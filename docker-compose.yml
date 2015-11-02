@@ -1,0 +1,8 @@
+web:
+  build: .
+  ports:
+    - "8080:8080"
+  dockerfile: docker/Dockerfile
+  environment:
+    VIRTUAL_HOST: instructure-ui.docker
+    NODE_ENV: development

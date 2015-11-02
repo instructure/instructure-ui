@@ -1,0 +1,28 @@
+.container {
+  position: relative;
+  min-height: 100px;
+}
+.context {
+  position: absolute;
+  top: 0; left: 0;
+}
+.text {
+  padding: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #888;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  max-width: 300px;
+}
+.image {
+  max-width: 300px;
+  max-height: 300px;
+  overflow: hidden;
+  margin: 4px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.image img {
+  display: block;
+}

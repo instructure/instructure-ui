@@ -1,0 +1,26 @@
+{
+  "name": "ic-context-box",
+  "version": "0.0.0",
+  "description": "A React context box component",
+  "author": "Instructure, Inc. Engineering",
+  "main": "./index.js",
+  "directories": {
+    "example": "__examples__"
+  },
+  "homepage": "https://github.com/instructure/instructure-ui",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "babel-runtime": "^6.0.14",
+    "classnames": "^2.2.0",
+    "react": "^0.14.1",
+    "react-dom": "^0.14.1"
+  },
+  "keywords": [
+    "react",
+    "react-component",
+    "instructure",
+    "popover",
+    "context box"
+  ]
+}

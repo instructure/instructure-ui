@@ -1,0 +1,4 @@
+node_modules/
+__build__/
+__dist__/
+__examples__/

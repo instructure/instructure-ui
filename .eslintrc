@@ -1,0 +1,23 @@
+{
+  "parser": "babel-eslint",
+  "rules": {
+    "max-len": [2, 120, 2],
+    "jsx-quotes": [2, "prefer-double"],
+    "key-spacing": [2, {
+      "beforeColon": false,
+      "afterColon": true,
+      "mode": "minimum"
+    }],
+    "no-var": 2,
+    "prefer-const": 2
+  },
+  "env": {
+    "browser": true,
+    "mocha": true,
+    "es6": true
+  },
+  "globals": {
+    "expect": true
+  },
+  "extends": ["standard", "standard-react"]
+}

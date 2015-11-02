@@ -1,0 +1,7 @@
+#!/bin/bash
+
+set -ex
+
+rm -rf __build__/ && \
+rm -rf __examples__/ && \
+rm -rf __dist__/

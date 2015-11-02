@@ -1,0 +1,5 @@
+web:
+  build: .
+  dockerfile: docker/Dockerfile.test
+  environment:
+    NODE_ENV: test

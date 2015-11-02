@@ -1,0 +1,5 @@
+**/.*
+**/__tests__
+**/__examples__
+CONTRIBUTING.md
+bower.json

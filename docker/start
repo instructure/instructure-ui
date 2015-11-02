@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -ex
+
+echo "building services..."
+docker-compose build
+
+echo "starting dev server..."
+docker-compose up

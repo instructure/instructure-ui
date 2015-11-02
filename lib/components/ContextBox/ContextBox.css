@@ -1,0 +1,122 @@
+$background-color: white;
+$border-color: #d6d6d6;
+$caret-border-color: color($border-color shade(8%));
+$border-radius: 4px;
+$caret-size: 8px;
+
+.root {
+  box-sizing: border-box;
+  background: $background-color;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
+  *, *:before, *:after { box-sizing: border-box; }
+}
+
+.content {
+  overflow: hidden;
+  border-radius: calc($border-radius - 1);
+}
+
+.caret--left,
+.caret--right,
+.caret--above,
+.caret--below {
+  position: relative;
+  min-height: calc($caret-size * 4);
+  &:before,
+  &:after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border: solid transparent;
+    border-color: rgba(255,255,255,0);
+  }
+  &:before { border-width: calc($caret-size + 1); }
+  &:after { border-width: $caret-size; }
+}
+
+.caret--left {
+  &:before, &:after {
+    right: 100%;
+    top: 50%;
+  }
+  &:after {
+    border-right-color: $background-color;
+    margin-top: calc( -($caret-size) );
+  }
+  &:before {
+    border-right-color: $caret-border-color;
+    margin-top: calc( -($caret-size + 1) );
+  }
+}
+
+.caret--right {
+  &:before, &:after {
+    top: 50%;
+    left: 100%;
+  }
+  &:after {
+    border-left-color: $background-color;
+    margin-top: calc( -($caret-size) );
+  }
+  &:before {
+    border-left-color: $caret-border-color;
+    margin-top: calc( -($caret-size + 1) );
+  }
+}
+
+.caret--above {
+  &:before, &:after {
+    bottom: 100%;
+    left: 50%;
+  }
+  &:after {
+    border-bottom-color: $background-color;
+    margin-left: calc( -($caret-size) );
+  }
+  &:before {
+    border-bottom-color: $caret-border-color;
+    margin-left: calc( -($caret-size + 1) );
+  }
+}
+
+.caret--below {
+  &:before, &:after {
+    top: 100%;
+    left: 50%;
+  }
+  &:after {
+    border-top-color: $background-color;
+    margin-left: calc( -($caret-size) );
+  }
+  &:before {
+    border-top-color: $caret-border-color;
+    margin-left: calc( -($caret-size + 1) );
+  }
+}
+
+@keyframes animate-root {
+  to {
+    transform: translate3d(0,0,0);
+    opacity: 1;
+  }
+}
+
+.animate--left,
+.animate--right,
+.animate--above,
+.animate--below {
+  opacity: 0;
+  animation-duration: 0.3s;
+  animation-name: animate-root;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
+}
+
+.animate--left { transform: translate3d(-20%,0,0); }
+.animate--right { transform: translate3d(20%,0,0); }
+.animate--above { transform: translate3d(0,-20%,0); }
+.animate--below { transform: translate3d(0,20%,0); }

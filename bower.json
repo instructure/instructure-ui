@@ -1,0 +1,27 @@
+{
+  "name": "instructure-ui",
+  "version": "0.0.0",
+  "homepage": "https://github.com/instructure/instructure-ui",
+  "author": "Instructure, Inc. Engineering",
+  "description": "React UI Component Framework for Instructure",
+  "main": "__dist__/instructure-ui.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "instructure"
+  ],
+  "license": "AGPL-3.0",
+  "ignore": [
+    "**/.*",
+    "**/__tests__",
+    "**/__examples__",
+    "__build__",
+    "__examples__",
+    "lib",
+    "node_modules",
+    "package.json",
+    "CONTRIBUTING.md",
+    "build.sh",
+    "docker-compose*"
+  ]
+}
