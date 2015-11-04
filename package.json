@@ -7,16 +7,21 @@
   "directories": {
     "lib": "lib",
     "example": "__examples__",
-    "dist": "__dist__"
+    "dist": "__dist__",
+    "doc": "docs"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
   },
+  "engines": {
+    "node": "~4.2.1",
+    "npm": "~3.3.9"
+  },
   "homepage": "https://github.com/instructure/instructure-ui",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot -d --progress --config webpack.config.js --content-base __examples__",
+    "start": "npm run build && webpack-dev-server --inline --hot -d --progress --config webpack.config.js --content-base __examples__",
     "test": "./scripts/test",
     "test:watch": "./scripts/test --no-single-run --browsers Chrome",
     "clean": "./scripts/clean",

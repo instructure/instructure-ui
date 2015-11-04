@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -e
+
+function program_is_installed {
+  # set to 1 initially
+  local return_=1
+  # set to 0 if not found
+  type $1 >/dev/null 2>&1 || { local return_=0; }
+  # return value
+  echo "$return_"
+}
+
+if [ ! $(program_is_installed nvm) ]
+  then
+    echo "-- install nvm...";
+    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.29.0/install.sh | bash
+fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
+
+echo "-- install node"
+nvm install && nvm use
+
+echo "-- install node dependencies...";
+npm install
