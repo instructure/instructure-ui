@@ -9,7 +9,7 @@ var entry = {}
 
 entry[pkg.name] = pkg.main
 
-module.exports = _.extend({
+module.exports = _.merge({}, require('./shared')(), {
   devtool: 'source-map',
   entry: entry,
   output: {
@@ -22,4 +22,4 @@ module.exports = _.extend({
     'react': 'React',
     'react/addons': 'React'
   }
-}, require('./shared'))
+})

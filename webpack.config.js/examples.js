@@ -6,7 +6,7 @@ var glob = require('glob')
 var webpack = require('webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 
-var config = require('./shared')
+var config = require('./shared')()
 var baseDir = process.cwd()
 
 config.entry = {
