@@ -34,7 +34,7 @@ components.forEach(function (component) {
   config.plugins.push(
     new HtmlWebpackPlugin({
       title: pkg.name,
-      template: path.resolve(baseDir, 'lib/index.html'),
+      template: path.resolve(baseDir, 'templates/example.html'),
       inject: 'body',
       filename: pkg.name + '/index.html',
       chunks: ['vendor', entry]
