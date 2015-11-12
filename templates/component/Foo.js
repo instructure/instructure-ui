@@ -1,13 +1,22 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import styles from './Foo.css'
 
-class Foo extends Component {
+export default class Foo extends Component {
+  static displayName = 'Foo'
+
+  static propTypes = {
+    bar: PropTypes.string
+  }
+
+  static defaultProps = {
+    bar: 'hello world'
+  }
+
   render () {
     return (
       <div className={styles.root}>
+
       </div>
     )
   }
 }
-
-export default Foo

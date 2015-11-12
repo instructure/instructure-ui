@@ -3,7 +3,7 @@
 var _ = require('lodash')
 var sharedConfig = require('./shared')('test')
 
-var modulesDirectories = [ 'lib/utils/TestUtils' ].concat(sharedConfig.resolve.modulesDirectories || [])
+var modulesDirectories = [ 'test/utils' ].concat(sharedConfig.resolve.modulesDirectories || [])
 
 var config = _.merge({}, sharedConfig, {
   cache: true,
