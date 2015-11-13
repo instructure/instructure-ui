@@ -23,6 +23,7 @@ module.exports = require('./util/generate-config')({
   externals: {
     'react': 'React',
     'react-dom': 'ReactDOM',
-    'react/addons': 'React'
+    'react/addons': 'React',
+    'lodash': '_'
   }
 }, 'production', process.env.MINIFY)

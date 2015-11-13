@@ -8,7 +8,7 @@ module.exports = function config (config) {
     frameworks: ['mocha', 'sinon-chai'],
 
     files: [
-      './test/tests.bundle.js'
+      './tests/tests.bundle.js'
     ],
 
     preprocessors: {

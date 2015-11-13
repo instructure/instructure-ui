@@ -50,14 +50,17 @@
   }
 }
 
-.optional,
+.required,
 .oneOf {
   font-weight: 200;
+  color: #888;
 }
 
 .list {
   display: inline;
   list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 .listItem {
   display: inline;

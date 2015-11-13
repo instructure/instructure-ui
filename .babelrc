@@ -3,8 +3,7 @@
   "env": {
     "development": {
       "plugins": [
-        "react-transform",
-        "react-display-name"
+        "react-transform"
       ],
       "extra": {
         "react-transform": {
@@ -20,11 +19,6 @@
           ]
         }
       }
-    },
-    "production": {
-      "plugins": [
-        "react-display-name"
-      ]
     }
   }
 }

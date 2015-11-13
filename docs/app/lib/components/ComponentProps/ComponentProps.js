@@ -52,15 +52,13 @@ export default class ComponentProps extends Component {
 
   renderDefault (prop) {
     if (prop.required) {
-      return ''
+      return <span className={styles.required}>Required</span>
     } else if (prop.defaultValue) {
       return (
         <code>{this.unquote(prop.defaultValue.value)}</code>
       )
     } else {
-      return (
-        <span className={styles.optional}>Optional</span>
-      )
+      return ''
     }
   }
 

@@ -1,0 +1,32 @@
+.root {
+  box-sizing: border-box;
+  text-align: center;
+  padding: 0 0.5rem;
+  font-size: 1rem;
+  color: #3F4A54;
+  flex: 0 0 33.33333333%;
+  max-width: 33.33333333%;
+  margin-bottom: 0.5rem;
+  justify-self: space-between;
+}
+
+.root:first-child:nth-last-child(2),
+.root:last-child:nth-child(2) {
+  flex-basis: 50%;
+  max-width: 50%;
+  justify-self: flex-start;
+}
+.root:last-child:nth-child(1) {
+  flex-basis: 100%;
+  max-width: 100%;
+}
+
+.label {
+  font-size: 0.75em;
+  color: #6b7883;
+}
+
+.value {
+  font-weight: 700;
+  font-size: 1.5em;
+}

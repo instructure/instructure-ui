@@ -2,6 +2,7 @@ import React from 'react'
 import { merge } from 'lodash'
 import ReactDOM from 'react-dom'
 import { drill, DOMSelectors } from 'react-drill'
+import ReactTestUtils from 'react/lib/ReactTestUtils'
 
 export default class ReactTestbed {
   constructor (ComponentClass, defaultProps) {
@@ -36,6 +37,18 @@ export default class ReactTestbed {
 
   get dom () {
     return drill(this.subject)
+  }
+
+  findChildrenByType (type) {
+    return ReactTestUtils.scryRenderedComponentsWithType(this.subject, type)
+  }
+
+  findChildByType (type) {
+    return ReactTestUtils.findRenderedComponentWithType(this.subject, type)
+  }
+
+  findChildren (test) {
+    return ReactTestUtils.findAllInRenderedTree(this.subject, test)
   }
 }
 

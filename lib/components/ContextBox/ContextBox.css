@@ -1,8 +1,8 @@
 $background-color: white;
 $border-color: #d6d6d6;
-$caret-border-color: color($border-color shade(8%));
+$arrow-border-color: color($border-color shade(8%));
 $border-radius: 4px;
-$caret-size: 8px;
+$arrow-size: 8px;
 
 .root {
   display: inline-block;
@@ -19,12 +19,9 @@ $caret-size: 8px;
   border-radius: calc($border-radius - 1);
 }
 
-.position--left,
-.position--right,
-.position--above,
-.position--below {
+.withArrow {
   position: relative;
-  min-height: calc($caret-size * 4);
+  min-height: calc($arrow-size * 4);
   &:before,
   &:after {
     content: "";
@@ -35,67 +32,67 @@ $caret-size: 8px;
     border: solid transparent;
     border-color: rgba(255,255,255,0);
   }
-  &:before { border-width: calc($caret-size + 1); }
-  &:after { border-width: $caret-size; }
-}
+  &:before { border-width: calc($arrow-size + 1); }
+  &:after { border-width: $arrow-size; }
 
-.position--right { /* caret on the left */
-  &:before, &:after {
-    right: 100%;
-    top: 50%;
+  &.position--right { /* arrow on the left */
+    &:before, &:after {
+      right: 100%;
+      top: 50%;
+    }
+    &:after {
+      border-right-color: $background-color;
+      margin-top: calc( -($arrow-size) );
+    }
+    &:before {
+      border-right-color: $arrow-border-color;
+      margin-top: calc( -($arrow-size + 1) );
+    }
   }
-  &:after {
-    border-right-color: $background-color;
-    margin-top: calc( -($caret-size) );
-  }
-  &:before {
-    border-right-color: $caret-border-color;
-    margin-top: calc( -($caret-size + 1) );
-  }
-}
 
-.position--left {  /* caret on the right */
-  &:before, &:after {
-    top: 50%;
-    left: 100%;
+  &.position--left {  /* arrow on the right */
+    &:before, &:after {
+      top: 50%;
+      left: 100%;
+    }
+    &:after {
+      border-left-color: $background-color;
+      margin-top: calc( -($arrow-size) );
+    }
+    &:before {
+      border-left-color: $arrow-border-color;
+      margin-top: calc( -($arrow-size + 1) );
+    }
   }
-  &:after {
-    border-left-color: $background-color;
-    margin-top: calc( -($caret-size) );
-  }
-  &:before {
-    border-left-color: $caret-border-color;
-    margin-top: calc( -($caret-size + 1) );
-  }
-}
 
-.position--below {  /* caret on top */
-  &:before, &:after {
-    bottom: 100%;
-    left: 50%;
+  &.position--below {  /* arrow on top */
+    &:before, &:after {
+      bottom: 100%;
+      left: 50%;
+    }
+    &:after {
+      border-bottom-color: $background-color;
+      margin-left: calc( -($arrow-size) );
+    }
+    &:before {
+      border-bottom-color: $arrow-border-color;
+      margin-left: calc( -($arrow-size + 1) );
+    }
   }
-  &:after {
-    border-bottom-color: $background-color;
-    margin-left: calc( -($caret-size) );
-  }
-  &:before {
-    border-bottom-color: $caret-border-color;
-    margin-left: calc( -($caret-size + 1) );
-  }
-}
 
-.position--above {  /* caret on bottom */
-  &:before, &:after {
-    top: 100%;
-    left: 50%;
-  }
-  &:after {
-    border-top-color: $background-color;
-    margin-left: calc( -($caret-size) );
-  }
-  &:before {
-    border-top-color: $caret-border-color;
-    margin-left: calc( -($caret-size + 1) );
+  &.position--above {  /* arrow on bottom */
+    &:before, &:after {
+      top: 100%;
+      left: 50%;
+    }
+    &:after {
+      border-top-color: $background-color;
+      margin-left: calc( -($arrow-size) );
+    }
+    &:before {
+      border-top-color: $arrow-border-color;
+      margin-left: calc( -($arrow-size + 1) );
+    }
   }
 }
 

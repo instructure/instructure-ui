@@ -1,0 +1,21 @@
+$link-color: #0094DD;
+
+.root {
+  text-decoration: none;
+  color: $link-color;
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+button.root {
+  user-select: text;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
