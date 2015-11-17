@@ -5,6 +5,7 @@ $border-radius: 4px;
 $caret-size: 8px;
 
 .root {
+  display: inline-block;
   box-sizing: border-box;
   background: $background-color;
   border-radius: $border-radius;
@@ -18,10 +19,10 @@ $caret-size: 8px;
   border-radius: calc($border-radius - 1);
 }
 
-.caret--left,
-.caret--right,
-.caret--above,
-.caret--below {
+.position--left,
+.position--right,
+.position--above,
+.position--below {
   position: relative;
   min-height: calc($caret-size * 4);
   &:before,
@@ -38,7 +39,7 @@ $caret-size: 8px;
   &:after { border-width: $caret-size; }
 }
 
-.caret--left {
+.position--right { /* caret on the left */
   &:before, &:after {
     right: 100%;
     top: 50%;
@@ -53,7 +54,7 @@ $caret-size: 8px;
   }
 }
 
-.caret--right {
+.position--left {  /* caret on the right */
   &:before, &:after {
     top: 50%;
     left: 100%;
@@ -68,7 +69,7 @@ $caret-size: 8px;
   }
 }
 
-.caret--above {
+.position--below {  /* caret on top */
   &:before, &:after {
     bottom: 100%;
     left: 50%;
@@ -83,7 +84,7 @@ $caret-size: 8px;
   }
 }
 
-.caret--below {
+.position--above {  /* caret on bottom */
   &:before, &:after {
     top: 100%;
     left: 50%;
@@ -105,10 +106,10 @@ $caret-size: 8px;
   }
 }
 
-.animate--left,
-.animate--right,
-.animate--above,
-.animate--below {
+.animateTo--left,
+.animateTo--right,
+.animateTo--above,
+.animateTo--below {
   opacity: 0;
   animation-duration: 0.3s;
   animation-name: animate-root;
@@ -116,7 +117,7 @@ $caret-size: 8px;
   animation-fill-mode: forwards;
 }
 
-.animate--left { transform: translate3d(-20%,0,0); }
-.animate--right { transform: translate3d(20%,0,0); }
-.animate--above { transform: translate3d(0,-20%,0); }
-.animate--below { transform: translate3d(0,20%,0); }
+.animateTo--right { transform: translate3d(-20%,0,0); }
+.animateTo--left { transform: translate3d(20%,0,0); }
+.animateTo--below { transform: translate3d(0,-20%,0); }
+.animateTo--above { transform: translate3d(0,20%,0); }
