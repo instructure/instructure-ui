@@ -1,0 +1,16 @@
+.root {
+
+}
+
+.nav {
+ background: #333;
+ position: fixed;
+ top: 0; bottom: 0; left: 0;
+ width: 12.5rem;
+ background: #333;
+ overflow-y: scroll;
+}
+
+.main {
+  margin-left: 12.5rem;
+}

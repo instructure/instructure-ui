@@ -21,17 +21,17 @@ fi
 git branch -D gh-pages
 git push origin :gh-pages
 
-# build examples
-npm run build:examples
+# build docs
+npm run build:docs
 
 # remove superfluous files
-find . -type f | egrep -v ".git/|__examples__/" | xargs rm
+find . -type f | egrep -v ".git/|__docs__/" | xargs rm
 find . -type d -empty -delete
 rm -rf node_modules
 
 # move example files to root
-mv __examples__/* ./
-rm -rf __examples__/
+mv __docs__/* ./
+rm -rf __docs__/
 
 # create gh-pages branch
 git checkout -b gh-pages

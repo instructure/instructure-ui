@@ -1,7 +1,0 @@
-{
-  "name": "ic-context-box",
-  "description": "A React context box component",
-  "directories": {
-    "example": "__examples__"
-  }
-}

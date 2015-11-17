@@ -1,15 +1,5 @@
 import React from 'react'
-import ReactDom from 'react-dom'
-import Foo from '../index'
+import { render } from 'react-dom'
+import FooExample from './Foo.example'
 
-const Examples = React.createClass({
-  render () {
-    return (
-      <div>
-        <Foo />
-      </div>
-    )
-  }
-})
-
-ReactDom.render(<Examples/>, document.getElementById('examples'))
+render(<FooExample/>, document.getElementById('app'))

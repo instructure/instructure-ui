@@ -1,0 +1,60 @@
+import React, { Component, PropTypes } from 'react'
+import CodeEditor from '../CodeEditor'
+import ComponentPreview from '../ComponentPreview'
+
+import styles from './ComponentPlayground.css'
+
+export default class ComponentPlayground extends Component {
+  static propTypes = {
+    code: PropTypes.string.isRequired
+  }
+
+  constructor (props) {
+    super()
+    this.state = {
+      code: props.code,
+      showCode: false
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { code } = nextProps
+    if (code) {
+      this.setState({
+        code
+      })
+    }
+  }
+
+  handleToggle = () => {
+    this.setState({
+      showCode: !this.state.showCode
+    })
+  }
+
+  handleChange = (newCode) => {
+    this.setState({
+      code: newCode
+    })
+  }
+
+  render () {
+    const { code } = this.state
+
+    const editor = <CodeEditor code={code} onChange={this.handleChange} />
+
+    return (
+      <div>
+        <div className={styles.container}>
+          <div className={styles.preview}>
+            <ComponentPreview code={code} />
+          </div>
+          {this.state.showCode && editor}
+        </div>
+        <button onClick={this.handleToggle}>
+          {this.state.showCode ? 'hide editor' : 'show editor'}
+        </button>
+      </div>
+    )
+  }
+}

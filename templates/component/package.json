@@ -1,7 +1,0 @@
-{
-  "name": "ic-foo",
-  "description": "A React component by Instructure",
-  "directories": {
-    "example": "__examples__"
-  }
-}

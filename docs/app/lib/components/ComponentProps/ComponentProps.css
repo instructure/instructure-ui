@@ -1,0 +1,64 @@
+.root {
+  margin-bottom: 2em;
+}
+
+.heading {
+  margin-bottom: .5em;
+  font-size: 1.3em;
+  font-weight: normal;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1em;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.tableRow {
+  border-bottom: 1px solid #e8e8e8;
+}
+
+.tableBody .tableRow:last-child {
+  border: none;
+}
+
+.tableHead {
+  margin-bottom: 1.5em;
+}
+
+.cell {
+  padding: .25em 1em .25em 0;
+}
+
+.cellHeading {
+  padding-right: 1em;
+  padding-bottom: .5em;
+  text-align:left;
+}
+.cellDesc {
+  padding-left: 1em;
+  p {
+    margin: 0;
+  }
+}
+
+.optional,
+.oneOf {
+  font-size: 0.875em;
+}
+
+.list {
+  display: inline;
+  list-style-type: none;
+}
+.listItem {
+  display: inline;
+}
+.listItem:after {
+  content: ", ";
+}
+.listItem:last-child:after {
+  content: "";
+}
+

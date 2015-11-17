@@ -1,35 +1,29 @@
 /* eslint no-var: 0 */
 
-var fs = require('fs')
-var path = require('path')
-var REGEX_TEST = /\-test\.js$/
+var statsConfig = require('./webpack/config/stats')
 
-function findTests (dir) {
-  var tests = []
-  fs.readdirSync(dir).forEach(function (file) {
-    var resolvedFile = path.resolve(dir, file)
-    var stat = fs.statSync(resolvedFile)
-    if (stat && stat.isDirectory()) {
-      tests = tests.concat(findTests(resolvedFile))
-    } else if (REGEX_TEST.test(resolvedFile)) {
-      tests.push(resolvedFile)
-    }
-  })
-  return tests
-}
-
-module.exports = function (config) {
-  var tests = findTests(path.resolve(process.cwd(), 'lib'))
-  var conf = {
+module.exports = function config (config) {
+  config.set({
     basePath: '',
 
     frameworks: ['mocha', 'sinon-chai'],
 
-    files: tests,
+    files: [
+      './test/tests.bundle.js'
+    ],
 
-    preprocessors: {},
+    preprocessors: {
+      '**/*.bundle.js': ['webpack', 'sourcemap']
+    },
 
     reporters: ['mocha'],
+
+    client: {
+      mocha: {
+        reporter: 'html',
+        ui: 'bdd'
+      }
+    },
 
     port: 9876,
 
@@ -61,7 +55,6 @@ module.exports = function (config) {
           // Additional reading:
           //
           //   - https://github.com/karma-runner/karma/issues/543
-          //   - http://stackoverflow.com/questions/5913978/cryptic-script-error-reported-in-javascript-in-chrome-and-firefox
           //   - https://bugs.webkit.org/show_bug.cgi?id=70574
           //   - https://groups.google.com/forum/#!topic/angular/VeqlVgUa6Wo
           //
@@ -75,18 +68,14 @@ module.exports = function (config) {
 
     singleRun: true,
 
-    webpack: require('./webpack.config.js/test'),
+    webpack: require('./webpack/test.config'),
 
     webpackServer: {
-      stats: {
-        colors: true
-      }
+      progress: false,
+      stats: statsConfig,
+      debug: true,
+      noInfo: true,
+      quiet: false
     }
-  }
-
-  tests.forEach(function (test) {
-    conf.preprocessors[test] = ['webpack', 'sourcemap']
   })
-
-  config.set(conf)
 }

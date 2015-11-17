@@ -1,7 +1,0 @@
-{
-  "name": "ic-range-input",
-  "description": "A React range input slider component",
-  "directories": {
-    "example": "__examples__"
-  }
-}

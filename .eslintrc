@@ -9,7 +9,8 @@
       "mode": "minimum"
     }],
     "no-var": 2,
-    "prefer-const": 2
+    "prefer-const": 2,
+    "no-console": 2
   },
   "env": {
     "browser": true,
@@ -18,7 +19,8 @@
   },
   "globals": {
     "expect": true,
-    "sinon": true
+    "sinon": true,
+    "createTestbed": true
   },
   "extends": ["standard", "standard-react"]
 }

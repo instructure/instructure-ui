@@ -1,4 +1,4 @@
-# Setting Up Sublime Text Editor for instructure-ui Development
+## Setting Up Sublime Text Editor for Development
 
 1. Install the [EditorConfig Plugin](https://github.com/sindresorhus/editorconfig-sublime)
 2. Install the [SublimeLinter Plugin](http://sublimelinter.readthedocs.org/en/latest/)

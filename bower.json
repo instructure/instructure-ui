@@ -16,7 +16,7 @@
     "**/__tests__",
     "**/__examples__",
     "__build__",
-    "__examples__",
+    "__docs__",
     "lib",
     "node_modules",
     "package.json",
