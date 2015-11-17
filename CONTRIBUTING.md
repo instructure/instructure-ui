@@ -12,7 +12,7 @@ Installation steps:
 
 - `npm start` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code in the `lib` directory you should see the page auto-reload.
 - `npm test` will run the tests.
-- `npm test-watch` will run the tests and watch for changes to the source code. Run this if you'd like to debug tests in the browser.
+- `npm run test:watch` will run the tests and watch for changes to the source code. Run this if you'd like to debug tests in the browser (Chrome).
 
 See the scripts section in [package.json](package.json) for all of the other build tasks/options.
 
@@ -35,7 +35,7 @@ anyway unless you are fixing something around our global build.)
 
 Components should:
 
-- be high contrast aware (uses color variables, meets 4.5:1).
+- be high contrast aware (use color variables, meet 4.5:1).
 - be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
 - be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
 - have good test coverage.

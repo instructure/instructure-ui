@@ -15,4 +15,4 @@ See the [contributing guidelines](CONTRIBUTING.md) for details.
 
 ### License
 
-TBD
+[MIT](LICENSE)

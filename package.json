@@ -14,10 +14,6 @@
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
   },
-  "engines": {
-    "node": "~4.2.1",
-    "npm": "~3.3.9"
-  },
   "homepage": "https://github.com/instructure/instructure-ui",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
@@ -33,7 +29,7 @@
     "release": "./scripts/release",
     "deploy": "./scripts/deploy"
   },
-  "license": "AGPL-3.0",
+  "license": "MIT",
   "devDependencies": {
     "autoprefixer": "6.0.3",
     "babel": "6.0.15",
