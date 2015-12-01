@@ -1,29 +1,33 @@
 import marked from 'marked'
 
 // https://github.com/sapegin/react-styleguidist/blob/master/loaders/examples.loader.js
-const CODE_PLACEHOLDER = '<%{#code#}%>'
+const EXAMPLE_PLACEHOLDER = '<%{#example#}%>'
 
 export default function parseDescription (markdown) {
-  const codeChunks = []
+  const examples = []
 
   const renderer = new marked.Renderer()
-  renderer.code = function (code) {
-    codeChunks.push(code)
-    return CODE_PLACEHOLDER
+  renderer.code = function (code, language) {
+    if (language === 'jsx_example') {
+      examples.push(code)
+      return EXAMPLE_PLACEHOLDER
+    } else {
+      return marked.Renderer.prototype.code.apply(this, arguments)
+    }
   }
 
   const html = marked(markdown, {renderer: renderer})
 
-  const chunks = []
-  const textChunks = html.split(CODE_PLACEHOLDER)
+  const sections = []
+  const textChunks = html.split(EXAMPLE_PLACEHOLDER)
   textChunks.forEach(function (chunk) {
-    const code = codeChunks.shift()
+    const code = examples.shift()
     if (chunk) {
-      chunks.push({type: 'html', content: chunk})
+      sections.push({type: 'html', content: chunk})
     }
     if (code) {
-      chunks.push({type: 'code', content: code})
+      sections.push({type: 'code', content: code})
     }
   })
-  return chunks
+  return sections
 }

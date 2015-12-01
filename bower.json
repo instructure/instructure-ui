@@ -20,7 +20,6 @@
     "lib",
     "node_modules",
     "package.json",
-    "CONTRIBUTING.md",
     "build.sh",
     "docker-compose*"
   ]

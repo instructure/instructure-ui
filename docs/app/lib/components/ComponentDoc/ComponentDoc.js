@@ -14,6 +14,7 @@ export default class ComponentDoc extends Component {
   }
 
   render () {
+    // load docs using the docgen webpack loader (./webpack/loaders/docgen.js)
     const doc = require(`!!docgen!lib/components/${this.props.name}/${this.props.name}.js`)
 
     const props = doc.props && <ComponentProps props={doc.props} />
@@ -24,7 +25,7 @@ export default class ComponentDoc extends Component {
     })
 
     return (
-      <div id={this.props.name} className={styles.root}>
+      <div>
         <h2 className={styles.heading}>{this.props.name}</h2>
         <code>
           {doc.path}

@@ -3,7 +3,8 @@ import {render} from 'react-dom'
 
 import ComponentDoc from './components/ComponentDoc'
 import DocsNav from './components/DocsNav'
-import GuideDoc from './components/GuideDoc'
+import HtmlDoc from './components/HtmlDoc'
+import DocsSection from './components/DocsSection'
 
 import InstructureUI from 'instructure-ui'
 import loadGuides, {guidesContext} from './util/load-guides'
@@ -31,10 +32,23 @@ class DocsApp extends Component {
   }
 
   render () {
+    const introduction = (
+      <DocsSection key="Introduction" id="Introduction" >
+        <HtmlDoc html={require('docs/index.md')} />
+      </DocsSection>
+    )
+
     const componentDocs = components
-      .map(name => <ComponentDoc key={name} name={name} />)
+      .map(name => <DocsSection key={name} id={name}><ComponentDoc name={name} /></DocsSection>)
+
     const guideDocs = guides
-      .map(guide => <GuideDoc key={guide.id} id={guide.id} html={guidesContext(guide.path)} />)
+      .map((guide) => {
+        return (
+          <DocsSection key={guide.id} id={guide.id}>
+            <HtmlDoc html={guidesContext(guide.path)} />
+          </DocsSection>
+        )
+      })
 
     return (
       <div className={styles.root}>
@@ -42,6 +56,7 @@ class DocsApp extends Component {
           <DocsNav components={components} guides={guides} />
         </div>
         <div className={styles.main}>
+          {introduction}
           {componentDocs}
           {guideDocs}
         </div>

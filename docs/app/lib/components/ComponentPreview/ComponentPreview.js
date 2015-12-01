@@ -2,7 +2,6 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import babel from 'babel-core/browser'
-import ComponentWrapper from '../ComponentWrapper'
 
 import styles from './ComponentPreview.css'
 
@@ -48,15 +47,12 @@ export default class ComponentPreview extends Component {
 
     try {
       const compiledCode = this.compileCode(code)
+
       /* eslint-disable no-eval */
       const component = eval(compiledCode)
       /* eslint-disable no-eval */
-      const wrappedComponent = (
-        <ComponentWrapper>
-          {component}
-        </ComponentWrapper>
-      )
-      ReactDOM.render(wrappedComponent, mountNode)
+
+      ReactDOM.render(component, mountNode)
     } catch (err) {
       ReactDOM.unmountComponentAtNode(mountNode)
       this.setState({

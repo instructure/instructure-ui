@@ -1,4 +1,4 @@
-export const guidesContext = require.context('docs', true, /^\.\/.*\.md$/)
+export const guidesContext = require.context('docs/guides', true, /^\.\/.*\.md$/)
 export default function loadGuides () {
   return guidesContext.keys().map((path) => {
     const id = path

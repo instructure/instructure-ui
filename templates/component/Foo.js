@@ -4,7 +4,7 @@ import styles from './Foo.css'
 /**
  * A Foo component
  *
- * ```jsx
+ * ```jsx_example
  * <Foo />
  * ```
  */

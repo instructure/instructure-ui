@@ -1,4 +1,4 @@
-# instructure-ui [WIP]
+## instructure-ui [WIP]
 
 A React UI component library currently under development by Instructure Inc.
 
@@ -11,7 +11,7 @@ See the [documentation](http://instructure.github.io/instructure-ui/) for live e
 
 ### Contribute
 
-See the [contributing guidelines](CONTRIBUTING.md) for details.
+See the [contributing guidelines](docs/guides/contributing.md) for details.
 
 ### License
 
