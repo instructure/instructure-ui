@@ -2,7 +2,15 @@
 var path = require('path')
 var paths = require('../paths')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
-var glob = require('glob')
+
+var pkg = require('../package')
+var entry = {
+  'example': path.join(paths.docsApp, 'lib/example.js'),
+  'docs': path.join(paths.docsApp, 'lib/index.js'),
+  'prismjs': path.join(paths.docsApp, 'lib/prismjs.js')
+}
+
+entry[pkg.name] = [ path.join(paths.root, pkg.main) ]
 
 var env = process.env.NODE_ENV
 
@@ -11,49 +19,25 @@ var config = require('./util/generate-config')({
     path: paths.docsBuild,
     filename: '[name].js'
   },
-  entry: {
-    'docs': path.join(paths.docsApp, 'lib/index.js'),
-    'prismjs': path.join(paths.docsApp, 'lib/prismjs.js')
-  },
+  entry: entry,
   plugins: [
     new HtmlWebpackPlugin({
       title: 'Instructure UI Component Library',
       template: path.join(paths.templatesRoot, '/index.tmpl.html'),
       inject: 'body',
-      chunks: ['prismjs', 'docs']
+      chunks: ['prismjs', 'docs', pkg.name]
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Component Example',
+      template: path.join(paths.templatesRoot, '/example.tmpl.html'),
+      inject: 'body',
+      filename: 'example.html',
+      chunks: ['example', pkg.name]
     })
   ]
 }, {
   env: env,
   minify: (env === 'production')
-})
-
-/* add entries for examples */
-var components = glob.sync('lib/components/**/__examples__/**/index.js')
-
-components.forEach(function (component) {
-  var parts = path.dirname(component).split(path.sep)
-  var componentName
-
-  parts.forEach(function (part, i) {
-    if (part === '__examples__') {
-      componentName = parts[ i - 1 ]
-    }
-  })
-
-  var entry = componentName + '/example'
-
-  config.entry[entry] = component
-
-  config.plugins.push(
-    new HtmlWebpackPlugin({
-      title: componentName + ' Examples',
-      template: path.join(paths.templatesRoot, '/index.tmpl.html'),
-      inject: 'body',
-      filename: componentName + '/index.html',
-      chunks: [entry]
-    })
-  )
 })
 
 module.exports = config

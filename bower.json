@@ -14,7 +14,6 @@
   "ignore": [
     "**/.*",
     "**/__tests__",
-    "**/__examples__",
     "__build__",
     "__docs__",
     "lib",

@@ -1,7 +1,6 @@
 // Based on https://github.com/joelburget/react-live-editor/blob/master/live-compile.jsx
 import React, { Component, PropTypes } from 'react'
-import ReactDOM from 'react-dom'
-import babel from 'babel-core/browser'
+import MessageListener from '../MessageListener'
 
 import styles from './ComponentPreview.css'
 
@@ -10,74 +9,47 @@ export default class ComponentPreview extends Component {
     code: PropTypes.string.isRequired
   }
 
-  constructor () {
+  constructor (props) {
     super()
     this.state = {
-      error: null
+      frameIsLoaded: false
     }
   }
 
   componentDidMount () {
-    this.executeCode()
+    this.renderPreview()
   }
 
   componentDidUpdate (prevProps) {
     if (this.props.code !== prevProps.code) {
-      this.executeCode()
+      this.renderPreview()
     }
   }
 
-  compileCode (code) {
-    return babel.transform(code, {stage: 0}).code
-  }
-
-  executeCode () {
-    const mountNode = this.refs.mount
-
-    ReactDOM.unmountComponentAtNode(mountNode)
-
-    this.setState({
-      error: null
-    })
-
-    const { code } = this.props
-    if (!code) {
-      return
-    }
-
-    try {
-      const compiledCode = this.compileCode(code)
-
-      /* eslint-disable no-eval */
-      const component = eval(compiledCode)
-      /* eslint-disable no-eval */
-
-      ReactDOM.render(component, mountNode)
-    } catch (err) {
-      ReactDOM.unmountComponentAtNode(mountNode)
+  handleMessage (message) {
+    if (message && message.isMounted) {
       this.setState({
-        error: err.toString()
+        frameIsLoaded: true
       })
     }
   }
 
-  renderError () {
-    const { error } = this.state
-    if (error) {
-      return (
-        <pre className={styles.error}>{error}</pre>
-      )
+  renderPreview () {
+    if (this.state.frameIsLoaded) {
+      MessageListener.postMessage(this.refs.frame.contentWindow, {
+        code: this.props.code
+      })
     } else {
-      return null
+      setTimeout(this.renderPreview.bind(this), 0)
     }
   }
 
   render () {
     return (
-      <div className={styles.root}>
-        <div ref="mount"></div>
-        { this.renderError() }
-      </div>
+      <MessageListener
+        onReceiveMessage={this.handleMessage.bind(this)}>
+        <iframe className={styles.frame} ref="frame" src="example.html"></iframe>
+      </MessageListener>
     )
   }
 }

@@ -1,17 +1,7 @@
 .container {
   border: 1px solid #e8e8e8;
   overflow: hidden;
-  margin-bottom: 2em;
   border-radius: 3px;
 }
 
-$sg-checkerboard-color: #EEE;
-$sg-checkerboard-gradient: 45deg, $sg-checkerboard-color 25%, transparent 25%, transparent 75%, $sg-checkerboard-color 75%, $sg-checkerboard-color;
 
-.preview {
-  padding: 1em;
-  background-color: #FEFEFE;
-  background-image: linear-gradient($sg-checkerboard-gradient), linear-gradient($sg-checkerboard-gradient);
-  background-size: 16px 16px;
-  background-position: 0 0, 8px 8px;
-}

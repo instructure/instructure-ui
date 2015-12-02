@@ -7,19 +7,11 @@ import HtmlDoc from './components/HtmlDoc'
 import DocsSection from './components/DocsSection'
 
 import InstructureUI from 'instructure-ui'
+
 import loadGuides, {guidesContext} from './util/load-guides'
-
-import styles from './docs.css'
-
 const components = Object.keys(InstructureUI).sort()
 
-/* These need to be globals to render examples */
-global.React = React
-global.InstructureUI = InstructureUI
-
-components.forEach((component) => {
-  global[component] = InstructureUI[component]
-})
+import styles from './docs.css'
 
 const guides = loadGuides()
 

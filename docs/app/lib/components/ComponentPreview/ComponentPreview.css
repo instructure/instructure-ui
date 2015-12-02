@@ -1,9 +1,8 @@
-.error {
-  font-family: Consolas, "Liberation Mono", Menlo, monospace;
-  color: white;
-  background: #c00;
-  margin: -15px -15px -18px;
-  padding: 15px;
-  line-height: 1.2;
-  font-size: 13px;
+.frame {
+  border-radius: 3px;
+  border: none;
+  width: 100%;
+  resize: both;
+  margin: 0;
+  padding: 0;
 }
