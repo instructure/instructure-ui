@@ -1,20 +1,13 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 import babel from 'babel-core/browser'
-import InstructureUI from 'instructure-ui'
-
 import MessageListener from './components/MessageListener'
 
 import styles from './example.css'
 
-const components = Object.keys(InstructureUI).sort()
+import { globalize } from './util/load-docs'
 
-/* These need to be globals to render examples */
-global.React = React
-
-components.forEach((component) => {
-  global[component] = InstructureUI[component]
-})
+globalize()
 
 class ExampleApp extends Component {
   constructor () {

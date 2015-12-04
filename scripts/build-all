@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -ex
-
-npm run clean && \
-npm run build:lib && \
-npm run build:dist && \
-npm run build:minify && \
-npm run build:docs

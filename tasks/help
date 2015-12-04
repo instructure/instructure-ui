@@ -1,0 +1,15 @@
+#!/bin/bash
+
+echo "Usage: instui <command> [<args>]"
+echo ""
+echo "Commands:"
+echo "  install       Installs dependencies"
+echo "  build         Builds the library for UMD and CommonJS."
+echo "  docs          Builds the documentation."
+echo "  server        Starts the dev server."
+echo "  release       Publish a new release to npm."
+echo "  test          Run the test suite. Use --single-run for single run."
+echo "  pages         Deploys the documentation to gh-pages."
+echo ""
+echo "Options:"
+echo "  --help      Prints usage and options."

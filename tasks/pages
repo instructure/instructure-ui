@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 # make sure working directory is clean
 DIRTY=$(git status | grep modified -c)
@@ -22,16 +22,18 @@ git branch -D gh-pages
 git push origin :gh-pages
 
 # build docs
-npm run build:docs
+$BASE_PATH/tasks/docs
+
+DOCS_PATH=$BUILD_PATH/docs
 
 # remove superfluous files
-find . -type f | egrep -v ".git/|__docs__/" | xargs rm
+find . -type f | egrep -v ".git/|$DOCS_PATH/" | xargs rm
 find . -type d -empty -delete
 rm -rf node_modules
 
 # move example files to root
-mv __docs__/* ./
-rm -rf __docs__/
+mv $DOCS_PATH/* ./
+rm -rf $DOCS_PATH/
 
 # create gh-pages branch
 git checkout -b gh-pages

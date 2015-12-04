@@ -1,18 +1,38 @@
 .root {
   font-size: 0.75rem;
+  background: #333;
+  color: white;
 }
 
-.searchInput {
-  color: inherit;
+.search,
+.link {
+  background: #333;
+  color: rgba(255,255,255,.7);
+  display: block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  transition: all .1s ease;
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: white;
+  }
+}
+
+.search {
+  background-color: rgba(255,255,255,.15);
   border: none;
   border-color: transparent;
-  background-color: transparent;
   display: block;
-  padding: 0;
   margin: 0;
+  width: 100%;
 
   &:focus {
     outline: none;
+  }
+  &:hover {
+    background-color: rgba(255,255,255,.08);
   }
 }
 
@@ -24,3 +44,6 @@
 .section {
  padding-left: 1em;
 }
+
+
+

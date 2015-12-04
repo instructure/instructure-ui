@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# get the task
+TASK=$1
+shift
+
+# default to help if no task was specified or if help was requested
+if [ -z "$TASK" ] || [ "$TASK" == "--help" ] || [ "$TASK" == "-h" ]; then
+  TASK=help
+fi
+
+# get the path of this actual script file
+pushd . > /dev/null
+SCRIPT_PATH="${BASH_SOURCE[0]}";
+while([ -h "${SCRIPT_PATH}" ]); do
+  cd "`dirname "${SCRIPT_PATH}"`"
+  SCRIPT_PATH="$(readlink "`basename "${SCRIPT_PATH}"`")";
+done
+cd "`dirname "${SCRIPT_PATH}"`" > /dev/null
+SCRIPT_PATH="`pwd`";
+popd > /dev/null
+
+# get the path to the task
+TASK_PATH=$SCRIPT_PATH/../tasks/$TASK
+
+# exit -1 if task script doesn't exist
+if [ ! -f $TASK_PATH ]; then
+  echo "Unknown command" $TASK
+  exit -1
+fi
+
+# set ENV vars
+export BASE_PATH=$SCRIPT_PATH/../
+export MODULES_PATH=$SCRIPT_PATH/../node_modules/
+export BUILD_PATH=__build__
+
+# DO IT!
+$TASK_PATH "$@"

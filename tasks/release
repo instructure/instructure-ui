@@ -1,10 +1,8 @@
 #!/bin/bash
 
-set -ex
-
 if [ "$1" == "--preview" ] || [ "$1" == "-P" ] || [ "$1" == "-p" ]; then
   # Preview release
-  changelog -t preview -s
+  $MODULES_PATH/rf-release/node_modules/.bin/changelog -t preview -s
 else
   # build task has to be run prior to release module
   # the release module is what prompts for next version number
@@ -28,7 +26,8 @@ else
   fi
 
   # Release to npm
-  npm run build
-  update_version '__build__/package.json' $next_version
-  release -v $next_version -f ./__build__
+  $BASE_PATH/tasks/build
+  $BASE_PATH/tasks/docs
+  update_version "${BUILD_PATH}/package.json" $next_version
+  $MODULES_PATH/.bin/release -v $next_version -f ./$BUILD_PATH
 fi

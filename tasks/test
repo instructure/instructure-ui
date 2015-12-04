@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -e
+
+karma=$MODULES_PATH/.bin/karma
+eslint=$MODULES_PATH/.bin/eslint
+
+$eslint -c .eslintrc lib && \
+NODE_ENV=test $karma start $BASE_PATH/karma.conf.js "$@"

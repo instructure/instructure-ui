@@ -7,21 +7,30 @@ import styles from './ComponentDoc.css'
 
 export default class ComponentDoc extends Component {
   static propTypes = {
-    name: PropTypes.string
+    name: PropTypes.string.isRequired,
+    path: PropTypes.string.isRequired,
+    doc: PropTypes.object
+  }
+
+  static defaultProps = {
+    doc: {}
   }
 
   render () {
-    // load docs using the docgen webpack loader (./webpack/loaders/docgen.js)
-    const doc = require(`!!docgen!lib/components/${this.props.name}/${this.props.name}.js`)
+    const {
+      name,
+      doc,
+      path
+    } = this.props
 
     const props = doc.props && <ComponentProps props={doc.props} />
     const description = doc.description && <ComponentDescription description={doc.description} />
-
+    // TODO: display warning/info message when component needs docs
     return (
       <div>
-        <h2 className={styles.heading}>{this.props.name}</h2>
+        <h2 className={styles.heading}>{name}</h2>
         <code>
-          {doc.path}
+          {path}
         </code>
         { props }
         { description }

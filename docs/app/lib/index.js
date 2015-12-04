@@ -6,14 +6,9 @@ import DocsNav from './components/DocsNav'
 import HtmlDoc from './components/HtmlDoc'
 import DocsSection from './components/DocsSection'
 
-import InstructureUI from 'instructure-ui'
-
-import loadGuides, {guidesContext} from './util/load-guides'
-const components = Object.keys(InstructureUI).sort()
-
 import styles from './docs.css'
 
-const guides = loadGuides()
+import {index, components, documents} from './util/load-docs'
 
 class DocsApp extends Component {
   constructor (props) {
@@ -24,20 +19,20 @@ class DocsApp extends Component {
   }
 
   render () {
-    const introduction = (
-      <DocsSection key="Introduction" id="Introduction" >
-        <HtmlDoc html={require('docs/index.md')} />
-      </DocsSection>
-    )
-
     const componentDocs = components
-      .map(name => <DocsSection key={name} id={name}><ComponentDoc name={name} /></DocsSection>)
-
-    const guideDocs = guides
-      .map((guide) => {
+      .map((component) => {
         return (
-          <DocsSection key={guide.id} id={guide.id}>
-            <HtmlDoc html={guidesContext(guide.path)} />
+          <DocsSection key={component.name} id={component.name}>
+            <ComponentDoc name={component.name} doc={component.doc} path={component.path} />
+          </DocsSection>
+        )
+      })
+
+    const docs = documents
+      .map((doc) => {
+        return (
+          <DocsSection key={doc.name} id={doc.name}>
+            <HtmlDoc html={doc.html} />
           </DocsSection>
         )
       })
@@ -45,12 +40,14 @@ class DocsApp extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.nav}>
-          <DocsNav components={components} guides={guides} />
+          <DocsNav components={components} documents={documents} />
         </div>
         <div className={styles.main}>
-          {introduction}
+          <DocsSection key="Introduction" id="Introduction">
+            <HtmlDoc html={index.html} />
+          </DocsSection>
           {componentDocs}
-          {guideDocs}
+          {docs}
         </div>
       </div>
     )

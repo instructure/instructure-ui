@@ -1,58 +1,29 @@
 /* eslint no-var: 0 */
+'use strict'
+
 var merge = require('webpack-merge')
-var paths = require('../../paths')
 var path = require('path')
-var pkg = require('../../package')
 
-module.exports = function (config, options) {
-  options = options || {
-    dist: false,
-    minify: false,
-    env: 'development'
-  }
+var opts = require('../util/config')
 
-  var alias = {}
-  alias[pkg.name] = path.join(paths.root, pkg.main)
-
-  var defaults = {
+module.exports = function (config, env, minify) {
+  return merge({
     resolve: {
-      root: paths.root,
+      root: opts.rootPath,
       modulesDirectories: [
-        'lib/components',
-        'node_modules',
-        '.'
-      ],
-      alias: alias
-    },
-    resolveLoader: {
-      root: paths.root,
-      modulesDirectories: [
-        'webpack/loaders',
-        'node_modules',
-        '.'
+        path.resolve(__dirname, '../../node_modules'),
+        'node_modules'
       ]
     },
-    module: require('../config/module')(options),
-    plugins: require('../config/plugins')(options),
-    postcss: require('../config/postcss')(options)
-  }
-
-  if (options.dist === true) {
-    defaults = merge(defaults, {
-      devtool: 'source-map',
-      output: {
-        path: paths.distBuild,
-        filename: '[name].js',
-        library: pkg.name,
-        libraryTarget: 'umd'
-      },
-      externals: {
-        'react': 'React',
-        'react-dom': 'React',
-        'react/addons': 'React'
-      }
-    })
-  }
-
-  return merge(defaults, config)
+    resolveLoader: {
+      modulesDirectories: [
+        path.resolve(__dirname, '../loaders'),
+        path.resolve(__dirname, '../../node_modules'),
+        'node_modules'
+      ]
+    },
+    module: require('./module-loaders')(env),
+    plugins: require('./plugins')(env, minify),
+    postcss: require('./postcss')(env)
+  }, config, opts.webpack)
 }

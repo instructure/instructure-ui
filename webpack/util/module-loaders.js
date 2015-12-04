@@ -1,12 +1,12 @@
 /* eslint no-var: 0 */
+'use strict'
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var merge = require('webpack-merge')
 
 var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=ic-[name]__[local]!postcss'
 
-module.exports = function (options) {
-  options = options || {}
+module.exports = function (env) {
   var config = {
     preLoaders: [
       {
@@ -52,7 +52,7 @@ module.exports = function (options) {
     ]
   }
 
-  if (options.env === 'production') {
+  if (env === 'production') {
     config = merge(config, {
       loaders: [
         {

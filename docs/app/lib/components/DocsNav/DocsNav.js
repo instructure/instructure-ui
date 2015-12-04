@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react'
-import { DocsMenu, DocsMenuItem } from '../DocsMenu'
 
 import styles from './DocsNav.css'
 
@@ -12,8 +11,13 @@ export default class DocsNav extends Component {
   }
 
   static propTypes = {
-    components: PropTypes.array.isRequired,
-    guides: PropTypes.array.isRequired
+    components: PropTypes.array,
+    documents: PropTypes.array
+  }
+
+  static defaultProps = {
+    components: [],
+    documents: []
   }
 
   handleSearchChange = e => this.setState({query: e.target.value})
@@ -21,39 +25,49 @@ export default class DocsNav extends Component {
   render () {
     const components = this.props.components
       .sort()
-      .filter(name => new RegExp(this.state.query, 'i').test(name))
-      .map(name => <DocsMenuItem key={name} name={name} href={`#${name}`} />)
+      .filter(component => new RegExp(this.state.query, 'i').test(component.name))
+      .map((component) => {
+        return (
+          <a key={component.name} className={styles.link} href={`#${component.name}`}>
+            {component.name}
+          </a>
+        )
+      })
 
-    const guides = this.props.guides
+    const documents = this.props.documents
       .sort()
-      .filter(guide => new RegExp(this.state.query, 'i').test(guide.title))
-      .map(guide => <DocsMenuItem key={guide.id} name={guide.title} href={`#${guide.id}`} />)
+      .filter(doc => new RegExp(this.state.query, 'i').test(doc.title))
+      .map((doc) => {
+        return (
+          <a key={doc.name} className={styles.link} href={`#${doc.name}`}>
+            {doc.title}
+          </a>
+        )
+      })
 
     return (
       <div className={styles.root}>
-        <DocsMenu>
-          <DocsMenuItem isActive>
-            <input
-              placeholder="Search"
-              onChange={this.handleSearchChange}
-              className={styles.searchInput}
-            />
-          </DocsMenuItem>
-          <div>
-            <div className={styles.header}>
-              Components
-            </div>
-            <div className={styles.section}>
-              {components}
-            </div>
-            <div className={styles.header}>
-              Guides
-            </div>
-            <div className={styles.section}>
-              {guides}
-            </div>
+        <label aria-label="Search Documentation">
+          <input
+            placeholder="Search"
+            onChange={this.handleSearchChange}
+            className={styles.search}
+          />
+        </label>
+        <div>
+          <div className={styles.header}>
+            Components
           </div>
-        </DocsMenu>
+          <div className={styles.section}>
+            {components}
+          </div>
+          <div className={styles.header}>
+            Documentation
+          </div>
+          <div className={styles.section}>
+            {documents}
+          </div>
+        </div>
       </div>
     )
   }

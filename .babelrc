@@ -20,6 +20,11 @@
           ]
         }
       }
+    },
+    "production": {
+      "plugins": [
+        "react-display-name"
+      ]
     }
   }
 }

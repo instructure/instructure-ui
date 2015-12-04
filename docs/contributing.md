@@ -14,7 +14,7 @@ Installation steps:
 - `npm test` will run the tests.
 - `npm run test:watch` will run the tests and watch for changes to the source code. Run this if you'd like to debug tests in the browser (Chrome).
 
-See the scripts section in [package.json](package.json) for all of the other build tasks/options.
+See the scripts section in the package.json file for all of the other build tasks/options.
 
 ## Linting and Code Formatting
 

@@ -1,43 +1,39 @@
 /* eslint no-var: 0 */
+'use strict'
+
 var path = require('path')
-var paths = require('../paths')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var config = require('./util/config')
 
-var pkg = require('../package')
 var entry = {
-  'example': path.join(paths.docsApp, 'lib/example.js'),
-  'docs': path.join(paths.docsApp, 'lib/index.js'),
-  'prismjs': path.join(paths.docsApp, 'lib/prismjs.js')
+  'example': path.join(config.docsAppPath, 'lib/example.js'),
+  'docs': [
+    path.join(config.docsAppPath, 'lib/index.js'),
+    path.join(config.docsAppPath, 'lib/prismjs.js')
+  ]
 }
+var libEntry = config.library.name
+entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
 
-entry[pkg.name] = [ path.join(paths.root, pkg.main) ]
-
-var env = process.env.NODE_ENV
-
-var config = require('./util/generate-config')({
+module.exports = require('./util/generate-config')({
   output: {
-    path: paths.docsBuild,
+    path: config.docsPath,
     filename: '[name].js'
   },
   entry: entry,
   plugins: [
     new HtmlWebpackPlugin({
-      title: 'Instructure UI Component Library',
-      template: path.join(paths.templatesRoot, '/index.tmpl.html'),
+      title: config.app.title,
+      template: path.join(config.docsAppPath, 'templates/index.tmpl.html'),
       inject: 'body',
-      chunks: ['prismjs', 'docs', pkg.name]
+      chunks: ['docs']
     }),
     new HtmlWebpackPlugin({
       title: 'Component Example',
-      template: path.join(paths.templatesRoot, '/example.tmpl.html'),
+      template: path.join(config.docsAppPath, 'templates/example.tmpl.html'),
       inject: 'body',
       filename: 'example.html',
-      chunks: ['example', pkg.name]
+      chunks: ['example', libEntry]
     })
   ]
-}, {
-  env: env,
-  minify: (env === 'production')
-})
-
-module.exports = config
+}, process.env.NODE_ENV, process.env.MINIFY)

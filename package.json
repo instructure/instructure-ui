@@ -4,11 +4,6 @@
   "description": "A React UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering",
   "main": "./lib/index.js",
-  "directories": {
-    "lib": "lib",
-    "dist": "__dist__",
-    "doc": "__docs__"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -16,17 +11,10 @@
   "homepage": "https://github.com/instructure/instructure-ui",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "start": "webpack-dev-server --inline --hot -d --progress --config webpack.config.js --content-base __docs__",
-    "test": "./scripts/test",
-    "test:watch": "./scripts/test --no-single-run --browsers Chrome",
-    "clean": "./scripts/clean",
-    "build:lib": "./scripts/build",
-    "build:dist": "webpack --config webpack/dist.config.js",
-    "build:minify": "webpack --config webpack/minify.config.js",
-    "build:docs": "export NODE_ENV=production && webpack --config webpack/docs.config.js",
-    "build": "./scripts/build-all",
-    "release": "./scripts/release",
-    "deploy": "./scripts/deploy"
+    "start": "./bin/instui server",
+    "test": "./bin/instui test --single-run",
+    "test:watch": "./bin/instui test",
+    "build": "./bin/instui build && ./bin/instui docs"
   },
   "license": "MIT",
   "devDependencies": {

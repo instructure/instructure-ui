@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+webpack=$MODULES_PATH/.bin/webpack
+
+rm -rf $BUILD_PATH/docs
+
+# Generate docs
+NODE_ENV=production MINIFY=1 $webpack --config $BASE_PATH/webpack/docs.config.js
+

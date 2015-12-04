@@ -1,0 +1,21 @@
+#!/bin/bash
+
+set -e
+
+babel=$MODULES_PATH/.bin/babel
+webpack=$MODULES_PATH/.bin/webpack
+
+rm -rf $BUILD_PATH
+
+# Transpile ES6
+$babel -d $BUILD_PATH/lib lib
+
+# Copy package
+cp README.md $BUILD_PATH/
+cp .npmignore $BUILD_PATH/
+cp LICENSE $BUILD_PATH/
+node -p 'p=require("./package");p.scripts=p.devDependencies=undefined;JSON.stringify(p,null,2)' > $BUILD_PATH/package.json
+
+# Generate bundle
+NODE_ENV=production $webpack --config $BASE_PATH/webpack/dist.config.js
+NODE_ENV=production MINIFY=1 $webpack --config $BASE_PATH/webpack/dist.config.js
