@@ -1,11 +1,15 @@
 .root {
   position: relative;
   background: #fff;
-  box-shadow: 0 1px 2px 0 rgba(34,36,38,.15);
-  margin: 1rem;
-  padding: 1em;
-  border-radius: .28571429rem;
-  border: 1px solid rgba(34,36,38,.15);
   color: #333;
-  font-size: 0.875em;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 4em;
+  border-bottom: 1px solid #eee;
+}
+.heading {
+  margin: 0;
+  padding: 0;
+  font-weight: 700;
+  font-size: 1.75em;
 }

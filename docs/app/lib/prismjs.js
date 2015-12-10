@@ -1,3 +1,3 @@
-import 'prismjs/themes/prism.css'
+import './prism.zenburn.css'
 
 require('script!prismjs/prism.js')

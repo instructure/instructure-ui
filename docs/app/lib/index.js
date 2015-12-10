@@ -31,7 +31,7 @@ class DocsApp extends Component {
     const docs = documents
       .map((doc) => {
         return (
-          <DocsSection key={doc.name} id={doc.name}>
+          <DocsSection key={doc.name} id={doc.name} heading={doc.title}>
             <HtmlDoc html={doc.html} />
           </DocsSection>
         )
@@ -46,7 +46,9 @@ class DocsApp extends Component {
           <DocsSection key="Introduction" id="Introduction">
             <HtmlDoc html={index.html} />
           </DocsSection>
+          <h2 className={styles.heading}>Components</h2>
           {componentDocs}
+          <h2 className={styles.heading}>Documentation</h2>
           {docs}
         </div>
       </div>

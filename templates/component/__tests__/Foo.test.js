@@ -1,6 +1,6 @@
 import Foo from '../index'
 
-describe('ic-foo', function () {
+describe('Foo', function () {
   const testbed = createTestbed(Foo, {
     /* default props go here */
   })

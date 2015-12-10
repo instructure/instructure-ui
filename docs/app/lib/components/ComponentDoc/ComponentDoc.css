@@ -1,4 +1,28 @@
+.root {
+  font-size: 1rem;
+  font-weight: 300;
+}
 .heading {
-  margin-bottom: 0;
+  margin-bottom: 2em;
+
+  h2 {
+    margin: 0;
+    padding: 0;
+    font-weight: 700;
+    font-size: 1.75em;
+  }
+}
+.path {
+  margin: 0;
+  font-size: 0.6875em;
+  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
+}
+.description {
+  p {
+    font-size: 1em;
+    line-height: 1.1;
+    border-left: 3px solid #0091AD;
+    padding-left: 1em;
+  }
 }
 

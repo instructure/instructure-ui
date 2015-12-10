@@ -47,6 +47,7 @@ export default class DocsNav extends Component {
 
     return (
       <div className={styles.root}>
+        <h1 className={styles.title}>InstUI</h1>
         <label aria-label="Search Documentation">
           <input
             placeholder="Search"

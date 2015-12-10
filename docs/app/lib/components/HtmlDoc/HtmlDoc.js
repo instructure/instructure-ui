@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 
+import styles from './HtmlDoc.css'
+
 export default class HtmlDoc extends Component {
   static propTypes = {
     html: PropTypes.string.isRequired
@@ -7,7 +9,7 @@ export default class HtmlDoc extends Component {
 
   render () {
     return (
-      <div dangerouslySetInnerHTML={{__html: this.props.html}} />
+      <div className={styles.root} dangerouslySetInnerHTML={{__html: this.props.html}} />
     )
   }
 }

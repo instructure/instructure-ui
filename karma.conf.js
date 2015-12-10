@@ -42,23 +42,7 @@ module.exports = function config (config) {
           '--no-first-run',
           '--disable-default-apps',
           '--disable-popup-blocking',
-          '--disable-translate',
-
-          // This is necessary in order to get useful error messages that
-          // happen outside of the test suites (e.g, script load errors).
-          //
-          // Without this flag, we get the dreaded "Script Error." message with
-          // no explanation, and that is due to the cross-origin policies (since
-          // karma loads our tests files using socket.io from another "origin").
-          //
-          // Additional reading:
-          //
-          //   - https://github.com/karma-runner/karma/issues/543
-          //   - https://bugs.webkit.org/show_bug.cgi?id=70574
-          //   - https://groups.google.com/forum/#!topic/angular/VeqlVgUa6Wo
-          //
-          '--disable-web-security',
-          '--no-sandbox'
+          '--disable-translate'
         ]
       }
     },

@@ -50,6 +50,7 @@ module.exports = {
 function nameToTitle (fileName) {
   return fileName
     .replace(/[\.\/]/g, '')
+    .replace(/^\d+\-/, '')
     .replace(/(\w+)/g, function (match) {
       return match.charAt(0).toUpperCase() + match.slice(1)
     })

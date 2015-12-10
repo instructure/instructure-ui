@@ -22,7 +22,7 @@ module.exports = function () {
     })
     .map(processDocs)
 
-  var lib = config.libraryMain ? '  lib: ' + requirePath(config.libraryMain) + ',' : ''
+  var lib = config.library.main ? '  lib: ' + requirePath(config.library.main) + ',' : ''
 
   return [
     'if (module.hot) {',

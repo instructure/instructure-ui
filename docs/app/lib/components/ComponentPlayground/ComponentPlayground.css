@@ -1,7 +1,16 @@
-.container {
-  border: 1px solid #e8e8e8;
+.root {
+  font-size: 1rem;
+  margin: 2em 0;
   overflow: hidden;
-  border-radius: 3px;
 }
-
-
+.button {
+  float: right;
+  background: #F5F5F5;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border: none;
+  font-size: 0.8em;
+  &:focus {
+    outline: none; /* take off chrome default */
+  }
+}

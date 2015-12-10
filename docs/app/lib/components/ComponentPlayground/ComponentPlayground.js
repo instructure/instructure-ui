@@ -40,17 +40,12 @@ export default class ComponentPlayground extends Component {
 
   render () {
     const { code } = this.state
-
     const editor = <CodeEditor code={code} onChange={this.handleChange} />
 
     return (
-      <div>
-        <div className={styles.container}>
-          <div className={styles.preview}>
-            <ComponentPreview code={code} />
-          </div>
-          {this.state.showCode && editor}
-        </div>
+      <div className={styles.root}>
+        <ComponentPreview code={code} />
+        {this.state.showCode && editor}
         <button onClick={this.handleToggle} className={styles.button}>
           {this.state.showCode ? 'hide editor' : 'show editor'}
         </button>

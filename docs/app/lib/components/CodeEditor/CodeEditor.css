@@ -3,9 +3,11 @@
   font-size: 1rem;
 }
 .root :global .CodeMirror {
-	height: auto;
-	padding: .3em .8em;
-	font-size: .9em;
+  height: auto;
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+}
+.root :global .CodeMirror-code {
+  font-size: .75em;
 }
 .root :global .CodeMirror-scroll {
 	height: auto;

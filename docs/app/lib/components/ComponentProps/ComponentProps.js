@@ -113,11 +113,10 @@ export default class ComponentProps extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <h3 className={styles.heading}>Props</h3>
         <table className={styles.table}>
           <thead className={styles.tableHead}>
             <tr className={styles.tableRow}>
-              <th className={styles.cellHeading} scope="col">Name</th>
+              <th className={styles.cellHeading} scope="col">Prop</th>
               <th className={styles.cellHeading} scope="col">Type</th>
               <th className={styles.cellHeading} scope="col">Default</th>
               <th className={styles.cellHeading + ' ' + styles.cellDesc} scope="col">Description</th>

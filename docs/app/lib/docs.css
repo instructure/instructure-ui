@@ -1,22 +1,31 @@
+$nav-spacing: 12.5rem;
+
 body {
   margin: 0;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   background-color: white;
 }
 
-.root {
-
-}
-
 .nav {
- background: #333;
+ background: #eeeeee;
  position: fixed;
  top: 0; bottom: 0; left: 0;
- width: 12.5rem;
- background: #333;
+ width: $nav-spacing;
  overflow-y: scroll;
+ overflow-x: hidden;
 }
 
 .main {
-  margin-left: 12.5rem;
+  margin-left: $nav-spacing;
 }
+
+.heading {
+  background: #0091AD;
+  color: #fff;
+  font-size: 2em;
+  font-weight: 100;
+  padding: 1em 2em;
+  margin: 0;
+  text-rendering: optimizeLegibility;
+}
+

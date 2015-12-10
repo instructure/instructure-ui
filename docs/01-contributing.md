@@ -1,4 +1,4 @@
-## Prerequisites and Installation
+### Prerequisites and Installation
 
 You'll need to have [Git](http://git-scm.com/) installed on your system. There is an install script provided that will install all of the other dependencies (note: it installs [nvm](https://github.com/creationix/nvm) and uses it to install the correct version of [Node](https://nodejs.org/en/)).
 
@@ -8,7 +8,8 @@ Installation steps:
 2. Clone this repository.
 3. Run the install script: `scripts/install`
 
-## Development
+
+### Development
 
 - `npm start` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code in the `lib` directory you should see the page auto-reload.
 - `npm test` will run the tests.
@@ -16,7 +17,8 @@ Installation steps:
 
 See the scripts section in the package.json file for all of the other build tasks/options.
 
-## Linting and Code Formatting
+
+### Linting and Code Formatting
 
 Linting is run as part of the build. If you use the Sublime Text editor you can set up the following plugins to catch
 linting and formatting errors earlier.
@@ -28,18 +30,18 @@ linting and formatting errors earlier.
 `npm install`
 5. Restart Sublime Text
 
-## Documentation
+### Documentation
 
 Please update the documentation with any API changes, the code and docs should
 always be in sync.
 
-## Build
+### Build
 
 Please do not include the output of `npm run build` in your commits, we
 only do this when we release. (Also, you probably don't need to build
 anyway unless you are fixing something around our global build.)
 
-## Guidelines
+### Guidelines
 
 Components should:
 
@@ -48,7 +50,7 @@ Components should:
 - be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
 - have good test coverage.
 
-## Commit Subjects
+### Commit Subjects
 
 If your patch **changes the API or fixes a bug** please use one of the
 following prefixes in your commit subject:

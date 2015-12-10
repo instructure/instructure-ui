@@ -4,7 +4,7 @@ import debounce from 'lodash/function/debounce'
 import CodeMirrorEditor from '../CodeMirrorEditor'
 
 import styles from './CodeEditor.css'
-import 'codemirror/theme/base16-light.css'
+import 'codemirror/theme/zenburn.css'
 
 const UPDATE_DELAY = 200
 
@@ -22,8 +22,8 @@ export default class CodeEditor extends Component {
 
   static codemirrorOptions = {
     mode: 'jsx',
-    theme: 'base16-light',
-    lineNumbers: false,
+    theme: 'zenburn',
+    lineNumbers: true,
     lineWrapping: true,
     smartIndent: false,
     matchBrackets: true,

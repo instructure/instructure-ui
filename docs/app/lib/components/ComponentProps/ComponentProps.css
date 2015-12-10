@@ -1,11 +1,5 @@
 .root {
-  margin-bottom: 2em;
-}
-
-.heading {
-  margin-bottom: .5em;
-  font-size: 1.3em;
-  font-weight: normal;
+  margin-top: 2em;
 }
 
 .table {
@@ -13,6 +7,11 @@
   margin-bottom: 1em;
   border-collapse: collapse;
   border-spacing: 0;
+  font-size: 0.8125em;
+}
+
+.table code {
+  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
 }
 
 .tableRow {
@@ -27,8 +26,15 @@
   margin-bottom: 1.5em;
 }
 
+.tableHead .cellHeading {
+  font-weight: 200;
+}
+
 .cell {
-  padding: .25em 1em .25em 0;
+  padding: 0.5em 0.5em 0.5em 0;
+}
+.cell:first-child {
+  font-weight: bold;
 }
 
 .cellHeading {
@@ -45,7 +51,7 @@
 
 .optional,
 .oneOf {
-  font-size: 0.875em;
+  font-weight: 200;
 }
 
 .list {
