@@ -30,47 +30,14 @@ linting and formatting errors earlier.
 `npm install`
 5. Restart Sublime Text
 
+
 ### Documentation
 
-Please update the documentation with any API changes, the code and docs should
+Please update the documentation with any changes, the code and docs should
 always be in sync.
+
 
 ### Build
 
-Please do not include the output of `npm run build` in your commits, we
-only do this when we release. (Also, you probably don't need to build
-anyway unless you are fixing something around our global build.)
-
-### Guidelines
-
-Components should:
-
-- be high contrast aware (use color variables, meet [4.5:1](http://www.w3.org/TR/WCAG20-TECHS/G18.html) and [3:1](http://www.w3.org/TR/WCAG20-TECHS/G183.html)).
-- be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
-- be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
-- have good test coverage.
-
-### Commit Subjects
-
-If your patch **changes the API or fixes a bug** please use one of the
-following prefixes in your commit subject:
-
-- `[fixed] ...`
-- `[changed] ...`
-- `[added] ...`
-- `[removed] ...`
-
-That ensures the subject line of your commit makes it into the
-auto-generated changelog. Do not use these tags if your change doesn't
-fix a bug and doesn't change the public API.
-
-Commits with changed, added, or removed, must be reviewed by another
-collaborator.
-
-### When using `[changed]` or `[removed]`...
-
-Please include an upgrade path with example code in the commit message.
-If it doesn't make sense to do this, then it doesn't make sense to use
-`[changed]` or `[removed]` :)
-
+Please do not include the output of `npm run build` in your commits.
 

@@ -15,7 +15,9 @@
     "test": "./bin/instui test --single-run",
     "test:watch": "./bin/instui test",
     "build": "./bin/instui build && ./bin/instui docs",
-    "generate": "./bin/instui generate"
+    "generate": "./bin/instui generate",
+    "bump": "./bin/instui bump",
+    "release": "./bin/instui release && ./bin/instui pages"
   },
   "license": "MIT",
   "devDependencies": {
@@ -27,7 +29,6 @@
     "babel-plugin-react-display-name": "2.0.0",
     "babel-plugin-react-transform": "1.1.1",
     "chai": "3.4.0",
-    "changelog": "1.0.7",
     "codemirror": "5.8.0",
     "css-loader": "0.21.0",
     "csswring": "4.0.0",
@@ -68,14 +69,12 @@
     "postcss-simple-vars": "1.1.0",
     "postcss-url": "5.0.2",
     "prismjs": "1.3.0",
-    "raw-loader": "0.5.1",
     "react-addons-test-utils": "0.14.1",
     "react-docgen": "2.4.0",
     "react-drill": "2.0.0",
     "react-transform-catch-errors": "1.0.0",
     "react-transform-hmr": "1.0.1",
     "redbox-react": "1.1.1",
-    "rf-release": "mzabriskie/rf-release",
     "script-loader": "0.6.1",
     "sinon": "1.17.2",
     "style-loader": "0.13.0",

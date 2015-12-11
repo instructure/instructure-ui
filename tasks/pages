@@ -1,44 +1,44 @@
 #!/bin/bash -e
 
 # make sure working directory is clean
-DIRTY=$(git status | grep modified -c)
-let DIRTY+=$(git status | grep Untracked -c)
-
-if [ $DIRTY -gt 0 ] && [ "$1" != "-f" ]; then
-  echo "\033[0;31m"Refusing to operate on unclean working directory"\033[0m"
+if [ ! -z "$(git status --porcelain)" ]; then
+  echo Refusing to operate on unclean working directory
   echo Use \"git status\" to see which files have been modified
   exit 1
 fi
 
-# delete gh-pages branch
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
+DOCS_PATH=$BUILD_PATH/docs
 
-if [ "$BRANCH" == "gh-pages" ]; then
-  git checkout master
+git checkout origin/master
+
+if [ "`git branch --list gh-pages`" ]; then
+  git branch -D gh-pages
 fi
-git branch -D gh-pages
-git push origin :gh-pages
 
 # build docs
 $BASE_PATH/tasks/docs
 
-DOCS_PATH=$BUILD_PATH/docs
+git checkout --orphan gh-pages
 
 # remove superfluous files
+git reset .
+git clean --force -d --exclude $DOCS_PATH
+rm -rf node_modules
 find . -type f | egrep -v ".git/|$DOCS_PATH/" | xargs rm
 find . -type d -empty -delete
-rm -rf node_modules
 
-# move example files to root
-mv $DOCS_PATH/* ./
-rm -rf $DOCS_PATH/
-
-# create gh-pages branch
-git checkout -b gh-pages
-git rm -rf .
+mv $DOCS_PATH/* .
+git clean --force -d $BUILD_PATH
 git add .
-git commit -m "updating gh-pages"
-git push -f origin gh-pages
+git commit -m "Update gh-pages"
+
+git push -f origin gh-pages:gh-pages
+
+git commit -m "Rebuild pages" --allow-empty
+
+git push origin gh-pages:gh-pages
+
 git checkout $BRANCH
 
 # restore node modules
