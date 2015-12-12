@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+COMPONENTS_DIR=lib/components
+COMPONENT_TEMPLATE_DIR=$BASE_PATH/templates/component
+
+read -p 'Component name: ' component
+
+export COMPONENT=$component
+
+if [ ! -d "$COMPONENTS_DIR" ]; then
+  echo Cannot find component directory!
+  exit 1
+fi
+
+if [ ! -d "$COMPONENT_TEMPLATE_DIR" ]; then
+  echo Cannot find component template!
+  exit 1
+fi
+
+if [ -d "$COMPONENTS_DIR/$COMPONENT" ]; then
+  echo Oops! Component $COMPONENT exists!
+  exit 1
+fi
+
+echo Generating $COMPONENT files in $COMPONENTS_DIR/$COMPONENT
+
+cp -r $COMPONENT_TEMPLATE_DIR $COMPONENTS_DIR/$COMPONENT
+
+# Update file names
+find $COMPONENTS_DIR/$COMPONENT -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+
+# Update file contents
+find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;

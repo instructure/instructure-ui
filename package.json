@@ -14,7 +14,8 @@
     "start": "./bin/instui server",
     "test": "./bin/instui test --single-run",
     "test:watch": "./bin/instui test",
-    "build": "./bin/instui build && ./bin/instui docs"
+    "build": "./bin/instui build && ./bin/instui docs",
+    "generate": "./bin/instui generate"
   },
   "license": "MIT",
   "devDependencies": {

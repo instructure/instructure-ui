@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 server=$MODULES_PATH/.bin/webpack-dev-server
 

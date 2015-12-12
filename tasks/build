@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 babel=$MODULES_PATH/.bin/babel
 webpack=$MODULES_PATH/.bin/webpack

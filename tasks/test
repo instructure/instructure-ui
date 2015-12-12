@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 karma=$MODULES_PATH/.bin/karma
 eslint=$MODULES_PATH/.bin/eslint

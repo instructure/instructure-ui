@@ -1,23 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import styles from './Foo.css'
+import styles from './${COMPONENT}.css'
 
 /**
- * A Foo component
+ * A ${COMPONENT} component
  *
  * ```jsx_example
- * <Foo />
+ * <${COMPONENT} />
  * ```
  */
-export default class Foo extends Component {
+export default class ${COMPONENT} extends Component {
   static propTypes = {
     /**
-    * description of bar prop
+    * description of replaceMe prop
     */
-    bar: PropTypes.string
+    replaceMe: PropTypes.string
   }
 
   static defaultProps = {
-    bar: 'hello world'
+    replaceMe: 'hello world'
   }
 
   render () {

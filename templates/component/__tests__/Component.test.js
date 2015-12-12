@@ -1,7 +1,7 @@
-import Foo from '../index'
+import ${COMPONENT} from '../index'
 
-describe('Foo', function () {
-  const testbed = createTestbed(Foo, {
+describe('${COMPONENT}', function () {
+  const testbed = createTestbed(${COMPONENT}, {
     /* default props go here */
   })
   it('should render', function () {

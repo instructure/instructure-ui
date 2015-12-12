@@ -1,6 +1,4 @@
-#!/bin/bash
-
-set -e
+#!/bin/bash -e
 
 webpack=$MODULES_PATH/.bin/webpack
 
