@@ -76,7 +76,7 @@ class ExampleApp extends Component {
 
   render () {
     return (
-      <MessageListener onReceiveMessage={this.handleMessage}>
+      <MessageListener onReceiveMessage={this.handleMessage} className={styles.root}>
         <div ref="mount"></div>
         { this.renderError() }
       </MessageListener>

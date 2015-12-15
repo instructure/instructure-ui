@@ -7,20 +7,28 @@ body {
   margin: 0;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   background-color: white;
-  padding: 1em;
   background-image: linear-gradient($sg-checkerboard-gradient), linear-gradient($sg-checkerboard-gradient);
   background-size: 16px 16px;
   background-position: 0 0, 8px 8px;
   height: 100%;
 }
 
+.root {
+  padding: 1em;
+}
+
 .error {
   font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
   color: white;
   background: #c00;
-  margin: -1.5em;
   padding: 1.5em;
+  margin: 0;
   line-height: 1.2;
   font-size: 0.75em;
-  height: 100vh;
+  position: absolute;
+  top: 0; left: 0;
+  overflow: auto;
+  display: block;
+  width: 100vw; height: 100vh;
+  box-sizing: border-box;
 }
