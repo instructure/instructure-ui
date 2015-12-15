@@ -10,15 +10,23 @@ fi
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DOCS_PATH=$BUILD_PATH/docs
 
-printf "Enter commit SHA to deploy to gh-pages: "
-read commit
-
 git fetch origin
 
-git checkout $commit
+git checkout origin/latest
 
+# delete the local gh-pages branch
 if [ "`git branch --list gh-pages`" ]; then
   git branch -D gh-pages
+fi
+
+# delete the gh-pages branch on github to force rebuild
+if [ "`git branch -r --list github/gh-pages`" ]; then
+  git push github :gh-pages
+fi
+
+# delete the gh-pages branch
+if [ "`git branch -r --list origin/gh-pages`" ]; then
+  git push origin :gh-pages
 fi
 
 # build docs
@@ -39,9 +47,11 @@ git add .
 git commit -m "Update gh-pages"
 
 git push -f origin gh-pages:gh-pages
+git push -f github gh-pages:gh-pages
 
 git commit -m "Rebuild pages" --allow-empty
 
+git push github gh-pages:gh-pages
 git push origin gh-pages:gh-pages
 
 git checkout $BRANCH
