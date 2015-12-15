@@ -10,7 +10,12 @@ fi
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
 DOCS_PATH=$BUILD_PATH/docs
 
-git checkout origin/master
+printf "Enter commit SHA to deploy to gh-pages: "
+read commit
+
+git fetch origin
+
+git checkout $commit
 
 if [ "`git branch --list gh-pages`" ]; then
   git branch -D gh-pages
