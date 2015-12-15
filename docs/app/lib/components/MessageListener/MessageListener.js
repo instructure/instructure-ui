@@ -45,7 +45,7 @@ export default class MessageListener extends Component {
 
   render () {
     return (
-      <div>
+      <div {...this.props}>
         {this.props.children}
       </div>
     )
