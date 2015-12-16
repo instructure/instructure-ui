@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A React UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering",
   "main": "./lib/index.js",
