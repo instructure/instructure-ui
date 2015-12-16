@@ -1,6 +1,8 @@
 // Based on https://github.com/joelburget/react-live-editor/blob/master/live-compile.jsx
 import React, { Component, PropTypes } from 'react'
 import MessageListener from '../MessageListener'
+import _ from 'lodash'
+import classnames from 'classnames'
 
 import styles from './ComponentPreview.css'
 
@@ -12,8 +14,10 @@ export default class ComponentPreview extends Component {
   constructor (props) {
     super()
     this.state = {
-      frameIsLoaded: false
+      frameIsLoaded: false,
+      isFullScreen: false
     }
+    this.frameName = _.uniqueId('frame_')
   }
 
   componentDidMount () {
@@ -26,11 +30,20 @@ export default class ComponentPreview extends Component {
     }
   }
 
+  handleToggle = () => {
+    this.setState({
+      isFullScreen: !this.state.isFullScreen
+    })
+  }
+
   handleMessage (message) {
     if (message && message.isMounted) {
       this.setState({
         frameIsLoaded: true
       })
+    }
+    if (message && message.contentHeight) {
+      this.refs.frame.height = message.contentHeight
     }
   }
 
@@ -45,10 +58,23 @@ export default class ComponentPreview extends Component {
   }
 
   render () {
+    const buttonText = this.state.isFullScreen ? 'Minimize' : 'Full Screen'
+    const classes = {
+      [styles.fullscreen]:  this.state.isFullScreen
+    }
+    // TODO: use a modal here
     return (
       <MessageListener
-        onReceiveMessage={this.handleMessage.bind(this)}>
-        <iframe className={styles.frame} ref="frame" src="example.html"></iframe>
+        sourceName={this.frameName}
+        onReceiveMessage={this.handleMessage.bind(this)}
+        className={classnames(classes)}>
+        <button className={styles.button} type="button" onClick={this.handleToggle}>
+          { buttonText }
+        </button>
+        <iframe ref="frame"
+          className={styles.frame}
+          name={this.frameName}
+          src="example.html"></iframe>
       </MessageListener>
     )
   }

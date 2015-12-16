@@ -17,6 +17,7 @@ const origin = (function () {
 
 export default class MessageListener extends Component {
   static propTypes = {
+    sourceName: PropTypes.string,
     onReceiveMessage: PropTypes.func,
     children: PropTypes.node
   }
@@ -37,8 +38,18 @@ export default class MessageListener extends Component {
     window.removeEventListener('message', this.handleMessage, false)
   }
 
+  sourceIsValid (eventSource) {
+    if (!this.props.sourceName) {
+      return true
+    } else {
+      const sourceFrame = eventSource.frameElement
+      const sourceName = sourceFrame ? sourceFrame.getAttribute('name') : null
+      return sourceName === this.props.sourceName
+    }
+  }
+
   handleMessage (e) {
-    if (e.origin === origin && e.data) {
+    if (this.sourceIsValid(e.source) && e.origin === origin && e.data) {
       this.props.onReceiveMessage(e.data)
     }
   }

@@ -4,7 +4,7 @@
   overflow: hidden;
 }
 .button {
-  float: right;
+  float: left;
   background: #F5F5F5;
   text-transform: uppercase;
   padding: 5px 12px;

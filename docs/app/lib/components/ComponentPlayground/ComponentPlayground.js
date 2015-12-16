@@ -46,7 +46,7 @@ export default class ComponentPlayground extends Component {
       <div className={styles.root}>
         <ComponentPreview code={code} />
         {this.state.showCode && editor}
-        <button onClick={this.handleToggle} className={styles.button}>
+        <button type="button" onClick={this.handleToggle} className={styles.button}>
           {this.state.showCode ? 'hide editor' : 'show editor'}
         </button>
       </div>
