@@ -1,5 +1,5 @@
-import React from 'react'
 import _ from 'lodash'
+import globals from './globals'
 
 // use webpack loader to load documentation data based on config
 const docs = require('docs!')
@@ -34,16 +34,12 @@ const sortedComponents = Object.keys(docs.lib || components)
     return _.merge({ name: name }, components[name])
   })
 
-module.exports = {
+export default {
   documents: _.reject(documents, isIndex),
   components: sortedComponents,
   index: _.find(documents, isIndex),
   globalize: function () {
-    // These need to be globals to render examples
-    global.React = React
-    sortedComponents.forEach((component) => {
-      global[component.name] = component.module
-    })
+    globals(sortedComponents)
   }
 }
 

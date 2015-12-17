@@ -2,12 +2,12 @@ import React, { Component, PropTypes } from 'react'
 import styles from './${COMPONENT}.css'
 
 /**
- * A ${COMPONENT} component
- *
- * ```jsx_example
- * <${COMPONENT} />
- * ```
- */
+  A ${COMPONENT} component [WIP]
+
+  ```jsx_example
+  <${COMPONENT} />
+  ```
+**/
 export default class ${COMPONENT} extends Component {
   static propTypes = {
     /**
@@ -23,7 +23,7 @@ export default class ${COMPONENT} extends Component {
   render () {
     return (
       <div className={styles.root}>
-
+        Hello World
       </div>
     )
   }

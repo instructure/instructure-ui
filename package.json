@@ -68,6 +68,7 @@
     "postcss-nested": "1.0.0",
     "postcss-simple-vars": "1.1.0",
     "postcss-url": "5.0.2",
+    "raw-loader": "0.5.1",
     "react-addons-test-utils": "0.14.1",
     "react-docgen": "2.4.0",
     "react-drill": "2.0.0",
