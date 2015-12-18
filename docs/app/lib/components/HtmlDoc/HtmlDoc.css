@@ -10,12 +10,4 @@
   li {
     line-height: 1.3;
   }
-  code:not([class]) {
-    font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
-    font-size: 75%;
-    background: #eee;
-    border: #333;
-    border-radius: 3px;
-    padding: 0.125em;
-  }
 }

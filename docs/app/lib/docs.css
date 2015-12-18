@@ -6,6 +6,20 @@ body {
   background-color: white;
 }
 
+code {
+  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
+  font-size: 75%;
+  background: #eee;
+  border: #333;
+  border-radius: 3px;
+  padding: 0.125em;
+}
+
+code[class^='lang-'] {
+  display: block;
+  padding: 0.5em;
+}
+
 .nav {
  background: #eeeeee;
  position: fixed;

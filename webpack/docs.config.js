@@ -8,8 +8,7 @@ var config = require('./util/config')
 var entry = {
   'example': path.join(config.docsAppPath, 'lib/example.js'),
   'docs': [
-    path.join(config.docsAppPath, 'lib/index.js'),
-    path.join(config.docsAppPath, 'lib/prismjs.js')
+    path.join(config.docsAppPath, 'lib/index.js')
   ]
 }
 var libEntry = config.library.name
