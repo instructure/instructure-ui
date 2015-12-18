@@ -24,5 +24,9 @@
     border-left: 3px solid #0091AD;
     padding-left: 1em;
   }
+
+  code {
+    font-size: 75%;
+  }
 }
 
