@@ -20,15 +20,15 @@ export default class MessageListener extends Component {
     sourceName: PropTypes.string,
     onReceiveMessage: PropTypes.func,
     children: PropTypes.node
-  }
+  };
 
   static defaultProps = {
     onReceiveMessage: function () {}
-  }
+  };
 
   static postMessage (target, message) {
     target.postMessage(message, origin)
-  }
+  };
 
   componentDidMount () {
     window.addEventListener('message', this.handleMessage.bind(this), false)

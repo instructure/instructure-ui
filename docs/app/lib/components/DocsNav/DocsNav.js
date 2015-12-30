@@ -3,6 +3,16 @@ import React, {PropTypes, Component} from 'react'
 import styles from './DocsNav.css'
 
 export default class DocsNav extends Component {
+  static propTypes = {
+    components: PropTypes.array,
+    documents: PropTypes.array
+  };
+
+  static defaultProps = {
+    components: [],
+    documents: []
+  };
+
   constructor (props) {
     super()
     this.state = {
@@ -10,17 +20,7 @@ export default class DocsNav extends Component {
     }
   }
 
-  static propTypes = {
-    components: PropTypes.array,
-    documents: PropTypes.array
-  }
-
-  static defaultProps = {
-    components: [],
-    documents: []
-  }
-
-  handleSearchChange = e => this.setState({query: e.target.value})
+  handleSearchChange = e => this.setState({query: e.target.value});
 
   render () {
     const components = this.props.components

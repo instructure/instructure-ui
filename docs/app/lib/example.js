@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
-import babel from 'babel-core/browser'
+import { transform } from 'babel-standalone'
 import MessageListener from './components/MessageListener'
 import debounce from 'lodash/function/debounce'
 import defer from 'lodash/function/defer'
 
 import styles from './example.css'
 
-import { globalize } from './util/load-docs'
+import docs from './util/load-docs'
 
-globalize()
+docs.globalize()
 
 class ExampleApp extends Component {
   constructor () {
@@ -35,10 +35,11 @@ class ExampleApp extends Component {
     if (message && typeof message.code === 'string') {
       this.executeCode(message.code)
     }
-  }
+  };
 
   compileCode (code) {
-    return babel.transform(code, {stage: 0}).code
+    // TODO: load babel presets and plugins from config
+    return transform(code, { presets: ['es2015', 'stage-1', 'react'] }).code
   }
 
   evalCode (code) {
@@ -54,7 +55,7 @@ class ExampleApp extends Component {
         contentHeight: node.offsetHeight
       })
     }, 0)
-  }
+  };
 
   executeCode (code) {
     const mountNode = this.refs.mount

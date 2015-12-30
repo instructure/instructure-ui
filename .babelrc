@@ -1,24 +1,13 @@
 {
-  "stage": 0,
+  "presets": ["es2015", "stage-1", "react"],
   "env": {
     "development": {
+      "presets": ["react-hmre"]
+    },
+    "build": {
       "plugins": [
-        "react-transform"
-      ],
-      "extra": {
-        "react-transform": {
-          "transforms": [
-            {
-              "transform": "react-transform-hmr",
-              "imports": ["react"],
-              "locals": ["module"]
-            }, {
-              "transform": "react-transform-catch-errors",
-              "imports": ["react", "redbox-react"]
-            }
-          ]
-        }
-      }
+        ["webpack-loaders", { "config": "./webpack/build.config.js", "verbose": true }]
+      ]
     }
   }
 }

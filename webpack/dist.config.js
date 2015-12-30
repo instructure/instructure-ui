@@ -3,7 +3,7 @@
 
 var options = require('./util/config')
 var entry = {}
-var entryName = options.library.name
+var entryName = options.library.packageName
 
 if (process.env.MINIFY) {
   entryName = entryName + '.min'
@@ -13,17 +13,11 @@ entry[entryName] = options.library.main
 
 module.exports = require('./util/generate-config')({
   entry: entry,
-  devtool: 'source-map',
   output: {
     path: options.distPath,
     filename: '[name].js',
-    library: options.libraryName,
+    library: options.library.name,
     libraryTarget: 'umd'
   },
-  externals: {
-    'react': 'React',
-    'react-dom': 'ReactDOM',
-    'react/addons': 'React',
-    'lodash': '_'
-  }
+  externals: require('./util/externals')
 }, 'production', process.env.MINIFY)

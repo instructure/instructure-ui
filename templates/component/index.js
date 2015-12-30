@@ -1,1 +1,2 @@
-export { default } from './${COMPONENT}'
+import ${COMPONENT} from './${COMPONENT}'
+module.exports = ${COMPONENT}

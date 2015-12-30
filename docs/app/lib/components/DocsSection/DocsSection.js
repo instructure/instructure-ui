@@ -7,7 +7,7 @@ export default class DocsSection extends Component {
     id: PropTypes.string.isRequired,
     heading: PropTypes.string,
     children: PropTypes.node
-  }
+  };
 
   render () {
     const heading = this.props.heading && (

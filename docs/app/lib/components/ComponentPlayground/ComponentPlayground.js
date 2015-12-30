@@ -7,7 +7,7 @@ import styles from './ComponentPlayground.css'
 export default class ComponentPlayground extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired
-  }
+  };
 
   constructor (props) {
     super()
@@ -30,13 +30,13 @@ export default class ComponentPlayground extends Component {
     this.setState({
       showCode: !this.state.showCode
     })
-  }
+  };
 
   handleChange = (newCode) => {
     this.setState({
       code: newCode
     })
-  }
+  };
 
   render () {
     const { code } = this.state

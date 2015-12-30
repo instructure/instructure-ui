@@ -34,19 +34,9 @@ const sortedComponents = Object.keys(docs.lib || components)
     return _.merge({ name: name }, components[name])
   })
 
-export default {
-  documents: _.reject(documents, isIndex),
-  components: sortedComponents,
-  index: _.find(documents, isIndex),
-  globalize: function () {
-    globals(sortedComponents)
-  }
-}
-
 function nameToTitle (fileName) {
   return fileName
     .replace(/[\.\/]/g, '')
-    .replace(/^\d+\-/, '')
     .replace(/(\w+)/g, function (match) {
       return match.charAt(0).toUpperCase() + match.slice(1)
     })
@@ -56,4 +46,13 @@ function nameToTitle (fileName) {
 // TODO: support sub directories and categories for docs
 function isIndex (doc) {
   return doc.name === 'index' || doc.name === 'README'
+}
+
+export default {
+  documents: _.reject(documents, isIndex),
+  components: sortedComponents,
+  index: _.find(documents, isIndex),
+  globalize: function () {
+    globals(sortedComponents)
+  }
 }

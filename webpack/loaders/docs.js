@@ -41,7 +41,7 @@ function processComponent (filepath) {
     'name: ' + JSON.stringify(path.basename(filepath, path.extname(filepath))),
     'filePath: ' + JSON.stringify(filepath),
     'relativePath: ' + JSON.stringify(path.relative(config.rootPath, filepath)),
-    'module: ' + requirePath(filepath),
+    'module: ' + requirePath(filepath) + '.default', // need to use .default to work with ES6 exports
     'doc: ' + requirePath('!!docgen!' + filepath)
   ].join(',') + '}'
 }
@@ -50,6 +50,6 @@ function processDocs (filepath) {
   return '{' + [
     'filePath: ' + JSON.stringify(filepath),
     'html: ' + requirePath(filepath),
-    'name: ' + JSON.stringify(path.basename(filepath, path.extname(filepath)))
+    'name: ' + JSON.stringify(path.basename(filepath, path.extname(filepath)).replace(/^\d+\-/, ''))
   ].join(',') + '}'
 }

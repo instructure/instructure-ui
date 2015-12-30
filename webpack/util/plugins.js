@@ -3,6 +3,8 @@
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var webpack = require('webpack')
+var path = require('path')
+var config = require('./config')
 
 module.exports = function (env, minify) {
   var plugins = []
@@ -10,6 +12,11 @@ module.exports = function (env, minify) {
   if (env === 'production') {
     plugins = [
       new ExtractTextPlugin('[name].css', { allChunks: true })
+    ]
+  } else if (env === 'build') {
+    var cssFilePath = process.argv[2]
+    plugins = [
+      new ExtractTextPlugin(path.relative(config.buildPath, cssFilePath))
     ]
   }
 

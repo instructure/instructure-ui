@@ -1,7 +1,7 @@
 /* eslint no-var: 0 */
 'use strict'
 
-module.exports = function (env) {
+module.exports = function (minify) {
   var plugins = [
     // Plugins seem to be first in last out
     // https://github.com/postcss/postcss#plugins
@@ -17,10 +17,11 @@ module.exports = function (env) {
       url: 'inline'
     })
   ]
-  if (env === 'production') {
+  if (minify) {
     plugins = plugins.concat([
-      require('csswring'),
-      require('postcss-discard-duplicates')()
+      require('postcss-discard-duplicates')(),
+      require('postcss-discard-comments'),
+      require('csswring')
     ])
   }
   return plugins

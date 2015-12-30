@@ -13,12 +13,12 @@ export default class CodeEditor extends Component {
     code: PropTypes.string.isRequired,
     readOnly: PropTypes.bool,
     onChange: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     readOnly: false,
     onChange: function () {}
-  }
+  };
 
   static codemirrorOptions = {
     mode: 'jsx',
@@ -29,7 +29,7 @@ export default class CodeEditor extends Component {
     matchBrackets: true,
     viewportMargin: Infinity,
     readOnly: false
-  }
+  };
 
   constructor () {
     super()

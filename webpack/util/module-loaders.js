@@ -3,8 +3,9 @@
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var merge = require('webpack-merge')
+var opts = require('../util/config')
 
-var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=ic-[name]__[local]!postcss'
+var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + opts.library.prefix + '[name]__[local]!postcss'
 
 module.exports = function (env) {
   var config = {
@@ -46,13 +47,10 @@ module.exports = function (env) {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file'
       }
-    ],
-    noParse: [
-      /babel-core\/browser.js/
     ]
   }
 
-  if (env === 'production') {
+  if (env === 'production' || env === 'build') {
     config = merge(config, {
       loaders: [
         {

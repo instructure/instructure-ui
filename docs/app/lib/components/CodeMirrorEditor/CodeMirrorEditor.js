@@ -16,12 +16,12 @@ export default class CodeMirrorEditor extends Component {
     options: PropTypes.object,
     path: PropTypes.string,
     value: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     onChange: function () {},
     onFocusChange: function () {}
-  }
+  };
 
   constructor (props) {
     super()
@@ -81,7 +81,7 @@ export default class CodeMirrorEditor extends Component {
     const newValue = doc.getValue()
     this._currentCodemirrorValue = newValue
     this.props.onChange && this.props.onChange(newValue)
-  }
+  };
 
   render () {
     const classes = {

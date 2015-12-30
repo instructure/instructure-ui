@@ -5,7 +5,7 @@ import styles from './HtmlDoc.css'
 export default class HtmlDoc extends Component {
   static propTypes = {
     html: PropTypes.string.isRequired
-  }
+  };
 
   render () {
     return (

@@ -5,8 +5,9 @@ webpack=$MODULES_PATH/.bin/webpack
 
 rm -rf $BUILD_PATH
 
-# Transpile ES6
-$babel -d $BUILD_PATH/lib lib
+# Transpile JS and CSS
+# TODO: load tests pattern from config
+NODE_ENV=build $babel -d $BUILD_PATH/lib --ignore 'lib/**/*.test.js' lib
 
 # Copy package
 cp README.md $BUILD_PATH/

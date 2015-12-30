@@ -6,7 +6,7 @@ import ComponentPlayground from '../ComponentPlayground'
 export default class ComponentDescription extends Component {
   static propTypes = {
     description: PropTypes.string
-  }
+  };
 
   componentWillUpdate (nextProps) {
     if (nextProps.description !== this.props.description) {

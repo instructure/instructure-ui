@@ -10,8 +10,10 @@ function getConfig () {
   var config = {
     buildPath: '__build__',
     library: {
-      name: pkg.name,
-      main: pkg.main
+      packageName: pkg.name,
+      name: 'InstUI',
+      main: pkg.main,
+      prefix: 'ic-'
     },
     app: {
       title: 'Instructure UI Component Library'

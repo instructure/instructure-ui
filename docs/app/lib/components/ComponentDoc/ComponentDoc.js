@@ -10,11 +10,11 @@ export default class ComponentDoc extends Component {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     doc: PropTypes.object
-  }
+  };
 
   static defaultProps = {
     doc: {}
-  }
+  };
 
   render () {
     const {

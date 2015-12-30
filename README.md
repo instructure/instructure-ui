@@ -11,7 +11,7 @@ See the [documentation](http://instructure.github.io/instructure-ui/) for live e
 
 ### Contribute
 
-See the [contributing guidelines](docs/contributing.md) for details.
+See the [contributing guidelines](http://instructure.github.io/instructure-ui/#contributing) for details.
 
 ### License
 

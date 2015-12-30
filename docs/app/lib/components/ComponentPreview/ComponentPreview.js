@@ -9,7 +9,7 @@ import styles from './ComponentPreview.css'
 export default class ComponentPreview extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired
-  }
+  };
 
   constructor (props) {
     super()
@@ -34,7 +34,7 @@ export default class ComponentPreview extends Component {
     this.setState({
       isFullScreen: !this.state.isFullScreen
     })
-  }
+  };
 
   handleMessage (message) {
     if (message && message.isMounted) {
@@ -45,7 +45,7 @@ export default class ComponentPreview extends Component {
     if (message && message.contentHeight) {
       this.refs.frame.height = message.contentHeight
     }
-  }
+  };
 
   renderPreview () {
     if (this.state.frameIsLoaded) {

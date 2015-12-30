@@ -6,11 +6,11 @@ import styles from './ComponentProps.css'
 export default class ComponentProps extends Component {
   static propTypes = {
     props: PropTypes.object.isRequired
-  }
+  };
 
   unquote (string) {
     return string.replace(/^'|'$/g, '')
-  }
+  };
 
   renderRows () {
     const rows = []
