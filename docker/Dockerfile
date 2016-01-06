@@ -1,4 +1,4 @@
-FROM docker.insops.net/instructure/node-passenger:4.2.1
+FROM instructure/node
 
 USER root
 
