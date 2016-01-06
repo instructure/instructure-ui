@@ -24,7 +24,7 @@ export default class ComponentDoc extends Component {
     } = this.props
 
     const props = doc.props && <ComponentProps props={doc.props} />
-    const description = doc.description && <ComponentDescription description={doc.description} />
+    const description = doc.description && <ComponentDescription name={name} description={doc.description} />
     // TODO: display warning/info message when component needs docs
     return (
       <div className={styles.root}>

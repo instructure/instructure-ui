@@ -8,6 +8,7 @@ import styles from './ComponentPreview.css'
 
 export default class ComponentPreview extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired
   };
 
@@ -17,7 +18,7 @@ export default class ComponentPreview extends Component {
       frameIsLoaded: false,
       isFullScreen: false
     }
-    this.frameName = _.uniqueId('frame_')
+    this.frameName = _.uniqueId('ComponentPreviewExample_')
   }
 
   componentDidMount () {
@@ -74,6 +75,7 @@ export default class ComponentPreview extends Component {
         <iframe ref="frame"
           className={styles.frame}
           name={this.frameName}
+          title={this.props.name + ' Example'}
           src="example.html"></iframe>
       </MessageListener>
     )

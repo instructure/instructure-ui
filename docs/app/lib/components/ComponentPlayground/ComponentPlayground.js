@@ -6,6 +6,7 @@ import styles from './ComponentPlayground.css'
 
 export default class ComponentPlayground extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired
   };
 
@@ -44,7 +45,7 @@ export default class ComponentPlayground extends Component {
 
     return (
       <div className={styles.root}>
-        <ComponentPreview code={code} />
+        <ComponentPreview code={code} name={this.props.name} />
         {this.state.showCode && editor}
         <button type="button" onClick={this.handleToggle} className={styles.button}>
           {this.state.showCode ? 'hide editor' : 'show editor'}

@@ -5,6 +5,7 @@ import ComponentPlayground from '../ComponentPlayground'
 
 export default class ComponentDescription extends Component {
   static propTypes = {
+    name: PropTypes.string.isRequired,
     description: PropTypes.string
   };
 
@@ -20,6 +21,7 @@ export default class ComponentDescription extends Component {
         case 'code':
           return (
             <ComponentPlayground
+              name={this.props.name}
               code={section.content}
               key={i} />
           )
