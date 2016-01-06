@@ -35,4 +35,4 @@ export MODULES_PATH=$SCRIPT_PATH/../node_modules/
 export BUILD_PATH=__build__
 
 # DO IT!
-$TASK_PATH "$@"
+exec $TASK_PATH "$@"

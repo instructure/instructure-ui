@@ -2,4 +2,4 @@
 
 server=$MODULES_PATH/.bin/webpack-dev-server
 
-$server --inline --hot -d --progress --config $BASE_PATH/webpack.config.js --content-base $BUILD_PATH/docs
+exec $server --inline --hot -d --progress --config $BASE_PATH/webpack.config.js --content-base $BUILD_PATH/docs "$@"

@@ -1,12 +1,13 @@
 ### Prerequisites and Installation
 
-You'll need to have [Git](http://git-scm.com/) installed on your system. There is an install script provided that will install all of the other dependencies (note: it installs [nvm](https://github.com/creationix/nvm) and uses it to install the correct version of [Node](https://nodejs.org/en/)).
+You'll need to have [Git](http://git-scm.com/) installed on your system.
 
 Installation steps:
 
 1. Install [Git](http://git-scm.com/).
 2. Clone this repository.
-3. Run the install script: `scripts/install`
+3. Optionally run `./bin/instui install` to install [Node](https://nodejs.org/en/)) via [nvm](https://github.com/creationix/nvm).
+4. Run `npm install`
 
 
 ### Development

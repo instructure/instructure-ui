@@ -21,5 +21,3 @@ export NVM_DIR="$HOME/.nvm"
 echo "-- install node"
 nvm install && nvm use
 
-echo "-- install node dependencies...";
-npm install
