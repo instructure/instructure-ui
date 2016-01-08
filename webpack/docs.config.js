@@ -11,10 +11,11 @@ var entry = {
     path.join(config.docsAppPath, 'lib/index.js')
   ]
 }
-var libEntry = config.library.name
+var libEntry = config.library.packageName
 entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
 
 module.exports = require('./util/generate-config')({
+  devtool: (process.env.NODE_ENV === 'production') ? 'source-map' : 'cheap-module-eval-source-map',
   output: {
     path: config.docsPath,
     filename: '[name].js'

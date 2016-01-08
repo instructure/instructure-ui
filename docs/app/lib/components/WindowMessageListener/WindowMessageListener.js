@@ -1,4 +1,5 @@
 import React, {PropTypes, Component} from 'react'
+import window from 'global/window'
 
 const origin = (function () {
   const { location } = window
@@ -15,7 +16,7 @@ const origin = (function () {
   }
 })()
 
-export default class MessageListener extends Component {
+export default class WindowMessageListener extends Component {
   static propTypes = {
     sourceName: PropTypes.string,
     onReceiveMessage: PropTypes.func,

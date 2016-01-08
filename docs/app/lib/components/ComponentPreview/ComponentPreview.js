@@ -1,7 +1,7 @@
 // Based on https://github.com/joelburget/react-live-editor/blob/master/live-compile.jsx
 import React, { Component, PropTypes } from 'react'
-import MessageListener from '../MessageListener'
-import _ from 'lodash'
+import WindowMessageListener from '../WindowMessageListener'
+import shortid from 'shortid'
 import classnames from 'classnames'
 
 import styles from './ComponentPreview.css'
@@ -18,7 +18,7 @@ export default class ComponentPreview extends Component {
       frameIsLoaded: false,
       isFullScreen: false
     }
-    this.frameName = _.uniqueId('ComponentPreviewExample_')
+    this.frameName = 'ComponentPreviewExample_' + shortid.generate()
   }
 
   componentDidMount () {
@@ -50,7 +50,7 @@ export default class ComponentPreview extends Component {
 
   renderPreview () {
     if (this.state.frameIsLoaded) {
-      MessageListener.postMessage(this.refs.frame.contentWindow, {
+      WindowMessageListener.postMessage(this.refs.frame.contentWindow, {
         code: this.props.code
       })
     } else {
@@ -65,7 +65,7 @@ export default class ComponentPreview extends Component {
     }
     // TODO: use a modal here
     return (
-      <MessageListener
+      <WindowMessageListener
         sourceName={this.frameName}
         onReceiveMessage={this.handleMessage.bind(this)}
         className={classnames(classes)}>
@@ -76,8 +76,8 @@ export default class ComponentPreview extends Component {
           className={styles.frame}
           name={this.frameName}
           title={this.props.name + ' Example'}
-          src="example.html"></iframe>
-      </MessageListener>
+          src={'example.html'}></iframe>
+      </WindowMessageListener>
     )
   }
-}
+} // 'examples/components/' + this.props.name + '.html'

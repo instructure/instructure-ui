@@ -3,6 +3,7 @@ import { merge } from 'lodash'
 import ReactDOM from 'react-dom'
 import { drill, DOMSelectors } from 'react-drill'
 import ReactTestUtils from 'react/lib/ReactTestUtils'
+import checkA11y from 'tests/util/a11y-check'
 
 export default class ReactTestbed {
   constructor (ComponentClass, defaultProps) {
@@ -50,9 +51,22 @@ export default class ReactTestbed {
   findChildren (test) {
     return ReactTestUtils.findAllInRenderedTree(this.subject, test)
   }
+
+  checkA11yStandards (done, options) {
+    options = options || {}
+
+    options.onFailure = options.onFailure || function (err, violations) {
+      expect(violations.length).to.equal(0, err)
+      done(new Error(err))
+    }
+    options.onSuccess = options.onSuccess || function () {
+      done()
+    }
+
+    checkA11y(this.dom.node, options)
+  }
 }
 
 global.createTestbed = (componentClass, defaultProps) => {
   return new ReactTestbed(componentClass, defaultProps)
 }
-

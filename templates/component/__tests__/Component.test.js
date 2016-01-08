@@ -15,7 +15,13 @@ describe('${COMPONENT}', function () {
   it('should have tests')
 
   describe('for a11y', function () {
-    /* placeholder for a11y tests */
-    it('should meet a11y standards')
+    it('should meet standards', function (done) {
+      testbed.render()
+
+      testbed.checkA11yStandards(done, {
+        ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
+      })
+    })
+    /* additional a11y related tests go here */
   })
 })

@@ -1,0 +1,46 @@
+$sg-checkerboard-color: #EEE;
+$sg-checkerboard-gradient: 45deg, $sg-checkerboard-color 25%, transparent 25%, transparent 75%, $sg-checkerboard-color 75%, $sg-checkerboard-color;
+
+:global {
+  html {
+    height: 100%;
+  }
+  body {
+    font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    margin: 0;
+    height: 100%;
+    background-color: white;
+    background-image: linear-gradient($sg-checkerboard-gradient), linear-gradient($sg-checkerboard-gradient);
+    background-size: 16px 16px;
+    background-position: 0 0, 8px 8px;
+  }
+}
+
+.root {
+  padding: 1em;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.errorBg {
+  margin: 0;
+  position: absolute;
+  top: 0; left: 0;
+  overflow: auto;
+  display: block;
+  width: 100vw; height: 100vh;
+  box-sizing: border-box;
+  z-index: -1;
+}
+
+.error,
+.errorBg {
+  background: #c00;
+}
+
+.error {
+  color: white;
+  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
+  line-height: 1.5;
+  font-size: 0.75em;
+}

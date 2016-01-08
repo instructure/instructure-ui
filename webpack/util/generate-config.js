@@ -13,7 +13,10 @@ module.exports = function (config, env, minify) {
       modulesDirectories: [
         path.resolve(__dirname, '../../node_modules'),
         'node_modules'
-      ]
+      ],
+      alias: {
+        'babel-config': path.resolve(opts.rootPath, '.babelrc')
+      }
     },
     resolveLoader: {
       modulesDirectories: [
