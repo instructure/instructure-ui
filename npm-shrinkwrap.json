@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "0.0.3",
+  "version": "0.1.0",
   "dependencies": {
     "accepts": {
       "version": "1.1.4",
@@ -1572,7 +1572,8 @@
           "dependencies": {
             "esprima": {
               "version": "2.7.1",
-              "from": "esprima@>=2.6.0 <3.0.0"
+              "from": "esprima@2.7.1",
+              "resolved": "https://registry.npmjs.org/esprima/-/esprima-2.7.1.tgz"
             }
           }
         },
@@ -3045,6 +3046,11 @@
       "from": "js-base64@>=2.1.9 <3.0.0",
       "resolved": "https://registry.npmjs.org/js-base64/-/js-base64-2.1.9.tgz"
     },
+    "js-stylesheet": {
+      "version": "0.0.1",
+      "from": "js-stylesheet@>=0.0.1 <0.0.2",
+      "resolved": "https://registry.npmjs.org/js-stylesheet/-/js-stylesheet-0.0.1.tgz"
+    },
     "js-tokens": {
       "version": "1.0.2",
       "from": "js-tokens@>=1.0.1 <2.0.0",
@@ -4370,6 +4376,11 @@
           "resolved": "https://registry.npmjs.org/lodash/-/lodash-3.10.1.tgz"
         }
       }
+    },
+    "react-tabs": {
+      "version": "0.5.3",
+      "from": "react-tabs@>=0.5.3 <0.6.0",
+      "resolved": "https://registry.npmjs.org/react-tabs/-/react-tabs-0.5.3.tgz"
     },
     "react-transform-catch-errors": {
       "version": "1.0.1",
