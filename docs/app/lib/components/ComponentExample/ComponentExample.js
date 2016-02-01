@@ -127,16 +127,11 @@ export default class ComponentExample extends Component {
   }
 
   renderExample () {
-    const { error } = this.state
-    if (error) {
-      null
-    } else {
-      return (
-        <div ref="mount" className={styles.example}>
-          {this.props.children}
-        </div>
-      )
-    }
+    return (
+      <div ref="mount" className={styles.example}>
+        {this.props.children}
+      </div>
+    )
   }
 
   render () {
