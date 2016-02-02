@@ -23,7 +23,7 @@ module.exports = require('./util/generate-config')({
   entry: entry,
   plugins: [
     new HtmlWebpackPlugin({
-      title: config.app.title,
+      title: config.app.title + ' (' + config.library.version + ')',
       template: path.join(config.docsAppPath, 'templates/index.tmpl.html'),
       inject: 'body',
       chunks: ['docs']
