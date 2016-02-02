@@ -14,44 +14,28 @@ git fetch origin
 
 git checkout origin/latest
 
+npm install
+
+# build docs
+$BASE_PATH/tasks/docs
+
 # delete the local gh-pages branch
 if [ "`git branch --list gh-pages`" ]; then
   git branch -D gh-pages
 fi
 
-# delete the gh-pages branch on github to force rebuild
-if [ "`git branch -r --list github/gh-pages`" ]; then
-  git push github :gh-pages
-fi
-
-# delete the gh-pages branch
-if [ "`git branch -r --list origin/gh-pages`" ]; then
-  git push origin :gh-pages
-fi
-
-# build docs
-$BASE_PATH/tasks/docs
-
 git checkout --orphan gh-pages
+git pull origin gh-pages
 
 # remove superfluous files
 git reset .
-git clean --force -d --exclude $DOCS_PATH
-rm -rf node_modules
-find . -type f | egrep -v ".git/|$DOCS_PATH/" | xargs rm
-find . -type d -empty -delete
+git add .gitignore
+git clean --force -d
 
-mv $DOCS_PATH/* .
-git clean --force -d $BUILD_PATH
+mv -f $DOCS_PATH/* .
 git add .
-git commit -m "Update gh-pages"
+git commit -m "Update gh-pages for `git log origin/latest -1 --pretty="%H"`"
 
-git push -f origin gh-pages:gh-pages
-git push -f github gh-pages:gh-pages
-
-git commit -m "Rebuild pages" --allow-empty
-
-git push github gh-pages:gh-pages
 git push origin gh-pages:gh-pages
 
 git checkout $BRANCH

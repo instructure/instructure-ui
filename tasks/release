@@ -20,6 +20,8 @@ package_version=$(node -p "require('./package').version")
 
 release_tag="v$package_version"
 
+npm install
+
 $BASE_PATH/tasks/test --single-run
 $BASE_PATH/tasks/build
 $BASE_PATH/tasks/docs
@@ -29,6 +31,6 @@ git tag -am "Version $package_version" $release_tag
 git push origin $release_tag
 git push origin $commit_sha:latest
 
-npm publish
+npm publish $BUILD_PATH
 
 git checkout $BRANCH

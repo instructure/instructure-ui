@@ -13,7 +13,8 @@ function getConfig () {
       packageName: pkg.name,
       name: 'InstUI',
       main: pkg.main,
-      prefix: 'ic-'
+      prefix: 'ic-',
+      version: pkg.version
     },
     app: {
       title: 'Instructure UI Component Library'
