@@ -52,7 +52,7 @@
 .required,
 .oneOf {
   font-weight: 200;
-  color: #888;
+  font-style: italic;
 }
 
 .list {

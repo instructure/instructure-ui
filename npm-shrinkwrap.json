@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "dependencies": {
     "accepts": {
       "version": "1.1.4",
@@ -1764,6 +1764,11 @@
       "version": "1.0.2",
       "from": "extsprintf@1.0.2",
       "resolved": "https://registry.npmjs.org/extsprintf/-/extsprintf-1.0.2.tgz"
+    },
+    "faker": {
+      "version": "3.0.1",
+      "from": "faker@*",
+      "resolved": "https://registry.npmjs.org/faker/-/faker-3.0.1.tgz"
     },
     "fast-levenshtein": {
       "version": "1.0.7",

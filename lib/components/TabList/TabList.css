@@ -1,0 +1,8 @@
+.root {
+
+}
+.simple,
+.accordion {
+  display: flex;
+  flex-flow: row wrap;
+}

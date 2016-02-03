@@ -14,10 +14,10 @@ function formatViolations (violations) {
   })
 }
 
-export default function checkA11y (node, options) {
-  options = options || {}
+export default function checkA11y (node, options = {}) {
+  const exclude = options.exclude || []
 
-  axe.a11yCheck(node, (result) => {
+  axe.a11yCheck({ include: [node], exclude }, (result) => {
     const ignores = options.ignores || []
     const violations = _.reject(result.violations, function (violation) {
       return (ignores.indexOf(violation.id) >= 0)

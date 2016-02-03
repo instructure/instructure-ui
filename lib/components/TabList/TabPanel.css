@@ -1,0 +1,56 @@
+.root {
+  flex-basis: 100%;
+
+  &[aria-hidden="true"] {
+    display: none;
+  }
+}
+
+.simple {
+  margin-top: -1px;
+
+  border: 1px solid #d6d6d6;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+
+  z-index: 2;
+}
+
+.accordion {
+  box-sizing: border-box;
+
+  border: 1px solid #d6d6d6;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top: none;
+
+  max-height: 2000px;
+  overflow: auto;
+  transition: max-height 0.5s ease-in-out;
+  transform: scaleY(1);
+
+  &[aria-hidden="true"] {
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    border: none;
+    opacity: 0;
+    transition: max-height 0.2s ease-in-out;
+    transform: scaleY(0);
+  }
+}
+
+.content {
+  padding: 0.875rem 1rem;
+
+  background-color: white;
+  color: #333;
+}
+
+.nextTab {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px; width: 1px;
+  margin: -1px; padding: 0; border: 0;
+}
