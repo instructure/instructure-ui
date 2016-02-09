@@ -2,13 +2,13 @@
   font-size: 0.875rem;
   cursor: pointer;
 
-  &[aria-disabled="true"] {
-    opacity: 0.5;
+  &[aria-selected],
+  &[aria-disabled] {
+    cursor: default;
   }
 
-  &[aria-selected="true"],
-  &[aria-disabled="true"] {
-    cursor: default;
+  &[aria-disabled] {
+    opacity: 0.5;
   }
 
   h1, h2, h3, h4, h5 {
@@ -22,13 +22,13 @@
 
   padding: .7em 1em;
 
-  margin-left: -1px;
   margin-right: 0.2em;
   margin-bottom: -1px;
 
   border: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
+  border-bottom: none;
 
   color: #0073ac;
 
@@ -36,22 +36,21 @@
     margin-left: 0;
   }
 
-  &[aria-selected="false"][aria-disabled="false"]:hover,
-  &[aria-selected="true"] {
+  &:not([aria-selected]):not([aria-disabled]):hover,
+  &[aria-selected] {
     border-color: #d6d6d6;
     color: #333;
   }
 
-  &[aria-selected="true"],
-  &[aria-disabled="true"] {
+  &[aria-selected],
+  &[aria-disabled] {
     color: #333;
     text-decoration: none;
   }
 
-  &[aria-selected="true"] {
+  &[aria-selected] {
     z-index: 3;
     background: #fff;
-    border-bottom-color: #fff;
   }
 
   &:focus {
@@ -66,7 +65,7 @@
   padding: 0.5rem 0.75rem;
 
   display: flex;
-  align-content: center;
+  align-items: center;
 
   border-radius: 6px;
 
@@ -77,19 +76,18 @@
     margin-top: 0;
   }
 
-  &::before {
+  & .icon::before {
     content:  "\25B8";
-    display: inline-block;
     margin-right: 0.75rem;
   }
 
   transition: box-shadow, background-color 0.15s ease-in-out;
 
-  &[aria-selected="false"][aria-disabled="false"]:hover {
+  &:not([aria-selected]):not([aria-disabled]):hover {
     background-color: #E6E6E6;
   }
 
-  &[aria-selected="true"] {
+  &[aria-selected] {
     border-color: #525252;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -97,7 +95,7 @@
     color: #fff;
     background-color: #6b6b6b;
 
-    &::before {
+    & .icon::before {
       content:  "\25BE";
     }
   }
@@ -107,3 +105,15 @@
     outline: none;
   }
 }
+
+.screenreader-only {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+}
+

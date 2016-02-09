@@ -1,14 +1,12 @@
 .root {
   flex-basis: 100%;
 
-  &[aria-hidden="true"] {
+  &[aria-hidden] {
     display: none;
   }
 }
 
 .simple {
-  margin-top: -1px;
-
   border: 1px solid #d6d6d6;
   border-bottom-left-radius: 3px;
   border-bottom-right-radius: 3px;
@@ -29,7 +27,7 @@
   transition: max-height 0.5s ease-in-out;
   transform: scaleY(1);
 
-  &[aria-hidden="true"] {
+  &[aria-hidden] {
     display: block;
     max-height: 0;
     overflow: hidden;
@@ -47,10 +45,3 @@
   color: #333;
 }
 
-.nextTab {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  height: 1px; width: 1px;
-  margin: -1px; padding: 0; border: 0;
-}
