@@ -12,10 +12,14 @@ module.exports = function config (config) {
     ],
 
     preprocessors: {
-      '**/*.bundle.js': ['webpack', 'sourcemap']
+      './tests/tests.bundle.js': ['webpack', 'sourcemap']
     },
 
-    reporters: ['mocha'],
+    reporters: ['mocha', 'coverage'],
+
+    coverageReporter: {
+      type: 'text-summary'
+    },
 
     client: {
       mocha: {

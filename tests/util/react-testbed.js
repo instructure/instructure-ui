@@ -1,5 +1,4 @@
 import React from 'react'
-import { merge } from 'lodash'
 import ReactDOM from 'react-dom'
 import { drill, DOMSelectors } from 'react-drill'
 import ReactTestUtils from 'react/lib/ReactTestUtils'
@@ -27,8 +26,8 @@ export default class ReactTestbed {
     })
   }
 
-  render (props) {
-    props = merge({}, this.defaultProps, props || {})
+  render (propOverrides = {}) {
+    const props = {...this.defaultProps, ...propOverrides}
     this.subject = ReactDOM.render(
       <this.ComponentClass {...props} />,
       this.rootNode
@@ -52,9 +51,7 @@ export default class ReactTestbed {
     return ReactTestUtils.findAllInRenderedTree(this.subject, test)
   }
 
-  checkA11yStandards (done, options) {
-    options = options || {}
-
+  checkA11yStandards (done, options = {}) {
     options.onFailure = options.onFailure || function (err, violations) {
       expect(violations.length).to.equal(0, err)
       done(new Error(err))

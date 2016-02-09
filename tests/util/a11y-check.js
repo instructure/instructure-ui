@@ -16,9 +16,15 @@ function formatViolations (violations) {
 
 export default function checkA11y (node, options = {}) {
   const exclude = options.exclude || []
+  const ignores = options.ignores || []
+  const axeConfig = {
+    runOnly: {
+      type: 'tag',
+      values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
+    }
+  }
 
-  axe.a11yCheck({ include: [node], exclude }, (result) => {
-    const ignores = options.ignores || []
+  axe.a11yCheck({ include: [node], exclude }, axeConfig, (result) => {
     const violations = _.reject(result.violations, function (violation) {
       return (ignores.indexOf(violation.id) >= 0)
     })

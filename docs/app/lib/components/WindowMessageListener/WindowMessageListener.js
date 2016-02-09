@@ -1,5 +1,4 @@
 import React, {PropTypes, Component} from 'react'
-import window from 'global/window'
 
 const origin = (function () {
   const { location } = window
