@@ -29,7 +29,7 @@ $BASE_PATH/tasks/docs
 git tag -am "Version $package_version" $release_tag
 
 git push origin $release_tag
-git push origin $commit_sha:latest
+git push -f origin $commit_sha:latest
 
 npm publish $BUILD_PATH
 
