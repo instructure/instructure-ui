@@ -1,6 +1,7 @@
 .root {
   font-size: 0.875rem;
   cursor: pointer;
+  user-select: none;
 
   &[aria-selected],
   &[aria-disabled] {
@@ -18,17 +19,16 @@
 
 .simple {
   order: -1;
-  z-index: 1;
+  box-sizing: border-box;
 
   padding: .7em 1em;
 
   margin-right: 0.2em;
-  margin-bottom: -1px;
+  margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
 
   border: 1px solid transparent;
   border-top-left-radius: 3px;
   border-top-right-radius: 3px;
-  border-bottom: none;
 
   color: #0073ac;
 
@@ -38,6 +38,7 @@
 
   &:not([aria-selected]):not([aria-disabled]):hover,
   &[aria-selected] {
+    background-color: white;
     border-color: #d6d6d6;
     color: #333;
   }
@@ -49,8 +50,9 @@
   }
 
   &[aria-selected] {
-    z-index: 3;
-    background: #fff;
+    /* To overlay Tab over TabPanel top border */
+    z-index: 1;
+    border-bottom-color: white;
   }
 
   &:focus {
@@ -60,10 +62,11 @@
 }
 
 .accordion {
+  transition: background-color 0.3s;
+  box-sizing: border-box;
   width: 100%;
-  margin-top: 0.75rem;
-  padding: 0.5rem 0.75rem;
-
+  margin-top: 0.5rem;
+  padding: 0.75rem;
   display: flex;
   align-items: center;
 
@@ -80,8 +83,6 @@
     content:  "\25B8";
     margin-right: 0.75rem;
   }
-
-  transition: box-shadow, background-color 0.15s ease-in-out;
 
   &:not([aria-selected]):not([aria-disabled]):hover {
     background-color: #E6E6E6;

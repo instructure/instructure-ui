@@ -93,6 +93,7 @@
   "dependencies": {
     "classnames": "~2.2.3",
     "react": "~0.14.7",
+    "react-addons-css-transition-group": "~0.14.7",
     "react-dom": "~0.14.7",
     "shortid": "~2.2.4"
   },
