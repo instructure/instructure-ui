@@ -11,8 +11,6 @@ var entry = {
     path.join(config.docsAppPath, 'lib/index.js')
   ]
 }
-var libEntry = config.library.packageName
-entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
 
 module.exports = require('./util/generate-config')({
   devtool: (process.env.NODE_ENV === 'production') ? 'source-map' : 'cheap-module-eval-source-map',
@@ -33,7 +31,7 @@ module.exports = require('./util/generate-config')({
       template: path.join(config.docsAppPath, 'templates/example.tmpl.html'),
       inject: 'body',
       filename: 'example.html',
-      chunks: ['example', libEntry]
+      chunks: ['example']
     })
   ]
 }, process.env.NODE_ENV, process.env.MINIFY)
