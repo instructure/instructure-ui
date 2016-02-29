@@ -1,13 +1,14 @@
 .root {
-  font-size: 1rem;
-  line-height: 1.2;
   min-width: 12.5rem;
   box-sizing: border-box;
-  color: #3F4A54;
+  margin: -0.5rem;
+  margin-top: 0;
+
   display: flex;
   flex: 0 1 auto;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: -0.5rem;
-  margin-top: 0;
+
+  font-size: 1rem;
+  line-height: 1.2;
 }

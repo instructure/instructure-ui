@@ -1,0 +1,7 @@
+.label {
+  color: map(MetricsListItem, labelColor);
+}
+
+.value {
+  color: map(MetricsListItem, valueColor);
+}
