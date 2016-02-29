@@ -2,10 +2,17 @@
 'use strict'
 
 var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var multi = require('multi-loader')
 var merge = require('webpack-merge')
 var opts = require('../util/config')
 
-var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + opts.library.prefix + '[name]__[local]!postcss'
+var cssPrefix = [
+  opts.library.prefix,
+  opts.library.version,
+  '[name]__[local]'
+].join('-')
+
+var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + cssPrefix + '!postcss'
 
 module.exports = function (env) {
   var config = {
@@ -55,16 +62,25 @@ module.exports = function (env) {
       loaders: [
         {
           test: /\.css$/,
-          include: /node_modules/,
-          loader: ExtractTextPlugin.extract('style', 'css')
+          exclude: [
+            /node_modules/,
+            /\/theme\//
+          ],
+          loader: ExtractTextPlugin.extract('style', CSS_LOADER)
         },
         {
           test: /\.css$/,
+          include: /\/theme\//,
           exclude: /node_modules/,
-          loader: ExtractTextPlugin.extract(
-            'style',
-            CSS_LOADER
+          loader: multi(
+            ExtractTextPlugin.extract('style', CSS_LOADER + '?pack=extractTheme'),
+            'to-string!' + CSS_LOADER
           )
+        },
+        {
+          test: /\.css$/,
+          include: /node_modules/,
+          loader: ExtractTextPlugin.extract('style', 'css')
         }
       ]
     })
@@ -73,8 +89,17 @@ module.exports = function (env) {
       loaders: [
         {
           test: /\.css$/,
-          exclude: /node_modules/,
+          exclude: [
+            /node_modules/,
+            /\/theme\//
+          ],
           loader: 'style!' + CSS_LOADER
+        },
+        {
+          test: /\.css$/,
+          include: /\/theme\//,
+          exclude: /node_modules/,
+          loader: CSS_LOADER
         },
         {
           test: /\.css$/,

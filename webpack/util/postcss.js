@@ -1,28 +1,52 @@
 /* eslint no-var: 0 */
 'use strict'
 
-module.exports = function (minify) {
+function pluginsList (minify, theme) {
   var plugins = [
-    // Plugins seem to be first in last out
-    // https://github.com/postcss/postcss#plugins
-    require('webpack-postcss-tools').prependTildesToImports,
-    require('autoprefixer')({ browsers: ['last 2 versions'] }),
-    require('postcss-discard-comments')(),
+    require('postcss-import')(),
+    require('postcss-url')({
+      url: 'inline'
+    }),
     require('postcss-mixins')(),
     require('postcss-nested')(),
     require('postcss-simple-vars')(),
-    require('postcss-color-function')(),
-    require('postcss-calc')(),
-    require('postcss-url')({
-      url: 'inline'
-    })
+    require('postcss-color-function')()
   ]
+
+  if (theme) {
+    plugins = plugins.concat(
+      require('postcss-map')({
+        maps: theme
+      })
+    )
+  }
+
+  plugins = plugins.concat(
+    require('postcss-calc')(),
+    require('autoprefixer')({
+      browsers: ['last 2 versions']
+    })
+  )
+
   if (minify) {
-    plugins = plugins.concat([
+    plugins = plugins.concat(
       require('postcss-discard-duplicates')(),
       require('postcss-discard-comments'),
       require('csswring')
-    ])
+    )
   }
+
   return plugins
+}
+
+module.exports = function (env, minify) {
+  var packs = {
+    defaults: pluginsList(minify, false)
+  }
+
+  if (env === 'production' || env === 'build') {
+    packs.extractTheme = pluginsList(minify, require('./theme-as-map')())
+  }
+
+  return packs
 }

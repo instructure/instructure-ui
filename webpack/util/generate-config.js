@@ -13,10 +13,7 @@ module.exports = function (config, env, minify) {
       modulesDirectories: [
         path.resolve(__dirname, '../../node_modules'),
         'node_modules'
-      ],
-      alias: {
-        'babel-config': path.resolve(opts.rootPath, '.babelrc')
-      }
+      ]
     },
     resolveLoader: {
       modulesDirectories: [
@@ -27,6 +24,6 @@ module.exports = function (config, env, minify) {
     },
     module: require('./module-loaders')(env),
     plugins: require('./plugins')(env, minify),
-    postcss: require('./postcss')(minify)
+    postcss: require('./postcss')(env, minify)
   }, config, opts.webpack)
 }

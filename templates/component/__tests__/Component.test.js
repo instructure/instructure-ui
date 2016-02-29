@@ -1,6 +1,6 @@
 import ${COMPONENT} from '../index'
 
-describe('${COMPONENT}', function () {
+describe('<${COMPONENT} />', function () {
   const testbed = createTestbed(${COMPONENT}, {
     /* default props go here */
   })
@@ -9,7 +9,7 @@ describe('${COMPONENT}', function () {
   it('should render', function () {
     testbed.render(/* override default props here */)
 
-    expect(testbed.dom.node).to.be.ok
+    expect(testbed.dom.node).to.exist
   })
 
   it('should have tests')

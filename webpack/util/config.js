@@ -13,7 +13,7 @@ function getConfig () {
       packageName: pkg.name,
       name: 'InstUI',
       main: pkg.main,
-      prefix: 'ic-',
+      prefix: 'ic',
       version: pkg.version
     },
     app: {
@@ -26,8 +26,13 @@ function getConfig () {
       files: 'lib/components/**/*.js',
       excludes: [
         /\.test\.js$/,
+        /\/theme\//,
         /index\.js$/
       ]
+    },
+    theme: {
+      files: 'lib/components/**/theme/*.js',
+      config: 'lib/theme/config'
     },
     tests: {
       files: 'lib/**/*.test.js'

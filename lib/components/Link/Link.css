@@ -1,12 +1,5 @@
-$link-color: #0073ac;
-
 .root {
-  text-decoration: none;
-  color: $link-color;
-  &:focus,
-  &:hover {
-    text-decoration: underline;
-  }
+
 }
 
 button.root {

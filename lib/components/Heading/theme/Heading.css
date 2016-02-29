@@ -1,0 +1,4 @@
+.root {
+  font-family: map(Heading, fontFamily);
+  font-weight: map(Heading, fontWeight);
+}

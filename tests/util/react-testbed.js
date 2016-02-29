@@ -28,8 +28,9 @@ export default class ReactTestbed {
 
   render (propOverrides = {}) {
     const props = {...this.defaultProps, ...propOverrides}
+    const Subject = this.ComponentClass
     this.subject = ReactDOM.render(
-      <this.ComponentClass {...props} />,
+      <Subject {...props} />,
       this.rootNode
     )
     return this.subject
@@ -37,6 +38,28 @@ export default class ReactTestbed {
 
   get dom () {
     return drill(this.subject)
+  }
+
+  getText (element = this.dom.node) {
+    const text = []
+    const els = element.childNodes
+    let el = els[0]
+    const excluded = {
+      'noscript': 'noscript',
+      'script': 'script',
+      'style': 'style'
+    }
+
+    for (let i = 0, iLen = els.length; i < iLen; i++) {
+      el = els[i]
+      if (el.nodeType === 1 &&
+         !(el.tagName.toLowerCase() in excluded)) {
+        text.push(this.getText(el))
+      } else if (el.nodeType === 3) {
+        text.push(el.data)
+      }
+    }
+    return text.join('').trim()
   }
 
   findChildrenByType (type) {
@@ -67,3 +90,4 @@ export default class ReactTestbed {
 global.createTestbed = (componentClass, defaultProps) => {
   return new ReactTestbed(componentClass, defaultProps)
 }
+

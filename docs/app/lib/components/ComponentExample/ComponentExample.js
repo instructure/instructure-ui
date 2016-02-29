@@ -62,13 +62,15 @@ export default class ComponentExample extends Component {
   };
 
   compileCode (code) {
-    return transform(code, require('json!babel-config')).code
+    return transform(code, {
+      presets: ['es2015', 'stage-1', 'react']
+    }).code
   }
 
   evalCode (code) {
     /* eslint-disable no-eval */
     return eval(code)
-    /* eslint-disable no-eval */
+    /* eslint-enable no-eval */
   }
 
   executeCode (code) {

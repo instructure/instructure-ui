@@ -1,0 +1,9 @@
+.root {
+  color: map(Link, textColor);
+  text-decoration: map(Link, textDecoration);
+
+  &:focus,
+  &:hover {
+    text-decoration: map(Link, textDecoration);
+  }
+}

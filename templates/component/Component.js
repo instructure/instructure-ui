@@ -1,5 +1,9 @@
 import React, { Component, PropTypes } from 'react'
+import themeable from '../../util/themeable'
+
 import styles from './${COMPONENT}.css'
+import themeVariables from './theme/${COMPONENT}'
+import themeStyles from './theme/${COMPONENT}.css'
 
 /**
   A ${COMPONENT} component [WIP]
@@ -8,6 +12,7 @@ import styles from './${COMPONENT}.css'
   <${COMPONENT} />
   ```
 **/
+@themeable(themeVariables, themeStyles)
 export default class ${COMPONENT} extends Component {
   static propTypes = {
     /**
