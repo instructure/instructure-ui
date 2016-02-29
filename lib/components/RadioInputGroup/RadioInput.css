@@ -1,18 +1,9 @@
-$color-radio-border: #cfcfcf;
-$color-radio-border-hover: #0096db;
-$color-radio-outline-focus: rgba(0, 150, 219, 0.2);
-$color-radio-outline-checked: rgba(255, 255, 255, 0.35);
-$color-radio-shadow-focus: rgba(0, 150, 219, 0.3);
-$label-color: #333;
-$label-font-size: 1em;
-
 .root {
 
 }
 
 .label {
-  font-size: $label-font-size;
-  color: $label-color;
+  font-size: 1rem;
   line-height: 1.5;
   font-weight: normal;
 }
@@ -36,24 +27,10 @@ $label-font-size: 1em;
     margin: 0;
     opacity: 0.0001; /* selenium cannot find fully transparent elements */
 
-    &:hover + .facade  {
-      border-color: $color-radio-border-hover;
-    }
-
-    &:checked + .facade {
-      background-color: $color-radio-border-hover;
-      box-shadow: inset 0 0 0 3px #fff;
-      border-color: $color-radio-border-hover;
-    }
-
-    &:focus + .facade {
-      background-color: $color-radio-border-hover;
-      box-shadow: inset 0 0 0 2px $color-radio-shadow-focus, inset 0 0 0 4px #fff;
-    }
-
     &:disabled + .facade {
-      border-color: $color-radio-border;
       opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
     }
   }
 }
@@ -61,12 +38,10 @@ $label-font-size: 1em;
 .facade {
   display: block;
   transition: all 0.2s ease-out;
-  -webkit-transition: none; /* Disable for Safari due to rendering bug */
   box-sizing: border-box;
   width: 1em;
   height: 1em;
   border-radius: 100%;
-  background: #fff;
   background-size: 1em 3em;
-  border: 1px solid $color-radio-border;
+  border: 1px solid;
 }

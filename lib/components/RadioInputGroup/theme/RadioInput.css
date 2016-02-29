@@ -1,0 +1,33 @@
+.label {
+  color: map(RadioInput, labelTextColor);
+}
+
+.input {
+
+  input[type="radio"] {
+
+    &:hover + .facade  {
+      border-color: map(RadioInput, borderColorHover);
+    }
+
+    &:checked + .facade {
+      background-color: map(RadioInput, borderColorHover);
+      box-shadow: inset 0 0 0 3px map(RadioInput, backgroundColor);
+      border-color: map(RadioInput, borderColorHover);
+    }
+
+    &:focus + .facade {
+      background-color: map(RadioInput, borderColorHover);
+      box-shadow: inset 0 0 0 2px map(RadioInput, shadowColorFocus), inset 0 0 0 4px map(RadioInput, backgroundColor);
+    }
+
+    &:disabled + .facade {
+      border-color: map(RadioInput, borderColor);
+    }
+  }
+}
+
+.facade {
+  background-color: map(RadioInput, backgroundColor);
+  border-color: map(RadioInput, borderColor);
+}

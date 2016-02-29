@@ -1,0 +1,7 @@
+.root {
+
+  legend {
+    color: map(RadioInputGroup, legendTextColor);
+    font-weight: map(RadioInputGroup, legendFontWeight);
+  }
+}
