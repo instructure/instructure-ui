@@ -1,120 +1,132 @@
-$background-color: white;
-$border-color: #d6d6d6;
-$arrow-border-color: color($border-color shade(8%));
-$border-radius: 4px;
-$arrow-size: 8px;
+:root {
+  --ContextBox-arrowSize: 0.5rem;
+  --ContextBox-borderWidth: 0.0625rem;
+  --ContextBox-borderRadius: 0.25rem;
+}
 
 .root {
-  display: inline-block;
   box-sizing: border-box;
-  background: $background-color;
-  border-radius: $border-radius;
-  border: 1px solid $border-color;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.1);
-  *, *:before, *:after { box-sizing: border-box; }
+  display: inline-block;
+
+  border: var(--ContextBox-borderWidth) solid;
+  border-radius: var(--ContextBox-borderRadius);
 }
 
 .content {
   overflow: hidden;
-  border-radius: calc($border-radius - 1);
+  border-radius: calc(var(--ContextBox-borderRadius) - var(--ContextBox-borderWidth));
 }
 
-.withArrow {
+.with-arrow {
+  min-height: calc(var(--ContextBox-arrowSize) * 4);
   position: relative;
-  min-height: calc($arrow-size * 4);
-  &:before,
-  &:after {
+
+  &::before,
+  &::after {
     content: "";
     height: 0;
     width: 0;
+    box-sizing: border-box;
     position: absolute;
     pointer-events: none;
     border: solid transparent;
-    border-color: rgba(255,255,255,0);
+    border-color: rgba(255, 255, 255, 0);
   }
-  &:before { border-width: calc($arrow-size + 1); }
-  &:after { border-width: $arrow-size; }
 
-  &.position--right { /* arrow on the left */
-    &:before, &:after {
-      right: 100%;
+  &::before {
+    border-width: calc(var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth));
+  }
+
+  &::after {
+    border-width: var(--ContextBox-arrowSize);
+  }
+
+  &.positioned--right { /* arrow on the left */
+
+    &::before,
+    &::after {
       top: 50%;
+      right: 100%;
     }
-    &:after {
-      border-right-color: $background-color;
-      margin-top: calc( -($arrow-size) );
+
+    &::after {
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
     }
-    &:before {
-      border-right-color: $arrow-border-color;
-      margin-top: calc( -($arrow-size + 1) );
+
+    &::before {
+      margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
     }
   }
 
-  &.position--left {  /* arrow on the right */
-    &:before, &:after {
+  &.positioned--left {  /* arrow on the right */
+
+    &::before,
+    &::after {
       top: 50%;
       left: 100%;
     }
-    &:after {
-      border-left-color: $background-color;
-      margin-top: calc( -($arrow-size) );
+
+    &::after {
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
     }
-    &:before {
-      border-left-color: $arrow-border-color;
-      margin-top: calc( -($arrow-size + 1) );
+
+    &::before {
+      margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
     }
   }
 
-  &.position--below {  /* arrow on top */
-    &:before, &:after {
+  &.positioned--below {  /* arrow on top */
+
+    &::before,
+    &::after {
       bottom: 100%;
       left: 50%;
     }
-    &:after {
-      border-bottom-color: $background-color;
-      margin-left: calc( -($arrow-size) );
+
+    &::after {
+      margin-left: calc(-1 * var(--ContextBox-arrowSize)));
     }
-    &:before {
-      border-bottom-color: $arrow-border-color;
-      margin-left: calc( -($arrow-size + 1) );
+
+    &::before {
+      margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
     }
   }
 
-  &.position--above {  /* arrow on bottom */
-    &:before, &:after {
+  &.positioned--above {  /* arrow on bottom */
+
+    &::before,
+    &::after {
       top: 100%;
       left: 50%;
     }
-    &:after {
-      border-top-color: $background-color;
-      margin-left: calc( -($arrow-size) );
+
+    &::after {
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
     }
-    &:before {
-      border-top-color: $arrow-border-color;
-      margin-left: calc( -($arrow-size + 1) );
+
+    &::before {
+      margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
     }
   }
 }
 
 @keyframes animate-root {
   to {
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
     opacity: 1;
   }
 }
 
-.animateTo--left,
-.animateTo--right,
-.animateTo--above,
-.animateTo--below {
+.with-animation {
   opacity: 0;
   animation-duration: 0.3s;
   animation-name: animate-root;
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
+
+  .positioned--right { transform: translate3d(-20%, 0, 0); }
+  .positioned--left { transform: translate3d(20%, 0, 0); }
+  .positioned--below { transform: translate3d(0, -20%, 0); }
+  .positioned--above { transform: translate3d(0, 20%, 0); }
 }
 
-.animateTo--right { transform: translate3d(-20%,0,0); }
-.animateTo--left { transform: translate3d(20%,0,0); }
-.animateTo--below { transform: translate3d(0,-20%,0); }
-.animateTo--above { transform: translate3d(0,20%,0); }

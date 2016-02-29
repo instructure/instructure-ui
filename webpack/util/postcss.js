@@ -10,7 +10,8 @@ function pluginsList (minify, theme) {
     require('postcss-mixins')(),
     require('postcss-nested')(),
     require('postcss-simple-vars')(),
-    require('postcss-color-function')()
+    require('postcss-color-function')(),
+    require('postcss-custom-properties')()
   ]
 
   if (theme) {
@@ -35,6 +36,11 @@ function pluginsList (minify, theme) {
       require('csswring')
     )
   }
+
+  plugins = plugins.concat(
+    require('postcss-browser-reporter'),
+    require('postcss-reporter')
+  )
 
   return plugins
 }

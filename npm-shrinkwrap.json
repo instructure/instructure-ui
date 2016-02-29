@@ -4099,6 +4099,11 @@
         }
       }
     },
+    "postcss-browser-reporter": {
+      "version": "0.4.0",
+      "from": "postcss-browser-reporter@>=0.4.0 <0.5.0",
+      "resolved": "https://registry.npmjs.org/postcss-browser-reporter/-/postcss-browser-reporter-0.4.0.tgz"
+    },
     "postcss-calc": {
       "version": "5.2.0",
       "from": "postcss-calc@>=5.2.0 <5.3.0",
@@ -4125,6 +4130,18 @@
       "version": "2.3.4",
       "from": "postcss-convert-values@>=2.3.4 <3.0.0",
       "resolved": "https://registry.npmjs.org/postcss-convert-values/-/postcss-convert-values-2.3.4.tgz"
+    },
+    "postcss-custom-properties": {
+      "version": "5.0.0",
+      "from": "postcss-custom-properties@>=5.0.0 <5.1.0",
+      "resolved": "https://registry.npmjs.org/postcss-custom-properties/-/postcss-custom-properties-5.0.0.tgz",
+      "dependencies": {
+        "balanced-match": {
+          "version": "0.1.0",
+          "from": "balanced-match@>=0.1.0 <0.2.0",
+          "resolved": "https://registry.npmjs.org/balanced-match/-/balanced-match-0.1.0.tgz"
+        }
+      }
     },
     "postcss-discard-comments": {
       "version": "2.0.4",
@@ -4265,6 +4282,18 @@
       "version": "1.0.3",
       "from": "postcss-reduce-transforms@>=1.0.3 <2.0.0",
       "resolved": "https://registry.npmjs.org/postcss-reduce-transforms/-/postcss-reduce-transforms-1.0.3.tgz"
+    },
+    "postcss-reporter": {
+      "version": "1.3.3",
+      "from": "postcss-reporter@>=1.3.3 <1.4.0",
+      "resolved": "https://registry.npmjs.org/postcss-reporter/-/postcss-reporter-1.3.3.tgz",
+      "dependencies": {
+        "lodash": {
+          "version": "4.5.1",
+          "from": "lodash@>=4.1.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.5.1.tgz"
+        }
+      }
     },
     "postcss-selector-parser": {
       "version": "1.3.2",

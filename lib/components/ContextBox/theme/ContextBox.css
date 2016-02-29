@@ -1,0 +1,52 @@
+.root {
+  background: map(ContextBox, backgroundColor);
+  border-color: map(ContextBox, borderColor);
+  box-shadow: 0 1px 6px map(ContextBox, boxShadowColor);
+}
+
+.with-arrow {
+  &.positioned--right { /* arrow on the left */
+
+    &::after {
+      border-right-color: map(ContextBox, backgroundColor);
+    }
+
+    &::before {
+      border-right-color: map(ContextBox, borderColor);
+    }
+  }
+
+  &.positioned--left {  /* arrow on the right */
+
+    &::after {
+      border-left-color: map(ContextBox, backgroundColor);
+    }
+
+    &::before {
+      border-left-color: map(ContextBox, borderColor);
+    }
+  }
+
+  &.positioned--below {  /* arrow on top */
+
+    &::after {
+      border-bottom-color: map(ContextBox, backgroundColor);
+    }
+
+    &::before {
+      border-bottom-color: map(ContextBox, borderColor);
+    }
+  }
+
+  &.positioned--above {  /* arrow on bottom */
+
+    &::after {
+      border-top-color: map(ContextBox, backgroundColor);
+    }
+
+    &::before {
+      border-top-color: map(ContextBox, borderColor);
+    }
+  }
+}
+
