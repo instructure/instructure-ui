@@ -1,9 +1,6 @@
-.root,
-.rectangle {
-  font-family: 'Helvetica Neue', 'Helvetica', sans-serif;
+.root {
   font-size: 6rem; /* 96px (we can change this to make more size variants) */
   height: 2em;
-  width: 15.625rem;
   display: inline-block;
   background-position: center;
   background-size: cover;
@@ -13,9 +10,6 @@
 .initials {
   line-height: 2em;
   text-align: center;
-  color: white;
-  background: #0071a8;
-  letter-spacing: 0.03125em;
 }
 
 .circle {
@@ -25,3 +19,6 @@
   overflow: hidden;
 }
 
+.rectangle {
+  width: 15.625rem;
+}
