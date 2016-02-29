@@ -1,19 +1,13 @@
-$profile-text-color: #333;
-$profile-label-color: #6b7883;
-
 .root {
-  background-color: white;
   font-size: 1rem;
   width: 15.625rem; /* Matches Avatar width */
 }
 
 .profile {
   padding: 0.875rem 1rem;
-  color: $profile-text-color;
 }
 
 .profileData {
-  color: $profile-label-color;
   font-size: 0.75em;
   line-height: 1.5;
 }

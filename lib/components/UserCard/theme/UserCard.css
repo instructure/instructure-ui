@@ -1,0 +1,11 @@
+.root {
+  background-color: map(UserCard, backgroundColor);
+}
+
+.profile {
+  color: map(UserCard, textColor);
+}
+
+.profileData {
+  color: map(UserCard, secondaryTextColor);
+}
