@@ -111,6 +111,7 @@
 }
 
 @keyframes animate-root {
+
   to {
     transform: translate3d(0, 0, 0);
     opacity: 1;
@@ -124,9 +125,20 @@
   animation-timing-function: ease-out;
   animation-fill-mode: forwards;
 
-  .positioned--right { transform: translate3d(-20%, 0, 0); }
-  .positioned--left { transform: translate3d(20%, 0, 0); }
-  .positioned--below { transform: translate3d(0, -20%, 0); }
-  .positioned--above { transform: translate3d(0, 20%, 0); }
+  .positioned--right {
+    transform: translate3d(-20%, 0, 0);
+  }
+
+  .positioned--left {
+    transform: translate3d(20%, 0, 0);
+  }
+
+  .positioned--below {
+    transform: translate3d(0, -20%, 0);
+  }
+
+  .positioned--above {
+    transform: translate3d(0, 20%, 0);
+  }
 }
 

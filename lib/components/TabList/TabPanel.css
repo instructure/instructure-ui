@@ -9,11 +9,12 @@
 }
 
 .content {
-  /* trigger hardware acceleration for smoother animation */
-  transform: translate3d(0,0,0);
   box-sizing: border-box;
-
   padding: 1rem;
+
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
+
   background-color: white;
 }
 
@@ -31,11 +32,12 @@
 }
 
 .content--leave.content--leave-active {
-  transition: opacity 0.1s;
+  transition: opacity 0.15s;
   opacity: 0;
 }
 
 .simple {
+
   .content {
     border: 1px solid #d6d6d6;
     border-bottom-left-radius: 3px;
@@ -54,11 +56,11 @@
   }
 
   .content--enter {
-    transform: translate3d(0,-20%,0);
+    transform: translate3d(0, -20%, 0);
   }
 
   .content--enter.content--enter-active {
     transition: opacity 0.3s, transform 0.3s ease-out;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
 }

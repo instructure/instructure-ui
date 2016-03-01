@@ -1,6 +1,25 @@
-.root {
+.root :global {
+
+  /* stylelint-disable selector-class-pattern */
+
+  .CodeMirror {
+    height: auto;
+    font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
+  }
+
+  .CodeMirror-code {
+    font-size: 0.75rem;
+  }
+
+  .CodeMirror-scroll {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+
+  /* stylelint-enable selector-class-pattern */
 }
 
 .is-focused {
-
+  outline: 2px solid #0073ac;
 }

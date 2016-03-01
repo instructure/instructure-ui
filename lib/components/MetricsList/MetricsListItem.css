@@ -1,15 +1,17 @@
 .root {
   box-sizing: border-box;
-  max-width: 33.33333333%;
+  max-width: 33.3333%;
   margin-bottom: 0.5rem;
   padding: 0 0.5rem;
 
-  flex: 0 0 33.33333333%;
+  flex: 0 0 33.3333%;
   justify-self: space-between;
 
   text-align: center;
   font-size: 1rem;
 }
+
+/* stylelint-disable selector-no-type */
 
 .root:first-child:nth-last-child(2),
 .root:last-child:nth-child(2) {
@@ -24,6 +26,8 @@
 
   flex-basis: 100%;
 }
+
+/* stylelint-enable selector-no-type */
 
 .label {
   font-size: 0.75em;

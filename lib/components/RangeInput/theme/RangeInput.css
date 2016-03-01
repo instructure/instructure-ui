@@ -1,35 +1,32 @@
 @import "../RangeInput.mixins.css";
 
-.root {
+.input {
 
-  input[type=range] {
+  @mixin handle-selector {
+    background: map(RangeInput, handleColor);
+    box-shadow: 0 0.2em 0.375em map(RangeInput, handleShadowColor);
+
+    &:hover {
+      background: map(RangeInput, handleColorHover);
+    }
+  }
+
+  &:focus,
+  &:active {
 
     @mixin handle-selector {
-      background: map(RangeInput, handleColor);
-      box-shadow: 0 0.2em 0.375em map(RangeInput, handleShadowColor);
-
-      &:hover {
-        background: map(RangeInput, handleColorHover);
-      }
+      box-shadow:
+        0 0.2em 0.375em map(RangeInput, handleShadowColor),
+        0 0 0 calc(var(--RangeInput-handleSize) / 2) map(RangeInput, focusOutlineColor);
     }
+  }
 
-    &:focus,
-    &:active {
+  @mixin track-selector {
+    background: map(RangeInput, trackColor);
+  }
 
-      @mixin handle-selector {
-        box-shadow:
-          0 0.2em 0.375em map(RangeInput, handleShadowColor),
-          0 0 0 calc(var(--RangeInput-handleSize) / 2) map(RangeInput, focusOutlineColor);
-      }
-    }
-
-    @mixin track-selector {
-      background: map(RangeInput, trackColor);
-    }
-
-    &::-ms-track {
-      background: transparent;
-    }
+  &::-ms-track {
+    background: transparent;
   }
 }
 

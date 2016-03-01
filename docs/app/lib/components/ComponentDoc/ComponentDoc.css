@@ -1,32 +1,43 @@
 .root {
   font-size: 1rem;
   font-weight: 300;
+  line-height: 1.4;
 }
+
 .heading {
-  margin-bottom: 2em;
+  margin-bottom: 2rem;
+
+  /* stylelint-disable selector-no-type */
 
   h2 {
     margin: 0;
     padding: 0;
-    font-weight: 700;
-    font-size: 1.75em;
+    font-size: 1.75rem;
+    font-weight: 600;
   }
+
+  /* stylelint-enable selector-no-type */
 }
+
 .path {
   margin: 0;
-  font-size: 0.6875em;
-  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
+  font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 0.75rem;
 }
+
 .description {
+  /* stylelint-disable selector-no-type */
+
   p {
-    font-size: 1em;
-    line-height: 1.1;
-    border-left: 3px solid #0091AD;
-    padding-left: 1em;
+    padding-left: 1rem;
+    border-left: 3px solid #0091ad;
+    line-height: 1.2;
   }
 
   code {
-    font-size: 75%;
+    font-size: 0.75rem;
   }
+
+  /* stylelint-enable selector-no-type */
 }
 

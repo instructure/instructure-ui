@@ -65,7 +65,7 @@ export default class ComponentPreview extends Component {
   render () {
     const buttonText = this.state.isFullScreen ? 'Minimize' : 'Full Screen'
     const classes = {
-      [styles.fullscreen]:  this.state.isFullScreen
+      [styles['is-fullscreen']]:  this.state.isFullScreen
     }
     // TODO: use a modal here
     return (

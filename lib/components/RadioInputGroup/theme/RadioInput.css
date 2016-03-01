@@ -4,9 +4,11 @@
 
 .input {
 
+  /* stylelint-disable selector-no-type */
+
   input[type="radio"] {
 
-    &:hover + .facade  {
+    &:hover + .facade {
       border-color: map(RadioInput, borderColorHover);
     }
 
@@ -25,6 +27,8 @@
       border-color: map(RadioInput, borderColor);
     }
   }
+
+  /* stylelint-enable selector-no-type */
 }
 
 .facade {

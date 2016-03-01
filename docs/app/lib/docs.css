@@ -1,44 +1,52 @@
-$nav-spacing: 12.5rem;
+:global {
 
-body {
-  margin: 0;
-  font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
-  background-color: white;
-}
+  /* stylelint-disable selector-no-type */
 
-code {
-  font-family: Menlo, Consolas, Monaco, 'Andale Mono', monospace;
-  background: #eee;
-  border: #333;
-  border-radius: 3px;
-  padding: 0.125em;
-}
+  body {
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    background-color: #fff;
+  }
 
-code[class^='lang-'] {
-  display: block;
-  padding: 0.5em;
+  code {
+    font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
+    background-color: #eee;
+    border-radius: 3px;
+    padding: 0.125em;
+  }
+
+  code[class^="lang-"] {
+    padding: 0.5em;
+    display: block;
+  }
+
+  /* stylelint-enable selector-no-type */
 }
 
 .nav {
- background: #eeeeee;
- position: fixed;
- top: 0; bottom: 0; left: 0;
- width: $nav-spacing;
- overflow-y: scroll;
- overflow-x: hidden;
+  width: 12.5rem;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+
+  background: #e6e6e6;
 }
 
 .main {
-  margin-left: $nav-spacing;
+  margin-left: 12.5rem;
 }
 
 .heading {
-  background: #0091AD;
+  background-color: #0091ad;
   color: #fff;
-  font-size: 2em;
+  font-size: 2rem;
   font-weight: 100;
-  padding: 1em 2em;
+  padding: 2rem 4rem;
   margin: 0;
   text-rendering: optimizeLegibility;
+  letter-spacing: 1px;
 }
 

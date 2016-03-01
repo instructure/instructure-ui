@@ -5,6 +5,7 @@
 }
 
 .with-arrow {
+
   &.positioned--right { /* arrow on the left */
 
     &::after {
@@ -49,4 +50,3 @@
     }
   }
 }
-

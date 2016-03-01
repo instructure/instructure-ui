@@ -3,6 +3,7 @@
 
 function pluginsList (minify, theme) {
   var plugins = [
+    require('stylelint')(),
     require('postcss-import')(),
     require('postcss-url')({
       url: 'inline'

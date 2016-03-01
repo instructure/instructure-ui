@@ -12,19 +12,27 @@
     opacity: 0.5;
   }
 
-  h1, h2, h3, h4, h5 {
+  /* stylelint-disable selector-no-type */
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
     font-size: inherit;
   }
+
+  /* stylelint-enable selector-no-type */
 }
 
 .simple {
-  order: -1;
   box-sizing: border-box;
-
-  padding: .7em 1em;
+  padding: 0.7em 1em;
 
   margin-right: 0.2em;
   margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
+
+  order: -1;
 
   border: 1px solid transparent;
   border-top-left-radius: 3px;
@@ -62,13 +70,15 @@
 }
 
 .accordion {
-  transition: background-color 0.3s;
   box-sizing: border-box;
+
   width: 100%;
   margin-top: 0.5rem;
   padding: 0.75rem;
   display: flex;
   align-items: center;
+
+  transition: background-color 0.3s;
 
   border-radius: 6px;
 
@@ -80,12 +90,12 @@
   }
 
   & .icon::before {
-    content:  "\25B8";
+    content: "\25B8";
     margin-right: 0.75rem;
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover {
-    background-color: #E6E6E6;
+    background-color: #e6e6e6;
   }
 
   &[aria-selected] {
@@ -97,7 +107,7 @@
     background-color: #6b6b6b;
 
     & .icon::before {
-      content:  "\25BE";
+      content: "\25BE";
     }
   }
 
@@ -108,13 +118,13 @@
 }
 
 .screenreader-only {
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
   height: 1px;
   width: 1px;
   margin: -1px;
   padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
   border: 0;
 }
 

@@ -4,9 +4,9 @@ import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 
 import 'codemirror/lib/codemirror.css'
-import styles from './CodeMirrorEditor.css'
-
 import '../../util/codemirror-jsx'
+
+import styles from './CodeMirrorEditor.css'
 
 export default class CodeMirrorEditor extends Component {
 

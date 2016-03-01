@@ -2,68 +2,6 @@
 
 .root {
   font-size: 1rem;
-
-  /* Style range input */
-
-  input[type=range] {
-    box-sizing: border-box;
-    appearance: none;
-    width: 100%; /* for Firefox */
-    outline: none;
-    margin: 0;
-    padding: 0; /* for IE */
-
-    /* Slider Handle/Thumb */
-
-    @mixin handle-selector {
-      appearance: none;
-      width: var(--RangeInput-handleSize);
-      height: var(--RangeInput-handleSize);
-      border-radius: 50%;
-      cursor: pointer;
-      transition: all 0.15s ease-in-out;
-    }
-
-    &::-webkit-slider-thumb {
-      margin-top: calc(-1 * var(--RangeInput-handleSize) / 4);
-    }
-
-    &:focus,
-    &:active {
-      outline: none;
-    }
-
-    /* remove outline in FF */
-
-    &::-moz-focus-inner,
-    &::-moz-focus-outer {
-      border: 0;
-      outline: none;
-    }
-
-    @mixin track-selector {
-      height: calc(var(--RangeInput-handleSize) / 2);
-      border-radius: 0.312em;
-      border-color: transparent;
-      color: transparent;
-      cursor: pointer;
-      animate: 0.2s;
-    }
-
-    &::-ms-track {
-      background: transparent;
-      border-width: var(--RangeInput-handleSize) 0;
-    }
-
-    &::-ms-fill-upper,
-    &::-ms-fill-lower {
-      border-radius: calc(var(--RangeInput-handleSize) / 2);
-    }
-
-    &::-ms-tooltip {
-      display: none;
-    }
-  }
 }
 
 /* Label text */
@@ -82,10 +20,67 @@
   align-items: center;
 }
 
-/* Slider */
+/* Style range input/Slider */
 
 .input {
   flex: auto;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%; /* for Firefox */
+  outline: none;
+  margin: 0;
+  padding: 0; /* for IE */
+
+  /* Slider Handle/Thumb */
+
+  @mixin handle-selector {
+    appearance: none;
+    width: var(--RangeInput-handleSize);
+    height: var(--RangeInput-handleSize);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+  }
+
+  &::-webkit-slider-thumb {
+    margin-top: calc(-1 * var(--RangeInput-handleSize) / 4);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+
+  /* remove outline in FF */
+
+  &::-moz-focus-inner,
+  &::-moz-focus-outer {
+    border: 0;
+    outline: none;
+  }
+
+  @mixin track-selector {
+    height: calc(var(--RangeInput-handleSize) / 2);
+    border-radius: 0.312em;
+    border-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    animate: 0.2s;
+  }
+
+  &::-ms-track {
+    background: transparent;
+    border-width: var(--RangeInput-handleSize) 0;
+  }
+
+  &::-ms-fill-upper,
+  &::-ms-fill-lower {
+    border-radius: calc(var(--RangeInput-handleSize) / 2);
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
 }
 
 /* Tooltip/Selected Value */

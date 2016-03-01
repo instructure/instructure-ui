@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
-import debounce from 'lodash/function/debounce'
+import { debounce } from 'lodash'
 
 import CodeMirrorEditor from '../CodeMirrorEditor'
 
-import styles from './CodeEditor.css'
 import 'codemirror/theme/zenburn.css'
 
 const UPDATE_DELAY = 200
@@ -46,9 +45,7 @@ export default class CodeEditor extends Component {
 
   render () {
     return (
-      <div className={styles.root}>
-        <CodeMirrorEditor value={this.props.code} onChange={this._handleChange} options={CodeEditor.codemirrorOptions}/>
-      </div>
+      <CodeMirrorEditor value={this.props.code} onChange={this._handleChange} options={CodeEditor.codemirrorOptions}/>
     )
   }
 }
