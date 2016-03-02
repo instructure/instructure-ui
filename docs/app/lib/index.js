@@ -9,8 +9,9 @@ import DocsSection from './components/DocsSection'
 import styles from './docs.css'
 
 import docs from './util/load-docs'
+import components from './util/load-components'
 
-const {index, components, documents} = docs
+const {index, documents} = docs
 
 class DocsApp extends Component {
   constructor (props) {

@@ -8,7 +8,7 @@ import window from 'global/window'
 
 import styles from './ComponentExample.css'
 
-import docs from '../../util/load-docs'
+require('../../util/load-globals')
 
 export default class ComponentExample extends Component {
   static propTypes = {
@@ -24,8 +24,6 @@ export default class ComponentExample extends Component {
   }
 
   componentDidMount () {
-    docs.globalize()
-
     if (this.props.code) {
       this.executeCode(this.props.code)
     }

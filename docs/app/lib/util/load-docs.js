@@ -1,11 +1,10 @@
 import _ from 'lodash'
-import globals from './globals'
 
 // use webpack loader to load documentation data based on config
-const docs = require('docs!')
+const docs = require('markdown-docs!')
 
 const documents = {}
-docs.documents.map((doc) => {
+docs.map((doc) => {
   const {
     name,
     html
@@ -17,22 +16,6 @@ docs.documents.map((doc) => {
     html
   }
 })
-
-const components = {}
-docs.components.forEach((component) => {
-  const name = component.module.displayName || component.module.name || component.name
-  components[name] = {
-    doc: component.doc,
-    path: component.relativePath,
-    module: component.module
-  }
-})
-
-const sortedComponents = Object.keys(docs.lib || components)
-  .sort()
-  .map((name) => {
-    return _.merge({ name: name }, components[name])
-  })
 
 function nameToTitle (fileName) {
   return fileName
@@ -50,9 +33,5 @@ function isIndex (doc) {
 
 export default {
   documents: _.reject(documents, isIndex),
-  components: sortedComponents,
-  index: _.find(documents, isIndex),
-  globalize: function () {
-    globals(sortedComponents)
-  }
+  index: _.find(documents, isIndex)
 }
