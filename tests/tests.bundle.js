@@ -1,9 +1,9 @@
 /* eslint no-var: 0 */
-var _ = require('lodash')
+var isFunction = require('lodash.isfunction')
 
 // clear the console before rebundling.
 /* eslint-disable no-console */
-if (_.isFunction(console.clear)) {
+if (isFunction(console.clear)) {
   console.clear()
 }
 /* eslint-enable no-console */

@@ -1,4 +1,5 @@
-import _ from 'lodash'
+import defer from 'lodash.defer'
+import reject from 'lodash.reject'
 
 require('script!axe-core/axe.min.js')
 /*global axe*/
@@ -25,7 +26,7 @@ export default function checkA11y (node, options = {}) {
   }
 
   axe.a11yCheck({ include: [node], exclude }, axeConfig, (result) => {
-    const violations = _.reject(result.violations, function (violation) {
+    const violations = reject(result.violations, function (violation) {
       return (ignores.indexOf(violation.id) >= 0)
     })
 
@@ -34,7 +35,7 @@ export default function checkA11y (node, options = {}) {
       if (typeof options.onFailure === 'function') {
         options.onFailure(err, violations)
       } else {
-        _.defer(function () {
+        defer(function () {
           throw new Error(err)
         })
       }

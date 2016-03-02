@@ -2,9 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import { transform } from 'babel-standalone'
 import WindowMessageListener from '../WindowMessageListener'
-import debounce from 'lodash/function/debounce'
-import defer from 'lodash/function/defer'
-import window from 'global/window'
+import debounce from 'lodash.debounce'
+import defer from 'lodash.defer'
 
 import styles from './ComponentExample.css'
 
@@ -137,9 +136,9 @@ export default class ComponentExample extends Component {
   render () {
     return (
       <WindowMessageListener onReceiveMessage={this.handleMessage} className={styles.root}>
-        { this.renderErrorBg() }
-        { this.renderExample() }
-        { this.renderError() }
+        {this.renderErrorBg()}
+        {this.renderExample()}
+        {this.renderError()}
       </WindowMessageListener>
     )
   }

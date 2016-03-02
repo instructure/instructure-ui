@@ -2,7 +2,7 @@
 'use strict'
 
 var path = require('path')
-var _ = require('lodash')
+var merge = require('lodash.merge')
 
 function getConfig () {
   var ROOT = process.cwd()
@@ -39,7 +39,7 @@ function getConfig () {
     }
   }
 
-  return _.merge({}, config, {
+  return merge({}, config, {
     rootPath: ROOT,
     docsAppPath: path.resolve(__dirname, '../../docs/app'),
     distPath: path.join(ROOT, config.buildPath, '/dist'),

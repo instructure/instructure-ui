@@ -37,10 +37,10 @@ export default class ComponentDoc extends Component {
           </div>
         </div>
         <div className={styles.description}>
-          { description }
+          {description}
         </div>
         <div className={styles.props}>
-          { props }
+          {props}
         </div>
       </div>
     )

@@ -22,11 +22,11 @@ export default class DocsNav extends Component {
     }
   }
 
-  handleSearchChange = e => this.setState({query: e.target.value});
+  handleSearchChange = (e) => this.setState({query: e.target.value});
 
   render () {
     const components = this.props.components
-      .filter(component => new RegExp(this.state.query, 'i').test(component.name))
+      .filter((component) => new RegExp(this.state.query, 'i').test(component.name))
       .map((component) => {
         const classes = {
           [styles.link]: true,

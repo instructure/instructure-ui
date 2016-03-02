@@ -39,7 +39,7 @@ export default class ComponentDescription extends Component {
     }
     return (
       <div>
-        { this.renderDescription() }
+        {this.renderDescription()}
       </div>
     )
   }

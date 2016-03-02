@@ -37,7 +37,7 @@ export default class ComponentPreview extends Component {
     })
   };
 
-  handleMessage (message) {
+  handleMessage = (message) => {
     if (message && message.isMounted) {
       this.setState({
         frameIsLoaded: true
@@ -71,10 +71,10 @@ export default class ComponentPreview extends Component {
     return (
       <WindowMessageListener
         sourceName={this.frameName}
-        onReceiveMessage={this.handleMessage.bind(this)}
+        onReceiveMessage={this.handleMessage}
         className={classnames(classes)}>
         <button className={styles.button} type="button" onClick={this.handleToggle}>
-          { buttonText }
+          {buttonText}
         </button>
         <iframe ref="frame"
           className={styles.frame}
