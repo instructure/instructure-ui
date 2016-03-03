@@ -49,6 +49,10 @@ export default class ComponentPreview extends Component {
   };
 
   renderPreview () {
+    if (!this.refs.frame) {
+      return
+    }
+
     if (this.state.frameIsLoaded) {
       WindowMessageListener.postMessage(this.refs.frame.contentWindow, {
         code: this.props.code

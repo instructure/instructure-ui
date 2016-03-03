@@ -1,11 +1,10 @@
 .root {
   position: relative;
-  background: #fff;
+  background-color: #fff;
   color: #333;
   font-size: 1rem;
   font-weight: 300;
   padding: 4em;
-  border-bottom: 1px solid #eee;
 }
 .heading {
   margin: 0;

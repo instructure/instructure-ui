@@ -1,16 +1,13 @@
-import _ from 'lodash'
-
 // use webpack loader to load documentation data based on config
 const docs = require('markdown-docs!')
 
-const documents = {}
-docs.map((doc) => {
-  const {
-    name,
-    html
-  } = doc
+const documentsMap = {}
+docs.forEach((doc) => {
+  const name = (doc.name === 'README') ? 'index' : doc.name
+  const html = doc.html
   const title = nameToTitle(name)
-  documents[name] = {
+
+  documentsMap[name] = {
     name,
     title,
     html
@@ -26,12 +23,5 @@ function nameToTitle (fileName) {
     .replace(/[_-]/g, ' ')
 }
 
-// TODO: support sub directories and categories for docs
-function isIndex (doc) {
-  return doc.name === 'index' || doc.name === 'README'
-}
-
-export default {
-  documents: _.reject(documents, isIndex),
-  index: _.find(documents, isIndex)
-}
+export const documentsList = Object.values(documentsMap)
+export default documentsMap

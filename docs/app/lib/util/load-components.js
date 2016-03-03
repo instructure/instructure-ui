@@ -1,20 +1,20 @@
-import _ from 'lodash'
-
 const docs = require('component-docs!')
 
-const components = {}
+const componentsMap = {}
 docs.components.forEach((component) => {
-  components[component.name] = {
+  componentsMap[component.name] = {
     doc: component.doc,
     path: component.path,
     module: component.module
   }
 })
 
-const sortedComponents = Object.keys(docs.lib || components)
+export const componentsList = Object.keys(docs.lib || componentsMap)
   .sort()
   .map((name) => {
-    return _.merge({ name: name }, components[name])
+    const component = componentsMap[name]
+    component.name = component.name || name // fallback to the name from the lib if the name is undefined
+    return component
   })
 
-export default sortedComponents
+export default componentsMap
