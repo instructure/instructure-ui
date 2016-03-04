@@ -4,6 +4,6 @@
 
   &:focus,
   &:hover {
-    text-decoration: map(Link, textDecoration);
+    text-decoration: map(Link, textDecorationHover);
   }
 }

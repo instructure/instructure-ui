@@ -1058,7 +1058,7 @@
     },
     "color": {
       "version": "0.11.1",
-      "from": "color@>=0.11.0 <0.12.0",
+      "from": "https://registry.npmjs.org/color/-/color-0.11.1.tgz",
       "resolved": "https://registry.npmjs.org/color/-/color-0.11.1.tgz",
       "dependencies": {
         "color-convert": {

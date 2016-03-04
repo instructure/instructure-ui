@@ -1,0 +1,62 @@
+.root {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+
+  line-height: 1; /* reset global line height */
+  padding: 0.6875rem 0.875rem;
+  margin: 0;
+  font-size: 0.875rem;
+  text-decoration: none; /* for links styled as buttons */
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+
+  transition: background 0.2s;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.default,
+.primary,
+.success,
+.alert,
+.danger {
+  /* Need to call out these classes here for theming
+     to work */
+}
+
+.link {
+  text-decoration: underline;
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.small {
+  padding: 0.375rem 0.5rem;
+  font-size: 0.75rem;
+}
+
+.large {
+  padding: 0.9065rem 0.8rem;
+}
+
+.is-block {
+  display: block;
+  width: 100%;
+}
+
+[aria-disabled] {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}

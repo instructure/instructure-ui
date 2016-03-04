@@ -1,7 +1,6 @@
 @import "../RangeInput.mixins.css";
 
 .input {
-
   @mixin handle-selector {
     background: map(RangeInput, handleColor);
     box-shadow: 0 0.2em 0.375em map(RangeInput, handleShadowColor);
@@ -13,7 +12,6 @@
 
   &:focus,
   &:active {
-
     @mixin handle-selector {
       box-shadow:
         0 0.2em 0.375em map(RangeInput, handleShadowColor),

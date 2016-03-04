@@ -106,6 +106,7 @@
   },
   "dependencies": {
     "classnames": "~2.2.3",
+    "color": "https://registry.npmjs.org/color/-/color-0.11.1.tgz",
     "react": "~0.14.7",
     "react-addons-css-transition-group": "~0.14.7",
     "react-dom": "~0.14.7",

@@ -13,6 +13,7 @@ button.root {
   margin: 0;
   padding: 0;
   text-align: left;
+  outline: none;
 }
 
 /* stylelint-enable selector-no-type */
