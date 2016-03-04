@@ -90,4 +90,3 @@ export default class ReactTestbed {
 global.createTestbed = (componentClass, defaultProps) => {
   return new ReactTestbed(componentClass, defaultProps)
 }
-
