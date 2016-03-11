@@ -1,16 +1,28 @@
 'use strict'
 
-module.exports = {
-  'react': {
-    'commonjs': 'react',
-    'commonjs2': 'react',
-    'amd': 'react',
-    'root': 'React'
+module.exports = [
+  {
+    'react': {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react'
+    }
   },
-  'react-dom': {
-    'commonjs': 'react-dom',
-    'commonjs2': 'react-dom',
-    'amd': 'react-dom',
-    'root': 'ReactDOM'
+  {
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom'
+    }
+  },
+  {
+    'react-addons-css-transition-group': {
+      commonjs2: 'react-addons-css-transition-group',
+      commonjs: 'react-addons-css-transition-group',
+      amd: 'react-addons-css-transition-group',
+      root: 'React.addons.CSSTransitionGroup'
+    }
   }
-}
+]

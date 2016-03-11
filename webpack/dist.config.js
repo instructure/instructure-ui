@@ -11,7 +11,7 @@ if (process.env.MINIFY) {
 
 entry[entryName] = options.library.main
 
-module.exports = require('./util/generate-config')({
+var config = require('./util/generate-config')({
   entry: entry,
   output: {
     path: options.distPath,
@@ -21,3 +21,5 @@ module.exports = require('./util/generate-config')({
   },
   externals: require('./util/externals')
 }, 'production', process.env.MINIFY)
+
+module.exports = config
