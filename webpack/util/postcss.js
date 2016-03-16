@@ -1,7 +1,7 @@
 /* eslint no-var: 0 */
 'use strict'
 
-function pluginsList (minify, theme) {
+function pluginsList (theme) {
   var plugins = [
     require('stylelint')(),
     require('postcss-import')(),
@@ -27,18 +27,7 @@ function pluginsList (minify, theme) {
     require('postcss-calc')(),
     require('autoprefixer')({
       browsers: ['last 2 versions']
-    })
-  )
-
-  if (minify) {
-    plugins = plugins.concat(
-      require('postcss-discard-duplicates')(),
-      require('postcss-discard-comments'),
-      require('csswring')
-    )
-  }
-
-  plugins = plugins.concat(
+    }),
     require('postcss-browser-reporter'),
     require('postcss-reporter')
   )
@@ -46,13 +35,13 @@ function pluginsList (minify, theme) {
   return plugins
 }
 
-module.exports = function (env, minify) {
+module.exports = function (env) {
   var packs = {
-    defaults: pluginsList(minify, false)
+    defaults: pluginsList(false)
   }
 
   if (env === 'production' || env === 'build') {
-    packs.extractTheme = pluginsList(minify, require('./theme-as-map')())
+    packs.extractTheme = pluginsList(require('./theme-as-map')())
   }
 
   return packs

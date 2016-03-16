@@ -24,6 +24,6 @@ module.exports = function (config, env, minify) {
     },
     module: require('./module-loaders')(env),
     plugins: require('./plugins')(env, minify),
-    postcss: require('./postcss')(env, minify)
+    postcss: require('./postcss')(env)
   }, config, opts.webpack)
 }

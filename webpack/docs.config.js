@@ -13,7 +13,8 @@ var entry = {
 }
 
 module.exports = require('./util/generate-config')({
-  devtool: (process.env.NODE_ENV === 'production') ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: (process.env.NODE_ENV === 'production') ? null : 'cheap-module-eval-source-map',
+
   output: {
     path: config.docsPath,
     filename: '[name].js'

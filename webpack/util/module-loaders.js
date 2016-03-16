@@ -12,7 +12,7 @@ var cssPrefix = [
   '[name]__[local]'
 ].join('-')
 
-var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + cssPrefix + '!postcss'
+var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + cssPrefix
 
 module.exports = function (env) {
   var config = {
@@ -66,15 +66,15 @@ module.exports = function (env) {
             /node_modules/,
             /\/theme\//
           ],
-          loader: ExtractTextPlugin.extract('style', CSS_LOADER)
+          loader: ExtractTextPlugin.extract('style', CSS_LOADER + '!postcss')
         },
         {
           test: /\.css$/,
           include: /\/theme\//,
           exclude: /node_modules/,
           loader: multi(
-            ExtractTextPlugin.extract('style', CSS_LOADER + '?pack=extractTheme'),
-            'to-string!' + CSS_LOADER
+            ExtractTextPlugin.extract('style', CSS_LOADER + '!postcss?pack=extractTheme'),
+            'to-string!' + CSS_LOADER + '&-minimize!postcss'
           )
         },
         {
@@ -93,13 +93,13 @@ module.exports = function (env) {
             /node_modules/,
             /\/theme\//
           ],
-          loader: 'style!' + CSS_LOADER
+          loader: 'style!' + CSS_LOADER + '!postcss'
         },
         {
           test: /\.css$/,
           include: /\/theme\//,
           exclude: /node_modules/,
-          loader: CSS_LOADER
+          loader: CSS_LOADER + '!postcss'
         },
         {
           test: /\.css$/,
