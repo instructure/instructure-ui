@@ -11,29 +11,18 @@
 .content {
   box-sizing: border-box;
   padding: 1rem;
-
-  /* trigger hardware acceleration for smoother animation */
-  transform: translate3d(0, 0, 0);
-
   background-color: white;
 }
 
 .content--enter {
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
   opacity: 0;
 }
 
 .content--enter.content--enter-active {
   transition: opacity 0.5s;
   opacity: 1;
-}
-
-.content--leave {
-  opacity: 1;
-}
-
-.content--leave.content--leave-active {
-  transition: opacity 0.15s;
-  opacity: 0;
 }
 
 .simple {
