@@ -11,7 +11,8 @@
   "homepage": "https://github.com/instructure/instructure-ui",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "start": "./bin/instui server",
+    "start": "./bin/instui docs && ./bin/instui server",
+    "start:watch": "./bin/instui dev-server",
     "test": "./bin/instui test --single-run",
     "test:watch": "./bin/instui test --browsers=Chrome",
     "build": "./bin/instui build && ./bin/instui docs",
@@ -51,6 +52,7 @@
     "glob": "~7.0.3",
     "html-loader": "~0.4.3",
     "html-webpack-plugin": "~2.10.0",
+    "http-server": "~0.9.0",
     "isparta-loader": "~2.0.0",
     "karma": "~0.13.22",
     "karma-chrome-launcher": "~0.2.2",

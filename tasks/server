@@ -1,5 +1,5 @@
 #!/bin/bash -e
 
-server=$MODULES_PATH/.bin/webpack-dev-server
+server=$MODULES_PATH/.bin/http-server
 
-exec $server --inline --hot -d --progress --config $BASE_PATH/webpack.config.js --content-base $BUILD_PATH/docs "$@"
+exec $server $BUILD_PATH/docs -p 8001

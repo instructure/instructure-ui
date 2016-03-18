@@ -12,9 +12,10 @@ Installation steps:
 
 ### Development
 
-- `npm start` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code in the `lib` directory you should see the page auto-reload.
+- `npm run start:watch` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code in the `lib` directory you should see the page auto-reload.
 - `npm test` will run the tests.
 - `npm run test:watch` will run the tests and watch for changes to the source code. Run this if you'd like to debug tests in the browser (Chrome).
+- `npm start` will build the production version of the documentation. You can view it at [http://localhost:8001](http://localhost:8001).
 
 Run `npm run` to list the available commands.
 
