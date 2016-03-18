@@ -4,12 +4,11 @@
 
 .input {
   appearance: none;
-  font-size: 0.875rem;
-  line-height: 1; /* reset global line height */
-  padding: 0.6875rem 0.875rem;
-  margin: 0;
-  min-height: 2.5rem;
 
+  line-height: 1; /* reset global line height */
+
+  padding: 0;
+  margin: 0;
   width: 100%;
   display: block;
   box-sizing: border-box;
@@ -25,6 +24,27 @@
     outline-width: 2px;
     outline-offset: -2px;
   }
+}
+
+.small .input {
+  height: 1.75rem;
+  font-size: 0.75rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.medium .input {
+  height: 2.375rem;
+  font-size: 0.875rem;
+  padding-left: 0.875rem;
+  padding-right: 0.875rem;
+}
+
+.large .input {
+  height: 3rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
 
 .label {
@@ -50,4 +70,3 @@
 .required {
   /* TODO: placeholder for now */
 }
-
