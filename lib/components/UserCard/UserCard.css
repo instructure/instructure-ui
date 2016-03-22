@@ -1,10 +1,12 @@
 .root {
   font-size: 1rem;
-  width: 15.625rem; /* Matches Avatar width */
+  min-width: 15.625rem; /* Matches Avatar width */
 }
 
 .profile {
+  box-sizing: border-box;
   padding: 0.875rem 1rem;
+  max-width: 15.625rem;
 }
 
 .profileData {
@@ -14,4 +16,15 @@
 
 .metrics {
   margin-top: 0.5rem;
+}
+
+.root[data-width_greater_than_avatar] {
+
+  .avatar {
+    text-align: center;
+  }
+
+  .profile {
+    margin: 0 auto;
+  }
 }
