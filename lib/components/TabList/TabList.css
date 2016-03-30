@@ -2,8 +2,7 @@
 
 }
 
-.simple,
-.accordion {
+.simple {
   display: flex;
   flex-flow: row wrap;
 }

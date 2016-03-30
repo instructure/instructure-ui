@@ -12,6 +12,7 @@
   box-sizing: border-box;
   padding: 1rem;
   background-color: white;
+  width: 100%;
 }
 
 .content--enter {
@@ -26,6 +27,7 @@
 }
 
 .simple {
+  flex-basis: 100%;
 
   .content {
     border: 1px solid #d6d6d6;
