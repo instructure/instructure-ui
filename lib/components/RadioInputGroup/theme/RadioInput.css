@@ -1,37 +1,83 @@
-.label {
-  color: map(RadioInput, labelTextColor);
-}
+.simple {
 
-.input {
+  .label {
+    color: map(RadioInput, labelTextColor);
+  }
 
-  /* stylelint-disable selector-no-type */
+  .input {
 
-  input[type="radio"] {
-
-    &:hover + .facade {
+    &:hover + .layout .facade {
       border-color: map(RadioInput, borderColorHover);
     }
 
-    &:checked + .facade {
+    &:checked + .layout .facade {
       background-color: map(RadioInput, borderColorHover);
       box-shadow: inset 0 0 0 3px map(RadioInput, backgroundColor);
       border-color: map(RadioInput, borderColorHover);
     }
 
-    &:focus + .facade {
+    &:focus + .layout .facade {
       background-color: map(RadioInput, borderColorHover);
-      box-shadow: inset 0 0 0 2px map(RadioInput, shadowColorFocus), inset 0 0 0 4px map(RadioInput, backgroundColor);
+      box-shadow:
+        inset 0 0 0 2px map(RadioInput, shadowColorFocus),
+        inset 0 0 0 4px map(RadioInput, backgroundColor);
     }
 
-    &:disabled + .facade {
+    &[aria-disabled] + .layout .facade {
       border-color: map(RadioInput, borderColor);
     }
   }
 
-  /* stylelint-enable selector-no-type */
+  .facade {
+    background-color: map(RadioInput, backgroundColor);
+    border-color: map(RadioInput, borderColor);
+  }
+
 }
 
-.facade {
-  background-color: map(RadioInput, backgroundColor);
-  border-color: map(RadioInput, borderColor);
+.toggle {
+
+  .facade {
+    background: map(RadioInput, toggleHandleBgColor);
+    border-radius: calc(map(RadioInput, borderRadius) - 4px);
+  }
+
+  .text {
+    color: map(RadioInput, toggleTextColor);
+  }
+
+  .input {
+
+    &:checked + .layout {
+
+      .text {
+        color: map(RadioInput, toggleHandleTextColor);
+      }
+
+    }
+
+    &:focus + .layout .facade {
+      box-shadow:
+        0 3px 7px rgba(0, 0, 0, 0.3),
+        0 0 0 8px map(RadioInput, toggleFocusColor);
+    }
+
+  }
+
+  &.success .input {
+
+    &:checked + .layout .text {
+      color: map(RadioInput, toggleSuccessTextColor);
+    }
+
+  }
+
+  &.danger .input {
+
+    &:checked + .layout .text {
+      color: map(RadioInput, toggleDangerTextColor);
+    }
+
+  }
+
 }

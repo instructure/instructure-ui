@@ -21,6 +21,12 @@
   &:focus {
     outline: none;
   }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .default,
@@ -62,10 +68,4 @@
 .is-block {
   display: block;
   width: 100%;
-}
-
-[aria-disabled] {
-  cursor: not-allowed;
-  pointer-events: none;
-  opacity: 0.5;
 }
