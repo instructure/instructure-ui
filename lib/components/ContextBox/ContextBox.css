@@ -43,6 +43,8 @@
 
   &.positioned--right { /* arrow on the left */
 
+    margin-left: var(--ContextBox-arrowSize);
+
     &::before,
     &::after {
       top: 50%;
@@ -59,6 +61,8 @@
   }
 
   &.positioned--left {  /* arrow on the right */
+
+    margin-right: var(--ContextBox-arrowSize);
 
     &::before,
     &::after {
@@ -77,6 +81,8 @@
 
   &.positioned--below {  /* arrow on top */
 
+    margin-top: var(--ContextBox-arrowSize);
+
     &::before,
     &::after {
       bottom: 100%;
@@ -84,7 +90,7 @@
     }
 
     &::after {
-      margin-left: calc(-1 * var(--ContextBox-arrowSize)));
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
     }
 
     &::before {
@@ -93,6 +99,8 @@
   }
 
   &.positioned--above {  /* arrow on bottom */
+
+    margin-bottom: var(--ContextBox-arrowSize);
 
     &::before,
     &::after {
