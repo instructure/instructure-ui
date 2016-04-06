@@ -24,10 +24,6 @@
     margin-top: 0;
   }
 
-  .label {
-    font-weight: normal;
-  }
-
   .layout {
     display: flex;
     align-items: center;

@@ -1,9 +1,5 @@
 .simple {
 
-  .label {
-    color: map(RadioInput, labelTextColor);
-  }
-
   .input {
 
     &:hover + .layout .facade {
@@ -33,13 +29,19 @@
     border-color: map(RadioInput, borderColor);
   }
 
+  .text {
+    color: map(RadioInput, labelTextColor);
+    line-height: map(RadioInput, labelLineHeight);
+    font-size: map(RadioInput, labelFontSize);
+  }
+
 }
 
 .toggle {
 
   .facade {
     background: map(RadioInput, toggleHandleBgColor);
-    border-radius: calc(map(RadioInput, borderRadius) - 4px);
+    border-radius: calc(map(RadioInput, toggleBorderRadius) - 4px);
   }
 
   .text {
