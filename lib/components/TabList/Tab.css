@@ -1,5 +1,5 @@
 .root {
-  font-size: 0.875rem;
+
   cursor: pointer;
   user-select: none;
 
@@ -25,14 +25,19 @@
   /* stylelint-enable selector-no-type */
 }
 
+.minimal,
 .simple {
+  order: -1;
+  white-space: nowrap;
+}
+
+.simple {
+  font-size: 0.875rem;
   box-sizing: border-box;
   padding: 0.7em 1em;
 
   margin-right: 0.2em;
   margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
-
-  order: -1;
 
   border: 1px solid transparent;
   border-top-left-radius: 3px;
@@ -69,7 +74,38 @@
   }
 }
 
+.minimal {
+  font-size: 1rem;
+  padding: 1rem 1.25rem;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  transition: border 0.4s ease;
+  border-bottom: 0.25rem solid transparent;
+
+  color: #333;
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    border-bottom-color: #cacaca;
+  }
+
+  &[aria-selected] {
+    border-bottom-color: #0073ac;
+    cursor: default;
+  }
+
+  &[aria-disabled] {
+    font-weight: normal;
+  }
+
+  &:focus {
+    outline: none;
+    text-decoration: underline;
+  }
+}
+
 .accordion {
+  font-size: 0.875rem;
   box-sizing: border-box;
 
   margin-top: 0.5rem;

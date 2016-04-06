@@ -26,10 +26,18 @@
   opacity: 1;
 }
 
+.minimal {
+
+  .content {
+    border-top: 1px solid #d6d6d6;
+  }
+}
+
 .simple {
   flex-basis: 100%;
 
   .content {
+    background-color: white;
     border: 1px solid #d6d6d6;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
@@ -40,6 +48,7 @@
   overflow: hidden;
 
   .content {
+    background-color: white;
     border: 1px solid #d6d6d6;
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
