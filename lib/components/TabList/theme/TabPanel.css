@@ -1,0 +1,4 @@
+.content {
+  background-color: map(TabPanel, backgroundColor);
+  border-color: map(TabPanel, borderColor);
+}

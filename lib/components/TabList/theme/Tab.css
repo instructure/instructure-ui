@@ -1,0 +1,69 @@
+.root {
+  font-size: map(Tab, fontSize);
+}
+
+.simple {
+  color: map(Tab, simpleTextColor);
+  text-decoration: map(Tab, simpleTextDecoration);
+
+  &:not([aria-selected]):not([aria-disabled]):hover,
+  &[aria-selected] {
+    background-color: map(Tab, simpleBackgroundColorSelected);
+    border-color: map(Tab, simpleBorderColorSelected);
+  }
+
+  &:hover,
+  &[aria-selected],
+  &[aria-disabled] {
+    color: map(Tab, simpleTextColorSelected);
+  }
+
+  &[aria-selected] {
+    border-bottom-color: map(Tab, simpleBackgroundColorSelected);
+  }
+
+  &:focus {
+    text-decoration: map(Tab, simpleTextDecorationFocused);
+  }
+
+}
+
+.minimal {
+  color: map(Tab, minimalTextColor);
+  text-decoration: map(Tab, minimalTextDecoration);
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    border-bottom-color: map(Tab, minimalBorderColorHover);
+  }
+
+  &[aria-selected] {
+
+    &::after {
+      background-color: map(Tab, minimalBorderColorSelected);
+    }
+  }
+
+  &:focus {
+    text-decoration: map(Tab, minimalTextDecorationFocused);
+  }
+}
+
+.accordion {
+  color: map(Tab, accordionTextColor);
+  background-color: map(Tab, accordionBackgroundColor);
+  border-color: map(Tab, accordionBorderColor);
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    background-color: map(Tab, accordionBackgroundColorHover);
+  }
+
+  &[aria-selected] {
+    border-color: map(Tab, accordionBorderColorSelected);
+    color: map(Tab, accordionTextColorSelected);
+    background-color: map(Tab, accordionBackgroundColorSelected);
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px map(Tab, accordionBorderColorFocused);
+  }
+}
