@@ -26,8 +26,12 @@ module.exports = function () {
 
 function processDocs (filepath) {
   return '{' + [
-    'filePath: ' + JSON.stringify(filepath),
-    'html: ' + requirePath(filepath),
-    'name: ' + JSON.stringify(path.basename(filepath, path.extname(filepath)).replace(/^\d+\-/, ''))
+    'path: ' + JSON.stringify(filepath),
+    'doc: ' + requirePath(filepath),
+    'name: ' + JSON.stringify(docNameFromPath(filepath))
   ].join(',') + '}'
+}
+
+function docNameFromPath (filepath) {
+  return path.basename(filepath, path.extname(filepath)).replace(/^\d+\-/, '')
 }

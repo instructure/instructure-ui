@@ -1,6 +1,7 @@
 /* eslint no-var: 0 */
 'use strict'
 
+var path = require('path')
 var options = require('./util/config')
 var entry = {}
 var entryName = options.library.packageName
@@ -9,7 +10,7 @@ if (process.env.MINIFY) {
   entryName = entryName + '.min'
 }
 
-entry[entryName] = options.library.main
+entry[entryName] = path.join(options.rootPath, options.library.main)
 
 var config = require('./util/generate-config')({
   entry: entry,

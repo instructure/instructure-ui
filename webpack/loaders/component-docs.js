@@ -16,14 +16,11 @@ module.exports = function () {
     })
     .map(processComponent)
 
-  var lib = config.library.main ? '  lib: ' + requirePath(config.library.main) + '.default,' : ''
-
   return [
     'if (module.hot) {',
     '  module.hot.accept([]);',
     '}',
     'module.exports = {',
-    lib,
     '  components: [' + components.join(',') + ']',
     '};'
   ].join('\n')
@@ -31,9 +28,13 @@ module.exports = function () {
 
 function processComponent (filepath) {
   return '{' + [
-    'name: ' + JSON.stringify(path.basename(filepath, path.extname(filepath))),
+    'name: ' + JSON.stringify(componentNameFromPath(filepath)),
     'path: ' + JSON.stringify(path.relative(config.rootPath, filepath)),
     'doc: ' + requirePath('!!docgen!' + filepath)
   ].join(',') + '}'
 }
 
+function componentNameFromPath (filepath) {
+  var parts = path.dirname(filepath).split(path.sep)
+  return parts[parts.length - 1]
+}

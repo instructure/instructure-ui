@@ -4,7 +4,7 @@ const docs = require('markdown-docs!')
 const documentsMap = {}
 docs.forEach((doc) => {
   const name = (doc.name === 'README') ? 'index' : doc.name
-  const html = doc.html
+  const html = doc.doc
   const title = nameToTitle(name)
 
   documentsMap[name] = {

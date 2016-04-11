@@ -20,18 +20,13 @@ function getConfig () {
       title: 'Instructure UI Component Library'
     },
     docs: {
-      files: 'docs/**/*.md'
+      files: 'docs/*.md'
     },
     components: {
-      files: 'lib/components/**/*.js',
-      excludes: [
-        /\.test\.js$/,
-        /\/theme\//,
-        /index\.js$/
-      ]
+      files: 'lib/components/*/index.js'
     },
     theme: {
-      files: 'lib/components/**/theme/*.js',
+      files: 'lib/components/*/theme/*.js',
       config: 'lib/theme/config'
     },
     tests: {
