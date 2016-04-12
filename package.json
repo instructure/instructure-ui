@@ -90,7 +90,7 @@
     "postcss-simple-vars": "~1.2.0",
     "postcss-url": "~5.1.1",
     "raw-loader": "~0.5.1",
-    "react-addons-test-utils": "~15.0.0",
+    "react-addons-test-utils": "~15.0.1",
     "react-docgen": "~2.7.0",
     "react-drill": "~2.1.1",
     "script-loader": "~0.6.1",
@@ -106,10 +106,10 @@
   "dependencies": {
     "babel-runtime": "~6.6.1",
     "classnames": "~2.2.3",
-    "color": "https://registry.npmjs.org/color/-/color-0.11.1.tgz",
-    "react": "~15.0.0",
-    "react-addons-css-transition-group": "~15.0.0",
-    "react-dom": "~15.0.0",
+    "color": "~0.11.1",
+    "react": "~15.0.1",
+    "react-addons-css-transition-group": "~15.0.1",
+    "react-dom": "~15.0.1",
     "shallowequal": "~0.2.2",
     "shortid": "~2.2.4"
   },

@@ -7,17 +7,23 @@ var path = require('path')
 var config = require('./config')
 
 module.exports = function (env, minify) {
-  var plugins = []
+  var plugins = [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify(env)
+      }
+    })
+  ]
 
   if (env === 'production') {
-    plugins = [
+    plugins = plugins.concat(
       new ExtractTextPlugin('[name].css', { allChunks: true })
-    ]
+    )
   } else if (env === 'build') {
     var cssFilePath = process.argv[2]
-    plugins = [
+    plugins = plugins.concat(
       new ExtractTextPlugin(path.relative(config.buildPath, cssFilePath))
-    ]
+    )
   }
 
   if (minify) {

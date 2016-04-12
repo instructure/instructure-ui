@@ -7,13 +7,14 @@ var webpack = require('webpack')
 var config = require('./util/config')
 
 var entry = {
-  'instructure-ui': path.join(config.rootPath, config.library.main),
   'example': path.join(config.docsAppPath, 'lib/example.js'),
   'docs': [
     path.join(config.docsAppPath, 'lib/index.js')
   ],
   'vendor': ['react', 'react-dom', 'react-addons-css-transition-group']
 }
+
+entry[config.library.packageName] = path.join(config.rootPath, config.library.main)
 
 module.exports = require('./util/generate-config')({
   devtool: (process.env.NODE_ENV === 'production') ? null : 'cheap-module-eval-source-map',
@@ -35,7 +36,7 @@ module.exports = require('./util/generate-config')({
       template: path.join(config.docsAppPath, 'templates/example.tmpl.html'),
       inject: 'body',
       filename: 'example.html',
-      chunks: ['example', 'instructure-ui', 'vendor']
+      chunks: ['example', config.library.packageName, 'vendor']
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
   ]

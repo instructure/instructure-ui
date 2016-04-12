@@ -41,10 +41,12 @@ export default class WindowMessageListener extends Component {
   sourceIsValid (eventSource) {
     if (!this.props.sourceName) {
       return true
-    } else {
+    } else if (eventSource) {
       const sourceFrame = eventSource.frameElement
       const sourceName = sourceFrame ? sourceFrame.getAttribute('name') : null
       return sourceName === this.props.sourceName
+    } else {
+      return false
     }
   }
 
