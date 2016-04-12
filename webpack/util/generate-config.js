@@ -4,12 +4,12 @@
 var merge = require('webpack-merge')
 var path = require('path')
 
-var opts = require('../util/config')
+var config = require('../util/config')
 
-module.exports = function (config, env, minify) {
-  return merge({
+module.exports = function (overrides) {
+  var defaults = {
     resolve: {
-      root: opts.rootPath,
+      root: config.rootPath,
       modulesDirectories: [
         path.resolve(__dirname, '../../node_modules'),
         'node_modules'
@@ -22,8 +22,9 @@ module.exports = function (config, env, minify) {
         'node_modules'
       ]
     },
-    module: require('./module-loaders')(env),
-    plugins: require('./plugins')(env, minify),
-    postcss: require('./postcss')(env)
-  }, config, opts.webpack)
+    module: require('./module-loaders')(process.env.NODE_ENV),
+    plugins: require('./plugins')(process.env.NODE_ENV, process.env.MINIFY),
+    postcss: require('./postcss')(process.env.NODE_ENV)
+  }
+  return merge(defaults, overrides, config.webpack)
 }

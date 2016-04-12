@@ -57,7 +57,7 @@ module.exports = function (env) {
     ]
   }
 
-  if (env === 'production' || env === 'build') {
+  if (env === 'production') {
     config = merge(config, {
       loaders: [
         {
@@ -99,7 +99,7 @@ module.exports = function (env) {
           test: /\.css$/,
           include: /\/theme\//,
           exclude: /node_modules/,
-          loader: CSS_LOADER + '!postcss'
+          loader: 'to-string!' + CSS_LOADER + '&-minimize!postcss'
         },
         {
           test: /\.css$/,
@@ -109,6 +109,5 @@ module.exports = function (env) {
       ]
     })
   }
-
   return config
 }

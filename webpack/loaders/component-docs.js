@@ -6,6 +6,7 @@ var path = require('path')
 var config = require('../util/config')
 var testPatterns = require('../util/test-patterns')
 var requirePath = require('../util/require-path')
+var componentNameFromPath = require('../util/component-name-from-path')
 
 module.exports = function () {
   this.cacheable && this.cacheable()
@@ -32,9 +33,4 @@ function processComponent (filepath) {
     'path: ' + JSON.stringify(path.relative(config.rootPath, filepath)),
     'doc: ' + requirePath('!!docgen!' + filepath)
   ].join(',') + '}'
-}
-
-function componentNameFromPath (filepath) {
-  var parts = path.dirname(filepath).split(path.sep)
-  return parts[parts.length - 1]
 }

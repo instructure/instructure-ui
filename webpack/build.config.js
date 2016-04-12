@@ -9,7 +9,7 @@ var config = require('./util/generate-config')({
     path: opts.buildPath + '/lib'
   },
   externals: require('./util/externals')
-}, process.env.NODE_ENV, process.env.MINIFY)
+})
 
 // need to override default resolve config for the build
 // so that the babel transform-runtime plugin generates the correct paths

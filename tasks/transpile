@@ -1,0 +1,8 @@
+#!/bin/bash -e
+
+babel=$MODULES_PATH/.bin/babel
+
+# Transpile JS and CSS to lib dir
+NODE_ENV=build BABEL_DISABLE_CACHE=1 $babel lib \
+  --out-dir $BUILD_PATH/lib \
+  --ignore **/__tests__/**,**/__spec__/**,*.test.js,*-test.js,*.spec.js,*-spec.js

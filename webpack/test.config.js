@@ -17,4 +17,4 @@ module.exports = require('./util/generate-config')({
       }
     ]
   }
-}, 'test')
+})

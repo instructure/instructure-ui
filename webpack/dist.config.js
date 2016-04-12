@@ -2,25 +2,35 @@
 'use strict'
 
 var path = require('path')
-var options = require('./util/config')
+var glob = require('glob')
+var config = require('./util/config')
+var componentNameFromPath = require('./util/component-name-from-path')
+
 var entry = {}
-var entryName = options.library.packageName
+var libEntry = config.library.packageName
 
 if (process.env.MINIFY) {
-  entryName = entryName + '.min'
+  libEntry = libEntry + '.min'
 }
 
-entry[entryName] = path.join(options.rootPath, options.library.main)
+entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
 
-var config = require('./util/generate-config')({
+glob.sync(config.components.files)
+  .map(function (filepath) {
+    var name = 'components/' + componentNameFromPath(filepath)
+    if (process.env.MINIFY) {
+      name = name + '.min'
+    }
+    entry[name] = [ path.join(config.rootPath, filepath) ]
+  })
+
+module.exports = require('./util/generate-config')({
   entry: entry,
   output: {
-    path: options.distPath,
+    path: config.distPath,
     filename: '[name].js',
-    library: options.library.name,
+    library: config.library.name,
     libraryTarget: 'umd'
   },
   externals: require('./util/externals')
-}, 'production', process.env.MINIFY)
-
-module.exports = config
+})

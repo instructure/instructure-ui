@@ -40,4 +40,4 @@ module.exports = require('./util/generate-config')({
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
   ]
-}, process.env.NODE_ENV, process.env.MINIFY)
+})
