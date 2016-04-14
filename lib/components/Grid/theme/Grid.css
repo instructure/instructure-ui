@@ -1,0 +1,54 @@
+@define-mixin start-grid {
+
+  display: flex;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.right {
+    justify-content: flex-end;
+  }
+
+  &.spaceAround {
+    justify-content: space-around;
+  }
+
+  &.spaceBetween {
+    justify-content: space-between;
+  }
+
+  &.vAlignCenter {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+  }
+
+}
+
+.startAtPhone {
+  @mixin start-grid;
+}
+
+@media screen and (min-width: map(Grid, breakpointTablet)) {
+
+  .startAtTablet {
+    @mixin start-grid;
+  }
+}
+
+@media screen and (min-width: map(Grid, breakpointDesktop)) {
+
+  .startAtDesktop {
+    @mixin start-grid;
+  }
+}
+
+@media screen and (min-width: map(Grid, breakpointWide)) {
+
+  .startAtWide {
+    @mixin start-grid;
+  }
+}

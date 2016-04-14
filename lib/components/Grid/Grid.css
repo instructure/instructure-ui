@@ -1,0 +1,39 @@
+.root {
+  box-sizing: border-box;
+}
+
+&.left {
+}
+
+&.center {
+}
+
+&.right {
+}
+
+&.spaceAround {
+}
+
+&.spaceBetween {
+}
+
+&.top {
+}
+
+&.vAlignCenter {
+}
+
+&.bottom {
+}
+
+.startAtPhone {
+}
+
+.startAtTablet {
+}
+
+.startAtDesktop {
+}
+
+.startAtWide {
+}

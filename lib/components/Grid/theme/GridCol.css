@@ -1,0 +1,246 @@
+@define-mixin start-grid {
+  flex: 1;
+  margin-bottom: 0;
+
+  &.gutterSmall,
+  &.gutterMedium,
+  &.gutterLarge {
+    margin-bottom: 0;
+  }
+
+  &.gutterSmall {
+    padding-left: map(GridCol, spacingSmall);
+    padding-right: map(GridCol, spacingSmall);
+  }
+
+  &.gutterMedium {
+    padding-left: map(GridCol, spacingMedium);
+    padding-right: map(GridCol, spacingMedium);
+  }
+
+  &.gutterLarge {
+    padding-left: map(GridCol, spacingLarge);
+    padding-right: map(GridCol, spacingLarge);
+  }
+
+}
+
+.root {
+  margin-bottom: map(GridCol, spacingMedium);
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.gutterSmall,
+.gutterMedium,
+.gutterLarge {
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+}
+
+.startAtPhone {
+  @mixin start-grid;
+}
+
+.phone--auto {
+  flex: 0 1 auto;
+}
+
+.phone--1 {
+  flex: 0 0 10%;
+}
+
+.phone--2 {
+  flex: 0 0 20%;
+}
+
+.phone--3 {
+  flex: 0 0 30%;
+}
+
+.phone--4 {
+  flex: 0 0 40%;
+}
+
+.phone--5 {
+  flex: 0 0 50%;
+}
+
+.phone--6 {
+  flex: 0 0 60%;
+}
+
+.phone--7 {
+  flex: 0 0 70%;
+}
+
+.phone--8 {
+  flex: 0 0 80%;
+}
+
+.phone--9 {
+  flex: 0 0 90%;
+}
+
+.phone--10 {
+  flex: 0 0 100%;
+}
+
+@media screen and (min-width: map(GridCol, breakpointTablet)) {
+
+  .startAtTablet {
+    @mixin start-grid;
+  }
+
+  .tablet--auto {
+    flex: 0 1 auto;
+  }
+
+  .tablet--1 {
+    flex: 0 0 10%;
+  }
+
+  .tablet--2 {
+    flex: 0 0 20%;
+  }
+
+  .tablet--3 {
+    flex: 0 0 30%;
+  }
+
+  .tablet--4 {
+    flex: 0 0 40%;
+  }
+
+  .tablet--5 {
+    flex: 0 0 50%;
+  }
+
+  .tablet--6 {
+    flex: 0 0 60%;
+  }
+
+  .tablet--7 {
+    flex: 0 0 70%;
+  }
+
+  .tablet--8 {
+    flex: 0 0 80%;
+  }
+
+  .tablet--9 {
+    flex: 0 0 90%;
+  }
+
+  .tablet--10 {
+    flex: 0 0 100%;
+  }
+}
+
+@media screen and (min-width: map(GridCol, breakpointDesktop)) {
+
+  .startAtDesktop {
+    @mixin start-grid;
+  }
+
+  .desktop--auto {
+    flex: 0 1 auto;
+  }
+
+  .desktop--1 {
+    flex: 0 0 10%;
+  }
+
+  .desktop--2 {
+    flex: 0 0 20%;
+  }
+
+  .desktop--3 {
+    flex: 0 0 30%;
+  }
+
+  .desktop--4 {
+    flex: 0 0 40%;
+  }
+
+  .desktop--5 {
+    flex: 0 0 50%;
+  }
+
+  .desktop--6 {
+    flex: 0 0 60%;
+  }
+
+  .desktop--7 {
+    flex: 0 0 70%;
+  }
+
+  .desktop--8 {
+    flex: 0 0 80%;
+  }
+
+  .desktop--9 {
+    flex: 0 0 90%;
+  }
+
+  .desktop--10 {
+    flex: 0 0 100%;
+  }
+
+}
+
+@media screen and (min-width: map(GridCol, breakpointWide)) {
+
+  .startAtWide {
+    @mixin start-grid;
+  }
+
+  .wide--auto {
+    flex: 0 1 auto;
+  }
+
+  .wide--1 {
+    flex: 0 0 10%;
+  }
+
+  .wide--2 {
+    flex: 0 0 20%;
+  }
+
+  .wide--3 {
+    flex: 0 0 30%;
+  }
+
+  .wide--4 {
+    flex: 0 0 40%;
+  }
+
+  .wide--5 {
+    flex: 0 0 50%;
+  }
+
+  .wide--6 {
+    flex: 0 0 60%;
+  }
+
+  .wide--7 {
+    flex: 0 0 70%;
+  }
+
+  .wide--8 {
+    flex: 0 0 80%;
+  }
+
+  .wide--9 {
+    flex: 0 0 90%;
+  }
+
+  .wide--10 {
+    flex: 0 0 100%;
+  }
+
+}
