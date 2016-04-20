@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import CodeEditor from '../CodeEditor'
 import ComponentPreview from '../ComponentPreview'
+import CodePenButton from '../CodePenButton'
 
 import styles from './ComponentPlayground.css'
 
@@ -46,10 +47,14 @@ export default class ComponentPlayground extends Component {
     return (
       <div className={styles.root}>
         <ComponentPreview code={code} name={this.props.name} />
+
         {this.state.showCode && editor}
+
         <button type="button" onClick={this.handleToggle} className={styles.button}>
-          {this.state.showCode ? 'hide editor' : 'show editor'}
+          {this.state.showCode ? 'hide code' : 'show code'}
         </button>
+
+        <CodePenButton code={code} title={this.props.name} />
       </div>
     )
   }

@@ -24,7 +24,7 @@ export default class CodeEditor extends Component {
     theme: 'zenburn',
     lineNumbers: true,
     lineWrapping: true,
-    smartIndent: false,
+    smartIndent: true,
     matchBrackets: true,
     viewportMargin: Infinity,
     readOnly: false

@@ -7,7 +7,7 @@ import defer from 'lodash.defer'
 
 import styles from './ComponentExample.css'
 
-require('../../util/load-globals')
+import '../../util/load-globals'
 
 export default class ComponentExample extends Component {
   static propTypes = {

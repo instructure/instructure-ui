@@ -11,6 +11,9 @@ var entry = {
   'docs': [
     path.join(config.docsAppPath, 'lib/index.js')
   ],
+  'globals': [ // for rendering examples in codepen
+    path.join(config.docsAppPath, 'lib/globals.js')
+  ],
   'vendor': ['react', 'react-dom', 'react-addons-css-transition-group']
 }
 
