@@ -56,10 +56,18 @@
   }
 }
 
-.required,
 .oneOf {
   font-weight: 200;
   font-style: italic;
+}
+
+.required {
+  background-color: #333;
+  color: white;
+  border-radius: 3px;
+  padding: 2px 3px;
+  font-size: 0.75rem;
+  font-weight: 400;
 }
 
 .list {

@@ -4,19 +4,44 @@
   overflow: hidden;
 }
 
-.button {
-  padding: 0.25rem 0.75rem;
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+}
 
-  float: left;
+.is-fullscreen .fullscreenButton {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+}
 
-  border: none;
-  background-color: #f5f5f5;
-  color: #333;
+.actions {
+  display: flex;
+  justify-content: flex-start;
+}
 
-  font-size: 0.75rem;
-  text-transform: uppercase;
+.close {
+  background-color: #1bb7b6;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
 
-  &:focus {
-    outline: none; /* take off chrome default */
-  }
+.editor {
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
+  transition: max-height 0.8s;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.editor--enter {
+  max-height: 0;
+}
+
+.editor--enter.editor--enter-active {
+  max-height: 999px;
 }

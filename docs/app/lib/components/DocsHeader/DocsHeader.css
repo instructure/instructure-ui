@@ -1,0 +1,20 @@
+.root {
+  font-size: 2.8rem;
+  height: 132px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #979797;
+  background: #1bb7b6 url("./bgd_header.png") no-repeat;
+  background-size: cover;
+  box-sizing: border-box;
+  justify-content: center;
+  color: #fff;
+  padding-left: 12px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999; /* has to be less than the full screen mode of ComponentPlayground/ComponentPreview */
+  margin: 0;
+}

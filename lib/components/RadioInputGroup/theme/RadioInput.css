@@ -1,3 +1,7 @@
+.root .text {
+  font-family: map(RadioInput, labelFontFamily);
+}
+
 .simple {
 
   .input {

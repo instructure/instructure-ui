@@ -4,7 +4,7 @@
 
   body {
     margin: 0;
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    font-family: "Open Sans", sans-serif;
     background-color: #fff;
   }
 
@@ -23,20 +23,27 @@
   /* stylelint-enable selector-no-type */
 }
 
+.root {
+  position: relative;
+  height: 100%;
+}
+
 .nav {
-  width: 12.5rem;
+  /* should be same as .main margin-left */
+  width: 14rem;
+  margin-top: 132px;
+  padding-bottom: 2rem;
   position: fixed;
   top: 0;
   bottom: 0;
   left: 0;
+  z-index: 2;
   overflow-y: scroll;
   overflow-x: hidden;
-
-  background: #e6e6e6;
 }
 
 .main {
-  margin-left: 12.5rem;
+  margin-left: 14rem;
 }
 
 .heading {

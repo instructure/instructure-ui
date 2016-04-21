@@ -21,6 +21,10 @@
   code {
     font-size: 0.75em;
   }
+
+  a {
+    color: #239ebd;
+  }
 }
 
 /* stylelint-enable selector-no-type */

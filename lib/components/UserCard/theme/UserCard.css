@@ -1,5 +1,6 @@
 .root {
   background-color: map(UserCard, backgroundColor);
+  font-family: map(UserCard, fontFamily);
 }
 
 .profile {

@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "0.5.0",
+  "version": "0.6.1",
   "dependencies": {
     "abbrev": {
       "version": "1.0.7",
@@ -1856,9 +1856,9 @@
       "resolved": "https://registry.npmjs.org/code-point-at/-/code-point-at-1.0.0.tgz"
     },
     "codemirror": {
-      "version": "5.12.0",
-      "from": "codemirror@>=5.12.0 <5.13.0",
-      "resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.12.0.tgz"
+      "version": "5.14.2",
+      "from": "codemirror@>=5.14.2 <5.15.0",
+      "resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.14.2.tgz"
     },
     "color": {
       "version": "0.11.1",
@@ -4063,11 +4063,6 @@
       "from": "jodid25519@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/jodid25519/-/jodid25519-1.0.2.tgz"
     },
-    "jquery": {
-      "version": "2.2.3",
-      "from": "jquery@*",
-      "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.3.tgz"
-    },
     "js-base64": {
       "version": "2.1.9",
       "from": "js-base64@>=2.1.9 <3.0.0",
@@ -5548,6 +5543,11 @@
           "version": "0.4.0",
           "from": "fbjs@0.4.0",
           "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.4.0.tgz"
+        },
+        "jquery": {
+          "version": "2.2.3",
+          "from": "jquery@latest",
+          "resolved": "https://registry.npmjs.org/jquery/-/jquery-2.2.3.tgz"
         },
         "whatwg-fetch": {
           "version": "0.9.0",

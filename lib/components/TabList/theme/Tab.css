@@ -1,5 +1,6 @@
 .root {
   font-size: map(Tab, fontSize);
+  font-family: map(Tab, fontFamily);
 }
 
 .simple {

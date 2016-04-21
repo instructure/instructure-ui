@@ -1,5 +1,8 @@
 .root {
 
+  &:focus {
+    outline: none;
+  }
 }
 
 /* stylelint-disable selector-no-type */

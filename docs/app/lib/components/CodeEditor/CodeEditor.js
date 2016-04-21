@@ -10,24 +10,17 @@ const UPDATE_DELAY = 200
 export default class CodeEditor extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
+    mode: PropTypes.string,
     readOnly: PropTypes.bool,
-    onChange: PropTypes.func
+    onChange: PropTypes.func,
+    style: PropTypes.oneOf(['playground', 'standalone'])
   };
 
   static defaultProps = {
     readOnly: false,
-    onChange: function () {}
-  };
-
-  static codemirrorOptions = {
     mode: 'jsx',
-    theme: 'zenburn',
-    lineNumbers: true,
-    lineWrapping: true,
-    smartIndent: true,
-    matchBrackets: true,
-    viewportMargin: Infinity,
-    readOnly: false
+    onChange: function () {},
+    style: 'standalone'
   };
 
   constructor () {
@@ -44,8 +37,23 @@ export default class CodeEditor extends Component {
   }
 
   render () {
+    const options = {
+      mode: this.props.mode,
+      theme: 'zenburn',
+      lineNumbers: false,
+      lineWrapping: true,
+      matchBrackets: true,
+      viewportMargin: Infinity,
+      readOnly: this.props.readOnly ? 'nocursor' : false,
+      tabindex: -1// ,
+      // extraKeys: {
+      //   Tab: false
+      // }
+    }
+
     return (
-      <CodeMirrorEditor value={this.props.code} onChange={this._handleChange} options={CodeEditor.codemirrorOptions}/>
+      <CodeMirrorEditor
+        style={this.props.style} value={this.props.code} onChange={this._handleChange} options={options}/>
     )
   }
 }

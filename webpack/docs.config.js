@@ -26,6 +26,11 @@ module.exports = require('./util/generate-config')({
     filename: '[name].js',
     libraryTarget: 'umd'
   },
+  resolve: {
+    alias: {
+      'instructure-ui': 'lib/index.js'
+    }
+  },
   entry: entry,
   plugins: [
     new HtmlWebpackPlugin({

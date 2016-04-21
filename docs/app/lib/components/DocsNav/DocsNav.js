@@ -3,6 +3,8 @@ import classnames from 'classnames'
 
 import styles from './DocsNav.css'
 
+import { TextInput, Link, ScreenReaderContent } from 'instructure-ui'
+
 export default class DocsNav extends Component {
   static propTypes = {
     components: PropTypes.array,
@@ -28,14 +30,17 @@ export default class DocsNav extends Component {
     const components = this.props.components
       .filter((component) => new RegExp(this.state.query, 'i').test(component.name))
       .map((component) => {
+        const isSelected = component.name === this.props.selected
         const classes = {
           [styles.link]: true,
-          [styles.selectedLink]: component.name === this.props.selected
+          [styles.selectedLink]: isSelected
         }
         return (
-          <a key={component.name} className={classnames(classes)} href={`#${component.name}`}>
-            {component.name}
-          </a>
+          <div key={component.name} className={classnames(classes)}>
+            <Link theme={{textColor: isSelected ? '#239EBD' : '#333'}} href={`#${component.name}`}>
+              {component.name}
+            </Link>
+          </div>
         )
       })
 
@@ -43,28 +48,27 @@ export default class DocsNav extends Component {
       .filter((doc) => doc.name !== 'index')
       .filter((doc) => new RegExp(this.state.query, 'i').test(doc.title))
       .map((doc) => {
+        const isSelected = doc.name === this.props.selected
         const classes = {
           [styles.link]: true,
-          [styles.selectedLink]: doc.name === this.props.selected
+          [styles.selectedLink]: isSelected
         }
         return (
-          <a key={doc.name} className={classnames(classes)} href={`#${doc.name}`}>
-            {doc.title}
-          </a>
+          <div key={doc.name} className={classnames(classes)}>
+            <Link theme={{textColor: isSelected ? '#239EBD' : '#333'}} href={`#${doc.name}`}>
+              {doc.title}
+            </Link>
+          </div>
         )
       })
 
     return (
       <div className={styles.root}>
-        <h1 className={styles.title} role="banner">
-          InstUI
-        </h1>
         <div role="search">
-          <input
-            placeholder="Search"
+          <TextInput
+            placeholder="Filter your search..."
             onChange={this.handleSearchChange}
-            className={styles.search}
-            aria-label="Search Documentation"
+            label={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
           />
         </div>
         <div role="navigation">

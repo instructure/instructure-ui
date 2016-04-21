@@ -94,15 +94,18 @@
 .link {
   background: transparent;
   color: map(Button, linkTextColor);
-  border-color: transparent;
+  border-color: map(Button, linkBorderColor);
   text-decoration: map(Button, linkTextDecoration);
 
   @mixin button-focus-variant
     map(Button, linkFocusOutlineColor);
 
-  &:focus,
-  &:active,
   &:hover {
     text-decoration: map(Button, linkTextDecorationHover);
+  }
+
+  &:focus,
+  &:active {
+    text-decoration: map(Button, linkTextDecorationFocus);
   }
 }

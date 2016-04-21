@@ -2,9 +2,12 @@ import React, {Component} from 'react'
 import {render} from 'react-dom'
 
 import ComponentDoc from './components/ComponentDoc'
+import DocsHeader from './components/DocsHeader'
 import DocsNav from './components/DocsNav'
 import HtmlDoc from './components/HtmlDoc'
 import DocsSection from './components/DocsSection'
+
+import { ScreenReaderContent } from 'instructure-ui'
 
 import styles from './docs.css'
 
@@ -23,6 +26,10 @@ class DocsApp extends Component {
     this.setState({
       key: window.location.hash.slice(1) || 'index'
     })
+  };
+
+  handleMenuToggle = () => {
+
   };
 
   componentDidMount () {
@@ -76,11 +83,18 @@ class DocsApp extends Component {
   render () {
     return (
       <div className={styles.root}>
-        <div className={styles.nav}>
-          <DocsNav selected={this.state.key} components={componentsList} documents={documentsList} />
-        </div>
+        <DocsHeader />
+
+        <ScreenReaderContent>
+          <a href="#nav">Skip to navigation</a>
+        </ScreenReaderContent>
+
         <div className={styles.main} role="main">
           {this.renderContent(this.state.key)}
+        </div>
+
+        <div className={styles.nav} id="nav">
+          <DocsNav selected={this.state.key} components={componentsList} documents={documentsList} />
         </div>
       </div>
     )

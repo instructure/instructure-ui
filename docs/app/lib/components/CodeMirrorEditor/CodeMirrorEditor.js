@@ -15,12 +15,14 @@ export default class CodeMirrorEditor extends Component {
     onFocusChange: PropTypes.func,
     options: PropTypes.object,
     path: PropTypes.string,
-    value: PropTypes.string
+    value: PropTypes.string,
+    style: PropTypes.oneOf(['playground', 'standalone'])
   };
 
   static defaultProps = {
     onChange: function () {},
-    onFocusChange: function () {}
+    onFocusChange: function () {},
+    style: 'standalone'
   };
 
   constructor (props) {
@@ -86,6 +88,7 @@ export default class CodeMirrorEditor extends Component {
   render () {
     const classes = {
       [styles.root]:           true,
+      [styles[this.props.style]]: true,
       [styles['is-focused']]:  this.state.isFocused
     }
 

@@ -1,3 +1,7 @@
+.root {
+  font-family: map(MetricsListItem, fontFamily);
+}
+
 .label {
   color: map(MetricsListItem, labelColor);
 }

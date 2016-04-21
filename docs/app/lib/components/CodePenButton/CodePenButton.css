@@ -1,18 +1,8 @@
+.root {
+  display: inline-block;
+}
 
-.button {
-  appearance: none;
-  border: none;
-  box-sizing: border-box;
-  background-color: transparent;
-  width: 16px;
-  height: 16px;
-  color: #ccc;
-  padding: 0;
-  margin: 4px;
-
-  &:focus,
-  &:hover {
-    outline: none;
-    color: #0091ad;
-  }
+.icon {
+  display: inline-block;
+  vertical-align: middle;
 }

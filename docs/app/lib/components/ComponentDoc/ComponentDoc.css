@@ -5,39 +5,38 @@
 }
 
 .heading {
-  margin-bottom: 2rem;
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 400;
+}
 
-  /* stylelint-disable selector-no-type */
+.sectionHeading {
+  margin: 2.5rem 0 2rem 0;
+  padding: 0;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
 
-  h2 {
-    margin: 0;
-    padding: 0;
-    font-size: 1.75rem;
-    font-weight: 600;
-  }
-
-  /* stylelint-enable selector-no-type */
+.sectionSubHeading {
+  margin: 2rem 0 1rem 0;
+  padding: 0;
+  font-size: 1rem;
+  font-weight: 300;
 }
 
 .path {
-  margin: 0;
-  font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
-  font-size: 0.75rem;
+  margin: 0 0 2rem 0;
+  font-size: 0.875rem;
 }
 
 .description {
   /* stylelint-disable selector-no-type */
 
-  p {
-    padding-left: 1rem;
-    border-left: 3px solid #0091ad;
-    line-height: 1.2;
-  }
-
   code {
-    font-size: 0.75rem;
+    font-size: 90%;
+    padding: 2px 4px;
   }
 
   /* stylelint-enable selector-no-type */
 }
-

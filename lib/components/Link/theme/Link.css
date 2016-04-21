@@ -1,6 +1,7 @@
 .root {
   color: map(Link, textColor);
   text-decoration: map(Link, textDecoration);
+  font-family: map(Link, fontFamily);
 
   &:focus,
   &:hover {

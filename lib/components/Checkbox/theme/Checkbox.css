@@ -3,6 +3,7 @@
   .text {
     color: map(Checkbox, labelTextColor);
     line-height: map(Checkbox, labelLineHeight);
+    font-family: map(Checkbox, labelFontFamily);
   }
 
   .facade {

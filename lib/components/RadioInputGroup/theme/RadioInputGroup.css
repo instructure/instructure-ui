@@ -1,6 +1,7 @@
 .label {
   color: map(RadioInputGroup, labelTextColor);
   font-weight: map(RadioInputGroup, labelFontWeight);
+  font-family: map(RadioInputGroup, labelFontFamily);
 }
 
 .toggle {

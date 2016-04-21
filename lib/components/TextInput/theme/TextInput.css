@@ -1,5 +1,8 @@
-.input {
+.root {
   font-family: map(TextInput, fontFamily);
+}
+
+.input {
   color: map(TextInput, textColor);
   background-color: map(TextInput, backgroundColor);
 

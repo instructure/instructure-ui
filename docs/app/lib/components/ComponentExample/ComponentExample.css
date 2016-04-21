@@ -13,12 +13,14 @@
 
   body {
     height: 100%;
+    box-sizing: border-box;
     margin: 0;
     background-color: #fff;
     background-image: linear-gradient(var(--gradientCheckerboard)), linear-gradient(var(--gradientCheckerboard));
     background-position: 0 0, 0.5rem 0.5rem;
     background-size: 1rem 1rem;
-    font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+    border: 1px solid #eee;
+    border-radius: 3px;
   }
 }
 

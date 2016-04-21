@@ -1,5 +1,9 @@
 @import "../RangeInput.mixins.css";
 
+.root {
+  font-family: map(RangeInput, fontFamily);
+}
+
 .input {
   @mixin handle-selector {
     background: map(RangeInput, handleColor);

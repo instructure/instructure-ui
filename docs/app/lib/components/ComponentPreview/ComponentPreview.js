@@ -9,14 +9,18 @@ import styles from './ComponentPreview.css'
 export default class ComponentPreview extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired
+    code: PropTypes.string.isRequired,
+    isFullScreen: PropTypes.bool
+  };
+
+  static defaultProps = {
+    isFullScreen: false
   };
 
   constructor (props) {
     super()
     this.state = {
-      frameIsLoaded: false,
-      isFullScreen: false
+      frameIsLoaded: false
     }
     this.frameName = 'ComponentPreviewExample_' + shortid.generate()
   }
@@ -30,12 +34,6 @@ export default class ComponentPreview extends Component {
       this.renderPreview()
     }
   }
-
-  handleToggle = () => {
-    this.setState({
-      isFullScreen: !this.state.isFullScreen
-    })
-  };
 
   handleMessage = (message) => {
     if (message && message.isMounted) {
@@ -63,19 +61,17 @@ export default class ComponentPreview extends Component {
   }
 
   render () {
-    const buttonText = this.state.isFullScreen ? 'Minimize' : 'Full Screen'
     const classes = {
-      [styles['is-fullscreen']]:  this.state.isFullScreen
+      [styles.root]: true,
+      [styles['is-fullscreen']]:  this.props.isFullScreen
     }
-    // TODO: use a modal here
+    // TODO: open example in new page/tab
+
     return (
       <WindowMessageListener
         sourceName={this.frameName}
         onReceiveMessage={this.handleMessage}
         className={classnames(classes)}>
-        <button className={styles.button} type="button" onClick={this.handleToggle}>
-          {buttonText}
-        </button>
         <iframe ref="frame"
           className={styles.frame}
           name={this.frameName}
