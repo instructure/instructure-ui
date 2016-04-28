@@ -9,6 +9,8 @@ import { Link, ScreenReaderContent } from 'instructure-ui'
 
 import styles from './ComponentDoc.css'
 
+import config from 'config!'
+
 export default class ComponentDoc extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -27,11 +29,13 @@ export default class ComponentDoc extends Component {
       path
     } = this.props
 
-    const packageName = 'instructure-ui' // TODO: get this from config
-    const libraryName = 'InstUI' // TODO: get this from config
+    const { library } = config
+
+    const packageName = library.packageName
+    const libraryName = library.name
     const props = doc.props && <ComponentProps props={doc.props} />
     const description = doc.description && <ComponentDescription name={name} description={doc.description} />
-    const githubRoot = 'https://github.com/instructure/instructure-ui/tree/master/' // TODO: get this from config
+    const githubRoot = library.projectUrl + '/tree/master/'
 
     const componentCSSPath = packageName + '/dist/components/' + name + '.css'
 

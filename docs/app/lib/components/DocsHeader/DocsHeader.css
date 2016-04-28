@@ -1,5 +1,5 @@
 .root {
-
+  color: #fff;
   height: 132px;
   display: flex;
   flex-direction: row;
@@ -19,16 +19,23 @@
   margin: 0;
 }
 
+.banner {
+  padding: 0 0.75rem;
+  flex: 1;
+}
+
 .heading {
   font-size: 2.8rem;
-  color: #fff;
-  padding-left: 12px;
   margin: 0;
-  flex: 1;
+  display: inline;
+}
+
+.version {
+  display: inline;
+  padding-left: 1rem;
 }
 
 .githubLink {
   color: white;
-  align-self: flex-start;
   margin: 1rem;
 }

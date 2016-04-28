@@ -14,7 +14,9 @@ function getConfig () {
       name: 'InstUI',
       main: pkg.main,
       prefix: 'ic',
-      version: pkg.version
+      version: pkg.version,
+      projectUrl: pkg.homepage,
+      docsUrl: 'http://instructure.github.io/instructure-ui/'
     },
     app: {
       title: 'Instructure UI Component Library'

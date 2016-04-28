@@ -2,14 +2,22 @@ import React, {Component} from 'react'
 
 import styles from './DocsHeader.css'
 
+import config from 'config!'
+
 export default class DocsHeader extends Component {
   render () {
+    const { library } = config
     return (
       <div className={styles.root}>
-        <h1 className={styles.heading} role="banner">
-          InstUI
-        </h1>
-        <a href="https://github.com/instructure/instructure-ui" className={styles.githubLink}>
+        <div className={styles.banner} role="banner">
+          <h1 className={styles.heading}>
+            {library.name}
+          </h1>
+          <div className={styles.version}>
+            v {library.version}
+          </div>
+        </div>
+        <a href={library.projectUrl} className={styles.githubLink}>
           <svg aria-hidden="true" height="28" version="1.1" viewBox="0 0 16 16" width="28" fill="currentColor">
             <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59 0.4 0.07 0.55-0.17
               0.55-0.38 0-0.19-0.01-0.82-0.01-1.49-2.01
