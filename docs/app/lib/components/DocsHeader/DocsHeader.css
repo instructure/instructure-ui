@@ -1,15 +1,15 @@
 .root {
-  font-size: 2.8rem;
+
   height: 132px;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   border-bottom: 1px solid #979797;
   background: #1bb7b6 url("./bgd_header.png") no-repeat;
   background-size: cover;
   box-sizing: border-box;
   justify-content: center;
-  color: #fff;
-  padding-left: 12px;
+  align-items: center;
+  align-content: space-between;
   width: 100%;
   position: fixed;
   top: 0;
@@ -17,4 +17,18 @@
   left: 0;
   z-index: 999; /* has to be less than the full screen mode of ComponentPlayground/ComponentPreview */
   margin: 0;
+}
+
+.heading {
+  font-size: 2.8rem;
+  color: #fff;
+  padding-left: 12px;
+  margin: 0;
+  flex: 1;
+}
+
+.githubLink {
+  color: white;
+  align-self: flex-start;
+  margin: 1rem;
 }
