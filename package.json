@@ -93,6 +93,7 @@
     "react-addons-test-utils": "~15.0.1",
     "react-docgen": "~2.7.0",
     "react-drill": "~2.1.1",
+    "react-overlays": "~0.6.3",
     "script-loader": "~0.6.1",
     "sinon": "~1.17.3",
     "sinon-chai": "~2.8.0",

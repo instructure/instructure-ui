@@ -1,20 +1,20 @@
-import React, { PropTypes } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Button as BaseButton } from 'instructure-ui'
 
-const Button = function (props) {
-  const color = '#239EBD'
-  const theme = {
-    linkTextColor: color,
-    linkFocusOutlineColor: color,
-    ...props.theme
+export default class Button extends Component {
+  static propTypes = {
+    theme: PropTypes.object
+  };
+
+  render () {
+    const color = '#239EBD'
+    const theme = {
+      linkTextColor: color,
+      linkFocusOutlineColor: color,
+      ...this.props.theme
+    }
+    return (
+      <BaseButton style="link" theme={theme} {...this.props} />
+    )
   }
-  return (
-    <BaseButton style="link" theme={theme} {...props} />
-  )
 }
-
-Button.propTypes = {
-  theme: PropTypes.object
-}
-
-export default Button

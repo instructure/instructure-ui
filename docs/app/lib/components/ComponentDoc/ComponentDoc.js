@@ -5,7 +5,7 @@ import ComponentProps from '../ComponentProps'
 
 import CodeEditor from '../CodeEditor'
 
-import { Link, ScreenReaderContent } from 'instructure-ui'
+import { Link } from 'instructure-ui'
 
 import styles from './ComponentDoc.css'
 
@@ -71,14 +71,14 @@ export default class ComponentDoc extends Component {
         <h2 className={styles.heading}>
           {name}
         </h2>
-        <ScreenReaderContent>
-          <a href={'#' + name + 'Properties'}>Skip to properties</a>
-        </ScreenReaderContent>
         <div className={styles.path}>
           <Link theme={{textColor: '#239ebd'}} href={githubRoot + path}>
             {path}
           </Link>
         </div>
+        <h3 className={styles.sectionHeading} id={name + 'Examples'}>
+          Examples
+        </h3>
         <div className={styles.description}>
           {description}
         </div>

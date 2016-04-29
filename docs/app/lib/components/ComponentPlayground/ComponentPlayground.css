@@ -9,13 +9,6 @@
   vertical-align: middle;
 }
 
-.is-fullscreen .fullscreenButton {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 1000;
-}
-
 .actions {
   display: flex;
   justify-content: flex-start;
@@ -31,17 +24,27 @@
 }
 
 .editor {
+  border-radius: 3px;
+}
+
+.editor--enter,
+.editor--leave.editor--leave-active {
   /* trigger hardware acceleration for smoother animation */
   transform: translate3d(0, 0, 0);
-  transition: max-height 0.8s;
-  border-radius: 3px;
-  overflow: hidden;
+  max-height: 0;
+  overflow: auto;
+
 }
 
 .editor--enter {
-  max-height: 0;
+  transition: max-height 1s ease-in-out;
 }
 
+.editor--leave {
+  transition: max-height 0.3s;
+}
+
+.editor--leave,
 .editor--enter.editor--enter-active {
-  max-height: 999px;
+  max-height: 1400px;
 }

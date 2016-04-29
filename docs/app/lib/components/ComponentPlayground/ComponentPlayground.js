@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReactDOM from 'react-dom'
 import CodeEditor from '../CodeEditor'
 import ComponentPreview from '../ComponentPreview'
 import CodePenButton from '../CodePenButton'
@@ -33,15 +34,21 @@ export default class ComponentPlayground extends Component {
     }
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.isFullScreen === true && this.state.isFullScreen === false) {
+      ReactDOM.findDOMNode(this.refs.fullScreenButton).focus()
+    }
+  }
+
   handleCodeToggle = () => {
     this.setState({
       showCode: !this.state.showCode
     })
   };
 
-  handleFullScreenToggle = () => {
+  handleMaximize = () => {
     this.setState({
-      isFullScreen: !this.state.isFullScreen
+      isFullScreen: true
     })
   };
 
@@ -51,50 +58,11 @@ export default class ComponentPlayground extends Component {
     })
   };
 
-  handleKeyDown = (e) => {
-    if (this.state.isFullScreen && e.keyCode === 27) {
-      this.setState({
-        isFullScreen: false
-      })
-    }
+  handleMinimize = () => {
+    this.setState({
+      isFullScreen: false
+    })
   };
-
-  renderFullScreenIcon () {
-    if (this.state.isFullScreen) {
-      return (
-        <svg className={styles.icon}
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.5em" height="1.5em">
-          <path fill="none" d="M0 0h24v24H0z" />
-          <g fill="currentColor">
-            <path d="M2 2h15v4h2V2c0-1.102-.897-2-2-2H2C.897 0 0 .898 0 2v15c0 1.103.897 2 2 2h4v-2H2V2z" />
-            <path d="M10 12h6v2h-6z" />
-            <path d="M21.207 19.793l-3.322-3.322C18.585 15.49 19 14.295 19
-            13c0-3.31-2.69-6-6-6s-6 2.69-6 6 2.69 6 6 6c1.294 0 2.49-.416
-            3.47-1.115l3.323 3.32 1.414-1.412zM9 13c0-2.206 1.794-4 4-4s4 1.794 4 4-1.794 4-4 4-4-1.794-4-4z" />
-          </g>
-        </svg>
-      )
-    } else {
-      return (
-        <svg className={styles.icon}
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="1.5em"
-          height="1.5em">
-          <path fill="none" d="M0 0h24v24H0z" />
-          <g fill="currentColor">
-            <path d="M6 19H2c-1.103 0-2-.897-2-2V2C0 .898.897 0 2 0h15c1.103 0 2 .898 2 2v4h-2V2H2v15h4v2z" />
-            <path d="M16 14v-2h-2v-2h-2v2h-2v2h2v2h2v-2" />
-            <path d="M21.207 19.793l-3.322-3.322C18.585 15.49 19 14.295
-            19 13c0-3.31-2.69-6-6-6s-6 2.69-6 6 2.69 6 6 6c1.294 0 2.49-.416
-            3.47-1.115l3.323 3.32 1.414-1.412zM9 13c0-2.206 1.794-4 4-4s4 1.794 4 4-1.794 4-4 4-4-1.794-4-4z" />
-          </g>
-        </svg>
-      )
-    }
-  }
 
   renderEditor () {
     const { code } = this.state
@@ -126,16 +94,18 @@ export default class ComponentPlayground extends Component {
 
   render () {
     const { code } = this.state
-    const fullScreenButtonText = this.state.isFullScreen ? 'Minimize' : 'Full Screen'
     const classes = {
-      [styles.root]: true,
-      [styles['is-fullscreen']]:  this.state.isFullScreen
+      [styles.root]: true
     }
 
     return (
-      <div className={classnames(classes)} onKeyDown={this.handleKeyDown}>
+      <div className={classnames(classes)}>
 
-        <ComponentPreview code={code} name={this.props.name} isFullScreen={this.state.isFullScreen} />
+        <ComponentPreview
+          code={code}
+          onMinimize={this.handleMinimize}
+          name={this.props.name}
+          isFullScreen={this.state.isFullScreen} />
 
         <ReactCSSTransitionGroup
           transitionName={{
@@ -145,16 +115,29 @@ export default class ComponentPlayground extends Component {
             leaveActive: styles['editor--leave-active']
           }}
           component="div"
-          transitionLeave={false}
-          transitionEnterTimeout={300}>
+          transitionLeaveTimeout={300}
+          transitionEnterTimeout={1000}>
           {this.state.showCode && this.renderEditor()}
         </ReactCSSTransitionGroup>
 
         <div className={styles.actions}>
           <span className={styles.fullscreenButton}>
-            <Button onClick={this.handleFullScreenToggle}>
-              <ScreenReaderContent>{fullScreenButtonText}</ScreenReaderContent>
-              {this.renderFullScreenIcon()}
+            <Button onClick={this.handleMaximize} ref="fullScreenButton">
+              <ScreenReaderContent>Full Screen</ScreenReaderContent>
+              <svg className={styles.icon}
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                width="1.5em"
+                height="1.5em">
+                <path fill="none" d="M0 0h24v24H0z" />
+                <g fill="currentColor">
+                  <path d="M6 19H2c-1.103 0-2-.897-2-2V2C0 .898.897 0 2 0h15c1.103 0 2 .898 2 2v4h-2V2H2v15h4v2z" />
+                  <path d="M16 14v-2h-2v-2h-2v2h-2v2h2v2h2v-2" />
+                  <path d="M21.207 19.793l-3.322-3.322C18.585 15.49 19 14.295
+                  19 13c0-3.31-2.69-6-6-6s-6 2.69-6 6 2.69 6 6 6c1.294 0 2.49-.416
+                  3.47-1.115l3.323 3.32 1.414-1.412zM9 13c0-2.206 1.794-4 4-4s4 1.794 4 4-1.794 4-4 4-4-1.794-4-4z" />
+                </g>
+              </svg>
             </Button>
           </span>
 

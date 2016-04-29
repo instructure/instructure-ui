@@ -66,9 +66,9 @@ export default class DocsNav extends Component {
       <div className={styles.root}>
         <div role="search">
           <TextInput
-            placeholder="Filter..."
+            placeholder="Find..."
             onChange={this.handleSearchChange}
-            label={<ScreenReaderContent>Filter Documentation</ScreenReaderContent>}
+            label={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
           />
         </div>
         <div role="navigation">

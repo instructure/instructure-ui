@@ -1,11 +1,23 @@
+:root {
+  --foregroundColor: #919191;
+  --backgroundColor: #fff;
+
+  /* this changes the colors for closing nav menu icon and borders */
+
+}
+
 :global {
 
   /* stylelint-disable selector-no-type */
 
+  html,
   body {
     margin: 0;
     font-family: "Open Sans", sans-serif;
     background-color: #fff;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
   }
 
   code {
@@ -24,36 +36,175 @@
 }
 
 .root {
-  position: relative;
+  margin: 0;
+  width: 100%;
   height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
-.nav {
-  /* should be same as .main margin-left */
-  width: 14rem;
-  margin-top: 132px;
-  padding-bottom: 2rem;
+.sidebar {
+  box-sizing: border-box;
+  height: calc(100% - 8.25rem);
+  width: 16.5rem;
   position: fixed;
-  top: 0;
-  bottom: 0;
+  z-index: 997;
   left: 0;
-  z-index: 2;
+  top: 8.25rem; /* height of DocsHeader */
+}
+
+.sidebar .nav {
+  box-sizing: border-box;
+  height: 100%;
+  width: 14rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1px solid var(--foregroundColor);
+}
+
+.container {
+  left: -14rem;
+  height: 100vh;
+  padding-left: 16.5rem;
+  transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
+  transform: translate3d(-14rem, 0, 0);
+}
+
+.header {
+  position: fixed;
+  width: 100%;
+  z-index: 998; /* has to be less than the full screen mode of ComponentPlayground/ComponentPreview */
+}
+
+.content {
+  box-sizing: border-box;
+  margin: 0 -14rem 0 0;
+  height: 100vh;
+  padding: 1.5rem;
   overflow-y: scroll;
   overflow-x: hidden;
+  transition: margin 0.3s ease-in-out;
 }
 
 .main {
-  margin-left: 14rem;
+  max-width: 67rem;
+  margin: 0 auto;
 }
 
-.heading {
-  background-color: #0091ad;
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 100;
-  padding: 2rem 4rem;
-  margin: 0;
-  text-rendering: optimizeLegibility;
-  letter-spacing: 1px;
+.menuToggle {
+  cursor: pointer;
+  background: var(--backgroundColor);
+  border-right: 1px solid var(--foregroundColor);
+  border-left: 2px solid #fff;
+  border-bottom: 1px solid var(--foregroundColor);
+  border-bottom-right-radius: 3px;
+  position: absolute;
+  padding: 0.5rem 0.8rem;
+  top: 0;
+  right: -8px;
+  font-size: 0.6rem;
 }
 
+.footer {
+  margin-top: 3rem;
+  padding: 2rem;
+  font-size: 0.75rem;
+  color: #666;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 0 0.25rem;
+}
+
+.hamburger {
+  cursor: pointer;
+  position: relative;
+  padding: 0.625em 1.5em 1em 0;
+  color: transparent;
+  background: transparent;
+  border: none;
+  width: 1.5em;
+  height: 1.5em;
+  line-height: 1.5em;
+  font-size: 1.5em;
+  text-indent: 1.5em;
+  box-sizing: border-box;
+
+  &:focus,
+  &:active {
+    outline: none;
+  }
+}
+
+.hamburger .line,
+.hamburger .line::before,
+.hamburger .line::after {
+  background: var(--foregroundColor);
+  cursor: pointer;
+  border-radius: 3px;
+  height: 0.25em;
+  line-height: 0.25em;
+  width: 1.5em;
+  position: absolute;
+  display: block;
+}
+
+.hamburger .line::before,
+.hamburger .line::after {
+  content: "";
+}
+
+.hamburger .line::before {
+  top: -0.625em;
+}
+
+.hamburger .line::after {
+  bottom: -0.625em;
+}
+
+.hamburger .line,
+.hamburger .line::before,
+.hamburger .line::after {
+  transition: all 500ms ease-in-out;
+}
+
+@media only screen and (max-width: 48rem) {
+
+  .sidebar {
+    top: 5rem;
+    height: calc(100% - 5rem);
+  }
+}
+
+.show-menu {
+
+  .container {
+    left: 0;
+    transform: translate3d(0, 0, 0);
+    transition: transform 500ms ease;
+  }
+
+  .content {
+    margin-right: 0;
+  }
+
+  .hamburger .line {
+    background-color: transparent;
+  }
+
+  .hamburger .line::before,
+  .hamburger .line::after {
+    top: 0;
+  }
+
+  .hamburger .line::before {
+    transform: rotate(45deg);
+  }
+
+  .hamburger .line::after {
+    transform: rotate(-45deg);
+  }
+
+}

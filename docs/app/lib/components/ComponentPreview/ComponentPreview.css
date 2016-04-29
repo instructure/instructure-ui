@@ -10,7 +10,7 @@
   resize: both;
 }
 
-.is-fullscreen .frame {
+.modal {
   width: 100vw;
   height: 100vh;
   position: fixed;
@@ -19,5 +19,25 @@
   bottom: 0;
   left: 0;
   z-index: 999;
+  background: rgba(255, 255, 255, 0.60);
+}
+
+.modal .frame {
+  width: 100vw;
+  height: 100vh;
   resize: none;
+}
+
+.button {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255, 255, 255, 0.60);
+  border-radius: 3px;
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: middle;
 }

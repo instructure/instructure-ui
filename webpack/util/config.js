@@ -16,6 +16,7 @@ function getConfig () {
       prefix: 'ic',
       version: pkg.version,
       projectUrl: pkg.homepage,
+      author: pkg.author,
       docsUrl: 'http://instructure.github.io/instructure-ui/'
     },
     app: {

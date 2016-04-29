@@ -14,7 +14,7 @@ export default class DocsHeader extends Component {
             {library.name}
           </h1>
           <div className={styles.version}>
-            v {library.version}
+            v{library.version}
           </div>
         </div>
         <a href={library.projectUrl} className={styles.githubLink}>

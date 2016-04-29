@@ -1,13 +1,12 @@
 .root {
   color: #333;
-  font-size: 0.75rem;
   background: #fff;
-  padding-left: 12px;
+  padding: 0.75rem;
 }
 
 .header {
   color: #239ebd;
-  font-size: 0.8rem;
+  font-size: 0.875rem;
   padding: 1rem 0.5rem;
   text-transform: uppercase;
   font-weight: 100;
@@ -19,7 +18,7 @@
   display: flex;
   align-items: center;
 
-  font-size: 0.8rem;
+  font-size: 0.875rem;
 
   transition: all 0.15s ease;
 
@@ -31,4 +30,12 @@
 .selectedLink {
   color: #239ebd;
   font-weight: 700;
+}
+
+@media only screen and (max-width: 48rem) {
+
+  .link,
+  .header {
+    font-size: 1rem;
+  }
 }

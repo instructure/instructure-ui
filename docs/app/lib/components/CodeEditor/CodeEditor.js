@@ -53,7 +53,7 @@ export default class CodeEditor extends Component {
 
     return (
       <CodeMirrorEditor
-        style={this.props.style} value={this.props.code} onChange={this._handleChange} options={options}/>
+        style={this.props.style} value={this.props.code} onChange={this._handleChange} options={options} />
     )
   }
 }
