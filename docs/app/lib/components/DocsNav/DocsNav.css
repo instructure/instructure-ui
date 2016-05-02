@@ -5,16 +5,21 @@
 }
 
 .header {
-  color: #239ebd;
+  color: #25a19f;
   font-size: 0.875rem;
-  padding: 1rem 0.5rem;
+  padding: 1rem;
   text-transform: uppercase;
   font-weight: 100;
 }
 
+.search {
+  text-align: center;
+  margin: 1rem;
+}
+
 .link {
   margin: 0;
-  padding: 0.5rem 1rem 0.5rem 1rem;
+  padding: 0.8rem 1rem;
   display: flex;
   align-items: center;
 
@@ -28,7 +33,7 @@
 }
 
 .selectedLink {
-  color: #239ebd;
+  color: #25a19f;
   font-weight: 700;
 }
 

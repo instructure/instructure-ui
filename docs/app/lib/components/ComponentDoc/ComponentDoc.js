@@ -72,13 +72,10 @@ export default class ComponentDoc extends Component {
           {name}
         </h2>
         <div className={styles.path}>
-          <Link theme={{textColor: '#239ebd'}} href={githubRoot + path}>
+          <Link theme={{textColor: '#25a19f'}} href={githubRoot + path}>
             {path}
           </Link>
         </div>
-        <h3 className={styles.sectionHeading} id={name + 'Examples'}>
-          Examples
-        </h3>
         <div className={styles.description}>
           {description}
         </div>

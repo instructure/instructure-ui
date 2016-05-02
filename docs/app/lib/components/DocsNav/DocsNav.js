@@ -37,7 +37,7 @@ export default class DocsNav extends Component {
         }
         return (
           <div key={component.name} className={classnames(classes)}>
-            <Link theme={{textColor: isSelected ? '#239EBD' : '#333'}} href={`#${component.name}`}>
+            <Link theme={{textColor: isSelected ? '#25a19f' : '#333'}} href={`#${component.name}`}>
               {component.name}
             </Link>
           </div>
@@ -55,7 +55,7 @@ export default class DocsNav extends Component {
         }
         return (
           <div key={doc.name} className={classnames(classes)}>
-            <Link theme={{textColor: isSelected ? '#239EBD' : '#333'}} href={`#${doc.name}`}>
+            <Link theme={{textColor: isSelected ? '#25a19f' : '#333'}} href={`#${doc.name}`}>
               {doc.title}
             </Link>
           </div>
@@ -64,7 +64,7 @@ export default class DocsNav extends Component {
 
     return (
       <div className={styles.root}>
-        <div role="search">
+        <div role="search" className={styles.search}>
           <TextInput
             placeholder="Find..."
             onChange={this.handleSearchChange}

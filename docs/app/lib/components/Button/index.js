@@ -7,7 +7,7 @@ export default class Button extends Component {
   };
 
   render () {
-    const color = '#239EBD'
+    const color = '#25a19f'
     const theme = {
       linkTextColor: color,
       linkFocusOutlineColor: color,
