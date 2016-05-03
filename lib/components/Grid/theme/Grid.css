@@ -1,31 +1,21 @@
 @define-mixin start-grid {
-
   display: flex;
+  flex-flow: column nowrap;
 
-  &.center {
-    justify-content: center;
+  &.colSpacingSmall {
+    padding-left: calc(map(Grid, spacingSmall) / 2);
+    padding-right: calc(map(Grid, spacingSmall) / 2);
   }
 
-  &.right {
-    justify-content: flex-end;
+  &.colSpacingMedium {
+    padding-left: calc(map(Grid, spacingMedium) / 2);
+    padding-right: calc(map(Grid, spacingMedium) / 2);
   }
 
-  &.spaceAround {
-    justify-content: space-around;
+  &.colSpacingLarge {
+    padding-left: calc(map(Grid, spacingLarge) / 2);
+    padding-right: calc(map(Grid, spacingLarge) / 2);
   }
-
-  &.spaceBetween {
-    justify-content: space-between;
-  }
-
-  &.vAlignCenter {
-    align-items: center;
-  }
-
-  &.bottom {
-    align-items: flex-end;
-  }
-
 }
 
 .startAtPhone {

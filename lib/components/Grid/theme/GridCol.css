@@ -1,246 +1,158 @@
-@define-mixin start-grid {
+@define-mixin start-grid-col {
   flex: 1;
   margin-bottom: 0;
 
-  &.gutterSmall,
-  &.gutterMedium,
-  &.gutterLarge {
+  &.rowSpacingSmall,
+  &.rowSpacingMedium,
+  &.rowSpacingLarge {
     margin-bottom: 0;
   }
 
-  &.gutterSmall {
-    padding-left: map(GridCol, spacingSmall);
-    padding-right: map(GridCol, spacingSmall);
+  &.colSpacingSmall {
+    padding-right: calc(map(GridCol, spacingSmall) / 2);
+    padding-left: calc(map(GridCol, spacingSmall) / 2);
   }
 
-  &.gutterMedium {
-    padding-left: map(GridCol, spacingMedium);
-    padding-right: map(GridCol, spacingMedium);
+  &.colSpacingMedium {
+    padding-right: calc(map(GridCol, spacingMedium) / 2);
+    padding-left: calc(map(GridCol, spacingMedium) / 2);
   }
 
-  &.gutterLarge {
-    padding-left: map(GridCol, spacingLarge);
-    padding-right: map(GridCol, spacingLarge);
+  &.colSpacingLarge {
+    padding-right: calc(map(GridCol, spacingLarge) / 2);
+    padding-left: calc(map(GridCol, spacingLarge) / 2);
   }
 
+  &.top {
+    align-self: flex-start;
+  }
+
+  &.middle {
+    align-self: center;
+  }
+
+  &.bottom {
+    align-self: flex-end;
+  }
+}
+
+@define-mixin grid-col
+  $width: 1 {
+
+  flex: 0 0 calc($width * 99.999%);
+  max-width: calc($width * 99.999%);
+}
+
+@define-mixin grid-cols-for-breakpoint
+  $breakpoint,
+  $grid-size: 12 {
+
+  /* stylelint-disable selector-class-pattern, selector-no-type */
+
+  .$(breakpoint)--auto {
+    flex: 0 1 auto;
+  }
+
+  .$(breakpoint)--1 {
+    @mixin grid-col 1/$grid-size;
+  }
+
+  .$(breakpoint)--2 {
+    @mixin grid-col 2/$grid-size;
+  }
+
+  .$(breakpoint)--3 {
+    @mixin grid-col 3/$grid-size;
+  }
+
+  .$(breakpoint)--4 {
+    @mixin grid-col 4/$grid-size;
+  }
+
+  .$(breakpoint)--5 {
+    @mixin grid-col 5/$grid-size;
+  }
+
+  .$(breakpoint)--6 {
+    @mixin grid-col 6/$grid-size;
+  }
+
+  .$(breakpoint)--7 {
+    @mixin grid-col 7/$grid-size;
+  }
+
+  .$(breakpoint)--8 {
+    @mixin grid-col 8/$grid-size;
+  }
+
+  .$(breakpoint)--9 {
+    @mixin grid-col 9/$grid-size;
+  }
+
+  .$(breakpoint)--10 {
+    @mixin grid-col 9/$grid-size;
+  }
+
+  .$(breakpoint)--11 {
+    @mixin grid-col 9/$grid-size;
+  }
+
+  .$(breakpoint)--12 {
+    flex: 0 0 100%;
+  }
+
+  /* stylelint-enable selector-class-pattern, selector-no-type */
 }
 
 .root {
-  margin-bottom: map(GridCol, spacingMedium);
+  margin-bottom: 0;
 
-  &:last-of-type {
+  &.rowSpacingSmall {
+    margin-bottom: map(GridCol, spacingSmall);
+  }
+
+  &.rowSpacingMedium {
+    margin-bottom: map(GridCol, spacingMedium);
+  }
+
+  &.rowSpacingLarge {
+    margin-bottom: map(GridCol, spacingLarge);
+  }
+
+  &:last-child {
     margin-bottom: 0;
   }
-}
 
-.gutterSmall,
-.gutterMedium,
-.gutterLarge {
-
-  &:last-of-type {
-    margin-bottom: 0;
-  }
+  @mixin grid-cols-for-breakpoint phone;
 }
 
 .startAtPhone {
-  @mixin start-grid;
-}
-
-.phone--auto {
-  flex: 0 1 auto;
-}
-
-.phone--1 {
-  flex: 0 0 10%;
-}
-
-.phone--2 {
-  flex: 0 0 20%;
-}
-
-.phone--3 {
-  flex: 0 0 30%;
-}
-
-.phone--4 {
-  flex: 0 0 40%;
-}
-
-.phone--5 {
-  flex: 0 0 50%;
-}
-
-.phone--6 {
-  flex: 0 0 60%;
-}
-
-.phone--7 {
-  flex: 0 0 70%;
-}
-
-.phone--8 {
-  flex: 0 0 80%;
-}
-
-.phone--9 {
-  flex: 0 0 90%;
-}
-
-.phone--10 {
-  flex: 0 0 100%;
+  @mixin start-grid-col;
 }
 
 @media screen and (min-width: map(GridCol, breakpointTablet)) {
 
   .startAtTablet {
-    @mixin start-grid;
+    @mixin start-grid-col;
   }
 
-  .tablet--auto {
-    flex: 0 1 auto;
-  }
-
-  .tablet--1 {
-    flex: 0 0 10%;
-  }
-
-  .tablet--2 {
-    flex: 0 0 20%;
-  }
-
-  .tablet--3 {
-    flex: 0 0 30%;
-  }
-
-  .tablet--4 {
-    flex: 0 0 40%;
-  }
-
-  .tablet--5 {
-    flex: 0 0 50%;
-  }
-
-  .tablet--6 {
-    flex: 0 0 60%;
-  }
-
-  .tablet--7 {
-    flex: 0 0 70%;
-  }
-
-  .tablet--8 {
-    flex: 0 0 80%;
-  }
-
-  .tablet--9 {
-    flex: 0 0 90%;
-  }
-
-  .tablet--10 {
-    flex: 0 0 100%;
-  }
+  @mixin grid-cols-for-breakpoint tablet;
 }
 
 @media screen and (min-width: map(GridCol, breakpointDesktop)) {
 
   .startAtDesktop {
-    @mixin start-grid;
+    @mixin start-grid-col;
   }
 
-  .desktop--auto {
-    flex: 0 1 auto;
-  }
-
-  .desktop--1 {
-    flex: 0 0 10%;
-  }
-
-  .desktop--2 {
-    flex: 0 0 20%;
-  }
-
-  .desktop--3 {
-    flex: 0 0 30%;
-  }
-
-  .desktop--4 {
-    flex: 0 0 40%;
-  }
-
-  .desktop--5 {
-    flex: 0 0 50%;
-  }
-
-  .desktop--6 {
-    flex: 0 0 60%;
-  }
-
-  .desktop--7 {
-    flex: 0 0 70%;
-  }
-
-  .desktop--8 {
-    flex: 0 0 80%;
-  }
-
-  .desktop--9 {
-    flex: 0 0 90%;
-  }
-
-  .desktop--10 {
-    flex: 0 0 100%;
-  }
-
+  @mixin grid-cols-for-breakpoint desktop;
 }
 
 @media screen and (min-width: map(GridCol, breakpointWide)) {
 
   .startAtWide {
-    @mixin start-grid;
+    @mixin start-grid-col;
   }
 
-  .wide--auto {
-    flex: 0 1 auto;
-  }
-
-  .wide--1 {
-    flex: 0 0 10%;
-  }
-
-  .wide--2 {
-    flex: 0 0 20%;
-  }
-
-  .wide--3 {
-    flex: 0 0 30%;
-  }
-
-  .wide--4 {
-    flex: 0 0 40%;
-  }
-
-  .wide--5 {
-    flex: 0 0 50%;
-  }
-
-  .wide--6 {
-    flex: 0 0 60%;
-  }
-
-  .wide--7 {
-    flex: 0 0 70%;
-  }
-
-  .wide--8 {
-    flex: 0 0 80%;
-  }
-
-  .wide--9 {
-    flex: 0 0 90%;
-  }
-
-  .wide--10 {
-    flex: 0 0 100%;
-  }
-
+  @mixin grid-cols-for-breakpoint wide;
 }

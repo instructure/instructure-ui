@@ -2,8 +2,28 @@
   box-sizing: border-box;
 }
 
-.visualDebug {
-  border: 1px dashed red;
+.start {
+}
+
+.center {
+}
+
+.end {
+}
+
+.spaceAround {
+}
+
+.spaceBetween {
+}
+
+.top {
+}
+
+.middle {
+}
+
+.bottom {
 }
 
 .startAtPhone {
@@ -16,6 +36,13 @@
 }
 
 .startAtWide {
+}
+
+.rowSpacingNone,
+.rowSpacingSmall,
+.rowSpacingMedium,
+.rowSpacingLarge {
+
 }
 
 .colSpacingNone,

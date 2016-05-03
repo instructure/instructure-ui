@@ -6,10 +6,26 @@
   border: 1px dashed red;
 }
 
-.gutterNone,
-.gutterSmall,
-.gutterMedium,
-.gutterLarge {
+.top {
+}
+
+.middle {
+}
+
+.bottom {
+}
+
+.colSpacingNone,
+.colSpacingSmall,
+.colSpacingMedium,
+.colSpacingLarge {
+
+}
+
+.rowSpacingNone,
+.rowSpacingSmall,
+.rowSpacingMedium,
+.rowSpacingLarge {
 
 }
 

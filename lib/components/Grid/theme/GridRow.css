@@ -1,0 +1,89 @@
+@define-mixin start-grid-row {
+
+  display: flex;
+  flex-flow: row nowrap;
+
+  &.center {
+    justify-content: center;
+  }
+
+  &.start {
+    justify-content: flex-start;
+  }
+
+  &.end {
+    justify-content: flex-end;
+  }
+
+  &.spaceAround {
+    justify-content: space-around;
+  }
+
+  &.spaceBetween {
+    justify-content: space-between;
+  }
+
+  &.middle {
+    align-items: center;
+  }
+
+  &.bottom {
+    align-items: flex-end;
+  }
+
+  &.rowSpacingSmall {
+    margin-bottom: map(GridRow, spacingSmall);
+  }
+
+  &.rowSpacingMedium {
+    margin-bottom: map(GridRow, spacingMedium);
+  }
+
+  &.rowSpacingLarge {
+    margin-bottom: map(GridRow, spacingLarge);
+  }
+
+  &.colSpacingSmall {
+    margin-left: calc(-1 * map(GridRow, spacingSmall) / 2);
+    margin-right: calc(-1 * map(GridRow, spacingSmall) / 2);
+  }
+
+  &.colSpacingMedium {
+    margin-left: calc(-1 * map(GridRow, spacingMedium) / 2);
+    margin-right: calc(-1 * map(GridRow, spacingMedium) / 2);
+  }
+
+  &.colSpacingLarge {
+    margin-left: calc(-1 * map(GridRow, spacingLarge) / 2);
+    margin-right: calc(-1 * map(GridRow, spacingLarge) / 2);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.startAtPhone {
+  @mixin start-grid-row;
+}
+
+@media screen and (min-width: map(GridRow, breakpointTablet)) {
+
+  .startAtTablet {
+    @mixin start-grid-row;
+  }
+}
+
+@media screen and (min-width: map(GridRow, breakpointDesktop)) {
+
+  .startAtDesktop {
+    @mixin start-grid-row;
+  }
+}
+
+@media screen and (min-width: map(GridRow, breakpointWide)) {
+
+  .startAtWide {
+    @mixin start-grid-row;
+  }
+}
