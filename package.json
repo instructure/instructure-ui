@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "version": "0.6.2",
   "description": "A React UI component library made by Instructure Inc.",
-  "author": "Instructure, Inc. Engineering",
+  "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
     "type": "git",
