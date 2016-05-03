@@ -3,24 +3,48 @@
 }
 
 .input {
+  font-family: map(TextInput, fontFamily);
   color: map(TextInput, textColor);
   background-color: map(TextInput, backgroundColor);
 
   border: map(TextInput, borderWidth) map(TextInput, borderStyle) map(TextInput, borderColor);
   border-radius: map(TextInput, borderRadius);
 
-  &[aria-invalid] {
-    border-color: map(TextInput, borderColorError);
-  }
-
   &:focus {
     border-color: map(TextInput, borderColorFocus);
     outline-color: map(TextInput, outlineColor);
   }
 
+  &[aria-invalid] {
+    border-color: map(TextInput, borderColorError);
+
+    &:focus {
+      border-color: map(TextInput, borderColorError);
+      outline-color: map(TextInput, outlineColorError);
+    }
+  }
+
   &::placeholder {
     color: map(TextInput, placeholderTextColor);
   }
+}
+
+.small .input {
+  font-size: map(TextInput, fontSizeSmall);
+  padding-left: map(TextInput, paddingSmall);
+  padding-right: map(TextInput, paddingSmall);
+}
+
+.medium .input {
+  font-size: map(TextInput, fontSizeMedium);
+  padding-left: map(TextInput, paddingMedium);
+  padding-right: map(TextInput, paddingMedium);
+}
+
+.large .input {
+  font-size: map(TextInput, fontSizeLarge);
+  padding-left: map(TextInput, paddingLarge);
+  padding-right: map(TextInput, paddingLarge);
 }
 
 .label {
@@ -29,4 +53,9 @@
 
 .errors {
   color: map(TextInput, errorsTextColor);
+  font-size: map(TextInput, fontSizeErrorMsgs);
+}
+
+.errorMsg {
+  margin-top: map(TextInput, errorMsgTopMargin);
 }

@@ -1,0 +1,89 @@
+.root {
+
+  font-family: map(Select, fontFamily);
+
+  .label {
+    line-height: map(Select, labelLineHeight);
+    font-weight: map(Select, labelFontWeight);
+
+    .labelLayout {
+      margin-bottom: map(Select, labelBottomMargin);
+    }
+  }
+
+  .select {
+    font-family: map(Select, fontFamily);
+    background: map(Select, backgroundColor);
+    border-width: map(Select, borderWidth);
+    border-color: map(Select, borderColor);
+    border-radius: map(Select, borderRadius);
+    color: map(Select, textColor);
+
+    &:focus {
+      border-color: map(Select, borderColorFocus);
+      outline-color: map(Select, outlineColor);
+    }
+
+    &[aria-invalid] {
+      border-color: map(Select, borderColorError);
+
+      &:focus {
+        border-color: map(Select, borderColorError);
+        outline-color: map(Select, outlineColorError);
+      }
+    }
+  }
+
+  .arrowDownIcon {
+    fill: map(Select, arrowIconColor);
+  }
+
+}
+
+.small {
+
+  .select {
+    font-size: map(Select, fontSizeSmall);
+    padding-left: map(Select, paddingSmall);
+    padding-right: calc(map(Select, paddingSmall) * 4);
+  }
+
+  .arrowDownIcon {
+    right: calc((map(Select, paddingSmall) * 2) - 0.375rem);
+  }
+}
+
+.medium {
+
+  .select {
+    font-size: map(Select, fontSizeMedium);
+    padding-left: map(Select, paddingMedium);
+    padding-right: calc(map(Select, paddingMedium) * 4);
+  }
+
+  .arrowDownIcon {
+    right: calc((map(Select, paddingMedium) * 2) - 0.4375rem);
+  }
+}
+
+.large {
+
+  .select {
+    font-size: map(Select, fontSizeLarge);
+    padding-left: map(Select, paddingLarge);
+    padding-right: calc(map(Select, paddingLarge) * 3);
+  }
+
+  .arrowDownIcon {
+    right: calc((map(Select, paddingLarge) * 1.5) - 0.5rem);
+  }
+}
+
+.errors {
+  color: map(Select, errorMsgColor);
+  font-size: map(Select, fontSizeErrorMsgs);
+}
+
+.errorMsg {
+  margin-top: map(Select, errorMsgTopMargin);
+}

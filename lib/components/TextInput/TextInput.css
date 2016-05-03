@@ -17,34 +17,24 @@
 
   outline-style: solid;
   outline-color: transparent;
-  outline-width: 0.75rem;
-  outline-offset: -0.75rem;
+  outline-offset: -0.5rem;
+  outline-width: 0.1875rem;
 
   &:focus {
-    outline-width: 2px;
-    outline-offset: -2px;
+    outline-offset: -0.1875rem;
   }
 }
 
 .small .input {
   height: 1.75rem;
-  font-size: 0.75rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
 }
 
 .medium .input {
   height: 2.375rem;
-  font-size: 0.875rem;
-  padding-left: 0.875rem;
-  padding-right: 0.875rem;
 }
 
 .large .input {
   height: 3rem;
-  font-size: 1rem;
-  padding-left: 1rem;
-  padding-right: 1rem;
 }
 
 .label {
@@ -55,10 +45,12 @@
 }
 
 .errors {
-  margin: 0.25rem 0 0 0;
   padding: 0;
+  margin: 0;
   list-style-type: none;
-  font-size: 0.75rem;
+}
+
+.errorMsg {
 }
 
 .disabled {

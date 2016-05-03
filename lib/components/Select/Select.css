@@ -1,0 +1,93 @@
+.root {
+  position: relative;
+
+  .label {
+    display: block;
+    box-sizing: border-box;
+
+    .labelLayout {
+    }
+  }
+
+  .selectLayout {
+    position: relative;
+  }
+
+  .arrowDownIcon {
+    display: block;
+    position: absolute;
+    pointer-events: none;
+  }
+
+  .select {
+    box-sizing: border-box;
+    transition: all 0.2s ease-out;
+    display: block;
+    width: 100%;
+    appearance: none;
+    border-style: solid;
+
+    outline-style: solid;
+    outline-color: transparent;
+    outline-offset: -0.5rem;
+    outline-width: 0.1875rem;
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      outline-offset: -0.1875rem;
+    }
+
+  }
+
+}
+
+.small {
+
+  .select {
+    height: 1.75rem;
+  }
+
+  .arrowDownIcon {
+    width: 0.75rem;
+    height: 0.75rem;
+    top: calc(50% - 0.4rem);
+  }
+}
+
+.medium {
+
+  .select {
+    height: 2.375rem;
+  }
+
+  .arrowDownIcon {
+    width: 0.875rem;
+    height: 0.875rem;
+    top: calc(50% - 0.4rem);
+  }
+}
+
+.large {
+
+  .select {
+    height: 3rem;
+  }
+
+  .arrowDownIcon {
+    width: 1rem;
+    height: 1rem;
+    top: calc(50% - 0.4rem);
+  }
+}
+
+.errors {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.errorMsg {
+}
