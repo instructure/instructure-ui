@@ -6,12 +6,21 @@
 
   h2 {
     font-size: 1.75rem;
-    font-weight: 300;
+    font-weight: 600;
+    margin-top: 4rem;
   }
 
   h3 {
-    font-size: 1.125rem;
-    font-weight: 300;
+    margin: 4rem 0 2rem 0;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+
+  h4 {
+    margin: 3rem 0 1rem 0;
+    padding: 0;
+    font-weight: 400;
   }
 
   li {

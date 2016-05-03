@@ -12,17 +12,16 @@
 }
 
 .sectionHeading {
-  margin: 2.5rem 0 2rem 0;
+  margin: 4rem 0 2rem 0;
   padding: 0;
   font-size: 1.5rem;
   font-weight: 400;
 }
 
 .sectionSubHeading {
-  margin: 2rem 0 1rem 0;
+  margin: 3rem 0 1rem 0;
   padding: 0;
-  font-weight: 300;
-  font-style: italic;
+  font-weight: 400;
 }
 
 .path {
