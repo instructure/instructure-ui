@@ -24,6 +24,8 @@ export default MyTabList = function () {
 }
 ```
 
+For the default theme you'll also need to include the ['Open Sans' font](http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400,300,500) in your application.
+
 ### Customization
 
 Coming soon. For now see the [ApplyTheme](http://instructure.github.io/instructure-ui/#ApplyTheme) component docs.
