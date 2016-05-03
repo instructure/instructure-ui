@@ -7,7 +7,7 @@ var webpack = require('webpack')
 var config = require('./util/config')
 
 var entry = {
-  'example': path.join(config.docsAppPath, 'lib/example.js'),
+  'example': [ path.join(config.docsAppPath, 'lib/example.js') ],
   'docs': [
     path.join(config.docsAppPath, 'lib/index.js')
   ],
@@ -17,7 +17,7 @@ var entry = {
   'vendor': ['react', 'react-dom', 'react-addons-css-transition-group']
 }
 
-entry[config.library.packageName] = path.join(config.rootPath, config.library.main)
+entry[config.library.packageName] = [ path.join(config.rootPath, config.library.main) ]
 
 module.exports = require('./util/generate-config')({
   devtool: (process.env.NODE_ENV === 'production') ? null : 'cheap-module-eval-source-map',
