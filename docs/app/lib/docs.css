@@ -1,6 +1,7 @@
 :root {
   --foregroundColor: #919191;
   --backgroundColor: #fff;
+  --focusColor: #25a19f;
 
   /* this changes the colors for closing nav menu icon and borders */
 
@@ -135,6 +136,12 @@
   &:focus,
   &:active {
     outline: none;
+
+    .line,
+    .line::before,
+    .line::after {
+      background: var(--focusColor);
+    }
   }
 }
 
@@ -168,6 +175,19 @@
 .hamburger .line::before,
 .hamburger .line::after {
   transition: all 500ms ease-in-out;
+}
+
+.nav--leave.nav--leave-active,
+.nav--enter {
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
+  opacity: 0;
+}
+
+.nav--leave,
+.nav--enter.nav--enter-active {
+  transition: opacity 0.5s;
+  opacity: 1;
 }
 
 @media only screen and (max-width: 48rem) {

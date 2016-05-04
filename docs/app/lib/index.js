@@ -7,6 +7,8 @@ import DocsNav from './components/DocsNav'
 import HtmlDoc from './components/HtmlDoc'
 import DocsSection from './components/DocsSection'
 
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+
 import styles from './docs.css'
 
 import documentsMap, { documentsList } from './util/load-docs'
@@ -120,12 +122,28 @@ class DocsApp extends Component {
           </div>
           <div className={styles.sidebar}>
             <div className={styles.menuToggle}>
-              <button className={styles.hamburger} onClick={this.handleMenuToggle}>
-                <span className={styles.line}>Open Menu</span>
+              <button className={styles.hamburger} onClick={this.handleMenuToggle}
+                aria-controls="nav" aria-expanded={this.state.showMenu ? 'true' : 'false'}>
+                <span className={styles.line}>Toggle Navigation</span>
               </button>
             </div>
-            <div className={styles.nav} id="nav">
-              <DocsNav selected={this.state.key} components={componentsList} documents={documentsList} />
+            <div className={styles.nav} id="nav" aria-hidden={this.state.showMenu ? null : 'false'}>
+              <ReactCSSTransitionGroup
+                transitionName={{
+                  enter: styles['nav--enter'],
+                  enterActive: styles['nav--enter-active'],
+                  leave: styles['nav--leave'],
+                  leaveActive: styles['nav--leave-active']
+                }}
+                component="div"
+                transitionLeaveTimeout={500}
+                transitionEnterTimeout={500}>
+                {this.state.showMenu &&
+                  <DocsNav
+                    selected={this.state.key}
+                    components={componentsList}
+                    documents={documentsList} />}
+              </ReactCSSTransitionGroup>
             </div>
           </div>
         </div>
