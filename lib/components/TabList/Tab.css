@@ -92,7 +92,7 @@
   box-sizing: border-box;
 
   margin-top: 0.5rem;
-  padding: 0.75rem;
+
   display: flex;
   align-items: center;
 
@@ -129,4 +129,3 @@
   clip: rect(0 0 0 0);
   border: 0;
 }
-

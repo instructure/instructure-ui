@@ -54,6 +54,11 @@
   background-color: map(Tab, accordionBackgroundColor);
   border-color: map(Tab, accordionBorderColor);
 
+  padding-top: map(Tab, spacingExtraSmall);
+  padding-bottom: map(Tab, spacingExtraSmall);
+  padding-right: map(Tab, spacingSmall);
+  padding-left: map(Tab, spacingSmall);
+
   &:not([aria-selected]):not([aria-disabled]):hover {
     background-color: map(Tab, accordionBackgroundColorHover);
   }
