@@ -1,8 +1,5 @@
 .content {
   background-color: map(TabPanel, backgroundColor);
   border-color: map(TabPanel, borderColor);
-  font-family: map(TabPanel, fontFamily);
-  font-size: map(TabPanel, fontSize);
-  font-weight: map(TabPanel, fontWeight);
   color: map(TabPanel, fontColor);
 }
