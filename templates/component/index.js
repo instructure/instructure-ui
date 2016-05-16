@@ -19,11 +19,11 @@ export default class ${COMPONENT} extends Component {
     * description of replaceMe prop
     */
     replaceMe: PropTypes.string
-  };
+  }
 
   static defaultProps = {
     replaceMe: 'hello world'
-  };
+  }
 
   render () {
     return (
