@@ -18,28 +18,32 @@ export default class ComponentProps extends Component {
 
     for (const name in props) {
       const prop = props[name]
-      rows.push(
-        <tr key={name} className={styles.tableRow}>
-          <td className={styles.cell}>
-            <code>{name}</code>
-          </td>
-          <td className={styles.cell}>
-            <code>{this.renderType(prop.type)}</code>
-          </td>
-          <td className={styles.cell}>
-            {this.renderDefault(prop)}
-          </td>
-          <td className={styles.cell + ' ' + styles.cellDesc}>
-            {this.renderDescription(prop)}
-          </td>
-        </tr>
-      )
+      const description = prop.description || ''
+
+      if (description.indexOf('@private') < 0 && description.indexOf('@deprecated') < 0) {
+        rows.push(
+          <tr key={name} className={styles.tableRow}>
+            <td className={styles.cell}>
+              <code>{name}</code>
+            </td>
+            <td className={styles.cell}>
+              <code>{this.renderType(prop.type)}</code>
+            </td>
+            <td className={styles.cell}>
+              {this.renderDefault(prop)}
+            </td>
+            <td className={styles.cell + ' ' + styles.cellDesc}>
+              {this.renderDescription(prop)}
+            </td>
+          </tr>
+        )
+      }
     }
     return rows
   }
 
   renderType (type) {
-    const { name } = type
+    const { name } = type || {}
 
     switch (name) {
       case 'arrayOf':
@@ -63,11 +67,10 @@ export default class ComponentProps extends Component {
   }
 
   renderDescription (prop) {
-    const { description } = prop
-
+    const { description } = prop || {}
     return (
       <div>
-        <div dangerouslySetInnerHTML={{__html: marked(description)}} />
+        {description && <div dangerouslySetInnerHTML={{__html: marked(description)}} />}
         {this.renderEnum(prop)}
         {this.renderUnion(prop)}
       </div>
@@ -75,30 +78,41 @@ export default class ComponentProps extends Component {
   }
 
   renderEnum (prop) {
-    if (prop.type.name !== 'enum') {
+    const {
+      type
+    } = prop
+
+    if (!type || type.name !== 'enum') {
       return
     }
-    if (!Array.isArray(prop.type.value)) {
-      return <span>{prop.type.value}</span>
+
+    if (!Array.isArray(type.value)) {
+      return <span>{type.value}</span>
     }
-    const values = prop.type.value.map(({ value }) => (
+
+    const values = type.value.map(({ value }) => (
       <li className={styles.listItem} key={value}>
         <code>{this.unquote(value)}</code>
       </li>
     ))
+
     return (
       <span><span className={styles.oneOf}>One of:</span> <ul className={styles.list}>{values}</ul></span>
     )
   }
 
   renderUnion (prop) {
-    if (prop.type.name !== 'union') {
+    const {
+      type
+    } = prop
+
+    if (!type || type.name !== 'union') {
       return
     }
-    if (!Array.isArray(prop.type.value)) {
-      return <span>{prop.type.value}</span>
+    if (!Array.isArray(type.value)) {
+      return <span>{type.value}</span>
     }
-    const values = prop.type.value.map((value) => (
+    const values = type.value.map((value) => (
       <li className={styles.listItem} key={value.name}>
         <code>{this.renderType(value)}</code>
       </li>
