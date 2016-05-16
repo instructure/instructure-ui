@@ -81,7 +81,7 @@
     "rule-nested-empty-line-before": "always",
     "rule-non-nested-empty-line-before": "always",
 
-    "selector-class-pattern": "^[a-z]+[a-zA-Z0-9\\-]+[a-zA-Z0-9]+$",
+    "selector-class-pattern": "^[a-z]+[a-zA-Z0-9\\-]*[a-zA-Z0-9]*$",
 
     "selector-combinator-space-after": "always",
     "selector-combinator-space-before": "always",
