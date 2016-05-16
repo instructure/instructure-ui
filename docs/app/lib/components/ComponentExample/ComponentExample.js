@@ -2,8 +2,8 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import { transform } from 'babel-standalone'
 import WindowMessageListener from '../WindowMessageListener'
-import debounce from 'lodash.debounce'
-import defer from 'lodash.defer'
+import debounce from 'lodash/debounce'
+import defer from 'lodash/defer'
 
 import styles from './ComponentExample.css'
 

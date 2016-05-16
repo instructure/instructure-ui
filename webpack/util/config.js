@@ -2,7 +2,7 @@
 'use strict'
 
 var path = require('path')
-var merge = require('lodash.merge')
+var merge = require('lodash/merge')
 
 function getConfig () {
   var ROOT = process.cwd()

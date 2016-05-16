@@ -1,5 +1,5 @@
-import defer from 'lodash.defer'
-import reject from 'lodash.reject'
+import defer from 'lodash/defer'
+import reject from 'lodash/reject'
 
 require('script!axe-core/axe.min.js')
 /*global axe*/
