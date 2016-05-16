@@ -28,7 +28,7 @@ module.exports = require('./util/generate-config')({
   },
   resolve: {
     alias: {
-      'instructure-ui': 'lib/index.js'
+      'instructure-ui': 'lib'
     }
   },
   entry: entry,

@@ -21,6 +21,7 @@
     background-size: 1rem 1rem;
     border: 1px solid #eee;
     border-radius: 3px;
+    overflow: scroll;
   }
 }
 
@@ -30,6 +31,7 @@
   box-sizing: border-box;
   padding: 1em;
   overflow: hidden;
+  position: relative;
 }
 
 .errorBg {

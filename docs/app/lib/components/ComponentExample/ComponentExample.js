@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import { transform } from 'babel-standalone'
-import WindowMessageListener from '../WindowMessageListener'
+import { windowMessageListener } from 'instructure-ui'
 import debounce from 'lodash/debounce'
 import defer from 'lodash/defer'
 
@@ -9,6 +9,13 @@ import styles from './ComponentExample.css'
 
 import '../../util/load-globals'
 
+const messageHandler = function (message) {
+  if (message && typeof message.code === 'string') {
+    this.executeCode(message.code)
+  }
+}
+
+@windowMessageListener(messageHandler)
 export default class ComponentExample extends Component {
   static propTypes = {
     code: PropTypes.string,
@@ -27,7 +34,7 @@ export default class ComponentExample extends Component {
       this.executeCode(this.props.code)
     }
     if (window.parent) {
-      WindowMessageListener.postMessage(window.parent, {
+      windowMessageListener.postMessage(window.parent, {
         isMounted: true
       })
       this._handleResize = debounce(this.notifyParent, 200)
@@ -41,18 +48,13 @@ export default class ComponentExample extends Component {
     }
   }
 
-  handleMessage = (message) => {
-    if (message && typeof message.code === 'string') {
-      this.executeCode(message.code)
-    }
-  };
-
   notifyParent = () => {
     if (window.parent) {
-      const node = ReactDOM.findDOMNode(this)
+      // need to use scrollHeight of body element to handle components that render into portals
+      const owner = document.body
       window.setTimeout(function () {
-        WindowMessageListener.postMessage(window.parent, {
-          contentHeight: node.offsetHeight
+        windowMessageListener.postMessage(window.parent, {
+          contentHeight: owner.scrollHeight
         })
       }, 0)
     }
@@ -135,11 +137,11 @@ export default class ComponentExample extends Component {
 
   render () {
     return (
-      <WindowMessageListener onReceiveMessage={this.handleMessage} className={styles.root}>
+      <div className={styles.root}>
         {this.renderErrorBg()}
         {this.renderExample()}
         {this.renderError()}
-      </WindowMessageListener>
+      </div>
     )
   }
 }

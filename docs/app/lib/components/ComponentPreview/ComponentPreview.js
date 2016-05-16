@@ -1,15 +1,33 @@
 // Based on https://github.com/joelburget/react-live-editor/blob/master/live-compile.jsx
 import React, { Component, PropTypes } from 'react'
-import WindowMessageListener from '../WindowMessageListener'
 import shortid from 'shortid'
 import classnames from 'classnames'
 
 import { Modal } from 'react-overlays'
 import Button from '../Button'
+import { windowMessageListener } from 'instructure-ui'
 import { ScreenReaderContent } from 'instructure-ui'
 
 import styles from './ComponentPreview.css'
 
+const DEFAULT_FRAME_HEIGHT = 70
+
+const messageHandler = function (message) {
+  if (message && message.isMounted) {
+    this.setState({
+      frameIsLoaded: true
+    })
+  }
+  if (message && message.contentHeight) {
+    this.refs.frame.height = message.contentHeight
+  }
+}
+
+const sourceName = function () {
+  return this._frameName
+}
+
+@windowMessageListener(messageHandler, sourceName)
 export default class ComponentPreview extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
@@ -28,27 +46,19 @@ export default class ComponentPreview extends Component {
     this.state = {
       frameIsLoaded: false
     }
-    this.frameName = 'ComponentPreviewExample_' + shortid.generate()
+    this._frameName = 'ComponentPreviewExample_' + shortid.generate()
   }
 
   componentDidMount () {
     this.renderPreview()
   }
 
-  componentDidUpdate () {
+  componentDidUpdate (prevProps) {
+    if (prevProps.name !== this.props.name) {
+      this.refs.frame.height = DEFAULT_FRAME_HEIGHT
+    }
     this.renderPreview()
   }
-
-  handleMessage = (message) => {
-    if (message && message.isMounted) {
-      this.setState({
-        frameIsLoaded: true
-      })
-    }
-    if (message && message.contentHeight) {
-      this.refs.frame.height = message.contentHeight
-    }
-  };
 
   handleMinimize = () => {
     this.props.onMinimize()
@@ -60,7 +70,7 @@ export default class ComponentPreview extends Component {
     }
 
     if (this.state.frameIsLoaded) {
-      WindowMessageListener.postMessage(this.refs.frame.contentWindow, {
+      windowMessageListener.postMessage(this.refs.frame.contentWindow, {
         code: this.props.code
       })
     } else {
@@ -100,16 +110,14 @@ export default class ComponentPreview extends Component {
     // TODO: open example in new page/tab
 
     const iframe = (
-      <WindowMessageListener
-        sourceName={this.frameName}
-        onReceiveMessage={this.handleMessage}
-        className={classnames(classes)}>
+      <div className={classnames(classes)}>
         <iframe ref="frame"
+          height={DEFAULT_FRAME_HEIGHT}
           className={styles.frame}
-          name={this.frameName}
+          name={this._frameName}
           title={name + ' Example'}
           src={'example.html'}></iframe>
-      </WindowMessageListener>
+      </div>
     )
 
     return isFullScreen ? (
