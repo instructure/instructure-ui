@@ -45,6 +45,12 @@ class DocsApp extends Component {
     window.removeEventListener('hashchange', this.updateKey, false)
   }
 
+  componentDidUpdate (prevProps, prevState) {
+    if (prevState.key !== this.state.key) {
+      this.refs.content.scrollTop = 0
+    }
+  }
+
   renderComponent (component) {
     return (
       <DocsSection id={component.name}>
@@ -94,7 +100,7 @@ class DocsApp extends Component {
           <DocsHeader />
         </div>
         <div className={styles.container}>
-          <div className={styles.content}>
+          <div className={styles.content} ref="content">
             <div className={styles.main} role="main" id="main">
               {this.renderContent(this.state.key)}
 
