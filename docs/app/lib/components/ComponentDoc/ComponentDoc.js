@@ -22,10 +22,35 @@ export default class ComponentDoc extends Component {
     doc: {}
   };
 
+  renderProps () {
+    const {
+      props
+    } = this.props.doc
+    return props ? (
+      <div>
+        <h3 className={styles.sectionHeading} id={name + 'Properties'}>
+          Properties
+        </h3>
+        <ComponentProps props={props} />
+      </div>
+    ) : null
+  }
+
+  renderDescription () {
+    const {
+      name,
+      doc
+    } = this.props
+    return doc.description ? (
+      <div className={styles.description}>
+        <ComponentDescription name={name} description={doc.description} />
+      </div>
+    ) : null
+  }
+
   render () {
     const {
       name,
-      doc,
       path
     } = this.props
 
@@ -33,8 +58,6 @@ export default class ComponentDoc extends Component {
 
     const packageName = library.packageName
     const libraryName = library.name
-    const props = doc.props && <ComponentProps props={doc.props} />
-    const description = doc.description && <ComponentDescription name={name} description={doc.description} />
     const githubRoot = library.projectUrl + '/tree/master/'
 
     const componentCSSPath = packageName + '/dist/components/' + name + '.css'
@@ -76,15 +99,8 @@ export default class ComponentDoc extends Component {
             {path}
           </Link>
         </div>
-        <div className={styles.description}>
-          {description}
-        </div>
-        <h3 className={styles.sectionHeading} id={name + 'Properties'} >
-          Properties
-        </h3>
-        <div className={styles.props}>
-          {props}
-        </div>
+        {this.renderDescription()}
+        {this.renderProps()}
         <h3 className={styles.sectionHeading} id={name + 'Usage'}>
           Usage
         </h3>
