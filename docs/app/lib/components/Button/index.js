@@ -14,7 +14,7 @@ export default class Button extends Component {
       ...this.props.theme
     }
     return (
-      <BaseButton style="link" theme={theme} {...this.props} />
+      <BaseButton variant="link" theme={theme} {...this.props} />
     )
   }
 }
