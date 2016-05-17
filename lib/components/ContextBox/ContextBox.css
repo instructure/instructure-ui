@@ -12,6 +12,11 @@
   border-radius: var(--ContextBox-borderRadius);
 }
 
+.default,
+.inverse {
+
+}
+
 .content {
   overflow: hidden;
   border-radius: calc(var(--ContextBox-borderRadius) - var(--ContextBox-borderWidth));
@@ -21,23 +26,23 @@
   min-height: calc(var(--ContextBox-arrowSize) * 4);
   position: relative;
 
-  &::before,
-  &::after {
+  .arrow,
+  .arrow::after {
     content: "";
     height: 0;
     width: 0;
-    box-sizing: border-box;
     position: absolute;
+    display: block;
+    box-sizing: border-box;
     pointer-events: none;
     border: solid transparent;
-    border-color: rgba(255, 255, 255, 0);
   }
 
-  &::before {
+  .arrow {
     border-width: calc(var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth));
   }
 
-  &::after {
+  .arrow::after {
     border-width: var(--ContextBox-arrowSize);
   }
 
@@ -45,108 +50,76 @@
 
     margin-left: var(--ContextBox-arrowSize);
 
-    &::before,
-    &::after {
+    .arrow {
       top: 50%;
-      right: 100%;
-    }
-
-    &::after {
-      margin-top: calc(-1 * var(--ContextBox-arrowSize));
-    }
-
-    &::before {
+      left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
       margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-left-width: 0;
     }
+
+    .arrow::after {
+      left: var(--ContextBox-borderWidth);
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
+      border-left-width: 0;
+    }
+
   }
 
   &.positioned--left {  /* arrow on the right */
 
     margin-right: var(--ContextBox-arrowSize);
 
-    &::before,
-    &::after {
+    .arrow {
       top: 50%;
-      left: 100%;
-    }
-
-    &::after {
-      margin-top: calc(-1 * var(--ContextBox-arrowSize));
-    }
-
-    &::before {
+      right: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
       margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-right-width: 0;
     }
+
+    .arrow::after {
+      right: var(--ContextBox-borderWidth);
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
+      border-right-width: 0;
+    }
+
   }
 
-  &.positioned--below {  /* arrow on top */
+  &.positioned--below,
+  &.positioned--bottom {  /* arrow on top */
 
     margin-top: var(--ContextBox-arrowSize);
 
-    &::before,
-    &::after {
-      bottom: 100%;
+    .arrow {
       left: 50%;
-    }
-
-    &::after {
-      margin-left: calc(-1 * var(--ContextBox-arrowSize));
-    }
-
-    &::before {
+      top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
       margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-top-width: 0;
+    }
+
+    .arrow::after {
+      top: var(--ContextBox-borderWidth);
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
+      border-top-width: 0;
     }
   }
 
-  &.positioned--above {  /* arrow on bottom */
+  &.positioned--above,
+  &.positioned--top {  /* arrow on bottom */
 
     margin-bottom: var(--ContextBox-arrowSize);
 
-    &::before,
-    &::after {
-      top: 100%;
+    .arrow {
       left: 50%;
-    }
-
-    &::after {
-      margin-left: calc(-1 * var(--ContextBox-arrowSize));
-    }
-
-    &::before {
+      bottom: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
       margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-bottom-width: 0;
     }
-  }
-}
 
-@keyframes animate-root {
-
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
-}
-
-.with-animation {
-  opacity: 0;
-  animation-duration: 0.3s;
-  animation-name: animate-root;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
-
-  .positioned--right {
-    transform: translate3d(-20%, 0, 0);
-  }
-
-  .positioned--left {
-    transform: translate3d(20%, 0, 0);
-  }
-
-  .positioned--below {
-    transform: translate3d(0, -20%, 0);
-  }
-
-  .positioned--above {
-    transform: translate3d(0, 20%, 0);
+    .arrow::after {
+      bottom: var(--ContextBox-borderWidth);
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
+      border-bottom-width: 0;
+    }
   }
 }
 

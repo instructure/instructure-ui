@@ -32,15 +32,6 @@
   }
 }
 
-.value {
-  color: map(RangeInput, valueTextColor);
-  background: map(RangeInput, valueBackgroundColor);
-
-  &::after {
-    border-right: 0.5em solid map(RangeInput, valueBackgroundColor);
-  }
-}
-
 .label {
   font-weight: map(RangeInput, labelFontWeight);
 }

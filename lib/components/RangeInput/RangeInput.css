@@ -89,27 +89,9 @@
   box-sizing: border-box;
   width: 4.375em;
   min-height: 2.15em;
-  margin-left: 0.437em;
   padding: 0.312em 0.625em;
 
-  position: relative;
-  display: inline-block;
-
   font-size: 1em;
-  line-height: 1.5;
+  line-height: 2.15em;
   text-align: center;
-  border-radius: 0.1875em;
-
-  /* arrow */
-
-  &::after {
-    content: "";
-    width: 0;
-    height: 0;
-    position: absolute;
-    top: 0.5em;
-    left: -0.4375em;
-    border-top: 0.5em solid transparent;
-    border-bottom: 0.5em solid transparent;
-  }
 }
