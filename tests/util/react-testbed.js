@@ -1,19 +1,69 @@
-import React from 'react'
+import React, { Component, createElement } from 'react'
 import ReactDOM from 'react-dom'
 import { drill, DOMSelectors } from 'react-drill'
 import ReactTestUtils from 'react/lib/ReactTestUtils'
 import checkA11y from 'tests/util/a11y-check'
+import createMockRaf from 'mock-raf'
+
+class TestBed extends Component {
+  constructor () {
+    super()
+    this.state = {
+      componentClass: null,
+      props: null
+    }
+  }
+  renderComponent (componentClass, props) {
+    this.setState({
+      componentClass,
+      props
+    })
+  }
+  setProps (newProps) {
+    const oldProps = this.props
+    this.setState({
+      props: {
+        ...oldProps,
+        ...newProps
+      }
+    })
+  }
+  get subject () {
+    return this.refs.subject
+  }
+  render () {
+    const {
+      componentClass,
+      props
+    } = this.state
+    return createElement(componentClass || 'div', {
+      ...props,
+      ref: 'subject'
+    })
+  }
+}
 
 export default class ReactTestbed {
-  constructor (ComponentClass, defaultProps) {
-    this.ComponentClass = ComponentClass
+  constructor (componentClass, defaultProps) {
+    this.componentClass = componentClass
     this.defaultProps = defaultProps || {}
 
     beforeEach(() => {
+      this.mockRaf = createMockRaf()
+
       this.rootNode = document.createElement('div')
+      this.rootNode.setAttribute('data-testbedroot', '')
       document.body.appendChild(this.rootNode)
       DOMSelectors.setRootNode(this.rootNode)
-      this.sandbox = sinon.sandbox.create()
+      this.bed = ReactDOM.render(
+        <TestBed />,
+        this.rootNode
+      )
+      this.sandbox = sinon.sandbox.create({
+        useFakeTimers: true
+      })
+      this.sandbox.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
+      this.sandbox.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
     })
 
     afterEach(() => {
@@ -28,12 +78,15 @@ export default class ReactTestbed {
 
   render (propOverrides = {}) {
     const props = {...this.defaultProps, ...propOverrides}
-    const Subject = this.ComponentClass
-    this.subject = ReactDOM.render(
-      <Subject {...props} />,
-      this.rootNode
-    )
+    const Subject = this.componentClass
+    this.bed.renderComponent(Subject, props)
+    this.subject = ReactTestUtils.scryRenderedComponentsWithType(this.bed, this.componentClass)[0]
+    this.sandbox.clock.tick(1000) // to make sure any "appear" transitions are complete
     return this.subject
+  }
+
+  setProps (props = {}) {
+    this.bed.setProps(props)
   }
 
   get dom () {
@@ -79,11 +132,14 @@ export default class ReactTestbed {
       expect(violations.length).to.equal(0, err)
       done(new Error(err))
     }
+
     options.onSuccess = options.onSuccess || function () {
       done()
     }
 
     checkA11y(this.dom.node, options)
+
+    this.sandbox.clock.tick(1000) // so that the setTimeouts in axe-core are called
   }
 }
 

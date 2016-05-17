@@ -9,7 +9,7 @@ if (isFunction(console.clear)) {
 /* eslint-enable no-console */
 
 // utils
-var utilsContext = require.context('./util', true, /\.js$/)
+var utilsContext = require.context('./util', true)
 utilsContext.keys().forEach(utilsContext)
 
 // tests
