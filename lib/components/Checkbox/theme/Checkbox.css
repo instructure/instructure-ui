@@ -12,7 +12,8 @@
 
 }
 
-.simple {
+.simple,
+.menuitem {
 
   .facade {
     border-color: map(Checkbox, borderColor);

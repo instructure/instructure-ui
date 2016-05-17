@@ -30,7 +30,8 @@
 
 }
 
-.simple {
+.simple,
+.menuitem {
 
   + .simple {
     margin-top: 0.6rem;
@@ -38,6 +39,7 @@
 
   .label {
     display: block;
+    line-height: 1.2;
   }
 
   .layout {
@@ -50,7 +52,7 @@
     width: 1em;
     height: 1em;
     position: absolute;
-    top: 0.0625rem;
+    top: 0.1rem;
     left: 0;
     transition: all 0.2s;
     border: 1px solid;
@@ -251,4 +253,15 @@
 
   }
 
+}
+
+.menuitem {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  .text {
+    font-size: 0.875rem;
+    line-height: 2.25rem;
+  }
 }

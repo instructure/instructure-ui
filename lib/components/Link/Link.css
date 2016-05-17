@@ -3,6 +3,16 @@
   &:focus {
     outline: none;
   }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.default {
+
 }
 
 /* stylelint-disable selector-no-type */
@@ -15,8 +25,20 @@ button.root {
   font-size: 1em;
   margin: 0;
   padding: 0;
-  text-align: left;
+  display: inline-flex;
+  align-content: flex-start;
   outline: none;
+}
+
+.menuitem,
+button.menuitem {
+  transition: background 0.2s;
+  padding: 0 1rem;
+  font-size: 0.875rem;
+  line-height: 2.25rem;
+  width: 100%;
+  display: flex;
+  align-content: flex-start;
 }
 
 /* stylelint-enable selector-no-type */

@@ -17,7 +17,8 @@
 
 }
 
-.simple {
+.simple,
+.menuitem {
   margin-top: 0.4rem;
 
   &:first-of-type {
@@ -178,4 +179,15 @@
 
 .success,
 .danger {
+}
+
+.menuitem {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+
+  .text {
+    font-size: 0.875rem;
+    line-height: 2.25rem;
+  }
 }
