@@ -83,9 +83,5 @@ A custom chai assertion is also provided that wraps the [axe-core](https://githu
 Code coverage thresholds are configured in `karma.config.js`. If coverage numbers go below the configured values, the build
 will fail.
 
-To generate a detailed coverage report run:
-
-```bash
-npm run coverage
-```
+When you run `npm test` a detailed coverage report is generated in `js-coverage/index.html`.
 

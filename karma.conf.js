@@ -1,24 +1,38 @@
 /* eslint no-var: 0 */
 'use strict'
 
-const isDebugMode = process.argv.some((arg) => arg === '--debug')
-const isCoverageMode = process.argv.some((arg) => arg === '--coverage')
+var isDebugMode = process.argv.some((arg) => arg === '--debug')
 
-var reporters = []
+// set browsers based on command line args
 var browsers = ['chrome_without_security']
-
-if (isCoverageMode) {
-  reporters.push('dots')
-} else {
-  reporters.push('mocha')
+if (!isDebugMode) {
+  browsers.push('Firefox')
 }
 
+// set coverage reporter based on command line args
+var coverageReporter
+if (!isDebugMode) { // we don't compute coverage in debug mode
+  coverageReporter = {
+    reporters: [
+      { type: isDebugMode ? 'text-summary' : 'text' },
+      { type: 'html', subdir: '.'}
+    ],
+    dir: isDebugMode ? null : 'coverage-js',
+    check: {
+      global: {
+        statements: 91,
+        lines: 82,
+        functions: 89,
+        branches: 73
+      }
+    }
+  }
+}
+
+// set reporters based on command line args
+var reporters = ['mocha']
 if (!isDebugMode) {
   reporters.push('coverage')
-}
-
-if (!isDebugMode && !isCoverageMode) {
-  browsers.push('Firefox')
 }
 
 module.exports = function config (config) {
@@ -37,17 +51,7 @@ module.exports = function config (config) {
 
     reporters: reporters,
 
-    coverageReporter: isDebugMode ? null : {
-      type: isCoverageMode ? 'text' : 'text-summary',
-      check: {
-        global: {
-          statements: 91,
-          lines: 82,
-          functions: 89,
-          branches: 73
-        }
-      }
-    },
+    coverageReporter: coverageReporter,
 
     client: {
       mocha: {
