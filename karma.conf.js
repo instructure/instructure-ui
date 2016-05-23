@@ -1,6 +1,26 @@
 /* eslint no-var: 0 */
 'use strict'
 
+const isDebugMode = process.argv.some((arg) => arg === '--debug')
+const isCoverageMode = process.argv.some((arg) => arg === '--coverage')
+
+var reporters = []
+var browsers = ['chrome_without_security']
+
+if (isCoverageMode) {
+  reporters.push('dots')
+} else {
+  reporters.push('mocha')
+}
+
+if (!isDebugMode) {
+  reporters.push('coverage')
+}
+
+if (!isDebugMode && !isCoverageMode) {
+  browsers.push('Firefox')
+}
+
 module.exports = function config (config) {
   config.set({
     basePath: '',
@@ -15,10 +35,18 @@ module.exports = function config (config) {
       './tests/tests.bundle.js': ['webpack', 'sourcemap']
     },
 
-    reporters: ['mocha', 'coverage'],
+    reporters: reporters,
 
-    coverageReporter: {
-      type: 'text-summary'
+    coverageReporter: isDebugMode ? null : {
+      type: isCoverageMode ? 'text' : 'text-summary',
+      check: {
+        global: {
+          statements: 91,
+          lines: 82,
+          functions: 89,
+          branches: 73
+        }
+      }
     },
 
     client: {
@@ -36,7 +64,7 @@ module.exports = function config (config) {
 
     autoWatch: true,
 
-    browsers: ['chrome_without_security', 'Firefox'],
+    browsers: browsers,
 
     customLaunchers: {
       chrome_without_security: {
@@ -55,7 +83,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config'),
+    webpack: require('./webpack/test.config')(isDebugMode),
 
     webpackServer: {
       progress: false,

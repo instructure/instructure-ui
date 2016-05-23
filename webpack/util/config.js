@@ -26,7 +26,8 @@ function getConfig () {
       files: 'docs/*.md'
     },
     components: {
-      files: 'lib/components/*/index.js'
+      files: 'lib/components/*/index.js',
+      excludes: [ /\.test\.js$/ ]
     },
     theme: {
       files: 'lib/components/*/theme/*.js',

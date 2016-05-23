@@ -7,21 +7,18 @@ describe('<${COMPONENT} />', function () {
 
   /* example test (replace me) */
   it('should render', function () {
-    testbed.render(/* override default props here */)
+    const subject = testbed.render(/* override default props here */)
 
-    expect(testbed.dom.node).to.exist
+    expect(subject.dom()).to.exist
   })
 
   it('should have tests')
 
-  describe('for a11y', function () {
-    it('should meet standards', function (done) {
-      testbed.render()
+  it('should meet a11y standards', function (done) {
+    const subject = testbed.render()
 
-      testbed.checkA11yStandards(done, {
-        ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-      })
+    subject.should.be.accessible(done, {
+      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
     })
-    /* additional a11y related tests go here */
   })
 })

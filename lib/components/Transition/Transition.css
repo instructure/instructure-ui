@@ -4,9 +4,7 @@
 }
 
 .fade {
-  transition-property: transform, opacity;
-  transition-duration: 300ms;
-  transition-timing-function: ease-out;
+  transition: opacity 300ms, transform 300ms ease-out;
 }
 
 .fade--exited,
