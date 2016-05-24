@@ -92,7 +92,6 @@
     "react-docgen": "~2.7.0",
     "react-dom": "~15.0.2",
     "react-drill": "~2.1.1",
-    "react-overlays": "~0.6.3",
     "script-loader": "~0.6.1",
     "sinon": "~1.17.3",
     "sinon-chai": "~2.8.0",
@@ -111,6 +110,7 @@
     "invariant": "~2.2.1",
     "keycode": "~2.1.1",
     "react-addons-css-transition-group": "^0.14.7 || ^15.0.0",
+    "react-overlays": "~0.6.3",
     "react-prop-types": "~0.3.0",
     "shallowequal": "~0.2.2",
     "shortid": "~2.2.4"
