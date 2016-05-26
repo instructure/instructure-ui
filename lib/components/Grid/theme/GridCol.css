@@ -122,13 +122,13 @@
   &:last-child {
     margin-bottom: 0;
   }
-
-  @mixin grid-cols-for-breakpoint phone;
 }
 
 .startAtPhone {
   @mixin start-grid-col;
 }
+
+@mixin grid-cols-for-breakpoint phone;
 
 @media screen and (min-width: map(GridCol, breakpointTablet)) {
 
