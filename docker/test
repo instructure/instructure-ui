@@ -1,6 +1,23 @@
 #!/bin/bash
 
-set -ex
+function cleanup() {
+  exit_code=$?
+  set +e
+
+  echo "copying coverage reports..."
+  docker cp $(docker-compose ps -q coverage):/usr/src/app/coverage .
+
+  echo "cleaning up..."
+  docker-compose stop test
+  docker-compose rm -f test
+  docker rmi -f $(docker images -qf "dangling=true") &>/dev/null
+
+  exit $exit_code
+}
+
+trap cleanup INT TERM EXIT
+
+set -e
 
 export COMPOSE_FILE=./docker-compose.test.yml
 
@@ -11,5 +28,4 @@ echo "building services..."
 docker-compose build
 
 echo "running tests..."
-docker-compose run --rm web bash -c "xvfb-daemon npm test"
-
+docker-compose run --rm test bash -c "xvfb-daemon npm test"

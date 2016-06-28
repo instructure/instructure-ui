@@ -15,9 +15,8 @@ if (!isDebugMode) { // we don't compute coverage in debug mode
   coverageReporter = {
     reporters: [
       { type: 'text' },
-      { type: 'html', subdir: '.'}
+      { type: 'html', dir: 'coverage' }
     ],
-    dir: 'coverage-js',
     check: {
       global: {
         statements: 91,

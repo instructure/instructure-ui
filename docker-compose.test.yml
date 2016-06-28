@@ -1,5 +1,11 @@
-web:
+coverage:
+  dockerfile: docker/Dockerfile.coverage
+  build: .
+
+test:
   build: .
   dockerfile: docker/Dockerfile.test
   environment:
     NODE_ENV: test
+  volumes_from:
+    - coverage

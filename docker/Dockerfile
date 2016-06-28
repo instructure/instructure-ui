@@ -4,14 +4,14 @@ USER root
 
 # Add source and install dependencies
 
-RUN mkdir -p /src/
-WORKDIR /src/
+RUN mkdir -p /usr/src/app/
+WORKDIR /usr/src/app/
 
-COPY ./package.json /src/
+COPY ./package.json /usr/src/app/
 RUN npm install --ignore-scripts --unsafe-perm
-COPY . /src/
+COPY . /usr/src/app/
 
-RUN chown -R docker:docker /src
+RUN chown -R docker:docker /usr/src/app
 USER docker
 
 CMD npm start
