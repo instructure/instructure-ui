@@ -4,12 +4,12 @@
 var path = require('path')
 var config = require('./util/config')
 
-module.exports = function (isDebugMode) {
+module.exports = function (disableCoverage) {
   return require('./util/generate-config')({
     cache: true,
     devtool: 'inline-source-map',
     module: {
-      preLoaders: isDebugMode ? [] : [
+      preLoaders: disableCoverage ? [] : [
         {
           test: /\.js$/,
           loader: 'isparta',

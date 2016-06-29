@@ -14,7 +14,7 @@
     "start": "./bin/instui docs && ./bin/instui server",
     "start:watch": "./bin/instui dev-server",
     "test": "./bin/instui test --single-run",
-    "test:watch": "./bin/instui test --debug",
+    "test:watch": "./bin/instui test --disable-coverage",
     "build": "./bin/instui build && ./bin/instui docs",
     "generate": "./bin/instui generate",
     "bump": "./bin/instui bump",

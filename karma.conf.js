@@ -1,20 +1,20 @@
 /* eslint no-var: 0 */
 'use strict'
 
-var isDebugMode = process.argv.some((arg) => arg === '--debug')
+var disableCoverage = process.argv.some((arg) => arg === '--disable-coverage')
 
 // set browsers based on command line args
 var browsers = ['chrome_without_security']
-if (!isDebugMode) {
+if (!disableCoverage) {
   browsers.push('Firefox')
 }
 
 // set coverage reporter based on command line args
 var coverageReporter
-if (!isDebugMode) { // we don't compute coverage in debug mode
+if (!disableCoverage) { // we don't compute coverage in debug mode
   coverageReporter = {
     reporters: [
-      { type: 'text' },
+      { type: 'text-summary' },
       { type: 'html', dir: 'coverage' }
     ],
     check: {
@@ -30,7 +30,7 @@ if (!isDebugMode) { // we don't compute coverage in debug mode
 
 // set reporters based on command line args
 var reporters = ['mocha']
-if (!isDebugMode) {
+if (!disableCoverage) {
   reporters.push('coverage')
 }
 
@@ -86,7 +86,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config')(isDebugMode),
+    webpack: require('./webpack/test.config')(disableCoverage),
 
     webpackServer: {
       progress: false,

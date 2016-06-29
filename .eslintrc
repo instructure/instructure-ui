@@ -3,6 +3,9 @@
   "rules": {
     "max-len": [2, 120, 2],
     "jsx-quotes": [2, "prefer-double"],
+    "react/jsx-no-bind": [2, {
+      "ignoreRefs": true
+    }],
     "key-spacing": [2, {
       "beforeColon": false,
       "afterColon": true,
