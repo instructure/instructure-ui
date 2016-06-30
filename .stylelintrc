@@ -41,10 +41,13 @@
     "function-linear-gradient-no-nonstandard-direction": true,
     "function-parentheses-newline-inside": "always-multi-line",
     "function-parentheses-space-inside": "never-single-line",
-    "function-url-quotes": "double",
+    "function-url-quotes": "always",
     "function-whitespace-after": "always",
 
     "indentation": 2,
+
+    "length-zero-no-unit": true,
+
     "max-empty-lines": 1,
     "max-line-length": [ 120, {
       "ignore": "non-comments",
@@ -72,7 +75,6 @@
     "number-leading-zero": "always",
 
     "number-max-precision": 4,
-    "number-zero-length-no-unit": true,
 
     "property-no-vendor-prefix": true,
 
