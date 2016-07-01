@@ -1,0 +1,61 @@
+.alert {
+  border-radius: map(Alert, borderRadius);
+  background-color: map(Alert, colorBackground);
+
+  + .alert {
+    margin-top: map(Alert, spacingSmall);
+  }
+}
+
+.content {
+  font-family: map(Alert, fontFamily);
+  font-size: map(Alert, fontSize);
+  line-height: map(Alert, lineHeight);
+  padding:
+    map(Alert, spacingSmall)
+    map(Alert, spacingMedium);
+}
+
+.icon {
+  color: map(Alert, colorIcon);
+}
+
+.success {
+  border-color: map(Alert, colorSuccess);
+
+  .icon {
+    background-color: map(Alert, colorSuccess);
+    border-right-color: map(Alert, colorSuccess);
+  }
+}
+
+.info {
+  border-color: map(Alert, colorBrand);
+
+  .icon {
+    background-color: map(Alert, colorBrand);
+    border-right-color: map(Alert, colorBrand);
+  }
+}
+
+.error {
+  border-color: map(Alert, colorDanger);
+
+  .icon {
+    background-color: map(Alert, colorDanger);
+    border-right-color: map(Alert, colorDanger);
+  }
+}
+
+.warning {
+  border-color: map(Alert, colorAlert);
+
+  .icon {
+    background-color: map(Alert, colorAlert);
+    border-right-color: map(Alert, colorAlert);
+  }
+}
+
+.closeIcon {
+  color: map(Alert, colorCloseIcon);
+}

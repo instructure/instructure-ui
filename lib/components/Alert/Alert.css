@@ -1,0 +1,52 @@
+.alert {
+  box-sizing: border-box;
+  max-width: 30rem;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  border: 2px solid;
+  display: flex;
+}
+
+.content {
+  box-sizing: border-box;
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  box-sizing: border-box;
+  flex: 0 0 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  border-right: 2px solid; /* or else icon looks 2px off center */
+}
+
+.closeButton {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+}
+
+.closeIcon {
+  line-height: 1;
+  font-size: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.info {
+}
+
+.error {
+}
+
+.success {
+}
+
+.warning {
+}
+
+.error {
+}
