@@ -1,9 +1,8 @@
+import React from 'react'
 import ${COMPONENT} from '../index'
 
 describe('<${COMPONENT} />', function () {
-  const testbed = createTestbed(${COMPONENT}, {
-    /* default props go here */
-  })
+  const testbed = createTestbed(<${COMPONENT} />)
 
   /* example test (replace me) */
   it('should render', function () {
