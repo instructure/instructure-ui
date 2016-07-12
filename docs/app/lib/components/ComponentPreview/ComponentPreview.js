@@ -5,8 +5,7 @@ import classnames from 'classnames'
 
 import { Modal } from 'react-overlays'
 import Button from '../Button'
-import { windowMessageListener } from 'instructure-ui'
-import { ScreenReaderContent } from 'instructure-ui'
+import { windowMessageListener, ScreenReaderContent } from 'instructure-ui'
 
 import styles from './ComponentPreview.css'
 
