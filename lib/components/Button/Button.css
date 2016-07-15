@@ -33,36 +33,53 @@
 .primary,
 .success,
 .alert,
-.danger {
-  /* Need to call out these classes here for theming
-     to work */
-}
-
+.danger,
 .link {
-  text-decoration: underline;
 
-  &:focus,
-  &:hover {
-    text-decoration: none;
+  &.small {
+    font-size: 0.75rem;
+    padding: 0 0.5rem;
+    line-height: 1.625rem;
+  }
+
+  &.medium {
+    font-size: 0.875rem;
+    padding: 0 0.875rem;
+    line-height: 2.25rem;
+  }
+
+  &.large {
+    font-size: 1rem;
+    padding: 0 1rem;
+    line-height: 2.875rem;
   }
 }
 
-.small {
-  padding: 0 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.625rem;
-}
+.icon,
+.icon-inverse {
+  text-decoration: none;
+  display: inline-flex;
 
-.medium {
-  padding: 0 0.875rem;
-  font-size: 0.875rem;
-  line-height: 2.25rem;
-}
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
 
-.large {
-  padding: 0 1rem;
-  font-size: 1rem;
-  line-height: 2.875rem;
+  &.small {
+    height: 1.625rem;
+    font-size: 1rem;
+  }
+
+  &.medium {
+    height: 2.25rem;
+    font-size: 1.5rem;
+  }
+
+  &.large {
+    height: 2.875rem;
+    font-size: 2rem;
+  }
 }
 
 .is-block {
