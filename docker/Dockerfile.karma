@@ -1,0 +1,5 @@
+FROM instructure/node
+
+EXPOSE 9876
+
+CMD ["npm", "run", "test:watch", "--", "--no-launch"]

@@ -2,12 +2,12 @@
 'use strict'
 
 var disableCoverage = process.argv.some((arg) => arg === '--disable-coverage')
+var noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 
 // set browsers based on command line args
-var browsers = ['chrome_without_security']
-if (!disableCoverage) {
-  browsers.push('Firefox')
-}
+var browsers = []
+if (!noLaunchers) { browsers.push('chrome_without_security') }
+if (!disableCoverage && !noLaunchers) { browsers.push('Firefox') }
 
 // set coverage reporter based on command line args
 var coverageReporter

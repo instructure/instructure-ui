@@ -1,8 +1,16 @@
 web:
   build: .
-  ports:
-    - "8080:8080"
   dockerfile: docker/Dockerfile
+  volumes:
+     - .:/usr/src/app
   environment:
     VIRTUAL_HOST: instructure-ui.docker
     NODE_ENV: development
+
+karma:
+  build: .
+  dockerfile: docker/Dockerfile.karma
+  volumes:
+    - .:/usr/src/app:ro
+  environment:
+    VIRTUAL_HOST: karma.instructure-ui.docker
