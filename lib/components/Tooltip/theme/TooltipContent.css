@@ -1,18 +1,18 @@
 .root {
-  font-family: map(Tooltip, fontFamily);
+  font-family: map(TooltipContent, fontFamily);
 }
 
 .small {
-  padding: map(Tooltip, spacingSmall);
-  font-size: map(Tooltip, fontSizeSmall);
+  padding: map(TooltipContent, spacingSmall);
+  font-size: map(TooltipContent, fontSizeSmall);
 }
 
 .medium {
-  padding: map(Tooltip, spacingMedium);
-  font-size: map(Tooltip, fontSizeMedium);
+  padding: map(TooltipContent, spacingMedium);
+  font-size: map(TooltipContent, fontSizeMedium);
 }
 
 .large {
-  padding: map(Tooltip, spacingLarge);
-  font-size: map(Tooltip, fontSizeLarge);
+  padding: map(TooltipContent, spacingLarge);
+  font-size: map(TooltipContent, fontSizeLarge);
 }
