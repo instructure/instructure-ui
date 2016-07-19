@@ -1,0 +1,231 @@
+/* stylelint-disable selector-no-type, property-no-vendor-prefix */
+
+.root {
+  font-family: map(Progress, fontFamily);
+}
+
+.small {
+
+  .progress[value] {
+    height: map(Progress, barHeightSmall);
+  }
+
+}
+
+.medium {
+
+  .progress[value] {
+    height: map(Progress, barHeightMedium);
+  }
+
+}
+
+.large {
+
+  .progress[value] {
+    height: calc(map(Progress, barHeightLarge) * 0.75);
+  }
+
+}
+
+.lightBg .output {
+  color: map(Progress, fontColorSecondary);
+}
+
+.lightBg .outputCounterValueNow {
+  color: map(Progress, fontColorPrimary);
+}
+
+.darkBg .output {
+  color: map(Progress, fontColorSecondaryInverse);
+}
+
+.darkBg .outputCounterValueNow {
+  color: map(Progress, fontColorPrimaryInverse);
+}
+
+.small.bar .output {
+  font-size: map(Progress, fontSizeSmall);
+}
+
+.small.circle .circleOutputText {
+  font-size: map(Progress, fontSizeExtraSmall);
+}
+
+.small.circle .outputCounterValueNow {
+  font-size: map(Progress, fontSizeSmall);
+}
+
+.medium.bar .output {
+  font-size: map(Progress, fontSizeMedium);
+}
+
+.medium.circle .circleOutputText {
+  font-size: map(Progress, fontSizeMedium);
+}
+
+.medium.circle .outputCounterValueNow {
+  font-size: calc(map(Progress, fontSizeLarge) * 1.3);
+}
+
+.large.bar .output {
+  font-size: map(Progress, fontSizeLarge);
+}
+
+.large.circle .circleOutputText {
+  font-size: map(Progress, fontSizeLarge);
+}
+
+.large.circle .outputCounterValueNow {
+  font-size: map(Progress, fontSizeExtraLarge);
+}
+
+@define-mixin progress-track-styles {
+  background-color: map(Progress, trackColor);
+}
+
+@define-mixin progress-track-styles-inverse {
+  background-color: map(Progress, trackColorInverse);
+}
+
+@define-mixin progress-meter-styles {
+  background-color: map(Progress, meterColor);
+}
+
+@define-mixin progress-meter-styles-inverse {
+  background-color: map(Progress, meterColorInverse);
+}
+
+@define-mixin progress-meter-styles-almost-done {
+  background-color: map(Progress, meterColorDone);
+}
+
+@define-mixin progress-meter-styles-almost-done-inverse {
+  background-color: map(Progress, meterColorDoneInverse);
+}
+
+.lightBg .progress[value] {
+  @mixin progress-track-styles;
+
+  &::-webkit-progress-bar {
+    @mixin progress-track-styles;
+  }
+
+  &::-webkit-progress-value {
+    @mixin progress-meter-styles;
+  }
+
+  &::-moz-progress-bar {
+    @mixin progress-meter-styles;
+  }
+
+  &::-ms-fill {
+    @mixin progress-meter-styles;
+  }
+
+}
+
+.darkBg .progress[value] {
+  @mixin progress-track-styles-inverse;
+
+  &::-webkit-progress-bar {
+    @mixin progress-track-styles-inverse;
+  }
+
+  &::-webkit-progress-value {
+    @mixin progress-meter-styles-inverse;
+  }
+
+  &::-moz-progress-bar {
+    @mixin progress-meter-styles-inverse;
+  }
+
+  &::-ms-fill {
+    @mixin progress-meter-styles-inverse;
+  }
+
+}
+
+.bar.lightBg.almostDone {
+
+  .progress[value] {
+
+    &::-webkit-progress-value {
+      @mixin progress-meter-styles-almost-done;
+    }
+
+    &::-moz-progress-bar {
+      @mixin progress-meter-styles-almost-done;
+    }
+
+    &::-ms-fill {
+      @mixin progress-meter-styles-almost-done;
+    }
+
+  }
+}
+
+.bar.darkBg.almostDone {
+
+  .progress[value] {
+
+    &::-webkit-progress-value {
+      @mixin progress-meter-styles-almost-done-inverse;
+    }
+
+    &::-moz-progress-bar {
+      @mixin progress-meter-styles-almost-done-inverse;
+    }
+
+    &::-ms-fill {
+      @mixin progress-meter-styles-almost-done-inverse;
+    }
+
+  }
+}
+
+.showOutput.bar {
+
+  .output {
+    padding-left: map(Progress, barTrackPadding);
+    padding-right: map(Progress, barTrackPadding);
+  }
+}
+
+.lightBg {
+
+  .circleTrack {
+    stroke: map(Progress, trackColor);
+  }
+
+  .circleMeter {
+    stroke: map(Progress, meterColor);
+  }
+}
+
+.darkBg {
+
+  .circleTrack {
+    stroke: map(Progress, trackColorInverse);
+  }
+
+  .circleMeter {
+    stroke: map(Progress, meterColorInverse);
+  }
+}
+
+.circle.lightBg.almostDone {
+
+  .circleMeter {
+    stroke: map(Progress, meterColorDone);
+  }
+}
+
+.circle.darkBg.almostDone {
+
+  .circleMeter {
+    stroke: map(Progress, meterColorDoneInverse);
+  }
+}
+
+/* stylelint-enable selector-no-type, property-no-vendor-prefix */

@@ -1,0 +1,340 @@
+:root {
+  --Progress-sizeSm: 5em;
+  --Progress-sizeMed: 7em;
+  --Progress-sizeLg: 9em;
+
+  /*
+    The radius variables here need to always
+    match the values in the radius() function
+    in index.js
+  */
+  --Progress-circleRadiusSm: 1.8em;
+  --Progress-circleRadiusMed: 2.75em;
+  --Progress-circleRadiusLg: 3.5em;
+
+  /*
+    Calculate the circumference of each size of circle
+    to use below
+  */
+  --Progress-circleCircumferenceSm: calc(2 * 3.1416 * var(--Progress-circleRadiusSm));
+  --Progress-circleCircumferenceMed: calc(2 * 3.1416 * var(--Progress-circleRadiusMed));
+  --Progress-circleCircumferenceLg: calc(2 * 3.1416 * var(--Progress-circleRadiusLg));
+}
+
+@keyframes circleTrackEnter {
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.root {
+}
+
+.output {
+  line-height: 1;
+  user-select: none;
+}
+
+.bar {
+  box-sizing: border-box;
+  width: 100%;
+
+  &.counter {
+
+    .outputCountSlash {
+      margin-left: 0.1875rem;
+      margin-right: 0.1875rem;
+    }
+  }
+}
+
+.circle {
+  /*
+    Seems like a good idea to reset font-size because
+    the SVG uses ems and might inherit a container's
+    font-size
+  */
+  font-size: 1rem;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+
+  .output {
+    transition: all 0.5s;
+    transition-delay: 0.5s;
+    transform: translate3d(0, 0, 0);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+  }
+
+  /*
+    The animateOnMount class is removed via a state
+    change in index.js, triggering CSS transitions and animations
+    that make the track, meter and output text animate in
+    (only used if the animateOnMount prop is true)
+  */
+
+  &.animateOnMount {
+
+    .circleTrack {
+      opacity: 0;
+      transform: translate3d(0, 0, 0) scale(0.1);
+      animation-name: circleTrackEnter;
+      animation-duration: 0.5s;
+      animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+      animation-fill-mode: forwards;
+    }
+
+    .output {
+      opacity: 0;
+      transform: translate3d(0, 34%, 0);
+    }
+
+    /* stylelint-disable declaration-no-important */
+
+    &.small {
+
+      .circleMeter {
+        stroke-dashoffset: var(--Progress-circleCircumferenceSm) !important;
+      }
+    }
+
+    &.medium {
+
+      .circleMeter {
+        stroke-dashoffset: var(--Progress-circleCircumferenceMed) !important;
+      }
+    }
+
+    &.large {
+
+      .circleMeter {
+        stroke-dashoffset: var(--Progress-circleCircumferenceLg) !important;
+      }
+    }
+    /* stylelint-enable declaration-no-important */
+
+  }
+
+  &.counter {
+
+    .outputCounterValueNow {
+      display: block;
+    }
+
+    .outputCountSlash {
+      margin-right: 0.1875rem;
+    }
+  }
+
+  .outputCounterValueNow {
+    letter-spacing: -0.0625rem;
+  }
+
+}
+
+.small {
+
+  &.circle {
+    width: var(--Progress-sizeSm);
+    height: var(--Progress-sizeSm);
+  }
+
+  .circleSVG {
+    width: var(--Progress-sizeSm);
+    height: var(--Progress-sizeSm);
+  }
+
+  .circleShadow {
+    stroke-width: 1em;
+  }
+
+  .circleTrack {
+    transform-origin: calc(var(--Progress-sizeSm) / 2);
+  }
+
+  .circleTrack,
+  .circleMeter {
+    stroke-width: 0.5em;
+  }
+
+  .circleMeter {
+    stroke-dasharray: var(--Progress-circleCircumferenceSm);
+  }
+}
+
+.medium {
+
+  &.circle {
+    width: var(--Progress-sizeMed);
+    height: var(--Progress-sizeMed);
+  }
+
+  .circleSVG {
+    width: var(--Progress-sizeMed);
+    height: var(--Progress-sizeMed);
+  }
+
+  .circleShadow {
+    stroke-width: 1.125em;
+  }
+
+  .circleTrack {
+    transform-origin: calc(var(--Progress-sizeMed) / 2);
+  }
+
+  .circleTrack,
+  .circleMeter {
+    stroke-width: 0.625em;
+  }
+
+  .circleMeter {
+    stroke-dasharray: var(--Progress-circleCircumferenceMed);
+  }
+}
+
+.large {
+
+  &.circle {
+    width: var(--Progress-sizeLg);
+    height: var(--Progress-sizeLg);
+  }
+
+  .circleSVG {
+    width: var(--Progress-sizeLg);
+    height: var(--Progress-sizeLg);
+  }
+
+  .circleShadow {
+    stroke-width: 1.375em;
+  }
+
+  .circleTrack {
+    transform-origin: calc(var(--Progress-sizeLg) / 2);
+  }
+
+  .circleTrack,
+  .circleMeter {
+    stroke-width: 0.875em;
+  }
+
+  .circleMeter {
+    stroke-dasharray: var(--Progress-circleCircumferenceLg);
+  }
+
+}
+
+.showOutput {
+
+}
+
+.almostDone {
+
+}
+
+.showOutput.bar {
+  display: flex;
+  align-items: center;
+
+  .progress[value] {
+    width: auto;
+    flex: 1;
+  }
+}
+
+.outputPercent,
+.outputCount {
+  font-size: smaller;
+  margin-left: 0.0625rem;
+}
+
+.outputPercent {
+  vertical-align: top;
+}
+
+.circleSVG {
+  transform: rotate(-90deg);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.circleShadow,
+.circleTrack,
+.circleMeter {
+  fill: none;
+}
+
+.circleMeter {
+  transition: all 1s;
+}
+
+.circleOutputText {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 17%;
+}
+
+.circle .outputCounterText {
+  word-break: break-word;
+  text-align: center;
+}
+
+/* stylelint-disable selector-no-type, property-no-vendor-prefix */
+
+/* Need to repeat some of these styles for the CSS to compile */
+
+@define-mixin progress-meter-styles {
+  transition: all 1s;
+  box-shadow: 0 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
+}
+
+.progress[value] {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  appearance: none;
+  display: block;
+  width: 100%;
+  min-width: 16rem;
+  border: none;
+  vertical-align: middle;
+
+  &::-webkit-progress-value {
+    @mixin progress-meter-styles;
+  }
+
+  &::-moz-progress-bar {
+    @mixin progress-meter-styles;
+  }
+
+  &::-ms-fill {
+    border: none;
+  }
+
+}
+
+/* stylelint-enable selector-no-type, property-no-vendor-prefix */
+
+.lightBg {
+
+  .circleShadow {
+    display: none;
+  }
+}
+
+.darkBg {
+
+  .circleShadow {
+    stroke: rgba(0, 0, 0, 0.15);
+  }
+}
