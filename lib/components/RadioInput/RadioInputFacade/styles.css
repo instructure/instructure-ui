@@ -1,0 +1,179 @@
+:root {
+  --RadioInputFacade-toggleHeightSm: 1.25rem;
+  --RadioInputFacade-toggleHeightMed: 1.875rem;
+  --RadioInputFacade-toggleHeightLg: 2.5rem;
+}
+
+.root {
+  display: block;
+}
+
+.label {
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+}
+
+.simple {
+  display: flex;
+  align-items: center;
+
+  .facade {
+    box-sizing: border-box;
+    margin-right: 0.5rem;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    min-width: 1em;
+    display: block;
+    transition: all 0.2s ease-out;
+    background-size: 1em 3em;
+    border-radius: 100%;
+    border: 1px solid var(--RadioInputFacade-borderColor);
+
+    background-color: var(--RadioInputFacade-backgroundColor);
+  }
+
+  .label {
+    flex: 1;
+  }
+
+  /* stylelint-disable selector-no-type */
+
+  [role="menuitemradio"]:hover > &,
+  label:hover > input[type="radio"] + &,
+  &.hovered {
+    .facade {
+      border-color: var(--RadioInputFacade-borderColorHover);
+    }
+  }
+
+  input[type="radio"]:checked + &,
+  &.checked {
+    .facade {
+      background-color: var(--RadioInputFacade-borderColorHover);
+      box-shadow: inset 0 0 0 3px var(--RadioInputFacade-backgroundColor);
+      border-color: var(--RadioInputFacade-borderColorHover);
+    }
+  }
+
+  [role="menuitemradio"]:focus > &,
+  input[type="radio"]:focus + &,
+  &.focused {
+    .facade {
+      background-color: var(--RadioInputFacade-borderColorHover);
+      box-shadow:
+        inset 0 0 0 2px var(--RadioInputFacade-shadowColorFocus),
+        inset 0 0 0 4px var(--RadioInputFacade-backgroundColor);
+    }
+  }
+
+  /* stylelint-enable selector-no-type */
+}
+
+.toggle {
+  user-select: none;
+  box-sizing: border-box;
+  position: relative;
+
+  .label {
+    display: block;
+    position: relative;
+    z-index: 1;
+    text-transform: uppercase;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: var(--RadioInputFacade-toggleTextColor);
+  }
+
+  .facade {
+    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transform: scale(0.5) translate3d(0, 0, 0);
+    opacity: 0;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    border-radius: calc(var(--Brand-borders-radiusLarge) - var(--Brand-borders-widthLarge));
+    background: var(--RadioInputFacade-toggleHandleBgColor);
+  }
+
+  &.small {
+    padding: 0 0.5rem;
+    height: var(--RadioInputFacade-toggleHeightSm);
+
+    .label {
+      font-size: 0.65rem;
+      height: var(--RadioInputFacade-toggleHeightSm);
+      line-height: var(--RadioInputFacade-toggleHeightSm);
+    }
+  }
+
+  &.medium {
+    padding: 0 0.875rem;
+    height: var(--RadioInputFacade-toggleHeightMed);
+
+    .label {
+      font-size: 0.75rem;
+      height: var(--RadioInputFacade-toggleHeightMed);
+      line-height: var(--RadioInputFacade-toggleHeightMed);
+    }
+  }
+
+  &.large {
+    padding: 0 1rem;
+    height: var(--RadioInputFacade-toggleHeightLg);
+
+    .label {
+      font-size: 0.85rem;
+      height: var(--RadioInputFacade-toggleHeightLg);
+      line-height: var(--RadioInputFacade-toggleHeightLg);
+    }
+  }
+
+  /* stylelint-disable selector-no-type */
+
+  input[type="radio"]:checked + & .facade,
+  &.checked .facade {
+    opacity: 1;
+    transform: scale(1) translate3d(0, 0, 0);
+  }
+
+  input[type="radio"][aria-disabled]:focus + & .label,
+  &.focused .label {
+    text-decoration: underline;
+  }
+
+  input[type="radio"]:checked + & .label,
+  &.checked .label {
+    color: var(--RadioInputFacade-toggleHandleTextColor);
+  }
+
+  input[type="radio"]:focus + & .facade,
+  &.focused .facade {
+    box-shadow:
+      0 3px 7px rgba(0, 0, 0, 0.3),
+      0 0 0 8px var(--RadioInputFacade-toggleFocusColor);
+  }
+
+  &.success {
+    input[type="radio"]:checked + & .label,
+    &.checked .label {
+      color: var(--RadioInputFacade-toggleSuccessTextColor);
+    }
+  }
+
+  &.danger {
+    input[type="radio"]:checked + & .label,
+    &.checked .label {
+      color: var(--RadioInputFacade-toggleDangerTextColor);
+    }
+  }
+
+  /* stylelint-enable selector-no-type */
+}
+

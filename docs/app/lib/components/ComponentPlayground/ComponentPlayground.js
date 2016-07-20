@@ -13,8 +13,9 @@ import styles from './ComponentPlayground.css'
 export default class ComponentPlayground extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    code: PropTypes.string.isRequired
-  };
+    code: PropTypes.string.isRequired,
+    variant: PropTypes.string
+  }
 
   constructor (props) {
     super()
@@ -66,15 +67,15 @@ export default class ComponentPlayground extends Component {
 
   renderEditor () {
     const { code } = this.state
+
     return (
       <div>
         <div className={styles.close}>
           <Button
             size="small"
-            theme={{linkTextColor: 'white', linkFocusOutlineColor: 'white'}}
+            variant="icon-inverse"
             onClick={this.handleCodeToggle}>
             <ScreenReaderContent>Hide Code</ScreenReaderContent>
-
             <svg
               aria-hidden="true"
               height="1em"
@@ -103,6 +104,7 @@ export default class ComponentPlayground extends Component {
 
         <ComponentPreview
           code={code}
+          variant={this.props.variant}
           onMinimize={this.handleMinimize}
           name={this.props.name}
           isFullScreen={this.state.isFullScreen} />
@@ -121,32 +123,30 @@ export default class ComponentPlayground extends Component {
         </ReactCSSTransitionGroup>
 
         <div className={styles.actions}>
-          <span className={styles.fullscreenButton}>
-            <Button onClick={this.handleMaximize} ref="fullScreenButton">
-              <ScreenReaderContent>Full Screen</ScreenReaderContent>
-              <svg className={styles.icon}
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="1.5em"
-                height="1.5em">
-                <path fill="none" d="M0 0h24v24H0z" />
-                <g fill="currentColor">
-                  <path d="M6 19H2c-1.103 0-2-.897-2-2V2C0 .898.897 0 2 0h15c1.103 0 2 .898 2 2v4h-2V2H2v15h4v2z" />
-                  <path d="M16 14v-2h-2v-2h-2v2h-2v2h2v2h2v-2" />
-                  <path d="M21.207 19.793l-3.322-3.322C18.585 15.49 19 14.295
-                  19 13c0-3.31-2.69-6-6-6s-6 2.69-6 6 2.69 6 6 6c1.294 0 2.49-.416
-                  3.47-1.115l3.323 3.32 1.414-1.412zM9 13c0-2.206 1.794-4 4-4s4 1.794 4 4-1.794 4-4 4-4-1.794-4-4z" />
-                </g>
-              </svg>
-            </Button>
-          </span>
+          <Button onClick={this.handleMaximize} ref="fullScreenButton">
+            <ScreenReaderContent>Full Screen</ScreenReaderContent>
+            <svg
+              className={styles.icon}
+              aria-hidden="true"
+              width="1em"
+              height="1em">
+              <path fill="none" d="M0 0h24v24H0z" />
+              <g fill="currentColor">
+                <path d="M6 19H2c-1.103 0-2-.897-2-2V2C0 .898.897 0 2 0h15c1.103 0 2 .898 2 2v4h-2V2H2v15h4v2z" />
+                <path d="M16 14v-2h-2v-2h-2v2h-2v2h2v2h2v-2" />
+                <path d="M21.207 19.793l-3.322-3.322C18.585 15.49 19 14.295
+                19 13c0-3.31-2.69-6-6-6s-6 2.69-6 6 2.69 6 6 6c1.294 0 2.49-.416
+                3.47-1.115l3.323 3.32 1.414-1.412zM9 13c0-2.206 1.794-4 4-4s4 1.794 4 4-1.794 4-4 4-4-1.794-4-4z" />
+              </g>
+            </svg>
+          </Button>
 
           <Button onClick={this.handleCodeToggle}>
             <ScreenReaderContent>{this.state.showCode ? 'Hide Code' : 'Show Code'}</ScreenReaderContent>
 
             <svg aria-hidden="true"
-              height="1.5em"
-              width="1em"
+              height="1em"
+              width="0.75em"
               fill="currentColor"
               className={styles.icon}>
               <path d="M9.5 3l-1.5 1.5 3.5 3.5L8 11.5l1.5 1.5 4.5-5L9.5

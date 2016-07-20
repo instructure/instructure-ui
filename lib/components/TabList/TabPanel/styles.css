@@ -1,0 +1,67 @@
+.root {
+  box-sizing: border-box;
+
+  &[aria-hidden] {
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+  }
+}
+
+.content {
+  box-sizing: border-box;
+  padding: var(--Brand-spacing-small);
+  width: 100%;
+  border-width: var(--Brand-borders-widthSmall);
+  border-style: var(--Brand-borders-style);
+  background-color: var(--TabPanel-backgroundColor);
+  border-color: var(--TabPanel-borderColor);
+  color: var(--TabPanel-textColor);
+}
+
+.content--enter {
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
+  opacity: 0;
+}
+
+.content--enter.content--enter-active {
+  transition: opacity 0.5s;
+  opacity: 1;
+}
+
+.minimal {
+  .content {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+}
+
+.simple {
+  flex-basis: 100%;
+
+  .content {
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+  }
+}
+
+.accordion {
+  overflow: hidden;
+
+  .content {
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border-top: none;
+  }
+
+  .content--enter {
+    transform: translate3d(0, -20%, 0);
+  }
+
+  .content--enter.content--enter-active {
+    transition: opacity 0.3s, transform 0.3s ease-out;
+    transform: translate3d(0, 0, 0);
+  }
+}

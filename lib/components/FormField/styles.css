@@ -1,0 +1,19 @@
+.root {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.is-block {
+  display: block;
+  width: 100%;
+}
+
+.required {
+  /* TODO: placeholder for now */
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.8;
+}

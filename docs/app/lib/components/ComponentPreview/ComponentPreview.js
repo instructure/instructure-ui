@@ -3,7 +3,7 @@ import React, { Component, PropTypes } from 'react'
 import shortid from 'shortid'
 import classnames from 'classnames'
 
-import { Modal } from 'react-overlays'
+import Modal from 'react-overlays/lib/Modal'
 import Button from '../Button'
 import { windowMessageListener, ScreenReaderContent } from 'instructure-ui'
 
@@ -31,17 +31,18 @@ export default class ComponentPreview extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
+    variant: PropTypes.string,
     isFullScreen: PropTypes.bool,
     onMinimize: PropTypes.func
-  };
+  }
 
   static defaultProps = {
     isFullScreen: false,
     onMinimize: function () {}
-  };
+  }
 
   constructor (props) {
-    super()
+    super(props)
     this.state = {
       frameIsLoaded: false
     }
@@ -61,7 +62,7 @@ export default class ComponentPreview extends Component {
 
   handleMinimize = () => {
     this.props.onMinimize()
-  };
+  }
 
   renderPreview = () => {
     if (!this.refs.frame) {
@@ -70,12 +71,13 @@ export default class ComponentPreview extends Component {
 
     if (this.state.frameIsLoaded) {
       windowMessageListener.postMessage(this.refs.frame.contentWindow, {
-        code: this.props.code
+        code: this.props.code,
+        variant: this.props.variant
       })
     } else {
       setTimeout(this.renderPreview.bind(this), 0)
     }
-  };
+  }
 
   renderMinimizeButton () {
     return (
@@ -84,7 +86,6 @@ export default class ComponentPreview extends Component {
           <ScreenReaderContent>Minimize</ScreenReaderContent>
           <svg className={styles.icon}
             aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg"
             width="1.5em" height="1.5em">
             <path fill="none" d="M0 0h24v24H0z" />
             <g fill="currentColor">
@@ -115,7 +116,7 @@ export default class ComponentPreview extends Component {
           className={styles.frame}
           name={this._frameName}
           title={name + ' Example'}
-          src={'example.html'}></iframe>
+          src={'example.html'} />
       </div>
     )
 

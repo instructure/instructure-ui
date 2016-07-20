@@ -1,48 +1,44 @@
 /* eslint no-var: 0 */
 'use strict'
 
-function pluginsList (theme) {
-  var plugins = [
+var pluginsList = function (variables) {
+  return [
     require('stylelint')(),
-    require('postcss-import')(),
     require('postcss-url')({
       url: 'inline'
     }),
-    require('postcss-mixins')(),
+    require('postcss-input-range')(), // for RangeInput
+
+    require('postcss-mixins')(), // need this for Grid
     require('postcss-nested')(),
-    require('postcss-simple-vars')(),
-    require('postcss-color-function')(),
-    require('postcss-custom-properties')()
-  ]
+    require('postcss-simple-vars')(), // need this for Grid
 
-  if (theme) {
-    plugins = plugins.concat(
-      require('postcss-map')({
-        maps: theme
-      })
-    )
-  }
+    require('postcss-custom-properties')({
+      variables: Object.assign(
+        {},
+        variables.theme,
+        variables.brand
+      ),
+      preserve: true
+    }),
 
-  plugins = plugins.concat(
+    require('postcss-custom-media')({
+      extensions: variables.media
+    }),
+
     require('postcss-calc')(),
+
     require('autoprefixer')({
       browsers: ['last 2 versions']
     }),
+
     require('postcss-browser-reporter'),
     require('postcss-reporter')
-  )
-
-  return plugins
+  ]
 }
 
 module.exports = function (env) {
-  var packs = {
-    defaults: pluginsList(false)
-  }
+  var variables = require('./load-css-variables')()
 
-  if (env === 'production' || env === 'build') {
-    packs.extractTheme = pluginsList(require('./theme-as-map')())
-  }
-
-  return packs
+  return pluginsList(variables)
 }

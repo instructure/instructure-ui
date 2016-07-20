@@ -1,9 +1,0 @@
-.root {
-
-}
-
-.simple,
-.minimal {
-  display: flex;
-  flex-flow: row wrap;
-}

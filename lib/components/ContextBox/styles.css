@@ -1,0 +1,225 @@
+:root {
+  --ContextBox-arrowSize: 0.5rem;
+  --ContextBox-borderWidth: 0.0625rem;
+  --ContextBox-borderRadius: 0.25rem;
+}
+
+.root {
+  box-sizing: border-box;
+  display: inline-block;
+
+  border-width: var(--ContextBox-borderWidth);
+  border-style: solid;
+  border-radius: var(--ContextBox-borderRadius);
+}
+
+.content {
+  overflow: hidden;
+  border-radius: calc(var(--ContextBox-borderRadius) - var(--ContextBox-borderWidth));
+}
+
+.with-arrow {
+  min-height: calc(var(--ContextBox-arrowSize) * 2);
+  position: relative;
+
+  .arrow,
+  .arrow::after {
+    content: "";
+    height: 0;
+    width: 0;
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    pointer-events: none;
+    border-style: solid;
+    border-color: transparent;
+  }
+
+  .arrow {
+    border-width: calc(var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth));
+  }
+
+  .arrow::after {
+    border-width: var(--ContextBox-arrowSize);
+  }
+
+  &.positioned--right { /* arrow on the left */
+    margin-left: var(--ContextBox-arrowSize);
+
+    .arrow {
+      top: 50%;
+      left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-left-width: 0;
+    }
+
+    .arrow::after {
+      left: var(--ContextBox-borderWidth);
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
+      border-left-width: 0;
+    }
+  }
+
+  &.positioned--left {  /* arrow on the right */
+    margin-right: var(--ContextBox-arrowSize);
+
+    .arrow {
+      top: 50%;
+      right: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      margin-top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-right-width: 0;
+    }
+
+    .arrow::after {
+      right: var(--ContextBox-borderWidth);
+      margin-top: calc(-1 * var(--ContextBox-arrowSize));
+      border-right-width: 0;
+    }
+  }
+
+  &.positioned--below,
+  &.positioned--bottom {  /* arrow on top */
+    margin-top: var(--ContextBox-arrowSize);
+
+    .arrow {
+      left: 50%;
+      top: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-top-width: 0;
+    }
+
+    .arrow::after {
+      top: var(--ContextBox-borderWidth);
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
+      border-top-width: 0;
+    }
+  }
+
+  &.positioned--above,
+  &.positioned--top {  /* arrow on bottom */
+    margin-bottom: var(--ContextBox-arrowSize);
+
+    .arrow {
+      left: 50%;
+      bottom: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      margin-left: calc(-1 * (var(--ContextBox-arrowSize) + var(--ContextBox-borderWidth)));
+      border-bottom-width: 0;
+    }
+
+    .arrow::after {
+      bottom: var(--ContextBox-borderWidth);
+      margin-left: calc(-1 * var(--ContextBox-arrowSize));
+      border-bottom-width: 0;
+    }
+  }
+}
+
+.default {
+  background: var(--ContextBox-backgroundColor);
+  border-color: var(--ContextBox-borderColor);
+  box-shadow: 0 1px 6px var(--ContextBox-boxShadowColor);
+  color: var(--ContextBox-textColor);
+}
+
+.inverse {
+  background: var(--ContextBox-backgroundColorInverse);
+  border-color: var(--ContextBox-borderColorInverse);
+  box-shadow: 0 1px 6px var(--ContextBox-boxShadowColorInverse);
+  color: var(--ContextBox-textColorInverse);
+}
+
+.default.with-arrow {
+  &.positioned--right { /* arrow on the left */
+
+    .arrow::after {
+      border-right-color: var(--ContextBox-backgroundColor);
+    }
+
+    .arrow {
+      border-right-color: var(--ContextBox-borderColor);
+    }
+  }
+
+  &.positioned--left {  /* arrow on the right */
+
+    .arrow::after {
+      border-left-color: var(--ContextBox-backgroundColor);
+    }
+
+    .arrow {
+      border-left-color: var(--ContextBox-borderColor);
+    }
+  }
+
+  &.positioned--below,
+  &.positioned--bottom {  /* arrow on top */
+
+    .arrow::after {
+      border-bottom-color: var(--ContextBox-backgroundColor);
+    }
+
+    .arrow {
+      border-bottom-color: var(--ContextBox-borderColor);
+    }
+  }
+
+  &.positioned--above,
+  &.positioned--top {  /* arrow on bottom */
+
+    .arrow::after {
+      border-top-color: var(--ContextBox-backgroundColor);
+    }
+
+    .arrow {
+      border-top-color: var(--ContextBox-borderColor);
+    }
+  }
+}
+
+.inverse.with-arrow {
+  &.positioned--right { /* arrow on the left */
+
+    .arrow::after {
+      border-right-color: var(--ContextBox-backgroundColorInverse);
+    }
+
+    .arrow {
+      border-right-color: var(--ContextBox-borderColorInverse);
+    }
+  }
+
+  &.positioned--left {  /* arrow on the right */
+
+    .arrow::after {
+      border-left-color: var(--ContextBox-backgroundColorInverse);
+    }
+
+    .arrow {
+      border-left-color: var(--ContextBox-borderColorInverse);
+    }
+  }
+
+  &.positioned--below,
+  &.positioned--bottom {  /* arrow on top */
+
+    .arrow::after {
+      border-bottom-color: var(--ContextBox-backgroundColorInverse);
+    }
+
+    .arrow {
+      border-bottom-color: var(--ContextBox-borderColorInverse);
+    }
+  }
+
+  &.positioned--above,
+  &.positioned--top {  /* arrow on bottom */
+
+    .arrow::after {
+      border-top-color: var(--ContextBox-backgroundColorInverse);
+    }
+
+    .arrow {
+      border-top-color: var(--ContextBox-borderColorInverse);
+    }
+  }
+}

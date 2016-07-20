@@ -1,0 +1,116 @@
+.root {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+}
+
+.bar[value] {
+  transition: all 0.3s;
+  box-sizing: border-box;
+  appearance: none;
+  width: auto;
+  flex: 1;
+  min-width: 16rem;
+  border: none;
+
+  &::-webkit-progress-value {
+    transition: all 1s;
+    box-shadow: 0 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
+    background-color: var(--ProgressBar-meter-color);
+  }
+
+  &::-moz-progress-bar {
+    transition: all 1s;
+    box-shadow: 0 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
+    background-color: var(--ProgressBar-meter-color);
+  }
+
+  &::-ms-fill {
+    border: none;
+    background-color: var(--ProgressBar-meter-color);
+  }
+}
+
+.value {
+  padding: 0 var(--Brand-spacing-medium);
+}
+
+.slash {
+  margin-left: 0.1875rem;
+  margin-right: 0.1875rem;
+}
+
+.small {
+  .bar[value] {
+    height: var(--ProgressBar-small-height);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeSmall);
+  }
+}
+
+.medium {
+  .bar[value] {
+    height: var(--ProgressBar-medium-height);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeMedium);
+  }
+}
+
+.large {
+  .bar[value] {
+    height: var(--ProgressBar-large-height);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeLarge);
+  }
+}
+
+.default {
+  .bar[value] {
+    background-color: var(--ProgressBar-track-color);
+
+    &::-webkit-progress-bar {
+      background-color: var(--ProgressBar-track-color);
+    }
+  }
+
+  .value {
+    color: var(--ProgressBar-color);
+  }
+}
+
+.inverse {
+  .bar[value] {
+    background-color: var(--ProgressBar-inverse-track-color);
+
+    &::-webkit-progress-bar {
+      background-color: var(--ProgressBar-inverse-track-color);
+    }
+  }
+
+  .value {
+    color: var(--ProgressBar-inverse-color);
+  }
+}
+
+.done .bar[value] {
+  &::-webkit-progress-value {
+    background-color: var(--ProgressBar-done-meter-color);
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--ProgressBar-done-meter-color);
+  }
+
+  &::-ms-fill {
+    background-color: var(--ProgressBar-done-meter-color);
+  }
+}

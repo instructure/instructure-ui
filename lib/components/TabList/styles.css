@@ -1,0 +1,9 @@
+.simple,
+.minimal {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.minimal {
+  background-color: var(--TabList-minimalBackgroundColor);
+}

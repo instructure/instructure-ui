@@ -1,28 +1,46 @@
 :root {
-  --colorCheckerboard: #eee;
-  --gradientCheckerboard: 45deg, var(--colorCheckerboard) 25%, transparent 25%, transparent 75%, var(--colorCheckerboard) 75%, var(--colorCheckerboard);
+  --ComponentExample-colorCheckerboard: #eee;
+  --ComponentExample-colorCheckerboardInverse: #444;
+  --ComponentExample-gradientCheckerboard:
+    45deg,
+    var(--ComponentExample-colorCheckerboard) 25%,
+    transparent 25%,
+    transparent 75%,
+    var(--ComponentExample-colorCheckerboard) 75%,
+    var(--ComponentExample-colorCheckerboard);
+  --ComponentExample-gradientCheckerboardInverse:
+    45deg,
+    var(--ComponentExample-colorCheckerboardInverse) 25%,
+    transparent 25%,
+    transparent 75%,
+    var(--ComponentExample-colorCheckerboardInverse) 75%,
+    var(--ComponentExample-colorCheckerboardInverse);
 }
 
 /* stylelint-disable selector-no-type */
 
-:global {
+html {
+  height: 100%;
+}
 
-  html {
-    height: 100%;
-  }
+body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #fff;
+  background-image: linear-gradient(var(--ComponentExample-gradientCheckerboard)),
+    linear-gradient(var(--ComponentExample-gradientCheckerboard));
+  background-position: 0 0, 0.5rem 0.5rem;
+  background-size: 1rem 1rem;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  overflow: scroll;
+}
 
-  body {
-    height: 100%;
-    box-sizing: border-box;
-    margin: 0;
-    background-color: #fff;
-    background-image: linear-gradient(var(--gradientCheckerboard)), linear-gradient(var(--gradientCheckerboard));
-    background-position: 0 0, 0.5rem 0.5rem;
-    background-size: 1rem 1rem;
-    border: 1px solid #eee;
-    border-radius: 3px;
-    overflow: scroll;
-  }
+body[data-variant="inverse"] {
+  background-color: #333;
+  background-image: linear-gradient(var(--ComponentExample-gradientCheckerboardInverse)),
+    linear-gradient(var(--ComponentExample-gradientCheckerboardInverse));
 }
 
 /* stylelint-enable selector-no-type */

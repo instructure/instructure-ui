@@ -1,0 +1,38 @@
+.root {
+  padding: var(--Brand-spacing-xSmall) var(--Brand-spacing-small);
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.default {
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+  font-size: var(--Brand-typography-fontSizeSmall);
+
+  cursor: pointer;
+  user-select: none;
+
+  transition: background 0.2s;
+
+  color: var(--MenuItem-color);
+  background: var(--MenuItem-background);
+
+  &:focus,
+  &:hover {
+    color: var(--MenuItem-hover-color);
+    background: var(--MenuItem-hover-background);
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.checkbox,
+.radio {
+
+}

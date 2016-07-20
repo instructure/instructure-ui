@@ -1,0 +1,207 @@
+:root {
+  --Button-borderWidth: var(--Brand-borders-widthSmall);
+  --Button-heightSmall: var(--Brand-forms-inputHeightSmall);
+  --Button-heightMedium: var(--Brand-forms-inputHeightMedium);
+  --Button-heightLarge: var(--Brand-forms-inputHeightLarge);
+}
+
+.root {
+  appearance: none;
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+
+  margin: 0;
+
+  text-decoration: none; /* for links styled as buttons */
+  text-align: center;
+  white-space: nowrap;
+
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+
+  transition: background 0.2s;
+
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  border-radius: var(--Brand-borders-radiusMedium);
+  border-style: var(--Brand-borders-style);
+  border-width: var(--Button-borderWidth);
+
+  &:focus {
+    outline: none;
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.default,
+.primary,
+.success,
+.link {
+  &.small {
+    font-size: var(--Brand-typography-fontSizeXSmall);
+    padding: 0 var(--Brand-spacing-xSmall);
+    line-height: var(--Button-heightSmall);
+  }
+
+  &.medium {
+    font-size: var(--Brand-typography-fontSizeSmall);
+    padding: 0 var(--Brand-spacing-small);
+    line-height: var(--Button-heightMedium);
+  }
+
+  &.large {
+    font-size: var(--Brand-typography-fontSizeMedium);
+    padding: 0 var(--Brand-spacing-medium);
+    line-height: var(--Button-heightLarge);
+  }
+}
+
+.default {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background: var(--Button-default-background);
+  color: var(--Button-default-color);
+  border-color: var(--Button-default-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-default-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-default-active-boxShadow);
+  }
+
+  &:focus {
+    box-shadow: var(--Button-default-focus-boxShadow);
+  }
+}
+
+.primary {
+  background: var(--Button-primary-background);
+  color: var(--Button-primary-color);
+  border-color: var(--Button-primary-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-primary-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-primary-active-boxShadow);
+  }
+
+  &:focus {
+    box-shadow: var(--Button-primary-focus-boxShadow);
+  }
+}
+
+.success {
+  background: var(--Button-success-background);
+  color: var(--Button-success-color);
+  border-color: var(--Button-success-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-success-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-success-active-boxShadow);
+  }
+
+  &:focus {
+    box-shadow: var(--Button-success-focus-boxShadow);
+  }
+}
+
+.link {
+  text-decoration: none;
+  background: transparent;
+  border-color: var(--Button-link-borderColor);
+  color: var(--Button-link-color);
+
+  &:focus {
+    box-shadow: var(--Button-link-focus-boxShadow);
+  }
+
+  &:hover,
+  &:focus,
+  &:active {
+    text-decoration: underline;
+  }
+
+  &:hover,
+  &:active {
+    color: var(--Button-link-hover-color);
+  }
+}
+
+.icon,
+.icon-inverse {
+  background: transparent;
+  border-color: var(--Button-icon-borderColor);
+  text-decoration: none;
+  display: inline-flex;
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: none;
+  }
+
+  &.small {
+    font-size: 1rem;
+    height: var(--Button-heightSmall);
+  }
+
+  &.medium {
+    font-size: 1.5rem;
+    height: var(--Button-heightMedium);
+  }
+
+  &.large {
+    font-size: 2rem;
+    height: var(--Button-heightLarge);
+  }
+}
+
+.icon-inverse {
+  color: var(--Button-icon-inverse-color);
+
+  &:hover,
+  &:active {
+    color: var(--Button-icon-inverse-hover-color);
+  }
+
+  &:focus {
+    box-shadow: var(--Button-icon-inverse-focus-boxShadow);
+  }
+}
+
+.icon {
+  color: var(--Button-icon-color);
+
+  &:hover,
+  &:active {
+    color: var(--Button-icon-hover-color);
+  }
+
+  &:focus {
+    box-shadow: var(--Button-icon-focus-boxShadow);
+  }
+}
+
+.is-block {
+  display: block;
+  width: 100%;
+}

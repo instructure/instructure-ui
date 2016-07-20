@@ -1,0 +1,19 @@
+.root {
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+}
+
+.small {
+  font-size: var(--Brand-typography-fontSizeXSmall);
+  padding: var(--Brand-spacing-xxSmall);
+}
+
+.medium {
+  font-size: var(--Brand-typography-fontSizeSmall);
+  padding: var(--Brand-spacing-xSmall);
+}
+
+.large {
+  font-size: var(--Brand-typography-fontSizeMedium);
+  padding: var(--Brand-spacing-small);
+}

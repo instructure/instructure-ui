@@ -11,14 +11,12 @@ module.exports = function (overrides) {
     resolve: {
       root: config.rootPath,
       modulesDirectories: [
-        path.resolve(__dirname, '../../node_modules'),
         'node_modules'
       ]
     },
     resolveLoader: {
       modulesDirectories: [
         path.resolve(__dirname, '../loaders'),
-        path.resolve(__dirname, '../../node_modules'),
         'node_modules'
       ]
     },

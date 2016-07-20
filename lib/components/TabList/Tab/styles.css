@@ -1,0 +1,165 @@
+.root {
+
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+
+  cursor: pointer;
+  user-select: none;
+
+  &[aria-selected],
+  &[aria-disabled] {
+    cursor: default;
+  }
+
+  &[aria-disabled] {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.minimal,
+.simple {
+  order: -1;
+  white-space: nowrap;
+}
+
+.simple {
+  box-sizing: border-box;
+  padding: 0.7em 1em;
+  color: var(--Tab-simpleTextColor);
+
+  margin-right: 0.2em;
+  margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
+
+  border: 1px solid transparent;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:not([aria-selected]):not([aria-disabled]):hover,
+  &[aria-selected] {
+    background-color: var(--Tab-simpleBackgroundColorSelected);
+    border-color: var(--Tab-simpleBorderColorSelected);
+  }
+
+  &:hover,
+  &[aria-selected],
+  &[aria-disabled] {
+    color: var(--Tab-simpleTextColorSelected);
+  }
+
+  &[aria-selected] {
+    /* To overlay Tab over TabPanel top border */
+    z-index: 1;
+    border-bottom-color: var(--Tab-simpleBackgroundColorSelected);
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.minimal {
+  padding: 1rem 1.25rem;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+  color: var(--Tab-minimalTextColor);
+
+  &::after {
+    transition: all 0.2s ease-out;
+    transform: translate3d(0, 0, 0) scaleX(0.01);
+    content: "";
+    height: 0.25rem;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+    opacity: 0;
+  }
+
+  &[aria-disabled] {
+    font-weight: normal;
+  }
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    border-bottom-color: var(--Tab-minimalBorderColorHover);
+  }
+
+  &[aria-selected]::after {
+    transform: translate3d(0, 0, 0) scaleX(1);
+    opacity: 1;
+    background-color: var(--Tab-minimalBorderColorSelected);
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.accordion {
+  box-sizing: border-box;
+
+  margin-top: 0.5rem;
+
+  padding: var(--Brand-spacing-xSmall) var(--Brand-spacing-small);
+
+  display: flex;
+  align-items: center;
+
+  transition: background-color 0.3s;
+  border-radius: 6px;
+  border-width: 1px;
+  border-style: solid;
+
+  color: var(--Tab-accordionTextColor);
+  background-color: var(--Tab-accordionBackgroundColor);
+  border-color: var(--Tab-accordionBorderColor);
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  & .icon::before {
+    content: "\25B8";
+    margin-right: 0.75rem;
+  }
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    background-color: var(--Tab-accordionBackgroundColorHover);
+  }
+
+  &[aria-selected] {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-color: var(--Tab-accordionBorderColorSelected);
+    color: var(--Tab-accordionTextColorSelected);
+    background-color: var(--Tab-accordionBackgroundColorSelected);
+
+    & .icon::before {
+      content: "\25BE";
+    }
+  }
+
+  &:focus {
+    box-shadow: inset 0 0 0 1px var(--Tab-accordionBorderColorFocused);
+  }
+}
+
+.screenreader-only {
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}

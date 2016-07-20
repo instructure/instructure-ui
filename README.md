@@ -14,8 +14,7 @@ npm install instructure-ui
 
 ```js
 import React from 'react'
-import { TabList } from 'instructure-ui'
-import 'instructure-ui/dist/components/TabList.css'
+import { TabList } from 'instructure-ui/lib/components/TabList'
 
 export default MyTabList = function () {
   return (
@@ -24,7 +23,7 @@ export default MyTabList = function () {
 }
 ```
 
-For the default theme you'll also need to include the ['Open Sans' font](http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans:400,300,500) in your application.
+For the default theme you'll also need to include the ['Lato' font](http://www.google.com/fonts#UsePlace:use/Collection:Lato:300,400,400i,700,700i) in your application.
 
 ### Customization
 

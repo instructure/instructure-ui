@@ -1,10 +1,7 @@
 /* eslint no-var: 0 */
 'use strict'
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
 var webpack = require('webpack')
-var path = require('path')
-var config = require('./config')
 
 module.exports = function (env, minify) {
   var plugins = [
@@ -14,17 +11,6 @@ module.exports = function (env, minify) {
       }
     })
   ]
-
-  if (env === 'production') {
-    plugins = plugins.concat(
-      new ExtractTextPlugin('[name].css', { allChunks: true })
-    )
-  } else if (env === 'build') {
-    var cssFilePath = process.argv[2]
-    plugins = plugins.concat(
-      new ExtractTextPlugin(path.relative(config.buildPath, cssFilePath))
-    )
-  }
 
   if (minify) {
     plugins = plugins.concat(
@@ -44,4 +30,3 @@ module.exports = function (env, minify) {
 
   return plugins
 }
-

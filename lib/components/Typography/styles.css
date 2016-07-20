@@ -1,0 +1,140 @@
+.root {
+  font-family: var(--Typography-fontFamily);
+}
+
+.color-primary {
+  color: var(--Typography-colorPrimary);
+}
+
+.color-secondary {
+  color: var(--Typography-colorSecondary);
+}
+
+.color-primary-inverse {
+  color: var(--Typography-colorPrimaryInverse);
+}
+
+.color-secondary-inverse {
+  color: var(--Typography-colorSecondaryInverse);
+}
+
+.color-success {
+  color: var(--Typography-colorSuccess);
+}
+
+.color-error {
+  color: var(--Typography-colorError);
+}
+
+.weight-normal {
+  font-weight: var(--Typography-fontWeightNormal);
+}
+
+.weight-light {
+  font-weight: var(--Typography-fontWeightLight);
+}
+
+.weight-bold {
+  font-weight: var(--Typography-fontWeightBold);
+}
+
+.style-normal {
+  font-style: normal;
+}
+
+.style-italic {
+  font-style: italic;
+}
+
+.x-small {
+  font-size: var(--Typography-fontSizeXSmall);
+}
+
+.small {
+  font-size: var(--Typography-fontSizeSmall);
+}
+
+.medium {
+  font-size: var(--Typography-fontSizeMedium);
+}
+
+.large {
+  font-size: var(--Typography-fontSizeLarge);
+}
+
+.x-large {
+  font-size: var(--Typography-fontSizeXLarge);
+}
+
+.xx-large {
+  font-size: var(--Typography-fontSizeXXLarge);
+}
+
+.lineHeight-default {
+  line-height: var(--Typography-lineHeight);
+}
+
+.lineHeight-fit {
+  line-height: var(--Typography-lineHeightFit);
+}
+
+.lineHeight-condensed {
+  line-height: var(--Typography-lineHeightCondensed);
+}
+
+.lineHeight-double {
+  line-height: var(--Typography-lineHeightDouble);
+}
+
+.transform-none {
+  text-transform: none;
+}
+
+.transform-capitalize {
+  text-transform: capitalize;
+}
+
+.transform-uppercase {
+  text-transform: uppercase;
+}
+
+.transform-lowercase {
+  text-transform: lowercase;
+}
+
+/* stylelint-disable selector-no-type */
+
+.root {
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sup {
+    top: -0.4em;
+  }
+
+  sub {
+    bottom: -0.4em;
+  }
+
+  pre,
+  code {
+    font-family: var(--Typography-fontFamilyMonospace);
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  b,
+  strong {
+    font-weight: var(--Typography-fontWeightBold);
+  }
+}
+
+/* stylelint-enable selector-no-type */

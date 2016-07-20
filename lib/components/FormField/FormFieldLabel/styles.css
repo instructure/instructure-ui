@@ -1,0 +1,10 @@
+.root {
+  color: var(--FormFieldLabel-color);
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeight);
+  font-size: var(--Brand-typography-fontSizeSmall);
+  padding: 0;
+  margin: 0;
+  display: block;
+}

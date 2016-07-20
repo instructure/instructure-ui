@@ -24,7 +24,14 @@ export default class DocsNav extends Component {
     }
   }
 
-  handleSearchChange = (e) => this.setState({query: e.target.value});
+  handleSearchChange = (e) => this.setState({query: e.target.value})
+
+  linkTheme (isSelected) {
+    return {
+      color: isSelected ? '#25a19f' : '#333',
+      textDecoration: 'none'
+    }
+  }
 
   render () {
     const components = this.props.components
@@ -37,7 +44,7 @@ export default class DocsNav extends Component {
         }
         return (
           <div key={component.name} className={classnames(classes)}>
-            <Link theme={{textColor: isSelected ? '#25a19f' : '#333'}} href={`#${component.name}`}>
+            <Link theme={this.linkTheme(isSelected)} href={`#${component.name}`}>
               {component.name}
             </Link>
           </div>
@@ -55,7 +62,7 @@ export default class DocsNav extends Component {
         }
         return (
           <div key={doc.name} className={classnames(classes)}>
-            <Link theme={{textColor: isSelected ? '#25a19f' : '#333'}} href={`#${doc.name}`}>
+            <Link theme={this.linkTheme(isSelected)} href={`#${doc.name}`}>
               {doc.title}
             </Link>
           </div>

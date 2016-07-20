@@ -1,0 +1,108 @@
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  flex: auto;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%; /* for Firefox */
+  outline: none;
+  margin: 0;
+  padding: 0; /* for IE */
+
+  &::range-thumb {
+    appearance: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+
+    width: var(--RangeInput-handleSize);
+    height: var(--RangeInput-handleSize);
+    background: var(--RangeInput-handleColor);
+    box-shadow: 0 1px 0 var(--RangeInput-handleShadowColor);
+
+    &:hover {
+      background: var(--RangeInput-handleColorHover);
+    }
+  }
+
+  &::-webkit-slider-thumb {
+    margin-top: calc(-1 * var(--RangeInput-handleSize) / 4);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+
+    &::range-thumb {
+      box-shadow:
+        0 1px 0 var(--RangeInput-handleShadowColor),
+        0 0 0 calc(var(--RangeInput-handleSize) / 2) var(--RangeInput-focusOutlineColor);
+    }
+  }
+
+  /* remove outline in FF */
+
+  &::-moz-focus-inner,
+  &::-moz-focus-outer {
+    border: 0;
+    outline: none;
+  }
+
+  &::range-track {
+    border-radius: 0.312em;
+    border-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    animate: 0.2s;
+
+    background: var(--RangeInput-trackColor);
+    height: calc(var(--RangeInput-handleSize) / 2);
+  }
+
+  &::-ms-track {
+    background: transparent;
+    border-width: var(--RangeInput-handleSize) 0;
+  }
+
+  &::-ms-fill-upper,
+  &::-ms-fill-lower {
+    border-width: var(--RangeInput-handleSize) 0;
+    border-radius: calc(var(--RangeInput-handleSize) / 2);
+    background: var(--RangeInput-trackColor);
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
+}
+
+.value {
+  box-sizing: border-box;
+  display: block;
+
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  text-align: center;
+
+  .small & {
+    font-size: var(--Brand-typography-fontSizeXSmall);
+    padding: 0 var(--Brand-spacing-xSmall);
+    line-height: var(--Brand-forms-inputHeightSmall);
+  }
+
+  .medium & {
+    font-size: var(--Brand-typography-fontSizeSmall);
+    padding: 0 var(--Brand-spacing-small);
+    line-height: var(--Brand-forms-inputHeightMedium);
+  }
+
+  .large & {
+    font-size: var(--Brand-typography-fontSizeMedium);
+    padding: 0 var(--Brand-spacing-medium);
+    line-height: var(--Brand-forms-inputHeightLarge);
+  }
+}

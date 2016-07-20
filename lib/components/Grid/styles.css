@@ -1,0 +1,52 @@
+.root {
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: var(--Brand-breakpoints-maxWidth);
+}
+
+@define-mixin Grid-container {
+  display: flex;
+  flex-flow: column nowrap;
+
+  &.colSpacingSmall {
+    padding-left: calc(var(--Brand-spacing-small) / 2);
+    padding-right: calc(var(--Brand-spacing-small) / 2);
+  }
+
+  &.colSpacingMedium {
+    padding-left: calc(var(--Brand-spacing-medium) / 2);
+    padding-right: calc(var(--Brand-spacing-medium) / 2);
+  }
+
+  &.colSpacingLarge {
+    padding-left: calc(var(--Brand-spacing-large) / 2);
+    padding-right: calc(var(--Brand-spacing-large) / 2);
+  }
+}
+
+.visualDebug {
+  border: 1px dashed red;
+}
+
+.startAtPhone {
+  @mixin Grid-container;
+}
+
+@media screen and (--Brand-media-tabletMin) {
+  .startAtTablet {
+    @mixin Grid-container;
+  }
+}
+
+@media screen and (--Brand-media-desktopMin) {
+  .startAtDesktop {
+    @mixin Grid-container;
+  }
+}
+
+@media screen and (--Brand-media-wideMin) {
+  .startAtWide {
+    @mixin Grid-container;
+  }
+}
+

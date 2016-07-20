@@ -28,6 +28,10 @@ $.fn.getKey = function () {
   return this.unwrap()._reactInternalInstance._currentElement.key.replace('.$', '')
 }
 
+$.fn.getPropertyValue = function (property) {
+  return window.getComputedStyle(this.dom()).getPropertyValue(property)
+}
+
 let wrappedA11yCheck
 
 const setA11yCheckCallback = function (cb) {
@@ -101,31 +105,39 @@ export default class ReactTestbed {
   }
 
   render (props = {}, context) {
+    const tick = () => {
+      // to make sure any transitions are complete:
+      this.mockRaf.step(10)
+      this.sandbox.clock.tick(1)
+    }
+
     const subject = cloneElement(this.subject, {
       ...this.subject.props,
       ...props
     })
+
     this.rootNode = document.createElement('div')
 
     this.$instance = $(subject).render(true, this.rootNode, context)
 
-    // to make sure any transitions are complete:
-    this.mockRaf.step(10)
-    this.sandbox.clock.tick(1000)
+    const propsFn = this.$instance.props
+    const unmountFn = this.$instance.unmount
+
+    this.$instance.props = function (props) {
+      const $instance = propsFn.call(this, props)
+      tick()
+      return $instance
+    }
+
+    this.$instance.unmount = function () {
+      const $instance = unmountFn.apply(this, arguments)
+      tick()
+      return $instance
+    }
+
+    tick()
 
     return this.$instance
-  }
-
-  props (props, callback) {
-    this.$instance.props(props, () => {
-      // to make sure any transitions are complete:
-      this.mockRaf.step(10)
-      this.sandbox.clock.tick(1000)
-
-      if (typeof callback === 'function') {
-        callback()
-      }
-    })
   }
 }
 

@@ -1,0 +1,35 @@
+.root {
+  display: block;
+}
+
+/* stylelint-disable selector-no-type */
+
+.simple {
+  > label {
+    margin-top: var(--Brand-spacing-xxSmall);
+  }
+}
+
+/* stylelint-enable selector-no-type */
+
+.toggle {
+  transition: all 0.2s;
+  display: inline-flex;
+  box-sizing: border-box;
+  border-width: var(--Brand-borders-widthLarge);
+  border-style: var(--Brand-borders-style);
+  border-radius: var(--Brand-borders-radiusLarge);
+
+  background: var(--RadioInputGroup-toggleBgColor);
+  border-color: var(--RadioInputGroup-toggleBgColor);
+
+  &.success {
+    background: var(--RadioInputGroup-toggleSuccessColor);
+    border-color: var(--RadioInputGroup-toggleSuccessColor);
+  }
+
+  &.danger {
+    background: var(--RadioInputGroup-toggleDangerColor);
+    border-color: var(--RadioInputGroup-toggleDangerColor);
+  }
+}

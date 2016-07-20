@@ -24,5 +24,13 @@ module.exports = [
       amd: 'react-addons-css-transition-group',
       root: 'React.addons.CSSTransitionGroup'
     }
+  },
+  {
+    'babel-polyfill': {
+      root: 'babel-polyfill',
+      commonjs2: 'babel-polyfill',
+      commonjs: 'babel-polyfill',
+      amd: 'babel-polyfill'
+    }
   }
 ]

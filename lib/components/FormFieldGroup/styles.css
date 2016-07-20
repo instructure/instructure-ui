@@ -1,0 +1,21 @@
+.root {
+  min-width: 0;
+  margin: 0;
+  padding: 0.01em 0 0 0;
+  border: 0;
+
+  &[aria-disabled] .fields {
+    opacity: 0.6;
+  }
+
+  + .root {
+    margin-top: var(--Brand-spacing-small);
+  }
+}
+
+.legend {
+  margin: 0;
+  padding: 0; /* no padding or margins on this element so that label can be hidden */
+  display: table;
+  width: 100%;
+}

@@ -1,6 +1,0 @@
-.label {
-  color: map(CheckboxGroup, labelTextColor);
-  font-weight: map(CheckboxGroup, labelFontWeight);
-  font-family: map(CheckboxGroup, labelFontFamily);
-}
-

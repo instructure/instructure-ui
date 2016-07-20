@@ -8,8 +8,9 @@ export default function parseDescription (markdown) {
 
   const renderer = new marked.Renderer()
   renderer.code = function (code, language) {
-    if (language === 'jsx_example') {
-      examples.push(code)
+    if (language === 'jsx_example' || language === 'jsx_example_inverse') {
+      const variant = (language === 'jsx_example_inverse') ? 'inverse' : null
+      examples.push({ code, variant })
       return EXAMPLE_PLACEHOLDER
     } else {
       return marked.Renderer.prototype.code.apply(this, arguments)
@@ -21,13 +22,20 @@ export default function parseDescription (markdown) {
   const sections = []
   const textChunks = html.split(EXAMPLE_PLACEHOLDER)
   textChunks.forEach(function (chunk) {
-    const code = examples.shift()
+    const example = examples.shift()
+
     if (chunk) {
       sections.push({type: 'html', content: chunk})
     }
-    if (code) {
-      sections.push({type: 'code', content: code})
+
+    if (example && example.code) {
+      sections.push({
+        type: 'code',
+        variant: example.variant,
+        content: example.code
+      })
     }
   })
+
   return sections
 }

@@ -1,21 +1,18 @@
 /* eslint no-var: 0 */
 'use strict'
 
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
-var multi = require('multi-loader')
-var merge = require('webpack-merge')
-var opts = require('../util/config')
+var config = require('./config')
 
-var cssPrefix = [
-  opts.library.prefix,
-  opts.library.version,
-  '[name]__[local]'
+var localIdentName = [
+  config.library.prefix,
+  config.library.version,
+  '[folder]__[local]'
 ].join('-')
 
-var CSS_LOADER = 'css?modules&importLoaders=1&localIdentName=' + cssPrefix
-
 module.exports = function (env) {
-  var config = {
+  var cssLoader = 'css?modules&importLoaders=1&localIdentName=' + localIdentName + '!postcss'
+
+  return {
     preLoaders: [
       {
         test: /\.js?$/,
@@ -39,75 +36,33 @@ module.exports = function (env) {
         loader: 'url?mimetype=image/png'
       },
       {
-        test: /\.gif$/,
-        loader: 'url?mimetype=image/gif'
-      },
-      {
-        test: /\.jpe?g$/,
-        loader: 'url?mimetype=image/jpeg'
-      },
-      {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'url?limit=10000&minetype=application/font-woff'
+        loader: 'url?limit=10000&mimetype=application/font-woff'
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
         loader: 'file'
+      },
+      {
+        test: /\.css$/,
+        exclude: [
+          /node_modules/,
+          /docs\/app\//
+        ],
+        loader: 'component-style!' + cssLoader
+      },
+      {
+        test: /\.css$/,
+        include: [
+          /docs\/app\//
+        ],
+        loader: 'style!' + cssLoader
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: 'style!css'
       }
     ]
   }
-
-  if (env === 'production') {
-    config = merge(config, {
-      loaders: [
-        {
-          test: /\.css$/,
-          exclude: [
-            /node_modules/,
-            /\/theme\//
-          ],
-          loader: ExtractTextPlugin.extract('style', CSS_LOADER + '!postcss')
-        },
-        {
-          test: /\.css$/,
-          include: /\/theme\//,
-          exclude: /node_modules/,
-          loader: multi(
-            ExtractTextPlugin.extract('style', CSS_LOADER + '!postcss?pack=extractTheme'),
-            'to-string!' + CSS_LOADER + '&-minimize!postcss'
-          )
-        },
-        {
-          test: /\.css$/,
-          include: /node_modules/,
-          loader: ExtractTextPlugin.extract('style', 'css')
-        }
-      ]
-    })
-  } else {
-    config = merge(config, {
-      loaders: [
-        {
-          test: /\.css$/,
-          exclude: [
-            /node_modules/,
-            /\/theme\//
-          ],
-          loader: 'style!' + CSS_LOADER + '!postcss'
-        },
-        {
-          test: /\.css$/,
-          include: /\/theme\//,
-          exclude: /node_modules/,
-          loader: 'to-string!' + CSS_LOADER + '&-minimize!postcss'
-        },
-        {
-          test: /\.css$/,
-          include: /node_modules/,
-          loader: 'style!css'
-        }
-      ]
-    })
-  }
-  return config
 }

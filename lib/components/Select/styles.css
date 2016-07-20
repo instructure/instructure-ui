@@ -1,0 +1,101 @@
+.root {
+  position: relative;
+  display: block;
+
+  .arrow {
+    display: block;
+    position: absolute;
+    top: calc(50% - 0.4rem);
+    right: var(--Brand-spacing-small);
+    pointer-events: none;
+    fill: var(--Select-arrowIconColor);
+  }
+
+  .select {
+    background: var(--Select-backgroundColor);
+    border-color: var(--Select-borderColor);
+    color: var(--Select-textColor);
+
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    appearance: none;
+
+    padding: 0 var(--Brand-spacing-small);
+
+    border-width: var(--Brand-borders-widthSmall);
+    border-style: var(--Brand-borders-style);
+    border-radius: var(--Brand-borders-radiusMedium);
+
+    transition: all 0.2s ease-out;
+
+    outline-style: solid;
+    outline-color: transparent;
+    outline-offset: -0.5rem;
+    outline-width: 0.1875rem;
+
+    font-family: var(--Brand-typography-fontFamily);
+    font-weight: var(--Brand-typography-fontWeightNormal);
+    font-size: var(--Brand-typography-fontSizeSmall);
+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      outline-offset: -0.1875rem;
+      border-color: var(--Select-borderColorFocus);
+      outline-color: var(--Select-outlineColor);
+    }
+
+    &[aria-invalid] {
+      border-color: var(--Select-borderColorError);
+
+      &:focus {
+        border-color: var(--Select-borderColorError);
+        outline-color: var(--Select-outlineColorError);
+      }
+    }
+
+  }
+
+}
+
+.small {
+  .select {
+    line-height: var(--Brand-forms-inputHeightSmall);
+    height: var(--Brand-forms-inputHeightSmall);
+    font-size: var(--Brand-typography-fontSizeXSmall);
+  }
+
+  .arrow {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}
+
+.medium {
+  .select {
+    line-height: var(--Brand-forms-inputHeightMedium);
+    height: var(--Brand-forms-inputHeightMedium);
+    font-size: var(--Brand-typography-fontSizeSmall);
+  }
+
+  .arrow {
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+}
+
+.large {
+  .select {
+    line-height: var(--Brand-forms-inputHeightLarge);
+    height: var(--Brand-forms-inputHeightLarge);
+    font-size: var(--Brand-typography-fontSizeSmall);
+  }
+
+  .arrow {
+    width: 1rem;
+    height: 1rem;
+  }
+}

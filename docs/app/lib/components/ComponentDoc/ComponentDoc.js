@@ -60,34 +60,29 @@ export default class ComponentDoc extends Component {
     const libraryName = library.name
     const githubRoot = library.projectUrl + '/tree/master/'
 
-    const componentCSSPath = packageName + '/dist/components/' + name + '.css'
-
-    const es6Example = [
+    const example = [
+      '/*** es6 ***/',
       'import { ' + name + ' } from \'' + packageName + '\'',
-      '// or',
+      '// or single component:',
       'import ' + name + ' from \'' + packageName + '/lib/components/' + name + '\'',
       '',
-      '// include component CSS',
-      'import \'' + componentCSSPath + '\''
-    ].join('\n')
-
-    const commonJSExample = [
-      'var ' + name + ' = require(\'' + packageName + '/lib/components/' + name + '\')',
-      '// or',
-      'var ' + name + ' = require(\'' + packageName + '\').' + name,
       '',
-      '// include component CSS',
-      'require(\'' + componentCSSPath + '\')'
-    ].join('\n')
-
-    const amdExample = [
-      'define([\'' + packageName + '\'], function(' + libraryName + ') {',
+      '/*** CommonJS ***/',
+      'var ' + name + ' = require(\'' + packageName + '\').' + name,
+      '// or single component:',
+      'var ' + name + ' = require(\'' + packageName + '/lib/components/' + name + '\')',
+      '',
+      '',
+      '/*** AMD ***/',
+      'define([\'' + libraryName + '\'], function(' + libraryName + ') {',
       '  var ' + name + ' = ' + libraryName + '.' + name,
+      '  ...',
+      '})',
+      '// or single component:',
+      'define([\'' + libraryName + '/' + name + '\'], function(' + name + ') {',
       '  ...',
       '})'
     ].join('\n')
-
-    // TODO: globals example
 
     return (
       <div className={styles.root}>
@@ -104,23 +99,11 @@ export default class ComponentDoc extends Component {
         <h3 className={styles.sectionHeading} id={name + 'Usage'}>
           Usage
         </h3>
-        <div>
-          <h4 className={styles.sectionSubHeading}>ES6</h4>
-          <CodeEditor code={es6Example} readOnly mode="javascript" />
-
-          <h4 className={styles.sectionSubHeading}>CommonJS</h4>
-          <CodeEditor code={commonJSExample} readOnly mode="javascript" />
-
-          <h4 className={styles.sectionSubHeading}>AMD</h4>
-          <p>
-            Note that if you are using AMD you'll have to require the entire component
-            library. If you want to consume only specific components, consider using npm and
-            CommonJS or ES6 modules instead.
-          </p>
-          <p>
-            You'll need to include the CSS file in <code>{componentCSSPath}</code>
-          </p>
-          <CodeEditor code={amdExample} readOnly mode="javascript" />
+        <p>
+          <code>npm install --save {packageName}</code>
+        </p>
+        <div className={styles.usage}>
+          <CodeEditor code={example} readOnly mode="javascript" />
         </div>
       </div>
     )

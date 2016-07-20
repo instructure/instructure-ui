@@ -17,7 +17,7 @@ entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
 
 glob.sync(config.components.files)
   .map(function (filepath) {
-    var name = 'components/' + componentNameFromPath(filepath)
+    var name = componentNameFromPath(filepath)
     if (process.env.MINIFY) {
       name = name + '.min'
     }
@@ -29,7 +29,7 @@ module.exports = require('./util/generate-config')({
   output: {
     path: config.distPath,
     filename: '[name].js',
-    library: config.library.name,
+    library: '[name]',
     libraryTarget: 'umd',
     umdNamedDefine: true
   },

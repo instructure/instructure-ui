@@ -1,0 +1,106 @@
+:root {
+  --ToggleFacade-borderWidth: var(--Brand-borders-widthLarge);
+}
+
+.root {
+  color: var(--ToggleFacade-color);
+  background: var(--ToggleFacade-background);
+  border-color: var(--ToggleFacade-borderColor);
+
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  user-select: none;
+  transition: all 0.2s;
+  position: relative;
+  box-sizing: border-box;
+
+  border-width: var(--ToggleFacade-borderWidth);
+  border-style: solid;
+  border-radius: var(--Brand-borders-radiusLarge);
+
+  &::before {
+    background: var(--ToggleFacade-handle-background);
+    transition: all 0.2s ease-out;
+    transform: translate3d(0, 0, 0);
+    content: "";
+    height: 100%;
+    width: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    border-radius: calc(var(--Brand-borders-radiusLarge) - var(--ToggleFacade-borderWidth));
+  }
+}
+
+.icon {
+  width: 50%;
+  height: 1em;
+  text-align: center;
+
+  .enter {
+    transform: scale(0.01) translate3d(0, 0, 0);
+    opacity: 0;
+  }
+
+  .enter.enter-active {
+    transition: all 0.2s ease-out;
+    transform: scale(1) translate3d(0, 0, 0);
+    opacity: 1;
+  }
+
+}
+
+.label {
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+  font-size: var(--Brand-typography-fontSizeSmall);
+}
+
+/* stylelint-disable selector-no-type */
+
+.root {
+  input[type="checkbox"]:checked + &,
+  &.checked {
+    justify-content: flex-start;
+    background: var(--ToggleFacade-checked-background);
+    border-color: var(--ToggleFacade-checked-borderColor);
+
+    &::before {
+      transform: translate3d(100%, 0, 0);
+    }
+  }
+
+  [role="menuitemcheckbox"]:focus > &,
+  input[type="checkbox"]:focus + &,
+  &.focused {
+    &::before {
+      box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.4),
+        0 0 0 8px var(--ToggleFacade-focus-outlineColor);
+    }
+  }
+}
+
+/* stylelint-enable selector-no-type */
+
+.small {
+  font-size: 0.9rem;
+  height: 1.75rem;
+  width: 3rem;
+}
+
+.medium {
+  font-size: 1.1rem;
+  height: 2.375rem;
+  width: 4rem;
+}
+
+.large {
+  font-size: 1.3rem;
+  height: 3rem;
+  width: 5rem;
+}

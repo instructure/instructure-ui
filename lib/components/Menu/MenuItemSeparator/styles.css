@@ -1,0 +1,6 @@
+.root {
+  height: var(--Brand-borders-widthSmall);
+  margin: 0 var(--Brand-spacing-small);
+  overflow: hidden;
+  background: var(--MenuItemSeparator-background);
+}

@@ -1,6 +1,0 @@
-.initials {
-  font-family: map(Avatar, fontFamily);
-  color: map(Avatar, textColor);
-  background-color: map(Avatar, backgroundColor);
-  letter-spacing: map(Avatar, letterSpacing);
-}

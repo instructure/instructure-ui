@@ -1,0 +1,29 @@
+.root {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+
+  & + .root {
+    margin-top: var(--Brand-spacing-xxSmall);
+  }
+}
+
+.input {
+  margin: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.0001; /* selenium cannot find fully transparent elements */
+}
+
+.disabled {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.is-block {
+  display: block;
+  width: 100%;
+}

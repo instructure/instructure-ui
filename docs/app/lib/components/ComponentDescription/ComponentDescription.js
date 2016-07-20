@@ -23,6 +23,7 @@ export default class ComponentDescription extends Component {
             <ComponentPlayground
               name={this.props.name}
               code={section.content}
+              variant={section.variant}
               key={i} />
           )
         case 'html':

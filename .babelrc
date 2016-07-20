@@ -1,13 +1,15 @@
 {
   "presets": ["es2015", "stage-1", "react"],
-  "plugins": ["transform-decorators-legacy", "transform-runtime"],
+  "plugins": [
+    "transform-decorators-legacy"
+  ],
   "env": {
     "development": {
       "presets": ["react-hmre"]
     },
     "build": {
       "plugins": [
-        ["webpack-loaders", { "config": "./webpack/build.config.js", "verbose": true }]
+        ["webpack-loaders", { "config": "./webpack/transpile.config.js", "verbose": true }]
       ]
     }
   }

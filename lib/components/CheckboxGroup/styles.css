@@ -1,0 +1,9 @@
+/* stylelint-disable selector-no-type */
+
+.root {
+  > label {
+    margin-top: var(--Brand-spacing-xxSmall);
+  }
+}
+
+/* stylelint-enable selector-no-type */

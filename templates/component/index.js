@@ -1,9 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import themeable from '../../util/themeable'
 
-import styles from './${COMPONENT}.css'
-import themeVariables from './theme/${COMPONENT}'
-import themeStyles from './theme/${COMPONENT}.css'
+import styles from './styles.css'
+import theme from './theme.js'
 
 /**
   A ${COMPONENT} component [WIP]
@@ -12,8 +11,8 @@ import themeStyles from './theme/${COMPONENT}.css'
   <${COMPONENT} />
   ```
 **/
-@themeable(themeVariables, themeStyles)
-export default class ${COMPONENT} extends Component {
+@themeable(theme, styles)
+class ${COMPONENT} extends Component {
   static propTypes = {
     /**
     * description of replaceMe prop
@@ -26,10 +25,13 @@ export default class ${COMPONENT} extends Component {
   }
 
   render () {
+    const props = omitProps(this.props, ${COMPONENT}.propTypes)
     return (
-      <div className={styles.root}>
+      <div {...props} className={styles.root}>
         Hello World
       </div>
     )
   }
 }
+
+export default ${COMPONENT}

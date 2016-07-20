@@ -26,12 +26,12 @@ function getConfig () {
       files: 'docs/*.md'
     },
     components: {
-      files: 'lib/components/*/index.js',
+      files: 'lib/components/*/index.js', // only the top level components
       excludes: [ /\.test\.js$/ ]
     },
     theme: {
-      files: 'lib/components/*/theme/*.js',
-      config: 'lib/theme/config'
+      files: 'lib/components/**/*theme.js', // include nested components
+      brand: 'lib/theme/brand'
     },
     tests: {
       files: 'lib/**/*.test.js'

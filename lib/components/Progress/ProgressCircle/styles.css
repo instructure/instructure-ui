@@ -1,0 +1,278 @@
+:root {
+  --ProgressCircle-sizeSm: 5rem;
+  --ProgressCircle-sizeMed: 7rem;
+  --ProgressCircle-sizeLg: 9rem;
+
+  /*
+    The radius variables here need to always
+    match the values in the radius() function
+    in index.js
+  */
+  --ProgressCircle-radiusSm: 1.8rem;
+  --ProgressCircle-radiusMed: 2.75rem;
+  --ProgressCircle-radiusLg: 3.5rem;
+
+  /*
+    Calculate the circumference of each size of circle
+    to use below
+  */
+  --ProgressCircle-circumferenceSm: calc(2 * 3.1416 * var(--ProgressCircle-radiusSm));
+  --ProgressCircle-circumferenceMed: calc(2 * 3.1416 * var(--ProgressCircle-radiusMed));
+  --ProgressCircle-circumferenceLg: calc(2 * 3.1416 * var(--ProgressCircle-radiusLg));
+}
+
+.root {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  overflow: hidden;
+
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+}
+
+.circle {
+  transform: rotate(-90deg);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.center {
+  transition: all 0.5s;
+  transition-delay: 0.5s;
+  display: block;
+  position: absolute;
+  transform: translate3d(0, 0, 0);
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+  z-index: -1;
+}
+
+.value {
+  box-sizing: border-box;
+  word-wrap: break-word;
+  text-align: center;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.shadow,
+.track,
+.meter {
+  fill: none;
+}
+
+.meter {
+  transition: all 1s;
+  stroke: var(--ProgressCircle-meter-color);
+}
+
+.default {
+  .track {
+    stroke: var(--ProgressCircle-track-color);
+  }
+
+  .value {
+    color: var(--ProgressCircle-color);
+  }
+}
+
+.inverse {
+  .track {
+    stroke: var(--ProgressCircle-inverse-track-color);
+  }
+
+  .value {
+    color: var(--ProgressCircle-inverse-color);
+  }
+}
+
+.default.done {
+  .shadow {
+    display: none;
+  }
+}
+
+.inverse.done {
+  .shadow {
+    stroke: rgba(0, 0, 0, 0.15);
+  }
+}
+
+.done {
+  .meter {
+    stroke: var(--ProgressCircle-done-meter-color);
+  }
+}
+
+.small {
+  width: var(--ProgressCircle-sizeSm);
+  height: var(--ProgressCircle-sizeSm);
+
+  .circle {
+    width: var(--ProgressCircle-sizeSm);
+    height: var(--ProgressCircle-sizeSm);
+  }
+
+  .shadow {
+    stroke-width: 1rem;
+  }
+
+  .track {
+    transform-origin: calc(var(--ProgressCircle-sizeSm) / 2);
+  }
+
+  .track,
+  .meter {
+    stroke-width: 0.5rem;
+  }
+
+  .meter {
+    stroke-dasharray: var(--ProgressCircle-circumferenceSm);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeSmall);
+    width: var(--ProgressCircle-sizeSm);
+    height: var(--ProgressCircle-sizeSm);
+  }
+}
+
+.medium {
+  width: var(--ProgressCircle-sizeMed);
+  height: var(--ProgressCircle-sizeMed);
+
+  .circle {
+    width: var(--ProgressCircle-sizeMed);
+    height: var(--ProgressCircle-sizeMed);
+  }
+
+  .shadow {
+    stroke-width: 1.125rem;
+  }
+
+  .track {
+    transform-origin: calc(var(--ProgressCircle-sizeMed) / 2);
+  }
+
+  .track,
+  .meter {
+    stroke-width: 0.625em;
+  }
+
+  .meter {
+    stroke-dasharray: var(--ProgressCircle-circumferenceMed);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeLarge);
+    width: var(--ProgressCircle-sizeMed);
+    height: var(--ProgressCircle-sizeMed);
+  }
+}
+
+.large {
+  width: var(--ProgressCircle-sizeLg);
+  height: var(--ProgressCircle-sizeLg);
+
+  .circle {
+    width: var(--ProgressCircle-sizeLg);
+    height: var(--ProgressCircle-sizeLg);
+  }
+
+  .shadow {
+    stroke-width: 1.375rem;
+  }
+
+  .track {
+    transform-origin: calc(var(--ProgressCircle-sizeLg) / 2);
+  }
+
+  .track,
+  .meter {
+    stroke-width: 0.875rem;
+  }
+
+  .meter {
+    stroke-dasharray: var(--ProgressCircle-circumferenceLg);
+  }
+
+  .value {
+    font-size: var(--Brand-typography-fontSizeXLarge);
+    width: var(--ProgressCircle-sizeLg);
+    height: var(--ProgressCircle-sizeLg);
+  }
+}
+
+@keyframes ProgressCircle-trackEnter {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/*
+  The animateOnMount class is removed via a state
+  change in index.js, triggering CSS transitions and animations
+  that make the track, meter and output text animate in
+  (only used if the animateOnMount prop is true)
+*/
+
+.animateOnMount {
+  .track {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) scale(0.1);
+    animation-name: ProgressCircle-trackEnter;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    animation-fill-mode: forwards;
+  }
+
+  .center {
+    opacity: 0;
+    transform: translate3d(0, 0, 0);
+  }
+
+  /* stylelint-disable declaration-no-important */
+
+  &.small {
+    .meter {
+      stroke-dashoffset: var(--ProgressCircle-circumferenceSm) !important;
+    }
+
+    .center {
+      transform: translate3d(0, 35%, 0);
+    }
+  }
+
+  &.medium {
+    .meter {
+      stroke-dashoffset: var(--ProgressCircle-circumferenceMed) !important;
+    }
+
+    .center {
+      transform: translate3d(0, 35%, 0);
+    }
+  }
+
+  &.large {
+    .meter {
+      stroke-dashoffset: var(--ProgressCircle-circumferenceLg) !important;
+    }
+
+    .center {
+      transform: translate3d(0, 35%, 0);
+    }
+  }
+
+  /* stylelint-enable declaration-no-important */
+}

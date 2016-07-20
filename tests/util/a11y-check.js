@@ -21,7 +21,7 @@ export default function checkA11y (node, options = {}) {
   const axeConfig = {
     runOnly: {
       type: 'tag',
-      values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
+      values: ['wcag2a', 'section508', 'best-practice'] // TODO: add 'wcag2aa' for high contrast themes
     }
   }
 

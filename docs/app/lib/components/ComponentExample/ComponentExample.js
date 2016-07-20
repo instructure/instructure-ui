@@ -11,7 +11,7 @@ import '../../util/load-globals'
 
 const messageHandler = function (message) {
   if (message && typeof message.code === 'string') {
-    this.executeCode(message.code)
+    this.executeCode(message.code, message.variant)
   }
 }
 
@@ -19,13 +19,15 @@ const messageHandler = function (message) {
 export default class ComponentExample extends Component {
   static propTypes = {
     code: PropTypes.string,
-    children: PropTypes.node
-  };
+    children: PropTypes.node,
+    variant: PropTypes.string
+  }
 
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      error: null
+      error: null,
+      variant: props.variant
     }
   }
 
@@ -39,6 +41,14 @@ export default class ComponentExample extends Component {
       })
       this._handleResize = debounce(this.notifyParent, 200)
       window.addEventListener('resize', this._handleResize)
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (nextProps.variant !== this.props.variant) {
+      this.setState({
+        variant: nextProps.variant
+      })
     }
   }
 
@@ -58,7 +68,7 @@ export default class ComponentExample extends Component {
         })
       }, 0)
     }
-  };
+  }
 
   compileCode (code) {
     return transform(code, {
@@ -72,13 +82,14 @@ export default class ComponentExample extends Component {
     /* eslint-enable no-eval */
   }
 
-  executeCode (code) {
+  executeCode (code, variant) {
     const mountNode = this.refs.mount
 
     ReactDOM.unmountComponentAtNode(mountNode)
 
     this.setState({
-      error: null
+      error: null,
+      variant
     })
 
     if (!code) {
@@ -120,7 +131,7 @@ export default class ComponentExample extends Component {
     const { error } = this.state
     if (error) {
       return (
-        <div className={styles.errorBg}></div>
+        <div className={styles.errorBg} />
       )
     } else {
       return null
@@ -136,6 +147,8 @@ export default class ComponentExample extends Component {
   }
 
   render () {
+    const variant = this.state.variant ? this.state.variant : ''
+    document.body.setAttribute('data-variant', variant)
     return (
       <div className={styles.root}>
         {this.renderErrorBg()}

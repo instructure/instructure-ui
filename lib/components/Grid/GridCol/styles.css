@@ -1,0 +1,154 @@
+:root {
+  --Grid-numCols: 12;
+}
+
+@define-mixin flex-column
+  $size: 1 {
+
+  flex: 0 0 calc($size / var(--Grid-numCols) * 99.999%);
+  max-width: calc($size / var(--Grid-numCols) * 99.999%);
+}
+
+@define-mixin grid-columns-for-breakpoint
+  $breakpoint {
+  .$(breakpoint)--auto {
+    flex: 0 1 auto;
+  }
+
+  .$(breakpoint)--1 {
+    @mixin flex-column 1;
+  }
+
+  .$(breakpoint)--2 {
+    @mixin flex-column 2;
+  }
+
+  .$(breakpoint)--3 {
+    @mixin flex-column 3;
+  }
+
+  .$(breakpoint)--4 {
+    @mixin flex-column 4;
+  }
+
+  .$(breakpoint)--5 {
+    @mixin flex-column 5;
+  }
+
+  .$(breakpoint)--6 {
+    @mixin flex-column 6;
+  }
+
+  .$(breakpoint)--7 {
+    @mixin flex-column 7;
+  }
+
+  .$(breakpoint)--8 {
+    @mixin flex-column 8;
+  }
+
+  .$(breakpoint)--9 {
+    @mixin flex-column 9;
+  }
+
+  .$(breakpoint)--10 {
+    @mixin flex-column 10;
+  }
+
+  .$(breakpoint)--11 {
+    @mixin flex-column 11;
+  }
+
+  .$(breakpoint)--12 {
+    flex: 0 0 100%;
+  }
+}
+
+@define-mixin start-grid-column {
+  flex: 1;
+  margin-bottom: 0;
+
+  &.rowSpacingSmall,
+  &.rowSpacingMedium,
+  &.rowSpacingLarge {
+    margin-bottom: 0;
+  }
+
+  &.colSpacingSmall {
+    padding: 0 calc(var(--Brand-spacing-small) / 2);
+  }
+
+  &.colSpacingMedium {
+    padding: 0 calc(var(--Brand-spacing-medium) / 2);
+  }
+
+  &.colSpacingLarge {
+    padding: 0 calc(var(--Brand-spacing-large) / 2);
+  }
+
+  &.vAlign--top {
+    align-self: flex-start;
+  }
+
+  &.vAlign--middle {
+    align-self: center;
+  }
+
+  &.vAlign--bottom {
+    align-self: flex-end;
+  }
+}
+
+.root {
+  box-sizing: border-box;
+
+  &.rowSpacingSmall {
+    margin-bottom: var(--Brand-spacing-small);
+  }
+
+  &.rowSpacingMedium {
+    margin-bottom: var(--Brand-spacing-medium);
+  }
+
+  &.rowSpacingLarge {
+    margin-bottom: var(--Brand-spacing-large);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.startAtPhone {
+  @mixin start-grid-column;
+}
+
+@mixin grid-columns-for-breakpoint phone;
+
+@media screen and (--Brand-media-tabletMin) {
+  .startAtTablet {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint tablet;
+}
+
+@media screen and (--Brand-media-desktopMin) {
+  .startAtDesktop {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint desktop;
+}
+
+@media screen and (--Brand-media-wideMin) {
+  .startAtWide {
+    @mixin start-grid-column;
+  }
+
+  @mixin grid-columns-for-breakpoint wide;
+}
+
+.visualDebug {
+  border: 1px dashed red;
+}

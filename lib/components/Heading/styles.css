@@ -1,0 +1,44 @@
+.root {
+  font-family: var(--Brand-typography-fontFamily);
+  line-height: var(--Brand-typography-lineHeight);
+  text-rendering: optimizeLegibility;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.h1 {
+  margin: 0;
+  font-size: var(--Brand-typography-fontSizeXXLarge);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: 1;
+}
+
+.h2 {
+  margin: 0;
+  font-size: var(--Brand-typography-fontSizeXLarge);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: 1;
+}
+
+.h3 {
+  margin: 0;
+  font-size: var(--Brand-typography-fontSizeLarge);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: 1;
+}
+
+.h4,
+.h5 {
+  margin: 0;
+  font-size: var(--Brand-typography-fontSizeMedium);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: inherit;
+}
+
+.reset {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}

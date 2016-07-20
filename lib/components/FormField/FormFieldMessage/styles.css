@@ -1,0 +1,31 @@
+.root {
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  font-size: var(--Brand-typography-fontSizeXSmall);
+  line-height: var(--Brand-typography-lineHeight);
+
+  padding: 0 0.125rem;
+}
+
+.screenreader-only {
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.hint {
+  color: var(--FormFieldMessage-colorHint);
+}
+
+.error {
+  color: var(--FormFieldMessage-colorError);
+}
+
+.success {
+  color: var(--FormFieldMessage-colorSuccess);
+}

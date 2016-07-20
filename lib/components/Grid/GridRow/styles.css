@@ -1,0 +1,93 @@
+@define-mixin grid-row {
+  display: flex;
+  flex-flow: row nowrap;
+
+  &.hAlign--center {
+    justify-content: center;
+  }
+
+  &.hAlign--start {
+    justify-content: flex-start;
+  }
+
+  &.hAlign--end {
+    justify-content: flex-end;
+  }
+
+  &.hAlign--spaceAround {
+    justify-content: space-around;
+  }
+
+  &.hAlign--spaceBetween {
+    justify-content: space-between;
+  }
+
+  &.vAlign--top {
+    align-items: flex-start;
+  }
+
+  &.vAlign--middle {
+    align-items: center;
+  }
+
+  &.vAlign--bottom {
+    align-items: flex-end;
+  }
+
+  &.colSpacingSmall {
+    margin-left: calc(-1 * var(--Brand-spacing-small) / 2);
+    margin-right: calc(-1 * var(--Brand-spacing-small) / 2);
+  }
+
+  &.colSpacingMedium {
+    margin-left: calc(-1 * var(--Brand-spacing-medium) / 2);
+    margin-right: calc(-1 * var(--Brand-spacing-medium) / 2);
+  }
+
+  &.colSpacingLarge {
+    margin-left: calc(-1 * var(--Brand-spacing-large) / 2);
+    margin-right: calc(-1 * var(--Brand-spacing-large) / 2);
+  }
+
+  &.rowSpacingSmall {
+    margin-bottom: var(--Brand-spacing-small);
+  }
+
+  &.rowSpacingMedium {
+    margin-bottom: var(--Brand-spacing-medium);
+  }
+
+  &.rowSpacingLarge {
+    margin-bottom: var(--Brand-spacing-large);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.root {
+  box-sizing: border-box;
+}
+
+.startAtPhone {
+  @mixin grid-row;
+}
+
+@media screen and (--Brand-media-tabletMin) {
+  .startAtTablet {
+    @mixin grid-row;
+  }
+}
+
+@media screen and (--Brand-media-desktopMin) {
+  .startAtDesktop {
+    @mixin grid-row;
+  }
+}
+
+@media screen and (--Brand-media-wideMin) {
+  .startAtWide {
+    @mixin grid-row;
+  }
+}

@@ -1,0 +1,15 @@
+.trigger {
+  color: var(--Tooltip-triggerColor);
+  font-family: var(--Brand-typography-fontFamily);
+  font-weight: var(--Brand-typography-fontWeightNormal);
+  line-height: var(--Brand-typography-lineHeightCondensed);
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus,
+  &:hover {
+    text-decoration: underline;
+  }
+}

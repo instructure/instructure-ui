@@ -11,7 +11,7 @@ const CodePenButton = function ({ code, title }) {
   const Example = function () {
     return (
       ${code}
-    );
+    )
   }
 
   ReactDOM.render(<Example />, document.getElementById('example'))
@@ -25,10 +25,6 @@ const CodePenButton = function ({ code, title }) {
     layout: 'top',
     css_prefix: 'autoprefixer',
     js_pre_processor: 'babel',
-    css_external: [
-      library.docsUrl + library.packageName + '.css',
-      library.docsUrl + 'example.css'
-    ].join(';'),
     js_external: [
       library.docsUrl + 'vendor.js',
       library.docsUrl + library.packageName + '.js',
@@ -40,13 +36,13 @@ const CodePenButton = function ({ code, title }) {
     <form action="http://codepen.io/pen/define" method="POST" target="_blank" className={styles.root}>
       <input type="hidden" name="data" value={JSON.stringify(data)} />
       <Button type="submit">
-        <ScreenReaderContent>Edit</ScreenReaderContent>
+        <ScreenReaderContent>Edit in codepen</ScreenReaderContent>
         <svg
           className={styles.icon}
-          width="1.5em"
-          height="1.5em"
+          width="0.75em"
+          height="0.75em"
           viewBox="0 0 256 256"
-          role="image">
+          aria-hidden="true">
           <title>codepen.io</title>
           <g role="presentation" fill="currentColor">
             <path d="M255.806943,87.0866439 C255.748337,86.7763743 255.696625,86.4661047
@@ -107,8 +103,7 @@ const CodePenButton = function ({ code, title }) {
               L225.190229,166.984513 L138.997334,224.442996 L138.997334,173.131299 L138.997334,173.131299 Z
               M206.474077,128.004309 L233.99499,109.59498 L233.99499,146.410191 L206.474077,127.997414
               L206.474077,128.004309 Z M186.689219,114.76614 L138.997334,82.8704247 L138.997334,31.5552802
-              L225.190229,89.0137628 L186.689219,114.76614 L186.689219,114.76614 Z">
-            </path>
+              L225.190229,89.0137628 L186.689219,114.76614 L186.689219,114.76614 Z" />
           </g>
         </svg>
       </Button>
