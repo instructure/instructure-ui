@@ -26,6 +26,7 @@
     width: 100%;
     appearance: none;
     border-style: solid;
+    line-height: normal;
 
     outline-style: solid;
     outline-color: transparent;
