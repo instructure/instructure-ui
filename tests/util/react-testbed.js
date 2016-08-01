@@ -24,6 +24,10 @@ $.fn.focused = function () {
   return this.dom() === document.activeElement
 }
 
+$.fn.getKey = function () {
+  return this.unwrap()._reactInternalInstance._currentElement.key.replace('.$', '')
+}
+
 let wrappedA11yCheck
 
 const setA11yCheckCallback = function (cb) {
