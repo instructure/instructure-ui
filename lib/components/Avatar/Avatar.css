@@ -1,10 +1,33 @@
 .root {
-  font-size: 6rem; /* 96px (we can change this to make more size variants) */
   height: 2em;
   display: inline-block;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+
+  &.auto {
+    font-size: inherit;
+  }
+
+  &.x-small {
+    font-size: 1.5rem;
+  }
+
+  &.small {
+    font-size: 1.875rem;
+  }
+
+  &.medium {
+    font-size: 2.25rem;
+  }
+
+  &.large {
+    font-size: 2.625rem;
+  }
+
+  &.x-large {
+    font-size: 3rem;
+  }
 }
 
 .initials {
@@ -20,5 +43,5 @@
 }
 
 .rectangle {
-  width: 15.625rem;
+  width: 2.2em;
 }
