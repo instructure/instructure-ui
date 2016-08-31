@@ -152,6 +152,7 @@
   border-color: var(--Button-icon-borderColor);
   text-decoration: none;
   display: inline-flex;
+  align-items: center;
 
   &:focus,
   &:hover,
