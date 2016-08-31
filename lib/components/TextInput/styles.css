@@ -52,18 +52,15 @@
 
 .small {
   font-size: var(--Brand-typography-fontSizeXSmall);
-  line-height: var(--Brand-forms-inputHeightSmall);
   height: var(--Brand-forms-inputHeightSmall);
 }
 
 .medium {
   font-size: var(--Brand-typography-fontSizeSmall);
-  line-height: var(--Brand-forms-inputHeightMedium);
   height: var(--Brand-forms-inputHeightMedium);
 }
 
 .large {
   font-size: var(--Brand-typography-fontSizeMedium);
-  line-height: var(--Brand-forms-inputHeightLarge);
   height: var(--Brand-forms-inputHeightLarge);
 }
