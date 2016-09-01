@@ -36,6 +36,7 @@
 
 .value {
   padding: 0 var(--Brand-spacing-medium);
+  line-height: 1;
 }
 
 .slash {

@@ -1,24 +1,29 @@
 :root {
-  --ProgressCircle-sizeSm: 5rem;
-  --ProgressCircle-sizeMed: 7rem;
-  --ProgressCircle-sizeLg: 9rem;
+  --ProgressCircle-sizeSm: 5em;
+  --ProgressCircle-sizeMed: 7em;
+  --ProgressCircle-sizeLg: 9em;
 
   /*
     The radius variables here need to always
     match the values in the radius() function
     in index.js
   */
-  --ProgressCircle-radiusSm: 1.8rem;
-  --ProgressCircle-radiusMed: 2.75rem;
-  --ProgressCircle-radiusLg: 3.5rem;
+  --ProgressCircle-radiusSm: 1.8em;
+  --ProgressCircle-radiusMed: 2.75em;
+  --ProgressCircle-radiusLg: 3.5em;
 
   /*
     Calculate the circumference of each size of circle
-    to use below
+    to use below. Note: Only Chrome seems happy using
+    calc() in the :root right now, so going to declare
+    these values explicitly for the time being. Ideally
+    they would be calculated as follows:
+    calc(2 * 3.1416 * var(--ProgressCircle-radiusMed))
+    and so on...
   */
-  --ProgressCircle-circumferenceSm: calc(2 * 3.1416 * var(--ProgressCircle-radiusSm));
-  --ProgressCircle-circumferenceMed: calc(2 * 3.1416 * var(--ProgressCircle-radiusMed));
-  --ProgressCircle-circumferenceLg: calc(2 * 3.1416 * var(--ProgressCircle-radiusLg));
+  --ProgressCircle-circumferenceSm: 11.3098em;
+  --ProgressCircle-circumferenceMed: 17.2788em;
+  --ProgressCircle-circumferenceLg: 21.9912em;
 }
 
 .root {
@@ -26,6 +31,13 @@
   vertical-align: middle;
   position: relative;
   overflow: hidden;
+
+  /*
+    Seems like a good idea to reset font-size because
+    the SVG uses ems and might inherit a container's
+    font-size
+  */
+  font-size: 1rem;
 
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
@@ -42,7 +54,7 @@
 
 .center {
   transition: all 0.5s;
-  transition-delay: 0.5s;
+  transition-delay: 1s;
   display: block;
   position: absolute;
   transform: translate3d(0, 0, 0);
@@ -63,6 +75,9 @@
   align-items: center;
   justify-content: center;
   padding: 1.5rem;
+  width: 100%;
+  height: 100%;
+  line-height: 1;
 }
 
 .shadow,
@@ -71,8 +86,15 @@
   fill: none;
 }
 
+.track {
+  transition: all 0.2s;
+  transform: translate3d(0, 0, 0) scale(1);
+  opacity: 1;
+}
+
 .meter {
-  transition: all 1s;
+  transition: stroke-dashoffset 1s;
+  transform: translate3d(0, 0, 0);
   stroke: var(--ProgressCircle-meter-color);
 }
 
@@ -89,10 +111,6 @@
 .inverse {
   .track {
     stroke: var(--ProgressCircle-inverse-track-color);
-  }
-
-  .value {
-    color: var(--ProgressCircle-inverse-color);
   }
 }
 
@@ -124,26 +142,25 @@
   }
 
   .shadow {
-    stroke-width: 1rem;
+    stroke-width: 1em;
   }
 
   .track {
-    transform-origin: calc(var(--ProgressCircle-sizeSm) / 2);
+    /*
+      need to avoid calc() for now to make all browsers happy
+      ideally, would be:
+      transform-origin: calc(var(--ProgressCircle-sizeSm) / 2);
+    */
+    transform-origin: 2.5em 2.5em;
   }
 
   .track,
   .meter {
-    stroke-width: 0.5rem;
+    stroke-width: 0.5em;
   }
 
   .meter {
     stroke-dasharray: var(--ProgressCircle-circumferenceSm);
-  }
-
-  .value {
-    font-size: var(--Brand-typography-fontSizeSmall);
-    width: var(--ProgressCircle-sizeSm);
-    height: var(--ProgressCircle-sizeSm);
   }
 }
 
@@ -157,11 +174,16 @@
   }
 
   .shadow {
-    stroke-width: 1.125rem;
+    stroke-width: 1.125em;
   }
 
   .track {
-    transform-origin: calc(var(--ProgressCircle-sizeMed) / 2);
+    /*
+      need to avoid calc() for now to make all browsers happy
+      ideally, would be:
+      transform-origin: calc(var(--ProgressCircle-sizeMed) / 2);
+    */
+    transform-origin: 3.5em 3.5em;
   }
 
   .track,
@@ -171,12 +193,6 @@
 
   .meter {
     stroke-dasharray: var(--ProgressCircle-circumferenceMed);
-  }
-
-  .value {
-    font-size: var(--Brand-typography-fontSizeLarge);
-    width: var(--ProgressCircle-sizeMed);
-    height: var(--ProgressCircle-sizeMed);
   }
 }
 
@@ -190,33 +206,25 @@
   }
 
   .shadow {
-    stroke-width: 1.375rem;
+    stroke-width: 1.375em;
   }
 
   .track {
-    transform-origin: calc(var(--ProgressCircle-sizeLg) / 2);
+    /*
+      need to avoid calc() for now to make all browsers happy
+      ideally, would be:
+      transform-origin: calc(var(--ProgressCircle-sizeLg) / 2);
+    */
+    transform-origin: 4.5em 4.5em;
   }
 
   .track,
   .meter {
-    stroke-width: 0.875rem;
+    stroke-width: 0.875em;
   }
 
   .meter {
     stroke-dasharray: var(--ProgressCircle-circumferenceLg);
-  }
-
-  .value {
-    font-size: var(--Brand-typography-fontSizeXLarge);
-    width: var(--ProgressCircle-sizeLg);
-    height: var(--ProgressCircle-sizeLg);
-  }
-}
-
-@keyframes ProgressCircle-trackEnter {
-  to {
-    opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -229,17 +237,17 @@
 
 .animateOnMount {
   .track {
-    opacity: 0;
+    opacity: 0.01;
     transform: translate3d(0, 0, 0) scale(0.1);
-    animation-name: ProgressCircle-trackEnter;
-    animation-duration: 0.5s;
-    animation-timing-function: cubic-bezier(0.175, 0.885, 0.320, 1.275);
-    animation-fill-mode: forwards;
   }
 
   .center {
     opacity: 0;
-    transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 35%, 0);
+  }
+
+  .meter {
+    opacity: 0;
   }
 
   /* stylelint-disable declaration-no-important */
@@ -248,29 +256,17 @@
     .meter {
       stroke-dashoffset: var(--ProgressCircle-circumferenceSm) !important;
     }
-
-    .center {
-      transform: translate3d(0, 35%, 0);
-    }
   }
 
   &.medium {
     .meter {
       stroke-dashoffset: var(--ProgressCircle-circumferenceMed) !important;
     }
-
-    .center {
-      transform: translate3d(0, 35%, 0);
-    }
   }
 
   &.large {
     .meter {
       stroke-dashoffset: var(--ProgressCircle-circumferenceLg) !important;
-    }
-
-    .center {
-      transform: translate3d(0, 35%, 0);
     }
   }
 
