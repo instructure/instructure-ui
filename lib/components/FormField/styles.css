@@ -1,4 +1,5 @@
 .root {
+  all: initial;
   display: inline-block;
   vertical-align: middle;
 }

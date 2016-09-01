@@ -6,6 +6,8 @@
   border-spacing: 0;
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
+  font-size: var(--Brand-typography-fontSizeMedium);
+  color: var(--Table-color);
   background: var(--Table-background);
 }
 
@@ -14,6 +16,8 @@
 caption {
   text-align: left;
   background: var(--Table-background);
+  font-size: var(--Brand-typography-fontSizeMedium);
+  color: var(--Table-captionColor);
 }
 
 tr {

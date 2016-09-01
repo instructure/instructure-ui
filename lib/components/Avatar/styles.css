@@ -4,6 +4,8 @@
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  overflow: hidden;
+  line-height: 0;
 
   &.auto {
     font-size: inherit;
@@ -28,7 +30,6 @@
   &.x-large {
     font-size: 3rem;
   }
-
 }
 
 .initials {

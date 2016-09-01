@@ -5,6 +5,7 @@
 }
 
 .input {
+  all: initial;
   flex: auto;
   box-sizing: border-box;
   appearance: none;
@@ -81,9 +82,11 @@
 }
 
 .value {
+  all: initial;
   box-sizing: border-box;
   display: block;
 
+  color: inherit;
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
   text-align: center;

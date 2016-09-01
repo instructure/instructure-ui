@@ -18,6 +18,7 @@
   }
 
   .select {
+    all: initial;
     background: var(--Select-backgroundColor);
     border-color: var(--Select-borderColor);
     color: var(--Select-textColor);

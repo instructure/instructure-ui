@@ -1,4 +1,5 @@
 .root {
+  all: initial;
   position: relative;
   display: inline-block;
   vertical-align: middle;
@@ -9,6 +10,7 @@
 }
 
 .input {
+  all: initial;
   margin: 0;
   position: absolute;
   top: 0;

@@ -123,6 +123,7 @@
 
   pre,
   code {
+    all: initial;
     font-family: var(--Typography-fontFamilyMonospace);
   }
 
@@ -135,6 +136,13 @@
   strong {
     font-weight: var(--Typography-fontWeightBold);
   }
+
+  p {
+    display: block;
+    padding: 0;
+    margin: var(--Brand-spacing-medium) 0;
+  }
+
 }
 
 /* stylelint-enable selector-no-type */

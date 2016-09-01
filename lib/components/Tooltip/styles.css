@@ -1,15 +1,31 @@
 .trigger {
-  color: var(--Tooltip-triggerColor);
+  cursor: pointer;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
+
+  color: var(--Tooltip-trigger-color);
+  text-decoration: var(--Tooltip-trigger-textDecoration);
+
+  transition: color 0.2s;
 
   &:focus {
     outline: none;
   }
 
   &:focus,
-  &:hover {
-    text-decoration: underline;
+  &:hover,
+  &:active {
+    text-decoration: var(--Tooltip-trigger-hover-textDecoration);
+    color: var(--Tooltip-trigger-hover-color);
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
   }
 }

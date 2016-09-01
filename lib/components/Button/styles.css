@@ -6,6 +6,7 @@
 }
 
 .root {
+  all: initial;
   appearance: none;
   box-sizing: border-box;
   display: inline-block;
@@ -226,6 +227,9 @@
 .icon-inverse,
 .circle-primary,
 .circle-danger {
+  padding: 0 var(--Brand-spacing-xSmall);
+  background: transparent;
+  border-color: var(--Button-icon-borderColor);
   text-decoration: none;
   display: inline-flex;
   align-items: center;

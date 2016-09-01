@@ -1,8 +1,8 @@
 .root {
-
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
   line-height: var(--Brand-typography-lineHeightCondensed);
+  font-size: var(--Brand-typography-fontSizeMedium);
 
   cursor: pointer;
   user-select: none;
