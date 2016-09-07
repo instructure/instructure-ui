@@ -1,7 +1,6 @@
 import { cloneElement } from 'react'
 import $ from 'teaspoon'
 import checkA11y from 'tests/util/a11y-check'
-import createMockRaf from 'mock-raf'
 import keycode from 'keycode'
 
 $.fn.getAttribute = function (attrName) {
@@ -35,28 +34,25 @@ $.fn.getPropertyValue = function (property) {
 let wrappedA11yCheck
 
 const setA11yCheckCallback = function (cb) {
-  wrappedA11yCheck = function (node, options) {
-    checkA11y(node, options)
+  wrappedA11yCheck = function (node, options, done) {
+    checkA11y(node, options, done)
     cb()
   }
 }
-const Assertion = global.chai.Assertion
 
+const Assertion = global.chai.Assertion
 global.chai.use(function (chai, utils) {
   utils.addMethod(Assertion.prototype, 'accessible', function (done, options = {}) {
     const obj = utils.flag(this, 'object')
 
-    options.onFailure = options.onFailure || function (err, violations) {
-      done(new Error(err))
-      new Assertion(violations.length).to.equal(0)
-    }
-
-    options.onSuccess = options.onSuccess || function () {
-      done()
-      new Assertion(0).to.equal(0)
-    }
-
-    wrappedA11yCheck(obj.dom(), options)
+    wrappedA11yCheck(obj.dom(), options, function (result) {
+      try {
+        new Assertion(result.violations.length).to.equal(0)
+        done()
+      } catch (e) {
+        done(result.error)
+      }
+    })
   })
 })
 
@@ -70,8 +66,6 @@ export default class ReactTestbed {
 
   setup (subject) {
     try {
-      this.mockRaf = createMockRaf()
-
       this.sandbox = sinon.sandbox.create({
         useFakeTimers: true
       })
@@ -80,8 +74,8 @@ export default class ReactTestbed {
         this.sandbox.clock.tick(1000) // so that the setTimeouts in axe-core are called
       })
 
-      this.sandbox.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
-      this.sandbox.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
+      this.sandbox.stub(window, 'requestAnimationFrame', setTimeout)
+      this.sandbox.stub(window, 'cancelAnimationFrame', clearTimeout)
     } catch (e) {
       console.warn('Error in test setup: ' + e) // eslint-disable-line no-console
     }
@@ -97,18 +91,17 @@ export default class ReactTestbed {
         this.$instance.unmount()
       }
     } catch (e) {
-      this.rootNode && this.rootNode.remove()
-      this.rootNode = undefined
-
-      console.warn('Error in test teardown: ' + e) // eslint-disable-line no-console
+      const displayName = this.subject.type.displayName
+      console.warn(`Error in test teardown for ${displayName}: ${e}`) // eslint-disable-line no-console
     }
+
+    this.rootNode && this.rootNode.remove()
+    this.rootNode = undefined
   }
 
   render (props = {}, context) {
     const tick = () => {
-      // to make sure any transitions are complete:
-      this.mockRaf.step(10)
-      this.sandbox.clock.tick(1)
+      this.sandbox.clock.tick(1000)
     }
 
     const subject = cloneElement(this.subject, {

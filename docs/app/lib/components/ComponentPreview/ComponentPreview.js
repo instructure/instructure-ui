@@ -75,7 +75,7 @@ export default class ComponentPreview extends Component {
         variant: this.props.variant
       })
     } else {
-      setTimeout(this.renderPreview.bind(this), 0)
+      window.setTimeout(this.renderPreview.bind(this), 0)
     }
   }
 
