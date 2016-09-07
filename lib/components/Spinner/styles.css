@@ -57,7 +57,7 @@
 
   .circleSpin {
     stroke-dasharray: 6em;
-    transform-origin: calc(var(--Spinner-sizeSm) / 2);
+    transform-origin: calc(var(--Spinner-sizeSm) / 2) calc(var(--Spinner-sizeSm) / 2);
   }
 }
 
@@ -82,7 +82,7 @@
 
   .circleSpin {
     stroke-dasharray: 10.5em;
-    transform-origin: calc(var(--Spinner-sizeMed) / 2);
+    transform-origin: calc(var(--Spinner-sizeMed) / 2) calc(var(--Spinner-sizeMed) / 2);
   }
 
 }
@@ -107,7 +107,7 @@
 
   .circleSpin {
     stroke-dasharray: 15em;
-    transform-origin: calc(var(--Spinner-sizeLg) / 2);
+    transform-origin: calc(var(--Spinner-sizeLg) / 2) calc(var(--Spinner-sizeLg) / 2);
   }
 }
 
