@@ -1,3 +1,9 @@
+:root {
+  --Select-arrowWidthSmall: 0.75rem;
+  --Select-arrowWidthMedium: 0.875rem;
+  --Select-arrowWidthLarge: 1rem;
+}
+
 .root {
   position: relative;
   display: block;
@@ -20,8 +26,6 @@
     display: block;
     width: 100%;
     appearance: none;
-
-    padding: 0 var(--Brand-spacing-small);
 
     border-width: var(--Brand-borders-widthSmall);
     border-style: var(--Brand-borders-style);
@@ -66,11 +70,12 @@
     line-height: var(--Brand-forms-inputHeightSmall);
     height: var(--Brand-forms-inputHeightSmall);
     font-size: var(--Brand-typography-fontSizeXSmall);
+    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthSmall)) 0 var(--Brand-spacing-small);
   }
 
   .arrow {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: var(--Select-arrowWidthSmall);
+    height: var(--Select-arrowWidthSmall);
   }
 }
 
@@ -79,11 +84,12 @@
     line-height: var(--Brand-forms-inputHeightMedium);
     height: var(--Brand-forms-inputHeightMedium);
     font-size: var(--Brand-typography-fontSizeSmall);
+    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthMedium)) 0 var(--Brand-spacing-small);
   }
 
   .arrow {
-    width: 0.875rem;
-    height: 0.875rem;
+    width: var(--Select-arrowWidthMedium);
+    height: var(--Select-arrowWidthMedium);
   }
 }
 
@@ -92,10 +98,11 @@
     line-height: var(--Brand-forms-inputHeightLarge);
     height: var(--Brand-forms-inputHeightLarge);
     font-size: var(--Brand-typography-fontSizeSmall);
+    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthLarge)) 0 var(--Brand-spacing-small);
   }
 
   .arrow {
-    width: 1rem;
-    height: 1rem;
+    width: var(--Select-arrowWidthLarge);
+    height: var(--Select-arrowWidthLarge);
   }
 }
