@@ -4809,8 +4809,8 @@
     },
     "react-axe": {
       "version": "2.0.1",
-      "from": "react-axe@>=2.0.1 <2.1.0",
-      "resolved": "https://registry.npmjs.org/react-axe/-/react-axe-2.0.1.tgz"
+      "from": "junyper/react-axe#3aa4e7e815f7b986120655185befdb1fb2e50c71",
+      "resolved": "git://github.com/junyper/react-axe.git#3aa4e7e815f7b986120655185befdb1fb2e50c71"
     },
     "react-deep-force-update": {
       "version": "1.0.1",
