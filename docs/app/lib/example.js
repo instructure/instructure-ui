@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import ComponentExample from './components/ComponentExample'
 
+import 'babel-polyfill'
+
 if (process.env.NODE_ENV !== 'production') {
   const axe = require('react-axe')
 
