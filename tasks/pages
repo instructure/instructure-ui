@@ -38,11 +38,6 @@ git commit -m "Update gh-pages for `git log origin/latest -1 --pretty="%H"`"
 
 git push origin gh-pages:gh-pages
 
-# this is a hack because gerrit replication to the gh-pages branch doesn't force a
-# rebuild of the pages
-git commit -m "Rebuild pages" --allow-empty
-git push github gh-pages:gh-pages
-
 git checkout $BRANCH
 
 # restore node modules
