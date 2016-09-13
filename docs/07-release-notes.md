@@ -1,3 +1,9 @@
+## 0.14.1
+
+### Don't bundle babel-polyfill with the library
+
+This prevents the "only one instance of babel-polyfill is allowed" errors.
+
 ## 0.14.0
 
 ### Breaking changes (code changes required to upgrade)
