@@ -1,4 +1,4 @@
-.root {
+.input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   appearance: none;
@@ -47,6 +47,12 @@
 
   &::placeholder {
     color: var(--TextInput-placeholderColor);
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 

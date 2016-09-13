@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import themeable from '../../util/themeable'
+import { omitProps } from '../../util/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme.js'
