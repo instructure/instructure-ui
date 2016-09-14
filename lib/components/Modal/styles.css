@@ -1,0 +1,57 @@
+.root {
+  background: var(--Modal-background);
+  overflow: hidden;
+  display: flex;
+
+  align-items: stretch;
+  flex-direction: column;
+  position: relative;
+
+  box-shadow: 0 0 3px 0 var(--Modal-borderColor);
+  border: 1px solid var(--Modal-borderColor);
+  border-radius: var(--Brand-borders-radiusMedium);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--Brand-spacing-medium);
+  right: var(--Brand-spacing-medium);
+  background: var(--Modal-background);
+}
+
+.auto,
+.small,
+.medium,
+.large {
+  max-width: 95vw;
+  max-height: 95vh;
+}
+
+.auto {
+  flex: 0 1 auto;
+  min-width: var(--Modal-maxWidthSmall);
+  min-height: var(--Modal-minHeightSmall);
+}
+
+.small {
+  flex: 0 1 var(--Modal-maxWidthSmall);
+  min-height: var(--Modal-minHeightSmall);
+}
+
+.medium {
+  flex: 0 1 var(--Modal-maxWidthMedium);
+  min-height: var(--Modal-minHeightMedium);
+}
+
+.large {
+  flex: 0 1 var(--Modal-maxWidthLarge);
+  min-height: var(--Modal-minHeightLarge);
+}
+
+.fullscreen {
+  flex: 1;
+  width: 100vw;
+  height: 100vh;
+  box-shadow: none;
+  border: none;
+}

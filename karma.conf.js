@@ -19,10 +19,10 @@ if (!disableCoverage) { // we don't compute coverage in debug mode
     ],
     check: {
       global: {
-        statements: 81,
-        lines: 81,
-        functions: 82,
-        branches: 69
+        statements: 78,
+        lines: 79,
+        functions: 81,
+        branches: 65
       }
     }
   }

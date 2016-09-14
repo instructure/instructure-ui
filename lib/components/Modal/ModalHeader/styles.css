@@ -1,0 +1,7 @@
+.root {
+  box-sizing: border-box;
+  padding: var(--Brand-spacing-medium);
+  padding-right: var(--Brand-spacing-xLarge);
+  flex: 0 0 auto;
+  border-bottom: 1px solid var(--ModalHeader-borderColor);
+}
