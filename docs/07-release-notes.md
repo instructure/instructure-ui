@@ -1,3 +1,7 @@
+## 0.14.2
+
+### Add missing type attribute on button elements rendered by the Button component
+
 ## 0.14.1
 
 ### Don't bundle babel-polyfill with the library
