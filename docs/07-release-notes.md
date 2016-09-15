@@ -1,10 +1,14 @@
+## 0.14.3
+
+#### Remove umd named define from webpack config
+
 ## 0.14.2
 
-### Add missing type attribute on button elements rendered by the Button component
+#### Add missing type attribute on button elements rendered by the Button component
 
 ## 0.14.1
 
-### Don't bundle babel-polyfill with the library
+#### Don't bundle babel-polyfill with the library
 
 This prevents the "only one instance of babel-polyfill is allowed" errors.
 
