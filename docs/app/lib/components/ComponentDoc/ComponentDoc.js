@@ -57,7 +57,6 @@ export default class ComponentDoc extends Component {
     const { library } = config
 
     const packageName = library.packageName
-    const libraryName = library.name
     const githubRoot = library.projectUrl + '/tree/master/'
 
     const example = [
@@ -74,12 +73,7 @@ export default class ComponentDoc extends Component {
       '',
       '',
       '/*** AMD ***/',
-      'define([\'' + libraryName + '\'], function(' + libraryName + ') {',
-      '  var ' + name + ' = ' + libraryName + '.' + name,
-      '  ...',
-      '})',
-      '// or single component:',
-      'define([\'' + libraryName + '/' + name + '\'], function(' + name + ') {',
+      'define([\'' + packageName + '/' + name + '\'], function(' + name + ') {',
       '  ...',
       '})'
     ].join('\n')

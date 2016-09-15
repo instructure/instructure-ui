@@ -30,8 +30,7 @@ module.exports = require('./util/generate-config')({
     path: config.distPath,
     filename: '[name].js',
     library: '[name]',
-    libraryTarget: 'umd',
-    umdNamedDefine: true
+    libraryTarget: 'umd'
   },
   externals: require('./util/externals')
 })

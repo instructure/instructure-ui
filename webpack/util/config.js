@@ -11,7 +11,7 @@ function getConfig () {
     buildPath: '__build__',
     library: {
       packageName: pkg.name,
-      name: 'InstUI',
+      name: 'InstUI', // only used for docs header
       main: pkg.main,
       prefix: 'ic',
       version: pkg.version,
