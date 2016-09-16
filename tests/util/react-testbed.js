@@ -91,7 +91,7 @@ export default class ReactTestbed {
         this.$instance.unmount()
       }
     } catch (e) {
-      const displayName = this.subject.type.displayName
+      const displayName = this.subject.type.displayName || this.subject.type.name
       console.warn(`Error in test teardown for ${displayName}: ${e}`) // eslint-disable-line no-console
     }
 

@@ -73,7 +73,7 @@ export default class ComponentDoc extends Component {
       '',
       '',
       '/*** AMD ***/',
-      'define([\'' + packageName + '/' + name + '\'], function(' + name + ') {',
+      'define([\'' + packageName + '/' + name + '\'], function({ default: ' + name + ' }) {',
       '  ...',
       '})'
     ].join('\n')
