@@ -1,3 +1,7 @@
+## 0.14.4
+
+#### Add getDisplayName util and use it to determine component type
+
 ## 0.14.3
 
 #### Remove umd named define from webpack config
