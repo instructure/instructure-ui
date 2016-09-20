@@ -2,12 +2,14 @@ import React, {Component, PropTypes} from 'react'
 import ReactDOM from 'react-dom'
 import { transform } from 'babel-standalone'
 import { windowMessageListener } from 'instructure-ui'
-import debounce from 'lodash/debounce'
 import defer from 'lodash/defer'
+import { override, after } from '../../util/monkey-patch'
 
 import styles from './ComponentExample.css'
 
 import '../../util/load-globals'
+
+const _createElement = React.createElement
 
 const messageHandler = function (message) {
   if (message && typeof message.code === 'string') {
@@ -29,6 +31,21 @@ export default class ComponentExample extends Component {
       error: null,
       variant: props.variant
     }
+
+    const overrideComponentInstance = (instance) => {
+      override(instance, 'componentDidMount', after(this.handleComponentChange))
+      override(instance, 'componentDidUpdate', after(this.handleComponentChange))
+    }
+
+    React.createElement = function () {
+      const el = _createElement.apply(this, arguments)
+
+      if (el._owner && el._owner._instance) {
+        overrideComponentInstance(el._owner._instance)
+      }
+
+      return el
+    }
   }
 
   componentDidMount () {
@@ -39,8 +56,6 @@ export default class ComponentExample extends Component {
       windowMessageListener.postMessage(window.parent, {
         isMounted: true
       })
-      this._handleResize = debounce(this.notifyParent, 200)
-      window.addEventListener('resize', this._handleResize)
     }
   }
 
@@ -52,13 +67,7 @@ export default class ComponentExample extends Component {
     }
   }
 
-  componentWillUnmount () {
-    if (this._handleResize) {
-      window.removeEventListener('resize', this._handleResize)
-    }
-  }
-
-  notifyParent = () => {
+  handleComponentChange = () => {
     if (window.parent) {
       // need to use scrollHeight of body element to handle components that render into portals
       const owner = document.body
@@ -100,9 +109,7 @@ export default class ComponentExample extends Component {
       const compiledCode = this.compileCode(code)
       const component = this.evalCode(compiledCode)
 
-      ReactDOM.render(component, mountNode, () => {
-        defer(this.notifyParent)
-      })
+      ReactDOM.render(component, mountNode)
     } catch (err) {
       this.handleError(err)
     }
@@ -113,7 +120,7 @@ export default class ComponentExample extends Component {
     this.setState({
       error: err.toString()
     })
-    defer(this.notifyParent)
+    defer(this.handleComponentChange)
   }
 
   renderError () {
