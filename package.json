@@ -105,7 +105,7 @@
     "deep-equal": "~1.0.1",
     "dom-helpers": "~2.4.0",
     "flat": "~2.0.1",
-    "instructure-icons": "~0.0.8",
+    "instructure-icons": "~0.0.9",
     "invariant": "~2.2.1",
     "keycode": "~2.1.1",
     "lodash": "~4.16.2",

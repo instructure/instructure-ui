@@ -3763,9 +3763,9 @@
       "dev": true
     },
     "instructure-icons": {
-      "version": "0.0.8",
-      "from": "instructure-icons@>=0.0.8 <0.1.0",
-      "resolved": "https://registry.npmjs.org/instructure-icons/-/instructure-icons-0.0.8.tgz"
+      "version": "0.0.10",
+      "from": "instructure-icons@>=0.0.9 <0.1.0",
+      "resolved": "https://registry.npmjs.org/instructure-icons/-/instructure-icons-0.0.10.tgz"
     },
     "interpret": {
       "version": "0.6.6",

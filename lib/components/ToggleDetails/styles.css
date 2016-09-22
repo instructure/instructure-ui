@@ -1,0 +1,111 @@
+:root {
+  --ToggleDetails-iconSizeSmall: 0.5rem;
+  --ToggleDetails-iconSizeMedium: 0.8125rem;
+  --ToggleDetails-iconSizeLarge: 1.125rem;
+  --ToggleDetails-togglePadding: var(--Brand-spacing-xxSmall);
+}
+
+.toggle {
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  background: transparent;
+
+  display: inline-block;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  line-height: 1;
+
+  border-radius: var(--Brand-borders-radiusMedium);
+  border: var(--Brand-borders-widthSmall) var(--Brand-borders-style) transparent;
+
+  outline: none;
+
+  &:active,
+  &:focus {
+    color: inherit; /* removes the push effect on FF */
+    outline: none;
+    border-color: var(--ToggleDetails-focusRingColor);
+  }
+}
+
+.summary {
+  position: relative; /* removes the push effect on IE */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  padding: var(--ToggleDetails-togglePadding);
+}
+
+.label {
+  display: block;
+  text-align: left;
+}
+
+.icon {
+  transition: all 0.2s linear;
+  transform: translate3d(0, 0, 0);
+  margin-right: var(--ToggleDetails-togglePadding);
+}
+
+.details {
+  box-sizing: border-box;
+  display: none;
+}
+
+.small {
+  .icon {
+    font-size: var(--ToggleDetails-iconSizeSmall);
+  }
+
+  .details {
+    padding-left: calc(var(--ToggleDetails-iconSizeSmall) + 2 * var(--ToggleDetails-togglePadding));
+  }
+}
+
+.medium {
+  .icon {
+    font-size: var(--ToggleDetails-iconSizeMedium);
+  }
+
+  .details {
+    padding-left: calc(var(--ToggleDetails-iconSizeMedium) + 2 * var(--ToggleDetails-togglePadding));
+  }
+}
+
+.large {
+  .icon {
+    font-size: var(--ToggleDetails-iconSizeLarge);
+  }
+
+  .details {
+    padding-left: calc(var(--ToggleDetails-iconSizeLarge) + 2 * var(--ToggleDetails-togglePadding));
+  }
+}
+
+.expanded {
+  .icon {
+    transform: translate3d(0, 0, 0) rotate(90deg);
+  }
+
+  .details {
+    display: block;
+  }
+}
+
+@keyframes ToggleDetails-contentAnimation {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.content {
+  opacity: 0.01;
+  transform: translate3d(0, -10%, 0);
+  animation-name: ToggleDetails-contentAnimation;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+}
