@@ -19,10 +19,10 @@ if (!disableCoverage) { // we don't compute coverage in debug mode
     ],
     check: {
       global: {
-        statements: 91,
-        lines: 82,
-        functions: 89,
-        branches: 73
+        statements: 81,
+        lines: 81,
+        functions: 82,
+        branches: 69
       }
     }
   }
@@ -86,7 +86,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config')(disableCoverage),
+    webpack: require('./webpack/test.config')(),
 
     webpackServer: {
       progress: false,

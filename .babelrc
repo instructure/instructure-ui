@@ -11,6 +11,9 @@
       "plugins": [
         ["webpack-loaders", { "config": "./webpack/transpile.config.js", "verbose": true }]
       ]
+    },
+    "test": {
+      "plugins": ["istanbul"]
     }
   }
 }
