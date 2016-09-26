@@ -86,7 +86,7 @@ export default class ComponentExample extends Component {
 
     return (
       <div className={styles.root}>
-        {example && <ApplyTheme defaultTheme={generateTheme(this.props.brand)}>{example}</ApplyTheme>}
+        {example && <ApplyTheme theme={generateTheme(this.props.brand)}>{example}</ApplyTheme>}
         {error && <div className={styles.errorBg} />}
         {error && <pre className={styles.error}>{error}</pre>}
       </div>
