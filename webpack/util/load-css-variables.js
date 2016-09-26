@@ -7,7 +7,7 @@ var config = require('./config')
 var componentNameFromPath = require('./component-name-from-path')
 var transformCssVariables = require('./transform-css-variables')
 
-require('babel-register')
+require('babel-core/register')
 
 var brand = require(path.join(config.rootPath, config.theme.brand)).default
 

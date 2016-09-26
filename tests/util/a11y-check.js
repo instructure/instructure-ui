@@ -1,7 +1,7 @@
 import reject from 'lodash/reject'
 
 require('script!axe-core/axe.min.js')
-/*global axe*/
+/* global axe */
 
 const formatError = function (violations) {
   return violations.map(function (violation) {
