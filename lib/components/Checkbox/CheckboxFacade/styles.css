@@ -18,8 +18,8 @@
   border: 1px solid var(--CheckboxFacade-borderColor);
   border-radius: var(--Brand-borders-radiusSmall);
 
-  margin-right: 0.5rem;
-  padding: 0.125rem;
+  margin-right: var(--Brand-spacing-xSmall);
+  padding: var(--Brand-spacing-xxxSmall);
 }
 
 .label {
@@ -28,7 +28,7 @@
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
   line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeSmall);
+  font-size: var(--Brand-typography-fontSizeMedium);
 }
 
 .icon {

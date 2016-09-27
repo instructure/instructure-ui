@@ -2,12 +2,12 @@
   --ToggleFacade-borderWidth: var(--Brand-borders-widthLarge);
 }
 
-.root {
+.facade {
   color: var(--ToggleFacade-color);
   background: var(--ToggleFacade-background);
   border-color: var(--ToggleFacade-borderColor);
 
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
   align-items: center;
 
@@ -19,6 +19,9 @@
   border-width: var(--ToggleFacade-borderWidth);
   border-style: solid;
   border-radius: var(--Brand-borders-radiusLarge);
+
+  margin-right: var(--Brand-spacing-xSmall);
+  vertical-align: middle;
 
   &::before {
     background: var(--ToggleFacade-handle-background);
@@ -54,15 +57,18 @@
 }
 
 .label {
+  color: var(--ToggleFacade-label-color);
+  flex: 1;
   font-family: var(--Brand-typography-fontFamily);
   font-weight: var(--Brand-typography-fontWeightNormal);
   line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeSmall);
+  font-size: var(--Brand-typography-fontSizeMedium);
 }
 
-/* stylelint-disable selector-no-type */
+.facade {
 
-.root {
+  /* stylelint-disable selector-no-type */
+
   input[type="checkbox"]:checked + &,
   &.checked {
     justify-content: flex-start;
@@ -83,9 +89,10 @@
         0 0 0 8px var(--ToggleFacade-focus-outlineColor);
     }
   }
-}
 
-/* stylelint-enable selector-no-type */
+  /* stylelint-enable selector-no-type */
+
+}
 
 .small {
   font-size: 0.9rem;
