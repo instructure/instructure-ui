@@ -77,7 +77,8 @@ module.exports = function config (config) {
           '--no-first-run',
           '--disable-default-apps',
           '--disable-popup-blocking',
-          '--disable-translate'
+          '--disable-translate',
+          '--no-sandbox'
         ]
       }
     },
