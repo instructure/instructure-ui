@@ -1,0 +1,15 @@
+.root {
+  box-sizing: border-box;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+.text {
+  font-family: var(--Brand-typography-fontFamily);
+  color: var(--BreadcrumbLink-color);
+}
