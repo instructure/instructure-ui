@@ -10,7 +10,8 @@
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
-  overflow: hidden;
+  position: relative;
+  overflow: visible;
 
   margin: 0;
 
@@ -44,6 +45,9 @@
 .default,
 .primary,
 .success,
+.light,
+.ghost,
+.ghost-inverse,
 .link {
   &.small {
     font-size: var(--Brand-typography-fontSizeXSmall);
@@ -64,6 +68,33 @@
   }
 }
 
+.default,
+.primary,
+.success,
+.light,
+.ghost,
+.ghost-inverse,
+.circle-primary,
+.circle-danger {
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.3125rem;
+    left: -0.3125rem;
+    right: -0.3125rem;
+    bottom: -0.3125rem;
+    border: var(--Button-default-focus-border);
+    border-radius: var(--Brand-borders-radiusLarge);
+    opacity: 0;
+  }
+
+  &:focus {
+    &::before {
+      opacity: 1;
+    }
+  }
+}
+
 .default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -80,10 +111,6 @@
   &:active {
     box-shadow: var(--Button-default-active-boxShadow);
   }
-
-  &:focus {
-    box-shadow: var(--Button-default-focus-boxShadow);
-  }
 }
 
 .primary {
@@ -98,10 +125,6 @@
 
   &:active {
     box-shadow: var(--Button-primary-active-boxShadow);
-  }
-
-  &:focus {
-    box-shadow: var(--Button-primary-focus-boxShadow);
   }
 }
 
@@ -118,9 +141,62 @@
   &:active {
     box-shadow: var(--Button-success-active-boxShadow);
   }
+}
+
+.light {
+  background: var(--Button-light-background);
+  color: var(--Button-light-color);
+  border-color: var(--Button-light-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-light-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-light-active-boxShadow);
+  }
+}
+
+.ghost {
+  background: var(--Button-ghost-background);
+  color: var(--Button-ghost-color);
+  border-color: var(--Button-ghost-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-ghost-hover-background);
+  }
 
   &:focus {
-    box-shadow: var(--Button-success-focus-boxShadow);
+    &::before {
+      border: var(--Button-ghost-focus-border);
+    }
+  }
+
+  &:active {
+    box-shadow: var(--Button-ghost-active-boxShadow);
+  }
+}
+
+.ghost-inverse {
+  background: var(--Button-ghost-inverse-background);
+  color: var(--Button-ghost-inverse-color);
+  border-color: var(--Button-ghost-inverse-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-ghost-inverse-hover-background);
+  }
+
+  &:focus {
+    &::before {
+      border: var(--Button-ghost-inverse-focus-border);
+    }
+  }
+
+  &:active {
+    box-shadow: var(--Button-ghost-inverse-active-boxShadow);
   }
 }
 
@@ -147,9 +223,9 @@
 }
 
 .icon,
-.icon-inverse {
-  background: transparent;
-  border-color: var(--Button-icon-borderColor);
+.icon-inverse,
+.circle-primary,
+.circle-danger {
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -174,6 +250,63 @@
     font-size: 2rem;
     height: var(--Button-heightLarge);
   }
+}
+
+.circle-primary,
+.circle-danger {
+  border-radius: 50%;
+
+  &::before {
+    border-radius: 50%;
+  }
+
+  &.small {
+    width: var(--Button-heightSmall);
+  }
+
+  &.medium {
+    width: var(--Button-heightMedium);
+  }
+
+  &.large {
+    width: var(--Button-heightLarge);
+  }
+}
+
+.circle-primary {
+  background: var(--Button-circle-primary-background);
+  color: var(--Button-circle-primary-color);
+  border-color: var(--Button-circle-primary-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-circle-primary-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-circle-primary-active-boxShadow);
+  }
+}
+
+.circle-danger {
+  background: var(--Button-circle-danger-background);
+  color: var(--Button-circle-danger-color);
+  border-color: var(--Button-circle-danger-borderColor);
+
+  &:hover,
+  &:active {
+    background: var(--Button-circle-danger-hover-background);
+  }
+
+  &:active {
+    box-shadow: var(--Button-circle-danger-active-boxShadow);
+  }
+}
+
+.icon,
+.icon-inverse {
+  background: transparent;
+  border-color: var(--Button-icon-borderColor);
 }
 
 .icon-inverse {
