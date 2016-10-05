@@ -1,3 +1,15 @@
+## 0.15.0
+
+#### Add a [Table](#Table) component
+
+#### Don't trigger [PopoverMenu](#PopoverMenu) on focus by default
+
+#### Move [Checkbox](#Checkbox) label to the right of the toggle
+
+#### Add a [TextArea](#TextArea) component
+
+#### Updates to font sizes (see [Typography](#Typography) component)
+
 ## 0.14.4
 
 #### Add getDisplayName util and use it to determine component type
