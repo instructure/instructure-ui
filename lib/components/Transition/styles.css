@@ -3,6 +3,8 @@
   transform: translate3d(0, 0, 0);
 }
 
+/* Animation type: fade */
+
 .fade {
   transition: opacity 300ms, transform 300ms ease-out;
 }
@@ -17,69 +19,82 @@
   opacity: 1;
 }
 
-@keyframes animate-root {
-  to {
-    transform: translate3d(0, 0, 0);
-    opacity: 1;
-  }
+/* Animation type: scale */
+
+.scale {
 }
+
+.scale--exited,
+.scale--entering {
+  transition:
+    opacity 300ms,
+    transform 300ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+  transform: scale(0.01) translate3d(0, 0, 0);
+  opacity: 0.01;
+}
+
+.scale--entered,
+.scale--exiting {
+  transition:
+    opacity 300ms,
+    transform 300ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+  transform: scale(1) translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Animation type: slide */
 
 .slide-up,
 .slide-down,
 .slide-right,
 .slide-left {
-  transition: opacity 300ms, transform 300ms ease-out;
 }
 
-.slide-up--entering,
+/* Starting states to transition OUT of */
+
+.slide-down--exited,
 .slide-down--entering,
-.slide-right--entering,
-.slide-left--entering {
-  animation-duration: 300ms;
-  animation-name: animate-root;
-  animation-timing-function: ease-out;
-  animation-fill-mode: forwards;
+.slide-up--exited,
+.slide-up--entering,
+.slide-left--exited,
+.slide-left--entering,
+.slide-right--exited,
+.slide-right--entering {
+  opacity: 0.01;
+  transition: opacity 300ms, transform 300ms;
+}
+
+.slide-down--exited,
+.slide-down--entering {
+  transform: translate3d(0, -50%, 0);
 }
 
 .slide-up--exited,
-.slide-down--exited,
-.slide-right--exited,
+.slide-up--entering {
+  transform: translate3d(0, 50%, 0);
+}
+
 .slide-left--exited,
-.slide-up--entering,
-.slide-down--entering,
-.slide-right--entering,
 .slide-left--entering {
-  opacity: 0.01;
+  transform: translate3d(-50%, 0, 0);
 }
 
-.slide-left--entering,
-.slide-left--exited {
-  transform: translate3d(-20%, 0, 0);
+.slide-right--exited,
+.slide-right--entering {
+  transform: translate3d(50%, 0, 0);
 }
 
-.slide-right--entering,
-.slide-right--exited {
-  transform: translate3d(20%, 0, 0);
-}
+/* Ending rules to transition TO */
 
-.slide-down--entering,
-.slide-down--exited {
-  transform: translate3d(0, -20%, 0);
-}
-
-.slide-up--entering,
-.slide-up--exited {
-  transform: translate3d(0, 20%, 0);
-}
-
-.slide-up--exiting,
-.slide-down--exiting,
-.slide-right--exiting,
-.slide-left--exiting,
-.slide-up--entered,
 .slide-down--entered,
+.slide-down--exiting,
+.slide-up--entered,
+.slide-up--exiting,
+.slide-left--entered,
+.slide-left--exiting,
 .slide-right--entered,
-.slide-left--entered {
+.slide-right--exiting {
   opacity: 1;
+  transition: opacity 300ms, transform 300ms;
   transform: translate3d(0, 0, 0);
 }
