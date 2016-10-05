@@ -1,5 +1,7 @@
 ## 0.15.0
 
+#### Add a [ToggleDetails](#ToggleDetails) component
+
 #### Add a [Table](#Table) component
 
 #### Don't trigger [PopoverMenu](#PopoverMenu) on focus by default
