@@ -65,7 +65,7 @@
   font-size: var(--Brand-typography-fontSizeMedium);
 }
 
-.facade {
+.root .facade {
 
   /* stylelint-disable selector-no-type */
 
