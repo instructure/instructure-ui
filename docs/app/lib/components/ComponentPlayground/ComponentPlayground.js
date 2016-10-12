@@ -145,8 +145,8 @@ export default class ComponentPlayground extends Component {
             <ScreenReaderContent>{this.state.showCode ? 'Hide Code' : 'Show Code'}</ScreenReaderContent>
 
             <svg aria-hidden="true"
-              height="1em"
-              width="0.75em"
+              height=".7em"
+              width="0.6em"
               fill="currentColor"
               className={styles.icon}>
               <path d="M9.5 3l-1.5 1.5 3.5 3.5L8 11.5l1.5 1.5 4.5-5L9.5
