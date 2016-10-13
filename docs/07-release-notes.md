@@ -1,3 +1,23 @@
+## 0.16.0
+
+#### Add a [Modal](#Modal) component
+
+#### Add a [Overlay](#Overlay) component
+
+#### Add a [Portal](#Portal) component
+
+#### Add focused getter to the [Button](#Button) component
+
+#### Fix focus state for [Checkbox](#Checkbox) `toggle` variant
+
+#### Fix [RangeInput](#RangeInput) passing `props` to it's input
+
+#### Update to [Button](#Button) design
+
+#### Update to [Select](#Select) don't set disabled attribute
+
+#### Update [Transition](#Transition) component
+
 ## 0.15.0
 
 #### Add a [ToggleDetails](#ToggleDetails) component
