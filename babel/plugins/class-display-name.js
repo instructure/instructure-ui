@@ -1,4 +1,4 @@
-export default function ({types: t}) {
+module.exports = function ({types: t}) {
   /**
    * Determine if an AST node is likely a class extending React.Component
    */
