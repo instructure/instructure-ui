@@ -2,8 +2,5 @@
   box-sizing: border-box;
   padding: var(--Brand-spacing-medium);
   overflow-y: auto;
-}
-
-.fullscreen {
   flex: 1;
 }

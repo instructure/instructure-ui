@@ -1,21 +1,29 @@
 .root {
-  background: var(--Modal-background);
+  display: flex;
+  flex-direction: row;
+  position: relative;
   overflow: hidden;
+  box-sizing: border-box;
+}
+
+.content {
+  background: var(--Modal-background);
+  flex: 1;
   display: flex;
 
   align-items: stretch;
   flex-direction: column;
-  position: relative;
 
   box-shadow: 0 0 3px 0 var(--Modal-borderColor);
   border: 1px solid var(--Modal-borderColor);
-  border-radius: var(--Brand-borders-radiusMedium);
+  border-radius: var(--Modal-borderRadius);
+  box-sizing: border-box;
 }
 
 .closeButton {
   position: absolute;
-  top: var(--Brand-spacing-medium);
-  right: var(--Brand-spacing-medium);
+  top: var(--Modal-closeButton-offset);
+  right: var(--Modal-closeButton-offset);
   background: var(--Modal-background);
 }
 
@@ -29,23 +37,35 @@
 
 .auto {
   flex: 0 1 auto;
-  min-width: var(--Modal-maxWidthSmall);
-  min-height: var(--Modal-minHeightSmall);
+  min-width: var(--Modal-auto-minWidth);
+
+  .content {
+    min-height: var(--Modal-auto-minHeight);
+  }
 }
 
 .small {
-  flex: 0 1 var(--Modal-maxWidthSmall);
-  min-height: var(--Modal-minHeightSmall);
+  flex: 0 1 var(--Modal-small-maxWidth);
+
+  .content {
+    min-height: var(--Modal-small-minHeight);
+  }
 }
 
 .medium {
-  flex: 0 1 var(--Modal-maxWidthMedium);
-  min-height: var(--Modal-minHeightMedium);
+  flex: 0 1 var(--Modal-medium-maxWidth);
+
+  .content {
+    min-height: var(--Modal-medium-minHeight);
+  }
 }
 
 .large {
-  flex: 0 1 var(--Modal-maxWidthLarge);
-  min-height: var(--Modal-minHeightLarge);
+  flex: 0 1 var(--Modal-large-maxWidth);
+
+  .content {
+    min-height: var(--Modal-large-minHeight);
+  }
 }
 
 .fullscreen {
