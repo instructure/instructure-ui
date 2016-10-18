@@ -42,6 +42,7 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
+  order: 1;
 }
 
 .success {

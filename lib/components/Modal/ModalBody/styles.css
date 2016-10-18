@@ -1,6 +1,6 @@
 .root {
   box-sizing: border-box;
-  padding: var(--Brand-spacing-medium);
+  padding: var(--ModalBody-padding);
   overflow-y: auto;
   flex: 1;
 }
