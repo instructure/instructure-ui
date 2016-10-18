@@ -1,3 +1,9 @@
+## 0.17.0
+
+#### Add a [Breadcrumb](#Breadcrumb) component
+
+#### Prevent Bootstrap or other CSS from interfering with component styles
+
 ## 0.16.0
 
 #### Add a [Modal](#Modal) component
