@@ -30,6 +30,11 @@
   opacity: 1;
 }
 
+.minimal,
+.simple {
+  flex-basis: 100%;
+}
+
 .minimal {
   .content {
     border-left: none;
@@ -39,8 +44,6 @@
 }
 
 .simple {
-  flex-basis: 100%;
-
   .content {
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
