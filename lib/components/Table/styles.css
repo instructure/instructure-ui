@@ -38,7 +38,7 @@ th {
   font-weight: bold;
 }
 
-thead th {
+thead > th {
   border-bottom-color: var(--Table-thBorderColor);
 }
 
@@ -73,25 +73,25 @@ thead th {
 }
 
 .colStriped:not(.rowHeaders) {
-  tbody td:nth-child(odd) {
+  > tbody > tr > td:nth-child(odd) {
     background-color: var(--Brand-colors-light);
   }
 }
 
 .colStriped.rowHeaders {
-  tbody td:nth-child(even) {
+  > tbody > tr > td:nth-child(even) {
     background-color: var(--Brand-colors-light);
   }
 }
 
 .rowStriped {
-  tbody tr:nth-child(odd) {
+  > tbody > tr:nth-child(odd) {
     background-color: var(--Brand-colors-light);
   }
 }
 
 .hover {
-  tbody tr {
+  > tbody > tr {
 
     border-left: 0.1875rem solid transparent;
     border-right: 0.1875rem solid transparent;
