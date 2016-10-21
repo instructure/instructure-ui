@@ -56,6 +56,13 @@ global.chai.use(function (chai, utils) {
   })
 })
 
+global.chai.use(function (chai, utils) {
+  utils.addMethod(Assertion.prototype, 'present', function () {
+    const obj = utils.flag(this, 'object')
+    return new Assertion(obj.dom()).to.exist
+  })
+})
+
 export default class ReactTestbed {
   constructor (subject) {
     this.subject = subject
