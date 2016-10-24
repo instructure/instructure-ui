@@ -11,7 +11,7 @@ function getConfig () {
     buildPath: '__build__',
     library: {
       packageName: pkg.name,
-      name: 'InstUI', // only used for docs header
+      name: 'InstUI', // only used for docs app header
       main: pkg.main,
       prefix: 'ic',
       version: pkg.version,
@@ -30,8 +30,7 @@ function getConfig () {
       excludes: [ /\.test\.js$/ ]
     },
     theme: {
-      files: 'lib/components/**/*theme.js', // include nested components
-      brand: 'lib/theme/brand'
+      files: 'lib/components/**/*theme.js' // include nested components
     },
     tests: {
       files: 'lib/**/*.test.js'

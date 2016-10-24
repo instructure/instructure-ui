@@ -1,8 +1,8 @@
 /* eslint no-var: 0 */
 'use strict'
 
-var pluginsList = function (variables) {
-  return [
+var pluginsList = function (isDocsPack) {
+  let plugins = [
     require('stylelint')(),
     require('postcss-url')({
       url: 'inline'
@@ -11,23 +11,18 @@ var pluginsList = function (variables) {
 
     require('postcss-mixins')(), // need this for Grid
     require('postcss-nested')(),
-    require('postcss-simple-vars')(), // need this for Grid
+    require('postcss-simple-vars')() // need this for Grid
+  ]
 
-    require('postcss-custom-properties')({
-      variables: Object.assign(
-        {},
-        variables.theme,
-        variables.brand
-      ),
-      preserve: true
-    }),
+  // these can be removed when we extract the docs app
+  if (isDocsPack) {
+    plugins = plugins.concat([
+      require('postcss-custom-properties')(),
+      require('postcss-calc')()
+    ])
+  }
 
-    require('postcss-custom-media')({
-      extensions: variables.media
-    }),
-
-    require('postcss-calc')(),
-
+  plugins = plugins.concat([
     require('autoprefixer')({
       browsers: ['last 2 versions']
     }),
@@ -36,11 +31,16 @@ var pluginsList = function (variables) {
     require('postcss-reporter'),
 
     require('postcss-initial') // adds 'all: initial' ie support
-  ]
+  ])
+
+  return plugins
 }
 
 module.exports = function (env) {
-  var variables = require('./load-css-variables')()
+  var packs = {
+    defaults: pluginsList(),
+    docs: pluginsList(true)
+  }
 
-  return pluginsList(variables)
+  return packs
 }

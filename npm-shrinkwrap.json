@@ -5381,12 +5381,6 @@
       "resolved": "https://registry.npmjs.org/postcss-convert-values/-/postcss-convert-values-2.4.1.tgz",
       "dev": true
     },
-    "postcss-custom-media": {
-      "version": "5.0.1",
-      "from": "postcss-custom-media@>=5.0.1 <5.1.0",
-      "resolved": "https://registry.npmjs.org/postcss-custom-media/-/postcss-custom-media-5.0.1.tgz",
-      "dev": true
-    },
     "postcss-custom-properties": {
       "version": "5.0.1",
       "from": "postcss-custom-properties@>=5.0.1 <5.1.0",

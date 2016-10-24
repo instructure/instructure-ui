@@ -3,14 +3,16 @@
 
 var config = require('./config')
 
-var localIdentName = [
-  config.library.prefix,
-  config.library.version,
-  '[folder]__[local]'
-].join('-')
-
 module.exports = function (env) {
-  var cssLoader = 'css?modules&importLoaders=1&localIdentName=' + localIdentName + '!postcss'
+  var cssLoader = 'css?modules&importLoaders=1&localIdentName=' + [
+    config.library.prefix,
+    config.library.version,
+    '[folder]__[local]'
+  ].join('-')
+
+  if (env === 'production') {
+    cssLoader = cssLoader + '&minify'
+  }
 
   return {
     preLoaders: [
@@ -49,14 +51,14 @@ module.exports = function (env) {
           /node_modules/,
           /docs\/app\//
         ],
-        loader: 'component-style!' + cssLoader
+        loader: 'component-style!' + cssLoader + '!postcss'
       },
       {
         test: /\.css$/,
         include: [
           /docs\/app\//
         ],
-        loader: 'style!' + cssLoader
+        loader: 'style!' + cssLoader + '!postcss?pack=docs'
       },
       {
         test: /\.css$/,

@@ -1,5 +1,4 @@
 .root {
-  box-sizing: border-box;
   margin: 0 auto;
   max-width: var(--Grid-maxWidth);
 }
@@ -7,6 +6,7 @@
 @define-mixin Grid-container {
   display: flex;
   flex-flow: column nowrap;
+  box-sizing: border-box;
 
   &.colSpacingSmall {
     padding-left: calc(var(--Grid-spacing-small) / 2);
