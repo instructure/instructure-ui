@@ -7,10 +7,10 @@
   border-style: solid;
   display: flex;
 
-  border-radius: var(--Brand-borders-radiusMedium);
+  border-radius: var(--Alert-borderRadius);
 
   + .alert {
-    margin-top: var(--Brand-spacing-small);
+    margin-top: var(--Alert-marginTop);
   }
 }
 
@@ -20,11 +20,11 @@
   display: flex;
   align-items: center;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-
-  padding: var(--Brand-spacing-small) var(--Brand-spacing-medium);
+  font-size: var(--Alert-content-fontSize);
+  font-family: var(--Alert-content-fontFamily);
+  font-weight: var(--Alert-content-fontWeight);
+  line-height: var(--Alert-content-lineHeight);
+  padding: var(--Alert-content-padding);
 }
 
 .icon {

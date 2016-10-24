@@ -18,37 +18,35 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   outline: transparent solid 0.1875rem;
   outline-offset: -0.5rem;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
+  font-family: var(--TextInput-fontFamily);
+  font-weight: var(--TextInput-fontWeight);
 
-  border-width: var(--Brand-borders-widthSmall);
-  border-style: var(--Brand-borders-style);
-  border-radius: var(--Brand-borders-radiusMedium);
+  border: var(--TextInput-borderWidth) var(--TextInput-borderStyle) var(--TextInput-borderColor);
+  border-radius: var(--TextInput-borderRadius);
 
   color: var(--TextInput-color);
-  background-color: var(--TextInput-backgroundColor);
-  border-color: var(--TextInput-borderColor);
+  background: var(--TextInput-background);
 
-  padding: 0 var(--Brand-spacing-small);
+  padding: var(--TextInput-padding);
 
   &:focus {
-    border-color: var(--TextInput-borderColorFocus);
-    outline: var(--TextInput-outlineColor) solid 0.1875rem;
+    border-color: var(--TextInput-focus-borderColor);
+    outline: var(--TextInput-focus-outlineColor) solid 0.1875rem;
     outline-offset: -0.1875rem;
     box-shadow: initial;
   }
 
   &[aria-invalid] {
-    border-color: var(--TextInput-borderColorError);
+    border-color: var(--TextInput-error-borderColor);
 
     &:focus {
-      border-color: var(--TextInput-borderColorError);
-      outline-color: var(--TextInput-outlineColorError);
+      border-color: var(--TextInput-error-borderColor);
+      outline-color: var(--TextInput-error-outlineColor);
     }
   }
 
   &::placeholder {
-    color: var(--TextInput-placeholderColor);
+    color: var(--TextInput-placeholder-color);
   }
 
   &[aria-disabled] {
@@ -58,18 +56,18 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   }
 
   &.small {
-    font-size: var(--Brand-typography-fontSizeXSmall);
-    height: var(--Brand-forms-inputHeightSmall);
+    font-size: var(--TextInput-small-fontSize);
+    height: var(--TextInput-small-height);
   }
 
   &.medium {
-    font-size: var(--Brand-typography-fontSizeSmall);
-    height: var(--Brand-forms-inputHeightMedium);
+    font-size: var(--TextInput-medium-fontSize);
+    height: var(--TextInput-medium-height);
   }
 
   &.large {
-    font-size: var(--Brand-typography-fontSizeMedium);
-    height: var(--Brand-forms-inputHeightLarge);
+    font-size: var(--TextInput-large-fontSize);
+    height: var(--TextInput-large-height);
   }
 }
 

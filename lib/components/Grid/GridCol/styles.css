@@ -1,12 +1,8 @@
-:root {
-  --Grid-numCols: 12;
-}
-
 @define-mixin flex-column
   $size: 1 {
 
-  flex: 0 0 calc($size / var(--Grid-numCols) * 99.999%);
-  max-width: calc($size / var(--Grid-numCols) * 99.999%);
+  flex: 0 0 calc($size / var(--GridCol-numCols) * 99.999%);
+  max-width: calc($size / var(--GridCol-numCols) * 99.999%);
 }
 
 @define-mixin grid-columns-for-breakpoint
@@ -75,15 +71,15 @@
   }
 
   &.colSpacingSmall {
-    padding: 0 calc(var(--Brand-spacing-small) / 2);
+    padding: 0 calc(var(--GridCol-spacing-small) / 2);
   }
 
   &.colSpacingMedium {
-    padding: 0 calc(var(--Brand-spacing-medium) / 2);
+    padding: 0 calc(var(--GridCol-spacing-medium) / 2);
   }
 
   &.colSpacingLarge {
-    padding: 0 calc(var(--Brand-spacing-large) / 2);
+    padding: 0 calc(var(--GridCol-spacing-large) / 2);
   }
 
   &.vAlign--top {
@@ -103,15 +99,15 @@
   box-sizing: border-box;
 
   &.rowSpacingSmall {
-    margin-bottom: var(--Brand-spacing-small);
+    margin-bottom: var(--GridCol-spacing-small);
   }
 
   &.rowSpacingMedium {
-    margin-bottom: var(--Brand-spacing-medium);
+    margin-bottom: var(--GridCol-spacing-medium);
   }
 
   &.rowSpacingLarge {
-    margin-bottom: var(--Brand-spacing-large);
+    margin-bottom: var(--GridCol-spacing-large);
   }
 
   &:last-child {
@@ -125,7 +121,7 @@
 
 @mixin grid-columns-for-breakpoint phone;
 
-@media screen and (--Brand-media-tabletMin) {
+@media screen and (--GridCol-media-tabletMin) {
   .startAtTablet {
     @mixin start-grid-column;
   }
@@ -133,7 +129,7 @@
   @mixin grid-columns-for-breakpoint tablet;
 }
 
-@media screen and (--Brand-media-desktopMin) {
+@media screen and (--GridCol-media-desktopMin) {
   .startAtDesktop {
     @mixin start-grid-column;
   }
@@ -141,7 +137,7 @@
   @mixin grid-columns-for-breakpoint desktop;
 }
 
-@media screen and (--Brand-media-wideMin) {
+@media screen and (--GridCol-media-wideMin) {
   .startAtWide {
     @mixin start-grid-column;
   }

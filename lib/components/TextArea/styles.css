@@ -10,7 +10,7 @@
   display: block;
   box-sizing: border-box;
 
-  padding: var(--Brand-spacing-small);
+  padding: var(--TextArea-padding);
 
   transition: all 0.2s ease-out;
 
@@ -19,34 +19,32 @@
   outline-offset: -0.5rem;
   outline-width: 0.1875rem;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
+  font-family: var(--TextArea-fontFamily);
+  font-weight: var(--TextArea-fontWeight);
 
-  border-width: var(--Brand-borders-widthSmall);
-  border-style: var(--Brand-borders-style);
-  border-radius: var(--Brand-borders-radiusMedium);
+  border: var(--TextArea-borderWidth) var(--TextArea-borderStyle) var(--TextArea-borderColor);
+  border-radius: var(--TextArea-borderRadius);
 
   color: var(--TextArea-color);
-  background-color: var(--TextArea-backgroundColor);
-  border-color: var(--TextArea-borderColor);
+  background: var(--TextArea-background);
 
   &:focus {
     outline-offset: -0.1875rem;
-    border-color: var(--TextArea-borderColorFocus);
-    outline-color: var(--TextArea-outlineColor);
+    border-color: var(--TextArea-focus-borderColor);
+    outline-color: var(--TextArea-focus-outlineColor);
   }
 
   &[aria-invalid] {
-    border-color: var(--TextArea-borderColorError);
+    border-color: var(--TextArea-error-borderColor);
 
     &:focus {
-      border-color: var(--TextArea-borderColorError);
-      outline-color: var(--TextArea-outlineColorError);
+      border-color: var(--TextArea-error-borderColor);
+      outline-color: var(--TextArea-error-outlineColor);
     }
   }
 
   &::placeholder {
-    color: var(--TextArea-placeholderColor);
+    color: var(--TextArea-placeholder-color);
   }
 
   &[aria-disabled] {
@@ -57,16 +55,16 @@
 }
 
 .small {
-  font-size: var(--Brand-typography-fontSizeXSmall);
-  min-height: var(--Brand-forms-inputHeightSmall);
+  font-size: var(--TextArea-small-fontSize);
+  min-height: var(--TextArea-small-height);
 }
 
 .medium {
-  font-size: var(--Brand-typography-fontSizeSmall);
-  min-height: var(--Brand-forms-inputHeightMedium);
+  font-size: var(--TextArea-medium-fontSize);
+  min-height: var(--TextArea-medium-height);
 }
 
 .large {
-  font-size: var(--Brand-typography-fontSizeMedium);
-  min-height: var(--Brand-forms-inputHeightLarge);
+  font-size: var(--TextArea-large-fontSize);
+  min-height: var(--TextArea-large-height);
 }

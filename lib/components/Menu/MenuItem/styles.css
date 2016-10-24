@@ -1,5 +1,6 @@
 .root {
-  padding: var(--Brand-spacing-xSmall) var(--Brand-spacing-small);
+  padding: var(--MenuItem-padding);
+  background: var(--MenuItem-background);
 
   &:focus {
     outline: none;
@@ -7,10 +8,10 @@
 }
 
 .default {
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeSmall);
+  font-family: var(--MenuItem-fontFamily);
+  font-weight: var(--MenuItem-fontWeight);
+  line-height: var(--MenuItem-lineHeight);
+  font-size: var(--MenuItem-fontSize);
 
   cursor: pointer;
   user-select: none;
@@ -34,5 +35,5 @@
 
 .checkbox,
 .radio {
-
+  background: var(--MenuItem-background);
 }

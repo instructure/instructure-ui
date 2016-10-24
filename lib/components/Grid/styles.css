@@ -1,7 +1,7 @@
 .root {
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: var(--Brand-breakpoints-maxWidth);
+  max-width: var(--Grid-maxWidth);
 }
 
 @define-mixin Grid-container {
@@ -9,18 +9,18 @@
   flex-flow: column nowrap;
 
   &.colSpacingSmall {
-    padding-left: calc(var(--Brand-spacing-small) / 2);
-    padding-right: calc(var(--Brand-spacing-small) / 2);
+    padding-left: calc(var(--Grid-spacing-small) / 2);
+    padding-right: calc(var(--Grid-spacing-small) / 2);
   }
 
   &.colSpacingMedium {
-    padding-left: calc(var(--Brand-spacing-medium) / 2);
-    padding-right: calc(var(--Brand-spacing-medium) / 2);
+    padding-left: calc(var(--Grid-spacing-medium) / 2);
+    padding-right: calc(var(--Grid-spacing-medium) / 2);
   }
 
   &.colSpacingLarge {
-    padding-left: calc(var(--Brand-spacing-large) / 2);
-    padding-right: calc(var(--Brand-spacing-large) / 2);
+    padding-left: calc(var(--Grid-spacing-large) / 2);
+    padding-right: calc(var(--Grid-spacing-large) / 2);
   }
 }
 
@@ -32,19 +32,19 @@
   @mixin Grid-container;
 }
 
-@media screen and (--Brand-media-tabletMin) {
+@media screen and (--Grid-media-tabletMin) {
   .startAtTablet {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--Brand-media-desktopMin) {
+@media screen and (--Grid-media-desktopMin) {
   .startAtDesktop {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--Brand-media-wideMin) {
+@media screen and (--Grid-media-wideMin) {
   .startAtWide {
     @mixin Grid-container;
   }

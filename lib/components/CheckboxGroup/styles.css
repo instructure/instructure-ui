@@ -2,7 +2,7 @@
 
 .root {
   > label {
-    margin-top: var(--Brand-spacing-xxSmall);
+    margin-top: var(--CheckboxGroup-marginTop);
   }
 }
 

@@ -1,31 +1,3 @@
-:root {
-  --ProgressCircle-sizeSm: 5em;
-  --ProgressCircle-sizeMed: 7em;
-  --ProgressCircle-sizeLg: 9em;
-
-  /*
-    The radius variables here need to always
-    match the values in the radius() function
-    in index.js
-  */
-  --ProgressCircle-radiusSm: 1.8em;
-  --ProgressCircle-radiusMed: 2.75em;
-  --ProgressCircle-radiusLg: 3.5em;
-
-  /*
-    Calculate the circumference of each size of circle
-    to use below. Note: Only Chrome seems happy using
-    calc() in the :root right now, so going to declare
-    these values explicitly for the time being. Ideally
-    they would be calculated as follows:
-    calc(2 * 3.1416 * var(--ProgressCircle-radiusMed))
-    and so on...
-  */
-  --ProgressCircle-circumferenceSm: 11.3098em;
-  --ProgressCircle-circumferenceMed: 17.2788em;
-  --ProgressCircle-circumferenceLg: 21.9912em;
-}
-
 .root {
   display: inline-block;
   vertical-align: middle;
@@ -39,9 +11,9 @@
   */
   font-size: 1rem;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
+  font-family: var(--ProgressCircle-fontFamily);
+  font-weight: var(--ProgressCircle-fontWeight);
+  line-height: var(--ProgressCircle-lineHeight);
 }
 
 .circle {
@@ -133,12 +105,12 @@
 }
 
 .small {
-  width: var(--ProgressCircle-sizeSm);
-  height: var(--ProgressCircle-sizeSm);
+  width: var(--ProgressCircle-small-size);
+  height: var(--ProgressCircle-small-size);
 
   .circle {
-    width: var(--ProgressCircle-sizeSm);
-    height: var(--ProgressCircle-sizeSm);
+    width: var(--ProgressCircle-small-size);
+    height: var(--ProgressCircle-small-size);
   }
 
   .shadow {
@@ -146,12 +118,7 @@
   }
 
   .track {
-    /*
-      need to avoid calc() for now to make all browsers happy
-      ideally, would be:
-      transform-origin: calc(var(--ProgressCircle-sizeSm) / 2);
-    */
-    transform-origin: 2.5em 2.5em;
+    transform-origin: var(--ProgressCircle-small-transform) var(--ProgressCircle-small-transform);
   }
 
   .track,
@@ -160,17 +127,17 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-circumferenceSm);
+    stroke-dasharray: var(--ProgressCircle-small-circumference);
   }
 }
 
 .medium {
-  width: var(--ProgressCircle-sizeMed);
-  height: var(--ProgressCircle-sizeMed);
+  width: var(--ProgressCircle-medium-size);
+  height: var(--ProgressCircle-medium-size);
 
   .circle {
-    width: var(--ProgressCircle-sizeMed);
-    height: var(--ProgressCircle-sizeMed);
+    width: var(--ProgressCircle-medium-size);
+    height: var(--ProgressCircle-medium-size);
   }
 
   .shadow {
@@ -178,12 +145,7 @@
   }
 
   .track {
-    /*
-      need to avoid calc() for now to make all browsers happy
-      ideally, would be:
-      transform-origin: calc(var(--ProgressCircle-sizeMed) / 2);
-    */
-    transform-origin: 3.5em 3.5em;
+    transform-origin: var(--ProgressCircle-medium-transform) var(--ProgressCircle-medium-transform);
   }
 
   .track,
@@ -192,17 +154,17 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-circumferenceMed);
+    stroke-dasharray: var(--ProgressCircle-medium-circumference);
   }
 }
 
 .large {
-  width: var(--ProgressCircle-sizeLg);
-  height: var(--ProgressCircle-sizeLg);
+  width: var(--ProgressCircle-large-size);
+  height: var(--ProgressCircle-large-size);
 
   .circle {
-    width: var(--ProgressCircle-sizeLg);
-    height: var(--ProgressCircle-sizeLg);
+    width: var(--ProgressCircle-large-size);
+    height: var(--ProgressCircle-large-size);
   }
 
   .shadow {
@@ -210,12 +172,7 @@
   }
 
   .track {
-    /*
-      need to avoid calc() for now to make all browsers happy
-      ideally, would be:
-      transform-origin: calc(var(--ProgressCircle-sizeLg) / 2);
-    */
-    transform-origin: 4.5em 4.5em;
+    transform-origin: var(--ProgressCircle-large-transform) var(--ProgressCircle-large-transform);
   }
 
   .track,
@@ -224,7 +181,7 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-circumferenceLg);
+    stroke-dasharray: var(--ProgressCircle-large-circumference);
   }
 }
 
@@ -249,26 +206,4 @@
   .meter {
     opacity: 0;
   }
-
-  /* stylelint-disable declaration-no-important */
-
-  &.small {
-    .meter {
-      stroke-dashoffset: var(--ProgressCircle-circumferenceSm) !important;
-    }
-  }
-
-  &.medium {
-    .meter {
-      stroke-dashoffset: var(--ProgressCircle-circumferenceMed) !important;
-    }
-  }
-
-  &.large {
-    .meter {
-      stroke-dashoffset: var(--ProgressCircle-circumferenceLg) !important;
-    }
-  }
-
-  /* stylelint-enable declaration-no-important */
 }

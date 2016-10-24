@@ -8,7 +8,7 @@
   }
 
   + .root {
-    margin-top: var(--Brand-spacing-small);
+    margin-top: var(--FormFieldGroup-marginTop);
   }
 }
 

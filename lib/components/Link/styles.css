@@ -4,8 +4,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
+  font-family: var(--Link-fontFamily);
+  font-weight: var(--Link-fontWeight);
 
   color: var(--Link-color);
   text-decoration: var(--Link-textDecoration);
@@ -43,6 +43,7 @@ button.root {
   display: inline-flex;
   align-content: flex-start;
   outline: none;
+  text-align: inherit;
 }
 
 /* stylelint-enable selector-no-type */

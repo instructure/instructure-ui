@@ -1,8 +1,8 @@
 .root {
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeMedium);
+  font-family: var(--Tab-fontFamily);
+  font-weight: var(--Tab-fontWeight);
+  line-height: var(--Tab-lineHeight);
+  font-size: var(--Tab-fontSize);
 
   cursor: pointer;
   user-select: none;
@@ -30,7 +30,7 @@
 .simple {
   box-sizing: border-box;
   padding: 0.7em 1em;
-  color: var(--Tab-simpleTextColor);
+  color: var(--Tab-simple-color);
 
   margin-right: 0.2em;
   margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
@@ -45,20 +45,20 @@
 
   &:not([aria-selected]):not([aria-disabled]):hover,
   &[aria-selected] {
-    background-color: var(--Tab-simpleBackgroundColorSelected);
-    border-color: var(--Tab-simpleBorderColorSelected);
+    background: var(--Tab-simple-selected-background);
+    border-color: var(--Tab-simple-selected-borderColor);
   }
 
   &:hover,
   &[aria-selected],
   &[aria-disabled] {
-    color: var(--Tab-simpleTextColorSelected);
+    color: var(--Tab-simple-selected-color);
   }
 
   &[aria-selected] {
     /* To overlay Tab over TabPanel top border */
     z-index: 1;
-    border-bottom-color: var(--Tab-simpleBackgroundColorSelected);
+    border-bottom-color: var(--Tab-simple-selected-background);
   }
 
   &:focus {
@@ -71,7 +71,7 @@
   line-height: 1;
   position: relative;
   z-index: 1;
-  color: var(--Tab-minimalTextColor);
+  color: var(--Tab-minimal-color);
 
   &::after {
     transition: all 0.2s ease-out;
@@ -90,13 +90,13 @@
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover {
-    border-bottom-color: var(--Tab-minimalBorderColorHover);
+    border-bottom-color: var(--Tab-minimal-hover-borderColor);
   }
 
   &[aria-selected]::after {
     transform: translate3d(0, 0, 0) scaleX(1);
     opacity: 1;
-    background-color: var(--Tab-minimalBorderColorSelected);
+    background-color: var(--Tab-minimal-selected-borderColor);
   }
 
   &:focus {
@@ -109,7 +109,7 @@
 
   margin-top: 0.5rem;
 
-  padding: var(--Brand-spacing-xSmall) var(--Brand-spacing-small);
+  padding: var(--Tab-accordion-padding);
 
   display: flex;
   align-items: center;
@@ -119,9 +119,9 @@
   border-width: 1px;
   border-style: solid;
 
-  color: var(--Tab-accordionTextColor);
-  background-color: var(--Tab-accordionBackgroundColor);
-  border-color: var(--Tab-accordionBorderColor);
+  color: var(--Tab-accordion-color);
+  background-color: var(--Tab-accordion-background);
+  border-color: var(--Tab-accordion-borderColor);
 
   &:first-of-type {
     margin-top: 0;
@@ -133,15 +133,15 @@
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover {
-    background-color: var(--Tab-accordionBackgroundColorHover);
+    background-color: var(--Tab-accordion-hover-background);
   }
 
   &[aria-selected] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-color: var(--Tab-accordionBorderColorSelected);
-    color: var(--Tab-accordionTextColorSelected);
-    background-color: var(--Tab-accordionBackgroundColorSelected);
+    border-color: var(--Tab-accordion-selected-borderColor);
+    color: var(--Tab-accordion-selected-color);
+    background-color: var(--Tab-accordion-selected-background);
 
     & .icon::before {
       content: "\25BE";
@@ -149,7 +149,7 @@
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 1px var(--Tab-accordionBorderColorFocused);
+    box-shadow: inset 0 0 0 1px var(--Tab-accordion-focused-borderColor);
   }
 }
 

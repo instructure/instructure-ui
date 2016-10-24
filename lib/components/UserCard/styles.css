@@ -1,7 +1,13 @@
 .root {
-  background-color: var(--UserCard-backgroundColor);
-  font-family: var(--UserCard-fontFamily);
   display: inline-block;
+
+  background: var(--UserCard-background);
+  color: var(--UserCard-color);
+
+  font-family: var(--UserCard-fontFamily);
+  font-weight: var(--UserCard-fontWeight);
+  line-height: var(--UserCard-lineHeight);
+  font-size: var(--UserCard-fontSize);
 }
 
 .avatar {
@@ -13,15 +19,13 @@
   box-sizing: border-box;
   padding: 0.875rem 1rem;
   max-width: 15.625rem;
-  font-family: var(--Brand-typography-fontFamily);
-  color: var(--UserCard-textColor);
 }
 
 .profileData {
-  font-size: var(--Brand-typography-fontSizeXSmall);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-weight: var(--Brand-typography-fontWeightLight);
-  color: var(--UserCard-secondaryTextColor);
+  font-weight: var(--UserCard-profileData-fontWeight);
+  line-height: var(--UserCard-profileData-lineHeight);
+  font-size: var(--UserCard-profileData-fontSize);
+  color: var(--UserCard-profileData-color);
 }
 
 .metrics {

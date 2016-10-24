@@ -1,10 +1,3 @@
-:root {
-  --ToggleDetails-iconSizeSmall: 0.5rem;
-  --ToggleDetails-iconSizeMedium: 0.8125rem;
-  --ToggleDetails-iconSizeLarge: 1.125rem;
-  --ToggleDetails-togglePadding: var(--Brand-spacing-xxSmall);
-}
-
 .toggle {
   appearance: none;
   cursor: pointer;
@@ -18,8 +11,8 @@
   margin: 0;
   line-height: 1;
 
-  border-radius: var(--Brand-borders-radiusMedium);
-  border: var(--Brand-borders-widthSmall) var(--Brand-borders-style) transparent;
+  border-radius: var(--ToggleDetails-toggle-borderRadius);
+  border: var(--ToggleDetails-toggle-borderWidth) var(--ToggleDetails-toggle-borderStyle) transparent;
 
   outline: none;
 
@@ -27,7 +20,7 @@
   &:focus {
     color: inherit; /* removes the push effect on FF */
     outline: none;
-    border-color: var(--ToggleDetails-focusRingColor);
+    border-color: var(--ToggleDetails-toggle-focus-borderColor);
   }
 }
 
@@ -36,7 +29,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: var(--ToggleDetails-togglePadding);
+  padding: var(--ToggleDetails-toggle-padding);
 }
 
 .label {
@@ -47,7 +40,7 @@
 .icon {
   transition: all 0.2s linear;
   transform: translate3d(0, 0, 0);
-  margin-right: var(--ToggleDetails-togglePadding);
+  margin-right: var(--ToggleDetails-toggle-padding);
 }
 
 .details {
@@ -57,31 +50,31 @@
 
 .small {
   .icon {
-    font-size: var(--ToggleDetails-iconSizeSmall);
+    font-size: var(--ToggleDetails-small-iconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-iconSizeSmall) + 2 * var(--ToggleDetails-togglePadding));
+    padding-left: calc(var(--ToggleDetails-small-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
   }
 }
 
 .medium {
   .icon {
-    font-size: var(--ToggleDetails-iconSizeMedium);
+    font-size: var(--ToggleDetails-medium-iconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-iconSizeMedium) + 2 * var(--ToggleDetails-togglePadding));
+    padding-left: calc(var(--ToggleDetails-medium-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
   }
 }
 
 .large {
   .icon {
-    font-size: var(--ToggleDetails-iconSizeLarge);
+    font-size: var(--ToggleDetails-large-iconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-iconSizeLarge) + 2 * var(--ToggleDetails-togglePadding));
+    padding-left: calc(var(--ToggleDetails-large-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
   }
 }
 

@@ -16,19 +16,19 @@
   transition: all 0.2s;
 
   border: 1px solid var(--CheckboxFacade-borderColor);
-  border-radius: var(--Brand-borders-radiusSmall);
+  border-radius: var(--CheckboxFacade-borderRadius);
 
-  margin-right: var(--Brand-spacing-xSmall);
-  padding: var(--Brand-spacing-xxxSmall);
+  margin-right: var(--CheckboxFacade-marginRight);
+  padding: var(--CheckboxFacade-padding);
 }
 
 .label {
-  color: var(--CheckboxFacade-label-color);
   flex: 1;
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeMedium);
+  color: var(--CheckboxFacade-label-color);
+  font-family: var(--CheckboxFacade-label-fontFamily);
+  font-weight: var(--CheckboxFacade-label-fontWeight);
+  line-height: var(--CheckboxFacade-label-lineHeight);
+  font-size: var(--CheckboxFacade-label-fontSize);
 }
 
 .icon {

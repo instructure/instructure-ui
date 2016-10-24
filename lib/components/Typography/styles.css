@@ -3,27 +3,27 @@
 }
 
 .color-primary {
-  color: var(--Typography-colorPrimary);
+  color: var(--Typography-primary-color);
 }
 
 .color-secondary {
-  color: var(--Typography-colorSecondary);
+  color: var(--Typography-secondary-color);
 }
 
 .color-primary-inverse {
-  color: var(--Typography-colorPrimaryInverse);
+  color: var(--Typography-primary-inverse-color);
 }
 
 .color-secondary-inverse {
-  color: var(--Typography-colorSecondaryInverse);
+  color: var(--Typography-secondary-inverse-color);
 }
 
 .color-success {
-  color: var(--Typography-colorSuccess);
+  color: var(--Typography-success-color);
 }
 
 .color-error {
-  color: var(--Typography-colorError);
+  color: var(--Typography-error-color);
 }
 
 .weight-normal {
@@ -140,7 +140,7 @@
   p {
     display: block;
     padding: 0;
-    margin: var(--Brand-spacing-medium) 0;
+    margin: var(--Typography-paragraph-margin);
   }
 
 }

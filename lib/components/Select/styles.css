@@ -1,9 +1,3 @@
-:root {
-  --Select-arrowWidthSmall: 0.75rem;
-  --Select-arrowWidthMedium: 0.875rem;
-  --Select-arrowWidthLarge: 1rem;
-}
-
 .root {
   position: relative;
   display: block;
@@ -12,25 +6,23 @@
     display: block;
     position: absolute;
     top: calc(50% - 0.4rem);
-    right: var(--Brand-spacing-small);
+    right: var(--Select-padding);
     pointer-events: none;
-    fill: var(--Select-arrowIconColor);
+    fill: var(--Select-arrow-color);
   }
 
   .select {
     all: initial;
-    background: var(--Select-backgroundColor);
-    border-color: var(--Select-borderColor);
-    color: var(--Select-textColor);
+    background: var(--Select-background);
+    color: var(--Select-color);
 
     box-sizing: border-box;
     display: block;
     width: 100%;
     appearance: none;
 
-    border-width: var(--Brand-borders-widthSmall);
-    border-style: var(--Brand-borders-style);
-    border-radius: var(--Brand-borders-radiusMedium);
+    border: var(--Select-borderWidth) var(--Select-borderStyle) var(--Select-borderColor);
+    border-radius: var(--Select-borderRadius);
 
     transition: all 0.2s ease-out;
 
@@ -39,9 +31,9 @@
     outline-offset: -0.5rem;
     outline-width: 0.1875rem;
 
-    font-family: var(--Brand-typography-fontFamily);
-    font-weight: var(--Brand-typography-fontWeightNormal);
-    font-size: var(--Brand-typography-fontSizeSmall);
+    font-family: var(--Select-fontFamily);
+    font-weight: var(--Select-fontWeight);
+    font-size: var(--Select-fontSize);
 
     &::-ms-expand {
       display: none;
@@ -49,16 +41,16 @@
 
     &:focus {
       outline-offset: -0.1875rem;
-      border-color: var(--Select-borderColorFocus);
-      outline-color: var(--Select-outlineColor);
+      border-color: var(--Select-focus-borderColor);
+      outline-color: var(--Select-focus-outlineColor);
     }
 
     &[aria-invalid] {
-      border-color: var(--Select-borderColorError);
+      border-color: var(--Select-error-borderColor);
 
       &:focus {
-        border-color: var(--Select-borderColorError);
-        outline-color: var(--Select-outlineColorError);
+        border-color: var(--Select-error-borderColor);
+        outline-color: var(--Select-error-outlineColor);
       }
     }
   }
@@ -72,42 +64,42 @@
 
 .small {
   .select {
-    line-height: var(--Brand-forms-inputHeightSmall);
-    height: var(--Brand-forms-inputHeightSmall);
-    font-size: var(--Brand-typography-fontSizeXSmall);
-    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthSmall)) 0 var(--Brand-spacing-small);
+    line-height: var(--Select-small-height);
+    height: var(--Select-small-height);
+    font-size: var(--Select-small-fontSize);
+    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-small-arrow-width)) 0 var(--Select-padding);
   }
 
   .arrow {
-    width: var(--Select-arrowWidthSmall);
-    height: var(--Select-arrowWidthSmall);
+    width: var(--Select-small-arrow-width);
+    height: var(--Select-small-arrow-width);
   }
 }
 
 .medium {
   .select {
-    line-height: var(--Brand-forms-inputHeightMedium);
-    height: var(--Brand-forms-inputHeightMedium);
-    font-size: var(--Brand-typography-fontSizeSmall);
-    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthMedium)) 0 var(--Brand-spacing-small);
+    line-height: var(--Select-medium-height);
+    height: var(--Select-medium-height);
+    font-size: var(--Select-medium-fontSize);
+    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-medium-arrow-width)) 0 var(--Select-padding);
   }
 
   .arrow {
-    width: var(--Select-arrowWidthMedium);
-    height: var(--Select-arrowWidthMedium);
+    width: var(--Select-medium-arrow-width);
+    height: var(--Select-medium-arrow-width);
   }
 }
 
 .large {
   .select {
-    line-height: var(--Brand-forms-inputHeightLarge);
-    height: var(--Brand-forms-inputHeightLarge);
-    font-size: var(--Brand-typography-fontSizeSmall);
-    padding: 0 calc(var(--Brand-spacing-small) + var(--Select-arrowWidthLarge)) 0 var(--Brand-spacing-small);
+    line-height: var(--Select-large-height);
+    height: var(--Select-large-height);
+    font-size: var(--Select-large-fontSize);
+    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-large-arrow-width)) 0 var(--Select-padding);
   }
 
   .arrow {
-    width: var(--Select-arrowWidthLarge);
-    height: var(--Select-arrowWidthLarge);
+    width: var(--Select-large-arrow-width);
+    height: var(--Select-large-arrow-width);
   }
 }

@@ -1,7 +1,3 @@
-:root {
-  --ToggleFacade-borderWidth: var(--Brand-borders-widthLarge);
-}
-
 .facade {
   color: var(--ToggleFacade-color);
   background: var(--ToggleFacade-background);
@@ -18,9 +14,9 @@
 
   border-width: var(--ToggleFacade-borderWidth);
   border-style: solid;
-  border-radius: var(--Brand-borders-radiusLarge);
+  border-radius: var(--ToggleFacade-borderRadius);
 
-  margin-right: var(--Brand-spacing-xSmall);
+  margin-right: var(--ToggleFacade-marginRight);
   vertical-align: middle;
 
   &::before {
@@ -34,7 +30,7 @@
     top: 0;
     left: 0;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    border-radius: calc(var(--Brand-borders-radiusLarge) - var(--ToggleFacade-borderWidth));
+    border-radius: calc(var(--ToggleFacade-borderRadius) - var(--ToggleFacade-borderWidth));
   }
 }
 
@@ -57,12 +53,12 @@
 }
 
 .label {
-  color: var(--ToggleFacade-label-color);
   flex: 1;
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeMedium);
+  color: var(--ToggleFacade-label-color);
+  font-family: var(--ToggleFacade-label-fontFamily);
+  font-weight: var(--ToggleFacade-label-fontWeight);
+  line-height: var(--ToggleFacade-label-lineHeight);
+  font-size: var(--ToggleFacade-label-fontSize);
 }
 
 .root .facade {

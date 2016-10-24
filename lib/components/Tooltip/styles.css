@@ -4,8 +4,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
+  font-family: var(--Tooltip-trigger-fontFamily);
+  font-weight: var(--Tooltip-trigger-fontWeight);
 
   color: var(--Tooltip-trigger-color);
   text-decoration: var(--Tooltip-trigger-textDecoration);

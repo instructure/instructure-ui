@@ -6,7 +6,7 @@
 
 .simple {
   > label {
-    margin-top: var(--Brand-spacing-xxSmall);
+    margin-top: var(--RadioInputGroup-marginTop);
   }
 }
 
@@ -16,20 +16,20 @@
   transition: all 0.2s;
   display: inline-flex;
   box-sizing: border-box;
-  border-width: var(--Brand-borders-widthLarge);
-  border-style: var(--Brand-borders-style);
-  border-radius: var(--Brand-borders-radiusLarge);
+  border-width: var(--RadioInputGroup-toggle-borderWidth);
+  border-style: var(--RadioInputGroup-toggle-borderStyle);
+  border-radius: var(--RadioInputGroup-toggle-borderRadius);
 
-  background: var(--RadioInputGroup-toggleBgColor);
-  border-color: var(--RadioInputGroup-toggleBgColor);
+  background: var(--RadioInputGroup-toggle-backgroundColor);
+  border-color: var(--RadioInputGroup-toggle-backgroundColor);
 
   &.success {
-    background: var(--RadioInputGroup-toggleSuccessColor);
-    border-color: var(--RadioInputGroup-toggleSuccessColor);
+    background: var(--RadioInputGroup-toggle-success-backgroundColor);
+    border-color: var(--RadioInputGroup-toggle-success-backgroundColor);
   }
 
   &.danger {
-    background: var(--RadioInputGroup-toggleDangerColor);
-    border-color: var(--RadioInputGroup-toggleDangerColor);
+    background: var(--RadioInputGroup-toggle-danger-backgroundColor);
+    border-color: var(--RadioInputGroup-toggle-danger-backgroundColor);
   }
 }

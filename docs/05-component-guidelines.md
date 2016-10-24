@@ -28,6 +28,26 @@ with component props `isOpen` and `withPadding`.
 As a general rule, element (e.g. `p { ... }`) and wildcard (`*`) selectors should be avoided. Exceptions could be made for
 components that would never render children.
 
-#### Custom Properties
+#### CSS variables and adding component themes
 
-Custom properties (css variables) should be in the format `--ComponentName-variableName`.
+All CSS variables should be defined in a `theme.js` file in the component directory. The theme is applied to the component via the `@themeable` decorator, which transforms the JS variables in the `theme.js` file into CSS custom properties that are automatically scoped and applied to the component.
+
+JS variables in the `theme.js` file can be nested, and should generally be named using the name of the component state and/or child element and then the camel-cased css property name.
+
+For example, to add a variable for the `hover` state of a `Button` component the theme.js file would contain the following:
+
+```
+export default function ({ colors }) {
+  return (
+    background: colors.lightest,
+    color: colors.darkest,
+
+    hover: {
+      color: colors.lightest,
+      background: colors.darkest
+    }
+  )
+}
+```
+
+The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hover-color`, `--Button-hover-background`. Use these generated custom property names in the `styles.css` file for the `Button` component.

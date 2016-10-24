@@ -1,9 +1,3 @@
-:root {
-  --ContextBox-arrowSize: 0.5rem;
-  --ContextBox-borderWidth: 0.0625rem;
-  --ContextBox-borderRadius: 0.25rem;
-}
-
 .root {
   box-sizing: border-box;
   display: inline-block;

@@ -1,8 +1,8 @@
 .root {
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  font-size: var(--Brand-typography-fontSizeXSmall);
-  line-height: var(--Brand-typography-lineHeight);
+  font-family: var(--FormFieldMessage-fontFamily);
+  font-weight: var(--FormFieldMessage-fontWeight);
+  font-size: var(--FormFieldMessage-fontSize);
+  line-height: var(--FormFieldMessage-lineHeight);
 
   padding: 0 0.125rem;
 }

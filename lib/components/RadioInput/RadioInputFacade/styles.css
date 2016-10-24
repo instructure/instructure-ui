@@ -1,18 +1,13 @@
-:root {
-  --RadioInputFacade-toggleHeightSm: 1.25rem;
-  --RadioInputFacade-toggleHeightMed: 1.875rem;
-  --RadioInputFacade-toggleHeightLg: 2.5rem;
-}
-
 .root {
   display: block;
 }
 
 .label {
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeMedium);
+  color: var(--RadioInputFacade-label-color);
+  font-family: var(--RadioInputFacade-label-fontFamily);
+  font-weight: var(--RadioInputFacade-label-fontWeight);
+  line-height: var(--RadioInputFacade-label-lineHeight);
+  font-size: var(--RadioInputFacade-label-fontSize);
 }
 
 .simple {
@@ -32,7 +27,7 @@
     border-radius: 100%;
     border: 1px solid var(--RadioInputFacade-borderColor);
 
-    background-color: var(--RadioInputFacade-backgroundColor);
+    background-color: var(--RadioInputFacade-background);
   }
 
   .label {
@@ -45,16 +40,16 @@
   label:hover > input[type="radio"] + &,
   &.hovered {
     .facade {
-      border-color: var(--RadioInputFacade-borderColorHover);
+      border-color: var(--RadioInputFacade-hover-borderColor);
     }
   }
 
   input[type="radio"]:checked + &,
   &.checked {
     .facade {
-      background-color: var(--RadioInputFacade-borderColorHover);
-      box-shadow: inset 0 0 0 3px var(--RadioInputFacade-backgroundColor);
-      border-color: var(--RadioInputFacade-borderColorHover);
+      background-color: var(--RadioInputFacade-hover-borderColor);
+      box-shadow: inset 0 0 0 3px var(--RadioInputFacade-background);
+      border-color: var(--RadioInputFacade-hover-borderColor);
     }
   }
 
@@ -62,10 +57,10 @@
   input[type="radio"]:focus + &,
   &.focused {
     .facade {
-      background-color: var(--RadioInputFacade-borderColorHover);
+      background-color: var(--RadioInputFacade-hover-borderColor);
       box-shadow:
-        inset 0 0 0 2px var(--RadioInputFacade-shadowColorFocus),
-        inset 0 0 0 4px var(--RadioInputFacade-backgroundColor);
+        inset 0 0 0 2px var(--RadioInputFacade-focus-shadowColor),
+        inset 0 0 0 4px var(--RadioInputFacade-background);
     }
   }
 
@@ -85,7 +80,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--RadioInputFacade-toggleTextColor);
+    color: var(--RadioInputFacade-toggle-color);
   }
 
   .facade {
@@ -99,40 +94,40 @@
     width: 100%;
     height: 100%;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    border-radius: calc(var(--Brand-borders-radiusLarge) - var(--Brand-borders-widthLarge));
-    background: var(--RadioInputFacade-toggleHandleBgColor);
+    border-radius: calc(var(--RadioInputFacade-toggle-borderRadius) - var(--RadioInputFacade-toggle-borderWidth));
+    background: var(--RadioInputFacade-toggle-handle-background);
   }
 
   &.small {
     padding: 0 0.5rem;
-    height: var(--RadioInputFacade-toggleHeightSm);
+    height: var(--RadioInputFacade-toggle-small-height);
 
     .label {
       font-size: 0.65rem;
-      height: var(--RadioInputFacade-toggleHeightSm);
-      line-height: var(--RadioInputFacade-toggleHeightSm);
+      height: var(--RadioInputFacade-toggle-small-height);
+      line-height: var(--RadioInputFacade-toggle-small-height);
     }
   }
 
   &.medium {
     padding: 0 0.875rem;
-    height: var(--RadioInputFacade-toggleHeightMed);
+    height: var(--RadioInputFacade-toggle-medium-height);
 
     .label {
       font-size: 0.75rem;
-      height: var(--RadioInputFacade-toggleHeightMed);
-      line-height: var(--RadioInputFacade-toggleHeightMed);
+      height: var(--RadioInputFacade-toggle-medium-height);
+      line-height: var(--RadioInputFacade-toggle-medium-height);
     }
   }
 
   &.large {
     padding: 0 1rem;
-    height: var(--RadioInputFacade-toggleHeightLg);
+    height: var(--RadioInputFacade-toggle-large-height);
 
     .label {
       font-size: 0.85rem;
-      height: var(--RadioInputFacade-toggleHeightLg);
-      line-height: var(--RadioInputFacade-toggleHeightLg);
+      height: var(--RadioInputFacade-toggle-large-height);
+      line-height: var(--RadioInputFacade-toggle-large-height);
     }
   }
 
@@ -151,27 +146,27 @@
 
   input[type="radio"]:checked + & .label,
   &.checked .label {
-    color: var(--RadioInputFacade-toggleHandleTextColor);
+    color: var(--RadioInputFacade-toggle-handle-color);
   }
 
   input[type="radio"]:focus + & .facade,
   &.focused .facade {
     box-shadow:
       0 3px 7px rgba(0, 0, 0, 0.3),
-      0 0 0 8px var(--RadioInputFacade-toggleFocusColor);
+      0 0 0 8px var(--RadioInputFacade-toggle-focus-color);
   }
 
   &.success {
     input[type="radio"]:checked + & .label,
     &.checked .label {
-      color: var(--RadioInputFacade-toggleSuccessTextColor);
+      color: var(--RadioInputFacade-toggle-success-color);
     }
   }
 
   &.danger {
     input[type="radio"]:checked + & .label,
     &.checked .label {
-      color: var(--RadioInputFacade-toggleDangerTextColor);
+      color: var(--RadioInputFacade-toggle-danger-color);
     }
   }
 

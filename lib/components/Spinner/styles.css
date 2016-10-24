@@ -1,13 +1,3 @@
-:root {
-  --Spinner-sizeSm: 3em;
-  --Spinner-sizeMed: 5em;
-  --Spinner-sizeLg: 7em;
-
-  --Spinner-borderWidthSm: 0.375em;
-  --Spinner-borderWidthMed: 0.5em;
-  --Spinner-borderWidthLg: 0.75em;
-}
-
 @keyframes rotate {
   to {
     transform: rotate(360deg);
@@ -38,76 +28,76 @@
 }
 
 .small {
-  width: var(--Spinner-sizeSm);
-  height: var(--Spinner-sizeSm);
+  width: var(--Spinner-small-size);
+  height: var(--Spinner-small-size);
 
   .circle {
-    width: var(--Spinner-sizeSm);
-    height: var(--Spinner-sizeSm);
+    width: var(--Spinner-small-size);
+    height: var(--Spinner-small-size);
   }
 
   .circleShadow {
-    stroke-width: calc(var(--Spinner-borderWidthSm) * 1.75);
+    stroke-width: calc(var(--Spinner-small-borderWidth) * 1.75);
   }
 
   .circleTrack,
   .circleSpin {
-    stroke-width: var(--Spinner-borderWidthSm);
+    stroke-width: var(--Spinner-small-borderWidth);
   }
 
   .circleSpin {
     stroke-dasharray: 6em;
-    transform-origin: calc(var(--Spinner-sizeSm) / 2) calc(var(--Spinner-sizeSm) / 2);
+    transform-origin: calc(var(--Spinner-small-size) / 2) calc(var(--Spinner-small-size) / 2);
   }
 }
 
 .medium {
-  width: var(--Spinner-sizeMed);
-  height: var(--Spinner-sizeMed);
+  width: var(--Spinner-medium-size);
+  height: var(--Spinner-medium-size);
 
   .circle {
-    stroke-width: var(--Spinner-borderWidthMed);
-    width: var(--Spinner-sizeMed);
-    height: var(--Spinner-sizeMed);
+    stroke-width: var(--Spinner-medium-borderWidth);
+    width: var(--Spinner-medium-size);
+    height: var(--Spinner-medium-size);
   }
 
   .circleShadow {
-    stroke-width: calc(var(--Spinner-borderWidthMed) * 1.75);
+    stroke-width: calc(var(--Spinner-medium-borderWidth) * 1.75);
   }
 
   .circleTrack,
   .circleSpin {
-    stroke-width: var(--Spinner-borderWidthMed);
+    stroke-width: var(--Spinner-medium-borderWidth);
   }
 
   .circleSpin {
     stroke-dasharray: 10.5em;
-    transform-origin: calc(var(--Spinner-sizeMed) / 2) calc(var(--Spinner-sizeMed) / 2);
+    transform-origin: calc(var(--Spinner-medium-size) / 2) calc(var(--Spinner-medium-size) / 2);
   }
-
 }
 
 .large {
-  width: var(--Spinner-sizeLg);
-  height: var(--Spinner-sizeLg);
+  width: var(--Spinner-large-size);
+  height: var(--Spinner-large-size);
 
   .circle {
-    width: var(--Spinner-sizeLg);
-    height: var(--Spinner-sizeLg);
+    stroke-width: var(--Spinner-large-borderWidth);
+    width: var(--Spinner-large-size);
+    height: var(--Spinner-large-size);
   }
 
   .circleShadow {
-    stroke-width: calc(var(--Spinner-borderWidthLg) * 1.75);
+    stroke-width: calc(var(--Spinner-large-borderWidth) * 1.75);
   }
 
   .circleTrack,
   .circleSpin {
-    stroke-width: var(--Spinner-borderWidthLg);
+    stroke-width: var(--Spinner-large-borderWidth);
   }
 
   .circleSpin {
-    stroke-dasharray: 15em;
-    transform-origin: calc(var(--Spinner-sizeLg) / 2) calc(var(--Spinner-sizeLg) / 2);
+    stroke-dasharray: 10.5em;
+    transform-origin: calc(var(--Spinner-large-size) / 2) calc(var(--Spinner-large-size) / 2);
   }
 }
 
@@ -142,11 +132,11 @@
   }
 
   .circleTrack {
-    stroke: var(--Spinner-colorTrack);
+    stroke: var(--Spinner-trackColor);
   }
 
   .circleSpin {
-    stroke: var(--Spinner-colorSpinner);
+    stroke: var(--Spinner-color);
   }
 }
 
@@ -156,11 +146,11 @@
   }
 
   .circleTrack {
-    stroke: var(--Spinner-colorTrackInverse);
+    stroke: var(--Spinner-inverse-trackColor);
   }
 
   .circleSpin {
-    stroke: var(--Spinner-colorSpinnerInverse);
+    stroke: var(--Spinner-inverse-color);
   }
 }
 

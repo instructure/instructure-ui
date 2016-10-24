@@ -35,7 +35,7 @@ var pluginsList = function (variables) {
     require('postcss-browser-reporter'),
     require('postcss-reporter'),
 
-    require('postcss-initial'), // adds 'all: initial' ie support
+    require('postcss-initial') // adds 'all: initial' ie support
   ]
 }
 

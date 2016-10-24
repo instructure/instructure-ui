@@ -10,6 +10,6 @@
 }
 
 .text {
-  font-family: var(--Brand-typography-fontFamily);
+  font-family: var(--BreadcrumbLink-fontFamily);
   color: var(--BreadcrumbLink-color);
 }

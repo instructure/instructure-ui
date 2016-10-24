@@ -2,10 +2,10 @@
   width: 100%;
   display: flex;
   align-items: center;
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightNormal);
-  line-height: var(--Brand-typography-lineHeightCondensed);
-  font-size: var(--Brand-typography-fontSizeMedium);
+  font-family: var(--ProgressBar-fontFamily);
+  font-weight: var(--ProgressBar-fontWeight);
+  line-height: var(--ProgressBar-lineHeight);
+  font-size: var(--ProgressBar-fontSize);
 }
 
 .bar[value] {
@@ -36,7 +36,7 @@
 }
 
 .value {
-  padding: 0 var(--Brand-spacing-medium);
+  padding: var(--ProgressBar-value-padding);
   line-height: 1;
 }
 
@@ -51,7 +51,7 @@
   }
 
   .value {
-    font-size: var(--Brand-typography-fontSizeSmall);
+    font-size: var(--ProgressBar-small-value-fontSize);
   }
 }
 
@@ -61,7 +61,7 @@
   }
 
   .value {
-    font-size: var(--Brand-typography-fontSizeMedium);
+    font-size: var(--ProgressBar-medium-value-fontSize);
   }
 }
 
@@ -71,7 +71,7 @@
   }
 
   .value {
-    font-size: var(--Brand-typography-fontSizeLarge);
+    font-size: var(--ProgressBar-large-value-fontSize);
   }
 }
 

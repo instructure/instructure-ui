@@ -38,8 +38,8 @@
   line-height: 2em;
   text-align: center;
 
-  font-family: var(--Brand-typography-fontFamily);
-  font-weight: var(--Brand-typography-fontWeightBold);
+  font-family: var(--Avatar-fontFamily);
+  font-weight: var(--Avatar-fontWeight);
   letter-spacing: 0.0313em;
 }
 
