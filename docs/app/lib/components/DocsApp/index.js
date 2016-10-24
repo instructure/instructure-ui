@@ -6,7 +6,7 @@ import DocsNav from '../DocsNav'
 import HtmlDoc from '../HtmlDoc'
 import DocsSection from '../DocsSection'
 
-import { ScreenReaderContent, Transition } from 'instructure-ui'
+import { ScreenReaderContent, Transition, Select, Brands } from 'instructure-ui'
 
 import styles from './styles.css'
 
@@ -20,7 +20,8 @@ export default class DocsApp extends Component {
     super()
     this.state = {
       menuSearch: '',
-      showMenu: true
+      showMenu: true,
+      brand: 'inst'
     }
   }
 
@@ -28,13 +29,19 @@ export default class DocsApp extends Component {
     this.setState({
       key: window.location.hash.slice(1) || 'index'
     })
-  };
+  }
 
   handleMenuToggle = () => {
     this.setState({
       showMenu: !this.state.showMenu
     })
-  };
+  }
+
+  handleBrandChange = (e) => {
+    this.setState({
+      brand: e.target.value
+    })
+  }
 
   componentDidMount () {
     this.updateKey()
@@ -53,9 +60,29 @@ export default class DocsApp extends Component {
   }
 
   renderComponent (component) {
+    const brands = Object.keys(Brands)
     return (
       <DocsSection id={component.name}>
-        <ComponentDoc name={component.name} doc={component.doc} path={component.path} />
+        <div className={styles.brandSelect}>
+          <Select
+            label={<ScreenReaderContent>Select brand</ScreenReaderContent>}
+            isBlock={false}
+            onChange={this.handleBrandChange}
+            defaultValue={this.state.brand}
+          >
+          {
+            brands.map((brand) => {
+              return <option key={brand} value={brand}>{brand}</option>
+            })
+          }
+          </Select>
+        </div>
+        <ComponentDoc
+          name={component.name}
+          doc={component.doc}
+          brand={this.state.brand}
+          path={component.path}
+        />
       </DocsSection>
     )
   }
@@ -103,6 +130,7 @@ export default class DocsApp extends Component {
         <div className={styles.container}>
           <div className={styles.content} ref="content">
             <div className={styles.main} role="main" id="main">
+
               {this.renderContent(this.state.key)}
 
               <div className={styles.footer}>

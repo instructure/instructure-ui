@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import ComponentExample from './components/ComponentExample'
+import ExampleApp from './components/ExampleApp'
 
 import 'babel-polyfill'
 
-ReactDOM.render(<ComponentExample />, document.getElementById('example'))
+ReactDOM.render(<ExampleApp />, document.getElementById('example'))
