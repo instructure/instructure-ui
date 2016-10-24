@@ -30,4 +30,8 @@ cp -r $COMPONENT_TEMPLATE_DIR $COMPONENTS_DIR/$COMPONENT
 find $COMPONENTS_DIR/$COMPONENT -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
 
 # Update file contents
-find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+else
+  find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+fi
