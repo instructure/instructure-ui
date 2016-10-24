@@ -53,3 +53,7 @@
 .rectangle {
   width: 2.605em;
 }
+
+.is-block {
+  display: block;
+}
