@@ -1,3 +1,21 @@
+## 0.17.1
+
+#### Added support for linux in the generate script
+
+See [commit](https://github.com/instructure/instructure-ui/commit/a9153714552d1dd0f300421de320264140ac4912) for details.
+
+#### Fix for [Table](#Table) component to prevent nested tables from inheriting hover or stripe styling
+
+#### Fix for [TabList](#TabList) component `minimal`, `simple` variants so they no longer break in a flexed container
+
+#### Fix [Modal](#Modal) component footer behavior when there is minimal body content
+
+#### Add `zIndex` prop to the [Overlay](#Overlay) and [Popover](#Popover) components
+
+#### Add custom chai assertion to verify that a dom element exists for testing
+
+See [commit](https://github.com/instructure/instructure-ui/commit/fcea0dd9ee67d172a5eb04e348fb5caf0b93472d) for details.
+
 ## 0.17.0
 
 #### Add a [Breadcrumb](#Breadcrumb) component
