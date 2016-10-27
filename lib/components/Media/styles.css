@@ -1,0 +1,32 @@
+.root {
+  display: flex;
+  background: var(--Media-background);
+}
+
+.top {
+  align-items: flex-start;
+}
+
+.center {
+  align-items: center;
+}
+
+.caption {
+  color: var(--Media-color);
+  font-family: var(--Media-fontFamily);
+}
+
+.figure {
+  margin: var(--Media-figure-margin);
+}
+
+.title {
+  display: block;
+  margin: var(--Media-title-margin);
+}
+
+.description {
+  font-size: var(--Media-description-fontSize);
+  line-height: var(--Media-description-lineHeight);
+  font-weight: var(--Media-description-fontWeight);
+}
