@@ -1,3 +1,13 @@
+## 0.17.2
+
+#### Add option to [RangeInput](#RangeInput) to turn off value display
+
+#### Fix [Popover](#Popover) bug, uninitialized state when show prop is set
+
+#### Define all variables in theme.js for each component
+
+#### Add a dismissable decorator
+
 ## 0.17.1
 
 #### Added support for linux in the generate script
