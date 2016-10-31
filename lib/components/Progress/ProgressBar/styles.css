@@ -19,25 +19,25 @@
 
   &::-webkit-progress-value {
     transition: all 1s;
-    box-shadow: 0 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
-    background-color: var(--ProgressBar-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-meter-colorStart) 0%, var(--ProgressBar-meter-colorEnd) 100%);
   }
 
   &::-moz-progress-bar {
     transition: all 1s;
-    box-shadow: 0 0.125rem 0.125rem rgba(0, 0, 0, 0.2);
-    background-color: var(--ProgressBar-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-meter-colorStart) 0%, var(--ProgressBar-meter-colorEnd) 100%);
   }
 
   &::-ms-fill {
     border: none;
-    background-color: var(--ProgressBar-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-meter-colorStart) 0%, var(--ProgressBar-meter-colorEnd) 100%);
   }
 }
 
 .value {
-  padding: var(--ProgressBar-value-padding);
   line-height: 1;
+  box-sizing: border-box;
+  padding-left: var(--ProgressBar-value-padding);
+  flex: 0 0 5.625rem;
 }
 
 .slash {
@@ -105,14 +105,14 @@
 
 .done .bar[value] {
   &::-webkit-progress-value {
-    background-color: var(--ProgressBar-done-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-done-meter-colorStart) 0%, var(--ProgressBar-done-meter-colorEnd) 100%);
   }
 
   &::-moz-progress-bar {
-    background-color: var(--ProgressBar-done-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-done-meter-colorStart) 0%, var(--ProgressBar-done-meter-colorEnd) 100%);
   }
 
   &::-ms-fill {
-    background-color: var(--ProgressBar-done-meter-color);
+    background: linear-gradient(to right, var(--ProgressBar-done-meter-colorStart) 0%, var(--ProgressBar-done-meter-colorEnd) 100%);
   }
 }

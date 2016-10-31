@@ -22,6 +22,10 @@
   color: var(--Typography-success-color);
 }
 
+.color-brand {
+  color: var(--Typography-brand-color);
+}
+
 .color-error {
   color: var(--Typography-error-color);
 }
