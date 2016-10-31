@@ -1,0 +1,14 @@
+.root {
+}
+
+.content {
+  margin-top: var(--TrayContent-content-margin);
+  padding: var(--TrayContent-content-padding);
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--TrayContent-closeButton-offset);
+  right: var(--TrayContent-closeButton-offset);
+  background: var(--TrayContent-background);
+}

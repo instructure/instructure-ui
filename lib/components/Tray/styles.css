@@ -1,0 +1,41 @@
+.root {
+  background: var(--Tray-background);
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+}
+
+.placement--top,
+.placement--bottom {
+  left: 0;
+  right: 0;
+}
+
+.placement--left,
+.placement--right {
+  top: 0;
+  bottom: 0;
+}
+
+.placement--center {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.placement--left {
+  left: 0;
+}
+
+.placement--right {
+  right: 0;
+}
+
+.placement--top {
+  top: 0;
+}
+
+.placement--bottom {
+  bottom: 0;
+}
