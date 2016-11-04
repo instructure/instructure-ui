@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import placeholderImage from 'mocks/util/placeholder-image'
-import IconComposeSolid from 'instructure-icons/react/Solid/IconComposeSolid'
-import IconPlusLine from 'instructure-icons/react/Line/IconPlusLine'
-import IconXLine from 'instructure-icons/react/Line/IconXLine'
+import IconComposeSolid from 'instructure-icons/lib/Solid/IconComposeSolid'
+import IconPlusLine from 'instructure-icons/lib/Line/IconPlusLine'
+import IconXLine from 'instructure-icons/lib/Line/IconXLine'
 import avatarImage from 'mocks/images/placeholder-avatar.png'
 import lorem from 'lorem-ipsum'
 
