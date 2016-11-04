@@ -1,7 +1,6 @@
 .alert {
   background: var(--Alert-background);
   box-sizing: border-box;
-  max-width: 30rem;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
   border-width: 2px;
   border-style: solid;
