@@ -38,18 +38,6 @@
   width: 50%;
   height: 1em;
   text-align: center;
-
-  .enter {
-    transform: scale(0.01) translate3d(0, 0, 0);
-    opacity: 0;
-  }
-
-  .enter.enter-active {
-    transition: all 0.2s ease-out;
-    transform: scale(1) translate3d(0, 0, 0);
-    opacity: 1;
-  }
-
 }
 
 .label {

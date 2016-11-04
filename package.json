@@ -110,7 +110,6 @@
     "invariant": "~2.2.1",
     "keycode": "~2.1.1",
     "lodash": "~4.16.2",
-    "react-addons-css-transition-group": "^0.14.7 || ^15.0.0",
     "react-overlays": "~0.6.3",
     "shortid": "~2.2.4",
     "tinycolor2": "~1.4.1"

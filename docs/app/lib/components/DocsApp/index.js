@@ -6,9 +6,7 @@ import DocsNav from '../DocsNav'
 import HtmlDoc from '../HtmlDoc'
 import DocsSection from '../DocsSection'
 
-import { ScreenReaderContent } from 'instructure-ui'
-
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
+import { ScreenReaderContent, Transition } from 'instructure-ui'
 
 import styles from './styles.css'
 
@@ -161,22 +159,16 @@ export default class DocsApp extends Component {
               </button>
             </div>
             <div className={styles.nav} id="nav" aria-hidden={this.state.showMenu ? null : 'false'}>
-              <ReactCSSTransitionGroup
-                transitionName={{
-                  enter: styles['nav--enter'],
-                  enterActive: styles['nav--enter-active'],
-                  leave: styles['nav--leave'],
-                  leaveActive: styles['nav--leave-active']
-                }}
-                component="div"
-                transitionLeaveTimeout={500}
-                transitionEnterTimeout={500}>
-                {this.state.showMenu &&
-                  <DocsNav
-                    selected={this.state.key}
-                    components={componentsList}
-                    documents={documentsList} />}
-              </ReactCSSTransitionGroup>
+              <Transition in={this.state.showMenu} transitionOnMount>
+                <div>
+                  {this.state.showMenu &&
+                    <DocsNav
+                      selected={this.state.key}
+                      components={componentsList}
+                      documents={documentsList} />
+                  }
+                </div>
+              </Transition>
             </div>
           </div>
         </div>

@@ -176,19 +176,6 @@ code[class^="lang-"] {
   transition: all 500ms ease-in-out;
 }
 
-.nav--leave.nav--leave-active,
-.nav--enter {
-  /* trigger hardware acceleration for smoother animation */
-  transform: translate3d(0, 0, 0);
-  opacity: 0;
-}
-
-.nav--leave,
-.nav--enter.nav--enter-active {
-  transition: opacity 0.5s;
-  opacity: 1;
-}
-
 .show-menu {
   .container {
     left: 0;

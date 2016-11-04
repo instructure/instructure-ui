@@ -14,7 +14,7 @@ var entry = {
   'globals': [ // for rendering examples in codepen
     path.join(config.docsAppPath, 'lib/globals.js')
   ],
-  'vendor': ['babel-polyfill', 'react', 'react-dom', 'react-addons-css-transition-group']
+  'vendor': ['babel-polyfill', 'react', 'react-dom']
 }
 
 entry[config.library.packageName] = [ path.join(config.rootPath, config.library.main) ]

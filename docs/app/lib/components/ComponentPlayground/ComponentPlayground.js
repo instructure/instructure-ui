@@ -4,9 +4,8 @@ import CodeEditor from '../CodeEditor'
 import ComponentPreview from '../ComponentPreview'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
-import { ScreenReaderContent } from 'instructure-ui'
+import { ScreenReaderContent, Transition } from 'instructure-ui'
 import classnames from 'classnames'
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group'
 
 import styles from './ComponentPlayground.css'
 
@@ -109,18 +108,11 @@ export default class ComponentPlayground extends Component {
           name={this.props.name}
           isFullScreen={this.state.isFullScreen} />
 
-        <ReactCSSTransitionGroup
-          transitionName={{
-            enter: styles['editor--enter'],
-            enterActive: styles['editor--enter-active'],
-            leave: styles['editor--leave'],
-            leaveActive: styles['editor--leave-active']
-          }}
-          component="div"
-          transitionLeaveTimeout={300}
-          transitionEnterTimeout={1000}>
-          {this.state.showCode && this.renderEditor()}
-        </ReactCSSTransitionGroup>
+        <Transition in={this.state.showCode} transitionOnMount type="slide-up">
+          <div>
+            {this.state.showCode && this.renderEditor()}
+          </div>
+        </Transition>
 
         <div className={styles.actions}>
           <Button onClick={this.handleMaximize} ref="fullScreenButton">
