@@ -1,3 +1,25 @@
+## 0.17.3
+
+#### Replace CSSTransitionGroup with [Transition](#Transition) component
+
+#### Fix [RadioInput](#RadioInput) and [Checkbox](#Checkbox) focus issues in Safari
+
+#### Remove `max-width` prop from the [Alert](#Alert) component
+
+#### Fix [Transition](#Transition) component `unmountOnExit` prop
+
+#### Add [AccessibleContent](#AccessibleContent) and [PresentationContent](#PresentationContent)
+
+#### Upgrade instructure-icons
+
+#### Update [Progress](#Progress) component styles
+
+#### Add [Tray](#Tray) component
+
+#### Update [Transition](#Transition) component styles
+
+#### Prevent errors in the [Avatar](#Avatar) component when `userName` prop is not provided
+
 ## 0.17.2
 
 #### Add option to [RangeInput](#RangeInput) to turn off value display
