@@ -10,8 +10,11 @@
 }
 
 .input {
-  all: initial;
+  padding: 0;
   margin: 0;
+  font-size: inherit;
+  line-height: inherit;
+  width: auto;
   position: absolute;
   top: 0;
   left: 0;
