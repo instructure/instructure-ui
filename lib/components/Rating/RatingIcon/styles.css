@@ -1,0 +1,45 @@
+.root {
+  display: inline-block;
+  vertical-align: bottom;
+  margin: 0 var(--RatingIcon-icon-margin);
+  line-height: 1;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.icon {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+.filled .icon {
+  color: var(--RatingIcon-iconFilled-color);
+}
+
+.empty .icon {
+  color: var(--RatingIcon-iconEmpty-color);
+}
+
+.small {
+  .icon {
+    font-size: var(--RatingIcon-small-icon-fontSize);
+  }
+}
+
+.medium {
+  .icon {
+    font-size: var(--RatingIcon-medium-icon-fontSize);
+  }
+}
+
+.large {
+  .icon {
+    font-size: var(--RatingIcon-large-icon-fontSize);
+  }
+}
