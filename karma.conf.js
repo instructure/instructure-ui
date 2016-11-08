@@ -1,36 +1,43 @@
-/* eslint no-var: 0 */
 'use strict'
 
-var disableCoverage = process.argv.some((arg) => arg === '--disable-coverage')
-var noLaunchers = process.argv.some((arg) => arg === '--no-launch')
+const withCoverage = process.argv.some((arg) => arg === '--coverage')
+const ciMode = process.argv.some((arg) => arg === '--ci')
+const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 
 // set browsers based on command line args
-var browsers = []
+const browsers = []
 if (!noLaunchers) { browsers.push('chrome_without_security') }
-if (!disableCoverage && !noLaunchers) { browsers.push('Firefox') }
+if (ciMode) { browsers.push('Firefox') }
 
 // set coverage reporter based on command line args
-var coverageReporter
-if (!disableCoverage) { // we don't compute coverage in debug mode
+let coverageReporter
+if (withCoverage) {
   coverageReporter = {
     reporters: [
       { type: 'text-summary' },
-      { type: 'html', dir: 'coverage' }
+      {
+        type: 'html',
+        dir: 'coverage',
+        subdir: function (browser) {
+          // normalization process to keep a consistent browser name
+          return browser.toLowerCase().split(/[ /-]/)[0]
+        }
+      }
     ],
     check: {
       global: {
-        statements: 78,
-        lines: 78,
-        functions: 81,
-        branches: 65
+        lines: 81
+      },
+      each: {
+        lines: 0 // TODO: after we write Popover related tests we should bump this up
       }
     }
   }
 }
 
 // set reporters based on command line args
-var reporters = ['mocha']
-if (!disableCoverage) {
+const reporters = ['mocha']
+if (withCoverage) {
   reporters.push('coverage')
 }
 
@@ -87,7 +94,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config')(),
+    webpack: require('./webpack/test.config')(ciMode),
 
     webpackServer: {
       progress: false,

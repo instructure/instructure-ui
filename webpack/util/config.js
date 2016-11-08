@@ -31,14 +31,12 @@ function getConfig () {
     },
     theme: {
       files: 'lib/components/**/*theme.js' // include nested components
-    },
-    tests: {
-      files: 'lib/**/*.test.js'
     }
   }
 
   return merge({}, config, {
     rootPath: ROOT,
+    srcPath: path.join(ROOT, config.buildPath, '/lib'),
     docsAppPath: path.resolve(__dirname, '../../docs/app'),
     distPath: path.join(ROOT, config.buildPath, '/dist'),
     docsPath: path.join(ROOT, config.buildPath, '/docs')

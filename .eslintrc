@@ -1,9 +1,11 @@
 {
   "plugins": [
-    "jsx-a11y"
+    "jsx-a11y",
+    "mocha"
   ],
   "parser": "babel-eslint",
   "rules": {
+    "mocha/no-exclusive-tests": "error",
     "jsx-a11y/anchor-has-content": 2,
     "jsx-a11y/aria-props": 2,
     "jsx-a11y/aria-proptypes": 2,

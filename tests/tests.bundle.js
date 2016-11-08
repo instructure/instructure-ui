@@ -1,16 +1,16 @@
-/* eslint no-var: 0 */
-var isFunction = require('lodash/isFunction')
+'use strict'
 
 // clear the console before rebundling.
 /* eslint-disable no-console */
-if (isFunction(console.clear)) {
+if (typeof console.clear === 'function') {
   console.clear()
 }
 /* eslint-enable no-console */
 
 // utils
-var utilsContext = require.context('./util', true)
+const utilsContext = require.context('./util', true)
 utilsContext.keys().forEach(utilsContext)
 
 // tests
-require('tests!')
+const testsContext = require.context('../lib', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)
