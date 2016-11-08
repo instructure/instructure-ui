@@ -14,7 +14,7 @@ var entry = {
   'globals': [ // for rendering examples in codepen
     path.join(config.docsAppPath, 'lib/globals.js')
   ],
-  'vendor': ['babel-polyfill', 'react', 'react-dom']
+  'common': ['babel-polyfill', 'react', 'react-dom']
 }
 
 entry[config.library.packageName] = [ path.join(config.rootPath, config.library.main) ]
@@ -37,15 +37,15 @@ module.exports = require('./util/generate-config')({
       title: config.app.title + ' (' + config.library.version + ')',
       template: path.join(config.docsAppPath, 'templates/index.tmpl.html'),
       inject: 'body',
-      chunks: ['docs', 'vendor']
+      chunks: ['docs', 'common']
     }),
     new HtmlWebpackPlugin({
       title: 'Component Example',
       template: path.join(config.docsAppPath, 'templates/example.tmpl.html'),
       inject: 'body',
       filename: 'example.html',
-      chunks: ['example', config.library.packageName, 'vendor']
+      chunks: ['example', config.library.packageName, 'common']
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js')
+    new webpack.optimize.CommonsChunkPlugin('common', 'common.js')
   ]
 })
