@@ -14,15 +14,9 @@ export default class Button extends Component {
   render () {
     const color = '#25a19f'
     const theme = {
-      icon: {
-        color,
-        focus: {
-          boxShadow: 'inset 0 0 0 1px ' + color
-        },
-        hover: {
-          color: color
-        }
-      }
+      iconColor: color,
+      iconFocusBoxShadow: 'inset 0 0 0 1px ' + color,
+      iconHoverColor: color
     }
     return (
       <BaseButton variant={this.props.variant} theme={theme} {...this.props} />

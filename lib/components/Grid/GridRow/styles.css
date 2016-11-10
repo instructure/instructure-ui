@@ -35,30 +35,30 @@
   }
 
   &.colSpacingSmall {
-    margin-left: calc(-1 * var(--GridRow-spacing-small) / 2);
-    margin-right: calc(-1 * var(--GridRow-spacing-small) / 2);
+    margin-left: calc(-1 * var(--spacingSmall) / 2);
+    margin-right: calc(-1 * var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    margin-left: calc(-1 * var(--GridRow-spacing-medium) / 2);
-    margin-right: calc(-1 * var(--GridRow-spacing-medium) / 2);
+    margin-left: calc(-1 * var(--spacingMedium) / 2);
+    margin-right: calc(-1 * var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    margin-left: calc(-1 * var(--GridRow-spacing-large) / 2);
-    margin-right: calc(-1 * var(--GridRow-spacing-large) / 2);
+    margin-left: calc(-1 * var(--spacingLarge) / 2);
+    margin-right: calc(-1 * var(--spacingLarge) / 2);
   }
 
   &.rowSpacingSmall {
-    margin-bottom: var(--GridRow-spacing-small);
+    margin-bottom: var(--spacingSmall);
   }
 
   &.rowSpacingMedium {
-    margin-bottom: var(--GridRow-spacing-medium);
+    margin-bottom: var(--spacingMedium);
   }
 
   &.rowSpacingLarge {
-    margin-bottom: var(--GridRow-spacing-large);
+    margin-bottom: var(--spacingLarge);
   }
 
   &:last-child {
@@ -74,19 +74,19 @@
   @mixin grid-row;
 }
 
-@media screen and (--GridRow-media-tabletMin) {
+@media screen and (--tabletMin) {
   .startAtTablet {
     @mixin grid-row;
   }
 }
 
-@media screen and (--GridRow-media-desktopMin) {
+@media screen and (--desktopMin) {
   .startAtDesktop {
     @mixin grid-row;
   }
 }
 
-@media screen and (--GridRow-media-wideMin) {
+@media screen and (--wideMin) {
   .startAtWide {
     @mixin grid-row;
   }

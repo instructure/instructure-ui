@@ -63,43 +63,41 @@ global.chai.use(function (chai, utils) {
   })
 })
 
-export default class ReactTestbed {
+export default class Testbed {
   constructor (subject) {
     this.subject = subject
 
-    beforeEach(this.setup.bind(this, subject))
+    this.sandbox = sinon.sandbox.create()
+
+    beforeEach(this.setup.bind(this))
     afterEach(this.teardown.bind(this))
   }
 
-  setup (subject) {
-    try {
-      this.sandbox = sinon.sandbox.create({
-        useFakeTimers: true
-      })
+  setup () {
+    this.rootNode = document.createElement('div')
+    document.body.appendChild(this.rootNode)
 
-      setA11yCheckCallback(() => {
-        this.sandbox.clock.tick(1000) // so that the setTimeouts in axe-core are called
-      })
+    this.sandbox.useFakeTimers()
 
-      this.sandbox.stub(window, 'requestAnimationFrame', setTimeout)
-      this.sandbox.stub(window, 'cancelAnimationFrame', clearTimeout)
-    } catch (e) {
-      console.warn('Error in test setup: ' + e) // eslint-disable-line no-console
-    }
+    setA11yCheckCallback(() => {
+      this.sandbox.clock.tick(1000) // so that the setTimeouts in axe-core are called
+    })
+
+    this.sandbox.stub(window, 'requestAnimationFrame', setTimeout)
+    this.sandbox.stub(window, 'cancelAnimationFrame', clearTimeout)
   }
 
   teardown () {
-    try {
-      if (this.sandbox && this.sandbox.restore) {
-        this.sandbox.restore()
-      }
+    this.sandbox.restore()
 
+    try {
       if (this.$instance && this.$instance.root && this.$instance.unmount) {
         this.$instance.unmount()
       }
     } catch (e) {
-      const displayName = this.subject.type.displayName || this.subject.type.name
-      console.warn(`Error in test teardown for ${displayName}: ${e}`) // eslint-disable-line no-console
+      const { type, name } = this.subject || {}
+      const s = (type && (type.displayName || type.name)) || name
+      console.warn(`Error in test teardown for ${s}: ${e}`) // eslint-disable-line no-console
     }
 
     this.rootNode && this.rootNode.remove()
@@ -107,6 +105,10 @@ export default class ReactTestbed {
   }
 
   render (props = {}, context) {
+    if (!this.subject) {
+      return
+    }
+
     const tick = () => {
       this.sandbox.clock.tick(1000)
     }
@@ -115,8 +117,6 @@ export default class ReactTestbed {
       ...this.subject.props,
       ...props
     })
-
-    this.rootNode = document.createElement('div')
 
     this.$instance = $(subject).render(true, this.rootNode, context)
 
@@ -142,5 +142,5 @@ export default class ReactTestbed {
 }
 
 global.createTestbed = function (subject) {
-  return new ReactTestbed(subject)
+  return new Testbed(subject)
 }

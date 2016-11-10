@@ -1,8 +1,8 @@
 .root {
-  font-family: var(--FormFieldMessage-fontFamily);
-  font-weight: var(--FormFieldMessage-fontWeight);
-  font-size: var(--FormFieldMessage-fontSize);
-  line-height: var(--FormFieldMessage-lineHeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
 
   padding: 0 0.125rem;
 }
@@ -19,13 +19,13 @@
 }
 
 .hint {
-  color: var(--FormFieldMessage-colorHint);
+  color: var(--colorHint);
 }
 
 .error {
-  color: var(--FormFieldMessage-colorError);
+  color: var(--colorError);
 }
 
 .success {
-  color: var(--FormFieldMessage-colorSuccess);
+  color: var(--colorSuccess);
 }

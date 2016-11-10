@@ -1,6 +1,6 @@
 .root {
-  font-family: var(--Heading-fontFamily);
-  line-height: var(--Heading-lineHeight);
+  font-family: var(--fontFamily);
+  line-height: var(--lineHeight);
   text-rendering: optimizeLegibility;
 
   -webkit-font-smoothing: antialiased;
@@ -9,73 +9,73 @@
 
 .h1 {
   margin: 0;
-  font-size: var(--Heading-h1-fontSize);
-  font-weight: var(--Heading-h1-fontWeight);
+  font-size: var(--h1FontSize);
+  font-weight: var(--h1FontWeight);
   line-height: 1;
 }
 
 .h2 {
   margin: 0;
-  font-size: var(--Heading-h2-fontSize);
-  font-weight: var(--Heading-h2-fontWeight);
+  font-size: var(--h2FontSize);
+  font-weight: var(--h2FontWeight);
   line-height: 1;
 }
 
 .h3 {
   margin: 0;
-  font-size: var(--Heading-h3-fontSize);
-  font-weight: var(--Heading-h3-fontWeight);
+  font-size: var(--h3FontSize);
+  font-weight: var(--h3FontWeight);
   line-height: 1;
 }
 
 .h4,
 .h5 {
   margin: 0;
-  font-size: var(--Heading-h4-fontSize);
-  font-weight: var(--Heading-h4-fontWeight);
+  font-size: var(--h4FontSize);
+  font-weight: var(--h4FontWeight);
   line-height: inherit;
 }
 
 .border-top {
-  padding-top: var(--Heading-border-padding);
-  border-top: var(--Heading-border-width) var(--Heading-border-style) var(--Heading-border-color);
+  padding-top: var(--borderPadding);
+  border-top: var(--borderWidth) var(--borderStyle) var(--borderColor);
 }
 
 .border-bottom {
-  padding-bottom: var(--Heading-border-padding);
-  border-bottom: var(--Heading-border-width) var(--Heading-border-style) var(--Heading-border-color);
+  padding-bottom: var(--borderPadding);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--borderColor);
 }
 
 .color-primary {
-  color: var(--Heading-primary-color);
+  color: var(--primaryColor);
 }
 
 .color-secondary {
-  color: var(--Heading-secondary-color);
+  color: var(--secondaryColor);
 }
 
 .color-primary-inverse {
-  color: var(--Heading-primary-inverse-color);
+  color: var(--primaryInverseColor);
 }
 
 .color-secondary-inverse {
-  color: var(--Heading-secondary-inverse-color);
+  color: var(--secondaryInverseColor);
 }
 
 .color-success {
-  color: var(--Heading-success-color);
+  color: var(--successColor);
 }
 
 .color-warning {
-  color: var(--Heading-warning-color);
+  color: var(--warningColor);
 }
 
 .color-brand {
-  color: var(--Heading-brand-color);
+  color: var(--brandColor);
 }
 
 .color-error {
-  color: var(--Heading-error-color);
+  color: var(--errorColor);
 }
 
 .reset {

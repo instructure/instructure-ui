@@ -20,18 +20,18 @@
     cursor: pointer;
     transition: all 0.15s ease-in-out;
 
-    width: var(--RangeInput-handle-size);
-    height: var(--RangeInput-handle-size);
-    background: var(--RangeInput-handle-background);
-    box-shadow: 0 1px 0 var(--RangeInput-handle-shadowColor);
+    width: var(--handleSize);
+    height: var(--handleSize);
+    background: var(--handleBackground);
+    box-shadow: 0 1px 0 var(--handleShadowColor);
 
     &:hover {
-      background: var(--RangeInput-handle-hover-background);
+      background: var(--handleHoverBackground);
     }
   }
 
   &::-webkit-slider-thumb {
-    margin-top: calc(-1 * var(--RangeInput-handle-size) / 4);
+    margin-top: calc(-1 * var(--handleSize) / 4);
   }
 
   &:focus,
@@ -40,8 +40,8 @@
 
     &::range-thumb {
       box-shadow:
-        0 1px 0 var(--RangeInput-handle-shadowColor),
-        0 0 0 var(--RangeInput-handle-focus-outlineWidth) var(--RangeInput-handle-focus-outlineColor);
+        0 1px 0 var(--handleShadowColor),
+        0 0 0 var(--handleFocusOutlineWidth) var(--handleFocusOutlineColor);
     }
   }
 
@@ -60,20 +60,20 @@
     cursor: pointer;
     animate: 0.2s;
 
-    background: var(--RangeInput-track-background);
-    height: calc(var(--RangeInput-handle-size) / 2);
+    background: var(--trackBackground);
+    height: calc(var(--handleSize) / 2);
   }
 
   &::-ms-track {
     background: transparent;
-    border-width: var(--RangeInput-handle-size) 0;
+    border-width: var(--handleSize) 0;
   }
 
   &::-ms-fill-upper,
   &::-ms-fill-lower {
-    border-width: var(--RangeInput-handle-size) 0;
-    border-radius: calc(var(--RangeInput-handle-size) / 2);
-    background: var(--RangeInput-track-background);
+    border-width: var(--handleSize) 0;
+    border-radius: calc(var(--handleSize) / 2);
+    background: var(--trackBackground);
   }
 
   &::-ms-tooltip {
@@ -87,25 +87,25 @@
   display: block;
 
   color: inherit;
-  font-family: var(--RangeInput-value-fontFamily);
-  font-weight: var(--RangeInput-value-fontWeight);
+  font-family: var(--valueFontFamily);
+  font-weight: var(--valueFontWeight);
   text-align: center;
 
   .small & {
-    font-size: var(--RangeInput-value-small-fontSize);
-    padding: var(--RangeInput-value-small-padding);
-    line-height: var(--RangeInput-value-small-lineHeight);
+    font-size: var(--valueSmallFontSize);
+    padding: var(--valueSmallPadding);
+    line-height: var(--valueSmallLineHeight);
   }
 
   .medium & {
-    font-size: var(--RangeInput-value-medium-fontSize);
-    padding: var(--RangeInput-value-medium-padding);
-    line-height: var(--RangeInput-value-medium-lineHeight);
+    font-size: var(--valueMediumFontSize);
+    padding: var(--valueMediumPadding);
+    line-height: var(--valueMediumLineHeight);
   }
 
   .large & {
-    font-size: var(--RangeInput-value-large-fontSize);
-    padding: var(--RangeInput-value-large-padding);
-    line-height: var(--RangeInput-value-large-lineHeight);
+    font-size: var(--valueLargeFontSize);
+    padding: var(--valueLargePadding);
+    line-height: var(--valueLargeLineHeight);
   }
 }

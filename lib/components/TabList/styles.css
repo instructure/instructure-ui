@@ -5,5 +5,5 @@
 }
 
 .minimal {
-  background: var(--TabList-minimal-background);
+  background: var(--minimalBackground);
 }

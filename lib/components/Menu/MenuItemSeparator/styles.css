@@ -1,6 +1,6 @@
 .root {
-  height: var(--MenuItemSeparator-height);
-  margin: var(--MenuItemSeparator-margin);
+  height: var(--height);
+  margin: var(--margin);
   overflow: hidden;
-  background: var(--MenuItemSeparator-background);
+  background: var(--background);
 }

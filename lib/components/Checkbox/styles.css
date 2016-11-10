@@ -5,7 +5,7 @@
   vertical-align: middle;
 
   & + .root {
-    margin-top: var(--Checkbox-marginTop);
+    margin-top: var(--marginTop);
   }
 }
 

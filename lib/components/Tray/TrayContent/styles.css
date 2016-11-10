@@ -2,23 +2,23 @@
 }
 
 .content {
-  margin-top: var(--TrayContent-content-margin);
-  padding: var(--TrayContent-content-padding);
+  margin-top: var(--contentMargin);
+  padding: var(--contentPadding);
 }
 
 .closeButton {
   position: absolute;
-  top: var(--TrayContent-closeButton-offset);
-  background: var(--TrayContent-background);
+  top: var(--closeButtonOffset);
+  background: var(--background);
 }
 
 .placement--left .closeButton,
 .placement--top .closeButton,
 .placement--bottom .closeButton {
-  right: var(--TrayContent-closeButton-offset);
+  right: var(--closeButtonOffset);
 }
 
 .placement--right .closeButton {
-  left: var(--TrayContent-closeButton-offset);
+  left: var(--closeButtonOffset);
 }
 

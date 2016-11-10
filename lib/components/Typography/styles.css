@@ -1,49 +1,49 @@
 .root {
-  font-family: var(--Typography-fontFamily);
+  font-family: var(--fontFamily);
 }
 
 .color-primary {
-  color: var(--Typography-primary-color);
+  color: var(--primaryColor);
 }
 
 .color-secondary {
-  color: var(--Typography-secondary-color);
+  color: var(--secondaryColor);
 }
 
 .color-primary-inverse {
-  color: var(--Typography-primary-inverse-color);
+  color: var(--primaryInverseColor);
 }
 
 .color-secondary-inverse {
-  color: var(--Typography-secondary-inverse-color);
+  color: var(--secondaryInverseColor);
 }
 
 .color-success {
-  color: var(--Typography-success-color);
+  color: var(--successColor);
 }
 
 .color-brand {
-  color: var(--Typography-brand-color);
+  color: var(--brandColor);
 }
 
 .color-warning {
-  color: var(--Typography-warning-color);
+  color: var(--warningColor);
 }
 
 .color-error {
-  color: var(--Typography-error-color);
+  color: var(--errorColor);
 }
 
 .weight-normal {
-  font-weight: var(--Typography-fontWeightNormal);
+  font-weight: var(--fontWeightNormal);
 }
 
 .weight-light {
-  font-weight: var(--Typography-fontWeightLight);
+  font-weight: var(--fontWeightLight);
 }
 
 .weight-bold {
-  font-weight: var(--Typography-fontWeightBold);
+  font-weight: var(--fontWeightBold);
 }
 
 .style-normal {
@@ -55,43 +55,43 @@
 }
 
 .x-small {
-  font-size: var(--Typography-fontSizeXSmall);
+  font-size: var(--fontSizeXSmall);
 }
 
 .small {
-  font-size: var(--Typography-fontSizeSmall);
+  font-size: var(--fontSizeSmall);
 }
 
 .medium {
-  font-size: var(--Typography-fontSizeMedium);
+  font-size: var(--fontSizeMedium);
 }
 
 .large {
-  font-size: var(--Typography-fontSizeLarge);
+  font-size: var(--fontSizeLarge);
 }
 
 .x-large {
-  font-size: var(--Typography-fontSizeXLarge);
+  font-size: var(--fontSizeXLarge);
 }
 
 .xx-large {
-  font-size: var(--Typography-fontSizeXXLarge);
+  font-size: var(--fontSizeXXLarge);
 }
 
 .lineHeight-default {
-  line-height: var(--Typography-lineHeight);
+  line-height: var(--lineHeight);
 }
 
 .lineHeight-fit {
-  line-height: var(--Typography-lineHeightFit);
+  line-height: var(--lineHeightFit);
 }
 
 .lineHeight-condensed {
-  line-height: var(--Typography-lineHeightCondensed);
+  line-height: var(--lineHeightCondensed);
 }
 
 .lineHeight-double {
-  line-height: var(--Typography-lineHeightDouble);
+  line-height: var(--lineHeightDouble);
 }
 
 .transform-none {
@@ -132,7 +132,7 @@
   pre,
   code {
     all: initial;
-    font-family: var(--Typography-fontFamilyMonospace);
+    font-family: var(--fontFamilyMonospace);
   }
 
   i,
@@ -142,13 +142,13 @@
 
   b,
   strong {
-    font-weight: var(--Typography-fontWeightBold);
+    font-weight: var(--fontWeightBold);
   }
 
   p {
     display: block;
     padding: 0;
-    margin: var(--Typography-paragraph-margin);
+    margin: var(--paragraphMargin);
   }
 
 }

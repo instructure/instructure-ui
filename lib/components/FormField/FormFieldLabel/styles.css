@@ -1,9 +1,9 @@
 .root {
-  color: var(--FormFieldLabel-color);
-  font-family: var(--FormFieldLabel-fontFamily);
-  font-weight: var(--FormFieldLabel-fontWeight);
-  line-height: var(--FormFieldLabel-lineHeight);
-  font-size: var(--FormFieldLabel-fontSize);
+  color: var(--color);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
   padding: 0;
   margin: 0;
   display: block;

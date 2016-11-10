@@ -1,7 +1,7 @@
 .root {
   display: inline-block;
   vertical-align: bottom;
-  margin: 0 var(--RatingIcon-icon-margin);
+  margin: 0 var(--iconMargin);
   line-height: 1;
 
   &:first-of-type {
@@ -19,27 +19,27 @@
 }
 
 .filled .icon {
-  color: var(--RatingIcon-iconFilled-color);
+  color: var(--iconFilledColor);
 }
 
 .empty .icon {
-  color: var(--RatingIcon-iconEmpty-color);
+  color: var(--iconEmptyColor);
 }
 
 .small {
   .icon {
-    font-size: var(--RatingIcon-small-icon-fontSize);
+    font-size: var(--smallIconFontSize);
   }
 }
 
 .medium {
   .icon {
-    font-size: var(--RatingIcon-medium-icon-fontSize);
+    font-size: var(--mediumIconFontSize);
   }
 }
 
 .large {
   .icon {
-    font-size: var(--RatingIcon-large-icon-fontSize);
+    font-size: var(--largeIconFontSize);
   }
 }

@@ -1,5 +1,7 @@
 'use strict'
 
+require('!!style!css!./tests.css')
+
 // clear the console before rebundling.
 /* eslint-disable no-console */
 if (typeof console.clear === 'function') {

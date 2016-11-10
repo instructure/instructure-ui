@@ -72,15 +72,15 @@
   }
 
   &.colSpacingSmall {
-    padding: 0 calc(var(--GridCol-spacing-small) / 2);
+    padding: 0 calc(var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    padding: 0 calc(var(--GridCol-spacing-medium) / 2);
+    padding: 0 calc(var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    padding: 0 calc(var(--GridCol-spacing-large) / 2);
+    padding: 0 calc(var(--spacingLarge) / 2);
   }
 
   &.vAlign--top {
@@ -100,15 +100,15 @@
   box-sizing: border-box;
 
   &.rowSpacingSmall {
-    margin-bottom: var(--GridCol-spacing-small);
+    margin-bottom: var(--spacingSmall);
   }
 
   &.rowSpacingMedium {
-    margin-bottom: var(--GridCol-spacing-medium);
+    margin-bottom: var(--spacingMedium);
   }
 
   &.rowSpacingLarge {
-    margin-bottom: var(--GridCol-spacing-large);
+    margin-bottom: var(--spacingLarge);
   }
 
   &:last-child {
@@ -122,7 +122,7 @@
 
 @mixin grid-columns-for-breakpoint phone;
 
-@media screen and (--GridCol-media-tabletMin) {
+@media screen and (--tabletMin) {
   .startAtTablet {
     @mixin start-grid-column;
   }
@@ -130,7 +130,7 @@
   @mixin grid-columns-for-breakpoint tablet;
 }
 
-@media screen and (--GridCol-media-desktopMin) {
+@media screen and (--desktopMin) {
   .startAtDesktop {
     @mixin start-grid-column;
   }
@@ -138,7 +138,7 @@
   @mixin grid-columns-for-breakpoint desktop;
 }
 
-@media screen and (--GridCol-media-wideMin) {
+@media screen and (--wideMin) {
   .startAtWide {
     @mixin start-grid-column;
   }

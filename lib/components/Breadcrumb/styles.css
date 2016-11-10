@@ -22,38 +22,38 @@
   box-sizing: border-box;
   position: absolute;
   top: 50%;
-  color: var(--Breadcrumb-separator-color);
+  color: var(--separatorColor);
 }
 
 .small .crumb {
-  font-size: var(--Breadcrumb-small-fontSize);
-  padding-right: calc(var(--Breadcrumb-small-separator-fontSize) * 2);
+  font-size: var(--smallFontSize);
+  padding-right: calc(var(--smallSeparatorFontSize) * 2);
 
   .separator {
-    font-size: var(--Breadcrumb-small-separator-fontSize);
-    right: calc(var(--Breadcrumb-small-separator-fontSize) / 2);
-    margin-top: calc(-1 * (var(--Breadcrumb-small-separator-fontSize) / 2));
+    font-size: var(--smallSeparatorFontSize);
+    right: calc(var(--smallSeparatorFontSize) / 2);
+    margin-top: calc(-1 * (var(--smallSeparatorFontSize) / 2));
   }
 }
 
 .medium .crumb {
-  font-size: var(--Breadcrumb-medium-fontSize);
-  padding-right: calc(var(--Breadcrumb-medium-separator-fontSize) * 2);
+  font-size: var(--mediumFontSize);
+  padding-right: calc(var(--mediumSeparatorFontSize) * 2);
 
   .separator {
-    font-size: var(--Breadcrumb-medium-separator-fontSize);
-    right: calc(var(--Breadcrumb-medium-separator-fontSize) / 2);
-    margin-top: calc(-1 * (var(--Breadcrumb-medium-separator-fontSize) / 2));
+    font-size: var(--mediumSeparatorFontSize);
+    right: calc(var(--mediumSeparatorFontSize) / 2);
+    margin-top: calc(-1 * (var(--mediumSeparatorFontSize) / 2));
   }
 }
 
 .large .crumb {
-  font-size: var(--Breadcrumb-large-fontSize);
-  padding-right: calc(var(--Breadcrumb-large-separator-fontSize) * 2);
+  font-size: var(--largeFontSize);
+  padding-right: calc(var(--largeSeparatorFontSize) * 2);
 
   .separator {
-    font-size: var(--Breadcrumb-large-separator-fontSize);
-    right: calc(var(--Breadcrumb-large-separator-fontSize) / 2);
-    margin-top: calc(-1 * (var(--Breadcrumb-large-separator-fontSize) / 2));
+    font-size: var(--largeSeparatorFontSize);
+    right: calc(var(--largeSeparatorFontSize) / 2);
+    margin-top: calc(-1 * (var(--largeSeparatorFontSize) / 2));
   }
 }

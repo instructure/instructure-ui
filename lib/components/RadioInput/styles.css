@@ -8,7 +8,7 @@
 
 .simple {
   & + .simple {
-    margin-top: var(--RadioInput-marginTop);
+    margin-top: var(--marginTop);
   }
 }
 

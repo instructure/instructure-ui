@@ -6,49 +6,49 @@
     display: block;
     position: absolute;
     top: calc(50% - 0.4rem);
-    right: var(--Select-padding);
+    right: var(--padding);
     pointer-events: none;
-    fill: var(--Select-arrow-color);
+    fill: var(--arrowColor);
   }
 
   .select {
     all: initial;
-    background: var(--Select-background);
-    color: var(--Select-color);
+    background: var(--background);
+    color: var(--color);
 
     box-sizing: border-box;
     display: block;
     width: 100%;
     appearance: none;
 
-    border: var(--Select-borderWidth) var(--Select-borderStyle) var(--Select-borderColor);
-    border-radius: var(--Select-borderRadius);
+    border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+    border-radius: var(--borderRadius);
 
     transition: all 0.2s ease-out;
 
     outline: 0.1875rem solid transparent;
     outline-offset: -0.5rem;
 
-    font-family: var(--Select-fontFamily);
-    font-weight: var(--Select-fontWeight);
-    font-size: var(--Select-fontSize);
+    font-family: var(--fontFamily);
+    font-weight: var(--fontWeight);
+    font-size: var(--fontSize);
 
     &::-ms-expand {
       display: none;
     }
 
     &:focus {
-      outline: 0.1875rem solid var(--Select-focus-outlineColor);
+      outline: 0.1875rem solid var(--focusOutlineColor);
       outline-offset: -0.1875rem;
-      border-color: var(--Select-focus-borderColor);
+      border-color: var(--focusBorderColor);
     }
 
     &[aria-invalid] {
-      border-color: var(--Select-error-borderColor);
+      border-color: var(--errorBorderColor);
 
       &:focus {
-        border-color: var(--Select-error-borderColor);
-        outline-color: var(--Select-error-outlineColor);
+        border-color: var(--errorBorderColor);
+        outline-color: var(--errorOutlineColor);
       }
     }
   }
@@ -62,42 +62,42 @@
 
 .small {
   .select {
-    line-height: var(--Select-small-height);
-    height: var(--Select-small-height);
-    font-size: var(--Select-small-fontSize);
-    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-small-arrow-width)) 0 var(--Select-padding);
+    line-height: var(--smallHeight);
+    height: var(--smallHeight);
+    font-size: var(--smallFontSize);
+    padding: 0 calc(var(--padding) * 2 + var(--smallArrowWidth)) 0 var(--padding);
   }
 
   .arrow {
-    width: var(--Select-small-arrow-width);
-    height: var(--Select-small-arrow-width);
+    width: var(--smallArrowWidth);
+    height: var(--smallArrowWidth);
   }
 }
 
 .medium {
   .select {
-    line-height: var(--Select-medium-height);
-    height: var(--Select-medium-height);
-    font-size: var(--Select-medium-fontSize);
-    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-medium-arrow-width)) 0 var(--Select-padding);
+    line-height: var(--mediumHeight);
+    height: var(--mediumHeight);
+    font-size: var(--mediumFontSize);
+    padding: 0 calc(var(--padding) * 2 + var(--mediumArrowWidth)) 0 var(--padding);
   }
 
   .arrow {
-    width: var(--Select-medium-arrow-width);
-    height: var(--Select-medium-arrow-width);
+    width: var(--mediumArrowWidth);
+    height: var(--mediumArrowWidth);
   }
 }
 
 .large {
   .select {
-    line-height: var(--Select-large-height);
-    height: var(--Select-large-height);
-    font-size: var(--Select-large-fontSize);
-    padding: 0 calc(var(--Select-padding) * 2 + var(--Select-large-arrow-width)) 0 var(--Select-padding);
+    line-height: var(--largeHeight);
+    height: var(--largeHeight);
+    font-size: var(--largeFontSize);
+    padding: 0 calc(var(--padding) * 2 + var(--largeArrowWidth)) 0 var(--padding);
   }
 
   .arrow {
-    width: var(--Select-large-arrow-width);
-    height: var(--Select-large-arrow-width);
+    width: var(--largeArrowWidth);
+    height: var(--largeArrowWidth);
   }
 }

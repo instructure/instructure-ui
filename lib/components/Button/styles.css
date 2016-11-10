@@ -19,11 +19,11 @@
 
   transition: background 0.2s;
 
-  font-family: var(--Button-fontFamily);
-  font-weight: var(--Button-fontWeight);
-  border-radius: var(--Button-borderRadius);
-  border-style: var(--Button-borderStyle);
-  border-width: var(--Button-borderWidth);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  border-radius: var(--borderRadius);
+  border-style: var(--borderStyle);
+  border-width: var(--borderWidth);
 
   &:focus {
     outline: none;
@@ -44,21 +44,21 @@
 .ghost-inverse,
 .link {
   &.small {
-    font-size: var(--Button-small-fontSize);
-    padding: var(--Button-small-padding);
-    line-height: var(--Button-small-height);
+    font-size: var(--smallFontSize);
+    padding: var(--smallPadding);
+    line-height: var(--smallHeight);
   }
 
   &.medium {
-    font-size: var(--Button-medium-fontSize);
-    padding: var(--Button-medium-padding);
-    line-height: var(--Button-medium-height);
+    font-size: var(--mediumFontSize);
+    padding: var(--mediumPadding);
+    line-height: var(--mediumHeight);
   }
 
   &.large {
-    font-size: var(--Button-large-fontSize);
-    padding: var(--Button-large-padding);
-    line-height: var(--Button-large-height);
+    font-size: var(--largeFontSize);
+    padding: var(--largePadding);
+    line-height: var(--largeHeight);
   }
 }
 
@@ -77,8 +77,8 @@
     left: -0.3125rem;
     right: -0.3125rem;
     bottom: -0.3125rem;
-    border: var(--Button-focus-border);
-    border-radius: var(--Button-focus-borderRadius);
+    border: var(--focusBorder);
+    border-radius: var(--focusBorderRadius);
     opacity: 0;
   }
 
@@ -96,109 +96,109 @@
 }
 
 .default {
-  background: var(--Button-default-background);
-  color: var(--Button-default-color);
-  border-color: var(--Button-default-borderColor);
+  background: var(--defaultBackground);
+  color: var(--defaultColor);
+  border-color: var(--defaultBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-default-hover-background);
+    background: var(--defaultHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-default-active-boxShadow);
+    box-shadow: var(--defaultActiveBoxShadow);
   }
 }
 
 .primary {
-  background: var(--Button-primary-background);
-  color: var(--Button-primary-color);
-  border-color: var(--Button-primary-borderColor);
+  background: var(--primaryBackground);
+  color: var(--primaryColor);
+  border-color: var(--primaryBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-primary-hover-background);
+    background: var(--primaryHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-primary-active-boxShadow);
+    box-shadow: var(--primaryActiveBoxShadow);
   }
 }
 
 .success {
-  background: var(--Button-success-background);
-  color: var(--Button-success-color);
-  border-color: var(--Button-success-borderColor);
+  background: var(--successBackground);
+  color: var(--successColor);
+  border-color: var(--successBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-success-hover-background);
+    background: var(--successHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-success-active-boxShadow);
+    box-shadow: var(--successActiveBoxShadow);
   }
 }
 
 .light {
-  background: var(--Button-light-background);
-  color: var(--Button-light-color);
-  border-color: var(--Button-light-borderColor);
+  background: var(--lightBackground);
+  color: var(--lightColor);
+  border-color: var(--lightBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-light-hover-background);
+    background: var(--lightHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-light-active-boxShadow);
+    box-shadow: var(--lightActiveBoxShadow);
   }
 }
 
 .ghost {
-  background: var(--Button-ghost-background);
-  color: var(--Button-ghost-color);
-  border-color: var(--Button-ghost-borderColor);
+  background: var(--ghostBackground);
+  color: var(--ghostColor);
+  border-color: var(--ghostBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-ghost-hover-background);
+    background: var(--ghostHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-ghost-active-boxShadow);
+    box-shadow: var(--ghostActiveBoxShadow);
   }
 }
 
 .ghost-inverse {
-  background: var(--Button-ghost-inverse-background);
-  color: var(--Button-ghost-inverse-color);
-  border-color: var(--Button-ghost-inverse-borderColor);
+  background: var(--ghostInverseBackground);
+  color: var(--ghostInverseColor);
+  border-color: var(--ghostInverseBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-ghost-inverse-hover-background);
+    background: var(--ghostInverseHoverBackground);
   }
 
   &:focus {
     &::before {
-      border: var(--Button-ghost-inverse-focus-border);
+      border: var(--ghostInverseFocusBorder);
     }
   }
 
   &:active {
-    box-shadow: var(--Button-ghost-inverse-active-boxShadow);
+    box-shadow: var(--ghostInverseActiveBoxShadow);
   }
 }
 
 .link {
   text-decoration: none;
   background: transparent;
-  border-color: var(--Button-link-borderColor);
-  color: var(--Button-link-color);
+  border-color: var(--linkBorderColor);
+  color: var(--linkColor);
 
   &:focus {
-    box-shadow: var(--Button-link-focus-boxShadow);
+    box-shadow: var(--linkFocusBoxShadow);
   }
 
   &:hover,
@@ -209,7 +209,7 @@
 
   &:hover,
   &:active {
-    color: var(--Button-link-hover-color);
+    color: var(--linkHoverColor);
   }
 }
 
@@ -217,9 +217,9 @@
 .icon-inverse,
 .circle-primary,
 .circle-danger {
-  padding: var(--Button-icon-padding);
+  padding: var(--iconPadding);
   background: transparent;
-  border-color: var(--Button-icon-borderColor);
+  border-color: var(--iconBorderColor);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -232,17 +232,17 @@
 
   &.small {
     font-size: 1rem;
-    height: var(--Button-small-height);
+    height: var(--smallHeight);
   }
 
   &.medium {
     font-size: 1.5rem;
-    height: var(--Button-medium-height);
+    height: var(--mediumHeight);
   }
 
   &.large {
     font-size: 2rem;
-    height: var(--Button-large-height);
+    height: var(--largeHeight);
   }
 }
 
@@ -255,77 +255,77 @@
   }
 
   &.small {
-    width: var(--Button-small-height);
+    width: var(--smallHeight);
   }
 
   &.medium {
-    width: var(--Button-medium-height);
+    width: var(--mediumHeight);
   }
 
   &.large {
-    width: var(--Button-large-height);
+    width: var(--largeHeight);
   }
 }
 
 .circle-primary {
-  background: var(--Button-circle-primary-background);
-  color: var(--Button-circle-primary-color);
-  border-color: var(--Button-circle-primary-borderColor);
+  background: var(--circlePrimaryBackground);
+  color: var(--circlePrimaryColor);
+  border-color: var(--circlePrimaryBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-circle-primary-hover-background);
+    background: var(--circlePrimaryHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-circle-primary-active-boxShadow);
+    box-shadow: var(--circlePrimaryActiveBoxShadow);
   }
 }
 
 .circle-danger {
-  background: var(--Button-circle-danger-background);
-  color: var(--Button-circle-danger-color);
-  border-color: var(--Button-circle-danger-borderColor);
+  background: var(--circleDangerBackground);
+  color: var(--circleDangerColor);
+  border-color: var(--circleDangerBorderColor);
 
   &:hover,
   &:active {
-    background: var(--Button-circle-danger-hover-background);
+    background: var(--circleDangerHoverBackground);
   }
 
   &:active {
-    box-shadow: var(--Button-circle-danger-active-boxShadow);
+    box-shadow: var(--circleDangerActiveBoxShadow);
   }
 }
 
 .icon,
 .icon-inverse {
   background: transparent;
-  border-color: var(--Button-icon-borderColor);
+  border-color: var(--iconBorderColor);
 }
 
 .icon-inverse {
-  color: var(--Button-icon-inverse-color);
+  color: var(--iconInverseColor);
 
   &:hover,
   &:active {
-    color: var(--Button-icon-inverse-hover-color);
+    color: var(--iconInverseHoverColor);
   }
 
   &:focus {
-    box-shadow: var(--Button-icon-inverse-focus-boxShadow);
+    box-shadow: var(--iconInverseFocusBoxShadow);
   }
 }
 
 .icon {
-  color: var(--Button-icon-color);
+  color: var(--iconColor);
 
   &:hover,
   &:active {
-    color: var(--Button-icon-hover-color);
+    color: var(--iconHoverColor);
   }
 
   &:focus {
-    box-shadow: var(--Button-icon-focus-boxShadow);
+    box-shadow: var(--iconFocusBoxShadow);
   }
 }
 

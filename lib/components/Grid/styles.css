@@ -1,6 +1,6 @@
 .root {
   margin: 0 auto;
-  max-width: var(--Grid-maxWidth);
+  max-width: var(--maxWidth);
 }
 
 @define-mixin Grid-container {
@@ -9,18 +9,18 @@
   box-sizing: border-box;
 
   &.colSpacingSmall {
-    padding-left: calc(var(--Grid-spacing-small) / 2);
-    padding-right: calc(var(--Grid-spacing-small) / 2);
+    padding-left: calc(var(--spacingSmall) / 2);
+    padding-right: calc(var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    padding-left: calc(var(--Grid-spacing-medium) / 2);
-    padding-right: calc(var(--Grid-spacing-medium) / 2);
+    padding-left: calc(var(--spacingMedium) / 2);
+    padding-right: calc(var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    padding-left: calc(var(--Grid-spacing-large) / 2);
-    padding-right: calc(var(--Grid-spacing-large) / 2);
+    padding-left: calc(var(--spacingLarge) / 2);
+    padding-right: calc(var(--spacingLarge) / 2);
   }
 }
 
@@ -32,19 +32,19 @@
   @mixin Grid-container;
 }
 
-@media screen and (--Grid-media-tabletMin) {
+@media screen and (--tabletMin) {
   .startAtTablet {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--Grid-media-desktopMin) {
+@media screen and (--desktopMin) {
   .startAtDesktop {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--Grid-media-wideMin) {
+@media screen and (--wideMin) {
   .startAtWide {
     @mixin Grid-container;
   }

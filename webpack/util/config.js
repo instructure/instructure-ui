@@ -37,9 +37,10 @@ function getConfig () {
   return merge({}, config, {
     rootPath: ROOT,
     srcPath: path.join(ROOT, config.buildPath, '/lib'),
-    docsAppPath: path.resolve(__dirname, '../../docs/app'),
+    docsAppPath: path.join(ROOT, '/docs/app'),
     distPath: path.join(ROOT, config.buildPath, '/dist'),
-    docsPath: path.join(ROOT, config.buildPath, '/docs')
+    docsPath: path.join(ROOT, config.buildPath, '/docs'),
+    testsPath: path.join(ROOT, '/tests')
   })
 }
 

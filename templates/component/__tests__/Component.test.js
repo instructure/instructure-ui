@@ -4,7 +4,6 @@ import ${COMPONENT} from '../index'
 describe('<${COMPONENT} />', function () {
   const testbed = createTestbed(<${COMPONENT} />)
 
-  /* example test (replace me) */
   it('should render', function () {
     const subject = testbed.render(/* override default props here */)
 

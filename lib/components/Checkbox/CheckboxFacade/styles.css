@@ -4,8 +4,8 @@
 }
 
 .facade {
-  color: var(--CheckboxFacade-color);
-  background: var(--CheckboxFacade-background);
+  color: var(--color);
+  background: var(--background);
 
   display: block;
   box-sizing: border-box;
@@ -15,20 +15,20 @@
 
   transition: all 0.2s;
 
-  border: 1px solid var(--CheckboxFacade-borderColor);
-  border-radius: var(--CheckboxFacade-borderRadius);
+  border: 1px solid var(--borderColor);
+  border-radius: var(--borderRadius);
 
-  margin-right: var(--CheckboxFacade-marginRight);
-  padding: var(--CheckboxFacade-padding);
+  margin-right: var(--marginRight);
+  padding: var(--padding);
 }
 
 .label {
   flex: 1;
-  color: var(--CheckboxFacade-label-color);
-  font-family: var(--CheckboxFacade-label-fontFamily);
-  font-weight: var(--CheckboxFacade-label-fontWeight);
-  line-height: var(--CheckboxFacade-label-lineHeight);
-  font-size: var(--CheckboxFacade-label-fontSize);
+  color: var(--labelColor);
+  font-family: var(--labelFontFamily);
+  font-weight: var(--labelFontWeight);
+  line-height: var(--labelLineHeight);
+  font-size: var(--labelFontSize);
 }
 
 .icon {
@@ -56,8 +56,8 @@
   input[type="checkbox"]:checked + &,
   &.checked {
     .facade {
-      background: var(--CheckboxFacade-checked-background);
-      border-color: var(--CheckboxFacade-checked-borderColor);
+      background: var(--checkedBackground);
+      border-color: var(--checkedBorderColor);
     }
   }
 
@@ -65,7 +65,7 @@
   [role="menuitemcheckbox"]:focus > &,
   &.focused {
     .facade {
-      box-shadow: 0 0 0 6px var(--CheckboxFacade-focus-outlineColor);
+      box-shadow: 0 0 0 6px var(--focusOutlineColor);
     }
   }
 
@@ -73,7 +73,7 @@
   [role="menuitemcheckbox"]:hover > &,
   &.hovered {
     .facade {
-      border-color: var(--CheckboxFacade-hover-borderColor);
+      border-color: var(--hoverBorderColor);
     }
   }
 

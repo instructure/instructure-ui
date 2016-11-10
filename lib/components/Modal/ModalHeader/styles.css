@@ -1,7 +1,7 @@
 .root {
   box-sizing: border-box;
-  padding: var(--ModalHeader-padding);
-  padding-right: calc(var(--ModalHeader-padding) * 2 + 1em);
+  padding: var(--padding);
+  padding-right: calc(var(--padding) * 2 + 1em);
   flex: 0 0 auto;
-  border-bottom: 1px solid var(--ModalHeader-borderColor);
+  border-bottom: 1px solid var(--borderColor);
 }

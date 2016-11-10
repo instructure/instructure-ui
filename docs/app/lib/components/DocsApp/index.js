@@ -70,11 +70,11 @@ export default class DocsApp extends Component {
             onChange={this.handleBrandChange}
             defaultValue={this.state.brand}
           >
-          {
-            brands.map((brand) => {
-              return <option key={brand} value={brand}>{brand}</option>
-            })
-          }
+            {
+              brands.map((brand) => {
+                return <option key={brand} value={brand}>{brand}</option>
+              })
+            }
           </Select>
         </div>
         <ComponentDoc

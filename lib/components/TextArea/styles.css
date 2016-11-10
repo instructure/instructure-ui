@@ -11,40 +11,40 @@
   display: block;
   box-sizing: border-box;
 
-  padding: var(--TextArea-padding);
+  padding: var(--padding);
 
   transition: all 0.2s ease-out;
 
   outline: 0.1875rem solid transparent;
   outline-offset: -0.5rem;
 
-  font-family: var(--TextArea-fontFamily);
-  font-weight: var(--TextArea-fontWeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
 
-  border: var(--TextArea-borderWidth) var(--TextArea-borderStyle) var(--TextArea-borderColor);
-  border-radius: var(--TextArea-borderRadius);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
 
-  color: var(--TextArea-color);
-  background: var(--TextArea-background);
+  color: var(--color);
+  background: var(--background);
 
   &:focus {
     box-shadow: initial;
-    outline: 0.1875rem solid var(--TextArea-focus-outlineColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
     outline-offset: -0.1875rem;
-    border-color: var(--TextArea-focus-borderColor);
+    border-color: var(--focusBorderColor);
   }
 
   &[aria-invalid] {
-    border-color: var(--TextArea-error-borderColor);
+    border-color: var(--errorBorderColor);
 
     &:focus {
-      border-color: var(--TextArea-error-borderColor);
-      outline-color: var(--TextArea-error-outlineColor);
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
     }
   }
 
   &::placeholder {
-    color: var(--TextArea-placeholder-color);
+    color: var(--placeholderColor);
   }
 
   &[aria-disabled] {
@@ -55,16 +55,16 @@
 }
 
 .small {
-  font-size: var(--TextArea-small-fontSize);
-  min-height: var(--TextArea-small-height);
+  font-size: var(--smallFontSize);
+  min-height: var(--smallHeight);
 }
 
 .medium {
-  font-size: var(--TextArea-medium-fontSize);
-  min-height: var(--TextArea-medium-height);
+  font-size: var(--mediumFontSize);
+  min-height: var(--mediumHeight);
 }
 
 .large {
-  font-size: var(--TextArea-large-fontSize);
-  min-height: var(--TextArea-large-height);
+  font-size: var(--largeFontSize);
+  min-height: var(--largeHeight);
 }

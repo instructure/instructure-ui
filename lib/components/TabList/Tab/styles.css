@@ -1,8 +1,8 @@
 .root {
-  font-family: var(--Tab-fontFamily);
-  font-weight: var(--Tab-fontWeight);
-  line-height: var(--Tab-lineHeight);
-  font-size: var(--Tab-fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
 
   cursor: pointer;
   user-select: none;
@@ -30,7 +30,7 @@
 .simple {
   box-sizing: border-box;
   padding: 0.7em 1em;
-  color: var(--Tab-simple-color);
+  color: var(--simpleColor);
 
   margin-right: 0.2em;
   margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
@@ -45,20 +45,20 @@
 
   &:not([aria-selected]):not([aria-disabled]):hover,
   &[aria-selected] {
-    background: var(--Tab-simple-selected-background);
-    border-color: var(--Tab-simple-selected-borderColor);
+    background: var(--simpleSelectedBackground);
+    border-color: var(--simpleSelectedBorderColor);
   }
 
   &:hover,
   &[aria-selected],
   &[aria-disabled] {
-    color: var(--Tab-simple-selected-color);
+    color: var(--simpleSelectedColor);
   }
 
   &[aria-selected] {
     /* To overlay Tab over TabPanel top border */
     z-index: 1;
-    border-bottom-color: var(--Tab-simple-selected-background);
+    border-bottom-color: var(--simpleSelectedBackground);
   }
 
   &:focus {
@@ -71,7 +71,7 @@
   line-height: 1;
   position: relative;
   z-index: 1;
-  color: var(--Tab-minimal-color);
+  color: var(--minimalColor);
 
   &::after {
     transition: all 0.2s ease-out;
@@ -90,13 +90,13 @@
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover {
-    border-bottom-color: var(--Tab-minimal-hover-borderColor);
+    border-bottom-color: var(--minimalHoverBorderColor);
   }
 
   &[aria-selected]::after {
     transform: translate3d(0, 0, 0) scaleX(1);
     opacity: 1;
-    background-color: var(--Tab-minimal-selected-borderColor);
+    background-color: var(--minimalSelectedBorderColor);
   }
 
   &:focus {
@@ -109,7 +109,7 @@
 
   margin-top: 0.5rem;
 
-  padding: var(--Tab-accordion-padding);
+  padding: var(--accordionPadding);
 
   display: flex;
   align-items: center;
@@ -119,37 +119,37 @@
   border-width: 1px;
   border-style: solid;
 
-  color: var(--Tab-accordion-color);
-  background-color: var(--Tab-accordion-background);
-  border-color: var(--Tab-accordion-borderColor);
+  color: var(--accordionColor);
+  background-color: var(--accordionBackground);
+  border-color: var(--accordionBorderColor);
 
   &:first-of-type {
     margin-top: 0;
   }
 
   & .icon::before {
-    content: "\25B8";
+    content: "\\25B8";
     margin-right: 0.75rem;
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover {
-    background-color: var(--Tab-accordion-hover-background);
+    background-color: var(--accordionHoverBackground);
   }
 
   &[aria-selected] {
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
-    border-color: var(--Tab-accordion-selected-borderColor);
-    color: var(--Tab-accordion-selected-color);
-    background-color: var(--Tab-accordion-selected-background);
+    border-color: var(--accordionSelectedBorderColor);
+    color: var(--accordionSelectedColor);
+    background-color: var(--accordionSelectedBackground);
 
     & .icon::before {
-      content: "\25BE";
+      content: "\\25BE";
     }
   }
 
   &:focus {
-    box-shadow: inset 0 0 0 1px var(--Tab-accordion-focused-borderColor);
+    box-shadow: inset 0 0 0 1px var(--accordionFocusedBorderColor);
   }
 }
 

@@ -11,8 +11,8 @@
   margin: 0;
   line-height: 1;
 
-  border-radius: var(--ToggleDetails-toggle-borderRadius);
-  border: var(--ToggleDetails-toggle-borderWidth) var(--ToggleDetails-toggle-borderStyle) transparent;
+  border-radius: var(--toggleBorderRadius);
+  border: var(--toggleBorderWidth) var(--toggleBorderStyle) transparent;
 
   outline: none;
 
@@ -20,7 +20,7 @@
   &:focus {
     color: inherit; /* removes the push effect on FF */
     outline: none;
-    border-color: var(--ToggleDetails-toggle-focus-borderColor);
+    border-color: var(--toggleFocusBorderColor);
   }
 }
 
@@ -29,7 +29,7 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  padding: var(--ToggleDetails-toggle-padding);
+  padding: var(--togglePadding);
 }
 
 .label {
@@ -40,7 +40,7 @@
 .icon {
   transition: all 0.2s linear;
   transform: translate3d(0, 0, 0);
-  margin-right: var(--ToggleDetails-toggle-padding);
+  margin-right: var(--togglePadding);
 }
 
 .details {
@@ -50,31 +50,31 @@
 
 .small {
   .icon {
-    font-size: var(--ToggleDetails-small-iconSize);
+    font-size: var(--smallIconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-small-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
+    padding-left: calc(var(--smallIconSize) + 2 * var(--togglePadding));
   }
 }
 
 .medium {
   .icon {
-    font-size: var(--ToggleDetails-medium-iconSize);
+    font-size: var(--mediumIconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-medium-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
+    padding-left: calc(var(--mediumIconSize) + 2 * var(--togglePadding));
   }
 }
 
 .large {
   .icon {
-    font-size: var(--ToggleDetails-large-iconSize);
+    font-size: var(--largeIconSize);
   }
 
   .details {
-    padding-left: calc(var(--ToggleDetails-large-iconSize) + 2 * var(--ToggleDetails-toggle-padding));
+    padding-left: calc(var(--largeIconSize) + 2 * var(--togglePadding));
   }
 }
 
@@ -88,7 +88,7 @@
   }
 }
 
-@keyframes ToggleDetails-contentAnimation {
+@keyframes contentAnimation {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
@@ -98,7 +98,7 @@
 .content {
   opacity: 0.01;
   transform: translate3d(0, -10%, 0);
-  animation-name: ToggleDetails-contentAnimation;
+  animation-name: contentAnimation;
   animation-fill-mode: forwards;
   animation-duration: 0.3s;
 }

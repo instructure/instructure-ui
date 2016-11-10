@@ -21,8 +21,7 @@ module.exports = function (overrides) {
       ]
     },
     module: require('./module-loaders')(process.env.NODE_ENV),
-    plugins: require('./plugins')(process.env.NODE_ENV, process.env.MINIFY),
-    postcss: require('./postcss')(process.env.NODE_ENV)
+    plugins: require('./plugins')(process.env.NODE_ENV, process.env.MINIFY)
   }
   return merge(defaults, overrides, config.webpack)
 }

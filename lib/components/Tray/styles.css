@@ -1,5 +1,5 @@
 .root {
-  background: var(--Tray-background);
+  background: var(--background);
   position: fixed;
   align-items: center;
   justify-content: center;

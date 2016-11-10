@@ -2,34 +2,30 @@
   display: block;
 }
 
-/* stylelint-disable selector-no-type */
-
 .simple {
-  > label {
-    margin-top: var(--RadioInputGroup-marginTop);
+  > label { /* stylelint-disable-line selector-no-type */
+    margin-top: var(--marginTop);
   }
 }
-
-/* stylelint-enable selector-no-type */
 
 .toggle {
   transition: all 0.2s;
   display: inline-flex;
   box-sizing: border-box;
-  border-width: var(--RadioInputGroup-toggle-borderWidth);
-  border-style: var(--RadioInputGroup-toggle-borderStyle);
-  border-radius: var(--RadioInputGroup-toggle-borderRadius);
+  border-width: var(--toggleBorderWidth);
+  border-style: var(--toggleBorderStyle);
+  border-radius: var(--toggleBorderRadius);
 
-  background: var(--RadioInputGroup-toggle-backgroundColor);
-  border-color: var(--RadioInputGroup-toggle-backgroundColor);
+  background: var(--toggleBackgroundColor);
+  border-color: var(--toggleBackgroundColor);
 
   &.success {
-    background: var(--RadioInputGroup-toggle-success-backgroundColor);
-    border-color: var(--RadioInputGroup-toggle-success-backgroundColor);
+    background: var(--toggleSuccessBackgroundColor);
+    border-color: var(--toggleSuccessBackgroundColor);
   }
 
   &.danger {
-    background: var(--RadioInputGroup-toggle-danger-backgroundColor);
-    border-color: var(--RadioInputGroup-toggle-danger-backgroundColor);
+    background: var(--toggleDangerBackgroundColor);
+    border-color: var(--toggleDangerBackgroundColor);
   }
 }

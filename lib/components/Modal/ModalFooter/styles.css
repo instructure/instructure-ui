@@ -1,12 +1,12 @@
 .root {
   flex: 0 0 auto;
-  background: var(--ModalFooter-background);
-  border-top: var(--ModalFooter-borderWidth) solid var(--ModalFooter-borderColor);
+  background: var(--background);
+  border-top: var(--borderWidth) solid var(--borderColor);
   box-sizing: border-box;
-  padding: var(--ModalFooter-padding);
+  padding: var(--padding);
 
-  border-bottom-right-radius: var(--ModalFooter-borderRadius);
-  border-bottom-left-radius: var(--ModalFooter-borderRadius);
+  border-bottom-right-radius: var(--borderRadius);
+  border-bottom-left-radius: var(--borderRadius);
 
   display: flex;
   justify-content: flex-end;

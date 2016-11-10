@@ -1,15 +1,15 @@
 .alert {
-  background: var(--Alert-background);
+  background: var(--background);
   box-sizing: border-box;
   box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
   border-width: 2px;
   border-style: solid;
   display: flex;
 
-  border-radius: var(--Alert-borderRadius);
+  border-radius: var(--borderRadius);
 
   + .alert {
-    margin-top: var(--Alert-marginTop);
+    margin-top: var(--marginTop);
   }
 }
 
@@ -19,15 +19,15 @@
   display: flex;
   align-items: center;
 
-  font-size: var(--Alert-content-fontSize);
-  font-family: var(--Alert-content-fontFamily);
-  font-weight: var(--Alert-content-fontWeight);
-  line-height: var(--Alert-content-lineHeight);
-  padding: var(--Alert-content-padding);
+  font-size: var(--contentFontSize);
+  font-family: var(--contentFontFamily);
+  font-weight: var(--contentFontWeight);
+  line-height: var(--contentLineHeight);
+  padding: var(--contentPadding);
 }
 
 .icon {
-  color: var(--Alert-icon-color);
+  color: var(--iconColor);
   box-sizing: border-box;
   flex: 0 0 2.5rem;
   display: flex;
@@ -45,37 +45,37 @@
 }
 
 .success {
-  border-color: var(--Alert-success-borderColor);
+  border-color: var(--successBorderColor);
 
   .icon {
-    background-color: var(--Alert-success-icon-background);
-    border-right-color: var(--Alert-success-icon-background);
+    background-color: var(--successIconBackground);
+    border-right-color: var(--successIconBackground);
   }
 }
 
 .info {
-  border-color: var(--Alert-info-borderColor);
+  border-color: var(--infoBorderColor);
 
   .icon {
-    background: var(--Alert-info-icon-background);
-    border-right-color: var(--Alert-info-icon-background);
+    background: var(--infoIconBackground);
+    border-right-color: var(--infoIconBackground);
   }
 }
 
 .error {
-  border-color: var(--Alert-danger-borderColor);
+  border-color: var(--dangerBorderColor);
 
   .icon {
-    background: var(--Alert-danger-icon-background);
-    border-right-color: var(--Alert-danger-icon-background);
+    background: var(--dangerIconBackground);
+    border-right-color: var(--dangerIconBackground);
   }
 }
 
 .warning {
-  border-color: var(--Alert-warning-borderColor);
+  border-color: var(--warningBorderColor);
 
   .icon {
-    background: var(--Alert-warning-icon-background);
-    border-right-color: var(--Alert-warning-icon-background);
+    background: var(--warningIconBackground);
+    border-right-color: var(--warningIconBackground);
   }
 }

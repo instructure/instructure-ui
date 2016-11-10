@@ -9,10 +9,8 @@
 
   text-align: center;
 
-  font-family: var(--MetricsListItem-fontFamily);
+  font-family: var(--fontFamily);
 }
-
-/* stylelint-disable selector-no-type */
 
 .root:first-child:nth-last-child(2),
 .root:last-child:nth-child(2) {
@@ -28,15 +26,13 @@
   flex-basis: 100%;
 }
 
-/* stylelint-enable selector-no-type */
-
 .label {
-  font-size: var(--MetricsListItem-label-fontSize);
-  color: var(--MetricsListItem-label-color);
+  font-size: var(--labelFontSize);
+  color: var(--labelColor);
 }
 
 .value {
-  font-weight: var(--MetricsListItem-value-fontWeight);
-  font-size: var(--MetricsListItem-value-fontSize);
-  color: var(--MetricsListItem-value-color);
+  font-weight: var(--valueFontWeight);
+  font-size: var(--valueFontSize);
+  color: var(--valueColor);
 }
