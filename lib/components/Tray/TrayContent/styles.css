@@ -9,6 +9,16 @@
 .closeButton {
   position: absolute;
   top: var(--TrayContent-closeButton-offset);
-  right: var(--TrayContent-closeButton-offset);
   background: var(--TrayContent-background);
 }
+
+.placement--left .closeButton,
+.placement--top .closeButton,
+.placement--bottom .closeButton {
+  right: var(--TrayContent-closeButton-offset);
+}
+
+.placement--right .closeButton {
+  left: var(--TrayContent-closeButton-offset);
+}
+
