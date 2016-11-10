@@ -11,9 +11,9 @@
   */
   font-size: 1rem;
 
-  font-family: var(--ProgressCircle-fontFamily);
-  font-weight: var(--ProgressCircle-fontWeight);
-  line-height: var(--ProgressCircle-lineHeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
 }
 
 .circle {
@@ -67,22 +67,22 @@
 .meter {
   transition: stroke-dashoffset 1s;
   transform: translate3d(0, 0, 0);
-  stroke: var(--ProgressCircle-meter-color);
+  stroke: var(--meterColor);
 }
 
 .default {
   .track {
-    stroke: var(--ProgressCircle-track-color);
+    stroke: var(--trackColor);
   }
 
   .value {
-    color: var(--ProgressCircle-color);
+    color: var(--color);
   }
 }
 
 .inverse {
   .track {
-    stroke: var(--ProgressCircle-inverse-track-color);
+    stroke: var(--inverseTrackColor);
   }
 }
 
@@ -100,17 +100,17 @@
 
 .done {
   .meter {
-    stroke: var(--ProgressCircle-done-meter-color);
+    stroke: var(--doneMeterColor);
   }
 }
 
 .small {
-  width: var(--ProgressCircle-small-size);
-  height: var(--ProgressCircle-small-size);
+  width: var(--smallSize);
+  height: var(--smallSize);
 
   .circle {
-    width: var(--ProgressCircle-small-size);
-    height: var(--ProgressCircle-small-size);
+    width: var(--smallSize);
+    height: var(--smallSize);
   }
 
   .shadow {
@@ -118,7 +118,7 @@
   }
 
   .track {
-    transform-origin: var(--ProgressCircle-small-transform) var(--ProgressCircle-small-transform);
+    transform-origin: var(--smallTransform) var(--smallTransform);
   }
 
   .track,
@@ -127,17 +127,17 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-small-circumference);
+    stroke-dasharray: var(--smallCircumference);
   }
 }
 
 .medium {
-  width: var(--ProgressCircle-medium-size);
-  height: var(--ProgressCircle-medium-size);
+  width: var(--mediumSize);
+  height: var(--mediumSize);
 
   .circle {
-    width: var(--ProgressCircle-medium-size);
-    height: var(--ProgressCircle-medium-size);
+    width: var(--mediumSize);
+    height: var(--mediumSize);
   }
 
   .shadow {
@@ -145,7 +145,7 @@
   }
 
   .track {
-    transform-origin: var(--ProgressCircle-medium-transform) var(--ProgressCircle-medium-transform);
+    transform-origin: var(--mediumTransform) var(--mediumTransform);
   }
 
   .track,
@@ -154,17 +154,17 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-medium-circumference);
+    stroke-dasharray: var(--mediumCircumference);
   }
 }
 
 .large {
-  width: var(--ProgressCircle-large-size);
-  height: var(--ProgressCircle-large-size);
+  width: var(--largeSize);
+  height: var(--largeSize);
 
   .circle {
-    width: var(--ProgressCircle-large-size);
-    height: var(--ProgressCircle-large-size);
+    width: var(--largeSize);
+    height: var(--largeSize);
   }
 
   .shadow {
@@ -172,7 +172,7 @@
   }
 
   .track {
-    transform-origin: var(--ProgressCircle-large-transform) var(--ProgressCircle-large-transform);
+    transform-origin: var(--largeTransform) var(--largeTransform);
   }
 
   .track,
@@ -181,7 +181,7 @@
   }
 
   .meter {
-    stroke-dasharray: var(--ProgressCircle-large-circumference);
+    stroke-dasharray: var(--largeCircumference);
   }
 }
 
@@ -215,15 +215,15 @@
   */
 
   &.small .meter {
-    stroke-dashoffset: var(--ProgressCircle-small-circumference) !important;
+    stroke-dashoffset: var(--smallCircumference) !important;
   }
 
   &.medium .meter {
-    stroke-dashoffset: var(--ProgressCircle-medium-circumference) !important;
+    stroke-dashoffset: var(--mediumCircumference) !important;
   }
 
   &.large .meter {
-    stroke-dashoffset: var(--ProgressCircle-large-circumference) !important;
+    stroke-dashoffset: var(--largeCircumference) !important;
   }
   /* stylelint-enable declaration-no-important */
 }

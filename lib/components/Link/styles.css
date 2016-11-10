@@ -4,11 +4,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: var(--Link-fontFamily);
-  font-weight: var(--Link-fontWeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
 
-  color: var(--Link-color);
-  text-decoration: var(--Link-textDecoration);
+  color: var(--color);
+  text-decoration: var(--textDecoration);
 
   transition: color 0.2s;
 
@@ -19,8 +19,8 @@
   &:focus,
   &:hover,
   &:active {
-    text-decoration: var(--Link-hover-textDecoration);
-    color: var(--Link-hover-color);
+    text-decoration: var(--hoverTextDecoration);
+    color: var(--hoverColor);
   }
 
   &[aria-disabled] {
@@ -30,9 +30,7 @@
   }
 }
 
-/* stylelint-disable selector-no-type */
-
-button.root {
+button.root { /* stylelint-disable-line selector-no-type */
   user-select: text;
   background: none;
   border: none;
@@ -45,5 +43,3 @@ button.root {
   outline: none;
   text-align: inherit;
 }
-
-/* stylelint-enable selector-no-type */

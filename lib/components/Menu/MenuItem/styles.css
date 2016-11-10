@@ -1,6 +1,6 @@
 .root {
-  padding: var(--MenuItem-padding);
-  background: var(--MenuItem-background);
+  padding: var(--padding);
+  background: var(--background);
 
   &:focus {
     outline: none;
@@ -8,23 +8,23 @@
 }
 
 .default {
-  font-family: var(--MenuItem-fontFamily);
-  font-weight: var(--MenuItem-fontWeight);
-  line-height: var(--MenuItem-lineHeight);
-  font-size: var(--MenuItem-fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
 
   cursor: pointer;
   user-select: none;
 
   transition: background 0.2s;
 
-  color: var(--MenuItem-color);
-  background: var(--MenuItem-background);
+  color: var(--color);
+  background: var(--background);
 
   &:focus,
   &:hover {
-    color: var(--MenuItem-hover-color);
-    background: var(--MenuItem-hover-background);
+    color: var(--hoverColor);
+    background: var(--hoverBackground);
   }
 }
 
@@ -35,5 +35,5 @@
 
 .checkbox,
 .radio {
-  background: var(--MenuItem-background);
+  background: var(--background);
 }

@@ -21,7 +21,7 @@
 }
 
 .text {
-  font-family: var(--BreadcrumbLink-fontFamily);
-  color: var(--BreadcrumbLink-color);
+  font-family: var(--fontFamily);
+  color: var(--color);
 }
 

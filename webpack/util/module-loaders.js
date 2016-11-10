@@ -1,18 +1,13 @@
-/* eslint no-var: 0 */
-'use strict'
-
-var config = require('./config')
+const { generateScopedName } = require('./themeable-css-transform')
 
 module.exports = function (env) {
-  var cssLoader = 'css?modules&importLoaders=1&localIdentName=' + [
-    config.library.prefix,
-    config.library.version,
-    '[folder]__[local]'
-  ].join('-')
+  let cssLoader = 'css?modules&importLoaders=1&localIdentName=' + generateScopedName(env)
 
   if (env === 'production') {
     cssLoader = cssLoader + '&minify'
   }
+
+  cssLoader = cssLoader + '!postcss'
 
   return {
     preLoaders: [
@@ -51,18 +46,20 @@ module.exports = function (env) {
           /node_modules/,
           /docs\/app\//
         ],
-        loader: 'component-style!' + cssLoader + '!postcss'
+        loader: 'babel!themeable-component-style!' + cssLoader
       },
       {
         test: /\.css$/,
         include: [
           /docs\/app\//
         ],
-        loader: 'style!' + cssLoader + '!postcss?pack=docs'
+        loader: 'style!' + cssLoader
       },
       {
         test: /\.css$/,
-        include: /node_modules/,
+        include: [
+          /node_modules/
+        ],
         loader: 'style!css'
       }
     ]

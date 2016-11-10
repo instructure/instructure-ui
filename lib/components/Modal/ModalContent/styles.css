@@ -7,24 +7,24 @@
 }
 
 .content {
-  background: var(--ModalContent-background);
+  background: var(--background);
   flex: 1;
   display: flex;
 
   align-items: stretch;
   flex-direction: column;
 
-  box-shadow: 0 0 3px 0 var(--ModalContent-borderColor);
-  border: 1px solid var(--ModalContent-borderColor);
-  border-radius: var(--ModalContent-borderRadius);
+  box-shadow: 0 0 3px 0 var(--borderColor);
+  border: 1px solid var(--borderColor);
+  border-radius: var(--borderRadius);
   box-sizing: border-box;
 }
 
 .closeButton {
   position: absolute;
-  top: var(--ModalContent-closeButton-offset);
-  right: var(--ModalContent-closeButton-offset);
-  background: var(--ModalContent-background);
+  top: var(--closeButtonOffset);
+  right: var(--closeButtonOffset);
+  background: var(--background);
 }
 
 .auto,
@@ -37,34 +37,34 @@
 
 .auto {
   flex: 0 1 auto;
-  min-width: var(--ModalContent-auto-minWidth);
+  min-width: var(--autoMinWidth);
 
   .content {
-    min-height: var(--ModalContent-auto-minHeight);
+    min-height: var(--autoMinHeight);
   }
 }
 
 .small {
-  flex: 0 1 var(--ModalContent-small-maxWidth);
+  flex: 0 1 var(--smallMaxWidth);
 
   .content {
-    min-height: var(--ModalContent-small-minHeight);
+    min-height: var(--smallMinHeight);
   }
 }
 
 .medium {
-  flex: 0 1 var(--ModalContent-medium-maxWidth);
+  flex: 0 1 var(--mediumMaxWidth);
 
   .content {
-    min-height: var(--ModalContent-medium-minHeight);
+    min-height: var(--mediumMinHeight);
   }
 }
 
 .large {
-  flex: 0 1 var(--ModalContent-large-maxWidth);
+  flex: 0 1 var(--largeMaxWidth);
 
   .content {
-    min-height: var(--ModalContent-large-minHeight);
+    min-height: var(--largeMinHeight);
   }
 }
 

@@ -20,7 +20,7 @@ module.exports = function (source) {
 
   return [
     'if (module.hot) {',
-    ' module.hot.accept([]);',
+    '  module.hot.accept([]);',
     '}',
     'module.exports = ' + JSON.stringify(value, undefined, '\t')
   ].join('\n')

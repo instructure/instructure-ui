@@ -3,11 +3,11 @@
 }
 
 .label {
-  color: var(--RadioInputFacade-label-color);
-  font-family: var(--RadioInputFacade-label-fontFamily);
-  font-weight: var(--RadioInputFacade-label-fontWeight);
-  line-height: var(--RadioInputFacade-label-lineHeight);
-  font-size: var(--RadioInputFacade-label-fontSize);
+  color: var(--labelColor);
+  font-family: var(--labelFontFamily);
+  font-weight: var(--labelFontWeight);
+  line-height: var(--labelLineHeight);
+  font-size: var(--labelFontSize);
 }
 
 .simple {
@@ -25,9 +25,9 @@
     transition: all 0.2s ease-out;
     background-size: 1em 3em;
     border-radius: 100%;
-    border: 1px solid var(--RadioInputFacade-borderColor);
+    border: 1px solid var(--borderColor);
 
-    background-color: var(--RadioInputFacade-background);
+    background-color: var(--background);
   }
 
   .label {
@@ -40,16 +40,16 @@
   label:hover > input[type="radio"] + &,
   &.hovered {
     .facade {
-      border-color: var(--RadioInputFacade-hover-borderColor);
+      border-color: var(--hoverBorderColor);
     }
   }
 
   input[type="radio"]:checked + &,
   &.checked {
     .facade {
-      background-color: var(--RadioInputFacade-hover-borderColor);
-      box-shadow: inset 0 0 0 3px var(--RadioInputFacade-background);
-      border-color: var(--RadioInputFacade-hover-borderColor);
+      background-color: var(--hoverBorderColor);
+      box-shadow: inset 0 0 0 3px var(--background);
+      border-color: var(--hoverBorderColor);
     }
   }
 
@@ -57,10 +57,10 @@
   input[type="radio"]:focus + &,
   &.focused {
     .facade {
-      background-color: var(--RadioInputFacade-hover-borderColor);
+      background-color: var(--hoverBorderColor);
       box-shadow:
-        inset 0 0 0 2px var(--RadioInputFacade-focus-shadowColor),
-        inset 0 0 0 4px var(--RadioInputFacade-background);
+        inset 0 0 0 2px var(--focusShadowColor),
+        inset 0 0 0 4px var(--background);
     }
   }
 
@@ -80,7 +80,7 @@
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--RadioInputFacade-toggle-color);
+    color: var(--toggleColor);
   }
 
   .facade {
@@ -94,40 +94,40 @@
     width: 100%;
     height: 100%;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    border-radius: calc(var(--RadioInputFacade-toggle-borderRadius) - var(--RadioInputFacade-toggle-borderWidth));
-    background: var(--RadioInputFacade-toggle-handle-background);
+    border-radius: calc(var(--toggleBorderRadius) - var(--toggleBorderWidth));
+    background: var(--toggleHandleBackground);
   }
 
   &.small {
     padding: 0 0.5rem;
-    height: var(--RadioInputFacade-toggle-small-height);
+    height: var(--toggleSmallHeight);
 
     .label {
       font-size: 0.65rem;
-      height: var(--RadioInputFacade-toggle-small-height);
-      line-height: var(--RadioInputFacade-toggle-small-height);
+      height: var(--toggleSmallHeight);
+      line-height: var(--toggleSmallHeight);
     }
   }
 
   &.medium {
     padding: 0 0.875rem;
-    height: var(--RadioInputFacade-toggle-medium-height);
+    height: var(--toggleMediumHeight);
 
     .label {
       font-size: 0.75rem;
-      height: var(--RadioInputFacade-toggle-medium-height);
-      line-height: var(--RadioInputFacade-toggle-medium-height);
+      height: var(--toggleMediumHeight);
+      line-height: var(--toggleMediumHeight);
     }
   }
 
   &.large {
     padding: 0 1rem;
-    height: var(--RadioInputFacade-toggle-large-height);
+    height: var(--toggleLargeHeight);
 
     .label {
       font-size: 0.85rem;
-      height: var(--RadioInputFacade-toggle-large-height);
-      line-height: var(--RadioInputFacade-toggle-large-height);
+      height: var(--toggleLargeHeight);
+      line-height: var(--toggleLargeHeight);
     }
   }
 
@@ -146,27 +146,27 @@
 
   input[type="radio"]:checked + & .label,
   &.checked .label {
-    color: var(--RadioInputFacade-toggle-handle-color);
+    color: var(--toggleHandleColor);
   }
 
   input[type="radio"]:focus + & .facade,
   &.focused .facade {
     box-shadow:
       0 3px 7px rgba(0, 0, 0, 0.3),
-      0 0 0 8px var(--RadioInputFacade-toggle-focus-color);
+      0 0 0 8px var(--toggleFocusColor);
   }
 
   &.success {
     input[type="radio"]:checked + & .label,
     &.checked .label {
-      color: var(--RadioInputFacade-toggle-success-color);
+      color: var(--toggleSuccessColor);
     }
   }
 
   &.danger {
     input[type="radio"]:checked + & .label,
     &.checked .label {
-      color: var(--RadioInputFacade-toggle-danger-color);
+      color: var(--toggleDangerColor);
     }
   }
 

@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  background: var(--Media-background);
+  background: var(--background);
 }
 
 .top {
@@ -12,21 +12,21 @@
 }
 
 .caption {
-  color: var(--Media-color);
-  font-family: var(--Media-fontFamily);
+  color: var(--color);
+  font-family: var(--fontFamily);
 }
 
 .figure {
-  margin: var(--Media-figure-margin);
+  margin: var(--figureMargin);
 }
 
 .title {
   display: block;
-  margin: var(--Media-title-margin);
+  margin: var(--titleMargin);
 }
 
 .description {
-  font-size: var(--Media-description-fontSize);
-  line-height: var(--Media-description-lineHeight);
-  font-weight: var(--Media-description-fontWeight);
+  font-size: var(--descriptionFontSize);
+  line-height: var(--descriptionLineHeight);
+  font-weight: var(--descriptionFontWeight);
 }

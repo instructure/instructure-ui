@@ -23,7 +23,7 @@ module.exports = function () {
     '}',
     'module.exports = {',
     '  components: [' + components.join(',') + ']',
-    '};'
+    '}'
   ].join('\n')
 }
 

@@ -1,19 +1,19 @@
 .root {
-  font-family: var(--TooltipContent-fontFamily);
-  font-weight: var(--TooltipContent-fontWeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
 }
 
 .small {
-  font-size: var(--TooltipContent-small-fontSize);
-  padding: var(--TooltipContent-small-padding);
+  font-size: var(--smallFontSize);
+  padding: var(--smallPadding);
 }
 
 .medium {
-  font-size: var(--TooltipContent-medium-fontSize);
-  padding: var(--TooltipContent-medium-padding);
+  font-size: var(--mediumFontSize);
+  padding: var(--mediumPadding);
 }
 
 .large {
-  font-size: var(--TooltipContent-large-fontSize);
-  padding: var(--TooltipContent-large-padding);
+  font-size: var(--largeFontSize);
+  padding: var(--largePadding);
 }

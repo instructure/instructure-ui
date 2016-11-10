@@ -4,11 +4,11 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  font-family: var(--Tooltip-trigger-fontFamily);
-  font-weight: var(--Tooltip-trigger-fontWeight);
+  font-family: var(--triggerFontFamily);
+  font-weight: var(--triggerFontWeight);
 
-  color: var(--Tooltip-trigger-color);
-  text-decoration: var(--Tooltip-trigger-textDecoration);
+  color: var(--triggerColor);
+  text-decoration: var(--triggerTextDecoration);
 
   transition: color 0.2s;
 
@@ -19,8 +19,8 @@
   &:focus,
   &:hover,
   &:active {
-    text-decoration: var(--Tooltip-trigger-hover-textDecoration);
-    color: var(--Tooltip-trigger-hover-color);
+    text-decoration: var(--triggerHoverTextDecoration);
+    color: var(--triggerHoverColor);
   }
 
   &[aria-disabled] {

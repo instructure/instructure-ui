@@ -1,7 +1,7 @@
 .facade {
-  color: var(--ToggleFacade-color);
-  background: var(--ToggleFacade-background);
-  border-color: var(--ToggleFacade-borderColor);
+  color: var(--color);
+  background: var(--background);
+  border-color: var(--borderColor);
 
   display: inline-flex;
   justify-content: flex-end;
@@ -12,15 +12,15 @@
   position: relative;
   box-sizing: border-box;
 
-  border-width: var(--ToggleFacade-borderWidth);
+  border-width: var(--borderWidth);
   border-style: solid;
-  border-radius: var(--ToggleFacade-borderRadius);
+  border-radius: var(--borderRadius);
 
-  margin-right: var(--ToggleFacade-marginRight);
+  margin-right: var(--marginRight);
   vertical-align: middle;
 
   &::before {
-    background: var(--ToggleFacade-handle-background);
+    background: var(--handleBackground);
     transition: all 0.2s ease-out;
     transform: translate3d(0, 0, 0);
     content: "";
@@ -30,7 +30,7 @@
     top: 0;
     left: 0;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    border-radius: calc(var(--ToggleFacade-borderRadius) - var(--ToggleFacade-borderWidth));
+    border-radius: calc(var(--borderRadius) - var(--borderWidth));
   }
 }
 
@@ -42,11 +42,11 @@
 
 .label {
   flex: 1;
-  color: var(--ToggleFacade-label-color);
-  font-family: var(--ToggleFacade-label-fontFamily);
-  font-weight: var(--ToggleFacade-label-fontWeight);
-  line-height: var(--ToggleFacade-label-lineHeight);
-  font-size: var(--ToggleFacade-label-fontSize);
+  color: var(--labelColor);
+  font-family: var(--labelFontFamily);
+  font-weight: var(--labelFontWeight);
+  line-height: var(--labelLineHeight);
+  font-size: var(--labelFontSize);
 }
 
 .root .facade {
@@ -56,8 +56,8 @@
   input[type="checkbox"]:checked + &,
   &.checked {
     justify-content: flex-start;
-    background: var(--ToggleFacade-checked-background);
-    border-color: var(--ToggleFacade-checked-borderColor);
+    background: var(--checkedBackground);
+    border-color: var(--checkedBorderColor);
 
     &::before {
       transform: translate3d(100%, 0, 0);
@@ -70,7 +70,7 @@
     &::before {
       box-shadow:
         0 3px 8px rgba(0, 0, 0, 0.4),
-        0 0 0 8px var(--ToggleFacade-focus-outlineColor);
+        0 0 0 8px var(--focusOutlineColor);
     }
   }
 

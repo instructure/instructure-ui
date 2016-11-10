@@ -2,7 +2,6 @@ import ${COMPONENT} from '../index'
 import { contrast } from '../../../util/color'
 
 describe('${COMPONENT}.theme', function () {
-
   describe('with the default theme', function () {
     const variables = ${COMPONENT}.generateTheme()
 

@@ -4,20 +4,20 @@
   max-width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  font-family: var(--Table-fontFamily);
-  font-weight: var(--Table-fontWeight);
-  font-size: var(--Table-fontSize);
-  color: var(--Table-color);
-  background: var(--Table-background);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  font-size: var(--fontSize);
+  color: var(--color);
+  background: var(--background);
 }
 
 /* stylelint-disable selector-no-type */
 
 caption {
   text-align: left;
-  background: var(--Table-background);
-  font-size: var(--Table-caption-fontSize);
-  color: var(--Table-caption-color);
+  background: var(--background);
+  font-size: var(--captionFontSize);
+  color: var(--captionColor);
 }
 
 tr {
@@ -31,7 +31,7 @@ td {
   border-bottom-style: solid;
   border-bottom-width: 1px;
   box-sizing: border-box;
-  border-bottom-color: var(--Table-borderColor);
+  border-bottom-color: var(--borderColor);
 }
 
 th {
@@ -39,54 +39,54 @@ th {
 }
 
 thead > th {
-  border-bottom-color: var(--Table-header-borderColor);
+  border-bottom-color: var(--headerBorderColor);
 }
 
 .small {
-  font-size: var(--Table-small-fontSize);
+  font-size: var(--smallFontSize);
 
   th,
   td {
-    line-height: var(--Table-small-lineHeight);
-    padding: var(--Table-small-padding);
+    line-height: var(--smallLineHeight);
+    padding: var(--smallPadding);
   }
 }
 
 .medium {
-  font-size: var(--Table-medium-fontSize);
+  font-size: var(--mediumFontSize);
 
   th,
   td {
-    line-height: var(--Table-medium-lineHeight);
-    padding: var(--Table-medium-padding);
+    line-height: var(--mediumLineHeight);
+    padding: var(--mediumPadding);
   }
 }
 
 .large {
-  font-size: var(--Table-large-fontSize);
+  font-size: var(--largeFontSize);
 
   th,
   td {
-    line-height: var(--Table-large-lineHeight);
-    padding: var(--Table-large-padding);
+    line-height: var(--largeLineHeight);
+    padding: var(--largePadding);
   }
 }
 
 .colStriped:not(.rowHeaders) {
   > tbody > tr > td:nth-child(odd) {
-    background-color: var(--Table-striped-background);
+    background-color: var(--stripedBackground);
   }
 }
 
 .colStriped.rowHeaders {
   > tbody > tr > td:nth-child(even) {
-    background-color: var(--Table-striped-background);
+    background-color: var(--stripedBackground);
   }
 }
 
 .rowStriped {
   > tbody > tr:nth-child(odd) {
-    background-color: var(--Table-striped-background);
+    background-color: var(--stripedBackground);
   }
 }
 
@@ -97,7 +97,7 @@ thead > th {
     border-right: 0.1875rem solid transparent;
 
     &:hover {
-      border-color: var(--Table-hover-borderColor);
+      border-color: var(--hoverBorderColor);
     }
   }
 }

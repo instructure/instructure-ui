@@ -1,0 +1,10 @@
+/* stylelint-disable selector-no-universal, declaration-no-important */
+
+* {
+  transform: none !important;
+  transition: none !important;
+  transition-property: none !important;
+  animation: none !important;
+}
+
+/* stylelint-enable selector-no-universal, declaration-no-important */

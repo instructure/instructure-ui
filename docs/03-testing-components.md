@@ -6,7 +6,7 @@
 
 ### The Details
 
-Component tests are written using the [mocha](https://mochajs.org/) testing framework and [chai](http://chaijs.com/api/bdd/) bdd style assertions. A test bed utility that is provided as a global function `createTestbed` (defined in `tests/util/react-testbed.js`)
+Component tests are written using the [mocha](https://mochajs.org/) testing framework and [chai](http://chaijs.com/api/bdd/) bdd style assertions. A test bed utility that is provided as a global function `createTestbed` (defined in `tests/util/testbed.js`)
 handles all of the common setup and teardown for your test. It also returns a test bed instance that provides some utilities for rendering components, updating props and stubbing out functions.
 
 #### To set up the test bed:

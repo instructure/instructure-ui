@@ -18,35 +18,35 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   outline: 0.1875rem solid transparent;
   outline-offset: -0.5rem;
 
-  font-family: var(--TextInput-fontFamily);
-  font-weight: var(--TextInput-fontWeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
 
-  border: var(--TextInput-borderWidth) var(--TextInput-borderStyle) var(--TextInput-borderColor);
-  border-radius: var(--TextInput-borderRadius);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
 
-  color: var(--TextInput-color);
-  background: var(--TextInput-background);
+  color: var(--color);
+  background: var(--background);
 
-  padding: var(--TextInput-padding);
+  padding: var(--padding);
 
   &:focus {
-    border-color: var(--TextInput-focus-borderColor);
-    outline: 0.1875rem solid var(--TextInput-focus-outlineColor);
+    border-color: var(--focusBorderColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
     outline-offset: -0.1875rem;
     box-shadow: initial;
   }
 
   &[aria-invalid] {
-    border-color: var(--TextInput-error-borderColor);
+    border-color: var(--errorBorderColor);
 
     &:focus {
-      border-color: var(--TextInput-error-borderColor);
-      outline-color: var(--TextInput-error-outlineColor);
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
     }
   }
 
   &::placeholder {
-    color: var(--TextInput-placeholder-color);
+    color: var(--placeholderColor);
   }
 
   &[aria-disabled] {
@@ -56,17 +56,17 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   }
 
   &.small {
-    font-size: var(--TextInput-small-fontSize);
-    height: var(--TextInput-small-height);
+    font-size: var(--smallFontSize);
+    height: var(--smallHeight);
   }
 
   &.medium {
-    font-size: var(--TextInput-medium-fontSize);
-    height: var(--TextInput-medium-height);
+    font-size: var(--mediumFontSize);
+    height: var(--mediumHeight);
   }
 
   &.large {
-    font-size: var(--TextInput-large-fontSize);
-    height: var(--TextInput-large-height);
+    font-size: var(--largeFontSize);
+    height: var(--largeHeight);
   }
 }

@@ -10,13 +10,13 @@
 
 .content {
   box-sizing: border-box;
-  padding: var(--TabPanel-padding);
+  padding: var(--padding);
   width: 100%;
-  border-width: var(--TabPanel-borderWidth);
-  border-style: var(--TabPanel-borderStyle);
-  background: var(--TabPanel-background);
-  border-color: var(--TabPanel-borderColor);
-  color: var(--TabPanel-color);
+  border-width: var(--borderWidth);
+  border-style: var(--borderStyle);
+  background: var(--background);
+  border-color: var(--borderColor);
+  color: var(--color);
 }
 
 .content--enter {

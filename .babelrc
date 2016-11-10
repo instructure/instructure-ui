@@ -2,15 +2,20 @@
   "presets": ["es2015", "stage-1", "react"],
   "plugins": [
     "transform-decorators-legacy",
-    "./babel/plugins/class-display-name"
+    "./babel/plugins/transform-class-display-name"
   ],
   "env": {
     "development": {
       "presets": ["react-hmre"]
     },
+    "production": {
+      "plugins": [
+        ["./babel/plugins/transform-themeable", { "postcssrc": "./postcss.config.js" }]
+      ]
+    },
     "transpile": {
       "plugins": [
-        ["webpack-loaders", { "config": "./webpack/transpile.config.js", "verbose": true }]
+        ["./babel/plugins/transform-themeable", { "postcssrc": "./postcss.config.js" }]
       ]
     },
     "test": {

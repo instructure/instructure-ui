@@ -33,13 +33,13 @@
 }
 
 .initials {
-  color: var(--Avatar-color);
-  background-color: var(--Avatar-background);
+  color: var(--color);
+  background-color: var(--background);
   line-height: 2em;
   text-align: center;
 
-  font-family: var(--Avatar-fontFamily);
-  font-weight: var(--Avatar-fontWeight);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
   letter-spacing: 0.0313em;
 }
 

@@ -8,7 +8,7 @@
   }
 
   + .root {
-    margin-top: var(--FormFieldGroup-marginTop);
+    margin-top: var(--marginTop);
   }
 }
 

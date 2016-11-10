@@ -2,7 +2,7 @@
 
 .root {
   > label {
-    margin-top: var(--CheckboxGroup-marginTop);
+    margin-top: var(--marginTop);
   }
 }
 
