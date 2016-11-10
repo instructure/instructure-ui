@@ -15,7 +15,7 @@ input[type].input { /* stylelint-disable-line selector-no-type */
 
   transition: all 0.2s ease-out;
 
-  outline: transparent solid 0.1875rem;
+  outline: 0.1875rem solid transparent;
   outline-offset: -0.5rem;
 
   font-family: var(--TextInput-fontFamily);
@@ -31,7 +31,7 @@ input[type].input { /* stylelint-disable-line selector-no-type */
 
   &:focus {
     border-color: var(--TextInput-focus-borderColor);
-    outline: var(--TextInput-focus-outlineColor) solid 0.1875rem;
+    outline: 0.1875rem solid var(--TextInput-focus-outlineColor);
     outline-offset: -0.1875rem;
     box-shadow: initial;
   }
@@ -70,5 +70,3 @@ input[type].input { /* stylelint-disable-line selector-no-type */
     height: var(--TextInput-large-height);
   }
 }
-
-
