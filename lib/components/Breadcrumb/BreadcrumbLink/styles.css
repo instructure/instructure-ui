@@ -9,7 +9,19 @@
   width: 100%;
 }
 
+.ellipsis {
+  box-sizing: border-box;
+  display: block;
+  vertical-align: middle;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
 .text {
   font-family: var(--BreadcrumbLink-fontFamily);
   color: var(--BreadcrumbLink-color);
 }
+
