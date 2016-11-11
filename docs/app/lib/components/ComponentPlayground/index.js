@@ -14,7 +14,8 @@ export default class ComponentPlayground extends Component {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
     brand: PropTypes.string,
-    variant: PropTypes.string
+    variant: PropTypes.string,
+    language: PropTypes.string
   }
 
   constructor (props) {
@@ -146,7 +147,7 @@ export default class ComponentPlayground extends Component {
             </svg>
           </Button>
 
-          <CodePenButton code={code} title={this.props.name} />
+          <CodePenButton code={code} title={this.props.name} language={this.props.language} />
         </div>
       </div>
     )

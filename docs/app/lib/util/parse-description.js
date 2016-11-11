@@ -8,9 +8,14 @@ export default function parseDescription (markdown) {
 
   const renderer = new marked.Renderer()
   renderer.code = function (code, language) {
-    if (language === 'jsx_example' || language === 'jsx_example_inverse') {
-      const variant = (language === 'jsx_example_inverse') ? 'inverse' : null
-      examples.push({ code, variant })
+    if (language === 'jsx_example' ||
+        language === 'jsx_example_inverse' ||
+        language === 'js_example' ||
+        language === 'js_example_inverse') {
+      const variant = (language === 'jsx_example_inverse' || language === 'js_example_inverse') ? 'inverse' : null
+      const lang = (language === 'js_example' || language === 'js_example_inverse') ? 'js' : 'jsx'
+      examples.push({ code, variant, lang })
+
       return EXAMPLE_PLACEHOLDER
     } else {
       return marked.Renderer.prototype.code.apply(this, arguments)
@@ -32,7 +37,8 @@ export default function parseDescription (markdown) {
       sections.push({
         type: 'code',
         variant: example.variant,
-        content: example.code
+        content: example.code,
+        language: example.lang
       })
     }
   })

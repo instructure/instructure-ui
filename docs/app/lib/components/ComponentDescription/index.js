@@ -26,6 +26,7 @@ export default class ComponentDescription extends Component {
               code={section.content}
               brand={this.props.brand}
               variant={section.variant}
+              language={section.language}
               key={i} />
           )
         case 'html':

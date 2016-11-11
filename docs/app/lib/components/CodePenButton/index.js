@@ -5,15 +5,20 @@ import { ScreenReaderContent } from 'instructure-ui'
 
 import config from 'config!'
 
-const CodePenButton = function ({ code, title }) {
+const CodePenButton = function ({ code, title, language }) {
   const { library } = config
-  const js = `
+  const js = (language === 'jsx')
+  ? `
   const Example = function () {
     return (
       ${code}
     )
   }
 
+  ReactDOM.render(<Example />, document.getElementById('example'))
+  `
+  : `
+  ${code}
   ReactDOM.render(<Example />, document.getElementById('example'))
   `
   const data = {
@@ -113,7 +118,8 @@ const CodePenButton = function ({ code, title }) {
 
 CodePenButton.propTypes = {
   code: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  language: PropTypes.string.isRequired
 }
 
 export default CodePenButton
