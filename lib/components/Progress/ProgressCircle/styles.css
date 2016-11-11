@@ -206,4 +206,24 @@
   .meter {
     opacity: 0;
   }
+
+  /* stylelint-disable declaration-no-important */
+
+  /*
+     Using !important here to guarantee that the bars will start showing
+     0 if the animateOnMount prop is set
+  */
+
+  &.small .meter {
+    stroke-dashoffset: var(--ProgressCircle-small-circumference) !important;
+  }
+
+  &.medium .meter {
+    stroke-dashoffset: var(--ProgressCircle-medium-circumference) !important;
+  }
+
+  &.large .meter {
+    stroke-dashoffset: var(--ProgressCircle-large-circumference) !important;
+  }
+  /* stylelint-enable declaration-no-important */
 }
