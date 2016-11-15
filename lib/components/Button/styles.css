@@ -77,7 +77,7 @@
     left: -0.3125rem;
     right: -0.3125rem;
     bottom: -0.3125rem;
-    border: var(--Button-default-focus-border);
+    border: var(--Button-focus-border);
     border-radius: var(--Button-focus-borderRadius);
     opacity: 0;
   }
@@ -163,12 +163,6 @@
   &:hover,
   &:active {
     background: var(--Button-ghost-hover-background);
-  }
-
-  &:focus {
-    &::before {
-      border: var(--Button-ghost-focus-border);
-    }
   }
 
   &:active {
