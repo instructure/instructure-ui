@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "0.17.2",
+  "version": "0.17.3",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
@@ -1266,6 +1266,12 @@
       "version": "5.19.0",
       "from": "codemirror@>=5.19.0 <5.20.0",
       "resolved": "https://registry.npmjs.org/codemirror/-/codemirror-5.19.0.tgz",
+      "dev": true
+    },
+    "collections": {
+      "version": "0.2.2",
+      "from": "collections@>=0.2.0 <0.3.0",
+      "resolved": "https://registry.npmjs.org/collections/-/collections-0.2.2.tgz",
       "dev": true
     },
     "color": {
@@ -3399,6 +3405,38 @@
         }
       }
     },
+    "gh-pages": {
+      "version": "0.11.0",
+      "from": "gh-pages@latest",
+      "resolved": "https://registry.npmjs.org/gh-pages/-/gh-pages-0.11.0.tgz",
+      "dev": true,
+      "dependencies": {
+        "async": {
+          "version": "1.5.2",
+          "from": "async@1.5.2",
+          "resolved": "https://registry.npmjs.org/async/-/async-1.5.2.tgz",
+          "dev": true
+        },
+        "glob": {
+          "version": "6.0.4",
+          "from": "glob@>=6.0.1 <7.0.0",
+          "resolved": "https://registry.npmjs.org/glob/-/glob-6.0.4.tgz",
+          "dev": true
+        },
+        "globby": {
+          "version": "4.1.0",
+          "from": "globby@>=4.0.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/globby/-/globby-4.1.0.tgz",
+          "dev": true
+        },
+        "graceful-fs": {
+          "version": "4.1.2",
+          "from": "graceful-fs@4.1.2",
+          "resolved": "https://registry.npmjs.org/graceful-fs/-/graceful-fs-4.1.2.tgz",
+          "dev": true
+        }
+      }
+    },
     "glob": {
       "version": "7.1.1",
       "from": "glob@>=7.1.0 <7.2.0",
@@ -4820,6 +4858,12 @@
       "resolved": "https://registry.npmjs.org/mime-types/-/mime-types-2.1.12.tgz",
       "dev": true
     },
+    "mimeparse": {
+      "version": "0.1.4",
+      "from": "mimeparse@>=0.1.4 <0.2.0",
+      "resolved": "https://registry.npmjs.org/mimeparse/-/mimeparse-0.1.4.tgz",
+      "dev": true
+    },
     "min-document": {
       "version": "2.19.0",
       "from": "min-document@>=2.19.0 <3.0.0",
@@ -5769,6 +5813,20 @@
       "resolved": "https://registry.npmjs.org/q/-/q-1.4.1.tgz",
       "dev": true
     },
+    "q-io": {
+      "version": "1.13.2",
+      "from": "q-io@1.13.2",
+      "resolved": "https://registry.npmjs.org/q-io/-/q-io-1.13.2.tgz",
+      "dev": true,
+      "dependencies": {
+        "qs": {
+          "version": "1.2.2",
+          "from": "qs@>=1.2.1 <2.0.0",
+          "resolved": "https://registry.npmjs.org/qs/-/qs-1.2.2.tgz",
+          "dev": true
+        }
+      }
+    },
     "qjobs": {
       "version": "1.1.5",
       "from": "qjobs@>=1.1.4 <2.0.0",
@@ -6133,7 +6191,7 @@
     },
     "rimraf": {
       "version": "2.5.4",
-      "from": "rimraf@>=2.5.0 <3.0.0",
+      "from": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.4.tgz",
       "resolved": "https://registry.npmjs.org/rimraf/-/rimraf-2.5.4.tgz",
       "dev": true
     },
@@ -6984,6 +7042,12 @@
       "resolved": "https://registry.npmjs.org/url-parse/-/url-parse-1.1.7.tgz",
       "dev": true
     },
+    "url2": {
+      "version": "0.0.0",
+      "from": "url2@>=0.0.0 <0.0.1",
+      "resolved": "https://registry.npmjs.org/url2/-/url2-0.0.0.tgz",
+      "dev": true
+    },
     "user-home": {
       "version": "1.1.1",
       "from": "user-home@>=1.1.1 <2.0.0",
@@ -7100,6 +7164,12 @@
           "dev": true
         }
       }
+    },
+    "weak-map": {
+      "version": "1.0.0",
+      "from": "weak-map@1.0.0",
+      "resolved": "https://registry.npmjs.org/weak-map/-/weak-map-1.0.0.tgz",
+      "dev": true
     },
     "webpack": {
       "version": "1.13.3",
@@ -7219,6 +7289,12 @@
       "version": "1.0.2",
       "from": "wrappy@>=1.0.0 <2.0.0",
       "resolved": "https://registry.npmjs.org/wrappy/-/wrappy-1.0.2.tgz",
+      "dev": true
+    },
+    "wrench": {
+      "version": "1.5.8",
+      "from": "wrench@1.5.8",
+      "resolved": "https://registry.npmjs.org/wrench/-/wrench-1.5.8.tgz",
       "dev": true
     },
     "write": {

@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
 COMPONENTS_DIR=lib/components
-COMPONENT_TEMPLATE_DIR=$BASE_PATH/templates/component
+COMPONENT_TEMPLATE_DIR=templates/component
 
 read -p 'Component name: ' component
 

@@ -8,7 +8,7 @@
     "development": {
       "presets": ["react-hmre"]
     },
-    "build": {
+    "transpile": {
       "plugins": [
         ["webpack-loaders", { "config": "./webpack/transpile.config.js", "verbose": true }]
       ]
