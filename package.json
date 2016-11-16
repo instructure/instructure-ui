@@ -11,24 +11,29 @@
   "homepage": "https://github.com/instructure/instructure-ui",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "start": "./bin/instui docs && ./bin/instui server",
-    "start:watch": "./bin/instui dev-server",
-    "test": "NODE_ENV=test karma start --single-run --coverage --ci",
+    "prestart": "npm run clean && npm install && npm run docs:build",
+    "start": "http-server __build__/docs -p 8001",
+    "start:watch": "webpack-dev-server --hot --inline --config webpack/docs.config.js",
+    "test": "cross-env NODE_ENV=test karma start --single-run --coverage --ci",
     "test:lint": "eslint lib",
-    "test:watch": "NODE_ENV=test karma start",
-    "build": "./bin/instui build && ./bin/instui docs",
-    "generate": "./bin/instui generate",
-    "bump": "./bin/instui bump",
-    "release": "./bin/instui release && ./bin/instui pages"
-  },
-  "nyc": {
-    "include": [
-      "lib"
-    ],
-    "exclude": [
-      "**/*.test.js",
-      "__tests__"
-    ]
+    "test:watch": "cross-env NODE_ENV=test karma start",
+    "generate": "./scripts/generate",
+    "clean": "rimraf __build__",
+    "docs": "webpack --config webpack/docs.config.js",
+    "docs:build": "cross-env NODE_ENV=production webpack --config webpack/docs.config.js",
+    "dist": "cross-env NODE_ENV=production webpack --config webpack/dist.config.js",
+    "dist:min": "cross-env MINIFY=1 NODE_ENV=production webpack --config webpack/dist.config.js",
+    "transpile": "cross-env NODE_ENV=transpile BABEL_DISABLE_CACHE=1 babel lib --out-dir __build__/lib --ignore *.test.js",
+    "build": "npm run clean && npm run dist && npm run dist:min && npm run transpile",
+    "bump": "./scripts/bump",
+    "bump:major": "./scripts/bump major",
+    "bump:minor": "./scripts/bump minor",
+    "bump:patch": "./scripts/bump patch",
+    "prerelease": "npm install && npm test && npm run build",
+    "release": "./scripts/release",
+    "release:beta": "./scripts/release -t beta",
+    "release:rc": "./scripts/release -t rc",
+    "deploy": "npm run docs:build && gh-pages -d __build__/docs -r git@github.com:instructure/instructure-ui.git"
   },
   "license": "MIT",
   "devDependencies": {
@@ -49,6 +54,7 @@
     "babel-standalone": "~6.15.0",
     "chai": "~3.5.0",
     "codemirror": "~5.19.0",
+    "cross-env": "~3.1.3",
     "css-loader": "~0.25.0",
     "eslint": "~3.6.0",
     "eslint-config-standard": "~6.0.1",
@@ -60,6 +66,7 @@
     "eslint-plugin-react": "~6.1.2",
     "eslint-plugin-standard": "~2.0.0",
     "file-loader": "~0.9.0",
+    "gh-pages": "~0.11.0",
     "glob": "~7.1.0",
     "html-loader": "~0.4.3",
     "html-webpack-plugin": "~2.22.0",
@@ -100,6 +107,7 @@
     "react-addons-test-utils": "~15.3.1",
     "react-docgen": "~2.10.0",
     "react-dom": "~15.3.1",
+    "rimraf": "~2.5.4",
     "script-loader": "~0.7.0",
     "sinon": "~1.17.3",
     "sinon-chai": "~2.8.0",

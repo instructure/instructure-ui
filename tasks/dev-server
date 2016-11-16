@@ -1,9 +1,0 @@
-#!/bin/bash -e
-
-server=$MODULES_PATH/.bin/webpack-dev-server
-
-exec $server --inline --hot -d --progress \
-  --host 0.0.0.0 \
-  --port 8080 \
-  --config $BASE_PATH/webpack.config.js \
-  --content-base $BUILD_PATH/docs "$@"

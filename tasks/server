@@ -1,5 +1,0 @@
-#!/bin/bash -e
-
-server=$MODULES_PATH/.bin/http-server
-
-exec $server $BUILD_PATH/docs -p 8001

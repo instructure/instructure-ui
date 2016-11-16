@@ -9,10 +9,9 @@ function program_is_installed {
   echo "$return_"
 }
 
-if [ ! $(program_is_installed nvm) ]
-  then
-    echo "-- install nvm...";
-    curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
+if [ ! $(program_is_installed nvm) ]; then
+  echo "-- install nvm...";
+  curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash
 fi
 
 echo "-- install node"

@@ -1,7 +1,0 @@
-#!/bin/bash -e
-
-webpack=$MODULES_PATH/.bin/webpack
-
-# Generate bundles in dist dir
-NODE_ENV=production $webpack --config $BASE_PATH/webpack/dist.config.js
-NODE_ENV=production MINIFY=1 $webpack --config $BASE_PATH/webpack/dist.config.js
