@@ -21,7 +21,7 @@ export default class DocsApp extends Component {
     this.state = {
       menuSearch: '',
       showMenu: true,
-      brand: 'inst'
+      brand: 'canvas'
     }
   }
 

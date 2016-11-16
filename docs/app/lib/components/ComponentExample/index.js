@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react'
-import { ApplyTheme, generateTheme } from 'instructure-ui'
+import { ApplyTheme, themeable } from 'instructure-ui'
 import { transform } from 'babel-standalone'
 
 import styles from './ComponentExample.css'
@@ -86,7 +86,7 @@ export default class ComponentExample extends Component {
 
     return (
       <div className={styles.root}>
-        {example && <ApplyTheme theme={generateTheme(this.props.brand)}>{example}</ApplyTheme>}
+        {example && <ApplyTheme theme={themeable.generateTheme(this.props.brand)}>{example}</ApplyTheme>}
         {error && <div className={styles.errorBg} />}
         {error && <pre className={styles.error}>{error}</pre>}
       </div>
