@@ -6,7 +6,7 @@ Installation steps:
 
 1. Install [Git](http://git-scm.com/).
 2. Clone this repository.
-3. Optionally run `./bin/instui install` to install [Node](https://nodejs.org/en/)) via [nvm](https://github.com/creationix/nvm).
+3. Optionally run `./scripts/install` to install [Node](https://nodejs.org/en/)) via [nvm](https://github.com/creationix/nvm).
 4. Run `npm install`
 
 

@@ -1,0 +1,139 @@
+#!/bin/bash -e
+
+########################################
+# Make sure working directory is clean #
+########################################
+if [ ! -z "$(git status --porcelain)" ]; then
+  echo Refusing to operate on unclean working directory
+  echo Use \"git status\" to see which files have been modified
+  exit 1
+fi
+
+############################
+# Store the current branch #
+############################
+BRANCH=$(git rev-parse --abbrev-ref HEAD)
+
+build_path=__build__
+
+################
+# Read options #
+################
+while getopts ":t:c:v:p:" opt; do
+  case $opt in
+    t)
+      echo "-t (release tag): $OPTARG" >&2
+      tag=" --tag $OPTARG"
+      ;;
+    c)
+      echo "-c (commit sha): $OPTARG" >&2
+      commit_sha=$OPTARG
+      ;;
+    v)
+      echo "-c (version): $OPTARG" >&2
+      next_version=$OPTARG
+      ;;
+    p)
+      echo "-p (build directory path): $OPTARG" >&2
+      build_path=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+########################
+# Determine the commit #
+########################
+if ! [[ $commit_sha ]]; then
+  printf "Enter commit SHA or tag to release: "
+  read commit_sha
+fi
+
+if ! [[ $commit_sha ]]; then
+  echo >&2 "Commit SHA or tag is required to release"
+  exit 1
+fi
+
+########################
+# Check out the commit #
+########################
+printf "Checking out $commit_sha ...\n"
+git fetch origin
+git checkout $commit_sha
+
+#########################
+# Determine the version #
+#########################
+current_version=$(node -p "require('./package').version")
+
+if ! [[ $next_version ]]; then
+  printf "Enter version or <ENTER> to release $current_version: "
+  read next_version
+fi
+
+if ! [[ $next_version ]]; then
+  next_version=$current_version
+fi
+
+if ! [[ $next_version =~ ^[0-9]\.[0-9]+\.[0-9](-.+)? ]]; then
+  echo >&2 "Version \"$next_version\" is not valid! It must be a valid semver string like 1.0.2 or 2.3.0-beta.1"
+  git checkout $BRANCH
+  exit 1
+fi
+
+##############################################################
+# If the version doesn't match package.json, tag the release #
+##############################################################
+if [[ "$current_version" != "$next_version" ]]; then
+  if ! [[ $tag ]]; then
+    tag=" --tag rc"
+  fi
+fi
+
+#######################
+# Prepare the release #
+#######################
+printf "Building version $next_version ...\n"
+npm run pre-release
+
+cp README.md $build_path/
+cp .npmignore $build_path/
+cp LICENSE $build_path/
+node -p "p=require(\"./package\");p.scripts=p.devDependencies=undefined;p.version=\"$next_version\";JSON.stringify(p,null,2)" > $build_path/package.json
+
+##############################
+# Publish the release to npm #
+##############################
+printf "Running npm publish $build_path$tag\n"
+npm publish $build_path$tag
+
+###########################
+# Deploy docs to gh-pages #
+###########################
+if ! [[ $tag ]]; then
+  printf "Deploying version $next_version of the documentation...\n"
+  npm run deploy
+fi
+
+######################
+# Tag release commit #
+######################
+printf "Tagging version $next_version ...\n"
+
+release_tag="v$next_version"
+git tag -am "Version $next_version" $release_tag
+git push origin $release_tag
+
+
+#######################################
+# Success!!!! Return to origin branch #
+#######################################
+printf "Version $next_version was successfully released!\n"
+git checkout $BRANCH

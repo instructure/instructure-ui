@@ -6,5 +6,5 @@ To debug your tests and component code in the browser:
 3. Now you can add breakpoints in the test code or the component code to debug issues. (`Command + P` in the 'Sources' tab)
 
 If you'd like to run the tests in a different browser (e.g. Firefox or Safari), you can run
-`./bin/instui test --browsers=Firefox --debug`.
+`NODE_ENV=test karma start --browsers=Firefox`.
 

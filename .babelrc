@@ -8,13 +8,20 @@
     "development": {
       "presets": ["react-hmre"]
     },
-    "build": {
+    "transpile": {
       "plugins": [
         ["webpack-loaders", { "config": "./webpack/transpile.config.js", "verbose": true }]
       ]
     },
     "test": {
-      "plugins": ["istanbul"]
+      "plugins": [
+        [
+          "istanbul", {
+            "include": ["lib"],
+            "exclude": ["**/*.test.js", "__tests__"]
+          }
+        ]
+      ]
     }
   }
 }
