@@ -26,6 +26,10 @@
   color: var(--Typography-brand-color);
 }
 
+.color-warning {
+  color: var(--Typography-warning-color);
+}
+
 .color-error {
   color: var(--Typography-error-color);
 }

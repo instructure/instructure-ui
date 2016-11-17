@@ -36,6 +36,48 @@
   line-height: inherit;
 }
 
+.border-top {
+  padding-top: var(--Heading-border-padding);
+  border-top: var(--Heading-border-width) var(--Heading-border-style) var(--Heading-border-color);
+}
+
+.border-bottom {
+  padding-bottom: var(--Heading-border-padding);
+  border-bottom: var(--Heading-border-width) var(--Heading-border-style) var(--Heading-border-color);
+}
+
+.color-primary {
+  color: var(--Heading-primary-color);
+}
+
+.color-secondary {
+  color: var(--Heading-secondary-color);
+}
+
+.color-primary-inverse {
+  color: var(--Heading-primary-inverse-color);
+}
+
+.color-secondary-inverse {
+  color: var(--Heading-secondary-inverse-color);
+}
+
+.color-success {
+  color: var(--Heading-success-color);
+}
+
+.color-warning {
+  color: var(--Heading-warning-color);
+}
+
+.color-brand {
+  color: var(--Heading-brand-color);
+}
+
+.color-error {
+  color: var(--Heading-error-color);
+}
+
 .reset {
   margin: 0;
   font-size: inherit;
