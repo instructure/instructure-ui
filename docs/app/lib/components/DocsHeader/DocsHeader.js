@@ -10,12 +10,14 @@ export default class DocsHeader extends Component {
     return (
       <div className={styles.root}>
         <div className={styles.banner} role="banner">
-          <h1 className={styles.heading}>
-            {library.name}
-          </h1>
-          <div className={styles.version}>
+          <a href="/" className={styles.headingLink}>
+            <h1 className={styles.heading}>
+              {library.name}
+            </h1>
+          </a>
+          <h2 className={styles.version}>
             v{library.version}
-          </div>
+          </h2>
         </div>
       </div>
     )

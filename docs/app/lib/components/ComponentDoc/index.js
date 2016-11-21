@@ -43,7 +43,7 @@ export default class ComponentDoc extends Component {
     const {
       theme
     } = this.props
-    return theme ? (
+    return theme && Object.keys(theme).length > 0 ? (
       <div>
         <h3 className={styles.sectionHeading} id={name + 'Theme'}>
           Theme Variables
@@ -102,7 +102,7 @@ export default class ComponentDoc extends Component {
           {name}
         </h2>
         <div className={styles.path}>
-          <Link theme={{textColor: '#25a19f'}} href={githubRoot + path}>
+          <Link href={githubRoot + path}>
             {path}
           </Link>
         </div>

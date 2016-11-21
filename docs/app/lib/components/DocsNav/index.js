@@ -30,7 +30,7 @@ export default class DocsNav extends Component {
 
   linkTheme (isSelected) {
     return {
-      color: isSelected ? '#25a19f' : '#333',
+      color: isSelected ? '#008ee2' : '#333',
       textDecoration: 'none'
     }
   }

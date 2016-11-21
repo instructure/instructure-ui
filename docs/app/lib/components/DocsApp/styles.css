@@ -1,7 +1,8 @@
 :root {
-  --foregroundColor: #919191;
+  --foregroundColor: #73818c;
   --backgroundColor: #fff;
-  --focusColor: #25a19f;
+  --focusColor: #008ee2;
+  --borderColor: #c7cdd1;
 }
 
 /* stylelint-disable selector-no-type */
@@ -45,12 +46,12 @@ code[class^="lang-"] {
 
 .sidebar {
   box-sizing: border-box;
-  height: calc(100% - 8.25rem);
+  height: 100%;
   width: 16.5rem;
   position: fixed;
   z-index: 997;
   left: 0;
-  top: 8.25rem; /* height of DocsHeader */
+  top: 0;
 }
 
 .sidebar .nav {
@@ -59,7 +60,8 @@ code[class^="lang-"] {
   width: 14rem;
   overflow-y: auto;
   overflow-x: hidden;
-  border-right: 1px solid var(--foregroundColor);
+  border-right: 1px solid var(--borderColor);
+  background-color: #fff;
 }
 
 .container {
@@ -68,12 +70,6 @@ code[class^="lang-"] {
   padding-left: 16.5rem;
   transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1) 0.2s;
   transform: translate3d(-14rem, 0, 0);
-}
-
-.header {
-  position: fixed;
-  width: 100%;
-  z-index: 998; /* has to be less than the full screen mode of ComponentPlayground/ComponentPreview */
 }
 
 .content {
@@ -94,9 +90,9 @@ code[class^="lang-"] {
 .menuToggle {
   cursor: pointer;
   background: var(--backgroundColor);
-  border-right: 1px solid var(--foregroundColor);
+  border-right: 1px solid var(--borderColor);
   border-left: 2px solid #fff;
-  border-bottom: 1px solid var(--foregroundColor);
+  border-bottom: 1px solid var(--borderColor);
   border-bottom-right-radius: 3px;
   position: absolute;
   padding: 0.5rem 0.8rem;
@@ -108,14 +104,13 @@ code[class^="lang-"] {
 .footer {
   margin-top: 3rem;
   padding: 2rem;
+  text-align: center;
   font-weight: 300;
+  line-height: 1rem;
 }
 
-.icon {
-  display: inline-block;
+.footerIcon {
   vertical-align: middle;
-  padding: 0 0.25rem;
-  line-height: 1;
 }
 
 .hamburger {
@@ -205,17 +200,8 @@ code[class^="lang-"] {
   }
 }
 
-@media only screen and (max-width: 48rem) {
-  .sidebar {
-    top: 5rem;
-    height: calc(100% - 5rem);
-  }
-}
-
 .githubLink {
-  color: #666;
-  line-height: 1em;
-  padding-left: 1em;
+  color: black;
 }
 
 .themeSelect {

@@ -4,10 +4,10 @@ import CodeEditor from '../CodeEditor'
 import ComponentPreview from '../ComponentPreview'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
-import { ScreenReaderContent, Transition } from 'instructure-ui'
+import { ScreenReaderContent } from 'instructure-ui'
 import classnames from 'classnames'
 
-import styles from './ComponentPlayground.css'
+import styles from './styles.css'
 
 export default class ComponentPlayground extends Component {
   static propTypes = {
@@ -111,9 +111,7 @@ export default class ComponentPlayground extends Component {
           name={this.props.name}
           isFullScreen={this.state.isFullScreen} />
 
-        <Transition in={this.state.showCode} transitionOnMount type="slide-up">
-          {this.state.showCode ? this.renderEditor() : null}
-        </Transition>
+        { this.state.showCode && this.renderEditor() }
 
         <div className={styles.actions}>
           <Button onClick={this.handleMaximize} ref="fullScreenButton">

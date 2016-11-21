@@ -1,11 +1,11 @@
 .root {
   color: #333;
   background: #fff;
-  padding: 0.75rem;
+  padding: 0.1rem 0.75rem 0.75rem;
 }
 
 .header {
-  color: #25a19f;
+  color: #008ee2;
   font-size: 0.875rem;
   padding: 1rem;
   text-transform: uppercase;
@@ -33,7 +33,7 @@
 }
 
 .selectedLink {
-  color: #25a19f;
+  color: #008ee2;
   font-weight: 700;
 }
 
