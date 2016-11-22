@@ -1,12 +1,11 @@
-/* eslint no-var: 0 */
 'use strict'
 
-var path = require('path')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var webpack = require('webpack')
-var config = require('./util/config')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const webpack = require('webpack')
+const config = require('./util/config')
 
-var entry = {
+const entry = {
   'example': [ path.join(config.docsAppPath, 'lib/example.js') ],
   'docs': [
     path.join(config.docsAppPath, 'lib/index.js')
@@ -47,5 +46,10 @@ module.exports = require('./util/generate-config')({
       chunks: ['example', config.library.packageName, 'common']
     }),
     new webpack.optimize.CommonsChunkPlugin('common', 'common.js')
-  ]
+  ],
+  devServer: {
+    contentBase: config.docsPath,
+    host: '0.0.0.0',
+    port: 8080
+  }
 })
