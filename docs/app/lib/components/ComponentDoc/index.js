@@ -16,7 +16,7 @@ export default class ComponentDoc extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
-    brand: PropTypes.string,
+    themeKey: PropTypes.string,
     doc: PropTypes.object,
     theme: PropTypes.object
   }
@@ -56,12 +56,12 @@ export default class ComponentDoc extends Component {
   renderDescription () {
     const {
       name,
-      brand,
+      themeKey,
       doc
     } = this.props
     return doc.description ? (
       <div className={styles.description}>
-        <ComponentDescription name={name} brand={brand} description={doc.description} />
+        <ComponentDescription name={name} themeKey={themeKey} description={doc.description} />
       </div>
     ) : null
   }

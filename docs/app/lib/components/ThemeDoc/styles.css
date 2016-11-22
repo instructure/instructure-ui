@@ -1,0 +1,19 @@
+.root {
+  margin-top: 2rem;
+
+  :global code { /* stylelint-disable-line selector-no-type */
+    background: transparent;
+    border: none;
+  }
+}
+
+.section {
+  margin: 1rem 0;
+}
+
+.heading {
+  margin: 0;
+  padding: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}

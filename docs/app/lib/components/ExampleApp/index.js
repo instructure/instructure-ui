@@ -23,7 +23,7 @@ export default class ExampleApp extends Component {
 
     this.state = {
       code: null,
-      brand: null,
+      themeKey: null,
       variant: null
     }
 
@@ -64,7 +64,7 @@ export default class ExampleApp extends Component {
   }
 
   render () {
-    const { variant, code, brand } = this.state
-    return <ComponentExample variant={variant} code={code} brand={brand} />
+    const { variant, code, themeKey } = this.state
+    return <ComponentExample variant={variant} code={code} themeKey={themeKey} />
   }
 }

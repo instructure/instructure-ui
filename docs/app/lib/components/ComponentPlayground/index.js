@@ -13,7 +13,7 @@ export default class ComponentPlayground extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
-    brand: PropTypes.string,
+    themeKey: PropTypes.string,
     variant: PropTypes.string,
     language: PropTypes.string
   }
@@ -106,7 +106,7 @@ export default class ComponentPlayground extends Component {
         <ComponentPreview
           code={code}
           variant={this.props.variant}
-          brand={this.props.brand}
+          themeKey={this.props.themeKey}
           onMinimize={this.handleMinimize}
           name={this.props.name}
           isFullScreen={this.state.isFullScreen} />

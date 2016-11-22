@@ -4,9 +4,10 @@ import ComponentDoc from '../ComponentDoc'
 import DocsHeader from '../DocsHeader'
 import DocsNav from '../DocsNav'
 import HtmlDoc from '../HtmlDoc'
+import ThemeDoc from '../ThemeDoc'
 import DocsSection from '../DocsSection'
 
-import { ScreenReaderContent, Transition, Select, Brands } from 'instructure-ui'
+import { ScreenReaderContent, Transition, RadioInputGroup, RadioInput, Themes, themeable } from 'instructure-ui'
 
 import styles from './styles.css'
 
@@ -21,7 +22,7 @@ export default class DocsApp extends Component {
     this.state = {
       menuSearch: '',
       showMenu: true,
-      brand: 'canvas'
+      themeKey: 'canvas'
     }
   }
 
@@ -37,9 +38,9 @@ export default class DocsApp extends Component {
     })
   }
 
-  handleBrandChange = (e) => {
+  handleThemeChange = (value) => {
     this.setState({
-      brand: e.target.value
+      themeKey: value
     })
   }
 
@@ -59,29 +60,47 @@ export default class DocsApp extends Component {
     }
   }
 
+  renderThemeSelect () {
+    const themeKeys = Object.keys(Themes)
+    return (
+      <div className={styles.themeSelect}>
+        <RadioInputGroup
+          name="theme"
+          description={<ScreenReaderContent>Select a theme</ScreenReaderContent>}
+          variant="toggle"
+          onChange={this.handleThemeChange}
+          defaultValue={this.state.themeKey}
+        >
+          {
+            themeKeys.map((themeKey) => {
+              return <RadioInput key={themeKey} label={themeKey} value={themeKey} />
+            })
+          }
+        </RadioInputGroup>
+      </div>
+    )
+  }
+
+  renderTheme (themeKey, theme) {
+    return (
+      <DocsSection id={themeKey}>
+        <ThemeDoc
+          themeKey={themeKey}
+          theme={theme}
+        />
+      </DocsSection>
+    )
+  }
+
   renderComponent (component) {
-    const brands = Object.keys(Brands)
     return (
       <DocsSection id={component.name}>
-        <div className={styles.brandSelect}>
-          <Select
-            label={<ScreenReaderContent>Select brand</ScreenReaderContent>}
-            isBlock={false}
-            onChange={this.handleBrandChange}
-            defaultValue={this.state.brand}
-          >
-            {
-              brands.map((brand) => {
-                return <option key={brand} value={brand}>{brand}</option>
-              })
-            }
-          </Select>
-        </div>
+        {this.renderThemeSelect()}
         <ComponentDoc
           name={component.name}
           doc={component.doc}
           theme={component.theme}
-          brand={this.state.brand}
+          themeKey={this.state.themeKey}
           path={component.path}
         />
       </DocsSection>
@@ -108,11 +127,14 @@ export default class DocsApp extends Component {
   renderContent (key) {
     const component = componentsMap[key]
     const doc = documentsMap[key]
+    const theme = Themes[key]
 
     if (component) {
       return this.renderComponent(component)
     } else if (doc) {
       return this.renderDoc(doc)
+    } else if (theme) {
+      return this.renderTheme(key, themeable.getTheme(key))
     } else {
       return this.renderError(key)
     }
@@ -194,7 +216,8 @@ export default class DocsApp extends Component {
                     <DocsNav
                       selected={this.state.key}
                       components={componentsList}
-                      documents={documentsList} />
+                      documents={documentsList}
+                      themes={Themes} />
                   }
                 </div>
               </Transition>

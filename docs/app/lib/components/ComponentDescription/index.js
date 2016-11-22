@@ -5,8 +5,8 @@ import ComponentPlayground from '../ComponentPlayground'
 
 export default class ComponentDescription extends Component {
   static propTypes = {
+    themeKey: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    brand: PropTypes.string,
     description: PropTypes.string
   }
 
@@ -24,7 +24,7 @@ export default class ComponentDescription extends Component {
             <ComponentPlayground
               name={this.props.name}
               code={section.content}
-              brand={this.props.brand}
+              themeKey={this.props.themeKey}
               variant={section.variant}
               language={section.language}
               key={i} />

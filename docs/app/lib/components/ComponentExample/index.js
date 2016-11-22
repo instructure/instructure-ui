@@ -8,7 +8,7 @@ export default class ComponentExample extends Component {
   static propTypes = {
     code: PropTypes.string,
     variant: PropTypes.string,
-    brand: PropTypes.string
+    themeKey: PropTypes.string
   }
 
   constructor (props) {
@@ -86,7 +86,7 @@ export default class ComponentExample extends Component {
 
     return (
       <div className={styles.root}>
-        {example && <ApplyTheme theme={themeable.generateTheme(this.props.brand)}>{example}</ApplyTheme>}
+        {example && <ApplyTheme theme={themeable.generateTheme(this.props.themeKey)}>{example}</ApplyTheme>}
         {error && <div className={styles.errorBg} />}
         {error && <pre className={styles.error}>{error}</pre>}
       </div>

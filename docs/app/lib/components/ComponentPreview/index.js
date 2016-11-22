@@ -31,7 +31,7 @@ export default class ComponentPreview extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
-    brand: PropTypes.string,
+    themeKey: PropTypes.string,
     variant: PropTypes.string,
     isFullScreen: PropTypes.bool,
     onMinimize: PropTypes.func
@@ -74,7 +74,7 @@ export default class ComponentPreview extends Component {
       windowMessageListener.postMessage(this.refs.frame.contentWindow, {
         code: this.props.code,
         variant: this.props.variant,
-        brand: this.props.brand
+        themeKey: this.props.themeKey
       })
     } else {
       window.setTimeout(this.renderPreview.bind(this), 0)

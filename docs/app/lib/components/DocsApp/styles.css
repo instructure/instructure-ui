@@ -218,7 +218,6 @@ code[class^="lang-"] {
   padding-left: 1em;
 }
 
-.brandSelect {
-  display: flex;
-  justify-content: flex-end;
+.themeSelect {
+  float: right;
 }
