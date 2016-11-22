@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react'
 
 import ComponentDescription from '../ComponentDescription'
 import ComponentProps from '../ComponentProps'
+import ComponentTheme from '../ComponentTheme'
 
 import CodeEditor from '../CodeEditor'
 
@@ -16,7 +17,8 @@ export default class ComponentDoc extends Component {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     brand: PropTypes.string,
-    doc: PropTypes.object
+    doc: PropTypes.object,
+    theme: PropTypes.object
   }
 
   static defaultProps = {
@@ -33,6 +35,20 @@ export default class ComponentDoc extends Component {
           Properties
         </h3>
         <ComponentProps props={props} />
+      </div>
+    ) : null
+  }
+
+  renderTheme () {
+    const {
+      theme
+    } = this.props
+    return theme ? (
+      <div>
+        <h3 className={styles.sectionHeading} id={name + 'Theme'}>
+          Theme Variables
+        </h3>
+        <ComponentTheme theme={theme} />
       </div>
     ) : null
   }
@@ -92,6 +108,7 @@ export default class ComponentDoc extends Component {
         </div>
         {this.renderDescription()}
         {this.renderProps()}
+        {this.renderTheme()}
         <h3 className={styles.sectionHeading} id={name + 'Usage'}>
           Usage
         </h3>
@@ -99,7 +116,7 @@ export default class ComponentDoc extends Component {
           <code>npm install --save {packageName}</code>
         </p>
         <div className={styles.usage}>
-          <CodeEditor code={example} readOnly mode="javascript" />
+          <CodeEditor code={example} mode="javascript" />
         </div>
       </div>
     )

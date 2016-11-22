@@ -80,6 +80,7 @@ export default class DocsApp extends Component {
         <ComponentDoc
           name={component.name}
           doc={component.doc}
+          theme={component.theme}
           brand={this.state.brand}
           path={component.path}
         />

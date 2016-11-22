@@ -26,17 +26,12 @@ function getConfig () {
       files: 'docs/*.md'
     },
     components: {
-      files: 'lib/components/*/index.js', // only the top level components
-      excludes: [ /\.test\.js$/ ]
-    },
-    theme: {
-      files: 'lib/components/**/*theme.js' // include nested components
+      files: 'lib/components/*/index.js' // only the top level components
     }
   }
 
   return merge({}, config, {
     rootPath: ROOT,
-    srcPath: path.join(ROOT, config.buildPath, '/lib'),
     docsAppPath: path.join(ROOT, '/docs/app'),
     distPath: path.join(ROOT, config.buildPath, '/dist'),
     docsPath: path.join(ROOT, config.buildPath, '/docs'),

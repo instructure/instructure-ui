@@ -1,0 +1,9 @@
+.root {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 3px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
