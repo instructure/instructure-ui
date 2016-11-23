@@ -1,4 +1,4 @@
-const docs = require('component-docs!')
+const docs = require('component-docs-loader!')
 
 const generateTheme = function (component) {
   if (typeof component.generateTheme === 'function') {

@@ -1,7 +1,7 @@
 const {
   transformRequire,
   transformCss
-} = require('../util/themeable-css-transform')
+} = require('../util/themeableCSSTransform')
 
 module.exports = function (content) {
   this.cacheable && this.cacheable()
@@ -22,9 +22,7 @@ module.exports = function (content) {
   }
 
   return [
-    'if (module.hot) {',
-    '  module.hot.accept([]);',
-    '}',
+    'module.hot && module.hot.accept([])',
     'module.exports = ' + result + ';'
   ].join('\n')
 }

@@ -1,32 +1,3 @@
 {
-  "presets": ["es2015", "stage-1", "react"],
-  "plugins": [
-    "transform-decorators-legacy",
-    "./babel/plugins/transform-class-display-name"
-  ],
-  "env": {
-    "development": {
-      "presets": ["react-hmre"]
-    },
-    "production": {
-      "plugins": [
-        ["./babel/plugins/transform-themeable", { "postcssrc": "./postcss.config.js" }]
-      ]
-    },
-    "transpile": {
-      "plugins": [
-        ["./babel/plugins/transform-themeable", { "postcssrc": "./postcss.config.js" }]
-      ]
-    },
-    "test": {
-      "plugins": [
-        [
-          "istanbul", {
-            "include": ["lib"],
-            "exclude": ["**/*.test.js", "__tests__"]
-          }
-        ]
-      ]
-    }
-  }
+  "presets": ["./babel/preset-inst-ui"]
 }

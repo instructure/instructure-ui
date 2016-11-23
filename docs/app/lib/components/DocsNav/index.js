@@ -3,7 +3,9 @@ import classnames from 'classnames'
 
 import styles from './styles.css'
 
-import { TextInput, Link, ScreenReaderContent } from 'instructure-ui'
+import TextInput from 'instructure-ui/lib/components/TextInput'
+import Link from 'instructure-ui/lib/components/Link'
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 
 export default class DocsNav extends Component {
   static propTypes = {

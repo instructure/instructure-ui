@@ -1,12 +1,11 @@
 import React, {PropTypes} from 'react'
 import styles from './CodePenButton.css'
 import Button from '../Button'
-import { ScreenReaderContent } from 'instructure-ui'
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 
-import config from 'config!'
+import { pkg } from 'config-loader!'
 
 const CodePenButton = function ({ code, title, language }) {
-  const { library } = config
   const js = (language === 'jsx')
   ? `
   const Example = function () {
@@ -31,9 +30,10 @@ const CodePenButton = function ({ code, title, language }) {
     css_prefix: 'autoprefixer',
     js_pre_processor: 'babel',
     js_external: [
-      library.docsUrl + 'common.js',
-      library.docsUrl + library.packageName + '.js',
-      library.docsUrl + 'globals.js'
+      pkg.homepage + 'polyfills.js',
+      pkg.homepage + 'vendor.js',
+      pkg.homepage + pkg.name + '.js',
+      pkg.homepage + 'globals.js'
     ].join(';')
   }
 

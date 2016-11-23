@@ -4,7 +4,7 @@
 const consoleError = console.error
 
 console.error = function (firstMessage, ...rest) {
-  if (firstMessage.startsWith('Warning:')) {
+  if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
     throw new Error(`Unexpected React Warning: ${firstMessage}`)
   }
 

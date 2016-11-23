@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Table } from 'instructure-ui'
+import Table from 'instructure-ui/lib/components/Table'
 import ColorSwatch from '../ColorSwatch'
 
 import styles from './styles.css'

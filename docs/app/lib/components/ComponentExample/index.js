@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react'
-import { ApplyTheme, themeable } from 'instructure-ui'
+import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
+import themeable from 'instructure-ui/lib/util/themeable'
 import { transform } from 'babel-standalone'
 
 import styles from './ComponentExample.css'

@@ -4,7 +4,7 @@ import CodeEditor from '../CodeEditor'
 import ComponentPreview from '../ComponentPreview'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
-import { ScreenReaderContent } from 'instructure-ui'
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import classnames from 'classnames'
 
 import styles from './styles.css'

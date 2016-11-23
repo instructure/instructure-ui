@@ -49,7 +49,7 @@
   "globals": {
     "expect": true,
     "sinon": true,
-    "createTestbed": true
+    "Testbed": true
   },
   "extends": ["standard", "standard-react"]
 }

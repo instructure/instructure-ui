@@ -61,7 +61,6 @@ code[class^="lang-"] {
   overflow-y: auto;
   overflow-x: hidden;
   border-right: 1px solid var(--borderColor);
-  background-color: #fff;
 }
 
 .container {
@@ -84,7 +83,7 @@ code[class^="lang-"] {
 
 .main {
   max-width: 67rem;
-  margin: 0 auto;
+  margin: 4rem auto 2rem auto;
 }
 
 .menuToggle {

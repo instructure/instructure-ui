@@ -1,36 +1,41 @@
-/* eslint no-var: 0 */
-'use strict'
+const path = require('path')
+const glob = require('glob')
+const { generateComponentName, paths, files, pkg } = require('./util/loadConfig')
+const Visualizer = require('webpack-visualizer-plugin')
 
-var path = require('path')
-var glob = require('glob')
-var config = require('./util/config')
-var componentNameFromPath = require('./util/component-name-from-path')
+const env = process.env.NODE_ENV
+const minify = process.env.MINIFY
+const entry = {}
 
-var entry = {}
-var libEntry = config.library.packageName
-
-if (process.env.MINIFY) {
-  libEntry = libEntry + '.min'
-}
-
-entry[libEntry] = [ path.join(config.rootPath, config.library.main) ]
-
-glob.sync(config.components.files)
+glob.sync(files.components)
   .map(function (filepath) {
-    var name = componentNameFromPath(filepath)
-    if (process.env.MINIFY) {
-      name = name + '.min'
-    }
-    entry[name] = [ path.join(config.rootPath, filepath) ]
+    const name = generateComponentName(filepath)
+    entry[minify ? name + '.min' : name] = [ filepath ]
   })
 
-module.exports = require('./util/generate-config')({
+entry[minify ? pkg.name + '.min' : pkg.name] = [ path.join(paths.root, pkg.main) ]
+
+let plugins = require('./config/plugins')(env, minify)
+
+plugins = plugins.concat([
+  new Visualizer({
+    filename: 'statistics.html'
+  })
+])
+
+module.exports = {
+  bail: true,
+  cache: false,
   entry: entry,
+  resolve: require('./config/resolve'),
+  resolveLoader: require('./config/resolveLoader'),
+  module: require('./config/module')(env),
+  plugins,
   output: {
-    path: config.distPath,
+    path: paths.build.dist,
     filename: '[name].js',
     library: '[name]',
     libraryTarget: 'umd'
   },
-  externals: require('./util/externals')
-})
+  externals: require('./config/externals')
+}

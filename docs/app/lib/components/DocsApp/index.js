@@ -7,15 +7,22 @@ import HtmlDoc from '../HtmlDoc'
 import ThemeDoc from '../ThemeDoc'
 import DocsSection from '../DocsSection'
 
-import { ScreenReaderContent, Transition, RadioInputGroup, RadioInput, Themes, themeable } from 'instructure-ui'
-import { IconHeartSolid, IconGithubSolid } from 'instructure-icons'
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+import Transition from 'instructure-ui/lib/components/Transition'
+import RadioInputGroup from 'instructure-ui/lib/components/RadioInputGroup'
+import RadioInput from 'instructure-ui/lib/components/RadioInput'
+import Themes from 'instructure-ui/lib/themes'
+import themeable from 'instructure-ui/lib/util/themeable'
+
+import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
+import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
 
 import styles from './styles.css'
 
 import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { componentsList } from '../../util/load-components'
 
-import config from 'config!'
+import { pkg } from 'config-loader!'
 
 export default class DocsApp extends Component {
   constructor (props) {
@@ -158,10 +165,10 @@ export default class DocsApp extends Component {
                 Made with &nbsp;
                 <IconHeartSolid className={styles.footerIcon} />
                 &nbsp;
-                by {config.library.author}.
+                by {pkg.author}.
                 &nbsp;
                 <a
-                  href={config.library.projectUrl}
+                  href={pkg.homepage}
                   className={styles.githubLink}
                 >
                   <IconGithubSolid className={styles.footerIcon} />

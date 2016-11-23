@@ -1,25 +1,20 @@
-/* eslint no-var: 0 */
-'use strict'
-
-var glob = require('glob')
-var path = require('path')
-var config = require('../util/config')
-var testPatterns = require('../util/test-patterns')
-var requirePath = require('../util/require-path')
+const glob = require('glob')
+const path = require('path')
+const { files } = require('../util/loadConfig')
+const requirePath = require('../util/requirePath')
 
 module.exports = function () {
   this.cacheable && this.cacheable()
 
-  var docs = glob.sync(config.docs.files)
-    .filter(function (docsPath) {
-      return testPatterns(docsPath, config.docs.excludes || [])
-    })
-    .map(processDocs)
+  let docs = [ processDocs(path.join(process.cwd(), 'README.md')) ]
+
+  docs = docs.concat(
+    glob.sync(files.docs)
+      .map(processDocs)
+  )
 
   return [
-    'if (module.hot) {',
-    '  module.hot.accept([]);',
-    '}',
+    'module.hot && module.hot.accept([])',
     'module.exports = [' + docs.join(',') + '];'
   ].join('\n')
 }

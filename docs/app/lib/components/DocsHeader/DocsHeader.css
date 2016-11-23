@@ -13,7 +13,7 @@
 }
 
 .heading {
-  font-size: 2.8rem;
+  font-size: 1.75rem;
   font-weight: 300;
   text-decoration: none;
   color: #008ee2;
@@ -23,5 +23,5 @@
 
 .version {
   color: #73818c;
-  font-size: 1rem;
+  font-size: 0.85rem;
 }

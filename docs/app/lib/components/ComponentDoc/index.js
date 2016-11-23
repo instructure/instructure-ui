@@ -6,11 +6,11 @@ import ComponentTheme from '../ComponentTheme'
 
 import CodeEditor from '../CodeEditor'
 
-import { Link } from 'instructure-ui'
+import Link from 'instructure-ui/lib/components/Link'
 
 import styles from './ComponentDoc.css'
 
-import config from 'config!'
+import { pkg } from 'config-loader!'
 
 export default class ComponentDoc extends Component {
   static propTypes = {
@@ -72,29 +72,19 @@ export default class ComponentDoc extends Component {
       path
     } = this.props
 
-    const { library } = config
+    const packageName = pkg.name
+    const githubRoot = pkg.repository.url.replace('.git', '') + '/tree/master/'
 
-    const packageName = library.packageName
-    const githubRoot = library.projectUrl + '/tree/master/'
+    const example = `/*** es6 ***/
+import ${name} from '${packageName}/lib/components/${name}'
 
-    const example = [
-      '/*** es6 ***/',
-      'import { ' + name + ' } from \'' + packageName + '\'',
-      '// or single component:',
-      'import ' + name + ' from \'' + packageName + '/lib/components/' + name + '\'',
-      '',
-      '',
-      '/*** CommonJS ***/',
-      'var ' + name + ' = require(\'' + packageName + '\').' + name,
-      '// or single component:',
-      'var ' + name + ' = require(\'' + packageName + '/lib/components/' + name + '\')',
-      '',
-      '',
-      '/*** AMD ***/',
-      'define([\'' + packageName + '/' + name + '\'], function({ default: ' + name + ' }) {',
-      '  ...',
-      '})'
-    ].join('\n')
+/*** CommonJS ***/
+var ${name} = require('${packageName}/lib/components/${name}')
+
+/*** AMD ***/
+define(['${packageName}/${name}'], function({ default: ${name} }) {
+  // ...
+})`
 
     return (
       <div className={styles.root}>
@@ -116,7 +106,7 @@ export default class ComponentDoc extends Component {
           <code>npm install --save {packageName}</code>
         </p>
         <div className={styles.usage}>
-          <CodeEditor code={example} mode="javascript" />
+          <CodeEditor readOnly code={example} mode="javascript" />
         </div>
       </div>
     )

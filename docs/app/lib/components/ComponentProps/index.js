@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react'
-import { Table, ScreenReaderContent } from 'instructure-ui'
+import Table from 'instructure-ui/lib/components/Table'
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import marked from 'marked'
 
 import styles from './styles.css'

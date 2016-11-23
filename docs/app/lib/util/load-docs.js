@@ -1,5 +1,5 @@
 // use webpack loader to load documentation data based on config
-const docs = require('markdown-docs!')
+const docs = require('markdown-docs-loader!')
 
 const documentsMap = {}
 docs.forEach((doc) => {

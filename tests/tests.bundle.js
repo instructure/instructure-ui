@@ -1,6 +1,6 @@
 'use strict'
 
-require('!!style!css!./tests.css')
+require('!!style-loader!css-loader!./tests.css')
 
 // clear the console before rebundling.
 /* eslint-disable no-console */

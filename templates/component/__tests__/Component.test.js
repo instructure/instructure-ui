@@ -2,7 +2,7 @@ import React from 'react'
 import ${COMPONENT} from '../index'
 
 describe('<${COMPONENT} />', function () {
-  const testbed = createTestbed(<${COMPONENT} />)
+  const testbed = new Testbed(<${COMPONENT} />)
 
   it('should render', function () {
     const subject = testbed.render(/* override default props here */)

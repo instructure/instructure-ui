@@ -73,6 +73,10 @@ export default class Testbed {
     afterEach(this.teardown.bind(this))
   }
 
+  /* eslint-disable max-len */
+  static testImage = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+  /* eslint-enable max-len */
+
   setup () {
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
@@ -137,6 +141,4 @@ export default class Testbed {
   }
 }
 
-global.createTestbed = function (subject) {
-  return new Testbed(subject)
-}
+global.Testbed = Testbed

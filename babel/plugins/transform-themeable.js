@@ -8,10 +8,11 @@ const {
 } = require('path')
 
 const {
-  generateScopedName,
   transformCss,
   transformRequire
-} = require('../../webpack/util/themeable-css-transform')
+} = require('../../webpack/util/themeableCSSTransform')
+
+const { generateScopedName } = require(join(process.cwd(), 'build.config.js'))
 
 module.exports = function ({ types: t }) {
   function resolveModulePath (filename) {
@@ -64,16 +65,19 @@ module.exports = function ({ types: t }) {
           return
         }
 
-        let postcssrc = state.opts.postcssrc && require(join(process.cwd(), state.opts.postcssrc))
+        const env = process.env.NODE_ENV
+        const cwd = process.cwd()
+
+        let postcssrc = state.opts.postcssrc && require(join(cwd, state.opts.postcssrc))
 
         if (postcssrc && typeof postcssrc === 'function') {
-          postcssrc = postcssrc({ cwd: process.cwd(), env: process.env.NODE_ENV })
+          postcssrc = postcssrc({ cwd, env })
         }
 
         const plugins = postcssrc && postcssrc.plugins
 
         require('css-modules-require-hook')({
-          generateScopedName: generateScopedName(process.env.NODE_ENV),
+          generateScopedName: generateScopedName({ env }),
           prepend: plugins || [],
           processCss: (css, filepath) => {
             let processed = css

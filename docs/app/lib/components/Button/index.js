@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { Button as BaseButton } from 'instructure-ui'
+import { default as BaseButton } from 'instructure-ui/lib/components/Button'
 
 export default class Button extends Component {
   static propTypes = {

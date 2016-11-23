@@ -1,13 +1,10 @@
-/* eslint no-var: 0 */
-'use strict'
-
-var docgen = require('react-docgen')
+const docgen = require('react-docgen')
 
 // based on https://github.com/eisisig/docgen-loader/blob/master/index.js
 module.exports = function (source) {
   this.cacheable && this.cacheable()
 
-  var value = {}
+  let value = {}
 
   /* eslint-disable no-console */
   try {
@@ -19,9 +16,7 @@ module.exports = function (source) {
   /* eslint-enable no-console */
 
   return [
-    'if (module.hot) {',
-    '  module.hot.accept([]);',
-    '}',
+    'module.hot && module.hot.accept([])',
     'module.exports = ' + JSON.stringify(value, undefined, '\t')
   ].join('\n')
 }

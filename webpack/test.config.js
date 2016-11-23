@@ -1,22 +1,10 @@
-'use strict'
-
-const webpack = require('webpack')
-
 module.exports = function (ciMode) {
-  const config = {
-    devtool: 'inline-source-map',
-    cache: true,
-    module: {
-      loaders: [
-        // https://github.com/webpack/webpack/issues/828
-        { test: /semver\.browser\.js/, loaders: ['imports?define=>undefined'] }
-      ]
-    }
+  return {
+    cache: false,
+    bail: ciMode,
+    resolve: require('./config/resolve'),
+    resolveLoader: require('./config/resolveLoader'),
+    plugins: require('./config/plugins')('test', false, ciMode),
+    module: require('./config/module')('test', ciMode)
   }
-
-  if (ciMode) {
-    config.plugins = [new webpack.NoErrorsPlugin()]
-  }
-
-  return require('./util/generate-config')(config)
 }

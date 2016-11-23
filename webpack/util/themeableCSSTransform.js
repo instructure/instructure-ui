@@ -1,5 +1,3 @@
-const config = require('./config')
-
 const getMatches = function (str, regex) {
   const matches = []
   let match
@@ -51,13 +49,5 @@ module.exports = {
         ${JSON.stringify(tokens)}
       )
     `
-  },
-
-  generateScopedName (env) {
-    return [
-      config.library.prefix,
-      config.library.version,
-      '[folder]__[local]'
-    ].join('-')
   }
 }
