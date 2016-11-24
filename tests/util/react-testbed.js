@@ -120,20 +120,16 @@ export default class ReactTestbed {
 
     this.$instance = $(subject).render(true, this.rootNode, context)
 
-    const propsFn = this.$instance.props
-    const unmountFn = this.$instance.unmount
-
-    this.$instance.props = function (props) {
-      const $instance = propsFn.call(this, props)
-      tick()
-      return $instance
+    function wrapWithTick (fn) {
+      return function (...args) {
+        const result = fn.call(this, ...args)
+        tick()
+        return result
+      }
     }
 
-    this.$instance.unmount = function () {
-      const $instance = unmountFn.apply(this, arguments)
-      tick()
-      return $instance
-    }
+    this.$instance.props = wrapWithTick(this.$instance.props)
+    this.$instance.unmount = wrapWithTick(this.$instance.unmount)
 
     tick()
 
