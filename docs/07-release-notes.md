@@ -1,3 +1,27 @@
+## 0.18.0
+
+#### Document theme variables for each component
+
+#### Fix [Select](#Select) component disabled state
+
+#### Fix [Button](#Button) component 'circle' variant in Firefox
+
+#### [Heading](#Heading) component updates
+
+#### Fix [Progress](#Progress)
+
+#### Make codepens work for non jsx examples (e.g. [Modal](#Modal))
+
+#### Updates to [Tray](#Tray) component
+
+#### Update [TextArea](#TextArea) and [Select](#Select) focus styles
+
+#### Add a [Canvas theme](#canvas)
+
+#### Add an [accessible theme](#a11y)
+
+#### Add [Media](#Media) component
+
 ## 0.17.3
 
 #### Replace CSSTransitionGroup with [Transition](#Transition) component
