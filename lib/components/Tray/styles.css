@@ -1,8 +1,9 @@
 .root {
-  background: var(--background);
+  background-color: var(--background);
   position: fixed;
-  align-items: center;
-  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-sizing: border-box;
 }
 
 .placement--top,
@@ -26,16 +27,43 @@
 
 .placement--left {
   left: 0;
+
+  &.border {
+    border-right-width: 1px;
+  }
 }
 
 .placement--right {
   right: 0;
+
+  &.border {
+    border-left-width: 1px;
+  }
+
 }
 
 .placement--top {
   top: 0;
+
+  &.border {
+    border-bottom-width: 1px;
+  }
 }
 
 .placement--bottom {
   bottom: 0;
+
+  &.border {
+    border-top-width: 1px;
+  }
+}
+
+.border {
+  border-width: 0;
+  border-color: var(--borderColor);
+  border-style: solid;
+}
+
+.shadow {
+  box-shadow: 0 0 0.4375rem 0 var(--shadowColorNear), 0 0 1.75rem 0 var(--shadowColorFar);
 }

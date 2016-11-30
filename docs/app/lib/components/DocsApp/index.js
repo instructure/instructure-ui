@@ -8,14 +8,16 @@ import ThemeDoc from '../ThemeDoc'
 import DocsSection from '../DocsSection'
 
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
-import Transition from 'instructure-ui/lib/components/Transition'
 import RadioInputGroup from 'instructure-ui/lib/components/RadioInputGroup'
 import RadioInput from 'instructure-ui/lib/components/RadioInput'
 import Themes from 'instructure-ui/lib/themes'
 import themeable from 'instructure-ui/lib/util/themeable'
+import Tray from 'instructure-ui/lib/components/Tray'
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
 import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
+
+import Button from '../Button'
 
 import styles from './styles.css'
 
@@ -156,6 +158,19 @@ export default class DocsApp extends Component {
     return (
       <div className={classnames(classes)}>
         <div className={styles.container}>
+          <div className={styles.menuToggle}>
+            <Button
+              onClick={this.handleMenuToggle}
+              aria-controls="nav"
+              aria-expanded={this.state.showMenu ? 'true' : 'false'}
+            >
+              <span className={styles.hamburger}>
+                <span className={styles.line}>
+                  <ScreenReaderContent>Toggle Navigation</ScreenReaderContent>
+                </span>
+              </span>
+            </Button>
+          </div>
           <div className={styles.content} ref="content">
             <div className={styles.main} role="main" id="main">
 
@@ -176,29 +191,17 @@ export default class DocsApp extends Component {
               </div>
             </div>
           </div>
-          <div className={styles.sidebar}>
-            <div className={styles.menuToggle}>
-              <button className={styles.hamburger} onClick={this.handleMenuToggle}
-                aria-controls="nav" aria-expanded={this.state.showMenu ? 'true' : 'false'}>
-                <span className={styles.line}>
-                  <ScreenReaderContent>Toggle Navigation</ScreenReaderContent>
-                </span>
-              </button>
+          <Tray isOpen={this.state.showMenu} isDismissable={false}>
+            <div className={styles.nav} id="nav">
+              <DocsHeader />
+              <DocsNav
+                selected={this.state.key}
+                components={componentsList}
+                documents={documentsList}
+                themes={Themes}
+              />
             </div>
-            <div className={styles.nav} id="nav" aria-hidden={this.state.showMenu ? null : 'false'}>
-              <Transition in={this.state.showMenu} unmountOnExit transitionOnMount>
-                <div>
-                  <DocsHeader />
-                  <DocsNav
-                    selected={this.state.key}
-                    components={componentsList}
-                    documents={documentsList}
-                    themes={Themes}
-                  />
-                </div>
-              </Transition>
-            </div>
-          </div>
+          </Tray>
         </div>
       </div>
     )

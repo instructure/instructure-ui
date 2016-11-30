@@ -1,11 +1,3 @@
-.root {
-}
-
-.content {
-  margin-top: var(--contentMargin);
-  padding: var(--contentPadding);
-}
-
 .closeButton {
   position: absolute;
   top: var(--closeButtonOffset);
