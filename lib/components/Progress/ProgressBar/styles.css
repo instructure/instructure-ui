@@ -14,7 +14,6 @@
   appearance: none;
   width: auto;
   flex: 1;
-  min-width: 16rem;
   border: none;
 
   &::-webkit-progress-value {
@@ -47,7 +46,8 @@
 
 .small {
   .bar[value] {
-    height: var(--smallHeight);
+    /* product design wants = 18px */
+    height: 1.125rem;
   }
 
   .value {
