@@ -2,38 +2,35 @@
   font-family: var(--fontFamily);
   line-height: var(--lineHeight);
   text-rendering: optimizeLegibility;
+  margin: 0;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .h1 {
-  margin: 0;
   font-size: var(--h1FontSize);
   font-weight: var(--h1FontWeight);
-  line-height: 1;
 }
 
 .h2 {
-  margin: 0;
   font-size: var(--h2FontSize);
   font-weight: var(--h2FontWeight);
-  line-height: 1;
 }
 
 .h3 {
-  margin: 0;
   font-size: var(--h3FontSize);
   font-weight: var(--h3FontWeight);
-  line-height: 1;
 }
 
-.h4,
-.h5 {
-  margin: 0;
+.h4 {
   font-size: var(--h4FontSize);
   font-weight: var(--h4FontWeight);
-  line-height: inherit;
+}
+
+.h5 {
+  font-size: var(--h5FontSize);
+  font-weight: var(--h5FontWeight);
 }
 
 .border-top {
