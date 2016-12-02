@@ -1,3 +1,15 @@
+## 0.18.1
+
+#### Upgrade to Webpack 2/bundle size improvements
+
+#### Adjust [Heading](#Heading) component styles
+
+#### Add LatoWeb to font-family to match Canvas
+
+#### [Tray](#Tray) component updates
+
+#### Reduce height of [Progress](#Progress) bars
+
 ## 0.18.0
 
 #### Document theme variables for each component
