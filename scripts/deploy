@@ -31,7 +31,7 @@ if ! [[ $repo ]]; then
   exit 1
 fi
 
-npm run build:docs
+npm run docs:build
 
 # https://github.com/github/pages-gem/pull/352
 touch $docs_path/.nojekyll
