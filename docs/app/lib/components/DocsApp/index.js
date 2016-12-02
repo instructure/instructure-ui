@@ -10,8 +10,7 @@ import DocsSection from '../DocsSection'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import RadioInputGroup from 'instructure-ui/lib/components/RadioInputGroup'
 import RadioInput from 'instructure-ui/lib/components/RadioInput'
-import Themes from 'instructure-ui/lib/themes'
-import themeable from 'instructure-ui/lib/util/themeable'
+import { getThemes } from 'instructure-ui/lib/themes'
 import Tray from 'instructure-ui/lib/components/Tray'
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
@@ -25,6 +24,8 @@ import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { componentsList } from '../../util/load-components'
 
 import { pkg } from 'config-loader!'
+
+const Themes = getThemes()
 
 export default class DocsApp extends Component {
   constructor (props) {
@@ -144,7 +145,7 @@ export default class DocsApp extends Component {
     } else if (doc) {
       return this.renderDoc(doc)
     } else if (theme) {
-      return this.renderTheme(key, themeable.getTheme(key))
+      return this.renderTheme(key, Themes[key])
     } else {
       return this.renderError(key)
     }
