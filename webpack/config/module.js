@@ -24,7 +24,7 @@ module.exports = function (env, ciMode) {
           loader: 'babel-loader',
           query: {
             babelrc: true,
-            cacheDirectory: true
+            cacheDirectory: (env !== 'production')
           }
         }],
         exclude: [ /node_modules/ ]

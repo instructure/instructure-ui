@@ -14,23 +14,23 @@ const CodePenButton = function ({ code, title, language }) {
     )
   }
 
-  ReactDOM.render(<Example />, document.getElementById('example'))
+  ReactDOM.render(<Example />, document.getElementById('app'))
   `
   : `
   ${code}
-  ReactDOM.render(<Example />, document.getElementById('example'))
+  ReactDOM.render(<Example />, document.getElementById('app'))
   `
   const data = {
     title,
     js,
     private: true,
     editors: '001',
-    html: '<div id="example"></div>',
+    html: '<div id="app"></div>',
     layout: 'top',
     css_prefix: 'autoprefixer',
     js_pre_processor: 'babel',
     js_external: [
-      pkg.homepage + 'polyfills.js',
+      pkg.homepage + 'babel-polyfill.js',
       pkg.homepage + 'vendor.js',
       pkg.homepage + pkg.name + '.js',
       pkg.homepage + 'globals.js'

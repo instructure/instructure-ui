@@ -14,13 +14,5 @@ module.exports = [
       commonjs: 'react-dom',
       amd: 'react-dom'
     }
-  },
-  {
-    'babel-polyfill': {
-      root: 'babel-polyfill',
-      commonjs2: 'babel-polyfill',
-      commonjs: 'babel-polyfill',
-      amd: 'babel-polyfill'
-    }
   }
 ]

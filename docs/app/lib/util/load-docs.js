@@ -7,6 +7,10 @@ docs.forEach((doc) => {
   const html = doc.doc
   const title = nameToTitle(name)
 
+  doc.name = name
+  doc.title = title
+  doc.html = html
+
   documentsMap[name] = {
     name,
     title,
@@ -23,5 +27,5 @@ function nameToTitle (fileName) {
     .replace(/[_-]/g, ' ')
 }
 
-export const documentsList = Object.values(documentsMap)
+export const documentsList = docs
 export default documentsMap

@@ -1,3 +1,4 @@
+const path = require('path')
 const env = process.env.BABEL_ENV || process.env.NODE_ENV
 const debug = process.env.DEBUG
 
@@ -9,44 +10,58 @@ if (env !== 'development' && env !== 'test' && env !== 'production' && env !== '
   )
 }
 
-let presets = []
+module.exports = function (context, opts = {}) {
+  let presets = []
 
-if (env !== 'transpile') {
-  presets = presets.concat([[require.resolve('babel-preset-es2015'), { 'modules': false }]])
-} else {
-  presets = presets.concat(require.resolve('babel-preset-es2015'))
-}
+  if (env !== 'transpile') {
+    presets = presets.concat([[require.resolve('babel-preset-latest'), { 'modules': false }]])
+  } else {
+    presets = presets.concat(require.resolve('babel-preset-latest'))
+  }
 
-presets = presets.concat([
-  require.resolve('babel-preset-stage-1'),
-  require.resolve('babel-preset-react')
-])
-
-if (env === 'development') {
-  presets = presets.concat([ require.resolve('babel-preset-react-hmre') ])
-}
-
-let plugins = [
-  require.resolve('babel-plugin-transform-decorators-legacy'),
-  require.resolve('./plugins/transform-class-display-name')
-]
-
-if (env === 'transpile' || env === 'production') {
-  plugins = plugins.concat([
-    [require.resolve('./plugins/transform-themeable'), { 'postcssrc': './postcss.config.js' }]
+  presets = presets.concat([
+    require.resolve('babel-preset-stage-1'),
+    require.resolve('babel-preset-react')
   ])
-}
 
-if (env === 'test' && !debug) {
-  plugins = [
-    [require.resolve('babel-plugin-istanbul'), {
-      'include': ['lib/**/*.js'],
-      'exclude': ['**/*.test.js', '__tests__']
-    }]
-  ].concat(plugins)
-}
+  if (env === 'development') {
+    presets = presets.concat([ require.resolve('babel-preset-react-hmre') ])
+  }
 
-module.exports = {
-  presets,
-  plugins
+  let plugins = [
+    [require.resolve('babel-plugin-transform-object-rest-spread'), {
+      useBuiltIns: true
+    }],
+    [require.resolve('babel-plugin-transform-react-jsx'), {
+      useBuiltIns: true
+    }],
+    [require.resolve('babel-plugin-transform-runtime'), {
+      helpers: false,
+      polyfill: false,
+      regenerator: false,
+      moduleName: path.dirname(require.resolve('babel-runtime/package'))
+    }],
+    require.resolve('babel-plugin-transform-decorators-legacy'),
+    require.resolve('./plugins/transform-class-display-name')
+  ]
+
+  if (opts.themeable && (env === 'transpile' || env === 'production')) {
+    plugins = plugins.concat([
+      [require.resolve('./plugins/transform-themeable'), { 'postcssrc': './postcss.config.js' }]
+    ])
+  }
+
+  if (env === 'test' && !debug) {
+    plugins = [
+      [require.resolve('babel-plugin-istanbul'), {
+        'include': ['lib/**/*.js'],
+        'exclude': ['**/*.test.js', '__tests__']
+      }]
+    ].concat(plugins)
+  }
+
+  return {
+    presets,
+    plugins
+  }
 }
