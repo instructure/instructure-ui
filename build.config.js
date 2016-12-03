@@ -5,6 +5,13 @@ const BUILD_PATH = path.join(ROOT_PATH, '__build__')
 const SRC_PATH = path.join(ROOT_PATH, 'lib')
 
 module.exports = {
+  polyfills: [
+    'es6.object.assign',
+    'es6.array.find',
+    'es6.array.find-index',
+    'es6.symbol'
+  ],
+
   generateScopedName: function ({ env }) { // for css modules class names
     return (env === 'production' || env === 'transpile') ? '[hash:base64]' : '[folder]__[local]'
   },

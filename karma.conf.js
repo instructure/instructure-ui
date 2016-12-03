@@ -24,7 +24,7 @@ if (withCoverage) {
     ],
     check: {
       global: {
-        lines: 87
+        lines: 86
       },
       each: {
         lines: 0 // TODO: after we write Popover related tests we should bump this up

@@ -1,5 +1,5 @@
 'use strict'
-
+require('babel-polyfill-loader!')
 require('!!style-loader!css-loader!./tests.css')
 
 // clear the console before rebundling.
