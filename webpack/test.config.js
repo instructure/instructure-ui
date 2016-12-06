@@ -1,10 +1,10 @@
-module.exports = function (ciMode) {
+module.exports = function (debug) {
   return {
-    cache: false,
-    bail: ciMode,
+    cache: !debug,
+    bail: !debug,
     resolve: require('./config/resolve'),
     resolveLoader: require('./config/resolveLoader'),
-    plugins: require('./config/plugins')('test', false, ciMode),
-    module: require('./config/module')('test', ciMode)
+    plugins: require('./config/plugins')('test', false, debug),
+    module: require('./config/module')('test', debug)
   }
 }

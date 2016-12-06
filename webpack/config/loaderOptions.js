@@ -1,7 +1,7 @@
 const { paths } = require('../util/loadConfig')
 
-module.exports = function (env, ciMode) {
-  const failOnError = (ciMode || env === 'production')
+module.exports = function (env, debug) {
+  const failOnError = (!debug || env === 'production')
 
   return {
     debug: failOnError,

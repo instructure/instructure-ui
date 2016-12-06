@@ -1,4 +1,5 @@
 const env = process.env.BABEL_ENV || process.env.NODE_ENV
+const debug = process.env.DEBUG
 
 if (env !== 'development' && env !== 'test' && env !== 'production' && env !== 'transpile') {
   throw new Error(
@@ -36,7 +37,7 @@ if (env === 'transpile' || env === 'production') {
   ])
 }
 
-if (env === 'test') {
+if (env === 'test' && !debug) {
   plugins = [
     [require.resolve('babel-plugin-istanbul'), {
       'include': ['lib/**/*.js'],

@@ -13,10 +13,10 @@
   "scripts": {
     "prestart": "npm run clean && npm install && npm run docs:build",
     "start": "http-server __build__/docs -p 8001",
-    "start:watch": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --config webpack/docs.config.js",
-    "test": "cross-env NODE_ENV=test karma start --single-run --coverage --ci",
+    "start:watch": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server --hot --inline --config webpack/docs.config.js",
+    "test": "cross-env NODE_ENV=test karma start --single-run --coverage",
     "test:lint": "eslint lib",
-    "test:watch": "cross-env NODE_ENV=test karma start",
+    "test:watch": "cross-env NODE_ENV=test DEBUG=1 karma start",
     "generate": "./scripts/generate",
     "clean": "rimraf __build__",
     "docs": "webpack --config webpack/docs.config.js",

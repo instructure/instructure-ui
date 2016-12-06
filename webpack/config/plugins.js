@@ -5,9 +5,9 @@ const DedupePlugin = require('webpack/lib/optimize/DedupePlugin')
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
 
-module.exports = function (env, minify, ciMode) {
+module.exports = function (env, minify, debug) {
   let plugins = [
-    new LoaderOptionsPlugin(require('./loaderOptions')(env, ciMode)),
+    new LoaderOptionsPlugin(require('./loaderOptions')(env, debug)),
     new DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(env)
@@ -35,7 +35,7 @@ module.exports = function (env, minify, ciMode) {
     ])
   }
 
-  if (ciMode || env === 'production') {
+  if (!debug || env === 'production') {
     plugins = plugins.concat([
       new NoErrorsPlugin()
     ])

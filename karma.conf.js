@@ -1,11 +1,11 @@
 const withCoverage = process.argv.some((arg) => arg === '--coverage')
-const ciMode = process.argv.some((arg) => arg === '--ci')
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
+const debug = process.env.DEBUG
 
 // set browsers based on command line args
 const browsers = []
 if (!noLaunchers) { browsers.push('chrome_without_security') }
-if (ciMode) { browsers.push('Firefox') }
+if (!debug) { browsers.push('Firefox') }
 
 // set coverage reporter based on command line args
 let coverageReporter
@@ -90,7 +90,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config')(ciMode),
+    webpack: require('./webpack/test.config')(debug),
 
     webpackMiddleware: { stats: 'errors-only' }
   })
