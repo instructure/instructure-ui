@@ -1,23 +1,13 @@
 .root {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-}
-
-.content {
   background: var(--background);
-  flex: 1;
-  display: flex;
-
-  align-items: stretch;
-  flex-direction: column;
-
   box-shadow: 0 0 3px 0 var(--borderColor);
   border: 1px solid var(--borderColor);
   border-radius: var(--borderRadius);
-  box-sizing: border-box;
 }
 
 .closeButton {
@@ -35,37 +25,54 @@
   max-height: 95vh;
 }
 
+/* DELETE THESE HACKS ONCE IE11 SUPPORT ENDS */
+/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-no-vendor-prefix */
+/* stylelint-disable selector-root-no-composition */
+/* stylelint-disable declaration-block-no-duplicate-properties */
+/* stylelint-disable value-no-vendor-prefix */
+
+_:-ms-fullscreen,
+:root {
+  .root {
+    display: block;
+    overflow: auto;
+  }
+
+  .root.fullscreen {
+    display: -ms-flexbox;
+    display: flex;
+  }
+
+  .auto,
+  .small,
+  .medium,
+  .large {
+    max-height: none;
+  }
+}
+
+/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-no-vendor-prefix */
+/* stylelint-enable selector-root-no-composition */
+/* stylelint-enable declaration-block-no-duplicate-properties */
+/* stylelint-enable value-no-vendor-prefix */
+
 .auto {
   flex: 0 1 auto;
   min-width: var(--autoMinWidth);
-
-  .content {
-    min-height: var(--autoMinHeight);
-  }
 }
 
 .small {
   flex: 0 1 var(--smallMaxWidth);
-
-  .content {
-    min-height: var(--smallMinHeight);
-  }
 }
 
 .medium {
   flex: 0 1 var(--mediumMaxWidth);
-
-  .content {
-    min-height: var(--mediumMinHeight);
-  }
 }
 
 .large {
   flex: 0 1 var(--largeMaxWidth);
-
-  .content {
-    min-height: var(--largeMinHeight);
-  }
 }
 
 .fullscreen {
