@@ -22,6 +22,7 @@ module.exports = {
   },
 
   files: {
+    logo: path.join(ROOT_PATH, 'logo.png'),
     components: path.join(SRC_PATH, 'components/*/index.js'), // only top level components
     docs: path.join(ROOT_PATH, 'docs/*.md')
   },
