@@ -1,3 +1,15 @@
+## 0.18.2
+
+#### Remove babel-polyfill peer dependency (required polyfills are listed in build.config.js)
+
+#### [Modal](#Modal) should focus close button by default
+
+#### Add generateTheme and setDefaultTheme to both [ApplyTheme](#ApplyTheme) and themeable
+
+#### Add Modern theme
+
+#### Fix [Modal](#Modal) scrolling issues in FF
+
 ## 0.18.1
 
 #### Upgrade to Webpack 2/bundle size improvements
