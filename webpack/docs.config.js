@@ -7,6 +7,7 @@ const { paths, pkg } = require('./util/loadConfig')
 
 const env = process.env.NODE_ENV
 const minify = process.env.MINIFY
+const debug = process.env.DEBUG
 
 const entry = {
   'example': [ path.join(paths.src.docs, 'lib/example.js') ],
@@ -37,7 +38,7 @@ const chunksSortMode = function (chunksOrder) {
   }
 }
 
-let plugins = require('./config/plugins')(env, minify)
+let plugins = require('./config/plugins')(env, minify, debug)
 plugins = plugins.concat([
   new HtmlWebpackPlugin({
     title: pkg.name + ' : ' + pkg.description + ' (' + pkg.version + ')',
