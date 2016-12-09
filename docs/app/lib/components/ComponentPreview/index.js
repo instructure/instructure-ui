@@ -3,9 +3,11 @@ import React, { Component, PropTypes } from 'react'
 import shortid from 'shortid'
 import classnames from 'classnames'
 
-import Modal from 'react-overlays/lib/Modal'
 import Button from '../Button'
+
+import Modal, {ModalBody} from 'instructure-ui/lib/components/Modal'
 import windowMessageListener, { origin } from 'instructure-ui/lib/util/windowMessageListener'
+
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import ReactDOM from 'react-dom'
 
@@ -90,11 +92,11 @@ export default class ComponentPreview extends Component {
   renderMinimizeButton () {
     return (
       <span className={styles.button}>
-        <Button onClick={this.handleMinimize}>
+        <Button onClick={this.handleMinimize} ref={(c) => { this._minimizeButton = c }}>
           <ScreenReaderContent>Minimize</ScreenReaderContent>
           <svg className={styles.icon}
             aria-hidden="true"
-            width="1.5em" height="1.5em">
+            width="1em" height="1em">
             <path fill="none" d="M0 0h24v24H0z" />
             <g fill="currentColor">
               <path d="M2 2h15v4h2V2c0-1.102-.897-2-2-2H2C.897 0 0 .898 0 2v15c0 1.103.897 2 2 2h4v-2H2V2z" />
@@ -109,13 +111,16 @@ export default class ComponentPreview extends Component {
     )
   }
 
+  getDefaultFocusElement = () => {
+    return this._minimizeButton
+  }
+
   render () {
     const { isFullScreen, name } = this.props
     const classes = {
       [styles.root]: true,
-      [styles['is-fullscreen']]:  isFullScreen
+      [styles.modal]: isFullScreen
     }
-    // TODO: open example in new page/tab
 
     const iframe = (
       <div className={classnames(classes)}>
@@ -130,16 +135,27 @@ export default class ComponentPreview extends Component {
 
     return isFullScreen ? (
       <Modal
-        backdrop={false}
-        container={document.body}
-        show
-        className={styles.modal}
-        onEscapeKeyUp={this.handleMinimize}>
-        <div>
+        isOpen
+        label="Fullscreen"
+        size="fullscreen"
+        isDismissable={false}
+        getDefaultFocusElement={this.getDefaultFocusElement}
+        onRequestClose={this.handleMinimize}
+        closeButtonRef={function (el) {
+          // Hide the close button so we can use our own
+          if (el) {
+            const node = ReactDOM.findDOMNode(el)
+            if (node) {
+              node.style.display = 'none'
+            }
+          }
+        }}
+      >
+        <ModalBody>
           {this.renderMinimizeButton()}
           {iframe}
-        </div>
+        </ModalBody>
       </Modal>
     ) : iframe
   }
-} // 'examples/components/' + this.props.name + '.html'
+}

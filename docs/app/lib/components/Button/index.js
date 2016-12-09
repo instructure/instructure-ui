@@ -11,6 +11,10 @@ export default class Button extends Component {
     variant: 'icon'
   }
 
+  focus () {
+    this._button.focus()
+  }
+
   render () {
     const color = '#008ee2'
     const theme = {
@@ -19,7 +23,7 @@ export default class Button extends Component {
       iconHoverColor: color
     }
     return (
-      <BaseButton variant={this.props.variant} theme={theme} {...this.props} />
+      <BaseButton ref={(c) => { this._button = c }} variant={this.props.variant} theme={theme} {...this.props} />
     )
   }
 }

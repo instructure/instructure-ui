@@ -1,6 +1,6 @@
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin')
-const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin')
+const NoEmitOnErrorsPlugin = require('webpack/lib/NoEmitOnErrorsPlugin')
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
 const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin')
@@ -37,7 +37,7 @@ module.exports = function (env, minify, debug) {
 
   if (!debug || env === 'production') {
     plugins = plugins.concat([
-      new NoErrorsPlugin()
+      new NoEmitOnErrorsPlugin()
     ])
   } else {
     plugins = plugins.concat([

@@ -1,6 +1,7 @@
 import { cloneElement } from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import keycode from 'keycode'
+import mockRaf from 'mock-raf'
 
 import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
 
@@ -34,6 +35,19 @@ ReactWrapper.prototype.dispatchNativeEvent = function (type, attrs) {
 ReactWrapper.prototype.keyDown = function (code) {
   const keyCode = keycode(code)
   this.simulate('keyDown', { keyCode: keyCode, key: keyCode, which: keyCode })
+}
+
+ReactWrapper.prototype.keyUp = function (code) {
+  const keyCode = keycode(code)
+  this.simulate('keyUp', { keyCode: keyCode, key: keyCode, which: keyCode })
+}
+
+ReactWrapper.prototype.click = function () {
+  this.simulate('click')
+}
+
+ReactWrapper.prototype.focus = function () {
+  this.getDOMNode().focus()
 }
 
 ReactWrapper.prototype.focused = function () {
@@ -104,6 +118,8 @@ export default class Testbed {
     this.subject = subject
     this.sandbox = sinon.sandbox.create()
 
+    this.mockRaf = mockRaf()
+
     beforeEach(this.setup.bind(this))
     afterEach(this.teardown.bind(this))
   }
@@ -116,15 +132,22 @@ export default class Testbed {
     return new ReactWrapper(element, true)
   }
 
+  tick = () => {
+    this.sandbox.clock.tick(300)
+    this.mockRaf.step()
+    this.mockRaf.step()
+  }
+
   setup () {
     ApplyTheme.setDefaultTheme('canvas')
 
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
 
+    this.sandbox.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
+    this.sandbox.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
+
     this.sandbox.useFakeTimers()
-    this.sandbox.stub(window, 'requestAnimationFrame', setTimeout)
-    this.sandbox.stub(window, 'cancelAnimationFrame', clearTimeout)
   }
 
   teardown () {
@@ -156,19 +179,18 @@ export default class Testbed {
 
     this.$instance = mount(subject, { attachTo: this.rootNode, context })
 
-    // call tick after methods that would cause a re-render/trigger a transition
-    const { clock } = this.sandbox
-    const tick = () => clock.tick(1000)
-
-    override(ReactWrapper.prototype, 'setProps', tick)
-    override(ReactWrapper.prototype, 'setState', tick)
-    override(ReactWrapper.prototype, 'setContext', tick)
-    override(ReactWrapper.prototype, 'unmount', tick)
+    // to execute any animations before making assertions
+    override(ReactWrapper.prototype, 'setProps', this.tick)
+    override(ReactWrapper.prototype, 'setState', this.tick)
+    override(ReactWrapper.prototype, 'setContext', this.tick)
+    override(ReactWrapper.prototype, 'unmount', this.tick)
 
     // axe uses setTimeout so we need to call clock.tick here too
-    override(ReactWrapper.prototype, 'getA11yViolations', tick)
+    override(ReactWrapper.prototype, 'getA11yViolations', () => {
+      this.sandbox.clock.tick(1000)
+    })
 
-    tick()
+    this.tick()
 
     return this.$instance
   }
