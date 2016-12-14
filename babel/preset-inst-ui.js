@@ -13,13 +13,18 @@ if (env !== 'development' && env !== 'test' && env !== 'production' && env !== '
 module.exports = function (context, opts = {}) {
   let presets = []
 
+  const envOpts = {
+    'targets': {
+      'browsers': ['last 2 versions']
+    }
+  }
+
   if (env !== 'transpile') {
-    presets = presets.concat([[require.resolve('babel-preset-latest'), { 'modules': false }]])
-  } else {
-    presets = presets.concat(require.resolve('babel-preset-latest'))
+    envOpts['modules'] = false
   }
 
   presets = presets.concat([
+    [require.resolve('babel-preset-env'), envOpts],
     require.resolve('babel-preset-stage-1'),
     require.resolve('babel-preset-react')
   ])

@@ -10,6 +10,12 @@ import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
 import avatarImage from './images/placeholder-avatar.png'
 import lorem from 'lorem-ipsum'
 
+import * as InstUI from 'instructure-ui'
+
+Object.keys(InstUI).forEach(function (component) {
+  global[component] = InstUI[component]
+})
+
 // These need to be globals to render examples
 global.placeholderImage = placeholderImage
 global.PlaceholderIcon = IconComposeSolid

@@ -17,26 +17,13 @@ const entry = {
   'globals': [ // for rendering examples in codepen
     path.join(paths.src.docs, 'lib/globals.js')
   ],
-  'babel-polyfill': ['babel-polyfill-loader!'],
-  'vendor': ['react', 'react-dom']
+  'vendor': [
+    path.join(paths.src.docs, 'lib/polyfill.js'),
+    'react',
+    'react-dom'
+  ]
 }
 entry[pkg.name] = [ path.join(paths.root, pkg.main) ]
-
-const docsAppChunks = ['babel-polyfill', 'vendor', pkg.name, 'docs']
-const exampleAppChunks = ['babel-polyfill', 'vendor', 'globals', pkg.name, 'example']
-const chunksSortMode = function (chunksOrder) {
-  return function (chunk1, chunk2) {
-    const order1 = chunksOrder.indexOf(chunk1.names[0])
-    const order2 = chunksOrder.indexOf(chunk2.names[0])
-    if (order1 > order2) {
-      return 1
-    } else if (order1 < order2) {
-      return -1
-    } else {
-      return 0
-    }
-  }
-}
 
 let plugins = require('./config/plugins')(env, minify, debug)
 plugins = plugins.concat([
@@ -44,8 +31,8 @@ plugins = plugins.concat([
     title: pkg.name + ' : ' + pkg.description + ' (' + pkg.version + ')',
     template: path.join(paths.src.docs, 'templates/index.tmpl.html'),
     inject: 'body',
-    chunks: docsAppChunks,
-    chunksSortMode: chunksSortMode(docsAppChunks)
+    chunks: ['vendor', pkg.name, 'docs'],
+    chunksSortMode: 'dependency'
   }),
 
   new HtmlWebpackPlugin({
@@ -53,16 +40,16 @@ plugins = plugins.concat([
     template: path.join(paths.src.docs, 'templates/index.tmpl.html'),
     inject: 'body',
     filename: 'example.html',
-    chunks: exampleAppChunks,
-    chunksSortMode: chunksSortMode(exampleAppChunks)
+    chunks: ['vendor', pkg.name, 'globals', 'example'],
+    chunksSortMode: 'dependency'
   }),
 
   new CommonsChunkPlugin({
-    name: ['babel-polyfill', 'vendor'].reverse()
+    name: ['vendor', pkg.name].reverse(),
+    minChunks: Infinity
   }),
 
   new ScriptExtHtmlWebpackPlugin({
-    inline: ['babel-polyfill'],
     sync: ['vendor'],
     defaultAttribute: 'defer'
   })
@@ -79,8 +66,7 @@ module.exports = {
   plugins,
   output: {
     path: paths.build.docs,
-    filename: '[name].js',
-    libraryTarget: 'umd'
+    filename: '[name].js'
   },
   devServer: {
     contentBase: paths.build.docs,

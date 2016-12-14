@@ -1,7 +1,6 @@
 const DefinePlugin = require('webpack/lib/DefinePlugin')
 const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin')
 const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin')
-const DedupePlugin = require('webpack/lib/optimize/DedupePlugin')
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
@@ -21,7 +20,6 @@ module.exports = function (env, minify, debug) {
 
   if (minify) {
     plugins = plugins.concat([
-      new DedupePlugin(),
       new UglifyJsPlugin({
         sourceMap: true,
         compressor: {

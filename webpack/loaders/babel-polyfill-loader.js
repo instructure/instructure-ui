@@ -6,7 +6,7 @@ module.exports = function () {
 
   const callback = this.async()
 
-  coreJSBuilder({ modules: polyfills, umd: false, library: false })
+  coreJSBuilder({ modules: polyfills, umd: true, library: false })
     .then(code => callback(null, code))
     .catch(error => callback(error))
 }
