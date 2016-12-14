@@ -9,23 +9,7 @@
 }
 
 .toggle {
-  transition: all 0.2s;
   display: inline-flex;
+  flex-wrap: wrap;
   box-sizing: border-box;
-  border-width: var(--toggleBorderWidth);
-  border-style: var(--toggleBorderStyle);
-  border-radius: var(--toggleBorderRadius);
-
-  background: var(--toggleBackgroundColor);
-  border-color: var(--toggleBackgroundColor);
-
-  &.success {
-    background: var(--toggleSuccessBackgroundColor);
-    border-color: var(--toggleSuccessBackgroundColor);
-  }
-
-  &.danger {
-    background: var(--toggleDangerBackgroundColor);
-    border-color: var(--toggleDangerBackgroundColor);
-  }
 }

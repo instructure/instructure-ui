@@ -26,7 +26,6 @@
     background-size: 1em 3em;
     border-radius: 100%;
     border: 1px solid var(--borderColor);
-
     background-color: var(--background);
   }
 
@@ -73,29 +72,61 @@
   position: relative;
 
   .label {
-    display: block;
     position: relative;
     z-index: 1;
     text-transform: uppercase;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    color: var(--toggleColor);
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    min-width: 1px;
   }
 
   .facade {
-    transition: all 0.2s cubic-bezier(0.175, 0.885, 0.320, 1.275);
-    transform: scale(0.5) translate3d(0, 0, 0);
-    opacity: 0;
+    box-sizing: border-box;
+    visibility: hidden;
     display: block;
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
-    border-radius: calc(var(--toggleBorderRadius) - var(--toggleBorderWidth));
-    background: var(--toggleHandleBackground);
+    box-shadow: var(--toggleShadow);
+    border-radius: var(--toggleBorderRadius);
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: -0.25rem;
+      left: -0.25rem;
+      width: calc(100% + 0.5rem);
+      height: calc(100% + 0.5rem);
+      box-sizing: border-box;
+      border-radius: calc(var(--toggleBorderRadius) + 0.0625rem);
+      border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusOutlineColor);
+      transition: all 0.2s;
+      transform: scale(0.66) translate3d(0, 0, 0);
+      opacity: 0;
+    }
+  }
+
+  &.success .facade {
+    background-color: var(--toggleBackgroundSuccess);
+  }
+
+  &.danger .facade {
+    background-color: var(--toggleBackgroundDanger);
+  }
+
+  &.warning .facade {
+    background-color: var(--toggleBackgroundWarning);
+  }
+
+  &.off .facade {
+    background-color: var(--toggleBackgroundOff);
   }
 
   &.small {
@@ -103,9 +134,14 @@
     height: var(--toggleSmallHeight);
 
     .label {
-      font-size: 0.65rem;
+      font-size: var(--toggleSmallFontSize);
       height: var(--toggleSmallHeight);
-      line-height: var(--toggleSmallHeight);
+
+      /* stylelint-disable selector-no-type */
+      svg {
+        font-size: calc(var(--toggleSmallFontSize) + 0.375rem);
+      }
+      /* stylelint-enable selector-no-type */
     }
   }
 
@@ -114,9 +150,14 @@
     height: var(--toggleMediumHeight);
 
     .label {
-      font-size: 0.75rem;
+      font-size: var(--toggleMediumFontSize);
       height: var(--toggleMediumHeight);
-      line-height: var(--toggleMediumHeight);
+
+      /* stylelint-disable selector-no-type */
+      svg {
+        font-size: calc(var(--toggleMediumFontSize) + 0.375rem);
+      }
+      /* stylelint-enable selector-no-type */
     }
   }
 
@@ -125,9 +166,14 @@
     height: var(--toggleLargeHeight);
 
     .label {
-      font-size: 0.85rem;
+      font-size: var(--toggleLargeFontSize);
       height: var(--toggleLargeHeight);
-      line-height: var(--toggleLargeHeight);
+
+      /* stylelint-disable selector-no-type */
+      svg {
+        font-size: calc(var(--toggleLargeFontSize) + 0.375rem);
+      }
+      /* stylelint-enable selector-no-type */
     }
   }
 
@@ -135,8 +181,7 @@
 
   input[type="radio"]:checked + & .facade,
   &.checked .facade {
-    opacity: 1;
-    transform: scale(1) translate3d(0, 0, 0);
+    visibility: visible;
   }
 
   input[type="radio"][aria-disabled]:focus + & .label,
@@ -146,30 +191,16 @@
 
   input[type="radio"]:checked + & .label,
   &.checked .label {
-    color: var(--toggleHandleColor);
+    color: var(--toggleHandleText);
   }
 
   input[type="radio"]:focus + & .facade,
   &.focused .facade {
-    box-shadow:
-      0 3px 7px rgba(0, 0, 0, 0.3),
-      0 0 0 8px var(--toggleFocusColor);
-  }
-
-  &.success {
-    input[type="radio"]:checked + & .label,
-    &.checked .label {
-      color: var(--toggleSuccessColor);
-    }
-  }
-
-  &.danger {
-    input[type="radio"]:checked + & .label,
-    &.checked .label {
-      color: var(--toggleDangerColor);
+    &::before {
+      opacity: 1;
+      transform: scale(1) translate3d(0, 0, 0);
     }
   }
 
   /* stylelint-enable selector-no-type */
 }
-
