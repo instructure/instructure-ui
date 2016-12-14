@@ -1,11 +1,11 @@
 const { generateScopedName } = require('../util/loadConfig')
 
-module.exports = function (env, ciMode) {
+module.exports = function (env, debug) {
   const cssLoaderQuery = {
     modules: true,
     importLoaders: 1,
     localIdentName: (typeof generateScopedName === 'function') && generateScopedName({
-      env: ciMode ? 'production' : env
+      env: !debug ? 'production' : env
     }),
     minify: (env === 'production')
   }

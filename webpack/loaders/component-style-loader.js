@@ -21,8 +21,8 @@ module.exports = function (content) {
     console.error(e) // eslint-disable-line no-console
   }
 
-  return [
-    'module.hot && module.hot.accept([])',
-    'module.exports = ' + result + ';'
-  ].join('\n')
+  return `
+module.hot && module.hot.accept([])
+module.exports = ${result}
+`
 }

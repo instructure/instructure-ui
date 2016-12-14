@@ -37,7 +37,7 @@ plugins = plugins.concat([
 
   new HtmlWebpackPlugin({
     title: 'Component Example',
-    template: path.join(paths.src.docs, 'templates/index.tmpl.html'),
+    template: path.join(paths.src.docs, 'templates/example.tmpl.html'),
     inject: 'body',
     filename: 'example.html',
     chunks: ['vendor', pkg.name, 'globals', 'example'],
@@ -62,7 +62,7 @@ module.exports = {
   entry,
   resolve,
   resolveLoader: require('./config/resolveLoader'),
-  module: require('./config/module')(env),
+  module: require('./config/module')(env, debug),
   plugins,
   output: {
     path: paths.build.docs,

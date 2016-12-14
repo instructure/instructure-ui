@@ -1,7 +1,7 @@
 const { paths } = require('../util/loadConfig')
 
 module.exports = function (env, debug) {
-  const failOnError = (!debug || env === 'production')
+  const failOnError = debug ? false : (env === 'production')
 
   return {
     debug: failOnError,

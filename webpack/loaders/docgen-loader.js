@@ -15,8 +15,8 @@ module.exports = function (source) {
   }
   /* eslint-enable no-console */
 
-  return [
-    'module.hot && module.hot.accept([])',
-    'module.exports = ' + JSON.stringify(value, undefined, '\t')
-  ].join('\n')
+  return `
+  module.hot && module.hot.accept([])
+  module.exports = ${JSON.stringify(value, undefined, '\t')}
+`
 }

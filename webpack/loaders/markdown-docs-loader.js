@@ -13,18 +13,20 @@ module.exports = function () {
       .map(processDocs)
   )
 
-  return [
-    'module.hot && module.hot.accept([])',
-    'module.exports = [' + docs.join(',') + '];'
-  ].join('\n')
+  return `
+module.hot && module.hot.accept([])
+module.exports = [${docs.join(',')}]
+`
 }
 
 function processDocs (filepath) {
-  return '{' + [
-    'path: ' + JSON.stringify(filepath),
-    'doc: ' + requirePath(filepath),
-    'name: ' + JSON.stringify(docNameFromPath(filepath))
-  ].join(',') + '}'
+  return `
+{
+  path: ${JSON.stringify(filepath)},
+  doc: ${requirePath(filepath)},
+  name: ${JSON.stringify(docNameFromPath(filepath))}
+}
+`
 }
 
 function docNameFromPath (filepath) {
