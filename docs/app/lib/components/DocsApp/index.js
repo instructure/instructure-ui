@@ -1,4 +1,8 @@
 import React, {Component} from 'react'
+
+import * as Themes from 'instructure-ui/lib/themes'
+import { getTheme } from 'instructure-ui/lib/themeable/registry'
+
 import classnames from 'classnames'
 import ComponentDoc from '../ComponentDoc'
 import DocsHeader from '../DocsHeader'
@@ -9,8 +13,8 @@ import DocsSection from '../DocsSection'
 
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import RadioInputGroup from 'instructure-ui/lib/components/RadioInputGroup'
+import Checkbox from 'instructure-ui/lib/components/Checkbox'
 import RadioInput from 'instructure-ui/lib/components/RadioInput'
-import { getThemes } from 'instructure-ui/lib/themes'
 import Tray from 'instructure-ui/lib/components/Tray'
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
@@ -25,15 +29,14 @@ import componentsMap, { componentsList } from '../../util/load-components'
 
 import { pkg } from 'config-loader!'
 
-const Themes = getThemes()
-
 export default class DocsApp extends Component {
   constructor (props) {
     super()
     this.state = {
       menuSearch: '',
       showMenu: false,
-      themeKey: 'canvas'
+      themeKey: 'canvas',
+      a11y: false
     }
   }
 
@@ -55,6 +58,12 @@ export default class DocsApp extends Component {
     })
   }
 
+  handleA11yToggle = () => {
+    this.setState({
+      a11y: !this.state.a11y
+    })
+  }
+
   componentDidMount () {
     this.updateKey()
 
@@ -69,6 +78,20 @@ export default class DocsApp extends Component {
     if (prevState.key !== this.state.key) {
       this.refs.content.scrollTop = 0
     }
+  }
+
+  renderA11yToggle () {
+    return (
+      <div className={styles.a11yToggle}>
+        <Checkbox
+          size="small"
+          checked={this.state.a11y}
+          label="a11y"
+          variant="toggle"
+          onChange={this.handleA11yToggle}
+        />
+      </div>
+    )
   }
 
   renderThemeSelect () {
@@ -96,6 +119,7 @@ export default class DocsApp extends Component {
     return (
       <DocsSection id={themeKey}>
         <ThemeDoc
+          a11y={this.state.a11y}
           themeKey={themeKey}
           theme={theme}
         />
@@ -104,14 +128,15 @@ export default class DocsApp extends Component {
   }
 
   renderComponent (component) {
+    const themeKey = this.state.a11y ? this.state.themeKey + '-a11y' : this.state.themeKey
     return (
       <DocsSection id={component.name}>
         {this.renderThemeSelect()}
         <ComponentDoc
           name={component.name}
           doc={component.doc}
-          theme={component.theme}
-          themeKey={this.state.themeKey}
+          theme={component.generateTheme(themeKey)}
+          themeKey={themeKey}
           path={component.path}
         />
       </DocsSection>
@@ -145,7 +170,8 @@ export default class DocsApp extends Component {
     } else if (doc) {
       return this.renderDoc(doc)
     } else if (theme) {
-      return this.renderTheme(key, Themes[key])
+      const themeKey = this.state.a11y ? key + '-a11y' : key
+      return this.renderTheme(key, getTheme(themeKey))
     } else {
       return this.renderError(key)
     }
@@ -173,6 +199,9 @@ export default class DocsApp extends Component {
             </Button>
           </div>
           <div className={styles.content} ref="content">
+
+            {this.renderA11yToggle()}
+
             <div className={styles.main} role="main" id="main">
 
               {this.renderContent(this.state.key)}
@@ -186,6 +215,7 @@ export default class DocsApp extends Component {
                 <a
                   href={pkg.repository.url}
                   className={styles.githubLink}
+                  target="_blank"
                 >
                   <IconGithubSolid className={styles.footerIcon} />
                 </a>

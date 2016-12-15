@@ -42,12 +42,14 @@ export default function ({ colors }) {
     background: colors.lightest,
     color: colors.darkest,
 
-    hover: {
-      color: colors.lightest,
-      background: colors.darkest
-    }
+    hoverColor: colors.lightest,
+    hoverBackground: colors.darkest
   )
 }
 ```
 
-The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hover-color`, `--Button-hover-background`. Use these generated custom property names in the `styles.css` file for the `Button` component.
+The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hoverColor`, `--Button-hoverBackground`, but you can use these variables in `styles.css` like `var(--background)`
+and `var(--hoverColor)`.
+
+Since the variables are defined in JS you can also access them in your component JS by using `this.theme` which will give
+you the theme values applied via React context with `ApplyTheme` or the `theme` prop (falling back to the defaults).

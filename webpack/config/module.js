@@ -70,7 +70,7 @@ module.exports = function (env, debug) {
         ],
         use: [
           'babel-loader',
-          'component-style-loader',
+          'themeable-css-loader',
           { loader: 'css-loader', query: cssLoaderQuery },
           'postcss-loader'
         ]

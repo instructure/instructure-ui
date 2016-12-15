@@ -1,17 +1,19 @@
-// use webpack loader to load documentation data based on config
 const docs = require('markdown-docs-loader!')
 
 const documentsMap = {}
-docs.forEach((doc) => {
+
+export const documentsList = docs.map((doc) => {
   const name = (doc.name === 'README') ? 'index' : doc.name
   const html = doc.doc
   const title = nameToTitle(name)
 
-  doc.name = name
-  doc.title = title
-  doc.html = html
-
   documentsMap[name] = {
+    name,
+    title,
+    html
+  }
+
+  return {
     name,
     title,
     html
@@ -27,5 +29,4 @@ function nameToTitle (fileName) {
     .replace(/[_-]/g, ' ')
 }
 
-export const documentsList = docs
 export default documentsMap
