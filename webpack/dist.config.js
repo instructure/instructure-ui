@@ -1,6 +1,6 @@
 const path = require('path')
 const glob = require('glob')
-const { generateComponentName, paths, files, pkg } = require('./util/loadConfig')
+const { generateComponentName, generateThemeName, paths, files, pkg } = require('./util/loadConfig')
 const Visualizer = require('webpack-visualizer-plugin')
 
 const env = process.env.NODE_ENV
@@ -11,6 +11,12 @@ glob.sync(files.components)
   .map(function (filepath) {
     const name = generateComponentName(filepath)
     entry[minify ? name + '.min' : name] = [ filepath ]
+  })
+
+glob.sync(files.themes)
+  .map(function (filepath) {
+    const name = generateThemeName(filepath)
+    entry['themes/' + (minify ? name + '.min' : name)] = [ filepath ]
   })
 
 entry[minify ? pkg.name + '.min' : pkg.name] = [ path.join(paths.root, pkg.main) ]

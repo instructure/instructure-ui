@@ -3,14 +3,15 @@ const LoaderOptionsPlugin = require('webpack/lib/LoaderOptionsPlugin')
 const NoErrorsPlugin = require('webpack/lib/NoErrorsPlugin')
 const UglifyJsPlugin = require('webpack/lib/optimize/UglifyJsPlugin')
 const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
+const NamedModulesPlugin = require('webpack/lib/NamedModulesPlugin')
 
 module.exports = function (env, minify, debug) {
   let plugins = [
     new LoaderOptionsPlugin(require('./loaderOptions')(env, debug)),
-
     new DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify(env)
+        'NODE_ENV': JSON.stringify(env),
+        'DEBUG': !!debug
       }
     })
   ]
@@ -40,7 +41,8 @@ module.exports = function (env, minify, debug) {
     ])
   } else {
     plugins = plugins.concat([
-      new SourceMapDevToolPlugin()
+      new SourceMapDevToolPlugin(),
+      new NamedModulesPlugin()
     ])
   }
 

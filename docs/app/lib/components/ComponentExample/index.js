@@ -1,9 +1,8 @@
 import React, {Component, PropTypes} from 'react'
 import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
-import themeable from 'instructure-ui/lib/util/themeable'
 import { transform } from 'babel-standalone'
 
-import styles from './ComponentExample.css'
+import styles from './styles.css'
 
 export default class ComponentExample extends Component {
   static propTypes = {
@@ -87,7 +86,7 @@ export default class ComponentExample extends Component {
 
     return (
       <div className={styles.root}>
-        {example && <ApplyTheme theme={themeable.generateTheme(this.props.themeKey)}>{example}</ApplyTheme>}
+        {example && <ApplyTheme theme={ApplyTheme.generateTheme(this.props.themeKey)}>{example}</ApplyTheme>}
         {error && <div className={styles.errorBg} />}
         {error && <pre className={styles.error}>{error}</pre>}
       </div>

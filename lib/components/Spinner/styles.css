@@ -160,27 +160,43 @@
   selector-root-no-composition,
   selector-no-vendor-prefix,
   selector-list-comma-newline-after,
-  root-no-standard-properties
+  root-no-standard-properties,
+  declaration-no-important
 */
-/* HACKS FOR IE11 and up until IE supports inline SVG animation */
-:-ms-fullscreen, :root {
+
+@define-mixin ie-hacks {
+  .circleSpin {
+    animation-name: none !important;
+  }
+
   .small .circleSpin {
-    stroke-dasharray: 3em;
+    stroke-dasharray: 3em !important;
   }
 
   .medium .circleSpin {
-    stroke-dasharray: 6em;
+    stroke-dasharray: 6em !important;
   }
 
   .large .circleSpin {
-    stroke-dasharray: 9em;
+    stroke-dasharray: 9em !important;
   }
 }
+
+/* HACKS FOR IE11/Edge until IE supports inline SVG animation */
+:-ms-fullscreen, :root {
+  @mixin ie-hacks;
+}
+
+@supports (-ms-ime-align:auto) {
+  @mixin ie-hacks;
+}
+
 /*
   stylelint-enable
   rule-non-nested-empty-line-before,
   selector-root-no-composition,
   selector-no-vendor-prefix,
   selector-list-comma-newline-after,
-  root-no-standard-properties
+  root-no-standard-properties,
+  declaration-no-important
 */

@@ -33,7 +33,7 @@ export default class CodeMirrorEditor extends Component {
   }
 
   componentDidMount () {
-    const textareaNode = this.refs.textarea
+    const textareaNode = this._textareaNode
     this.codeMirror = CodeMirror.fromTextArea(textareaNode, this.props.options)
     this.codeMirror.on('change', this.handleValueChanged)
     this.codeMirror.on('focus', this.handleFocusChanged.bind(this, true))
@@ -94,7 +94,12 @@ export default class CodeMirrorEditor extends Component {
 
     return (
       <div className={classnames(classes)}>
-        <textarea ref="textarea" name={this.props.path} defaultValue={''} autoComplete="off" />
+        <textarea
+          ref={(c) => { this._textareaNode = c }}
+          name={this.props.path}
+          defaultValue={''}
+          autoComplete="off"
+        />
       </div>
     )
   }

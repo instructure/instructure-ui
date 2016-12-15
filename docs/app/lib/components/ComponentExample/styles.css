@@ -1,0 +1,79 @@
+:root {
+  --ComponentExample-colorCheckerboard: #eee;
+  --ComponentExample-colorCheckerboardInverse: #444;
+  --ComponentExample-gradientCheckerboard:
+    45deg,
+    var(--ComponentExample-colorCheckerboard) 25%,
+    transparent 25%,
+    transparent 75%,
+    var(--ComponentExample-colorCheckerboard) 75%,
+    var(--ComponentExample-colorCheckerboard);
+  --ComponentExample-gradientCheckerboardInverse:
+    45deg,
+    var(--ComponentExample-colorCheckerboardInverse) 25%,
+    transparent 25%,
+    transparent 75%,
+    var(--ComponentExample-colorCheckerboardInverse) 75%,
+    var(--ComponentExample-colorCheckerboardInverse);
+}
+
+/* stylelint-disable selector-no-type */
+
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  box-sizing: border-box;
+  margin: 0;
+  background-color: #fff;
+  background-image: linear-gradient(var(--ComponentExample-gradientCheckerboard)),
+    linear-gradient(var(--ComponentExample-gradientCheckerboard));
+  background-position: 0 0, 0.5rem 0.5rem;
+  background-size: 1rem 1rem;
+  border: 1px solid #eee;
+  border-radius: 3px;
+  overflow: scroll;
+}
+
+body[data-variant="inverse"] {
+  background-color: #333;
+  background-image: linear-gradient(var(--ComponentExample-gradientCheckerboardInverse)),
+    linear-gradient(var(--ComponentExample-gradientCheckerboardInverse));
+}
+
+/* stylelint-enable selector-no-type */
+
+.root {
+  box-sizing: border-box;
+  padding: 1em;
+  overflow: hidden;
+  position: relative;
+  transform: translateZ(0);
+}
+
+.errorBg {
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  overflow: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  display: block;
+}
+
+.error,
+.errorBg {
+  background: #892e2f;
+}
+
+.error {
+  color: #fff;
+  font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}

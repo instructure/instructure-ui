@@ -38,7 +38,7 @@ export default class ComponentPlayground extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     if (prevState.isFullScreen === true && this.state.isFullScreen === false) {
-      ReactDOM.findDOMNode(this.refs.fullScreenButton).focus()
+      ReactDOM.findDOMNode(this._fullScreenButton).focus()
     }
   }
 
@@ -114,7 +114,7 @@ export default class ComponentPlayground extends Component {
         { this.state.showCode && this.renderEditor() }
 
         <div className={styles.actions}>
-          <Button onClick={this.handleMaximize} ref="fullScreenButton">
+          <Button onClick={this.handleMaximize} ref={(c) => { this._fullScreenButton = c }}>
             <ScreenReaderContent>Full Screen</ScreenReaderContent>
             <svg
               className={styles.icon}

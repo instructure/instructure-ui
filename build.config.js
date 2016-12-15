@@ -6,14 +6,13 @@ const SRC_PATH = path.join(ROOT_PATH, 'lib')
 
 module.exports = {
   polyfills: [
-    'es6.object.assign',
     'es6.array.find',
     'es6.array.find-index',
     'es6.symbol'
   ],
 
   generateScopedName: function ({ env }) { // for css modules class names
-    return (env === 'production' || env === 'transpile') ? '[hash:base64]' : '[folder]__[local]'
+    return (env === 'production' || env === 'transpile') ? '[hash:base64:7]' : '[folder]__[local]'
   },
 
   generateComponentName: function (filepath) { // for component names in build output and docs
@@ -21,9 +20,15 @@ module.exports = {
     return parts[parts.length - 1]
   },
 
+  generateThemeName: function (filepath) {
+    const parts = path.dirname(filepath).split(path.sep)
+    return parts[parts.length - 1]
+  },
+
   files: {
     logo: path.join(ROOT_PATH, 'logo.png'),
     components: path.join(SRC_PATH, 'components/*/index.js'), // only top level components
+    themes: path.join(SRC_PATH, 'themes/*/index.js'),
     docs: path.join(ROOT_PATH, 'docs/*.md')
   },
 

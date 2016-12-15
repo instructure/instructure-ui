@@ -50,10 +50,6 @@
 }
 
 .root {
-
-  /* stylelint-disable selector-no-type */
-
-  input[type="checkbox"]:checked + &,
   &.checked {
     .facade {
       background: var(--checkedBackground);
@@ -65,22 +61,15 @@
     }
   }
 
-  input[type="checkbox"]:focus + &,
-  [role="menuitemcheckbox"]:focus > &,
   &.focused {
     .facade {
       box-shadow: 0 0 0 6px var(--focusOutlineColor);
     }
   }
 
-  label:hover > &,
-  [role="menuitemcheckbox"]:hover > &,
   &.hovered {
     .facade {
       border-color: var(--hoverBorderColor);
     }
   }
-
-  /* stylelint-enable selector-no-type */
-
 }

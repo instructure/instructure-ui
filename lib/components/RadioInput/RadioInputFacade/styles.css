@@ -33,17 +33,12 @@
     flex: 1;
   }
 
-  /* stylelint-disable selector-no-type */
-
-  [role="menuitemradio"]:hover > &,
-  label:hover > input[type="radio"] + &,
   &.hovered {
     .facade {
       border-color: var(--hoverBorderColor);
     }
   }
 
-  input[type="radio"]:checked + &,
   &.checked {
     .facade {
       background-color: var(--hoverBorderColor);
@@ -52,8 +47,6 @@
     }
   }
 
-  [role="menuitemradio"]:focus > &,
-  input[type="radio"]:focus + &,
   &.focused {
     .facade {
       background-color: var(--hoverBorderColor);
@@ -62,8 +55,6 @@
         inset 0 0 0 4px var(--background);
     }
   }
-
-  /* stylelint-enable selector-no-type */
 }
 
 .toggle {
@@ -177,30 +168,22 @@
     }
   }
 
-  /* stylelint-disable selector-no-type */
-
-  input[type="radio"]:checked + & .facade,
   &.checked .facade {
     visibility: visible;
   }
 
-  input[type="radio"][aria-disabled]:focus + & .label,
   &.focused .label {
     text-decoration: underline;
   }
 
-  input[type="radio"]:checked + & .label,
   &.checked .label {
     color: var(--toggleHandleText);
   }
 
-  input[type="radio"]:focus + & .facade,
   &.focused .facade {
     &::before {
       opacity: 1;
       transform: scale(1) translate3d(0, 0, 0);
     }
   }
-
-  /* stylelint-enable selector-no-type */
 }

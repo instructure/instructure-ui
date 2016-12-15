@@ -1,3 +1,5 @@
+/* stylelint-disable selector-no-type */
+
 .root {
   display: table;
   width: 100%;
@@ -9,37 +11,35 @@
   font-size: var(--fontSize);
   color: var(--color);
   background: var(--background);
-}
 
-/* stylelint-disable selector-no-type */
+  caption {
+    text-align: left;
+    background: var(--background);
+    font-size: var(--captionFontSize);
+    color: var(--captionColor);
+  }
 
-caption {
-  text-align: left;
-  background: var(--background);
-  font-size: var(--captionFontSize);
-  color: var(--captionColor);
-}
+  tr {
+    box-sizing: border-box;
+  }
 
-tr {
-  box-sizing: border-box;
-}
+  th,
+  td {
+    text-align: left;
+    vertical-align: middle;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    box-sizing: border-box;
+    border-bottom-color: var(--borderColor);
+  }
 
-th,
-td {
-  text-align: left;
-  vertical-align: middle;
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
-  box-sizing: border-box;
-  border-bottom-color: var(--borderColor);
-}
+  th {
+    font-weight: bold;
+  }
 
-th {
-  font-weight: bold;
-}
-
-thead > th {
-  border-bottom-color: var(--headerBorderColor);
+  thead > th {
+    border-bottom-color: var(--headerBorderColor);
+  }
 }
 
 .small {

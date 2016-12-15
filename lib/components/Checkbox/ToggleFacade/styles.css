@@ -26,10 +26,6 @@
   }
 }
 
-.disabled::before {
-  display: none;
-}
-
 .icon {
   display: block;
   text-align: center;
@@ -78,10 +74,6 @@
 }
 
 .root .facade {
-
-  /* stylelint-disable selector-no-type */
-
-  input[type="checkbox"]:checked + &,
   &.checked {
     background: var(--checkedBackground);
     box-shadow: none;
@@ -95,17 +87,12 @@
     }
   }
 
-  [role="menuitemcheckbox"]:focus > &,
-  input[type="checkbox"]:focus + &,
   &.focused {
     &::before {
       transform: scale(1) translate3d(0, 0, 0);
       opacity: 1;
     }
   }
-
-  /* stylelint-enable selector-no-type */
-
 }
 
 .small {

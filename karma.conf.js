@@ -24,10 +24,10 @@ if (withCoverage) {
     ],
     check: {
       global: {
-        lines: 86
+        lines: 90
       },
       each: {
-        lines: 0 // TODO: after we write Popover related tests we should bump this up
+        lines: 50
       }
     }
   }
@@ -92,6 +92,10 @@ module.exports = function config (config) {
 
     webpack: require('./webpack/test.config')(debug),
 
-    webpackMiddleware: { stats: 'errors-only' }
+    webpackMiddleware: { stats: 'errors-only' },
+
+    mochaReporter: {
+      showDiff: true
+    }
   })
 }

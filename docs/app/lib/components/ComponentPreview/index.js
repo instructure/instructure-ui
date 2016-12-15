@@ -5,21 +5,26 @@ import classnames from 'classnames'
 
 import Modal from 'react-overlays/lib/Modal'
 import Button from '../Button'
-import windowMessageListener from 'instructure-ui/lib/util/windowMessageListener'
+import windowMessageListener, { origin } from 'instructure-ui/lib/util/windowMessageListener'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+import ReactDOM from 'react-dom'
 
 import styles from './ComponentPreview.css'
 
 const DEFAULT_FRAME_HEIGHT = 70
 
 const messageHandler = function (message) {
-  if (message && message.isMounted) {
-    this.setState({
-      frameIsLoaded: true
-    })
-  }
-  if (message && message.contentHeight) {
-    this.refs.frame.height = message.contentHeight
+  try {
+    if (message && message.isMounted && this.state) {
+      this.setState({
+        frameIsLoaded: true
+      })
+    }
+    if (message && message.contentHeight && this._frame) {
+      this._frame.height = message.contentHeight
+    }
+  } catch (e) {
+    // TODO: prevent 'TypeErrors' in IE
   }
 }
 
@@ -57,7 +62,7 @@ export default class ComponentPreview extends Component {
 
   componentDidUpdate (prevProps) {
     if (prevProps.name !== this.props.name) {
-      this.refs.frame.height = DEFAULT_FRAME_HEIGHT
+      this._frame.height = DEFAULT_FRAME_HEIGHT
     }
     this.renderPreview()
   }
@@ -67,16 +72,16 @@ export default class ComponentPreview extends Component {
   }
 
   renderPreview = () => {
-    if (!this.refs.frame) {
+    if (!this._frame) {
       return
     }
 
     if (this.state.frameIsLoaded) {
-      windowMessageListener.postMessage(this.refs.frame.contentWindow, {
+      windowMessageListener.postMessage(this._frame.contentWindow, {
         code: this.props.code,
         variant: this.props.variant,
         themeKey: this.props.themeKey
-      })
+      }, origin(ReactDOM.findDOMNode(this)))
     } else {
       window.setTimeout(this.renderPreview.bind(this), 0)
     }
@@ -114,7 +119,7 @@ export default class ComponentPreview extends Component {
 
     const iframe = (
       <div className={classnames(classes)}>
-        <iframe ref="frame"
+        <iframe ref={(c) => { this._frame = c }}
           height={DEFAULT_FRAME_HEIGHT}
           className={styles.frame}
           name={this._frameName}

@@ -102,10 +102,6 @@ fi
 #######################
 printf "Building version $next_version ...\n"
 npm run pre-release
-
-cp README.md $build_path/
-cp .npmignore $build_path/
-cp LICENSE $build_path/
 node -p "p=require(\"./package\");p.scripts=p.devDependencies=undefined;p.version=\"$next_version\";JSON.stringify(p,null,2)" > $build_path/package.json
 
 ##############################
