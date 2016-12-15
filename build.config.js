@@ -21,9 +21,15 @@ module.exports = {
     return parts[parts.length - 1]
   },
 
+  generateThemeName: function (filepath) {
+    const parts = path.dirname(filepath).split(path.sep)
+    return parts[parts.length - 1]
+  },
+
   files: {
     logo: path.join(ROOT_PATH, 'logo.png'),
     components: path.join(SRC_PATH, 'components/*/index.js'), // only top level components
+    themes: path.join(SRC_PATH, 'themes/*/index.js'),
     docs: path.join(ROOT_PATH, 'docs/*.md')
   },
 

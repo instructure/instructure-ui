@@ -4,7 +4,7 @@ const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
-const { paths, pkg, files } = require('./util/loadConfig')
+const { files, paths, pkg } = require('./util/loadConfig')
 
 const env = process.env.NODE_ENV
 const minify = process.env.MINIFY
@@ -24,9 +24,11 @@ const entry = {
     'react-dom'
   ]
 }
-entry[pkg.name] = [ path.join(paths.root, pkg.main) ]
+
+entry[pkg.name] = [ path.join(paths.src.docs, 'lib/themes.js'), path.join(paths.root, pkg.main) ]
 
 let plugins = require('./config/plugins')(env, minify, debug)
+
 plugins = plugins.concat([
   new HtmlWebpackPlugin({
     title: pkg.name + ' : ' + pkg.description + ' (' + pkg.version + ')',
@@ -62,6 +64,8 @@ const resolve = require('./config/resolve')
 resolve.alias = { 'instructure-ui': process.cwd() }
 
 module.exports = {
+  cache: !!debug,
+  bail: !debug,
   entry,
   resolve,
   resolveLoader: require('./config/resolveLoader'),

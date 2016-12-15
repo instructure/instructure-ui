@@ -7,12 +7,7 @@ const {
   join
 } = require('path')
 
-const {
-  transformCss,
-  transformRequire
-} = require('../../webpack/util/themeableCSSTransform')
-
-const { generateScopedName } = require(join(process.cwd(), 'build.config.js'))
+const transformCssRequire = require('./util/transform-css-require')
 
 module.exports = function ({ types: t }) {
   function resolveModulePath (filename) {
@@ -76,20 +71,24 @@ module.exports = function ({ types: t }) {
 
         const plugins = postcssrc && postcssrc.plugins
 
+        let themeablerc = state.opts.themeablerc && require(join(cwd, state.opts.themeablerc))
+
+        if (themeablerc && typeof themeablerc === 'function') {
+          themeablerc = themeablerc({ cwd, env })
+        }
+
+        const { generateScopedName } = themeablerc
+
         require('css-modules-require-hook')({
           generateScopedName: generateScopedName({ env }),
           prepend: plugins || [],
           processCss: (css, filepath) => {
-            let processed = css
-
-            processed = transformCss(css)
-
             if (!STYLES.has(filepath)) {
-              STYLES.set(filepath, processed)
+              STYLES.set(filepath, css)
             }
-
-            return processed
-          }
+            return css
+          },
+          append: [require('./util/postcss-themeable-styles')]
         })
 
         initialized = true
@@ -120,12 +119,11 @@ module.exports = function ({ types: t }) {
           const requiringFile = file.opts.filename
           const cssFilePath = resolveStylesheetPath(requiringFile, stylesheetPath)
           const tokens = requireCssFile(requiringFile, stylesheetPath)
-
           const css = STYLES.get(cssFilePath)
 
           if (!t.isExpressionStatement(path.parent)) {
             if (css) {
-              path.replaceWithSourceString(transformRequire(tokens, css))
+              path.replaceWithSourceString(transformCssRequire(tokens, css))
             } else {
               path.replaceWith(t.ObjectExpression(
                 Object.keys(tokens).map(

@@ -15,5 +15,5 @@ export function after (extraBehavior) {
 }
 
 export function override (object, methodName, callback) {
-  object[methodName] = callback(object[methodName])
+  object[methodName] = callback(object[methodName]) // eslint-disable-line no-param-reassign
 }
