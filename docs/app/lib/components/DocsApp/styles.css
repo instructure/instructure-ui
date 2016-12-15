@@ -61,7 +61,7 @@ code[class^="lang-"] {
   box-sizing: border-box;
   margin: 0 -14rem 0 0;
   height: 100vh;
-  padding: 1.5rem;
+  padding: 3rem 3.5rem;
   min-width: 18rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -187,6 +187,7 @@ code[class^="lang-"] {
   color: black;
 }
 
-.themeSelect {
+.themeSelect,
+.a11yToggle {
   float: right;
 }

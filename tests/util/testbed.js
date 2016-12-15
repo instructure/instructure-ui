@@ -1,10 +1,13 @@
 import { cloneElement } from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import keycode from 'keycode'
+
+import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
+
 import checkA11y from 'tests/util/a11y-check'
 
 const override = function (object, methodName, extra) {
-  object[methodName] = (function (original, after) {
+  object[methodName] = (function (original, after) { // eslint-disable-line
     return function () {
       const result = original && original.apply(this, arguments)
       after.apply(this, arguments)
@@ -94,6 +97,8 @@ global.chai.use(function (chai, utils) {
   })
 })
 
+global.chai.use(require('chai-string'))
+
 export default class Testbed {
   constructor (subject) {
     this.subject = subject
@@ -112,6 +117,8 @@ export default class Testbed {
   }
 
   setup () {
+    ApplyTheme.setDefaultTheme('canvas')
+
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
 

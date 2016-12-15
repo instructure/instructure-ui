@@ -7,7 +7,6 @@ const SourceMapDevToolPlugin = require('webpack/lib/SourceMapDevToolPlugin')
 module.exports = function (env, minify, debug) {
   let plugins = [
     new LoaderOptionsPlugin(require('./loaderOptions')(env, debug)),
-
     new DefinePlugin({
       'process.env': {
         'NODE_ENV': JSON.stringify(env)

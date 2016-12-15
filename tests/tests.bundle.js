@@ -2,6 +2,8 @@
 require('babel-polyfill-loader!')
 require('!!style-loader!css-loader!./tests.css')
 
+require('instructure-ui/lib/themes')
+
 // clear the console before rebundling.
 /* eslint-disable no-console */
 if (typeof console.clear === 'function') {

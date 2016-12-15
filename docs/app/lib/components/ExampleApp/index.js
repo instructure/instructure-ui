@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+
 import windowMessageListener from 'instructure-ui/lib/util/windowMessageListener'
+
 import { override, after } from '../../util/monkey-patch'
 import ComponentExample from '../ComponentExample'
 
