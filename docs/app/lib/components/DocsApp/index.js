@@ -192,7 +192,7 @@ export default class DocsApp extends Component {
               </div>
             </div>
           </div>
-          <Tray isOpen={this.state.showMenu} isDismissable={false}>
+          <Tray label="Navigation" isOpen={this.state.showMenu} isDismissable={false}>
             <div className={styles.nav} id="nav">
               <DocsHeader />
               <DocsNav
