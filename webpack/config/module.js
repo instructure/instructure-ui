@@ -1,13 +1,18 @@
 const { generateScopedName } = require('../util/loadConfig')
 
 module.exports = function (env, debug) {
+  const isProduction = env === 'production'
+
   const cssLoaderQuery = {
     modules: true,
     importLoaders: 1,
     localIdentName: (typeof generateScopedName === 'function') && generateScopedName({
       env: !debug ? 'production' : env
     }),
-    minify: (env === 'production')
+    minimize: isProduction,
+    discardComments: true,
+    discardEmpty: true,
+    discardUnused: true,
   }
 
   return {
@@ -24,7 +29,7 @@ module.exports = function (env, debug) {
           loader: 'babel-loader',
           query: {
             babelrc: true,
-            cacheDirectory: (env !== 'production')
+            cacheDirectory: isProduction
           }
         }],
         exclude: [ /node_modules/ ]
