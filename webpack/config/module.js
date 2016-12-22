@@ -29,7 +29,7 @@ module.exports = function (env, debug) {
           loader: 'babel-loader',
           query: {
             babelrc: true,
-            cacheDirectory: isProduction
+            cacheDirectory: !isProduction
           }
         }],
         exclude: [ /node_modules/ ]
