@@ -5,6 +5,9 @@ module.exports = function (debug) {
     resolve: require('./config/resolve'),
     resolveLoader: require('./config/resolveLoader'),
     plugins: require('./config/plugins')('test', false, debug),
-    module: require('./config/module')('test', debug)
+    module: require('./config/module')('test', debug),
+    performance: {
+      hints: false
+    }
   }
 }

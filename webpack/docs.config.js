@@ -2,8 +2,9 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CommonsChunkPlugin = require('webpack/lib/optimize/CommonsChunkPlugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
-const { paths, pkg } = require('./util/loadConfig')
+const { paths, pkg, files } = require('./util/loadConfig')
 
 const env = process.env.NODE_ENV
 const minify = process.env.MINIFY
@@ -44,6 +45,8 @@ plugins = plugins.concat([
     chunksSortMode: 'dependency'
   }),
 
+  new FaviconsWebpackPlugin(files.logo),
+
   new CommonsChunkPlugin({
     name: ['vendor', pkg.name].reverse(),
     minChunks: Infinity
@@ -72,5 +75,8 @@ module.exports = {
     contentBase: paths.build.docs,
     host: '0.0.0.0',
     port: 8080
+  },
+  performance: {
+    hints: false
   }
 }

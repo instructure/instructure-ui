@@ -18,7 +18,7 @@
     "test:lint": "eslint lib",
     "test:watch": "cross-env NODE_ENV=test DEBUG=1 karma start",
     "generate": "./scripts/generate",
-    "clean": "rimraf __build__",
+    "clean": "rimraf __build__ && rimraf .babel-cache",
     "docs": "cross-env NODE_ENV=development webpack",
     "docs:min": "cross-env NODE_ENV=production MINIFY=1 webpack",
     "dist": "cross-env NODE_ENV=production webpack --config webpack/dist.config.js",

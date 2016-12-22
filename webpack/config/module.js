@@ -12,7 +12,7 @@ module.exports = function (env, debug) {
     minimize: isProduction,
     discardComments: true,
     discardEmpty: true,
-    discardUnused: true,
+    discardUnused: true
   }
 
   return {
@@ -29,7 +29,7 @@ module.exports = function (env, debug) {
           loader: 'babel-loader',
           query: {
             babelrc: true,
-            cacheDirectory: !isProduction
+            cacheDirectory: isProduction ? false : '.babel-cache'
           }
         }],
         exclude: [ /node_modules/ ]
