@@ -8,3 +8,7 @@
   margin: 0;
   display: block;
 }
+
+.marginBottom {
+  margin-bottom: var(--marginBottom);
+}
