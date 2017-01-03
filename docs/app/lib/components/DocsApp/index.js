@@ -184,7 +184,7 @@ export default class DocsApp extends Component {
                 by {pkg.author}.
                 &nbsp;
                 <a
-                  href={pkg.homepage}
+                  href={pkg.repository.url}
                   className={styles.githubLink}
                 >
                   <IconGithubSolid className={styles.footerIcon} />
