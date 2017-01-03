@@ -59,6 +59,10 @@
       background: var(--checkedBackground);
       border-color: var(--checkedBorderColor);
     }
+
+    .label {
+      color: var(--checkedLabelColor);
+    }
   }
 
   input[type="checkbox"]:focus + &,
