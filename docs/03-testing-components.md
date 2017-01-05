@@ -22,16 +22,17 @@ const testbed = new Testbed(<MyComponent prop="foo" />)
 const subject = testbed.render()
 ```
 
-The render function returns the component under test wrapped in a [teaspoon](https://github.com/jquense/teaspoon) object
-that you can use to query the DOM and/or the component tree rendered by your component. See the [teaspoon](https://github.com/jquense/teaspoon) and [chai](http://chaijs.com/api/bdd/) documentation for more details on how to write assertions.
+The render function returns the component under test wrapped in a [enzyme](http://airbnb.io/enzyme/) object
+that you can use to query the DOM and/or the component tree rendered by your component. See the [enzyme](http://airbnb.io/enzyme/) and [chai](http://chaijs.com/api/bdd/) documentation for more details on how to write assertions.
 
 #### To update the props after render:
 
 ```javascript
-subject.props({
+subject.setProps({
   someProp: 'someNewValue'
-}, function () {
-  // assert that something has changed after the props are updated here
+}, () => {
+  // assert something after props have been updated
+  done()
 })
 ```
 
@@ -44,7 +45,7 @@ const subject = testbed.render({
   onClick
 })
 
-subject.find('input').trigger('click')
+subject.find('input').simulate('click')
 
 expect(onClick).to.have.been.called
 ```

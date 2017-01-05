@@ -1,42 +1,73 @@
 import { cloneElement } from 'react'
-import $ from 'teaspoon'
-import checkA11y from 'tests/util/a11y-check'
+import { mount, ReactWrapper } from 'enzyme'
 import keycode from 'keycode'
+import checkA11y from 'tests/util/a11y-check'
 
-$.fn.getAttribute = function (attrName) {
-  return this
-    .dom()
-    .getAttribute(attrName)
+const override = function (object, methodName, extra) {
+  object[methodName] = (function (original, after) {
+    return function () {
+      const result = original && original.apply(this, arguments)
+      after.apply(this, arguments)
+      return result
+    }
+  })(object[methodName], extra)
 }
 
-$.fn.dispatchNativeEvent = function (type, attrs) {
+ReactWrapper.prototype.unwrap = function () {
+  return this.node
+}
+
+ReactWrapper.prototype.getAttribute = function (attrName) {
+  return this.getDOMNode().getAttribute(attrName)
+}
+
+ReactWrapper.prototype.dispatchNativeEvent = function (type, attrs) {
   const event = new Event(type)
-  this.dom().dispatchEvent(event, attrs)
+  const domNode = this.getDOMNode()
+
+  domNode.dispatchEvent(event, attrs)
 }
 
-$.fn.keyDown = function (code) {
+ReactWrapper.prototype.keyDown = function (code) {
   const keyCode = keycode(code)
-  this.trigger('keyDown', { keyCode: keyCode, key: keyCode, which: keyCode })
+  this.simulate('keyDown', { keyCode: keyCode, key: keyCode, which: keyCode })
 }
 
-$.fn.focused = function () {
-  return this.dom() === document.activeElement
+ReactWrapper.prototype.focused = function () {
+  const domNode = this.getDOMNode()
+  return domNode && (domNode === document.activeElement)
 }
 
-$.fn.getKey = function () {
-  return this.unwrap()._reactInternalInstance._currentElement.key.replace('.$', '')
+ReactWrapper.prototype.getKey = function () {
+  return this.key()
 }
 
-$.fn.getPropertyValue = function (property) {
-  return window.getComputedStyle(this.dom()).getPropertyValue(property)
+ReactWrapper.prototype.getComputedStyle = function () {
+  const domNode = this.getDOMNode()
+  return domNode && window && window.getComputedStyle(domNode)
 }
 
-let wrappedA11yCheck
+ReactWrapper.prototype.tagName = function () {
+  const domNode = this.getDOMNode()
+  return domNode && domNode.tagName.toUpperCase()
+}
 
-const setA11yCheckCallback = function (cb) {
-  wrappedA11yCheck = function (node, options, done) {
-    checkA11y(node, options, done)
-    cb()
+ReactWrapper.prototype.findText = function (text) {
+  return this.findWhere(n => n.text() === text)
+}
+
+ReactWrapper.prototype.getA11yViolations = function (options, callback) {
+  checkA11y(this.getDOMNode(), options, callback)
+}
+
+const originalRef = ReactWrapper.prototype.ref
+ReactWrapper.prototype.ref = function () {
+  const ref = arguments[0]
+  const instance = this.instance()
+  if (instance.hasOwnProperty(ref)) {
+    return new ReactWrapper(instance[ref], true)
+  } else {
+    return originalRef.apply(this, arguments)
   }
 }
 
@@ -45,7 +76,7 @@ global.chai.use(function (chai, utils) {
   utils.addMethod(Assertion.prototype, 'accessible', function (done, options = {}) {
     const obj = utils.flag(this, 'object')
 
-    wrappedA11yCheck(obj.dom(), options, function (result) {
+    obj.getA11yViolations(options, (result) => {
       try {
         new Assertion(result.violations.length).to.equal(0)
         done()
@@ -59,14 +90,13 @@ global.chai.use(function (chai, utils) {
 global.chai.use(function (chai, utils) {
   utils.addMethod(Assertion.prototype, 'present', function () {
     const obj = utils.flag(this, 'object')
-    return new Assertion(obj.dom()).to.exist
+    return new Assertion(obj.getDOMNode()).to.exist
   })
 })
 
 export default class Testbed {
   constructor (subject) {
     this.subject = subject
-
     this.sandbox = sinon.sandbox.create()
 
     beforeEach(this.setup.bind(this))
@@ -77,16 +107,15 @@ export default class Testbed {
   static testImage = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
   /* eslint-enable max-len */
 
+  static wrap (element) {
+    return new ReactWrapper(element, true)
+  }
+
   setup () {
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
 
     this.sandbox.useFakeTimers()
-
-    setA11yCheckCallback(() => {
-      this.sandbox.clock.tick(1000) // so that the setTimeouts in axe-core are called
-    })
-
     this.sandbox.stub(window, 'requestAnimationFrame', setTimeout)
     this.sandbox.stub(window, 'cancelAnimationFrame', clearTimeout)
   }
@@ -95,7 +124,7 @@ export default class Testbed {
     this.sandbox.restore()
 
     try {
-      if (this.$instance && this.$instance.root && this.$instance.unmount) {
+      if (this.$instance && typeof this.$instance.unmount === 'function') {
         this.$instance.unmount()
       }
     } catch (e) {
@@ -113,27 +142,24 @@ export default class Testbed {
       return
     }
 
-    const tick = () => {
-      this.sandbox.clock.tick(1000)
-    }
-
     const subject = cloneElement(this.subject, {
       ...this.subject.props,
       ...props
     })
 
-    this.$instance = $(subject).render(true, this.rootNode, context)
+    this.$instance = mount(subject, { attachTo: this.rootNode, context })
 
-    function wrapWithTick (fn) {
-      return function (...args) {
-        const result = fn.call(this, ...args)
-        tick()
-        return result
-      }
-    }
+    // call tick after methods that would cause a re-render/trigger a transition
+    const { clock } = this.sandbox
+    const tick = () => clock.tick(1000)
 
-    this.$instance.props = wrapWithTick(this.$instance.props)
-    this.$instance.unmount = wrapWithTick(this.$instance.unmount)
+    override(ReactWrapper.prototype, 'setProps', tick)
+    override(ReactWrapper.prototype, 'setState', tick)
+    override(ReactWrapper.prototype, 'setContext', tick)
+    override(ReactWrapper.prototype, 'unmount', tick)
+
+    // axe uses setTimeout so we need to call clock.tick here too
+    override(ReactWrapper.prototype, 'getA11yViolations', tick)
 
     tick()
 
