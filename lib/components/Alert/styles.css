@@ -2,7 +2,7 @@
   color: var(--color);
   background: var(--background);
   box-sizing: border-box;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--boxShadow);
   border-width: 2px;
   border-style: solid;
   display: flex;

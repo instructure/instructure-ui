@@ -111,14 +111,14 @@
 .default {
   background: var(--backgroundColor);
   border-color: var(--borderColor);
-  box-shadow: 0 1px 6px var(--boxShadowColor);
+  box-shadow: var(--boxShadow);
   color: var(--textColor);
 }
 
 .inverse {
   background: var(--backgroundColorInverse);
   border-color: var(--borderColorInverse);
-  box-shadow: 0 1px 6px var(--boxShadowColorInverse);
+  box-shadow: var(--boxShadow);
   color: var(--textColorInverse);
 }
 
