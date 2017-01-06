@@ -1,4 +1,9 @@
-.root {
+/* stylelint-disable selector-no-type */
+
+.root,
+.root a.link:link,
+.root a.link:visited,
+.root button.link {
   cursor: pointer;
 
   -webkit-font-smoothing: antialiased;
@@ -30,7 +35,7 @@
   }
 }
 
-button.root { /* stylelint-disable-line selector-no-type */
+.root button.link {
   user-select: text;
   background: none;
   border: none;
@@ -43,3 +48,5 @@ button.root { /* stylelint-disable-line selector-no-type */
   outline: none;
   text-align: inherit;
 }
+
+/* stylelint-enable selector-no-type */
