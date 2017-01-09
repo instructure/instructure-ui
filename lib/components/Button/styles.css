@@ -17,16 +17,23 @@
   user-select: none;
   touch-action: manipulation;
 
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.2s;
+  transform: var(--transform);
 
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
+  text-transform: var(--textTransform);
+  letter-spacing: var(--letterSpacing);
   border-radius: var(--borderRadius);
   border-style: var(--borderStyle);
   border-width: var(--borderWidth);
 
   &:focus {
     outline: none;
+  }
+
+  &:hover {
+    transform: var(--hoverTransform);
   }
 
   &[aria-disabled] {
@@ -106,6 +113,7 @@
   }
 
   &:active {
+    background: var(--defaultActiveBackground);
     box-shadow: var(--defaultActiveBoxShadow);
   }
 }
@@ -121,6 +129,7 @@
   }
 
   &:active {
+    background: var(--primaryActiveBackground);
     box-shadow: var(--primaryActiveBoxShadow);
   }
 }
@@ -136,6 +145,7 @@
   }
 
   &:active {
+    background: var(--successActiveBackground);
     box-shadow: var(--successActiveBoxShadow);
   }
 }
@@ -151,6 +161,7 @@
   }
 
   &:active {
+    background: var(--lightActiveBackground);
     box-shadow: var(--lightActiveBoxShadow);
   }
 }
@@ -158,6 +169,7 @@
 .ghost {
   background: var(--ghostBackground);
   color: var(--ghostColor);
+  border-style: var(--ghostBorderStyle);
   border-color: var(--ghostBorderColor);
 
   &:hover,
@@ -166,6 +178,7 @@
   }
 
   &:active {
+    background: var(--ghostActiveBackground);
     box-shadow: var(--ghostActiveBoxShadow);
   }
 }
@@ -173,6 +186,7 @@
 .ghost-inverse {
   background: var(--ghostInverseBackground);
   color: var(--ghostInverseColor);
+  border-style: var(--ghostInverseBorderStyle);
   border-color: var(--ghostInverseBorderColor);
 
   &:hover,
@@ -187,6 +201,7 @@
   }
 
   &:active {
+    background: var(--ghostActiveBackground);
     box-shadow: var(--ghostInverseActiveBoxShadow);
   }
 }
@@ -278,6 +293,7 @@
   }
 
   &:active {
+    background: var(--circlePrimaryActiveBackground);
     box-shadow: var(--circlePrimaryActiveBoxShadow);
   }
 }
@@ -293,6 +309,7 @@
   }
 
   &:active {
+    background: var(--circleDangerActiveBackground);
     box-shadow: var(--circleDangerActiveBoxShadow);
   }
 }
