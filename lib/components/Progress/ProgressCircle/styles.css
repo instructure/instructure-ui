@@ -104,6 +104,33 @@
   }
 }
 
+.x-small {
+  width: var(--xSmallSize);
+  height: var(--xSmallSize);
+
+  .circle {
+    width: var(--xSmallSize);
+    height: var(--xSmallSize);
+  }
+
+  .shadow {
+    stroke-width: 0.5em;
+  }
+
+  .track {
+    transform-origin: var(--xSmallTransform) var(--xSmallTransform);
+  }
+
+  .track,
+  .meter {
+    stroke-width: 0.185em;
+  }
+
+  .meter {
+    stroke-dasharray: var(--xSmallCircumference);
+  }
+}
+
 .small {
   width: var(--smallSize);
   height: var(--smallSize);
@@ -213,6 +240,10 @@
      Using !important here to guarantee that the bars will start showing
      0 if the animateOnMount prop is set
   */
+
+  &.x-small .meter {
+    stroke-dashoffset: var(--xSmallCircumference) !important;
+  }
 
   &.small .meter {
     stroke-dashoffset: var(--smallCircumference) !important;

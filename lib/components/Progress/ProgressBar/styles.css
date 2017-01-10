@@ -44,6 +44,16 @@
   margin-right: 0.1875rem;
 }
 
+.x-small {
+  .bar[value] {
+    height: var(--xSmallHeight);
+  }
+
+  .value {
+    font-size: var(--xSmallValueFontSize);
+  }
+}
+
 .small {
   .bar[value] {
     /* product design wants = 18px */
