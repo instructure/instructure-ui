@@ -41,8 +41,9 @@
 .closeButton {
   box-sizing: border-box;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   order: 1;
+  margin-top: var(--closeButtonMarginTop);
 }
 
 .success {
