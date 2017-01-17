@@ -1,0 +1,13 @@
+.root {
+  display: block;
+}
+
+.label {
+  background: var(--background);
+  padding: var(--padding);
+  display: block;
+  font-size: var(--fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  color: var(--color);
+}

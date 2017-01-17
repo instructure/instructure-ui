@@ -2,38 +2,61 @@
   padding: var(--padding);
   background: var(--background);
 
-  &:focus {
-    outline: none;
-  }
-}
+  display: flex;
+  align-items: center;
 
-.default {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   line-height: var(--lineHeight);
   font-size: var(--fontSize);
 
+  transition: background 0.2s;
+
+  outline: none;
   cursor: pointer;
   user-select: none;
 
-  transition: background 0.2s;
-
-  color: var(--color);
-  background: var(--background);
-
   &:focus,
+  &:active,
   &:hover {
-    color: var(--hoverColor);
-    background: var(--hoverBackground);
+    background: var(--activeBackground);
+
+    .label {
+      color: var(--activeLabelColor);
+    }
+
+    .icon {
+      color: var(--activeIconColor);
+    }
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
   }
 }
 
-.disabled {
-  cursor: not-allowed;
-  opacity: 0.5;
+.label {
+  color: var(--labelColor);
 }
 
-.checkbox,
-.radio {
-  background: var(--background);
+.icon {
+  color: var(--iconColor);
+  margin: var(--iconMargin);
+  width: 1em;
+  height: 1em;
 }
+
+/* stylelint-disable selector-no-type */
+
+a.root,
+a.root:link,
+a.root:visited,
+a.root:active,
+a.root:hover,
+a.root:focus {
+  text-decoration: none;
+}
+
+/* stylelint-enable selector-no-type */
