@@ -9,7 +9,6 @@
 }
 
 .bar[value] {
-  transition: all 0.3s;
   box-sizing: border-box;
   appearance: none;
   width: auto;
@@ -17,12 +16,10 @@
   border: none;
 
   &::-webkit-progress-value {
-    transition: all 1s;
     background: linear-gradient(to right, var(--meterColorStart) 0%, var(--meterColorEnd) 100%);
   }
 
   &::-moz-progress-bar {
-    transition: all 1s;
     background: linear-gradient(to right, var(--meterColorStart) 0%, var(--meterColorEnd) 100%);
   }
 
