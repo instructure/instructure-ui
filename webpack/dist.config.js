@@ -10,10 +10,11 @@ const entry = {}
 glob.sync(files.components)
   .map(function (filepath) {
     const name = generateComponentName(filepath)
-    entry[minify ? name + '.min' : name] = [ filepath ]
+    entry['components/' + (minify ? name + '.min' : name)] = [ filepath ]
   })
 
 entry[minify ? pkg.name + '.min' : pkg.name] = [ path.join(paths.root, pkg.main) ]
+entry['index'] = [ path.join(paths.root, pkg.main) ]
 
 let plugins = require('./config/plugins')(env, minify)
 
