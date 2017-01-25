@@ -12,8 +12,10 @@
 
   transition: color 0.2s;
 
+  outline: var(--outlineWidth) solid var(--outlineColor);
+
   &:focus {
-    outline: none;
+    outline-color: var(--focusOutlineColor);
   }
 
   &:focus,
@@ -40,6 +42,5 @@ button.root { /* stylelint-disable-line selector-no-type */
   padding: 0;
   display: inline-flex;
   align-content: flex-start;
-  outline: none;
   text-align: inherit;
 }
