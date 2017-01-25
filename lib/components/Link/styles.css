@@ -17,8 +17,14 @@
 
   transition: color 0.2s;
 
-  &:focus {
-    outline: none;
+  outline-width: var(--outlineWidth);
+  outline-style: var(--outlineStyle);
+  outline-offset: var(--outlineOffset);
+  outline-color: var(--outlineColor);
+
+  &:focus,
+  &:active {
+    outline-color: var(--focusOutlineColor);
   }
 
   &:focus,
@@ -45,7 +51,6 @@
   padding: 0;
   display: inline-flex;
   align-content: flex-start;
-  outline: none;
   text-align: inherit;
 }
 
