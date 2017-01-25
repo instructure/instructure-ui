@@ -212,14 +212,11 @@
   border-color: var(--linkBorderColor);
   color: var(--linkColor);
 
-  &:focus {
-    box-shadow: var(--linkFocusBoxShadow);
-  }
-
   &:hover,
   &:focus,
   &:active {
     text-decoration: underline;
+    border-color: var(--linkFocusBorderColor);
   }
 
   &:hover,
