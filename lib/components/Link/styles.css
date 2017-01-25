@@ -1,4 +1,10 @@
-.root {
+/* stylelint-disable selector-no-type */
+
+.root,
+a.root,
+a.root:visited,
+a.root:link,
+button.root {
   cursor: pointer;
 
   -webkit-font-smoothing: antialiased;
@@ -12,8 +18,14 @@
 
   transition: color 0.2s;
 
+  outline-width: var(--outlineWidth);
+  outline-style: solid;
+  outline-offset: var(--outlineOffset);
+  outline-color: var(--outlineColor);
+
+  &:active,
   &:focus {
-    outline: none;
+    outline-color: var(--focusOutlineColor);
   }
 
   &:focus,
@@ -30,7 +42,7 @@
   }
 }
 
-button.root { /* stylelint-disable-line selector-no-type */
+button.root {
   user-select: text;
   background: none;
   border: none;
@@ -40,6 +52,7 @@ button.root { /* stylelint-disable-line selector-no-type */
   padding: 0;
   display: inline-flex;
   align-content: flex-start;
-  outline: none;
   text-align: inherit;
 }
+
+/* stylelint-enable selector-no-type */
