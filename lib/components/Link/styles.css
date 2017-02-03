@@ -18,14 +18,11 @@ button.root {
 
   transition: color 0.2s;
 
-  outline-width: var(--outlineWidth);
-  outline-style: solid;
-  outline-offset: var(--outlineOffset);
-  outline-color: var(--outlineColor);
+  outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
 
   &:active,
   &:focus {
-    outline-color: var(--focusOutlineColor);
+    outline: var(--outlineWidth) var(--outlineStyle) var(--focusOutlineColor);
   }
 
   &:focus,
