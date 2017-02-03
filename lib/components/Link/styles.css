@@ -17,14 +17,11 @@
 
   transition: color 0.2s;
 
-  outline-width: var(--outlineWidth);
-  outline-style: var(--outlineStyle);
-  outline-offset: var(--outlineOffset);
-  outline-color: var(--outlineColor);
+  outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
 
   &:focus,
   &:active {
-    outline-color: var(--focusOutlineColor);
+    outline: var(--outlineWidth) var(--outlineStyle) var(--focusOutlineColor);
   }
 
   &:focus,
