@@ -32,7 +32,6 @@
     opacity: 0;
   }
 
-  &:active,
   &:focus {
     &::before {
       opacity: 1;

@@ -6,13 +6,11 @@ import styles from './styles.css'
 import TextInput from 'instructure-ui/lib/components/TextInput'
 import Link from 'instructure-ui/lib/components/Link'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
-import ToggleDetails from 'instructure-ui/lib/components/ToggleDetails'
-import Typography from 'instructure-ui/lib/components/Typography'
-import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
+import NavToggle from '../NavToggle'
 
 export default class DocsNav extends Component {
   static propTypes = {
-    components: PropTypes.array,
+    components: PropTypes.object,
     documents: PropTypes.array,
     themes: PropTypes.object,
     selected: PropTypes.string
@@ -40,34 +38,42 @@ export default class DocsNav extends Component {
     }
   }
 
-  renderSection (toggleText, sectionLinks, expanded) {
+  createNavToggle (toggleText, children, expanded, variant = 'section') {
+    if (children.length === 0) {
+      return
+    }
+
     return (
-      <ApplyTheme theme={{
-        [ToggleDetails.theme]: {iconColor: '#008ee2'},
-        [Typography.theme]: {primaryColor: '#008ee2'}
-      }}>
-        <div className={styles.toggle}>
-          <ToggleDetails
-            summary={
-              <Typography
-                transform="uppercase"
-                weight="light"
-                color="primary"
-              >
-                {toggleText}
-              </Typography>
-            }
-            isExpanded={expanded || !!this.state.query}
-            iconPosition="end"
-            isBlock
-          >
-            <div className={styles.section}>
-              {sectionLinks}
-            </div>
-          </ToggleDetails>
-        </div>
-      </ApplyTheme>
+      <div className={styles.navToggle} key={toggleText}>
+        <NavToggle
+          variant={variant}
+          summary={toggleText}
+          isExpanded={expanded || !!this.state.query}
+          iconPosition="end"
+          isBlock
+        >
+          {children}
+        </NavToggle>
+      </div>
     )
+  }
+
+  createComponentLinks = (components, isCategoryLink = false) => {
+    return components.map((component) => {
+      const isSelected = component.name === this.props.selected
+      const classes = {
+        [styles.link]: true,
+        [styles.categoryLink]: isCategoryLink,
+        [styles.selectedLink]: isSelected
+      }
+      return (
+        <div key={component.name} className={classnames(classes)}>
+          <Link theme={this.linkTheme(isSelected)} href={`#${component.name}`}>
+            {component.name}
+          </Link>
+        </div>
+      )
+    })
   }
 
   render () {
@@ -75,23 +81,32 @@ export default class DocsNav extends Component {
     let documentSelected = false
     let themeSelected = false
 
-    const components = this.props.components
-      .filter((component) => new RegExp(this.state.query, 'i').test(component.name))
-      .map((component) => {
-        const isSelected = component.name === this.props.selected
+    const categories = []
+    let elements = null
+    const categorizedComponents = this.props.components
+
+    Object.keys(categorizedComponents).sort().forEach((category) => {
+      const filteredComponents = categorizedComponents[category]
+        .filter((component) => new RegExp(this.state.query, 'i').test(component.name))
+
+      if (filteredComponents.length > 0) {
+        const isSelected = filteredComponents.map((component) => component.name)
+          .indexOf(this.props.selected) > -1
         componentSelected = componentSelected || isSelected
-        const classes = {
-          [styles.link]: true,
-          [styles.selectedLink]: isSelected
+        const componentLinks = this.createComponentLinks(filteredComponents, true)
+
+        if (category !== 'Elements') {
+          categories.push(this.createNavToggle(category, componentLinks, isSelected, 'category'))
+        } else {
+          elements = this.createComponentLinks(filteredComponents)
         }
-        return (
-          <div key={component.name} className={classnames(classes)}>
-            <Link theme={this.linkTheme(isSelected)} href={`#${component.name}`}>
-              {component.name}
-            </Link>
-          </div>
-        )
-      })
+      }
+    })
+
+    let components = []
+    if (elements || (categories.length > 0)) {
+      components = [elements, ...categories]
+    }
 
     const documents = this.props.documents
       .filter((doc) => doc.name !== 'index')
@@ -139,10 +154,10 @@ export default class DocsNav extends Component {
             label={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
           />
         </div>
-        <div role="navigation">
-          { themes.length > 0 && this.renderSection('Themes', themes, themeSelected) }
-          { components.length > 0 && this.renderSection('Components', components, componentSelected) }
-          { documents.length > 0 && this.renderSection('Documentation', documents, documentSelected) }
+        <div role="navigation" className={styles.sections}>
+          { this.createNavToggle('Themes', themes, themeSelected) }
+          { this.createNavToggle('Components', components, componentSelected) }
+          { this.createNavToggle('Documentation', documents, documentSelected) }
         </div>
       </div>
     )

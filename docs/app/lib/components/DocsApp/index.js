@@ -25,7 +25,7 @@ import Button from '../Button'
 import styles from './styles.css'
 
 import documentsMap, { documentsList } from '../../util/load-docs'
-import componentsMap, { componentsList } from '../../util/load-components'
+import componentsMap, { categorizedComponents } from '../../util/load-components'
 
 import { pkg } from 'config-loader!'
 
@@ -227,7 +227,7 @@ export default class DocsApp extends Component {
               <DocsHeader />
               <DocsNav
                 selected={this.state.key}
-                components={componentsList}
+                components={categorizedComponents}
                 documents={documentsList}
                 themes={Themes}
               />

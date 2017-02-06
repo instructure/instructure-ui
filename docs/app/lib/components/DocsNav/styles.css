@@ -4,13 +4,21 @@
   padding: 0.1rem 0.75rem 0.75rem;
 }
 
-.toggle {
-  padding: 0.8rem 1rem;
-}
-
 .search {
   text-align: center;
   margin: 1rem;
+}
+
+.sections {
+  padding: 0 1rem;
+}
+
+.navToggle {
+  padding: 0.8rem 0;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
 }
 
 .link {
@@ -29,6 +37,14 @@
 
   &:last-child {
     padding-bottom: 0;
+  }
+}
+
+.categoryLink {
+  padding-left: 1rem;
+
+  &:first-child {
+    padding-top: 0.8rem;
   }
 }
 

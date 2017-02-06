@@ -10,10 +10,15 @@ docs.components.forEach((component) => {
   }
 })
 
-export const componentsList = Object.keys(componentsMap)
-  .sort()
-  .map((name) => {
-    return componentsMap[name]
-  })
+const categorizedComponents = {}
+Object.keys(componentsMap).forEach((name) => {
+  let category = componentsMap[name].doc.data.category || 'Elements'
+  category = category.charAt(0).toUpperCase() + category.slice(1)
+  if (categorizedComponents[category] === undefined) {
+    categorizedComponents[category] = []
+  }
+  categorizedComponents[category].push(componentsMap[name])
+})
 
+export {categorizedComponents}
 export default componentsMap
