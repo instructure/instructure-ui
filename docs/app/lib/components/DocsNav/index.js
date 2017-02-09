@@ -6,6 +6,9 @@ import styles from './styles.css'
 import TextInput from 'instructure-ui/lib/components/TextInput'
 import Link from 'instructure-ui/lib/components/Link'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+import ToggleDetails from 'instructure-ui/lib/components/ToggleDetails'
+import Typography from 'instructure-ui/lib/components/Typography'
+import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
 
 export default class DocsNav extends Component {
   static propTypes = {
@@ -37,11 +40,46 @@ export default class DocsNav extends Component {
     }
   }
 
+  renderSection (toggleText, sectionLinks, expanded) {
+    return (
+      <ApplyTheme theme={{
+        [ToggleDetails.theme]: {iconColor: '#008ee2'},
+        [Typography.theme]: {primaryColor: '#008ee2'}
+      }}>
+        <div className={styles.toggle}>
+          <ToggleDetails
+            summary={
+              <Typography
+                transform="uppercase"
+                weight="light"
+                color="primary"
+              >
+                {toggleText}
+              </Typography>
+            }
+            isExpanded={expanded || !!this.state.query}
+            iconPosition="end"
+            isBlock
+          >
+            <div className={styles.section}>
+              {sectionLinks}
+            </div>
+          </ToggleDetails>
+        </div>
+      </ApplyTheme>
+    )
+  }
+
   render () {
+    let componentSelected = false
+    let documentSelected = false
+    let themeSelected = false
+
     const components = this.props.components
       .filter((component) => new RegExp(this.state.query, 'i').test(component.name))
       .map((component) => {
         const isSelected = component.name === this.props.selected
+        componentSelected = componentSelected || isSelected
         const classes = {
           [styles.link]: true,
           [styles.selectedLink]: isSelected
@@ -60,6 +98,7 @@ export default class DocsNav extends Component {
       .filter((doc) => new RegExp(this.state.query, 'i').test(doc.title))
       .map((doc) => {
         const isSelected = doc.name === this.props.selected
+        documentSelected = documentSelected || isSelected
         const classes = {
           [styles.link]: true,
           [styles.selectedLink]: isSelected
@@ -74,8 +113,10 @@ export default class DocsNav extends Component {
       })
 
     const themes = Object.keys(this.props.themes)
+      .filter((themeKey) => new RegExp(this.state.query, 'i').test(themeKey))
       .map((themeKey) => {
         const isSelected = themeKey === this.props.selected
+        themeSelected = themeSelected || isSelected
         const classes = {
           [styles.link]: true,
           [styles.selectedLink]: isSelected
@@ -99,24 +140,9 @@ export default class DocsNav extends Component {
           />
         </div>
         <div role="navigation">
-          <div className={styles.header}>
-            Themes
-          </div>
-          <div className={styles.section}>
-            {themes}
-          </div>
-          <div className={styles.header}>
-            Components
-          </div>
-          <div className={styles.section}>
-            {components}
-          </div>
-          <div className={styles.header}>
-            Documentation
-          </div>
-          <div className={styles.section}>
-            {documents}
-          </div>
+          { themes.length > 0 && this.renderSection('Themes', themes, themeSelected) }
+          { components.length > 0 && this.renderSection('Components', components, componentSelected) }
+          { documents.length > 0 && this.renderSection('Documentation', documents, documentSelected) }
         </div>
       </div>
     )

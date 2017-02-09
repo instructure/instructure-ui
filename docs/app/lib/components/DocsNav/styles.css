@@ -4,12 +4,8 @@
   padding: 0.1rem 0.75rem 0.75rem;
 }
 
-.header {
-  color: #008ee2;
-  font-size: 0.875rem;
-  padding: 1rem;
-  text-transform: uppercase;
-  font-weight: 300;
+.toggle {
+  padding: 0.8rem 1rem;
 }
 
 .search {
@@ -19,7 +15,7 @@
 
 .link {
   margin: 0;
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 0;
   display: flex;
   align-items: center;
 
@@ -29,6 +25,10 @@
 
   &:first-child {
     flex: 1;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
   }
 }
 
