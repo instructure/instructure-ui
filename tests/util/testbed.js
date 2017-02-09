@@ -91,7 +91,7 @@ global.chai.use(function (chai, utils) {
 })
 
 global.chai.use(function (chai, utils) {
-  utils.addMethod(Assertion.prototype, 'present', function () {
+  utils.addProperty(Assertion.prototype, 'present', function () {
     const obj = utils.flag(this, 'object')
     return new Assertion(obj.getDOMNode()).to.exist
   })
