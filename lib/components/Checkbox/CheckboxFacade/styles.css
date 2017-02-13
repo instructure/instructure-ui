@@ -1,6 +1,6 @@
 .root {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .facade {
@@ -20,6 +20,22 @@
 
   margin-right: var(--marginRight);
   padding: var(--padding);
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: calc(1em + 0.875rem);
+    height: calc(1em + 0.875rem);
+    box-sizing: border-box;
+    border-radius: calc(var(--borderRadius) + 0.125rem);
+    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusOutlineColor);
+    transition: all 0.2s;
+    transform: scale(0.75) translate3d(0, 0, 0);
+    opacity: 0;
+  }
 }
 
 .label {
@@ -63,7 +79,10 @@
 
   &.focused {
     .facade {
-      box-shadow: 0 0 0 6px var(--focusOutlineColor);
+      &::before {
+        transform: scale(1) translate3d(0, 0, 0);
+        opacity: 1;
+      }
     }
   }
 
