@@ -1,29 +1,12 @@
 .root {
   box-sizing: border-box;
-  max-width: 33.3333%;
-  margin-bottom: 0.5rem;
-  padding: 0 0.5rem;
+  padding: var(--padding);
 
-  flex: 0 0 33.3333%;
-  justify-self: space-between;
+  justify-self: space-around;
 
-  text-align: center;
+  text-align: var(--textAlign);
 
   font-family: var(--fontFamily);
-}
-
-.root:first-child:nth-last-child(2),
-.root:last-child:nth-child(2) {
-  max-width: 50%;
-
-  flex-basis: 50%;
-  justify-self: flex-start;
-}
-
-.root:last-child:nth-child(1) {
-  max-width: 100%;
-
-  flex-basis: 100%;
 }
 
 .label {
