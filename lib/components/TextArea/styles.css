@@ -27,6 +27,9 @@
   color: var(--color);
   background: var(--background);
 
+  white-space: pre-wrap;
+  word-wrap: break-word;
+
   &:focus {
     box-shadow: initial;
     outline: 0.1875rem solid var(--focusOutlineColor);
