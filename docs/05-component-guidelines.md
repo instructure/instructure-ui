@@ -39,10 +39,10 @@ For example, to add a variable for the `hover` state of a `Button` component the
 ```
 export default function ({ colors }) {
   return (
-    background: colors.lightest,
+    background: colors.white,
     color: colors.licorice,
 
-    hoverColor: colors.lightest,
+    hoverColor: colors.white,
     hoverBackground: colors.licorice
   )
 }
