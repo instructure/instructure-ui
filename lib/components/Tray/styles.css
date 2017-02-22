@@ -4,6 +4,7 @@
   overflow-y: auto;
   overflow-x: hidden;
   box-sizing: border-box;
+  z-index: var(--zIndex);
 }
 
 .placement--top,

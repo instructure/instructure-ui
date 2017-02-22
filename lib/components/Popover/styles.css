@@ -1,0 +1,4 @@
+.content {
+  z-index: var(--zIndex);
+  display: block;
+}
