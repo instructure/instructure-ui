@@ -8,6 +8,7 @@
 }
 
 .content {
+  display: block;
   overflow: hidden;
   border-radius: calc(var(--borderRadius) - var(--borderWidth));
 }
@@ -30,6 +31,7 @@
   }
 
   .arrow {
+    display: block;
     border-width: calc(var(--arrowSize) + var(--borderWidth));
   }
 
