@@ -1,15 +1,18 @@
 const { paths } = require('../util/loadConfig')
 
 module.exports = function (env, debug) {
-  const failOnError = debug ? false : (env === 'production')
+  const debugMode = debug || (env === 'development')
 
   return {
-    debug: failOnError,
+    debug: debugMode,
     options: {
       context: paths.root, // required for css-loader
       eslint: {
+        failOnWarning: !debugMode,
         emitError: true,
-        failOnError
+        failOnError: !debugMode,
+        fix: false,
+        quiet: false
       }
     }
   }
