@@ -1,0 +1,117 @@
+/* Variables are defined in ./theme.js */
+
+.root {
+  box-sizing: border-box;
+  position: relative;
+  font-family: var(--fontFamily);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  min-width: var(--autoMinWidth);
+
+  &:not(.clickable) {
+    padding: var(--containerPadding);
+    background-color: var(--backgroundColor);
+  }
+}
+
+.hero,
+.content,
+.button,
+.heading,
+.message {
+  display: block;
+}
+
+.hero + .heading {
+  margin: var(--largeMargin) 0 0;
+}
+
+.small .hero + .heading {
+  margin: var(--mediumMargin) 0 0;
+}
+
+.hero + .message,
+.heading + .message {
+  margin: var(--mediumMargin) 0 0;
+}
+
+.small {
+  .hero {
+    font-size: 4rem;
+  }
+}
+
+.medium {
+  .hero {
+    font-size: 8rem;
+  }
+}
+
+.large {
+  .hero {
+    font-size: 12rem;
+  }
+}
+
+.small,
+.medium {
+  .message {
+    font-size: var(--messageFontSize);
+  }
+}
+
+.large {
+  .message {
+    font-size: var(--messageFontSizeLarge);
+  }
+}
+
+.message {
+  color: var(--messageColor);
+}
+
+.clickable .message {
+  color: var(--messageColorClickable);
+}
+
+.hero {
+  color: var(--iconColor);
+
+  /* stylelint-disable selector-no-type */
+  > img,
+  > svg {
+    max-width: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
+  > img {
+    height: auto;
+  }
+  /* stylelint-enable selector-no-type */
+}
+
+.button {
+  appearance: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  margin: 0;
+  padding: var(--containerPadding);
+  border: none;
+  border-radius: var(--buttonBorderRadius);
+  background: var(--backgroundColor);
+
+  &:hover,
+  &:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 var(--buttonBorderWidth) var(--iconHoverColor);
+
+    .hero {
+      color: var(--iconHoverColor);
+    }
+  }
+}
