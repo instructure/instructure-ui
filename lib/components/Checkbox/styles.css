@@ -3,10 +3,6 @@
   position: relative;
   display: inline-block;
   vertical-align: middle;
-
-  & + .root {
-    margin-top: var(--marginTop);
-  }
 }
 
 .input {
