@@ -15,7 +15,7 @@
 
   transition: all 0.2s;
 
-  border: 1px solid var(--borderColor);
+  border: var(--borderWidth) solid var(--borderColor);
   border-radius: var(--borderRadius);
 
   margin-right: var(--marginRight);
@@ -27,11 +27,11 @@
     z-index: -1;
     top: -0.25rem;
     left: -0.25rem;
-    width: calc(1em + 0.875rem);
-    height: calc(1em + 0.875rem);
+    width: calc(1em + 1.0rem);
+    height: calc(1em + 1.0rem);
     box-sizing: border-box;
     border-radius: calc(var(--borderRadius) + 0.125rem);
-    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusOutlineColor);
+    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusBorderColor);
     transition: all 0.2s;
     transform: scale(0.75) translate3d(0, 0, 0);
     opacity: 0;
