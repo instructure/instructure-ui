@@ -1,6 +1,5 @@
 .root {
-  margin: 0 auto;
-  max-width: var(--maxWidth);
+  display: block;
 }
 
 @define-mixin Grid-container {
@@ -9,18 +8,15 @@
   box-sizing: border-box;
 
   &.colSpacingSmall {
-    padding-left: calc(var(--spacingSmall) / 2);
-    padding-right: calc(var(--spacingSmall) / 2);
+    padding: 0 calc(var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    padding-left: calc(var(--spacingMedium) / 2);
-    padding-right: calc(var(--spacingMedium) / 2);
+    padding: 0 calc(var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    padding-left: calc(var(--spacingLarge) / 2);
-    padding-right: calc(var(--spacingLarge) / 2);
+    padding: 0 calc(var(--spacingLarge) / 2);
   }
 }
 

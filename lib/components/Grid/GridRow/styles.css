@@ -35,18 +35,15 @@
   }
 
   &.colSpacingSmall {
-    margin-left: calc(-1 * var(--spacingSmall) / 2);
-    margin-right: calc(-1 * var(--spacingSmall) / 2);
+    margin: 0 calc(-1 * var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    margin-left: calc(-1 * var(--spacingMedium) / 2);
-    margin-right: calc(-1 * var(--spacingMedium) / 2);
+    margin: 0 calc(-1 * var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    margin-left: calc(-1 * var(--spacingLarge) / 2);
-    margin-right: calc(-1 * var(--spacingLarge) / 2);
+    margin: 0 calc(-1 * var(--spacingLarge) / 2);
   }
 
   &.rowSpacingSmall {
@@ -61,12 +58,14 @@
     margin-bottom: var(--spacingLarge);
   }
 
-  &:last-child {
+  &.rowSpacingNone,
+  &.lastRow {
     margin-bottom: 0;
   }
 }
 
 .root {
+  display: block;
   box-sizing: border-box;
 }
 

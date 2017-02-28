@@ -7,6 +7,12 @@
   max-width: calc($size / 12 * 99.999%);
 }
 
+@define-mixin column-offset
+  $size: 1 {
+
+  margin-left: calc($size / 12 * 99.999%);
+}
+
 @define-mixin grid-columns-for-breakpoint
   $breakpoint {
   .$(breakpoint)--auto {
@@ -62,6 +68,54 @@
   .$(breakpoint)--12 {
     flex: 0 0 100%;
   }
+
+  .$(breakpoint)-offset--1 {
+    @mixin column-offset 1;
+  }
+
+  .$(breakpoint)-offset--2 {
+    @mixin column-offset 2;
+  }
+
+  .$(breakpoint)-offset--3 {
+    @mixin column-offset 3;
+  }
+
+  .$(breakpoint)-offset--4 {
+    @mixin column-offset 4;
+  }
+
+  .$(breakpoint)-offset--5 {
+    @mixin column-offset 5;
+  }
+
+  .$(breakpoint)-offset--6 {
+    @mixin column-offset 6;
+  }
+
+  .$(breakpoint)-offset--7 {
+    @mixin column-offset 7;
+  }
+
+  .$(breakpoint)-offset--8 {
+    @mixin column-offset 8;
+  }
+
+  .$(breakpoint)-offset--9 {
+    @mixin column-offset 9;
+  }
+
+  .$(breakpoint)-offset--10 {
+    @mixin column-offset 10;
+  }
+
+  .$(breakpoint)-offset--11 {
+    @mixin column-offset 11;
+  }
+
+  .$(breakpoint)--12 {
+    flex: 0 0 100%;
+  }
 }
 
 @define-mixin start-grid-column {
@@ -76,15 +130,18 @@
   }
 
   &.colSpacingSmall {
-    padding: 0 calc(var(--spacingSmall) / 2);
+    padding-left: calc(var(--spacingSmall) / 2);
+    padding-right: calc(var(--spacingSmall) / 2);
   }
 
   &.colSpacingMedium {
-    padding: 0 calc(var(--spacingMedium) / 2);
+    padding-left: calc(var(--spacingMedium) / 2);
+    padding-right: calc(var(--spacingMedium) / 2);
   }
 
   &.colSpacingLarge {
-    padding: 0 calc(var(--spacingLarge) / 2);
+    padding-left: calc(var(--spacingLarge) / 2);
+    padding-right: calc(var(--spacingLarge) / 2);
   }
 
   &.vAlign--top {
@@ -98,10 +155,28 @@
   &.vAlign--bottom {
     align-self: flex-end;
   }
+
+  &.textAlign--left {
+    text-align: left;
+  }
+
+  &.textAlign--right {
+    text-align: right;
+  }
+
+  &.textAlign--center {
+    text-align: center;
+  }
+
+  &.textAlign--inherit {
+    text-align: inherit;
+  }
 }
 
 .root {
+  display: block;
   box-sizing: border-box;
+  text-align: inherit;
 
   &.rowSpacingSmall {
     margin-bottom: var(--spacingSmall);
@@ -115,7 +190,8 @@
     margin-bottom: var(--spacingLarge);
   }
 
-  &:last-child {
+  &.rowSpacingNone,
+  &.lastRow.lastCol {
     margin-bottom: 0;
   }
 }
