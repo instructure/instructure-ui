@@ -3,19 +3,7 @@
   font-weight: var(--fontWeight);
   font-size: var(--fontSize);
   line-height: var(--lineHeight);
-
-  padding: 0 0.125rem;
-}
-
-.screenreader-only {
-  height: 1px;
-  width: 1px;
-  margin: -1px;
-  padding: 0;
-  position: absolute;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  border: 0;
+  display: block;
 }
 
 .hint {

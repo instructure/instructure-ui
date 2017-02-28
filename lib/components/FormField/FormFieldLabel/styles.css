@@ -1,14 +1,29 @@
+/* stylelint-disable selector-no-type */
+
+legend.root,
+label.root {
+  all: initial;
+}
+
 .root {
-  color: var(--color);
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  line-height: var(--lineHeight);
-  font-size: var(--fontSize);
-  padding: 0;
-  margin: 0;
   display: block;
 }
 
-.marginBottom {
-  margin-bottom: var(--marginBottom);
+legend.root {
+  display: table;
+  width: 100%;
 }
+
+.root,
+legend.root,
+label.root {
+  color: var(--color);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  font-size: var(--fontSize);
+  line-height: var(--lineHeight);
+  margin: 0;
+  text-align: inherit;
+}
+
+/* stylelint-enable selector-no-type */

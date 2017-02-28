@@ -1,21 +1,16 @@
-.root {
-  all: initial;
-  width: 100%;
-  padding: 0.01em 0 0 0;
-
-  &[aria-disabled] .fields {
-    opacity: 0.6;
-  }
-
-  + .root {
-    margin-top: var(--marginTop);
-  }
+.fields {
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+  display: block;
 }
 
-.legend {
-  all: initial;
-  margin: 0;
-  padding: 0; /* no padding or margins on this element so that label can be hidden */
-  display: table;
-  width: 100%;
+.fields.invalid {
+  border-color: var(--errorBorderColor);
+  padding: var(--errorFieldsPadding);
+}
+
+.fields.disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
 }

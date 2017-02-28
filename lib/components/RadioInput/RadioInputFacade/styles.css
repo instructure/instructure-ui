@@ -16,16 +16,16 @@
 
   .facade {
     box-sizing: border-box;
-    margin-right: 0.5rem;
-    width: 1em;
-    height: 1em;
-    flex-shrink: 0;
-    min-width: 1em;
     display: block;
+    position: relative;
+    margin-right: 0.5rem;
+    width: 1rem;
+    height: 1rem;
+    flex-shrink: 0;
+    min-width: 1rem;
     transition: all 0.2s ease-out;
-    background-size: 1em 3em;
     border-radius: 100%;
-    border: 1px solid var(--borderColor);
+    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--borderColor);
     background-color: var(--background);
 
     &::before {
@@ -33,9 +33,9 @@
       position: absolute;
       z-index: -1;
       top: -0.25rem;
-      left: -0.3rem;
-      width: calc(1em + 0.6rem);
-      height: calc(1em + 0.6rem);
+      left: -0.25rem;
+      width: calc(100% + 0.5rem);
+      height: calc(100% + 0.5rem);
       box-sizing: border-box;
       border-radius: 100%;
       border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusOutlineColor);
