@@ -3,9 +3,6 @@
 }
 
 .simple {
-  > label { /* stylelint-disable-line selector-no-type */
-    margin-top: var(--marginTop);
-  }
 }
 
 .toggle {

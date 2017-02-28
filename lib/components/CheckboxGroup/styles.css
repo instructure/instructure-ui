@@ -1,9 +1,0 @@
-/* stylelint-disable selector-no-type */
-
-.root {
-  > label {
-    margin-top: var(--marginTop);
-  }
-}
-
-/* stylelint-enable selector-no-type */
