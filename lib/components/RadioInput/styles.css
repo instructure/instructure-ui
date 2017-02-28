@@ -6,12 +6,6 @@
   vertical-align: middle;
 }
 
-.simple {
-  & + .simple {
-    margin-top: var(--marginTop);
-  }
-}
-
 .toggle {
 }
 
