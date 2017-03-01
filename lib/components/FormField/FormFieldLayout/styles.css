@@ -1,13 +1,10 @@
-fieldset.root { /* stylelint-disable-line selector-no-type */
-  width: 100%;
+.root {
+  all: initial;
+  width: auto;
   border: 0;
   padding: 0.01em 0 0;
   margin: 0;
   min-width: 0;
-}
-
-label.root { /* stylelint-disable-line selector-no-type */
-  all: initial;
 }
 
 .root {

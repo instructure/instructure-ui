@@ -14,9 +14,9 @@ legend.root {
   width: 100%;
 }
 
-.root,
-legend.root,
-label.root {
+.has-content,
+legend.has-content,
+label.has-content {
   color: var(--color);
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
