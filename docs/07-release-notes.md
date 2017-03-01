@@ -1,3 +1,103 @@
+## 1.0.0
+
+#### Add a [Position](#Position) component @mzabriskie
+
+#### Update design of [Checkbox](#Checkbox) `toggle` variant @chart
+
+#### Fix [Grid](#Grid) component bugs with `spaceAround` and `spaceBetween` props in IE 11 @jstern
+
+#### Update design of [RadioInputGroup](#RadioInputGroup) `toggle` variant @chart
+
+#### Minimize CSS in JS bundles @jbelser
+
+#### Update `modern` design of [Checkbox](#Checkbox) component @andy
+
+#### Fix CSS specificity bug with [Link](#Link) component @jstern
+
+#### Optimize style injection (using [glamor](https://github.com/threepointone/glamor) Stylesheet) @jstern
+
+#### Import themes individually and change the API for setting the default theme. See [theme](#canvas) documentation. @jstern
+
+#### Make box-shadows consistent (use [theme config](#canvas) for shadows) @phiett
+
+#### Add `x-small` size to [Progress](#Progress) component @brinaca
+
+#### Fix margins on [FormFieldLabel](#FormFieldLabel) when there is no visible label text @chart
+
+#### Fix [Link](#Link) component in `a11y` theme @chart
+
+#### Fix alignment of close button on [Alert](#Alert) component @phiett
+
+#### Add `as` prop to (note `tag` and `tagName` props have been removed): @sejensen
+
+- [AccessibleContent](#AccessibleContent)
+- [Button](#Button)
+- [Heading](#Heading)
+- [Link](#Link)
+- [PresentationContent](#PresentationContent)
+- [ScreenReaderContent](#ScreenReaderContent)
+- [Typography](#Typography)
+
+#### Update [Button](#Button) for `modern` theme @andy
+
+#### Add a `buttonRef` prop to the [Button](#Button) component @jstern
+
+#### Replace `style` prop on [Typography](#Typography) component with `fontStyle` @jstern
+
+#### Fix spacing on [Button](#Button) component so that it lines up with TextInput @chart
+
+#### Fix [Progress](#Progress) component VoiceOver bug @cpalmer
+
+#### Add focus management to [Tray](#Tray) @jcorrigan
+
+#### Make onChange handler for [TextArea](#TextArea) consistent with TextInput @jstern
+
+#### Add an index file to the components directory in /dist build output @jstern
+
+#### Add focus ring to a11y theme of [Link](#Link) and [Button](#Button) components
+
+#### Add new color `mediumLighter` to canvas and modern themes @phiett
+
+#### Updates to [Menu](#Menu) component `checkbox` and `radio` item types @sejensen
+
+#### Prevent errors when [Transition](#Transition) steps occur after the component unmounts @jstern
+
+#### Ensure modern theme for [Checkbox](#Checkbox) and [RadioInput](#RadioInput) are brand vs gray @phiett
+
+#### [ToggleDetails](#ToggleDetails) customization updates
+
+#### Change [Checkbox](#Checkbox) and [RadioInput](#RadioInput) to dark vs brand @phiett
+
+#### Fix bugs in [CheckboxGroup](#CheckboxGroup) and [MenuItemGroup](#MenuItemGroup) due to unintentional state modification @sejensen
+
+#### [Popover](#Popover} refactor and bug fixes @mzabriskie
+
+#### Fix [TextArea](#TextArea) ENTER key support and horizontal scroll on FF and IE 11 @jstern
+
+#### Remove three Item limit from [MetricList](#MetricList) @cprescott
+
+#### Replace [Checkbox](#Checkbox) & [RadioInput](#RadioInput) focus states with single outline state @phiett
+
+#### Add `inline` layout option to [FormField](#FormField)/all form components
+
+#### Add `column` layout optino to [FormFieldGroup](#FormFieldGroup), [RadioInputGroup](#RadioInputGroup), [CheckboxGroup](#CheckboxGroup) @jstern, @chart
+
+#### Add `offset` prop to [GridCol](#GridCol) @jstern
+
+#### Make [Tooltip](#Tooltip) default to `default` variant @jstern
+
+#### Remove zIndex props and add them to component themes @jstern
+
+#### Allow any trigger content for [Tooltip](#Tooltip) @jstern
+
+#### Prevent overwriting existing keys @jstern
+
+#### Update color theme variable names @phiett
+
+#### Fix screen reader bugs in [Progress](#Progress) component @phiett
+
+#### Add [TreeBrowser](#TreeBrowser) component @mberns
+
 ## 0.18.2
 
 #### Remove babel-polyfill peer dependency (required polyfills are listed in build.config.js)
