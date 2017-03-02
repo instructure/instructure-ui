@@ -119,7 +119,7 @@
 }
 
 @define-mixin start-grid-column {
-  flex: 1;
+  flex: 1 1 auto;
   margin-bottom: 0;
   box-sizing: border-box;
 
@@ -177,6 +177,7 @@
   display: block;
   box-sizing: border-box;
   text-align: inherit;
+  min-width: 1px;
 
   &.rowSpacingSmall {
     margin-bottom: var(--spacingSmall);
