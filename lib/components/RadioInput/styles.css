@@ -92,7 +92,7 @@ input.input[type="radio"] { /* stylelint-disable-line selector-no-type */
   .input:checked + .control {
     .facade {
       background: var(--background);
-      box-shadow: inset 0 0 0 3px var(--hoverBorderColor);
+      box-shadow: inset 0 0 0 var(--controlSize) var(--hoverBorderColor);
       border-color: var(--hoverBorderColor);
     }
   }
