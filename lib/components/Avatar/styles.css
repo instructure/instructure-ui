@@ -1,57 +1,66 @@
 .root {
-  height: 2em;
+  height: 2.5em;
   display: inline-block;
+  border-style: solid;
+  border-color: var(--borderColor);
+  box-sizing: border-box;
+  background-color: var(--background);
   background-position: center;
   background-size: cover;
+  background-clip: content-box;
   background-repeat: no-repeat;
   overflow: hidden;
   line-height: 0;
 
   &.auto {
     font-size: inherit;
+    border-width: var(--borderWidthSmall);
   }
 
   &.x-small {
-    font-size: 1.5rem;
+    font-size: 0.75rem;
+    border-width: var(--borderWidthSmall);
   }
 
   &.small {
-    font-size: 1.875rem;
+    font-size: 1.0rem;
+    border-width: var(--borderWidthSmall);
   }
 
   &.medium {
-    font-size: 2.25rem;
+    font-size: 1.25rem;
+    border-width: var(--borderWidthMedium);
   }
 
   &.large {
-    font-size: 2.625rem;
+    font-size: 1.5rem;
+    border-width: var(--borderWidthMedium);
   }
 
   &.x-large {
-    font-size: 3rem;
+    font-size: 1.75rem;
+    border-width: var(--borderWidthMedium);
   }
 }
 
 .initials {
   color: var(--color);
-  background-color: var(--background);
-  line-height: 2em;
+  line-height: 2.375em;
   text-align: center;
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   letter-spacing: 0.0313em;
 }
 
 .circle {
-  width: 2em;
+  width: 2.5em;
   position: relative;
-  border-radius: 2em;
+  border-radius: 100%;
   overflow: hidden;
 }
 
 .rectangle {
-  width: 2.605em;
+  width: 3em;
 }
 
 .is-block {
