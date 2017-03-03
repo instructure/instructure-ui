@@ -1,3 +1,13 @@
+## 1.0.1
+
+#### Fix focus state for RadioInput and Checkbox @chart
+
+#### Fix message display for form components at `wide` screens @jstern
+
+#### Fix focus for [Menu](#Menu) component when first item is a MenuItemGroup @sejensen
+
+#### Add [Billboard](#Billboard) component @chart
+
 ## 1.0.0
 
 #### Add a [Position](#Position) component @mzabriskie
@@ -70,7 +80,7 @@
 
 #### Fix bugs in [CheckboxGroup](#CheckboxGroup) and [MenuItemGroup](#MenuItemGroup) due to unintentional state modification @sejensen
 
-#### [Popover](#Popover} refactor and bug fixes @mzabriskie
+#### [Popover](#Popover) refactor and bug fixes @mzabriskie
 
 #### Fix [TextArea](#TextArea) ENTER key support and horizontal scroll on FF and IE 11 @jstern
 
