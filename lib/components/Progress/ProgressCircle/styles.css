@@ -113,6 +113,10 @@
     height: var(--xSmallSize);
   }
 
+  .value {
+    padding: 0.5rem;
+  }
+
   .shadow {
     stroke-width: 0.5em;
   }
