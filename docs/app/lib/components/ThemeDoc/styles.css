@@ -1,7 +1,7 @@
 .root {
   margin-top: 2rem;
 
-  :global code { /* stylelint-disable-line selector-no-type */
+  code { /* stylelint-disable-line selector-no-type */
     background: transparent;
     border: none;
   }

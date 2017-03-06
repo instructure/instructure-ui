@@ -1,10 +1,11 @@
 import React, { Component, PropTypes } from 'react'
 import ReactDOM from 'react-dom'
 import CodeEditor from '../CodeEditor'
-import ComponentPreview from '../ComponentPreview'
+import ComponentExample from '../ComponentExample'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+import Modal, { ModalBody } from 'instructure-ui/lib/components/Modal'
 import classnames from 'classnames'
 
 import styles from './styles.css'
@@ -95,21 +96,38 @@ export default class ComponentPlayground extends Component {
   }
 
   render () {
-    const { code } = this.state
+    const { code, isFullScreen } = this.state
     const classes = {
       [styles.root]: true
     }
 
+    const example = (
+      <ComponentExample
+        variant={this.props.variant}
+        code={code}
+        themeKey={this.props.themeKey}
+        isFullScreen={isFullScreen}
+      />
+    )
+
     return (
       <div className={classnames(classes)}>
 
-        <ComponentPreview
-          code={code}
-          variant={this.props.variant}
-          themeKey={this.props.themeKey}
-          onMinimize={this.handleMinimize}
-          name={this.props.name}
-          isFullScreen={this.state.isFullScreen} />
+        {
+          isFullScreen ? (
+            <Modal
+              isOpen
+              label={`Full screen view of ${this.props.name}`}
+              size="fullscreen"
+              onRequestClose={this.handleMinimize}
+              closeButtonLabel="Close full screen view"
+            >
+              <ModalBody>
+                {example}
+              </ModalBody>
+            </Modal>
+          ) : example
+        }
 
         { this.state.showCode && this.renderEditor() }
 

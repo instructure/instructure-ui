@@ -12,7 +12,6 @@
   &::before {
     content: "";
     position: absolute;
-    z-index: -1;
     top: -0.25rem;
     left: -0.25rem;
     width: calc(100% + 0.5rem);

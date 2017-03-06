@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import styles from './CodePenButton.css'
+import styles from './styles.css'
 import Button from '../Button'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 

@@ -11,7 +11,6 @@ const minify = process.env.MINIFY
 const debug = process.env.DEBUG
 
 const entry = {
-  'example': [ path.join(paths.src.docs, 'lib/example.js') ],
   'docs': [
     path.join(paths.src.docs, 'lib/index.js')
   ],
@@ -34,16 +33,7 @@ plugins = plugins.concat([
     title: pkg.name + ' : ' + pkg.description + ' (' + pkg.version + ')',
     template: path.join(paths.src.docs, 'templates/index.tmpl.html'),
     inject: 'body',
-    chunks: ['vendor', pkg.name, 'docs'],
-    chunksSortMode: 'dependency'
-  }),
-
-  new HtmlWebpackPlugin({
-    title: 'Component Example',
-    template: path.join(paths.src.docs, 'templates/example.tmpl.html'),
-    inject: 'body',
-    filename: 'example.html',
-    chunks: ['vendor', pkg.name, 'globals', 'example'],
+    chunks: ['vendor', pkg.name, 'globals', 'docs'],
     chunksSortMode: 'dependency'
   }),
 
@@ -55,7 +45,8 @@ plugins = plugins.concat([
   }),
 
   new ScriptExtHtmlWebpackPlugin({
-    defaultAttribute: 'sync'
+    defaultAttribute: 'sync',
+    defer: ['docs']
   })
 ])
 

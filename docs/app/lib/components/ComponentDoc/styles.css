@@ -29,20 +29,9 @@
   font-size: 0.875rem;
 }
 
-/* stylelint-disable selector-no-type */
-
 .description {
-  code {
+  code { /* stylelint-disable-line selector-no-type */
     font-size: 90%;
     padding: 2px 4px;
   }
-
-  h3 {
-    margin: 2rem 0 0.75rem 0;
-    padding: 0;
-    font-style: italic;
-    font-weight: 400;
-  }
 }
-
-/* stylelint-enable selector-no-type */

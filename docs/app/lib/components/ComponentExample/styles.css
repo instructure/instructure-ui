@@ -17,15 +17,9 @@
     var(--ComponentExample-colorCheckerboardInverse);
 }
 
-/* stylelint-disable selector-no-type */
-
-html {
-  height: 100%;
-}
-
-body {
-  height: 100%;
+.root {
   box-sizing: border-box;
+  padding: 1em;
   margin: 0;
   background-color: #fff;
   background-image: linear-gradient(var(--ComponentExample-gradientCheckerboard)),
@@ -34,44 +28,24 @@ body {
   background-size: 1rem 1rem;
   border: 1px solid #eee;
   border-radius: 3px;
-  overflow: scroll;
 }
 
-body[data-variant="inverse"] {
+.fullscreen {
+  width: 100%;
+  height: 100%;
+}
+
+.inverse {
   background-color: #333;
   background-image: linear-gradient(var(--ComponentExample-gradientCheckerboardInverse)),
     linear-gradient(var(--ComponentExample-gradientCheckerboardInverse));
 }
 
-/* stylelint-enable selector-no-type */
-
-.root {
-  box-sizing: border-box;
-  padding: 1em;
-  overflow: hidden;
-  position: relative;
-  transform: translateZ(0);
-}
-
-.errorBg {
-  box-sizing: border-box;
-  width: 100vw;
-  height: 100vh;
-  margin: 0;
-  overflow: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  display: block;
-}
-
-.error,
-.errorBg {
-  background: #892e2f;
-}
-
 .error {
+  background: #892e2f;
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
   color: #fff;
   font-family: Menlo, Consolas, Monaco, "Andale Mono", monospace;
   font-size: 0.75rem;

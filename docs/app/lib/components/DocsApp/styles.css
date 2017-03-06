@@ -11,10 +11,6 @@ html,
 body {
   margin: 0;
   font-family: "Lato", Helvetica, Arial, sans-serif;
-
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
   font-weight: 400;
   background-color: #fff;
   width: 100%;

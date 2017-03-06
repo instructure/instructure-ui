@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import styles from './DocsSection.css'
+import styles from './styles.css'
 
 export default class DocsSection extends Component {
   static propTypes = {

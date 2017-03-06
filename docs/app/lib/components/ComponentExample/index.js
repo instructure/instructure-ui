@@ -1,6 +1,8 @@
 import React, {Component, PropTypes} from 'react'
+import ReactDOM from 'react-dom'
 import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
 import { transform } from 'babel-standalone'
+import classnames from 'classnames'
 
 import styles from './styles.css'
 
@@ -8,7 +10,8 @@ export default class ComponentExample extends Component {
   static propTypes = {
     code: PropTypes.string,
     variant: PropTypes.string,
-    themeKey: PropTypes.string
+    themeKey: PropTypes.string,
+    isFullScreen: PropTypes.bool
   }
 
   constructor (props) {
@@ -23,24 +26,12 @@ export default class ComponentExample extends Component {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
-
-    if (this.props.variant) {
-      this.setVariantAttribute()
-    }
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.code !== prevProps.code) {
+    if (this.props.code !== prevProps.code || this.props.themeKey !== prevProps.themeKey) {
       this.executeCode(this.props.code)
     }
-
-    if (this.props.variant !== prevProps.variant) {
-      this.setVariantAttribute()
-    }
-  }
-
-  setVariantAttribute () {
-    document.body.setAttribute('data-variant', this.props.variant)
   }
 
   compileCode (code) {
@@ -50,45 +41,54 @@ export default class ComponentExample extends Component {
   }
 
   evalCode (code) {
-    /* eslint-disable no-eval */
-    return eval(code)
-    /* eslint-enable no-eval */
+    return eval(code) // eslint-disable-line no-eval
   }
 
-  executeCode (code, variant) {
+  executeCode (code) {
+    const mountNode = this._mountNode
+
+    ReactDOM.unmountComponentAtNode(mountNode)
+
+    this.setState({ error: null })
+
     if (!code) {
       return
     }
 
     try {
       const compiledCode = this.compileCode(code)
-      const example = this.evalCode(compiledCode)
+      const component = this.evalCode(compiledCode)
 
-      this.setState({
-        error: null,
-        variant,
-        example
-      })
+      ReactDOM.render(
+        <ApplyTheme theme={ApplyTheme.generateTheme(this.props.themeKey)}>
+          {component}
+        </ApplyTheme>,
+        mountNode
+      )
     } catch (err) {
       this.handleError(err)
     }
   }
 
   handleError (err) {
+    ReactDOM.unmountComponentAtNode(this._mountNode)
     this.setState({
-      error: err.toString(),
-      example: null
+      error: err.toString()
     })
   }
 
   render () {
-    const { error, example } = this.state
+    const classes = {
+      [styles.root]: true,
+      [styles[this.props.variant]]: this.props.variant,
+      [styles.error]: this.state.error,
+      [styles.fullscreen]: this.props.isFullScreen
+    }
 
     return (
-      <div className={styles.root}>
-        {example && <ApplyTheme theme={ApplyTheme.generateTheme(this.props.themeKey)}>{example}</ApplyTheme>}
-        {error && <div className={styles.errorBg} />}
-        {error && <pre className={styles.error}>{error}</pre>}
+      <div className={classnames(classes)}>
+        <div ref={(el) => { this._mountNode = el }} />
+        {this.state.error && <pre className={styles.error}>{this.state.error}</pre>}
       </div>
     )
   }

@@ -12,7 +12,7 @@ export default function parseDescription (markdown) {
         language === 'jsx_example_inverse' ||
         language === 'js_example' ||
         language === 'js_example_inverse') {
-      const variant = (language === 'jsx_example_inverse' || language === 'js_example_inverse') ? 'inverse' : null
+      const variant = (language === 'jsx_example_inverse' || language === 'js_example_inverse') ? 'inverse' : undefined
       const lang = (language === 'js_example' || language === 'js_example_inverse') ? 'js' : 'jsx'
       examples.push({ code, variant, lang })
 

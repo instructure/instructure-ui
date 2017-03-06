@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 
-import styles from './HtmlDoc.css'
+import styles from './styles.css'
 
 export default class HtmlDoc extends Component {
   static propTypes = {

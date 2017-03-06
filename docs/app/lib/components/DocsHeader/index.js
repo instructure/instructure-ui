@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import styles from './DocsHeader.css'
+import styles from './styles.css'
 
 import config from 'config-loader!'
 

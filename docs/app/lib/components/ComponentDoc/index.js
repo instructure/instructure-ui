@@ -8,7 +8,7 @@ import CodeEditor from '../CodeEditor'
 
 import Link from 'instructure-ui/lib/components/Link'
 
-import styles from './ComponentDoc.css'
+import styles from './styles.css'
 
 import { pkg } from 'config-loader!'
 
