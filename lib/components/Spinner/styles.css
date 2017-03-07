@@ -183,6 +183,7 @@
 }
 
 /* HACKS FOR IE11/Edge until IE supports inline SVG animation */
+
 :-ms-fullscreen, :root {
   @mixin ie-hacks;
 }
