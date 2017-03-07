@@ -79,6 +79,7 @@
   color: var(--iconColor);
 
   /* stylelint-disable selector-no-type */
+
   > img,
   > svg {
     max-width: 100%;
@@ -89,6 +90,7 @@
   > img {
     height: auto;
   }
+
   /* stylelint-enable selector-no-type */
 }
 

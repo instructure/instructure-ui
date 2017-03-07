@@ -9,7 +9,6 @@ import 'codemirror/mode/jsx/jsx'
 import styles from './styles.css'
 
 export default class CodeMirrorEditor extends Component {
-
   static propTypes = {
     onChange: PropTypes.func,
     onFocusChange: PropTypes.func,

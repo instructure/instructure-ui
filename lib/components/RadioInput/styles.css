@@ -184,9 +184,11 @@ input.input[type="radio"] { /* stylelint-disable-line selector-no-type */
       height: var(--toggleSmallHeight);
 
       /* stylelint-disable selector-no-type */
+
       svg {
         font-size: calc(var(--toggleSmallFontSize) + 0.375rem);
       }
+
       /* stylelint-enable selector-no-type */
     }
   }
@@ -200,9 +202,11 @@ input.input[type="radio"] { /* stylelint-disable-line selector-no-type */
       height: var(--toggleMediumHeight);
 
       /* stylelint-disable selector-no-type */
+
       svg {
         font-size: calc(var(--toggleMediumFontSize) + 0.375rem);
       }
+
       /* stylelint-enable selector-no-type */
     }
   }
@@ -216,9 +220,11 @@ input.input[type="radio"] { /* stylelint-disable-line selector-no-type */
       height: var(--toggleLargeHeight);
 
       /* stylelint-disable selector-no-type */
+
       svg {
         font-size: calc(var(--toggleLargeFontSize) + 0.375rem);
       }
+
       /* stylelint-enable selector-no-type */
     }
   }

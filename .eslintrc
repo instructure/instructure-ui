@@ -6,6 +6,12 @@
   "parser": "babel-eslint",
   "rules": {
     "mocha/no-exclusive-tests": "error",
+    "jsx-a11y/accessible-emoji" : 2,
+    "jsx-a11y/aria-activedescendant-has-tabindex": 2,
+    "jsx-a11y/iframe-has-title": 2,
+    "jsx-a11y/no-autofocus": 2,
+    "jsx-a11y/no-distracting-elements": 2,
+    "jsx-a11y/no-redundant-roles": 2,
     "jsx-a11y/anchor-has-content": 2,
     "jsx-a11y/aria-props": 2,
     "jsx-a11y/aria-proptypes": 2,
@@ -17,7 +23,6 @@
     "jsx-a11y/label-has-for": 2,
     "jsx-a11y/mouse-events-have-key-events": 2,
     "jsx-a11y/no-access-key": 2,
-    "jsx-a11y/no-marquee": 2,
     "jsx-a11y/no-onchange": 2,
     "jsx-a11y/onclick-has-focus": 2,
     "jsx-a11y/onclick-has-role": 2,
@@ -39,7 +44,10 @@
     "prefer-const": 2,
     "no-param-reassign": ["error", { "props": true }],
     "no-console": 2,
-    "no-useless-escape": 0
+    "no-useless-escape": 0,
+
+    "no-unused-expressions": 0,
+    "react/no-unused-prop-types": 0
   },
   "env": {
     "browser": true,
