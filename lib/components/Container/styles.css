@@ -1,0 +1,43 @@
+.root {
+  box-sizing: border-box;
+  min-width: 1px;
+}
+
+.isBlock {
+  display: block;
+}
+
+.isInline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.textAlign--left {
+  text-align: left;
+}
+
+.textAlign--center {
+  text-align: center;
+}
+
+.textAlign--right {
+  text-align: right;
+}
+
+.small {
+  max-width: var(--smallMaxWidth);
+}
+
+.medium {
+  max-width: var(--mediumMaxWidth);
+}
+
+.large {
+  max-width: var(--largeMaxWidth);
+}
+
+.auto {}
+
+.visualDebug {
+  border: 1px dashed red;
+}
