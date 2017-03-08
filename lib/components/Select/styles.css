@@ -21,7 +21,12 @@
     width: 100%;
     appearance: none;
 
-    border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+    border-width: var(--borderWidth);
+    border-style: var(--borderStyle);
+    border-top-color: var(--borderTopColor);
+    border-right-color: var(--borderRightColor);
+    border-bottom-color: var(--borderBottomColor);
+    border-left-color: var(--borderLeftColor);
     border-radius: var(--borderRadius);
 
     transition: all 0.2s ease-out;
