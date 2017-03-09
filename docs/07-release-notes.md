@@ -1,3 +1,11 @@
+## 1.0.2
+
+#### Do not focus [PopoverMenu](#PopoverMenu) trigger on mount @sejensen
+
+#### Fix `shouldCloseOnOverlayClick` prop for [Modal](#Modal) @mzabriskie
+
+#### Fix [PopoverMenu](#PopoverMenu) bug when MenuItems are triggered by ENTER key press @jstern
+
 ## 1.0.1
 
 #### Fix focus state for RadioInput and Checkbox @chart

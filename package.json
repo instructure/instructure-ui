@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
