@@ -1,0 +1,55 @@
+.root {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.input {
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+.label {
+  display: block;
+  box-sizing: border-box;
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+  text-align: center;
+  border-radius: var(--borderRadius);
+  border: var(--borderWidth) solid transparent;
+  cursor: pointer;
+
+  &:hover {
+    border-color: var(--hoverBorderColor);
+    border-style: var(--hoverBorderStyle);
+  }
+}
+
+.focused {
+  .label {
+    border-color: var(--hoverBorderColor);
+    border-style: solid;
+  }
+}
+
+.dragAccepted,
+.dragRejected {
+  .label {
+    border-style: var(--focusBorderStyle);
+  }
+}
+
+.dragAccepted .label {
+  border-color: var(--acceptedColor);
+}
+
+.dragRejected .label {
+  border-color: var(--rejectedColor);
+}
