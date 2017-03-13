@@ -71,10 +71,6 @@
   color: var(--messageColor);
 }
 
-.clickable .message {
-  color: var(--messageColorClickable);
-}
-
 .hero {
   color: var(--iconColor);
 
@@ -106,14 +102,35 @@
   border: none;
   border-radius: var(--buttonBorderRadius);
   background: var(--backgroundColor);
+  text-decoration: none;
 
   &:hover,
   &:focus {
+    text-decoration: none;
     outline: none;
     box-shadow: inset 0 0 0 var(--buttonBorderWidth) var(--iconHoverColor);
 
     .hero {
       color: var(--iconHoverColor);
     }
+  }
+
+  &:active {
+    background: var(--clickableActiveBg);
+
+    .hero,
+    .message {
+      color: var(--clickableActiveText);
+    }
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  .message {
+    color: var(--messageColorClickable);
   }
 }
