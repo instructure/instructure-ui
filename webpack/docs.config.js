@@ -24,7 +24,7 @@ const entry = {
   ]
 }
 
-entry[pkg.name] = [ path.join(paths.src.docs, 'lib/themes.js'), path.join(paths.root, pkg.main) ]
+entry[pkg.name] = [ paths.src.themes, path.join(paths.root, pkg.main) ]
 
 let plugins = require('./config/plugins')(env, minify, debug)
 

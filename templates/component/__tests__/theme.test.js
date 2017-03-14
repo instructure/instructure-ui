@@ -2,7 +2,7 @@ import ${COMPONENT} from '../index'
 import { contrast } from '../../../util/color'
 
 describe('${COMPONENT}.theme', function () {
-  describe('with the canvas theme', function () {
+  describe('with the default theme', function () {
     const variables = ${COMPONENT}.generateTheme()
 
     it('should have a background and text colors that meet 3:1 contrast', function () {

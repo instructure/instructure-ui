@@ -7,7 +7,6 @@ import styles from './styles.css'
 
 export default class ThemeDoc extends Component {
   static propTypes = {
-    a11y: PropTypes.bool,
     themeKey: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired
   }
@@ -70,13 +69,14 @@ export default class ThemeDoc extends Component {
       }
     }
 
-    const key = this.props.a11y ? `${themeKey}-a11y` : themeKey
+    const a11y = (themeKey.indexOf('-a11y') >= 0)
+    const key = a11y ? themeKey.split('-')[0] : themeKey
+    const params = a11y ? '{ accessible: true }' : ''
 
     const code = `
-import 'instructure-ui/lib/themes/${themeKey}'
-import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
-
-ApplyTheme.setDefaultTheme('${key}')
+// in your application entry point (before render):
+import { ${key} } from 'instructure-ui/lib/themes'
+${key}.use(${params})
 `
     return (
       <div className={styles.root}>

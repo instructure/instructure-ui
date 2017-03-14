@@ -37,7 +37,8 @@ module.exports = {
     root: ROOT_PATH,
     src: {
       root: SRC_PATH,
-      docs: path.join(ROOT_PATH, 'docs/app')
+      docs: path.join(ROOT_PATH, 'docs/app'),
+      themes: path.join(SRC_PATH, 'themes')
     },
     build: {
       root: BUILD_PATH,

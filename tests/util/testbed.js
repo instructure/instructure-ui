@@ -3,7 +3,7 @@ import { mount, ReactWrapper } from 'enzyme'
 import keycode from 'keycode'
 import mockRaf from 'mock-raf'
 
-import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
+import { canvas } from 'instructure-ui/lib/themes'
 
 import checkA11y from 'tests/util/a11y-check'
 
@@ -166,7 +166,7 @@ export default class Testbed {
   }
 
   setup () {
-    ApplyTheme.setDefaultTheme('canvas')
+    canvas.use()
 
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)

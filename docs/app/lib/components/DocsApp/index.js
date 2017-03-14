@@ -1,8 +1,5 @@
 import React, {Component} from 'react'
 
-import * as Themes from 'instructure-ui/lib/themes'
-import { getTheme } from 'instructure-ui/lib/themeable/registry'
-
 import classnames from 'classnames'
 import ComponentDoc from '../ComponentDoc'
 import DocsHeader from '../DocsHeader'
@@ -12,9 +9,7 @@ import ThemeDoc from '../ThemeDoc'
 import DocsSection from '../DocsSection'
 
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
-import RadioInputGroup from 'instructure-ui/lib/components/RadioInputGroup'
-import Checkbox from 'instructure-ui/lib/components/Checkbox'
-import RadioInput from 'instructure-ui/lib/components/RadioInput'
+import Select from 'instructure-ui/lib/components/Select'
 import Tray from 'instructure-ui/lib/components/Tray'
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
@@ -27,6 +22,8 @@ import styles from './styles.css'
 import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { categorizedComponents } from '../../util/load-components'
 
+import { getRegistry, getTheme } from 'instructure-ui/lib/themeable/registry'
+
 import { pkg } from 'config-loader!'
 
 export default class DocsApp extends Component {
@@ -35,8 +32,7 @@ export default class DocsApp extends Component {
     this.state = {
       menuSearch: '',
       showMenu: false,
-      themeKey: 'canvas',
-      a11y: false
+      themeKey: 'canvas'
     }
   }
 
@@ -52,15 +48,9 @@ export default class DocsApp extends Component {
     })
   }
 
-  handleThemeChange = (value) => {
+  handleThemeChange = (e) => {
     this.setState({
-      themeKey: value
-    })
-  }
-
-  handleA11yToggle = () => {
-    this.setState({
-      a11y: !this.state.a11y
+      themeKey: e.target.value
     })
   }
 
@@ -80,37 +70,22 @@ export default class DocsApp extends Component {
     }
   }
 
-  renderA11yToggle () {
-    return (
-      <div className={styles.a11yToggle}>
-        <Checkbox
-          size="small"
-          checked={this.state.a11y}
-          label="a11y"
-          variant="toggle"
-          onChange={this.handleA11yToggle}
-        />
-      </div>
-    )
-  }
-
   renderThemeSelect () {
-    const themeKeys = Object.keys(Themes)
+    const themeKeys = Object.keys(getThemes())
     return (
       <div className={styles.themeSelect}>
-        <RadioInputGroup
+        <Select
           name="theme"
-          description={<ScreenReaderContent>Select a theme</ScreenReaderContent>}
-          variant="toggle"
+          label="Theme"
           onChange={this.handleThemeChange}
-          defaultValue={this.state.themeKey}
+          value={this.state.themeKey}
         >
           {
             themeKeys.map((themeKey) => {
-              return <RadioInput key={themeKey} label={themeKey} value={themeKey} />
+              return <option key={themeKey} value={themeKey}>{themeKey}</option>
             })
           }
-        </RadioInputGroup>
+        </Select>
       </div>
     )
   }
@@ -119,7 +94,6 @@ export default class DocsApp extends Component {
     return (
       <DocsSection id={themeKey}>
         <ThemeDoc
-          a11y={this.state.a11y}
           themeKey={themeKey}
           theme={theme}
         />
@@ -128,10 +102,12 @@ export default class DocsApp extends Component {
   }
 
   renderComponent (component) {
-    const themeKey = this.state.a11y ? this.state.themeKey + '-a11y' : this.state.themeKey
+    const themeKey = this.state.themeKey
     return (
       <DocsSection id={component.name}>
-        {this.renderThemeSelect()}
+        <div className={styles.docsSectionHeader}>
+          {this.renderThemeSelect()}
+        </div>
         <ComponentDoc
           name={component.name}
           doc={component.doc}
@@ -163,15 +139,14 @@ export default class DocsApp extends Component {
   renderContent (key) {
     const component = componentsMap[key]
     const doc = documentsMap[key]
-    const theme = Themes[key]
+    const theme = getThemes()[key]
 
     if (component) {
       return this.renderComponent(component)
     } else if (doc) {
       return this.renderDoc(doc)
     } else if (theme) {
-      const themeKey = this.state.a11y ? key + '-a11y' : key
-      return this.renderTheme(key, getTheme(themeKey))
+      return this.renderTheme(key, getTheme(key))
     } else {
       return this.renderError(key)
     }
@@ -200,8 +175,6 @@ export default class DocsApp extends Component {
           </div>
           <div className={styles.content} ref={(c) => { this._content = c }}>
 
-            {this.renderA11yToggle()}
-
             <div className={styles.main} role="main" id="main">
 
               {this.renderContent(this.state.key)}
@@ -229,7 +202,7 @@ export default class DocsApp extends Component {
                 selected={this.state.key}
                 components={categorizedComponents}
                 documents={documentsList}
-                themes={Themes}
+                themes={getThemes()}
               />
             </div>
           </Tray>
@@ -237,4 +210,9 @@ export default class DocsApp extends Component {
       </div>
     )
   }
+}
+
+function getThemes () {
+  const registry = getRegistry()
+  return registry.themes
 }

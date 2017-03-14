@@ -65,7 +65,7 @@ code[class^="lang-"] {
 
 .main {
   max-width: 67rem;
-  margin: 4rem auto 2rem auto;
+  margin: 2rem auto 2rem auto;
 }
 
 .menuToggle {
@@ -183,7 +183,7 @@ code[class^="lang-"] {
   color: black;
 }
 
-.themeSelect,
-.a11yToggle {
-  float: right;
+.docsSectionHeader {
+  display: flex;
+  justify-content: flex-end;
 }
