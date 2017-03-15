@@ -6,18 +6,6 @@
   display: flex;
   flex-flow: column nowrap;
   box-sizing: border-box;
-
-  &.colSpacingSmall {
-    padding: 0 calc(var(--spacingSmall) / 2);
-  }
-
-  &.colSpacingMedium {
-    padding: 0 calc(var(--spacingMedium) / 2);
-  }
-
-  &.colSpacingLarge {
-    padding: 0 calc(var(--spacingLarge) / 2);
-  }
 }
 
 .visualDebug {
