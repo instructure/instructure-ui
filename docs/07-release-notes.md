@@ -1,3 +1,21 @@
+## 1.1.0
+
+#### Fix "illegal rule inserted" console warning @jstern
+
+#### Allow [Billboard](#Billboard) to render as a link if `href` prop is provided @chart
+
+#### Update look of [Avatar](#Avatar) @phiett
+
+#### Update [modern](#modern) theme for [RadioInput](#RadioInput) @phiett
+
+#### Update [modern](#modern) theme for [Checkbox](#Checkbox) @phiett
+
+#### Prevent referencing window at require time @bburgoyne
+
+#### Allow [Billboard](#Billboard) to pass props to button @chart
+
+#### Allow `inverse` close button on [Tray](#Tray) @ctennety
+
 ## 1.0.2
 
 #### Do not focus [PopoverMenu](#PopoverMenu) trigger on mount @sejensen
