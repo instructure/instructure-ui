@@ -14,11 +14,11 @@
     justify-content: flex-end;
   }
 
-  &.hAlign--spaceAround {
+  &.hAlign--space-around {
     justify-content: space-around;
   }
 
-  &.hAlign--spaceBetween {
+  &.hAlign--space-between {
     justify-content: space-between;
   }
 
@@ -69,24 +69,28 @@
   box-sizing: border-box;
 }
 
-.startAtPhone {
+.startAtSmall {
   @mixin grid-row;
 }
 
-@media screen and (--tabletMin) {
-  .startAtTablet {
+@media screen and (--mediumMin) {
+  .startAtMedium {
     @mixin grid-row;
   }
 }
 
-@media screen and (--desktopMin) {
-  .startAtDesktop {
+@media screen and (--largeMin) {
+  .startAtLarge {
     @mixin grid-row;
   }
 }
 
-@media screen and (--wideMin) {
-  .startAtWide {
+@media screen and (--xLargeMin) {
+  .startAtLarge {
     @mixin grid-row;
   }
+}
+
+.visualDebug {
+  border: 1px dashed blue;
 }

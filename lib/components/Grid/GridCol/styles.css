@@ -197,34 +197,34 @@
   }
 }
 
-.startAtPhone {
+.startAtSmall {
   @mixin start-grid-column;
 }
 
-@mixin grid-columns-for-breakpoint phone;
+@mixin grid-columns-for-breakpoint small;
 
-@media screen and (--tabletMin) {
-  .startAtTablet {
+@media screen and (--mediumMin) {
+  .startAtMedium {
     @mixin start-grid-column;
   }
 
-  @mixin grid-columns-for-breakpoint tablet;
+  @mixin grid-columns-for-breakpoint medium;
 }
 
-@media screen and (--desktopMin) {
-  .startAtDesktop {
+@media screen and (--largeMin) {
+  .startAtLarge {
     @mixin start-grid-column;
   }
 
-  @mixin grid-columns-for-breakpoint desktop;
+  @mixin grid-columns-for-breakpoint large;
 }
 
-@media screen and (--wideMin) {
-  .startAtWide {
+@media screen and (--xLargeMin) {
+  .startAtXLarge {
     @mixin start-grid-column;
   }
 
-  @mixin grid-columns-for-breakpoint wide;
+  @mixin grid-columns-for-breakpoint x-large;
 }
 
 .visualDebug {

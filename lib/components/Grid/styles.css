@@ -12,24 +12,24 @@
   border: 1px dashed red;
 }
 
-.startAtPhone {
+.startAtSmall {
   @mixin Grid-container;
 }
 
-@media screen and (--tabletMin) {
-  .startAtTablet {
+@media screen and (--mediumMin) {
+  .startAtMedium {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--desktopMin) {
-  .startAtDesktop {
+@media screen and (--largeMin) {
+  .startAtLarge {
     @mixin Grid-container;
   }
 }
 
-@media screen and (--wideMin) {
-  .startAtWide {
+@media screen and (--xLargeMin) {
+  .startAtXLarge {
     @mixin Grid-container;
   }
 }
