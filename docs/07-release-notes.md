@@ -1,3 +1,9 @@
+## 1.2.0
+
+#### Add a `trackPosition` prop to [Position](#Position) component so that positioning can be toggled on/off @mzabriskie
+
+#### Fix [Grid](#Grid) component/remove extra padding on left and right sides @jstern
+
 ## 1.1.0
 
 #### Fix "illegal rule inserted" console warning @jstern
