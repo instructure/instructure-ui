@@ -44,7 +44,7 @@
 
     .arrow {
       top: 50%;
-      left: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      right: 100%;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-left-width: 0;
     }
@@ -61,7 +61,7 @@
 
     .arrow {
       top: 50%;
-      right: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      left: 100%;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-right-width: 0;
     }
@@ -79,7 +79,7 @@
 
     .arrow {
       left: 50%;
-      top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      bottom: 100%;
       margin-left: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-top-width: 0;
     }
@@ -97,7 +97,7 @@
 
     .arrow {
       left: 50%;
-      bottom: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      top: 100%;
       margin-left: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-bottom-width: 0;
     }
