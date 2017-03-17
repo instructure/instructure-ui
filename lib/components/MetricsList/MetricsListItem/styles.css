@@ -1,4 +1,7 @@
 .root {
+  display: flex;
+  flex-direction: column-reverse;
+
   box-sizing: border-box;
   padding: var(--padding);
 
