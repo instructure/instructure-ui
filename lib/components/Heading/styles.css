@@ -85,3 +85,12 @@
   font-weight: inherit;
   line-height: inherit;
 }
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* in case element is span or other inline element */
+  display: block;
+}
