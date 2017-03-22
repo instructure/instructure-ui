@@ -46,7 +46,7 @@
     }
   }
 
-  &::placeholder-shown {
+  &:placeholder-shown {
     color: var(--placeholderColor);
   }
 
