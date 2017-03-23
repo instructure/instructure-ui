@@ -1,15 +1,18 @@
 .root {
-  box-sizing: border-box;
   min-width: 1px;
 }
 
-.isBlock {
+.block {
   display: block;
 }
 
-.isInline {
+.inline {
   display: inline-block;
   vertical-align: middle;
+}
+
+.hasPadding {
+  box-sizing: border-box;
 }
 
 .textAlign--left {

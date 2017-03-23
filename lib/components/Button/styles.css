@@ -53,19 +53,25 @@
   &.small {
     font-size: var(--smallFontSize);
     padding: var(--smallPadding);
-    line-height: var(--smallHeight);
+
+    /* account for top and bottom border */
+    line-height: calc(var(--smallHeight) - (var(--borderWidth) * 2));
   }
 
   &.medium {
     font-size: var(--mediumFontSize);
     padding: var(--mediumPadding);
-    line-height: var(--mediumHeight);
+
+    /* account for top and bottom border */
+    line-height: calc(var(--mediumHeight) - (var(--borderWidth) * 2));
   }
 
   &.large {
     font-size: var(--largeFontSize);
     padding: var(--largePadding);
-    line-height: var(--largeHeight);
+
+    /* account for top and bottom border */
+    line-height: calc(var(--largeHeight) - (var(--borderWidth) * 2));
   }
 }
 
@@ -76,22 +82,27 @@
 .ghost,
 .ghost-inverse,
 .circle-primary,
-.circle-danger {
+.circle-danger,
+.icon,
+.icon-inverse {
   &::before {
     content: "";
     position: absolute;
-    top: -0.3125rem;
-    left: -0.3125rem;
-    right: -0.3125rem;
-    bottom: -0.3125rem;
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
     border: var(--focusBorder);
-    border-radius: var(--focusBorderRadius);
+    border-radius: calc(var(--focusBorderRadius) + 0.125rem);
     opacity: 0;
+    transform: scale(0.01);
+    transition: all 0.2s;
   }
 
   &:focus {
     &::before {
       opacity: 1;
+      transform: scale(1);
     }
   }
 }
@@ -233,7 +244,10 @@
   background: transparent;
   border-color: var(--iconBorderColor);
   text-decoration: none;
-  display: inline-flex;
+
+  /* stylelint-disable declaration-no-important */
+  display: inline-flex !important;
+  /* stylelint-enable declaration-no-important */
   align-items: center;
 
   &:focus,
@@ -315,6 +329,13 @@
 .icon-inverse {
   background: transparent;
   border-color: var(--iconBorderColor);
+
+  &::before {
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
 }
 
 .icon-inverse {
@@ -326,7 +347,9 @@
   }
 
   &:focus {
-    box-shadow: var(--iconInverseFocusBoxShadow);
+    &::before {
+      border-color: var(--ghostInverseBorderColor);
+    }
   }
 }
 
@@ -337,13 +360,8 @@
   &:active {
     color: var(--iconHoverColor);
   }
-
-  &:focus {
-    box-shadow: var(--iconFocusBoxShadow);
-  }
 }
 
-.is-block {
-  display: block;
+.isBlock {
   width: 100%;
 }
