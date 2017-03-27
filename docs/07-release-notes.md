@@ -1,3 +1,27 @@
+## 1.3.0
+
+#### Resolve [PopoverMenu](#PopoverMenu) focus issues @sejensen
+
+#### Only render [Portal](#Portal)/[Position](#Position) if it has content @mzabriskie
+
+#### Add a [FileDrop](#FileDrop) component @ddoumecq
+
+#### Update [modern](#modern) theme for [TextArea](#TextArea) @phiett
+
+#### Add a [Container](#Container) component @chart
+
+#### Fix console warnings for invalid placeholder [TextArea](#TextArea) and [TextInput](#TextInput) styles @jsimon
+
+#### Fix IE11 bug with thin line on triangle for [ContextBox](#ContextBox) @phiett
+
+#### Enter key should trigger onClick on [Button](#Button) component for any element @jstern
+
+#### Add ellipsis prop to [Heading](#Heading) component @chart
+
+#### [MetricsList](#MetricsList) read item label before value @cprescott
+
+#### Fix URL to docs in the docs @eschiebel
+
 ## 1.2.0
 
 #### Add a `trackPosition` prop to [Position](#Position) component so that positioning can be toggled on/off @mzabriskie
