@@ -3,3 +3,7 @@
   max-width: 100%;
   height: auto;
 }
+
+.is-block {
+  display: block;
+}
