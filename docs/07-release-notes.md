@@ -1,3 +1,9 @@
+## 1.3.1
+
+#### Remove PureComponent so that the library still works with React 0.14.8 @jstern
+
+#### Call [PopoverMenu](#PopoverMenu) event handlers after setState @jstern
+
 ## 1.3.0
 
 #### Resolve [PopoverMenu](#PopoverMenu) focus issues @sejensen
