@@ -132,7 +132,7 @@
     }
 
     .arrow {
-      border-right-color: var(--borderColor);
+      border-right-color: var(--arrowBorderColor);
     }
   }
 
@@ -143,7 +143,7 @@
     }
 
     .arrow {
-      border-left-color: var(--borderColor);
+      border-left-color: var(--arrowBorderColor);
     }
   }
 
@@ -155,7 +155,7 @@
     }
 
     .arrow {
-      border-bottom-color: var(--borderColor);
+      border-bottom-color: var(--arrowBorderColor);
     }
   }
 
@@ -167,7 +167,7 @@
     }
 
     .arrow {
-      border-top-color: var(--borderColor);
+      border-top-color: var(--arrowBorderColor);
     }
   }
 }
