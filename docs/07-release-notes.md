@@ -1,3 +1,7 @@
+## 1.3.2
+
+#### Update onItemClick and onCollectionClick return values for [TreeBrowser](#TreeBrowser) @mberns
+
 ## 1.3.1
 
 #### Remove PureComponent so that the library still works with React 0.14.8 @jstern
