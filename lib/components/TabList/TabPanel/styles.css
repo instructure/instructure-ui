@@ -10,7 +10,6 @@
 
 .content {
   box-sizing: border-box;
-  padding: var(--padding);
   width: 100%;
   border-width: var(--borderWidth);
   border-style: var(--borderStyle);
