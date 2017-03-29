@@ -8,10 +8,6 @@
   display: flex;
 
   border-radius: var(--borderRadius);
-
-  + .alert {
-    margin-top: var(--marginTop);
-  }
 }
 
 .content {
