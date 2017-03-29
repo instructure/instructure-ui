@@ -1,6 +1,5 @@
 .root {
   box-sizing: border-box;
-  padding: var(--padding);
   overflow-y: auto;
   flex: 1 1 auto;
 }
