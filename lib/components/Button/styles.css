@@ -1,6 +1,12 @@
+.root[type="button"],
+.root[type="reset"],
+.root[type="submit"],
+.root {
+  appearance: none;
+}
+
 .root {
   all: initial;
-  appearance: none;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
