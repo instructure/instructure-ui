@@ -6,7 +6,10 @@ const requirePath = require('../util/requirePath')
 module.exports = function () {
   this.cacheable && this.cacheable()
 
-  let docs = [ processDocs(path.join(process.cwd(), 'README.md')) ]
+  let docs = [
+    processDocs(path.join(process.cwd(), 'README.md')),
+    processDocs(path.join(process.cwd(), 'CHANGELOG.md'))
+  ]
 
   docs = docs.concat(
     glob.sync(files.docs)

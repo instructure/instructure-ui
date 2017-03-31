@@ -144,7 +144,7 @@ export default class DocsApp extends Component {
   }
 
   renderDoc (doc) {
-    const heading = doc.title !== 'Index' ? doc.title : null
+    const heading = ['Index', 'CHANGELOG'].indexOf(doc.title) === -1 ? doc.title : null
     return (
       <DocsSection id={doc.name} heading={heading}>
         <HtmlDoc html={doc.html} />

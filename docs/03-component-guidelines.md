@@ -32,8 +32,6 @@ components that would never render children.
 
 All CSS variables should be defined in a `theme.js` file in the component directory. The theme is applied to the component via the `@themeable` decorator, which transforms the JS variables in the `theme.js` file into CSS custom properties that are automatically scoped and applied to the component.
 
-JS variables in the `theme.js` file can be nested, and should generally be named using the name of the component state and/or child element and then the camel-cased css property name.
-
 For example, to add a variable for the `hover` state of a `Button` component the theme.js file would contain the following:
 
 ```
@@ -48,8 +46,8 @@ export default function ({ colors }) {
 }
 ```
 
-The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hoverColor`, `--Button-hoverBackground`, but you can use these variables in `styles.css` like `var(--background)`
+The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hoverColor`, `--Button-hoverBackground`, in order to scope them to the component, but you can use these variables in `styles.css` like `var(--background)`
 and `var(--hoverColor)`.
 
-Since the variables are defined in JS you can also access them in your component JS by using `this.theme` which will give
-you the theme values applied via React context with `ApplyTheme` or the `theme` prop (falling back to the defaults).
+Since the variables are defined in JS you can also access them in your component JS (e.g. `this.theme.hoverColor`) which will give
+you the theme values applied via React context with `ApplyTheme` or the `theme` prop (falling back to the defaults provided in the theme.js file).

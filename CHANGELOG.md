@@ -1,3 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+
+<a name="1.3.5"></a>
+## [1.3.5](https://github.com/instructure/instructure-ui/compare/v1.3.4...v1.3.5) (2017-03-31)
+
+
+
 ## 1.3.4
 
 #### Upgrade instructure-icons @jstern
@@ -384,4 +393,3 @@ Icons are now imported individually to reduce the overall library bundle size.
 
 The [Heading](#Heading) component now supports levels 1-5 (and a reset) and also supports overriding the root
 element.
-
