@@ -1,3 +1,7 @@
+## 1.3.3
+
+#### Add option to show on click to [Tooltip](#Tooltip) @sburnett
+
 ## 1.3.2
 
 #### Update onItemClick and onCollectionClick return values for [TreeBrowser](#TreeBrowser) @mberns

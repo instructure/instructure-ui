@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "1.3.2",
+  "version": "1.3.3",
   "dependencies": {
     "abbrev": {
       "version": "1.0.9",
