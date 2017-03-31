@@ -1,3 +1,9 @@
+## 1.3.4
+
+#### Upgrade instructure-icons @jstern
+
+#### Prevent normalize.css from breaking the [Button](#Button) component styles @mphillips
+
 ## 1.3.3
 
 #### Add option to show on click to [Tooltip](#Tooltip) @sburnett
