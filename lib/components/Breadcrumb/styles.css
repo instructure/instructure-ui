@@ -2,13 +2,11 @@
   margin: 0;
   padding: 0;
   list-style-type: none;
-  overflow: auto;
+  overflow: visible;
 }
 
 .crumb {
   box-sizing: border-box;
-  overflow: hidden;
-  white-space: nowrap;
   display: inline-block;
   vertical-align: middle;
   position: relative;
@@ -32,7 +30,7 @@
   .separator {
     font-size: var(--smallSeparatorFontSize);
     right: calc(var(--smallSeparatorFontSize) / 2);
-    margin-top: calc(-1 * (var(--smallSeparatorFontSize) / 2));
+    margin-top: calc(-1 * (var(--smallSeparatorFontSize) / 3));
   }
 }
 
@@ -43,7 +41,7 @@
   .separator {
     font-size: var(--mediumSeparatorFontSize);
     right: calc(var(--mediumSeparatorFontSize) / 2);
-    margin-top: calc(-1 * (var(--mediumSeparatorFontSize) / 2));
+    margin-top: calc(-1 * (var(--mediumSeparatorFontSize) / 3));
   }
 }
 
@@ -54,6 +52,6 @@
   .separator {
     font-size: var(--largeSeparatorFontSize);
     right: calc(var(--largeSeparatorFontSize) / 2);
-    margin-top: calc(-1 * (var(--largeSeparatorFontSize) / 2));
+    margin-top: calc(-1 * (var(--largeSeparatorFontSize) / 3));
   }
 }

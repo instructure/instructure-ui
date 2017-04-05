@@ -1,6 +1,5 @@
 /* stylelint-disable selector-no-type */
 
-.root,
 .root a.link:link,
 .root a.link:visited,
 .root button.link {
@@ -49,6 +48,22 @@
   display: inline-flex;
   align-content: flex-start;
   text-align: inherit;
+}
+
+.ellipsis {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.text {
+  box-sizing: border-box;
+  display: block;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
 }
 
 /* stylelint-enable selector-no-type */
