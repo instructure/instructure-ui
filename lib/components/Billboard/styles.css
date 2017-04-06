@@ -7,7 +7,6 @@
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  min-width: var(--autoMinWidth);
   display: block;
 
   &:not(.clickable) {
@@ -37,10 +36,7 @@
 }
 
 .small {
-  &:not(.clickable),
-  .button {
-    padding: var(--paddingSmall);
-  }
+  padding: var(--paddingSmall);
 
   .hero {
     font-size: 4rem;
@@ -48,10 +44,7 @@
 }
 
 .medium {
-  &:not(.clickable),
-  .button {
-    padding: var(--paddingMedium);
-  }
+  padding: var(--paddingMedium);
 
   .hero {
     font-size: 8rem;
@@ -59,10 +52,7 @@
 }
 
 .large {
-  &:not(.clickable),
-  .button {
-    padding: var(--paddingLarge);
-  }
+  padding: var(--paddingLarge);
 
   .hero {
     font-size: 12rem;
@@ -118,7 +108,6 @@
   touch-action: manipulation;
   width: 100%;
   margin: 0;
-  padding: var(--containerPadding);
   border: var(--buttonBorderWidth) var(--buttonBorderStyle) transparent;
   border-radius: var(--buttonBorderRadius);
   background: var(--backgroundColor);
