@@ -1,6 +1,6 @@
 /* stylelint-disable selector-no-universal, declaration-no-important */
 
-* {
+.no-transition * {
   transform: none !important;
   transition: none !important;
   transition-property: none !important;

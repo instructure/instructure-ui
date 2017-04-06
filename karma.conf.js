@@ -24,7 +24,7 @@ if (withCoverage) {
     ],
     check: {
       global: {
-        lines: 90
+        lines: 92
       },
       each: {
         lines: 50

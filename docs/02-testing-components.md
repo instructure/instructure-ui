@@ -39,7 +39,7 @@ subject.setProps({
 #### To stub out a function:
 
 ```javascript
-const onClick = testbed.sandbox.stub()
+const onClick = testbed.stub()
 
 const subject = testbed.render({
   onClick

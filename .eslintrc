@@ -47,7 +47,9 @@
     "no-useless-escape": 0,
 
     "no-unused-expressions": 0,
-    "react/no-unused-prop-types": 0
+    "react/no-unused-prop-types": 0,
+
+    "import/no-webpack-loader-syntax": 0
   },
   "env": {
     "browser": true,

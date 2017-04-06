@@ -15,7 +15,7 @@ module.exports = function (context, opts = {}) {
 
   const envOpts = {
     'targets': {
-      'browsers': ['last 2 versions']
+      'browsers': ['last 2 versions', 'not ie <= 10']
     }
   }
 

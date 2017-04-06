@@ -1,3 +1,3 @@
-Object.assign = require('object-assign')
-
 import 'babel-polyfill-loader!'
+
+Object.assign = require('object-assign')

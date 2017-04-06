@@ -7,6 +7,8 @@ import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
 
 import checkA11y from 'tests/util/a11y-check'
 
+const realSetTimeout = setTimeout
+
 const override = function (object, methodName, extra) {
   object[methodName] = (function (original, after) { // eslint-disable-line
     return function () {
@@ -107,7 +109,7 @@ global.chai.use(function (chai, utils) {
 global.chai.use(function (chai, utils) {
   utils.addProperty(Assertion.prototype, 'present', function () {
     const obj = utils.flag(this, 'object')
-    return new Assertion(obj.getDOMNode()).to.exist
+    return new Assertion((obj.length > 0 && obj.getDOMNode())).to.be.ok
   })
 })
 
@@ -117,7 +119,6 @@ export default class Testbed {
   constructor (subject) {
     this.subject = subject
     this.sandbox = sinon.sandbox.create()
-
     this.mockRaf = mockRaf()
 
     beforeEach(this.setup.bind(this))
@@ -132,10 +133,36 @@ export default class Testbed {
     return new ReactWrapper(element, true)
   }
 
-  tick = () => {
-    this.sandbox.clock.tick(300)
+  tick = (ms = 300) => {
+    this.sandbox.clock.tick(ms)
+  }
+
+  raf () {
     this.mockRaf.step()
-    this.mockRaf.step()
+  }
+
+  stub (obj, method, fn) {
+    if (typeof fn === 'function') {
+      return this.sandbox.stub(obj, method).callsFake(fn)
+    } else {
+      return this.sandbox.stub()
+    }
+  }
+
+  spy (obj, method) {
+    return this.sandbox.spy(obj, method)
+  }
+
+  defer () {
+    return realSetTimeout.apply(window, arguments)
+  }
+
+  disableCSSTransitions () {
+    document.body.classList.add('no-transition')
+  }
+
+  enableCSSTransitions () {
+    document.body.classList.remove('no-transition')
   }
 
   setup () {
@@ -143,9 +170,10 @@ export default class Testbed {
 
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
+    this.disableCSSTransitions()
 
-    this.sandbox.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
-    this.sandbox.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
+    this.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
+    this.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
 
     this.sandbox.useFakeTimers()
   }
@@ -179,18 +207,10 @@ export default class Testbed {
 
     this.$instance = mount(subject, { attachTo: this.rootNode, context })
 
-    // to execute any animations before making assertions
-    override(ReactWrapper.prototype, 'setProps', this.tick)
-    override(ReactWrapper.prototype, 'setState', this.tick)
-    override(ReactWrapper.prototype, 'setContext', this.tick)
-    override(ReactWrapper.prototype, 'unmount', this.tick)
-
     // axe uses setTimeout so we need to call clock.tick here too
     override(ReactWrapper.prototype, 'getA11yViolations', () => {
       this.sandbox.clock.tick(1000)
     })
-
-    this.tick()
 
     return this.$instance
   }
