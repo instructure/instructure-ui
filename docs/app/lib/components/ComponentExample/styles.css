@@ -28,6 +28,8 @@
   background-size: 1rem 1rem;
   border: 1px solid #eee;
   border-radius: 3px;
+  position: relative;
+  overflow-x: auto;
 }
 
 .fullscreen {
