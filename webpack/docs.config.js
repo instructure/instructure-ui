@@ -51,7 +51,8 @@ plugins = plugins.concat([
 ])
 
 const resolve = require('./config/resolve')
-resolve.alias = { 'instructure-ui': process.cwd() }
+resolve.alias = resolve.alias || {}
+resolve.alias['instructure-ui'] = process.cwd()
 
 module.exports = {
   cache: !!debug,
