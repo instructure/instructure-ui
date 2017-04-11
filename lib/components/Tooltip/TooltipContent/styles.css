@@ -1,6 +1,7 @@
 .root {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
+  box-sizing: border-box;
 }
 
 .small {

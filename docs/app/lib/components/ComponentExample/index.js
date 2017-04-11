@@ -34,6 +34,12 @@ export default class ComponentExample extends Component {
     }
   }
 
+  componentWillUnmount () {
+    if (this._mountNode) {
+      ReactDOM.unmountComponentAtNode(this._mountNode)
+    }
+  }
+
   compileCode (code) {
     return transform(code, {
       presets: ['es2015', 'stage-1', 'react']

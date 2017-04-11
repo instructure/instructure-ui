@@ -15,6 +15,7 @@
   top: var(--closeButtonOffset);
   right: var(--closeButtonOffset);
   background: var(--background);
+  z-index: var(--closeButtonZIndex);
 }
 
 .auto,
