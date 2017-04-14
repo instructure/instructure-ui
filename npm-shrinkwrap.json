@@ -137,9 +137,9 @@
       "dev": true
     },
     "arr-flatten": {
-      "version": "1.0.1",
+      "version": "1.0.2",
       "from": "arr-flatten@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/arr-flatten/-/arr-flatten-1.0.1.tgz",
+      "resolved": "https://registry.npmjs.org/arr-flatten/-/arr-flatten-1.0.2.tgz",
       "dev": true
     },
     "array-differ": {
@@ -4501,9 +4501,9 @@
       "dev": true
     },
     "hosted-git-info": {
-      "version": "2.4.1",
+      "version": "2.4.2",
       "from": "hosted-git-info@>=2.1.4 <3.0.0",
-      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.1.tgz",
+      "resolved": "https://registry.npmjs.org/hosted-git-info/-/hosted-git-info-2.4.2.tgz",
       "dev": true
     },
     "hpack.js": {
@@ -4724,9 +4724,9 @@
       "dev": true
     },
     "instructure-icons": {
-      "version": "2.1.0",
-      "from": "instructure-icons@2.1.0",
-      "resolved": "https://registry.npmjs.org/instructure-icons/-/instructure-icons-2.1.0.tgz"
+      "version": "2.2.0",
+      "from": "instructure-icons@2.2.0",
+      "resolved": "https://registry.npmjs.org/instructure-icons/-/instructure-icons-2.2.0.tgz"
     },
     "interpret": {
       "version": "1.0.2",
