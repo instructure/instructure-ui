@@ -126,7 +126,7 @@ printf "Tagging version $next_version ...\n"
 release_tag="v$next_version"
 
 # delete the local tag if it already exists
-if [ "`git branch --list $release_tag`" ]; then
+if [ "`git tag --list $release_tag`" ]; then
   git tag -d $release_tag
 fi
 
