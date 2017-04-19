@@ -8,7 +8,7 @@
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
   },
-  "homepage": "http://instructure.github.io/instructure-ui/",
+  "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "npm run clean && npm install && npm run docs:min",
