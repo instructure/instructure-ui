@@ -4,8 +4,6 @@ resolve.alias['instructure-ui'] = process.cwd()
 
 module.exports = function (debug) {
   return {
-    cache: !!debug,
-    bail: !debug,
     externals: {
       'react/lib/ExecutionEnvironment': true,
       'react/lib/ReactContext': true,

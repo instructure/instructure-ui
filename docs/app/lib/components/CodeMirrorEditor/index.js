@@ -1,6 +1,7 @@
 // based on https://raw.githubusercontent.com/JedWatson/react-codemirror/master/src/Codemirror.js
 import CodeMirror from 'codemirror'
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import 'codemirror/lib/codemirror.css'

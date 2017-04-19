@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Table from 'instructure-ui/lib/components/Table'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import marked from 'marked'

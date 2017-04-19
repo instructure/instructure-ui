@@ -1,4 +1,5 @@
-import React, {Component, PropTypes} from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
 import { transform } from 'babel-standalone'

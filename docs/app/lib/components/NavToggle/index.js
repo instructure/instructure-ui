@@ -1,4 +1,5 @@
-import React, { Component, PropTypes } from 'react'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import ToggleDetails from 'instructure-ui/lib/components/ToggleDetails'
 import Typography from 'instructure-ui/lib/components/Typography'
 
