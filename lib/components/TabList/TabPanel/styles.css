@@ -1,11 +1,5 @@
 .root {
   box-sizing: border-box;
-
-  &[aria-hidden] {
-    height: 0;
-    visibility: hidden;
-    overflow: hidden;
-  }
 }
 
 .content {
@@ -16,17 +10,6 @@
   background: var(--background);
   border-color: var(--borderColor);
   color: var(--color);
-}
-
-.content--enter {
-  /* trigger hardware acceleration for smoother animation */
-  transform: translate3d(0, 0, 0);
-  opacity: 0;
-}
-
-.content--enter.content--enter-active {
-  transition: opacity 0.5s;
-  opacity: 1;
 }
 
 .minimal,
@@ -56,14 +39,5 @@
     border-bottom-left-radius: 6px;
     border-bottom-right-radius: 6px;
     border-top: none;
-  }
-
-  .content--enter {
-    transform: translate3d(0, -20%, 0);
-  }
-
-  .content--enter.content--enter-active {
-    transition: opacity 0.3s, transform 0.3s ease-out;
-    transform: translate3d(0, 0, 0);
   }
 }
