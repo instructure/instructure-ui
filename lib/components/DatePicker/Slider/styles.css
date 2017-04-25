@@ -1,0 +1,42 @@
+.root {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.prev,
+.next {
+  cursor: pointer;
+  background-color: var(--background);
+  border: 1px solid transparent;
+  border-radius: var(--selectedBorderRadius);
+  width: var(--sliderButtonSize);
+  height: var(--sliderButtonSize);
+  font-size: var(--fontSize);
+  font-weight: var(--fontWeight);
+  outline: none;
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    border: 1px solid transparent;
+    border-radius: calc(var(--selectedBorderRadius) + 0.125rem);
+    opacity: 0;
+    transform: scale(0.01);
+    transition: all 0.2s;
+  }
+
+  &:focus {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+      border-color: var(--focusOutline);
+    }
+  }
+}

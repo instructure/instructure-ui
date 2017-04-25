@@ -5947,6 +5947,17 @@
       "resolved": "https://registry.npmjs.org/modify-values/-/modify-values-1.0.0.tgz",
       "dev": true
     },
+    "moment": {
+      "version": "2.18.1",
+      "from": "moment@>=2.18.1 <3.0.0",
+      "resolved": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz"
+    },
+    "moment-timezone": {
+      "version": "0.5.13",
+      "from": "moment-timezone@>=0.5.13 <0.6.0",
+      "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.13.tgz",
+      "dev": true
+    },
     "ms": {
       "version": "0.7.2",
       "from": "ms@0.7.2",

@@ -1,0 +1,91 @@
+/* Variables are defined in ./theme.js */
+
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  font-size: var(--fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+
+  color: var(--color);
+  background: var(--background);
+}
+
+.calendar {
+  text-align: center;
+}
+
+.cell {
+  background-color: var(--background);
+  border: 1px solid transparent;
+  outline: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-size: var(--fontSize);
+  padding: var(--cellPadding);
+  text-align: center;
+  min-width: var(--cellMinWidth);
+  min-height: var(--cellMinHeight);
+  position: relative;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    border: 1px solid var(--focusOutline);
+    border-radius: calc(var(--selectedBorderRadius) + 0.125rem);
+    opacity: 0;
+    transform: scale(0.01);
+    transition: all 0.2s;
+  }
+
+  &:focus {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /*
+    order here is important for proper contrast when selected and today are
+    outside the rendered month
+  */
+
+  &.outside {
+    color: var(--otherMonthColor);
+  }
+
+  &.today {
+    background-color: var(--todayBackground);
+    border-radius: var(--todayBorderRadius);
+    color: var(--todayColor);
+  }
+
+  &.today:focus::before {
+    border-radius: var(--todayBorderRadius);
+    border: 1px solid var(--focusOutline);
+  }
+
+  &.selected {
+    background-color: var(--selectedBackground);
+    border-radius: var(--selectedBorderRadius);
+    color: var(--selectedColor);
+  }
+
+  &.selected:focus::before {
+    border-radius: var(--selectedBorderRadius);
+    border: 1px solid var(--focusOutline);
+  }
+}
+
+.label {
+  text-align: center;
+  margin: var(--labelMargin);
+  padding: var(--labelPadding);
+}

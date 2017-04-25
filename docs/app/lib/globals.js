@@ -10,6 +10,9 @@ import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
 import avatarImage from './images/placeholder-avatar.png'
 import lorem from 'lorem-ipsum'
 
+import moment from 'moment'
+import 'moment/min/locales'
+
 import * as InstUI from 'instructure-ui'
 
 Object.keys(InstUI).forEach(function (component) {
@@ -44,3 +47,4 @@ global.lorem = {
     })
   }
 }
+global.moment = moment
