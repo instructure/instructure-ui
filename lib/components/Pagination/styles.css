@@ -1,0 +1,8 @@
+.root {
+  text-align: center;
+}
+
+.pages {
+  display: inline-flex;
+  align-items: center;
+}

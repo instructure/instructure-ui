@@ -8,6 +8,7 @@ module.exports = {
   polyfills: [
     'es6.array.find',
     'es6.array.find-index',
+    'es6.array.from',
     'es7.array.includes',
     'es6.symbol'
   ],
