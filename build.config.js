@@ -42,7 +42,6 @@ module.exports = {
     },
     build: {
       root: BUILD_PATH,
-      dist: path.join(BUILD_PATH, '/dist'),
       docs: path.join(BUILD_PATH, '/docs')
     }
   }

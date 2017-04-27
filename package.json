@@ -24,10 +24,8 @@
     "commit": "git-cz",
     "docs": "cross-env NODE_ENV=development webpack",
     "docs:min": "cross-env NODE_ENV=production MINIFY=1 webpack",
-    "dist": "cross-env NODE_ENV=production webpack --config webpack/dist.config.js",
-    "dist:min": "cross-env MINIFY=1 NODE_ENV=production webpack --config webpack/dist.config.js",
     "transpile": "cross-env NODE_ENV=transpile BABEL_DISABLE_CACHE=1 babel lib --out-dir __build__/lib --ignore *.test.js",
-    "build": "npm run clean && npm run dist && npm run dist:min && npm run transpile",
+    "build": "npm run clean && npm run transpile",
     "bump": "standard-version",
     "pre-release": "./scripts/pre-release",
     "release": "./scripts/release",
@@ -130,8 +128,7 @@
     "stylelint": "7.10.1",
     "url-loader": "0.5.8",
     "webpack": "2.2.1",
-    "webpack-dev-server": "2.4.1",
-    "webpack-visualizer-plugin": "0.1.11"
+    "webpack-dev-server": "2.4.1"
   },
   "dependencies": {
     "classnames": "2.2.5",
