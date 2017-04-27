@@ -1,25 +1,18 @@
 .root {
-  padding: var(--padding);
-  background: var(--background);
-
-  display: flex;
-  align-items: center;
-
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  line-height: var(--lineHeight);
-  font-size: var(--fontSize);
-
-  transition: background 0.2s;
-
+  border: none;
   outline: none;
-  cursor: pointer;
-  user-select: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: left;
 
+  &.active,
   &:focus,
   &:active,
   &:hover {
-    background: var(--activeBackground);
+    .content {
+      background: var(--activeBackground);
+    }
 
     .label {
       color: var(--activeLabelColor);
@@ -30,10 +23,42 @@
     }
   }
 
+  &::-moz-focus-inner { /* removes extra ff button spacing */
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
   &[aria-disabled] {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
+  }
+}
+
+.content {
+  padding: var(--padding);
+
+  display: flex;
+  align-items: center;
+  background: var(--background);
+  transition: background 0.2s;
+  opacity: inherit;
+
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
+  text-align: left;
+
+  cursor: pointer;
+  user-select: none;
+
+  &.arrow {
+    .icon {
+      margin-right: 0;
+      margin-left: auto;
+    }
   }
 }
 

@@ -2,6 +2,11 @@
   display: block;
 }
 
+.items {
+  padding: 0;
+  list-style-type: none;
+}
+
 .label {
   background: var(--background);
   padding: var(--padding);

@@ -1,0 +1,4 @@
+.menu {
+  min-width: var(--minWidth);
+  max-width: var(--maxWidth);
+}
