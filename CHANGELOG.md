@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/instructure/instructure-ui/compare/v1.4.1...v1.4.2) (2017-04-27)
+
+
+### Bug Fixes
+
+* **Spinner:** Fix illegal rule console warning ([1ebfb4e](https://github.com/instructure/instructure-ui/commit/1ebfb4e))
+* **TabList:** Fix TabList transitions and unmountOnExit ([6ff5dc7](https://github.com/instructure/instructure-ui/commit/6ff5dc7))
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/instructure/instructure-ui/compare/v1.4.0...v1.4.1) (2017-04-14)
 
