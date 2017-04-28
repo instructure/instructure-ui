@@ -11,16 +11,16 @@
   box-sizing: border-box;
 }
 
-.textAlign--left {
-  text-align: left;
+.textAlign--start {
+  text-align: start;
 }
 
 .textAlign--center {
   text-align: center;
 }
 
-.textAlign--right {
-  text-align: right;
+.textAlign--end {
+  text-align: end;
 }
 
 .small {

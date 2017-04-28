@@ -13,7 +13,7 @@
   background: var(--background);
 
   caption {
-    text-align: left;
+    text-align: start;
     background: var(--background);
     font-size: var(--captionFontSize);
     color: var(--captionColor);
@@ -25,7 +25,7 @@
 
   th,
   td {
-    text-align: left;
+    text-align: start;
     vertical-align: middle;
     border-bottom-style: solid;
     border-bottom-width: 1px;

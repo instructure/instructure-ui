@@ -156,12 +156,12 @@
     align-self: flex-end;
   }
 
-  &.textAlign--left {
-    text-align: left;
+  &.textAlign--start {
+    text-align: start;
   }
 
-  &.textAlign--right {
-    text-align: right;
+  &.textAlign--end {
+    text-align: end;
   }
 
   &.textAlign--center {
