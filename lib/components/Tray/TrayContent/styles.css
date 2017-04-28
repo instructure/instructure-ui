@@ -4,13 +4,13 @@
   background: var(--background);
 }
 
-.placement--left .closeButton,
+.placement--start .closeButton,
 .placement--top .closeButton,
 .placement--bottom .closeButton {
   right: var(--closeButtonOffset);
 }
 
-.placement--right .closeButton {
+.placement--end .closeButton {
   left: var(--closeButtonOffset);
 }
 

@@ -39,11 +39,11 @@
     border-width: var(--arrowSize);
   }
 
-  &.positioned--right-middle,
-  &.positioned--right-top,
-  &.positioned--right-bottom,
-  &.positioned--middle-right,
-  &.positioned--right { /* arrow on the left */
+  &.positioned--end-center,
+  &.positioned--end-top,
+  &.positioned--end-bottom,
+  &.positioned--center-end,
+  &.positioned--end { /* arrow start */
     margin-left: var(--arrowSize);
 
     .arrow {
@@ -60,11 +60,11 @@
     }
   }
 
-  &.positioned--left-middle,
-  &.positioned--left-top,
-  &.positioned--left-bottom,
-  &.positioned--middle-left,
-  &.positioned--left {  /* arrow on the right */
+  &.positioned--start-center,
+  &.positioned--start-top,
+  &.positioned--start-bottom,
+  &.positioned--center-start,
+  &.positioned--start {  /* arrow after */
     margin-right: var(--arrowSize);
 
     .arrow {
@@ -82,9 +82,9 @@
   }
 
   &.positioned--bottom,
-  &.positioned--bottom-right,
-  &.positioned--bottom-left,
-  &.positioned--bottom-center {  /* arrow on top */
+  &.positioned--bottom-end,
+  &.positioned--bottom-start,
+  &.positioned--bottom-center {  /* arrow start */
     margin-top: var(--arrowSize);
 
     .arrow {
@@ -101,9 +101,9 @@
   }
 
   &.positioned--top,
-  &.positioned--top-left,
-  &.positioned--top-right,
-  &.positioned--top-center {  /* arrow on bottom */
+  &.positioned--top-start,
+  &.positioned--top-end,
+  &.positioned--top-center {  /* arrow bottom */
     margin-bottom: var(--arrowSize);
 
     .arrow {
@@ -128,29 +128,29 @@
     }
   }
 
-  &.positioned--top-left,
-  &.positioned--bottom-left {
+  &.positioned--top-start,
+  &.positioned--bottom-start {
     .arrow {
       left: calc((var(--arrowSize) + var(--borderWidth)) * 2);
     }
   }
 
-  &.positioned--left-top,
-  &.positioned--right-top {
+  &.positioned--start-top,
+  &.positioned--end-top {
     .arrow {
       top: calc((var(--arrowSize) + var(--borderWidth)) * 2);
     }
   }
 
-  &.positioned--left-bottom,
-  &.positioned--right-bottom {
+  &.positioned--start-bottom,
+  &.positioned--end-bottom {
     .arrow {
       top: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
     }
   }
 
-  &.positioned--top-right,
-  &.positioned--bottom-right {
+  &.positioned--top-end,
+  &.positioned--bottom-end {
     .arrow {
       left: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
     }
@@ -172,11 +172,11 @@
 }
 
 .default.with-arrow {
-  &.positioned--right,
-  &.positioned--right-middle,
-  &.positioned--middle-right,
-  &.positioned--right-top,
-  &.positioned--right-bottom { /* arrow on the left */
+  &.positioned--end,
+  &.positioned--end-center,
+  &.positioned--center-end,
+  &.positioned--end-top,
+  &.positioned--end-bottom { /* arrow start */
 
     .arrow::after {
       border-right-color: var(--backgroundColor);
@@ -187,11 +187,11 @@
     }
   }
 
-  &.positioned--left,
-  &.positioned--left-middle,
-  &.positioned--middle-left,
-  &.positioned--left-top,
-  &.positioned--left-bottom {  /* arrow on the right */
+  &.positioned--start,
+  &.positioned--start-center,
+  &.positioned--center-start,
+  &.positioned--start-top,
+  &.positioned--start-bottom {  /* arrow end */
 
     .arrow::after {
       border-left-color: var(--backgroundColor);
@@ -203,9 +203,9 @@
   }
 
   &.positioned--bottom,
-  &.positioned--bottom-right,
-  &.positioned--bottom-left,
-  &.positioned--bottom-center {  /* arrow on top */
+  &.positioned--bottom-end,
+  &.positioned--bottom-start,
+  &.positioned--bottom-center {  /* arrow top */
 
     .arrow::after {
       border-bottom-color: var(--backgroundColor);
@@ -217,9 +217,9 @@
   }
 
   &.positioned--top,
-  &.positioned--top-right,
-  &.positioned--top-left,
-  &.positioned--top-center {  /* arrow on bottom */
+  &.positioned--top-end,
+  &.positioned--top-start,
+  &.positioned--top-center {  /* arrow bottom */
 
     .arrow::after {
       border-top-color: var(--backgroundColor);
@@ -232,11 +232,11 @@
 }
 
 .inverse.with-arrow {
-  &.positioned--right,
-  &.positioned--right-middle,
-  &.positioned--middle-right,
-  &.positioned--right-top,
-  &.positioned--right-bottom { /* arrow on the left */
+  &.positioned--end,
+  &.positioned--end-center,
+  &.positioned--center-end,
+  &.positioned--end-top,
+  &.positioned--end-bottom { /* arrow start */
 
     .arrow::after {
       border-right-color: var(--backgroundColorInverse);
@@ -247,11 +247,11 @@
     }
   }
 
-  &.positioned--left,
-  &.positioned--left-middle,
-  &.positioned--middle-left,
-  &.positioned--left-top,
-  &.positioned--left-bottom {  /* arrow on the right */
+  &.positioned--start,
+  &.positioned--start-center,
+  &.positioned--center-start,
+  &.positioned--start-top,
+  &.positioned--start-bottom {  /* arrow end */
 
     .arrow::after {
       border-left-color: var(--backgroundColorInverse);
@@ -263,9 +263,9 @@
   }
 
   &.positioned--bottom,
-  &.positioned--bottom-right,
-  &.positioned--bottom-left,
-  &.positioned--bottom-center {  /* arrow on top */
+  &.positioned--bottom-end,
+  &.positioned--bottom-start,
+  &.positioned--bottom-center {  /* arrow top */
 
     .arrow::after {
       border-bottom-color: var(--backgroundColorInverse);
@@ -277,9 +277,9 @@
   }
 
   &.positioned--top,
-  &.positioned--top-right,
-  &.positioned--top-left,
-  &.positioned--top-center {  /* arrow on bottom */
+  &.positioned--top-end,
+  &.positioned--top-start,
+  &.positioned--top-center {  /* arrow bottom */
 
     .arrow::after {
       border-top-color: var(--backgroundColorInverse);

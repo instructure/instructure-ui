@@ -13,8 +13,8 @@
   right: 0;
 }
 
-.placement--left,
-.placement--right {
+.placement--start,
+.placement--end {
   top: 0;
   bottom: 0;
 }
@@ -26,7 +26,7 @@
   bottom: 0;
 }
 
-.placement--left {
+.placement--start {
   left: 0;
 
   &.border {
@@ -34,7 +34,7 @@
   }
 }
 
-.placement--right {
+.placement--end {
   right: 0;
 
   &.border {
