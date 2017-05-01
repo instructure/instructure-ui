@@ -9,6 +9,7 @@
   all: initial;
   box-sizing: border-box;
   display: inline-block;
+  max-width: 100%;
   vertical-align: middle;
   position: relative;
   overflow: visible;
@@ -58,26 +59,17 @@
 .link {
   &.small {
     font-size: var(--smallFontSize);
-    padding: var(--smallPadding);
-
-    /* account for top and bottom border */
-    line-height: calc(var(--smallHeight) - (var(--borderWidth) * 2));
+    padding: calc(var(--smallPadding) / 1.25) var(--smallPadding);
   }
 
   &.medium {
     font-size: var(--mediumFontSize);
-    padding: var(--mediumPadding);
-
-    /* account for top and bottom border */
-    line-height: calc(var(--mediumHeight) - (var(--borderWidth) * 2));
+    padding: calc(var(--mediumPadding) / 1.25) var(--mediumPadding);
   }
 
   &.large {
     font-size: var(--largeFontSize);
-    padding: var(--largePadding);
-
-    /* account for top and bottom border */
-    line-height: calc(var(--largeHeight) - (var(--borderWidth) * 2));
+    padding: calc(var(--largePadding) / 2) var(--largePadding);
   }
 }
 
@@ -370,4 +362,7 @@
 
 .isBlock {
   width: 100%;
+  white-space: normal;
+  word-wrap: break-word;
+  hyphens: auto;
 }
