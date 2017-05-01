@@ -1,0 +1,109 @@
+.root {
+  box-sizing: border-box;
+  font-family: var(--fontFamily);
+  display: inline-flex;
+  align-items: center;
+  text-align: center;
+  vertical-align: middle;
+  background-color: var(--background);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+  color: var(--textColor);
+  user-select: none;
+}
+
+.small {
+  height: var(--heightSmall);
+  padding: var(--paddingSmall);
+  font-size: var(--fontSizeSmall);
+
+  .icon {
+    font-size: 0.75rem;
+  }
+}
+
+.medium {
+  height: var(--heightMedium);
+  padding: var(--padding);
+  font-size: calc(var(--fontSizeMedium) - 0.0625rem);
+
+  .icon {
+    font-size: 0.75rem;
+  }
+}
+
+.large {
+  height: var(--heightLarge);
+  padding: var(--padding);
+  font-size: calc(var(--fontSizeLarge) - 0.0625rem);
+
+  .icon {
+    font-size: 0.875rem;
+  }
+}
+
+.button {
+  touch-action: manipulation;
+  outline: none;
+  position: relative;
+  transition: background-color var(--transitionTiming);
+
+  &::before {
+    content: "";
+    box-sizing: border-box;
+    width: calc(100% + 0.5rem);
+    height: calc(100% + 0.5rem);
+    border: 1px solid var(--focusOutlineColor);
+    border-radius: var(--borderRadius);
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    opacity: 0;
+    transform: scale(0.01);
+    transition: all var(--transitionTiming);
+  }
+
+  &:not(.dismissable) {
+    cursor: pointer;
+  }
+
+  &:focus {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  &:hover {
+    background-color: var(--backgroundHover);
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.dismissable {
+  &:hover {
+    .icon {
+      color: var(--iconHoverColor);
+    }
+  }
+}
+
+.icon {
+  margin-left: var(--iconMargin);
+  transform: translateY(0.0625rem);
+  transition: all var(--transitionTiming);
+  color: var(--iconColor);
+  cursor: pointer;
+}
+
+.text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: var(--maxWidth);
+}
