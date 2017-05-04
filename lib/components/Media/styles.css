@@ -1,6 +1,8 @@
-.root {
+figure.root { /* stylelint-disable-line selector-no-type */
   display: flex;
   background: var(--background);
+  margin: 0;
+  padding: 0;
 }
 
 .top {
@@ -11,9 +13,11 @@
   align-items: center;
 }
 
-.caption {
+figcaption.caption { /* stylelint-disable-line selector-no-type */
   color: var(--color);
   font-family: var(--fontFamily);
+  margin: 0;
+  padding: 0;
 }
 
 .figure {
