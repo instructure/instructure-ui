@@ -52,6 +52,7 @@ export default class NavToggle extends Component {
         ref={(c) => { this._toggle = c }}
         variant={this.props.variant}
         theme={toggleTheme}
+        fluidWidth
         {...this.props}
         summary={
           <Typography

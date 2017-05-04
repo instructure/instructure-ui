@@ -49,9 +49,8 @@ export default class DocsNav extends Component {
         <NavToggle
           variant={variant}
           summary={toggleText}
-          isExpanded={expanded || !!this.state.query}
+          expanded={expanded || !!this.state.query}
           iconPosition="end"
-          isBlock
         >
           {children}
         </NavToggle>
