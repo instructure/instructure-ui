@@ -1,6 +1,5 @@
 .root {
   height: 2.5em;
-  display: inline-block;
   border-style: solid;
   border-color: var(--borderColor);
   box-sizing: border-box;
@@ -11,6 +10,7 @@
   background-repeat: no-repeat;
   overflow: hidden;
   line-height: 0;
+  text-align: center;
 
   &.auto {
     font-size: inherit;
@@ -46,7 +46,6 @@
 .initials {
   color: var(--color);
   line-height: 2.375em;
-  text-align: center;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   letter-spacing: 0.0313em;
@@ -61,8 +60,4 @@
 
 .rectangle {
   width: 3em;
-}
-
-.is-block {
-  display: block;
 }
