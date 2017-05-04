@@ -20,8 +20,6 @@ Element classes should be camel case (e.g. `inputLabel`).
 Modifiers should also be camel case, with a couple exceptions:
 
 - If part of the classname is dynamically generated in the JS from a component prop, use a double dash before the generated part of the class name. e.g. `positioned--left` where "left" is a string value passed as a prop `positioned`.
-- For modifiers generated via a boolean prop, use an `is-`, `has-` or `with-` prefix. e.g. `is-open`, `with-padding`
-with component props `isOpen` and `withPadding`.
 
 #### Element and Wildcard Selectors
 

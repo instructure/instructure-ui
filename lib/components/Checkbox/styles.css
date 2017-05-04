@@ -1,8 +1,8 @@
 .root {
   all: initial;
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
+  display: block;
+  width: 100%;
 }
 
 .input {
@@ -24,7 +24,8 @@
   opacity: 0.5;
 }
 
-.is-block {
-  display: block;
-  width: 100%;
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
 }

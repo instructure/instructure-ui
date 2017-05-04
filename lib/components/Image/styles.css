@@ -2,10 +2,11 @@
   all: initial;
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-.is-block {
-  display: block;
+.inline {
+  display: inline-block;
 }
 
 .overlayLayout {

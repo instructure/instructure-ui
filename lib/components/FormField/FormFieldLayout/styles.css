@@ -8,11 +8,12 @@
 }
 
 .root {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.is-block {
   display: block;
   width: 100%;
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: auto;
 }

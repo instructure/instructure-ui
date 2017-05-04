@@ -8,9 +8,8 @@
 .root {
   all: initial;
   box-sizing: border-box;
-  display: inline-block;
   max-width: 100%;
-  vertical-align: middle;
+
   position: relative;
   overflow: visible;
 
@@ -360,7 +359,7 @@
   }
 }
 
-.isBlock {
+.fluidWidth {
   width: 100%;
   white-space: normal;
   word-wrap: break-word;
