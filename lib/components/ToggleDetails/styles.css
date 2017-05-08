@@ -39,6 +39,18 @@
   }
 }
 
+.filled {
+  background: var(--filledBackgroundColor);
+  border: var(--filledBorderWidth) var(--filledBorderStyle) var(--filledBorderColor);
+  border-radius: var(--filledBorderRadius);
+  padding: var(--filledPadding);
+  width: 100%;
+
+  .summary {
+    justify-content: flex-start;
+  }
+}
+
 .fluidWidth {
   display: block;
   width: 100%;
