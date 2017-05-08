@@ -17,18 +17,12 @@
   flex-basis: 100%;
 }
 
-.minimal {
+.minimal,
+.simple {
   .content {
     border-left: none;
     border-right: none;
     border-bottom: none;
-  }
-}
-
-.simple {
-  .content {
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
   }
 }
 
