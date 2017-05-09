@@ -132,6 +132,7 @@
   },
   "dependencies": {
     "classnames": "2.2.5",
+    "decimal.js": "7.2.1",
     "deep-equal": "1.0.1",
     "glamor": "2.20.24",
     "invariant": "2.2.2",

@@ -1,0 +1,111 @@
+.inputContainer {
+  display: flex;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+
+  transition: all 0.2s ease-out;
+
+  outline: 0.1875rem solid transparent;
+  outline-offset: -0.5rem;
+
+  overflow: hidden;
+
+  font-family: var(--fontFamily);
+
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+
+  &.focus {
+    border-color: var(--focusBorderColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
+    outline-offset: -0.1875rem;
+    box-shadow: initial;
+  }
+
+  &.invalid {
+    border-color: var(--errorBorderColor);
+
+    &:focus {
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+    height: var(--mediumHeight);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+    height: var(--largeHeight);
+  }
+}
+
+.input {
+  all: initial;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  appearance: none;
+
+  line-height: 1; /* reset global line height */
+
+  margin: 0;
+  width: 100%;
+  display: block;
+
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--fontWeight);
+
+  color: var(--color);
+  background: var(--background);
+
+  padding: var(--padding);
+
+  &:placeholder-shown {
+    color: var(--placeholderColor);
+  }
+}
+
+.arrowContainer {
+  width: 2em;
+  display: flex;
+  flex-direction: column;
+}
+
+.arrow {
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--arrowsBackgroundColor);
+  border: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
+  border-top: none;
+  border-right: none;
+  color: var(--arrowsColor);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--arrowsHoverBackgroundColor);
+  }
+
+  &:active {
+    box-shadow: var(--arrowsActiveBoxShadow);
+  }
+}

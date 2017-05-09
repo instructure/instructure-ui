@@ -14,7 +14,7 @@ if (withCoverage) {
     reporters: [
       { type: 'text-summary' },
       {
-        type: 'html',
+        type: 'lcov',
         dir: 'coverage',
         subdir: function (browser) {
           // normalization process to keep a consistent browser name
