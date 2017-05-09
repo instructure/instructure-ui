@@ -94,6 +94,18 @@
   line-height: var(--lineHeightDouble);
 }
 
+.letterSpacing-normal {
+  letter-spacing: var(--letterSpacingNormal);
+}
+
+.letterSpacing-condensed {
+  letter-spacing: var(--letterSpacingCondensed);
+}
+
+.letterSpacing-expanded {
+  letter-spacing: var(--letterSpacingExpanded);
+}
+
 .transform-none {
   text-transform: none;
 }
