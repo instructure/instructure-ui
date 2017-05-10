@@ -2,6 +2,285 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/instructure/instructure-ui/compare/v1.4.1...v2.0.0) (2017-05-10)
+
+
+### Bug Fixes
+
+* **release:** Fix typo in release script ([9850924](https://github.com/instructure/instructure-ui/commit/9850924))
+* **Spinner:** Fix illegal rule console warning ([d0820aa](https://github.com/instructure/instructure-ui/commit/d0820aa))
+* **TabList:** Fix TabList transitions and unmountOnExit ([fcc5961](https://github.com/instructure/instructure-ui/commit/fcc5961))
+* **themes:** Don't depend on import order for themeable components, themes ([10396c8](https://github.com/instructure/instructure-ui/commit/10396c8))
+
+
+### Dependencies and Build
+
+* Remove UMD output and build scripts ([5d5eb65](https://github.com/instructure/instructure-ui/commit/5d5eb65))
+* Upgrade React to the latest version ([c422be7](https://github.com/instructure/instructure-ui/commit/c422be7))
+
+
+### API Changes
+
+* **Avatar:** Update the Avatar component API ([56f4eab](https://github.com/instructure/instructure-ui/commit/56f4eab))
+* **Container:** Make `size` property values consistent ([f75465a](https://github.com/instructure/instructure-ui/commit/f75465a))
+* **isBlock:** Replace `isBlock` props with `inline` ([c1dcdff](https://github.com/instructure/instructure-ui/commit/c1dcdff))
+* **ToggleDetails:** Update the ToggleDetails component API ([c8348b5](https://github.com/instructure/instructure-ui/commit/c8348b5))
+* **RTL support:** Replace left/right with start/end ([c855ea1](https://github.com/instructure/instructure-ui/commit/c855ea1))
+* **Grid:** Change breakpoints and media to use 'small', 'medium', etc. ([15f592a](https://github.com/instructure/instructure-ui/commit/15f592a))
+
+
+### Features
+
+* **Button:** Wrap text when 'isBlock' prop is set ([d8af67d](https://github.com/instructure/instructure-ui/commit/d8af67d))
+* **Pagination:** Add Pagination ([76ee0f0](https://github.com/instructure/instructure-ui/commit/76ee0f0))
+* **Pill:** Add Pill component ([354795c](https://github.com/instructure/instructure-ui/commit/354795c))
+* **RTL support:** Rename placement props ([099795a](https://github.com/instructure/instructure-ui/commit/099795a))
+* **Tag:** Add Tag component ([6a0d804](https://github.com/instructure/instructure-ui/commit/6a0d804))
+
+
+### Upgrade Guide
+
+We've introduced some improved API and component changes that are not backwards compatible with previous versions. To help with migrating to 2.x, here is a list of specific areas where changes will be required in order to upgrade.
+
+#### Build and Dependency Updates
+
+* **React 0.14.9 or 15.4.0 is required**
+* **UMD format is no longer supported**
+* **instructure-icons is now a peer dependency**
+
+
+#### Themes no longer dependent on import order
+
+You no longer have to call `setDefaultTheme`. If you import just the theme that you need, it will be used as the default (otherwise the first theme imported will be the default).
+
+If you'd like to add user overrides or toggle on the a11y version, you can do:
+
+```
+import { canvas } from 'instructure-ui/lib/themes'
+canvas.use({ accessible: true, overrides: brandVariables })
+```
+
+Note: this also splits out the a11y themes from the base so they can be
+imported separately.
+
+BREAKING CHANGES:
+- removed `ApplyTheme.setDefaultTheme`
+- removed `themeable.setDefaultTheme`
+- trigger a11y themes using `theme.use()`
+
+#### `size` prop changes
+
+Camel-case values in `Container` component `margin` and `padding` props will need to be changed to use dashes (for consistency with other components).
+
+<table>
+  <caption> Alert, Avatar, Billboard, Breadcrumb, Button, ContextBox, Heading, Image, Link, Media, Modal, Pill, Progress, Rating, Spinner, Table, TabList</caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+    <td>
+    'xxxSmall'
+    </td>
+    <td>
+    'xxx-small'
+    </td>
+    </tr>
+    <tr>
+    <td>
+    'xxSmall'
+    </td>
+    <td>
+    'xx-small'
+    </td>
+    </tr>
+    <tr>
+      <td>
+      'xSmall'
+      </td>
+      <td>
+      'x-small'
+      </td>
+    </tr>
+    <tr>
+      <td>
+      'xLarge'
+      </td>
+      <td>
+      'x-large'
+      </td>
+    </tr>
+    <tr>
+      <td>
+      'xxLarge'
+      </td>
+      <td>
+      'xx-large'
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Position API Changes
+
+Components previously using `left` and `right` for positioning have been updated to use `start` and `end` to better support RTL languages in the future.
+
+<table>
+  <caption>ContextBox, Popover, Position, Tooltip, Tray </caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+    <td>
+    placement: 'left'
+    </td>
+    <td>
+    placement: 'start'
+    </td>
+    </tr>
+    <tr>
+    <td>
+    placement: 'right'
+    </td>
+    <td>
+    placement: 'end'
+    </td>
+    </tr>
+    <tr>
+    <td>
+    placement: 'middle'
+    </td>
+    <td>
+    placement: 'center'
+    </td>
+    </tr>
+  </tbody>
+</table>
+
+
+#### `textAlign` prop Values
+Components previously using `left` and `right` for the `textAlign` prop have been updated to use `start` and `end` to better support RTL languages in the future.
+<table>
+  <caption>Container, ContextBox, FormField, Grid, GridCol, TabList</caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      textAlign: 'left'
+      </td>
+      <td>
+      textAlign: 'start'
+      </td>
+    </tr>
+    <tr>
+      <td>
+      textAlign: 'right'
+      </td>
+      <td>
+      textAlign: 'end'
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### `isBlock` prop
+Changes for consistency in component APIs
+<table>
+  <caption>Button, ToggleDetails</caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      isBlock: true
+      </td>
+      <td>
+      fluidWidth: true
+      </td>
+    </tr>
+  </tbody>
+</table>
+<br/>
+<table>
+  <caption>Checkbox, FormField, FormFieldLayout, Image, RadioInput, Select, TextArea, TextInput, Tooltip, Transition </caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      isBlock: true
+      </td>
+      <td>
+      inline: false
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### `Avatar` Component API
+Changes to our `<Avatar>` component:
+<table>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      userName: 'Sarah'
+      </td>
+      <td>
+      name: 'Sarah'
+      </td>
+    </tr>
+    <tr>
+      <td>
+      userImgUrl: {avatarImage}
+      </td>
+      <td>
+      src: {avatarImage}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### `ToggleDetails` Component API
+Changes to our `<ToggleDetails>` component:
+<table>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>
+      isExpanded
+      </td>
+      <td>
+      expanded
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+#### Breakpoint (`startAt`) props
+Changes to the allowed values for the `<Grid>` component props, with extension into a few components where we allow breakpoints to be set:
+
+<table>
+  <caption>Grid, FormFieldGroup, RadioInputGroup, CheckboxGroup</caption>
+  <thead><tr><th>1.x</th><th>2.x</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>phone</td>
+      <td>small</td>
+    </tr>
+    <tr>
+      <td>tablet</td>
+      <td>medium</td>
+    </tr>
+    <tr>
+      <td>desktop</td>
+      <td>large</td>
+    </tr>
+    <tr>
+      <td>wide</td>
+      <td>x-large</td>
+    </tr>
+  </tbody>
+</table>
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/instructure/instructure-ui/compare/v1.4.0...v1.4.1) (2017-04-14)
 
