@@ -9,7 +9,7 @@
   all: initial;
   box-sizing: border-box;
   max-width: 100%;
-
+  display: inline-block;
   position: relative;
   overflow: visible;
 
@@ -360,6 +360,7 @@
 }
 
 .fluidWidth {
+  display: block;
   width: 100%;
   white-space: normal;
   word-wrap: break-word;
