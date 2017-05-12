@@ -52,6 +52,7 @@
 .default,
 .primary,
 .success,
+.danger,
 .light,
 .ghost,
 .ghost-inverse,
@@ -75,6 +76,7 @@
 .default,
 .primary,
 .success,
+.danger,
 .light,
 .ghost,
 .ghost-inverse,
@@ -155,6 +157,22 @@
   &:active {
     background: var(--successActiveBackground);
     box-shadow: var(--successActiveBoxShadow);
+  }
+}
+
+.danger {
+  background: var(--dangerBackground);
+  color: var(--dangerColor);
+  border-color: var(--dangerBorderColor);
+
+  &:hover,
+  &:active {
+    background: var(--dangerHoverBackground);
+  }
+
+  &:active {
+    background: var(--dangerActiveBackground);
+    box-shadow: var(--dangerActiveBoxShadow);
   }
 }
 
