@@ -25,6 +25,19 @@ _:-ms-fullscreen,
   }
 }
 
+/* NEED THIS HACK TO SUPPORT FULLSCREEN IN SAFARI */
+
+_:-webkit-full-screen,
+.layout {
+  align-items: flex-start;
+  padding-top: 2rem;
+}
+
+_:-webkit-full-screen,
+.fullscreen {
+  padding-top: 0;
+}
+
 /* stylelint-enable selector-no-type */
 /* stylelint-enable selector-no-vendor-prefix */
 /* stylelint-enable selector-root-no-composition */
