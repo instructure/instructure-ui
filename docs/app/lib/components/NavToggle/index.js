@@ -20,7 +20,8 @@ export default class NavToggle extends Component {
   render () {
     const {
       summary,
-      variant
+      variant,
+      ...props
     } = this.props
 
     const sectionStyles = {
@@ -50,10 +51,10 @@ export default class NavToggle extends Component {
     return (
       <ToggleDetails
         ref={(c) => { this._toggle = c }}
-        variant={this.props.variant}
+        variant="default"
         theme={toggleTheme}
         fluidWidth
-        {...this.props}
+        {...props}
         summary={
           <Typography
             weight={styles.textWeight}

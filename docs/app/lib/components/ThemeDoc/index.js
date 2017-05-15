@@ -72,11 +72,12 @@ export default class ThemeDoc extends Component {
 
     const a11y = (themeKey.indexOf('-a11y') >= 0)
     const key = a11y ? themeKey.split('-')[0] : themeKey
-    const params = a11y ? '{ accessible: true }' : ''
+    const params = a11y ? '{ accessible: true }' : `{ overrides: { colors: { brand: 'red' } } }`
 
     const code = `
 // in your application entry point (before render):
-import { ${key} } from 'instructure-ui/lib/themes'
+import ${key} from 'instructure-ui/lib/themes/${key}'
+
 ${key}.use(${params})
 `
     return (
