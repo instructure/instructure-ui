@@ -23,6 +23,8 @@ module.exports = function (ctx) {
 
     require('postcss-initial'), // adds 'all: initial' ie support
 
+    require('postcss-bidirection'),
+
     require('postcss-reporter')
   ])
 

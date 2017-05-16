@@ -6751,6 +6751,12 @@
       "resolved": "https://registry.npmjs.org/postcss/-/postcss-5.2.16.tgz",
       "dev": true
     },
+    "postcss-bidirection": {
+      "version": "2.3.0",
+      "from": "postcss-bidirection@latest",
+      "resolved": "https://registry.npmjs.org/postcss-bidirection/-/postcss-bidirection-2.3.0.tgz",
+      "dev": true
+    },
     "postcss-browser-reporter": {
       "version": "0.5.0",
       "from": "postcss-browser-reporter@0.5.0",
