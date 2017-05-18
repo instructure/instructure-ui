@@ -65,9 +65,13 @@ export default class ComponentExample extends Component {
     try {
       const compiledCode = this.compileCode(code)
       const component = this.evalCode(compiledCode)
+      const { themeKey } = this.props
 
       ReactDOM.render(
-        <ApplyTheme theme={ApplyTheme.generateTheme(this.props.themeKey)}>
+        <ApplyTheme
+          theme={ApplyTheme.generateTheme(themeKey)}
+          immutable={(themeKey && (themeKey.indexOf('-a11y') >= 0))}
+        >
           {component}
         </ApplyTheme>,
         mountNode
