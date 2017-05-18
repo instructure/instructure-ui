@@ -16,6 +16,7 @@ export default class ComponentPlayground extends Component {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
     themeKey: PropTypes.string,
+    accessible: PropTypes.bool,
     variant: PropTypes.string,
     language: PropTypes.string
   }
@@ -106,6 +107,7 @@ export default class ComponentPlayground extends Component {
       <ComponentExample
         variant={this.props.variant}
         code={code}
+        accessible={this.props.accessible}
         themeKey={this.props.themeKey}
         isFullScreen={isFullScreen}
       />

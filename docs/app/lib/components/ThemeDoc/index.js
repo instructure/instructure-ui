@@ -8,7 +8,6 @@ import styles from './styles.css'
 
 export default class ThemeDoc extends Component {
   static propTypes = {
-    themeKey: PropTypes.string.isRequired,
     theme: PropTypes.object.isRequired
   }
 
@@ -57,39 +56,40 @@ export default class ThemeDoc extends Component {
 
   render () {
     const sections = []
-    const variables = []
+    const vars = []
 
-    const { theme, themeKey } = this.props
+    const { theme } = this.props
+    const { key, variables } = theme
 
-    for (const name in theme) {
-      const value = theme[name]
+    for (const name in variables) {
+      const value = variables[name]
       if (typeof value === 'object') {
         sections.push(this.renderSection(name, this.renderRows(value)))
       } else {
-        variables.push(this.renderVariable(name, value))
+        vars.push(this.renderVariable(name, value))
       }
     }
 
-    const a11y = (themeKey.indexOf('-a11y') >= 0)
-    const key = a11y ? themeKey.split('-')[0] : themeKey
+    const a11y = (key.indexOf('-a11y') >= 0)
+    const themeKey = a11y ? key.split('-')[0] : key
     const params = a11y ? '{ accessible: true }' : `{ overrides: { colors: { brand: 'red' } } }`
 
     const code = `
-// in your application entry point (before render):
-import ${key} from 'instructure-ui/lib/themes/${key}'
+// before mounting your React application:
+import ${themeKey} from 'instructure-ui/lib/themes/${themeKey}'
 
-${key}.use(${params})
+${themeKey}.use(${params})
 `
     return (
       <div className={styles.root}>
         <h2 className={styles.heading}>
-          {themeKey}
+          {key}
         </h2>
         <div className={styles.usage}>
           <CodeEditor readOnly code={code} mode="javascript" />
         </div>
         {sections}
-        {variables.length > 0 && this.renderSection('brand variables', variables)}
+        {vars.length > 0 && this.renderSection('brand variables', vars)}
       </div>
     )
   }
