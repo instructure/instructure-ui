@@ -18,6 +18,7 @@ export default class ComponentDoc extends Component {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     themeKey: PropTypes.string,
+    accessible: PropTypes.bool,
     doc: PropTypes.object,
     theme: PropTypes.object
   }
@@ -58,11 +59,18 @@ export default class ComponentDoc extends Component {
     const {
       name,
       themeKey,
-      doc
+      doc,
+      accessible
     } = this.props
+
     return doc.description ? (
       <div className={styles.description}>
-        <ComponentDescription name={name} themeKey={themeKey} description={doc.description} />
+        <ComponentDescription
+          name={name}
+          themeKey={themeKey}
+          description={doc.description}
+          accessible={accessible}
+        />
       </div>
     ) : null
   }

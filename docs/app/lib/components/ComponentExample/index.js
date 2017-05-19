@@ -12,6 +12,7 @@ export default class ComponentExample extends Component {
     code: PropTypes.string,
     variant: PropTypes.string,
     themeKey: PropTypes.string,
+    accessible: PropTypes.bool,
     isFullScreen: PropTypes.bool
   }
 
@@ -30,7 +31,9 @@ export default class ComponentExample extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.code !== prevProps.code || this.props.themeKey !== prevProps.themeKey) {
+    if (this.props.code !== prevProps.code ||
+        this.props.themeKey !== prevProps.themeKey ||
+        this.props.accessible !== prevProps.accessible) {
       this.executeCode(this.props.code)
     }
   }
@@ -65,9 +68,13 @@ export default class ComponentExample extends Component {
     try {
       const compiledCode = this.compileCode(code)
       const component = this.evalCode(compiledCode)
+      const { themeKey, accessible } = this.props
 
       ReactDOM.render(
-        <ApplyTheme theme={ApplyTheme.generateTheme(this.props.themeKey)}>
+        <ApplyTheme
+          theme={ApplyTheme.generateTheme(themeKey)}
+          immutable={accessible}
+        >
           {component}
         </ApplyTheme>,
         mountNode

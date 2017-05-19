@@ -8,7 +8,8 @@ export default class ComponentDescription extends Component {
   static propTypes = {
     themeKey: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    description: PropTypes.string
+    description: PropTypes.string,
+    accessible: PropTypes.bool
   }
 
   componentWillUpdate (nextProps) {
@@ -25,6 +26,7 @@ export default class ComponentDescription extends Component {
             <ComponentPlayground
               name={this.props.name}
               code={section.content}
+              accessible={this.props.accessible}
               themeKey={this.props.themeKey}
               variant={section.variant}
               language={section.language}

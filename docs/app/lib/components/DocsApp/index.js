@@ -22,9 +22,9 @@ import styles from './styles.css'
 import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { categorizedComponents } from '../../util/load-components'
 
-import { getRegistry, getTheme } from 'instructure-ui/lib/themeable/registry'
-
 import { pkg } from 'config-loader!'
+
+import themes from 'instructure-ui/lib/themes'
 
 export default class DocsApp extends Component {
   constructor (props) {
@@ -71,7 +71,7 @@ export default class DocsApp extends Component {
   }
 
   renderThemeSelect () {
-    const themeKeys = Object.keys(getThemes())
+    const themeKeys = Object.keys(themes)
     return (
       <div className={styles.themeSelect}>
         <Select
@@ -112,6 +112,7 @@ export default class DocsApp extends Component {
           name={component.name}
           doc={component.doc}
           theme={component.generateTheme(themeKey)}
+          accessible={themes[themeKey].accessible}
           themeKey={themeKey}
           path={component.path}
         />
@@ -139,14 +140,14 @@ export default class DocsApp extends Component {
   renderContent (key) {
     const component = componentsMap[key]
     const doc = documentsMap[key]
-    const theme = getThemes()[key]
+    const theme = themes[key]
 
     if (component) {
       return this.renderComponent(component)
     } else if (doc) {
       return this.renderDoc(doc)
     } else if (theme) {
-      return this.renderTheme(key, getTheme(key))
+      return this.renderTheme(key, themes[key])
     } else {
       return this.renderError(key)
     }
@@ -202,7 +203,7 @@ export default class DocsApp extends Component {
                 selected={this.state.key}
                 components={categorizedComponents}
                 documents={documentsList}
-                themes={getThemes()}
+                themes={themes}
               />
             </div>
           </Tray>
@@ -210,9 +211,4 @@ export default class DocsApp extends Component {
       </div>
     )
   }
-}
-
-function getThemes () {
-  const registry = getRegistry()
-  return registry.themes
 }
