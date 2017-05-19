@@ -1,6 +1,24 @@
+.layout {
+  position: relative;
+  display: block;
+}
+
+.icon {
+  display: block;
+  position: absolute;
+  top: calc(50% - 0.4rem);
+  right: var(--padding);
+  pointer-events: none;
+  fill: var(--iconColor);
+}
+
 .input,
 input[type].input { /* stylelint-disable-line selector-no-type */
   all: initial;
+
+  &::-ms-clear {
+    display: none;
+  }
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -27,7 +45,7 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   color: var(--color);
   background: var(--background);
 
-  padding: var(--padding);
+  padding: 0 var(--padding);
 
   &:focus {
     border-color: var(--focusBorderColor);
