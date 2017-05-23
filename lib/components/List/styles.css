@@ -1,0 +1,40 @@
+.root {
+  font-weight: var(--fontWeight);
+  font-family: var(--fontFamily);
+  padding: 0;
+}
+
+.default {
+  padding-left: var(--defaultListPadding);
+
+  &.ordered {
+    list-style-type: none;
+    padding-left: calc(var(--defaultListPadding) / 2);
+    counter-reset: ol-counter;
+
+    /* stylelint-disable selector-no-type */
+
+    li::before {
+      font-weight: var(--orderedNumberFontWeight);
+      counter-increment: ol-counter;
+      content: counters(ol-counter, ".") ".";
+      margin-right: var(--orderedNumberMargin);
+    }
+
+    /* stylelint-enable selector-no-type */
+
+  }
+}
+
+.unstyled,
+.pipe,
+.steps {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.unstyled {}
+
+.pipe {}
+
+.unordered {}
