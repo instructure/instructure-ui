@@ -6017,12 +6017,12 @@
     },
     "moment": {
       "version": "2.18.1",
-      "from": "moment@>=2.18.1 <3.0.0",
+      "from": "moment@>=2.9.0",
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.18.1.tgz"
     },
     "moment-timezone": {
       "version": "0.5.13",
-      "from": "moment-timezone@>=0.5.13 <0.6.0",
+      "from": "moment-timezone@0.5.13",
       "resolved": "https://registry.npmjs.org/moment-timezone/-/moment-timezone-0.5.13.tgz"
     },
     "ms": {
@@ -6205,7 +6205,7 @@
     },
     "numeral": {
       "version": "2.0.6",
-      "from": "numeral@>=2.0.6 <3.0.0",
+      "from": "numeral@2.0.6",
       "resolved": "https://registry.npmjs.org/numeral/-/numeral-2.0.6.tgz"
     },
     "oauth-sign": {
