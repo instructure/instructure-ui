@@ -2,6 +2,7 @@ import { cloneElement } from 'react'
 import { mount, ReactWrapper } from 'enzyme'
 import keycode from 'keycode'
 import mockRaf from 'mock-raf'
+import Locale from 'lib/util/locale'
 
 import { canvas } from 'instructure-ui/lib/themes'
 
@@ -174,6 +175,7 @@ export default class Testbed {
 
     this.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
     this.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
+    this.stub(Locale, 'browserLocale', () => 'en')
 
     this.sandbox.useFakeTimers()
   }
