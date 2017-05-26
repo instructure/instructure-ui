@@ -170,4 +170,8 @@
   display: inline-block;
   vertical-align: middle;
   box-sizing: border-box;
+
+  svg { /* stylelint-disable-line selector-no-type */
+    display: block;
+  }
 }
