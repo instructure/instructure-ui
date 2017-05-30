@@ -38,7 +38,7 @@ const CodePenButton = function ({ code, title, language }) {
   }
 
   return (
-    <form action="http://codepen.io/pen/define" method="POST" target="_blank" className={styles.root}>
+    <form action="https://codepen.io/pen/define" method="POST" target="_blank" className={styles.root}>
       <input type="hidden" name="data" value={JSON.stringify(data)} />
       <Button type="submit">
         <ScreenReaderContent>Edit in codepen</ScreenReaderContent>
