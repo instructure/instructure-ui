@@ -130,7 +130,7 @@
     font-size: var(--nameFontSizeSmall);
   }
 
-  .textDetails {
+  .textDescriptor {
     font-size: var(--descriptorFontSizeSmall);
   }
 }
@@ -162,7 +162,7 @@
     font-size: var(--nameFontSizeMedium);
   }
 
-  .textDetails {
+  .textDescriptor {
     font-size: var(--descriptorFontSizeMedium);
   }
 }
@@ -194,7 +194,7 @@
     font-size: var(--nameFontSizeLarge);
   }
 
-  .textDetails {
+  .textDescriptor {
     font-size: var(--descriptorFontSizeLarge);
   }
 }
