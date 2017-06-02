@@ -1,0 +1,7 @@
+.tag {
+  margin: var(--tagMargin) 0 0 var(--tagMargin);
+
+  &:last-of-type {
+    margin-bottom: var(--tagMargin);
+  }
+}

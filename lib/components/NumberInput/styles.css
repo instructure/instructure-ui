@@ -27,7 +27,7 @@
   &.invalid {
     border-color: var(--errorBorderColor);
 
-    &:focus {
+    &.focus {
       border-color: var(--errorBorderColor);
       outline-color: var(--errorOutlineColor);
     }
