@@ -36,21 +36,25 @@
 
     &.positioned--start {
       &.count {
-        left: calc(-1 * var(--countOffset));
+        offset-inline-start: calc(-1 * var(--countOffset));
+        offset-inline-end: auto;
       }
 
       &.notification {
-        left: var(--notificationOffset);
+        offset-inline-start: var(--notificationOffset);
+        offset-inline-end: auto;
       }
     }
 
     &.positioned--end {
       &.count {
-        right: calc(-1 * var(--countOffset));
+        offset-inline-end: calc(-1 * var(--countOffset));
+        offset-inline-start: auto;
       }
 
       &.notification {
-        right: var(--notificationOffset);
+        offset-inline-end: var(--notificationOffset);
+        offset-inline-start: auto;
       }
     }
 
@@ -73,23 +77,23 @@
 
     &.positioned--center.positioned--start {
       &.count {
-        left: auto;
-        right: calc(100% - var(--countOffset));
+        offset-inline-start: auto;
+        offset-inline-end: calc(100% - var(--countOffset));
       }
 
       &.notification {
-        left: calc(-1 * var(--sizeNotification) / 2);
+        offset-inline-start: calc(-1 * var(--sizeNotification) / 2);
       }
     }
 
     &.positioned--center.positioned--end {
       &.count {
-        right: auto;
-        left: calc(100% - var(--countOffset));
+        offset-inline-end: auto;
+        offset-inline-start: calc(100% - var(--countOffset));
       }
 
       &.notification {
-        right: calc(-1 * var(--sizeNotification) / 2);
+        offset-inline-end: calc(-1 * var(--sizeNotification) / 2);
       }
     }
   }
