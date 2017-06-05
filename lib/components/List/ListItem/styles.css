@@ -30,16 +30,19 @@
   text-overflow: ellipsis;
   max-width: 100%;
   box-sizing: border-box;
-  border-right: var(--pipeBorderWidth) solid var(--pipeBorderColor);
+  border-inline-end: var(--pipeBorderWidth) solid var(--pipeBorderColor);
+  border-inline-start: none;
   line-height: var(--pipeLineHeight);
   color: var(--pipeColor);
   font-size: var(--fontSizeSmall);
-  padding-right: var(--pipeSpacing);
-  margin-right: var(--pipeSpacing);
+  padding-inline-end: var(--pipeSpacing);
+  padding-inline-start: 0;
+  margin-inline-end: var(--pipeSpacing);
+  margin-inline-start: 0;
 
   &:last-of-type {
-    margin-right: 0;
-    border-right: none;
+    margin-inline-end: 0;
+    border-inline-end: none;
   }
 }
 
