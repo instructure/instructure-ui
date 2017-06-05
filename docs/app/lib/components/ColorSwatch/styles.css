@@ -3,7 +3,8 @@
   height: 1em;
   display: inline-block;
   vertical-align: middle;
-  margin-right: 3px;
+  margin-inline-end: 3px;
+  margin-inline-start: 0;
   border: 1px solid #eee;
   border-radius: 3px;
 }
