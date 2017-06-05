@@ -14,6 +14,8 @@
   position: relative;
   overflow: visible;
 
+  direction: inherit;
+
   margin: 0;
 
   text-decoration: none; /* for links styled as buttons */
@@ -118,7 +120,7 @@
     white-space: normal;
     word-wrap: break-word;
     hyphens: auto;
-    text-align: left;
+    text-align: start;
 
     > svg {
       display: inline-block;
@@ -129,7 +131,8 @@
   &.fluidWidth > svg,
   .layout > svg {
     font-size: var(--iconPlusTextFontSize);
-    margin-right: var(--iconPlusTextMargin);
+    margin-inline-end: var(--iconPlusTextMargin);
+    margin-inline-start: auto;
   }
 
   .layout > svg {
