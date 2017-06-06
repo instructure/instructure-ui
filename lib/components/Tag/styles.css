@@ -94,7 +94,8 @@
 }
 
 .icon {
-  margin-left: var(--iconMargin);
+  margin-inline-start: var(--iconMargin);
+  margin-inline-end: 0;
   transform: translateY(0.0625rem);
   transition: all var(--transitionTiming);
   color: var(--iconColor);
