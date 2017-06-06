@@ -1,7 +1,8 @@
 .root {
   box-sizing: border-box;
   padding: var(--padding);
-  padding-right: calc(var(--padding) * 2 + 1em);
+  padding-inline-end: calc(var(--padding) * 2 + 1em);
+  padding-inline-start: var(--padding);
   flex: 0 0 auto;
   border-bottom: 1px solid var(--borderColor);
 }

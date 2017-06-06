@@ -13,7 +13,8 @@
 .closeButton {
   position: absolute;
   top: var(--closeButtonOffset);
-  right: var(--closeButtonOffset);
+  offset-inline-end: var(--closeButtonOffset);
+  offset-inline-start: auto;
   background: var(--background);
   z-index: var(--closeButtonZIndex);
 }
