@@ -8,7 +8,8 @@
   align-items: center;
   position: absolute;
   top: 0;
-  right: var(--padding);
+  offset-inline-end: var(--padding);
+  offset-inline-start: auto;
   height: 100%;
   pointer-events: none;
   fill: var(--iconColor);
@@ -21,6 +22,8 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   &::-ms-clear {
     display: none;
   }
+
+  text-align: start;
 
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -91,6 +94,7 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   }
 
   &.hasIcon {
-    padding-right: calc(var(--padding) * 2 + 1em);
+    padding-inline-end: calc(var(--padding) * 2 + 1em);
+    padding-inline-start: var(--padding);
   }
 }
