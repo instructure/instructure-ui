@@ -3,6 +3,8 @@
   position: relative;
   display: block;
   width: 100%;
+  direction: inherit;
+  text-align: start;
 }
 
 .input {
@@ -13,7 +15,8 @@
   width: auto;
   position: absolute;
   top: 0;
-  left: 0;
+  offset-inline-start: 0;
+  offset-inline-end: auto;
   z-index: -1;
   opacity: 0.0001; /* selenium cannot find fully transparent elements */
 }

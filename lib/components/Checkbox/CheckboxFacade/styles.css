@@ -20,7 +20,8 @@
   border: var(--borderWidth) solid var(--borderColor);
   border-radius: var(--borderRadius);
 
-  margin-right: var(--marginRight);
+  margin-inline-end: var(--marginRight);
+  margin-inline-start: 0;
   padding: var(--padding);
 
   &::before {
