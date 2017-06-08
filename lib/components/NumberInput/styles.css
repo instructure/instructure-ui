@@ -57,6 +57,8 @@
 
 .input {
   all: initial;
+  text-align: start;
+  direction: inherit;
 
   &::-ms-clear {
     display: none;
@@ -103,9 +105,10 @@
   align-items: center;
 
   background-color: var(--arrowsBackgroundColor);
-  border: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
   border-top: none;
-  border-right: none;
+  border-inline-end: none;
+  border-inline-start: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
   color: var(--arrowsColor);
 
   &:last-child {
