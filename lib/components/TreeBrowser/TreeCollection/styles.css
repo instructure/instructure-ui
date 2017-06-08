@@ -15,7 +15,7 @@
   position: relative;
 }
 
-.item {
+.node {
   margin: 0;
   padding: 0;
 }
@@ -57,7 +57,7 @@
       margin-top: calc(-1 * var(--baseSpacingSmall));
     }
 
-    .item {
+    .node {
       &::before {
         width: calc(var(--baseSpacingSmall) * 1.25);
       }
@@ -81,7 +81,7 @@
       margin-top: calc(-1 * var(--baseSpacingMedium));
     }
 
-    .item {
+    .node {
       &::before {
         width: calc(var(--baseSpacingMedium) * 1.25);
       }
@@ -105,7 +105,7 @@
       margin-top: calc(-1 * var(--baseSpacingLarge));
     }
 
-    .item {
+    .node {
       &::before {
         width: calc(var(--baseSpacingLarge) * 1.25);
       }
