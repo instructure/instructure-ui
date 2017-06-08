@@ -132,6 +132,7 @@
     "webpack-dev-server": "2.4.1"
   },
   "dependencies": {
+    "bowser": "1.7.0",
     "classnames": "2.2.5",
     "decimal.js": "7.2.1",
     "deep-equal": "1.0.1",
