@@ -13,7 +13,7 @@
 }
 
 .crumb:last-child {
-  padding-right: 0;
+  padding-inline-end: 0;
 }
 
 .separator {
@@ -25,33 +25,39 @@
 
 .small .crumb {
   font-size: var(--smallFontSize);
-  padding-right: calc(var(--smallSeparatorFontSize) * 2);
+  padding-inline-end: calc(var(--smallSeparatorFontSize) * 2);
+  padding-inline-start: 0;
 
   .separator {
     font-size: var(--smallSeparatorFontSize);
-    right: calc(var(--smallSeparatorFontSize) / 2);
+    offset-inline-end: calc(var(--smallSeparatorFontSize) / 2);
+    offset-inline-start: auto;
     margin-top: calc(-1 * (var(--smallSeparatorFontSize) / 3));
   }
 }
 
 .medium .crumb {
   font-size: var(--mediumFontSize);
-  padding-right: calc(var(--mediumSeparatorFontSize) * 2);
+  padding-inline-end: calc(var(--mediumSeparatorFontSize) * 2);
+  padding-inline-start: 0;
 
   .separator {
     font-size: var(--mediumSeparatorFontSize);
-    right: calc(var(--mediumSeparatorFontSize) / 2);
+    offset-inline-end: calc(var(--mediumSeparatorFontSize) / 2);
+    offset-inline-start: auto;
     margin-top: calc(-1 * (var(--mediumSeparatorFontSize) / 3));
   }
 }
 
 .large .crumb {
   font-size: var(--largeFontSize);
-  padding-right: calc(var(--largeSeparatorFontSize) * 2);
+  padding-inline-end: calc(var(--largeSeparatorFontSize) * 2);
+  padding-inline-start: 0;
 
   .separator {
     font-size: var(--largeSeparatorFontSize);
-    right: calc(var(--largeSeparatorFontSize) / 2);
+    offset-inline-end: calc(var(--largeSeparatorFontSize) / 2);
+    offset-inline-start: auto;
     margin-top: calc(-1 * (var(--largeSeparatorFontSize) / 3));
   }
 }
