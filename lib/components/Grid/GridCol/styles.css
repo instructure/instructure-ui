@@ -10,7 +10,8 @@
 @define-mixin column-offset
   $size: 1 {
 
-  margin-left: calc($size / 12 * 99.999%);
+  margin-inline-start: calc($size / 12 * 99.999%);
+  margin-inline-end: 0;
 }
 
 @define-mixin grid-columns-for-breakpoint
