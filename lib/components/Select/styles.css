@@ -6,7 +6,8 @@
     display: block;
     position: absolute;
     top: calc(50% - 0.4rem);
-    right: var(--padding);
+    offset-inline-end: var(--padding);
+    offset-inline-start: auto;
     pointer-events: none;
     fill: var(--arrowColor);
   }
@@ -15,6 +16,8 @@
     all: initial;
     background: var(--background);
     color: var(--color);
+
+    direction: inherit;
 
     box-sizing: border-box;
     display: block;
@@ -70,7 +73,10 @@
     line-height: var(--smallHeight);
     height: var(--smallHeight);
     font-size: var(--smallFontSize);
-    padding: 0 calc(var(--padding) * 2 + var(--smallArrowWidth)) 0 var(--padding);
+    padding-top: 0;
+    padding-inline-end: calc(var(--padding) * 2 + var(--smallArrowWidth));
+    padding-bottom: 0;
+    padding-inline-start: var(--padding);
   }
 
   .arrow {
@@ -84,7 +90,10 @@
     line-height: var(--mediumHeight);
     height: var(--mediumHeight);
     font-size: var(--mediumFontSize);
-    padding: 0 calc(var(--padding) * 2 + var(--mediumArrowWidth)) 0 var(--padding);
+    padding-top: 0;
+    padding-inline-end: calc(var(--padding) * 2 + var(--mediumArrowWidth));
+    padding-bottom: 0;
+    padding-inline-start: var(--padding);
   }
 
   .arrow {
@@ -98,7 +107,11 @@
     line-height: var(--largeHeight);
     height: var(--largeHeight);
     font-size: var(--largeFontSize);
-    padding: 0 calc(var(--padding) * 2 + var(--largeArrowWidth)) 0 var(--padding);
+    padding-top: 0;
+    padding-inline-end: calc(var(--padding) * 2 + var(--largeArrowWidth));
+    padding-bottom: 0;
+    padding-inline-start: var(--padding);
+
   }
 
   .arrow {
