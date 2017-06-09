@@ -101,7 +101,7 @@
     "mock-raf": "1.0.0",
     "object-assign": "4.1.1",
     "postcss": "5.2.16",
-    "postcss-bidirection": "2.3.0",
+    "postcss-bidirection": "2.4.0",
     "postcss-browser-reporter": "0.5.0",
     "postcss-calc": "5.3.1",
     "postcss-custom-properties": "5.0.2",

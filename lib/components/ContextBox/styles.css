@@ -44,19 +44,24 @@
   &.positioned--end-bottom,
   &.positioned--center-end,
   &.positioned--end { /* arrow start */
-    margin-left: var(--arrowSize);
+    margin-inline-start: var(--arrowSize);
+    margin-inline-end: 0;
 
     .arrow {
       top: 50%;
-      right: 100%;
+      offset-inline-end: 100%;
+      offset-inline-start: auto;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
-      border-left-width: 0;
+      border-inline-start-width: 0;
+      border-inline-end-width: var(--arrowSize);
     }
 
     .arrow::after {
-      left: var(--borderWidth);
+      offset-inline-start: var(--borderWidth);
+      offset-inline-end: auto;
       margin-top: calc(-1 * var(--arrowSize));
-      border-left-width: 0;
+      border-inline-start-width: 0;
+      border-inline-end-width: var(--arrowSize);
     }
   }
 
@@ -69,15 +74,19 @@
 
     .arrow {
       top: 50%;
-      left: 100%;
+      offset-inline-start: 100%;
+      offset-inline-end: auto;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
-      border-right-width: 0;
+      border-inline-end-width: 0;
+      border-inline-start-width: var(--arrowSize);
     }
 
     .arrow::after {
-      right: var(--borderWidth);
+      offset-inline-end: var(--borderWidth);
+      offset-inline-start: auto;
       margin-top: calc(-1 * var(--arrowSize));
-      border-right-width: 0;
+      border-inline-end-width: 0;
+      border-inline-start-width: var(--arrowSize);
     }
   }
 
@@ -89,13 +98,15 @@
 
     .arrow {
       bottom: 100%;
-      margin-left: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      margin-inline-start: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      margin-inline-end: 0;
       border-top-width: 0;
     }
 
     .arrow::after {
       top: var(--borderWidth);
-      margin-left: calc(-1 * var(--arrowSize));
+      margin-inline-start: calc(-1 * var(--arrowSize));
+      margin-inline-end: 0;
       border-top-width: 0;
     }
   }
@@ -108,13 +119,15 @@
 
     .arrow {
       top: 100%;
-      margin-left: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      margin-inline-start: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
+      margin-inline-end: 0;
       border-bottom-width: 0;
     }
 
     .arrow::after {
       bottom: var(--borderWidth);
-      margin-left: calc(-1 * var(--arrowSize));
+      margin-inline-start: calc(-1 * var(--arrowSize));
+      margin-inline-end: 0;
       border-bottom-width: 0;
     }
   }
@@ -131,7 +144,8 @@
   &.positioned--top-start,
   &.positioned--bottom-start {
     .arrow {
-      left: calc((var(--arrowSize) + var(--borderWidth)) * 2);
+      offset-inline-start: calc((var(--arrowSize) + var(--borderWidth)) * 2);
+      offset-inline-end: auto;
     }
   }
 
@@ -152,7 +166,8 @@
   &.positioned--top-end,
   &.positioned--bottom-end {
     .arrow {
-      left: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
+      offset-inline-start: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
+      offset-inline-end: auto;
     }
   }
 }
@@ -179,11 +194,11 @@
   &.positioned--end-bottom { /* arrow start */
 
     .arrow::after {
-      border-right-color: var(--backgroundColor);
+      border-inline-end-color: var(--backgroundColor);
     }
 
     .arrow {
-      border-right-color: var(--arrowBorderColor);
+      border-inline-end-color: var(--arrowBorderColor);
     }
   }
 
@@ -194,11 +209,11 @@
   &.positioned--start-bottom {  /* arrow end */
 
     .arrow::after {
-      border-left-color: var(--backgroundColor);
+      border-inline-start-color: var(--backgroundColor);
     }
 
     .arrow {
-      border-left-color: var(--arrowBorderColor);
+      border-inline-start-color: var(--arrowBorderColor);
     }
   }
 
@@ -239,11 +254,11 @@
   &.positioned--end-bottom { /* arrow start */
 
     .arrow::after {
-      border-right-color: var(--backgroundColorInverse);
+      border-inline-end-color: var(--backgroundColorInverse);
     }
 
     .arrow {
-      border-right-color: var(--borderColorInverse);
+      border-inline-end-color: var(--borderColorInverse);
     }
   }
 
