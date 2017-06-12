@@ -56,8 +56,8 @@
 
   &.arrow {
     .icon {
-      margin-right: 0;
-      margin-left: auto;
+      margin-inline-end: 0;
+      margin-inline-start: auto;
     }
   }
 }
@@ -68,7 +68,8 @@
 
 .icon {
   color: var(--iconColor);
-  margin: var(--iconMargin);
+  margin-inline-end: var(--iconMarginEnd);
+  margin-inline-start: 0;
   width: 1em;
   height: 1em;
 }
