@@ -73,9 +73,10 @@ always be in sync.
 
 ### Releases
 
-1. Run `npm run bump` to update the package version. Ignore the advice to push the tag (we do that after we publish the release due to our gerrit workflow).
-2. Update the [CHANGELOG](#CHANGELOG) to optionally add any additional information about the release.
-3. Push up the version bump commit to gerrit for review and testing.
-4. Once the updated package.json file is merged, run `npm run release`
-5. Verify that the documentation was updated on gh-pages and the release was tagged in github.
+1. Make sure tags are up to date. If not, run `git fetch --tags --force`
+2. Run `npm run bump` to update the package version. Ignore the advice to push the tag (we do that after we publish the release due to our gerrit workflow).
+3. Update the [CHANGELOG](#CHANGELOG) to optionally add any additional information about the release.
+4. Push up the version bump commit to gerrit for review and testing.
+5. Once the updated package.json file is merged, run `npm run release`
+6. Verify that the documentation was updated on gh-pages and the release was tagged in github.
 
