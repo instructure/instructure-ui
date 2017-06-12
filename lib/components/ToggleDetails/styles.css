@@ -81,11 +81,13 @@
 }
 
 .iconStart {
-  margin-right: var(--iconMargin);
+  margin-inline-end: var(--iconMargin);
+  margin-inline-start: 0;
 }
 
 .iconEnd {
-  margin-left: var(--iconMargin);
+  margin-inline-start: var(--iconMargin);
+  margin-inline-end: 0;
 }
 
 .details {
@@ -103,15 +105,18 @@
 
 .indentDetails {
   &.small {
-    padding-left: calc(var(--smallIconSize) + var(--togglePadding));
+    padding-inline-start: calc(var(--smallIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
   }
 
   &.medium {
-    padding-left: calc(var(--mediumIconSize) + var(--togglePadding));
+    padding-inline-start: calc(var(--mediumIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
   }
 
   &.large {
-    padding-left: calc(var(--largeIconSize) + var(--togglePadding));
+    padding-inline-start: calc(var(--largeIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
   }
 }
 
