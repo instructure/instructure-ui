@@ -4,10 +4,12 @@
 }
 
 .icon {
-  display: block;
+  display: flex;
+  align-items: center;
   position: absolute;
-  top: calc(50% - 0.4rem);
+  top: 0;
   right: var(--padding);
+  height: 100%;
   pointer-events: none;
   fill: var(--iconColor);
 }
@@ -86,5 +88,9 @@ input[type].input { /* stylelint-disable-line selector-no-type */
   &.large {
     font-size: var(--largeFontSize);
     height: var(--largeHeight);
+  }
+
+  &.hasIcon {
+    padding-right: calc(var(--padding) * 2 + 1em);
   }
 }
