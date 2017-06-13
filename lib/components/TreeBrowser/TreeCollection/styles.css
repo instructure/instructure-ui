@@ -29,7 +29,8 @@
       background: var(--borderColor);
       position: absolute;
       bottom: 0;
-      left: 0;
+      offset-inline-start: 0;
+      offset-inline-end: auto;
       transform: scaleY(0.01);
       transform-origin: center top;
       animation-name: list;
@@ -43,13 +44,15 @@
 .small {
   &.indent {
     .list {
-      margin-left: calc(var(--baseSpacingSmall) * 3);
+      margin-inline-start: calc(var(--baseSpacingSmall) * 3);
+      margin-inline-end: 0;
     }
   }
 
   &.folderTree {
     .list {
-      margin-left: calc(var(--baseSpacingSmall) * 2);
+      margin-inline-start: calc(var(--baseSpacingSmall) * 2);
+      margin-inline-end: 0;
       padding-top: var(--baseSpacingSmall);
       margin-top: calc(-1 * var(--baseSpacingSmall));
     }
@@ -65,13 +68,15 @@
 .medium {
   &.indent {
     .list {
-      margin-left: calc(var(--baseSpacingMedium) * 3);
+      margin-inline-start: calc(var(--baseSpacingMedium) * 3);
+      margin-inline-end: 0;
     }
   }
 
   &.folderTree {
     .list {
-      margin-left: calc(var(--baseSpacingMedium) * 2);
+      margin-inline-start: calc(var(--baseSpacingMedium) * 2);
+      margin-inline-end: 0;
       padding-top: var(--baseSpacingMedium);
       margin-top: calc(-1 * var(--baseSpacingMedium));
     }
@@ -87,13 +92,15 @@
 .large {
   &.indent {
     .list {
-      margin-left: calc(var(--baseSpacingLarge) * 3);
+      margin-inline-start: calc(var(--baseSpacingLarge) * 3);
+      margin-inline-end: 0;
     }
   }
 
   &.folderTree {
     .list {
-      margin-left: calc(var(--baseSpacingLarge) * 2);
+      margin-inline-start: calc(var(--baseSpacingLarge) * 2);
+      margin-inline-end: 0;
       padding-top: var(--baseSpacingLarge);
       margin-top: calc(-1 * var(--baseSpacingLarge));
     }
