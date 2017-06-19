@@ -12,11 +12,9 @@
 /* stylelint-disable property-no-vendor-prefix */
 
 _:-ms-fullscreen,
-:root {
-  .root {
-    -ms-flex: 1 0 auto;
-    flex: 1 0 auto;
-  }
+:root  .root {
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 
 /* stylelint-enable selector-no-type */

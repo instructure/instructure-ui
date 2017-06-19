@@ -14,15 +14,14 @@
 /* stylelint-disable selector-root-no-composition */
 
 _:-ms-fullscreen,
-:root {
-  .layout {
-    align-items: flex-start;
-    padding-top: 2rem;
-  }
+:root .layout {
+  align-items: flex-start;
+  padding-top: 2rem;
+}
 
-  .fullscreen {
-    padding-top: 0;
-  }
+_:-ms-fullscreen,
+:root .fullscreen {
+  padding-top: 0;
 }
 
 /* NEED THIS HACK TO SUPPORT FULLSCREEN IN SAFARI */

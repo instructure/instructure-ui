@@ -35,23 +35,16 @@
 /* stylelint-disable value-no-vendor-prefix */
 
 _:-ms-fullscreen,
-:root {
-  .root {
-    display: block;
-    overflow: auto;
-  }
+:root .root {
+  display: block;
+  overflow: auto;
+  max-height: none;
+}
 
-  .root.fullscreen {
-    display: -ms-flexbox;
-    display: flex;
-  }
-
-  .auto,
-  .small,
-  .medium,
-  .large {
-    max-height: none;
-  }
+_:-ms-fullscreen,
+:root .fullscreen {
+  display: -ms-flexbox;
+  display: flex;
 }
 
 /* stylelint-enable selector-no-type */
