@@ -1,4 +1,4 @@
-import marked from 'marked'
+import marked from 'marked' // eslint-disable-line import/no-extraneous-dependencies
 
 // https://github.com/sapegin/react-styleguidist/blob/master/loaders/examples.loader.js
 const EXAMPLE_PLACEHOLDER = '<%{#example#}%>'

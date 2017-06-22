@@ -1,21 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import Table from 'instructure-ui/lib/components/Table'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+
 import ColorSwatch from '../ColorSwatch'
 
 import styles from './styles.css'
 
 export default class ComponentTheme extends Component {
   static propTypes = {
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
   renderRows () {
     const rows = []
     const { theme } = this.props
 
-    for (const name in theme) {
+    for (const name in theme) { // eslint-disable-line no-restricted-syntax
       const value = theme[name]
       rows.push(
         <tr key={name}>

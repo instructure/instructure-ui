@@ -1,5 +1,6 @@
-import reject from 'lodash/reject'
+import reject from 'lodash/reject' // eslint-disable-line import/no-extraneous-dependencies
 
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved
 require('script-loader!axe-core/axe.min.js')
 /* global axe */
 

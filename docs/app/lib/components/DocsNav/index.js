@@ -2,19 +2,22 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import styles from './styles.css'
-
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 import TextInput from 'instructure-ui/lib/components/TextInput'
 import Link from 'instructure-ui/lib/components/Link'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
+
+import styles from './styles.css'
+
 import NavToggle from '../NavToggle'
 
 export default class DocsNav extends Component {
   static propTypes = {
-    components: PropTypes.object,
-    documents: PropTypes.array,
-    themes: PropTypes.object,
-    selected: PropTypes.string
+    components: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    documents: PropTypes.array, // eslint-disable-line react/forbid-prop-types
+    themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    selected: PropTypes.string // eslint-disable-line react/require-default-props
   }
 
   static defaultProps = {

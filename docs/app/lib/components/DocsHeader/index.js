@@ -1,8 +1,12 @@
 import React, {Component} from 'react'
 
-import styles from './styles.css'
-
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/no-webpack-loader-syntax,
+  import/extensions */
 import config from 'config-loader!'
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved, import/no-webpack-loader-syntax,
+  import/extensions */
+
+import styles from './styles.css'
 
 export default class DocsHeader extends Component {
   render () {

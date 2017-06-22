@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import Table from 'instructure-ui/lib/components/Table'
+
 import ColorSwatch from '../ColorSwatch'
 import CodeEditor from '../CodeEditor'
 
@@ -8,7 +11,7 @@ import styles from './styles.css'
 
 export default class ThemeDoc extends Component {
   static propTypes = {
-    theme: PropTypes.object.isRequired
+    theme: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
   renderVariable (name, value) {
@@ -28,7 +31,7 @@ export default class ThemeDoc extends Component {
   renderRows (section) {
     const rows = []
 
-    for (const name in section) {
+    for (const name in section) { // eslint-disable-line no-restricted-syntax
       const value = section[name]
       rows.push(this.renderVariable(name, value))
     }
@@ -61,7 +64,7 @@ export default class ThemeDoc extends Component {
     const { theme } = this.props
     const { key, variables } = theme
 
-    for (const name in variables) {
+    for (const name in variables) { // eslint-disable-line no-restricted-syntax
       const value = variables[name]
       if (typeof value === 'object') {
         sections.push(this.renderSection(name, this.renderRows(value)))

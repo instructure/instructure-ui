@@ -1,10 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import styles from './styles.css'
-import Button from '../Button'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 
+/* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
 import { pkg } from 'config-loader!'
+/* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
+
+import styles from './styles.css'
+import Button from '../Button'
 
 const CodePenButton = function ({ code, title, language }) {
   const js = (language === 'jsx')

@@ -1,17 +1,23 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
+import Modal, { ModalBody } from 'instructure-ui/lib/components/Modal'
+
+import classnames from 'classnames'
 import CodeEditor from '../CodeEditor'
 import ComponentExample from '../ComponentExample'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
-import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
-import Modal, { ModalBody } from 'instructure-ui/lib/components/Modal'
-import classnames from 'classnames'
 
 import styles from './styles.css'
 
 export default class ComponentPlayground extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     name: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
@@ -20,6 +26,7 @@ export default class ComponentPlayground extends Component {
     variant: PropTypes.string,
     language: PropTypes.string
   }
+  /* eslint-enable react/require-default-props */
 
   constructor (props) {
     super()
@@ -41,7 +48,7 @@ export default class ComponentPlayground extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     if (prevState.isFullScreen === true && this.state.isFullScreen === false) {
-      ReactDOM.findDOMNode(this._fullScreenButton).focus()
+      ReactDOM.findDOMNode(this._fullScreenButton).focus() // eslint-disable-line react/no-find-dom-node
     }
   }
 
@@ -72,6 +79,7 @@ export default class ComponentPlayground extends Component {
   renderEditor () {
     const { code } = this.state
 
+    /* eslint-disable react/style-prop-object */
     return (
       <div>
         <div className={styles.close}>
@@ -95,6 +103,7 @@ export default class ComponentPlayground extends Component {
         <CodeEditor code={code} style="playground" onChange={this.handleChange} />
       </div>
     )
+    /* eslint-enable react/style-prop-object */
   }
 
   render () {

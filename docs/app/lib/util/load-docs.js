@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved
 const docs = require('markdown-docs-loader!')
 
 const documentsMap = {}

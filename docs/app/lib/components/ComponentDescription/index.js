@@ -5,12 +5,14 @@ import parseDescription from '../../util/parse-description'
 import ComponentPlayground from '../ComponentPlayground'
 
 export default class ComponentDescription extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     themeKey: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
     accessible: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   componentWillUpdate (nextProps) {
     if (nextProps.description !== this.props.description) {
@@ -19,6 +21,7 @@ export default class ComponentDescription extends Component {
   }
 
   renderDescription () {
+    /* eslint-disable react/no-danger, react/no-array-index-key, array-callback-return */
     return this.sections.map((section, i) => {
       switch (section.type) {
         case 'code':
@@ -38,6 +41,7 @@ export default class ComponentDescription extends Component {
           )
       }
     })
+    /* eslint-enable react/no-danger, react/no-array-index-key, array-callback-return */
   }
 
   render () {

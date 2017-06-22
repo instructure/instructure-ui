@@ -1,27 +1,34 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
+import Link from 'instructure-ui/lib/components/Link'
+
+/* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
+import { pkg } from 'config-loader!'
+/* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
+
 import ComponentDescription from '../ComponentDescription'
 import ComponentProps from '../ComponentProps'
 import ComponentTheme from '../ComponentTheme'
 
 import CodeEditor from '../CodeEditor'
 
-import Link from 'instructure-ui/lib/components/Link'
-
 import styles from './styles.css'
 
-import { pkg } from 'config-loader!'
-
 export default class ComponentDoc extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     name: PropTypes.string.isRequired,
     path: PropTypes.string.isRequired,
     themeKey: PropTypes.string,
     accessible: PropTypes.bool,
-    doc: PropTypes.object,
-    theme: PropTypes.object
+    doc: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    theme: PropTypes.object // eslint-disable-line react/forbid-prop-types
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     doc: {}

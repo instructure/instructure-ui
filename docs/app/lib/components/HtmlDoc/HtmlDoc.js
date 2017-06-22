@@ -9,8 +9,10 @@ export default class HtmlDoc extends Component {
   };
 
   render () {
+    /* eslint-disable react/no-danger */
     return (
       <div className={styles.root} dangerouslySetInnerHTML={{__html: this.props.html}} />
     )
+    /* eslint-enable react/no-danger */
   }
 }

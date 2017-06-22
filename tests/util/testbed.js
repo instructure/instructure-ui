@@ -1,17 +1,21 @@
 import { cloneElement } from 'react'
-import { mount, ReactWrapper } from 'enzyme'
+import { mount, ReactWrapper } from 'enzyme' // eslint-disable-line import/no-extraneous-dependencies
 import keycode from 'keycode'
-import mockRaf from 'mock-raf'
+import mockRaf from 'mock-raf' // eslint-disable-line import/no-extraneous-dependencies
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import Locale from 'lib/util/locale'
 
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import { canvas } from 'instructure-ui/lib/themes'
 
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import checkA11y from 'tests/util/a11y-check'
 
 const realSetTimeout = setTimeout
 
 const override = function (object, methodName, extra) {
-  object[methodName] = (function (original, after) { // eslint-disable-line
+  object[methodName] = (function (original, after) { // eslint-disable-line no-param-reassign, wrap-iife
     return function () {
       const result = original && original.apply(this, arguments)
       after.apply(this, arguments)
@@ -100,6 +104,7 @@ const originalRef = ReactWrapper.prototype.ref
 ReactWrapper.prototype.ref = function () {
   const ref = arguments[0]
   const instance = this.instance()
+  // eslint-disable-next-line no-prototype-builtins
   if (instance.hasOwnProperty(ref)) {
     return new ReactWrapper(instance[ref], true)
   } else {
@@ -130,6 +135,7 @@ global.chai.use(function (chai, utils) {
   })
 })
 
+// eslint-disable-next-line import/no-extraneous-dependencies
 global.chai.use(require('chai-string'))
 
 export default class Testbed {

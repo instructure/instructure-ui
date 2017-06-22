@@ -1,5 +1,21 @@
 import React, {Component} from 'react'
 
+/* eslint-disable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
+import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+import Select from 'instructure-ui/lib/components/Select'
+import Tray from 'instructure-ui/lib/components/Tray'
+import themes from 'instructure-ui/lib/themes'
+/* eslint-enable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
+
+import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
+import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
+
+/* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
+import { pkg } from 'config-loader!'
+/* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
+  import/extensions */
+
 import classnames from 'classnames'
 import ComponentDoc from '../ComponentDoc'
 import DocsHeader from '../DocsHeader'
@@ -8,23 +24,12 @@ import HtmlDoc from '../HtmlDoc'
 import ThemeDoc from '../ThemeDoc'
 import DocsSection from '../DocsSection'
 
-import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
-import Select from 'instructure-ui/lib/components/Select'
-import Tray from 'instructure-ui/lib/components/Tray'
-
-import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
-import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
-
 import Button from '../Button'
 
 import styles from './styles.css'
 
 import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { categorizedComponents } from '../../util/load-components'
-
-import { pkg } from 'config-loader!'
-
-import themes from 'instructure-ui/lib/themes'
 
 export default class DocsApp extends Component {
   constructor (props) {

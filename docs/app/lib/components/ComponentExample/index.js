@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import ApplyTheme from 'instructure-ui/lib/components/ApplyTheme'
-import { transform } from 'babel-standalone'
+
+import { transform } from 'babel-standalone' // eslint-disable-line import/no-extraneous-dependencies
 import classnames from 'classnames'
 
 import styles from './styles.css'
 
 export default class ComponentExample extends Component {
+
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     code: PropTypes.string,
     variant: PropTypes.string,
@@ -15,6 +20,7 @@ export default class ComponentExample extends Component {
     accessible: PropTypes.bool,
     isFullScreen: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   constructor (props) {
     super(props)

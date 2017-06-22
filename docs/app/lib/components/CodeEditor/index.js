@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import debounce from 'lodash/debounce'
+import debounce from 'lodash/debounce' // eslint-disable-line import/no-extraneous-dependencies
+import 'codemirror/theme/neo.css' // eslint-disable-line import/no-extraneous-dependencies
 
 import CodeMirrorEditor from '../CodeMirrorEditor'
-
-import 'codemirror/theme/neo.css'
 
 const UPDATE_DELAY = 200
 

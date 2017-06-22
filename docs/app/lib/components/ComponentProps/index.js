@@ -1,14 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import Table from 'instructure-ui/lib/components/Table'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
+
+// eslint-disable-next-line import/no-extraneous-dependencies,
 import marked from 'marked'
 
 import styles from './styles.css'
 
 export default class ComponentProps extends Component {
   static propTypes = {
-    props: PropTypes.object.isRequired
+    props: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
   unquote (string) {
@@ -19,7 +25,7 @@ export default class ComponentProps extends Component {
     const rows = []
     const { props } = this.props
 
-    for (const name in props) {
+    for (const name in props) { // eslint-disable-line no-restricted-syntax
       const prop = props[name]
       const description = prop.description || ''
 
@@ -71,6 +77,7 @@ export default class ComponentProps extends Component {
 
   renderDescription (prop) {
     const { description } = prop || {}
+    /* eslint-disable react/no-danger */
     return (
       <div>
         {description && <div dangerouslySetInnerHTML={{__html: marked(description)}} />}
@@ -78,6 +85,7 @@ export default class ComponentProps extends Component {
         {this.renderUnion(prop)}
       </div>
     )
+    /* eslint-enable react/no-danger */
   }
 
   renderEnum (prop) {

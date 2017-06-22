@@ -1,23 +1,25 @@
 // based on https://raw.githubusercontent.com/JedWatson/react-codemirror/master/src/Codemirror.js
-import CodeMirror from 'codemirror'
+import CodeMirror from 'codemirror' // eslint-disable-line import/no-extraneous-dependencies
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/mode/jsx/jsx'
+import 'codemirror/lib/codemirror.css' // eslint-disable-line import/no-extraneous-dependencies
+import 'codemirror/mode/jsx/jsx' // eslint-disable-line import/no-extraneous-dependencies
 
 import styles from './styles.css'
 
 export default class CodeMirrorEditor extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     onChange: PropTypes.func,
     onFocusChange: PropTypes.func,
-    options: PropTypes.object,
+    options: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     path: PropTypes.string,
     value: PropTypes.string,
     style: PropTypes.oneOf(['playground', 'standalone'])
   };
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     onChange: function () {},
@@ -54,7 +56,8 @@ export default class CodeMirrorEditor extends Component {
       this.codeMirror.setValue(nextProps.value)
     }
     if (typeof nextProps.options === 'object') {
-      for (const optionName in nextProps.options) {
+      for (const optionName in nextProps.options) { // eslint-disable-line no-restricted-syntax
+        // eslint-disable-next-line no-prototype-builtins
         if (nextProps.options.hasOwnProperty(optionName)) {
           this.codeMirror.setOption(optionName, nextProps.options[optionName])
         }

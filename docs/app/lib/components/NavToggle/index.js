@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import ToggleDetails from 'instructure-ui/lib/components/ToggleDetails'
+
+// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import Typography from 'instructure-ui/lib/components/Typography'
 
 export default class NavToggle extends Component {
