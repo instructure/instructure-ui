@@ -63,7 +63,7 @@
     transition: all var(--transitionTiming);
   }
 
-  &:not(.dismissable) {
+  &:not(.dismissible) {
     cursor: pointer;
   }
 
@@ -85,7 +85,7 @@
   }
 }
 
-.dismissable {
+.dismissible {
   &:hover {
     .icon {
       color: var(--iconHoverColor);
