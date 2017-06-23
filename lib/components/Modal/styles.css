@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   overflow: auto;
+  outline: none;
 }
 
 /* DELETE THESE HACKS ONCE IE11 SUPPORT ENDS */

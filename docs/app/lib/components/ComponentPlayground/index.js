@@ -133,11 +133,11 @@ export default class ComponentPlayground extends Component {
         {
           isFullScreen ? (
             <Modal
-              isOpen
+              open
               label={`Full screen view of ${this.props.name}`}
-              size="fullscreen"
-              onRequestClose={this.handleMinimize}
               closeButtonLabel="Close full screen view"
+              size="fullscreen"
+              onDismiss={this.handleMinimize}
             >
               <ModalBody>
                 {example}
