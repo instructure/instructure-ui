@@ -35,6 +35,22 @@ ReactWrapper.prototype.dispatchNativeEvent = function (type, attrs) {
   domNode.dispatchEvent(event, attrs)
 }
 
+ReactWrapper.prototype.dispatchNativeKeyboardEvent = function (type, init) {
+  const event = document.createEventObject
+      ? document.createEventObject()
+      : document.createEvent('Events')
+
+  if (event.initEvent) {
+    event.initEvent(type, true, true)
+  }
+
+  Object.keys(init || {}).forEach((key) => {
+    event[key] = init[key]
+  })
+
+  this.getDOMNode().dispatchEvent(event)
+}
+
 ReactWrapper.prototype.keyDown = function (code) {
   const keyCode = keycode(code)
   this.simulate('keyDown', { keyCode: keyCode, key: keyCode, which: keyCode })
@@ -186,6 +202,7 @@ export default class Testbed {
     try {
       if (this.$instance && typeof this.$instance.unmount === 'function') {
         this.$instance.unmount()
+        this.$instance = null
       }
     } catch (e) {
       const { type, name } = this.subject || {}
@@ -202,6 +219,14 @@ export default class Testbed {
       return
     }
 
+    if (this.$instance) {
+      const { type, name } = this.subject || {}
+      const s = (type && (type.displayName || type.name)) || name
+      console.warn( // eslint-disable-line no-console
+        `Testbed.render called more than once in the same test for ${s} !!`
+      )
+    }
+
     const subject = cloneElement(this.subject, {
       ...this.subject.props,
       ...props
@@ -211,7 +236,7 @@ export default class Testbed {
 
     // axe uses setTimeout so we need to call clock.tick here too
     override(ReactWrapper.prototype, 'getA11yViolations', () => {
-      this.sandbox.clock.tick(1000)
+      this.sandbox.clock && this.sandbox.clock.tick(1000)
     })
 
     return this.$instance
