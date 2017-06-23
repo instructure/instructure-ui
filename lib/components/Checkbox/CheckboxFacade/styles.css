@@ -8,12 +8,12 @@
   background: var(--background);
   position: relative;
 
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-sizing: border-box;
 
   flex-shrink: 0;
-  width: 1.25rem;
-  height: 1.25rem;
 
   transition: all 0.2s;
 
@@ -50,21 +50,48 @@
 }
 
 .icon {
-  width: 1em;
-  height: 1em;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  > svg { /* stylelint-disable-line selector-no-type */
+    display: block;
+  }
 }
 
 .small {
-  font-size: 0.625rem;
+  font-size: var(--iconSizeSmall);
+
+  .facade {
+    width: var(--facadeSizeSmall);
+    height: var(--facadeSizeSmall);
+  }
 }
 
 .medium {
-  font-size: 0.75rem;
+  font-size: var(--iconSizeMedium);
+
+  .facade {
+    width: var(--facadeSizeMedium);
+    height: var(--facadeSizeMedium);
+  }
+
+  .label {
+    margin-top: var(--labelTopMarginMedium);
+  }
 }
 
 .large {
-  font-size: 0.875rem;
+  font-size: var(--iconSizeLarge);
+
+  .facade {
+    width: var(--facadeSizeLarge);
+    height: var(--facadeSizeLarge);
+  }
+
+  .label {
+    margin-top: var(--labelTopMarginLarge);
+  }
 }
 
 .root {
