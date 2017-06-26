@@ -33,7 +33,8 @@ export default class ComponentDescription extends Component {
               themeKey={this.props.themeKey}
               variant={section.variant}
               language={section.language}
-              key={i} />
+              key={i}
+            />
           )
         case 'html':
           return (
