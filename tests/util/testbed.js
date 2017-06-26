@@ -69,6 +69,14 @@ ReactWrapper.prototype.click = function () {
   this.simulate('click')
 }
 
+ReactWrapper.prototype.mouseOver = function () {
+  this.simulate('mouseOver')
+}
+
+ReactWrapper.prototype.mouseOut = function () {
+  this.simulate('mouseOut')
+}
+
 ReactWrapper.prototype.focus = function () {
   this.getDOMNode().focus()
 }
