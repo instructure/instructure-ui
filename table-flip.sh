@@ -6,11 +6,12 @@ echo "-- install node"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
 
-nvm install && nvm use
+nvm install
+nvm use
 
 echo "-- installing dependencies"
 rm -rf node_modules
-npm cache clean
+npm cache clear --force
 npm install
 
 echo "-- clearing old build artifacts"
