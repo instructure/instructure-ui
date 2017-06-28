@@ -5,10 +5,10 @@ require('script-loader!axe-core/axe.min.js')
 /* global axe */
 
 const formatError = function (violations) {
-  return violations.map(function (violation) {
+  return violations.map((violation) => {
     return [
       '[' + violation.id + '] ' + violation.help,
-      violation.nodes.map(function (node) {
+      violation.nodes.map((node) => {
         return node.target.toString()
       }).join('\n'),
       violation.description,
@@ -27,15 +27,15 @@ export default function checkA11y (node, options = {}, done) {
     }
   }
 
-  axe.a11yCheck({ include: [node], exclude }, axeConfig, function (result) {
-    const violations = reject(result.violations, function (violation) {
+  axe.a11yCheck({ include: [node], exclude }, axeConfig, (result) => {
+    const violations = reject(result.violations, (violation) => {
       return (ignores.indexOf(violation.id) >= 0)
     })
 
-    violations.forEach(function (violation) {
+    violations.forEach((violation) => {
       /* eslint-disable no-console */
       console.groupCollapsed('[' + violation.id + '] ' + violation.help)
-      violation.nodes.forEach(function (node) {
+      violation.nodes.forEach((node) => {
         const el = document.querySelector(node.target.toString())
         if (!el) {
           console.log(node.target.toString())

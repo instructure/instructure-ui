@@ -121,7 +121,7 @@ ReactWrapper.prototype.ref = function () {
 }
 
 const Assertion = global.chai.Assertion
-global.chai.use(function (chai, utils) {
+global.chai.use((chai, utils) => {
   utils.addMethod(Assertion.prototype, 'accessible', function (done, options = {}) {
     const obj = utils.flag(this, 'object')
 
@@ -136,7 +136,7 @@ global.chai.use(function (chai, utils) {
   })
 })
 
-global.chai.use(function (chai, utils) {
+global.chai.use((chai, utils) => {
   utils.addProperty(Assertion.prototype, 'present', function () {
     const obj = utils.flag(this, 'object')
     return new Assertion((obj.length > 0 && obj.getDOMNode())).to.be.ok

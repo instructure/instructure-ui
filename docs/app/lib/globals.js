@@ -18,7 +18,7 @@ import placeholderImage from './util/placeholder-image'
 
 import avatarImage from './images/placeholder-avatar.png'
 
-Object.keys(InstUI).forEach(function (component) {
+Object.keys(InstUI).forEach((component) => {
   global[component] = InstUI[component]
 })
 

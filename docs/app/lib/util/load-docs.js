@@ -24,7 +24,7 @@ export const documentsList = docs.map((doc) => {
 function nameToTitle (fileName) {
   return fileName
     .replace(/[\.\/]/g, '')
-    .replace(/(\w+)/g, function (match) {
+    .replace(/(\w+)/g, (match) => {
       return match.charAt(0).toUpperCase() + match.slice(1)
     })
     .replace(/[_-]/g, ' ')

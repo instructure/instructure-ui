@@ -30,7 +30,7 @@ module.exports = {
     "react/prefer-stateless-function": 0,
     "import/prefer-default-export": 0,
 
-    "prefer-arrow-callback": 0,
+
     "prefer-template": 0,
     "prefer-rest-params": 0,
     "arrow-parens": 0,

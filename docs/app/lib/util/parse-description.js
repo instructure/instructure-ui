@@ -26,7 +26,7 @@ export default function parseDescription (markdown) {
 
   const sections = []
   const textChunks = html.split(EXAMPLE_PLACEHOLDER)
-  textChunks.forEach(function (chunk) {
+  textChunks.forEach((chunk) => {
     const example = examples.shift()
 
     if (chunk) {
