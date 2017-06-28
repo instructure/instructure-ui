@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
-import { default as BaseButton } from 'instructure-ui/lib/components/Button'
+import BaseButton from 'instructure-ui/lib/components/Button'
 
 export default class Button extends Component {
   static propTypes = {

@@ -28,8 +28,6 @@ module.exports = {
     "react/sort-comp": 0,
     "react/no-unused-prop-types": 0,
     "react/prefer-stateless-function": 0,
-    "import/no-named-default": 0,
-    "import/no-mutable-exports": 0,
     "import/prefer-default-export": 0,
 
     "prefer-arrow-callback": 0,
