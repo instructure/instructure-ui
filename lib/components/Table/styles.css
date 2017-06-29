@@ -72,13 +72,7 @@
   }
 }
 
-.colStriped:not(.rowHeaders) {
-  > tbody > tr > td:nth-child(odd) {
-    background-color: var(--stripedBackground);
-  }
-}
-
-.colStriped.rowHeaders {
+.colStriped {
   > tbody > tr > td:nth-child(even) {
     background-color: var(--stripedBackground);
   }
