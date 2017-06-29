@@ -22,9 +22,34 @@
 
 .root {
   display: inline-block;
+  vertical-align: middle;
   position: relative;
   box-sizing: border-box;
   overflow: hidden;
+}
+
+.x-small {
+  width: var(--xSmallSize);
+  height: var(--xSmallSize);
+
+  .circle {
+    width: var(--xSmallSize);
+    height: var(--xSmallSize);
+  }
+
+  .circleShadow {
+    stroke-width: calc(var(--xSmallBorderWidth) * 1.75);
+  }
+
+  .circleTrack,
+  .circleSpin {
+    stroke-width: var(--xSmallBorderWidth);
+  }
+
+  .circleSpin {
+    stroke-dasharray: 3em;
+    transform-origin: calc(var(--xSmallSize) / 2) calc(var(--xSmallSize) / 2);
+  }
 }
 
 .small {
@@ -167,6 +192,10 @@
 @define-mixin ie-hacks {
   .circleSpin {
     animation-name: none !important;
+  }
+
+  .x-small .circleSpin {
+    stroke-dasharray: 1.5em !important;
   }
 
   .small .circleSpin {
