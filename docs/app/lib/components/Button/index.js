@@ -21,7 +21,7 @@ export default class Button extends Component {
     const color = '#008ee2'
     const theme = {
       iconColor: color,
-      iconFocusBoxShadow: 'inset 0 0 0 1px ' + color,
+      iconFocusBoxShadow: `inset 0 0 0 1px ${color}`,
       iconHoverColor: color
     }
     return (

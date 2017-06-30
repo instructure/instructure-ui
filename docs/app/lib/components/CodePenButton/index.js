@@ -38,9 +38,9 @@ const CodePenButton = function ({ code, title, language }) {
     css_prefix: 'autoprefixer',
     js_pre_processor: 'babel',
     js_external: [
-      pkg.homepage + 'vendor.js',
-      pkg.homepage + pkg.name + '.js',
-      pkg.homepage + 'globals.js'
+      `${pkg.homepage}vendor.js`,
+      `${pkg.homepage}${pkg.name}.js`,
+      `${pkg.homepage}globals.js`
     ].join(';')
   }
 

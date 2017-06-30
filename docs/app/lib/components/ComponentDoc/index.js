@@ -40,7 +40,7 @@ export default class ComponentDoc extends Component {
     } = this.props.doc
     return props ? (
       <div>
-        <h3 className={styles.sectionHeading} id={name + 'Properties'}>
+        <h3 className={styles.sectionHeading} id={`${name}Properties`}>
           Properties
         </h3>
         <ComponentProps props={props} />
@@ -54,7 +54,7 @@ export default class ComponentDoc extends Component {
     } = this.props
     return theme && Object.keys(theme).length > 0 ? (
       <div>
-        <h3 className={styles.sectionHeading} id={name + 'Theme'}>
+        <h3 className={styles.sectionHeading} id={`${name}Theme`}>
           Theme Variables
         </h3>
         <ComponentTheme theme={theme} />
@@ -89,7 +89,7 @@ export default class ComponentDoc extends Component {
     } = this.props
 
     const packageName = pkg.name
-    const githubRoot = pkg.repository.url.replace('.git', '') + '/tree/master/'
+    const githubRoot = `${pkg.repository.url.replace('.git', '')}/tree/master/`
 
     const example = `/*** es6 ***/
 import ${name} from '${packageName}/lib/components/${name}'
@@ -115,7 +115,7 @@ define(['${packageName}/${name}'], function({ default: ${name} }) {
         {this.renderDescription()}
         {this.renderProps()}
         {this.renderTheme()}
-        <h3 className={styles.sectionHeading} id={name + 'Usage'}>
+        <h3 className={styles.sectionHeading} id={`${name}Usage`}>
           Usage
         </h3>
         <p>

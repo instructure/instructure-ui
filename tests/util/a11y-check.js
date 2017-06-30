@@ -7,12 +7,12 @@ require('script-loader!axe-core/axe.min.js')
 const formatError = function (violations) {
   return violations.map((violation) => {
     return [
-      '[' + violation.id + '] ' + violation.help,
+      `[${violation.id}] ${violation.help}`,
       violation.nodes.map((node) => {
         return node.target.toString()
       }).join('\n'),
       violation.description,
-      violation.helpUrl + '\n'
+      `${violation.helpUrl}\n`
     ].join('\n')
   })
 }
@@ -34,7 +34,7 @@ export default function checkA11y (node, options = {}, done) {
 
     violations.forEach((violation) => {
       /* eslint-disable no-console */
-      console.groupCollapsed('[' + violation.id + '] ' + violation.help)
+      console.groupCollapsed(`[${violation.id}] ${violation.help}`)
       violation.nodes.forEach((node) => {
         const el = document.querySelector(node.target.toString())
         if (!el) {
