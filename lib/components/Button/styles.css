@@ -90,7 +90,8 @@
 .light,
 .ghost,
 .ghost-inverse,
-.link {
+.link,
+.link-inverse {
   padding-top: var(--topBottomPadding);
   padding-bottom: var(--topBottomPadding);
 
@@ -301,7 +302,8 @@
   }
 }
 
-.link {
+.link,
+.link-inverse {
   text-decoration: var(--linkTextDecoration);
   background: transparent;
   border-color: var(--linkBorderColor);
@@ -317,6 +319,15 @@
   &:hover,
   &:active {
     color: var(--linkHoverColor);
+  }
+}
+
+.link-inverse {
+  color: var(--linkInverseColor);
+
+  &:hover,
+  &:active {
+    color: var(--linkInverseColor);
   }
 }
 

@@ -37,6 +37,18 @@
   }
 }
 
+.root a.inverse:link,
+.root a.inverse:visited,
+.root button.inverse {
+  color: var(--colorInverse);
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--colorInverse);
+  }
+}
+
 .root button.link {
   user-select: text;
   background: none;
