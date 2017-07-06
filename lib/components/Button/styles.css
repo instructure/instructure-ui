@@ -59,7 +59,8 @@
   }
 
   &.fluidWidth {
-    min-height: var(--smallHeight);
+    padding-top: var(--topBottomPadding);
+    padding-bottom: var(--topBottomPadding);
   }
 }
 
@@ -69,7 +70,8 @@
   }
 
   &.fluidWidth {
-    min-height: var(--mediumHeight);
+    padding-top: var(--topBottomPadding);
+    padding-bottom: var(--topBottomPadding);
   }
 }
 
@@ -79,7 +81,8 @@
   }
 
   &.fluidWidth {
-    min-height: var(--largeHeight);
+    padding-top: var(--topBottomPadding);
+    padding-bottom: var(--topBottomPadding);
   }
 }
 
