@@ -158,9 +158,9 @@ export default class DocsNav extends Component {
           />
         </div>
         <div role="navigation" className={styles.sections}>
-          { this.createNavToggle('Themes', themes, themeSelected) }
           { this.createNavToggle('Components', components, componentSelected) }
           { this.createNavToggle('Documentation', documents, documentSelected) }
+          { this.createNavToggle('Themes', themes, themeSelected) }
         </div>
       </div>
     )

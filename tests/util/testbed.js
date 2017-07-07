@@ -10,7 +10,7 @@ import Locale from 'lib/util/locale'
 import { canvas } from 'instructure-ui/lib/themes'
 
 // eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
-import checkA11y from 'tests/util/a11y-check'
+import checkA11y from './a11y-check'
 
 const realSetTimeout = setTimeout
 

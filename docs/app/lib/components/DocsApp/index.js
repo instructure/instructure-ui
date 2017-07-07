@@ -4,7 +4,7 @@ import React, {Component} from 'react'
 import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderContent'
 import Select from 'instructure-ui/lib/components/Select'
 import Tray from 'instructure-ui/lib/components/Tray'
-import themes from 'instructure-ui/lib/themes'
+import { getRegisteredThemes } from 'instructure-ui/lib/themeable/registry'
 /* eslint-enable import/no-extraneous-dependencies, import/no-unresolved, import/extensions */
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
@@ -12,7 +12,7 @@ import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
 
 /* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
-import { pkg } from 'config-loader!'
+import { library } from 'config-loader!'
 /* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
 
@@ -30,6 +30,8 @@ import styles from './styles.css'
 
 import documentsMap, { documentsList } from '../../util/load-docs'
 import componentsMap, { categorizedComponents } from '../../util/load-components'
+
+const themes = getRegisteredThemes()
 
 export default class DocsApp extends Component {
   constructor (props) {
@@ -189,10 +191,10 @@ export default class DocsApp extends Component {
                 Made with &nbsp;
                 <IconHeartSolid className={styles.footerIcon} />
                 &nbsp;
-                by {pkg.author}.
+                by {library.author}.
                 &nbsp;
                 <a
-                  href={pkg.repository.url}
+                  href={library.repository}
                   className={styles.githubLink}
                   target="_blank"
                 >

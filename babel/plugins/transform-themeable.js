@@ -42,10 +42,47 @@ module.exports = function ({ types: t }) {
   function requireCssFile (filepath, stylesheetPath) {
     // css-modules-require-hooks throws if file is ignored
     try {
-      return require(resolveStylesheetPath(filepath, stylesheetPath))
+      return require( // eslint-disable-line import/no-dynamic-require
+        resolveStylesheetPath(filepath, stylesheetPath)
+      )
     } catch (e) {
       return {} // return empty object, this simulates result of ignored stylesheet file
     }
+  }
+
+  function loadConfig (opt, def) {
+    const env = process.env.NODE_ENV
+    const cwd = process.cwd()
+
+    let config = require( // eslint-disable-line import/no-dynamic-require
+      opt || join(cwd, def)
+    )
+
+    if (config && typeof config === 'function') {
+      config = config({ cwd, env })
+    }
+
+    return config
+  }
+
+  function getScopedNameGenerator (opt) { // for css modules class names
+    const config = loadConfig(opt, 'themeable.config.js')
+
+    if (config && typeof config.generateScopedName === 'function') {
+      return config.generateScopedName({ env: process.env.NODE_ENV })
+    } else return (env) => (env === 'production') ? '[hash:base64:7]' : '[folder]__[local]'
+  }
+
+  function getPostCSSPlugins (opt) {
+    const config = loadConfig(opt, 'postcss.config.js')
+
+    let plugins = []
+
+    if (config && config.plugins) {
+      plugins = config.plugins
+    }
+
+    return plugins
   }
 
   let initialized = false // is css modules require hook initialized?
@@ -60,28 +97,11 @@ module.exports = function ({ types: t }) {
           return
         }
 
-        const env = process.env.NODE_ENV
-        const cwd = process.cwd()
-
-        let postcssrc = state.opts.postcssrc && require(join(cwd, state.opts.postcssrc))
-
-        if (postcssrc && typeof postcssrc === 'function') {
-          postcssrc = postcssrc({ cwd, env })
-        }
-
-        const plugins = postcssrc && postcssrc.plugins
-
-        let themeablerc = state.opts.themeablerc && require(join(cwd, state.opts.themeablerc))
-
-        if (themeablerc && typeof themeablerc === 'function') {
-          themeablerc = themeablerc({ cwd, env })
-        }
-
-        const { generateScopedName } = themeablerc
-
-        require('css-modules-require-hook')({
-          generateScopedName: generateScopedName({ env }),
-          prepend: plugins || [],
+        require( // eslint-disable-line import/no-extraneous-dependencies
+          'css-modules-require-hook'
+        )({
+          generateScopedName: getScopedNameGenerator(state.opts.themeablerc),
+          prepend: getPostCSSPlugins(state.opts.postcssrc),
           processCss: (css, filepath) => {
             if (!STYLES.has(filepath)) {
               STYLES.set(filepath, css)

@@ -6,7 +6,7 @@ import ScreenReaderContent from 'instructure-ui/lib/components/ScreenReaderConte
 
 /* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
-import { pkg } from 'config-loader!'
+import { library } from 'config-loader!'
 /* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
 
@@ -38,9 +38,9 @@ const CodePenButton = function ({ code, title, language }) {
     css_prefix: 'autoprefixer',
     js_pre_processor: 'babel',
     js_external: [
-      `${pkg.homepage}vendor.js`,
-      `${pkg.homepage}${pkg.name}.js`,
-      `${pkg.homepage}globals.js`
+      `${library.homepage}common.js`,
+      `${library.homepage}${library.name}.js`,
+      `${library.homepage}globals.js`
     ].join(';')
   }
 

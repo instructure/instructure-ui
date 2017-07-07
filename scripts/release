@@ -93,7 +93,14 @@ fi
 ##############################################################
 if [[ "$current_version" != "$next_version" ]]; then
   if ! [[ $tag ]]; then
-    tag=" --tag rc"
+    printf "Enter a tag for this release (e.g. beta or rc): "
+    read releaseTag
+
+    if ! [[ $releaseTag ]]; then
+      releaseTag="dev"
+    fi
+
+    tag=" --tag $releaseTag"
   fi
 fi
 
@@ -101,7 +108,7 @@ fi
 # Prepare the release #
 #######################
 printf "Building version $next_version ...\n"
-npm run pre-release
+npm run prerelease
 node -p "p=require(\"./package\");p.scripts=p.devDependencies=undefined;p.version=\"$next_version\";JSON.stringify(p,null,2)" > $build_path/package.json
 
 ##############################

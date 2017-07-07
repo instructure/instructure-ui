@@ -6,7 +6,7 @@ Installation steps:
 
 1. Install [Git](http://git-scm.com/).
 2. Clone this repository.
-3. Optionally run `./scripts/install` to install [Node](https://nodejs.org/en/)) via [nvm](https://github.com/creationix/nvm).
+3. Install [Node](https://nodejs.org/en/)) and [nvm](https://github.com/creationix/nvm).
 4. Run `npm install`
 
 
@@ -79,4 +79,3 @@ always be in sync.
 4. Push up the version bump commit to gerrit for review and testing.
 5. Once the updated package.json file is merged, run `npm run release`
 6. Verify that the documentation was updated on gh-pages and the release was tagged in github.
-

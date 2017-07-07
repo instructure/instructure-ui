@@ -6,7 +6,7 @@ import Link from 'instructure-ui/lib/components/Link'
 
 /* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
-import { pkg } from 'config-loader!'
+import { library } from 'config-loader!'
 /* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved,
   import/extensions */
 
@@ -88,19 +88,19 @@ export default class ComponentDoc extends Component {
       path
     } = this.props
 
-    const packageName = pkg.name
-    const githubRoot = `${pkg.repository.url.replace('.git', '')}/tree/master/`
+    const packageName = library.name
+    const githubRoot = `${library.repository.replace('.git', '')}/tree/master/`
 
-    const example = `/*** es6 ***/
-import ${name} from '${packageName}/lib/components/${name}'
+    // TODO: get the output path in the webpack plugin
+    const srcPath = 'lib/components'
+
+    const example = `\
+/*** es6 ***/
+import ${name} from '${packageName}/${srcPath}/${name}'
 
 /*** CommonJS ***/
-var ${name} = require('${packageName}/lib/components/${name}')
-
-/*** AMD ***/
-define(['${packageName}/${name}'], function({ default: ${name} }) {
-  // ...
-})`
+var ${name} = require('${packageName}/${srcPath}/${name}')
+`
 
     return (
       <div className={styles.root}>

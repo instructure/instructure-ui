@@ -1,6 +1,6 @@
 const withCoverage = process.argv.some((arg) => arg === '--coverage')
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
-const debug = process.env.DEBUG
+const debug = Boolean(process.env.DEBUG)
 
 // set browsers based on command line args
 const browsers = []
@@ -96,7 +96,7 @@ module.exports = function config (config) {
 
     singleRun: false,
 
-    webpack: require('./webpack/test.config')(debug),
+    webpack: require('./webpack.test.config'),
 
     webpackMiddleware: { stats: 'errors-only' },
 

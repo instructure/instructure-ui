@@ -1,18 +1,15 @@
+/* eslint-disable import/no-extraneous-dependencies */
 module.exports = {
   plugins: [
-    require('stylelint')(),
-
-    require('postcss-url')({
-      url: 'inline'
-    }),
-    require('postcss-nested')(),
-    require('postcss-custom-properties')(),
-    require('postcss-calc')(),
+    require('stylelint'),
+    require('postcss-nested'),
+    require('postcss-custom-properties'),
     require('autoprefixer')({
-      browsers: ['last 2 versions']
+      // TODO: when we extract the plugin we'll need to get this from some shared module
+      browsers: require('../../browserslist.json')
     }),
-
     require('postcss-browser-reporter'),
     require('postcss-reporter')
   ]
 }
+/* eslint-enable import/no-extraneous-dependencies */

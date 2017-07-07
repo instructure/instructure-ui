@@ -1,6 +1,6 @@
 const transformCustomProps = require('../../babel/plugins/util/postcss-themeable-styles')
 const transformCssRequire = require('../../babel/plugins/util/transform-css-require')
-const postcss = require('postcss')
+const postcss = require('postcss') // eslint-disable-line import/no-extraneous-dependencies
 
 module.exports = function (source, map) {
   this.cacheable && this.cacheable()
@@ -26,7 +26,7 @@ module.exports = function (source, map) {
     return postcss([transformCustomProps])
       .process(source.toString(), opts)
       .then((result) => {
-        result.warnings().forEach(function (msg) {
+        result.warnings().forEach((msg) => {
           loader.emitWarning(msg.toString())
         })
         callback(

@@ -1,5 +1,5 @@
-const docgen = require('react-docgen')
-const matter = require('gray-matter')
+const docgen = require('react-docgen') // eslint-disable-line import/no-extraneous-dependencies
+const matter = require('gray-matter') // eslint-disable-line import/no-extraneous-dependencies
 
 // based on https://github.com/eisisig/docgen-loader/blob/master/index.js
 module.exports = function (source) {

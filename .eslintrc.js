@@ -18,6 +18,7 @@ module.exports = {
   },
   "parser": "babel-eslint",
   "rules": {
+    "no-console": ["error", { "allow": ["warn", "error"] }],
     "mocha/no-exclusive-tests": "error",
     "semi": ['error', 'never'],
     "comma-dangle": ["error", "never"],

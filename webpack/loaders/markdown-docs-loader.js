@@ -1,7 +1,9 @@
-const glob = require('glob')
+const glob = require('glob') // eslint-disable-line import/no-extraneous-dependencies
 const path = require('path')
-const { files } = require('../util/loadConfig')
-const requirePath = require('../util/requirePath')
+
+const { files } = require( // eslint-disable-line import/no-dynamic-require
+  path.join(process.cwd(), 'themeable.config.js')
+)
 
 module.exports = function () {
   this.cacheable && this.cacheable()
@@ -34,4 +36,8 @@ function processDocs (filepath) {
 
 function docNameFromPath (filepath) {
   return path.basename(filepath, path.extname(filepath)).replace(/^\d+\-/, '')
+}
+
+function requirePath (filepath) {
+  return `require(${JSON.stringify(filepath)})`
 }
