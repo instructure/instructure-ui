@@ -1,8 +1,19 @@
-/* eslint-disable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved */
+/*
+  eslint-disable
+    import/no-dynamic-require,
+    import/no-extraneous-dependencies,
+    import/no-webpack-loader-syntax,
+    import/no-unresolved
+*/
 require('babel-polyfill-loader!')
 require('!!style-loader!css-loader!./tests.css')
-/* eslint-enable import/no-extraneous-dependencies, import/no-webpack-loader-syntax, import/no-unresolved */
-
+/*
+  eslint-enable
+    import/no-dynamic-require,
+    import/no-extraneous-dependencies,
+    import/no-webpack-loader-syntax,
+    import/no-unresolved
+*/
 // clear the console before rebundling.
 /* eslint-disable no-console */
 if (typeof console.clear === 'function') {

@@ -14,18 +14,16 @@ const debug = Boolean(process.env.DEBUG) || (env === 'development')
 const esModules = Boolean(process.env.ES_MODULES)
 
 module.exports = function (context, opts = {}) {
-  let presets = []
-
-  presets = presets.concat([
+  const presets = [
     [require.resolve('babel-preset-env'), {
       targets: {
-        browsers: require('../browserslist.json') // TODO; make this an option
+        browsers: opts.browsers || require('./browserslist.json')
       },
       modules: (esModules === 0 || esModules === false) ? false : undefined
     }],
     require.resolve('babel-preset-stage-1'),
     require.resolve('babel-preset-react')
-  ])
+  ]
 
   let plugins = [
     [require.resolve('babel-plugin-transform-object-rest-spread'), {

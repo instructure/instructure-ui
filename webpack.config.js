@@ -1,51 +1,43 @@
 const path = require('path')
 const webpack = require('webpack')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
-const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
+
+const DocsPlugin = require('./webpack/plugins/docs')
 
 const env = process.env.NODE_ENV
 const debug = Boolean(process.env.DEBUG) || env === 'development'
-const pkg = require(path.join(__dirname, 'package.json')) // eslint-disable-line import/no-dynamic-require
 
-const {
-  entryName,
-  favicon,
-  library
-} = require('./themeable.config.js')
+// eslint-disable-next-line import/no-dynamic-require
+const pkg = require(path.join(__dirname, 'package.json'))
+const output = path.join(__dirname, '__build__')
 
 const paths = {
-  output: path.join(__dirname, '__build__/docs'),
-  src: path.join(__dirname, 'lib'), // TODO: change to src
-  docs: path.join(__dirname, 'docs/app/lib') // TODO: move to webpack plugin
+  lib: path.join(output, 'lib'),
+  docs: path.join(output, 'docs'),
+  src: path.join(__dirname, 'lib') // TODO: change to src and transpile to lib
 }
 
 module.exports = {
   cache: debug,
   bail: !debug,
   entry: {
-    [entryName]: paths.docs, // TODO: change to src
     common: [
-      // TODO: docs app/plugin will need its own polyfills?
       'babel-polyfill-loader!',
+      require.resolve('moment/min/locales'),
       'react',
       'react-dom'
     ],
     [pkg.name]: [
       path.join(paths.src, 'themes'),
       paths.src
-    ],
-    // TODO: need to be able to specify this for each library (as a plugin option?)
-    globals: [
-      path.join(paths.docs, 'globals.js')
     ]
   },
   output: {
-    path: paths.output,
+    library: 'InstructureUI',
+    path: paths.docs,
     filename: '[name].js'
   },
   devServer: {
-    contentBase: paths.output,
+    contentBase: paths.docs,
     host: '0.0.0.0',
     port: 8080
   },
@@ -60,23 +52,41 @@ function addPlugins (basePlugins) {
   let plugins = basePlugins || []
 
   plugins = plugins.concat([
+    new DocsPlugin({
+      title: `${pkg.name} : ${pkg.description} (${pkg.version})`,
+      favicon: path.join(__dirname, 'logo.png'),
+      library: {
+        packageName: pkg.name,
+        name: 'InstructureUI',
+        description: pkg.description,
+        version: pkg.version,
+        repository: pkg.repository.url,
+        author: pkg.author,
+        codepen: { // codpen button form data
+          js_external: [
+            `${pkg.homepage}common.js`,
+            `${pkg.homepage}${pkg.name}.js`,
+            `${pkg.homepage}globals.js`
+          ]
+        }
+      },
+      globals: { // for component playground and codepen examples
+        PlaceholderIcon: 'instructure-icons/lib/Line/IconUserLine',
+        IconPlus: 'instructure-icons/lib/Solid/IconPlusSolid',
+        IconX: 'instructure-icons/lib/Solid/IconXSolid',
+        moment: 'moment',
+        avatarImage: path.join(__dirname, 'docs/images/placeholder-avatar.png')
+      },
+      files: {
+        // TODO: consolidate docs loader into a single loader and change this to an array of paths/patterns
+        components: path.join(__dirname, 'lib/components/*/index.js'), // only top level components
+        docs: path.join(__dirname, 'docs/*.md')
+      },
+      template: path.join(__dirname, 'templates/docs/index.tmpl.html')
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: ['common', pkg.name].reverse(),
       minChunks: Infinity
-    }),
-    // TODO; the following 2 plugins would be added by the webpack plugin
-    new FaviconsWebpackPlugin(favicon),
-    new HtmlWebpackPlugin({
-      title: library.title,
-      filename: 'index.html',
-      template: require.resolve('./docs/app/templates/index.tmpl.html'), // TODO: get template from plugin options
-      inject: 'body',
-      chunks: ['common', pkg.name, 'globals', entryName], // TODO: make this a plugin option?
-      chunksSortMode: 'dependency'
-    }),
-    new ScriptExtHtmlWebpackPlugin({
-      defaultAttribute: 'sync',
-      defer: [entryName] // to ensure that globals loads first
     })
   ])
 

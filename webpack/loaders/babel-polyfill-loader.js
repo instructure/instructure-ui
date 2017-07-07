@@ -1,14 +1,18 @@
 const path = require('path')
 const coreJSBuilder = require('core-js-builder') // eslint-disable-line import/no-extraneous-dependencies
 
-const options = require( // eslint-disable-line import/no-dynamic-require
-  path.join(process.cwd(), 'babel-polyfill.json')
-)
+// eslint-disable-next-line import/no-extraneous-dependencies
+const loaderUtils = require('loader-utils')
 
 module.exports = function () {
   this.cacheable && this.cacheable()
 
   const callback = this.async()
+
+  const options = loaderUtils.getOptions(this) ||
+    require( // eslint-disable-line import/no-dynamic-require
+      path.join(process.cwd(), 'babel-polyfill.json')
+    )
 
   Promise.resolve().then(() => {
     return coreJSBuilder(options)

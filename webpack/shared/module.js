@@ -7,21 +7,6 @@ const {
 const env = process.env.NODE_ENV
 const debug = Boolean(process.env.DEBUG) || env === 'development'
 
-const cssLoader = {
-  loader: 'css-loader',
-  options: {
-    modules: true,
-    importLoaders: 1,
-    localIdentName: (typeof generateScopedName === 'function') && generateScopedName({
-      env: !debug ? 'production' : env
-    }),
-    minimize: !debug,
-    discardComments: true,
-    discardEmpty: true,
-    discardUnused: true
-  }
-}
-
 const babelLoader = {
   loader: 'babel-loader',
   options: {
@@ -30,12 +15,15 @@ const babelLoader = {
   }
 }
 
+// TODO: remove webpack/plugins once plugin is in node_modules
+const externalExcludes = [ /node_modules/, /webpack\/plugins/ ]
+
 module.exports = {
   rules: [
     {
       enforce: 'pre',
       test: /\.js?$/,
-      exclude: [ /node_modules/ ],
+      exclude: externalExcludes,
       loader: 'eslint-loader',
       options: {
         failOnWarning: !debug,
@@ -47,27 +35,16 @@ module.exports = {
     },
     {
       test: /\.js$/,
-      exclude: [ /node_modules/ ],
+      exclude: externalExcludes,
       use: [ babelLoader ]
     },
     {
-      test: /\.md$/,
-      exclude: [ /node_modules/ ],
-      use: [ 'html-loader', 'markdown-loader' ]
-    },
-    {
       test: /\.png$/,
-      loader: 'url-loader',
-      options: {
-        mimetype: 'image/png'
-      }
+      loader: 'url-loader'
     },
     {
       test: /\.css$/,
-      exclude: [
-        /node_modules/,
-        /docs\/app\//
-      ],
+      exclude: externalExcludes,
       use: [
         {
           loader: 'babel-loader',
@@ -77,27 +54,22 @@ module.exports = {
           }
         },
         'themeable-css-loader',
-        cssLoader,
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1,
+            localIdentName: (typeof generateScopedName === 'function') && generateScopedName({
+              env: !debug ? 'production' : env
+            }),
+            minimize: !debug,
+            discardComments: true,
+            discardEmpty: true,
+            discardUnused: true
+          }
+        },
         'postcss-loader'
       ]
-    },
-    {
-      test: /\.css$/,
-      include: [
-        /docs\/app\//
-      ],
-      use: [
-        'style-loader',
-        cssLoader,
-        'postcss-loader'
-      ]
-    },
-    {
-      test: /\.css$/,
-      include: [
-        /node_modules/
-      ],
-      use: [ 'style-loader', 'css-loader' ]
     }
   ]
 }
