@@ -78,7 +78,7 @@
     "html-loader": "0.4.5",
     "html-webpack-plugin": "2.29.0",
     "http-server": "0.10.0",
-    "instructure-icons": "3.0.0",
+    "instructure-icons": "4.2.0",
     "karma": "1.7.0",
     "karma-chai-sinon": "0.1.5",
     "karma-chrome-launcher": "2.2.0",
@@ -144,7 +144,7 @@
     "tinycolor2": "^1.4.1"
   },
   "peerDependencies": {
-    "instructure-icons": "^2.3.0 || ^3.0.0",
+    "instructure-icons": "^2.3.0 || >=3.0.0",
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },
