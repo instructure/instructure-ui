@@ -88,9 +88,9 @@
     "selector-list-comma-newline-after": "always",
     "selector-list-comma-space-before": "never",
 
-    "selector-no-id": true,
-    "selector-no-type": true,
-    "selector-no-universal": true,
+    "selector-max-id": 0,
+    "selector-max-type": 0,
+    "selector-max-universal": 0,
     "selector-no-vendor-prefix": true,
     "selector-pseudo-element-colon-notation": "double",
 

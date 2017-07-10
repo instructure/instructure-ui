@@ -116,7 +116,7 @@
     padding-right: var(--largePadding);
   }
 
-  /* stylelint-disable selector-no-type */
+  /* stylelint-disable selector-max-type */
 
   &.fluidWidth {
     display: block;
@@ -143,7 +143,7 @@
     display: block;
   }
 
-  /* stylelint-enable selector-no-type */
+  /* stylelint-enable selector-max-type */
 }
 
 .default,

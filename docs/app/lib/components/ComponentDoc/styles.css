@@ -30,7 +30,7 @@
 }
 
 .description {
-  code { /* stylelint-disable-line selector-no-type */
+  code { /* stylelint-disable-line selector-max-type */
     font-size: 90%;
     padding: 2px 4px;
   }

@@ -1,4 +1,4 @@
-figure.root { /* stylelint-disable-line selector-no-type */
+figure.root { /* stylelint-disable-line selector-max-type */
   display: flex;
   background: var(--background);
   margin: 0;
@@ -13,7 +13,7 @@ figure.root { /* stylelint-disable-line selector-no-type */
   align-items: center;
 }
 
-figcaption.caption { /* stylelint-disable-line selector-no-type */
+figcaption.caption { /* stylelint-disable-line selector-max-type */
   color: var(--color);
   font-family: var(--fontFamily);
   margin: 0;

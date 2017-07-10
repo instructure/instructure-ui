@@ -54,7 +54,7 @@
   align-items: center;
   justify-content: center;
 
-  > svg { /* stylelint-disable-line selector-no-type */
+  > svg { /* stylelint-disable-line selector-max-type */
     display: block;
   }
 }

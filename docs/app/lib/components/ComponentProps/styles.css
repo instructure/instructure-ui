@@ -1,7 +1,7 @@
 .root {
   margin-top: 2rem;
 
-  code { /* stylelint-disable-line selector-no-type */
+  code { /* stylelint-disable-line selector-max-type */
     background: transparent;
     border: none;
   }
@@ -12,7 +12,7 @@
   font-weight: 300;
   line-height: 1.4;
 
-  p { /* stylelint-disable-line selector-no-type */
+  p { /* stylelint-disable-line selector-max-type */
     margin: 0;
   }
 }

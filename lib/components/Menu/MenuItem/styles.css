@@ -74,7 +74,7 @@
   height: 1em;
 }
 
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 
 a.root,
 a.root:link,
@@ -85,4 +85,4 @@ a.root:focus {
   text-decoration: none;
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */

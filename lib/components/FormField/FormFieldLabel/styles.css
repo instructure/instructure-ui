@@ -1,4 +1,4 @@
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 
 legend.root,
 label.root {
@@ -26,4 +26,4 @@ label.has-content {
   text-align: inherit;
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */

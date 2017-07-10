@@ -1,4 +1,4 @@
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 
 .root {
   font-size: 1rem;
@@ -79,4 +79,4 @@
   }
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */

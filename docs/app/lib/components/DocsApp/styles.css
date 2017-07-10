@@ -5,7 +5,7 @@
   --borderColor: #c7cdd1;
 }
 
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 
 html,
 body {
@@ -30,7 +30,7 @@ code[class^="lang-"] {
   display: block;
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */
 
 .root {
   margin: 0;

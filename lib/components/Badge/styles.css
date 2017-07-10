@@ -175,7 +175,7 @@
   vertical-align: middle;
   box-sizing: border-box;
 
-  svg { /* stylelint-disable-line selector-no-type */
+  svg { /* stylelint-disable-line selector-max-type */
     display: block;
   }
 }

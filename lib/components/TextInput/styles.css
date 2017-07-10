@@ -15,8 +15,10 @@
   fill: var(--iconColor);
 }
 
+/* stylelint-disable selector-max-type */
+
 .input,
-input[type].input { /* stylelint-disable-line selector-no-type */
+input[type].input {
   all: initial;
 
   &::-ms-clear {
@@ -98,3 +100,5 @@ input[type].input { /* stylelint-disable-line selector-no-type */
     padding-inline-start: var(--padding);
   }
 }
+
+/* stylelint-enable selector-max-type */

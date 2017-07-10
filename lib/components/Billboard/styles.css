@@ -84,7 +84,7 @@
 .hero {
   color: var(--iconColor);
 
-  /* stylelint-disable selector-no-type */
+  /* stylelint-disable selector-max-type */
 
   > img,
   > svg {
@@ -97,7 +97,7 @@
     height: auto;
   }
 
-  /* stylelint-enable selector-no-type */
+  /* stylelint-enable selector-max-type */
 }
 
 .clickable {

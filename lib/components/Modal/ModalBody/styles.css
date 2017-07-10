@@ -5,7 +5,7 @@
 }
 
 /* DELETE THESE HACKS ONCE IE11 SUPPORT ENDS */
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 /* stylelint-disable selector-no-vendor-prefix */
 /* stylelint-disable value-no-vendor-prefix */
 /* stylelint-disable selector-root-no-composition */
@@ -17,7 +17,7 @@ _:-ms-fullscreen,
   flex: 1 0 auto;
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */
 /* stylelint-enable selector-no-vendor-prefix */
 /* stylelint-enable value-no-vendor-prefix */
 /* stylelint-enable selector-root-no-composition */

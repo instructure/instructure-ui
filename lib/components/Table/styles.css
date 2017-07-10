@@ -1,4 +1,4 @@
-/* stylelint-disable selector-no-type */
+/* stylelint-disable selector-max-type */
 
 .root {
   display: table;
@@ -96,4 +96,4 @@
   }
 }
 
-/* stylelint-enable selector-no-type */
+/* stylelint-enable selector-max-type */

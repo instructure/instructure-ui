@@ -14,7 +14,7 @@
     padding-inline-end: 0;
     counter-reset: ol-counter;
 
-    /* stylelint-disable selector-no-type */
+    /* stylelint-disable selector-max-type */
 
     li::before {
       font-weight: var(--orderedNumberFontWeight);
@@ -24,7 +24,7 @@
       margin-inline-start: 0;
     }
 
-    /* stylelint-enable selector-no-type */
+    /* stylelint-enable selector-max-type */
 
   }
 }
