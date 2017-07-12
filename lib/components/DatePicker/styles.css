@@ -17,12 +17,20 @@
   text-align: center;
 }
 
+.header {
+  font-weight: var(--headerFontWeight);
+}
+
 .cell {
   background-color: var(--background);
-  border: 1px solid transparent;
+  border: none;
+  border-radius: var(--borderRadius);
   outline: none;
   box-sizing: border-box;
   cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  appearance: none;
   font-size: var(--fontSize);
   padding: var(--cellPadding);
   text-align: center;
@@ -31,26 +39,15 @@
   position: relative;
   overflow: visible;
 
-  &::before {
-    content: "";
-    position: absolute;
-    top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
-    bottom: -0.25rem;
-    border: 1px solid var(--focusOutline);
-    border-radius: calc(var(--selectedBorderRadius) + 0.125rem);
-    opacity: 0;
-    transform: scale(0.01);
-    transition: all 0.2s;
-    z-index: var(--zIndex);
-  }
+  /*
+    Abandoning use of ::before pseudo element for :focus for now to keep
+    Edge 15 happy
+  */
 
   &:focus {
-    &::before {
-      opacity: 1;
-      transform: scale(1);
-    }
+    box-shadow:
+      inset 0 0 0 0.125rem var(--background),
+      0 0 0 0.0625rem var(--focusOutline);
   }
 
   /*
@@ -68,20 +65,10 @@
     color: var(--todayColor);
   }
 
-  &.today:focus::before {
-    border-radius: var(--todayBorderRadius);
-    border: 1px solid var(--focusOutline);
-  }
-
   &.selected {
     background-color: var(--selectedBackground);
-    border-radius: var(--selectedBorderRadius);
+    border-radius: var(--borderRadius);
     color: var(--selectedColor);
-  }
-
-  &.selected:focus::before {
-    border-radius: var(--selectedBorderRadius);
-    border: 1px solid var(--focusOutline);
   }
 }
 
