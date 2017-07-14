@@ -5,6 +5,12 @@
   appearance: none;
 }
 
+/* removes default dotted focus outline in Firefox */
+
+.root::-moz-focus-inner {
+  border: 0;
+}
+
 .root {
   all: initial;
   box-sizing: border-box;
