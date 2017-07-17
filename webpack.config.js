@@ -1,13 +1,13 @@
 const path = require('path')
 const webpack = require('webpack')
 
-const DocsPlugin = require('./webpack/plugins/docs')
+const DocsPlugin = require('@instructure/ui-docs')
 
 const env = process.env.NODE_ENV
 const debug = Boolean(process.env.DEBUG) || env === 'development'
 
-// eslint-disable-next-line import/no-dynamic-require
-const pkg = require(path.join(__dirname, 'package.json'))
+const pkg = require('./package.json')
+
 const output = path.join(__dirname, '__build__')
 
 const paths = {
@@ -22,7 +22,6 @@ module.exports = {
   entry: {
     common: [
       'babel-polyfill-loader!',
-      require.resolve('moment/min/locales'),
       'react',
       'react-dom'
     ],
@@ -32,7 +31,6 @@ module.exports = {
     ]
   },
   output: {
-    library: 'InstructureUI',
     path: paths.docs,
     filename: '[name].js'
   },
@@ -57,6 +55,7 @@ function addPlugins (basePlugins) {
       favicon: path.join(__dirname, 'logo.png'),
       library: {
         packageName: pkg.name,
+        packageMain: pkg.main,
         name: 'InstructureUI',
         description: pkg.description,
         version: pkg.version,
@@ -75,12 +74,19 @@ function addPlugins (basePlugins) {
         IconPlus: 'instructure-icons/lib/Solid/IconPlusSolid',
         IconX: 'instructure-icons/lib/Solid/IconXSolid',
         moment: 'moment',
-        avatarImage: path.join(__dirname, 'docs/images/placeholder-avatar.png')
+        locales: 'moment/min/locales',
+        avatarImage: path.join(__dirname, 'docs/assets/placeholder-avatar.png')
       },
       files: {
         // TODO: consolidate docs loader into a single loader and change this to an array of paths/patterns
-        components: path.join(__dirname, 'lib/components/*/index.js'), // only top level components
-        docs: path.join(__dirname, 'docs/*.md')
+        components: [
+          path.join(__dirname, 'lib/components/*/index.js') // only top level components
+        ],
+        docs: [
+          path.join(__dirname, 'README.md'),
+          path.join(__dirname, 'CHANGELOG'),
+          path.join(__dirname, 'docs/*.md')
+        ]
       },
       template: path.join(__dirname, 'templates/docs/index.tmpl.html')
     }),

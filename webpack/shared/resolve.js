@@ -1,7 +1,6 @@
 module.exports = {
   alias: {
-    'instructure-icons$': 'invalid',
-    'instructure-ui': process.cwd()
+    'instructure-icons$': 'invalid'
   },
   modules: [
     process.cwd(),

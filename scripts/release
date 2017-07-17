@@ -82,16 +82,14 @@ if ! [[ $next_version ]]; then
   next_version=$current_version
 fi
 
-if ! [[ $next_version =~ ^[0-9]\.[0-9]+\.[0-9](-.+)? ]]; then
-  echo >&2 "Version \"$next_version\" is not valid! It must be a valid semver string like 1.0.2 or 2.3.0-beta.1"
-  git checkout $BRANCH
-  exit 1
-fi
-
-##############################################################
-# If the version doesn't match package.json, tag the release #
-##############################################################
-if [[ "$current_version" != "$next_version" ]]; then
+################################################
+# If the version doesn't match package.json... #
+################################################
+if [[ "$current_version" != "$next_version" ]];
+then
+  ###################
+  # tag the release #
+  ###################
   if ! [[ $tag ]]; then
     printf "Enter a tag for this release (e.g. beta or rc): "
     read releaseTag
@@ -102,25 +100,38 @@ if [[ "$current_version" != "$next_version" ]]; then
 
     tag=" --tag $releaseTag"
   fi
+else
+  if ! [[ $tag ]]; then
+    tag=" --tag latest"
+  fi
 fi
+
+######################
+# update the version #
+######################
+next_version=$(npm version --no-git-tag-version --allow-same-version $next_version)
 
 #######################
 # Prepare the release #
 #######################
+printf "Installing version $next_version ...\n"
+npm run clean
+npm install
+printf "Testing version $next_version ...\n"
+npm test
 printf "Building version $next_version ...\n"
-npm run prerelease
-node -p "p=require(\"./package\");p.scripts=p.devDependencies=undefined;p.version=\"$next_version\";JSON.stringify(p,null,2)" > $build_path/package.json
+npm run build
 
 ##############################
 # Publish the release to npm #
 ##############################
 printf "Running npm publish $build_path$tag\n"
-npm publish $build_path$tag
+npm publish $build_path$tag --access=public
 
 ###########################
 # Deploy docs to gh-pages #
 ###########################
-if ! [[ $tag ]]; then
+if [[ "$tag" == "latest" ]]; then
   printf "Deploying version $next_version of the documentation...\n"
   npm run deploy
 fi
@@ -130,19 +141,17 @@ fi
 ######################
 printf "Tagging version $next_version ...\n"
 
-release_tag="v$next_version"
-
 # delete the local tag if it already exists
-if [ "`git tag --list $release_tag`" ]; then
-  git tag -d $release_tag
+if [ "`git tag --list $next_version`" ]; then
+  git tag -d $next_version
 fi
 
-git tag -am "Version $next_version" $release_tag
-git push origin $release_tag
-
+git tag -am "Version $next_version" $next_version
+git push origin $next_version
 
 #######################################
 # Success!!!! Return to origin branch #
 #######################################
 printf "Version $next_version was successfully released!\n"
+git checkout -- .
 git checkout $BRANCH
