@@ -1,3 +1,10 @@
+// clear the console before rebundling.
+/* eslint-disable no-console */
+if (typeof console.clear === 'function') {
+  console.clear()
+}
+/* eslint-enable no-console */
+
 /*
   eslint-disable
     import/no-dynamic-require,
@@ -14,12 +21,8 @@ require('!!style-loader!css-loader!./tests.css')
     import/no-webpack-loader-syntax,
     import/no-unresolved
 */
-// clear the console before rebundling.
-/* eslint-disable no-console */
-if (typeof console.clear === 'function') {
-  console.clear()
-}
-/* eslint-enable no-console */
+
+require('../lib/themes')
 
 // utils
 const utilsContext = require.context('./util', true)

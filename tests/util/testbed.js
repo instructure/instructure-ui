@@ -3,13 +3,8 @@ import { mount, ReactWrapper } from 'enzyme' // eslint-disable-line import/no-ex
 import keycode from 'keycode'
 import mockRaf from 'mock-raf' // eslint-disable-line import/no-extraneous-dependencies
 
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
-import Locale from 'lib/util/locale'
+import Locale from '../../lib/util/locale'
 
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
-import { canvas } from 'instructure-ui/lib/themes'
-
-// eslint-disable-next-line import/no-extraneous-dependencies, import/no-unresolved, import/extensions
 import checkA11y from './a11y-check'
 
 const realSetTimeout = setTimeout
@@ -197,8 +192,6 @@ export default class Testbed {
   }
 
   setup () {
-    canvas.use()
-
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
     this.disableCSSTransitions()

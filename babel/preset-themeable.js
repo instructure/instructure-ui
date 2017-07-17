@@ -19,7 +19,8 @@ module.exports = function (context, opts = {}) {
       targets: {
         browsers: opts.browsers || require('./browserslist.json')
       },
-      modules: (esModules === 0 || esModules === false) ? false : undefined
+      modules: (esModules === 0 || esModules === false) ? false : undefined,
+      useBuiltIns: false
     }],
     require.resolve('babel-preset-stage-1'),
     require.resolve('babel-preset-react')
