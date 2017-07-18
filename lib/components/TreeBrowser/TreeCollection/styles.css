@@ -20,25 +20,34 @@
   padding: 0;
 }
 
-.folderTree {
-  .list {
-    &::before {
-      content: "";
-      width: var(--borderWidth);
-      height: 100%;
-      background: var(--borderColor);
-      position: absolute;
-      bottom: 0;
-      offset-inline-start: 0;
-      offset-inline-end: auto;
-      transform: scaleY(0.01);
-      transform-origin: center top;
-      animation-name: list;
-      animation-duration: 0.2s;
-      animation-fill-mode: forwards;
-      animation-timing-function: ease-out;
-    }
-  }
+.folderTree .list::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  bottom: 0;
+  offset-inline-start: 0;
+  offset-inline-end: auto;
+  transform: scaleY(0.01);
+  transform-origin: center top;
+  animation-name: list;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+/*
+MS EDGE v15 breaks the component if CSS variables are used on pseudo elements
+here, so hardcoding until this problem is hopefully resolved in Edge 16
+*/
+
+.folderTree:not(.edge) .list::before {
+  width: var(--borderWidth);
+  background: var(--borderColor);
+}
+
+.folderTree.edge .list::before {
+  width: 0.0625rem;
+  background: #73818c;
 }
 
 .small {
@@ -55,12 +64,6 @@
       margin-inline-end: 0;
       padding-top: var(--baseSpacingSmall);
       margin-top: calc(-1 * var(--baseSpacingSmall));
-    }
-
-    .node {
-      &::before {
-        width: calc(var(--baseSpacingSmall) * 1.25);
-      }
     }
   }
 }
@@ -80,12 +83,6 @@
       padding-top: var(--baseSpacingMedium);
       margin-top: calc(-1 * var(--baseSpacingMedium));
     }
-
-    .node {
-      &::before {
-        width: calc(var(--baseSpacingMedium) * 1.25);
-      }
-    }
   }
 }
 
@@ -103,12 +100,6 @@
       margin-inline-end: 0;
       padding-top: var(--baseSpacingLarge);
       margin-top: calc(-1 * var(--baseSpacingLarge));
-    }
-
-    .node {
-      &::before {
-        width: calc(var(--baseSpacingLarge) * 1.25);
-      }
     }
   }
 }
