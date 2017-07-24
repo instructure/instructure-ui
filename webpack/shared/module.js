@@ -1,8 +1,4 @@
-const { join } = require('path')
-
-const {
-  generateScopedName
-} = require(join(process.cwd(), 'themeable.config.js')) // eslint-disable-line import/no-dynamic-require
+const { generateScopedName } = require('../../themeable.config.js')
 
 const env = process.env.NODE_ENV
 const debug = Boolean(process.env.DEBUG) || env === 'development'
@@ -15,15 +11,12 @@ const babelLoader = {
   }
 }
 
-// TODO: remove webpack/plugins once plugin is in node_modules
-const externalExcludes = [ /node_modules/, /webpack\/plugins/ ]
-
 module.exports = {
   rules: [
     {
       enforce: 'pre',
       test: /\.js?$/,
-      exclude: externalExcludes,
+      exclude: [ /node_modules/ ],
       loader: 'eslint-loader',
       options: {
         failOnWarning: !debug,
@@ -35,7 +28,7 @@ module.exports = {
     },
     {
       test: /\.js$/,
-      exclude: externalExcludes,
+      exclude: [ /node_modules/ ],
       use: [ babelLoader ]
     },
     {
@@ -44,15 +37,9 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      exclude: externalExcludes,
+      exclude: [ /node_modules/ ],
       use: [
-        {
-          loader: 'babel-loader',
-          options: {
-            babelrc: true,
-            cacheDirectory: !debug ? false : '.babel-cache'
-          }
-        },
+        babelLoader,
         'themeable-css-loader',
         {
           loader: 'css-loader',
