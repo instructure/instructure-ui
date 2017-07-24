@@ -4,7 +4,7 @@ import themeable from '../../themeable'
 import { omitProps } from '../../util/passthroughProps'
 
 import styles from './styles.css'
-import theme from './theme.js'
+import theme from './theme'
 
 /**
   A ${COMPONENT} component [WIP]
