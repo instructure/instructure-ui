@@ -37,6 +37,10 @@ module.exports = {
       loader: 'url-loader'
     },
     {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader'
+    },
+    {
       test: /\.css$/,
       exclude: [/node_modules/],
       use: [

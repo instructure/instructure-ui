@@ -23,7 +23,8 @@
     }
   }
 
-  &::-moz-focus-inner { /* removes extra ff button spacing */
+  &::-moz-focus-inner {
+    /* removes extra ff button spacing */
     padding: 0;
     margin: 0;
     border: 0;

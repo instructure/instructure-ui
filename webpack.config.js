@@ -75,7 +75,8 @@ function addPlugins (basePlugins) {
         IconX: 'instructure-icons/lib/Solid/IconXSolid',
         moment: 'moment',
         locales: 'moment/min/locales',
-        avatarImage: path.join(__dirname, 'docs/assets/placeholder-avatar.png')
+        avatarImage: path.join(__dirname, 'docs/assets/placeholder-avatar.png'),
+        iconExample: path.join(__dirname, 'docs/assets/heart_lg.svg')
       },
       files: {
         // TODO: consolidate docs loader into a single loader and change this to an array of paths/patterns

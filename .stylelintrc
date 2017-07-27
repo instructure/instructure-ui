@@ -76,9 +76,7 @@
 
     "property-no-vendor-prefix": true,
 
-    "rule-empty-line-before": [ "always", {
-      "except": ["first-nested"]
-    } ],
+    "rule-empty-line-before": [ "always", { "ignore": ["inside-block", "after-comment"] } ],
 
     "selector-class-pattern": "^[a-z]+[a-zA-Z0-9\\-]*[a-zA-Z0-9]*$",
 
