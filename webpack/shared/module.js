@@ -16,11 +16,12 @@ module.exports = {
     {
       enforce: 'pre',
       test: /\.js?$/,
-      exclude: [ /node_modules/ ],
+      exclude: [/node_modules/],
       loader: 'eslint-loader',
       options: {
         failOnWarning: !debug,
-        emitError: true,
+        emitError: !debug,
+        emitWarning: debug,
         failOnError: !debug,
         fix: false,
         quiet: false
@@ -28,8 +29,8 @@ module.exports = {
     },
     {
       test: /\.js$/,
-      exclude: [ /node_modules/ ],
-      use: [ babelLoader ]
+      exclude: [/node_modules/],
+      use: [babelLoader]
     },
     {
       test: /\.png$/,
@@ -37,7 +38,7 @@ module.exports = {
     },
     {
       test: /\.css$/,
-      exclude: [ /node_modules/ ],
+      exclude: [/node_modules/],
       use: [
         babelLoader,
         'themeable-css-loader',
@@ -46,9 +47,11 @@ module.exports = {
           options: {
             modules: true,
             importLoaders: 1,
-            localIdentName: (typeof generateScopedName === 'function') && generateScopedName({
-              env: !debug ? 'production' : env
-            }),
+            localIdentName:
+              typeof generateScopedName === 'function' &&
+              generateScopedName({
+                env: !debug ? 'production' : env
+              }),
             minimize: !debug,
             discardComments: true,
             discardEmpty: true,
