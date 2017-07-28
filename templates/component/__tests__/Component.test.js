@@ -1,10 +1,10 @@
 import React from 'react'
 import ${COMPONENT} from '../index'
 
-describe('<${COMPONENT} />', function () {
+describe('<${COMPONENT} />', () => {
   const testbed = new Testbed(<${COMPONENT} />)
 
-  it('should render', function () {
+  it('should render', () => {
     const subject = testbed.render(/* override default props here */)
 
     expect(subject).to.be.present
@@ -12,7 +12,7 @@ describe('<${COMPONENT} />', function () {
 
   it('should have tests')
 
-  it('should meet a11y standards', function (done) {
+  it('should meet a11y standards', (done) => {
     const subject = testbed.render()
 
     subject.should.be.accessible(done, {
