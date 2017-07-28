@@ -20,21 +20,15 @@ module.exports = {
   cache: debug,
   bail: !debug,
   entry: {
-    common: [
-      'babel-polyfill-loader!',
-      'react',
-      'react-dom'
-    ],
-    [pkg.name]: [
-      path.join(paths.src, 'themes'),
-      paths.src
-    ]
+    common: ['babel-polyfill-loader!', 'react', 'react-dom'],
+    [pkg.name]: [path.join(paths.src, 'themes'), paths.src]
   },
   output: {
     path: paths.docs,
     filename: '[name].js'
   },
   devServer: {
+    disableHostCheck: true,
     contentBase: paths.docs,
     host: '0.0.0.0',
     port: 8080
@@ -61,15 +55,13 @@ function addPlugins (basePlugins) {
         version: pkg.version,
         repository: pkg.repository.url,
         author: pkg.author,
-        codepen: { // codpen button form data
-          js_external: [
-            `${pkg.homepage}common.js`,
-            `${pkg.homepage}${pkg.name}.js`,
-            `${pkg.homepage}globals.js`
-          ]
+        codepen: {
+          // codpen button form data
+          js_external: [`${pkg.homepage}common.js`, `${pkg.homepage}${pkg.name}.js`, `${pkg.homepage}globals.js`]
         }
       },
-      globals: { // for component playground and codepen examples
+      globals: {
+        // for component playground and codepen examples
         PlaceholderIcon: 'instructure-icons/lib/Line/IconUserLine',
         IconPlus: 'instructure-icons/lib/Solid/IconPlusSolid',
         IconX: 'instructure-icons/lib/Solid/IconXSolid',
@@ -83,11 +75,7 @@ function addPlugins (basePlugins) {
         components: [
           path.join(__dirname, 'lib/components/*/index.js') // only top level components
         ],
-        docs: [
-          path.join(__dirname, 'README.md'),
-          path.join(__dirname, 'CHANGELOG'),
-          path.join(__dirname, 'docs/*.md')
-        ]
+        docs: [path.join(__dirname, 'README.md'), path.join(__dirname, 'CHANGELOG'), path.join(__dirname, 'docs/*.md')]
       },
       template: path.join(__dirname, 'templates/docs/index.tmpl.html')
     }),
