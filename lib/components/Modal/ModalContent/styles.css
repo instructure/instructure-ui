@@ -1,4 +1,4 @@
-.root {
+.content {
   display: flex;
   flex-direction: column;
   position: relative;
@@ -10,15 +10,6 @@
   border-radius: var(--borderRadius);
 }
 
-.closeButton {
-  position: absolute;
-  top: var(--closeButtonOffset);
-  offset-inline-end: var(--closeButtonOffset);
-  offset-inline-start: auto;
-  background: var(--background);
-  z-index: var(--closeButtonZIndex);
-}
-
 .auto,
 .small,
 .medium,
@@ -26,32 +17,6 @@
   max-width: 95vw;
   max-height: 95vh;
 }
-
-/* DELETE THESE HACKS ONCE IE11 SUPPORT ENDS */
-/* stylelint-disable selector-max-type */
-/* stylelint-disable selector-no-vendor-prefix */
-/* stylelint-disable selector-root-no-composition */
-/* stylelint-disable declaration-block-no-duplicate-properties */
-/* stylelint-disable value-no-vendor-prefix */
-
-_:-ms-fullscreen,
-:root .root {
-  display: block;
-  overflow: auto;
-  max-height: none;
-}
-
-_:-ms-fullscreen,
-:root .fullscreen {
-  display: -ms-flexbox;
-  display: flex;
-}
-
-/* stylelint-enable selector-max-type */
-/* stylelint-enable selector-no-vendor-prefix */
-/* stylelint-enable selector-root-no-composition */
-/* stylelint-enable declaration-block-no-duplicate-properties */
-/* stylelint-enable value-no-vendor-prefix */
 
 .auto {
   flex: 0 1 auto;
