@@ -1,6 +1,7 @@
 .root {
   box-sizing: border-box;
   display: inline-block;
+  vertical-align: middle;
 
   border-width: var(--borderWidth);
   border-style: solid;
@@ -43,7 +44,8 @@
   &.positioned--end-top,
   &.positioned--end-bottom,
   &.positioned--center-end,
-  &.positioned--end { /* arrow start */
+  &.positioned--end {
+    /* arrow start */
     margin-inline-start: var(--arrowSize);
     margin-inline-end: 0;
 
@@ -69,7 +71,8 @@
   &.positioned--start-top,
   &.positioned--start-bottom,
   &.positioned--center-start,
-  &.positioned--start {  /* arrow after */
+  &.positioned--start {
+    /* arrow after */
     margin-right: var(--arrowSize);
 
     .arrow {
@@ -93,7 +96,8 @@
   &.positioned--bottom,
   &.positioned--bottom-end,
   &.positioned--bottom-start,
-  &.positioned--bottom-center {  /* arrow start */
+  &.positioned--bottom-center {
+    /* arrow start */
     margin-top: var(--arrowSize);
 
     .arrow {
@@ -114,7 +118,8 @@
   &.positioned--top,
   &.positioned--top-start,
   &.positioned--top-end,
-  &.positioned--top-center {  /* arrow bottom */
+  &.positioned--top-center {
+    /* arrow bottom */
     margin-bottom: var(--arrowSize);
 
     .arrow {
@@ -191,7 +196,8 @@
   &.positioned--end-center,
   &.positioned--center-end,
   &.positioned--end-top,
-  &.positioned--end-bottom { /* arrow start */
+  &.positioned--end-bottom {
+    /* arrow start */
 
     .arrow::after {
       border-inline-end-color: var(--backgroundColor);
@@ -206,7 +212,8 @@
   &.positioned--start-center,
   &.positioned--center-start,
   &.positioned--start-top,
-  &.positioned--start-bottom {  /* arrow end */
+  &.positioned--start-bottom {
+    /* arrow end */
 
     .arrow::after {
       border-inline-start-color: var(--backgroundColor);
@@ -220,7 +227,8 @@
   &.positioned--bottom,
   &.positioned--bottom-end,
   &.positioned--bottom-start,
-  &.positioned--bottom-center {  /* arrow top */
+  &.positioned--bottom-center {
+    /* arrow top */
 
     .arrow::after {
       border-bottom-color: var(--backgroundColor);
@@ -234,7 +242,8 @@
   &.positioned--top,
   &.positioned--top-end,
   &.positioned--top-start,
-  &.positioned--top-center {  /* arrow bottom */
+  &.positioned--top-center {
+    /* arrow bottom */
 
     .arrow::after {
       border-top-color: var(--backgroundColor);
@@ -251,7 +260,8 @@
   &.positioned--end-center,
   &.positioned--center-end,
   &.positioned--end-top,
-  &.positioned--end-bottom { /* arrow start */
+  &.positioned--end-bottom {
+    /* arrow start */
 
     .arrow::after {
       border-inline-end-color: var(--backgroundColorInverse);
@@ -266,7 +276,8 @@
   &.positioned--start-center,
   &.positioned--center-start,
   &.positioned--start-top,
-  &.positioned--start-bottom {  /* arrow end */
+  &.positioned--start-bottom {
+    /* arrow end */
 
     .arrow::after {
       border-left-color: var(--backgroundColorInverse);
@@ -280,7 +291,8 @@
   &.positioned--bottom,
   &.positioned--bottom-end,
   &.positioned--bottom-start,
-  &.positioned--bottom-center {  /* arrow top */
+  &.positioned--bottom-center {
+    /* arrow top */
 
     .arrow::after {
       border-bottom-color: var(--backgroundColorInverse);
@@ -294,7 +306,8 @@
   &.positioned--top,
   &.positioned--top-end,
   &.positioned--top-start,
-  &.positioned--top-center {  /* arrow bottom */
+  &.positioned--top-center {
+    /* arrow bottom */
 
     .arrow::after {
       border-top-color: var(--backgroundColorInverse);

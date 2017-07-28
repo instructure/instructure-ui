@@ -12,7 +12,7 @@ module.exports = {
   resolve: require('./webpack/shared/resolve'),
   resolveLoader: require('./webpack/shared/resolveLoader'),
   module: require('./webpack/shared/module'),
-  devtool: 'cheap-module-source-map',
+  devtool: 'cheap-module-eval-source-map',
   performance: {
     hints: false
   }

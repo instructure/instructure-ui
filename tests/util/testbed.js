@@ -10,7 +10,8 @@ import checkA11y from './a11y-check'
 const realSetTimeout = setTimeout
 
 const override = function (object, methodName, extra) {
-  object[methodName] = (function (original, after) { // eslint-disable-line no-param-reassign, wrap-iife
+  // eslint-disable-next-line no-param-reassign, wrap-iife
+  object[methodName] = (function (original, after) {
     return function () {
       const result = original && original.apply(this, arguments)
       after.apply(this, arguments)
@@ -34,20 +35,22 @@ ReactWrapper.prototype.dispatchNativeEvent = function (type, attrs) {
   domNode.dispatchEvent(event, attrs)
 }
 
-ReactWrapper.prototype.dispatchNativeKeyboardEvent = function (type, init) {
-  const event = document.createEventObject
-      ? document.createEventObject()
-      : document.createEvent('Events')
+ReactWrapper.prototype.dispatchNativeKeyboardEvent = function (type, keyCode) {
+  const event = document.createEventObject ? document.createEventObject() : document.createEvent('Events')
 
   if (event.initEvent) {
     event.initEvent(type, true, true)
   }
 
-  Object.keys(init || {}).forEach((key) => {
-    event[key] = init[key]
-  })
+  event.keyCode = keycode(keyCode)
 
   this.getDOMNode().dispatchEvent(event)
+}
+
+ReactWrapper.prototype.dispatchNativeMouseEvent = function (type, attrs) {
+  const event = new MouseEvent(type, attrs)
+  const domNode = this.getDOMNode()
+  domNode.dispatchEvent(event)
 }
 
 ReactWrapper.prototype.keyDown = function (code) {
@@ -78,7 +81,7 @@ ReactWrapper.prototype.focus = function () {
 
 ReactWrapper.prototype.focused = function () {
   const domNode = this.getDOMNode()
-  return domNode && (domNode === document.activeElement)
+  return domNode && domNode === document.activeElement
 }
 
 ReactWrapper.prototype.getKey = function () {
@@ -115,12 +118,17 @@ ReactWrapper.prototype.ref = function () {
   }
 }
 
+// eslint-disable-next-line import/no-extraneous-dependencies
+global.chai.use(require('chai-string'))
+// eslint-disable-next-line import/no-extraneous-dependencies
+global.chai.use(require('chai-enzyme')())
+
 const Assertion = global.chai.Assertion
 global.chai.use((chai, utils) => {
   utils.addMethod(Assertion.prototype, 'accessible', function (done, options = {}) {
     const obj = utils.flag(this, 'object')
 
-    obj.getA11yViolations(options, (result) => {
+    obj.getA11yViolations(options, result => {
       try {
         new Assertion(result.violations.length).to.equal(0)
         done()
@@ -134,12 +142,9 @@ global.chai.use((chai, utils) => {
 global.chai.use((chai, utils) => {
   utils.addProperty(Assertion.prototype, 'present', function () {
     const obj = utils.flag(this, 'object')
-    return new Assertion((obj.length > 0 && obj.getDOMNode())).to.be.ok
+    return new Assertion(obj.length > 0 && obj.getDOMNode()).to.be.ok
   })
 })
-
-// eslint-disable-next-line import/no-extraneous-dependencies
-global.chai.use(require('chai-string'))
 
 export default class Testbed {
   constructor (subject) {
@@ -151,12 +156,15 @@ export default class Testbed {
     afterEach(this.teardown.bind(this))
   }
 
-  /* eslint-disable max-len */
+  // eslint-disable-next-line max-len
   static testImage = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
-  /* eslint-enable max-len */
 
   static wrap (element) {
     return new ReactWrapper(element, true)
+  }
+
+  get wrapper () {
+    return new ReactWrapper(this.rootNode, true)
   }
 
   tick = (ms = 300) => {
@@ -229,7 +237,8 @@ export default class Testbed {
     if (this.$instance) {
       const { type, name } = this.subject || {}
       const s = (type && (type.displayName || type.name)) || name
-      console.warn( // eslint-disable-line no-console
+      console.warn(
+        // eslint-disable-line no-console
         `Testbed.render called more than once in the same test for ${s} !!`
       )
     }

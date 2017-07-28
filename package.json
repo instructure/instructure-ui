@@ -53,6 +53,7 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-1": "6.24.1",
     "chai": "4.1.0",
+    "chai-enzyme": "^0.8.0",
     "chai-string": "1.4.0",
     "commitizen": "2.9.6",
     "copyfiles": "1.2.0",
