@@ -1,7 +1,7 @@
 .tag {
-  margin: var(--tagMargin) 0 0 var(--tagMargin);
+  margin: calc(var(--tagTopMargin) + 0.125rem) 0 0 var(--tagStartMargin);
 
   &:last-of-type {
-    margin-bottom: var(--tagMargin);
+    margin-bottom: var(--tagTopMargin);
   }
 }

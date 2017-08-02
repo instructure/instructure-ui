@@ -44,7 +44,7 @@
     font-size: var(--smallFontSize);
 
     .input {
-      min-height: var(--smallHeight);
+      min-height: calc(var(--smallHeight) - 0.125rem);
     }
   }
 
@@ -52,7 +52,7 @@
     font-size: var(--mediumFontSize);
 
     .input {
-      min-height: var(--mediumHeight);
+      min-height: calc(var(--mediumHeight) - 0.125rem);
     }
   }
 
@@ -60,7 +60,7 @@
     font-size: var(--largeFontSize);
 
     .input {
-      min-height: var(--largeHeight);
+      min-height: calc(var(--largeHeight) - 0.125rem);
     }
   }
 
@@ -86,6 +86,10 @@
 
     &::-ms-clear {
       display: none;
+    }
+
+    &[autocomplete="off"]::-webkit-contacts-auto-fill-button {
+      display: none !important; /* stylelint-disable-line declaration-no-important */
     }
 
     -webkit-font-smoothing: antialiased;
