@@ -142,7 +142,7 @@ module.exports = function ({ types: t }) {
           const css = STYLES.get(cssFilePath)
 
           if (!t.isExpressionStatement(path.parent)) {
-            if (css) {
+            if (css !== undefined) {
               path.replaceWithSourceString(transformCssRequire(tokens, css))
             } else {
               path.replaceWith(t.ObjectExpression(
