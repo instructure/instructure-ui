@@ -9,6 +9,11 @@
   border: 1px solid var(--borderColor);
   border-radius: var(--borderRadius);
   z-index: var(--zIndex);
+
+  &.ie11 {
+    display: block;
+    overflow: auto;
+  }
 }
 
 .auto,
@@ -17,6 +22,10 @@
 .large {
   max-width: 95vw;
   max-height: 95vh;
+
+  &.ie11 {
+    max-height: none;
+  }
 }
 
 .auto {

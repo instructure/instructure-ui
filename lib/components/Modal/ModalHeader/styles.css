@@ -1,6 +1,6 @@
 .root {
   box-sizing: border-box;
-  padding: 0 var(--padding) var(--padding);
+  padding: var(--padding);
   padding-inline-end: calc(var(--padding) * 2 + 1em);
   padding-inline-start: var(--padding);
   flex: 0 0 auto;

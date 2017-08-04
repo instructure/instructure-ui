@@ -35,7 +35,12 @@
   max-width: var(--largeMaxWidth);
 }
 
-.auto {}
+.fullscreen {
+  max-width: 100vw;
+}
+
+.auto {
+}
 
 .visualDebug {
   border: 1px dashed red;
