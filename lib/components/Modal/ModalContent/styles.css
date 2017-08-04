@@ -8,6 +8,7 @@
   box-shadow: var(--boxShadow);
   border: 1px solid var(--borderColor);
   border-radius: var(--borderRadius);
+  z-index: var(--zIndex);
 }
 
 .auto,
