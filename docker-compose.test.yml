@@ -9,3 +9,5 @@ test:
     NODE_ENV: test
   volumes_from:
     - coverage
+  volumes:
+    - "./.git:/usr/src/app/.git"

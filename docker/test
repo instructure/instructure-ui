@@ -28,4 +28,4 @@ echo "building services..."
 docker-compose build
 
 echo "running tests..."
-docker-compose run --rm test bash -c "xvfb-daemon npm test"
+docker-compose run -u "root" --rm test bash -c "xvfb-daemon npm test"

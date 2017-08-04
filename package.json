@@ -20,7 +20,7 @@
     "test:watch": "cross-env NODE_ENV=test DEBUG=1 karma start",
     "lint": "eslint lib",
     "lint:fix": "eslint lib --fix",
-    "lint:commit": "validate-commit-msg \"$(git log -1 --pretty=%B)\"",
+    "lint:commit": "rm -f .git/validate-commit-msg && git log -1 --pretty=%B > .git/validate-commit-msg && validate-commit-msg validate-commit-msg",
     "generate": "./scripts/generate",
     "commit": "git-cz",
     "clean": "rimraf __build__ .babel-cache",
