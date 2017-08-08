@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "version": "2.5.0",
+  "version": "3.0.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -29,7 +29,7 @@
     "copy": "npm-run-all copy:themeable copy:pkg copy:codemods",
     "copy:themeable": "copyfiles babel/**/* babel/plugins/util/**/* webpack/loaders/themeable-css-loader.js __build__/",
     "copy:pkg": "copyfiles package.json README.md .npmignore LICENSE CHANGELOG.md __build__",
-    "copy:codemods": "copyfiles codemods/lib/**/* __build__/",
+    "copy:codemods": "copyfiles codemods/lib/*.js codemods/lib/**/* __build__/",
     "docs": "cross-env NODE_ENV=production webpack",
     "build": "npm-run-all --parallel transpile docs copy",
     "bump": "git fetch origin --tags --force && standard-version",
