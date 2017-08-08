@@ -65,6 +65,16 @@ If you'd like to run the tests in a different browser (e.g. Firefox or Safari), 
 2. Please do not include the output of `npm run build` in your commits.
 
 
+### Codemods
+
+Instructure UI ships with codemods to make it easier to deal with API changes.
+
+**Updating**:
+
+This codemode helps you update your project by renaming `props` that have had names changed (e.g., `onReady` => `onOpen`). If you have a project that uses `instructure-ui` this codemod is for you.
+
+`jscodeshift -t instructure-ui/codemods/updatePropNames.js <path> --config=instructure-ui/codemods/config/propNames.config.json`
+
 ### Documentation
 
 Please update the documentation with any changes, the code and docs should
