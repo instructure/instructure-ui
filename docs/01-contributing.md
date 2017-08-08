@@ -73,7 +73,7 @@ Instructure UI ships with codemods to make it easier to deal with API changes.
 
 This codemode helps you update your project by renaming `props` that have had names changed (e.g., `onReady` => `onOpen`). If you have a project that uses `instructure-ui` this codemod is for you.
 
-`jscodeshift -t instructure-ui/codemods/updatePropNames.js <path> --config=instructure-ui/codemods/config/propNames.config.json`
+`jscodeshift -t instructure-ui/codemods/lib/updatePropNames.js <path> --config=instructure-ui/codemods/lib/config/propNames.config.json`
 
 ### Documentation
 

@@ -75,7 +75,11 @@ function addPlugins (basePlugins) {
         components: [
           path.join(__dirname, 'lib/components/*/index.js') // only top level components
         ],
-        docs: [path.join(__dirname, 'README.md'), path.join(__dirname, 'CHANGELOG'), path.join(__dirname, 'docs/*.md')]
+        docs: [
+          path.join(__dirname, 'README.md'),
+          path.join(__dirname, 'CHANGELOG.md'),
+          path.join(__dirname, 'docs/*.md')
+        ]
       },
       template: path.join(__dirname, 'templates/docs/index.tmpl.html')
     }),
