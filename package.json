@@ -26,9 +26,10 @@
     "commit": "git-cz",
     "clean": "rimraf __build__ .babel-cache",
     "transpile": "cross-env NODE_ENV=production ES_MODULES=0 BABEL_DISABLE_CACHE=1 babel lib --out-dir __build__/lib --ignore *.test.js",
-    "copy": "npm-run-all copy:themeable copy:pkg",
+    "copy": "npm-run-all copy:themeable copy:pkg copy:codemods",
     "copy:themeable": "copyfiles babel/**/* babel/plugins/util/**/* webpack/loaders/themeable-css-loader.js __build__/",
     "copy:pkg": "copyfiles package.json README.md .npmignore LICENSE CHANGELOG.md __build__",
+    "copy:codemods": "copyfiles codemods/lib/**/* __build__/",
     "docs": "cross-env NODE_ENV=production webpack",
     "build": "npm-run-all --parallel transpile docs copy",
     "bump": "git fetch origin --tags --force && standard-version",
@@ -139,11 +140,7 @@
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },
-  "keywords": [
-    "react",
-    "react-component",
-    "instructure"
-  ],
+  "keywords": ["react", "react-component", "instructure"],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
