@@ -65,7 +65,7 @@ fi
 # Check out the commit #
 ########################
 printf "Checking out $commit_sha ...\n"
-git fetch origin --tags --force
+git fetch origin
 git checkout $commit_sha
 
 #########################
