@@ -131,7 +131,7 @@ npm publish $build_path$tag --access=public
 ###########################
 # Deploy docs to gh-pages #
 ###########################
-if [[ "$tag" == "latest" ]]; then
+if [[ "$tag" == " --tag latest" ]]; then
   printf "Deploying version $next_version of the documentation...\n"
   npm run deploy
 fi
