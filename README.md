@@ -1,6 +1,9 @@
 [npm]: https://img.shields.io/npm/v/instructure-ui.svg
 [npm-url]: https://npmjs.com/package/instructure-ui
 
+[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
+
 <div style="text-align: center; margin-bottom: 10rem; padding-bottom: 3rem;">
   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 300px;" viewBox="0 0 400 400">
       <path class="strokeColor" d="M204.59,355.17h-.94v-2.86h.94Zm0-6.61h-.94v-3.75h.94Zm0-7.5h-.94V337.3h.94Zm0-7.5h-.94V329.8h.94Zm0-7.5h-.94V322.3h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94v-3.75h.94Zm0-7.5h-.94V112.2h.94Zm0-7.5h-.94V104.7h.94Zm0-7.5h-.94V97.2h.94Zm0-7.5h-.94V89.69h.94Zm0-7.5h-.94V82.19h.94Zm0-7.5h-.94V74.69h.94Zm0-7.5h-.94V67.18h.94Z"/>
@@ -49,6 +52,7 @@
 </div>
 
 [![npm][npm]][npm-url]
+[![build-status][build-status]][build-status-url]
 
 ### Installation
 
