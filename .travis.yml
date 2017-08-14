@@ -1,0 +1,17 @@
+# Even though we run everything inside docker,
+# Travis requires us to pick a language else it will pick Ruby by default.
+# Let's choose a lightweight base image then we provide our own build tools.
+# Note: `language: generic` was failing in OSX so in that case you can use language: c
+language: generic
+
+# https://docs.travis-ci.com/user/reference/trusty/#Docker
+dist: trusty
+services:
+  - docker
+
+before_install:
+  - docker --version
+  - docker-compose --version
+
+script:
+  - travis_retry ./docker/test
