@@ -3,9 +3,9 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  min-width: var(--minWidth);
   background: var(--background);
   margin: 0;
-
   transition: all 0.2s ease-out;
 
   outline: 0.1875rem solid transparent;
@@ -68,7 +68,6 @@
     position: relative;
     display: flex;
     flex: 1;
-    min-width: 12rem;
   }
 
   .icon {
@@ -83,7 +82,6 @@
   .input {
     all: initial;
     width: 100%;
-
     &::-ms-clear {
       display: none;
     }
