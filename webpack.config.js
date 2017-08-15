@@ -56,8 +56,12 @@ function addPlugins (basePlugins) {
         repository: pkg.repository.url,
         author: pkg.author,
         codepen: {
-          // codpen button form data
-          js_external: [`${pkg.homepage}common.js`, `${pkg.homepage}${pkg.name}.js`, `${pkg.homepage}globals.js`]
+          // codpen button form data (https://blog.codepen.io/documentation/api/prefill/)
+          js_external: [
+            `${pkg.homepage}common.js`,
+            `${pkg.homepage}${pkg.name}.js`,
+            `${pkg.homepage}globals.js`
+          ].join(';')
         }
       },
       globals: {
