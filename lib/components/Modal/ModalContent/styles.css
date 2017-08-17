@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: hidden;
   box-sizing: border-box;
   background: var(--background);
   box-shadow: var(--boxShadow);
