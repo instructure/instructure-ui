@@ -1,3 +1,4 @@
 .root {
   z-index: var(--zIndex);
+  box-sizing: border-box;
 }

@@ -1,23 +1,21 @@
 .root {
-  position: relative;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
+}
 
+.content {
+  display: block;
   border-width: var(--borderWidth);
   border-style: solid;
   border-radius: var(--borderRadius);
 }
 
-.content {
-  display: block;
-  overflow: hidden;
-  border-radius: calc(var(--borderRadius) - var(--borderWidth));
-}
-
 .with-arrow {
-  min-height: calc(var(--arrowSize) * 2);
-  position: relative;
+  .content {
+    min-height: calc(var(--arrowSize) * 2);
+    position: relative;
+  }
 
   .arrow,
   .arrow::after {
@@ -47,8 +45,8 @@
   &.positioned--center-end,
   &.positioned--end {
     /* arrow start */
-    margin-inline-start: var(--arrowSize);
-    margin-inline-end: 0;
+    padding-inline-start: var(--arrowSize);
+    padding-inline-end: 0;
 
     .arrow {
       top: 50%;
@@ -74,7 +72,7 @@
   &.positioned--center-start,
   &.positioned--start {
     /* arrow after */
-    margin-right: var(--arrowSize);
+    padding-right: var(--arrowSize);
 
     .arrow {
       top: 50%;
@@ -99,7 +97,7 @@
   &.positioned--bottom-start,
   &.positioned--bottom-center {
     /* arrow start */
-    margin-top: var(--arrowSize);
+    padding-top: var(--arrowSize);
 
     .arrow {
       bottom: 100%;
@@ -121,7 +119,7 @@
   &.positioned--top-end,
   &.positioned--top-center {
     /* arrow bottom */
-    margin-bottom: var(--arrowSize);
+    padding-bottom: var(--arrowSize);
 
     .arrow {
       top: 100%;
@@ -178,14 +176,14 @@
   }
 }
 
-.default {
+.default .content {
   background: var(--backgroundColor);
   border-color: var(--borderColor);
   box-shadow: var(--boxShadow);
   color: var(--textColor);
 }
 
-.inverse {
+.inverse .content {
   background: var(--backgroundColorInverse);
   border-color: var(--borderColorInverse);
   box-shadow: var(--boxShadow);
