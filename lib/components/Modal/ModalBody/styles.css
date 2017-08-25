@@ -4,21 +4,8 @@
   flex: 1 1 auto;
 }
 
-/* DELETE THESE HACKS ONCE IE11 SUPPORT ENDS */
-/* stylelint-disable selector-max-type */
-/* stylelint-disable selector-no-vendor-prefix */
-/* stylelint-disable value-no-vendor-prefix */
-/* stylelint-disable selector-root-no-composition */
-/* stylelint-disable property-no-vendor-prefix */
-
-_:-ms-fullscreen,
-:root  .root {
-  -ms-flex: 1 0 auto;
-  flex: 1 0 auto;
+.content {
+  box-sizing: border-box;
+  max-width: var(--contentMaxWidth);
+  margin: 0 auto;
 }
-
-/* stylelint-enable selector-max-type */
-/* stylelint-enable selector-no-vendor-prefix */
-/* stylelint-enable value-no-vendor-prefix */
-/* stylelint-enable selector-root-no-composition */
-/* stylelint-enable property-no-vendor-prefix */
