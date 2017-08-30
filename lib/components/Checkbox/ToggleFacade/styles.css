@@ -1,3 +1,30 @@
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.root .facade {
+  &.checked {
+    background: var(--checkedBackground);
+    box-shadow: none;
+
+    .icon {
+      transform: translate3d(50%, 0, 0);
+    }
+
+    .iconSVG {
+      color: var(--checkedIconColor);
+    }
+  }
+
+  &.focused {
+    &::before {
+      transform: scale(1) translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+}
+
 .facade {
   background: var(--background);
   border-color: var(--borderColor);
@@ -66,33 +93,12 @@
 
 .label {
   flex: 1;
+  min-width: 1px;
   color: var(--labelColor);
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
   line-height: var(--labelLineHeight);
   font-size: var(--labelFontSize);
-}
-
-.root .facade {
-  &.checked {
-    background: var(--checkedBackground);
-    box-shadow: none;
-
-    .icon {
-      transform: translate3d(50%, 0, 0);
-    }
-
-    .iconSVG {
-      color: var(--checkedIconColor);
-    }
-  }
-
-  &.focused {
-    &::before {
-      transform: scale(1) translate3d(0, 0, 0);
-      opacity: 1;
-    }
-  }
 }
 
 .small {

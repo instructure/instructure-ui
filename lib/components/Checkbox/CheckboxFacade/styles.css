@@ -42,6 +42,7 @@
 
 .label {
   flex: 1 1 auto;
+  min-width: 1px;
   color: var(--labelColor);
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
