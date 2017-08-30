@@ -74,7 +74,7 @@
     display: block;
     position: absolute;
     top: calc(50% - 0.4rem);
-    right: var(--inputPadding);
+    right: var(--inputPaddingStart);
     pointer-events: none;
     fill: var(--iconColor);
   }
@@ -104,9 +104,8 @@
     font-weight: var(--fontWeight);
 
     color: var(--color);
-
+    padding: 0 var(--inputPaddingEnd) 0 var(--inputPaddingStart);
     box-sizing: border-box;
-    padding: 0 var(--inputPadding);
 
     &:placeholder-shown {
       color: var(--placeholderColor);
