@@ -23,6 +23,10 @@
   text-align: end;
 }
 
+.x-small {
+  max-width: var(--xSmallMaxWidth);
+}
+
 .small {
   max-width: var(--smallMaxWidth);
 }
