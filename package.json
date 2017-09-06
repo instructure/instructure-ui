@@ -127,6 +127,7 @@
     "jscodeshift": "^0.3.32",
     "keycode": "^2.1.8",
     "moment-timezone": "^0.5.13",
+    "no-scroll": "^2.1.0",
     "numeral": "^2.0.6",
     "object.omit": "^2.0.1",
     "object.pick": "^1.2.0",
