@@ -55,7 +55,8 @@ module.exports = function (context, opts = {}) {
           require.resolve('./plugins/transform-themeable'),
           {
             postcssrc: opts.postcssrc,
-            themeablerc: opts.themeablerc
+            themeablerc: opts.themeablerc,
+            ignore: opts.ignore
           }
         ]
       ])

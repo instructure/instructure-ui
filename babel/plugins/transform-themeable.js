@@ -7,6 +7,7 @@ const {
   join
 } = require('path')
 
+const globToRegex = require('glob-to-regexp')
 const transformCssRequire = require('./util/transform-css-require')
 
 module.exports = function ({ types: t }) {
@@ -85,7 +86,27 @@ module.exports = function ({ types: t }) {
     return plugins
   }
 
+  // The exception-checking code is adapted from https://github.com/css-modules/css-modules-require-hook
+  // Copyright (c) 2015 Alexey Litvinov
+
+  /**
+   * @param  {function|regex|string} ignore glob, regex or function
+   * @return {function}
+   */
+  function buildExceptionChecker (ignore) {
+    if (ignore instanceof RegExp) {
+      return filepath => ignore.test(filepath)
+    }
+
+    if (typeof ignore === 'string') {
+      return filepath => globToRegex(ignore).test(filepath)
+    }
+
+    return ignore || (filepath => !filepath)
+  }
+
   let initialized = false // is css modules require hook initialized?
+  let isException
   const matchExtensions = /\.css$/i
 
   const STYLES = new Map()
@@ -111,6 +132,8 @@ module.exports = function ({ types: t }) {
           append: [require('./util/postcss-themeable-styles')]
         })
 
+        isException = buildExceptionChecker(state.opts.ignore)
+
         initialized = true
       },
 
@@ -120,7 +143,7 @@ module.exports = function ({ types: t }) {
         // CallExpression will then replace it or remove depending on parent node (if is Program or not)
         const { value } = path.node.source
 
-        if (matchExtensions.test(value)) {
+        if (!isException(value) && matchExtensions.test(value)) {
           const requiringFile = file.opts.filename
           requireCssFile(requiringFile, value)
         }
@@ -134,8 +157,7 @@ module.exports = function ({ types: t }) {
         }
 
         const [{ value: stylesheetPath }] = args
-
-        if (matchExtensions.test(stylesheetPath)) {
+        if (!isException(stylesheetPath) && matchExtensions.test(stylesheetPath)) {
           const requiringFile = file.opts.filename
           const cssFilePath = resolveStylesheetPath(requiringFile, stylesheetPath)
           const tokens = requireCssFile(requiringFile, stylesheetPath)

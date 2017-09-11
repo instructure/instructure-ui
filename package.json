@@ -124,6 +124,7 @@
     "decimal.js": "^7.2.1",
     "deep-equal": "^1.0.1",
     "glamor": "^2.20.37",
+    "glob-to-regexp": "^0.3.0",
     "jscodeshift": "^0.3.32",
     "keycode": "^2.1.8",
     "moment-timezone": "^0.5.13",
