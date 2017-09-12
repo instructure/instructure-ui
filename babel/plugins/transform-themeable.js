@@ -47,6 +47,7 @@ module.exports = function ({ types: t }) {
         resolveStylesheetPath(filepath, stylesheetPath)
       )
     } catch (e) {
+      console.warn(`Warning: Could not find stylesheet: ${stylesheetPath}`)
       return {} // return empty object, this simulates result of ignored stylesheet file
     }
   }
