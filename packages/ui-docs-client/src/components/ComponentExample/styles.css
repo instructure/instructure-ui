@@ -1,0 +1,44 @@
+.root {
+  box-sizing: border-box;
+  padding: var(--padding);
+  margin: 0;
+  background-color: var(--backgroundColor);
+  background-image: linear-gradient(var(--gradientCheckerboard)),
+    linear-gradient(var(--gradientCheckerboard));
+  background-position: 0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2);
+  background-size: var(--gradientCheckerboardSize) var(--gradientCheckerboardSize);
+  border: var(--border);
+  border-radius: var(--borderRadius);
+  position: relative;
+  overflow: scroll;
+}
+
+.fullscreen {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+}
+
+.inverse {
+  background-color: var(--backgroundColorInverse);
+  background-image: linear-gradient(var(--gradientCheckerboardInverse)),
+    linear-gradient(var(--gradientCheckerboardInverse));
+}
+
+.error {
+  background: var(--backgroundError);
+  box-sizing: border-box;
+  margin: 0;
+  display: block;
+  color: var(--colorError);
+  font-family: var(--fontFamilyError);
+  font-size: var(--fontSizeError);
+  line-height: 1.4;
+
+  /* stylelint-disable selector-max-type */
+  pre,
+  code {
+    color: var(--colorError);
+  }
+  /* stylelint-enable selector-max-type */
+}

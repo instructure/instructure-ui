@@ -1,0 +1,36 @@
+{
+  "name": "__docs__",
+  "private": true,
+  "version": "3.4.0",
+  "description": "Documentation for A UI library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "start": "http-server __build__ -p 8001",
+    "start:watch": "cross-env NODE_ENV=development DEBUG=1 WEBPACK=1 webpack-dev-server",
+    "build": "cross-env NODE_ENV=production webpack",
+    "build:dev": "cross-env NODE_ENV=development DEBUG=1 WEBPACK=1 webpack",
+    "clean": "rimraf __build__ .babel-cache",
+    "bump": "git fetch origin --tags --force && lerna publish --skip-git --skip-npm --conventional-commits",
+    "deploy": "touch __build__/.nojekyll && gh-pages -d __build__ -r git@github.com:instructure/instructure-ui.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/ui-config": "3.4.0",
+    "@instructure/ui-core": "3.4.0",
+    "@instructure/ui-docs-client": "3.4.0",
+    "@instructure/ui-docs-plugin": "3.4.0",
+    "@instructure/ui-polyfill-loader": "3.4.0",
+    "gh-pages": "1.0.0",
+    "http-server": "0.10.0",
+    "instructure-icons": "4.2.0",
+    "moment": "^2.10.6",
+    "webpack": "2.2.1",
+    "webpack-dev-server": "2.6.1"
+  }
+}

@@ -1,9 +1,0 @@
-{
-  "globals": {
-    "baseDir": "../"
-  },
-  "testEnvironment": "node",
-  "roots": [
-    "codemods"
-  ]
-}

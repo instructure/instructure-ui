@@ -1,3 +1,0 @@
-{
-  "presets": [["./babel/preset-themeable", { "transform": true }]]
-}

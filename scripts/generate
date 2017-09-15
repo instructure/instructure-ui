@@ -1,7 +1,7 @@
 #!/bin/bash -e
 
-COMPONENTS_DIR=lib/components
-COMPONENT_TEMPLATE_DIR=templates/component
+COMPONENTS_DIR=packages/ui-core/src/components
+COMPONENT_TEMPLATE_DIR=scripts/templates/component
 
 read -p 'Component name: ' component
 

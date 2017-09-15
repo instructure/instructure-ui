@@ -1,0 +1,61 @@
+.root {
+  color: #333;
+  background: #fff;
+  padding: 0.1rem 0.75rem 0.75rem;
+}
+
+.search {
+  text-align: center;
+  margin: 1rem;
+}
+
+.sections {
+  padding: 0 1rem;
+}
+
+.navToggle {
+  padding: 0.8rem 0;
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.link {
+  margin: 0;
+  padding: 0.8rem 0;
+  display: flex;
+  align-items: center;
+
+  font-size: 0.875rem;
+
+  transition: all 0.15s ease;
+
+  &:first-child {
+    flex: 1;
+  }
+
+  &:last-child {
+    padding-bottom: 0;
+  }
+}
+
+.categoryLink {
+  padding-left: 1rem;
+
+  &:first-child {
+    padding-top: 0.8rem;
+  }
+}
+
+.selectedLink {
+  color: #008ee2;
+  font-weight: 700;
+}
+
+@media only screen and (max-width: 48rem) {
+  .link,
+  .header {
+    font-size: 1rem;
+  }
+}

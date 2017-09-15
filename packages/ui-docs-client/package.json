@@ -1,0 +1,52 @@
+{
+  "name": "@instructure/ui-docs-client",
+  "version": "3.4.0",
+  "description": "A React application to display documentation made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test npm run lint",
+    "lint": "npm-run-all --parallel lint:js lint:css",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:js": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "clean": "rimraf lib",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
+    "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-config": "3.4.0",
+    "@instructure/ui-core": "3.4.0",
+    "babel-cli": "6.26.0",
+    "babel-plugin-inline-import": "2.0.6",
+    "instructure-icons": "4.2.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1"
+  },
+  "dependencies": {
+    "babel-standalone": "^6.26.0",
+    "classnames": "^2.2.5",
+    "codemirror": "^5.27.4",
+    "core-js": "^2.4.1",
+    "lorem-ipsum": "^1.0.4",
+    "marked": "^0.3.6",
+    "prop-types": "^15.5.10",
+    "tinycolor2": "^1.4.1"
+  },
+  "peerDependencies": {
+    "@instructure/ui-core": ">=3.4.0",
+    "instructure-icons": ">=4.2.0",
+    "react": "^0.14.9 || ^15.6.1",
+    "react-dom": "^0.14.9 || ^15.6.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

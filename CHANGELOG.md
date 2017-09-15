@@ -120,7 +120,11 @@ To help with this upgrade, deprecated props should now emit console warnings in 
 environments. You can also run the codemod to update properties for this release:
 
 ```sh
-jscodeshift -t instructure-ui/codemods/lib/updatePropNames.js <path> --config=instructure-ui/codemods/lib/config/propNames.config.json
+npm install @instructure/ui-codemods
+```
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updatePropNames.js <path> --config=node_modules/@instructure/ui-core/config/propNames.config.json
 ```
 
 * **DateInput:** add `value` prop for controlled component support

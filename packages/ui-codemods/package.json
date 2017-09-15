@@ -1,0 +1,29 @@
+{
+  "name": "@instructure/ui-codemods",
+  "version": "3.4.0",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "npm-run-all lint test:jest",
+    "test:jest": "jest --config ./jest.config.json",
+    "lint": "eslint lib",
+    "lint:fix": "eslint lib --fix"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^20.0.4"
+  },
+  "dependencies": {
+    "jscodeshift": "^0.3.32"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

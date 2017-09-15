@@ -1,0 +1,5 @@
+**/.*
+**/__tests__
+*.config.js
+gulpfile.js
+src/

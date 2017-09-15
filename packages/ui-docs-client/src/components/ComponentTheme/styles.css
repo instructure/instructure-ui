@@ -1,0 +1,8 @@
+.root {
+  margin-top: 2rem;
+
+  code { /* stylelint-disable-line selector-max-type */
+    background: transparent;
+    border: none;
+  }
+}

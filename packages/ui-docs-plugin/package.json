@@ -1,0 +1,44 @@
+{
+  "name": "@instructure/ui-docs-plugin",
+  "version": "3.4.0",
+  "description": "A webpack plugin to generate documentation made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test npm run lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-core": "3.4.0",
+    "instructure-icons": "4.2.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1",
+    "webpack": "2.2.1"
+  },
+  "dependencies": {
+    "favicons-webpack-plugin": "0.0.7",
+    "globby": "6.1.0",
+    "gray-matter": "3.0.2",
+    "html-loader": "0.4.5",
+    "html-webpack-plugin": "2.29.0",
+    "loader-utils": "1.1.0",
+    "markdown-loader": "2.0.1",
+    "react-docgen": "2.16.0",
+    "script-ext-html-webpack-plugin": "1.8.3"
+  },
+  "peerDependencies": {
+    "@instructure/ui-docs-client": "^3.4.0",
+    "webpack": "^2.2.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

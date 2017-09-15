@@ -1,0 +1,10 @@
+.root {
+  width: 1em;
+  height: 1em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-inline-end: 3px;
+  margin-inline-start: 0;
+  border: 1px solid var(--borderColor);
+  border-radius: 3px;
+}

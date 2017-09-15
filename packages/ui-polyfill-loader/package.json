@@ -1,0 +1,29 @@
+{
+  "name": "@instructure/ui-polyfill-loader",
+  "version": "3.4.0",
+  "description": "A webpack loader that generates a customized polyfill",
+  "main": "./index.js",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test npm run lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/ui-config": "3.4.0",
+    "core-js-builder": "^2.4.1",
+    "loader-utils": "^1.1.0"
+  },
+  "peerDependencies": {
+    "webpack": "^2.0.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
