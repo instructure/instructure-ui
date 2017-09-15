@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import lorem from 'lorem-ipsum'
 
-import parseComponents from './util/parse-components'
-import parseDocs from './util/parse-docs'
+import parseComponents from './utils/parse-components'
+import parseDocs from './utils/parse-docs'
 
 import DocsApp from './components/DocsApp'
 
-import placeholderImage from './util/placeholder-image'
+import placeholderImage from './utils/placeholder-image'
 
 global.lorem = {
   sentence () {

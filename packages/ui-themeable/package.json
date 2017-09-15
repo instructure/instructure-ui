@@ -1,0 +1,49 @@
+{
+  "name": "@instructure/ui-themeable",
+  "version": "3.4.0",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "npm-run-all test:browser test:node",
+    "test:browser": "cross-env NODE_ENV=test COVERAGE=1 karma start --single-run --coverage",
+    "test:node": "node lib/index.js",
+    "test:watch": "cross-env NODE_ENV=test DEBUG=1 karma start",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
+    "generate": "./scripts/generate",
+    "clean": "rimraf lib .babel-cache",
+    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
+    "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-presets": "3.4.0",
+    "babel-cli": "6.26.0",
+    "react": "15.6.1",
+    "react-dom": "15.6.1"
+  },
+  "dependencies": {
+    "@instructure/ui-utils": "^3.4.0",
+    "bowser": "^1.7.0",
+    "deep-equal": "^1.0.1",
+    "glamor": "^2.20.37",
+    "prop-types": "^15.5.10",
+    "shortid": "^2.2.8",
+    "tinycolor2": "^1.4.1"
+  },
+  "peerDependencies": {
+    "instructure-icons": "^2.3.0 || >=3.0.0",
+    "react": "^0.14.9 || ^15.6.1",
+    "react-dom": "^0.14.9 || ^15.6.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

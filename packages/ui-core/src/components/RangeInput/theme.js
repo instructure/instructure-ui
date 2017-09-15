@@ -1,4 +1,4 @@
-import { alpha, darken } from '../../util/color'
+import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function ({ colors, typography, spacing, forms }) {
   return {

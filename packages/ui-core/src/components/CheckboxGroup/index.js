@@ -1,11 +1,12 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import Checkbox from '../Checkbox'
-import safeCloneElement from '../../util/safeCloneElement'
-import { pickProps, omitProps } from '../../util/passthroughProps'
-import matchComponentTypes from '../../util/matchComponentTypes'
 
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+
+import Checkbox from '../Checkbox'
 import FormFieldGroup from '../FormFieldGroup'
 
 /**

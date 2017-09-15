@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import themeable from '../../../themeable'
-import findDOMNode from '../../../util/dom/findDOMNode'
+
+import themeable from '@instructure/ui-themeable'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
 import styles from './styles.css'
 import theme from './theme'

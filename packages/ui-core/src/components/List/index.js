@@ -1,10 +1,11 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import themeable from '../../themeable'
-import { omitProps } from '../../util/passthroughProps'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import safeCloneElement from '../../util/safeCloneElement'
+
+import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 
 import Container from '../Container'
 import ListItem from './ListItem'

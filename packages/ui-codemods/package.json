@@ -12,7 +12,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "test": "npm-run-all lint test:jest",
-    "test:jest": "jest --config ./jest.config.json",
+    "test:jest": "jest",
     "lint": "eslint lib",
     "lint:fix": "eslint lib --fix"
   },

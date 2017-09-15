@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { omitProps } from '../../util/passthroughProps'
-import getElementType from '../../util/getElementType'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 
 import PresentationContent from '../PresentationContent'
 import ScreenReaderContent from '../ScreenReaderContent'

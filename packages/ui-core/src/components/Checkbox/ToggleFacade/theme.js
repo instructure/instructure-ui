@@ -1,4 +1,4 @@
-import { alpha } from '../../../util/color'
+import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, borders, forms, spacing, typography }) {
   return {
@@ -27,7 +27,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
   }
 }
 
-generator['canvas-a11y'] = generator['modern-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = function ({ colors }) {
   return {
     uncheckedIconColor: colors.oxford,
     background: colors.oxford,

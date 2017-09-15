@@ -1,4 +1,4 @@
-const findDeprecatedProp = require('../util/findDeprecatedProp')
+const findDeprecatedProp = require('../utils/findDeprecatedProp')
 
 /**
   * Find JSX attributes (props)

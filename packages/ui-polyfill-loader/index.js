@@ -1,14 +1,14 @@
 const path = require('path')
 const coreJSBuilder = require('core-js-builder')
 const loaderUtils = require('loader-utils')
-const { loadConfig, POLYFILLRC } = require('@instructure/ui-config')
+const loadConfig = require('@instructure/ui-presets')
 
 module.exports = function BabelPolyFillLoader () {
   this.cacheable && this.cacheable()
 
   const callback = this.async()
 
-  const options = loaderUtils.getOptions(this) || loadConfig(POLYFILLRC)
+  const options = loaderUtils.getOptions(this) || loadConfig('polyfill', require('@instructure/ui-presets/polyfill'))
 
   Promise.resolve().then(() => {
     return coreJSBuilder({

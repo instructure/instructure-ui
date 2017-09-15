@@ -46,7 +46,7 @@ new DocsPlugin({
   },
   files: {
     components: [
-      path.join(__dirname, 'lib/components/*/index.js') // only top level components
+      path.join(__dirname, 'src/components/*/index.js') // only top level components
     ],
     docs: [
       path.join(__dirname, 'README.md'),

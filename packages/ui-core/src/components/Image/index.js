@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import themeable from '../../themeable'
-import { omitProps } from '../../util/passthroughProps'
+
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Container from '../Container'
 

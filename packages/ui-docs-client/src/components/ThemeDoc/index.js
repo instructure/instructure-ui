@@ -77,7 +77,7 @@ export default class ThemeDoc extends Component {
 
     const code = `
 // before mounting your React application:
-import ${themeKey} from '@instructure/ui-core/lib/themes/${themeKey}'
+import ${themeKey} from '@instructure/ui-themes/${themeKey}'
 
 ${themeKey}.use(${params})
 `

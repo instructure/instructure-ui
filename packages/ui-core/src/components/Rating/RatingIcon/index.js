@@ -4,8 +4,8 @@ import IconStarSolid from 'instructure-icons/lib/Solid/IconStarSolid'
 import IconStarLightSolid from 'instructure-icons/lib/Solid/IconStarLightSolid'
 import classnames from 'classnames'
 
-import themeable from '../../../themeable'
-import requestAnimationFrame from '../../../util/dom/requestAnimationFrame'
+import themeable from '@instructure/ui-themeable'
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
 import Transition from '../../Transition'
 

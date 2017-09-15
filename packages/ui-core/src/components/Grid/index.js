@@ -1,12 +1,13 @@
 import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import capitalizeFirstLetter from '../../util/capitalizeFirstLetter'
-import safeCloneElement from '../../util/safeCloneElement'
-import themeable from '../../themeable'
-import matchComponentTypes from '../../util/matchComponentTypes'
-import { omitProps, pickProps } from '../../util/passthroughProps'
+
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import GridRow from './GridRow'
 

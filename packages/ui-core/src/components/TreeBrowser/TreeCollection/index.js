@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import bowser from 'bowser'
 import classnames from 'classnames'
-import themeable from '../../../themeable'
+import themeable from '@instructure/ui-themeable'
 
 import TreeButton from '../TreeButton'
 

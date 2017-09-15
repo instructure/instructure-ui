@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps } from '../../../util/passthroughProps'
-import CustomPropTypes from '../../../util/CustomPropTypes'
-import isActiveElement from '../../../util/dom/isActiveElement'
-import warning from '../../../util/warning'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import AutocompleteField from '../AutocompleteField'
 import { getOptionId } from '../util'

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import bowser from 'bowser'
 
-import themeable from '../../../themeable'
-import { omitProps, pickProps } from '../../../util/passthroughProps'
+import themeable from '@instructure/ui-themeable'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Mask from '../../Mask'
 
@@ -16,13 +16,15 @@ export default class ModalContent extends Component {
   static propTypes = {
     children: PropTypes.node, // eslint-disable-line react/require-default-props
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
-    contentRef: PropTypes.func
+    contentRef: PropTypes.func,
+    className: PropTypes.string
   }
 
   static defaultProps = {
     contentRef: function (el) {},
     size: 'auto',
-    children: null
+    children: undefined,
+    className: undefined
   }
 
   render () {

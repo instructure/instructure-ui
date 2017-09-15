@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import ${COMPONENT} from '../index'
-import { contrast } from '../../../util/color'
 
 describe('${COMPONENT}.theme', () => {
   describe('with the default theme', () => {

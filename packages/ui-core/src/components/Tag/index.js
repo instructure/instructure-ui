@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
-import themeable from '../../themeable'
-import { omitProps } from '../../util/passthroughProps'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import isActiveElement from '../../util/dom/isActiveElement'
+
+import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+
 import Container from '../Container'
 
 import styles from './styles.css'

@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import themeable from '../../themeable'
-import { pickProps, omitProps } from '../../util/passthroughProps'
-import warning from '../../util/warning'
+
+import themeable from '@instructure/ui-themeable'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import warning from '@instructure/ui-utils/lib/warning'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import Locale from '@instructure/ui-utils/lib/i18n/Locale'
 
 import DatePicker from '../DatePicker'
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 import TextInput from '../TextInput'
-import CustomPropTypes from '../../util/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
-
-import { browserTimeZone, now, parseMoment } from '../../util/time'
-import Locale from '../../util/locale'
 
 /**
   A DateInput component is used to input a date either with a
@@ -147,29 +147,29 @@ export default class DateInput extends Component {
   }
 
   timezone (props) {
-    return props.timezone || this.context.timezone || browserTimeZone()
+    return props.timezone || this.context.timezone || DateTime.browserTimeZone()
   }
 
   computeDateRelatedStateValues (props) {
     const defaultDateValue = props.dateValue === undefined ? props.defaultDateValue : props.dateValue
     let textInputValue
-    let momentValue
+    let parsedDate
     if (defaultDateValue) {
-      momentValue = parseMoment(defaultDateValue, this.locale(props), this.timezone(props))
-      textInputValue = momentValue.format(props.format)
+      parsedDate = DateTime.parse(defaultDateValue, this.locale(props), this.timezone(props))
+      textInputValue = parsedDate.format(props.format)
     } else {
       textInputValue = ''
-      momentValue = parseMoment(textInputValue, this.locale(props), this.timezone(props))
+      parsedDate = DateTime.parse(textInputValue, this.locale(props), this.timezone(props))
     }
 
     return {
       textInputValue,
-      momentValue
+      parsedDate
     }
   }
 
   getCurrentDate () {
-    return this.state.momentValue.format()
+    return this.state.parsedDate.format()
   }
 
   handleInputRef = node => {
@@ -188,33 +188,33 @@ export default class DateInput extends Component {
   }
 
   handleTextInputChange = e => {
-    const oldMoment = this.state.momentValue
+    const oldMoment = this.state.parsedDate
     const newTextValue = e.target.value
-    const newMoment = parseMoment(newTextValue, this.locale(this.props), this.timezone(this.props))
+    const newParsedDate = DateTime.parse(newTextValue, this.locale(this.props), this.timezone(this.props))
     const newMessages = []
     if (newTextValue !== '' && this.props.validationFeedback) {
       newMessages.push({
-        text: newMoment.format(this.props.format),
-        type: newMoment.isValid() ? 'success' : 'error'
+        text: newParsedDate.format(this.props.format),
+        type: newParsedDate.isValid() ? 'success' : 'error'
       })
     }
     this.setState({
       showPopover: false,
       textInputValue: newTextValue,
-      momentValue: newMoment,
+      parsedDate: newParsedDate,
       messages: newMessages
     })
 
-    this.fireOnChange(e, newMoment, newTextValue)
+    this.fireOnChange(e, newParsedDate, newTextValue)
   }
 
   handleTextInputKeyDown = e => {
     if (e.key === 'Enter') {
       e.preventDefault()
-      if (this.state.momentValue.isValid()) {
+      if (this.state.parsedDate.isValid()) {
         this.setState({
           showPopover: false,
-          textInputValue: this.state.momentValue.format(this.props.format),
+          textInputValue: this.state.parsedDate.format(this.props.format),
           messages: []
         })
       }
@@ -222,18 +222,18 @@ export default class DateInput extends Component {
   }
 
   handleDatePickerChange = (e, newValue) => {
-    const newMoment = parseMoment(newValue, this.locale(this.props), this.timezone(this.props))
+    const newDate = DateTime.parse(newValue, this.locale(this.props), this.timezone(this.props))
 
-    warning(newMoment.isValid(), `[DateInput] Unexpected date format received from DatePicker: ${newValue}`)
+    warning(newDate.isValid(), `[DateInput] Unexpected date format received from DatePicker: ${newValue}`)
 
-    const textInputValue = newMoment.format(this.props.format)
+    const textInputValue = newDate.format(this.props.format)
     this.setState({
       showPopover: false,
       textInputValue,
-      momentValue: newMoment,
+      parsedDate: newDate,
       messages: []
     })
-    this.fireOnChange(e, newMoment, textInputValue)
+    this.fireOnChange(e, newDate, textInputValue)
   }
 
   fireOnChange (e, newMoment, rawValue) {
@@ -250,9 +250,9 @@ export default class DateInput extends Component {
     const ignoredProps = ['type', 'messages', 'defaultValue', 'value', 'onChange', 'onKeyDown']
     const textInputProps = pickProps(this.props, omitProps(TextInput.propTypes, {}, ignoredProps))
 
-    let datePickerMoment = this.state.momentValue
+    let datePickerMoment = this.state.parsedDate
     if (!datePickerMoment.isValid()) {
-      datePickerMoment = now(this.locale(this.props), this.timezone(this.props))
+      datePickerMoment = DateTime.now(this.locale(this.props), this.timezone(this.props))
         .hour(0)
         .minute(0)
         .second(0)

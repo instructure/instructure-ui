@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import themeable from '../../../themeable'
-import { omitProps, pickProps } from '../../../util/passthroughProps'
+import themeable from '@instructure/ui-themeable'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -57,7 +57,7 @@ class TrayContent extends Component {
           [styles.shadow]: this.props.shadow,
           [styles[this.props.size]]: true,
           [styles[`placement--${this.props.placement}`]]: true,
-          [this.props.className]: this.props.className
+          [this.props.className]: this.props.className // eslint-disable-line react/prop-types
         })}
       >
         {this.props.children}

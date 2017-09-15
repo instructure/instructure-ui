@@ -1,7 +1,11 @@
 module.exports = {
-  presets: [[ require('@instructure/ui-config/babel/preset'), { // eslint-disable-line import/no-extraneous-dependencies
-    themeable: true
-  }]],
+  presets: [[
+    // eslint-disable-next-line import/no-extraneous-dependencies
+    require('@instructure/ui-presets/babel'),
+    {
+      themeable: true
+    }
+  ]],
   plugins: [[
     'inline-import', {
       extensions: [

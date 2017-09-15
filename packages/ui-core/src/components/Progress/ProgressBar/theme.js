@@ -1,4 +1,4 @@
-import { lighten } from '../../../util/color'
+import { lighten } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, spacing, typography }) {
   return {

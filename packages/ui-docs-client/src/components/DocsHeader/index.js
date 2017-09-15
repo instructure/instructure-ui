@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import themeable from '@instructure/ui-core/lib/themeable'
+import themeable from '@instructure/ui-themeable'
 
 import Button from '../Button'
 

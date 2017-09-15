@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import shortid from 'shortid'
 import classnames from 'classnames'
 import keycode from 'keycode'
-import themeable from '../../themeable'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { pickProps, omitProps } from '../../util/passthroughProps'
-import isActiveElement from '../../util/dom/isActiveElement'
+
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+
 import FormField from '../FormField'
 
 import IconArrowDown from './IconArrowDown'
@@ -150,7 +152,8 @@ class Select extends Component {
     * when used with the `value` prop, the component will not control its own state
     */
     onChange: PropTypes.func,
-    onBlur: PropTypes.func
+    onBlur: PropTypes.func,
+    onKeyDown: PropTypes.func
   }
   /* eslint-enable react/require-default-props */
 
@@ -161,7 +164,8 @@ class Select extends Component {
     layout: 'stacked',
     messages: [],
     disabled: false,
-    selectRef: function (select) {}
+    selectRef: function (select) {},
+    onKeyDown: undefined
   }
 
   constructor (props) {

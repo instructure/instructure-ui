@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import createChainedFunction from '../../util/createChainedFunction'
-import { pickProps } from '../../util/passthroughProps'
-import deprecated from '../../util/deprecated'
-import CustomPropTypes from '../../util/CustomPropTypes'
+
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import Portal from '../Portal'
 import Dialog from '../Dialog'

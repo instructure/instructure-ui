@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import themeable from '@instructure/ui-themeable'
+
 import Menu from '../../Menu'
 import MenuItem from '../MenuItem'
 import MenuItemSeparator from '../MenuItemSeparator'
 import MenuItemGroup from '../MenuItemGroup'
 import ContextBox from '../../ContextBox'
 import Position, { PositionTarget, PositionContent } from '../../Position'
-
-import CustomPropTypes from '../../../util/CustomPropTypes'
-import createChainedFunction from '../../../util/createChainedFunction'
-import isActiveElement from '../../../util/dom/isActiveElement'
-import containsActiveElement from '../../../util/dom/containsActiveElement'
-import themeable from '../../../themeable'
 
 import styles from './styles.css'
 import theme from './theme'

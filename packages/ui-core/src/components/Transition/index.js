@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import BaseTransition from '../../util/BaseTransition'
-import themeable from '../../themeable'
+import themeable from '@instructure/ui-themeable'
+
+import BaseTransition from './BaseTransition'
 
 import styles from './styles.css'
 

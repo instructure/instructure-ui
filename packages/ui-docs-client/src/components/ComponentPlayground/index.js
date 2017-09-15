@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import themeable from '@instructure/ui-core/lib/themeable'
+import themeable from '@instructure/ui-themeable'
 
 import Modal, { ModalBody } from '@instructure/ui-core/lib/components/Modal'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'

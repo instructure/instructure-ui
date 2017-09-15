@@ -3,15 +3,14 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import deepEqual from 'deep-equal'
 
-import themeable from '../../themeable'
-
-import ComponentIdentifier, { pick } from '../../util/ComponentIdentifier'
-import safeCloneElement from '../../util/safeCloneElement'
-import addPositionChangeListener from '../../util/dom/addPositionChangeListener'
-import shallowEqual from '../../util/shallowEqual'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import debounce from '../../util/debounce'
-import calculateElementPosition from '../../util/dom/calculateElementPosition'
+import themeable from '@instructure/ui-themeable'
+import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPositionChangeListener'
+import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import debounce from '@instructure/ui-utils/lib/debounce'
+import calculateElementPosition from '@instructure/ui-utils/lib/dom/calculateElementPosition'
 
 import Portal from '../Portal'
 

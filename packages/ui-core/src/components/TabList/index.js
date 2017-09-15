@@ -5,12 +5,11 @@ import classnames from 'classnames'
 import shortid from 'shortid'
 import keycode from 'keycode'
 
-import themeable from '../../themeable'
-
-import CustomPropTypes from '../../util/CustomPropTypes'
-import matchComponentTypes from '../../util/matchComponentTypes'
-import safeCloneElement from '../../util/safeCloneElement'
-import warning from '../../util/warning'
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import Container from '../Container'
 import Tab from './Tab'

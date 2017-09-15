@@ -1,9 +1,11 @@
 import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import themeable from '../../themeable'
-import { omitProps, pickProps } from '../../util/passthroughProps'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import themeable from '@instructure/ui-themeable'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+
 import Grid, { GridCol, GridRow } from '../Grid'
 import { FormFieldLayout } from '../FormField'
 

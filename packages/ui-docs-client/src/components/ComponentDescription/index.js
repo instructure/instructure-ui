@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import ComponentPlayground from '../ComponentPlayground'
 
-import parseDescription from '../../util/parse-description'
+import parseDescription from '../../utils/parse-description'
 
 export default class ComponentDescription extends Component {
   static propTypes = {

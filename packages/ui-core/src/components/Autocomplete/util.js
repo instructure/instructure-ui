@@ -1,5 +1,5 @@
 import { Children } from 'react'
-import warning from '../../util/warning'
+import warning from '@instructure/ui-utils/lib/warning'
 
 export function getOptionId (option) {
   if (typeof option === 'string') {

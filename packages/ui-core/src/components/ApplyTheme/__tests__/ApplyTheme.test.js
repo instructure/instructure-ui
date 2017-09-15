@@ -1,5 +1,6 @@
 import React from 'react'
-import themeable from '../../../themeable'
+import themeable from '@instructure/ui-themeable'
+
 import ApplyTheme from '../index'
 
 describe('<ApplyTheme />', () => {

@@ -19,7 +19,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
   }
 }
 
-generator['canvas-a11y'] = generator['modern-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = function ({ colors }) {
   return {
     color: colors.licorice,
     borderColor: colors.licorice

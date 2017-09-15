@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import styles from './styles.css'
-import themeable from '../../themeable'
-import theme from './theme'
+
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+
 import Autocomplete from '../Autocomplete'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { pickProps, omitProps } from '../../util/passthroughProps'
-import { browserTimeZone, now, parseMoment } from '../../util/time'
-import Locale from '../../util/locale'
+
+import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---
@@ -147,7 +150,7 @@ class TimeInput extends Component {
   }
 
   timezone () {
-    return this.props.timezone || this.context.timezone || browserTimeZone()
+    return this.props.timezone || this.context.timezone || DateTime.browserTimeZone()
   }
 
   render () {
@@ -192,9 +195,9 @@ class TimeInput extends Component {
     let baseDate
     const baseValue = value || defaultValue
     if (baseValue) {
-      baseDate = parseMoment(baseValue, locale, timezone)
+      baseDate = DateTime.parse(baseValue, locale, timezone)
     } else {
-      baseDate = now(locale, timezone)
+      baseDate = DateTime.now(locale, timezone)
     }
     return baseDate.second(0).millisecond(0)
   }
@@ -207,7 +210,7 @@ class TimeInput extends Component {
 
     return {
       value: value,
-      label: parseMoment(value, locale, timezone).format(format)
+      label: DateTime.parse(value, locale, timezone).format(format)
     }
   }
 

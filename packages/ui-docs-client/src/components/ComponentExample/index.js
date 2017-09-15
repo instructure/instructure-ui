@@ -6,7 +6,7 @@ import classnames from 'classnames'
 import { transform } from 'babel-standalone'
 
 import ApplyTheme from '@instructure/ui-core/lib/components/ApplyTheme'
-import themeable from '@instructure/ui-core/lib/themeable'
+import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'

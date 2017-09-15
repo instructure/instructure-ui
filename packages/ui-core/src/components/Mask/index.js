@@ -4,12 +4,11 @@ import keycode from 'keycode'
 import classnames from 'classnames'
 import noScroll from 'no-scroll'
 
-import themeable from '../../themeable'
-
-import createChainedFunction from '../../util/createChainedFunction'
-import ensureSingleChild from '../../util/ensureSingleChild'
-import contains from '../../util/dom/contains'
-import { omitProps } from '../../util/passthroughProps'
+import themeable from '@instructure/ui-themeable'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import contains from '@instructure/ui-utils/lib/dom/contains'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -86,14 +85,17 @@ class Mask extends Component {
   static propTypes = {
     onDismiss: PropTypes.func,
     placement: PropTypes.oneOf(['top', 'center', 'bottom']),
-    /**
-      Cover the viewport
-    **/
-    fullScreen: PropTypes.bool
+    fullScreen: PropTypes.bool,
+    children: PropTypes.node,
+    onClick: PropTypes.func,
+    onKeyUp: PropTypes.func
   }
 
   static defaultProps = {
-    onDismiss: null,
+    children: undefined,
+    onClick: undefined,
+    onKeyUp: undefined,
+    onDismiss: undefined,
     placement: 'center',
     fullScreen: false
   }
@@ -111,7 +113,7 @@ class Mask extends Component {
   }
 
   dismiss = event => {
-    if (this.props.onDismiss) {
+    if (typeof this.props.onDismiss === 'function') {
       event.preventDefault()
       this.props.onDismiss(event)
     }
@@ -144,7 +146,9 @@ class Mask extends Component {
 
     let props = omitProps(this.props, Mask.propTypes)
 
-    if (this.props.onDismiss) {
+    if (typeof this.props.onDismiss === 'function' ||
+      typeof this.props.onClick === 'function' ||
+      typeof this.props.onKeyUp === 'function') {
       props = {
         ...props,
         onClick: createChainedFunction(this.handleClick, this.props.onClick),

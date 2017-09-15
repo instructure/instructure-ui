@@ -1,4 +1,4 @@
-const getClassDeclarations = require('../util/getClassDeclarations')
+const getClassDeclarations = require('../utils/getClassDeclarations')
 
 /**
   * Insert a new @deprecated decorator for a Component,

@@ -2,12 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import themeable from '@instructure/ui-themeable'
+
 import ContextBox from '../../ContextBox'
 import Spinner from '../../Spinner'
 
 import { getOptionId } from '../util'
 
-import themeable from '../../../themeable'
 import styles from './styles.css'
 import theme from './theme'
 

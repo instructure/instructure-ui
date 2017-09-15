@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import CustomPropTypes from '../../util/CustomPropTypes'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
-import themeable from '../../themeable'
-import {browserTimeZone, parseMoment, now} from '../../util/time'
-import Locale from '../../util/locale'
+import themeable from '@instructure/ui-themeable'
+import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import Locale from '@instructure/ui-utils/lib/i18n/Locale'
 
 import PresentationContent from '../PresentationContent'
 import ScreenReaderContent from '../ScreenReaderContent'
@@ -137,7 +137,7 @@ export default class DatePicker extends Component {
 
     let todayValue = props.todayValue
     if (todayValue == null) {
-      todayValue = now(this.locale(), this.timezone())
+      todayValue = DateTime.now(this.locale(), this.timezone())
         .hour(0)
         .minute(0)
         .second(0)
@@ -165,7 +165,7 @@ export default class DatePicker extends Component {
   }
 
   timezone () {
-    return this.props.timezone || this.context.timezone || browserTimeZone()
+    return this.props.timezone || this.context.timezone || DateTime.browserTimeZone()
   }
 
   todayValue () {
@@ -222,7 +222,7 @@ export default class DatePicker extends Component {
     e.preventDefault()
     e.stopPropagation()
 
-    const focusedMoment = parseMoment(this.state.focusedValue, this.locale(), this.timezone())
+    const focusedMoment = DateTime.parse(this.state.focusedValue, this.locale(), this.timezone())
     switch (e.keyCode) {
       case (left):
         focusedMoment.subtract(1, 'days')
@@ -244,11 +244,11 @@ export default class DatePicker extends Component {
   }
 
   updateSlider (newValueString) {
-    const newValueMoment = parseMoment(newValueString, this.locale(), this.timezone())
+    const newValueMoment = DateTime.parse(newValueString, this.locale(), this.timezone())
     const newMonth = newValueMoment.month()
     const newYear = newValueMoment.year()
 
-    const renderedMoment = parseMoment(this.state.renderedValue, this.locale(), this.timezone())
+    const renderedMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
     const renderedMonth = renderedMoment.month()
     const renderedYear = renderedMoment.year()
 
@@ -272,14 +272,14 @@ export default class DatePicker extends Component {
   }
 
   handleSliderPrev = (e) => {
-    const sliderMoment = parseMoment(this.state.renderedValue, this.locale(), this.timezone())
+    const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
     const sliderString = sliderMoment.subtract(1, 'months').format()
     this.setState({renderedValue: sliderString})
     this.fireRenderedChange(e, sliderString)
   }
 
   handleSliderNext = (e) => {
-    const sliderMoment = parseMoment(this.state.renderedValue, this.locale(), this.timezone())
+    const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
     const sliderString = sliderMoment.add(1, 'months').format()
     this.setState({renderedValue: sliderString})
     this.fireRenderedChange(e, sliderString)
@@ -390,10 +390,10 @@ export default class DatePicker extends Component {
   render () {
     const locale = this.locale()
     const timezone = this.timezone()
-    const today = parseMoment(this.state.todayValue, locale, timezone)
-    const selected = parseMoment(this.state.selectedValue, locale, timezone)
-    const rendered = parseMoment(this.state.renderedValue, locale, timezone)
-    const focused = parseMoment(this.state.focusedValue, locale, timezone)
+    const today = DateTime.parse(this.state.todayValue, locale, timezone)
+    const selected = DateTime.parse(this.state.selectedValue, locale, timezone)
+    const rendered = DateTime.parse(this.state.renderedValue, locale, timezone)
+    const focused = DateTime.parse(this.state.focusedValue, locale, timezone)
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (

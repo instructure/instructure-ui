@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import IconLeft from 'instructure-icons/lib/Solid/IconArrowOpenLeftSolid'
 import IconRight from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
-import themeable from '../../themeable'
-import { omitProps } from '../../util/passthroughProps'
-import CustomPropTypes from '../../util/CustomPropTypes'
+
+import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import Container from '../Container'
 import Button from '../Button'

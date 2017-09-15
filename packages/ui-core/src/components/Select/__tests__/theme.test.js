@@ -1,4 +1,4 @@
-import { contrast } from '../../../util/color'
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import Select from '../index'
 
 describe('Select.theme', () => {

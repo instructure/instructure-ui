@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import themeable from '@instructure/ui-core/lib/themeable'
+import themeable from '@instructure/ui-themeable'
 
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
 import Link from '@instructure/ui-core/lib/components/Link'

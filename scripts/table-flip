@@ -13,4 +13,4 @@ yarn cache clean
 
 echo "-- installing dependencies"
 yarn install
-yarn run bootstrap
+yarn bootstrap

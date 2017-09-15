@@ -11,18 +11,11 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test npm run lint",
+    "test": "cross-env NODE_ENV=test yarn lint",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-core": "3.4.0",
-    "instructure-icons": "4.2.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "webpack": "2.2.1"
-  },
   "dependencies": {
     "favicons-webpack-plugin": "0.0.7",
     "globby": "6.1.0",

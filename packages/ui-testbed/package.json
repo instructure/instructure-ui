@@ -1,0 +1,42 @@
+{
+  "name": "@instructure/ui-testbed",
+  "version": "3.4.0",
+  "description": "A test utility library for UI components",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test yarn lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axe-core": "^2.4.1",
+    "chai": "^4.1.0",
+    "chai-enzyme": "^0.8.0",
+    "chai-string": "^1.4.0",
+    "enzyme": "^2.9.1",
+    "glamor": "^2.20.37",
+    "keycode": "^2.1.8",
+    "lodash.reject": "^4.6.0",
+    "mocha": "^3.4.2",
+    "mock-raf": "^1.0.0",
+    "react-addons-test-utils": "^15.6.0",
+    "react-test-renderer": "^15.6.1",
+    "sinon": "^2.4.1",
+    "sinon-chai": "^2.12.0"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

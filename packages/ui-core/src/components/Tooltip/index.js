@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
+
+import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 import ScreenReaderContent from '../ScreenReaderContent'
-import getElementType from '../../util/getElementType'
-import CustomPropTypes from '../../util/CustomPropTypes'
 import TooltipContent from './TooltipContent'
-import { omitProps } from '../../util/passthroughProps'
-import ensureSingleChild from '../../util/ensureSingleChild'
 
 /**
 ---

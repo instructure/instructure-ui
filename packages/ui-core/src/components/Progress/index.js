@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+
 import ProgressBar from './ProgressBar'
 import ProgressCircle from './ProgressCircle'
-import CustomPropTypes from '../../util/CustomPropTypes'
 
 /**
   Progress is an easy-to-customize progress bar or circle (a.k.a, doughnut)

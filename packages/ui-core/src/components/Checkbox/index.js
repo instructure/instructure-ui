@@ -3,11 +3,12 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 import classnames from 'classnames'
 import shortid from 'shortid'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { omitProps } from '../../util/passthroughProps'
-import createChainedFunction from '../../util/createChainedFunction'
-import isActiveElement from '../../util/dom/isActiveElement'
-import themeable from '../../themeable'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import themeable from '@instructure/ui-themeable'
 
 import { FormFieldMessages } from '../FormField'
 

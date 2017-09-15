@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { omitProps } from '../../../util/passthroughProps'
+
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+
 import Button from '../../Button'
 
 export default class PaginationButton extends Component {

@@ -223,11 +223,6 @@ describe('<NumberInput />', () => {
       expect(subject.instance().locale).to.equal('de')
     })
 
-    it('uses the browser locale if no locale is provided', () => {
-      const subject = testbed.render()
-      expect(subject.instance().locale).to.equal('en')
-    })
-
     it('formats default values in accordance with the locale', () => {
       const subject = testbed.render({ defaultValue: '2.5', locale: 'de' })
       expect(subject.find('input').node.value).to.equal('2,5')

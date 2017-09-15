@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import List from '../index'
-import { contrast } from '../../../util/color'
 
 describe('List.theme', () => {
   describe('with the default theme', () => {

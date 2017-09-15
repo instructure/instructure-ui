@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import ensureSingleChild from '../../util/ensureSingleChild'
+import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 
 /**
 ---

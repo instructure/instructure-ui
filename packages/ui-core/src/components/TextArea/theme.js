@@ -1,4 +1,4 @@
-import { alpha } from '../../util/color'
+import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, borders, spacing, typography, forms }) {
   return {
@@ -47,24 +47,5 @@ generator.canvas = function (variables) {
     color: variables['ic-brand-font-color-dark'],
     focusBorderColor: variables['ic-brand-primary'],
     focusOutlineColor: alpha(variables['ic-brand-primary'], 50)
-  }
-}
-
-generator.modern = function ({ colors, borders, typography }) {
-  return {
-    borderTopColor: 'transparent',
-    borderRightColor: 'transparent',
-    borderBottomColor: colors.slate,
-    borderLeftColor: 'transparent',
-    borderRadius: 'none',
-    placeholderColor: colors.ash,
-    focusBorderTopColor: 'transparent',
-    focusBorderRightColor: 'transparent',
-    focusBorderLeftColor: 'transparent',
-    focusOutlineColor: 'transparent',
-    errorBorderColor: 'transparent',
-    errorOutlineColor: 'transparent',
-    boxShadowColor: colors.brand,
-    boxShadowErrorColor: colors.crimson
   }
 }

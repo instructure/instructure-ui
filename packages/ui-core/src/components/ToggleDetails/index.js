@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import shortid from 'shortid'
 import classnames from 'classnames'
+
 import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
 import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
 
-import CustomPropTypes from '../../util/CustomPropTypes'
-import themeable from '../../themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'

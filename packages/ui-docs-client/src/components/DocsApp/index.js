@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 
-import themeable from '@instructure/ui-core/lib/themeable'
+import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 import Select from '@instructure/ui-core/lib/components/Select'
 import Tray from '@instructure/ui-core/lib/components/Tray'
 
-import { getRegisteredThemes } from '@instructure/ui-core/lib/themeable/registry'
+import { getRegisteredThemes } from '@instructure/ui-themeable/lib/registry'
 
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
 import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'

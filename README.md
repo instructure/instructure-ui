@@ -13,7 +13,17 @@ published as separate packages on NPM:
 
 [![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-core)](https://www.npmjs.com/package/@instructure/ui-core) &ndash; UI component library
 
-[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-config)](https://www.npmjs.com/package/@instructure/ui-config) &ndash; Shared build config for UI libraries
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-utils)](https://www.npmjs.com/package/@instructure/ui-utils) &ndash; UI utilities
+
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-themeable)](https://www.npmjs.com/package/@instructure/ui-themeable) &ndash; A library for applying themes to UI components
+
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-themes)](https://www.npmjs.com/package/@instructure/ui-themes) &ndash; Themes that can be applied to themeable components
+
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/babel-plugin-themeable-styles)](https://www.npmjs.com/package/@instructure/babel-plugin-themeable-styles) &ndash; A babel plugin to transform CSS imports for themeable components
+
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-testbed)](https://www.npmjs.com/package/@instructure/ui-testbed) &ndash; A testbed and utilities for writing UI tests
+
+[![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-presets)](https://www.npmjs.com/package/@instructure/ui-presets) &ndash; Shared build config for UI libraries
 
 [![npm](https://img.shields.io/npm/v/@blueprintjs/core.svg?label=@instructure/ui-codemods)](https://www.npmjs.com/package/@instructure/ui-codemods) &ndash; "Codemod" scripts to help with upgrades that contain API changes
 

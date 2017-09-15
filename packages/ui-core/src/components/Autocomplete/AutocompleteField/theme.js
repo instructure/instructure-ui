@@ -1,4 +1,4 @@
-import { alpha } from '../../../util/color'
+import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, typography, borders, spacing, stacking, forms }) {
   return {

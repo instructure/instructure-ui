@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { pickProps } from '../../util/passthroughProps'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+
 import FormFieldLayout from './FormFieldLayout'
 
 /**

@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import AutocompleteOptionsList from '../index'
-import { contrast } from '../../../../util/color'
 
 describe('AutocompleteField.theme', () => {
   describe('with the canvas theme', () => {

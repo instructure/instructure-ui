@@ -1,1 +1,1 @@
-module.exports = require('./packages/ui-config/stylelint')
+module.exports = require('./packages/ui-presets/stylelint')

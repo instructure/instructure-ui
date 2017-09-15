@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import themeable from '../../../themeable'
+
+import themeable from '@instructure/ui-themeable'
+import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
-
-import capitalizeFirstLetter from '../../../util/capitalizeFirstLetter'
-import { omitProps } from '../../../util/passthroughProps'
 
 // TODO: get numcols from theme config
 const COL_WIDTHS = ['auto', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]

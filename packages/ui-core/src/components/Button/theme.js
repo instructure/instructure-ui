@@ -1,4 +1,4 @@
-import { alpha, darken } from '../../util/color'
+import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
 
 const activeShadow = 'inset 0 0 3px 1px'
 const focusShadow = 'inset 0 0 0 1px'
@@ -12,16 +12,6 @@ const buttonVariant = function (style, mainColor, textColor) {
     [`${style}HoverBackground`]: darken(mainColor, 10),
     [`${style}ActiveBackground`]: darken(mainColor, 10),
     [`${style}ActiveBoxShadow`]: `${activeShadow} ${darken(mainColor, 20, 0.45)}`
-  }
-}
-
-const modernButtonVariant = function (style, bgColor, textColor) {
-  return {
-    [`${style}Background`]: bgColor,
-    [`${style}Color`]: textColor,
-    [`${style}HoverBackground`]: darken(bgColor, 10),
-    [`${style}ActiveBackground`]: darken(bgColor, 30),
-    [`${style}ActiveBoxShadow`]: 'none'
   }
 }
 
@@ -167,50 +157,5 @@ generator['canvas-a11y'] = function ({ colors }) {
   return {
     linkTextDecoration: 'underline',
     linkFocusBorderColor: colors.brand
-  }
-}
-
-generator['modern'] = function ({ borders, colors, spacing, typography }) {
-  return {
-    borderRadius: borders.radiusXXLarge,
-    borderStyle: 'none',
-
-    letterSpacing: '1.2px',
-    textTransform: 'uppercase',
-    fontWeight: typography.fontWeightBold,
-
-    smallFontSize: typography.fontSizeXSmall,
-
-    mediumFontSize: typography.fontSizeXSmall,
-
-    largeFontSize: typography.fontSizeMedium,
-
-    focusBorderRadius: borders.radiusXXLarge,
-
-    transform: 'none',
-    hoverTransform: 'scale(1.1) translateZ(0)',
-
-    ...modernButtonVariant(
-      'default',
-      colors.slate,
-      colors.white
-    ),
-
-    ghostHoverBackground: 'transparent',
-    ghostActiveBoxShadow: 'none',
-    ghostBorderStyle: borders.style,
-
-    ghostInverseHoverBackground: 'transparent',
-    ghostInverseActiveBoxShadow: 'none',
-    ghostInverseBorderStyle: borders.style
-  }
-}
-
-generator['modern-a11y'] = function (vars) {
-  return {
-    ...generator['modern'](vars),
-    linkTextDecoration: 'underline',
-    linkFocusBorderColor: vars.colors.brand,
-    borderStyle: vars.borders.style
   }
 }

@@ -1,4 +1,4 @@
-import { darken } from '../../util/color'
+import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function ({ colors, borders, shadows }) {
   return {

@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import TimeInput from '../index'
-import { contrast } from '../../../util/color'
 
 describe('TimeInput.theme', () => {
   describe('with the default theme', () => {

@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import Tag from '../index'
-import { contrast } from '../../../util/color'
 
 describe('Tag.theme', () => {
   describe('with the default theme', () => {

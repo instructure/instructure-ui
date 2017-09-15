@@ -3,8 +3,8 @@ const webpack = require('webpack')
 
 const DocsPlugin = require('@instructure/ui-docs-plugin')
 
-const env = process.env.NODE_ENV
-const debug = Boolean(process.env.DEBUG) || env === 'development'
+const ENV = process.env.NODE_ENV
+const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
 
 const paths = {
   root: path.join(__dirname, '../'),
@@ -13,8 +13,8 @@ const paths = {
 }
 
 module.exports = {
-  cache: debug,
-  bail: !debug,
+  cache: false,
+  bail: !DEBUG,
   entry: {
     common: [
       '@instructure/ui-polyfill-loader!',
@@ -23,8 +23,8 @@ module.exports = {
       'moment'
     ],
     'instructure-ui': [
-      path.join(paths.lib, 'src/themes'),
-      path.join(paths.lib, 'src')
+      '@instructure/ui-themes',
+      '@instructure/ui-core'
     ]
   },
   output: {
@@ -39,16 +39,16 @@ module.exports = {
   },
   plugins: getPlugins(),
   module: {
-    rules: require('@instructure/ui-config/webpack/module/rules')
+    rules: require('@instructure/ui-presets/webpack/module/rules')
   },
-  resolveLoader: require('@instructure/ui-config/webpack/resolveLoader'),
+  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
   devtool: 'cheap-module-source-map'
 }
 
 function getPlugins () {
   const pkg = require('../ui-core/package.json')
 
-  let plugins = require('@instructure/ui-config/webpack/plugins')
+  let plugins = require('@instructure/ui-presets/webpack/plugins')
 
   plugins = plugins.concat([
     new DocsPlugin({
@@ -92,7 +92,7 @@ function getPlugins () {
     })
   ])
 
-  if (!debug) {
+  if (!DEBUG) {
     plugins = plugins.concat([
       new webpack.optimize.UglifyJsPlugin({
         sourceMap: true,

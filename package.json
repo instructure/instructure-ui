@@ -1,9 +1,8 @@
 {
   "name": "instructure-ui",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "A monorepo for UI libraries made by Instructure Inc.",
   "private": true,
   "version": "3.4.0",
-  "description": "A monorepo for UI libraries made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -15,10 +14,10 @@
     "packages/*"
   ],
   "scripts": {
-    "prestart": "yarn run bootstrap",
+    "prestart": "yarn bootstrap",
     "start": "lerna run start --stream",
     "start:watch": "lerna run start:watch --stream",
-    "pretest": "yarn run bootstrap",
+    "pretest": "yarn bootstrap",
     "test": "npm-run-all lint:commit test:packages",
     "test:watch": "lerna run test:watch --stream",
     "test:packages": "lerna run test --stream",
@@ -27,10 +26,11 @@
     "lint:commit": "rm -f .git/validate-commit-msg && git log -1 --pretty=%B > .git/validate-commit-msg && validate-commit-msg validate-commit-msg",
     "generate": "./scripts/generate",
     "commit": "git-cz",
-    "bootstrap": "npm-run-all clean:modules bootstrap:packages clean:packages build",
+    "bootstrap": "npm-run-all clean:modules bootstrap:packages clean build",
     "bootstrap:packages": "lerna bootstrap",
-    "build": "lerna run build --stream",
-    "build:dev": "lerna run build:dev --stream",
+    "build": "lerna run build --stream --ignore __docs__",
+    "build:dev": "lerna run build:dev --stream --ignore __docs__",
+    "clean": "npm-run-all clean:packages",
     "clean:packages": "lerna run clean",
     "clean:modules": "lerna clean --yes",
     "fetch": "git fetch origin --tags --force",
@@ -38,7 +38,7 @@
     "bump:packages": "lerna publish --skip-git --skip-npm --force-publish=* --repo-version $npm_package_version",
     "bump:commit": "git commit -a -m \"chore(release): $npm_package_version\"",
     "bump": "npm-run-all fetch bump:repo bump:packages bump:commit",
-    "prerelease": "yarn run test",
+    "prerelease": "yarn test",
     "release": "./scripts/release",
     "deploy": "lerna run deploy"
   },
@@ -47,20 +47,19 @@
     "@instructure/conventional-changelog": "1.0.0",
     "commitizen": "2.9.6",
     "cross-env": "5.0.5",
-    "eslint": "3.19.0",
     "lerna": "2.1.2",
     "npm-run-all": "4.1.1",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
     "rimraf": "2.6.1",
     "standard-version": "4.2.0",
-    "stylelint": "8.1.1",
     "validate-commit-msg": "2.14.0"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/@instructure/conventional-changelog"
     }
+  },
+  "engines": {
+    "yarn": ">=0.28.4"
   },
   "standard-version": {
     "skip": {

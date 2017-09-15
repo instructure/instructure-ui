@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import debounce from '@instructure/ui-core/lib/util/debounce'
+import debounce from '@instructure/ui-utils/lib/debounce'
 
 import CodeMirrorEditor from '../CodeMirrorEditor'
 

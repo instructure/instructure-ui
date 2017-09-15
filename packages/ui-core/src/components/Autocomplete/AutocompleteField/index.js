@@ -4,11 +4,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import shortid from 'shortid'
 
-import themeable from '../../../themeable'
-import CustomPropTypes from '../../../util/CustomPropTypes'
-import { omitProps, pickProps } from '../../../util/passthroughProps'
-import containsActiveElement from '../../../util/dom/containsActiveElement'
-import findDOMNode from '../../../util/dom/findDOMNode'
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
 import AutocompleteOptionsList from '../AutocompleteOptionsList'
 import Position, { PositionContent } from '../../Position'
@@ -137,7 +137,9 @@ class AutocompleteField extends Component {
     /**
     * should the menu be closed when a selection happens
     */
-    closeOnSelect: PropTypes.bool
+    closeOnSelect: PropTypes.bool,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import themeable from '../../themeable'
+
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import themeable from '@instructure/ui-themeable'
 
 import MetricsListItem from './MetricsListItem'
 

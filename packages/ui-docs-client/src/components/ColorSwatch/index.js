@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { isValid } from '@instructure/ui-core/lib/util/color'
-import themeable from '@instructure/ui-core/lib/themeable'
+import { isValid } from '@instructure/ui-themeable/lib/utils/color'
+import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'

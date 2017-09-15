@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import FileDrop from '../index'
-import { contrast } from '../../../util/color'
 
 describe('FileDrop.theme', () => {
   describe('with the canvas theme', () => {

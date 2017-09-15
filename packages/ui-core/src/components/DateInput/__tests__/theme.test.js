@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import DateInput from '../index'
-import { contrast } from '../../../util/color'
 
 describe('DateInput.theme', () => {
   describe('with the canvas theme', () => {

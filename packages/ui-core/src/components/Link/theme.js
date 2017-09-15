@@ -1,4 +1,4 @@
-import { darken } from '../../util/color'
+import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, typography, borders }) {
   return {
@@ -17,7 +17,7 @@ export default function generator ({ colors, typography, borders }) {
   }
 }
 
-generator['canvas-a11y'] = generator['modern-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = function ({ colors }) {
   return {
     textDecoration: 'underline',
     focusOutlineColor: colors.brand

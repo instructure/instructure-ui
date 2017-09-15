@@ -42,13 +42,3 @@ generator.canvas = function (variables) {
     labelColor: variables['ic-brand-font-color-dark']
   }
 }
-
-generator.modern = function ({ colors, borders }) {
-  return {
-    borderRadius: borders.radiusSmall,
-    hoverBorderColor: colors.electric,
-    checkedBackground: colors.electric,
-    checkedBorderColor: colors.electric,
-    focusBorderColor: 'transparent'
-  }
-}

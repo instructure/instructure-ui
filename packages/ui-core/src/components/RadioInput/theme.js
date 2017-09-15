@@ -32,7 +32,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
   }
 }
 
-generator['canvas-a11y'] = generator['modern-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = function ({ colors }) {
   return {
     toggleBackgroundOff: colors.oxford,
     borderColor: colors.oxford
@@ -43,14 +43,5 @@ generator.canvas = function (variables) {
   return {
     focusBorderColor: variables['ic-brand-primary'],
     labelColor: variables['ic-brand-font-color-dark']
-  }
-}
-
-generator.modern = function ({ colors, borders }) {
-  return {
-    borderColor: colors.oxford,
-    hoverBorderColor: colors.electric,
-    focusBorderColor: 'transparent',
-    controlSize: '0.375rem'
   }
 }

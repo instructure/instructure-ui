@@ -1,10 +1,10 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import {ThemeContextTypes, makeThemeContext, getThemeContext} from '../../themeable/ThemeContextTypes'
-import mergeDeep from '../../themeable/util/mergeDeep'
-import warning from '../../util/warning'
-import themeable from '../../themeable'
-import ensureSingleChild from '../../util/ensureSingleChild'
+import {ThemeContextTypes, makeThemeContext, getThemeContext} from '@instructure/ui-themeable/lib/ThemeContextTypes'
+import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
+import warning from '@instructure/ui-utils/lib/warning'
+import themeable from '@instructure/ui-themeable'
+import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 
 /**
 ---

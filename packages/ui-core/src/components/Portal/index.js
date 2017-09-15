@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import shallowEqual from '../../util/shallowEqual'
-import CustomPropTypes from '../../util/CustomPropTypes'
-import deprecated from '../../util/deprecated'
+
+import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 /**
 ---

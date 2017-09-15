@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import MenuItemGroup from '../index'
-import { contrast } from '../../../../util/color'
 
 describe('MenuItemGroup.theme', () => {
   describe('with the canvas theme', () => {

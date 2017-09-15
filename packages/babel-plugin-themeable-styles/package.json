@@ -1,0 +1,30 @@
+{
+  "name": "@instructure/babel-plugin-themeable-styles",
+  "version": "3.4.0",
+  "description": "A babel plugin to transform CSS imports for themeable components",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "cross-env NODE_ENV=test yarn lint",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/postcss-themeable-styles": "3.4.0",
+    "babel-template": "^6.26.0",
+    "css-modules-require-hook": "^4.2.2"
+  },
+  "peerDependencies": {
+    "babel-core": "^6.26.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import Badge from '../index'
-import { contrast } from '../../../util/color'
 
 describe('Badge.theme', () => {
   describe('with the default theme', () => {

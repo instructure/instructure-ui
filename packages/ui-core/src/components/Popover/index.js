@@ -1,20 +1,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
+import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut'
+import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import warning from '@instructure/ui-utils/lib/warning'
+
 import ContextBox from '../ContextBox'
 import Position, { PositionTarget, PositionContent } from '../Position'
 import Dialog from '../Dialog'
 import CloseButton from '../CloseButton'
-
-import CustomPropTypes from '../../util/CustomPropTypes'
-import ComponentIdentifier, { pick } from '../../util/ComponentIdentifier'
-import createChainedFunction from '../../util/createChainedFunction'
-import safeCloneElement from '../../util/safeCloneElement'
-import shallowEqual from '../../util/shallowEqual'
-import handleMouseOverOut from '../../util/handleMouseOverOut'
-import { pickProps } from '../../util/passthroughProps'
-import deprecated from '../../util/deprecated'
-import warning from '../../util/warning'
 
 class PopoverTrigger extends ComponentIdentifier {
   static displayName = 'PopoverTrigger'

@@ -1,5 +1,6 @@
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import Pill from '../index'
-import { contrast } from '../../../util/color'
 
 describe('Pill.theme', () => {
   describe('with the canvas theme', () => {

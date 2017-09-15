@@ -3,10 +3,12 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 import IconFolderSolid from 'instructure-icons/lib/Solid/IconFolderSolid'
 import IconDocumentSolid from 'instructure-icons/lib/Solid/IconDocumentSolid'
-import themeable from '../../themeable'
+
+import themeable from '@instructure/ui-themeable'
+import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+
 import TreeCollection from './TreeCollection'
-import { pickProps } from '../../util/passthroughProps'
-import CustomPropTypes from '../../util/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'

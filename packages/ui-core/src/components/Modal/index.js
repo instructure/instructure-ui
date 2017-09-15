@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+
 import ModalContent from './ModalContent'
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
-
-import CustomPropTypes from '../../util/CustomPropTypes'
-import { omitProps, pickProps } from '../../util/passthroughProps'
-import createChainedFunction from '../../util/createChainedFunction'
-import deprecated from '../../util/deprecated'
 
 import Portal from '../Portal'
 import Dialog from '../Dialog'

@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-module.exports = require('@instructure/ui-config/postcss')({
+module.exports = require('@instructure/ui-presets/postcss')({
   before: {
     plugin: 'postcss-nested',
     insert: [

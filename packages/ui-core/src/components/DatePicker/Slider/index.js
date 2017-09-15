@@ -3,10 +3,10 @@ import PropTypes from 'prop-types'
 
 import IconArrowOpenLeftSolid from 'instructure-icons/lib/Solid/IconArrowOpenLeftSolid'
 import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import themeable from '@instructure/ui-themeable'
 
 import AccessibleContent from '../../AccessibleContent'
 import Button from '../../Button'
-import themeable from '../../../themeable'
 
 import styles from './styles.css'
 import theme from './theme'

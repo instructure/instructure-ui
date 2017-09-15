@@ -10,9 +10,9 @@ import IconCompleteSolid from 'instructure-icons/lib/Solid/IconCompleteSolid'
 import IconInfoSolid from 'instructure-icons/lib/Solid/IconInfoSolid'
 import IconWarningSolid from 'instructure-icons/lib/Solid/IconWarningSolid'
 
-import themeable from '../../themeable'
-import deprecated from '../../util/deprecated'
-import CustomPropTypes from '../../util/CustomPropTypes'
+import themeable from '@instructure/ui-themeable'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import Container from '../Container'
 import CloseButton from '../CloseButton'

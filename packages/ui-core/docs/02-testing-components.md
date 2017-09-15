@@ -1,12 +1,12 @@
 ### The TL;DR on writing tests:
 
-1. Run `npm run test:watch`.
-2. Edit the tests that were generated for you in `lib/components/MyComponent/__tests__`.
+1. Run `yarn test:watch --scope @instructure/ui-core`.
+2. Edit the tests that were generated for you in `packages/ui-core/src/components/MyComponent/__tests__`.
 3. Watch your tests run in the console.
 
 ### The Details
 
-Component tests are written using the [mocha](https://mochajs.org/) testing framework and [chai](http://chaijs.com/api/bdd/) bdd style assertions. A test bed utility that is provided as a global function `Testbed` (defined in `tests/util/testbed.js`)
+Component tests are written using the [mocha](https://mochajs.org/) testing framework and [chai](http://chaijs.com/api/bdd/) bdd style assertions. A test bed utility that is provided as a global function `Testbed` (defined in `packages/ui-testbed`)
 handles all of the common setup and teardown for your test. It also provides some utilities for
 rendering components, updating props and stubbing out functions.
 
@@ -85,5 +85,4 @@ A custom chai assertion is also provided that wraps the [axe-core](https://githu
 Code coverage thresholds are configured in `karma.config.js`. If coverage numbers go below the configured values, the build
 will fail.
 
-When you run `npm test` a detailed coverage report is generated in `js-coverage/index.html`.
-
+When you run `yarn test` a detailed coverage report is generated in the `coverage/` directory.

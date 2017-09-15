@@ -1,4 +1,4 @@
-import { contrast } from '../../../../util/color'
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import CheckboxFacade from '../index'
 
 describe('CheckboxFacade.theme', () => {
@@ -7,19 +7,6 @@ describe('CheckboxFacade.theme', () => {
 
     it('should ensure checkbox meets 3:1 contrast', () => {
       expect(contrast(variables.color, variables.checkedBackground))
-        .to.be.above(3)
-    })
-  })
-
-  describe('with the modern theme', () => {
-    const variables = CheckboxFacade.generateTheme('modern')
-
-    it('should ensure checkbox meets 3:1 contrast', () => {
-      expect(contrast(variables.color, variables.checkedBackground))
-        .to.be.above(3)
-      expect(contrast(variables.labelColor, variables.background))
-        .to.be.above(3)
-      expect(contrast(variables.checkedLabelColor, variables.background))
         .to.be.above(3)
     })
   })

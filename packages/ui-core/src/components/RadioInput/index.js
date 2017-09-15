@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import shortid from 'shortid'
-import themeable from '../../themeable'
-import { omitProps } from '../../util/passthroughProps'
-import isActiveElement from '../../util/dom/isActiveElement'
+
+import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 
 import styles from './styles.css'
 import theme from './theme'

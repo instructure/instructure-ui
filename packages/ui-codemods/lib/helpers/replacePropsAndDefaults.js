@@ -1,5 +1,5 @@
-const getClassDeclarations = require('../util/getClassDeclarations')
-const findDeprecatedProp = require('../util/findDeprecatedProp')
+const getClassDeclarations = require('../utils/getClassDeclarations')
+const findDeprecatedProp = require('../utils/findDeprecatedProp')
 
 /**
   * Find and replace deprecated propTypes and defaultProps

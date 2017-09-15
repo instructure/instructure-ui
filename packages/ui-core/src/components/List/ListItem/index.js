@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import themeable from '../../../themeable'
-import { omitProps } from '../../../util/passthroughProps'
+
+import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

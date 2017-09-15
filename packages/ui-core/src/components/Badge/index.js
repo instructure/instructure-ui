@@ -2,9 +2,9 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import shortid from 'shortid'
-import themeable from '../../themeable'
-import safeCloneElement from '../../util/safeCloneElement'
-import CustomPropTypes from '../../util/CustomPropTypes'
+import themeable from '@instructure/ui-themeable'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import Container from '../Container'
 
