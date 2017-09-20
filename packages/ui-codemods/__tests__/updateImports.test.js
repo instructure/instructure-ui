@@ -1,19 +1,20 @@
 const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
-const tests = ['elements']
+const tests = ['imports']
 
 jest.autoMockOff()
 
-describe('updatePropNames', () => {
+describe('updateImports', () => {
   tests.forEach(test => {
     defineTest(
       __dirname,
-      'lib/updatePropNames',
+      'lib/updateImports',
       {
-        config: path.join(__dirname, '../__testfixtures__/props.config.js')
+        config: path.join(__dirname, '../__testfixtures__/imports.config.js')
       },
-      `updatePropNames/${test}`
+      `updateImports/${test}`
     )
   })
 })
+

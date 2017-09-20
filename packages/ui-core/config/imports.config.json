@@ -1,0 +1,50 @@
+[
+  {
+    "pattern": "^instructure-ui/lib/components",
+    "replace": "@instructure/ui-core/lib/components"
+  },
+  {
+    "pattern": "^instructure-ui/lib/themes",
+    "replace": "@instructure/ui-themes"
+  },
+  {
+    "pattern": "^instructure-ui/lib/themeable",
+    "replace": "@instructure/ui-themeable"
+  },
+
+  {
+    "pattern": "^instructure-ui/lib/util/dom",
+    "replace": "@instructure/ui-utils/lib/dom"
+  },
+
+  {
+    "oldPath": "instructure-ui/lib/util",
+    "newPath": "@instructure/ui-utils/lib",
+    "modules": [
+      "capitalizeFirstLetter",
+      "createChainedFunction",
+      "debounce",
+      "mergeDeep",
+      "shallowEqual",
+      "warning"
+    ]
+  },
+
+  {
+    "oldPath": "instructure-ui/lib/util",
+    "newPath": "@instructure/ui-utils/lib/react",
+    "modules": [
+      "ComponentIdentifier",
+      "containerQuery",
+      "CustomPropTypes",
+      "deprecated",
+      "ensureSingleChild",
+      "getDisplayName",
+      "getElementType",
+      "matchComponentTypes",
+      "passthroughProps",
+      "safeCloneElement",
+      "windowMessageListener"
+    ]
+  }
+]

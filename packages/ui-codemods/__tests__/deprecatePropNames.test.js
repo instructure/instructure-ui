@@ -11,7 +11,7 @@ describe('deprecatePropNames', () => {
       __dirname,
       'lib/deprecatePropNames',
       {
-        config: path.join(__dirname, '../__testfixtures__/config.js')
+        config: path.join(__dirname, '../__testfixtures__/props.config.js')
       },
       `deprecatePropNames/${test}`
     )
