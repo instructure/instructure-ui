@@ -26,7 +26,6 @@
 
   text-decoration: none; /* for links styled as buttons */
   text-align: center;
-  white-space: nowrap;
 
   cursor: pointer;
   user-select: none;
@@ -37,7 +36,6 @@
 
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-  line-height: 1;
   text-transform: var(--textTransform);
   letter-spacing: var(--letterSpacing);
   border-radius: var(--borderRadius);
@@ -59,37 +57,8 @@
   }
 }
 
-.small {
-  &:not(.fluidWidth) {
-    height: var(--smallHeight);
-  }
-
-  &.fluidWidth {
-    padding-top: var(--topBottomPadding);
-    padding-bottom: var(--topBottomPadding);
-  }
-}
-
-.medium {
-  &:not(.fluidWidth) {
-    height: var(--mediumHeight);
-  }
-
-  &.fluidWidth {
-    padding-top: var(--topBottomPadding);
-    padding-bottom: var(--topBottomPadding);
-  }
-}
-
-.large {
-  &:not(.fluidWidth) {
-    height: var(--largeHeight);
-  }
-
-  &.fluidWidth {
-    padding-top: var(--topBottomPadding);
-    padding-bottom: var(--topBottomPadding);
-  }
+.content {
+  box-sizing: border-box;
 }
 
 .default,
@@ -101,55 +70,80 @@
 .ghost-inverse,
 .link,
 .link-inverse {
-  padding-top: var(--topBottomPadding);
-  padding-bottom: var(--topBottomPadding);
-
   &.small {
     font-size: var(--smallFontSize);
     padding-left: var(--smallPadding);
     padding-right: var(--smallPadding);
+
+    /* subtract the top and bottom border */
+    line-height: calc(var(--smallHeight) - (var(--borderWidth) * 2));
+
+    &.fluidWidth .content {
+      padding-top: 0.25rem;
+      padding-bottom: 0.25rem;
+    }
   }
 
   &.medium {
     font-size: var(--mediumFontSize);
     padding-left: var(--mediumPadding);
     padding-right: var(--mediumPadding);
+
+    /* subtract the top and bottom border */
+    line-height: calc(var(--mediumHeight) - (var(--borderWidth) * 2));
+
+    &.fluidWidth .content {
+      padding-top: 0.5rem;
+      padding-bottom: 0.5rem;
+    }
   }
 
   &.large {
     font-size: var(--largeFontSize);
     padding-left: var(--largePadding);
     padding-right: var(--largePadding);
+
+    /* subtract the top and bottom border */
+    line-height: calc(var(--largeHeight) - (var(--borderWidth) * 2));
+
+    &.fluidWidth .content {
+      padding-top: 0.75rem;
+      padding-bottom: 0.75rem;
+    }
   }
 
-  /* stylelint-disable selector-max-type */
+  /* cut off text with ellipsis if not fluidWith */
+  &:not(.fluidWidth) {
+    .content {
+      display: block;
+      box-sizing: border-box;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
 
   &.fluidWidth {
     display: block;
     width: 100%;
-    white-space: normal;
-    word-wrap: break-word;
-    hyphens: auto;
     text-align: start;
 
-    > svg {
+    .content {
+      word-wrap: break-word;
+      hyphens: auto;
+      line-height: var(--fluidWidthLineHeight);
       display: inline-block;
-      vertical-align: middle;
     }
   }
 
-  &.fluidWidth > svg,
-  .layout > svg {
+  svg { /* stylelint-disable-line selector-max-type */
     font-size: var(--iconPlusTextFontSize);
     margin-inline-end: var(--iconPlusTextMargin);
     margin-inline-start: auto;
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(-0.0625rem);
   }
-
-  .layout > svg {
-    display: block;
-  }
-
-  /* stylelint-enable selector-max-type */
 }
 
 .default,
@@ -345,8 +339,6 @@
 .circle-primary,
 .circle-danger {
   padding: var(--iconPadding);
-  background: transparent;
-  border-color: var(--iconBorderColor);
   text-decoration: none;
 
   &:focus,
@@ -357,14 +349,23 @@
 
   &.small {
     font-size: 1rem;
+    height: var(--smallHeight);
   }
 
   &.medium {
     font-size: 1.5rem;
+    height: var(--mediumHeight);
   }
 
   &.large {
     font-size: 2rem;
+    height: var(--largeHeight);
+  }
+
+  .content {
+    display: inline-block;
+    vertical-align: middle;
+    transform: translateY(0.0625rem);
   }
 }
 
@@ -425,13 +426,6 @@
 .icon-inverse {
   background: transparent;
   border-color: var(--iconBorderColor);
-
-  &::before {
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
 }
 
 .icon-inverse {
@@ -456,12 +450,4 @@
   &:active {
     color: var(--iconHoverColor);
   }
-}
-
-.layout {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
 }
