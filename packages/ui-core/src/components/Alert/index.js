@@ -13,6 +13,7 @@ import IconWarningSolid from 'instructure-icons/lib/Solid/IconWarningSolid'
 import themeable from '@instructure/ui-themeable'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import Container from '../Container'
 import CloseButton from '../CloseButton'
@@ -288,8 +289,13 @@ export default class Alert extends Component {
 
   initLiveRegion () {
     const liveRegion = this.getLiveRegion()
+
+    warning(
+      liveRegion.getAttribute('role') === 'alert',
+      `[Alert] live region must have role='alert' set on page load in order to announce content`
+    )
+
     if (liveRegion) {
-      liveRegion.setAttribute('role', 'alert')
       liveRegion.setAttribute('aria-live', 'assertive')
       liveRegion.setAttribute('aria-relevant', 'additions text')
       liveRegion.setAttribute('aria-atomic', 'false')
@@ -338,7 +344,6 @@ export default class Alert extends Component {
         // and then reapplied because JAWS/IE will not respect the
         // "aria-relevant" attribute and read when the node is deleted if
         // the attributes are in place
-        liveRegion.removeAttribute('role')
         liveRegion.removeAttribute('aria-live')
         liveRegion.removeAttribute('aria-relevant')
         liveRegion.removeAttribute('aria-atomic')
