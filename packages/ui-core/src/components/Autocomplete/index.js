@@ -570,11 +570,11 @@ class Autocomplete extends Component {
      */
     onClose: PropTypes.func,
     /**
-     * Callback fired when one of the menu options gets selected
+     * Callback fired when one of the menu options gets selected. Second parameter is the selected option.
      */
     onChange: PropTypes.func,
     /**
-     * Callback fired when on the onChange of the internal input
+     * Callback fired when on the onChange of the internal input.
      */
     onInputChange: PropTypes.func,
     /**
@@ -624,6 +624,10 @@ class Autocomplete extends Component {
 
   get invalid () {
     return !!this.props.messages && this.props.messages.findIndex(message => message.type === 'error') >= 0
+  }
+
+  get value () {
+    return this._subComponent && this._subComponent.value
   }
 
   focus = () => {

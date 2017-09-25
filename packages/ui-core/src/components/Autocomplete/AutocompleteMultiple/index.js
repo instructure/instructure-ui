@@ -124,6 +124,10 @@ class AutocompleteMultiple extends Component {
     return containsActiveElement(this._field)
   }
 
+  get value () {
+    return this.state.selectedOption.map(selected => selected && selected.value)
+  }
+
   focus = () => {
     this._input && this._input.focus()
   }

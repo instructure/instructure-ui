@@ -100,6 +100,11 @@ class AutocompleteSingle extends Component {
     return isActiveElement(this._input)
   }
 
+  get value () {
+    const selected = this.state.selectedOption
+    return selected && selected.value
+  }
+
   focus = () => {
     this._input && this._input.focus()
   }
