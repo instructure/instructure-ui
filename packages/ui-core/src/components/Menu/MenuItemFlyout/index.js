@@ -151,6 +151,14 @@ class MenuItemFlyout extends Component {
     }
   }
 
+  handleMenuSelect = (e, value, selected) => {
+    this.setShow(false)
+
+    if (typeof this.props.onSelect === 'function') {
+      this.props.onSelect(e, value, selected)
+    }
+  }
+
   focusTrigger () {
     this._trigger && this._trigger.focus()
   }
@@ -190,7 +198,7 @@ class MenuItemFlyout extends Component {
               labelledBy={labelledBy}
               onDismiss={this.handleMenuDismiss}
               onKeyDown={this.handleMenuKeyDown}
-              onSelect={createChainedFunction(this.handleMenuDismiss, onSelect)}
+              onSelect={this.handleMenuSelect}
               ref={el => {
                 this._menu = el
                 contentRef(el)

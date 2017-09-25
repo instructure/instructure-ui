@@ -87,7 +87,7 @@ describe('<Menu />', () => {
       onDismiss
     })
 
-    subject.keyDown('escape')
+    subject.keyUp('escape')
     subject.keyDown('tab')
 
     expect(onDismiss).to.have.been.calledTwice

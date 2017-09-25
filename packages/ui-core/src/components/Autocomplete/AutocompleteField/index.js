@@ -111,6 +111,10 @@ class AutocompleteField extends Component {
      */
     onKeyDown: PropTypes.func,
     /**
+     * Callback fired on keyUp for the input
+     */
+    onKeyUp: PropTypes.func,
+    /**
      * Callback fired on click for the input
      */
     onClick: PropTypes.func,
@@ -160,6 +164,7 @@ class AutocompleteField extends Component {
     onFocus: event => {},
     onBlur: event => {},
     onKeyDown: event => {},
+    onKeyUp: event => {},
     onOpen: event => {},
     onClose: event => {}
   }
@@ -322,7 +327,6 @@ class AutocompleteField extends Component {
     ArrowDown: this.handleDownArrowKey,
     Home: this.handleHomeKey,
     End: this.handleEndKey,
-    Escape: this.close,
     Enter: this.handleEnterKey
   }
 
@@ -339,6 +343,14 @@ class AutocompleteField extends Component {
       this.keyMap[event.key](event)
     }
     this.props.onKeyDown(event)
+  }
+
+  handleKeyUp = event => {
+    if (event.key === 'Escape' && this.expanded) {
+      event.preventDefault()
+      this.close(event)
+    }
+    this.props.onKeyUp(event)
   }
 
   handleFocus = event => {
@@ -443,6 +455,7 @@ class AutocompleteField extends Component {
                 onChange={this.handleChange}
                 onClick={this.handleClick}
                 onKeyDown={this.handleKeyDown}
+                onKeyUp={this.handleKeyUp}
                 onBlur={this.handleBlur}
                 type="text"
                 autoComplete="off"

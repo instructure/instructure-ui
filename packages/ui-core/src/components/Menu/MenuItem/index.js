@@ -67,12 +67,16 @@ class MenuItem extends Component {
   }
 
   handleClick = e => {
-    const { onSelect, onClick, disabled, value } = this.props
+    const { onSelect, onClick, disabled, value, href } = this.props
     const selected = !this.selected
 
     if (disabled) {
       e.preventDefault()
       return
+    }
+
+    if (!href) {
+      e.preventDefault()
     }
 
     if (this.props.selected === undefined) {

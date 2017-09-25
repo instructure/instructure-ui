@@ -58,7 +58,7 @@ describe('<AutocompleteMultiple />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
@@ -67,7 +67,7 @@ describe('<AutocompleteMultiple />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
@@ -79,7 +79,7 @@ describe('<AutocompleteMultiple />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = label
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(onChange.firstCall).to.exist
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]

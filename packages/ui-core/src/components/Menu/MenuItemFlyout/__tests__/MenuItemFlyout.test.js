@@ -67,7 +67,7 @@ describe('<MenuItemFlyout />', () => {
     subject.find('button').click()
     testbed.tick()
 
-    subject.ref('_menu').keyDown('esc')
+    subject.ref('_menu').keyUp('esc')
     testbed.tick()
 
     expect(subject.ref('_menu').length).to.equal(0)

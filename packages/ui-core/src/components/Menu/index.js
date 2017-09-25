@@ -95,6 +95,7 @@ class Menu extends Component {
     */
     onDismiss: PropTypes.func,
     onKeyDown: PropTypes.func,
+    onKeyUp: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func
   }
@@ -103,6 +104,7 @@ class Menu extends Component {
   static defaultProps = {
     disabled: false,
     onKeyDown: function (e) {},
+    onKeyUp: function (e) {},
     onDismiss: function (e) {},
     onFocus: function (e) {},
     onBlur: function (e) {},
@@ -128,7 +130,6 @@ class Menu extends Component {
     const {
       down,
       up,
-      esc,
       tab,
       pgup,
       pgdn
@@ -144,7 +145,14 @@ class Menu extends Component {
       event.preventDefault()
       event.stopPropagation()
       this.hideActiveMenuItemFlyout()
-    } else if ([esc, tab].includes(key)) {
+    } else if (tab === key) {
+      this.props.onDismiss(event)
+    }
+  }
+
+  handleKeyUp = (event) => {
+    if (event.keyCode === keycode.codes.esc) {
+      event.preventDefault()
       this.props.onDismiss(event)
     }
   }
@@ -297,7 +305,8 @@ class Menu extends Component {
       disabled,
       controls,
       title,
-      onKeyDown
+      onKeyDown,
+      onKeyUp
     } = this.props
     const props = omitProps(this.props, Menu.propTypes)
 
@@ -315,6 +324,7 @@ class Menu extends Component {
         aria-disabled={disabled ? 'true' : null}
         title={title}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
+        onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
       >
         {this.renderChildren()}
       </ul>

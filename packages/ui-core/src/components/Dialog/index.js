@@ -208,13 +208,15 @@ class Dialog extends Component {
   }
 
   handleDocumentClick = event => {
-    if (this.props.open && this.props.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick) {
+    if (this.props.open && this.props.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick &&
+        !event.defaultPrevented) {
       this.props.onDismiss(event)
     }
   }
 
   handleKeyUp = event => {
-    if (this.focused && this.props.open && this.props.shouldCloseOnEscape && event.keyCode === keycode.codes.escape) {
+    if (this.focused && this.props.open && this.props.shouldCloseOnEscape &&
+        !event.defaultPrevented && event.keyCode === keycode.codes.escape) {
       this.props.onDismiss(event)
     }
   }

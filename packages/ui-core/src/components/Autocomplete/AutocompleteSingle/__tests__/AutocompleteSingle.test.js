@@ -56,7 +56,7 @@ describe('<AutocompleteSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(subject.instance()._input.value).to.equal('')
     expect(onInputChange).to.have.been.calledOnce
     expect(onInputChange.firstCall.args[0]).to.equal(null)
@@ -101,7 +101,7 @@ describe('<AutocompleteSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(onInputChange).to.have.been.calledOnce
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(label)
@@ -117,7 +117,7 @@ describe('<AutocompleteSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = label
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(onChange).to.have.been.calledOnce
     expect(onChange.firstCall.args[0].target).to.exist
     expect(onChange.firstCall.args[0].target.value).to.equal(label)

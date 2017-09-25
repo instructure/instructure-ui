@@ -111,7 +111,7 @@ describe('<AutocompleteField />', () => {
     subject.find('input').simulate('click')
     testbed.tick()
     expect(subject.instance().expanded).to.be.true
-    subject.find('input').simulate('keyDown', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
     testbed.tick()
     expect(subject.instance().expanded).to.be.false
   })
