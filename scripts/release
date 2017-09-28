@@ -111,7 +111,7 @@ git checkout -b $release_branch
 printf "Installing version $next_version ...\n"
 $NPM_CLIENT install
 printf "Preparing version $next_version ...\n"
-$NPM_CLIENT prerelease
+$NPM_CLIENT run prerelease
 
 ###############################
 # Publish sub-packages to npm #

@@ -51,7 +51,8 @@
     "npm-run-all": "4.1.1",
     "rimraf": "2.6.1",
     "standard-version": "4.2.0",
-    "validate-commit-msg": "2.14.0"
+    "validate-commit-msg": "2.14.0",
+    "yarn": "^1.1.0"
   },
   "config": {
     "commitizen": {
@@ -59,7 +60,7 @@
     }
   },
   "engines": {
-    "yarn": ">=0.28.4"
+    "yarn": ">=1.1.0"
   },
   "standard-version": {
     "skip": {

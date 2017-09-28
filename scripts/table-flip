@@ -1,5 +1,7 @@
 #!/bin/bash -e
 
+NPM_CLIENT=$(npm bin)/yarn
+
 echo '(╯°□°）╯︵ ┻━┻'
 
 echo "-- install node"
@@ -9,8 +11,8 @@ nvm use
 
 echo "-- clearing dependencies"
 rm -rf node_modules
-yarn cache clean
+$NPM_CLIENT cache clean
 
 echo "-- installing dependencies"
-yarn install
-yarn bootstrap
+$NPM_CLIENT install
+$NPM_CLIENT run bootstrap
