@@ -13,19 +13,20 @@ const paths = {
 }
 
 module.exports = {
-  cache: false,
+  cache: DEBUG,
   bail: !DEBUG,
   entry: {
     common: [
-      '@instructure/ui-polyfill-loader!',
+      '../ui-polyfill-loader!',
       'react',
       'react-dom',
       'moment'
     ],
     'instructure-ui': [
-      '@instructure/ui-themes',
-      '@instructure/ui-core'
-    ]
+      '../ui-themes/src',
+      '../ui-core/src'
+    ],
+    globals: './globals'
   },
   output: {
     path: paths.output,
@@ -72,7 +73,6 @@ function getPlugins () {
           ].join(';')
         }
       },
-      globals: require('./globals'),
       files: {
         // TODO: consolidate docs loader into a single loader and change this to an array of paths/patterns
         components: [

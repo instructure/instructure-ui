@@ -32,12 +32,6 @@ global.lorem = {
 
 global.placeholderImage = placeholderImage
 
-export function initGlobals (globals = {}) {
-  Object.keys(globals).forEach((key) => {
-    global[key] = globals[key]
-  })
-}
-
 export default function renderDocsClient (data, element) {
   const props = {
     library: data.library,

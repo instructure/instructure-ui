@@ -41,9 +41,6 @@ new DocsPlugin({
       ]
     }
   },
-  globals: { // for component playground and codepen examples
-    moment: 'moment'
-  },
   files: {
     components: [
       path.join(__dirname, 'src/components/*/index.js') // only top level components

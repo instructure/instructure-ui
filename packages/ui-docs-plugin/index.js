@@ -23,13 +23,6 @@ DocsPlugin.prototype.apply = function (compiler) {
   // TODO: validate options
 
   const docsLoader = require.resolve('./loaders/docs-loader')
-  const globalsLoader = require.resolve('./loaders/globals-loader')
-
-  compiler.apply(new SingleEntryPlugin(
-    this.context,
-    `${globalsLoader}?${JSON.stringify({ library, globals })}!`,
-    'globals'
-  ))
 
   compiler.apply(new SingleEntryPlugin(
     this.context,
