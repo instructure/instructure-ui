@@ -13,7 +13,6 @@ export default class ListItem extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     children: PropTypes.node.isRequired,
-    as: PropTypes.oneOf(['ul', 'ol']),
     variant: PropTypes.oneOf(['default', 'unstyled', 'pipe']),
     size: PropTypes.oneOf(['small', 'medium', 'large'])
   };
@@ -26,9 +25,7 @@ export default class ListItem extends Component {
       [styles.root]: true,
       [styles[this.props.variant]]: this.props.variant,
       [styles[this.props.size]]: this.props.size &&
-        this.props.variant !== 'pipe',
-      [styles.unordered]: this.props.as === 'ul',
-      [styles.ordered]: this.props.as === 'ol'
+        this.props.variant !== 'pipe'
     }
 
     return (

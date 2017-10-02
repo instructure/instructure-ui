@@ -14,7 +14,6 @@ export default function ({ borders, colors, spacing, typography }) {
     pipeColor: colors.slate,
     pipeLineHeight: typography.lineHeightCondensed,
 
-    marginBottomDefault: spacing.xxxSmall,
-    marginBottomUnstyled: spacing.xxSmall
+    marginBottomDefault: spacing.xxxSmall
   }
 }

@@ -9,14 +9,7 @@
 
 .default {
   margin-bottom: var(--marginBottomDefault);
-}
 
-.unstyled {
-  margin-bottom: var(--marginBottomUnstyled);
-}
-
-.default,
-.unstyled {
   &:last-of-type {
     margin-bottom: 0;
   }
@@ -57,7 +50,3 @@
 .large {
   font-size: var(--fontSizeLarge);
 }
-
-.unordered {}
-
-.ordered {}
