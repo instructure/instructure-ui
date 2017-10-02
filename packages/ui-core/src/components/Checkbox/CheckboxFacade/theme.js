@@ -20,7 +20,7 @@ export default function generator ({ colors, borders, spacing, typography }) {
     labelColor: colors.oxford,
     checkedLabelColor: colors.oxford,
     labelFontFamily: typography.fontFamily,
-    labelFontSize: typography.fontSizeSmall,
+    labelFontSize: typography.fontSizeMedium,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
     labelTopMarginMedium: '0.125rem',

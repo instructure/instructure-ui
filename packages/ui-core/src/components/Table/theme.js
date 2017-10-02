@@ -16,15 +16,15 @@ export default function generator ({ colors, typography, spacing }) {
     captionColor: colors.oxford,
     captionFontSize: typography.fontSizeMedium,
 
-    smallFontSize: typography.fontSizeXSmall,
+    smallFontSize: typography.fontSizeSmall,
     smallLineHeight: typography.lineHeightFit,
     smallPadding: `${spacing.xxSmall} ${spacing.xSmall}`,
 
-    mediumFontSize: typography.fontSizeSmall,
+    mediumFontSize: typography.fontSizeMedium,
     mediumLineHeight: typography.lineHeightCondensed,
     mediumPadding: `${spacing.xSmall} ${spacing.small}`,
 
-    largeFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge,
     largeLineHeight: typography.lineHeightCondensed,
     largePadding: `${spacing.small} ${spacing.medium}`,
 

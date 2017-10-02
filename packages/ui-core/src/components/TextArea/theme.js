@@ -31,13 +31,13 @@ export default function generator ({ colors, borders, spacing, typography, forms
 
     placeholderColor: colors.slate,
 
-    smallFontSize: typography.fontSizeXSmall,
+    smallFontSize: typography.fontSizeSmall,
     smallHeight: forms.inputHeightSmall,
 
-    mediumFontSize: typography.fontSizeSmall,
+    mediumFontSize: typography.fontSizeMedium,
     mediumHeight: forms.inputHeightMedium,
 
-    largeFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge,
     largeHeight: forms.inputHeightLarge
   }
 }

@@ -15,22 +15,21 @@ export default function generator ({ colors, borders, typography, forms, spacing
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    fontSize: typography.fontSizeSmall,
 
     padding: spacing.small,
 
     arrowColor: colors.oxford,
 
     smallHeight: forms.inputHeightSmall,
-    smallFontSize: typography.fontSizeXSmall,
+    smallFontSize: typography.fontSizeSmall,
     smallArrowWidth: '0.75rem',
 
     mediumHeight: forms.inputHeightMedium,
-    mediumFontSize: typography.fontSizeSmall,
+    mediumFontSize: typography.fontSizeMedium,
     mediumArrowWidth: '0.875rem',
 
     largeHeight: forms.inputHeightLarge,
-    largeFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge,
     largeArrowWidth: '1rem',
 
     focusBorderColor: colors.brand,

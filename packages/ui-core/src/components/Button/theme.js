@@ -34,11 +34,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     mediumHeight: forms.inputHeightMedium,
     mediumPadding: spacing.small,
-    mediumFontSize: typography.fontSizeSmall,
+    mediumFontSize: typography.fontSizeMedium,
 
     largeHeight: forms.inputHeightLarge,
     largePadding: spacing.medium,
-    largeFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge,
 
     focusBorderRadius: borders.radiusMedium,
     focusBorder: `${focusOutline} ${colors.brand}`,

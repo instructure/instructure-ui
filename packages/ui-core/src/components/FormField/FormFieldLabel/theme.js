@@ -3,7 +3,7 @@ export default function generator ({ colors, typography }) {
     color: colors.oxford,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightBold,
-    fontSize: typography.fontSizeSmall,
+    fontSize: typography.fontSizeMedium,
     lineHeight: typography.lineHeightCondensed
   }
 }

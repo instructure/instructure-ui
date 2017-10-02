@@ -2,7 +2,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
   return {
     labelColor: colors.oxford,
     labelFontFamily: typography.fontFamily,
-    labelFontSize: typography.fontSizeSmall,
+    labelFontSize: typography.fontSizeMedium,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
 
@@ -26,6 +26,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     toggleMediumHeight: forms.inputHeightMedium,
     toggleLargeHeight: forms.inputHeightLarge,
     toggleShadow: shadows.depth1,
+    // toggle font is uppercase, so sizes are smaller below
     toggleSmallFontSize: typography.fontSizeXSmall,
     toggleMediumFontSize: typography.fontSizeSmall,
     toggleLargeFontSize: typography.fontSizeMedium

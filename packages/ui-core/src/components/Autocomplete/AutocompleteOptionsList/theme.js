@@ -17,9 +17,9 @@ export default function generator ({ colors, typography, borders, spacing, stack
 
     padding: `${spacing.xSmall} ${spacing.small}`,
 
-    smallFontSize: typography.fontSizeXSmall,
-    mediumFontSize: typography.fontSizeSmall,
-    largeFontSize: typography.fontSizeMedium
+    smallFontSize: typography.fontSizeSmall,
+    mediumFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge
   }
 }
 

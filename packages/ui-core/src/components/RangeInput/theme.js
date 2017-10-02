@@ -20,15 +20,15 @@ export default function ({ colors, typography, spacing, forms }) {
     valueFontFamily: typography.fontFamily,
     valueFontWeight: typography.fontWeightNormal,
 
-    valueSmallFontSize: typography.fontSizeXSmall,
+    valueSmallFontSize: typography.fontSizeSmall,
     valueSmallPadding: `0 ${spacing.xSmall}`,
     valueSmallLineHeight: forms.inputHeightSmall,
 
-    valueMediumFontSize: typography.fontSizeSmall,
+    valueMediumFontSize: typography.fontSizeMedium,
     valueMediumPadding: `0 ${spacing.small}`,
     valueMediumLineHeight: forms.inputHeightMedium,
 
-    valueLargeFontSize: typography.fontSizeMedium,
+    valueLargeFontSize: typography.fontSizeLarge,
     valueLargePadding: `0 ${spacing.medium}`,
     valueLargeLineHeight: forms.inputHeightLarge
   }

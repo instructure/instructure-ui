@@ -39,7 +39,6 @@
 
     font-family: var(--fontFamily);
     font-weight: var(--fontWeight);
-    font-size: var(--fontSize);
 
     &::-ms-expand {
       display: none;

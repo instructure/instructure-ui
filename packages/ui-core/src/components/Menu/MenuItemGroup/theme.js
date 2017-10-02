@@ -2,7 +2,7 @@
 
 export default function generator ({ colors, typography, spacing }) {
   return {
-    fontSize: typography.fontSizeSmall,
+    fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightBold,
     padding: `${spacing.xSmall} ${spacing.small}`,
