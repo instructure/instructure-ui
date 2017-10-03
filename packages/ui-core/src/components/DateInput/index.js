@@ -89,8 +89,8 @@ export default class DateInput extends Component {
 
     /**
       Called when the date value of the input has changed.
-      The parameters are the triggering event, new date value in ISO 8601 format, and
-      the raw user input.
+      The parameters are the triggering event, new date value in ISO 8601 format,
+      the raw user input, and if the conversion from raw to a date was succesful.
     **/
     onDateChange: PropTypes.func,
 
@@ -117,7 +117,7 @@ export default class DateInput extends Component {
     locale: undefined,
     timezone: undefined,
     defaultDateValue: undefined,
-    onDateChange: (e, formattedValue, rawValue) => {},
+    onDateChange: (e, formattedValue, rawValue, rawConversionFailed) => {},
     dateValue: undefined,
     datePickerRef: (el) => {},
     inputRef: (el) => {}
@@ -191,6 +191,7 @@ export default class DateInput extends Component {
     const oldMoment = this.state.parsedDate
     const newTextValue = e.target.value
     const newParsedDate = DateTime.parse(newTextValue, this.locale(this.props), this.timezone(this.props))
+    const rawConversionFailed = newTextValue !== '' && !newParsedDate.isValid()
     const newMessages = []
     if (newTextValue !== '' && this.props.validationFeedback) {
       newMessages.push({
@@ -205,7 +206,7 @@ export default class DateInput extends Component {
       messages: newMessages
     })
 
-    this.fireOnChange(e, newParsedDate, newTextValue)
+    this.fireOnChange(e, newParsedDate, newTextValue, rawConversionFailed)
   }
 
   handleTextInputKeyDown = e => {
@@ -233,16 +234,13 @@ export default class DateInput extends Component {
       parsedDate: newDate,
       messages: []
     })
-    this.fireOnChange(e, newDate, textInputValue)
+    this.fireOnChange(e, newDate, textInputValue, !newDate.isValid())
   }
 
-  fireOnChange (e, newMoment, rawValue) {
+  fireOnChange (e, newMoment, rawValue, rawConversionFailed) {
     if (typeof this.props.onDateChange === 'function') {
-      if (newMoment.isValid()) {
-        this.props.onDateChange(e, newMoment.format(), rawValue)
-      } else {
-        this.props.onDateChange(e, null, rawValue)
-      }
+      const moment = newMoment.isValid() ? newMoment.format() : null
+      this.props.onDateChange(e, moment, rawValue, rawConversionFailed)
     }
   }
 
