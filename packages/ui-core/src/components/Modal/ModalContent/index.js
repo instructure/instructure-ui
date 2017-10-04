@@ -17,23 +17,37 @@ export default class ModalContent extends Component {
     children: PropTypes.node, // eslint-disable-line react/require-default-props
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
     contentRef: PropTypes.func,
-    className: PropTypes.string
+    className: PropTypes.string,
+    shouldCloseOnOverlayClick: PropTypes.bool,
+    onDismiss: PropTypes.func
   }
 
   static defaultProps = {
     contentRef: function (el) {},
     size: 'auto',
     children: undefined,
-    className: undefined
+    className: undefined,
+    shouldCloseOnOverlayClick: true,
+    onDismiss: event => {}
   }
 
   render () {
-    const { size, children, ...props } = this.props
+    const {
+      size,
+      children,
+      shouldCloseOnOverlayClick,
+      onDismiss,
+      ...props
+    } = this.props
 
     const ie11 = bowser.msie && bowser.version > 10
 
     return (
-      <Mask placement={ie11 ? 'top' : 'center'} fullScreen>
+      <Mask
+        onDismiss={shouldCloseOnOverlayClick ? onDismiss : undefined}
+        placement={ie11 ? 'top' : 'center'}
+        fullScreen
+      >
         <span
           {...omitProps(this.props, ModalContent.propTypes)}
           className={classnames({

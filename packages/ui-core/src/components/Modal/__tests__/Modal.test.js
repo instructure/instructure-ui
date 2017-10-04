@@ -1,6 +1,7 @@
 import React from 'react'
 import Button from '../../Button'
 import Portal from '../../Portal'
+import Mask from '../../Mask'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
 
 describe('<Modal />', () => {
@@ -106,9 +107,8 @@ describe('<Modal />', () => {
 
     testbed.tick()
 
-    Testbed.wrap(document.body).dispatchNativeMouseEvent('click', {
-      bubbles: true
-    })
+    const mask = subject.ref('_content').node.parentNode
+    mask.click()
 
     expect(onDismiss).to.have.been.called
   })
@@ -123,9 +123,8 @@ describe('<Modal />', () => {
 
     testbed.tick()
 
-    Testbed.wrap(document.body).dispatchNativeMouseEvent('click', {
-      bubbles: true
-    })
+    const mask = subject.ref('_content').node.parentNode
+    mask.click()
 
     expect(onDismiss).to.not.have.been.called
   })

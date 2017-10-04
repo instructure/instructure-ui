@@ -407,7 +407,7 @@ export default class Modal extends Component {
             {...pickProps(this.props, Dialog.propTypes)}
             defaultFocusElement={this.defaultFocusElement}
             contentElement={() => this._content}
-            shouldCloseOnDocumentClick={this.props.shouldCloseOnOverlayClick}
+            shouldCloseOnDocumentClick={false}
             shouldCloseOnEscape
             shouldContainFocus
             open={this.state.open}
