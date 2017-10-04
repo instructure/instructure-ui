@@ -38,6 +38,10 @@ class FormFieldLayout extends Component {
     *   }`
     */
     messages: PropTypes.arrayOf(CustomPropTypes.message),
+    /**
+    * id for the form field messages
+    */
+    messagesId: PropTypes.string,
     children: PropTypes.node,
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline'])
@@ -47,13 +51,14 @@ class FormFieldLayout extends Component {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
-    as: 'label'
+    as: 'label',
+    messagesId: undefined
   };
 
   constructor (props) {
     super()
 
-    this._messagesId = `FormFieldLayout__messages-${shortid.generate()}`
+    this._messagesId = props.messagesId || `FormFieldLayout__messages-${shortid.generate()}`
   }
 
   get hasVisibleLabel () {

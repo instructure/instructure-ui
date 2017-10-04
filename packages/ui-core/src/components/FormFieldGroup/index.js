@@ -134,6 +134,10 @@ export default class FormFieldGroup extends Component {
     *   }`
     */
     messages: PropTypes.arrayOf(CustomPropTypes.message),
+    /**
+    * id for the form field messages
+    */
+    messagesId: PropTypes.string,
     disabled: PropTypes.bool,
     children: PropTypes.node,
     layout: PropTypes.oneOf(['stacked', 'columns', 'inline']),
@@ -149,7 +153,8 @@ export default class FormFieldGroup extends Component {
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',
-    vAlign: 'middle'
+    vAlign: 'middle',
+    messagesId: undefined
   }
 
   get invalid () {

@@ -1,5 +1,6 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
+import shortid from 'shortid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -148,6 +149,12 @@ export default class CheckboxGroup extends Component {
         value: props.defaultValue
       }
     }
+
+    this._messagesId = `CheckboxGroup__messages-${shortid.generate()}`
+  }
+
+  get hasMessages () {
+    return this.props.messages && (this.props.messages.length > 0)
   }
 
   handleChange = (e) => {
@@ -200,7 +207,8 @@ export default class CheckboxGroup extends Component {
           size,
           checked: (this.value.indexOf(child.props.value) > -1),
           onChange: this.handleChange,
-          width: child.props.width || 'auto'
+          width: child.props.width || 'auto',
+          'aria-describedby': this.hasMessages && this._messagesId
         })
       } else {
         return child
@@ -215,6 +223,7 @@ export default class CheckboxGroup extends Component {
         {...pickProps(this.props, FormFieldGroup.propTypes)}
         rowSpacing="small"
         vAlign="top"
+        messagesId={this._messagesId}
       >
         {this.renderChildren()}
       </FormFieldGroup>

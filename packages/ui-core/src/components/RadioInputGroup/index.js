@@ -1,5 +1,6 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
+import shortid from 'shortid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -328,6 +329,12 @@ export default class RadioInputGroup extends Component {
         value: props.defaultValue
       }
     }
+
+    this._messagesId = `RadioInputGroup__messages-${shortid.generate()}`
+  }
+
+  get hasMessages () {
+    return this.props.messages && (this.props.messages.length > 0)
   }
 
   handleChange = (e) => {
@@ -373,7 +380,8 @@ export default class RadioInputGroup extends Component {
           checked: this.value === child.props.value,
           onChange: this.handleChange,
           readOnly: (readOnly || child.props.readOnly),
-          width: child.props.width || 'auto'
+          width: child.props.width || 'auto',
+          'aria-describedby': this.hasMessages && this._messagesId
         })
       } else {
         return child // ignore (but preserve) children that aren't RadioInput
@@ -397,6 +405,7 @@ export default class RadioInputGroup extends Component {
         rowSpacing={(variant === 'toggle') ? 'none' : 'small'}
         colSpacing={(variant === 'toggle') ? 'none' : 'small'}
         startAt={(variant === 'toggle') ? 'small' : undefined}
+        messagesId={this._messagesId}
       >
         {this.renderChildren()}
       </FormFieldGroup>
