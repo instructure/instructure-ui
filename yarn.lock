@@ -4702,6 +4702,14 @@ instructure-icons@4.2.0:
     shortid "^2.2.8"
     svg-to-jsx "^0.0.20"
 
+instructure-icons@4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/instructure-icons/-/instructure-icons-4.3.1.tgz#8d13f034e1bb7f0ac4f2848483604cc03b075ac5"
+  dependencies:
+    prop-types "^15.5.8"
+    shortid "^2.2.8"
+    svg-to-jsx "^0.0.20"
+
 internal-ip@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"

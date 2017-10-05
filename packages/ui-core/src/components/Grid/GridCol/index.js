@@ -70,12 +70,26 @@ export default class GridCol extends Component {
   }
 
   breakpointClass (breakpoint) {
-    const width = (this.props.width && this.props.width[breakpoint]) || this.props.width
+    let { width } = this.props
+
+    if (width && typeof width === 'object') {
+      width = width[breakpoint]
+    }
+
+    if (typeof width !== 'string') return
+
     return `${breakpoint}--${width}`
   }
 
   breakpointOffsetClass (breakpoint) {
-    const offset = (this.props.offset && this.props.offset[breakpoint]) || this.props.offset
+    let { offset } = this.props
+
+    if (offset && typeof offset === 'object') {
+      offset = offset[breakpoint]
+    }
+
+    if (typeof offset !== 'string') return
+
     return `${breakpoint}-offset--${offset}`
   }
 
