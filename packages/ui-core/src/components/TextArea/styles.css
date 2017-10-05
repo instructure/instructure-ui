@@ -56,7 +56,7 @@
     }
   }
 
-  &:placeholder-shown {
+  &::placeholder {
     color: var(--placeholderColor);
   }
 

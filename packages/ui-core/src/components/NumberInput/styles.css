@@ -84,7 +84,7 @@
 
   padding: var(--padding);
 
-  &:placeholder-shown {
+  &::placeholder {
     color: var(--placeholderColor);
   }
 }

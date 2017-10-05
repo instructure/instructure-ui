@@ -45,8 +45,9 @@ category: forms
 
   <div style={{ padding: '2rem 2rem 16rem 2rem', margin: '0 auto' }}>
     <Example
-      label="Choose a state" defaultOption="12"
-      onChange={(e, o) => console.log(o.label)}
+      label="Choose a state"
+      defaultOption="12"
+      onChange={(event, value) => console.log(value.label)}
     />
     <br />
     <Example
@@ -254,7 +255,7 @@ category: forms
   Autocomplete with errors.
 
   ```jsx_example
-  <div style={{height: 300}}>
+  <div style={{ height: 300 }}>
     <Autocomplete
       label="Choose a state"
       messages={[{ text: 'Invalid name', type: 'error' }]}
@@ -330,7 +331,11 @@ category: forms
   }
 
   <div style={{ padding: '2rem 2rem 16rem 2rem', margin: '0 auto' }}>
-    <Example label="This one allows empty values" allowEmpty />
+    <Example
+      label="This one allows empty values"
+      placeholder="Placeholder text"
+      allowEmpty
+    />
     <br />
     <Example label="Choose a few states" multiple />
   </div>

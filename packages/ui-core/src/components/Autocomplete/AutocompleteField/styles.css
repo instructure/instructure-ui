@@ -107,7 +107,7 @@
     padding: 0 var(--inputPaddingEnd) 0 var(--inputPaddingStart);
     box-sizing: border-box;
 
-    &:placeholder-shown {
+    &::placeholder {
       color: var(--placeholderColor);
     }
   }

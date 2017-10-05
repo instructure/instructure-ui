@@ -111,7 +111,12 @@ category: forms
   A number input field with minimum and maximum
 
   ```jsx_example
-  <NumberInput label="Two digit number or less, divisible by 7" min="-98" max="98" step="7" />
+  <NumberInput
+    label="Two digit number or less, divisible by 7"
+    min="-98"
+    max="98"
+    step="7"
+  />
   ```
 
   A controlled number input
@@ -133,7 +138,9 @@ category: forms
             onChange={this.handleChange}
           />
           <br />
-          <Button onClick={() => this.handleChange({}, '5')}>Let's go with 5</Button>
+          <Button onClick={() => this.handleChange({}, '5')}>
+            Let's go with 5
+          </Button>
         </div>
       )
     }
@@ -154,10 +161,7 @@ category: forms
 
   ```js_example
   class Example extends React.Component {
-    constructor (props) {
-      super(props)
-      this.state = { locale: 'de' }
-    }
+    this.state = { locale: 'de' };
 
     render () {
       const label = this.state.locale === 'de' ? "Comma separator" : "Period separator";
@@ -165,7 +169,7 @@ category: forms
         <div>
           <Select
             label="Choose locale"
-            onChange={(e) => this.setState({locale: e.target.value})}>
+            onChange={(e) => this.setState({ locale: e.target.value })}>
               <option key="de" value="de">de</option>
               <option key="en" value="en">en</option>
           </Select>
@@ -340,7 +344,7 @@ class NumberInput extends Component {
 
   static contextTypes = {
     locale: PropTypes.string
-  }
+  };
 
   static defaultProps = {
     showArrows: true,

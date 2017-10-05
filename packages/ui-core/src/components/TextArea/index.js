@@ -37,14 +37,15 @@ category: forms
 
   A textarea with a screenreader only label
   ```jsx_example
-  <TextArea label={
-    <ScreenReaderContent>Description</ScreenReaderContent>
-    } placeholder="describe something"/>
+  <TextArea
+    label={<ScreenReaderContent>Description</ScreenReaderContent>}
+    placeholder="describe something"
+  />
   ```
 
   An inline textarea with a fixed width, initial height and maxHeight
   ```jsx_example
-  <div style={{display: 'flex', alignItems: 'center'}}>
+  <div style={{ display: 'flex', alignItems: 'center' }}>
     <TextArea
       label={<ScreenReaderContent>Label</ScreenReaderContent>}
       inline
@@ -62,19 +63,9 @@ category: forms
   ```js_example
 
   class Example extends React.Component {
-    constructor (props) {
-      super(props)
+    state = { description: 'Hello World' };
 
-      this.state = {
-        description: 'Hello World'
-      }
-    }
-
-    handleChange = (e) => {
-      this.setState({
-        description: e.target.value
-      })
-    };
+    handleChange = (e) => this.setState({ description: e.target.value});
 
     render () {
       return (

@@ -19,7 +19,7 @@ category: forms
   A standard text input field
 
   ```jsx_example
-  <TextInput label="Name" />
+  <TextInput label="Name" placeholder="Doe, John Doe" />
   ```
 
   A text input field with errors
@@ -40,16 +40,22 @@ category: forms
   A text input field with a screenreader only label
 
   ```jsx_example
-  <TextInput label={
-    <ScreenReaderContent>Age</ScreenReaderContent>
-    } placeholder="hello world"/>
+  <TextInput
+    label={<ScreenReaderContent>Age</ScreenReaderContent>}
+    placeholder="hello world"
+  />
   ```
 
   An inline text input field with a fixed width
 
   ```jsx_example
   <div style={{display: 'flex', alignItems: 'center'}}>
-    <TextInput label={<ScreenReaderContent>Label</ScreenReaderContent>} inline width="4em" />&nbsp;
+    <TextInput
+      label={<ScreenReaderContent>Label</ScreenReaderContent>}
+      inline
+      width="4em"
+    />
+    &nbsp;
     <Typography>foo</Typography>
   </div>
   ```

@@ -70,7 +70,7 @@ input[type].input {
     }
   }
 
-  &:placeholder-shown {
+  &::placeholder {
     color: var(--placeholderColor);
   }
 
