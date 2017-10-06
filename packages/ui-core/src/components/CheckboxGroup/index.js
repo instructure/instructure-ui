@@ -28,14 +28,14 @@ category: components/forms
       <Checkbox label="Volleyball" value="volleyball" />
       <Checkbox label="Other" value="other" />
     </CheckboxGroup>
-    <CheckboxGroup name="sports"
+    <CheckboxGroup name="sports" size="small"
       layout="columns"
       onChange={function (value) { console.log(value) }}
       defaultValue={['football', 'volleyball']}
       description="Select your favorite sports">
-      <Checkbox label={lorem.sentence()} value="football" />
-      <Checkbox label={lorem.sentence()} value="basketball" />
-      <Checkbox label={lorem.sentence()} value="volleyball" />
+      <Checkbox label="Football" value="football" />
+      <Checkbox label="Basketball" value="basketball" />
+      <Checkbox label="Volleyball" value="volleyball" />
       <Checkbox label="Other" value="other" />
     </CheckboxGroup>
   </FormFieldGroup>
@@ -46,7 +46,6 @@ category: components/forms
   <CheckboxGroup
     name="sports2"
     layout="inline"
-    size="small"
     messages={[
       { text: 'Invalid name', type: 'error' }
     ]}
@@ -66,7 +65,6 @@ category: components/forms
   ```jsx_example
     <CheckboxGroup
     name="sports3"
-    size="small"
     onChange={function (value) { console.log(value) }}
     defaultValue={['soccer', 'volleyball']}
     description="I wish to receive score alerts for"
@@ -82,7 +80,6 @@ category: components/forms
   ```jsx_example
     <CheckboxGroup
     name="sports4"
-    size="small"
     onChange={function (value) { console.log(value) }}
     defaultValue={['soccer', 'volleyball']}
     description="I wish to receive score alerts for"

@@ -47,7 +47,6 @@
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
   line-height: var(--labelLineHeight);
-  font-size: var(--labelFontSize);
 }
 
 .icon {
@@ -61,37 +60,38 @@
 }
 
 .small {
-  font-size: var(--iconSizeSmall);
+  .label {
+    font-size: var(--labelFontSizeSmall);
+  }
 
   .facade {
+    font-size: var(--iconSizeSmall);
     width: var(--facadeSizeSmall);
     height: var(--facadeSizeSmall);
   }
 }
 
 .medium {
-  font-size: var(--iconSizeMedium);
-
-  .facade {
-    width: var(--facadeSizeMedium);
-    height: var(--facadeSizeMedium);
+  .label {
+    font-size: var(--labelFontSizeMedium);
   }
 
-  .label {
-    margin-top: var(--labelTopMarginMedium);
+  .facade {
+    font-size: var(--iconSizeMedium);
+    width: var(--facadeSizeMedium);
+    height: var(--facadeSizeMedium);
   }
 }
 
 .large {
-  font-size: var(--iconSizeLarge);
-
-  .facade {
-    width: var(--facadeSizeLarge);
-    height: var(--facadeSizeLarge);
+  .label {
+    font-size: var(--labelFontSizeLarge);
   }
 
-  .label {
-    margin-top: var(--labelTopMarginLarge);
+  .facade {
+    font-size: var(--iconSizeLarge);
+    width: var(--facadeSizeLarge);
+    height: var(--facadeSizeLarge);
   }
 }
 

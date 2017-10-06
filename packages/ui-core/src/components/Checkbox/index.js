@@ -25,6 +25,9 @@ category: components/forms
   By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
   set the `defaultChecked` prop.
 
+  Adjust the size of the checkbox and label text via the `size` prop. The default size is
+  `medium`.
+
   ```jsx_example
     <Checkbox label={lorem.sentence()} value="medium" defaultChecked />
   ```
@@ -56,8 +59,6 @@ category: components/forms
   ```
 
   Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch.
-  Setting the `size` prop changes the size of the toggle switch. The default size
-  is `medium`.
 
   ```jsx_example
   <FormFieldGroup description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}>

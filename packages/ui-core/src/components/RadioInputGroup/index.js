@@ -19,6 +19,9 @@ category: components/forms
   the name property on the RadioInput components for you and will set the selected item
   based on the `value` property.
 
+  Adjust the size of the radio button and label text via the `size` prop. The default size is
+  `medium`.
+
   ```jsx_example
   ---
   render: false
@@ -40,6 +43,7 @@ category: components/forms
   }
   render(<Example />)
   ```
+
   With the `layout` prop set to `inline` to render the description in its own column at screens `medium` size
   and up (see [Grid](#Grid)).
   ```jsx_example
@@ -99,9 +103,6 @@ category: components/forms
   ```
 
   Set the `variant` prop to `toggle` to have the RadioInputGroup display as a toggle switch.
-  If the `variant` prop is set to `toggle`, you can set the `size` prop to produce toggles of
-  different sizes. As with the [Button](#Button) component and the input components,
-  `medium` is the default.
 
   ```jsx_example
   <FormFieldGroup description={<ScreenReaderContent>Toggle examples</ScreenReaderContent>}>

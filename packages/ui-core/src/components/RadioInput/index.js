@@ -13,6 +13,11 @@ import theme from './theme'
 ---
 category: components/forms
 ---
+  By default, the RadioInput component is a custom styled HTML radio button.
+
+  Adjust the size of the RadioInput and its label text via the `size` prop. The default size is
+  `medium`.
+
   ```jsx_example
     <RadioInput
       label={lorem.sentence()}

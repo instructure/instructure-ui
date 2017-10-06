@@ -20,19 +20,20 @@ export default function generator ({ colors, borders, spacing, typography }) {
     labelColor: colors.oxford,
     checkedLabelColor: colors.oxford,
     labelFontFamily: typography.fontFamily,
-    labelFontSize: typography.fontSizeMedium,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
-    labelTopMarginMedium: '0.125rem',
-    labelTopMarginLarge: '0.25rem',
 
     facadeSizeSmall: '1rem',
     facadeSizeMedium: '1.25rem',
-    facadeSizeLarge: '1.5rem',
+    facadeSizeLarge: '1.75rem',
+
+    labelFontSizeSmall: typography.fontSizeSmall,
+    labelFontSizeMedium: typography.fontSizeMedium,
+    labelFontSizeLarge: typography.fontSizeLarge,
 
     iconSizeSmall: '0.625rem',
     iconSizeMedium: '0.75rem',
-    iconSizeLarge: '0.875rem'
+    iconSizeLarge: '1rem'
   }
 }
 

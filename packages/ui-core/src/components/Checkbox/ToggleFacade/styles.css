@@ -98,38 +98,49 @@
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
   line-height: var(--labelLineHeight);
-  font-size: var(--labelFontSize);
 }
 
 .small {
-  font-size: 0.875rem;
   height: var(--baseSizeSmall);
   width: calc(var(--baseSizeSmall) * 1.5);
 
   .icon {
+    font-size: 0.875rem;
     height: var(--baseSizeSmall);
     width: var(--baseSizeSmall);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeSmall);
   }
 }
 
 .medium {
-  font-size: 1.125rem;
   height: var(--baseSizeMedium);
   width: calc(var(--baseSizeMedium) * 1.5);
 
   .icon {
+    font-size: 1.125rem;
     height: var(--baseSizeMedium);
     width: var(--baseSizeMedium);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeMedium);
   }
 }
 
 .large {
-  font-size: 1.5rem;
   height: var(--baseSizeLarge);
   width: calc(var(--baseSizeLarge) * 1.5);
 
   .icon {
+    font-size: 1.5rem;
     height: var(--baseSizeLarge);
     width: var(--baseSizeLarge);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeLarge);
   }
 }

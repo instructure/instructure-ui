@@ -21,9 +21,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
     baseSizeLarge: forms.inputHeightLarge,
     labelColor: colors.oxford,
     labelFontFamily: typography.fontFamily,
-    labelFontSize: typography.fontSizeMedium,
     labelFontWeight: typography.fontWeightNormal,
-    labelLineHeight: typography.lineHeightCondensed
+    labelLineHeight: typography.lineHeightCondensed,
+    labelFontSizeSmall: typography.fontSizeSmall,
+    labelFontSizeMedium: typography.fontSizeMedium,
+    labelFontSizeLarge: typography.fontSizeLarge
   }
 }
 
