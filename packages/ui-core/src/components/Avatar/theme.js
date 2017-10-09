@@ -11,3 +11,9 @@ export default function generator ({ colors, borders, typography }) {
     fontWeight: typography.fontWeightBold
   }
 }
+
+generator['canvas'] = function (variables) {
+  return {
+    color: variables['ic-primary-brand-color']
+  }
+}
