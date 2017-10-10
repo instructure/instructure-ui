@@ -2,6 +2,19 @@ import findDOMNode from './findDOMNode'
 import canUseDOM from './canUseDOM'
 import getComputedStyle from './getComputedStyle'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Retrieves the scroll parents of a specified element.
+ * Includes parents of nodeType 1 (Element nodes such
+ * as <p> or <div>) that have overflow css properties
+ * set to auto, scroll, or overlay
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @returns {Array} scroll parents
+ */
 export default function getScrollParents (el) {
   const parents = []
 

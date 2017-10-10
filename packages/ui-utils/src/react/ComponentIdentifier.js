@@ -38,8 +38,8 @@ Abstract component identifier. Helpful for picking out a specific child.
     document.getElementById('container')
   )
   ```
-
 **/
+
 export default class ComponentIdentifier extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
@@ -61,6 +61,10 @@ export default class ComponentIdentifier extends Component {
 }
 
 /**
+ * ---
+ * category: utilities/react
+ * ---
+ *
  * Pick a specific child component from a component's children
  *
  * @param {Component} component The component to look for

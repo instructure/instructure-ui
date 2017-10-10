@@ -3,6 +3,16 @@ import canUseDOM from './canUseDOM'
 import contains from './contains'
 import ownerDocument from './ownerDocument'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Gets the bounding rectangle of an element
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @return {object} rect - object with top, left coords and height and width
+ */
 export default function getBoundingClientRect (el) {
   const rect = { top: 0, left: 0, height: 0, width: 0 }
 

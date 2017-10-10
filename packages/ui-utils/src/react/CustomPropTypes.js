@@ -8,6 +8,10 @@ import canUseDOM from '../dom/canUseDOM'
 export default {
   Children: {
     /**
+     * ---
+     * category: utilities/react
+     * ---
+     *
      * Validate that the children of a component is one of the specified types.
      *
      * Example:
@@ -62,6 +66,10 @@ export default {
     },
 
     /**
+     * ---
+     * category: utilities/react
+     * ---
+     *
      * Validate the type and order of children for a component.
      *
      * Example:
@@ -171,6 +179,32 @@ ${formatTypes(componentName, childNames)}`)
     }
   },
 
+  /**
+   * ---
+   * category: utilities/react
+   * ---
+   *
+   * Ensure that a corresponding handler function is provided for the given prop if the
+   * component does not manage its own state.
+   *
+   * Example:
+   *
+   *  class Foo extends Component {
+   *    static propTypes = {
+   *      selected: CustomPropTypes.controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
+   *      onSelect: PropTypes.func,
+   *      defaultSelected: PropTypes.bool
+   *    }
+   *  ...
+   *
+   * This will throw an error if the 'selected' prop is supplied without a corresponding
+   * 'onSelect' handler and will recommend using 'defaultSelected' instead.
+   *
+   * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+   * @param {string} handlerName - name of the handler function
+   * @param {string} defaultPropName - name of the default prop
+   * @returns Error if designated prop is supplied without a corresponding handler function
+   */
   controllable (propType, handlerName = 'onChange', defaultPropName = 'defaultValue') {
     return function (props, propName, componentName) {
       const error = propType.apply(null, arguments) // eslint-disable-line prefer-spread
@@ -191,6 +225,20 @@ Otherwise, set '${handlerName}'.`
     }
   },
 
+  /**
+   * ---
+   * category: utilities/react
+   * ---
+   *
+   * Verify that the given prop is a valid React element.
+   *
+   * @param {Object} props - object containing the component props
+   * @param {string} propName - name of the given prop
+   * @param {string} componentName - name of the component
+   * @param {string} location
+   * @param {string} propFullName
+   * @returns Error if prop is an invalid react element
+   */
   elementType (props, propName, componentName, location, propFullName) {
     if (props[propName] === undefined) {
       return
@@ -216,6 +264,44 @@ Otherwise, set '${handlerName}'.`
 
   element: canUseDOM ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)]) : PropTypes.element,
 
+  /**
+   * ---
+   * category: utilities/react
+   * ---
+   *
+   * Validate spacing prop constraining it to the following enumerated values
+   *
+   *  - '0'
+   *  - 'none'
+   *  - 'auto'
+   *  - 'xxx-small'
+   *  - 'xx-small'
+   *  - 'x-small'
+   *  - 'small'
+   *  - 'medium'
+   *  - 'large'
+   *  - 'x-large'
+   *  - 'xx-large'
+   *
+   * Valid inputs include a single value or a string with CSS
+   * shorthand like syntax with a maximum of 4 values.
+   *
+   * Examples of valid inputs:
+   * 'x-small' (single value)
+   * 'small large' (CSS shorthand)
+   * '0 small large x-large' (CSS shorthand max 4 values)
+   *
+   * Examples of invalid inputs:
+   * '5px' (must be a string from the enumerated values)
+   * '0 large small 0 0' (invalid shorthand syntax w/5 values)
+   *
+   * @param {Object} props - object containing the component props
+   * @param {string} propName - name of the given prop
+   * @param {string} componentName - name of the component
+   * @param {string} location
+   * @param {string} propFullName
+   * @returns Error if is not one of the enumerated values or the shorthand syntax is incorrect
+   */
   spacing (props, propName, componentName, location) {
     const validValues = [
       '0',
@@ -266,6 +352,20 @@ Otherwise, set '${handlerName}'.`
     }
   },
 
+  /**
+   * ---
+   * category: utilities/react
+   * ---
+   *
+   * Verify that the given prop is a correctly formatted ISO 8601 formatted string.
+   *
+   * @param {Object} props - object containing the component props
+   * @param {string} propName - name of the given prop
+   * @param {string} componentName - name of the component
+   * @param {string} location
+   * @param {string} propFullName
+   * @returns Error if prop is an invalid ISO 8601 string
+   */
   iso8601 (props, propName, componentName, location) {
     const propValue = props[propName]
     if (propValue === undefined) return
@@ -287,6 +387,17 @@ Otherwise, set '${handlerName}'.`
     }
   },
 
+  /**
+   * ---
+   * category: utilities/react
+   * ---
+   *
+   * Trigger a warning if the specified prop variant is deprecated
+   *
+   * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+   * @param {string} deprecated - name of the deprecated variant
+   * @param {string} message - additional information to display with the warning
+   */
   deprecatedVariant (propType, deprecated, message) {
     return (props, propName, componentName) => {
       if (props[propName] === deprecated) {

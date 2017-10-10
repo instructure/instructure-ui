@@ -4,6 +4,17 @@ import isActiveElement from './isActiveElement'
 import containsActiveElement from './containsActiveElement'
 import getActiveElement from './getActiveElement'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Scope tab in order to trap focus within a specified
+ * element.
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {Event} event - the DOM Event that was fired
+ */
 export default function scopeTab (element, event) {
   const node = findDOMNode(element)
   const tabbable = findTabbable(node)

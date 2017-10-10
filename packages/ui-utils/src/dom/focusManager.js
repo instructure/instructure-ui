@@ -6,6 +6,16 @@ import getActiveElement from './getActiveElement'
 import addEventListener from './addEventListener'
 import containsActiveElement from './containsActiveElement'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ * @module FocusManager
+ * Class for focus operations.
+ * - Scoping focus within a given context,
+ * - Mark active element for focus later
+ * - Return focus to the marked element
+ */
 class FocusManager {
   contextElement = null
   focusLaterElement = null
@@ -74,7 +84,7 @@ class FocusManager {
       return
     }
     this.contextElement = findDOMNode(el)
-
+    const win = ownerWindow(this.contextElement)
     this.listeners.push(addEventListener(ownerWindow(this.contextElement), 'blur', this.handleBlur, false))
     this.listeners.push(addEventListener(ownerDocument(this.contextElement), 'focus', this.handleFocus, true))
   }

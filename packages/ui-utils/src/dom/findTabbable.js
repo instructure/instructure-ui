@@ -13,6 +13,19 @@
 import getComputedStyle from './getComputedStyle'
 import findDOMNode from './findDOMNode'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Given an element, finds and returns all tabbable children.
+ * Tabbable elements include input, select, textarea, button, and object.
+ * Anchor tags are also tabbable if they include an href or positive
+ * tabindex attribute.
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @returns {Array} array of all tabbable children
+ */
 export default function findTabbable (el) {
   const element = findDOMNode(el)
 

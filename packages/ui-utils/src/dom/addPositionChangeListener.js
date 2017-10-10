@@ -2,6 +2,18 @@ import findDOMNode from './findDOMNode'
 import getBoundingClientRect from './getBoundingClientRect'
 import requestAnimationFrame from './requestAnimationFrame'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Adds a listener to an element and calls a specified handler
+ * function whenever the position changes
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {function} handler - function to run if the position has changed
+ * @returns {function} remove - cancel the listener and no longer execute the handler function
+ */
 export default function addPositionChangeListener (el, handler) {
   const node = findDOMNode(el)
   const raf = []

@@ -2,6 +2,19 @@ import findDOMNode from './findDOMNode'
 
 let classListShimmed = false
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Produces a classList object containing functions
+ * for both adding and removing classes from an element.
+ * Also provides a contains function to query if the
+ * element contains a specified class name.
+ *
+ * @param {ReactComponent|DomNode} element - component or DOM node
+ * @return {Object} object containing classList functions 'contains', 'add', and 'remove'
+ */
 export default function getClassList (element) {
   const node = findDOMNode(element)
 

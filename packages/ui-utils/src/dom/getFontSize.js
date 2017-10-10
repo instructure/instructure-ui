@@ -1,3 +1,13 @@
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Gets font size in px
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @returns {Object} font size in px
+ */
 export default function getFontSize (el) {
   const m = document.createElement('div')
 

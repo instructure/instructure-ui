@@ -2,13 +2,14 @@
  * ---
  * category: utilities/DOM
  * ---
+ *
  * transformCursor - Calculate the resulting cursor position
  * within a string when some characters are removed
  *
- * @param  {number} cursorIndex  original cursor index
- * @param  {string} dirtyValue   original string
- * @param  {string} cleanedValue original string with some characters removed
- * @return {number}              resulting cursor index
+ * @param {number} cursorIndex - original cursor index
+ * @param {string} dirtyValue - original string
+ * @param {string} cleanedValue - original string with some characters removed
+ * @returns {number} resulting cursor index
  */
 export function transformCursor (cursorIndex, dirtyValue, cleanedValue) {
   if (dirtyValue.length === cleanedValue.length) {
@@ -33,12 +34,16 @@ export function transformCursor (cursorIndex, dirtyValue, cleanedValue) {
 }
 
 /**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
  * transformSelection - Calculate the resulting text selection
  * of a changing text-containing HTML element
  *
- * @param  {DomNode} element      HTML element with selection capabilities
- * @param  {string} cleanedValue  new value that will be given to the HTML element
- * @return {Object}               resulting selection values
+ * @param {DomNode} element - HTML element with selection capabilities
+ * @param {string} cleanedValue - new value that will be given to the HTML element
+ * @return {Object} resulting selection values
  */
 export default function transformSelection (element, cleanedValue) {
   const {

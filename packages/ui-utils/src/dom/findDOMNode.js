@@ -1,5 +1,15 @@
 import ReactDOM from 'react-dom'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Wrapper function for React.findDOMNode
+ *
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @returns {DomNode} The root node of this element
+ */
 export default function findDOMNode (el) {
   if (el === window) {
     return el

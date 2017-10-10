@@ -1,5 +1,16 @@
 import canUseDOM from './canUseDOM'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * If dom is usable, returns a function wrapper for
+ * window.requestAnimationFrame. Otherwise sets
+ * a manual timeout.
+ *
+ * @returns {function} requestAnimationFrame - takes a cb function as an argument and returns a cancel method
+ */
 export default (function () {
   let requestAnimationFrame
 
