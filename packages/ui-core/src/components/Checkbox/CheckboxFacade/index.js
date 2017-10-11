@@ -7,6 +7,11 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Checkbox
+---
+**/
 @themeable(theme, styles)
 export default class CheckboxFacade extends Component {
   static propTypes = {

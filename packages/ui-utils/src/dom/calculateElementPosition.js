@@ -6,6 +6,28 @@ import findDOMNode from './findDOMNode'
 import ownerDocument from './ownerDocument'
 import ownerWindow from './ownerWindow'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Calculate the coordinates to attach an element
+ * to a designated target with specified constraints
+
+ * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {DomNode} target - the target DOM node
+ * @param {Object} options - constraints for the positioning
+ * @param {string} options.placement - designates where the element will be attached
+ *  ('top', 'bottom', 'left', 'right', 'top left' etc.)
+ * @param {DomNode} options.container - DOM node where the element is contained
+ * @param {boolean} options.over - whether or not you want the element to position over the target
+ * @param {string} options.constrain - if the element should be constrained to 'window',
+ *  'scroll-parent', 'parent', or 'none'
+ * @param {string|number} options.offsetX - the horizontal offset for the positioned element
+ * @param {string|number} options.offsetY - the vertical offset for the positioned element
+ * @returns {Object} object containing style with the calculated position in the 'transform'
+ *  property
+ */
 export default function calculateElementPosition (element, target, options) {
   if (!element || options.placement === 'offscreen') {
     return {

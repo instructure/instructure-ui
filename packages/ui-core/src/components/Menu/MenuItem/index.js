@@ -17,6 +17,11 @@ import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Menu
+---
+**/
 @themeable(theme, styles)
 class MenuItem extends Component {
   /* eslint-disable react/require-default-props */

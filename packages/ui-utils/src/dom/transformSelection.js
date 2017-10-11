@@ -1,4 +1,7 @@
 /**
+ * ---
+ * category: utilities/DOM
+ * ---
  * transformCursor - Calculate the resulting cursor position
  * within a string when some characters are removed
  *

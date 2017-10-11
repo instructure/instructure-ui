@@ -7,6 +7,10 @@ import ProgressBar from './ProgressBar'
 import ProgressCircle from './ProgressCircle'
 
 /**
+---
+category: components
+---
+
   Progress is an easy-to-customize progress bar or circle (a.k.a, doughnut)
 
   ### Basic progress bar and circle
@@ -105,7 +109,7 @@ import ProgressCircle from './ProgressCircle'
   prop, developers can use the `valueMax` and `valueNow` props to create
   whatever output they desire - using whatever markup and internationalization
   library tags they need. Common usage examples are shown below. Note the
-  use of the [Typography](#Typography) component for easy text formatting.
+  use of the [Text](#Text) component for easy text formatting.
 
   Don't forget to use the `formatValueText` prop to create easily
   understandable output for screenreader users.
@@ -121,10 +125,10 @@ import ProgressCircle from './ProgressCircle'
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Typography weight="bold">
+        <Text weight="bold">
           {Math.round(valueNow / valueMax * 100)}
-          <Typography color="secondary" weight="light"><sup>%</sup></Typography>
-        </Typography>
+          <Text color="secondary" weight="light"><sup>%</sup></Text>
+        </Text>
       )
     }}
     valueMax={88}
@@ -137,10 +141,10 @@ import ProgressCircle from './ProgressCircle'
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Typography weight="bold" size="large">
+        <Text weight="bold" size="large">
           {Math.round(valueNow / valueMax * 100)}
-          <Typography color="secondary" weight="light"><sup>%</sup></Typography>
-        </Typography>
+          <Text color="secondary" weight="light"><sup>%</sup></Text>
+        </Text>
       )
     }}
     variant="circle"
@@ -165,7 +169,7 @@ import ProgressCircle from './ProgressCircle'
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
         <span>
-          <Typography size="small">{valueNow} / {valueMax}</Typography>
+          <Text size="small">{valueNow} / {valueMax}</Text>
         </span>
       )
     }}
@@ -180,10 +184,10 @@ import ProgressCircle from './ProgressCircle'
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
         <span>
-          <Typography size="x-large" weight="bold">{valueNow}</Typography>
+          <Text size="x-large" weight="bold">{valueNow}</Text>
           <br />
-          <Typography color="secondary" size="small">/&nbsp;</Typography>
-          <Typography color="secondary" size="small">{valueMax}</Typography>
+          <Text color="secondary" size="small">/&nbsp;</Text>
+          <Text color="secondary" size="small">{valueMax}</Text>
         </span>
       )
     }}
@@ -206,15 +210,15 @@ import ProgressCircle from './ProgressCircle'
     formatDisplayedValue={function (valueNow, valueMax) {
       if (valueNow > (valueMax / 2)) {
         return (
-          <Typography weight="bold" size="x-large">
+          <Text weight="bold" size="x-large">
             PASS
-          </Typography>
+          </Text>
         )
       } else {
         return (
-        <Typography weight="bold" size="x-large">
+        <Text weight="bold" size="x-large">
           FAIL
-        </Typography>
+        </Text>
         )
       }
     }}
@@ -231,15 +235,15 @@ import ProgressCircle from './ProgressCircle'
     formatDisplayedValue={function (valueNow, valueMax) {
       if (valueNow > (valueMax / 2)) {
         return (
-          <Typography weight="bold" size="x-large">
+          <Text weight="bold" size="x-large">
             PASS
-          </Typography>
+          </Text>
         )
       } else {
         return (
-        <Typography weight="bold" size="x-large">
+        <Text weight="bold" size="x-large">
           FAIL
-        </Typography>
+        </Text>
         )
       }
     }}
@@ -270,10 +274,10 @@ import ProgressCircle from './ProgressCircle'
         formatDisplayedValue={function (valueNow, valueMax) {
           return (
             <span>
-              <Typography size="xx-large" weight="bold">{valueNow}</Typography>
+              <Text size="xx-large" weight="bold">{valueNow}</Text>
               <br />
-              <Typography color="secondary" size="small">of </Typography>
-              <Typography color="secondary" size="small">{valueMax}</Typography>
+              <Text color="secondary" size="small">of </Text>
+              <Text color="secondary" size="small">{valueMax}</Text>
             </span>
           )
         }}
@@ -298,15 +302,15 @@ import ProgressCircle from './ProgressCircle'
       }}
       formatDisplayedValue={function (valueNow, valueMax) {
         return (
-          <Typography weight="bold" color="primary-inverse">
+          <Text weight="bold" color="primary-inverse">
             {Math.round(valueNow / valueMax * 100)}
-            <Typography
+            <Text
               color="secondary"
               weight="light"
               color="secondary-inverse">
                 <sup>%</sup>
-            </Typography>
-          </Typography>
+            </Text>
+          </Text>
         )
       }}
       variant="bar-inverse"
@@ -319,15 +323,15 @@ import ProgressCircle from './ProgressCircle'
       }}
       formatDisplayedValue={function (valueNow, valueMax) {
         return (
-          <Typography weight="bold" color="primary-inverse">
+          <Text weight="bold" color="primary-inverse">
             {Math.round(valueNow / valueMax * 100)}
-            <Typography
+            <Text
               color="secondary"
               weight="light"
               color="secondary-inverse">
                 <sup>%</sup>
-            </Typography>
-          </Typography>
+            </Text>
+          </Text>
         )
       }}
       size="small"
@@ -342,10 +346,10 @@ import ProgressCircle from './ProgressCircle'
       formatDisplayedValue={function (valueNow, valueMax) {
         return (
           <span>
-            <Typography color="primary-inverse" size="x-large" weight="bold">{valueNow}</Typography>
+            <Text color="primary-inverse" size="x-large" weight="bold">{valueNow}</Text>
             <br />
-            <Typography color="secondary-inverse" size="small">of </Typography>
-            <Typography color="secondary-inverse" size="small">{valueMax}</Typography>
+            <Text color="secondary-inverse" size="small">of </Text>
+            <Text color="secondary-inverse" size="small">{valueMax}</Text>
           </span>
         )
       }}

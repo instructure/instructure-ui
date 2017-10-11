@@ -11,7 +11,7 @@ import warning from '@instructure/ui-utils/lib/warning'
 
 import Tag from '../../Tag'
 import AutocompleteField from '../AutocompleteField'
-import { getOptionId } from '../util'
+import getOptionId from '../utils/getOptionId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -23,6 +23,11 @@ const optionType = PropTypes.shape({
   children: PropTypes.node
 })
 
+/**
+---
+parent: Autocomplete
+---
+**/
 @themeable(theme, styles)
 class AutocompleteMultiple extends Component {
   /* eslint-disable react/require-default-props */

@@ -13,7 +13,7 @@ import FormFieldGroup from '../FormFieldGroup'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   A RadioInputGroup is a group of RadioInput components. It will handle setting
   the name property on the RadioInput components for you and will set the selected item

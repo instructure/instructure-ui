@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/ui-themeable
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themeable.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/ui-themeable
+yarn add @instructure/ui-themeable
 ```

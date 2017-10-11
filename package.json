@@ -1,6 +1,6 @@
 {
   "name": "instructure-ui",
-  "description": "A monorepo for UI libraries made by Instructure Inc.",
+  "description": "UI libraries made by Instructure Inc.",
   "private": true,
   "version": "3.4.0",
   "author": "Instructure, Inc. Engineering and Product Design",
@@ -24,7 +24,8 @@
     "lint": "lerna run lint --stream",
     "lint:fix": "lerna run lint:fix",
     "lint:commit": "rm -f .git/validate-commit-msg && git log -1 --pretty=%B > .git/validate-commit-msg && validate-commit-msg validate-commit-msg",
-    "generate": "./scripts/generate",
+    "generate:component": "./scripts/generate-component",
+    "generate:package": "./scripts/generate-package",
     "commit": "git-cz",
     "bootstrap": "npm-run-all clean:modules bootstrap:packages clean build",
     "bootstrap:packages": "lerna bootstrap",

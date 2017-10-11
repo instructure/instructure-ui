@@ -11,7 +11,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/layout
 ---
   Use Container as a wrapper to separate content and/or to set the
   text alignment for a section of content.
@@ -27,7 +27,7 @@ category: utilities
     margin="large auto"
     padding="small"
   >
-    <Typography as="div">{lorem.sentence()}</Typography>
+    <Text as="div">{lorem.sentence()}</Text>
   </Container>
   ```
   ### The `as` prop
@@ -60,7 +60,7 @@ category: utilities
       </Grid>
 
     </Container>
-    <Typography as="p">{lorem.paragraph()}</Typography>
+    <Text as="p">{lorem.paragraph()}</Text>
   </Container>
   ```
   ### Inline Containers
@@ -77,7 +77,7 @@ category: utilities
       margin="large auto"
       padding="0 small 0 0"
     >
-      <Typography as="div">{lorem.sentence()}</Typography>
+      <Text as="div">{lorem.sentence()}</Text>
     </Container>
     <Button variant="success">Some action</Button>
   </Container>

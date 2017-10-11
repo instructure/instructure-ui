@@ -14,6 +14,10 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
+
 ### Use `<Tag />` to represent a category or group in a form
 
 Tag can be static (informational only) or clickable (when the `onClick` prop is
@@ -53,7 +57,7 @@ supplied).
       </AccessibleContent>
     }
     dismissible
-    margin="0 xxSmall 0 0"
+    margin="0 xx-small 0 0"
     onClick={function () {
       alert("This Tag was dismissed")
     }}

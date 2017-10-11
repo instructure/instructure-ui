@@ -2,6 +2,16 @@ import React from 'react'
 import warning from '../warning'
 import createChainedFunction from '../createChainedFunction'
 
+/**
+* ---
+* category: utilities/react
+* ---
+* Clone a React element without overwriting refs.
+* @module safeCloneElement
+* @param {ReactElement} element
+* @param {object} props
+* @return {ReactElement}
+*/
 export default function safeCloneElement (element, props, ...children) {
   const cloneRef = props.ref
   const originalRef = element.ref

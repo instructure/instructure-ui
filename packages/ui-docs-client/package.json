@@ -26,7 +26,6 @@
     "@instructure/ui-testbed": "3.4.0",
     "babel-cli": "6.26.0",
     "babel-plugin-inline-import": "2.0.6",
-    "instructure-icons": "4.2.0",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
@@ -37,11 +36,10 @@
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.27.4",
-    "core-js": "^2.4.1",
+    "he": "^1.1.1",
     "lorem-ipsum": "^1.0.4",
     "marked": "^0.3.6",
-    "prop-types": "^15.5.10",
-    "tinycolor2": "^1.4.1"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "instructure-icons": ">=4.2.0",

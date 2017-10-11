@@ -13,7 +13,9 @@ import Container from '../Container'
 import Heading from '../Heading'
 
 /**
-
+---
+category: components
+---
   Use Billboard for empty states, 404 pages, redirects, etc.
   ```jsx_example
   <Billboard

@@ -18,7 +18,7 @@ import Container from '../Container'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
 
   The Dialog component is a utility that is used by

@@ -12,6 +12,11 @@ import Transition from '../../Transition'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Rating
+---
+**/
 @themeable(theme, styles)
 export default class RatingIcon extends Component {
   static propTypes = {

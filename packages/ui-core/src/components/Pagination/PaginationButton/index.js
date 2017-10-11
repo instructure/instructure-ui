@@ -5,6 +5,11 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Button from '../../Button'
 
+/**
+---
+parent: Pagination
+---
+**/
 export default class PaginationButton extends Component {
   static propTypes = {
     /**

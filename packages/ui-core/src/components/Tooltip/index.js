@@ -13,7 +13,7 @@ import TooltipContent from './TooltipContent'
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
   Tooltips are small contextual overlays that appear on hover or focus.
 

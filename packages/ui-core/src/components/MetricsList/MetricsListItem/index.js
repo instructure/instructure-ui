@@ -5,6 +5,11 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: MetricsList
+---
+**/
 @themeable(theme, styles)
 export default class MetricsListItem extends Component {
   static propTypes = {

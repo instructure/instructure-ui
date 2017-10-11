@@ -11,6 +11,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+parent: FormField
+---
   This is a helper component that is used by most of the custom form
   components. In most cases it shouldn't be used directly.
 

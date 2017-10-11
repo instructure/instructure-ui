@@ -120,7 +120,7 @@ To help with this upgrade, deprecated props should now emit console warnings in 
 environments. You can also run the codemod to update properties for this release:
 
 ```sh
-npm install @instructure/ui-codemods
+yarn add @instructure/ui-codemods
 ```
 
 ```sh

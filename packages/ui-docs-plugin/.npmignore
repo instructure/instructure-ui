@@ -1,2 +1,5 @@
 **/.*
 **/__tests__
+*.config.js
+src/
+babelrc.js

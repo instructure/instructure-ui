@@ -14,7 +14,7 @@ import theme from './theme'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   A TimeInput component is used to select a time from a list of allowed time values. The
   list of possible values can be configured via this components props.

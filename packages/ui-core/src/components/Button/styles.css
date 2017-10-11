@@ -340,6 +340,7 @@
 .circle-danger {
   padding: var(--iconPadding);
   text-decoration: none;
+  line-height: 1;
 
   &:focus,
   &:hover,
@@ -365,7 +366,7 @@
   .content {
     display: inline-block;
     vertical-align: middle;
-    transform: translateY(0.0625rem);
+    line-height: 1;
   }
 }
 

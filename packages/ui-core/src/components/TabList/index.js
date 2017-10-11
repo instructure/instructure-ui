@@ -20,7 +20,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   Accessible tabbed content component. You can use the TAB key to focus the component and
   arrow keys to navigate between panels of content. The default variant is `simple` tabs.
@@ -30,16 +30,16 @@ category: navigation
   ```jsx_example
   <TabList defaultSelectedIndex={2}>
     <TabPanel title="First Tab">
-      <Typography>Hello World</Typography>
+      <Text>Hello World</Text>
     </TabPanel>
     <TabPanel title="Disabled Tab" disabled>
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
     <TabPanel title="Third Tab">
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
     <TabPanel title="Fourth Tab" maxHeight="10rem">
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
   </TabList>
   ```
@@ -61,16 +61,16 @@ category: navigation
     padding="medium"
   >
     <TabPanel title="Tab A" textAlign="center" padding="large">
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
     <TabPanel title="Disabled Tab" disabled>
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
     <TabPanel title="Tab C">
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
     <TabPanel title="Tab D">
-      <Typography>{lorem.paragraphs()}</Typography>
+      <Text>{lorem.paragraphs()}</Text>
     </TabPanel>
   </TabList>
   ```

@@ -8,6 +8,11 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: List
+---
+**/
 @themeable(theme, styles)
 export default class ListItem extends Component {
   /* eslint-disable react/require-default-props */

@@ -6,6 +6,11 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Tooltip
+---
+**/
 @themeable(theme, styles)
 export default class TooltipContent extends Component {
   /* eslint-disable react/require-default-props */

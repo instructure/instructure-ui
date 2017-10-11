@@ -14,6 +14,11 @@ import GridCol from '../GridCol'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Grid
+---
+**/
 @themeable(theme, styles)
 export default class GridRow extends Component {
   /* eslint-disable react/require-default-props */

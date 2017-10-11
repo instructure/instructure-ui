@@ -11,7 +11,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   The InlineSVG component renders an accessible inline SVG. See also [SVGIcon](#SVGIcon).
 

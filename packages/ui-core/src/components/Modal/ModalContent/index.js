@@ -11,6 +11,11 @@ import Mask from '../../Mask'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Modal
+---
+**/
 @themeable(theme, styles)
 export default class ModalContent extends Component {
   static propTypes = {

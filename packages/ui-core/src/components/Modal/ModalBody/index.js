@@ -9,6 +9,11 @@ import Container from '../../Container'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Modal
+---
+**/
 @themeable(theme, styles)
 export default class ModalBody extends Component {
   /* eslint-disable react/require-default-props */

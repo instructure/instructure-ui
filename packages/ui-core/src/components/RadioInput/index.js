@@ -11,7 +11,7 @@ import styles from './styles.css'
 import theme from './theme'
 /**
 ---
-category: forms
+category: components/forms
 ---
   ```jsx_example
     <RadioInput

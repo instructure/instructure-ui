@@ -14,6 +14,7 @@
     transition: all 0.2s ease-out;
     color: #2e383c;
     line-height: 1.4375;
+    margin-bottom: 1rem;
   }
 
   .CodeMirror-lines {

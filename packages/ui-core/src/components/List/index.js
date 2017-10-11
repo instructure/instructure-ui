@@ -14,6 +14,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components/typography
+---
   By default, `<List>` creates an unordered list of its children. Change the `as` prop to
   create an ordered list instead.
 

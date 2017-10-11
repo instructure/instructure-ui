@@ -12,7 +12,7 @@ import Transition from '../Transition'
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
   The Overlay component is a [Dialog](#Dialog) component that transitions
   in and out content rendered in a [Portal](#Portal)

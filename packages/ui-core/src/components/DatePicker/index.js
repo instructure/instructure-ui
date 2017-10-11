@@ -12,11 +12,14 @@ import Locale from '@instructure/ui-utils/lib/i18n/Locale'
 import PresentationContent from '../PresentationContent'
 import ScreenReaderContent from '../ScreenReaderContent'
 
-import Slider from './Slider'
+import DatePickerPagination from './DatePickerPagination'
 import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   The DatePicker component is used to select a date from a calendar.
   You may want to use a [DateInput](#DateInput) instead.
 
@@ -239,11 +242,11 @@ export default class DatePicker extends Component {
     }
 
     const newFocusedString = focusedMoment.format()
-    this.updateSlider(newFocusedString)
+    this.updatePagination(newFocusedString)
     this.setState({focusedValue: newFocusedString})
   }
 
-  updateSlider (newValueString) {
+  updatePagination (newValueString) {
     const newValueMoment = DateTime.parse(newValueString, this.locale(), this.timezone())
     const newMonth = newValueMoment.month()
     const newYear = newValueMoment.year()
@@ -253,32 +256,32 @@ export default class DatePicker extends Component {
     const renderedYear = renderedMoment.year()
 
     if (newYear < renderedYear) {
-      this.handleSliderPrev()
+      this.handlePaginationPrev()
       return
     }
 
     if (newYear > renderedYear) {
-      this.handleSliderNext()
+      this.handlePaginationNext()
       return
     }
 
     if (newMonth < renderedMonth) {
-      this.handleSliderPrev()
+      this.handlePaginationPrev()
     }
 
     if (newMonth > renderedMonth) {
-      this.handleSliderNext()
+      this.handlePaginationNext()
     }
   }
 
-  handleSliderPrev = (e) => {
+  handlePaginationPrev = (e) => {
     const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
     const sliderString = sliderMoment.subtract(1, 'months').format()
     this.setState({renderedValue: sliderString})
     this.fireRenderedChange(e, sliderString)
   }
 
-  handleSliderNext = (e) => {
+  handlePaginationNext = (e) => {
     const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
     const sliderString = sliderMoment.add(1, 'months').format()
     this.setState({renderedValue: sliderString})
@@ -286,7 +289,7 @@ export default class DatePicker extends Component {
   }
 
   handleDateClick = (e, clickedString) => {
-    this.updateSlider(clickedString)
+    this.updatePagination(clickedString)
     this.setState({selectedValue: clickedString})
     this.fireSelectedChange(e, clickedString)
   }
@@ -398,17 +401,17 @@ export default class DatePicker extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <div className={styles.root}>
-        <Slider
+        <DatePickerPagination
           previousLabel={this.props.previousLabel}
           nextLabel={this.props.nextLabel}
-          onPrev={this.handleSliderPrev}
-          onNext={this.handleSliderNext}
+          onPrev={this.handlePaginationPrev}
+          onNext={this.handlePaginationNext}
         >
           <div className={styles.label}>
             <div>{rendered.format('MMMM')}</div>
             <div>{rendered.format('YYYY')}</div>
           </div>
-        </Slider>
+        </DatePickerPagination>
         <div
           ref={(c) => { this._calendar = c }}
           className={styles.calendar}

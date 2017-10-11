@@ -1,4 +1,3 @@
-
 import shortid from 'shortid'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -58,7 +57,7 @@ export const clearRegistry = function () {
   setRegistry(makeRegistry())
 }
 
-const getDefaultThemeKey = function () {
+export const getDefaultThemeKey = function () {
   const { defaultThemeKey, registered } = getRegistry()
   return defaultThemeKey || registered[0] || DEFAULT_THEME_KEY
 }

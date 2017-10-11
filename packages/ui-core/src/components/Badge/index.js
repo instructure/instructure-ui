@@ -12,6 +12,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   ### Making badges accessible
   Badge counts are automatically fed to screenreaders through the `aria-describedby`
   attribute. Often, though, a number alone doesn't give a screenreader user enough context.

@@ -11,6 +11,11 @@ import Transition from '../../Transition'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: TabList
+---
+**/
 @themeable(theme, styles)
 export default class TabPanel extends Component {
   /* eslint-disable react/require-default-props */

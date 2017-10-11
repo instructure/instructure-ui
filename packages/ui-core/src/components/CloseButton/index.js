@@ -16,7 +16,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   A CloseButton component (used in dialog components).
   See [Alert](#Alert), [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray).

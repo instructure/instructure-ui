@@ -3,6 +3,15 @@ import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentT
 
 import ScreenReaderContent from '../components/ScreenReaderContent'
 
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Returns 'true' if any of the children are visible
+ * @function
+ * @param {Array.<object>} children - A react component's children prop
+ * @return {boolean} - whether any of the children are visible
+ */
 export default function hasVisibleChildren (children) {
   let visible = false
 

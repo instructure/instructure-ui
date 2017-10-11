@@ -8,7 +8,7 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   The `<Portal/>` component allows you to render a subtree into a DOM element.
 
@@ -42,11 +42,11 @@ category: utilities
               <p>Greetings from the portal!</p>
             </ContextBox>
           </Portal>
-          <Typography>
+          <Text>
             <p>{lorem.paragraph()}</p>
             <div ref={(c) => this._mountNode = c}></div>
             <p>{lorem.paragraph()}</p>
-          </Typography>
+          </Text>
         </div>
       )
     }

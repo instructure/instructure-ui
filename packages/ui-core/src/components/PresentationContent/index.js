@@ -7,7 +7,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   A component that *tries* to hide itself from screen readers, absolutely
   expecting that you're providing a more accessible version of the resource
@@ -23,9 +23,9 @@ category: utilities
 
   ```jsx_example
     <PresentationContent>
-      <Typography>
+      <Text>
         Presentational content here
-      </Typography>
+      </Text>
     </PresentationContent>
   ```
 **/

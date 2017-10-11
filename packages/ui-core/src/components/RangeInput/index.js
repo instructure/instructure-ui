@@ -16,7 +16,7 @@ import theme from './theme'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   An html5 range input/slider component. Note the default `stacked`
   label > input layout, and the alternate `inline` layout.

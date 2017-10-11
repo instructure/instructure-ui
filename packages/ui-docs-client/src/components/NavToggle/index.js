@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ToggleDetails from '@instructure/ui-core/lib/components/ToggleDetails'
-import Typography from '@instructure/ui-core/lib/components/Typography'
+import Text from '@instructure/ui-core/lib/components/Text'
 
 export default class NavToggle extends Component {
   static propTypes = {
@@ -57,7 +57,7 @@ export default class NavToggle extends Component {
         fluidWidth
         {...props}
         summary={
-          <Typography
+          <Text
             weight={styles.textWeight}
             transform={styles.textTransform}
             size={styles.textSize}
@@ -65,7 +65,7 @@ export default class NavToggle extends Component {
             color="primary"
           >
             {summary}
-          </Typography>
+          </Text>
         }
       />
     )

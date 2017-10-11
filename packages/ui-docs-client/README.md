@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/ui-docs-client
 
 A client application to display documentation made by Instructure Inc.
@@ -10,7 +14,7 @@ A client application to display documentation made by Instructure Inc.
 ### Installation
 
 ```sh
-npm install @instructure/ui-docs-client
+yarn add @instructure/ui-docs-client
 ```
 
 ### Usage

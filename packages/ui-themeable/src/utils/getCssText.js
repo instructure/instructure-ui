@@ -4,8 +4,11 @@ import applyCustomMediaToCss from './applyCustomMediaToCss'
 import customPropertiesSupported from './customPropertiesSupported'
 
 /**
+ * ---
+ * category: utilities/themes
+ * ---
  * Returns the CSS as a string with variables applied
- *
+ * @module getCssText
  * @param {Function} template A template function that returns the CSS as a string with variables injected
  * @param {Object} variables JS variables
  * @param {string} prefix CSS variable prefix/namespace

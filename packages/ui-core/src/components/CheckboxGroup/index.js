@@ -12,7 +12,7 @@ import FormFieldGroup from '../FormFieldGroup'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   A `<CheckboxGroup/>` is a group of [Checkbox](#Checkbox) components that share the same name. You can
   set an array `value` for the entire group and it will handle setting the `checked` and `name` props for you.

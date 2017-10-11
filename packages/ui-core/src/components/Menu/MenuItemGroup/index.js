@@ -16,6 +16,11 @@ import MenuItemSeparator from '../MenuItemSeparator'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Menu
+---
+**/
 @themeable(theme, styles)
 class MenuItemGroup extends Component {
   /* eslint-disable react/require-default-props */

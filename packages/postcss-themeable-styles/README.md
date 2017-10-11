@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/postcss-themeable-styles
 
 [npm]: https://img.shields.io/npm/v/@instructure/postcss-themeable-styles.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/postcss-themeable-styles
+yarn add --dev @instructure/postcss-themeable-styles
 ```

@@ -9,6 +9,11 @@ import TreeButton from '../TreeButton'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: TreeBrowser
+---
+**/
 @themeable(theme, styles)
 export default class TreeCollection extends Component {
   /* eslint-disable react/require-default-props */

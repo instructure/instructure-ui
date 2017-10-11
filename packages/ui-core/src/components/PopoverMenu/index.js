@@ -20,7 +20,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   The `<PopoverMenu/>` component provides a toggle button which, when clicked, shows or hides a [Menu](#Menu) in a
   [Popover](#Popover).

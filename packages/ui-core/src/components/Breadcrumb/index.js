@@ -13,7 +13,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   Change the `size` prop to control the font-size of the breadcrumbs
   (default is `medium`).

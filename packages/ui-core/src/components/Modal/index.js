@@ -18,7 +18,7 @@ import CloseButton from '../CloseButton'
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
   The Modal is a dialog component that is centered in the viewport. The Modal
   overlays the application content and applies a mask to it.
@@ -85,7 +85,7 @@ category: dialogs
                <Heading>Hello World</Heading>
              </ModalHeader>
              <ModalBody>
-               <Typography lineHeight="double">{fpo}</Typography>
+               <Text lineHeight="double">{fpo}</Text>
              </ModalBody>
              <ModalFooter>
                <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
@@ -140,7 +140,7 @@ category: dialogs
                <Heading>This Modal contains an Autocomplete</Heading>
              </ModalHeader>
              <ModalBody>
-               <Typography lineHeight="double">{fpo}</Typography>
+               <Text lineHeight="double">{fpo}</Text>
                <ModalAutoCompleteExample
                 label="Choose a state" defaultOption="12"
                 onChange={(e, o) => console.log(o.label)} />

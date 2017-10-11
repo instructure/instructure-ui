@@ -16,7 +16,7 @@ import styles from './styles.css'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   Renders available pages of content, and reacts to selection of another page.
   Expects array of `PaginationButton` children. Focus and announcement of page change is

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { darken } from '@instructure/ui-themeable/lib/utils/color'
 import BaseButton from '@instructure/ui-core/lib/components/Button'
 
 export default class Button extends Component {
@@ -28,7 +29,9 @@ export default class Button extends Component {
         theme={{
           iconColor: color,
           iconFocusBoxShadow: `inset 0 0 0 1px ${color}`,
-          iconHoverColor: color
+          iconHoverColor: color,
+          linkColor: color,
+          linkHoverColor: darken(color, 10)
         }}
       />
     )

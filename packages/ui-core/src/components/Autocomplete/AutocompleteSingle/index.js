@@ -7,7 +7,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import warning from '@instructure/ui-utils/lib/warning'
 
 import AutocompleteField from '../AutocompleteField'
-import { getOptionId } from '../util'
+import getOptionId from '../utils/getOptionId'
 
 const optionType = PropTypes.shape({
   label: PropTypes.string.isRequired,
@@ -16,6 +16,11 @@ const optionType = PropTypes.shape({
   children: PropTypes.node
 })
 
+/**
+---
+parent: Autocomplete
+---
+**/
 class AutocompleteSingle extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

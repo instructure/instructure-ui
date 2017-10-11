@@ -12,6 +12,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   Displays short, contextual information about an item. Change the border
   and text color via the `variant` prop. Use the `margin` prop to add space around
   the component.

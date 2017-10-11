@@ -1,15 +1,18 @@
 /**
- * Safe chained function
+ * ---
+ * category: utilities/react
+ * ---
+ * Safe chained functions
  *
  * Will only create a new function if needed,
  * otherwise will pass back existing functions or null.
  *
  * Forked from: https://github.com/react-bootstrap/react-overlays/blob/master/src/utils/createChainedFunction.js
- *
+ * @module createChainedFunction
  * @param {function} functions to chain
  * @returns {function|null}
  */
-function createChainedFunction (...funcs) {
+export default function createChainedFunction (...funcs) {
   return funcs
     .filter((f, i) => {
       if (f == null) {
@@ -35,8 +38,6 @@ function createChainedFunction (...funcs) {
       }
     }, null)
 }
-
-export default createChainedFunction
 
 /**
  * Find all indexes for a value in an Array

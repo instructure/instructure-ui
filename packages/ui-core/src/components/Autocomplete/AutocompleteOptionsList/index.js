@@ -7,11 +7,16 @@ import themeable from '@instructure/ui-themeable'
 import ContextBox from '../../ContextBox'
 import Spinner from '../../Spinner'
 
-import { getOptionId } from '../util'
+import getOptionId from '../utils/getOptionId'
 
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Autocomplete
+---
+**/
 @themeable(theme, styles)
 class AutocompleteOptionsList extends Component {
   /* eslint-disable react/require-default-props */

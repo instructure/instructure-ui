@@ -12,6 +12,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   ### Choose from four sizes and add margin as needed
 
   The `size` prop allows you to select from `x-small`, `small`, `medium` and `large`

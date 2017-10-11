@@ -14,7 +14,7 @@ import FormField from '../FormField'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   A standard text input field
 
@@ -56,7 +56,7 @@ category: forms
       width="4em"
     />
     &nbsp;
-    <Typography>foo</Typography>
+    <Text>foo</Text>
   </div>
   ```
 
@@ -158,6 +158,9 @@ class TextInput extends Component {
     this._defaultId = `TextInput_${shortid.generate()}`
   }
 
+  /**
+  * focus the input element
+  */
   focus () {
     this._input.focus()
   }

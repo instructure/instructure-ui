@@ -3,7 +3,7 @@ import keycode from 'keycode'
 import moment from 'moment' // eslint-disable-line import/no-extraneous-dependencies
 import DatePicker from '../index'
 import styles from '../styles.css'
-import sliderStyles from '../Slider/styles.css'
+import paginationStyles from '../DatePickerPagination/styles.css'
 
 describe('<DatePicker />', () => {
   const testbed = new Testbed(<DatePicker previousLabel="foo" nextLabel="bar" todayValue="2017-06-01" />)
@@ -36,7 +36,7 @@ describe('<DatePicker />', () => {
   it('fires onRenderedChange when next arrow is clicked', () => {
     const onRenderedChange = testbed.stub()
     const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${sliderStyles.root}`)
+    const slider = subject.find(`.${paginationStyles.root}`)
     const nextButton = slider.find('Button').first()
     nextButton.simulate('click')
     expect(onRenderedChange).to.have.been.called
@@ -47,7 +47,7 @@ describe('<DatePicker />', () => {
   it('fires onRenderedChange when previous arrow is clicked', () => {
     const onRenderedChange = testbed.stub()
     const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${sliderStyles.root}`)
+    const slider = subject.find(`.${paginationStyles.root}`)
     const prevButton = slider.find('Button').last()
     prevButton.simulate('click')
     expect(onRenderedChange).to.have.been.called

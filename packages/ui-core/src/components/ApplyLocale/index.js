@@ -4,7 +4,7 @@ import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   `<ApplyLocale />` Sets the locale and timezone context for children that can
   use it, such as a [DatePicker](#DatePicker) or [NumberInput](#NumberInput)

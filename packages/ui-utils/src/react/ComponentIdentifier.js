@@ -3,38 +3,43 @@ import PropTypes from 'prop-types'
 import matchComponentTypes from './matchComponentTypes'
 import ensureSingleChild from './ensureSingleChild'
 
+
 /**
- * Abstract component identifier. Helpful for picking out a specific child.
- *
- * Example:
- *
- *  class App extends Component {
- *    render () {
- *      const title = pick(Title, this.props.children)
- *      const content = pick(Content, this.props.children)
- *
- *      return (
- *        <div>
- *          {title}
- *          <ContextBox>
- *            {content}
- *          </ContextBox>
- *        </div>
- *      )
- *    }
- *  }
- *
- *  class Title extends ComponentIdentifier { static displayName = "Title" }
- *  class Content extends ComponentIdentifier { static displayName = "Content" }
- *
- *  ReactDOM.render(
- *    <App>
- *      <Title><h2>Hello World!</h2></Title>
- *      <Content><div>This text gets decorated within `App`.</div></Content>
- *    </App>,
- *    document.getElementById('container')
- *  )
- */
+---
+category: utilities/react
+---
+Abstract component identifier. Helpful for picking out a specific child.
+
+  ```js
+  class App extends Component {
+    render () {
+      const title = pick(Title, this.props.children)
+      const content = pick(Content, this.props.children)
+
+      return (
+        <div>
+          {title}
+          <ContextBox>
+            {content}
+          </ContextBox>
+         </div>
+     )
+    }
+  }
+
+  class Title extends ComponentIdentifier { static displayName = "Title" }
+  class Content extends ComponentIdentifier { static displayName = "Content" }
+
+  ReactDOM.render(
+    <App>
+      <Title><h2>Hello World!</h2></Title>
+      <Content><div>This text gets decorated within `App`.</div></Content>
+    </App>,
+    document.getElementById('container')
+  )
+  ```
+
+**/
 export default class ComponentIdentifier extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {

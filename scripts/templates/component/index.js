@@ -8,6 +8,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   A ${COMPONENT} component [WIP]
 
   ```jsx_example

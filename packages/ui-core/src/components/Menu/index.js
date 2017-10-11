@@ -20,7 +20,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   The `<Menu/>` component provides a list of actionable
   `<MenuItems/>`that are keyboard accessible. A `<Menu/>`

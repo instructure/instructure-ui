@@ -1,0 +1,27 @@
+.root {
+  font-size: 1rem;
+  margin: 2rem 0;
+
+  :global .CodeMirror { /* stylelint-disable-line selector-class-pattern */
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-bottom: 0.25rem;
+  }
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5rem;
+}
+
+.close {
+  background-color: #008ee2;
+  color: white;
+  display: flex;
+  justify-content: flex-end;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.editor {}

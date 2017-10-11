@@ -1,0 +1,21 @@
+.root {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.banner {
+  padding: 1rem 1.7rem 0;
+}
+
+.heading {
+  font-size: 1.75rem;
+  font-weight: 300;
+  text-decoration: none;
+  color: #008ee2;
+  margin: 0;
+  display: inline;
+}
+
+.version {
+  padding: 0 0.75rem;
+}

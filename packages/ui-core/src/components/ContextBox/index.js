@@ -12,6 +12,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   A `<ContextBox/>` is a container component that displays contextual information. It may or may not
   be displayed as on overlay using a [Popover](#Popover).
 
@@ -33,7 +36,7 @@ import theme from './theme'
       placement="top"
     >
       <Heading level="h3">Hello World</Heading>
-      <Typography size="small">Some informational text that is helpful</Typography>
+      <Text size="small">Some informational text that is helpful</Text>
     </ContextBox>
     <ContextBox
       margin="0 large 0 0"
@@ -42,7 +45,7 @@ import theme from './theme'
       placement="start"
     >
       <Heading level="h3">Hello World</Heading>
-      <Typography size="small">This ContextBox is end-text-aligned</Typography>
+      <Text size="small">This ContextBox is end-text-aligned</Text>
     </ContextBox>
     <ContextBox
       placement="bottom"
@@ -51,11 +54,11 @@ import theme from './theme'
       size="small"
       margin="x-large 0 0"
     >
-      <Typography size="small">
+      <Text size="small">
         This ContextBox uses the inverse variant and medium padding. Its size prop is set to small,
         which causes long strings like this to wrap. It also has top margin to separate it from
         the ContextBoxes about it.
-      </Typography>
+      </Text>
     </ContextBox>
   </div>
   ```

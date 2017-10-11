@@ -1,19 +1,25 @@
+---
+category: packages
+---
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-polyfill-loader.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-polyfill-loader
 
+## babel-polyfill-loader
+
 [![npm][npm]][npm-url]
 
-# babel-polyfill-loader
+
 A [webpack](https://www.npmjs.com/package/webpack) loader that generates a
 customized polyfill
 
-## Installation
+### Installation
 
 ```sh
-npm install @instructure/ui-polyfill-loader
+yarn add --dev @instructure/ui-polyfill-loader
 ```
 
-## Usage
+### Usage
 Add a .polyfillrc (in JSON or YAML format) or a polyfill.config.js file to your project:
 
 ```json

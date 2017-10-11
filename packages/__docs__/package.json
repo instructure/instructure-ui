@@ -16,6 +16,9 @@
     "start:watch": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
     "build:dev": "cross-env NODE_ENV=development DEBUG=1 webpack",
+    "test": "cross-env NODE_ENV=test yarn lint",
+    "lint": "eslint src",
+    "lint:fix": "eslint src --fix",
     "clean": "rimraf __build__ .babel-cache",
     "bump": "git fetch origin --tags --force && lerna publish --skip-git --skip-npm --conventional-commits",
     "deploy": "touch __build__/.nojekyll && gh-pages -d __build__ -r git@github.com:instructure/instructure-ui.git"

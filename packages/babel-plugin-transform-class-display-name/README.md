@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/babel-plugin-transform-class-display-name
 
 [npm]: https://img.shields.io/npm/v/@instructure/babel-plugin-transform-class-display-name.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/babel-plugin-transform-class-display-name
+yarn add --dev @instructure/babel-plugin-transform-class-display-name
 ```

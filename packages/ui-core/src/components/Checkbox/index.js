@@ -20,7 +20,7 @@ import theme from './theme'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
   set the `defaultChecked` prop.

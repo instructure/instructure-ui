@@ -15,7 +15,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
 
   A Mask component covers its closest positioned parent (either absolute or relative).

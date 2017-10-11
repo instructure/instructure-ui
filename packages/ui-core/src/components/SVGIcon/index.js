@@ -14,7 +14,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   SVGIcon component
 

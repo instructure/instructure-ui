@@ -1,7 +1,11 @@
+---
+category: packages
+---
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
 
-### @instructure/ui-codemods
+## @instructure/ui-codemods
 
 InstructureUI codemods should make it easier to deal with API changes to `@instructure/ui-core`.
 
@@ -10,7 +14,7 @@ InstructureUI codemods should make it easier to deal with API changes to `@instr
 ### Installation
 
 ```sh
-npm install @instructure/ui-codemods
+yarn add @instructure/ui-codemods
 ```
 
 ### Updating Deprecated Props

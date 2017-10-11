@@ -10,6 +10,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   An Avatar component
   ```jsx_example
   <Avatar name="Sarah Robinson" src={avatarImage} />

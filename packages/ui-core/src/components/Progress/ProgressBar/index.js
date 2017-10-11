@@ -10,6 +10,11 @@ import Container from '../../Container'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Progress
+---
+**/
 @themeable(theme, styles)
 export default class ProgressBar extends Component {
   /* eslint-disable react/require-default-props */

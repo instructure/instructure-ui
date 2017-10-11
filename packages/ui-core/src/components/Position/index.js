@@ -31,7 +31,7 @@ class PositionContent extends ComponentIdentifier {
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   A Position component
 

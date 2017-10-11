@@ -13,6 +13,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components/utilities
+---
   A Media component with a caption
 
   ```jsx_example

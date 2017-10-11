@@ -10,7 +10,7 @@ import styles from './styles.css'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   The ScreenReaderContent component renders content that is accessible to
   screen readers, but is not visible.

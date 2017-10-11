@@ -14,12 +14,17 @@ import AutocompleteOptionsList from '../AutocompleteOptionsList'
 import Position, { PositionContent } from '../../Position'
 import FormField from '../../FormField'
 
-import { getOptionId } from '../util'
+import getOptionId from '../utils/getOptionId'
 import IconArrowDown from './IconArrowDown'
 
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Autocomplete
+---
+**/
 @themeable(theme, styles)
 class AutocompleteField extends Component {
   /* eslint-disable react/require-default-props */

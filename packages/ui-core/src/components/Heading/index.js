@@ -13,6 +13,9 @@ import theme from './theme'
 import Container from '../Container'
 
 /**
+---
+category: components/typography
+---
   Generate content headings, from h1 to h5. The `as` prop controls what
   html element is outputted. The `level` prop sets its appearance.
   Use the `margin` prop to give the Heading margin.

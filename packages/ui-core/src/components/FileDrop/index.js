@@ -68,7 +68,7 @@ const IS_MS = isBrowserMS()
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   FileDrop is a consistent way to drag and drop, as well as browse your computer to upload a media file.
 

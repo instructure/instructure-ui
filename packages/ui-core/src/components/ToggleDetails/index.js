@@ -16,7 +16,7 @@ const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   The ToggleDetails component can be used to show/hide content in response to user action.
 
@@ -24,12 +24,12 @@ category: navigation
 
   ```jsx_example
   <ToggleDetails
-    summary={<Typography color="primary">Click to hide me!</Typography>}
+    summary={<Text color="primary">Click to hide me!</Text>}
     defaultExpanded
   >
-    <Typography>
+    <Text>
       <b>I am expanded!</b>&nbsp;{lorem.paragraph()}
-    </Typography>
+    </Text>
   </ToggleDetails>
   ```
 
@@ -54,13 +54,13 @@ category: navigation
           <br />
           <br />
           <ToggleDetails
-            summary={<Typography color="primary">Click to hide me!</Typography>}
+            summary={<Text color="primary">Click to hide me!</Text>}
             expanded={this.state.expanded}
             onToggle={this.handleChange}
           >
-            <Typography>
+            <Text>
               <b>I am controlled and expanded!</b>&nbsp;{lorem.paragraph()}
-            </Typography>
+            </Text>
           </ToggleDetails>
         </div>
         )
@@ -75,11 +75,11 @@ category: navigation
   ```jsx_example
   <ToggleDetails
     variant="filled"
-    summary={<Typography color="primary">Click to expand me!</Typography>}
+    summary={<Text color="primary">Click to expand me!</Text>}
   >
-    <Typography>
+    <Text>
       <b>I am expanded!</b>&nbsp;{lorem.paragraph()}
-    </Typography>
+    </Text>
   </ToggleDetails>
   ```
   ### Icon size / summary text formatting
@@ -87,35 +87,35 @@ category: navigation
 
   The `summary` prop accepts any node, allowing you to format the summary text as
   you see fit. In these examples, we are formatting it with the
-  [Typography](#Typography) component.
+  [Text](#Text) component.
 
   ```jsx_example
   <div>
     <ToggleDetails
       size="small"
-      summary={<Typography size="small">Small icon</Typography>}
+      summary={<Text size="small">Small icon</Text>}
     >
-      <Typography>
+      <Text>
         {lorem.paragraph()}
-      </Typography>
+      </Text>
     </ToggleDetails>
 
     <br />
 
-    <ToggleDetails summary={<Typography size="medium">Medium icon</Typography>}>
-      <Typography>
+    <ToggleDetails summary={<Text size="medium">Medium icon</Text>}>
+      <Text>
         {lorem.paragraph()}
-      </Typography>
+      </Text>
     </ToggleDetails>
 
     <br />
 
     <ToggleDetails
       size="large"
-      summary={<Typography size="large">Large icon</Typography>}>
-      <Typography>
+      summary={<Text size="large">Large icon</Text>}>
+      <Text>
         {lorem.paragraph()}
-      </Typography>
+      </Text>
     </ToggleDetails>
   </div>
   ```
@@ -129,20 +129,20 @@ category: navigation
   ```jsx_example
   <ToggleDetails
     summary={
-      <Typography
+      <Text
         size="medium"
         weight="bold"
       >
         Block display
-      </Typography>
+      </Text>
     }
     iconPosition="end"
     defaultExpanded
     fluidWidth
   >
-    <Typography>
+    <Text>
       {lorem.paragraph()}
-    </Typography>
+    </Text>
   </ToggleDetails>
   ```
 **/

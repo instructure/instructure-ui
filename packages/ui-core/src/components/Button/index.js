@@ -15,6 +15,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   The default button component:
   ```jsx_example
   <Button>OK</Button>

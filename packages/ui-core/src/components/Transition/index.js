@@ -8,7 +8,7 @@ import styles from './styles.css'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
 The `Transition` wrapper helps you easily transition elements in and out of
 your UI. The component defaults to the `fade` opacity transition.

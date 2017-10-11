@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/babel-plugin-themeable-styles
 
 [npm]: https://img.shields.io/npm/v/@instructure/babel-plugin-themeable-styles.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/babel-plugin-themeable-styles
+yarn add --dev @instructure/babel-plugin-themeable-styles
 ```

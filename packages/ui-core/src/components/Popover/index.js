@@ -26,7 +26,7 @@ class PopoverContent extends ComponentIdentifier {
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
   A `<Popover/>` is a small overlay of content that contains secondary information. Most of the time
   you can use a [Tooltip](#Tooltip) or a [PopoverMenu](#PopoverMenu) component, but if you need

@@ -2,10 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import lorem from 'lorem-ipsum'
 
-import parseComponents from './utils/parse-components'
-import parseDocs from './utils/parse-docs'
-
-import DocsApp from './components/DocsApp'
+import App from './components/App'
 
 import placeholderImage from './utils/placeholder-image'
 
@@ -33,11 +30,5 @@ global.lorem = {
 global.placeholderImage = placeholderImage
 
 export default function renderDocsClient (data, element) {
-  const props = {
-    library: data.library,
-    ...parseComponents(data.components),
-    ...parseDocs(data.docs)
-  }
-
-  ReactDOM.render(<DocsApp {...props} />, element)
+  ReactDOM.render(<App {...data} />, element)
 }

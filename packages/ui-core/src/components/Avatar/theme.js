@@ -14,6 +14,6 @@ export default function generator ({ colors, borders, typography }) {
 
 generator['canvas'] = function (variables) {
   return {
-    color: variables['ic-primary-brand-color']
+    color: variables['ic-brand-primary']
   }
 }

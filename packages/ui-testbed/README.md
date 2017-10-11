@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/ui-testbed
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-testbed.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/ui-testbed
+yarn add --dev @instructure/ui-testbed
 ```

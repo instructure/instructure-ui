@@ -7,11 +7,11 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import AutocompleteSingle from './AutocompleteSingle'
 import AutocompleteMultiple from './AutocompleteMultiple'
-import { parseOptions } from './util'
+import parseOptions from './utils/parseOptions'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   Autocomplete is a searchable select component.
 
@@ -371,7 +371,7 @@ category: forms
             <option value="16">Illinois</option>
           </Autocomplete>
           &nbsp;
-          <Typography>{this.props.width}</Typography>
+          <Text>{this.props.width}</Text>
         </div>
       )
     }

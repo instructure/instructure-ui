@@ -12,6 +12,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   An accessible image component
 
   ```jsx_example

@@ -9,6 +9,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components/typography
+---
   The MetricsList component displays metrics (value + label) in rows.
 
   ```jsx_example

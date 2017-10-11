@@ -16,7 +16,7 @@ import theme from './theme'
 
 /**
 ---
-category: utilities
+category: components/layout
 ---
   ### Create a basic column layout
 

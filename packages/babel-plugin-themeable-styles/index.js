@@ -39,9 +39,6 @@ module.exports = exports.default = function transformThemeableStyles ({ types: t
         ([plugin]) => plugin.manipulateOptions === pluginApi.manipulateOptions
       )[0][1]
 
-      // eslint-disable-next-line no-console
-      console.log(`[transform-themeable]: ${basename(cwd)}`)
-
       requireHook({
         ignore: thisPluginOptions.ignore,
         generateScopedName: getScopedNameGenerator(thisPluginOptions.themeablerc),

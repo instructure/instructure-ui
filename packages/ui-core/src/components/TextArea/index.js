@@ -18,7 +18,7 @@ import FormField from '../FormField'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   Standard textarea field (resizable). Note the default `stacked` label > input
   layout, and the alternate `inline` layout.
@@ -54,7 +54,7 @@ category: forms
       maxHeight="250px"
     />
     &nbsp;
-    <Typography>foo</Typography>
+    <Text>foo</Text>
   </div>
   ```
 

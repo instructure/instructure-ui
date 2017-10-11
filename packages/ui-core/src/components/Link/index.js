@@ -16,7 +16,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   A Link component
 

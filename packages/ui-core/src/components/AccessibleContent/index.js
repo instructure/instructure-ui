@@ -10,7 +10,7 @@ import ScreenReaderContent from '../ScreenReaderContent'
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   An AccessibleContent component
 
@@ -19,9 +19,9 @@ category: utilities
 
   ```jsx_example
   <AccessibleContent alt="Alternative text for a screenreader only">
-    <Typography>
+    <Text>
       Presentational content goes here
-    </Typography>
+    </Text>
   </AccessibleContent>
   ```
 **/

@@ -8,7 +8,7 @@ import FormFieldLayout from './FormFieldLayout'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   This is a helper component that is used by most of the custom form
   components. In most cases it shouldn't be used directly.

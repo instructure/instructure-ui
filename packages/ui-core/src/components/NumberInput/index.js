@@ -94,7 +94,7 @@ export function cleanValue (value, locale, allowNegative = true) {
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   A standard number input field with placeholder
 
@@ -250,7 +250,7 @@ category: forms
       </GridCol>
       <GridCol width="auto">
         <Container margin="0 0 x-small" display="block">
-          <Typography weight="bold">%</Typography>
+          <Text weight="bold">%</Text>
         </Container>
       </GridCol>
     </GridRow>

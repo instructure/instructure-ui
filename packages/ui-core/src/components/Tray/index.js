@@ -16,7 +16,7 @@ import TrayContent from './TrayContent'
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
   The Tray is a dialog component that slides out from the top/bottom/left/right of
   the viewport.
@@ -88,7 +88,7 @@ category: dialogs
           >
             <Container as="div" padding="large medium">
               <Heading>Hello</Heading>
-              <Typography as="p" lineHeight="double">{lorem.paragraph()}</Typography>
+              <Text as="p" lineHeight="double">{lorem.paragraph()}</Text>
             </Container>
           </Tray>
         </div>

@@ -8,7 +8,7 @@ import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild
 
 /**
 ---
-category: utilities
+category: components/utilities
 ---
   The `<ApplyTheme/>` component provides a way to override the default
   theme properties for all `@themeable` child components.

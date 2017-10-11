@@ -1,3 +1,7 @@
+---
+category: packages
+---
+
 ## @instructure/ui-themes
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themes.svg
@@ -8,5 +12,5 @@
 ### Installation
 
 ```sh
-npm install @instructure/ui-themes
+yarn add @instructure/ui-themes
 ```

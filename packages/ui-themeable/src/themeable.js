@@ -1,3 +1,16 @@
+/**
+* ---
+* category: utilities/themes
+* ---
+* Make a component "themeable" and inject component styles into the document.
+* Themeable components have a `theme` property which can be configured explicitly
+* via props or passed via React context.
+* @module themeable
+* @param {function} theme - A function that generates the component theme variables.
+* @param {object} styles - The component styles object.
+* @return {function} The themeable component.
+*/
+
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import deepEqual from 'deep-equal'
@@ -24,13 +37,7 @@ import {
 
 const debug = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
 
-/**
- * Mark component as themeable and inject component styles into the document
- *
- * Themeable components have a `theme` property which can be configured explicitly
- * via props or passed via context.
- *
- */
+
 export default function themeable (theme, styles) {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)

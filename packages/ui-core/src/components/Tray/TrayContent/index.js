@@ -8,6 +8,11 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: Tray
+---
+**/
 @themeable(theme, styles)
 class TrayContent extends Component {
   static propTypes = {

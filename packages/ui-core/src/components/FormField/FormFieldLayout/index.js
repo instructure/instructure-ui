@@ -18,6 +18,11 @@ import Grid, { GridCol, GridRow } from '../../Grid'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: FormField
+---
+**/
 @themeable(theme, styles)
 class FormFieldLayout extends Component {
   /* eslint-disable react/require-default-props */

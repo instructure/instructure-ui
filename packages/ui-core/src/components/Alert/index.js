@@ -26,10 +26,10 @@ import theme from './theme'
 
 /**
 ---
-category: dialogs
+category: components/dialogs
 ---
 
-The Alert component can be used to notify the user. It supports serveral
+The Alert component can be used to notify the user. It supports several
 variants to provide context to the message.
 
 Alert can optionally render as a dismissible 'dialog' with a close button.

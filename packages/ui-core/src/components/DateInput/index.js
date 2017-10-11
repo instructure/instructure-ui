@@ -16,6 +16,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components/forms
+---
   A DateInput component is used to input a date either with a
   [DatePicker](#DatePicker) in a popup, or by typing a date into a
   [TextInput](#TextInput).

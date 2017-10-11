@@ -13,6 +13,9 @@ import styles from './styles.css'
 import theme from './theme'
 
 /**
+---
+category: components
+---
   Rating takes the `valueNow` and `valueMax` props and
   outputs a 3- or 5-star rating. Decimals are rounded to the nearest
   whole number.

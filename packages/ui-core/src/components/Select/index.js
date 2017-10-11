@@ -18,7 +18,7 @@ import theme from './theme'
 
 /**
 ---
-category: forms
+category: components/forms
 ---
   An accessible and easily stylable select component.
 

@@ -15,7 +15,7 @@ import theme from './theme'
 
 /**
 ---
-category: navigation
+category: components/navigation
 ---
   The `<TreeBrowser/>` component provides a keyboard accessible tree structure. The component expects
   to receive a normalized data structure, examples can be seen at https://github.com/paularmstrong/normalizr.
