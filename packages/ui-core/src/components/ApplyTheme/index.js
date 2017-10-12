@@ -51,9 +51,9 @@ category: components/utilities
     )}
   >
     <div>
-      <Link href="example.html">I should be red</Link>
+      <Link href="https://instructure.github.io/instructure-ui/">I should be red</Link>
       <br />
-      <Link href="example.html" theme={Link.generateTheme('canvas', {
+      <Link href="https://instructure.github.io/instructure-ui/" theme={Link.generateTheme('canvas', {
           'color': 'green'
         }
       )}>I should be green</Link>

@@ -25,7 +25,7 @@ category: components/dialogs
   ```jsx_example
   <div>
     <p>
-      <Tooltip tip="Hello. I'm a tool tip" as={Link} href="example.html">
+      <Tooltip tip="Hello. I'm a tool tip" as={Link} href="https://instructure.github.io/instructure-ui/">
         Hover or focus me
       </Tooltip>
     </p>

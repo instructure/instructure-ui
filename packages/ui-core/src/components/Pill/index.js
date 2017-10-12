@@ -62,7 +62,7 @@ category: components
 class Pill extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
-    text: PropTypes.string.isRequired,
+    text: PropTypes.node.isRequired,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via

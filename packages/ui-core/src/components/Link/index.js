@@ -21,7 +21,7 @@ category: components/navigation
   A Link component
 
   ```jsx_example
-    <Link href="example.html">I'm a link</Link>
+    <Link href="https://instructure.github.io/instructure-ui/">I'm a link</Link>
   ```
 
   ```jsx_example
@@ -41,7 +41,7 @@ category: components/navigation
   to add margin to the top or bottom of Link, wrap it inside a `<Container />`.
 
   ```jsx_example
-    <Link href="example.html" margin="0 0 0 large">I'm a link with left margin</Link>
+    <Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I'm a link with left margin</Link>
   ```
  **/
 @themeable(theme, styles)

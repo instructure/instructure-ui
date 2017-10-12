@@ -32,7 +32,7 @@ category: components
   A button with an href passed outputs a link element styled like a button.
 
 ```jsx_example
-<Button href="example.html">Click Here</Button>
+<Button href="https://instructure.github.io/instructure-ui/">Click Here</Button>
 ```
 
   Button variants for different contexts using the `variant` prop are shown below. Note also
@@ -47,7 +47,7 @@ category: components
   <Button variant="primary" margin="0 x-small 0 0">
     Primary button
   </Button>
-  <Button href="example.html" variant="success" margin="0 x-small 0 0">
+  <Button href="https://instructure.github.io/instructure-ui/" variant="success" margin="0 x-small 0 0">
     <PlaceholderIcon />
     Success button
   </Button>

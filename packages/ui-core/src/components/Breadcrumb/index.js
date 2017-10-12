@@ -26,7 +26,7 @@ category: components/navigation
   <div>
 
     <Breadcrumb size="small" label="You are here:" margin="none none medium">
-      <BreadcrumbLink href="example.html">English 204</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
         <BreadcrumbLink
           onClick={function () {
             console.log("This BreadcrumbLink was clicked!")
@@ -34,11 +34,11 @@ category: components/navigation
         >
           Exploring John Updike
         </BreadcrumbLink>
-      <BreadcrumbLink href="example.html">The Rabbit Novels</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
       <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
     </Breadcrumb>
     <Breadcrumb label="You are here:" margin="none none medium">
-      <BreadcrumbLink href="example.html">English 204</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
         <BreadcrumbLink
           onClick={function () {
             console.log("This BreadcrumbLink was clicked!")
@@ -46,11 +46,11 @@ category: components/navigation
         >
           Exploring John Updike
         </BreadcrumbLink>
-      <BreadcrumbLink href="example.html">The Rabbit Novels</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
       <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
     </Breadcrumb>
     <Breadcrumb size="large" label="You are here:">
-      <BreadcrumbLink href="example.html">English 204</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
         <BreadcrumbLink
           onClick={function () {
             console.log("This BreadcrumbLink was clicked!")
@@ -58,7 +58,7 @@ category: components/navigation
         >
           Exploring John Updike
         </BreadcrumbLink>
-      <BreadcrumbLink href="example.html">The Rabbit Novels</BreadcrumbLink>
+      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
       <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
     </Breadcrumb>
   </div>
@@ -67,8 +67,8 @@ category: components/navigation
   If you don't provide an href to `BreadcrumbLink`, it will render as text.
   ```jsx_example
   <Breadcrumb label="You are here:">
-    <BreadcrumbLink href="example.html">Course A</BreadcrumbLink>
-    <BreadcrumbLink href="example.html">Modules</BreadcrumbLink>
+    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">Course A</BreadcrumbLink>
+    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">Modules</BreadcrumbLink>
     <BreadcrumbLink>A Great Module</BreadcrumbLink>
   </Breadcrumb>
   ```

@@ -68,7 +68,7 @@ category: components/navigation
           }
         >
           <MenuItem value="mastery">Learning Mastery</MenuItem>
-          <MenuItem href="example.html">Default (Grid view)</MenuItem>
+          <MenuItem href="https://instructure.github.io/instructure-ui/">Default (Grid view)</MenuItem>
           <MenuItem disabled>Individual (List view)</MenuItem>
           <MenuItemFlyout label="More Options">
             <MenuItemGroup
