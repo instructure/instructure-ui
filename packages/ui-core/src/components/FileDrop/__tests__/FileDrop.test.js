@@ -47,9 +47,16 @@ describe('<FileDrop />', () => {
       }
     }
 
-    it('responds to onDrop event', () => {
+    it('responds to drop event', () => {
       const subject = testbed.render({ onDrop })
-      subject.find('input').simulate('drop')
+      subject.find('label').simulate('drop')
+
+      expect(onDrop).to.have.been.called
+    })
+
+    it('responds to change event', () => {
+      const subject = testbed.render({ onDrop })
+      subject.find('input').simulate('change')
 
       expect(onDrop).to.have.been.called
     })
@@ -61,7 +68,7 @@ describe('<FileDrop />', () => {
         onDropAccepted,
         onDropRejected
       })
-      subject.find('input').simulate('drop', imageDropEvent)
+      subject.find('label').simulate('drop', imageDropEvent)
 
       expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
       expect(onDropAccepted).to.have.been.called
@@ -75,7 +82,7 @@ describe('<FileDrop />', () => {
         onDropAccepted,
         onDropRejected
       })
-      subject.find('input').simulate('drop', imageDropEvent)
+      subject.find('label').simulate('drop', imageDropEvent)
 
       expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
       expect(onDropAccepted).to.have.been.called
@@ -89,7 +96,7 @@ describe('<FileDrop />', () => {
         onDropAccepted,
         onDropRejected
       })
-      subject.find('input').simulate('drop', docDropEvent)
+      subject.find('label').simulate('drop', docDropEvent)
 
       expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
       expect(onDropAccepted).to.not.have.been.called
@@ -103,7 +110,7 @@ describe('<FileDrop />', () => {
         onDropAccepted,
         onDropRejected
       })
-      subject.find('input').simulate('drop', docDropEvent)
+      subject.find('label').simulate('drop', docDropEvent)
 
       expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
       expect(onDropAccepted).to.not.have.been.called
@@ -160,7 +167,7 @@ describe('<FileDrop />', () => {
       const onDragEnter = testbed.stub()
 
       const subject = testbed.render({ onDragEnter })
-      subject.find('input').simulate('dragenter')
+      subject.find('label').simulate('dragenter')
 
       expect(onDragEnter).to.have.been.called
     })
@@ -169,7 +176,7 @@ describe('<FileDrop />', () => {
       const onDragOver = testbed.stub()
 
       const subject = testbed.render({ onDragOver })
-      subject.find('input').simulate('dragover')
+      subject.find('label').simulate('dragover')
 
       expect(onDragOver).to.have.been.called
     })
@@ -178,7 +185,7 @@ describe('<FileDrop />', () => {
       const onDragLeave = testbed.stub()
 
       const subject = testbed.render({ onDragLeave })
-      subject.find('input').simulate('dragleave')
+      subject.find('label').simulate('dragleave')
 
       expect(onDragLeave).to.have.been.called
     })

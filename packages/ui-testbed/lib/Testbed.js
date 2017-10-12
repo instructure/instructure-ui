@@ -76,6 +76,7 @@ class Testbed {
   }
 
   teardown () {
+    this.sandbox.reset()
     this.sandbox.restore()
 
     try {

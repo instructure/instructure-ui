@@ -450,14 +450,19 @@ export default class FileDrop extends Component {
     const props = omitProps(this.props, FileDrop.propTypes)
 
     return (
-      <label
-        className={classnames(classes)}
-        htmlFor={id}
-        onDragEnter={this.handleDragEnter}
-        onDragOver={this.handleDragOver}
-        onDragLeave={this.handleDragLeave}
-        onDrop={this.handleDrop}
-      >
+      <div>
+        <label
+          className={classnames(classes)}
+          htmlFor={id}
+          onDragEnter={this.handleDragEnter}
+          onDragOver={this.handleDragOver}
+          onDragLeave={this.handleDragLeave}
+          onDrop={this.handleDrop}
+        >
+          <span className={styles.label}>
+            {this.renderLabel()}
+          </span>
+        </label>
         <input
           {...props}
           type="file"
@@ -471,10 +476,7 @@ export default class FileDrop extends Component {
           accept={acceptStr}
           onChange={this.handleDrop}
         />
-        <span className={styles.label}>
-          {this.renderLabel()}
-        </span>
-      </label>
+      </div>
     )
   }
 }
