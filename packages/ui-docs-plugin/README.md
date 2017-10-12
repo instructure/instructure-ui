@@ -51,14 +51,15 @@ module.exports = {
 }
 ```
 
-Anything that you would like to be available in scope for code examples, you can define
-in one of your entries (e.g. globals in the example above) like:
+`React` and `ReactDOM` are both set as global variables for use in the code examples.
+
+A `render` function is also provided if you want to be able to control what is rendered in your examples.
+
+Anything else that you would like to be available in scope, you can define
+in one of your entries (e.g. `./globals` in the example above) like:
 
 ```js
-import React from React
 import * as MyLibrary from './index'
-
-global[React] = React
 
 Object.keys(MyLibrary).forEach((key) => {
   global[key] = MyLibrary[key]
@@ -119,3 +120,52 @@ module.exports = {
   template: path.resolve(__dirname, 'index.tmpl.html')
 }
 ```
+
+### Writing documentation
+
+You can write documentation in markdown files or in code comment blocks in your source files.
+
+If you would like to display an example of a rendered component along with the code example, you can include a
+markdown code block like:
+
+````md
+```jsx_example
+<Button>Click Me</Button>
+```
+````
+
+If you would like to display the component on a dark background, you can add some extra data as
+yaml front matter to your code block:
+
+````md
+```jsx_example
+---
+inverse: true
+---
+<Button variant"ghost-inverse">Click Me</Button>
+```
+````
+
+If you would like to show a more complex code example, you can control what's rendered yourself with the following
+configuration:
+
+````md
+```jsx_example
+---
+render: false
+---
+const MyButton = () => <Button>Click Me</Button>
+render(MyButton)
+```
+````
+
+To make the code editor read-only you can configure the code block as:
+
+````md
+```jsx_example
+---
+readOnly: true
+---
+<Button>Click Me</Button>
+```
+````

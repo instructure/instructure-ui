@@ -1,6 +1,7 @@
 import React, { createElement } from 'react'
 import marked from 'marked'
 import he from 'he'
+import grayMatter from 'gray-matter'
 
 import Link from '@instructure/ui-core/lib/components/Link'
 import Heading from '@instructure/ui-core/lib/components/Heading'
@@ -11,6 +12,7 @@ import List, { ListItem } from '@instructure/ui-core/lib/components/List'
 import CodeEditor from '../components/CodeEditor'
 import Playground from '../components/Playground'
 
+import trimIndent from './trimIndent'
 
 /* eslint-disable react/prop-types */
 const elements = {
@@ -115,13 +117,15 @@ function createRenderer () {
 
     function CodeComponent () {
       if (typeof language === 'string' && language.indexOf('_example') >= 0) {
-        const parts = language.split('_')
+        const matter = grayMatter(trimIndent(code))
         return (
           <Playground
-            variant={parts[2]}
+            inverse={matter.data.inverse}
+            render={matter.data.render}
             title={tracker.context.title}
-            code={code}
-            language={parts[0]}
+            code={matter.content}
+            language={language.split('_')[0]}
+            readOnly={matter.data.readOnly}
           />
         )
       } else if (language) {

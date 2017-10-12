@@ -122,12 +122,15 @@ category: components/forms
   A controlled number input
 
   ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     state = {
       number: '0.1'
     };
 
-    handleChange = (event, number) => this.setState({ number })
+    handleChange = (event, number) => this.setState({ number });
 
     render () {
       return (
@@ -146,7 +149,7 @@ category: components/forms
     }
   }
 
-  <Example label="Battery capacity in Amp-hrs" step="0.1" min="0.1" />
+  render(<Example label="Battery capacity in Amp-hrs" step="0.1" min="0.1" />)
   ```
 
   A number input field with step set to 0.1
@@ -159,9 +162,12 @@ category: components/forms
   can be supplied either as a property or with [ApplyLocale](#ApplyLocale). If a locale
   is not specified, it will be inferred from the browser.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
-    this.state = { locale: 'de' };
+    state = { locale: 'de' };
 
     render () {
       const label = this.state.locale === 'de' ? "Comma separator" : "Period separator";
@@ -187,7 +193,7 @@ category: components/forms
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 
   A number input field with min set to 10.2, max to 50.8 and step set to 0.111

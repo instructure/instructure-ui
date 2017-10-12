@@ -36,6 +36,7 @@
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.27.4",
+    "gray-matter": "^3.0.2",
     "he": "^1.1.1",
     "lorem-ipsum": "^1.0.4",
     "marked": "^0.3.6",

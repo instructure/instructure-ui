@@ -36,14 +36,18 @@ category: components/navigation
   ToggleDetails can be controlled
 
   ```jsx_example
+  ---
+  render: false
+  ---
+
   class Example extends React.Component {
     state = {
       expanded: true
-    }
+    };
 
-    handleChange = (event, expanded) => this.setState({ expanded })
+    handleChange = (event, expanded) => this.setState({ expanded });
 
-    handleToggle = () => this.setState({ expanded: !this.state.expanded })
+    handleToggle = () => this.setState({ expanded: !this.state.expanded });
 
     render () {
       return (
@@ -67,7 +71,7 @@ category: components/navigation
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 
   ToggleDetails can be set to `filled` and will force the width to 100%.

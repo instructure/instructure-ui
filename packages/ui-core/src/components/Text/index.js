@@ -99,7 +99,10 @@ category: components/typography
   </div>
   ```
 
-  ```jsx_example_inverse
+  ```jsx_example
+  ---
+  inverse: true
+  ---
   <div>
     <Text color="primary-inverse">I'm primary text</Text><br/>
     <Text color="secondary-inverse">I'm secondary text</Text>

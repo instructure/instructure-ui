@@ -28,8 +28,11 @@ category: components/navigation
     <Link>I'm a button that looks like a link because I have no href prop</Link>
   ```
 
-  ```jsx_example_inverse
-    <Link variant="inverse">I'm an inverse link for use with dark backgrounds</Link>
+  ```jsx_example
+  ---
+  inverse: true
+  ---
+  <Link variant="inverse">I'm an inverse link for use with dark backgrounds</Link>
   ```
 
   ### Adding margin

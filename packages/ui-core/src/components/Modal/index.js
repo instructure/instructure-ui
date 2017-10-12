@@ -26,7 +26,10 @@ category: components/dialogs
   The default `padding` of the Modal content is `medium` but can be overridden
   by using the `padding` prop on the `<ModalBody/>` if the use case requires it.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
    const fpo = lorem.paragraphs(5)
 
    class Example extends React.Component {
@@ -97,13 +100,16 @@ category: components/dialogs
      }
    }
 
-   <Example />
+   render(<Example />)
    ```
 
    A Modal may contain components which "break out" of their container using absolute position elements,
    such as an Autocomplete and it's options list.
 
-   ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   const fpo = lorem.paragraphs(1)
    class Example extends React.Component {
      constructor (props) {
@@ -181,8 +187,8 @@ category: components/dialogs
     }
   }
 
-   <Example />
-   ```
+  render(<Example />)
+  ```
 **/
 
 @deprecated('3.0.0', {

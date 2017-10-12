@@ -12,7 +12,10 @@ category: components/utilities
 ---
   The `<Portal/>` component allows you to render a subtree into a DOM element.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     constructor (props) {
       super(props)
@@ -52,7 +55,7 @@ category: components/utilities
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 **/
 @deprecated('3.0.0', {

@@ -39,7 +39,10 @@ category: components/utilities
   The Mask component can be configured to cover the full screen if it is rendered inside a [Portal](#Portal).
 
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
 
    class Example extends React.Component {
      constructor (props) {
@@ -77,7 +80,7 @@ category: components/utilities
      }
    }
 
-   <Example />
+   render(<Example />)
    ```
 **/
 @themeable(theme, styles)

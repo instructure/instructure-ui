@@ -293,7 +293,10 @@ category: components
   Use the `bar-inverse` and `circle-inverse` variants to make the Progress
   track dark instead of light.
 
-  ```jsx_example_inverse
+  ```jsx_example
+  ---
+  inverse: true
+  ---
     <div>
     <Progress
       label="Percent complete"

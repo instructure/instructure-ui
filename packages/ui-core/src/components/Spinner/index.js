@@ -27,16 +27,20 @@ category: components
     <Spinner title="Loading" margin="0 0 0 medium" />
     <Spinner title="Loading" size="large" margin="0 0 0 medium" />
   </div>
-
   ```
+
   ### Different color schemes for use with light and dark backgrounds
 
   The Spinner component defaults to `lightBg`. However, there is also an `inverse`
   color scheme designed to be more visible on dark backgrounds.
 
-  ```jsx_example_inverse
-    <Spinner title="Loading" variant="inverse" />
+  ```jsx_example
+  ---
+  inverse: true
+  ---
+  <Spinner title="Loading" variant="inverse" />
   ```
+
   ### Internet Explorer
 
   As of mid-2016, Internet Explorer doesn't support animations inside inline SVGs.

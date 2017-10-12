@@ -29,8 +29,10 @@ category: components/navigation
   you need to include more complex content, take a look at [Popover](#Popover) with the `shouldContainFocus`
   and `applicationElement` properties.
 
-  ```js_example
-
+  ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     constructor (props) {
       super(props)
@@ -110,7 +112,7 @@ category: components/navigation
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 **/
 

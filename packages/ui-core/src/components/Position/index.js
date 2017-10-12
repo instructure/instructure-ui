@@ -35,7 +35,10 @@ category: components/utilities
 ---
   A Position component
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   const fpo = lorem.paragraph()
 class Example extends React.Component {
   constructor (props) {
@@ -118,11 +121,15 @@ class Example extends React.Component {
   }
 }
 
-<Example />
+render(<Example />)
 ```
 The `mountNode` prop renders the positioned content inside the configured element (instead of the body).
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
+
   const fpo = lorem.paragraph()
   class Example extends React.Component {
     constructor (props) {
@@ -223,11 +230,14 @@ The `mountNode` prop renders the positioned content inside the configured elemen
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
   [Experimental/WIP]: `over` prop with `stretch` placement.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   const fpo = lorem.paragraphs(7)
 
   class Example extends React.Component {
@@ -297,7 +307,7 @@ The `mountNode` prop renders the positioned content inside the configured elemen
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 **/
 @themeable(theme, styles)

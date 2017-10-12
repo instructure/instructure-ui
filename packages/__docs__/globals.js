@@ -12,8 +12,6 @@ import iconExample from './heart_lg.svg'
 import * as UICore from '../ui-core/src'
 
 const globals = Object.assign({
-  React,
-  ReactDOM,
   PlaceholderIcon: IconUserLine,
   IconPlus: IconPlusSolid,
   IconX: IconXSolid,

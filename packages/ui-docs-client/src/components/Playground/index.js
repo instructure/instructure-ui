@@ -31,7 +31,16 @@ export default class Playground extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
     code: PropTypes.string.isRequired,
-    language: PropTypes.string.isRequired
+    language: PropTypes.string.isRequired,
+    render: PropTypes.bool,
+    inverse: PropTypes.bool,
+    readOnly: PropTypes.bool
+  }
+
+  static defaultProps = {
+    render: true,
+    inverse: false,
+    readOnly: false
   }
 
   static contextTypes = {
@@ -103,7 +112,12 @@ export default class Playground extends Component {
             </SVGIcon>
           </Button>
         </div>
-        <CodeEditor code={code} variant="playground" onChange={this.handleChange} />
+        <CodeEditor
+          code={code}
+          variant="playground"
+          onChange={this.handleChange}
+          readOnly={this.props.readOnly}
+        />
       </div>
     )
   }
@@ -114,7 +128,9 @@ export default class Playground extends Component {
     const preview = (
       <Preview
         code={code}
+        render={this.props.render}
         language={this.props.language}
+        inverse={this.props.inverse}
         fullscreen={fullscreen}
       />
     )
@@ -168,6 +184,7 @@ export default class Playground extends Component {
             code={code}
             title={`${this.props.title} Example`}
             language={this.props.language}
+            render={this.props.render}
             options={this.context.library.codepen}
           /> }
         </div>

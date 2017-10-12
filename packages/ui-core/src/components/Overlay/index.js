@@ -17,7 +17,10 @@ category: components/dialogs
   The Overlay component is a [Dialog](#Dialog) component that transitions
   in and out content rendered in a [Portal](#Portal)
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     constructor (props) {
       super(props)
@@ -57,7 +60,7 @@ category: components/dialogs
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 **/
 @deprecated('3.0.0', {

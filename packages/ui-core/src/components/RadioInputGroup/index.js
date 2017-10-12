@@ -19,7 +19,10 @@ category: components/forms
   the name property on the RadioInput components for you and will set the selected item
   based on the `value` property.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   function Example () {
     const inputs = [
       {value: 'foo', label: lorem.sentence() },
@@ -35,11 +38,15 @@ category: components/forms
       </RadioInputGroup>
     )
   }
-  <Example />
+  render(<Example />)
   ```
   With the `layout` prop set to `inline` to render the description in its own column at screens `medium` size
   and up (see [Grid](#Grid)).
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
+
   function Example () {
     const inputs = [
       {value: 'foo', label: lorem.sentence() },
@@ -56,11 +63,14 @@ category: components/forms
       </RadioInputGroup>
     )
   }
-  <Example />
+  render(<Example />)
   ```
   With the `layout` property set to `columns` the inputs will render horizontally at screens `medium` size
   and up (see [Grid](#Grid)).
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   function Example () {
     const inputs = [
       {value: 'foo', label: lorem.sentence() },
@@ -85,7 +95,7 @@ category: components/forms
     )
   }
 
-  <Example />
+  render(<Example />)
   ```
 
   Set the `variant` prop to `toggle` to have the RadioInputGroup display as a toggle switch.

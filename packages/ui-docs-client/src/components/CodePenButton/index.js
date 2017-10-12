@@ -12,31 +12,22 @@ export default class CodePenButton extends Component {
     code: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
+    render: PropTypes.bool,
     options: PropTypes.object // eslint-disable-line react/forbid-prop-types
   }
 
   static defaultProps = {
-    options: {}
+    options: {},
+    render: true
   }
 
   render () {
-    const js = (this.props.language.includes('jsx'))
-    ? `
-    const Example = function () {
-      return (
-        ${this.props.code}
-      )
-    }
+    const { language, render } = this.props
+    const code = render ? `render(${this.props.code})` : this.props.code
 
-    ReactDOM.render(<Example />, document.getElementById('app'))
-    `
-    : `
-    ${this.props.code}
-    ReactDOM.render(<Example />, document.getElementById('app'))
-    `
     const data = {
       title: this.props.title,
-      js,
+      js: `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n\n${code}`,
       private: true,
       editors: '001',
       html: '<div id="app"></div>',

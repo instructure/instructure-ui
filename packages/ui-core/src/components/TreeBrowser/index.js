@@ -49,7 +49,10 @@ category: components/navigation
 
   An example of a 'controlled' `<TreeBrowser />` with custom icons:
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
     class Example extends React.Component {
       constructor (props) {
         super(props)
@@ -106,7 +109,7 @@ category: components/navigation
 
     }
 
-    <Example/>
+    render(<Example/>)
   ```
 **/
 @themeable(theme, styles)

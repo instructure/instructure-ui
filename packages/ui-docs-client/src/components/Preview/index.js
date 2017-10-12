@@ -16,12 +16,16 @@ export default class Preview extends Component {
 
   static propTypes = {
     code: PropTypes.string.isRequired,
+    render: PropTypes.bool,
     language: PropTypes.string.isRequired,
-    fullscreen: PropTypes.bool
+    fullscreen: PropTypes.bool,
+    inverse: PropTypes.bool
   }
 
   static defaultProps = {
-    fullscreen: false
+    render: true,
+    fullscreen: false,
+    inverse: false
   }
 
   static contextTypes = {
@@ -61,10 +65,6 @@ export default class Preview extends Component {
     }).code
   }
 
-  evalCode (code) {
-    return eval(code) // eslint-disable-line no-eval
-  }
-
   executeCode (code) {
     const mountNode = this._mountNode
 
@@ -76,24 +76,31 @@ export default class Preview extends Component {
       return
     }
 
-    try {
-      const compiledCode = this.compileCode(code)
-      let component = this.evalCode(compiledCode)
-
+    const render = (el) => {
       const { themeKey, themes } = this.context
+      let elToRender = el
 
       if (themeKey && themes[themeKey]) {
-        component = (
+        elToRender = (
           <ApplyTheme
             theme={ApplyTheme.generateTheme(themeKey)}
             immutable={themes[themeKey].accessible}
           >
-            {component}
+            {elToRender}
           </ApplyTheme>
         )
       }
 
-      ReactDOM.render(component, mountNode)
+      ReactDOM.render(elToRender, mountNode)
+    }
+
+    try {
+      const compiledCode = this.compileCode(code)
+      const el = eval(compiledCode) // eslint-disable-line no-eval
+
+      if (this.props.render !== false) {
+        render(el)
+      }
     } catch (err) {
       this.handleError(err)
     }
@@ -109,7 +116,7 @@ export default class Preview extends Component {
   render () {
     const classes = {
       [styles.root]: true,
-      [styles.inverse]: (typeof this.props.language === 'string') && this.props.language.indexOf('inverse') >= 0,
+      [styles.inverse]: this.props.inverse,
       [styles.error]: this.state.error,
       [styles.fullscreen]: this.props.fullscreen
     }

@@ -60,7 +60,10 @@ category: components/forms
 
   A 'controlled' TextArea
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
 
   class Example extends React.Component {
     state = { description: 'Hello World' };
@@ -78,7 +81,7 @@ category: components/forms
     }
   }
 
-  <Example/>
+  render(<Example/>)
   ```
 **/
 @themeable(theme, styles)

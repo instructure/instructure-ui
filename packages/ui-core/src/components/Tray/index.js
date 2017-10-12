@@ -24,7 +24,10 @@ category: components/dialogs
   Note that the `size` property only applies when the Tray is positioned at `start`
   or `end` and defines the width of the Tray.
 
-  ```js_example
+  ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     constructor (props) {
       super(props)
@@ -96,7 +99,7 @@ category: components/dialogs
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 **/
 @deprecated('3.0.0', {

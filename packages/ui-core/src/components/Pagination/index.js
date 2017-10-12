@@ -28,6 +28,9 @@ category: components/navigation
   Provide an `onClick` to `PaginationButton` to handle navigation.
 
   ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     constructor (props) {
       super(props)
@@ -58,7 +61,7 @@ category: components/navigation
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 
   If you instead provide an href to `PaginationButton` it will render as a link.

@@ -29,6 +29,9 @@ global.lorem = {
 
 global.placeholderImage = placeholderImage
 
+global.React = React
+global.ReactDOM = ReactDOM
+
 export default function renderDocsClient (data, element) {
   ReactDOM.render(<App {...data} />, element)
 }

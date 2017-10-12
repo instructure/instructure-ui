@@ -87,6 +87,9 @@ The `timeout` prop can be used to automatically dismiss an alert after a time.
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
 
 ```jsx_example
+---
+render: false
+---
 class Example extends React.Component {
   constructor (props) {
     super(props)
@@ -145,7 +148,7 @@ class Example extends React.Component {
   }
 }
 
-<Example />
+render(<Example />)
   ```
 **/
 

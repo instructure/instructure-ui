@@ -33,6 +33,9 @@ category: components/dialogs
   something custom that behaves more like a dialog, use a `<Popover/>`.
 
   ```jsx_example
+  ---
+  render: false
+  ---
   class Example extends React.Component {
     render () {
       return (
@@ -51,13 +54,16 @@ category: components/dialogs
     }
   }
 
-  <Example />
+  render(<Example />)
   ```
 
   `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` and `applicationElement`
   properties set, it will trap focus inside the `<Popover />`.
 
 ```jsx_example
+---
+render: false
+---
 class Example extends React.Component {
   render () {
     return (
@@ -87,7 +93,7 @@ class Example extends React.Component {
   }
 }
 
-<Example />
+render(<Example />)
 ```
 **/
 

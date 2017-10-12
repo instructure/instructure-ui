@@ -34,7 +34,10 @@ category: components/forms
 
   ```jsx_example
   <div style={{height: 350}}>
-    <TimeInput label='Time' value='1986-05-17T18:00:00.000Z' />
+    <TimeInput
+      label='Time' value='1986-05-17T18:00:00.000Z'
+      onChange={(e) => {console.log('onChange', e)}}
+    />
   </div>
   ```
 
@@ -50,10 +53,30 @@ category: components/forms
 
   ```jsx_example
   <div style={{height: 500}}>
-   <TimeInput label='Eastern' value={new Date().toISOString()} timezone='US/Eastern' />
-   <TimeInput label='Central' value={new Date().toISOString()} timezone='US/Central' />
-   <TimeInput label='Mountain' value={new Date().toISOString()} timezone='US/Mountain' />
-   <TimeInput label='Western' value={new Date().toISOString()} timezone='US/Pacific' />
+    <TimeInput
+      label='Eastern'
+      value={new Date().toISOString()}
+      timezone='US/Eastern'
+      onChange={(e) => {console.log('onChange', e)}}
+    />
+    <TimeInput
+      label='Central'
+      value={new Date().toISOString()}
+      timezone='US/Central'
+      onChange={(e) => {console.log('onChange', e)}}
+    />
+    <TimeInput
+      label='Mountain'
+      value={new Date().toISOString()}
+      timezone='US/Mountain'
+      onChange={(e) => {console.log('onChange', e)}}
+    />
+    <TimeInput
+      label='Western'
+      value={new Date().toISOString()}
+      timezone='US/Pacific'
+      onChange={(e) => {console.log('onChange', e)}}
+    />
   </div>
   ```
 

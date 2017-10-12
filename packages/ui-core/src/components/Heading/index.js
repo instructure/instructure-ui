@@ -47,12 +47,17 @@ category: components/typography
     <Heading color="error">I am error/danger color</Heading>
   </div>
   ```
-  ```jsx_example_inverse
+
+  ```jsx_example
+  ---
+  inverse: true
+  ---
   <div>
     <Heading color="primary-inverse">I am primary-inverse color</Heading>
     <Heading color="secondary-inverse">I am secondary-inverse color</Heading>
   </div>
   ```
+
   ### Borders
 
   `Heading` defaults to no borders. However, using the `border` prop, you can
@@ -66,6 +71,7 @@ category: components/typography
     <Heading border="top">I have a top border</Heading>
   </div>
   ```
+
   ### Ellipsis text overflow
 
   When the `ellipsis` prop is `true`, the Heading text will no longer

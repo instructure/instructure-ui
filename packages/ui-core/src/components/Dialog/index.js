@@ -24,50 +24,53 @@ category: components/utilities
   The Dialog component is a utility that is used by
   [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray) for keyboard accessibility.
 
-  ```js_example
-  class Example extends React.Component {
-    constructor (props) {
-      super(props)
-      this.state = { open: false }
-    }
-
-    render () {
-      return (
-        <Container as="div" padding="large">
-          <Button
-            onClick={() => this.setState({ open: true })}
-          >
-            Show the Dialog
-          </Button>
-          <Portal open={this.state.open}>
-            <Mask>
-              <Dialog
-                open={this.state.open}
-                shouldContainFocus
-                applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
-                defaultFocusElement={() => this._firstName}
-                shouldReturnFocus
-                onDismiss={() => this.setState({ open: false })}
-              >
-                <ContextBox withArrow={false} padding="medium">
-                  <CloseButton placement="end" onClick={() => this.setState({ open: false })}>
-                    Close
-                  </CloseButton>
-                  <FormFieldGroup description={<Heading level="h4" as="span">Full name</Heading>} layout="columns">
-                    <TextInput label="First" inputRef={(c) => this._firstName = c} />
-                    <TextInput label="Last" />
-                  </FormFieldGroup>
-                </ContextBox>
-              </Dialog>
-            </Mask>
-          </Portal>
-        </Container>
-      )
-    }
+```jsx_example
+---
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = { open: false }
   }
 
-  <Example />
-  ```
+  render () {
+    return (
+      <Container as="div" padding="large">
+        <Button
+          onClick={() => this.setState({ open: true })}
+        >
+          Show the Dialog
+        </Button>
+        <Portal open={this.state.open}>
+          <Mask>
+            <Dialog
+              open={this.state.open}
+              shouldContainFocus
+              applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
+              defaultFocusElement={() => this._firstName}
+              shouldReturnFocus
+              onDismiss={() => this.setState({ open: false })}
+            >
+              <ContextBox withArrow={false} padding="medium">
+                <CloseButton placement="end" onClick={() => this.setState({ open: false })}>
+                  Close
+                </CloseButton>
+                <FormFieldGroup description={<Heading level="h4" as="span">Full name</Heading>} layout="columns">
+                  <TextInput label="First" inputRef={(c) => this._firstName = c} />
+                  <TextInput label="Last" />
+                </FormFieldGroup>
+              </ContextBox>
+            </Dialog>
+          </Mask>
+        </Portal>
+      </Container>
+    )
+  }
+}
+
+render(<Example />)
+```
 **/
 
 class Dialog extends Component {
