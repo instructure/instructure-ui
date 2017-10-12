@@ -24,7 +24,11 @@ module.exports = function DocsLoader () {
       const renderDocsClient = require('!!${require.resolve('@instructure/ui-docs-client')}').default
       const parseDocs = require('!!${require.resolve('../utils/parseDocs')}')
 
-      const props = parseDocs([${docs.join(',')}], ${processFile(path.resolve(options.projectRoot, 'README.md'))})
+      const props = parseDocs(
+        [${docs.join(',')}],
+        ${processFile(path.resolve(options.projectRoot, 'README.md'))},
+        ${processFile(path.resolve(options.projectRoot, 'CHANGELOG.md'))}
+      )
       props.library = ${JSON.stringify(options.library || {})}
 
       renderDocsClient(props, document.getElementById('app'))

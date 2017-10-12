@@ -1,6 +1,6 @@
 const CATEGORY_DELIMITER = '/'
 
-module.exports = function parseDocs (docs, readme) {
+module.exports = function parseDocs (docs, readme, changelog) {
   const parsed = {
     sections: {
       __uncategorized: {
@@ -64,6 +64,7 @@ module.exports = function parseDocs (docs, readme) {
   })
 
   parsed.docs.index = parsed.docs.index || readme
+  parsed.docs.CHANGELOG = parsed.docs.CHANGELOG || changelog
 
   return parsed
 }

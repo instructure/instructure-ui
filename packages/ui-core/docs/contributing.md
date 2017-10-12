@@ -1,6 +1,6 @@
 ---
 title: Contributing
-category: guidelines
+category: guides
 ---
 
 ## Contributing

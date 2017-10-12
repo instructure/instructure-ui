@@ -1,6 +1,6 @@
 ---
 title: Component Guidelines
-category: guidelines
+category: guides
 ---
 
 ## Component Guidelines

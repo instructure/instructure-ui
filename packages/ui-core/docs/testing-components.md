@@ -1,6 +1,6 @@
 ---
 title: Testing Components
-category: guidelines
+category: guides
 ---
 
 ## Testing Components

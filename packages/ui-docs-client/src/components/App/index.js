@@ -170,6 +170,15 @@ export default class App extends Component {
     )
   }
 
+  renderChangeLog () {
+    const { docs } = this.props
+    return (
+      <Section id="CHANGELOG">
+        {compileMarkdown(docs.CHANGELOG.description, { title: 'CHANGELOG' })}
+      </Section>
+    )
+  }
+
   renderError (key) {
     return (
       <Section id="error">

@@ -89,7 +89,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(Math.floor(contentRect.left)).to.equal(Math.floor(targetRect.right))
+    expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right))).to.be.true
   })
 
   it('should render top stretched inside of target', () => {
@@ -120,7 +120,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(Math.floor(contentRect.right)).to.equal(Math.floor(targetRect.left))
+    expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left))).to.be.true
   })
 
   it('should render above target', () => {
