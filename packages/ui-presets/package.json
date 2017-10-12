@@ -49,6 +49,7 @@
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-react": "^7.1.0",
     "file-loader": "^1.1.5",
+    "happypack": "4.0.0",
     "karma": "^1.7.1",
     "karma-chai-sinon": "^0.1.5",
     "karma-chrome-launcher": "^2.2.0",

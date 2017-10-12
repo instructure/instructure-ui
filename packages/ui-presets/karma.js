@@ -117,15 +117,15 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
           'react/lib/ReactContext': true,
           'react/addons': true
         },
-        plugins: require('./webpack/plugins').concat([
-          new webpack.ProvidePlugin({
-            Testbed: require.resolve('@instructure/ui-testbed')
-          })
-        ]),
         resolveLoader: require('./webpack/resolveLoader'),
         module: {
           rules: require('./webpack/module/rules')
         },
+        plugins: require('./webpack/plugins')().concat([
+          new webpack.ProvidePlugin({
+            Testbed: require.resolve('@instructure/ui-testbed')
+          })
+        ]),
         devtool: 'cheap-module-eval-source-map',
         performance: {
           hints: false

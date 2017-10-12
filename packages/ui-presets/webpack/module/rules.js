@@ -1,17 +1,7 @@
 const path = require('path')
-const loadConfig = require('../../loadConfig')
-
-const { generateScopedName } = loadConfig('themeable', require('../../themeable'))
 
 const ENV = process.env.NODE_ENV
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
-
-const babelLoader = {
-  loader: require.resolve('babel-loader'),
-  options: {
-    cacheDirectory: !DEBUG ? false : '.babel-cache'
-  }
-}
 
 module.exports = [
   {
@@ -32,33 +22,15 @@ module.exports = [
   {
     test: /\.js$/,
     exclude: [/node_modules/, /lib/],
-    use: [babelLoader]
+    use: ['happypack/loader?id=js']
   },
   {
     test: /\.css$/,
     exclude: [/node_modules/, /lib/],
     use: [
-      babelLoader,
+      'happypack/loader?id=js',
       'themeable-css-loader',
-      {
-        loader: 'css-loader',
-        options: {
-          modules: true,
-          importLoaders: 1,
-          localIdentName:
-            typeof generateScopedName === 'function' &&
-            generateScopedName({
-              env: !DEBUG ? 'production' : ENV
-            }),
-          minimize: false,
-          discardComments: true,
-          discardEmpty: true,
-          discardUnused: true
-        }
-      },
-      {
-        loader: 'postcss-loader'
-      }
+      'happypack/loader?id=css'
     ]
   },
   {

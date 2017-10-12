@@ -8,7 +8,7 @@ const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
 
 const outputPath = path.resolve(__dirname, '__build__')
 
-let plugins = require('@instructure/ui-presets/webpack/plugins')
+let plugins = require('@instructure/ui-presets/webpack/plugins')()
 
 plugins = plugins.concat([
   new DocsPlugin(),
@@ -66,10 +66,10 @@ module.exports = {
     host: '0.0.0.0',
     port: 8080
   },
-  plugins,
   module: {
     rules: require('@instructure/ui-presets/webpack/module/rules')
   },
+  plugins,
   resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
   devtool: 'cheap-module-source-map'
 }
