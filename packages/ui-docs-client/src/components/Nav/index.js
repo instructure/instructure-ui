@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
+import Text from '@instructure/ui-core/lib/components/Text'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
 import Link from '@instructure/ui-core/lib/components/Link'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
@@ -17,6 +18,19 @@ import theme from './theme'
 
 @themeable(theme, styles)
 export default class Nav extends Component {
+
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      query: null,
+      expandedSections: this.setExpandedSections(false, props.sections),
+      userToggling: false
+    }
+
+    this._themeId = '__themes'
+  }
+
   static propTypes = {
     docs: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     sections: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
@@ -30,13 +44,35 @@ export default class Nav extends Component {
     selected: undefined
   }
 
-  state = {
-    query: null
+  setExpandedSections = (expanded, sections) => {
+    const expandedSections = {}
+    Object.keys(sections).forEach((sectionId) => {
+      expandedSections[sectionId] = expanded
+    })
+    expandedSections['__themes'] = expanded
+    return expandedSections
   }
 
   handleSearchChange = (e) => {
     const value = e.target.value
-    this.setState({ query: value ? new RegExp(value, 'i') : null })
+
+    const expandedSections = this.setExpandedSections(!!value, this.state.expandedSections)
+    this.setState({
+      query: value ? new RegExp(value, 'i') : null,
+      expandedSections,
+      userToggling: false
+    })
+  }
+
+  handleToggleSection = (sectionId, expanded) => {
+    this.setState(({ expandedSections }) => {
+      const newExpandedSections = {...this.state.expandedSections}
+      newExpandedSections[sectionId] = expanded
+      return {
+        expandedSections: newExpandedSections,
+        userToggling: true
+      }
+    })
   }
 
   matchQuery (str) {
@@ -51,17 +87,19 @@ export default class Nav extends Component {
     }
   }
 
-  createNavToggle ({ id, title, children, expanded, variant }) {
+  createNavToggle ({ id, title, children, variant }) {
     if (children.length === 0) {
       return
     }
 
+    const { expandedSections } = this.state
     return (
       <div className={styles.navToggle} key={id}>
         <NavToggle
           variant={variant}
           summary={title}
-          defaultExpanded={expanded || this.state.query !== null}
+          onToggle={(e, toggleExpanded) => { this.handleToggleSection(id, toggleExpanded) }}
+          expanded={expandedSections[id]}
           iconPosition="end"
         >
           {children}
@@ -70,30 +108,47 @@ export default class Nav extends Component {
     )
   }
 
-  matchingDocsInSection (sectionId, sectionSelected) {
+  markExpanded = (sectionId) => {
+    const { expandedSections, userToggling } = this.state
+    // If we set expanded to true for a section that contains a
+    // selected doc on every render, the user cannot collapse a section
+    // that contains a selected doc. We mark when a user toggles a
+    // section and allow them to control the expanded status of the
+    // sections until a new query where we will once again display all
+    // of the results, or no query where we will once again only show
+    // the expanded path
+    if (userToggling) {
+      return
+    }
+    expandedSections[sectionId] = true
+  }
+
+  matchingDocsInSection (sectionId, markExpanded) {
     const { sections, selected, docs } = this.props
     return sections[sectionId].docs
       .filter((docId) => {
         return (
           this.matchQuery(docId) ||
-          this.matchQuery(docs[docId].title)
+          this.matchQuery(docs[docId].title) ||
+          this.matchQuery(sectionId)
           // TODO: check children for matches too
         )
       })
       .map((docId) => {
-        sectionSelected = sectionSelected || (docId === selected) // eslint-disable-line no-param-reassign
+        if (typeof markExpanded === 'function' && docId === selected) {
+          markExpanded(sectionId)
+        }
         return docId
       })
   }
 
-  matchingSectionsInSection (sectionId, sectionSelected) {
+  matchingSectionsInSection (sectionId, markExpanded) {
     const { sections, selected } = this.props
     return sections[sectionId].sections
-      .filter((childSectionId) => {
-        return this.matchQuery(childSectionId) || this.matchingSectionsInSection(childSectionId, sectionSelected) > 0
-      })
       .map((sectionId) => {
-        sectionSelected = sectionSelected || (sectionId === selected) // eslint-disable-line no-param-reassign
+        if (typeof markExpanded === 'function' && sectionId === selected) {
+          markExpanded(sectionId)
+        }
         return sectionId
       })
   }
@@ -117,15 +172,15 @@ export default class Nav extends Component {
     )
   }
 
-  renderSectionChildren (sectionId, selected) {
+  renderSectionChildren (sectionId, markExpanded) {
     const children = {}
 
-    this.matchingSectionsInSection(sectionId, selected)
+    this.matchingSectionsInSection(sectionId, markExpanded)
       .forEach((sectionId) => {
         children[capitalizeFirstLetter(this.props.sections[sectionId].title)] = { section: true, id: sectionId }
       })
 
-    this.matchingDocsInSection(sectionId, selected)
+    this.matchingDocsInSection(sectionId, markExpanded)
       .filter(docId => !this.props.docs[docId].parent) // filter out docs with parent defined
       .forEach(docId => { children[docId] = { id: docId } })
 
@@ -133,34 +188,48 @@ export default class Nav extends Component {
       .sort()
       .map((id) => {
         if (children[id].section) {
-          return this.renderSectionLink(children[id].id, selected, 'category')
+          return this.renderSectionLink(children[id].id, () => { markExpanded(sectionId) }, 'category')
         } else {
           return this.renderDocLink(id)
         }
       })
   }
 
-  renderSectionLink (sectionId, sectionSelected, variant) {
+  renderSectionLink (sectionId, markParentExpanded, variant) {
     const { selected, docs } = this.props
-    const childSectionSelected = (sectionId === selected)
 
-    sectionSelected = sectionSelected || childSectionSelected // eslint-disable-line no-param-reassign
+    const markExpanded = (sectionId) => {
+      this.markExpanded(sectionId)
+      if (typeof markParentExpanded === 'function') {
+        markParentExpanded()
+      }
+    }
+
+    if (sectionId === selected) {
+      markExpanded(sectionId)
+    }
 
     if (sectionId === '__uncategorized') {
-      return this.renderSectionChildren(sectionId, sectionSelected)
+      return this.renderSectionChildren(sectionId, markExpanded)
     } else {
       return this.createNavToggle({
         id: sectionId,
         title: this.props.sections[sectionId].title,
-        children: this.renderSectionChildren(sectionId, sectionSelected),
-        expanded: sectionSelected,
+        children: this.renderSectionChildren(sectionId, markExpanded),
         variant
       })
     }
   }
 
   sectionHasMatches (sectionId) {
-    return this.matchingDocsInSection(sectionId).length > 0 || this.matchingSectionsInSection(sectionId).length > 0
+    let matches = this.matchingDocsInSection(sectionId).length > 0
+    const sections = this.matchingSectionsInSection(sectionId)
+    if (sections.length > 0) {
+      sections.forEach((childSectionId) => {
+        matches = matches || this.sectionHasMatches(childSectionId)
+      })
+    }
+    return matches
   }
 
   renderSections () {
@@ -168,7 +237,7 @@ export default class Nav extends Component {
       .sort()
       .filter(sectionId => this.props.sections[sectionId].level === 0)
       .filter(sectionId => this.sectionHasMatches(sectionId))
-      .map((sectionId) => this.renderSectionLink(sectionId, false))
+      .map(sectionId => this.renderSectionLink(sectionId))
   }
 
   renderThemeSection () {
@@ -198,15 +267,19 @@ export default class Nav extends Component {
         )
       })
 
+    if (themeSelected) {
+      this.markExpanded(this._themeId)
+    }
+
     return this.createNavToggle({
-      id: '__themes',
+      id: this._themeId,
       title: 'Themes',
-      children: themeLinks,
-      expanded: themeSelected
+      children: themeLinks
     })
   }
 
   render () {
+    const sections = this.renderSections()
     return (
       <div className={styles.root}>
         <div role="search" className={styles.search}>
@@ -217,7 +290,17 @@ export default class Nav extends Component {
           />
         </div>
         <div role="navigation" className={styles.sections}>
-          {this.renderSections()}
+          {sections && sections.length > 0
+            ? sections
+            : <Text
+              weight="light"
+              size="medium"
+              theme={{ primaryColor: styles.color }}
+              color="primary"
+            >
+                No search results
+              </Text>
+          }
           {this.renderThemeSection()}
         </div>
       </div>
