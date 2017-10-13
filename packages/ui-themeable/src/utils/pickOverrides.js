@@ -1,3 +1,12 @@
+/**
+* ---
+* category: utilities/themes
+* ---
+* Return only the theme variables that are different from the default
+* @param {Object} defaultTheme
+* @param {Object} theme
+* @returns {Object} variables that are different from the defaults
+*/
 export default function pickOverrides (defaultTheme, theme) {
   const overrides = {}
 

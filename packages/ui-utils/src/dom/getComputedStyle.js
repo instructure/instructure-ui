@@ -6,7 +6,7 @@ import canUseDOM from './canUseDOM'
  * category: utilities/DOM
  * ---
  *
- * Get the associated css properties and values for a
+ * Get the associated CSS properties and values for a
  * specified element
  *
  * @param {ReactComponent|DomNode} el - component or DOM node

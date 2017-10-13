@@ -25,6 +25,10 @@ code[class^="lang-"] {
   display: block;
 }
 
+h3 code {
+  margin: 0 0.5em 0 0;
+}
+
 table code {
   background: transparent;
   border: none;

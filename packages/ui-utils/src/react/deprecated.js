@@ -23,7 +23,7 @@ import warning from '../warning'
 * @module deprecated
 * @param {string} version
 * @param {object} oldProps
-* @return {function} - React component with deprecated props behavior
+* @return {function} React component with deprecated props behavior
 */
 export default function deprecated (version, oldProps) {
   return function (ComposedComponent) {

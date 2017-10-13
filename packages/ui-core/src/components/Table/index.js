@@ -17,7 +17,7 @@ import theme from './theme'
 category: components
 ---
 
-  Note that the `caption` prop is required for accessibilty. If you would
+  Note that the `caption` prop is required for accessibility. If you would
   rather hide the caption, wrap it inside a
   [ScreenReaderContent](#ScreenReaderContent) component.
 

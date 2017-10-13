@@ -1,16 +1,3 @@
-/**
-* ---
-* category: utilities/themes
-* ---
-* Make a component "themeable" and inject component styles into the document.
-* Themeable components have a `theme` property which can be configured explicitly
-* via props or passed via React context.
-* @module themeable
-* @param {function} theme - A function that generates the component theme variables.
-* @param {object} styles - The component styles object.
-* @return {function} The themeable component.
-*/
-
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import deepEqual from 'deep-equal'
@@ -31,13 +18,48 @@ import {
   generateTheme
 } from './registry'
 
-import {
-  mount
-} from './styles'
+import StyleSheet from './StyleSheet'
 
 const debug = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
 
-
+/**
+* ---
+* category: utilities/themes
+* ---
+* A decorator or higher order component that makes a component `themeable`.
+*
+* As a HOC:
+*
+* ```js
+* import themeable from '@instructure/ui-themeable'
+* import styles from 'styles.css'
+* import theme from 'theme.js'
+*
+* class Example extends React.Component {
+*   render () {
+*     return <div className={styles.root}>Hello</div>
+*   }
+* }
+*
+* export default themeable(theme, styles)(Example)
+* ```
+*
+* Note: in the above example, the CSS file must be transformed into a JS object
+* via [babel](#babel-plugin-themeable-styles) or [webpack](#ui-presets) loader.
+*
+* Themeable components inject their themed styles into the document when they are mounted.
+*
+* After the initial mount, a themeable component's theme can be configured explicitly
+* via its `theme` prop or passed via React context using the [ApplyTheme](#ApplyTheme) component.
+*
+* Themeable components register themselves with the [global theme registry](#registry)
+* when they are imported into the application, so you will need to be sure to import them
+* before you mount your application so that the default themed styles can be generated and injected.
+*
+* @param {function} theme - A function that generates the component theme variables.
+* @param {object} styles - The component styles object.
+* @return {function} composes the themeable component.
+*/
 export default function themeable (theme, styles) {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)
@@ -102,7 +124,7 @@ export default function themeable (theme, styles) {
         const defaultTheme = generateThemeForContextKey()
         const cssText = getCssText(styles.template, defaultTheme, componentId)
 
-        mount(componentId, cssText)
+        StyleSheet.mount(componentId, cssText)
 
         if (super.componentWillMount) {
           super.componentWillMount()
@@ -200,7 +222,12 @@ export default function themeable (theme, styles) {
 }
 
 /**
-*  Utility to generate a theme for all themeable components
+* Utility to generate a theme for all themeable components that have been registered.
+* This theme can be applied using the [ApplyTheme](#ApplyTheme) component.
+*
+* @param {String} themeKey The theme to use (for global theme variables across components)
+* @param {Object} overrides theme variable overrides (usually for dynamic/user defined values)
+* @return {Object} A theme config to use with `<ApplyTheme />`
 */
 themeable.generateTheme = generateTheme
 

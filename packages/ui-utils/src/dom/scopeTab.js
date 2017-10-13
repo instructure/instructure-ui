@@ -12,8 +12,8 @@ import getActiveElement from './getActiveElement'
  * Scope tab in order to trap focus within a specified
  * element.
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {Event} event - the DOM Event that was fired
+ * @param {ReactElement|DOMNode} el
+ * @param {Event} event the DOM Event that was fired
  */
 export default function scopeTab (element, event) {
   const node = findDOMNode(element)

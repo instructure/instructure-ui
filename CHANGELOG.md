@@ -2,6 +2,105 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.0.0"></a>
+# [4.0.0](https://github.com/instructure/instructure-ui/compare/v3.3.1...v4.0.0) (2017-10-13)
+
+
+The two major themes of the 4.0 release are mono-repo and documentation!
+
+### Mono-repo
+
+In 4.0 we've split the `instructure-ui` library into a bunch of smaller libraries
+and we're publishing them all as separate modules to NPM.
+
+This should make it easier to upgrade going forward. (e.g you can upgrade to a
+patch or minor release of [@instructure/ui-core](#ui-core) without upgrading
+[@instructure/ui-themeable](#ui-themeable)).
+
+Unfortunately this also means that paths for imports will have to change when applying
+this upgrade.
+
+However, the codemod script provided by [@instructure/ui-codemods](#ui-codemods)
+should help with that, and you can see what paths have changed in the `ui-core/config/imports.config.json` file.
+
+### Documentation
+
+The @instructure/ui-docs-plugin module has gotten an overhaul and now supports
+[JSDoc](http://usejsdoc.org/) and generates documentation from any file format that
+supports JS style code blocks, in addition to markdown.
+
+All of the utilities, and packages have been documented, so finding your way
+around the libraries and seeing how they fit together should be a lot easier.
+
+### Bug Fixes
+
+* **Alert:** Announce live region content in the docs ([493440a](https://github.com/instructure/instructure-ui/commit/493440a))
+* **Autocomplete:** add calls for onInputChange ([33ad3cb](https://github.com/instructure/instructure-ui/commit/33ad3cb))
+* **Autocomplete,Codepen:** Codepen examples should render ([36ef124](https://github.com/instructure/instructure-ui/commit/36ef124))
+* **Autocomplete,Menu,Dialog:** Prevent esc from closing Dialog ([284eeed](https://github.com/instructure/instructure-ui/commit/284eeed))
+* **Avatar:** include canvas theme generator ([dc27b6a](https://github.com/instructure/instructure-ui/commit/dc27b6a))
+* **build:** ignore lib directories ([cb56606](https://github.com/instructure/instructure-ui/commit/cb56606))
+* **build:** Use local version of yarn for scripts ([fcf7732](https://github.com/instructure/instructure-ui/commit/fcf7732))
+* **build:** use relative paths for entries so that app rebuilds in dev ([f60d94d](https://github.com/instructure/instructure-ui/commit/f60d94d))
+* **Button:** Correct fluidWidth Button heights ([5ede261](https://github.com/instructure/instructure-ui/commit/5ede261))
+* **CheckboxGroup,RadioInputGroup:** Link messages to inputs for SR ([fba6550](https://github.com/instructure/instructure-ui/commit/fba6550))
+* **documentation:** Examples should have valid URLs for hrefs ([18eeaa4](https://github.com/instructure/instructure-ui/commit/18eeaa4))
+* **FileDrop:** make input sibling of label ([d892cff](https://github.com/instructure/instructure-ui/commit/d892cff))
+* **Forms:** fix css placeholder color ([7c63393](https://github.com/instructure/instructure-ui/commit/7c63393))
+* **Forms:** Update size prop ([95ecfd2](https://github.com/instructure/instructure-ui/commit/95ecfd2))
+* **Grid:** width and offset not working ([1a2fa45](https://github.com/instructure/instructure-ui/commit/1a2fa45))
+* **Grid:** GridCol with width="auto" should not shrink ([ae82286](https://github.com/instructure/instructure-ui/commit/ae82286))
+* **Mask:** Prevent mask from calling onDismiss when defaultPrevented ([4f42ad0](https://github.com/instructure/instructure-ui/commit/4f42ad0))
+* **Mask:** Update Mask example text ([77deb7e](https://github.com/instructure/instructure-ui/commit/77deb7e))
+* **Modal:** Modify modal to dismiss for Mask click instead of document ([64f6816](https://github.com/instructure/instructure-ui/commit/64f6816))
+* **ToggleDetails:** Fix fluidWidth prop / updates ([de9ef24](https://github.com/instructure/instructure-ui/commit/de9ef24))
+* **ui-docs-client:** Fix navigation issues ([193399e](https://github.com/instructure/instructure-ui/commit/193399e))
+* **ui-docs-client:** Make version link to changelog ([581fca4](https://github.com/instructure/instructure-ui/commit/581fca4))
+
+
+### Features
+
+* **Autocomplete:** implement value getter ([1a8a730](https://github.com/instructure/instructure-ui/commit/1a8a730))
+* **ui-codemods:** Adding codemod for updating imports ([f4907cb](https://github.com/instructure/instructure-ui/commit/f4907cb))
+* **build:** Monorepo second pass ([5fae316](https://github.com/instructure/instructure-ui/commit/5fae316))
+* **build:** Monorepo, yarn workspaces and Lerna setup ([edd71af](https://github.com/instructure/instructure-ui/commit/edd71af))
+* **DateInput:** Add conversion status as part of onDateChange ([1ecb819](https://github.com/instructure/instructure-ui/commit/1ecb819))
+* **Forms:** Update component font sizes ([13f77c6](https://github.com/instructure/instructure-ui/commit/13f77c6))
+* **List:** Remove margin from unstyled list item ([0e39d75](https://github.com/instructure/instructure-ui/commit/0e39d75))
+* **ToggleDetails:** add controllable behavior ([f767b50](https://github.com/instructure/instructure-ui/commit/f767b50))
+* **ui-docs-plugin:** Doc comment blocks in all file types & JSdocs ([6189147](https://github.com/instructure/instructure-ui/commit/6189147))
+* **ui-docs-plugin:** Integrate react-axe in dev mode ([6a29682](https://github.com/instructure/instructure-ui/commit/6a29682))
+* **ui-utils:** Add jsdocs for util functions ([c6b5834](https://github.com/instructure/instructure-ui/commit/c6b5834))
+
+
+### BREAKING CHANGES
+
+* **Autocomplete,Codepen:** JS examples will need to include a call to render and will need to
+  include `render: false` as front matter inside the code block
+* **ui-docs-plugin:** Inverse examples will need to include `inverse: true` as front matter inside
+  the code block
+* **Typography,Text:** Typography component is renamed to Text, so
+imports/requires will need to be updated (it's added to the codemod
+config in ui-core)
+* **Forms:** The font size of the components will have increased
+* **Forms:** Font-sizes for `large` and `small`
+simple RadioInputs and Checkboxes have changed. In
+particular, Checkbox toggles have gone from using the
+same font-size for every size to changing the
+font-size based on the `size` prop (to be
+consistent with other InstUI components).
+* **List:** ListItem with `unstyled` variant won't have margins.
+* **build:** Imports of instructure-ui/babel/, instructure-ui/lib/themeable and
+instructure-ui/lib/themes will need to be updated
+* **build:** Imports of instructure-ui and ui-docs packages will
+need to be updated to use the new packages: @instructure/ui-core, @instructure/ui-codemods, @instructure/ui-config
+* **build:** Imports of ui-docs will need to be updated to: @instructure/ui-docs-plugin, @instructure/ui-docs-client
+* **Autocomplete:** onInputChange prop now has a new argument providing the
+value and the event argument is now nullable
+* **ToggleDetails:** expanded prop now means ToggleDetails is controlled
+and defaultExpanded prop fills the same job expanded did previously
+
+
 <a name="3.4.0"></a>
 # [3.4.0](https://github.com/instructure/instructure-ui/compare/v3.3.1...v3.4.0) (2017-09-12)
 

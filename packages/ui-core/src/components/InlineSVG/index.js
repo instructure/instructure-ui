@@ -13,7 +13,8 @@ import theme from './theme'
 ---
 category: components/utilities
 ---
-  The InlineSVG component renders an accessible inline SVG. See also [SVGIcon](#SVGIcon).
+  The InlineSVG component renders an accessible SVG inline in the html document.
+  See also [SVGIcon](#SVGIcon) which provides more styles specific to icons.
 
   ```jsx_example
   <InlineSVG src={iconExample} width="2em" height="2em" />

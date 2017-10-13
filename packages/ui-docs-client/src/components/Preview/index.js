@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
+import axe from 'react-axe'
 
 import { transform } from 'babel-standalone'
 
@@ -10,6 +11,14 @@ import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'
+
+if (process.env.NODE_ENV !== 'production') {
+  axe(React, ReactDOM, 1500, {
+    rules: [
+      { id: 'color-contrast', enabled: false }
+    ]
+  })
+}
 
 @themeable(theme, styles)
 export default class Preview extends Component {

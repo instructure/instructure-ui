@@ -28,17 +28,7 @@ export default MyHeading = function () {
 }
 ```
 
-```jsx_example
-  <Button variant="primary" margin="0 x-small 0 0">
-    Primary button
-  </Button>
-```
-
 For the default theme you'll also need to include the ['Lato' font](http://www.google.com/fonts#UsePlace:use/Collection:Lato:300,400,400i,700,700i) in your application.
-
-### Customization
-
-Coming soon. For now see the [ApplyTheme](http://instructure.github.io/@instructure/ui-core/#ApplyTheme) component docs.
 
 ### Browser Support
 
@@ -47,7 +37,7 @@ Coming soon. For now see the [ApplyTheme](http://instructure.github.io/@instruct
 
 ### Contribute
 
-See the [contributing guidelines](http://instructure.github.io/@instructure/ui-core/#contributing) for details.
+See the [contributing guidelines](#contributing) for details.
 
 ### License
 

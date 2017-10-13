@@ -4,7 +4,7 @@
  * ---
  *
  * Performs simple test to determine if DOM can be accessed
- *
+ * @module
  * @returns {boolean} whether the dom can be used
  */
 export default !!(

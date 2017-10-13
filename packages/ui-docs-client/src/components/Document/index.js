@@ -49,8 +49,8 @@ export default class Document extends Component {
 
   renderTheme (doc) {
     const { themeKey } = this.props
-    const generateTheme = doc.component && doc.component.generateTheme
-    const theme = generateTheme && generateTheme(themeKey)
+    const { generateTheme } = doc
+    const theme = (typeof generateTheme === 'function') && generateTheme(themeKey)
 
     return theme && Object.keys(theme).length > 0 ? (
       <Container margin="small">
@@ -62,14 +62,14 @@ export default class Document extends Component {
     ) : null
   }
 
-  renderDescription () {
+  renderDescription (doc) {
     const {
       srcUrl,
       description,
       id,
       title,
       undocumented
-    } = this.props.doc
+    } = doc
 
     return description && !undocumented ? (
       <Description
@@ -124,6 +124,7 @@ const ${id} = require('${requirePath}')
       id,
       params
     } = doc
+
     return params ? (
       <Container margin="small">
         <Heading level="h3" id={`${id}Parameters`} margin="0 0 small 0">
@@ -139,6 +140,7 @@ const ${id} = require('${requirePath}')
       id,
       returns
     } = doc
+
     return returns ? (
       <Container margin="small">
         <Heading level="h3" id={`${id}Returns`} margin="0 0 small 0">
@@ -151,14 +153,13 @@ const ${id} = require('${requirePath}')
 
   renderMethods (doc) {
     const {
-      id
+      id,
+      methods
     } = doc
 
-    const methods = (this.props.doc.methods || []).filter(method => method.docblock !== null)
-
-    return (methods.length > 0) ? (
+    return (methods && methods.length > 0) ? (
       <Container margin="small">
-        <Heading level="h3" id={`${id}Returns`} margin="0 0 small 0">
+        <Heading level="h3" id={`${id}Methods`} margin="0 0 small 0">
           Methods
         </Heading>
         <Methods methods={methods} />
@@ -166,8 +167,8 @@ const ${id} = require('${requirePath}')
     ) : null
   }
 
-  renderDoc (doc) {
-    return (
+  renderDetails (doc) {
+    return this.hasDetails(doc) ? (
       <div>
         {this.renderParams(doc)}
         {this.renderReturns(doc)}
@@ -175,38 +176,56 @@ const ${id} = require('${requirePath}')
         {this.renderProps(doc)}
         {this.renderTheme(doc)}
       </div>
-    )
+    ) : null
   }
 
-  renderDetails () {
-    const { doc } = this.props
-    const children = doc.children || []
-
-    if (children.length > 0) {
-      return (
-        <TabList>
-          <TabPanel title={doc.title} key={`${doc.id}TabPanel`}>
-            {this.renderDoc(doc)}
-          </TabPanel>
-          {children.map(child => (
-            <TabPanel title={child.title} key={`${child.id}TabPanel`}>
-              {this.renderDoc(child)}
-            </TabPanel>
-          ))}
-        </TabList>
-      )
-    } else {
-      return this.renderDoc(doc)
-    }
+  hasDetails (doc) {
+    return doc.params || doc.returns || doc.methods || doc.props || doc.generateTheme
   }
 
   render () {
+    const { doc } = this.props
+    const children = doc.children || []
+    let details = null
+
+    if (this.hasDetails(doc)) {
+      details = (children.length > 0) ? (
+        <TabList>
+          <TabPanel title={doc.title} key={`${doc.id}TabPanel`}>
+            {this.renderDetails(doc)}
+          </TabPanel>
+          {children.map(child => (
+            <TabPanel title={child.title} key={`${child.id}TabPanel`}>
+              {this.renderDescription(child)}
+              {this.renderDetails(child)}
+            </TabPanel>
+          ))}
+        </TabList>
+      ) : this.renderDetails(doc)
+    }
+
+    let sections
+
+    if (doc.sections) {
+      sections = doc.sections.map(section => (
+        <Container margin="small" key={`${doc.id}.${section.name}`}>
+          <Heading level="h3" id={`${doc.id}.${section.name}`} margin="large 0 small 0">
+            { section.kind && <code>{section.kind}</code> }
+            {section.title}
+          </Heading>
+          {this.renderDescription(section)}
+          {this.renderDetails(section)}
+        </Container>
+      ))
+    }
+
     return (
       <div>
-        { this.props.doc.documentType !== 'markdown' && this.renderSrcLink() }
-        {this.renderDescription()}
-        {this.renderDetails()}
-        {this.renderUsage()}
+        { doc.documentType !== 'markdown' && this.renderSrcLink() }
+        { this.renderDescription(doc) }
+        { details }
+        { sections }
+        { this.renderUsage() }
       </div>
     )
   }

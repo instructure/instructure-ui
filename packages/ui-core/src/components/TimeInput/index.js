@@ -17,7 +17,7 @@ import theme from './theme'
 category: components/forms
 ---
   A TimeInput component is used to select a time from a list of allowed time values. The
-  list of possible values can be configured via this components props.
+  list of possible values can be configured via this component's props.
 
   TimeInput passes most properties through to the underlying [Autocomplete](#Autocomplete).
   It does not pass through `defaultOption` or `selectedOption`.
@@ -49,7 +49,7 @@ category: components/forms
   </div>
   ```
 
-  TimeInput's with the current time in different time zones
+  TimeInputs with the current time in different time zones
 
   ```jsx_example
   <div style={{height: 500}}>

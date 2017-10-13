@@ -6,10 +6,9 @@ import requestAnimationFrame from './requestAnimationFrame'
  * ---
  * category: utilities/DOM
  * ---
- *
  * Adds a listener to an element and calls a specified handler
  * function whenever the position changes
- *
+ * @module
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {function} handler - function to run if the position has changed
  * @returns {function} remove - cancel the listener and no longer execute the handler function

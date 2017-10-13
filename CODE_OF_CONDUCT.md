@@ -1,3 +1,9 @@
+---
+title: Code of Conduct
+category: guides
+order: 2
+---
+
 ## Code of Conduct
 
 ### Our Pledge

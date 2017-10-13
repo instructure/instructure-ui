@@ -22,7 +22,7 @@ module.exports = function extractComments (sourceStr) {
     if (block.type !== 'multi' && block.type !== 'doc' && line.match(commentRegex.single)) {
       block.raw += `${line}\n`
       // Add the current line (and a newline) minus the comment marker.
-      block.text += `${line.replace(/^\s*\/\/\s?/, '')}\n`
+      block.description += `${line.replace(/^\s*\/\/\s?/, '')}\n`
       if (block.type !== 'single') {
         block.line = i + 1
       }
@@ -33,7 +33,7 @@ module.exports = function extractComments (sourceStr) {
     // If we have reached the end of the current block, save it.
     if (block.type && line.match(commentRegex.multiFinish)) {
       const doneWithCurrentLine = block.type !== 'single'
-      block.text = block.text.replace(/^\n+/, '').replace(/\n+$/, '')
+      block.description = block.description.replace(/^\n+/, '').replace(/\n+$/, '')
       blocks.push(block)
       indentAmount = false
       block = {
@@ -60,7 +60,7 @@ module.exports = function extractComments (sourceStr) {
     if (block.type === 'doc') {
       block.raw += `${line}\n`
       // Add the current line (and a newline) minus the comment marker.
-      block.text += `${line.replace(/^\s*\*\s?/, '')}\n`
+      block.description += `${line.replace(/^\s*\*\s?/, '')}\n`
       return
     }
 
@@ -83,7 +83,7 @@ module.exports = function extractComments (sourceStr) {
         indentAmount = line.match(/^\s*/)[0]
       }
       // Always strip same indentation amount from each line.
-      block.text += `${line.replace(new RegExp(`^${indentAmount}`), '', 1)}\n`
+      block.description += `${line.replace(new RegExp(`^${indentAmount}`), '', 1)}\n`
     }
   }
 

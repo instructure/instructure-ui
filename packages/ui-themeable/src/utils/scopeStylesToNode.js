@@ -1,5 +1,16 @@
 import transformCss, { isKeyframesSelector } from './transformCss'
 
+/**
+* ---
+* category: utilities/themes
+* ---
+* Scopes the styles in a CSS string to a DOM node
+* to polyfill CSS variables for [themeable](#themeable) components.
+* @module scopeStylesToNode
+* @param {DOMNode} domNode
+* @param {String} cssText
+* @param {String} scope a unique identifier to use to scope the styles. Applied as a custom html attribute.
+*/
 export default function scopeStylesToNode (domNode, cssText, scope) {
   let styleNode = domNode.querySelector(`#${scope}`)
   const attr = scope.toLowerCase()
@@ -39,6 +50,11 @@ export default function scopeStylesToNode (domNode, cssText, scope) {
   }
 }
 
+/**
+* Transforms a CSS string to add a scoping selector to each rule
+* @param {String} cssText
+* @param {String} scope a unique identifier to use to scope the styles
+*/
 export function scopeCssText (cssText, scope) {
   return transformCss(cssText, (rule) => {
     const transformed = {...rule}

@@ -73,7 +73,7 @@ category: components/forms
   FileDrop is a consistent way to drag and drop, as well as browse your computer to upload a media file.
 
   The `isDragAccepted` and `isDragRejected` props can be used to signal to the user if
-  the dragged files are going to be accepted or not (unfortunately, this onlys works as intented in Chrome
+  the dragged files are going to be accepted or not (unfortunately, this only works as intended in Chrome
   and Firefox).
 
   ```jsx_example

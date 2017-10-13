@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-presets",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",
@@ -17,10 +17,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/babel-plugin-themeable-styles": "3.4.0",
-    "@instructure/babel-plugin-transform-class-display-name": "3.4.0",
-    "@instructure/postcss-themeable-styles": "3.4.0",
-    "@instructure/ui-testbed": "3.4.0",
+    "@instructure/babel-plugin-themeable-styles": "^4.0.0",
+    "@instructure/babel-plugin-transform-class-display-name": "^4.0.0",
+    "@instructure/postcss-themeable-styles": "^4.0.0",
+    "@instructure/ui-testbed": "^4.0.0",
     "autoprefixer": "7.1.2",
     "babel-core": "6.26.0",
     "babel-eslint": "7.2.3",
@@ -62,8 +62,8 @@
     "postcss-nested": "2.1.2",
     "postcss-reporter": "4.0.0",
     "postcss-simple-vars": "4.0.0",
-    "stylelint": "8.1.1",
     "style-loader": "0.18.2",
+    "stylelint": "8.1.1",
     "svg-inline-loader": "0.8.0",
     "url-loader": "0.5.9",
     "webpack": "2.2.1"

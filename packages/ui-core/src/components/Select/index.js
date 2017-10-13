@@ -20,7 +20,7 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  An accessible and easily stylable select component.
+  An accessible and easily styleable select component.
 
   ### Select size variants
 

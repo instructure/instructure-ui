@@ -1,3 +1,10 @@
+/**
+* ---
+* category: utilities/themes
+* ---
+* A global theme registry
+* @module registry
+*/
 import shortid from 'shortid'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -33,7 +40,11 @@ const validateRegistry = function (registry) {
   return registry
 }
 
-export const getRegistry = function () {
+/**
+* Get the global theme registry
+* @return {object} The theme registry
+*/
+export function getRegistry () {
   if (!canUseDOM) {
     return GLOBAL_THEME_REGISTRY
   }
@@ -45,7 +56,10 @@ export const getRegistry = function () {
   return validateRegistry(window.GLOBAL_THEME_REGISTRY)
 }
 
-export const setRegistry = function (registry) {
+/**
+* Set the global theme registry
+*/
+export function setRegistry (registry) {
   GLOBAL_THEME_REGISTRY = registry
 
   if (canUseDOM) {
@@ -53,15 +67,28 @@ export const setRegistry = function (registry) {
   }
 }
 
-export const clearRegistry = function () {
+/**
+* Clear the global theme registry
+*/
+export function clearRegistry () {
   setRegistry(makeRegistry())
 }
 
-export const getDefaultThemeKey = function () {
+/**
+* Get the default theme key
+* @return {String} the default theme key
+*/
+export function getDefaultThemeKey () {
   const { defaultThemeKey, registered } = getRegistry()
   return defaultThemeKey || registered[0] || DEFAULT_THEME_KEY
 }
 
+/**
+* Get the default theme key
+* @param {String} the default theme key
+* @param {Object} overrides for the theme variables
+* @param {Boolean} is the theme immutable/can it be overridden?
+*/
 export const setDefaultTheme = function (themeKey, overrides, immutable) {
   const registry = getRegistry()
   let theme = registry.themes[themeKey]
@@ -140,7 +167,7 @@ const overrideThemeVariables = function (themeKey, overrides) {
 
 /**
  * Merge theme variables for 'themeKey' with the defaults (and overrides)
- *
+ * @private
  * @param {String} themeKey
  * @param {Object} variable Theme overrides
  * @return {Object} A merged variables object
@@ -165,7 +192,7 @@ const mergeWithDefaultThemeVariables = function (themeKey, overrides = {}) {
 /**
  * Wraps a component theme function to merge its return values with the return
  * values of the default function
- *
+ * @private
  * @param {Function} componentThemeFunction
  * @param {String} themeKey
  * @return {Object} A wrapped theme object
@@ -224,7 +251,8 @@ const getRegisteredComponents = function (themeKey) {
 }
 
 /**
- * Generate themes for all @themeable components, to be used by `<ApplyTheme />`.
+ * Generate themes for all registered [@themeable](#themeable) components,
+ * to be used by [`<ApplyTheme />`](#ApplyTheme).
  *
  * @param {String} themeKey The theme to use (for global theme variables across components)
  * @param {Object} overrides theme variable overrides (usually for user defined values)

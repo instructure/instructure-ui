@@ -35,25 +35,47 @@ module.exports = function DocgenLoader (source) {
 
     if (!doc.props) {
       try {
-        doc = jsdoc.explainSync({ source })[0]
-        doc.documentType = 'jsdoc'
+        const sections = jsdoc.explainSync({ source })
+          .filter((section) => {
+            return section.undocumented !== true && section.access !== 'private' && section.kind !== 'package'
+          })
+        const module = sections.filter(section => section.kind === 'module')[0] || sections[0] || {}
+        doc = {
+          ...module,
+          sections: sections
+            .filter(section => section.longname !== module.longname)
+            .map((section) => {
+              const parts = section.longname.split('.')
+              const name = section.longname.replace(`${module.longname}.`, '')
+              return {
+                ...section,
+                id: name,
+                title: name
+              }
+            }),
+          undocumented: sections.length <= 0,
+          documentType: 'jsdoc'
+        }
       } catch (e2) {
         reportError(e2, this.request)
       }
     }
   } else if (resourcePath.includes('.md')) {
     doc.documentType = 'markdown'
+    doc.description = source
   } else {
     try {
-      doc.comments = extractComments(source)
-      doc.description = doc.comments.filter(d => d.type === 'doc')[0].text
+      doc.sections = (extractComments(source) || [])
+        .filter(section => section.type === 'doc')
+      doc.description = doc.sections[0].description
+      doc.undocumented = doc.sections.length === 0
       doc.documentType = 'comments'
     } catch (e3) {
       reportError(e3, this.request)
     }
   }
 
-  const matter = grayMatter(doc.description || source)
+  const matter = grayMatter(doc.description || '')
   const template = identifier(options, resourcePath, matter, context)
   const id = loaderUtils.interpolateName(this, template, {})
   const relativePath = path.relative(options.projectRoot, resourcePath)
@@ -73,6 +95,7 @@ module.exports = function DocgenLoader (source) {
     category: matter.data.category,
     parent: matter.data.parent,
     title: matter.data.title || id,
+    order: matter.data.order || '',
     srcPath: srcPath(resourcePath, options, context),
     srcUrl: srcUrl(resourcePath, options, context)
   })

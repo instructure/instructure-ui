@@ -19,7 +19,7 @@ yarn add --dev @instructure/ui-docs-plugin
 
 ### Usage
 
-In your webpack config add the plugin:
+In the webpack config for your documentation app, add the plugin:
 
 ```js
 const DocsPlugin = require('@instructure/ui-docs-plugin')
@@ -109,8 +109,8 @@ module.exports = {
     path.resolve(rootPath, '**/config/**')
   ],
   identifier: (resourcePath, matter, context) => {
-    if (matter.name) {
-      return matter.name
+    if (matter.data.id) {
+      return matter.data.id
     } else if (resourcePath.includes('/index.js') || resourcePath.includes('README.md')) {
       return '[folder]'
     } else {
@@ -124,6 +124,25 @@ module.exports = {
 ### Writing documentation
 
 You can write documentation in markdown files or in code comment blocks in your source files.
+
+#### Documentation meta data:
+
+You can configure optional meta data about a document with [YAML](http://yaml.org/) front matter inside your markdown content.
+
+````md
+---
+category: guides/contributing
+id: code_of_conduct
+order: 3
+title: Code of Conduct
+---
+````
+
+The front matter must be the first content in the markdown file or comment block.
+
+Note: categories can be nested via the `/` delimiter.
+
+#### Code examples
 
 If you would like to display an example of a rendered component along with the code example, you can include a
 markdown code block like:
@@ -169,3 +188,13 @@ readOnly: true
 <Button>Click Me</Button>
 ```
 ````
+
+### Development
+
+From the root of the `instructure-ui` repo:
+
+1. Run `yarn`
+1. Run `yarn build:dev`
+1. Run `yarn start:watch`
+1. Open [http://localhost:8080](http://localhost:8080) in your browser
+1. You'll need to run `yarn build:dev --scope @instructure/ui-docs-plugin` when you make changes.

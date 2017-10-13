@@ -1,6 +1,7 @@
 ---
 title: Contributing
 category: guides
+order: 1
 ---
 
 ## Contributing
@@ -21,12 +22,12 @@ Run `yarn run` to list the available commands.
 2. Import/export your component in `packages/ui-core/src/components/index.js`.
 3. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new component.
 4. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
-5. Start making changes to your component (following the [guidelines](#component-guidelines)) and watch it update in the browser automatically.
+5. Start making changes to your component and watch it update in the browser automatically.
 
 
 ### Testing
 
-See the [testing documenation](#testing-components) for details.
+All components should have good test coverage. See the [testing documentation](#testing-components) for details.
 
 
 ### Debugging
@@ -41,5 +42,35 @@ If you'd like to run the tests in a different browser (e.g. Firefox or Safari), 
 
 ### Documentation
 
-Please update the documentation with any changes, the code and docs should
+All components and utilities should be well documented, including examples.
+
+Write documentation inline in code comment blocks. The code and docs should
 always be in sync.
+
+### Accessibility Requirements
+
+All components should:
+
+- be high contrast aware (use theme variables for all colors, colors should meet [4.5:1](http://www.w3.org/TR/WCAG20-TECHS/G18.html) and [3:1](http://www.w3.org/TR/WCAG20-TECHS/G183.html) contrast ratios).
+- be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
+- be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
+
+### CSS Conventions
+
+The build system uses the webpack css-loader and [css modules](https://github.com/css-modules/css-modules) to generate
+Suit/BEM style class names, where the "block" portion includes the component name and a configured prefix. So in the .css source for components we only have to worry about "element" and "modifier" class names (using BEM terminology).
+
+#### Element Class Names
+
+Element classes should be camel case (e.g. `inputLabel`).
+
+#### Modifier Class Names
+
+Modifiers should also be camel case, with a couple exceptions:
+
+- If part of the classname is dynamically generated in the JS from a component prop, use a double dash before the generated part of the class name. e.g. `positioned--left` where "left" is a string value passed as a prop `positioned`.
+
+#### Element and Wildcard Selectors
+
+As a general rule, element (e.g. `p { ... }`) and wildcard (`*`) selectors should be avoided. Exceptions could be made for
+components that would never render children.

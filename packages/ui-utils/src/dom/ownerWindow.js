@@ -5,11 +5,9 @@ import ownerDocument from './ownerDocument'
  * ---
  * category: utilities/DOM
  * ---
- *
  * Retrieve the owner window object associated with
  * the owner document of the specified element
- *
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {ReactElement|DOMNode} el
  * @returns {Object} the owner window
  */
 export default function (el) {

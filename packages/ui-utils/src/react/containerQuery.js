@@ -4,6 +4,24 @@ import getFontSize from '../dom/getFontSize'
 import addResizeListener from '../dom/addResizeListener'
 import debounce from '../debounce'
 
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * A decorator or higher order component to provide the ability to style a
+ * React component with container queries.
+ *
+ * The containerQuery HOC provides a `size` getter so that you can alter the behavior
+ * of the component based on the size of its container.
+ *
+ * The `size` will be updated whenever the dimensions of the container change.
+ *
+ * So that CSS rules can be applied based on the dimensions of the container,
+ * custom data attributes are added to the container DOM element.
+ *
+ * @param {Object} query
+ * @returns {Function} a function that creates an element with containerQuery behavior
+ */
 export default function containerQuery (query) {
   const getSelectorMap = function (el) {
     return parseQuery(query, el)
@@ -64,6 +82,10 @@ export default function containerQuery (query) {
         if (super.componentWillUnmount) {
           super.componentWillUnmount()
         }
+      }
+
+      get size () {
+        this._size
       }
     }
   }

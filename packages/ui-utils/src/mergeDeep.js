@@ -1,3 +1,13 @@
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Deep merge N objects into a single result object.
+ * Merging creates a new object, so that none of the arguments are modified.
+ *
+ * @param {Object} arguments objects to merge
+ * @returns {Object} a new object with items from all arguments
+ */
 export default function mergeDeep () {
   const args = [...arguments]
   let target = {}

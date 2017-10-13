@@ -87,7 +87,7 @@ category: components/layout
     to expand to the width of its content. (See the final example grid
     to see how this can be useful for right-aligning column content.)
 
-  + The `startAt` prop setting supercedes any `<GridCol>` width props. For
+  + The `startAt` prop setting supersedes any `<GridCol>` width props. For
     example, if you set `width={{small: 2}}` on a column, but the `startAt` prop
     on your `<Grid>` is set to `medium`, the `width={{small: 2}}` will be ignored.
 

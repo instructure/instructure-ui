@@ -1,3 +1,14 @@
+/**
+ * ---
+ * category: utilities/themes
+ * ---
+ * Polyfill custom media for [themeable](#themeable) components.
+ * Searches for strings like `(--mediumMin)` and replaces it with the
+ * variable value (e.g. `variables.mediumMin`)
+ * @param {String} cssText the CSS text to apply the custom media to
+ * @param {Object} variables object containing custom media variables
+ * @returns {String} CSS text with custom media values applied
+ */
 export default function applyCustomMediaToCss (cssText, variables) {
   const matches = getMatches(cssText, /@media\s*[^(]*\((--[^)]+)\)?/g)
   let result = cssText

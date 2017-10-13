@@ -7,7 +7,7 @@ import requestAnimationFrame from './requestAnimationFrame'
  * ---
  * category: utilities/DOM
  * ---
- *
+ * @module
  * Adds a listener to an element and calls a specified handler
  * function whenever the size changes
  *

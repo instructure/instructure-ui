@@ -245,7 +245,7 @@ category: components/forms
   </RadioInputGroup>
   ```
 
-  Use the readOnly prop to cause the same affect as disabled except the styling makes it look active.
+  Use the readOnly prop to cause the same effect as disabled except the styling makes it look active.
 
   ```jsx_example
   <RadioInputGroup name="readonlyex" defaultValue="none" description="Super-awesome feature" variant="toggle" readOnly>

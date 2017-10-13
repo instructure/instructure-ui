@@ -9,8 +9,22 @@ category: packages
 
 [![npm][npm]][npm-url]
 
+A transform to add a displayName to React components. This is required for
+[@instructure/ui-themeable](#ui-themeable) because it uses the displayName to
+scope the CSS variables.
+
 ### Installation
 
 ```sh
 yarn add --dev @instructure/babel-plugin-transform-class-display-name
+```
+
+### Usage
+
+In your `.babelrc` file:
+
+```json
+{
+  "plugins": ["@instructure/babel-plugin-transform-class-display-name"]
+}
 ```

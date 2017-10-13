@@ -1,14 +1,32 @@
+/**
+* ---
+* category: utilities/themes
+* ---
+* Parses a CSS string into an AST object
+* @module parseCss
+* @param {String} cssText CSS string to parse
+* @returns {Object} AST for the CSS string
+*/
+export default function parse (cssText = '') {
+  const cleaned = clean(cssText)
+  return parseLexed(lex(cleaned), cleaned)
+}
+
+/**
+* CSSRule types (https://developer.mozilla.org/en-US/docs/Web/API/CSSRule)
+*/
 export const ruleTypes = {
   style: 1,
   keyframes: 7,
   media: 4
 }
 
-export default function parse (cssText = '') {
-  const cleaned = clean(cssText)
-  return parseLexed(lex(cleaned), cleaned)
-}
-
+/**
+* Removes comments and import statements from a CSS string
+* (to prep for parsing and applying transforms)
+* @param {String} cssText CSS string to parse
+* @returns {String} cleaned CSS string
+*/
 export function clean (text = '') {
   // remove comments and imports
   return text

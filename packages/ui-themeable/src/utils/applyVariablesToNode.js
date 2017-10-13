@@ -9,7 +9,7 @@ import { getCssTextWithPolyfill } from './getCssText'
  * ---
  * category: utilities/themes
  * ---
- * Apply custom style properties to a dom node (with polyfill for IE)
+ * Apply theme variables to a DOM node (as CSS variables, with polyfill)
  * @module applyVariablesToNode
  * @param {Element} domNode HTML element to apply variables to using the style attribute
  * @param {Object} variables JS variables

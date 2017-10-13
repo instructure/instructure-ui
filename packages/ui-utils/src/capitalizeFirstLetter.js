@@ -1,3 +1,10 @@
-export default function capitalizeFirstLetter (word) {
-  return word ? word.charAt(0).toUpperCase() + word.slice(1) : word
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Capitalize the first letter in a string
+ * @param {String} str
+ */
+export default function capitalizeFirstLetter (str) {
+  return str ? str.charAt(0).toUpperCase() + str.slice(1) : str
 }

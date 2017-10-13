@@ -5,6 +5,7 @@ import ownerWindow from './ownerWindow'
 import getActiveElement from './getActiveElement'
 import addEventListener from './addEventListener'
 import containsActiveElement from './containsActiveElement'
+import warning from '../warning'
 
 /**
  * ---
@@ -62,8 +63,8 @@ class FocusManager {
     try {
       this.focusLaterElement.focus()
     } catch (e) {
-      // eslint-disable-next-line
-      console.warn(
+      warning(
+        false,
         `
         You tried to return focus to ${this.focusLaterElement}
         but it is not in the DOM anymore: ${e}
@@ -75,8 +76,8 @@ class FocusManager {
 
   setupScopedFocus (el) {
     if (this.contextElement) {
-      // eslint-disable-next-line
-      console.warn(
+      warning(
+        false,
         `
         Focus is already scoped to ${this.contextElement}.
         `

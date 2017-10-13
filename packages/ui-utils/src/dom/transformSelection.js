@@ -3,7 +3,30 @@
  * category: utilities/DOM
  * ---
  *
- * transformCursor - Calculate the resulting cursor position
+ * transformSelection - Calculate the resulting text selection
+ * of a changing text-containing HTML element
+ * @module transformSelection
+ * @param {DomNode} element - HTML element with selection capabilities
+ * @param {string} cleanedValue - new value that will be given to the HTML element
+ * @return {Object} resulting selection values
+ */
+export default function transformSelection (element, cleanedValue) {
+  const {
+    selectionStart,
+    selectionEnd,
+    selectionDirection,
+    value
+  } = element
+
+  return {
+    selectionStart: transformCursor(selectionStart, value, cleanedValue),
+    selectionEnd: transformCursor(selectionEnd, value, cleanedValue),
+    selectionDirection
+  }
+}
+
+/**
+ * Calculate the resulting cursor position
  * within a string when some characters are removed
  *
  * @param {number} cursorIndex - original cursor index
@@ -31,31 +54,4 @@ export function transformCursor (cursorIndex, dirtyValue, cleanedValue) {
       }
       return result
     }, 0)
-}
-
-/**
- * ---
- * category: utilities/DOM
- * ---
- *
- * transformSelection - Calculate the resulting text selection
- * of a changing text-containing HTML element
- *
- * @param {DomNode} element - HTML element with selection capabilities
- * @param {string} cleanedValue - new value that will be given to the HTML element
- * @return {Object} resulting selection values
- */
-export default function transformSelection (element, cleanedValue) {
-  const {
-    selectionStart,
-    selectionEnd,
-    selectionDirection,
-    value
-  } = element
-
-  return {
-    selectionStart: transformCursor(selectionStart, value, cleanedValue),
-    selectionEnd: transformCursor(selectionEnd, value, cleanedValue),
-    selectionDirection
-  }
 }

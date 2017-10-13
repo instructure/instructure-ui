@@ -7,7 +7,7 @@ import findDOMNode from './findDOMNode'
  *
  * Retrieve the owner document of a specified element
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {ReactElement|DOMNode} el
  * @returns {DomNode} the owner document
  */
 export default function ownerDocument (el) {

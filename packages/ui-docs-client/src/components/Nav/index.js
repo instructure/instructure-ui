@@ -153,7 +153,7 @@ export default class Nav extends Component {
       })
   }
 
-  renderDocLink (docId) {
+  renderDocLink (docId, level = 0) {
     const { docs, selected } = this.props
     const docSelected = (docId === selected)
 
@@ -162,6 +162,7 @@ export default class Nav extends Component {
         key={docId}
         className={classnames({
           [styles.link]: true,
+          [styles[`level--${level}`]]: true,
           [styles.selectedLink]: docSelected
         })}
       >
@@ -177,20 +178,31 @@ export default class Nav extends Component {
 
     this.matchingSectionsInSection(sectionId, markExpanded)
       .forEach((sectionId) => {
-        children[capitalizeFirstLetter(this.props.sections[sectionId].title)] = { section: true, id: sectionId }
+        const title = capitalizeFirstLetter(this.props.sections[sectionId].title)
+        children[title] = { section: true, id: sectionId, order: '__' }
       })
 
     this.matchingDocsInSection(sectionId, markExpanded)
       .filter(docId => !this.props.docs[docId].parent) // filter out docs with parent defined
-      .forEach(docId => { children[docId] = { id: docId } })
+      .forEach(docId => { children[docId] = { id: docId, order: this.props.docs[docId].order } })
 
     return Object.keys(children)
-      .sort()
+      .sort((a, b) => {
+        const idA = `${children[a].order}${a.toUpperCase()}`
+        const idB = `${children[b].order}${b.toUpperCase()}`
+        if (idA < idB) {
+          return -1
+        }
+        if (idA > idB) {
+          return 1
+        }
+        return 0
+      })
       .map((id) => {
         if (children[id].section) {
           return this.renderSectionLink(children[id].id, () => { markExpanded(sectionId) }, 'category')
         } else {
-          return this.renderDocLink(id)
+          return this.renderDocLink(id, this.props.sections[sectionId].level)
         }
       })
   }
@@ -257,7 +269,8 @@ export default class Nav extends Component {
             key={themeKey}
             className={classnames({
               [styles.link]: true,
-              [styles.selectedLink]: isSelected
+              [styles.selectedLink]: isSelected,
+              [styles['level--0']]: true
             })}
           >
             <Link theme={this.linkTheme(isSelected)} href={`#${themeKey}`}>

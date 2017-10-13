@@ -13,7 +13,7 @@ import ownerWindow from './ownerWindow'
  *
  * Calculate the coordinates to attach an element
  * to a designated target with specified constraints
-
+ * @module
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @param {DomNode} target - the target DOM node
  * @param {Object} options - constraints for the positioning

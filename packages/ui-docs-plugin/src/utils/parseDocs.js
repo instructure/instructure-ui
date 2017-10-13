@@ -16,20 +16,16 @@ module.exports = function parseDocs (docs, readme, changelog) {
   docs.forEach((doc) => {
     const { category, id, parent } = doc
 
-    if (doc.undocumented === true) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`[${doc.srcPath}] is undocumented.`)
-      }
-      return
-    }
+    warning((!doc.undocumented), `[${doc.srcPath}] is undocumented.`)
+    warning((!docs[id]), `[${id}] is a duplicate document ID.`)
 
-    if (docs[id]) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.warn(`[${id}] is a duplicate document ID.`)
-      }
-    }
+    if (doc.undocumented === true) return
 
-    parsed.docs[id] = doc
+    parsed.docs[id] = {
+      ...doc,
+      methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
+      generateTheme: doc.component && doc.component.generateTheme
+    }
 
     if (parent) {
       parsed.parents[parent] = parsed.parents[parent] || { children: [] }
@@ -67,4 +63,10 @@ module.exports = function parseDocs (docs, readme, changelog) {
   parsed.docs.CHANGELOG = parsed.docs.CHANGELOG || changelog
 
   return parsed
+}
+
+function warning (condition, message, ...args) {
+  if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+    console.warn.apply(undefined, [`Warning: ${message}`, ...args])
+  }
 }

@@ -27,8 +27,8 @@ module.exports = function () {
     ],
     template: path.resolve(__dirname, 'index.tmpl.html'),
     identifier: (resourcePath, matter, context) => {
-      if (matter.name) {
-        return matter.name
+      if (matter.data.id) {
+        return matter.data.id
       } else if (resourcePath.includes('/index.js') || resourcePath.includes('README.md')) {
         return '[folder]'
       } else {

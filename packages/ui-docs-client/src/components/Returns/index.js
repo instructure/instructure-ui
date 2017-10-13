@@ -13,8 +13,9 @@ export default class Returns extends Component {
 
   renderRows () {
     return this.props.types.map((type, index) => {
+      const key = `${type.type}-${index}`
       return (
-        <tr key={type.type}>
+        <tr key={key}>
           <td><code>{this.renderType(type.type)}</code></td>
           <td>{this.renderDescription(type.description)}</td>
         </tr>

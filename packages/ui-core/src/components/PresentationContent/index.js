@@ -19,7 +19,7 @@ category: components/utilities
   along with the accessible version you're providing.
 
   Use of this component is discouraged unless there's no alternative
-  (e.g. for data vizualizations)
+  (e.g. for data visualizations)
 
   ```jsx_example
     <PresentationContent>
