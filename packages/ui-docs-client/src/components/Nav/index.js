@@ -82,7 +82,7 @@ export default class Nav extends Component {
 
   linkTheme (isSelected) {
     return {
-      color: isSelected ? '#008ee2' : '#333',
+      color: isSelected ? '#0084D1' : '#333',
       textDecoration: 'none'
     }
   }

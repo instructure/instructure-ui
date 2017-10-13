@@ -140,7 +140,11 @@ category: components/dialogs
              label="Modal Dialog: Hello World"
              shouldCloseOnOverlayClick
              closeButtonLabel="Close"
-             applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
+             applicationElement={() => [
+                document.getElementById('app'),
+                document.getElementById('flash-messages'),
+                document.getElementById('nav')
+            ]}
            >
              <ModalHeader>
                <Heading>This Modal contains an Autocomplete</Heading>

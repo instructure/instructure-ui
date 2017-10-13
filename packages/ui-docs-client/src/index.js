@@ -1,10 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import lorem from 'lorem-ipsum'
+import axe from 'react-axe'
 
 import App from './components/App'
 
 import placeholderImage from './utils/placeholder-image'
+
+if (process.env.NODE_ENV !== 'production') {
+  axe(React, ReactDOM, 1000, {
+    rules: [
+      { id: 'color-contrast', enabled: false }
+    ]
+  })
+}
 
 global.lorem = {
   sentence () {

@@ -4,20 +4,29 @@ import PropTypes from 'prop-types'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 
 export default class Section extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
-    id: PropTypes.string.isRequired,
+    id: PropTypes.string,
     heading: PropTypes.string,
     children: PropTypes.node
-  };
-  /* eslint-enable react/require-default-props */
+  }
+
+  static defaultProps = {
+    id: undefined,
+    heading: undefined,
+    children: null
+  }
 
   render () {
     const heading = this.props.heading && (
-      <Heading level="h2">{this.props.heading}</Heading>
+      <Heading
+        level="h2"
+        id={this.props.id}
+      >
+        {this.props.heading}
+      </Heading>
     )
     return (
-      <div id={this.props.id}>
+      <div>
         {heading}
         <div>
           {this.props.children}

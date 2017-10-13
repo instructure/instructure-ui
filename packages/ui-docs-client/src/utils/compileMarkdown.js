@@ -129,7 +129,7 @@ function createRenderer () {
           />
         )
       } else if (language) {
-        return <CodeEditor code={code} language={language} readOnly />
+        return <CodeEditor label="Code example" code={code} language={language} readOnly />
       } else {
         return <code>{code}</code>
       }

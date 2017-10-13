@@ -426,6 +426,10 @@ axe-core@^2.4.1:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.4.2.tgz#3156d914051ea32597e584071d9d653b66d1579b"
 
+axe-core@~2.3.1:
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-2.3.1.tgz#be87acabe8c2c6a979761ea7c2b423791fb32f3f"
+
 axobject-query@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/axobject-query/-/axobject-query-0.1.0.tgz#62f59dbc59c9f9242759ca349960e7a2fe3c36c0"
@@ -7670,6 +7674,12 @@ rc@^1.1.7:
 react-addons-test-utils@^15.6.0:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
+
+react-axe@^2.1.7:
+  version "2.1.7"
+  resolved "https://registry.yarnpkg.com/react-axe/-/react-axe-2.1.7.tgz#1641839ca97607164ae24c837b526b39cf7da170"
+  dependencies:
+    axe-core "~2.3.1"
 
 react-docgen@^2.16.0:
   version "2.18.0"

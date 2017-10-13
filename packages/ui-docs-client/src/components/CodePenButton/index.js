@@ -30,7 +30,7 @@ export default class CodePenButton extends Component {
       js: `const render = (el) => { ReactDOM.render(el, document.getElementById('app')) }\n\n${code}`,
       private: true,
       editors: '001',
-      html: '<div id="app"></div>',
+      html: '<div id="app"></div><div id="flash-messages"></div><div id="nav"></div>',
       layout: 'top',
       css_prefix: 'autoprefixer',
       js_pre_processor: 'babel',

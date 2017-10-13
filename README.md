@@ -1,7 +1,7 @@
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
 
-# instructure-ui
+## instructure-ui
 
 [![build-status][build-status]][build-status-url]
 

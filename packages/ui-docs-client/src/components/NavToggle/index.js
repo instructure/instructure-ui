@@ -26,7 +26,7 @@ export default class NavToggle extends Component {
     } = this.props
 
     const sectionStyles = {
-      color: '#008ee2',
+      color: '#0084D1',
       textWeight: 'light',
       textTransform: 'uppercase',
       textSize: 'medium'

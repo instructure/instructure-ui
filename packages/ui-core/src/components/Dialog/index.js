@@ -47,7 +47,11 @@ class Example extends React.Component {
             <Dialog
               open={this.state.open}
               shouldContainFocus
-              applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
+              applicationElement={() => [
+                document.getElementById('app'),
+                document.getElementById('flash-messages'),
+                document.getElementById('nav')
+              ]}
               defaultFocusElement={() => this._firstName}
               shouldReturnFocus
               onDismiss={() => this.setState({ open: false })}

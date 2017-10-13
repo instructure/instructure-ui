@@ -113,6 +113,7 @@ export default class Playground extends Component {
           </Button>
         </div>
         <CodeEditor
+          label={`${this.props.title} Example Code`}
           code={code}
           variant="playground"
           onChange={this.handleChange}
@@ -147,7 +148,8 @@ export default class Playground extends Component {
               onDismiss={this.handleMinimize}
               applicationElement={() => [
                 document.getElementById('app'),
-                document.getElementById('flash-messages')
+                document.getElementById('flash-messages'),
+                document.getElementById('nav')
               ]}
             >
               <ModalBody padding="0">

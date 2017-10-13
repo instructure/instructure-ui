@@ -145,19 +145,18 @@ export default class App extends Component {
     }
 
     return (
-      <Section id={doc.id}>
+      <div>
         { this.renderThemeSelect() }
-        { doc.documentType !== 'markdown' && <Heading level="h2">
-          {doc.title}
-        </Heading> }
-        <Document
-          doc={{
-            ...doc,
-            children
-          }}
-          themeKey={this.state.themeKey}
-        />
-      </Section>
+        <Section id={doc.id} heading={doc.documentType !== 'markdown' && doc.title}>
+          <Document
+            doc={{
+              ...doc,
+              children
+            }}
+            themeKey={this.state.themeKey}
+          />
+        </Section>
+      </div>
     )
   }
 
@@ -245,6 +244,7 @@ export default class App extends Component {
                 &nbsp; by {author}. &nbsp;
                 <a href={repository} className={styles.githubLink} target="_blank">
                   <IconGithubSolid className={styles.footerIcon} />
+                  <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
                 </a>
               </div>
             </div>
@@ -253,9 +253,14 @@ export default class App extends Component {
             label="Navigation"
             open={this.state.showMenu}
             size="x-small"
-            applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')]}
+            applicationElement={() => [
+              document.getElementById('app'),
+              document.getElementById('flash-messages'),
+              document.getElementById('nav')
+            ]}
+            mountNode={() => document.getElementById('nav')}
           >
-            <div className={styles.nav} id="nav">
+            <div className={styles.nav}>
               <Header name={name} version={version} />
               <Nav
                 selected={this.state.key}

@@ -9,6 +9,7 @@ const UPDATE_DELAY = 200
 export default class CodeEditor extends Component {
   static propTypes = {
     code: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
     mode: PropTypes.string,
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
@@ -49,6 +50,7 @@ export default class CodeEditor extends Component {
 
     return (
       <CodeMirrorEditor
+        label={this.props.label}
         variant={this.props.variant}
         value={this.props.code}
         onChange={this._handleChange}

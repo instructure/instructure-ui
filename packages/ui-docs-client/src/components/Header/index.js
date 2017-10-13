@@ -20,8 +20,8 @@ export default class Header extends Component {
         <div className={styles.banner} role="banner">
           <Link
             theme={{
-              color: '#008ee2',
-              hoverColor: darken('#008ee2', 10),
+              color: '#0084D1',
+              hoverColor: darken('#0084D1', 10),
               textDecoration: 'none',
               hoverTextDecoration: 'underline'
             }}
@@ -34,8 +34,8 @@ export default class Header extends Component {
           <div className={styles.version}>
             <Link
               theme={{
-                color: '#73818C',
-                hoverColor: darken('#73818C', 10),
+                color: '#005A8F',
+                hoverColor: darken('#005A8F', 10),
                 textDecoration: 'none',
                 hoverTextDecoration: 'underline'
               }}

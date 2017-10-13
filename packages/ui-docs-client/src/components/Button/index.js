@@ -20,7 +20,7 @@ export default class Button extends Component {
   }
 
   render () {
-    const color = '#008ee2'
+    const color = '#0084D1'
     return (
       <BaseButton
         {...this.props}

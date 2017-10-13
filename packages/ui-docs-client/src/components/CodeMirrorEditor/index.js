@@ -3,8 +3,10 @@ import CodeMirror from 'codemirror'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import shortid from 'shortid'
 
 import themeable from '@instructure/ui-themeable'
+import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/jsx/jsx'
@@ -15,6 +17,7 @@ import theme from './theme'
 @themeable(theme, styles)
 export default class CodeMirrorEditor extends Component {
   static propTypes = {
+    label: PropTypes.string.isRequired,
     mode: PropTypes.oneOf(['javascript', 'jsx']),
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
@@ -41,6 +44,7 @@ export default class CodeMirrorEditor extends Component {
     this.state = {
       isFocused: false
     }
+    this._id = `CodeEditor__${shortid.generate()}`
   }
 
   componentDidMount () {
@@ -106,12 +110,16 @@ export default class CodeMirrorEditor extends Component {
 
     return (
       <div className={classnames(classes)}>
-        <textarea
-          ref={(c) => { this._textareaNode = c }}
-          name={this.props.path}
-          defaultValue={''}
-          autoComplete="off"
-        />
+        <label htmlFor={this._id}>
+          <ScreenReaderContent>{this.props.label}</ScreenReaderContent>
+          <textarea
+            id={this._id}
+            ref={(c) => { this._textareaNode = c }}
+            name={this.props.path}
+            defaultValue={''}
+            autoComplete="off"
+          />
+        </label>
       </div>
     )
   }

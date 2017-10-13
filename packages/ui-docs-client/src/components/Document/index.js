@@ -5,7 +5,7 @@ import Link from '@instructure/ui-core/lib/components/Link'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 import Text from '@instructure/ui-core/lib/components/Text'
 import Container from '@instructure/ui-core/lib/components/Container'
-
+import { darken } from '@instructure/ui-themeable/lib/utils/color'
 import Table from '@instructure/ui-core/lib/components/Table'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 import TabList, { TabPanel } from '@instructure/ui-core/lib/components/TabList'
@@ -87,7 +87,7 @@ export default class Document extends Component {
 
     return (
       <Text size="small">
-        <Link href={srcUrl}>
+        <Link href={srcUrl} theme={{ color: '#005A8F', hoverColor: darken('#005A8F', 10) }}>
           {srcPath}
         </Link>
       </Text>
@@ -95,7 +95,7 @@ export default class Document extends Component {
   }
 
   renderUsage () {
-    const { requirePath, id, packageName } = this.props.doc
+    const { requirePath, id, packageName, title } = this.props.doc
 
     if (!requirePath) return
 
@@ -114,7 +114,7 @@ const ${id} = require('${requirePath}')
         <Container margin="0 0 small 0" display="block">
           <code>yarn add {packageName}</code>
         </Container>
-        <CodeEditor code={example} readOnly />
+        <CodeEditor label={`${title} Usage`} code={example} readOnly />
       </Container>
     )
   }

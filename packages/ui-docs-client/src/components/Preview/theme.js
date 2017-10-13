@@ -28,6 +28,6 @@ export default function ({ colors, typography, spacing, borders, stacking }) {
     backgroundError: colors.crimson,
     colorError: colors.white,
     toolbarColor: colors.white,
-    toolbarBackground: '#008ee2'
+    toolbarBackground: '#0084D1'
   }
 }

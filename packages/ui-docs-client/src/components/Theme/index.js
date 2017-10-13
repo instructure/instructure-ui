@@ -81,7 +81,7 @@ theme.use(${params})
 `
     return (
       <div>
-        <CodeEditor code={code} readOnly />
+        <CodeEditor label={`${themeKey} Theme Usage`} code={code} readOnly />
         {sections}
         {vars.length > 0 && this.renderSection('brand variables', vars)}
       </div>
