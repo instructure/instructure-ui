@@ -81,7 +81,7 @@ export default class GridCol extends Component {
       width = width[breakpoint]
     }
 
-    if (typeof width !== 'string') return
+    if (!width) return
 
     return `${breakpoint}--${width}`
   }
@@ -93,7 +93,7 @@ export default class GridCol extends Component {
       offset = offset[breakpoint]
     }
 
-    if (typeof offset !== 'string') return
+    if (!offset) return
 
     return `${breakpoint}-offset--${offset}`
   }
