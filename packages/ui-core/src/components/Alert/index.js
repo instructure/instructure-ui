@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 import keycode from 'keycode'
 
 import IconCompleteSolid from 'instructure-icons/lib/Solid/IconCompleteSolid'
@@ -316,7 +316,7 @@ export default class Alert extends Component {
   createScreenreaderAlert () {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      this.srid = shortid.generate()
+      this.srid = nanoid(7)
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

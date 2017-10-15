@@ -1,6 +1,6 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -78,7 +78,7 @@ class MenuItemGroup extends Component {
       }
     }
 
-    this._labelId = `MenuItemGroup__${shortid.generate()}`
+    this._labelId = `MenuItemGroup__${nanoid(7)}`
   }
 
   handleSelect = (e, value, selected) => {

@@ -3,7 +3,7 @@ import CodeMirror from 'codemirror'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
@@ -44,7 +44,7 @@ export default class CodeMirrorEditor extends Component {
     this.state = {
       isFocused: false
     }
-    this._id = `CodeEditor__${shortid.generate()}`
+    this._id = `CodeEditor__${nanoid(7)}`
   }
 
   componentDidMount () {

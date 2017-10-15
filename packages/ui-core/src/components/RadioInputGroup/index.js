@@ -1,6 +1,6 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -341,7 +341,7 @@ export default class RadioInputGroup extends Component {
       }
     }
 
-    this._messagesId = `RadioInputGroup__messages-${shortid.generate()}`
+    this._messagesId = `RadioInputGroup__messages-${nanoid(7)}`
   }
 
   get hasMessages () {

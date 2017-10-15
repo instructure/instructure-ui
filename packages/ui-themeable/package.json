@@ -34,8 +34,8 @@
     "bowser": "^1.7.0",
     "deep-equal": "^1.0.1",
     "glamor": "^2.20.37",
+    "nanoid": "^0.2.2",
     "prop-types": "^15.5.10",
-    "shortid": "^2.2.8",
     "tinycolor2": "^1.4.1"
   },
   "peerDependencies": {

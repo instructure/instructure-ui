@@ -36,11 +36,11 @@
     "moment": "^2.10.6",
     "moment-timezone": "^0.5.13",
     "no-scroll": "^2.1.0",
+    "nanoid": "^0.2.2",
     "numeral": "^2.0.6",
     "object.omit": "^2.0.1",
     "object.pick": "^1.2.0",
-    "prop-types": "^15.5.10",
-    "shortid": "^2.2.8"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.1",

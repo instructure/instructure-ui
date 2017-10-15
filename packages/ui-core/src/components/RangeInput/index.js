@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -88,7 +88,7 @@ class RangeInput extends Component {
       }
     }
 
-    this.defaultId = `RangeInput_${shortid.generate()}`
+    this.defaultId = `RangeInput_${nanoid(7)}`
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

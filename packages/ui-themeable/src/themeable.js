@@ -14,7 +14,7 @@
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import deepEqual from 'deep-equal'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
@@ -205,6 +205,6 @@ export default function themeable (theme, styles) {
 themeable.generateTheme = generateTheme
 
 function uniqueId (displayName) {
-  const id = shortid.generate()
+  const id = nanoid(7)
   return process.env.DEBUG ? `${displayName}__${id}` : id
 }

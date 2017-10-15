@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
@@ -63,7 +63,7 @@ class FormFieldLayout extends Component {
   constructor (props) {
     super()
 
-    this._messagesId = props.messagesId || `FormFieldLayout__messages-${shortid.generate()}`
+    this._messagesId = props.messagesId || `FormFieldLayout__messages-${nanoid(7)}`
   }
 
   get hasVisibleLabel () {
