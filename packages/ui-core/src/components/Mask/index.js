@@ -123,7 +123,7 @@ class Mask extends Component {
   }
 
   handleKeyUp = event => {
-    if (event.keyCode === keycode.codes.esc) {
+    if (event.keyCode === keycode.codes.esc && !event.defaultPrevented) {
       this.dismiss(event)
     }
   }

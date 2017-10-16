@@ -59,4 +59,15 @@ describe('<Mask />', () => {
 
     expect(onDismiss).to.have.been.called
   })
+
+  it('should not call onDismiss when esc keyUp default is prevented', () => {
+    const onDismiss = testbed.stub()
+    const subject = testbed.render({
+      onDismiss
+    })
+
+    subject.simulate('keyUp', { keyCode: keycode.codes.esc, defaultPrevented: true })
+
+    expect(onDismiss).to.not.have.been.called
+  })
 })
