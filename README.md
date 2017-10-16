@@ -52,7 +52,7 @@
 
 ### Contribute
 
-Before contributing please read our [code of conduct](CODE_OF_CONDUCT.md)
+Before contributing please read our [code of conduct](#CODE_OF_CONDUCT)
 
 
 ### Prerequisites and Installation

@@ -25,6 +25,7 @@ module.exports = {
     }
   },
   files: [
+    path.resolve(projectRoot, 'CODE_OF_CONDUCT.md'),
     path.resolve(projectRoot, 'packages/ui-core/src/components/*/**/index.js'),
     path.resolve(projectRoot, 'packages/ui-core/src/utils/**/*.js'),
     path.resolve(projectRoot, 'packages/ui-themeable/src/**/*.js'),
