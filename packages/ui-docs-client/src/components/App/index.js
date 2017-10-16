@@ -147,7 +147,7 @@ export default class App extends Component {
     return (
       <div>
         { this.renderThemeSelect() }
-        <Section id={doc.id} heading={doc.documentType !== 'markdown' && doc.title}>
+        <Section id={doc.id} heading={doc.documentType !== 'markdown' ? doc.title : undefined}>
           <Document
             doc={{
               ...doc,
