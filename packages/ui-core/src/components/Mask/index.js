@@ -72,7 +72,7 @@ category: components/utilities
                 fullScreen
                 onDismiss={() => { this.setState({ open: false }) }}
               >
-                <Heading>Click me to close</Heading>
+                <Heading>Click anywhere around this text to close the Mask</Heading>
               </Mask>
             </Portal>
          </div>
