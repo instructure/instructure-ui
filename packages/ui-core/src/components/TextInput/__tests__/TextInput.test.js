@@ -46,6 +46,33 @@ describe('<TextInput/>', () => {
     expect(subject.instance().value).to.equal('bar')
   })
 
+  it('should provide messageId to FormField', () => {
+    const subject = testbed.render()
+    expect(subject.find('FormField').prop('messagesId')).to.not.be.empty
+  })
+
+  it('should provide messageId to FormField', () => {
+    const subject = testbed.render({
+      messages: [{
+        text: 'yup',
+        type: 'error'
+      }]
+    })
+    expect(subject.find('input').prop('aria-describedby')).to.not.be.empty
+  })
+
+  it('should have equal messagesId and aria-describedby values', () => {
+    const subject = testbed.render({
+      messages: [{
+        text: 'yup',
+        type: 'error'
+      }]
+    })
+    expect(subject.find('input').prop('aria-describedby')).to.equal(
+      subject.find('FormField').prop('messagesId')
+    )
+  })
+
   describe('events', () => {
     it('responds to onChange event', () => {
       const onChange = testbed.stub()

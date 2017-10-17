@@ -219,4 +219,26 @@ describe('<DateInput />', () => {
     const subject = testbed.render()
     subject.should.be.accessible(done, {})
   })
+
+  it('should display "Invalid date" on an invalid date', () => {
+    const subject = testbed.render()
+    subject.instance().handleTextInputChange({ target: { value: 'foo' } })
+    expect(subject.find('TextInput').prop('messages')).to.deep.equal([
+      {
+        text: 'Invalid date',
+        type: 'error'
+      }
+    ])
+  })
+
+  it('should display invalidDateMessage on an invalid date when present', () => {
+    const subject = testbed.render({ invalidDateMessage: "Invalid date message" })
+    subject.instance().handleTextInputChange({ target: { value: 'foo' } })
+    expect(subject.find('TextInput').prop('messages')).to.deep.equal([
+      {
+        text: 'Invalid date message',
+        type: 'error'
+      }
+    ])
+  })
 })

@@ -34,6 +34,7 @@ class FormField extends Component {
     *   }`
     */
     messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messagesId: PropTypes.string,
     children: PropTypes.node,
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline']),
@@ -44,6 +45,7 @@ class FormField extends Component {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
+    messagesId: undefined,
     vAlign: 'middle'
   };
 

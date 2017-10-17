@@ -30,6 +30,7 @@ category: components/forms
     placeholder="Choose"
     label="Birthday"
     onDateChange={function () { console.log(arguments) }}
+    invalidDateMessage="Invalid date: Birthday"
   />
   ```
 
@@ -57,6 +58,10 @@ export default class DateInput extends Component {
       The label to put on the next month button of the calendar.
     **/
     nextLabel: PropTypes.string.isRequired,
+    /**
+     * The message that's used when the data is invalid.
+     */
+    invalidDateMessage:PropTypes.string,
     /**
      * Where the calendar popover should be placed.
      */
@@ -123,7 +128,8 @@ export default class DateInput extends Component {
     onDateChange: (e, formattedValue, rawValue, rawConversionFailed) => {},
     dateValue: undefined,
     datePickerRef: (el) => {},
-    inputRef: (el) => {}
+    inputRef: (el) => {},
+    invalidDateMessage: undefined
   }
 
   static contextTypes = {
@@ -197,10 +203,17 @@ export default class DateInput extends Component {
     const rawConversionFailed = newTextValue !== '' && !newParsedDate.isValid()
     const newMessages = []
     if (newTextValue !== '' && this.props.validationFeedback) {
-      newMessages.push({
-        text: newParsedDate.format(this.props.format),
-        type: newParsedDate.isValid() ? 'success' : 'error'
-      })
+      if (newParsedDate.isValid()) {
+        newMessages.push({
+          text: newParsedDate.format(this.props.format),
+          type: 'success'
+        })
+      } else {
+        newMessages.push({
+          text: this.props.invalidDateMessage || newParsedDate.format(this.props.format),
+          type: 'error'
+        })
+      }
     }
     this.setState({
       showPopover: false,
