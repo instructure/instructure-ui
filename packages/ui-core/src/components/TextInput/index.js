@@ -156,6 +156,7 @@ class TextInput extends Component {
     super()
 
     this._defaultId = `TextInput_${shortid.generate()}`
+    this._messagesId = `TextInput__messages-${shortid.generate()}`
   }
 
   /**
@@ -163,6 +164,10 @@ class TextInput extends Component {
   */
   focus () {
     this._input.focus()
+  }
+
+  get hasMessages () {
+    return this.props.messages && (this.props.messages.length > 0)
   }
 
   get invalid () {
@@ -223,6 +228,7 @@ class TextInput extends Component {
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
         id={this.id}
+        messagesId={this._messagesId}
       >
         <span className={styles.layout}>
           <input
@@ -243,6 +249,7 @@ class TextInput extends Component {
             disabled={disabled}
             aria-disabled={disabled ? 'true' : null}
             className={classnames(classes)}
+            aria-describedby={this.hasMessages ? this._messagesId : null}
           />
           {this.renderIcon()}
         </span>
