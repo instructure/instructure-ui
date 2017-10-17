@@ -1,8 +1,17 @@
-export default function generator ({ colors, spacing, borders }) {
+export default function generator ({ colors, spacing, borders, typography }) {
   return {
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
+    lineHeight: typography.lineHeight,
+    textColor: colors.licorice,
+
+    fontSizeSmall: typography.fontSizeSmall,
+    fontSizeMedium: typography.fontSizeMedium,
+    fontSizeLarge: typography.fontSizeLarge,
+
     smallIconSize: '0.5rem',
-    mediumIconSize: '0.8125rem',
-    largeIconSize: '1.125rem',
+    mediumIconSize: '0.75rem',
+    largeIconSize: '1rem',
     iconMargin: spacing.xxSmall,
     iconColor: colors.licorice,
 
@@ -23,6 +32,8 @@ export default function generator ({ colors, spacing, borders }) {
 
 generator['canvas'] = function (variables) {
   return {
-    iconColor: variables['ic-brand-font-color-dark']
+    toggleFocusBorderColor: variables['ic-brand-primary'],
+    iconColor: variables['ic-brand-font-color-dark'],
+    textColor: variables['ic-brand-font-color-dark']
   }
 }

@@ -136,7 +136,7 @@
     }
   }
 
-  svg { /* stylelint-disable-line selector-max-type */
+  .content > svg { /* stylelint-disable-line selector-max-type */
     font-size: var(--iconPlusTextFontSize);
     margin-inline-end: var(--iconPlusTextMargin);
     margin-inline-start: auto;

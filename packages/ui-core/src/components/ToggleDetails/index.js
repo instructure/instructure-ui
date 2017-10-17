@@ -9,6 +9,8 @@ import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDow
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 
+import Button from '../Button'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -20,16 +22,14 @@ category: components/navigation
 ---
   The ToggleDetails component can be used to show/hide content in response to user action.
 
-  By default, ToggleDetails content is hidden. To override, pass in the `expanded` prop.
+  By default, ToggleDetails content is hidden. To override, pass in the `defaultExpanded` prop.
 
   ```jsx_example
   <ToggleDetails
-    summary={<Text color="primary">Click to hide me!</Text>}
+    summary="Click to hide me!"
     defaultExpanded
   >
-    <Text>
-      <b>I am expanded!</b>&nbsp;{lorem.paragraph()}
-    </Text>
+    <Text weight="bold">I am expanded!</Text> {lorem.paragraph()}
   </ToggleDetails>
   ```
 
@@ -58,13 +58,11 @@ category: components/navigation
           <br />
           <br />
           <ToggleDetails
-            summary={<Text color="primary">Click to hide me!</Text>}
+            summary="Click to hide me!"
             expanded={this.state.expanded}
             onToggle={this.handleChange}
           >
-            <Text>
-              <b>I am controlled and expanded!</b>&nbsp;{lorem.paragraph()}
-            </Text>
+            <Text weight="bold">I am controlled and expanded!</Text> {lorem.paragraph()}
           </ToggleDetails>
         </div>
         )
@@ -74,16 +72,14 @@ category: components/navigation
   render(<Example />)
   ```
 
-  ToggleDetails can be set to `filled` and will force the width to 100%.
+  Setting ToggleDetails to `filled` will make the toggle use the `fluidWidth` Button component.
 
   ```jsx_example
   <ToggleDetails
     variant="filled"
-    summary={<Text color="primary">Click to expand me!</Text>}
+    summary="Click to expand me!"
   >
-    <Text>
-      <b>I am expanded!</b>&nbsp;{lorem.paragraph()}
-    </Text>
+    {lorem.paragraph()}
   </ToggleDetails>
   ```
   ### Icon size / summary text formatting
@@ -97,29 +93,24 @@ category: components/navigation
   <div>
     <ToggleDetails
       size="small"
-      summary={<Text size="small">Small icon</Text>}
+      summary="Small icon"
     >
-      <Text>
-        {lorem.paragraph()}
-      </Text>
+      {lorem.paragraph()}
     </ToggleDetails>
 
     <br />
 
-    <ToggleDetails summary={<Text size="medium">Medium icon</Text>}>
-      <Text>
-        {lorem.paragraph()}
-      </Text>
+    <ToggleDetails summary="Medium icon">
+      {lorem.paragraph()}
     </ToggleDetails>
 
     <br />
 
     <ToggleDetails
       size="large"
-      summary={<Text size="large">Large icon</Text>}>
-      <Text>
-        {lorem.paragraph()}
-      </Text>
+      summary="Large icon"
+    >
+      {lorem.paragraph()}
     </ToggleDetails>
   </div>
   ```
@@ -127,19 +118,12 @@ category: components/navigation
   ### Icon positioning and block display
   The `iconPosition` prop determines if the icon comes before or after the summary
 
-  When the `fluidWidth` prop is set, the summary fills the width of its
+  When the `fluidWidth` prop is set, the toggle fills the width of its
   container.
 
   ```jsx_example
   <ToggleDetails
-    summary={
-      <Text
-        size="medium"
-        weight="bold"
-      >
-        Block display
-      </Text>
-    }
+    summary="Block display"
     iconPosition="end"
     defaultExpanded
     fluidWidth
@@ -255,39 +239,62 @@ class ToggleDetails extends Component {
     this.props.onToggle(event, !this.expanded)
   }
 
-  renderToggle () {
+  renderSummary () {
     const {
-      variant,
       summary,
       iconPosition
     } = this.props
 
     return (
-      <button
-        type="button"
-        aria-controls={this._contentId}
-        aria-expanded={this.expanded}
-        onClick={this.handleToggle}
-        className={classnames(styles.toggle, styles[variant], {
-          [styles.fluidWidth]: this.props.fluidWidth
-        })}
-      >
-        <span className={styles.summary}>
-          {iconPosition === 'start' && this.renderIcon()}
-          {summary}
-          {iconPosition === 'end' && this.renderIcon()}
-        </span>
-      </button>
+      <span className={styles.summary}>
+        {iconPosition === 'start' && this.renderIcon()}
+        {summary}
+        {iconPosition === 'end' && this.renderIcon()}
+      </span>
     )
   }
 
+  renderToggle () {
+    const {
+      variant
+    } = this.props
+
+    const props = {
+      'aria-controls': this._contentId,
+      'aria-expanded': this.expanded,
+      onClick: this.handleToggle
+    }
+
+    if (variant === 'filled') {
+      return (
+        <Button
+          {...props}
+          fluidWidth
+        >
+          {this.renderSummary()}
+        </Button>
+      )
+    } else {
+      return (
+        <button
+          {...props}
+          type="button"
+          className={classnames(styles.toggle, styles[variant], {
+            [styles.fluidWidth]: this.props.fluidWidth
+          })}
+        >
+          {this.renderSummary()}
+        </button>
+      )
+    }
+  }
+
   renderIcon () {
-    const { size, iconPosition } = this.props
+    const { iconPosition } = this.props
     const Icon = this.expanded ? this.props.iconExpanded : this.props.icon
 
     return (
       <span className={classnames(styles.icon, {
-        [styles[size]]: size,
         [styles.iconStart]: iconPosition === 'start',
         [styles.iconEnd]: iconPosition === 'end'
       })}
@@ -298,7 +305,7 @@ class ToggleDetails extends Component {
   }
 
   renderDetails () {
-    const { size, iconPosition } = this.props
+    const { size, iconPosition, fluidWidth } = this.props
 
     return (
       <div
@@ -307,7 +314,7 @@ class ToggleDetails extends Component {
           [styles[size]]: size,
           [styles.hiddenDetails]: !this.expanded,
           [styles.expandedDetails]: this.expanded,
-          [styles.indentDetails]: iconPosition === 'start'
+          [styles.indentDetails]: iconPosition === 'start' && !fluidWidth
         })}
       >
         {this.renderContent()}

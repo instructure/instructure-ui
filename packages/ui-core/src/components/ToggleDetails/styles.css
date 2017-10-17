@@ -1,19 +1,72 @@
+.root {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+}
+
+.small {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeSmall);
+  }
+
+  .icon {
+    font-size: var(--smallIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--smallIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
+.medium {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeMedium);
+  }
+
+  .icon {
+    font-size: var(--mediumIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--mediumIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
+.large {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeLarge);
+  }
+
+  .icon {
+    font-size: var(--largeIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--largeIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
 .toggle {
+  font-family: var(--fontFamily);
   appearance: none;
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
-  background: transparent;
   position: relative;
   overflow: visible;
-
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  line-height: 1;
-
   outline: none;
   border: none;
+  background: transparent;
+  color: var(--textColor);
 
   &::-moz-focus-inner { /* removes extra ff button spacing */
     padding: 0;
@@ -39,18 +92,6 @@
   }
 }
 
-.filled {
-  background: var(--filledBackgroundColor);
-  border: var(--filledBorderWidth) var(--filledBorderStyle) var(--filledBorderColor);
-  border-radius: var(--filledBorderRadius);
-  padding: var(--filledPadding);
-  width: 100%;
-
-  .summary {
-    justify-content: flex-start;
-  }
-}
-
 .fluidWidth {
   display: block;
   width: 100%;
@@ -62,21 +103,14 @@
   align-items: center;
   box-sizing: border-box;
   justify-content: space-between;
+  text-align: start;
 }
 
 .icon {
   color: var(--iconColor);
 
-  &.small {
-    font-size: var(--smallIconSize);
-  }
-
-  &.medium {
-    font-size: var(--mediumIconSize);
-  }
-
-  &.large {
-    font-size: var(--largeIconSize);
+  > svg { /* stylelint-disable-line selector-max-type */
+    display: block; /* fix vertical alignment of icon */
   }
 }
 
@@ -93,6 +127,7 @@
 .details {
   box-sizing: border-box;
   padding-top: var(--togglePadding);
+  color: var(--textColor);
 }
 
 .hiddenDetails {
@@ -101,23 +136,6 @@
 
 .expandedDetails {
   display: block;
-}
-
-.indentDetails {
-  &.small {
-    padding-inline-start: calc(var(--smallIconSize) + var(--togglePadding));
-    padding-inline-end: 0;
-  }
-
-  &.medium {
-    padding-inline-start: calc(var(--mediumIconSize) + var(--togglePadding));
-    padding-inline-end: 0;
-  }
-
-  &.large {
-    padding-inline-start: calc(var(--largeIconSize) + var(--togglePadding));
-    padding-inline-end: 0;
-  }
 }
 
 @keyframes contentAnimation {
