@@ -68,7 +68,9 @@ class Menu extends Component {
     /**
     * children of type `MenuItem`
     */
-    children: CustomPropTypes.Children.oneOf([MenuItem, MenuItemSeparator, MenuItemGroup, MenuItemFlyout]),
+    children: CustomPropTypes.Children.oneOf([
+      MenuItem, MenuItemSeparator, MenuItemGroup, MenuItemFlyout
+    ]),
     /**
     * the id of the element that contains the text description of the menu
     */
@@ -111,15 +113,13 @@ class Menu extends Component {
     onSelect: function (e, value, selected) {}
   }
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      hasFocus: false
-    }
-
-    this._menuitems = []
+  state = {
+    hasFocus: false
   }
+
+  _menuitems = []
+  _node = null
+  _activeMenuItemFlyout = null
 
   componentWillUnmount () {
     delete this._activeMenuItemFlyout
@@ -135,12 +135,12 @@ class Menu extends Component {
       pgdn
     } = keycode.codes
 
-    if ([down, pgdn].includes(key)) {
+    if (key === down || key === pgdn) {
       this.moveFocus(1)
       event.preventDefault()
       event.stopPropagation()
       this.hideActiveMenuItemFlyout()
-    } else if ([up, pgup].includes(key)) {
+    } else if (key === up || key === pgup) {
       this.moveFocus(-1)
       event.preventDefault()
       event.stopPropagation()
@@ -157,17 +157,9 @@ class Menu extends Component {
     }
   }
 
-  handleItemFocus = () => {
-    this.setState({
-      hasFocus: true
-    })
-  }
+  handleItemFocus = () => this.setState({ hasFocus: true })
 
-  handleItemBlur = () => {
-    this.setState({
-      hasFocus: this.focusedIndex >= 0
-    })
-  }
+  handleItemBlur = () => this.setState({ hasFocus: this.focusedIndex >= 0 })
 
   focus () {
     this._node && this._node.focus()
@@ -178,7 +170,7 @@ class Menu extends Component {
   }
 
   get focusedIndex () {
-    return this._menuitems.findIndex((item) => { return item.focused === true })
+    return this._menuitems.findIndex((item) => (item.focused === true))
   }
 
   moveFocus (step) {
@@ -199,8 +191,10 @@ class Menu extends Component {
   }
 
   handleMenuItemMouseOver = (mouseOverItem) => {
-    if (this._activeMenuItemFlyout &&
-        mouseOverItem !== this._activeMenuItemFlyout._menuItemTrigger) {
+    if (
+      this._activeMenuItemFlyout &&
+      mouseOverItem !== this._activeMenuItemFlyout._menuItemTrigger
+    ) {
       this.hideActiveMenuItemFlyout()
     }
   }
@@ -216,6 +210,10 @@ class Menu extends Component {
       this._activeMenuItemFlyout.setShow(false)
       this._activeMenuItemFlyout = null
     }
+  }
+
+  handleMenuRef = (node) => {
+    this._node = node
   }
 
   renderChildren () {
@@ -237,11 +235,11 @@ class Menu extends Component {
         return child
       }
 
-      count++
+      count += 1
 
-      const ref = (c) => {
-        if (c) {
-          this._menuitems.push(c)
+      const ref = (node) => {
+        if (node) {
+          this._menuitems.push(node)
         }
       }
 
@@ -258,40 +256,46 @@ class Menu extends Component {
       const isTabbable = !this.state.hasFocus && count === 1
 
       if (matchComponentTypes(child, [MenuItem])) {
-        return (<li> {
-          safeCloneElement(child, {
-            ...props,
-            tabIndex: isTabbable ? 0 : -1,
-            ref,
-            key: index
-          })
-        } </li>)
+        return (
+          <li>
+            {safeCloneElement(child, {
+              ...props,
+              tabIndex: isTabbable ? 0 : -1,
+              ref,
+              key: index
+            })}
+          </li>
+        )
       }
 
       if (matchComponentTypes(child, [MenuItemFlyout])) {
-        return (<li> {
-          safeCloneElement(child, {
-            ...props,
-            tabIndex: isTabbable ? 0 : -1,
-            onToggle: this.handleFlyoutToggle,
-            onParentDismiss: onDismiss,
-            labelledBy,
-            title,
-            ref,
-            key: index
-          })
-        } </li>)
+        return (
+          <li>
+            {safeCloneElement(child, {
+              ...props,
+              tabIndex: isTabbable ? 0 : -1,
+              onToggle: this.handleFlyoutToggle,
+              onParentDismiss: onDismiss,
+              labelledBy,
+              title,
+              ref,
+              key: index
+            })}
+          </li>
+        )
       }
 
       if (matchComponentTypes(child, [MenuItemGroup])) {
-        return (<li> {
-          safeCloneElement(child, {
-            ...props,
-            itemRef: ref,
-            isTabbable,
-            key: index
-          })
-        } </li>)
+        return (
+          <li>
+            {safeCloneElement(child, {
+              ...props,
+              itemRef: ref,
+              isTabbable,
+              key: index
+            })}
+          </li>
+        )
       }
     })
 
@@ -315,7 +319,7 @@ class Menu extends Component {
         {...props}
         role="menu"
         tabIndex={this.state.hasFocus ? null : '0'}
-        ref={(c) => { this._node = c }}
+        ref={this.handleMenuRef}
         className={styles.root}
         aria-hidden={hidden}
         aria-labelledby={labelledBy}
