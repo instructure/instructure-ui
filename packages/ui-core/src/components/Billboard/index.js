@@ -200,6 +200,7 @@ class Billboard extends Component {
         margin={margin}
         href={href}
         onClick={this.handleClick}
+        disabled={disabled}
         aria-disabled={((onClick || href) && disabled) ? 'true' : null}
       >
         {this.renderContent()}

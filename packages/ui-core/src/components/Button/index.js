@@ -23,10 +23,11 @@ category: components
 ```jsx_example
 <Button>OK</Button>
 ```
-  The default button in its disabled state:
+  The default button in its disabled state.
 
 ```jsx_example
-<Button disabled>OK</Button>
+<Button disabled>
+  OK</Button>
 ```
 
   A button with an href passed outputs a link element styled like a button.
@@ -243,6 +244,7 @@ class Button extends Component {
       },
       ...omitProps(this.props, Button.propTypes, ['padding']),
       className: classnames(classes),
+      disabled,
       'aria-disabled': disabled ? 'true' : null,
       onClick: this.handleClick,
       onKeyDown: this.handleKeyDown,
@@ -255,7 +257,12 @@ class Button extends Component {
     const ElementType = this.elementType
 
     return (
-      <Container {...props} display={null} as={ElementType} margin={margin}>
+      <Container
+        {...props}
+        display={null}
+        as={ElementType}
+        margin={margin}
+      >
         <span className={styles.content}>{this.props.children}</span>
       </Container>
     )
