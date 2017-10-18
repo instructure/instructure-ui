@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
@@ -160,7 +160,7 @@ class TextArea extends Component {
   constructor () {
     super()
 
-    this._defaultId = `TextArea__${shortid.generate()}`
+    this._defaultId = `TextArea__${nanoid(7)}`
   }
 
   componentDidMount () {

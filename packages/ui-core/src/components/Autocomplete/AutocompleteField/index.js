@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -177,8 +177,8 @@ class AutocompleteField extends Component {
   constructor () {
     super(...arguments)
 
-    this._defaultId = `Autocomplete__${shortid.generate()}`
-    this._optionsId = `Autocomplete_Options_${shortid.generate()}`
+    this._defaultId = `Autocomplete__${nanoid(7)}`
+    this._optionsId = `Autocomplete_Options_${nanoid(7)}`
   }
 
   _menu = null

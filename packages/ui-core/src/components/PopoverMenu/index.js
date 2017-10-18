@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -180,7 +180,7 @@ export default class PopoverMenu extends Component {
       this.state.show = props.defaultShow
     }
 
-    this.labelId = `PopoverMenu__${shortid.generate()}`
+    this.labelId = `PopoverMenu__${nanoid(7)}`
     this.raf = []
   }
 

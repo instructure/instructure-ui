@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -80,7 +80,7 @@ export default class Spinner extends Component {
   constructor (props) {
     super()
 
-    this.titleId = `Spinner__${shortid.generate()}`
+    this.titleId = `Spinner__${nanoid(7)}`
   }
 
   radius () {

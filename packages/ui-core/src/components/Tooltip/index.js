@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -78,7 +78,7 @@ export default class Tooltip extends Component {
   constructor (props) {
     super()
 
-    this._id = `Tooltip__${shortid.generate()}`
+    this._id = `Tooltip__${nanoid(7)}`
   }
 
   renderTrigger () {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 import keycode from 'keycode'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -171,7 +171,7 @@ class Select extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `Select__${shortid.generate()}`
+    this._defaultId = `Select__${nanoid(7)}`
   }
 
   get id () {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -139,7 +139,7 @@ class Checkbox extends Component {
       this.state.checked = !!props.defaultChecked
     }
 
-    this._defaultId = `Checkbox__${shortid.generate()}`
+    this._defaultId = `Checkbox__${nanoid(7)}`
   }
 
   handleChange = (e) => {

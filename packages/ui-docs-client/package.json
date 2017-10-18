@@ -40,9 +40,9 @@
     "he": "^1.1.1",
     "lorem-ipsum": "^1.0.4",
     "marked": "^0.3.6",
+    "nanoid": "^0.2.2",
     "prop-types": "^15.5.10",
-    "react-axe": "^2.1.7",
-    "shortid": "^2.2.8"
+    "react-axe": "^2.1.7"
   },
   "peerDependencies": {
     "instructure-icons": ">=4.2.0",

@@ -2,8 +2,8 @@ import React, { Component, createElement } from 'react'
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames'
-import shortid from 'shortid'
 import keycode from 'keycode'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -208,7 +208,7 @@ export default class TabList extends Component {
     let diff = ids.length - this.tabs.length
 
     while (diff++ < 0) {
-      ids.push(shortid.generate())
+      ids.push(nanoid(7))
     }
 
     this._tabIds = ids

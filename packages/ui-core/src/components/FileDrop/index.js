@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -274,7 +274,7 @@ export default class FileDrop extends Component {
   constructor (props) {
     super(props)
 
-    this.defaultId = `FileDrop__${shortid.generate()}`
+    this.defaultId = `FileDrop__${nanoid(7)}`
   }
 
   state = {

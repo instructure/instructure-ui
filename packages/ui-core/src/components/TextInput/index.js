@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -155,7 +155,7 @@ class TextInput extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `TextInput_${shortid.generate()}`
+    this._defaultId = `TextInput_${nanoid(7)}`
   }
 
   /**

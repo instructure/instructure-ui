@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -77,7 +77,7 @@ class RadioInput extends Component {
   constructor (props) {
     super(props)
 
-    this._defaultId = `RadioInput__${shortid.generate()}`
+    this._defaultId = `RadioInput__${nanoid(7)}`
   }
 
   handleClick = (e) => {

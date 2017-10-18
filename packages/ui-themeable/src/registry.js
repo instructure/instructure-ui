@@ -1,4 +1,4 @@
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import warning from '@instructure/ui-utils/lib/warning'
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
@@ -82,7 +82,7 @@ export const setDefaultTheme = function (themeKey, overrides, immutable) {
 
 export function registerTheme (theme) {
   const registry = getRegistry()
-  const key = theme.key || shortid.generate()
+  const key = theme.key || nanoid(7)
 
   registry.themes[key] = theme
   registry.registered.push(key)

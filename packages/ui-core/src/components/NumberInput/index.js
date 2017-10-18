@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+import nanoid from 'nanoid'
 import Decimal from 'decimal.js'
 import numeral from 'numeral'
 import 'numeral/locales'
@@ -372,7 +372,7 @@ class NumberInput extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `NumberInput_${shortid.generate()}`
+    this._defaultId = `NumberInput_${nanoid(7)}`
   }
 
   _input = null;

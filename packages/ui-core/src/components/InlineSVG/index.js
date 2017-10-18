@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
+import nanoid from 'nanoid'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -46,8 +46,8 @@ export default class InlineSVG extends Component {
   constructor (props) {
     super()
 
-    this.titleId = shortid.generate()
-    this.descId = shortid.generate()
+    this.titleId = nanoid(7)
+    this.descId = nanoid(7)
   }
 
   get role () {

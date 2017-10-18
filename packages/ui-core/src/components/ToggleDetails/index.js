@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
+import nanoid from 'nanoid'
 
 import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
 import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
@@ -200,7 +200,7 @@ class ToggleDetails extends Component {
       expanded: this.isControlled(props) ? props.expanded : !!props.defaultExpanded
     }
 
-    this._contentId = `ToggleDetails__${shortid.generate()}`
+    this._contentId = `ToggleDetails__${nanoid(7)}`
   }
 
   shouldAnimateContent = false
