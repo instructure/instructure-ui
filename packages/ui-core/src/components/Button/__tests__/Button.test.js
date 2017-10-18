@@ -182,12 +182,12 @@ describe('<Button/>', () => {
         expect(subject.getAttribute('aria-disabled')).to.exist
       })
 
-      it('does not set the disabled attribute so that the button stays in tab order', () => {
+      it('sets the disabled attribute so that the button is not in tab order', () => {
         const subject = testbed.render({
           disabled: true
         })
 
-        expect(subject.getAttribute('disabled')).to.not.exist
+        expect(subject.getAttribute('disabled')).to.exist
       })
 
       it('sets the aria-disabled attribute when an href is provided', () => {
