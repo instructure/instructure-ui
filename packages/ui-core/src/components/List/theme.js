@@ -10,3 +10,9 @@ export default function generator ({ colors, spacing, typography }) {
     orderedNumberMargin: spacing.xSmall
   }
 }
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
+  }
+}

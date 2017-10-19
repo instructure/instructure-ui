@@ -10,3 +10,9 @@ export default function generator ({ colors, typography }) {
     background: colors.white
   }
 }
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
+  }
+}

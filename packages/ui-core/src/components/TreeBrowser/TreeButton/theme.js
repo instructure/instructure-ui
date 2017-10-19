@@ -1,4 +1,4 @@
-export default function ({ colors, spacing, typography, borders }) {
+export default function generator ({ colors, spacing, typography, borders }) {
   return {
     hoverBackgroundColor: colors.brand,
     focusOutlineWidth: borders.widthMedium,
@@ -21,5 +21,15 @@ export default function ({ colors, spacing, typography, borders }) {
     borderWidth: borders.widthSmall,
     borderColor: colors.slate,
     textLineHeight: typography.lineHeightCondensed
+  }
+}
+
+generator['canvas'] = function (variables) {
+  return {
+    iconColor: variables['ic-brand-font-color-dark'],
+    hoverBackgroundColor: variables['ic-brand-primary'],
+    focusOutlineColor: variables['ic-brand-primary'],
+    nameTextColor: variables['ic-brand-primary'],
+    descriptorTextColor: variables['ic-brand-font-color-dark']
   }
 }

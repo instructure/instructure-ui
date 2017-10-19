@@ -1,4 +1,4 @@
-export default function ({ colors, borders, spacing, typography, shadows }) {
+export default function generator ({ colors, borders, spacing, typography, shadows }) {
   return {
     color: colors.licorice,
     background: colors.white,
@@ -29,5 +29,11 @@ export default function ({ colors, borders, spacing, typography, shadows }) {
     dangerIconBackground: colors.crimson,
 
     boxShadow: shadows.depth2
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
   }
 }

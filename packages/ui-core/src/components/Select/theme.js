@@ -43,6 +43,7 @@ export default function generator ({ colors, borders, typography, forms, spacing
 generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
+    arrowColor: variables['ic-brand-font-color-dark'],
     focusBorderColor: variables['ic-brand-primary'],
     focusOutlineColor: alpha(variables['ic-brand-primary'], 50)
   }

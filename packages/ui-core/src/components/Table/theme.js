@@ -35,6 +35,7 @@ export default function generator ({ colors, typography, spacing }) {
 generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
+    captionColor: variables['ic-brand-font-color-dark'],
     hoverBorderColor: variables['ic-brand-primary']
   }
 }

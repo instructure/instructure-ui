@@ -37,6 +37,8 @@ generator['canvas-a11y'] = function ({ colors }) {
 generator.canvas = function (variables) {
   return {
     focusOutlineColor: variables['ic-brand-primary'],
+    iconColor: variables['ic-brand-font-color-dark'],
+    iconHoverColor: variables['ic-brand-primary'],
     textColor: variables['ic-brand-font-color-dark']
   }
 }

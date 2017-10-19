@@ -1,6 +1,6 @@
 import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
 
-export default function ({ colors, typography, spacing, forms }) {
+export default function generator ({ colors, typography, spacing, forms }) {
   return {
 
     handleSize: '1.5rem',
@@ -31,5 +31,16 @@ export default function ({ colors, typography, spacing, forms }) {
     valueLargeFontSize: typography.fontSizeLarge,
     valueLargePadding: `0 ${spacing.medium}`,
     valueLargeLineHeight: forms.inputHeightLarge
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    handleBackground: variables['ic-brand-primary'],
+    handleShadowColor: darken(variables['ic-brand-primary'], 15),
+    handleFocusOutlineColor: alpha(variables['ic-brand-primary'], 40),
+    handleHoverBackground: variables['ic-brand-primary'],
+    handleFocusBackground: variables['ic-brand-primary'],
+    valueBackground: variables['ic-brand-font-color-dark']
   }
 }

@@ -1,6 +1,4 @@
-import { alpha } from '@instructure/ui-themeable/lib/utils/color'
-
-export default function generator ({ colors, borders, forms, spacing, typography }) {
+export default function generator ({ colors, borders, forms, shadows, spacing, typography }) {
   return {
     color: colors.white,
     background: colors.porcelain,
@@ -11,11 +9,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
     checkedBackground: colors.shamrock,
     uncheckedIconColor: colors.slate,
     checkedIconColor: colors.shamrock,
-    shadowColor: alpha(colors.licorice, 25),
     focusOutlineColor: colors.brand,
     focusBorderWidth: borders.widthSmall,
     focusBorderStyle: borders.style,
     toggleBackground: colors.white,
+    toggleShadow: shadows.depth1,
     baseSizeSmall: forms.inputHeightSmall,
     baseSizeMedium: forms.inputHeightMedium,
     baseSizeLarge: forms.inputHeightLarge,

@@ -80,7 +80,7 @@
   height: calc(100% - (var(--borderWidth) * 2));
   width: calc(100% - (var(--borderWidth) * 2));
   background: var(--toggleBackground);
-  box-shadow: 0 0.125rem 0.5rem var(--shadowColor);
+  box-shadow: var(--toggleShadow);
   border-radius: 100%;
 }
 
