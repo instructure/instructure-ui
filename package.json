@@ -31,6 +31,7 @@
     "bootstrap:packages": "lerna bootstrap",
     "build": "lerna run build --stream --ignore __docs__",
     "build:dev": "lerna run build:dev --stream --ignore __docs__",
+    "build:docs": "lerna run build --scope __docs__",
     "clean": "npm-run-all clean:packages",
     "clean:packages": "lerna run clean",
     "clean:modules": "lerna clean --yes",
@@ -39,7 +40,6 @@
     "bump:packages": "lerna publish --skip-git --skip-npm --force-publish=* --repo-version $npm_package_version",
     "bump:commit": "git commit -a -m \"chore(release): $npm_package_version\"",
     "bump": "npm-run-all fetch bump:repo bump:packages bump:commit",
-    "prerelease": "yarn test",
     "release": "./scripts/release",
     "deploy": "lerna run deploy"
   },

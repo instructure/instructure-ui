@@ -111,7 +111,7 @@ git checkout -b $release_branch
 printf "Installing version $next_version ...\n"
 $NPM_CLIENT install
 printf "Preparing version $next_version ...\n"
-$NPM_CLIENT run prerelease
+$NPM_CLIENT run test
 
 ###############################
 # Publish sub-packages to npm #
@@ -137,7 +137,7 @@ git push origin $next_version
 #####################################
 if [[ "$tag" == "latest" ]]; then
   printf "Building version $next_version of the documentation...\n"
-  $NPM_CLIENT run docs
+  $NPM_CLIENT run build:docs
 
   printf "Deploying version $next_version of the documentation...\n"
   $NPM_CLIENT run deploy
