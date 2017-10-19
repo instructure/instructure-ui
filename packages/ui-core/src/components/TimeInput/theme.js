@@ -1,5 +1,3 @@
-/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
-
 export default function generator ({ colors, typography }) {
   return {
     fontSize: typography.fontSizeMedium,
@@ -8,5 +6,11 @@ export default function generator ({ colors, typography }) {
 
     color: colors.oxford,
     background: colors.white
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
   }
 }

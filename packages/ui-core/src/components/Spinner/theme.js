@@ -22,6 +22,8 @@ export default function generator ({ colors }) {
 
 generator.canvas = function (variables) {
   return {
-    color: variables['ic-brand-primary']
+    color: variables['ic-brand-primary'],
+    inverseColor: variables['ic-brand-primary'],
+    inverseTrackColor: variables['ic-brand-font-color-dark']
   }
 }

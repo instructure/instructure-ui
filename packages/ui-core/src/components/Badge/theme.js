@@ -1,5 +1,3 @@
-/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
-
 export default function generator ({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
@@ -16,5 +14,11 @@ export default function generator ({ borders, colors, spacing, typography }) {
     borderRadius: '999rem',
     padding: spacing.xxSmall,
     pulseBorderThickness: borders.widthMedium
+  }
+}
+
+generator['canvas'] = function (variables) {
+  return {
+    colorPrimary: variables['ic-brand-primary']
   }
 }

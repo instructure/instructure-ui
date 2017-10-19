@@ -1,4 +1,4 @@
-export default function ({ borders, colors, spacing, typography }) {
+export default function generator ({ borders, colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -15,5 +15,11 @@ export default function ({ borders, colors, spacing, typography }) {
     pipeLineHeight: typography.lineHeightCondensed,
 
     marginBottomDefault: spacing.xxxSmall
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
   }
 }

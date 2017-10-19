@@ -40,6 +40,6 @@ generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
     meterColorStart: variables['ic-brand-primary'],
-    meterColorEnd: lighten(variables['ic-brand-primary'], 10)
+    meterColorEnd: lighten(variables['ic-brand-primary'], 12)
   }
 }

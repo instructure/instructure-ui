@@ -1,6 +1,6 @@
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
-export default function ({ colors, borders, shadows }) {
+export default function generator ({ colors, borders, shadows }) {
   return {
     borderColor: colors.tiara,
     arrowBorderColor: darken(colors.tiara, 5),
@@ -16,5 +16,12 @@ export default function ({ colors, borders, shadows }) {
     borderRadius: borders.radiusMedium,
 
     boxShadow: shadows.depth1
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    textColor: variables['ic-brand-font-color-dark'],
+    backgroundColorInverse: variables['ic-brand-font-color-dark']
   }
 }

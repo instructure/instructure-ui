@@ -12,11 +12,7 @@ export default function generator ({ colors, spacing, typography }) {
 
 generator.canvas = function (variables) {
   return {
-    iconEmpty: {
-      color: variables['ic-brand-primary']
-    },
-    iconFilled: {
-      color: variables['ic-brand-primary']
-    }
+    iconEmptyColor: variables['ic-brand-primary'],
+    iconFilledColor: variables['ic-brand-primary']
   }
 }

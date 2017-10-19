@@ -25,6 +25,7 @@ category: components
   ```jsx_example
     <div>
       <Badge
+        pulse
         count={99}
         margin="0 medium 0 0"
         formatOutput={function (formattedCount) {
@@ -40,6 +41,7 @@ category: components
         </Button>
       </Badge>
       <Badge
+        pulse
         type="notification"
         formatOutput={function () {
           return <ScreenReaderContent>You have new edits to review</ScreenReaderContent>

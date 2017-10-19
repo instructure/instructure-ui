@@ -31,6 +31,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
 generator.canvas = function (variables) {
   return {
     iconHoverColor: variables['ic-brand-primary'],
-    messageColorClickable: variables['ic-brand-primary']
+    messageColorClickable: variables['ic-brand-primary'],
+    clickableActiveBg: variables['ic-brand-primary']
   }
 }

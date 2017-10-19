@@ -40,6 +40,10 @@ export default function generator ({ colors, borders, spacing, typography }) {
 generator.canvas = function (variables) {
   return {
     focusBorderColor: variables['ic-brand-primary'],
-    labelColor: variables['ic-brand-font-color-dark']
+    labelColor: variables['ic-brand-font-color-dark'],
+    checkedLabelColor: variables['ic-brand-font-color-dark'],
+    checkedBackground: variables['ic-brand-font-color-dark'],
+    checkedBorderColor: variables['ic-brand-font-color-dark'],
+    hoverBorderColor: variables['ic-brand-font-color-dark']
   }
 }
