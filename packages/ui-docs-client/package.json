@@ -38,7 +38,6 @@
     "codemirror": "^5.27.4",
     "gray-matter": "^3.0.2",
     "he": "^1.1.1",
-    "lorem-ipsum": "^1.0.4",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",
     "react-axe": "^2.1.7",
