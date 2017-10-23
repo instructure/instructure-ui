@@ -120,6 +120,14 @@ describe('<Menu />', () => {
     expect(subject.instance().focusedIndex).to.equal(0)
   })
 
+  it('should focus the first menu item when menu only has one item', () => {
+    const subject = testbed.render({
+      children: <MenuItem>foo</MenuItem>
+    })
+    subject.simulate('focus')
+    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true
+  })
+
   it('should set aria attributes and title properly', () => {
     const subject = testbed.render({
       labelledBy: 'id',

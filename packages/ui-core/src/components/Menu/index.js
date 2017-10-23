@@ -190,6 +190,14 @@ class Menu extends Component {
     }
   }
 
+  handleMenuFocus = () => {
+    // when there is only one menu item, focus that item so SR users
+    // don't have to drill down for access
+    if (this._menuitems.length === 1) {
+      this._menuitems[0].focus()
+    }
+  }
+
   handleMenuItemMouseOver = (mouseOverItem) => {
     if (
       this._activeMenuItemFlyout &&
@@ -329,6 +337,7 @@ class Menu extends Component {
         title={title}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
         onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
+        onFocus={this.handleMenuFocus}
       >
         {this.renderChildren()}
       </ul>
