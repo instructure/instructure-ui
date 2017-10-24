@@ -5,10 +5,10 @@
 * A global theme registry
 * @module registry
 */
-import shortid from 'shortid'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import warning from '@instructure/ui-utils/lib/warning'
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
+import uid from '@instructure/ui-utils/lib/uid'
 
 const DEFAULT_THEME_KEY = '@@themeableDefaultTheme'
 
@@ -109,10 +109,22 @@ export const setDefaultTheme = function (themeKey, overrides, immutable) {
 
 export function registerTheme (theme) {
   const registry = getRegistry()
-  const key = theme.key || shortid.generate()
+  const key = theme.key || uid()
 
   registry.themes[key] = theme
   registry.registered.push(key)
+}
+
+function documentTheme (themeKey, docs) {
+  const registry = getRegistry()
+  const theme = registry.themes[themeKey]
+
+  warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+
+  registry.themes[themeKey] = {
+    ...theme,
+    ...docs
+  }
 }
 
 /**
@@ -132,6 +144,9 @@ export function makeTheme ({ theme, a11y }) {
         warning(theme, `Invalid theme.`)
         setDefaultTheme(theme.key, overrides, false)
       }
+    },
+    document: function (docs) {
+      documentTheme(theme.key, docs)
     }
   }
 }

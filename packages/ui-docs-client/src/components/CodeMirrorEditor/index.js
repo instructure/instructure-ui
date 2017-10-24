@@ -3,10 +3,10 @@ import CodeMirror from 'codemirror'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
 
 import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import 'codemirror/mode/javascript/javascript'
 import 'codemirror/mode/jsx/jsx'
@@ -44,7 +44,7 @@ export default class CodeMirrorEditor extends Component {
     this.state = {
       isFocused: false
     }
-    this._id = `CodeEditor__${shortid.generate()}`
+    this._id = `CodeEditor__${uid()}`
   }
 
   componentDidMount () {
@@ -68,7 +68,7 @@ export default class CodeMirrorEditor extends Component {
     if (this.codeMirror && this._currentCodemirrorValue !== nextProps.value) {
       this.codeMirror.setValue(nextProps.value)
     }
-    if (typeof nextProps.options === 'object') {
+    if (nextProps.options && typeof nextProps.options === 'object') {
       for (const optionName in nextProps.options) { // eslint-disable-line no-restricted-syntax
         // eslint-disable-next-line no-prototype-builtins
         if (nextProps.options.hasOwnProperty(optionName)) {

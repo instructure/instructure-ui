@@ -10,14 +10,6 @@ import FormFieldLayout from './FormFieldLayout'
 ---
 category: components/forms
 ---
-  This is a helper component that is used by most of the custom form
-  components. In most cases it shouldn't be used directly.
-
-  ```jsx_example
-  <FormField id="foo" label="Opacity">
-    <input id="foo" type="range"/>
-  </FormField>
-  ```
 **/
 class FormField extends Component {
   /* eslint-disable react/require-default-props */

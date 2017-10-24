@@ -8,8 +8,6 @@ import Select from '@instructure/ui-core/lib/components/Select'
 import Tray from '@instructure/ui-core/lib/components/Tray'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 
-import { getRegisteredThemes, getDefaultThemeKey } from '@instructure/ui-themeable/lib/registry'
-
 import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
 import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
 
@@ -35,15 +33,17 @@ export default class App extends Component {
     docs: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     parents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     sections: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    descriptions: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     library: LibraryPropType.isRequired
   }
 
   static defaultProps = {
-    parents: [],
-    sections: []
+    themes: {},
+    parents: {},
+    sections: {},
+    descriptions: {}
   }
-
-  static themes = getRegisteredThemes()
 
   static childContextTypes = {
     library: LibraryPropType,
@@ -53,10 +53,11 @@ export default class App extends Component {
 
   constructor (props) {
     super()
+
     this.state = {
-      key: null,
+      key: undefined,
       showMenu: false,
-      themeKey: getDefaultThemeKey()
+      themeKey: undefined
     }
   }
 
@@ -64,7 +65,7 @@ export default class App extends Component {
     return {
       library: this.props.library,
       themeKey: this.state.themeKey,
-      themes: App.themes
+      themes: this.props.themes
     }
   }
 
@@ -103,8 +104,8 @@ export default class App extends Component {
   }
 
   renderThemeSelect () {
-    const themeKeys = Object.keys(App.themes)
-    return (
+    const themeKeys = Object.keys(this.props.themes)
+    return themeKeys.length > 0 ? (
       <div className={styles.docsSectionHeader}>
         <div className={styles.themeSelect}>
           <Select
@@ -123,36 +124,46 @@ export default class App extends Component {
           </Select>
         </div>
       </div>
-    )
+    ) : null
   }
 
   renderTheme (themeKey) {
+    const theme = this.props.themes[themeKey]
     return (
       <Section id={themeKey}>
         <Heading level="h2" margin="0 0 medium 0">
           {themeKey}
         </Heading>
-        <Theme themeKey={themeKey} variables={App.themes[themeKey].variables} />
+        <Theme
+          themeKey={themeKey}
+          variables={theme.resource.variables}
+          requirePath={theme.requirePath}
+          immutable={theme.resource.immutable}
+        />
       </Section>
     )
   }
 
   renderDocument (doc) {
+    const { descriptions, docs, parents } = this.props
     let children = []
 
-    if (this.props.parents[doc.id]) {
-      children = this.props.parents[doc.id].children.map(childId => this.props.docs[childId])
+    if (parents[doc.id]) {
+      children = parents[doc.id].children.map(childId => docs[childId])
     }
+
+    const description = descriptions[doc.id]
 
     return (
       <div>
         { this.renderThemeSelect() }
-        <Section id={doc.id} heading={doc.documentType !== 'markdown' ? doc.title : undefined}>
+        <Section id={doc.id} heading={doc.extension !== '.md' ? doc.title : undefined}>
           <Document
             doc={{
               ...doc,
               children
             }}
+            description={description || doc.description}
             themeKey={this.state.themeKey}
           />
         </Section>
@@ -164,7 +175,7 @@ export default class App extends Component {
     const { docs, library } = this.props
     return (
       <Section id={library.name}>
-        {compileMarkdown(docs.index.description, { title: library.name })}
+        {compileMarkdown(docs[library.name].description, { title: library.name })}
       </Section>
     )
   }
@@ -188,7 +199,7 @@ export default class App extends Component {
 
   renderContent (key) {
     const doc = this.props.docs[key]
-    const theme = App.themes[key]
+    const theme = this.props.themes[key]
 
     if (!key || key === 'index') {
       return this.renderIndex()
@@ -201,14 +212,37 @@ export default class App extends Component {
     }
   }
 
+  renderFooter () {
+    const {
+      author,
+      repository
+    } = this.props.library
+
+    return author || repository ? (
+      <div className={styles.footer}>
+        { author && (
+          <span>
+            Made with &nbsp;
+            <IconHeartSolid className={styles.footerIcon} />
+            &nbsp; by {author}. &nbsp;
+          </span>
+        ) }
+        { repository && (
+          <a href={repository} className={styles.githubLink} target="_blank">
+            <IconGithubSolid className={styles.footerIcon} />
+            <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
+          </a>
+        ) }
+      </div>
+    ) : null
+  }
+
   render () {
     const classes = {
       [styles.root]: true,
       [styles['show-menu']]: this.state.showMenu
     }
     const {
-      author,
-      repository,
       name,
       version
     } = this.props.library
@@ -238,15 +272,7 @@ export default class App extends Component {
 
               {this.renderContent(this.state.key)}
 
-              <div className={styles.footer}>
-                Made with &nbsp;
-                <IconHeartSolid className={styles.footerIcon} />
-                &nbsp; by {author}. &nbsp;
-                <a href={repository} className={styles.githubLink} target="_blank">
-                  <IconGithubSolid className={styles.footerIcon} />
-                  <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
-                </a>
-              </div>
+              {this.renderFooter()}
             </div>
           </div>
           <Tray
@@ -266,7 +292,7 @@ export default class App extends Component {
                 selected={this.state.key}
                 sections={this.props.sections}
                 docs={this.props.docs}
-                themes={App.themes}
+                themes={this.props.themes}
               />
             </div>
           </Tray>

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -16,87 +17,6 @@ import FormField from '../FormField'
 ---
 category: components/forms
 ---
-  A standard text input field
-
-  ```jsx_example
-  <TextInput label="Name" placeholder="Doe, John Doe" />
-  ```
-
-  A text input field with errors
-
-  ```jsx_example
-  <TextInput messages={[{ text: 'Invalid name', type: 'error' }]} label="Name" />
-  ```
-
-  A text input with an `inline` layout.
-
-  ```jsx_example
-  <TextInput
-    label="Name"
-    layout="inline"
-  />
-  ```
-
-  A text input field with a screenreader only label
-
-  ```jsx_example
-  <TextInput
-    label={<ScreenReaderContent>Age</ScreenReaderContent>}
-    placeholder="hello world"
-  />
-  ```
-
-  An inline text input field with a fixed width
-
-  ```jsx_example
-  <div style={{display: 'flex', alignItems: 'center'}}>
-    <TextInput
-      label={<ScreenReaderContent>Label</ScreenReaderContent>}
-      inline
-      width="4em"
-    />
-    &nbsp;
-    <Text>foo</Text>
-  </div>
-  ```
-
-  A password input field
-
-  ```jsx_example
-  <TextInput label="Password" type="password" />
-  ```
-
-  A text input field next to a [Button](#Button). Note: Form layout components
-  are coming soon. Please ignore the inline styles in the example.
-
-  ```jsx_example
-  <Grid vAlign="bottom">
-    <GridRow>
-      <GridCol>
-        <TextInput label="Default-size input and button" />
-      </GridCol>
-      <GridCol>
-        <Button>Click me</Button>
-      </GridCol>
-    </GridRow>
-    <GridRow>
-      <GridCol>
-        <TextInput size="small" label="Small-size input and button" />
-      </GridCol>
-      <GridCol>
-        <Button size="small">Click me</Button>
-      </GridCol>
-    </GridRow>
-    <GridRow>
-      <GridCol>
-        <TextInput size="large" label="Large-size input and button" />
-      </GridCol>
-      <GridCol>
-        <Button size="large">Click me</Button>
-      </GridCol>
-    </GridRow>
-  </Grid>
-  ```
 **/
 @themeable(theme, styles)
 class TextInput extends Component {
@@ -155,8 +75,8 @@ class TextInput extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `TextInput_${shortid.generate()}`
-    this._messagesId = `TextInput__messages-${shortid.generate()}`
+    this._defaultId = `TextInput_${uid()}`
+    this._messagesId = `TextInput__messages-${uid()}`
   }
 
   /**

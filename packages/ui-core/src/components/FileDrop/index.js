@@ -1,67 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import styles from './styles.css'
 import theme from './theme'
-
-// Used try-catch due to missing document/navigator references in Jenkins
-function isBrowserMS () {
-  let result = false
-  try {
-    result = document.documentMode || /Edge/.test(navigator.userAgent)
-  } catch (e) {} // eslint-disable-line no-empty
-
-  return result
-}
-
-function getAcceptList (accept) {
-  const list = Array.isArray(accept) ? accept : accept.split(',')
-  return list.map(a => a.trim())
-}
-
-export function getEventFiles (event, inputEl) {
-  const dt = event.dataTransfer
-
-  if (dt) {
-    if (dt.files && dt.files.length) {
-      return dt.files
-    } else if (dt.items && dt.items.length) {
-      return dt.items
-    }
-  } else if (inputEl && inputEl.files) {
-    return inputEl.files
-  }
-
-  return []
-}
-
-export function accepts (file, acceptProp) {
-  if (file && acceptProp && file.type !== 'application/x-moz-file') {
-    const acceptList = getAcceptList(acceptProp)
-    const mimeType = file.type || ''
-    const baseMimeType = mimeType.replace(/\/.*$/, '')
-
-    return acceptList.some(type => {
-      if (type.charAt(0) === '.') {
-        // type is an extension like .pdf
-        if (!file.name) {
-          return mimeType.endsWith(type.slice(1))
-        }
-        return file.name.toLowerCase().endsWith(type.toLowerCase())
-      } else if (/\/\*$/.test(type)) {
-        // type is something like a image/* mime type
-        return baseMimeType === type.replace(/\/.*$/, '')
-      }
-      return mimeType === type
-    })
-  }
-  return true
-}
 
 const ENTER_KEY = 'Enter'
 const IS_MS = isBrowserMS()
@@ -70,128 +16,6 @@ const IS_MS = isBrowserMS()
 ---
 category: components/forms
 ---
-  FileDrop is a consistent way to drag and drop, as well as browse your computer to upload a media file.
-
-  The `isDragAccepted` and `isDragRejected` props can be used to signal to the user if
-  the dragged files are going to be accepted or not (unfortunately, this only works as intended in Chrome
-  and Firefox).
-
-  ```jsx_example
-  <FileDrop
-    accept="image/*"
-    onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
-    onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-    label={
-      <Billboard
-        heading="Upload your image"
-        message="Drag and drop, or click to browse your computer"
-        hero={<Image src={placeholderImage(1200, 300)} />}
-      />
-    }
-  />
-  ```
-
-  ### Accept
-
-  The `accept` prop dictates what type of files are allowed. It can be an array or comma-separated string of
-  [MIME type formats](https://en.wikipedia.org/wiki/Media_type#Common_examples) and/or file extensions
-
-  ```jsx_example
-  <Grid startAt="medium" vAlign="middle">
-    <GridRow>
-      <GridCol>
-
-        <FileDrop
-          accept=".jpg"
-          onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
-          onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-          label={
-            <Billboard
-              size="small"
-              message="Only .jpg files"
-              hero={<IconPlus />}
-            />
-          }
-        />
-
-      </GridCol>
-      <GridCol>
-
-        <FileDrop
-          accept=".png"
-          onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
-          onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-          label={
-            <Billboard
-              size="small"
-              message="Only .png files"
-              hero={<IconPlus />}
-            />
-          }
-        />
-
-      </GridCol>
-      <GridCol>
-
-        <FileDrop
-          accept="video/*"
-          onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
-          onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
-          label={
-            <Billboard
-              size="small"
-              message="All video file types"
-              hero={<IconPlus />}
-            />
-          }
-        />
-
-      </GridCol>
-    </GridRow>
-  </Grid>
-  ```
-
-  ### AllowMultiple
-
-  If the `allowMultiple` prop is set to `true`, FileDrop accepts multiple files.
-
-  ```jsx_example
-  <Grid startAt="medium" vAlign="middle">
-    <GridRow>
-      <GridCol>
-
-        <FileDrop
-          allowMultiple={true}
-          label={
-            <Billboard
-              size="small"
-              heading="Upload your files"
-              headingLevel="h3"
-              message="Allow multiple files"
-              hero={<IconPlus />}
-            />
-          }
-        />
-
-      </GridCol>
-      <GridCol>
-
-        <FileDrop
-          label={
-            <Billboard
-              size="small"
-              heading="Upload your file"
-              message="Allow only one file"
-              headingLevel="h3"
-              hero={<IconPlus />}
-            />
-          }
-        />
-
-      </GridCol>
-    </GridRow>
-  </Grid>
-  ```
 **/
 @themeable(theme, styles)
 export default class FileDrop extends Component {
@@ -274,7 +98,7 @@ export default class FileDrop extends Component {
   constructor (props) {
     super(props)
 
-    this.defaultId = `FileDrop__${shortid.generate()}`
+    this.defaultId = `FileDrop__${uid()}`
   }
 
   state = {
@@ -479,4 +303,59 @@ export default class FileDrop extends Component {
       </div>
     )
   }
+}
+
+
+// Used try-catch due to missing document/navigator references in Jenkins
+function isBrowserMS () {
+  let result = false
+  try {
+    result = document.documentMode || /Edge/.test(navigator.userAgent)
+  } catch (e) {} // eslint-disable-line no-empty
+
+  return result
+}
+
+function getAcceptList (accept) {
+  const list = Array.isArray(accept) ? accept : accept.split(',')
+  return list.map(a => a.trim())
+}
+
+export function getEventFiles (event, inputEl) {
+  const dt = event.dataTransfer
+
+  if (dt) {
+    if (dt.files && dt.files.length) {
+      return dt.files
+    } else if (dt.items && dt.items.length) {
+      return dt.items
+    }
+  } else if (inputEl && inputEl.files) {
+    return inputEl.files
+  }
+
+  return []
+}
+
+export function accepts (file, acceptProp) {
+  if (file && acceptProp && file.type !== 'application/x-moz-file') {
+    const acceptList = getAcceptList(acceptProp)
+    const mimeType = file.type || ''
+    const baseMimeType = mimeType.replace(/\/.*$/, '')
+
+    return acceptList.some(type => {
+      if (type.charAt(0) === '.') {
+        // type is an extension like .pdf
+        if (!file.name) {
+          return mimeType.endsWith(type.slice(1))
+        }
+        return file.name.toLowerCase().endsWith(type.toLowerCase())
+      } else if (/\/\*$/.test(type)) {
+        // type is something like a image/* mime type
+        return baseMimeType === type.replace(/\/.*$/, '')
+      }
+      return mimeType === type
+    })
+  }
+  return true
 }

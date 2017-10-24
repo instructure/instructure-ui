@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 import classnames from 'classnames'
-import shortid from 'shortid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import { FormFieldMessages } from '../FormField'
 
@@ -22,61 +22,6 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  By default, the Checkbox component is a custom styled HTML checkbox. To default the checkbox to checked,
-  set the `defaultChecked` prop.
-
-  Adjust the size of the checkbox and label text via the `size` prop. The default size is
-  `medium`.
-
-  ```jsx_example
-    <Checkbox label={lorem.sentence()} value="medium" defaultChecked />
-  ```
-
-  The default Checkbox in its disabled state:
-
-  ```jsx_example
-    <CheckboxGroup
-      defaultValue={['medium']}
-      name="example"
-      description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}
-    >
-      <Checkbox label={lorem.sentence()} value="medium" disabled />
-      <Checkbox label={lorem.sentence()} value="small" disabled />
-    </CheckboxGroup>
-  ```
-
-  You can also set a readOnly state:
-
-  ```jsx_example
-    <CheckboxGroup
-      defaultValue={['medium']}
-      name="example"
-      description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}
-    >
-      <Checkbox label={lorem.sentence()} value="medium" readOnly />
-      <Checkbox label={lorem.sentence()} value="small" readOnly />
-    </CheckboxGroup>
-  ```
-
-  Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch.
-
-  ```jsx_example
-  <FormFieldGroup description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}>
-    <Checkbox label="Small size" value="small" variant="toggle" size="small" defaultChecked />
-    <Checkbox label="Medium size" value="medium" variant="toggle" />
-    <Checkbox label="Large size" value="large" variant="toggle" size="large" defaultChecked />
-  </FormFieldGroup>
-  ```
-
-  You might want to hide the label text when using the toggle switch variant. Do that by wrapping
-  the text in the [ScreenReaderContent](#ScreenReaderContent) component.
-
-  ```jsx_example
-  <Checkbox
-    label={<ScreenReaderContent>Screenreader-accessible label</ScreenReaderContent>}
-    value="accessible" variant="toggle" />
-  ```
-
 **/
 
 @themeable(theme, styles)
@@ -139,7 +84,7 @@ class Checkbox extends Component {
       this.state.checked = !!props.defaultChecked
     }
 
-    this._defaultId = `Checkbox__${shortid.generate()}`
+    this._defaultId = `Checkbox__${uid()}`
   }
 
   handleChange = (e) => {

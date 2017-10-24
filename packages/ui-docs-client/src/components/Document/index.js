@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { camelize } from 'humps'
 
 import Link from '@instructure/ui-core/lib/components/Link'
 import Heading from '@instructure/ui-core/lib/components/Heading'
@@ -25,11 +26,13 @@ import { DocPropType } from '../App/propTypes'
 export default class Document extends Component {
   static propTypes = {
     doc: DocPropType.isRequired, // eslint-disable-line react/forbid-prop-types
+    description: PropTypes.string,
     themeKey: PropTypes.string
   }
 
   static defaultProps = {
-    themeKey: null
+    description: undefined,
+    themeKey: undefined
   }
 
   renderProps (doc) {
@@ -62,18 +65,16 @@ export default class Document extends Component {
     ) : null
   }
 
-  renderDescription (doc) {
+  renderDescription (doc, description) {
     const {
       srcUrl,
-      description,
       id,
-      title,
-      undocumented
+      title
     } = doc
 
-    return description && !undocumented ? (
+    return this.props.description ? (
       <Description
-        id={id}
+        id={`${id}Description`}
         content={description}
         title={title}
       />
@@ -95,16 +96,16 @@ export default class Document extends Component {
   }
 
   renderUsage () {
-    const { requirePath, id, packageName, title } = this.props.doc
+    const { requirePath, id, displayName, packageName, title } = this.props.doc
 
     if (!requirePath) return
 
     const example = `\
 /*** ES Modules ***/
-import ${id} from '${requirePath}'
+import ${displayName || camelize(title)} from '${requirePath}'
 
 /*** CommonJS ***/
-const ${id} = require('${requirePath}')
+const ${displayName || camelize(title)} = require('${requirePath}')
 `
     return (
       <Container margin="small">
@@ -112,9 +113,9 @@ const ${id} = require('${requirePath}')
           Usage
         </Heading>
         <Container margin="0 0 small 0" display="block">
-          <code>yarn add {packageName}</code>
+          <CodeEditor label={`How to install ${title}`} code={`yarn add ${packageName}`} language="sh" readOnly />
         </Container>
-        <CodeEditor label={`${title} Usage`} code={example} readOnly />
+        <CodeEditor label={`How to use ${title}`} code={example} language="js" readOnly />
       </Container>
     )
   }
@@ -196,7 +197,7 @@ const ${id} = require('${requirePath}')
           </TabPanel>
           {children.map(child => (
             <TabPanel title={child.title} key={`${child.id}TabPanel`}>
-              {this.renderDescription(child)}
+              {this.renderDescription(child, child.description)}
               {this.renderDetails(child)}
             </TabPanel>
           ))}
@@ -213,7 +214,7 @@ const ${id} = require('${requirePath}')
             { section.kind && <code>{section.kind}</code> }
             {section.title}
           </Heading>
-          {this.renderDescription(section)}
+          {this.renderDescription(section, section.description)}
           {this.renderDetails(section)}
         </Container>
       ))
@@ -221,11 +222,11 @@ const ${id} = require('${requirePath}')
 
     return (
       <div>
-        { doc.documentType !== 'markdown' && this.renderSrcLink() }
-        { this.renderDescription(doc) }
+        { doc.extension !== '.md' && this.renderSrcLink() }
+        { this.renderDescription(doc, this.props.description) }
         { details }
         { sections }
-        { this.renderUsage() }
+        { doc.resource && this.renderUsage() }
       </div>
     )
   }

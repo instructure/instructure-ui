@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
@@ -10,6 +9,7 @@ import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -20,69 +20,6 @@ import FormField from '../FormField'
 ---
 category: components/forms
 ---
-  Standard textarea field (resizable). Note the default `stacked` label > input
-  layout, and the alternate `inline` layout.
-
-  ```jsx_example
-  <FormFieldGroup description={<ScreenReaderContent>TextArea examples</ScreenReaderContent>}>
-    <TextArea label="Description" resize="vertical" />
-    <TextArea label="Description" resize="vertical" layout="inline" />
-  </FormFieldGroup>
-  ```
-
-  A textarea field with errors
-  ```jsx_example
-  <TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
-  ```
-
-  A textarea with a screenreader only label
-  ```jsx_example
-  <TextArea
-    label={<ScreenReaderContent>Description</ScreenReaderContent>}
-    placeholder="describe something"
-  />
-  ```
-
-  An inline textarea with a fixed width, initial height and maxHeight
-  ```jsx_example
-  <div style={{ display: 'flex', alignItems: 'center' }}>
-    <TextArea
-      label={<ScreenReaderContent>Label</ScreenReaderContent>}
-      inline
-      width="10em"
-      height="10em"
-      maxHeight="250px"
-    />
-    &nbsp;
-    <Text>foo</Text>
-  </div>
-  ```
-
-  A 'controlled' TextArea
-
-  ```jsx_example
-  ---
-  render: false
-  ---
-
-  class Example extends React.Component {
-    state = { description: 'Hello World' };
-
-    handleChange = (e) => this.setState({ description: e.target.value});
-
-    render () {
-      return (
-        <TextArea
-          label="Description"
-          value={this.state.description}
-          onChange={this.handleChange}
-        />
-      )
-    }
-  }
-
-  render(<Example/>)
-  ```
 **/
 @themeable(theme, styles)
 class TextArea extends Component {
@@ -160,7 +97,7 @@ class TextArea extends Component {
   constructor () {
     super()
 
-    this._defaultId = `TextArea__${shortid.generate()}`
+    this._defaultId = `TextArea__${uid()}`
   }
 
   componentDidMount () {

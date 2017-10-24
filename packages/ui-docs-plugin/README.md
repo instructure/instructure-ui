@@ -6,10 +6,10 @@ category: packages
 
 A webpack plugin to generate documentation made by Instructure Inc.
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-docs-plugin.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-docs-plugin
-
 [![npm][npm]][npm-url]
+[![build-status][build-status]][build-status-url]
+[![MIT License][license-badge]][LICENSE]
+[![Code of Conduct][coc-badge]][coc]
 
 ### Installation
 
@@ -19,9 +19,12 @@ yarn add --dev @instructure/ui-docs-plugin
 
 ### Usage
 
-In the webpack config for your documentation app, add the plugin:
+Set up a new webpack config for your documentation app, and add the plugin:
 
 ```js
+// webpack.docs.config.js
+const pkg = require('./package.json')
+
 const DocsPlugin = require('@instructure/ui-docs-plugin')
 
 module.exports = {
@@ -30,94 +33,136 @@ module.exports = {
     'my-library': [ 'src'],
     globals: './globals'
   },
-  output: {
-    path: outputPath,
-    filename: '[name].js'
-  },
-  devServer: {
-    disableHostCheck: true,
-    contentBase: outputPath,
-    host: '0.0.0.0',
-    port: 8080
-  },
   plugins: [
-    new DocsPlugin()
-  ],
-  module: {
-    rules: require('@instructure/ui-presets/webpack/module/rules')
-  },
-  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
-  devtool: 'cheap-module-source-map'
+    new DocsPlugin({
+      // absolute path for resolving webpack requires (should be where you're running webpack)
+      context: __dirname,
+      // search path for documentation files (needs to be an absolute path)
+      projectRoot: __dirname,
+      // html document title
+      title: `${pkg.name} : ${pkg.description} (${pkg.version})`,
+      // optional favicon image (path should be absolute or relative to context)
+      favicon: 'logo.png',
+      library: {
+        name: pkg.name,
+        version: pkg.version,
+        repository: pkg.repository.url, // optional
+        author: pkg.author // optional
+      },
+      // paths should be absolute or relative to projectRoot
+      files: [
+        'src/components/*/index.js',
+        'docs/*.md'
+      ],
+      ignore: [ // optional
+        '**/node_modules/**',
+        '**/__tests__/**'
+      ],
+      // optional html template (path should be absolute or relative to context)
+      template: 'index.ejs'
+    })
+  ]
 }
 ```
 
-`React` and `ReactDOM` are both set as global variables for use in the code examples.
+### Globals/Code examples
 
-A `render` function is also provided if you want to be able to control what is rendered in your examples.
+`React` and `ReactDOM` are both in scope for use in code examples, and a `render` function is also provided
+if you want to be able to control what is rendered (see below).
 
 Anything else that you would like to be available in scope, you can define
 in one of your entries (e.g. `./globals` in the example above) like:
 
 ```js
+// globals.js
 import * as MyLibrary from './index'
 
+// Make all of the library exports global so we can use them in code examples
 Object.keys(MyLibrary).forEach((key) => {
   global[key] = MyLibrary[key]
 })
 ```
 
-You can configure the plugin by adding a `docs.config.js` file:
+### Themes
+
+The plugin will generate documentation for themes that are compatible with [@instructure/ui-themeable].
+You can make your own theme or import one from [@instructure/ui-themes](ui-themes) and then add them
+to the plugin options:
 
 ```js
-const path = require('path')
-const rootPath = path.resolve(__dirname, '../../')
-const pkg = require('./package.json')
+// webpack.docs.config.js
 
-module.exports = {
-  rootPath,
-  title: `${pkg.name} : ${pkg.description} (${pkg.version})`,
-  favicon: path.resolve(rootPath, 'logo.png'),
+new DocsPlugin({
+  themes: [
+    'src/themes/*/index.js'
+  ],
+})
+```
+
+### Codepen links
+
+To display a link to open examples in [codepen](https://codepen.io/), add the codepen API data to the plugin options:
+
+```js
+// webpack.docs.config.js
+
+new DocsPlugin({
   library: {
-    name: pkg.name,
-    version: pkg.version,
-    repository: pkg.repository.url,
-    author: pkg.author,
-    packages: 'packages',
-    scope: '@instructure',
     codepen: {
       // codepen button form data (https://blog.codepen.io/documentation/api/prefill/)
-      // this is usually whatever webpack entries you've defined
-      js_external: [
+      js_external: [ // usually whatever webpack entries you've defined for the documentation
         `${pkg.homepage}common.js`,
         `${pkg.homepage}instructure-ui.js`,
         `${pkg.homepage}globals.js`
       ].join(';')
     }
-  },
-  files: [
-    path.resolve(rootPath, 'CHANGELOG.md'),
-    path.resolve(rootPath, 'packages/ui-core/src/components/*/index.js'),
-    path.resolve(rootPath, 'packages/ui-core/src/utils/*/**.js'),
-    path.resolve(rootPath, 'packages/ui-themeable/src/*/**.js'),
-    path.resolve(rootPath, 'packages/ui-utils/src/*/**.js'),
-    path.resolve(rootPath, 'packages/*/README.md'),
-    path.resolve(rootPath, 'packages/*/docs/*.md')
-  ],
-  ignore: [
-    path.resolve(rootPath, '**/node_modules/**'),
-    path.resolve(rootPath, '**/__tests__/**'),
-    path.resolve(rootPath, '**/config/**')
-  ],
-  identifier: (resourcePath, matter, context) => {
-    if (matter.data.id) {
-      return matter.data.id
-    } else if (resourcePath.includes('/index.js') || resourcePath.includes('README.md')) {
-      return '[folder]'
-    } else {
-      return '[name]'
+  }
+})
+```
+
+### Documenting a mono-repo
+
+If you need to document multiple packages in the same repo, configure the library as follows:
+
+```js
+// webpack.docs.config.js
+
+new DocsPlugin({
+  library: {
+    ...
+    packages: 'packages', // relative path (from project root) to the packages directory
+    scope: '@instructure' // optional
+  }
+})
+```
+
+### Customizing generated paths and IDS
+
+You can add custom functions to the plugin config to change how document identifiers, titles and
+paths to JS modules are generated:
+
+```js
+// docs.config.js (in the directory where you're running webpack)
+
+module.exports = {
+  ...
+  document: {
+    identifier: function (docData, context) { // a unique identifier for the document
+      ...
+    },
+    title: function (docData, context) { // title for the document
+      ...
+    },
+    srcPath: function (docPath, context) { // the path to src that will display in the documentation
+      ...
+    },
+    srcUrl: function (docPath, context) { // the href that links to the src
+      ...
+    },
+    requirePath: function (docPath, context) { // the path that displays in the 'Usage' section
+      ...
     }
-  },
-  template: path.resolve(__dirname, 'index.tmpl.html')
+  }
 }
 ```
 
@@ -142,13 +187,30 @@ The front matter must be the first content in the markdown file or comment block
 
 Note: categories can be nested via the `/` delimiter.
 
+#### README files
+
+In README files you can add the meta data:
+
+```md
+---
+describes: MyComponent
+```
+
+To have the README file content serve as the description for the resource with the id 'MyComponent'. Usually this will
+be the `index.js` file in that directory.
+
+Documents with the `describes` meta data won't show up in the documentation navigation.
+
 #### Code examples
 
 If you would like to display an example of a rendered component along with the code example, you can include a
 markdown code block like:
 
 ````md
-```jsx_example
+```js
+---
+example: true
+---
 <Button>Click Me</Button>
 ```
 ````
@@ -157,8 +219,9 @@ If you would like to display the component on a dark background, you can add som
 yaml front matter to your code block:
 
 ````md
-```jsx_example
+```js
 ---
+example: true
 inverse: true
 ---
 <Button variant"ghost-inverse">Click Me</Button>
@@ -169,9 +232,10 @@ If you would like to show a more complex code example, you can control what's re
 configuration:
 
 ````md
-```jsx_example
+```js
 ---
 render: false
+example: true
 ---
 const MyButton = () => <Button>Click Me</Button>
 render(MyButton)
@@ -181,7 +245,7 @@ render(MyButton)
 To make the code editor read-only you can configure the code block as:
 
 ````md
-```jsx_example
+```js
 ---
 readOnly: true
 ---
@@ -198,3 +262,15 @@ From the root of the `instructure-ui` repo:
 1. Run `yarn start:watch`
 1. Open [http://localhost:8080](http://localhost:8080) in your browser
 1. You'll need to run `yarn build:dev --scope @instructure/ui-docs-plugin` when you make changes.
+
+[npm]: https://img.shields.io/npm/v/@instructure/ui-docs-plugin.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-docs-plugin
+
+[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
+
+[license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
+[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
+
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

@@ -2,18 +2,17 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import AutocompleteOptionsList from '../AutocompleteOptionsList'
 import Position, { PositionContent } from '../../Position'
 import FormField from '../../FormField'
-
 import getOptionId from '../utils/getOptionId'
 import IconArrowDown from './IconArrowDown'
 
@@ -177,8 +176,8 @@ class AutocompleteField extends Component {
   constructor () {
     super(...arguments)
 
-    this._defaultId = `Autocomplete__${shortid.generate()}`
-    this._optionsId = `Autocomplete_Options_${shortid.generate()}`
+    this._defaultId = `Autocomplete__${uid()}`
+    this._optionsId = `Autocomplete_Options_${uid()}`
   }
 
   _menu = null

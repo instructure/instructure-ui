@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import ContextBox from '../ContextBox'
 import FormField from '../FormField'
@@ -18,20 +18,7 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  An html5 range input/slider component. Note the default `stacked`
-  label > input layout, and the alternate `inline` layout.
-
-  ```jsx_example
-  <FormFieldGroup description={<ScreenReaderContent>RangeInput examples</ScreenReaderContent>}>
-    <RangeInput label="Grading range" defaultValue={50} max={100} min={0} />
-    <RangeInput
-      layout="inline"
-      label="Grading range"
-      defaultValue={50}
-      max={100} min={0} />
-  </FormFieldGroup>
-  ```
- **/
+**/
 @themeable(theme, styles)
 class RangeInput extends Component {
   /* eslint-disable react/require-default-props */
@@ -88,7 +75,7 @@ class RangeInput extends Component {
       }
     }
 
-    this.defaultId = `RangeInput_${shortid.generate()}`
+    this.defaultId = `RangeInput_${uid()}`
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

@@ -1,6 +1,14 @@
 const CATEGORY_DELIMITER = '/'
 
-module.exports = function parseDocs (docs, readme, changelog) {
+module.exports = function getClientProps (docs, themes, library) {
+  return {
+    ...parseDocs(docs),
+    themes: parseThemes(themes),
+    library
+  }
+}
+
+function parseDocs (docs) {
   const parsed = {
     sections: {
       __uncategorized: {
@@ -10,11 +18,12 @@ module.exports = function parseDocs (docs, readme, changelog) {
       }
     },
     parents: {},
-    docs: {}
+    docs: {},
+    descriptions: {}
   }
 
   docs.forEach((doc) => {
-    const { category, id, parent } = doc
+    const { category, id, parent, describes } = doc
 
     warning((!doc.undocumented), `[${doc.srcPath}] is undocumented.`)
     warning((!docs[id]), `[${id}] is a duplicate document ID.`)
@@ -24,7 +33,11 @@ module.exports = function parseDocs (docs, readme, changelog) {
     parsed.docs[id] = {
       ...doc,
       methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
-      generateTheme: doc.component && doc.component.generateTheme
+      generateTheme: doc.resource && doc.resource.generateTheme
+    }
+
+    if (describes) {
+      parsed.descriptions[describes] = doc.description
     }
 
     if (parent) {
@@ -32,7 +45,7 @@ module.exports = function parseDocs (docs, readme, changelog) {
       parsed.parents[parent].children.push(id)
     }
 
-    if (category) {
+    if (category && category !== 'index') {
       const sections = category.trim().split(CATEGORY_DELIMITER)
 
       sections.forEach((sectionTitle, index) => {
@@ -55,12 +68,11 @@ module.exports = function parseDocs (docs, readme, changelog) {
         }
       })
     } else {
-      parsed.sections.__uncategorized.docs.push(id)
+      if (!parent && !describes && category !== 'index' && id !== 'CHANGELOG') {
+        parsed.sections.__uncategorized.docs.push(id)
+      }
     }
   })
-
-  parsed.docs.index = parsed.docs.index || readme
-  parsed.docs.CHANGELOG = parsed.docs.CHANGELOG || changelog
 
   return parsed
 }
@@ -69,4 +81,14 @@ function warning (condition, message, ...args) {
   if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
     console.warn.apply(undefined, [`Warning: ${message}`, ...args])
   }
+}
+
+function parseThemes (themes) {
+  const parsed = {}
+
+  themes.forEach((theme) => {
+    parsed[theme.resource.key] = theme
+  })
+
+  return parsed
 }

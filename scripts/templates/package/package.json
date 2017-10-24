@@ -4,6 +4,7 @@
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "module": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -18,7 +19,9 @@
     "lint": "eslint src",
     "lint:fix": "eslint src --fix",
     "clean": "rimraf lib .babel-cache",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
+    "build": "npm-run-all build:cjs build:es",
+    "build:cjs": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
+    "build:es": "cross-env NODE_ENV=production ES_MODULES=1 babel src --out-dir es --ignore *.test.js",
     "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
   },
   "license": "MIT",

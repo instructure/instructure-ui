@@ -26,8 +26,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
       polyfill: false,
       regenerator: false
     }],
-    'transform-decorators-legacy',
-    require.resolve('@instructure/babel-plugin-transform-class-display-name')
+    'transform-decorators-legacy'
   ]
 
   if (opts.themeable) {

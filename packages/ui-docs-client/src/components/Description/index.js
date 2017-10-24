@@ -14,7 +14,7 @@ export default class Description extends Component {
     const { id, title, content } = this.props
 
     return (
-      <div id={`${id}Description`}>
+      <div id={id}>
         { compileMarkdown(content, { title }) }
       </div>
     )

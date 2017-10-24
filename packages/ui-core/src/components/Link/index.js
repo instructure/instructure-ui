@@ -18,32 +18,7 @@ import theme from './theme'
 ---
 category: components/navigation
 ---
-  A Link component
-
-  ```jsx_example
-    <Link href="https://instructure.github.io/instructure-ui/">I'm a link</Link>
-  ```
-
-  ```jsx_example
-    <Link>I'm a button that looks like a link because I have no href prop</Link>
-  ```
-
-  ```jsx_example
-  ---
-  inverse: true
-  ---
-  <Link variant="inverse">I'm an inverse link for use with dark backgrounds</Link>
-  ```
-
-  ### Adding margin
-  Use the `margin` prop to add space to the left or right of the Link. Because
-  Link displays `inline`, top and bottom margin will not work. If you need
-  to add margin to the top or bottom of Link, wrap it inside a `<Container />`.
-
-  ```jsx_example
-    <Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I'm a link with left margin</Link>
-  ```
- **/
+**/
 @themeable(theme, styles)
 class Link extends Component {
   /* eslint-disable react/require-default-props */

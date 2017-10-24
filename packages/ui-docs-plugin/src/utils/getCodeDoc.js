@@ -1,4 +1,17 @@
-module.exports = function extractComments (sourceStr) {
+module.exports = function getCodeDoc (source, error) {
+  const doc = {}
+  try {
+    doc.sections = (parseComments(source) || [])
+      .filter(section => section.type === 'doc')
+    doc.description = doc.sections[0].description
+    doc.undocumented = doc.sections.length === 0
+  } catch (err) {
+    error(err)
+  }
+  return doc
+}
+
+function parseComments (source) {
   const commentRegex = {
     single:        /^\s*\/\/.*$/,
     docblockStart: /^\s*\/\*\*\s*$/,
@@ -6,7 +19,7 @@ module.exports = function extractComments (sourceStr) {
     multiFinish:   /^\s*\*\/\s*$/
   }
 
-  const lines = `${sourceStr.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
+  const lines = `${source.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
   const blocks = []
 
   let block = {

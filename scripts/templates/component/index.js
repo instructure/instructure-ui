@@ -11,11 +11,6 @@ import theme from './theme'
 ---
 category: components
 ---
-  A ${COMPONENT} component [WIP]
-
-  ```jsx_example
-  <${COMPONENT} />
-  ```
 **/
 @themeable(theme, styles)
 class ${COMPONENT} extends Component {

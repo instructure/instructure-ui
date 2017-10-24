@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -13,12 +13,6 @@ import theme from './theme'
 ---
 category: components/utilities
 ---
-  The InlineSVG component renders an accessible SVG inline in the html document.
-  See also [SVGIcon](#SVGIcon) which provides more styles specific to icons.
-
-  ```jsx_example
-  <InlineSVG src={iconExample} width="2em" height="2em" />
-  ```
 **/
 @themeable(theme, styles)
 export default class InlineSVG extends Component {
@@ -47,8 +41,8 @@ export default class InlineSVG extends Component {
   constructor (props) {
     super()
 
-    this.titleId = shortid.generate()
-    this.descId = shortid.generate()
+    this.titleId = uid()
+    this.descId = uid()
   }
 
   get role () {

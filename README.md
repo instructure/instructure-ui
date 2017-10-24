@@ -1,9 +1,12 @@
-[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
-[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
+---
+category: index
+---
 
 ## instructure-ui
 
 [![build-status][build-status]][build-status-url]
+[![MIT License][license-badge]][LICENSE]
+[![Code of Conduct][coc-badge]][coc]
 
 <div style="text-align: center; margin-bottom: 10rem; padding-bottom: 3rem;">
   <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 300px;" viewBox="0 0 400 400">
@@ -61,7 +64,7 @@ You'll need to have [Git](http://git-scm.com/) installed on your system.
 
 We use [Lerna](https://lernajs.io/) to manage inter-package dependencies in this monorepo.
 
-__Prerequisites__: Node.js v6+, Yarn v0.27+
+__Prerequisites__: Node.js v8+, Yarn v1.1.0+
 
 Installation steps:
 
@@ -129,7 +132,7 @@ always be in sync.
 ### Releases
 
 1. Run `yarn bump` to update the package version. Ignore the advice to push the tag (we do that after we publish the release due to our gerrit review workflow).
-1. Optionally update the [CHANGELOG](#CHANGELOG) to optionally add any additional information about the release.
+1. Optionally update the [CHANGELOG](#CHANGELOG) to add any additional information about the release.
 1. Push up the version bump commit to gerrit for review and testing.
 1. Once the version bump commit is merged, run `yarn release`
 1. Verify that the documentation was updated on gh-pages and the release was tagged in github.
@@ -138,3 +141,12 @@ always be in sync.
 ### License
 
 [MIT](LICENSE)
+
+[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
+
+[license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
+[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
+
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

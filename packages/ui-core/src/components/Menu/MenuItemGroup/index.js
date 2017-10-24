@@ -1,12 +1,12 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import hasVisibleChildren from '../../../utils/hasVisibleChildren'
 
@@ -78,7 +78,7 @@ class MenuItemGroup extends Component {
       }
     }
 
-    this._labelId = `MenuItemGroup__${shortid.generate()}`
+    this._labelId = `MenuItemGroup__${uid()}`
   }
 
   handleSelect = (e, value, selected) => {

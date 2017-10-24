@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
 
+import uid from '@instructure/ui-utils/lib/uid'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -13,31 +13,6 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  By default, the RadioInput component is a custom styled HTML radio button.
-
-  Adjust the size of the RadioInput and its label text via the `size` prop. The default size is
-  `medium`.
-
-  ```jsx_example
-    <RadioInput
-      label={lorem.sentence()}
-      value="foo"
-      name="bar"
-      checked
-    />
-  ```
-  You can also make the radioInput readOnly by passing in a readOnly prop.
-
-  ```jsx_example
-    <RadioInput
-      label={lorem.sentence()}
-      value="foo"
-      name="baz"
-      onClick={() => alert('this shouldn\'t appear!')}
-      onChange={() => alert('this shouldn\'t appear!')}
-      readOnly
-    />
-  ```
 **/
 @themeable(theme, styles)
 class RadioInput extends Component {
@@ -77,7 +52,7 @@ class RadioInput extends Component {
   constructor (props) {
     super(props)
 
-    this._defaultId = `RadioInput__${shortid.generate()}`
+    this._defaultId = `RadioInput__${uid()}`
   }
 
   handleClick = (e) => {
