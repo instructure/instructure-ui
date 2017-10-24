@@ -93,7 +93,7 @@ export default class Preview extends Component {
         elToRender = (
           <ApplyTheme
             theme={ApplyTheme.generateTheme(themeKey)}
-            immutable={themes[themeKey].accessible}
+            immutable={themes[themeKey].resource.immutable}
           >
             {elToRender}
           </ApplyTheme>

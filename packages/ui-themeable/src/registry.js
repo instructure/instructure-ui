@@ -115,6 +115,18 @@ export function registerTheme (theme) {
   registry.registered.push(key)
 }
 
+function documentTheme (themeKey, docs) {
+  const registry = getRegistry()
+  const theme = registry.themes[themeKey]
+
+  warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+
+  registry.themes[themeKey] = {
+    ...theme,
+    ...docs
+  }
+}
+
 /**
  * Wraps a theme and provides a method to set as default and toggle between a11y and base
  *
@@ -132,6 +144,9 @@ export function makeTheme ({ theme, a11y }) {
         warning(theme, `Invalid theme.`)
         setDefaultTheme(theme.key, overrides, false)
       }
+    },
+    document: function (docs) {
+      documentTheme(theme.key, docs)
     }
   }
 }

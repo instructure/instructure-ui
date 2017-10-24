@@ -24,7 +24,7 @@ module.exports = function parseDocs (docs, readme, changelog) {
     parsed.docs[id] = {
       ...doc,
       methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
-      generateTheme: doc.component && doc.component.generateTheme
+      generateTheme: doc.resource && doc.resource.generateTheme
     }
 
     if (parent) {

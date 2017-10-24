@@ -43,7 +43,7 @@ const theme = {
   variables
 }
 
-// register the brand variables but don't export them because we don't want canvas-a11y to inherit them
+// register the brand variables but don't export them because we don't want canvas-high-contrast to inherit them
 registerTheme({ key, variables: { ...variables, ...brandVariables } })
 
 export default makeTheme({ theme })

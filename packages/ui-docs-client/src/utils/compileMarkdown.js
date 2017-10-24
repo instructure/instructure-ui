@@ -42,7 +42,7 @@ export default function compileMarkdown (content, context, options = {}) {
   tracker.context = context
   tracker.currentId = []
 
-  marked(content, Object.assign({renderer: renderer, smartypants: true}, options))
+  marked(trimIndent(content), Object.assign({renderer: renderer, smartypants: true}, options))
 
   return tracker.tree
 }

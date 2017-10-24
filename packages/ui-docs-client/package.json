@@ -32,19 +32,20 @@
   "dependencies": {
     "@instructure/ui-core": "^4.0.0",
     "@instructure/ui-themeable": "^4.0.0",
+    "@instructure/ui-themes": "^4.0.0",
     "@instructure/ui-utils": "^4.0.0",
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.27.4",
     "gray-matter": "^3.0.2",
     "he": "^1.1.1",
+    "instructure-icons": "^4.3.1",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",
     "react-axe": "^2.1.7",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
-    "instructure-icons": ">=4.2.0",
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },

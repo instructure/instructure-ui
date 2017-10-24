@@ -73,7 +73,7 @@ export default class Document extends Component {
 
     return description && !undocumented ? (
       <Description
-        id={id}
+        id={`${id}Description`}
         content={description}
         title={title}
       />

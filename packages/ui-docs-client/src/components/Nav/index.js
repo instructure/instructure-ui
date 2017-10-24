@@ -59,6 +59,7 @@ export default class Nav extends Component {
     const expandedSections = this.setExpandedSections(!!value, this.state.expandedSections)
     this.setState({
       query: value ? new RegExp(value, 'i') : null,
+      queryStr: value,
       expandedSections,
       userToggling: false
     })
@@ -311,8 +312,8 @@ export default class Nav extends Component {
               theme={{ primaryColor: styles.color }}
               color="primary"
             >
-                No search results
-              </Text>
+                No matches for <b>{this.state.queryStr}</b>
+            </Text>
           }
           {this.renderThemeSection()}
         </div>
