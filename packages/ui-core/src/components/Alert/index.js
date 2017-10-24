@@ -117,8 +117,6 @@ export default class Alert extends Component {
     screenReaderOnly: false
   }
 
-  static transitionDuration = Transition.duration
-
   constructor (props) {
     super(props)
 

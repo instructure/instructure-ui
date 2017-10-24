@@ -21,19 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export default function ({ colors, breakpoints, shadows, stacking, borders }) {
+export default function generator ({ colors, typography }) {
   return {
-    closeButtonOffset: '0',
-    background: colors.white,
-    borderColor: colors.tiara,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    boxShadow: shadows.depth3,
-    xSmallWidth: breakpoints.xSmall,
-    smallWidth: '20em', // 368px
-    mediumWidth: breakpoints.medium,
-    largeWidth: breakpoints.large,
-    zIndex: stacking.topmost
+    fontSize: typography.fontSizeMedium,
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
+
+    color: colors.oxford,
+    background: colors.white
   }
 }

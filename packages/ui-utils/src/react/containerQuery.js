@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
 import getDisplayName from './getDisplayName'
 import findDOMNode from '../dom/findDOMNode'
 import addResizeListener from '../dom/addResizeListener'
@@ -38,7 +39,8 @@ import px from '../px'
  * The containerQuery HOC provides a `size` getter so that you can alter the behavior
  * of the component based on the size of its container.
  *
- * The `size` will be updated whenever the dimensions of the container change.
+ * The `size` will be updated whenever the dimensions of the container change,
+ * and will be passed as a parameter to the onSizeChange prop provided.
  *
  * So that CSS rules can be applied based on the dimensions of the container,
  * custom data attributes are added to the container DOM element.
@@ -48,7 +50,7 @@ import px from '../px'
  */
 export default function containerQuery (query) {
   const getSelectorMap = function (el) {
-    return parseQuery(query, el)
+    return query && parseQuery(query, el)
   }
 
   return function (ComposedComponent) {
@@ -56,15 +58,28 @@ export default function containerQuery (query) {
       static displayName = getDisplayName(ComposedComponent)
       static getSelectorMap = getSelectorMap
 
+      static propTypes = {
+        ...ComposedComponent.propTypes,
+        onSizeChange: PropTypes.func
+      }
+
       updateAttributes = (size) => {
         if (this._size && (this._size.width === size.width && this._size.height === size.height)) {
           return
         }
 
-        const container = findDOMNode(this)
-        const selectorMap = getSelectorMap(container)(size)
-
         this._size = size
+
+        if (typeof this.props.onSizeChange === 'function') {
+          this.props.onSizeChange(size)
+        }
+
+        const container = findDOMNode(this)
+
+        if (typeof getSelectorMap(container) !== 'function') {
+          return
+        }
+        const selectorMap = getSelectorMap(container)(size)
 
         // eslint-disable-next-line no-restricted-syntax
         for (const [selectorName, isOn] of toPairs(selectorMap)) {

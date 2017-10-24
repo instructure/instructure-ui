@@ -22,18 +22,9 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, breakpoints, shadows, stacking, borders }) {
-  return {
-    closeButtonOffset: '0',
-    background: colors.white,
-    borderColor: colors.tiara,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    boxShadow: shadows.depth3,
-    xSmallWidth: breakpoints.xSmall,
-    smallWidth: '20em', // 368px
-    mediumWidth: breakpoints.medium,
-    largeWidth: breakpoints.large,
-    zIndex: stacking.topmost
-  }
-}
+Testbed.init()
+
+require('@instructure/ui-themes/lib/canvas')
+
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)

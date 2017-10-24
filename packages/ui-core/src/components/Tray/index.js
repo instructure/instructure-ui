@@ -56,6 +56,9 @@ class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
 
+    /**
+     * An accessible label for the close button. The close button won't display without this label.
+     */
     closeButtonLabel: PropTypes.string,
 
     children: PropTypes.node,
@@ -92,7 +95,6 @@ class Tray extends Component {
     contentRef: PropTypes.func,
 
     /**
-     *
      * A function that returns a reference to the close button element
      */
     closeButtonRef: PropTypes.func,
@@ -139,40 +141,38 @@ class Tray extends Component {
     insertAt: PropTypes.oneOf(['bottom', 'top']),
 
     /**
-     * Callback fired before the <Modal /> transitions in
+     * Callback fired before the <Tray /> transitions in
      */
     onEnter: PropTypes.func,
     /**
-     * Callback fired as the <Modal /> begins to transition in
+     * Callback fired as the <Tray /> begins to transition in
      */
     onEntering: PropTypes.func,
     /**
-     * Callback fired after the <Modal /> finishes transitioning in
+     * Callback fired after the <Tray /> finishes transitioning in
      */
     onEntered: PropTypes.func,
     /**
-     * Callback fired right before the <Modal /> transitions out
+     * Callback fired right before the <Tray /> transitions out
      */
     onExit: PropTypes.func,
     /**
-     * Callback fired as the <Modal /> begins to transition out
+     * Callback fired as the <Tray /> begins to transition out
      */
     onExiting: PropTypes.func,
     /**
-     * Callback fired after the <Modal /> finishes transitioning out
+     * Callback fired after the <Tray /> finishes transitioning out
      */
     onExited: PropTypes.func,
 
     closeButtonVariant: PropTypes.oneOf(['icon', 'icon-inverse']),
 
     /**
-     *
      * Should the `<Tray />` have a border
      */
     border: PropTypes.bool,
 
     /**
-     *
      * Should the `<Tray />` have a box shadow
      */
     shadow: PropTypes.bool
@@ -238,7 +238,6 @@ class Tray extends Component {
 
   get transition () {
     const { placement, open } = this.props
-
     return classnames({
       'slide-down':
         (placement === 'top' && open) || (placement === 'bottom' && !open),
@@ -292,6 +291,7 @@ class Tray extends Component {
 
   render () {
     const { children, contentRef, open, onOpen, ...props } = this.props
+
     return (
       <Portal
         {...pickProps(props, Portal.propTypes)}

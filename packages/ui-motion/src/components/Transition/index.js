@@ -25,17 +25,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
+import ms from '@instructure/ui-utils/lib/ms'
 
 import BaseTransition from './BaseTransition'
 
 import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-@themeable(null, styles)
+@themeable(theme, styles)
 export default class Transition extends Component {
   static propTypes = {
     type: PropTypes.oneOf([
@@ -113,8 +115,6 @@ export default class Transition extends Component {
     onExited: function () {}
   }
 
-  static duration = 300 // needs to match the times in the CSS
-
   render () {
     const {
       type,
@@ -122,11 +122,13 @@ export default class Transition extends Component {
       ...props
     } = this.props
 
+    const duration = ms(this.theme.duration)
+
     return type ? (
       <BaseTransition
         {...props}
-        enterDelay={Transition.duration}
-        exitDelay={Transition.duration}
+        enterDelay={duration}
+        exitDelay={duration}
         transitionClassName={styles[type]}
         exitedClassName={styles[`${type}--exited`]}
         exitingClassName={styles[`${type}--exiting`]}

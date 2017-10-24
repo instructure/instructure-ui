@@ -56,7 +56,7 @@ class Dialog extends Component {
     label: PropTypes.string,
 
     /**
-     * Whether or not the `<Dialog />` is openn
+     * Whether or not the `<Dialog />` is open
      */
     open: PropTypes.bool,
 

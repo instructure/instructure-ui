@@ -21,19 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import LayoutContent from '../index'
+import styles from '../styles.css'
 
-export default function ({ colors, breakpoints, shadows, stacking, borders }) {
-  return {
-    closeButtonOffset: '0',
-    background: colors.white,
-    borderColor: colors.tiara,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    boxShadow: shadows.depth3,
-    xSmallWidth: breakpoints.xSmall,
-    smallWidth: '20em', // 368px
-    mediumWidth: breakpoints.medium,
-    largeWidth: breakpoints.large,
-    zIndex: stacking.topmost
-  }
-}
+describe('<LayoutContent />', () => {
+  const testbed = new Testbed(
+    <LayoutContent label="LayoutContentTest">Hello World</LayoutContent>
+  )
+
+  it('should render', () => {
+    const subject = testbed.render()
+    expect(subject).to.be.present
+  })
+
+  it('should should not have a transition class if transition is set to false', (done) => {
+    const subject = testbed.render({
+      transition: false
+    })
+
+    expect(subject.hasClass(styles['transition'])).to.be.false
+
+    subject.setProps({ transition: true }, () => {
+      expect(subject.hasClass(styles['transition'])).to.be.true
+      done()
+    })
+  })
+
+  it('should should call the content ref', () => {
+    const contentRef = testbed.spy()
+    const subject = testbed.render({
+      contentRef
+    })
+
+    expect(contentRef).to.have.been.calledWith(subject.ref('_content').node)
+  })
+})

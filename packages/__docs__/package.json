@@ -29,6 +29,7 @@
     "@instructure/ui-docs-plugin": "^4.6.0",
     "@instructure/ui-elements": "^4.6.0",
     "@instructure/ui-icons": "^4.6.0",
+    "@instructure/ui-layout": "^4.6.0",
     "@instructure/ui-polyfill-loader": "^4.6.0",
     "@instructure/ui-forms": "^4.6.0",
     "@instructure/ui-motion": "^4.6.0",

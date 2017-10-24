@@ -34,6 +34,7 @@ import * as UIContainer from '@instructure/ui-container'
 import * as UICore from '@instructure/ui-core'
 import * as UIElements from '@instructure/ui-elements'
 import * as UIForms from '@instructure/ui-forms'
+import * as UILayout from '@instructure/ui-layout'
 import * as UIMotion from '@instructure/ui-motion'
 import * as UISVGImages from '@instructure/ui-svg-images'
 import * as UIPortal from '@instructure/ui-portal'
@@ -87,6 +88,7 @@ const globals = Object.assign(
   UIContainer,
   UIElements,
   UIForms,
+  UILayout,
   UIMotion,
   UISVGImages,
   UIPortal

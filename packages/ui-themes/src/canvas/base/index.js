@@ -27,6 +27,7 @@ import KEYS from '../../keys'
 
 import borders from './borders'
 import colors from './colors'
+import transitions from './transitions'
 import typography from './typography'
 import spacing from './spacing'
 import forms from './forms'
@@ -40,6 +41,7 @@ const key = KEYS.CANVAS
 const variables = {
   borders,
   colors,
+  transitions,
   typography,
   spacing,
   forms,

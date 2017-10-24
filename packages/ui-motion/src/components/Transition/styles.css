@@ -6,7 +6,7 @@
 /* Animation type: fade */
 
 .fade {
-  transition: opacity 300ms, transform 300ms ease-out;
+  transition: opacity var(--duration), transform var(--duration) ease-out;
 }
 
 .fade--exiting,
@@ -23,8 +23,8 @@
 
 .scale {
   transition:
-    opacity 300ms,
-    transform 300ms cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    opacity var(--duration),
+    transform var(--duration) cubic-bezier(0.175, 0.885, 0.320, 1.275);
 }
 
 .scale--exited,
@@ -56,7 +56,7 @@
 .slide-right,
 .slide-up,
 .slide-down {
-  transition: opacity 300ms, transform 300ms;
+  transition: opacity var(--duration), transform var(--duration);
 }
 
 .slide-left--entering,

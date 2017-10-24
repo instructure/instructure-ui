@@ -23,8 +23,10 @@
  */
 
 import React, { Component } from 'react'
+
 import Button from '@instructure/ui-elements/lib/components/Button'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import within from '@instructure/ui-utils/lib/within'
 
 import Position, { PositionTarget, PositionContent } from '../index'
 
@@ -232,7 +234,3 @@ describe('<Position />', () => {
     })
   })
 })
-
-function within (a, b, diff = 1) {
-  return a + diff >= b && b >= a - diff
-}
