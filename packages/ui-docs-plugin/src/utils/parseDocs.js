@@ -10,11 +10,12 @@ module.exports = function parseDocs (docs, readme, changelog) {
       }
     },
     parents: {},
-    docs: {}
+    docs: {},
+    descriptions: {}
   }
 
   docs.forEach((doc) => {
-    const { category, id, parent } = doc
+    const { category, id, parent, describes } = doc
 
     warning((!doc.undocumented), `[${doc.srcPath}] is undocumented.`)
     warning((!docs[id]), `[${id}] is a duplicate document ID.`)
@@ -24,7 +25,11 @@ module.exports = function parseDocs (docs, readme, changelog) {
     parsed.docs[id] = {
       ...doc,
       methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
-      generateTheme: doc.component && doc.component.generateTheme
+      generateTheme: doc.resource && doc.resource.generateTheme
+    }
+
+    if (describes) {
+      parsed.descriptions[describes] = doc.description
     }
 
     if (parent) {

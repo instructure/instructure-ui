@@ -13,31 +13,6 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  By default, the RadioInput component is a custom styled HTML radio button.
-
-  Adjust the size of the RadioInput and its label text via the `size` prop. The default size is
-  `medium`.
-
-  ```jsx_example
-    <RadioInput
-      label={lorem.sentence()}
-      value="foo"
-      name="bar"
-      checked
-    />
-  ```
-  You can also make the radioInput readOnly by passing in a readOnly prop.
-
-  ```jsx_example
-    <RadioInput
-      label={lorem.sentence()}
-      value="foo"
-      name="baz"
-      onClick={() => alert('this shouldn\'t appear!')}
-      onChange={() => alert('this shouldn\'t appear!')}
-      readOnly
-    />
-  ```
 **/
 @themeable(theme, styles)
 class RadioInput extends Component {

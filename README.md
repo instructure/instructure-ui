@@ -61,7 +61,7 @@ You'll need to have [Git](http://git-scm.com/) installed on your system.
 
 We use [Lerna](https://lernajs.io/) to manage inter-package dependencies in this monorepo.
 
-__Prerequisites__: Node.js v6+, Yarn v0.27+
+__Prerequisites__: Node.js v8+, Yarn v1.1.0+
 
 Installation steps:
 
@@ -129,7 +129,7 @@ always be in sync.
 ### Releases
 
 1. Run `yarn bump` to update the package version. Ignore the advice to push the tag (we do that after we publish the release due to our gerrit review workflow).
-1. Optionally update the [CHANGELOG](#CHANGELOG) to optionally add any additional information about the release.
+1. Optionally update the [CHANGELOG](#CHANGELOG) to add any additional information about the release.
 1. Push up the version bump commit to gerrit for review and testing.
 1. Once the version bump commit is merged, run `yarn release`
 1. Verify that the documentation was updated on gh-pages and the release was tagged in github.

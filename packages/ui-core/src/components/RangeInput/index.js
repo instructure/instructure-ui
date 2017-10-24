@@ -18,20 +18,7 @@ import theme from './theme'
 ---
 category: components/forms
 ---
-  An html5 range input/slider component. Note the default `stacked`
-  label > input layout, and the alternate `inline` layout.
-
-  ```jsx_example
-  <FormFieldGroup description={<ScreenReaderContent>RangeInput examples</ScreenReaderContent>}>
-    <RangeInput label="Grading range" defaultValue={50} max={100} min={0} />
-    <RangeInput
-      layout="inline"
-      label="Grading range"
-      defaultValue={50}
-      max={100} min={0} />
-  </FormFieldGroup>
-  ```
- **/
+**/
 @themeable(theme, styles)
 class RangeInput extends Component {
   /* eslint-disable react/require-default-props */

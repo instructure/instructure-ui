@@ -6,20 +6,6 @@ import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild
 ---
 category: components/utilities
 ---
-  `<ApplyLocale />` Sets the locale and timezone context for children that can
-  use it, such as a [DatePicker](#DatePicker) or [NumberInput](#NumberInput)
-
-```jsx_example
-  <ApplyLocale locale="fr" timezone="Europe/Paris">
-    <DatePicker previousLabel="previous month" nextLabel="next month"/>
-  </ApplyLocale>
-```
-
-```jsx_example
-  <ApplyLocale locale="de">
-    <NumberInput label="Locale set to 'de' via ApplyLocale" defaultValue="2.4" step="0.1"/>
-  </ApplyLocale>
-```
 **/
 export default class ApplyLocale extends Component {
   /* eslint-disable react/require-default-props */

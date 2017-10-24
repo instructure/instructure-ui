@@ -1,13 +1,28 @@
 const webpack = require('webpack')
+const constants = require('karma').constants
+
+const ChromiumRevision = require('puppeteer/package.json').puppeteer.chromium_revision
+const Downloader = require('puppeteer/utils/ChromiumDownloader')
+
+const revisionInfo = Downloader.revisionInfo(Downloader.currentPlatform(), ChromiumRevision)
 
 const withCoverage = process.argv.some((arg) => arg === '--coverage')
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
+
 const debug = Boolean(process.env.DEBUG)
+
+process.env.CHROME_BIN = revisionInfo.executablePath
 
 module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
   const browsers = []
-  if (!noLaunchers) { browsers.push('chrome_without_security') }
-  if (!debug) { browsers.push('Firefox') }
+
+  if (!noLaunchers) {
+    if (debug) {
+      browsers.push('chrome_without_security')
+    } else {
+      browsers.push('custom_headless_chrome')
+    }
+  }
 
   const reporters = ['mocha']
 
@@ -21,10 +36,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
       {
         type: 'lcov',
         dir: coverageDirectory,
-        subdir: function (browser) {
-          // normalization process to keep a consistent browser name
-          return browser.toLowerCase().split(/[ /-]/)[0]
-        }
+        subdir: '.'
       }
     ],
     check: coverageThreshold
@@ -60,11 +72,15 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
 
       colors: true,
 
-      logLevel: config.LOG_INFO,
+      logLevel: constants.LOG_ERROR,
 
       autoWatch: true,
 
       browsers: browsers,
+
+      reportSlowerThan: 500,
+
+      concurrency: 2,
 
       customLaunchers: {
         chrome_without_security: {
@@ -75,6 +91,16 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
             '--disable-default-apps',
             '--disable-popup-blocking',
             '--disable-translate',
+            '--no-sandbox'
+          ]
+        },
+        custom_headless_chrome: {
+          base: 'ChromeHeadless',
+          chromeFlags: [
+            '--disable-gpu',
+            '--headless',
+            '--hide-scrollbar',
+            '--remote-debugging-port=9222',
             '--no-sandbox'
           ]
         }

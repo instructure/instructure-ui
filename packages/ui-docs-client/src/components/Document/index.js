@@ -25,11 +25,13 @@ import { DocPropType } from '../App/propTypes'
 export default class Document extends Component {
   static propTypes = {
     doc: DocPropType.isRequired, // eslint-disable-line react/forbid-prop-types
+    description: PropTypes.string,
     themeKey: PropTypes.string
   }
 
   static defaultProps = {
-    themeKey: null
+    description: undefined,
+    themeKey: undefined
   }
 
   renderProps (doc) {
@@ -65,16 +67,14 @@ export default class Document extends Component {
   renderDescription (doc) {
     const {
       srcUrl,
-      description,
       id,
-      title,
-      undocumented
+      title
     } = doc
 
-    return description && !undocumented ? (
+    return this.props.description ? (
       <Description
-        id={id}
-        content={description}
+        id={`${id}Description`}
+        content={this.props.description}
         title={title}
       />
     ) : null

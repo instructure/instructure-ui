@@ -14,12 +14,17 @@ import theme from './theme'
 ---
 parent: FormField
 ---
-  This is a helper component that is used by most of the custom form
-  components. In most cases it shouldn't be used directly.
 
-  ```jsx_example
-  <FormFieldLabel>Hello</FormFieldLabel>
-  ```
+This is a helper component that is used by most of the custom form
+components. In most cases it shouldn't be used directly.
+
+```js
+---
+example: true
+---
+<FormFieldLabel>Hello</FormFieldLabel>
+```
+
 **/
 @themeable(theme, styles)
 export default class FormFieldLabel extends Component {

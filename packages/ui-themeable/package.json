@@ -39,7 +39,6 @@
     "tinycolor2": "^1.4.1"
   },
   "peerDependencies": {
-    "instructure-icons": "^2.3.0 || >=3.0.0",
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },

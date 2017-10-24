@@ -68,7 +68,7 @@ export default class CodeMirrorEditor extends Component {
     if (this.codeMirror && this._currentCodemirrorValue !== nextProps.value) {
       this.codeMirror.setValue(nextProps.value)
     }
-    if (typeof nextProps.options === 'object') {
+    if (nextProps.options && typeof nextProps.options === 'object') {
       for (const optionName in nextProps.options) { // eslint-disable-line no-restricted-syntax
         // eslint-disable-next-line no-prototype-builtins
         if (nextProps.options.hasOwnProperty(optionName)) {

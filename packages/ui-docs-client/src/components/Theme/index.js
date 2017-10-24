@@ -3,13 +3,20 @@ import PropTypes from 'prop-types'
 
 import Table from '@instructure/ui-core/lib/components/Table'
 
+import Description from '../Description'
 import ColorSwatch from '../ColorSwatch'
 import CodeEditor from '../CodeEditor'
 
 export default class Theme extends Component {
   static propTypes = {
     themeKey: PropTypes.string.isRequired,
-    variables: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+    variables: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    requirePath: PropTypes.string.isRequired,
+    immutable: PropTypes.bool
+  }
+
+  static defaultProps = {
+    immutable: false
   }
 
   renderVariable (name, value) {
@@ -62,28 +69,64 @@ export default class Theme extends Component {
     Object.keys(variables).forEach((name) => {
       const value = variables[name]
 
-      if (typeof value === 'object') {
+      if (value && typeof value === 'object') {
         sections.push(this.renderSection(name, this.renderRows(value)))
       } else {
         vars.push(this.renderVariable(name, value))
       }
     })
 
-    const a11y = (themeKey.indexOf('-a11y') >= 0)
-    const themeBaseName = a11y ? themeKey.split('-')[0] : themeKey
-    const params = a11y ? '{ accessible: true }' : `{ overrides: { colors: { brand: 'red' } } }`
+    const params = this.props.immutable ?
+      '/* this theme does not allow overrides */' :
+      `{ overrides: { colors: { brand: 'red' } } }`
 
-    const code = `
-// before mounting your React application:
-import theme from '@instructure/ui-themes/${themeBaseName}'
-
-theme.use(${params})
-`
     return (
       <div>
-        <CodeEditor label={`${themeKey} Theme Usage`} code={code} readOnly />
+
         {sections}
         {vars.length > 0 && this.renderSection('brand variables', vars)}
+
+        <Description
+          id={`${themeKey}ApplicationUsage`}
+          content={`
+            ### Usage in React applications
+
+            ${'```js'}
+            // before mounting your React application:
+            import theme from '${this.props.requirePath}'
+
+            theme.use(${params})
+            ${'```'}
+          `}
+          title={`${themeKey} Theme Usage in applications`}
+        />
+
+
+        <Description
+          id={`${themeKey}ComponentThemeUsage`}
+          content={`
+            ### Usage in component themes
+
+            ${'```js'}
+            // my-component/theme.js
+
+            // define the default theme:
+            export default function generator ({ colors }) {
+              return {
+                color: colors.brand
+              }
+            }
+
+            // define the theme for ${themeKey}:
+            generator['${themeKey}'] = function ({ colors }) {
+              return {
+                color: colors.white
+              }
+            }
+            ${'```'}
+          `}
+          title={`${themeKey} Theme Usage in applications`}
+        />
       </div>
     )
   }

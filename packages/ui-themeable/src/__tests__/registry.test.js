@@ -34,7 +34,8 @@ describe('registry', () => {
   const baz = { key: 'baz', variables: { red: 'pink' } }
   const accessible = {
     key: 'accessible',
-    variables: { red: 'salmon', brand: 'purple' }
+    variables: { red: 'salmon', brand: 'purple' },
+    immutable: true
   }
 
   const overrides = {

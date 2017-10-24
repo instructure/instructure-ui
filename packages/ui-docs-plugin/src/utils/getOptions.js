@@ -1,16 +1,19 @@
 const path = require('path')
 const loadConfig = require('@instructure/ui-presets')
 
-module.exports = function () {
-  const projectRoot = process.cwd()
+module.exports = function (pluginOptions = {}) {
+  const options = Object.assign({}, loadConfig('docs'), pluginOptions)
 
-  // TODO: validate options
+  const context = options.context || process.cwd()
+  const projectRoot = options.projectRoot || process.cwd()
 
-  return loadConfig('docs', {
+  const defaultOptions = {
+    context, // for webpack requires
     title: 'Documentation',
-    files: [],
+    files: [ path.resolve(projectRoot, '**/*.md') ],
+    themes: [],
     library: {},
-    projectRoot,
+    projectRoot, // to determine src paths
     ignore: [
       path.resolve(projectRoot, '**/node_modules/**'),
       path.resolve(projectRoot, '**/bower_components/**'),
@@ -25,15 +28,8 @@ module.exports = function () {
       path.resolve(projectRoot, 'vendor/**'),
       path.resolve(projectRoot, 'dist/**')
     ],
-    template: path.resolve(__dirname, 'index.tmpl.html'),
-    identifier: (resourcePath, matter, context) => {
-      if (matter.data.id) {
-        return matter.data.id
-      } else if (resourcePath.includes('/index.js') || resourcePath.includes('README.md')) {
-        return '[folder]'
-      } else {
-        return '[name]'
-      }
-    }
-  })
+    template: path.resolve(__dirname, '../../index.ejs')
+  }
+
+  return Object.assign({}, defaultOptions, options)
 }

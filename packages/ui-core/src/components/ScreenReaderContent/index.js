@@ -12,14 +12,6 @@ import styles from './styles.css'
 ---
 category: components/utilities
 ---
-  The ScreenReaderContent component renders content that is accessible to
-  screen readers, but is not visible.
-
-  ```jsx_example
-  <ScreenReaderContent>
-    This content is not visible.
-  </ScreenReaderContent>
-  ```
 **/
 @themeable(null, styles)
 class ScreenReaderContent extends Component {

@@ -15,15 +15,18 @@ import FormFieldMessage from '../FormFieldMessage'
 parent: FormField
 ---
 
-  A FormFieldMessages component
+A FormFieldMessages component
 
-  ```jsx_example
-  <FormFieldMessages messages={[
-    { text: 'Invalid name', type: 'error' },
-    { text: 'Good job!', type: 'success' },
-    { text: 'Full name, first and last', type: 'hint' },
-  ]} />
-  ```
+```js
+---
+example: true
+---
+<FormFieldMessages messages={[
+  { text: 'Invalid name', type: 'error' },
+  { text: 'Good job!', type: 'success' },
+  { text: 'Full name, first and last', type: 'hint' },
+]} />
+```
 **/
 @themeable(theme, styles)
 export default class FormFieldMessages extends Component {

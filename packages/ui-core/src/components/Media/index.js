@@ -16,32 +16,6 @@ import theme from './theme'
 ---
 category: components/utilities
 ---
-  A Media component with a caption
-
-  ```jsx_example
-  <Media
-    description={lorem.sentence()}
-  >
-    <Avatar name="Jennifer Stern" />
-  </Media>
-  ```
-  Create a heading by using the `title` prop, and add space around the Media
-  component via the `margin` prop. To constrain the component's width, use
-  the `size` prop.
-
-  You can also adjust the alignment of the media with the descriptive text by
-  setting the `alignContent` prop.
-  ```jsx_example
-  <Media
-    margin="x-large auto"
-    size="small"
-    alignContent="top"
-    title="Graham Taylor"
-    description={lorem.paragraph()}
-  >
-    <Avatar name="Graham Taylor" />
-  </Media>
-  ```
 **/
 @themeable(theme, styles)
 class Media extends Component {
