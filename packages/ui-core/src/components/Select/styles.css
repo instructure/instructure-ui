@@ -5,11 +5,12 @@
   .arrow {
     display: block;
     position: absolute;
-    top: calc(50% - 0.4rem);
+    top: 50%;
+    transform: translateY(-50%);
     offset-inline-end: var(--padding);
     offset-inline-start: auto;
     pointer-events: none;
-    fill: var(--arrowColor);
+    color: var(--arrowColor);
   }
 
   .select {
@@ -79,8 +80,7 @@
   }
 
   .arrow {
-    width: var(--smallArrowWidth);
-    height: var(--smallArrowWidth);
+    font-size: var(--smallArrowWidth);
   }
 }
 
@@ -96,8 +96,7 @@
   }
 
   .arrow {
-    width: var(--mediumArrowWidth);
-    height: var(--mediumArrowWidth);
+    font-size: var(--mediumArrowWidth);
   }
 }
 
@@ -114,7 +113,6 @@
   }
 
   .arrow {
-    width: var(--largeArrowWidth);
-    height: var(--largeArrowWidth);
+    font-size: var(--largeArrowWidth);
   }
 }
