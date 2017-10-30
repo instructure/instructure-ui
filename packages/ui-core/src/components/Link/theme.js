@@ -13,14 +13,16 @@ export default function generator ({ colors, typography, borders }) {
     outlineStyle: borders.style,
     focusOutlineColor: 'transparent',
 
-    colorInverse: colors.porcelain
+    colorInverse: colors.porcelain,
+    focusInverseOutlineColor: 'transparent'
   }
 }
 
 generator['canvas-a11y'] = function ({ colors }) {
   return {
     textDecoration: 'underline',
-    focusOutlineColor: colors.brand
+    focusOutlineColor: colors.brand,
+    focusInverseOutlineColor: colors.porcelain
   }
 }
 

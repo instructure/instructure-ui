@@ -42,10 +42,15 @@
 .root button.inverse {
   color: var(--colorInverse);
 
-  &:focus,
   &:hover,
+  &:focus,
   &:active {
     color: var(--colorInverse);
+  }
+
+  &:focus,
+  &:active {
+    outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseOutlineColor);
   }
 }
 
