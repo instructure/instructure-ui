@@ -109,7 +109,7 @@ class Tag extends Component {
         onClick={(onClick) ? this.handleClick : null}
         aria-disabled={(onClick && disabled) ? 'true' : null}
         display={null}
-        title={title || (typeof text === 'string') ? text : null}
+        title={title || ((typeof text === 'string') ? text : null)}
       >
         <span className={styles.text}>
           {text}
