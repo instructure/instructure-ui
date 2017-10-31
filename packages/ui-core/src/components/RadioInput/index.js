@@ -77,6 +77,12 @@ class RadioInput extends Component {
   constructor (props) {
     super(props)
 
+    this.state = {}
+
+    if (props.checked === undefined) {
+      this.state.checked = false
+    }
+
     this._defaultId = `RadioInput__${shortid.generate()}`
   }
 
@@ -95,6 +101,10 @@ class RadioInput extends Component {
       return
     }
 
+    if (this.props.checked === undefined) {
+      this.setState({ checked: !this.state.checked })
+    }
+
     this.props.onChange(e)
   }
 
@@ -111,7 +121,7 @@ class RadioInput extends Component {
   }
 
   get checked () {
-    return this._input.checked
+    return (this.props.checked === undefined) ? this.state.checked : this.props.checked
   }
 
   render () {
@@ -149,9 +159,10 @@ class RadioInput extends Component {
           ref={(c) => { this._input = c }}
           value={value}
           name={name}
-          checked={this.props.checked}
+          checked={this.checked}
           type="radio"
           className={styles.input}
+          disabled={disabled || readOnly ? 'true' : null}
           aria-disabled={disabled || readOnly ? 'true' : null}
           onChange={this.handleChange}
           onClick={this.handleClick}
