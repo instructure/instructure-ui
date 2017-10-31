@@ -248,7 +248,7 @@ class ToggleDetails extends Component {
     return (
       <span className={styles.summary}>
         {iconPosition === 'start' && this.renderIcon()}
-        {summary}
+        <span className={styles.summaryText}>{summary}</span>
         {iconPosition === 'end' && this.renderIcon()}
       </span>
     )
@@ -294,13 +294,12 @@ class ToggleDetails extends Component {
     const Icon = this.expanded ? this.props.iconExpanded : this.props.icon
 
     return (
-      <span className={classnames(styles.icon, {
-        [styles.iconStart]: iconPosition === 'start',
-        [styles.iconEnd]: iconPosition === 'end'
-      })}
-      >
-        <Icon />
-      </span>
+      <Icon
+        className={classnames(styles.icon, {
+          [styles.iconStart]: iconPosition === 'start',
+          [styles.iconEnd]: iconPosition === 'end'
+        })}
+      />
     )
   }
 
@@ -331,8 +330,23 @@ class ToggleDetails extends Component {
   }
 
   render () {
+    const {
+      variant,
+      iconPosition,
+      fluidWidth,
+      size
+    } = this.props
+
+    const positionIconAtEnd = iconPosition === 'end' && (variant === 'filled' || fluidWidth)
+
+    const classes = {
+      [styles.root]: true,
+      [styles[this.props.size]]: true,
+      [styles.positionIconAtEnd]: positionIconAtEnd
+    }
+
     return (
-      <div className={classnames(styles.root, styles[this.props.size])}>
+      <div className={classnames(classes)}>
         {this.renderToggle()}
         {this.renderDetails()}
       </div>

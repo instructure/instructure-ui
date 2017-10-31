@@ -121,7 +121,7 @@ inverse: true
     </Button>
     <br />
     <Button fluidWidth size="large" href="http://instructure.github.io/instructure-ui">
-      Large fluidWidth link-button
+      Large fluidWidth button
     </Button>
     <br />
     <Button fluidWidth size="large">
