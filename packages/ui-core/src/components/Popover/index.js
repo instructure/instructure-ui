@@ -294,7 +294,7 @@ class Popover extends Component {
     onMouseOver: event => {},
     onMouseOut: event => {},
     onShow: position => {},
-    onDismiss: event => {},
+    onDismiss: () => {},
     placement: 'bottom center',
     offsetX: 0,
     offsetY: 0,
@@ -366,13 +366,18 @@ class Popover extends Component {
     }
   }
 
-  hide = () => {
-    if (this.props.show === undefined) {
-      this.setState({ show: false })
+  hide = (e) => {
+    // check if shown before setstate to prevent multiple onDismiss firings
+    if (typeof this.props.onDismiss === 'function' && this.shown) {
+      this.props.onDismiss()
     }
 
     if (typeof this.props.onToggle === 'function') {
       this.props.onToggle(false)
+    }
+
+    if (this.props.show === undefined) {
+      this.setState({ show: false })
     }
   }
 
