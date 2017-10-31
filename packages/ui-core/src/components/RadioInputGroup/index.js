@@ -32,7 +32,7 @@ category: components/forms
       {value: 'bar', label: lorem.sentence() },
       {value: 'baz', label: lorem.sentence() }
     ]
-    const handleChange = function (value) {
+    const handleChange = function (event, value) {
       console.log(value)
     }
     return (
@@ -361,7 +361,7 @@ export default class RadioInputGroup extends Component {
     }
 
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(value)
+      this.props.onChange(e, value)
     }
   };
 
