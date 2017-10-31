@@ -102,7 +102,6 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  justify-content: space-between;
   text-align: start;
 }
 
@@ -122,6 +121,14 @@
 .iconEnd {
   margin-inline-start: var(--iconMargin);
   margin-inline-end: 0;
+}
+
+.summaryText {
+  min-width: 1px;
+}
+
+.positionIconAtEnd .summaryText {
+  flex: 1;
 }
 
 .details {

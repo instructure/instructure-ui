@@ -59,6 +59,7 @@
 
 .content {
   box-sizing: border-box;
+  display: block;
 }
 
 .default,
@@ -79,8 +80,8 @@
     line-height: calc(var(--smallHeight) - (var(--borderWidth) * 2));
 
     &.fluidWidth .content {
-      padding-top: 0.25rem;
-      padding-bottom: 0.25rem;
+      padding-top: 0.375rem;
+      padding-bottom: 0.3125rem;
     }
   }
 
@@ -93,8 +94,8 @@
     line-height: calc(var(--mediumHeight) - (var(--borderWidth) * 2));
 
     &.fluidWidth .content {
-      padding-top: 0.5rem;
-      padding-bottom: 0.5rem;
+      padding-top: 0.5625rem;
+      padding-bottom: 0.5625rem;
     }
   }
 
@@ -107,15 +108,14 @@
     line-height: calc(var(--largeHeight) - (var(--borderWidth) * 2));
 
     &.fluidWidth .content {
-      padding-top: 0.75rem;
-      padding-bottom: 0.75rem;
+      padding-top: 0.6875rem;
+      padding-bottom: 0.6875rem;
     }
   }
 
   /* cut off text with ellipsis if not fluidWith */
   &:not(.fluidWidth) {
     .content {
-      display: block;
       box-sizing: border-box;
       white-space: nowrap;
       overflow: hidden;
@@ -132,7 +132,6 @@
       word-wrap: break-word;
       hyphens: auto;
       line-height: var(--fluidWidthLineHeight);
-      display: inline-block;
     }
   }
 
