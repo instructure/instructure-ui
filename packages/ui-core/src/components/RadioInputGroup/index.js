@@ -103,7 +103,7 @@ export default class RadioInputGroup extends Component {
     }
 
     if (typeof this.props.onChange === 'function') {
-      this.props.onChange(value)
+      this.props.onChange(e, value)
     }
   };
 
