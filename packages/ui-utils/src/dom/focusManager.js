@@ -104,4 +104,4 @@ class FocusManager {
   }
 }
 
-export default new FocusManager()
+export default FocusManager

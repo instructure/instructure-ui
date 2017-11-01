@@ -6,7 +6,7 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import focusManager from '@instructure/ui-utils/lib/dom/focusManager'
+import FocusManager from '@instructure/ui-utils/lib/dom/focusManager'
 import scopeTab from '@instructure/ui-utils/lib/dom/scopeTab'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -73,8 +73,8 @@ class Dialog extends Component {
     onDismiss: () => {}
   }
 
+  _focusManager = new FocusManager()
   _preventCloseOnDocumentClick = false
-
   _timeouts = []
 
   componentDidMount () {
@@ -107,7 +107,7 @@ class Dialog extends Component {
         this.addDocumentListeners()
 
         if (this.props.shouldReturnFocus) {
-          focusManager.markForFocusLater()
+          this._focusManager.markForFocusLater()
         }
 
         if (this.props.shouldContainFocus) {
@@ -127,7 +127,7 @@ class Dialog extends Component {
     }
 
     if (this.props.shouldReturnFocus) {
-      focusManager.returnFocus()
+      this._focusManager.returnFocus()
     }
   }
 
@@ -196,7 +196,7 @@ class Dialog extends Component {
       this._keyDownListener = addEventListener(ownerDocument(this), 'keydown', this.handleKeyDown)
     }
 
-    focusManager.setupScopedFocus(this.contentElement)
+    this._focusManager.setupScopedFocus(this.contentElement)
     this.hideApplicationElement()
   }
 
@@ -204,7 +204,7 @@ class Dialog extends Component {
     this._keyDownListener && this._keyDownListener.remove()
     this._keyDownListener = null
 
-    focusManager.teardownScopedFocus()
+    this._focusManager.teardownScopedFocus()
     this.openApplicationElement()
   }
 

@@ -1,6 +1,7 @@
-import focusManager from '../focusManager'
+import FocusManager from '../focusManager'
 
 describe('focusManager', () => {
+  const focusManager = new FocusManager()
   let container
   let handleWindowFocus
 
