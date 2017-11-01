@@ -73,11 +73,31 @@ supplied).
     <Tag text="Large" size="large" margin="0 xx-small 0 0" />
   </div>
   ```
+
   ### Max-width
   ```jsx_example
     <Tag
       text="Long string of text designed to trigger overflow"
     />
+  ```
+
+  ### Inline variant
+
+  This variant is designed to look similar to the surrounding text.
+  ```jsx_example
+  <p>
+    This is an
+    <Tag
+      dismissible
+      onClick={() => alert('Tag dismissed')}
+      size="large"
+      text={<AccessibleContent alt="Remove 'inline'">
+        inline
+      </AccessibleContent>}
+      variant="inline"
+    />
+    tag.
+  </p>
   ```
 **/
 
@@ -100,13 +120,15 @@ class Tag extends Component {
     * If you add an onClick prop, Tag renders as a clickable button
     */
     onClick: PropTypes.func,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    variant: PropTypes.oneOf(['default', 'inline'])
   }
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     size: 'medium',
-    dismissible: false
+    dismissible: false,
+    variant: 'default'
   }
 
   get focused () {
@@ -144,13 +166,15 @@ class Tag extends Component {
       text,
       title,
       onClick,
-      margin
+      margin,
+      variant
     } = this.props
 
     const props = omitProps(this.props, Tag.propTypes, ['padding'])
 
     const classes = {
       [styles.root]: true,
+      [styles[variant]]: true,
       [styles[size]]: size,
       [styles.dismissible]: dismissible,
       [styles.button]: onClick
