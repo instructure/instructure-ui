@@ -46,6 +46,7 @@
   touch-action: manipulation;
   outline: none;
   position: relative;
+  overflow: visible;
   transition: background-color var(--transitionTiming);
 
   &::before {
@@ -53,7 +54,7 @@
     box-sizing: border-box;
     width: calc(100% + 0.5rem);
     height: calc(100% + 0.5rem);
-    border: 1px solid var(--focusOutlineColor);
+    border: var(--borderWidth) var(--borderStyle) var(--focusOutlineColor);
     border-radius: var(--borderRadius);
     position: absolute;
     top: -0.25rem;
