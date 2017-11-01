@@ -291,5 +291,9 @@ describe('<FileDrop />', () => {
       expect(accepts(firefoxDragEnterFile, '.png')).to.be.true
       expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true
     })
+
+    it('allows extensions without leading dot', () => {
+      expect(accepts(dropImage, 'jpg, png')).to.be.true
+    })
   })
 })
