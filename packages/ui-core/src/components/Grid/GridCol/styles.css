@@ -120,7 +120,9 @@
 }
 
 @define-mixin start-grid-column {
-  flex: 1 1 auto;
+  /* stylelint-disable length-zero-no-unit */
+  flex: 1 1 0px; /* TODO: px can be removed when IE11 is dropped */
+  /* stylelint-enable length-zero-no-unit */
   margin-bottom: 0;
   box-sizing: border-box;
 
