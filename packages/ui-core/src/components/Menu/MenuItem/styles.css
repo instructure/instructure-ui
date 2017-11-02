@@ -71,6 +71,7 @@
   color: var(--iconColor);
   margin-inline-end: var(--iconMarginEnd);
   margin-inline-start: 0;
+  min-width: 1em;
   width: 1em;
   height: 1em;
 }
