@@ -285,6 +285,7 @@ class Checkbox extends Component {
           value={value}
           type="checkbox"
           ref={(c) => { this._input = c }}
+          disabled={disabled || readOnly ? 'true' : null}
           aria-disabled={disabled || readOnly ? 'true' : null}
           className={styles.input}
           onChange={this.handleChange}
