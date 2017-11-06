@@ -101,8 +101,17 @@ export default class Tooltip extends Component {
   render () {
     const trigger = this.renderTrigger()
     return (
-      <Popover on={this.props.on} shouldRenderOffscreen placement={this.props.placement} variant={this.props.variant}>
-        <PopoverTrigger aria-describedby={this._id} aria-controls={this._id}>
+      <Popover
+        on={this.props.on}
+        shouldRenderOffscreen
+        shouldReturnFocus={false}
+        placement={this.props.placement}
+        variant={this.props.variant}
+      >
+        <PopoverTrigger
+          aria-describedby={this._id}
+          aria-controls={this._id}
+        >
           {trigger}
         </PopoverTrigger>
         <PopoverContent>
