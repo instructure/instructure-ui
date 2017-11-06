@@ -5,6 +5,7 @@
 }
 
 .content {
+  position: relative;
   display: block;
   border-width: var(--borderWidth);
   border-style: solid;
@@ -14,7 +15,6 @@
 .with-arrow {
   .content {
     min-height: calc(var(--arrowSize) * 2);
-    position: relative;
   }
 
   .arrow,
