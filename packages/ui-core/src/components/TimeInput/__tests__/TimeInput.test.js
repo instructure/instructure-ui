@@ -1,6 +1,6 @@
 import React from 'react'
-import moment from 'moment'
-import 'moment-timezone/builds/moment-timezone-with-data'
+import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+
 import TimeInput from '../index'
 
 describe('<TimeInput />', () => {
@@ -13,7 +13,7 @@ describe('<TimeInput />', () => {
   })
 
   it('renders the specified value when present', () => {
-    const value = moment.tz('1986-05-17T18:00:00.000Z', 'US/Eastern')
+    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
     const subject = testbed.render({
       value: value.toISOString(),
       onChange: () => {}
@@ -23,7 +23,7 @@ describe('<TimeInput />', () => {
   })
 
   it('renders the specified default value when present', () => {
-    const defaultValue = moment.tz('1986-05-25T19:00:00.000Z', 'US/Eastern')
+    const defaultValue = DateTime.parse('1986-05-25T19:00:00.000Z', 'en', 'US/Eastern')
     const subject = testbed.render({
       defaultValue: defaultValue.toISOString()
     })
@@ -32,8 +32,8 @@ describe('<TimeInput />', () => {
   })
 
   it('renders the specified value when both default value and value are set', () => {
-    const value = moment.tz('1986-05-17T18:00:00.000Z', 'US/Eastern')
-    const defaultValue = moment.tz('1986-05-25T19:00:00.000Z', 'US/Eastern')
+    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+    const defaultValue = DateTime.parse('1986-05-25T19:00:00.000Z', 'en', 'US/Eastern')
     const subject = testbed.render({
       value: value.toISOString(),
       defaultValue: defaultValue.toISOString(),
@@ -44,9 +44,9 @@ describe('<TimeInput />', () => {
   })
 
   it('renders using the specified timezone', () => {
-    const value = moment.tz('1986-05-17T18:00:00.000Z', 'US/Central')
-    const oneHourBackValue = moment.tz('1986-05-17T18:00:00.000Z', 'US/Mountain')
-    const oneHourForwardBackValue = moment.tz('1986-05-17T18:00:00.000Z', 'US/Eastern')
+    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Central')
+    const oneHourBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Mountain')
+    const oneHourForwardBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
     const subject = testbed.render({
       value: value.toISOString(),
       timezone: 'US/Central',
@@ -58,7 +58,7 @@ describe('<TimeInput />', () => {
   })
 
   it('renders using the specified locale', () => {
-    const value = moment.tz('1986-05-17T18:00:00.000Z', 'US/Eastern')
+    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
     const subject = testbed.render({
       value: value.toISOString(),
       locale: 'fr',
@@ -78,7 +78,7 @@ describe('<TimeInput />', () => {
   })
 
   it('renders using the specified step value', () => {
-    const value = moment.tz('1986-05-17T18:00:00.000Z', 'US/Eastern')
+    const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
 
     const subject = testbed.render({
       step: 15,

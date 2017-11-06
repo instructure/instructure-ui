@@ -33,6 +33,15 @@ export function parse (dateString, locale, timezone) {
 }
 
 /**
+* Determines if a string is a valid ISO 8601 string
+* @param {String} dateString
+* @returns {Boolean} true if dateString is a valid ISO 8601 string
+*/
+export function isValid (dateString) {
+  return moment(dateString, [moment.ISO_8601]).isValid()
+}
+
+/**
 * Get the users's time zone (or guess)
 * see https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
 * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
@@ -44,7 +53,8 @@ export function browserTimeZone () {
 export default {
   now,
   parse,
-  browserTimeZone
+  browserTimeZone,
+  isValid
 }
 
 function checkParams (locale, timezone) {
