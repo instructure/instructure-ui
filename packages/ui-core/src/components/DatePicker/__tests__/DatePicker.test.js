@@ -1,6 +1,8 @@
 import React from 'react'
 import keycode from 'keycode'
-import moment from 'moment' // eslint-disable-line import/no-extraneous-dependencies
+
+import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+
 import DatePicker from '../index'
 import styles from '../styles.css'
 import paginationStyles from '../DatePickerPagination/styles.css'
@@ -30,7 +32,7 @@ describe('<DatePicker />', () => {
     cell.simulate('click')
     expect(onSelectedChange).to.have.been.called
     const onChangeArg = onSelectedChange.getCall(0).args[1]
-    expect(moment(onChangeArg, [moment.ISO_8601]).isValid()).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok
   })
 
   it('fires onRenderedChange when next arrow is clicked', () => {
@@ -41,7 +43,7 @@ describe('<DatePicker />', () => {
     nextButton.simulate('click')
     expect(onRenderedChange).to.have.been.called
     const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(moment(onChangeArg, [moment.ISO_8601]).isValid()).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok
   })
 
   it('fires onRenderedChange when previous arrow is clicked', () => {
@@ -52,7 +54,7 @@ describe('<DatePicker />', () => {
     prevButton.simulate('click')
     expect(onRenderedChange).to.have.been.called
     const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(moment(onChangeArg, [moment.ISO_8601]).isValid()).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok
   })
 
   it('localizes the calendar layout', () => {
