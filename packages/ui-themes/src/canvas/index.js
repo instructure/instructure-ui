@@ -1,9 +1,9 @@
 import { makeTheme } from '@instructure/ui-themeable/lib/registry'
 
 import theme from './base'
-import a11y from './a11y'
+import highContrast from './high-contrast'
 
 export default makeTheme({
   theme,
-  a11y
+  a11y: highContrast
 })

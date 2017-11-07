@@ -27,7 +27,7 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
   }
 }
 
-generator['canvas-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     uncheckedIconColor: colors.oxford,
     background: colors.oxford,

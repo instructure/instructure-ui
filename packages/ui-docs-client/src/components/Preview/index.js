@@ -87,13 +87,14 @@ export default class Preview extends Component {
 
     const render = (el) => {
       const { themeKey, themes } = this.context
+      const theme = ApplyTheme.generateTheme(themeKey)
       let elToRender = el
 
       if (themeKey && themes[themeKey]) {
         elToRender = (
           <ApplyTheme
-            theme={ApplyTheme.generateTheme(themeKey)}
-            immutable={themes[themeKey].accessible}
+            theme={theme}
+            immutable={themes[themeKey].immutable}
           >
             {elToRender}
           </ApplyTheme>

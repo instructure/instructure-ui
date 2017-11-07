@@ -21,7 +21,7 @@ describe('Tag.theme', () => {
   })
 
   describe('with the accessible canvas theme', () => {
-    const variables = Tag.generateTheme('canvas-a11y')
+    const variables = Tag.generateTheme('canvas-high-contrast')
 
     variants.forEach((variant) => {
       context(`with the ${variant} variant`, () => {

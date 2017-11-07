@@ -16,8 +16,8 @@ describe('ToggleFacade.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = ToggleFacade.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = ToggleFacade.generateTheme('canvas-high-contrast')
 
     it('should ensure icon meets 4.5:1 contrast', () => {
       expect(contrast(variables.uncheckedIconColor, variables.toggleBackground))

@@ -13,8 +13,8 @@ describe('TabPanel.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = TabPanel.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = TabPanel.generateTheme('canvas-high-contrast')
 
     describe('simple variant', () => {
       it('should ensure text and tab panel background meet 4.5:1 contrast', () => {

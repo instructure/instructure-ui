@@ -13,8 +13,8 @@ describe('ProgressCircle.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = ProgressCircle.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = ProgressCircle.generateTheme('canvas-high-contrast')
 
     describe('default', () => {
       it('should ensure meter color and track color meet 4.5:1 contrast', () => {

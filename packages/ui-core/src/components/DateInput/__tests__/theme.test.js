@@ -11,8 +11,8 @@ describe('DateInput.theme', () => {
     })
   })
 
-  describe('with the accessible canvas theme', () => {
-    const variables = DateInput.generateTheme('canvas-a11y')
+  describe('with the high contrast canvas theme', () => {
+    const variables = DateInput.generateTheme('canvas-high-contrast')
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(4.5)

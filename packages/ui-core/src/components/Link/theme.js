@@ -18,7 +18,7 @@ export default function generator ({ colors, typography, borders }) {
   }
 }
 
-generator['canvas-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     textDecoration: 'underline',
     focusOutlineColor: colors.brand,
