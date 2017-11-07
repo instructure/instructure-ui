@@ -124,6 +124,8 @@ describe('<AutocompleteMultiple />', () => {
 
     subject.instance()._input.value = 'Key La'
 
+    expect(subject.instance().state.selectedOption.length).to.equal(0)
+
     onSelect({ preventDefault, target: 1 }, newSelection)
 
     expect(onChange.firstCall).to.exist
@@ -137,42 +139,101 @@ describe('<AutocompleteMultiple />', () => {
     expect(onInputChange.firstCall.args[1]).to.equal('')
 
     expect(subject.instance().state.filterText).to.equal('')
+    expect(subject.instance().state.selectedOption.length).to.equal(1)
+
+    const tags = subject.find(Tag)
+    expect(tags).to.exist
+    expect(tags.length).to.equal(1)
   })
 
   it('selection is additive', () => {
-    const newSelection = {
+    const firstSelection = {
+      value: '4', label: 'Key Largo'
+    }
+    const secondSelection = {
       value: '5', label: 'Montego'
     }
-    const onInputChange = testbed.stub()
     const onChange = testbed.stub()
-    const subject = testbed.render({
-      onChange,
-      onInputChange,
-      selectedOption: [{
-        value: '4', label: 'Key Largo'
-      }]
-    })
+    const subject = testbed.render({ onChange })
     testbed.tick()
+
     const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
+
     expect(onSelect).to.exist
 
-    subject.instance()._input.value = 'Key La'
-
-    onSelect({ preventDefault, target: 1 }, newSelection)
+    expect(subject.instance().state.selectedOption.length).to.equal(0)
+    onSelect({ preventDefault, target: 1 }, firstSelection)
+    expect(subject.instance().state.selectedOption.length).to.equal(1)
+    onSelect({ preventDefault, target: 2 }, secondSelection)
+    expect(subject.instance().state.selectedOption.length).to.equal(2)
 
     expect(onChange.firstCall).to.exist
-    const eventArg = onChange.firstCall.args[0]
-    const selectedOptionArg = onChange.firstCall.args[1]
-    expect(eventArg.target).to.equal(1)
-    expect(selectedOptionArg).to.eql([{
+    expect(onChange.firstCall.args[0].target).to.equal(1)
+    expect(onChange.firstCall.args[1]).to.eql([firstSelection])
+
+    expect(onChange.getCall(1)).to.exist
+    expect(onChange.getCall(1).args[0].target).to.equal(2)
+    expect(onChange.getCall(1).args[1]).to.eql([firstSelection, secondSelection])
+
+    const tags = subject.find(Tag)
+    expect(tags).to.exist
+    expect(tags.length).to.equal(2)
+  })
+
+  it(`when controlled, shouldn't update Tags by itself`, () => {
+    const selectedOption = [{
+      value: '5', label: 'Montego'
+    }]
+    const newSelection = {
       value: '4', label: 'Key Largo'
-    }, newSelection])
+    }
+    const onChange = testbed.stub()
+    const subject = testbed.render({ onChange, selectedOption })
+    testbed.tick()
 
-    expect(onInputChange.firstCall).to.exist
-    expect(onInputChange.firstCall.args[0]).to.equal(null)
-    expect(onInputChange.firstCall.args[1]).to.equal('')
+    const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
 
-    expect(subject.instance().state.filterText).to.equal('')
+    expect(onSelect).to.exist
+
+    expect(subject.instance().state.selectedOption.length).to.equal(1)
+    onSelect({ preventDefault, target: 10 }, newSelection)
+    expect(subject.instance().state.selectedOption.length).to.equal(1)
+
+    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall.args[0].target).to.equal(10)
+    expect(onChange.firstCall.args[1]).to.eql([...selectedOption, newSelection])
+
+    const tags = subject.find(Tag)
+    expect(tags).to.exist
+    expect(tags.length).to.equal(1)
+  })
+
+  it(`when controlled, should only update Tags when selectedOption props changes`, (done) => {
+    const selectedOption = [{
+      value: '5', label: 'Montego'
+    }]
+    const newSelection = {
+      value: '4', label: 'Key Largo'
+    }
+    const onChange = testbed.stub()
+    const subject = testbed.render({ onChange, selectedOption })
+    testbed.tick()
+
+    const tags = subject.find(Tag)
+    expect(tags).to.exist
+    expect(tags.length).to.equal(1)
+
+    subject.setProps({
+      selectedOption: [...selectedOption, newSelection]
+    }, () => {
+      testbed.defer(() => { // wait for re-render
+        testbed.tick()
+        const tags = subject.find(Tag)
+        expect(tags).to.exist
+        expect(tags.length).to.equal(2)
+        done()
+      })
+    })
   })
 
   it('renders Tags for each selectedOption', () => {
