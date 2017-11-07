@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import deepEqual from 'deep-equal'
-import shortid from 'shortid'
 
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import warning from '@instructure/ui-utils/lib/warning'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
 
@@ -232,6 +232,6 @@ export default function themeable (theme, styles) {
 themeable.generateTheme = generateTheme
 
 function uniqueId (displayName) {
-  const id = shortid.generate()
+  const id = uid()
   return process.env.DEBUG ? `${displayName}__${id}` : id
 }

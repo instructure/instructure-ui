@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
@@ -9,6 +8,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import FormField from '../FormField'
 
@@ -170,7 +170,7 @@ class Select extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `Select__${shortid.generate()}`
+    this._defaultId = `Select__${uid()}`
   }
 
   get id () {

@@ -1,7 +1,7 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 
+import uid from '@instructure/ui-utils/lib/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -147,7 +147,7 @@ export default class CheckboxGroup extends Component {
       }
     }
 
-    this._messagesId = `CheckboxGroup__messages-${shortid.generate()}`
+    this._messagesId = `CheckboxGroup__messages-${uid()}`
   }
 
   get hasMessages () {
