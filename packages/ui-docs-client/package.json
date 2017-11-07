@@ -28,6 +28,7 @@
   "dependencies": {
     "@instructure/ui-core": "^4.0.0",
     "@instructure/ui-themeable": "^4.0.0",
+    "@instructure/ui-themes": "^4.0.0",
     "@instructure/ui-utils": "^4.0.0",
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",

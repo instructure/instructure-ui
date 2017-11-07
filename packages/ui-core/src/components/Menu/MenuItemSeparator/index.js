@@ -8,12 +8,15 @@ import theme from './theme'
 ---
 parent: Menu
 ---
+@module MenuItemSeparator
 **/
 @themeable(theme, styles)
-export default class MenuItemSeparator extends Component {
+class MenuItemSeparator extends Component {
   render () {
     return (
-      <li {...this.props} role="separator" className={styles.root} />
+      <div {...this.props} role="separator" className={styles.root} />
     )
   }
 }
+
+export default MenuItemSeparator
