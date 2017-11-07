@@ -53,7 +53,8 @@ class MenuItem extends Component {
     as: CustomPropTypes.elementType,
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    active: PropTypes.bool
+    active: PropTypes.bool,
+    href: PropTypes.string
   }
   /* eslint-enable react/require-default-props */
 

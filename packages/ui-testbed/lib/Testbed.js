@@ -1,6 +1,5 @@
 const sinon = require('sinon')
 const { cloneElement } = require('react')
-const mockRaf = require('mock-raf')
 const { StyleSheet } = require('glamor/lib/sheet')
 
 const { ReactWrapper, mount } = require('./enzymeWrapper')
@@ -22,7 +21,6 @@ class Testbed {
   constructor (subject) {
     this.subject = subject
     this.sandbox = sinon.sandbox.create()
-    this.mockRaf = mockRaf()
 
     beforeEach(this.setup.bind(this))
     afterEach(this.teardown.bind(this))
@@ -37,7 +35,7 @@ class Testbed {
   }
 
   raf () {
-    this.mockRaf.step()
+    this.sandbox.clock.runToFrame()
   }
 
   stub (obj, method, fn) {
@@ -68,9 +66,6 @@ class Testbed {
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
     this.disableCSSTransitions()
-
-    this.stub(window, 'requestAnimationFrame', this.mockRaf.raf)
-    this.stub(window, 'cancelAnimationFrame', this.mockRaf.cancel)
 
     this.sandbox.useFakeTimers()
   }

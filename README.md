@@ -82,10 +82,10 @@ Installation steps:
 
 ### Development
 
-- `yarn start:watch` runs the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code in the `packages/ui-core` directory you should see the page auto-reload.
-- `yarn test` will run the tests for all of the packages.
-- `yarn test:watch --scope [package name]` will run the tests for 'package name' and will watch for changes to the source code.
-- `yarn start` will build the production version of the documentation. You can view it at [http://localhost:8001](http://localhost:8001).
+1. Run `yarn build:watch` to build all of the packages for a development environment and watch for changes.
+1. Run `yarn start:watch` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should
+see the page auto-reload.
+1. Run `yarn test:watch --scope [package name]` to run the tests for 'package name' and watch for changes.
 
 Run `yarn run` to list the available commands.
 

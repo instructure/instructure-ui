@@ -35,12 +35,14 @@ RUN apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add source and install dependencies
-
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app/
 
 COPY ./package.json /usr/src/app/
-RUN npm install --ignore-scripts --unsafe-perm
+COPY ./yarn.lock /usr/src/app
+COPY .yarnrc /usr/src/app
+
+RUN yarn --ignore-scripts --pure-lockfile --no-progress
 COPY . /usr/src/app/
 
 RUN chown -R docker:docker /usr/src/app

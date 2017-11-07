@@ -4,6 +4,7 @@
   "description": "A React application to display documentation made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "module": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -11,20 +12,15 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test yarn lint",
-    "lint": "npm-run-all --parallel lint:js lint:css",
-    "lint:css": "stylelint \"src/**/*.css\"",
-    "lint:js": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "clean": "rimraf lib",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
-    "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
   },
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.2.0",
-    "@instructure/ui-testbed": "^4.2.0",
-    "babel-cli": "6.26.0",
     "babel-plugin-inline-import": "2.0.6",
     "react": "15.6.1",
     "react-dom": "15.6.1"
@@ -38,13 +34,13 @@
     "codemirror": "^5.27.4",
     "gray-matter": "^3.0.2",
     "he": "^1.1.1",
+    "instructure-icons": "^4.3.1",
     "marked": "^0.3.6",
     "prop-types": "^15.5.10",
     "react-axe": "^2.1.7",
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
-    "instructure-icons": ">=4.2.0",
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },

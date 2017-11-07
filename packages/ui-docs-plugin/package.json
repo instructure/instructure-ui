@@ -11,18 +11,14 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test yarn lint",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
-    "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
   },
   "license": "MIT",
-  "devDependencies": {
-    "@instructure/ui-presets": "^4.2.0",
-    "babel-cli": "6.26.0"
-  },
   "dependencies": {
+    "@instructure/ui-docs-client": "^4.2.0",
     "@instructure/ui-presets": "^4.2.0",
     "favicons-webpack-plugin": "^0.0.7",
     "globby": "^6.1.0",
@@ -34,7 +30,6 @@
     "script-ext-html-webpack-plugin": "^1.8.3"
   },
   "peerDependencies": {
-    "@instructure/ui-docs-client": "^3.4.0",
     "webpack": "^2.2.1"
   },
   "publishConfig": {

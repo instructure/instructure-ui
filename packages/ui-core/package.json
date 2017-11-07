@@ -4,6 +4,7 @@
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "module": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -11,24 +12,21 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "npm-run-all test:browser test:node",
-    "test:browser": "cross-env NODE_ENV=test COVERAGE=1 karma start --single-run --coverage",
-    "test:node": "node lib/index.js",
-    "test:watch": "cross-env NODE_ENV=test DEBUG=1 karma start",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "clean": "rimraf lib .babel-cache",
-    "build": "cross-env NODE_ENV=production babel src --out-dir lib --ignore *.test.js",
-    "build:dev": "cross-env NODE_ENV=development babel src --out-dir lib --ignore *.test.js"
+    "test": "ui-test",
+    "test:watch": "ui-test --watch",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
   },
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.2.0",
     "@instructure/ui-themes": "^4.2.0",
-    "babel-cli": "6.26.0",
     "postcss-input-range": "4.0.0",
-    "postcss-mixins": "6.0.1",
-    "postcss-simple-vars": "4.0.0",
+    "postcss-mixins": "6.2.0",
+    "postcss-simple-vars": "4.1.0",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
@@ -39,6 +37,7 @@
     "classnames": "^2.2.5",
     "decimal.js": "^7.2.1",
     "deep-equal": "^1.0.1",
+    "instructure-icons": "^4.3.1",
     "keycode": "^2.1.8",
     "no-scroll": "^2.1.0",
     "numeral": "^2.0.6",
@@ -46,7 +45,6 @@
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
-    "instructure-icons": "^2.3.0 || >=3.0.0",
     "react": "^0.14.9 || ^15.6.1",
     "react-dom": "^0.14.9 || ^15.6.1"
   },

@@ -36,5 +36,11 @@ find $PACKAGE_DIR/$PACKAGE -name 'Package*' -type f -exec bash -c 'mv "$1" "${1/
 if [[ "$OSTYPE" == darwin* ]]; then
   find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
 else
-  find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i -e "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+fi
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${VERSION}/$VERSION/g" '{}' \;
+else
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${VERSION}/$VERSION/g" '{}' \;
 fi

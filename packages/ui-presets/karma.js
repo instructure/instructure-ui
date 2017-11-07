@@ -1,8 +1,10 @@
 const webpack = require('webpack')
+const constants = require('karma').constants
 
-const withCoverage = process.argv.some((arg) => arg === '--coverage')
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
+
 const debug = Boolean(process.env.DEBUG)
+const withCoverage = Boolean(process.env.COVERAGE)
 
 module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
   const browsers = []
@@ -60,11 +62,15 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
 
       colors: true,
 
-      logLevel: config.LOG_INFO,
+      logLevel: constants.LOG_ERROR,
 
       autoWatch: true,
 
       browsers: browsers,
+
+      reportSlowerThan: 500,
+
+      concurrency: 2,
 
       customLaunchers: {
         chrome_without_security: {
@@ -88,7 +94,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
       browserDisconnectTolerance: 1, // default 0
       browserNoActivityTimeout: 60000, // default 10000
 
-      singleRun: false,
+      singleRun: !debug,
 
       webpack: {
         cache: debug,

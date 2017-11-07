@@ -11,7 +11,6 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test yarn lint",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
@@ -25,11 +24,10 @@
     "glamor": "^2.20.37",
     "keycode": "^2.1.8",
     "lodash.reject": "^4.6.0",
-    "mocha": "^3.4.2",
-    "mock-raf": "^1.0.0",
+    "mocha": "^4.0.1",
     "react-addons-test-utils": "^15.6.0",
-    "react-test-renderer": "^15.6.1",
-    "sinon": "^2.4.1",
+    "react-test-renderer": "15.6.1",
+    "sinon": "^4.1.2",
     "sinon-chai": "^2.12.0"
   },
   "peerDependencies": {
