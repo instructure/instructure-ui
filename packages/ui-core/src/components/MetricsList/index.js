@@ -12,16 +12,7 @@ import theme from './theme'
 ---
 category: components/typography
 ---
-  The MetricsList component displays metrics (value + label) in rows.
-
-  ```jsx_example
-  <MetricsList>
-    <MetricsListItem label="Grade" value="80%" />
-    <MetricsListItem label="Late" value="4" />
-    <MetricsListItem label="Missing" value="2" />
-  </MetricsList>
-  ```
- **/
+**/
 @themeable(theme, styles)
 export default class MetricsList extends Component {
   /* eslint-disable react/require-default-props */

@@ -18,14 +18,6 @@ import theme from './theme'
 ---
 category: components/utilities
 ---
-  A CloseButton component (used in dialog components).
-  See [Alert](#Alert), [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray).
-
-  See [Button](#Button) for properties.
-
-  ```jsx_example
-  <CloseButton offset="none">Close</CloseButton>
-  ```
 **/
 @themeable(theme, styles)
 class CloseButton extends Component {
