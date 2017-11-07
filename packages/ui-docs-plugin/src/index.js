@@ -2,6 +2,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin')
 const SingleEntryPlugin = require('webpack/lib/SingleEntryPlugin')
+const path = require('path')
 
 const getOptions = require('./utils/getOptions')
 
@@ -14,7 +15,7 @@ DocsPlugin.prototype.apply = function (compiler) {
 
   compiler.apply(new SingleEntryPlugin(
     this.context,
-    `!!${require.resolve('./loaders/docs-loader')}!`,
+    `!!${require.resolve('./loaders/docs-loader')}?${JSON.stringify(options)}!`,
     'ui-docs'
   ))
 
@@ -32,7 +33,10 @@ DocsPlugin.prototype.apply = function (compiler) {
   }))
 
   if (options.favicon) {
-    compiler.apply(new FaviconsWebpackPlugin(options.favicon))
+    compiler.apply(new FaviconsWebpackPlugin({
+      logo: path.resolve(options.context, options.favicon),
+      title: options.title
+    }))
   }
 }
 

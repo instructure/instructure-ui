@@ -12,7 +12,10 @@ import theme from './theme'
 export default class Header extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
-    version: PropTypes.string.isRequired
+    version: PropTypes.string
+  }
+  static defaultProps = {
+    version: undefined
   }
   render () {
     return (
@@ -28,22 +31,24 @@ export default class Header extends Component {
             href="#index"
           >
             <h1 className={styles.heading}>
-              {this.props.name}
+              {this.props.name || 'Documentation'}
             </h1>
           </Link>
-          <div className={styles.version}>
-            <Link
-              theme={{
-                color: '#005A8F',
-                hoverColor: darken('#005A8F', 10),
-                textDecoration: 'none',
-                hoverTextDecoration: 'underline'
-              }}
-              href="#CHANGELOG"
-            >
-              v{this.props.version}
-            </Link>
-          </div>
+          { this.props.version && (
+            <div className={styles.version}>
+              <Link
+                theme={{
+                  color: '#005A8F',
+                  hoverColor: darken('#005A8F', 10),
+                  textDecoration: 'none',
+                  hoverTextDecoration: 'underline'
+                }}
+                href="#CHANGELOG"
+              >
+                v{this.props.version}
+              </Link>
+            </div>
+          ) }
         </div>
       </div>
     )

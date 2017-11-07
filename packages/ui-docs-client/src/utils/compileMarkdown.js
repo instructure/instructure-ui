@@ -42,7 +42,7 @@ export default function compileMarkdown (content, context, options = {}) {
   tracker.context = context
   tracker.currentId = []
 
-  marked(content, Object.assign({renderer: renderer, smartypants: true}, options))
+  marked(trimIndent(content), Object.assign({renderer: renderer, smartypants: true}, options))
 
   return tracker.tree
 }
@@ -116,20 +116,25 @@ function createRenderer () {
     const elementId = tracker.nextElementId++
 
     function CodeComponent () {
-      if (typeof language === 'string' && language.indexOf('_example') >= 0) {
+      if (typeof language === 'string') {
         const matter = grayMatter(trimIndent(code))
-        return (
-          <Playground
-            inverse={matter.data.inverse}
-            render={matter.data.render}
-            title={tracker.context.title}
-            code={matter.content}
-            language={language.split('_')[0]}
-            readOnly={matter.data.readOnly}
-          />
-        )
-      } else if (language) {
-        return <CodeEditor label="Code example" code={code} language={language} readOnly />
+        const readOnly = matter.data ? matter.data.readOnly : true
+        const title = tracker.context.title || matter.data.title || 'Code example'
+
+        if (language.indexOf('_example') >= 0 || matter.data.example) {
+          return (
+            <Playground
+              inverse={matter.data.inverse}
+              render={matter.data.render}
+              title={title}
+              code={matter.content}
+              language={language.split('_')[0]}
+              readOnly={readOnly}
+            />
+          )
+        } else {
+          return <CodeEditor label={title} code={code} language={language} readOnly={readOnly} />
+        }
       } else {
         return <code>{code}</code>
       }
