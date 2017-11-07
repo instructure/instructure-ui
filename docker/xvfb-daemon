@@ -1,8 +1,0 @@
-#!/bin/bash
-export DISPLAY=:99
-/etc/init.d/xvfb start
-timeout 10 xvfb-wait
-$@
-exit_value=$?
-/etc/init.d/xvfb stop
-exit $exit_value
