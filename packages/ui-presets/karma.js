@@ -1,15 +1,22 @@
 const webpack = require('webpack')
 const constants = require('karma').constants
 
+const ChromiumRevision = require('puppeteer/package.json').puppeteer.chromium_revision
+const Downloader = require('puppeteer/utils/ChromiumDownloader')
+
+const revisionInfo = Downloader.revisionInfo(Downloader.currentPlatform(), ChromiumRevision)
+
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 
 const debug = Boolean(process.env.DEBUG)
 const withCoverage = Boolean(process.env.COVERAGE)
 
+process.env.CHROME_BIN = revisionInfo.executablePath
+
 module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
   const browsers = []
-  if (!noLaunchers) { browsers.push('chrome_without_security') }
-  if (!debug) { browsers.push('Firefox') }
+
+  if (!noLaunchers) { browsers.push('CustomChromeHeadless') }
 
   const reporters = ['mocha']
 
@@ -23,10 +30,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
       {
         type: 'lcov',
         dir: coverageDirectory,
-        subdir: function (browser) {
-          // normalization process to keep a consistent browser name
-          return browser.toLowerCase().split(/[ /-]/)[0]
-        }
+        subdir: '.'
       }
     ],
     check: coverageThreshold
@@ -73,7 +77,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
       concurrency: 2,
 
       customLaunchers: {
-        chrome_without_security: {
+        CustomChrome: {
           base: 'Chrome',
           flags: [
             '--no-default-browser-check',
@@ -81,6 +85,15 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
             '--disable-default-apps',
             '--disable-popup-blocking',
             '--disable-translate',
+            '--no-sandbox'
+          ]
+        },
+        CustomChromeHeadless: {
+          base: 'ChromeHeadless',
+          flags: [
+            '--disable-gpu',
+            '--hide-scrollbar',
+            '--remote-debugging-port=9222',
             '--no-sandbox'
           ]
         }

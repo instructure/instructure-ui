@@ -3,36 +3,12 @@ FROM instructure/node:8
 USER root
 
 # Add Chrome
-RUN apt-get update \
-  && apt-get install -y wget \
-  && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-  && echo "deb http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list
-
-# Add Firefox
-RUN add-apt-repository -y ppa:mozillateam/firefox-next
-
-# Install
-RUN apt-get update \
-  && apt-get install -y firefox google-chrome-stable xvfb
-
-ENV CHROME_BIN /usr/bin/google-chrome-stable
-ENV FIREFOX_BIN /usr/bin/firefox
-ENV DISPLAY :99
-
-# Add Xvfb init and daemon scripts
-COPY docker/xvfb-init /etc/init.d/xvfb
-RUN chmod a+x /etc/init.d/xvfb
-COPY docker/xvfb-wait /usr/bin/xvfb-wait
-RUN chmod a+x /usr/bin/xvfb-wait
-COPY docker/xvfb-daemon /usr/bin/xvfb-daemon
-RUN chmod a+x /usr/bin/xvfb-daemon
-
-RUN mkdir /var/xvfb
-RUN chown -R docker:docker /var/xvfb
-
-# Clean up
-RUN apt-get clean \
-  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN curl --silent "https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-key add - \
+ && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > "/etc/apt/sources.list.d/google.list" \
+ && apt-get update --quiet=2 \
+ && apt-get install --quiet=2 google-chrome-beta > /dev/null \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Add source and install dependencies
 RUN mkdir -p /usr/src/app/
