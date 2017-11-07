@@ -48,7 +48,8 @@ module.exports = {
       'moment'
     ],
     'instructure-ui': [
-      '../ui-themes/src',
+      '../ui-themes/src/canvas/base',
+      '../ui-themes/src/canvas/high-contrast',
       '../ui-core/src',
       '../ui-utils/src',
       '../ui-themeable/src'
