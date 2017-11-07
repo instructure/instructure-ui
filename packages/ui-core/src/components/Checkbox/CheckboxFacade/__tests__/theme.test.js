@@ -11,8 +11,8 @@ describe('CheckboxFacade.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = CheckboxFacade.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = CheckboxFacade.generateTheme('canvas-high-contrast')
 
     it('should ensure checkbox meets 4.5:1 contrast', () => {
       expect(contrast(variables.color, variables.checkedBackground))

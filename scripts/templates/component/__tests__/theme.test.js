@@ -11,7 +11,7 @@ describe('${COMPONENT}.theme', () => {
     })
   })
 
-  describe('with the accessible canvas theme', () => {
+  describe('with the high contrast canvas theme', () => {
     const variables = ${COMPONENT}.generateTheme('canvas-high-contrast')
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {

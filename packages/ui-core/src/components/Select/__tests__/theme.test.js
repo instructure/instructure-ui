@@ -18,8 +18,8 @@ describe('Select.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = Select.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = Select.generateTheme('canvas-high-contrast')
     it('should ensure font color 4.5:1 contrast with background', () => {
       expect(contrast(variables.color, variables.background))
         .to.be.above(4.5)

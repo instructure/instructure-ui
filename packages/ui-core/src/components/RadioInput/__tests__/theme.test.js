@@ -23,8 +23,8 @@ describe('RadioInput.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = RadioInput.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = RadioInput.generateTheme('canvas-high-contrast')
 
     it('should ensure toggle text meets 4.5:1 contrast with success-state background', () => {
       expect(contrast(variables.toggleBackgroundSuccess, variables.toggleHandleText))

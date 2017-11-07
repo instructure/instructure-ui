@@ -43,7 +43,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
   }
 }
 
-generator['canvas-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     toggleBackgroundOff: colors.oxford
   }

@@ -13,8 +13,8 @@ describe('Alert.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = Alert.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = Alert.generateTheme('canvas-high-contrast')
 
     describe('default', () => {
       it('should ensure text color and background color meet 3:1 contrast', () => {

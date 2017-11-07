@@ -24,8 +24,8 @@ describe('Tab.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = Tab.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = Tab.generateTheme('canvas-high-contrast')
 
     describe('simple variant', () => {
       it('should ensure text and tab background meet 4.5:1 contrast', () => {

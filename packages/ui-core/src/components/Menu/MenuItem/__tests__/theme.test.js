@@ -19,8 +19,8 @@ describe('MenuItem.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = MenuItem.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = MenuItem.generateTheme('canvas-high-contrast')
 
     it('should ensure label color and icon color meet 4.5:1 contrast with background', () => {
       expect(contrast(variables.background, variables.labelColor))

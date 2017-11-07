@@ -17,8 +17,8 @@ describe('Badge.theme', () => {
     })
   })
 
-  describe('with the accessible canvas theme', () => {
-    const variables = Badge.generateTheme('canvas-a11y')
+  describe('with the high contrast canvas theme', () => {
+    const variables = Badge.generateTheme('canvas-high-contrast')
 
     it('should have a default background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.colorPrimary, variables.color)).to.be.above(4.5)

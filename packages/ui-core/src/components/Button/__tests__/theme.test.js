@@ -51,8 +51,8 @@ describe('Button.theme', () => {
     })
   })
 
-  describe('with the "canvas-a11y" theme', () => {
-    const variables = Button.generateTheme('canvas-a11y')
+  describe('with the "canvas-high-contrast" theme', () => {
+    const variables = Button.generateTheme('canvas-high-contrast')
 
     describe('default', () => {
       it('should have a background and text colors that meet 4.5:1 contrast', () => {

@@ -18,8 +18,8 @@ describe('TextInput.theme', () => {
     })
   })
 
-  describe('with the accessible canvas theme', () => {
-    const variables = TextInput.generateTheme('canvas-a11y')
+  describe('with the high contrast canvas theme', () => {
+    const variables = TextInput.generateTheme('canvas-high-contrast')
 
     describe('default', () => {
       it('should ensure focus color and background color meet 4.5:1 contrast', () => {

@@ -153,7 +153,7 @@ generator['canvas'] = function (variables) {
   }
 }
 
-generator['canvas-a11y'] = function ({ colors }) {
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     linkTextDecoration: 'underline',
     linkFocusBorderColor: colors.brand

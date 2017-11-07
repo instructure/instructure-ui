@@ -16,7 +16,7 @@ describe('AutocompleteField.theme', () => {
   })
 
   describe('with the accessible canvas theme', () => {
-    const variables = AutocompleteOptionsList.generateTheme('canvas-a11y')
+    const variables = AutocompleteOptionsList.generateTheme('canvas-high-contrast')
 
     it('should have a highlightedBackground and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.highlightedBackground, variables.activeLabelColor)).to.be.above(4.5)

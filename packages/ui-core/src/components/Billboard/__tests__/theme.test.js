@@ -12,8 +12,8 @@ describe('Billboard.theme', () => {
     })
   })
 
-  describe('with the accessible canvas theme', () => {
-    const variables = Billboard.generateTheme('canvas-a11y')
+  describe('with the high contrast canvas theme', () => {
+    const variables = Billboard.generateTheme('canvas-high-contrast')
 
     it('should have message text color that meets 4.5:1 contrast with the background color', () => {
       expect(contrast(variables.messageColor, variables.backgroundColor)).to.be.above(4.5)
