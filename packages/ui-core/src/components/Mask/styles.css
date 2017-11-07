@@ -6,8 +6,6 @@
   left: 0;
   right: 0;
   bottom: 0;
-  width: 100%;
-  height: 100%;
   overflow: auto;
 
   display: flex;
@@ -26,7 +24,6 @@
 
 .fullScreen {
   position: fixed;
-  width: 100vw;
 }
 
 .top {
