@@ -1,10 +1,11 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import shortid from 'shortid'
+
 import themeable from '@instructure/ui-themeable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import Container from '../Container'
 
@@ -199,7 +200,7 @@ class Badge extends Component {
 
   constructor (props) {
     super(props)
-    this._defaultId = `Badge__${shortid.generate()}`
+    this._defaultId = `Badge__${uid()}`
   }
 
   countOverflow () {

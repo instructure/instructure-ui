@@ -2,7 +2,6 @@ import React, { Component, createElement } from 'react'
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames'
-import shortid from 'shortid'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
@@ -10,6 +9,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import warning from '@instructure/ui-utils/lib/warning'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import Container from '../Container'
 import Tab from './Tab'
@@ -208,7 +208,7 @@ export default class TabList extends Component {
     let diff = ids.length - this.tabs.length
 
     while (diff++ < 0) {
-      ids.push(shortid.generate())
+      ids.push(uid())
     }
 
     this._tabIds = ids

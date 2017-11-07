@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom'
 
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import shortid from 'shortid'
 import keycode from 'keycode'
 
 import IconCompleteSolid from 'instructure-icons/lib/Solid/IconCompleteSolid'
@@ -14,6 +13,7 @@ import themeable from '@instructure/ui-themeable'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import warning from '@instructure/ui-utils/lib/warning'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import Container from '../Container'
 import CloseButton from '../CloseButton'
@@ -316,7 +316,7 @@ export default class Alert extends Component {
   createScreenreaderAlert () {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      this.srid = shortid.generate()
+      this.srid = uid()
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 import classnames from 'classnames'
 
 import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
 import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import uid from '@instructure/ui-utils/lib/uid'
 import themeable from '@instructure/ui-themeable'
 
 import Button from '../Button'
@@ -200,7 +200,7 @@ class ToggleDetails extends Component {
       expanded: this.isControlled(props) ? props.expanded : !!props.defaultExpanded
     }
 
-    this._contentId = `ToggleDetails__${shortid.generate()}`
+    this._contentId = `ToggleDetails__${uid()}`
   }
 
   shouldAnimateContent = false

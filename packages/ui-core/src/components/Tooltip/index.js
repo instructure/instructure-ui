@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import shortid from 'shortid'
 
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 import ScreenReaderContent from '../ScreenReaderContent'
@@ -78,7 +78,7 @@ export default class Tooltip extends Component {
   constructor (props) {
     super()
 
-    this._id = `Tooltip__${shortid.generate()}`
+    this._id = `Tooltip__${uid()}`
   }
 
   renderTrigger () {

@@ -41,8 +41,7 @@
     "keycode": "^2.1.8",
     "no-scroll": "^2.1.0",
     "numeral": "^2.0.6",
-    "prop-types": "^15.5.10",
-    "shortid": "^2.2.8"
+    "prop-types": "^15.5.10"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.1",
