@@ -13,14 +13,11 @@
   "scripts": {
     "prestart": "yarn build",
     "start": "http-server __build__ -p 8001",
-    "start:watch": "cross-env NODE_ENV=development DEBUG=1 webpack-dev-server",
-    "build": "cross-env NODE_ENV=production webpack",
-    "build:dev": "cross-env NODE_ENV=development DEBUG=1 webpack",
-    "test": "cross-env NODE_ENV=test yarn lint",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
-    "clean": "rimraf __build__ .babel-cache",
-    "bump": "git fetch origin --tags --force && lerna publish --skip-git --skip-npm --conventional-commits",
+    "start:watch": "ui-build --bundle --watch",
+    "build": "ui-build --bundle",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
     "deploy": "touch __build__/.nojekyll && gh-pages -d __build__ -r git@github.com:instructure/instructure-ui.git"
   },
   "license": "MIT",
@@ -31,14 +28,13 @@
     "@instructure/ui-polyfill-loader": "^4.0.0",
     "@instructure/ui-presets": "^4.0.0",
     "@instructure/ui-themes": "^4.0.0",
-    "gh-pages": "1.0.0",
-    "http-server": "0.10.0",
-    "instructure-icons": "4.3.1",
+    "gh-pages": "^1.0.0",
+    "http-server": "^0.10.0",
+    "instructure-icons": "^4.3.2",
     "moment": "^2.10.6",
     "lorem-ipsum": "^1.0.4",
-    "react": "15.6.1",
-    "react-dom": "15.6.1",
-    "webpack": "2.2.1",
-    "webpack-dev-server": "2.6.1"
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "webpack": "^3.8.1"
   }
 }

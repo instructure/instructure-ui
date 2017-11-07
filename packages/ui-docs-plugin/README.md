@@ -193,8 +193,6 @@ readOnly: true
 
 From the root of the `instructure-ui` repo:
 
-1. Run `yarn`
-1. Run `yarn build:dev`
+1. Run `yarn build:watch`
 1. Run `yarn start:watch`
 1. Open [http://localhost:8080](http://localhost:8080) in your browser
-1. You'll need to run `yarn build:dev --scope @instructure/ui-docs-plugin` when you make changes.

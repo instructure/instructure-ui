@@ -1,4 +1,4 @@
-FROM instructure/core
+FROM instructure/node:8
 
 USER root
 

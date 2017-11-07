@@ -13,12 +13,12 @@
   "scripts": {
     "test": "npm-run-all lint test:jest",
     "test:jest": "jest",
-    "lint": "eslint lib",
-    "lint:fix": "eslint lib --fix"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "^20.0.4"
+    "jest": "21.2.1"
   },
   "dependencies": {
     "jscodeshift": "^0.3.32"
