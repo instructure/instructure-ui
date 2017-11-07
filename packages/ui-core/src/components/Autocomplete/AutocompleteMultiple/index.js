@@ -133,6 +133,10 @@ class AutocompleteMultiple extends Component {
     return this.state.selectedOption.map(selected => selected && selected.value)
   }
 
+  get isControlled () {
+    return !!this.props.selectedOption
+  }
+
   focus = () => {
     this._input && this._input.focus()
   }
@@ -250,29 +254,37 @@ class AutocompleteMultiple extends Component {
   handleSelect = (event, newOption) => {
     this.cleanInput()
 
-    const selectedOption = [...this.state.selectedOption, newOption]
+    const newSelectedOption = [...this.state.selectedOption, newOption]
 
-    this.setState((prevState, props) => ({
-      filterText: '',
-      filteredOptions: this.getFilteredOptions(props, '', selectedOption),
-      selectedOption
-    }), this.focus)
+    this.setState((prevState, props) => {
+      const selectedOption = this.isControlled ? prevState.selectedOption : newSelectedOption
 
-    this.props.onChange(event, selectedOption)
+      return {
+        filterText: '',
+        filteredOptions: this.getFilteredOptions(props, '', selectedOption),
+        selectedOption
+      }
+    }, this.focus)
+
+    this.props.onChange(event, newSelectedOption)
   }
 
   dismiss = (event, tag) => {
     event.preventDefault() // to prevent expanding the menu onClick
 
     const tagId = getOptionId(tag)
-    const selectedOption = this.state.selectedOption.filter((o) => getOptionId(o) !== tagId)
+    const newSelectedOption = this.state.selectedOption.filter((o) => getOptionId(o) !== tagId)
 
-    this.setState(({ filterText }, props) => ({
-      filteredOptions: this.getFilteredOptions(props, filterText, selectedOption),
-      selectedOption
-    }), this.focus)
+    this.setState((prevState, props) => {
+      const selectedOption = this.isControlled ? prevState.selectedOption : newSelectedOption
 
-    this.props.onChange(event, selectedOption)
+      return {
+        filteredOptions: this.getFilteredOptions(props, prevState.filterText, selectedOption),
+        selectedOption
+      }
+    }, this.focus)
+
+    this.props.onChange(event, newSelectedOption)
   }
 
   handleInputRef = (node, ...args) => {
