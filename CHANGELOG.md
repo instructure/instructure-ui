@@ -62,7 +62,7 @@ should help with that, and you can see what paths have changed in the `ui-core/c
 
 ### Documentation
 
-The @instructure/ui-docs-plugin module has gotten an overhaul and now supports
+The [@instructure/ui-docs-plugin](#ui-docs-plugin) module has gotten an overhaul and now supports
 [JSDoc](http://usejsdoc.org/) and generates documentation from any file format that
 supports JS style code blocks, in addition to markdown.
 

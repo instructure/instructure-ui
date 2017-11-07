@@ -31,7 +31,7 @@ module.exports = {
     path.resolve(projectRoot, 'packages/ui-themeable/src/**/*.js'),
     path.resolve(projectRoot, 'packages/ui-utils/src/**/*.js'),
     path.resolve(projectRoot, 'packages/*/README.md'),
-    path.resolve(projectRoot, 'packages/*/docs/**/*.md')
+    path.resolve(projectRoot, 'docs/**/*.md')
   ],
   ignore: [
     path.resolve(projectRoot, '**/node_modules/**'),
