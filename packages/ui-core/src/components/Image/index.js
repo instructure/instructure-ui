@@ -22,14 +22,14 @@ category: components
   ```
 
   ### inline and margin
-  Use the `margin` prop to add space around `<Image/>`. Adding `inline={false}` makes
+  Use the `margin` prop to add space around `<Image/>`. Adding `display="block"` makes
   the image a block-level element
 
   ```jsx_example
   <div>
-    <Image margin="0 medium 0 0" alt="A placeholder image" src={placeholderImage(300, 200)} />
-    <Image margin="0 0 0 medium" src={placeholderImage(200, 200)} />
-    <Image inline={false} margin="medium 0 0" src={placeholderImage(400, 200)} />
+    <Image margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
+    <Image margin="small" src={placeholderImage(200, 200)} />
+    <Image display="block" margin="medium" src={placeholderImage(400, 200)} />
   </div>
   ```
 
