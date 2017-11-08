@@ -143,7 +143,8 @@ class Position extends Component {
 
     const { style, placement, positioned } = this.state
 
-    if (placement !== prevState.placement || style.top !== prevState.style.top || style.left !== prevState.style.left) {
+    if (style && prevState.style && (placement !== prevState.placement || style.top !== prevState.style.top ||
+        style.left !== prevState.style.left)) {
       this.props.onPositionChanged({
         top: style.top,
         left: style.left,
