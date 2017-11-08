@@ -1,4 +1,4 @@
-FROM instructure/node:8
+FROM instructure/node:8.6
 
 EXPOSE 8080
 
