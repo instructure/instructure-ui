@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.2"></a>
+# [3.3.2](https://github.com/instructure/instructure-ui/compare/v3.3.1...v3.3.2) (2017-11-08)
+
+
+### Bug Fixes
+
+* **DateInput:** fix controlled component version in 3.3.1 ([4723202](https://github.com/instructure/instructure-ui/commit/4723202))
+* **FileDrop:** allow extensions without leading dot ([3ed3f3e](https://github.com/instructure/instructure-ui/commit/3ed3f3e))
+* **Grid:** GridCol with width="auto" should not shrink ([048a5a3](https://github.com/instructure/instructure-ui/commit/048a5a3))
+* **Tooltip:** Move focus on single tab press with tooltip ([08d7d68](https://github.com/instructure/instructure-ui/commit/08d7d68))
+
+
+### Features
+
+* **DateInput:** Add conversion status as part of onDateChange ([2bce9a4](https://github.com/instructure/instructure-ui/commit/2bce9a4))
+* **Tag:** inline variant ([af84ca0](https://github.com/instructure/instructure-ui/commit/af84ca0))
+
+
+
 <a name="3.3.1"></a>
 ## [3.3.1](https://github.com/instructure/instructure-ui/compare/v3.3.0...v3.3.1) (2017-09-11)
 
