@@ -11,12 +11,20 @@ const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 const debug = Boolean(process.env.DEBUG)
 const withCoverage = Boolean(process.env.COVERAGE)
 
-process.env.CHROME_BIN = revisionInfo.executablePath
+if (!debug) {
+  process.env.CHROME_BIN = revisionInfo.executablePath
+}
 
 module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
   const browsers = []
 
-  if (!noLaunchers) { browsers.push('CustomChromeHeadless') }
+  if (!noLaunchers) {
+    if (debug) {
+      browsers.push('CustomChrome')
+    } else {
+      browsers.push('CustomChromeHeadless')
+    }
+  }
 
   const reporters = ['mocha']
 
