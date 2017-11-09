@@ -12,7 +12,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     background: colors.white,
 
     highlightedBackground: colors.brand,
-    activeBackground: darken(colors.brand, 10),
+    activeBackground: colors.ash,
     activeLabelColor: colors.white,
 
     padding: `${spacing.xSmall} ${spacing.small}`,
@@ -26,7 +26,6 @@ export default function generator ({ colors, typography, borders, spacing, stack
 generator.canvas = function (variables) {
   return {
     labelColor: variables['ic-brand-font-color-dark'],
-    activeBackground: darken(variables['ic-brand-primary'], 10),
     highlightedBackground: variables['ic-brand-primary']
   }
 }
