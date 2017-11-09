@@ -116,8 +116,7 @@ export default class DateInput extends Component {
     this.state = Object.assign(
       {
         showPopover: false,
-        messages: [],
-        hasInputRef: false
+        messages: []
       },
       this.computeDateRelatedStateValues(props)
     )
@@ -161,12 +160,6 @@ export default class DateInput extends Component {
   handleInputRef = node => {
     this._input = node
     this.props.inputRef(node)
-
-    // Once we get the input ref, we need to trigger a rerender so
-    // it can be passed to the positionTarget element for Popover
-    if (!this.state.hasInputRef) {
-      this.setState({ hasInputRef: true })
-    }
   }
 
   handlePopoverToggle = showPopoverValue => {
@@ -215,6 +208,10 @@ export default class DateInput extends Component {
     }
   }
 
+  handleTextInputClick = e => {
+    this.setState({ showPopover: true })
+  }
+
   handleDatePickerChange = (e, newValue) => {
     const newDate = DateTime.parse(newValue, this.locale(this.props), this.timezone(this.props))
 
@@ -251,35 +248,35 @@ export default class DateInput extends Component {
     }
 
     return (
-      <Popover
-        on={['click']}
-        placement={this.props.placement}
-        show={this.state.showPopover}
-        onToggle={this.handlePopoverToggle}
-        positionTarget={this._input}
-      >
-        <PopoverTrigger>
-          <TextInput
-            {...textInputProps}
-            value={this.state.textInputValue}
-            messages={this.state.messages.concat(this.props.messages)}
-            onChange={this.handleTextInputChange}
-            onKeyDown={this.handleTextInputKeyDown}
-            inputRef={this.handleInputRef}
-          />
-        </PopoverTrigger>
-        <PopoverContent>
-          <DatePicker
-            previousLabel={this.props.previousLabel}
-            nextLabel={this.props.nextLabel}
-            selectedValue={datePickerMoment.format()}
-            locale={this.locale(this.props)}
-            timezone={this.timezone(this.props)}
-            onSelectedChange={this.handleDatePickerChange}
-            ref={this.props.datePickerRef}
-          />
-        </PopoverContent>
-      </Popover>
+      <span>
+        <TextInput
+          {...textInputProps}
+          value={this.state.textInputValue}
+          messages={this.state.messages.concat(this.props.messages)}
+          onChange={this.handleTextInputChange}
+          onKeyDown={this.handleTextInputKeyDown}
+          onClick={this.handleTextInputClick}
+          inputRef={this.handleInputRef}
+        />
+        <Popover
+          placement={this.props.placement}
+          show={this.state.showPopover}
+          onToggle={this.handlePopoverToggle}
+          positionTarget={this._input}
+        >
+          <PopoverContent>
+            <DatePicker
+              previousLabel={this.props.previousLabel}
+              nextLabel={this.props.nextLabel}
+              selectedValue={datePickerMoment.format()}
+              locale={this.locale(this.props)}
+              timezone={this.timezone(this.props)}
+              onSelectedChange={this.handleDatePickerChange}
+              ref={this.props.datePickerRef}
+            />
+          </PopoverContent>
+        </Popover>
+      </span>
     )
   }
 }
