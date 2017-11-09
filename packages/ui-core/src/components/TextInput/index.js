@@ -106,6 +106,11 @@ class TextInput extends Component {
     return this._input.value
   }
 
+  handleInputRef = node => {
+    this._input = node
+    this.props.inputRef(node)
+  }
+
   renderIcon () {
     const Icon = this.props.icon
 
@@ -157,10 +162,7 @@ class TextInput extends Component {
             style={style}
             defaultValue={defaultValue}
             placeholder={placeholder}
-            ref={(input, ...args) => {
-              this._input = input
-              inputRef.apply(this, [input].concat(args))
-            }}
+            ref={this.handleInputRef}
             type={type}
             id={this.id}
             required={required}
