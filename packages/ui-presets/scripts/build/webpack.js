@@ -5,7 +5,7 @@ let result
 
 if (process.argv.includes('--watch')) {
   result = runCommands({
-    webpack: getCommand(['NODE_ENV=development'], 'webpack-dev-server', [])
+    webpack: getCommand(['NODE_ENV=development', 'DEBUG=1'], 'webpack-dev-server', [])
   })
 } else {
   result = runCommands({
