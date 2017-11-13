@@ -59,7 +59,7 @@ export default class Spinner extends Component {
       case 'small':
         return '1em'
       case 'large':
-        return '2.5em'
+        return '2.25em'
       default:
         return '1.75em'
     }

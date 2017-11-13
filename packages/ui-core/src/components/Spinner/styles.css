@@ -121,7 +121,7 @@
   }
 
   .circleSpin {
-    stroke-dasharray: 10.5em;
+    stroke-dasharray: 14em;
     transform-origin: calc(var(--largeSize) / 2) calc(var(--largeSize) / 2);
   }
 }
