@@ -16,6 +16,7 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import transformSelection from '@instructure/ui-utils/lib/dom/transformSelection'
 import uid from '@instructure/ui-utils/lib/uid'
 
+import './locales/sv'
 import styles from './styles.css'
 import theme from './theme'
 
