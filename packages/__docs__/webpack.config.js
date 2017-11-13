@@ -91,15 +91,15 @@ module.exports = {
     common: [
       '../ui-polyfill-loader!',
       'react',
-      'react-dom',
-      'moment'
+      'react-dom'
     ],
     'instructure-ui': [
-      '../ui-core/src',
-      '../ui-utils/src',
-      '../ui-themeable/src'
+      '@instructure/ui-core',
+      '@instructure/ui-utils',
+      '@instructure/ui-themes',
+      '@instructure/ui-themeable'
     ],
-    globals: './globals'
+    globals: './globals' // for codepen
   },
   output: {
     path: outputPath,
@@ -115,6 +115,20 @@ module.exports = {
     rules: require('@instructure/ui-presets/webpack/module/rules')
   },
   plugins,
+  resolve: {
+    alias: {
+      // set up aliases to get webpack to rebuild when we make changes to these packages
+      '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
+      '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
+      '@instructure/ui-themes$': path.resolve(__dirname, '../ui-themes/src/'),
+      '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
+
+      '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
+      '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),
+      '@instructure/ui-themes/lib': path.resolve(__dirname, '../ui-themes/src'),
+      '@instructure/ui-themeable/lib': path.resolve(__dirname, '../ui-themeable/src')
+    }
+  },
   resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
   devtool: 'cheap-module-source-map'
 }

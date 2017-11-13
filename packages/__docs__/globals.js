@@ -7,11 +7,11 @@ import moment from 'moment'
 import 'moment/min/locales'
 import lorem from 'lorem-ipsum'
 
+import * as UICore from '@instructure/ui-core'
+
 import avatarImage from './placeholder-avatar.png'
 import iconExample from './heart_lg.svg'
 import placeholderImage from './placeholder-image'
-
-import * as UICore from '../ui-core/src'
 
 const globals = Object.assign({
   PlaceholderIcon: IconUserLine,
