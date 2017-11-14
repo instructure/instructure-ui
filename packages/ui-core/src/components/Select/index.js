@@ -27,7 +27,7 @@ class Select extends Component {
     /**
     * Children must be option tags.
     */
-    children: CustomPropTypes.Children.oneOf(['option']),
+    children: CustomPropTypes.Children.oneOf(['option', 'optgroup']),
     label: PropTypes.node.isRequired,
     disabled: PropTypes.bool,
     /**
