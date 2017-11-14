@@ -218,9 +218,8 @@ class Checkbox extends Component {
     /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
     return (
-      <label
+      <div
         className={classnames(classes)}
-        htmlFor={this.id}
         onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
         onMouseOut={createChainedFunction(onMouseOut, this.handleMouseOut)}
       >
@@ -239,9 +238,11 @@ class Checkbox extends Component {
           onBlur={createChainedFunction(onBlur, this.handleBlur)}
           checked={this.checked}
         />
-        { this.renderFacade() }
-        <FormFieldMessages messages={messages} />
-      </label>
+        <label htmlFor={this.id} className={styles.control}>
+          { this.renderFacade() }
+          <FormFieldMessages messages={messages} />
+        </label>
+      </div>
     )
 
      /* eslint-enable jsx-a11y/mouse-events-have-key-events */

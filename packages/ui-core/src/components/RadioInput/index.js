@@ -124,10 +124,7 @@ class RadioInput extends Component {
     }
 
     return (
-      <label
-        className={classnames(classes)}
-        htmlFor={this.id}
-      >
+      <div className={classnames(classes)}>
         <input
           {...props}
           id={this.id}
@@ -142,13 +139,13 @@ class RadioInput extends Component {
           onChange={this.handleChange}
           onClick={this.handleClick}
         />
-        <span className={styles.control}>
+        <label className={styles.control} htmlFor={this.id}>
           <span className={styles.facade} aria-hidden="true" />
           <span className={styles.label}>
             {label}
           </span>
-        </span>
-      </label>
+        </label>
+      </div>
     )
   }
 }
