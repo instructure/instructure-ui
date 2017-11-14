@@ -1,14 +1,17 @@
 .root {
-  all: initial;
   position: relative;
-  display: block;
   width: 100%;
-  direction: inherit;
-  text-align: start;
 
   &:hover {
     cursor: default;
   }
+}
+
+.control {
+  all: initial;
+  display: block;
+  direction: inherit;
+  text-align: start;
 }
 
 /* stylelint-disable selector-max-type */
