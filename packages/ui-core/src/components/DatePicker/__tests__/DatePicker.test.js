@@ -81,48 +81,48 @@ describe('<DatePicker />', () => {
 
   it('gets locale and timezone from context', () => {
     const subject = testbed.render({}, {locale: 'fr', timezone: 'Europe/Paris'})
-    expect(subject.instance().locale()).to.equal('fr')
-    expect(subject.instance().timezone()).to.equal('Europe/Paris')
+    expect(subject.instance().locale).to.equal('fr')
+    expect(subject.instance().timezone).to.equal('Europe/Paris')
   })
 
   it('overrides locale and timezone context with properties', () => {
     const subject = testbed.render({locale: 'ja', timezone: 'Asia/Tokyo'}, {locale: 'fr', timezone: 'Europe/Paris'})
-    expect(subject.instance().locale()).to.equal('ja')
-    expect(subject.instance().timezone()).to.equal('Asia/Tokyo')
+    expect(subject.instance().locale).to.equal('ja')
+    expect(subject.instance().timezone).to.equal('Asia/Tokyo')
   })
 
   it('defaults the selected value to the today value', () => {
     const subject = testbed.render({todayValue: '2017-04-01'})
-    expect(subject.instance().selectedValue()).to.equal('2017-04-01')
+    expect(subject.instance().selectedValue).to.equal('2017-04-01')
   })
 
   it('defaults the rendered value to the selected value', () => {
     const subject = testbed.render({todayValue: '2017-04-01', defaultSelectedValue: '2017-05-01'})
-    expect(subject.instance().renderedValue()).to.equal('2017-05-01')
+    expect(subject.instance().renderedValue).to.equal('2017-05-01')
   })
 
   it('should focus next day on key right', () => {
     const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
-    expect(subject.instance().focusedValue()).to.equal('2017-05-02T00:00:00+02:00')
+    expect(subject.instance().focusedValue).to.equal('2017-05-02T00:00:00+02:00')
   })
 
   it('should focus previous day on key left', () => {
     const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(subject.instance().focusedValue()).to.equal('2017-04-30T00:00:00+02:00')
+    expect(subject.instance().focusedValue).to.equal('2017-04-30T00:00:00+02:00')
   })
 
   it('should focus next week on key down', () => {
     const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.down })
-    expect(subject.instance().focusedValue()).to.equal('2017-05-08T00:00:00+02:00')
+    expect(subject.instance().focusedValue).to.equal('2017-05-08T00:00:00+02:00')
   })
 
   it('should focus previous week on key up', () => {
     const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.up })
-    expect(subject.instance().focusedValue()).to.equal('2017-04-24T00:00:00+02:00')
+    expect(subject.instance().focusedValue).to.equal('2017-04-24T00:00:00+02:00')
   })
 
   it('should move slider to a different month when focus moves out of month', () => {
