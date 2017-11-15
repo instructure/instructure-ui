@@ -17,6 +17,7 @@ module.exports = {
     'instructure-ui': [
       '@instructure/ui-container',
       '@instructure/ui-core',
+      '@instructure/ui-forms',
       '@instructure/ui-portal',
       '@instructure/ui-svg-images',
       '@instructure/ui-themes',
@@ -44,6 +45,7 @@ module.exports = {
       // set up aliases to get webpack to rebuild when we make changes to these packages
       '@instructure/ui-container$': path.resolve(__dirname, '../ui-container/src/'),
       '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
+      '@instructure/ui-forms$': path.resolve(__dirname, '../ui-forms/src/'),
       '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
       '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
       '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
@@ -52,6 +54,7 @@ module.exports = {
 
       '@instructure/ui-container/lib': path.resolve(__dirname, '../ui-container/src'),
       '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
+      '@instructure/ui-forms/lib': path.resolve(__dirname, '../ui-forms/src'),
       '@instructure/ui-portal/lib': path.resolve(__dirname, '../ui-portal/src'),
       '@instructure/ui-svg-images/lib': path.resolve(__dirname, '../ui-svg-images/src'),
       '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),

@@ -1,10 +1,10 @@
 import React from 'react'
-import AutocompleteOptionsList from '../index'
+import SelectOptionsList from '../index'
 import styles from '../styles.css'
 
-describe('<AutocompleteOptionsList />', () => {
+describe('<SelectOptionsList />', () => {
   const testbed = new Testbed(
-    <AutocompleteOptionsList
+    <SelectOptionsList
       options={[
         {
           label: 'Alabama',
@@ -83,5 +83,36 @@ describe('<AutocompleteOptionsList />', () => {
 
     empty.simulate('click')
     expect(onStaticClick).to.have.been.called
+  })
+
+  it('should not allow disabled options to be selected', () => {
+    const onSelect = testbed.stub()
+    const subject = testbed.render({
+      options: [
+        {
+          label: 'Alabama',
+          value: '0',
+          id: '0',
+          children: 'Alabama',
+          disabled: true
+        },
+        {
+          label: 'Alaska',
+          value: '1',
+          id: '1',
+          children: 'Alaska'
+        },
+        {
+          label: 'America',
+          value: '2',
+          id: '2',
+          children: 'America'
+        }
+      ],
+      onSelect
+    })
+
+    subject.find('li').first().simulate('click')
+    expect(onSelect).to.not.have.been.called
   })
 })

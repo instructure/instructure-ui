@@ -6,6 +6,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
+    groupFontWeight: typography.fontWeightBold,
     lineHeight: typography.lineHeightCondensed,
 
     labelColor: colors.oxford,
@@ -16,6 +17,8 @@ export default function generator ({ colors, typography, borders, spacing, stack
     activeLabelColor: colors.white,
 
     padding: `${spacing.xSmall} ${spacing.small}`,
+    iconPaddingEnd: spacing.small,
+    groupPadding: spacing.medium,
 
     smallFontSize: typography.fontSizeSmall,
     mediumFontSize: typography.fontSizeMedium,

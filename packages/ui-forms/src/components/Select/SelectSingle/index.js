@@ -6,7 +6,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import warning from '@instructure/ui-utils/lib/warning'
 
-import AutocompleteField from '../AutocompleteField'
+import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
 
 const optionType = PropTypes.shape({
@@ -18,10 +18,10 @@ const optionType = PropTypes.shape({
 
 /**
 ---
-parent: Autocomplete
+parent: Select
 ---
 **/
-class AutocompleteSingle extends Component {
+class SelectSingle extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
@@ -53,7 +53,7 @@ class AutocompleteSingle extends Component {
     */
     editable: PropTypes.bool,
     /**
-    * for non-multiple Autocomplete, allows the user to empty selection
+    * for non-multiple Select, allows the user to empty selection
     */
     allowEmpty: PropTypes.bool,
     /**
@@ -118,7 +118,7 @@ class AutocompleteSingle extends Component {
     if (typeof selectedOption === 'string') {
       const foundOption = this.props.options.find((o) => getOptionId(o) === selectedOption)
 
-      warning(foundOption, '[Autocomplete] The selectedOption is a string but doesn\'t correspond to an option')
+      warning(foundOption, '[Select] The selectedOption is a string but doesn\'t correspond to an option')
 
       return foundOption
     }
@@ -232,8 +232,8 @@ class AutocompleteSingle extends Component {
 
   render () {
     return (
-      <AutocompleteField
-        {...omitProps(this.props, AutocompleteSingle.propTypes)}
+      <SelectField
+        {...omitProps(this.props, SelectSingle.propTypes)}
         editable={this.props.editable}
         inputRef={this.handleInputRef}
         options={this.state.filteredOptions}
@@ -249,4 +249,4 @@ class AutocompleteSingle extends Component {
   }
 }
 
-export default AutocompleteSingle
+export default SelectSingle

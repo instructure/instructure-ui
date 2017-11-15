@@ -9,8 +9,8 @@ import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveE
 import warning from '@instructure/ui-utils/lib/warning'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
-import Tag from '../../Tag'
-import AutocompleteField from '../AutocompleteField'
+import Tag from '@instructure/ui-core/lib/components/Tag'
+import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
 
 import styles from './styles.css'
@@ -25,11 +25,11 @@ const optionType = PropTypes.shape({
 
 /**
 ---
-parent: Autocomplete
+parent: Select
 ---
 **/
 @themeable(theme, styles)
-class AutocompleteMultiple extends Component {
+class SelectMultiple extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
@@ -61,6 +61,10 @@ class AutocompleteMultiple extends Component {
     */
     editable: PropTypes.bool,
     /**
+     * Optional name for the FormField
+     */
+    name: PropTypes.string,
+    /**
      * The size used for input and menu options
      */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
@@ -76,6 +80,10 @@ class AutocompleteMultiple extends Component {
      * The format function called for each Tag to render its contents
      */
     formatSelectedOption: PropTypes.func,
+    /**
+    * Whether or not to disable the input and tags
+    */
+    disabled: PropTypes.bool,
     /**
      * Callback fired when the menu is closed
      */
@@ -154,7 +162,7 @@ class AutocompleteMultiple extends Component {
         const foundOption = options.find((o) => getOptionId(o) === option)
         warning(
           foundOption,
-          `[Autocomplete] The option (${option}) doesn't correspond to an option's id or (in case of no id) value`
+          `[Select] The option (${option}) doesn't correspond to an option's id or (in case of no id) value`
         )
 
         return foundOption
@@ -302,19 +310,34 @@ class AutocompleteMultiple extends Component {
         size={this.props.size}
         onClick={(event) => this.dismiss(event, tag)} // eslint-disable-line react/jsx-no-bind
         dismissible
+        disabled={this.props.disabled}
       />
     ))
   }
 
+  renderInputs () {
+    return this.state.selectedOption.map((tag, index) => {
+      return (
+        <input
+          type="hidden"
+          key={tag.label}
+          name={this.props.name}
+          value={tag.value}
+        />
+      )
+    })
+  }
+
   render () {
     return (
-      <AutocompleteField
-        {...omitProps(this.props, AutocompleteMultiple.propTypes)}
+      <SelectField
+        {...omitProps(this.props, SelectMultiple.propTypes)}
         ref={(el) => { this._field = el }}
         inputRef={this.handleInputRef}
         editable={this.props.editable}
         options={this.state.filteredOptions}
         size={this.props.size}
+        disabled={this.props.disabled}
         onSelect={this.handleSelect}
         onStaticClick={this.focus}
         onClose={this.handleClose}
@@ -324,9 +347,10 @@ class AutocompleteMultiple extends Component {
         closeOnSelect={this.props.closeOnSelect}
       >
         {this.renderTags()}
-      </AutocompleteField>
+        {this.renderInputs()}
+      </SelectField>
     )
   }
 }
 
-export default AutocompleteMultiple
+export default SelectMultiple

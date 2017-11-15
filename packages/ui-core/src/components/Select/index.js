@@ -9,17 +9,17 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 import uid from '@instructure/ui-utils/lib/uid'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 import FormField from '../FormField'
 
 import styles from './styles.css'
 import theme from './theme'
 
-/**
----
-category: components/forms
----
-**/
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-forms'
+))
 @themeable(theme, styles)
 class Select extends Component {
   /* eslint-disable react/require-default-props */

@@ -1,22 +1,24 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import deepEqual from 'deep-equal'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
-import SelectSingle from '../../../../ui-forms/lib/components/Select/SelectSingle'
-import SelectMultiple from '../../../../ui-forms/lib/components/Select/SelectMultiple'
+import SelectSingle from './SelectSingle'
+import SelectMultiple from './SelectMultiple'
 import parseOptions from './utils/parseOptions'
 
-@deprecated('5.0.0', null, 'Use @instructure/ui-forms/src/components/Select instead')
-
-class Autocomplete extends Component {
+/**
+---
+category: ui-forms
+---
+**/
+class Select extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * Determines wether Autocomplete allows multiple values
+     * Determines wether Select allows multiple values
      */
     multiple: PropTypes.bool,
     /**
@@ -26,11 +28,12 @@ class Autocomplete extends Component {
     /**
     * Each children must be an option element.
     */
-    children: CustomPropTypes.Children.oneOf(['option']),
+    children: CustomPropTypes.Children.oneOf(['option', 'optgroup']),
     /**
     * a function that provides a reference to the internal input element
     */
     inputRef: PropTypes.func,
+    value: PropTypes.string,
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
@@ -41,7 +44,10 @@ class Autocomplete extends Component {
           label: PropTypes.string.isRequired,
           value: PropTypes.string.isRequired,
           id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-          children: PropTypes.node
+          children: PropTypes.node,
+          disabled: PropTypes.bool,
+          icon: PropTypes.func,
+          groupLabel: PropTypes.bool
         }),
         PropTypes.arrayOf(
           PropTypes.oneOfType([
@@ -50,7 +56,10 @@ class Autocomplete extends Component {
               label: PropTypes.string.isRequired,
               value: PropTypes.string.isRequired,
               id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-              children: PropTypes.node
+              children: PropTypes.node,
+              disabled: PropTypes.bool,
+              icon: PropTypes.func,
+              groupLabel: PropTypes.bool
             })
           ])
         )
@@ -67,7 +76,10 @@ class Autocomplete extends Component {
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        children: PropTypes.node
+        children: PropTypes.node,
+        disabled: PropTypes.bool,
+        icon: PropTypes.func,
+        groupLabel: PropTypes.bool
       }),
       PropTypes.arrayOf(
         PropTypes.oneOfType([
@@ -76,13 +88,16 @@ class Autocomplete extends Component {
             label: PropTypes.string.isRequired,
             value: PropTypes.string.isRequired,
             id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-            children: PropTypes.node
+            children: PropTypes.node,
+            disabled: PropTypes.bool,
+            icon: PropTypes.func,
+            groupLabel: PropTypes.bool
           })
         ])
       )
     ]),
     /**
-    * for not multiple Autocomplete, allows the user to empty selection
+    * for not multiple Select, allows the user to empty selection
     */
     allowEmpty: PropTypes.bool,
 
@@ -112,6 +127,10 @@ class Autocomplete extends Component {
      * The amount of options that are visible without scrolling
      */
     visibleOptionsCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * Custom text to be read by the screenreader when Select is focused
+     */
+    assistiveText: PropTypes.string,
     /**
      * The filter function applied to the options when writing on the input
      */
@@ -156,8 +175,8 @@ class Autocomplete extends Component {
   /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    editable: true,
-    allowEmpty: false,
+    editable: false,
+    allowEmpty: true,
     emptyOption: '---',
     selectedOption: null,
     size: 'medium',
@@ -211,6 +230,21 @@ class Autocomplete extends Component {
 
   render () {
     const Component = this.props.multiple ? SelectMultiple : SelectSingle
+    let defaultSelectedOption = this.props.defaultOption || this.props.value
+
+    // select first non-disabled option for standard select components
+    if (!this.props.editable &&
+        !this.props.multiple &&
+        typeof defaultSelectedOption === 'undefined'
+    ) {
+      for (let i = 0; this.state.options.length; i++) {
+        const option = this.state.options[i]
+        if (!option.disabled) {
+          defaultSelectedOption = option
+          break
+        }
+      }
+    }
 
     return (
       <Component
@@ -220,13 +254,12 @@ class Autocomplete extends Component {
           'defaultOption',
           !this.props.multiple ? 'formatSelectedOption' : ''
         ])}
-        editable
         options={this.state.options}
-        defaultSelectedOption={this.props.defaultOption}
+        defaultSelectedOption={defaultSelectedOption}
         closeOnSelect={this.props.closeOnSelect}
       />
     )
   }
 }
 
-export default Autocomplete
+export default Select

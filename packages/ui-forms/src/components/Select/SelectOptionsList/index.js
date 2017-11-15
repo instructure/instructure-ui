@@ -4,8 +4,8 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
-import ContextBox from '../../ContextBox'
-import Spinner from '../../Spinner'
+import ContextBox from '@instructure/ui-core/lib/components/ContextBox'
+import Spinner from '@instructure/ui-core/lib/components/Spinner'
 
 import getOptionId from '../utils/getOptionId'
 
@@ -14,11 +14,11 @@ import theme from './theme'
 
 /**
 ---
-parent: Autocomplete
+parent: Select
 ---
 **/
 @themeable(theme, styles)
-class AutocompleteOptionsList extends Component {
+class SelectOptionsList extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
@@ -30,7 +30,10 @@ class AutocompleteOptionsList extends Component {
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        children: PropTypes.node
+        children: PropTypes.node,
+        disabled: PropTypes.bool,
+        icon: PropTypes.func,
+        groupLabel: PropTypes.bool
       })
     ]),
     options: PropTypes.arrayOf(
@@ -38,7 +41,10 @@ class AutocompleteOptionsList extends Component {
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        children: PropTypes.node
+        children: PropTypes.node,
+        disabled: PropTypes.bool,
+        icon: PropTypes.func,
+        groupLabel: PropTypes.bool
       })
     ),
     /**
@@ -70,6 +76,8 @@ class AutocompleteOptionsList extends Component {
      * Callback fired on the option selection
      */
     onSelect: PropTypes.func,
+    onKeyDown: PropTypes.func,
+    onKeyUp: PropTypes.func,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * Options dropdown can be wider than input if maxWidth is provided
@@ -79,7 +87,9 @@ class AutocompleteOptionsList extends Component {
      * Callback fired when the empty option is selected by click
      */
     onStaticClick: PropTypes.func,
-    highlightedIndex: PropTypes.number
+    onBlur: PropTypes.func,
+    highlightedIndex: PropTypes.number,
+    expanded: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
@@ -91,6 +101,7 @@ class AutocompleteOptionsList extends Component {
     emptyOption: '---',
     size: 'medium',
     highlightedIndex: 0,
+    expanded: false,
     menuRef: el => {},
     onHighlightOption: event => {},
     onSelect: (event, selectedOption) => {},
@@ -110,9 +121,30 @@ class AutocompleteOptionsList extends Component {
         })}
         onClick={onStaticClick}
       >
-        {message}
+        <span className={styles.label}>
+          {message}
+        </span>
       </li>
     )
+  }
+
+  renderIcon (icon) {
+    if (typeof icon !== 'undefined' && icon !== null) {
+      const Icon = icon
+      return (
+        <span className={styles.icon}>
+          <Icon />
+        </span>
+      )
+    }
+  }
+
+  handleClick = (event, option) => {
+    if (option.disabled || option.groupLabel) {
+      event.preventDefault()
+      return
+    }
+    this.props.onSelect(event, option)
   }
 
   renderOptions () {
@@ -137,29 +169,34 @@ class AutocompleteOptionsList extends Component {
     }
 
     return options.map((option, index) => {
-      const { children, id } = option
+      const { children, id, disabled, icon, groupLabel, groupItem } = option
       const selected = getOptionId(selectedOption) === id
       const handlers = {
         onMouseEnter: () => onHighlightOption(index),
-        onClick: event => onSelect(event, option)
+        onClick: event => this.handleClick(event, option)
       }
-
       /* eslint-disable jsx-a11y/role-has-required-aria-props */
       return (
         <li
           {...handlers}
-          tabIndex="-1"
-          id={`${optionsId}_${id}`}
+          role="option"
           key={id}
+          id={`${optionsId}_${id}`}
           className={classnames(styles.option, {
             [styles.selected]: selected,
             [styles[size]]: size,
-            [styles.highlighted]: index === highlightedIndex
+            [styles.highlighted]: index === highlightedIndex,
+            [styles.disabled]: disabled || groupLabel,
+            [styles.groupLabel]: groupLabel,
+            [styles.groupItem]: groupItem
           })}
-          role="option"
-          aria-checked={selected ? 'true' : 'false'}
+          tabIndex="-1"
+          aria-selected={index === highlightedIndex ? 'true' : 'false'}
+          disabled={disabled || groupLabel}
+          aria-disabled={disabled || groupLabel ? 'true' : null}
         >
           <span className={styles.label}>
+            {icon && this.renderIcon(icon)}
             {children}
           </span>
         </li>
@@ -183,6 +220,10 @@ class AutocompleteOptionsList extends Component {
         <ul
           className={styles.optionsList}
           id={optionsId}
+          onKeyDown={this.props.onKeyDown}
+          onKeyUp={this.props.onKeyUp}
+          onBlur={this.props.onBlur}
+          tabIndex="-1"
           ref={el => {
             menuRef(el)
             if (el) {
@@ -192,7 +233,8 @@ class AutocompleteOptionsList extends Component {
           }}
           role="listbox"
           style={{
-            maxHeight: `${visibleOptionsCount * this.optionHeight}px`
+            maxHeight: `${visibleOptionsCount * this.optionHeight}px`,
+            display: this.props.expanded ? 'block' : 'none'
           }}
         >
           {this.renderOptions()}
@@ -202,4 +244,4 @@ class AutocompleteOptionsList extends Component {
   }
 }
 
-export default AutocompleteOptionsList
+export default SelectOptionsList

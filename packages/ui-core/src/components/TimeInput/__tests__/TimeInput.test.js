@@ -74,7 +74,7 @@ describe('<TimeInput />', () => {
       defaultToFirstOption: true
     })
 
-    expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').innerHTML)
+    expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').textContent)
   })
 
   it('renders using the specified step value', () => {
@@ -89,8 +89,8 @@ describe('<TimeInput />', () => {
     const optionTexts = document.querySelectorAll('li > span')
     const expctedFirstOptionText = value.hour(0).minute(0).format(subject.prop('format'))
     const expctedSecondOptionText = value.hour(0).minute(15).format(subject.prop('format'))
-    expect(optionTexts[0].innerHTML).to.be.eq(expctedFirstOptionText)
-    expect(optionTexts[1].innerHTML).to.be.eq(expctedSecondOptionText)
+    expect(optionTexts[0].textContent).to.be.eq(expctedFirstOptionText)
+    expect(optionTexts[1].textContent).to.be.eq(expctedSecondOptionText)
   })
 
   it('should meet a11y standards', (done) => {

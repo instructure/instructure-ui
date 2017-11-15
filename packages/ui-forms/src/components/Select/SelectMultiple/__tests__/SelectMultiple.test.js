@@ -1,9 +1,10 @@
-import React from 'react'
-import AutocompleteMultiple from '../index'
-import AutocompleteField from '../../AutocompleteField'
-import Tag from '../../../Tag'
+import Tag from '@instructure/ui-core/lib/components/Tag'
 
-describe('<AutocompleteMultiple />', () => {
+import React from 'react'
+import SelectMultiple from '../index'
+import SelectField from '../../SelectField'
+
+describe('<SelectMultiple />', () => {
   const preventDefault = () => {}
   const options = [{
     label: 'Aruba', children: 'Aruba', value: '0', id: '0'
@@ -21,7 +22,9 @@ describe('<AutocompleteMultiple />', () => {
   }
 
   const testbed = new Testbed(
-    <AutocompleteMultiple
+    <SelectMultiple
+      editable
+      multiple
       label="Choose a vacation destination"
       options={options}
       filter={filter}
@@ -36,7 +39,7 @@ describe('<AutocompleteMultiple />', () => {
   it('should focus the input when focus is called', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input[type="text"]').focused()).to.be.true
   })
 
   it('should provide an focused getter', () => {
@@ -48,7 +51,7 @@ describe('<AutocompleteMultiple />', () => {
   it('should provide an inputRef prop', () => {
     const inputRef = testbed.stub()
     const subject = testbed.render({ inputRef })
-    expect(inputRef).to.have.been.calledWith(subject.find('input').unwrap())
+    expect(inputRef).to.have.been.calledWith(subject.find('input[type="text"]').unwrap())
   })
 
   it('resets input value to empty when closing the menu with selectedOption', () => {
@@ -56,18 +59,18 @@ describe('<AutocompleteMultiple />', () => {
       selectedOption: ['1']
     })
     testbed.tick()
-    subject.find('input').simulate('click')
+    subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
   it('resets input value to empty when closing the menu with no selectedOption', () => {
     const subject = testbed.render()
     testbed.tick()
-    subject.find('input').simulate('click')
+    subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
@@ -77,9 +80,9 @@ describe('<AutocompleteMultiple />', () => {
     const onChange = testbed.stub()
     const subject = testbed.render({ onChange })
     testbed.tick()
-    subject.find('input').simulate('click')
+    subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = label
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
     expect(onChange.firstCall).to.exist
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]
@@ -94,7 +97,7 @@ describe('<AutocompleteMultiple />', () => {
     const subject = testbed.render({ onInputChange })
     testbed.tick()
     subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
+    subject.find('input[type="text"]').simulate('change', { preventDefault })
     expect(onInputChange.firstCall).to.exist
     expect(onInputChange.firstCall.args[0]).to.exist
     expect(onInputChange.firstCall.args[0].target.value).to.eql(label)
@@ -106,12 +109,12 @@ describe('<AutocompleteMultiple />', () => {
     const subject = testbed.render({})
     testbed.tick()
     subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
+    subject.find('input[type="text"]').simulate('change', { preventDefault })
     expect(subject.instance().state.filterText).to.equal(label.toLowerCase())
     expect(subject.instance().state.filteredOptions.length).to.equal(1)
   })
 
-  it('responds to selection done by AutocompleteField', () => {
+  it('responds to selection done by SelectField', () => {
     const newSelection = {
       value: '4', label: 'Key Largo'
     }
@@ -119,7 +122,7 @@ describe('<AutocompleteMultiple />', () => {
     const onChange = testbed.stub()
     const subject = testbed.render({ onChange, onInputChange })
     testbed.tick()
-    const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
+    const onSelect = subject.find(SelectField).unwrap().props.onSelect
     expect(onSelect).to.exist
 
     subject.instance()._input.value = 'Key La'
@@ -156,9 +159,7 @@ describe('<AutocompleteMultiple />', () => {
     const onChange = testbed.stub()
     const subject = testbed.render({ onChange })
     testbed.tick()
-
-    const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
-
+    const onSelect = subject.find(SelectField).unwrap().props.onSelect
     expect(onSelect).to.exist
 
     expect(subject.instance().state.selectedOption.length).to.equal(0)
@@ -191,7 +192,7 @@ describe('<AutocompleteMultiple />', () => {
     const subject = testbed.render({ onChange, selectedOption })
     testbed.tick()
 
-    const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
+    const onSelect = subject.find(SelectField).unwrap().props.onSelect
 
     expect(onSelect).to.exist
 
@@ -309,7 +310,7 @@ describe('<AutocompleteMultiple />', () => {
         messages: [{ type: 'error', text: 'some error message' }]
       })
 
-      expect(subject.find('input').getAttribute('aria-invalid'))
+      expect(subject.find('input[type="text"]').getAttribute('aria-invalid'))
         .to.exist
     })
   })

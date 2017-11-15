@@ -1,11 +1,11 @@
 import React from 'react'
-import AutocompleteField from '../index'
+import SelectField from '../index'
 
-describe('<AutocompleteField />', () => {
+describe('<SelectField />', () => {
   const preventDefault = () => {}
   const testbed = new Testbed(
     (
-      <AutocompleteField
+      <SelectField
         closeOnSelect
         label="Choose a state"
         options={[
@@ -89,7 +89,9 @@ describe('<AutocompleteField />', () => {
   })
 
   it('expands on change', () => {
-    const subject = testbed.render()
+    const subject = testbed.render({
+      editable: true
+    })
     subject.find('input').simulate('change', { target: { value: 'a' } })
     testbed.tick()
     expect(subject.instance().expanded).to.be.true
@@ -249,7 +251,10 @@ describe('<AutocompleteField />', () => {
 
     it('responds to onInputChange event', () => {
       const onInputChange = testbed.stub()
-      const subject = testbed.render({ onInputChange })
+      const subject = testbed.render({
+        editable: true,
+        onInputChange
+      })
 
       subject.find('input').simulate('change', { target: { value: 'a' } })
 

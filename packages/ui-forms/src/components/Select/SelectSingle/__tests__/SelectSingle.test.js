@@ -1,8 +1,8 @@
 import React from 'react'
-import AutocompleteSingle from '../index'
-import AutocompleteField from '../../AutocompleteField'
+import SelectSingle from '../index'
+import SelectField from '../../SelectField'
 
-describe('<AutocompleteSingle />', () => {
+describe('<SelectSingle />', () => {
   const preventDefault = () => {}
   const options = [{
     label: 'Aruba', children: 'Aruba', value: '0', id: '0'
@@ -20,7 +20,7 @@ describe('<AutocompleteSingle />', () => {
   }
 
   const testbed = new Testbed(
-    <AutocompleteSingle
+    <SelectSingle
       label="Choose a vacation destination"
       options={options}
       filter={filter}
@@ -129,7 +129,10 @@ describe('<AutocompleteSingle />', () => {
   it('calls onInputChange when input changes', () => {
     const label = 'Aruba'
     const onInputChange = testbed.stub()
-    const subject = testbed.render({ onInputChange })
+    const subject = testbed.render({
+      editable: true,
+      onInputChange
+    })
     testbed.tick()
     subject.instance()._input.value = label
     subject.find('input').simulate('change', { preventDefault })
@@ -141,7 +144,9 @@ describe('<AutocompleteSingle />', () => {
 
   it('filters the options when input changes', () => {
     const label = 'ARU'
-    const subject = testbed.render()
+    const subject = testbed.render({
+      editable: true
+    })
     testbed.tick()
     subject.instance()._input.value = label
     subject.find('input').simulate('change', { preventDefault })
@@ -149,13 +154,13 @@ describe('<AutocompleteSingle />', () => {
     expect(subject.instance().state.filteredOptions.length).to.equal(1)
   })
 
-  it('renders AutocompleteField', () => {
+  it('renders SelectField', () => {
     const subject = testbed.render()
     testbed.tick()
-    expect(subject.find(AutocompleteField).unwrap()).to.exist
+    expect(subject.find(SelectField).unwrap()).to.exist
   })
 
-  it('responds to selection done by AutocompleteField', () => {
+  it('responds to selection done by SelectField', () => {
     const newSelection = {
       value: '4', label: 'Key Largo'
     }
@@ -163,7 +168,7 @@ describe('<AutocompleteSingle />', () => {
     const onInputChange = testbed.stub()
     const subject = testbed.render({ onChange, onInputChange })
     testbed.tick()
-    const onSelect = subject.find(AutocompleteField).unwrap().props.onSelect
+    const onSelect = subject.find(SelectField).unwrap().props.onSelect
     expect(onSelect).to.exist
 
     onSelect({ preventDefault, target: 1 }, newSelection)

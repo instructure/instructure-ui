@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
-import Select from '@instructure/ui-core/lib/components/Select'
+import Select from '@instructure/ui-forms/lib/components/Select'
 import Tray from '@instructure/ui-core/lib/components/Tray'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 
@@ -84,9 +84,9 @@ export default class App extends Component {
     })
   }
 
-  handleThemeChange = e => {
+  handleThemeChange = (event, option) => {
     this.setState({
-      themeKey: e.target.value
+      themeKey: option.value
     })
   }
 

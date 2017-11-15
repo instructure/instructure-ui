@@ -1,0 +1,82 @@
+.optionsList {
+  box-sizing: border-box;
+  overflow: auto;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.option {
+  padding: var(--padding);
+  background: var(--background);
+
+  display: flex;
+  align-items: center;
+
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--mediumFontSize);
+
+  transition: background 0.2s;
+
+  outline: none;
+  cursor: pointer;
+  user-select: none;
+
+  &.small {
+    font-size: var(--smallFontSize);
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+  }
+
+  &.highlighted:not(.groupLabel) {
+    background: var(--highlightedBackground);
+  }
+
+  &.selected:not(.groupLabel) {
+    background: var(--activeBackground);
+  }
+
+  &.disabled:not(.groupLabel) {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.groupLabel {
+    cursor: not-allowed;
+    pointer-events: none;
+    font-weight: var(--groupFontWeight);
+  }
+
+  &.groupItem {
+    padding-inline-start: var(--groupPadding);
+  }
+}
+
+.label {
+  color: var(--labelColor);
+
+  @nest .highlighted:not(.groupLabel) & {
+    color: var(--activeLabelColor);
+  }
+
+  @nest .selected:not(.groupLabel) & {
+    color: var(--activeLabelColor);
+  }
+}
+
+.icon {
+  margin-right: var(--iconPaddingEnd);
+}
+
+.container {
+  z-index: var(--zIndex);
+}

@@ -6,26 +6,29 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import AutocompleteOptionsList from '../AutocompleteOptionsList'
-import Position, { PositionContent } from '../../Position'
-import FormField from '../../FormField'
+import Position, { PositionContent } from '@instructure/ui-core/lib/components/Position'
+import FormField from '@instructure/ui-core/lib/components/FormField'
+
+import SelectOptionsList from '../SelectOptionsList'
 import getOptionId from '../utils/getOptionId'
 import IconArrowDown from './IconArrowDown'
+
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-parent: Autocomplete
+parent: Select
 ---
 **/
 @themeable(theme, styles)
-class AutocompleteField extends Component {
+class SelectField extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
@@ -37,7 +40,10 @@ class AutocompleteField extends Component {
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        children: PropTypes.node
+        children: PropTypes.node,
+        disabled: PropTypes.bool,
+        icon: PropTypes.func,
+        groupLabel: PropTypes.bool
       })
     ]),
     options: PropTypes.arrayOf(
@@ -45,7 +51,10 @@ class AutocompleteField extends Component {
         label: PropTypes.string.isRequired,
         value: PropTypes.string.isRequired,
         id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-        children: PropTypes.node
+        children: PropTypes.node,
+        disabled: PropTypes.bool,
+        icon: PropTypes.func,
+        groupLabel: PropTypes.bool
       })
     ),
     /**
@@ -77,7 +86,10 @@ class AutocompleteField extends Component {
      * The amount of options that are visible without scrolling
      */
     visibleOptionsCount: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-
+    /**
+     * Custom text to be read by the screenreader when Select is focused
+     */
+    assistiveText: PropTypes.string,
     /**
      * Callback fired when the options have been positioned
      */
@@ -98,6 +110,10 @@ class AutocompleteField extends Component {
      * Width of the whole container
      */
     width: PropTypes.string,
+    /**
+     * Determines whether or not to display the FormField inline
+     */
+    inline: PropTypes.bool,
     /**
      * Children to be rendered inside the input container before the actual input
      */
@@ -159,6 +175,8 @@ class AutocompleteField extends Component {
     options: [],
     visibleOptionsCount: 8,
     closeOnSelect: true,
+    editable: false,
+    inline: false,
     onPositioned: () => {},
     onSelect: (event, selectedOption) => {},
     onStaticClick: event => {},
@@ -176,11 +194,13 @@ class AutocompleteField extends Component {
   constructor () {
     super(...arguments)
 
-    this._defaultId = `Autocomplete__${uid()}`
-    this._optionsId = `Autocomplete_Options_${uid()}`
+    this._defaultId = `Select__${uid()}`
+    this._optionsId = `Select_Options_${uid()}`
+    this._assistId = `Select__assistiveText-${uid()}`
   }
 
   _menu = null
+  _input = null
   _inputContainer = null
   _timeouts = []
   timeoutId = null
@@ -268,10 +288,22 @@ class AutocompleteField extends Component {
   }
 
   highlightOption = index => {
-    if (!this.props.loadingText && this.props.options[index]) {
+    const option = this.props.options[index]
+    if (!this.props.loadingText && option) {
+      if (option.disabled || option.groupLabel) {
+        // target index is disabled, try next option instead
+        if (index > this.state.highlightedIndex && index + 1 < this.props.options.length) {
+          this.highlightOption(index + 1)
+        } else if (index < this.state.highlightedIndex && index - 1 >= 0) {
+          this.highlightOption(index - 1)
+        }
+        return
+      }
+
       this.setState({
         highlightedIndex: index
       })
+
       this.props.onHighlight(index)
 
       // Update scrolling
@@ -312,7 +344,18 @@ class AutocompleteField extends Component {
 
   handleUpArrowKey = event => {
     if (this.expanded) {
-      this.highlightOption(Math.max(0, this.state.highlightedIndex - 1))
+      const index = Math.max(0, this.state.highlightedIndex - 1)
+      const option = this.props.options[index]
+      const el = this._menu.querySelectorAll('li')[index]
+
+      this.highlightOption(index)
+      // set dom focus so VO will read highlighted option correctly
+      if (el &&
+        option &&
+        !option.disabled &&
+        !option.groupLabel) {
+        el.focus()
+      }
     } else {
       this.open()
     }
@@ -320,7 +363,18 @@ class AutocompleteField extends Component {
 
   handleDownArrowKey = event => {
     if (this.expanded) {
-      this.highlightOption(Math.min(this.props.options.length - 1, this.state.highlightedIndex + 1))
+      const index = Math.min(this.props.options.length - 1, this.state.highlightedIndex + 1)
+      const option = this.props.options[index]
+      const el = this._menu.querySelectorAll('li')[index]
+
+      this.highlightOption(index)
+      // set dom focus so VO will read highlighted option correctly
+      if (el &&
+        option &&
+        !option.disabled &&
+        !option.groupLabel) {
+        el.focus()
+      }
     } else {
       this.open()
     }
@@ -345,6 +399,11 @@ class AutocompleteField extends Component {
         event.preventDefault()
       }
       this.keyMap[event.key](event)
+    } else {
+      // return dom focus to input when the user tries to type
+      if (this._input && this.props.editable) {
+        this._input.focus()
+      }
     }
     this.props.onKeyDown(event)
   }
@@ -365,6 +424,8 @@ class AutocompleteField extends Component {
   handleBlur = event => {
     event.persist()
 
+    const el = event.target.tagName === 'INPUT' ? this._menu : this._inputContainer
+
     this.setState(
       () => ({ focus: false }),
       () => {
@@ -372,7 +433,7 @@ class AutocompleteField extends Component {
           this._timeouts.push(
             setTimeout(() => {
               // timeout so we can check where focus went to
-              if (!containsActiveElement(this._menu)) {
+              if (!containsActiveElement(el)) {
                 this.close(event)
               }
             }, 0)
@@ -386,6 +447,10 @@ class AutocompleteField extends Component {
   handleClick = event => {
     if (!this.expanded) {
       event.preventDefault()
+      // make sure safari focuses readonly input
+      if (this._input && !this.props.editable) {
+        this._input.focus()
+      }
       this.open()
     }
     this.props.onClick(event)
@@ -402,8 +467,23 @@ class AutocompleteField extends Component {
     this._menu = node
   }
 
+  handleInputRef = node => {
+    this._input = node
+  }
+
   handleInputContainerRef = node => {
     this._inputContainer = node
+  }
+
+  renderIcon () {
+    if (typeof this.props.selectedOption.icon === 'function') {
+      const Icon = this.props.selectedOption.icon
+      return (
+        <span className={styles.inputIcon}>
+          <Icon />
+        </span>
+      )
+    }
   }
 
   render () {
@@ -419,11 +499,14 @@ class AutocompleteField extends Component {
       emptyOption,
       visibleOptionsCount,
       children,
-      onStaticClick
+      onStaticClick,
+      assistiveText
     } = this.props
 
-    const inputProps = omitProps(this.props, AutocompleteField.propTypes, [
+    const inputProps = omitProps(this.props, SelectField.propTypes, [
       'allowEmpty',
+      'assistiveText',
+      'value',
       ...Object.keys(FormField.propTypes)
     ])
 
@@ -431,55 +514,58 @@ class AutocompleteField extends Component {
     if (highlightedOption) {
       inputProps['aria-activedescendant'] = `${this._optionsId}_${highlightedOption.id}`
     } else {
-      inputProps['aria-activedescendant'] = `${this._optionsId}_${0}`
+      inputProps['aria-activedescendant'] = null
     }
 
     return (
-      <span>
-        <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
-          <span
-            style={{
-              width: width || 'auto'
-            }}
-            ref={this.handleInputContainerRef}
-            className={classnames(styles.inputContainer, {
-              [styles.invalid]: this.invalid,
-              [styles.disabled]: disabled,
-              [styles[size]]: size,
-              [styles.focus]: this.state.focus
-            })}
-          >
-            {children}
-            <span className={styles.inputLayout}>
-              <input
-                {...inputProps}
-                id={this.id}
-                className={styles.input}
-                onFocus={this.handleFocus}
-                onChange={this.handleChange}
-                onClick={this.handleClick}
-                onKeyDown={this.handleKeyDown}
-                onKeyUp={this.handleKeyUp}
-                onBlur={this.handleBlur}
-                type="text"
-                autoComplete="off"
-                ref={this.props.inputRef}
-                role="combobox"
-                aria-autocomplete="list"
-                aria-expanded={this.expanded}
-                aria-owns={this._optionsId}
-                aria-controls={this._optionsId}
-                required={required}
-                aria-required={required}
-                aria-invalid={this.invalid ? 'true' : null}
-                readOnly={!editable}
-                disabled={disabled}
-                aria-disabled={disabled ? 'true' : null}
-              />
-              <IconArrowDown className={styles.icon} />
-            </span>
+      <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
+        <span
+          style={{
+            width: width || 'auto'
+          }}
+          ref={this.handleInputContainerRef}
+          className={classnames(styles.inputContainer, {
+            [styles.invalid]: this.invalid,
+            [styles.disabled]: disabled,
+            [styles[size]]: size,
+            [styles.focus]: this.state.focus
+          })}
+        >
+          {children}
+          <span className={styles.inputLayout}>
+            {selectedOption && this.renderIcon()}
+            <input
+              {...inputProps}
+              id={this.id}
+              className={classnames(styles.input, {
+                [styles.editable]: editable
+              })}
+              onFocus={this.handleFocus}
+              onClick={this.handleClick}
+              onChange={editable ? this.handleChange : null}
+              onKeyDown={this.handleKeyDown}
+              onKeyUp={this.handleKeyUp}
+              onBlur={this.handleBlur}
+              type="text"
+              ref={createChainedFunction(this.props.inputRef, this.handleInputRef)}
+              role="combobox"
+              aria-expanded={this.expanded}
+              aria-owns={this._optionsId}
+              aria-describedby={this._assistId}
+              aria-controls={this._optionsId}
+              aria-autocomplete={editable ? 'list' : null}
+              aria-haspopup="true"
+              autoComplete={editable ? 'off' : null}
+              required={required}
+              aria-required={required}
+              aria-invalid={this.invalid ? 'true' : null}
+              readOnly={!editable}
+              disabled={disabled}
+              aria-disabled={disabled ? 'true' : null}
+            />
+            <IconArrowDown className={styles.icon} />
           </span>
-        </FormField>
+        </span>
         <Position
           trackPosition={this.expanded}
           placement={this.placement}
@@ -488,7 +574,7 @@ class AutocompleteField extends Component {
           mountNode={this._inputContainer}
         >
           <PositionContent>
-            <AutocompleteOptionsList
+            <SelectOptionsList
               options={options}
               selectedOption={selectedOption}
               optionsId={this._optionsId}
@@ -499,14 +585,26 @@ class AutocompleteField extends Component {
               onStaticClick={onStaticClick}
               onHighlightOption={this.highlightOption}
               onSelect={this.select}
+              expanded={this.state.expanded}
+              onKeyDown={this.handleKeyDown}
+              onKeyUp={this.handleKeyUp}
+              onBlur={this.handleBlur}
               highlightedIndex={this.state.highlightedIndex}
               maxWidth={this.props.optionsMaxWidth}
             />
           </PositionContent>
         </Position>
-      </span>
+        <span
+          id={this._assistId}
+          style={{
+            display: 'none'
+          }}
+        >
+          {assistiveText}
+        </span>
+      </FormField>
     )
   }
 }
 
-export default AutocompleteField
+export default SelectField
