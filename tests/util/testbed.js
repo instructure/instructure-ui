@@ -28,6 +28,13 @@ ReactWrapper.prototype.getAttribute = function (attrName) {
   return this.getDOMNode().getAttribute(attrName)
 }
 
+ReactWrapper.prototype.setValue = function (value) {
+  this.simulate('focus')
+  this.simulate('keyUp')
+  this.simulate('keyDown')
+  this.simulate('change', { target: { value } })
+}
+
 ReactWrapper.prototype.dispatchNativeEvent = function (type, attrs) {
   const event = new Event(type)
   const domNode = this.getDOMNode()
