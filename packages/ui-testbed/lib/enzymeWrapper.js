@@ -67,6 +67,13 @@ ReactWrapper.prototype.focused = function () {
   return domNode && domNode === document.activeElement
 }
 
+ReactWrapper.prototype.setValue = function (value) {
+  this.simulate('focus')
+  this.simulate('keyUp')
+  this.simulate('keyDown')
+  this.simulate('change', { target: { value } })
+}
+
 ReactWrapper.prototype.getKey = function () {
   return this.key()
 }

@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import warning from '@instructure/ui-utils/lib/warning'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import DatePicker from '../DatePicker'
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
@@ -34,7 +37,10 @@ export default class DateInput extends Component {
     /**
      * The message that's used when the data is invalid.
      */
-    invalidDateMessage:PropTypes.string,
+    invalidDateMessage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
+    ]).isRequired,
     /**
      * Where the calendar popover should be placed.
      */
@@ -87,7 +93,24 @@ export default class DateInput extends Component {
 
     datePickerRef: PropTypes.func,
 
-    inputRef: PropTypes.func
+    inputRef: PropTypes.func,
+
+    /**
+      An ISO 8601 formatted string. Defaults to the current date.
+    **/
+    todayValue: CustomPropTypes.iso8601,
+
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    layout: PropTypes.oneOf(['stacked', 'inline']),
+    width: PropTypes.string,
+    inline: PropTypes.bool,
+    /**
+    * Html placeholder text to display when the input has no value. This should be hint text, not a label
+    * replacement.
+    */
+    placeholder: PropTypes.string,
+    disabled: PropTypes.bool,
+    required: PropTypes.bool
   }
 
   static defaultProps = {
@@ -98,11 +121,19 @@ export default class DateInput extends Component {
     locale: undefined,
     timezone: undefined,
     defaultDateValue: undefined,
-    onDateChange: (e, formattedValue, rawValue, rawConversionFailed) => {},
+    onDateChange: (e, isoValue, rawValue, rawConversionFailed) => {},
     dateValue: undefined,
-    datePickerRef: (el) => {},
-    inputRef: (el) => {},
-    invalidDateMessage: undefined
+    datePickerRef: el => {},
+    inputRef: el => {},
+    invalidDateMessage: (textInputValue) => {},
+    required: false,
+    placeholder: undefined,
+    todayValue: undefined,
+    width: undefined,
+    inline: false,
+    size: 'medium',
+    disabled: false,
+    layout: 'stacked'
   }
 
   static contextTypes = {
@@ -113,165 +144,278 @@ export default class DateInput extends Component {
   constructor (props, context) {
     super(props, context)
 
-    this.state = Object.assign(
-      {
-        showPopover: false,
-        messages: []
-      },
-      this.computeDateRelatedStateValues(props)
+    const initialDateValue = props.dateValue || props.defaultDateValue || undefined
+    const locale = this._locale(props, context)
+    const timezone = this._timezone(props, context)
+    const parsedDate = this._parseDate(initialDateValue, locale, timezone)
+
+    warning(
+      (!initialDateValue || parsedDate.isValid()),
+      `[DateInput] Unexpected date format received for dateValue prop: ${initialDateValue}`
     )
-    this._input = null
+
+    this.state = {
+      showCalendar: false,
+      ...this.computeState(initialDateValue, parsedDate, props)
+    }
+
+    this._input = undefined
   }
 
   componentWillReceiveProps (nextProps) {
-    this.setState(this.computeDateRelatedStateValues(nextProps))
+    if (this.props.dateValue !== nextProps.dateValue) {
+      const parsedDate = this.parseDate(nextProps.dateValue)
+
+      warning(
+        (!nextProps.dateValue || parsedDate.isValid()),
+        `[DateInput] Unexpected date format received for dateValue prop: ${nextProps.dateValue}`
+      )
+
+      this.setState((state, props) => {
+        return this.computeState(
+          nextProps.dateValue,
+          parsedDate,
+          nextProps,
+          state
+        )
+      })
+    }
   }
 
-  locale (props) {
-    return props.locale || this.context.locale || Locale.browserLocale()
+  /**
+  * focus the input element
+  */
+  focus () {
+    this._input.focus()
   }
 
-  timezone (props) {
-    return props.timezone || this.context.timezone || DateTime.browserTimeZone()
+  get hasMessages () {
+    return this.messages && (this.messages.length > 0)
   }
 
-  computeDateRelatedStateValues (props) {
-    const defaultDateValue = props.dateValue === undefined ? props.defaultDateValue : props.dateValue
-    let textInputValue
-    let parsedDate
-    if (defaultDateValue) {
-      parsedDate = DateTime.parse(defaultDateValue, this.locale(props), this.timezone(props))
-      textInputValue = parsedDate.format(props.format)
+  get invalid () {
+    return this.messages && this.messages.findIndex((message) => { return message.type === 'error' }) >= 0
+  }
+
+  get focused () {
+    return isActiveElement(this._input)
+  }
+
+  get value () {
+    return this._input.value
+  }
+
+  get calendarSelectedValue () {
+    const { acceptedValue } = this.state
+
+    let value = acceptedValue ? this.parseDate(acceptedValue) : undefined
+
+    if (!value || !value.isValid()) {
+      value = DateTime.now(this.locale, this.timezone)
+    }
+
+    return value.format()
+  }
+
+  get locale () {
+    return this._locale(this.props, this.context)
+  }
+
+  get timezone () {
+    return this._timezone(this.props, this.context)
+  }
+
+  get messages () {
+    if (!this.props.validationFeedback || !this.state.textInputValue) {
+      return this.props.messages
+    }
+
+    const messages = []
+    const parsedDate = this.parseDate(this.state.textInputValue)
+
+    if (parsedDate.isValid()) {
+      messages.push({
+        text: parsedDate.format(this.props.format),
+        type: 'success'
+      })
     } else {
-      textInputValue = ''
-      parsedDate = DateTime.parse(textInputValue, this.locale(props), this.timezone(props))
+      let { invalidDateMessage } = this.props
+      if (typeof invalidDateMessage === 'function') {
+        invalidDateMessage = invalidDateMessage(this.state.textInputValue)
+      }
+
+      messages.push({
+        text: invalidDateMessage || parsedDate.format(this.props.format),
+        type: 'error'
+      })
     }
 
-    return {
-      textInputValue,
-      parsedDate
-    }
+    return messages.concat(this.props.messages)
   }
 
-  getCurrentDate () {
-    return this.state.parsedDate.format()
-  }
-
-  handleInputRef = node => {
+  textInputRef = node => {
     this._input = node
-    this.props.inputRef(node)
-  }
-
-  handlePopoverToggle = showPopoverValue => {
-    this.setState({ showPopover: showPopoverValue })
-  }
-
-  handleTextInputChange = e => {
-    const oldMoment = this.state.parsedDate
-    const newTextValue = e.target.value
-    const newParsedDate = DateTime.parse(newTextValue, this.locale(this.props), this.timezone(this.props))
-    const rawConversionFailed = newTextValue !== '' && !newParsedDate.isValid()
-    const newMessages = []
-    if (newTextValue !== '' && this.props.validationFeedback) {
-      if (newParsedDate.isValid()) {
-        newMessages.push({
-          text: newParsedDate.format(this.props.format),
-          type: 'success'
-        })
-      } else {
-        newMessages.push({
-          text: this.props.invalidDateMessage || newParsedDate.format(this.props.format),
-          type: 'error'
-        })
-      }
-    }
-    this.setState({
-      showPopover: false,
-      textInputValue: newTextValue,
-      parsedDate: newParsedDate,
-      messages: newMessages
-    })
-
-    this.fireOnChange(e, newParsedDate, newTextValue, rawConversionFailed)
-  }
-
-  handleTextInputKeyDown = e => {
-    if (e.key === 'Enter') {
-      e.preventDefault()
-      if (this.state.parsedDate.isValid()) {
-        this.setState({
-          showPopover: false,
-          textInputValue: this.state.parsedDate.format(this.props.format),
-          messages: []
-        })
-      }
+    if (node) {
+      this.props.inputRef(node)
     }
   }
 
-  handleTextInputClick = e => {
-    this.setState({ showPopover: true })
+  handleTextInputChange = event => {
+    // because we're controlling the TextInput
+    this.setState({ textInputValue: event.target.value, showCalendar: false })
   }
 
-  handleDatePickerChange = (e, newValue) => {
-    const newDate = DateTime.parse(newValue, this.locale(this.props), this.timezone(this.props))
+  handleTextInputKeyDown = event => {
+    if (event.keyCode === keycode.codes.enter) {
+      event.preventDefault() // prevent form submission
+      this.acceptValue(event)
+    }
+  }
 
-    warning(newDate.isValid(), `[DateInput] Unexpected date format received from DatePicker: ${newValue}`)
+  handleTextInputClick = event => {
+    // accept the current value first so the calendar shows the correct selected date
+    this.acceptValue(event)
+    this.showCalendar()
+  }
 
-    const textInputValue = newDate.format(this.props.format)
-    this.setState({
-      showPopover: false,
-      textInputValue,
-      parsedDate: newDate,
-      messages: []
+  handleTextInputBlur = event => {
+    // when focus leaves the textInput field, replace its text with the properly formatted
+    // string for the date. This is handy because once the user types "Nov", we will parse that
+    // into November 1st of the current year.
+    this.acceptValue(event)
+  }
+
+  handleCalendarSelect = (event, newValue) => {
+    const parsedDate = this.parseDate(newValue)
+
+    warning(parsedDate.isValid(), `[DateInput] Unexpected date format received from DatePicker: ${newValue}`)
+
+    this.acceptValue(event, newValue)
+
+    if (parsedDate.isValid()) {
+      this.hideCalendar()
+    }
+  }
+
+  handleCalendarDismiss = () => {
+    this.hideCalendar()
+  }
+
+  toggleCalendar (showCalendar) {
+    this.setState({ showCalendar })
+  }
+
+  showCalendar () {
+    this.toggleCalendar(true)
+  }
+
+  hideCalendar () {
+    this.toggleCalendar(false)
+  }
+
+  acceptValue (event, dateStr) {
+    const rawAcceptedValue = dateStr || event.target.value
+
+    this.setState((state, props) => {
+      const parsedDate = this.parseDate(rawAcceptedValue)
+        .hour(state.hour)
+        .minute(state.minute)
+        .second(state.second)
+        .millisecond(state.millisecond)
+
+      const newState = this.computeState(rawAcceptedValue, parsedDate, props, state)
+
+      if ((newState.acceptedValue !== state.acceptedValue) && (typeof this.props.onDateChange === 'function')) {
+        this.props.onDateChange(
+          event,
+          // since the API here is ISO dates in, we should pass an ISO date back in the handler
+          newState.acceptedValue,
+          rawAcceptedValue,
+          !newState.isValidOrEmpty
+        )
+      }
+
+      return newState
     })
-    this.fireOnChange(e, newDate, textInputValue, !newDate.isValid())
   }
 
-  fireOnChange (e, newMoment, rawValue, rawConversionFailed) {
-    if (typeof this.props.onDateChange === 'function') {
-      const moment = newMoment.isValid() ? newMoment.format() : null
-      this.props.onDateChange(e, moment, rawValue, rawConversionFailed)
+  _parseDate (dateStr, locale, timezone) {
+    return DateTime.parse(dateStr, locale, timezone)
+  }
+
+  _timezone (props, context) {
+    return props.timezone || context.timezone || DateTime.browserTimeZone()
+  }
+
+  _locale (props, context) {
+    return props.locale || context.locale || Locale.browserLocale()
+  }
+
+  parseDate (dateStr) {
+    return this._parseDate(dateStr, this.locale, this.timezone)
+  }
+
+  computeState (rawValue, parsedDate, props, state) {
+    if (parsedDate.isValid()) {
+      return {
+        isValidOrEmpty: true,
+        acceptedValue: parsedDate.format(),
+        textInputValue: parsedDate.format(props.format),
+        hour: parsedDate.hour(),
+        minute: parsedDate.minute(),
+        second: parsedDate.second(),
+        millisecond: parsedDate.millisecond()
+      }
+    } else {
+      return {
+        isValidOrEmpty: !rawValue,
+        acceptedValue: undefined,
+        textInputValue: state ? state.textInputValue : '',
+        hour: 0,
+        minute: 0,
+        second: 0,
+        millisecond: 0
+      }
     }
   }
 
   render () {
-    const ignoredProps = ['type', 'messages', 'defaultValue', 'value', 'onChange', 'onKeyDown']
+    const ignoredProps = [
+      'type',
+      'messages',
+      'defaultValue',
+      'value'
+    ]
     const textInputProps = pickProps(this.props, omitProps(TextInput.propTypes, {}, ignoredProps))
-
-    let datePickerMoment = this.state.parsedDate
-    if (!datePickerMoment.isValid()) {
-      datePickerMoment = DateTime.now(this.locale(this.props), this.timezone(this.props))
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .millisecond(0)
-    }
+    const { onChange, onKeyDown, onClick, onBlur } = this.props // eslint-disable-line react/prop-types
 
     return (
       <span>
         <TextInput
           {...textInputProps}
           value={this.state.textInputValue}
-          messages={this.state.messages.concat(this.props.messages)}
-          onChange={this.handleTextInputChange}
-          onKeyDown={this.handleTextInputKeyDown}
-          onClick={this.handleTextInputClick}
-          inputRef={this.handleInputRef}
+          messages={this.messages}
+          onChange={createChainedFunction(onChange, this.handleTextInputChange)}
+          onKeyDown={createChainedFunction(onKeyDown, this.handleTextInputKeyDown)}
+          onClick={createChainedFunction(onClick, this.handleTextInputClick)}
+          onBlur={createChainedFunction(onBlur, this.handleTextInputBlur)}
+          inputRef={this.textInputRef}
         />
         <Popover
           placement={this.props.placement}
-          show={this.state.showPopover}
-          onToggle={this.handlePopoverToggle}
+          show={this.state.showCalendar}
+          onDismiss={this.handleCalendarDismiss}
           positionTarget={this._input}
         >
           <PopoverContent>
             <DatePicker
+              todayValue={this.props.todayValue}
               previousLabel={this.props.previousLabel}
               nextLabel={this.props.nextLabel}
-              selectedValue={datePickerMoment.format()}
-              locale={this.locale(this.props)}
-              timezone={this.timezone(this.props)}
-              onSelectedChange={this.handleDatePickerChange}
+              selectedValue={this.calendarSelectedValue}
+              locale={this.locale}
+              timezone={this.timezone}
+              onSelectedChange={this.handleCalendarSelect}
               ref={this.props.datePickerRef}
             />
           </PopoverContent>
