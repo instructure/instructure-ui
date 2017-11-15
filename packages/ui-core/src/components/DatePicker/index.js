@@ -4,10 +4,10 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-
 import themeable from '@instructure/ui-themeable'
 import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import PresentationContent from '../PresentationContent'
 import ScreenReaderContent from '../ScreenReaderContent'
@@ -91,53 +91,43 @@ export default class DatePicker extends Component {
   constructor (props, context) {
     super(props, context)
 
-    let todayValue = props.todayValue
-    if (todayValue == null) {
-      todayValue = DateTime.now(this.locale(), this.timezone())
-        .hour(0)
-        .minute(0)
-        .second(0)
-        .millisecond(0)
-        .format()
-    }
+    const locale = this._locale(props, context)
+    const timezone = this._timezone(props, context)
 
-    let selectedValue = props.selectedValue || props.defaultSelectedValue
-    if (selectedValue == null) {
-      selectedValue = todayValue
-    }
+    const defaultTodayValue = DateTime.now(locale, timezone)
+      .hour(0)
+      .minute(0)
+      .second(0)
+      .millisecond(0)
+      .format()
 
-    let renderedValue = props.renderedValue || props.defaultRenderedValue
-    if (renderedValue == null) {
-      renderedValue = selectedValue
-    }
+    const todayValue = this._validateDateProp(
+      props.todayValue,
+      defaultTodayValue,
+      'todayValue',
+      locale,
+      timezone
+    )
+
+    const selectedValue = this._validateDateProp(
+      props.selectedValue || props.defaultSelectedValue,
+      todayValue,
+      'selectedValue',
+      locale,
+      timezone
+    )
+
+    const renderedValue = this._validateDateProp(
+      props.renderedValue || props.defaultRenderedValue,
+      selectedValue,
+      'renderedValue',
+      locale,
+      timezone
+    )
 
     const focusedValue = selectedValue
 
-    this.state = {selectedValue, renderedValue, todayValue, focusedValue}
-  }
-
-  locale () {
-    return this.props.locale || this.context.locale || Locale.browserLocale()
-  }
-
-  timezone () {
-    return this.props.timezone || this.context.timezone || DateTime.browserTimeZone()
-  }
-
-  todayValue () {
-    return this.state.todayValue
-  }
-
-  selectedValue () {
-    return this.state.selectedValue
-  }
-
-  renderedValue () {
-    return this.state.renderedValue
-  }
-
-  focusedValue () {
-    return this.state.focusedValue
+    this.state = { selectedValue, renderedValue, todayValue, focusedValue }
   }
 
   componentWillReceiveProps (nextProps) {
@@ -146,10 +136,12 @@ export default class DatePicker extends Component {
       nextProps.renderedValue !== this.props.renderedValue ||
       nextProps.todayValue !== this.props.todayValue
     ) {
-      this.setState({
-        selectedValue: nextProps.selectedValue,
-        renderedValue: nextProps.renderedValue,
-        todayValue: nextProps.todayValue
+      this.setState((state) => {
+        return {
+          selectedValue: this.validateDateProp(nextProps.selectedValue, state.selectedValue, 'selectedValue'),
+          renderedValue: this.validateDateProp(nextProps.renderedValue, state.renderedValue, 'renderedValue'),
+          todayValue: this.validateDateProp(nextProps.todayValue, state.todayValue, 'todayValue')
+        }
       })
     }
   }
@@ -158,6 +150,60 @@ export default class DatePicker extends Component {
     if ((this.state.focusedValue !== prevState.focusedValue) && this._focusedDay) {
       this._focusedDay.focus()
     }
+  }
+
+  _validateDateProp (dateStr, fallbackDateStr, propName, locale, timezone) {
+    const parsedDate = this._parseDate(dateStr, locale, timezone)
+    const isEmpty = !dateStr
+    const isValid = parsedDate.isValid()
+
+    warning(isEmpty || isValid, `[DatePicker] Unexpected date format received for ${propName} prop: ${dateStr}`)
+
+    return (isEmpty || !isValid) ? fallbackDateStr : dateStr
+  }
+
+  validateDateProp (dateStr, fallbackDateStr, propName) {
+    return this._validateDateProp(dateStr, fallbackDateStr, propName, this.locale, this.timezone)
+  }
+
+  _locale (props, context) {
+    return props.locale || context.locale || Locale.browserLocale()
+  }
+
+  _timezone (props, context) {
+    return props.timezone || context.timezone || DateTime.browserTimeZone()
+  }
+
+  _parseDate (dateStr, locale, timezone) {
+    return DateTime.parse(dateStr, locale, timezone)
+  }
+
+  parseDate (dateStr) {
+    return this._parseDate(dateStr, this.locale, this.timezone)
+  }
+
+  get locale () {
+    return this._locale(this.props, this.context)
+  }
+
+  get timezone () {
+    return this._timezone(this.props, this.context)
+  }
+
+  get todayValue () {
+    return this.state.todayValue
+  }
+
+  get selectedValue () {
+    return this.state.selectedValue
+  }
+
+  get renderedValue () {
+    return this.state.renderedValue
+  }
+
+  get focusedValue () {
+    return this.state.focusedValue
   }
 
   handleCalendarKeyDown = (e) => {
@@ -178,33 +224,34 @@ export default class DatePicker extends Component {
     e.preventDefault()
     e.stopPropagation()
 
-    const focusedMoment = DateTime.parse(this.state.focusedValue, this.locale(), this.timezone())
+    const focusedDate = this.parseDate(this.state.focusedValue)
+
     switch (e.keyCode) {
       case (left):
-        focusedMoment.subtract(1, 'days')
+        focusedDate.subtract(1, 'days')
         break
       case (right):
-        focusedMoment.add(1, 'days')
+        focusedDate.add(1, 'days')
         break
       case (up):
-        focusedMoment.subtract(7, 'days')
+        focusedDate.subtract(7, 'days')
         break
       case (down):
-        focusedMoment.add(7, 'days')
+        focusedDate.add(7, 'days')
         break
     }
 
-    const newFocusedString = focusedMoment.format()
+    const newFocusedString = focusedDate.format()
     this.updatePagination(newFocusedString)
-    this.setState({focusedValue: newFocusedString})
+    this.setState({ focusedValue: newFocusedString })
   }
 
   updatePagination (newValueString) {
-    const newValueMoment = DateTime.parse(newValueString, this.locale(), this.timezone())
+    const newValueMoment = this.parseDate(newValueString)
     const newMonth = newValueMoment.month()
     const newYear = newValueMoment.year()
 
-    const renderedMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
+    const renderedMoment = this.parseDate(this.state.renderedValue)
     const renderedMonth = renderedMoment.month()
     const renderedYear = renderedMoment.year()
 
@@ -228,27 +275,27 @@ export default class DatePicker extends Component {
   }
 
   handlePaginationPrev = (e) => {
-    const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
+    const sliderMoment = this.parseDate(this.state.renderedValue)
     const sliderString = sliderMoment.subtract(1, 'months').format()
-    this.setState({renderedValue: sliderString})
+    this.setState({ renderedValue: sliderString })
     this.fireRenderedChange(e, sliderString)
   }
 
   handlePaginationNext = (e) => {
-    const sliderMoment = DateTime.parse(this.state.renderedValue, this.locale(), this.timezone())
+    const sliderMoment = this.parseDate(this.state.renderedValue)
     const sliderString = sliderMoment.add(1, 'months').format()
-    this.setState({renderedValue: sliderString})
+    this.setState({ renderedValue: sliderString })
     this.fireRenderedChange(e, sliderString)
   }
 
   handleDateClick = (e, clickedString) => {
     this.updatePagination(clickedString)
-    this.setState({selectedValue: clickedString})
+    this.setState({ selectedValue: clickedString })
     this.fireSelectedChange(e, clickedString)
   }
 
   handleDateFocus = (focusedString) => {
-    this.setState({focusedValue: focusedString})
+    this.setState({ focusedValue: focusedString })
   }
 
   fireRenderedChange (e, newRenderedString) {
@@ -344,12 +391,10 @@ export default class DatePicker extends Component {
   }
 
   render () {
-    const locale = this.locale()
-    const timezone = this.timezone()
-    const today = DateTime.parse(this.state.todayValue, locale, timezone)
-    const selected = DateTime.parse(this.state.selectedValue, locale, timezone)
-    const rendered = DateTime.parse(this.state.renderedValue, locale, timezone)
-    const focused = DateTime.parse(this.state.focusedValue, locale, timezone)
+    const today = this.parseDate(this.state.todayValue)
+    const selected = this.parseDate(this.state.selectedValue)
+    const rendered = this.parseDate(this.state.renderedValue)
+    const focused = this.parseDate(this.state.focusedValue)
 
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
