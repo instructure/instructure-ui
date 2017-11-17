@@ -127,11 +127,50 @@ always be in sync.
 
 ### Releases
 
-1. Run `yarn bump` to update the package version. Ignore the advice to push the tag (we do that after we publish the release due to our gerrit review workflow).
-1. Optionally update the [CHANGELOG](#CHANGELOG) to add any additional information about the release.
-1. Push up the version bump commit to gerrit for review and testing.
-1. Once the version bump commit is merged, run `yarn release`
+Before beginning:
+
+- Make sure you have permissions to release to npm and have run `npm login --scope=@instructure`
+- Make sure you have write/push permissions to the github repo (to publish
+the docs to the gh-pages branch).
+
+1. Run `yarn bump` to update the package version.
+1. Optionally update the CHANGELOG.md file to add any additional information about the release.
+1. Push up the version bump commit for review and testing.
+1. Once the version bump commit is merged, run `yarn release` (make sure you've run `npm login`)
 1. Verify that the documentation was updated on gh-pages and the release was tagged in github.
+
+
+### Patch Release Process
+
+Before beginning:
+
+- Make sure you have permissions to release to npm and have run `npm login --scope=@instructure`
+- You will also need permissions to create remote branches if the release branch isn't already set up (see A below).
+
+A. To set up a branch for a patch release (e.g. 1.4.1):
+
+1. Run `git fetch origin --tags` to pull down the remote branches and tags.
+1. Make a new local branch for the release based on the release tag: `git checkout v1.4.0 -b stable/release-v1.4.x`
+1. Create the remote branch: `git push origin stable/release-v1.4.x:stable/release-v1.4.x`
+
+B. To add a change to the patch release (e.g. 1.4.1):
+
+1. `git fetch origin`
+1. Checkout the patch release branch locally: `git checkout origin/stable/release-v1.4.x --track`
+1. `git cherry-pick` the change from the master branch after it's been merged.
+1. Push the change: `git push origin HEAD:refs/for/stable/release-v1.4.x`
+1. Review the new commit, test it and merge it to the remote release branch.
+
+C. To create the patch release commit (e.g. 1.4.1):
+
+1. From the local release branch (steps B (1, 2) above), run `yarn bump`.
+1. Check that the CHANGELOG.md file was updated correctly and that the new version number is changed to 1.4.1.
+1. Push the version bump commit for review: `git push origin HEAD:refs/for/stable/release-v1.4.x`
+1. Review the version bump commit, test it and merge it.
+1. From the local release branch (steps B (1, 2) above) run `yarn release` (this creates the release tag, v1.4.1)
+1. When prompted for the npm tag, enter 'stable'
+1. Check https://github.com/instructure/instructure-ui/releases and http://instructure.github.io/instructure-ui/
+(v1.4.1 should be there)
 
 
 ### License
