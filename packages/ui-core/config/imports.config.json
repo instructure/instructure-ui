@@ -9,11 +9,11 @@
   },
   {
     "pattern": "^instructure-ui/lib/themes",
-    "replace": "@instructure/ui-themes"
+    "replace": "@instructure/ui-themes/lib"
   },
   {
     "pattern": "^instructure-ui/lib/themeable",
-    "replace": "@instructure/ui-themeable"
+    "replace": "@instructure/ui-themeable/lib"
   },
 
   {
