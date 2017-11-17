@@ -22,8 +22,8 @@ BRANCH=$(git rev-parse --abbrev-ref HEAD)
 while getopts ":t:c:v:" opt; do
   case $opt in
     t)
-      echo "-t (release tag): $OPTARG" >&2
-      tag=$OPTARG
+      echo "-t (npm tag): $OPTARG" >&2
+      npm_tag=$OPTARG
       ;;
     c)
       echo "-c (commit sha): $OPTARG" >&2
@@ -48,12 +48,12 @@ done
 # Determine the commit #
 ########################
 if ! [[ $commit_sha ]]; then
-  printf "Enter commit SHA or tag to release: "
+  printf "Enter commit SHA or git tag to release: "
   read commit_sha
 fi
 
 if ! [[ $commit_sha ]]; then
-  echo >&2 "Commit SHA or tag is required to release"
+  echo >&2 "Commit SHA or git tag is required to release"
   exit 1
 fi
 
@@ -86,23 +86,23 @@ then
   #########################
   # (npm) tag the release #
   #########################
-  if ! [[ $tag ]]; then
-    printf "Enter an npm tag for this release (e.g. beta or rc): "
-    read tag
+  if ! [[ $npm_tag ]]; then
+    printf "Enter an npm tag (beta, rc, latest, stable): "
+    read npm_tag
 
-    if ! [[ $tag ]]; then
-      tag="dev"
+    if ! [[ $npm_tag ]]; then
+      npm_tag="dev"
     fi
   fi
 else
-  tag="latest"
+  npm_tag="stable"
 fi
 
 #################################
 # Create release branch (local) #
 #################################
-release_branch=$tag/release-$next_version
 printf "Creating release branch $release_branch ...\n"
+release_branch=$npm_tag/release-$next_version
 git checkout -b $release_branch
 
 #######################
@@ -116,26 +116,28 @@ $NPM_CLIENT run test
 ###############################
 # Publish sub-packages to npm #
 ###############################
-printf "Running lerna publish --npm-tag $tag\n"
-$(npm bin)/lerna publish --skip-git --npm-tag $tag --repo-version $next_version --force-publish=*
+printf "Running lerna publish --npm-tag $npm_tag\n"
+$(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=*
 
 ######################
 # Tag release commit #
 ######################
-printf "Tagging version $next_version ...\n"
+git_tag="v$next_version"
+
+printf "Tagging version $git_tag ...\n"
 
 # delete the local tag if it already exists
-if [ "`git tag --list $next_version`" ]; then
-  git tag -d $next_version
+if [ "`git tag --list $git_tag`" ]; then
+  git tag -d $git_tag
 fi
 
-git tag -am "Version $next_version" $next_version
-git push origin $next_version
+git tag -am "Version $next_version" $git_tag
+git push origin $git_tag
 
 #####################################
 # Build and deploy docs to gh-pages #
 #####################################
-if [[ "$tag" == "latest" ]]; then
+if [[ "$npm_tag" == "latest" ]]; then
   printf "Building version $next_version of the documentation...\n"
   $NPM_CLIENT run build:docs
 
