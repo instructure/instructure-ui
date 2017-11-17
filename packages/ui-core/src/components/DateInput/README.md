@@ -33,7 +33,6 @@ class Example extends React.Component {
 
     this.state = {
       isoDate: undefined,
-      required: false,
       messages: []
     }
   }
@@ -73,7 +72,7 @@ class Example extends React.Component {
     const newDate = new Date(this.state.isoDate || Date.now())
     newDate.setMonth(m)
     this.setState({ isoDate: newDate.toISOString(), messages: [] })
-  }
+  };
 
   render () {
     return (
