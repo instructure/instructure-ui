@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.3"></a>
+## [3.3.3](https://github.com/instructure/instructure-ui/compare/v3.3.2...v3.3.3) (2017-11-17)
+
+
+### Bug Fixes
+
+* **DateInput:** Allow text input when component is controlled ([3f6cf2c](https://github.com/instructure/instructure-ui/commit/3f6cf2c))
+
+
+
 <a name="3.3.2"></a>
 # [3.3.2](https://github.com/instructure/instructure-ui/compare/v3.3.1...v3.3.2) (2017-11-08)
 
