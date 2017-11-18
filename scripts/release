@@ -48,13 +48,12 @@ done
 # Determine the commit #
 ########################
 if ! [[ $commit_sha ]]; then
-  printf "Enter commit SHA or git tag to release: "
+  printf "Enter commit SHA or git tag (defaults to HEAD): "
   read commit_sha
 fi
 
 if ! [[ $commit_sha ]]; then
-  echo >&2 "Commit SHA or git tag is required to release"
-  exit 1
+  commit_sha=HEAD
 fi
 
 ########################
