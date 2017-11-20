@@ -22,6 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/media-capture": "^4.7.1",
     "@instructure/ui-a11y": "^4.7.1",
     "@instructure/ui-alerts": "^4.7.1",
     "@instructure/ui-billboard": "^4.7.1",
