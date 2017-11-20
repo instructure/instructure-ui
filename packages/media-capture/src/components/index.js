@@ -1,0 +1,1 @@
+export MediaCapture from './MediaCapture'
