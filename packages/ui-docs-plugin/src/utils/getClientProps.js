@@ -46,7 +46,9 @@ function parseDocs (docs, library) {
     descriptions: {}
   }
 
-  docs.forEach((doc) => {
+  docs
+  .filter(doc => !doc.private)
+  .forEach((doc) => {
     const { category, id, parent, describes } = doc
 
     warning((!doc.undocumented), `[${doc.srcPath}] is undocumented.`)
