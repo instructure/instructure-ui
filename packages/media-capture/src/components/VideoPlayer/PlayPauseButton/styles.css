@@ -1,0 +1,15 @@
+.button {
+  background-color: var(--backgroundColor);
+  border: var(--border);
+  color: var(--color);
+  margin: var(--margin);
+  padding: var(--padding);
+
+  cursor: pointer;
+  height: 100%;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 var(--focusOutlineWeight) var(--focusOutlineColor);
+    border: var(--focusBorderWeight) solid var(--focusBorderColor);
+  }
+}

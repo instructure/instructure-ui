@@ -1,0 +1,17 @@
+.badge {
+  color: var(--fontColor);
+  background-color: var(--backgroundColor);
+  padding: var(--padding);
+
+  display: flex;
+  align-items: center;
+}
+
+.signal {
+  background: var(--signalColor);
+  width: var(--signalSize);
+  height: var(--signalSize);
+  margin: var(--signalMargin);
+
+  border-radius: 50%;
+}

@@ -1,0 +1,7 @@
+.message {
+  color: var(--fontColor);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
