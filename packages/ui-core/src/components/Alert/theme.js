@@ -2,8 +2,11 @@ export default function generator ({ colors, borders, spacing, typography, shado
   return {
     color: colors.licorice,
     background: colors.white,
-    borderRadius: borders.radiusMedium,
     marginTop: spacing.small,
+
+    borderRadius: borders.radiusMedium,
+    borderWidth: borders.widthMedium,
+    borderStyle: borders.style,
 
     contentPadding: `${spacing.small} ${spacing.medium}`,
     contentFontSize: typography.fontSizeMedium,

@@ -3,10 +3,9 @@
   background: var(--background);
   box-sizing: border-box;
   box-shadow: var(--boxShadow);
-  border-width: 2px;
-  border-style: solid;
   display: flex;
-
+  border-width: var(--borderWidth);
+  border-style: var(--borderStyle);
   border-radius: var(--borderRadius);
 }
 
@@ -31,7 +30,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  border-right: 2px solid; /* or else icon looks 2px off center */
+  border-right: var(--borderWidth) var(--borderStyle); /* or else icon looks off center */
 }
 
 .closeButton {
