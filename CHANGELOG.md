@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="3.3.4"></a>
+## [3.3.4](https://github.com/instructure/instructure-ui/compare/v3.3.3...v3.3.4) (2017-11-27)
+
+
+### Bug Fixes
+
+* **RadioInput,Checkbox:** Move inputs outside label elements ([711d230](https://github.com/instructure/instructure-ui/commit/711d230))
+
+
+
 <a name="3.3.3"></a>
 ## [3.3.3](https://github.com/instructure/instructure-ui/compare/v3.3.2...v3.3.3) (2017-11-17)
 
