@@ -3,8 +3,6 @@
 }
 
 @define-mixin Grid-container {
-  display: flex;
-  flex-flow: column nowrap;
   box-sizing: border-box;
 }
 
@@ -33,4 +31,3 @@
     @mixin Grid-container;
   }
 }
-

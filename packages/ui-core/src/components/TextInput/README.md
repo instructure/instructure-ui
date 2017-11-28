@@ -83,7 +83,8 @@ example: true
 />
 ```
 
-An inline `TextInput` with a fixed width:
+An inline `TextInput` with a fixed width. *Note: IE11 needs a `width` prop if
+the TextInput is `inline`.*
 
 ```js
 ---

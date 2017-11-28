@@ -32,6 +32,8 @@ example: true
 
 ### Select with the `layout` prop set to `inline`
 
+*Note: IE11 needs a `width` prop if the Select is `inline`.*
+
 ```js
 ---
 example: true

@@ -138,7 +138,7 @@ As with other forms components, setting the `layout` prop to `inline` will
 horizontally align the input and the label.
 
 Setting the boolean `inline` prop to `true` will cause the input itself to display
-inline and accept a fixed `width`.
+inline and accept a fixed `width`. *Note: IE11 needs a `width` prop if the input is `inline`.*
 
 ```js
 ---

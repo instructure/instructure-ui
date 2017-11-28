@@ -43,8 +43,8 @@ class Example extends React.Component {
                   Close
                 </CloseButton>
                 <FormFieldGroup description={<Heading level="h4" as="span">Full name</Heading>} layout="columns">
-                  <TextInput label="First" inputRef={(c) => this._firstName = c} />
-                  <TextInput label="Last" />
+                  <TextInput width="12rem" label="First" inputRef={(c) => this._firstName = c} />
+                  <TextInput width="12rem" label="Last" />
                 </FormFieldGroup>
               </ContextBox>
             </Dialog>

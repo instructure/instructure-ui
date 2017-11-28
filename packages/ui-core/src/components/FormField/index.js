@@ -31,7 +31,8 @@ class FormField extends Component {
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline']),
     labelAlign: PropTypes.oneOf(['start', 'end']),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom'])
+    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
+    width: PropTypes.string
   };
   /* eslint-enable react/require-default-props */
 
