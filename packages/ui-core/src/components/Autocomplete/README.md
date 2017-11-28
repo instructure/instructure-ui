@@ -361,7 +361,8 @@ render(
 )
 ```
 
-An inline Autocomplete with a fixed width:
+An inline Autocomplete with a fixed width. *Note: IE11 needs a `width` prop if the
+Autocomplete is `inline`.*
 
 ```js
 ---

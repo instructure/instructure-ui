@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import warning from '@instructure/ui-utils/lib/warning'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -50,7 +51,8 @@ class FormFieldLayout extends Component {
     children: PropTypes.node,
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline']),
-    labelAlign: PropTypes.oneOf(['start', 'end'])
+    labelAlign: PropTypes.oneOf(['start', 'end']),
+    width: PropTypes.string
   };
   /* eslint-enable react/require-default-props */
 
@@ -66,6 +68,15 @@ class FormFieldLayout extends Component {
     super()
 
     this._messagesId = props.messagesId || `FormFieldLayout__messages-${uid()}`
+
+    if (props.inline && props.layout === 'inline') {
+      warning(
+        !!props.width,
+        `[FormFieldLayout] The inline prop is true, and the layout is set to inline.
+        This will cause a layout issue in Internet Explorer 11 unless you also add a
+        value for the width prop.`
+      )
+    }
   }
 
   get hasVisibleLabel () {
@@ -78,6 +89,11 @@ class FormFieldLayout extends Component {
 
   get elementType () {
     return getElementType(FormFieldLayout, this.props)
+  }
+
+  get inlineContainerAndLabel () {
+    // Return if both the component container and label will display inline
+    return this.props.inline && this.props.layout === 'inline'
   }
 
   renderLabel () {
@@ -97,7 +113,7 @@ class FormFieldLayout extends Component {
     return this.hasVisibleLabel ? (
       <GridCol
         textAlign={this.props.labelAlign}
-        width={3}
+        width={(this.inlineContainerAndLabel) ? 'auto' : 3}
       >
         { this.renderLabel() }
       </GridCol>
@@ -122,7 +138,10 @@ class FormFieldLayout extends Component {
   renderVisibleMessages () {
     return this.hasMessages ? (
       <GridRow>
-        <GridCol offset={3}>
+        <GridCol
+          offset={(this.inlineContainerAndLabel) ? null : 3}
+          textAlign={(this.inlineContainerAndLabel) ? 'end' : null}
+        >
           <FormFieldMessages id={this._messagesId} messages={this.props.messages} />
         </GridCol>
       </GridRow>
@@ -159,7 +178,7 @@ class FormFieldLayout extends Component {
         >
           <GridRow>
             { this.renderVisibleLabel() }
-            <GridCol>
+            <GridCol width={(this.inlineContainerAndLabel) ? 'auto' : null}>
               { this.renderScreenReaderLabel() }
               { this.props.children }
             </GridCol>

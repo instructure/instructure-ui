@@ -36,7 +36,8 @@ example: true
 />
 ```
 
-An inline `textarea` with a fixed width, initial height and maxHeight:
+An inline `textarea` with a fixed width, initial height and maxHeight.
+*Note: IE11 needs a `width` prop if the TextArea is `inline`.*
 
 ```js
 ---
