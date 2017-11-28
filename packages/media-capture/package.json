@@ -26,6 +26,7 @@
     "access": "public"
   },
   "dependencies": {
+    "prop-types": "^15.6.0",
     "react": "^15.6.1"
   }
 }

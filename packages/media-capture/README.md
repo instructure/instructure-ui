@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/media-capture
+yarn add @instructure/media-capture
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/media-capture.svg
@@ -27,3 +27,40 @@ yarn add --dev @instructure/media-capture
 
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
+
+
+### Browser Support
+
+- Chrome, Firefox
+
+### Usage
+
+```javascript
+import React, { Component } from 'react'
+import { canUseMediaCapture, mediaCaptureStates }, MediaCapture from '@instructure/media-capture'
+
+export default class Container extends Component {
+  saveFile (file) {
+    // do something with the file
+  },
+  
+  mediaCaptureClosed (state) {
+    if (state === mediaCaptureStates.RECORDING) {
+      alert('Recording canceled.')
+    }
+  },
+
+  render () {
+    return (
+      { canUseMediaCapture() ?
+        <MediaCapture
+          onCompleted={this.saveFile}
+          onCancel={this.mediaCaptureClosed}
+          onClose={this.mediaCaptureClosed}
+        /> : null
+      }
+    )
+  }
+}
+
+```
