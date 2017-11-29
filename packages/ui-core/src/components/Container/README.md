@@ -23,6 +23,24 @@ example: true
 </Container>
 ```
 
+Add a shadow or border to the Container using `withShadow` and `withBorder` props
+
+```js
+---
+example: true
+---
+<Container
+  as="div"
+  size="medium"
+  textAlign="center"
+  margin="small"
+  withBorder
+  withShadow
+>
+  <Text as="div">{lorem.sentence()}</Text>
+</Container>
+```
+
 ### The `as` prop
 
 Change the `as` prop to set what element Container should render as.

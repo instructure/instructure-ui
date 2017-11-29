@@ -2,7 +2,6 @@ import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, borders, shadows }) {
   return {
-    borderColor: colors.tiara,
     arrowBorderColor: darken(colors.tiara, 5),
     backgroundColor: colors.white,
     textColor: colors.oxford,
@@ -13,7 +12,6 @@ export default function generator ({ colors, borders, shadows }) {
 
     arrowSize: '0.5rem',
     borderWidth: borders.widthSmall,
-    borderRadius: borders.radiusMedium,
 
     boxShadow: shadows.depth1
   }

@@ -49,3 +49,14 @@
 .visualDebug {
   border: 1px dashed red;
 }
+
+.withBorder {
+  border-style: solid;
+  border-color: var(--borderColor);
+  border-width: var(--borderWidth);
+  border-radius: var(--borderRadius);
+}
+
+.withShadow {
+  box-shadow: var(--boxShadow);
+}

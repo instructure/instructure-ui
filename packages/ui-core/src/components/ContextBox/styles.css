@@ -7,9 +7,6 @@
 .content {
   position: relative;
   display: block;
-  border-width: var(--borderWidth);
-  border-style: solid;
-  border-radius: var(--borderRadius);
 }
 
 .with-arrow {
@@ -178,15 +175,11 @@
 
 .default .content {
   background: var(--backgroundColor);
-  border-color: var(--borderColor);
-  box-shadow: var(--boxShadow);
   color: var(--textColor);
 }
 
 .inverse .content {
   background: var(--backgroundColorInverse);
-  border-color: var(--borderColorInverse);
-  box-shadow: var(--boxShadow);
   color: var(--textColorInverse);
 }
 
@@ -202,8 +195,10 @@
       border-inline-end-color: var(--backgroundColor);
     }
 
-    .arrow {
-      border-inline-end-color: var(--arrowBorderColor);
+    &.with-border {
+      .arrow {
+        border-inline-end-color: var(--arrowBorderColor);
+      }
     }
   }
 
@@ -218,8 +213,10 @@
       border-inline-start-color: var(--backgroundColor);
     }
 
-    .arrow {
-      border-inline-start-color: var(--arrowBorderColor);
+    &.with-border {
+      .arrow {
+        border-inline-start-color: var(--arrowBorderColor);
+      }
     }
   }
 
@@ -233,8 +230,10 @@
       border-bottom-color: var(--backgroundColor);
     }
 
-    .arrow {
-      border-bottom-color: var(--arrowBorderColor);
+    &.with-border {
+      .arrow {
+        border-bottom-color: var(--arrowBorderColor);
+      }
     }
   }
 
@@ -248,8 +247,10 @@
       border-top-color: var(--backgroundColor);
     }
 
-    .arrow {
-      border-top-color: var(--arrowBorderColor);
+    &.with-border {
+      .arrow {
+        border-top-color: var(--arrowBorderColor);
+      }
     }
   }
 }
@@ -266,8 +267,10 @@
       border-inline-end-color: var(--backgroundColorInverse);
     }
 
-    .arrow {
-      border-inline-end-color: var(--borderColorInverse);
+    &.with-border {
+      .arrow {
+        border-inline-end-color: var(--borderColorInverse);
+      }
     }
   }
 
@@ -282,8 +285,10 @@
       border-left-color: var(--backgroundColorInverse);
     }
 
-    .arrow {
-      border-left-color: var(--borderColorInverse);
+    &.with-border {
+      .arrow {
+        border-left-color: var(--borderColorInverse);
+      }
     }
   }
 
@@ -297,8 +302,10 @@
       border-bottom-color: var(--backgroundColorInverse);
     }
 
-    .arrow {
-      border-bottom-color: var(--borderColorInverse);
+    &.with-border {
+      .arrow {
+        border-bottom-color: var(--borderColorInverse);
+      }
     }
   }
 
@@ -312,8 +319,10 @@
       border-top-color: var(--backgroundColorInverse);
     }
 
-    .arrow {
-      border-top-color: var(--borderColorInverse);
+    &.with-border {
+      .arrow {
+        border-top-color: var(--borderColorInverse);
+      }
     }
   }
 }

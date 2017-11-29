@@ -23,6 +23,14 @@ export default class ContextBox extends Component {
     children:  PropTypes.node.isRequired,
     variant: PropTypes.oneOf(['default', 'inverse']),
     withArrow: PropTypes.bool,
+    /**
+     * Should the `<ContextBox />` have a border
+     */
+    withBorder: PropTypes.bool,
+    /**
+     * Should the `<ContextBox />` have a box shadow
+     */
+    withShadow: PropTypes.bool,
     arrowOffsetStart: PropTypes.oneOfType([
       PropTypes.number, PropTypes.string
     ]),
@@ -60,7 +68,9 @@ export default class ContextBox extends Component {
   static defaultProps = {
     variant: 'default',
     placement: 'center end',
-    withArrow: true
+    withArrow: true,
+    withBorder: true,
+    withShadow: true
   }
 
   render () {
@@ -74,6 +84,8 @@ export default class ContextBox extends Component {
       variant,
       children,
       withArrow,
+      withBorder,
+      withShadow,
       positionStart,
       positionTop,
       arrowOffsetTop,
@@ -85,6 +97,7 @@ export default class ContextBox extends Component {
       [styles.root]: true,
       [styles[variant]]: true,
       [styles['with-arrow']]: withArrow,
+      [styles['with-border']]: withBorder,
       [className]: className,
       [styles[`positioned--${placement.replace(' ', '-')}`]]: true
     }
@@ -113,6 +126,8 @@ export default class ContextBox extends Component {
           className={styles.content}
           padding={padding}
           textAlign={textAlign}
+          withBorder={withBorder}
+          withShadow={withShadow}
         >
           {withArrow && <span className={styles.arrow} style={arrowStyle} />}
           {children}

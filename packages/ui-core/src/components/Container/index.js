@@ -46,7 +46,17 @@ class Container extends Component {
     /**
     * provides a reference to the underlying html element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+
+    /**
+     * Whether or not to render a border around the Container
+     */
+    withBorder: PropTypes.bool,
+
+    /**
+     * Whether or not to render a box shadow for the Container
+     */
+    withShadow: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
@@ -104,7 +114,17 @@ class Container extends Component {
   }
 
   render () {
-    const { children, textAlign, display, visualDebug, size, padding, margin } = this.props
+    const {
+      children,
+      textAlign,
+      display,
+      visualDebug,
+      size,
+      padding,
+      margin,
+      withBorder,
+      withShadow
+    } = this.props
 
     const classes = {
       [styles.root]: true,
@@ -113,6 +133,8 @@ class Container extends Component {
       [styles[`textAlign--${textAlign}`]]: textAlign,
       [styles[size]]: size,
       [styles.hasPadding]: padding,
+      [styles.withBorder]: withBorder,
+      [styles.withShadow]: withShadow,
       [this.props.className]: this.props.className // eslint-disable-line react/prop-types
     }
 

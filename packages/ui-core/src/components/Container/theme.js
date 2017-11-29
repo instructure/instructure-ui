@@ -1,7 +1,12 @@
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator ({ spacing, breakpoints }) {
+export default function generator ({ colors, borders, shadows, spacing, breakpoints }) {
   return {
+    borderColor: colors.tiara,
+    borderWidth: borders.widthSmall,
+    borderRadius: borders.radiusMedium,
+    boxShadow: shadows.depth1,
+
     marginxxxSmall: spacing.xxxSmall,
     marginxxSmall: spacing.xxSmall,
     marginxSmall: spacing.xSmall,
