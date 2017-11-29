@@ -49,7 +49,8 @@ class FormFieldLayout extends Component {
     messagesId: PropTypes.string,
     children: PropTypes.node,
     inline: PropTypes.bool,
-    layout: PropTypes.oneOf(['stacked', 'inline'])
+    layout: PropTypes.oneOf(['stacked', 'inline']),
+    labelAlign: PropTypes.oneOf(['start', 'end'])
   };
   /* eslint-enable react/require-default-props */
 
@@ -57,6 +58,7 @@ class FormFieldLayout extends Component {
     inline: false,
     layout: 'stacked',
     as: 'label',
+    labelAlign: 'end',
     messagesId: undefined
   };
 
@@ -93,7 +95,10 @@ class FormFieldLayout extends Component {
 
   renderVisibleLabel () {
     return this.hasVisibleLabel ? (
-      <GridCol textAlign="end" width={3}>
+      <GridCol
+        textAlign={this.props.labelAlign}
+        width={3}
+      >
         { this.renderLabel() }
       </GridCol>
     ) : null

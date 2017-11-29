@@ -30,6 +30,7 @@ class FormField extends Component {
     children: PropTypes.node,
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline']),
+    labelAlign: PropTypes.oneOf(['start', 'end']),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom'])
   };
   /* eslint-enable react/require-default-props */
@@ -38,6 +39,7 @@ class FormField extends Component {
     inline: false,
     layout: 'stacked',
     messagesId: undefined,
+    labelAlign: 'end',
     vAlign: 'middle'
   };
 
