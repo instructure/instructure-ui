@@ -1,8 +1,8 @@
 import getDisplayName from './getDisplayName'
 import findDOMNode from '../dom/findDOMNode'
-import getFontSize from '../dom/getFontSize'
 import addResizeListener from '../dom/addResizeListener'
 import debounce from '../debounce'
+import px from '../px'
 
 /**
  * ---
@@ -93,38 +93,18 @@ export default function containerQuery (query) {
 
 function parseQuery (query, el) {
   const rules = []
-  let fontSizeRem = null
-  let fontSizeEm = null
 
   // eslint-disable-next-line no-restricted-syntax
   for (const [selectorName, {minWidth, maxWidth, minHeight, maxHeight}] of toPairs(query)) {
     rules.push([
       selectorName,
       {
-        minWidth: px(minWidth) || 0,
-        maxWidth: px(maxWidth) || Infinity,
-        minHeight: px(minHeight) || 0,
-        maxHeight: px(maxHeight) || Infinity
+        minWidth: px(minWidth, el) || 0,
+        maxWidth: px(maxWidth, el) || Infinity,
+        minHeight: px(minHeight, el) || 0,
+        maxHeight: px(maxHeight, el) || Infinity
       }
     ])
-  }
-
-  function px (val) {
-    if (!val || typeof val === 'number') {
-      return val
-    }
-
-    const [ num, unit ] = parseUnit(val)
-
-    if (unit === 'rem') {
-      fontSizeRem = fontSizeRem || getFontSize()
-      return num * fontSizeRem
-    } else if (unit === 'em') {
-      fontSizeEm = fontSizeEm || getFontSize(el)
-      return num * fontSizeEm
-    } else {
-      return num
-    }
   }
 
   return function ({width, height}) {
@@ -144,11 +124,4 @@ function parseQuery (query, el) {
 
 function toPairs (obj) {
   return Object.keys(obj).map((key) => [key, obj[key]])
-}
-
-function parseUnit (str) {
-  return [
-    parseFloat(`${str}`, 10),
-    str.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
-  ]
 }

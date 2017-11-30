@@ -5,9 +5,10 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  * ---
  * category: utilities
  * ---
- * @module shallowEqual
  * Performs equality by iterating through keys on an object and returning false
  * when any key has values which are not strictly equal between the arguments.
+ *
+ * @module shallowEqual
  *
  * @param {Object} objA
  * @param {Object} objB

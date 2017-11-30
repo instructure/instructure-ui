@@ -77,6 +77,79 @@ export default {
 
     /**
      *
+     * Ensures that there is exactly one of each specified child
+     *
+     * ```js
+     *  class Example extends Component {
+     *    static propTypes = {
+     *      children: CustomPropTypes.Children.oneOfEach([Foo, Bar, Baz])
+     *    }
+     *
+     *    render () {
+     *      return <div>{this.props.children}</div>
+     *    }
+     *  }
+     * ```
+     *
+     * This will enforce the following:
+     *
+     * ```jsx
+     *  <Example>
+     *    <Foo />
+     *    <Bar />
+     *    <Baz />
+     *  </Example>
+     * ```
+     * An error will be thrown
+     *  - If any of the children are not provided (ex. Foo, Bar, but missing Baz)
+     *  - If multiple children of the same type are provided (ex. Foo, Foo, Bar, and Baz)
+     *
+     * @param {Array} validTypes - Array of child types
+     * @returns {Error} if validation failed
+     */
+    oneOfEach (validTypes) {
+      return function (props, propName, componentName) {
+        const children = React.Children.toArray(props[propName])
+        const instanceCount = {}
+        const validTypeNames = validTypes.map((type) => {
+          const typeName = getDisplayName(type)
+          instanceCount[typeName] = 0
+          return typeName
+        })
+
+        for (let i = 0; i < children.length; i++) {
+          const childName = getDisplayName(children[i].type)
+
+          if (validTypeNames.indexOf(childName) < 0) {
+            return new Error(
+              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+            )
+          }
+
+          instanceCount[childName] = (instanceCount[childName] || 0) + 1
+        }
+
+        const errors = []
+        Object.keys(instanceCount).forEach((childName) => {
+          if (instanceCount[childName] > 1) {
+            errors.push(`${instanceCount[childName]} children of type ${childName}`)
+          }
+          if (instanceCount[childName] === 0) {
+            errors.push(`0 children of type ${childName}`)
+          }
+        })
+
+        if (errors.length > 0) {
+          return new Error(
+            `Expected exactly one of each ${validTypeNames.join(', ')} in ${componentName} but found:
+${errors.join('\n')}`
+          )
+        }
+      }
+    },
+
+    /**
+     *
      * Validate the type and order of children for a component.
      *
      * ```js

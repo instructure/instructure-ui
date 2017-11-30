@@ -4,8 +4,9 @@ import shortid from 'shortid'
  * ---
  * category: utilities
  * ---
- * @module uid
  * Generate a unique id
+ *
+ * @module uid
  *
  * @returns {String} a unique id
 */
