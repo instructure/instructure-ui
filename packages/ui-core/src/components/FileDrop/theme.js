@@ -3,9 +3,11 @@ export default function generator ({ borders, colors }) {
     backgroundColor: colors.white,
     borderRadius: borders.radiusLarge,
     borderWidth: borders.widthMedium,
+    borderStyle: 'dashed',
     hoverBorderColor: colors.brand,
-    hoverBorderStyle: 'dashed',
+    focusBorderWidth: borders.widthSmall,
     focusBorderStyle: 'solid',
+    focusBorderColor: colors.brand,
     acceptedColor: colors.brand,
     rejectedColor: colors.crimson
   }

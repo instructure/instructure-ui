@@ -3,8 +3,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import uid from '@instructure/ui-utils/lib/uid'
+
+import Container from '../Container'
+import FormFieldMessages from '../FormField/FormFieldMessages'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -92,6 +96,13 @@ export default class FileDrop extends Component {
       PropTypes.arrayOf(PropTypes.string)
     ]),
     /**
+    * object with shape: `{
+    * text: PropTypes.string,
+    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+    *   }`
+    */
+    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    /**
     * callback called when dropping files or when the file dialog window exits successfully
     */
     onDrop: PropTypes.func,
@@ -146,13 +157,15 @@ export default class FileDrop extends Component {
     enablePreview: false,
     allowMultiple: false,
     maxSize: Infinity,
-    minSize: 0
+    minSize: 0,
+    messages: []
   }
 
   constructor (props) {
     super(props)
 
     this.defaultId = `FileDrop__${uid()}`
+    this.messagesId = `FileDrop__messages-${uid()}`
   }
 
   state = {
@@ -164,6 +177,16 @@ export default class FileDrop extends Component {
   enterCounter = 0
   fileInputEl = null
   defaultId = null
+
+  get hasMessages () {
+    return this.props.messages && (this.props.messages.length > 0)
+  }
+
+  get invalid () {
+    return this.hasMessages && this.props.messages.findIndex((message) => {
+      return message.type === 'error'
+    }) >= 0
+  }
 
   getDataTransferItems (event, enablePreview) {
     let list = Array.prototype.slice.call(getEventFiles(event, this.fileInputEl))
@@ -325,7 +348,7 @@ export default class FileDrop extends Component {
     const id = this.props.id || this.defaultId
     const classes = {
       [styles.root]: true,
-      [styles.dragRejected]: this.state.isDragRejected,
+      [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted,
       [styles.focused]: this.state.focused
     }
@@ -342,7 +365,9 @@ export default class FileDrop extends Component {
           onDrop={this.handleDrop}
         >
           <span className={styles.label}>
-            {this.renderLabel()}
+            <span className={styles.layout}>
+              {this.renderLabel()}
+            </span>
           </span>
         </label>
         <input
@@ -357,7 +382,13 @@ export default class FileDrop extends Component {
           multiple={allowMultiple}
           accept={this.acceptStr()}
           onChange={this.handleDrop}
+          aria-describedby={this.hasMessages ? this.messagesId : null}
         />
+        {(this.hasMessages) ?
+          <Container display="block" margin="small 0 0">
+            <FormFieldMessages id={this.messagesId} messages={this.props.messages} />
+          </Container>
+        : null}
       </div>
     )
   }

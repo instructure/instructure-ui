@@ -29,13 +29,17 @@ example: true
 ### Accept
 
 The `accept` prop dictates what type of files are allowed. It can be an array or comma-separated string of
-[MIME type formats](https://en.wikipedia.org/wiki/Media_type#Common_examples) and/or file extensions
+[MIME type formats](https://en.wikipedia.org/wiki/Media_type#Common_examples) and/or file extensions.
+
+FileDrop accepts the same `messages` prop as the other Instructure UI input components for providing
+form validation feedback. If there are `error` messages in the `messages` array, FileDrop's border
+will turn the theme's `rejectedColor`.
 
 ```js
 ---
 example: true
 ---
-<Grid startAt="medium" vAlign="middle">
+<Grid startAt="medium">
   <GridRow>
     <GridCol>
 
@@ -43,6 +47,7 @@ example: true
         accept=".jpg"
         onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }}
         onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }}
+        messages={[{ text: 'Invalid file type', type: 'error' }]}
         label={
           <Billboard
             size="small"

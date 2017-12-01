@@ -20,36 +20,63 @@
   box-sizing: border-box;
   position: relative;
   z-index: 1;
-  overflow: hidden;
   text-align: center;
   border-radius: var(--borderRadius);
-  border: var(--borderWidth) solid transparent;
+  border: var(--borderWidth) var(--borderStyle) transparent;
   cursor: pointer;
 
   &:hover {
     border-color: var(--hoverBorderColor);
-    border-style: var(--hoverBorderStyle);
   }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusBorderColor);
+    border-radius: var(--borderRadius);
+    opacity: 0;
+    transform: scale(0.01);
+    transition: all 0.2s;
+  }
+}
+
+.layout {
+  display: block;
+  overflow: hidden;
+  border-radius: var(--borderRadius);
 }
 
 .focused {
-  .label {
-    border-color: var(--hoverBorderColor);
-    border-style: solid;
+  .label::before {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
-.dragAccepted,
+.dragAccepted {
+  .label {
+    border-color: var(--acceptedColor);
+  }
+
+  &.focused {
+    .label::before {
+      border-color: var(--acceptedColor);
+    }
+  }
+}
+
 .dragRejected {
   .label {
-    border-style: var(--focusBorderStyle);
+    border-color: var(--rejectedColor);
   }
-}
 
-.dragAccepted .label {
-  border-color: var(--acceptedColor);
-}
-
-.dragRejected .label {
-  border-color: var(--rejectedColor);
+  &.focused {
+    .label::before {
+      border-color: var(--rejectedColor);
+    }
+  }
 }
