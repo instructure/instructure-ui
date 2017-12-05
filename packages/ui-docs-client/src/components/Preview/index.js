@@ -12,13 +12,7 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 import theme from './theme'
 
-if (process.env.NODE_ENV !== 'production') {
-  axe(React, ReactDOM, 1500, {
-    rules: [
-      { id: 'color-contrast', enabled: false }
-    ]
-  })
-}
+let _createElement
 
 @themeable(theme, styles)
 export default class Preview extends Component {
@@ -54,6 +48,16 @@ export default class Preview extends Component {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
+
+    if (process.env.NODE_ENV !== 'production') {
+      _createElement = React.createElement
+
+      axe(React, ReactDOM, 1500, {
+        rules: [
+          { id: 'color-contrast', enabled: false }
+        ]
+      })
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -65,6 +69,10 @@ export default class Preview extends Component {
   componentWillUnmount () {
     if (this._mountNode) {
       ReactDOM.unmountComponentAtNode(this._mountNode)
+    }
+
+    if (_createElement) {
+      React.createElement = _createElement
     }
   }
 

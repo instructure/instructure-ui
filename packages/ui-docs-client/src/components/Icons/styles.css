@@ -1,0 +1,31 @@
+.header {
+  max-width: 24rem;
+}
+
+.filters {
+  display: inline-block;
+}
+
+.glyphs {
+  display: flex;
+  max-width: var(--gridMaxWidth);
+  flex-wrap: wrap;
+  margin: 0 auto;
+  padding-top: 1rem;
+}
+
+.glyph {
+  min-width: var(--glyphMinWidth);
+  flex-basis: var(--glyphMinWidth);
+  flex-grow: 1;
+  margin: 0.5rem;
+}
+
+@media (max-width: var(--gridBreakpoint)) {
+  .grid {
+    display: block;
+  }
+  .cell {
+    max-width: none;
+  }
+}

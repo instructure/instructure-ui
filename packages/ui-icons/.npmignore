@@ -1,0 +1,7 @@
+**/.*
+babelrc.js
+*.config.js
+*.conf.js
+__build__
+src
+gulpfile.js

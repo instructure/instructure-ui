@@ -25,6 +25,7 @@
     "@instructure/ui-core": "^4.5.0",
     "@instructure/ui-docs-client": "^4.5.0",
     "@instructure/ui-docs-plugin": "^4.5.0",
+    "@instructure/ui-icons": "^4.5.0",
     "@instructure/ui-polyfill-loader": "^4.5.0",
     "@instructure/ui-presets": "^4.5.0",
     "@instructure/ui-themeable": "^4.5.0",
@@ -35,8 +36,10 @@
     "instructure-icons": "^4.3.2",
     "lorem-ipsum": "^1.0.4",
     "moment": "^2.10.6",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "webpack": "^3.8.1"
+    "raw-loader": "^0.5.1",
+    "react": "^15.6.2",
+    "react-dom": "^15.6.2",
+    "svg-inline-loader": "^0.8.0",
+    "webpack": "^3.10.0"
   }
 }

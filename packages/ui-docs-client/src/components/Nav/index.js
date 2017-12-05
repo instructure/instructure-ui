@@ -7,6 +7,7 @@ import themeable from '@instructure/ui-themeable'
 import Text from '@instructure/ui-core/lib/components/Text'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
 import Link from '@instructure/ui-core/lib/components/Link'
+import Button from '@instructure/ui-core/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
@@ -35,12 +36,14 @@ export default class Nav extends Component {
     docs: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     sections: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
     themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    icons: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     selected: PropTypes.string
   }
 
   static defaultProps = {
     docs: [],
     themes: [],
+    icons: {},
     selected: undefined
   }
 
@@ -253,7 +256,7 @@ export default class Nav extends Component {
       .map(sectionId => this.renderSectionLink(sectionId))
   }
 
-  renderThemeSection () {
+  renderThemes () {
     let themeSelected = false
 
     const themeLinks = Object.keys(this.props.themes)
@@ -285,15 +288,37 @@ export default class Nav extends Component {
       this.markExpanded(this._themeId)
     }
 
-    return this.createNavToggle({
+    const link = this.createNavToggle({
       id: this._themeId,
       title: 'Themes',
       children: themeLinks
     })
+
+    return link ? [link] : []
+  }
+
+  renderIcons () {
+    const { selected, icons } = this.props
+
+    const formats = Object.keys(icons.formats)
+      .filter((key) => this.matchQuery(icons.formats[key].format) || this.matchQuery('iconography'))
+
+    return (formats.length > 0) ? [
+      <div className={styles.navToggle} key={'iconography'}>
+        <NavToggle
+          summary={'Iconography'}
+          href="#iconography"
+        />
+      </div>
+    ] : []
   }
 
   render () {
     const sections = this.renderSections()
+    const themes = this.renderThemes()
+    const icons = this.renderIcons()
+    const matches = [ ...sections, ...themes, ...icons ]
+
     return (
       <div className={styles.root}>
         <div role="search" className={styles.search}>
@@ -304,8 +329,8 @@ export default class Nav extends Component {
           />
         </div>
         <div role="navigation" className={styles.sections}>
-          {sections && sections.length > 0
-            ? sections
+          { matches.length > 0
+            ? matches
             : <Text
               weight="light"
               size="medium"
@@ -315,7 +340,6 @@ export default class Nav extends Component {
                 No matches for <b>{this.state.queryStr}</b>
             </Text>
           }
-          {this.renderThemeSection()}
         </div>
       </div>
     )

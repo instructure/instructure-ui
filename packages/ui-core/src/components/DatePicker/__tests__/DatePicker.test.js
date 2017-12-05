@@ -59,8 +59,8 @@ describe('<DatePicker />', () => {
 
   it('localizes the calendar layout', () => {
     const subject = testbed.render({locale: 'fr'})
-    expect(subject.find('th PresentationContent').first().text()).to.equal('Lu')
-    expect(subject.find('th ScreenReaderContent').first().text()).to.equal('lundi')
+    expect(subject.find('th PresentationContent').first().text().toLowerCase()).to.equal('lu')
+    expect(subject.find('th ScreenReaderContent').first().text().toLowerCase()).to.equal('lundi')
   })
 
   it('localizes the header', () => {

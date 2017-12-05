@@ -90,6 +90,15 @@
       opacity: 1;
     }
   }
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: none;
+    color: var(--textColor);
+  }
+
+  text-decoration: none;
 }
 
 .fluidWidth {

@@ -7,11 +7,13 @@ import Text from '@instructure/ui-core/lib/components/Text'
 export default class NavToggle extends Component {
   static propTypes = {
     summary: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(['section', 'category'])
+    variant: PropTypes.oneOf(['section', 'category']),
+    children: PropTypes.node
   }
 
   static defaultProps = {
-    variant: 'section'
+    variant: 'section',
+    children: undefined
   }
 
   focus () {
@@ -49,6 +51,18 @@ export default class NavToggle extends Component {
       primaryColor: styles.color
     }
 
+    const summaryContent = (
+      <Text
+        weight={styles.textWeight}
+        transform={styles.textTransform}
+        size={styles.textSize}
+        theme={typographyTheme}
+        color="primary"
+      >
+        {summary}
+      </Text>
+    )
+
     return (
       <ToggleDetails
         ref={(c) => { this._toggle = c }}
@@ -56,17 +70,7 @@ export default class NavToggle extends Component {
         theme={toggleTheme}
         fluidWidth
         {...props}
-        summary={
-          <Text
-            weight={styles.textWeight}
-            transform={styles.textTransform}
-            size={styles.textSize}
-            theme={typographyTheme}
-            color="primary"
-          >
-            {summary}
-          </Text>
-        }
+        summary={summaryContent}
       />
     )
   }

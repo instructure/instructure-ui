@@ -1,0 +1,29 @@
+.root {
+  text-align: center;
+}
+
+.variants {
+  box-sizing: border-box;
+  padding: var(--padding);
+  margin: 0;
+  background-color: var(--backgroundColor);
+  background-image: linear-gradient(var(--gradientCheckerboard)),
+    linear-gradient(var(--gradientCheckerboard));
+  background-position: 0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2);
+  background-size: var(--gradientCheckerboardSize) var(--gradientCheckerboardSize);
+  border: var(--border);
+  border-radius: var(--borderRadius);
+  position: relative;
+  overflow: scroll;
+  margin-bottom: 0.5rem;
+}
+
+.info {
+  color: #999;
+  font-family: "Courier New", Courier, monospace;
+  margin: 0.5em 1em;
+}
+
+.variant {
+  display: inline-block;
+}

@@ -17,6 +17,7 @@ import Header from '../Header'
 import Nav from '../Nav'
 import Theme from '../Theme'
 import Section from '../Section'
+import Icons from '../Icons'
 
 import Button from '../Button'
 
@@ -34,11 +35,13 @@ export default class App extends Component {
     parents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     sections: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    icons: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     descriptions: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     library: LibraryPropType.isRequired
   }
 
   static defaultProps = {
+    icons: {},
     themes: {},
     parents: {},
     sections: {},
@@ -144,6 +147,25 @@ export default class App extends Component {
     )
   }
 
+  renderIcons (key) {
+    const { icons } = this.props
+    const keys = Object.keys(icons.formats)
+    const { format } = (icons.formats[key] || icons.formats['react'] || icons.formats[keys[0]])
+
+    return (
+      <Section id={key}>
+        <Heading level="h2" margin="0 0 medium 0">
+          Iconography
+        </Heading>
+        <Icons
+          packageName={icons.packageName}
+          selectedFormat={key}
+          formats={icons.formats}
+        />
+      </Section>
+    )
+  }
+
   renderDocument (doc) {
     const { descriptions, docs, parents } = this.props
     let children = []
@@ -201,15 +223,18 @@ export default class App extends Component {
   renderContent (key) {
     const doc = this.props.docs[key]
     const theme = this.props.themes[key]
+    const icon = this.props.icons.formats[key]
 
     if (!key || key === 'index') {
       return this.renderIndex()
     } if (key === 'CHANGELOG') {
       return this.renderChangeLog()
-    } else if (doc) {
-      return this.renderDocument(doc)
+    } else if (key === 'iconography' || icon) {
+      return this.renderIcons(key)
     } else if (theme) {
       return this.renderTheme(key)
+    } else if (doc) {
+      return this.renderDocument(doc)
     } else {
       return this.renderError(key)
     }
@@ -296,6 +321,7 @@ export default class App extends Component {
                 sections={this.props.sections}
                 docs={this.props.docs}
                 themes={this.props.themes}
+                icons={this.props.icons}
               />
             </div>
           </Tray>

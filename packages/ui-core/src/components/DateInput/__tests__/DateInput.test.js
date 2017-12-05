@@ -184,8 +184,7 @@ describe('<DateInput />', () => {
 
   it('should fire the onDateChange event with rawConversionFailed=true event when DatePicker value is invalid', () => {
     const onDateChange = testbed.stub()
-    const OrigConsoleError = console.error
-    console.error = testbed.stub()
+    testbed.stub(console, 'error')
 
     const subject = testbed.render({
       onDateChange,
@@ -196,8 +195,6 @@ describe('<DateInput />', () => {
 
     expect(onDateChange).to.have.been.called
     expect(onDateChange.getCall(0).args[3]).to.equal(true)
-
-    console.error = OrigConsoleError
   })
 
   it('should not touch the time portion of the initial value when DatePicker value changes', () => {

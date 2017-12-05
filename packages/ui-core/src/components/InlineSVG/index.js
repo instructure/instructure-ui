@@ -112,7 +112,7 @@ export default class InlineSVG extends Component {
         aria-hidden={title ? null : 'true'}
         aria-labelledby={this.labelledBy}
         role={this.role}
-        focusable={focusable}
+        focusable={focusable ? 'true' : 'false'}
         className={classnames({
           [styles.root]: true,
           [props.className]: props.className

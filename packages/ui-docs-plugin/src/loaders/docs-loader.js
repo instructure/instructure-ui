@@ -18,15 +18,8 @@ module.exports = function DocsLoader () {
     return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(loaderOptions)}!${filepath}')`
   }
 
-  const themes = (options.themes || [])
-    .map((theme) => {
-      const themePath = path.resolve(options.projectRoot, theme)
-      const pathInfo = getPathInfo(themePath, options, context)
-      return `{
-        resource: require('${path.resolve(options.context, themePath)}').default,
-        requirePath: '${pathInfo.requirePath}'
-      }`
-    })
+  const themes = parseThemes(options.themes, options)
+  const icons = parseIcons(options.icons)
 
   const files = options.files.map(file => path.resolve(options.projectRoot, file))
   const ignore = options.ignore ? options.ignore.map(file => path.resolve(options.projectRoot, file)) : undefined
@@ -49,9 +42,41 @@ module.exports = function DocsLoader () {
         ${JSON.stringify(options.library || {})}
       )
 
+      props.icons = ${icons}
+
       renderClient(props, document.getElementById('app'))
     `)
   }).catch((error) => {
     callback(error)
   })
+}
+
+function parseThemes (themes = [], options) {
+  return themes.map((theme) => {
+    const themePath = path.resolve(options.projectRoot, theme)
+    const pathInfo = getPathInfo(themePath, options, options.context)
+    return `{
+        resource: require('${path.resolve(options.context, themePath)}').default,
+        requirePath: '${pathInfo.requirePath}'
+      }`
+  })
+}
+
+function parseIcons (icons = {}) {
+  const formats = Object.keys(icons.formats).map((format) => {
+    return `\
+'icons-${format.toLowerCase()}': {
+  format: '${format}',
+  glyphs: require('${icons.formats[format]}'),
+  requirePath: '${icons.formats[format]}'
+}`
+  })
+
+  return `
+  {
+    packageName: '${icons.packageName}',
+    formats: {
+      ${formats.join(',\n')}
+    }
+  }`
 }

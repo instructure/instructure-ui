@@ -1,0 +1,3 @@
+$icons-<%= variant %>: (<% _.each(glyphs, function(glyph, index) { %>
+  <%= glyph.glyphName %>: "\<%= glyph.codepoint %>"<% if (index < glyphs.length - 1) { %>,<% } }); %>
+);

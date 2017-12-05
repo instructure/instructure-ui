@@ -8,6 +8,7 @@ import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDow
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
 import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Button from '../Button'
 
@@ -61,7 +62,7 @@ class ToggleDetails extends Component {
     /**
     * The toggleable content passed inside the ToggleDetails component
     */
-    children: PropTypes.node.isRequired,
+    children: PropTypes.node,
     /**
     * Choose a size for the expand/collapse icon
     */
@@ -77,7 +78,8 @@ class ToggleDetails extends Component {
     iconPosition: 'start',
     expanded: null,
     defaultExpanded: false,
-    onToggle: function (event, expanded) {}
+    onToggle: function (event, expanded) {},
+    children: undefined
   }
 
   constructor (props) {
@@ -143,28 +145,44 @@ class ToggleDetails extends Component {
 
   renderToggle () {
     const {
-      variant
+      variant,
+      children,
+      ...props
     } = this.props
 
-    const props = {
+    const a11yProps = children ? {
       'aria-controls': this._contentId,
       'aria-expanded': this.expanded,
       onClick: this.handleToggle
-    }
+    } : {}
 
     if (variant === 'filled') {
       return (
         <Button
-          {...props}
+          {...omitProps(props, ToggleDetails.propTypes)}
+          {...a11yProps}
           fluidWidth
         >
           {this.renderSummary()}
         </Button>
       )
+    } else if (props.href) {
+      return (
+        <a
+          {...omitProps(props, ToggleDetails.propTypes)}
+          {...a11yProps}
+          className={classnames(styles.toggle, styles[variant], {
+            [styles.fluidWidth]: this.props.fluidWidth
+          })}
+        >
+          {this.renderSummary()}
+        </a>
+      )
     } else {
       return (
         <button
-          {...props}
+          {...omitProps(props, ToggleDetails.propTypes)}
+          {...a11yProps}
           type="button"
           className={classnames(styles.toggle, styles[variant], {
             [styles.fluidWidth]: this.props.fluidWidth
@@ -180,14 +198,14 @@ class ToggleDetails extends Component {
     const { iconPosition } = this.props
     const Icon = this.expanded ? this.props.iconExpanded : this.props.icon
 
-    return (
+    return this.props.children ? (
       <Icon
         className={classnames(styles.icon, {
           [styles.iconStart]: iconPosition === 'start',
           [styles.iconEnd]: iconPosition === 'end'
         })}
       />
-    )
+    ) : null
   }
 
   renderDetails () {
@@ -203,7 +221,7 @@ class ToggleDetails extends Component {
           [styles.indentDetails]: iconPosition === 'start' && !fluidWidth
         })}
       >
-        {this.renderContent()}
+        {this.props.children && this.renderContent()}
       </div>
     )
   }

@@ -1,22 +1,27 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import IconUserLine from 'instructure-icons/lib/Line/IconUserLine'
-import IconPlusSolid from 'instructure-icons/lib/Solid/IconPlusSolid'
-import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
+
 import moment from 'moment'
 import 'moment/min/locales'
 import lorem from 'lorem-ipsum'
 
 import * as UICore from '@instructure/ui-core'
 
+import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
+import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+
+import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
+import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
+
+import iconExample from '!svg-inline-loader!./heart_lg.svg' // eslint-disable-line
 import avatarImage from './placeholder-avatar.png'
-import iconExample from './heart_lg.svg'
 import placeholderImage from './placeholder-image'
 
 const globals = Object.assign({
-  PlaceholderIcon: IconUserLine,
-  IconPlus: IconPlusSolid,
-  IconX: IconXSolid,
+  PlaceholderIcon: IconUser,
+  IconPlus: IconPlus,
+  IconX: IconX,
   moment,
   avatarImage,
   iconExample,

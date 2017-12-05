@@ -34,14 +34,25 @@ module.exports = [
     ]
   },
   {
-    test: /\.png$/,
-    loader: 'url-loader'
+    test: /\.css$/,
+    include: [/ui-icons/],
+    use: [
+      'style-loader',
+      'css-loader'
+    ]
   },
   {
-    test: /\.svg$/,
-    loader: 'svg-inline-loader',
+    test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+    loader: 'url-loader',
     options: {
-      removeSVGTagAttrs: false
+      limit: 10000
+    }
+  },
+  {
+    test: /\.png$/,
+    loader: 'url-loader',
+    options: {
+      limit: 10000
     }
   }
 ]

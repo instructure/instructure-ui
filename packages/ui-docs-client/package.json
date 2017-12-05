@@ -21,11 +21,12 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.5.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
   },
   "dependencies": {
     "@instructure/ui-core": "^4.5.0",
+    "@instructure/ui-icons": "^4.5.0",
     "@instructure/ui-themeable": "^4.5.0",
     "@instructure/ui-themes": "^4.5.0",
     "@instructure/ui-utils": "^4.5.0",
@@ -40,8 +41,8 @@
     "react-axe": "^2.1.7"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.1",
-    "react-dom": "^0.14.9 || ^15.6.1"
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
   },
   "publishConfig": {
     "access": "public"

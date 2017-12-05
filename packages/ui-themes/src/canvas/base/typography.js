@@ -1,6 +1,6 @@
 export default Object.freeze({
   fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyMonospace: 'monospace',
+  fontFamilyMonospace: '"Courier New", Courier, monospace',
 
   fontSizeXSmall: '0.75rem', // 12px
   fontSizeSmall: '0.875rem', // 14px
