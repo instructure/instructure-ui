@@ -6,12 +6,13 @@ export default function generator ({ colors, spacing, typography }) {
     fontWeight: typography.fontWeightNormal,
     lineHeight: typography.lineHeightCondensed,
     fontSize: typography.fontSizeMedium,
+    labelPadding: spacing.large,
 
     labelColor: colors.oxford,
     background: colors.white,
 
     iconColor: colors.oxford,
-    iconMarginEnd: spacing.xSmall,
+    iconPadding: spacing.small,
 
     activeBackground: colors.brand,
     activeLabelColor: colors.white,

@@ -163,13 +163,8 @@ class MenuItem extends Component {
   renderContent () {
     const { children, type } = this.props
 
-    const classes = {
-      [styles.content]: true,
-      [styles.arrow]: type === 'flyout'
-    }
-
     return (
-      <span className={classnames(classes)}>
+      <span>
         {(type === 'checkbox' || type === 'radio') &&
           <span className={styles.icon}>
             {this.selected && <IconCheckSolid />}
@@ -186,14 +181,24 @@ class MenuItem extends Component {
   }
 
   render () {
-    const { disabled, controls, onKeyDown, onKeyUp, onMouseOver, active, type } = this.props
+    const {
+      disabled,
+      controls,
+      onKeyDown,
+      onKeyUp,
+      onMouseOver,
+      active,
+      type,
+      children
+    } = this.props
 
     const props = omitProps(this.props, MenuItem.propTypes)
     const ElementType = this.elementType
 
     const classes = {
       [styles.root]: true,
-      [styles.active]: active
+      [styles.active]: active,
+      [styles.flyout]: type === 'flyout'
     }
 
     /* eslint-disable jsx-a11y/mouse-events-have-key-events, no-nested-ternary */

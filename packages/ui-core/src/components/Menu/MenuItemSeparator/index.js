@@ -14,7 +14,7 @@ parent: Menu
 class MenuItemSeparator extends Component {
   render () {
     return (
-      <div {...this.props} role="separator" className={styles.root} />
+      <div {...this.props} role="presentation" className={styles.root} />
     )
   }
 }
