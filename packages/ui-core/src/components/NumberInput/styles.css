@@ -93,6 +93,12 @@
   flex: 0 0 var(--arrowsContainerWidth);
   display: flex;
   flex-direction: column;
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .arrow {
