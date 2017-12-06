@@ -4,36 +4,47 @@ import TextArea from '../index'
 describe('TextArea', () => {
   const testbed = new Testbed(<TextArea label="Name" autoGrow={false} />)
 
-  /* eslint-disable max-len */
-  it('should adjust the height to fit the text'/* , done => {
+  it('adjusts the minHeight to fit the text', () => {
     const subject = testbed.render({
       autoGrow: true,
       onChange: testbed.stub()
     })
+    testbed.raf()
+    testbed.tick()
+    const originalMinHeight = parseFloat(subject.instance().minHeight)
 
-    const originalHeight = parseFloat(subject.find('textarea').getComputedStyle().height)
+    /* eslint-disable max-len */
+    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
+    /* eslint-enable max-len */
+    testbed.raf()
+    testbed.tick()
+    const minHeight = parseFloat(subject.instance().minHeight)
 
-    subject.setProps(
-      {
+    expect(minHeight).to.be.above(originalMinHeight)
+  })
 
-        value:
-          'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'
-      },
-      () => {
-        testbed.raf()
-        testbed.tick()
+  it('adjusts the minHeight to fit the text after being cleared', () => {
+    const subject = testbed.render({
+      autoGrow: true,
+      onChange: testbed.stub()
+    })
+    testbed.raf()
+    testbed.tick()
 
-        testbed.defer(() => {
-          const height = parseFloat(subject.find('textarea').getComputedStyle().height)
+    const originalMinHeight = subject.instance().minHeight
+    /* eslint-disable max-len */
+    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
+    /* eslint-enable max-len */
+    testbed.raf()
+    testbed.tick()
 
-          expect(parseFloat(height)).to.be.above(originalHeight)
+    subject.setProps({ value: '' })
+    testbed.raf()
+    testbed.tick()
 
-          done()
-        }, 500)
-      }
-    )
-  }*/)
-  /* eslint-enable max-len */
+    const minHeight = subject.instance().minHeight
+    expect(minHeight).to.equal(originalMinHeight)
+  })
 
   it('should accept a default value', () => {
     const subject = testbed.render({
