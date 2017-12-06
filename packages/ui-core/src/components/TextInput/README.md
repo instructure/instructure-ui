@@ -11,6 +11,45 @@ example: true
 <TextInput label="Name" placeholder="Doe, John Doe" />
 ```
 
+`TextInput` supports textAlign set to `start` _(default)_ or `center`. Center is ONLY to be used in very specific circumstances that have been directed by design.
+```js
+---
+example: true
+---
+<Table
+  caption={<ScreenReaderContent>Center Align Use Case</ScreenReaderContent>}>
+  <thead>
+    <tr>
+      <th scope="col"><ScreenReaderContent>Band</ScreenReaderContent></th>
+      <th scope="col"><ScreenReaderContent>Album</ScreenReaderContent></th>
+      <th scope="col"><ScreenReaderContent>Song</ScreenReaderContent></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <TextInput 
+          textAlign="center"
+          label={<ScreenReaderContent>Best Band</ScreenReaderContent>}
+          placeholder="Best Band" />
+      </td>
+      <td>
+        <TextInput 
+          textAlign="center"
+          label={<ScreenReaderContent>Best Album</ScreenReaderContent>}
+          placeholder="Best Album" />
+      </td>
+      <td>
+        <TextInput 
+          textAlign="center"
+          label={<ScreenReaderContent>Best Song</ScreenReaderContent>}
+          placeholder="Best Song" />
+      </td>
+    </tr>
+  </tbody>
+</Table>
+```
+
 A `TextInput` with errors:
 
 ```js

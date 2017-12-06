@@ -34,6 +34,7 @@ class TextInput extends Component {
     messages: PropTypes.arrayOf(CustomPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
+    textAlign: PropTypes.oneOf(['start', 'center']),
     width: PropTypes.string,
     inline: PropTypes.bool,
     /**
@@ -66,6 +67,7 @@ class TextInput extends Component {
     inline: false,
     type: 'text',
     size: 'medium',
+    textAlign: 'start',
     messages: [],
     disabled: false,
     inputRef: function (input) {},
@@ -129,6 +131,7 @@ class TextInput extends Component {
     const {
       type,
       size,
+      textAlign,
       placeholder,
       value,
       defaultValue,
@@ -144,6 +147,7 @@ class TextInput extends Component {
     const classes = {
       [styles.input]: true,
       [styles[size]]: size,
+      [styles[`textAlign--${textAlign}`]]: textAlign,
       [styles.hasIcon]: icon
     }
 
