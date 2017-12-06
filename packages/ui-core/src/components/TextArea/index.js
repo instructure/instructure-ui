@@ -141,18 +141,24 @@ class TextArea extends Component {
       return
     }
 
-    const scrollHeight = this._textarea.scrollHeight
-    let initialHeight = this.props.height
-    let minHeight = scrollHeight
-    let maxHeight = this.props.maxHeight
+    if (this.initialMinHeight && this.value === '') {
+      this._textarea.style.minHeight = this.initialMinHeight
+    } else {
+      const scrollHeight = this._textarea.scrollHeight
+      let initialHeight = this.props.height
+      let minHeight = scrollHeight
+      let maxHeight = this.props.maxHeight
 
-    if (initialHeight && scrollHeight < (initialHeight = parseInt(initialHeight))) {
-      minHeight = initialHeight
-    } else if (maxHeight && scrollHeight > (maxHeight = parseInt(maxHeight))) {
-      minHeight = maxHeight
+      if (initialHeight && scrollHeight < (initialHeight = parseInt(initialHeight))) {
+        minHeight = initialHeight
+      } else if (maxHeight && scrollHeight > (maxHeight = parseInt(maxHeight))) {
+        minHeight = maxHeight
+      }
+
+      const minHeightInPx = `${minHeight}px`
+      if (!this.initialMinHeight) { this.initialMinHeight = minHeightInPx }
+      this._textarea.style.minHeight = minHeightInPx
     }
-
-    this._textarea.style.minHeight = `${minHeight}px`
   }
 
   focus () {
@@ -174,6 +180,10 @@ class TextArea extends Component {
     if (typeof onChange === 'function') {
       onChange(event)
     }
+  }
+
+  get minHeight () {
+    return this._textarea.style.minHeight
   }
 
   get invalid () {
