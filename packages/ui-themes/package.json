@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "A library of @instructure/ui-themeable themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -23,14 +23,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^4.1.0",
-    "@instructure/ui-themeable": "^4.1.0",
+    "@instructure/ui-presets": "^4.2.0",
+    "@instructure/ui-themeable": "^4.2.0",
     "babel-cli": "6.26.0",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
   "peerDependencies": {
-    "@instructure/ui-themeable": "^4.1.0"
+    "@instructure/ui-themeable": "^4.2.0"
   },
   "publishConfig": {
     "access": "public"

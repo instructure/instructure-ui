@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-docs-client",
-  "version": "4.1.0",
+  "version": "4.2.0",
   "description": "A React application to display documentation made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,17 +22,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^4.1.0",
-    "@instructure/ui-testbed": "^4.1.0",
+    "@instructure/ui-presets": "^4.2.0",
+    "@instructure/ui-testbed": "^4.2.0",
     "babel-cli": "6.26.0",
     "babel-plugin-inline-import": "2.0.6",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
   "dependencies": {
-    "@instructure/ui-core": "^4.1.0",
-    "@instructure/ui-themeable": "^4.1.0",
-    "@instructure/ui-utils": "^4.1.0",
+    "@instructure/ui-core": "^4.2.0",
+    "@instructure/ui-themeable": "^4.2.0",
+    "@instructure/ui-utils": "^4.2.0",
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.27.4",
