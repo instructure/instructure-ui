@@ -12,6 +12,8 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
+    "test": "ui-test",
+    "test:watch": "ui-test --watch",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
@@ -20,13 +22,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "4.0.0"
+    "@instructure/ui-presets": "4.0.0",
+    "enzyme": "^3.2.0",
+    "redux-devtools": "^3.4.1"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
     "prop-types": "^15.6.0",
-    "react": "^15.6.1"
+    "react": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2"
   }
 }

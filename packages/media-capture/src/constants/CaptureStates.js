@@ -1,0 +1,6 @@
+export const FINISHED = 'FINISHED'
+export const PREVIEWSAVE = 'PREVIEWSAVE'
+export const READY = 'READY'
+export const RECORDING = 'RECORDING'
+export const SAVING = 'SAVING'
+export const STARTING = 'STARTING'
