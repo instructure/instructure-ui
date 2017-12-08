@@ -47,9 +47,17 @@ export default class Avatar extends Component {
   }
 
   makeInitialsFromName () {
-    const name = this.props.name
+    let name = this.props.name
 
-    if (name && typeof name === 'string' && name.match(/\s+/)) {
+    if (!name || typeof name !== 'string') {
+      return
+    }
+    name = name.trim()
+    if (name.length === 0) {
+      return
+    }
+
+    if (name.match(/\s+/)) {
       const names = name.split(/\s+/)
       return (names[0][0] + names[names.length - 1][0]).toUpperCase()
     } else {
