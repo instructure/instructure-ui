@@ -38,7 +38,7 @@ class CloseButton extends Component {
     variant: 'icon',
     placement: 'static',
     offset: 'x-small',
-    size: 'medium',
+    size: 'small',
     margin: '0'
   }
 
@@ -54,7 +54,7 @@ class CloseButton extends Component {
           [styles[`offset--${offset}`]]: offset
         })}
       >
-        <Button {...pickProps(this.props, Button.propTypes)} size="small">
+        <Button {...pickProps(this.props, Button.propTypes)}>
           <IconXSolid />
           <ScreenReaderContent>
             {this.props.children}
