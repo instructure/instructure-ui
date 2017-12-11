@@ -20,6 +20,7 @@
     "pretest": "yarn bootstrap",
     "test": "npm-run-all lint:commit lint test:packages",
     "test:packages": "lerna run test --parallel --stream",
+    "test:packages:mocha": "NODE_RUNTIME=true lerna run test:mocha --parallel --stream",
     "test:watch": "lerna run test:watch --stream",
     "lint": "lerna run lint --parallel --stream",
     "lint:fix": "lerna run lint:fix",
