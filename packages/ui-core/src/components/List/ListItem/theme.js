@@ -8,11 +8,13 @@ export default function generator ({ borders, colors, spacing, typography }) {
     fontSizeLarge: typography.fontSizeLarge,
     color: colors.licorice,
 
-    pipeBorderColor: colors.ash,
-    pipeBorderWidth: borders.widthSmall,
+    inlineColor: colors.slate,
+    inlineLineHeight: typography.lineHeightCondensed,
+
+    noneSpacing: spacing.xSmall,
     pipeSpacing: spacing.xSmall,
-    pipeColor: colors.slate,
-    pipeLineHeight: typography.lineHeightCondensed,
+    slashSpacing: spacing.xxxSmall,
+    arrowSpacing: spacing.xSmall,
 
     marginBottomDefault: spacing.xxxSmall
   }

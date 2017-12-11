@@ -40,17 +40,57 @@ example: true
   <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
 </List>
 ```
-### `pipe`
+### `inline`
 
-The `pipe` variant renders a horizontal list of items separated by a pipe border.
-
-Note that the `pipe` variant will not be affected by the `size` prop.
+The `inline` variant renders a horizontal list of items. You can separate each `ListItem` with a delimiter by setting the `delimiter` prop.
 
 ```js
 ---
 example: true
 ---
-<List variant="pipe">
+<List variant="inline" size="small">
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>10pts</ListItem>
+  <ListItem><b>Due:</b> Jan 17, 2018</ListItem>
+  <ListItem><Link href="#">Submitted</Link></ListItem>
+</List>
+```
+
+Inline list with a `pipe` delimiter.
+
+```js
+---
+example: true
+---
+<List variant="inline" delimiter="pipe" size="small">
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>10pts</ListItem>
+  <ListItem><b>Due:</b> Jan 17, 2018</ListItem>
+  <ListItem><Link href="#">Submitted</Link></ListItem>
+</List>
+```
+
+Inline list with a `slash` delimiter.
+
+```js
+---
+example: true
+---
+<List variant="inline" delimiter="slash" size="small">
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>10pts</ListItem>
+  <ListItem><b>Due:</b> Jan 17, 2018</ListItem>
+  <ListItem><Link href="#">Submitted</Link></ListItem>
+</List>
+```
+
+Inline list with a `arrow` delimiter.
+
+```js
+---
+example: true
+---
+<List variant="inline" delimiter="arrow" size="small">
   <ListItem>{lorem.sentence()}</ListItem>
   <ListItem>10pts</ListItem>
   <ListItem><b>Due:</b> Jan 17, 2018</ListItem>

@@ -34,7 +34,8 @@ export default class List extends Component {
     */
     margin: CustomPropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['default', 'unstyled', 'pipe'])
+    variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
+    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow'])
   }
   /* eslint-enable react/require-default-props */
 
@@ -42,6 +43,7 @@ export default class List extends Component {
     as: 'ul',
     margin: 'none',
     variant: 'default',
+    delimiter: 'none',
     size: 'medium'
   }
 
@@ -49,6 +51,7 @@ export default class List extends Component {
     return Children.map(this.props.children, (child) => {
       return safeCloneElement(child, {
         variant: this.props.variant,
+        delimiter: this.props.delimiter,
         size: this.props.size,
         as: this.props.as
       })
