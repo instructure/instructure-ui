@@ -1,15 +1,10 @@
-const path = require('path')
 const loadConfig = require('./loadConfig')
 
-module.exports = function (context, opts = { themeable: false, esModules: false, coverage: false }) {
+module.exports = function (context, opts = { themeable: false, esModules: false, coverage: false, node: false }) {
+  const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
+
   const presets = [
-    ['env', {
-      targets: {
-        browsers: loadConfig('browserslist', require('./browserslist'))
-      },
-      modules: opts.esModules ? false : 'commonjs',
-      useBuiltIns: false
-    }],
+    ['env', envPresetConfig],
     'stage-1',
     'react'
   ]
@@ -31,15 +26,28 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   ]
 
   if (opts.themeable) {
+    let themeableConfig = {
+      ignore: 'node_modules/**/*',
+      postcssrc: loadConfig('postcss', require('./postcss')()),
+      themeablerc: loadConfig('themeable', require('./themeable'))
+    }
+
+    if (typeof opts.themeable === 'object') {
+      themeableConfig = Object.assign(themeableConfig, opts.themeable)
+    }
+
     plugins = plugins.concat([
       [
         require.resolve('@instructure/babel-plugin-themeable-styles'),
-        {
-          ignore: 'node_modules/**/*',
-          postcssrc: loadConfig('postcss', require('./postcss')()),
-          themeablerc: loadConfig('themeable', require('./themeable'))
-        }
+        themeableConfig
       ]
+    ])
+  }
+
+  if (opts.node) {
+    plugins = plugins.concat([
+      require('babel-plugin-dynamic-import-node').default,
+      require('babel-plugin-transform-ensure-ignore').default
     ])
   }
 
@@ -55,5 +63,31 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   return {
     presets,
     plugins
+  }
+}
+
+function getNodeEnvConfig () {
+  return {
+    // the test-quick command that is ran directly in node (in quizzes land) and not using webpack
+    // needs commonjs modules, not es modules. But it only needs to transform js features
+    // that the current version of node doesn't support, not everything our lowest supported
+    // browser needs
+    targets: {
+      node: 'current'
+    },
+    modules: 'commonjs',
+    // this is for babel-plugin-transform-themeable. it currently doesn't work against native class syntax.
+    // once it does, this line can be removed
+    include: ['transform-es2015-classes']
+  }
+}
+
+function getWebEnvConfig (opts) {
+  return {
+    targets: {
+      browsers: loadConfig('browserslist', require('./browserslist'))
+    },
+    modules: opts.esModules ? false : 'commonjs',
+    useBuiltIns: true
   }
 }

@@ -13,6 +13,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "test": "ui-test",
+    "test:mocha": "ui-test --mocha",
     "test:watch": "ui-test --watch",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
