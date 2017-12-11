@@ -77,24 +77,16 @@ if ! [[ $next_version ]]; then
   next_version=$current_version
 fi
 
-################################################
-# If the version doesn't match package.json... #
-################################################
-if [[ "$current_version" != "$next_version" ]];
-then
-  #########################
-  # (npm) tag the release #
-  #########################
-  if ! [[ $npm_tag ]]; then
-    printf "Enter an npm tag (beta, rc, latest, stable): "
-    read npm_tag
+#########################
+# (npm) tag the release #
+#########################
+if ! [[ $npm_tag ]]; then
+  printf "Enter an npm tag (beta, latest, stable): "
+  read npm_tag
 
-    if ! [[ $npm_tag ]]; then
-      npm_tag="dev"
-    fi
+  if ! [[ $npm_tag ]]; then
+    npm_tag="dev"
   fi
-else
-  npm_tag="stable"
 fi
 
 #################################
