@@ -1,5 +1,6 @@
 import Modal from 'instructure-ui/lib/components/Modal'
 import Tray from 'instructure-ui/lib/components/Tray'
+import Typography from 'instructure-ui/lib/components/Typography'
 
 import Foo from 'example/path/Foo'
 
