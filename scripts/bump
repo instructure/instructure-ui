@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+########################################
+# Make sure working directory is clean #
+########################################
+if [ ! -z "$(git status --porcelain)" ]; then
+  echo Refusing to operate on unclean working directory
+  echo Use \"git status\" to see which files have been modified
+  exit 1
+fi
+
+##################################
+# Fetch remote tags and branches #
+##################################
+git fetch origin --tags --force
+
+#################################
+# Determine the release version #
+#################################
+$(npm bin)/standard-version
+next_version=$(node -p "require('./package').version")
+
+###################
+# Update packages #
+###################
+printf "Updating packages and generating the changelog for $next_version ...\n"
+$(npm bin)/lerna publish --skip-git --skip-npm --force-publish=* --repo-version $next_version
+
+##########################
+# Create the bump commit #
+##########################
+printf "Committing version bump commit for $next_version ...\n"
+git commit -a -m "chore(release): $next_version"
