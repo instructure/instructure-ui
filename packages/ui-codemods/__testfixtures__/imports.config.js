@@ -4,6 +4,10 @@ module.exports = [
     "replace": "@instructure/ui-core/lib/components"
   },
   {
+    "pattern": "^instructure-ui/lib/components/Typography",
+    "replace": "@instructure/ui-core/lib/components/Text"
+  },
+  {
     "pattern": "^instructure-ui/lib/themes",
     "replace": "@instructure/ui-themes"
   },
