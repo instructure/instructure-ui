@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
+export default function generator ({ colors, typography }) {
+  return {
+    fontSize: typography.fontSizeMedium,
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
 
- export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
-     'ui-utils',
-     'ui-a11y'
-   ) || '')
-   return UIFindTabbable(el)
- }
+    color: colors.oxford,
+    background: colors.white
+  }
+}

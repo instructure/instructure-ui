@@ -38,6 +38,7 @@ import * as UIForms from '@instructure/ui-forms/lib/components'
 import * as UILayout from '@instructure/ui-layout/lib/components'
 import * as UIMotion from '@instructure/ui-motion/lib/components'
 import * as UISVGImages from '@instructure/ui-svg-images/lib/components'
+import * as UIPages from '@instructure/ui-pages/lib/components'
 import * as UIPagination from '@instructure/ui-pagination/lib/components'
 import * as UIPortal from '@instructure/ui-portal/lib/components'
 import * as UIThemeable from '@instructure/ui-themeable/lib/components'
@@ -46,6 +47,7 @@ import * as UITreeBrowser from '@instructure/ui-tree-browser/lib/components'
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import IconArrowOpenLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
@@ -66,6 +68,7 @@ const components = Object.assign(
   UILayout,
   UIMotion,
   UISVGImages,
+  UIPages,
   UIPagination,
   UIPortal,
   UIThemeable,
@@ -78,8 +81,9 @@ Object.keys(components).forEach((key) => {
 
 const globals = {
   PlaceholderIcon: IconUser,
-  IconPlus: IconPlus,
-  IconX: IconX,
+  IconPlus,
+  IconX,
+  IconArrowOpenLeft,
   locales: moment.locales(),
   avatarImage,
   iconExample,

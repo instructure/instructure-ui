@@ -22,15 +22,24 @@
  * SOFTWARE.
  */
 
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
+import Pages from '../index'
 
- export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
-     'ui-utils',
-     'ui-a11y'
-   ) || '')
-   return UIFindTabbable(el)
- }
+describe('Pages.theme', () => {
+  describe('with the default theme', () => {
+    const variables = Pages.generateTheme()
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
+  })
+
+  describe('with the high contrast canvas theme', () => {
+    const variables = Pages.generateTheme('canvas-high-contrast')
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+  })
+})

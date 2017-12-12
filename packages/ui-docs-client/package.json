@@ -43,7 +43,7 @@
     "he": "^1.1.1",
     "marked": "^0.3.9",
     "prop-types": "^15.5.10",
-    "react-axe": "^2.1.7"
+    "react-axe": "^2.1.9"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",

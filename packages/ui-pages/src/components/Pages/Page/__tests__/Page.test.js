@@ -22,15 +22,52 @@
  * SOFTWARE.
  */
 
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import React from 'react'
+import Page from '../index'
 
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
+describe('<Page />', () => {
+  let _input
+  const testbed = new Testbed(
+    <Page defaultFocusElement={() => { return _input }}>
+        {() => {
+          return (
+            <div>
+              <input type="text" ref={(el) => { _input = el }} />
+              <span>Hello World</span>
+            </div>
+          )
+        }}
+    </Page>
+  )
 
- export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
-     'ui-utils',
-     'ui-a11y'
-   ) || '')
-   return UIFindTabbable(el)
- }
+  it('should render with a function as child', () => {
+    const subject = testbed.render()
+
+    expect(subject.text()).to.equal('Hello World')
+  })
+
+  it('should focus default element', () => {
+    const subject = testbed.render()
+
+    subject.instance().focus()
+
+    expect(subject.find('input').focused()).to.be.true
+  })
+
+  it('should use context', () => {
+    const pageSpy = testbed.spy()
+    const history = [1, 4, 3]
+    const navigate = () => {}
+
+    testbed.render({
+        children: pageSpy
+      }, {
+        history,
+        navigateToPreviousPage: navigate
+      })
+
+    expect(pageSpy.calledOnce).to.equal(true)
+    expect(pageSpy.args[0][0]).to.equal(history)
+    expect(pageSpy.args[0][1]).to.equal(navigate)
+  })
+})

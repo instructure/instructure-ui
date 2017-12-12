@@ -59,6 +59,10 @@ category: components/dialogs
   renderOffscreen: 'shouldRenderOffscreen',
   rootClose: 'shouldCloseOnDocumentClick'
 })
+@deprecated('5.0.0', {
+  closeButtonLabel: true,
+  closeButtonRef: true
+})
 class Popover extends Component {
   static Trigger = PopoverTrigger
   static Content = PopoverContent
@@ -152,7 +156,6 @@ class Popover extends Component {
     closeButtonLabel: PropTypes.string,
 
     /**
-     *
      * A function that returns a reference to the close button element
      */
     closeButtonRef: PropTypes.func,
@@ -418,7 +421,7 @@ class Popover extends Component {
   }
 
   get defaultFocusElement () {
-    return this.props.defaultFocusElement || (() => this._closeButton)
+    return this.props.defaultFocusElement
   }
 
   renderCloseButton () {
@@ -449,7 +452,6 @@ class Popover extends Component {
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
         >
-          {this.renderCloseButton()}
           {content}
         </Dialog>
       )
@@ -462,6 +464,7 @@ class Popover extends Component {
           elementRef={this.props.contentRef}
           placement={this.state.placement}
         >
+          {this.renderCloseButton()}
           {content}
         </ContextBox>
       )

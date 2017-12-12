@@ -21,16 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
-
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
-
- export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
-     'ui-utils',
-     'ui-a11y'
-   ) || '')
-   return UIFindTabbable(el)
- }
+export Pages, { Page } from './Pages'

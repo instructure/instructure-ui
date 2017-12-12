@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+const path = require('path')
 
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
-
- export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
-     'ui-utils',
-     'ui-a11y'
-   ) || '')
-   return UIFindTabbable(el)
- }
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 70
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-pages')
+})
