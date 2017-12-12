@@ -34,6 +34,7 @@ The `ui-forms` package contains the following components:
 - [Checkbox](#Checkbox)
 - [CheckboxGroup](#CheckboxGroup)
 - [DateInput](#DateInput)
+- [DateTimeInput](#DateTimeInput)
 - [FileDrop](#FileDrop)
 - [FormField](#FormField)
 - [FormFieldGroup](#FormFieldGroup)

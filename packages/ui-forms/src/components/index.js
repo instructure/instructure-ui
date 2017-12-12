@@ -25,6 +25,7 @@
 export Checkbox, { CheckboxFacade, ToggleFacade } from './Checkbox'
 export CheckboxGroup from './CheckboxGroup'
 export DateInput, { DatePicker } from './DateInput'
+export DateTimeInput from './DateTimeInput'
 export FileDrop from './FileDrop'
 export FormField, { FormFieldLabel, FormFieldMessage, FormFieldMessages, FormFieldLayout } from './FormField'
 export FormFieldGroup from './FormFieldGroup'

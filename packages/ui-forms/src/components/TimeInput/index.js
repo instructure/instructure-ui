@@ -117,6 +117,10 @@ class TimeInput extends Component {
     timezone: PropTypes.string
   }
 
+  get focused () {
+    return this._select && this._select.focused
+  }
+
   locale () {
     return this.props.locale || this.context.locale || Locale.browserLocale()
   }
@@ -139,6 +143,7 @@ class TimeInput extends Component {
 
     return (
       <Select
+        ref={(el) => {this._select = el}}
         editable
         label={label}
         defaultOption={defaultOption}
