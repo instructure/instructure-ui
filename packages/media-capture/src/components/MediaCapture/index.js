@@ -1,12 +1,16 @@
 import React, { Component } from 'react'
-
 import PropTypes from 'prop-types'
-
+import { createStore } from 'redux'
+import MediaCaptureProvider from '../MediaCaptureProvider'
+import CaptureBackground from '../CaptureBackground'
+import CapturePresentation from '../CapturePresentation'
 import Media from '../Media'
 import Controller from '../Controller'
+import reducer from '../../reducers'
+
+const store = createStore(reducer)
 
 export default class MediaCapture extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
      * Callback fired when a file has been generated.
@@ -24,14 +28,25 @@ export default class MediaCapture extends Component {
      */
     onClose: PropTypes.func
   }
-  /* eslint-enable react/require-default-props */
+
+  static defaultProps = {
+    onCancel: () => {},
+    onClose: () => {}
+  }
 
   render () {
     return (
-      <div>
-        <Media />
-        <Controller />
-      </div>
+      <MediaCaptureProvider
+        store={store}
+        render={({captureState}) => (
+          <CaptureBackground>
+            <CapturePresentation>
+              <Media captureState={captureState} />
+              <Controller captureState={captureState} />
+            </CapturePresentation>
+          </CaptureBackground>
+        )}
+      />
     )
   }
 }

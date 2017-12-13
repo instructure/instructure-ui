@@ -22,14 +22,18 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/babel-plugin-themeable-styles": "^4.4.1",
     "@instructure/ui-presets": "4.4.1",
-    "enzyme": "^3.2.0",
+    "@instructure/ui-themes": "^4.4.1",
+    "get-test-media": "^1.0.0",
     "redux-devtools": "^3.4.1"
   },
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
+    "@instructure/ui-themeable": "^4.4.1",
+    "classnames": "^2.2.5",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-redux": "^5.0.6",
