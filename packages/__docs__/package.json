@@ -35,6 +35,7 @@
     "instructure-icons": "^4.3.2",
     "lorem-ipsum": "^1.0.4",
     "moment": "^2.10.6",
+    "lorem-ipsum": "^1.0.4",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "webpack": "^3.8.1"
