@@ -11,10 +11,11 @@ module.exports = function DocsLoader () {
   const callback = this.async()
 
   const context = this.context || process.cwd()
-  const options = getOptions(loaderUtils.getOptions(this))
+  const loaderOptions = loaderUtils.getOptions(this) || {}
+  const options = getOptions(loaderOptions)
 
   const processFile = (filepath) => {
-    return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(options)}!${filepath}')`
+    return `require('!!${require.resolve('./docgen-loader')}?${JSON.stringify(loaderOptions)}!${filepath}')`
   }
 
   const themes = (options.themes || [])

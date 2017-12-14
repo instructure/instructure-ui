@@ -11,11 +11,12 @@ function DocsPlugin (options) {
 }
 
 DocsPlugin.prototype.apply = function (compiler) {
-  const options = getOptions(this.options)
+  const pluginOptions = this.options || {}
+  const options = getOptions(pluginOptions)
 
   compiler.apply(new SingleEntryPlugin(
     this.context,
-    `!!${require.resolve('./loaders/docs-loader')}?${JSON.stringify(options)}!`,
+    `!!${require.resolve('./loaders/docs-loader')}?${JSON.stringify(pluginOptions)}!`,
     'ui-docs'
   ))
 
