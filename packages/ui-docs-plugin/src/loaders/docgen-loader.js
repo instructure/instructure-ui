@@ -9,7 +9,8 @@ module.exports = function DocgenLoader (source) {
   this.cacheable && this.cacheable()
 
   const context = this.context || process.cwd()
-  const options = getOptions(loaderUtils.getOptions(this))
+  const loaderOptions = loaderUtils.getOptions(this) || {}
+  const options = getOptions(loaderOptions)
   const pathInfo = getPathInfo(this.resourcePath, options, context)
 
   let doc = parseDoc(this.resourcePath, source, (err) => {
