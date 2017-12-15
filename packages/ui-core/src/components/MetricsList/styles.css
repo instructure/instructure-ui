@@ -1,13 +1,9 @@
 .root {
   box-sizing: border-box;
-
   display: flex;
-  flex: 0 1 auto;
-  flex-direction: row;
   flex-wrap: wrap;
-
-  line-height: var(--lineHeight);
+  align-items: flex-start;
   justify-content: space-around;
-
+  line-height: var(--lineHeight);
   color: var(--color);
 }
