@@ -22,8 +22,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/babel-plugin-themeable-styles": "^4.4.1",
-    "@instructure/ui-presets": "4.4.1",
+    "@instructure/ui-presets": "^4.4.1",
     "@instructure/ui-themes": "^4.4.1",
     "get-test-media": "^1.0.0",
     "redux-devtools": "^3.4.1"

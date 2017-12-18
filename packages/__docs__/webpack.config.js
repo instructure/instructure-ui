@@ -38,6 +38,8 @@ plugins = plugins.concat([
       'README.md',
       'CHANGELOG.md',
       'CODE_OF_CONDUCT.md',
+      'packages/media-capture/src/components/MediaCapture/index.js',
+      'packages/media-capture/src/components/MediaCapture/README.md',
       'packages/ui-core/src/components/*/**/index.js',
       'packages/ui-core/src/components/*/**/README.md',
       'packages/ui-core/src/utils/**/*.js',
@@ -94,6 +96,7 @@ module.exports = {
       'react-dom'
     ],
     'instructure-ui': [
+      '@instructure/media-capture',
       '@instructure/ui-core',
       '@instructure/ui-utils',
       '@instructure/ui-themes',
@@ -118,11 +121,13 @@ module.exports = {
   resolve: {
     alias: {
       // set up aliases to get webpack to rebuild when we make changes to these packages
+      '@instructure/media-capture$': path.resolve(__dirname, '../media-capture/src'),
       '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
       '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
       '@instructure/ui-themes$': path.resolve(__dirname, '../ui-themes/src/'),
       '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
 
+      '@instructure/media-capture/lib': path.resolve(__dirname, '../media-capture/src'),
       '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
       '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),
       '@instructure/ui-themes/lib': path.resolve(__dirname, '../ui-themes/src'),

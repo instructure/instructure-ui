@@ -8,6 +8,7 @@ import 'moment/min/locales'
 import lorem from 'lorem-ipsum'
 
 import * as UICore from '@instructure/ui-core'
+import * as MediaCapture from '@instructure/media-capture/lib/components'
 
 import avatarImage from './placeholder-avatar.png'
 import iconExample from './heart_lg.svg'
@@ -43,7 +44,7 @@ const globals = Object.assign({
   placeholderImage,
   React,
   ReactDOM
-}, UICore)
+}, UICore, MediaCapture)
 
 Object.keys(globals).forEach((key) => {
   global[key] = globals[key]

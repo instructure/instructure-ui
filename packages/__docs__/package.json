@@ -22,6 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/media-capture": "^4.4.1",
     "@instructure/ui-core": "^4.4.1",
     "@instructure/ui-docs-client": "^4.4.1",
     "@instructure/ui-docs-plugin": "^4.4.1",

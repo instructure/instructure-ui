@@ -14,6 +14,12 @@ import { STARTING } from '../../constants/CaptureStates'
 
 const store = createStore(reducer)
 
+/**
+---
+category: components
+---
+**/
+
 export default class MediaCapture extends Component {
   static propTypes = {
     /**

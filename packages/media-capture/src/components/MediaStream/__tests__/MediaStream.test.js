@@ -1,7 +1,7 @@
 import React from 'react'
 import getTestMedia from 'get-test-media'
 import MediaStream from '../index'
-import * as getUserMedia from '../../../lib/getUserMedia'
+import * as getUserMedia from '../../../getUserMedia'
 
 describe('<MediaStream />', () => {
   const testbed = new Testbed(<MediaStream />)

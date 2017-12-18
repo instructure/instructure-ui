@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import MediaStreamMessage from '../MediaStreamMessage'
-import { getUserMedia } from '../../lib/getUserMedia'
+import { getUserMedia } from '../../getUserMedia'
 
 const HAVE_ENOUGH_DATA = 4
 const POLL_DURATION = 200
