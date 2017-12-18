@@ -2,6 +2,7 @@
   flex: 4;
   float: right;
   width: 753px;
-  border-radius: 3px;
+  border-radius: 4px;
   background-color: black;
+  position: relative;
 }

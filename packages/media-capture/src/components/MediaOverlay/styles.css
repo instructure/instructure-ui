@@ -1,0 +1,12 @@
+.badge {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  font-size: 15px;
+  background-color: rgba(55, 66, 72);
+  width: 80px;
+  height: auto;
+  left: 15px;
+  top: 15px;
+  text-align: center;
+  border-radius: 4px;
+}
