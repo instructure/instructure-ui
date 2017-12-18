@@ -10,4 +10,3 @@ export const startClicked = () => ({ type: types.START_CLICKED })
 export const startoverClicked = () => ({ type: types.STARTOVER_CLICKED })
 export const titleEdited = text => ({ type: types.TITLE_EDITED, text })
 export const videoDeviceChanged = id => ({ type: types.VIDEO_DEVICE_CHANGED, id })
-

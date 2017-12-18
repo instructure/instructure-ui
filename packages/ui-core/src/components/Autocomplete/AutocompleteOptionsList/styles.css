@@ -38,6 +38,7 @@
 
   .label {
     color: var(--labelColor);
+    width: 100%;
   }
 
   &.highlighted {

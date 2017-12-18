@@ -4,9 +4,13 @@ import { createStore } from 'redux'
 import MediaCaptureProvider from '../MediaCaptureProvider'
 import CaptureBackground from '../CaptureBackground'
 import CapturePresentation from '../CapturePresentation'
+import MediaContainer from '../MediaContainer'
+import MediaOverlay from '../MediaOverlay'
 import Media from '../Media'
 import Controller from '../Controller'
+import CTA from '../CTA'
 import reducer from '../../reducers'
+import { STARTING } from '../../constants/CaptureStates'
 
 const store = createStore(reducer)
 
@@ -41,8 +45,13 @@ export default class MediaCapture extends Component {
         render={({captureState}) => (
           <CaptureBackground>
             <CapturePresentation>
-              <Media captureState={captureState} />
-              <Controller captureState={captureState} />
+              <MediaContainer>
+                <MediaOverlay captureState={captureState} />
+                <Media captureState={captureState} />
+              </MediaContainer>
+              <Controller captureState={captureState}>
+                <CTA captureState={captureState} />
+              </Controller>
             </CapturePresentation>
           </CaptureBackground>
         )}
