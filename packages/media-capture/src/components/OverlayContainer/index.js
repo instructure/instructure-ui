@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
-import classNames from 'classnames'
 
 import styles from './styles.css'
 
 @themeable({}, styles)
-export default class CaptureBackground extends Component {
+export default class OverlayContainer extends Component {
   static propTypes = {
     children: PropTypes.node
   }
@@ -17,8 +16,10 @@ export default class CaptureBackground extends Component {
 
   render () {
     return (
-      <div className={classNames(styles.background)}>
-        {this.props.children}
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          { this.props.children }
+        </div>
       </div>
     )
   }

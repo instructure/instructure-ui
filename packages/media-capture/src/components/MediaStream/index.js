@@ -61,13 +61,6 @@ export default class MediaStream extends Component {
   }
 
   render () {
-    const style = {
-      flex: '4',
-      float: 'right',
-      width: '753px',
-      borderRadius: '3px'
-    }
-
     return (
       <div>
         <MediaStreamMessage
@@ -75,7 +68,7 @@ export default class MediaStream extends Component {
           error={this.state.streamError}
         />
         <video
-          style={{width: '100%', height: '100%'}}
+          style={{width: '100%', height: '100%', borderRadius: '4px'}}
           controls={false}
           autoPlay
           ref={el => { this.video = el }}
