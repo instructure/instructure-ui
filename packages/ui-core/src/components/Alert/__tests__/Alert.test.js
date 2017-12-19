@@ -138,6 +138,40 @@ describe('<Alert />', () => {
     expect(liver.innerText).to.include('Success: Sample alert text.')
   })
 
+  describe('screen reader only', () => {
+    let spy
+
+    beforeEach(() => {
+      spy = testbed.spy(console, 'warn')
+    })
+
+    afterEach(() => {
+      spy.restore()
+    })
+
+    it('should not render anything when using live region and screen reader only', () => {
+      const liver = document.getElementById('_alertLiveRegion')
+
+      const subject = testbed.render({
+        liveRegion: () => liver,
+        screenReaderOnly: true
+      })
+
+      expect(subject.html()).to.equal(null)
+    })
+
+    it('should warn if screen reader only without live region', () => {
+      const subject = testbed.render({
+        screenReaderOnly: true
+      })
+
+      expect(subject.html()).to.equal(null)
+      spy.should.have.been.calledWithExactly(
+        `Warning: [Alert] 'screenReaderOnly' must be used in conjunction with 'liveRegion'`
+      )
+    })
+  })
+
   it('should close when told to, with transition', done => {
     const liver = document.getElementById('_alertLiveRegion')
     const alert = testbed.render({

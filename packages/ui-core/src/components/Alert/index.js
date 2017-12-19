@@ -82,6 +82,10 @@ export default class Alert extends Component {
     */
     liveRegion: PropTypes.func,
     /**
+     * If the alert should only be visible to screen readers
+     */
+    screenReaderOnly: PropTypes.bool,
+    /**
     * Milliseconds until the Alert is dismissed automatically
     */
     timeout: PropTypes.number,
@@ -109,7 +113,8 @@ export default class Alert extends Component {
     margin: 'x-small 0',
     timeout: 0,
     transition: 'fade',
-    open: true
+    open: true,
+    screenReaderOnly: false
   }
 
   static transitionDuration = Transition.duration
@@ -324,6 +329,16 @@ export default class Alert extends Component {
   }
 
   render () {
+    // Don't render anything if screen reader only
+    if (this.props.screenReaderOnly) {
+      warning(
+        this.getLiveRegion(),
+        `[Alert] 'screenReaderOnly' must be used in conjunction with 'liveRegion'`
+      )
+
+      return null
+    }
+
     if (this.props.transition === 'none') {
       return this.state.open ? this.renderAlert() : null
     }
@@ -340,3 +355,5 @@ export default class Alert extends Component {
     )
   }
 }
+
+
