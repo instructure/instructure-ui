@@ -29,7 +29,7 @@
     "generate:package": "./scripts/generate-package",
     "commit": "git-cz",
     "bootstrap": "npm-run-all clean:modules bootstrap:packages clean build",
-    "bootstrap:packages": "lerna bootstrap",
+    "bootstrap:packages": "lerna bootstrap --reject-cycles",
     "build": "lerna run build --stream --parallel --ignore __docs__",
     "build:watch": "lerna run build:watch --stream --parallel --ignore __docs__",
     "build:docs": "lerna run build --scope __docs__",

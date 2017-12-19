@@ -1,3 +1,7 @@
+const loadConfig = require('../../loadConfig')
+
+const config = loadConfig('mocha')
+
 /* eslint-disable immutable/no-mutation */
 
 // Compile imports with babel
@@ -18,19 +22,7 @@ require('jsdom-global')(null, {
   }
 })
 
-// Load instui canvas theme
-require('@instructure/ui-themes/lib/canvas')
-
 // Make testing libraries available globally
-
-const chai = require('chai')
-const sinon = require('sinon')
-
-chai.should()
-global.chai = chai
-global.expect = chai.expect
-global.sinon = sinon
-
 const Testbed = require('@instructure/ui-testbed')
 
 global.Testbed = Testbed

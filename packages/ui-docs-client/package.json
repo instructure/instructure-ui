@@ -21,7 +21,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.4.1",
-    "babel-plugin-inline-import": "2.0.6",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },

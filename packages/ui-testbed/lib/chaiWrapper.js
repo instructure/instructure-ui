@@ -1,4 +1,5 @@
 module.exports = function (chai) {
+  chai.should()
   chai.use(require('sinon-chai'))
   chai.use(require('chai-string'))
   chai.use(require('chai-enzyme')())
@@ -19,4 +20,7 @@ module.exports = function (chai) {
       })
     })
   })
+
+  global.chai = chai
+  global.expect = chai.expect
 }
