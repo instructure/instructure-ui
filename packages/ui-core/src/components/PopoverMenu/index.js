@@ -249,3 +249,5 @@ export default class PopoverMenu extends Component {
     )
   }
 }
+
+export { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '../Menu'
