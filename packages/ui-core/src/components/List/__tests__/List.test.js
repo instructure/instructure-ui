@@ -18,6 +18,23 @@ describe('<List />', () => {
     expect(subject.find('li').length).to.equal(4)
   })
 
+  it('should filter out falsy/null children', () => {
+    const testbed = new Testbed(
+      <List>
+        {null &&
+          <ListItem>List item 1</ListItem>
+        }
+        {false &&
+          <ListItem>List item 2</ListItem>
+        }
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+      </List>
+    )
+    const subject = testbed.render()
+    expect(subject.find('li').length).to.equal(2)
+  })
+
   it('should render an ordered list', () => {
     const subject = testbed.render({as: 'ol'})
     expect(subject.find('ol').length).to.equal(1)
