@@ -35,6 +35,8 @@ export default class ListItem extends Component {
     const variant = this.props.variant === 'pipe' ? 'inline' : this.props.variant
     const size = this.props.variant === 'pipe' ? 'small' : this.props.size
 
+    const noDelimiter = (delimiter === 'none' && variant !== 'inline')
+
     const classes = {
       [styles.root]: true,
       [styles[variant]]: variant,
@@ -48,10 +50,12 @@ export default class ListItem extends Component {
         className={classnames(classes)}
       >
         {this.props.children}
-        <span
-          className={styles.delimiter}
-          aria-hidden="true"
-        />
+        {!noDelimiter && (
+          <span
+            className={styles.delimiter}
+            aria-hidden="true"
+          />
+        )}
       </li>
     )
   }
