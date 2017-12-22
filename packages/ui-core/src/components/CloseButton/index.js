@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -55,7 +55,7 @@ class CloseButton extends Component {
         })}
       >
         <Button {...pickProps(this.props, Button.propTypes)}>
-          <IconXSolid />
+          <IconX />
           <ScreenReaderContent>
             {this.props.children}
           </ScreenReaderContent>

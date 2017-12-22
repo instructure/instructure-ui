@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import IconArrowOpenLeftSolid from 'instructure-icons/lib/Solid/IconArrowOpenLeftSolid'
-import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import IconArrowOpenLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
 
 import AccessibleContent from '../../AccessibleContent'
@@ -43,7 +43,7 @@ export default class DatePickerPagination extends Component {
           variant="icon"
           onClick={this.handlePrevClick}
         >
-          <IconArrowOpenLeftSolid
+          <IconArrowOpenLeft
             className={styles.arrowIcon}
             title={this.props.previousLabel}
           />
@@ -53,7 +53,7 @@ export default class DatePickerPagination extends Component {
           variant="icon"
           onClick={this.handleNextClick}
         >
-          <IconArrowOpenRightSolid
+          <IconArrowOpenRight
             className={styles.arrowIcon}
             title={this.props.nextLabel}
           />

@@ -1,6 +1,6 @@
 import React from 'react'
-import IconFolderSolid from 'instructure-icons/lib/Solid/IconFolderSolid'
-import IconDocumentSolid from 'instructure-icons/lib/Solid/IconDocumentSolid'
+import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
 import TreeButton from '../index'
 import styles from '../styles.css'
 
@@ -38,21 +38,21 @@ describe('<TreeButton />', () => {
 
   describe('icons', () => {
     it('renders a passed collection Icon', () => {
-      const button = testbed.render({type: 'collection', collectionIcon: IconFolderSolid})
-      const svg = button.find(IconFolderSolid)
+      const button = testbed.render({type: 'collection', collectionIcon: IconFolder})
+      const svg = button.find(IconFolder)
       expect(svg.length).to.equal(1)
     })
 
     it('renders a passed item Icon', () => {
-      const button = testbed.render({type: 'item', itemIcon: IconDocumentSolid})
-      const svg = button.find(IconDocumentSolid)
+      const button = testbed.render({type: 'item', itemIcon: IconDocument})
+      const svg = button.find(IconDocument)
       expect(svg.length).to.equal(1)
     })
 
     it('renders a TreeButton without icon if no icon prop passd', () => {
       const button = testbed.render()
-      const svg1 = button.find(IconFolderSolid)
-      const svg2 = button.find(IconDocumentSolid)
+      const svg1 = button.find(IconFolder)
+      const svg2 = button.find(IconDocument)
       expect(svg1.length + svg2.length).to.equal(0)
     })
   })

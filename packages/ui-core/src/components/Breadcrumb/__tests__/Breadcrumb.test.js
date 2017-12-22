@@ -1,6 +1,6 @@
 import React from 'react'
 
-import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 
 import Breadcrumb from '../index'
 import BreadcrumbLink from '../BreadcrumbLink'
@@ -20,7 +20,7 @@ describe('<Breadcrumb />', () => {
 
   it('should render IconArrowOpenRightSolid by default as a separator', () => {
     const subject = testbed.render()
-    expect(subject.find(IconArrowOpenRightSolid)).to.be.present
+    expect(subject.find(IconArrowOpenRight)).to.be.present
   })
 
   it('should meet a11y standards', (done) => {

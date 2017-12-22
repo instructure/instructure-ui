@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import bowser from 'bowser'
+
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import TreeButton from '../TreeButton'
 
@@ -139,7 +140,7 @@ export default class TreeCollection extends Component {
 
     // remove when Edge sorts out styles-on-pseudo-elements issues:
     // https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/11495448/
-    const edge15Up = bowser.msedge && bowser.version >= 15
+    const edge15Up = Browser.msedge && Browser.version >= 15
 
     const classes = {
       [styles.root]: true,

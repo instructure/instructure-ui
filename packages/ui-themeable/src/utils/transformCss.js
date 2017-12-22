@@ -1,4 +1,4 @@
-import bowser from 'bowser'
+import Browser from '@instructure/ui-utils/lib/Browser'
 import parseCss, { ruleTypes } from './parseCss'
 
 /**
@@ -95,15 +95,15 @@ function toCssText (node, text) {
 }
 
 function filterUnusedVendorRule (selector) {
-  if (!(bowser.msedge || bowser.msie) && selector.indexOf('-ms-') > -1) {
+  if (!(Browser.msedge || Browser.msie) && selector.indexOf('-ms-') > -1) {
     return false
   }
 
-  if (!(bowser.webkit || bowser.msedge || bowser.blink) && selector.indexOf('-webkit-') > -1) {
+  if (!(Browser.webkit || Browser.msedge || Browser.blink) && selector.indexOf('-webkit-') > -1) {
     return false
   }
 
-  if (!bowser.gecko && selector.indexOf('-moz-') > -1) {
+  if (!Browser.gecko && selector.indexOf('-moz-') > -1) {
     return false
   }
 

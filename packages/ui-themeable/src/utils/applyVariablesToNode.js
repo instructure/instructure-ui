@@ -1,4 +1,5 @@
-import bowser from 'bowser'
+import Browser from '@instructure/ui-utils/lib/Browser'
+
 import scopeStylesToNode from './scopeStylesToNode'
 import formatVariableNames from './formatVariableNames'
 import pickOverrides from './pickOverrides'
@@ -20,7 +21,7 @@ import { getCssTextWithPolyfill } from './getCssText'
  */
 export default function applyVariablesToNode () {
   if (customPropertiesSupported() &&
-      !(bowser.msedge && bowser.version >= 15)) { // polyfill edge 15 until improved css variable support
+      !(Browser.msedge && Browser.version >= 15)) { // polyfill edge 15 until improved css variable support
     applyVariablesToNodeStyle.apply(this, arguments)
   } else {
     applyVariablesPolyfillToNode.apply(this, arguments)

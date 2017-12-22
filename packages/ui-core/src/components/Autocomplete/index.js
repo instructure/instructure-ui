@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import deepEqual from 'deep-equal'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import AutocompleteSingle from './AutocompleteSingle'
 import AutocompleteMultiple from './AutocompleteMultiple'

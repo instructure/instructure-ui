@@ -23,7 +23,7 @@
     "gulp": "3.9.1"
   },
   "dependencies": {
-    "@instructure/ui-core": "^4.5.0",
+    "@instructure/ui-svg-images": "^4.5.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {

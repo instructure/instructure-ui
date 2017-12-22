@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
@@ -56,7 +56,7 @@ export default class Breadcrumb extends Component {
         return (
           <li className={styles.crumb} style={style}>
             {child}
-            {index < (numChildren - 1) && <IconArrowOpenRightSolid className={styles.separator} />}
+            {index < (numChildren - 1) && <IconArrowOpenRight className={styles.separator} />}
           </li>
         )
       }

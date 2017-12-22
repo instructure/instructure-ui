@@ -1,5 +1,5 @@
 import React from 'react'
-import IconCheckSolid from 'instructure-icons/lib/Solid/IconCheckSolid'
+import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
 import MenuItem from '../index'
 
 describe('<MenuItem />', () => {
@@ -149,7 +149,7 @@ describe('<MenuItem />', () => {
       type: 'checkbox',
       defaultSelected: true
     })
-    expect(subject.find(IconCheckSolid))
+    expect(subject.find(IconCheck))
       .to.be.present
   })
 
@@ -159,7 +159,7 @@ describe('<MenuItem />', () => {
       selected: true,
       onSelect: testbed.stub()
     })
-    expect(subject.find(IconCheckSolid))
+    expect(subject.find(IconCheck))
       .to.be.present
   })
 

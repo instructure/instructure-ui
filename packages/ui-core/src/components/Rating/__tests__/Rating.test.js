@@ -1,6 +1,6 @@
 import React from 'react'
-import IconStarSolid from 'instructure-icons/lib/Solid/IconStarSolid'
-import IconStarLightSolid from 'instructure-icons/lib/Solid/IconStarLightSolid'
+import IconStar from '@instructure/ui-icons/lib/Solid/IconStar'
+import IconStarLight from '@instructure/ui-icons/lib/Solid/IconStarLight'
 import Rating from '../index'
 import RatingIcon from '../RatingIcon'
 
@@ -30,7 +30,7 @@ describe('<Rating />', () => {
     const subject = testbed.render({
       iconCount: 5
     })
-    const svg = subject.find(IconStarLightSolid)
+    const svg = subject.find(IconStarLight)
     expect(svg.length).to.equal(5)
   })
 
@@ -38,7 +38,7 @@ describe('<Rating />', () => {
     const subject = testbed.render({
       valueMax: 0
     })
-    const svg = subject.find(IconStarLightSolid)
+    const svg = subject.find(IconStarLight)
     expect(svg.length).to.equal(3)
   })
 
@@ -59,7 +59,7 @@ describe('<Rating />', () => {
       valueNow: 89,
       valueMax: 100
     })
-    const svg = subject.find(IconStarSolid)
+    const svg = subject.find(IconStar)
     expect(svg.length).to.equal(4)
   })
 
@@ -69,7 +69,7 @@ describe('<Rating />', () => {
       valueNow: 110,
       valueMax: 100
     })
-    const svg = subject.find(IconStarSolid)
+    const svg = subject.find(IconStar)
     expect(svg.length).to.equal(5)
   })
 

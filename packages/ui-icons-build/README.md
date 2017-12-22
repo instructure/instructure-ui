@@ -19,6 +19,13 @@ Build scripts to generate icon sets from source Sketch files for multiple platfo
 yarn add --dev @instructure/ui-icons-build
 ```
 
+If you don't have [Sketch](https://www.sketchapp.com/) installed,
+you'll need [SketchTool](https://www.sketchapp.com/tool/).
+
+```sh
+curl -L https://raw.githubusercontent.com/cognitom/gulp-sketch/master/install-sketchtool.sh | sudo sh
+```
+
 ### Supported formats:
 
 - Accessible React components for each icon/variant

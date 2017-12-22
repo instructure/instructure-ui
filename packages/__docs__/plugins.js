@@ -36,9 +36,9 @@ plugins = plugins.concat([
       'README.md',
       'CHANGELOG.md',
       'CODE_OF_CONDUCT.md',
-      'packages/ui-core/src/components/*/**/index.js',
-      'packages/ui-core/src/components/*/**/README.md',
-      'packages/ui-core/src/utils/**/*.js',
+      'packages/*/src/components/*/**/index.js',
+      'packages/*/src/components/*/**/README.md',
+      'packages/*/src/utils/**/*.js',
       'packages/ui-themeable/src/**/*.js',
       'packages/ui-utils/src/**/*.js',
       'packages/*/README.md',
@@ -51,7 +51,9 @@ plugins = plugins.concat([
       '**/config/**',
       '**/src/index.js',
       'packages/ui-utils/src/{react,dom,i18n}/index.js',
-      '**/theme.js'
+      '**/theme.js',
+      'packages/ui-docs-client/**/*.js',
+      'packages/ui-docs-plugin/**/*.js'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas'),

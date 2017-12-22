@@ -7,7 +7,7 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
+import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 import uid from '@instructure/ui-utils/lib/uid'
 
 import FormField from '../FormField'
@@ -189,7 +189,7 @@ class Select extends Component {
           >
             {children}
           </select>
-          <IconArrowOpenDownSolid className={styles.arrow} />
+          <IconArrowOpenDown className={styles.arrow} />
         </span>
       </FormField>
     )

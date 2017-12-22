@@ -1,6 +1,6 @@
 import React from 'react'
-import IconFolderSolid from 'instructure-icons/lib/Solid/IconFolderSolid'
-import IconDocumentSolid from 'instructure-icons/lib/Solid/IconDocumentSolid'
+import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
 import TreeCollection from '../index'
 
 describe('<TreeCollection />', () => {
@@ -14,9 +14,9 @@ describe('<TreeCollection />', () => {
     items={[
       {id: 1, name: 'Item 1'}
     ]}
-    collectionIcon={IconFolderSolid}
-    collectionIconExpanded={IconFolderSolid}
-    itemIcon={IconDocumentSolid}
+    collectionIcon={IconFolder}
+    collectionIconExpanded={IconFolder}
+    itemIcon={IconDocument}
   />)
 
   it('should render', () => {
@@ -27,18 +27,18 @@ describe('<TreeCollection />', () => {
   describe('collections', () => {
     it('renders icons properly on children', () => {
       const collection = testbed.render({expanded: true})
-      expect(collection.find(IconFolderSolid).length).to.equal(2)
-      expect(collection.find(IconDocumentSolid).length).to.equal(1)
+      expect(collection.find(IconFolder).length).to.equal(2)
+      expect(collection.find(IconDocument).length).to.equal(1)
     })
 
     it('shows expanded icon without rendering a list if collection is empty', () => {
       const collection = testbed.render({
-        collectionIconExpanded: IconDocumentSolid,
+        collectionIconExpanded: IconDocument,
         expanded: true,
         collections: [],
         items: []
       })
-      expect(collection.find(IconDocumentSolid).length).to.equal(1)
+      expect(collection.find(IconDocument).length).to.equal(1)
       expect(collection.find('ul')).to.have.length(0)
     })
 

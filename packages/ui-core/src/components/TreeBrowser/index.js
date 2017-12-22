@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import IconFolderSolid from 'instructure-icons/lib/Solid/IconFolderSolid'
-import IconDocumentSolid from 'instructure-icons/lib/Solid/IconDocumentSolid'
+import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -74,9 +74,9 @@ export default class TreeBrowser extends Component {
     size: 'medium',
     variant: 'folderTree',
     showRootCollection: true,
-    collectionIcon: IconFolderSolid,
-    collectionIconExpanded: IconFolderSolid,
-    itemIcon: IconDocumentSolid,
+    collectionIcon: IconFolder,
+    collectionIconExpanded: IconFolder,
+    itemIcon: IconDocument,
     defaultExpanded: [],
     onItemClick: function () {},
     onCollectionClick: function () {}

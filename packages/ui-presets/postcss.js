@@ -2,9 +2,9 @@ const loadConfig = require('./loadConfig')
 
 const CORE_PLUGINS = [
   ['postcss-nested'],
+  ['postcss-bidirection'],
   ['autoprefixer', { browsers: loadConfig('browserslist', require('./browserslist')) }],
   ['postcss-initial'],
-  ['postcss-bidirection'],
   ['postcss-reporter']
 ]
 

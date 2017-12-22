@@ -1,12 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import Decimal from 'decimal.js/decimal'
-import numeral from 'numeral'
-import 'numeral/locales'
 
-import IconArrowOpenUpLine from 'instructure-icons/lib/Line/IconArrowOpenUpLine'
-import IconArrowOpenDownLine from 'instructure-icons/lib/Line/IconArrowOpenDownLine'
+
+import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
+import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
@@ -15,24 +13,13 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import transformSelection from '@instructure/ui-utils/lib/dom/transformSelection'
 import uid from '@instructure/ui-utils/lib/uid'
+import Decimal from '@instructure/ui-utils/lib/Decimal'
+import Numeral from '@instructure/ui-utils/lib/i18n/Numeral'
 
-import './locales/sv'
 import styles from './styles.css'
 import theme from './theme'
 
 import FormField from '../FormField'
-
-// Decimal configuration
-Decimal.set({
-  /**
-  * The maximum number of significant digits of the result of an operation.
-  */
-  precision: 100,
-  /**
-  * The positive exponent value at and above which toString returns scientific notation.
-  */
-  toExpPos: 100
-})
 
 const keyDirections = {
   ArrowUp: 1,
@@ -44,7 +31,7 @@ function noop () {}
 // Accepts a string locale and returns a string representing the decimal
 // delimiter that is used by that locale, or '.' if the locale is not recognized.
 function decimalDelimiter (locale) {
-  const localeData = locale && numeral.locales[locale.toLowerCase()]
+  const localeData = locale && Numeral.locales[locale.toLowerCase()]
   if (!localeData) {
     // default to using '.' as the delimiter if no locale is set or if
     // there is no Numeral locale file for the currently set locale.
@@ -346,7 +333,7 @@ class NumberInput extends Component {
           onKeyDown={noop}
           role="presentation"
         >
-          <IconArrowOpenUpLine />
+          <IconArrowOpenUp />
         </span>
         <span
           className={styles.arrow}
@@ -354,7 +341,7 @@ class NumberInput extends Component {
           onKeyDown={noop}
           role="presentation"
         >
-          <IconArrowOpenDownLine />
+          <IconArrowOpenDown />
         </span>
       </span>
     )

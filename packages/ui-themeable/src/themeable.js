@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import deepEqual from 'deep-equal'
 
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
 

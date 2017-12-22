@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import classnames from 'classnames'
-import IconCheckSolid from 'instructure-icons/lib/Solid/IconCheckSolid'
-import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
@@ -167,14 +167,14 @@ class MenuItem extends Component {
       <span>
         {(type === 'checkbox' || type === 'radio') &&
           <span className={styles.icon}>
-            {this.selected && <IconCheckSolid />}
+            {this.selected && <IconCheck />}
           </span>}
         <span className={styles.label}>
           {children}
         </span>
         {type === 'flyout' &&
           <span className={styles.icon}>
-            <IconArrowOpenRightSolid />
+            <IconArrowOpenRight />
           </span>}
       </span>
     )

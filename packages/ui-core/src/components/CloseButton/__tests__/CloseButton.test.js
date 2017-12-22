@@ -1,5 +1,5 @@
 import React from 'react'
-import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import CloseButton from '../index'
 
 describe('<CloseButton />', () => {
@@ -7,7 +7,7 @@ describe('<CloseButton />', () => {
 
   it('should render with x icon', () => {
     const subject = testbed.render()
-    const iconX = subject.find(IconXSolid)
+    const iconX = subject.find(IconX)
 
     expect(subject).to.be.present
     expect(iconX).to.be.present

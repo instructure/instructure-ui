@@ -1,6 +1,6 @@
 import React from 'react'
-import IconArrowOpenUpLine from 'instructure-icons/lib/Line/IconArrowOpenUpLine'
-import IconArrowOpenDownLine from 'instructure-icons/lib/Line/IconArrowOpenDownLine'
+import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
+import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 import NumberInput, { cleanValue } from '../index'
 import styles from '../styles.css'
 
@@ -239,13 +239,13 @@ describe('<NumberInput />', () => {
 
     it('increments the number in the appropriate locale when the up arrow is pressed', () => {
       const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenUpLine).simulate('click')
+      subject.find(IconArrowOpenUp).simulate('click')
       expect(subject.find('input').node.value).to.equal('2,6')
     })
 
     it('decrements the number in the appropriate locale when the down arrow is pressed', () => {
       const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenDownLine).simulate('click')
+      subject.find(IconArrowOpenDown).simulate('click')
       expect(subject.find('input').node.value).to.equal('2,4')
     })
 

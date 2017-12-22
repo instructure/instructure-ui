@@ -8,6 +8,14 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
+    "pattern": "^instructure/ui-core/lib/components/SVGIcon",
+    "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
+  },
+  {
+    "pattern": "^instructure/ui-core/lib/components/InlineSVG",
+    "replace": "@instructure/ui-svg-images/lib/components/InlineSVG"
+  },
+  {
     "pattern": "^instructure-ui/lib/themes",
     "replace": "@instructure/ui-themes/lib"
   },

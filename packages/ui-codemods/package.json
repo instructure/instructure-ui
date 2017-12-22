@@ -18,7 +18,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "21.2.1"
+    "jest": "22.0.4"
   },
   "dependencies": {
     "jscodeshift": "^0.4.0"

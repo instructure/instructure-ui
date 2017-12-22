@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import bowser from 'bowser'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import Mask from '../../Mask'
 
@@ -45,7 +45,7 @@ export default class ModalContent extends Component {
       ...props
     } = this.props
 
-    const ie11 = bowser.msie && bowser.version > 10
+    const ie11 = Browser.msie && Browser.version > 10
 
     return (
       <Mask

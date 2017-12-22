@@ -1,8 +1,8 @@
 import React from 'react'
 
-import IconCompleteSolid from 'instructure-icons/lib/Solid/IconCompleteSolid'
-import IconInfoSolid from 'instructure-icons/lib/Solid/IconInfoSolid'
-import IconWarningSolid from 'instructure-icons/lib/Solid/IconWarningSolid'
+import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
+import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
+import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 
 import Alert from '../index'
 import styles from '../styles.css'
@@ -68,7 +68,7 @@ describe('<Alert />', () => {
   describe('`variant` is success', () => {
     const variantModifications = {
       className: styles.success,
-      iconComponent: IconCompleteSolid
+      iconComponent: IconComplete
     }
     variantChanges('success', variantModifications)
   })
@@ -76,7 +76,7 @@ describe('<Alert />', () => {
   describe('`variant` is error', () => {
     const variantModifications = {
       className: styles.error,
-      iconComponent: IconWarningSolid
+      iconComponent: IconWarning
     }
     variantChanges('error', variantModifications)
   })
@@ -84,7 +84,7 @@ describe('<Alert />', () => {
   describe('`variant` is warning', () => {
     const variantModifications = {
       className: styles.warning,
-      iconComponent: IconWarningSolid
+      iconComponent: IconWarning
     }
     variantChanges('warning', variantModifications)
   })
@@ -92,7 +92,7 @@ describe('<Alert />', () => {
   describe('`variant` is info', () => {
     const variantModifications = {
       className: styles.info,
-      iconComponent: IconInfoSolid
+      iconComponent: IconInfo
     }
     variantChanges('info', variantModifications)
   })

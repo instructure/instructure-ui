@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import IconCheckSolid from 'instructure-icons/lib/Solid/IconCheckSolid'
-import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
+import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -35,11 +35,11 @@ export default class ToggleFacade extends Component {
   renderIcon () {
     if (this.props.checked) {
       return (
-        <IconCheckSolid className={styles.iconSVG} />
+        <IconCheck className={styles.iconSVG} />
       )
     } else {
       return (
-        <IconXSolid className={styles.iconSVG} />
+        <IconX className={styles.iconSVG} />
       )
     }
   }

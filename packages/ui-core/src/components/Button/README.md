@@ -34,7 +34,7 @@ Button variants for different contexts using the `variant` prop are shown below.
 the `margin` prop used to add space between the buttons.
 
 Note that for non-icon-variant buttons, SVG icons imported from
-[instructure-icons](http://instructure.github.io/instructure-icons/)
+[@instructure/ui-icons](#ui-icons)
 will be sized appropriately and given right-margin to offset them from the text.
 
 ```js

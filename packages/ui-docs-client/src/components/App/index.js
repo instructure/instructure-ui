@@ -8,8 +8,8 @@ import Select from '@instructure/ui-core/lib/components/Select'
 import Tray from '@instructure/ui-core/lib/components/Tray'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 
-import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
-import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
+import IconHeart from '@instructure/ui-icons/lib/Solid/IconHeart'
+import IconGithub from '@instructure/ui-icons/lib/Solid/IconGithub'
 
 import classnames from 'classnames'
 import Document from '../Document'
@@ -251,13 +251,13 @@ export default class App extends Component {
         { author && (
           <span>
             Made with &nbsp;
-            <IconHeartSolid className={styles.footerIcon} />
+            <IconHeart className={styles.footerIcon} />
             &nbsp; by {author}. &nbsp;
           </span>
         ) }
         { repository && (
           <a href={repository} className={styles.githubLink} target="_blank">
-            <IconGithubSolid className={styles.footerIcon} />
+            <IconGithub className={styles.footerIcon} />
             <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
           </a>
         ) }

@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import IconArrowOpenRightSolid from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
-import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
@@ -73,8 +73,8 @@ class ToggleDetails extends Component {
     variant: 'default',
     size: 'medium',
     fluidWidth: false,
-    icon: IconArrowOpenRightSolid,
-    iconExpanded: IconArrowOpenDownSolid,
+    icon: IconArrowOpenRight,
+    iconExpanded: IconArrowOpenDown,
     iconPosition: 'start',
     expanded: null,
     defaultExpanded: false,

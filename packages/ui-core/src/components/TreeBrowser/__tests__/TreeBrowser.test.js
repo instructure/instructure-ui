@@ -1,7 +1,7 @@
 import React from 'react'
-import IconFolderSolid from 'instructure-icons/lib/Solid/IconFolderSolid'
-import IconDocumentSolid from 'instructure-icons/lib/Solid/IconDocumentSolid'
-import IconPlus from 'instructure-icons/lib/Solid/IconPlusSolid'
+import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
+import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
 import TreeBrowser from '../index'
 
 describe('<TreeBrowser />', () => {
@@ -117,7 +117,7 @@ describe('<TreeBrowser />', () => {
   describe('collections', () => {
     it('renders a folder icon by default', () => {
       const tree = testbed.render()
-      const svg = tree.find(IconFolderSolid)
+      const svg = tree.find(IconFolder)
       expect(svg.length).to.equal(1)
     })
 
@@ -129,7 +129,7 @@ describe('<TreeBrowser />', () => {
 
     it('renders without an icon if collection icon explicitly set to null', () => {
       const tree = testbed.render({collectionIcon: null})
-      const svg = tree.find(IconFolderSolid)
+      const svg = tree.find(IconFolder)
       expect(svg.length).to.equal(0)
     })
 
@@ -143,17 +143,17 @@ describe('<TreeBrowser />', () => {
 
     it('renders icons properly', () => {
       const tree = testbed.render({
-        collectionIconExpanded: IconDocumentSolid
+        collectionIconExpanded: IconDocument
       })
       const button = tree.find('button')
-      expect(button.find(IconFolderSolid).length).to.equal(1)
-      expect(button.find(IconDocumentSolid).length).to.equal(0)
+      expect(button.find(IconFolder).length).to.equal(1)
+      expect(button.find(IconDocument).length).to.equal(0)
       button.simulate('click')
-      expect(button.find(IconFolderSolid).length).to.equal(0)
-      expect(button.find(IconDocumentSolid).length).to.equal(1)
+      expect(button.find(IconFolder).length).to.equal(0)
+      expect(button.find(IconDocument).length).to.equal(1)
       button.simulate('click')
-      expect(button.find(IconFolderSolid).length).to.equal(1)
-      expect(button.find(IconDocumentSolid).length).to.equal(0)
+      expect(button.find(IconFolder).length).to.equal(1)
+      expect(button.find(IconDocument).length).to.equal(0)
     })
   })
 
@@ -161,7 +161,7 @@ describe('<TreeBrowser />', () => {
     it('renders a document icon by default', () => {
       const tree = testbed.render()
       tree.find('button').simulate('click')
-      const svg = tree.find(IconDocumentSolid)
+      const svg = tree.find(IconDocument)
       expect(svg.length).to.equal(1)
     })
 
@@ -174,7 +174,7 @@ describe('<TreeBrowser />', () => {
 
     it('renders without an icon if item icon explicitly set to null', () => {
       const tree = testbed.render({itemIcon: null})
-      const svg = tree.find(IconDocumentSolid)
+      const svg = tree.find(IconDocument)
       expect(svg.length).to.equal(0)
     })
   })

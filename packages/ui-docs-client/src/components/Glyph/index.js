@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Button from '@instructure/ui-core/lib/components/Button'
 import Heading from '@instructure/ui-core/lib/components/Heading'
-import InlineSVG from '@instructure/ui-core/lib/components/InlineSVG'
+import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 
 import themeable from '@instructure/ui-themeable'

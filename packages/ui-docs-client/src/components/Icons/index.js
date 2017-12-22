@@ -140,7 +140,7 @@ class MyIcon extends React.Component {
 }`
     } else {
       example = `\
-import InlineSVG from '@instructure/ui-core/lib/components/InlineSVG'
+import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
 import { ${name} } from '${requirePath}'
 
 class MyIcon extends React.Component {

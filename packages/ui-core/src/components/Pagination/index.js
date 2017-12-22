@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import IconLeft from 'instructure-icons/lib/Solid/IconArrowOpenLeftSolid'
-import IconRight from 'instructure-icons/lib/Solid/IconArrowOpenRightSolid'
+import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
+import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'

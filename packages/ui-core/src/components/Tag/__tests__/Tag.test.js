@@ -1,5 +1,5 @@
 import React from 'react'
-import IconXSolid from 'instructure-icons/lib/Solid/IconXSolid'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import Tag from '../index'
 import styles from '../styles.css'
 import Container from '../../Container'
@@ -23,7 +23,7 @@ describe('<Tag />', () => {
   it('should render a close icon when it is dismissible and clickable', () => {
     const onClick = testbed.stub()
     const tag = testbed.render({onClick, dismissible: true})
-    const svg = tag.find(IconXSolid)
+    const svg = tag.find(IconX)
     expect(svg.length).to.equal(1)
   })
 

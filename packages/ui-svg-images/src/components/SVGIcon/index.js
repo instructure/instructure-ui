@@ -35,13 +35,15 @@ class SVGIcon extends Component {
       width,
       height,
       rotate,
+      className,
       style, // eslint-disable-line react/prop-types
       ...props
     } = this.props
 
     const classes = {
       [styles.root]: true,
-      [styles[`rotate--${rotate}`]]: rotate && rotate !== '0'
+      [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
+      [className]: className
     }
 
     return (

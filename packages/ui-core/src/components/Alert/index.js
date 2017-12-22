@@ -5,9 +5,9 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import keycode from 'keycode'
 
-import IconCompleteSolid from 'instructure-icons/lib/Solid/IconCompleteSolid'
-import IconInfoSolid from 'instructure-icons/lib/Solid/IconInfoSolid'
-import IconWarningSolid from 'instructure-icons/lib/Solid/IconWarningSolid'
+import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
+import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
+import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 
 import themeable from '@instructure/ui-themeable'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
@@ -105,19 +105,19 @@ export default class Alert extends Component {
   variantUI () {
     return {
       error: {
-        Icon: IconWarningSolid,
+        Icon: IconWarning,
         classNames: classNames(styles.alert, styles.error)
       },
       info: {
-        Icon: IconInfoSolid,
+        Icon: IconInfo,
         classNames: classNames(styles.alert, styles.info)
       },
       success: {
-        Icon: IconCompleteSolid,
+        Icon: IconComplete,
         classNames: classNames(styles.alert, styles.success)
       },
       warning: {
-        Icon: IconWarningSolid,
+        Icon: IconWarning,
         classNames: classNames(styles.alert, styles.warning)
       }
     }[this.props.variant]
