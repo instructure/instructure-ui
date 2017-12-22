@@ -37,7 +37,7 @@ Run `yarn export:icons` from the repository root directory to generate the SVG f
 - Use dashes in the name of the .sketch files (e.g `calendar-month`).
   Use the same name for art-boards, but prefix with the variant, e.g. `solid/calendar-month` and `line/calendar-month`.
 
-- Draw your icons on the 1920 x 1920 art-boards that are set up for you in the Sketch template.
+- Draw your icons on the 1920 x 1920 art-boards that are set up for you in the [Sketch template](https://github.com/instructure/instructure-ui/tree/master/packages/ui-icons/template.sketch).
 
 - Before you flatten shapes or vectorize strokes as described below, make a hidden copy of the original paths off
   to the side so that you can more easily come back and make changes later.
