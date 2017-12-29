@@ -1,6 +1,5 @@
 .background {
   background-color: rgba(94, 94, 94, 0.5);
-  width: auto;
+  width: 100%;
   min-width: 800px;
-  height: auto;
 }

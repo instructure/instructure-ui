@@ -5,7 +5,12 @@ import themeable from '@instructure/ui-themeable'
 import OverlayContainer from '../OverlayContainer'
 import CountdownTimer from '../CountdownTimer'
 import RecordingBadge from '../RecordingBadge'
-import { STARTING, RECORDING, PREVIEWSAVE } from '../../constants/CaptureStates'
+import {
+  STARTING,
+  RECORDING,
+  PREVIEWSAVE,
+  SAVING
+} from '../../constants/CaptureStates'
 import styles from './styles.css'
 
 @themeable({}, styles)
@@ -26,7 +31,7 @@ export default class MediaOverlay extends Component {
     }
 
     const PreviewBadgeGuard = (state) => {
-      if (state !== PREVIEWSAVE) return null
+      if (![PREVIEWSAVE, SAVING].includes(state)) return null
 
       return <div className={styles.badge}>PREVIEW</div>
     }

@@ -1,8 +1,6 @@
 .media {
-  flex: 4;
-  float: right;
-  width: 753px;
+  max-width: 753px;
   border-radius: 4px;
-  background-color: black;
   position: relative;
+  margin: 0 1rem;
 }

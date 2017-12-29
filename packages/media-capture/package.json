@@ -31,11 +31,14 @@
     "access": "public"
   },
   "dependencies": {
+    "@instructure/ui-core": "^4.4.1",
     "@instructure/ui-themeable": "^4.4.1",
     "classnames": "^2.2.5",
+    "instructure-icons": "^4.3.2",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-redux": "^5.0.6",
-    "redux": "^3.7.2"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import MediaCaptureProvider from '../MediaCaptureProvider'
 import CaptureBackground from '../CaptureBackground'
 import CapturePresentation from '../CapturePresentation'
@@ -12,7 +13,7 @@ import CTA from '../CTA'
 import reducer from '../../reducers'
 import { STARTING } from '../../constants/CaptureStates'
 
-const store = createStore(reducer)
+const store = createStore(reducer, applyMiddleware(thunk))
 
 /**
 ---

@@ -33,18 +33,6 @@ describe('mediaCapture actions', () => {
     })
   })
 
-  it('saveClicked should create SAVE_CLICKED action', () => {
-    expect(actions.saveClicked()).to.deep.equal({
-      type: types.SAVE_CLICKED
-    })
-  })
-
-  it('startClicked should create SAVE_CLICKED action', () => {
-    expect(actions.saveClicked()).to.deep.equal({
-      type: types.SAVE_CLICKED
-    })
-  })
-
   it('startoverClicked should create STARTOVER_CLICKED action', () => {
     expect(actions.startoverClicked()).to.deep.equal({
       type: types.STARTOVER_CLICKED
@@ -62,6 +50,14 @@ describe('mediaCapture actions', () => {
     expect(actions.videoDeviceChanged('oasnf2308hf')).to.deep.equal({
       type: types.VIDEO_DEVICE_CHANGED,
       id: 'oasnf2308hf'
+    })
+  })
+
+  it('saveClicked should dispatch SAVE_CLICKED action', () => {
+    const dispatch = sinon.stub()
+    actions.saveClicked()(dispatch)
+    expect(dispatch).to.have.been.calledWith({
+      type: types.SAVE_CLICKED
     })
   })
 })

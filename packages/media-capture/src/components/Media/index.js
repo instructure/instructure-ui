@@ -8,7 +8,8 @@ import {
   READY,
   RECORDING,
   PREVIEWSAVE,
-  STARTING
+  STARTING,
+  SAVING
 } from '../../constants/CaptureStates'
 
 export default class Media extends Component {
@@ -24,7 +25,7 @@ export default class Media extends Component {
     }
 
     const MediaPlaybackGuard = (state) => {
-      if (state !== PREVIEWSAVE) return null
+      if (![PREVIEWSAVE, SAVING].includes(state)) return null
 
 
       return <MediaPlayback />

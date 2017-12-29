@@ -6,5 +6,7 @@ describes: MediaCapture
 ---
 example: true
 ---
-<MediaCapture />
+const onCompleted = () => { alert('Recording Completed!') };
+
+<MediaCapture onCompleted={onCompleted} />
 ```
