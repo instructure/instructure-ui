@@ -16,6 +16,7 @@ module.exports = {
     ],
     'instructure-ui': [
       '@instructure/ui-core',
+      '@instructure/ui-portal',
       '@instructure/ui-svg-images',
       '@instructure/ui-themes',
       '@instructure/ui-themeable',
@@ -41,12 +42,14 @@ module.exports = {
     alias: {
       // set up aliases to get webpack to rebuild when we make changes to these packages
       '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
+      '@instructure/ui-portal$': path.resolve(__dirname, '../ui-portal/src/'),
       '@instructure/ui-svg-images$': path.resolve(__dirname, '../ui-svg-images/src/'),
       '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
       '@instructure/ui-themes$': path.resolve(__dirname, '../ui-themes/src/'),
       '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
 
       '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
+      '@instructure/ui-portal/lib': path.resolve(__dirname, '../ui-portal/src'),
       '@instructure/ui-svg-images/lib': path.resolve(__dirname, '../ui-svg-images/src'),
       '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),
       '@instructure/ui-themes/lib': path.resolve(__dirname, '../ui-themes/src'),

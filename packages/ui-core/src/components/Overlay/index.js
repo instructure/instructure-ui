@@ -6,7 +6,8 @@ import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
-import Portal from '../Portal'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
+
 import Dialog from '../Dialog'
 import Transition from '../Transition'
 

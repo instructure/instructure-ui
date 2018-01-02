@@ -7,7 +7,8 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
-import Portal from '../Portal'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
+
 import Dialog from '../Dialog'
 import CloseButton from '../CloseButton'
 import Transition from '../Transition'

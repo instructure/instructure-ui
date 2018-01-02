@@ -7,6 +7,7 @@ import lorem from 'lorem-ipsum'
 
 import * as UICore from '@instructure/ui-core'
 import * as UISVGImages from '@instructure/ui-svg-images'
+import * as UIPortal from '@instructure/ui-portal'
 
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
@@ -52,7 +53,8 @@ const globals = Object.assign(
     ReactDOM
   },
   UICore,
-  UISVGImages
+  UISVGImages,
+  UIPortal
 )
 
 Object.keys(globals).forEach((key) => {

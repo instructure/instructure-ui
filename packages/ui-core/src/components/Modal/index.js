@@ -6,12 +6,13 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
+import Portal from '@instructure/ui-portal/lib/components/Portal'
+
 import ModalContent from './ModalContent'
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
-import Portal from '../Portal'
 import Dialog from '../Dialog'
 import Transition from '../Transition'
 import CloseButton from '../CloseButton'

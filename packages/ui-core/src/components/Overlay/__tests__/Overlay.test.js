@@ -1,6 +1,6 @@
 import React from 'react'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
 import Overlay from '../index'
-import Portal from '../../Portal'
 
 describe('<Overlay />', () => {
   const testbed = new Testbed(<Overlay />)

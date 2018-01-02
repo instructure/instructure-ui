@@ -8,11 +8,15 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
-    "pattern": "^instructure/ui-core/lib/components/SVGIcon",
+    "pattern": "^@instructure/ui-core/lib/components/Portal",
+    "replace": "@instructure/ui-portal/lib/components/Portal"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
     "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
   },
   {
-    "pattern": "^instructure/ui-core/lib/components/InlineSVG",
+    "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
     "replace": "@instructure/ui-svg-images/lib/components/InlineSVG"
   },
   {

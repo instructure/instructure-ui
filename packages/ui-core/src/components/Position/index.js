@@ -12,7 +12,7 @@ import debounce from '@instructure/ui-utils/lib/debounce'
 import calculateElementPosition from '@instructure/ui-utils/lib/dom/calculateElementPosition'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
-import Portal from '../Portal'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import styles from './styles.css'
 import theme from './theme'

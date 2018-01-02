@@ -50,6 +50,7 @@ plugins = plugins.concat([
       '**/__docs__/**',
       '**/config/**',
       '**/src/index.js',
+      'packages/ui-core/src/components/Portal/*',
       'packages/ui-utils/src/{react,dom,i18n}/index.js',
       '**/theme.js',
       'packages/ui-docs-client/**/*.js',

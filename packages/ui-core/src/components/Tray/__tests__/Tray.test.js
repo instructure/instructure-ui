@@ -1,6 +1,6 @@
 import React from 'react'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
 import Button from '../../Button'
-import Portal from '../../Portal'
 import Tray from '../index'
 
 describe('<Tray />', () => {

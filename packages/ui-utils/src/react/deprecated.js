@@ -22,10 +22,11 @@ import warning from '../warning'
 *
 * @module deprecated
 * @param {string} version
-* @param {object} oldProps
+* @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
+* @param {string} message
 * @return {function} React component with deprecated props behavior
 */
-export default function deprecated (version, oldProps) {
+export default function deprecated (version, oldProps, message) {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)
 
@@ -33,13 +34,21 @@ export default function deprecated (version, oldProps) {
       static displayName = displayName
 
       constructor (props, context) {
-        checkProps(version, props, oldProps)
+        if (oldProps) {
+          warnDeprecatedProps(version, props, oldProps, message)
+        } else {
+          warnDeprecatedComponent(version, displayName, message)
+        }
 
         super(props, context)
       }
 
       componentWillReceiveProps (nextProps) {
-        checkProps(version, nextProps, oldProps)
+        if (oldProps) {
+          warnDeprecatedProps(version, nextProps, oldProps, message)
+        } else {
+          warnDeprecatedComponent(version, displayName, message)
+        }
 
         if (super.componentWillReceiveProps) {
           super.componentWillReceiveProps(nextProps)
@@ -51,7 +60,7 @@ export default function deprecated (version, oldProps) {
   }
 }
 
-function checkProps (version, props, oldProps) {
+function warnDeprecatedProps (version, props, oldProps, message) {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
@@ -60,9 +69,18 @@ function checkProps (version, props, oldProps) {
 
       warning(
         false,
-        '%s was deprecated in %s%s',
-        oldProp, version, (newProp ? ` use ${newProp} instead` : '')
+        '%s was deprecated in %s%s. %s',
+        oldProp, version, (newProp ? ` use ${newProp} instead` : ''), message || ''
       )
     }
   })
+}
+
+function warnDeprecatedComponent (version, displayName, message) {
+  warning(false, '%s was deprecated in version %s %s', displayName, version, message || '')
+}
+
+export function changedPackageWarning (prevPackage, newPackage) {
+  return `It has been moved from ${prevPackage} to ${newPackage}. See ${newPackage} ` +
+    `in the documentation for more details`
 }
