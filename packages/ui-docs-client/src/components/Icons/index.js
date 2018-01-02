@@ -68,6 +68,14 @@ export default class Icons extends Component {
     this.setState({ name: null, variant: null, glyph: null })
   }
 
+  renderDocs () {
+    if (this.selectedFormatKey === 'icons-react') {
+      return <p>See the <a href="#SVGIcon">SVGIcon</a> component for props and examples.</p>
+    } else if (this.selectedFormatKey === 'icons-svg') {
+      return <p>See the <a href="#InlineSVG">InlineSVG</a> component for props and examples.</p>
+    }
+  }
+
   renderHeader () {
     const { formats } = this.props
     return (
@@ -100,6 +108,7 @@ export default class Icons extends Component {
             </Select>
           </FormFieldGroup>
         </div>
+        { this.renderDocs() }
       </div>
     )
   }
