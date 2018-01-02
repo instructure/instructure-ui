@@ -15,6 +15,7 @@ export default class Controller extends Component {
       flex: '1',
       width: '753px',
       backgroundColor: 'grey',
+      opacity: '0.5',
       borderRadius: '3px'
     }
 

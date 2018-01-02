@@ -1,0 +1,20 @@
+.signal {
+  background: rgb(196, 28, 28);
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  margin-left: 7px;
+  margin-top: 6px;
+}
+
+.badge {
+  position: absolute;
+  color: rgb(255, 255, 255);
+  background-color: #73818a;
+  width: 60px;
+  height: 20px;
+  bottom: 0;
+  right: 0;
+  text-align: right;
+  border-radius: 0 0 4px 0;
+}

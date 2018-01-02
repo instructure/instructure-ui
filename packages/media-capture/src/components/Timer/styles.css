@@ -1,0 +1,10 @@
+.timer {
+  position: absolute;
+  color: #fff;
+  font-size: 12px;
+  margin-top: 3px;
+  width: 70%;
+  text-align: center;
+  top: 0;
+  right: 0;
+}
