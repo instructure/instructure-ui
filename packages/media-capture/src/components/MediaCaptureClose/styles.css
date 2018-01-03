@@ -1,0 +1,12 @@
+.close {
+  position: absolute;
+  cursor: pointer;
+  right: 13px;
+  top: 13px;
+
+  /* stylelint-disable selector-max-type */
+  button {
+    color: #fff;
+  }
+  /* stylelint-enable */
+}

@@ -4,3 +4,10 @@
   height: 100%;
   color: white;
 }
+
+.loading {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

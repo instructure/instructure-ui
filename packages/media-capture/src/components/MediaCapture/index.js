@@ -5,6 +5,7 @@ import thunk from 'redux-thunk'
 import MediaCaptureProvider from '../MediaCaptureProvider'
 import CaptureBackground from '../CaptureBackground'
 import CapturePresentation from '../CapturePresentation'
+import MediaCaptureClose from '../MediaCaptureClose'
 import MediaContainer from '../MediaContainer'
 import MediaOverlay from '../MediaOverlay'
 import Media from '../Media'
@@ -45,13 +46,31 @@ export default class MediaCapture extends Component {
     onClose: () => {}
   }
 
+  constructor (props) {
+    super(props)
+    this.state = {
+      shown: true
+    }
+
+    this.close = this.close.bind(this)
+  }
+
+  close (currentState) {
+    this.setState({ shown: false }, () => {
+      this.props.onClose(currentState)
+    })
+  }
+
   render () {
+    if (!this.state.shown) return null
+
     return (
       <MediaCaptureProvider
         store={store}
         render={({captureState}) => (
           <CaptureBackground>
             <CapturePresentation>
+              <MediaCaptureClose captureState={captureState} onClick={this.close} />
               <MediaContainer>
                 <MediaOverlay captureState={captureState} />
                 <Media captureState={captureState} />

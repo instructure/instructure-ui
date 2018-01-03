@@ -29,7 +29,7 @@ describe('capture reducer', () => {
         { type: types.CLOSE_CLICKED }
       )
     ).to.deep.equal(
-      { captureState: states.FINISHED }
+      { captureState: states.READY }
     )
 
     expect(

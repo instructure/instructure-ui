@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 import classNames from 'classnames'
+import Spinner from '@instructure/ui-core/lib/components/Spinner'
 
 import styles from './styles.css'
 
@@ -17,9 +18,26 @@ export default class MediaStreamMessage extends Component {
   render () {
     if (this.props.loaded) return null
 
+    const ErrorMessageGuard = (error) => {
+      if (!this.props.error) return null
+
+      return <h2>{this.props.error}</h2>
+    }
+
+    const LoadingGuard = () => {
+      return (
+        <div className={classNames(styles.loading)}>
+          <Spinner title="Loading" size="large" margin="0 0 0 0" />
+        </div>
+      )
+    }
+
     return (
       <div className={classNames(styles.message)}>
-        <h2>{this.props.error || 'LOADING PLACEHOLDER...'}</h2>
+        {
+          ErrorMessageGuard(this.props.error) ||
+          LoadingGuard()
+        }
       </div>
     )
   }

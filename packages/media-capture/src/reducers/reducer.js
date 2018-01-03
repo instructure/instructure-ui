@@ -36,7 +36,7 @@ export default function reducer (state = initialState, action) {
       if ([READY, STARTING, RECORDING, PREVIEWSAVE].includes(state.captureState)) {
         return {
           ...state,
-          captureState: FINISHED
+          captureState: READY
         }
       } else {
         return state
