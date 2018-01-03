@@ -1,7 +1,6 @@
 const loadConfig = require('./loadConfig')
 
 const CORE_PLUGINS = [
-  ['postcss-nested'],
   ['postcss-bidirection'],
   ['autoprefixer', { browsers: loadConfig('browserslist', require('./browserslist')) }],
   ['postcss-initial'],
@@ -10,9 +9,12 @@ const CORE_PLUGINS = [
 
 const DEBUG = Boolean(process.env.DEBUG)
 
-module.exports = function (opts = { before: {}, after: {} }) {
+module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
   return function (ctx = {}) {
-    let plugins = [ ...CORE_PLUGINS ]
+    let plugins = [
+      opts.nesting ? ['postcss-nesting'] : ['postcss-nested'],
+      ...CORE_PLUGINS
+    ]
 
     if (DEBUG) {
       plugins = [['stylelint'], ...plugins, ['postcss-browser-reporter']]

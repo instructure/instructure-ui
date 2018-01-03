@@ -71,6 +71,7 @@
     "postcss-initial": "2.0.0",
     "postcss-loader": "2.0.8",
     "postcss-nested": "3.0.0",
+    "postcss-nesting": "^4.0.0",
     "postcss-reporter": "5.0.0",
     "puppeteer": "^0.13.0",
     "rimraf": "2.6.2",

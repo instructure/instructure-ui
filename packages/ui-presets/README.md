@@ -88,7 +88,8 @@ module.exports = require('@instructure/ui-presets/postcss')({
     insert: [
       [require.resolve('postcss-input-range')]
     ]
-  }
+  },
+  nesting: false // Set to true to use postcss-nesting instead of postcss-nested, defaults to false
 })
 ```
 
