@@ -37,7 +37,7 @@ const createReactSvgDataTask = function (variant) {
             glyphName: baseName,
             name,
             variant,
-            deprecated: toComponentName(deprecated[baseName], variant),
+            deprecated: toComponentName(deprecated[baseName]),
             path: path.join(config.react.destination, variant, name),
             viewBox: $svg.attr('viewBox'), // we only care about the viewBox attr
             source: svgtojsx($svg.html())

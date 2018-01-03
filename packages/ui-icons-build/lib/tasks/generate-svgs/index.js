@@ -22,6 +22,7 @@ const toComponentName = function (name, variant = '') {
 gulp.task('generate-svgs-index', (cb) => {
   const glyphs = {}
   const destination = path.join(config.destination, 'svg/')
+  const deprecated = config.deprecated || {}
 
   glob.sync(path.normalize(`${config.svg.destination}/**/*.svg`)).forEach((file) => {
     const baseName = path.basename(file, '.svg')
@@ -32,7 +33,8 @@ gulp.task('generate-svgs-index', (cb) => {
 
     glyphs[name][variant] = {
       glyphName: baseName,
-      src: fs.readFileSync(file, 'utf8')
+      src: fs.readFileSync(file, 'utf8'),
+      deprecated: !!deprecated[baseName]
     }
   })
 

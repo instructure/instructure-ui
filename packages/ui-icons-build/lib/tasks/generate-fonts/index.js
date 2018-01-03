@@ -22,6 +22,7 @@ const createFontTask = function (variant) {
   const fontName = `${formatName(config.fonts.fontName)}-${formatName(variant)}`
   const formats = config.fonts.formats
   const variantClassName = `${config.fonts.className}-${variant.toLowerCase()}`
+  const deprecated = config.deprecated || {}
 
   gulp.task(key, () => {
     return gulp.src(`${config.fonts.source + variant}/*.svg`)
@@ -45,7 +46,8 @@ const createFontTask = function (variant) {
               cssFile: `${fontName}.css`,
               codepoint,
               className: glyphClassName,
-              classes: [variantClassName, glyphClassName]
+              classes: [variantClassName, glyphClassName],
+              deprecated: !!deprecated[glyph.name]
             }
 
             return GLYPHS[name][variant]

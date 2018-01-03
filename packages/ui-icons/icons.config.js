@@ -26,6 +26,22 @@ const react = {
 const deprecated = {
   /* [icon name]: [icon name to use instead]
   /* e.g. 'arrow-up': 'arrow' */
+  'discussion-x': 'x',
+  'copy-course': 'copy',
+  'discussion-reply-dark': 'more',
+  'discussion-reply': 'more',
+  'discussion-search': 'search',
+  'search-address-book': 'search',
+  'rss-add': 'add',
+  'user-add': 'add',
+  'materials-required-light': 'materials-required',
+  'mature-light': 'mature',
+  'note-dark': 'note',
+  'note-light': 'note',
+  'icon-reply-2': 'icon-reply',
+  'icon-replied': 'icon-reply',
+  'settings-2': 'settings',
+  'twitter-boxed': 'twitter'
 }
 
 module.exports = {

@@ -68,14 +68,6 @@ export default class Icons extends Component {
     this.setState({ name: null, variant: null, glyph: null })
   }
 
-  renderDocs () {
-    if (this.selectedFormatKey === 'icons-react') {
-      return <p>See the <a href="#SVGIcon">SVGIcon</a> component for props and examples.</p>
-    } else if (this.selectedFormatKey === 'icons-svg') {
-      return <p>See the <a href="#InlineSVG">InlineSVG</a> component for props and examples.</p>
-    }
-  }
-
   renderHeader () {
     const { formats } = this.props
     return (
@@ -108,7 +100,6 @@ export default class Icons extends Component {
             </Select>
           </FormFieldGroup>
         </div>
-        { this.renderDocs() }
       </div>
     )
   }
@@ -148,15 +139,7 @@ class MyIcon extends React.Component {
   }
 }`
     } else {
-      example = `\
-import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
-import { ${name} } from '${requirePath}'
-
-class MyIcon extends React.Component {
-  render() {
-    return <InlineSVG src={${name}.${variant}.src} width="2em" height="2em" />
-  }
-}`
+      example = glyph.src
     }
 
     return (
@@ -165,12 +148,14 @@ class MyIcon extends React.Component {
           Usage
         </Heading>
         <CodeEditor label={`How to use`} code={example} language="js" readOnly />
+        { glyph.displayName && <p>See the <a href="#SVGIcon">SVGIcon</a> component for props and examples.</p> }
       </div>
     )
   }
 
   renderGlyph (name, variants) {
-    return (
+    const firstVariant = variants[Object.keys(variants)[0]]
+    return firstVariant.deprecated ? null : (
       <div className={styles.glyph} key={name}>
         <Glyph
           name={name}

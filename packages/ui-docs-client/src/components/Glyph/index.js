@@ -29,12 +29,17 @@ class Variant extends Component {
     let icon
 
     if (glyph.src) {
-      icon = <InlineSVG src={glyph.src} width="2rem" height="2rem" />
+      icon = <InlineSVG src={glyph.src} width="2rem" height="2rem" title={`${name} (${variant})`} />
     } else if (typeof glyph === 'function') {
       const Icon = glyph
-      icon = <Icon />
+      icon = <Icon title={`${name} (${variant})`} />
     } else if (glyph.classes) {
-      icon = <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
+      icon = (
+        <span>
+          <i className={`${glyph.classes.join(' ')}`} aria-hidden="true" />
+          <ScreenReaderContent>{`${name} (${variant})`}</ScreenReaderContent>
+        </span>
+      )
     }
 
     return (
@@ -45,7 +50,7 @@ class Variant extends Component {
           onClick={this.handleClick}
         >
           {icon}
-          <ScreenReaderContent>Usage</ScreenReaderContent>
+          <ScreenReaderContent>View Usage</ScreenReaderContent>
         </Button>
       </div>
     )

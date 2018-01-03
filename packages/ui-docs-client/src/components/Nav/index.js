@@ -317,7 +317,7 @@ export default class Nav extends Component {
     const sections = this.renderSections()
     const themes = this.renderThemes()
     const icons = this.renderIcons()
-    const matches = [ ...sections, ...themes, ...icons ]
+    const matches = [ ...sections, ...icons, ...themes ]
 
     return (
       <div className={styles.root}>
