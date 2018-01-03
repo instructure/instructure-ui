@@ -49,4 +49,36 @@ describe('<MediaStream />', () => {
         'Please allow Arc to access your webcam.')
     })
   })
+
+  describe('unmounting', () => {
+    context('when a stream has been established', () => {
+      it('stops all tracks', () => {
+        const stream = getTestMedia({
+          audio: true,
+          video: {
+            width: 400,
+            height: 300,
+            frameRate: 24
+          }
+        }).stream
+        const stopStub = testbed.stub()
+        const tracks = [
+          { stop: stopStub },
+          { stop: stopStub }
+        ]
+        testbed.stub(stream, 'getTracks', () => tracks)
+
+        const media = testbed.render()
+        media.instance().success(stream)
+        media.unmount()
+        expect(stopStub.callCount).to.eql(2)
+      })
+    })
+
+    context('when a stream is not present', () => {
+      it('does nothing', () => {
+        expect(() => testbed.render()).to.not.throw()
+      })
+    })
+  })
 })

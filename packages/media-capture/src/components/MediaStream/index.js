@@ -28,6 +28,12 @@ export default class MediaStream extends Component {
     getUserMedia(this.success, this.error)
   }
 
+  componentWillUnmount () {
+    if (this.stream) {
+      this.stream.getTracks().forEach(t => t.stop())
+    }
+  }
+
   pollReadyState () {
     // we poll here because rendering the stream inside the
     // video element is not instantaneous. Check the readyState
@@ -42,6 +48,7 @@ export default class MediaStream extends Component {
   }
 
   success (stream) {
+    this.stream = stream
     if (this.video) {
       this.video.srcObject = stream
       this.pollReadyState()
