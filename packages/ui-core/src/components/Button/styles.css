@@ -194,6 +194,12 @@
     background: var(--defaultHoverBackground);
   }
 
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--defaultColor);
+  }
+
   &:active {
     background: var(--defaultActiveBackground);
     box-shadow: var(--defaultActiveBoxShadow);
@@ -208,6 +214,12 @@
   &:hover,
   &:active {
     background: var(--primaryHoverBackground);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--primaryColor);
   }
 
   &:active {
@@ -226,6 +238,12 @@
     background: var(--successHoverBackground);
   }
 
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--successColor);
+  }
+
   &:active {
     background: var(--successActiveBackground);
     box-shadow: var(--successActiveBoxShadow);
@@ -242,6 +260,12 @@
     background: var(--dangerHoverBackground);
   }
 
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--dangerColor);
+  }
+
   &:active {
     background: var(--dangerActiveBackground);
     box-shadow: var(--dangerActiveBoxShadow);
@@ -256,6 +280,12 @@
   &:hover,
   &:active {
     background: var(--lightHoverBackground);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--lightColor);
   }
 
   &:active {
@@ -275,6 +305,12 @@
     background: var(--ghostHoverBackground);
   }
 
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--ghostColor);
+  }
+
   &:active {
     background: var(--ghostActiveBackground);
     box-shadow: var(--ghostActiveBoxShadow);
@@ -290,6 +326,12 @@
   &:hover,
   &:active {
     background: var(--ghostInverseHoverBackground);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--ghostInverseColor);
   }
 
   &:focus {
@@ -311,15 +353,11 @@
   border-color: var(--linkBorderColor);
   color: var(--linkColor);
 
-  &:hover,
   &:focus,
+  &:hover,
   &:active {
     text-decoration: underline;
     border-color: var(--linkFocusBorderColor);
-  }
-
-  &:hover,
-  &:active {
     color: var(--linkHoverColor);
   }
 }
@@ -327,6 +365,7 @@
 .link-inverse {
   color: var(--linkInverseColor);
 
+  &:focus,
   &:hover,
   &:active {
     color: var(--linkInverseColor);
@@ -400,6 +439,12 @@
     background: var(--circlePrimaryHoverBackground);
   }
 
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--circlePrimaryColor);
+  }
+
   &:active {
     background: var(--circlePrimaryActiveBackground);
     box-shadow: var(--circlePrimaryActiveBoxShadow);
@@ -414,6 +459,12 @@
   &:hover,
   &:active {
     background: var(--circleDangerHoverBackground);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--circleDangerColor);
   }
 
   &:active {
@@ -431,21 +482,24 @@
 .icon-inverse {
   color: var(--iconInverseColor);
 
-  &:hover,
-  &:active {
-    color: var(--iconInverseHoverColor);
-  }
-
   &:focus {
+    color: var(--iconInverseHoverColor);
+
     &::before {
       border-color: var(--ghostInverseBorderColor);
     }
+  }
+
+  &:hover,
+  &:active {
+    color: var(--iconInverseHoverColor);
   }
 }
 
 .icon {
   color: var(--iconColor);
 
+  &:focus,
   &:hover,
   &:active {
     color: var(--iconHoverColor);
