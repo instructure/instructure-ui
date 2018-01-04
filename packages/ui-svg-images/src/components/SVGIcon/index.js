@@ -4,6 +4,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import InlineSVG from '../InlineSVG'
 
@@ -16,18 +17,26 @@ category: components/utilities
 ---
 **/
 @themeable(theme, styles)
+
+@deprecated('4.7.0', {
+  width: 'size',
+  height: 'size'
+})
+
 class SVGIcon extends Component {
   static propTypes = {
     ...InlineSVG.propTypes,
     width: PropTypes.string,
     height: PropTypes.string,
-    rotate: PropTypes.oneOf(['0', '90', '180', '270'])
+    rotate: PropTypes.oneOf(['0', '90', '180', '270']),
+    size: PropTypes.oneOf([undefined, 'x-small', 'small', 'medium', 'large', 'x-large'])
   }
 
   static defaultProps = {
     width: '1em',
     height: '1em',
-    rotate: '0'
+    rotate: '0',
+    size: undefined
   }
 
   render () {
@@ -36,6 +45,7 @@ class SVGIcon extends Component {
       height,
       rotate,
       className,
+      size,
       style, // eslint-disable-line react/prop-types
       ...props
     } = this.props
@@ -43,6 +53,7 @@ class SVGIcon extends Component {
     const classes = {
       [styles.root]: true,
       [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
+      [styles[`size--${size}`]]: size,
       [className]: className
     }
 

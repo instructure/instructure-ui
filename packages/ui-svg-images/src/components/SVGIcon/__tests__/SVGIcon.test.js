@@ -1,5 +1,6 @@
 import React from 'react'
 import SVGIcon from '../index'
+import styles from '../styles.css'
 
 describe('<SVGIcon />', () => {
   const testbed = new Testbed(<SVGIcon />)
@@ -34,6 +35,27 @@ describe('<SVGIcon />', () => {
 
     expect(subject.props().width).to.equal('2.75em')
     expect(subject.props().height).to.equal('3.8em')
+  })
+
+  it('should set size', () => {
+    const subject = testbed.render({
+      size: 'large'
+    })
+
+    expect(subject.hasClass(styles['size--large'])).to.be.true
+  })
+
+  it('should prioritize deprecated width and height over size', () => {
+    const subject = testbed.render({
+      size: 'x-small',
+      width: '200px',
+      height: '200px'
+    })
+
+    const width = subject.getComputedStyle().getPropertyValue('width')
+    expect(width).to.equal('200px')
+    const height = subject.getComputedStyle().getPropertyValue('height')
+    expect(height).to.equal('200px')
   })
 
   it('should meet a11y standards', (done) => {

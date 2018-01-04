@@ -9,5 +9,5 @@ See also [SVGIcon](#SVGIcon) which provides more styles specific to icons.
 ---
 example: true
 ---
-<InlineSVG src={iconExample} width="2em" height="2em" />
+<InlineSVG src={iconExample} />
 ```
