@@ -198,6 +198,28 @@ describe('<DateInput />', () => {
     expect(onDateChange.getCall(0).args[3]).to.equal(true)
   })
 
+  it('fires the onDateChange event when DatePicker value is changed from empty to an invalid value', () => {
+    testbed.stub(console, 'error')
+    const onDateChange = testbed.stub()
+    const subject = testbed.render({ onDateChange })
+    const dateInput = subject.find('input')
+    dateInput.setValue('not a date')
+    dateInput.simulate('blur')
+    expect(onDateChange).to.have.been.calledOnce
+  })
+
+  it('fires the onDateChange event when DatePicker value is changed from an invalid value to empty', () => {
+    testbed.stub(console, 'error')
+    const onDateChange = testbed.stub()
+    const subject = testbed.render({ onDateChange })
+    const dateInput = subject.find('input')
+    dateInput.setValue('not a date')
+    dateInput.simulate('blur')
+    dateInput.setValue('')
+    dateInput.simulate('blur')
+    expect(onDateChange).to.have.been.calledTwice
+  })
+
   it('should not touch the time portion of the initial value when DatePicker value changes', () => {
     const onDateChange = testbed.stub()
     const subject = testbed.render({

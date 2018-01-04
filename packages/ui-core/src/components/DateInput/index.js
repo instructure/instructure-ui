@@ -324,11 +324,10 @@ export default class DateInput extends Component {
         .millisecond(state.millisecond)
 
       const newState = this.computeState(rawAcceptedValue, parsedDate, props, state)
+      const acceptedValueChanged = newState.acceptedValue !== state.acceptedValue
+      const validOrEmptyChanged = newState.isValidOrEmpty !== state.isValidOrEmpty
 
-      if (
-        (newState.acceptedValue !== state.acceptedValue) &&
-        (typeof this.props.onDateChange === 'function')
-      ) {
+      if ((acceptedValueChanged || validOrEmptyChanged) && (typeof this.props.onDateChange === 'function')) {
         this.props.onDateChange(
           event,
           newState.acceptedValue,
