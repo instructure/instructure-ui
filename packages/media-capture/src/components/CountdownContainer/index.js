@@ -5,7 +5,7 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 
 @themeable({}, styles)
-export default class OverlayContainer extends Component {
+export default class CountdownContainer extends Component {
   static propTypes = {
     children: PropTypes.node
   }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { _component as CountdownTimer } from '../index'
+import CountdownTimer from '../index'
 import * as CaptureActions from '../../../actions'
 
 describe('<CountdownTimer />', () => {

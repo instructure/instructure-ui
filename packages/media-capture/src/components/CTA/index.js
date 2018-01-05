@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import Button from '@instructure/ui-core/lib/components/Button'
 import IconSettingsLine from 'instructure-icons/lib/Line/IconSettingsLine'
 
@@ -11,9 +9,8 @@ import {
   PREVIEWSAVE,
   SAVING
 } from '../../constants/CaptureStates'
-import * as CaptureActions from '../../actions'
 
-class CTA extends Component {
+export default class CTA extends Component {
   static propTypes = {
     actions: PropTypes.shape({
       saveClicked: PropTypes.func.isRequired,
@@ -78,13 +75,3 @@ class CTA extends Component {
     )
   }
 }
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(CaptureActions, dispatch)
-})
-
-export const _component = CTA
-export default connect(
-  () => ({}),
-  mapDispatchToProps
-)(CTA)

@@ -1,29 +1,22 @@
 import React, { Component } from 'react'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import CloseButton from '@instructure/ui-core/lib/components/CloseButton'
 import themeable from '@instructure/ui-themeable'
 import classNames from 'classnames'
 
-import * as CaptureActions from '../../actions'
-
 import styles from './styles.css'
 
 @themeable({}, styles)
-class MediaCaptureClose extends Component {
+export default class MediaCaptureClose extends Component {
   static propTypes = {
     captureState: PropTypes.string.isRequired,
-    onClick: PropTypes.func.isRequired,
     actions: PropTypes.shape({
       closeClicked: PropTypes.func
-    })
+    }).isRequired,
+    onClick: PropTypes.func.isRequired
   }
 
   static defaultProps = {
-    actions: {
-      closeClicked: () => {}
-    }
   }
 
   constructor (props) {
@@ -47,17 +40,3 @@ class MediaCaptureClose extends Component {
     )
   }
 }
-
-const mapStateToProps = state => ({
-  state: state
-})
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(CaptureActions, dispatch)
-})
-
-export const _component = MediaCaptureClose
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MediaCaptureClose)

@@ -67,16 +67,28 @@ export default class MediaCapture extends Component {
     return (
       <MediaCaptureProvider
         store={store}
-        render={({captureState}) => (
+        render={({ state: { captureState, msg, videoSrc }, actions }) => (
           <CaptureBackground>
             <CapturePresentation>
-              <MediaCaptureClose captureState={captureState} onClick={this.close} />
+              <MediaCaptureClose
+                captureState={captureState}
+                actions={actions}
+                onClick={this.close}
+              />
               <MediaContainer>
-                <MediaOverlay captureState={captureState} />
-                <Media captureState={captureState} />
+                <MediaOverlay
+                  captureState={captureState}
+                  msg={msg}
+                  actions={actions}
+                />
+                <Media
+                  captureState={captureState}
+                  videoSrc={videoSrc}
+                  actions={actions}
+                />
               </MediaContainer>
               <Controller captureState={captureState}>
-                <CTA captureState={captureState} />
+                <CTA captureState={captureState} actions={actions} />
               </Controller>
             </CapturePresentation>
           </CaptureBackground>

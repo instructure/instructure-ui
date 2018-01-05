@@ -7,7 +7,7 @@ import {
   SAVING
 } from '../../../constants/CaptureStates'
 
-import { _component as CTA } from '../index'
+import CTA from '../index'
 
 describe('<CTA />', () => {
   const actionStubs = {

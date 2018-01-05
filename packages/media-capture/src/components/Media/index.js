@@ -9,26 +9,28 @@ import {
   RECORDING,
   PREVIEWSAVE,
   STARTING,
-  SAVING
+  SAVING,
+  LOADING
 } from '../../constants/CaptureStates'
 
 export default class Media extends Component {
   static propTypes = {
-    captureState: PropTypes.string.isRequired
+    captureState: PropTypes.string.isRequired,
+    videoSrc: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
   render () {
     const MediaStreamGuard = (state) => {
-      if (![READY, STARTING, RECORDING].includes(state)) return null
+      if (![LOADING, READY, STARTING, RECORDING].includes(state)) return null
 
-      return <MediaStream />
+      return <MediaStream captureState={state} actions={{...this.props.actions}} />
     }
 
     const MediaPlaybackGuard = (state) => {
       if (![PREVIEWSAVE, SAVING].includes(state)) return null
 
-
-      return <MediaPlayback />
+      return <MediaPlayback videoSrc={this.props.videoSrc} />
     }
 
     return (

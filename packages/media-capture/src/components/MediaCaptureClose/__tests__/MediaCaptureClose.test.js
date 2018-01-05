@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { _component as MediaCaptureClose } from '../index'
+import MediaCaptureClose from '../index'
 import { READY } from '../../../constants/CaptureStates'
 import * as CaptureActions from '../../../actions'
 

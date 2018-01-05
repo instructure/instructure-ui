@@ -9,6 +9,10 @@ export const startClicked = () => ({ type: types.START_CLICKED })
 export const startoverClicked = () => ({ type: types.STARTOVER_CLICKED })
 export const titleEdited = text => ({ type: types.TITLE_EDITED, text })
 export const videoDeviceChanged = id => ({ type: types.VIDEO_DEVICE_CHANGED, id })
+export const deviceRequestAccepted = () => ({ type: types.DEVICE_REQUEST_ACCEPTED })
+export const mediaRecorderInitialized = (mr) => ({ type: types.MEDIA_RECORDER_INITIALIZED, mr })
+export const videoObjectGenerated = (src) => ({ type: types.VIDEO_OBJECT_GENERATED, src })
+export const errorOccurred = (msg) => ({ type: types.ERROR_OCCURRED, msg })
 
 export const saveClicked = () => {
   return (dispatch) => {

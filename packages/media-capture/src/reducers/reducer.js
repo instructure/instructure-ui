@@ -8,7 +8,11 @@ import {
   START_CLICKED,
   STARTOVER_CLICKED,
   TITLE_EDITED,
-  VIDEO_DEVICE_CHANGED
+  VIDEO_DEVICE_CHANGED,
+  DEVICE_REQUEST_ACCEPTED,
+  MEDIA_RECORDER_INITIALIZED,
+  VIDEO_OBJECT_GENERATED,
+  ERROR_OCCURRED
 } from '../constants/ActionTypes'
 
 import {
@@ -17,11 +21,15 @@ import {
   READY,
   RECORDING,
   SAVING,
-  STARTING
+  STARTING,
+  LOADING,
+  ERROR
 } from '../constants/CaptureStates'
 
 const initialState = {
-  captureState: READY
+  captureState: LOADING,
+  videoSrc: "",
+  msg: ''
 }
 
 export default function reducer (state = initialState, action) {
@@ -50,9 +58,23 @@ export default function reducer (state = initialState, action) {
         captureState: RECORDING
       }
 
+    case DEVICE_REQUEST_ACCEPTED:
+      return {
+        ...state,
+        captureState: READY
+      }
+
+    case ERROR_OCCURRED:
+      return {
+        ...state,
+        msg: action.msg,
+        captureState: ERROR
+      }
+
     case FINISH_CLICKED:
       if (state.captureState !== RECORDING) { return state }
 
+      state.mediaRecorder && state.mediaRecorder.stop()
       return {
         ...state,
         captureState: PREVIEWSAVE
@@ -64,6 +86,13 @@ export default function reducer (state = initialState, action) {
       return {
         ...state,
         captureState: FINISHED
+      }
+
+    case MEDIA_RECORDER_INITIALIZED:
+
+      return {
+        ...state,
+        mediaRecorder: action.mr
       }
 
     case SAVE_CLICKED:
@@ -100,6 +129,12 @@ export default function reducer (state = initialState, action) {
       return {
         ...state,
         videoDeviceId: action.id
+      }
+
+    case VIDEO_OBJECT_GENERATED:
+      return {
+        ...state,
+        videoSrc: action.src
       }
 
     default:

@@ -7,7 +7,7 @@ describe('capture reducer', () => {
     expect(
       reducer(undefined, {})
     ).to.deep.equal(
-      { captureState: states.READY }
+      { captureState: states.LOADING, msg: '', videoSrc: '' }
     )
   })
 
@@ -203,6 +203,50 @@ describe('capture reducer', () => {
       )
     ).to.deep.equal(
       { captureState: states.READY, videoDeviceId: '1028eowjdnf' }
+    )
+  })
+
+  it('should handle DEVICE_REQUEST_ACCEPTED', () => {
+    expect(
+      reducer(
+        { captureState: states.LOADING },
+        { type: types.DEVICE_REQUEST_ACCEPTED }
+      )
+    ).to.deep.equal(
+      { captureState: states.READY }
+    )
+  })
+
+  it('should handle MEDIA_RECORDER_INITIALIZED', () => {
+    expect(
+      reducer(
+        { captureState: states.RECORDING },
+        { type: types.MEDIA_RECORDER_INITIALIZED, mr: true }
+      )
+    ).to.deep.equal(
+      { captureState: states.RECORDING, mediaRecorder: true }
+    )
+  })
+
+  it('should handle VIDEO_OBJECT_GENERATED', () => {
+    expect(
+      reducer(
+        { captureState: states.PREVIEWSAVE },
+        { type: types.VIDEO_OBJECT_GENERATED, src: 'blob:1234asdf23' }
+      )
+    ).to.deep.equal(
+      { captureState: states.PREVIEWSAVE, videoSrc: 'blob:1234asdf23' }
+    )
+  })
+
+  it('should handle ERROR_OCCURRED', () => {
+    expect(
+      reducer(
+        { captureState: states.READY },
+        { type: types.ERROR_OCCURRED, msg: 'error copy' }
+      )
+    ).to.deep.equal(
+      { captureState: states.ERROR, msg: 'error copy' }
     )
   })
 })

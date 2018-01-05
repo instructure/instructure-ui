@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import MediaStreamMessage from '../MediaStreamMessage'
 import { getUserMedia } from '../../getUserMedia'
+import { startMediaRecorder } from '../../mediaRecorder'
+import { LOADING, RECORDING } from '../../constants/CaptureStates'
 
 const HAVE_ENOUGH_DATA = 4
 const POLL_DURATION = 200
@@ -13,19 +15,53 @@ const ERRORS = {
 
 export default class MediaStream extends Component {
   /* eslint-disable jsx-a11y/media-has-caption */
+  static propTypes = {
+    captureState: PropTypes.string.isRequired,
+    actions: PropTypes.shape({
+      deviceRequestAccepted: PropTypes.func,
+      mediaRecorderInitialized: PropTypes.func,
+      videoObjectGenerated: PropTypes.func,
+      errorOccurred: PropTypes.func
+    })
+  }
+
+  static defaultProps = {
+    actions: {
+      deviceRequestAccepted: () => {},
+      mediaRecorderInitialized: () => {},
+      videoObjectGenerated: () => {},
+      errorOccurred: () => {}
+    }
+  }
+
   constructor (props) {
     super(props)
-    this.state = {
-      streamLoaded: false,
-      streamError: null
-    }
 
-    this.success = this.success.bind(this)
+    this.streamSuccess = this.streamSuccess.bind(this)
+    this.onMediaRecorderInit = this.onMediaRecorderInit.bind(this)
+    this.blobSuccess = this.blobSuccess.bind(this)
     this.error = this.error.bind(this)
   }
 
+  shouldComponentUpdate (nextProps) {
+    return (
+      this.props.captureState !== nextProps.captureState
+    )
+  }
+
   componentDidMount () {
-    getUserMedia(this.success, this.error)
+    getUserMedia(this.streamSuccess, this.error)
+  }
+
+  componentDidUpdate () {
+    if (this.props.captureState === RECORDING && this.stream) {
+      startMediaRecorder(
+        this.stream,
+        this.onMediaRecorderInit,
+        this.blobSuccess,
+        this.error
+      )
+    }
   }
 
   componentWillUnmount () {
@@ -34,46 +70,45 @@ export default class MediaStream extends Component {
     }
   }
 
+  onMediaRecorderInit (mediaRecorder) {
+    this.props.actions.mediaRecorderInitialized(mediaRecorder)
+  }
+
   pollReadyState () {
     // we poll here because rendering the stream inside the
     // video element is not instantaneous. Check the readyState
     // for an appropriate signal.
     const poll = setInterval(() => {
       if (this.video.readyState === HAVE_ENOUGH_DATA) {
-        this.setState({ streamLoaded: true }, () => {
-          clearInterval(poll)
-        })
+        this.props.captureState === LOADING && this.props.actions.deviceRequestAccepted()
+        clearInterval(poll)
       }
     }, POLL_DURATION)
   }
 
-  success (stream) {
+  streamSuccess (stream) {
     this.stream = stream
-    if (this.video) {
+    if (this.video && this.props.captureState === LOADING) {
       this.video.srcObject = stream
       this.pollReadyState()
     }
   }
 
+  blobSuccess (blob) {
+    const src = window.URL.createObjectURL(blob)
+    this.props.actions.videoObjectGenerated(src)
+  }
+
   error (err) {
-    if (err && ERRORS[err.name]) {
-      this.setState({
-        streamError: ERRORS[err.name]
-      })
-    } else {
-      this.setState({
-        streamError: ERRORS['default']
-      })
+    if (err) {
+      const key = ERRORS[err.name] ? err.name : 'default'
+      this.props.actions.errorOccurred(ERRORS[key])
     }
   }
 
   render () {
     return (
       <div>
-        <MediaStreamMessage
-          loaded={this.state.streamLoaded}
-          error={this.state.streamError}
-        />
         <video
           style={{width: '100%', height: '100%', borderRadius: '4px'}}
           controls={false}

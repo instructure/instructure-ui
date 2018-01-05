@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 
 import * as CaptureActions from '../../actions'
 
-class CountdownTimer extends Component {
+export default class CountdownTimer extends Component {
   static propTypes = {
     countdownFrom: PropTypes.number,
     actions: PropTypes.shape({
@@ -14,13 +12,10 @@ class CountdownTimer extends Component {
   }
 
   static defaultProps = {
+    countdownFrom: 3,
     actions: {
       countdownComplete: () => {}
     }
-  }
-
-  static defaultProps = {
-    countdownFrom: 3
   }
 
   constructor (props) {
@@ -63,17 +58,3 @@ class CountdownTimer extends Component {
     return <span>{ this.state.currentValue }</span>
   }
 }
-
-const mapStateToProps = state => ({
-  state: state
-})
-
-const mapDispatchToProps = dispatch => ({
-  actions: bindActionCreators(CaptureActions, dispatch)
-})
-
-export const _component = CountdownTimer
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CountdownTimer)

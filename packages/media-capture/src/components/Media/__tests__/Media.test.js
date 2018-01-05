@@ -9,7 +9,7 @@ import {
 } from '../../../constants/CaptureStates'
 
 describe('<Media />', () => {
-  const testbed = new Testbed(<Media captureState={READY} />)
+  const testbed = new Testbed(<Media captureState={READY} actions={{}} videoSrc="" />)
 
   it('should render', () => {
     const media = testbed.render()
