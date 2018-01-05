@@ -1,7 +1,37 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 module.exports = {
-  extends: 'airbnb',
-  plugins: ['react', 'jsx-a11y', 'import', 'mocha'],
+  extends: ['react-app', 'plugin:react/recommended'],
+  plugins: [
+    'react',
+    'jsx-a11y',
+    'mocha',
+    'notice'
+  ],
   env: {
+    node: true,
     browser: true,
     mocha: true,
     es6: true
@@ -13,52 +43,23 @@ module.exports = {
   },
   parser: 'babel-eslint',
   rules: {
-    'no-console': ['error', { allow: ['warn', 'error'] }],
-    'mocha/no-exclusive-tests': 'error',
-    semi: ['error', 'never'],
-    'comma-dangle': ['error', 'never'],
-    'max-len': [2, 120, 2],
-    'space-before-function-paren': ['error', 'always'],
-
-    'react/jsx-filename-extension': [1, { extensions: ['.js'] }],
-    'react/sort-comp': 0,
-    'react/no-unused-prop-types': 0,
-    'react/prefer-stateless-function': 0,
-    'import/prefer-default-export': 0,
     'react/no-find-dom-node': 0,
-
-    'prefer-rest-params': 0,
-    'arrow-parens': 0,
-    'arrow-body-style': 0,
-    'no-lonely-if': 0,
-    'no-else-return': 0,
-    'no-shadow': 0,
-    'no-unused-vars': 0,
-    'no-use-before-define': 0,
-    'no-underscore-dangle': 0,
-    'no-useless-escape': 0,
-    'no-useless-concat': 0,
-    'no-multi-assign': 0,
-    'no-plusplus': 0,
-    'no-unused-expressions': 0,
-    'no-confusing-arrow': 0,
-    'no-cond-assign': 0,
-    'func-names': 0,
-    radix: 0,
-    'one-var': 0,
-    'one-var-declaration-per-line': 0,
-    'key-spacing': 0,
-    'dot-notation': 0,
-    'global-require': 0,
-    'object-shorthand': 0,
-    'object-curly-spacing': 0,
-    quotes: 0,
-    'array-bracket-spacing': 0,
-    'class-methods-use-this': 0,
-    'consistent-return': 0,
-    'guard-for-in': 0,
-    'operator-assignment': 0,
-    'default-case': 0,
-    'spaced-comment': ['error', 'always', { markers: ['*'] }]
-  }
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-extra-semi': 'error',
+    'no-trailing-spaces': 'error',
+    'no-param-reassign': ['error', { props: true }],
+    'notice/notice': ['error', {
+      mustMatch: 'The MIT License \\(MIT\\)',
+      templateFile: require.resolve('./copyright.js')
+    }]
+  },
+  overrides: [
+    {
+        files: '*.test.js',
+        rules: {
+          'mocha/no-exclusive-tests': 'error',
+          'no-unused-expressions': 0
+        }
+    }
+  ]
 }

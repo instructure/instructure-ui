@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React from 'react'
 import Select from '../index'
 
@@ -55,7 +79,7 @@ describe('<Select />', () => {
     }]
     const subject = testbed.render({
       editable: true,
-      children: items.map((i) => <option value={i.value}>{i.label}</option>)
+      children: items.map((i) => <option key={i} value={i.value}>{i.label}</option>)
     })
 
     expect(subject.instance().state.options).to.eql(items.map(i => ({
@@ -70,7 +94,7 @@ describe('<Select />', () => {
     })))
 
     subject.setProps({
-      children: items.slice(1).map((i) => <option value={i.value}>{i.label}</option>)
+      children: items.slice(1).map((i) => <option key={i} value={i.value}>{i.label}</option>)
     }, () => {
       testbed.defer(() => { // wait for re-render
         expect(subject.instance().state.options).to.eql(items.slice(1).map(i => ({
@@ -93,7 +117,7 @@ describe('<Select />', () => {
     try {
       testbed.render({
         children: [
-          <optgroup label="Group One">
+          <optgroup key="one" label="Group One">
             <option value="item1">Item One</option>
             <option value="item2">Item Two</option>
           </optgroup>
@@ -110,7 +134,7 @@ describe('<Select />', () => {
     try {
       testbed.render({
         children: [
-          <span>Invalid!!!</span>
+          <span key="invalid">Invalid!!!</span>
         ]
       })
     } catch (e) {

@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
@@ -20,7 +44,6 @@ category: components/navigation
 **/
 @themeable(theme, styles)
 export default class TreeBrowser extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
     * a normalized hash of collections, keyed by id, that contain an
@@ -28,12 +51,12 @@ export default class TreeBrowser extends Component {
     * collection ids), and optional :descriptor text.
     * Each collection must have a unique id.
     */
-    collections: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    collections: PropTypes.object.isRequired,
     /**
     * a hash of items, keyed by id ,that contain an :id, :name,
     * and optional :descriptor text
     */
-    items: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+    items: PropTypes.object.isRequired,
     /**
     * specifies the id of the root level collection, if present.
     * if no root is specified, all collections will be rendered
@@ -68,7 +91,6 @@ export default class TreeBrowser extends Component {
     */
     treeLabel: PropTypes.string
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     size: 'medium',
@@ -210,7 +232,6 @@ export default class TreeBrowser extends Component {
   }
 
   renderRoot () {
-    /* eslint-disable react/no-array-index-key */
     return this.collections.map((collection, i) => (
       <TreeCollection
         key={i}
@@ -219,7 +240,6 @@ export default class TreeBrowser extends Component {
         onCollectionClick={this.handleCollectionClick}
       />
     ))
-    /* eslint-enable react/no-array-index-key */
   }
 
   render () {

@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
@@ -24,7 +48,6 @@ parent: Menu
 **/
 @themeable(theme, styles)
 class MenuItem extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     /* the menu item label */
     children: PropTypes.node.isRequired,
@@ -56,7 +79,6 @@ class MenuItem extends Component {
     active: PropTypes.bool,
     href: PropTypes.string
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     type: 'button',
@@ -188,8 +210,7 @@ class MenuItem extends Component {
       onKeyUp,
       onMouseOver,
       active,
-      type,
-      children
+      type
     } = this.props
 
     const props = omitProps(this.props, MenuItem.propTypes)
@@ -201,7 +222,6 @@ class MenuItem extends Component {
       [styles.flyout]: type === 'flyout'
     }
 
-    /* eslint-disable jsx-a11y/mouse-events-have-key-events, no-nested-ternary */
     return (
       <ElementType
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
@@ -222,7 +242,6 @@ class MenuItem extends Component {
         {this.renderContent()}
       </ElementType>
     )
-    /* eslint-enable jsx-a11y/mouse-events-have-key-events, no-nested-ternary */
   }
 }
 

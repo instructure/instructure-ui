@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { createElement } from 'react'
 import marked from 'marked'
 import he from 'he'
@@ -7,14 +31,13 @@ import Link from '@instructure/ui-core/lib/components/Link'
 import Heading from '@instructure/ui-core/lib/components/Heading'
 import Table from '@instructure/ui-core/lib/components/Table'
 import Image from '@instructure/ui-core/lib/components/Image'
-import List, { ListItem } from '@instructure/ui-core/lib/components/List'
 
 import CodeEditor from '../components/CodeEditor'
 import Playground from '../components/Playground'
 
 import trimIndent from './trimIndent'
 
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, react/display-name */
 const elements = {
   h1: ({ id, children }) => <Heading id={id} level="h1" margin="0 0 large">{children}</Heading>,
   h2: ({ id, children }) => <Heading id={id} level="h2" margin="0 0 large">{children}</Heading>,
@@ -30,7 +53,7 @@ const elements = {
     }
   }
 }
-/* eslint-enable react/prop-types */
+/* eslint-enable react/prop-types, react/display-name */
 
 const { renderer, tracker } = createRenderer()
 
@@ -170,7 +193,7 @@ function createRenderer () {
     return addElement('a', {href, title}, text)
   }
 
-  renderer.a = function (href, title, text) {
+  renderer.a = function (name, text) {
     return addElement('a', {name}, text)
   }
 

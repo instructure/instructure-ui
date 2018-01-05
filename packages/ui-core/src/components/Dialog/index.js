@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
@@ -10,7 +34,6 @@ import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import FocusManager from '@instructure/ui-utils/lib/dom/focusManager'
 import scopeTab from '@instructure/ui-utils/lib/dom/scopeTab'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import findTabbable from '@instructure/ui-utils/lib/dom/findTabbable'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -28,9 +51,9 @@ class Dialog extends Component {
     /**
      * The children to be rendered within the `<Dialog />`
      */
-    children: PropTypes.node, // eslint-disable-line react/require-default-props
+    children: PropTypes.node,
 
-    label: PropTypes.string, // eslint-disable-line react/require-default-props
+    label: PropTypes.string,
 
     /**
      * Whether or not the `<Dialog />` is openn

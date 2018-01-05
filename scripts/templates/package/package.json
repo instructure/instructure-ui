@@ -22,7 +22,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "${VERSION}"
+    "@instructure/ui-presets": "^${VERSION}",
+    "@instructure/ui-themes": "^${VERSION}"
   },
   "publishConfig": {
     "access": "public"

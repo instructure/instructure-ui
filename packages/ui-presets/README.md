@@ -32,7 +32,6 @@ To pass in more options, you can make your own preset:
 ```js
 /* babelrc.js */
 module.exports = {
-  // eslint-disable-next-line import/no-extraneous-dependencies
   presets: [[ require('@instructure/ui-presets/babel'), {
     themeable: true,
     coverage: Boolean(process.env.COVERAGE)
