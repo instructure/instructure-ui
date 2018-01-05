@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
+import Container from '@instructure/ui-container/lib/components/Container'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
@@ -13,8 +14,6 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import findTabbable from '@instructure/ui-utils/lib/dom/findTabbable'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import warning from '@instructure/ui-utils/lib/warning'
-
-import Container from '../Container'
 
 /**
 ---

@@ -8,6 +8,10 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Container",
+    "replace": "@instructure/ui-container/lib/components/Container"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
     "replace": "@instructure/ui-portal/lib/components/Portal"
   },

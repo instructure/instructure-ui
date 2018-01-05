@@ -1,7 +1,7 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Pill from '../index'
 import styles from '../styles.css'
-import Container from '../../Container'
 
 describe('<Pill />', () => {
   const testbed = new Testbed(<Pill text="Overdue" />)

@@ -5,6 +5,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import keycode from 'keycode'
 
+import Container from '@instructure/ui-container/lib/components/Container'
+
 import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
 import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
 import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
@@ -15,7 +17,6 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import Container from '../Container'
 import CloseButton from '../CloseButton'
 import ScreenReaderContent from '../ScreenReaderContent'
 

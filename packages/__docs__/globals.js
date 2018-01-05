@@ -5,6 +5,7 @@ import moment from 'moment'
 import 'moment/min/locales'
 import lorem from 'lorem-ipsum'
 
+import * as UIContainer from '@instructure/ui-container'
 import * as UICore from '@instructure/ui-core'
 import * as UISVGImages from '@instructure/ui-svg-images'
 import * as UIPortal from '@instructure/ui-portal'
@@ -52,6 +53,7 @@ const globals = Object.assign(
     React,
     ReactDOM
   },
+  UIContainer,
   UICore,
   UISVGImages,
   UIPortal

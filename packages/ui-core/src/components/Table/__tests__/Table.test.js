@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Table from '../index'
-import Container from '../../Container'
 
 describe('<Table />', () => {
   const testbed = new Testbed(<Table caption="Test table" />)

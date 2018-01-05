@@ -1,7 +1,7 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import List from '../index'
 import ListItem from '../ListItem'
-import Container from '../../Container'
 
 describe('<List />', () => {
   const testbed = new Testbed(

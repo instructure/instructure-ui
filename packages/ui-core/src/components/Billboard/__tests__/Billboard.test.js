@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Billboard from '../index'
-import Container from '../../Container'
 
 describe('<Billboard />', () => {
   const testbed = new Testbed(<Billboard />)

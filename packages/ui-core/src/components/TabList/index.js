@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
+import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
@@ -11,7 +12,6 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import Container from '../Container'
 import Tab from './Tab'
 import TabPanel from './TabPanel'
 

@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Button from '../index'
-import Container from '../../Container'
 
 describe('<Button/>', () => {
   const testbed = new Testbed(<Button>Hello World</Button>)

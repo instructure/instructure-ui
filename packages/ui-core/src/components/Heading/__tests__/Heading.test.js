@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Heading from '../index'
-import Container from '../../Container'
 
 describe('<Heading />', () => {
   const testbed = new Testbed(<Heading>Hello World</Heading>)

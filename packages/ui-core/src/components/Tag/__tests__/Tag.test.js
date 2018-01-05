@@ -1,8 +1,8 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import Tag from '../index'
 import styles from '../styles.css'
-import Container from '../../Container'
 
 describe('<Tag />', () => {
   const testbed = new Testbed(<Tag text="Summer" />)

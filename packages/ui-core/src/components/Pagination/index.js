@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import Container from '@instructure/ui-container/lib/components/Container'
+
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 
@@ -7,7 +10,6 @@ import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
-import Container from '../Container'
 import Button from '../Button'
 
 import PaginationButton from './PaginationButton'

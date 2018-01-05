@@ -1,6 +1,6 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import Media from '../index'
-import Container from '../../Container'
 import Image from '../../Image'
 
 describe('<Media />', () => {

@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+
+import Container from '@instructure/ui-container/lib/components/Container'
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import BreadcrumbLink from './BreadcrumbLink'
-import Container from '../Container'
 
 import styles from './styles.css'
 import theme from './theme'

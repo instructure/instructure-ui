@@ -1,9 +1,9 @@
 import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton'
-import Container from '../../Container'
 
 describe('<Pagination />', () => {
   const buildPages = function (count = 4, current = 0) {
