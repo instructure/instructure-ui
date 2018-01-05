@@ -76,7 +76,8 @@ class TimeInput extends Component {
      * An ISO 8601 formatted date string representing the current selected value
      * (must be accompanied by an onChange prop).
      */
-    value: CustomPropTypes.controllable(CustomPropTypes.iso8601)
+    value: CustomPropTypes.controllable(CustomPropTypes.iso8601),
+    disabled: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
@@ -100,7 +101,7 @@ class TimeInput extends Component {
   }
 
   render () {
-    const { defaultToFirstOption, defaultValue, format, label, onChange, step, value } = this.props
+    const { defaultToFirstOption, defaultValue, format, label, onChange, step, value, disabled } = this.props
     const locale = this.locale()
     const timezone = this.timezone()
 
@@ -117,6 +118,7 @@ class TimeInput extends Component {
         defaultOption={defaultOption}
         selectedOption={selectedOption}
         onChange={onChange}
+        disabled={disabled}
         {...autocompleteProps}
       >
         { options }
