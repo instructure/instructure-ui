@@ -57,19 +57,21 @@ export default function deprecated (version, oldProps, message) {
     class DeprecatedComponent extends ComposedComponent {
       static displayName = displayName
 
-      constructor (props, context) {
+      componentDidMount () {
         if (oldProps) {
-          warnDeprecatedProps(version, props, oldProps, message)
+          warnDeprecatedProps(displayName, version, this.props, oldProps, message)
         } else {
           warnDeprecatedComponent(version, displayName, message)
         }
 
-        super(props, context)
+        if (super.componentDidMount) {
+          super.componentDidMount()
+        }
       }
 
       componentWillReceiveProps (nextProps) {
         if (oldProps) {
-          warnDeprecatedProps(version, nextProps, oldProps, message)
+          warnDeprecatedProps(displayName, version, nextProps, oldProps, message)
         } else {
           warnDeprecatedComponent(version, displayName, message)
         }
@@ -84,7 +86,7 @@ export default function deprecated (version, oldProps, message) {
   }
 }
 
-function warnDeprecatedProps (version, props, oldProps, message) {
+function warnDeprecatedProps (displayName, version, props, oldProps, message) {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
@@ -93,18 +95,17 @@ function warnDeprecatedProps (version, props, oldProps, message) {
 
       warning(
         false,
-        '%s was deprecated in %s%s. %s',
-        oldProp, version, (newProp ? ` use ${newProp} instead` : ''), message || ''
+        '[%s] `%s` was deprecated in %s%s. %s',
+        displayName, oldProp, version, (newProp ? `. Use \`${newProp}\` instead` : ''), message || ''
       )
     }
   })
 }
 
 function warnDeprecatedComponent (version, displayName, message) {
-  warning(false, '%s was deprecated in version %s %s', displayName, version, message || '')
+  warning(false, '[%s] was deprecated in version %s. %s', displayName, version, message || '')
 }
 
 export function changedPackageWarning (prevPackage, newPackage) {
-  return `It has been moved from ${prevPackage} to ${newPackage}. See ${newPackage} ` +
-    `in the documentation for more details`
+  return `It has been moved from @instructure/${prevPackage} to @instructure/${newPackage}.`
 }

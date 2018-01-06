@@ -40,7 +40,6 @@ category: components/layout
 **/
 @themeable(theme, styles)
 class Container extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     as: CustomPropTypes.elementType,
     children: PropTypes.node,
@@ -82,7 +81,6 @@ class Container extends Component {
      */
     withShadow: PropTypes.bool
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     display: null

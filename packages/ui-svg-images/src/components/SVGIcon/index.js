@@ -40,12 +40,10 @@ category: components/utilities
 ---
 **/
 @themeable(theme, styles)
-
 @deprecated('4.7.0', {
   width: 'size',
   height: 'size'
 })
-
 class SVGIcon extends Component {
   static propTypes = {
     ...InlineSVG.propTypes,
@@ -56,8 +54,6 @@ class SVGIcon extends Component {
   }
 
   static defaultProps = {
-    width: '1em',
-    height: '1em',
     rotate: '0',
     size: undefined
   }
@@ -84,8 +80,8 @@ class SVGIcon extends Component {
       <InlineSVG
         {...props}
         style={{ ...style, width, height }}
-        width={width}
-        height={height}
+        width={width || '1em'}
+        height={height || '1em'}
         rotate={rotate}
         className={classnames(classes)}
       />

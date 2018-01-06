@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import Heading from '@instructure/ui-core/lib/components/Heading'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
-import Select from '@instructure/ui-core/lib/components/Select'
+import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-core/lib/components/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-core/lib/components/Modal'

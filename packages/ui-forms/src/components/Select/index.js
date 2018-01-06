@@ -39,7 +39,6 @@ category: components/forms
 ---
 **/
 class Select extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
      * Determines wether Select allows multiple values
@@ -196,7 +195,6 @@ class Select extends Component {
     */
     closeOnSelect: PropTypes.bool
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     editable: false,

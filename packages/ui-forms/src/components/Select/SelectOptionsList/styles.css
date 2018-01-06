@@ -63,14 +63,14 @@
 
 .label {
   color: var(--labelColor);
+}
 
-  @nest .highlighted:not(.groupLabel) & {
-    color: var(--activeLabelColor);
-  }
+.highlighted:not(.groupLabel) .label {
+  color: var(--activeLabelColor);
+}
 
-  @nest .selected:not(.groupLabel) & {
-    color: var(--activeLabelColor);
-  }
+.selected:not(.groupLabel) .label {
+  color: var(--activeLabelColor);
 }
 
 .icon {

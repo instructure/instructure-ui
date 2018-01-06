@@ -59,10 +59,11 @@ describe('@deprecated', () => {
       })
 
       spy.should.have.been.calledWithExactly(
-        'Warning: %s was deprecated in %s%s. %s',
+        'Warning: [%s] `%s` was deprecated in %s%s. %s',
+        'TestComponent',
         'foo',
         '2.1.0',
-        ' use bar instead',
+        '. Use `bar` instead',
         ''
       )
     })
@@ -75,7 +76,8 @@ describe('@deprecated', () => {
       })
 
       spy.should.have.been.calledWithExactly(
-        'Warning: %s was deprecated in %s%s. %s',
+        'Warning: [%s] `%s` was deprecated in %s%s. %s',
+        'TestComponent',
         'baz',
         '2.1.0',
         '',
@@ -105,7 +107,7 @@ describe('@deprecated', () => {
       testbed.render()
 
       spy.should.have.been.calledWithExactly(
-        'Warning: %s was deprecated in version %s %s',
+        'Warning: [%s] was deprecated in version %s. %s',
         'TestComponent',
         '3.4.0',
         ''
@@ -126,11 +128,10 @@ describe('@deprecated', () => {
 
       testbed.render()
 
-      const message = `It has been moved from ui-core to ui-portal. See ui-portal ` +
-        `in the documentation for more details`
+      const message = `It has been moved from @instructure/ui-core to @instructure/ui-portal.`
 
       spy.should.have.been.calledWithExactly(
-        'Warning: %s was deprecated in version %s %s',
+        'Warning: [%s] was deprecated in version %s. %s',
         'TestComponent',
         '5.0.0',
         message

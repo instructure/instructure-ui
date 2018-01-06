@@ -79,6 +79,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Portal/*',
       'packages/ui-core/src/components/Select/*',
       'packages/ui-utils/src/{react,dom,i18n}/index.js',
+      'packages/ui-utils/src/i18n/locales/*',
       '**/theme.js',
       'packages/ui-docs-client/**/*.js',
       'packages/ui-docs-plugin/**/*.js'

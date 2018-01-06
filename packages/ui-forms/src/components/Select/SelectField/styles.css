@@ -96,18 +96,18 @@
   &::placeholder {
     color: var(--placeholderColor);
   }
+}
 
-  @nest .small & {
-    min-height: calc(var(--smallHeight) - 0.125rem);
-  }
+.small .input {
+  min-height: calc(var(--smallHeight) - 0.125rem);
+}
 
-  @nest .medium & {
-    min-height: calc(var(--mediumHeight) - 0.125rem);
-  }
+.medium .input {
+  min-height: calc(var(--mediumHeight) - 0.125rem);
+}
 
-  @nest .large & {
-    min-height: calc(var(--largeHeight) - 0.125rem);
-  }
+.large .input {
+  min-height: calc(var(--largeHeight) - 0.125rem);
 }
 
 .inputIcon {

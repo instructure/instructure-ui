@@ -30,6 +30,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
+// TODO: prevent/lint for imports like this after we remove ui-core
 import SelectSingle from '../../../../ui-forms/lib/components/Select/SelectSingle'
 import SelectMultiple from '../../../../ui-forms/lib/components/Select/SelectMultiple'
 import parseOptions from './utils/parseOptions'
