@@ -1,0 +1,93 @@
+.container {
+  flex: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  &:focus {
+    box-shadow: 0 0 0 var(--focusOutlineWeight) var(--focusOutlineColor);
+    outline: none;
+  }
+}
+
+.buffered,
+.viewed,
+.rest {
+  height: 100%;
+}
+
+.buffered {
+  background-color: var(--bufferedBackgroundColor);
+}
+
+.viewed {
+  background-color: var(--progressBackgroundColor);
+}
+
+.rest {
+  background-color: var(--backgroundColor);
+  flex: 1;
+}
+
+.timebarContent {
+  color: var(--timestampColor);
+  font-weight: var(--timestampFontWeight);
+  font-size: var(--timestampFontSize);
+  padding: var(--timestampPadding);
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tooltipContainer {
+  background-color: var(--tooltipBackgroundColor);
+  width: var(--tooltipLineWidth);
+  top: 0;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &:focus {
+    outline: none;
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.tooltipContent {
+  margin-top: var(--tooltipTop);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tooltip {
+  color: var(--tooltipColor);
+  font-weight: var(--tooltipFontWeight);
+  font-size: var(--tooltipFontSize);
+  background-color: var(--tooltipBackgroundColor);
+  padding: var(--tooltipPadding);
+}
+
+.tooltipCaret {
+  border-top: var(--tooltipCaretSize) solid var(--tooltipBackgroundColor);
+
+  width: 0;
+  height: 0;
+  border-left: var(--tooltipCaretSize) solid transparent;
+  border-right: var(--tooltipCaretSize) solid transparent;
+}
+
+.tooltipLine {
+  background-color: var(--tooltipBackgroundColor);
+  width: var(--tooltipLineWidth);
+  height: var(--tooltipLineHeight);
+}
