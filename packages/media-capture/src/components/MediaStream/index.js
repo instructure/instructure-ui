@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import themeable from '@instructure/ui-themeable'
 
 import { getUserMedia, enumerateDevices, getAudioContext } from '../../core/mediaDevices'
 import { startMediaRecorder } from '../../core/mediaRecorder'
 import { LOADING, RECORDING, READY } from '../../constants/CaptureStates'
+
+import styles from './styles.css'
 
 const HAVE_ENOUGH_DATA = 4
 const POLL_DURATION = 200
@@ -15,6 +18,7 @@ const ERRORS = {
   default: 'Something went wrong accessing your webcam.' // needs i18n
 }
 
+@themeable({}, styles)
 export default class MediaStream extends Component {
   /* eslint-disable jsx-a11y/media-has-caption */
   static propTypes = {
@@ -132,7 +136,7 @@ export default class MediaStream extends Component {
     return (
       <div>
         <video
-          style={{width: '100%', height: '100%', borderRadius: '4px'}}
+          className={styles.video}
           controls={false}
           autoPlay
           muted

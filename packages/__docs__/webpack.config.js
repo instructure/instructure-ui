@@ -40,6 +40,8 @@ plugins = plugins.concat([
       'CODE_OF_CONDUCT.md',
       'packages/media-capture/src/components/MediaCapture/index.js',
       'packages/media-capture/src/components/MediaCapture/README.md',
+      'packages/media-capture/src/components/VideoPlayer/index.js',
+      'packages/media-capture/src/components/VideoPlayer/README.md',
       'packages/ui-core/src/components/*/**/index.js',
       'packages/ui-core/src/components/*/**/README.md',
       'packages/ui-core/src/utils/**/*.js',
