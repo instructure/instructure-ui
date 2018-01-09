@@ -23,34 +23,29 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+
+import { MetricsListItem as UIMetricsListItem } from '@instructure/ui-elements/lib/components/MetricsList'
 
 /**
 ---
 parent: MetricsList
 ---
 **/
-@themeable(theme, styles)
-export default class MetricsListItem extends Component {
+
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-elements'
+))
+class MetricsListItem extends Component {
   static propTypes = {
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
-  };
+    ...UIMetricsListItem.PropTypes
+  }
 
   render () {
-    return (
-      <div role="row" className={styles.root}>
-        <div role="rowheader" className={styles.label}>
-          {this.props.label}
-        </div>
-        <div role="gridcell" className={styles.value}>
-          {this.props.value}
-        </div>
-      </div>
-    )
+    return <UIMetricsListItem {...this.props} />
   }
 }
+
+export default MetricsListItem

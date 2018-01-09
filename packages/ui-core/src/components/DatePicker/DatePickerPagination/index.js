@@ -25,11 +25,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Button from '@instructure/ui-elements/lib/components/Button'
 import IconArrowOpenLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
-
-import Button from '../../Button'
 
 import styles from './styles.css'
 import theme from './theme'

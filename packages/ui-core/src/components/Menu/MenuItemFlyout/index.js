@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
+import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -36,7 +38,6 @@ import Menu from '../../Menu'
 import MenuItem from '../MenuItem'
 import MenuItemSeparator from '../MenuItemSeparator'
 import MenuItemGroup from '../MenuItemGroup'
-import ContextBox from '../../ContextBox'
 import Position, { PositionTarget, PositionContent } from '../../Position'
 
 import styles from './styles.css'

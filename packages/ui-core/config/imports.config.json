@@ -8,20 +8,80 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Avatar",
+    "replace": "@instructure/ui-elements/lib/components/Avatar"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Badge",
+    "replace": "@instructure/ui-elements/lib/components/Badge"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Button",
+    "replace": "@instructure/ui-elements/lib/components/Button"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Container",
     "replace": "@instructure/ui-container/lib/components/Container"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/ContextBox",
+    "replace": "@instructure/ui-elements/lib/components/ContextBox"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Heading",
+    "replace": "@instructure/ui-elements/lib/components/Heading"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Image",
+    "replace": "@instructure/ui-elements/lib/components/Image"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
+    "replace": "@instructure/ui-svg-images/lib/components/InlineSVG"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Link",
+    "replace": "@instructure/ui-elements/lib/components/Link"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/List",
+    "replace": "@instructure/ui-elements/lib/components/List"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/MetricsList",
+    "replace": "@instructure/ui-elements/lib/components/MetricsList"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Pill",
+    "replace": "@instructure/ui-elements/lib/components/Pill"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
     "replace": "@instructure/ui-portal/lib/components/Portal"
   },
   {
-    "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
-    "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
+    "pattern": "^@instructure/ui-core/lib/components/Progress",
+    "replace": "@instructure/ui-elements/lib/components/Progress"
   },
   {
-    "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
-    "replace": "@instructure/ui-svg-images/lib/components/InlineSVG"
+    "pattern": "^@instructure/ui-core/lib/components/Spinner",
+    "replace": "@instructure/ui-elements/lib/components/Spinner"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Table",
+    "replace": "@instructure/ui-elements/lib/components/Table"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Tag",
+    "replace": "@instructure/ui-elements/lib/components/Tag"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Text",
+    "replace": "@instructure/ui-elements/lib/components/Text"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
+    "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
   },
   {
     "pattern": "^instructure-ui/lib/themes",

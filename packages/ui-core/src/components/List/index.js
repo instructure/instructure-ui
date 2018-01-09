@@ -22,108 +22,23 @@
  * SOFTWARE.
  */
 
-import React, { Children, Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import React, { Component } from 'react'
 
-import Container from '@instructure/ui-container/lib/components/Container'
-import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import ListItem from './ListItem'
+import UIList from '@instructure/ui-elements/lib/components/List'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/typography
----
-**/
-@themeable(theme, styles)
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-elements'
+))
 export default class List extends Component {
   static propTypes = {
-    /**
-    * Only accepts <ListItem> as a child
-    */
-    children: CustomPropTypes.Children.oneOf([ListItem]),
-    as: PropTypes.oneOf(['ul', 'ol']),
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: CustomPropTypes.spacing,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
-    /**
-    * Sets the margin separating each ListItem.
-    */
-    itemSpacing: PropTypes.oneOf([
-      undefined,
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ])
-  }
-
-  static defaultProps = {
-    as: 'ul',
-    margin: 'none',
-    variant: 'default',
-    delimiter: 'none',
-    size: 'medium',
-    itemSpacing: undefined
-  }
-
-  renderChildren () {
-    return Children.map(this.props.children, (child) => {
-      if (!child) return // ignore null, falsy children
-
-      return safeCloneElement(child, {
-        variant: this.props.variant,
-        delimiter: this.props.delimiter,
-        size: this.props.size,
-        as: this.props.as,
-        spacing: this.props.itemSpacing
-      })
-    })
+    ...UIList.PropTypes
   }
 
   render () {
-    const props = omitProps(this.props, List.propTypes, ['padding'])
-
-    const {
-      as,
-      margin,
-      variant
-    } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[variant]]: variant,
-      [styles.unordered]: as === 'ul',
-      [styles.ordered]: as === 'ol'
-    }
-
-    return (
-      <Container
-        {...props}
-        className={classnames(classes)}
-        as={as}
-        margin={margin}
-      >
-        {this.renderChildren()}
-      </Container>
-    )
+    return <UIList {...this.props} />
   }
 }
 

@@ -23,98 +23,22 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import styles from './styles.css'
-import theme from './theme'
+import UITable from '@instructure/ui-elements/lib/components/Table'
 
-/**
----
-category: components
----
-**/
-
-@deprecated('3.0.0', {
-  tableData: true,
-  rowHeaders: true,
-  colHeaders: true
-})
-
-@themeable(theme, styles)
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-elements'
+))
 class Table extends Component {
   static propTypes = {
-    /**
-    * Set the table's caption element (its label)
-    */
-    caption: PropTypes.node.isRequired,
-    /**
-    * Build the table markup via the children prop
-    */
-    children: PropTypes.node,
-    /**
-    * Highlight each row on hover
-    */
-    hover: PropTypes.bool,
-    /**
-    * Controls the padding and font-size of table cells
-    */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-    * Add a light background color to alternate rows or columns
-    */
-    striped: PropTypes.oneOf(['columns', 'rows']),
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: CustomPropTypes.spacing,
-    /**
-    * @deprecated
-    */
-    tableData: PropTypes.array,
-    /**
-    * @deprecated
-    */
-    colHeaders: PropTypes.arrayOf(PropTypes.string),
-    /**
-    * @deprecated
-    */
-    rowHeaders: PropTypes.bool
-  }
-
-  static defaultProps = {
-    hover: false,
-    size: 'medium'
+    ...UITable.PropTypes
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles.rowStriped]: this.props.striped === 'rows',
-      [styles.colStriped]: this.props.striped === 'columns',
-      [styles.hover]: this.props.hover
-    }
-
-    return (
-      <Container
-        {...omitProps(this.props, Table.propTypes, ['padding'])}
-        as="table"
-        className={classnames(classes)}
-        margin={this.props.margin}
-      >
-        <caption>{this.props.caption}</caption>
-        {this.props.children}
-      </Container>
-    )
+    return <UITable {...this.props} />
   }
 }
 

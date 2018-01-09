@@ -23,68 +23,22 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
-import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import styles from './styles.css'
-import theme from './theme'
+import UIPill from '@instructure/ui-elements/lib/components/Pill'
 
-/**
----
-category: components
----
-**/
-
-@themeable(theme, styles)
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-elements'
+))
 class Pill extends Component {
   static propTypes = {
-    text: PropTypes.node.isRequired,
-    /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
-    margin: CustomPropTypes.spacing,
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary'])
-  }
-
-  static defaultProps = {
-    variant: 'default'
+    ...UIPill.PropTypes
   }
 
   render () {
-    const {
-      margin,
-      text,
-      variant
-    } = this.props
-
-    const props = omitProps(this.props, Pill.propTypes, ['padding'])
-
-    const classes = classnames({
-      [styles.root]: true,
-      [styles[variant]]: variant
-    })
-
-    return (
-      <Container
-        {...props}
-        className={classes}
-        as="span"
-        display={null}
-        margin={margin}
-        title={text}
-      >
-        <span className={styles.text}>
-          {text}
-        </span>
-      </Container>
-    )
+    return <UIPill {...this.props} />
   }
 }
 

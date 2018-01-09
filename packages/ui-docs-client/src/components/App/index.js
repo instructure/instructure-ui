@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import Tray from '@instructure/ui-core/lib/components/Tray'
-import Heading from '@instructure/ui-core/lib/components/Heading'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
 
 import IconHeart from '@instructure/ui-icons/lib/Solid/IconHeart'
 import IconGithub from '@instructure/ui-icons/lib/Solid/IconGithub'

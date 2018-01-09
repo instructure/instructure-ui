@@ -26,6 +26,7 @@
     "@instructure/ui-core": "^4.6.0",
     "@instructure/ui-docs-client": "^4.6.0",
     "@instructure/ui-docs-plugin": "^4.6.0",
+    "@instructure/ui-elements": "^4.6.0",
     "@instructure/ui-icons": "^4.6.0",
     "@instructure/ui-polyfill-loader": "^4.6.0",
     "@instructure/ui-forms": "^4.6.0",

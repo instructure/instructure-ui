@@ -23,9 +23,10 @@
  */
 
 import React from 'react'
+import Button from '@instructure/ui-elements/lib/components/Button'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
+
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
-import Button from '../../Button'
-import Heading from '../../Heading'
 
 describe('<Popover />', () => {
   let content

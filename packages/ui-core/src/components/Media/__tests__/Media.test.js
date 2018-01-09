@@ -24,8 +24,9 @@
 
 import React from 'react'
 import Container from '@instructure/ui-container/lib/components/Container'
+import Image from '@instructure/ui-elements/lib/components/Image'
+
 import Media from '../index'
-import Image from '../../Image'
 
 describe('<Media />', () => {
   // eslint-disable-next-line max-len

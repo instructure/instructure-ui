@@ -26,13 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import Button from '@instructure/ui-elements/lib/components/Button'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
-import Button from '../Button'
 import ScreenReaderContent from '../ScreenReaderContent'
 
 import styles from './styles.css'

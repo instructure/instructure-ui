@@ -27,11 +27,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-
-import Heading from '../Heading'
 
 import styles from './styles.css'
 import theme from './theme'

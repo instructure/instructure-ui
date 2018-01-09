@@ -23,9 +23,9 @@
  */
 
 import React from 'react'
+import Button from '@instructure/ui-elements/lib/components/Button'
 
 import Dialog from '../index'
-import Button from '../../Button'
 
 describe('<Dialog />', () => {
   const testbed = new Testbed(

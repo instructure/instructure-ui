@@ -24,10 +24,9 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Link from '@instructure/ui-elements/lib/components/Link'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-
-import Link from '../../Link'
 
 import styles from './styles.css'
 import theme from './theme'

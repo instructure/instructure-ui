@@ -23,9 +23,10 @@
  */
 
 import React, { Component } from 'react'
+import Button from '@instructure/ui-elements/lib/components/Button'
+import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+
 import Position, { PositionTarget, PositionContent } from '../index'
-import Button from '../../Button'
-import ContextBox from '../../ContextBox'
 
 function findAll (subject) {
   const position = subject.find(Position)

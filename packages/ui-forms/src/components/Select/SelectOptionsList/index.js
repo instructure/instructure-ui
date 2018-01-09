@@ -28,8 +28,8 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
-import ContextBox from '@instructure/ui-core/lib/components/ContextBox'
-import Spinner from '@instructure/ui-core/lib/components/Spinner'
+import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import Spinner from '@instructure/ui-elements/lib/components/Spinner'
 
 import getOptionId from '../utils/getOptionId'
 

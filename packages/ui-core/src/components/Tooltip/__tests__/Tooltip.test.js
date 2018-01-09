@@ -23,9 +23,10 @@
  */
 
 import React from 'react'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
+import Link from '@instructure/ui-elements/lib/components/Link'
+
 import Tooltip from '../index'
-import Heading from '../../Heading'
-import Link from '../../Link'
 
 describe('<Tooltip />', () => {
   describe('using as', () => {

@@ -24,34 +24,21 @@
 
 import React, { Component } from 'react'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import themeable from '@instructure/ui-themeable'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import MetricsListItem from './MetricsListItem'
+import UIMetricsList from '@instructure/ui-elements/lib/components/MetricsList'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/typography
----
-**/
-@themeable(theme, styles)
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-elements'
+))
 export default class MetricsList extends Component {
   static propTypes = {
-    /**
-    * children of type `MetricsListItem`
-    */
-    children: CustomPropTypes.Children.oneOf([MetricsListItem])
+    ...UIMetricsList.PropTypes
   }
 
   render () {
-    return (
-      <div className={styles.root} role="grid" aria-readonly="true">
-        {this.props.children}
-      </div>
-    )
+    return <UIMetricsList {...this.props} />
   }
 }
 

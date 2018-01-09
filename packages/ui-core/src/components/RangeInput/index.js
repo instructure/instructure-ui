@@ -26,13 +26,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import ContextBox from '../ContextBox'
 import FormField from '../FormField'
 
 import styles from './styles.css'

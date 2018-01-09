@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import Button from '@instructure/ui-elements/lib/components/Button'
+
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 
@@ -33,8 +35,6 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-
-import Button from '../Button'
 
 import styles from './styles.css'
 import theme from './theme'

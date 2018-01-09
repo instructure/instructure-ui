@@ -25,9 +25,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Link from '@instructure/ui-elements/lib/components/Link'
 import themeable from '@instructure/ui-themeable'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
-import Link from '@instructure/ui-core/lib/components/Link'
 
 import styles from './styles.css'
 import theme from './theme'

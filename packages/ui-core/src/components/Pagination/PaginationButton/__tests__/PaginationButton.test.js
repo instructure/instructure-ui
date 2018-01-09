@@ -23,7 +23,8 @@
  */
 
 import React from 'react'
-import Button from '../../../Button'
+import Button from '@instructure/ui-elements/lib/components/Button'
+
 import PaginationButton from '../index'
 
 describe('<PaginationButton />', () => {

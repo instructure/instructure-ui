@@ -33,7 +33,7 @@ import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveE
 import warning from '@instructure/ui-utils/lib/warning'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
-import Tag from '@instructure/ui-core/lib/components/Tag'
+import Tag from '@instructure/ui-elements/lib/components/Tag'
 import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
 

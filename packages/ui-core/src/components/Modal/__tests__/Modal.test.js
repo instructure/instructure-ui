@@ -23,8 +23,9 @@
  */
 
 import React from 'react'
+import Button from '@instructure/ui-elements/lib/components/Button'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
-import Button from '../../Button'
+
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
 
 describe('<Modal />', () => {

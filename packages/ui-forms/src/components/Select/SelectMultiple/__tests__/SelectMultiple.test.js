@@ -26,7 +26,7 @@ import React from 'react'
 import SelectMultiple from '../index'
 import SelectField from '../../SelectField'
 
-import Tag from '@instructure/ui-core/lib/components/Tag'
+import Tag from '@instructure/ui-elements/lib/components/Tag'
 
 describe('<SelectMultiple />', () => {
   const preventDefault = () => {}

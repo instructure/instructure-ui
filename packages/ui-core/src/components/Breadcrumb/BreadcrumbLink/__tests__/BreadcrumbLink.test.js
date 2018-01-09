@@ -23,8 +23,9 @@
  */
 
 import React from 'react'
+import Link from '@instructure/ui-elements/lib/components/Link'
+
 import BreadcrumbLink from '../index'
-import Link from '../../../Link'
 
 import styles from '../styles.css'
 

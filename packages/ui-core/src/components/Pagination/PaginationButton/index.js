@@ -24,10 +24,9 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Button from '@instructure/ui-elements/lib/components/Button'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-
-import Button from '../../Button'
 
 /**
 ---
