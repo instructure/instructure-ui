@@ -58,7 +58,21 @@ export default class List extends Component {
     margin: CustomPropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow'])
+    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
+    /**
+    * Sets the margin separating each ListItem.
+    */
+    itemSpacing: PropTypes.oneOf([
+      undefined,
+      'xxx-small',
+      'xx-small',
+      'x-small',
+      'small',
+      'medium',
+      'large',
+      'x-large',
+      'xx-large'
+    ])
   }
 
   static defaultProps = {
@@ -66,7 +80,8 @@ export default class List extends Component {
     margin: 'none',
     variant: 'default',
     delimiter: 'none',
-    size: 'medium'
+    size: 'medium',
+    itemSpacing: undefined
   }
 
   renderChildren () {
@@ -77,7 +92,8 @@ export default class List extends Component {
         variant: this.props.variant,
         delimiter: this.props.delimiter,
         size: this.props.size,
-        as: this.props.as
+        as: this.props.as,
+        spacing: this.props.itemSpacing
       })
     })
   }

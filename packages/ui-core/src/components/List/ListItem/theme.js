@@ -31,16 +31,21 @@ export default function generator ({ borders, colors, spacing, typography }) {
     fontSizeMedium: typography.fontSizeMedium,
     fontSizeLarge: typography.fontSizeLarge,
     color: colors.licorice,
-
     inlineColor: colors.slate,
     inlineLineHeight: typography.lineHeightCondensed,
-
     noneSpacing: spacing.xSmall,
     pipeSpacing: spacing.xSmall,
     slashSpacing: spacing.xxxSmall,
     arrowSpacing: spacing.xSmall,
-
-    marginBottomDefault: spacing.xxxSmall
+    marginBottomDefault: spacing.xxxSmall,
+    spacingXXXSmall: spacing.xxxSmall,
+    spacingXXSmall: spacing.xxSmall,
+    spacingXSmall: spacing.xSmall,
+    spacingSmall: spacing.small,
+    spacingMedium: spacing.medium,
+    spacingLarge: spacing.large,
+    spacingXLarge: spacing.xLarge,
+    spacingXXLarge: spacing.xxLarge
   }
 }
 

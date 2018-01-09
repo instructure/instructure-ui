@@ -64,7 +64,16 @@ describe('<List />', () => {
       padding: 'small medium large small'
     })
 
-    expect(subject.find(Container).props().padding).to.not.exist
+    expect(subject.find('Container').at(0).props().padding).to.not.exist
+  })
+
+  it('should pass down itemSpacing to ListItems', () => {
+    const subject = testbed.render({
+      itemSpacing: 'large'
+    })
+
+    const firstListItem = subject.find('ListItem').at(0)
+    expect(firstListItem.props().spacing).to.equal('large')
   })
 
   it('should meet a11y standards', (done) => {

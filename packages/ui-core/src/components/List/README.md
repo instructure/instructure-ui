@@ -40,6 +40,7 @@ example: true
   <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
 </List>
 ```
+
 ### `inline`
 
 The `inline` variant renders a horizontal list of items. You can separate each `ListItem` with a delimiter by setting the `delimiter` prop.
@@ -95,5 +96,42 @@ example: true
   <ListItem>10pts</ListItem>
   <ListItem><b>Due:</b> Jan 17, 2018</ListItem>
   <ListItem><Link href="#">Submitted</Link></ListItem>
+</List>
+```
+
+### Adding margin between ListItems
+
+Use the `itemSpacing` prop to add margin around your list's items. To avoid unwanted excess margin
+at the top/bottom or start/end of a List, the _first_ and _last_ ListItems will not receive margin via `itemSpacing`. ** `itemSpacing` has no effect on ListItems inside Lists with the `delimiter` prop set to anything other than `none`. **
+
+```js
+---
+example: true
+---
+<div>
+  <List variant="unstyled" itemSpacing="small">
+    <ListItem><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></ListItem>
+    <ListItem><Link href="https://www.getbridge.com">Bridge by Instructure</Link></ListItem>
+    <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
+  </List>
+  <List variant="inline" margin="large 0 0" itemSpacing="large">
+    <ListItem><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></ListItem>
+    <ListItem><Link href="https://www.getbridge.com">Bridge by Instructure</Link></ListItem>
+    <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
+  </List>
+</div>
+```
+
+Note that individual ListItems also accept the same `margin` prop as List, in the event
+you need different spacing around certain ListItems in the List.
+
+```js
+---
+example: true
+---
+<List variant="unstyled" itemSpacing="small">
+  <ListItem margin="x-large"><Link href="https://www.canvaslms.com/try-canvas">Canvas by Instructure</Link></ListItem>
+  <ListItem><Link href="https://www.getbridge.com">Bridge by Instructure</Link></ListItem>
+  <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
 </List>
 ```
