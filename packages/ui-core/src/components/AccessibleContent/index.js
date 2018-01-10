@@ -25,43 +25,20 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import UIAccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
 
-import PresentationContent from '../PresentationContent'
-import ScreenReaderContent from '../ScreenReaderContent'
-/**
----
-category: components/utilities
----
-*/
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-a11y'
+))
 class AccessibleContent extends Component {
   static propTypes = {
-    alt: PropTypes.string,
-    children: PropTypes.node,
-    /**
-    * the element type to render the screen reader content as
-    */
-    as: CustomPropTypes.elementType
-  }
-
-  static defaultProps = {
-    as: 'span'
+    ...UIAccessibleContent.PropTypes
   }
 
   render () {
-    const props = { ...omitProps(this.props, AccessibleContent.propTypes) }
-    const ElementType = getElementType(AccessibleContent, this.props)
-
-    return (
-      <ElementType {...props}>
-        <ScreenReaderContent>{this.props.alt}</ScreenReaderContent>
-        <PresentationContent>
-          {this.props.children}
-        </PresentationContent>
-      </ElementType>
-    )
+    return <UIAccessibleContent {...this.props} />
   }
 }
 

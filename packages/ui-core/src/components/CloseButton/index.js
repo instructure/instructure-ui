@@ -28,12 +28,11 @@ import classnames from 'classnames'
 
 import Button from '@instructure/ui-elements/lib/components/Button'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-
-import ScreenReaderContent from '../ScreenReaderContent'
 
 import styles from './styles.css'
 import theme from './theme'

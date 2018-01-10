@@ -24,7 +24,7 @@
 
 import React from 'react'
 import hasVisibleChildren from '../hasVisibleChildren'
-import ScreenReaderContent from '../../components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 describe('hasVisibleChildren', () => {
   it('should not count ScreenReaderContent as visible content', () => {

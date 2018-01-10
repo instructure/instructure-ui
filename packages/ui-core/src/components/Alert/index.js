@@ -30,6 +30,7 @@ import classNames from 'classnames'
 import keycode from 'keycode'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
 import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
@@ -42,9 +43,7 @@ import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
 
 import CloseButton from '../CloseButton'
-import ScreenReaderContent from '../ScreenReaderContent'
-
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '../Transition'
 
 import styles from './styles.css'
 import theme from './theme'

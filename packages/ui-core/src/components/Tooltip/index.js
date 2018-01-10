@@ -31,8 +31,9 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 import uid from '@instructure/ui-utils/lib/uid'
 
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
-import ScreenReaderContent from '../ScreenReaderContent'
 import TooltipContent from './TooltipContent'
 
 /**

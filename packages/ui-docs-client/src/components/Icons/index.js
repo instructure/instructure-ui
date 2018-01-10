@@ -29,7 +29,7 @@ import Heading from '@instructure/ui-elements/lib/components/Heading'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-core/lib/components/FormFieldGroup'
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-core/lib/components/Modal'
 import IconSearch from '@instructure/ui-icons/lib/Solid/IconSearch'
 

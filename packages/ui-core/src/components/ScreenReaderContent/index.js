@@ -25,44 +25,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import UIScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import styles from './styles.css'
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-a11y'
+))
 
-/**
----
-category: components/utilities
----
-**/
-@themeable(null, styles)
 class ScreenReaderContent extends Component {
   static propTypes = {
-    /**
-    * the element type to render as
-    */
-    as: CustomPropTypes.elementType,
-    /**
-    * content meant for screen readers only
-    */
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    as: 'span'
+    ...UIScreenReaderContent.PropTypes
   }
 
   render () {
-    const props = {
-      ...omitProps(this.props, ScreenReaderContent.propTypes),
-      className: styles.root
-    }
-
-    const ElementType = getElementType(ScreenReaderContent, this.props)
-
-    return <ElementType {...props}>{this.props.children}</ElementType>
+    return <UIScreenReaderContent {...this.props} />
   }
 }
 

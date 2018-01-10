@@ -25,7 +25,7 @@
 import React from 'react'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 
-import ScreenReaderContent from '../components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 /**
  * ---

@@ -33,8 +33,8 @@ import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 import Locale from '@instructure/ui-utils/lib/i18n/Locale'
 import warning from '@instructure/ui-utils/lib/warning'
 
-import PresentationContent from '../PresentationContent'
-import ScreenReaderContent from '../ScreenReaderContent'
+import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import DatePickerPagination from './DatePickerPagination'
 import styles from './styles.css'

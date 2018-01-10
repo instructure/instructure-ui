@@ -39,6 +39,7 @@ module.exports = {
       'react-dom'
     ],
     'instructure-ui': [
+      '@instructure/ui-a11y',
       '@instructure/ui-container',
       '@instructure/ui-core',
       '@instructure/ui-elements',
@@ -69,6 +70,7 @@ module.exports = {
   resolve: {
     alias: {
       // set up aliases to get webpack to rebuild when we make changes to these packages
+      '@instructure/ui-a11y$': path.resolve(__dirname, '../ui-a11y/src/'),
       '@instructure/ui-container$': path.resolve(__dirname, '../ui-container/src/'),
       '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
       '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
@@ -80,6 +82,7 @@ module.exports = {
       '@instructure/ui-themes$': path.resolve(__dirname, '../ui-themes/src/'),
       '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
 
+      '@instructure/ui-a11y/lib': path.resolve(__dirname, '../ui-a11y/src'),
       '@instructure/ui-container/lib': path.resolve(__dirname, '../ui-container/src'),
       '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
       '@instructure/ui-elements/lib': path.resolve(__dirname, '../ui-elements/src'),

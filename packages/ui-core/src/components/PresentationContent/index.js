@@ -25,38 +25,21 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import UIPresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
 
-/**
----
-category: components/utilities
----
-**/
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-a11y'
+))
+
 class PresentationContent extends Component {
   static propTypes = {
-    children: PropTypes.node,
-    /**
-    * the element type to render as
-    */
-    as: CustomPropTypes.elementType
-  }
-
-  static defaultProps = {
-    as: 'span'
+    ...UIPresentationContent.PropTypes
   }
 
   render () {
-    const props = {
-      ...omitProps(this.props, PresentationContent.propTypes),
-      'aria-hidden': 'true',
-      role: 'presentation'
-    }
-
-    const ElementType = getElementType(PresentationContent, this.props)
-
-    return <ElementType {...props}>{this.props.children}</ElementType>
+    return <UIPresentationContent {...this.props} />
   }
 }
 

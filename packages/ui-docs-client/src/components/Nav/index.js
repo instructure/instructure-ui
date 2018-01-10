@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import Text from '@instructure/ui-elements/lib/components/Text'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
 import Link from '@instructure/ui-elements/lib/components/Link'
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 

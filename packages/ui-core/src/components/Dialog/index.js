@@ -31,10 +31,10 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import FocusManager from '@instructure/ui-utils/lib/dom/focusManager'
+import FocusManager from '@instructure/ui-a11y/lib/utils/focusManager'
 import scopeTab from '@instructure/ui-utils/lib/dom/scopeTab'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import findTabbable from '@instructure/ui-utils/lib/dom/findTabbable'
+import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import warning from '@instructure/ui-utils/lib/warning'
 

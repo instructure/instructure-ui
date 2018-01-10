@@ -29,7 +29,7 @@ import ReactDOM from 'react-dom'
 import themeable from '@instructure/ui-themeable'
 
 import Modal, { ModalBody } from '@instructure/ui-core/lib/components/Modal'
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import Tooltip from '@instructure/ui-core/lib/components/Tooltip'
 

@@ -88,6 +88,18 @@
     "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/AccessibleContent",
+    "replace": "@instructure/ui-a11y/lib/components/AccessibleContent"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/PresentationContent",
+    "replace": "@instructure/ui-a11y/lib/components/PresentationContent"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/ScreenReaderContent",
+    "replace": "@instructure/ui-a11y/lib/components/ScreenReaderContent"
+  },
+  {
     "pattern": "^instructure-ui/lib/themes",
     "replace": "@instructure/ui-themes/lib"
   },

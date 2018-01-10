@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import warning from '@instructure/ui-utils/lib/warning'
 import themeable from '@instructure/ui-themeable'
@@ -37,7 +39,6 @@ import hasVisibleChildren from '../../../utils/hasVisibleChildren'
 
 import FormFieldLabel from '../FormFieldLabel'
 import FormFieldMessages from '../FormFieldMessages'
-import ScreenReaderContent from '../../ScreenReaderContent'
 import Grid, { GridCol, GridRow } from '../../Grid'
 
 import styles from './styles.css'

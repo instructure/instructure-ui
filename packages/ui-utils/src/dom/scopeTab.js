@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
+import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+
 import findDOMNode from './findDOMNode'
-import findTabbable from './findTabbable'
 import isActiveElement from './isActiveElement'
 import containsActiveElement from './containsActiveElement'
 import getActiveElement from './getActiveElement'
