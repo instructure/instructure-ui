@@ -10,7 +10,7 @@ import {
 import Controller from '../index'
 
 describe('<Controller />', () => {
-  const testbed = new Testbed(<Controller captureState="" />)
+  const testbed = new Testbed(<Controller captureState="" actions={{}} />)
 
   it('should render', () => {
     const controller = testbed.render()
@@ -32,8 +32,8 @@ describe('<Controller />', () => {
 
   context('when RECORDING state', () => {
     it('renders a reset button', () => {
-      const controller = testbed.render({ captureState: RECORDING })
-      expect(controller.find('Button').length).to.eql(1)
+      const controller = testbed.render({ captureState: RECORDING, actions: { startoverClicked: () => {}} })
+      expect(controller.find('StartOver').length).to.eql(1)
     })
   })
 

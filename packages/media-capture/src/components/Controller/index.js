@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classNames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import Button from '@instructure/ui-core/lib/components/Button'
 import TextInput from '@instructure/ui-core/lib/components/TextInput'
@@ -7,6 +8,8 @@ import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReade
 import IconSettingsSolid from 'instructure-icons/lib/Solid/IconSettingsSolid'
 import IconResetSolid from 'instructure-icons/lib/Solid/IconResetSolid'
 
+import DeviceSelection from '../DeviceSelection'
+import StartOver from '../StartOver'
 import styles from './styles.css'
 
 import {
@@ -20,7 +23,8 @@ import {
 export default class Controller extends Component {
   static propTypes = {
     children: PropTypes.node,
-    captureState: PropTypes.string.isRequired
+    captureState: PropTypes.string.isRequired,
+    actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
   static defaultProps = {
@@ -33,13 +37,9 @@ export default class Controller extends Component {
 
       return (
         <div className={styles.container}>
-          <Button variant="icon">
-            <IconSettingsSolid />
-          </Button>
+          <DeviceSelection variant="audio" />
           {this.props.children}
-          <Button variant="icon">
-            <IconSettingsSolid />
-          </Button>
+          <DeviceSelection variant="video" />
         </div>
       )
     }
@@ -49,10 +49,13 @@ export default class Controller extends Component {
 
       return (
         <div className={styles.container}>
-          {this.props.children}
-          <Button variant="icon">
-            <IconResetSolid />
-          </Button>
+          <div className={styles.flexed} />
+          <div className={styles.flexed}>
+            {this.props.children}
+          </div>
+          <div className={classNames({[styles.flexed]: true, [styles.right]: true})}>
+            <StartOver actions={{...this.props.actions}} />
+          </div>
         </div>
       )
     }

@@ -87,7 +87,7 @@ export default class MediaCapture extends Component {
                   actions={actions}
                 />
               </MediaContainer>
-              <Controller captureState={captureState}>
+              <Controller captureState={captureState} actions={actions}>
                 <CTA captureState={captureState} actions={actions} />
               </Controller>
             </CapturePresentation>

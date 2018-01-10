@@ -114,6 +114,8 @@ export default function reducer (state = initialState, action) {
     case STARTOVER_CLICKED:
       if (![RECORDING, PREVIEWSAVE].includes(state.captureState)) { return state }
 
+      state.mediaRecorder && state.mediaRecorder.stop()
+
       return {
         ...state,
         captureState: READY

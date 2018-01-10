@@ -44,6 +44,7 @@ export default class CTA extends Component {
       return (
         <Button
           onClick={actions.finishClicked}
+          variant="primary"
           size="large"
           margin="0 auto"
         >
