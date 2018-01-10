@@ -1,6 +1,9 @@
 .root {
   color: inherit;
   fill: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
 }
 
 .rotate--90 {
