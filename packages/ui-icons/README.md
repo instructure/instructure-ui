@@ -16,7 +16,7 @@ category: packages
 yarn add --dev @instructure/ui-icons
 ```
 
-## Usage
+### Usage
 
 To use the React components:
 
@@ -50,7 +50,7 @@ function MyComponent () {
 - Run `yarn start:watch` from the repository root directory to start the local server and check the generated output.
 
 
-## Guidelines for Drawing Icons
+### Guidelines for Drawing Icons
 
 - Draw your icons on the 1920 x 1920 art-boards that are set up for you in the template.
 
