@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import Browser from '@instructure/ui-utils/lib/Browser'
+
 
 import scopeStylesToNode from './scopeStylesToNode'
 import formatVariableNames from './formatVariableNames'
@@ -44,8 +44,7 @@ import { getCssTextWithPolyfill } from './getCssText'
  * @param {String} scope (for IE) A scope to apply to the styles applied to domNode
  */
 export default function applyVariablesToNode () {
-  if (customPropertiesSupported() &&
-      !(Browser.msedge && Browser.version >= 15)) { // polyfill edge 15 until improved css variable support
+  if (customPropertiesSupported()) {
     applyVariablesToNodeStyle.apply(this, arguments)
   } else {
     applyVariablesPolyfillToNode.apply(this, arguments)

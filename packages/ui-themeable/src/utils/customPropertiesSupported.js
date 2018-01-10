@@ -23,6 +23,7 @@
  */
 
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 /**
  * ---
@@ -32,5 +33,9 @@ import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
  * @returns {Boolean} true if the DOM is available and CSS variables are supported
  */
 export default function customPropertiesSupported () {
-  return (canUseDOM && window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)'))
+  return (
+    canUseDOM &&
+    !(Browser.msedge && Browser.version < 16) && // polyfill edge 15 until improved css variable support
+    window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
+  )
 }
