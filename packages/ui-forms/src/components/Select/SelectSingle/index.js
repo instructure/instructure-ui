@@ -80,6 +80,10 @@ class SelectSingle extends Component {
     */
     allowEmpty: PropTypes.bool,
     /**
+    * Whether or not to disable the input
+    */
+    disabled: PropTypes.bool,
+    /**
      * The filter function applied to the options when writting on the input
      */
     filter: PropTypes.func,
@@ -162,15 +166,17 @@ class SelectSingle extends Component {
     }
 
     // When the component is controlled and selectedOption changes, update the input and state
-    const oldId = getOptionId(this.props.selectedOption)
-    const newId = getOptionId(nextProps.selectedOption)
-    if (newId !== null && newId !== oldId) {
-      const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption)
-      this.setState({ selectedOption })
+    if (!this.props.disabled) {
+      const oldId = getOptionId(this.props.selectedOption)
+      const newId = getOptionId(nextProps.selectedOption)
+      if (newId !== null && newId !== oldId) {
+        const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption)
+        this.setState({ selectedOption })
 
-      if (this._input.value !== selectedOption.label) {
-        this._input.value = selectedOption.label
-        this.props.onInputChange(null, this._input.value)
+        if (this._input.value !== selectedOption.label) {
+          this._input.value = selectedOption.label
+          this.props.onInputChange(null, this._input.value)
+        }
       }
     }
   }
@@ -260,6 +266,7 @@ class SelectSingle extends Component {
         inputRef={this.handleInputRef}
         options={this.state.filteredOptions}
         selectedOption={this.state.selectedOption}
+        disabled={this.props.disabled}
         onSelect={this.handleSelect}
         onStaticClick={this.focus}
         onClose={this.handleClose}

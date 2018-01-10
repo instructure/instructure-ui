@@ -211,7 +211,7 @@ class SelectMultiple extends Component {
       !deepEqual(this.props.selectedOption, nextProps.selectedOption)
     )
 
-    if (updateSelectedOption || updateOptions) {
+    if ((updateSelectedOption || updateOptions) && !this.props.disabled) {
       this.setState((prevState) => {
         const selectedOption = updateSelectedOption ? this.getSelectedOptionFromProps(
           nextProps.selectedOption,
