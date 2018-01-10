@@ -55,7 +55,10 @@
   }
 }
 
-.input {
+/* stylelint-disable selector-max-type */
+
+.input,
+input[type].input {
   all: initial;
   text-align: start;
   direction: inherit;
@@ -70,7 +73,10 @@
 
   line-height: 1; /* reset global line height */
 
+  border: 0;
+  height: initial;
   margin: 0;
+
   flex: 1;
   min-width: 1px;
   box-sizing: border-box;
@@ -88,6 +94,8 @@
     color: var(--placeholderColor);
   }
 }
+
+/* stylelint-enable selector-max-type */
 
 .arrowContainer {
   flex: 0 0 var(--arrowsContainerWidth);

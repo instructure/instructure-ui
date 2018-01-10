@@ -59,7 +59,10 @@
   flex: 1 1 auto;
 }
 
-.input {
+/* stylelint-disable selector-max-type */
+
+.input,
+input[type].input {
   all: initial;
   width: 100%;
   cursor: default;
@@ -98,16 +101,25 @@
   }
 }
 
-.small .input {
-  min-height: calc(var(--smallHeight) - 0.125rem);
+.small {
+  .input,
+  input[type].input {
+    min-height: calc(var(--smallHeight) - 0.125rem);
+  }
 }
 
-.medium .input {
-  min-height: calc(var(--mediumHeight) - 0.125rem);
+.medium {
+  .input,
+  input[type].input {
+    min-height: calc(var(--mediumHeight) - 0.125rem);
+  }
 }
 
-.large .input {
-  min-height: calc(var(--largeHeight) - 0.125rem);
+.large {
+  .input,
+  input[type].input {
+    min-height: calc(var(--largeHeight) - 0.125rem);
+  }
 }
 
 .inputIcon {
