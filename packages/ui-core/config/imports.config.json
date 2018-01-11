@@ -80,6 +80,10 @@
     "replace": "@instructure/ui-elements/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Transition",
+    "replace": "@instructure/ui-motion/lib/components/Transition"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
     "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
   },

@@ -44,7 +44,7 @@ import uid from '@instructure/ui-utils/lib/uid'
 import CloseButton from '../CloseButton'
 import ScreenReaderContent from '../ScreenReaderContent'
 
-import Transition from '../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import styles from './styles.css'
 import theme from './theme'

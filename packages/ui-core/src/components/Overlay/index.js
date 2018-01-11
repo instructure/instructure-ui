@@ -33,7 +33,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Dialog from '../Dialog'
-import Transition from '../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 /**
 ---

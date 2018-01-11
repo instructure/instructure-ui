@@ -35,7 +35,7 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Dialog from '../Dialog'
 import CloseButton from '../CloseButton'
-import Transition from '../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import TrayContent from './TrayContent'
 

@@ -30,7 +30,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 
-import Transition from '../../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import styles from './styles.css'
 import theme from './theme'

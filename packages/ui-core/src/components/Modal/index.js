@@ -38,7 +38,7 @@ import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
 import Dialog from '../Dialog'
-import Transition from '../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 import CloseButton from '../CloseButton'
 
 /**

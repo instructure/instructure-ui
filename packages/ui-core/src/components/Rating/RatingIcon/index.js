@@ -31,7 +31,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
-import Transition from '../../Transition'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import styles from './styles.css'
 import theme from './theme'
