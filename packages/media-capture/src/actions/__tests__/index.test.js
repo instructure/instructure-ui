@@ -60,4 +60,38 @@ describe('mediaCapture actions', () => {
       type: types.SAVE_CLICKED
     })
   })
+
+  it('deviceRequestAccepted should create DEVICE_REQUEST_ACCEPTED action', () => {
+    expect(actions.deviceRequestAccepted()).to.deep.equal({
+      type: types.DEVICE_REQUEST_ACCEPTED
+    })
+  })
+
+  it('mediaRecorderInitialized should create MEDIA_RECORDER_INITIALIZED action', () => {
+    expect(actions.mediaRecorderInitialized('mr')).to.deep.equal({
+      type: types.MEDIA_RECORDER_INITIALIZED,
+      mr: 'mr'
+    })
+  })
+
+  it('videoObjectGenerated should create VIDEO_OBJECT_GENERATED action', () => {
+    expect(actions.videoObjectGenerated('src')).to.deep.equal({
+      type: types.VIDEO_OBJECT_GENERATED,
+      src: 'src'
+    })
+  })
+
+  it('errorOccurred should create ERROR_OCCURED action', () => {
+    expect(actions.errorOccurred('msg')).to.deep.equal({
+      type: types.ERROR_OCCURRED,
+      msg: 'msg'
+    })
+  })
+
+  it('devicesFound should create DEVICES_FOUND action', () => {
+    expect(actions.devicesFound('devices')).to.deep.equal({
+      type: types.DEVICES_FOUND,
+      devices: 'devices'
+    })
+  })
 })

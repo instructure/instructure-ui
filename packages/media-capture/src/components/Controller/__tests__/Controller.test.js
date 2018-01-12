@@ -10,7 +10,18 @@ import {
 import Controller from '../index'
 
 describe('<Controller />', () => {
-  const testbed = new Testbed(<Controller captureState="" actions={{}} />)
+  const props = {
+    captureState: '',
+    devices: {
+      audioinput: [],
+      videoinput: []
+    },
+    audioDeviceId: '',
+    videoDeviceId: '',
+    actions: {}
+  }
+
+  const testbed = new Testbed(<Controller {...props} />)
 
   it('should render', () => {
     const controller = testbed.render()
@@ -25,8 +36,16 @@ describe('<Controller />', () => {
 
   context('when READY state', () => {
     it('renders device controls', () => {
-      const controller = testbed.render({ captureState: READY })
-      expect(controller.find('Button').length).to.eql(2)
+      const props = {
+        captureState: READY,
+        actions: {
+          audioDeviceChanged: () => {},
+          videoDeviceChanged: () => {}
+        }
+      }
+
+      const controller = testbed.render(props)
+      expect(controller.find('DeviceSelection').length).to.eql(2)
     })
   })
 

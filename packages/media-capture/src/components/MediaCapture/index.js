@@ -67,7 +67,7 @@ export default class MediaCapture extends Component {
     return (
       <MediaCaptureProvider
         store={store}
-        render={({ state: { captureState, msg, videoSrc }, actions }) => (
+        render={({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, devices }, actions }) => (
           <CaptureBackground>
             <CapturePresentation>
               <MediaCaptureClose
@@ -84,10 +84,18 @@ export default class MediaCapture extends Component {
                 <Media
                   captureState={captureState}
                   videoSrc={videoSrc}
+                  videoDeviceId={videoDeviceId}
+                  audioDeviceId={audioDeviceId}
                   actions={actions}
                 />
               </MediaContainer>
-              <Controller captureState={captureState} actions={actions}>
+              <Controller
+                captureState={captureState}
+                devices={devices}
+                audioDeviceId={audioDeviceId}
+                videoDeviceId={videoDeviceId}
+                actions={actions}
+              >
                 <CTA captureState={captureState} actions={actions} />
               </Controller>
             </CapturePresentation>

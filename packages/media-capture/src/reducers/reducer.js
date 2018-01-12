@@ -12,7 +12,8 @@ import {
   DEVICE_REQUEST_ACCEPTED,
   MEDIA_RECORDER_INITIALIZED,
   VIDEO_OBJECT_GENERATED,
-  ERROR_OCCURRED
+  ERROR_OCCURRED,
+  DEVICES_FOUND
 } from '../constants/ActionTypes'
 
 import {
@@ -28,8 +29,14 @@ import {
 
 const initialState = {
   captureState: LOADING,
-  videoSrc: "",
-  msg: ''
+  videoSrc: '',
+  msg: '',
+  devices: {
+    audioinput: [],
+    videoinput: []
+  },
+  audioDeviceId: '',
+  videoDeviceId: ''
 }
 
 export default function reducer (state = initialState, action) {
@@ -62,6 +69,14 @@ export default function reducer (state = initialState, action) {
       return {
         ...state,
         captureState: READY
+      }
+
+    case DEVICES_FOUND:
+      return {
+        ...state,
+        devices: action.devices,
+        audioDeviceId: action.devices.audioinput[0].deviceId,
+        videoDeviceId: action.devices.videoinput[0].deviceId
       }
 
     case ERROR_OCCURRED:

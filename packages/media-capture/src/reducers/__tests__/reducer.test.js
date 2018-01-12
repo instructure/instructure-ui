@@ -7,7 +7,17 @@ describe('capture reducer', () => {
     expect(
       reducer(undefined, {})
     ).to.deep.equal(
-      { captureState: states.LOADING, msg: '', videoSrc: '' }
+      {
+        captureState: states.LOADING,
+        msg: '',
+        videoSrc: '',
+        audioDeviceId: '',
+        videoDeviceId: '',
+        devices: {
+          audioinput: [],
+          videoinput: []
+        }
+      }
     )
   })
 
@@ -60,6 +70,31 @@ describe('capture reducer', () => {
     ).to.deep.equal(
       {
         captureState: states.RECORDING
+      }
+    )
+  })
+
+  it('should handle DEVICES_FOUND', () => {
+    expect(
+      reducer(
+        { captureState: states.LOADING },
+        {
+          type: types.DEVICES_FOUND,
+          devices: {
+            audioinput: [{ deviceId: 'audioDeviceId1' }, { deviceId: 'audioDeviceId2' }],
+            videoinput: [{deviceId: 'videoDeviceId1'}]
+          }
+        }
+      )
+    ).to.deep.equal(
+      {
+        captureState: states.LOADING,
+        devices: {
+          audioinput: [{ deviceId: 'audioDeviceId1' }, { deviceId: 'audioDeviceId2' }],
+          videoinput: [{ deviceId: 'videoDeviceId1' }]
+        },
+        audioDeviceId: 'audioDeviceId1',
+        videoDeviceId: 'videoDeviceId1'
       }
     )
   })

@@ -2,13 +2,15 @@ import React from 'react'
 import getTestMedia from 'get-test-media'
 
 import MediaStream from '../index'
-import * as getUserMedia from '../../../getUserMedia'
+import * as mediaDevices from '../../../mediaDevices'
 import { LOADING, RECORDING } from '../../../constants/CaptureStates'
 import * as startMediaRecorder from '../../../mediaRecorder'
 
 describe('<MediaStream />', () => {
   const props = {
     captureState: LOADING,
+    videoDeviceId: '',
+    audioDeviceId: '',
     actions: {
       deviceRequestAccepted: () => {},
       mediaRecorderInitialized: () => {},
@@ -25,7 +27,7 @@ describe('<MediaStream />', () => {
 
   describe('accessing the clients audio and video devices', () => {
     it('calls getUserMedia', () => {
-      const getUserMediaSpy = testbed.spy(getUserMedia, 'getUserMedia')
+      const getUserMediaSpy = testbed.spy(mediaDevices, 'getUserMedia')
       const stream = testbed.render()
       expect(getUserMediaSpy).to.have.been.called
     })

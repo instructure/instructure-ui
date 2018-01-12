@@ -6,7 +6,8 @@ import {
   SAVING,
   LOADING,
   ERROR,
-  STARTING
+  STARTING,
+  RECORDING
 } from '../../../constants/CaptureStates'
 
 describe('<MediaOverlay />', () => {
@@ -49,6 +50,13 @@ describe('<MediaOverlay />', () => {
       it('renders a <Message />', () => {
         const overlay = testbed.render({ captureState: ERROR })
         expect(overlay.find('Message').length).to.eql(1)
+      })
+    })
+
+    describe('RECORDING', () => {
+      it('renders a <RecordingBadge />', () => {
+        const overlay = testbed.render({ captureState: RECORDING })
+        expect(overlay.find('RecordingBadge').length).to.eql(1)
       })
     })
 

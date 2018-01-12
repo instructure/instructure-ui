@@ -24,6 +24,12 @@ export default class Controller extends Component {
   static propTypes = {
     children: PropTypes.node,
     captureState: PropTypes.string.isRequired,
+    devices: PropTypes.shape({
+      audioinput: PropTypes.array,
+      videoinput: PropTypes.array
+    }).isRequired,
+    audioDeviceId: PropTypes.string.isRequired,
+    videoDeviceId: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
@@ -37,9 +43,19 @@ export default class Controller extends Component {
 
       return (
         <div className={styles.container}>
-          <DeviceSelection variant="audio" />
+          <DeviceSelection
+            variant="audio"
+            devices={this.props.devices.audioinput}
+            selectedDeviceId={this.props.audioDeviceId}
+            actions={{...this.props.actions}}
+          />
           {this.props.children}
-          <DeviceSelection variant="video" />
+          <DeviceSelection
+            variant="video"
+            devices={this.props.devices.videoinput}
+            selectedDeviceId={this.props.videoDeviceId}
+            actions={{...this.props.actions}}
+          />
         </div>
       )
     }

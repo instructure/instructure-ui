@@ -13,6 +13,7 @@ export const deviceRequestAccepted = () => ({ type: types.DEVICE_REQUEST_ACCEPTE
 export const mediaRecorderInitialized = (mr) => ({ type: types.MEDIA_RECORDER_INITIALIZED, mr })
 export const videoObjectGenerated = (src) => ({ type: types.VIDEO_OBJECT_GENERATED, src })
 export const errorOccurred = (msg) => ({ type: types.ERROR_OCCURRED, msg })
+export const devicesFound = (devices) => ({ type: types.DEVICES_FOUND, devices })
 
 export const saveClicked = () => {
   return (dispatch) => {

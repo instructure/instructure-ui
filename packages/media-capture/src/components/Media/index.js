@@ -17,6 +17,8 @@ export default class Media extends Component {
   static propTypes = {
     captureState: PropTypes.string.isRequired,
     videoSrc: PropTypes.string.isRequired,
+    videoDeviceId: PropTypes.string.isRequired,
+    audioDeviceId: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
@@ -24,7 +26,14 @@ export default class Media extends Component {
     const MediaStreamGuard = (state) => {
       if (![LOADING, READY, STARTING, RECORDING].includes(state)) return null
 
-      return <MediaStream captureState={state} actions={{...this.props.actions}} />
+      return (
+        <MediaStream
+          captureState={state}
+          videoDeviceId={this.props.videoDeviceId}
+          audioDeviceId={this.props.audioDeviceId}
+          actions={{...this.props.actions}}
+        />
+      )
     }
 
     const MediaPlaybackGuard = (state) => {
