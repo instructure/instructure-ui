@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { getUserMedia } from '../../getUserMedia'
+import { getUserMedia, enumerateDevices } from '../../mediaDevices'
 import { startMediaRecorder } from '../../mediaRecorder'
 import { LOADING, RECORDING } from '../../constants/CaptureStates'
 
@@ -10,6 +10,8 @@ const POLL_DURATION = 200
 
 const ERRORS = {
   NotAllowedError: 'Please allow Arc to access your webcam.',
+  NotReadableError: 'Your webcam may already be in use.',
+  TrackStartError: 'Your webcam may already be in use.',
   default: 'Something went wrong accessing your webcam.'
 }
 
@@ -17,10 +19,13 @@ export default class MediaStream extends Component {
   /* eslint-disable jsx-a11y/media-has-caption */
   static propTypes = {
     captureState: PropTypes.string.isRequired,
+    videoDeviceId: PropTypes.string.isRequired,
+    audioDeviceId: PropTypes.string.isRequired,
     actions: PropTypes.shape({
       deviceRequestAccepted: PropTypes.func,
       mediaRecorderInitialized: PropTypes.func,
       videoObjectGenerated: PropTypes.func,
+      devicesFound: PropTypes.func,
       errorOccurred: PropTypes.func
     })
   }
@@ -28,19 +33,11 @@ export default class MediaStream extends Component {
   static defaultProps = {
     actions: {
       deviceRequestAccepted: () => {},
+      devicesFound: () => {},
       mediaRecorderInitialized: () => {},
       videoObjectGenerated: () => {},
       errorOccurred: () => {}
     }
-  }
-
-  constructor (props) {
-    super(props)
-
-    this.streamSuccess = this.streamSuccess.bind(this)
-    this.onMediaRecorderInit = this.onMediaRecorderInit.bind(this)
-    this.blobSuccess = this.blobSuccess.bind(this)
-    this.error = this.error.bind(this)
   }
 
   shouldComponentUpdate (nextProps) {
@@ -50,7 +47,13 @@ export default class MediaStream extends Component {
   }
 
   componentDidMount () {
-    getUserMedia(this.streamSuccess, this.error)
+    getUserMedia(
+      this.props.audioDeviceId,
+      this.props.videoDeviceId,
+      this.streamSuccess,
+      this.error
+    )
+    enumerateDevices(this.deviceSuccess, this.error)
   }
 
   componentDidUpdate () {
@@ -70,7 +73,7 @@ export default class MediaStream extends Component {
     }
   }
 
-  onMediaRecorderInit (mediaRecorder) {
+  onMediaRecorderInit = (mediaRecorder) => {
     this.props.actions.mediaRecorderInitialized(mediaRecorder)
   }
 
@@ -86,7 +89,7 @@ export default class MediaStream extends Component {
     }, POLL_DURATION)
   }
 
-  streamSuccess (stream) {
+  streamSuccess = (stream) => {
     this.stream = stream
     if (this.video && this.props.captureState === LOADING) {
       this.video.srcObject = stream
@@ -94,12 +97,16 @@ export default class MediaStream extends Component {
     }
   }
 
-  blobSuccess (blob) {
+  deviceSuccess = (types) => {
+    this.props.actions.devicesFound(types)
+  }
+
+  blobSuccess = (blob) => {
     const src = window.URL.createObjectURL(blob)
     this.props.actions.videoObjectGenerated(src)
   }
 
-  error (err) {
+  error = (err) => {
     if (err) {
       const key = ERRORS[err.name] ? err.name : 'default'
       this.props.actions.errorOccurred(ERRORS[key])
