@@ -26,6 +26,7 @@ export default class CTA extends Component {
     const StartGuard = (state) => {
       if (state !== READY) return null
 
+      // needs i18n
       return (
         <Button
           onClick={actions.startClicked}
@@ -41,6 +42,7 @@ export default class CTA extends Component {
     const FinishGuard = (state) => {
       if (state !== RECORDING) return null
 
+      // needs i18n
       return (
         <Button
           onClick={actions.finishClicked}
@@ -56,6 +58,7 @@ export default class CTA extends Component {
     const PreviewAndSaveGuard = (state) => {
       if (![PREVIEWSAVE, SAVING].includes(state)) return null
 
+      // needs i18n
       return (
         <Button
           onClick={actions.saveClicked}

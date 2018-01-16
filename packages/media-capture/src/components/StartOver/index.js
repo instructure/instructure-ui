@@ -19,6 +19,8 @@ export default class StartOver extends Component {
 
   render () {
     const { actions } = this.props
+
+    // needs i18n
     return (
       <Button onClick={actions.startoverClicked} variant="light">
         <IconResetSolid />

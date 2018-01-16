@@ -13,7 +13,9 @@ import {
   MEDIA_RECORDER_INITIALIZED,
   VIDEO_OBJECT_GENERATED,
   ERROR_OCCURRED,
-  DEVICES_FOUND
+  DEVICES_FOUND,
+  AUDIO_SIGNAL_EMITTED,
+  SOUND_METER_INITIALIZED
 } from '../constants/ActionTypes'
 
 import {
@@ -47,7 +49,15 @@ export default function reducer (state = initialState, action) {
         audioDeviceId: action.id
       }
 
+    case SOUND_METER_INITIALIZED:
+      return {
+        ...state,
+        soundMeter: action.sm
+      }
+
     case CLOSE_CLICKED:
+      state.soundMeter && state.soundMeter.stop()
+
       if ([READY, STARTING, RECORDING, PREVIEWSAVE].includes(state.captureState)) {
         return {
           ...state,
@@ -90,6 +100,8 @@ export default function reducer (state = initialState, action) {
       if (state.captureState !== RECORDING) { return state }
 
       state.mediaRecorder && state.mediaRecorder.stop()
+      state.soundMeter && state.soundMeter.stop()
+
       return {
         ...state,
         captureState: PREVIEWSAVE
@@ -130,6 +142,7 @@ export default function reducer (state = initialState, action) {
       if (![RECORDING, PREVIEWSAVE].includes(state.captureState)) { return state }
 
       state.mediaRecorder && state.mediaRecorder.stop()
+      state.soundMeter && state.soundMeter.stop()
 
       return {
         ...state,

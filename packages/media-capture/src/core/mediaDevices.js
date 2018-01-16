@@ -1,5 +1,11 @@
+import SoundMeter from './soundMeter'
+
 const defaultConstraints = {
-  audio: false,
+  audio: {
+    sampleRate:48000,
+    channelCount: 2,
+    volume: 1.0
+  },
   video: {
     width: 1280,
     height: 720,
@@ -9,12 +15,16 @@ const defaultConstraints = {
 
 export function getUserMedia (audioId, videoId, success, error) {
   const constraints = {
-    audio: false, // todo: spread 'audio' when feature complete
+    audio: {
+      ...defaultConstraints.audio,
+      id: audioId
+    },
     video: {
       ...defaultConstraints.video,
       id: videoId
     }
   }
+
   navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => success(stream))
     .catch(err => error(err))
@@ -46,4 +56,14 @@ export function enumerateDevices (success, error) {
       success(deviceTypes)
     })
     .catch(e => error(e))
+}
+
+export function getAudioContext (stream, success, error) {
+  const audioContext = new AudioContext()
+  const soundMeter = new SoundMeter(audioContext)
+  soundMeter.connectToSource(stream, (e) => {
+    if (e) { error(e) }
+
+    success(soundMeter)
+  })
 }

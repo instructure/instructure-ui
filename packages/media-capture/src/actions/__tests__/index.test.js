@@ -94,4 +94,15 @@ describe('mediaCapture actions', () => {
       devices: 'devices'
     })
   })
+
+  it('startClicked should create START_CLICKED action', () => {
+    expect(actions.startClicked()).to.deep.equal({ type: types.START_CLICKED })
+  })
+
+  it('soundMeterInitialized should create SOUND_METER_INITIALIZED action', () => {
+    expect(actions.soundMeterInitialized('sm')).to.deep.equal({
+      type: types.SOUND_METER_INITIALIZED,
+      sm: 'sm'
+    })
+  })
 })

@@ -2,9 +2,10 @@ import React from 'react'
 import getTestMedia from 'get-test-media'
 
 import MediaStream from '../index'
-import * as mediaDevices from '../../../mediaDevices'
+import * as mediaDevices from '../../../core/mediaDevices'
 import { LOADING, RECORDING } from '../../../constants/CaptureStates'
-import * as startMediaRecorder from '../../../mediaRecorder'
+import * as startMediaRecorder from '../../../core/mediaRecorder'
+import { soundMeterInitialized } from '../../../actions/index'
 
 describe('<MediaStream />', () => {
   const props = {
@@ -43,7 +44,7 @@ describe('<MediaStream />', () => {
         }
       })
 
-      const stream = testbed.render()
+      const stream = testbed.render({ actions: { soundMeterInitialized: () => {} }})
       stream.instance().streamSuccess(media.stream)
       expect(pollReadyStateSpy).to.have.been.called
       expect(stream.instance().video.srcObject).to.equal(media.stream)
@@ -68,7 +69,15 @@ describe('<MediaStream />', () => {
           frameRate: 24
         }
       })
-      const stream = testbed.render()
+      const stream = testbed.render(
+        {
+          actions: {
+            soundMeterInitialized: () => {},
+            mediaRecorderInitialized: () => {},
+            errorOccurred: () => {}
+          }
+        }
+      )
       stream.instance().streamSuccess(media.stream)
       stream.setProps({ captureState: RECORDING })
 
@@ -102,7 +111,7 @@ describe('<MediaStream />', () => {
         ]
         testbed.stub(stream, 'getTracks', () => tracks)
 
-        const media = testbed.render()
+        const media = testbed.render({ actions: { soundMeterInitialized: () => {} }})
         media.instance().streamSuccess(stream)
         media.unmount()
         expect(stopStub.callCount).to.eql(2)

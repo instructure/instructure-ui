@@ -63,4 +63,35 @@ describe('<DeviceSelection />', () => {
       })
     })
   })
+
+  context('device selection', () => {
+    describe('#isDeviceSelected', () => {
+      it('returns true if the value if equal to the prop', () => {
+        const DeviceSelection = testbed.render({ selectedDeviceId: 'aeiou' })
+        expect(DeviceSelection.instance().isDeviceSelected('aeiou')).to.eql(true)
+      })
+
+      it('returns false if the value if equal to the prop', () => {
+        const DeviceSelection = testbed.render({ selectedDeviceId: 'aeiou' })
+        expect(DeviceSelection.instance().isDeviceSelected('uoiea')).to.eql(false)
+      })
+    })
+
+    describe('#deviceSelected', () => {
+      it('invoked the action associated with its variant', () => {
+        const audioDeviceChangedStub = testbed.spy()
+        const props = {
+          variant: 'audio',
+          actions: {
+            audioDeviceChanged: audioDeviceChangedStub,
+            videoDeviceChanged: () => {}
+          }
+        }
+
+        const DeviceSelection = testbed.render(props)
+        DeviceSelection.instance().deviceSelected('event', ['newSelected'])
+        expect(audioDeviceChangedStub).to.have.been.calledWith('newSelected')
+      })
+    })
+  })
 })

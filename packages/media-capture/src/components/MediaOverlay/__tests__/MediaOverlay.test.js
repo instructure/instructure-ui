@@ -7,10 +7,17 @@ import {
   LOADING,
   ERROR,
   STARTING,
-  RECORDING
+  RECORDING,
+  READY
 } from '../../../constants/CaptureStates'
 
 describe('<MediaOverlay />', () => {
+  const soundMeter = {
+    processor: {
+      volume: 0
+    }
+  }
+
   const testbed = new Testbed(<MediaOverlay captureState={PREVIEWSAVE} actions={{}} msg="" />)
 
   it('should render', () => {
@@ -55,7 +62,8 @@ describe('<MediaOverlay />', () => {
 
     describe('RECORDING', () => {
       it('renders a <RecordingBadge />', () => {
-        const overlay = testbed.render({ captureState: RECORDING })
+        const overlay = testbed.render({ captureState: RECORDING, soundMeter })
+        expect(overlay.find('AudioSignal').length).to.eql(1)
         expect(overlay.find('RecordingBadge').length).to.eql(1)
       })
     })
@@ -64,6 +72,13 @@ describe('<MediaOverlay />', () => {
       it('renders a <Loading />', () => {
         const overlay = testbed.render({ captureState: LOADING })
         expect(overlay.find('Loading').length).to.eql(1)
+      })
+    })
+
+    describe('READY', () => {
+      it('renders a <AudioSignal />', () => {
+        const overlay = testbed.render({ captureState: READY, soundMeter })
+        expect(overlay.find('AudioSignal').length).to.eql(1)
       })
     })
   })
