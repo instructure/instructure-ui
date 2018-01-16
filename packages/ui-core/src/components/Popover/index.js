@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
@@ -37,7 +38,6 @@ import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 
-import Position, { PositionTarget, PositionContent } from '../Position'
 import Dialog from '../Dialog'
 import CloseButton from '../CloseButton'
 

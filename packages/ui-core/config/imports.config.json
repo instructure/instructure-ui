@@ -36,6 +36,10 @@
     "replace": "@instructure/ui-elements/lib/components/ContextBox"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Grid",
+    "replace": "@instructure/ui-layout/lib/components/Grid"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Heading",
     "replace": "@instructure/ui-elements/lib/components/Heading"
   },
@@ -56,6 +60,10 @@
     "replace": "@instructure/ui-elements/lib/components/List"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Media",
+    "replace": "@instructure/ui-layout/lib/components/Media"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/MetricsList",
     "replace": "@instructure/ui-elements/lib/components/MetricsList"
   },
@@ -66,6 +74,10 @@
   {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
     "replace": "@instructure/ui-portal/lib/components/Portal"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Position",
+    "replace": "@instructure/ui-layout/lib/components/Position"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Progress",
@@ -127,6 +139,10 @@
   {
     "pattern": "^instructure-ui/lib/util/dom",
     "replace": "@instructure/ui-utils/lib/dom"
+  },
+  {
+    "pattern": "^@instructure-ui/ui-utils/lib/dom/calculateElementPosition",
+    "replace": "@instructure/ui-layout/lib/utils/calculateElementPosition"
   },
 
   {

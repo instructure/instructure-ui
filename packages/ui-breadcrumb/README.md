@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-breadcrumb
+yarn add @instructure/ui-breadcrumb
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-breadcrumb.svg

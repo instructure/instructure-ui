@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 

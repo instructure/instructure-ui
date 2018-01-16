@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-a11y
+yarn add @instructure/ui-a11y
 ```
 
 ### Usage
@@ -32,13 +32,13 @@ export default MyAccessibleContent = function () {
 ```
 
 ### Components
-The `ui-elements` package contains the following components:
+The `ui-a11y` package contains the following components:
 - [AccessibleContent](#AccessibleContent)
 - [PresentationContent](#PresentationContent)
 - [ScreenReaderContent](#ScreenReaderContent)
 
 ### Utilities
-The `ui-elements` package contains the following utilities:
+The `ui-a11y` package contains the following utilities:
 - [findTabbable](#findTabbable)
 - [focusManager](#focusManager)
 

@@ -24,7 +24,7 @@
 
 import React from 'react'
 import FormFieldLayout from '../index'
-import { GridCol } from '../../../Grid'
+import { GridCol } from '@instructure/ui-layout/lib/components/Grid'
 
 describe('<FormFieldLayout />', () => {
   const testbed = new Testbed(<FormFieldLayout label="Username" />)

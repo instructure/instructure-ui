@@ -9,11 +9,10 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
-
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-container
+yarn add @instructure/ui-container
 ```
 ### Usage
 
@@ -30,11 +29,17 @@ export default MyContainer = function () {
 }
 ```
 
-See more detailed documentation and usage for [Container](#Container)
+### Components
+The `ui-container` package contains the following:
+- [Container](#Container)
 
 ### Contribute
 
 See the [contributing guidelines](#contributing) for details.
+
+### License
+
+[MIT](LICENSE)
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-container.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-container

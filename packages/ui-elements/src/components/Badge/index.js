@@ -26,9 +26,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+
 import themeable from '@instructure/ui-themeable'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import uid from '@instructure/ui-utils/lib/uid'
 
 import styles from './styles.css'

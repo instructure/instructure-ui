@@ -26,8 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import deepEqual from 'deep-equal'
 
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import SelectSingle from './SelectSingle'
 import SelectMultiple from './SelectMultiple'

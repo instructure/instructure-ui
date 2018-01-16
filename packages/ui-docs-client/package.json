@@ -25,6 +25,7 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-container": "^4.6.0",
     "@instructure/ui-core": "^4.6.0",
     "@instructure/ui-elements": "^4.6.0",
     "@instructure/ui-icons": "^4.6.0",
@@ -34,8 +35,6 @@
     "@instructure/ui-utils": "^4.6.0",
     "@instructure/ui-a11y": "^4.6.0",
     "@instructure/ui-forms": "^4.6.0",
-    "@instructure/ui-motion": "^4.6.0",
-    "@instructure/ui-tree-browser": "^4.6.0",
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
     "codemirror": "^5.33.0",

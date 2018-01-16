@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'

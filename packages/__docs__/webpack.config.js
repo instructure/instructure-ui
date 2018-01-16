@@ -100,6 +100,7 @@ module.exports = {
       '@instructure/ui-forms/lib': path.resolve(__dirname, '../ui-forms/src'),
       '@instructure/ui-layout/lib': path.resolve(__dirname, '../ui-layout/src'),
       '@instructure/ui-motion/lib': path.resolve(__dirname, '../ui-motion/src'),
+      '@instructure/ui-pages/lib': path.resolve(__dirname, '../ui-pages/src'),
       '@instructure/ui-pagination/lib': path.resolve(__dirname, '../ui-pagination/src'),
       '@instructure/ui-portal/lib': path.resolve(__dirname, '../ui-portal/src'),
       '@instructure/ui-svg-images/lib': path.resolve(__dirname, '../ui-svg-images/src'),

@@ -21,4 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = require('@instructure/ui-presets/postcss')()
+
+module.exports = require('@instructure/ui-presets/postcss')({
+  before: {
+    plugin: 'postcss-nested',
+    insert: [
+      [require.resolve('postcss-mixins')], // TODO: remove this. needed for Grid
+      [require.resolve('postcss-simple-vars')] // TODO: remove this. needed for Grid
+    ]
+  }
+})

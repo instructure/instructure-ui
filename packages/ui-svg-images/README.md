@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-svg-images
+yarn add @instructure/ui-svg-images
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-svg-images.svg

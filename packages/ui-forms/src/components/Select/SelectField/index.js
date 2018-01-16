@@ -35,8 +35,8 @@ import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveE
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import Position, { PositionContent } from '@instructure/ui-core/lib/components/Position'
-import FormField from '@instructure/ui-core/lib/components/FormField'
+import Position, { PositionContent } from '@instructure/ui-layout/lib/components/Position'
+import FormField from '../../../../../ui-core/lib/components/FormField'
 
 import SelectOptionsList from '../SelectOptionsList'
 import getOptionId from '../utils/getOptionId'

@@ -42,7 +42,7 @@ export default class Page extends Component {
     /**
      * The children to be rendered
      */
-    children: PropTypes.func,
+    children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
 
     /**
      * An element or a function returning an element to focus by default
@@ -58,7 +58,6 @@ export default class Page extends Component {
   }
 
   static defaultProps = {
-    children: () => { return null },
     defaultFocusElement: null,
     padding: 'small',
     textAlign: 'start'
@@ -111,6 +110,11 @@ export default class Page extends Component {
       ...props
     } = this.props
 
+    const {
+      history,
+      navigateToPreviousPage
+    } = this.context
+
     return (
       <Container
         as="div"
@@ -118,7 +122,9 @@ export default class Page extends Component {
         textAlign={props.textAlign}
         elementRef={(el) => { this._content = el }}
       >
-        {children(this.context.history, this.context.navigateToPreviousPage)}
+        {
+          (children && typeof children === 'function') ? children(history, navigateToPreviousPage) : children
+        }
       </Container>
     )
   }

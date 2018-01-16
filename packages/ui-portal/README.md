@@ -1,6 +1,5 @@
 ---
 category: packages
-describes: Portal
 ---
 
 ## ui-portal
@@ -10,62 +9,12 @@ describes: Portal
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
-### Example
-
-The `<Portal/>` component allows you to render a subtree into a DOM element.
-
-```js
----
-render: false
-example: true
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      isPortalOpen: false
-    }
-  }
-
-  handleButtonClick = () => {
-    this.setState({
-      isPortalOpen: !this.state.isPortalOpen
-    })
-  };
-
-  render () {
-    return (
-      <div>
-        <Button onClick={this.handleButtonClick}>
-          {this.state.isPortalOpen ? 'Close' : 'Open'} the Portal
-        </Button>
-        <Portal
-          mountNode={() => this._mountNode}
-          open={this.state.isPortalOpen}
-        >
-          <ContextBox>
-            <p>Greetings from the portal!</p>
-          </ContextBox>
-        </Portal>
-        <Text>
-          <p>{lorem.paragraph()}</p>
-          <div ref={(c) => this._mountNode = c}></div>
-          <p>{lorem.paragraph()}</p>
-        </Text>
-      </div>
-    )
-  }
-}
-
-render(<Example />)
-```
-
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-portal
+yarn add @instructure/ui-portal
 ```
+
 ### Usage
 
 ```js
@@ -81,7 +30,9 @@ export default MyPortal = function () {
 }
 ```
 
-See more detailed documentation and usage for [Portal](#Portal)
+### Components
+The `ui-portal` package contains the following:
+- [Portal](#Portal)
 
 ### Contribute
 

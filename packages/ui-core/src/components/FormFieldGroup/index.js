@@ -27,10 +27,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import Grid, { GridCol, GridRow } from '../Grid'
 import { FormFieldLayout } from '../FormField'
 
 import styles from './styles.css'

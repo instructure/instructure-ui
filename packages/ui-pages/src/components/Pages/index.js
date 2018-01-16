@@ -31,6 +31,7 @@ import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import Page from './Page'
 import Container from '@instructure/ui-container/lib/components/Container'
@@ -135,7 +136,7 @@ class Pages extends Component {
   }
 
   get focused () {
-    return containsActiveElement(this.contentElement)
+    return containsActiveElement(this._contentElement)
   }
 
   focus () {
@@ -147,7 +148,7 @@ class Pages extends Component {
         activePage.focus()
       } else {
         // Use first tabbable as last ditch effort
-        const tabbable = findTabbable(this.contentElement)
+        const tabbable = findTabbable(this._contentElement)
         const element = tabbable && tabbable[0]
 
         element && element.focus()
@@ -156,25 +157,30 @@ class Pages extends Component {
   }
 
   get activePage () {
-    const children = React.Children.toArray(this.props.children)
-    return safeCloneElement(children[this.props.activePageIndex], {
+    const { activePageIndex, children } = this.props
+    const pages = React.Children.toArray(children)
+    const activePage = (activePageIndex < pages.length) ? pages[activePageIndex] : null
+
+    warning(activePage, '[Pages] invalid `activePageIndex`.')
+
+    return activePage ? safeCloneElement(activePage, {
       ref: (el) => { this._activePage = el }
-    })
+    }) : null
   }
 
   render () {
-    return (
+    return this.activePage ? (
       <Container
         as="div"
         id={this._contentId}
         className={styles.root}
         margin={this.props.margin}
         role="region"
-        elementRef={(el) => { this.contentElement = el }}
+        elementRef={(el) => { this._contentElement = el }}
       >
         {this.activePage}
       </Container>
-    )
+    ) : null
   }
 }
 

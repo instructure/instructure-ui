@@ -23,9 +23,8 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
 import Image from '@instructure/ui-elements/lib/components/Image'
-
+import Container from '@instructure/ui-container/lib/components/Container'
 import Media from '../index'
 
 describe('<Media />', () => {

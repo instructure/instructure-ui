@@ -31,7 +31,6 @@ import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-core/lib/components/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-core/lib/components/Modal'
-import IconSearch from '@instructure/ui-icons/lib/Solid/IconSearch'
 
 import themeable from '@instructure/ui-themeable'
 
@@ -96,34 +95,31 @@ export default class Icons extends Component {
     const { formats } = this.props
     return (
       <div className={styles.header}>
-        <div className="filters">
-          <FormFieldGroup
-            layout="columns"
-            colSpacing="small"
-            description={<ScreenReaderContent>Filter Icons</ScreenReaderContent>}
-            hAlign="end"
+        <FormFieldGroup
+          layout="columns"
+          colSpacing="small"
+          description={<ScreenReaderContent>Filter Icons</ScreenReaderContent>}
+          hAlign="end"
+        >
+          <TextInput
+            placeholder="Filter icons..."
+            defaultValue={this.state.query}
+            onChange={this.handleSearchChange}
+            label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
+            size="large"
+          />
+          <Select
+            name="format"
+            label={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
+            onChange={this.handleFormatChange}
+            size="large"
+            value={this.selectedFormatKey}
           >
-            <TextInput
-              placeholder="Filter Icons"
-              defaultValue={this.state.query}
-              onChange={this.handleSearchChange}
-              label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
-              size="large"
-              icon={IconSearch}
-            />
-            <Select
-              name="format"
-              label={<ScreenReaderContent>Icon Format</ScreenReaderContent>}
-              onChange={this.handleFormatChange}
-              size="large"
-              value={this.props.selectedFormat}
-            >
-              {Object.keys(formats).map(key => (
-                <option value={key} key={`${key}`}>{formats[key].format}</option>
-              ))}
-            </Select>
-          </FormFieldGroup>
-        </div>
+            {Object.keys(formats).map(key => (
+              <option value={key} key={`${key}`}>{formats[key].format}</option>
+            ))}
+          </Select>
+        </FormFieldGroup>
       </div>
     )
   }

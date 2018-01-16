@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/${PACKAGE}
+yarn add @instructure/${PACKAGE}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/${PACKAGE}.svg

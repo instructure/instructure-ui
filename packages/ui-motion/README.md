@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-motion
+yarn add @instructure/ui-motion
 ```
 
 ### Usage

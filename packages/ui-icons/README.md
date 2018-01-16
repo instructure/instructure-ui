@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-icons
+yarn add @instructure/ui-icons
 ```
 
 ### Usage

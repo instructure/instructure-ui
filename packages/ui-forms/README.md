@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-forms
+yarn add @instructure/ui-forms
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-forms.svg

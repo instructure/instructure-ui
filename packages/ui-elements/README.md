@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-elements
+yarn add @instructure/ui-elements
 ```
 
 ### Usage

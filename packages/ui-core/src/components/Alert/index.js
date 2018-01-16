@@ -37,8 +37,8 @@ import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
 import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 
 import themeable from '@instructure/ui-themeable'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
 

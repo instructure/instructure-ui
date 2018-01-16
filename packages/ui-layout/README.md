@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-layout
+yarn add @instructure/ui-layout
 ```
 ### Usage
 
@@ -31,7 +31,16 @@ export default MyLayout = function () {
 }
 ```
 
-See more detailed documentation and usage for [Layout](#Layout)
+### Components
+The `ui-layout` package contains the following components:
+- [Grid](#Grid)
+- [Layout](#Layout)
+- [Media](#Media)
+- [Position](#Position)
+
+### Utilities
+The `ui-layout` package contains the following utilities:
+- [calculateElementPosition](#calculateElementPosition)
 
 ### Contribute
 

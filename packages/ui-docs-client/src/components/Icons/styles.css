@@ -1,9 +1,6 @@
 .header {
   max-width: 24rem;
-}
-
-.filters {
-  display: inline-block;
+  position: relative;
 }
 
 .glyphs {

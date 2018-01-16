@@ -22,87 +22,26 @@
  * SOFTWARE.
  */
 
-import React, { Component, Children } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
+import React, { Component } from 'react'
 
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import GridRow from './GridRow'
+import UIGrid from '@instructure/ui-layout/lib/components/Grid'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/layout
----
-**/
-@themeable(theme, styles)
-export default class Grid extends Component {
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-layout'
+))
+class Grid extends Component {
   static propTypes = {
-    children: CustomPropTypes.Children.oneOf([GridRow]),
-    colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
-    hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),
-    vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
-    visualDebug: PropTypes.bool
-  }
-
-  static defaultProps = {
-    colSpacing: 'medium',
-    rowSpacing: 'medium',
-    hAlign: 'start',
-    startAt: 'small',
-    vAlign: 'top',
-    visualDebug: false
-  };
-
-  startAtClass () {
-    return !!this.props.startAt && (`startAt${capitalizeFirstLetter(this.props.startAt)}`)
-  }
-
-  renderChildren () {
-    const children = Children.toArray(this.props.children)
-
-    return children.map((child, index) => {
-      if (matchComponentTypes(child, [GridRow])) {
-        return safeCloneElement(child, {
-          ...pickProps(this.props, Grid.propTypes),
-          ...child.props, /* child props should override parent */
-          isLastRow: ((index + 1) === children.length)
-        })
-      } else {
-        return child // PropType validation should handle errors
-      }
-    })
+    ...UIGrid.PropTypes
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.startAtClass()]]: !!this.props.startAt,
-      [styles.visualDebug]: this.props.visualDebug
-    }
-
-    const props = omitProps(this.props, Grid.propTypes)
-
-    return (
-      <span
-        {...props}
-        className={classnames(classes)}
-      >
-        {this.renderChildren()}
-      </span>
-    )
+    return <UIGrid {...this.props} />
   }
 }
 
+export default Grid
 export { default as GridCol } from './GridCol'
 export { default as GridRow } from './GridRow'

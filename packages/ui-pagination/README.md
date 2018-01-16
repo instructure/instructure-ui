@@ -13,7 +13,7 @@ category: packages
 ### Installation
 
 ```sh
-yarn add --dev @instructure/ui-pagination
+yarn add @instructure/ui-pagination
 ```
 
 ### Usage
