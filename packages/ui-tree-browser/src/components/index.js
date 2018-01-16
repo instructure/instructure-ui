@@ -22,24 +22,4 @@
  * SOFTWARE.
  */
 
- import React, { Component } from 'react'
-
- import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
- import UITreeBrowser from '@instructure/ui-tree-browser/lib/components/TreeBrowser'
-
- @deprecated('5.0.0', null, changedPackageWarning(
-   'ui-core',
-   'ui-tree-browser'
- ))
- class TreeBrowser extends Component {
-   static propTypes = {
-     ...UITreeBrowser.PropTypes
-   }
-
-   render () {
-     return <UITreeBrowser {...this.props} />
-   }
- }
-
- export default TreeBrowser
+ export TreeBrowser from './TreeBrowser'

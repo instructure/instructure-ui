@@ -40,6 +40,7 @@ import * as UIMotion from '@instructure/ui-motion'
 import * as UISVGImages from '@instructure/ui-svg-images'
 import * as UIPagination from '@instructure/ui-pagination'
 import * as UIPortal from '@instructure/ui-portal'
+import * as UITreeBrowser from '@instructure/ui-tree-browser'
 
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
@@ -95,7 +96,8 @@ const globals = Object.assign(
   UIMotion,
   UISVGImages,
   UIPagination,
-  UIPortal
+  UIPortal,
+  UITreeBrowser
 )
 
 Object.keys(globals).forEach((key) => {

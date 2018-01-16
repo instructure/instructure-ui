@@ -22,24 +22,14 @@
  * SOFTWARE.
  */
 
- import React, { Component } from 'react'
+const path = require('path')
 
- import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
- import UITreeBrowser from '@instructure/ui-tree-browser/lib/components/TreeBrowser'
-
- @deprecated('5.0.0', null, changedPackageWarning(
-   'ui-core',
-   'ui-tree-browser'
- ))
- class TreeBrowser extends Component {
-   static propTypes = {
-     ...UITreeBrowser.PropTypes
-   }
-
-   render () {
-     return <UITreeBrowser {...this.props} />
-   }
- }
-
- export default TreeBrowser
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 91
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-tree-browser')
+})

@@ -88,6 +88,10 @@
     "replace": "@instructure/ui-motion/lib/components/Transition"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/TreeBrowser",
+    "replace": "@instructure/ui-tree-browser/lib/components/TreeBrowser"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
     "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
   },
