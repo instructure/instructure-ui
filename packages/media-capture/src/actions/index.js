@@ -14,6 +14,7 @@ export const mediaRecorderInitialized = (mr) => ({ type: types.MEDIA_RECORDER_IN
 export const videoObjectGenerated = (src) => ({ type: types.VIDEO_OBJECT_GENERATED, src })
 export const errorOccurred = (msg) => ({ type: types.ERROR_OCCURRED, msg })
 export const devicesFound = (devices) => ({ type: types.DEVICES_FOUND, devices })
+export const soundMeterInitialized = (sm) => ({ type: types.SOUND_METER_INITIALIZED, sm })
 
 export const saveClicked = () => {
   return (dispatch) => {

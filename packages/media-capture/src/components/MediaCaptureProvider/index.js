@@ -31,7 +31,8 @@ class MediaCaptureProvider extends React.Component {
       mediaRecorderInitialized: PropTypes.func.isRequired,
       videoObjectGenerated: PropTypes.func.isRequired,
       errorOccurred: PropTypes.func.isRequired,
-      devicesFound: PropTypes.func.isRequired
+      devicesFound: PropTypes.func.isRequired,
+      soundMeterInitialized: PropTypes.func.isRequired
     }).isRequired
   }
 

@@ -54,7 +54,7 @@ export default class CountdownTimer extends Component {
   }
 
   render () {
-    // TODO: add SR announcements
+    // TODO: add SR announcements, needs i18n
     return <span>{ this.state.currentValue }</span>
   }
 }

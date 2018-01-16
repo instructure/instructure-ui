@@ -82,8 +82,8 @@ export default class Controller extends Component {
       return (
         <div className={styles.container}>
           <TextInput
-            label={<ScreenReaderContent>Name</ScreenReaderContent>}
-            placeholder="A filename"
+            label={<ScreenReaderContent>Name{/* needs i18n */}</ScreenReaderContent>}
+            placeholder="A filename" /* needs i18n */
           />
           {this.props.children}
         </div>

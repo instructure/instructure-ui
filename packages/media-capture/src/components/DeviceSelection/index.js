@@ -39,11 +39,11 @@ export default class DeviceSelection extends Component {
   config (variant) {
     const VARIANTS = {
       audio: {
-        label: 'Mic',
+        label: 'Mic', // needs i18n
         icon: <IconMicSolid />
       },
       video: {
-        label: 'Webcam',
+        label: 'Webcam', // needs i18n
         icon: <IconVideoSolid />
       }
     }

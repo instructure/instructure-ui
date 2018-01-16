@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
+import AudioSignal from '../AudioSignal'
 import CountdownContainer from '../CountdownContainer'
 import CountdownTimer from '../CountdownTimer'
 import Loading from '../Loading'
@@ -13,7 +14,8 @@ import {
   PREVIEWSAVE,
   SAVING,
   LOADING,
-  ERROR
+  ERROR,
+  READY
 } from '../../constants/CaptureStates'
 import styles from './styles.css'
 
@@ -21,8 +23,13 @@ import styles from './styles.css'
 export default class MediaOverlay extends Component {
   static propTypes = {
     captureState: PropTypes.string.isRequired,
+    soundMeter: PropTypes.object, // eslint-disable-line react/forbid-prop-types
     msg: PropTypes.string.isRequired,
     actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
+  }
+
+  static defaultProps = {
+    soundMeter: {}
   }
 
   render () {
@@ -51,20 +58,37 @@ export default class MediaOverlay extends Component {
     const PreviewBadgeGuard = (state) => {
       if (![PREVIEWSAVE, SAVING].includes(state)) return null
 
-      return <div className={styles.badge}>PREVIEW</div>
+      // needs i18n
+      return (
+        <div className={styles.badge}>
+          PREVIEW
+        </div>
+      )
     }
 
-    const RecordingBadgeGuard = (state) => {
+    const RecordingGuard = (state) => {
       if (state !== RECORDING) return null
 
-      return <RecordingBadge />
+      return (
+        <div>
+          <AudioSignal reduced soundMeter={this.props.soundMeter} />
+          <RecordingBadge />
+        </div>
+      )
+    }
+
+    const ReadyGuard = (state) => {
+      if (state !== READY) return null
+
+      return <AudioSignal soundMeter={this.props.soundMeter} />
     }
 
     return (
       LoadingGuard(this.props.captureState) ||
+      ReadyGuard(this.props.captureState) ||
       ErrorGuard(this.props.captureState) ||
       CountdownTimerGuard(this.props.captureState) ||
-      RecordingBadgeGuard(this.props.captureState) ||
+      RecordingGuard(this.props.captureState) ||
       PreviewBadgeGuard(this.props.captureState)
     )
   }

@@ -1,0 +1,9 @@
+.progress {
+  position: absolute;
+  bottom: -2px;
+  width: 100%;
+}
+
+.reduced {
+  width: 92%;
+}

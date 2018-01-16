@@ -67,40 +67,42 @@ export default class MediaCapture extends Component {
     return (
       <MediaCaptureProvider
         store={store}
-        render={({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, devices }, actions }) => (
-          <CaptureBackground>
-            <CapturePresentation>
-              <MediaCaptureClose
-                captureState={captureState}
-                actions={actions}
-                onClick={this.close}
-              />
-              <MediaContainer>
-                <MediaOverlay
+        render={
+          ({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, soundMeter, devices }, actions }) => (
+            <CaptureBackground>
+              <CapturePresentation>
+                <MediaCaptureClose
                   captureState={captureState}
-                  msg={msg}
                   actions={actions}
+                  onClick={this.close}
                 />
-                <Media
+                <MediaContainer>
+                  <MediaOverlay
+                    captureState={captureState}
+                    soundMeter={soundMeter}
+                    msg={msg}
+                    actions={actions}
+                  />
+                  <Media
+                    captureState={captureState}
+                    videoSrc={videoSrc}
+                    videoDeviceId={videoDeviceId}
+                    audioDeviceId={audioDeviceId}
+                    actions={actions}
+                  />
+                </MediaContainer>
+                <Controller
                   captureState={captureState}
-                  videoSrc={videoSrc}
-                  videoDeviceId={videoDeviceId}
+                  devices={devices}
                   audioDeviceId={audioDeviceId}
+                  videoDeviceId={videoDeviceId}
                   actions={actions}
-                />
-              </MediaContainer>
-              <Controller
-                captureState={captureState}
-                devices={devices}
-                audioDeviceId={audioDeviceId}
-                videoDeviceId={videoDeviceId}
-                actions={actions}
-              >
-                <CTA captureState={captureState} actions={actions} />
-              </Controller>
-            </CapturePresentation>
-          </CaptureBackground>
-        )}
+                >
+                  <CTA captureState={captureState} actions={actions} />
+                </Controller>
+              </CapturePresentation>
+            </CaptureBackground>
+          )}
       />
     )
   }
