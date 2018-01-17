@@ -1,15 +1,23 @@
 .root {
   display: flex;
   flex-direction: column-reverse;
-
   box-sizing: border-box;
+
   padding: var(--padding);
-
-  justify-self: space-around;
-
   text-align: var(--textAlign);
-
   font-family: var(--fontFamily);
+
+  &.start {
+    text-align: left;
+  }
+
+  &.center {
+    text-align: center;
+  }
+
+  &.end {
+    text-align: right;
+  }
 }
 
 .label {
