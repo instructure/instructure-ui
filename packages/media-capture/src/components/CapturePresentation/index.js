@@ -4,8 +4,9 @@ import themeable from '@instructure/ui-themeable'
 import classNames from 'classnames'
 
 import styles from './styles.css'
+import theme from './theme'
 
-@themeable({}, styles)
+@themeable(theme, styles)
 export default class CapturePresentation extends Component {
   static propTypes = {
     children: PropTypes.node

@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import themeable from '@instructure/ui-themeable'
 
 import * as CaptureActions from '../../actions'
 
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
 export default class CountdownTimer extends Component {
   static propTypes = {
     countdownFrom: PropTypes.number,
@@ -23,9 +28,6 @@ export default class CountdownTimer extends Component {
     this.state = {
       currentValue: props.countdownFrom
     }
-
-    this.startCountdown = this.startCountdown.bind(this)
-    this.clearCountdown = this.clearCountdown.bind(this)
   }
 
   componentDidMount () {
@@ -36,7 +38,7 @@ export default class CountdownTimer extends Component {
     this.clearCountdown()
   }
 
-  startCountdown () {
+  startCountdown = () => {
     this.timer = setInterval(() => {
       this.setState({
         currentValue: this.state.currentValue - 1
@@ -49,12 +51,18 @@ export default class CountdownTimer extends Component {
     }, 1000)
   }
 
-  clearCountdown () {
+  clearCountdown = () => {
     if (this.timer) clearInterval(this.timer)
   }
 
   render () {
     // TODO: add SR announcements, needs i18n
-    return <span>{ this.state.currentValue }</span>
+    return (
+      <div className={styles.container}>
+        <div className={styles.inner}>
+          <time>{this.state.currentValue}</time>
+        </div>
+      </div>
+    )
   }
 }

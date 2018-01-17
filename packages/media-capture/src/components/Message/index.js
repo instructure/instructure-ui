@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 import classNames from 'classnames'
 
-import styles from './styles.css'
+import Heading from '@instructure/ui-core/lib/components/Heading'
 
-@themeable({}, styles)
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
 export default class Message extends Component {
   static propTypes = {
     msg: PropTypes.string.isRequired
@@ -15,7 +18,7 @@ export default class Message extends Component {
     const ErrorMessageGuard = (error) => {
       if (error.length <= 0) return null
 
-      return <h2>{error}</h2>
+      return <Heading>{error}</Heading>
     }
 
     return (

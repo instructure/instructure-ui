@@ -15,18 +15,9 @@ describe('<MediaCapture />', () => {
     expect(mediaCapture).to.be.present
   })
 
-  describe('#close', () => {
-    it('sets the shown state to false', () => {
-      const mediaCapture = testbed.render()
-      mediaCapture.instance().close()
-      expect(mediaCapture.state('shown')).to.be.false
-    })
-
-    it('invokes the onClose prop', () => {
-      const onCloseSpy = testbed.spy()
-      const mediaCapture = testbed.render({ onClose: onCloseSpy })
-      mediaCapture.instance().close()
-      expect(onCloseSpy).to.have.been.called
-    })
+  it('passes onClose prop to MediaCaptureProvider', () => {
+    const onClose = testbed.stub()
+    const mediaCapture = testbed.render({ onClose })
+    expect(mediaCapture.find('MediaCaptureProvider').prop('onClose')).to.eql(onClose)
   })
 })

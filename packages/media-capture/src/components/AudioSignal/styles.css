@@ -1,9 +1,26 @@
-.progress {
-  position: absolute;
-  bottom: -2px;
-  width: 100%;
-}
+.progress[value] {
+  box-sizing: border-box;
+  appearance: none;
+  width: auto;
+  flex: 1;
+  border: none;
+  height: 100%;
+  background-color: var(--backgroundColor);
 
-.reduced {
-  width: 92%;
+  &::-webkit-progress-bar {
+    background-color: var(--backgroundColor);
+  }
+
+  &::-webkit-progress-value {
+    background: linear-gradient(to right, var(--meterColorStart) 0%, var(--meterColorEnd) 100%);
+  }
+
+  &::-moz-progress-bar {
+    background: linear-gradient(to right, var(--meterColorStart) 0%, var(--meterColorEnd) 100%);
+  }
+
+  &::-ms-fill {
+    border: none;
+    background: linear-gradient(to right, var(--meterColorStart) 0%, var(--meterColorEnd) 100%);
+  }
 }

@@ -10,7 +10,9 @@ import IconResetSolid from 'instructure-icons/lib/Solid/IconResetSolid'
 
 import DeviceSelection from '../DeviceSelection'
 import StartOver from '../StartOver'
+
 import styles from './styles.css'
+import theme from './theme'
 
 import {
   READY,
@@ -19,7 +21,7 @@ import {
   SAVING
 } from '../../constants/CaptureStates'
 
-@themeable({}, styles)
+@themeable(theme, styles)
 export default class Controller extends Component {
   static propTypes = {
     children: PropTypes.node,

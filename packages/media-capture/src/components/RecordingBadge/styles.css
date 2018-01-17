@@ -1,21 +1,17 @@
-.signal {
-  background: rgb(196, 28, 28);
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  margin-left: 7px;
-  margin-top: 6px;
+.badge {
+  color: var(--fontColor);
+  background-color: var(--backgroundColor);
+  padding: var(--padding);
+
+  display: flex;
+  align-items: center;
 }
 
-.badge {
-  position: absolute;
-  color: rgb(255, 255, 255);
-  background-color: #73818a;
-  margin-bottom: 5px;
-  width: 61px;
-  height: 20px;
-  bottom: 0;
-  right: 0;
-  text-align: right;
-  border-radius: 0 0 4px 0;
+.signal {
+  background: var(--signalColor);
+  width: var(--signalSize);
+  height: var(--signalSize);
+  margin: var(--signalMargin);
+
+  border-radius: 50%;
 }

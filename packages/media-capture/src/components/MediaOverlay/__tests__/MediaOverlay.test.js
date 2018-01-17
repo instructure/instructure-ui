@@ -28,11 +28,6 @@ describe('<MediaOverlay />', () => {
 
   describe('captureStates', () => {
     describe('STARTING', () => {
-      it('renders a <CountdownContainer />', () => {
-        const overlay = testbed.render({ captureState: STARTING })
-        expect(overlay.find('CountdownContainer').length).to.eql(1)
-      })
-
       it('renders a <CountdownTimer />', () => {
         const overlay = testbed.render({ captureState: STARTING })
         expect(overlay.find('CountdownTimer').length).to.eql(1)
