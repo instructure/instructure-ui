@@ -23,6 +23,7 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -36,13 +37,28 @@ parent: MetricsList
 @themeable(theme, styles)
 export default class MetricsListItem extends Component {
   static propTypes = {
+    textAlign: PropTypes.oneOf(['start','center', 'end']),
     label: PropTypes.string.isRequired,
     value: PropTypes.string.isRequired
-  };
+  }
+  static defaultProps = {
+    textAlign: 'center'
+  }
 
   render () {
+    const {
+      textAlign
+    } = this.props
+
+    const classes = {
+      [styles.root]: true,
+      [styles[textAlign]]: true
+    }
+
     return (
-      <div role="row" className={styles.root}>
+      <div role="row"
+        className={classnames(classes)}
+      >
         <div role="rowheader" className={styles.label}>
           {this.props.label}
         </div>
