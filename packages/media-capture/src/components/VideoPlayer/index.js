@@ -192,6 +192,7 @@ export default class VideoPlayer extends Component {
           src={src}
           id={this.state.videoId}
           className={styles.video}
+          tabIndex="-1"
         />
         { controls(this.state, actions) }
       </div>

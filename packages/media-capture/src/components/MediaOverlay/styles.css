@@ -1,11 +1,19 @@
-.badge {
+.previewBadge {
+  color: var(--fontColor);
+  font-size: var(--fontSize);
+  background-color: var(--backgroundColor);
+  padding: var(--padding);
+
   position: absolute;
-  color: rgb(255, 255, 255);
-  font-size: 15px;
-  background-color: #73818a;
-  width: 80px;
-  height: auto;
   left: 15px;
   top: 15px;
   text-align: center;
+}
+
+.bottomBar {
+  position: absolute;
+  display: flex;
+  bottom: 0;
+  width: 100%;
+  height: var(--recordingBarHeight);
 }

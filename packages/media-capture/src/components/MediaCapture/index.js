@@ -3,9 +3,7 @@ import PropTypes from 'prop-types'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import MediaCaptureProvider from '../MediaCaptureProvider'
-import CaptureBackground from '../CaptureBackground'
 import CapturePresentation from '../CapturePresentation'
-import MediaCaptureClose from '../MediaCaptureClose'
 import MediaContainer from '../MediaContainer'
 import MediaOverlay from '../MediaOverlay'
 import Media from '../Media'
@@ -46,62 +44,39 @@ export default class MediaCapture extends Component {
     onClose: () => {}
   }
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      shown: true
-    }
-
-    this.close = this.close.bind(this)
-  }
-
-  close (currentState) {
-    this.setState({ shown: false }, () => {
-      this.props.onClose(currentState)
-    })
-  }
-
   render () {
-    if (!this.state.shown) return null
-
     return (
       <MediaCaptureProvider
+        onClose={this.props.onClose}
         store={store}
         render={
           ({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, soundMeter, devices }, actions }) => (
-            <CaptureBackground>
-              <CapturePresentation>
-                <MediaCaptureClose
+            <CapturePresentation>
+              <MediaContainer>
+                <MediaOverlay
                   captureState={captureState}
+                  soundMeter={soundMeter}
+                  msg={msg}
                   actions={actions}
-                  onClick={this.close}
                 />
-                <MediaContainer>
-                  <MediaOverlay
-                    captureState={captureState}
-                    soundMeter={soundMeter}
-                    msg={msg}
-                    actions={actions}
-                  />
-                  <Media
-                    captureState={captureState}
-                    videoSrc={videoSrc}
-                    videoDeviceId={videoDeviceId}
-                    audioDeviceId={audioDeviceId}
-                    actions={actions}
-                  />
-                </MediaContainer>
-                <Controller
+                <Media
                   captureState={captureState}
-                  devices={devices}
-                  audioDeviceId={audioDeviceId}
+                  videoSrc={videoSrc}
                   videoDeviceId={videoDeviceId}
+                  audioDeviceId={audioDeviceId}
                   actions={actions}
-                >
-                  <CTA captureState={captureState} actions={actions} />
-                </Controller>
-              </CapturePresentation>
-            </CaptureBackground>
+                />
+              </MediaContainer>
+              <Controller
+                captureState={captureState}
+                devices={devices}
+                audioDeviceId={audioDeviceId}
+                videoDeviceId={videoDeviceId}
+                actions={actions}
+              >
+                <CTA captureState={captureState} actions={actions} />
+              </Controller>
+            </CapturePresentation>
           )}
       />
     )

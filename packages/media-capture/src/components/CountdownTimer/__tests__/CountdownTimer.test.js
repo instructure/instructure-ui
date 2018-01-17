@@ -24,10 +24,10 @@ describe('<CountdownTimer />', () => {
     })
 
     it('invokes clearCountdown when the countdown reaches 0', () => {
-      const clearCountdown = testbed.spy(CountdownTimer.prototype, 'clearCountdown')
       const countdownTimer = testbed.render({
         countdownFrom: 5
       })
+      const clearCountdown = testbed.spy(countdownTimer.instance(), 'clearCountdown')
 
       expect(clearCountdown.callCount).to.eql(0)
       testbed.tick(5000)

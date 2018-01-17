@@ -33,7 +33,16 @@ class MediaCaptureProvider extends React.Component {
       errorOccurred: PropTypes.func.isRequired,
       devicesFound: PropTypes.func.isRequired,
       soundMeterInitialized: PropTypes.func.isRequired
-    }).isRequired
+    }).isRequired,
+    onClose: PropTypes.func
+  }
+
+  static defaultProps = {
+    onClose: (captureState) => {}
+  }
+
+  componentWillUnmount () {
+    this.props.onClose(this.props.state.captureState)
   }
 
   render () {

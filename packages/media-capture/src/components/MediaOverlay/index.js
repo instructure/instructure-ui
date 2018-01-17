@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
 import AudioSignal from '../AudioSignal'
-import CountdownContainer from '../CountdownContainer'
 import CountdownTimer from '../CountdownTimer'
 import Loading from '../Loading'
 import Message from '../Message'
@@ -17,9 +16,11 @@ import {
   ERROR,
   READY
 } from '../../constants/CaptureStates'
-import styles from './styles.css'
 
-@themeable({}, styles)
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
 export default class MediaOverlay extends Component {
   static propTypes = {
     captureState: PropTypes.string.isRequired,
@@ -48,11 +49,7 @@ export default class MediaOverlay extends Component {
     const CountdownTimerGuard = (state) => {
       if (state !== STARTING) return null
 
-      return (
-        <CountdownContainer>
-          <CountdownTimer actions={this.props.actions} />
-        </CountdownContainer>
-      )
+      return <CountdownTimer actions={this.props.actions} />
     }
 
     const PreviewBadgeGuard = (state) => {
@@ -60,7 +57,7 @@ export default class MediaOverlay extends Component {
 
       // needs i18n
       return (
-        <div className={styles.badge}>
+        <div className={styles.previewBadge}>
           PREVIEW
         </div>
       )
@@ -70,7 +67,7 @@ export default class MediaOverlay extends Component {
       if (state !== RECORDING) return null
 
       return (
-        <div>
+        <div className={styles.bottomBar}>
           <AudioSignal reduced soundMeter={this.props.soundMeter} />
           <RecordingBadge />
         </div>
@@ -80,7 +77,11 @@ export default class MediaOverlay extends Component {
     const ReadyGuard = (state) => {
       if (state !== READY) return null
 
-      return <AudioSignal soundMeter={this.props.soundMeter} />
+      return (
+        <div className={styles.bottomBar}>
+          <AudioSignal soundMeter={this.props.soundMeter} />
+        </div>
+      )
     }
 
     return (

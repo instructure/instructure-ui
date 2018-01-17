@@ -3,8 +3,9 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
+import theme from './theme'
 
-@themeable({}, styles)
+@themeable(theme, styles)
 export default class Timer extends Component {
   constructor (props) {
     super(props)
