@@ -21,18 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const path = require('path')
-
-module.exports = require('@instructure/ui-presets/karma')({
-  bundle: './tests.bundle.js',
-  coverageThreshold: {
-    global: {
-      lines: 91
-    },
-    each: {
-      lines: 0
-    }
-  },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
-})
+module.exports = require('@instructure/ui-presets/postcss')()

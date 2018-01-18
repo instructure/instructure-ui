@@ -34,6 +34,7 @@
     "@instructure/ui-layout": "^4.6.0",
     "@instructure/ui-polyfill-loader": "^4.6.0",
     "@instructure/ui-forms": "^4.6.0",
+    "@instructure/ui-menu": "^4.6.0",
     "@instructure/ui-motion": "^4.6.0",
     "@instructure/ui-pages": "^4.6.0",
     "@instructure/ui-pagination": "^4.6.0",

@@ -29,10 +29,7 @@ module.exports = require('@instructure/ui-presets/karma')({
   coverageThreshold: {
     global: {
       lines: 91
-    },
-    each: {
-      lines: 0
     }
   },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-menu')
 })

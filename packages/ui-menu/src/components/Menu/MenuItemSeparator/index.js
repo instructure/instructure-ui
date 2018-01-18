@@ -22,17 +22,25 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+import React, { Component } from 'react'
+import themeable from '@instructure/ui-themeable'
 
-module.exports = require('@instructure/ui-presets/karma')({
-  bundle: './tests.bundle.js',
-  coverageThreshold: {
-    global: {
-      lines: 91
-    },
-    each: {
-      lines: 0
-    }
-  },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
-})
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+parent: Menu
+---
+@module MenuItemSeparator
+**/
+@themeable(theme, styles)
+class MenuItemSeparator extends Component {
+  render () {
+    return (
+      <div {...this.props} role="presentation" className={styles.root} />
+    )
+  }
+}
+
+export default MenuItemSeparator

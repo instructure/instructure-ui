@@ -23,23 +23,22 @@
  */
 
 import React, { Component } from 'react'
-import themeable from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-/**
----
-parent: Menu
----
-@module MenuItemSeparator
-**/
-@themeable(theme, styles)
+import { MenuItemSeparator as UIMenuItemSeparator } from '@instructure/ui-menu/lib/components/Menu'
+
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-menu'
+))
 class MenuItemSeparator extends Component {
+  static propTypes = {
+    ...UIMenuItemSeparator.PropTypes
+  }
+
   render () {
-    return (
-      <div {...this.props} role="presentation" className={styles.root} />
-    )
+    return <UIMenuItemSeparator {...this.props} />
   }
 }
 

@@ -95,6 +95,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Link/*',
       'packages/ui-core/src/components/List/**',
       'packages/ui-core/src/components/Media/*',
+      'packages/ui-core/src/components/Menu/**',
       'packages/ui-core/src/components/MetricsList/**',
       'packages/ui-core/src/components/Pagination/*',
       'packages/ui-core/src/components/Pill/*',

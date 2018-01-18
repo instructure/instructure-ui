@@ -136,6 +136,10 @@
     "replace": "@instructure/ui-pagination/lib/components/Pagination"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Menu",
+    "replace": "@instructure/ui-menu/lib/components/Menu"
+  },
+  {
     "pattern": "^instructure-ui/lib/themes",
     "replace": "@instructure/ui-themes/lib"
   },

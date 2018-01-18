@@ -22,17 +22,9 @@
  * SOFTWARE.
  */
 
-const path = require('path')
+Testbed.init()
 
-module.exports = require('@instructure/ui-presets/karma')({
-  bundle: './tests.bundle.js',
-  coverageThreshold: {
-    global: {
-      lines: 91
-    },
-    each: {
-      lines: 0
-    }
-  },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
-})
+require('@instructure/ui-themes/lib/canvas')
+
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)

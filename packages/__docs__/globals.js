@@ -37,6 +37,7 @@ import * as UICore from '@instructure/ui-core/lib/components'
 import * as UIElements from '@instructure/ui-elements/lib/components'
 import * as UIForms from '@instructure/ui-forms/lib/components'
 import * as UILayout from '@instructure/ui-layout/lib/components'
+import * as UIMenu from '@instructure/ui-menu/lib/components'
 import * as UIMotion from '@instructure/ui-motion/lib/components'
 import * as UISVGImages from '@instructure/ui-svg-images/lib/components'
 import * as UIPages from '@instructure/ui-pages/lib/components'
@@ -69,6 +70,7 @@ const components = Object.assign(
   UIElements,
   UIForms,
   UILayout,
+  UIMenu,
   UIMotion,
   UISVGImages,
   UIPages,

@@ -22,17 +22,5 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-
-module.exports = require('@instructure/ui-presets/karma')({
-  bundle: './tests.bundle.js',
-  coverageThreshold: {
-    global: {
-      lines: 91
-    },
-    each: {
-      lines: 0
-    }
-  },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
-})
+ export Menu, { MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
+ export MenuItemFlyout from './Menu/MenuItemFlyout'

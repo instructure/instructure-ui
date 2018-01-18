@@ -22,17 +22,10 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-
-module.exports = require('@instructure/ui-presets/karma')({
-  bundle: './tests.bundle.js',
-  coverageThreshold: {
-    global: {
-      lines: 91
-    },
-    each: {
-      lines: 0
-    }
-  },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
-})
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
+}

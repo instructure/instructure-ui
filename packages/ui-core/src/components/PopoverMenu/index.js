@@ -36,7 +36,7 @@ import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimatio
 import themeable from '@instructure/ui-themeable'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
-import Menu, { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '../Menu'
+import Menu, { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '@instructure/ui-menu/lib/components/Menu'
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 
 import styles from './styles.css'

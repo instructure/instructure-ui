@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-core",
+  "name": "@instructure/ui-menu",
   "version": "4.6.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -13,7 +13,6 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "test": "ui-test",
-    "test:mocha": "ui-test --mocha",
     "test:watch": "ui-test --watch",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
@@ -25,31 +24,17 @@
   "devDependencies": {
     "@instructure/ui-presets": "^4.6.0",
     "@instructure/ui-themes": "^4.6.0",
-    "postcss-input-range": "4.0.0",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^4.6.0",
-    "@instructure/ui-breadcrumb": "^4.6.0",
-    "@instructure/ui-buttons": "^4.6.0",
-    "@instructure/ui-container": "^4.6.0",
     "@instructure/ui-elements": "^4.6.0",
-    "@instructure/ui-forms": "^4.6.0",
     "@instructure/ui-icons": "^4.6.0",
-    "@instructure/ui-layout": "^4.6.0",
-    "@instructure/ui-menu": "^4.6.0",
-    "@instructure/ui-motion": "^4.6.0",
-    "@instructure/ui-pagination": "^4.6.0",
-    "@instructure/ui-portal": "^4.6.0",
     "@instructure/ui-themeable": "^4.6.0",
-    "@instructure/ui-toggle-details": "^4.6.0",
-    "@instructure/ui-tree-browser": "^4.6.0",
     "@instructure/ui-utils": "^4.6.0",
+    "prop-types": "^15.5.10",
     "classnames": "^2.2.5",
-    "keycode": "^2.1.8",
-    "no-scroll": "^2.1.0",
-    "prop-types": "^15.5.10"
+    "keycode": "^2.1.8"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",
