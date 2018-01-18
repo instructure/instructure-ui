@@ -26,22 +26,11 @@ import {
   SAVING,
   STARTING,
   LOADING,
-  ERROR
+  ERROR,
+  getInitialState
 } from '../constants/CaptureStates'
 
-const initialState = {
-  captureState: LOADING,
-  videoSrc: '',
-  msg: '',
-  devices: {
-    audioinput: [],
-    videoinput: []
-  },
-  audioDeviceId: '',
-  videoDeviceId: ''
-}
-
-export default function reducer (state = initialState, action) {
+export default function reducer (state, action) {
   switch (action.type) {
     case AUDIO_DEVICE_CHANGED:
       return {
@@ -96,7 +85,7 @@ export default function reducer (state = initialState, action) {
         captureState: ERROR
       }
 
-    case FINISH_CLICKED:
+    case FINISH_CLICKED: {
       if (state.captureState !== RECORDING) { return state }
 
       state.mediaRecorder && state.mediaRecorder.stop()
@@ -104,16 +93,20 @@ export default function reducer (state = initialState, action) {
 
       return {
         ...state,
+        fileName: action.fileName,
         captureState: PREVIEWSAVE
       }
+    }
 
-    case ONCOMPLETE:
+    case ONCOMPLETE: {
       if (state.captureState !== SAVING) { return state }
 
+      state.onCompleted(new File([state.videoBlob], state.fileName, { type: 'webm' }))
+
       return {
-        ...state,
-        captureState: FINISHED
+        ...getInitialState()
       }
+    }
 
     case MEDIA_RECORDER_INITIALIZED:
 
@@ -127,6 +120,7 @@ export default function reducer (state = initialState, action) {
 
       return {
         ...state,
+        fileName: action.fileName,
         captureState: SAVING
       }
 
@@ -145,8 +139,7 @@ export default function reducer (state = initialState, action) {
       state.soundMeter && state.soundMeter.stop()
 
       return {
-        ...state,
-        captureState: READY
+        ...getInitialState()
       }
 
     case TITLE_EDITED:
@@ -164,7 +157,8 @@ export default function reducer (state = initialState, action) {
     case VIDEO_OBJECT_GENERATED:
       return {
         ...state,
-        videoSrc: action.src
+        videoSrc: action.src,
+        videoBlob: action.blob
       }
 
     default:

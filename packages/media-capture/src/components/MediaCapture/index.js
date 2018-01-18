@@ -12,9 +12,7 @@ import Media from '../Media'
 import Controller from '../Controller'
 import CTA from '../CTA'
 import reducer from '../../reducers'
-import { STARTING } from '../../constants/CaptureStates'
-
-const store = createStore(reducer, applyMiddleware(thunk))
+import { STARTING, LOADING, getInitialState } from '../../constants/CaptureStates'
 
 /**
 ---
@@ -48,14 +46,16 @@ export default class MediaCapture extends Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      shown: true
-    }
 
-    this.close = this.close.bind(this)
+    const initialState = getInitialState(this.props.onCompleted)
+
+    this.state = {
+      shown: true,
+      store: createStore(reducer, initialState, applyMiddleware(thunk))
+    }
   }
 
-  close (currentState) {
+  close = (currentState) => {
     this.setState({ shown: false }, () => {
       this.props.onClose(currentState)
     })
@@ -66,9 +66,21 @@ export default class MediaCapture extends Component {
 
     return (
       <MediaCaptureProvider
-        store={store}
+        store={this.state.store}
         render={
-          ({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, soundMeter, devices }, actions }) => (
+          ({
+            state: {
+              captureState,
+              msg,
+              videoSrc,
+              videoDeviceId,
+              audioDeviceId,
+              soundMeter,
+              devices,
+              fileName
+            },
+            actions
+          }) => (
             <CaptureBackground>
               <CapturePresentation>
                 <MediaCaptureClose
@@ -93,6 +105,7 @@ export default class MediaCapture extends Component {
                 </MediaContainer>
                 <Controller
                   captureState={captureState}
+                  fileName={fileName}
                   devices={devices}
                   audioDeviceId={audioDeviceId}
                   videoDeviceId={videoDeviceId}

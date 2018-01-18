@@ -3,24 +3,6 @@ import * as types from '../../constants/ActionTypes'
 import * as states from '../../constants/CaptureStates'
 
 describe('capture reducer', () => {
-  it('should handle initial state', () => {
-    expect(
-      reducer(undefined, {})
-    ).to.deep.equal(
-      {
-        captureState: states.LOADING,
-        msg: '',
-        videoSrc: '',
-        audioDeviceId: '',
-        videoDeviceId: '',
-        devices: {
-          audioinput: [],
-          videoinput: []
-        }
-      }
-    )
-  })
-
   it('should handle AUDIO_DEVICE_CHANGED', () => {
     expect(
       reducer([], {
@@ -103,10 +85,10 @@ describe('capture reducer', () => {
     expect(
       reducer(
         { captureState: states.RECORDING },
-        { type: types.FINISH_CLICKED }
+        { type: types.FINISH_CLICKED, fileName: 'this is a file name' }
       )
     ).to.deep.equal(
-      { captureState: states.PREVIEWSAVE }
+      { captureState: states.PREVIEWSAVE, fileName: 'this is a file name' }
     )
 
     expect(
@@ -122,11 +104,11 @@ describe('capture reducer', () => {
   it('should handle ONCOMPLETE', () => {
     expect(
       reducer(
-        { captureState: states.SAVING },
+        { captureState: states.SAVING, onCompleted: () => {} },
         { type: types.ONCOMPLETE }
       )
     ).to.deep.equal(
-      { captureState: states.FINISHED }
+      { ...states.getInitialState() }
     )
 
     expect(
@@ -143,10 +125,10 @@ describe('capture reducer', () => {
     expect(
       reducer(
         { captureState: states.PREVIEWSAVE },
-        { type: types.SAVE_CLICKED }
+        { type: types.SAVE_CLICKED, fileName: 'this is a file name' }
       )
     ).to.deep.equal(
-      { captureState: states.SAVING }
+      { captureState: states.SAVING, fileName: 'this is a file name' }
     )
 
     expect(
@@ -206,7 +188,7 @@ describe('capture reducer', () => {
         { type: types.STARTOVER_CLICKED }
       )
     ).to.deep.equal(
-      { captureState: states.READY }
+      { ...states.getInitialState() }
     )
 
     expect(
@@ -267,10 +249,10 @@ describe('capture reducer', () => {
     expect(
       reducer(
         { captureState: states.PREVIEWSAVE },
-        { type: types.VIDEO_OBJECT_GENERATED, src: 'blob:1234asdf23' }
+        { type: types.VIDEO_OBJECT_GENERATED, src: 'blob:1234asdf23', blob: '[BLOB]' }
       )
     ).to.deep.equal(
-      { captureState: states.PREVIEWSAVE, videoSrc: 'blob:1234asdf23' }
+      { captureState: states.PREVIEWSAVE, videoSrc: 'blob:1234asdf23', videoBlob: '[BLOB]' }
     )
   })
 

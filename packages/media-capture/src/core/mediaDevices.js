@@ -2,7 +2,7 @@ import SoundMeter from './soundMeter'
 
 const defaultConstraints = {
   audio: {
-    sampleRate:48000,
+    sampleRate: 48000,
     channelCount: 2,
     volume: 1.0
   },

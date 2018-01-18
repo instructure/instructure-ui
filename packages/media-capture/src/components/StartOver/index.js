@@ -22,8 +22,8 @@ export default class StartOver extends Component {
 
     // needs i18n
     return (
-      <Button onClick={actions.startoverClicked} variant="light">
-        <IconResetSolid />
+      <Button onClick={actions.startoverClicked} variant="light" size="small">
+        <IconResetSolid width="0.8em" height="0.8em" />
         Start Over
       </Button>
     )

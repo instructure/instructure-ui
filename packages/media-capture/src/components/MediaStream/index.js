@@ -117,7 +117,7 @@ export default class MediaStream extends Component {
 
   blobSuccess = (blob) => {
     const src = window.URL.createObjectURL(blob)
-    this.props.actions.videoObjectGenerated(src)
+    this.props.actions.videoObjectGenerated(src, blob)
   }
 
   error = (err) => {

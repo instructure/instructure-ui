@@ -74,8 +74,7 @@ export default class CTA extends Component {
 
     return (
       StartGuard(captureState) ||
-      FinishGuard(captureState) ||
-      PreviewAndSaveGuard(captureState)
+      FinishGuard(captureState)
     )
   }
 }
