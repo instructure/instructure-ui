@@ -22,22 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import UIBillboard from '@instructure/ui-billboard/lib/components/Billboard'
+Testbed.init()
 
-@deprecated('5.0.0', null, changedPackageWarning(
- 'ui-core',
- 'ui-billboard'
-))
-class Billboard extends Component {
- static propTypes = {
-   ...UIBillboard.PropTypes
- }
+require('@instructure/ui-themes/lib/canvas')
 
- render () {
-   return <UIBillboard {...this.props} />
- }
-}
-
-export default Billboard
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)

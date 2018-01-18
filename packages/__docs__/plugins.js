@@ -84,6 +84,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Autocomplete/*',
       'packages/ui-core/src/components/Avatar/*',
       'packages/ui-core/src/components/Badge/*',
+      'packages/ui-core/src/components/Billboard/*',
       'packages/ui-core/src/components/Button/*',
       'packages/ui-core/src/components/Breadcrumb/*',
       'packages/ui-core/src/components/CloseButton/*',

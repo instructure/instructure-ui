@@ -21,23 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import UIBillboard from '@instructure/ui-billboard/lib/components/Billboard'
-
-@deprecated('5.0.0', null, changedPackageWarning(
- 'ui-core',
- 'ui-billboard'
-))
-class Billboard extends Component {
- static propTypes = {
-   ...UIBillboard.PropTypes
- }
-
- render () {
-   return <UIBillboard {...this.props} />
- }
-}
-
-export default Billboard
+export * from './components'

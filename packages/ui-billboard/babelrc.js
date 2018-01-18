@@ -22,22 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import UIBillboard from '@instructure/ui-billboard/lib/components/Billboard'
-
-@deprecated('5.0.0', null, changedPackageWarning(
- 'ui-core',
- 'ui-billboard'
-))
-class Billboard extends Component {
- static propTypes = {
-   ...UIBillboard.PropTypes
- }
-
- render () {
-   return <UIBillboard {...this.props} />
- }
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }
-
-export default Billboard

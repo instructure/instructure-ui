@@ -20,6 +20,10 @@
     "replace": "@instructure/ui-elements/lib/components/Badge"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Billboard",
+    "replace": "@instructure/ui-billboard/lib/components/Billboard"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Breadcrumb",
     "replace": "@instructure/ui-breadcrumb/lib/components/Breadcrumb"
   },

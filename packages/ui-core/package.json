@@ -31,6 +31,7 @@
   },
   "dependencies": {
     "@instructure/ui-a11y": "^4.6.0",
+    "@instructure/ui-billboard": "^4.6.0",
     "@instructure/ui-breadcrumb": "^4.6.0",
     "@instructure/ui-buttons": "^4.6.0",
     "@instructure/ui-container": "^4.6.0",
