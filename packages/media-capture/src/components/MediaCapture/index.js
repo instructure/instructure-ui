@@ -9,10 +9,8 @@ import MediaOverlay from '../MediaOverlay'
 import Media from '../Media'
 import Controller from '../Controller'
 import CTA from '../CTA'
-import reducer from '../../reducers'
-import { STARTING } from '../../constants/CaptureStates'
-
-const store = createStore(reducer, applyMiddleware(thunk))
+import { reducer, getInitialState } from '../../reducers'
+import { STARTING, LOADING } from '../../constants/CaptureStates'
 
 /**
 ---
@@ -44,13 +42,35 @@ export default class MediaCapture extends Component {
     onClose: () => {}
   }
 
+  constructor (props) {
+    super(props)
+
+    const initialState = getInitialState(this.props.onCompleted)
+
+    this.state = {
+      store: createStore(reducer, initialState, applyMiddleware(thunk))
+    }
+  }
+
   render () {
     return (
       <MediaCaptureProvider
         onClose={this.props.onClose}
-        store={store}
+        store={this.state.store}
         render={
-          ({ state: { captureState, msg, videoSrc, videoDeviceId, audioDeviceId, soundMeter, devices }, actions }) => (
+          ({
+            state: {
+              captureState,
+              msg,
+              videoSrc,
+              videoDeviceId,
+              audioDeviceId,
+              soundMeter,
+              devices,
+              fileName
+            },
+            actions
+          }) => (
             <CapturePresentation>
               <MediaContainer>
                 <MediaOverlay
@@ -62,13 +82,16 @@ export default class MediaCapture extends Component {
                 <Media
                   captureState={captureState}
                   videoSrc={videoSrc}
-                  videoDeviceId={videoDeviceId}
+                  fileName={fileName}
+                  devices={devices}
                   audioDeviceId={audioDeviceId}
+                  videoDeviceId={videoDeviceId}
                   actions={actions}
                 />
               </MediaContainer>
               <Controller
                 captureState={captureState}
+                fileName={fileName}
                 devices={devices}
                 audioDeviceId={audioDeviceId}
                 videoDeviceId={videoDeviceId}

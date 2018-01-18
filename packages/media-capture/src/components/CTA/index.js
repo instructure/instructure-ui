@@ -55,27 +55,9 @@ export default class CTA extends Component {
       )
     }
 
-    const PreviewAndSaveGuard = (state) => {
-      if (![PREVIEWSAVE, SAVING].includes(state)) return null
-
-      // needs i18n
-      return (
-        <Button
-          onClick={actions.saveClicked}
-          disabled={state === SAVING}
-          variant="primary"
-          size="large"
-          margin="0 0 0 medium"
-        >
-          Save
-        </Button>
-      )
-    }
-
     return (
       StartGuard(captureState) ||
-      FinishGuard(captureState) ||
-      PreviewAndSaveGuard(captureState)
+      FinishGuard(captureState)
     )
   }
 }

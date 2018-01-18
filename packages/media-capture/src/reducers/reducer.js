@@ -29,19 +29,24 @@ import {
   ERROR
 } from '../constants/CaptureStates'
 
-const initialState = {
-  captureState: LOADING,
-  videoSrc: '',
-  msg: '',
-  devices: {
-    audioinput: [],
-    videoinput: []
-  },
-  audioDeviceId: '',
-  videoDeviceId: ''
+export function getInitialState (onCompleted) {
+  return {
+    captureState: LOADING,
+    videoSrc: '',
+    videoBlob: '',
+    msg: '',
+    devices: {
+      audioinput: [],
+      videoinput: []
+    },
+    audioDeviceId: '',
+    videoDeviceId: '',
+    fileName: '',
+    onCompleted: onCompleted
+  }
 }
 
-export default function reducer (state = initialState, action) {
+export function reducer (state, action) {
   switch (action.type) {
     case AUDIO_DEVICE_CHANGED:
       return {
@@ -82,6 +87,7 @@ export default function reducer (state = initialState, action) {
       }
 
     case DEVICES_FOUND:
+
       return {
         ...state,
         devices: action.devices,
@@ -96,7 +102,7 @@ export default function reducer (state = initialState, action) {
         captureState: ERROR
       }
 
-    case FINISH_CLICKED:
+    case FINISH_CLICKED: {
       if (state.captureState !== RECORDING) { return state }
 
       state.mediaRecorder && state.mediaRecorder.stop()
@@ -104,16 +110,22 @@ export default function reducer (state = initialState, action) {
 
       return {
         ...state,
+        fileName: action.fileName,
         captureState: PREVIEWSAVE
       }
+    }
 
-    case ONCOMPLETE:
+    case ONCOMPLETE: {
       if (state.captureState !== SAVING) { return state }
 
+      state.onCompleted(new File([state.videoBlob], state.fileName, { type: 'webm' }))
+
       return {
-        ...state,
-        captureState: FINISHED
+        ...getInitialState(state.onCompleted),
+        soundMeter: state.soundMeter,
+        captureState: READY
       }
+    }
 
     case MEDIA_RECORDER_INITIALIZED:
 
@@ -127,6 +139,7 @@ export default function reducer (state = initialState, action) {
 
       return {
         ...state,
+        fileName: action.fileName,
         captureState: SAVING
       }
 
@@ -141,11 +154,14 @@ export default function reducer (state = initialState, action) {
     case STARTOVER_CLICKED:
       if (![RECORDING, PREVIEWSAVE].includes(state.captureState)) { return state }
 
-      state.mediaRecorder && state.mediaRecorder.stop()
-      state.soundMeter && state.soundMeter.stop()
+      state.mediaRecorder && state.mediaRecorder.state !== 'inactive' && state.mediaRecorder.stop()
 
       return {
-        ...state,
+        ...getInitialState(state.onCompleted),
+        devices: state.devices,
+        audioDeviceId: state.audioDeviceId,
+        videoDeviceId: state.videoDeviceId,
+        soundMeter: state.soundMeter,
         captureState: READY
       }
 
@@ -164,7 +180,8 @@ export default function reducer (state = initialState, action) {
     case VIDEO_OBJECT_GENERATED:
       return {
         ...state,
-        videoSrc: action.src
+        videoSrc: action.src,
+        videoBlob: action.blob
       }
 
     default:
