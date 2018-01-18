@@ -36,6 +36,7 @@
     "@instructure/ui-utils": "^4.6.0",
     "classnames": "^2.2.5",
     "instructure-icons": "^4.3.2",
+    "luxon": "^0.3.1",
     "prop-types": "^15.6.0",
     "react": "^15.6.1",
     "react-redux": "^5.0.6",

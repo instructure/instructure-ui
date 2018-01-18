@@ -12,6 +12,7 @@ import Controller from '../index'
 describe('<Controller />', () => {
   const props = {
     captureState: '',
+    fileName: '',
     devices: {
       audioinput: [],
       videoinput: []
@@ -51,22 +52,46 @@ describe('<Controller />', () => {
 
   context('when RECORDING state', () => {
     it('renders a reset button', () => {
-      const controller = testbed.render({ captureState: RECORDING, actions: { startoverClicked: () => {}} })
+      const controller = testbed.render({
+        captureState: RECORDING, actions: { startoverClicked: () => {} }
+      })
       expect(controller.find('StartOver').length).to.eql(1)
     })
   })
 
   context('when PREVIEWSAVE state', () => {
-    it('renders a text input for file name', () => {
-      const controller = testbed.render({ captureState: PREVIEWSAVE })
-      expect(controller.find('TextInput').length).to.eql(1)
+    it('renders a <FileSave />', () => {
+      const controller = testbed.render({
+        captureState: PREVIEWSAVE, actions: { saveClicked: () => {}, startoverClicked: () => {}}
+      })
+
+      expect(controller.find('FileSave').length).to.eql(1)
+    })
+
+    it('renders a <StartOver />', () => {
+      const controller = testbed.render({
+        captureState: PREVIEWSAVE, actions: { saveClicked: () => {}, startoverClicked: () => {}}
+      })
+
+      expect(controller.find('StartOver').length).to.eql(1)
     })
   })
 
   context('when SAVING state', () => {
-    it('renders a text input for file name', () => {
-      const controller = testbed.render({ captureState: SAVING })
-      expect(controller.find('TextInput').length).to.eql(1)
+    it('renders a <FileSave />', () => {
+      const controller = testbed.render({
+        captureState: PREVIEWSAVE, actions: { saveClicked: () => {}, startoverClicked: () => {} }
+      })
+
+      expect(controller.find('FileSave').length).to.eql(1)
+    })
+
+    it('renders a <StartOver />', () => {
+      const controller = testbed.render({
+        captureState: PREVIEWSAVE, actions: { saveClicked: () => {}, startoverClicked: () => {}}
+      })
+
+      expect(controller.find('StartOver').length).to.eql(1)
     })
   })
 })

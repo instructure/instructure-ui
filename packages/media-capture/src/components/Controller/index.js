@@ -3,12 +3,11 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import Button from '@instructure/ui-core/lib/components/Button'
-import TextInput from '@instructure/ui-core/lib/components/TextInput'
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
 import IconSettingsSolid from 'instructure-icons/lib/Solid/IconSettingsSolid'
 import IconResetSolid from 'instructure-icons/lib/Solid/IconResetSolid'
 
 import DeviceSelection from '../DeviceSelection'
+import FileSave from '../FileSave'
 import StartOver from '../StartOver'
 
 import styles from './styles.css'
@@ -26,6 +25,7 @@ export default class Controller extends Component {
   static propTypes = {
     children: PropTypes.node,
     captureState: PropTypes.string.isRequired,
+    fileName: PropTypes.string.isRequired,
     devices: PropTypes.shape({
       audioinput: PropTypes.array,
       videoinput: PropTypes.array
@@ -83,11 +83,12 @@ export default class Controller extends Component {
 
       return (
         <div className={styles.container}>
-          <TextInput
-            label={<ScreenReaderContent>Name{/* needs i18n */}</ScreenReaderContent>}
-            placeholder="A filename" /* needs i18n */
-          />
-          {this.props.children}
+          <div className={styles.flexed}>
+            <FileSave captureState={state} fileName={this.props.fileName} actions={{...this.props.actions}} />
+          </div>
+          <div className={classNames({[styles.flexed]: true, [styles.right]: true})}>
+            <StartOver actions={{...this.props.actions}} />
+          </div>
         </div>
       )
     }
