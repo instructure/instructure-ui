@@ -1,0 +1,108 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
+
+import Container from '@instructure/ui-container/lib/components/Container'
+import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import themeable from '@instructure/ui-themeable'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+
+import BreadcrumbLink from './BreadcrumbLink'
+
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+category: components/navigation
+---
+**/
+
+@themeable(theme, styles)
+export default class Breadcrumb extends Component {
+  static propTypes = {
+    /**
+    * children of type BreadcrumbLink
+    */
+    children: CustomPropTypes.Children.oneOf([BreadcrumbLink]),
+    /**
+    * An accessible label for the navigation
+    */
+    label: PropTypes.string.isRequired,
+    /**
+    * Sets the font-size of the breadcrumb text
+    */
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+    */
+    margin: CustomPropTypes.spacing
+  }
+
+  static defaultProps = {
+    size: 'medium'
+  }
+
+  renderChildren () {
+    const numChildren = this.props.children ? this.props.children.length : 0
+    const style = {
+      maxWidth: `${Math.floor(100 / numChildren)}%`
+    }
+    return React.Children.map(this.props.children,
+      (child, index) => {
+        return (
+          <li className={styles.crumb} style={style}>
+            {child}
+            {index < (numChildren - 1) && <IconArrowOpenRight className={styles.separator} />}
+          </li>
+        )
+      }
+    )
+  }
+
+  render () {
+    const classes = {
+      [styles.root]: true,
+      [styles[this.props.size]]: true
+    }
+    return (
+      <Container
+        role="navigation"
+        as="div"
+        margin={this.props.margin}
+      >
+        <ol className={classnames(classes)} aria-label={this.props.label}>
+          {this.renderChildren()}
+        </ol>
+      </Container>
+    )
+  }
+}
+
+export { default as BreadcrumbLink } from './BreadcrumbLink'

@@ -22,25 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+const path = require('path')
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-breadcrumb'
-))
-class Breadcrumb extends Component {
-  static propTypes = {
-    ...UIBreadcrumb.PropTypes
-  }
-
-  render () {
-    return <UIBreadcrumb {...this.props} />
-  }
-}
-
-export default Breadcrumb
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 100
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-breadcrumb')
+})

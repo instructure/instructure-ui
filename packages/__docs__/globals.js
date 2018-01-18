@@ -30,6 +30,7 @@ import 'moment/min/locales'
 import lorem from 'lorem-ipsum'
 
 import * as UIA11y from '@instructure/ui-a11y'
+import * as UIBreadcrumb from '@instructure/ui-breadcrumb'
 import * as UIContainer from '@instructure/ui-container'
 import * as UICore from '@instructure/ui-core'
 import * as UIElements from '@instructure/ui-elements'
@@ -86,6 +87,7 @@ const globals = Object.assign(
   },
   UICore,
   UIA11y,
+  UIBreadcrumb,
   UIContainer,
   UIElements,
   UIForms,

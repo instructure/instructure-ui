@@ -22,25 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+Testbed.init()
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+require('@instructure/ui-themes/lib/canvas')
 
-import UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-breadcrumb'
-))
-class Breadcrumb extends Component {
-  static propTypes = {
-    ...UIBreadcrumb.PropTypes
-  }
-
-  render () {
-    return <UIBreadcrumb {...this.props} />
-  }
-}
-
-export default Breadcrumb
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)
