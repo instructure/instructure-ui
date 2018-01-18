@@ -34,7 +34,7 @@ export default class MediaCaptureClose extends Component {
     return (
       <div className={styles.close}>
         <CloseButton className="close" onClick={this.handleClick} size="large">
-          Close {/* needs i18n */}
+          Close
         </CloseButton>
       </div>
     )

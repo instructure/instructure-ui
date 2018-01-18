@@ -22,9 +22,9 @@ describe('mediaCapture actions', () => {
   })
 
   it('finishClicked should create FINISH_CLICKED action', () => {
-    expect(actions.finishClicked()).to.deep.equal({
-      type: types.FINISH_CLICKED
-    })
+    const dispatch = sinon.stub()
+    actions.finishClicked()(dispatch)
+    expect(dispatch).to.have.been.called
   })
 
   it('onComplete should create ONCOMPLETE action', () => {
@@ -55,9 +55,10 @@ describe('mediaCapture actions', () => {
 
   it('saveClicked should dispatch SAVE_CLICKED action', () => {
     const dispatch = sinon.stub()
-    actions.saveClicked()(dispatch)
+    actions.saveClicked('file')(dispatch)
     expect(dispatch).to.have.been.calledWith({
-      type: types.SAVE_CLICKED
+      type: types.SAVE_CLICKED,
+      fileName: 'file'
     })
   })
 
@@ -75,9 +76,10 @@ describe('mediaCapture actions', () => {
   })
 
   it('videoObjectGenerated should create VIDEO_OBJECT_GENERATED action', () => {
-    expect(actions.videoObjectGenerated('src')).to.deep.equal({
+    expect(actions.videoObjectGenerated('src', 'blob')).to.deep.equal({
       type: types.VIDEO_OBJECT_GENERATED,
-      src: 'src'
+      src: 'src',
+      blob: 'blob'
     })
   })
 

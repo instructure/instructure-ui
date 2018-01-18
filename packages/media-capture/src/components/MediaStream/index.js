@@ -48,7 +48,8 @@ export default class MediaStream extends Component {
 
   shouldComponentUpdate (nextProps) {
     return (
-      this.props.captureState !== nextProps.captureState || this.props.audioDeviceId !== nextProps.audioDeviceId
+      this.props.captureState !== nextProps.captureState ||
+      this.deviceChanged(nextProps.audioDeviceId, nextProps.videoDeviceId)
     )
   }
 
@@ -62,15 +63,26 @@ export default class MediaStream extends Component {
     enumerateDevices(this.deviceSuccess, this.error)
   }
 
-  componentDidUpdate () {
-    if (this.props.captureState === RECORDING && this.stream) {
-      getUserMedia(
-        this.props.audioDeviceId,
-        this.props.videoDeviceId,
-        this.streamSuccess,
-        this.error
-      )
+  deviceChanged = (audioId, videoId) => {
+    return (
+      this.props.audioDeviceId !== audioId ||
+      this.props.videoDeviceId !== videoId
+    )
+  }
 
+  componentDidUpdate (prevProps) {
+    if (this.props.captureState === READY && this.stream) {
+      if (this.deviceChanged(prevProps.audioDeviceId, prevProps.videoDeviceId)) {
+        getUserMedia(
+          this.props.audioDeviceId,
+          this.props.videoDeviceId,
+          this.streamSuccess,
+          this.error
+        )
+      }
+    }
+
+    if (this.props.captureState === RECORDING && this.stream) {
       startMediaRecorder(
         this.stream,
         this.onMediaRecorderInit,
@@ -121,7 +133,7 @@ export default class MediaStream extends Component {
 
   blobSuccess = (blob) => {
     const src = window.URL.createObjectURL(blob)
-    this.props.actions.videoObjectGenerated(src)
+    this.props.actions.videoObjectGenerated(src, blob)
   }
 
   error = (err) => {
