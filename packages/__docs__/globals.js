@@ -37,6 +37,7 @@ import * as UIForms from '@instructure/ui-forms'
 import * as UILayout from '@instructure/ui-layout'
 import * as UIMotion from '@instructure/ui-motion'
 import * as UISVGImages from '@instructure/ui-svg-images'
+import * as UIPagination from '@instructure/ui-pagination'
 import * as UIPortal from '@instructure/ui-portal'
 
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
@@ -91,6 +92,7 @@ const globals = Object.assign(
   UILayout,
   UIMotion,
   UISVGImages,
+  UIPagination,
   UIPortal
 )
 

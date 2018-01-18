@@ -22,25 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIPagination from '@instructure/ui-pagination/lib/components/Pagination'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-pagination'
-))
-class Pagination extends Component {
-  static propTypes = {
-    ...UIPagination.PropTypes
-  }
-
-  render () {
-    return <UIPagination {...this.props} />
-  }
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }
-
-export default Pagination

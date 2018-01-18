@@ -22,25 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+const path = require('path')
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIPagination from '@instructure/ui-pagination/lib/components/Pagination'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-pagination'
-))
-class Pagination extends Component {
-  static propTypes = {
-    ...UIPagination.PropTypes
-  }
-
-  render () {
-    return <UIPagination {...this.props} />
-  }
-}
-
-export default Pagination
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 94
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-pagination')
+})

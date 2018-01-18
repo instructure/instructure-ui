@@ -100,6 +100,10 @@
     "replace": "@instructure/ui-a11y/lib/components/ScreenReaderContent"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Pagination",
+    "replace": "@instructure/ui-pagination/lib/components/Pagination"
+  },
+  {
     "pattern": "^instructure-ui/lib/themes",
     "replace": "@instructure/ui-themes/lib"
   },
