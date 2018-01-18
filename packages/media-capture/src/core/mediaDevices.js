@@ -2,7 +2,7 @@ import SoundMeter from './soundMeter'
 
 const defaultConstraints = {
   audio: {
-    sampleRate:48000,
+    sampleRate: 48000,
     channelCount: 2,
     volume: 1.0
   },
@@ -17,11 +17,11 @@ export function getUserMedia (audioId, videoId, success, error) {
   const constraints = {
     audio: {
       ...defaultConstraints.audio,
-      id: audioId
+      deviceId: audioId
     },
     video: {
       ...defaultConstraints.video,
-      id: videoId
+      deviceId: videoId
     }
   }
 

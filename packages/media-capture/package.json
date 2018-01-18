@@ -41,5 +41,9 @@
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0"
+  },
+  "peerDependencies": {
+    "moment": "^2.10.6",
+    "moment-timezone": "^0.5.14"
   }
 }

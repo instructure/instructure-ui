@@ -1,3 +1,1 @@
-import reducer from './reducer'
-
-export default reducer
+export { reducer, getInitialState } from './reducer'

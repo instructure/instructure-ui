@@ -47,27 +47,4 @@ describe('<CTA />', () => {
       expect(cta.find('Button').prop('onClick')).to.eql(finishClicked)
     })
   })
-
-  context('when PREVIEWSAVE state', () => {
-    it('renders a save button', () => {
-      const saveClicked = testbed.stub()
-      const cta = testbed.render({
-        actions: { ...actionStubs, saveClicked },
-        captureState: PREVIEWSAVE
-      })
-
-      expect(cta.text()).to.eql('Save')
-      expect(cta.find('Button').prop('onClick')).to.eql(saveClicked)
-      expect(cta.find('Button').prop('disabled')).to.eql(false)
-    })
-  })
-
-  context('when SAVING state', () => {
-    it('renders a disabled save button', () => {
-      const cta = testbed.render({ captureState: SAVING })
-
-      expect(cta.text()).to.eql('Save')
-      expect(cta.find('Button').prop('disabled')).to.eql(true)
-    })
-  })
 })
