@@ -22,7 +22,14 @@
  * SOFTWARE.
  */
 
-import Decimal from 'decimal.js/decimal'
+import { default as DecimalBase } from 'decimal.js/decimal'
+import warning from './warning'
+import { changedPackageWarning } from './react/deprecated'
+
+DecimalBase.set({
+  precision: 100,
+  toExpPos: 100
+})
 
 /**
  * ---
@@ -32,9 +39,12 @@ import Decimal from 'decimal.js/decimal'
  *
  * @module Decimal
  */
-Decimal.set({
-  precision: 100,
-  toExpPos: 100
-})
-
-export default Decimal
+export default class Decimal extends DecimalBase {
+  constructor () {
+    super()
+    warning(false, '[%s] was deprecated in version %s. %s', 'Decimal', '5.0.0', changedPackageWarning(
+      'ui-utils',
+      'ui-i18n'
+    ) || '')
+  }
+}

@@ -22,7 +22,9 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@instructure/ui-forms": "^4.7.2",
     "@instructure/ui-presets": "^4.7.2",
+    "@instructure/ui-themes": "^4.7.2",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
@@ -31,9 +33,10 @@
     "react-dom": "^0.14.9 || ^15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-utils": "^4.7.2",
+    "decimal.js": "^9.0.1",
     "moment": "^2.10.6",
     "moment-timezone": "^0.5.14",
-    "numeral": "^2.0.6",
     "prop-types": "^15.5.10"
   },
   "publishConfig": {

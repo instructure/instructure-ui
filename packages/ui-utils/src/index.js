@@ -22,12 +22,20 @@
  * SOFTWARE.
  */
 
-import * as dom from './dom'
-import * as i18n from './i18n'
-import * as react from './react'
+export * from './react'
+export * from './dom'
+export * from './i18n'
 
-export default {
-  dom,
-  i18n,
-  react
-}
+export Browser from './Browser'
+export capitalizeFirstLetter from './capitalizeFirstLetter'
+export debounce from './debounce'
+export Decimal from './Decimal'
+export deepEqual from './deepEqual'
+export mergeDeep from './mergeDeep'
+export ms from './ms'
+export parseUnit from './parseUnit'
+export px from './px'
+export shallowEqual from './shallowEqual'
+export uid from './uid'
+export warning from './warning'
+export within from './within'

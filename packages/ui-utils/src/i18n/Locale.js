@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import Locale from '@instructure/ui-i18n/lib/Locale'
+import Locale from '../../../ui-i18n/lib/Locale'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'

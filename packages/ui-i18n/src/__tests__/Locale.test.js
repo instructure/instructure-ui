@@ -30,12 +30,12 @@ describe('browserLocale', () => {
     expect(Locale.browserLocale(navigator)).to.equal('de')
   })
 
-  it('returns the browser locale if no navigator is passed, or "en" if no browser locale is set', () => {
-    const expectedLanguage = navigator ? navigator.language : 'en'
+  it('returns the browser locale if no navigator is passed, or "en-US" if no browser locale is set', () => {
+    const expectedLanguage = navigator ? navigator.language : 'en-US'
     expect(Locale.browserLocale()).to.equal(expectedLanguage)
   })
 
   it('returns the default "en" if navigator is undefined', () => {
-    expect(Locale.browserLocale(null)).to.equal('en')
+    expect(Locale.browserLocale(null)).to.equal('en-US')
   })
 })

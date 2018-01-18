@@ -16,6 +16,11 @@ category: packages
 yarn add --dev @instructure/ui-i18n
 ```
 
+### Components
+The `ui-i18n` package contains the following:
+- [ApplyLocale](#ApplyLocale)
+
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-i18n.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-i18n
 

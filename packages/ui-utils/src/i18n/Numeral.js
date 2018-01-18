@@ -22,18 +22,11 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+import { default as NumeralBase } from 'numeral'
+import './locales'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
-
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
 
 /**
  * ---
@@ -41,4 +34,12 @@ warning(
  * ---
  * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
  */
-export default Numeral
+ export default class Numeral extends NumeralBase {
+   constructor () {
+     super()
+     warning(false, '[%s] was deprecated in version %s. %s', 'Numeral', '5.0.0', changedPackageWarning(
+       'ui-utils',
+       'ui-i18n'
+     ) || '')
+   }
+ }

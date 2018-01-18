@@ -62,6 +62,7 @@ plugins = plugins.concat([
       'packages/*/src/components/*/**/README.md',
       'packages/*/src/utils/**/*.js',
       'packages/ui-themeable/src/**/*.js',
+      'packages/ui-i18n/src/**/*.js',
       'packages/ui-utils/src/**/*.js'
     ],
     ignore: [
@@ -70,20 +71,23 @@ plugins = plugins.concat([
       '**/__svg__/**',
       '**/__testfixtures__/**',
       '**/__tests__/**',
+      '**/locales/**',
       '**/src/index.js',
       '**/src/components/index.js',
       '**/src/utils/index.js',
       '**/theme.js',
       'packages/__docs__/**',
       'packages/ui-core/**',
-      'packages/ui-utils/src/{react,dom,i18n}/index.js',
+      'packages/ui-utils/src/{react,dom}/index.js',
       'packages/ui-docs-client/**/*.js',
       'packages/ui-docs-plugin/**/*.js',
+      'packages/ui-utils/src/i18n/*.js',
+      'packages/ui-utils/src/index.js',
       'packages/ui-utils/src/dom/calculateElementPosition.js',
       'packages/ui-utils/src/dom/findTabbable.js',
       'packages/ui-utils/src/dom/focusManager.js',
-      'packages/ui-utils/src/i18n/*.js',
-      'packages/ui-utils/src/react/containerQuery.js'
+      'packages/ui-utils/src/react/containerQuery.js',
+      'packages/ui-utils/src/Decimal.js'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas'),

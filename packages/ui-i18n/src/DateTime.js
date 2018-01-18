@@ -40,7 +40,7 @@ import 'moment-timezone/builds/moment-timezone-with-data'
 * @returns {String} ISO 8601 string
 */
 export function now (locale, timezone) {
-  checkParams(locale, timezone)
+  _checkParams(locale, timezone)
   return moment().locale(locale).tz(timezone)
 }
 
@@ -52,7 +52,7 @@ export function now (locale, timezone) {
 * @returns {String} ISO 8601 string
 */
 export function parse (dateString, locale, timezone) {
-  checkParams(locale, timezone)
+  _checkParams(locale, timezone)
   return moment.tz(dateString, [moment.ISO_8601, 'l', 'L', 'll', 'LL'], locale, timezone)
 }
 
@@ -74,15 +74,28 @@ export function browserTimeZone () {
   return moment.tz.guess()
 }
 
+/**
+* Return a localized date + time with timezone as a ISO 8601 string
+* @param {String} dateString
+* @param {String} locale
+* @param {String} timezone
+* @param {String} format
+* @returns {String} Localized ISO 8601 string
+*/
+export function toLocaleString (dateString, locale, timezone, format) {
+  const d = parse(dateString, locale, timezone)
+  return format ? d.format(format) : d.toISOString(true)
+}
+
 export default {
   now,
   parse,
   browserTimeZone,
-  isValid
+  isValid,
+  toLocaleString
 }
 
-function checkParams (locale, timezone) {
+function _checkParams (locale, timezone) {
   if (locale == null) throw Error('locale must be specified')
   if (timezone == null) throw Error('timezone must be specified')
 }
-

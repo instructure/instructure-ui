@@ -82,6 +82,10 @@ ReactWrapper.prototype.mouseOut = function () {
   this.simulate('mouseOut')
 }
 
+ReactWrapper.prototype.blur = function () {
+  this.simulate('blur')
+}
+
 ReactWrapper.prototype.focus = function () {
   this.getDOMNode().focus()
 }
@@ -92,9 +96,15 @@ ReactWrapper.prototype.focused = function () {
 }
 
 ReactWrapper.prototype.setValue = function (value) {
+  const domNode = this.getDOMNode()
+
   this.simulate('focus')
+
+  domNode.value = value
+
   this.simulate('keyUp')
   this.simulate('keyDown')
+
   this.simulate('change', { target: { value } })
 }
 

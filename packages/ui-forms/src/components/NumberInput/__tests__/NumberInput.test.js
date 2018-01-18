@@ -25,207 +25,170 @@
 import React from 'react'
 import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
-import NumberInput, { cleanValue } from '../index'
-import styles from '../styles.css'
+import NumberInput from '../index'
 
 describe('<NumberInput />', () => {
   const testbed = new Testbed(<NumberInput label="Name" />)
 
-  describe('NumberInput.cleanValue', () => {
-    it('should clean letter characters', () => {
-      const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      expect(cleanValue(value)).to.equal('')
-    })
-
-    it('should reject all symbols except for - and the locale decimal delimiter', () => {
-      // locale is set to 'en' so the decimal delimiter is '.'
-      const value = '!"·$%&/()=?¿\'|-@#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…'
-      expect(cleanValue(value)).to.equal('-.')
-    })
-
-    it('should allow only one minus sign when it is not behind numbers', () => {
-      expect(cleanValue('6-')).to.equal('6')
-      expect(cleanValue('-6')).to.equal('-6')
-      expect(cleanValue('-')).to.equal('-')
-      expect(cleanValue('--')).to.equal('-')
-      expect(cleanValue('-----dfghj5678')).to.equal('-5678')
-      expect(cleanValue('-dfghj----5678')).to.equal('-5678')
-      expect(cleanValue('-dfghj-5678---')).to.equal('-5678')
-      expect(cleanValue('-dfghj5678----')).to.equal('-5678')
-      expect(cleanValue('dfghj5678----')).to.equal('5678')
-      expect(cleanValue('dfghj567----8')).to.equal('5678')
-      expect(cleanValue('dfghj5-678')).to.equal('5678')
-    })
-
-    it('should allow only one decimal delimiter', () => {
-      // locale is set to 'en' so the decimal delimiter is '.'
-      expect(cleanValue('6.')).to.equal('6.')
-      expect(cleanValue('.6')).to.equal('.6')
-      expect(cleanValue('6.6.6')).to.equal('6.66')
-      expect(cleanValue('66..6')).to.equal('66.6')
-      expect(cleanValue('.')).to.equal('.')
-      expect(cleanValue('..')).to.equal('.')
-      expect(cleanValue('.....dfghj5678')).to.equal('.5678')
-      expect(cleanValue('.dfghj....5678')).to.equal('.5678')
-      expect(cleanValue('.dfghj.5678...')).to.equal('.5678')
-      expect(cleanValue('.dfghj5678....')).to.equal('.5678')
-      expect(cleanValue('dfghj5678....')).to.equal('5678.')
-      expect(cleanValue('dfghj567....8')).to.equal('567.8')
-      expect(cleanValue('dfghj5.678')).to.equal('5.678')
-    })
-  })
-
   describe('NumberInput.applyStep', () => {
     it('should add steps', () => {
       const subject = testbed.render({ defaultValue: '0', step: '1' })
-      expect(subject.instance().applyStep(1)).to.equal('1')
+      expect(subject.instance().applyStep(1).toString()).to.equal('1')
     })
 
     it('should subtract steps', () => {
       const subject = testbed.render({ defaultValue: '0', step: '1' })
-      expect(subject.instance().applyStep(-1)).to.equal('-1')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-1')
     })
 
     it('should support fractional steps', () => {
       const subject = testbed.render({ defaultValue: '3', step: '1.5' })
-      expect(subject.instance().applyStep(-1)).to.equal('1.5')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('1.5')
     })
 
     describe('with large numbers', () => {
       it('should add steps', () => {
         const subject = testbed.render({ defaultValue: '123456789012345678901', step: '1' })
-        expect(subject.instance().applyStep(1)).to.equal('123456789012345678902')
+        expect(subject.instance().applyStep(1).toString()).to.equal('123456789012345678902')
       })
 
       it('should substract steps', () => {
         const subject = testbed.render({ defaultValue: '1234567890123456789012345', step: '1' })
-        expect(subject.instance().applyStep(-1)).to.equal('1234567890123456789012344')
+        expect(subject.instance().applyStep(-1).toString()).to.equal('1234567890123456789012344')
       })
 
       it('should not use scientific notation', () => {
         const subject = testbed.render({ defaultValue: '123456789012345678901234567890', step: '5' })
-        expect(subject.instance().applyStep(1)).to.equal('123456789012345678901234567895')
+        expect(subject.instance().applyStep(1).toString()).to.equal('123456789012345678901234567895')
       })
     })
 
     describe('when the input is empty', () => {
       it('should assume value is 0 web adding steps', () => {
         const subject = testbed.render({ defaultValue: '', step: '123' })
-        expect(subject.instance().applyStep(1)).to.equal('123')
+        expect(subject.instance().applyStep(1).toString()).to.equal('123')
       })
 
       it('should assume value is 0 when subtracting steps', () => {
         const subject = testbed.render({ defaultValue: '', step: '123' })
-        expect(subject.instance().applyStep(-1)).to.equal('-123')
+        expect(subject.instance().applyStep(-1).toString()).to.equal('-123')
       })
     })
 
     describe('with a min prop', () => {
       it('should limit min if given', () => {
         const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-        expect(subject.instance().applyStep(-1)).to.equal('-10')
+        expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
       })
 
       it('should limit min if given', () => {
         const subject = testbed.render({ defaultValue: '-10', step: '1', min: '-10' })
-        expect(subject.instance().applyStep(-1)).to.equal('-10')
+        expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
       })
 
       it('should limit min if given', () => {
         const subject = testbed.render({ defaultValue: '0', step: '1', min: '0' })
-        expect(subject.instance().applyStep('0', '1', -1, '0')).to.equal('0')
+        expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
       })
     })
 
     it('should limit min if given', () => {
       const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0')).to.equal('0')
+      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
     })
 
     it('should limit min if given', () => {
       const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0')).to.equal('0')
+      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
     })
 
     it('should limit min if given', () => {
       const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
 
       subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0')).to.equal('0')
+      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
     })
 
     it("should snap to the next step when value doesn't match the step increments", () => {
       const subject = testbed.render({ defaultValue: '2.5', step: '1', min: null })
-      expect(subject.instance().applyStep(1)).to.equal('3')
+      expect(subject.instance().applyStep(1).toString()).to.equal('3')
 
       subject.setProps({ defaultValue: '2.5', step: '1', min: null })
-      expect(subject.instance().applyStep(-1)).to.equal('2')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('2')
     })
 
-    it('should not change if value is already smaller than min and dir is -1', () => {
-      const subject = testbed.render({ defaultValue: '-99', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1)).to.equal('-99')
+    it('should snap value to min if value is already smaller than min and dir is -1', () => {
+      const subject = testbed.render({
+        defaultValue: '-99',
+        step: '1',
+        min: '-10'
+      })
+      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
     })
 
     it('should snap value to min when it is already smaller than min and dir is 1', () => {
-      const subject = testbed.render({ defaultValue: '-99', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(1)).to.equal('-10')
+      const subject = testbed.render({
+        defaultValue: '-99',
+        step: '1',
+        min: '-10'
+      })
+      expect(subject.instance().applyStep(1).toString()).to.equal('-10')
     })
 
     it('should limit max if given', () => {
       const subject = testbed.render({ defaultValue: '6', step: '1', min: null, max: '7' })
-      expect(subject.instance().applyStep(1)).to.equal('7')
+      expect(subject.instance().applyStep(1).toString()).to.equal('7')
 
       subject.setProps({ defaultValue: '7', step: '1', min: null, max: '7' })
-      expect(subject.instance().applyStep(1)).to.equal('7')
+      expect(subject.instance().applyStep(1).toString()).to.equal('7')
     })
 
-    it('should not change if value is already greater than max and dir is 1', () => {
+    it('should snap value to max if value is already greater than max and dir is 1', () => {
       const subject = testbed.render({ defaultValue: '99', step: '1', min: null, max: '10' })
-      expect(subject.instance().applyStep(1)).to.equal('99')
+      expect(subject.instance().applyStep(1).toString()).to.equal('10')
     })
 
     it('should snap value to max when it is already greater than max and dir is -1', () => {
       const subject = testbed.render({ defaultValue: '99', step: '1', min: null, max: '10' })
-      expect(subject.instance().applyStep(-1)).to.equal('10')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('10')
     })
 
     it('should use min when given as the base for step', () => {
       const subject = testbed.render({ value: '1', step: '0.11', min: '1' })
-      expect(subject.instance().applyStep(1)).to.equal('1.11')
+      expect(subject.instance().applyStep(1).toString()).to.equal('1.1')
 
       subject.setProps({ value: '0', step: '0.11', min: '0' })
-      expect(subject.instance().applyStep(1)).to.equal('0.11')
+      expect(subject.instance().applyStep(1).toString()).to.equal('0.11')
 
       subject.setProps({ value: '-1', step: '0.3', min: '-1' })
-      expect(subject.instance().applyStep(1)).to.equal('-0.7')
+      expect(subject.instance().applyStep(1).toString()).to.equal('-0.9')
 
       subject.setProps({ value: '5.25', step: '1', min: '-2.75' })
-      expect(subject.instance().applyStep(-1)).to.equal('4.25')
+      expect(subject.instance().applyStep(-1).toString()).to.equal('5')
     })
 
-    it("should not pass over max it when the last step doesn't match", () => {
+    it("should not pass over max when the last step doesn't match", () => {
       const subject = testbed.render({ value: '2', step: '1', min: null, max: '2.75' })
-      expect(subject.instance().applyStep(1)).to.equal('2')
+      expect(subject.instance().applyStep(1).toString()).to.equal('2.75')
 
       subject.setProps({ value: '3.4', step: '0.4', min: '3', max: '3.6' })
-      expect(subject.instance().applyStep(1)).to.equal('3.4')
+      expect(subject.instance().applyStep(1).toString()).to.equal('3.6')
     })
   })
 
@@ -248,7 +211,10 @@ describe('<NumberInput />', () => {
     })
 
     it('formats default values in accordance with the locale', () => {
-      const subject = testbed.render({ defaultValue: '2.5', locale: 'de' })
+      const subject = testbed.render({
+        defaultValue: 'a2.5',
+        locale: 'de'
+      })
       expect(subject.find('input').node.value).to.equal('2,5')
     })
 
@@ -263,38 +229,77 @@ describe('<NumberInput />', () => {
 
     it('increments the number in the appropriate locale when the up arrow is pressed', () => {
       const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenUp).simulate('click')
+      subject.find(IconArrowOpenUp).click()
       expect(subject.find('input').node.value).to.equal('2,6')
     })
 
     it('decrements the number in the appropriate locale when the down arrow is pressed', () => {
       const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenDown).simulate('click')
+      subject.find(IconArrowOpenDown).click()
       expect(subject.find('input').node.value).to.equal('2,4')
     })
 
     it('allows entering "." if the locale uses "." as a decimal delimiter', () => {
       const subject = testbed.render()
-      subject.find('input').simulate('change', { target: { value: '2.' } })
-      expect(subject.find('input').node.value).to.equal('2.')
-    })
+      const input = subject.find('input')
 
-    it('disallows entering "," if the locale uses "." as a decimal delimiter', () => {
-      const subject = testbed.render()
-      subject.find('input').simulate('change', { target: { value: '2,' } })
-      expect(subject.find('input').node.value).to.equal('2')
+      input.setValue('2.1')
+      input.blur()
+
+      expect(input.node.value).to.equal('2.1')
     })
 
     it('allows entering "," if the locale uses "," as a decimal delimiter', () => {
       const subject = testbed.render({ locale: 'de' })
-      subject.find('input').simulate('change', { target: { value: '2,' } })
-      expect(subject.find('input').node.value).to.equal('2,')
+      const input = subject.find('input')
+
+      input.setValue('2,1')
+      input.blur()
+
+      expect(input.node.value).to.equal('2,1')
+    })
+  })
+
+  describe('onBlur formatting', () => {
+    it('should clean letter characters', () => {
+      const subject = testbed.render()
+      const input = subject.find('input')
+      input.setValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      input.blur()
+      expect(input.getDOMNode().value).to.equal('')
     })
 
-    it('disallows entering "." if the locale uses "," as a decimal delimiter', () => {
-      const subject = testbed.render({ locale: 'de' })
-      subject.find('input').simulate('change', { target: { value: '2.' } })
-      expect(subject.find('input').node.value).to.equal('2')
+    it('should reject all symbols except for - and the locale decimal delimiter', () => {
+      // locale is set to 'en' so the decimal delimiter is '.'
+      const subject = testbed.render()
+      const input = subject.find('input')
+      input.setValue('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')
+      input.blur()
+      expect(input.getDOMNode().value).to.equal('0')
+    })
+
+    it('should apply the locale specific thousands delimiter', () => {
+      const subject = testbed.render({ locale: 'es' })
+      const input = subject.find('input')
+      input.setValue('1234567890')
+      input.blur()
+      expect(input.getDOMNode().value).to.equal('1.234.567.890')
+    })
+
+    it('should remove leading zeros', () => {
+      const subject = testbed.render({ locale: 'es' })
+      const input = subject.find('input')
+      input.setValue('aabb0.0.0.1')
+      input.blur()
+      expect(input.getDOMNode().value).to.equal('1')
+    })
+
+    it('should leave only the last decimal delimiter', () => {
+      const subject = testbed.render({ locale: 'fr' })
+      const input = subject.find('input')
+      input.setValue(',1,,2,,,3,,4')
+      input.blur()
+      expect(input.getDOMNode().value).to.equal('123,4')
     })
   })
 
@@ -345,10 +350,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(`.${styles.arrow}`).first().simulate('click')
+      subject.find(IconArrowOpenUp).click()
 
       expect(onChange).to.have.been.called
       expect(onChange.firstCall.args[1]).to.equal('1')
+      expect(onChange.firstCall.args[2]).to.equal(1)
       expect(subject.find('input').getDOMNode().value).to.equal('1')
     })
 
@@ -359,9 +365,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(`.${styles.arrow}`).last().simulate('click')
+      subject.find(IconArrowOpenDown).click('click')
 
       expect(onChange).to.have.been.called
+      expect(onChange.firstCall.args[1]).to.equal('-1')
+      expect(onChange.firstCall.args[2]).to.equal(-1)
       expect(subject.find('input').getDOMNode().value).to.equal('-1')
     })
 
@@ -384,7 +392,7 @@ describe('<NumberInput />', () => {
         onKeyDown
       })
 
-      subject.find('input').simulate('keydown', { key: 'ArrowUp' })
+      subject.find('input').keyDown('ArrowUp')
 
       expect(onKeyDown).to.have.been.called
     })
@@ -396,7 +404,7 @@ describe('<NumberInput />', () => {
         onBlur
       })
 
-      subject.find('input').simulate('blur')
+      subject.find('input').blur()
 
       expect(onBlur).to.have.been.called
     })

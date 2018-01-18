@@ -26,19 +26,19 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-
 import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import themeable from '@instructure/ui-themeable'
 import Locale from '@instructure/ui-i18n/lib/Locale'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import Decimal from '@instructure/ui-i18n/lib/Decimal'
+
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import transformSelection from '@instructure/ui-utils/lib/dom/transformSelection'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import uid from '@instructure/ui-utils/lib/uid'
-import Decimal from '@instructure/ui-utils/lib/Decimal'
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+
+import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -53,58 +53,6 @@ const keyDirections = {
 
 function noop () {}
 
-// Accepts a string locale and returns a string representing the decimal
-// delimiter that is used by that locale, or '.' if the locale is not recognized.
-function decimalDelimiter (locale) {
-  const localeData = locale && Numeral.locales[locale.toLowerCase()]
-  if (!localeData) {
-    // default to using '.' as the delimiter if no locale is set or if
-    // there is no Numeral locale file for the currently set locale.
-    return '.'
-  }
-
-  return localeData.delimiters.decimal
-}
-
-// Accepts three strings (a string to search, a character to be replaced, and a
-// character to use as the replacement) and returns a string with every instance
-// of 'char' replaced with 'replaceWith'.
-function replaceChar (string, char, replaceWith) {
-  return string.replace(new RegExp(`\\${char}`, 'g'), replaceWith)
-}
-
-// Accepts a number and a string locale and returns a string representing the
-// number in the specified locale.
-function formatNumberForLocale (number, locale) {
-  const delimiter = decimalDelimiter(locale)
-  return replaceChar(number.toString(), '.', delimiter)
-}
-
-export function cleanValue (value, locale, allowNegative = true) {
-  const delimiter = decimalDelimiter(locale)
-  // Remove everything that is not numbers, delimiter nor '-'
-  const alphaRemoval = value.replace(new RegExp(`[^\\d\\-\\${delimiter}]`, 'g'), '')
-  const isNegative = allowNegative && alphaRemoval[0] === '-'
-
-  // Remove all '-'s
-  let minusRemoval = replaceChar(alphaRemoval, '-', '')
-
-  // Re-add one '-' if appropriate
-  if (isNegative) {
-    minusRemoval = `-${minusRemoval}`
-  }
-
-  // If there is no delimiter, return the cleaned string
-  const delimiterIndex = minusRemoval.indexOf(delimiter)
-  if (delimiterIndex === -1) {
-    return minusRemoval
-  }
-
-  // If there are one or more delimiters, only keep the first one
-  const [head, tail] = minusRemoval.split(new RegExp(`\\${delimiter}(.*)`), 2)
-  return head + delimiter + replaceChar(tail, delimiter, '')
-}
-
 /**
 ---
 category: components/forms
@@ -116,9 +64,9 @@ class NumberInput extends Component {
     label: PropTypes.node.isRequired,
     id: PropTypes.string,
     showArrows: PropTypes.bool,
-    step: PropTypes.string,
-    min: PropTypes.string,
-    max: PropTypes.string,
+    step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
     * object with shape: `{
     * text: PropTypes.string,
@@ -148,11 +96,16 @@ class NumberInput extends Component {
     /**
     * value to set on initial render
     */
-    defaultValue: PropTypes.string,
+    defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.string),
+    value: CustomPropTypes.controllable(
+      PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    ),
+    /**
+    * the event may be of type blur under certain conditions
+    */
     onChange: PropTypes.func,
     onKeyDown: PropTypes.func,
     onFocus: PropTypes.func,
@@ -174,96 +127,83 @@ class NumberInput extends Component {
     disabled: false,
     layout: 'stacked',
     inputRef: function (input) {},
-    onChange: function (event, value) {},
+    onChange: function (event, numberAsString, parsedNumber) {},
     onKeyDown: function (event) {},
     onFocus: function (event) {},
     onBlur: function (event) {}
-  };
+  }
 
   constructor (props) {
     super()
-
     this._defaultId = `NumberInput_${uid()}`
   }
 
-  _input = null;
+  _input = null
 
   state = {
     focus: false
-  };
+  }
 
-  componentWillReceiveProps (nextProps) {
-    if (nextProps.locale !== this.props.locale) {
-      const delimiter = decimalDelimiter(this.props.locale)
-      const newDelimiter = decimalDelimiter(nextProps.locale)
-      this._input.value = replaceChar(this._input.value, delimiter, newDelimiter)
+  componentWillReceiveProps (nextProps, nextContext) {
+    const currentLocale = this.getLocale(this.props, this.context)
+    const nextLocale = this.getLocale(nextProps, nextContext)
+    let decimalValue
+
+    if (currentLocale !== nextLocale) {
+      decimalValue = Decimal.parse(this._input.value, currentLocale)
+      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(nextLocale))
+    }
+
+    // controlled
+    if (nextProps.value !== this.props.value && typeof nextProps.value === 'number') {
+      decimalValue = Decimal.parse(nextProps.value)
+      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(nextLocale))
     }
   }
 
   // Replicate the arrow behavior commonly seen in inputs of type number
   applyStep = (dir) => {
-    const rawValue = this._input.value
     const { min, max, step } = this.props
-    const delimiter = decimalDelimiter(this.locale)
-    const parseableRawValue = rawValue ? replaceChar(rawValue, delimiter, '.') : '0'
-    const value = new Decimal(parseableRawValue || 0).minus(min || 0)
-    const hasMin = min !== '' && min !== undefined && min !== null
-    const hasMax = max !== '' && max !== undefined && max !== null
+
+    let d = Decimal.parse(this._input.value || '0', this.locale)
+
+    if (!d.mod(step).equals(0)) {
+      // case when value is between steps, so we snap to the next step
+      const steps = d.div(step)
+
+      if (dir > 0) {
+        d = steps.floor().times(step)
+      } else {
+        d = steps.ceil().times(step)
+      }
+    }
+
+    // then we add the step
+    if (dir > 0) {
+      d = d.plus(step)
+    } else {
+      d = d.minus(step)
+    }
 
     // case when value is less than minimum
-    if (hasMin && value.lt(0)) {
-      if (dir < 0) {
-        return rawValue || min
-      }
-      return min
+    if (min && d.lt(min)) {
+      return Decimal.parse(min)
     }
 
     // case when value is more than maximum
-    if (hasMax && value.plus(min || 0).gt(max)) {
-      if (dir > 0) {
-        return rawValue || min
-      }
-      return max
+    if (max && d.gt(max)) {
+      return Decimal.parse(max)
     }
 
-    let resultValue
-    if (!value.mod(step).equals(0)) {
-      // case when value is between steps, so we snap to the next step
-      if (dir > 0) {
-        resultValue = value.div(step).ceil().times(step)
-      } else {
-        resultValue = value.div(step).floor().times(step)
-      }
-    } else if (dir > 0) {
-      resultValue = value.plus(step)
-    } else {
-      resultValue = value.minus(step)
-    }
-
-    if (hasMin && resultValue.lt(0)) {
-      return min
-    }
-
-    resultValue = resultValue.plus(min || 0)
-
-    if (hasMax) {
-      const maxStep = new Decimal(max)
-        .minus(min || 0)
-        .div(step)
-        .floor()
-        .times(step)
-        .plus(min || 0)
-
-      if (resultValue.gt(maxStep)) {
-        return maxStep.toString()
-      }
-    }
-
-    return resultValue.toString()
+    return d
   }
 
   focus () {
     this._input.focus()
+  }
+
+  getLocale = (props = {}, context = {}) => {
+    return props.locale || context.locale || Locale.browserLocale()
   }
 
   get locale () {
@@ -285,6 +225,10 @@ class NumberInput extends Component {
     return isActiveElement(this._input)
   }
 
+  getDecimalValue (value, locale) {
+    return Decimal.parse(value, locale)
+  }
+
   get value () {
     return this._input.value
   }
@@ -292,60 +236,85 @@ class NumberInput extends Component {
   handleRef = (element, ...args) => {
     this._input = element
     this.props.inputRef.apply(this, [element].concat(args))
-  };
+  }
 
   handleFocus = (event) => {
     this.setState(() => ({ focus: true }))
     this.props.onFocus(event)
-  };
+  }
 
   handleBlur = (event) => {
+    const { min, max } = this.props
+    let decimalValue = this.getDecimalValue(event.target.value, this.locale)
+
+    // case when value is less than minimum
+    if (min && decimalValue.lt(min)) {
+      decimalValue = Decimal.parse(min)
+    }
+
+    // case when value is more than maximum
+    if (max && decimalValue.gt(max)) {
+      decimalValue = Decimal.parse(max)
+    }
+
+    this._input.value = decimalValue.isNaN() ? '' : decimalValue.toLocaleString(this.locale)
     this.setState(() => ({ focus: false }))
+
     this.props.onBlur(event)
-  };
+    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+  }
 
   handleChange = (event) => {
-    const { min } = this.props
-    const missingMin = min === '' || min === null || min === undefined
-    const newValue = cleanValue(event.target.value, this.locale, missingMin || new Decimal(min).lt(0))
-    const newSelection = transformSelection(this._input, newValue)
-    this._input.value = newValue
+    const decimalValue = this.getDecimalValue(event.target.value, this.locale)
+    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+  }
+
+  updateInput = (value) => {
+    const newSelection = transformSelection(this._input, value)
+    this._input.value = value
     this._input.selectionStart = newSelection.selectionStart
     this._input.selectionEnd = newSelection.selectionEnd
     this._input.selectionDirection = newSelection.selectionDirection
-
-    this.props.onChange(event, newValue)
-  };
+  }
 
   handleKeyDown = (event) => {
     const dir = keyDirections[event.key]
 
     if (dir) {
       event.preventDefault()
-      const newValue = formatNumberForLocale(this.applyStep(dir), this.locale)
-      this._input.value = newValue
+
+      const decimalValue = this.applyStep(dir)
+
+      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale))
+
       this.props.onKeyDown(event)
-      this.props.onChange(event, newValue)
+      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
     } else {
       this.props.onKeyDown(event)
     }
-  };
+  }
 
   handleClickUp = (event) => {
     event.preventDefault()
-    const newValue = formatNumberForLocale(this.applyStep(1), this.locale)
+
+    const decimalValue = this.applyStep(1)
+
     this._input.focus()
-    this._input.value = newValue
-    this.props.onChange(event, newValue)
-  };
+    this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
+
+    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+  }
 
   handleClickDown = (event) => {
     event.preventDefault()
-    const newValue = formatNumberForLocale(this.applyStep(-1), this.locale)
+
+    const decimalValue = this.applyStep(-1)
+
     this._input.focus()
-    this._input.value = newValue
-    this.props.onChange(event, newValue)
-  };
+    this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
+
+    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+  }
 
   renderArrows () {
     return (
@@ -376,8 +345,8 @@ class NumberInput extends Component {
       showArrows,
       placeholder,
       value,
-      defaultValue,
       disabled,
+      defaultValue,
       required,
       width,
       inline
@@ -407,8 +376,8 @@ class NumberInput extends Component {
             onBlur={this.handleBlur}
             type="text"
             inputMode="numeric"
-            value={value}
-            defaultValue={defaultValue && formatNumberForLocale(defaultValue, this.locale)}
+            value={value ? Decimal.parse(value).toLocaleString(this.locale) : value}
+            defaultValue={defaultValue ? Decimal.parse(defaultValue).toLocaleString(this.locale) : defaultValue}
             placeholder={placeholder}
             ref={this.handleRef}
             id={this.id}

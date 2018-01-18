@@ -8,7 +8,11 @@ A standard number input field with placeholder
 ---
 example: true
 ---
-<NumberInput label="Age" placeholder="Your age goes here" />
+<NumberInput
+  label="Age (in years)"
+  placeholder="Your age goes here"
+  min="1"
+/>
 ```
 
 A number input field with minimum set to 30
@@ -17,7 +21,11 @@ A number input field with minimum set to 30
 ---
 example: true
 ---
-<NumberInput label="Monitor refresh rate" min="30" />
+<NumberInput
+  label="Monitor refresh rate"
+  min="30"
+  defaultValue="32"
+/>
 ```
 
 A number input field with minimum and maximum
@@ -102,10 +110,10 @@ class Example extends React.Component {
         <Container padding="small">
           <NumberInput
             label={label}
-            step="0.1"
-            min="0.1"
+            step={0.1}
+            min={0.1}
             locale={this.state.locale}
-            defaultValue="2.4"
+            defaultValue={2.4}
           />
         </Container>
       </div>

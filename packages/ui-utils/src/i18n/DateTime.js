@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import DateTime from '../../../ui-i18n/lib/DateTime'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
