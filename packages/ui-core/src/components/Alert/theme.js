@@ -39,7 +39,7 @@ export default function generator ({ colors, borders, spacing, typography, shado
     contentLineHeight: typography.lineHeightCondensed,
 
     closeButtonMarginTop: spacing.xSmall,
-    closeButtonMarginRight: spacing.xSmall,
+    closeButtonMarginRight: spacing.xxSmall,
 
     iconColor: colors.white,
     iconBackground: colors.white,

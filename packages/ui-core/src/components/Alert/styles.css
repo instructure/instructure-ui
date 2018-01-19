@@ -4,6 +4,7 @@
   box-sizing: border-box;
   box-shadow: var(--boxShadow);
   display: flex;
+  min-width: 12rem;
   border-width: var(--borderWidth);
   border-style: var(--borderStyle);
   border-radius: var(--borderRadius);
@@ -13,8 +14,8 @@
   box-sizing: border-box;
   flex: 1;
   display: flex;
+  min-width: 1px;
   align-items: center;
-
   font-size: var(--contentFontSize);
   font-family: var(--contentFontFamily);
   font-weight: var(--contentFontWeight);
