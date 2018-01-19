@@ -22,24 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+Testbed.init()
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+require('@instructure/ui-themes/lib/canvas')
 
-import UIToggleDetails from '@instructure/ui-toggle-details/lib/components/ToggleDetails'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-toggle-details'
-))
-class ToggleDetails extends Component {
-  static propTypes = {
-    ...UIToggleDetails.PropTypes
-  }
-
-  render () {
-    return <UIToggleDetails {...this.props} />
-  }
-}
-
-export default ToggleDetails
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)

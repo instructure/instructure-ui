@@ -100,6 +100,10 @@
     "replace": "@instructure/ui-elements/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/ToggleDetails",
+    "replace": "@instructure/ui-toggle-details/lib/components/ToggleDetails"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Transition",
     "replace": "@instructure/ui-motion/lib/components/Transition"
   },

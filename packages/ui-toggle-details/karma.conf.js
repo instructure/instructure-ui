@@ -22,24 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+const path = require('path')
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIToggleDetails from '@instructure/ui-toggle-details/lib/components/ToggleDetails'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-toggle-details'
-))
-class ToggleDetails extends Component {
-  static propTypes = {
-    ...UIToggleDetails.PropTypes
-  }
-
-  render () {
-    return <UIToggleDetails {...this.props} />
-  }
-}
-
-export default ToggleDetails
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 88
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-toggle-details')
+})

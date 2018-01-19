@@ -42,6 +42,7 @@ import * as UIPages from '@instructure/ui-pages/lib/components'
 import * as UIPagination from '@instructure/ui-pagination/lib/components'
 import * as UIPortal from '@instructure/ui-portal/lib/components'
 import * as UIThemeable from '@instructure/ui-themeable/lib/components'
+import * as UIToggleDetails from '@instructure/ui-toggle-details/lib/components'
 import * as UITreeBrowser from '@instructure/ui-tree-browser/lib/components'
 
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
@@ -72,6 +73,7 @@ const components = Object.assign(
   UIPagination,
   UIPortal,
   UIThemeable,
+  UIToggleDetails,
   UITreeBrowser
 )
 
