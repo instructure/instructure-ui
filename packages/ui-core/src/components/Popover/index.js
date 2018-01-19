@@ -6,10 +6,12 @@ import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/Compo
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
+import px from '@instructure/ui-utils/lib/px'
 import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
+import { parsePlacement } from '@instructure/ui-utils/lib/dom/calculateElementPosition'
 
 import ContextBox from '../ContextBox'
 import Position, { PositionTarget, PositionContent } from '../Position'
@@ -214,7 +216,12 @@ class Popover extends Component {
     /**
      * Target element for positioning the Popover (if it differs from the trigger)
      */
-    positionTarget: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func])
+    positionTarget: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+
+    /**
+     * should the content offset to align by its arrow
+     */
+    alignArrow: PropTypes.bool
   }
 
   static defaultProps = {
@@ -252,7 +259,8 @@ class Popover extends Component {
     label: null,
     mountNode: null,
     insertAt: 'bottom',
-    positionTarget: null
+    positionTarget: null,
+    alignArrow: false
   }
 
   constructor (props) {
@@ -436,6 +444,7 @@ class Popover extends Component {
           {...pickProps(this.props, ContextBox.propTypes)}
           elementRef={this.props.contentRef}
           placement={this.state.placement}
+          ref={c => this._contextBox = c}
         >
           {content}
         </ContextBox>
@@ -445,19 +454,40 @@ class Popover extends Component {
     }
   }
 
-  render () {
-    const positionTarget = this.props.positionTarget
+  get positionProps () {
+    let offsetX = this.props.offsetX
+    let offsetY = this.props.offsetY
+    if (this.props.alignArrow && this._contextBox) {
+      const secondaryPlacement = parsePlacement(this.state.placement)[1]
+      const { arrowSize, borderWidth } = this._contextBox.theme
+      const offsetAmount = (px(arrowSize) + px(borderWidth)) * 2
+      if (secondaryPlacement === 'start') {
+        offsetX = offsetAmount
+      } else if (secondaryPlacement === 'end') {
+        offsetX = -offsetAmount
+      } else if (secondaryPlacement === 'top') {
+        offsetY = offsetAmount
+      } else if (secondaryPlacement === 'bottom') {
+        offsetY = -offsetAmount
+      }
+    }
 
-    const positionProps = {
+    return {
       ...pickProps(this.props, Position.propTypes),
+      offsetX,
+      offsetY,
       trackPosition: this.shown,
       placement: this.placement,
       onPositioned: createChainedFunction(this.handlePositionChanged, this.props.onShow),
       onPositionChanged: this.handlePositionChanged,
-      target: positionTarget
+      target: this.props.positionTarget
     }
+  }
 
-    if (positionTarget) {
+  render () {
+    const positionProps = this.positionProps
+
+    if (this.props.positionTarget) {
       return (
         <span>
           {this.renderTrigger()}
