@@ -111,4 +111,31 @@ class Example extends React.Component {
 }
 
 render(<Example />)
+
+```
+The `alignArrow` prop will offset the popover content to adjust for the offset of the arrow.
+This will override offsetX for start/end placements, and will override offsetY for top/bottom placements.
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+render () {
+  return (
+      <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
+        <Popover show placement="end top" alignArrow>
+          <PopoverTrigger>
+            <div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>
+          </PopoverTrigger>
+          <PopoverContent>
+            <Heading>Small<br/>Target</Heading>
+          </PopoverContent>
+        </Popover>
+      </div>
+  )
+}
+}
+
+render(<Example />)
 ```

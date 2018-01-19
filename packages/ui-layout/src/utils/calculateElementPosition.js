@@ -404,7 +404,7 @@ function sortPlacement (placement) {
   return [first, second]
 }
 
-function parsePlacement (placement) {
+export function parsePlacement (placement) {
   let parsed = placement.split(' ')
 
   if (parsed.length === 1) {

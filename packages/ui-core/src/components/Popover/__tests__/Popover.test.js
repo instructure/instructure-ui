@@ -25,6 +25,7 @@
 import React from 'react'
 import Button from '@instructure/ui-elements/lib/components/Button'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
+import UIPosition from '@instructure/ui-layout/lib/components/Position'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
 
@@ -153,6 +154,32 @@ describe('<Popover />', () => {
       button.simulate('click')
 
       expect(content).to.be.null
+    })
+  })
+
+  describe('alignArrow', () => {
+    it('sets the offset when alignArrow is true, and placement is not center', () => {
+      const subject = testbed.render({
+        alignArrow: true,
+        placement: 'bottom start',
+        defaultShow: true
+      })
+      testbed.tick()
+      const position = subject.find(UIPosition)
+      expect(position.prop('offsetX')).to.not.equal(0)
+    })
+
+    it('uses the passed offset when alignArrow is false', () => {
+      const subject = testbed.render({
+        placement: 'bottom start',
+        defaultShow: true,
+        offsetX: -1,
+        offsetY: -2
+      })
+      testbed.tick()
+      const position = subject.find(UIPosition)
+      expect(position.prop('offsetX')).to.equal(-1)
+      expect(position.prop('offsetY')).to.equal(-2)
     })
   })
 })
