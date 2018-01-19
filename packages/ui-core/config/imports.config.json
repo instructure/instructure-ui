@@ -8,6 +8,10 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/ApplyTheme",
+    "replace": "@instructure/ui-themeable/lib/components/ApplyTheme"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Avatar",
     "replace": "@instructure/ui-elements/lib/components/Avatar"
   },

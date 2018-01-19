@@ -25,22 +25,23 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
+import lorem from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
-import lorem from 'lorem-ipsum'
 
-import * as UIA11y from '@instructure/ui-a11y'
-import * as UIBreadcrumb from '@instructure/ui-breadcrumb'
-import * as UIContainer from '@instructure/ui-container'
-import * as UICore from '@instructure/ui-core'
-import * as UIElements from '@instructure/ui-elements'
-import * as UIForms from '@instructure/ui-forms'
-import * as UILayout from '@instructure/ui-layout'
-import * as UIMotion from '@instructure/ui-motion'
-import * as UISVGImages from '@instructure/ui-svg-images'
-import * as UIPagination from '@instructure/ui-pagination'
-import * as UIPortal from '@instructure/ui-portal'
-import * as UITreeBrowser from '@instructure/ui-tree-browser'
+import * as UIA11y from '@instructure/ui-a11y/lib/components'
+import * as UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components'
+import * as UIContainer from '@instructure/ui-container/lib/components'
+import * as UICore from '@instructure/ui-core/lib/components'
+import * as UIElements from '@instructure/ui-elements/lib/components'
+import * as UIForms from '@instructure/ui-forms/lib/components'
+import * as UILayout from '@instructure/ui-layout/lib/components'
+import * as UIMotion from '@instructure/ui-motion/lib/components'
+import * as UISVGImages from '@instructure/ui-svg-images/lib/components'
+import * as UIPagination from '@instructure/ui-pagination/lib/components'
+import * as UIPortal from '@instructure/ui-portal/lib/components'
+import * as UIThemeable from '@instructure/ui-themeable/lib/components'
+import * as UITreeBrowser from '@instructure/ui-tree-browser/lib/components'
 
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
@@ -54,38 +55,8 @@ import iconExample from '!svg-inline-loader!./heart_lg.svg'
 import avatarImage from './placeholder-avatar.png'
 import placeholderImage from './placeholder-image'
 
-const globals = Object.assign(
-  {
-    PlaceholderIcon: IconUser,
-    IconPlus: IconPlus,
-    IconX: IconX,
-    moment,
-    avatarImage,
-    iconExample,
-    lorem: {
-      sentence () {
-        return lorem({
-          count: 1,
-          units: 'sentences'
-        })
-      },
-      paragraph () {
-        return lorem({
-          count: 1,
-          units: 'paragraphs'
-        })
-      },
-      paragraphs (count) {
-        return lorem({
-          count: count || Math.floor(Math.random() * 10),
-          units: 'paragraphs'
-        })
-      }
-    },
-    placeholderImage,
-    React,
-    ReactDOM
-  },
+const components = Object.assign(
+  {},
   UICore,
   UIA11y,
   UIBreadcrumb,
@@ -97,11 +68,46 @@ const globals = Object.assign(
   UISVGImages,
   UIPagination,
   UIPortal,
+  UIThemeable,
   UITreeBrowser
 )
+
+Object.keys(components).forEach((key) => {
+  global[key] = components[key]
+})
+
+const globals = {
+  PlaceholderIcon: IconUser,
+  IconPlus: IconPlus,
+  IconX: IconX,
+  locales: moment.locales(),
+  avatarImage,
+  iconExample,
+  lorem: {
+    sentence () {
+      return lorem({
+        count: 1,
+        units: 'sentences'
+      })
+    },
+    paragraph () {
+      return lorem({
+        count: 1,
+        units: 'paragraphs'
+      })
+    },
+    paragraphs (count) {
+      return lorem({
+        count: count || Math.floor(Math.random() * 10),
+        units: 'paragraphs'
+      })
+    }
+  },
+  placeholderImage,
+  React,
+  ReactDOM
+}
 
 Object.keys(globals).forEach((key) => {
   global[key] = globals[key]
 })
-
-module.exports = globals

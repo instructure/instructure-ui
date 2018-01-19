@@ -21,6 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export { default } from './themeable'
-export * from './components'
+export ApplyTheme from './ApplyTheme'

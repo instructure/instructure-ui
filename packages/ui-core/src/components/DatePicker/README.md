@@ -39,7 +39,7 @@ class Example extends React.Component {
             inline
             label="Choose Locale"
             onChange={e => this.setState({locale: e.target.value})}>
-              {moment.locales().map(loc => <option key={loc} value={loc}>{loc}</option>)}
+              {locales.map(loc => <option key={loc} value={loc}>{loc}</option>)}
           </Select>
         </Container>
         <DatePicker

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import themeable from '@instructure/ui-themeable'
+import themeable from '../../../themeable'
 
 import ApplyTheme from '../index'
 

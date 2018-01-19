@@ -21,66 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React, { Component } from 'react'
 
-import { Component } from 'react'
-import PropTypes from 'prop-types'
-import {ThemeContextTypes, makeThemeContext, getThemeContext} from '@instructure/ui-themeable/lib/ThemeContextTypes'
-import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
-import warning from '@instructure/ui-utils/lib/warning'
-import themeable from '@instructure/ui-themeable'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-/**
----
-category: components/utilities
----
-**/
-export default class ApplyTheme extends Component {
+import UIApplyTheme from '@instructure/ui-themeable/lib/components/ApplyTheme'
+
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-themeable'
+))
+class ApplyTheme extends Component {
   static propTypes = {
-    /**
-    * set theme variables to override the defaults
-    */
-    theme: PropTypes.object,
-    /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
-    children: PropTypes.node,
-    /**
-    * Prevent overriding this theme via a child ApplyTheme component or theme props
-    */
-    immutable: PropTypes.bool
-  }
-
-  static defaultProps = {
-    immutable: false
-  }
-
-  static childContextTypes = ThemeContextTypes;
-
-  static contextTypes = ThemeContextTypes;
-
-  static generateTheme = themeable.generateTheme;
-
-  getChildContext () {
-    let theme = this.props.theme || {}
-
-    const parentThemeContext = getThemeContext(this.context) || {}
-
-    if (parentThemeContext.immutable && parentThemeContext.theme) {
-      warning(
-        !this.props.theme,
-        '[ApplyTheme] Parent theme is immutable. Cannot apply theme: %O',
-        this.props.theme
-      )
-      theme = parentThemeContext.theme
-    } else if (parentThemeContext.theme) {
-      theme = mergeDeep(parentThemeContext.theme, theme)
-    }
-
-    return makeThemeContext(theme, parentThemeContext.immutable || this.props.immutable)
+    ...UIApplyTheme.PropTypes
   }
 
   render () {
-    return ensureSingleChild(this.props.children)
+    return <UIApplyTheme {...this.props} />
   }
 }
+
+export default ApplyTheme

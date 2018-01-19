@@ -30,8 +30,7 @@ import axe from 'react-axe'
 
 import { transform } from 'babel-standalone'
 
-import ApplyTheme from '@instructure/ui-core/lib/components/ApplyTheme'
-import themeable from '@instructure/ui-themeable'
+import themeable, { ApplyTheme } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'

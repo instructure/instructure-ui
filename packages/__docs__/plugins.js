@@ -57,24 +57,30 @@ plugins = plugins.concat([
       }
     },
     files: [
-      'README.md',
-      'CHANGELOG.md',
-      'CODE_OF_CONDUCT.md',
+      '**/*.md',
       'packages/*/src/components/*/**/index.js',
       'packages/*/src/components/*/**/README.md',
       'packages/*/src/utils/**/*.js',
       'packages/ui-themeable/src/**/*.js',
-      'packages/ui-utils/src/**/*.js',
-      'packages/*/README.md',
-      'docs/**/*.md'
+      'packages/ui-utils/src/**/*.js'
     ],
     ignore: [
       '**/node_modules/**',
+      '**/__svg__/**',
+      '**/__testfixtures__/**',
       '**/__tests__/**',
       '**/__docs__/**',
       '**/config/**',
       '**/src/index.js',
+      '**/src/components/index.js',
+      '**/src/utils/index.js',
+      '**/theme.js',
+      'packages/ui-utils/src/{react,dom,i18n}/index.js',
+      'packages/ui-utils/src/i18n/locales/*',
+      'packages/ui-docs-client/**/*.js',
+      'packages/ui-docs-plugin/**/*.js',
       'packages/ui-core/src/components/AccessibleContent/*',
+      'packages/ui-core/src/components/ApplyTheme/*',
       'packages/ui-core/src/components/Autocomplete/*',
       'packages/ui-core/src/components/Avatar/*',
       'packages/ui-core/src/components/Badge/*',
@@ -100,13 +106,8 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Text/*',
       'packages/ui-core/src/components/Transition/*',
       'packages/ui-core/src/components/TreeBrowser/*',
-      'packages/ui-utils/src/{react,dom,i18n}/index.js',
-      'packages/ui-utils/src/i18n/locales/*',
       'packages/ui-utils/src/dom/findTabbable.js',
-      'packages/ui-utils/src/dom/focusManager.js',
-      '**/theme.js',
-      'packages/ui-docs-client/**/*.js',
-      'packages/ui-docs-plugin/**/*.js'
+      'packages/ui-utils/src/dom/focusManager.js'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas'),
