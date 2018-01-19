@@ -41,7 +41,7 @@ class Example extends React.Component {
     return (
       <div>
         <Select
-          onChange={(e) => { this.setState({ placement: e.target.value }) }}
+          onChange={(e, o) => { this.setState({ placement: o.value }) }}
           value={this.state.placement}
           label={<ScreenReaderContent>Tray Placement</ScreenReaderContent>}
           inline
@@ -50,7 +50,7 @@ class Example extends React.Component {
         </Select>
 
         <Select
-          onChange={(e) => { this.setState({ size: e.target.value }) }}
+          onChange={(e, o) => { this.setState({ size: o.value }) }}
           value={this.state.size}
           label={<ScreenReaderContent>Tray Size</ScreenReaderContent>}
           inline

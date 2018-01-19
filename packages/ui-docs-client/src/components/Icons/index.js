@@ -80,8 +80,8 @@ export default class Icons extends Component {
 
   handleSearchChange = (e) => this.setState({query: e.target.value})
 
-  handleFormatChange = (e) => {
-    window.location.hash = `#${e.target.value}`
+  handleFormatChange = (e, o) => {
+    window.location.hash = `#${o.value}`
   }
 
   handleVariantClick = (e, name, variant, glyph) => {

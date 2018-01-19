@@ -114,9 +114,9 @@ class Example extends React.Component {
     }
   }
 
-  handleDirectionChange = (e) => {
+  handleDirectionChange = (e, o) => {
     this.setState({
-      direction: e.target.value
+      direction: o.value
     })
   };
 

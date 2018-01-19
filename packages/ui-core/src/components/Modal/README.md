@@ -31,8 +31,8 @@ example: true
      })
    };
 
-   handleSelectChange = (e) => {
-     this.setState({ size: e.target.value })
+   handleSelectChange = (e, o) => {
+     this.setState({ size: o.value })
    };
 
    render () {

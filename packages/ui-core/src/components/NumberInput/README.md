@@ -95,7 +95,7 @@ class Example extends React.Component {
       <div>
         <Select
           label="Choose locale"
-          onChange={(e) => this.setState({ locale: e.target.value })}>
+          onChange={(e, o) => this.setState({ locale: o.value })}>
             <option key="de" value="de">de</option>
             <option key="en" value="en">en</option>
         </Select>
