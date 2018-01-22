@@ -23,7 +23,13 @@
  */
 
 module.exports = {
-  extends: ['react-app', 'plugin:react/recommended'],
+  extends: [
+    'eslint:recommended',
+    'plugin:import/errors',
+    'plugin:import/warnings',
+    'plugin:react/recommended',
+    'plugin:jsx-a11y/recommended'
+  ],
   plugins: [
     'react',
     'jsx-a11y',
@@ -45,6 +51,13 @@ module.exports = {
   rules: {
     'react/no-find-dom-node': 0,
     'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-unused-vars': [
+      'warn',
+      {
+        args: 'none',
+        ignoreRestSiblings: true,
+      },
+    ],
     'no-extra-semi': 'error',
     'no-trailing-spaces': 'error',
     'no-param-reassign': ['error', { props: true }],

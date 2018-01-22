@@ -36,6 +36,10 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
   },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
+  },
   "publishConfig": {
     "access": "public"
   }

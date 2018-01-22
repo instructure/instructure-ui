@@ -42,7 +42,7 @@ function isBrowserMS () {
   let result = false
   try {
     result = document.documentMode || /Edge/.test(navigator.userAgent)
-  } catch (e) {}
+  } catch (e) {} // eslint-disable-line no-empty
 
   return result
 }

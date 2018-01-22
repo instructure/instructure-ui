@@ -261,7 +261,7 @@ class MenuItemFlyout extends Component {
         offsetY={offset.y}
       >
         <PositionTarget>
-          <MenuItem
+          <MenuItem // eslint-disable-line jsx-a11y/mouse-events-have-key-events
             type="flyout"
             active={this.state.show}
             onKeyDown={this.handleMenuItemTriggerKeyDown}

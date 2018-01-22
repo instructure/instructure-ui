@@ -49,7 +49,7 @@ const elements = {
     if (href) {
       return <Link href={href} title={title} target={target}>{children}</Link>
     } else {
-      return <a name={name}>{children}</a>
+      return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }
   }
 }

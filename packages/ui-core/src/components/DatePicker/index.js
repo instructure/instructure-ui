@@ -433,7 +433,7 @@ export default class DatePicker extends Component {
             <div>{rendered.format('YYYY')}</div>
           </div>
         </DatePickerPagination>
-        <div
+        <div // eslint-disable-line jsx-a11y/no-static-element-interactions
           ref={(c) => { this._calendar = c }}
           className={styles.calendar}
           onKeyDown={this.handleCalendarKeyDown}

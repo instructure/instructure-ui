@@ -45,7 +45,7 @@
     "@instructure/ui-themes": "^4.6.0",
     "@instructure/ui-utils": "^4.6.0",
     "gh-pages": "^1.0.0",
-    "http-server": "^0.10.0",
+    "http-server": "^0.11.1",
     "lorem-ipsum": "^1.0.4",
     "moment": "^2.10.6",
     "raw-loader": "^0.5.1",

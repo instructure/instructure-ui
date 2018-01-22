@@ -61,7 +61,7 @@ export default class InlineSVG extends Component {
     return matches ? matches[1] : src
   }
 
-  constructor (props) {
+  constructor () {
     super()
 
     this.titleId = uid()

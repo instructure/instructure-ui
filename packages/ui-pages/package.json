@@ -25,6 +25,18 @@
     "@instructure/ui-presets": "^4.6.0",
     "@instructure/ui-themes": "^4.6.0"
   },
+  "dependencies": {
+    "@instructure/ui-a11y": "^4.6.0",
+    "@instructure/ui-container": "^4.6.0",
+    "@instructure/ui-elements": "^4.6.0",
+    "@instructure/ui-themeable": "^4.6.0",
+    "@instructure/ui-utils": "^4.6.0",
+    "prop-types": "^15.5.10"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
+  },
   "publishConfig": {
     "access": "public"
   }

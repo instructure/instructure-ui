@@ -223,7 +223,7 @@ class MenuItem extends Component {
     }
 
     return (
-      <ElementType
+      <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         role={this.role}

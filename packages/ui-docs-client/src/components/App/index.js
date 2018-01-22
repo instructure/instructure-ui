@@ -80,7 +80,7 @@ export default class App extends Component {
     themeKey: PropTypes.string
   }
 
-  constructor (props) {
+  constructor () {
     super()
 
     this.state = {
@@ -237,7 +237,7 @@ export default class App extends Component {
     ) : null
   }
 
-  renderError (key) {
+  renderError () {
     return (
       <Section id="error">
         <Heading level="h2">Document not found</Heading>

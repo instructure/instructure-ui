@@ -43,3 +43,4 @@ class Breadcrumb extends Component {
 }
 
 export default Breadcrumb
+export { BreadcrumbLink } from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'

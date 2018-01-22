@@ -40,7 +40,7 @@
     "codemirror": "^5.33.0",
     "gray-matter": "^3.0.2",
     "he": "^1.1.1",
-    "marked": "^0.3.9",
+    "marked": "^0.3.12",
     "prop-types": "^15.5.10",
     "react-axe": "^2.1.9"
   },

@@ -42,4 +42,5 @@
    }
  }
 
- export default TreeBrowser
+export default TreeBrowser
+export { TreeCollection, TreeButton } from '@instructure/ui-tree-browser/lib/components/TreeBrowser'

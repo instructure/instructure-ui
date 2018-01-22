@@ -23,7 +23,7 @@
  */
 
 
-// eslint-disable-next-line import/no-webpack-loader-syntax
+// eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import IconSVG from '!!raw-loader!./placeholder.svg'
 
 export default function placeholderImage (width = 512, height = 512) {

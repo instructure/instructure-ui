@@ -23,7 +23,6 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
@@ -44,3 +43,4 @@ class Pagination extends Component {
 }
 
 export default Pagination
+export { PaginationButton } from '@instructure/ui-pagination/lib/components/Pagination'
