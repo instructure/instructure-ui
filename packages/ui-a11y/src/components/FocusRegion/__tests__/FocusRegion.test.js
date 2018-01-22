@@ -25,14 +25,14 @@
 import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 
-import Dialog from '../index'
+import FocusRegion from '../index'
 
-describe('<Dialog />', () => {
+describe('<FocusRegion />', () => {
   const testbed = new Testbed(
     (
-      <Dialog>
+      <FocusRegion>
         <Button>Hello World</Button>
-      </Dialog>
+      </FocusRegion>
     )
   )
 
@@ -49,9 +49,9 @@ describe('<Dialog />', () => {
   })
 
   it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true, label: 'Dialog Example' })
+    const subject = testbed.render({ open: true, label: 'FocusRegion Example' })
     expect(subject.find('[role="region"]')).to.be.present
-    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
+    expect(subject.find('[aria-label="FocusRegion Example"]')).to.be.present
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -87,11 +87,11 @@ describe('<Dialog />', () => {
   })
 })
 
-describe('<Dialog /> managed focus', () => {
+describe('<FocusRegion /> managed focus', () => {
   const applicationElement = document.createElement('div')
-  class DialogExample extends React.Component {
+  class FocusRegionExample extends React.Component {
     static propTypes = {
-      ...Dialog.PropTypes
+      ...FocusRegion.PropTypes
     }
 
     componentDidMount () {
@@ -109,18 +109,18 @@ describe('<Dialog /> managed focus', () => {
               this._input = c
             }}
           />
-          <Dialog {...this.props} label="A Modal" applicationElement={() => applicationElement}>
+          <FocusRegion {...this.props} label="A Modal" applicationElement={() => applicationElement}>
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />
             </div>
-          </Dialog>
+          </FocusRegion>
         </div>
       )
     }
   }
 
-  const testbed = new Testbed(<DialogExample />)
+  const testbed = new Testbed(<FocusRegionExample />)
 
   it('should focus the first tabbable element by default', () => {
     testbed.render({

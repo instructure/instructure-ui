@@ -28,7 +28,7 @@ module.exports = require('@instructure/ui-presets/karma')({
   bundle: './tests.bundle.js',
   coverageThreshold: {
     global: {
-      lines: 66
+      lines: 64
     }
   },
   coverageDirectory: path.join(__dirname, '../../coverage/ui-a11y')

@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
@@ -40,8 +41,6 @@ import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
-
-import Dialog from '../Dialog'
 
 class PopoverTrigger extends ComponentIdentifier {
   static displayName = 'PopoverTrigger'
@@ -454,14 +453,14 @@ class Popover extends Component {
 
     if (this.shown) {
       content = (
-        <Dialog
-          {...pickProps(this.props, Dialog.propTypes)}
+        <FocusRegion
+          {...pickProps(this.props, FocusRegion.propTypes)}
           open={this.shown}
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
         >
           {content}
-        </Dialog>
+        </FocusRegion>
       )
     }
 

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- export AccessibleContent from './AccessibleContent'
+export AccessibleContent from './AccessibleContent'
+export FocusRegion from './FocusRegion'
 export PresentationContent from './PresentationContent'
 export ScreenReaderContent from './ScreenReaderContent'

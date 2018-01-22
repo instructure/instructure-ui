@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
@@ -32,7 +34,6 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
-import Dialog from '../Dialog'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 /**
@@ -86,7 +87,7 @@ class Overlay extends Component {
      */
     applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
     /**
-     * An element or a function returning an element that wraps the content of the `<Dialog />`
+     * An element or a function returning an element that wraps the content of the `<FocusRegion />`
      */
     contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
@@ -239,14 +240,14 @@ class Overlay extends Component {
 
   render () {
     let content = (
-      <Dialog
-        {...pickProps(this.props, Dialog.propTypes)}
+      <FocusRegion
+        {...pickProps(this.props, FocusRegion.propTypes)}
         defaultFocusElement={this.props.defaultFocusElement}
         open={this.state.open}
         role="region"
       >
         {this.props.children}
-      </Dialog>
+      </FocusRegion>
     )
 
     if (this.props.transition) {

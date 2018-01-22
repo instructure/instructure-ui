@@ -2,7 +2,7 @@
 describes: Overlay
 ---
 
-The Overlay component is a [Dialog](#Dialog) component that transitions
+The Overlay component is a closable/dismissible component that transitions
 in and out content rendered in a [Portal](#Portal)
 
 ```js

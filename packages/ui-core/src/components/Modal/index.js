@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -39,7 +40,6 @@ import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
 
-import Dialog from '../Dialog'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 /**
@@ -266,8 +266,8 @@ export default class Modal extends Component {
           type={this.props.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <Dialog
-            {...pickProps(this.props, Dialog.propTypes)}
+          <FocusRegion
+            {...pickProps(this.props, FocusRegion.propTypes)}
             defaultFocusElement={this.defaultFocusElement}
             contentElement={() => this._content}
             shouldCloseOnDocumentClick={false}
@@ -299,7 +299,7 @@ export default class Modal extends Component {
               </CloseButton>
               {children}
             </ModalContent>
-          </Dialog>
+          </FocusRegion>
         </Transition>
       </Portal>
     )

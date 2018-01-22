@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -35,7 +36,6 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
-import Dialog from '../Dialog'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import TrayContent from './TrayContent'
@@ -309,8 +309,8 @@ class Tray extends Component {
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
           <TrayContent {...pickProps(props, TrayContent.propTypes)} ref={contentRef}>
-            <Dialog
-              {...pickProps(props, Dialog.propTypes)}
+            <FocusRegion
+              {...pickProps(props, FocusRegion.propTypes)}
               defaultFocusElement={this.defaultFocusElement}
               open={this.state.portalOpen || this.state.transitioning}
               role="region"
@@ -318,7 +318,7 @@ class Tray extends Component {
             >
               {this.renderCloseButton()}
               {children}
-            </Dialog>
+            </FocusRegion>
           </TrayContent>
         </Transition>
       </Portal>

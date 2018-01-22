@@ -40,6 +40,10 @@
     "replace": "@instructure/ui-elements/lib/components/ContextBox"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Dialog",
+    "replace": "@instructure/ui-a11y/lib/components/FocusRegion"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Grid",
     "replace": "@instructure/ui-layout/lib/components/Grid"
   },

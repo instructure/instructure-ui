@@ -25,6 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
@@ -34,9 +35,6 @@ import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClie
 import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import ms from '@instructure/ui-utils/lib/ms'
-
-/* TODO: Change these imports once we break ui-overlays out from ui-core */
-import Dialog from '../../../../../ui-core/lib/components/Dialog'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -287,8 +285,8 @@ class LayoutTray extends Component {
     // jolted offscreen when the default focus element gets focus
     if (this.state.positioned) {
       trayContent = (
-        <Dialog
-          {...pickProps(this.props, Dialog.propTypes)}
+        <FocusRegion
+          {...pickProps(this.props, FocusRegion.propTypes)}
           open
           shouldCloseOnDocumentClick={false}
           shouldReturnFocus
@@ -307,7 +305,7 @@ class LayoutTray extends Component {
             {closeButtonLabel}
           </CloseButton>
           {trayContent}
-        </Dialog>
+        </FocusRegion>
       )
     }
 

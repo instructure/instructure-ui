@@ -34,6 +34,7 @@ export default MyAccessibleContent = function () {
 ### Components
 The `ui-a11y` package contains the following components:
 - [AccessibleContent](#AccessibleContent)
+- [FocusRegion](#FocusRegion)
 - [PresentationContent](#PresentationContent)
 - [ScreenReaderContent](#ScreenReaderContent)
 
