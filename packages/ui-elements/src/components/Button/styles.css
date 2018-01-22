@@ -405,7 +405,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    height: 100%;
   }
 }
 
@@ -476,7 +476,6 @@
 
 .icon,
 .icon-inverse {
-  background: transparent;
   border-color: var(--iconBorderColor);
 }
 
