@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -39,7 +41,6 @@ import ModalFooter from './ModalFooter'
 
 import Dialog from '../Dialog'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
-import CloseButton from '../CloseButton'
 
 /**
 ---

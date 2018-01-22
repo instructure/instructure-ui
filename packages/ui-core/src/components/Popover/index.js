@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
@@ -41,7 +42,6 @@ import warning from '@instructure/ui-utils/lib/warning'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
 
 import Dialog from '../Dialog'
-import CloseButton from '../CloseButton'
 
 class PopoverTrigger extends ComponentIdentifier {
   static displayName = 'PopoverTrigger'

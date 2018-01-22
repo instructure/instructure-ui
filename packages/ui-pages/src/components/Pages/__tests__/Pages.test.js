@@ -24,7 +24,7 @@
 
 import React from 'react'
 import Pages, { Page } from '../index'
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 
 describe('<Pages />', () => {
   const testbed = new Testbed(

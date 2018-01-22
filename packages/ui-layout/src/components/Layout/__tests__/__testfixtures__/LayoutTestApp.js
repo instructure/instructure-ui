@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Layout, { LayoutTray, LayoutContent } from '../../index'

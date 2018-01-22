@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import within from '@instructure/ui-utils/lib/within'
 

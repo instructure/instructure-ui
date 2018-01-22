@@ -86,6 +86,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Badge/*',
       'packages/ui-core/src/components/Button/*',
       'packages/ui-core/src/components/Breadcrumb/*',
+      'packages/ui-core/src/components/CloseButton/*',
       'packages/ui-core/src/components/Container/*',
       'packages/ui-core/src/components/ContextBox/*',
       'packages/ui-core/src/components/Grid/**',

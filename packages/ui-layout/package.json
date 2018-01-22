@@ -30,6 +30,7 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-buttons": "^4.6.0",
     "@instructure/ui-container": "^4.6.0",
     "@instructure/ui-elements": "^4.6.0",
     "@instructure/ui-motion": "^4.6.0",

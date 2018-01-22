@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Container from '@instructure/ui-container/lib/components/Container'
+
 import themeable from '@instructure/ui-themeable'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
@@ -34,7 +36,6 @@ import uid from '@instructure/ui-utils/lib/uid'
 import warning from '@instructure/ui-utils/lib/warning'
 
 import Page from './Page'
-import Container from '@instructure/ui-container/lib/components/Container'
 
 import styles from './styles.css'
 import theme from './theme'

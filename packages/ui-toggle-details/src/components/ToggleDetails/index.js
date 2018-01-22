@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'

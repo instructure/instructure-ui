@@ -25,6 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
 import themeable from '@instructure/ui-themeable'
@@ -36,7 +37,6 @@ import ms from '@instructure/ui-utils/lib/ms'
 
 /* TODO: Change these imports once we break ui-overlays out from ui-core */
 import Dialog from '../../../../../ui-core/lib/components/Dialog'
-import CloseButton from '../../../../../ui-core/lib/components/CloseButton'
 
 import styles from './styles.css'
 import theme from './theme'

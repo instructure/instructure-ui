@@ -41,6 +41,7 @@ module.exports = {
     'instructure-ui': [
       '@instructure/ui-a11y',
       '@instructure/ui-breadcrumb',
+      '@instructure/ui-buttons',
       '@instructure/ui-container',
       '@instructure/ui-core',
       '@instructure/ui-elements',
@@ -78,6 +79,7 @@ module.exports = {
       // set up aliases to get webpack to rebuild when we make changes to these packages
       '@instructure/ui-a11y$': path.resolve(__dirname, '../ui-a11y/src/'),
       '@instructure/ui-breadcrumb$': path.resolve(__dirname, '../ui-breadcrumb/src/'),
+      '@instructure/ui-buttons$': path.resolve(__dirname, '../ui-buttons/src/'),
       '@instructure/ui-container$': path.resolve(__dirname, '../ui-container/src/'),
       '@instructure/ui-core$': path.resolve(__dirname, '../ui-core/src/'),
       '@instructure/ui-elements$': path.resolve(__dirname, '../ui-elements/src/'),
@@ -96,6 +98,7 @@ module.exports = {
 
       '@instructure/ui-a11y/lib': path.resolve(__dirname, '../ui-a11y/src'),
       '@instructure/ui-breadcrumb/lib': path.resolve(__dirname, '../ui-breadcrumb/src'),
+      '@instructure/ui-buttons/lib': path.resolve(__dirname, '../ui-buttons/src'),
       '@instructure/ui-container/lib': path.resolve(__dirname, '../ui-container/src'),
       '@instructure/ui-core/lib': path.resolve(__dirname, '../ui-core/src'),
       '@instructure/ui-elements/lib': path.resolve(__dirname, '../ui-elements/src'),

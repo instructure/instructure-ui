@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'

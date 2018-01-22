@@ -25,7 +25,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Button",
-    "replace": "@instructure/ui-elements/lib/components/Button"
+    "replace": "@instructure/ui-buttons/lib/components/Button"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/CloseButton",
+    "replace": "@instructure/ui-buttons/lib/components/CloseButton"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Container",

@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -34,7 +36,6 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Dialog from '../Dialog'
-import CloseButton from '../CloseButton'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import TrayContent from './TrayContent'

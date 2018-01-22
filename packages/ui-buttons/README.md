@@ -2,7 +2,7 @@
 category: packages
 ---
 
-## ui-elements
+## ui-buttons
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
@@ -13,49 +13,36 @@ category: packages
 ### Installation
 
 ```sh
-yarn add @instructure/ui-elements
+yarn add @instructure/ui-buttons
 ```
 
 ### Usage
 
 ```js
 import React from 'react'
-import Avatar from '@instructure/ui-elements/lib/components/Avatar'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 
-export default MyAvatar = function () {
+export default MyButton = function () {
   return (
-    <Avatar name="Kyle Montgomery" />
+    <Button>Hello button</Button>
   )
 }
 ```
 
 ### Components
-The `ui-elements` package contains the following:
-- [Avatar](#Avatar)
-- [Badge](#Badge)
-- [ContextBox](#ContextBox)
-- [Heading](#Heading)
-- [Image](#Image)
-- [Link](#Link)
-- [List](#List)
-- [MetricsList](#MetricsList)
-- [Pill](#Pill)
-- [Progress](#Progress)
-- [Spinner](#Spinner)
-- [Table](#Table)
-- [Tag](#Tag)
-- [Text](#Text)
+The `ui-buttons` package contains the following:
+- [Button](#Button)
+- [CloseButton](#CloseButton)
 
 ### Contribute
-
 See the [contributing guidelines](#contributing) for details.
 
 ### License
 
 [MIT](LICENSE)
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-elements.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-elements
+[npm]: https://img.shields.io/npm/v/@instructure/ui-buttons.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-buttons
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

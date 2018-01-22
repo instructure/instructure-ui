@@ -29,6 +29,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import keycode from 'keycode'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Container from '@instructure/ui-container/lib/components/Container'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
@@ -42,7 +43,6 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import CloseButton from '../CloseButton'
 import Transition from '../Transition'
 
 import styles from './styles.css'

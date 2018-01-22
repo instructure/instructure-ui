@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIButton from '@instructure/ui-buttons/lib/components/Button'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-buttons'
-))
-class Button extends Component {
-  static propTypes = {
-    ...UIButton.PropTypes
-  }
-
-  render () {
-    return <UIButton {...this.props} />
-  }
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }
-
-export default Button

@@ -22,24 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+const path = require('path')
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import UIButton from '@instructure/ui-buttons/lib/components/Button'
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-buttons'
-))
-class Button extends Component {
-  static propTypes = {
-    ...UIButton.PropTypes
-  }
-
-  render () {
-    return <UIButton {...this.props} />
-  }
-}
-
-export default Button
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 91
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-buttons')
+})

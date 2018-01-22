@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-elements/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/components/Button'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import UIPosition from '@instructure/ui-layout/lib/components/Position'
 

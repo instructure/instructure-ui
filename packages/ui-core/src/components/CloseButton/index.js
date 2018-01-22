@@ -23,68 +23,22 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import Button from '@instructure/ui-elements/lib/components/Button'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import UICloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-category: components/utilities
----
-**/
-@themeable(theme, styles)
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-buttons'
+))
 class CloseButton extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequired,
-    buttonRef: PropTypes.func,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    onClick: PropTypes.func,
-    margin: CustomPropTypes.spacing,
-    placement: PropTypes.oneOf(['start', 'end', 'static']),
-    offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
-    variant: PropTypes.oneOf(['icon', 'icon-inverse'])
-  }
-
-  static defaultProps = {
-    onClick: (event) => {},
-    buttonRef: (el) => {},
-    variant: 'icon',
-    placement: 'static',
-    offset: 'x-small',
-    size: 'small',
-    margin: '0'
+    ...UICloseButton.PropTypes
   }
 
   render () {
-    const { placement, offset } = this.props
-
-    return (
-      <span
-        {...omitProps(this.props, CloseButton.propTypes)}
-        className={classnames({
-          [styles.root]: true,
-          [styles[`placement--${placement}`]]: placement,
-          [styles[`offset--${offset}`]]: offset
-        })}
-      >
-        <Button {...pickProps(this.props, Button.propTypes)}>
-          <IconX />
-          <ScreenReaderContent>
-            {this.props.children}
-          </ScreenReaderContent>
-        </Button>
-      </span>
-    )
+    return <UICloseButton {...this.props} />
   }
 }
 
