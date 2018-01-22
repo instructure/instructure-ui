@@ -38,6 +38,7 @@
     "@instructure/ui-container": "^4.7.1",
     "@instructure/ui-elements": "^4.7.1",
     "@instructure/ui-forms": "^4.7.1",
+    "@instructure/ui-i18n": "^4.7.1",
     "@instructure/ui-icons": "^4.7.1",
     "@instructure/ui-layout": "^4.7.1",
     "@instructure/ui-menu": "^4.7.1",

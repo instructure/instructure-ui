@@ -22,6 +22,11 @@
  * SOFTWARE.
  */
 
+import Locale from '@instructure/ui-i18n/lib/Locale'
+
+import { changedPackageWarning } from '../react/deprecated'
+import warning from '../warning'
+
 /**
 * ---
 * category: utilities/i18n
@@ -35,9 +40,14 @@ export default {
   * @returns {String} locale (defaults to 'en')
   */
   browserLocale (nav = navigator) {
-    if (typeof nav !== 'undefined') {
-      return nav.language
-    }
-    return 'en'
+    warning(
+      false,
+      '[%s] was deprecated in version %s. %s',
+      'Locale.browserLocale',
+      '5.0.0',
+      changedPackageWarning('ui-utils', 'ui-i18n')
+    )
+
+    return Locale.browserLocale(nav)
   }
 }

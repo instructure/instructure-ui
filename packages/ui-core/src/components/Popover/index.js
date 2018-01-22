@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 
-import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
+import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 import UIPopover from '@instructure/ui-overlays/lib/components/Popover'

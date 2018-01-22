@@ -12,6 +12,10 @@
     "replace": "@instructure/ui-themeable/lib/components/ApplyTheme"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/ApplyLocale",
+    "replace": "@instructure/ui-i18n/lib/components/ApplyLocale"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Avatar",
     "replace": "@instructure/ui-elements/lib/components/Avatar"
   },

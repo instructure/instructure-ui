@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-import DateTime from '@instructure/ui-i18n/lib/DateTime'
-
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import moment from 'moment'
+import 'moment-timezone/builds/moment-timezone-with-data'
 
 /**
 * ---
@@ -42,14 +40,8 @@ import warning from '../warning'
 * @returns {String} ISO 8601 string
 */
 export function now (locale, timezone) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.now',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
-  return DateTime.now(locale, timezone)
+  checkParams(locale, timezone)
+  return moment().locale(locale).tz(timezone)
 }
 
 /**
@@ -60,14 +52,8 @@ export function now (locale, timezone) {
 * @returns {String} ISO 8601 string
 */
 export function parse (dateString, locale, timezone) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.parse',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
-  return DateTime.parse(dateString, locale, timezone)
+  checkParams(locale, timezone)
+  return moment.tz(dateString, [moment.ISO_8601, 'l', 'L', 'll', 'LL'], locale, timezone)
 }
 
 /**
@@ -76,14 +62,7 @@ export function parse (dateString, locale, timezone) {
 * @returns {Boolean} true if dateString is a valid ISO 8601 string
 */
 export function isValid (dateString) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.isValid',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
-  return DateTime.isValid(dateString)
+  return moment(dateString, [moment.ISO_8601]).isValid()
 }
 
 /**
@@ -92,14 +71,7 @@ export function isValid (dateString) {
 * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 */
 export function browserTimeZone () {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.browserTimeZone',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
-  return DateTime.browserTimeZone()
+  return moment.tz.guess()
 }
 
 export default {
@@ -108,3 +80,9 @@ export default {
   browserTimeZone,
   isValid
 }
+
+function checkParams (locale, timezone) {
+  if (locale == null) throw Error('locale must be specified')
+  if (timezone == null) throw Error('timezone must be specified')
+}
+

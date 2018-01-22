@@ -31,10 +31,10 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import moment from 'moment'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
+
 import getDisplayName from './getDisplayName'
 import warning from '../warning'
-
 import canUseDOM from '../dom/canUseDOM'
 
 export default {
@@ -476,8 +476,7 @@ Otherwise, set '${handlerName}'.`
       )
     }
 
-    const parsedMoment = moment(propValue, [moment.ISO_8601])
-    if (!parsedMoment.isValid()) {
+    if (!DateTime.isValid(propValue)) {
       return new Error(
         `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
           `an ISO 8601 formatted string.`

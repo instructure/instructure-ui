@@ -22,19 +22,8 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
-
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
-
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
-
+import Numeral from 'numeral'
+import './locales'
 /**
  * ---
  * category: utilities
@@ -42,3 +31,4 @@ warning(
  * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
  */
 export default Numeral
+

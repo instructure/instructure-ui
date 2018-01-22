@@ -36,6 +36,7 @@
     "@instructure/ui-layout": "^4.7.1",
     "@instructure/ui-polyfill-loader": "^4.7.1",
     "@instructure/ui-forms": "^4.7.1",
+    "@instructure/ui-i18n": "^4.7.1",
     "@instructure/ui-menu": "^4.7.1",
     "@instructure/ui-motion": "^4.7.1",
     "@instructure/ui-overlays": "^4.7.1",

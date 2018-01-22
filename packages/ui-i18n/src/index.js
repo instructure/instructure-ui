@@ -22,23 +22,9 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+export * from './components'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
-
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
-
-/**
- * ---
- * category: utilities
- * ---
- * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
- */
-export default Numeral
+/* list utils in alphabetical order */
+export DateTime from './DateTime'
+export Locale from './Locale'
+export Numeral from './Numeral'

@@ -22,23 +22,14 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+const path = require('path')
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
-
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
-
-/**
- * ---
- * category: utilities
- * ---
- * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
- */
-export default Numeral
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 100
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-i18n')
+})

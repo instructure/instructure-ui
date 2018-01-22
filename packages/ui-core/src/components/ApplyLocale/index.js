@@ -22,44 +22,31 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
-import PropTypes from 'prop-types'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import React, { Component } from 'react'
+
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+
+import UIApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
 
 /**
 ---
 category: components/utilities
 ---
 **/
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-i18n'
+))
 export default class ApplyLocale extends Component {
   static propTypes = {
-    /**
-      A standard language id
-    **/
-    locale: PropTypes.string,
-    /**
-      A timezone identifier in the format: Area/Location
-    **/
-    timezone: PropTypes.string,
-    /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
-    children: PropTypes.node
+    ...UIApplyLocale.propTypes
   }
 
   static childContextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
-
-  getChildContext () {
-    return {
-      locale: this.props.locale,
-      timezone: this.props.timezone
-    }
+    ...UIApplyLocale.childContextTypes
   }
 
   render () {
-    return ensureSingleChild(this.props.children)
+    return <UIApplyLocale {...this.props} />
   }
 }

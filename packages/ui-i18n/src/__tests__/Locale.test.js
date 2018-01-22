@@ -22,23 +22,20 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+import Locale from '../Locale'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+describe('browserLocale', () => {
+  it('returns the navigator language if a navigator is explicity passed', () => {
+    const navigator = { language: 'de' }
+    expect(Locale.browserLocale(navigator)).to.equal('de')
+  })
 
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
+  it('returns the browser locale if no navigator is passed, or "en" if no browser locale is set', () => {
+    const expectedLanguage = navigator ? navigator.language : 'en'
+    expect(Locale.browserLocale()).to.equal(expectedLanguage)
+  })
 
-/**
- * ---
- * category: utilities
- * ---
- * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
- */
-export default Numeral
+  it('returns the default "en" if navigator is undefined', () => {
+    expect(Locale.browserLocale(null)).to.equal('en')
+  })
+})

@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-utils",
+  "name": "@instructure/ui-i18n",
   "version": "4.7.1",
-  "description": "A collection of utilities for UI components",
+  "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -26,21 +26,15 @@
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
-  "dependencies": {
-    "@instructure/ui-i18n": "^4.7.1",
-    "bowser": "^1.9.1",
-    "decimal.js": "^9.0.1",
-    "deep-equal": "^1.0.1",
-    "keycode": "^2.1.8",
-    "no-scroll": "^2.1.0",
-    "object.omit": "^3.0.0",
-    "object.pick": "^1.2.0",
-    "prop-types": "^15.5.10",
-    "shortid": "^2.2.8"
-  },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",
     "react-dom": "^0.14.9 || ^15.6.2"
+  },
+  "dependencies": {
+    "moment": "^2.10.6",
+    "moment-timezone": "^0.5.14",
+    "numeral": "^2.0.6",
+    "prop-types": "^15.5.10"
   },
   "publishConfig": {
     "access": "public"

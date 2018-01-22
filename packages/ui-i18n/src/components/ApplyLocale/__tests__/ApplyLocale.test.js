@@ -22,23 +22,24 @@
  * SOFTWARE.
  */
 
-import Numeral from '@instructure/ui-i18n/lib/Numeral'
+import React from 'react'
+import ApplyLocale from '../index'
+import DatePicker from '../../../../../ui-core/lib/components/DatePicker'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+describe('<ApplyLocale />', () => {
+  const testbed = new Testbed(
+    <ApplyLocale locale="fr" timezone="Europe/Paris">
+      <DatePicker previousLabel="foo" nextLabel="bar" />
+    </ApplyLocale>
+  )
 
-warning(
-  false,
-  '[%s] was deprecated in version %s. %s',
-  'Numeral',
-  '5.0.0',
-  changedPackageWarning('ui-utils', 'ui-i18n')
-)
+  it('applies locale context', () => {
+    const subject = testbed.render()
+    expect(subject.find(DatePicker).unwrap().context).to.include({locale: 'fr'})
+  })
 
-/**
- * ---
- * category: utilities
- * ---
- * A wrapper for [numeral](https://www.npmjs.com/package/numeral)
- */
-export default Numeral
+  it('applies timezone context', () => {
+    const subject = testbed.render()
+    expect(subject.find(DatePicker).unwrap().context).to.include({timezone: 'Europe/Paris'})
+  })
+})

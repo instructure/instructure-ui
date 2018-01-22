@@ -22,16 +22,44 @@
  * SOFTWARE.
  */
 
-import Locale from '../Locale'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 
-describe('browserLocale', () => {
-  it('returns the navigator language if a navigator is explicity passed', () => {
-    const navigator = { language: 'de' }
-    expect(Locale.browserLocale(navigator)).to.equal('de')
-  })
+/**
+---
+category: components/utilities
+---
+**/
+export default class ApplyLocale extends Component {
+  static propTypes = {
+    /**
+      A standard language id
+    **/
+    locale: PropTypes.string,
+    /**
+      A timezone identifier in the format: Area/Location
+    **/
+    timezone: PropTypes.string,
+    /**
+    * accepts only one child (children must be wrapped in a single component/element)
+    */
+    children: PropTypes.node
+  }
 
-  it('returns the browser locale if no navigator is passed, or "en" if no browser locale is set', () => {
-    const expectedLanguage = navigator ? navigator.language : 'en'
-    expect(Locale.browserLocale()).to.equal(expectedLanguage)
-  })
-})
+  static childContextTypes = {
+    locale: PropTypes.string,
+    timezone: PropTypes.string
+  }
+
+  getChildContext () {
+    return {
+      locale: this.props.locale,
+      timezone: this.props.timezone
+    }
+  }
+
+  render () {
+    return ensureSingleChild(this.props.children)
+  }
+}
