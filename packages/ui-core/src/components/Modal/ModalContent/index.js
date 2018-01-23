@@ -23,71 +23,23 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import Browser from '@instructure/ui-utils/lib/Browser'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import Mask from '../../Mask'
+import { ModalContent as UIModalContent } from '@instructure/ui-overlays/lib/components/Modal'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-parent: Modal
----
-**/
-@themeable(theme, styles)
-export default class ModalContent extends Component {
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-overlays'
+))
+class ModalContent extends Component {
   static propTypes = {
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
-    contentRef: PropTypes.func,
-    className: PropTypes.string,
-    shouldCloseOnOverlayClick: PropTypes.bool,
-    onDismiss: PropTypes.func
-  }
-
-  static defaultProps = {
-    contentRef: function (el) {},
-    size: 'auto',
-    children: undefined,
-    className: undefined,
-    shouldCloseOnOverlayClick: true,
-    onDismiss: event => {}
+    ...UIModalContent.PropTypes
   }
 
   render () {
-    const {
-      size,
-      shouldCloseOnOverlayClick,
-      onDismiss
-    } = this.props
-
-    const ie11 = Browser.msie && Browser.version > 10
-
-    return (
-      <Mask
-        onDismiss={shouldCloseOnOverlayClick ? onDismiss : undefined}
-        placement={ie11 ? 'top' : 'center'}
-        fullScreen
-      >
-        <span
-          {...omitProps(this.props, ModalContent.propTypes)}
-          className={classnames({
-            [styles.content]: true,
-            [styles[size]]: true,
-            [this.props.className]: this.props.className,
-            [styles.ie11]: ie11
-          })}
-          ref={this.props.contentRef}
-        >
-          {this.props.children}
-        </span>
-      </Mask>
-    )
+    return <UIModalContent {...this.props} />
   }
 }
+
+export default ModalContent

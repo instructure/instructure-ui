@@ -41,13 +41,7 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 category: components/dialogs
 ---
 **/
-@deprecated('3.0.0', {
-  onRequestClose: 'onDismiss',
-  isOpen: 'open',
-  onReady: 'onOpen',
-  onAfterOpen: 'onOpen',
-  shouldCloseOnClick: 'shouldCloseOnDocumentClick'
-})
+@deprecated('5.0.0', null)
 class Overlay extends Component {
   static propTypes = {
     children: PropTypes.node,

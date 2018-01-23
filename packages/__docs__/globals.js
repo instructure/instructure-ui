@@ -40,6 +40,7 @@ import * as UIForms from '@instructure/ui-forms/lib/components'
 import * as UILayout from '@instructure/ui-layout/lib/components'
 import * as UIMenu from '@instructure/ui-menu/lib/components'
 import * as UIMotion from '@instructure/ui-motion/lib/components'
+import * as UIOverlays from '@instructure/ui-overlays/lib/components'
 import * as UISVGImages from '@instructure/ui-svg-images/lib/components'
 import * as UIPages from '@instructure/ui-pages/lib/components'
 import * as UIPagination from '@instructure/ui-pagination/lib/components'
@@ -74,6 +75,7 @@ const components = Object.assign(
   UILayout,
   UIMenu,
   UIMotion,
+  UIOverlays,
   UISVGImages,
   UIPages,
   UIPagination,

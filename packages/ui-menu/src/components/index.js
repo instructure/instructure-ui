@@ -22,5 +22,6 @@
  * SOFTWARE.
  */
 
- export Menu, { MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
- export MenuItemFlyout from './Menu/MenuItemFlyout'
+export Menu, { MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
+export MenuItemFlyout from './Menu/MenuItemFlyout'
+export PopoverMenu from './PopoverMenu'

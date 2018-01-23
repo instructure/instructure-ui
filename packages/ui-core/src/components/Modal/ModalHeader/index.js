@@ -23,27 +23,23 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-/**
----
-parent: Modal
----
-**/
-@themeable(theme, styles)
-export default class ModalHeader extends Component {
+import { ModalHeader as UIModalHeader } from '@instructure/ui-overlays/lib/components/Modal'
+
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-overlays'
+))
+class ModalHeader extends Component {
   static propTypes = {
-    children: PropTypes.node
+    ...UIModalHeader.PropTypes
   }
+
   render () {
-    return (
-      <div className={styles.root}>
-        {this.props.children}
-      </div>
-    )
+    return <UIModalHeader {...this.props} />
   }
 }
+
+export default ModalHeader

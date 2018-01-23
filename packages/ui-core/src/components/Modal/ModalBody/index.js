@@ -23,43 +23,23 @@
  */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { ModalBody as UIModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-parent: Modal
----
-**/
-@themeable(theme, styles)
-export default class ModalBody extends Component {
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-overlays'
+))
+class ModalBody extends Component {
   static propTypes = {
-    children: PropTypes.node,
-    padding: CustomPropTypes.spacing
-  }
-
-  static defaultProps = {
-    padding: 'medium'
+    ...UIModalBody.PropTypes
   }
 
   render () {
-    return (
-      <Container
-        as="div"
-        className={styles.root}
-        padding={this.props.padding}
-      >
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
-      </Container>
-    )
+    return <UIModalBody {...this.props} />
   }
 }
+
+export default ModalBody

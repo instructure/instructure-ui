@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
+import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -36,7 +37,6 @@ import Locale from '@instructure/ui-utils/lib/i18n/Locale'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import DatePicker from '../DatePicker'
-import Popover, { PopoverContent } from '../Popover'
 import TextInput from '../TextInput'
 
 import styles from './styles.css'

@@ -24,7 +24,7 @@
 
 import React from 'react'
 import PopoverMenu from '../index'
-import { MenuItem, MenuItemSeparator } from '@instructure/ui-menu/lib/components/Menu'
+import { MenuItem, MenuItemSeparator } from '../../Menu'
 
 describe('<PopoverMenu />', () => {
   const testbed = new Testbed(

@@ -72,6 +72,10 @@
     "replace": "@instructure/ui-elements/lib/components/List"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Mask",
+    "replace": "@instructure/ui-overlays/lib/components/Mask"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Media",
     "replace": "@instructure/ui-layout/lib/components/Media"
   },
@@ -80,8 +84,20 @@
     "replace": "@instructure/ui-elements/lib/components/MetricsList"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Modal",
+    "replace": "@instructure/ui-overlays/lib/components/Modal"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Pill",
     "replace": "@instructure/ui-elements/lib/components/Pill"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Popover",
+    "replace": "@instructure/ui-overlays/lib/components/Popover"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/PopoverMenu",
+    "replace": "@instructure/ui-menu/lib/components/PopoverMenu"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
@@ -116,8 +132,16 @@
     "replace": "@instructure/ui-toggle-details/lib/components/ToggleDetails"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Tooltip",
+    "replace": "@instructure/ui-overlays/lib/components/Tooltip"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Transition",
     "replace": "@instructure/ui-motion/lib/components/Transition"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Tray",
+    "replace": "@instructure/ui-overlays/lib/components/Tray"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TreeBrowser",
