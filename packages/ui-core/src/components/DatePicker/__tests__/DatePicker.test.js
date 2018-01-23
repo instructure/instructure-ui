@@ -28,58 +28,9 @@ import keycode from 'keycode'
 import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 
 import DatePicker from '../index'
-import styles from '../styles.css'
-import paginationStyles from '../DatePickerPagination/styles.css'
 
 describe('<DatePicker />', () => {
   const testbed = new Testbed(<DatePicker previousLabel="foo" nextLabel="bar" todayValue="2017-06-01" />)
-
-  it('styles today date', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.today}`)).to.be.present
-  })
-
-  it('styles the selected date', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.selected}`)).to.be.present
-  })
-
-  it('styles dates outside the selected month', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.outside}`).length).to.be.above(0)
-  })
-
-  it('fires onSelectedChange when date is clicked', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render({onSelectedChange})
-    const cell = subject.find(`.${styles.outside}`).first()
-    cell.simulate('click')
-    expect(onSelectedChange).to.have.been.called
-    const onChangeArg = onSelectedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
-  })
-
-  it('fires onRenderedChange when next arrow is clicked', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${paginationStyles.root}`)
-    const nextButton = slider.find('Button').first()
-    nextButton.simulate('click')
-    expect(onRenderedChange).to.have.been.called
-    const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
-  })
-
-  it('fires onRenderedChange when previous arrow is clicked', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${paginationStyles.root}`)
-    const prevButton = slider.find('Button').last()
-    prevButton.simulate('click')
-    expect(onRenderedChange).to.have.been.called
-    const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
-  })
 
   it('localizes the calendar layout', () => {
     const subject = testbed.render({locale: 'fr'})
@@ -87,21 +38,6 @@ describe('<DatePicker />', () => {
     expect(subject.find('th ScreenReaderContent').first().text().toLowerCase()).to.equal('lundi')
   })
 
-  it('localizes the header', () => {
-    const subject = testbed.render({defaultRenderedValue: '2017-01-01', locale: 'fr'})
-    expect(subject.find(`.${styles.label}`).text()).to.equal('janvier2017')
-  })
-
-  it('uses the specified timezone', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render(
-      {defaultRenderedValue: '2017-05-01', timezone: 'Europe/Paris', onSelectedChange})
-    expect(subject.get)
-    const cell = subject.find(`.${styles.outside}`).first()
-    cell.simulate('click')
-    expect(onSelectedChange).to.have.been.called
-    expect(onSelectedChange.getCall(0).args[1]).to.include('2017-04-30T00:00:00+02:00')
-  })
 
   it('gets locale and timezone from context', () => {
     const subject = testbed.render({}, {locale: 'fr', timezone: 'Europe/Paris'})
@@ -156,16 +92,6 @@ describe('<DatePicker />', () => {
       onRenderedChange
     })
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(onRenderedChange).to.have.been.called
-  })
-
-  it('should move slider to a different month when date is selected out of month', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({
-      defaultSelectedValue: '2017-05-01',
-      onRenderedChange
-    })
-    subject.find(`.${styles.outside}`).first().simulate('click')
     expect(onRenderedChange).to.have.been.called
   })
 

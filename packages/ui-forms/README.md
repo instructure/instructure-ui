@@ -16,6 +16,42 @@ category: packages
 yarn add @instructure/ui-forms
 ```
 
+### Usage
+
+```js
+import React from 'react'
+import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+
+export default MyTextInput = function () {
+  return (
+    <TextInput label="Name" placeholder="Doe, John Doe" />
+  )
+}
+```
+
+### Components
+The `ui-forms` package contains the following components:
+- [Checkbox](#Checkbox)
+- [CheckboxGroup](#CheckboxGroup)
+- [DateInput](#DateInput)
+- [FileDrop](#FileDrop)
+- [FormField](#FormField)
+- [FormFieldGroup](#FormFieldGroup)
+- [NumberInput](#NumberInput)
+- [RadioInput](#RadioInput)
+- [RadioInputGroup](#RadioInputGroup)
+- [RangeInput](#RangeInput)
+- [Select](#Select)
+- [TextArea](#TextArea)
+- [TextInput](#TextInput)
+- [TimeInput](#TimeInput)
+
+### Contribute
+
+See the [contributing guidelines](#contributing) for details.
+
+### License
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-forms.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-forms
 

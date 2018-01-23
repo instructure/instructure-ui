@@ -35,7 +35,7 @@ import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown
 import uid from '@instructure/ui-utils/lib/uid'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import FormField from '../FormField'
+import FormField from '@instructure/ui-forms/lib/components/FormField'
 
 import styles from './styles.css'
 import theme from './theme'

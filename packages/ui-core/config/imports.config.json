@@ -8,6 +8,10 @@
     "replace": "@instructure/ui-core/lib/components/Text"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Autocomplete",
+    "replace": "@instructure/ui-forms/lib/components/Select"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/ApplyTheme",
     "replace": "@instructure/ui-themeable/lib/components/ApplyTheme"
   },
@@ -50,6 +54,10 @@
   {
     "pattern": "^@instructure/ui-core/lib/components/Dialog",
     "replace": "@instructure/ui-a11y/lib/components/FocusRegion"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/DateInput",
+    "replace": "@instructure/ui-forms/lib/components/DateInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Grid",
@@ -116,6 +124,10 @@
     "replace": "@instructure/ui-elements/lib/components/Progress"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Select",
+    "replace": "@instructure/ui-forms/lib/components/Select"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Spinner",
     "replace": "@instructure/ui-elements/lib/components/Spinner"
   },
@@ -130,6 +142,10 @@
   {
     "pattern": "^@instructure/ui-core/lib/components/Text",
     "replace": "@instructure/ui-elements/lib/components/Text"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/TimeInput",
+    "replace": "@instructure/ui-forms/lib/components/TimeInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ToggleDetails",
@@ -174,6 +190,50 @@
   {
     "pattern": "^@instructure/ui-core/lib/components/Menu",
     "replace": "@instructure/ui-menu/lib/components/Menu"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/FormField",
+    "replace": "@instructure/ui-forms/lib/components/FormField"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/FormFieldGroup",
+    "replace": "@instructure/ui-forms/lib/components/FormFieldGroup"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/Checkbox",
+    "replace": "@instructure/ui-forms/lib/components/Checkbox"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/CheckboxGroup",
+    "replace": "@instructure/ui-forms/lib/components/CheckboxGroup"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/RadioInput",
+    "replace": "@instructure/ui-forms/lib/components/RadioInput"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/RadioInputGroup",
+    "replace": "@instructure/ui-forms/lib/components/RadioInputGroup"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/RangeInput",
+    "replace": "@instructure/ui-forms/lib/components/RangeInput"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/FileDrop",
+    "replace": "@instructure/ui-forms/lib/components/FileDrop"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/TextArea",
+    "replace": "@instructure/ui-forms/lib/components/TextArea"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/TextInput",
+    "replace": "@instructure/ui-forms/lib/components/TextInput"
+  },
+  {
+    "pattern": "^@instructure/ui-core/lib/components/NumberInput",
+    "replace": "@instructure/ui-forms/lib/components/NumberInput"
   },
   {
     "pattern": "^instructure-ui/lib/themes",

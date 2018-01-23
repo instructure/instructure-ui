@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 
 import Text from '@instructure/ui-elements/lib/components/Text'
-import TextInput from '@instructure/ui-core/lib/components/TextInput'
+import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 

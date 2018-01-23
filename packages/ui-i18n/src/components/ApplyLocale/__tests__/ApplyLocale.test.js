@@ -24,7 +24,7 @@
 
 import React from 'react'
 import ApplyLocale from '../index'
-import DatePicker from '../../../../../ui-core/lib/components/DatePicker'
+import { DatePicker } from '@instructure/ui-forms/lib/components/DateInput'
 
 describe('<ApplyLocale />', () => {
   const testbed = new Testbed(

@@ -22,4 +22,11 @@
  * SOFTWARE.
  */
 
-module.exports = require('@instructure/ui-presets/postcss')()
+ module.exports = require('@instructure/ui-presets/postcss')({
+   before: {
+     plugin: 'postcss-nested',
+     insert: [
+       [require.resolve('postcss-input-range')] // for RangeInput
+     ]
+   }
+ })

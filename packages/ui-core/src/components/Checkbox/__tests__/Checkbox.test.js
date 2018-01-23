@@ -24,7 +24,6 @@
 
 import React from 'react'
 import Checkbox from '../index'
-import CheckboxFacade from '../CheckboxFacade'
 
 describe('<Checkbox />', () => {
   const testbed = new Testbed(
@@ -133,18 +132,6 @@ describe('<Checkbox />', () => {
 
       expect(subject.instance().focused).to.be.true
       expect(subject.find('input').focused()).to.be.true
-    })
-
-    it('sets hover states', () => {
-      const subject = testbed.render()
-
-      subject.simulate('mouseOver')
-
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.true
-
-      subject.simulate('mouseOut')
-
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.false
     })
   })
 

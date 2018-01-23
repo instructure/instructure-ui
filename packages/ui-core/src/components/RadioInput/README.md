@@ -2,35 +2,5 @@
 describes: RadioInput
 ---
 
-By default, the RadioInput component is a custom styled HTML radio button.
-
-Adjust the size of the RadioInput and its label text via the `size` prop. The default size is
-`medium`.
-
-```js
----
-example: true
----
-<RadioInput
-  label={lorem.sentence()}
-  value="foo"
-  name="bar"
-  checked
-/>
-```
-
-You can also make the radioInput readOnly by passing in a readOnly prop.
-
-```js
----
-example: true
----
-<RadioInput
-  label={lorem.sentence()}
-  value="foo"
-  name="baz"
-  onClick={() => alert('this shouldn\'t appear!')}
-  onChange={() => alert('this shouldn\'t appear!')}
-  readOnly
-/>
-```
+As of 5.0.0, RadioInput has been moved from the `ui-core` package to `ui-forms`.
+See [ui-forms](#ui-forms) for more details.

@@ -22,80 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import classnames from 'classnames'
-import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
-import themeable from '@instructure/ui-themeable'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import styles from './styles.css'
-import theme from './theme'
+import { ToggleFacade } from '@instructure/ui-forms/lib/components/Checkbox'
 
-/**
----
-parent: Checkbox
----
-**/
-@themeable(theme, styles)
-export default class ToggleFacade extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    checked: PropTypes.bool,
-    disabled: PropTypes.bool,
-    readOnly: PropTypes.bool,
-    focused: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
-  }
-
-  static defaultProps = {
-    checked: false,
-    focused: false,
-    size: 'medium'
-  }
-
-  renderIcon () {
-    if (this.props.checked) {
-      return (
-        <IconCheck className={styles.iconSVG} />
-      )
-    } else {
-      return (
-        <IconX className={styles.iconSVG} />
-      )
-    }
-  }
-
-  render () {
-    const {
-      size,
-      checked,
-      disabled,
-      focused,
-      readOnly
-    } = this.props
-
-    const classes = {
-      [styles.facade]: true,
-      [styles.checked]: checked,
-      [styles.disabled]: disabled && !readOnly,
-      [styles.focused]: focused,
-      [styles[size]]: true
-    }
-
-    return (
-      <span className={styles.root}>
-        <span className={classnames(classes)} aria-hidden="true">
-          <span className={styles.icon}>
-            <span className={styles.iconToggle}>
-              {this.renderIcon()}
-            </span>
-          </span>
-        </span>
-        <span className={styles.label}>
-          {this.props.children}
-        </span>
-      </span>
-    )
-  }
-}
+export default deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-forms'
+))(ToggleFacade)

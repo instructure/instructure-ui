@@ -26,7 +26,6 @@ import React from 'react'
 import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 import NumberInput, { cleanValue } from '../index'
-import styles from '../styles.css'
 
 describe('<NumberInput />', () => {
   const testbed = new Testbed(<NumberInput label="Name" />)
@@ -338,33 +337,6 @@ describe('<NumberInput />', () => {
   })
 
   describe('events', () => {
-    it('up arrow responds to clicks', () => {
-      const onChange = testbed.stub()
-
-      const subject = testbed.render({
-        onChange
-      })
-
-      subject.find(`.${styles.arrow}`).first().simulate('click')
-
-      expect(onChange).to.have.been.called
-      expect(onChange.firstCall.args[1]).to.equal('1')
-      expect(subject.find('input').getDOMNode().value).to.equal('1')
-    })
-
-    it('down arrow responds to clicks', () => {
-      const onChange = testbed.stub()
-
-      const subject = testbed.render({
-        onChange
-      })
-
-      subject.find(`.${styles.arrow}`).last().simulate('click')
-
-      expect(onChange).to.have.been.called
-      expect(subject.find('input').getDOMNode().value).to.equal('-1')
-    })
-
     it('responds to onChange event', () => {
       const onChange = testbed.stub()
 
