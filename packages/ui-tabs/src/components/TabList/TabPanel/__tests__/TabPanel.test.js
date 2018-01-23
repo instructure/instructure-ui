@@ -22,10 +22,25 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import { Tab } from '@instructure/ui-tabs/lib/components/TabList'
+import React from 'react'
+import TabPanel from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-tabs'
-))(Tab)
+describe('<TabPanel />', () => {
+  const testbed = new Testbed(
+    <TabPanel selected title="Panel Title">Panel contents</TabPanel>
+  )
+
+  it('should render children', () => {
+    const subject = testbed.render()
+
+    expect(subject.text())
+      .to.equal('Panel contents')
+  })
+
+  it('should have appropriate role attribute', () => {
+    const subject = testbed.render()
+
+    expect(subject.getAttribute('role'))
+      .to.equal('tabpanel')
+  })
+})

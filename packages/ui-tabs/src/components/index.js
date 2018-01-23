@@ -21,11 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import { Tab } from '@instructure/ui-tabs/lib/components/TabList'
-
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-tabs'
-))(Tab)
+export TabList, { Tab, TabPanel } from './TabList'

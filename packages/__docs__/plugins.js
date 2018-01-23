@@ -116,6 +116,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Select/*',
       'packages/ui-core/src/components/Spinner/*',
       'packages/ui-core/src/components/Table/*',
+      'packages/ui-core/src/components/TabList/**',
       'packages/ui-core/src/components/Tag/*',
       'packages/ui-core/src/components/Text/*',
       'packages/ui-core/src/components/ToggleDetails/*',

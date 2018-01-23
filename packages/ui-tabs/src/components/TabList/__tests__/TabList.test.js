@@ -285,19 +285,6 @@ describe('<TabList />', () => {
     })
   })
 
-  it('should meet a11y standards when set to the accordion variant', (done) => {
-    const subject = testbed.render({
-      variant: 'accordion'
-    })
-
-    subject.should.be.accessible(done, {
-      exclude: [['[aria-disabled="true"]']], // ignore color contrast for disabled tab
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
-    })
-  })
-
   it('should meet a11y standards when set to the minimal variant', (done) => {
     const subject = testbed.render({
       variant: 'minimal'

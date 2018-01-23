@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import { Tab } from '@instructure/ui-tabs/lib/components/TabList'
+Testbed.init()
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-tabs'
-))(Tab)
+require('@instructure/ui-themes/lib/canvas')
+
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)

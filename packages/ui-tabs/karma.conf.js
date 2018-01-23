@@ -22,10 +22,14 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import { Tab } from '@instructure/ui-tabs/lib/components/TabList'
+const path = require('path')
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-tabs'
-))(Tab)
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 97
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-tabs')
+})

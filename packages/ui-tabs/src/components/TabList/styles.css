@@ -7,7 +7,3 @@
 .minimal {
   background: var(--minimalBackground);
 }
-
-.accordion {
-  display: block;
-}

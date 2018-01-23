@@ -30,7 +30,7 @@ import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Text from '@instructure/ui-elements/lib/components/Text'
 import Container from '@instructure/ui-container/lib/components/Container'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
-import TabList, { TabPanel } from '@instructure/ui-core/lib/components/TabList'
+import TabList, { TabPanel } from '@instructure/ui-tabs/lib/components/TabList'
 
 import Description from '../Description'
 import Properties from '../Properties'

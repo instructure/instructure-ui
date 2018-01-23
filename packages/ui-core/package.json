@@ -45,6 +45,7 @@
     "@instructure/ui-overlays": "^4.7.1",
     "@instructure/ui-pagination": "^4.7.1",
     "@instructure/ui-portal": "^4.7.1",
+    "@instructure/ui-tabs": "^4.7.1",
     "@instructure/ui-themeable": "^4.7.1",
     "@instructure/ui-toggle-details": "^4.7.1",
     "@instructure/ui-tree-browser": "^4.7.1",
