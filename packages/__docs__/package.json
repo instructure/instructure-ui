@@ -23,6 +23,7 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/ui-a11y": "^4.7.1",
+    "@instructure/ui-alerts": "^4.7.1",
     "@instructure/ui-billboard": "^4.7.1",
     "@instructure/ui-breadcrumb": "^4.7.1",
     "@instructure/ui-buttons": "^4.7.1",

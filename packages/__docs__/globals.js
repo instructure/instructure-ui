@@ -30,6 +30,7 @@ import moment from 'moment'
 import 'moment/min/locales'
 
 import * as UIA11y from '@instructure/ui-a11y/lib/components'
+import * as UIAlerts from '@instructure/ui-alerts/lib/components'
 import * as UIBillboard from '@instructure/ui-billboard/lib/components'
 import * as UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components'
 import * as UIButtons from '@instructure/ui-buttons/lib/components'
@@ -66,6 +67,7 @@ const components = Object.assign(
   {},
   UICore,
   UIA11y,
+  UIAlerts,
   UIBillboard,
   UIBreadcrumb,
   UIButtons,

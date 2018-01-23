@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import Alert from '@instructure/ui-alerts/lib/components/Alert'
-
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-alerts'
-))(Alert)
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
+}

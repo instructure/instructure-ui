@@ -22,13 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+const path = require('path')
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import Alert from '@instructure/ui-alerts/lib/components/Alert'
-
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-alerts'
-))(Alert)
+module.exports = require('@instructure/ui-presets/karma')({
+  bundle: './tests.bundle.js',
+  coverageThreshold: {
+    global: {
+      lines: 90
+    }
+  },
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-alerts')
+})

@@ -29,6 +29,7 @@ import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
 import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 
 import Alert from '../index'
+import styles from '../styles.css'
 
 describe('<Alert />', () => {
   beforeEach(() => {
@@ -87,6 +88,38 @@ describe('<Alert />', () => {
       expect(icon).to.be.present
     })
   }
+
+  describe('`variant` is success', () => {
+    const variantModifications = {
+      className: styles.success,
+      iconComponent: IconComplete
+    }
+    variantChanges('success', variantModifications)
+  })
+
+  describe('`variant` is error', () => {
+    const variantModifications = {
+      className: styles.error,
+      iconComponent: IconWarning
+    }
+    variantChanges('error', variantModifications)
+  })
+
+  describe('`variant` is warning', () => {
+    const variantModifications = {
+      className: styles.warning,
+      iconComponent: IconWarning
+    }
+    variantChanges('warning', variantModifications)
+  })
+
+  describe('`variant` is info', () => {
+    const variantModifications = {
+      className: styles.info,
+      iconComponent: IconInfo
+    }
+    variantChanges('info', variantModifications)
+  })
 
   it('should meet a11y standards', done => {
     const subject = testbed.render({ transition: 'none' })

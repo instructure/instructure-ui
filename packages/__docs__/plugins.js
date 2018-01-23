@@ -80,6 +80,7 @@ plugins = plugins.concat([
       'packages/ui-docs-client/**/*.js',
       'packages/ui-docs-plugin/**/*.js',
       'packages/ui-core/src/components/AccessibleContent/*',
+      'packages/ui-core/src/components/Alert/*',
       'packages/ui-core/src/components/ApplyTheme/*',
       'packages/ui-core/src/components/Autocomplete/*',
       'packages/ui-core/src/components/Avatar/*',

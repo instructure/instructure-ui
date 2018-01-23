@@ -22,13 +22,9 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+Testbed.init()
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+require('@instructure/ui-themes/lib/canvas')
 
-import Alert from '@instructure/ui-alerts/lib/components/Alert'
-
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-alerts'
-))(Alert)
+const testsContext = require.context('./src', true, /\.test\.js$/)
+testsContext.keys().forEach(testsContext)
