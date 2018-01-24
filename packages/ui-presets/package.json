@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-presets",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",
@@ -20,10 +20,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/babel-plugin-themeable-styles": "^4.6.0",
-    "@instructure/babel-plugin-transform-class-display-name": "^4.6.0",
-    "@instructure/postcss-themeable-styles": "^4.6.0",
-    "@instructure/ui-testbed": "^4.6.0",
+    "@instructure/babel-plugin-themeable-styles": "^4.7.0",
+    "@instructure/babel-plugin-transform-class-display-name": "^4.7.0",
+    "@instructure/postcss-themeable-styles": "^4.7.0",
+    "@instructure/ui-testbed": "^4.7.0",
     "autoprefixer": "^7.2.5",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
