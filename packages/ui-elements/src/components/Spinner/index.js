@@ -28,6 +28,7 @@ import classNames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
+import Browser from '@instructure/ui-utils/lib/Browser'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
 
@@ -87,10 +88,13 @@ export default class Spinner extends Component {
   }
 
   render () {
+    const ie11 = Browser.msie && Browser.version > 10
+
     const classes = {
       [styles.root]: true,
       [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true
+      [styles[this.props.variant]]: true,
+      [styles.ie11]: ie11
     }
     return (
       <Container
