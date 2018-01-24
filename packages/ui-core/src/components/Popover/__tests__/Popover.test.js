@@ -3,6 +3,7 @@ import React from 'react'
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
 import Button from '../../Button'
 import Heading from '../../Heading'
+import Position from '../../Position'
 
 describe('<Popover />', () => {
   let content
@@ -141,7 +142,7 @@ describe('<Popover />', () => {
         defaultShow: true
       })
       testbed.tick()
-      const position = subject.find(UIPosition)
+      const position = subject.find(Position)
       expect(position.prop('offsetX')).to.not.equal(0)
     })
 
@@ -153,7 +154,7 @@ describe('<Popover />', () => {
         offsetY: -2
       })
       testbed.tick()
-      const position = subject.find(UIPosition)
+      const position = subject.find(Position)
       expect(position.prop('offsetX')).to.equal(-1)
       expect(position.prop('offsetY')).to.equal(-2)
     })

@@ -444,7 +444,7 @@ class Popover extends Component {
           {...pickProps(this.props, ContextBox.propTypes)}
           elementRef={this.props.contentRef}
           placement={this.state.placement}
-          ref={c => this._contextBox = c}
+          ref={(c) => { this._contextBox = c }}
         >
           {content}
         </ContextBox>
