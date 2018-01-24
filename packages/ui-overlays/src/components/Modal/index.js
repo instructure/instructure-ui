@@ -56,6 +56,10 @@ category: components/dialogs
   closeButtonVariant: true,
   padding: true
 })
+@deprecated('5.0.0', {
+  closeButtonLabel: true,
+  closeButtonRef: true
+})
 export default class Modal extends Component {
   static propTypes = {
     /**
@@ -66,7 +70,7 @@ export default class Modal extends Component {
     /**
      * An accessible label for the close button. The close button won't display without this label.
      */
-    closeButtonLabel: PropTypes.string.isRequired,
+    closeButtonLabel: PropTypes.string,
 
     /**
      * The children to be rendered within the `<Modal />`
@@ -244,6 +248,22 @@ export default class Modal extends Component {
     })
   }
 
+  renderCloseButton() {
+    return this.props.closeButtonLabel
+      ? <CloseButton
+        buttonRef={el => {
+          this._closeButton = el
+          this.props.closeButtonRef(el)
+        }}
+        placement="end"
+        offset="medium"
+        onClick={this.props.onDismiss}
+      >
+        {this.props.closeButtonLabel}
+      </CloseButton>
+      : null
+  }
+
   get defaultFocusElement () {
     return this.props.defaultFocusElement || (() => this._closeButton)
   }
@@ -285,17 +305,7 @@ export default class Modal extends Component {
                 }
               }}
             >
-              <CloseButton
-                buttonRef={el => {
-                  this._closeButton = el
-                  this.props.closeButtonRef(el)
-                }}
-                placement="end"
-                offset="medium"
-                onClick={this.props.onDismiss}
-              >
-                {this.props.closeButtonLabel}
-              </CloseButton>
+              {this.renderCloseButton()}
               {children}
             </ModalContent>
           </FocusRegion>

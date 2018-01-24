@@ -35,6 +35,19 @@ example: true
      this.setState({ size: o.value })
    };
 
+   renderCloseButton () {
+     return (
+       <CloseButton
+         placement="end"
+         offset="medium"
+         variant="icon"
+         onClick={this.handleButtonClick}
+       >
+         Close
+       </CloseButton>
+     )
+   }
+
    render () {
      const variants = [
        {value: 'auto', label: 'Auto'},
@@ -64,9 +77,9 @@ example: true
            size={this.state.size}
            label="Modal Dialog: Hello World"
            shouldCloseOnOverlayClick
-           closeButtonLabel="Close"
            applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
          >
+           {this.renderCloseButton()}
            <ModalHeader>
              <Heading>Hello World</Heading>
            </ModalHeader>
@@ -109,7 +122,20 @@ const fpo = lorem.paragraphs(1)
      this.setState(function (state) {
        return { open: !state.open }
      })
-   };
+   }
+
+   renderCloseButton () {
+     return (
+       <CloseButton
+         placement="end"
+         offset="medium"
+         variant="icon"
+         onClick={this.handleButtonClick}
+       >
+         Close
+       </CloseButton>
+     )
+   }
 
    render () {
      return (
@@ -123,13 +149,13 @@ const fpo = lorem.paragraphs(1)
            size="medium"
            label="Modal Dialog: Hello World"
            shouldCloseOnOverlayClick
-           closeButtonLabel="Close"
            applicationElement={() => [
               document.getElementById('app'),
               document.getElementById('flash-messages'),
               document.getElementById('nav')
           ]}
          >
+           {this.renderCloseButton()}
            <ModalHeader>
              <Heading>This Modal contains an Autocomplete</Heading>
            </ModalHeader>
@@ -160,7 +186,8 @@ const fpo = lorem.paragraphs(1)
     ]
 
     return (
-      <Autocomplete {...this.props}
+      <Select {...this.props}
+        editable
         formatSelectedOption={(tag) => (
           <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
         )}
@@ -170,7 +197,7 @@ const fpo = lorem.paragraphs(1)
             {label}
           </option>
         ))}
-      </Autocomplete>
+      </Select>
     )
   }
 }

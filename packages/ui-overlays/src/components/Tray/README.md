@@ -23,6 +23,25 @@ class Example extends React.Component {
     }
   }
 
+  hideTray = () => {
+    this.setState({
+      open: false
+    })
+  }
+
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="x-small"
+        variant="icon"
+        onClick={this.hideTray}
+      >
+        Close
+      </CloseButton>
+    )
+  }
+
   render () {
     const placementVariants = [
       {value: 'start', label: 'Left'},
@@ -67,7 +86,6 @@ class Example extends React.Component {
 
         <Tray
           label="Tray Example"
-          closeButtonLabel="Close"
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
           size={this.state.size}
@@ -75,6 +93,7 @@ class Example extends React.Component {
           applicationElement={() => document.getElementById('app') }
         >
           <Container as="div" padding="large medium">
+            {this.renderCloseButton()}
             <Heading>Hello</Heading>
             <Text as="p" lineHeight="double">{lorem.paragraph()}</Text>
           </Container>

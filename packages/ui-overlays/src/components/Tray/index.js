@@ -53,6 +53,10 @@ category: components/dialogs
   getDefaultFocusElement: 'defaultFocusElement',
   trapFocus: 'shouldContainFocus'
 })
+@deprecated('5.0.0', {
+  closeButtonLabel: true,
+  closeButtonRef: true
+})
 class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
