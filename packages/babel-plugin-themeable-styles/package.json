@@ -1,6 +1,6 @@
 {
   "name": "@instructure/babel-plugin-themeable-styles",
-  "version": "4.6.0",
+  "version": "4.7.0",
   "description": "A babel plugin to transform CSS imports for themeable components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/postcss-themeable-styles": "^4.6.0",
+    "@instructure/postcss-themeable-styles": "^4.7.0",
     "babel-template": "^6.26.0",
     "css-modules-require-hook": "^4.2.2"
   },
