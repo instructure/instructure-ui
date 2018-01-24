@@ -95,6 +95,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
     linkTextDecoration: 'none',
 
     linkInverseColor: colors.porcelain,
+    linkInverseFocusBorderColor: 'transparent',
 
     iconBorderColor: 'transparent',
     iconPadding: `0 ${spacing.xxSmall}`,
@@ -180,6 +181,7 @@ generator['canvas'] = function (variables) {
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     linkTextDecoration: 'underline',
-    linkFocusBorderColor: colors.brand
+    linkFocusBorderColor: colors.brand,
+    linkInverseFocusBorderColor: colors.white
   }
 }

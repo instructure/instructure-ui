@@ -348,15 +348,23 @@
 
 .link,
 .link-inverse {
-  text-decoration: var(--linkTextDecoration);
   background: transparent;
+  text-decoration: var(--linkTextDecoration);
   border-color: var(--linkBorderColor);
-  color: var(--linkColor);
 
   &:focus,
   &:hover,
   &:active {
     text-decoration: underline;
+  }
+}
+
+.link {
+  color: var(--linkColor);
+
+  &:focus,
+  &:hover,
+  &:active {
     border-color: var(--linkFocusBorderColor);
     color: var(--linkHoverColor);
   }
@@ -368,6 +376,7 @@
   &:focus,
   &:hover,
   &:active {
+    border-color: var(--linkInverseFocusBorderColor);
     color: var(--linkInverseColor);
   }
 }
