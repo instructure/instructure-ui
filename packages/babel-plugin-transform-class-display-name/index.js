@@ -60,17 +60,17 @@ module.exports = exports.default = function transformClassDisplayName ({types: t
   /**
    * Insert a static displayName for the identifier
    */
-  function insertDisplayName (path, id) {
-    path.insertAfter(
-      t.assignmentExpression(
-        '=',
-        t.memberExpression(
-          t.identifier(id),
-          t.identifier('displayName')
-        ),
-        t.stringLiteral(id)
-      )
+  function insertDisplayName(path, id) {
+    const assignment = t.assignmentExpression(
+      '=',
+      t.memberExpression(
+        t.identifier(id),
+        t.identifier('displayName')
+      ),
+      t.stringLiteral(id)
     )
+    // Put in the assignment expression and a semicolon
+    path.insertAfter([assignment, t.emptyStatement()])
   }
 
   return {
