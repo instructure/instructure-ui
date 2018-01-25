@@ -22,10 +22,33 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
+import React from 'react'
+import AccessibleContent from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-a11y'
-))(AccessibleContent)
+describe('<AccessibleContent />', () => {
+  const testbed = new Testbed(<AccessibleContent />)
+
+  /* example test (replace me) */
+  it('should render', () => {
+    const subject = testbed.render(/* override default props here */)
+
+    expect(subject).to.be.present
+  })
+
+  it('should render with the specified tag when `as` prop is set', () => {
+    const subject = testbed.render({
+      as: 'div'
+    })
+
+    expect(subject.tagName())
+      .to.equal('DIV')
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done, {
+      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
+    })
+  })
+})

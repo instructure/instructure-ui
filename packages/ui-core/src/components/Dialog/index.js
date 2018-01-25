@@ -22,24 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import { default as Dialog } from '@instructure/ui-a11y/lib/components/FocusRegion'
 
-import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+Dialog.displayName = 'Dialog'
 
-@deprecated('5.0.0', null, `${changedPackageWarning(
-  'ui-core',
-  'ui-a11y'
-)} It has also been renamed to \`FocusRegion\`.`)
-class Dialog extends Component {
-  static propTypes = {
-    ...FocusRegion.PropTypes
-  }
-
-  render () {
-    return <FocusRegion {...this.props} />
-  }
-}
-
-export default Dialog
+export default deprecated(
+  '5.0.0',
+  null,
+  `${changedPackageWarning('ui-core', 'ui-a11y')} It has also been renamed to \`FocusRegion\`.`
+)(Dialog)

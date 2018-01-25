@@ -25,14 +25,14 @@
 import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 
-import FocusRegion from '../index'
+import Dialog from '../index'
 
-describe('<FocusRegion />', () => {
+describe('<Dialog />', () => {
   const testbed = new Testbed(
     (
-      <FocusRegion>
+      <Dialog>
         <Button>Hello World</Button>
-      </FocusRegion>
+      </Dialog>
     )
   )
 
@@ -49,9 +49,9 @@ describe('<FocusRegion />', () => {
   })
 
   it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true, label: 'FocusRegion Example' })
+    const subject = testbed.render({ open: true, label: 'Dialog Example' })
     expect(subject.find('[role="region"]')).to.be.present
-    expect(subject.find('[aria-label="FocusRegion Example"]')).to.be.present
+    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -87,11 +87,11 @@ describe('<FocusRegion />', () => {
   })
 })
 
-describe('<FocusRegion /> managed focus', () => {
+describe('<Dialog /> managed focus', () => {
   const applicationElement = document.createElement('div')
-  class FocusRegionExample extends React.Component {
+  class DialogExample extends React.Component {
     static propTypes = {
-      ...FocusRegion.propTypes
+      ...Dialog.propTypes
     }
 
     componentDidMount () {
@@ -109,18 +109,18 @@ describe('<FocusRegion /> managed focus', () => {
               this._input = c
             }}
           />
-          <FocusRegion {...this.props} label="A Modal" applicationElement={() => applicationElement}>
+          <Dialog {...this.props} label="A Modal" applicationElement={() => applicationElement}>
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />
             </div>
-          </FocusRegion>
+          </Dialog>
         </div>
       )
     }
   }
 
-  const testbed = new Testbed(<FocusRegionExample />)
+  const testbed = new Testbed(<DialogExample />)
 
   it('should focus the first tabbable element by default', () => {
     testbed.render({

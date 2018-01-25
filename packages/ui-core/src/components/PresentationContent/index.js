@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import UIPresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
+import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-a11y'
-))
-
-class PresentationContent extends Component {
-  static propTypes = {
-    ...UIPresentationContent.PropTypes
-  }
-
-  render () {
-    return <UIPresentationContent {...this.props} />
-  }
-}
-
-export default PresentationContent
+))(PresentationContent)

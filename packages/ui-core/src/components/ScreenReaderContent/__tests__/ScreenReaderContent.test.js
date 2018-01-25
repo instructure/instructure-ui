@@ -22,10 +22,39 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
+import React from 'react'
+import ScreenReaderContent from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-a11y'
-))(AccessibleContent)
+describe('<ScreenReaderContent />', () => {
+  const testbed = new Testbed(<ScreenReaderContent />)
+
+  it('should render the specified tag when `as` prop is set', () => {
+    const subject = testbed.render({as: 'div'})
+
+    expect(subject.tagName())
+      .to.equal('DIV')
+  })
+
+  it('accepts props like normal', () => {
+    const subject = testbed.render({hidden: 'true'})
+    expect(subject.prop('hidden')).to.equal('true')
+  })
+
+  it('renders children components', () => {
+    const childComponent = React.createElement('span')
+    const subject = testbed.render({children: childComponent})
+    expect(subject.find('span').length).to.equal(2)
+  })
+
+  it('is accessible by screen readers', () => {
+    const subject = testbed.render()
+
+    const {
+      offsetHeight,
+      opacity
+    } = subject.getComputedStyle()
+
+    expect(offsetHeight).to.not.equal(0)
+    expect(opacity).to.not.equal(0)
+  })
+})

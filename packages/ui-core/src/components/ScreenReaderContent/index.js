@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
-import UIScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-a11y'
-))
-
-class ScreenReaderContent extends Component {
-  static propTypes = {
-    ...UIScreenReaderContent.PropTypes
-  }
-
-  render () {
-    return <UIScreenReaderContent {...this.props} />
-  }
-}
-
-export default ScreenReaderContent
+))(ScreenReaderContent)
