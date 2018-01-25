@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import { MenuItemSeparator } from '@instructure/ui-menu/lib/components/Menu'
 
-import { MenuItemSeparator as UIMenuItemSeparator } from '@instructure/ui-menu/lib/components/Menu'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-menu'
-))
-class MenuItemSeparator extends Component {
-  static propTypes = {
-    ...UIMenuItemSeparator.PropTypes
-  }
-
-  render () {
-    return <UIMenuItemSeparator {...this.props} />
-  }
-}
-
-export default MenuItemSeparator
+))(MenuItemSeparator)

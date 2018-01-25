@@ -22,27 +22,14 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Menu from '@instructure/ui-menu/lib/components/Menu'
 
-import UIMenu from '@instructure/ui-menu/lib/components/Menu'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-menu'
-))
-class Menu extends Component {
-  static propTypes = {
-    ...UIMenu.PropTypes
-  }
+))(Menu)
 
-  render () {
-    return <UIMenu {...this.props} />
-  }
-}
-
-export default Menu
 export { default as MenuItem } from './MenuItem'
 export { default as MenuItemGroup } from './MenuItemGroup'
 export { default as MenuItemSeparator } from './MenuItemSeparator'

@@ -22,25 +22,12 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import PopoverMenu from '@instructure/ui-menu/lib/components/PopoverMenu'
 
-import UIPopoverMenu from '@instructure/ui-menu/lib/components/PopoverMenu'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-menu'
-))
-class PopoverMenu extends Component {
-  static propTypes = {
-    ...UIPopoverMenu.PropTypes
-  }
+))(PopoverMenu)
 
-  render () {
-    return <UIPopoverMenu {...this.props} />
-  }
-}
-
-export default PopoverMenu
 export { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '../Menu'
