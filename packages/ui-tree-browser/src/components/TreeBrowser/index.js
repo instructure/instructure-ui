@@ -258,5 +258,3 @@ export default class TreeBrowser extends Component {
     /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */
   }
 }
-
-export { default as TreeCollection } from './TreeCollection'
