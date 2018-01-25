@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import Breadcrumb from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'
+import { BreadcrumbLink } from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'
 
 export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-breadcrumb'
-))(Breadcrumb)
-
-export { default as BreadcrumbLink } from './BreadcrumbLink'
+))(BreadcrumbLink)

@@ -21,12 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import Breadcrumb from '@instructure/ui-breadcrumb/lib/components/Breadcrumb'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-breadcrumb'
-))(Breadcrumb)
+import React from 'react'
+import Link from '@instructure/ui-elements/lib/components/Link'
 
-export { default as BreadcrumbLink } from './BreadcrumbLink'
+import BreadcrumbLink from '../index'
+
+describe('<BreadcrumbLink />', () => {
+  const testbed = new Testbed(<BreadcrumbLink>Content</BreadcrumbLink>)
+
+  it('should render a Link component when given an href prop', () => {
+    const subject = testbed.render({href: '#'})
+    expect(subject.find(Link)).to.be.present
+  })
+
+  it('should render as a button and respond to onClick event', () => {
+    const onClick = testbed.stub()
+    const subject = testbed.render({onClick})
+    subject.find('button').simulate('click')
+    expect(onClick).to.have.been.called
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done, {
+      ignores: [
+        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
+      ]
+    })
+  })
+})
