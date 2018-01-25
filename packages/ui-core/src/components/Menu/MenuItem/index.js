@@ -189,7 +189,8 @@ class MenuItem extends Component {
       onMouseOver,
       active,
       type,
-      children
+      children,
+      href
     } = this.props
 
     const props = omitProps(this.props, MenuItem.propTypes)
@@ -206,6 +207,7 @@ class MenuItem extends Component {
       <ElementType
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
+        href={href}
         role={this.role}
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}

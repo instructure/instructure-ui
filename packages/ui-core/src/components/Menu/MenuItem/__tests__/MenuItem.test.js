@@ -16,7 +16,7 @@ describe('<MenuItem />', () => {
     const subject = testbed.render({
       href: 'example.html'
     })
-    expect(subject.tagName()).to.equal('A')
+    expect(subject.find('a[href="example.html"]')).to.be.present
   })
 
   it('should call onSelect after click', () => {
