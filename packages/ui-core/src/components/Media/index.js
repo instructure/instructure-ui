@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Media from '@instructure/ui-layout/lib/components/Media'
 
-import UIMedia from '@instructure/ui-layout/lib/components/Media'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-layout'
-))
-class Media extends Component {
-  static propTypes = {
-    ...UIMedia.PropTypes
-  }
-
-  render () {
-    return <UIMedia {...this.props} />
-  }
-}
-
-export default Media
+))(Media)

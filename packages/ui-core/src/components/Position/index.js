@@ -22,28 +22,18 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import UIPosition from '@instructure/ui-layout/lib/components/Position'
+import Position from '@instructure/ui-layout/lib/components/Position'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-layout'
-))
-class Position extends Component {
-  static propTypes = {
-    ...UIPosition.PropTypes
-  }
-
-  render () {
-    return <UIPosition {...this.props} />
-  }
-}
+))(Position)
 
 @deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
@@ -65,5 +55,4 @@ class PositionContent extends ComponentIdentifier {
   }
 }
 
-export default Position
 export { PositionTarget, PositionContent }

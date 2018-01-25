@@ -22,26 +22,13 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Grid from '@instructure/ui-layout/lib/components/Grid'
 
-import UIGrid from '@instructure/ui-layout/lib/components/Grid'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-layout'
-))
-class Grid extends Component {
-  static propTypes = {
-    ...UIGrid.PropTypes
-  }
+))(Grid)
 
-  render () {
-    return <UIGrid {...this.props} />
-  }
-}
-
-export default Grid
 export { default as GridCol } from './GridCol'
 export { default as GridRow } from './GridRow'
