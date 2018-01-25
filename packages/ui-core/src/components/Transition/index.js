@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
- import React, { Component } from 'react'
-
  import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+ import Transition from '@instructure/ui-motion/lib/components/Transition'
 
- import UITransition from '@instructure/ui-motion/lib/components/Transition'
-
- @deprecated('5.0.0', null, changedPackageWarning(
+ export default deprecated('5.0.0', null, changedPackageWarning(
    'ui-core',
    'ui-motion'
- ))
- class Transition extends Component {
-   static propTypes = {
-     ...UITransition.PropTypes
-   }
-
-   render () {
-     return <UITransition {...this.props} />
-   }
- }
-
- export default Transition
+ ))(Transition)
