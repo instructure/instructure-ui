@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Link from '@instructure/ui-elements/lib/components/Link'
 
-import UILink from '@instructure/ui-elements/lib/components/Link'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Link extends Component {
-  static propTypes = {
-    ...UILink.PropTypes
-  }
-
-  render () {
-    return <UILink {...this.props} />
-  }
-}
-
-export default Link
+))(Link)

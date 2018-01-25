@@ -22,10 +22,39 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import ProgressCircle from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<ProgressCircle />', () => {
+  const testbed = new Testbed(
+    <ProgressCircle
+      label="Loading completion"
+      valueNow={40}
+      valueMax={60}
+    />
+  )
+
+  it('should render', () => {
+    const subject = testbed.render()
+
+    expect(subject).to.be.present
+  })
+
+  it('should render the value if a formatter function is provided', () => {
+    const subject = testbed.render({
+      valueNow: 40,
+      valueMax: 60,
+      formatDisplayedValue: function (valueNow, valueMax) {
+        return `${valueNow} / ${valueMax}`
+      }
+    })
+
+    expect(subject.text()).to.contain('40 / 60')
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done)
+  })
+})

@@ -22,10 +22,30 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import ProgressBar from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<ProgressBar />', () => {
+  const testbed = new Testbed(
+    <ProgressBar
+      label="Loading completion"
+      valueNow={40}
+      valueMax={60}
+    />
+  )
+
+  /* example test (replace me) */
+  it('should render', () => {
+    const subject = testbed.render(/* override default props here */)
+
+    expect(subject).to.be.present
+  })
+
+  it('should have tests')
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done)
+  })
+})

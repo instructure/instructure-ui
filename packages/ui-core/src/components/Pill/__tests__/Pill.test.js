@@ -22,10 +22,32 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import Container from '@instructure/ui-container/lib/components/Container'
+import Pill from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<Pill />', () => {
+  const testbed = new Testbed(<Pill text="Overdue" />)
+
+  it('should render', () => {
+    const subject = testbed.render()
+    expect(subject).to.be.present
+  })
+
+  it('should not allow padding to be added as a property', () => {
+    const subject = testbed.render({
+      padding: 'small medium large large'
+    })
+    expect(subject.find(Container).props().padding).to.not.exist
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done, {
+      ignores: [
+        'color-contrast'
+      ]
+    })
+  })
+})

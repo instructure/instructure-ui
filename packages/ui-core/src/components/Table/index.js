@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Table from '@instructure/ui-elements/lib/components/Table'
 
-import UITable from '@instructure/ui-elements/lib/components/Table'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Table extends Component {
-  static propTypes = {
-    ...UITable.PropTypes
-  }
-
-  render () {
-    return <UITable {...this.props} />
-  }
-}
-
-export default Table
+))(Table)

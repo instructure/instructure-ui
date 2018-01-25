@@ -22,30 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import { MetricsListItem } from '@instructure/ui-elements/lib/components/MetricsList'
 
-import { MetricsListItem as UIMetricsListItem } from '@instructure/ui-elements/lib/components/MetricsList'
-
-/**
----
-parent: MetricsList
----
-**/
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class MetricsListItem extends Component {
-  static propTypes = {
-    ...UIMetricsListItem.PropTypes
-  }
-
-  render () {
-    return <UIMetricsListItem {...this.props} />
-  }
-}
-
-export default MetricsListItem
+))(MetricsListItem)

@@ -22,10 +22,22 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import ContextBox from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<ContextBox />', () => {
+  const testbed = new Testbed(<ContextBox>foo</ContextBox>)
+
+  it('should render the children', () => {
+    const subject = testbed.render()
+
+    expect(subject.text())
+      .to.equal('foo')
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done)
+  })
+})

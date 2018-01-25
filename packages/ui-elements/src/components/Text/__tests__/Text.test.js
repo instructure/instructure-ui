@@ -22,10 +22,30 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import Text from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<Text />', () => {
+  const testbed = new Testbed(<Text />)
+
+  it('should render', () => {
+    const subject = testbed.render()
+
+    expect(subject).to.be.present
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done)
+  })
+
+  it('should render with the specified tag when `as` prop is set', () => {
+    const subject = testbed.render({
+      as: 'div'
+    })
+
+    expect(subject.tagName())
+      .to.equal('DIV')
+  })
+})

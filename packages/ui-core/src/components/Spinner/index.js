@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Spinner from '@instructure/ui-elements/lib/components/Spinner'
 
-import UISpinner from '@instructure/ui-elements/lib/components/Spinner'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Spinner extends Component {
-  static propTypes = {
-    ...UISpinner.PropTypes
-  }
-
-  render () {
-    return <UISpinner {...this.props} />
-  }
-}
-
-export default Spinner
+))(Spinner)

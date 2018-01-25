@@ -22,10 +22,24 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import React from 'react'
+import Table from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-elements'
-))(ContextBox)
+describe('<Table />', () => {
+  const testbed = new Testbed(<Table caption="Test table" />)
+
+  it('should render a caption', () => {
+    const subject = testbed.render({
+      caption: 'An amazing test table'
+    })
+    expect(subject.find('caption').text()).to.equal('An amazing test table')
+  })
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done, {
+      ignores: []
+    })
+  })
+})

@@ -22,24 +22,12 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import List from '@instructure/ui-elements/lib/components/List'
 
-import UIList from '@instructure/ui-elements/lib/components/List'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-export default class List extends Component {
-  static propTypes = {
-    ...UIList.PropTypes
-  }
-
-  render () {
-    return <UIList {...this.props} />
-  }
-}
+))(List)
 
 export { default as ListItem } from './ListItem'

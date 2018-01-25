@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Text from '@instructure/ui-elements/lib/components/Text'
 
-import UIText from '@instructure/ui-elements/lib/components/Text'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Text extends Component {
-  static propTypes = {
-    ...UIText.PropTypes
-  }
-
-  render () {
-    return <UIText {...this.props} />
-  }
-}
-
-export default Text
+))(Text)

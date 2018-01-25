@@ -21,25 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import UIAvatar from '@instructure/ui-elements/lib/components/Avatar'
+import Avatar from '@instructure/ui-elements/lib/components/Avatar'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Avatar extends Component {
-  static propTypes = {
-    ...UIAvatar.PropTypes
-  }
-
-  render () {
-    return <UIAvatar {...this.props} />
-  }
-}
-
-export default Avatar
+))(Avatar)

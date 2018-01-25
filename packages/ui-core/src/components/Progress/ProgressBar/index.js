@@ -22,30 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import { ProgressBar } from '@instructure/ui-elements/lib/components/Progress'
 
-import { ProgressBar as UIProgressBar } from '@instructure/ui-elements/lib/components/Progress'
-
-/**
----
-parent: Progress
----
-**/
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class ProgressBar extends Component {
-  static propTypes = {
-    ...UIProgressBar.PropTypes
-  }
-
-  render () {
-    return <UIProgressBar {...this.props} />
-  }
-}
-
-export default ProgressBar
+))(ProgressBar)

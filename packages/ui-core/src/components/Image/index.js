@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Image from '@instructure/ui-elements/lib/components/Image'
 
-import UIImage from '@instructure/ui-elements/lib/components/Image'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Image extends Component {
-  static propTypes = {
-    ...UIImage.PropTypes
-  }
-
-  render () {
-    return <UIImage {...this.props} />
-  }
-}
-
-export default Image
+))(Image)

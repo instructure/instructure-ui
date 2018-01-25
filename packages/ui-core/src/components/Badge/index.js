@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Badge from '@instructure/ui-elements/lib/components/Badge'
 
-import UIBadge from '@instructure/ui-elements/lib/components/Badge'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Badge extends Component {
-  static propTypes = {
-    ...UIBadge.PropTypes
-  }
-
-  render () {
-    return <UIBadge {...this.props} />
-  }
-}
-
-export default Badge
+))(Badge)

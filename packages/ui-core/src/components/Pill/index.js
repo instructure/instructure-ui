@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Pill from '@instructure/ui-elements/lib/components/Pill'
 
-import UIPill from '@instructure/ui-elements/lib/components/Pill'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))
-class Pill extends Component {
-  static propTypes = {
-    ...UIPill.PropTypes
-  }
-
-  render () {
-    return <UIPill {...this.props} />
-  }
-}
-
-export default Pill
+))(Pill)
