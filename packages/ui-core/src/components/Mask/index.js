@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Mask from '@instructure/ui-overlays/lib/components/Mask'
 
-import UIMask from '@instructure/ui-overlays/lib/components/Mask'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-overlays'
-))
-class Mask extends Component {
-  static propTypes = {
-    ...UIMask.PropTypes
-  }
-
-  render () {
-    return <UIMask {...this.props} />
-  }
-}
-
-export default Mask
+))(Mask)

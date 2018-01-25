@@ -27,21 +27,12 @@ import React, { Component } from 'react'
 import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import UIPopover from '@instructure/ui-overlays/lib/components/Popover'
+import Popover from '@instructure/ui-overlays/lib/components/Popover'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-overlays'
-))
-class Popover extends Component {
-  static propTypes = {
-    ...UIPopover.PropTypes
-  }
-
-  render () {
-    return <UIPopover {...this.props} />
-  }
-}
+))(Popover)
 
 @deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
@@ -59,5 +50,4 @@ class PopoverContent extends ComponentIdentifier {
   static displayName = 'PopoverContent'
 }
 
-export default Popover
 export { PopoverTrigger, PopoverContent }

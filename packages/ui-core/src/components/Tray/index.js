@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import Tray from '@instructure/ui-overlays/lib/components/Tray'
 
-import UITray from '@instructure/ui-overlays/lib/components/Tray'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-overlays'
-))
-class Tray extends Component {
-  static propTypes = {
-    ...UITray.PropTypes
-  }
-
-  render () {
-    return <UITray {...this.props} />
-  }
-}
-
-export default Tray
+))(Tray)

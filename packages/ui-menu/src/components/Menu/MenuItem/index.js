@@ -210,8 +210,8 @@ class MenuItem extends Component {
       onKeyUp,
       onMouseOver,
       active,
-      href,
-      type
+      type,
+      href
     } = this.props
 
     const props = omitProps(this.props, MenuItem.propTypes)
@@ -227,8 +227,8 @@ class MenuItem extends Component {
       <ElementType // eslint-disable-line jsx-a11y/mouse-events-have-key-events
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
-        role={this.role}
         href={href}
+        role={this.role}
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}
         aria-checked={type === 'checkbox' || type === 'radio' ? (this.selected ? 'true' : 'false') : null}

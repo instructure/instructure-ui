@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import { ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 
-import { ModalBody as UIModalBody } from '@instructure/ui-overlays/lib/components/Modal'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-overlays'
-))
-class ModalBody extends Component {
-  static propTypes = {
-    ...UIModalBody.PropTypes
-  }
-
-  render () {
-    return <UIModalBody {...this.props} />
-  }
-}
-
-export default ModalBody
+))(ModalBody)
