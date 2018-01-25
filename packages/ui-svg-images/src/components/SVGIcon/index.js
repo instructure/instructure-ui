@@ -40,7 +40,7 @@ category: components/utilities
 ---
 **/
 @themeable(theme, styles)
-@deprecated('4.7.0', {
+@deprecated('5.0.0', {
   width: 'size',
   height: 'size'
 })
