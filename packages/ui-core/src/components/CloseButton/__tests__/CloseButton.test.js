@@ -22,10 +22,18 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import Button from '@instructure/ui-buttons/lib/components/Button'
+import React from 'react'
+import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import CloseButton from '../index'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-buttons'
-))(Button)
+describe('<CloseButton />', () => {
+  const testbed = new Testbed(<CloseButton>Close</CloseButton>)
+
+  it('should render with x icon', () => {
+    const subject = testbed.render()
+    const iconX = subject.find(IconX)
+
+    expect(subject).to.be.present
+    expect(iconX).to.be.present
+  })
+})

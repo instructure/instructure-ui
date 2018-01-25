@@ -22,24 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
-import UICloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
-
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-buttons'
-))
-class CloseButton extends Component {
-  static propTypes = {
-    ...UICloseButton.PropTypes
-  }
-
-  render () {
-    return <UICloseButton {...this.props} />
-  }
-}
-
-export default CloseButton
+))(CloseButton)
