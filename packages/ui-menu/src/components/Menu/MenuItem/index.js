@@ -210,6 +210,7 @@ class MenuItem extends Component {
       onKeyUp,
       onMouseOver,
       active,
+      href,
       type
     } = this.props
 
@@ -227,6 +228,7 @@ class MenuItem extends Component {
         tabIndex="-1" // note: tabIndex can be overridden by Menu or MenuItemGroup components
         {...props}
         role={this.role}
+        href={href}
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}
         aria-checked={type === 'checkbox' || type === 'radio' ? (this.selected ? 'true' : 'false') : null}
