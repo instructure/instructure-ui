@@ -26,6 +26,7 @@ import React from 'react'
 import IconStar from '@instructure/ui-icons/lib/Solid/IconStar'
 import IconStarLight from '@instructure/ui-icons/lib/Solid/IconStarLight'
 import Rating from '../index'
+import RatingIcon from '../RatingIcon'
 
 describe('<Rating />', () => {
   const testbed = new Testbed(
@@ -63,6 +64,17 @@ describe('<Rating />', () => {
     })
     const svg = subject.find(IconStarLight)
     expect(svg.length).to.equal(3)
+  })
+
+  it('transitions when animateFill is set', () => {
+    const subject = testbed.render({
+      iconCount: 5,
+      animateFill: true,
+      valueNow: 100,
+      valueMax: 100
+    })
+
+    expect(subject.find(RatingIcon).at(4).props().animateFill).to.be.true
   })
 
   it('should fill the correct number of icons', () => {

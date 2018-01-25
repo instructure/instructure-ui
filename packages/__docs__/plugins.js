@@ -110,6 +110,7 @@ plugins = plugins.concat([
       'packages/ui-core/src/components/Position/*',
       'packages/ui-core/src/components/PresentationContent/*',
       'packages/ui-core/src/components/Progress/**',
+      'packages/ui-core/src/components/Rating/*',
       'packages/ui-core/src/components/ScreenReaderContent/*',
       'packages/ui-core/src/components/Select/*',
       'packages/ui-core/src/components/Spinner/*',

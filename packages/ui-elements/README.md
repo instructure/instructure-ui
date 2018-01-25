@@ -41,6 +41,7 @@ The `ui-elements` package contains the following:
 - [MetricsList](#MetricsList)
 - [Pill](#Pill)
 - [Progress](#Progress)
+- [Rating](#Rating)
 - [Spinner](#Spinner)
 - [Table](#Table)
 - [Tag](#Tag)
