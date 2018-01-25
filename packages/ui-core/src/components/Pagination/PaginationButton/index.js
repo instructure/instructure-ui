@@ -23,11 +23,9 @@
  */
 
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import Pagination from '@instructure/ui-pagination/lib/components/Pagination'
+import { PaginationButton } from '@instructure/ui-pagination/lib/components/Pagination'
 
 export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-pagination'
-))(Pagination)
-
-export { default as PaginationButton } from './PaginationButton'
+))(PaginationButton)
