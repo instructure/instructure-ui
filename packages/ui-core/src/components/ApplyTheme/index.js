@@ -21,24 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import UIApplyTheme from '@instructure/ui-themeable/lib/components/ApplyTheme'
+import ApplyTheme from '@instructure/ui-themeable/lib/components/ApplyTheme'
 
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-themeable'
-))
-class ApplyTheme extends Component {
-  static propTypes = {
-    ...UIApplyTheme.PropTypes
-  }
-
-  render () {
-    return <UIApplyTheme {...this.props} />
-  }
-}
-
-export default ApplyTheme
+))(ApplyTheme)
