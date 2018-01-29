@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
- import UIHasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import React from 'react'
+import hasVisibleChildren from '../hasVisibleChildren'
+import ScreenReaderContent from '../../components/ScreenReaderContent'
 
- import { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
- import warning from '@instructure/ui-utils/lib/warning'
-
- export default function hasVisibleChildren (children) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'hasVisibleChildren', '5.0.0', changedPackageWarning(
-     'ui-core',
-     'ui-a11y'
-   ) || '')
-   return UIHasVisibleChildren(children)
- }
+describe('hasVisibleChildren', () => {
+  it('should not count ScreenReaderContent as visible content', () => {
+    expect(hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)).to.be.false
+  })
+  it('should count everything else as visible', () => {
+    expect(hasVisibleChildren(<div>Foo</div>)).to.be.true
+  })
+})

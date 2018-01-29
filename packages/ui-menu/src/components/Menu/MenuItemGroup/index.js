@@ -32,7 +32,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import uid from '@instructure/ui-utils/lib/uid'
 
-import hasVisibleChildren from '../../../../../ui-core/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import MenuItem from '../MenuItem'
 import MenuItemSeparator from '../MenuItemSeparator'

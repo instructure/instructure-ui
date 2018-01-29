@@ -37,8 +37,7 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import uid from '@instructure/ui-utils/lib/uid'
 
-// TODO: remove relative path when hasVisibleChildren is moved out of ui-core
-import hasVisibleChildren from '../../../../../ui-core/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import FormFieldLabel from '../FormFieldLabel'
 import FormFieldMessages from '../FormFieldMessages'

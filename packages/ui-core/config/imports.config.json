@@ -252,7 +252,10 @@
     "pattern": "^@instructure-ui/ui-utils/lib/dom/calculateElementPosition",
     "replace": "@instructure/ui-layout/lib/utils/calculateElementPosition"
   },
-
+  {
+    "pattern": "^@instructure-ui/ui-core/lib/utils/hasVisibleChildren",
+    "replace": "@instructure/ui-a11y/lib/utils/hasVisibleChildren"
+  },
   {
     "oldPath": "instructure-ui/lib/util",
     "newPath": "@instructure/ui-utils/lib",

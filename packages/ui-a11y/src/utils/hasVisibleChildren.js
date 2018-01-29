@@ -22,15 +22,27 @@
  * SOFTWARE.
  */
 
- import UIHasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import React from 'react'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 
- import { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
- import warning from '@instructure/ui-utils/lib/warning'
+import ScreenReaderContent from '../components/ScreenReaderContent'
 
- export default function hasVisibleChildren (children) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'hasVisibleChildren', '5.0.0', changedPackageWarning(
-     'ui-core',
-     'ui-a11y'
-   ) || '')
-   return UIHasVisibleChildren(children)
- }
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
+ * @param {ReactChildren} children - A react component's children prop
+ * @return {boolean} whether any of the children are visible
+ */
+export default function hasVisibleChildren (children) {
+  let visible = false
+
+  React.Children.forEach(children, (child) => {
+    if (child && !matchComponentTypes(child, [ScreenReaderContent])) {
+      visible = true
+    }
+  })
+
+  return visible
+}

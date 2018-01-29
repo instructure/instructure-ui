@@ -30,8 +30,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
-// TODO: remove relative path when hasVisibleChildren is moved out of ui-core
-import hasVisibleChildren from '../../../../../ui-core/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import styles from './styles.css'
 import theme from './theme'
