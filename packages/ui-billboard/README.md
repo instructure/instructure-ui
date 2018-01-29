@@ -9,6 +9,8 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+Use Billboard for empty states, 404 pages, redirects, etc.
+
 ### Installation
 
 ```sh

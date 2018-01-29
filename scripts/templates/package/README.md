@@ -9,6 +9,7 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+A UI component library made by Instructure Inc.
 
 ### Installation
 

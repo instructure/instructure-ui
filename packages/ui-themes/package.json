@@ -24,9 +24,7 @@
   "devDependencies": {
     "@instructure/ui-presets": "^4.7.1",
     "@instructure/ui-themeable": "^4.7.1",
-    "@instructure/ui-utils": "^4.7.1",
-    "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "@instructure/ui-utils": "^4.7.1"
   },
   "peerDependencies": {
     "@instructure/ui-themeable": "^4.7.1"
