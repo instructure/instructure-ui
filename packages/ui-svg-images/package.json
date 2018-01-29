@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-svg-images",
   "version": "4.7.1",
-  "description": "",
+  "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",

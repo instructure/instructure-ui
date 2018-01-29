@@ -9,6 +9,9 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+Use Container as a wrapper to separate content and/or to set the
+text alignment for a section of content.
+
 ### Installation
 
 ```sh
