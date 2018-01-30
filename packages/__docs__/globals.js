@@ -43,6 +43,7 @@ import * as UILayout from '@instructure/ui-layout/lib/components'
 import * as MediaCapture from '@instructure/media-capture/lib/components'
 import * as UIMenu from '@instructure/ui-menu/lib/components'
 import * as UIMotion from '@instructure/ui-motion/lib/components'
+import * as UINavigation from '@instructure/ui-navigation/lib/components'
 import * as UIOverlays from '@instructure/ui-overlays/lib/components'
 import * as UIPages from '@instructure/ui-pages/lib/components'
 import * as UIPagination from '@instructure/ui-pagination/lib/components'
@@ -65,6 +66,7 @@ import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 import iconExample from '!svg-inline-loader!./heart_lg.svg'
 import avatarImage from './placeholder-avatar.jpg'
 import placeholderImage from './placeholder-image'
+import placeholderLogo from './placeholder-logo'
 
 const components = Object.assign(
   {},
@@ -82,6 +84,7 @@ const components = Object.assign(
   MediaCapture,
   UIMenu,
   UIMotion,
+  UINavigation,
   UIOverlays,
   UIPages,
   UIPagination,
@@ -126,6 +129,7 @@ const globals = {
     }
   },
   placeholderImage,
+  placeholderLogo,
   React,
   ReactDOM
 }

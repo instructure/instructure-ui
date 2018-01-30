@@ -39,6 +39,7 @@
     "@instructure/ui-layout": "^5.2.0",
     "@instructure/ui-menu": "^5.2.0",
     "@instructure/ui-motion": "^5.2.0",
+    "@instructure/ui-navigation": "^5.2.0",
     "@instructure/ui-overlays": "^5.2.0",
     "@instructure/ui-pages": "^5.2.0",
     "@instructure/ui-pagination": "^5.2.0",

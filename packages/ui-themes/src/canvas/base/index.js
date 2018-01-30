@@ -61,7 +61,14 @@ export const brandVariables = {
   'ic-brand-button--primary-bgd': colors.backgroundBrand,
   'ic-brand-button--primary-text': colors.textLightest,
   'ic-brand-button--secondary-bgd': colors.backgroundDarkest,
-  'ic-brand-button--secondary-text': colors.textLightest
+  'ic-brand-button--secondary-text': colors.textLightest,
+
+  'ic-brand-global-nav-bgd': colors.backgroundBrandSecondary,
+  'ic-global-nav-link-hover': colors.backgroundDarkest,
+  'ic-brand-global-nav-ic-icon-svg-fill': colors.textLightest,
+  'ic-brand-global-nav-ic-icon-svg-fill--active': colors.textBrand,
+  'ic-brand-global-nav-menu-item__text-color': colors.textLightest,
+  'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
 
 const theme = {

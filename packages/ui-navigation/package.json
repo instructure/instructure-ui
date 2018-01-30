@@ -1,0 +1,47 @@
+{
+  "name": "@instructure/ui-navigation",
+  "version": "5.2.0",
+  "description": "",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "ui-test",
+    "test:watch": "ui-test --watch",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-presets": "^5.2.0",
+    "@instructure/ui-themes": "^5.2.0",
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
+  },
+  "dependencies": {
+    "@instructure/ui-themeable": "^5.2.0",
+    "@instructure/ui-a11y": "^5.2.0",
+    "@instructure/ui-elements": "^5.2.0",
+    "@instructure/ui-overlays": "^5.2.0",
+    "@instructure/ui-utils": "^5.2.0",
+    "@instructure/ui-icons": "^5.2.0",
+    "classnames": "^2.2.5",
+    "prop-types": "^15.5.10"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
