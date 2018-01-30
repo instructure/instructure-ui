@@ -78,7 +78,8 @@ Before beginning you will need:
 
 To create a beta release:
 
-1. Run `yarn release -- -t beta`.
+1. Run `yarn release -t beta`.
+1. Enter a version with the 'beta' flag when the script asks for it (e.g. X.0.0-beta.1)
 1. Verify that the release was tagged in Github and released to npm.
 
 ```text
@@ -116,7 +117,7 @@ B. To bump the package versions for a stable release (G^ and J^ below):
 
 C. To create a stable release:
 
-1. Run `yarn release -- -t latest` to publish the packages and git tag the release (vX.0.0 and vX.0.1 below).
+1. Run `yarn release -t latest` to publish the packages and git tag the release (vX.0.0 and vX.0.1 below).
 1. Verify that the release was tagged in Github and the packages released to npm.
 1. Verify that the documentation was updated on gh-pages.
 1. `git cherry-pick` the version bump commit (G^' and J^' below) onto the `master` branch.
@@ -146,7 +147,8 @@ Before beginning you will need:
 To create a dev release:
 
 1. Make sure you've checked out the branch you want to release
-1. Run `yarn release -- -t dev`.
+1. Run `yarn release -t dev`.
+1. Enter a version with the 'dev' flag when the script asks for it (e.g. X.Y.0-dev.1)
 1. Verify that the release was tagged in Github and released to npm.
 
 ```text
@@ -191,5 +193,5 @@ C. To create the patch release commit (e.g. 1.4.1):
 1. Check that the CHANGELOG.md file was updated correctly and that the new version number is changed to 1.4.1.
 1. Push the version bump commit for review: `git push origin HEAD:refs/for/patch/release-v1.4.x`
 1. Review the version bump commit, test it and merge it.
-1. From the local release branch (steps B (1, 2) above) run `yarn release -- -t stable`.
+1. From the local release branch (steps B (1, 2) above) run `yarn release -t stable`.
 1. Verify that the release was tagged in Github and released to npm.
