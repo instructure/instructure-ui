@@ -190,5 +190,4 @@ table code {
 .docsSectionHeader {
   display: flex;
   justify-content: flex-end;
-  position: relative; /* TODO: to be removed when Position bug INSTUI-938 is resolved */
 }

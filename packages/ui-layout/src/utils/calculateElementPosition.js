@@ -196,6 +196,7 @@ class PositionedElement {
 
     let offsetY = 0
     let offsetX = 0
+    let scrollY = 0
 
     for (let i = 1; i < parents.length; i++) {
       const parent = getBoundingClientRect(parents[i])
@@ -203,7 +204,12 @@ class PositionedElement {
 
       offsetY = offsetY + (child.top - parent.top)
       offsetX = offsetX + (child.left - parent.left)
+      scrollY = scrollY + parents[i].scrollTop
     }
+    // Account for any scrolling on positioned parents
+    // Without this, unnecessary scroll offset could be applied
+    // to our target element
+    offsetY = offsetY + scrollY
 
     return { top: offsetY, left: offsetX }
   }

@@ -53,7 +53,14 @@ export default function getOffsetParents (el) {
 
     // eslint-disable-next-line no-cond-assign
     while ((parent = parent.parentNode) && parent && parent.nodeType === 1 && parent.tagName !== 'BODY') {
-      if (getComputedStyle(parent).position !== 'static') {
+      const style = getComputedStyle(parent)
+      const transform = style.getPropertyValue("-webkit-transform") ||
+                        style.getPropertyValue("-moz-transform") ||
+                        style.getPropertyValue("-ms-transform") ||
+                        style.getPropertyValue("-o-transform") ||
+                        style.getPropertyValue("transform") || null
+
+      if (style.position !== 'static' || (transform && transform !== 'none')) {
         parents.push(parent)
       }
     }
