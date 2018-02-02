@@ -138,6 +138,16 @@ describe('<SelectMultiple />', () => {
     expect(subject.instance().state.filteredOptions.length).to.equal(1)
   })
 
+  it('resets the options when closing the menu without a selection', () => {
+    const subject = testbed.render()
+    testbed.tick()
+    subject.find('input[type="text"]').simulate('click')
+    subject.instance()._input.value = 'Arub'
+    subject.find('input[type="text"]').simulate('change', { preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
+    expect(subject.instance().state.filteredOptions.length).to.equal(4)
+  })
+
   it('responds to selection done by SelectField', () => {
     const newSelection = {
       value: '4', label: 'Key Largo'
