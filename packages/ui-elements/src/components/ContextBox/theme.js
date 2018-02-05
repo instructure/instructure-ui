@@ -22,11 +22,9 @@
  * SOFTWARE.
  */
 
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
-
 export default function generator ({ colors, borders, shadows }) {
   return {
-    arrowBorderColor: darken(colors.tiara, 5),
+    arrowBorderColor: colors.ash,
     backgroundColor: colors.white,
     textColor: colors.oxford,
 

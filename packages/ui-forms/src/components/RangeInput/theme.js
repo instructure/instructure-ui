@@ -37,7 +37,7 @@ export default function generator ({ colors, typography, spacing, forms }) {
     handleFocusOutlineColor: alpha(colors.brand, 40),
     handleFocusOutlineWidth: '0.75em',
 
-    trackBackground: colors.slate,
+    trackBackground: colors.ash,
 
     valueBackground: colors.oxford,
     valueColor: colors.white,

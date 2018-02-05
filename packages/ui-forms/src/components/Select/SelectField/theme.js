@@ -46,7 +46,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     errorBorderColor: colors.crimson,
     errorOutlineColor: alpha(colors.crimson, 50),
 
-    placeholderColor: colors.slate,
+    placeholderColor: colors.ash,
 
     smallFontSize: typography.fontSizeSmall,
     smallHeight: forms.inputHeightSmall,

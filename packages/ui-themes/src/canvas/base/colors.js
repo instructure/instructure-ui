@@ -21,34 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export default Object.freeze({
-  // These need to meet 3:1 contrast requirements when used as text against background
-  // colors white or when used as a background with text colors white
+const colors = {
   brand: '#008EE2',
   electric: '#008EE2',
   shamrock: '#00AC18',
   barney: '#BF32A4',
   crimson: '#EE0612',
   fire: '#FC5E13',
-
-  // these need to meet 3:1 contrast as background with text colors porcelain and white
-  // or as text with background porcelain and white
   licorice: '#2D3B45',
   oxford: '#394B58',
-
-  // should meet 3:1 contrast as text with background colors porcelain and white
-  // and as background color with text colors porcelain and white
-  slate: '#73818C',
-
-  // This needs to meet 3:1 contrast requirements when used as text against background
-  // color white or when used as a background with text color white
   ash: '#8B969E',
-
-  tiara: '#C7CDD1', // used only for borders (where contrast with text isn't an issue)
-
-  // these need to meet 3:1 contrast as background with text colors oxford and licorice
-  // and as text with backround colors oxford and licorice
+  tiara: '#C7CDD1',
   porcelain: '#F5F5F5',
   white: '#FFFFFF'
-})
+}
+
+export function makeFunctionalColors (colors) {
+  return {
+    ...colors,
+
+    textDarkest: colors.licorice,
+    textDark: colors.ash,
+    textLight: colors.porcelain,
+    textLightest: colors.white,
+
+    textBrand: colors.electric,
+    textAlert: colors.barney,
+    textInfo: colors.electric,
+    textSuccess: colors.shamrock,
+    textWarning: colors.fire,
+
+    backgroundDarkest: colors.licorice,
+    backgroundDark: colors.oxford,
+    // backgroundMedium: colors.ash, // TODO: what text color does this work with?
+    backgroundLight: colors.porcelain,
+    backgroundLightest: colors.white,
+
+    backgroundBrand: colors.electric,
+    backgroundAlert: colors.barney,
+    backgroundInfo: colors.electric,
+    backgroundSuccess: colors.shamrock,
+    backgroundWarning: colors.fire,
+
+    borderLight: colors.tiara,
+    borderDark: colors.ash,
+
+    borderBrand: colors.electric,
+    borderAlert: colors.barney,
+    borderInfo: colors.electric,
+    borderSuccess: colors.shamrock,
+    borderWarning: colors.fire
+  }
+}
+
+export default Object.freeze(makeFunctionalColors(colors))
