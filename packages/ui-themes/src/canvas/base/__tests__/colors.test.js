@@ -26,87 +26,169 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import colors from '../colors'
 
 describe('canvas.colors', () => {
-  describe('brand', () => {
-    it('should meet 3:1 contrast as a background color with `porcelain` text', () => {
-      expect(contrast(colors.brand, colors.porcelain)).to.be.above(3)
+  describe('textDarkest', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textDarkest, colors.backgroundLightest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.brand, colors.white)).to.be.above(3)
+    it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
+      expect(contrast(colors.textDarkest, colors.backgroundLight)).to.be.above(3)
+    })
+  })
+  describe('textDark', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textDark, colors.backgroundLightest)).to.be.above(3)
+    })
+  })
+  describe('textLight', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textLight, colors.backgroundDarkest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDark` background', () => {
+      expect(contrast(colors.textLight, colors.backgroundDark)).to.be.above(3)
+    })
+  })
+  describe('textLightest', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundDarkest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDark` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundDark)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundBrand` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundBrand)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundAlert` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundAlert)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundInfo` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundInfo)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundSuccess` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundSuccess)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundWarning` background', () => {
+      expect(contrast(colors.textLightest, colors.backgroundWarning)).to.be.above(3)
+    })
+  })
+  describe('textBrand', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textBrand, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
+      expect(contrast(colors.textBrand, colors.backgroundLight)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textBrand, colors.backgroundDarkest)).to.be.above(3)
+    })
+  })
+  describe('textAlert', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textAlert, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
+      expect(contrast(colors.textAlert, colors.backgroundLight)).to.be.above(3)
+    })
+  })
+  describe('textInfo', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textInfo, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textInfo, colors.backgroundDarkest)).to.be.above(3)
+    })
+  })
+  describe('textSuccess', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textSuccess, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textSuccess, colors.backgroundDarkest)).to.be.above(3)
+    })
+  })
+  describe('textWarning', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textWarning, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.textWarning, colors.backgroundDarkest)).to.be.above(3)
     })
   })
 
-  describe('shamrock', () => {
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.shamrock, colors.white)).to.be.above(3)
+  describe('borderLight', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderLight, colors.backgroundDarkest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderLight, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-
-  describe('barney', () => {
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.barney, colors.white)).to.be.above(3)
+  describe('borderDark', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderDark, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderDark, colors.backgroundDarkest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderDark, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-
-  describe('crimson', () => {
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.crimson, colors.white)).to.be.above(3)
+  describe('borderBrand', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderBrand, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundLight` background', () => {
+      expect(contrast(colors.borderBrand, colors.backgroundLight)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderBrand, colors.backgroundDarkest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderBrand, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-
-  describe('fire', () => {
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.fire, colors.white)).to.be.above(3)
+  describe('borderAlert', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderAlert, colors.backgroundLightest)).to.be.above(3)
+    })
+    it('should meet 3:1 contrast as a border color with `backgroundLight` background', () => {
+      expect(contrast(colors.borderAlert, colors.backgroundLight)).to.be.above(3)
     })
   })
-
-  describe('licorice', () => {
-    it('should meet 3:1 contrast as a background color with `porcelain` text', () => {
-      expect(contrast(colors.licorice, colors.porcelain)).to.be.above(3)
+  describe('borderInfo', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderInfo, colors.backgroundLightest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.licorice, colors.white)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundLight` background', () => {
+      expect(contrast(colors.borderInfo, colors.backgroundLight)).to.be.above(3)
     })
-  })
-
-  describe('oxford', () => {
-    it('should meet 3:1 contrast as a background color with `porcelain` text', () => {
-      expect(contrast(colors.oxford, colors.porcelain)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderInfo, colors.backgroundDarkest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.oxford, colors.white)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderInfo, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-
-  describe('slate', () => {
-    it('should meet 3:1 contrast as a background color with `porcelain` text', () => {
-      expect(contrast(colors.slate, colors.porcelain)).to.be.above(3)
+  describe('borderSuccess', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderSuccess, colors.backgroundLightest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.slate, colors.white)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderSuccess, colors.backgroundDarkest)).to.be.above(3)
     })
-  })
-
-  describe('ash', () => {
-    it('should meet 3:1 contrast as a background color with `white` text', () => {
-      expect(contrast(colors.ash, colors.white)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderSuccess, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-
-  describe('porcelain', () => {
-    it('should meet 3:1 contrast as a background color with `licorice` text', () => {
-      expect(contrast(colors.porcelain, colors.licorice)).to.be.above(3)
+  describe('borderWarning', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderWarning, colors.backgroundLightest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a background color with `oxford` text', () => {
-      expect(contrast(colors.porcelain, colors.oxford)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderWarning, colors.backgroundDarkest)).to.be.above(3)
     })
-  })
-
-  describe('white', () => {
-    it('should meet 3:1 contrast as a background color with `licorice` text', () => {
-      expect(contrast(colors.white, colors.licorice)).to.be.above(3)
-    })
-    it('should meet 3:1 contrast as a background color with `oxford` text', () => {
-      expect(contrast(colors.white, colors.oxford)).to.be.above(3)
+    it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderWarning, colors.backgroundDarkest)).to.be.above(3)
     })
   })
 })

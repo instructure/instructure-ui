@@ -29,7 +29,7 @@ export default function generator ({ typography, colors, spacing }) {
     primaryColor: colors.licorice,
     primaryInverseColor: colors.white,
 
-    secondaryColor: colors.slate,
+    secondaryColor: colors.ash,
     secondaryInverseColor: colors.porcelain,
 
     warningColor: colors.fire,

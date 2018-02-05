@@ -84,6 +84,7 @@ plugins = plugins.concat([
       'packages/ui-docs-plugin/**/*.js',
       'packages/ui-utils/src/i18n/*.js',
       'packages/ui-utils/src/index.js',
+      'packages/ui-core/**/*.js',
       'packages/ui-utils/src/dom/calculateElementPosition.js',
       'packages/ui-utils/src/dom/findTabbable.js',
       'packages/ui-utils/src/dom/focusManager.js',

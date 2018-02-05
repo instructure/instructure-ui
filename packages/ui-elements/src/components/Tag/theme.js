@@ -78,7 +78,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
       borderColor: colors.ash,
       borderRadius: borders.radiusMedium,
       iconColor: colors.ash,
-      iconHoverColor: colors.slate,
+      iconHoverColor: colors.ash,
       mainColor: colors.white,
       textColor: colors.licorice
     })

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
-
 export default function generator ({ colors, typography, spacing }) {
   return {
     color: colors.oxford,
@@ -33,7 +31,7 @@ export default function generator ({ colors, typography, spacing }) {
     fontSize: typography.fontSizeMedium,
     borderColor: colors.tiara,
 
-    headerBorderColor: darken(colors.tiara, 20),
+    headerBorderColor: colors.ash,
 
     hoverBorderColor: colors.brand,
 

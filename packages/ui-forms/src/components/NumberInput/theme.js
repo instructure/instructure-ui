@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
+import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, typography, borders, spacing, forms }) {
   return {
@@ -42,9 +42,9 @@ export default function generator ({ colors, typography, borders, spacing, forms
     arrowsContainerWidth: '2rem',
     arrowsColor: colors.licorice,
     arrowsBackgroundColor: colors.porcelain,
-    arrowsHoverBackgroundColor: darken(colors.porcelain, 10),
-    arrowsBorderColor: darken(colors.porcelain, 10),
-    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${darken(colors.porcelain, 20, 0.45)}`,
+    arrowsHoverBackgroundColor: colors.tiara,
+    arrowsBorderColor: colors.tiara,
+    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors.tiara}`,
 
     focusBorderColor: colors.brand,
     focusOutlineColor: alpha(colors.brand, 50),
@@ -52,7 +52,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
     errorBorderColor: colors.crimson,
     errorOutlineColor: alpha(colors.crimson, 50),
 
-    placeholderColor: colors.slate,
+    placeholderColor: colors.ash,
 
     mediumFontSize: typography.fontSizeMedium,
     mediumHeight: forms.inputHeightMedium,

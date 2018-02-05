@@ -46,7 +46,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     primaryColor: colors.licorice,
     primaryInverseColor: colors.white,
 
-    secondaryColor: colors.slate,
+    secondaryColor: colors.ash,
     secondaryInverseColor: colors.porcelain,
 
     brandColor: colors.brand,

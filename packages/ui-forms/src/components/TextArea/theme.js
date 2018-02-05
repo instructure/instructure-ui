@@ -53,7 +53,7 @@ export default function generator ({ colors, borders, spacing, typography, forms
     errorOutlineColor: alpha(colors.crimson, 50),
     boxShadowErrorColor: 'transparent',
 
-    placeholderColor: colors.slate,
+    placeholderColor: colors.ash,
 
     smallFontSize: typography.fontSizeSmall,
     smallHeight: forms.inputHeightSmall,
