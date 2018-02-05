@@ -60,6 +60,7 @@
     opacity: 0;
     transform: scale(0.01);
     transition: all var(--transitionTiming);
+    pointer-events: none;
   }
 
   &:not(.dismissible) {

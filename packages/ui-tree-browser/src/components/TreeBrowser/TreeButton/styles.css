@@ -104,6 +104,7 @@
     offset-inline-start: 0;
     offset-inline-end: auto;
     top: 50%;
+    pointer-events: none;
   }
 }
 
