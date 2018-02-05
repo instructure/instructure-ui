@@ -236,6 +236,26 @@ describe('<SelectSingle />', () => {
     })
   })
 
+  it(`when controlled, should clear input when selectedOption is changed to null`, (done) => {
+    const selectedOption = '0'
+    const onChange = testbed.stub()
+    const subject = testbed.render({ onChange, selectedOption })
+    testbed.tick()
+
+    expect(subject.instance()._input.value).to.equal('Aruba')
+
+    subject.setProps({
+      selectedOption: null
+    }, () => {
+      testbed.defer(() => { // wait for re-render
+        testbed.tick()
+        expect(subject.instance()._input.value).to.equal('')
+        expect(subject.instance().state.selectedOption).to.equal(null)
+        done()
+      })
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()

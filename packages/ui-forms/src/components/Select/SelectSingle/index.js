@@ -177,6 +177,10 @@ class SelectSingle extends Component {
           this._input.value = selectedOption.label
           this.props.onInputChange(null, this._input.value)
         }
+      } else if (newId === null && newId !== oldId) {
+        this.setState({ selectedOption: null })
+        this._input.value = ''
+        this.props.onInputChange(null, this._input.value)
       }
     }
   }
