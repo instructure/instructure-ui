@@ -88,7 +88,6 @@ describe('<FocusRegion />', () => {
 })
 
 describe('<FocusRegion /> managed focus', () => {
-  const applicationElement = document.createElement('div')
   class FocusRegionExample extends React.Component {
     static propTypes = {
       ...FocusRegion.propTypes
@@ -109,7 +108,7 @@ describe('<FocusRegion /> managed focus', () => {
               this._input = c
             }}
           />
-          <FocusRegion {...this.props} label="A Modal" applicationElement={() => applicationElement}>
+          <FocusRegion {...this.props} label="A Modal">
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />

@@ -332,11 +332,6 @@ export default class App extends Component {
             label="Navigation"
             open={this.state.showMenu}
             size="x-small"
-            applicationElement={() => [
-              document.getElementById('app'),
-              document.getElementById('flash-messages'),
-              document.getElementById('nav')
-            ]}
             mountNode={() => document.getElementById('nav')}
           >
             <div className={styles.nav}>

@@ -27,22 +27,31 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import FocusManager from '@instructure/ui-a11y/lib/utils/focusManager'
 import scopeTab from '@instructure/ui-utils/lib/dom/scopeTab'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import warning from '@instructure/ui-utils/lib/warning'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+
+import findTabbable from '../../utils/findTabbable'
+import FocusManager from '../../utils/focusManager'
 
 /**
 ---
 category: components/utilities
 ---
 **/
+
+@deprecated('5.0.0', {
+  applicationElement: true
+},
+'Elements outside of the `<FocusRegion />` are now hidden from screen readers by default. ' +
+'Use the `liveRegion` prop to specify any elements that should not be hidden')
 
 class FocusRegion extends Component {
   static propTypes = {
@@ -68,14 +77,15 @@ class FocusRegion extends Component {
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
     /**
-     * An element or a function returning an element to apply `aria-hidden` to
-     */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
-
-    /**
      * An element or a function returning an element that wraps the content of the `<FocusRegion />`
      */
     contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<FocusRegion />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
 
     shouldContainFocus: PropTypes.bool,
     shouldReturnFocus: PropTypes.bool,
@@ -89,9 +99,9 @@ class FocusRegion extends Component {
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: true,
     shouldCloseOnEscape: true,
-    applicationElement: null,
     defaultFocusElement: null,
     contentElement: null,
+    liveRegion: null,
     onDismiss: () => {}
   }
 
@@ -201,25 +211,12 @@ class FocusRegion extends Component {
     }
   }
 
-  hideApplicationElement () {
-    this.applicationElement.forEach(element => {
-      element.setAttribute('aria-hidden', 'true')
-    })
-  }
-
-  openApplicationElement () {
-    this.applicationElement.forEach(element => {
-      element.removeAttribute('aria-hidden')
-    })
-  }
-
   setupScopedFocus () {
     if (!this._keyDownListener) {
       this._keyDownListener = addEventListener(ownerDocument(this), 'keydown', this.handleKeyDown)
     }
 
-    this._focusManager.setupScopedFocus(this.contentElement)
-    this.hideApplicationElement()
+    this._focusManager.setupScopedFocus(this.contentElement, this.liveRegion)
   }
 
   teardownScopedFocus () {
@@ -227,7 +224,6 @@ class FocusRegion extends Component {
     this._keyDownListener = null
 
     this._focusManager.teardownScopedFocus()
-    this.openApplicationElement()
   }
 
   focus () {
@@ -267,45 +263,19 @@ class FocusRegion extends Component {
     return defaultFocusElement
   }
 
-  get applicationElement () {
-    let { applicationElement } = this.props
-
-    if (typeof applicationElement === 'function') {
-      applicationElement = applicationElement()
-    }
-
-    if (Array.isArray(applicationElement)) {
-      applicationElement = applicationElement.map(el => findDOMNode(el))
-    } else if (applicationElement) {
-      applicationElement = [findDOMNode(applicationElement)]
-    }
-
-    if (this.props.shouldContainFocus) {
-      warning(
-        applicationElement,
-        `[FocusRegion] The applicationElement prop is required in order to contain focus.`
-      )
-    }
-
-    return applicationElement
-  }
-
   get contentElement () {
-    let { contentElement } = this.props
-
-    if (typeof contentElement === 'function') {
-      contentElement = contentElement()
-    }
-
-    if (contentElement) {
-      contentElement = findDOMNode(contentElement)
-    }
+    let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
       contentElement = this._root
     }
 
     return contentElement
+  }
+
+  get liveRegion () {
+    const { liveRegion } = this.props
+    return Array.isArray(liveRegion) ? liveRegion : findDOMNode(this.props.liveRegion)
   }
 
   render () {

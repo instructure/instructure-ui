@@ -218,11 +218,7 @@ class MyIcon extends React.Component {
               label={`Usage: ${name} ${variant}`}
               size="medium"
               shouldCloseOnOverlayClick
-              applicationElement={() => [
-                document.getElementById('app'),
-                document.getElementById('flash-messages'),
-                document.getElementById('nav')
-              ]}
+              closeButtonLabel="Close"
             >
               <ModalHeader>
                 <CloseButton

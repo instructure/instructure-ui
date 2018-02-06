@@ -88,7 +88,6 @@ describe('<Dialog />', () => {
 })
 
 describe('<Dialog /> managed focus', () => {
-  const applicationElement = document.createElement('div')
   class DialogExample extends React.Component {
     static propTypes = {
       ...Dialog.propTypes
@@ -109,7 +108,7 @@ describe('<Dialog /> managed focus', () => {
               this._input = c
             }}
           />
-          <Dialog {...this.props} label="A Modal" applicationElement={() => applicationElement}>
+          <Dialog {...this.props} label="A Modal">
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />

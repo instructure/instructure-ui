@@ -31,15 +31,17 @@ import ReactDOM from 'react-dom'
  *
  * Wrapper function for React.findDOMNode
  *
- * @param {ReactComponent|DomNode} el - component or DOM node
+ * @param {ReactComponent|DomNode} el - component, DOM node, or function returning a DOM node
  * @returns {DomNode} The root node of this element
  */
 export default function findDOMNode (el) {
-  if (el === window) {
-    return el
-  } else if (el === document) {
+  const node = typeof el === 'function' ? el() : el
+
+  if (node === window) {
+    return node
+  } else if (node === document) {
     return document.documentElement
-  } else if (el) {
-    return ReactDOM.findDOMNode(el) // eslint-disable-line react/no-find-dom-node
+  } else if (node) {
+    return ReactDOM.findDOMNode(node) // eslint-disable-line react/no-find-dom-node
   }
 }

@@ -112,11 +112,6 @@ class LayoutTray extends Component {
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
     /**
-     * An element or a function returning an element to apply `aria-hidden` to
-     */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
-
-    /**
      * Callback fired before the <LayoutTray /> transitions in
      */
     onEnter: PropTypes.func,
@@ -147,7 +142,12 @@ class LayoutTray extends Component {
     /**
      * Ref function for the <LayoutTray /> content
      */
-    contentRef: PropTypes.func
+    contentRef: PropTypes.func,
+
+    /**
+     * Function that returns the DIV where screenreader alerts will be placed.
+     */
+    liveRegion: PropTypes.func
   }
 
   static defaultProps = {
@@ -163,7 +163,6 @@ class LayoutTray extends Component {
     closeButtonVariant: 'icon',
     shouldContainFocus: true,
     defaultFocusElement: null,
-    applicationElement: null,
     onEnter: () => {},
     onEntering: () => {},
     onEntered: () => {},

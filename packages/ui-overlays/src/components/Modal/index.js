@@ -58,7 +58,8 @@ category: components/dialogs
 })
 @deprecated('5.0.0', {
   closeButtonLabel: true,
-  closeButtonRef: true
+  closeButtonRef: true,
+  applicationElement: true
 })
 export default class Modal extends Component {
   static propTypes = {
@@ -96,10 +97,6 @@ export default class Modal extends Component {
      * An element or a function returning an element to focus by default
      */
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
-     * An element or a function returning an element to apply `aria-hidden` to
-     */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
 
     /**
      * Whether focus should be returned to the trigger when the `<Modal/>` is closed
@@ -148,6 +145,12 @@ export default class Modal extends Component {
      */
     insertAt: PropTypes.oneOf(['bottom', 'top']),
 
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<Modal />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+
     transition: Transition.propTypes.type,
 
     /**
@@ -191,10 +194,10 @@ export default class Modal extends Component {
     onExited: () => {},
     mountNode: null,
     insertAt: 'bottom',
+    liveRegion: null,
     contentRef: el => {},
     shouldCloseOnOverlayClick: true,
     shouldReturnFocus: true,
-    applicationElement: null,
     defaultFocusElement: null,
     children: null
   }

@@ -63,7 +63,8 @@ category: components/dialogs
 })
 @deprecated('5.0.0', {
   closeButtonLabel: true,
-  closeButtonRef: true
+  closeButtonRef: true,
+  applicationElement: true
 })
 class Popover extends Component {
   static Trigger = PopoverTrigger
@@ -171,10 +172,6 @@ class Popover extends Component {
      * An element or a function returning an element to focus by default
      */
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-    /**
-     * An element or a function returning an element to apply `aria-hidden` to
-     */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
 
     /**
     * Should the `<Popover />` render offscreen when visually hidden
@@ -241,6 +238,13 @@ class Popover extends Component {
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */
     insertAt: PropTypes.oneOf(['bottom', 'top']),
+
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<Popover />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+
     /**
      * Target element for positioning the Popover (if it differs from the trigger)
      */
@@ -280,11 +284,11 @@ class Popover extends Component {
     shouldReturnFocus: true,
     shouldCloseOnDocumentClick: true,
     shouldCloseOnEscape: true,
-    applicationElement: null,
     defaultFocusElement: null,
     label: null,
     mountNode: null,
     insertAt: 'bottom',
+    liveRegion: null,
     positionTarget: null,
     alignArrow: false
   }

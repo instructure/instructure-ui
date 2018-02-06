@@ -88,7 +88,6 @@ export default class LayoutTestApp extends Component {
             onDismiss={this.handleLayoutTrayDismiss}
             label="Test LayoutTray"
             closeButtonLabel="Close"
-            applicationElement={() => document.createElement('div')}
           >
             <div style={{ width: trayWidth }}>
               Hello from tray

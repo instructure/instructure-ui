@@ -261,7 +261,6 @@ class Example extends React.Component {
           show={this.state.showPopover}
           shouldContainFocus
           shouldReturnFocus
-          applicationElement={() => document.getElementById('app')}
           label="Pages Dialog Example"
           placement="center end"
           onDismiss={this.hidePopover}

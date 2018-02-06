@@ -77,7 +77,6 @@ example: true
            size={this.state.size}
            label="Modal Dialog: Hello World"
            shouldCloseOnOverlayClick
-           applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
          >
            <ModalHeader>
              {this.renderCloseButton()}
@@ -149,11 +148,6 @@ const fpo = lorem.paragraphs(1)
            size="medium"
            label="Modal Dialog: Hello World"
            shouldCloseOnOverlayClick
-           applicationElement={() => [
-              document.getElementById('app'),
-              document.getElementById('flash-messages'),
-              document.getElementById('nav')
-          ]}
          >
            <ModalHeader>
              {this.renderCloseButton()}

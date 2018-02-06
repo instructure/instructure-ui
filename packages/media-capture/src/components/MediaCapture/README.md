@@ -50,7 +50,6 @@ class Example extends React.Component {
           onDismiss={() => { this.setState({ isOpen: false }) }}
           label="Media Capture"
           shouldCloseOnOverlayClick
-          applicationElement={() => document.getElementById('app')}
         >
           <ModalBody padding="xx-large">
             {this.renderCloseButton()}

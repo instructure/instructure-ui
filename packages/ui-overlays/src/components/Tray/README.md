@@ -90,7 +90,6 @@ class Example extends React.Component {
           onDismiss={() => { this.setState({ open: false }) }}
           size={this.state.size}
           placement={this.state.placement}
-          applicationElement={() => document.getElementById('app') }
         >
           <Container as="div" padding="large medium">
             {this.renderCloseButton()}

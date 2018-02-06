@@ -28,12 +28,10 @@ import LayoutTray from '../index'
 import styles from '../styles.css'
 
 describe('<LayoutTray />', () => {
-  const applicationElement = document.createElement('div')
   const testbed = new Testbed(
     <LayoutTray
       label="Layout Tray Test"
       closeButtonLabel="Close"
-      applicationElement={() => applicationElement}
     >
       Hello from layout tray
     </LayoutTray>

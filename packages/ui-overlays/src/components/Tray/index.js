@@ -56,7 +56,8 @@ category: components/dialogs
 @deprecated('5.0.0', {
   closeButtonLabel: true,
   closeButtonRef: true,
-  closeButtonVariant: true
+  closeButtonVariant: true,
+  applicationElement: true
 })
 class Tray extends Component {
   static propTypes = {
@@ -88,11 +89,6 @@ class Tray extends Component {
      * An element or a function returning an element to focus by default
      */
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
-
-    /**
-     * An element or a function returning an element to apply `aria-hidden` to
-     */
-    applicationElement: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
 
     /**
      *
@@ -147,6 +143,12 @@ class Tray extends Component {
     insertAt: PropTypes.oneOf(['bottom', 'top']),
 
     /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<Tray />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+
+    /**
      * Callback fired before the <Tray /> transitions in
      */
     onEnter: PropTypes.func,
@@ -197,11 +199,11 @@ class Tray extends Component {
     onExited: () => {},
     mountNode: null,
     insertAt: 'bottom',
+    liveRegion: null,
     contentRef: el => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
     shouldReturnFocus: true,
-    applicationElement: null,
     defaultFocusElement: null,
     size: 'small',
     placement: 'start',

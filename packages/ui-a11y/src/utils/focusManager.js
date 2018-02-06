@@ -30,6 +30,7 @@ import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import warning from '@instructure/ui-utils/lib/warning'
 
+import ScreenReaderFocusRegion from './ScreenReaderFocusRegion'
 import findTabbable from './findTabbable'
 
 /**
@@ -46,6 +47,7 @@ class FocusManager {
   contextElement = null
   focusLaterElement = null
   needToFocus = false
+  screenReaderFocusRegion = new ScreenReaderFocusRegion()
   listeners = []
   timeouts = []
 
@@ -99,7 +101,7 @@ class FocusManager {
     this.focusLaterElement = null
   }
 
-  setupScopedFocus (el) {
+  setupScopedFocus (el, liveRegion) {
     if (this.contextElement) {
       warning(
         false,
@@ -113,9 +115,13 @@ class FocusManager {
 
     this.listeners.push(addEventListener(ownerWindow(this.contextElement), 'blur', this.handleBlur, false))
     this.listeners.push(addEventListener(ownerDocument(this.contextElement), 'focus', this.handleFocus, true))
+
+    this.screenReaderFocusRegion.isolateRegion(this.contextElement, liveRegion)
   }
 
   teardownScopedFocus () {
+    this.screenReaderFocusRegion.openRegion()
+
     this.listeners.forEach(listener => {
       listener.remove()
     })

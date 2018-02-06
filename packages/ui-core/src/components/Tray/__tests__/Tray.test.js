@@ -29,9 +29,8 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 import Tray from '../index'
 
 describe('<Tray />', () => {
-  const applicationElement = document.createElement('div')
   const testbed = new Testbed(
-    <Tray label="Tray Example" closeButtonLabel="Close" applicationElement={() => applicationElement} />
+    <Tray label="Tray Example" closeButtonLabel="Close" />
   )
 
   it('should render nothing and have a node with no parent when closed', () => {
@@ -160,7 +159,6 @@ describe('<Tray />', () => {
 })
 
 describe('<Tray /> managed focus', () => {
-  const applicationElement = document.createElement('div')
   class TrayExample extends React.Component {
     static propTypes = {
       ...Tray.propTypes
@@ -170,7 +168,7 @@ describe('<Tray /> managed focus', () => {
       return (
         <div>
           <input type="text" />
-          <Tray {...this.props} closeButtonLabel="close" applicationElement={() => applicationElement}>
+          <Tray {...this.props} closeButtonLabel="close">
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />

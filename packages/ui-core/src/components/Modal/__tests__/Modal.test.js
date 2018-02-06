@@ -29,14 +29,12 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
 
 describe('<Modal />', () => {
-  const applicationElement = document.createElement('div')
   const testbed = new Testbed(
     (
       <Modal
         transition="fade"
         label="Modal Dialog"
         closeButtonLabel="Close"
-        applicationElement={() => applicationElement}
         shouldReturnFocus={false}
       >
         <ModalBody />
@@ -217,7 +215,6 @@ describe('<Modal />', () => {
 })
 
 describe('<Modal /> managed focus', () => {
-  const applicationElement = document.createElement('div')
   class ModalExample extends React.Component {
     static propTypes = {
       ...Modal.propTypes
@@ -227,7 +224,7 @@ describe('<Modal /> managed focus', () => {
       return (
         <div>
           <input type="text" />
-          <Modal {...this.props} closeButtonLabel="close" applicationElement={() => applicationElement}>
+          <Modal {...this.props} closeButtonLabel="close">
             <ModalBody>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />

@@ -33,7 +33,7 @@ class Example extends React.Component {
             open={this.state.open}
             placement="start"
             onDismiss={() => { this.setState({ open: false }) }}
-            applicationElement={() => document.getElementById('layoutContentExample1') }
+            liveRegion={() => document.getElementById('flash-messages')}
           >
             <Container
               as="div"
@@ -113,7 +113,6 @@ class Example extends React.Component {
             open={this.state.endOpen}
             placement="end"
             onDismiss={() => {this.setState({ endOpen: false })}}
-            applicationElement={() => document.getElementById('layoutContentExample')}
           >
             <Container
               as="div"
@@ -135,7 +134,6 @@ class Example extends React.Component {
                 open={this.state.startOpen}
                 placement="start"
                 onDismiss={() => { this.setState({ startOpen: false }) }}
-                applicationElement={() => document.getElementById('layoutContentExample') }
               >
                 <Container
                   as="div"
@@ -180,13 +178,13 @@ class Example extends React.Component {
                       </GridRow>
                       <GridRow colSpacing="medium">
                         <GridCol>
-                          <Image src={placeholderImage(250, 250)} />
+                          <Image role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                         <GridCol>
-                          <Image src={placeholderImage(250, 250)} />
+                          <Image role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                         <GridCol>
-                          <Image src={placeholderImage(250, 250)} />
+                          <Image role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                       </GridRow>
                     </Grid>

@@ -32,8 +32,8 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-`<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` and `applicationElement`
-properties set, it will trap focus inside the `<Popover />`.
+`<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property 
+set, it will trap focus inside the `<Popover />`.
 
 ```js
 ---
@@ -84,7 +84,6 @@ class Example extends React.Component {
           shouldContainFocus
           shouldReturnFocus
           shouldCloseOnDocumentClick
-          applicationElement={() => document.getElementById('app')}
           label="Popover Dialog Example"
           offsetY="16px"
         >

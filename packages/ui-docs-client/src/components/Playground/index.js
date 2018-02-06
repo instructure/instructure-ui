@@ -169,11 +169,6 @@ export default class Playground extends Component {
               closeButtonLabel="Close full screen view"
               size="fullscreen"
               onDismiss={this.handleMinimize}
-              applicationElement={() => [
-                document.getElementById('app'),
-                document.getElementById('flash-messages'),
-                document.getElementById('nav')
-              ]}
             >
               <ModalBody padding="0">
                 {preview}

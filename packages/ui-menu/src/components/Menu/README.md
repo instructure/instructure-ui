@@ -47,7 +47,7 @@ The `<Menu/>` component can provide a toggle button which, when clicked, shows o
 
 Note: `<Menu/>` cannot contain content that is not a `<MenuItem/>` (links or buttons). If
 you need to include more complex content, take a look at [Popover](#Popover) with the `shouldContainFocus`
-and `applicationElement` properties.
+property.
 
 ```js
 ---
