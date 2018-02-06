@@ -100,7 +100,7 @@
   }
 }
 
-:not(.inline) {
+.root:not(.inline) {
   &.spacing--xxx-small {
     margin-top: var(--spacingXXXSmall);
     margin-bottom: var(--spacingXXXSmall);
