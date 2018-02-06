@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
+import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -73,7 +73,7 @@ export default class CheckboxFacade extends Component {
       <span className={classnames(classes)}>
         <span className={styles.facade} aria-hidden="true">
           <span className={styles.icon}>
-            <IconCheck />
+            <IconCheckMark />
           </span>
         </span>
         <span className={styles.label}>

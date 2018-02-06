@@ -25,7 +25,7 @@
 export default function generator ({ colors, borders, spacing, typography }) {
   return {
     color: colors.white,
-    borderWidth: borders.widthMedium,
+    borderWidth: borders.widthSmall,
     borderColor: colors.ash,
     borderRadius: borders.radiusMedium,
     background: colors.white,
