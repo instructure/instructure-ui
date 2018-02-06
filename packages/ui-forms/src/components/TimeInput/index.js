@@ -28,8 +28,8 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
-import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import Locale from '@instructure/ui-i18n/lib/Locale'
 
 import Select from '../Select'
 

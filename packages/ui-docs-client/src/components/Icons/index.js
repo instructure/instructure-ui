@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import Select from '@instructure/ui-forms/lib/components/Select'
@@ -207,7 +208,6 @@ class MyIcon extends React.Component {
               label={`Usage: ${name} ${variant}`}
               size="medium"
               shouldCloseOnOverlayClick
-              closeButtonLabel="Close"
               applicationElement={() => [
                 document.getElementById('app'),
                 document.getElementById('flash-messages'),
@@ -215,6 +215,14 @@ class MyIcon extends React.Component {
               ]}
             >
               <ModalHeader>
+                <CloseButton
+                  placement="end"
+                  offset="medium"
+                  variant="icon"
+                  onClick={this.handleModalDismiss}
+                >
+                  Close
+                </CloseButton>
                 <Heading>{`${glyph.glyphName} (${variant})`}</Heading>
               </ModalHeader>
               <ModalBody>

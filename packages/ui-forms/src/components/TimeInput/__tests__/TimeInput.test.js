@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 import TimeInput from '../index'
 

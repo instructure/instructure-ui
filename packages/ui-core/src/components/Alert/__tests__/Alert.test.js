@@ -24,10 +24,6 @@
 
 import React from 'react'
 
-import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
-import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
-import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
-
 import Alert from '../index'
 
 describe('<Alert />', () => {
@@ -73,20 +69,6 @@ describe('<Alert />', () => {
 
     expect(onDismiss.called).to.be.true
   })
-
-  const variantChanges = function (variant, variantModifications) {
-    it('should add a class to main div based on `variant`', () => {
-      const alert = testbed.render({ variant, transition: 'none' })
-      const mainDiv = alert.find(`.${variantModifications.className}`)
-      expect(mainDiv).to.be.present
-    })
-
-    it('should change the icon based on `variant`', () => {
-      const alert = testbed.render({ variant, transition: 'none' })
-      const icon = alert.find(variantModifications.iconComponent)
-      expect(icon).to.be.present
-    })
-  }
 
   it('should meet a11y standards', done => {
     const subject = testbed.render({ transition: 'none' })

@@ -29,8 +29,8 @@ import keycode from 'keycode'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
-import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import Locale from '@instructure/ui-i18n/lib/Locale'
 import warning from '@instructure/ui-utils/lib/warning'
 
 import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'

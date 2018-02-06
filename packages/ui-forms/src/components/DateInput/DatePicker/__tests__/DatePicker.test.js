@@ -25,7 +25,7 @@
 import React from 'react'
 import keycode from 'keycode'
 
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 import DatePicker from '../index'
 import styles from '../styles.css'

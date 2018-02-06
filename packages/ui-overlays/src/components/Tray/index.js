@@ -55,7 +55,8 @@ category: components/dialogs
 })
 @deprecated('5.0.0', {
   closeButtonLabel: true,
-  closeButtonRef: true
+  closeButtonRef: true,
+  closeButtonVariant: true
 })
 class Tray extends Component {
   static propTypes = {
@@ -197,7 +198,6 @@ class Tray extends Component {
     mountNode: null,
     insertAt: 'bottom',
     contentRef: el => {},
-    closeButtonRef: el => {},
     shouldCloseOnDocumentClick: false,
     shouldContainFocus: true,
     shouldReturnFocus: true,
@@ -207,8 +207,6 @@ class Tray extends Component {
     placement: 'start',
     shadow: true,
     border: false,
-    closeButtonVariant: 'icon',
-    closeButtonLabel: null,
     children: null
   }
 
@@ -285,7 +283,9 @@ class Tray extends Component {
         variant={this.props.closeButtonVariant}
         buttonRef={el => {
           this._closeButton = el
-          this.props.closeButtonRef(el)
+          if (typeof this.props.closeButtonRef === 'function') {
+            this.props.closeButtonRef(el)
+          }
         }}
         onClick={this.props.onDismiss}
       >

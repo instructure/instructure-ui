@@ -22,11 +22,24 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+import React from 'react'
+import ApplyLocale from '../index'
+import { DatePicker } from '@instructure/ui-forms/lib/components/DateInput'
 
-import Alert from '@instructure/ui-alerts/lib/components/Alert'
+describe('<ApplyLocale />', () => {
+  const testbed = new Testbed(
+    <ApplyLocale locale="fr" timezone="Europe/Paris">
+      <DatePicker previousLabel="foo" nextLabel="bar" />
+    </ApplyLocale>
+  )
 
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-alerts'
-))(Alert)
+  it('applies locale context', () => {
+    const subject = testbed.render()
+    expect(subject.find(DatePicker).unwrap().context).to.include({locale: 'fr'})
+  })
+
+  it('applies timezone context', () => {
+    const subject = testbed.render()
+    expect(subject.find(DatePicker).unwrap().context).to.include({timezone: 'Europe/Paris'})
+  })
+})

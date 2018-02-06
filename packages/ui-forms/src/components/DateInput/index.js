@@ -32,8 +32,8 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import warning from '@instructure/ui-utils/lib/warning'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
-import Locale from '@instructure/ui-utils/lib/i18n/Locale'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import Locale from '@instructure/ui-i18n/lib/Locale'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import DatePicker from './DatePicker'

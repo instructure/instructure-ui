@@ -268,14 +268,12 @@ class Popover extends Component {
     variant: 'default',
     on: ['hover', 'focus'],
     contentRef: el => {},
-    closeButtonRef: el => {},
     defaultShow: false,
     withArrow: true,
     trackPosition: true,
     constrain: 'window',
     onPositioned: position => {},
     onPositionChanged: position => {},
-    closeButtonLabel: null,
     shouldRenderOffscreen: false,
     shouldContainFocus: false,
     shouldReturnFocus: true,
@@ -439,7 +437,9 @@ class Popover extends Component {
         variant={this.props.variant === 'inverse' ? 'icon-inverse' : 'icon'}
         buttonRef={el => {
           this._closeButton = el
-          this.props.closeButtonRef(el)
+          if (typeof this.props.closeButtonRef === 'function') {
+            this.props.closeButtonRef(el)
+          }
         }}
         onClick={this.hide}
       >

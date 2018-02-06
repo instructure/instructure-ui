@@ -192,7 +192,6 @@ export default class Modal extends Component {
     mountNode: null,
     insertAt: 'bottom',
     contentRef: el => {},
-    closeButtonRef: el => {},
     shouldCloseOnOverlayClick: true,
     shouldReturnFocus: true,
     applicationElement: null,
@@ -253,7 +252,9 @@ export default class Modal extends Component {
       ? <CloseButton
         buttonRef={el => {
           this._closeButton = el
-          this.props.closeButtonRef(el)
+          if (typeof this.props.closeButtonRef === 'function') {
+            this.props.closeButtonRef(el)
+          }
         }}
         placement="end"
         offset="medium"

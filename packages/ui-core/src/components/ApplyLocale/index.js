@@ -22,31 +22,11 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import UIApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
+import ApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
 
-/**
----
-category: components/utilities
----
-**/
-@deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-i18n'
-))
-export default class ApplyLocale extends Component {
-  static propTypes = {
-    ...UIApplyLocale.propTypes
-  }
-
-  static childContextTypes = {
-    ...UIApplyLocale.childContextTypes
-  }
-
-  render () {
-    return <UIApplyLocale {...this.props} />
-  }
-}
+))(ApplyLocale)

@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-
 import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 

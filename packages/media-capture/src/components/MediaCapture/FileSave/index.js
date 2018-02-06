@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
-import TextInput from '@instructure/ui-core/lib/components/TextInput'
+import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import {

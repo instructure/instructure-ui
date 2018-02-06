@@ -26,6 +26,19 @@ class Example extends React.Component {
     })
   }
 
+  renderCloseButton () {
+     return (
+       <CloseButton
+         placement="end"
+         offset="medium"
+         variant="icon"
+         onClick={() => this.setState({ isOpen: false })}
+       >
+         Close
+       </CloseButton>
+     )
+   }
+
   render () {
     return (
       <div>
@@ -37,10 +50,10 @@ class Example extends React.Component {
           onDismiss={() => { this.setState({ isOpen: false }) }}
           label="Media Capture"
           shouldCloseOnOverlayClick
-          closeButtonLabel="Close"
           applicationElement={() => document.getElementById('app')}
         >
           <ModalBody padding="xx-large">
+            {this.renderCloseButton()}
             <MediaCapture onCompleted={this.onCompleted} onClose={this.onClose} />
           </ModalBody>
         </Modal>

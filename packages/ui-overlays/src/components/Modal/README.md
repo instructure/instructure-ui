@@ -79,8 +79,8 @@ example: true
            shouldCloseOnOverlayClick
            applicationElement={() => [document.getElementById('app'), document.getElementById('flash-messages')] }
          >
-           {this.renderCloseButton()}
            <ModalHeader>
+             {this.renderCloseButton()}
              <Heading>Hello World</Heading>
            </ModalHeader>
            <ModalBody>
@@ -155,8 +155,8 @@ const fpo = lorem.paragraphs(1)
               document.getElementById('nav')
           ]}
          >
-           {this.renderCloseButton()}
            <ModalHeader>
+             {this.renderCloseButton()}
              <Heading>This Modal contains an Autocomplete</Heading>
            </ModalHeader>
            <ModalBody>
