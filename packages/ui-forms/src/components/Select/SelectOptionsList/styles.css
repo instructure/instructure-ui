@@ -9,17 +9,13 @@
 .option {
   padding: var(--padding);
   background: var(--background);
-
   display: flex;
   align-items: center;
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   line-height: var(--lineHeight);
   font-size: var(--mediumFontSize);
-
   transition: background 0.2s;
-
   outline: none;
   cursor: pointer;
   user-select: none;

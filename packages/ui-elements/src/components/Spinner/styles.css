@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
 @keyframes rotate {
   to {
     transform: rotate(360deg);
@@ -185,3 +187,5 @@
     stroke: var(--inverseColor);
   }
 }
+
+/* stylelint-enable selector-max-class, no-descending-specificity */

@@ -3,10 +3,9 @@
   font-size: var(--fontSize);
   background-color: var(--backgroundColor);
   padding: var(--padding);
-
   position: absolute;
-  left: 15px;
-  top: 15px;
+  left: 0.9375rem;
+  top: 0.9375rem;
   text-align: center;
 }
 

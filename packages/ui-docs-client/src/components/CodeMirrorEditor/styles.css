@@ -1,4 +1,4 @@
-/* stylelint-disable selector-class-pattern, selector-max-type */
+/* stylelint-disable no-descending-specificity, selector-pseudo-class-no-unknown, color-named, selector-class-pattern, selector-max-type, color-no-hex, unit-blacklist */
 
 :global {
   .CodeMirror {
@@ -35,6 +35,7 @@
     word-wrap: normal;
     line-height: inherit;
     color: inherit;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 2;
     position: relative;
     overflow: visible;
@@ -76,6 +77,8 @@
     border-left: 1px solid black;
     border-right: none;
     width: 0;
+    position: absolute;
+    pointer-events: none;
   }
 
   .CodeMirror div.CodeMirror-secondarycursor {
@@ -138,6 +141,7 @@
   .CodeMirror-scrollbar-filler,
   .CodeMirror-gutter-filler {
     position: absolute;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 6;
     display: none;
   }
@@ -171,6 +175,7 @@
     left: 0;
     top: 0;
     min-height: 100%;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 3;
     white-space: nowrap;
     border: none;
@@ -188,6 +193,7 @@
 
   .CodeMirror-gutter-wrapper {
     position: absolute;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 4;
     background: none; /* !important */
     border: none; /* !important */
@@ -197,12 +203,14 @@
     position: absolute;
     top: 0;
     bottom: 0;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 4;
   }
 
   .CodeMirror-gutter-elt {
     position: absolute;
     cursor: default;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 4;
   }
 
@@ -216,11 +224,13 @@
     right: 0;
     top: 0;
     bottom: 0;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 0;
   }
 
   .CodeMirror-linewidget {
     position: relative;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 2;
     overflow: auto;
   }
@@ -246,11 +256,6 @@
     visibility: hidden;
   }
 
-  .CodeMirror-cursor {
-    position: absolute;
-    pointer-events: none;
-  }
-
   .CodeMirror-measure pre {
     position: static;
   }
@@ -258,6 +263,7 @@
   div.CodeMirror-cursors {
     visibility: hidden;
     position: relative;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 3;
   }
 
@@ -292,14 +298,14 @@
     background: #d7d4f0;
   }
 
-
   .cm-fat-cursor .CodeMirror-cursor {
     width: auto;
-    border: 0; /* !important */
+    border: 0;
     background: #7e7;
   }
 
   .cm-fat-cursor div.CodeMirror-cursors {
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 1;
   }
 
@@ -312,6 +318,7 @@
 
   @keyframes blink {
     0% {}
+
     50% {
       background-color: transparent;
     }
@@ -347,6 +354,7 @@
   .cm-em {
     font-style: italic;
   }
+
   .cm-link {
     text-decoration: underline;
   }
@@ -477,4 +485,4 @@
   }
 }
 
-/* stylelint-enable selector-class-pattern */
+/* stylelint-enable no-descending-specificity, selector-pseudo-class-no-unknown, color-named, selector-class-pattern, selector-max-type, color-no-hex, unit-blacklist */

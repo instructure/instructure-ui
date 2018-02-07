@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity, selector-max-class */
+
 .root {
   position: relative;
   border: none;
@@ -5,19 +7,15 @@
   padding: var(--padding);
   margin: 0;
   width: 100%;
-
   border-radius: initial;
   box-sizing: border-box;
-
   text-align: start;
   cursor: pointer;
   user-select: none;
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   line-height: var(--lineHeight);
   font-size: var(--fontSize);
-
   background: var(--background);
   transition: background 0.2s;
 
@@ -31,6 +29,7 @@
 
   &.flyout {
     padding-inline-end: var(--labelPadding);
+
     .icon {
       offset-inline-start: auto;
       offset-inline-end: var(--iconPadding);
@@ -40,6 +39,7 @@
   &[role=menuitemradio],
   &[role=menuitemcheckbox] {
     padding-inline-start: var(--labelPadding);
+
     .icon {
       offset-inline-start: var(--iconPadding);
       offset-inline-end: auto;
@@ -83,16 +83,13 @@
   position: absolute;
   display: flex;
   align-items: center;
-
   top: 0;
   width: 1em;
   height: 100%;
-
   color: var(--iconColor);
 }
 
 /* stylelint-disable selector-max-type */
-
 a.root,
 a.root:link,
 a.root:visited,
@@ -101,5 +98,6 @@ a.root:hover,
 a.root:focus {
   text-decoration: none;
 }
-
 /* stylelint-enable selector-max-type */
+
+/* stylelint-enable no-descending-specificity, selector-max-class */

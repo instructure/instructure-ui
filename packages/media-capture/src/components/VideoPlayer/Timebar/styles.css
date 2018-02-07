@@ -3,6 +3,7 @@
   position: relative;
   display: flex;
   align-items: center;
+
   &:focus {
     box-shadow: 0 0 0 var(--focusOutlineWeight) var(--focusOutlineColor);
     outline: none;
@@ -33,7 +34,6 @@
   font-weight: var(--timestampFontWeight);
   font-size: var(--timestampFontSize);
   padding: var(--timestampPadding);
-
   position: absolute;
   left: 0;
   right: 0;
@@ -53,6 +53,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
   &:focus {
     outline: none;
   }
@@ -79,7 +80,6 @@
 
 .tooltipCaret {
   border-top: var(--tooltipCaretSize) solid var(--tooltipBackgroundColor);
-
   width: 0;
   height: 0;
   border-left: var(--tooltipCaretSize) solid transparent;

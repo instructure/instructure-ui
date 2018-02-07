@@ -18,6 +18,7 @@
 
 .placement--start {
   left: 0;
+
   &.border {
     border-right-width: var(--borderWidth);
     box-sizing: border-box;
@@ -26,6 +27,7 @@
 
 .placement--end {
   right: 0;
+
   &.border {
     border-left-width: var(--borderWidth);
     box-sizing: border-box;

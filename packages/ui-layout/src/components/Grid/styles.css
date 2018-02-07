@@ -1,3 +1,5 @@
+/* stylelint-disable at-rule-no-unknown */
+
 .root {
   display: block;
 }
@@ -7,7 +9,8 @@
 }
 
 .visualDebug {
-  border: 1px dashed red;
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
 }
 
 .startAtSmall {
@@ -31,3 +34,5 @@
     @mixin Grid-container;
   }
 }
+
+/* stylelint-enable at-rule-no-unknown */

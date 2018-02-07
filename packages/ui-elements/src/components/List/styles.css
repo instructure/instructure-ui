@@ -15,7 +15,6 @@
     counter-reset: ol-counter;
 
     /* stylelint-disable selector-max-type */
-
     li::before {
       font-weight: var(--orderedNumberFontWeight);
       counter-increment: ol-counter;
@@ -23,9 +22,7 @@
       margin-inline-end: var(--orderedNumberMargin);
       margin-inline-start: 0;
     }
-
     /* stylelint-enable selector-max-type */
-
   }
 }
 

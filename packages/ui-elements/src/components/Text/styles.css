@@ -1,5 +1,45 @@
 .root {
   font-family: var(--fontFamily);
+
+  /* stylelint-disable selector-max-type */
+  sub,
+  sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+  }
+
+  sup {
+    top: -0.4em;
+  }
+
+  sub {
+    bottom: -0.4em;
+  }
+
+  pre,
+  code {
+    all: initial;
+    font-family: var(--fontFamilyMonospace);
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  b,
+  strong {
+    font-weight: var(--fontWeightBold);
+  }
+
+  p {
+    display: block;
+    padding: 0;
+    margin: var(--paragraphMargin);
+  }
+  /* stylelint-enable selector-max-type */
 }
 
 .color-primary {
@@ -121,48 +161,3 @@
 .transform-lowercase {
   text-transform: lowercase;
 }
-
-/* stylelint-disable selector-max-type */
-
-.root {
-  sub,
-  sup {
-    font-size: 75%;
-    line-height: 0;
-    position: relative;
-    vertical-align: baseline;
-  }
-
-  sup {
-    top: -0.4em;
-  }
-
-  sub {
-    bottom: -0.4em;
-  }
-
-  pre,
-  code {
-    all: initial;
-    font-family: var(--fontFamilyMonospace);
-  }
-
-  i,
-  em {
-    font-style: italic;
-  }
-
-  b,
-  strong {
-    font-weight: var(--fontWeightBold);
-  }
-
-  p {
-    display: block;
-    padding: 0;
-    margin: var(--paragraphMargin);
-  }
-
-}
-
-/* stylelint-enable selector-max-type */

@@ -47,7 +47,8 @@
 }
 
 .visualDebug {
-  border: 1px dashed red;
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
 }
 
 .withBorder {

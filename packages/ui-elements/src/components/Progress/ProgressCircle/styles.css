@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, max-nesting-depth, no-descending-specificity */
+
 .root {
   display: inline-block;
   vertical-align: middle;
@@ -10,7 +12,6 @@
     font-size
   */
   font-size: 1rem;
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   line-height: var(--lineHeight);
@@ -261,3 +262,5 @@
   }
   /* stylelint-enable declaration-no-important */
 }
+
+/* stylelint-enable selector-max-class, max-nesting-depth, no-descending-specificity */

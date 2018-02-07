@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, max-nesting-depth */
+
 .root {
   box-sizing: border-box;
   display: inline-block;
@@ -331,3 +333,5 @@
   position: absolute;
   left: -999em;
 }
+
+/* stylelint-enable selector-max-class, max-nesting-depth */

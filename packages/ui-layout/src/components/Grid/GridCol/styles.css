@@ -1,6 +1,7 @@
+/* stylelint-disable selector-max-class, at-rule-no-unknown */
+
 @define-mixin flex-column
   $size: 1 {
-
   flex-grow: 0;
   flex-shrink: 0;
   flex-basis: calc($size / 12 * 99.999%);
@@ -9,7 +10,6 @@
 
 @define-mixin column-offset
   $size: 1 {
-
   margin-inline-start: calc($size / 12 * 99.999%);
   margin-inline-end: 0;
 }
@@ -64,12 +64,6 @@
 
   .$(breakpoint)--11 {
     @mixin flex-column 11;
-  }
-
-  .$(breakpoint)--12 {
-    flex-grow: 0;
-    flex-shrink: 0;
-    flex-basis: 100%;
   }
 
   .$(breakpoint)-offset--1 {
@@ -182,7 +176,7 @@
   display: block;
   box-sizing: border-box;
   text-align: inherit;
-  min-width: 1px;
+  min-width: 0.0625rem;
 
   &.rowSpacingSmall {
     margin-bottom: var(--spacingSmall);
@@ -233,5 +227,8 @@
 }
 
 .visualDebug {
-  border: 1px dashed red;
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
 }
+
+/* stylelint-enable at-rule-no-unknown */

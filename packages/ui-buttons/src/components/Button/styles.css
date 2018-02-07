@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
 .root[type="button"],
 .root[type="reset"],
 .root[type="submit"],
@@ -19,21 +21,15 @@
   vertical-align: middle;
   position: relative;
   overflow: visible;
-
   direction: inherit;
-
   margin: 0;
-
   text-decoration: none; /* for links styled as buttons */
   text-align: center;
-
   cursor: pointer;
   user-select: none;
   touch-action: manipulation;
-
   transition: background 0.2s, transform 0.2s;
   transform: var(--transform);
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   text-transform: var(--textTransform);
@@ -514,3 +510,5 @@
     color: var(--iconHoverColor);
   }
 }
+
+/* stylelint-enable selector-max-class, no-descending-specificity */

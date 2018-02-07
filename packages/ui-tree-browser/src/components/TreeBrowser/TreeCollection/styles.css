@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class */
+
 .root {
 }
 
@@ -47,7 +49,7 @@ here, so hardcoding until this problem is hopefully resolved in Edge 16
 
 .folderTree.edge .list::before {
   width: 0.0625rem;
-  background: #73818c;
+  background: #73818c; /* stylelint-disable-line color-no-hex */
 }
 
 .small {
@@ -105,3 +107,5 @@ here, so hardcoding until this problem is hopefully resolved in Edge 16
 }
 
 .expanded {}
+
+/* stylelint-enable selector-max-class */

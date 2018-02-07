@@ -4,10 +4,8 @@
   border-top: var(--borderWidth) solid var(--borderColor);
   box-sizing: border-box;
   padding: var(--padding);
-
   border-bottom-right-radius: var(--borderRadius);
   border-bottom-left-radius: var(--borderRadius);
-
   display: flex;
   justify-content: flex-end;
 }

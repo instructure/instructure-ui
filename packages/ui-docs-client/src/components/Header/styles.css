@@ -1,3 +1,5 @@
+/* stylelint-disable color-no-hex */
+
 .root {
   box-sizing: border-box;
   width: 100%;
@@ -19,3 +21,5 @@
 .version {
   font-size: 0.875rem;
 }
+
+/* stylelint-enable color-no-hex */

@@ -1,4 +1,4 @@
-/* Variables are defined in ./theme.js */
+/* stylelint-disable no-descending-specificity, selector-max-class */
 
 .root {
   box-sizing: border-box;
@@ -41,6 +41,10 @@
   .hero {
     font-size: 4rem;
   }
+
+  .message {
+    font-size: var(--messageFontSizeSmall);
+  }
 }
 
 .medium {
@@ -48,6 +52,10 @@
 
   .hero {
     font-size: 8rem;
+  }
+
+  .message {
+    font-size: var(--messageFontSizeMedium);
   }
 }
 
@@ -57,21 +65,7 @@
   .hero {
     font-size: 12rem;
   }
-}
 
-.small {
-  .message {
-    font-size: var(--messageFontSizeSmall);
-  }
-}
-
-.medium {
-  .message {
-    font-size: var(--messageFontSizeMedium);
-  }
-}
-
-.large {
   .message {
     font-size: var(--messageFontSizeLarge);
   }
@@ -148,3 +142,5 @@
     color: var(--messageColorClickable);
   }
 }
+
+/* stylelint-enable no-descending-specificity, selector-max-class */

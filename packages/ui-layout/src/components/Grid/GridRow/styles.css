@@ -1,3 +1,5 @@
+/* stylelint-disable at-rule-no-unknown */
+
 @define-mixin grid-row {
   display: flex;
   flex-flow: row nowrap;
@@ -92,5 +94,8 @@
 }
 
 .visualDebug {
-  border: 1px dashed blue;
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed blue;
 }
+
+/* stylelint-enable at-rule-no-unknown */

@@ -1,3 +1,5 @@
+/* stylelint-disable selector-pseudo-class-no-unknown, color-no-hex, color-named, unit-blacklist */
+
 .root {
   font-size: 1rem;
   margin: 2rem 0;
@@ -25,3 +27,5 @@
 }
 
 .editor {}
+
+/* stylelint-enable selector-pseudo-class-no-unknown, color-no-hex, color-named, unit-blacklist */

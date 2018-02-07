@@ -1,4 +1,4 @@
-/* stylelint-disable selector-max-type */
+/* stylelint-disable selector-max-type, selector-max-class, no-descending-specificity */
 
 .root {
   display: table;
@@ -28,7 +28,7 @@
     text-align: start;
     vertical-align: middle;
     border-bottom-style: solid;
-    border-bottom-width: 1px;
+    border-bottom-width: 0.0625rem;
     box-sizing: border-box;
     border-bottom-color: var(--borderColor);
   }
@@ -86,7 +86,6 @@
 
 .hover {
   > tbody > tr {
-
     border-left: 0.1875rem solid transparent;
     border-right: 0.1875rem solid transparent;
 
@@ -96,4 +95,4 @@
   }
 }
 
-/* stylelint-enable selector-max-type */
+/* stylelint-enable selector-max-type, selector-max-class, no-descending-specificity */

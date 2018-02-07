@@ -3,7 +3,8 @@
   padding: var(--padding);
   margin: 0;
   background-color: var(--backgroundColor);
-  background-image: linear-gradient(var(--gradientCheckerboard)),
+  background-image:
+    linear-gradient(var(--gradientCheckerboard)),
     linear-gradient(var(--gradientCheckerboard));
   background-position: 0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2);
   background-size: var(--gradientCheckerboardSize) var(--gradientCheckerboardSize);
@@ -21,7 +22,8 @@
 
 .inverse {
   background-color: var(--backgroundColorInverse);
-  background-image: linear-gradient(var(--gradientCheckerboardInverse)),
+  background-image:
+    linear-gradient(var(--gradientCheckerboardInverse)),
     linear-gradient(var(--gradientCheckerboardInverse));
 }
 

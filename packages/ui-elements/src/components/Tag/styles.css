@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, no-descending-specificity, max-nesting-depth */
+
 .root {
   box-sizing: border-box;
   font-family: var(--fontFamily);
@@ -131,7 +133,6 @@
   cursor: text;
   margin: 0 0.2rem 0.2rem 0.2rem;
 
-
   &.button {
     &::before {
       border: var(--inlineBorderWidth) var(--inlineBorderStyle) var(--focusOutlineColor);
@@ -163,3 +164,5 @@
     }
   }
 }
+
+/* stylelint-enable selector-max-class, no-descending-specificity, max-nesting-depth */

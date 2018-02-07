@@ -24,7 +24,7 @@
 .scale {
   transition:
     opacity var(--duration),
-    transform var(--duration) cubic-bezier(0.175, 0.885, 0.320, 1.275);
+    transform var(--duration) cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .scale--exited,
@@ -113,4 +113,3 @@
 .slide-down--exited {
   transform: translate3d(0, -50%, 0);
 }
-

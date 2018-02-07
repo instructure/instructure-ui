@@ -20,7 +20,7 @@
   font-size: var(--textFontSize);
   font-weight: var(--textFontWeight);
   letter-spacing: 0.0625rem;
-  min-width: 1px;
+  min-width: 0.0625rem;
   max-width: var(--maxWidth);
   flex: 1 0 auto;
   line-height: 1;

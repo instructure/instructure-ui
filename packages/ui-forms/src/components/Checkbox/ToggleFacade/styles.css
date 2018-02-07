@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
 .root {
   display: flex;
   align-items: center;
@@ -88,12 +90,13 @@
   display: block;
   color: var(--uncheckedIconColor);
   position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 1;
 }
 
 .label {
   flex: 1;
-  min-width: 1px;
+  min-width: 0.0625rem;
   color: var(--labelColor);
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
@@ -144,3 +147,5 @@
     font-size: var(--labelFontSizeLarge);
   }
 }
+
+/* stylelint-enable selector-max-class, no-descending-specificity */

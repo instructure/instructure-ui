@@ -26,7 +26,6 @@
   font-size: var(--fontSize);
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-
   color: var(--color);
   background: var(--background);
 }

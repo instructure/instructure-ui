@@ -26,11 +26,8 @@
 const { runCommands, getCommand } = require('../utils')
 
 const commands = {
-  eslint: getCommand([], 'eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.'])
-}
-
-if (!process.argv.includes('--fix')) { // stylelint doesn't support fix
-  commands.stylelint = getCommand([], 'stylelint', ['**/*.css'])
+  eslint: getCommand([], 'eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.']),
+  stylelint: getCommand([], 'stylelint', process.argv.includes('--fix') ? ['**/*.css', '--fix'] : ['**/*.css'])
 }
 
 const result = runCommands(commands)

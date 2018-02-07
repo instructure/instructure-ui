@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class */
+
 .root {
   display: block;
   box-sizing: border-box;
@@ -5,9 +7,9 @@
 }
 
 .input {
-  width: 1px;
-  height: 1px;
-  margin: -1px;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
   padding: 0;
   position: absolute;
   overflow: hidden;
@@ -19,6 +21,7 @@
   display: block;
   box-sizing: border-box;
   position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 1;
   text-align: center;
   border-radius: var(--borderRadius);
@@ -80,3 +83,5 @@
     }
   }
 }
+
+/* stylelint-enable selector-max-class */

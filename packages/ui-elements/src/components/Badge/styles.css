@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, max-nesting-depth */
+
 .badge {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
@@ -12,6 +14,7 @@
   &:not(.standalone) {
     display: block;
     position: absolute;
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 1;
 
     &.positioned--top {
@@ -179,3 +182,5 @@
     display: block;
   }
 }
+
+/* stylelint-enable selector-max-class, max-nesting-depth */

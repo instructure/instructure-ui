@@ -5,7 +5,7 @@
   box-sizing: border-box;
   background: var(--background);
   box-shadow: var(--boxShadow);
-  border: 1px solid var(--borderColor);
+  border: 0.0625rem solid var(--borderColor);
   border-radius: var(--borderRadius);
   z-index: var(--zIndex);
 

@@ -1,20 +1,18 @@
+/* stylelint-disable selector-max-class */
+
 .inputContainer {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  min-width: 1px;
+  min-width: 0.0625rem;
   background: var(--background);
   margin: 0;
   transition: all 0.2s ease-out;
-
   outline: 0.1875rem solid transparent;
   outline-offset: -0.5rem;
-
   overflow: hidden;
-
   font-family: var(--fontFamily);
-
   border: var(--borderWidth) var(--borderStyle) var(--borderColor);
   border-radius: var(--borderRadius);
 
@@ -82,16 +80,12 @@ input[type].input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   appearance: none;
-
   line-height: 1; /* reset global line height */
-
   margin: 0;
   display: block;
-
   font-family: inherit;
   font-size: inherit;
   font-weight: var(--fontWeight);
-
   color: var(--color);
   padding: 0 var(--inputPaddingEnd) 0 var(--inputPaddingStart);
   box-sizing: border-box;
@@ -138,3 +132,5 @@ input[type].input {
   pointer-events: none;
   fill: var(--iconColor);
 }
+
+/* stylelint-enable selector-max-class */

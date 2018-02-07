@@ -1,9 +1,10 @@
+/* stylelint-disable no-descending-specificity */
+
 .root {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   line-height: var(--lineHeight);
   font-size: var(--fontSize);
-
   cursor: pointer;
   user-select: none;
 
@@ -31,13 +32,11 @@
   box-sizing: border-box;
   padding: 0.7em 1em;
   color: var(--simpleColor);
-
   margin-right: 0.2em;
-  margin-bottom: -1px; /* To overlay Tab over TabPanel top border */
-
-  border: 1px solid transparent;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  margin-bottom: -0.0625rem; /* To overlay Tab over TabPanel top border */
+  border: 0.0625rem solid transparent;
+  border-top-left-radius: 0.1875rem;
+  border-top-right-radius: 0.1875rem;
 
   &:first-of-type {
     margin-left: 0;
@@ -57,6 +56,7 @@
 
   &[aria-selected] {
     /* To overlay Tab over TabPanel top border */
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 1;
     border-bottom-color: var(--simpleSelectedBackground);
   }
@@ -70,6 +70,7 @@
   padding: 1rem 1.25rem;
   line-height: 1;
   position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 1;
   color: var(--minimalColor);
 
@@ -81,7 +82,7 @@
     width: 100%;
     position: absolute;
     left: 0;
-    bottom: -1px;
+    bottom: -0.0625rem;
     opacity: 0;
   }
 
@@ -105,12 +106,14 @@
 }
 
 .screenreader-only {
-  height: 1px;
-  width: 1px;
-  margin: -1px;
+  height: 0.0625rem;
+  width: 0.0625rem;
+  margin: -0.0625rem;
   padding: 0;
   position: absolute;
   overflow: hidden;
   clip: rect(0 0 0 0);
   border: 0;
 }
+
+/* stylelint-enable no-descending-specificity */

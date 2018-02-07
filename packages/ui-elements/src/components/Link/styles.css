@@ -1,21 +1,16 @@
-/* stylelint-disable selector-max-type */
+/* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
 
 .root a.link:link,
 .root a.link:visited,
 .root button.link {
   cursor: pointer;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-
   color: var(--color);
   text-decoration: var(--textDecoration);
-
   transition: color 0.2s;
-
   outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
 
   &:focus,
@@ -83,4 +78,4 @@
   width: 100%;
 }
 
-/* stylelint-enable selector-max-type */
+/* stylelint-enable selector-max-class, no-descending-specificity, selector-max-type */

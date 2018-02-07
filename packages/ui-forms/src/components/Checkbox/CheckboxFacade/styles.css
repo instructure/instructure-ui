@@ -7,19 +7,14 @@
   color: var(--color);
   background: var(--background);
   position: relative;
-
   display: flex;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-
   flex-shrink: 0;
-
   transition: all 0.2s;
-
   border: var(--borderWidth) solid var(--borderColor);
   border-radius: var(--borderRadius);
-
   margin-inline-end: var(--marginRight);
   margin-inline-start: 0;
   padding: var(--padding);
@@ -42,7 +37,7 @@
 
 .label {
   flex: 1 1 auto;
-  min-width: 1px;
+  min-width: 0.0625rem;
   color: var(--labelColor);
   font-family: var(--labelFontFamily);
   font-weight: var(--labelFontWeight);
@@ -95,30 +90,28 @@
   }
 }
 
-.root {
-  &.checked {
-    .facade {
-      background: var(--checkedBackground);
-      border-color: var(--checkedBorderColor);
-    }
-
-    .label {
-      color: var(--checkedLabelColor);
-    }
+.checked {
+  .facade {
+    background: var(--checkedBackground);
+    border-color: var(--checkedBorderColor);
   }
 
-  &.focused {
-    .facade {
-      &::before {
-        transform: scale(1) translate3d(0, 0, 0);
-        opacity: 1;
-      }
+  .label {
+    color: var(--checkedLabelColor);
+  }
+}
+
+.focused {
+  .facade {
+    &::before {
+      transform: scale(1) translate3d(0, 0, 0);
+      opacity: 1;
     }
   }
+}
 
-  &.hovered {
-    .facade {
-      border-color: var(--hoverBorderColor);
-    }
+.hovered {
+  .facade {
+    border-color: var(--hoverBorderColor);
   }
 }

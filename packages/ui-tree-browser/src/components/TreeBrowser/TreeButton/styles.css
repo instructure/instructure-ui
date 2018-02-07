@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity, selector-max-class */
+
 @keyframes button {
   50% {
     opacity: 0.5;
@@ -22,8 +24,8 @@
   cursor: pointer;
   border: none;
   position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 1;
-
   transform: translate3d(-2%, 0, 0);
   opacity: 0.01;
   transform-origin: left center;
@@ -61,11 +63,12 @@
 
 .icon,
 .text {
-  min-width: 1px;
+  min-width: 0.0625rem;
 }
 
 .icon {
   position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 1;
   color: var(--iconColor);
 }
@@ -207,3 +210,5 @@
 }
 
 .expanded {}
+
+/* stylelint-enable no-descending-specificity, selector-max-class */

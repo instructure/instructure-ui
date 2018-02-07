@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 .root {
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
@@ -133,7 +135,7 @@
 }
 
 .summaryText {
-  min-width: 1px;
+  min-width: 0.0625rem;
 }
 
 .positionIconAtEnd .summaryText {
@@ -166,3 +168,5 @@
   animation-fill-mode: forwards;
   animation-duration: 0.3s;
 }
+
+/* stylelint-enable no-descending-specificity */

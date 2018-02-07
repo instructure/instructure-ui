@@ -4,11 +4,9 @@
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-
   font-size: var(--fontSize);
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-
   color: var(--color);
   background: var(--background);
 }

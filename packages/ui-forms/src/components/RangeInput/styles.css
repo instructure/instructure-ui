@@ -1,3 +1,5 @@
+/* stylelint-disable no-descending-specificity */
+
 .root {
   display: flex;
   justify-content: center;
@@ -14,16 +16,16 @@
   margin: 0;
   padding: 0; /* for IE */
 
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   &::range-thumb {
     appearance: none;
     border-radius: 50%;
     cursor: pointer;
     transition: all 0.15s ease-in-out;
-
     width: var(--handleSize);
     height: var(--handleSize);
     background: var(--handleBackground);
-    box-shadow: 0 1px 0 var(--handleShadowColor);
+    box-shadow: 0 0.0625rem 0 var(--handleShadowColor);
 
     &:hover {
       background: var(--handleHoverBackground);
@@ -38,9 +40,10 @@
   &:active {
     outline: none;
 
+    /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
     &::range-thumb {
       box-shadow:
-        0 1px 0 var(--handleShadowColor),
+        0 0.0625rem 0 var(--handleShadowColor),
         0 0 0 var(--handleFocusOutlineWidth) var(--handleFocusOutlineColor);
     }
   }
@@ -53,13 +56,12 @@
     outline: none;
   }
 
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
   &::range-track {
     border-radius: 0.312em;
     border-color: transparent;
     color: transparent;
     cursor: pointer;
-    animate: 0.2s;
-
     background: var(--trackBackground);
     height: calc(var(--handleSize) / 2);
   }
@@ -85,7 +87,6 @@
   all: initial;
   box-sizing: border-box;
   display: block;
-
   color: inherit;
   font-family: var(--valueFontFamily);
   font-weight: var(--valueFontWeight);
@@ -109,3 +110,5 @@
     line-height: var(--valueLargeLineHeight);
   }
 }
+
+/* stylelint-enable no-descending-specificity */

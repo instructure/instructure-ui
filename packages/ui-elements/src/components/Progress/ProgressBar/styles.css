@@ -1,3 +1,5 @@
+/* stylelint-disable selector-max-class, max-nesting-depth, no-descending-specificity */
+
 .root {
   width: 100%;
   display: flex;
@@ -123,3 +125,5 @@
     background: linear-gradient(to right, var(--doneMeterColorStart) 0%, var(--doneMeterColorEnd) 100%);
   }
 }
+
+/* stylelint-enable selector-max-class, max-nesting-depth, no-descending-specificity */

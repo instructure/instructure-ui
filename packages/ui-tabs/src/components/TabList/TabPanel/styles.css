@@ -15,10 +15,7 @@
 .minimal,
 .simple {
   flex-basis: 100%;
-}
 
-.minimal,
-.simple {
   .content {
     border-left: none;
     border-right: none;
