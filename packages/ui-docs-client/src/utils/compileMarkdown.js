@@ -31,8 +31,8 @@ import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Image from '@instructure/ui-elements/lib/components/Image'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import Table from '@instructure/ui-elements/lib/components/Table'
+import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
-import CodeEditor from '../components/CodeEditor'
 import Playground from '../components/Playground'
 
 import trimIndent from './trimIndent'
@@ -156,7 +156,14 @@ function createRenderer () {
             />
           )
         } else {
-          return <CodeEditor label={title} code={code} language={language} readOnly={readOnly} />
+          return (
+            <CodeEditor
+              label={title}
+              code={code}
+              language={language}
+              readOnly={true}
+            />
+          )
         }
       } else {
         return <code>{code}</code>

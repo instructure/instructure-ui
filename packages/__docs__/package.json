@@ -28,6 +28,7 @@
     "@instructure/ui-billboard": "^4.7.1",
     "@instructure/ui-breadcrumb": "^4.7.1",
     "@instructure/ui-buttons": "^4.7.1",
+    "@instructure/ui-code-editor": "^4.7.1",
     "@instructure/ui-container": "^4.7.1",
     "@instructure/ui-core": "^4.7.1",
     "@instructure/ui-docs-client": "^4.7.1",

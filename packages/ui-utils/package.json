@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@instructure/ui-i18n": "^4.7.1",
-    "bowser": "^1.9.1",
+    "bowser": "^1.9.2",
     "decimal.js": "^9.0.1",
     "deep-equal": "^1.0.1",
     "keycode": "^2.1.8",

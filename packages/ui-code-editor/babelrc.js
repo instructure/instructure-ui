@@ -22,23 +22,10 @@
  * SOFTWARE.
  */
 
-module.exports = function trimIndent (str) {
-  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
-  let indent = false
-  let trimmed = ''
-
-  lines.forEach((line, i) => {
-    line.replace(/\s*$/, '')
-
-    if (indent === false) {
-      if (line === '') {
-        return
-      }
-      indent = line.match(/^\s*/)[0]
-    }
-
-    trimmed += `${line.replace(new RegExp(`^${indent}`), '', 1)}\n`
-  })
-
-  return trimmed.trim()
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }

@@ -32,10 +32,10 @@ import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-forms/lib/components/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
+import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
 import themeable from '@instructure/ui-themeable'
 
-import CodeEditor from '../CodeEditor'
 import Glyph from '../Glyph'
 
 import styles from './styles.css'
@@ -131,7 +131,12 @@ export default class Icons extends Component {
         <Heading level="h3" margin="medium 0">
           Installation
         </Heading>
-        <CodeEditor label={`How to install`} code={`yarn add ${this.props.packageName}`} language="sh" readOnly />
+        <CodeEditor
+          label={`How to install`}
+          code={`yarn add ${this.props.packageName}`}
+          language="shell"
+          readOnly
+        />
       </div>
     )
   }
@@ -168,7 +173,12 @@ class MyIcon extends React.Component {
         <Heading level="h3" margin="small 0">
           Usage
         </Heading>
-        <CodeEditor label={`How to use`} code={example} language="js" readOnly />
+        <CodeEditor
+          label={`How to use`}
+          code={example}
+          language="javascript"
+          readOnly
+        />
         { glyph.displayName && <p>See the <a href="#SVGIcon">SVGIcon</a> component for props and examples.</p> }
       </div>
     )

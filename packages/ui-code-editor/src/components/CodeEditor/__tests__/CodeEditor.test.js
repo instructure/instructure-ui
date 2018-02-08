@@ -22,23 +22,15 @@
  * SOFTWARE.
  */
 
-module.exports = function trimIndent (str) {
-  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
-  let indent = false
-  let trimmed = ''
+import React from 'react'
+import CodeEditor from '../index'
 
-  lines.forEach((line, i) => {
-    line.replace(/\s*$/, '')
+describe('<CodeEditor />', () => {
+  const testbed = new Testbed(<CodeEditor label='foo' />)
 
-    if (indent === false) {
-      if (line === '') {
-        return
-      }
-      indent = line.match(/^\s*/)[0]
-    }
+  it('should render', () => {
+    const subject = testbed.render();
 
-    trimmed += `${line.replace(new RegExp(`^${indent}`), '', 1)}\n`
+    expect(subject).to.be.present;
   })
-
-  return trimmed.trim()
-}
+})

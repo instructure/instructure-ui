@@ -21,24 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 
-module.exports = function trimIndent (str) {
-  const lines = `${str.replace(/\r\n/g, '\n').replace(/\r/g, '\n')}\n`.split('\n')
-  let indent = false
-  let trimmed = ''
+let CodeMirror, cm
 
-  lines.forEach((line, i) => {
-    line.replace(/\s*$/, '')
+if (canUseDOM) {
+  require('codemirror/mode/jsx/jsx')
+  require('codemirror/mode/shell/shell')
+  require('codemirror/mode/css/css')
+  require('codemirror/mode/htmlmixed/htmlmixed')
+  require('codemirror/mode/markdown/markdown')
 
-    if (indent === false) {
-      if (line === '') {
-        return
-      }
-      indent = line.match(/^\s*/)[0]
-    }
-
-    trimmed += `${line.replace(new RegExp(`^${indent}`), '', 1)}\n`
-  })
-
-  return trimmed.trim()
+  cm = require('codemirror')
+  CodeMirror = require('react-codemirror')
+  CodeMirror.defaultOptions = cm.defaults
+} else {
+  CodeMirror = () => null
+  CodeMirror.defaultOptions = {}
 }
+
+export default CodeMirror

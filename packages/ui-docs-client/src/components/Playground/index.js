@@ -32,8 +32,8 @@ import Modal, { ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
+import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
-import CodeEditor from '../CodeEditor'
 import Preview from '../Preview'
 import CodePenButton from '../CodePenButton'
 import Button from '../Button'
@@ -138,9 +138,9 @@ export default class Playground extends Component {
         <CodeEditor
           label={`${this.props.title} Example Code`}
           code={code}
-          variant="playground"
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
+          attachment="bottom"
         />
       </div>
     )

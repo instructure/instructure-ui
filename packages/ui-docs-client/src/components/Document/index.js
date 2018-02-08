@@ -31,6 +31,7 @@ import Text from '@instructure/ui-elements/lib/components/Text'
 import Container from '@instructure/ui-container/lib/components/Container'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 import TabList, { TabPanel } from '@instructure/ui-tabs/lib/components/TabList'
+import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
 import Description from '../Description'
 import Properties from '../Properties'
@@ -38,7 +39,7 @@ import Params from '../Params'
 import Returns from '../Returns'
 import Methods from '../Methods'
 import ComponentTheme from '../ComponentTheme'
-import CodeEditor from '../CodeEditor'
+
 
 import { DocPropType } from '../App/propTypes'
 
@@ -131,9 +132,19 @@ const ${displayName || resource.name} = require('${requirePath}')
           Usage
         </Heading>
         <Container margin="0 0 small 0" display="block">
-          <CodeEditor label={`How to install ${title}`} code={`yarn add ${packageName}`} language="sh" readOnly />
+          <CodeEditor
+            label={`How to install ${title}`}
+            code={`yarn add ${packageName}`}
+            language="shell"
+            readOnly
+          />
         </Container>
-        <CodeEditor label={`How to use ${title}`} code={example} language="js" readOnly />
+        <CodeEditor
+          label={`How to use ${title}`}
+          code={example}
+          language="javascript"
+          readOnly
+        />
       </Container>
     )
   }

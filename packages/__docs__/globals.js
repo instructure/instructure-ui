@@ -34,6 +34,7 @@ import * as UIAlerts from '@instructure/ui-alerts/lib/components'
 import * as UIBillboard from '@instructure/ui-billboard/lib/components'
 import * as UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components'
 import * as UIButtons from '@instructure/ui-buttons/lib/components'
+import * as UICodeEditor from '@instructure/ui-code-editor/lib/components'
 import * as UIContainer from '@instructure/ui-container/lib/components'
 import * as UICore from '@instructure/ui-core/lib/components'
 import * as UIElements from '@instructure/ui-elements/lib/components'
@@ -74,6 +75,7 @@ const components = Object.assign(
   UIBillboard,
   UIBreadcrumb,
   UIButtons,
+  UICodeEditor,
   UIContainer,
   UIElements,
   UIForms,
