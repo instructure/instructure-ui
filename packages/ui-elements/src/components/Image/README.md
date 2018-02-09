@@ -11,20 +11,20 @@ example: true
 <Image src={placeholderImage(250, 250)} />
 ```
 
-### Display and margin
+### Margin and display
 
-Use the `margin` prop to add space around `<Image/>`. Adding `display="block"` makes
-the image a block-level element
+Use the `margin` prop to add space around `<Image />`. Setting the `inline` prop to `false` makes
+the image a block-level element.
 
 ```js
 ---
 example: true
 ---
-<div>
+<Container textAlign="center" as="div">
   <Image margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
   <Image margin="small" src={placeholderImage(200, 200)} />
-  <Image display="block" margin="medium" src={placeholderImage(400, 200)} />
-</div>
+  <Image inline={false} margin="small auto" src={placeholderImage(400, 200)} />
+</Container>
 ```
 
 ### Color overlay
@@ -36,7 +36,7 @@ in mind that Internet Explorer currently ignores CSS blend mode rules.)
 ---
 example: true
 ---
-  <Container textAlign="center">
+  <Container textAlign="center" as="div">
     <Image
       src={placeholderImage(200, 200)}
       overlay={{color: '#008ee2', opacity: 7}}
@@ -67,7 +67,7 @@ are not supported in Internet Explorer.
 ---
 example: true
 ---
-  <Container textAlign="center">
+  <Container textAlign="center" as="div">
     <Image
       grayscale
       src={avatarImage}

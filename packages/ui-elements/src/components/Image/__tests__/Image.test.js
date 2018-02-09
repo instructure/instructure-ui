@@ -52,6 +52,12 @@ describe('<Image />', () => {
       expect(subject.find('[alt="Foo"]')).to.be.present
     })
 
+    it('should respect width and height attributes', () => {
+      const subject = testbed.render({ width: '100', height: '100' })
+      const offsetHeight = subject.getComputedStyle().getPropertyValue('height')
+      expect(offsetHeight).to.equal('100px')
+    })
+
     it('should not allow padding to be added as a property', () => {
       const subject = testbed.render({
         padding: 'small medium large small'
@@ -79,6 +85,23 @@ describe('<Image />', () => {
         grayscale: true
       })
       expect(subject.getComputedStyle().getPropertyValue('filter')).to.contain('grayscale')
+    })
+
+    // If component renders as simple image
+    it('should display block-level when inline is false', () => {
+      const image = testbed.render({ inline: false })
+      expect(image.getComputedStyle().getPropertyValue('display')).to.contain('block')
+    })
+
+    // If component has an overlay and renders as image inside containing element
+    it('should display block-level with overlay when inline is false', () => {
+      const imageWithOverlay = testbed.render({
+        inline: false,
+        overlay: {color: 'tomato', opacity: 7}
+      })
+      expect(imageWithOverlay.find(Container).props().display).to.equal('block')
+      const imageInsideOverlay = imageWithOverlay.find('img')
+      expect(imageInsideOverlay.getComputedStyle().getPropertyValue('display')).to.contain('block')
     })
   })
 })

@@ -99,7 +99,7 @@ export default class Image extends Component {
 
     const imgClasses = {
       [styles.image]: true,
-      [styles.inline]: inline || !overlay,
+      [styles['has-overlay']]: overlay,
       [styles['has-filter']]: blur || grayscale
     }
 
@@ -141,6 +141,7 @@ export default class Image extends Component {
           {...props}
           as="img"
           margin={margin}
+          display={(inline) ? 'inline' : 'block'}
           className={classnames(imgClasses)}
           style={imgStyle}
         />

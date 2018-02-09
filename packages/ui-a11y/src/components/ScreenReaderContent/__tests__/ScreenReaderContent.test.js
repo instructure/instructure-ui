@@ -48,13 +48,10 @@ describe('<ScreenReaderContent />', () => {
 
   it('is accessible by screen readers', () => {
     const subject = testbed.render()
+    const height = subject.getComputedStyle().getPropertyValue('height')
+    const opacity = subject.getComputedStyle().getPropertyValue('opacity')
 
-    const {
-      offsetHeight,
-      opacity
-    } = subject.getComputedStyle()
-
-    expect(offsetHeight).to.not.equal(0)
-    expect(opacity).to.not.equal(0)
+    expect(height).to.not.equal(0 || undefined)
+    expect(opacity).to.not.equal(0 || undefined)
   })
 })

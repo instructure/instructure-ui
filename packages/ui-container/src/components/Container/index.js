@@ -57,7 +57,8 @@ class Container extends Component {
     */
     padding: CustomPropTypes.spacing,
     /**
-    * By default the Container is a block-level element
+    * By default the Container's display prop is null, meaning it takes on the
+    * display rules of the html element it's rendered as.
     */
     display: PropTypes.oneOf([null, 'block', 'inline']),
     /**
