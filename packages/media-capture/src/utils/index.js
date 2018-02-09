@@ -29,12 +29,18 @@ category: packages/media-capture
 
 /**
  * Function to be called to check if the clients browser
- * can support the getUserMedia/Stream and MediaRecorder api's.
+ * can support the getUserMedia/Stream, MediaRecorder and AudioContext api's.
  * https://caniuse.com/#search=getusermedia
  * https://caniuse.com/#search=mediarecorder
+ * https://caniuse.com/#search=audiocontext
  */
-export function canUseMediaCapture () {
-  return true
+export function canUseMediaCapture(win = window) {
+  return (
+    !!win.navigator.mediaDevices &&
+    typeof win.navigator.mediaDevices.getUserMedia === "function" &&
+    typeof win.MediaRecorder === "function" &&
+    typeof win.AudioContext === "function"
+  )
 }
 
 /**

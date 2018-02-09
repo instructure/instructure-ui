@@ -24,7 +24,34 @@
 import { canUseMediaCapture } from '../index'
 
 describe('canUseMediaCapture', () => {
-  it('returns true', () => {
-    expect(canUseMediaCapture()).to.be.true
+  let win
+
+  beforeEach(() => {
+    win = {
+      navigator: {
+        mediaDevices: { getUserMedia: () => {} }
+      },
+      MediaRecorder: () => {},
+      AudioContext: () => {}
+    }
+  })
+
+  it('returns true when getUserMedia, MediaRecorder and AudioContext are supported', () => {
+    expect(canUseMediaCapture(win)).to.be.true
+  });
+
+  it('returns false when getUserMedia is not supported', () => {
+    delete win.navigator.mediaDevices
+    expect(canUseMediaCapture(win)).to.be.false
+  })
+
+  it('returns false when MediaRecorder is not supported', () => {
+    delete win.MediaRecorder
+    expect(canUseMediaCapture(win)).to.be.false
+  })
+
+  it('returns false when AudioContext is not supported', () => {
+    delete win.AudioContext
+    expect(canUseMediaCapture(win)).to.be.false
   })
 })
