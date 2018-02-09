@@ -43,6 +43,18 @@ describe('<CTA />', () => {
     expect(CTA).to.be.present
   })
 
+  it('should have a <Button />', () => {
+    const cta = testbed.render({ captureState: READY })
+    expect(cta.find('Button').length).to.eql(1)
+  })
+
+  it('should focus the <Button /> when updated', () => {
+    const cta = testbed.render({ captureState: READY })
+    cta.setProps({ captureState: RECORDING })
+
+    expect(document.activeElement).to.eql(cta.find('button').node)
+  })
+
   context('when READY state', () => {
     it('renders a start recording button', () => {
       const startClicked = testbed.stub()

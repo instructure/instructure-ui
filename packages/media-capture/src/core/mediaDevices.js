@@ -82,8 +82,7 @@ export function enumerateDevices (success, error) {
 }
 
 export function getAudioContext (stream, success, error) {
-  const audioContext = new AudioContext()
-  const soundMeter = new SoundMeter(audioContext)
+  const soundMeter = new SoundMeter(new AudioContext())
   soundMeter.connectToSource(stream, (e) => {
     if (e) { error(e) }
 

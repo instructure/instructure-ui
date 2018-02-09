@@ -33,7 +33,9 @@ describe('mediaCapture actions', () => {
   })
 
   it('closeClicked should create CLOSE_CLICKED action', () => {
-    expect(actions.closeClicked()).to.deep.equal({
+    const dispatch = sinon.stub()
+    actions.closeClicked()(dispatch)
+    expect(dispatch).to.have.been.calledWith({
       type: types.CLOSE_CLICKED
     })
   })
@@ -114,9 +116,14 @@ describe('mediaCapture actions', () => {
   })
 
   it('devicesFound should create DEVICES_FOUND action', () => {
-    expect(actions.devicesFound('devices')).to.deep.equal({
+    const dispatch = sinon.stub()
+    const devices = { audioinput: [{ deviceId: 'default' }, { label: 'default:' }], videoinput: [{ label: 'id1', deviceId: '12345' }] }
+    actions.devicesFound(devices, { label: 'id1' })(dispatch)
+    expect(dispatch).to.have.been.calledWith({
       type: types.DEVICES_FOUND,
-      devices: 'devices'
+      devices,
+      selectedVideoId: '12345',
+      selectedAudioId: 'default'
     })
   })
 

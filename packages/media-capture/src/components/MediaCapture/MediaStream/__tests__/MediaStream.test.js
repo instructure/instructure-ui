@@ -25,19 +25,36 @@ import React from 'react'
 import getTestMedia from 'get-test-media'
 
 import MediaStream from '../index'
-import { LOADING, RECORDING } from '../../../../constants/CaptureStates'
+import * as MediaDevices from '../../../../core/mediaDevices'
+import { LOADING, RECORDING, READY } from '../../../../constants/CaptureStates'
 import * as startMediaRecorder from '../../../../core/mediaRecorder'
 
 describe('<MediaStream />', () => {
+  window.audioContext = new AudioContext()
+
+  const getMedia = () => {
+    return getTestMedia({
+      audio: true,
+      audioContext: window.audioContext,
+      video: {
+        width: 400,
+        height: 300,
+        frameRate: 24
+      }
+    })
+  }
+
   const props = {
     captureState: LOADING,
     videoDeviceId: '',
     audioDeviceId: '',
     actions: {
       deviceRequestAccepted: () => {},
+      soundMeterInitialized: () => {},
       mediaRecorderInitialized: () => {},
       videoObjectGenerated: () => {},
-      errorOccurred: () => {}
+      errorOccurred: () => {},
+      cleanUp: () => {}
     }
   }
   const testbed = new Testbed(<MediaStream {...props} />)
@@ -48,26 +65,29 @@ describe('<MediaStream />', () => {
   })
 
   describe('accessing the clients audio and video devices', () => {
-    it('calls getUserMedia'/*, () => {
-      const getUserMediaSpy = testbed.spy(mediaDevices, 'getUserMedia')
+    it('calls getUserMedia', () => {
+      const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserMedia')
+      testbed.render()
       expect(getUserMediaSpy).to.have.been.called
-    }*/)
+    })
 
     it('handles the streamSuccess callback', () => {
-      const pollReadyStateSpy = testbed.spy(MediaStream.prototype, 'pollReadyState')
-      const media = getTestMedia({
-        audio: true,
-        video: {
-          width: 400,
-          height: 300,
-          frameRate: 24
-        }
-      })
+      const deviceRequestAcceptedStub = testbed.stub()
+      const media = getMedia()
 
-      const stream = testbed.render({ actions: { soundMeterInitialized: () => {} }})
+      const stream = testbed.render(
+        {
+          actions: {
+            soundMeterInitialized: () => {},
+            deviceRequestAccepted: deviceRequestAcceptedStub
+          }
+        }
+      )
+
       stream.instance().streamSuccess(media.stream)
-      expect(pollReadyStateSpy).to.have.been.called
       expect(stream.instance().video.srcObject).to.equal(media.stream)
+      stream.instance().streamLoaded()
+      expect(deviceRequestAcceptedStub).to.have.been.called
     })
 
     it('handles the error callback', () => {
@@ -76,28 +96,25 @@ describe('<MediaStream />', () => {
       stream.instance().error({ name: 'NotAllowedError' })
       expect(errorSpy).to.have.been.called
     })
+
+    describe('changing devices', () => {
+      it('calls getUserMedia when a new device is to be used', () => {
+        const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserMedia')
+        const media = getMedia()
+        const stream = testbed.render({ captureState: READY })
+        stream.instance().streamSuccess(media.stream)
+        stream.setProps({ audioDeviceId: '12345' })
+        expect(getUserMediaSpy).to.have.been.called
+      })
+    })
   })
 
   describe('recording the stream', () => {
     it('calls startMediaRecorder', () => {
       const startMediaRecorderSpy = testbed.spy(startMediaRecorder, 'startMediaRecorder')
-      const media = getTestMedia({
-        audio: true,
-        video: {
-          width: 400,
-          height: 300,
-          frameRate: 24
-        }
-      })
-      const stream = testbed.render(
-        {
-          actions: {
-            soundMeterInitialized: () => {},
-            mediaRecorderInitialized: () => {},
-            errorOccurred: () => {}
-          }
-        }
-      )
+      const media = getMedia()
+
+      const stream = testbed.render()
       stream.instance().streamSuccess(media.stream)
       stream.setProps({ captureState: RECORDING })
 
@@ -106,7 +123,7 @@ describe('<MediaStream />', () => {
 
     it('handles the blobSuccess callback', () => {
       const videoObjectGeneratedSpy = testbed.spy()
-      const stream = testbed.render({actions: { videoObjectGenerated: videoObjectGeneratedSpy }})
+      const stream = testbed.render({ actions: { videoObjectGenerated: videoObjectGeneratedSpy }})
       stream.instance().blobSuccess(new File(['hello'], 'hello.txt'))
 
       expect(videoObjectGeneratedSpy).to.have.been.called
@@ -116,14 +133,7 @@ describe('<MediaStream />', () => {
   describe('unmounting', () => {
     context('when a stream has been established', () => {
       it('stops all tracks', () => {
-        const stream = getTestMedia({
-          audio: true,
-          video: {
-            width: 400,
-            height: 300,
-            frameRate: 24
-          }
-        }).stream
+        const stream = getMedia().stream
         const stopStub = testbed.stub()
         const tracks = [
           { stop: stopStub },
@@ -131,7 +141,7 @@ describe('<MediaStream />', () => {
         ]
         testbed.stub(stream, 'getTracks', () => tracks)
 
-        const media = testbed.render({ actions: { soundMeterInitialized: () => {} }})
+        const media = testbed.render({ actions: { soundMeterInitialized: () => {}, cleanUp: () => {} }})
         media.instance().streamSuccess(stream)
         media.unmount()
         expect(stopStub.callCount).to.eql(2)

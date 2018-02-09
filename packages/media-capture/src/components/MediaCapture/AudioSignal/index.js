@@ -40,9 +40,7 @@ private: true
 class AudioSignal extends Component {
   static propTypes = {
     soundMeter: PropTypes.shape({
-      processor: PropTypes.shape({
-        volume: PropTypes.number.isRequired
-      }).isRequired
+      volume: PropTypes.number.isRequired
     }).isRequired
   }
 
@@ -70,8 +68,8 @@ class AudioSignal extends Component {
     )
   }
 
-  getVolume = () => {
-    const volume = Math.floor(this.props.soundMeter.processor.volume * 100) * MULTIPLIER
+  getVolume () {
+    const volume = Math.floor(this.props.soundMeter.volume * 100) * MULTIPLIER
     if (volume !== this.state.value) {
       this.setState({
         value: volume

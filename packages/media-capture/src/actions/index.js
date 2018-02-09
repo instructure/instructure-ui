@@ -27,7 +27,13 @@ import { translate } from '../constants/translated/translations'
 import * as types from '../constants/ActionTypes'
 
 export const audioDeviceChanged = id => ({ type: types.AUDIO_DEVICE_CHANGED, id })
-export const closeClicked = () => ({ type: types.CLOSE_CLICKED })
+export const cleanUp = () => ({ type: types.CLEAN_UP })
+export const closeClicked = () => {
+  return (dispatch) => {
+    dispatch({ type: types.CLOSE_CLICKED })
+    dispatch(cleanUp())
+  }
+}
 export const countdownComplete = () => ({ type: types.COUNTDOWN_COMPLETE })
 
 export const finishClicked = () => {
@@ -35,9 +41,10 @@ export const finishClicked = () => {
     dispatch(
       {
         type: types.FINISH_CLICKED,
-        fileName:  `[${translate('FILE_PLACEHOLDER')} ${new Date(DateTime.local())}]`
+        fileName: `[${translate('FILE_PLACEHOLDER')} ${new Date(DateTime.local())}]`
       }
     )
+    dispatch(cleanUp())
   }
 }
 
@@ -50,7 +57,27 @@ export const deviceRequestAccepted = () => ({ type: types.DEVICE_REQUEST_ACCEPTE
 export const mediaRecorderInitialized = (mr) => ({ type: types.MEDIA_RECORDER_INITIALIZED, mr })
 export const videoObjectGenerated = (src, blob) => ({ type: types.VIDEO_OBJECT_GENERATED, src, blob })
 export const errorOccurred = (msg) => ({ type: types.ERROR_OCCURRED, msg })
-export const devicesFound = (devices) => ({ type: types.DEVICES_FOUND, devices })
+
+export const devicesFound = (devices, currentVideoTrack) => {
+  return (dispatch) => {
+    const [selectedVideoTrack,] = devices.videoinput.filter(d => {
+      return d.label === currentVideoTrack.label
+    })
+    const [selectedAudioTrack,] = devices.audioinput.filter(d => {
+      return d.deviceId === 'default' || d.label.indexOf('default') !== -1
+    })
+
+    dispatch(
+      {
+        type: types.DEVICES_FOUND,
+        devices,
+        selectedVideoId: selectedVideoTrack ? selectedVideoTrack.deviceId : '',
+        selectedAudioId: selectedAudioTrack ? selectedAudioTrack.deviceId : ''
+      }
+    )
+  }
+}
+
 export const soundMeterInitialized = (sm) => ({ type: types.SOUND_METER_INITIALIZED, sm })
 
 export const saveClicked = (fileName) => {

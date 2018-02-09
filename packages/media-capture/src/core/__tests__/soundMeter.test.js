@@ -21,41 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import SoundMeter from '../soundMeter'
 
-import AudioSignal from '../index'
-
-describe('<AudioSignal />', () => {
-  const props = {
-    soundMeter: {
-      volume: 0.1
+describe('SoundMeter', () => {
+  const closeStub = sinon.stub()
+  const disconnectStub = sinon.stub()
+  const audioContext = () => {
+    return {
+      createScriptProcessor: () => {
+        return {
+          disconnect: disconnectStub
+        }
+      },
+      state: '',
+      close: closeStub
     }
   }
 
-  const testbed = new Testbed(<AudioSignal {...props} />)
-
-  it('should render', () => {
-    const AudioSignal = testbed.render()
-    expect(AudioSignal).to.be.present
+  it ('initializes', () => {
+    const soundMeter = new SoundMeter(audioContext())
+    expect(soundMeter.volume).to.eql(0)
+    expect(soundMeter.averaging).to.eql(0.95)
   })
 
-  it('gets the current volume from the soundMeter', () => {
-    const getVolumeSpy = testbed.spy(AudioSignal.prototype, 'getVolume')
-    testbed.render()
-    testbed.tick(200)
-    expect(getVolumeSpy).to.have.been.called
+  it("consumes an event's inputBuffer and calculates a weighted root mean square", () => {
+    const inputBuffer = {
+      getChannelData: () => {
+        return [2, 5, 6, 2, 8, 10, 15, 16, 20, 24, 21]
+      }
+    }
+    const soundMeter = new SoundMeter(audioContext())
+    soundMeter.consumeBuffer({ inputBuffer })
+    expect(soundMeter.volume).to.eql(13.918594495396176)
   })
 
-  it('should render a <progress />', () => {
-    const AudioSignal = testbed.render()
-    expect(AudioSignal.find('progress').length).to.eql(1)
-  })
-
-  describe('getVolume', () => {
-    it('gets the volume from the sound processor and updates local state', () => {
-      const AudioSignal = testbed.render()
-      AudioSignal.instance().getVolume()
-      expect(AudioSignal.state('value')).to.eql(15)
-    })
+  it('cleans up', () => {
+    const soundMeter = new SoundMeter(audioContext())
+    soundMeter.context.state = 'inactive'
+    soundMeter.stop()
+    expect(closeStub).to.have.been.called
+    expect(disconnectStub).to.have.been.called
   })
 })

@@ -35,11 +35,7 @@ import {
 } from '../../../../constants/CaptureStates'
 
 describe('<MediaOverlay />', () => {
-  const soundMeter = {
-    processor: {
-      volume: 0
-    }
-  }
+  const soundMeter = { volume: 0 }
 
   const testbed = new Testbed(<MediaOverlay captureState={PREVIEWSAVE} actions={{}} msg="" />)
 

@@ -32,9 +32,6 @@ import { translate } from '../../../constants/translated/translations'
 
 import styles from './styles.css'
 
-const HAVE_ENOUGH_DATA = 4
-const POLL_DURATION = 200
-
 const ERRORS = {
   NotAllowedError: translate('NOT_ALLOWED_ERROR'),
   NotReadableError: translate('NOT_READABLE_ERROR'),
@@ -60,7 +57,8 @@ class MediaStream extends Component {
       videoObjectGenerated: PropTypes.func,
       devicesFound: PropTypes.func,
       soundMeterInitialized: PropTypes.func,
-      errorOccurred: PropTypes.func
+      errorOccurred: PropTypes.func,
+      cleanUp: PropTypes.func
     })
   }
 
@@ -89,7 +87,6 @@ class MediaStream extends Component {
       this.streamSuccess,
       this.error
     )
-    enumerateDevices(this.deviceSuccess, this.error)
   }
 
   deviceChanged = (audioId, videoId) => {
@@ -100,8 +97,12 @@ class MediaStream extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.captureState === READY && this.stream) {
+    if (!this.stream) { return }
+
+    if (this.props.captureState === READY) {
       if (this.deviceChanged(prevProps.audioDeviceId, prevProps.videoDeviceId)) {
+        this.props.actions.cleanUp()
+        this.stopTracks()
         getUserMedia(
           this.props.audioDeviceId,
           this.props.videoDeviceId,
@@ -111,7 +112,7 @@ class MediaStream extends Component {
       }
     }
 
-    if (this.props.captureState === RECORDING && this.stream) {
+    if (this.props.captureState === RECORDING) {
       startMediaRecorder(
         this.stream,
         this.onMediaRecorderInit,
@@ -122,33 +123,30 @@ class MediaStream extends Component {
   }
 
   componentWillUnmount () {
-    if (this.stream) {
-      this.stream.getTracks().forEach(t => t.stop())
-    }
+    this.props.actions.cleanUp()
+    this.stopTracks()
+  }
+
+  stopTracks () {
+    this.stream && this.stream.getTracks().forEach(t => t.stop())
   }
 
   onMediaRecorderInit = (mediaRecorder) => {
     this.props.actions.mediaRecorderInitialized(mediaRecorder)
   }
 
-  pollReadyState () {
-    // we poll here because rendering the stream inside the
-    // video element is not instantaneous. Check the readyState
-    // for an appropriate signal.
-    const poll = setInterval(() => {
-      if (this.video.readyState === HAVE_ENOUGH_DATA) {
-        this.props.captureState === LOADING && this.props.actions.deviceRequestAccepted()
-        clearInterval(poll)
-      }
-    }, POLL_DURATION)
+  streamLoaded = () => {
+    this.props.captureState === LOADING && this.props.actions.deviceRequestAccepted()
   }
 
   streamSuccess = (stream) => {
     this.stream = stream
     if (this.video) {
       getAudioContext(this.stream, this.soundMeterEmitted, this.error)
+      if (this.props.audioDeviceId.length === 0) {
+        enumerateDevices(this.deviceSuccess, this.error)
+      }
       this.video.srcObject = this.stream
-      this.pollReadyState()
     }
   }
 
@@ -157,7 +155,8 @@ class MediaStream extends Component {
   }
 
   deviceSuccess = (types) => {
-    this.props.actions.devicesFound(types)
+    const [videoTrack] = this.stream.getVideoTracks()
+    this.props.actions.devicesFound(types, videoTrack)
   }
 
   blobSuccess = (blob) => {
@@ -181,6 +180,7 @@ class MediaStream extends Component {
           autoPlay
           muted
           tabIndex="-1"
+          onCanPlay={this.streamLoaded}
           ref={el => { this.video = el }}
         />
       </div>

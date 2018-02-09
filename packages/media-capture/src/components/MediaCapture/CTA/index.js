@@ -51,6 +51,10 @@ class CTA extends Component {
     this.el && this.el.focus()
   }
 
+  captureRef = (e) => {
+    this.el = e
+  }
+
   render () {
     const { captureState, actions } = this.props
 
@@ -78,7 +82,7 @@ class CTA extends Component {
           variant="primary"
           size="large"
           margin="0 auto"
-          ref={(e) => { this.el = e }}
+          ref={this.captureRef}
         >
           { translate('FINISH') }
         </Button>

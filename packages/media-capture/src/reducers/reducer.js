@@ -23,6 +23,7 @@
  */
 import {
   AUDIO_DEVICE_CHANGED,
+  CLEAN_UP,
   CLOSE_CLICKED,
   COUNTDOWN_COMPLETE,
   FINISH_CLICKED,
@@ -81,9 +82,14 @@ export function reducer (state, action) {
         soundMeter: action.sm
       }
 
-    case CLOSE_CLICKED:
+    case CLEAN_UP: {
       state.soundMeter && state.soundMeter.stop()
+      state.mediaRecorder && state.mediaRecorder.state !== 'inactive' && state.mediaRecorder.stop()
 
+      return state
+    }
+
+    case CLOSE_CLICKED:
       if ([READY, STARTING, RECORDING, PREVIEWSAVE].includes(state.captureState)) {
         return {
           ...state,
@@ -112,8 +118,8 @@ export function reducer (state, action) {
       return {
         ...state,
         devices: action.devices,
-        audioDeviceId: action.devices.audioinput[0].deviceId,
-        videoDeviceId: action.devices.videoinput[0].deviceId
+        audioDeviceId: action.selectedAudioId,
+        videoDeviceId: action.selectedVideoId
       }
 
     case ERROR_OCCURRED:
@@ -125,9 +131,6 @@ export function reducer (state, action) {
 
     case FINISH_CLICKED: {
       if (state.captureState !== RECORDING) { return state }
-
-      state.mediaRecorder && state.mediaRecorder.stop()
-      state.soundMeter && state.soundMeter.stop()
 
       return {
         ...state,

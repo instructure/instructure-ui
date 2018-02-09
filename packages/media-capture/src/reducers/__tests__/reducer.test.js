@@ -87,8 +87,10 @@ describe('capture reducer', () => {
           type: types.DEVICES_FOUND,
           devices: {
             audioinput: [{ deviceId: 'audioDeviceId1' }, { deviceId: 'audioDeviceId2' }],
-            videoinput: [{deviceId: 'videoDeviceId1'}]
-          }
+            videoinput: [{ deviceId: 'videoDeviceId1' }]
+          },
+          selectedAudioId: 'audioDeviceId1',
+          selectedVideoId: 'videoDeviceId1'
         }
       )
     ).to.deep.equal(

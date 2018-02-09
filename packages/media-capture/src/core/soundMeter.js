@@ -25,8 +25,8 @@ export default class SoundMeter {
   constructor (context) {
     this.context = context
     this.processor = this.context.createScriptProcessor(512)
-    this.processor.volume = 0
-    this.processor.averaging = 0.95
+    this.volume = 0
+    this.averaging = 0.95
     this.processor.onaudioprocess = this.consumeBuffer
   }
 
@@ -42,12 +42,13 @@ export default class SoundMeter {
   }
 
   stop () {
-    this.mic.disconnect()
-    this.processor.disconnect()
+    this.context.state !== 'closed' && this.context.close()
+    this.mic && this.mic.disconnect()
+    this.processor && this.processor.disconnect()
   }
 
-  consumeBuffer (event) {
-    const buf = event.inputBuffer.getChannelData(0)
+  consumeBuffer = ({ inputBuffer }) => {
+    const buf = inputBuffer.getChannelData(0)
     const bufLength = buf.length
     let sum = 0
     let x

@@ -21,15 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function startMediaRecorder (stream, onMediaRecorderInit, success, error) {
-  const chunks = []
-  const mediaRecorder = new MediaRecorder(stream, { mimeType: 'video/webm' })
-  onMediaRecorderInit(mediaRecorder)
-  mediaRecorder.start(10)
-  mediaRecorder.ondataavailable = (e) => chunks.push(e.data)
-  mediaRecorder.onerror = (e) => error(e)
-  mediaRecorder.onstop = (e) => {
-    const blob = new Blob(chunks, { type: 'video/webm' })
-    success(blob)
+
+const FILE_TYPE = 'video/webm'
+
+function startMediaRecorder (stream, onMediaRecorderInit, success, error) {
+  const mediaFile = new MediaFile(stream, FILE_TYPE, success, error)
+  onMediaRecorderInit(mediaFile.mediaRecorder)
+  mediaFile.mediaRecorder.start(10)
+}
+
+class MediaFile {
+  constructor (stream, fileType, fileSuccess, fileError) {
+    this.stream = stream
+    this.fileType = fileType
+    this.fileSuccess = fileSuccess
+    this.fileError = fileError
+    this.chunks = []
+    this.mediaRecorder = new MediaRecorder(stream, { mimeType: this.fileType })
+    this.mediaRecorder.ondataavailable = this.addToChunks
+    this.mediaRecorder.onerror = this.onError
+    this.mediaRecorder.onstop = this.onStop
+  }
+
+  addToChunks = (e) => {
+    this.chunks.push(e.data)
+  }
+
+  onError = (e) => {
+    this.fileError(e)
+  }
+
+  onStop = (e) => {
+    const blob = new Blob(this.chunks, { type: this.fileType })
+    this.fileSuccess(blob)
   }
 }
+
+export { startMediaRecorder }
+export default MediaFile
