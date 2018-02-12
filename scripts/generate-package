@@ -5,7 +5,12 @@ PACKAGE_TEMPLATE_DIR=scripts/templates/package
 
 current_version=$(node -p "require('./lerna').version")
 
-read -p 'Package name: ' package
+# If no args are supplied, ask for user input
+if [ $# -eq 0 ]; then
+  read -p 'Package name: ' package
+else
+  package=$1
+fi
 
 export PACKAGE=$package
 export VERSION=$current_version
