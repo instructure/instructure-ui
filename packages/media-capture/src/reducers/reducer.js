@@ -48,7 +48,8 @@ import {
   SAVING,
   STARTING,
   LOADING,
-  ERROR
+  ERROR,
+  FINISHED
 } from '../constants/CaptureStates'
 
 export function getInitialState (onCompleted) {
@@ -140,14 +141,14 @@ export function reducer (state, action) {
     }
 
     case ONCOMPLETE: {
-      if (state.captureState !== SAVING) { return state }
+      if (![SAVING, FINISHED].includes(state.captureState)) { return state }
 
       state.onCompleted(new File([state.videoBlob], state.fileName, { type: 'webm' }))
 
       return {
-        ...getInitialState(state.onCompleted),
+        ...state,
         soundMeter: state.soundMeter,
-        captureState: READY
+        captureState: FINISHED
       }
     }
 
@@ -176,7 +177,7 @@ export function reducer (state, action) {
       }
 
     case STARTOVER_CLICKED:
-      if (![RECORDING, PREVIEWSAVE].includes(state.captureState)) { return state }
+      if (![RECORDING, PREVIEWSAVE, FINISHED].includes(state.captureState)) { return state }
 
       state.mediaRecorder && state.mediaRecorder.state !== 'inactive' && state.mediaRecorder.stop()
 

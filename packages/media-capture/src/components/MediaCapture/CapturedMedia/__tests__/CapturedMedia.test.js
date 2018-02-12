@@ -72,12 +72,12 @@ describe('<CapturedMedia />', () => {
       expect(media.find('MediaPlayback').length).to.equal(1)
     })
 
-    it('should not render a MediaPlayback with the FINISHED captureState', () => {
+    it('should render a MediaPlayback with the FINISHED captureState', () => {
       const media = testbed.render({
         captureState: FINISHED
       })
 
-      expect(media.find('MediaPlayback').length).to.equal(0)
+      expect(media.find('MediaPlayback').length).to.equal(1)
     })
   })
 })

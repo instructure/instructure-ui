@@ -62,7 +62,7 @@ export default class FileSave extends Component {
   }
 
   saveClicked = () => {
-    this.props.actions.saveClicked(this.state.fileName)
+    this.props.actions.saveClicked(this.state.fileName.trim())
   }
 
   render () {

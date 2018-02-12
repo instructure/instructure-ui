@@ -82,11 +82,12 @@ export const soundMeterInitialized = (sm) => ({ type: types.SOUND_METER_INITIALI
 
 export const saveClicked = (fileName) => {
   return (dispatch) => {
-    dispatch({ type: types.SAVE_CLICKED, fileName })
+    if (fileName.length === 0) {
+      dispatch({ type: types.SAVE_CLICKED, fileName: `[${translate('FILE_PLACEHOLDER')} ${new Date(DateTime.local())}]` })
+    } else {
+      dispatch({ type: types.SAVE_CLICKED, fileName })
+    }
 
-    // simulate async saving
-    setTimeout(() => {
-      dispatch(onComplete())
-    }, 1500)
+    dispatch(onComplete())
   }
 }

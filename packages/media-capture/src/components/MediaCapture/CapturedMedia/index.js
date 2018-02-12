@@ -33,7 +33,8 @@ import {
   PREVIEWSAVE,
   STARTING,
   SAVING,
-  LOADING
+  LOADING,
+  FINISHED
 } from '../../../constants/CaptureStates'
 
 /**
@@ -65,7 +66,7 @@ export default class CapturedMedia extends Component {
     }
 
     const MediaPlaybackGuard = (state) => {
-      if (![PREVIEWSAVE, SAVING].includes(state)) return null
+      if (![PREVIEWSAVE, SAVING, FINISHED].includes(state)) return null
 
       return <MediaPlayback videoSrc={this.props.videoSrc} />
     }
