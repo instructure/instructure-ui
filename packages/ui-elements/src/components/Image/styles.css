@@ -22,8 +22,6 @@
 .overlayLayout {
   display: inline-block;
   vertical-align: middle;
-  position: relative;
-  overflow: hidden; /* stops blurred images extending past overlay borders */
 }
 
 .overlay {
@@ -44,4 +42,25 @@
 .has-filter,
 .overlay {
   transition: all var(--effectTransitionDuration);
+}
+
+.cover,
+.container--has-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.container--has-background {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.container--has-overlay {
+  position: relative;
+  overflow: hidden; /* stops blurred images extending past overlay borders */
 }

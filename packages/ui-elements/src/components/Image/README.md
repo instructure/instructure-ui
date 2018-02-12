@@ -58,6 +58,24 @@ example: true
   </Container>
 ```
 
+### Cover
+
+When the `cover` prop is `true` Image fills the full width and height of its
+containing element, while maintaining the aspect ratio of the source image.
+
+```js
+---
+example: true
+---
+<div style={{width: '66%', height: '11rem'}}>
+  <Image
+    src={avatarImage}
+    overlay={{color: 'rebeccapurple', opacity: 8}}
+    cover
+  />
+</div>
+```
+
 ### Grayscale and blur filters
 
 Please note: these should only be used for presentational effects: Filters

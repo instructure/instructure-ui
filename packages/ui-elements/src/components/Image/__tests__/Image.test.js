@@ -103,5 +103,21 @@ describe('<Image />', () => {
       const imageInsideOverlay = imageWithOverlay.find('img')
       expect(imageInsideOverlay.getComputedStyle().getPropertyValue('display')).to.contain('block')
     })
+
+    it('should apply CSS object-fit: cover when cover is true', () => {
+      const subject = testbed.render({ cover: true })
+      const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
+      expect(objectFit).to.equal('cover')
+    })
+
+    it('should set overlay container height and width to 100% when cover is true', () => {
+      const subject = testbed.render({
+        alt: 'testing123',
+        cover: true,
+        overlay: {color: '#ff0000', opacity: 7}
+      })
+      expect(subject.hasClass(styles['container--has-cover'])).to.be.true
+      expect(subject.find('[alt="testing123"]')).to.be.present
+    })
   })
 })
