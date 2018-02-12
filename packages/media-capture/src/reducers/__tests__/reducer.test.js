@@ -134,16 +134,16 @@ describe('capture reducer', () => {
         { type: types.ONCOMPLETE }
       )
     ).to.deep.equal(
-      { ...getInitialState(), captureState: states.READY, soundMeter: true, onCompleted }
+      { ...getInitialState(onCompleted), captureState: states.FINISHED, soundMeter: true }
     )
 
     expect(
       reducer(
-        { captureState: states.FINISHED },
+        { captureState: states.READY },
         { type: types.ONCOMPLETE }
       )
     ).to.deep.equal(
-      { captureState: states.FINISHED }
+      { captureState: states.READY }
     )
   })
 

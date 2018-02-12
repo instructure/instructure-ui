@@ -37,7 +37,8 @@ import {
   READY,
   RECORDING,
   PREVIEWSAVE,
-  SAVING
+  SAVING,
+  FINISHED
 } from '../../../constants/CaptureStates'
 
 /**
@@ -104,7 +105,7 @@ class Controller extends Component {
     }
 
     const SaveGuard = (state) => {
-      if (![PREVIEWSAVE, SAVING].includes(state)) return null
+      if (![PREVIEWSAVE, SAVING, FINISHED].includes(state)) return null
 
       return (
         <div className={styles.container}>
