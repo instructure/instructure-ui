@@ -6,6 +6,7 @@ USER root
 RUN curl --silent "https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-key add - \
  && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > "/etc/apt/sources.list.d/google.list" \
  && apt-get update --quiet=2 \
+ && apt-get install libgconf-2-4 --quiet=2 \
  && apt-get install --quiet=2 google-chrome-beta > /dev/null \
  && apt-get clean \
  && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
