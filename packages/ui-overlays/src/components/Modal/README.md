@@ -58,7 +58,7 @@ example: true
      ]
 
      return (
-       <div>
+       <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
          <Select
            onChange={this.handleSelectChange}
            value={this.state.size}

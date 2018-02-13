@@ -58,7 +58,7 @@ class Example extends React.Component {
     ]
 
     return (
-      <div>
+      <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
         <Select
           onChange={(e, o) => { this.setState({ placement: o.value }) }}
           value={this.state.placement}

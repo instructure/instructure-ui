@@ -2,6 +2,10 @@
 describes: Select
 ---
 
+Select is an accessible, custom styled combobox component with optional autocomplete.
+
+*Note: When Select is rendered inside a parent with `overflow:hidden` the options may be clipped.*
+
 ### Select size variants
 
 Default is `medium`.
@@ -10,7 +14,11 @@ Default is `medium`.
 ---
 example: true
 ---
-<div style={{ padding: '0 0 6rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto xx-large auto"
+  padding="x-small x-small x-large x-small"
+>
   <Select
     size="small"
     label="Small"
@@ -39,7 +47,7 @@ example: true
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Select with the `layout` prop set to `inline`
@@ -50,12 +58,16 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 4rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto xx-large auto"
+  padding="x-small"
+>
   <Select label="Inline select" layout="inline">
     <option value="foo">Foo</option>
     <option disabled value="bar">Bar</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Select with default value set using `defaultOption`
@@ -64,7 +76,11 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 4rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto medium auto"
+  padding="x-small"
+>
   <Select
     label="Single"
     defaultOption="bar"
@@ -83,7 +99,7 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Select with icons
@@ -92,12 +108,16 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 4rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto xx-large auto"
+  padding="x-small"
+>
   <Select label="Icon select">
     <option value="foo" icon={PlaceholderIcon}>Foo</option>
     <option value="bar" icon={PlaceholderIcon}>Bar</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Select with groups
@@ -106,7 +126,7 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 17rem 0', margin: '0 auto' }}>
+<div style={{ padding: '0 0 18rem 0', margin: '0 auto' }}>
   <Select label="Group Select">
   <optgroup label="Group One">
     <option value="item1">Item One</option>
@@ -130,7 +150,11 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 10rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto xx-large auto"
+  padding="x-small x-small x-large x-small"
+>
   <Select
     layout="inline"
     label="Choose a snack"
@@ -150,7 +174,7 @@ example: true
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Select with assistive text and a label visible only to screenreaders
@@ -159,7 +183,11 @@ example: true
 ---
 example: true
 ---
-<div style={{ padding: '0 0 10rem 0', margin: '0 auto' }}>
+<Container
+  as="div"
+  margin="0 auto xx-large auto"
+  padding="x-small x-small x-large x-small"
+>
   <Select
     label={<ScreenReaderContent>What would you like for a snack?</ScreenReaderContent>}
     assistiveText="4 options available. Use the down arrow to navigate options."
@@ -169,7 +197,7 @@ example: true
     <option value="bananas">Bananas</option>
     <option value="candy">Candy</option>
   </Select>
-</div>
+</Container>
 ```
 
 ### Disabled Selects
@@ -180,22 +208,26 @@ You can disable an entire Select or the child options.
 ---
 example: true
 ---
-<div style={{ padding: '0 0 10rem 0', margin: '0 auto' }}>
-  <Select disabled label="What would you like for a snack?" inline>
-    <option value="apples" disabled>Apples</option>
-    <option value="oranges">Oranges</option>
-    <option value="bananas">Bananas</option>
-    <option value="candy">Candy</option>
-  </Select>
-  <br />
-  <br />
+<Container
+  as="div"
+  margin="0 auto x-large auto"
+  padding="x-small"
+>
   <Select label="Choose a snack" inline>
     <option value="apples">Apples</option>
     <option value="oranges">Oranges</option>
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
   </Select>
-</div>
+  <br />
+  <br />
+  <Select disabled label="What would you like for a snack?" inline>
+    <option value="apples" disabled>Apples</option>
+    <option value="oranges">Oranges</option>
+    <option value="bananas">Bananas</option>
+    <option value="candy">Candy</option>
+  </Select>
+</Container>
 ```
 ### Select with autocomplete
 
@@ -233,25 +265,25 @@ render () {
 }
 
 render(
-<div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
-  <Example
-    label="Choose a state"
-    name="state"
-    defaultOption="12"
-    onChange={(event, value) => console.log(value.label)}
-    assistiveText="Start typing to search. Press the down arrow to navigate results."
-    editable
-  />
-  <br />
-  <Example
-    label="Choose a few states"
-    name="states"
-    defaultOption={["0", "12", "15"]}
-    assistiveText="Start typing to search. Press the down arrow to navigate results."
-    editable
-    multiple
-  />
-</div>
+  <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
+    <Example
+      label="Choose a state"
+      name="state"
+      defaultOption="12"
+      onChange={(event, value) => console.log(value.label)}
+      assistiveText="Start typing to search. Press the down arrow to navigate results."
+      editable
+    />
+    <br />
+    <Example
+      label="Choose a few states"
+      name="states"
+      defaultOption={["0", "12", "15"]}
+      assistiveText="Start typing to search. Press the down arrow to navigate results."
+      editable
+      multiple
+    />
+  </div>
 )
 ```
 
@@ -561,7 +593,7 @@ class Example extends React.Component {
 }
 
 render(
-  <form style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
+  <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
     <Example label="Default-size Select and button" />
     <br/>
     <Example
@@ -574,6 +606,6 @@ render(
       size="large"
     />
     <br/>
-  </form>
+  </div>
 )
 ```

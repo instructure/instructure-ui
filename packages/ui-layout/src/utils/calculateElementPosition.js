@@ -297,19 +297,47 @@ class PositionData {
     }
   }
 
+  overflow (element) {
+    const bounds = getBoundingClientRect(element)
+    const offsets = addOffsets([this.target.position, this.offset])
+    const parentOffsetTop = this.element.positionedParentsOffset.top + this.element.scrollParentsOffset.top
+
+    const left = offsets.left
+    const right = left + this.element.positionedParentsOffset.left + this.element.width
+
+    let top = offsets.top + parentOffsetTop
+    let bottom = offsets.top + this.element.height + parentOffsetTop
+
+    // adjust for vertical placements
+    if (this.element.placement[0] === "bottom") {
+      top -= this.element.height + this.target.height
+    } else if (this.element.placement[0] === "top") {
+      bottom += this.element.height + this.target.height
+    }
+    // adjust for horizontal placements
+    if (this.element.placement[1] === "top") {
+      top -= this.element.height - this.target.height
+    } else if (this.element.placement[1] === "bottom") {
+      bottom += this.element.height - this.target.height
+    }
+
+    return {
+      top: (top < bounds.top) ? bounds.top - top : 0,
+      bottom: (bottom > bounds.bottom) ? bottom - bounds.bottom : 0,
+      left: (left < bounds.left) ? bounds.left - left : 0,
+      right: (right > bounds.right) ? right - bounds.right : 0
+    }
+  }
+
   constrainTo (element) {
     if (!element) return
 
-    const { top, left } = addOffsets([this.target.position, this.offset])
-
-    const bounds = getBoundingClientRect(element)
-    const right = left + this.element.positionedParentsOffset.left + this.element.width
-
+    const overflow = this.overflow(element)
     const oob = {
-      top: top < bounds.top,
-      bottom: top + this.element.height > bounds.bottom,
-      left: left < bounds.left,
-      right: right > bounds.right
+      top: overflow.top > 0,
+      bottom: overflow.bottom > 0,
+      left: overflow.left > 0,
+      right: overflow.right > 0,
     }
 
     if (this.element.hasVerticalPlacement) {
@@ -324,10 +352,23 @@ class PositionData {
         this.target.placement[1] = 'end'
       }
 
-      if (oob.top) {
+      if (oob.top && oob.bottom) {
+        // if top and bottom bounds broken
+        if (overflow.bottom < overflow.top) {
+          // more room on bottom, position below
+          this.element.placement[0] = 'bottom'
+          this.target.placement[0] = 'top'
+        } else {
+          // more room on top, position above
+          this.element.placement[0] = 'top'
+          this.target.placement[0] = 'bottom'
+        }
+      } else if (oob.top) {
+        // if top bound broken, position below
         this.element.placement[0] = 'bottom'
         this.target.placement[0] = 'top'
       } else if (oob.bottom) {
+        // if bottom bound broken, position above
         this.element.placement[0] = 'top'
         this.target.placement[0] = 'bottom'
       }
