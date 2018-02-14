@@ -1,6 +1,6 @@
 {
   "name": "@instructure/babel-plugin-transform-class-display-name",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "description": "A babel plugin to add a displayName property to React component class declarations",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",
