@@ -30,8 +30,10 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import px from '@instructure/ui-utils/lib/px'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import uid from '@instructure/ui-utils/lib/uid'
 
@@ -69,7 +71,7 @@ class TextArea extends Component {
     */
     height: PropTypes.string,
     /**
-    * when autoGrow is true, the textarea will never grow beyond this value (in pixels)
+    * when autoGrow is true, the textarea will never grow beyond this value
     */
     maxHeight: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
     /**
@@ -169,16 +171,15 @@ class TextArea extends Component {
       const scrollHeight = this._textarea.scrollHeight
       let initialHeight = this.props.height
       let minHeight = scrollHeight
-      let maxHeight = this.props.maxHeight
+      let maxHeight = px(this.props.maxHeight, findDOMNode(this))
 
       // eslint-disable-next-line no-cond-assign
       if (initialHeight && scrollHeight < (initialHeight = parseInt(initialHeight, 10))) {
         minHeight = initialHeight
       // eslint-disable-next-line no-cond-assign
-    } else if (maxHeight && scrollHeight > (maxHeight = parseInt(maxHeight, 10))) {
+      } else if (maxHeight && scrollHeight > (maxHeight = parseInt(maxHeight, 10))) {
         minHeight = maxHeight
       }
-
       const minHeightInPx = `${minHeight}px`
       if (!this.initialMinHeight) { this.initialMinHeight = minHeightInPx }
       this._textarea.style.minHeight = minHeightInPx
