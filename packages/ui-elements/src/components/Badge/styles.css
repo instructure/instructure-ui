@@ -109,8 +109,8 @@
   &.count {
     line-height: var(--size);
     min-width: var(--size);
-    padding-left: var(--padding);
-    padding-right: var(--padding);
+    padding-inline-start: var(--padding);
+    padding-inline-end: var(--padding);
   }
 
   &.notification {
@@ -160,7 +160,8 @@
     border-radius: var(--borderRadius);
     position: absolute;
     top: -0.25rem;
-    left: -0.25rem;
+    offset-inline-end: auto;
+    offset-inline-start: -0.25rem;
     box-sizing: border-box;
     border: var(--pulseBorderThickness) solid;
     opacity: 0;

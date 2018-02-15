@@ -64,6 +64,7 @@ input[type].input {
   all: initial;
   width: 100%;
   cursor: default;
+  box-sizing: border-box;
 
   &::-ms-clear {
     display: none;
@@ -87,8 +88,8 @@ input[type].input {
   font-size: inherit;
   font-weight: var(--fontWeight);
   color: var(--color);
-  padding: 0 var(--inputPaddingEnd) 0 var(--inputPaddingStart);
-  box-sizing: border-box;
+  padding: 0 var(--inputPadding);
+  height: auto;
 
   &::placeholder {
     color: var(--placeholderColor);
@@ -120,15 +121,13 @@ input[type].input {
   height: 100%;
   display: flex;
   align-items: center;
-  margin-left: var(--inputPaddingStart);
+  margin-inline-start: var(--inputPadding);
 }
 
 .icon {
-  height: 100%;
   display: flex;
-  align-items: center;
-  position: absolute;
-  right: var(--inputPaddingStart);
+  align-self: center;
+  margin-inline-end: var(--inputPadding);
   pointer-events: none;
   fill: var(--iconColor);
 }

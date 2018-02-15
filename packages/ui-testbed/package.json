@@ -24,10 +24,10 @@
     "glamor": "^2.20.37",
     "keycode": "^2.1.8",
     "lodash.reject": "^4.6.0",
-    "mocha": "^4.1.0",
+    "mocha": "^5.0.1",
     "react-addons-test-utils": "^15.6.0",
     "react-test-renderer": "15.6.2",
-    "sinon": "^4.1.2",
+    "sinon": "^4.3.0",
     "sinon-chai": "^2.12.0"
   },
   "peerDependencies": {

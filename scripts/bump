@@ -14,16 +14,36 @@ fi
 ##################################
 git fetch origin --tags --force
 
-#################################
-# Determine the release version #
-#################################
-$(npm bin)/standard-version
-next_version=$(node -p "require('./package').version")
+#########################
+# Determine the version #
+#########################
+while getopts ":v:" opt; do
+  case $opt in
+    v)
+      echo "-v (version): $OPTARG" >&2
+      next_version=$OPTARG
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
+
+if ! [[ $next_version ]]; then
+  $(npm bin)/standard-version
+  next_version=$(node -p "require('./package').version")
+fi
 
 ###################
 # Update packages #
 ###################
 printf "Updating packages and generating the changelog for $next_version ...\n"
+$(npm bin)/yarn version --no-git-tag-version --new-version $next_version
 $(npm bin)/lerna publish --skip-git --skip-npm --force-publish=* --repo-version $next_version
 
 ##########################

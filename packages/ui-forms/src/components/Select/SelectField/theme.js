@@ -38,8 +38,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     iconColor: colors.oxford,
     background: colors.white,
 
-    inputPaddingStart: spacing.small,
-    inputPaddingEnd: spacing.large,
+    inputPadding: spacing.small,
 
     focusBorderColor: colors.brand,
     focusOutlineColor: alpha(colors.brand, 50),
