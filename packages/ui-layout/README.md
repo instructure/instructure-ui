@@ -41,6 +41,8 @@ The `ui-layout` package contains the following components:
 ### Utilities
 The `ui-layout` package contains the following utilities:
 - [calculateElementPosition](#calculateElementPosition)
+- [addElementQueryMatchListener](#addElementQueryMatchListener)
+- [addMediaQueryMatchListener](#addMediaQueryMatchListener)
 
 ### Contribute
 

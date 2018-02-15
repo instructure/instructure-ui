@@ -21,17 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import UIFocusManager from '../../../ui-a11y/lib/utils/focusManager'
+import parseQuery from '../../parseQuery'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+export default class MediaQueryListProxy {
+  constructor (query, listenerCallback, initialSize = { width: 0, height: 0}) {
+    // Convert query string back to a json object
+    let [key, value] = query.replace(/\(|\)|\s/g, '').split(':')
+    key = key.replace(/-([a-z])/g, g => g[1].toUpperCase())
 
-export default class FocusManager extends UIFocusManager {
-  constructor () {
-    super()
-    warning(false, '[%s] was deprecated in version %s. %s', 'FocusManager', '5.0.0', changedPackageWarning(
-      'ui-utils',
-      'ui-a11y'
-    ) || '')
+    const namedQuery = { 'query': {} }
+    namedQuery.query[key] = value
+
+    this.queryMatches = parseQuery(namedQuery)
+    this.listenerCallback = listenerCallback
+    this.size = initialSize
+  }
+
+  addListener(cb) {
+    this.listenerCallback((width, height) => {
+      this.size = { width, height }
+      cb()
+    })
+  }
+
+  get matches () {
+    return this.queryMatches(this.size).query
   }
 }

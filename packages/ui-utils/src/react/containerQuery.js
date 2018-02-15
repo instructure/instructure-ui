@@ -23,16 +23,23 @@
  */
 
 import PropTypes from 'prop-types'
-import getDisplayName from './getDisplayName'
-import findDOMNode from '../dom/findDOMNode'
-import addResizeListener from '../dom/addResizeListener'
-import debounce from '../debounce'
-import px from '../px'
+
+import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
+import debounce from '@instructure/ui-utils/lib/debounce'
+import { warnDeprecatedComponent } from '@instructure/ui-utils/lib/react/deprecated'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
+
+import parseQuery from '../../../ui-layout/lib/utils/parseQuery'
 
 /**
  * ---
  * category: utilities/react
  * ---
+ *
+ * NOTE: As of 5.0.0, containerQuery has been deprecated. Use the [Responsive](#Responsive)
+ * component instead.
+ *
  * A decorator or higher order component to provide the ability to style a
  * React component with container queries.
  *
@@ -92,6 +99,8 @@ export default function containerQuery (query) {
       }
 
       componentDidMount () {
+        warnDeprecatedComponent('5.0.0', 'containerQuery', 'Use the `Responsive` component instead')
+
         const node = findDOMNode(this)
 
         const size = {
@@ -127,37 +136,6 @@ export default function containerQuery (query) {
         return this._size
       }
     }
-  }
-}
-
-function parseQuery (query, el) {
-  const rules = []
-
-  // eslint-disable-next-line no-restricted-syntax
-  for (const [selectorName, {minWidth, maxWidth, minHeight, maxHeight}] of toPairs(query)) {
-    rules.push([
-      selectorName,
-      {
-        minWidth: px(minWidth, el) || 0,
-        maxWidth: px(maxWidth, el) || Infinity,
-        minHeight: px(minHeight, el) || 0,
-        maxHeight: px(maxHeight, el) || Infinity
-      }
-    ])
-  }
-
-  return function ({width, height}) {
-    const selectorMap = {}
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (const [selectorName, {minWidth, maxWidth, minHeight, maxHeight}] of rules) {
-      selectorMap[selectorName] = (
-        minWidth <= width && width <= maxWidth &&
-        minHeight <= height && height <= maxHeight
-      )
-    }
-
-    return selectorMap
   }
 }
 

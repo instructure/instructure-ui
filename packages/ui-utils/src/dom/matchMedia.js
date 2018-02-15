@@ -22,56 +22,24 @@
  * SOFTWARE.
  */
 
+import canUseDOM from './canUseDOM'
 import findDOMNode from './findDOMNode'
-import getBoundingClientRect from './getBoundingClientRect'
-import requestAnimationFrame from './requestAnimationFrame'
-
-// TODO: replace with https://wicg.github.io/ResizeObserver/ when it's supported
+import ownerWindow from './ownerWindow'
 
 /**
  * ---
  * category: utilities/DOM
  * ---
- * @module
- * Adds a listener to an element and calls a specified handler
- * function whenever the size changes
  *
+ * Wrapper function for window.matchMedia
+ *
+ * see https://developer.mozilla.org/en-US/docs/Web/API/Window/matchMedia
+ *
+ * @param {string} query - media query string
  * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {function} handler - function to run when resize occurs
- * @returns {function} remove - cancel the listener and no longer execute the handler function
+ * @returns {Object} a media query list object
  */
-export default function addResizeListener (el, handler) {
-  const node = findDOMNode(el)
-  let { width } = getBoundingClientRect(node)
-  let cancelled = false
-  let raf
-
-  const checkDimensions = () => {
-    if (cancelled) {
-      return
-    }
-
-    const boundingRect = getBoundingClientRect(node)
-    const size = {
-      width: boundingRect.width,
-      height: boundingRect.height
-    }
-
-    if (size.width !== width && typeof handler === 'function') {
-      handler(size)
-    }
-
-    width = size.width
-
-    raf = requestAnimationFrame(checkDimensions)
-  }
-
-  checkDimensions()
-
-  return {
-    remove () {
-      cancelled = true
-      raf.cancel()
-    }
-  }
+export default function matchMedia (query, el) {
+  const node = findDOMNode(el) || document
+  return canUseDOM && ownerWindow(node).matchMedia(query)
 }

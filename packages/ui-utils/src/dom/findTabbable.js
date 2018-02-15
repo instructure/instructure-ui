@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
- import UIFindTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+ import UIFindTabbable from '../../../ui-a11y/lib/utils/findTabbable'
 
  import { changedPackageWarning } from '../react/deprecated'
  import warning from '../warning'

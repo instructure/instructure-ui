@@ -121,7 +121,7 @@ function warnDeprecatedProps (componentName, version, props, oldProps, message) 
   })
 }
 
-function warnDeprecatedComponent (version, componentName, message) {
+export function warnDeprecatedComponent (version, componentName, message) {
   warning(false, '[%s] was deprecated in version %s. %s', componentName, version, message || '')
 }
 

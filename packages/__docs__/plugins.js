@@ -82,6 +82,7 @@ plugins = plugins.concat([
       'packages/ui-utils/src/dom/findTabbable.js',
       'packages/ui-utils/src/dom/focusManager.js',
       'packages/ui-utils/src/i18n/*.js',
+      'packages/ui-utils/src/react/containerQuery.js'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas'),
