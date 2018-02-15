@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-forms",
-  "version": "4.7.1",
+  "version": "4.7.2",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,25 +22,25 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^4.7.1",
-    "@instructure/ui-themes": "^4.7.1",
+    "@instructure/ui-presets": "^4.7.2",
+    "@instructure/ui-themes": "^4.7.2",
     "react": "^0.14.9 || ^15.6.2",
     "react-dom": "^0.14.9 || ^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^4.7.1",
-    "@instructure/ui-buttons": "^4.7.1",
-    "@instructure/ui-container": "^4.7.1",
-    "@instructure/ui-elements": "^4.7.1",
-    "@instructure/ui-icons": "^4.7.1",
-    "@instructure/ui-layout": "^4.7.1",
-    "@instructure/ui-overlays": "^4.7.1",
-    "@instructure/ui-themeable": "^4.7.1",
-    "@instructure/ui-utils": "^4.7.1",
+    "@instructure/ui-a11y": "^4.7.2",
+    "@instructure/ui-buttons": "^4.7.2",
+    "@instructure/ui-container": "^4.7.2",
+    "@instructure/ui-elements": "^4.7.2",
+    "@instructure/ui-icons": "^4.7.2",
+    "@instructure/ui-layout": "^4.7.2",
+    "@instructure/ui-overlays": "^4.7.2",
+    "@instructure/ui-themeable": "^4.7.2",
+    "@instructure/ui-utils": "^4.7.2",
     "classnames": "^2.2.5",
-    "prop-types": "^15.6.0",
     "deep-equal": "^1.0.1",
-    "keycode": "^2.1.8"
+    "keycode": "^2.1.8",
+    "prop-types": "^15.6.0"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",
