@@ -27,6 +27,7 @@ import themeable from '@instructure/ui-themeable'
 import generate from '@instructure/ui-utils/lib/uid'
 
 import VideoPlayerControls from './VideoPlayerControls'
+import Loading from '../MediaCapture/Loading'
 import { translate } from '../../constants/translated/translations'
 
 import styles from './styles.css'
@@ -82,6 +83,7 @@ class VideoPlayer extends Component {
     this.video = null
     this.state = {
       state: PAUSED,
+      loadingSrc: true,
       showControls: true,
       videoId: generate()
     }
@@ -201,6 +203,12 @@ class VideoPlayer extends Component {
     }
   }
 
+  hideSpinner = () => {
+    this.setState({
+      loadingSrc: false
+    })
+  }
+
   render () {
     const { src, controls } = this.props
 
@@ -226,12 +234,14 @@ class VideoPlayer extends Component {
     /* eslint-disable jsx-a11y/media-has-caption, jsx-a11y/no-noninteractive-tabindex */
     return (
       <div {...wrapperProps}>
+        { this.state.loadingSrc && <Loading /> }
         <video
           ref={this.setVideoRef}
           src={src}
           id={this.state.videoId}
           className={styles.video}
           tabIndex="-1"
+          onCanPlay={this.hideSpinner}
         />
         { controls(this.state, actions) }
       </div>

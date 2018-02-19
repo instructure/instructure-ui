@@ -23,6 +23,7 @@
  */
 export default function generator () {
   return {
-    maxWidth: '50em'
+    maxWidth: '50em',
+    padding: '3.75rem'
   }
 }

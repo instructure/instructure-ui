@@ -67,8 +67,18 @@ describe('<VideoPlayer />', () => {
     expect(testbed.render()).to.be.present
   })
 
+  it('should render a </Loading />', () => {
+    expect(testbed.render().find('Loading').length).to.eql(1)
+  })
+
   it('should be accessible', (done) => {
     expect(testbed.render()).to.be.accessible(done)
+  })
+
+  describe('source loaded', () => {
+    const player = testbed.render()
+    player.setState({ loadingSrc: false })
+    expect(player.find('Loading').length).to.eql(0)
   })
 
   describe('#componentDidMount', () => {
