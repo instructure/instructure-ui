@@ -29,6 +29,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -40,7 +41,14 @@ import theme from './theme'
 category: components/typography
 ---
 **/
- @themeable(theme, styles)
+@deprecated(
+  '5.0.0',
+  null,
+  `"primary-inverse", "secondary-inverse", "success", "warning", "error", and "brand" Heading
+  colors are deprecated. Use "inherit", "primary", or "secondary" instead.`
+)
+
+@themeable(theme, styles)
 export default class Heading extends Component {
    static propTypes = {
      border: PropTypes.oneOf(['none', 'top', 'bottom']),
