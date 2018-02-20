@@ -31,6 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import warning from '@instructure/ui-utils/lib/warning'
+import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -45,9 +46,9 @@ export default class ListItem extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     children: PropTypes.node.isRequired,
-    variant: CustomPropTypes.deprecatedVariant(
-      PropTypes.oneOf(['default', 'unstyled', 'pipe', 'inline']),
-      'pipe',
+    variant: deprecatePropValues(
+      PropTypes.oneOf(['default', 'unstyled', 'inline']),
+      ['pipe'],
       'For the same functionality, use `inline` on the `variant` prop and set the `delimiter` prop to `pipe`.'
     ),
     delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),

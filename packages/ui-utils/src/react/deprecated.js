@@ -86,7 +86,26 @@ export default function deprecated (version, oldProps, message) {
   }
 }
 
-function warnDeprecatedProps (displayName, version, props, oldProps, message) {
+/**
+ *
+ * Trigger a console warning if the specified prop variant is deprecated
+ *
+ * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+ * @param {array} deprecated - an array of the deprecated variant names
+ * @param {string} message - additional information to display with the warning
+ */
+export const deprecatePropValues = (propType, deprecated = [], message) => {
+  return (props, propName, componentName, ...rest) => {
+    const isDeprecatedValue = deprecated.includes(props[propName])
+    warning(
+      (!isDeprecatedValue),
+      `[${componentName}] The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
+    )
+    return isDeprecatedValue ? null : propType(props, propName, componentName, ...rest)
+  }
+}
+
+function warnDeprecatedProps (componentName, version, props, oldProps, message) {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
@@ -96,14 +115,14 @@ function warnDeprecatedProps (displayName, version, props, oldProps, message) {
       warning(
         false,
         '[%s] `%s` was deprecated in %s%s. %s',
-        displayName, oldProp, version, (newProp ? `. Use \`${newProp}\` instead` : ''), message || ''
+        componentName, oldProp, version, (newProp ? `. Use \`${newProp}\` instead` : ''), message || ''
       )
     }
   })
 }
 
-function warnDeprecatedComponent (version, displayName, message) {
-  warning(false, '[%s] was deprecated in version %s. %s', displayName, version, message || '')
+function warnDeprecatedComponent (version, componentName, message) {
+  warning(false, '[%s] was deprecated in version %s. %s', componentName, version, message || '')
 }
 
 export function changedPackageWarning (prevPackage, newPackage) {

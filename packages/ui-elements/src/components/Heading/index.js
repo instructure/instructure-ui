@@ -29,7 +29,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -41,29 +41,22 @@ import theme from './theme'
 category: components/typography
 ---
 **/
-@deprecated(
-  '5.0.0',
-  null,
-  `"primary-inverse", "secondary-inverse", "success", "warning", "error", and "brand" Heading
-  colors are deprecated. Use "inherit", "primary", or "secondary" instead.`
-)
 
 @themeable(theme, styles)
 export default class Heading extends Component {
    static propTypes = {
      border: PropTypes.oneOf(['none', 'top', 'bottom']),
      children: PropTypes.node.isRequired,
-     color: PropTypes.oneOf([
-       'primary',
-       'secondary',
-       'primary-inverse',
-       'secondary-inverse',
-       'success',
-       'warning',
-       'error',
-       'brand',
-       'inherit'
-     ]),
+     color: deprecatePropValues(
+       PropTypes.oneOf([
+         'primary',
+         'secondary',
+         'primary-inverse',
+         'secondary-inverse',
+         'inherit'
+       ]),
+       ['success', 'warning', 'error', 'brand']
+     ),
      level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
     /**
     * the element type to render as (defaults to the level)

@@ -22,9 +22,6 @@ example: true
 
 ### Colors
 
-Headings default to the theme's 'oxford' text color. However, the text color
-can be changed, if desired.
-
 ```js
 ---
 example: true
@@ -33,10 +30,6 @@ example: true
   <Heading>I inherit my color via the CSS cascade (default)</Heading>
   <Heading color="primary">I am primary color</Heading>
   <Heading color="secondary">I am secondary color</Heading>
-  <Heading color="brand">I am brand color</Heading>
-  <Heading color="success">I am success color</Heading>
-  <Heading color="warning">I am warning color</Heading>
-  <Heading color="error">I am error/danger color</Heading>
 </div>
 ```
 

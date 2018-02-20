@@ -493,7 +493,9 @@ Otherwise, set '${handlerName}'.`
    * @param {string} message - additional information to display with the warning
    */
   deprecatedVariant (propType, deprecated, message) {
-    return (props, propName, componentName) => {
+    warning(false, '[%] was deprecated in version %s. %s', 'deprecatedVariant', '5.0.0', 'Use `deprecatePropValues` instead.')
+
+    return (props, propName, componentName, location) => {
       warning(
         (props[propName] !== deprecated),
         `\`${componentName}\` \`${deprecated}\` variant is deprecated. ${message || ''}`
