@@ -183,27 +183,7 @@ describe('capture reducer', () => {
         { type: types.START_CLICKED }
       )
     ).to.deep.equal(
-      { captureState: states.STARTING }
-    )
-  })
-
-  it('should handle START_CLICKED', () => {
-    expect(
-      reducer(
-        { captureState: states.PREVIEWSAVE },
-        { type: types.START_CLICKED }
-      )
-    ).to.deep.equal(
-      { captureState: states.PREVIEWSAVE }
-    )
-
-    expect(
-      reducer(
-        { captureState: states.READY },
-        { type: types.START_CLICKED }
-      )
-    ).to.deep.equal(
-      { captureState: states.STARTING }
+      { captureState: states.STARTING, hasStarted: true }
     )
   })
 

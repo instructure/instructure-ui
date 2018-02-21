@@ -55,6 +55,7 @@ import {
 export function getInitialState (onCompleted) {
   return {
     captureState: LOADING,
+    hasStarted: false,
     videoSrc: '',
     videoBlob: '',
     msg: '',
@@ -173,6 +174,7 @@ export function reducer (state, action) {
 
       return {
         ...state,
+        hasStarted: true,
         captureState: STARTING
       }
 
@@ -183,6 +185,7 @@ export function reducer (state, action) {
 
       return {
         ...getInitialState(state.onCompleted),
+        hasStarted: state.hasStarted,
         devices: state.devices,
         audioDeviceId: state.audioDeviceId,
         videoDeviceId: state.videoDeviceId,

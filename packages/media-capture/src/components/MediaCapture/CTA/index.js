@@ -44,11 +44,16 @@ class CTA extends Component {
       startClicked: PropTypes.func.isRequired,
       finishClicked: PropTypes.func.isRequired
     }).isRequired,
-    captureState: PropTypes.string.isRequired
+    captureState: PropTypes.string.isRequired,
+    hasStarted: PropTypes.bool.isRequired
+  }
+
+  componentDidMount () {
+    this.props.hasStarted && this.el && this.el.focus()
   }
 
   componentDidUpdate () {
-    this.el && this.el.focus()
+    this.props.hasStarted && this.el && this.el.focus()
   }
 
   captureRef = (e) => {
@@ -67,6 +72,7 @@ class CTA extends Component {
           variant="primary"
           size="large"
           margin="0 medium"
+          ref={this.captureRef}
         >
           { translate('START') }
         </Button>

@@ -100,7 +100,8 @@ class MediaCapture extends Component {
               audioDeviceId,
               soundMeter,
               devices,
-              fileName
+              fileName,
+              hasStarted
             },
             actions
           }) => (
@@ -130,7 +131,7 @@ class MediaCapture extends Component {
                 videoDeviceId={videoDeviceId}
                 actions={actions}
               >
-                <CTA captureState={captureState} actions={actions} />
+                <CTA captureState={captureState} hasStarted={hasStarted} actions={actions} />
               </Controller>
             </CapturePresentation>
           )}

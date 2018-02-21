@@ -36,7 +36,7 @@ describe('<CTA />', () => {
     startClicked: () => {},
     finishClicked: () => {}
   }
-  const testbed = new Testbed(<CTA actions={actionStubs} captureState="" />)
+  const testbed = new Testbed(<CTA actions={actionStubs} captureState="" hasStarted={false} />)
 
   it('should render', () => {
     const CTA = testbed.render()
@@ -44,12 +44,12 @@ describe('<CTA />', () => {
   })
 
   it('should have a <Button />', () => {
-    const cta = testbed.render({ captureState: READY })
+    const cta = testbed.render({ captureState: READY, hasStarted: false })
     expect(cta.find('Button').length).to.eql(1)
   })
 
   it('should focus the <Button /> when updated', () => {
-    const cta = testbed.render({ captureState: READY })
+    const cta = testbed.render({ captureState: READY, hasStarted: true })
     cta.setProps({ captureState: RECORDING })
 
     expect(document.activeElement).to.eql(cta.find('button').node)
@@ -60,7 +60,8 @@ describe('<CTA />', () => {
       const startClicked = testbed.stub()
       const cta = testbed.render({
         actions: { ...actionStubs, startClicked },
-        captureState: READY
+        captureState: READY,
+        hasStarted: false
       })
 
       expect(cta.text()).to.eql('Start Recording')
@@ -73,7 +74,8 @@ describe('<CTA />', () => {
       const finishClicked = testbed.stub()
       const cta = testbed.render({
         actions: { ...actionStubs, finishClicked },
-        captureState: RECORDING
+        captureState: RECORDING,
+        hasStarted: false
       })
 
       expect(cta.text()).to.eql('Finish')
