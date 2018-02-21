@@ -38,16 +38,17 @@ function MyComponent () {
   Sketch app.
 
 - Use dashes in the name of the .sketch files (e.g `calendar-month`).
-  Use the same name for art-boards, but prefix with the variant, e.g. `solid/calendar-month` and `line/calendar-month`.
+  Use the same name for art-boards, but prefix with the variant, e.g. `Solid/calendar-month` and `Line/calendar-month`.
 
 - Save new icon files in the `/src` directory.
 
-- Run `yarn export:icons` from the repository root directory to generate the SVG files.
+- Run `yarn export:icons` from the repository root directory to generate the SVG files. Troubleshooting: if sketchtool is not installed do so by running `curl -L https://raw.githubusercontent.com/cognitom/gulp-sketch/master/install-sketchtool.sh | sudo sh`
 
-- Verify that the art-boards are exported as SVG to the `/src/__svg__` directory. There should be
-  directories for each variant based on the art-board names.
+- Verify that the art-boards are exported as SVG to the `/src/__svg__` directory. There should be directories for each variant based on the art-board names.
 
 - Run `yarn start:watch` from the repository root directory to start the local server and check the generated output.
+
+- Verify icons display correctly by checking under `iconography` in the main nav
 
 
 ### Guidelines for Drawing Icons
