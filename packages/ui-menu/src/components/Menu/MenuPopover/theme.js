@@ -22,5 +22,9 @@
  * SOFTWARE.
  */
 
-export Menu, { MenuPopover, MenuList, MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'
-export MenuItemFlyout from './Menu/MenuItemFlyout'
+export default function ({ breakpoints }) {
+  return {
+    minWidth: breakpoints.xxSmall,
+    maxWidth: breakpoints.xSmall
+  }
+}

@@ -37,24 +37,24 @@ import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveE
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import themeable from '@instructure/ui-themeable'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
-import Menu, { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '../Menu'
+import MenuList from '../MenuList'
+import MenuItem from '../MenuItem'
+import MenuItemFlyout from '../MenuItemFlyout'
+import MenuItemGroup from '../MenuItemGroup'
+import MenuItemSeparator from '../MenuItemSeparator'
 
 import styles from './styles.css'
 import theme from './theme'
 
 /**
 ---
-category: components/navigation
+parent: Menu
 ---
 **/
 
-@deprecated('3.0.0', {
-  focusTriggerOnClose: 'shouldFocusTriggerOnClose'
-})
 @themeable(theme, styles)
-export default class PopoverMenu extends Component {
+export default class MenuPopover extends Component {
   static propTypes = {
     /**
     * the trigger element
@@ -84,7 +84,7 @@ export default class PopoverMenu extends Component {
     onToggle: PropTypes.func,
 
     onSelect: PropTypes.func,
-    onClose: PropTypes.func,
+    onDismiss: PropTypes.func,
     onFocus: PropTypes.func,
     /**
      * A function that returns a reference to the content element
@@ -112,7 +112,7 @@ export default class PopoverMenu extends Component {
       this.state.show = props.defaultShow
     }
 
-    this.labelId = `PopoverMenu__${uid()}`
+    this.labelId = `MenuPopover__${uid()}`
     this.raf = []
   }
 
@@ -160,8 +160,8 @@ export default class PopoverMenu extends Component {
           this.props.onToggle(show)
         }
 
-        if (!show && typeof this.props.onClose === 'function') {
-          this.props.onClose()
+        if (!show && typeof this.props.onDismiss === 'function') {
+          this.props.onDismiss()
         }
       }
     )
@@ -213,7 +213,7 @@ export default class PopoverMenu extends Component {
   }
 
   focusTrigger () {
-    if (!this.show) {
+    if (!this.show && typeof this._trigger.focus === 'function') {
       this._trigger.focus()
     }
   }
@@ -231,7 +231,7 @@ export default class PopoverMenu extends Component {
 
     const menu = (
       <div className={styles.menu}>
-        <Menu
+        <MenuList
           labelledBy={this.labelId}
           hidden={!this.show}
           ref={el => {
@@ -241,7 +241,7 @@ export default class PopoverMenu extends Component {
           onDismiss={this.handleMenuDismiss}
         >
           {children}
-        </Menu>
+        </MenuList>
       </div>
     )
 
@@ -273,5 +273,3 @@ export default class PopoverMenu extends Component {
     )
   }
 }
-
-export { MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout } from '../Menu'

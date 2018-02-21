@@ -43,9 +43,9 @@ describe('<DeviceSelection />', () => {
     expect(DeviceSelection).to.be.present
   })
 
-  it('should render a <PopoverMenu />', () => {
+  it('should render a <Menu />', () => {
     const DeviceSelection = testbed.render()
-    expect(DeviceSelection.find('PopoverMenu').length).to.eql(1)
+    expect(DeviceSelection.find('Menu').length).to.eql(1)
   })
 
   it('should render a <Button />', () => {

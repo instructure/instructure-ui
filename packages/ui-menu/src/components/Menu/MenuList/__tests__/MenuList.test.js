@@ -23,11 +23,14 @@
  */
 
 import React from 'react'
-import Menu, { MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
+import MenuList from '../../MenuList'
+import MenuItem from '../../MenuItem'
+import MenuItemSeparator from '../../MenuItemSeparator'
+import MenuItemGroup from '../../MenuItemGroup'
 
-describe('<Menu />', () => {
+describe('<MenuList />', () => {
   const testbed = new Testbed(
-    <Menu>
+    <MenuList>
       <MenuItem>Default (Grid view)</MenuItem>
       <MenuItem value="foo">Learning Mastery</MenuItem>
       <MenuItem disabled>Individual (List view)</MenuItem>
@@ -55,7 +58,7 @@ describe('<Menu />', () => {
       </MenuItemGroup>
       <MenuItemSeparator />
       <MenuItem value="baz">Open grading history...</MenuItem>
-    </Menu>
+    </MenuList>
   )
 
   it('should render', () => {
@@ -86,6 +89,15 @@ describe('<Menu />', () => {
     expect(onSelect).to.have.been.called
   })
 
+  it('should call onKeyDown when menu item is selected', () => {
+    const onSelect = testbed.stub()
+    const subject = testbed.render({
+      onSelect
+    })
+    subject.find('MenuItem').first().simulate('click')
+    expect(onSelect).to.have.been.called
+  })
+
   it('should not call onSelect when disabled', () => {
     const onSelect = testbed.stub()
     const subject = testbed.render({
@@ -106,6 +118,11 @@ describe('<Menu />', () => {
     subject.keyDown('tab')
 
     expect(onDismiss).to.have.been.calledTwice
+  })
+
+  it('should have focus index -1 by default', () => {
+    const subject = testbed.render()
+    expect(subject.instance().focusedIndex).to.equal(-1)
   })
 
   it('should assign menu focus when focus prop is set', () => {
@@ -130,57 +147,27 @@ describe('<Menu />', () => {
     expect(subject.instance().focusedIndex).to.equal(0)
   })
 
-  it('should render a <MenuPopover /> when trigger is defined', () => {
+  it('should focus the first menu item when menu only has one item', () => {
     const subject = testbed.render({
-      trigger: <button>menu</button>
+      children: <MenuItem>foo</MenuItem>
     })
-    expect(subject.find('MenuPopover').length).to.eql(1)
+    subject.simulate('focus')
+    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true
   })
 
-  it('should not show by default', () => {
+  it('should set aria attributes and title properly', () => {
     const subject = testbed.render({
-      trigger: <button>menu</button>
+      labelledBy: 'id',
+      controls: 'id',
+      hidden: true,
+      disabled: true,
+      title: 'title'
     })
-
-    expect(subject.instance().show).to.be.false
-  })
-
-  it('should provide content ref', () => {
-    let content = null
-
-    testbed.render({
-      trigger: <button>menu</button>,
-      defaultShow: true,
-      contentRef: (el) => {
-        content = el
-      }
-    })
-
-    expect(content).to.not.be.null
-  })
-
-  it('should call onToggle on click', () => {
-    const onToggle = testbed.stub()
-    const subject = testbed.render({
-      onToggle,
-      trigger: <button>menu</button>
-    })
-
-    subject.find('button').simulate('click')
-
-    expect(onToggle).to.have.been.called
-  })
-
-  it('should call onFocus on focus', () => {
-    const onFocus = testbed.stub()
-    const subject = testbed.render({
-      onFocus,
-      trigger: <button>menu</button>
-    })
-
-    subject.find('button').simulate('focus')
-
-    expect(onFocus).to.have.been.called
+    expect(subject.getAttribute('aria-labelledby')).to.exist
+    expect(subject.getAttribute('aria-controls')).to.exist
+    expect(subject.getAttribute('aria-hidden')).to.exist
+    expect(subject.getAttribute('aria-disabled')).to.exist
+    expect(subject.getAttribute('title')).to.exist
   })
 
   it('should meet a11y standards', (done) => {

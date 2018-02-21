@@ -27,7 +27,7 @@ import Button from '@instructure/ui-buttons/lib/components/Button'
 import { MenuItem, MenuItemGroup } from '@instructure/ui-menu/lib/components/Menu'
 import IconMicSolid from '@instructure/ui-icons/lib/Solid/IconMic'
 import IconVideoSolid from '@instructure/ui-icons/lib/Solid/IconVideo'
-import PopoverMenu from '@instructure/ui-menu/lib/components/PopoverMenu'
+import Menu from '@instructure/ui-menu/lib/components/Menu'
 import themeable from '@instructure/ui-themeable'
 
 import { translate } from '../../../constants/translated/translations'
@@ -114,7 +114,7 @@ class DeviceSelection extends Component {
 
   render () {
     return (
-      <PopoverMenu
+      <Menu
         placement="bottom"
         trigger={
           <Button variant="light" margin="0 large 0">
@@ -130,7 +130,7 @@ class DeviceSelection extends Component {
         >
           {this.menuItems()}
         </MenuItemGroup>
-      </PopoverMenu>
+      </Menu>
     )
   }
 }

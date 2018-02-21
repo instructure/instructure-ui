@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import PopoverMenu from '../index'
-import { MenuItem, MenuItemSeparator } from '../../Menu'
+import MenuPopover from '../index'
+import MenuItem from '../../MenuItem'
+import MenuItemSeparator from '../../MenuItemSeparator'
 
-describe('<PopoverMenu />', () => {
+describe('<MenuPopover />', () => {
   const testbed = new Testbed(
-    <PopoverMenu
+    <MenuPopover
       trigger={<button>More</button>}
     >
       <MenuItem>Learning Mastery</MenuItem>
@@ -44,7 +45,7 @@ describe('<PopoverMenu />', () => {
       </MenuItem>
       <MenuItemSeparator />
       <MenuItem>Open grading history...</MenuItem>
-    </PopoverMenu>
+    </MenuPopover>
   )
 
   it('should render', () => {

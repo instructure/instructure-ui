@@ -3,7 +3,7 @@ describes: Popover
 ---
 
 A `<Popover/>` is a small overlay of content that contains secondary information. Most of the time
-you can use a [Tooltip](#Tooltip) or a [PopoverMenu](#PopoverMenu) component, but if you need
+you can use a [Tooltip](#Tooltip) or a [Menu](#Menu) component, but if you need
 something custom that behaves more like a dialog, use a `<Popover/>`.
 
 ```js

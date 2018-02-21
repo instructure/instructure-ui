@@ -35,7 +35,6 @@ export default MyMenu = function () {
 ### Components
 The `ui-menu` package contains the following:
 - [Menu](#Menu)
-- [PopoverMenu](#PopoverMenu)
 
 ### Contribute
 

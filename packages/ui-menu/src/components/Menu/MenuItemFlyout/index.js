@@ -36,7 +36,7 @@ import themeable from '@instructure/ui-themeable'
 
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
-import Menu from '../../Menu'
+import MenuList from '../MenuList'
 import MenuItem from '../MenuItem'
 import MenuItemSeparator from '../MenuItemSeparator'
 import MenuItemGroup from '../MenuItemGroup'
@@ -221,7 +221,7 @@ class MenuItemFlyout extends Component {
       content = (
         <ContextBox className={styles.content} withArrow={false}>
           <div className={styles.menu}>
-            <Menu
+            <MenuList
               title={title}
               controls={controls}
               labelledBy={labelledBy}
@@ -234,7 +234,7 @@ class MenuItemFlyout extends Component {
               }}
             >
               {children}
-            </Menu>
+            </MenuList>
           </div>
         </ContextBox>
       )
