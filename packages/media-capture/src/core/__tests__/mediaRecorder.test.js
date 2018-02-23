@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 import getTestMedia from 'get-test-media'
+import { tools } from 'ts-ebml'
 import MediaFile, { startMediaRecorder } from '../mediaRecorder'
 
 describe('MediaRecorder', () => {
@@ -51,18 +52,44 @@ describe('MediaRecorder', () => {
     const errorStub = sinon.stub()
     const mediaFile  = new MediaFile(getMedia().stream, 'video/webm', successStub, errorStub)
 
-    it('collects chunks of data in an array', () => {
-      mediaFile.addToChunks({ data: '1' })
-      mediaFile.addToChunks({ data: '2' })
-      mediaFile.addToChunks({ data: '3' })
-
-      expect(mediaFile.chunks.length).to.eql(3)
-      expect(mediaFile.chunks[1]).to.eql('2')
+    describe('#readAsArrayBuffer', () => {
+      const frReadAsArrayBufferSpy = sinon.spy(FileReader.prototype, 'readAsArrayBuffer')
+      it("uses FileReader's readAsArrayBuffer to make the blob consumable by ebml", () => {
+        mediaFile.readAsArrayBuffer('12345').then(() => {
+          expect(frReadAsArrayBufferSpy.calledWith('12345')).to.be.true
+        })
+      })
     })
 
-    it('invokes the success callback when stopped', () => {
-      mediaFile.onStop()
-      expect(successStub).to.have.been.called
+    const ebmlDecoderStub = sinon.stub(mediaFile.decoder, 'decode')
+    ebmlDecoderStub.returns(['elm1', 'elm2', 'elm3'])
+
+    const ebmlReaderStub = sinon.stub(mediaFile.reader, 'read')
+
+    const makeMetadataSeekableStub = sinon.stub(tools, 'makeMetadataSeekable')
+    makeMetadataSeekableStub.returns('seekableMetadatas')
+
+    const readAsArrayBufferStub = sinon.stub(mediaFile, 'readAsArrayBuffer')
+    readAsArrayBufferStub.returns(Promise.resolve([0, 1, 2, 3, 4]))
+
+    it('decodes and reads the chunks emitted by the mediaRecorder', (done) => {
+      Promise.all([
+        mediaFile.addToChunks({ data: { type: mediaFile.fileType }}),
+        mediaFile.addToChunks({ data: { type: mediaFile.fileType }}),
+        mediaFile.addToChunks({ data: { type: mediaFile.fileType }})
+      ])
+      .then(() => {
+        expect(ebmlDecoderStub.callCount).to.eql(3)
+        expect(ebmlReaderStub.callCount).to.eql(9)
+        done()
+      })
+    })
+
+    it('invokes the success callback when stopped', (done) => {
+      mediaFile.onStop().then(() => {
+        expect(successStub).to.have.been.called
+        done()
+      })
     })
 
     it('invokes the error callback with an error', () => {

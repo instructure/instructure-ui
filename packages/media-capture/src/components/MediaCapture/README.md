@@ -18,7 +18,17 @@ class Example extends React.Component {
     }
   }
 
-  onCompleted = () => { alert('Recording Completed!') }
+  onCompleted = (file) => {
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(file)
+    a.download = `${file.name}.webm`
+    a.style = { display: 'none' }
+    this.container.append(a)
+    a.click()
+    URL.revokeObjectURL(a.href)
+    a.remove()
+    this.setState({ isOpen: false })
+  }
 
   onClose = (state) => {
     this.setState({ isOpen: false }, () => {
@@ -41,7 +51,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <div>
+      <div ref={el => this.container = el}>
         <Button onClick={() => { this.setState({ isOpen: !this.state.isOpen }) }}>
           Show Media Capture Modal
         </Button>

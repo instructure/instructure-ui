@@ -42,7 +42,8 @@
     "react": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "ts-ebml": "^2.0.2"
   },
   "publishConfig": {
     "access": "public"

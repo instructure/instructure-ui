@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { Decoder, Reader, tools } from 'ts-ebml'
 
-const FILE_TYPE = 'video/webm'
+const FILE_TYPE = 'video/webm; codecs="vp8, opus"'
 
 function startMediaRecorder (stream, onMediaRecorderInit, success, error) {
   const mediaFile = new MediaFile(stream, FILE_TYPE, success, error)
@@ -36,7 +37,12 @@ class MediaFile {
     this.fileType = fileType
     this.fileSuccess = fileSuccess
     this.fileError = fileError
+
+    this.tasks = Promise.resolve()
+    this.decoder = new Decoder()
+    this.reader = new Reader()
     this.chunks = []
+
     this.mediaRecorder = new MediaRecorder(stream, { mimeType: this.fileType })
     this.mediaRecorder.ondataavailable = this.addToChunks
     this.mediaRecorder.onerror = this.onError
@@ -45,15 +51,43 @@ class MediaFile {
 
   addToChunks = (e) => {
     this.chunks.push(e.data)
+    const task = () => this.readAsArrayBuffer(e.data).then((buf) => {
+      const elms = this.decoder.decode(buf)
+      elms.forEach((elm) => { this.reader.read(elm) })
+    }).catch((e) => {
+      this.onError(e)
+    })
+
+    return this.tasks.then(() => task() )
+  }
+
+  readAsArrayBuffer = (blob) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader()
+      reader.readAsArrayBuffer(blob)
+      reader.onloadend = () => { resolve(reader.result) }
+      reader.onerror = (ev) => { reject(ev.error) }
+    })
   }
 
   onError = (e) => {
     this.fileError(e)
   }
 
-  onStop = (e) => {
-    const blob = new Blob(this.chunks, { type: this.fileType })
-    this.fileSuccess(blob)
+  onStop = () => {
+    return this.tasks.then(() => {
+      const webM = new Blob(this.chunks, { type: FILE_TYPE })
+      return this.readAsArrayBuffer(webM)
+    }).then((webMBuf) => {
+      const refinedMetadataBuf = tools.makeMetadataSeekable(
+        this.reader.metadatas, this.reader.duration, this.reader.cues
+      )
+      const body = webMBuf.slice(this.reader.metadataSize)
+      const refinedWebM = new Blob([refinedMetadataBuf, body], { type: FILE_TYPE })
+      this.fileSuccess(refinedWebM)
+    }).catch((e) => {
+      this.onError(e)
+    })
   }
 }
 

@@ -25,8 +25,7 @@ import React from 'react'
 import VideoPlayer, {
   SEEK_INTERVAL_SECONDS,
   JUMP_INTERVAL_SECONDS,
-  MEDIA_ELEMENT_EVENTS,
-  CHROME_UNSEEKABLE_BUG_TIME
+  MEDIA_ELEMENT_EVENTS
 } from '../index'
 import {
   PAUSED,
@@ -298,15 +297,6 @@ describe('<VideoPlayer />', () => {
       player.instance().applyVideoProps()
       expect(player.state('currentTime')).to.eql(0)
       expect(player.state('showControls')).to.eql(true)
-    })
-  })
-
-  describe('if the video duration is unknown (Infinity)', () => {
-    it('sets the current time to a very large number', () => {
-      mockVideo.duration = Infinity
-      const player = renderWithMockVideo()
-      player.instance().applyVideoProps()
-      expect(player.instance().video.currentTime).to.eql(CHROME_UNSEEKABLE_BUG_TIME)
     })
   })
 })

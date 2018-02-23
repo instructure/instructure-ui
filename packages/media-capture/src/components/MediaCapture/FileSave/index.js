@@ -67,24 +67,27 @@ export default class FileSave extends Component {
 
   render () {
     return (
-      <div style={{ display: 'flex', width: '100%' }}>
-        <TextInput
-          size="small"
-          label={<ScreenReaderContent>{translate('SR_FILE_INPUT')}</ScreenReaderContent>}
-          placeholder={this.props.fileName}
-          onChange={this.onChange}
-          inputRef={(e) => { this.input = e }}
-        />
-        <Button
-          onClick={this.saveClicked}
-          disabled={this.props.captureState === SAVING}
-          variant="primary"
-          size="small"
-          margin="0 0 0 x-small"
-        >
-          { translate('SAVE') }
-        </Button>
-      </div>
+      <form>
+        <div style={{ display: 'flex', width: '100%' }}>
+          <TextInput
+            size="small"
+            label={<ScreenReaderContent>{translate('SR_FILE_INPUT')}</ScreenReaderContent>}
+            placeholder={this.props.fileName}
+            onChange={this.onChange}
+            inputRef={(e) => { this.input = e }}
+          />
+          <Button
+            type="submit"
+            onClick={this.saveClicked}
+            disabled={this.props.captureState === SAVING}
+            variant="primary"
+            size="small"
+            margin="0 0 0 x-small"
+           >
+            { translate('SAVE') }
+          </Button>
+        </div>
+      </form>
     )
   }
 }
