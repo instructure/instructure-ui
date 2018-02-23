@@ -33,6 +33,7 @@ export default MyLayout = function () {
 
 ### Components
 The `ui-layout` package contains the following components:
+- [Flex](#Flex)
 - [Grid](#Grid)
 - [Layout](#Layout)
 - [Media](#Media)

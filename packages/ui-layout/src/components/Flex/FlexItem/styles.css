@@ -1,0 +1,42 @@
+.root {
+  box-sizing: border-box;
+  min-width: 0.0625rem;
+
+  /* initial value is 1, but we want 0 as our default,
+  so users can opt in to shrink like they do grow */
+  flex-shrink: 0;
+}
+
+.column {
+  /* useful defaults for column layouts */
+  width: 100%;
+  overflow-y: auto;
+}
+
+.align--start {
+  align-self: flex-start;
+}
+
+.align--end {
+  align-self: flex-end;
+}
+
+.align--center {
+  align-self: center;
+}
+
+.align--stretch {
+  align-self: stretch;
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.visualDebug {
+  outline: 0.0625rem dashed var(--debugOutlineColor);
+}
