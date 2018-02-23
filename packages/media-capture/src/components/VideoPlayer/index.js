@@ -42,7 +42,6 @@ import {
 export const SEEK_INTERVAL_SECONDS = 5
 export const JUMP_INTERVAL_SECONDS = 30
 export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate', 'seeked', 'ended']
-export const CHROME_UNSEEKABLE_BUG_TIME = 100000
 
 /**
 ---
@@ -173,10 +172,6 @@ class VideoPlayer extends Component {
   }
 
   applyVideoProps = () => {
-    if (this.video.duration === Infinity) {
-      this.video.currentTime = CHROME_UNSEEKABLE_BUG_TIME
-      return
-    }
     const buffered = this.video.buffered
 
     let state = this.video.paused ? PAUSED : PLAYING

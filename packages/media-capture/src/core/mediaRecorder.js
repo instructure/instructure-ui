@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const ebml = require('ts-ebml')
 
-const FILE_TYPE = 'video/webm'
+const FILE_TYPE = 'video/webm; codecs="vp8, opus"'
 
 function startMediaRecorder (stream, onMediaRecorderInit, success, error) {
   const mediaFile = new MediaFile(stream, FILE_TYPE, success, error)
@@ -36,7 +37,12 @@ class MediaFile {
     this.fileType = fileType
     this.fileSuccess = fileSuccess
     this.fileError = fileError
-    this.chunks = []
+
+    this.tasks = Promise.resolve()
+    this.decoder = new ebml.Decoder()
+    this.reader = new ebml.Reader()
+    this.webMFile = new Blob([], { type: 'video/webm' })
+
     this.mediaRecorder = new MediaRecorder(stream, { mimeType: this.fileType })
     this.mediaRecorder.ondataavailable = this.addToChunks
     this.mediaRecorder.onerror = this.onError
@@ -44,16 +50,37 @@ class MediaFile {
   }
 
   addToChunks = (e) => {
-    this.chunks.push(e.data)
+    this.webM = new Blob([this.webM, e.data], { type: e.data.type })
+    const task = ()=> this.readAsArrayBuffer(e.data).then((buf) => {
+      const elms = this.decoder.decode(buf)
+      elms.forEach((elm) => { this.reader.read(elm) })
+    });
+    this.tasks = this.tasks.then(()=> task() )
+  }
+
+  readAsArrayBuffer = (blob) => {
+    return new Promise((resolve, reject)=>{
+      const reader = new FileReader()
+      reader.readAsArrayBuffer(blob)
+      reader.onloadend = ()=>{ resolve(reader.result) }
+      reader.onerror = (ev)=>{ reject(ev.error) }
+    })
   }
 
   onError = (e) => {
     this.fileError(e)
   }
 
-  onStop = (e) => {
-    const blob = new Blob(this.chunks, { type: this.fileType })
-    this.fileSuccess(blob)
+  onStop = () => {
+    const refinedMetadataBuf = ebml.tools.makeMetadataSeekable(
+      this.reader.metadatas, this.reader.duration, this.reader.cues
+    )
+
+    this.readAsArrayBuffer(this.webM).then((webMBuf) => {
+      const body = webMBuf.slice(this.reader.metadataSize)
+      const refinedWebM = new Blob([refinedMetadataBuf, body], { type: this.webM.type })
+      this.fileSuccess(refinedWebM)
+    })
   }
 }
 

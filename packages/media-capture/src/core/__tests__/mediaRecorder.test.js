@@ -46,7 +46,7 @@ describe('MediaRecorder', () => {
     expect(onInitSpy).to.have.been.called
   })
 
-  describe('MediaFile', () => {
+  describe.skip('MediaFile', () => {
     const successStub = sinon.stub()
     const errorStub = sinon.stub()
     const mediaFile  = new MediaFile(getMedia().stream, 'video/webm', successStub, errorStub)
