@@ -35,6 +35,7 @@ import uid from '@instructure/ui-utils/lib/uid'
 import styles from './styles.css'
 import theme from './theme'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormField from '../FormField'
 
 /**
@@ -54,7 +55,7 @@ class TextInput extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     textAlign: PropTypes.oneOf(['start', 'center']),

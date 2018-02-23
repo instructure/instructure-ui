@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
@@ -52,7 +52,7 @@ export default class TabPanel extends Component {
     labelledBy: PropTypes.string,
     selected: PropTypes.bool,
     disabled: PropTypes.bool,
-    padding: CustomPropTypes.spacing,
+    padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     tabRef: PropTypes.func
   }

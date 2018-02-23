@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
@@ -40,6 +40,7 @@ import FormField from '../../FormField'
 
 import SelectOptionsList from '../SelectOptionsList'
 import getOptionId from '../utils/getOptionId'
+import FormPropTypes from '../../../utils/FormPropTypes'
 import IconArrowDown from './IconArrowDown'
 
 
@@ -83,9 +84,9 @@ class SelectField extends Component {
     /**
      * The placement of the menu in relation to the input, passed down to Position
      */
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
     label: PropTypes.node.isRequired,
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     /**

@@ -43,6 +43,7 @@ import Numeral from '@instructure/ui-i18n/lib/Numeral'
 import styles from './styles.css'
 import theme from './theme'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormField from '../FormField'
 
 const keyDirections = {
@@ -124,7 +125,7 @@ class NumberInput extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
       A standard language id
     **/

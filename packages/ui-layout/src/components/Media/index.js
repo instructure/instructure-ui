@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Container from '@instructure/ui-container/lib/components/Container'
@@ -65,7 +65,7 @@ class Media extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large'])
   }
 

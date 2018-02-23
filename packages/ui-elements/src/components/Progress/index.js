@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 import ProgressBar from './ProgressBar'
 import ProgressCircle from './ProgressCircle'
@@ -79,7 +79,7 @@ class Progress extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {

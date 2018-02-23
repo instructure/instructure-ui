@@ -25,9 +25,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldLayout from './FormFieldLayout'
 
 /**
@@ -48,7 +48,7 @@ class FormField extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     messagesId: PropTypes.string,
     children: PropTypes.node,
     inline: PropTypes.bool,

@@ -28,7 +28,8 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import uid from '@instructure/ui-utils/lib/uid'
 
@@ -71,13 +72,13 @@ class Badge extends Component {
     * Supported values are `top start`, `top end`, `end center`, `bottom end`,
     * `bottom start`, and `start center`
     */
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     formatOverflowText: PropTypes.func,
     formatOutput: PropTypes.func
   }

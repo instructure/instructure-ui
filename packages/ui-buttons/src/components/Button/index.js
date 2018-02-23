@@ -30,6 +30,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -85,7 +86,7 @@ class Button extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {

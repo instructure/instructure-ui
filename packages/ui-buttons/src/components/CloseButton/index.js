@@ -30,7 +30,7 @@ import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import Button from '../Button'
@@ -50,7 +50,7 @@ class CloseButton extends Component {
     buttonRef: PropTypes.func,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     onClick: PropTypes.func,
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     placement: PropTypes.oneOf(['start', 'end', 'static']),
     offset: PropTypes.oneOf(['none', 'x-small', 'small', 'medium']),
     variant: PropTypes.oneOf(['icon', 'icon-inverse'])

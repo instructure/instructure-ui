@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 import uid from '@instructure/ui-utils/lib/uid'
@@ -57,7 +58,7 @@ export default class Tooltip extends Component {
       PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
     ]),
     variant: PropTypes.oneOf(['default', 'inverse']),
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
     size: PropTypes.oneOf(['small', 'medium', 'large'])
   }
 

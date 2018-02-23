@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
@@ -75,7 +75,7 @@ class Table extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     /**
     * @deprecated
     */

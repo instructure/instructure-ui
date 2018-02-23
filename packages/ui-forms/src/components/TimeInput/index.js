@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
@@ -52,7 +53,7 @@ class TimeInput extends Component {
     /**
      * An ISO 8601 formatted date string to use if `value` isn't provided.
      */
-    defaultValue: CustomPropTypes.iso8601,
+    defaultValue: I18nPropTypes.iso8601,
     /**
      * The format to use when displaying the possible and currently selected options.
      *
@@ -100,7 +101,7 @@ class TimeInput extends Component {
      * An ISO 8601 formatted date string representing the current selected value
      * (must be accompanied by an onChange prop).
      */
-    value: CustomPropTypes.controllable(CustomPropTypes.iso8601),
+    value: CustomPropTypes.controllable(I18nPropTypes.iso8601),
     disabled: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */

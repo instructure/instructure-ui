@@ -31,6 +31,9 @@ import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import warning from '@instructure/ui-utils/lib/warning'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import FormPropTypes from '@instructure/ui-forms/lib/utils/FormPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
@@ -68,7 +71,7 @@ export default class DateInput extends Component {
     /**
      * Where the calendar popover should be placed.
      */
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
     /**
       This display to show in the input when a date is selected.
       Valid formats are compatible with
@@ -82,7 +85,7 @@ export default class DateInput extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
       A standard language id
     **/
@@ -96,7 +99,7 @@ export default class DateInput extends Component {
       An ISO 8601 formatted string. The initial date value to display on render.
       It should only be used when using this component as an uncontrolled input.
     **/
-    defaultDateValue: CustomPropTypes.iso8601,
+    defaultDateValue: I18nPropTypes.iso8601,
 
     /**
       Called when the date value of the input has changed.
@@ -108,7 +111,7 @@ export default class DateInput extends Component {
     /**
     * the selected value (must be accompanied by an `onDateChange` prop)
     */
-    dateValue: CustomPropTypes.controllable(CustomPropTypes.iso8601, 'onDateChange', 'defaultDateValue'),
+    dateValue: CustomPropTypes.controllable(I18nPropTypes.iso8601, 'onDateChange', 'defaultDateValue'),
 
     /**
       Whether to display validation feedback while typing.
@@ -122,7 +125,7 @@ export default class DateInput extends Component {
     /**
       An ISO 8601 formatted string. Defaults to the current date.
     **/
-    todayValue: CustomPropTypes.iso8601,
+    todayValue: I18nPropTypes.iso8601,
 
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),

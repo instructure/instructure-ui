@@ -40,7 +40,7 @@ import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import uid from '@instructure/ui-utils/lib/uid'
@@ -76,7 +76,7 @@ export default class Alert extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     /**
     * Function that returns the DIV where screenreader alerts will be placed.
     */
@@ -353,5 +353,3 @@ export default class Alert extends Component {
     )
   }
 }
-
-

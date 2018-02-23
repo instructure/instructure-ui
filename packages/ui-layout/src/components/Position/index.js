@@ -38,6 +38,7 @@ import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import calculateElementPosition from '../../utils/calculateElementPosition'
+import LayoutPropTypes from '../../utils/LayoutPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -50,7 +51,7 @@ class PositionContent extends ComponentIdentifier {
   static displayName = 'PositionContent'
   static propTypes = {
     children: PropTypes.node,
-    placement: CustomPropTypes.placement
+    placement: LayoutPropTypes.placement
   }
 }
 
@@ -83,7 +84,7 @@ class Position extends Component {
     /**
      * The placement of the content in relation to the trigger
      */
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
 
     /**
      * The horizontal offset for the positioned content

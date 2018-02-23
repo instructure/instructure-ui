@@ -31,6 +31,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import Checkbox from '../Checkbox'
 import FormFieldGroup from '../FormFieldGroup'
 
@@ -63,7 +64,7 @@ export default class CheckboxGroup extends Component {
     type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
       }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
     * children of type `Checkbox`
     */

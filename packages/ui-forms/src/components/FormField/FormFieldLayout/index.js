@@ -41,6 +41,7 @@ import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildre
 
 import FormFieldLabel from '../FormFieldLabel'
 import FormFieldMessages from '../FormFieldMessages'
+import FormPropTypes from '../../../utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -68,7 +69,7 @@ class FormFieldLayout extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
     * id for the form field messages
     */

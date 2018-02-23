@@ -40,6 +40,7 @@ import uid from '@instructure/ui-utils/lib/uid'
 import styles from './styles.css'
 import theme from './theme'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormField from '../FormField'
 
 /**
@@ -80,7 +81,7 @@ class TextArea extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     inline: PropTypes.bool,
     /**
     * Html placeholder text to display when the input has no value. This should be hint text, not a label

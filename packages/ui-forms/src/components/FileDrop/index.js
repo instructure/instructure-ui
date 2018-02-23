@@ -28,10 +28,10 @@ import classnames from 'classnames'
 
 import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import uid from '@instructure/ui-utils/lib/uid'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldMessages from '../FormField/FormFieldMessages'
 
 import styles from './styles.css'
@@ -124,7 +124,7 @@ export default class FileDrop extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
     * callback called when dropping files or when the file dialog window exits successfully
     */

@@ -32,6 +32,7 @@ import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveE
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import uid from '@instructure/ui-utils/lib/uid'
 import warning from '@instructure/ui-utils/lib/warning'
 
@@ -69,7 +70,7 @@ class Pages extends Component {
     /**
     * Set the margin using familiar CSS shorthand
     */
-    margin: CustomPropTypes.spacing
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {

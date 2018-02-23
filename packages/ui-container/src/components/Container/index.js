@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -51,11 +52,11 @@ class Container extends Component {
     /**
     * Set the margin using familiar CSS shorthand
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     /**
     * Set the padding using familiar CSS shorthand
     */
-    padding: CustomPropTypes.spacing,
+    padding: ThemeablePropTypes.spacing,
     /**
     * By default the Container's display prop is null, meaning it takes on the
     * display rules of the html element it's rendered as.

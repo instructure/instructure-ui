@@ -35,6 +35,7 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import uid from '@instructure/ui-utils/lib/uid'
 
 import FormField from '../FormField'
+import FormPropTypes from '../../utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -61,7 +62,7 @@ class RangeInput extends Component {
     * when used with the `value` prop, the component will not control its own state
     */
     onChange: PropTypes.func,
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     id: PropTypes.string,

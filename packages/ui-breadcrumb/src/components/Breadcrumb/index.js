@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import BreadcrumbLink from './BreadcrumbLink'
@@ -62,7 +63,7 @@ export default class Breadcrumb extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing
+    margin: ThemeablePropTypes.spacing
   }
 
   static defaultProps = {

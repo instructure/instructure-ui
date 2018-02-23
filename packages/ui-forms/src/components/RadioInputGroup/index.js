@@ -33,6 +33,7 @@ import uid from '@instructure/ui-utils/lib/uid'
 
 import RadioInput from '../RadioInput'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldGroup from '../FormFieldGroup'
 
 /**
@@ -71,7 +72,7 @@ export default class RadioInputGroup extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
     * children of type `RadioInput`
     */

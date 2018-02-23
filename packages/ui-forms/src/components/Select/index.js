@@ -27,8 +27,10 @@ import PropTypes from 'prop-types'
 import deepEqual from 'deep-equal'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
+import FormPropTypes from '../../utils/FormPropTypes'
 import SelectSingle from './SelectSingle'
 import SelectMultiple from './SelectMultiple'
 import parseOptions from './utils/parseOptions'
@@ -129,8 +131,8 @@ class Select extends Component {
     /**
      * The placement of the content in relation to the trigger, passed down to Position
      */
-    placement: CustomPropTypes.placement,
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    placement: LayoutPropTypes.placement,
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     /**

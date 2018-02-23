@@ -1,0 +1,65 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
+
+/**
+ * ---
+ * category: utilities/react
+ * ---
+ * Custom I18n prop types for React components.
+ * @module I18nPropTypes
+ */
+export default {
+  /**
+   *
+   * Verify that the given prop is a correctly formatted ISO 8601 formatted string.
+   *
+   * @param {Object} props - object containing the component props
+   * @param {string} propName - name of the given prop
+   * @param {string} componentName - name of the component
+   * @param {string} location
+   * @param {string} propFullName
+   * @returns {Error} if prop is an invalid ISO 8601 string
+   */
+  iso8601 (props, propName, componentName, location) {
+    const propValue = props[propName]
+    if (propValue === undefined) return
+
+    const propValueType = typeof propValue
+    if (typeof propValueType !== 'string') {
+      return new Error(
+        `Invalid ${location} \`${propName}\` of type \`${propValueType}\` supplied to \`${componentName}\`, expected ` +
+          `an ISO 8601 formatted string.`
+      )
+    }
+
+    if (!DateTime.isValid(propValue)) {
+      return new Error(
+        `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
+          `an ISO 8601 formatted string.`
+      )
+    }
+  }
+}

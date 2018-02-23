@@ -22,15 +22,16 @@
  * SOFTWARE.
  */
 
+import PropTypes from 'prop-types'
+import jsonToMediaQuery from './jsonToMediaQuery'
+
 /**
  * ---
  * category: utilities/layout
  * ---
  * Custom prop types for `ui-layout` components.
- * @module CustomPropTypes
+ * @module LayoutPropTypes
  */
-import jsonToMediaQuery from './jsonToMediaQuery'
-
 export default {
   /**
    * Verify that the given prop is a properly formatted query object
@@ -67,5 +68,31 @@ export default {
         `Invalid query prop supplied to \`${componentName}\`. ${e.message}`
       )
     }
-  }
+  },
+
+  placement: PropTypes.oneOf([
+    'top',
+    'end',
+    'bottom',
+    'start',
+    'top start',
+    'start top',
+    'start center',
+    'start bottom',
+    'bottom start',
+    'bottom center',
+    'bottom end',
+    'end bottom',
+    'end center',
+    'end top',
+    'top end',
+    'top center',
+    'center end',
+    'center start',
+    'top stretch',
+    'bottom stretch',
+    'end stretch',
+    'start stretch',
+    'offscreen'
+  ])
 }

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -52,7 +52,7 @@ export default class Page extends Component {
     /**
     * Set the padding using familiar CSS shorthand
     */
-    padding: CustomPropTypes.spacing,
+    padding: ThemeablePropTypes.spacing,
 
     textAlign: PropTypes.oneOf(['start', 'center', 'end'])
   }

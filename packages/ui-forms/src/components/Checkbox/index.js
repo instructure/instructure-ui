@@ -35,6 +35,7 @@ import themeable from '@instructure/ui-themeable'
 import uid from '@instructure/ui-utils/lib/uid'
 
 import { FormFieldMessages } from '../FormField'
+import FormPropTypes from '../../utils/FormPropTypes'
 
 import CheckboxFacade from './CheckboxFacade'
 import ToggleFacade from './ToggleFacade'
@@ -63,7 +64,7 @@ class Checkbox extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /* whether to set the input to checked or not on initial render */
     defaultChecked: PropTypes.bool,
     /**

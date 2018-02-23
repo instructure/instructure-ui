@@ -32,6 +32,7 @@ import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import { FormFieldLayout } from '../FormField'
+import FormPropTypes from '../../utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -55,7 +56,7 @@ export default class FormFieldGroup extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     /**
     * id for the form field messages
     */

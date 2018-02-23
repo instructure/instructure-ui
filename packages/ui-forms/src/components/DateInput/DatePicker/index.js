@@ -28,6 +28,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import themeable from '@instructure/ui-themeable'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
@@ -60,31 +61,31 @@ export default class DatePicker extends Component {
     /**
       An ISO 8601 formatted string. The selected value on initial render.
     **/
-    defaultSelectedValue: CustomPropTypes.iso8601,
+    defaultSelectedValue: I18nPropTypes.iso8601,
     /**
       An ISO 8601 formatted string. Must be accompanied by an onSelectedChange property.
       Defaults to today's date.
     **/
-    selectedValue: CustomPropTypes.controllable(CustomPropTypes.iso8601,
+    selectedValue: CustomPropTypes.controllable(I18nPropTypes.iso8601,
       'onSelectedChange', 'defaultSelectedValue'),
 
     /**
       An ISO 8601 formatted string. The rendered value on initial render.
     **/
-    defaultRenderedValue: CustomPropTypes.iso8601,
+    defaultRenderedValue: I18nPropTypes.iso8601,
 
     /**
       An ISO 8601 formatted string. Must be accompanied by an onRenderedChange property.
       Defaults to today's date.
     **/
-    renderedValue: CustomPropTypes.controllable(CustomPropTypes.iso8601,
+    renderedValue: CustomPropTypes.controllable(I18nPropTypes.iso8601,
       'onRenderedChange', 'defaultRenderedValue'),
 
     /**
       An ISO 8601 formatted string. Defaults to the current date. DatePicker doesn't
       attempt to change this value. Defaults to today's date.
     **/
-    todayValue: CustomPropTypes.iso8601,
+    todayValue: I18nPropTypes.iso8601,
 
     /**
       A standard language id

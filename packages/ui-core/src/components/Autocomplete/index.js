@@ -26,13 +26,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
-// TODO: prevent/lint for imports like this after we remove ui-core
-import SelectSingle from '../../../../ui-forms/lib/components/Select/SelectSingle'
-import SelectMultiple from '../../../../ui-forms/lib/components/Select/SelectMultiple'
+import SelectSingle from '@instructure/ui-forms/lib/components/Select/SelectSingle'
+import SelectMultiple from '@instructure/ui-forms/lib/components/Select/SelectMultiple'
+import FormPropTypes from '@instructure/ui-forms/lib/utils/FormPropTypes'
 import parseOptions from './utils/parseOptions'
 
 @deprecated('5.0.0', null, 'Use @instructure/ui-forms/src/components/Select instead')
@@ -115,8 +117,8 @@ class Autocomplete extends Component {
     /**
      * The placement of the content in relation to the trigger, passed down to Position
      */
-    placement: CustomPropTypes.placement,
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    placement: LayoutPropTypes.placement,
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     /**

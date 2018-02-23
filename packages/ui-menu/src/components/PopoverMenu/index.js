@@ -29,6 +29,7 @@ import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlay
 
 import uid from '@instructure/ui-utils/lib/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -60,7 +61,7 @@ export default class PopoverMenu extends Component {
     */
     trigger: PropTypes.node.isRequired,
 
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
 
     /**
     * children of type `MenuItem`, `MenuItemGroup`, or `MenuItemSeparator`

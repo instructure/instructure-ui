@@ -36,6 +36,7 @@ import uid from '@instructure/ui-utils/lib/uid'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 import FormField from '@instructure/ui-forms/lib/components/FormField'
+import FormPropTypes from '@instructure/ui-forms/lib/utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -59,7 +60,7 @@ class Select extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     id: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),

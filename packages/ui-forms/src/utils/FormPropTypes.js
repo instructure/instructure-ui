@@ -24,35 +24,16 @@
 
 import PropTypes from 'prop-types'
 
-import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
-import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-import Position from '@instructure/ui-layout/lib/components/Position'
-
-export default deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-layout'
-))(Position)
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-layout'
-))
-class PositionTarget extends ComponentIdentifier {
-  static displayName = 'PositionTarget'
+/**
+ * ---
+ * category: utilities/form
+ * ---
+ * Custom prop types for React components.
+ * @module FormPropTypes
+ */
+export default {
+  message: PropTypes.shape({
+    text: PropTypes.string,
+    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
+  })
 }
-
-@deprecated('5.0.0', null, changedPackageWarning(
-  'ui-core',
-  'ui-layout'
-))
-class PositionContent extends ComponentIdentifier {
-  static displayName = 'PositionContent'
-  static propTypes = {
-    children: PropTypes.node,
-    placement: LayoutPropTypes.placement
-  }
-}
-
-export { PositionTarget, PositionContent }

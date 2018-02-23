@@ -28,7 +28,8 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -59,7 +60,7 @@ export default class ContextBox extends Component {
     arrowOffsetTop: PropTypes.oneOfType([
       PropTypes.number, PropTypes.string
     ]),
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
     positionStart: PropTypes.oneOfType([
       PropTypes.number, PropTypes.string
     ]),
@@ -71,13 +72,13 @@ export default class ContextBox extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: CustomPropTypes.spacing,
+    margin: ThemeablePropTypes.spacing,
     /**
     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
     */
-    padding: CustomPropTypes.spacing,
+    padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
     * Component will expand to fit the width of its contents by default,

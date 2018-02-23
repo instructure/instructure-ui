@@ -31,6 +31,7 @@ import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -77,7 +78,7 @@ class Popover extends Component {
     /**
      * The placement of the content in relation to the trigger
      */
-    placement: CustomPropTypes.placement,
+    placement: LayoutPropTypes.placement,
 
     /**
      * The action that causes the Content to display (`click`, `hover`, `focus`)
