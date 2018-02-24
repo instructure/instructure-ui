@@ -72,6 +72,8 @@ Installation steps:
 1. Run `yarn`
 1. Run `yarn bootstrap`
 
+Run `yarn run` to list the available commands.
+
 
 ### Usage
 
@@ -85,8 +87,6 @@ Installation steps:
 1. Run `yarn start:watch` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should
 see the page auto-reload.
 1. Run `yarn test:watch --scope [package name]` to run the tests for 'package name' and watch for changes.
-
-Run `yarn run` to list the available commands.
 
 
 ### Updating build dependencies

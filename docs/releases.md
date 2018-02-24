@@ -1,6 +1,6 @@
 ---
 title: Releases
-category: guides
+category: Contributing
 order: 5
 ---
 

@@ -4,7 +4,7 @@ describes: ${COMPONENT}
 
 A `${COMPONENT}` component [WIP]
 
-```js
+```javascript
 ---
 example: true
 ---

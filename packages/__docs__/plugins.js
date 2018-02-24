@@ -65,6 +65,7 @@ plugins = plugins.concat([
       'packages/ui-utils/src/**/*.js'
     ],
     ignore: [
+      '**/templates/**',
       '**/node_modules/**',
       '**/__svg__/**',
       '**/__testfixtures__/**',

@@ -1,9 +1,9 @@
 ---
-title: Testing Components
-category: guides
+title: Testing
+category: Contributing
 ---
 
-## Testing Components
+## Testing
 
 ### The TL;DR on writing tests:
 
