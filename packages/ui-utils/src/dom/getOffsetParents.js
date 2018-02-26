@@ -34,7 +34,8 @@ import ownerDocument from './ownerDocument'
  *
  * Retrieves the offset parents of a specified element.
  * Includes parents of nodeType 1 (Element nodes such
- * as <p> or <div>) that do not have static position.
+ * as <p> or <div>) that have either been transformed
+ * or that do not have static position.
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Array} offset parents
@@ -58,9 +59,11 @@ export default function getOffsetParents (el) {
                         style.getPropertyValue("-moz-transform") ||
                         style.getPropertyValue("-ms-transform") ||
                         style.getPropertyValue("-o-transform") ||
-                        style.getPropertyValue("transform") || null
+                        style.getPropertyValue("transform") || 'none'
+      // initial value of transform can be 'none' or a matrix equivalent
+      const transformDefault = transform === 'none' || transform === 'matrix(1, 0, 0, 1, 0, 0)' ? true : false
 
-      if (style.position !== 'static' || (transform && transform !== 'none')) {
+      if (style.position !== 'static' || !transformDefault) {
         parents.push(parent)
       }
     }
