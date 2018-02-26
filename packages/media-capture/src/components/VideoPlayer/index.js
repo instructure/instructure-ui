@@ -97,6 +97,8 @@ class VideoPlayer extends Component {
     MEDIA_ELEMENT_EVENTS.forEach((evt) => {
       this.video.removeEventListener(evt, this.applyVideoProps)
     })
+    // remove the video ref and stop applying video props
+    this.video = null;
   }
 
   _registerEventHandlers () {
@@ -173,6 +175,10 @@ class VideoPlayer extends Component {
   }
 
   applyVideoProps = () => {
+    if (!this.video) {
+      return
+    }
+
     if (this.video.duration === Infinity) {
       this.video.currentTime = CHROME_UNSEEKABLE_BUG_TIME
       return

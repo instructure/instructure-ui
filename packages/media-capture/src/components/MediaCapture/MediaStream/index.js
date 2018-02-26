@@ -101,7 +101,7 @@ class MediaStream extends Component {
 
     if (this.props.captureState === READY) {
       if (this.deviceChanged(prevProps.audioDeviceId, prevProps.videoDeviceId)) {
-        this.props.actions.cleanUp()
+        this.cleanUp()
         this.stopTracks()
         getUserMedia(
           this.props.audioDeviceId,
@@ -123,8 +123,14 @@ class MediaStream extends Component {
   }
 
   componentWillUnmount () {
-    this.props.actions.cleanUp()
+    this.cleanUp()
     this.stopTracks()
+  }
+
+  cleanUp () {
+    if (typeof this.props.actions.cleanUp === 'function') {
+      this.props.actions.cleanUp()
+    }
   }
 
   stopTracks () {
@@ -167,7 +173,9 @@ class MediaStream extends Component {
   error = (err) => {
     if (err) {
       const key = ERRORS[err.name] ? err.name : 'default'
-      this.props.actions.errorOccurred(ERRORS[key])
+      if (typeof this.props.actions.errorOccurred === 'function') {
+        this.props.actions.errorOccurred(ERRORS[key])
+      }
     }
   }
 

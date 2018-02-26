@@ -32,10 +32,10 @@ import {
   PAUSED,
   PLAYING
 } from '../videoStates'
+import testVideo from './fixtures/testVideo'
 
 describe('<VideoPlayer />', () => {
-  const src = 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
-  const testbed = new Testbed(<VideoPlayer src={src} />)
+  const testbed = new Testbed(<VideoPlayer src={testVideo} />)
   let mockVideo
 
   beforeEach(() => {
@@ -108,7 +108,7 @@ describe('<VideoPlayer />', () => {
     it('adds event listeners on the video element', () => {
       const player = renderWithMockVideo()
       const listenerCb = player.instance().applyVideoProps
-      mockVideo.addEventListener.reset()
+      mockVideo.addEventListener.resetHistory()
       player.instance()._registerEventHandlers()
 
       MEDIA_ELEMENT_EVENTS.forEach((evt) => {
@@ -198,7 +198,7 @@ describe('<VideoPlayer />', () => {
       const player = renderWithMockVideo()
       player.instance().showControls = testbed.stub()
       return ['ArrowRight', 'ArrowLeft', 'PageUp', 'PageDown', ' '].forEach((key) => {
-        player.instance().showControls.reset()
+        player.instance().showControls.resetHistory()
         keyboardEvent(player, key)
         expect(player.instance().showControls).to.have.been.called
       })
