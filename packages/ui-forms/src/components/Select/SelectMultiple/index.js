@@ -244,7 +244,7 @@ class SelectMultiple extends Component {
     }
     return {
       filterText: '',
-      filteredOptions: this.getFilteredOptions(props, '')
+      filteredOptions: this.getFilteredOptions(props, '', prevState.selectedOption)
     }
   }, this.props.onClose)
 

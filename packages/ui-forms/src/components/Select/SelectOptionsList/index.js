@@ -138,6 +138,9 @@ class SelectOptionsList extends Component {
     return (
       <li // eslint-disable-line
         tabIndex="-1"
+        role="option"
+        aria-disabled="true"
+        aria-selected="false"
         className={classnames(styles.option, {
           [styles[size]]: size
         })}
@@ -213,7 +216,6 @@ class SelectOptionsList extends Component {
           })}
           tabIndex="-1"
           aria-selected={index === highlightedIndex ? 'true' : 'false'}
-          disabled={disabled || groupLabel}
           aria-disabled={disabled || groupLabel ? 'true' : null}
         >
           <span className={styles.label}>
