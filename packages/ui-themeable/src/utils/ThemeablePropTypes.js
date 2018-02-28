@@ -32,6 +32,12 @@ import PropTypes from 'prop-types'
  * @module ThemeablePropTypes
  */
 export default {
+  shadow: PropTypes.oneOf([1, 2, 3]),
+
+  border: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
+
+  background: PropTypes.oneOf(['default', 'inverse', 'transparent']),
+
   size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
 
   /**
@@ -69,21 +75,23 @@ export default {
    * @param {string} propFullName
    * @returns {Error} if is not one of the enumerated values or the shorthand syntax is incorrect
    */
-  spacing (props, propName, componentName, location) {
-    const validValues = [
-      '0',
-      'none',
-      'auto',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]
+  spacing: shorthandPropType([
+    '0',
+    'none',
+    'auto',
+    'xxx-small',
+    'xx-small',
+    'x-small',
+    'small',
+    'medium',
+    'large',
+    'x-large',
+    'xx-large'
+  ])
+}
 
+export function shorthandPropType(validValues) {
+  return function (props, propName, componentName, location) {
     const propValue = props[propName]
 
     if (propValue === undefined) {
