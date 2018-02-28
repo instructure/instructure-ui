@@ -35,7 +35,7 @@ import Browser from '@instructure/ui-utils/lib/Browser'
 export default function customPropertiesSupported () {
   return (
     canUseDOM &&
-    !(Browser.msedge && Browser.version < 16) && // polyfill edge 15 until improved css variable support
+    !(Browser.msedge) && // polyfill edge until improved css variable support
     window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
   )
 }
