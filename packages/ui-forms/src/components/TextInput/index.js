@@ -175,6 +175,14 @@ class TextInput extends Component {
 
     const style = width ? { width } : null
 
+    let descriptionIds = ''
+    if (props['aria-describedby']) {
+      descriptionIds = `${props['aria-describedby'] }`
+    }
+    if (this.hasMessages) {
+      descriptionIds += this._messagesId
+    }
+
     return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
@@ -197,7 +205,7 @@ class TextInput extends Component {
             disabled={disabled}
             aria-disabled={disabled ? 'true' : null}
             className={classnames(classes)}
-            aria-describedby={this.hasMessages ? this._messagesId : null}
+            aria-describedby={descriptionIds !== '' ? descriptionIds : null}
           />
           {this.renderIcon()}
         </span>
