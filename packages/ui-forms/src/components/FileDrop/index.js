@@ -369,7 +369,7 @@ export default class FileDrop extends Component {
     const { allowMultiple } = this.props
     const id = this.props.id || this.defaultId
     const classes = {
-      [styles.root]: true,
+      [styles.label]: true,
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted,
       [styles.focused]: this.state.focused
@@ -377,7 +377,7 @@ export default class FileDrop extends Component {
     const props = omitProps(this.props, FileDrop.propTypes)
 
     return (
-      <div>
+      <div className={styles.root}>
         <label
           className={classnames(classes)}
           htmlFor={id}
@@ -386,7 +386,7 @@ export default class FileDrop extends Component {
           onDragLeave={this.handleDragLeave}
           onDrop={this.handleDrop}
         >
-          <span className={styles.label}>
+          <span className={styles.labelContent}>
             <span className={styles.layout}>
               {this.renderLabel()}
             </span>

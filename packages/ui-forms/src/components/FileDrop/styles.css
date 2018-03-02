@@ -1,6 +1,9 @@
 /* stylelint-disable selector-max-class */
-
 .root {
+  position: relative;
+}
+
+.label {
   display: block;
   box-sizing: border-box;
   position: relative;
@@ -17,7 +20,7 @@
   border: 0;
 }
 
-.label {
+.labelContent {
   display: block;
   box-sizing: border-box;
   position: relative;
@@ -55,31 +58,31 @@
 }
 
 .focused {
-  .label::before {
+  .labelContent::before {
     opacity: 1;
     transform: scale(1);
   }
 }
 
 .dragAccepted {
-  .label {
+  .labelContent {
     border-color: var(--acceptedColor);
   }
 
   &.focused {
-    .label::before {
+    .labelContent::before {
       border-color: var(--acceptedColor);
     }
   }
 }
 
 .dragRejected {
-  .label {
+  .labelContent {
     border-color: var(--rejectedColor);
   }
 
   &.focused {
-    .label::before {
+    .labelContent::before {
       border-color: var(--rejectedColor);
     }
   }
