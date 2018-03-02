@@ -3,6 +3,7 @@
   font-family: var(--fontFamily);
   line-height: var(--lineHeight);
   color: var(--color);
+  background: var(--background);
   padding: 0;
 }
 

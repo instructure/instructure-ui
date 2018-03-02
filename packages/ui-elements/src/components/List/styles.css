@@ -2,6 +2,8 @@
   font-weight: var(--fontWeight);
   font-family: var(--fontFamily);
   padding: 0;
+  background: var(--background);
+  color: var(--color);
 }
 
 .default {
