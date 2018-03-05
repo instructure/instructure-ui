@@ -1,13 +1,13 @@
 ---
-describes: Layout
+describes: DrawerLayout
 ---
 
-The `<Layout />` component creates a layout consisting of both `<LayoutTray />` and `<LayoutContent />`.
+The `<DrawerLayout />` component creates a layout consisting of both `<DrawerTray />` and `<DrawerContent />`.
 The tray can be placed at the `start` or `end` position. When there is sufficient space available, 
-the tray is positioned alongside the content. As the screen gets smaller, the `<LayoutTray />` can 
-be configured to overlay the `<LayoutContent />`
+the tray is positioned alongside the content. As the screen gets smaller, the `<DrawerTray />` can 
+be configured to overlay the `<DrawerContent />`
 
-The `minWidth` prop specifies a breakpoint. When the `<LayoutContent />` resizes such that the width is
+The `minWidth` prop specifies a breakpoint. When the `<DrawerContent />` resizes such that the width is
 less than the designated `minWidth`, the tray overlays the content
 
 ```js
@@ -26,9 +26,9 @@ class Example extends React.Component {
   render () {
     return (
       <div style={{height: '25rem'}}>
-        <Layout>
-          <LayoutTray
-            label="Layout Tray Start Example"
+        <DrawerLayout>
+          <DrawerTray
+            label="Drawer Tray Start Example"
             closeButtonLabel="Close"
             open={this.state.open}
             placement="start"
@@ -47,14 +47,11 @@ class Example extends React.Component {
                 Hello from start tray with a small amount of placeholder content
               </Text>
             </Container>
-          </LayoutTray>
-          <LayoutContent label="Layout content example">
-            <div
-              id="layoutContentExample1"
-              style={{background: 'white', height: '100%'}}
-            >
+          </DrawerTray>
+          <DrawerContent label="Drawer content example">
+            <div style={{background: 'white', height: '100%'}}>
               <Container as="div" padding="x-large">
-                <Heading border="bottom">A simple layout</Heading>
+                <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
                   <GridRow>
                     <GridCol>
@@ -76,8 +73,8 @@ class Example extends React.Component {
                 </Text>
               </Container>
             </div>
-          </LayoutContent>
-        </Layout>
+          </DrawerContent>
+        </DrawerLayout>
       </div>
     )
   }
@@ -86,7 +83,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-Multiple `<Layout />` components can be nested in order to place trays on both sides
+Multiple `<DrawerLayout />` components can be nested in order to place trays on both sides
 
 
 ```js
@@ -106,9 +103,9 @@ class Example extends React.Component {
   render () {
     return (
       <div style={{height: '40rem'}}>
-        <Layout>
-          <LayoutTray
-            label="Layout Tray End Example"
+        <DrawerLayout>
+          <DrawerTray
+            label="Drawer Tray End Example"
             closeButtonLabel="Close"
             open={this.state.endOpen}
             placement="end"
@@ -125,10 +122,10 @@ class Example extends React.Component {
                 Hello from end tray with a good amount of content as well
               </Text>
             </Container>
-          </LayoutTray>
-          <LayoutContent label="Layout content example containing another layout">
-            <Layout>
-              <LayoutTray
+          </DrawerTray>
+          <DrawerContent label="Drawer content example containing another layout">
+            <DrawerLayout>
+              <DrawerTray
                 label="Layout Tray Start Example"
                 closeButtonLabel="Close"
                 open={this.state.startOpen}
@@ -147,14 +144,11 @@ class Example extends React.Component {
                     Hello from start tray with a small amount of placeholder content
                   </Text>
                 </Container>
-              </LayoutTray>
-              <LayoutContent label="Layout content example containing a responsive ">
-                <div
-                  id="layoutContentExample"
-                  style={{background: 'white', height: '100%'}}
-                >
+              </DrawerTray>
+              <DrawerContent label="Drawer content example containing a responsive ">
+                <div style={{background: 'white', height: '100%'}}>
                   <Container as="div" padding="x-large">
-                    <Heading border="bottom">A nested layout</Heading>
+                    <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
                       <GridRow>
                         <GridCol>
@@ -196,10 +190,10 @@ class Example extends React.Component {
                     </Text>
                   </Container>
                 </div>
-              </LayoutContent>
-            </Layout>
-          </LayoutContent>
-        </Layout>
+              </DrawerContent>
+            </DrawerLayout>
+          </DrawerContent>
+        </DrawerLayout>
       </div>
     )
   }

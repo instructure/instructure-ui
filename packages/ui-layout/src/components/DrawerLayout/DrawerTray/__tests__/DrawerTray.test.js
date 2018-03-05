@@ -24,17 +24,17 @@
 import React from 'react'
 import px from '@instructure/ui-utils/lib/px'
 import within from '@instructure/ui-utils/lib/within'
-import LayoutTray from '../index'
+import DrawerTray from '../index'
 import styles from '../styles.css'
 
-describe('<LayoutTray />', () => {
+describe('<DrawerTray />', () => {
   const testbed = new Testbed(
-    <LayoutTray
-      label="Layout Tray Test"
+    <DrawerTray
+      label="Drawer Tray Test"
       closeButtonLabel="Close"
     >
       Hello from layout tray
-    </LayoutTray>
+    </DrawerTray>
   )
 
   function testTrayPlacement (placement) {
@@ -200,6 +200,6 @@ describe('<LayoutTray />', () => {
     testbed.tick()
 
     expect(tray.querySelector('[role="region"]')).to.exist
-    expect(tray.querySelector('[aria-label="Layout Tray Test"]')).to.exist
+    expect(tray.querySelector('[aria-label="Drawer Tray Test"]')).to.exist
   })
 })

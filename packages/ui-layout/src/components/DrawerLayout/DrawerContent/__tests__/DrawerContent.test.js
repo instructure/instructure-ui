@@ -22,12 +22,12 @@
  * SOFTWARE.
  */
 import React from 'react'
-import LayoutContent from '../index'
+import DrawerContent from '../index'
 import styles from '../styles.css'
 
-describe('<LayoutContent />', () => {
+describe('<DrawerContent />', () => {
   const testbed = new Testbed(
-    <LayoutContent label="LayoutContentTest">Hello World</LayoutContent>
+    <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
   )
 
   it('should render', () => {

@@ -30,8 +30,8 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import px from '@instructure/ui-utils/lib/px'
 
-import LayoutContent from './LayoutContent'
-import LayoutTray from './LayoutTray'
+import DrawerContent from './DrawerContent'
+import DrawerTray from './DrawerTray'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -43,18 +43,18 @@ experimental: true
 ---
 **/
 @themeable(theme, styles)
-class Layout extends Component {
+class DrawerLayout extends Component {
   static propTypes = {
     /**
-     * Exactly one of each of the following child types: `LayoutContent`, `LayoutTray`
+     * Exactly one of each of the following child types: `DrawerContent`, `DrawerTray`
      */
-    children: CustomPropTypes.Children.oneOfEach([LayoutContent, LayoutTray]),
+    children: CustomPropTypes.Children.oneOfEach([DrawerContent, DrawerTray]),
     /**
-     * Min width for the `<LayoutContent />`
+     * Min width for the `<DrawerContent />`
      */
     minWidth: PropTypes.string,
     /**
-     * Function called when the `<LayoutContent />` is resized and hits the `minWidth` breakpoint
+     * Function called when the `<DrawerContent />` is resized and hits the `minWidth` breakpoint
      * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
      * it is side by side
      */
@@ -89,7 +89,7 @@ class Layout extends Component {
 
   get trayProps () {
     return Children.toArray(this.props.children).filter(
-      (child) => matchComponentTypes(child, [LayoutTray])
+      (child) => matchComponentTypes(child, [DrawerTray])
     )[0].props
   }
 
@@ -181,7 +181,7 @@ class Layout extends Component {
     const { children, minWidth } = this.props
 
     return Children.map(children, (child, index) => {
-      if (matchComponentTypes(child, [LayoutTray])) {
+      if (matchComponentTypes(child, [DrawerTray])) {
         return safeCloneElement(child, {
           key: child.props.label,
           onSizeChange: this.handleTraySizeChange,
@@ -191,7 +191,7 @@ class Layout extends Component {
           onExit: this.handleTrayTransitionBegin,
           onExited: this.handleTrayTransitionEnd
         })
-      } else if (matchComponentTypes(child, [LayoutContent])) {
+      } else if (matchComponentTypes(child, [DrawerContent])) {
         return safeCloneElement(child, {
           key: child.props.label,
           style: {
@@ -218,6 +218,6 @@ class Layout extends Component {
   }
 }
 
-export default Layout
-export { default as LayoutContent } from './LayoutContent'
-export { default as LayoutTray } from './LayoutTray'
+export default DrawerLayout
+export { default as DrawerContent } from './DrawerContent'
+export { default as DrawerTray } from './DrawerTray'

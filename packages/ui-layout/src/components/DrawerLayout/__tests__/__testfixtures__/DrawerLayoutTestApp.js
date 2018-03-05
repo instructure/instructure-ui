@@ -27,9 +27,9 @@ import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import Layout, { LayoutTray, LayoutContent } from '../../index'
+import DrawerLayout, { DrawerTray, DrawerContent } from '../../index'
 
-export default class LayoutTestApp extends Component {
+export default class DrawerLayoutTestApp extends Component {
   static propTypes = {
     layoutWidth: PropTypes.string,
     minWidth: PropTypes.string,
@@ -53,19 +53,19 @@ export default class LayoutTestApp extends Component {
   }
 
   _layout = null
-  _layoutContent = null
-  _contentId = 'LayoutTestApp__content'
+  _drawerContent = null
+  _contentId = 'DrawerLayoutTestApp__content'
 
 
   get trayOpen () {
     return this.state.trayOpen || this.props.trayOpen
   }
 
-  handleLayoutTrayOpen = () => {
+  handleDrawerTrayOpen = () => {
     this.setState({ trayOpen: true })
   }
 
-  handleLayoutTrayDismiss = () => {
+  handleDrawerTrayDismiss = () => {
     this.setState({ trayOpen: false })
   }
 
@@ -78,33 +78,33 @@ export default class LayoutTestApp extends Component {
 
     return (
       <div style={{ width: layoutWidth }}>
-        <Layout
-          {...pickProps(this.props, Layout.propTypes)}
+        <DrawerLayout
+          {...pickProps(this.props, DrawerLayout.propTypes)}
           ref={(node) => { this._layout = node }}
         >
-          <LayoutTray
+          <DrawerTray
             open={this.trayOpen}
             placement={trayPlacement}
-            onDismiss={this.handleLayoutTrayDismiss}
-            label="Test LayoutTray"
+            onDismiss={this.handleDrawerTrayDismiss}
+            label="Test DrawerTray"
             closeButtonLabel="Close"
           >
             <div style={{ width: trayWidth }}>
               Hello from tray
             </div>
-          </LayoutTray>
-          <LayoutContent
-            label="Test LayoutContent"
-            ref={(node) => { this._layoutContent = node }}
+          </DrawerTray>
+          <DrawerContent
+            label="Test DrawerContent"
+            ref={(node) => { this._drawerContent = node }}
           >
             <div>
               Hello from content
-              <Button onClick={this.handleLayoutTrayOpen}>
+              <Button onClick={this.handleDrawerTrayOpen}>
                 Expand
               </Button>
             </div>
-          </LayoutContent>
-        </Layout>
+          </DrawerContent>
+        </DrawerLayout>
       </div>
     )
   }

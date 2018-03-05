@@ -22,9 +22,9 @@
 * SOFTWARE.
 */
 
+export DrawerLayout, { DrawerContent, DrawerTray } from './DrawerLayout'
 export Flex, { FlexItem } from './Flex'
 export Grid, { GridRow, GridCol } from './Grid'
-export Layout, { LayoutContent, LayoutTray } from './Layout'
 export Media from './Media'
 export Position, { PositionTarget, PositionContent } from './Position'
 export Responsive from './Responsive'

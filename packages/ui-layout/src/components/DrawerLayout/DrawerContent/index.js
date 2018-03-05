@@ -33,22 +33,22 @@ import theme from './theme'
 
 /**
 ---
-parent: Layout
+parent: DrawerLayout
 ---
 **/
 @containerQuery()
 @themeable(theme, styles)
-class LayoutContent extends Component {
+class DrawerContent extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.node,
     contentRef: PropTypes.func,
     /**
-     * Callback fired whenever the `<LayoutContent />` changes size
+     * Callback fired whenever the `<DrawerContent />` changes size
      */
     onSizeChange: PropTypes.func,
     /**
-     * Should the `<LayoutContent />` transition
+     * Should the `<DrawerContent />` transition
      */
     transition: PropTypes.bool
   }
@@ -93,4 +93,4 @@ class LayoutContent extends Component {
   }
 }
 
-export default LayoutContent
+export default DrawerContent

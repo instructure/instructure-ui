@@ -19,23 +19,23 @@ yarn add @instructure/ui-layout
 
 ```js
 import React from 'react'
-import Layout, { LayoutTray, LayoutContent } from '@instructure/ui-layout/lib/components/Layout'
+import DrawerLayout, { DrawerTray, DrawerContent } from '@instructure/ui-layout/lib/components/DrawerLayout'
 
 export default MyLayout = function () {
   return (
-    <Layout>
-      <LayoutTray>Hello from layout tray</LayoutTray>
-      <LayoutContent>Hello from layout content</LayoutContent>
-    </Layout>
+    <DrawerLayout>
+      <DrawerTray>Hello from layout tray</DrawerTray>
+      <DrawerContent>Hello from layout content</DrawerContent>
+    </DrawerLayout>
   )
 }
 ```
 
 ### Components
 The `ui-layout` package contains the following components:
+- [DrawerLayout](#DrawerLayout)
 - [Flex](#Flex)
 - [Grid](#Grid)
-- [Layout](#Layout)
 - [Media](#Media)
 - [Position](#Position)
 

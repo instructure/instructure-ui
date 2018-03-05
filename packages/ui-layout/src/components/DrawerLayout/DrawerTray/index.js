@@ -41,19 +41,19 @@ import theme from './theme'
 
 /**
 ---
-parent: Layout
+parent: DrawerLayout
 ---
 **/
 
 @themeable(theme, styles)
-class LayoutTray extends Component {
+class DrawerTray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
 
     children: PropTypes.node,
 
     /**
-     * Placement of the `<LayoutTray />`
+     * Placement of the `<DrawerTray />`
      */
     placement: PropTypes.oneOf(['start', 'end']),
 
@@ -63,26 +63,26 @@ class LayoutTray extends Component {
     open: PropTypes.bool,
 
     /**
-     * Called when the `<LayoutTray />` is opened
+     * Called when the `<DrawerTray />` is opened
      */
     onOpen: PropTypes.func,
     /**
-     * Should the `<LayoutTray />` have a border
+     * Should the `<DrawerTray />` have a border
      */
     border: PropTypes.bool,
 
     /**
-     * Should the `<LayoutTray />` have a shadow
+     * Should the `<DrawerTray />` have a shadow
      */
     shadow: PropTypes.bool,
 
     /**
-     * Boolean designating if the `<LayoutTray />` is overlaying the content
+     * Boolean designating if the `<DrawerTray />` is overlaying the content
      */
     overlay: PropTypes.bool,
 
     /**
-     * Callback fired when the `<LayoutTray />` is requesting to be closed
+     * Callback fired when the `<DrawerTray />` is requesting to be closed
      */
     onDismiss: PropTypes.func,
 
@@ -102,7 +102,7 @@ class LayoutTray extends Component {
     closeButtonVariant: PropTypes.oneOf(['icon', 'icon-inverse']),
 
     /**
-     * Should `<LayoutTray />` contain focus
+     * Should `<DrawerTray />` contain focus
      */
     shouldContainFocus: PropTypes.bool,
 
@@ -112,35 +112,35 @@ class LayoutTray extends Component {
     defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
     /**
-     * Callback fired before the <LayoutTray /> transitions in
+     * Callback fired before the <DrawerTray /> transitions in
      */
     onEnter: PropTypes.func,
     /**
-     * Callback fired as the <LayoutTray /> begins to transition in
+     * Callback fired as the <DrawerTray /> begins to transition in
      */
     onEntering: PropTypes.func,
     /**
-     * Callback fired after the <LayoutTray /> finishes transitioning in
+     * Callback fired after the <DrawerTray /> finishes transitioning in
      */
     onEntered: PropTypes.func,
     /**
-     * Callback fired right before the <LayoutTray /> transitions out
+     * Callback fired right before the <DrawerTray /> transitions out
      */
     onExit: PropTypes.func,
     /**
-     * Callback fired as the <LayoutTray /> begins to transition out
+     * Callback fired as the <DrawerTray /> begins to transition out
      */
     onExiting: PropTypes.func,
     /**
-     * Callback fired after the <LayoutTray /> finishes transitioning out
+     * Callback fired after the <DrawerTray /> finishes transitioning out
      */
     onExited: PropTypes.func,
     /**
-     * Callback fired with the tray dimensions when the <LayoutTray /> opens and closes
+     * Callback fired with the tray dimensions when the <DrawerTray /> opens and closes
      */
     onSizeChange: PropTypes.func,
     /**
-     * Ref function for the <LayoutTray /> content
+     * Ref function for the <DrawerTray /> content
      */
     contentRef: PropTypes.func,
 
@@ -192,7 +192,7 @@ class LayoutTray extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    // layout tray is closing
+    // drawer tray is closing
     if (this.props.open && !nextProps.open) {
       this.setState({
         positioned: false
@@ -339,4 +339,4 @@ class LayoutTray extends Component {
   }
 }
 
-export default LayoutTray
+export default DrawerTray

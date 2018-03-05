@@ -28,14 +28,14 @@ import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import px from '@instructure/ui-utils/lib/px'
 import within from '@instructure/ui-utils/lib/within'
 
-import LayoutTestApp from './__testfixtures__/LayoutTestApp'
+import DrawerLayoutTestApp from './__testfixtures__/DrawerLayoutTestApp'
 
-describe('<Layout />', () => {
+describe('<DrawerLayout />', () => {
   const testbed = new Testbed(
-    <LayoutTestApp />
+    <DrawerLayoutTestApp />
   )
 
-  function testLayoutContentMargin (placement) {
+  function testDrawerContentMargin (placement) {
     it(`with no overlay, layout content should have margin equal to tray width with placement ${placement}`, () => {
       const trayWidth = '250px'
       const subject = testbed.render({
@@ -48,14 +48,14 @@ describe('<Layout />', () => {
       testbed.tick()
       testbed.tick()
 
-      const layoutContentNode = findDOMNode(subject.ref('_layoutContent').node)
+      const DrawerContentNode = findDOMNode(subject.ref('_drawerContent').node)
       const margin = placement === 'start' ? 'marginLeft' : 'marginRight'
-      const width = px(layoutContentNode.style[margin])
+      const width = px(DrawerContentNode.style[margin])
       expect(within(width, px(trayWidth), 2)).to.be.true // added some tolerance for client rect measurements
     })
   }
 
-  function testOmitLayoutContentMargin (placement) {
+  function testOmitDrawerContentMargin (placement) {
     it(`with overlay, layout content should have a margin of zero with placement ${placement}`, () => {
       const subject = testbed.render({
         trayWidth: '250px',
@@ -67,9 +67,9 @@ describe('<Layout />', () => {
       testbed.tick()
       testbed.tick()
 
-      const layoutContentNode = findDOMNode(subject.ref('_layoutContent').node)
+      const DrawerContentNode = findDOMNode(subject.ref('_drawerContent').node)
       const margin = placement === 'start' ? 'marginLeft' : 'marginRight'
-      expect(layoutContentNode.style[margin]).to.equal('0px')
+      expect(DrawerContentNode.style[margin]).to.equal('0px')
     })
   }
 
@@ -78,18 +78,18 @@ describe('<Layout />', () => {
     expect(subject).to.be.present
   })
 
-  testLayoutContentMargin('start')
-  testLayoutContentMargin('end')
+  testDrawerContentMargin('start')
+  testDrawerContentMargin('end')
 
-  testOmitLayoutContentMargin('start')
-  testOmitLayoutContentMargin('end')
+  testOmitDrawerContentMargin('start')
+  testOmitDrawerContentMargin('end')
 
   it('should set the minWidth on the layout content', () => {
     const subject = testbed.render({
       minWidth: '450px'
     })
-    const layoutContentNode = findDOMNode(subject.ref('_layoutContent').node)
-    expect(layoutContentNode.style['minWidth']).to.equal('450px')
+    const DrawerContentNode = findDOMNode(subject.ref('_drawerContent').node)
+    expect(DrawerContentNode.style['minWidth']).to.equal('450px')
   })
 
   it('the tray should overlay the content when the content is less than the minWidth', (done) => {
