@@ -82,26 +82,6 @@ class DrawerTray extends Component {
     overlay: PropTypes.bool,
 
     /**
-     * Callback fired when the `<DrawerTray />` is requesting to be closed
-     */
-    onDismiss: PropTypes.func,
-
-    /**
-     * A function that returns a reference to the close button element
-     */
-    closeButtonRef: PropTypes.func,
-
-    /**
-     * An accessible label for the close button. The close button won't display without this label.
-     */
-    closeButtonLabel: PropTypes.string.isRequired,
-
-    /**
-     * variant specifying a standard dark close button, or an inverse variant for dark backgrounds
-     */
-    closeButtonVariant: PropTypes.oneOf(['icon', 'icon-inverse']),
-
-    /**
      * Should `<DrawerTray />` contain focus
      */
     shouldContainFocus: PropTypes.bool,
@@ -158,9 +138,6 @@ class DrawerTray extends Component {
     overlay: false,
     border: true,
     placement: 'start',
-    onDismiss: () => {},
-    closeButtonRef: (node) => {},
-    closeButtonVariant: 'icon',
     shouldContainFocus: true,
     defaultFocusElement: null,
     onEnter: () => {},
@@ -177,7 +154,6 @@ class DrawerTray extends Component {
     positioned: false
   }
 
-  _closeButton = null
   _trayContent = null
 
   get trayRect () {
@@ -267,9 +243,6 @@ class DrawerTray extends Component {
       open,
       border,
       placement,
-      closeButtonLabel,
-      closeButtonVariant,
-      onDismiss,
       onEnter,
       onEntered,
       onExit,
@@ -291,18 +264,6 @@ class DrawerTray extends Component {
           shouldReturnFocus
           role="region"
         >
-          <CloseButton
-            buttonRef={el => {
-              this._closeButton = el
-              this.props.closeButtonRef(el)
-            }}
-            variant={closeButtonVariant}
-            placement="end"
-            offset="medium"
-            onClick={onDismiss}
-          >
-            {closeButtonLabel}
-          </CloseButton>
           {trayContent}
         </FocusRegion>
       )

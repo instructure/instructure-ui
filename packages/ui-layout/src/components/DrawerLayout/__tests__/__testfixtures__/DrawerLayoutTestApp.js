@@ -65,10 +65,6 @@ export default class DrawerLayoutTestApp extends Component {
     this.setState({ trayOpen: true })
   }
 
-  handleDrawerTrayDismiss = () => {
-    this.setState({ trayOpen: false })
-  }
-
   render () {
     const {
       layoutWidth,
@@ -85,9 +81,7 @@ export default class DrawerLayoutTestApp extends Component {
           <DrawerTray
             open={this.trayOpen}
             placement={trayPlacement}
-            onDismiss={this.handleDrawerTrayDismiss}
             label="Test DrawerTray"
-            closeButtonLabel="Close"
           >
             <div style={{ width: trayWidth }}>
               Hello from tray

@@ -23,6 +23,19 @@ class Example extends React.Component {
     }
   };
 
+  renderCloseButton (closeTray) {
+    return (
+      <CloseButton
+        placement="end"
+        offset="small"
+        variant="icon"
+        onClick={closeTray}
+      >
+        Close
+      </CloseButton>
+    )
+  }
+
   render () {
     return (
       <div style={{height: '25rem'}}>
@@ -32,7 +45,6 @@ class Example extends React.Component {
             closeButtonLabel="Close"
             open={this.state.open}
             placement="start"
-            onDismiss={() => { this.setState({ open: false }) }}
             liveRegion={() => document.getElementById('flash-messages')}
           >
             <Container
@@ -42,6 +54,9 @@ class Example extends React.Component {
               margin="large auto"
               padding="small"
             >
+              {this.renderCloseButton(() => { 
+                this.setState({ open: false }) 
+              })}
               <Avatar name="foo bar" margin="0 0 small 0" />
               <Text as="div" size="x-small">
                 Hello from start tray with a small amount of placeholder content
@@ -100,6 +115,19 @@ class Example extends React.Component {
     }
   }
 
+  renderCloseButton (closeTray) {
+    return (
+      <CloseButton
+        placement="end"
+        offset="small"
+        variant="icon"
+        onClick={closeTray}
+      >
+        Close
+      </CloseButton>
+    )
+  }
+
   render () {
     return (
       <div style={{height: '40rem'}}>
@@ -118,6 +146,9 @@ class Example extends React.Component {
               margin="large auto"
               padding="large"
             >
+              {this.renderCloseButton(() => { 
+                this.setState({ endOpen: false }) 
+              })}   
               <Text as="div" size="x-small">
                 Hello from end tray with a good amount of content as well
               </Text>
@@ -130,7 +161,6 @@ class Example extends React.Component {
                 closeButtonLabel="Close"
                 open={this.state.startOpen}
                 placement="start"
-                onDismiss={() => { this.setState({ startOpen: false }) }}
               >
                 <Container
                   as="div"
@@ -139,6 +169,9 @@ class Example extends React.Component {
                   margin="large auto"
                   padding="small"
                 >
+                  {this.renderCloseButton(() => { 
+                    this.setState({ startOpen: false }) 
+                  })}
                   <Avatar name="foo bar" margin="0 0 small 0" />
                   <Text as="div" size="x-small">
                     Hello from start tray with a small amount of placeholder content

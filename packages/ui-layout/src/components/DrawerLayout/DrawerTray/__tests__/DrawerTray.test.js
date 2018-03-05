@@ -29,10 +29,7 @@ import styles from '../styles.css'
 
 describe('<DrawerTray />', () => {
   const testbed = new Testbed(
-    <DrawerTray
-      label="Drawer Tray Test"
-      closeButtonLabel="Close"
-    >
+    <DrawerTray label="Drawer Tray Test">
       Hello from layout tray
     </DrawerTray>
   )
@@ -79,33 +76,6 @@ describe('<DrawerTray />', () => {
     testbed.tick()
 
     expect(contentRef).to.have.been.calledWith(subject.ref('_trayContent').node)
-  })
-
-  it('should call the closeButtonRef', () => {
-    const closeButtonRef = testbed.spy()
-    const subject = testbed.render({
-      open: true,
-      closeButtonRef
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(closeButtonRef).to.have.been.calledWith(subject.ref('_closeButton').node)
-  })
-
-  it('should call onDismiss', () => {
-    const onDismiss = testbed.spy()
-    const subject = testbed.render({
-      open: true,
-      onDismiss
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    subject.ref('_closeButton').click()
-    expect(onDismiss).to.have.been.called
   })
 
   it('should call onOpen ', (done) => {
