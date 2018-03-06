@@ -67,7 +67,7 @@ Installation steps:
 1. Install [Git](http://git-scm.com/).
 1. Install [Node](https://nodejs.org/en/)) and [nvm](https://github.com/creationix/nvm).
 1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/).
-1. Clone this repository: `git clone https://github.com/instructure/instructure-ui.git`.
+1. Clone this repository: `git clone gerrit:instructure-ui`.
 1. Run `cd instructure-ui`
 1. Run `yarn`
 1. Run `yarn bootstrap`
