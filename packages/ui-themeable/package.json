@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themeable",
-  "version": "4.7.2",
+  "version": "4.7.3",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,12 +22,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^4.7.2",
+    "@instructure/ui-presets": "^4.7.3",
     "react": "15.6.1",
     "react-dom": "15.6.1"
   },
   "dependencies": {
-    "@instructure/ui-utils": "^4.7.2",
+    "@instructure/ui-utils": "^4.7.3",
     "bowser": "^1.7.0",
     "deep-equal": "^1.0.1",
     "glamor": "^2.20.37",
