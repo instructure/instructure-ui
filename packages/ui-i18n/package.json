@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-i18n",
-  "version": "4.7.2",
+  "version": "4.7.3",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,9 +22,9 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-forms": "^4.7.2",
-    "@instructure/ui-presets": "^4.7.2",
-    "@instructure/ui-themes": "^4.7.2",
+    "@instructure/ui-forms": "^4.7.3",
+    "@instructure/ui-presets": "^4.7.3",
+    "@instructure/ui-themes": "^4.7.3",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
@@ -33,7 +33,7 @@
     "react-dom": "^0.14.9 || ^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-utils": "^4.7.2",
+    "@instructure/ui-utils": "^4.7.3",
     "decimal.js": "^9.0.1",
     "moment": "^2.10.6",
     "moment-timezone": "^0.5.14",
