@@ -28,7 +28,7 @@ import he from 'he'
 import grayMatter from 'gray-matter'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
-import Image from '@instructure/ui-elements/lib/components/Image'
+import Img from '@instructure/ui-elements/lib/components/Img'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import Table from '@instructure/ui-elements/lib/components/Table'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
@@ -43,7 +43,7 @@ const elements = {
   h2: ({ id, children }) => <Heading id={id} level="h2" margin="0 0 large">{children}</Heading>,
   h3: ({ id, children }) => <Heading id={id} level="h3" margin="large 0 small 0">{children}</Heading>,
   h4: ({ id, children }) => <Heading id={id} level="h4" margin="large 0 small 0">{children}</Heading>,
-  img: ({ src, alt }) => <Image src={src} alt={alt} />,
+  img: ({ src, alt }) => <Img src={src} alt={alt} />,
   table: ({ children }) => <Table>{children}</Table>,
   a: ({ href, title, target, name, children }) => {
     if (href) {

@@ -23,9 +23,9 @@
  */
 
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import Image from '@instructure/ui-elements/lib/components/Image'
+import Img from '@instructure/ui-elements/lib/components/Img'
 
 export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
   'ui-elements'
-))(Image)
+))(Img)

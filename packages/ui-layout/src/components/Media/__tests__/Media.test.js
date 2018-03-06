@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Image from '@instructure/ui-elements/lib/components/Image'
+import Img from '@instructure/ui-elements/lib/components/Img'
 import Container from '@instructure/ui-container/lib/components/Container'
 import Media from '../index'
 
@@ -36,7 +36,7 @@ describe('<Media />', () => {
       title="Hello World"
       description="Test Image"
     >
-      <Image src={image} />
+      <Img src={image} />
     </Media>
   )
 

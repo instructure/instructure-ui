@@ -35,7 +35,7 @@ The `ui-elements` package contains the following:
 - [Badge](#Badge)
 - [ContextBox](#ContextBox)
 - [Heading](#Heading)
-- [Image](#Image)
+- [Img](#Img)
 - [Link](#Link)
 - [List](#List)
 - [MetricsList](#MetricsList)

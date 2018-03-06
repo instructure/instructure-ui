@@ -41,7 +41,7 @@ category: components
 ---
 **/
 @themeable(theme, styles)
-export default class Image extends Component {
+export default class Img extends Component {
   static propTypes = {
     src: PropTypes.string.isRequired,
     alt: PropTypes.string,
@@ -117,7 +117,7 @@ export default class Image extends Component {
     }
 
     const props = {
-      ...omitProps(this.props, Image.propTypes, ['padding']),
+      ...omitProps(this.props, Img.propTypes, ['padding']),
       className: classnames(imgClasses),
       src,
       alt
@@ -140,9 +140,9 @@ export default class Image extends Component {
         mixBlendMode: (overlay.blend) ? overlay.blend : null
       }
 
-      /* eslint-disable jsx-a11y/alt-text */
-      const image = <img {...props} className={classnames(imgClasses)} style={imgStyle} />
-      /* eslint-enable jsx-a11y/alt-text */
+      /* eslint-disable jsx-a11y/alt-text, jsx-a11y/no-redundant-roles*/
+      const image = <img {...props} className={classnames(imgClasses)} style={imgStyle} role="img"/>
+      /* eslint-enable jsx-a11y/alt-text, jsx-a11y/no-redundant-roles */
 
       return (
         <Container

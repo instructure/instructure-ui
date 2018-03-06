@@ -1,5 +1,5 @@
 ---
-describes: Image
+describes: Img
 ---
 
 An accessible image component
@@ -8,12 +8,12 @@ An accessible image component
 ---
 example: true
 ---
-<Image src={placeholderImage(250, 250)} />
+<Img src={placeholderImage(250, 250)} />
 ```
 
 ### Margin and display
 
-Use the `margin` prop to add space around `<Image />`. Setting the `inline` prop to `false` makes
+Use the `margin` prop to add space around `<Img />`. Setting the `inline` prop to `false` makes
 the image a block-level element.
 
 ```js
@@ -21,9 +21,9 @@ the image a block-level element.
 example: true
 ---
 <Container textAlign="center" as="div">
-  <Image margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
-  <Image margin="small" src={placeholderImage(200, 200)} />
-  <Image inline={false} margin="small auto" src={placeholderImage(400, 200)} />
+  <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
+  <Img margin="small" src={placeholderImage(200, 200)} />
+  <Img inline={false} margin="small auto" src={placeholderImage(400, 200)} />
 </Container>
 ```
 
@@ -37,19 +37,19 @@ in mind that Internet Explorer currently ignores CSS blend mode rules.)
 example: true
 ---
   <Container textAlign="center" as="div">
-    <Image
+    <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#008ee2', opacity: 7}}
       alt="A placeholder image"
       margin="x-small"
     />
-    <Image
+    <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#008ee2', opacity: 7, blend: 'multiply'}}
       alt="A placeholder image"
       margin="x-small"
     />
-    <Image
+    <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#008ee2', opacity: 7, blend: 'screen'}}
       alt="A placeholder image"
@@ -68,7 +68,7 @@ containing element, while maintaining the aspect ratio of the source image.
 example: true
 ---
 <div style={{width: '66%', height: '11rem'}}>
-  <Image
+  <Img
     src={avatarImage}
     overlay={{color: 'rebeccapurple', opacity: 8}}
     cover
@@ -86,13 +86,13 @@ are not supported in Internet Explorer.
 example: true
 ---
   <Container textAlign="center" as="div">
-    <Image
+    <Img
       grayscale
       src={avatarImage}
       alt="A placeholder image"
       margin="x-small"
     />
-    <Image
+    <Img
       blur
       src={avatarImage}
       alt="A placeholder image"

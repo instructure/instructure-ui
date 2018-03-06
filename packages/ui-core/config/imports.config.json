@@ -69,7 +69,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Image",
-    "replace": "@instructure/ui-elements/lib/components/Image"
+    "replace": "@instructure/ui-elements/lib/components/Img"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
