@@ -108,18 +108,6 @@ describe('<MenuList />', () => {
     expect(onSelect).to.not.have.been.called
   })
 
-  it('should call onDismiss after Esc or Tab press', () => {
-    const onDismiss = testbed.stub()
-    const subject = testbed.render({
-      onDismiss
-    })
-
-    subject.keyUp('escape')
-    subject.keyDown('tab')
-
-    expect(onDismiss).to.have.been.calledTwice
-  })
-
   it('should have focus index -1 by default', () => {
     const subject = testbed.render()
     expect(subject.instance().focusedIndex).to.equal(-1)

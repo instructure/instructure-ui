@@ -55,8 +55,8 @@ export default class FocusRegion {
   _listeners = []
   _setup = false
 
-  handleDismiss = (event) => {
-    this._options.onDismiss(event)
+  handleDismiss = (event, documentClick) => {
+    this._options.onDismiss(event, documentClick)
   }
 
   captureDocumentClick = event => {
@@ -68,7 +68,7 @@ export default class FocusRegion {
   handleDocumentClick = event => {
     if (this._options.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick &&
         !event.defaultPrevented) {
-      this.handleDismiss(event)
+      this.handleDismiss(event, true)
     }
   }
 

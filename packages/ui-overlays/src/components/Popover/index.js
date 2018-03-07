@@ -266,7 +266,7 @@ class Popover extends Component {
     onMouseOver: event => {},
     onMouseOut: event => {},
     onShow: position => {},
-    onDismiss: () => {},
+    onDismiss: (event, documentClick) => {},
     placement: 'bottom center',
     offsetX: 0,
     offsetY: 0,
@@ -337,19 +337,26 @@ class Popover extends Component {
     }
   }
 
-  hide = (e) => {
-    // check if shown before setstate to prevent multiple onDismiss firings
-    if (typeof this.props.onDismiss === 'function' && this.shown) {
-      this.props.onDismiss()
-    }
-
-    if (typeof this.props.onToggle === 'function') {
-      this.props.onToggle(false)
-    }
+  hide = (e, documentClick) => {
+    const {
+      onDismiss,
+      onToggle
+    } = this.props
 
     if (this.props.show === undefined) {
-      this.setState({ show: false })
+      this.setState(({ show }) => {
+        if (show) {
+          onDismiss(e, documentClick)
+        }
+        return { show: false }
+      })
+    } else {
+      if (this.props.show) {
+        onDismiss(e, documentClick)
+      }
     }
+
+    onToggle(false)
   }
 
   toggle = () => {
@@ -419,6 +426,7 @@ class Popover extends Component {
         ref: el => {
           this._trigger = el
         },
+        'aria-expanded': this.shown ? 'true' : 'false',
         onClick: createChainedFunction(onClick, this.props.onClick),
         onBlur: createChainedFunction(onBlur, this.props.onBlur),
         onFocus: createChainedFunction(onFocus, this.props.onFocus),

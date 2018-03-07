@@ -46,10 +46,11 @@
     }
   }
 
-  &.active,
   &:focus,
   &:active,
-  &:hover {
+  &:hover,
+  &.active,
+  &[aria-expanded="true"] {
     background: var(--activeBackground);
 
     .label {

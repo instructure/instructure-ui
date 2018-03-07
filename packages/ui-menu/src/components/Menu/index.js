@@ -84,9 +84,23 @@ export default class Menu extends Component {
     */
     contentRef: PropTypes.func,
     /**
+     * If a trigger is provided, a function that returns a reference to the popover
+     */
+    popoverRef: PropTypes.func,
+    /**
     * Should the trigger receive focus after close
     */
     shouldFocusTriggerOnClose: PropTypes.bool,
+    /**
+     * An element or a function returning an element to use as the mount node for the `<Menu />`
+     * when a trigger is provided (defaults to `document.body`)
+     */
+    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when a trigger is provided and the `<Menu />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
     /**
     * Call this function when a menu item is selected (note: value argument will default to the index)
     */
@@ -130,7 +144,9 @@ export default class Menu extends Component {
   }
 
   get show () {
-    return this._subComponent && this._subComponent.show
+    if (this._subComponent && this._subComponent._popover) {
+      return this._subComponent._popover.shown
+    }
   }
 
   handleRef = node => {

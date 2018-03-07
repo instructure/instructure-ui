@@ -51,75 +51,58 @@ parent: Menu
 export default class MenuList extends Component {
   static propTypes = {
     /**
-    * children of type `MenuItem`
-    */
+     * children of type `MenuItem`
+     */
     children: CustomPropTypes.Children.oneOf([
       MenuItem, MenuItemSeparator, MenuItemGroup, MenuItemFlyout
     ]),
     /**
-    * the id of the element that contains the text description of the menu
-    */
+     * the id of the element that contains the text description of the menu
+     */
     labelledBy: PropTypes.string,
     /**
-    * the id of the element that the menu items will act upon
-    */
+     * the id of the element that the menu items will act upon
+     */
     controls: PropTypes.string,
     /**
-    * a description of the menu
-    */
+     * a description of the menu
+     */
     title: PropTypes.string,
     disabled: PropTypes.bool,
     /**
-    * call this function when a menu item is selected (note: value argument will default to the index)
-    */
+     * call this function when a menu item is selected (note: value argument will default to the index)
+     */
     onSelect: PropTypes.func,
-    /**
-    * call this function when the menu item is closed (via ESC, TAB key or item selected)
-    */
-    onDismiss: PropTypes.func,
     onKeyDown: PropTypes.func,
     onKeyUp: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
-
     /**
-    * should the menu be open for the initial render
-    */
-    defaultShow: PropTypes.bool,
-
+     * prop specifying if the `<MenuList />` is shown
+     */
+    show: PropTypes.bool,
     /**
-    * is the menu open (should be accompanied by `onToggle`)
-    */
-    show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
-
-    /**
-    * Call this function when the menu is toggled open/closed. When used with `show`,
-    * the component will not control its own state.
-    */
-    onToggle: PropTypes.func
+     * Callback fired when a `<MenuItemFlyout />` in the `<MenuList />` is dismissed
+     */
+    onFlyoutDismiss: PropTypes.func
   }
 
   static defaultProps = {
-    defaultShow: true,
+    show: true,
     disabled: false,
     onKeyDown: function (e) {},
     onKeyUp: function (e) {},
-    onDismiss: function (e) {},
     onFocus: function (e) {},
     onBlur: function (e) {},
-    onSelect: function (e, value, selected) {}
+    onSelect: function (e, value, selected) {},
+    onFlyoutDismiss: function (e, documentClick) {}
   }
 
   constructor (props) {
     super()
 
     this.state = {
-      hasFocus: false,
-      show: true
-    }
-
-    if (props.show === undefined) {
-      this.state.show = props.defaultShow
+      hasFocus: false
     }
   }
 
@@ -136,7 +119,6 @@ export default class MenuList extends Component {
     const {
       down,
       up,
-      tab,
       pgup,
       pgdn
     } = keycode.codes
@@ -151,15 +133,6 @@ export default class MenuList extends Component {
       event.preventDefault()
       event.stopPropagation()
       this.hideActiveMenuItemFlyout()
-    } else if (tab === key) {
-      this.props.onDismiss(event)
-    }
-  }
-
-  handleKeyUp = (event) => {
-    if (event.keyCode === keycode.codes.esc) {
-      event.preventDefault()
-      this.props.onDismiss(event)
     }
   }
 
@@ -177,10 +150,6 @@ export default class MenuList extends Component {
 
   get focusedIndex () {
     return this._menuitems.findIndex((item) => (item.focused === true))
-  }
-
-  get show () {
-    return this.props.show === undefined ? this.state.show : this.props.show
   }
 
   moveFocus (step) {
@@ -209,10 +178,7 @@ export default class MenuList extends Component {
   }
 
   handleMenuItemMouseOver = (mouseOverItem) => {
-    if (
-      this._activeMenuItemFlyout &&
-      mouseOverItem !== this._activeMenuItemFlyout._menuItemTrigger
-    ) {
+    if (this._activeMenuItemFlyout && mouseOverItem !== this._activeMenuItemFlyout._trigger) {
       this.hideActiveMenuItemFlyout()
     }
   }
@@ -223,9 +189,9 @@ export default class MenuList extends Component {
     }
   }
 
-  hideActiveMenuItemFlyout = () => {
+  hideActiveMenuItemFlyout = (e) => {
     if (this._activeMenuItemFlyout) {
-      this._activeMenuItemFlyout.setShow(false)
+      this._activeMenuItemFlyout.hide(e)
       this._activeMenuItemFlyout = null
     }
   }
@@ -239,9 +205,9 @@ export default class MenuList extends Component {
       children,
       disabled,
       controls,
-      onDismiss,
       labelledBy,
-      title
+      title,
+      onFlyoutDismiss
     } = this.props
 
     this._menuitems = []
@@ -293,7 +259,7 @@ export default class MenuList extends Component {
               ...props,
               tabIndex: isTabbable ? 0 : -1,
               onToggle: this.handleFlyoutToggle,
-              onParentDismiss: onDismiss,
+              onDismiss: onFlyoutDismiss,
               labelledBy,
               title,
               ref,
@@ -327,7 +293,7 @@ export default class MenuList extends Component {
       controls,
       title,
       onKeyDown,
-      onKeyUp
+      show
     } = this.props
     const props = omitProps(this.props, MenuList.propTypes)
 
@@ -338,14 +304,13 @@ export default class MenuList extends Component {
         tabIndex={this.state.hasFocus ? null : '0'}
         ref={this.handleMenuRef}
         className={styles.root}
-        aria-hidden={!this.show}
+        aria-hidden={!show}
         aria-labelledby={labelledBy}
         aria-controls={controls}
-        aria-expanded={this.show}
+        aria-expanded={show}
         aria-disabled={disabled ? 'true' : null}
         title={title}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
-        onKeyUp={createChainedFunction(onKeyUp, this.handleKeyUp)}
         onFocus={this.handleMenuFocus}
       >
         {this.renderChildren()}

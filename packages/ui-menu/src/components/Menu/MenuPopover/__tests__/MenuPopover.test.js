@@ -26,6 +26,7 @@ import React from 'react'
 import MenuPopover from '../index'
 import MenuItem from '../../MenuItem'
 import MenuItemSeparator from '../../MenuItemSeparator'
+import MenuList from '../../MenuList'
 
 describe('<MenuPopover />', () => {
   const testbed = new Testbed(
@@ -50,7 +51,7 @@ describe('<MenuPopover />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.exist
   })
 
   it('should render when show and onToggle props are set', () => {
@@ -59,13 +60,13 @@ describe('<MenuPopover />', () => {
       onToggle: () => {}
     })
 
-    expect(subject.ref('_menu')).to.be.present
+    expect(subject.ref('_menu').length).to.equal(1)
   })
 
   it('should not show by default', () => {
     const subject = testbed.render()
 
-    expect(subject.instance().show).to.be.false
+    expect(subject.ref('_menu').length).to.equal(0)
   })
 
   it('should accept a default show', () => {
@@ -73,7 +74,7 @@ describe('<MenuPopover />', () => {
       defaultShow: true
     })
 
-    expect(subject.ref('_menu')).to.be.present
+    expect(subject.ref('_menu').length).to.equal(1)
   })
 
   it('should provide content ref', () => {
@@ -120,6 +121,20 @@ describe('<MenuPopover />', () => {
     subject.find('button').simulate('focus')
 
     expect(onFocus).to.have.been.called
+  })
+
+  it(`should call onDismiss after tab press`, () => {
+    const onDismiss = testbed.stub()
+    const subject = testbed.render({
+      defaultShow: true,
+      onDismiss
+    })
+
+    testbed.tick()
+
+    subject.ref('_menu').keyDown('tab')
+
+    expect(onDismiss).to.have.been.calledOnce
   })
 
   it('should have an aria-haspopup attribute', () => {

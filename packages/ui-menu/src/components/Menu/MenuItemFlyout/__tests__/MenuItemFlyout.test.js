@@ -42,24 +42,24 @@ describe('<MenuItemFlyout />', () => {
       subject.find('button').simulate(event.type, event.code)
       testbed.tick()
 
-      expect(subject.ref('_menu')).to.be.present
+      expect(subject.ref('_menu').length).to.equal(1)
     })
   }
 
-  function testFocusFlyoutOnEvent (expected, event) {
-    it(`expect flyout menu focus to be ${expected} on ${event.type} ${keycode(event.code) || ''}`, () => {
+  function testFocusFlyoutOnEvent (event) {
+    it(`expect flyout menu to be focused on ${event.type} ${keycode(event.code) || ''}`, () => {
       const subject = testbed.render()
 
       subject.find('button').simulate(event.type, event.code)
       testbed.tick()
 
-      expect(subject.ref('_menu').focused()).to.equal(expected)
+      expect(subject.ref('_menu').focused()).to.be.true
     })
   }
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.exist
   })
 
   testShowFlyoutOnEvent({type: 'click'})
@@ -68,11 +68,10 @@ describe('<MenuItemFlyout />', () => {
   testShowFlyoutOnEvent({type: 'keyUp', code: { keyCode: keycode.codes.space }})
   testShowFlyoutOnEvent({type: 'keyDown', code: { keyCode: keycode.codes.enter }})
 
-  testFocusFlyoutOnEvent(true, {type: 'click'})
-  testFocusFlyoutOnEvent(true, {type: 'keyDown', code: { keyCode: keycode.codes.right }})
-  testFocusFlyoutOnEvent(true, {type: 'keyUp', code: { keyCode: keycode.codes.space }})
-  testFocusFlyoutOnEvent(true, {type: 'keyDown', code: { keyCode: keycode.codes.enter }})
-  testFocusFlyoutOnEvent(false, {type: 'mouseOver'})
+  testFocusFlyoutOnEvent({type: 'click'})
+  testFocusFlyoutOnEvent({type: 'keyDown', code: { keyCode: keycode.codes.right }})
+  testFocusFlyoutOnEvent({type: 'keyUp', code: { keyCode: keycode.codes.space }})
+  testFocusFlyoutOnEvent({type: 'keyDown', code: { keyCode: keycode.codes.enter }})
 
   it('it should not open the flyout when disabled', () => {
     const subject = testbed.render({
@@ -91,7 +90,7 @@ describe('<MenuItemFlyout />', () => {
     subject.find('button').click()
     testbed.tick()
 
-    subject.ref('_menu').keyUp('esc')
+    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
     expect(subject.ref('_menu').length).to.equal(0)

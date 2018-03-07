@@ -96,16 +96,19 @@ describe('<Menu />', () => {
     expect(onSelect).to.not.have.been.called
   })
 
-  it('should call onDismiss after Esc or Tab press', () => {
+  it(`should call onDismiss after escape press`, () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+    testbed.render({
+      trigger: <button>menu</button>,
+      defaultShow: true,
       onDismiss
     })
 
-    subject.keyUp('escape')
-    subject.keyDown('tab')
+    testbed.tick()
 
-    expect(onDismiss).to.have.been.calledTwice
+    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
+
+    expect(onDismiss).to.have.been.calledOnce
   })
 
   it('should assign menu focus when focus prop is set', () => {

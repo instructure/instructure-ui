@@ -24,18 +24,16 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import keycode from 'keycode'
 
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 
+import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import uid from '@instructure/ui-utils/lib/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import themeable from '@instructure/ui-themeable'
 
 import MenuList from '../MenuList'
@@ -57,172 +55,135 @@ parent: Menu
 export default class MenuPopover extends Component {
   static propTypes = {
     /**
-    * the trigger element
-    */
+     * The trigger element
+     */
     trigger: PropTypes.node.isRequired,
-
-    placement: LayoutPropTypes.placement,
-
     /**
-    * children of type `MenuItem`, `MenuItemGroup`, or `MenuItemSeparator`
-    */
+     * The placement of the menu in relation to the trigger
+     */
+    placement: LayoutPropTypes.placement,
+    /**
+     * children of type `MenuItem`, `MenuItemGroup`, or `MenuItemSeparator`
+     */
     children: CustomPropTypes.Children.oneOf([MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout]),
     /**
-    * should the menu be open for the initial render
-    */
+     * Whether or not the `<MenuPopover />` should be rendered on initial render.
+     */
     defaultShow: PropTypes.bool,
-
     /**
-    * is the menu open (should be accompanied by `onToggle`)
-    */
+     * Whether or not the `<MenuPopover />` is shown (should be accompanied by `onToggle`)
+     */
     show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
-
     /**
-    * Call this function when the menu is toggled open/closed. When used with `show`,
-    * the component will not control its own state.
-    */
+     * Callback fired when the `<MenuPopover />` is toggled open/closed. When used with `show`,
+     * the component will not control its own state.
+     */
     onToggle: PropTypes.func,
-
+    /**
+     * Callback fired when a menu item within the `<MenuPopover />` is selected
+     */
     onSelect: PropTypes.func,
+    /**
+     * Callback fired when the `<MenuPopover />` is dismissed
+     */
     onDismiss: PropTypes.func,
+    /**
+     * Callback fired when trigger is focused
+     */
     onFocus: PropTypes.func,
+    onKeyDown: PropTypes.func,
     /**
      * A function that returns a reference to the content element
      */
     contentRef: PropTypes.func,
+    /*
+     * A function that returns a reference to the `<MenuList />`
+     */
+    menuRef: PropTypes.func,
     /**
-    * Should the trigger receive focus after close
-    */
-    shouldFocusTriggerOnClose: PropTypes.bool
+     * A function that returns a reference to the `<Popover />`
+     */
+    popoverRef: PropTypes.func,
+    /**
+     * Should the trigger receive focus after close
+     */
+    shouldFocusTriggerOnClose: PropTypes.bool,
+    /**
+     * Should the `<MenuPopover />` display with an arrow pointing to the trigger
+     */
+    withArrow: PropTypes.bool,
+    /**
+     * The horizontal offset for the positioned menu
+     */
+    offsetX: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * The vertical offset for the positioned menu
+     */
+    offsetY: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * An element or a function returning an element to use as the mount node
+     * for the `<MenuPopover />` (defaults to `document.body`)
+     */
+    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<MenuPopover />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func])
   }
 
   static defaultProps = {
     placement: 'bottom center',
     defaultShow: false,
-    contentRef: function (el) {},
-    shouldFocusTriggerOnClose: true
+    show: undefined,
+    onToggle: show => {},
+    onSelect: (event, value, selected) => {},
+    onDismiss: (event, documentClick) => {},
+    onFocus: event => {},
+    onKeyDown: event => {},
+    contentRef: el => {},
+    menuRef: el => {},
+    popoverRef: el => {},
+    shouldFocusTriggerOnClose: true,
+    withArrow: true,
+    offsetX: 0,
+    offsetY: 0,
+    mountNode: null,
+    liveRegion: null
   }
 
   constructor (props) {
-    super()
+    super(props)
 
-    this.state = {}
-
-    if (props.show === undefined) {
-      this.state.show = props.defaultShow
-    }
-
-    this.labelId = `MenuPopover__${uid()}`
-    this.raf = []
+    this._popover = null
+    this._trigger = null
+    this._menu = null
+    this._labelId = `MenuPopover__${uid()}`
   }
 
-  shouldComponentUpdate (nextProps, nextState) {
-    return !(shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState))
+  handleMenuSelect = (event, value, selected) => {
+    this.hide(event)
+    this.props.onSelect(event, value, selected)
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    if (this.props.show !== prevProps.show || this.state.show !== prevState.show) {
-      this.maybeFocusTrigger()
-    }
-  }
-
-  componentWillUnmount () {
-    this._unmounted = true
-    this.raf.forEach(request => {
-      request.cancel()
-    })
-    this.raf = []
-  }
-
-  get show () {
-    return this.props.show === undefined ? this.state.show : this.props.show
-  }
-
-  maybeFocusTrigger () {
-    if (!this.show && this.props.shouldFocusTriggerOnClose) {
-      this.focusTrigger()
+  handleMenuKeyDown = (event) => {
+    if (event && event.keyCode === keycode.codes.tab) {
+      // Persist this event so that we can still use it in the parent menu
+      // if this instance of <MenuPopover /> is being used as a flyout
+      event.persist()
+      this.hide(event)
     }
   }
 
-  toggleShow (callback) {
-    let show
-    this.setState(
-      (state, props) => {
-        show = props.show === undefined ? !state.show : !props.show
-        return { show }
-      },
-      () => {
-        if (typeof callback === 'function') {
-          callback()
-        }
-
-        if (typeof this.props.onToggle === 'function') {
-          this.props.onToggle(show)
-        }
-
-        if (!show && typeof this.props.onDismiss === 'function') {
-          this.props.onDismiss()
-        }
-      }
-    )
-  }
-
-  handleToggle = show => {
-    if (show !== this.show) {
-      this.toggleShow()
+  handleFlyoutDismiss = (event, documentClick) => {
+    if ((event && event.keyCode === keycode.codes.tab) || documentClick) {
+      this.hide(event)
     }
   }
 
-  handleMenuDismiss = e => {
-    this.toggleShow()
-  }
-
-  handleMenuSelect = (e, value, selected) => {
-    this.toggleShow(args => {
-      if (typeof this.props.onSelect === 'function') {
-        this.props.onSelect(e, value, selected)
-      }
-    })
-  }
-
-  handleFocus = () => {
-    // focus the menu on the next render
-    this.focusMenu()
-  }
-
-  handlePopoverShown = () => {
-    // Focus on Menu has to happen after it's been positioned or else
-    // document will scroll to the bottom where Popover initially
-    // inserts into the DOM.
-    this.raf.push(
-      requestAnimationFrame(() => {
-        this.focusMenu()
-      })
-    )
-  }
-
-  focusMenu () {
-    // Don't focus the menu if it already has focus
-    if (this._unmounted || (this._menu && containsActiveElement(this._menu))) {
-      return
-    }
-
-    if (this.show) {
-      this._menu.focus()
-    }
-  }
-
-  focusTrigger () {
-    if (!this.show && typeof this._trigger.focus === 'function') {
-      this._trigger.focus()
-    }
-  }
-
-  focus () {
-    if (this.show) {
-      this.focusMenu()
-    } else {
-      this.focusTrigger()
+  hide = (event) => {
+    if (this._popover) {
+      this._popover.hide(event)
     }
   }
 
@@ -235,20 +196,24 @@ export default class MenuPopover extends Component {
   }
 
   render () {
-    const { onFocus, children } = this.props
+    const {
+      children,
+      menuRef,
+      popoverRef,
+      onKeyDown
+    } = this.props
 
     const menu = (
       <div className={styles.menu}>
         <MenuList
-          {...pickProps(this.props, MenuList.propTypes)}
-          labelledBy={this.labelId}
-          show={this.show}
+          labelledBy={this._labelId}
+          onSelect={this.handleMenuSelect}
+          onKeyDown={createChainedFunction(onKeyDown, this.handleMenuKeyDown)}
+          onFlyoutDismiss={this.handleFlyoutDismiss}
           ref={el => {
             this._menu = el
+            menuRef(el)
           }}
-          onSelect={this.handleMenuSelect}
-          onDismiss={this.handleMenuDismiss}
-          onToggle={this.handleToggle}
         >
           {children}
         </MenuList>
@@ -258,22 +223,20 @@ export default class MenuPopover extends Component {
     return (
       <Popover
         {...pickProps(this.props, Popover.propTypes)}
-        show={this.show}
         on={['click']}
-        onToggle={this.handleToggle}
-        onFocus={createChainedFunction(onFocus, this.handleFocus)}
-        onShow={this.handlePopoverShown}
-        shouldCloseOnEscape={false}
+        shouldContainFocus={true}
+        shouldReturnFocus={true}
+        ref={el => {
+          this._popover = el
+          popoverRef(el)
+        }}
       >
         <PopoverTrigger>
           {safeCloneElement(this.props.trigger, {
             role: 'button',
-            tabIndex: 0,
-            ref: c => {
-              this._trigger = c
-            },
+            ref: el => { this._trigger = el },
             'aria-haspopup': true,
-            id: this.labelId
+            id: this._labelId
           })}
         </PopoverTrigger>
         <PopoverContent aria-expanded={this.show}>

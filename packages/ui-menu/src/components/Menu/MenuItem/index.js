@@ -32,6 +32,7 @@ import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -46,8 +47,11 @@ import theme from './theme'
 parent: Menu
 ---
 **/
+@deprecated('5.0.0', {
+  active: true
+})
 @themeable(theme, styles)
-export default class MenuItem extends Component {
+class MenuItem extends Component {
   static propTypes = {
     /* the menu item label */
     children: PropTypes.node.isRequired,
@@ -95,16 +99,12 @@ export default class MenuItem extends Component {
   }
 
   handleClick = e => {
-    const { onSelect, onClick, disabled, value, href } = this.props
+    const { onSelect, onClick, disabled, value } = this.props
     const selected = !this.selected
 
     if (disabled) {
       e.preventDefault()
       return
-    }
-
-    if (!href) {
-      e.preventDefault()
     }
 
     if (this.props.selected === undefined) {
@@ -246,3 +246,5 @@ export default class MenuItem extends Component {
     )
   }
 }
+
+export default MenuItem
