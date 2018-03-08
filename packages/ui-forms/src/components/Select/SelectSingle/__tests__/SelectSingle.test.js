@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import keycode from 'keycode'
 import SelectSingle from '../index'
 import SelectField from '../../SelectField'
 
@@ -80,7 +81,7 @@ describe('<SelectSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(subject.instance()._input.value).to.equal('')
     expect(onInputChange).to.have.been.calledOnce
     expect(onInputChange.firstCall.args[0]).to.equal(null)
@@ -125,7 +126,7 @@ describe('<SelectSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(onInputChange).to.have.been.calledOnce
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(label)
@@ -141,7 +142,7 @@ describe('<SelectSingle />', () => {
     testbed.tick()
     subject.find('input').simulate('click')
     subject.instance()._input.value = label
-    subject.find('input').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(onChange).to.have.been.calledOnce
     expect(onChange.firstCall.args[0].target).to.exist
     expect(onChange.firstCall.args[0].target.value).to.equal(label)

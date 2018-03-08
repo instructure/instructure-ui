@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
@@ -403,12 +404,20 @@ class SelectField extends Component {
     }
   }
 
+  handleSpaceKey = event => {
+    if (!this.expanded) {
+      event.preventDefault()
+      this.open()
+    }
+  }
+
   keyMap = {
-    ArrowUp: this.handleUpArrowKey,
-    ArrowDown: this.handleDownArrowKey,
-    Home: this.handleHomeKey,
-    End: this.handleEndKey,
-    Enter: this.handleEnterKey
+    up: this.handleUpArrowKey,
+    down: this.handleDownArrowKey,
+    home: this.handleHomeKey,
+    end: this.handleEndKey,
+    enter: this.handleEnterKey,
+    space: this.handleSpaceKey
   }
 
   handlePositioned = () => {
@@ -416,11 +425,12 @@ class SelectField extends Component {
   }
 
   handleKeyDown = event => {
-    if (this.keyMap.hasOwnProperty(event.key)) {
-      if (event.key !== 'Enter' || this.expanded) {
+    const key = keycode.names[event.keyCode]
+    if (this.keyMap.hasOwnProperty(key)) {
+      if ((key !== 'enter' || this.expanded) && key !== 'space') {
         event.preventDefault()
       }
-      this.keyMap[event.key](event)
+      this.keyMap[key](event)
     } else {
       // return dom focus to input when the user tries to type
       if (this._input && this.props.editable) {
@@ -431,7 +441,8 @@ class SelectField extends Component {
   }
 
   handleKeyUp = event => {
-    if (event.key === 'Escape' && this.expanded) {
+    const key = keycode.names[event.keyCode]
+    if (key === 'esc' && this.expanded) {
       event.preventDefault()
       this.close(event)
     }

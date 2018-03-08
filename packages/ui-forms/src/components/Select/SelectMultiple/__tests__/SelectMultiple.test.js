@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import keycode from 'keycode'
 import SelectMultiple from '../index'
 import SelectField from '../../SelectField'
 
@@ -85,7 +86,7 @@ describe('<SelectMultiple />', () => {
     testbed.tick()
     subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
@@ -94,7 +95,7 @@ describe('<SelectMultiple />', () => {
     testbed.tick()
     subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = 'Arub'
-    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(subject.instance()._input.value).to.equal('')
   })
 
@@ -106,7 +107,7 @@ describe('<SelectMultiple />', () => {
     testbed.tick()
     subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = label
-    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(onChange.firstCall).to.exist
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]
@@ -144,7 +145,7 @@ describe('<SelectMultiple />', () => {
     subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = 'Arub'
     subject.find('input[type="text"]').simulate('change', { preventDefault })
-    subject.find('input[type="text"]').simulate('keyUp', { key: 'Escape', preventDefault })
+    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(subject.instance().state.filteredOptions.length).to.equal(4)
   })
 
