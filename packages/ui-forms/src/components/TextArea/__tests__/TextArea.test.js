@@ -28,48 +28,6 @@ import TextArea from '../index'
 describe('TextArea', () => {
   const testbed = new Testbed(<TextArea label="Name" autoGrow={false} />)
 
-  it('adjusts the minHeight to fit the text', () => {
-    const subject = testbed.render({
-      autoGrow: true,
-      onChange: testbed.stub()
-    })
-    testbed.raf()
-    testbed.tick()
-    const originalMinHeight = parseFloat(subject.instance().minHeight)
-
-    /* eslint-disable max-len */
-    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
-    /* eslint-enable max-len */
-    testbed.raf()
-    testbed.tick()
-    const minHeight = parseFloat(subject.instance().minHeight)
-
-    expect(minHeight).to.be.above(originalMinHeight)
-  })
-
-  it('adjusts the minHeight to fit the text after being cleared', () => {
-    const subject = testbed.render({
-      autoGrow: true,
-      onChange: testbed.stub()
-    })
-    testbed.raf()
-    testbed.tick()
-
-    const originalMinHeight = subject.instance().minHeight
-    /* eslint-disable max-len */
-    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
-    /* eslint-enable max-len */
-    testbed.raf()
-    testbed.tick()
-
-    subject.setProps({ value: '' })
-    testbed.raf()
-    testbed.tick()
-
-    const minHeight = subject.instance().minHeight
-    expect(minHeight).to.equal(originalMinHeight)
-  })
-
   it('should accept a default value', () => {
     const subject = testbed.render({
       defaultValue: 'Tom Servo'
@@ -85,6 +43,44 @@ describe('TextArea', () => {
     const subject = testbed.render()
 
     expect(subject.find('label').length).to.equal(1)
+  })
+
+  it('should set an initial height', () => {
+    const subject = testbed.render({
+      height: '100px'
+    })
+    expect(subject.find('textarea').getComputedStyle().getPropertyValue('height')).to.contain('100px')
+  })
+
+  it('should resize if autoGrow is true', () => {
+    const subject = testbed.render({
+      autoGrow: true,
+      onChange: testbed.stub()
+    })
+
+    testbed.raf()
+    testbed.tick()
+
+    const textarea = subject.find('textarea')
+    const initialHeight = parseInt(textarea.getComputedStyle().getPropertyValue('height'), 10)
+
+    /* eslint-disable max-len */
+    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
+    /* eslint-enable max-len */
+
+    testbed.raf()
+    testbed.tick()
+
+    const resizedHeight = parseInt(textarea.getComputedStyle().getPropertyValue('height'), 10)
+    expect(resizedHeight).to.be.above(initialHeight)
+  })
+
+  it('should set a maxHeight', () => {
+    const subject = testbed.render({
+      maxHeight: '100px',
+      autoGrow: true
+    })
+    expect(subject.find('textarea').getComputedStyle().getPropertyValue('max-height')).to.contain('100px')
   })
 
   it('should focus the textarea when focus is called', () => {

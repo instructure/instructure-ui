@@ -53,10 +53,14 @@ class TextArea extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     id: PropTypes.string,
+    /**
+    * sets the font-size for the textarea
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
     /**
-    * the textarea will expand vertically to fit the height of the content
+    * the textarea will expand vertically to fit the height of the content,
+    * unless its content exceeds `maxHeight`
     */
     autoGrow: PropTypes.bool,
     /**
@@ -166,25 +170,32 @@ class TextArea extends Component {
       return
     }
 
-    if (this.initialMinHeight && this.value === '') {
-      this._textarea.style.minHeight = this.initialMinHeight
-    } else {
-      const scrollHeight = this._textarea.scrollHeight
-      let initialHeight = this.props.height
-      let minHeight = scrollHeight
-      let maxHeight = px(this.props.maxHeight, findDOMNode(this))
+    const offset = this._textarea.offsetHeight - this._textarea.clientHeight
+    let height = ''
 
-      // eslint-disable-next-line no-cond-assign
-      if (initialHeight && scrollHeight < (initialHeight = parseInt(initialHeight, 10))) {
-        minHeight = initialHeight
-      // eslint-disable-next-line no-cond-assign
-      } else if (maxHeight && scrollHeight > (maxHeight = parseInt(maxHeight, 10))) {
-        minHeight = maxHeight
+    // Note:
+    // 1. height has be reset to `auto` every time this method runs, or scrollHeight will not reset
+    this._textarea.style.height = 'auto'
+    // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
+
+    this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
+    height = (this._textarea.scrollHeight + offset) + 'px'
+
+    if (
+      this.props.maxHeight &&
+      (this._textarea.scrollHeight > px(this.props.maxHeight, findDOMNode(this)))) {
+      this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
+    } else if (this.props.height) {
+      if (this._textarea.value === '') {
+        height = this.props.height
+      } else if (px(this.props.height, findDOMNode(this)) > this._textarea.scrollHeight) {
+        this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
+        height = this.props.height
       }
-      const minHeightInPx = `${minHeight}px`
-      if (!this.initialMinHeight) { this.initialMinHeight = minHeightInPx }
-      this._textarea.style.minHeight = minHeightInPx
     }
+
+    this._textarea.style.height = height
+    this._textarea.scrollTop = this._textarea.scrollHeight
   }
 
   focus () {
@@ -230,6 +241,7 @@ class TextArea extends Component {
 
   render () {
     const {
+      autoGrow,
       placeholder,
       value,
       defaultValue,
@@ -237,6 +249,7 @@ class TextArea extends Component {
       required,
       width,
       height,
+      maxHeight,
       textareaRef,
       resize,
       size
@@ -250,9 +263,10 @@ class TextArea extends Component {
     }
 
     const style = {
-      width,
-      resize,
-      height
+      width: width,
+      resize: resize,
+      height: (!autoGrow) ? height : null,
+      maxHeight: maxHeight
     }
 
     return (

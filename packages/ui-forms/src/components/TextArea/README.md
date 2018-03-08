@@ -2,8 +2,28 @@
 describes: TextArea
 ---
 
-Standard HTML `textarea` element (resizable). Note the default `stacked` label &gt; input
-layout, and the alternate `inline` layout.
+TextArea renders a standard HTML `textarea` element. By default, TextArea will
+resize to fit its content. Use the `maxHeight` property to set a limit on the
+component's height.
+
+```js
+---
+example: true
+---
+<div>
+  <TextArea
+    label="Enter/delete text to see TextArea resize"
+  />
+  <br />
+  <TextArea
+    label="I can't go any higher than 10rem (160px)"
+    maxHeight="10rem"
+  />
+</div>
+```
+
+To allow the user to manually resize TextArea (in supported browsers), use the
+`resize` property.
 
 ```js
 ---

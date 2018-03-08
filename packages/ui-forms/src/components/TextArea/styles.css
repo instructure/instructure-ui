@@ -60,15 +60,12 @@
 
 .small {
   font-size: var(--smallFontSize);
-  min-height: var(--smallHeight);
 }
 
 .medium {
   font-size: var(--mediumFontSize);
-  min-height: var(--mediumHeight);
 }
 
 .large {
   font-size: var(--largeFontSize);
-  min-height: var(--largeHeight);
 }
