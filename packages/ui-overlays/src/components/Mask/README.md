@@ -4,9 +4,6 @@ describes: Mask
 
 A Mask component covers its closest positioned parent (either absolute or relative).
 
-You can use the [Overlay](#Overlay) component to make a mask that covers
-the viewport (with transitions).
-
 ```js
 ---
 example: true
