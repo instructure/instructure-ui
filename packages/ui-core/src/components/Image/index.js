@@ -25,7 +25,9 @@
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import Img from '@instructure/ui-elements/lib/components/Img'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
+Img.displayName = 'Image'
+
+export default deprecated('5.0.0', null, `${changedPackageWarning(
   'ui-core',
   'ui-elements'
-))(Img)
+)} It has also been renamed from [Image] to [Img].`)(Img)

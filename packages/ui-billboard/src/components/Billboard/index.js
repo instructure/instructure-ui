@@ -47,7 +47,7 @@ category: components
 class Billboard extends Component {
   static propTypes = {
     /**
-    * Provide an <Image> component or Instructure Icon for the hero image
+    * Provide an <Img> component or Instructure Icon for the hero image
     */
     hero: PropTypes.element,
     /**

@@ -20,7 +20,7 @@ example: true
     <Billboard
       heading="Upload your image"
       message="Drag and drop, or click to browse your computer"
-      hero={<Image src={placeholderImage(1200, 300)} />}
+      hero={<Img src={placeholderImage(1200, 300)} />}
     />
   }
 />

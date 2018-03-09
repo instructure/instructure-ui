@@ -134,7 +134,9 @@ class MediaStream extends Component {
   }
 
   stopTracks () {
-    this.stream && this.stream.getTracks().forEach(t => t.stop())
+    if (this.stream && typeof this.stream.getTracks === 'function') {
+      this.stream.getTracks().forEach(t => t.stop())
+    }
   }
 
   onMediaRecorderInit = (mediaRecorder) => {

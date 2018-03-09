@@ -205,13 +205,13 @@ class Example extends React.Component {
                       </GridRow>
                       <GridRow colSpacing="medium">
                         <GridCol>
-                          <Image role="img" src={placeholderImage(250, 250)} />
+                          <Img role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                         <GridCol>
-                          <Image role="img" src={placeholderImage(250, 250)} />
+                          <Img role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                         <GridCol>
-                          <Image role="img" src={placeholderImage(250, 250)} />
+                          <Img role="img" src={placeholderImage(250, 250)} />
                         </GridCol>
                       </GridRow>
                     </Grid>

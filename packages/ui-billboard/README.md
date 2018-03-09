@@ -27,7 +27,7 @@ example: true
   size="medium"
   heading="Well, this is awkward."
   message="Think there should be something here?"
-  hero={<Image src={placeholderImage(900, 500)} />} />
+  hero={<Img src={placeholderImage(900, 500)} />} />
 ```
 
 ### Components
