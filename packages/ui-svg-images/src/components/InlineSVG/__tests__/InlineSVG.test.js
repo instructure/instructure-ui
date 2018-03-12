@@ -127,6 +127,14 @@ describe('<InlineSVG />', () => {
     expect(subject.props().focusable).to.equal(true)
   })
 
+  it('should display block when inline is false', () => {
+    const subject = testbed.render({
+      inline: false
+    })
+
+    expect(subject.getComputedStyle().getPropertyValue('display')).to.contain('block')
+  })
+
   it('should allow passing in the svg src as a string', () => {
     const subject = testbed.render({
       children: null,

@@ -13,8 +13,9 @@ InlineSVG accepts the `className` prop, which you can use to style your image.
 For sizing, the component accepts `width` and `height` props, which are added
 to the SVG as attributes.
 
-Note that setting your SVG to `display: block` will remove extra space at the bottom of
-the image that results from it displaying inline (the default).
+Note that setting `inline` to `false` will cause the SVG to display block, which
+can be useful for removing extra space at the bottom of the SVG that results from
+it displaying inline (the default).
 
 ```js
 ---

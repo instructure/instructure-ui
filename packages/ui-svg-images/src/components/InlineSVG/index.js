@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import uid from '@instructure/ui-utils/lib/uid'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -46,14 +47,16 @@ export default class InlineSVG extends Component {
     description: PropTypes.string,
     focusable: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    inline: PropTypes.bool
   }
 
   static defaultProps = {
     focusable: false,
     src: '',
     title: '',
-    description: ''
+    description: '',
+    inline: true
   }
 
   static prepareSrc = src => {
@@ -143,7 +146,7 @@ export default class InlineSVG extends Component {
     return (
       <svg
         {...parseAttributes(this.props.src)}
-        {...props}
+        {...omitProps(this.props, InlineSVG.propTypes, ['inline'])}
         style={{
           ...style,
           width,
@@ -157,6 +160,8 @@ export default class InlineSVG extends Component {
         focusable={focusable ? 'true' : 'false'}
         className={classnames({
           [styles.root]: true,
+          [styles.inline]: this.props.inline,
+          [styles.block]: !this.props.inline,
           [props.className]: props.className
         })}
       >

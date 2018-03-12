@@ -91,6 +91,20 @@ example: true
 <SVGIcon src={iconExample} size="medium" rotate="90" />
 ```
 
+### Changing the icon's display property
+
+SVGIcon defaults to displaying `inline-block`, which can result in some space
+appearing beneath the icon, as it will inherit its parent's `line-height`.
+In situations where this is undesirable, you can set `inline` to `false` to make
+the icon display as a block-level element.
+
+```js
+---
+example: true
+---
+<SVGIcon src={iconExample} size="medium" inline={false} />
+```
+
 ### Children
 
 The SVGIcon component also accepts SVG content as jsx via the children prop.

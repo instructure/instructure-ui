@@ -2,3 +2,11 @@
   color: inherit;
   fill: currentColor;
 }
+
+.inline {
+  display: inline-block;
+}
+
+.block {
+  display: block;
+}
