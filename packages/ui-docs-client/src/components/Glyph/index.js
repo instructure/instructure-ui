@@ -53,7 +53,7 @@ class Variant extends Component {
     let icon
 
     if (glyph.src) {
-      icon = <InlineSVG src={glyph.src} width="2rem" height="2rem" title={`${name} (${variant})`} />
+      icon = <InlineSVG src={glyph.src} title={`${name} (${variant})`} />
     } else if (typeof glyph === 'function') {
       const Icon = glyph
       icon = <Icon title={`${name} (${variant})`} />

@@ -47,43 +47,34 @@ category: components/utilities
 class SVGIcon extends Component {
   static propTypes = {
     ...InlineSVG.propTypes,
-    width: PropTypes.string,
-    height: PropTypes.string,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
     size: PropTypes.oneOf([undefined, 'x-small', 'small', 'medium', 'large', 'x-large'])
   }
 
   static defaultProps = {
-    rotate: '0',
-    size: undefined
+    rotate: '0'
   }
 
   render () {
     const {
-      width,
-      height,
       rotate,
       className,
       size,
-      style, // eslint-disable-line react/prop-types
       ...props
     } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
-      [styles[`size--${size}`]]: size,
-      [className]: className
-    }
 
     return (
       <InlineSVG
         {...props}
-        style={{ ...style, width, height }}
-        width={width || '1em'}
-        height={height || '1em'}
         rotate={rotate}
-        className={classnames(classes)}
+        className={classnames({
+          [styles.root]: true,
+          [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
+          [styles[`size--${size}`]]: size,
+          [className]: className
+        })}
       />
     )
   }

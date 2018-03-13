@@ -44,7 +44,9 @@ export default class InlineSVG extends Component {
     src: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,
-    focusable: PropTypes.bool
+    focusable: PropTypes.bool,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -126,12 +128,29 @@ export default class InlineSVG extends Component {
   }
 
   render () {
-    const { title, description, focusable, children, src, ...props } = this.props
+    const {
+      style, // eslint-disable-line react/prop-types
+      width,
+      height,
+      title,
+      description,
+      focusable,
+      children,
+      src,
+      ...props
+    } = this.props
 
     return (
       <svg
         {...parseAttributes(this.props.src)}
         {...props}
+        style={{
+          ...style,
+          width,
+          height
+        }}
+        width={width || '1em'}
+        height={height || '1em'}
         aria-hidden={title ? null : 'true'}
         aria-labelledby={this.labelledBy}
         role={this.role}
