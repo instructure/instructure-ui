@@ -38,8 +38,8 @@ parent: MetricsList
 export default class MetricsListItem extends Component {
   static propTypes = {
     textAlign: PropTypes.oneOf(['start','center', 'end']),
-    label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired
+    label: PropTypes.node.isRequired,
+    value: PropTypes.node.isRequired
   }
   static defaultProps = {
     textAlign: 'center'
