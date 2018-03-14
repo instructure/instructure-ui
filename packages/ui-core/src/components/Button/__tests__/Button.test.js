@@ -48,8 +48,8 @@ describe('<Button/>', () => {
       href: 'example.html'
     })
 
-    expect(subject.tagName())
-      .to.equal('A')
+    expect(subject.tagName()).to.equal('A')
+    expect(subject.find('[href="example.html"]')).to.have.length(1)
   })
 
   it('should render designated tag if `as` prop is specified', () => {
@@ -145,7 +145,7 @@ describe('<Button/>', () => {
       const onClick = testbed.stub()
 
       const subject = testbed.render({
-        href: 'example.html',
+        href: '#',
         onClick
       })
 

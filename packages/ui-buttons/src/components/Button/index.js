@@ -118,9 +118,10 @@ class Button extends Component {
       e.preventDefault()
       e.stopPropagation()
 
-      if (typeof onClick === 'function' && !disabled) {
+      if ((typeof onClick === 'function') && !disabled) {
         onClick(e)
-      } else if (href) {
+      }
+      if (href) {
         findDOMNode(this._button).click() // eslint-disable-line react/no-find-dom-node
       }
     }
