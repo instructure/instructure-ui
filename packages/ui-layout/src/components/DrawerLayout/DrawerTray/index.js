@@ -26,7 +26,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
 import themeable from '@instructure/ui-themeable'
