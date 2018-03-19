@@ -1,4 +1,4 @@
-FROM instructure/node:8.6
+FROM instructure/node:8
 
 EXPOSE 9876
 
