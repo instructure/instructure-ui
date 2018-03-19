@@ -10,8 +10,10 @@ order: 5
 
 There are two active branches: `master`, and `beta`.
 
-In general, changes land on `master` first, and fixes to `beta`
-are applied by cherry picking from `master`.
+All development is off of the `master` branch, so in general, changes land on `master` first,
+and fixes are applied to `beta` by cherry picking them from `master`.
+
+All stable releases should be run off of the `beta` branch (see below).
 
 ```text
 master: A - B
@@ -55,15 +57,12 @@ Before beginning you will need:
 
 - Permissions to write/push to the `beta` branch.
 
-To promote `master` to `beta`:
-
-Important: the following should only be run when we're ready to release any un-released
-breaking changes that are in the `master` branch.
+To promote `master` to `beta` prior to running a release:
 
 1. Run `git fetch origin --tags`.
 1. Run `git checkout -B beta --track origin/master` to point the `beta` branch to `master`.
 1. Run `git merge origin/beta` to preserve the release tags/history.
-1. Run `git push -f origin beta` to update the remote `beta` branch.
+1. Run `git push origin beta` to update the remote `beta` branch.
 
 
 ### Beta Release Process
