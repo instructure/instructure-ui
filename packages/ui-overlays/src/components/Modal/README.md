@@ -76,7 +76,7 @@ example: true
            onDismiss={() => { this.setState({ open: false }) }}
            size={this.state.size}
            label="Modal Dialog: Hello World"
-           shouldCloseOnOverlayClick
+           shouldCloseOnDocumentClick
          >
            <ModalHeader>
              {this.renderCloseButton()}
@@ -147,7 +147,7 @@ const fpo = lorem.paragraphs(1)
            onDismiss={() => { this.setState({ open: false }) }}
            size="medium"
            label="Modal Dialog: Hello World"
-           shouldCloseOnOverlayClick
+           shouldCloseOnDocumentClick
          >
            <ModalHeader>
              {this.renderCloseButton()}

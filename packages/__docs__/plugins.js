@@ -86,6 +86,7 @@ plugins = plugins.concat([
       'packages/ui-utils/src/dom/calculateElementPosition.js',
       'packages/ui-utils/src/dom/findTabbable.js',
       'packages/ui-utils/src/dom/focusManager.js',
+      'packages/ui-utils/src/dom/scopeTab.js',
       'packages/ui-utils/src/react/containerQuery.js',
       'packages/ui-utils/src/Decimal.js'
     ],

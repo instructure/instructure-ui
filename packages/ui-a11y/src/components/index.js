@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 export AccessibleContent from './AccessibleContent'
-export FocusRegion from './FocusRegion'
+export Dialog from './Dialog'
 export PresentationContent from './PresentationContent'
 export ScreenReaderContent from './ScreenReaderContent'

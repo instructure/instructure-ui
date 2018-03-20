@@ -42,7 +42,7 @@ import MenuItemSeparator from './MenuItemSeparator'
 category: components/navigation
 ---
 **/
-class Menu extends Component {
+export default class Menu extends Component {
   static propTypes = {
     /**
     * Children of type `MenuItem`
@@ -62,10 +62,6 @@ class Menu extends Component {
     * A description of the menu
     */
     title: PropTypes.string,
-    /**
-    * Sets aria-hidden
-    */
-    hidden: PropTypes.bool,
     disabled: PropTypes.bool,
     /**
     * The trigger element. Declaring a trigger will create a menu in a popover.
@@ -96,7 +92,7 @@ class Menu extends Component {
     */
     onSelect: PropTypes.func,
     /**
-    * Call this function when the menu item is closed (via ESC, TAB key or item selected)
+    * Call this function when the menu popover is dismissed (via ESC, TAB key or item selected)
     */
     onDismiss: PropTypes.func,
     /**
@@ -107,7 +103,7 @@ class Menu extends Component {
     onKeyDown: PropTypes.func,
     onKeyUp: PropTypes.func,
     onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
+    onBlur: PropTypes.func
   }
 
   static defaultProps = {
@@ -142,18 +138,29 @@ class Menu extends Component {
   }
 
   render () {
-    const Component = this.props.trigger ? MenuPopover : MenuList
-    const props = pickProps(this.props, Component.propTypes)
-    return (
-      <Component {...props} ref={this.handleRef} />
-    )
+    const { show, ...props } = this.props
+    if (this.props.trigger) {
+      return (
+        <MenuPopover
+          {...pickProps(props, MenuPopover.propTypes)}
+          show={show}
+          ref={this.handleRef}
+        />
+      )
+    } else {
+      return (
+        <MenuList
+          {...pickProps(props, MenuList.propTypes)}
+          ref={this.handleRef}
+        />
+      )
+    }
   }
 }
 
-export default Menu
-export { default as MenuPopover } from './MenuPopover'
-export { default as MenuList } from './MenuList'
 export { default as MenuItem } from './MenuItem'
+export { default as MenuList } from './MenuList'
+export { default as MenuPopover } from './MenuPopover'
 export { default as MenuItemGroup } from './MenuItemGroup'
 export { default as MenuItemSeparator } from './MenuItemSeparator'
 export { default as MenuItemFlyout } from './MenuItemFlyout'

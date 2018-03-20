@@ -1,0 +1,177 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import Container from '@instructure/ui-container/lib/components/Container'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+
+import FocusRegionManager from '../../utils/FocusRegionManager'
+
+/**
+---
+category: components/utilities
+---
+**/
+
+@deprecated('5.0.0', {
+  applicationElement: true
+},
+'Elements outside of the `<Dialog />` are now hidden from screen readers by default. ' +
+'Use the `ignore` prop to specify any elements that should not be hidden')
+
+class Dialog extends Component {
+  static propTypes = {
+    ...Container.propTypes,
+
+    /**
+     * The children to be rendered within the `<Dialog />`
+     */
+    children: PropTypes.node,
+
+    label: PropTypes.string,
+
+    /**
+     * Whether or not the `<Dialog />` is open
+     */
+    open: PropTypes.bool,
+
+    onDismiss: PropTypes.func,
+
+    /**
+     * An element or a function returning an element to focus by default
+     */
+    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+    /**
+     * An element or a function returning an element that wraps the content of the `<Dialog />`
+     */
+    contentElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
+
+    /**
+     * An element, function returning an element, or array of elements that will not be hidden from
+     * the screen reader when the `<Dialog />` is open
+     */
+    liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
+    shouldContainFocus: PropTypes.oneOfType([
+      PropTypes.bool,
+      PropTypes.oneOf(['keyboard', 'screenreader'])
+    ]),
+    shouldReturnFocus: PropTypes.bool,
+    shouldCloseOnDocumentClick: PropTypes.bool,
+    shouldCloseOnEscape: PropTypes.bool
+  }
+
+  static defaultProps = {
+    open: false,
+    shouldContainFocus: false,
+    shouldReturnFocus: false,
+    shouldCloseOnDocumentClick: true,
+    shouldCloseOnEscape: true,
+    defaultFocusElement: null,
+    contentElement: null,
+    liveRegion: null,
+    onDismiss: () => {}
+  }
+
+  _timeouts = []
+
+  componentDidMount () {
+    if (this.props.open) {
+      this.focus()
+    }
+  }
+
+  componentDidUpdate (prevProps) {
+    const { open } = this.props
+
+    if (open && !prevProps.open) {
+      this.focus()
+    } else if (!open && prevProps.open) {
+      this.blur()
+    }
+  }
+
+  componentWillUnmount () {
+    if (this.props.open) {
+      this.blur()
+    }
+
+    this._timeouts.forEach(timeout => clearTimeout(timeout))
+    this._timeouts = []
+  }
+
+  focus () {
+    const {
+      open,
+      contentElement,
+      ...options
+    } = this.props
+
+    this._timeouts.push(setTimeout(() => {
+      FocusRegionManager.focusRegion(this.contentElement, {
+        ...options
+      })
+    }, 0))
+  }
+
+  blur () {
+    FocusRegionManager.blurRegion(this.contentElement)
+  }
+
+  get focused () {
+    return FocusRegionManager.isFocused(this.contentElement)
+  }
+
+  get contentElement () {
+    let contentElement = findDOMNode(this.props.contentElement)
+
+    if (!contentElement) {
+      contentElement = this._root
+    }
+
+    return contentElement
+  }
+
+  render () {
+    return this.props.open
+      ? <Container
+        {...omitProps(this.props, Dialog.propTypes)}
+        {...pickProps(this.props, Container.propTypes)}
+        ref={el => {
+          this._root = el
+        }}
+        role={this.props.label ? 'region' : null}
+        aria-label={this.props.label}
+      >
+        {this.props.children}
+      </Container>
+      : null
+  }
+}
+
+export default Dialog

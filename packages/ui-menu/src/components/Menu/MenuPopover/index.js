@@ -226,19 +226,29 @@ export default class MenuPopover extends Component {
     }
   }
 
+  focused () {
+    return this._menu && this._menu.focused()
+  }
+
+  get focusedIndex () {
+    return this._menu && this._menu.focusedIndex
+  }
+
   render () {
     const { onFocus, children } = this.props
 
     const menu = (
       <div className={styles.menu}>
         <MenuList
+          {...pickProps(this.props, MenuList.propTypes)}
           labelledBy={this.labelId}
-          hidden={!this.show}
+          show={this.show}
           ref={el => {
             this._menu = el
           }}
           onSelect={this.handleMenuSelect}
           onDismiss={this.handleMenuDismiss}
+          onToggle={this.handleToggle}
         >
           {children}
         </MenuList>

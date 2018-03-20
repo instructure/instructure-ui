@@ -53,7 +53,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Dialog",
-    "replace": "@instructure/ui-a11y/lib/components/FocusRegion"
+    "replace": "@instructure/ui-a11y/lib/components/Dialog"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/DateInput",

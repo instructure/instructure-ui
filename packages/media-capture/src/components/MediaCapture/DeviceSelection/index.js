@@ -24,10 +24,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
-import { MenuItem, MenuItemGroup } from '@instructure/ui-menu/lib/components/Menu'
 import IconMicSolid from '@instructure/ui-icons/lib/Solid/IconMic'
 import IconVideoSolid from '@instructure/ui-icons/lib/Solid/IconVideo'
-import Menu from '@instructure/ui-menu/lib/components/Menu'
+import Menu, { MenuItem, MenuItemGroup } from '@instructure/ui-menu/lib/components/Menu'
 import themeable from '@instructure/ui-themeable'
 
 import { translate } from '../../../constants/translated/translations'

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
@@ -458,14 +458,14 @@ class Popover extends Component {
 
     if (this.shown) {
       content = (
-        <FocusRegion
-          {...pickProps(this.props, FocusRegion.propTypes)}
+        <Dialog
+          {...pickProps(this.props, Dialog.propTypes)}
           open={this.shown}
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
         >
           {content}
-        </FocusRegion>
+        </Dialog>
       )
     }
 

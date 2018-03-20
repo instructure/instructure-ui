@@ -49,7 +49,7 @@ class Example extends React.Component {
           open={this.state.isOpen}
           onDismiss={() => { this.setState({ isOpen: false }) }}
           label="Media Capture"
-          shouldCloseOnOverlayClick
+          shouldCloseOnDocumentClick
         >
           <ModalBody padding="xx-large">
             {this.renderCloseButton()}

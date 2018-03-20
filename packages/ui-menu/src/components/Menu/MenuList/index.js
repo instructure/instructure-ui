@@ -48,7 +48,7 @@ parent: Menu
 ---
 **/
 @themeable(theme, styles)
-class MenuList extends Component {
+export default class MenuList extends Component {
   static propTypes = {
     /**
     * children of type `MenuItem`
@@ -68,10 +68,6 @@ class MenuList extends Component {
     * a description of the menu
     */
     title: PropTypes.string,
-    /**
-    * sets aria-hidden
-    */
-    hidden: PropTypes.bool,
     disabled: PropTypes.bool,
     /**
     * call this function when a menu item is selected (note: value argument will default to the index)
@@ -85,9 +81,26 @@ class MenuList extends Component {
     onKeyUp: PropTypes.func,
     onFocus: PropTypes.func,
     onBlur: PropTypes.func,
+
+    /**
+    * should the menu be open for the initial render
+    */
+    defaultShow: PropTypes.bool,
+
+    /**
+    * is the menu open (should be accompanied by `onToggle`)
+    */
+    show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
+
+    /**
+    * Call this function when the menu is toggled open/closed. When used with `show`,
+    * the component will not control its own state.
+    */
+    onToggle: PropTypes.func
   }
 
   static defaultProps = {
+    defaultShow: true,
     disabled: false,
     onKeyDown: function (e) {},
     onKeyUp: function (e) {},
@@ -97,8 +110,17 @@ class MenuList extends Component {
     onSelect: function (e, value, selected) {}
   }
 
-  state = {
-    hasFocus: false
+  constructor (props) {
+    super()
+
+    this.state = {
+      hasFocus: false,
+      show: true
+    }
+
+    if (props.show === undefined) {
+      this.state.show = props.defaultShow
+    }
   }
 
   _menuitems = []
@@ -155,6 +177,10 @@ class MenuList extends Component {
 
   get focusedIndex () {
     return this._menuitems.findIndex((item) => (item.focused === true))
+  }
+
+  get show () {
+    return this.props.show === undefined ? this.state.show : this.props.show
   }
 
   moveFocus (step) {
@@ -297,7 +323,6 @@ class MenuList extends Component {
   render () {
     const {
       labelledBy,
-      hidden,
       disabled,
       controls,
       title,
@@ -313,10 +338,10 @@ class MenuList extends Component {
         tabIndex={this.state.hasFocus ? null : '0'}
         ref={this.handleMenuRef}
         className={styles.root}
-        aria-hidden={hidden}
+        aria-hidden={!this.show}
         aria-labelledby={labelledBy}
         aria-controls={controls}
-        aria-expanded={!hidden}
+        aria-expanded={this.show}
         aria-disabled={disabled ? 'true' : null}
         title={title}
         onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
@@ -328,5 +353,3 @@ class MenuList extends Component {
     )
   }
 }
-
-export default MenuList

@@ -122,31 +122,34 @@ describe('<Modal />', () => {
 
   it('should dismiss when overlay clicked by default', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+
+    testbed.render({
       open: true,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.have.been.called
   })
 
   it('should dismiss when overlay clicked with prop', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+    testbed.render({
       open: true,
-      shouldCloseOnOverlayClick: false,
+      shouldCloseOnDocumentClick: false,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.not.have.been.called
   })

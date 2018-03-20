@@ -217,7 +217,7 @@ class MyIcon extends React.Component {
               onDismiss={this.handleModalDismiss}
               label={`Usage: ${name} ${variant}`}
               size="medium"
-              shouldCloseOnOverlayClick
+              shouldCloseOnDocumentClick
               closeButtonLabel="Close"
             >
               <ModalHeader>

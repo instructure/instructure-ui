@@ -25,14 +25,14 @@
 import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 
-import FocusRegion from '../index'
+import Dialog from '../index'
 
-describe('<FocusRegion />', () => {
+describe('<Dialog />', () => {
   const testbed = new Testbed(
     (
-      <FocusRegion>
+      <Dialog>
         <Button>Hello World</Button>
-      </FocusRegion>
+      </Dialog>
     )
   )
 
@@ -49,16 +49,15 @@ describe('<FocusRegion />', () => {
   })
 
   it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true, label: 'FocusRegion Example' })
+    const subject = testbed.render({ open: true, label: 'Dialog Example' })
     expect(subject.find('[role="region"]')).to.be.present
-    expect(subject.find('[aria-label="FocusRegion Example"]')).to.be.present
+    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
     const onDismiss = testbed.stub()
     testbed.render({
       open: true,
-      shouldCloseOnEscape: true,
       onDismiss
     })
 
@@ -87,10 +86,10 @@ describe('<FocusRegion />', () => {
   })
 })
 
-describe('<FocusRegion /> managed focus', () => {
-  class FocusRegionExample extends React.Component {
+describe('<Dialog /> managed focus', () => {
+  class DialogExample extends React.Component {
     static propTypes = {
-      ...FocusRegion.propTypes
+      ...Dialog.propTypes
     }
 
     componentDidMount () {
@@ -108,18 +107,18 @@ describe('<FocusRegion /> managed focus', () => {
               this._input = c
             }}
           />
-          <FocusRegion {...this.props} label="A Modal">
+          <Dialog {...this.props} label="A Modal">
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />
             </div>
-          </FocusRegion>
+          </Dialog>
         </div>
       )
     }
   }
 
-  const testbed = new Testbed(<FocusRegionExample />)
+  const testbed = new Testbed(<DialogExample />)
 
   it('should focus the first tabbable element by default', () => {
     testbed.render({
@@ -131,21 +130,16 @@ describe('<FocusRegion /> managed focus', () => {
     expect(document.getElementById('input-one') === document.activeElement).to.be.true
   })
 
-  it('should focus the first tabbable element when open prop becomes true', done => {
+  it('should focus the first tabbable element when open prop becomes true', () => {
     const subject = testbed.render({
       open: false
     })
 
-    subject.setProps(
-      {
-        open: true
-      },
-      () => {
-        testbed.tick()
-        expect(document.getElementById('input-one') === document.activeElement).to.be.true
-        done()
-      }
-    )
+    subject.setProps({ open: true })
+
+    testbed.tick()
+
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true
   })
 
   it('should take a prop for finding default focus', () => {

@@ -60,6 +60,7 @@ describe('<Modal />', () => {
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true })
     const portal = subject.find(Portal).unwrap()
+
     expect(portal.node.querySelector('[role="region"]')).to.exist
     expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist
   })
@@ -122,31 +123,35 @@ describe('<Modal />', () => {
 
   it('should dismiss when overlay clicked by default', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+
+    testbed.render({
       open: true,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.have.been.called
   })
 
   it('should dismiss when overlay clicked with prop', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+
+    testbed.render({
       open: true,
-      shouldCloseOnOverlayClick: false,
+      shouldCloseOnDocumentClick: false,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.not.have.been.called
   })

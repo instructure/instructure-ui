@@ -54,7 +54,7 @@ render: false
          >
             <Mask
               fullScreen
-              onDismiss={() => { this.setState({ open: false }) }}
+              onClick={() => { this.setState({ open: false }) }}
             >
               <Heading>Click anywhere around this text to close the Mask</Heading>
             </Mask>

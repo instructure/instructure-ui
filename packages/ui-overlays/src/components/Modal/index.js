@@ -24,8 +24,9 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
-import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -36,7 +37,14 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
-import ModalContent from './ModalContent'
+import themeable from '@instructure/ui-themeable'
+import Browser from '@instructure/ui-utils/lib/Browser'
+
+import Mask from '../Mask'
+
+import styles from './styles.css'
+import theme from './theme'
+
 import ModalHeader from './ModalHeader'
 import ModalBody from './ModalBody'
 import ModalFooter from './ModalFooter'
@@ -59,8 +67,10 @@ category: components/dialogs
 @deprecated('5.0.0', {
   closeButtonLabel: true,
   closeButtonRef: true,
-  applicationElement: true
+  applicationElement: true,
+  shouldCloseOnOverlayClick: 'shouldCloseOnDocumentClick'
 })
+@themeable(theme, styles)
 export default class Modal extends Component {
   static propTypes = {
     /**
@@ -104,9 +114,9 @@ export default class Modal extends Component {
     shouldReturnFocus: PropTypes.bool,
 
     /**
-     * Whether the `<Modal/>` should request close when the overlay is clicked
+     * Whether the `<Modal/>` should request close when the document is clicked
      */
-    shouldCloseOnOverlayClick: PropTypes.bool,
+    shouldCloseOnDocumentClick: PropTypes.bool,
 
     /**
      * Callback fired when `<Modal />` content has been mounted in the DOM
@@ -196,7 +206,7 @@ export default class Modal extends Component {
     insertAt: 'bottom',
     liveRegion: null,
     contentRef: el => {},
-    shouldCloseOnOverlayClick: true,
+    shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
     defaultFocusElement: null,
     children: null
@@ -273,7 +283,17 @@ export default class Modal extends Component {
   }
 
   render () {
-    const { children, contentRef, ...props } = this.props
+    const {
+      shouldCloseOnDocumentClick,
+      shouldCloseOnOverlayClick, // eslint-disable-line react/prop-types
+      children,
+      contentRef,
+      onDismiss,
+      size,
+      ...props
+    } = this.props
+
+    const ie11 = Browser.msie && Browser.version > 10
 
     return (
       <Portal
@@ -289,30 +309,42 @@ export default class Modal extends Component {
           type={this.props.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <FocusRegion
-            {...pickProps(this.props, FocusRegion.propTypes)}
+          <Dialog
+            {...pickProps(this.props, Dialog.propTypes)}
+            label={this.props.label}
             defaultFocusElement={this.defaultFocusElement}
-            contentElement={() => this._content}
-            shouldCloseOnDocumentClick={false}
+            shouldCloseOnDocumentClick={
+              shouldCloseOnOverlayClick === undefined
+                ? shouldCloseOnDocumentClick
+                : shouldCloseOnOverlayClick
+            }
             shouldCloseOnEscape
             shouldContainFocus
             open={this.state.open}
-            role="region"
           >
-            <ModalContent
-              {...omitProps(props, Modal.propTypes)}
-              {...pickProps(props, ModalContent.propTypes)}
-              contentRef={el => {
-                this._content = el
-                if (typeof contentRef === 'function') {
-                  contentRef(el)
-                }
-              }}
+            <Mask
+              placement={ie11 ? 'top' : 'center'}
+              fullScreen
             >
-              {this.renderCloseButton()}
-              {children}
-            </ModalContent>
-          </FocusRegion>
+              <div
+                {...omitProps(props, Modal.propTypes)}
+                className={classnames({
+                  [styles.content]: true,
+                  [styles[size]]: true,
+                  [styles.ie11]: ie11
+                })}
+                ref={el => {
+                  this._content = el
+                  if (typeof contentRef === 'function') {
+                    contentRef(el)
+                  }
+                }}
+              >
+                {this.renderCloseButton()}
+                {children}
+              </div>
+            </Mask>
+          </Dialog>
         </Transition>
       </Portal>
     )

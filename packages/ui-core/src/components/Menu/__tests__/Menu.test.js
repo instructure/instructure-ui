@@ -156,7 +156,7 @@ describe('<Menu />', () => {
     const subject = testbed.render({
       labelledBy: 'id',
       controls: 'id',
-      hidden: true,
+      defaultShow: false,
       disabled: true,
       title: 'title'
     })

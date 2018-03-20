@@ -46,7 +46,7 @@ parent: Menu
 ---
 **/
 @themeable(theme, styles)
-class MenuItemGroup extends Component {
+export default class MenuItemGroup extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     allowMultiple: PropTypes.bool,
@@ -216,5 +216,3 @@ class MenuItemGroup extends Component {
     )
   }
 }
-
-export default MenuItemGroup

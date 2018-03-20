@@ -1,8 +1,8 @@
 ---
-describes: FocusRegion
+describes: Dialog
 ---
 
-The `FocusRegion` component is a utility that is used by
+The `Dialog` component is a utility that is used by
 [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray) for keyboard accessibility.
 
 ```js
@@ -22,11 +22,11 @@ class Example extends React.Component {
         <Button
           onClick={() => this.setState({ open: true })}
         >
-          Open the FocusRegion
+          Open the Dialog
         </Button>
         <Portal open={this.state.open}>
           <Mask>
-            <FocusRegion
+            <Dialog
               open={this.state.open}
               shouldContainFocus
               defaultFocusElement={() => this._firstName}
@@ -42,7 +42,7 @@ class Example extends React.Component {
                   <TextInput width="12rem" label="Last" />
                 </FormFieldGroup>
               </ContextBox>
-            </FocusRegion>
+            </Dialog>
           </Mask>
         </Portal>
       </Container>

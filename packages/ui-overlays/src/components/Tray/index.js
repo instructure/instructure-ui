@@ -26,13 +26,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
-import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import themeable from '@instructure/ui-themeable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
@@ -40,7 +41,8 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
 
-import TrayContent from './TrayContent'
+import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---
@@ -61,6 +63,7 @@ category: components/dialogs
   closeButtonVariant: true,
   applicationElement: true
 })
+@themeable(theme, styles)
 class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
@@ -323,26 +326,34 @@ class Tray extends Component {
           type={this.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <TrayContent
-            {...pickProps(props, TrayContent.propTypes)}
+          <span
+            {...omitProps(this.props, Tray.propTypes)}
+            className={classnames({
+              [styles.root]: true,
+              [styles.border]: this.props.border,
+              [styles.shadow]: this.props.shadow,
+              [styles[this.props.size]]: true,
+              [styles[`placement--${this.props.placement}`]]: true,
+              [this.props.className]: this.props.className // eslint-disable-line react/prop-types
+            })}
             ref={(el) => {
               this._content = el
 
               if (typeof contentRef === 'function') {
                 contentRef(el)
               }
-          }}>
-            <FocusRegion
-              {...pickProps(props, FocusRegion.propTypes)}
+            }}
+          >
+            <Dialog
+              {...pickProps(props, Dialog.propTypes)}
               defaultFocusElement={this.defaultFocusElement}
               open={this.state.portalOpen || this.state.transitioning}
-              role="region"
               shouldCloseOnEscape
             >
               {this.renderCloseButton()}
               {children}
-            </FocusRegion>
-          </TrayContent>
+            </Dialog>
+          </span>
         </Transition>
       </Portal>
     )

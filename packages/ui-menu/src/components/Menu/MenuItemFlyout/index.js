@@ -50,7 +50,7 @@ parent: Menu
 ---
 **/
 @themeable(theme, styles)
-class MenuItemFlyout extends Component {
+export default class MenuItemFlyout extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**
@@ -286,5 +286,3 @@ class MenuItemFlyout extends Component {
     )
   }
 }
-
-export default MenuItemFlyout

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import MenuList from '../../MenuList'
+import MenuList from '../index'
 import MenuItem from '../../MenuItem'
 import MenuItemSeparator from '../../MenuItemSeparator'
 import MenuItemGroup from '../../MenuItemGroup'

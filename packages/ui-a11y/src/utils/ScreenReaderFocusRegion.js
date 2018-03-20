@@ -33,53 +33,62 @@ import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
  * for example, in overlay components where we want to restrict the screen
  * readers to the overlay content
  */
-class ScreenReaderFocusRegion {
-  constructor () {
-    this._nodes = []
+export default class ScreenReaderFocusRegion {
+  constructor (element, options = {
+    shouldContainFocus: true,
+    liveRegion: []
+  }) {
+    this._liveRegion = Array.isArray(options.liveRegion) ? options.liveRegion : [findDOMNode(options.liveRegion)]
+    this._contextElement = findDOMNode(element)
+    this._options = options
   }
 
-  /**
-   * Hide all elements outside of a specified node
-   * @param {ReactComponent|DomNode} el - component or DOM node we want to isolate
-   * @param {Function|DomNode|Array} ignore - An element, function returning an element, or array of elements
-   *  that will be ignored and will not receive aria-hidden
-   */
-  isolateRegion (el, ignore) {
-    let node = findDOMNode(el)
+  _observer = null
+  _attributes = []
+  _nodes = []
+  _parents = []
 
+  muteNode (node) {
     if (node) {
-      while (node && node.nodeType === 1 && node.tagName !== 'BODY') {
-        const screenReaderFocusRegionNode = new ScreenReaderFocusRegionNode(node, ignore)
-        screenReaderFocusRegionNode.isolateRegion()
-        this._nodes.push(screenReaderFocusRegionNode)
+      // When we are trapping screen reader focus on an element that
+      // is deep inside the DOM, we can't apply aria-hidden to the
+      // parents, so parent regions will be read if they have a role
+      // and/or aria-label assigned. To optimize SR ux we remove the role,
+      // aria-label, and aria-hidden attrs temporarily when the region
+      // is focused, and then we restore them when focus is lost.
+      [
+        'role',
+        'aria-label',
+        'aria-hidden' // this should never happen right?
+      ].forEach((attribute) => {
+        const value = node.getAttribute(attribute)
 
-        node = node.parentNode
-      }
+        if (value !== null) {
+          this._attributes.push([node, attribute, value])
+          node.removeAttribute(attribute)
+        }
+      })
+
+      this._observer.observe(node, { childList: true })
     }
   }
 
-  /**
-   * Restore all elements back to their unhidden state
-   */
-  openRegion () {
-    this._nodes.forEach((pathNode) => {
-      pathNode.openRegion()
-    })
-    this._nodes = []
-  }
-}
-
-class ScreenReaderFocusRegionNode {
-  constructor (pathChild, ignore) {
-    this._child = pathChild
-    this._parent = pathChild.parentElement
-    this._ignore = Array.isArray(ignore) ? ignore : [findDOMNode(ignore)]
-    this._parentAttributes = []
-    this._hiddenNodes = []
-    this._observer = null
+  hideNode (node) {
+    if (
+      node &&
+      node.nodeType === 1 &&
+      node !== this._contextElement &&
+      node.getAttribute('aria-hidden') !== 'true' &&
+      this._parents.indexOf(node) === -1 &&
+      this._nodes.indexOf(node) === -1 &&
+      this._liveRegion.indexOf(node) === -1
+    ) {
+      node.setAttribute('aria-hidden', 'true')
+      this._nodes.push(node)
+    }
   }
 
-  onMutation = (records) => {
+  handleDOMMutation = (records) => {
     records.forEach((record) => {
       record.addedNodes.forEach((addedNode) => {
         this.hideNode(addedNode)
@@ -88,82 +97,57 @@ class ScreenReaderFocusRegionNode {
       record.removedNodes.forEach((removedNode) => {
         // Node has been removed from the DOM, make sure it is
         // removed from our list of hidden nodes as well
-        const index = this._hiddenNodes.indexOf(removedNode)
+        const index = this._nodes.indexOf(removedNode)
         if (index >= 0) {
-          this._hiddenNodes.splice(index, 1)
+          this._nodes.splice(index, 1)
         }
       })
     })
   }
 
-  hideNode (node) {
-    const shouldHideNode = (
-      node &&
-      node.nodeType === 1 &&
-      node !== this._child &&
-      node.getAttribute('aria-hidden') !== 'true' &&
-      this._hiddenNodes.indexOf(node) === -1 &&
-      this._ignore.indexOf(node) === -1
-    )
+  setup () {
+    if (!this._options.shouldContainFocus) {
+      return
+    }
 
-    if (shouldHideNode) {
-      node.setAttribute('aria-hidden', 'true')
-      this._hiddenNodes.push(node)
+    this._observer = new MutationObserver(this.handleDOMMutation)
+
+    let node = this._contextElement
+
+    while (node && node.nodeType === 1 && node.tagName !== 'BODY') {
+      const parent = node.parentElement // can be null
+
+      if (parent) {
+        this._parents.push(parent)
+
+        this.muteNode(parent)
+
+        Array.prototype.slice.call(parent.childNodes)
+          .forEach((child) => {
+            this.hideNode(child)
+          })
+      }
+
+      node = node.parentNode // should never be null, will default to doc element
     }
   }
 
-  muteParentAttributes () {
-    // When we are trapping screen reader focus on an element that
-    // is deep inside the DOM, we can't apply aria-hidden to the
-    // parents, so parent regions will be read if they have a role
-    // and/or aria-label assigned. To optimize SR ux we remove the role,
-    // aria-label, and aria-hidden attrs temporarily when the region
-    // is focused, and then we restore them when focus is lost.
-    const muteAttributes = [
-      'role',
-      'aria-label',
-      'aria-hidden'
-    ]
+  teardown () {
+    if (this._observer) {
+      this._observer.disconnect()
+      this._observer = null
+    }
 
-    muteAttributes.forEach((attribute) => {
-      const pathParentAttribute = this._parent.getAttribute(attribute)
-
-      if (pathParentAttribute !== null) {
-        this._parentAttributes.push([attribute, pathParentAttribute])
-        this._parent.removeAttribute(attribute)
-      }
-    })
-  }
-
-  unmuteParentAttributes () {
-    this._parentAttributes.forEach((pathParentAttribute) => {
-      this._parent.setAttribute(pathParentAttribute[0], pathParentAttribute[1] || '')
-    })
-    this._parentAttributes = []
-  }
-
-  isolateRegion () {
-    this._observer = new MutationObserver(this.onMutation)
-    this._observer.observe(this._parent, { childList: true })
-
-    this.muteParentAttributes()
-
-    Array.prototype.slice.call(this._parent.childNodes).forEach((child) => {
-      this.hideNode(child)
-    })
-  }
-
-  openRegion () {
-    this._observer.disconnect()
-    this._observer = null
-
-    this._hiddenNodes.forEach((node) => {
+    this._nodes.forEach((node) => {
       node.removeAttribute('aria-hidden')
     })
-    this._hiddenNodes = []
+    this._nodes = []
 
-    this.unmuteParentAttributes()
+    this._attributes.forEach((attribute) => {
+      attribute[0].setAttribute(attribute[1], attribute[2] || '')
+    })
+    this._attributes = []
+
+    this._parents = []
   }
 }
-
-export default ScreenReaderFocusRegion

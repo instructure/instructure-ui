@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import FocusRegion from '@instructure/ui-a11y/lib/components/FocusRegion'
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
 import themeable from '@instructure/ui-themeable'
@@ -256,15 +256,15 @@ class DrawerTray extends Component {
     // jolted offscreen when the default focus element gets focus
     if (this.state.positioned) {
       trayContent = (
-        <FocusRegion
-          {...pickProps(this.props, FocusRegion.propTypes)}
+        <Dialog
+          {...pickProps(this.props, Dialog.propTypes)}
           open
           shouldCloseOnDocumentClick={false}
           shouldReturnFocus
           role="region"
         >
           {trayContent}
-        </FocusRegion>
+        </Dialog>
       )
     }
 
