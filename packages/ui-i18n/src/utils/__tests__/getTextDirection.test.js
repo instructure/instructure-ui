@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 2018 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,29 +21,39 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import getTextDirection from '../getTextDirection'
 
-import findDOMNode from './findDOMNode'
-import ownerWindow from './ownerWindow'
-import canUseDOM from './canUseDOM'
+describe('getTextDirection', () => {
+  const testbed = new Testbed(<div><h1>Hello</h1></div>)
 
-/**
- * ---
- * category: utilities/DOM
- * ---
- *
- * Get the associated CSS properties and values for a
- * specified element
- *
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @returns {Object} object containing css properties and values for the element
- */
-export default function getComputedStyle (el) {
-  let style = {}
+  beforeEach(() => {
+    testbed.setTextDirection('ltr')
+  })
 
-  if (canUseDOM) {
-    const node = el && findDOMNode(el)
-    style = node ? ownerWindow(el).getComputedStyle(node) : {}
-  }
+  it('defaults the dir of <html>', () => {
+    expect(getTextDirection()).to.equal(document.documentElement.getAttribute('dir'))
+  })
 
-  return style
-}
+  it('defaults to the dir of <html> when passed an element', () => {
+    const subject = testbed.render()
+
+    expect(getTextDirection(subject.node)).to.equal('ltr')
+  })
+
+  it('returns "rtl" if the `dir` of the element is "rtl"', () => {
+    const subject = testbed.render({
+      dir: 'rtl'
+    })
+
+    expect(getTextDirection(subject.node)).to.equal('rtl')
+  })
+
+  it('inherits value set by ancestor', () => {
+    const subject = testbed.render({
+      dir: 'rtl'
+    })
+
+    expect(getTextDirection(subject.find('h1').node)).to.equal('rtl')
+  })
+})

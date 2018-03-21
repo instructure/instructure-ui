@@ -38,6 +38,8 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
+import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
+
 import TrayContent from './TrayContent'
 
 /**
@@ -217,7 +219,8 @@ class Tray extends Component {
 
     this.state = {
       portalOpen: false,
-      transitioning: false
+      transitioning: false,
+      dir: 'ltr'
     }
   }
 
@@ -225,6 +228,10 @@ class Tray extends Component {
 
   componentDidMount () {
     this._isMounted = true
+
+    this.setState({
+      dir: getTextDirection(this._content)
+    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -243,14 +250,16 @@ class Tray extends Component {
 
   get transition () {
     const { placement, open } = this.props
+    const { dir } = this.state
+
     return classnames({
       'slide-down':
         (placement === 'top' && open) || (placement === 'bottom' && !open),
       'slide-up':
         (placement === 'bottom' && open) || (placement === 'top' && !open),
-      'slide-left':
+      [`slide-${dir === 'rtl' ? 'right' : 'left'}`]:
         (placement === 'start' && !open) || (placement === 'end' && open),
-      'slide-right':
+      [`slide-${dir === 'rtl' ? 'left' : 'right'}`]:
         (placement === 'end' && !open) || (placement === 'start' && open)
     })
   }
@@ -314,7 +323,15 @@ class Tray extends Component {
           type={this.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <TrayContent {...pickProps(props, TrayContent.propTypes)} ref={contentRef}>
+          <TrayContent
+            {...pickProps(props, TrayContent.propTypes)}
+            ref={(el) => {
+              this._content = el
+
+              if (typeof contentRef === 'function') {
+                contentRef(el)
+              }
+          }}>
             <FocusRegion
               {...pickProps(props, FocusRegion.propTypes)}
               defaultFocusElement={this.defaultFocusElement}

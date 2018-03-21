@@ -21,8 +21,8 @@
 
 .placement--top,
 .placement--bottom {
-  left: 0;
-  right: 0;
+  offset-inline-start: 0;
+  offset-inline-end: 0;
 }
 
 .placement--start,
@@ -55,18 +55,20 @@
 }
 
 .placement--start {
-  left: 0;
+  offset-inline-start: 0;
+  offset-inline-end: auto;
 
   &.border {
-    border-right-width: var(--borderWidth);
+    border-inline-end-width: var(--borderWidth);
   }
 }
 
 .placement--end {
-  right: 0;
+  offset-inline-end: 0;
+  offset-inline-start: auto;
 
   &.border {
-    border-left-width: var(--borderWidth);
+    border-inline-start-width: var(--borderWidth);
   }
 }
 

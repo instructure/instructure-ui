@@ -120,39 +120,63 @@ describe('<Tray />', () => {
   })
 
   describe('transition()', () => {
-    const enteringPlacements = {
-      start: 'slide-right',
-      end: 'slide-left',
-      top: 'slide-down',
-      bottom: 'slide-up'
+
+    const placements = {
+      ltr: {
+        enteringPlacements: {
+          start: 'slide-right',
+          end: 'slide-left',
+          top: 'slide-down',
+          bottom: 'slide-up'
+        },
+        exitingPlacements: {
+          start: 'slide-left',
+          end: 'slide-right',
+          top: 'slide-up',
+          bottom: 'slide-down'
+        }
+      },
+      rtl: {
+        enteringPlacements: {
+          start: 'slide-left',
+          end: 'slide-right'
+        },
+        exitingPlacements: {
+          start: 'slide-right',
+          end: 'slide-left'
+        }
+      }
     }
 
-    const exitingPlacements = {
-      start: 'slide-left',
-      end: 'slide-right',
-      top: 'slide-up',
-      bottom: 'slide-down'
-    }
+    for (const dir in placements) {
+      describe(`dir=${dir}`, () => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const placement in placements[dir].enteringPlacements) {
+          const val = placements[dir].enteringPlacements[placement]
+          it(`returns ${val}`, () => {
+            testbed.setTextDirection(dir)
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const placement in enteringPlacements) {
-      it(`returns ${enteringPlacements[placement]}`, () => {
-        const subject = testbed.render({
-          open: true,
-          placement: placement
-        })
-        expect(subject.instance().transition).to.equal(enteringPlacements[placement])
-      })
-    }
+            const subject = testbed.render({
+              open: true,
+              placement: placement
+            })
+            expect(subject.instance().transition).to.equal(val)
+          })
+        }
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const placement in exitingPlacements) {
-      it(`returns ${exitingPlacements[placement]}`, () => {
-        const subject = testbed.render({
-          open: false,
-          placement: placement
-        })
-        expect(subject.instance().transition).to.equal(exitingPlacements[placement])
+        // eslint-disable-next-line no-restricted-syntax
+        for (const placement in placements[dir].exitingPlacements) {
+          const val = placements[dir].exitingPlacements[placement]
+          it(`returns ${val}`, () => {
+            testbed.setTextDirection(dir)
+
+            const subject = testbed.render({
+              open: false,
+              placement: placement
+            })
+            expect(subject.instance().transition).to.equal(val)
+          })
+        }
       })
     }
   })

@@ -44,9 +44,9 @@ class Example extends React.Component {
 
   render () {
     const placementVariants = [
-      {value: 'start', label: 'Left'},
+      {value: 'start', label: 'Start'},
       {value: 'top', label: 'Top'},
-      {value: 'end', label: 'Right'},
+      {value: 'end', label: 'End'},
       {value: 'bottom', label: 'Bottom'}
     ]
 

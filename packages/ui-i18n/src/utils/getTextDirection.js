@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 2018 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,28 +22,21 @@
  * SOFTWARE.
  */
 
-import findDOMNode from './findDOMNode'
-import ownerWindow from './ownerWindow'
-import canUseDOM from './canUseDOM'
+import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
+import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
 
 /**
  * ---
- * category: utilities/DOM
+ * category: utilities/i18n
  * ---
  *
- * Get the associated CSS properties and values for a
- * specified element
- *
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @returns {Object} object containing css properties and values for the element
+ * Return the direction ('ltr' or 'rtl') of an element
+ * @param {Element} element will use the <html> element by default
+ * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
-export default function getComputedStyle (el) {
-  let style = {}
-
+export default function getTextDirection (element) {
   if (canUseDOM) {
-    const node = el && findDOMNode(el)
-    style = node ? ownerWindow(el).getComputedStyle(node) : {}
+    const el = element === undefined ? document.documentElement : element
+    return getComputedStyle(el).direction
   }
-
-  return style
 }
