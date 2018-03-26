@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-codemods",
-  "version": "4.7.3",
+  "version": "4.8.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
