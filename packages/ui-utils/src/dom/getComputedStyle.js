@@ -1,4 +1,5 @@
 import findDOMNode from './findDOMNode'
+import ownerWindow from './ownerWindow'
 import canUseDOM from './canUseDOM'
 
 /**
@@ -17,7 +18,7 @@ export default function getComputedStyle (el) {
 
   if (canUseDOM) {
     const node = el && findDOMNode(el)
-    style = node ? window.getComputedStyle(node) : {}
+    style = node ? ownerWindow(el).getComputedStyle(node) : {}
   }
 
   return style

@@ -70,6 +70,10 @@ class Testbed {
     this.sandbox.useFakeTimers()
   }
 
+  setTextDirection (dir) {
+    document.documentElement.setAttribute('dir', dir)
+  }
+
   teardown () {
     this.sandbox.reset()
     this.sandbox.restore()
@@ -87,6 +91,8 @@ class Testbed {
 
     this.rootNode && this.rootNode.remove()
     this.rootNode = undefined
+
+    document.documentElement.removeAttribute('dir')
   }
 
   render (props = {}, context) {

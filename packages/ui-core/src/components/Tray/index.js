@@ -6,6 +6,7 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import getTextDirection from '@instructure/ui-utils/lib/i18n/getTextDirection'
 
 import Portal from '../Portal'
 import Dialog from '../Dialog'
@@ -187,7 +188,8 @@ class Tray extends Component {
 
     this.state = {
       portalOpen: false,
-      transitioning: false
+      transitioning: false,
+      dir: 'ltr'
     }
   }
 
@@ -195,6 +197,11 @@ class Tray extends Component {
 
   componentDidMount () {
     this._isMounted = true
+
+    /* eslint-disable react/no-did-mount-set-state */
+    this.setState({
+      dir: getTextDirection(this._content)
+    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -213,15 +220,16 @@ class Tray extends Component {
 
   get transition () {
     const { placement, open } = this.props
+    const { dir } = this.state
 
     return classnames({
       'slide-down':
         (placement === 'top' && open) || (placement === 'bottom' && !open),
       'slide-up':
         (placement === 'bottom' && open) || (placement === 'top' && !open),
-      'slide-left':
+      [`slide-${dir === 'rtl' ? 'right' : 'left'}`]:
         (placement === 'start' && !open) || (placement === 'end' && open),
-      'slide-right':
+      [`slide-${dir === 'rtl' ? 'left' : 'right'}`]:
         (placement === 'end' && !open) || (placement === 'start' && open)
     })
   }
@@ -282,7 +290,13 @@ class Tray extends Component {
           type={this.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <TrayContent {...pickProps(props, TrayContent.propTypes)} ref={contentRef}>
+          <TrayContent
+            {...pickProps(props, TrayContent.propTypes)}
+            ref={(el) => {
+              this._content = el
+              if (typeof contentRef === 'function') contentRef(el)
+            }}
+          >
             <Dialog
               {...pickProps(props, Dialog.propTypes)}
               defaultFocusElement={this.defaultFocusElement}
