@@ -69,12 +69,13 @@ export default class FlexItem extends Component {
     * Sets the base size of the FlexItem (width if direction is `row`; height if direction is `column`)
     */
     size: PropTypes.string,
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+
     margin: ThemeablePropTypes.spacing,
     /**
     * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
