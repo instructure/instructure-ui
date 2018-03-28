@@ -29,6 +29,7 @@ import noScroll from 'no-scroll'
 
 import themeable from '@instructure/ui-themeable'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -39,29 +40,32 @@ import theme from './theme'
 category: components/utilities
 ---
 **/
+@deprecated('5.0.0', {
+  fullScreen: 'fullscreen'
+})
 @themeable(theme, styles)
 class Mask extends Component {
   static propTypes = {
     onDismiss: PropTypes.func,
     placement: PropTypes.oneOf(['top', 'center', 'bottom']),
-    fullScreen: PropTypes.bool,
+    fullscreen: PropTypes.bool,
     children: PropTypes.node,
     onClick: PropTypes.func
   }
 
   static defaultProps = {
     placement: 'center',
-    fullScreen: false
+    fullscreen: false
   }
 
   componentDidMount () {
-    if (this.props.fullScreen) {
+    if (this.props.fullscreen || this.props.fullScreen) { // eslint-disable-line react/prop-types
       noScroll.on()
     }
   }
 
   componentWillUnmount () {
-    if (this.props.fullScreen) {
+    if (this.props.fullscreen || this.props.fullScreen) { // eslint-disable-line react/prop-types
       noScroll.off()
     }
   }
@@ -76,7 +80,7 @@ class Mask extends Component {
     const classes = classnames({
       [styles.root]: true,
       [styles[this.props.placement]]: true,
-      [styles.fullScreen]: this.props.fullScreen
+      [styles.fullscreen]: this.props.fullscreen || this.props.fullScreen // eslint-disable-line react/prop-types
     })
 
     let props = omitProps(this.props, Mask.propTypes)

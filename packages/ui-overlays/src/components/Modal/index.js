@@ -295,6 +295,37 @@ export default class Modal extends Component {
 
     const ie11 = Browser.msie && Browser.version > 10
 
+    const dialog = (
+      <Dialog
+        {...omitProps(props, Modal.propTypes)}
+        {...pickProps(this.props, Dialog.propTypes)}
+        label={this.props.label}
+        defaultFocusElement={this.defaultFocusElement}
+        shouldCloseOnDocumentClick={
+          shouldCloseOnOverlayClick === undefined
+            ? shouldCloseOnDocumentClick
+            : shouldCloseOnOverlayClick
+        }
+        shouldCloseOnEscape
+        shouldContainFocus
+        open={this.state.open}
+        className={classnames({
+          [styles.content]: true,
+          [styles[size]]: true,
+          [styles.ie11]: ie11
+        })}
+        ref={el => {
+          this._content = el
+          if (typeof contentRef === 'function') {
+            contentRef(el)
+          }
+        }}
+      >
+        {this.renderCloseButton()}
+        {children}
+      </Dialog>
+    )
+
     return (
       <Portal
         {...pickProps(this.props, Portal.propTypes)}
@@ -309,42 +340,17 @@ export default class Modal extends Component {
           type={this.props.transition}
           onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
         >
-          <Dialog
-            {...pickProps(this.props, Dialog.propTypes)}
-            label={this.props.label}
-            defaultFocusElement={this.defaultFocusElement}
-            shouldCloseOnDocumentClick={
-              shouldCloseOnOverlayClick === undefined
-                ? shouldCloseOnDocumentClick
-                : shouldCloseOnOverlayClick
-            }
-            shouldCloseOnEscape
-            shouldContainFocus
-            open={this.state.open}
-          >
-            <Mask
-              placement={ie11 ? 'top' : 'center'}
-              fullScreen
-            >
-              <div
-                {...omitProps(props, Modal.propTypes)}
-                className={classnames({
-                  [styles.content]: true,
-                  [styles[size]]: true,
-                  [styles.ie11]: ie11
-                })}
-                ref={el => {
-                  this._content = el
-                  if (typeof contentRef === 'function') {
-                    contentRef(el)
-                  }
-                }}
+          { size === 'fullscreen' ? (
+              <span className={styles.layout}>{dialog}</span>
+            ) : (
+              <Mask
+                placement={ie11 ? 'top' : 'center'}
+                fullscreen
               >
-                {this.renderCloseButton()}
-                {children}
-              </div>
-            </Mask>
-          </Dialog>
+                { dialog }
+              </Mask>
+            )
+          }
         </Transition>
       </Portal>
     )

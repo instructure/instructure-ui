@@ -46,8 +46,6 @@ category: components/utilities
 
 class Dialog extends Component {
   static propTypes = {
-    ...Container.propTypes,
-
     /**
      * The children to be rendered within the `<Dialog />`
      */
@@ -167,6 +165,7 @@ class Dialog extends Component {
         }}
         role={this.props.label ? 'region' : null}
         aria-label={this.props.label}
+        className={this.props.className} // eslint-disable-line react/prop-types
       >
         {this.props.children}
       </Container>
