@@ -1,11 +1,37 @@
-import findDOMNode from './findDOMNode'
-import findTabbable from './findTabbable'
-import ownerDocument from './ownerDocument'
-import ownerWindow from './ownerWindow'
-import getActiveElement from './getActiveElement'
-import addEventListener from './addEventListener'
-import containsActiveElement from './containsActiveElement'
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
+import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
+import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
+import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
+import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+
+import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
+
+import findTabbable from './findTabbable'
 
 /**
  * ---
@@ -18,6 +44,14 @@ import warning from '../warning'
  * - Return focus to the marked element
  */
 class FocusManager {
+  constructor () {
+    warning(false, '[%s] was deprecated in version %s. %s', 'focusManager', '5.0.0', changedPackageWarning(
+      'ui-utils',
+      'ui-a11y',
+      'Use `FocusManager.focusRegion` to create a new focus region.'
+    ) || '')
+  }
+
   contextElement = null
   focusLaterElement = null
   needToFocus = false
@@ -85,7 +119,7 @@ class FocusManager {
       return
     }
     this.contextElement = findDOMNode(el)
-    const win = ownerWindow(this.contextElement)
+
     this.listeners.push(addEventListener(ownerWindow(this.contextElement), 'blur', this.handleBlur, false))
     this.listeners.push(addEventListener(ownerDocument(this.contextElement), 'focus', this.handleFocus, true))
   }

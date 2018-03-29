@@ -1,0 +1,81 @@
+/* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
+
+.root a.link:link,
+.root a.link:visited,
+.root button.link {
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  color: var(--color);
+  text-decoration: var(--textDecoration);
+  transition: color 0.2s;
+  outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
+
+  &:focus,
+  &:active {
+    outline: var(--outlineWidth) var(--outlineStyle) var(--focusOutlineColor);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: var(--hoverTextDecoration);
+    color: var(--hoverColor);
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.root a.inverse:link,
+.root a.inverse:visited,
+.root button.inverse {
+  color: var(--colorInverse);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: var(--colorInverse);
+  }
+
+  &:focus,
+  &:active {
+    outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseOutlineColor);
+  }
+}
+
+.root button.link {
+  user-select: text;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-content: flex-start;
+  text-align: inherit;
+}
+
+.ellipsis {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+}
+
+.text {
+  box-sizing: border-box;
+  display: block;
+  line-height: 1.2;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+}
+
+/* stylelint-enable selector-max-class, no-descending-specificity, selector-max-type */

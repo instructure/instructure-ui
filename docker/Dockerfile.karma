@@ -1,5 +1,5 @@
-FROM instructure/node:8.6
+FROM instructure/node:8
 
 EXPOSE 9876
 
-CMD ["npm", "run", "test:watch", "--", "--no-launch"]
+CMD ["yarn", "run", "test:watch", "--", "--no-launch"]

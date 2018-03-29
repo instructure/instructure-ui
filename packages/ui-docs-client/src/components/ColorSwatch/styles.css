@@ -1,3 +1,4 @@
+/* stylelint-disable unit-blacklist */
 .root {
   width: 1em;
   height: 1em;
@@ -8,3 +9,4 @@
   border: 1px solid var(--borderColor);
   border-radius: 3px;
 }
+/* stylelint-enable unit-blacklist */

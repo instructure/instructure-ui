@@ -1,0 +1,18 @@
+.container {
+  margin: var(--margin);
+  min-height: var(--height);
+  width: var(--width);
+  max-width: var(--maxWidth);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.flexed {
+  display: flex;
+  flex: 1;
+}
+
+.right {
+  justify-content: flex-end;
+}

@@ -1,0 +1,215 @@
+/* stylelint-disable no-descending-specificity, selector-max-class */
+
+@keyframes button {
+  50% {
+    opacity: 0.5;
+    transform: translate3d(2%, 0, 0);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.root {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin: 0;
+  background-color: transparent;
+  text-align: start;
+  font-family: inherit;
+  user-select: none;
+  cursor: pointer;
+  border: none;
+  position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+  z-index: 1;
+  transform: translate3d(-2%, 0, 0);
+  opacity: 0.01;
+  transform-origin: left center;
+  animation-name: button;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+  animation-delay: 0.2s;
+
+  &:hover {
+    background-color: var(--hoverBackgroundColor);
+
+    &.folderTree::before {
+      visibility: hidden;
+    }
+
+    .textName,
+    .textDescriptor,
+    .icon {
+      color: var(--hoverTextColor);
+    }
+  }
+
+  &:focus {
+    outline: 0;
+    box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
+  }
+}
+
+.layout {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+.icon,
+.text {
+  min-width: 0.0625rem;
+}
+
+.icon {
+  position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+  z-index: 1;
+  color: var(--iconColor);
+}
+
+.text {
+  line-height: var(--textLineHeight);
+  flex: 1;
+}
+
+.textName,
+.textDescriptor {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.textName {
+  color: var(--nameTextColor);
+}
+
+.textDescriptor {
+  margin-top: var(--descriptorMarginTop);
+  color: var(--descriptorTextColor);
+}
+
+.folderTree {
+  &::before {
+    content: "";
+    height: var(--borderWidth);
+    background: var(--borderColor);
+    position: absolute;
+    offset-inline-start: 0;
+    offset-inline-end: auto;
+    top: 50%;
+    pointer-events: none;
+  }
+}
+
+.small {
+  &.folderTree {
+    padding: calc(var(--baseSpacingSmall) / 3) var(--baseSpacingSmall);
+
+    &::before {
+      width: calc(var(--baseSpacingSmall) * 1.5);
+    }
+
+    .icon {
+      margin-inline-end: var(--baseSpacingSmall);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingSmall) * 2);
+    }
+  }
+
+  &.indent {
+    padding: calc(var(--baseSpacingSmall) / 3) calc(var(--baseSpacingSmall) / 2);
+
+    .icon {
+      margin-inline-end: calc(var(--baseSpacingSmall) / 2);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingSmall) * 2);
+    }
+  }
+
+  .textName {
+    font-size: var(--nameFontSizeSmall);
+  }
+
+  .textDescriptor {
+    font-size: var(--descriptorFontSizeSmall);
+  }
+}
+
+.medium {
+  &.folderTree {
+    padding: calc(var(--baseSpacingMedium) / 3) var(--baseSpacingMedium);
+
+    &::before {
+      width: calc(var(--baseSpacingMedium) * 1.5);
+    }
+
+    .icon {
+      margin-inline-end: var(--baseSpacingMedium);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingMedium) * 2);
+    }
+  }
+
+  &.indent {
+    padding: calc(var(--baseSpacingMedium) / 3) calc(var(--baseSpacingMedium) / 2);
+
+    .icon {
+      margin-inline-end: calc(var(--baseSpacingMedium) / 2);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingMedium) * 2);
+    }
+  }
+
+  .textName {
+    font-size: var(--nameFontSizeMedium);
+  }
+
+  .textDescriptor {
+    font-size: var(--descriptorFontSizeMedium);
+  }
+}
+
+.large {
+  &.folderTree {
+    padding: calc(var(--baseSpacingLarge) / 3) var(--baseSpacingLarge);
+
+    &::before {
+      width: calc(var(--baseSpacingLarge) * 1.5);
+    }
+
+    .icon {
+      margin-inline-end: var(--baseSpacingLarge);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingLarge) * 2);
+    }
+  }
+
+  &.indent {
+    padding: calc(var(--baseSpacingLarge) / 3) calc(var(--baseSpacingLarge) / 2);
+
+    .icon {
+      margin-inline-end: calc(var(--baseSpacingLarge) / 2);
+      margin-inline-start: 0;
+      font-size: calc(var(--baseSpacingLarge) * 2);
+    }
+  }
+
+  .textName {
+    font-size: var(--nameFontSizeLarge);
+  }
+
+  .textDescriptor {
+    font-size: var(--descriptorFontSizeLarge);
+  }
+}
+
+.expanded {}
+
+/* stylelint-enable no-descending-specificity, selector-max-class */

@@ -1,0 +1,10 @@
+.root {
+  width: 0.0625rem;
+  height: 0.0625rem;
+  margin: -0.0625rem;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}

@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
@@ -7,22 +31,22 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import IconArrowOpenDownSolid from 'instructure-icons/lib/Solid/IconArrowOpenDownSolid'
+import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 import uid from '@instructure/ui-utils/lib/uid'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import FormField from '../FormField'
+import FormField from '@instructure/ui-forms/lib/components/FormField'
+import FormPropTypes from '@instructure/ui-forms/lib/utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
 
-/**
----
-category: components/forms
----
-**/
+@deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-forms'
+))
 @themeable(theme, styles)
 class Select extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
     * Children must be option tags.
@@ -36,7 +60,7 @@ class Select extends Component {
     * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
     *   }`
     */
-    messages: PropTypes.arrayOf(CustomPropTypes.message),
+    messages: PropTypes.arrayOf(FormPropTypes.message),
     id: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf(['stacked', 'inline']),
@@ -62,7 +86,6 @@ class Select extends Component {
     onBlur: PropTypes.func,
     onKeyDown: PropTypes.func
   }
-  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     inline: false,
@@ -189,7 +212,7 @@ class Select extends Component {
           >
             {children}
           </select>
-          <IconArrowOpenDownSolid className={styles.arrow} />
+          <IconArrowOpenDown className={styles.arrow} />
         </span>
       </FormField>
     )

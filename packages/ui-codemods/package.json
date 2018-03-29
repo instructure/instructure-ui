@@ -1,7 +1,7 @@
 {
   "name": "@instructure/ui-codemods",
   "version": "4.8.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "Codemod scripts to help upgrade instructure-ui libraries.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -18,10 +18,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "21.2.1"
+    "jest": "22.3.0"
   },
   "dependencies": {
-    "jscodeshift": "^0.3.32"
+    "jscodeshift": "^0.4.0"
   },
   "publishConfig": {
     "access": "public"

@@ -1,0 +1,33 @@
+#!/bin/bash -e
+
+NPM_CLIENT=$(npm bin)/yarn
+RFC_TEMPLATE_DIR=scripts/templates/rfc
+
+if [ ! -d "$RFC_TEMPLATE_DIR" ]; then
+  echo Cannot find RFC template!
+  exit 1
+fi
+
+read -p 'Component name: ' COMPONENT
+
+RFC_DIR=rfcs/$COMPONENT
+
+if [ -d "$RFC_DIR" ]; then
+  echo Oops! RFC $RFC_DIR exists!
+  exit 1
+fi
+
+echo Generating $COMPONENT RFC in $RFC_DIR
+
+# Create component directory and copy template files
+cp -r $RFC_TEMPLATE_DIR $RFC_DIR
+
+# Export this variable so it's available in the find and sed commands below
+export COMPONENT
+
+# Update file contents
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $RFC_DIR -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+else
+  find $RFC_DIR -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+fi

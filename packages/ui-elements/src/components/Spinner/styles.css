@@ -1,0 +1,191 @@
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes morph {
+  0% {
+    stroke-dashoffset: 190%;
+  }
+
+  50% {
+    stroke-dashoffset: 50%;
+    transform: rotate(90deg);
+  }
+
+  100% {
+    stroke-dashoffset: 190%;
+    transform: rotate(360deg);
+  }
+}
+
+.root {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.x-small {
+  width: var(--xSmallSize);
+  height: var(--xSmallSize);
+
+  .circle {
+    width: var(--xSmallSize);
+    height: var(--xSmallSize);
+  }
+
+  .circleShadow {
+    stroke-width: calc(var(--xSmallBorderWidth) * 1.75);
+  }
+
+  .circleTrack,
+  .circleSpin {
+    stroke-width: var(--xSmallBorderWidth);
+  }
+
+  .circleSpin {
+    stroke-dasharray: 3em;
+    transform-origin: calc(var(--xSmallSize) / 2) calc(var(--xSmallSize) / 2);
+  }
+}
+
+.small {
+  width: var(--smallSize);
+  height: var(--smallSize);
+
+  .circle {
+    width: var(--smallSize);
+    height: var(--smallSize);
+  }
+
+  .circleShadow {
+    stroke-width: calc(var(--smallBorderWidth) * 1.75);
+  }
+
+  .circleTrack,
+  .circleSpin {
+    stroke-width: var(--smallBorderWidth);
+  }
+
+  .circleSpin {
+    stroke-dasharray: 6em;
+    transform-origin: calc(var(--smallSize) / 2) calc(var(--smallSize) / 2);
+  }
+}
+
+.medium {
+  width: var(--mediumSize);
+  height: var(--mediumSize);
+
+  .circle {
+    stroke-width: var(--mediumBorderWidth);
+    width: var(--mediumSize);
+    height: var(--mediumSize);
+  }
+
+  .circleShadow {
+    stroke-width: calc(var(--mediumBorderWidth) * 1.75);
+  }
+
+  .circleTrack,
+  .circleSpin {
+    stroke-width: var(--mediumBorderWidth);
+  }
+
+  .circleSpin {
+    stroke-dasharray: 10.5em;
+    transform-origin: calc(var(--mediumSize) / 2) calc(var(--mediumSize) / 2);
+  }
+}
+
+.large {
+  width: var(--largeSize);
+  height: var(--largeSize);
+
+  .circle {
+    stroke-width: var(--largeBorderWidth);
+    width: var(--largeSize);
+    height: var(--largeSize);
+  }
+
+  .circleShadow {
+    stroke-width: calc(var(--largeBorderWidth) * 1.75);
+  }
+
+  .circleTrack,
+  .circleSpin {
+    stroke-width: var(--largeBorderWidth);
+  }
+
+  .circleSpin {
+    stroke-dasharray: 14em;
+    transform-origin: calc(var(--largeSize) / 2) calc(var(--largeSize) / 2);
+  }
+}
+
+.circle {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation-name: rotate;
+  animation-duration: 2.25s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.circleTrack,
+.circleShadow,
+.circleSpin {
+  fill: none;
+}
+
+.circleSpin {
+  stroke-linecap: round;
+}
+
+.root:not(.ie11) .circleSpin {
+  animation-name: morph;
+  animation-duration: 1.75s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease;
+}
+
+.root.ie11 .circleSpin {
+  stroke-dashoffset: 100%;
+}
+
+.default {
+  .circleShadow {
+    stroke: none;
+  }
+
+  .circleTrack {
+    stroke: var(--trackColor);
+  }
+
+  .circleSpin {
+    stroke: var(--color);
+  }
+}
+
+.inverse {
+  .circleShadow {
+    stroke: rgba(0, 0, 0, 0.3);
+  }
+
+  .circleTrack {
+    stroke: var(--inverseTrackColor);
+  }
+
+  .circleSpin {
+    stroke: var(--inverseColor);
+  }
+}
+
+/* stylelint-enable selector-max-class, no-descending-specificity */

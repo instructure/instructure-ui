@@ -1,7 +1,29 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React from 'react'
 import Avatar from '../index'
-
-import styles from '../styles.css'
 
 describe('<Avatar />', () => {
   const testbed = new Testbed(<Avatar name="Jessica Jones" />)
@@ -21,12 +43,6 @@ describe('<Avatar />', () => {
   })
 
   describe('with the default props', () => {
-    it('should should display as a circle', () => {
-      const subject = testbed.render()
-
-      expect(subject.hasClass(styles.circle)).to.be.true
-    })
-
     it('should render initials', () => {
       const subject = testbed.render()
 
@@ -49,16 +65,6 @@ describe('<Avatar />', () => {
     })
   })
 
-  describe('when variant is set to "rectangle"', () => {
-    it('should display as a rectangle', () => {
-      const subject = testbed.render({
-        variant: 'rectangle'
-      })
-
-      expect(subject.hasClass(styles.rectangle)).to.be.true
-    })
-  })
-
   describe('when the user name has no spaces', () => {
     it('should render a single initial', () => {
       const subject = testbed.render({
@@ -66,6 +72,26 @@ describe('<Avatar />', () => {
       })
 
       expect(subject.text()).to.equal('J')
+    })
+  })
+
+  describe('when the user name has leading spaces', () => {
+    it('should skip them', () => {
+      const subject = testbed.render({
+        name: ' Jessica Jones'
+      })
+
+      expect(subject.text()).to.equal('JJ')
+    })
+  })
+
+  describe('when the user name is empty', () => {
+    it('should render', () => {
+      const subject = testbed.render({
+        name: ''
+      })
+
+      expect(subject.text()).to.equal('')
     })
   })
 

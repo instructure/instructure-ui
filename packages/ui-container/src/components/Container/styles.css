@@ -1,0 +1,63 @@
+.block {
+  display: block;
+}
+
+.inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.hasPadding {
+  box-sizing: border-box;
+}
+
+.textAlign--start {
+  text-align: start;
+}
+
+.textAlign--center {
+  text-align: center;
+}
+
+.textAlign--end {
+  text-align: end;
+}
+
+.x-small {
+  max-width: var(--xSmallMaxWidth);
+}
+
+.small {
+  max-width: var(--smallMaxWidth);
+}
+
+.medium {
+  max-width: var(--mediumMaxWidth);
+}
+
+.large {
+  max-width: var(--largeMaxWidth);
+}
+
+.fullscreen {
+  max-width: 100vw;
+}
+
+.auto {
+}
+
+.visualDebug {
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
+}
+
+.withBorder {
+  border-style: solid;
+  border-color: var(--borderColor);
+  border-width: var(--borderWidth);
+  border-radius: var(--borderRadius);
+}
+
+.withShadow {
+  box-shadow: var(--boxShadow);
+}

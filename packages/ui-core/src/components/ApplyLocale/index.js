@@ -1,43 +1,32 @@
-import { Component } from 'react'
-import PropTypes from 'prop-types'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-/**
----
-category: components/utilities
----
-**/
-export default class ApplyLocale extends Component {
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    /**
-      A standard language id
-    **/
-    locale: PropTypes.string,
-    /**
-      A timezone identifier in the format: Area/Location
-    **/
-    timezone: PropTypes.string,
-    /**
-    * accepts only one child (children must be wrapped in a single component/element)
-    */
-    children: PropTypes.node
-  }
-  /* eslint-enable react/require-default-props */
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-  static childContextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
+import ApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
 
-  getChildContext () {
-    return {
-      locale: this.props.locale,
-      timezone: this.props.timezone
-    }
-  }
-
-  render () {
-    return ensureSingleChild(this.props.children)
-  }
-}
+export default deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-i18n'
+))(ApplyLocale)

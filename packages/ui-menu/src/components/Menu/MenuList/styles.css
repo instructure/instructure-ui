@@ -1,0 +1,31 @@
+.root {
+  list-style-type: none;
+  margin: 0 0 0 0;
+  padding: 0.25rem 0;
+  background: var(--background);
+  display: block;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    border: var(--focusBorder);
+    border-radius: calc(var(--focusBorderRadius) + 0.125rem);
+    opacity: 0;
+    transform: scale(0.8);
+    pointer-events: none;
+  }
+
+  &:focus {
+    outline: none;
+
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

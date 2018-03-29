@@ -1,0 +1,38 @@
+/* stylelint-disable at-rule-no-unknown */
+
+.root {
+  display: block;
+}
+
+@define-mixin Grid-container {
+  box-sizing: border-box;
+}
+
+.visualDebug {
+  /* stylelint-disable-next-line color-named */
+  outline: 0.0625rem dashed red;
+}
+
+.startAtSmall {
+  @mixin Grid-container;
+}
+
+@media screen and (--mediumMin) {
+  .startAtMedium {
+    @mixin Grid-container;
+  }
+}
+
+@media screen and (--largeMin) {
+  .startAtLarge {
+    @mixin Grid-container;
+  }
+}
+
+@media screen and (--xLargeMin) {
+  .startAtXLarge {
+    @mixin Grid-container;
+  }
+}
+
+/* stylelint-enable at-rule-no-unknown */

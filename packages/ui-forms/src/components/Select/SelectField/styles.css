@@ -1,0 +1,135 @@
+/* stylelint-disable selector-max-class */
+
+.inputContainer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0.0625rem;
+  background: var(--background);
+  margin: 0;
+  transition: all 0.2s ease-out;
+  outline: 0.1875rem solid transparent;
+  outline-offset: -0.5rem;
+  overflow: hidden;
+  font-family: var(--fontFamily);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+
+  &.focus {
+    border-color: var(--focusBorderColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
+    outline-offset: -0.1875rem;
+    box-shadow: initial;
+  }
+
+  &.invalid {
+    border-color: var(--errorBorderColor);
+
+    &.focus {
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.small {
+    font-size: var(--smallFontSize);
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+  }
+}
+
+.inputLayout {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+}
+
+/* stylelint-disable selector-max-type */
+
+.input,
+input[type].input {
+  all: initial;
+  width: 100%;
+  cursor: default;
+  box-sizing: border-box;
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  &.editable {
+    cursor: text;
+  }
+
+  &[autocomplete="off"]::-webkit-contacts-auto-fill-button {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  appearance: none;
+  line-height: 1; /* reset global line height */
+  margin: 0;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--fontWeight);
+  color: var(--color);
+  padding: 0 var(--inputPadding);
+  height: auto;
+
+  &::placeholder {
+    color: var(--placeholderColor);
+  }
+}
+
+.small {
+  .input,
+  input[type].input {
+    min-height: calc(var(--smallHeight) - 0.125rem);
+  }
+}
+
+.medium {
+  .input,
+  input[type].input {
+    min-height: calc(var(--mediumHeight) - 0.125rem);
+  }
+}
+
+.large {
+  .input,
+  input[type].input {
+    min-height: calc(var(--largeHeight) - 0.125rem);
+  }
+}
+
+.inputIcon {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  margin-inline-start: var(--inputPadding);
+}
+
+.icon {
+  display: flex;
+  align-self: center;
+  margin-inline-end: var(--inputPadding);
+  pointer-events: none;
+  fill: var(--iconColor);
+}
+
+/* stylelint-enable selector-max-class */

@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React from 'react'
 import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 
@@ -74,7 +98,7 @@ describe('<TimeInput />', () => {
       defaultToFirstOption: true
     })
 
-    expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').innerHTML)
+    expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').textContent)
   })
 
   it('renders using the specified step value', () => {
@@ -89,8 +113,8 @@ describe('<TimeInput />', () => {
     const optionTexts = document.querySelectorAll('li > span')
     const expctedFirstOptionText = value.hour(0).minute(0).format(subject.prop('format'))
     const expctedSecondOptionText = value.hour(0).minute(15).format(subject.prop('format'))
-    expect(optionTexts[0].innerHTML).to.be.eq(expctedFirstOptionText)
-    expect(optionTexts[1].innerHTML).to.be.eq(expctedSecondOptionText)
+    expect(optionTexts[0].textContent).to.be.eq(expctedFirstOptionText)
+    expect(optionTexts[1].textContent).to.be.eq(expctedSecondOptionText)
   })
 
   it('should meet a11y standards', (done) => {

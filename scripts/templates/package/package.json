@@ -1,7 +1,7 @@
 {
   "name": "@instructure/${PACKAGE}",
   "version": "${VERSION}",
-  "description": "",
+  "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -22,7 +22,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "${VERSION}"
+    "@instructure/ui-presets": "^${VERSION}",
+    "@instructure/ui-themes": "^${VERSION}"
   },
   "publishConfig": {
     "access": "public"

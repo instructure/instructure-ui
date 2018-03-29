@@ -1,0 +1,9 @@
+.simple,
+.minimal {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.minimal {
+  background: var(--minimalBackground);
+}

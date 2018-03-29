@@ -1,0 +1,51 @@
+{
+  "name": "@instructure/media-capture",
+  "version": "4.8.0",
+  "description": "",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test": "ui-test",
+    "test:watch": "ui-test --watch",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-presets": "^4.8.0",
+    "@instructure/ui-themes": "^4.8.0",
+    "get-test-media": "^1.0.0",
+    "redux-devtools": "^3.4.1"
+  },
+  "dependencies": {
+    "@instructure/ui-alerts": "^4.8.0",
+    "@instructure/ui-buttons": "^4.8.0",
+    "@instructure/ui-core": "^4.8.0",
+    "@instructure/ui-elements": "^4.8.0",
+    "@instructure/ui-icons": "^4.8.0",
+    "@instructure/ui-menu": "^4.8.0",
+    "@instructure/ui-themeable": "^4.8.0",
+    "@instructure/ui-utils": "^4.8.0",
+    "classnames": "^2.2.5",
+    "luxon": "^0.3.1",
+    "prop-types": "^15.6.0",
+    "react": "^15.6.1",
+    "react-redux": "^5.0.6",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "ts-ebml": "^2.0.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

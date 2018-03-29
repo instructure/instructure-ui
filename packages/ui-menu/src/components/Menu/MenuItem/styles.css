@@ -1,0 +1,104 @@
+/* stylelint-disable no-descending-specificity, selector-max-class */
+
+.root {
+  position: relative;
+  border: none;
+  outline: none;
+  padding: var(--padding);
+  margin: 0;
+  width: 100%;
+  border-radius: initial;
+  box-sizing: border-box;
+  text-align: start;
+  cursor: pointer;
+  user-select: none;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
+  background: var(--background);
+  transition: background 0.2s;
+
+  /*
+  Changing the following to display: flex; causes a VO
+  bug where items with role menuitem, menuitemcheckbox
+  and menuitemradio are selected twice with control+
+  option+space. So we set the display to block.
+  */
+  display: block;
+
+  &.flyout {
+    padding-inline-end: var(--labelPadding);
+
+    .icon {
+      offset-inline-start: auto;
+      offset-inline-end: var(--iconPadding);
+    }
+  }
+
+  &[role=menuitemradio],
+  &[role=menuitemcheckbox] {
+    padding-inline-start: var(--labelPadding);
+
+    .icon {
+      offset-inline-start: var(--iconPadding);
+      offset-inline-end: auto;
+    }
+  }
+
+  &:focus,
+  &:active,
+  &:hover,
+  &.active,
+  &[aria-expanded="true"] {
+    background: var(--activeBackground);
+
+    .label {
+      color: var(--activeLabelColor);
+    }
+
+    .icon {
+      color: var(--activeIconColor);
+    }
+  }
+
+  &::-moz-focus-inner {
+    /* removes extra ff button spacing */
+    padding: 0;
+    margin: 0;
+    border: 0;
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.label {
+  color: var(--labelColor);
+}
+
+.icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  top: 0;
+  width: 1em;
+  height: 100%;
+  color: var(--iconColor);
+}
+
+/* stylelint-disable selector-max-type */
+a.root,
+a.root:link,
+a.root:visited,
+a.root:active,
+a.root:hover,
+a.root:focus {
+  text-decoration: none;
+}
+/* stylelint-enable selector-max-type */
+
+/* stylelint-enable no-descending-specificity, selector-max-class */

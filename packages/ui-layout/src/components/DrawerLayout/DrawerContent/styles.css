@@ -1,0 +1,8 @@
+.root {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.transition {
+  transition: margin var(--duration);
+}

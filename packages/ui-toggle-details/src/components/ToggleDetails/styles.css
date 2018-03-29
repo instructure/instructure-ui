@@ -1,0 +1,173 @@
+/* stylelint-disable no-descending-specificity */
+
+.root {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+}
+
+.small {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeSmall);
+  }
+
+  .icon {
+    font-size: var(--smallIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--smallIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
+.medium {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeMedium);
+  }
+
+  .icon {
+    font-size: var(--mediumIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--mediumIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
+.large {
+  .toggle,
+  .details {
+    font-size: var(--fontSizeLarge);
+  }
+
+  .icon {
+    font-size: var(--largeIconSize);
+  }
+
+  .indentDetails {
+    padding-inline-start: calc(var(--largeIconSize) + var(--togglePadding));
+    padding-inline-end: 0;
+  }
+}
+
+.toggle {
+  font-family: var(--fontFamily);
+  appearance: none;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  position: relative;
+  overflow: visible;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: var(--textColor);
+
+  &::-moz-focus-inner { /* removes extra ff button spacing */
+    padding: 0;
+    margin: 0;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.3125rem;
+    left: -0.3125rem;
+    right: -0.3125rem;
+    bottom: -0.3125rem;
+    border: var(--toggleBorderWidth) var(--toggleBorderStyle) var(--toggleFocusBorderColor);
+    border-radius: var(--toggleBorderRadius);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:focus {
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    text-decoration: none;
+    color: var(--textColor);
+  }
+
+  text-decoration: none;
+}
+
+.fluidWidth {
+  display: block;
+  width: 100%;
+}
+
+.summary {
+  position: relative; /* removes the push effect on IE */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  text-align: start;
+}
+
+.icon {
+  color: var(--iconColor);
+
+  > svg { /* stylelint-disable-line selector-max-type */
+    display: block; /* fix vertical alignment of icon */
+  }
+}
+
+.iconStart {
+  margin-inline-end: var(--iconMargin);
+  margin-inline-start: 0;
+}
+
+.iconEnd {
+  margin-inline-start: var(--iconMargin);
+  margin-inline-end: 0;
+}
+
+.summaryText {
+  min-width: 0.0625rem;
+}
+
+.positionIconAtEnd .summaryText {
+  flex: 1;
+}
+
+.details {
+  box-sizing: border-box;
+  padding-top: var(--togglePadding);
+  color: var(--textColor);
+}
+
+.hiddenDetails {
+  display: none;
+}
+
+.expandedDetails {
+  display: block;
+}
+
+@keyframes contentAnimation {
+  to {
+    opacity: 1;
+  }
+}
+
+.content {
+  opacity: 0.01;
+  animation-name: contentAnimation;
+  animation-fill-mode: forwards;
+  animation-duration: 0.3s;
+}
+
+/* stylelint-enable no-descending-specificity */

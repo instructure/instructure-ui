@@ -1,12 +1,8 @@
+/* stylelint-disable color-no-hex, color-named, unit-blacklist */
+
 .root {
   font-size: 1rem;
   margin: 2rem 0;
-
-  :global .CodeMirror { /* stylelint-disable-line selector-class-pattern */
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    margin-bottom: 0.25rem;
-  }
 }
 
 .actions {
@@ -25,3 +21,5 @@
 }
 
 .editor {}
+
+/* stylelint-enable color-no-hex, color-named, unit-blacklist */

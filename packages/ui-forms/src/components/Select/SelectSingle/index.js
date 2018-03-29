@@ -1,0 +1,285 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import warning from '@instructure/ui-utils/lib/warning'
+
+import SelectField from '../SelectField'
+import getOptionId from '../utils/getOptionId'
+
+const optionType = PropTypes.shape({
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  children: PropTypes.node
+})
+
+/**
+---
+parent: Select
+---
+**/
+class SelectSingle extends Component {
+  static propTypes = {
+    /**
+    * The options to render in the menu
+    */
+    options: PropTypes.arrayOf(optionType),
+    /**
+    * a function that provides a reference to the internal input element
+    */
+    inputRef: PropTypes.func,
+    /**
+    * the selected value (must be accompanied by an `onChange` prop)
+    */
+    selectedOption: CustomPropTypes.controllable(
+      PropTypes.oneOfType([PropTypes.string, optionType]),
+      'onChange',
+      'defaultSelectedOption'
+    ),
+    /**
+     * Options dropdown can be wider than input if optionsMaxWidth is provided
+     */
+    optionsMaxWidth: PropTypes.string,
+    /**
+    * value to set on initial render, meant for an uncontrolled component
+    */
+    defaultSelectedOption: PropTypes.oneOfType([PropTypes.string, optionType]),
+    /**
+    * Determines whether the user can type in the input
+    */
+    editable: PropTypes.bool,
+    /**
+    * for non-multiple Select, allows the user to empty selection
+    */
+    allowEmpty: PropTypes.bool,
+    /**
+    * Whether or not to disable the input
+    */
+    disabled: PropTypes.bool,
+    /**
+     * The filter function applied to the options when writting on the input
+     */
+    filter: PropTypes.func,
+    /**
+     * Callback fired when the menu is closed
+     */
+    onClose: PropTypes.func,
+    /**
+     * Callback fired when one of the menu options gets selected
+     */
+    onChange: PropTypes.func,
+    /**
+     * Callback fired when on the onChange of the internal input
+     */
+    onInputChange: PropTypes.func,
+    /**
+    * should the menu be closed when a selection happens
+    */
+    closeOnSelect: PropTypes.bool
+  }
+
+  static defaultProps = {
+    inputRef: (node) => {},
+    onClose: () => {},
+    onChange: (event, selectedOption) => {},
+    onInputChange: (event, value) => {},
+    closeOnSelect: true
+  }
+
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      filterText: '',
+      filteredOptions: props.options,
+      selectedOption: this.getSelectedOptionFromProps(
+        this.props.selectedOption || this.props.defaultSelectedOption
+      )
+    }
+  }
+
+  _input = null
+
+  get focused () {
+    return isActiveElement(this._input)
+  }
+
+  get value () {
+    const selected = this.state.selectedOption
+    return selected && selected.value
+  }
+
+  focus = () => {
+    this._input && this._input.focus()
+  }
+
+  getSelectedOptionFromProps (selectedOption) {
+    if (typeof selectedOption === 'string') {
+      const foundOption = this.props.options.find((o) => getOptionId(o) === selectedOption)
+
+      warning(foundOption, '[Select] The selectedOption is a string but doesn\'t correspond to an option')
+
+      return foundOption
+    }
+
+    return selectedOption
+  }
+
+  componentDidMount () {
+    if (this.state.selectedOption) {
+      this._input.value = this.state.selectedOption.label
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    if (this.props.options !== nextProps.options) {
+      this.setState({
+        filteredOptions: nextProps.filter(nextProps.options, this.state.filterText)
+      })
+    }
+
+    // When the component is controlled and selectedOption changes, update the input and state
+    if (!this.props.disabled) {
+      const oldId = getOptionId(this.props.selectedOption)
+      const newId = getOptionId(nextProps.selectedOption)
+      if (newId !== null && newId !== oldId) {
+        const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption)
+        this.setState({ selectedOption })
+
+        if (this._input.value !== selectedOption.label) {
+          this._input.value = selectedOption.label
+          this.props.onInputChange(null, this._input.value)
+        }
+      } else if (newId === null && newId !== oldId) {
+        this.setState({ selectedOption: null })
+        this._input.value = ''
+        this.props.onInputChange(null, this._input.value)
+      }
+    }
+  }
+
+  handleClose = (event, newSelectedOption) => this.setState((prevState, props) => {
+    const inputValue = this._input.value
+    const loweredInputValue = inputValue.toLowerCase()
+    const selectedOption = newSelectedOption || prevState.selectedOption
+    const match = prevState.filteredOptions.find(
+      option => option.label.toLowerCase() === loweredInputValue
+    )
+
+    if (match) {
+      this._input.value = match.label
+
+      if (
+        !selectedOption ||
+        getOptionId(match) !== getOptionId(selectedOption)
+      ) {
+        props.onChange(event, match)
+      }
+    } else if (selectedOption) {
+      if (props.allowEmpty && this._input.value === '') {
+        props.onChange(event, null)
+        return {
+          filterText: '',
+          filteredOptions: props.options,
+          selectedOption: null
+        }
+      } else {
+        // reset the value to the last valid value
+        this._input.value = selectedOption.label
+      }
+    } else {
+      // clean wrong values
+      this._input.value = ''
+    }
+
+    if (this._input.value !== inputValue) {
+      this.props.onInputChange(null, this._input.value)
+    }
+
+    return {
+      filterText: '',
+      filteredOptions: props.options,
+      selectedOption: match || selectedOption
+    }
+  }, this.props.onClose)
+
+  handleInputChange = (event, value) => {
+    this.props.onInputChange(event, value)
+
+    const filterText = value.toLowerCase()
+    if (this.state.filterText !== filterText) {
+      this.setState((prevState, props) => ({
+        filterText,
+        filteredOptions: props.filter(this.props.options, filterText)
+      }))
+    }
+  }
+
+  handleSelect = (event, selectedOption) => {
+    if (this._input.value !== selectedOption.label) {
+      this._input.value = selectedOption.label
+      this.props.onInputChange(null, this._input.value)
+    }
+
+    this.setState({
+      filterText: '',
+      filteredOptions: this.props.options,
+      selectedOption
+    }, () => this.focus())
+
+    this.props.onChange(event, selectedOption)
+  }
+
+  handleInputRef = (node, ...args) => {
+    this._input = node
+    this.props.inputRef.apply(this, [node].concat(args))
+  }
+
+  render () {
+    return (
+      <SelectField
+        {...omitProps(this.props, SelectSingle.propTypes)}
+        editable={this.props.editable}
+        inputRef={this.handleInputRef}
+        options={this.state.filteredOptions}
+        selectedOption={this.state.selectedOption}
+        disabled={this.props.disabled}
+        onSelect={this.handleSelect}
+        onStaticClick={this.focus}
+        onClose={this.handleClose}
+        onInputChange={this.handleInputChange}
+        optionsMaxWidth={this.props.optionsMaxWidth}
+        closeOnSelect={this.props.closeOnSelect}
+      />
+    )
+  }
+}
+
+export default SelectSingle

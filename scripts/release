@@ -49,21 +49,20 @@ else
   release_type=prerelease
 fi
 
-###########################################
-# Determine next version for pre-releases #
-###########################################
-if [[ "$release_type" == "prerelease" ]]; then
-  # Generate the version number for alpha, beta and dev releases
-  # Bump package.json files and generate changelog
-  $(npm bin)/standard-version --prerelease $npm_tag
-fi
-
 #############################
 # Get version and commit id #
 #############################
 next_version=$(node -p "require('./package').version")
 commit=$(git rev-parse --short HEAD)
 commit_msg=$(git log -1 --pretty=oneline --abbrev-commit)
+
+###########################################
+# Determine next version for pre-releases #
+###########################################
+if [[ "$release_type" == "prerelease" ]]; then
+  printf "Enter version or <ENTER> to release $next_version: "
+  read next_version
+fi
 
 printf "Version: $next_version ...\n"
 printf "Commit: $commit_msg ...\n"

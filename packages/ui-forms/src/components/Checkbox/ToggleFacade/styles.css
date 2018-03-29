@@ -1,0 +1,152 @@
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
+.root {
+  display: flex;
+  align-items: center;
+}
+
+.root .facade {
+  &.checked {
+    background: var(--checkedBackground);
+    box-shadow: none;
+
+    .icon {
+      transform: translate3d(50%, 0, 0);
+    }
+
+    .iconSVG {
+      color: var(--checkedIconColor);
+    }
+  }
+
+  &.focused {
+    &::before {
+      transform: scale(1) translate3d(0, 0, 0);
+      opacity: 1;
+    }
+  }
+}
+
+.facade {
+  background: var(--background);
+  border-color: var(--borderColor);
+  display: inline-block;
+  user-select: none;
+  position: relative;
+  border-radius: 3rem;
+  margin-inline-end: var(--marginEnd);
+  margin-inline-start: 0;
+  vertical-align: middle;
+  box-shadow: inset 0 0 0 var(--borderWidth) var(--borderColor);
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: -0.25rem;
+    left: -0.25rem;
+    width: calc(100% + 0.5rem);
+    height: calc(100% + 0.5rem);
+    box-sizing: border-box;
+    border-radius: calc(var(--borderRadius) - 0.25rem);
+    border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusOutlineColor);
+    transition: all 0.2s;
+    transform: scale(0.75) translate3d(0, 0, 0);
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.icon {
+  display: block;
+  text-align: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: all 0.2s;
+  transform: translate3d(0, 0, 0);
+}
+
+.iconToggle {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconToggle::before {
+  content: "";
+  position: absolute;
+  top: var(--borderWidth);
+  left: var(--borderWidth);
+  height: calc(100% - (var(--borderWidth) * 2));
+  width: calc(100% - (var(--borderWidth) * 2));
+  background: var(--toggleBackground);
+  box-shadow: var(--toggleShadow);
+  border-radius: 100%;
+}
+
+.iconSVG {
+  display: block;
+  color: var(--uncheckedIconColor);
+  position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+  z-index: 1;
+}
+
+.label {
+  flex: 1;
+  min-width: 0.0625rem;
+  color: var(--labelColor);
+  font-family: var(--labelFontFamily);
+  font-weight: var(--labelFontWeight);
+  line-height: var(--labelLineHeight);
+}
+
+.small {
+  height: var(--baseSizeSmall);
+  width: calc(var(--baseSizeSmall) * 1.5);
+
+  .icon {
+    font-size: 0.875rem;
+    height: var(--baseSizeSmall);
+    width: var(--baseSizeSmall);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeSmall);
+  }
+}
+
+.medium {
+  height: var(--baseSizeMedium);
+  width: calc(var(--baseSizeMedium) * 1.5);
+
+  .icon {
+    font-size: 1.125rem;
+    height: var(--baseSizeMedium);
+    width: var(--baseSizeMedium);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeMedium);
+  }
+}
+
+.large {
+  height: var(--baseSizeLarge);
+  width: calc(var(--baseSizeLarge) * 1.5);
+
+  .icon {
+    font-size: 1.5rem;
+    height: var(--baseSizeLarge);
+    width: var(--baseSizeLarge);
+  }
+
+  + .label {
+    font-size: var(--labelFontSizeLarge);
+  }
+}
+
+/* stylelint-enable selector-max-class, no-descending-specificity */

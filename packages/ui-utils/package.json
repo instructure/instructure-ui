@@ -23,16 +23,14 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.8.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
   },
   "dependencies": {
-    "bowser": "^1.7.0",
-    "decimal.js": "^7.2.1",
+    "bowser": "^1.9.1",
+    "decimal.js": "^9.0.1",
     "deep-equal": "^1.0.1",
     "keycode": "^2.1.8",
-    "moment": "^2.10.6",
-    "moment-timezone": "^0.5.14",
     "no-scroll": "^2.1.0",
     "numeral": "^2.0.6",
     "object.omit": "^3.0.0",
@@ -41,8 +39,8 @@
     "shortid": "^2.2.8"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.1",
-    "react-dom": "^0.14.9 || ^15.6.1"
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
   },
   "publishConfig": {
     "access": "public"

@@ -1,47 +1,31 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
 
-import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import styles from './styles.css'
-
-/**
----
-category: components/utilities
----
-**/
-@themeable(null, styles)
-class ScreenReaderContent extends Component {
-  /* eslint-disable react/require-default-props */
-  static propTypes = {
-    /**
-    * the element type to render as
-    */
-    as: CustomPropTypes.elementType,
-    /**
-    * content meant for screen readers only
-    */
-    children: PropTypes.node
-  }
-  /* eslint-enable react/require-default-props */
-
-  static defaultProps = {
-    as: 'span'
-  }
-
-  render () {
-    const props = {
-      ...omitProps(this.props, ScreenReaderContent.propTypes),
-      className: styles.root
-    }
-
-    const ElementType = getElementType(ScreenReaderContent, this.props)
-
-    return <ElementType {...props}>{this.props.children}</ElementType>
-  }
-}
-
-export default ScreenReaderContent
+export default deprecated('5.0.0', null, changedPackageWarning(
+  'ui-core',
+  'ui-a11y'
+))(ScreenReaderContent)

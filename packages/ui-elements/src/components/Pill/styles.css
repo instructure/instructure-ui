@@ -1,0 +1,63 @@
+/* Variables are defined in ./theme.js */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  font-family: var(--fontFamily);
+  background: var(--background);
+  box-sizing: border-box;
+  padding: var(--padding);
+  border-width: var(--borderWidth);
+  border-style: var(--borderStyle);
+  height: var(--height);
+  border-radius: 1rem;
+}
+
+.text {
+  box-sizing: border-box;
+  text-transform: var(--textTransformStyle);
+  font-size: var(--textFontSize);
+  font-weight: var(--textFontWeight);
+  letter-spacing: 0.0625rem;
+  min-width: 0.0625rem;
+  max-width: var(--maxWidth);
+  flex: 1 0 auto;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.default {
+  border-color: var(--color);
+
+  .text {
+    color: var(--color);
+  }
+}
+
+.primary {
+  border-color: var(--primaryColor);
+
+  .text {
+    color: var(--primaryColor);
+  }
+}
+
+.success {
+  border-color: var(--successColor);
+
+  .text {
+    color: var(--successColor);
+  }
+}
+
+.danger {
+  border-color: var(--dangerColor);
+
+  .text {
+    color: var(--dangerColor);
+  }
+}

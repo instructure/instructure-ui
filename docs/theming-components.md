@@ -1,11 +1,11 @@
 ---
-title: Theming Components
-category: guides
+title: Themes
+category: Contributing
 ---
 
-## Theming Components
+## Themes
 
-The `ui-core` components use the [@instructure/ui-themeable](#themeable) decorator along
+The react components use the [@instructure/ui-themeable](#themeable) library along
 with a [babel plugin](#babel-plugin-themeable-styles) to import CSS styles and generate theme
 variables.
 

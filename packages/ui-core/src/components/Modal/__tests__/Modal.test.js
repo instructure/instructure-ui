@@ -1,18 +1,40 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React from 'react'
-import Button from '../../Button'
-import Portal from '../../Portal'
-import Mask from '../../Mask'
+import Button from '@instructure/ui-buttons/lib/components/Button'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
+
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
 
 describe('<Modal />', () => {
-  const applicationElement = document.createElement('div')
   const testbed = new Testbed(
     (
       <Modal
         transition="fade"
         label="Modal Dialog"
         closeButtonLabel="Close"
-        applicationElement={() => applicationElement}
         shouldReturnFocus={false}
       >
         <ModalBody />
@@ -100,31 +122,34 @@ describe('<Modal />', () => {
 
   it('should dismiss when overlay clicked by default', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+
+    testbed.render({
       open: true,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.have.been.called
   })
 
   it('should dismiss when overlay clicked with prop', () => {
     const onDismiss = testbed.stub()
-    const subject = testbed.render({
+    testbed.render({
       open: true,
-      shouldCloseOnOverlayClick: false,
+      shouldCloseOnDocumentClick: false,
       onDismiss
     })
 
     testbed.tick()
 
-    const mask = subject.ref('_content').node.parentNode
-    mask.click()
+    testbed.wrapper.dispatchNativeMouseEvent('click', {
+      bubbles: true
+    })
 
     expect(onDismiss).to.not.have.been.called
   })
@@ -193,17 +218,16 @@ describe('<Modal />', () => {
 })
 
 describe('<Modal /> managed focus', () => {
-  const applicationElement = document.createElement('div')
   class ModalExample extends React.Component {
     static propTypes = {
-      ...Modal.PropTypes
+      ...Modal.propTypes
     }
 
     render () {
       return (
         <div>
           <input type="text" />
-          <Modal {...this.props} label="A Modal" closeButtonLabel="close" applicationElement={() => applicationElement}>
+          <Modal {...this.props} closeButtonLabel="close">
             <ModalBody>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />
@@ -214,7 +238,7 @@ describe('<Modal /> managed focus', () => {
     }
   }
 
-  const testbed = new Testbed(<ModalExample />)
+  const testbed = new Testbed(<ModalExample label="A Modal" />)
 
   it('should focus closeButton by default', () => {
     let closeButton

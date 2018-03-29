@@ -1,13 +1,37 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
-import Text from '@instructure/ui-core/lib/components/Text'
-import TextInput from '@instructure/ui-core/lib/components/TextInput'
-import Link from '@instructure/ui-core/lib/components/Link'
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
+import Text from '@instructure/ui-elements/lib/components/Text'
+import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+import Link from '@instructure/ui-elements/lib/components/Link'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 
@@ -32,15 +56,17 @@ export default class Nav extends Component {
   }
 
   static propTypes = {
-    docs: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    sections: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    docs: PropTypes.object.isRequired,
+    sections: PropTypes.object.isRequired,
+    themes: PropTypes.object,
+    icons: PropTypes.object,
     selected: PropTypes.string
   }
 
   static defaultProps = {
     docs: [],
     themes: [],
+    icons: {},
     selected: undefined
   }
 
@@ -209,7 +235,7 @@ export default class Nav extends Component {
   }
 
   renderSectionLink (sectionId, markParentExpanded, variant) {
-    const { selected, docs } = this.props
+    const { selected } = this.props
 
     const markExpanded = (sectionId) => {
       this.markExpanded(sectionId)
@@ -253,7 +279,7 @@ export default class Nav extends Component {
       .map(sectionId => this.renderSectionLink(sectionId))
   }
 
-  renderThemeSection () {
+  renderThemes () {
     let themeSelected = false
 
     const themeLinks = Object.keys(this.props.themes)
@@ -285,15 +311,37 @@ export default class Nav extends Component {
       this.markExpanded(this._themeId)
     }
 
-    return this.createNavToggle({
+    const link = this.createNavToggle({
       id: this._themeId,
       title: 'Themes',
       children: themeLinks
     })
+
+    return link ? [link] : []
+  }
+
+  renderIcons () {
+    const { icons } = this.props
+
+    const formats = Object.keys(icons.formats)
+      .filter((key) => this.matchQuery(icons.formats[key].format) || this.matchQuery('iconography'))
+
+    return (formats.length > 0) ? [
+      <div className={styles.navToggle} key={'iconography'}>
+        <NavToggle
+          summary={'Iconography'}
+          href="#iconography"
+        />
+      </div>
+    ] : []
   }
 
   render () {
     const sections = this.renderSections()
+    const themes = this.renderThemes()
+    const icons = this.renderIcons()
+    const matches = [ ...sections, ...icons, ...themes ]
+
     return (
       <div className={styles.root}>
         <div role="search" className={styles.search}>
@@ -304,8 +352,8 @@ export default class Nav extends Component {
           />
         </div>
         <div role="navigation" className={styles.sections}>
-          {sections && sections.length > 0
-            ? sections
+          { matches.length > 0
+            ? matches
             : <Text
               weight="light"
               size="medium"
@@ -315,7 +363,6 @@ export default class Nav extends Component {
                 No matches for <b>{this.state.queryStr}</b>
             </Text>
           }
-          {this.renderThemeSection()}
         </div>
       </div>
     )

@@ -17,24 +17,27 @@
     "prestart": "yarn bootstrap",
     "start": "lerna run start --stream",
     "start:watch": "lerna run start:watch --stream",
-    "pretest": "yarn bootstrap",
+    "pretest": "yarn bootstrap && yarn check",
     "test": "npm-run-all lint:commit lint test:packages",
-    "test:packages": "lerna run test --parallel --stream",
-    "test:packages:mocha": "NODE_RUNTIME=true lerna run test:mocha --parallel --stream",
+    "test:packages": "lerna run test --stream",
+    "test:packages:mocha": "NODE_RUNTIME=true lerna run test:mocha --stream",
     "test:watch": "lerna run test:watch --stream",
-    "lint": "lerna run lint --parallel --stream",
-    "lint:fix": "lerna run lint:fix",
+    "lint": "lerna run lint --stream",
+    "lint:fix": "lerna run lint:fix --stream",
     "lint:commit": "rm -f .git/validate-commit-msg && git log -1 --pretty=%B > .git/validate-commit-msg && validate-commit-msg validate-commit-msg",
     "generate:component": "./scripts/generate-component",
     "generate:package": "./scripts/generate-package",
+    "generate:rfc": "./scripts/generate-rfc",
+    "precommit": "lerna exec lint-staged --stream --parallel",
     "commit": "git-cz",
     "bootstrap": "npm-run-all clean:modules bootstrap:packages clean build",
-    "bootstrap:packages": "lerna bootstrap",
-    "build": "lerna run build --stream --parallel --ignore __docs__",
-    "build:watch": "lerna run build:watch --stream --parallel --ignore __docs__",
-    "build:docs": "lerna run build --scope __docs__",
-    "clean": "lerna run clean",
+    "bootstrap:packages": "lerna bootstrap --reject-cycles",
+    "build": "lerna run build --stream --ignore __docs__",
+    "build:watch": "lerna run build:watch --stream --ignore __docs__",
+    "build:docs": "lerna run build --stream --scope __docs__",
+    "clean": "lerna run clean --stream",
     "clean:modules": "lerna clean --yes",
+    "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "./scripts/bump",
     "release": "./scripts/release",
     "predeploy": "yarn build:docs",
@@ -44,11 +47,12 @@
   "devDependencies": {
     "@instructure/conventional-changelog": "1.0.0",
     "commitizen": "2.9.6",
-    "lerna": "2.5.1",
-    "npm-run-all": "4.1.1",
-    "standard-version": "4.2.0",
+    "lerna": "2.9.0",
+    "lint-staged": "^6.1.0",
+    "npm-run-all": "4.1.2",
+    "standard-version": "4.3.0",
     "validate-commit-msg": "2.14.0",
-    "yarn": "1.3.2"
+    "yarn": "1.5.1"
   },
   "config": {
     "commitizen": {
@@ -56,6 +60,7 @@
     }
   },
   "engines": {
+    "node": ">=8.6.0",
     "yarn": ">=1.1.0"
   },
   "standard-version": {
@@ -63,5 +68,9 @@
       "tag": true,
       "commit": true
     }
+  },
+  "lint-staged": {
+    "*.js": "eslint",
+    "*.css": "stylelint"
   }
 }

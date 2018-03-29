@@ -26,27 +26,39 @@
     "@instructure/ui-presets": "^4.8.0",
     "@instructure/ui-themes": "^4.8.0",
     "postcss-input-range": "4.0.0",
-    "postcss-mixins": "6.2.0",
-    "postcss-simple-vars": "4.1.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-a11y": "^4.8.0",
+    "@instructure/ui-alerts": "^4.8.0",
+    "@instructure/ui-billboard": "^4.8.0",
+    "@instructure/ui-breadcrumb": "^4.8.0",
+    "@instructure/ui-buttons": "^4.8.0",
+    "@instructure/ui-container": "^4.8.0",
+    "@instructure/ui-elements": "^4.8.0",
+    "@instructure/ui-forms": "^4.8.0",
+    "@instructure/ui-i18n": "^4.8.0",
+    "@instructure/ui-icons": "^4.8.0",
+    "@instructure/ui-layout": "^4.8.0",
+    "@instructure/ui-menu": "^4.8.0",
+    "@instructure/ui-motion": "^4.8.0",
+    "@instructure/ui-overlays": "^4.8.0",
+    "@instructure/ui-pagination": "^4.8.0",
+    "@instructure/ui-portal": "^4.8.0",
+    "@instructure/ui-tabs": "^4.8.0",
     "@instructure/ui-themeable": "^4.8.0",
+    "@instructure/ui-toggle-details": "^4.8.0",
+    "@instructure/ui-tree-browser": "^4.8.0",
     "@instructure/ui-utils": "^4.8.0",
-    "bowser": "^1.7.0",
     "classnames": "^2.2.5",
-    "decimal.js": "^7.2.1",
-    "deep-equal": "^1.0.1",
-    "instructure-icons": "^4.3.1",
     "keycode": "^2.1.8",
     "no-scroll": "^2.1.0",
-    "numeral": "^2.0.6",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.1",
-    "react-dom": "^0.14.9 || ^15.6.1"
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
   },
   "publishConfig": {
     "access": "public"

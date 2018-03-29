@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import getDisplayName from './getDisplayName'
 import warning from '../warning'
 
@@ -22,24 +46,35 @@ import warning from '../warning'
 *
 * @module deprecated
 * @param {string} version
-* @param {object} oldProps
+* @param {object} oldProps (if this argument is null or undefined, the entire component is deprecated)
+* @param {string} message
 * @return {function} React component with deprecated props behavior
 */
-export default function deprecated (version, oldProps) {
+export default function deprecated (version, oldProps, message) {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)
 
     class DeprecatedComponent extends ComposedComponent {
       static displayName = displayName
 
-      constructor (props, context) {
-        checkProps(version, props, oldProps)
+      componentDidMount () {
+        if (oldProps) {
+          warnDeprecatedProps(displayName, version, this.props, oldProps, message)
+        } else {
+          warnDeprecatedComponent(version, displayName, message)
+        }
 
-        super(props, context)
+        if (super.componentDidMount) {
+          super.componentDidMount()
+        }
       }
 
       componentWillReceiveProps (nextProps) {
-        checkProps(version, nextProps, oldProps)
+        if (oldProps) {
+          warnDeprecatedProps(displayName, version, nextProps, oldProps, message)
+        } else {
+          warnDeprecatedComponent(version, displayName, message)
+        }
 
         if (super.componentWillReceiveProps) {
           super.componentWillReceiveProps(nextProps)
@@ -51,7 +86,26 @@ export default function deprecated (version, oldProps) {
   }
 }
 
-function checkProps (version, props, oldProps) {
+/**
+ *
+ * Trigger a console warning if the specified prop variant is deprecated
+ *
+ * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+ * @param {array} deprecated - an array of the deprecated variant names
+ * @param {string} message - additional information to display with the warning
+ */
+export const deprecatePropValues = (propType, deprecated = [], message) => {
+  return (props, propName, componentName, ...rest) => {
+    const isDeprecatedValue = deprecated.includes(props[propName])
+    warning(
+      (!isDeprecatedValue),
+      `[${componentName}] The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
+    )
+    return isDeprecatedValue ? null : propType(props, propName, componentName, ...rest)
+  }
+}
+
+function warnDeprecatedProps (componentName, version, props, oldProps, message) {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
@@ -60,9 +114,17 @@ function checkProps (version, props, oldProps) {
 
       warning(
         false,
-        '%s was deprecated in %s%s',
-        oldProp, version, (newProp ? ` use ${newProp} instead` : '')
+        '[%s] `%s` was deprecated in %s%s. %s',
+        componentName, oldProp, version, (newProp ? `. Use \`${newProp}\` instead` : ''), message || ''
       )
     }
   })
+}
+
+export function warnDeprecatedComponent (version, componentName, message) {
+  warning(false, '[%s] was deprecated in version %s. %s', componentName, version, message || '')
+}
+
+export function changedPackageWarning (prevPackage, newPackage) {
+  return `It has been moved from @instructure/${prevPackage} to @instructure/${newPackage}.`
 }

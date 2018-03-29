@@ -1,0 +1,24 @@
+.root {
+  box-sizing: border-box;
+}
+
+.content {
+  box-sizing: border-box;
+  width: 100%;
+  border-width: var(--borderWidth);
+  border-style: var(--borderStyle);
+  background: var(--background);
+  border-color: var(--borderColor);
+  color: var(--color);
+}
+
+.minimal,
+.simple {
+  flex-basis: 100%;
+
+  .content {
+    border-left: none;
+    border-right: none;
+    border-bottom: none;
+  }
+}

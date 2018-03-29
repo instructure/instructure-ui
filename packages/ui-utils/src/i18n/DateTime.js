@@ -1,5 +1,31 @@
-import moment from 'moment' // eslint-disable-line import/no-extraneous-dependencies
-import 'moment-timezone/builds/moment-timezone-with-data'
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import DateTime from '../../../ui-i18n/lib/DateTime'
+
+import { changedPackageWarning } from '../react/deprecated'
+import warning from '../warning'
 
 /**
 * ---
@@ -16,8 +42,14 @@ import 'moment-timezone/builds/moment-timezone-with-data'
 * @returns {String} ISO 8601 string
 */
 export function now (locale, timezone) {
-  checkParams(locale, timezone)
-  return moment().locale(locale).tz(timezone)
+  warning(
+    false,
+    '[%s] was deprecated in version %s. %s',
+    'DateTime.now',
+    '5.0.0',
+    changedPackageWarning('ui-utils', 'ui-i18n')
+  )
+  return DateTime.now(locale, timezone)
 }
 
 /**
@@ -28,8 +60,14 @@ export function now (locale, timezone) {
 * @returns {String} ISO 8601 string
 */
 export function parse (dateString, locale, timezone) {
-  checkParams(locale, timezone)
-  return moment.tz(dateString, [moment.ISO_8601, 'l', 'L', 'll', 'LL'], locale, timezone)
+  warning(
+    false,
+    '[%s] was deprecated in version %s. %s',
+    'DateTime.parse',
+    '5.0.0',
+    changedPackageWarning('ui-utils', 'ui-i18n')
+  )
+  return DateTime.parse(dateString, locale, timezone)
 }
 
 /**
@@ -38,7 +76,14 @@ export function parse (dateString, locale, timezone) {
 * @returns {Boolean} true if dateString is a valid ISO 8601 string
 */
 export function isValid (dateString) {
-  return moment(dateString, [moment.ISO_8601]).isValid()
+  warning(
+    false,
+    '[%s] was deprecated in version %s. %s',
+    'DateTime.isValid',
+    '5.0.0',
+    changedPackageWarning('ui-utils', 'ui-i18n')
+  )
+  return DateTime.isValid(dateString)
 }
 
 /**
@@ -47,7 +92,14 @@ export function isValid (dateString) {
 * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 */
 export function browserTimeZone () {
-  return moment.tz.guess()
+  warning(
+    false,
+    '[%s] was deprecated in version %s. %s',
+    'DateTime.browserTimeZone',
+    '5.0.0',
+    changedPackageWarning('ui-utils', 'ui-i18n')
+  )
+  return DateTime.browserTimeZone()
 }
 
 export default {
@@ -55,9 +107,4 @@ export default {
   parse,
   browserTimeZone,
   isValid
-}
-
-function checkParams (locale, timezone) {
-  if (locale == null) throw Error('locale must be specified')
-  if (timezone == null) throw Error('timezone must be specified')
 }

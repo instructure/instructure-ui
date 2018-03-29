@@ -8,13 +8,12 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **Button:** Fire both onClick and href ([b2a78bb](https://github.com/instructure/instructure-ui/commit/b2a78bb))
+* **ui-buttons:** Button href prop should work with onClick ([b2a78bb](https://github.com/instructure/instructure-ui/commit/b2a78bb))
 
 
 ### Features
 
 * **ui-overlay,ui-i18n:** add RTL language support to Tray ([92679d7](https://github.com/instructure/instructure-ui/commit/92679d7))
-
 
 
 <a name="4.7.3"></a>

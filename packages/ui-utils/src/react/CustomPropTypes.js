@@ -1,3 +1,33 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import getDisplayName from './getDisplayName'
+import canUseDOM from '../dom/canUseDOM'
+
 /**
  * ---
  * category: utilities/react
@@ -5,14 +35,6 @@
  * Custom prop types for React components.
  * @module CustomPropTypes
  */
-import React from 'react'
-import PropTypes from 'prop-types'
-import moment from 'moment'
-import getDisplayName from './getDisplayName'
-import warning from '../warning'
-
-import canUseDOM from '../dom/canUseDOM'
-
 export default {
   Children: {
     /**
@@ -291,7 +313,7 @@ ${formatTypes(componentName, childNames)}`)
    */
   controllable (propType, handlerName = 'onChange', defaultPropName = 'defaultValue') {
     return function (props, propName, componentName) {
-      const error = propType.apply(null, arguments) // eslint-disable-line prefer-spread
+      const error = propType.apply(null, arguments)
       if (error) {
         return error
       }
@@ -342,172 +364,5 @@ Otherwise, set '${handlerName}'.`
     }
   },
 
-  element: canUseDOM ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)]) : PropTypes.element,
-
-  /**
-   *
-   * Validate spacing prop constraining it to the following enumerated values
-   *
-   *  - '0'
-   *  - 'none'
-   *  - 'auto'
-   *  - 'xxx-small'
-   *  - 'xx-small'
-   *  - 'x-small'
-   *  - 'small'
-   *  - 'medium'
-   *  - 'large'
-   *  - 'x-large'
-   *  - 'xx-large'
-   *
-   * Valid inputs include a single value or a string with CSS
-   * shorthand like syntax with a maximum of 4 values.
-   *
-   * Examples of valid inputs:
-   * 'x-small' (single value)
-   * 'small large' (CSS shorthand)
-   * '0 small large x-large' (CSS shorthand max 4 values)
-   *
-   * Examples of invalid inputs:
-   * '5px' (must be a string from the enumerated values)
-   * '0 large small 0 0' (invalid shorthand syntax w/5 values)
-   *
-   * @param {Object} props - object containing the component props
-   * @param {string} propName - name of the given prop
-   * @param {string} componentName - name of the component
-   * @param {string} location
-   * @param {string} propFullName
-   * @returns {Error} if is not one of the enumerated values or the shorthand syntax is incorrect
-   */
-  spacing (props, propName, componentName, location) {
-    const validValues = [
-      '0',
-      'none',
-      'auto',
-      'xxx-small',
-      'xx-small',
-      'x-small',
-      'small',
-      'medium',
-      'large',
-      'x-large',
-      'xx-large'
-    ]
-
-    const propValue = props[propName]
-
-    if (propValue === undefined) {
-      return
-    }
-
-    const propValueType = typeof propValue
-
-    if (propValueType !== 'string') {
-      return new Error(
-        `Invalid ${location} \`${propName}\` of type \`${propValueType}\` supplied to \`${componentName}\`, expected ` +
-          `a string.`
-      )
-    }
-
-    const propValues = propValue.split(' ')
-    const valuesLength = propValues.length
-    if (valuesLength > 0 && valuesLength < 5) {
-      for (let i = 0; i < valuesLength; i++) {
-        const valueIndex = validValues.indexOf(propValues[i])
-        if (valueIndex === -1) {
-          return new Error(
-            `Invalid ${location} \`${propName}\` \`${propValues[i]}\` supplied to \`${componentName}\`, expected ` +
-              `a one of \`${validValues.join(', ')}\`.`
-          )
-        }
-      }
-    } else {
-      return new Error(
-        `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
-          `between one and four of the following valid values: \`${validValues.join(', ')}\`.`
-      )
-    }
-  },
-
-  /**
-   *
-   * Verify that the given prop is a correctly formatted ISO 8601 formatted string.
-   *
-   * @param {Object} props - object containing the component props
-   * @param {string} propName - name of the given prop
-   * @param {string} componentName - name of the component
-   * @param {string} location
-   * @param {string} propFullName
-   * @returns {Error} if prop is an invalid ISO 8601 string
-   */
-  iso8601 (props, propName, componentName, location) {
-    const propValue = props[propName]
-    if (propValue === undefined) return
-
-    const propValueType = typeof propValue
-    if (typeof propValueType !== 'string') {
-      return new Error(
-        `Invalid ${location} \`${propName}\` of type \`${propValueType}\` supplied to \`${componentName}\`, expected ` +
-          `an ISO 8601 formatted string.`
-      )
-    }
-
-    const parsedMoment = moment(propValue, [moment.ISO_8601])
-    if (!parsedMoment.isValid()) {
-      return new Error(
-        `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
-          `an ISO 8601 formatted string.`
-      )
-    }
-  },
-
-  /**
-   *
-   * Trigger a console warning if the specified prop variant is deprecated
-   *
-   * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
-   * @param {string} deprecated - name of the deprecated variant
-   * @param {string} message - additional information to display with the warning
-   */
-  deprecatedVariant (propType, deprecated, message) {
-    return (props, propName, componentName) => {
-      warning(
-        (props[propName] !== deprecated),
-        `\`${componentName}\` \`${deprecated}\` variant is deprecated. ${message || ''}`
-      )
-    }
-  },
-
-  message: PropTypes.shape({
-    text: PropTypes.string,
-    type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-  }),
-
-  placement: PropTypes.oneOf([
-    'top',
-    'end',
-    'bottom',
-    'start',
-    'top start',
-    'start top',
-    'start center',
-    'start bottom',
-    'bottom start',
-    'bottom center',
-    'bottom end',
-    'end bottom',
-    'end center',
-    'end top',
-    'top end',
-    'top center',
-    'center end',
-    'center start',
-    'top stretch',
-    'bottom stretch',
-    'end stretch',
-    'start stretch',
-    'offscreen'
-  ]),
-
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large'])
+  element: canUseDOM ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)]) : PropTypes.element
 }

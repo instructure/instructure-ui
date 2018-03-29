@@ -1,0 +1,130 @@
+/* stylelint-disable selector-max-class */
+
+.inputContainer {
+  display: flex;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  transition: all 0.2s ease-out;
+  outline: 0.1875rem solid transparent;
+  outline-offset: -0.5rem;
+  overflow: hidden;
+  font-family: var(--fontFamily);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+
+  &.focus {
+    border-color: var(--focusBorderColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
+    outline-offset: -0.1875rem;
+    box-shadow: initial;
+  }
+
+  &.invalid {
+    border-color: var(--errorBorderColor);
+
+    &.focus {
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
+    }
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+    height: var(--mediumHeight);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+    height: var(--largeHeight);
+  }
+
+  &.inline {
+    display: inline-flex;
+    width: auto;
+  }
+}
+
+/* stylelint-disable selector-max-type */
+
+.input,
+input[type].input {
+  all: initial;
+  text-align: start;
+  direction: inherit;
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  appearance: none;
+  line-height: 1; /* reset global line height */
+  border: 0;
+  height: initial;
+  margin: 0;
+  flex: 1;
+  min-width: 0.0625rem;
+  box-sizing: border-box;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--fontWeight);
+  color: var(--color);
+  background: var(--background);
+  padding: var(--padding);
+
+  &::placeholder {
+    color: var(--placeholderColor);
+  }
+}
+
+/* stylelint-enable selector-max-type */
+
+.arrowContainer {
+  flex: 0 0 var(--arrowsContainerWidth);
+  display: flex;
+  flex-direction: column;
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.arrow {
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--arrowsBackgroundColor);
+  border-top: none;
+  border-inline-end: none;
+  border-inline-start: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--arrowsBorderColor);
+  color: var(--arrowsColor);
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:hover {
+    background-color: var(--arrowsHoverBackgroundColor);
+  }
+
+  &:active {
+    box-shadow: var(--arrowsActiveBoxShadow);
+  }
+}
+
+/* stylelint-enable selector-max-class */

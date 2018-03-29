@@ -1,37 +1,58 @@
 #!/bin/bash -e
 
-COMPONENTS_DIR=packages/ui-core/src/components
-COMPONENT_TEMPLATE_DIR=scripts/templates/component
-
-read -p 'Component name: ' component
-
-export COMPONENT=$component
-
-if [ ! -d "$COMPONENTS_DIR" ]; then
-  echo Cannot find component directory!
-  exit 1
-fi
+NPM_CLIENT=$(npm bin)/yarn
+COMPONENT_TEMPLATE_DIR=scripts/templates/component/
 
 if [ ! -d "$COMPONENT_TEMPLATE_DIR" ]; then
   echo Cannot find component template!
   exit 1
 fi
 
-if [ -d "$COMPONENTS_DIR/$COMPONENT" ]; then
+read -p 'Component name: ' COMPONENT
+read -p 'Package name: ' PACKAGE
+
+PACKAGE_DIR=packages/$PACKAGE
+
+if [ ! -d "$PACKAGE_DIR" ]; then
+  echo The specified package does not exist.
+
+  read -p "Would you like to create a new package [$PACKAGE]? [y/n] " -n 1 -r; echo
+  if [[ $REPLY =~ ^[Yy]$ ]]; then
+    $NPM_CLIENT run generate:package $PACKAGE
+  else
+    echo "Stopped. No components or packages were generated."
+    exit
+  fi
+fi
+
+# Check one last time to make sure the generate:package script was successful
+if [ ! -d "$PACKAGE_DIR" ]; then
+  echo Failed to generate package $PACKAGE!
+  exit 1
+fi
+
+COMPONENT_DIR=$PACKAGE_DIR/src/components/$COMPONENT
+
+if [ -d "$COMPONENT_DIR" ]; then
   echo Oops! Component $COMPONENT exists!
   exit 1
 fi
 
-echo Generating $COMPONENT files in $COMPONENTS_DIR/$COMPONENT
+echo Generating $COMPONENT files in $COMPONENT_DIR
 
-cp -r $COMPONENT_TEMPLATE_DIR $COMPONENTS_DIR/$COMPONENT
+# Create component directory and copy template files
+mkdir -p $COMPONENT_DIR
+cp -r $COMPONENT_TEMPLATE_DIR $COMPONENT_DIR
+
+# Export this variable so it's available in the find and sed commands below
+export COMPONENT
 
 # Update file names
-find $COMPONENTS_DIR/$COMPONENT -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+find $COMPONENT_DIR -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
 
 # Update file contents
 if [[ "$OSTYPE" == darwin* ]]; then
-  find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $COMPONENT_DIR -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 else
-  find $COMPONENTS_DIR/$COMPONENT -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $COMPONENT_DIR -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 fi

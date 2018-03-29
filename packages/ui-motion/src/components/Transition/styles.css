@@ -1,0 +1,115 @@
+.root {
+  /* trigger hardware acceleration for smoother animation */
+  transform: translate3d(0, 0, 0);
+}
+
+/* Animation type: fade */
+
+.fade {
+  transition: opacity var(--duration), transform var(--duration) ease-out;
+}
+
+.fade--exiting,
+.fade--exited {
+  opacity: 0.01;
+}
+
+.fade--entering,
+.fade--entered {
+  opacity: 1;
+}
+
+/* Animation type: scale */
+
+.scale {
+  transition:
+    opacity var(--duration),
+    transform var(--duration) cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.scale--exited,
+.scale--exiting {
+  transform: scale(0.01) translate3d(0, 0, 0);
+  opacity: 0.01;
+}
+
+.scale--entered,
+.scale--entering {
+  transform: scale(1) translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+/* Animation type: slide */
+
+/*
+  Note: the transitions for slide are:
+  from EXITED to ENTERING and from ENTERED to EXITING.
+
+  ENTERED and EXITED will be set directly when enter or exit transitions are disabled and they reset the 'stage'
+  for the next transition.
+
+  The base transition class enables/disables transitions from one state to another, so transitions should be
+  set there.
+*/
+
+.slide-left,
+.slide-right,
+.slide-up,
+.slide-down {
+  transition: opacity var(--duration), transform var(--duration);
+}
+
+.slide-left--entering,
+.slide-left--entered,
+.slide-right--entering,
+.slide-right--entered,
+.slide-up--entering,
+.slide-up--entered,
+.slide-down--entering,
+.slide-down--entered {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.slide-left--exiting,
+.slide-right--exiting,
+.slide-up--exiting,
+.slide-down--exiting,
+.slide-left--exited,
+.slide-right--exited,
+.slide-up--exited,
+.slide-down--exited {
+  opacity: 0.01;
+}
+
+.slide-left--exiting {
+  transform: translate3d(-50%, 0, 0);
+}
+
+.slide-left--exited {
+  transform: translate3d(50%, 0, 0);
+}
+
+.slide-right--exiting {
+  transform: translate3d(50%, 0, 0);
+}
+
+.slide-right--exited {
+  transform: translate3d(-50%, 0, 0);
+}
+
+.slide-up--exiting {
+  transform: translate3d(0, -50%, 0);
+}
+
+.slide-up--exited {
+  transform: translate3d(0, 50%, 0);
+}
+
+.slide-down--exiting {
+  transform: translate3d(0, 50%, 0);
+}
+
+.slide-down--exited {
+  transform: translate3d(0, -50%, 0);
+}

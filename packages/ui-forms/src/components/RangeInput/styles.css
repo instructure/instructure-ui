@@ -1,0 +1,114 @@
+/* stylelint-disable no-descending-specificity */
+
+.root {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.input {
+  all: initial;
+  flex: auto;
+  box-sizing: border-box;
+  appearance: none;
+  width: 100%; /* for Firefox */
+  outline: none;
+  margin: 0;
+  padding: 0; /* for IE */
+
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  &::range-thumb {
+    appearance: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    width: var(--handleSize);
+    height: var(--handleSize);
+    background: var(--handleBackground);
+    box-shadow: 0 0.0625rem 0 var(--handleShadowColor);
+
+    &:hover {
+      background: var(--handleHoverBackground);
+    }
+  }
+
+  &::-webkit-slider-thumb {
+    margin-top: calc(-1 * var(--handleSize) / 4);
+  }
+
+  &:focus,
+  &:active {
+    outline: none;
+
+    /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+    &::range-thumb {
+      box-shadow:
+        0 0.0625rem 0 var(--handleShadowColor),
+        0 0 0 var(--handleFocusOutlineWidth) var(--handleFocusOutlineColor);
+    }
+  }
+
+  /* remove outline in FF */
+
+  &::-moz-focus-inner,
+  &::-moz-focus-outer {
+    border: 0;
+    outline: none;
+  }
+
+  /* stylelint-disable-next-line selector-pseudo-element-no-unknown */
+  &::range-track {
+    border-radius: 0.312em;
+    border-color: transparent;
+    color: transparent;
+    cursor: pointer;
+    background: var(--trackBackground);
+    height: calc(var(--handleSize) / 2);
+  }
+
+  &::-ms-track {
+    background: transparent;
+    border-width: var(--handleSize) 0;
+  }
+
+  &::-ms-fill-upper,
+  &::-ms-fill-lower {
+    border-width: var(--handleSize) 0;
+    border-radius: calc(var(--handleSize) / 2);
+    background: var(--trackBackground);
+  }
+
+  &::-ms-tooltip {
+    display: none;
+  }
+}
+
+.value {
+  all: initial;
+  box-sizing: border-box;
+  display: block;
+  color: inherit;
+  font-family: var(--valueFontFamily);
+  font-weight: var(--valueFontWeight);
+  text-align: center;
+
+  .small & {
+    font-size: var(--valueSmallFontSize);
+    padding: var(--valueSmallPadding);
+    line-height: var(--valueSmallLineHeight);
+  }
+
+  .medium & {
+    font-size: var(--valueMediumFontSize);
+    padding: var(--valueMediumPadding);
+    line-height: var(--valueMediumLineHeight);
+  }
+
+  .large & {
+    font-size: var(--valueLargeFontSize);
+    padding: var(--valueLargePadding);
+    line-height: var(--valueLargeLineHeight);
+  }
+}
+
+/* stylelint-enable no-descending-specificity */

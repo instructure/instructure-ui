@@ -23,20 +23,18 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^4.8.0",
-    "react": "15.6.1",
-    "react-dom": "15.6.1"
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
   },
   "dependencies": {
     "@instructure/ui-utils": "^4.8.0",
-    "bowser": "^1.7.0",
-    "deep-equal": "^1.0.1",
     "glamor": "^2.20.37",
     "prop-types": "^15.5.10",
     "tinycolor2": "^1.4.1"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.1",
-    "react-dom": "^0.14.9 || ^15.6.1"
+    "react": "^0.14.9 || ^15.6.2",
+    "react-dom": "^0.14.9 || ^15.6.2"
   },
   "publishConfig": {
     "access": "public"

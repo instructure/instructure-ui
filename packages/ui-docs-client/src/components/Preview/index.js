@@ -1,3 +1,27 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
@@ -6,19 +30,12 @@ import axe from 'react-axe'
 
 import { transform } from 'babel-standalone'
 
-import ApplyTheme from '@instructure/ui-core/lib/components/ApplyTheme'
-import themeable from '@instructure/ui-themeable'
+import themeable, { ApplyTheme } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
 import theme from './theme'
 
-if (process.env.NODE_ENV !== 'production') {
-  axe(React, ReactDOM, 1500, {
-    rules: [
-      { id: 'color-contrast', enabled: false }
-    ]
-  })
-}
+let _createElement
 
 @themeable(theme, styles)
 export default class Preview extends Component {
@@ -54,6 +71,16 @@ export default class Preview extends Component {
     if (this.props.code) {
       this.executeCode(this.props.code)
     }
+
+    if (process.env.NODE_ENV !== 'production') {
+      _createElement = React.createElement
+
+      axe(React, ReactDOM, 1500, {
+        rules: [
+          { id: 'color-contrast', enabled: false }
+        ]
+      })
+    }
   }
 
   componentDidUpdate (prevProps) {
@@ -65,6 +92,10 @@ export default class Preview extends Component {
   componentWillUnmount () {
     if (this._mountNode) {
       ReactDOM.unmountComponentAtNode(this._mountNode)
+    }
+
+    if (_createElement) {
+      React.createElement = _createElement
     }
   }
 

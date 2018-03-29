@@ -1,15 +1,41 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 
-import ScreenReaderContent from '@instructure/ui-core/lib/components/ScreenReaderContent'
-import Select from '@instructure/ui-core/lib/components/Select'
-import Tray from '@instructure/ui-core/lib/components/Tray'
-import Heading from '@instructure/ui-core/lib/components/Heading'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import Select from '@instructure/ui-forms/lib/components/Select'
+import Tray from '@instructure/ui-overlays/lib/components/Tray'
 
-import IconHeartSolid from 'instructure-icons/lib/Solid/IconHeartSolid'
-import IconGithubSolid from 'instructure-icons/lib/Solid/IconGithubSolid'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
+import Pill from '@instructure/ui-elements/lib/components/Pill'
+
+import IconHeart from '@instructure/ui-icons/lib/Solid/IconHeart'
+import IconGithub from '@instructure/ui-icons/lib/Solid/IconGithub'
 
 import classnames from 'classnames'
 import Document from '../Document'
@@ -17,6 +43,7 @@ import Header from '../Header'
 import Nav from '../Nav'
 import Theme from '../Theme'
 import Section from '../Section'
+import Icons from '../Icons'
 
 import Button from '../Button'
 
@@ -30,15 +57,17 @@ import theme from './theme'
 @themeable(theme, styles)
 export default class App extends Component {
   static propTypes = {
-    docs: PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
-    parents: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    sections: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    themes: PropTypes.object, // eslint-disable-line react/forbid-prop-types
-    descriptions: PropTypes.object, // eslint-disable-line react/forbid-prop-types
+    docs: PropTypes.object.isRequired,
+    parents: PropTypes.object,
+    sections: PropTypes.object,
+    themes: PropTypes.object,
+    icons: PropTypes.object,
+    descriptions: PropTypes.object,
     library: LibraryPropType.isRequired
   }
 
   static defaultProps = {
+    icons: {},
     themes: {},
     parents: {},
     sections: {},
@@ -51,7 +80,7 @@ export default class App extends Component {
     themeKey: PropTypes.string
   }
 
-  constructor (props) {
+  constructor () {
     super()
 
     this.state = {
@@ -81,9 +110,9 @@ export default class App extends Component {
     })
   }
 
-  handleThemeChange = e => {
+  handleThemeChange = (event, option) => {
     this.setState({
-      themeKey: e.target.value
+      themeKey: option.value
     })
   }
 
@@ -144,6 +173,23 @@ export default class App extends Component {
     )
   }
 
+  renderIcons (key) {
+    const { icons } = this.props
+
+    return (
+      <Section id={key}>
+        <Heading level="h2" margin="0 0 medium 0">
+          Iconography
+        </Heading>
+        <Icons
+          packageName={icons.packageName}
+          selectedFormat={key}
+          formats={icons.formats}
+        />
+      </Section>
+    )
+  }
+
   renderDocument (doc) {
     const { descriptions, docs, parents } = this.props
     let children = []
@@ -157,6 +203,7 @@ export default class App extends Component {
     return (
       <div>
         { this.renderThemeSelect() }
+        { doc.experimental && <div><Pill text="Experimental" variant="primary" margin="small 0" /></div>}
         <Section id={doc.id} heading={doc.extension !== '.md' ? doc.title : undefined}>
           <Document
             doc={{
@@ -190,7 +237,7 @@ export default class App extends Component {
     ) : null
   }
 
-  renderError (key) {
+  renderError () {
     return (
       <Section id="error">
         <Heading level="h2">Document not found</Heading>
@@ -201,15 +248,18 @@ export default class App extends Component {
   renderContent (key) {
     const doc = this.props.docs[key]
     const theme = this.props.themes[key]
+    const icon = this.props.icons.formats[key]
 
     if (!key || key === 'index') {
       return this.renderIndex()
     } if (key === 'CHANGELOG') {
       return this.renderChangeLog()
-    } else if (doc) {
-      return this.renderDocument(doc)
+    } else if (key === 'iconography' || icon) {
+      return this.renderIcons(key)
     } else if (theme) {
       return this.renderTheme(key)
+    } else if (doc) {
+      return this.renderDocument(doc)
     } else {
       return this.renderError(key)
     }
@@ -226,13 +276,13 @@ export default class App extends Component {
         { author && (
           <span>
             Made with &nbsp;
-            <IconHeartSolid className={styles.footerIcon} />
+            <IconHeart className={styles.footerIcon} />
             &nbsp; by {author}. &nbsp;
           </span>
         ) }
         { repository && (
           <a href={repository} className={styles.githubLink} target="_blank">
-            <IconGithubSolid className={styles.footerIcon} />
+            <IconGithub className={styles.footerIcon} />
             <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
           </a>
         ) }
@@ -282,11 +332,6 @@ export default class App extends Component {
             label="Navigation"
             open={this.state.showMenu}
             size="x-small"
-            applicationElement={() => [
-              document.getElementById('app'),
-              document.getElementById('flash-messages'),
-              document.getElementById('nav')
-            ]}
             mountNode={() => document.getElementById('nav')}
           >
             <div className={styles.nav}>
@@ -296,6 +341,7 @@ export default class App extends Component {
                 sections={this.props.sections}
                 docs={this.props.docs}
                 themes={this.props.themes}
+                icons={this.props.icons}
               />
             </div>
           </Tray>

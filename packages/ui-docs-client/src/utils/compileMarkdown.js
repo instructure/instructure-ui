@@ -1,36 +1,59 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React, { createElement } from 'react'
 import marked from 'marked'
 import he from 'he'
 import grayMatter from 'gray-matter'
 
-import Link from '@instructure/ui-core/lib/components/Link'
-import Heading from '@instructure/ui-core/lib/components/Heading'
-import Table from '@instructure/ui-core/lib/components/Table'
-import Image from '@instructure/ui-core/lib/components/Image'
-import List, { ListItem } from '@instructure/ui-core/lib/components/List'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
+import Img from '@instructure/ui-elements/lib/components/Img'
+import Link from '@instructure/ui-elements/lib/components/Link'
+import Table from '@instructure/ui-elements/lib/components/Table'
+import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
-import CodeEditor from '../components/CodeEditor'
 import Playground from '../components/Playground'
 
 import trimIndent from './trimIndent'
 
-/* eslint-disable react/prop-types */
+/* eslint-disable react/prop-types, react/display-name */
 const elements = {
   h1: ({ id, children }) => <Heading id={id} level="h1" margin="0 0 large">{children}</Heading>,
   h2: ({ id, children }) => <Heading id={id} level="h2" margin="0 0 large">{children}</Heading>,
   h3: ({ id, children }) => <Heading id={id} level="h3" margin="large 0 small 0">{children}</Heading>,
   h4: ({ id, children }) => <Heading id={id} level="h4" margin="large 0 small 0">{children}</Heading>,
-  img: ({ src, alt }) => <Image src={src} alt={alt} />,
+  img: ({ src, alt }) => <Img src={src} alt={alt} />,
   table: ({ children }) => <Table>{children}</Table>,
   a: ({ href, title, target, name, children }) => {
     if (href) {
       return <Link href={href} title={title} target={target}>{children}</Link>
     } else {
-      return <a name={name}>{children}</a>
+      return <a name={name}>{children}</a> // eslint-disable-line jsx-a11y/anchor-is-valid
     }
   }
 }
-/* eslint-enable react/prop-types */
+/* eslint-enable react/prop-types, react/display-name */
 
 const { renderer, tracker } = createRenderer()
 
@@ -133,7 +156,14 @@ function createRenderer () {
             />
           )
         } else {
-          return <CodeEditor label={title} code={code} language={language} readOnly={readOnly} />
+          return (
+            <CodeEditor
+              label={title}
+              code={code}
+              language={language}
+              readOnly={true}
+            />
+          )
         }
       } else {
         return <code>{code}</code>
@@ -170,7 +200,7 @@ function createRenderer () {
     return addElement('a', {href, title}, text)
   }
 
-  renderer.a = function (href, title, text) {
+  renderer.a = function (name, text) {
     return addElement('a', {name}, text)
   }
 

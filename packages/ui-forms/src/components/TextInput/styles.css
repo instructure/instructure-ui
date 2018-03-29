@@ -1,0 +1,102 @@
+.layout {
+  position: relative;
+  display: block;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  offset-inline-end: var(--padding);
+  offset-inline-start: auto;
+  height: 100%;
+  pointer-events: none;
+  fill: var(--iconColor);
+}
+
+/* stylelint-disable selector-max-type */
+
+.input,
+input[type].input {
+  all: initial;
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  appearance: none;
+  line-height: 1; /* reset global line height */
+  margin: 0;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  transition: all 0.2s ease-out;
+  outline: 0.1875rem solid transparent;
+  outline-offset: -0.5rem;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+  color: var(--color);
+  background: var(--background);
+  padding: 0 var(--padding);
+
+  &:focus {
+    border-color: var(--focusBorderColor);
+    outline: 0.1875rem solid var(--focusOutlineColor);
+    outline-offset: -0.1875rem;
+    box-shadow: initial;
+  }
+
+  &[aria-invalid] {
+    border-color: var(--errorBorderColor);
+
+    &:focus {
+      border-color: var(--errorBorderColor);
+      outline-color: var(--errorOutlineColor);
+    }
+  }
+
+  &::placeholder {
+    color: var(--placeholderColor);
+  }
+
+  &[aria-disabled] {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.small {
+    font-size: var(--smallFontSize);
+    height: var(--smallHeight);
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+    height: var(--mediumHeight);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+    height: var(--largeHeight);
+  }
+
+  &.hasIcon {
+    padding-inline-end: calc(var(--padding) * 2 + 1em);
+    padding-inline-start: var(--padding);
+  }
+
+  &.textAlign--start {
+    text-align: start;
+  }
+
+  &.textAlign--center {
+    text-align: center;
+  }
+}
+
+/* stylelint-enable selector-max-type */

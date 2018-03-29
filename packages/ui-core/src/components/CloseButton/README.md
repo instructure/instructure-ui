@@ -2,14 +2,5 @@
 describes: CloseButton
 ---
 
-A `CloseButton` component (used in [Dialog](#Dialog) components).
-See [Alert](#Alert), [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray).
-
-See [Button](#Button) for properties.
-
-```js
----
-example: true
----
-<CloseButton offset="none">Close</CloseButton>
-```
+As of 5.0.0, CloseButton has been moved from the `ui-core` package to `ui-buttons`.
+See [ui-buttons](#ui-buttons) for more details.

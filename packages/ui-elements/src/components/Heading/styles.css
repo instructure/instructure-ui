@@ -1,0 +1,95 @@
+.root {
+  font-family: var(--fontFamily);
+  line-height: var(--lineHeight);
+  text-rendering: optimizeLegibility;
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.h1 {
+  font-size: var(--h1FontSize);
+  font-weight: var(--h1FontWeight);
+}
+
+.h2 {
+  font-size: var(--h2FontSize);
+  font-weight: var(--h2FontWeight);
+}
+
+.h3 {
+  font-size: var(--h3FontSize);
+  font-weight: var(--h3FontWeight);
+}
+
+.h4 {
+  font-size: var(--h4FontSize);
+  font-weight: var(--h4FontWeight);
+}
+
+.h5 {
+  font-size: var(--h5FontSize);
+  font-weight: var(--h5FontWeight);
+}
+
+.border-top {
+  padding-top: var(--borderPadding);
+  border-top: var(--borderWidth) var(--borderStyle) var(--borderColor);
+}
+
+.border-bottom {
+  padding-bottom: var(--borderPadding);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--borderColor);
+}
+
+.color-inherit {
+  color: inherit;
+}
+
+.color-primary {
+  color: var(--primaryColor);
+}
+
+.color-secondary {
+  color: var(--secondaryColor);
+}
+
+.color-primary-inverse {
+  color: var(--primaryInverseColor);
+}
+
+.color-secondary-inverse {
+  color: var(--secondaryInverseColor);
+}
+
+.color-success {
+  color: var(--successColor);
+}
+
+.color-warning {
+  color: var(--warningColor);
+}
+
+.color-brand {
+  color: var(--brandColor);
+}
+
+.color-error {
+  color: var(--errorColor);
+}
+
+.reset {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* in case element is span or other inline element */
+  display: block;
+}

@@ -1,7 +1,29 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import React from 'react'
 import Transition from '../index'
-
-import styles from '../styles.css'
 
 describe('<Transition />', () => {
   const testbed = new Testbed(
@@ -9,42 +31,6 @@ describe('<Transition />', () => {
       <div>hello</div>
     </Transition>
   )
-
-  const types = ['fade', 'scale', 'slide-down', 'slide-up', 'slide-left', 'slide-right']
-
-  const expectTypeClass = function (type) {
-    it(`should correctly apply type classest for ${type}`, () => {
-      const subject = testbed.render({
-        in: true,
-        type: type
-      })
-      expect(subject.hasClass(styles[type])).to.be.true
-    })
-  }
-
-  types.forEach((type) => {
-    expectTypeClass(type)
-  })
-
-  it('should correctly apply enter and exit classes', (done) => {
-    const subject = testbed.render({
-      in: true,
-      type: 'fade'
-    })
-
-    testbed.tick() // entering
-
-    expect(subject.hasClass(styles['fade--entered']))
-      .to.be.true
-
-    subject.setProps({ in: false }, () => {
-      testbed.tick() // trigger exiting -> exited
-
-      expect(subject.hasClass(styles['fade--exited']))
-        .to.be.true
-      done()
-    })
-  })
 
   it('should remove component from DOM when `unmountOnExit` is set', (done) => {
     const subject = testbed.render({

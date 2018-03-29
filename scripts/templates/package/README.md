@@ -9,11 +9,12 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+A UI component library made by Instructure Inc.
 
 ### Installation
 
 ```sh
-yarn add --dev @instructure/${PACKAGE}
+yarn add @instructure/${PACKAGE}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/${PACKAGE}.svg

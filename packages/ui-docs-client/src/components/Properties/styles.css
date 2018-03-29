@@ -1,3 +1,5 @@
+/* stylelint-disable color-no-hex, color-named, unit-blacklist */
+
 .root {
   margin-top: 2rem;
 
@@ -49,3 +51,5 @@
     content: "";
   }
 }
+
+/* stylelint-enable color-no-hex, color-named, unit-blacklist */

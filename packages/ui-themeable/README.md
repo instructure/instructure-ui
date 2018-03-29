@@ -20,6 +20,21 @@ a system of components that use a [shared global theme](#canvas).
 yarn add @instructure/ui-themeable
 ```
 
+### Motivation
+
+1. Two-tiered theme variable system: system-wide variables + component level variables. With this variable system, components can be themed, tested, and rendered in isolation from the rest of the system, and we can mitigate issues that may arise with system-wide theme updates.
+
+2. Runtime theme application and definition: to apply user/account level themes *without using the CSS cascade*.
+
+3. Prevent CSS Cascade bugs: All components should specify variants via props or component level theme variables only (no className or style overrides) with a clear API and should not rely on any external styles.
+
+4. Theme variables should be accessible in both JS and CSS.
+
+5. All component styles and variables should scoped to the component.
+
+6. Pre-render/server-side render support (inline critical CSS).
+
+
 ### Usage
 
 Make a UI component [themeable](#themeable):
@@ -99,8 +114,7 @@ from the `canvas-high-contrast` theme).
 
 ### Using theme variables in CSS
 
-The `@themeable` decorator will generate the CSS custom properties `--Button-background`, `--Button-color`, `--Button-hoverColor`, `--Button-hoverBackground`, in order to scope them to the component. The `--Button-` prefix is applied at build time,
-so you can use these variables in `styles.css` like `var(--background)` and `var(--hoverColor)`:
+Note: Don't worry about scoping your CSS variables (the [ui-themable](#ui-themeable) library will take care of that for you):
 
 ```css
 .root {
@@ -118,6 +132,67 @@ so you can use these variables in `styles.css` like `var(--background)` and `var
 
 Since the variables are defined in JS you can also access them in your component JS (e.g. `this.theme.hoverColor`) which will give
 you the theme values applied via React context with `ApplyTheme` or the `theme` prop (falling back to the defaults provided in the `theme.js` file).
+
+
+### How it works
+
+The [babel plugin](#babel-plugin-themeable-styles) does a few things:
+
+ 1. It uses the [css-modules-require-hook](https://github.com/css-modules/css-modules-require-hook)
+    to namespace the class names (configurable via themeable.config.js).
+ 2. It runs [postcss](https://github.com/postcss/postcss) on the contents of the `theme.css` file using plugins defined in postcss.config.js, plus [postcss-themeable-styles](#postcss-themeable-styles).
+ 3. It converts the processed CSS string to a function that provides a JS template
+    so that variable values from `theme.js` can be injected into the CSS
+    for browsers that don't support CSS variables.
+
+ The [ui-themable](#ui-themeable) library will call the theme function and inject the resulting CSS string into the document
+ when the component mounts. If the browser supports CSS variables, it will
+ inject namespaced CSS variables into the CSS before adding it to the document.
+
+ e.g. The following is injected into the document for browsers with CSS var support:
+
+ ```css
+ .list__root {
+   color: var(--list__color);
+   background: var(--list__background);
+ }
+
+ :root {
+   --list__color: #8893A2;
+   --list__background: #FFFFFF;
+ }
+ ```
+
+ Whereas if the browser does not support CSS variables:
+
+ ```css
+ .list__root {
+   color: #8893A2;
+   background: #FFFFFF;
+ }
+ ```
+
+ The [ui-themable](#ui-themeable) library also supports runtime themes as follows:
+
+ For browsers that support CSS variables, it will add variables via the
+ style attribute on the component root (when the theme is changed, either
+ via the theme property or via React context using the [ApplyTheme](#ApplyTheme) component).
+
+  ```html
+  <div style="--list-background: red">
+  ```
+
+ For browsers that don't support CSS variables it will update the DOM like:
+
+ ```html
+ <div data-theme="XYZ">
+   <style type="text/css">
+     [data-theme="XYZ"].list__root {
+       background: red;
+     }
+   </style>
+ </div>
+ ```
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-themeable.svg

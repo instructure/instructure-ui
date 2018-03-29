@@ -1,12 +1,13 @@
-/* stylelint-disable selector-max-type */
+/* stylelint-disable color-no-hex, unit-blacklist, color-named, no-descending-specificity, selector-max-class */
 
+/* stylelint-disable selector-max-type */
 html,
 body {
   margin: 0;
   color: var(--color);
   font-family: var(--fontFamily);
   line-height: var(--lineHeight);
-  fontWeight: var(--fontWeight);
+  font-weight: var(--fontWeight);
   background-color: var(--backgroundColor);
   width: 100%;
   height: 100%;
@@ -80,6 +81,7 @@ table code {
   top: 0;
   left: 16rem;
   font-size: 0.6rem;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
   z-index: 9999;
 }
 
@@ -121,6 +123,7 @@ table code {
   width: 1.5em;
   position: absolute;
   display: block;
+  transition: all 300ms ease-in-out;
 }
 
 .hamburger .line::before,
@@ -134,12 +137,6 @@ table code {
 
 .hamburger .line::after {
   bottom: -0.625em;
-}
-
-.hamburger .line,
-.hamburger .line::before,
-.hamburger .line::after {
-  transition: all 300ms ease-in-out;
 }
 
 .show-menu {
@@ -191,3 +188,5 @@ table code {
   display: flex;
   justify-content: flex-end;
 }
+
+/* stylelint-enable color-no-hex, unit-blacklist, color-named, no-descending-specificity, selector-max-class */
