@@ -24,6 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -31,17 +32,21 @@ import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 import uid from '@instructure/ui-utils/lib/uid'
+import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
-import TooltipContent from './TooltipContent'
+
+import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---
 category: components/dialogs
 ---
 **/
+@themeable(theme, styles)
 export default class Tooltip extends Component {
   static propTypes = {
     tip: PropTypes.node.isRequired,
@@ -108,9 +113,16 @@ export default class Tooltip extends Component {
           {trigger}
         </PopoverTrigger>
         <PopoverContent>
-          <TooltipContent id={this._id} size={this.props.size}>
+          <span
+            id={this._id}
+            className={classnames({
+              [styles.root]: true,
+              [styles[this.props.size]]: this.props.size
+            })}
+            role="tooltip"
+          >
             {this.props.tip}
-          </TooltipContent>
+          </span>
         </PopoverContent>
       </Popover>
     )
