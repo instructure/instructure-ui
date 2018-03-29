@@ -32,7 +32,7 @@ class Example extends React.Component {
   renderCloseButton () {
     return (
       <CloseButton
-        placement="end"
+        placement={this.state.placement === 'end' ? 'start' : 'end'}
         offset="x-small"
         variant="icon"
         onClick={this.hideTray}
@@ -91,7 +91,7 @@ class Example extends React.Component {
           size={this.state.size}
           placement={this.state.placement}
         >
-          <Container as="div" padding="large medium">
+          <Container as="div" padding="x-large large">
             {this.renderCloseButton()}
             <Heading>Hello</Heading>
             <Text as="p" lineHeight="double">{lorem.paragraph()}</Text>
