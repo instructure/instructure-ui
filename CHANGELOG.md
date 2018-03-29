@@ -2,6 +2,248 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.0"></a>
+# [5.0.0](https://github.com/instructure/instructure-ui/compare/v4.8.0...v5.0.0) (2018-03-29)
+
+
+
+### Upgrade Guide
+
+The easiest way to upgrade is to run `yarn upgrade --scope @instructure`. Once you've done this, make sure
+you check the 'BREAKING CHANGES' section below so that you can make those changes as necessary.
+
+After upgrading you should see deprecation warnings in dev and test environments that will help you prepare
+for future releases (or check out the 'Deprecations' section below). The [ui-codemods](#ui-codemods) scripts
+should make it easy to update your import/require statements to get rid of a lot of the warnings. Note: you'll
+need to update your package.json file manually to add the new packages.
+
+Note though, that it's not necessary to upgrade everything at once. Depending on the size of your application
+you may want to upgrade a package (or component) at a time. This is a major release, but in this case
+it's safe to do that.
+
+
+
+### Release Highlights
+
+#### **Breaking up is hard to do: Goodbye, `ui-core`!**
+We have broken `ui-core` into smaller packages like [ui-breadcrumb](#ui-breadcrumb), [ui-buttons](#ui-buttons),
+and [ui-container](#ui-container). This change is intended to make consuming Instructure UI components easier by
+allowing applications to only import and update the packages they need. You're welcome.
+
+#### **...and hello, `ui-icons`!**
+This release brings Instructure's [SVG icon library](#iconography) into Instructure UI. Icons can now be imported
+from the [ui-icons](#ui-icons) package. We have also added a [ui-svg-images](#ui-svg-images) package, with components for
+handling [inline SVGs](#InlineSVG) and [SVG icons](#SVGIcon).
+
+#### **A [Responsive 🕶🎸](#Responsive) component ([abe0cb3](https://github.com/instructure/instructure-ui/commit/abe0cb3))**
+If this release has a rock star, it's the [Responsive](#Responsive) component. It will swagger into
+your application wearing shades, rock the greatest guitar solo you've ever heard, and basically
+solve every responsive front-end problem ever. The true "one ring to rule them all" of responsive
+development, Responsive allows you to -- _wait for it_ -- choose between element queries and
+media queries, specify your own breakpoints, and conditionally render content at those breakpoints.
+Enjoy.
+
+#### **Add RFC generator and docs ([64d6368](https://github.com/instructure/instructure-ui/commit/64d6368))**
+RFC stands for _Request for Comment_ and reflects our new process for contributing to Instructure
+UI. An RFC is a markdown document that describes the purpose of the proposed change or addition,
+including the API, props and theme variables. RFC documents are committed to Instructure UI
+and iterated on by the contributor and the UI Development team. Once the RFC is approved and merged
+to master, development can begin. Take a look at the [RFC for the Flex component](#FlexRFC), for
+an example, or create your own by running `yarn generate:rfc` in your local repository.
+
+#### **A media-capture Package**
+This package was contributed recently for use in the [Arc video platform](https://www.arcmedia.com/) and includes a native [VideoPlayer](#VideoPlayer) as well as a [MediaCapture](#MediaCapture) component for recording and uploading videos.
+
+#### **Add [Flex](#Flex) component ([7f702ac](https://github.com/instructure/instructure-ui/commit/7f702ac))**
+Feeling like [Grid](#Grid) is just overkill for a simple column layout? Struggling to line up icons,
+buttons, and text? Thinking of just giving up and quietly using `<table>`? Well, you're in for a
+[real treat](#Flex), my friend.
+
+#### **Add screen reader only variant to [Alert](#Alert)**
+[Alert](#Alert) now has a `screenReaderOnly` property. When set to `true`, the alert should only be
+visible to screen readers.
+
+#### **Add experimental flag and decorator ([9bbcbab](https://github.com/instructure/instructure-ui/commit/9bbcbab))**
+This feature allows component developers to indicate that their component uses JS or CSS features
+that are not fully supported by all browsers, or that the component is still in experimentation mode
+and the API may change. Putting `experimental: true` in the YAML front matter
+of a doc will render a [Pill](#Pill) with the text 'Experimental' before the page heading in the
+documentation. A console warning will also display in dev environments.
+
+#### **Add [Img](#Img) cover property ([edcc5ce](https://github.com/instructure/instructure-ui/commit/edcc5ce))**
+CSS's `object-fit: cover` comes to the [Img](#Img) component, with polyfill support for IE11. When
+the new `cover` prop is `true`, Img fills the full width and height of its containing element, while
+maintaining the aspect ratio of the source image. Great for full-page or section background images.
+
+#### **Update [Select](#Select) to use non-native options dropdown ([c291a38](https://github.com/instructure/instructure-ui/commit/c291a38))**
+We have combined Autocomplete and [Select](#Select) into a single, amazing component. No more ugly
+browser-styled select options! With this change, Select moves to the new [ui-forms](#ui-forms) package. The
+original Select and Autocomplete components in `ui-core` are now deprecated and will be removed in a
+future release. We've also fixed a bunch of accessibility bugs in the process, so upgrade as soon
+as you can!
+
+
+
+### Deprecations
+
+#### **applicationElement ([ee7d1e9](https://github.com/instructure/instructure-ui/commit/ee7d1e9))**
+Remember when you used to have to pass in an `applicationElement` prop to [Moda](#Modal), [Popover](#Popover),
+and [Tray](#Tray)?
+
+Forget about it. You no longer have to supply an `applicationElement` prop because it's all done automagically 🎩.
+
+#### **ui-core Deprecations**
+
+Nearly all components in ui-core have been deprecated in the 5.0.0 release and have been moved into separate,
+smaller packages. As you upgrade, you can run a [ui-codemod](#ui-codemods) script to update the import/require
+statements in your code, or check the `config/imports.config.json` file in the ui-core package to see where
+things have moved. Also note that if you upgrade the `ui-core` package, you'll see deprecation warnings
+in dev and test environments that will also tell you what the new package is for each component. Note: you'll
+need to update your package.json file manually to add the new packages.
+
+#### **Close Buttons**
+
+The `closeButtonLabel` prop is deprecated in [Modal](#Modal), [Tray](#Tray), and [Popover](#Popover). To migrate
+to the new versions of these components, render a [CloseButton](#CloseButton) as a child (see the examples in the
+documentation for implementation details). This change should give consuming applications more control over the
+layout of the content.
+
+#### **Icon width and height**
+
+The `width` and `height` props have been deprecated in the [SVGIcon](#SVGIcon) component. Going forward, you
+can use the `size` prop instead. This should make the icons sizes more consistent across the consuming application.
+
+
+
+### BREAKING CHANGES
+
+* **ui-forms:** [MetricsList](#MetricsList) text alignment is now a prop instead of a theme variable
+* **ui-motion,ui-alerts:** - The [Transition](#Transition).duration and [Alert](#Alert).transitionDuration static
+  attributes have been removed. These values are now distributed
+  via a duration theme variable located in
+  `ui-themes/lib/canvas/base/transition.js`
+* **ui-presets:** Themes have to be imported in a `mocha.config.js` file for mocha/jsdom tests
+* **ui-forms:** [DateInput](#DateInput) onDateChange prop arguments have changed and the
+invalidDateMessage prop is now required.
+* **ui-forms:** [RadioInputGroup](#RadioInputGroup) onChange prop arguments have changed
+* **ui-a11y:** FocusManager is no longer exported as a singleton. You now need to import and create a new instance. Ex:
+`const myFocusManager = new FocusManager()`
+* **ui-tabs:** [TabList](#TabList) deprecated `accordion` variant is removed. Use the [ToggleDetails](#ToggleDetails)
+component instead.
+* **ui-utils:** Usage of [CustomPropTypes](#CustomPropTypes) will need to be updated for
+the types that have been split out into [LayoutPropTypes](#LayoutPropTypes), [I18nPropTypes](#I18I18nPropTypes),
+[FormPropTypes](#FormPropTypes), and [ThemeablePropTypes](#ThemeablePropTypes)
+
+
+
+### Bug Fixes
+
+* **docs:** Prevent console warnings in docs app ([e4729ec](https://github.com/instructure/instructure-ui/commit/e4729ec))
+* **media-capture:** Do not trigger device dialog on finished ([5cdc70f](https://github.com/instructure/instructure-ui/commit/5cdc70f))
+* **media-capture:** User-friendly device names on Firefox
+* **scripts:** Fix release script for pre-releases ([03d11a4](https://github.com/instructure/instructure-ui/commit/03d11a4))
+* **scripts:** Add babel and postcss config to package template
+* **ui-a11y:** [focusManager](#focusManager) should handle multiple dialogs ([9722dbe](https://github.com/instructure/instructure-ui/commit/9722dbe))
+* **ui-alerts:** add min-width to [Alert](#Alert) so flex items don't collapse ([9861c9b](https://github.com/instructure/instructure-ui/commit/9861c9b))
+* **ui-buttons:** Fix icon centering with as=div [Button](#Button) ([659f3a4](https://github.com/instructure/instructure-ui/commit/659f3a4))
+* **ui-buttons:** Fix inverse link [Button](#Button) :focus outline ([b9abdb0](https://github.com/instructure/instructure-ui/commit/b9abdb0))
+* **ui-buttons:** [Button](#Button) Fire onClick with href prop ([f7c22c9](https://github.com/instructure/instructure-ui/commit/f7c22c9))
+* **ui-elements:** rename Image component to [Img](#Img) ([668479f](https://github.com/instructure/instructure-ui/commit/668479f))
+* **ui-elements:** Fix high contrast mode for [ProgressBar](#ProgressBar) ([2aed758](https://github.com/instructure/instructure-ui/commit/2aed758))
+* **ui-elements:** trim whitespace in [Avatar](#Avatar) makeInitialsFromName ([212e92a](https://github.com/instructure/instructure-ui/commit/212e92a))
+* **ui-elements:** deprecate [Heading](#Heading) color prop ([74b86e0](https://github.com/instructure/instructure-ui/commit/74b86e0))
+* **ui-elements:** fix [Image](#Image) display property ([a72961c](https://github.com/instructure/instructure-ui/commit/a72961c))
+* **ui-elements:** Make [Spinner](#Spinner) look better in IE11 ([081f7a0](https://github.com/instructure/instructure-ui/commit/081f7a0))
+* **ui-elements:** Disabled [Tag](#Tag) should not be keyboard focusable ([6bb66bc](https://github.com/instructure/instructure-ui/commit/6bb66bc))
+* **ui-elements:** allow node prop type for [MetricsList](#MetricsList) label and value props ([ffaaeea](https://github.com/instructure/instructure-ui/commit/ffaaeea))
+* **ui-forms:** Resolve [Select](#Select) a11y issues ([a66a03c](https://github.com/instructure/instructure-ui/commit/a66a03c))
+* **ui-forms:** [Select](#Select) doesn't expand with Space key ([866709f](https://github.com/instructure/instructure-ui/commit/866709f))
+* **ui-forms:** Fix [TextArea](#TextArea) resizing when text is deleted ([682d336](https://github.com/instructure/instructure-ui/commit/682d336))
+* **ui-forms:** [TextInput](#TextInput) not reading [Tooltip](#Tooltip) id ([5d6adee](https://github.com/instructure/instructure-ui/commit/5d6adee))
+* **ui-forms:** increase CSS specificity for [NumberInput](#NumberInput),[TimeInput](#TimeInput) ([a6b08b3](https://github.com/instructure/instructure-ui/commit/a6b08b3))
+* **ui-forms:** [RadioInputGroup](#RadioInputGroup) should pass event to onChange cb ([4268eec](https://github.com/instructure/instructure-ui/commit/4268eec))
+ ([74fa7eb](https://github.com/instructure/instructure-ui/commit/74fa7eb))
+* **ui-forms:** Allow [Select](#Select) selectedOption to be cleared ([2aa2b94](https://github.com/instructure/instructure-ui/commit/2aa2b94))
+* **ui-forms:** Ensure [Select](#Select) resets results on close ([b26c8b3](https://github.com/instructure/instructure-ui/commit/b26c8b3))
+* **ui-forms:** Fix [Select](#Select) component onChange handlers ([c6ef9fc](https://github.com/instructure/instructure-ui/commit/c6ef9fc))
+* **ui-forms:** Prevent value change of disabled controlled [Select](#Select) ([525a4e4](https://github.com/instructure/instructure-ui/commit/525a4e4))
+* **ui-forms:** [TextArea](#TextArea) should shrink when cleared ([3320d9d](https://github.com/instructure/instructure-ui/commit/3320d9d))
+* **ui-icons:** Add Sketch template file ([42a5c3f](https://github.com/instructure/instructure-ui/commit/42a5c3f))
+* **ui-layout:** Fix [Position](#Position) constraint logic ([9763ef3](https://github.com/instructure/instructure-ui/commit/9763ef3))
+* **ui-layout:** Fix [Position](#Position) getOffsetParents in IE11 ([15797b5](https://github.com/instructure/instructure-ui/commit/15797b5))
+* **ui-layout:** [Position](#Position) should handle transformed/relative position parents ([26bc897](https://github.com/instructure/instructure-ui/commit/26bc897))
+* **media-capture:** Utilize ts-ebml to get duration and cues headers in ([8aadc43](https://github.com/instructure/instructure-ui/commit/8aadc43))
+* **ui-menu:** Remove transition from :focus ring on [Menu](#Menu) ([cba89db](https://github.com/instructure/instructure-ui/commit/cba89db))
+* **ui-menu:** Resolve issues with [Menu](#Menu) inside [Modal](#Modal) ([c6f3c18](https://github.com/instructure/instructure-ui/commit/c6f3c18))
+* **ui-presets:** Remove cycle in dependency graph ([352a58b](https://github.com/instructure/instructure-ui/commit/352a58b))
+* **ui-presets:** Remove unnecessary dependency ([943bab4](https://github.com/instructure/instructure-ui/commit/943bab4))
+* **ui-testbed:** update CSS to disable transitions ([fa75264](https://github.com/instructure/instructure-ui/commit/fa75264))
+* **ui-svg-images:** fix [InlineSVG](#InlineSVG) example size ([0369e7e](https://github.com/instructure/instructure-ui/commit/0369e7e))
+* **ui-svg-images:** Fix size prop for [SVGIcon](#SVGIcon) ([2ef69e9](https://github.com/instructure/instructure-ui/commit/2ef69e9))
+
+
+
+### Features
+
+* **build:** Add RFC generator and docs ([64d6368](https://github.com/instructure/instructure-ui/commit/64d6368))
+* **build:** Add copyright notice eslint plugin ([0153907](https://github.com/instructure/instructure-ui/commit/0153907))
+* **media-capture:** add feature detection for [MediaCapture](#MediaCapture) ([c7450f6](https://github.com/instructure/instructure-ui/commit/c7450f6))
+* **media-capture:** Add [MediaCapture](#MediaCapture), [VideoPlayer](#VideoPlayer) ([39ebb9e](https://github.com/instructure/instructure-ui/commit/39ebb9e))
+* **media-capture:** [VideoPlayer](#VideoPlayer) playback onCanPlay handler ([c00de06](https://github.com/instructure/instructure-ui/commit/c00de06))
+* **scripts:** Add ability to specify a package to generate:component ([1a890ee](https://github.com/instructure/instructure-ui/commit/1a890ee))
+* **ui-a11y:** add ui-a11y package ([e913843](https://github.com/instructure/instructure-ui/commit/e913843))
+* **ui-a11y:** add a [FocusRegion](#FocusRegion) component ([f395fd8](https://github.com/instructure/instructure-ui/commit/f395fd8))
+* **ui-a11y:** Add [FocusRegionManager](#FocusRegionManager), [FocusRegion](#FocusRegion) utilities ([d14eaa0](https://github.com/instructure/instructure-ui/commit/d14eaa0))
+* **ui-a11y:** add hasVisibleChildren ([bf31684](https://github.com/instructure/instructure-ui/commit/bf31684))
+* **ui-alerts:** Add a ui-alerts package ([d078984](https://github.com/instructure/instructure-ui/commit/d078984))
+* **ui-alerts:** Add screen reader only variant to [Alert](#Alert) ([d764e94](https://github.com/instructure/instructure-ui/commit/d764e94))
+* **ui-billboard:** Add ui-billboard package ([4272911](https://github.com/instructure/instructure-ui/commit/4272911))
+* **ui-breadcrumb:** Add ui-breadcrumb package ([b990973](https://github.com/instructure/instructure-ui/commit/b990973))
+* **ui-buttons:** Add a ui-buttons package ([21bde2f](https://github.com/instructure/instructure-ui/commit/21bde2f))
+* **ui-code-editor:** Add ui-code-editor package ([7d6bd1c](https://github.com/instructure/instructure-ui/commit/7d6bd1c))
+* **ui-container:** Add a ui-container package ([b90aade](https://github.com/instructure/instructure-ui/commit/b90aade))
+* **ui-docs-plugin,ui-utils:** Add experimental flag and decorator ([9bbcbab](https://github.com/instructure/instructure-ui/commit/9bbcbab))
+* **ui-elements:** Add a ui-elements package ([12483d7](https://github.com/instructure/instructure-ui/commit/12483d7))
+* **ui-elements:** add [Img](#Img) component ([9d0cb9e](https://github.com/instructure/instructure-ui/commit/9d0cb9e))
+* **ui-elements:** Deprecate colors for [Heading](#Heading) ([26cc418](https://github.com/instructure/instructure-ui/commit/26cc418))
+* **ui-elements:** Add [Img](#Img) cover property ([edcc5ce](https://github.com/instructure/instructure-ui/commit/edcc5ce))
+* **ui-elements:** Add [Rating](#Rating) to ui-elements package ([77eaa11](https://github.com/instructure/instructure-ui/commit/77eaa11))
+* **ui-forms:** Add ui-forms package ([ca6b694](https://github.com/instructure/instructure-ui/commit/ca6b694))
+* **ui-forms:** Update [NumberInput](#NumberInput) i18n solution ([572bb3a](https://github.com/instructure/instructure-ui/commit/572bb3a))
+* **ui-forms:** [Checkbox](#Checkbox) Update checkmark icon and border ([e75b0e6](https://github.com/instructure/instructure-ui/commit/e75b0e6))
+* **ui-forms:** Update [Select](#Select) to use non-native options dropdown ([c291a38](https://github.com/instructure/instructure-ui/commit/c291a38))
+* **ui-forms:** [TextArea](#TextArea) maxHeight should accept ems, rems ([8817c07](https://github.com/instructure/instructure-ui/commit/8817c07))
+* **ui-i18n:** Adding ui-i18n package ([823f89a](https://github.com/instructure/instructure-ui/commit/823f89a))
+* **ui-icons:** Add icons (from instructure-icons) as a new package ([8c3b3f0](https://github.com/instructure/instructure-ui/commit/8c3b3f0))
+* **ui-icons:** add share and video-camera icons ([5c7a3fb](https://github.com/instructure/instructure-ui/commit/5c7a3fb))
+* **ui-icons:** add progress icon ([0f4207b](https://github.com/instructure/instructure-ui/commit/0f4207b))
+* **ui-layout:** Add ui-layout package ([c461644](https://github.com/instructure/instructure-ui/commit/c461644))
+* **ui-layout:** A [Responsive](#Responsive) component ([abe0cb3](https://github.com/instructure/instructure-ui/commit/abe0cb3))
+* **ui-layout:** A [DrawerLayout](#DrawerLayout) component ([1cfb7b5](https://github.com/instructure/instructure-ui/commit/1cfb7b5))
+* **ui-layout:** Add [Flex](#Flex) component ([7f702ac](https://github.com/instructure/instructure-ui/commit/7f702ac))
+* **ui-menu:** Add ui-menu package ([7a7fb35](https://github.com/instructure/instructure-ui/commit/7a7fb35))
+* **ui-motion:** Add ui-motion package ([638c6a9](https://github.com/instructure/instructure-ui/commit/638c6a9))
+* **ui-overlays:** Add a ui-overlays package ([c9762a4](https://github.com/instructure/instructure-ui/commit/c9762a4))
+* **ui-overlays:** [Tray](#Tray),[Modal](#Modal) Deprecate closeButtonLabel and closeButtonRef ([85a76b8](https://github.com/instructure/instructure-ui/commit/85a76b8))
+* **ui-overlays,ui-i18n:** Add RTL language support to [Tray](#Tray) ([3309bcb](https://github.com/instructure/instructure-ui/commit/3309bcb))
+* **ui-overlays:** deprecate applicationElement prop ([ee7d1e9](https://github.com/instructure/instructure-ui/commit/ee7d1e9))
+* **ui-pages:** Add [Pages](#Pages) component ([6fda3e3](https://github.com/instructure/instructure-ui/commit/6fda3e3))
+* **ui-pagination:** Add ui-pagination package ([ef3ee97](https://github.com/instructure/instructure-ui/commit/ef3ee97))
+* **ui-portal:** Add ui-portal package ([d4ed6db](https://github.com/instructure/instructure-ui/commit/d4ed6db))
+* **ui-presets,ui-core:** Add support for node test environments ([5d3a452](https://github.com/instructure/instructure-ui/commit/5d3a452))
+* **ui-svg-images:** Add ui-svg-images, remove instructure-icons imports ([6201628](https://github.com/instructure/instructure-ui/commit/6201628))
+* **ui-svg-images:** Add [SVGIcon](#SVGIcon) size prop, deprecate height/width ([24501ea](https://github.com/instructure/instructure-ui/commit/24501ea))
+* **ui-svg-images:** Add `inline` prop to [SVGIcon](#SVGIcon) and [InlineSVG](#InlineSVG) ([72fe27f](https://github.com/instructure/instructure-ui/commit/72fe27f))
+* **ui-tabs:** Add ui-tabs package ([7b984c7](https://github.com/instructure/instructure-ui/commit/7b984c7))
+* **ui-themeable:** Add [ApplyTheme](#ApplyTheme) to ui-themeable package
+* **ui-themeable:** Add shorthandPropType ([066d1f0](https://github.com/instructure/instructure-ui/commit/066d1f0))
+ ([c69644c](https://github.com/instructure/instructure-ui/commit/c69644c))
+* **ui-toggle-details:** Add ui-toggle-details package ([6b606de](https://github.com/instructure/instructure-ui/commit/6b606de))
+* **ui-tree-browser:** Add ui-tree-browser package ([1c59c1f](https://github.com/instructure/instructure-ui/commit/1c59c1f))
+* **ui-utils:** Split up CustomPropTypes ([25fb0e0](https://github.com/instructure/instructure-ui/commit/25fb0e0))
+
+
+
 <a name="4.8.0"></a>
 # [4.8.0](https://github.com/instructure/instructure-ui/compare/v4.7.3...v4.8.0) (2018-03-26)
 
