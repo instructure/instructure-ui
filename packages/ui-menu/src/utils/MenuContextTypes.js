@@ -22,10 +22,24 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, borders }) {
-  return {
-    background: colors.white,
-    focusBorder: `1px solid ${colors.brand}`,
-    focusBorderRadius: borders.radiusMedium
-  }
+import PropTypes from 'prop-types'
+
+const CONTEXT_KEY = '@@menu'
+
+export const MenuContextTypes = {
+  [CONTEXT_KEY]: PropTypes.shape({
+    registerMenuItem: PropTypes.func,
+    removeMenuItem: PropTypes.func
+  })
+}
+
+export function makeMenuContext ({ registerMenuItem, removeMenuItem }) {
+  return {[CONTEXT_KEY]: {
+    registerMenuItem,
+    removeMenuItem
+  }}
+}
+
+export function getMenuContext (context) {
+  return context ? context[CONTEXT_KEY] : undefined
 }

@@ -78,6 +78,7 @@ plugins = plugins.concat([
       '**/theme.js',
       'packages/__docs__/**',
       'packages/ui-core/**',
+      'packages/ui-menu/src/utils/**',
       'packages/ui-utils/src/{react,dom}/index.js',
       'packages/ui-docs-client/**/*.js',
       'packages/ui-docs-plugin/**/*.js',

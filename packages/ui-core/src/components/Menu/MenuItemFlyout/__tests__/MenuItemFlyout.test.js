@@ -24,25 +24,36 @@
 
 import React from 'react'
 import keycode from 'keycode'
-import { MenuItemFlyout, MenuItem } from '../../../Menu'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import Menu, { MenuItem } from '../../../Menu'
 
 describe('<MenuItemFlyout />', () => {
   const testbed = new Testbed(
-    <MenuItemFlyout label="test">
-      <MenuItem>Foo</MenuItem>
-      <MenuItem>Bar</MenuItem>
-      <MenuItem>Baz</MenuItem>
-    </MenuItemFlyout>
+    <Menu>
+      <Menu label="test">
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItem>Baz</MenuItem>
+      </Menu>
+    </Menu>
   )
+
+  function findFlyout (subject) {
+    return subject.instance()._activeSubMenu
+  }
+
+  function findFlyoutTrigger (subject) {
+    return subject.find('button[aria-haspopup]')
+  }
 
   function testShowFlyoutOnEvent (event) {
     it(`should show flyout menu on ${event.type} ${keycode(event.code) || ''}`, () => {
       const subject = testbed.render()
 
-      subject.find('button').simulate(event.type, event.code)
+      findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(subject.ref('_menu').length).to.equal(1)
+      expect(findFlyout(subject).shown).to.be.true
     })
   }
 
@@ -50,10 +61,10 @@ describe('<MenuItemFlyout />', () => {
     it(`expect flyout menu to be focused on ${event.type} ${keycode(event.code) || ''}`, () => {
       const subject = testbed.render()
 
-      subject.find('button').simulate(event.type, event.code)
+      findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(subject.ref('_menu').focused()).to.be.true
+      expect(findFlyout(subject).focused()).to.be.true
     })
   }
 
@@ -75,49 +86,57 @@ describe('<MenuItemFlyout />', () => {
 
   it('it should not open the flyout when disabled', () => {
     const subject = testbed.render({
+      defaultShow: true,
       disabled: true
     })
 
-    subject.find('button').click()
+    findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    expect(subject.ref('_menu').length).to.equal(0)
+    expect(findFlyout(subject)).to.not.exist
   })
 
   it('it should close the menu flyout on escape press', () => {
-    const subject = testbed.render()
+    const subject = testbed.render({
+      defaultShow: true
+    })
 
-    subject.find('button').click()
+    findFlyoutTrigger(subject).click()
     testbed.tick()
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
-    expect(subject.ref('_menu').length).to.equal(0)
+    expect(findFlyout(subject).shown).to.be.false
   })
 
   it('it should close the menu flyout on left press', () => {
     const subject = testbed.render()
-
-    subject.find('button').click()
+    findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    subject.ref('_menu').keyDown('left')
+    const flyout = findFlyout(subject)
+    Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'left')
     testbed.tick()
 
-    expect(subject.ref('_menu').length).to.equal(0)
+    expect(flyout.shown).to.be.false
   })
 
   it('it should call onDismiss on tab press', () => {
     const onDismiss = testbed.spy()
     const subject = testbed.render({
+      trigger: <button>More</button>,
+      defaultShow: true,
       onDismiss
     })
 
-    subject.find('button').click()
     testbed.tick()
 
-    subject.ref('_menu').keyDown('tab')
+    findFlyoutTrigger(Testbed.wrap(subject.instance()._menu)).click()
+    testbed.tick()
+
+    const flyout = findFlyout(subject)
+    Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'tab')
     testbed.tick()
 
     expect(onDismiss).to.have.been.calledOnce
@@ -129,35 +148,56 @@ describe('<MenuItemFlyout />', () => {
       onSelect
     })
 
-    subject.find('button').click()
+    findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    const menuItem = subject.ref('_menu').find('MenuItem').first()
-
+    const flyout = findFlyout(subject)
+    const menuItem = findDOMNode(flyout._menuItems[0])
     menuItem.click()
-
     testbed.tick()
 
     expect(onSelect).to.have.been.calledOnce
   })
 
-  it('it should call onToggle on click', () => {
+  it('it should call onToggle on click and on dismiss', () => {
     const onToggle = testbed.spy()
     const subject = testbed.render({
-      onToggle
+      children: (
+        <Menu onToggle={onToggle} label="test">
+          <MenuItem>Foo</MenuItem>
+          <MenuItem>Bar</MenuItem>
+          <MenuItem>Baz</MenuItem>
+        </Menu>
+      )
     })
 
-    subject.find('button').click()
+    findFlyoutTrigger(subject).click()
+    testbed.tick()
 
     expect(onToggle).to.have.been.calledOnce
+    expect(onToggle.lastCall.args[0]).to.equal(true)
+
+    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
+    testbed.tick()
+
+    expect(onToggle).to.have.been.calledTwice
+    expect(onToggle.lastCall.args[0]).to.equal(false)
   })
 
   it('it should call onMouseOver on hover', () => {
     const onMouseOver = testbed.spy()
     const subject = testbed.render({
-      onMouseOver
+      /* eslint-disable jsx-a11y/mouse-events-have-key-events */
+      children: (
+        <Menu onMouseOver={onMouseOver} label="test">
+          <MenuItem>Foo</MenuItem>
+          <MenuItem>Bar</MenuItem>
+          <MenuItem>Baz</MenuItem>
+        </Menu>
+      )
+      /* eslint-enable jsx-a11y/mouse-events-have-key-events */
     })
-    subject.find('button').mouseOver()
+    findFlyoutTrigger(subject).mouseOver()
 
     expect(onMouseOver).to.have.been.calledOnce
   })
