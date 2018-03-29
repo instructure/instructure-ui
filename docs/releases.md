@@ -51,13 +51,13 @@ master: A - B - C - D - E - F
 beta:         . - E'
 ```
 
-### Promoting the `master` branch to `beta`
+### Major Release Process
 
 Before beginning you will need:
 
 - Permissions to write/push to the `beta` branch.
 
-To promote `master` to `beta` prior to running a release:
+To promote `master` to `beta` prior to running a major release:
 
 1. Run `git fetch origin --tags`.
 1. Run `git checkout -B beta --track origin/master` to point the `beta` branch to `master`.
@@ -65,32 +65,7 @@ To promote `master` to `beta` prior to running a release:
 1. Run `git push origin beta` to update the remote `beta` branch.
 
 
-### Beta Release Process
-
-Before beginning you will need:
-
-- Permissions to publish to the instructure org on npm and have run `npm login --scope=@instructure`.
-- A local `beta` branch:
-
-1. Run `git fetch origin --tags`.
-1. Run `git checkout -B beta --track origin/beta`.
-
-To create a beta release:
-
-1. Run `yarn release -t beta`.
-1. Enter a version with the 'beta' flag when the script asks for it (e.g. X.0.0-beta.1)
-1. Verify that the release was tagged in Github and released to npm.
-
-```text
-master: A - B - C - D - E - F
-             \
-beta:         . - E'
-                  |
-(vX.0.0-beta.1)   .
-```
-
-
-### Major, Minor, Patch Release Process
+### Stable (Major, Minor, Patch) Release Process
 
 Before beginning you will need:
 
@@ -119,7 +94,7 @@ C. To create a stable release:
 1. Run `yarn release -t latest` to publish the packages and git tag the release (vX.0.0 and vX.0.1 below).
 1. Verify that the release was tagged in Github and the packages released to npm.
 1. Verify that the documentation was updated on gh-pages.
-1. `git cherry-pick` the version bump commit (G^' and J^' below) onto the `master` branch.
+1. Run `yarn bump -v X.0.0` on the `master` branch to update the package.json files, and copy the CHANGELOG from the `beta` branch.
 
 Here G^ is the version bump commit for the major release, vX.0.0, and J^ is the version bump commit for a
 patch release, vX.0.1, (which includes the bug fix commit I').
@@ -134,6 +109,31 @@ beta:         . - E' - G^ - I' - J^
 (vX.0.0):              .         |
                                  |
 (vX.0.1):                        .
+```
+
+
+### Beta Releases
+
+Before beginning you will need:
+
+- Permissions to publish to the instructure org on npm and have run `npm login --scope=@instructure`.
+- A local `beta` branch:
+
+1. Run `git fetch origin --tags`.
+1. Run `git checkout -B beta --track origin/beta`.
+
+To create a beta release:
+
+1. Run `yarn release -t beta`.
+1. Enter a version with the 'beta' flag when the script asks for it (e.g. X.0.0-beta.1)
+1. Verify that the release was tagged in Github and released to npm.
+
+```text
+master: A - B - C - D - E - F
+             \
+beta:         . - E'
+                  |
+(vX.0.0-beta.1)   .
 ```
 
 
@@ -167,6 +167,10 @@ beta:         . - E' - G^ - I' - J^                 |
 
 ### Patching Older Releases
 
+If the `beta` branch has already been updated in preparation for a major release,
+you may have to create a temporary patch branch to patch in a bug fix for an older
+release.
+
 Before beginning you will need:
 
 - Permissions to publish to the instructure org on npm and have run `npm login --scope=@instructure`.
@@ -192,5 +196,5 @@ C. To create the patch release commit (e.g. 1.4.1):
 1. Check that the CHANGELOG.md file was updated correctly and that the new version number is changed to 1.4.1.
 1. Push the version bump commit for review: `git push origin HEAD:refs/for/patch/release-v1.4.x`
 1. Review the version bump commit, test it and merge it.
-1. From the local release branch (steps B (1, 2) above) run `yarn release -t stable`.
+1. From the local release branch (steps B (1, 2) above) run `yarn release -t stable` (Note: if it's the latest stable release run `yarn release -t latest` instead).
 1. Verify that the release was tagged in Github and released to npm.

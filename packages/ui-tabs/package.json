@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-tabs",
-  "version": "4.7.3",
+  "version": "4.8.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,8 +22,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^4.7.3",
-    "@instructure/ui-themes": "^4.7.3"
+    "@instructure/ui-presets": "^4.8.0",
+    "@instructure/ui-themes": "^4.8.0"
   },
   "publishConfig": {
     "access": "public"

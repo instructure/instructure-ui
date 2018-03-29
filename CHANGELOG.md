@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="4.8.0"></a>
+# [4.8.0](https://github.com/instructure/instructure-ui/compare/v4.7.3...v4.8.0) (2018-03-26)
+
+
+### Bug Fixes
+
+* **ui-buttons:** Button href prop should work with onClick ([b2a78bb](https://github.com/instructure/instructure-ui/commit/b2a78bb))
+
+
+### Features
+
+* **ui-overlay,ui-i18n:** add RTL language support to Tray ([92679d7](https://github.com/instructure/instructure-ui/commit/92679d7))
+
+
 <a name="4.7.3"></a>
 ## [4.7.3](https://github.com/instructure/instructure-ui/compare/v4.7.2...v4.7.3) (2018-03-06)
 
