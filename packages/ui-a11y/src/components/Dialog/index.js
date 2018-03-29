@@ -29,6 +29,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
 import FocusRegionManager from '../../utils/FocusRegionManager'
 
@@ -96,7 +97,7 @@ class Dialog extends Component {
     onDismiss: () => {}
   }
 
-  _timeouts = []
+  _raf = []
 
   componentDidMount () {
     if (this.props.open) {
@@ -119,8 +120,8 @@ class Dialog extends Component {
       this.blur()
     }
 
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
-    this._timeouts = []
+    this._raf.forEach(request => request.cancel())
+    this._raf = []
   }
 
   focus () {
@@ -130,11 +131,11 @@ class Dialog extends Component {
       ...options
     } = this.props
 
-    this._timeouts.push(setTimeout(() => {
+    this._raf.push(requestAnimationFrame(() => {
       FocusRegionManager.focusRegion(this.contentElement, {
         ...options
       })
-    }, 0))
+    }))
   }
 
   blur () {

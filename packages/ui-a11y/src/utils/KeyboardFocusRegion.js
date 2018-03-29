@@ -29,7 +29,7 @@ import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import warning from '@instructure/ui-utils/lib/warning'
-
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
 import keycode from 'keycode'
 
@@ -67,7 +67,7 @@ export default class KeyboardFocusRegion {
   _focusLaterElement = null
   _needToFocus = false
   _listeners = []
-  _timeouts = []
+  _raf = []
   _setup = false
 
   get focused () {
@@ -193,14 +193,14 @@ export default class KeyboardFocusRegion {
       // the element outside of a setTimeout. Side-effect of this implementation
       // is that the document.body gets focus, and then we focus our element right
       // after, seems fine.
-      this._timeouts.push(
-        setTimeout(() => {
+      this._raf.push(
+        requestAnimationFrame(() => {
           if (containsActiveElement(this._contextElement)) {
             return
           }
 
           this.firstTabbable && this.firstTabbable.focus()
-        }, 0)
+        })
       )
     }
   }
@@ -229,10 +229,8 @@ export default class KeyboardFocusRegion {
       })
       this._listeners = []
 
-      this._timeouts.forEach(timeout => {
-        clearTimeout(timeout)
-      })
-      this._timeouts = []
+      this._raf.forEach(request => request.cancel())
+      this._raf = []
 
       this._preventCloseOnDocumentClick = false
 
