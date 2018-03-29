@@ -22,9 +22,12 @@
  * SOFTWARE.
  */
 
-export default function ({ breakpoints }) {
+export default function ({ breakpoints, colors, borders }) {
   return {
     minWidth: breakpoints.xxSmall,
-    maxWidth: breakpoints.xSmall
+    maxWidth: breakpoints.xSmall,
+    background: colors.white,
+    focusBorder: `1px solid ${colors.brand}`,
+    focusBorderRadius: borders.radiusMedium
   }
 }

@@ -88,7 +88,7 @@ export default class MenuItemGroup extends Component {
     allowMultiple: false,
     defaultSelected: [],
     itemRef: function (item) {},
-    onSelect: function (e, selected) {}
+    onSelect: function (e, value, selected, item) {}
   }
 
   constructor (props) {
@@ -96,38 +96,51 @@ export default class MenuItemGroup extends Component {
 
     if (props.selected === undefined) {
       this.state = {
-        selected: this.selectedFromChildren(props.children, props.allowMultiple) || props.defaultSelected
+        selected: this.selectedFromChildren(props) || props.defaultSelected
       }
     }
 
     this._labelId = `MenuItemGroup__${uid()}`
   }
 
-  handleSelect = (e, value, selected) => {
+  handleSelect = (e, value, selected, item) => {
     if (this.props.disabled) {
       e.preventDefault()
       return
     }
 
-    const newSelected = this.props.allowMultiple ? this.selected : []
-    const location = newSelected.indexOf(value)
-
-    if (selected && location < 0) {
-      newSelected.push(value)
-    } else if (!selected && location !== -1) {
-      newSelected.splice(location, 1)
-    }
-
-    if (this.props.selected === undefined) {
-      this.setState({ selected: newSelected })
-    }
-
-    if (typeof this.props.onSelect === 'function') {
-      this.props.onSelect(e, newSelected)
+    if (this.props.selected) {
+      this.updateSelected(e, value, this.props.selected, selected, item)
+    } else {
+      this.setState((state) => {
+        return { selected: this.updateSelected(e, value, state.selected, selected, item) }
+      })
     }
   }
 
-  selectedFromChildren (children, allowMultiple) {
+  updateSelected = (e, value, items, selected, item) => {
+    const { allowMultiple } = this.props
+    let updated = allowMultiple ? [...items] : []
+    const location = updated.indexOf(value)
+
+    if ((selected === true) && location < 0) {
+      updated.push(value)
+    } else if ((selected === false) && location !== -1) {
+      updated.splice(location, 1)
+    } else if (!allowMultiple && updated.length < 1) {
+      // don't allow nothing selected if it's not allowMultiple/checkbox
+      updated = [...items]
+    }
+
+    if (typeof this.props.onSelect === 'function') {
+      this.props.onSelect(e, updated, selected, item)
+    }
+
+    return updated
+  }
+
+  selectedFromChildren (props) {
+    const { children, allowMultiple } = props
     const selected = []
 
     const items = Children.toArray(children).filter((child) => {
@@ -176,6 +189,7 @@ export default class MenuItemGroup extends Component {
       if (matchComponentTypes(child, [MenuItem])) {
         ++index
         const value = child.props.value || index
+
         return (<li> {
           safeCloneElement(child, {
             tabIndex: (isTabbable && index === 0) ? 0 : -1,

@@ -16,4 +16,5 @@
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
   color: var(--color);
+  text-align: start;
 }

@@ -1,4 +1,6 @@
-.root {
+.menu {
+  min-width: var(--minWidth);
+  max-width: var(--maxWidth);
   list-style-type: none;
   margin: 0 0 0 0;
   padding: 0.25rem 0;

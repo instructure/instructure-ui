@@ -159,13 +159,11 @@ describe('<Menu />', () => {
     const subject = testbed.render({
       labelledBy: 'id',
       controls: 'id',
-      defaultShow: false,
       disabled: true,
       title: 'title'
     })
     expect(subject.getAttribute('aria-labelledby')).to.exist
     expect(subject.getAttribute('aria-controls')).to.exist
-    expect(subject.getAttribute('aria-hidden')).to.exist
     expect(subject.getAttribute('aria-disabled')).to.exist
     expect(subject.getAttribute('title')).to.exist
   })

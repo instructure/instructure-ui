@@ -39,6 +39,8 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
+import { MenuContextTypes, getMenuContext } from '../../../utils/MenuContextTypes'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -80,21 +82,40 @@ class MenuItem extends Component {
     as: CustomPropTypes.elementType,
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    active: PropTypes.bool,
     href: PropTypes.string
   }
 
   static defaultProps = {
     type: 'button',
     disabled: false,
-    onSelect: function (e, value, selected) {}
+    onSelect: function (e, value, selected, item) {}
   }
+
+  static contextTypes = MenuContextTypes
 
   constructor (props) {
     super()
 
-    this.state = {
-      selected: props.selected === undefined ? !!props.defaultSelected : null
+    if (props.selected === undefined) {
+      this.state = {
+        selected: props.defaultSelected
+      }
+    }
+  }
+
+  componentDidMount () {
+    const context = getMenuContext(this.context)
+
+    if (context && context.registerMenuItem) {
+      context.registerMenuItem(this)
+    }
+  }
+
+  componentWillUnmount () {
+    const context = getMenuContext(this.context)
+
+    if (context && context.registerMenuItem) {
+      context.removeMenuItem(this)
     }
   }
 
@@ -112,7 +133,7 @@ class MenuItem extends Component {
     }
 
     if (typeof onSelect === 'function') {
-      onSelect(e, value, selected)
+      onSelect(e, value, selected, this)
     }
 
     if (typeof onClick === 'function') {
@@ -149,8 +170,12 @@ class MenuItem extends Component {
     }
   }
 
-  handleMouseOver = () => {
+  handleMouseOver = (event) => {
     this.focus()
+
+    if (typeof this.props.onMouseOver === 'function') {
+      this.props.onMouseOver(event, this)
+    }
   }
 
   get elementType () {
@@ -208,8 +233,6 @@ class MenuItem extends Component {
       controls,
       onKeyDown,
       onKeyUp,
-      onMouseOver,
-      active,
       type,
       href
     } = this.props
@@ -219,7 +242,6 @@ class MenuItem extends Component {
 
     const classes = {
       [styles.root]: true,
-      [styles.active]: active,
       [styles.flyout]: type === 'flyout'
     }
 
@@ -239,7 +261,7 @@ class MenuItem extends Component {
           this._node = c
         }}
         className={classnames(classes)}
-        onMouseOver={createChainedFunction(onMouseOver, this.handleMouseOver)}
+        onMouseOver={this.handleMouseOver}
       >
         {this.renderContent()}
       </ElementType>
