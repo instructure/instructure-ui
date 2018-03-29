@@ -32,9 +32,6 @@ describe('TextArea', () => {
     const subject = testbed.render({
       defaultValue: 'Tom Servo'
     })
-    testbed.raf()
-    testbed.tick()
-    const originalMinHeight = parseFloat(subject.instance().minHeight)
 
     testbed.raf()
     testbed.tick()

@@ -67,7 +67,7 @@ function srcUrl (resourcePath, options, context) {
   } else {
     const path = srcPath(resourcePath, options, context)
     const library = options.library || {}
-    return library.repository ? `${library.repository.replace('.git', '')}/tree/beta/${path}` : null
+    return library.repository ? `${library.repository.replace('.git', '')}/tree/stable/${path}` : null
   }
 }
 
