@@ -23,23 +23,34 @@
  */
 
 import React from 'react'
+import PropTypes from 'prop-types'
 import ApplyLocale from '../index'
-import { DatePicker } from '@instructure/ui-forms/lib/components/DateInput'
+
+class LocalizableComponent extends React.Component {
+  static contextTypes = {
+    locale: PropTypes.string,
+    timezone: PropTypes.string
+  }
+
+  render () {
+    return <div />
+  }
+}
 
 describe('<ApplyLocale />', () => {
   const testbed = new Testbed(
     <ApplyLocale locale="fr" timezone="Europe/Paris">
-      <DatePicker previousLabel="foo" nextLabel="bar" />
+      <LocalizableComponent />
     </ApplyLocale>
   )
 
   it('applies locale context', () => {
     const subject = testbed.render()
-    expect(subject.find(DatePicker).unwrap().context).to.include({locale: 'fr'})
+    expect(subject.find(LocalizableComponent).unwrap().context).to.include({locale: 'fr'})
   })
 
   it('applies timezone context', () => {
     const subject = testbed.render()
-    expect(subject.find(DatePicker).unwrap().context).to.include({timezone: 'Europe/Paris'})
+    expect(subject.find(LocalizableComponent).unwrap().context).to.include({timezone: 'Europe/Paris'})
   })
 })

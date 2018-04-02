@@ -64,7 +64,8 @@ module.exports = {
     'notice/notice': ['error', {
       mustMatch: 'The MIT License \\(MIT\\)',
       templateFile: require.resolve('./copyright.js')
-    }]
+    }],
+    'import/no-extraneous-dependencies': 'error'
   },
   overrides: [
     {

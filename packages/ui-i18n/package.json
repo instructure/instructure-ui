@@ -22,7 +22,6 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-forms": "^5.0.0",
     "@instructure/ui-presets": "^5.0.0",
     "@instructure/ui-themes": "^5.0.0",
     "react": "15.6.2",

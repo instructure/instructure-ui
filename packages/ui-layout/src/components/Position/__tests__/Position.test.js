@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 21 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -24,8 +24,6 @@
 
 import React, { Component } from 'react'
 
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import within from '@instructure/ui-utils/lib/within'
 
 import Position, { PositionTarget, PositionContent } from '../index'
@@ -63,17 +61,16 @@ describe('<Position />', () => {
         >
           <Position {...props}>
             <PositionTarget>
-              <Button>Target</Button>
+              <button>Target</button>
             </PositionTarget>
             <PositionContent>
-              <ContextBox
-                placement={this.props.placement}
+              <div
                 ref={el => {
                   this._content = el
                 }}
               >
                 <div>Content</div>
-              </ContextBox>
+              </div>
             </PositionContent>
           </Position>
         </div>
@@ -126,8 +123,8 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(Math.floor(contentRect.top)).to.equal(Math.floor(targetRect.top))
-    expect(Math.floor(contentRect.width)).to.equal(Math.floor(targetRect.width))
+    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)).to.be.true
+    expect(within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)).to.be.true
   })
 
   it('should render below target', () => {
@@ -137,7 +134,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(Math.floor(contentRect.top)).to.equal(Math.floor(targetRect.bottom))
+    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true
   })
 
   it('should render left of target', () => {
@@ -214,23 +211,23 @@ describe('<Position />', () => {
     }
 
     assertOffset('top', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 0.5)).to.be.true
-      expect(within(contentRect.left, left - 10, 0.5)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true
+      expect(within(contentRect.left, left - 10, 1)).to.be.true
     })
 
     assertOffset('start', '10px', (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 0.5)).to.be.true
-      expect(within(contentRect.left, left - 10, 0.5)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true
+      expect(within(contentRect.left, left - 10, 1)).to.be.true
     })
 
     assertOffset('end', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 0.5)).to.be.true
-      expect(within(contentRect.left, left + 10, 0.5)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true
+      expect(within(contentRect.left, left + 10, 1)).to.be.true
     })
 
     assertOffset('bottom', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top + 10, 0.5)).to.be.true
-      expect(within(contentRect.left, left - 10, 0.5)).to.be.true
+      expect(within(contentRect.top, top + 10, 1)).to.be.true
+      expect(within(contentRect.left, left - 10, 1)).to.be.true
     })
   })
 })

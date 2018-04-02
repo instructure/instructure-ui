@@ -31,6 +31,10 @@ export default function generator ({ colors, spacing, typography }) {
     figureMargin: `0 ${spacing.small} 0 0`,
     titleMargin: `0 0 ${spacing.xSmall} 0`,
 
+    titleFontSize: typography.fontSizeLarge,
+    titleFontWeight: typography.fontWeightNormal,
+    titleLineHeight: typography.lineHeightFit,
+
     descriptionFontSize: typography.fontSizeMedium,
     descriptionFontWeight: typography.fontWeightNormal,
     descriptionLineHeight: typography.lineHeightCondensed

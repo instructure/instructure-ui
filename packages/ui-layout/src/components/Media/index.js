@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Heading from '@instructure/ui-elements/lib/components/Heading'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -38,7 +37,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/utilities
+category: components/layout
 ---
 **/
 @themeable(theme, styles)
@@ -51,7 +50,7 @@ class Media extends Component {
     /**
     * the media title
     */
-    title: PropTypes.string,
+    title: PropTypes.node,
     /**
     * the media description
     */
@@ -96,11 +95,9 @@ class Media extends Component {
         <figcaption className={styles.caption}>
           {
             this.props.title && (
-              <Heading level="h3">
-                <span className={styles.title}>
-                  {this.props.title}
-                </span>
-              </Heading>
+              <span className={styles.title}>
+                {this.props.title}
+              </span>
             )
           }
           {

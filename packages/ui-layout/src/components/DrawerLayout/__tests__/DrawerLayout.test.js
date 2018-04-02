@@ -23,7 +23,6 @@
  */
 import React from 'react'
 
-import Button from '@instructure/ui-buttons/lib/components/Button'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import px from '@instructure/ui-utils/lib/px'
 import within from '@instructure/ui-utils/lib/within'
@@ -139,7 +138,7 @@ describe('<DrawerLayout />', () => {
       layoutWidth: '695px'
     })
 
-    subject.find(Button).click()
+    subject.find('button').click()
 
     testbed.tick()
     testbed.tick()
@@ -155,7 +154,7 @@ describe('<DrawerLayout />', () => {
       layoutWidth: '705px'
     })
 
-    subject.find(Button).click()
+    subject.find('button').click()
 
     testbed.tick()
     testbed.tick()

@@ -36,7 +36,6 @@ import * as UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components'
 import * as UIButtons from '@instructure/ui-buttons/lib/components'
 import * as UICodeEditor from '@instructure/ui-code-editor/lib/components'
 import * as UIContainer from '@instructure/ui-container/lib/components'
-import * as UICore from '@instructure/ui-core/lib/components'
 import * as UIElements from '@instructure/ui-elements/lib/components'
 import * as UIForms from '@instructure/ui-forms/lib/components'
 import * as UII18n from '@instructure/ui-i18n/lib/components'
@@ -69,7 +68,6 @@ import placeholderImage from './placeholder-image'
 
 const components = Object.assign(
   {},
-  UICore,
   UIA11y,
   UIAlerts,
   UIBillboard,

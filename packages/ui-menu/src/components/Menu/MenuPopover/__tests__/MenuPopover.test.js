@@ -26,7 +26,6 @@ import React from 'react'
 import MenuPopover from '../index'
 import MenuItem from '../../MenuItem'
 import MenuItemSeparator from '../../MenuItemSeparator'
-import MenuList from '../../MenuList'
 
 describe('<MenuPopover />', () => {
   const testbed = new Testbed(

@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
-import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
-import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import findDOMNode from '../dom/findDOMNode'
+import ownerDocument from '../dom/ownerDocument'
+import ownerWindow from '../dom/ownerWindow'
+import getActiveElement from '../dom/getActiveElement'
+import addEventListener from '../dom/addEventListener'
+import containsActiveElement from '../dom/containsActiveElement'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'

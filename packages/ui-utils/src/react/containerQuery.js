@@ -24,11 +24,11 @@
 
 import PropTypes from 'prop-types'
 
-import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
-import debounce from '@instructure/ui-utils/lib/debounce'
-import { warnDeprecatedComponent } from '@instructure/ui-utils/lib/react/deprecated'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
+import addResizeListener from '../dom/addResizeListener'
+import debounce from '../debounce'
+import { warnDeprecatedComponent } from '../react/deprecated'
+import findDOMNode from '../dom/findDOMNode'
+import getDisplayName from '../react/getDisplayName'
 
 import parseQuery from '../../../ui-layout/lib/utils/parseQuery'
 

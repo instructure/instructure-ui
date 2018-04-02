@@ -23,7 +23,6 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
 
 import Dialog from '../index'
 
@@ -31,7 +30,7 @@ describe('<Dialog />', () => {
   const testbed = new Testbed(
     (
       <Dialog>
-        <Button>Hello World</Button>
+        <button>Hello World</button>
       </Dialog>
     )
   )

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import { isValid } from '../DateTime'
 
 /**
  * ---
@@ -55,7 +55,7 @@ export default {
       )
     }
 
-    if (!DateTime.isValid(propValue)) {
+    if (!isValid(propValue)) {
       return new Error(
         `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
           `an ISO 8601 formatted string.`
