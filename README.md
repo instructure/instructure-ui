@@ -102,13 +102,12 @@ see the page auto-reload.
 
 ### Linting and Code Formatting
 
-Linting is run as part of the build. If you use the Sublime Text or Atom editors you can set up the following plugins to catch
-linting and formatting errors earlier.
+Linting is run as part of the build. If you use the Sublime Text, Atom, or VSCode editors, you can set up the following plugins to catch linting and formatting errors earlier.
 
-1. Install the *EditorConfig* plugin [Sublime](https://github.com/sindresorhus/editorconfig-sublime), [Atom](https://github.com/sindresorhus/atom-editorconfig)
-1. Install the *Linter* plugin [Sublime](http://sublimelinter.readthedocs.org/en/latest/), [Atom](https://atom.io/packages/linter)
-1. Install the *Eslint* plugin [Sublime](https://github.com/roadhump/SublimeLinter-eslint), [Atom](https://github.com/AtomLinter/linter-eslint)
-1. Install the *Stylelint* plugin [Sublime](https://github.com/kungfusheep/SublimeLinter-contrib-stylelint), [Atom](https://atom.io/packages/linter-stylelint)
+1. Install the *Linter* plugin [Sublime](http://sublimelinter.readthedocs.org/en/latest/), [Atom](https://atom.io/packages/linter). Linting is included in VSCode.
+1. Install the *EditorConfig* plugin [Sublime](https://github.com/sindresorhus/editorconfig-sublime), [Atom](https://github.com/sindresorhus/atom-editorconfig), [VSCode](https://github.com/editorconfig/editorconfig-vscode)
+1. Install the *Eslint* plugin [Sublime](https://github.com/roadhump/SublimeLinter-eslint), [Atom](https://github.com/AtomLinter/linter-eslint), [VSCode](https://github.com/Microsoft/vscode-eslint)
+1. Install the *Stylelint* plugin [Sublime](https://github.com/kungfusheep/SublimeLinter-contrib-stylelint), [Atom](https://atom.io/packages/linter-stylelint), [VSCode](https://github.com/shinnn/vscode-stylelint)
 1. Run `yarn` to install the dependencies
 1. Restart your editor
 
@@ -121,8 +120,7 @@ linting and formatting errors earlier.
 
 ### Documentation
 
-Please update the documentation and examples with any changes, the code and docs should
-always be in sync.
+Please update the documentation and examples with any changes, the code and docs should always be in sync.
 
 
 ### License
