@@ -21,10 +21,10 @@ yarn add @instructure/ui-icons
 To use the React components:
 
 ```js
-import { IconAddLine } from '@instructure/ui-icons'
+import IconAdd from '@instructure/ui-icons/lib/Line/IconAdd'
 
 function MyComponent () {
-  return <IconAddLine />
+  return <IconAdd />
 }
 ```
 
