@@ -224,12 +224,12 @@ class ToggleDetails extends Component {
     const Icon = this.expanded ? this.props.iconExpanded : this.props.icon
 
     return this.props.children ? (
-      <Icon
-        className={classnames(styles.icon, {
-          [styles.iconStart]: iconPosition === 'start',
-          [styles.iconEnd]: iconPosition === 'end'
-        })}
-      />
+      <span className={classnames(styles.icon, {
+        [styles.iconStart]: iconPosition === 'start',
+        [styles.iconEnd]: iconPosition === 'end'
+      })}>
+        <Icon />
+      </span>
     ) : null
   }
 
