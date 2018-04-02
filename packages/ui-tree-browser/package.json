@@ -23,6 +23,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^5.0.0",
+    "@instructure/ui-themes": "^5.0.0",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
@@ -30,6 +31,7 @@
     "@instructure/ui-icons": "^5.0.0",
     "@instructure/ui-themeable": "^5.0.0",
     "@instructure/ui-utils": "^5.0.0",
+    "classnames": "^2.2.5",
     "keycode": "^2.1.8",
     "prop-types": "^15.5.10"
   },

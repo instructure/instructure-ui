@@ -35,6 +35,7 @@ export default MyMask = function () {
 The `ui-overlays` package contains the following:
 - [Mask](#Mask)
 - [Modal](#Modal)
+- [Overlay](#Overlay)
 - [Popover](#Popover)
 - [Tooltip](#Tooltip)
 - [Tray](#Tray)

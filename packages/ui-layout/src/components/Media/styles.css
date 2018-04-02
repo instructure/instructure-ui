@@ -3,6 +3,7 @@ figure.root { /* stylelint-disable-line selector-max-type */
   background: var(--background);
   margin: 0;
   padding: 0;
+  font-family: var(--fontFamily);
 }
 
 .top {
@@ -15,7 +16,6 @@ figure.root { /* stylelint-disable-line selector-max-type */
 
 figcaption.caption { /* stylelint-disable-line selector-max-type */
   color: var(--color);
-  font-family: var(--fontFamily);
   margin: 0;
   padding: 0;
 }
@@ -25,8 +25,14 @@ figcaption.caption { /* stylelint-disable-line selector-max-type */
 }
 
 .title {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   display: block;
   margin: var(--titleMargin);
+  font-size: var(--titleFontSize);
+  font-weight: var(--titleFontWeight);
+  line-height: var(--titleLineHeight);
 }
 
 .description {

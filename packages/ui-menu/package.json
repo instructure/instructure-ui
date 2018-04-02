@@ -28,8 +28,10 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-a11y": "^5.0.0",
     "@instructure/ui-elements": "^5.0.0",
     "@instructure/ui-icons": "^5.0.0",
+    "@instructure/ui-layout": "^5.0.0",
     "@instructure/ui-overlays": "^5.0.0",
     "@instructure/ui-themeable": "^5.0.0",
     "@instructure/ui-utils": "^5.0.0",

@@ -24,7 +24,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '@instructure/ui-buttons/lib/components/Button'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import DrawerLayout, { DrawerTray, DrawerContent } from '../../index'
@@ -93,9 +92,9 @@ export default class DrawerLayoutTestApp extends Component {
           >
             <div>
               Hello from content
-              <Button onClick={this.handleDrawerTrayOpen}>
+              <button onClick={this.handleDrawerTrayOpen}>
                 Expand
-              </Button>
+              </button>
             </div>
           </DrawerContent>
         </DrawerLayout>
