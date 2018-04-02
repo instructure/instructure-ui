@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.0.1"></a>
+## [5.0.1](https://github.com/instructure/instructure-ui/compare/v5.0.0...v5.0.1) (2018-04-02)
+
+
+### Bug Fixes
+
+* Add missing dependencies ([d66826b](https://github.com/instructure/instructure-ui/commit/d66826b))
+
+
+
 <a name="5.0.0"></a>
 # [5.0.0](https://github.com/instructure/instructure-ui/compare/v4.8.0...v5.0.0) (2018-03-29)
 

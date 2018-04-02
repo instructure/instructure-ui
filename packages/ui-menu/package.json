@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-menu",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,19 +22,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.0.0",
-    "@instructure/ui-themes": "^5.0.0",
+    "@instructure/ui-presets": "^5.0.1",
+    "@instructure/ui-themes": "^5.0.1",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^5.0.0",
-    "@instructure/ui-elements": "^5.0.0",
-    "@instructure/ui-icons": "^5.0.0",
-    "@instructure/ui-layout": "^5.0.0",
-    "@instructure/ui-overlays": "^5.0.0",
-    "@instructure/ui-themeable": "^5.0.0",
-    "@instructure/ui-utils": "^5.0.0",
+    "@instructure/ui-a11y": "^5.0.1",
+    "@instructure/ui-elements": "^5.0.1",
+    "@instructure/ui-icons": "^5.0.1",
+    "@instructure/ui-layout": "^5.0.1",
+    "@instructure/ui-overlays": "^5.0.1",
+    "@instructure/ui-themeable": "^5.0.1",
+    "@instructure/ui-utils": "^5.0.1",
     "classnames": "^2.2.5",
     "keycode": "^2.1.8",
     "prop-types": "^15.5.10"
