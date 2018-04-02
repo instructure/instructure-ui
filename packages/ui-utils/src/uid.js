@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import shortid from 'shortid'
+import generate from 'nanoid/generate'
 
 /**
  * ---
@@ -34,4 +34,9 @@ import shortid from 'shortid'
  *
  * @returns {String} a unique id
 */
-export default shortid.generate
+const alphabet = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-'
+const idLength = 7
+
+export default function uid() {
+  return generate(alphabet, idLength)
+}
