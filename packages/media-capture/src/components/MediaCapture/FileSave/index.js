@@ -21,17 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import TextInput from '@instructure/ui-forms/lib/components/TextInput'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Button from "@instructure/ui-buttons/lib/components/Button";
+import TextInput from "@instructure/ui-forms/lib/components/TextInput";
+import ScreenReaderContent from "@instructure/ui-a11y/lib/components/ScreenReaderContent";
 
-import {
-  SAVING
-} from '../../../constants/CaptureStates'
-import { translate } from '../../../constants/translated/translations'
-
+import { SAVING } from "../../../constants/CaptureStates";
+import { translate } from "../../../constants/translated/translations";
 
 /**
 ---
@@ -45,36 +42,43 @@ export default class FileSave extends Component {
     actions: PropTypes.shape({
       saveClicked: PropTypes.func.isRequired
     }).isRequired
-  }
+  };
 
-  constructor (props) {
-    super(props)
+  constructor(props) {
+    super(props);
 
     this.state = {
       fileName: this.props.fileName
-    }
+    };
   }
 
   onChange = () => {
     this.setState({
       fileName: this.input.value
-    })
-  }
+    });
+  };
 
-  saveClicked = () => {
-    this.props.actions.saveClicked(this.state.fileName.trim())
-  }
+  saveClicked = e => {
+    e.preventDefault();
+    this.props.actions.saveClicked(this.state.fileName.trim());
+  };
 
-  render () {
+  render() {
     return (
       <form>
-        <div style={{ display: 'flex', width: '100%' }}>
+        <div style={{ display: "flex", width: "100%" }}>
           <TextInput
             size="small"
-            label={<ScreenReaderContent>{translate('SR_FILE_INPUT')}</ScreenReaderContent>}
+            label={
+              <ScreenReaderContent>
+                {translate("SR_FILE_INPUT")}
+              </ScreenReaderContent>
+            }
             placeholder={this.props.fileName}
             onChange={this.onChange}
-            inputRef={(e) => { this.input = e }}
+            inputRef={e => {
+              this.input = e;
+            }}
           />
           <Button
             type="submit"
@@ -83,11 +87,11 @@ export default class FileSave extends Component {
             variant="primary"
             size="small"
             margin="0 0 0 x-small"
-           >
-            { translate('SAVE') }
+          >
+            {translate("SAVE")}
           </Button>
         </div>
       </form>
-    )
+    );
   }
 }
