@@ -111,6 +111,9 @@ things have moved. Also note that if you upgrade the `ui-core` package, you'll s
 in dev and test environments that will also tell you what the new package is for each component. Note: you'll
 need to update your package.json file manually to add the new packages.
 
+#### **PopoverMenu ([893f628](https://github.com/instructure/instructure-ui/commit/893f6289d2bb9ca0dee0327b0e75759e7d5dc074))**
+Speaking of `ui-core`... `PopoverMenu` will remain in ui-core *but* it does not make the move to the new `ui-menu` package on its own, PopoverMenu functionality has now been consolidated into [Menu](#Menu). By assigning a node to the `trigger` prop it will create a menu from the triggering element (ie: <Button>). 
+
 #### **Close Buttons**
 
 The `closeButtonLabel` prop is deprecated in [Modal](#Modal), [Tray](#Tray), and [Popover](#Popover). To migrate
