@@ -48,7 +48,14 @@ class Tag extends Component {
     className: PropTypes.string,
     text: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired,
     title: PropTypes.string,
+    /**
+     * Whether or not to disable the tag
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     dismissible: PropTypes.bool,
     /**
     * Valid values are `0`, `none`, `auto`, `xxxx-small`, `xx-small`, `x-small`,
@@ -79,12 +86,9 @@ class Tag extends Component {
   }
 
   handleClick = (e) => {
-    const {
-      disabled,
-      onClick
-    } = this.props
+    const { disabled, readOnly, onClick } = this.props
 
-    if (disabled) {
+    if (disabled || readOnly) {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -101,6 +105,7 @@ class Tag extends Component {
       className,
       dismissible,
       disabled,
+      readOnly,
       size,
       text,
       title,
@@ -116,7 +121,8 @@ class Tag extends Component {
       [styles[variant]]: true,
       [styles[size]]: size,
       [styles.dismissible]: dismissible,
-      [styles.button]: onClick
+      [styles.button]: onClick,
+      [styles.disabled]: disabled
     }
 
     return (
@@ -128,9 +134,9 @@ class Tag extends Component {
         margin={margin}
         type={(onClick) ? 'button' : null}
         onClick={(onClick) ? this.handleClick : null}
-        aria-disabled={(onClick && disabled) ? 'true' : null}
+        disabled={disabled || readOnly}
+        aria-disabled={(onClick && (disabled || readOnly)) ? 'true' : null}
         display={null}
-        disabled={disabled}
         title={title || ((typeof text === 'string') ? text : null)}
       >
         <span className={styles.text}>

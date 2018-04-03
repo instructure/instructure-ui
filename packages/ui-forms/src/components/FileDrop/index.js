@@ -165,7 +165,15 @@ export default class FileDrop extends Component {
     /**
     * the minimum file size allowed
     */
-    minSize: PropTypes.number
+    minSize: PropTypes.number,
+    /**
+     * Whether or not to disable the input
+     */
+    disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool
   }
 
   static defaultProps = {
@@ -180,6 +188,7 @@ export default class FileDrop extends Component {
     allowMultiple: false,
     maxSize: Infinity,
     minSize: 0,
+    readOnly: false,
     messages: []
   }
 
@@ -347,6 +356,8 @@ export default class FileDrop extends Component {
       <Label
         isDragAccepted={this.state.isDragAccepted}
         isDragRejected={this.state.isDragRejected}
+        disabled={this.props.disabled}
+        readOnly={this.props.readOnly}
       />
     )
   }
@@ -366,7 +377,7 @@ export default class FileDrop extends Component {
   }
 
   render () {
-    const { allowMultiple } = this.props
+    const { allowMultiple, disabled, readOnly } = this.props
     const id = this.props.id || this.defaultId
     const classes = {
       [styles.label]: true,
@@ -405,6 +416,8 @@ export default class FileDrop extends Component {
           accept={this.acceptStr()}
           onChange={this.handleDrop}
           aria-describedby={this.hasMessages ? this.messagesId : null}
+          disabled={disabled || readOnly}
+          aria-disabled={disabled || readOnly ? 'true' : null}
         />
         {(this.hasMessages) ?
           <Container display="block" margin="small 0 0">

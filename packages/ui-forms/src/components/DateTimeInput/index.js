@@ -164,7 +164,14 @@ class DateTimeInput extends Component {
     **/
     defaultValue: I18nPropTypes.iso8601,
     required: PropTypes.bool,
+    /**
+     * Whether or not to disable the inputs
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     /**
     * Called when the date-time value has changed.
     * The passed in parameters are
@@ -196,6 +203,7 @@ class DateTimeInput extends Component {
     defaultValue: undefined,
     required: false,
     disabled: false,
+    readOnly: false,
     dateInputRef: undefined,
     timeInputRef: undefined,
   }
@@ -408,7 +416,7 @@ class DateTimeInput extends Component {
       description,
       datePlaceholder, dateLabel, dateNextLabel, datePreviousLabel, dateFormat, dateInputRef,
       timeLabel, timeFormat, timeStep, timeInputRef,
-      layout, required, disabled
+      layout, required, disabled, readOnly
     } = this.props
     const locale = this.locale
     const timezone = this.timezone
@@ -438,6 +446,7 @@ class DateTimeInput extends Component {
           validationFeedback={false}
           required={required}
           disabled={disabled}
+          readOnly={readOnly}
         />
         <TimeInput
           ref={this.timeInputComponentRef}
@@ -451,6 +460,7 @@ class DateTimeInput extends Component {
           value={this.state.result}
           inputRef={timeInputRef}
           disabled={disabled}
+          readOnly={readOnly}
         />
       </FormFieldGroup>
     )

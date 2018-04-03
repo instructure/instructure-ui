@@ -111,6 +111,38 @@ example: true
 </Container>
 ```
 
+### Select with the `disabled` prop
+
+```js
+---
+example: true
+---
+<Container
+  as="div"
+  margin="0 auto medium auto"
+  padding="x-small"
+>
+  <Select
+    label="Single"
+    defaultOption="bar"
+    disabled
+  >
+    <option value="foo">Foo</option>
+    <option value="bar">Bar</option>
+  </Select>
+  <br />
+  <Select
+    label="Multiple"
+    defaultOption={['foo', 'bar']}
+    multiple
+    disabled
+  >
+    <option value="foo">Foo</option>
+    <option value="bar">Bar</option>
+  </Select>
+</Container>
+```
+
 ### Select with icons
 
 ```js

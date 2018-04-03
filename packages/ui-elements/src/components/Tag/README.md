@@ -71,6 +71,25 @@ example: true
 </div>
 ```
 
+### Disabled
+
+A `disabled` Tag.
+
+```js
+---
+example: true
+---
+<Tag
+  text="Dismissible Disabled"
+  dismissible
+  disabled
+  margin="0 xx-small 0 0"
+  onClick={function () {
+    alert("This Tag was dismissed. This shouldn't happen")
+  }}
+/>
+```
+
 ### Max-width
 
 ```js

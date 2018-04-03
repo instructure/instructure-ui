@@ -12,7 +12,25 @@ example: true
   size="medium"
   heading="Well, this is awkward."
   message="Think there should be something here?"
-  hero={<Img src={placeholderImage(900, 500)} />} />
+  hero={<Img src={placeholderImage(900, 500)} />}
+/>
+```
+
+A disabled Billboard:
+
+```js
+---
+example: true
+---
+<Billboard
+  size="small"
+  heading="This is disabled"
+  onClick={function () {
+    alert('This Billboard was clicked!')
+  }}
+  hero={(size) => <PlaceholderIcon size={size} />}
+  disabled
+/>
 ```
 
 If Billboard has an `href` prop set, it will render as a link;
@@ -32,38 +50,32 @@ example: true
 <Grid startAt="medium" vAlign="middle">
   <GridRow>
     <GridCol>
-
       <Billboard
         disabled
         message="I am a disabled button"
         size="small"
         onClick={function () {
-          alert("This Billboard was clicked!")
+          alert('This Billboard was clicked!')
         }}
         hero={(size) => <PlaceholderIcon size={size} />}
       />
-
     </GridCol>
     <GridCol>
-
       <Billboard
         message="Click this link"
         href="http://instructure.com"
         hero={(size) => <PlaceholderIcon size={size} />}
       />
-
     </GridCol>
     <GridCol>
-
       <Billboard
         message="Create a new Module"
         size="large"
         onClick={function () {
-          alert("This Billboard was clicked!")
+          alert('This Billboard was clicked!')
         }}
         hero={(size) => <PlaceholderIcon size={size} />}
       />
-
     </GridCol>
   </GridRow>
 </Grid>

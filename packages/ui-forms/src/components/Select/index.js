@@ -165,6 +165,14 @@ class Select extends Component {
      */
     formatSelectedOption: PropTypes.func,
     /**
+     * Whether or not to disable the input
+     */
+    disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
+    /**
      * Callback fired when `<Position />` content has been rendered
      */
     onPositioned: PropTypes.func,

@@ -79,6 +79,7 @@ class Button extends Component {
     */
     fluidWidth: PropTypes.bool,
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     href: PropTypes.string,
     onClick: PropTypes.func,
     /**
@@ -100,9 +101,9 @@ class Button extends Component {
   }
 
   handleClick = e => {
-    const { disabled, onClick } = this.props
+    const { disabled, readOnly, onClick } = this.props
 
-    if (disabled) {
+    if (disabled || readOnly) {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -111,14 +112,14 @@ class Button extends Component {
   }
 
   handleKeyDown = e => {
-    const { disabled, onClick, href } = this.props
+    const { disabled, readOnly, onClick, href } = this.props
 
     // behave like a button when space key is pressed
     if (this.elementType !== 'button' && (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)) {
       e.preventDefault()
       e.stopPropagation()
 
-      if ((typeof onClick === 'function') && !disabled) {
+      if ((typeof onClick === 'function') && !disabled && !readOnly) {
         onClick(e)
       }
       if (href) {
@@ -140,13 +141,25 @@ class Button extends Component {
   }
 
   render () {
-    const { variant, size, fluidWidth, disabled, href, type, onClick, buttonRef, margin } = this.props
+    const {
+      variant,
+      size,
+      fluidWidth,
+      disabled,
+      readOnly,
+      href,
+      type,
+      onClick,
+      buttonRef,
+      margin
+    } = this.props
 
     const classes = {
       [styles.root]: true,
       [styles[variant]]: true,
       [styles[size]]: size,
-      [styles.fluidWidth]: fluidWidth
+      [styles.fluidWidth]: fluidWidth,
+      [styles.disabled]: disabled
     }
 
     const props = {
@@ -156,8 +169,8 @@ class Button extends Component {
       },
       ...omitProps(this.props, Button.propTypes, ['padding']),
       className: classnames(classes),
-      disabled,
-      'aria-disabled': disabled ? 'true' : null,
+      disabled: disabled || readOnly,
+      'aria-disabled': disabled || readOnly ? 'true' : null,
       onClick: this.handleClick,
       onKeyDown: this.handleKeyDown,
       href: href,

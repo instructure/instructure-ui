@@ -76,7 +76,9 @@ class RangeInput extends Component {
     * A function to format the displayed value
     */
     formatValue: PropTypes.func,
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+    disabled: PropTypes.bool,
+    readOnly: PropTypes.bool
   }
 
   static defaultProps = {
@@ -87,7 +89,9 @@ class RangeInput extends Component {
     inline: false,
     size: 'medium',
     layout: 'stacked',
-    displayValue: true
+    displayValue: true,
+    disabled: false,
+    readOnly: false
   }
 
   constructor (props) {
@@ -163,7 +167,9 @@ class RangeInput extends Component {
   render () {
     const {
       formatValue,
-      size
+      size,
+      disabled,
+      readOnly
     } = this.props
 
     const props = omitProps(this.props, RangeInput.propTypes)
@@ -196,6 +202,8 @@ class RangeInput extends Component {
             aria-valuemax={this.props.max}
             aria-valuetext={formatValue(this.value, this.props.max)}
             {...props}
+            disabled={disabled || readOnly}
+            aria-disabled={disabled || readOnly ? 'true' : null}
           />
           {this.renderValue()}
         </div>

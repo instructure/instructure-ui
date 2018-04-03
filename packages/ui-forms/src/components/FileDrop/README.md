@@ -26,6 +26,26 @@ example: true
 />
 ```
 
+A disabled FileDrop
+
+```js
+---
+example: true
+---
+<FileDrop
+  label={
+    <Billboard
+      heading="Upload your image"
+      message="Drag and drop, or click to browse your computer"
+      hero={<Img src={placeholderImage(1200, 300)} />}
+      disabled
+    />
+  }
+  disabled
+/>
+```
+
+
 ### Accept
 
 The `accept` prop dictates what type of files are allowed. It can be an array or comma-separated string of

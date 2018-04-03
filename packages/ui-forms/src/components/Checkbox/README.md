@@ -31,22 +31,6 @@ example: true
 </CheckboxGroup>
 ```
 
-You can also set a readOnly state:
-
-```js
----
-example: true
----
-<CheckboxGroup
-  defaultValue={['medium']}
-  name="example"
-  description={<ScreenReaderContent>Checkbox examples</ScreenReaderContent>}
->
-  <Checkbox label={lorem.sentence()} value="medium" readOnly />
-  <Checkbox label={lorem.sentence()} value="small" readOnly />
-</CheckboxGroup>
-```
-
 Setting the `variant` prop to `toggle` turns the checkbox into a toggle switch.
 
 ```js
@@ -70,6 +54,6 @@ example: true
 <Checkbox
   label={<ScreenReaderContent>Screenreader-accessible label</ScreenReaderContent>}
   value="accessible"
-  variant="toggle" 
+  variant="toggle"
 />
 ```

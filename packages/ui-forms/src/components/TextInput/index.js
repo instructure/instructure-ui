@@ -66,7 +66,14 @@ class TextInput extends Component {
     * replacement.
     */
     placeholder: PropTypes.string,
+    /**
+     * Whether or not to disable the input
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     /**
     * a function that provides a reference to the actual input element
@@ -93,6 +100,7 @@ class TextInput extends Component {
     textAlign: 'start',
     messages: [],
     disabled: false,
+    readOnly: false,
     inputRef: function (input) {},
     layout: 'stacked'
   }
@@ -159,6 +167,7 @@ class TextInput extends Component {
       value,
       defaultValue,
       disabled,
+      readOnly,
       required,
       width,
       icon
@@ -170,7 +179,8 @@ class TextInput extends Component {
       [styles.input]: true,
       [styles[size]]: size,
       [styles[`textAlign--${textAlign}`]]: textAlign,
-      [styles.hasIcon]: icon
+      [styles.hasIcon]: icon,
+      [styles.disabled]: disabled
     }
 
     const style = width ? { width } : null
@@ -202,8 +212,8 @@ class TextInput extends Component {
             required={required}
             aria-required={required}
             aria-invalid={this.invalid ? 'true' : null}
-            disabled={disabled}
-            aria-disabled={disabled ? 'true' : null}
+            disabled={disabled || readOnly}
+            aria-disabled={disabled || readOnly ? 'true' : null}
             className={classnames(classes)}
             aria-describedby={descriptionIds !== '' ? descriptionIds : null}
           />

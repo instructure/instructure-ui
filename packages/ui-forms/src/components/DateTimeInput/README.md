@@ -110,7 +110,7 @@ example: true
     invalidDateTimeMessage={(dvalue, tvalue) => { return `'${dvalue} ${tvalue}' is not valid.` }}
     layout="columns"
     defaultValue="2018-01-18T13:10"
-    disabled={true}
+    disabled
   />
 
 ```

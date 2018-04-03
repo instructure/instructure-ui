@@ -49,15 +49,20 @@ class RadioInput extends Component {
     id: PropTypes.string,
     name: PropTypes.string,
     checked: PropTypes.bool,
+    /**
+     * Whether or not to disable the input
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     variant: PropTypes.oneOf(['simple', 'toggle']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     context: PropTypes.oneOf(['success', 'warning', 'danger', 'off']),
     inline: PropTypes.bool,
     onClick: PropTypes.func,
-    onChange: PropTypes.func,
-    /** works just like disabled but keeps the same styles as if it were active */
-    readOnly: PropTypes.bool
+    onChange: PropTypes.func
   }
 
   static defaultProps = {
@@ -124,21 +129,21 @@ class RadioInput extends Component {
   render () {
     const {
       disabled,
+      readOnly,
       label,
       variant,
       size,
       inline,
       context,
       value,
-      name,
-      readOnly
+      name
     } = this.props
 
     const props = omitProps(this.props, RadioInput.propTypes)
 
     const classes = {
       [styles.root]: true,
-      [styles.disabled]: disabled && !readOnly,
+      [styles.disabled]: disabled,
       [styles[variant]]: true,
       [styles[context]]: variant === 'toggle',
       [styles[size]]: true,

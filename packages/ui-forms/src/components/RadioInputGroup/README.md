@@ -255,19 +255,6 @@ example: true
 </RadioInputGroup>
 ```
 
-Use the readOnly prop to cause the same effect as disabled except the styling makes it look active.
-
-```js
----
-example: true
----
-<RadioInputGroup name="readonlyex" defaultValue="none" description="Super-awesome feature" variant="toggle" readOnly>
-  <RadioInput label="None" value="none" context="off" />
-  <RadioInput label="Some" value="some" />
-  <RadioInput label="All" value="all" />
-</RadioInputGroup>
-```
-
 If you would like to make the description visible only to screen readers you can use the
 [ScreenReaderContent](#ScreenReaderContent) component.
 

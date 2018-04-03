@@ -142,6 +142,19 @@ describe('TextArea', () => {
       expect(onChange).to.not.have.been.called
     })
 
+    it('does not respond to onChange event when readOnly', () => {
+      const onChange = testbed.stub()
+
+      const subject = testbed.render({
+        readOnly: true,
+        onChange
+      })
+
+      subject.find('textarea').simulate('change')
+
+      expect(onChange).to.not.have.been.called
+    })
+
     it('responds to onBlur event', () => {
       const onBlur = testbed.stub()
 

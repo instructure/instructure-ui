@@ -102,7 +102,14 @@ class TimeInput extends Component {
      * (must be accompanied by an onChange prop).
      */
     value: CustomPropTypes.controllable(I18nPropTypes.iso8601),
-    disabled: PropTypes.bool
+    /**
+     * Whether or not to disable the select
+     */
+    disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool
   }
   /* eslint-enable react/require-default-props */
 
@@ -130,7 +137,18 @@ class TimeInput extends Component {
   }
 
   render () {
-    const { defaultToFirstOption, defaultValue, format, label, onChange, step, value, disabled } = this.props
+    const {
+      defaultToFirstOption,
+      defaultValue,
+      format,
+      label,
+      onChange,
+      step,
+      value,
+      disabled,
+      readOnly
+    } = this.props
+
     const locale = this.locale()
     const timezone = this.timezone()
 
@@ -150,9 +168,10 @@ class TimeInput extends Component {
         selectedOption={selectedOption}
         onChange={onChange}
         disabled={disabled}
+        readOnly={readOnly}
         {...selectProps}
       >
-        { options }
+        {options}
       </Select>
     )
   }
