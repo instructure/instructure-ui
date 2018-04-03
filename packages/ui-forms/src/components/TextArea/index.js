@@ -92,7 +92,14 @@ class TextArea extends Component {
     * replacement.
     */
     placeholder: PropTypes.string,
+    /**
+     * Whether or not to disable the textarea
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     /**
     * a function that provides a reference to the actual textarea element
@@ -119,6 +126,7 @@ class TextArea extends Component {
     inline: false,
     messages: [],
     disabled: false,
+    readOnly: false,
     textareaRef: function (textarea) {},
     layout: 'stacked'
   }
@@ -203,9 +211,9 @@ class TextArea extends Component {
   }
 
   handleChange = (event) => {
-    const { onChange, value, disabled } = this.props
+    const { onChange, value, disabled, readOnly } = this.props
 
-    if (disabled) {
+    if (disabled || readOnly) {
       event.preventDefault()
       return
     }
@@ -246,6 +254,7 @@ class TextArea extends Component {
       value,
       defaultValue,
       disabled,
+      readOnly,
       required,
       width,
       height,
@@ -259,7 +268,8 @@ class TextArea extends Component {
 
     const classes = {
       [styles.textarea]: true,
-      [styles[size]]: true
+      [styles[size]]: true,
+      [styles.disabled]: disabled
     }
 
     const style = {
@@ -290,8 +300,8 @@ class TextArea extends Component {
           required={required}
           aria-required={required}
           aria-invalid={this.invalid ? 'true' : null}
-          disabled={disabled}
-          aria-disabled={disabled ? 'true' : null}
+          disabled={disabled || readOnly}
+          aria-disabled={disabled || readOnly ? 'true' : null}
           className={classnames(classes)}
           onChange={this.handleChange}
         />

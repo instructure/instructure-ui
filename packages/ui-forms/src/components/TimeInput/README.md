@@ -14,7 +14,7 @@ A TimeInput using just the default values:
 ---
 example: true
 ---
-<div style={{height: 350}}>
+<div style={{ height: 350 }}>
   <TimeInput label='Time' />
 </div>
 ```
@@ -25,10 +25,10 @@ A TimeInput with a value specified
 ---
 example: true
 ---
-<div style={{height: 350}}>
+<div style={{ height: 350 }}>
   <TimeInput
     label='Time' value='1986-05-17T18:00:00.000Z'
-    onChange={(e) => {console.log('onChange', e)}}
+    onChange={(e) => { console.log('onChange', e) }}
   />
 </div>
 ```
@@ -39,8 +39,19 @@ A TimeInput with step set to 15 and a different format (LTS - includes seconds):
 ---
 example: true
 ---
-<div style={{height: 350}}>
+<div style={{ height: 350 }}>
   <TimeInput label='Time' step={15} format='LTS' />
+</div>
+```
+
+A disabled TimeInput:
+
+```js
+---
+example: true
+---
+<div style={{ height: 350 }}>
+  <TimeInput label='Time' step={15} format='LTS' value='1986-05-17T18:00:00.000Z' disabled />
 </div>
 ```
 
@@ -55,25 +66,25 @@ example: true
     label='Eastern'
     value={new Date().toISOString()}
     timezone='US/Eastern'
-    onChange={(e) => {console.log('onChange', e)}}
+    onChange={(e) => { console.log('onChange', e) }}
   />
   <TimeInput
     label='Central'
     value={new Date().toISOString()}
     timezone='US/Central'
-    onChange={(e) => {console.log('onChange', e)}}
+    onChange={(e) => { console.log('onChange', e) }}
   />
   <TimeInput
     label='Mountain'
     value={new Date().toISOString()}
     timezone='US/Mountain'
-    onChange={(e) => {console.log('onChange', e)}}
+    onChange={(e) => { console.log('onChange', e) }}
   />
   <TimeInput
     label='Western'
     value={new Date().toISOString()}
     timezone='US/Pacific'
-    onChange={(e) => {console.log('onChange', e)}}
+    onChange={(e) => { console.log('onChange', e) }}
   />
 </div>
 ```
@@ -84,8 +95,8 @@ A TimeInput with locale set to French (fr):
 ---
 example: true
 ---
-<div style={{height: 350}}>
-  <TimeInput label='Time' locale='fr' />
+<div style={{ height: 350 }}>
+  <TimeInput label="Time" locale="fr" />
 </div>
 ```
 
@@ -95,7 +106,7 @@ A TimeInput with no default value and set to default to the first option:
 ---
 example: true
 ---
-<div style={{height: 350}}>
-  <TimeInput label='Time' defaultToFirstOption />
+<div style={{ height: 350 }}>
+  <TimeInput label="Time" defaultToFirstOption />
 </div>
 ```

@@ -80,8 +80,13 @@ class Checkbox extends Component {
     onBlur: PropTypes.func,
     onMouseOver: PropTypes.func,
     onMouseOut: PropTypes.func,
+    /**
+     * Whether or not to disable the checkbox
+     */
     disabled: PropTypes.bool,
-    /** works exactly like disabled except the styling makes it look active */
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
     readOnly: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['simple', 'toggle']),
@@ -220,21 +225,21 @@ class Checkbox extends Component {
     const {
       inline,
       disabled,
+      readOnly,
       messages,
       value,
       onKeyDown,
       onFocus,
       onBlur,
       onMouseOver,
-      onMouseOut,
-      readOnly
+      onMouseOut
     } = this.props
 
     const props = omitProps(this.props, Checkbox.propTypes)
 
     const classes = {
       [styles.root]: true,
-      [styles.disabled]: disabled && !readOnly,
+      [styles.disabled]: disabled,
       [styles.inline]: inline
     }
 

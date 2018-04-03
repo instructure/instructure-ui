@@ -15,6 +15,7 @@ example: true
     layout="inline"
     label="Grading range"
     defaultValue={50}
-    max={100} min={0} />
+    max={100} min={0}
+  />
 </FormFieldGroup>
 ```

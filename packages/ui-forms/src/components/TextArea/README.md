@@ -44,6 +44,15 @@ example: true
 <TextArea messages={[{ text: 'Invalid description', type: 'error' }]} label="Description" />
 ```
 
+A disabled `textarea`:
+
+```js
+---
+example: true
+---
+<TextArea label="Description" defaultValue="Nice" disabled />
+```
+
 A `textarea` with a screenreader only label:
 
 ```js

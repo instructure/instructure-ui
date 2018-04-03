@@ -83,7 +83,14 @@ class Billboard extends Component {
     * If `href` is provided, Billboard will render as a link
     */
     href: PropTypes.string,
+    /**
+     * Whether or not to disable the billboard
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -163,10 +170,11 @@ class Billboard extends Component {
   handleClick = (e) => {
     const {
       disabled,
+      readOnly,
       onClick
     } = this.props
 
-    if (disabled) {
+    if (disabled || readOnly) {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -178,6 +186,7 @@ class Billboard extends Component {
     const {
       href,
       disabled,
+      readOnly,
       onClick,
       size,
       margin
@@ -186,7 +195,8 @@ class Billboard extends Component {
     const classes = {
       [styles.root]: true,
       [styles[size]]: true,
-      [styles.clickable]: href || onClick
+      [styles.clickable]: href || onClick,
+      [styles.disabled]: disabled
     }
     const Element = getElementType(Billboard, this.props)
 
@@ -199,8 +209,8 @@ class Billboard extends Component {
         margin={margin}
         href={href}
         onClick={this.handleClick}
-        disabled={disabled}
-        aria-disabled={((onClick || href) && disabled) ? 'true' : null}
+        disabled={disabled || readOnly}
+        aria-disabled={(disabled || readOnly) ? 'true' : null}
       >
         {this.renderContent()}
       </Container>

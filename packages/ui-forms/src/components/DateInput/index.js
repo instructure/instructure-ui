@@ -136,7 +136,14 @@ export default class DateInput extends Component {
     * replacement.
     */
     placeholder: PropTypes.string,
+    /**
+     * Whether or not to disable the input
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     required: PropTypes.bool
   }
 
@@ -160,6 +167,7 @@ export default class DateInput extends Component {
     inline: false,
     size: 'medium',
     disabled: false,
+    readOnly: false,
     layout: 'stacked'
   }
 

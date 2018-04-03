@@ -80,9 +80,13 @@ class SelectSingle extends Component {
     */
     allowEmpty: PropTypes.bool,
     /**
-    * Whether or not to disable the input
-    */
+     * Whether or not to disable the input
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     /**
      * The filter function applied to the options when writting on the input
      */
@@ -166,7 +170,7 @@ class SelectSingle extends Component {
     }
 
     // When the component is controlled and selectedOption changes, update the input and state
-    if (!this.props.disabled) {
+    if (!this.props.disabled && !this.props.readOnly) {
       const oldId = getOptionId(this.props.selectedOption)
       const newId = getOptionId(nextProps.selectedOption)
       if (newId !== null && newId !== oldId) {
@@ -271,6 +275,7 @@ class SelectSingle extends Component {
         options={this.state.filteredOptions}
         selectedOption={this.state.selectedOption}
         disabled={this.props.disabled}
+        readOnly={this.props.readOnly}
         onSelect={this.handleSelect}
         onStaticClick={this.focus}
         onClose={this.handleClose}

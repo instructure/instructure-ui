@@ -188,6 +188,7 @@ class SelectField extends Component {
     */
     closeOnSelect: PropTypes.bool,
     disabled: PropTypes.bool,
+    readOnly: PropTypes.bool,
     required: PropTypes.bool
   }
 
@@ -523,6 +524,7 @@ class SelectField extends Component {
     const {
       size,
       disabled,
+      readOnly,
       editable,
       required,
       width,
@@ -593,8 +595,8 @@ class SelectField extends Component {
               aria-required={required}
               aria-invalid={this.invalid ? 'true' : null}
               readOnly={!editable}
-              disabled={disabled}
-              aria-disabled={disabled ? 'true' : null}
+              disabled={disabled || readOnly}
+              aria-disabled={disabled || readOnly ? 'true' : null}
             />
             <IconArrowDown className={styles.icon} />
           </span>

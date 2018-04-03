@@ -127,11 +127,38 @@ describe('<Button/>', () => {
       expect(onClick).to.not.have.been.called
     })
 
+    it('should not call onClick when button is readOnly', () => {
+      const onClick = testbed.stub()
+
+      const subject = testbed.render({
+        readOnly: true,
+        onClick
+      })
+
+      subject.simulate('click')
+
+      expect(onClick).to.not.have.been.called
+    })
+
     it('should not call onClick when button is disabled and an href prop is provided', () => {
       const onClick = testbed.stub()
 
       const subject = testbed.render({
         disabled: true,
+        href: 'example.html',
+        onClick
+      })
+
+      subject.simulate('click')
+
+      expect(onClick).to.not.have.been.called
+    })
+
+    it('should not call onClick when button is readOnly and an href prop is provided', () => {
+      const onClick = testbed.stub()
+
+      const subject = testbed.render({
+        readOnly: true,
         href: 'example.html',
         onClick
       })
@@ -179,6 +206,19 @@ describe('<Button/>', () => {
 
       expect(onClick).to.not.have.been.called
     })
+
+    it('should not call onClick when button is readOnly and space key is pressed', () => {
+      const onClick = testbed.stub()
+
+      const subject = testbed.render({
+        readOnly: true,
+        onClick
+      })
+
+      subject.keyDown('space')
+
+      expect(onClick).to.not.have.been.called
+    })
   })
 
   describe('for a11y', () => {
@@ -186,15 +226,6 @@ describe('<Button/>', () => {
       const subject = testbed.render()
 
       subject.should.be.accessible(done)
-    })
-
-    it('sets the aria-disabled attribute', () => {
-      const subject = testbed.render({
-        disabled: true,
-        href: 'example.html'
-      })
-
-      expect(subject.getAttribute('aria-disabled')).to.exist
     })
 
     describe('when disabled', () => {
@@ -217,6 +248,33 @@ describe('<Button/>', () => {
       it('sets the aria-disabled attribute when an href is provided', () => {
         const subject = testbed.render({
           disabled: true,
+          href: 'example.html'
+        })
+
+        expect(subject.getAttribute('aria-disabled')).to.exist
+      })
+    })
+
+    describe('when readOnly', () => {
+      it('sets the aria-disabled attribute', () => {
+        const subject = testbed.render({
+          readOnly: true
+        })
+
+        expect(subject.getAttribute('aria-disabled')).to.exist
+      })
+
+      it('sets the readOnly attribute so that the button is not in tab order', () => {
+        const subject = testbed.render({
+          readOnly: true
+        })
+
+        expect(subject.getAttribute('disabled')).to.exist
+      })
+
+      it('sets the aria-disabled attribute when an href is provided', () => {
+        const subject = testbed.render({
+          readOnly: true,
           href: 'example.html'
         })
 

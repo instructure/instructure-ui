@@ -15,6 +15,19 @@ example: true
 />
 ```
 
+A disabled number input field
+
+```js
+---
+example: true
+---
+<NumberInput
+  label="Age (in years)"
+  disabled
+  defaultValue="4"
+/>
+```
+
 A number input field with minimum set to 30
 
 ```js

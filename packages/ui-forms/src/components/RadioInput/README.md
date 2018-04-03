@@ -18,19 +18,3 @@ example: true
   checked
 />
 ```
-
-You can also make the radioInput readOnly by passing in a readOnly prop.
-
-```js
----
-example: true
----
-<RadioInput
-  label={lorem.sentence()}
-  value="foo"
-  name="baz"
-  onClick={() => alert('this shouldn\'t appear!')}
-  onChange={() => alert('this shouldn\'t appear!')}
-  readOnly
-/>
-```

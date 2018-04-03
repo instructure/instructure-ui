@@ -104,9 +104,13 @@ class SelectMultiple extends Component {
      */
     formatSelectedOption: PropTypes.func,
     /**
-    * Whether or not to disable the input and tags
-    */
+     * Whether or not to disable the input and tags
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     /**
      * Callback fired when the menu is closed
      */
@@ -211,7 +215,7 @@ class SelectMultiple extends Component {
       !deepEqual(this.props.selectedOption, nextProps.selectedOption)
     )
 
-    if ((updateSelectedOption || updateOptions) && !this.props.disabled) {
+    if ((updateSelectedOption || updateOptions) && !this.props.disabled && !this.props.readOnly) {
       this.setState((prevState) => {
         const selectedOption = updateSelectedOption ? this.getSelectedOptionFromProps(
           nextProps.selectedOption,
@@ -331,6 +335,7 @@ class SelectMultiple extends Component {
         onClick={(event) => this.dismiss(event, tag)}
         dismissible
         disabled={this.props.disabled}
+        readOnly={this.props.readOnly}
       />
     ))
   }
@@ -358,6 +363,7 @@ class SelectMultiple extends Component {
         options={this.state.filteredOptions}
         size={this.props.size}
         disabled={this.props.disabled}
+        readOnly={this.props.readOnly}
         onSelect={this.handleSelect}
         onStaticClick={this.focus}
         onClose={this.handleClose}

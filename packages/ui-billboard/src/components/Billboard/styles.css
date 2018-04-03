@@ -12,6 +12,12 @@
   &:not(.clickable) {
     background-color: var(--backgroundColor);
   }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .hero,
@@ -130,12 +136,6 @@
     .message {
       color: var(--clickableActiveText);
     }
-  }
-
-  &[aria-disabled] {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
   }
 
   .message {

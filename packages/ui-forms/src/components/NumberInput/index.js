@@ -87,7 +87,14 @@ class NumberInput extends Component {
     * replacement.
     */
     placeholder: PropTypes.string,
+    /**
+     * Whether or not to disable the input
+     */
     disabled: PropTypes.bool,
+    /**
+     * Works just like disabled but keeps the same styles as if it were active
+     */
+    readOnly: PropTypes.bool,
     required: PropTypes.bool,
     /**
     * a function that provides a reference to the actual input element
@@ -125,6 +132,7 @@ class NumberInput extends Component {
     size: 'medium',
     messages: [],
     disabled: false,
+    readOnly: false,
     layout: 'stacked',
     inputRef: function (input) {},
     onChange: function (event, numberAsString, parsedNumber) {},
@@ -280,40 +288,46 @@ class NumberInput extends Component {
   handleKeyDown = (event) => {
     const dir = keyDirections[event.key]
 
-    if (dir) {
-      event.preventDefault()
+    if (!this.props.disabled && !this.props.readOnly) {
+      if (dir) {
+        event.preventDefault()
 
-      const decimalValue = this.applyStep(dir)
+        const decimalValue = this.applyStep(dir)
 
-      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale))
+        this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale))
 
-      this.props.onKeyDown(event)
-      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
-    } else {
-      this.props.onKeyDown(event)
+        this.props.onKeyDown(event)
+        this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+      } else {
+        this.props.onKeyDown(event)
+      }
     }
   }
 
   handleClickUp = (event) => {
     event.preventDefault()
 
-    const decimalValue = this.applyStep(1)
+    if (!this.props.disabled && !this.props.readOnly) {
+      const decimalValue = this.applyStep(1)
 
-    this._input.focus()
-    this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
+      this._input.focus()
+      this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
 
-    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+    }
   }
 
   handleClickDown = (event) => {
     event.preventDefault()
 
-    const decimalValue = this.applyStep(-1)
+    if (!this.props.disabled && !this.props.readOnly) {
+      const decimalValue = this.applyStep(-1)
 
-    this._input.focus()
-    this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
+      this._input.focus()
+      this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
 
-    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+    }
   }
 
   renderArrows () {
@@ -346,6 +360,7 @@ class NumberInput extends Component {
       placeholder,
       value,
       disabled,
+      readOnly,
       defaultValue,
       required,
       width,
@@ -384,8 +399,8 @@ class NumberInput extends Component {
             required={required}
             aria-required={required}
             aria-invalid={this.invalid ? 'true' : null}
-            disabled={disabled}
-            aria-disabled={disabled ? 'true' : null}
+            disabled={disabled || readOnly}
+            aria-disabled={disabled || readOnly ? 'true' : null}
           />
           {showArrows ? this.renderArrows() : null}
         </span>

@@ -20,6 +20,24 @@ example: true
 />
 ```
 
+A disabled DateInput:
+
+```js
+---
+example: true
+---
+<DateInput
+  previousLabel="previous month"
+  nextLabel="next month"
+  placeholder="Select a date"
+  label="Date"
+  onDateChange={() => { console.log(arguments) }}
+  invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
+  defaultDateValue={new Date()}
+  disabled
+/>
+```
+
 A controlled (required) DateInput:
 
 ```js

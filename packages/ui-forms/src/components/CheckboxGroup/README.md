@@ -60,26 +60,6 @@ example: true
 
 You can set disable/readonly on a group and it works much the same way as a RadioInputGroup.
 
-A `readonly` CheckboxGroup:
-
-```js
----
-example: true
----
-<CheckboxGroup
-  name="sports3"
-  onChange={function (value) { console.log(value) }}
-  defaultValue={['soccer', 'volleyball']}
-  description="I wish to receive score alerts for"
-  readOnly
->
-  <Checkbox label="Football" value="football" variant="toggle" />
-  <Checkbox label="Basketball" value="basketball" variant="toggle" />
-  <Checkbox label="Volleyball" value="volleyball" variant="toggle" />
-  <Checkbox label="Soccer" value="soccer" variant="toggle" />
-</CheckboxGroup>
-```
-
 A `disabled` CheckboxGroup:
 
 ```js

@@ -28,19 +28,19 @@ example: true
   <tbody>
     <tr>
       <td>
-        <TextInput 
+        <TextInput
           textAlign="center"
           label={<ScreenReaderContent>Best Band</ScreenReaderContent>}
           placeholder="Best Band" />
       </td>
       <td>
-        <TextInput 
+        <TextInput
           textAlign="center"
           label={<ScreenReaderContent>Best Album</ScreenReaderContent>}
           placeholder="Best Album" />
       </td>
       <td>
-        <TextInput 
+        <TextInput
           textAlign="center"
           label={<ScreenReaderContent>Best Song</ScreenReaderContent>}
           placeholder="Best Song" />
@@ -57,6 +57,15 @@ A `TextInput` with errors:
 example: true
 ---
 <TextInput messages={[{ text: 'Invalid name', type: 'error' }]} label="Name" />
+```
+
+A disabled `TextInput`:
+
+```js
+---
+example: true
+---
+<TextInput disabled label="Name" defaultValue="Charles" />
 ```
 
 A `TextInput` with an `inline` layout:

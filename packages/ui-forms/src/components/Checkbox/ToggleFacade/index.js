@@ -71,14 +71,13 @@ export default class ToggleFacade extends Component {
       size,
       checked,
       disabled,
-      focused,
-      readOnly
+      focused
     } = this.props
 
     const classes = {
       [styles.facade]: true,
       [styles.checked]: checked,
-      [styles.disabled]: disabled && !readOnly,
+      [styles.disabled]: disabled,
       [styles.focused]: focused,
       [styles[size]]: true
     }
