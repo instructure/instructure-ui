@@ -59,6 +59,13 @@ describe('<FileSave />', () => {
       FileSave.find('Button').simulate('click')
       expect(saveClickedSpy).to.have.been.called
     })
+
+    it('prevents default handling of the form', () => {
+      const preventDefault = testbed.stub()
+      const FileSave = testbed.render()
+      FileSave.find('Button').simulate('click', { preventDefault })
+      expect(preventDefault).to.have.been.called
+    })
   })
 
   context('when SAVING', () => {

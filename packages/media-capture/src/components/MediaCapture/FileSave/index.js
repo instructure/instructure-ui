@@ -26,18 +26,18 @@ import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import themeable from '@instructure/ui-themeable'
 
-import {
-  SAVING
-} from '../../../constants/CaptureStates'
+import { SAVING } from '../../../constants/CaptureStates'
 import { translate } from '../../../constants/translated/translations'
-
+import styles from './styles.css'
 
 /**
 ---
 private: true
 ---
 **/
+@themeable(() => {}, styles)
 export default class FileSave extends Component {
   static propTypes = {
     captureState: PropTypes.string.isRequired,
@@ -61,14 +61,15 @@ export default class FileSave extends Component {
     })
   }
 
-  saveClicked = () => {
+  saveClicked = e => {
+    e.preventDefault()
     this.props.actions.saveClicked(this.state.fileName.trim())
   }
 
   render () {
     return (
-      <form>
-        <div style={{ display: 'flex', width: '100%' }}>
+      <form className={styles.form}>
+        <div className={styles.container}>
           <TextInput
             size="small"
             label={<ScreenReaderContent>{translate('SR_FILE_INPUT')}</ScreenReaderContent>}
@@ -83,7 +84,7 @@ export default class FileSave extends Component {
             variant="primary"
             size="small"
             margin="0 0 0 x-small"
-           >
+          >
             { translate('SAVE') }
           </Button>
         </div>
