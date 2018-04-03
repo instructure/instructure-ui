@@ -10,7 +10,7 @@ example: true
 ---
 <CodeEditor
   label='code editor'
-  code={`function findSequence(goal) {
+  defaultValue={`function findSequence(goal) {
   function find(start, history) {
     if (start == goal)
       return history;

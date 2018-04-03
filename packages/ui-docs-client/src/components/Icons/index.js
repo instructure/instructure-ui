@@ -133,7 +133,7 @@ export default class Icons extends Component {
         </Heading>
         <CodeEditor
           label={`How to install`}
-          code={`yarn add ${this.props.packageName}`}
+          value={`yarn add ${this.props.packageName}`}
           language="shell"
           readOnly
         />
@@ -175,7 +175,7 @@ class MyIcon extends React.Component {
         </Heading>
         <CodeEditor
           label={`How to use`}
-          code={example}
+          value={example}
           language="javascript"
           readOnly
         />

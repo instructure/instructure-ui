@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
-
-let CodeMirror, cm
+import { Controlled as CodeMirror } from 'react-codemirror2'
 
 if (canUseDOM) {
   require('codemirror/mode/jsx/jsx')
@@ -31,13 +30,6 @@ if (canUseDOM) {
   require('codemirror/mode/css/css')
   require('codemirror/mode/htmlmixed/htmlmixed')
   require('codemirror/mode/markdown/markdown')
-
-  cm = require('codemirror')
-  CodeMirror = require('react-codemirror')
-  CodeMirror.defaultOptions = cm.defaults
-} else {
-  CodeMirror = () => null
-  CodeMirror.defaultOptions = {}
 }
 
 export default CodeMirror
