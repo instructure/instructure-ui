@@ -134,14 +134,14 @@ const ${displayName || resource.name} = require('${requirePath}')
         <Container margin="0 0 small 0" display="block">
           <CodeEditor
             label={`How to install ${title}`}
-            code={`yarn add ${packageName}`}
+            value={`yarn add ${packageName}`}
             language="shell"
             readOnly
           />
         </Container>
         <CodeEditor
           label={`How to use ${title}`}
-          code={example}
+          value={example}
           language="javascript"
           readOnly
         />

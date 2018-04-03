@@ -30,6 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import uid from '@instructure/ui-utils/lib/uid'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -40,6 +41,10 @@ import CodeMirror from './codemirror'
 category: components
 ---
 **/
+
+@deprecated('5.1.0', {
+  code: 'value'
+})
 @themeable(theme, styles)
 export default class CodeEditor extends Component {
   static propTypes = {
@@ -58,25 +63,34 @@ export default class CodeEditor extends Component {
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
     options: PropTypes.object,
-    code: PropTypes.string,
-    attachment: PropTypes.oneOf(['bottom', 'top'])
+    attachment: PropTypes.oneOf(['bottom', 'top']),
+    /**
+    * value to set on initial render
+    */
+    defaultValue: PropTypes.string,
+    /**
+    * the selected value (when controlled via the `onChange` prop)
+    */
+    value: PropTypes.string
   }
 
   static defaultProps = {
     language: 'jsx',
     readOnly: false,
-    onChange: function () {},
     options: {
-      ...CodeMirror.defaults,
-      inputStyle: 'contenteditable',
       styleActiveLine: true
-    },
-    code: ''
+    }
   }
 
-  constructor () {
+  constructor (props) {
     super()
     this._id = `CodeEditor__${uid()}`
+
+    if (props.value === undefined) {
+      this.state = {
+        value: props.defaultValue || props.code // eslint-disable-line react/prop-types
+      }
+    }
   }
 
   focus () {
@@ -107,6 +121,10 @@ export default class CodeEditor extends Component {
     }
   }
 
+  get value () {
+    return (this.props.value === undefined) ? this.state.value : this.props.value
+  }
+
   render () {
     const classes = {
       [styles.root]: true,
@@ -121,8 +139,17 @@ export default class CodeEditor extends Component {
             {...omitProps(this.props, CodeEditor.propTypes)}
             id={this._id}
             options={this.options}
-            defaultValue={this.props.code}
-            onChange={this.props.onChange}
+            value={this.value}
+            onBeforeChange={(editor, data, value) => {
+              if (this.props.value === undefined) {
+                this.setState({ value })
+              }
+            }}
+            onChange={(editor, data, value) => {
+              if (typeof this.props.onChange === 'function') {
+                this.props.onChange(value)
+              }
+            }}
             ref={(el) => { this.codeMirror = el }}
           />
         </label>

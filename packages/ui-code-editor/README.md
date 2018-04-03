@@ -27,7 +27,7 @@ export default MyCodeEditor = function () {
   return (
     <CodeEditor
       label='code editor'
-      code='{"foo": "bar"}'
+      defaultValue='{"foo": "bar"}'
       language='javascript'
       readOnly
     />

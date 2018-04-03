@@ -137,7 +137,7 @@ export default class Playground extends Component {
         </div>
         <CodeEditor
           label={`${this.props.title} Example Code`}
-          code={code}
+          defaultValue={code}
           onChange={this.handleChange}
           readOnly={this.props.readOnly}
           attachment="bottom"

@@ -159,9 +159,9 @@ function createRenderer () {
           return (
             <CodeEditor
               label={title}
-              code={code}
+              value={code}
               language={language}
-              readOnly={true}
+              readOnly
             />
           )
         }
