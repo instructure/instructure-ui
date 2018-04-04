@@ -317,4 +317,38 @@ describe('<TabList />', () => {
     expect(panels(0).getAttribute('aria-labelledby'))
       .to.equal(tabs(0).getAttribute('id'))
   })
-})
+
+
+  describe('with duplicate-named tabs', () => {
+    const testbedDupes = new Testbed(
+      <TabList>
+        <TabPanel title="A Tab">Contents of first tab.</TabPanel>
+        <TabPanel title="A Tab">Contents of second tab.</TabPanel>
+        <TabPanel title="A Tab" disabled>Contents of third tab.</TabPanel>
+      </TabList>
+    )
+
+    it('should still render the correct number of panels', () => {
+      const subject = testbedDupes.render()
+
+      expect(subject.find('[role="tabpanel"]')).to.have.length(3)
+    })
+  });
+
+
+  describe('with nodes as tab titles', () => {
+    const testbedNodes = new Testbed(
+      <TabList>
+        <TabPanel title={<div/>}>Contents of first tab.</TabPanel>
+        <TabPanel title={<span/>}>Contents of second tab.</TabPanel>
+        <TabPanel title={<img alt='example'/>} disabled>Contents of third tab.</TabPanel>
+      </TabList>
+    )
+
+    it('should still render the correct number of panels', () => {
+      const subject = testbedNodes.render()
+
+      expect(subject.find('[role="tabpanel"]')).to.have.length(3)
+    })
+  });
+});
