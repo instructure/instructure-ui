@@ -27,6 +27,28 @@ example: true
 </TabList>
 ```
 
+### Tabs with nodes for titles
+
+```js
+---
+example: true
+---
+<TabList defaultSelectedIndex={0}>
+  <TabPanel title={<PlaceholderIcon />}>
+    <Text>Hello World</Text>
+  </TabPanel>
+  <TabPanel title={<span><div>Stacked</div><div>{'Text divs'}</div></span>}>
+    <Text>{lorem.paragraphs()}</Text>
+  </TabPanel>
+  <TabPanel title={<span><Avatar name="User Avatar" size='x-small' />{'User Avatar'}</span>}>
+    <Text>{lorem.paragraphs()}</Text>
+  </TabPanel>
+  <TabPanel title={<Pill variant="primary" text="Pill"/>} maxHeight="10rem">
+    <Text>{lorem.paragraphs()}</Text>
+  </TabPanel>
+</TabList>
+```
+
 ### Minimal tabs
 
 To style `<TabList/>` as shown below, set the `variant` to `minimal`.
