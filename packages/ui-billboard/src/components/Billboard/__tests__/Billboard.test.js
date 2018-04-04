@@ -24,6 +24,7 @@
 
 import React from 'react'
 import Container from '@instructure/ui-container/lib/components/Container'
+import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
 import Billboard from '../index'
 
 describe('<Billboard />', () => {
@@ -41,6 +42,36 @@ describe('<Billboard />', () => {
     })
     const headline = subject.find('h2')
     expect(headline.findText('Test heading').length).to.equal(1)
+  })
+
+  it('should use medium icon size if size is small', () => {
+    const subject = testbed.render({
+      size: 'small',
+      hero: function (size) { // eslint-disable-line react/display-name
+        return <IconA11y size={size} />
+      }
+    })
+    expect(subject.find(IconA11y).props().size).to.equal('medium')
+  })
+
+  it('should use large icon size if size is medium', () => {
+    const subject = testbed.render({
+      size: 'medium',
+      hero: function (size) { // eslint-disable-line react/display-name
+        return <IconA11y size={size} />
+      }
+    })
+    expect(subject.find(IconA11y).props().size).to.equal('large')
+  })
+
+  it('should use x-large icon size if size is large', () => {
+    const subject = testbed.render({
+      size: 'large',
+      hero: function (size) { // eslint-disable-line react/display-name
+        return <IconA11y size={size} />
+      }
+    })
+    expect(subject.find(IconA11y).props().size).to.equal('x-large')
   })
 
   it('renders as a link if it has an href prop', () => {

@@ -28,10 +28,11 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-container": "^5.1.0",
-    "@instructure/ui-elements": "^5.1.0",
-    "@instructure/ui-themeable": "^5.1.0",
-    "@instructure/ui-utils": "^5.1.0",
+    "@instructure/ui-container": "^5.0.1",
+    "@instructure/ui-elements": "^5.0.1",
+    "@instructure/ui-icons": "^5.0.1",
+    "@instructure/ui-themeable": "^5.0.1",
+    "@instructure/ui-utils": "^5.0.1",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   },

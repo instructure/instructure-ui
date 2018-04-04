@@ -39,7 +39,7 @@
   padding: var(--paddingSmall);
 
   .hero {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 
   .message {
@@ -51,7 +51,7 @@
   padding: var(--paddingMedium);
 
   .hero {
-    font-size: 8rem;
+    font-size: 5rem;
   }
 
   .message {
@@ -63,7 +63,7 @@
   padding: var(--paddingLarge);
 
   .hero {
-    font-size: 12rem;
+    font-size: 10rem;
   }
 
   .message {
