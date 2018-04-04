@@ -25,7 +25,7 @@
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.4.0', null, `${changedPackageWarning(
   'ui-core',
-  'ui-elements'
-))(ContextBox)
+  'ui-layout'
+)} It has also been renamed from [ContextBox] to [ContextView].`)(ContextBox)

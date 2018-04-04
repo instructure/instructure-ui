@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
+import makeThemeVars from '../makeThemeVars'
 
-// use for consistent box shadows
+describe('makeThemeVars', () => {
+  it('given a list of variables, should append a prefix and camel case each key', () => {
+    const vars = {
+      xSmall: 'foo',
+      medium: 'bar',
+      xxLarge: 'baz'
+    }
 
-const shadows = [
-  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
-  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
-  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
-]
+    const result = makeThemeVars('margin', vars)
+    expect(result['xSmall']).to.not.exist
+    expect(result['medium']).to.not.exist
+    expect(result['xxLarge']).to.not.exist
 
-export default Object.freeze({
-  depth1: shadows[0],
-  depth2: shadows[1],
-  depth3: shadows[2],
-
-  resting: shadows[0],
-  above: shadows[1],
-  topmost: shadows[2]
+    expect(result['marginXSmall']).to.equal('foo')
+    expect(result['marginMedium']).to.equal('bar')
+    expect(result['marginXxLarge']).to.equal('baz')
+  })
 })

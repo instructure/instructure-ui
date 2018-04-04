@@ -33,11 +33,13 @@ export default MyLayout = function () {
 
 ### Components
 The `ui-layout` package contains the following components:
+- [ContextView](#ContextView)
 - [DrawerLayout](#DrawerLayout)
 - [Flex](#Flex)
 - [Grid](#Grid)
 - [Media](#Media)
 - [Position](#Position)
+- [View](#View)
 
 ### Utilities
 The `ui-layout` package contains the following utilities:

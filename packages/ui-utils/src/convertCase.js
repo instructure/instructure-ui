@@ -22,21 +22,47 @@
  * SOFTWARE.
  */
 
+import capitalizeFirstLetter from './capitalizeFirstLetter'
 
-// use for consistent box shadows
+/**
+ * ---
+ * category: utilities
+ * ---
+ * @module convertCase
+ */
 
-const shadows = [
-  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
-  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
-  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
-]
+/**
+ * Converts a hyphenated string to camel case
+ *
+ * Example inputs:
+ *  - 'foo-bar'
+ *  - 'baz-qux'
+ *
+ * Example outputs:
+ *  - 'fooBar'
+ *  - 'bazQux'
+ *
+ * @param {String} str
+ * @returns {String} Returns camel cased string
+*/
+export function camelize (str) {
+  return str.replace(/-([a-z])/g, (g) => g[1].toUpperCase())
+}
 
-export default Object.freeze({
-  depth1: shadows[0],
-  depth2: shadows[1],
-  depth3: shadows[2],
-
-  resting: shadows[0],
-  above: shadows[1],
-  topmost: shadows[2]
-})
+/**
+ * Converts a hyphenated or camel cased string to pascal case
+ *
+ * Example inputs:
+ *  - 'foo-bar'
+ *  - 'baz-qux'
+ *
+ * Example outputs:
+ *  - 'FooBar'
+ *  - 'BazQux'
+ *
+ * @param {String} str
+ * @returns {String} Returns pascal cased string
+*/
+export function pascalize (str) {
+  return capitalizeFirstLetter(camelize(str))
+}

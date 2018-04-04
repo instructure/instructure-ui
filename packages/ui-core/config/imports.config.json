@@ -45,11 +45,19 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Container",
-    "replace": "@instructure/ui-container/lib/components/Container"
+    "replace": "@instructure/ui-layout/lib/components/View"
+  },
+  {
+    "pattern": "^@instructure/ui-container/lib/components/Container",
+    "replace": "@instructure/ui-layout/lib/components/View"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ContextBox",
-    "replace": "@instructure/ui-elements/lib/components/ContextBox"
+    "replace": "@instructure/ui-layout/lib/components/ContextView"
+  },
+  {
+    "pattern": "^@instructure/ui-elements/lib/components/ContextBox",
+    "replace": "@instructure/ui-layout/lib/components/ContextView"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Dialog",

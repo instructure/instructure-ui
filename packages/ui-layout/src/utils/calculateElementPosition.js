@@ -128,16 +128,7 @@ class PositionedElement {
   }
 
   get mirroredPlacement () {
-    const [first, second] = this.placement
-    const mirror = {
-      center: 'center',
-      start: 'end',
-      end: 'start',
-      top: 'bottom',
-      bottom: 'top',
-      stretch: 'stretch'
-    }
-    return [mirror[first], second]
+    return mirrorPlacement(this.placement)
   }
 
   calculateOffset (placement) {
@@ -463,4 +454,18 @@ export function parsePlacement (placement) {
 
 function formatPlacement (placement) {
   return placement.join(' ')
+}
+
+export function mirrorPlacement (placement) {
+  const [first, second] = placement
+
+  const mirror = {
+    center: 'center',
+    start: 'end',
+    end: 'start',
+    top: 'bottom',
+    bottom: 'top',
+    stretch: 'stretch'
+  }
+  return [mirror[first], second]
 }

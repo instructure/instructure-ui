@@ -78,12 +78,12 @@ render () {
           </Button>
         </PositionTarget>
         <PositionContent>
-          <ContextBox placement={this.state.adjusted} size="small" padding="small">
+          <ContextView placement={this.state.adjusted} size="small" padding="small">
             <Heading level="h3">{placement}</Heading>
             <p>
             {fpo}
             </p>
-          </ContextBox>
+          </ContextView>
         </PositionContent>
       </Position>
     </Container>
@@ -177,7 +177,7 @@ class Example extends React.Component {
             </Button>
           </PositionTarget>
           <PositionContent>
-            <ContextBox
+            <ContextView
               placement={this.state.adjusted}
               size="small"
               padding="small"
@@ -186,7 +186,7 @@ class Example extends React.Component {
               <p>
                 {fpo}
               </p>
-            </ContextBox>
+            </ContextView>
           </PositionContent>
         </Position>
       </Container>

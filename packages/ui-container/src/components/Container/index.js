@@ -31,6 +31,8 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -183,4 +185,7 @@ class Container extends Component {
   }
 }
 
-export default Container
+export default deprecated('5.4.0', null, `${changedPackageWarning(
+  'ui-container',
+  'ui-layout'
+)} It has also been renamed from [Container] to [View].`)(Container)

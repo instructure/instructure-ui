@@ -22,21 +22,23 @@
  * SOFTWARE.
  */
 
+import { camelize } from '@instructure/ui-utils/lib/convertCase'
 
-// use for consistent box shadows
-
-const shadows = [
-  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
-  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
-  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
-]
-
-export default Object.freeze({
-  depth1: shadows[0],
-  depth2: shadows[1],
-  depth3: shadows[2],
-
-  resting: shadows[0],
-  above: shadows[1],
-  topmost: shadows[2]
-})
+/**
+ * ---
+ * category: utilities/themes
+ * ---
+ * Given a prefix and a theme object, prepends the object keys with
+ * the designated prefix and camel cases the concatenation.
+ *
+ * @param {String} prefix - a string to prepend to object keys
+ * @param {Object} vars - an object
+ * @returns {Object} a modified object with prefixed keys
+ */
+export default function makeThemeVars (prefix, vars) {
+  const themeVars = {}
+  Object.keys(vars).forEach(variable => {
+    themeVars[camelize(`${prefix}-${variable}`)] = vars[variable]
+  })
+  return themeVars
+}

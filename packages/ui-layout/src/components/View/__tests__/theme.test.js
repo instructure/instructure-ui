@@ -22,21 +22,32 @@
  * SOFTWARE.
  */
 
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
-// use for consistent box shadows
+import View from '../index'
 
-const shadows = [
-  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
-  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
-  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
-]
+describe('View.theme', () => {
+  describe('with the default theme', () => {
+    const variables = View.generateTheme()
 
-export default Object.freeze({
-  depth1: shadows[0],
-  depth2: shadows[1],
-  depth3: shadows[2],
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
 
-  resting: shadows[0],
-  above: shadows[1],
-  topmost: shadows[2]
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundInverse, variables.colorInverse)).to.be.above(3)
+    })
+  })
+
+  describe('with the high contrast canvas theme', () => {
+    const variables = View.generateTheme('canvas-high-contrast')
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundInverse, variables.colorInverse)).to.be.above(4.5)
+    })
+  })
 })

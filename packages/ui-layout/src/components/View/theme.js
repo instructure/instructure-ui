@@ -22,21 +22,37 @@
  * SOFTWARE.
  */
 
+/* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-// use for consistent box shadows
+import makeThemeVars from '@instructure/ui-themeable/lib/utils/makeThemeVars'
 
-const shadows = [
-  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
-  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
-  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
-]
+export default function generator ({ typography, colors, borders, spacing, shadows, breakpoints }) {
+  return {
+    fontSize: typography.fontSizeMedium,
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
 
-export default Object.freeze({
-  depth1: shadows[0],
-  depth2: shadows[1],
-  depth3: shadows[2],
+    color: colors.oxford,
+    background: colors.white,
+    borderColor: colors.tiara,
 
-  resting: shadows[0],
-  above: shadows[1],
-  topmost: shadows[2]
-})
+    colorInverse: colors.white,
+    backgroundInverse: colors.oxford,
+    borderColorInverse: 'transparent',
+    debugOutlineColor: colors.borderDebug,
+
+    borderStyle: borders.style,
+
+    arrowSize: '0.5rem',
+
+    xSmallMaxWidth: breakpoints.xSmall,
+    smallMaxWidth: breakpoints.small,
+    mediumMaxWidth: breakpoints.medium,
+    largeMaxWidth: breakpoints.large,
+
+    ...makeThemeVars('margin', spacing),
+    ...makeThemeVars('padding', spacing),
+    ...makeThemeVars('shadow', shadows),
+    ...makeThemeVars('border', borders)
+  }
+}
