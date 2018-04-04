@@ -2,6 +2,38 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.1.0"></a>
+# [5.1.0](https://github.com/instructure/instructure-ui/compare/v5.0.1...v5.1.0) (2018-04-04)
+
+### Deprecations
+
+#### **ui-menu: Deprecate MenuItemFlyout ([dc82765](https://github.com/instructure/instructure-ui/commit/dc82765))**
+Don't panic. You can still create menu fly-outs. In order to simplify the component
+API, the `MenuItemFlyout` component has been consolidated with `Menu`.
+
+To create fly-out menus moving forward you can replace `MenuItemFlyout` with `Menu`.
+
+See the updated [Menu](#Menu) documentation for examples.
+
+
+### Bug Fixes
+
+* **ui-forms:** remove 0.01em top padding ([14a5675](https://github.com/instructure/instructure-ui/commit/14a5675))
+* **ui-code-editor:** CodeEditor content should update when value changes ([eb7ecdd](https://github.com/instructure/instructure-ui/commit/eb7ecdd))
+* **ui-toggle-details:** iconColor should be themeable ([14e6577](https://github.com/instructure/instructure-ui/commit/14e6577))
+
+
+### Features
+
+* **DateTimeInput:** new DateTimeInput component ([2aaf29b](https://github.com/instructure/instructure-ui/commit/2aaf29b))
+
+
+### Performance Improvements
+
+* **ui-utils:** Replace shortid with nanoid ([5d0a93e](https://github.com/instructure/instructure-ui/commit/5d0a93e))
+
+
+
 <a name="5.0.1"></a>
 ## [5.0.1](https://github.com/instructure/instructure-ui/compare/v5.0.0...v5.0.1) (2018-04-02)
 
@@ -112,7 +144,7 @@ in dev and test environments that will also tell you what the new package is for
 need to update your package.json file manually to add the new packages.
 
 #### **PopoverMenu ([893f628](https://github.com/instructure/instructure-ui/commit/893f6289d2bb9ca0dee0327b0e75759e7d5dc074))**
-Speaking of `ui-core`... `PopoverMenu` will remain in ui-core *but* it does not make the move to the new `ui-menu` package on its own, PopoverMenu functionality has now been consolidated into [Menu](#Menu). By assigning a node to the `trigger` prop it will create a menu from the triggering element (ie: <Button>). 
+Speaking of `ui-core`... `PopoverMenu` will remain in ui-core *but* it does not make the move to the new `ui-menu` package on its own, PopoverMenu functionality has now been consolidated into [Menu](#Menu). By assigning a node to the `trigger` prop it will create a menu from the triggering element (ie: <Button>).
 
 #### **Close Buttons**
 
