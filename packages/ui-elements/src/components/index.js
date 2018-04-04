@@ -23,7 +23,6 @@
  */
 export Avatar from './Avatar'
 export Badge from './Badge'
-export ContextBox from './ContextBox'
 export Heading from './Heading'
 export Img from './Img'
 export Link from './Link'

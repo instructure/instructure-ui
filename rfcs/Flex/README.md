@@ -141,7 +141,7 @@ Notes:
 - The FlexItem component inherits all View component properties but will override `width` and `height` if necessary.
 
 ### Dependencies
-- ui-view
+- ui-layout
 - ui-themeable
 
 ### Theme Variables

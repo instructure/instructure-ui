@@ -32,9 +32,10 @@ import PropTypes from 'prop-types'
  * @module ThemeablePropTypes
  */
 export default {
-  shadow: PropTypes.oneOf([1, 2, 3]),
+  shadow: PropTypes.oneOf(['resting', 'above', 'topmost']),
 
-  border: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
+  borderWidth: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
+  borderRadius: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
 
   background: PropTypes.oneOf(['default', 'inverse', 'transparent']),
 
@@ -90,7 +91,7 @@ export default {
   ])
 }
 
-export function shorthandPropType(validValues) {
+export function shorthandPropType (validValues) {
   return function (props, propName, componentName, location) {
     const propValue = props[propName]
 

@@ -32,6 +32,7 @@
   "dependencies": {
     "@instructure/ui-a11y": "^5.3.1",
     "@instructure/ui-container": "^5.3.1",
+    "@instructure/ui-i18n": "^5.3.1",
     "@instructure/ui-motion": "^5.3.1",
     "@instructure/ui-portal": "^5.3.1",
     "@instructure/ui-themeable": "^5.3.1",

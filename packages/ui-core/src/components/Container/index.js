@@ -25,7 +25,7 @@
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import Container from '@instructure/ui-container/lib/components/Container'
 
-export default deprecated('5.0.0', null, changedPackageWarning(
+export default deprecated('5.4.0', null, `${changedPackageWarning(
   'ui-core',
-  'ui-container'
-))(Container)
+  'ui-layout'
+)} It has also been renamed from [Container] to [View].`)(Container)

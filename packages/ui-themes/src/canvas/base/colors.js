@@ -78,7 +78,9 @@ export function makeFunctionalColors (colors) {
     borderInfo: colors.brand,
     borderSuccess: colors.shamrock,
     borderDanger: colors.crimson,
-    borderWarning: colors.fire
+    borderWarning: colors.fire,
+
+    borderDebug: colors.crimson
   }
 }
 

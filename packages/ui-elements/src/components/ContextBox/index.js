@@ -30,6 +30,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -41,7 +42,7 @@ category: components
 ---
  **/
 @themeable(theme, styles)
-export default class ContextBox extends Component {
+class ContextBox extends Component {
   static propTypes = {
     children:  PropTypes.node.isRequired,
     variant: PropTypes.oneOf(['default', 'inverse']),
@@ -158,3 +159,8 @@ export default class ContextBox extends Component {
     )
   }
 }
+
+export default deprecated('5.4.0', null, `${changedPackageWarning(
+  'ui-elements',
+  'ui-layout'
+)} It has also been renamed from [ContextBox] to [ContextView].`)(ContextBox)

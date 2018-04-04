@@ -1,0 +1,72 @@
+.root {
+  box-sizing: border-box;
+  font-size: var(--fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  border-style: var(--borderStyle);
+}
+
+.display--block {
+  display: block;
+}
+
+.display--inline-block {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.textAlign--start {
+  text-align: start;
+}
+
+.display--flex {
+  display: flex;
+}
+
+.display--inline-flex {
+  display: inline-flex;
+}
+
+.textAlign--center {
+  text-align: center;
+}
+
+.textAlign--end {
+  text-align: end;
+}
+
+.debug {
+  outline: 0.0625rem dashed var(--debugOutlineColor);
+}
+
+.background--default {
+  color: var(--color);
+  background: var(--background);
+  border-color: var(--borderColor);
+}
+
+.background--inverse {
+  color: var(--colorInverse);
+  background: var(--backgroundInverse);
+  border-color: var(--borderColorInverse);
+}
+
+.size--x-small {
+  max-width: var(--xSmallMaxWidth);
+}
+
+.size--small {
+  max-width: var(--smallMaxWidth);
+}
+
+.size--medium {
+  max-width: var(--mediumMaxWidth);
+}
+
+.size--large {
+  max-width: var(--largeMaxWidth);
+}
+
+.size--fullscreen {
+  max-width: 100vw;
+}
