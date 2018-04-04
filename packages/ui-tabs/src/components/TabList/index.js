@@ -241,13 +241,13 @@ export default class TabList extends Component {
     return this._tabs[index]
   }
 
-  createScreenReaderTab (index, id, key, props) {
+  createScreenReaderTab (index, id, props) {
     return createElement(Tab, {
       variant: 'screenreader-only',
       ref: (c) => {
         this._srTabs[index] = c
       },
-      key: `sr-tab-${key}`,
+      key: `sr-tab-${id}`,
       id: `sr-tab-${id}`,
       controls: `panel-${id}`,
       index,
@@ -259,7 +259,7 @@ export default class TabList extends Component {
     })
   }
 
-  createTab (index, id, key, selected, props) {
+  createTab (index, id, selected, props) {
     const focus = selected && this.state.focus
 
     return createElement(Tab, {
@@ -270,7 +270,7 @@ export default class TabList extends Component {
           props.tabRef(c)
         }
       },
-      key: `tab-${key}`,
+      key: `tab-${id}`,
       id: `tab-${id}`,
       controls: `panel-${id}`,
       index,
@@ -284,7 +284,7 @@ export default class TabList extends Component {
     })
   }
 
-  clonePanel (index, id, key, selected, panel) {
+  clonePanel (index, id, selected, panel) {
     return safeCloneElement(panel, {
       ref: (c) => {
         this._panels[index] = c
@@ -292,7 +292,7 @@ export default class TabList extends Component {
       id: `panel-${id}`,
       labelledBy: `tab-${id}`,
       selected,
-      key: `panel-${key}`,
+      key: `panel-${id}`,
       variant: this.props.variant,
       padding: panel.props.padding || this.props.padding,
       textAlign: panel.props.textAlign || this.props.textAlign
@@ -313,20 +313,20 @@ export default class TabList extends Component {
         // render screen reader only tabs before the selected tab
         if (selected) {
           for (let i = 0; i < index; i++) {
-            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props.title, tabs[i].props))
+            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props))
           }
         }
 
-        children.push(this.createTab(index, id, child.props.title, selected, child.props))
+        children.push(this.createTab(index, id, selected, child.props))
 
         // render screen reader only tabs after the selected tab
         if (selected) {
           for (let i = index + 1; i < count; i++) {
-            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props.title, tabs[i].props))
+            children.push(this.createScreenReaderTab(i, ids[i], tabs[i].props))
           }
         }
 
-        children.push(this.clonePanel(index, id, child.props.title, selected, child))
+        children.push(this.clonePanel(index, id, selected, child))
       } else {
         children.push(child)
       }
