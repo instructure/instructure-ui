@@ -49,7 +49,7 @@ class Billboard extends Component {
     /**
     * Provide an <Img> component or Instructure Icon for the hero image
     */
-    hero: PropTypes.element,
+    hero: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
     /**
     * If you're using an icon, this prop will size it. Also sets the font-size
     * of the headline and message.
@@ -119,6 +119,31 @@ class Billboard extends Component {
     )
   }
 
+  get heroIsFunction () {
+    return typeof this.props.hero === 'function'
+  }
+
+  get SVGIconSize () {
+    const size = this.props.size
+
+    // serve up appropriate SVGIcon size for each Billboard size
+    if (size === 'small') {
+      return 'medium'
+    } else if (size === 'large') {
+      return 'x-large'
+    } else {
+      return 'large'
+    }
+  }
+
+  renderHero () {
+    if (this.heroIsFunction) {
+      return this.props.hero(this.SVGIconSize)
+    } else {
+      return this.props.hero
+    }
+  }
+
   renderContent () {
     const {
       heading,
@@ -128,7 +153,7 @@ class Billboard extends Component {
 
     return (
       <span className={styles.content}>
-        {hero && <span className={styles.hero}>{hero}</span>}
+        {hero && <span className={styles.hero}>{this.renderHero()}</span>}
         {heading && this.renderHeading()}
         {message && <span className={styles.message}>{message}</span>}
       </span>

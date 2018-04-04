@@ -17,8 +17,13 @@ example: true
 
 If Billboard has an `href` prop set, it will render as a link;
 if an `onClick` prop is set, the component will render as a button.
-Use the `message` prop for your link or button text/call to action.
-Use the `size` prop to adjust the size of the icon and text.
+
+Use the `message` prop for your link or button text/call to action, and
+the `size` prop to adjust the size of the icon and text.
+
+Pass [Instructure icons](#icons-react) to the `hero` property via a function
+(see examples), and they will be sized correctly based on the Billboard's
+`size`.
 
 ```js
 ---
@@ -35,7 +40,8 @@ example: true
         onClick={function () {
           alert("This Billboard was clicked!")
         }}
-        hero={<IconPlus />} />
+        hero={(size) => <PlaceholderIcon size={size} />}
+      />
 
     </GridCol>
     <GridCol>
@@ -43,7 +49,8 @@ example: true
       <Billboard
         message="Click this link"
         href="http://instructure.com"
-        hero={<PlaceholderIcon />} />
+        hero={(size) => <PlaceholderIcon size={size} />}
+      />
 
     </GridCol>
     <GridCol>
@@ -54,7 +61,8 @@ example: true
         onClick={function () {
           alert("This Billboard was clicked!")
         }}
-        hero={<IconPlus />} />
+        hero={(size) => <PlaceholderIcon size={size} />}
+      />
 
     </GridCol>
   </GridRow>

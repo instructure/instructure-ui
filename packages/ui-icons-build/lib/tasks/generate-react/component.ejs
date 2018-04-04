@@ -8,6 +8,10 @@ export default class <%= name %> extends Component {
   static deprecated = true;
   <% } %>
 
+  static propTypes = {
+    ...SVGIcon.propTypes
+  }
+
   render () {
     <% if (deprecated) { %>
     if (process.env.NODE_ENV !== 'production') {
