@@ -21,18 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export Avatar from './Avatar'
-export Badge from './Badge'
-export Heading from './Heading'
-export Img from './Img'
-export Link from './Link'
-export List, { ListItem } from './List'
-export MetricsList, { MetricsListItem } from './MetricsList'
-export Pill from './Pill'
-export Progress, { ProgressBar, ProgressCircle } from './Progress'
-export Rating from './Rating'
-export Spinner from './Spinner'
-export Table from './Table'
-export Tag from './Tag'
-export Text from './Text'
-export TruncateText from './TruncateText'
+
+
+/**
+ * ---
+ * parent: TruncateText
+ * ---
+ * Removes given characters, such as whitespace and punctuation, from either end of a string.
+ *
+ * @param {string} string The string to clean.
+ * @param {string[]} ignore Array of characters to remove.
+ * @param {boolean} start Whether or not to clean start of string.
+ * @param {boolean} end Whether or not to clean end of string.
+ * @param {boolean} repeat=false Do a thorough clean.
+ */
+export default function cleanString (string, ignore, start = true, end = true, repeat = false) {
+  let text = string
+  let firstChar = text.charAt(0)
+  let lastChar = text.slice(-1)
+
+  if (start && ignore.indexOf(firstChar) !== -1) {
+    text = text.slice(1)
+  }
+
+  if (end && ignore.indexOf(lastChar) !== -1) {
+    text = text.slice(0, -1)
+  }
+
+  if (repeat) {
+    text = cleanString(text, ignore, start, end, false)
+  }
+
+  return text
+}

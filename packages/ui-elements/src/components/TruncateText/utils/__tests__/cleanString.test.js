@@ -21,18 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export Avatar from './Avatar'
-export Badge from './Badge'
-export Heading from './Heading'
-export Img from './Img'
-export Link from './Link'
-export List, { ListItem } from './List'
-export MetricsList, { MetricsListItem } from './MetricsList'
-export Pill from './Pill'
-export Progress, { ProgressBar, ProgressCircle } from './Progress'
-export Rating from './Rating'
-export Spinner from './Spinner'
-export Table from './Table'
-export Tag from './Tag'
-export Text from './Text'
-export TruncateText from './TruncateText'
+
+import cleanString from '../cleanString'
+
+describe('cleanSring', () => {
+  it('should remove spaces from start and end of string', () => {
+    const string = ' Hello world '
+
+    const newString = cleanString(string, [' '])
+    expect(newString).to.equal('Hello world')
+  })
+
+  it('should remove spaces from only the end of string', () => {
+    const string = ' Hello world '
+
+    const newString = cleanString(string, [' '], false)
+    expect(newString).to.equal(' Hello world')
+  })
+
+  it('should remove spaces and commas', () => {
+    const string = ' Hello world,'
+
+    const newString = cleanString(string, [' ', ','])
+    expect(newString).to.equal('Hello world')
+  })
+
+
+  it('should do a thorough cleaning', () => {
+    const string = 'Hello world. '
+
+    const newString = cleanString(string, [' ','.'], false, true, true)
+    expect(newString).to.equal('Hello world')
+  })
+})

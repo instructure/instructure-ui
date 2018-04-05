@@ -46,6 +46,7 @@ The `ui-elements` package contains the following:
 - [Table](#Table)
 - [Tag](#Tag)
 - [Text](#Text)
+- [TruncateText](#TruncateText)
 
 ### Contribute
 

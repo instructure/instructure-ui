@@ -21,18 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export Avatar from './Avatar'
-export Badge from './Badge'
-export Heading from './Heading'
-export Img from './Img'
-export Link from './Link'
-export List, { ListItem } from './List'
-export MetricsList, { MetricsListItem } from './MetricsList'
-export Pill from './Pill'
-export Progress, { ProgressBar, ProgressCircle } from './Progress'
-export Rating from './Rating'
-export Spinner from './Spinner'
-export Table from './Table'
-export Tag from './Tag'
-export Text from './Text'
-export TruncateText from './TruncateText'
+
+/**
+ * ---
+ * category: utilities
+ * ---
+ * Deep clones an array with sub arrays
+ *
+ * @param {Array} arr
+ * @returns {Array} Returns a copy of the array
+*/
+
+export default function cloneArray (arr) {
+  let copy
+  if (Array.isArray(arr)) {
+    copy = arr.slice(0)
+    for (let i = 0; i < copy.length; i++) {
+      copy[i] = cloneArray(copy[i])
+    }
+    return copy
+  } else {
+    return arr
+  }
+}
