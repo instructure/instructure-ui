@@ -32,7 +32,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import { FormFieldMessages } from '../FormField'
 import FormPropTypes from '../../utils/FormPropTypes'
@@ -107,7 +107,7 @@ class Checkbox extends Component {
       this.state.checked = !!props.defaultChecked
     }
 
-    this._defaultId = `Checkbox__${uid()}`
+    this._defaultId = generateElementId('Checkbox')
   }
 
   handleChange = (e) => {

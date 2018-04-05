@@ -36,7 +36,7 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import transformSelection from '@instructure/ui-utils/lib/dom/transformSelection'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import themeable from '@instructure/ui-themeable'
 
@@ -135,7 +135,7 @@ class NumberInput extends Component {
 
   constructor (props) {
     super()
-    this._defaultId = `NumberInput_${uid()}`
+    this._defaultId = generateElementId('NumberInput')
   }
 
   _input = null

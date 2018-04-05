@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -113,7 +113,7 @@ export default class PopoverMenu extends Component {
       this.state.show = props.defaultShow
     }
 
-    this.labelId = `PopoverMenu__${uid()}`
+    this.labelId = generateElementId('PopoverMenu')
     this.raf = []
   }
 

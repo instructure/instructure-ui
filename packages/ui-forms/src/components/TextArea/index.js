@@ -35,7 +35,7 @@ import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimatio
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import px from '@instructure/ui-utils/lib/px'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -126,7 +126,7 @@ class TextArea extends Component {
   constructor () {
     super()
 
-    this._defaultId = `TextArea__${uid()}`
+    this._defaultId = generateElementId('TextArea')
   }
 
   componentDidMount () {

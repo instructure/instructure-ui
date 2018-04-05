@@ -30,7 +30,7 @@ import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -71,7 +71,7 @@ export default class Spinner extends Component {
   constructor (props) {
     super()
 
-    this.titleId = `Spinner__${uid()}`
+    this.titleId = generateElementId('Spinner')
   }
 
   radius () {

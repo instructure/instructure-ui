@@ -31,7 +31,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
@@ -76,7 +76,7 @@ export default class Tooltip extends Component {
   constructor (props) {
     super()
 
-    this._id = `Tooltip__${uid()}`
+    this._id = generateElementId('Tooltip')
   }
 
   renderTrigger () {

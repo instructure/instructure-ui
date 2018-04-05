@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
-import generate from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import VideoPlayerControls from './VideoPlayerControls'
 import Loading from '../MediaCapture/Loading'
@@ -84,7 +84,7 @@ class VideoPlayer extends Component {
       state: PAUSED,
       loadingSrc: true,
       showControls: true,
-      videoId: generate()
+      videoId: generateElementId('VideoPlayer')
     }
   }
 

@@ -30,7 +30,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -100,8 +100,8 @@ class TextInput extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = `TextInput_${uid()}`
-    this._messagesId = `TextInput__messages-${uid()}`
+    this._defaultId = generateElementId('TextInput')
+    this._messagesId = generateElementId('TextInput-messages')
   }
 
   /**

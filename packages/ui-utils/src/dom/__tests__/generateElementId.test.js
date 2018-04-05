@@ -22,19 +22,16 @@
  * SOFTWARE.
  */
 
-import generate from 'nanoid/generate'
+import generateElementId from '../generateElementId'
 
-/**
- * ---
- * category: utilities
- * ---
- * Generate a unique id. For valid HTML element IDs use [generateElementId](#generateElementId)
- *
- * @module uid
- * @param {String} alphabet a custom alphabet (e.g. '1234567890abcdef')
- * @param {Number} idLength id length
- * @returns {String} a unique id
-*/
-export default function uid(alphabet, idLength) {
-  return generate(alphabet, idLength)
-}
+describe('generateElementId', () => {
+  it('generates a valid element id', () => {
+    expect(() => { document.querySelector(generateElementId()) }).to.not.throw(Error)
+  })
+  it('provides a default prefix', () => {
+    expect(generateElementId()).to.startWith('el__')
+  })
+  it('adds a custom prefix', () => {
+    expect(generateElementId('myPrefix')).to.startWith('myPrefix__')
+  })
+})

@@ -34,7 +34,7 @@ import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown
 import themeable from '@instructure/ui-themeable'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -114,7 +114,7 @@ class ToggleDetails extends Component {
       expanded: this.isControlled(props) ? props.expanded : !!props.defaultExpanded
     }
 
-    this._contentId = `ToggleDetails__${uid()}`
+    this._contentId = generateElementId('ToggleDetails')
   }
 
   shouldAnimateContent = false

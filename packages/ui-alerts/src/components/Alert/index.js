@@ -43,7 +43,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -219,7 +219,7 @@ export default class Alert extends Component {
   createScreenreaderAlert () {
     const liveRegion = this.getLiveRegion()
     if (liveRegion) {
-      this.srid = uid()
+      this.srid = generateElementId('Alert')
 
       const div = document.createElement('div')
       div.setAttribute('id', this.srid)

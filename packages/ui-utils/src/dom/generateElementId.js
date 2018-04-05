@@ -21,20 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import generate from 'nanoid/generate'
+import uid from '../uid'
 
 /**
  * ---
  * category: utilities
  * ---
- * Generate a unique id. For valid HTML element IDs use [generateElementId](#generateElementId)
+ * Generate a valid unique id for a DOM element.
  *
- * @module uid
- * @param {String} alphabet a custom alphabet (e.g. '1234567890abcdef')
- * @param {Number} idLength id length
+ * @module generateElementId
+ * @param {String} prefix a custom prefix
  * @returns {String} a unique id
 */
-export default function uid(alphabet, idLength) {
-  return generate(alphabet, idLength)
+export default function generateElementId (prefix = 'el') {
+  return `${prefix}__${uid('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-0123456789', 7)}`
 }

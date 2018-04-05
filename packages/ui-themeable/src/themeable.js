@@ -28,7 +28,7 @@ import ReactDOM from 'react-dom'
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import warning from '@instructure/ui-utils/lib/warning'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
@@ -87,7 +87,7 @@ export default function themeable (theme, styles = {}) {
     const displayName = getDisplayName(ComposedComponent)
 
     const contextKey = Symbol(displayName)
-    const componentId = uniqueId(displayName)
+    const componentId = generateElementId(displayName)
 
     const template = (typeof styles.template === 'function') ? styles.template : () => {
       warning(
@@ -121,7 +121,7 @@ export default function themeable (theme, styles = {}) {
         super(props, context)
 
         this._themeCache = null
-        this._instanceId = uniqueId(displayName)
+        this._instanceId = generateElementId(displayName)
       }
 
       static displayName = displayName
@@ -207,8 +207,12 @@ export default function themeable (theme, styles = {}) {
           defaultTheme,
           componentId,
           template, // for IE 11
-          this._instanceId // for IE 11
+          this.scope // for IE 11
         )
+      }
+
+      get scope () {
+        return this._instanceId
       }
 
       get theme () {
@@ -252,8 +256,3 @@ export default function themeable (theme, styles = {}) {
 * @return {Object} A theme config to use with `<ApplyTheme />`
 */
 themeable.generateTheme = generateTheme
-
-function uniqueId (displayName) {
-  const id = uid()
-  return process.env.DEBUG ? `${displayName}__${id}` : id
-}

@@ -54,6 +54,11 @@ describe('@themeable', () => {
 
   const testbed = new Testbed(<ThemeableComponent />)
 
+  it('generates a valid component scope', () => { // for IE/Edge
+    const component = testbed.render().instance()
+    expect(() => { document.querySelector(`#${component.scope}`) }).to.not.throw(Error)
+  })
+
   it('allows configuration through props', () => {
     const theme = {
       textColor: 'purple'

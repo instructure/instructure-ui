@@ -30,7 +30,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
@@ -100,7 +100,7 @@ export default class MenuItemGroup extends Component {
       }
     }
 
-    this._labelId = `MenuItemGroup__${uid()}`
+    this._labelId = generateElementId('MenuItemGroup')
   }
 
   handleSelect = (e, value, selected, item) => {

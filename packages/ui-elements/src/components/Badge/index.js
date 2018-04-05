@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -94,7 +94,7 @@ class Badge extends Component {
 
   constructor (props) {
     super(props)
-    this._defaultId = `Badge__${uid()}`
+    this._defaultId = generateElementId('Badge')
   }
 
   countOverflow () {
