@@ -71,6 +71,7 @@ example: true
 ```
 
 ### Select with default value set using `defaultOption`
+Select with `formatSelectedOption` configured to show a `Badge` component in front of label
 
 ```js
 ---
@@ -93,6 +94,14 @@ example: true
   <Select
     label="Multiple"
     defaultOption={['foo', 'bar']}
+    formatSelectedOption={option => {
+     return (
+       <span>
+         <Badge type="notification" variant={option.label === 'Foo' ? "primary" : "success"} standalone margin="0 xx-small xxx-small 0" />
+         {option.label}
+       </span>
+     )}
+    }
     multiple
     onChange={(event, options) => console.log(options)}
   >
