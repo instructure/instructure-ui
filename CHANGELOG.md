@@ -8,8 +8,7 @@ All notable changes to this project will be documented in this file. See [standa
 
 ### Bug Fixes
 
-* **ui-utils:** Generated element ids can't start with a number ([b2a913a](https://github.com/instructure/instructure-ui/commit/b2a913a))
-
+* **ui-utils:** Generated element ids can't start with a number ([c6e159e](https://github.com/instructure/instructure-ui/commit/c6e159e))
 
 
 <a name="5.1.0"></a>
