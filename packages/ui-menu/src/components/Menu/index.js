@@ -28,7 +28,7 @@ import keycode from 'keycode'
 
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
@@ -181,7 +181,7 @@ class Menu extends Component {
   _popover = null
   _trigger = null
   _menu = null
-  _labelId = `Menu__${uid()}`
+  _labelId = generateElementId('Menu')
   _activeSubMenu = null
 
   static childContextTypes = MenuContextTypes

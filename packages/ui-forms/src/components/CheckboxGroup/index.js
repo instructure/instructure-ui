@@ -25,7 +25,7 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -93,7 +93,7 @@ export default class CheckboxGroup extends Component {
       }
     }
 
-    this._messagesId = `CheckboxGroup__messages-${uid()}`
+    this._messagesId = generateElementId('CheckboxGroup-messages')
   }
 
   get hasMessages () {

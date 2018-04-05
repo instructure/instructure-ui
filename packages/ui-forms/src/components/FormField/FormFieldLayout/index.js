@@ -35,7 +35,7 @@ import warning from '@instructure/ui-utils/lib/warning'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
@@ -92,7 +92,7 @@ class FormFieldLayout extends Component {
   constructor (props) {
     super()
 
-    this._messagesId = props.messagesId || `FormFieldLayout__messages-${uid()}`
+    this._messagesId = props.messagesId || generateElementId('FormFieldLayout-messages')
 
     if (props.inline && props.layout === 'inline') {
       warning(

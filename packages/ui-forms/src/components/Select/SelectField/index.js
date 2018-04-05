@@ -34,7 +34,7 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import Position, { PositionContent } from '@instructure/ui-layout/lib/components/Position'
 import FormField from '../../FormField'
@@ -218,9 +218,9 @@ class SelectField extends Component {
   constructor () {
     super(...arguments)
 
-    this._defaultId = `Select__${uid()}`
-    this._optionsId = `Select_Options_${uid()}`
-    this._assistId = `Select__assistiveText-${uid()}`
+    this._defaultId = generateElementId('Select')
+    this._optionsId = generateElementId('Select-Options')
+    this._assistId = generateElementId('Select-assistiveText')
   }
 
   _menu = null

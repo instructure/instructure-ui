@@ -29,7 +29,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import RadioInput from '../RadioInput'
 
@@ -106,7 +106,7 @@ export default class RadioInputGroup extends Component {
       }
     }
 
-    this._messagesId = `RadioInputGroup__messages-${uid()}`
+    this._messagesId = generateElementId('RadioInputGroup-messages')
   }
 
   get hasMessages () {

@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import uid from '@instructure/ui-utils/lib/uid'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldMessages from '../FormField/FormFieldMessages'
@@ -186,8 +186,8 @@ export default class FileDrop extends Component {
   constructor (props) {
     super(props)
 
-    this.defaultId = `FileDrop__${uid()}`
-    this.messagesId = `FileDrop__messages-${uid()}`
+    this.defaultId = generateElementId('FileDrop')
+    this.messagesId = generateElementId('FileDrop-messages')
   }
 
   state = {
