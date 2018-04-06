@@ -51,7 +51,7 @@ A disabled TimeInput:
 example: true
 ---
 <div style={{ height: 350 }}>
-  <TimeInput label='Time' step={15} format='LTS' value='1986-05-17T18:00:00.000Z' disabled />
+  <TimeInput label='Time' step={15} format='LTS' defaultValue='1986-05-17T18:00:00.000Z' disabled />
 </div>
 ```
 
