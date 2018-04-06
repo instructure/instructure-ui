@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.2.0"></a>
+# [5.2.0](https://github.com/instructure/instructure-ui/compare/v5.1.1...v5.2.0) (2018-04-06)
+
+
+### Bug Fixes
+
+* **ui-forms:** Fix warning issue in [DateTimeInput](#DateTimeInput) ([1704c53](https://github.com/instructure/instructure-ui/commit/1704c53))
+* **ui-i18n:** Fix [DateTime](#DateTime). Should use moment-timezone. ([c78de61](https://github.com/instructure/instructure-ui/commit/c78de61))
+* **ui-tabs:** Fix [TabList](#TabList) support for nodes as title ([eb33479](https://github.com/instructure/instructure-ui/commit/eb33479))
+
+
+### Features
+
+* **ui-billboard:** Size icons in [Billboard](#Billboard) with [SVGIcon](#SVGIcon) size prop ([11d3bfe](https://github.com/instructure/instructure-ui/commit/11d3bfe))
+* **ui-forms:** Add readOnly to ui-forms components ([f494d0d](https://github.com/instructure/instructure-ui/commit/f494d0d))
+
+
 <a name="5.1.1"></a>
 ## [5.1.1](https://github.com/instructure/instructure-ui/compare/v5.1.0...v5.1.1) (2018-04-05)
 

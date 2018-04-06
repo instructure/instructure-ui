@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "5.1.1",
+  "version": "5.2.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
