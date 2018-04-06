@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import moment from 'moment'
+import moment from 'moment-timezone'
 import 'moment-timezone/builds/moment-timezone-with-data'
 
 /**
@@ -53,7 +53,8 @@ export function now (locale, timezone) {
 */
 export function parse (dateString, locale, timezone) {
   _checkParams(locale, timezone)
-  return moment.tz(dateString, [moment.ISO_8601, 'l', 'L', 'll', 'LL'], locale, timezone)
+  // list all available localized formats, from most specific to least
+  return moment.tz(dateString, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
 }
 
 /**

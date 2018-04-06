@@ -34,7 +34,6 @@
   "dependencies": {
     "@instructure/ui-utils": "^5.1.1",
     "decimal.js": "^9.0.1",
-    "moment": "^2.10.6",
     "moment-timezone": "^0.5.14",
     "prop-types": "^15.5.10"
   },
