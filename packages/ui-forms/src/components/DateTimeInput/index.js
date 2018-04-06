@@ -239,7 +239,7 @@ class DateTimeInput extends Component {
 
   componentWillReceiveProps (nextProps) {
     warning(
-      (nextProps.locale !== this.locale || nextProps.timezone !== this.timezone),
+      (nextProps.locale === this.locale || nextProps.timezone === this.timezone),
       'You cannot change the locale or timezone of a DateTimeInput. The new value(s) will be ignored.'
     )
 
