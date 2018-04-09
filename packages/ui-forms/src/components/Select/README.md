@@ -538,6 +538,77 @@ render(
 )
 ```
 
+### Persistent Options
+
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor () {
+    super(...arguments)
+    this.persistentOptions = [
+      { label: 'Apples', value: '0', dismissible: false },
+      { label: 'Bananas', value: '1', dismissible: false }
+    ]
+    this.state = {
+      options: [...this.persistentOptions]
+    }
+  };
+
+  handleChange = (e, opts) => {
+    const options = [
+      ...this.persistentOptions,
+      ...opts.slice(this.persistentOptions.length)
+    ];
+    console.log(options)
+    this.setState({ options });
+  }
+
+  clear = () => {
+    this.setState({
+      options: [...this.persistentOptions]
+    });
+  };
+
+  getOptionLabel () {
+    const { options } = this.state
+    return options.map((o) => o.label).join(', ')
+  };
+
+  render () {
+    return (
+      <div>
+        <Select
+          editable
+          {...this.props}
+          selectedOption={this.state.options}
+          onChange={this.handleChange}
+        >
+          <option value="0">Apples</option>
+          <option value="1">Bananas</option>
+          <option value="2">Oranges</option>
+          <option value="3">Mangoes</option>
+          <option value="4">Pears</option>
+          <option value="5">Cherries</option>
+
+        </Select>
+        <div>Value selected: {this.getOptionLabel()}</div>
+        <br />
+        <Button onClick={this.clear}>Clear Selections</Button>
+      </div>
+    )
+  }
+}
+
+render(
+  <div style={{ margin: '0 auto 4rem' }}>
+    <Example label="Choose a few fruits" multiple />
+  </div>
+)
+```
+
 ### Inline Select with a fixed width
 
 ```js
