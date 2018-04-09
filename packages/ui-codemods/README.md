@@ -33,6 +33,12 @@ This codemod helps you update your project by renaming `imports` that have chang
 jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/ui-core/config/imports.config.json
 ```
 
+To update instructure-icons imports to the new ui-icons package. Use the following:
+
+```sh
+jscodeshift -t node_modules/@instructure/ui-codemods/lib/updateImports.js <path> --config=node_modules/@instructure/ui-icons/config/imports.config.json
+```
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-codemods.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-codemods
 
