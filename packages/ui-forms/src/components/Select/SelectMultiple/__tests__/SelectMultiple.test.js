@@ -27,8 +27,6 @@ import keycode from 'keycode'
 import SelectMultiple from '../index'
 import SelectField from '../../SelectField'
 
-import Tag from '@instructure/ui-elements/lib/components/Tag'
-
 describe('<SelectMultiple />', () => {
   const preventDefault = () => {}
   const options = [{
@@ -179,7 +177,7 @@ describe('<SelectMultiple />', () => {
     expect(subject.instance().state.filterText).to.equal('')
     expect(subject.instance().state.selectedOption.length).to.equal(1)
 
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
     expect(tags).to.exist
     expect(tags.length).to.equal(1)
   })
@@ -211,7 +209,7 @@ describe('<SelectMultiple />', () => {
     expect(onChange.getCall(1).args[0].target).to.equal(2)
     expect(onChange.getCall(1).args[1]).to.eql([firstSelection, secondSelection])
 
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
     expect(tags).to.exist
     expect(tags.length).to.equal(2)
   })
@@ -239,7 +237,7 @@ describe('<SelectMultiple />', () => {
     expect(onChange.firstCall.args[0].target).to.equal(10)
     expect(onChange.firstCall.args[1]).to.eql([...selectedOption, newSelection])
 
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
     expect(tags).to.exist
     expect(tags.length).to.equal(1)
   })
@@ -255,7 +253,7 @@ describe('<SelectMultiple />', () => {
     const subject = testbed.render({ onChange, selectedOption })
     testbed.tick()
 
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
     expect(tags).to.exist
     expect(tags.length).to.equal(1)
 
@@ -264,7 +262,7 @@ describe('<SelectMultiple />', () => {
     }, () => {
       testbed.defer(() => { // wait for re-render
         testbed.tick()
-        const tags = subject.find(Tag)
+        const tags = subject.find('Tag')
         expect(tags).to.exist
         expect(tags.length).to.equal(2)
         done()
@@ -283,7 +281,7 @@ describe('<SelectMultiple />', () => {
       }]
     })
     testbed.tick()
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
     expect(tags).to.exist
     expect(tags.length).to.equal(3)
   })
@@ -301,13 +299,28 @@ describe('<SelectMultiple />', () => {
       }]
     })
     testbed.tick()
-    const tags = subject.find(Tag)
+    const tags = subject.find('Tag')
 
     tags.at(1).simulate('click', { target: 1, preventDefault })
 
     expect(onChange.firstCall).to.exist
     const selectedOptionArg = onChange.firstCall.args[1]
     expect(selectedOptionArg.length).to.equal(2)
+  })
+
+  it('allows tags to be non-dismissible', () => {
+    const onChange = testbed.stub()
+    const subject = testbed.render({
+      onChange,
+      selectedOption: [{
+        value: '4', label: 'Key Largo', dismissible: false
+      }]
+    })
+    testbed.tick()
+    const tags = subject.find('Tag')
+    const nonDismissibleTag = tags.at(0);
+    expect(nonDismissibleTag.prop('onChange')).to.equal(undefined)
+    expect(nonDismissibleTag.prop('dismissible')).to.equal(false)
   })
 
   it('recalculates selectedOption when it changes', (done) => {
