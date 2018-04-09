@@ -325,19 +325,29 @@ class SelectMultiple extends Component {
   }
 
   renderTags () {
-    return this.state.selectedOption.map((tag, index) => (
-      <Tag
-        className={styles.tag}
-        key={tag.label}
-        title={tag.label}
-        text={this.props.formatSelectedOption(tag, index)}
-        size={this.props.size}
-        onClick={(event) => this.dismiss(event, tag)}
-        dismissible
-        disabled={this.props.disabled}
-        readOnly={this.props.readOnly}
-      />
-    ))
+    return this.state.selectedOption.map((tag, index) => {
+      const isDismissible = tag.dismissible !== false;
+      let dismissibleProps = {};
+      if (isDismissible) {
+        dismissibleProps = {
+          dismissible: true,
+          onClick: (event) => this.dismiss(event, tag)
+        };
+      }
+
+      return (
+        <Tag
+          className={styles.tag}
+          key={tag.label}
+          title={tag.label}
+          text={this.props.formatSelectedOption(tag, index)}
+          size={this.props.size}
+          disabled={this.props.disabled}
+          readOnly={this.props.readOnly}
+          {...dismissibleProps}
+        />
+      )
+    })
   }
 
   renderInputs () {
