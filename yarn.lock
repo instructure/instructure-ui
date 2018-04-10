@@ -11201,6 +11201,10 @@ react-modal@^3.3.2:
     prop-types "^15.5.10"
     warning "^3.0.0"
 
+react-github-corner@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-github-corner/-/react-github-corner-2.1.0.tgz#559363f5407e932db47e942f639d165e81827be4"
+
 react-redux@^5.0.6:
   version "5.0.7"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.7.tgz#0dc1076d9afb4670f993ffaef44b8f8c1155a4c8"

@@ -45,7 +45,8 @@
     "he": "^1.1.1",
     "marked": "^0.3.12",
     "prop-types": "^15.5.10",
-    "react-axe": "^2.1.9"
+    "react-axe": "^2.1.9",
+    "react-github-corner": "^2.1.0"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",
