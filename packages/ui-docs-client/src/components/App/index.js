@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import GithubCorner from 'react-github-corner'
+
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
@@ -322,7 +324,6 @@ export default class App extends Component {
             }}
           >
             <div className={styles.main} role="main" id="main">
-
               {this.renderContent(this.state.key)}
 
               {this.renderFooter()}
@@ -345,6 +346,10 @@ export default class App extends Component {
               />
             </div>
           </Tray>
+          <GithubCorner
+            className={styles['github-corner']}
+            href="https://www.github.com/instructure/instructure-ui"
+          />
         </div>
       </div>
     )
