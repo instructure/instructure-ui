@@ -87,7 +87,7 @@ export default class App extends Component {
 
     this.state = {
       key: undefined,
-      showMenu: false,
+      showMenu: true,
       themeKey: undefined
     }
   }
