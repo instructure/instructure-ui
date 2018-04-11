@@ -77,7 +77,7 @@ export default function ({ colors, borders, spacing, typography, stacking }) {
     hrColor: colors.ash,
     linkColor: colors.electric,
     errorColor: colors.crimson,
-    propertyColor: colors.barney,
+    propertyColor: colors.textAlert,
     nodeColor: colors.fire,
     operatorColor: colors.licorice
   }
