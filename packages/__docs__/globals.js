@@ -63,7 +63,7 @@ import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import iconExample from '!svg-inline-loader!./heart_lg.svg'
-import avatarImage from './placeholder-avatar.png'
+import avatarImage from './placeholder-avatar.jpg'
 import placeholderImage from './placeholder-image'
 
 const components = Object.assign(
