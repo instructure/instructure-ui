@@ -28,7 +28,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     fontWeight: typography.fontWeightNormal,
     padding: `0 ${spacing.xSmall}`,
     height: '1.3125rem',
-    background: colors.white,
+    background: colors.backgroundLightest,
     lineHeight: typography.lineHeightFit,
     textTransformStyle: 'uppercase',
     textFontSize: typography.fontSizeXSmall,

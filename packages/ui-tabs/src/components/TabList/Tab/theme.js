@@ -30,7 +30,7 @@ export default function generator ({ colors, typography, spacing }) {
     fontSize: typography.fontSizeMedium,
 
     simpleColor: colors.brand,
-    simpleSelectedBackground: colors.white,
+    simpleSelectedBackground: colors.backgroundLightest,
     simpleSelectedBorderColor: colors.tiara,
     simpleSelectedColor: colors.oxford,
 

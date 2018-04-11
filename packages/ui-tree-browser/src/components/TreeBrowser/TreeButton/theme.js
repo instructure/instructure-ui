@@ -32,7 +32,7 @@ export default function generator ({ colors, spacing, typography, borders }) {
     descriptorMarginTop: spacing.xxxSmall,
     nameTextColor: colors.brand,
     descriptorTextColor: colors.oxford,
-    hoverTextColor: colors.white,
+    hoverTextColor: colors.textLightest,
     nameFontSizeSmall: typography.fontSizeXSmall,
     nameFontSizeMedium: typography.fontSizeSmall,
     nameFontSizeLarge: typography.fontSizeMedium,

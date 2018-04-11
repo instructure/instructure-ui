@@ -37,7 +37,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
     iconColor: colors.oxford,
 
     color: colors.oxford,
-    background: colors.white,
+    background: colors.backgroundLightest,
 
     padding: spacing.small,
 

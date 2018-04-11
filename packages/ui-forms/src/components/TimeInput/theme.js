@@ -29,7 +29,7 @@ export default function generator ({ colors, typography }) {
     fontWeight: typography.fontWeightNormal,
 
     color: colors.oxford,
-    background: colors.white
+    background: colors.backgroundLightest
   }
 }
 

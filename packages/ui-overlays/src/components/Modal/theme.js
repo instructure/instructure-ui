@@ -24,7 +24,7 @@
 
 export default function ({ colors, borders, breakpoints, shadows, stacking }) {
   return {
-    background: colors.white,
+    background: colors.backgroundLightest,
     borderColor: colors.tiara,
     borderRadius: borders.radiusMedium,
 

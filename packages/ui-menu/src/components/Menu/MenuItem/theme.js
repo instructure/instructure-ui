@@ -33,14 +33,14 @@ export default function generator ({ colors, spacing, typography }) {
     labelPadding: spacing.large,
 
     labelColor: colors.oxford,
-    background: colors.white,
+    background: colors.backgroundLightest,
 
     iconColor: colors.oxford,
     iconPadding: spacing.small,
 
     activeBackground: colors.brand,
-    activeLabelColor: colors.white,
-    activeIconColor: colors.white
+    activeLabelColor: colors.textLightest,
+    activeIconColor: colors.textLightest
   }
 }
 

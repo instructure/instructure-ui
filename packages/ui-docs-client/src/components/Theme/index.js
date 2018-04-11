@@ -143,7 +143,7 @@ export default class Theme extends Component {
             // define the theme for ${themeKey}:
             generator['${themeKey}'] = function ({ colors }) {
               return {
-                color: colors.white
+                color: colors.textLightest
               }
             }
             ${'```'}

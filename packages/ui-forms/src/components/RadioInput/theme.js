@@ -29,7 +29,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
 
-    background: colors.white,
+    background: colors.backgroundLightest,
     borderColor: colors.oxford,
     hoverBorderColor: colors.oxford,
     controlSize: '0.1875rem',
@@ -55,7 +55,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     toggleBackgroundOff: colors.ash,
     toggleBackgroundDanger: colors.crimson,
     toggleBackgroundWarning: colors.fire,
-    toggleHandleText: colors.white,
+    toggleHandleText: colors.textLightest,
     toggleSmallHeight: forms.inputHeightSmall,
     toggleMediumHeight: forms.inputHeightMedium,
     toggleLargeHeight: forms.inputHeightLarge,

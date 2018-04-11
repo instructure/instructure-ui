@@ -24,7 +24,7 @@
 
 export default function generator ({ borders, colors }) {
   return {
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundLightest,
     borderRadius: borders.radiusLarge,
     borderWidth: borders.widthMedium,
     borderStyle: 'dashed',

@@ -24,7 +24,7 @@
 
 export default function generator ({ colors, borders, forms, shadows, spacing, typography }) {
   return {
-    color: colors.white,
+    color: colors.textLightest,
     background: colors.porcelain,
     borderColor: colors.tiara,
     borderWidth: borders.widthMedium,
@@ -36,7 +36,7 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
     focusOutlineColor: colors.brand,
     focusBorderWidth: borders.widthSmall,
     focusBorderStyle: borders.style,
-    toggleBackground: colors.white,
+    toggleBackground: colors.backgroundLightest,
     toggleShadow: shadows.depth1,
     baseSizeSmall: forms.inputHeightSmall,
     baseSizeMedium: forms.inputHeightMedium,

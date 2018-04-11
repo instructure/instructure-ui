@@ -29,7 +29,7 @@ export default function ({ colors, typography, spacing, borders, stacking }) {
   return {
     padding: spacing.small,
     borderRadius: borders.radiusMedium,
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundLightest,
     border: `${borders.widthSmall} solid #eee`,
     backgroundColorInverse: '#333',
     gradientCheckerboardSize: '1rem',
@@ -50,8 +50,8 @@ export default function ({ colors, typography, spacing, borders, stacking }) {
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
     fontSizeError: typography.fontSizeSmall,
     backgroundError: colors.crimson,
-    colorError: colors.white,
-    toolbarColor: colors.white,
+    colorError: colors.textLightest,
+    toolbarColor: colors.textLightest,
     toolbarBackground: '#0084D1'
   }
 }

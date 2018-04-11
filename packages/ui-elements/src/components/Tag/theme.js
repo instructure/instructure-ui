@@ -79,7 +79,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
       borderRadius: borders.radiusMedium,
       iconColor: colors.ash,
       iconHoverColor: colors.ash,
-      mainColor: colors.white,
+      mainColor: colors.textLightest,
       textColor: colors.licorice
     })
   }
@@ -87,7 +87,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    defaultBackground: colors.white,
+    defaultBackground: colors.backgroundLightest,
     defaultBorderColor: colors.licorice
   }
 }

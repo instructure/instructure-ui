@@ -25,7 +25,7 @@
 export default function generator ({ colors, borders, spacing, typography, shadows }) {
   return {
     color: colors.licorice,
-    background: colors.white,
+    background: colors.backgroundLightest,
     marginTop: spacing.small,
 
     borderRadius: borders.radiusMedium,
@@ -41,8 +41,8 @@ export default function generator ({ colors, borders, spacing, typography, shado
     closeButtonMarginTop: spacing.xSmall,
     closeButtonMarginRight: spacing.xxSmall,
 
-    iconColor: colors.white,
-    iconBackground: colors.white,
+    iconColor: colors.textLightest,
+    iconBackground: colors.backgroundLightest,
 
     successBorderColor: colors.shamrock,
     successIconBackground: colors.shamrock,

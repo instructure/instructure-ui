@@ -23,7 +23,7 @@
  */
 export default function generator ({ colors, typography }) {
   return {
-    color: colors.white,
+    color: colors.textLightest,
     fontSize: typography.fontSizeXSmall
   }
 }
