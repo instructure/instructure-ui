@@ -24,7 +24,7 @@
 
 export default function generator ({ colors }) {
   return {
-    trackColor: colors.porcelain,
+    trackColor: colors.textLight,
     color: colors.textBrand,
 
     xSmallSize: '1.5em',

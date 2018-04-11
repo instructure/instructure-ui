@@ -70,7 +70,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
       borderColor: colors.borderMedium,
       iconColor: colors.textDarkest,
       iconHoverColor: colors.textBrand,
-      mainColor: colors.porcelain,
+      mainColor: colors.textLight,
       textColor: colors.textDarkest
     }),
 

@@ -24,7 +24,7 @@
 
 export default function ({ colors, borders, spacing }) {
   return {
-    background: colors.porcelain,
+    background: colors.backgroundLight,
     borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderRadius: borders.radiusMedium,

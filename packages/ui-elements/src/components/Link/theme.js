@@ -37,7 +37,7 @@ export default function generator ({ colors, typography, borders }) {
     outlineStyle: borders.style,
     focusOutlineColor: 'transparent',
 
-    colorInverse: colors.porcelain,
+    colorInverse: colors.textLight,
     focusInverseOutlineColor: 'transparent'
   }
 }
@@ -46,7 +46,7 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
   return {
     textDecoration: 'underline',
     focusOutlineColor: colors.borderBrand,
-    focusInverseOutlineColor: colors.porcelain
+    focusInverseOutlineColor: colors.borderLight
   }
 }
 

@@ -73,7 +73,7 @@ export default function generator ({ colors, typography }) {
     color: colors.textDarkest,
     meterColor: colors.backgroundBrand,
     doneMeterColor: colors.backgroundSuccess,
-    trackColor: colors.porcelain,
+    trackColor: colors.textLight,
 
     inverseColor: colors.textLightest,
     inverseTrackColor: 'rgba(0, 0, 0, 0.25)'
