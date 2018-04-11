@@ -41,7 +41,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
 
     arrowsContainerWidth: '2rem',
     arrowsColor: colors.textDarkest,
-    arrowsBackgroundColor: colors.porcelain,
+    arrowsBackgroundColor: colors.backgroundLight,
     arrowsHoverBackgroundColor: colors.backgroundMedium,
     arrowsBorderColor: colors.borderMedium,
     arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors.borderMedium}`,

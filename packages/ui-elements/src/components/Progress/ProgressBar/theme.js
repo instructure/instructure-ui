@@ -53,7 +53,7 @@ export default function generator ({ colors, spacing, typography }) {
     doneMeterColorStart: colors.backgroundSuccess,
     doneMeterColorEnd: lighten(colors.backgroundSuccess, 12),
 
-    trackColor: colors.porcelain,
+    trackColor: colors.textLight,
 
     inverseColor: colors.textLightest,
     inverseTrackColor: 'rgba(0, 0, 0, 0.25)'

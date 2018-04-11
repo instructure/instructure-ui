@@ -69,7 +69,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
     focusShadow: 'none',
 
     lightBackground: colors.backgroundLightest,
-    lightBorderColor: darken(colors.porcelain, 10),
+    lightBorderColor: darken(colors.borderLight, 10),
     lightColor: colors.textDarkest,
     lightHoverBackground: darken(colors.backgroundLightest, 5),
     lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
@@ -94,7 +94,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
     linkHoverColor: darken(colors.textBrand, 10),
     linkTextDecoration: 'none',
 
-    linkInverseColor: colors.porcelain,
+    linkInverseColor: colors.textLight,
     linkInverseFocusBorderColor: 'transparent',
 
     iconBorderColor: 'transparent',
@@ -113,7 +113,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'default',
-      colors.porcelain,
+      colors.backgroundLight,
       colors.textDarkest
     ),
 

@@ -50,7 +50,7 @@ export default function generator ({ colors, typography, spacing }) {
     largeLineHeight: typography.lineHeightCondensed,
     largePadding: `${spacing.small} ${spacing.medium}`,
 
-    stripedBackground: colors.porcelain
+    stripedBackground: colors.backgroundLight
   }
 }
 
