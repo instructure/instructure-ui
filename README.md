@@ -118,6 +118,19 @@ Linting is run as part of the build. If you use the Sublime Text, Atom, or VSCod
 1. Please do not include the output of `yarn build` in your commits.
 
 
+### Local Development with React Storybook
+
+InstUI uses React Storybook, components are documented as "examples" in each `__tests__` directory within each component. React Storybook has some excellent tools for local dev and documentation, including an HCM/background switcher, viewport switchers, action loggers, and many more that may be implemented as we continue to develop this feature. Here's how to use it:
+
+- `yarn storybook` - runs tests and spins up Storybook on localhost:9001
+
+Here are some links to some useful Storybook Docs:
+
+- [Storybook Docs](https://storybook.js.org/basics/introduction/)
+- [Writing Stories](https://storybook.js.org/basics/writing-stories/)
+- [Addons](https://storybook.js.org/addons/addon-gallery/)
+ 
+
 ### Documentation
 
 Please update the documentation and examples with any changes, the code and docs should always be in sync.

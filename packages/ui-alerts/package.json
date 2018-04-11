@@ -25,7 +25,8 @@
     "@instructure/ui-presets": "^5.2.0",
     "@instructure/ui-themes": "^5.2.0",
     "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "react-dom": "15.6.2",
+    "@storybook/react": "^3.4.1"
   },
   "dependencies": {
     "@instructure/ui-a11y": "^5.2.0",

@@ -1,0 +1,3 @@
+{
+  "presets": [["@instructure/ui-presets/babel", { themeable: true }]]
+}
