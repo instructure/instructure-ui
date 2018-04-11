@@ -54,7 +54,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
 
     errorColor: colors.crimson,
 
-    successColor: colors.shamrock,
+    successColor: colors.textSuccess,
 
     borderPadding: spacing.xxxSmall,
     borderColor: colors.tiara,

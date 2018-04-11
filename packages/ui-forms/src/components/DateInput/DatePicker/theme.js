@@ -47,7 +47,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     todayBorderRadius: spacing.large, // to make the today highlight circular
     todayColor: colors.textLightest,
 
-    selectedBackground: colors.shamrock,
+    selectedBackground: colors.backgroundSuccess,
     selectedColor: colors.textLightest,
 
     otherMonthColor: colors.ash,

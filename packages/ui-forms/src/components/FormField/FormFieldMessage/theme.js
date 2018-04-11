@@ -26,7 +26,7 @@ export default function generator ({ colors, typography }) {
   return {
     colorHint: colors.licorice,
     colorError: colors.crimson,
-    colorSuccess: colors.shamrock,
+    colorSuccess: colors.textSuccess,
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,

@@ -72,7 +72,7 @@ export default function generator ({ colors, typography }) {
 
     color: colors.oxford,
     meterColor: colors.brand,
-    doneMeterColor: colors.shamrock,
+    doneMeterColor: colors.backgroundSuccess,
     trackColor: colors.porcelain,
 
     inverseColor: colors.textLightest,
