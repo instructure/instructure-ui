@@ -24,6 +24,6 @@
 
 export default function generator ({ colors }) {
   return {
-    debugOutlineColor: colors.shamrock
+    debugOutlineColor: colors.borderSuccess
   }
 }

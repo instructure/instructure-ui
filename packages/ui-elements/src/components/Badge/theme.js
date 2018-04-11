@@ -29,7 +29,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     color: colors.textLightest,
     fontSize: typography.fontSizeXSmall,
     colorDanger: colors.crimson,
-    colorSuccess: colors.shamrock,
+    colorSuccess: colors.textSuccess,
     colorPrimary: colors.brand,
     size: '1.25rem',
     countOffset: '0.5rem',

@@ -44,8 +44,8 @@ export default function generator ({ colors, borders, spacing, typography, shado
     iconColor: colors.textLightest,
     iconBackground: colors.backgroundLightest,
 
-    successBorderColor: colors.shamrock,
-    successIconBackground: colors.shamrock,
+    successBorderColor: colors.borderSuccess,
+    successIconBackground: colors.backgroundSuccess,
 
     infoBorderColor: colors.electric,
     infoIconBackground: colors.electric,

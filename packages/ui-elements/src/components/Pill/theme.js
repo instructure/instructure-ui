@@ -37,7 +37,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     color: colors.ash,
     primaryColor: colors.brand,
     dangerColor: colors.crimson,
-    successColor: colors.shamrock,
+    successColor: colors.textSuccess,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style
   }

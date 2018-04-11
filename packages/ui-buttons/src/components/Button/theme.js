@@ -125,7 +125,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'success',
-      colors.shamrock,
+      colors.backgroundSuccess,
       colors.textLightest
     ),
 

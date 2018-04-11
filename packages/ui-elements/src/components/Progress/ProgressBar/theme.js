@@ -50,8 +50,8 @@ export default function generator ({ colors, spacing, typography }) {
     meterColorStart: colors.brand,
     meterColorEnd: lighten(colors.brand, 12),
 
-    doneMeterColorStart: colors.shamrock,
-    doneMeterColorEnd: lighten(colors.shamrock, 12),
+    doneMeterColorStart: colors.backgroundSuccess,
+    doneMeterColorEnd: lighten(colors.backgroundSuccess, 12),
 
     trackColor: colors.porcelain,
 
