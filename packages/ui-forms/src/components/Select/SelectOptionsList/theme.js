@@ -33,11 +33,11 @@ export default function generator ({ colors, typography, borders, spacing, stack
     lineHeight: typography.lineHeightCondensed,
 
     labelColor: colors.oxford,
-    background: colors.white,
+    background: colors.backgroundLightest,
 
     highlightedBackground: colors.brand,
     activeBackground: colors.ash,
-    activeLabelColor: colors.white,
+    activeLabelColor: colors.textLightest,
 
     padding: `${spacing.xSmall} ${spacing.small}`,
     iconPaddingEnd: spacing.small,

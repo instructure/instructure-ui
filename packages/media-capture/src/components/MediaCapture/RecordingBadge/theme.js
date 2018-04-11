@@ -24,9 +24,9 @@
 export default function generator ({ colors, spacing, typography }) {
   return {
     backgroundColor: colors.slate,
-    fontColor: colors.white,
+    fontColor: colors.textLightest,
     padding: `${spacing.xxxSmall} ${spacing.xSmall}`,
-    signalColor: colors.white,
+    signalColor: colors.backgroundLightest,
     signalSize: '0.4em',
     signalMargin: `0 ${spacing.xxSmall} 0 0`
   }

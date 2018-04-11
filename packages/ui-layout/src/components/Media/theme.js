@@ -25,7 +25,7 @@
 export default function generator ({ colors, spacing, typography }) {
   return {
     fontFamily: typography.fontFamily,
-    background: colors.white,
+    background: colors.backgroundLightest,
     color: colors.licorice,
 
     figureMargin: `0 ${spacing.small} 0 0`,

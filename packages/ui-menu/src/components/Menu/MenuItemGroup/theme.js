@@ -29,7 +29,7 @@ export default function generator ({ colors, typography, spacing }) {
     fontWeight: typography.fontWeightBold,
     padding: `${spacing.xSmall} ${spacing.small}`,
     color: colors.oxford,
-    background: colors.white
+    background: colors.backgroundLightest
   }
 }
 

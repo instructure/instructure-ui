@@ -34,7 +34,7 @@ export default function generator ({ colors, borders, typography, forms, spacing
     borderStyle: borders.style,
     borderRadius: borders.radiusMedium,
 
-    background: colors.white,
+    background: colors.backgroundLightest,
     color: colors.oxford,
 
     fontFamily: typography.fontFamily,

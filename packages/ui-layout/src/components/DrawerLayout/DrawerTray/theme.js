@@ -23,7 +23,7 @@
  */
 export default function generator ({ colors, borders, stacking, shadows, transitions }) {
   return {
-    background: colors.white,
+    background: colors.backgroundLightest,
     borderColor: colors.tiara,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,

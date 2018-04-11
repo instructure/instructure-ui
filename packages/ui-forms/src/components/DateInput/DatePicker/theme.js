@@ -29,7 +29,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     fontWeight: typography.fontWeightNormal,
 
     color: colors.oxford,
-    background: colors.white,
+    background: colors.backgroundLightest,
     borderRadius: borders.radiusMedium,
 
     labelMargin: '0',
@@ -45,10 +45,10 @@ export default function generator ({ colors, typography, borders, spacing, stack
 
     todayBackground: colors.electric,
     todayBorderRadius: spacing.large, // to make the today highlight circular
-    todayColor: colors.white,
+    todayColor: colors.textLightest,
 
     selectedBackground: colors.shamrock,
-    selectedColor: colors.white,
+    selectedColor: colors.textLightest,
 
     otherMonthColor: colors.ash,
     focusOutline: colors.brand,

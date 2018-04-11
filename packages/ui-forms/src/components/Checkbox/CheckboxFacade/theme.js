@@ -24,11 +24,11 @@
 
 export default function generator ({ colors, borders, spacing, typography }) {
   return {
-    color: colors.white,
+    color: colors.textLightest,
     borderWidth: borders.widthSmall,
     borderColor: colors.ash,
     borderRadius: borders.radiusMedium,
-    background: colors.white,
+    background: colors.backgroundLightest,
     marginRight: spacing.xSmall,
     padding: spacing.xxxSmall,
 

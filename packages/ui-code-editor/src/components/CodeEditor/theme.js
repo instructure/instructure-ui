@@ -32,7 +32,7 @@ export default function ({ colors, borders, spacing, typography, stacking }) {
     border: `${borders.widthSmall} solid ${colors.porcelain}`,
     borderRadius: borders.radiusMedium,
     focusBorderColor: colors.electric,
-    focusBoxShadow: `inset 0 0 0 1px ${colors.white}`,
+    focusBoxShadow: `inset 0 0 0 1px ${colors.borderLightest}`,
     horizontalPadding: spacing.xSmall,
     verticalPadding: spacing.xxSmall,
     color: colors.licorice,

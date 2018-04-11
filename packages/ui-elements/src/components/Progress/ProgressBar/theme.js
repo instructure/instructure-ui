@@ -55,7 +55,7 @@ export default function generator ({ colors, spacing, typography }) {
 
     trackColor: colors.porcelain,
 
-    inverseColor: colors.white,
+    inverseColor: colors.textLightest,
     inverseTrackColor: 'rgba(0, 0, 0, 0.25)'
   }
 }

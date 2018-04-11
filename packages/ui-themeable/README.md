@@ -78,7 +78,7 @@ export default function generator ({ colors }) {
     background: colors.tiara,
     color: colors.licorice,
 
-    hoverColor: colors.white,
+    hoverColor: colors.textLightest,
     hoverBackground: colors.licorice
   )
 }
@@ -101,12 +101,12 @@ If we want to make the Button transform the global theme variables differently w
 ...
 generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    background: colors.white
+    background: colors.backgroundLightest
   }
 }
 ```
 
-This will override the default Button theme and use the global theme variable `colors.white` for the
+This will override the default Button theme and use the global theme variable `colors.textLightest` for the
 value of its `background` theme variable instead of `colors.tiara`.
 
 The rest of the variables will pick up from the default Button theme generator (applying the global theme variables

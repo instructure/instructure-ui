@@ -29,7 +29,7 @@ export default function ({ colors, spacing, borders }) {
   return {
     padding: spacing.small,
     borderRadius: borders.radiusMedium,
-    backgroundColor: colors.white,
+    backgroundColor: colors.backgroundLightest,
     border: `${borders.widthSmall} solid #eee`,
     backgroundColorInverse: '#333',
     gradientCheckerboardSize: '1rem',

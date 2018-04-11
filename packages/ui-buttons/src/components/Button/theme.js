@@ -68,11 +68,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
     focusBorder: `${focusOutline} ${colors.brand}`,
     focusShadow: 'none',
 
-    lightBackground: colors.white,
+    lightBackground: colors.backgroundLightest,
     lightBorderColor: darken(colors.porcelain, 10),
     lightColor: colors.oxford,
-    lightHoverBackground: darken(colors.white, 5),
-    lightActiveBoxShadow: `${activeShadow} ${darken(colors.white, 25)}`,
+    lightHoverBackground: darken(colors.backgroundLightest, 5),
+    lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
 
     ghostBackground: 'transparent',
     ghostBorderColor: colors.brand,
@@ -82,11 +82,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.brand, 20)}`,
 
     ghostInverseBackground: 'transparent',
-    ghostInverseBorderColor: colors.white,
-    ghostInverseColor: colors.white,
-    ghostInverseHoverBackground: alpha(colors.white, 10),
-    ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.white, 20)}`,
-    ghostInverseFocusBorder: `${focusOutline} ${colors.white}`,
+    ghostInverseBorderColor: colors.borderLightest,
+    ghostInverseColor: colors.textLightest,
+    ghostInverseHoverBackground: alpha(colors.backgroundLightest, 10),
+    ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
+    ghostInverseFocusBorder: `${focusOutline} ${colors.borderLightest}`,
 
     linkColor: colors.brand,
     linkBorderColor: 'transparent',
@@ -105,9 +105,9 @@ export default function generator ({ colors, borders, forms, spacing, typography
     iconPlusTextFontSize: '1.25rem',
     iconPlusTextMargin: spacing.xxSmall,
 
-    iconInverseColor: colors.white,
-    iconInverseHoverColor: colors.white,
-    iconInverseFocusBoxShadow: `${focusShadow} ${colors.white}`,
+    iconInverseColor: colors.textLightest,
+    iconInverseHoverColor: colors.textLightest,
+    iconInverseFocusBoxShadow: `${focusShadow} ${colors.borderLightest}`,
 
     fluidWidthLineHeight: typography.lineHeightFit,
 
@@ -120,31 +120,31 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ...buttonVariant(
       'primary',
       colors.brand,
-      colors.white
+      colors.textLightest
     ),
 
     ...buttonVariant(
       'success',
       colors.shamrock,
-      colors.white
+      colors.textLightest
     ),
 
     ...buttonVariant(
       'danger',
       colors.crimson,
-      colors.white
+      colors.textLightest
     ),
 
     ...buttonVariant(
       'circlePrimary',
       colors.brand,
-      colors.white
+      colors.textLightest
     ),
 
     ...buttonVariant(
       'circleDanger',
       colors.crimson,
-      colors.white
+      colors.textLightest
     )
   }
 }
@@ -182,6 +182,6 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
   return {
     linkTextDecoration: 'underline',
     linkFocusBorderColor: colors.brand,
-    linkInverseFocusBorderColor: colors.white
+    linkInverseFocusBorderColor: colors.borderLightest
   }
 }

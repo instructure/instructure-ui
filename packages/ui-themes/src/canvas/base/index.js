@@ -59,9 +59,9 @@ export const brandVariables = {
   'ic-link-color': colors.brand,
 
   'ic-brand-button--primary-bgd': colors.brand,
-  'ic-brand-button--primary-text': colors.white,
+  'ic-brand-button--primary-text': colors.textLightest,
   'ic-brand-button--secondary-bgd': colors.licorice,
-  'ic-brand-button--secondary-text': colors.white
+  'ic-brand-button--secondary-text': colors.textLightest
 }
 
 const theme = {

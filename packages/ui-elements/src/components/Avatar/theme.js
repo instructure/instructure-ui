@@ -25,7 +25,7 @@
 export default function generator ({ colors, borders, typography }) {
   return {
     color: colors.brand,
-    background: colors.white,
+    background: colors.backgroundLightest,
     borderWidthSmall: borders.widthSmall,
     borderWidthMedium: borders.widthMedium,
     borderColor: colors.tiara,
