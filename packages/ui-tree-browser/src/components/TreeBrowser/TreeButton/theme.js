@@ -43,7 +43,7 @@ export default function generator ({ colors, spacing, typography, borders }) {
     baseSpacingMedium: spacing.small,
     baseSpacingLarge: '1rem',
     borderWidth: borders.widthSmall,
-    borderColor: colors.ash,
+    borderColor: colors.borderDark,
     textLineHeight: typography.lineHeightCondensed
   }
 }

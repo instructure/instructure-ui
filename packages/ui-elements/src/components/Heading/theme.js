@@ -46,7 +46,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     primaryInverseColor: colors.textLightest,
     primaryColor: colors.textDarkest,
 
-    secondaryColor: colors.ash,
+    secondaryColor: colors.textDark,
     secondaryInverseColor: colors.textLight,
 
     brandColor: colors.textBrand,

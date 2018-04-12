@@ -36,7 +36,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     background: colors.backgroundLightest,
 
     highlightedBackground: colors.backgroundBrand,
-    activeBackground: colors.ash,
+    activeBackground: colors.backgroundDark,
     activeLabelColor: colors.textLightest,
 
     padding: `${spacing.xSmall} ${spacing.small}`,
