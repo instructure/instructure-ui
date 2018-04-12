@@ -50,8 +50,8 @@ export default function generator ({ colors, borders, spacing, typography, shado
     infoBorderColor: colors.borderInfo,
     infoIconBackground: colors.backgroundInfo,
 
-    warningBorderColor: colors.fire,
-    warningIconBackground: colors.fire,
+    warningBorderColor: colors.borderWarning,
+    warningIconBackground: colors.backgroundWarning,
 
     dangerBorderColor: colors.borderDanger,
     dangerIconBackground: colors.backgroundDanger,
