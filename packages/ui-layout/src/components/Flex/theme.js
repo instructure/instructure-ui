@@ -25,6 +25,6 @@
 export default function generator ({ colors, typography }) {
   return {
     fontFamily: typography.fontFamily,
-    debugOutlineColor: colors.crimson
+    debugOutlineColor: colors.borderDanger
   }
 }

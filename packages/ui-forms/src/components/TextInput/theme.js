@@ -44,8 +44,8 @@ export default function generator ({ colors, typography, borders, spacing, forms
     focusBorderColor: colors.borderBrand,
     focusOutlineColor: alpha(colors.borderBrand, 50),
 
-    errorBorderColor: colors.crimson,
-    errorOutlineColor: alpha(colors.crimson, 50),
+    errorBorderColor: colors.borderDanger,
+    errorOutlineColor: alpha(colors.borderDanger, 50),
 
     placeholderColor: colors.textDark,
 

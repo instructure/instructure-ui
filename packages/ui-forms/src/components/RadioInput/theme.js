@@ -53,7 +53,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     toggleBorderWidth: borders.widthLarge,
     toggleBackgroundSuccess: colors.backgroundSuccess,
     toggleBackgroundOff: colors.backgroundDark,
-    toggleBackgroundDanger: colors.crimson,
+    toggleBackgroundDanger: colors.backgroundDanger,
     toggleBackgroundWarning: colors.fire,
     toggleHandleText: colors.textLightest,
     toggleSmallHeight: forms.inputHeightSmall,

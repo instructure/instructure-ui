@@ -52,7 +52,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     brandColor: colors.textBrand,
     warningColor: colors.fire,
 
-    errorColor: colors.crimson,
+    errorColor: colors.textDanger,
 
     successColor: colors.textSuccess,
 

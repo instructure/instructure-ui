@@ -28,7 +28,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     fontWeight: typography.fontWeightNormal,
     color: colors.textLightest,
     fontSize: typography.fontSizeXSmall,
-    colorDanger: colors.crimson,
+    colorDanger: colors.textDanger,
     colorSuccess: colors.textSuccess,
     colorPrimary: colors.textBrand,
     size: '1.25rem',

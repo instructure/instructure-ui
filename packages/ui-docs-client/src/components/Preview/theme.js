@@ -49,7 +49,7 @@ export default function ({ colors, typography, spacing, borders, stacking }) {
       ${colorCheckerboardInverse}`,
     fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
     fontSizeError: typography.fontSizeSmall,
-    backgroundError: colors.crimson,
+    backgroundError: colors.backgroundDanger,
     colorError: colors.textLightest,
     toolbarColor: colors.textLightest,
     toolbarBackground: '#0084D1'

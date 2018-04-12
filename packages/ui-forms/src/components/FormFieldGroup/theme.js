@@ -29,7 +29,7 @@ export default function ({ borders, colors, spacing }) {
     borderColor: 'transparent',
     borderRadius: borders.radiusMedium,
 
-    errorBorderColor: colors.crimson,
+    errorBorderColor: colors.borderDanger,
     errorFieldsPadding: spacing.xSmall
   }
 }
