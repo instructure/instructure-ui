@@ -43,8 +43,8 @@ describe('canvas.colors', () => {
     it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
       expect(contrast(colors.textLight, colors.backgroundDarkest)).to.be.above(3)
     })
-    it('should meet 3:1 contrast as a text color with `backgroundDark` background', () => {
-      expect(contrast(colors.textLight, colors.backgroundDark)).to.be.above(3)
+    it('should meet 3:1 contrast as a text color with `backgroundBrandSecondary` background', () => {
+      expect(contrast(colors.textLight, colors.backgroundBrandSecondary)).to.be.above(3)
     })
   })
   describe('textLightest', () => {
@@ -111,6 +111,11 @@ describe('canvas.colors', () => {
     })
     it('should meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
       expect(contrast(colors.textWarning, colors.backgroundDarkest)).to.be.above(3)
+    })
+  })
+  describe('textDanger', () => {
+    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textDanger, colors.backgroundLightest)).to.be.above(3)
     })
   })
 
@@ -189,6 +194,11 @@ describe('canvas.colors', () => {
     })
     it('should meet 3:1 contrast as a border color with `backgroundDarkest` background', () => {
       expect(contrast(colors.borderWarning, colors.backgroundDarkest)).to.be.above(3)
+    })
+  })
+  describe('borderDanger', () => {
+    it('should meet 3:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderDanger, colors.backgroundLightest)).to.be.above(3)
     })
   })
 })

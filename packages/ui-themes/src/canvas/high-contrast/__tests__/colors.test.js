@@ -101,13 +101,18 @@ describe('canvas.colors', () => {
       expect(contrast(colors.textWarning, colors.backgroundLightest)).to.be.above(4.5)
     })
   })
+  describe('textDanger', () => {
+    it('should meet 4.5:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textDanger, colors.backgroundLightest)).to.be.above(4.5)
+    })
+  })
 
   describe('borderLight', () => {
-    it('should meet 4.5:1 contrast as a border color with `backgroundLightest` background', () => {
-      expect(contrast(colors.borderLight, colors.backgroundLightest)).to.be.above(4.5)
+    it('should meet 4.5:1 contrast as a border color with `backgroundDarkest` background', () => {
+      expect(contrast(colors.borderLight, colors.backgroundDarkest)).to.be.above(4.5)
     })
-    it('should meet 4.5:1 contrast as a border color with `backgroundLight` background', () => {
-      expect(contrast(colors.borderLight, colors.backgroundLight)).to.be.above(4.5)
+    it('should meet 4.5:1 contrast as a border color with `backgroundDark` background', () => {
+      expect(contrast(colors.borderLight, colors.backgroundDark)).to.be.above(4.5)
     })
   })
   describe('borderDark', () => {
@@ -147,6 +152,11 @@ describe('canvas.colors', () => {
   describe('borderWarning', () => {
     it('should meet 4.5:1 contrast as a border color with `backgroundLightest` background', () => {
       expect(contrast(colors.borderWarning, colors.backgroundLightest)).to.be.above(4.5)
+    })
+  })
+  describe('borderDanger', () => {
+    it('should meet 4.5:1 contrast as a border color with `backgroundLightest` background', () => {
+      expect(contrast(colors.borderDanger, colors.backgroundLightest)).to.be.above(4.5)
     })
   })
 })
