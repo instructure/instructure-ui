@@ -131,7 +131,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'danger',
-      colors.crimson,
+      colors.backgroundDanger,
       colors.textLightest
     ),
 
@@ -143,7 +143,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'circleDanger',
-      colors.crimson,
+      colors.backgroundDanger,
       colors.textLightest
     )
   }

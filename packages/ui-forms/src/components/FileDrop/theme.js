@@ -33,7 +33,7 @@ export default function generator ({ borders, colors }) {
     focusBorderStyle: 'solid',
     focusBorderColor: colors.borderBrand,
     acceptedColor: colors.textBrand,
-    rejectedColor: colors.crimson
+    rejectedColor: colors.textDanger
   }
 }
 

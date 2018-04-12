@@ -28,7 +28,7 @@
 }
 
 .error {
-  background: var(--backgroundError);
+  background: var(--backgroundDanger);
   box-sizing: border-box;
   margin: 0;
   display: block;
