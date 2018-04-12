@@ -27,6 +27,6 @@ export default function generator ({ colors }) {
   return {
     meterColorStart: colors.brand,
     meterColorEnd: lighten(colors.brand, 12),
-    backgroundColor: colors.licorice
+    backgroundColor: colors.backgroundDarkest
   }
 }

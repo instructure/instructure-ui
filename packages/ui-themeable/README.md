@@ -76,10 +76,10 @@ the `theme.js` file might contain the following:
 export default function generator ({ colors }) {
   return (
     background: colors.tiara,
-    color: colors.licorice,
+    color: colors.textDarkest,
 
     hoverColor: colors.textLightest,
-    hoverBackground: colors.licorice
+    hoverBackground: colors.backgroundDarkest
   )
 }
 ```

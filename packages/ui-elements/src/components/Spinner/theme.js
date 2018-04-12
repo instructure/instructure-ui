@@ -39,7 +39,7 @@ export default function generator ({ colors }) {
     largeSize: '7em',
     largeBorderWidth: '0.75em',
 
-    inverseTrackColor: colors.licorice,
+    inverseTrackColor: colors.textDarkest,
     inverseColor: colors.brand
   }
 }

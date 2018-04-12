@@ -68,10 +68,10 @@ export default function generator ({ borders, colors, forms, spacing, typography
 
     ...tagVariant('default', {
       borderColor: colors.tiara,
-      iconColor: colors.licorice,
+      iconColor: colors.textDarkest,
       iconHoverColor: colors.brand,
       mainColor: colors.porcelain,
-      textColor: colors.licorice
+      textColor: colors.textDarkest
     }),
 
     ...tagVariant('inline', {
@@ -80,7 +80,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
       iconColor: colors.ash,
       iconHoverColor: colors.ash,
       mainColor: colors.textLightest,
-      textColor: colors.licorice
+      textColor: colors.textDarkest
     })
   }
 }
@@ -88,7 +88,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     defaultBackground: colors.backgroundLightest,
-    defaultBorderColor: colors.licorice
+    defaultBorderColor: colors.borderDarkest
   }
 }
 
