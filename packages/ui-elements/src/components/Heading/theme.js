@@ -57,7 +57,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     successColor: colors.textSuccess,
 
     borderPadding: spacing.xxxSmall,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style
   }

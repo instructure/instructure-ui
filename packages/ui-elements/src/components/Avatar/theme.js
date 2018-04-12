@@ -28,7 +28,7 @@ export default function generator ({ colors, borders, typography }) {
     background: colors.backgroundLightest,
     borderWidthSmall: borders.widthSmall,
     borderWidthMedium: borders.widthMedium,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightBold
   }

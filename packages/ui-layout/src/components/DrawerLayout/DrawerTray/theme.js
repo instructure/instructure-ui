@@ -24,7 +24,7 @@
 export default function generator ({ colors, borders, stacking, shadows, transitions }) {
   return {
     background: colors.backgroundLightest,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
     zIndex: stacking.topmost,

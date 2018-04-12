@@ -24,7 +24,7 @@
 
 export default function ({ colors, borders, spacing }) {
   return {
-    background: colors.tiara,
+    background: colors.backgroundMedium,
     height: borders.widthSmall,
     margin: `0 ${spacing.small}`
   }

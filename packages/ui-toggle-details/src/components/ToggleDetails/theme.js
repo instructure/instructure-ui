@@ -48,7 +48,7 @@ export default function generator ({ colors, spacing, borders, typography }) {
     filledBackgroundColor: colors.porcelain,
     filledBorderWidth: borders.widthSmall,
     filledBorderStyle: borders.style,
-    filledBorderColor: colors.tiara,
+    filledBorderColor: colors.borderMedium,
     filledBorderRadius: borders.radiusMedium,
     filledPadding: spacing.small
   }

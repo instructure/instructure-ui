@@ -31,7 +31,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
 
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
     color: colors.textDarkest,

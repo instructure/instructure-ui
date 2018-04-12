@@ -25,7 +25,7 @@
 export default function ({ colors, borders, breakpoints, shadows, stacking }) {
   return {
     background: colors.backgroundLightest,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
     autoMinWidth: breakpoints.xSmall,
