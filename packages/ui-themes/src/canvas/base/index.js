@@ -53,12 +53,12 @@ const variables = {
 
 export const brandVariables = {
   /* Defaults for Canvas account branding variables: */
-  'ic-brand-primary': colors.brand,
+  'ic-brand-primary': colors.textBrand,
   'ic-brand-font-color-dark': colors.textDarkest,
 
-  'ic-link-color': colors.brand,
+  'ic-link-color': colors.textBrand,
 
-  'ic-brand-button--primary-bgd': colors.brand,
+  'ic-brand-button--primary-bgd': colors.backgroundBrand,
   'ic-brand-button--primary-text': colors.textLightest,
   'ic-brand-button--secondary-bgd': colors.backgroundDarkest,
   'ic-brand-button--secondary-text': colors.textLightest

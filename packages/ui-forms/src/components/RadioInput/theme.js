@@ -34,7 +34,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     hoverBorderColor: colors.oxford,
     controlSize: '0.1875rem',
 
-    focusBorderColor: colors.brand,
+    focusBorderColor: colors.borderBrand,
     focusBorderWidth: borders.widthSmall,
     focusBorderStyle: borders.style,
 

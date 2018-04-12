@@ -33,7 +33,7 @@ export default function generator ({ typography, colors, spacing }) {
     secondaryInverseColor: colors.porcelain,
 
     warningColor: colors.fire,
-    brandColor: colors.brand,
+    brandColor: colors.textBrand,
     errorColor: colors.crimson,
     successColor: colors.textSuccess,
 

@@ -23,7 +23,7 @@
  */
 export default function generator ({ colors, borders }) {
   return {
-    focusOutlineColor: colors.brand,
+    focusOutlineColor: colors.borderBrand,
     focusOutlineWeight: borders.widthMedium
   }
 }

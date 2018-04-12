@@ -61,7 +61,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     fontSizeLarge: typography.fontSizeMedium,
     padding: `0 ${spacing.small}`,
     paddingSmall: `0 ${spacing.xSmall}`,
-    focusOutlineColor: colors.brand,
+    focusOutlineColor: colors.borderBrand,
     maxWidth: '10rem',
     iconMargin: spacing.xxSmall,
     transitionTiming: '0.2s',
@@ -69,7 +69,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     ...tagVariant('default', {
       borderColor: colors.tiara,
       iconColor: colors.textDarkest,
-      iconHoverColor: colors.brand,
+      iconHoverColor: colors.textBrand,
       mainColor: colors.porcelain,
       textColor: colors.textDarkest
     }),

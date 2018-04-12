@@ -27,7 +27,7 @@ export default function ({ breakpoints, colors, borders }) {
     minWidth: breakpoints.xxSmall,
     maxWidth: breakpoints.xSmall,
     background: colors.backgroundLightest,
-    focusBorder: `1px solid ${colors.brand}`,
+    focusBorder: `1px solid ${colors.borderBrand}`,
     focusBorderRadius: borders.radiusMedium
   }
 }

@@ -43,7 +43,7 @@ export default function generator ({ colors, spacing, borders, typography }) {
     toggleBorderRadius: borders.radiusMedium,
     toggleBorderWidth: borders.widthSmall,
     toggleBorderStyle: borders.style,
-    toggleFocusBorderColor: colors.brand,
+    toggleFocusBorderColor: colors.borderBrand,
 
     filledBackgroundColor: colors.porcelain,
     filledBorderWidth: borders.widthSmall,

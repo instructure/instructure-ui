@@ -136,7 +136,7 @@ export default class Theme extends Component {
             // define the default theme:
             export default function generator ({ colors }) {
               return {
-                color: colors.brand
+                color: colors.textBrand
               }
             }
 

@@ -23,12 +23,12 @@
  */
 export default function generator ({ colors, borders, spacing }) {
   return {
-    backgroundColor: colors.brand,
+    backgroundColor: colors.backgroundBrand,
     color: colors.textLightest,
     margin: `0 ${spacing.xxSmall} 0 0`,
     border: 'none',
     padding: `0 ${spacing.small}`,
-    focusOutlineColor: colors.brand,
+    focusOutlineColor: colors.borderBrand,
     focusOutlineWeight: borders.widthMedium,
     focusBorderColor: colors.borderLightest,
     focusBorderWeight: borders.widthSmall

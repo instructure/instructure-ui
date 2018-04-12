@@ -25,8 +25,8 @@
 export default function generator ({ colors, spacing, typography }) {
   return {
     iconMargin: spacing.xxxSmall,
-    iconEmptyColor: colors.brand,
-    iconFilledColor: colors.brand,
+    iconEmptyColor: colors.textBrand,
+    iconFilledColor: colors.textBrand,
 
     smallIconFontSize: typography.fontSizeMedium,
     mediumIconFontSize: typography.fontSizeLarge,

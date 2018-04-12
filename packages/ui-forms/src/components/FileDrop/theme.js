@@ -28,11 +28,11 @@ export default function generator ({ borders, colors }) {
     borderRadius: borders.radiusLarge,
     borderWidth: borders.widthMedium,
     borderStyle: 'dashed',
-    hoverBorderColor: colors.brand,
+    hoverBorderColor: colors.borderBrand,
     focusBorderWidth: borders.widthSmall,
     focusBorderStyle: 'solid',
-    focusBorderColor: colors.brand,
-    acceptedColor: colors.brand,
+    focusBorderColor: colors.borderBrand,
+    acceptedColor: colors.textBrand,
     rejectedColor: colors.crimson
   }
 }

@@ -28,13 +28,13 @@ export default function generator ({ colors, typography, spacing, forms }) {
   return {
 
     handleSize: '1.5rem',
-    handleBackground: colors.brand,
-    handleShadowColor: darken(colors.brand, 15),
+    handleBackground: colors.backgroundBrand,
+    handleShadowColor: darken(colors.borderBrand, 15),
 
-    handleHoverBackground: colors.brand,
+    handleHoverBackground: colors.backgroundBrand,
 
-    handleFocusBackground: colors.brand,
-    handleFocusOutlineColor: alpha(colors.brand, 40),
+    handleFocusBackground: colors.backgroundBrand,
+    handleFocusOutlineColor: alpha(colors.borderBrand, 40),
     handleFocusOutlineWidth: '0.75em',
 
     trackBackground: colors.ash,

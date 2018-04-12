@@ -42,11 +42,11 @@ export default function generator ({ colors, borders, spacing, typography, forms
 
     padding: spacing.small,
 
-    focusBorderTopColor: colors.brand,
-    focusBorderRightColor: colors.brand,
-    focusBorderBottomColor: colors.brand,
-    focusBorderLeftColor: colors.brand,
-    focusOutlineColor: alpha(colors.brand, 50),
+    focusBorderTopColor: colors.borderBrand,
+    focusBorderRightColor: colors.borderBrand,
+    focusBorderBottomColor: colors.borderBrand,
+    focusBorderLeftColor: colors.borderBrand,
+    focusOutlineColor: alpha(colors.borderBrand, 50),
     boxShadowColor: 'transparent',
 
     errorBorderColor: colors.crimson,

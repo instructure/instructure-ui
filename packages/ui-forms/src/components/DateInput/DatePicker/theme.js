@@ -43,7 +43,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     cellBorderWidth: borders.widthSmall,
     cellBorderStyle: borders.style,
 
-    todayBackground: colors.electric,
+    todayBackground: colors.backgroundBrand,
     todayBorderRadius: spacing.large, // to make the today highlight circular
     todayColor: colors.textLightest,
 
@@ -51,7 +51,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     selectedColor: colors.textLightest,
 
     otherMonthColor: colors.ash,
-    focusOutline: colors.brand,
+    focusOutline: colors.borderBrand,
 
     zIndex: (stacking.above)
   }

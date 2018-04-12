@@ -29,14 +29,14 @@ export default function generator ({ colors, typography, spacing }) {
     lineHeight: typography.lineHeightCondensed,
     fontSize: typography.fontSizeMedium,
 
-    simpleColor: colors.brand,
+    simpleColor: colors.textBrand,
     simpleSelectedBackground: colors.backgroundLightest,
     simpleSelectedBorderColor: colors.tiara,
     simpleSelectedColor: colors.oxford,
 
     minimalColor: colors.oxford,
     minimalHoverBorderColor: colors.tiara,
-    minimalSelectedBorderColor: colors.brand
+    minimalSelectedBorderColor: colors.borderBrand
   }
 }
 

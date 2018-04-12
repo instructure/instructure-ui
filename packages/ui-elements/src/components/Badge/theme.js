@@ -30,7 +30,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     fontSize: typography.fontSizeXSmall,
     colorDanger: colors.crimson,
     colorSuccess: colors.textSuccess,
-    colorPrimary: colors.brand,
+    colorPrimary: colors.textBrand,
     size: '1.25rem',
     countOffset: '0.5rem',
     notificationOffset: '0.125rem',
