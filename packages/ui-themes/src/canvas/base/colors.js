@@ -49,27 +49,34 @@ export function makeFunctionalColors (colors) {
     textAlert: colors.barney,
     textInfo: colors.electric,
     textSuccess: colors.shamrock,
+    textDanger: colors.crimson,
     textWarning: colors.fire,
 
     backgroundDarkest: colors.licorice,
-    backgroundDark: colors.oxford,
-    // backgroundMedium: colors.ash, // TODO: what text color does this work with?
+    backgroundDark: colors.ash,
+    backgroundMedium: colors.tiara,
     backgroundLight: colors.porcelain,
     backgroundLightest: colors.white,
 
     backgroundBrand: colors.electric,
+    backgroundBrandSecondary: colors.oxford,
     backgroundAlert: colors.barney,
     backgroundInfo: colors.electric,
     backgroundSuccess: colors.shamrock,
+    backgroundDanger: colors.crimson,
     backgroundWarning: colors.fire,
 
-    borderLight: colors.tiara,
+    borderLightest: colors.white,
+    borderLight: colors.porcelain,
+    borderMedium: colors.tiara,
     borderDark: colors.ash,
+    borderDarkest: colors.licorice,
 
     borderBrand: colors.electric,
     borderAlert: colors.barney,
     borderInfo: colors.electric,
     borderSuccess: colors.shamrock,
+    borderDanger: colors.crimson,
     borderWarning: colors.fire
   }
 }
