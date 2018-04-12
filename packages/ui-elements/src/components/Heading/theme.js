@@ -50,7 +50,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     secondaryInverseColor: colors.textLight,
 
     brandColor: colors.textBrand,
-    warningColor: colors.fire,
+    warningColor: colors.textWarning,
 
     errorColor: colors.textDanger,
 
