@@ -52,7 +52,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
     errorBorderColor: colors.crimson,
     errorOutlineColor: alpha(colors.crimson, 50),
 
-    placeholderColor: colors.ash,
+    placeholderColor: colors.textDark,
 
     mediumFontSize: typography.fontSizeMedium,
     mediumHeight: forms.inputHeightMedium,

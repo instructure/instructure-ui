@@ -29,7 +29,7 @@ export default function generator ({ typography, colors, spacing }) {
     primaryInverseColor: colors.textLightest,
     primaryColor: colors.textDarkest,
 
-    secondaryColor: colors.ash,
+    secondaryColor: colors.textDark,
     secondaryInverseColor: colors.textLight,
 
     warningColor: colors.fire,

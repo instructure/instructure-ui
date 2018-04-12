@@ -24,7 +24,7 @@
 
 export default function generator ({ colors, borders, shadows }) {
   return {
-    arrowBorderColor: colors.ash,
+    arrowBorderColor: colors.borderDark,
     backgroundColor: colors.backgroundLightest,
     textColor: colors.textDarkest,
 

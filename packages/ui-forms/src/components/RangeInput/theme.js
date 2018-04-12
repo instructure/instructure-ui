@@ -37,7 +37,7 @@ export default function generator ({ colors, typography, spacing, forms }) {
     handleFocusOutlineColor: alpha(colors.borderBrand, 40),
     handleFocusOutlineWidth: '0.75em',
 
-    trackBackground: colors.ash,
+    trackBackground: colors.backgroundDark,
 
     valueBackground: colors.backgroundDarkest,
     valueColor: colors.textLightest,

@@ -50,7 +50,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     selectedBackground: colors.backgroundSuccess,
     selectedColor: colors.textLightest,
 
-    otherMonthColor: colors.ash,
+    otherMonthColor: colors.textDark,
     focusOutline: colors.borderBrand,
 
     zIndex: (stacking.above)

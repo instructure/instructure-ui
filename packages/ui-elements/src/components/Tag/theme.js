@@ -75,10 +75,10 @@ export default function generator ({ borders, colors, forms, spacing, typography
     }),
 
     ...tagVariant('inline', {
-      borderColor: colors.ash,
+      borderColor: colors.borderDark,
       borderRadius: borders.radiusMedium,
-      iconColor: colors.ash,
-      iconHoverColor: colors.ash,
+      iconColor: colors.textDark,
+      iconHoverColor: colors.textDark,
       mainColor: colors.textLightest,
       textColor: colors.textDarkest
     })

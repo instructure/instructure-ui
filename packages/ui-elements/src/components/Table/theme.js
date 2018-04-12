@@ -31,7 +31,7 @@ export default function generator ({ colors, typography, spacing }) {
     fontSize: typography.fontSizeMedium,
     borderColor: colors.borderMedium,
 
-    headerBorderColor: colors.ash,
+    headerBorderColor: colors.borderDark,
 
     hoverBorderColor: colors.borderBrand,
 
