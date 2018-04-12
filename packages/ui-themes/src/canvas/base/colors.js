@@ -45,9 +45,9 @@ export function makeFunctionalColors (colors) {
     textLight: colors.porcelain,
     textLightest: colors.white,
 
-    textBrand: colors.electric,
+    textBrand: colors.brand,
     textAlert: colors.barney,
-    textInfo: colors.electric,
+    textInfo: colors.brand,
     textSuccess: colors.shamrock,
     textDanger: colors.crimson,
     textWarning: colors.fire,
@@ -58,10 +58,10 @@ export function makeFunctionalColors (colors) {
     backgroundLight: colors.porcelain,
     backgroundLightest: colors.white,
 
-    backgroundBrand: colors.electric,
+    backgroundBrand: colors.brand,
     backgroundBrandSecondary: colors.oxford,
     backgroundAlert: colors.barney,
-    backgroundInfo: colors.electric,
+    backgroundInfo: colors.brand,
     backgroundSuccess: colors.shamrock,
     backgroundDanger: colors.crimson,
     backgroundWarning: colors.fire,
@@ -72,9 +72,9 @@ export function makeFunctionalColors (colors) {
     borderDark: colors.ash,
     borderDarkest: colors.licorice,
 
-    borderBrand: colors.electric,
+    borderBrand: colors.brand,
     borderAlert: colors.barney,
-    borderInfo: colors.electric,
+    borderInfo: colors.brand,
     borderSuccess: colors.shamrock,
     borderDanger: colors.crimson,
     borderWarning: colors.fire

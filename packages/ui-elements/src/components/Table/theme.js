@@ -33,7 +33,7 @@ export default function generator ({ colors, typography, spacing }) {
 
     headerBorderColor: colors.ash,
 
-    hoverBorderColor: colors.brand,
+    hoverBorderColor: colors.borderBrand,
 
     captionColor: colors.oxford,
     captionFontSize: typography.fontSizeMedium,

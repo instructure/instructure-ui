@@ -47,8 +47,8 @@ export default function generator ({ colors, borders, spacing, typography, shado
     successBorderColor: colors.borderSuccess,
     successIconBackground: colors.backgroundSuccess,
 
-    infoBorderColor: colors.electric,
-    infoIconBackground: colors.electric,
+    infoBorderColor: colors.borderInfo,
+    infoIconBackground: colors.backgroundInfo,
 
     warningBorderColor: colors.fire,
     warningIconBackground: colors.fire,

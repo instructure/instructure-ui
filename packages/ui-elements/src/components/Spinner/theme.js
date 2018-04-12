@@ -25,7 +25,7 @@
 export default function generator ({ colors }) {
   return {
     trackColor: colors.porcelain,
-    color: colors.brand,
+    color: colors.textBrand,
 
     xSmallSize: '1.5em',
     xSmallBorderWidth: '0.25em',
@@ -40,7 +40,7 @@ export default function generator ({ colors }) {
     largeBorderWidth: '0.75em',
 
     inverseTrackColor: colors.textDarkest,
-    inverseColor: colors.brand
+    inverseColor: colors.textBrand
   }
 }
 

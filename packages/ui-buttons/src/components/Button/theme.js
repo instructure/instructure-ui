@@ -65,7 +65,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
     largeFontSize: typography.fontSizeLarge,
 
     focusBorderRadius: borders.radiusMedium,
-    focusBorder: `${focusOutline} ${colors.brand}`,
+    focusBorder: `${focusOutline} ${colors.borderBrand}`,
     focusShadow: 'none',
 
     lightBackground: colors.backgroundLightest,
@@ -75,11 +75,11 @@ export default function generator ({ colors, borders, forms, spacing, typography
     lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
 
     ghostBackground: 'transparent',
-    ghostBorderColor: colors.brand,
+    ghostBorderColor: colors.borderBrand,
     ghostBorderStyle: borders.style,
-    ghostColor: colors.brand,
-    ghostHoverBackground: alpha(colors.brand, 10),
-    ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.brand, 20)}`,
+    ghostColor: colors.textBrand,
+    ghostHoverBackground: alpha(colors.backgroundBrand, 10),
+    ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderBrand, 20)}`,
 
     ghostInverseBackground: 'transparent',
     ghostInverseBorderColor: colors.borderLightest,
@@ -88,10 +88,10 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
     ghostInverseFocusBorder: `${focusOutline} ${colors.borderLightest}`,
 
-    linkColor: colors.brand,
+    linkColor: colors.textBrand,
     linkBorderColor: 'transparent',
     linkFocusBorderColor: 'transparent',
-    linkHoverColor: darken(colors.brand, 10),
+    linkHoverColor: darken(colors.textBrand, 10),
     linkTextDecoration: 'none',
 
     linkInverseColor: colors.porcelain,
@@ -100,8 +100,8 @@ export default function generator ({ colors, borders, forms, spacing, typography
     iconBorderColor: 'transparent',
     iconPadding: `0 ${spacing.xxSmall}`,
     iconColor: colors.oxford,
-    iconHoverColor: colors.brand,
-    iconFocusBoxShadow: `${focusShadow} ${colors.brand}`,
+    iconHoverColor: colors.textBrand,
+    iconFocusBoxShadow: `${focusShadow} ${colors.borderBrand}`,
     iconPlusTextFontSize: '1.25rem',
     iconPlusTextMargin: spacing.xxSmall,
 
@@ -119,7 +119,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'primary',
-      colors.brand,
+      colors.backgroundBrand,
       colors.textLightest
     ),
 
@@ -137,7 +137,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     ...buttonVariant(
       'circlePrimary',
-      colors.brand,
+      colors.backgroundBrand,
       colors.textLightest
     ),
 
@@ -181,7 +181,7 @@ generator['canvas'] = function (variables) {
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     linkTextDecoration: 'underline',
-    linkFocusBorderColor: colors.brand,
-    linkInverseFocusBorderColor: colors.borderLightest
+    linkInverseFocusBorderColor: colors.borderLightest,
+    linkFocusBorderColor: colors.borderBrand,
   }
 }

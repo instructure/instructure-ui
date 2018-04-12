@@ -71,7 +71,7 @@ export default function generator ({ colors, typography }) {
     largeTransform: `${transform(size.large)}em`,
 
     color: colors.oxford,
-    meterColor: colors.brand,
+    meterColor: colors.backgroundBrand,
     doneMeterColor: colors.backgroundSuccess,
     trackColor: colors.porcelain,
 

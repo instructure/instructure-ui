@@ -38,7 +38,7 @@ export default function generator ({ colors, spacing, typography }) {
     iconColor: colors.oxford,
     iconPadding: spacing.small,
 
-    activeBackground: colors.brand,
+    activeBackground: colors.backgroundBrand,
     activeLabelColor: colors.textLightest,
     activeIconColor: colors.textLightest
   }

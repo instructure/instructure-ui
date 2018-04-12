@@ -47,8 +47,8 @@ export default function generator ({ colors, spacing, typography }) {
 
     valuePadding: `${spacing.xxSmall}`,
 
-    meterColorStart: colors.brand,
-    meterColorEnd: lighten(colors.brand, 12),
+    meterColorStart: colors.backgroundBrand,
+    meterColorEnd: lighten(colors.backgroundBrand, 12),
 
     doneMeterColorStart: colors.backgroundSuccess,
     doneMeterColorEnd: lighten(colors.backgroundSuccess, 12),

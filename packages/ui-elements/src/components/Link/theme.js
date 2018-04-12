@@ -28,9 +28,9 @@ export default function generator ({ colors, typography, borders }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    color: colors.brand,
+    color: colors.textBrand,
     textDecoration: 'none',
-    hoverColor: darken(colors.brand, 10),
+    hoverColor: darken(colors.textBrand, 10),
     hoverTextDecoration: 'underline',
     outlineWidth: borders.widthSmall,
     outlineColor: 'transparent',
@@ -45,7 +45,7 @@ export default function generator ({ colors, typography, borders }) {
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
     textDecoration: 'underline',
-    focusOutlineColor: colors.brand,
+    focusOutlineColor: colors.borderBrand,
     focusInverseOutlineColor: colors.porcelain
   }
 }

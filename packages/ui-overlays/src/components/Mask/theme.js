@@ -27,7 +27,7 @@ export default function generator ({ colors, borders, stacking }) {
     zIndex: stacking.topmost,
     background: 'rgba(255, 255, 255, 0.75)',
     borderColor: 'transparent',
-    focusBorderColor: colors.brand,
+    focusBorderColor: colors.borderBrand,
     borderRadius: borders.radiusMedium,
     borderWidth: borders.widthSmall
   }

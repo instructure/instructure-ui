@@ -24,13 +24,13 @@
 
 export default function generator ({ colors, spacing, typography, borders }) {
   return {
-    hoverBackgroundColor: colors.brand,
+    hoverBackgroundColor: colors.backgroundBrand,
     focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.brand,
+    focusOutlineColor: colors.borderBrand,
     iconColor: colors.oxford,
     iconsMarginRight: spacing.xSmall,
     descriptorMarginTop: spacing.xxxSmall,
-    nameTextColor: colors.brand,
+    nameTextColor: colors.textBrand,
     descriptorTextColor: colors.oxford,
     hoverTextColor: colors.textLightest,
     nameFontSizeSmall: typography.fontSizeXSmall,
