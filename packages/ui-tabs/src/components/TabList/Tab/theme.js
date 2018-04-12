@@ -32,9 +32,9 @@ export default function generator ({ colors, typography, spacing }) {
     simpleColor: colors.textBrand,
     simpleSelectedBackground: colors.backgroundLightest,
     simpleSelectedBorderColor: colors.tiara,
-    simpleSelectedColor: colors.oxford,
+    simpleSelectedColor: colors.textDarkest,
 
-    minimalColor: colors.oxford,
+    minimalColor: colors.textDarkest,
     minimalHoverBorderColor: colors.tiara,
     minimalSelectedBorderColor: colors.borderBrand
   }

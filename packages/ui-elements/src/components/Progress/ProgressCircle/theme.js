@@ -70,7 +70,7 @@ export default function generator ({ colors, typography }) {
     largeCircumference: `${circumference(radius.large)}em`,
     largeTransform: `${transform(size.large)}em`,
 
-    color: colors.oxford,
+    color: colors.textDarkest,
     meterColor: colors.backgroundBrand,
     doneMeterColor: colors.backgroundSuccess,
     trackColor: colors.porcelain,

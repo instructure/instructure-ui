@@ -39,7 +39,7 @@ export default function generator ({ colors, typography, spacing, forms }) {
 
     trackBackground: colors.ash,
 
-    valueBackground: colors.oxford,
+    valueBackground: colors.backgroundDarkest,
     valueColor: colors.textLightest,
     valueFontFamily: typography.fontFamily,
     valueFontWeight: typography.fontWeightNormal,

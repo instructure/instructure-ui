@@ -24,7 +24,7 @@
 
 export default function ({ colors, typography }) {
   return {
-    foregroundColor: colors.oxford,
+    foregroundColor: colors.backgroundDarkest,
     backgroundColor: colors.backgroundLightest,
     focusColor: '#0084D1',
     borderColor: '#c7cdd1',

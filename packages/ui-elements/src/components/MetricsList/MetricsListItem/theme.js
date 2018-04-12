@@ -28,11 +28,11 @@ export default function generator ({ colors, typography, spacing }) {
     textAlign: 'center',
     fontFamily: typography.fontFamily,
 
-    valueColor: colors.oxford,
+    valueColor: colors.textDarkest,
     valueFontSize: typography.fontSizeXLarge,
     valueFontWeight: typography.fontWeightBold,
 
-    labelColor: colors.oxford,
+    labelColor: colors.textDarkest,
     labelFontSize: typography.fontSizeXSmall
   }
 }

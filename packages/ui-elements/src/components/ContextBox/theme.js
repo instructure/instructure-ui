@@ -26,10 +26,10 @@ export default function generator ({ colors, borders, shadows }) {
   return {
     arrowBorderColor: colors.ash,
     backgroundColor: colors.backgroundLightest,
-    textColor: colors.oxford,
+    textColor: colors.textDarkest,
 
     borderColorInverse: 'transparent',
-    backgroundColorInverse: colors.oxford,
+    backgroundColorInverse: colors.backgroundDarkest,
     textColorInverse: colors.textLightest,
 
     arrowSize: '0.5rem',

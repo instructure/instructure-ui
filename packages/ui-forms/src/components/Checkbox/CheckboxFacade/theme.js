@@ -32,17 +32,17 @@ export default function generator ({ colors, borders, spacing, typography }) {
     marginRight: spacing.xSmall,
     padding: spacing.xxxSmall,
 
-    checkedBackground: colors.oxford,
-    checkedBorderColor: colors.oxford,
+    checkedBackground: colors.backgroundDarkest,
+    checkedBorderColor: colors.borderDarkest,
 
-    hoverBorderColor: colors.oxford,
+    hoverBorderColor: colors.borderDarkest,
 
     focusBorderColor: colors.borderBrand,
     focusBorderWidth: borders.widthSmall,
     focusBorderStyle: borders.style,
 
-    labelColor: colors.oxford,
-    checkedLabelColor: colors.oxford,
+    labelColor: colors.textDarkest,
+    checkedLabelColor: colors.textDarkest,
     labelFontFamily: typography.fontFamily,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,

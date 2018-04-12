@@ -35,14 +35,14 @@ export default function generator ({ colors, borders, typography, forms, spacing
     borderRadius: borders.radiusMedium,
 
     background: colors.backgroundLightest,
-    color: colors.oxford,
+    color: colors.textDarkest,
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
 
     padding: spacing.small,
 
-    arrowColor: colors.oxford,
+    arrowColor: colors.textDarkest,
 
     smallHeight: forms.inputHeightSmall,
     smallFontSize: typography.fontSizeSmall,

@@ -26,7 +26,7 @@ import { lighten } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, spacing, typography }) {
   return {
-    color: colors.oxford,
+    color: colors.textDarkest,
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
