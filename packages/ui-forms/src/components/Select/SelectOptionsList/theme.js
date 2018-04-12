@@ -32,7 +32,7 @@ export default function generator ({ colors, typography, borders, spacing, stack
     groupFontWeight: typography.fontWeightBold,
     lineHeight: typography.lineHeightCondensed,
 
-    labelColor: colors.oxford,
+    labelColor: colors.textDarkest,
     background: colors.backgroundLightest,
 
     highlightedBackground: colors.backgroundBrand,

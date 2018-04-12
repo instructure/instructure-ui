@@ -28,7 +28,7 @@ export default function generator ({ colors, borders, spacing, typography, forms
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    color: colors.oxford,
+    color: colors.textDarkest,
 
     background: colors.backgroundLightest,
 

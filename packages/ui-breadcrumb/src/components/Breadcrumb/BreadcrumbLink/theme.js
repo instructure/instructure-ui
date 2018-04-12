@@ -24,7 +24,7 @@
 
 export default function generator ({ colors, typography }) {
   return {
-    color: colors.oxford,
+    color: colors.textDarkest,
     fontFamily: typography.fontFamily
   }
 }

@@ -24,7 +24,7 @@
 
 export default function generator ({ colors, typography, spacing }) {
   return {
-    color: colors.oxford,
+    color: colors.textDarkest,
     background: colors.backgroundLightest,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -35,7 +35,7 @@ export default function generator ({ colors, typography, spacing }) {
 
     hoverBorderColor: colors.borderBrand,
 
-    captionColor: colors.oxford,
+    captionColor: colors.textDarkest,
     captionFontSize: typography.fontSizeMedium,
 
     smallFontSize: typography.fontSizeSmall,

@@ -41,7 +41,7 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
     baseSizeSmall: forms.inputHeightSmall,
     baseSizeMedium: forms.inputHeightMedium,
     baseSizeLarge: forms.inputHeightLarge,
-    labelColor: colors.oxford,
+    labelColor: colors.textDarkest,
     labelFontFamily: typography.fontFamily,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
@@ -53,9 +53,9 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    uncheckedIconColor: colors.oxford,
-    background: colors.oxford,
-    borderColor: colors.oxford
+    uncheckedIconColor: colors.textDarkest,
+    background: colors.backgroundDarkest,
+    borderColor: colors.borderDarkest
   }
 }
 

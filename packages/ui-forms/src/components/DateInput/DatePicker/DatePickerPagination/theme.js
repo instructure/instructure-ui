@@ -27,7 +27,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
     fontSize: typography.fontSizeMedium,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    color: colors.oxford,
+    color: colors.textDarkest,
     buttonIconSize: typography.fontSizeMedium
   }
 }

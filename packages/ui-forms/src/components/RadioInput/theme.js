@@ -24,14 +24,14 @@
 
 export default function generator ({ spacing, borders, colors, forms, shadows, typography }) {
   return {
-    labelColor: colors.oxford,
+    labelColor: colors.textDarkest,
     labelFontFamily: typography.fontFamily,
     labelFontWeight: typography.fontWeightNormal,
     labelLineHeight: typography.lineHeightCondensed,
 
     background: colors.backgroundLightest,
-    borderColor: colors.oxford,
-    hoverBorderColor: colors.oxford,
+    borderColor: colors.borderDarkest,
+    hoverBorderColor: colors.borderDarkest,
     controlSize: '0.1875rem',
 
     focusBorderColor: colors.borderBrand,
@@ -69,7 +69,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    toggleBackgroundOff: colors.oxford
+    toggleBackgroundOff: colors.backgroundDarkest
   }
 }
 

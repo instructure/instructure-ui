@@ -32,10 +32,10 @@ export default function generator ({ colors, spacing, typography }) {
     fontSize: typography.fontSizeMedium,
     labelPadding: spacing.large,
 
-    labelColor: colors.oxford,
+    labelColor: colors.textDarkest,
     background: colors.backgroundLightest,
 
-    iconColor: colors.oxford,
+    iconColor: colors.textDarkest,
     iconPadding: spacing.small,
 
     activeBackground: colors.backgroundBrand,

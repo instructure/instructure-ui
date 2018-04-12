@@ -26,7 +26,7 @@ import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 export default function generator ({ colors, borders, spacing, typography }) {
   return {
     backgroundColor: alpha(colors.backgroundDarkest, 80),
-    bufferedBackgroundColor: alpha(colors.oxford, 80),
+    bufferedBackgroundColor: alpha(colors.backgroundDarkest, 80),
     progressBackgroundColor: alpha(colors.backgroundBrand, 90),
     focusOutlineColor: colors.borderBrand,
     focusOutlineWeight: borders.widthMedium,

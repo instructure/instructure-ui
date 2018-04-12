@@ -70,7 +70,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     lightBackground: colors.backgroundLightest,
     lightBorderColor: darken(colors.porcelain, 10),
-    lightColor: colors.oxford,
+    lightColor: colors.textDarkest,
     lightHoverBackground: darken(colors.backgroundLightest, 5),
     lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
 
@@ -99,7 +99,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     iconBorderColor: 'transparent',
     iconPadding: `0 ${spacing.xxSmall}`,
-    iconColor: colors.oxford,
+    iconColor: colors.textDarkest,
     iconHoverColor: colors.textBrand,
     iconFocusBoxShadow: `${focusShadow} ${colors.borderBrand}`,
     iconPlusTextFontSize: '1.25rem',
@@ -114,7 +114,7 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ...buttonVariant(
       'default',
       colors.porcelain,
-      colors.oxford
+      colors.textDarkest
     ),
 
     ...buttonVariant(

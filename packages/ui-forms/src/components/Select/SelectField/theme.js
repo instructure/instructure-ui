@@ -34,8 +34,8 @@ export default function generator ({ colors, typography, borders, spacing, stack
     borderColor: colors.tiara,
     borderRadius: borders.radiusMedium,
 
-    color: colors.oxford,
-    iconColor: colors.oxford,
+    color: colors.textDarkest,
+    iconColor: colors.textDarkest,
     background: colors.backgroundLightest,
 
     inputPadding: spacing.small,
