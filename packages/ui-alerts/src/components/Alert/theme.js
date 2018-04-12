@@ -24,8 +24,8 @@
 
 export default function generator ({ colors, borders, spacing, typography, shadows }) {
   return {
-    color: colors.licorice,
     background: colors.backgroundLightest,
+    color: colors.textDarkest,
     marginTop: spacing.small,
 
     borderRadius: borders.radiusMedium,

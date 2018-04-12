@@ -28,7 +28,7 @@ export default function ({ colors, typography }) {
     backgroundColor: colors.backgroundLightest,
     focusColor: '#0084D1',
     borderColor: '#c7cdd1',
-    color: colors.licorice,
+    color: colors.textDarkest,
     fontFamily: typography.fontFamily,
     fontFamilyMonospace: typography.fontFamilyMonospace,
     lineHeight: typography.lineHeight,

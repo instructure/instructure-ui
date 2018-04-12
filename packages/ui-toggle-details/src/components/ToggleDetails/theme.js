@@ -27,7 +27,7 @@ export default function generator ({ colors, spacing, borders, typography }) {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
     lineHeight: typography.lineHeight,
-    textColor: colors.licorice,
+    textColor: colors.textDarkest,
 
     fontSizeSmall: typography.fontSizeSmall,
     fontSizeMedium: typography.fontSizeMedium,
@@ -37,7 +37,7 @@ export default function generator ({ colors, spacing, borders, typography }) {
     mediumIconSize: '0.75rem',
     largeIconSize: '1rem',
     iconMargin: spacing.xxSmall,
-    iconColor: colors.licorice,
+    iconColor: colors.textDarkest,
 
     togglePadding: spacing.xxSmall,
     toggleBorderRadius: borders.radiusMedium,

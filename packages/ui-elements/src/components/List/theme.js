@@ -25,7 +25,7 @@
 export default function generator ({ colors, spacing, typography }) {
   return {
     background: colors.backgroundLightest,
-    color: colors.licorice,
+    color: colors.textDarkest,
     pipeColor: colors.ash,
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,

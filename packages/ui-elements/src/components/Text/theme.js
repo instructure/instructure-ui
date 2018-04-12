@@ -26,8 +26,8 @@ export default function generator ({ typography, colors, spacing }) {
   return {
     ...typography,
 
-    primaryColor: colors.licorice,
     primaryInverseColor: colors.textLightest,
+    primaryColor: colors.textDarkest,
 
     secondaryColor: colors.ash,
     secondaryInverseColor: colors.porcelain,

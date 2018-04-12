@@ -45,8 +45,8 @@ export default function generator ({ borders, colors, forms, spacing, typography
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
-    color: colors.licorice,
-    borderColor: colors.licorice
+    color: colors.textDarkest,
+    borderColor: colors.borderDarkest
   }
 }
 

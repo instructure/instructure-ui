@@ -30,7 +30,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     fontSizeSmall: typography.fontSizeSmall,
     fontSizeMedium: typography.fontSizeMedium,
     fontSizeLarge: typography.fontSizeLarge,
-    color: colors.licorice,
+    color: colors.textDarkest,
     inlineColor: colors.ash,
     inlineLineHeight: typography.lineHeightCondensed,
     noneSpacing: spacing.xSmall,

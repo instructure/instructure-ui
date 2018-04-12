@@ -40,7 +40,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
     padding: `0 ${spacing.small}`,
 
     arrowsContainerWidth: '2rem',
-    arrowsColor: colors.licorice,
+    arrowsColor: colors.textDarkest,
     arrowsBackgroundColor: colors.porcelain,
     arrowsHoverBackgroundColor: colors.tiara,
     arrowsBorderColor: colors.tiara,

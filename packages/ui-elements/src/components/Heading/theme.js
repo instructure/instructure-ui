@@ -43,8 +43,8 @@ export default function generator ({ borders, colors, spacing, typography }) {
     h5FontSize: typography.fontSizeSmall,
     h5FontWeight: typography.fontWeightNormal,
 
-    primaryColor: colors.licorice,
     primaryInverseColor: colors.textLightest,
+    primaryColor: colors.textDarkest,
 
     secondaryColor: colors.ash,
     secondaryInverseColor: colors.porcelain,
