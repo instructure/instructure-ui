@@ -67,7 +67,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     transitionTiming: '0.2s',
 
     ...tagVariant('default', {
-      borderColor: colors.tiara,
+      borderColor: colors.borderMedium,
       iconColor: colors.textDarkest,
       iconHoverColor: colors.textBrand,
       mainColor: colors.porcelain,

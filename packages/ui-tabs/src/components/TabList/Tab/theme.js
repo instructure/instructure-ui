@@ -31,11 +31,11 @@ export default function generator ({ colors, typography, spacing }) {
 
     simpleColor: colors.textBrand,
     simpleSelectedBackground: colors.backgroundLightest,
-    simpleSelectedBorderColor: colors.tiara,
+    simpleSelectedBorderColor: colors.borderMedium,
     simpleSelectedColor: colors.textDarkest,
 
     minimalColor: colors.textDarkest,
-    minimalHoverBorderColor: colors.tiara,
+    minimalHoverBorderColor: colors.borderMedium,
     minimalSelectedBorderColor: colors.borderBrand
   }
 }

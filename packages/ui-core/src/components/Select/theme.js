@@ -26,10 +26,10 @@ import { alpha } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, borders, typography, forms, spacing }) {
   return {
-    borderTopColor: colors.tiara,
-    borderRightColor: colors.tiara,
-    borderBottomColor: colors.tiara,
-    borderLeftColor: colors.tiara,
+    borderTopColor: colors.borderMedium,
+    borderRightColor: colors.borderMedium,
+    borderBottomColor: colors.borderMedium,
+    borderLeftColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
     borderRadius: borders.radiusMedium,

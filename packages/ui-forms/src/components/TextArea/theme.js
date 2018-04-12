@@ -34,10 +34,10 @@ export default function generator ({ colors, borders, spacing, typography, forms
 
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
-    borderTopColor: colors.tiara,
-    borderRightColor: colors.tiara,
-    borderBottomColor: colors.tiara,
-    borderLeftColor: colors.tiara,
+    borderTopColor: colors.borderMedium,
+    borderRightColor: colors.borderMedium,
+    borderBottomColor: colors.borderMedium,
+    borderLeftColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
     padding: spacing.small,

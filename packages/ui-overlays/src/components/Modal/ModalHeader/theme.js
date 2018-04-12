@@ -24,7 +24,7 @@
 
 export default function ({ colors, spacing }) {
   return {
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     padding: spacing.medium
   }
 }

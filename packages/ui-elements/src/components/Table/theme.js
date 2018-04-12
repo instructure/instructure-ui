@@ -29,7 +29,7 @@ export default function generator ({ colors, typography, spacing }) {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
     fontSize: typography.fontSizeMedium,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
 
     headerBorderColor: colors.ash,
 

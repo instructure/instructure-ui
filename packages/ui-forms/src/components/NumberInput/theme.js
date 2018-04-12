@@ -31,7 +31,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
 
     borderWidth: borders.widthSmall,
     borderStyle: borders.style,
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
     color: colors.textDarkest,
@@ -42,9 +42,9 @@ export default function generator ({ colors, typography, borders, spacing, forms
     arrowsContainerWidth: '2rem',
     arrowsColor: colors.textDarkest,
     arrowsBackgroundColor: colors.porcelain,
-    arrowsHoverBackgroundColor: colors.tiara,
-    arrowsBorderColor: colors.tiara,
-    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors.tiara}`,
+    arrowsHoverBackgroundColor: colors.backgroundMedium,
+    arrowsBorderColor: colors.borderMedium,
+    arrowsActiveBoxShadow: `inset 0 0 3px 1px ${colors.borderMedium}`,
 
     focusBorderColor: colors.borderBrand,
     focusOutlineColor: alpha(colors.borderBrand, 50),

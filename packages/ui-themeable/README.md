@@ -75,7 +75,7 @@ the `theme.js` file might contain the following:
 // Button/theme.js
 export default function generator ({ colors }) {
   return (
-    background: colors.tiara,
+    background: colors.backgroundMedium,
     color: colors.textDarkest,
 
     hoverColor: colors.textLightest,

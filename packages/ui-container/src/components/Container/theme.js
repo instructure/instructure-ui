@@ -26,7 +26,7 @@
 
 export default function generator ({ colors, borders, shadows, spacing, breakpoints }) {
   return {
-    borderColor: colors.tiara,
+    borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderRadius: borders.radiusMedium,
     boxShadow: shadows.depth1,
