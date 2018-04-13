@@ -1,15 +1,16 @@
 import { configure } from '@storybook/react'
 import { setOptions } from "@storybook/addon-options";
+import { getStorybook } from '@storybook/react'
+
 import '../packages/ui-themes/src/canvas'
 
 setOptions({
   name: "Instructure UI",
   url: "http://instructure.github.io/instructure-ui/#index",
   goFullScreen: false,
-  showStoriesPanel: true,
-  showAddonsPanel: false,
-  showSearchBox: false,
-  enableShortcuts: false
+  showLeftPanel: true,
+  showDownPanel: false,
+  showSearchBox: false
 })
 
 // automatically import all files ending in *.stories.js from the src folders
@@ -20,3 +21,5 @@ function loadStories() {
 }
 
 configure(loadStories, module)
+
+export { getStorybook }

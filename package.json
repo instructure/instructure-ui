@@ -42,21 +42,23 @@
     "release": "./scripts/release",
     "predeploy": "yarn build:docs",
     "deploy": "lerna run deploy",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json"
   },
   "license": "MIT",
   "devDependencies": {
     "@instructure/conventional-changelog": "1.0.0",
+    "@storybook/addon-links": "^3.3.15",
+    "@storybook/addon-options": "^3.3.15",
+    "@storybook/react": "^3.4.1",
     "commitizen": "2.9.6",
     "lerna": "2.9.0",
     "lint-staged": "^6.1.0",
     "npm-run-all": "4.1.2",
-    "@storybook/react": "^3.4.1",
     "standard-version": "4.3.0",
+    "story2sketch": "^0.2.1",
     "validate-commit-msg": "2.14.0",
-    "yarn": "1.5.1",
-    "@storybook/addon-links": "^3.3.15",
-    "@storybook/addon-options": "^3.3.15"
+    "yarn": "1.5.1"
   },
   "config": {
     "commitizen": {

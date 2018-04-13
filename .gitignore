@@ -8,3 +8,4 @@ package-lock.json
 .babel-cache
 __build__
 .vscode
+stories.asketch.json
