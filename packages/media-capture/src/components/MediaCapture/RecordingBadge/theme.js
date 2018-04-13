@@ -23,7 +23,7 @@
  */
 export default function generator ({ colors, spacing, typography }) {
   return {
-    backgroundColor: colors.slate,
+    backgroundColor: colors.backgroundDark,
     fontColor: colors.textLightest,
     padding: `${spacing.xxxSmall} ${spacing.xSmall}`,
     signalColor: colors.backgroundLightest,

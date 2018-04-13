@@ -24,7 +24,7 @@
 export default function generator ({ colors, spacing, typography }) {
   return {
     fontColor: colors.textLightest,
-    backgroundColor: colors.slate,
+    backgroundColor: colors.backgroundDark,
     fontSize: typography.fontSizeSmall,
     padding: `0 ${spacing.xSmall}`,
     recordingBarHeight: '1.5em'
