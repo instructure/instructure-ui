@@ -1,0 +1,17 @@
+#!/bin/bash -ex
+
+NPM_CLIENT=$(npm bin)/yarn
+
+run-happo() {
+  git checkout --quiet $1
+
+  $NPM_CLIENT run build:examples
+
+  happo run
+}
+
+# Check out the previous version and generate snapshots
+run-happo HEAD^
+
+# Check out the latest version and check for diffs
+run-happo -
