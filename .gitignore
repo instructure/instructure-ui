@@ -9,3 +9,5 @@ package-lock.json
 __build__
 .vscode
 stories.asketch.json
+__screenshots__
+screenshots.json

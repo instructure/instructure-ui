@@ -8,12 +8,12 @@ setOptions({
   name: "Instructure UI",
   url: "http://instructure.github.io/instructure-ui/#index",
   goFullScreen: false,
-  showLeftPanel: true,
-  showDownPanel: false,
+  showStoriesPanel: true,
+  showAddonPanel: false,
   showSearchBox: false
 })
 
-// automatically import all files ending in *.stories.js from the src folders
+// automatically import all stories.js files in the packages
 const req = require.context('../packages', true, /stories\.js$/)
 
 function loadStories() {

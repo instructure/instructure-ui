@@ -43,7 +43,10 @@
     "predeploy": "yarn build:docs",
     "deploy": "lerna run deploy",
     "storybook": "start-storybook -p 9001 -c .storybook",
-    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json"
+    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
+    "build:examples": "webpack --config .happo/webpack.config.js",
+    "generate:screenshots": "./scripts/screenshots",
+    "review:screenshots": "happo review"
   },
   "license": "MIT",
   "devDependencies": {
@@ -52,9 +55,13 @@
     "@storybook/addon-options": "^3.3.15",
     "@storybook/react": "^3.4.1",
     "commitizen": "2.9.6",
+    "happo": "^5.0.0",
+    "happo-target-firefox": "^5.0.0",
     "lerna": "2.9.0",
     "lint-staged": "^6.1.0",
     "npm-run-all": "4.1.2",
+    "react": "15.6.2",
+    "react-dom": "15.6.2",
     "standard-version": "4.3.0",
     "story2sketch": "^0.2.1",
     "validate-commit-msg": "2.14.0",
