@@ -193,9 +193,7 @@ export default class Alert extends Component {
     return this.isDOMNode(lr) ? lr : null
   }
 
-  initLiveRegion () {
-    const liveRegion = this.getLiveRegion()
-
+  initLiveRegion (liveRegion) {
     warning(
       liveRegion.getAttribute('role') === 'alert',
       `[Alert] live region must have role='alert' set on page load in order to announce content`
@@ -257,7 +255,7 @@ export default class Alert extends Component {
         ReactDOM.unmountComponentAtNode(div)
         div.parentNode.removeChild(div)
 
-        this.initLiveRegion()
+        this.initLiveRegion(liveRegion)
       }
     }
   }
@@ -269,8 +267,9 @@ export default class Alert extends Component {
   }
 
   componentWillMount () {
-    if (this.getLiveRegion()) {
-      this.initLiveRegion()
+    const liveRegion = this.getLiveRegion()
+    if (liveRegion) {
+      this.initLiveRegion(liveRegion)
     }
   }
 
