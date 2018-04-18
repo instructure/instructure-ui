@@ -26,6 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Container from '@instructure/ui-container/lib/components/Container'
+import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -68,6 +69,27 @@ export default class Avatar extends Component {
     inline: true
   }
 
+  state = { loaded: false }
+  _image = null
+  _listeners = []
+
+  componentDidMount () {
+    if (this.props.src) {
+      this._image = new Image()
+      this._image.src = this.props.src
+
+      this._listeners.push(addEventListener(this._image, 'load', () => {
+        this.setState({ loaded: true })
+      }))
+    }
+  }
+
+  componentWillUnmount () {
+    this._listeners.forEach(listener => {
+      listener.remove()
+    })
+  }
+
   makeInitialsFromName () {
     let name = this.props.name
 
@@ -102,7 +124,7 @@ export default class Avatar extends Component {
       [styles[this.props.variant]]: true
     }
 
-    const style = this.props.src ? {
+    const style = this.state.loaded ? {
       backgroundImage: `url('${this.props.src}')`
     } : null
 
@@ -115,7 +137,7 @@ export default class Avatar extends Component {
         margin={this.props.margin}
         display={this.props.inline ? 'inline' : 'block'}
       >
-        {!this.props.src && this.renderInitials()}
+        {!this.state.loaded && this.renderInitials()}
       </Container>
     )
   }
