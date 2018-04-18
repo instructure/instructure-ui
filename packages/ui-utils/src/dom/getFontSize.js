@@ -21,6 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import canUseDOM from './canUseDOM'
+import ownerDocument from './ownerDocument'
+import getComputedStyle from './getComputedStyle'
+
+const COMPUTED_CACHE = {}
 
 /**
  * ---
@@ -32,30 +37,22 @@
  * @param {ReactComponent|DomNode} el - component or DOM node
  * @returns {Object} font size in px
  */
-export default function getFontSize (el) {
-  const m = document.createElement('div')
-
-  let container = el || document.body
-  let fontSize = 16
-
-  if (!container) {
-    container = document.createElement('body')
-    container.style.cssText = 'font-size:1em !important'
-    document.documentElement.insertBefore(container, document.body)
+export default function getFontSize (el, ignoreCache) {
+  if (!canUseDOM) {
+    return 16
   }
 
-  m.style.cssText = [
-    'display: inline-block !important;',
-    'padding: 0 !important;',
-    'line-height: 1 !important;',
-    'position: absolute !important;',
-    'visibility: hidden !important;',
-    'font-size: 1em !important;'
-  ].join('')
-  m.appendChild(document.createTextNode('M'))
-  container.appendChild(m)
-  fontSize = m.offsetHeight
-  container.removeChild(m)
+  const container = el || ownerDocument(el).documentElement
+
+  // return the cached font size if it's there
+  if (!ignoreCache && COMPUTED_CACHE[container]) {
+    return COMPUTED_CACHE[container]
+  }
+
+  const fontSize = parseInt(getComputedStyle(container).getPropertyValue('font-size'))
+
+  // cache the computed font size so that we don't have to compute it again
+  COMPUTED_CACHE[container] = fontSize
 
   return fontSize
 }

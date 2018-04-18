@@ -297,7 +297,9 @@ class Popover extends Component {
     super(props)
 
     this.state = {
-      placement: props.placement
+      placement: props.placement,
+      offsetX: props.offsetX,
+      offsetY: props.offsetY
     }
 
     if (props.show === undefined) {
@@ -370,7 +372,8 @@ class Popover extends Component {
   handlePositionChanged = ({ placement }) => {
     this.setState({
       closeButtonPlacement: this.getCloseButtonPlacement(this.props),
-      placement
+      placement,
+      ...this.computeOffsets(placement)
     })
   }
 
@@ -494,11 +497,11 @@ class Popover extends Component {
     }
   }
 
-  get positionProps () {
-    let offsetX = this.props.offsetX
-    let offsetY = this.props.offsetY
+  computeOffsets (placement) {
+    let { offsetX, offsetY } = this.props
+
     if (this.props.alignArrow && this._contextBox) {
-      const secondaryPlacement = parsePlacement(this.state.placement)[1]
+      const secondaryPlacement = parsePlacement(placement)[1]
       const { arrowSize, borderWidth } = this._contextBox.theme
       const offsetAmount = (px(arrowSize) + px(borderWidth)) * 2
       if (secondaryPlacement === 'start') {
@@ -513,9 +516,16 @@ class Popover extends Component {
     }
 
     return {
-      ...pickProps(this.props, Position.propTypes),
       offsetX,
-      offsetY,
+      offsetY
+    }
+  }
+
+  get positionProps () {
+    return {
+      ...pickProps(this.props, Position.propTypes),
+      offsetX: this.state.offsetX,
+      offsetY: this.state.offsetY,
       trackPosition: this.shown,
       placement: this.placement,
       onPositioned: createChainedFunction(this.handlePositionChanged, this.props.onShow),
