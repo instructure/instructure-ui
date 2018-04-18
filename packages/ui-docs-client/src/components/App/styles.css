@@ -50,7 +50,8 @@ table code {
 }
 
 .container {
-  width: 100vw;
+  left: -16rem;
+  height: 100vh;
   border-left: 1px solid var(--borderColor);
   padding-left: 16.5rem;
   transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -59,7 +60,7 @@ table code {
 
 .content {
   box-sizing: border-box;
-  margin: 0;
+  margin: 0 -16rem 0 0;
   height: 100vh;
   padding: 3rem 3.5rem;
   min-width: 18rem;
@@ -138,12 +139,6 @@ table code {
   bottom: -0.625em;
 }
 
-.github-corner svg { /* stylelint-disable-line selector-max-type */
-  /* account for .container { padding-left: 16.5rem; } */
-  transform: translate3d(-0.5rem, 0, 0);
-  transition: transform 300ms cubic-bezier(0.23, 1, 0.32, 1);
-}
-
 .show-menu {
   .container {
     transform: translate3d(0, 0, 0);
@@ -169,11 +164,6 @@ table code {
 
   .hamburger .line::after {
     transform: rotate(-45deg);
-  }
-
-  .github-corner svg { /* stylelint-disable-line selector-max-type */
-    transform: translate3d(-16.5rem, 0, 0);
-    transition: transform 300ms ease;
   }
 }
 
