@@ -28,7 +28,7 @@ example: true
     2: { id: 2, name: "Subtraction Worksheet"},
     3: { id: 3, name: "General Questions" },
     4: { id: 4, name: "Vogon Poetry"},
-    5: { id: 5, name: "Bistromath", description: "Explain the Bistromathic Drive" }
+    5: { id: 5, name: "Bistromath", descriptor: "Explain the Bistromathic Drive" }
   }}
   defaultExpanded={[1, 3]}
   rootId={1}
