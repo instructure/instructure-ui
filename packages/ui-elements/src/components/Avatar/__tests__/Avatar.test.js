@@ -62,14 +62,15 @@ describe('<Avatar />', () => {
   describe('when an image src url is provided', () => {
     it('should display the image url provided', () => {
       // eslint-disable-next-line max-len
-      const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+      const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
-      const subject = testbed.render({
-        src: image
-      })
+      const subject = testbed.render({ src })
+      const image = Testbed.wrap(subject.instance()._image)
+
+      image.dispatchNativeEvent('load')
 
       expect(subject.getComputedStyle().getPropertyValue('background-image'))
-        .to.contain(image)
+        .to.contain(src)
     })
   })
 
