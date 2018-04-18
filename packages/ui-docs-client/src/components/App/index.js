@@ -346,11 +346,8 @@ export default class App extends Component {
               />
             </div>
           </Tray>
-          <GithubCorner
-            className={styles['github-corner']}
-            href="https://www.github.com/instructure/instructure-ui"
-          />
         </div>
+        <GithubCorner href="https://www.github.com/instructure/instructure-ui" />
       </div>
     )
   }
