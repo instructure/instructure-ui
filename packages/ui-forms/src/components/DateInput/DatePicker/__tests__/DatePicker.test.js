@@ -57,6 +57,35 @@ describe('<DatePicker />', () => {
     expect(onSelectedChange).to.have.been.called
     const onChangeArg = onSelectedChange.getCall(0).args[1]
     expect(DateTime.isValid(onChangeArg)).to.be.ok
+    expect(cell.props().disabled).to.eq(false)
+  })
+
+  it('should disable the date if the day is in disabledDaysOfWeek', () => {
+    const onSelectedChange = testbed.stub()
+    const subject = testbed.render({ disabledDaysOfWeek: [0, 1, 2, 3, 4, 5, 6], onSelectedChange })
+    const cell = subject.find(`.${styles.outside}`).first()
+    cell.simulate('click')
+    expect(onSelectedChange).to.not.have.been.called
+    expect(cell.props().disabled).to.eq(true)
+  })
+
+  it('should disable the date if the day is in disabledDays', () => {
+    const onSelectedChange = testbed.stub()
+    const subject = testbed.render({ disabledDays: [new Date(2017, 5, 5)], onSelectedChange })
+    const cell = subject.find(`.${styles.cell}`).at(8)
+    cell.simulate('click')
+    expect(onSelectedChange).to.not.have.been.called
+    expect(cell.props().disabled).to.eq(true)
+  })
+
+  it('should disable the day if the disabledDays callback returns true', () => {
+    const disabledDays = (day) => true
+    const onSelectedChange = testbed.stub()
+    const subject = testbed.render({ disabledDays: disabledDays, onSelectedChange })
+    const cell = subject.find(`.${styles.cell}`).at(8)
+    cell.simulate('click')
+    expect(onSelectedChange).to.not.have.been.called
+    expect(cell.props().disabled).to.eq(true)
   })
 
   it('fires onRenderedChange when next arrow is clicked', () => {
@@ -147,6 +176,36 @@ describe('<DatePicker />', () => {
     const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.up })
     expect(subject.instance().focusedValue).to.equal('2017-04-24T00:00:00+02:00')
+  })
+
+  it('should skip disabled days on key right', () => {
+    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 4, 2)] })
+    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
+    expect(subject.instance().focusedValue).to.equal('2017-05-03T00:00:00+02:00')
+  })
+
+  it('should skip disabled days on key left', () => {
+    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 3, 30)] })
+    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
+    expect(subject.instance().focusedValue).to.equal('2017-04-29T00:00:00+02:00')
+  })
+
+  it('should skip disabled days on key down', () => {
+    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 4, 8)] })
+    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.down })
+    expect(subject.instance().focusedValue).to.equal('2017-05-15T00:00:00+02:00')
+  })
+
+  it('should skip disabled days on key up', () => {
+    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 3, 24)] })
+    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.up })
+    expect(subject.instance().focusedValue).to.equal('2017-04-17T00:00:00+02:00')
+  })
+
+  it('should stay on the current day on arrow change if more than the the following 60 days are disabled', () => {
+    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: (date) => true })
+    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
+    expect(subject.instance().focusedValue).to.equal('2017-05-01')
   })
 
   it('should move slider to a different month when focus moves out of month', () => {

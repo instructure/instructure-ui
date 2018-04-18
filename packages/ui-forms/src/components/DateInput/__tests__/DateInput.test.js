@@ -87,25 +87,31 @@ describe('<DateInput />', () => {
     expect(onDateChange.getCall(0).args[1]).to.equal('2017-05-01T00:00:00+02:00')
   })
 
-  it('should forward the current date, locale, and timezone to the DatePicker', () => {
+  it('should forward the current date, locale, timezone, disabledDays, and disabledDaysOfWeek to the DatePicker', () => {
     // Popovers are tricky because of the portal, so we need to do this
     let datePicker = null
     const datePickerRef = dp => {
       datePicker = dp
     }
 
+    const disabledDays = [new Date()]
     const subject = testbed.render({
       locale: 'fr',
       timezone: 'Europe/Paris',
       defaultDateValue: '2017-05-01',
+      disabledDaysOfWeek: [0, 6],
+      disabledDays: disabledDays,
       datePickerRef
     })
     subject.find('input').simulate('click')
     expect(datePicker.props).to.include({
       locale: 'fr',
       timezone: 'Europe/Paris',
-      selectedValue: '2017-05-01T00:00:00+02:00'
+      selectedValue: '2017-05-01T00:00:00+02:00',
+      disabledDays
     })
+
+    expect(datePicker.props.disabledDaysOfWeek).to.eql([0, 6])
   })
 
   it('should not forward certain props to the TextInput', () => {
@@ -161,6 +167,22 @@ describe('<DateInput />', () => {
       { text: errorText, type: 'error' }
     ])
     expect(subject.text()).to.equal(subject.props().label + dateText + errorText)
+  })
+
+  it('should render the disabledDateMessage if the date is disabled', () => {
+    const subject = testbed.render({ disabledDays: [new Date(2017, 4, 1)], disabledDateMessage: 'Date is disabled!!' })
+    subject.find('input').setValue('5/1/2017')
+    expect(subject.find('TextInput').props().messages).to.deep.equal([
+      { text: 'Date is disabled!!', type: 'error' }
+    ])
+  })
+
+  it('should render a default disabledDateMessage if no message was provided', () => {
+    const subject = testbed.render({ disabledDays: [new Date(2017, 4, 1)] })
+    subject.find('input').setValue('5/1/2017')
+    expect(subject.find('TextInput').props().messages).to.deep.equal([
+      { text: 'May 1, 2017 is disabled', type: 'error' }
+    ])
   })
 
   it('should render fail message when input is invalid', () => {
@@ -241,6 +263,40 @@ describe('<DateInput />', () => {
     dateInput.setValue('')
     dateInput.simulate('blur')
     expect(onDateChange).to.have.been.calledTwice
+  })
+
+  it('should fire the onDateChange event with dateIsDisabled=true event when the date is disabled', () => {
+    const onDateChange = testbed.stub()
+    testbed.stub(console, 'error')
+
+    const subject = testbed.render({
+      onDateChange,
+      dateValue: new Date('2017-05-02T13:40:00').toISOString(),
+      disabledDays: [new Date(2017, 4, 3)]
+    })
+
+    subject.find('input').setValue('5/3/2017')
+    subject.find('input').simulate('blur')
+
+    expect(onDateChange).to.have.been.called
+    expect(onDateChange.getCall(0).args[4]).to.equal(true)
+  })
+
+  it('should fire the onDateChange event with dateIsDisabled=false event when the date is enabled', () => {
+    const onDateChange = testbed.stub()
+    testbed.stub(console, 'error')
+
+    const subject = testbed.render({
+      onDateChange,
+      dateValue: new Date('2017-05-02T13:40:00').toISOString(),
+      disabledDays: [new Date(2017, 4, 3)]
+    })
+
+    subject.find('input').setValue('5/4/2017')
+    subject.find('input').simulate('blur')
+
+    expect(onDateChange).to.have.been.called
+    expect(onDateChange.getCall(0).args[4]).to.equal(false)
   })
 
   it('should not touch the time portion of the initial value when DatePicker value changes', () => {

@@ -40,6 +40,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 import DatePickerPagination from './DatePickerPagination'
 import styles from './styles.css'
 import theme from './theme'
+import { isSameMonth, isSameDay, isDayDisabled } from "../utils/dateHelpers"
 
 /**
 ---
@@ -103,7 +104,24 @@ export default class DatePicker extends Component {
     /**
       Called with the triggering event followed by an ISO 8601 formatted string.
     **/
-    onRenderedChange: PropTypes.func
+    onRenderedChange: PropTypes.func,
+    /**
+      An array of weekdays that should be unselectable. Each day should be an integer
+      corresponding to the day of the week, where 0 = Sunday, 1 = Monday, 2 = Tuesday,
+      3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday.
+    **/
+    disabledDaysOfWeek: PropTypes.array,
+    /**
+      An array of Date objects that should be unselectable or a callback function
+      that gets passed a date and should return a boolean indicating where it is
+      unselectable.
+    **/
+    disabledDays: PropTypes.oneOfType([PropTypes.array, PropTypes.func])
+  }
+
+  static defaultProps = {
+    disabledDaysOfWeek: [],
+    disabledDays: []
   }
 
   static contextTypes = {
@@ -229,6 +247,35 @@ export default class DatePicker extends Component {
     return this.state.focusedValue
   }
 
+  findNextEnabledDay = (date, eventKeycode, currentIteration = 0, iterationMax = 60) => {
+    switch (eventKeycode) {
+      case (keycode.codes.left):
+        date.subtract(1, 'days')
+        break
+      case (keycode.codes.right):
+        date.add(1, 'days')
+        break
+      case (keycode.codes.up):
+        date.subtract(7, 'days')
+        break
+      case (keycode.codes.down):
+        date.add(7, 'days')
+        break
+      default:
+        break
+    }
+
+    // Since we allow a datesDisabled callback function, the set of disabled dates is non
+    // deterministic, which means without this check the function could recurse infinitely.
+    if(currentIteration >= iterationMax) {
+      return null
+    } else if(isDayDisabled(date, this.props.disabledDaysOfWeek, this.props.disabledDays)) {
+      return this.findNextEnabledDay(date, eventKeycode, currentIteration + 1)
+    } else {
+      return date
+    }
+  }
+
   handleCalendarKeyDown = (e) => {
     const {
       up,
@@ -244,29 +291,18 @@ export default class DatePicker extends Component {
       return
     }
 
+    const focusedDate = this.parseDate(this.state.focusedValue)
+    const newFocusedDate = this.findNextEnabledDay(focusedDate, e.keyCode)
+
+    if(!newFocusedDate) {
+      return
+    }
+
     e.preventDefault()
     e.stopPropagation()
 
-    const focusedDate = this.parseDate(this.state.focusedValue)
 
-    switch (e.keyCode) {
-      case (left):
-        focusedDate.subtract(1, 'days')
-        break
-      case (right):
-        focusedDate.add(1, 'days')
-        break
-      case (up):
-        focusedDate.subtract(7, 'days')
-        break
-      case (down):
-        focusedDate.add(7, 'days')
-        break
-      default:
-        break
-    }
-
-    const newFocusedString = focusedDate.format()
+    const newFocusedString = newFocusedDate.format()
     this.updatePagination(newFocusedString)
     this.setState({ focusedValue: newFocusedString })
   }
@@ -335,14 +371,6 @@ export default class DatePicker extends Component {
     }
   }
 
-  isSameDay (a, b) {
-    return this.isSameMonth(a, b) && a.isSame(b, 'day')
-  }
-
-  isSameMonth (a, b) {
-    return a.isSame(b, 'year') && a.isSame(b, 'month')
-  }
-
   renderHeaderCell (day) {
     return (
       <th className={styles.header} key={day.dayOfYear()}>
@@ -363,24 +391,28 @@ export default class DatePicker extends Component {
   }
 
   renderDayCell (day, today, selected, rendered, focused) {
+    const disabled = isDayDisabled(day, this.props.disabledDaysOfWeek, this.props.disabledDays)
+
     const classes = {
       [styles.cell]: true,
-      [styles.today]: this.isSameDay(day, today),
-      [styles.selected]: this.isSameDay(day, selected),
-      [styles.outside]: !this.isSameMonth(day, rendered)
+      [styles.today]: isSameDay(day, today),
+      [styles.selected]: isSameDay(day, selected),
+      [styles.outside]: !isSameMonth(day, rendered),
+      [styles.disabled]: disabled
     }
 
-    const handleDateClick = (e) => this.handleDateClick(e, day.format())
+    const handleDateClick = disabled ? (e) => null : (e) => this.handleDateClick(e, day.format())
     const handleDateFocus = () => this.handleDateFocus(day.format())
     return (
       <td key={day.dayOfYear()}>
         <button
           type="button"
           className={classnames(classes)}
-          tabIndex={this.isSameMonth(day, rendered) ? '0' : '-1'}
-          ref={(c) => { if (this.isSameDay(day, focused)) { this._focusedDay = c } }}
+          tabIndex={isSameMonth(day, rendered) ? '0' : '-1'}
+          ref={(c) => { if (isSameDay(day, focused)) { this._focusedDay = c } }}
           onClick={handleDateClick}
           onFocus={handleDateFocus}
+          disabled={disabled}
         >
           { day.format('D') }
         </button>

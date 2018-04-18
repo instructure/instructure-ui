@@ -44,6 +44,7 @@ import TextInput from '../TextInput'
 
 import styles from './styles.css'
 import theme from './theme'
+import { isDayDisabled } from "./utils/dateHelpers"
 
 /**
 ---
@@ -68,6 +69,13 @@ export default class DateInput extends Component {
       PropTypes.string,
       PropTypes.func
     ]).isRequired,
+    /**
+     * The message that's used when a date is disabled
+     */
+    disabledDateMessage: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.func
+    ]),
     /**
      * Where the calendar popover should be placed.
      */
@@ -104,7 +112,8 @@ export default class DateInput extends Component {
     /**
       Called when the date value of the input has changed.
       The parameters are the triggering event, new date value in ISO 8601 format,
-      the raw user input, and if the conversion from raw to a date was succesful.
+      the raw user input, if the conversion from raw to a date was succesful, and
+      if the selected date is disabled.
     **/
     onDateChange: PropTypes.func,
 
@@ -144,7 +153,19 @@ export default class DateInput extends Component {
      * Works just like disabled but keeps the same styles as if it were active
      */
     readOnly: PropTypes.bool,
-    required: PropTypes.bool
+    required: PropTypes.bool,
+    /**
+      An array of weekdays that should be unselectable. Each day should be an integer
+      corresponding to the day of the week, where 0 = Sunday, 1 = Monday, 2 = Tuesday,
+      3 = Wednesday, 4 = Thursday, 5 = Friday, 6 = Saturday.
+    **/
+    disabledDaysOfWeek: PropTypes.array,
+    /**
+      An array of Date objects that should be unselectable or a callback function
+      that gets passed a date and should return a boolean indicating where it is
+      unselectable.
+    **/
+    disabledDays: PropTypes.oneOfType([PropTypes.array, PropTypes.func])
   }
 
   static defaultProps = {
@@ -155,7 +176,7 @@ export default class DateInput extends Component {
     locale: undefined,
     timezone: undefined,
     defaultDateValue: undefined,
-    onDateChange: (e, isoValue, rawValue, rawConversionFailed) => {},
+    onDateChange: (e, isoValue, rawValue, rawConversionFailed, dateIsDisabled) => {},
     dateValue: undefined,
     datePickerRef: el => {},
     inputRef: el => {},
@@ -168,7 +189,9 @@ export default class DateInput extends Component {
     size: 'medium',
     disabled: false,
     readOnly: false,
-    layout: 'stacked'
+    layout: 'stacked',
+    disabledDaysOfWeek: [],
+    disabledDays: []
   }
 
   static contextTypes = {
@@ -267,8 +290,19 @@ export default class DateInput extends Component {
 
     const messages = []
     const parsedDate = this.parseDate(this.state.textInputValue)
+    const isValid = parsedDate.isValid()
 
-    if (parsedDate.isValid()) {
+    if (isValid && isDayDisabled(parsedDate, this.props.disabledDaysOfWeek, this.props.disabledDays)) {
+      let { disabledDateMessage } = this.props
+      if (typeof disabledDateMessage === 'function') {
+        disabledDateMessage = disabledDateMessage(this.state.textInputValue)
+      }
+
+      messages.push({
+        text: disabledDateMessage || `${parsedDate.format(this.props.format)} is disabled`,
+        type: 'error'
+      })
+    } else if (isValid) {
       messages.push({
         text: parsedDate.format(this.props.format),
         type: 'success'
@@ -361,6 +395,7 @@ export default class DateInput extends Component {
       const newState = this.computeState(rawAcceptedValue, parsedDate, props, state)
       const acceptedValueChanged = newState.acceptedValue !== state.acceptedValue
       const validOrEmptyChanged = newState.isValidOrEmpty !== state.isValidOrEmpty
+      const dateIsDisabled = parsedDate.isValid() ? isDayDisabled(parsedDate, this.props.disabledDaysOfWeek, this.props.disabledDays) : false
 
       if ((acceptedValueChanged || validOrEmptyChanged) && (typeof this.props.onDateChange === 'function')) {
         this.props.onDateChange(
@@ -368,7 +403,8 @@ export default class DateInput extends Component {
           // since the API here is ISO dates in, we should pass an ISO date back in the handler
           newState.acceptedValue,
           newState.textInputValue,
-          !newState.isValidOrEmpty
+          !newState.isValidOrEmpty,
+          dateIsDisabled
         )
       }
 
@@ -453,6 +489,8 @@ export default class DateInput extends Component {
               locale={this.locale}
               timezone={this.timezone}
               onSelectedChange={this.handleCalendarSelect}
+              disabledDaysOfWeek={this.props.disabledDaysOfWeek}
+              disabledDays={this.props.disabledDays}
               ref={this.props.datePickerRef}
             />
           </PopoverContent>

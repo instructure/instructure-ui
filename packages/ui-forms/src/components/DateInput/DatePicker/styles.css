@@ -79,3 +79,8 @@
   margin: var(--labelMargin);
   padding: var(--labelPadding);
 }
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}

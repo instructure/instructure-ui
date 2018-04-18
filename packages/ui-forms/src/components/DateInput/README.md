@@ -59,7 +59,7 @@ class Example extends React.Component {
     this.setState({ messages: [] })
   };
 
-  onDateChange = (e, isoDate, rawValue, rawConversionFailed) => {
+  onDateChange = (e, isoDate, rawValue, rawConversionFailed, dateIsDisabled) => {
     const messages = []
 
     if (!isoDate) {
@@ -107,6 +107,8 @@ class Example extends React.Component {
           onChange={this.onInputChange}
           onBlur={this.onInputBlur}
           dateValue={this.state.isoDate}
+          disabledDateMessage={(date) => `Date is disabled`}
+          disabledDaysOfWeek={[0, 6]}
           required
         />
       </FormFieldGroup>
@@ -116,8 +118,61 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
+A DateInput with a `disabledDaysOfWeek` prop disabling weekends:
+
+```js
+---
+example: true
+---
+<DateInput
+  previousLabel="previous month"
+  nextLabel="next month"
+  placeholder="Select a date"
+  label="Date"
+  onDateChange={() => { console.log(arguments) }}
+  invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
+  disabledDaysOfWeek={[0, 6]}
+/>
+```
+
+A DateInput with a `disabledDays` array
+
+```js
+---
+example: true
+---
+<DateInput
+  previousLabel="previous month"
+  nextLabel="next month"
+  placeholder="Select a date"
+  label="Date"
+  onDateChange={() => { console.log(arguments) }}
+  invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
+  disabledDays={[new Date(2018, 3, 20), new Date(2018, 3, 1)]}
+/>
+```
+
+
+A DateInput with a `disabledDays` callback function
+
+```js
+---
+example: true
+---
+<DateInput
+  previousLabel="previous month"
+  nextLabel="next month"
+  placeholder="Select a date"
+  label="Date"
+  onDateChange={() => { console.log(arguments) }}
+  invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
+  disabledDays={(day) => day > new Date()}
+/>
+```
+
 DateInput passes most properties through to the underlying [TextInput](#TextInput).
-It does not pass through `type`, `defaultValue`, or `value`.
+It does not pass through `type`, `defaultValue`, `disabledDays`, `disabledDaysOfWeek`
+or `value`.
 
 When the DatePicker value changes, the new date is displayed in the TextInput
 according to the specified format.
