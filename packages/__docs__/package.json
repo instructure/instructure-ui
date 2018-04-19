@@ -56,7 +56,7 @@
     "gh-pages": "^1.0.0",
     "http-server": "^0.11.1",
     "lorem-ipsum": "^1.0.4",
-    "moment": "^2.10.6",
+    "moment": "^2.22.1",
     "raw-loader": "^0.5.1",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",

@@ -1,6 +1,7 @@
+import path from 'path'
 import { configure } from '@storybook/react'
 import { setOptions } from "@storybook/addon-options";
-import { getStorybook } from '@storybook/react'
+import { getStorybook, storiesOf } from '@storybook/react'
 
 import '../packages/ui-themes/src/canvas'
 
@@ -13,13 +14,25 @@ setOptions({
   showSearchBox: false
 })
 
-// automatically import all stories.js files in the packages
-const req = require.context('../packages', true, /stories\.js$/)
+configure(() => {
+  // Automatically import all example js files
+  const req = require.context('../packages', true,  /src\/\S+\/examples\.js$/)
 
-function loadStories() {
-  req.keys().forEach((filename) => req(filename))
-}
-
-configure(loadStories, module)
+  req.keys().forEach((pathToExamples) => {
+    const Examples = req(pathToExamples)
+    const component = getComponentNameFromDirectory(pathToExamples)
+    const stories = storiesOf(component, module)
+    Object.keys(Examples).forEach((example) => {
+      stories.add(example, Examples[example])
+    })
+  })
+}, module)
 
 export { getStorybook }
+
+function getComponentNameFromDirectory (filePath) {
+  const directories = path.dirname(filePath)
+    .split(path.sep)
+    .filter(part => part !== '__tests__')
+  return directories.pop()
+}
