@@ -33,12 +33,12 @@ import '@instructure/ui-themes/lib/canvas'
 const TESTS = []
 
 // Automatically import all component .examples.js files in packages
-const requireExamples = require.context('../packages', true,  /src\/\S+\.examples\.js$/)
+const requireExamples = require.context('../packages', true,  /src\/\S+\/examples\.js$/)
 
 // assemble the tests from the examples
 requireExamples.keys()
   .forEach((pathToExamples) => {
-    const componentName = path.basename(pathToExamples, '.js').replace('.examples', '')
+    const componentName = getComponentNameFromDirectory(pathToExamples)
     const componentExamples = requireExamples(pathToExamples)
 
     Object.keys(componentExamples)
@@ -71,4 +71,11 @@ happo.cleanOutElement = function (element) {
 
 happo.getRootNodes = function () {
  return document.querySelectorAll('[data-reactroot]')
+}
+
+function getComponentNameFromDirectory (filePath) {
+  const directories = path.dirname(filePath)
+    .split(path.sep)
+    .filter(part => part !== '__tests__')
+  return directories.pop()
 }

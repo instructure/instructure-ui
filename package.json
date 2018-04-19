@@ -51,21 +51,21 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/conventional-changelog": "1.0.0",
-    "@storybook/addon-links": "^3.3.15",
-    "@storybook/addon-options": "^3.3.15",
-    "@storybook/react": "^3.4.1",
+    "@storybook/addon-links": "^3.4.2",
+    "@storybook/addon-options": "^3.4.2",
+    "@storybook/react": "^3.4.2",
     "commitizen": "2.9.6",
     "happo": "^5.0.0",
     "happo-target-firefox": "^5.0.0",
-    "lerna": "2.9.0",
-    "lint-staged": "^6.1.0",
+    "lerna": "2.10.2",
+    "lint-staged": "^7.0.4",
     "npm-run-all": "4.1.2",
     "react": "15.6.2",
     "react-dom": "15.6.2",
     "standard-version": "4.3.0",
     "story2sketch": "^0.2.1",
     "validate-commit-msg": "2.14.0",
-    "yarn": "1.5.1"
+    "yarn": "1.6.0"
   },
   "config": {
     "commitizen": {
