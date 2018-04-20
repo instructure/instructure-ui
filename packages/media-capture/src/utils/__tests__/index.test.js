@@ -38,7 +38,7 @@ describe('canUseMediaCapture', () => {
 
   it('returns true when getUserMedia, MediaRecorder and AudioContext are supported', () => {
     expect(canUseMediaCapture(win)).to.be.true
-  });
+  })
 
   it('returns false when getUserMedia is not supported', () => {
     delete win.navigator.mediaDevices

@@ -223,8 +223,8 @@ class DateTimeInput extends Component {
     const timezone = props.timezone || context.timezone || DateTime.browserTimeZone()
     if (initialValue) {
       // guarantee the initialValue is in the given timezone
-      initialValue = DateTime.toLocaleString(initialValue, locale, timezone);
-      ({date, time} = this.splitDateAndTime(initialValue));
+      initialValue = DateTime.toLocaleString(initialValue, locale, timezone); // eslint-disable-line semi
+      ({date, time} = this.splitDateAndTime(initialValue));  // eslint-disable-line semi
       ({result, messages} = this.combineDateAndTime(date, time))
     }
     messages = this.mergeMessages(messages, this.props)
@@ -245,13 +245,13 @@ class DateTimeInput extends Component {
 
     if (nextProps.value) {
       // guarantee the new datetime remains in the given timezone
-      let newValue = DateTime.toLocaleString(nextProps.value, this.locale, this.timezone);
+      let newValue = DateTime.toLocaleString(nextProps.value, this.locale, this.timezone)
       const {date, time} = this.splitDateAndTime(newValue)
       let {result, messages} = this.combineDateAndTime(date, time)
       messages = this.mergeMessages(messages, nextProps)
       this.setState({date, time, result, messages})
     } else {
-      this.setState({messages: this.mergeMessages(this.state.messages, nextProps)});
+      this.setState({messages: this.mergeMessages(this.state.messages, nextProps)})
     }
   }
 

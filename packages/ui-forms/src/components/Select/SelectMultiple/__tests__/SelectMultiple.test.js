@@ -318,7 +318,7 @@ describe('<SelectMultiple />', () => {
     })
     testbed.tick()
     const tags = subject.find('Tag')
-    const nonDismissibleTag = tags.at(0);
+    const nonDismissibleTag = tags.at(0)
     expect(nonDismissibleTag.prop('onChange')).to.equal(undefined)
     expect(nonDismissibleTag.prop('dismissible')).to.equal(false)
   })
