@@ -1,7 +1,7 @@
 ---
 category: Contributing/RFCs
-id: DisabledDaysDateInputRFC
-title: DisabledDaysDateInput
+id: DateInputRFC
+title: DateInput disabled days
 ---
 
 

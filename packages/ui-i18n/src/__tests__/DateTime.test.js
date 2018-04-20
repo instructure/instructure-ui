@@ -49,7 +49,7 @@ describe('DateTime', () => {
 
   it('knows when now is', () => {
     // not much of a test, but I need it for coverage stats
-    const result = now(locale, timezone);
+    const result = now(locale, timezone)
     expect(result)
   })
 

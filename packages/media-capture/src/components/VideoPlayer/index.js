@@ -97,7 +97,7 @@ class VideoPlayer extends Component {
       this.video.removeEventListener(evt, this.applyVideoProps)
     })
     // remove the video ref and stop applying video props
-    this.video = null;
+    this.video = null
   }
 
   _registerEventHandlers () {

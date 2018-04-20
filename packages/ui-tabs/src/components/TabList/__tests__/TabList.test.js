@@ -333,7 +333,7 @@ describe('<TabList />', () => {
 
       expect(subject.find('[role="tabpanel"]')).to.have.length(3)
     })
-  });
+  })
 
 
   describe('with nodes as tab titles', () => {
@@ -350,5 +350,5 @@ describe('<TabList />', () => {
 
       expect(subject.find('[role="tabpanel"]')).to.have.length(3)
     })
-  });
-});
+  })
+})

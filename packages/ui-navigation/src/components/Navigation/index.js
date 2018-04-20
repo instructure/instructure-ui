@@ -129,7 +129,7 @@ class Navigation extends Component {
         <li className={styles.list}>
           {navItem}
         </li>
-      );
+      )
     })
   }
 

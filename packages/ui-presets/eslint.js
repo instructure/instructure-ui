@@ -58,7 +58,8 @@ module.exports = {
         ignoreRestSiblings: true,
       },
     ],
-    'no-extra-semi': 'error',
+    'semi': ['error', 'never'],
+    'semi-spacing': ['error', { before: false, after: true }],
     'no-trailing-spaces': 'error',
     'no-param-reassign': ['error', { props: true }],
     'notice/notice': ['error', {

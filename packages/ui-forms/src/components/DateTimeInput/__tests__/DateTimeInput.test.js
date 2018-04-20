@@ -183,18 +183,18 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should provide the html elements for date and time input', () => {
-    let dref = undefined;
-    let tref = undefined;
+    let dref = undefined
+    let tref = undefined
     const subject = testbed.render({
       dateInputRef: (el) => {dref = el},
       timeInputRef: (el) => {tref = el}
     })
 
-    const dateInput = subject.find('DateInput').find('input').nodes[0];
-    expect(dateInput === dref).to.be.true;
+    const dateInput = subject.find('DateInput').find('input').nodes[0]
+    expect(dateInput === dref).to.be.true
 
-    const timeInput = subject.find('TimeInput').find('input').nodes[0];
-    expect(timeInput === tref).to.be.true;
+    const timeInput = subject.find('TimeInput').find('input').nodes[0]
+    expect(timeInput === tref).to.be.true
   })
 
   it('should update state when value prop changes', () => {
@@ -245,7 +245,7 @@ describe('<DateTimeInput />', () => {
       messages: [{text: "May 1, 2017 1:30 PM", type: "success"}]
     })
 
-    subject.setProps({messages: [{text: 'hello world', type: 'success'}]});
+    subject.setProps({messages: [{text: 'hello world', type: 'success'}]})
     expect(subject.instance().state).to.eql({
       date: '2017-05-01',
       time: '13:30:00.000-04:00',
