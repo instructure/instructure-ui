@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.0"></a>
+# [5.3.0](https://github.com/instructure/instructure-ui/compare/v5.2.0...v5.3.0) (2018-04-20)
+
+
+### Bug Fixes
+
+* **ui-alerts:** Fix an issue where removing screenreader alerts could fail ([4fac6e6](https://github.com/instructure/instructure-ui/commit/4fac6e6))
+* **ui-docs-client:** Update GithubCorner styles ([57ddbec](https://github.com/instructure/instructure-ui/commit/57ddbec))
+* **ui-icons,IconAssignment:** Assignment should show for line & solid ([fbfcf59](https://github.com/instructure/instructure-ui/commit/fbfcf59))
+* **ui-utils,getFontSize:** Improve performance ([702c923](https://github.com/instructure/instructure-ui/commit/702c923))
+
+
+### Features
+
+* **build:** Add visual diff scripts ([792d958](https://github.com/instructure/instructure-ui/commit/792d958))
+* **build:** Generate Sketch assets from component examples ([33f88ae](https://github.com/instructure/instructure-ui/commit/33f88ae))
+* **ui-forms:** allow persistent options in MultipleSelect ([ffc5946](https://github.com/instructure/instructure-ui/commit/ffc5946))
+* **ui-icons:** import codemod config ([3b96226](https://github.com/instructure/instructure-ui/commit/3b96226))
+* **ui-navigation:** new Navigation/NavigationItem component ([29da924](https://github.com/instructure/instructure-ui/commit/29da924))
+
+
+
 <a name="5.2.0"></a>
 # [5.2.0](https://github.com/instructure/instructure-ui/compare/v5.1.1...v5.2.0) (2018-04-06)
 
