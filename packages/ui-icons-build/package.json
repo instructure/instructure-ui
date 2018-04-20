@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons-build",
-  "version": "5.2.0",
+  "version": "5.3.0",
   "description": "Build scripts to export icons from Sketch files",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/ui-presets": "^5.2.0",
+    "@instructure/ui-presets": "^5.3.0",
     "del": "3.0.0",
     "glob": "7.1.2",
     "gulp": "3.9.1",
