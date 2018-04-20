@@ -95,26 +95,6 @@ describe('<Avatar />', () => {
     })
   })
 
-  describe('when the user name has leading spaces', () => {
-    it('should skip them', () => {
-      const subject = testbed.render({
-        name: ' Jessica Jones'
-      })
-
-      expect(subject.text()).to.equal('JJ')
-    })
-  })
-
-  describe('when the user name is empty', () => {
-    it('should render', () => {
-      const subject = testbed.render({
-        name: ''
-      })
-
-      expect(subject.text()).to.equal('')
-    })
-  })
-
   describe('when alt text is provided', () => {
     it('should render the text as an aria-label attribute', () => {
       const subject = testbed.render({alt: 'This is a test'})

@@ -60,7 +60,7 @@ module.exports = exports.default = function transformClassDisplayName ({types: t
   /**
    * Insert a static displayName for the identifier
    */
-  function insertDisplayName (path, id) {
+  function insertDisplayName(path, id) {
     const assignment = t.assignmentExpression(
       '=',
       t.memberExpression(
