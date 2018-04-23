@@ -12,17 +12,50 @@ render: false
 example: true
 ---
 class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      showPopover: false
+    }
+  }
+
+  showPopover = () => {
+    this.setState({
+      showPopover: true
+    })
+  }
+
+  hidePopover = () => {
+    this.setState({
+      showPopover: false
+    })
+  }
   render () {
     return (
       <div style={{ paddingBottom: 25 }}>
-        <Popover on="click">
-          <PopoverTrigger><Button>Click Me</Button></PopoverTrigger>
-          <PopoverContent><Heading>Hello</Heading></PopoverContent>
-        </Popover>
-        &nbsp;
-        <Popover>
-          <PopoverTrigger><Link>Hover or Focus Me</Link></PopoverTrigger>
-          <PopoverContent><Heading>Hello</Heading></PopoverContent>
+        <Popover
+          on="click"
+          shouldContainFocus
+          shouldReturnFocus
+          shouldCloseOnDocumentClick
+          show={this.state.showPopover}
+          onDismiss={this.hidePopover}
+        >
+          <PopoverTrigger><Button onClick={this.showPopover}>Click Me</Button></PopoverTrigger>
+          <PopoverContent>
+            <Container padding="large" display="block">
+              <CloseButton
+                placement="end"
+                offset="x-small"
+                variant="icon"
+                onClick={this.hidePopover}
+              >
+                Close
+              </CloseButton>
+              <Heading>Hello</Heading>
+            </Container>
+          </PopoverContent>
         </Popover>
       </div>
     )
@@ -32,7 +65,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-`<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property 
+`<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property
 set, it will trap focus inside the `<Popover />`.
 
 ```js

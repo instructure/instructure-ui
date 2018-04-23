@@ -59,7 +59,8 @@ export default function calculateElementPosition (element, target, options) {
       style: {
         left: '-9999em',
         overflow: 'hidden',
-        position: 'absolute'
+        position: 'absolute',
+        display: element ? 'none' : null
       }
     }
   }

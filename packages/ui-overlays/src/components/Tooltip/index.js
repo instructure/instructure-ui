@@ -86,9 +86,6 @@ export default class Tooltip extends Component {
       return (
         <Trigger {...props}>
           {this.props.children}
-          <ScreenReaderContent>
-            {this.props.tip}
-          </ScreenReaderContent>
         </Trigger>
       )
     } else {

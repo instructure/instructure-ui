@@ -391,12 +391,13 @@ class Popover extends Component {
     let trigger = pick(Popover.Trigger, this.props.children)
 
     if (trigger) {
-      const { on } = this.props
+      const { on, shouldContainFocus } = this.props
       let onClick
       let onBlur
       let onFocus
       let onMouseOut
       let onMouseOver
+      let expanded
 
       if (on.indexOf('click') > -1) {
         onClick = () => {
@@ -425,11 +426,18 @@ class Popover extends Component {
         }
       }
 
+      if (shouldContainFocus) {
+        // only set aria-expanded if popover can contain focus
+        expanded = this.shown ? 'true' : 'false'
+      } else {
+        expanded = null
+      }
+
       trigger = safeCloneElement(trigger, {
         ref: el => {
           this._trigger = el
         },
-        'aria-expanded': this.shown ? 'true' : 'false',
+        'aria-expanded': expanded,
         onClick: createChainedFunction(onClick, this.props.onClick),
         onBlur: createChainedFunction(onBlur, this.props.onBlur),
         onFocus: createChainedFunction(onFocus, this.props.onFocus),
