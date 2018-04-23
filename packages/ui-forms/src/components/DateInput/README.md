@@ -15,7 +15,7 @@ example: true
   nextLabel="next month"
   placeholder="Select a date"
   label="Date"
-  onDateChange={() => { console.log(arguments) }}
+  onDateChange={(event, isoValue, rawValue, rawConversionFailed) => { console.log(event, isoValue, rawValue, rawConversionFailed) }}
   invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
 />
 ```
@@ -31,7 +31,7 @@ example: true
   nextLabel="next month"
   placeholder="Select a date"
   label="Date"
-  onDateChange={() => { console.log(arguments) }}
+  onDateChange={(event, isoValue, rawValue, rawConversionFailed) => { console.log(event, isoValue, rawValue, rawConversionFailed) }}
   invalidDateMessage={(value) => { return `'${value}' is not a valid date` }}
   defaultDateValue={new Date()}
   disabled

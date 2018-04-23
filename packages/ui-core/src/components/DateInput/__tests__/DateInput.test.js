@@ -339,7 +339,7 @@ describe('<DateInput />', () => {
     subject.find('input').keyDown('enter')
 
     expect(onDateChange).to.have.been.called
-    expect(onDateChange.getCall(0).args[2]).to.equal('May 1 2017 panda')
+    expect(onDateChange.getCall(0).args[2]).to.equal('May 1, 2017')
   })
 
   it('should meet a11y standards', done => {
