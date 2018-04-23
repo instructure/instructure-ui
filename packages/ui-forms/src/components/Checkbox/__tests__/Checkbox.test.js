@@ -25,6 +25,7 @@
 import React from 'react'
 import Checkbox from '../index'
 import CheckboxFacade from '../CheckboxFacade'
+import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 
 describe('<Checkbox />', () => {
   const testbed = new Testbed(
@@ -36,6 +37,16 @@ describe('<Checkbox />', () => {
 
     expect(subject.find('input').getDOMNode().type)
       .to.equal('checkbox')
+  })
+
+  it('`simple` variant only displays a checkmark when checked', () => {
+    const subject = testbed.render({
+      variant: 'simple',
+      defaultChecked: false
+    })
+
+    const facade = subject.find(CheckboxFacade)
+    expect(facade.find(IconCheckMark)).to.not.exist
   })
 
   describe('events', () => {
