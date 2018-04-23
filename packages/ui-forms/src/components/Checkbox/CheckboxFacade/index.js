@@ -72,9 +72,7 @@ export default class CheckboxFacade extends Component {
     return (
       <span className={classnames(classes)}>
         <span className={styles.facade} aria-hidden="true">
-          <span className={styles.icon}>
-            <IconCheckMark />
-          </span>
+          { checked && <IconCheckMark inline={false} /> }
         </span>
         <span className={styles.label}>
           {this.props.children}
