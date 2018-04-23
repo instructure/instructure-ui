@@ -367,7 +367,7 @@ export default class DateInput extends Component {
           event,
           // since the API here is ISO dates in, we should pass an ISO date back in the handler
           newState.acceptedValue,
-          rawAcceptedValue,
+          newState.textInputValue,
           !newState.isValidOrEmpty
         )
       }
