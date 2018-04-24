@@ -18,7 +18,10 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Container as="div" padding="large">
+      <View
+        as="div"
+        padding="large"
+      >
         <Button
           onClick={() => this.setState({ open: true })}
         >
@@ -33,19 +36,30 @@ class Example extends React.Component {
               shouldReturnFocus
               onDismiss={() => this.setState({ open: false })}
             >
-              <ContextBox withArrow={false} padding="medium">
+              <View
+                as="div"
+                maxWidth="40rem"
+                maxHeight="30rem"
+                background="default"
+                shadow="above"
+                style={{position: 'relative'}}
+                padding="medium"
+              >
                 <CloseButton placement="end" onClick={() => this.setState({ open: false })}>
                   Close
                 </CloseButton>
-                <FormFieldGroup description={<Heading level="h4" as="span">Full name</Heading>} layout="columns">
+                <FormFieldGroup
+                  description={<Heading level="h4" as="span">Full name</Heading>}
+                  layout="columns"
+                >
                   <TextInput width="12rem" label="First" inputRef={(c) => this._firstName = c} />
                   <TextInput width="12rem" label="Last" />
                 </FormFieldGroup>
-              </ContextBox>
+              </View>
             </Dialog>
           </Mask>
         </Portal>
-      </Container>
+      </View>
     )
   }
 }

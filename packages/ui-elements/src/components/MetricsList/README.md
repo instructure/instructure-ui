@@ -19,7 +19,7 @@ example: true
 ---
 example: true
 ---
-<ContextBox padding="small">
+<ContextView padding="small" placement="center start">
   <MetricsList>
     <MetricsListItem
       label={<div>Average Grade<div>High 33%, Low 10%</div></div>}
@@ -38,5 +38,5 @@ example: true
       value="11"
     />
   </MetricsList>
-</ContextBox>
+</ContextView>
 ```

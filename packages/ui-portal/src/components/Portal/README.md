@@ -34,9 +34,9 @@ class Example extends React.Component {
           mountNode={() => this._mountNode}
           open={this.state.isPortalOpen}
         >
-          <ContextBox>
+          <ContextView placement="center start" padding="0 x-small">
             <p>Greetings from the portal!</p>
-          </ContextBox>
+          </ContextView>
         </Portal>
         <Text>
           <p>{lorem.paragraph()}</p>
