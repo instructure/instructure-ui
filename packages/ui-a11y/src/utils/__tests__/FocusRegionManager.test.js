@@ -73,7 +73,7 @@ describe('FocusRegionManager', () => {
     expect(document.activeElement).to.equal(button)
 
     FocusRegionManager.focusRegion(subject.find('[data-test-content]').node)
-
+    testbed.tick()
     expect(document.activeElement).to.equal(subject.find('[data-test-first-tabbable]').node)
   })
 

@@ -131,15 +131,19 @@ export default class KeyboardFocusRegion {
       element = this.firstTabbable || this.firstFocusable || this._contextElement
     }
 
-    try {
-      element && element.focus()
-    } catch (e) {
-      warning(
-        false,
-        '[KeyboardFocusRegion] A focusable element is required in order to set focus to a FocusRegion.'
-      )
-      ownerDocument(this._contextElement).activeElement.blur()
-    }
+    this._raf.push(
+      requestAnimationFrame(() => {
+        try {
+          element && element.focus()
+        } catch (e) {
+          warning(
+            false,
+            '[KeyboardFocusRegion] A focusable element is required in order to set focus to a FocusRegion.'
+          )
+          ownerDocument(this._contextElement).activeElement.blur()
+        }
+      })
+    )
   }
 
   blur () {
