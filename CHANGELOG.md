@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.3.1"></a>
+## [5.3.1](https://github.com/instructure/instructure-ui/compare/v5.3.0...v5.3.1) (2018-04-24)
+
+
+### Bug Fixes
+
+* **ui-themes:** Should be backwards compatible with <= 5.3 components ([6f44e11](https://github.com/instructure/instructure-ui/commit/6f44e11))
+
+
+
 <a name="5.3.0"></a>
 # [5.3.0](https://github.com/instructure/instructure-ui/compare/v5.2.0...v5.3.0) (2018-04-20)
 

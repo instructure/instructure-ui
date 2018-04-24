@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pages",
-  "version": "5.3.0",
+  "version": "5.3.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,16 +22,16 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.3.0",
-    "@instructure/ui-themes": "^5.3.0"
+    "@instructure/ui-presets": "^5.3.1",
+    "@instructure/ui-themes": "^5.3.1"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^5.3.0",
-    "@instructure/ui-buttons": "^5.3.0",
-    "@instructure/ui-container": "^5.3.0",
-    "@instructure/ui-elements": "^5.3.0",
-    "@instructure/ui-themeable": "^5.3.0",
-    "@instructure/ui-utils": "^5.3.0",
+    "@instructure/ui-a11y": "^5.3.1",
+    "@instructure/ui-buttons": "^5.3.1",
+    "@instructure/ui-container": "^5.3.1",
+    "@instructure/ui-elements": "^5.3.1",
+    "@instructure/ui-themeable": "^5.3.1",
+    "@instructure/ui-utils": "^5.3.1",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {
