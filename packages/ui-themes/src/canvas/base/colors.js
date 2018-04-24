@@ -31,6 +31,7 @@ const colors = {
   licorice: '#2D3B45',
   oxford: '#394B58',
   ash: '#8B969E',
+  slate: '#8B969E',
   tiara: '#C7CDD1',
   porcelain: '#F5F5F5',
   white: '#FFFFFF'
