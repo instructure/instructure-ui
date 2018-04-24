@@ -65,7 +65,7 @@ render () {
   }
 
   return (
-    <Container as="div" padding="medium" textAlign="center">
+    <View as="div" padding="medium" textAlign="center">
       <Position
         placement={placement}
         offsetX={offset.x}
@@ -86,7 +86,7 @@ render () {
           </ContextView>
         </PositionContent>
       </Position>
-    </Container>
+    </View>
   )
 }
 }

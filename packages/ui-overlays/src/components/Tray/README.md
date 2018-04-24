@@ -91,11 +91,11 @@ class Example extends React.Component {
           size={this.state.size}
           placement={this.state.placement}
         >
-          <Container as="div" padding="x-large large">
+          <View as="div" padding="x-large large">
             {this.renderCloseButton()}
             <Heading>Hello</Heading>
             <Text as="p" lineHeight="double">{lorem.paragraph()}</Text>
-          </Container>
+          </View>
         </Tray>
       </div>
     )

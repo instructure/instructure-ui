@@ -8,7 +8,7 @@ A Mask component covers its closest positioned parent (either absolute or relati
 ---
 example: true
 ---
-<Container
+<View
   padding="large"
   margin="medium"
   textAlign="center"
@@ -17,7 +17,7 @@ example: true
 >
   <Heading>Some content that is masked</Heading>
   <Mask />
-</Container>
+</View>
 ```
 
 The Mask component can be configured to cover the full screen if it is rendered inside a [Portal](#Portal).

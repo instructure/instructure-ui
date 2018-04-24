@@ -38,9 +38,9 @@ class Example extends React.Component {
           transitionOnMount
           in={this.state.isOffscreen}
           type="fade">
-          <Container>
+          <View>
             <Avatar name="Fade" />
-          </Container>
+          </View>
         </Transition>
       </div>
     )
@@ -86,9 +86,9 @@ class Example extends React.Component {
           unmountOnExit
           in={this.state.isOffscreen}
           type="scale">
-          <Container display="inline">
+          <View display="inline-block">
             <Avatar name="Collapse" />
-          </Container>
+          </View>
         </Transition>
       </div>
     )
@@ -156,9 +156,9 @@ class Example extends React.Component {
           transitionOnMount
           in={this.state.isOffscreen}
           type={transitionType}>
-          <Container display="inline">
+          <View display="inline-block">
             <Avatar name="Slide" />
-          </Container>
+          </View>
         </Transition>
       </div>
     )

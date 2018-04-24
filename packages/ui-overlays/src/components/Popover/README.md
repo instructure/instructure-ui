@@ -109,7 +109,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Container padding="large 0">
+      <View padding="large 0">
         <Popover
           on="click"
           show={this.state.showPopover}
@@ -128,16 +128,16 @@ class Example extends React.Component {
             </Button>
           </PopoverTrigger>
           <PopoverContent>
-            <Container padding="medium" display="block" as="form">
+            <View padding="medium" display="block" as="form">
               {this.renderCloseButton()}
               <FormFieldGroup description="Log In">
                 <TextInput label="Username" inputRef={(el) => { if (el) { this._username = el } }}/>
                 <TextInput label="Password" type="password" />
               </FormFieldGroup>
-            </Container>
+            </View>
           </PopoverContent>
         </Popover>
-      </Container>
+      </View>
     )
   }
 }

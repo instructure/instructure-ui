@@ -15,7 +15,7 @@ you need to include more complex content, take a look at [Popover](#Popover).
 ---
 example: true
 ---
-<Container padding="medium" textAlign="center">
+<View padding="medium" textAlign="center">
   <Menu
     placement="bottom"
     trigger={
@@ -58,7 +58,7 @@ example: true
     <MenuItemSeparator />
     <MenuItem value="baz">Open grading history...</MenuItem>
   </Menu>
-</Container>
+</View>
 ```
 
 The Menu can also be a controlled component:
@@ -92,7 +92,7 @@ class Example extends React.Component {
 
   render () {
     return (
-    <Container padding="medium" textAlign="center">
+    <View padding="medium" textAlign="center">
       <Menu
         placement="bottom"
         trigger={
@@ -139,7 +139,7 @@ class Example extends React.Component {
         <MenuItemSeparator />
         <MenuItem value="baz">Open grading history...</MenuItem>
       </Menu>
-    </Container>
+    </View>
     )
   }
 }
