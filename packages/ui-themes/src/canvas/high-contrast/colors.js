@@ -34,6 +34,7 @@
    licorice: '#2D3B45',
    oxford: '#394B58',
    ash: '#556572',
+   slate: '#556572',
    tiara: '#556572',
    porcelain: '#FFFFFF',
    white: '#FFFFFF'
