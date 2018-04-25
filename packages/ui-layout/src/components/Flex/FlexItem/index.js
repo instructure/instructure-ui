@@ -31,7 +31,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '../../View'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -112,10 +112,10 @@ export default class FlexItem extends Component {
      visualDebug
    } = this.props
 
+   const dirColumn = direction === 'column'
+
    const style = {
-     flexBasis: size,
-     minWidth: (direction === "row") ? size : null,
-     minHeight: (direction === "column") ? size : null
+     flexBasis: size
    }
 
    const classes = {
@@ -124,21 +124,24 @@ export default class FlexItem extends Component {
      [styles.grow]: grow,
      [styles.shrink]: shrink,
      [styles[`align--${align}`]]: align,
-     [styles.column]: direction === 'column'
+     [styles.column]: dirColumn
    }
 
    return (
-     <Container
+     <View
        {...props}
        className={classnames(classes)}
        style={style}
-       textAlign={textAlign}
        as={as}
+       width={dirColumn ? '100%' : undefined}
+       minHeight={dirColumn ? size : undefined}
+       minWidth={direction === 'row' ? size : undefined}
+       textAlign={textAlign}
        margin={margin}
        padding={padding}
      >
        {children}
-     </Container>
+     </View>
    )
   }
 }

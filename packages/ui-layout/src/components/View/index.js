@@ -133,14 +133,25 @@ class View extends Component {
     as: 'span',
     elementRef: el => {},
     display: 'auto',
-    width: 'auto',
-    height: 'auto',
     children: null,
-    textAlign: 'start',
-    borderWidth: '0',
-    borderRadius: '0',
     background: 'transparent',
-    debug: false
+    debug: false,
+    // textAlign is undefined by default so that View can inherit text alignment
+    // from parents
+    textAlign: undefined,
+    // The following props should be undefined because default values are passed in
+    // as inline styles which break the styling of the consuming components
+    margin: undefined,
+    padding: undefined,
+    height: undefined,
+    width: undefined,
+    maxHeight: undefined,
+    maxWidth: undefined,
+    minHeight: undefined,
+    minWidth: undefined,
+    borderWidth: undefined,
+    borderRadius: undefined,
+    shadow: undefined
   }
 
   constructor (props) {
@@ -178,6 +189,11 @@ class View extends Component {
     return getDisplayName(View)
   }
 
+  get hasBorder () {
+    const { borderWidth } = this.props
+    return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
+  }
+
   get borderStyle () {
     let { borderRadius, borderWidth } = this.props
 
@@ -213,6 +229,7 @@ class View extends Component {
   }
 
   get positionStyle () {
+    // For Position
     const { style } = this.props // eslint-disable-line react/prop-types
 
     return {
@@ -220,6 +237,15 @@ class View extends Component {
       left: style && style.left,
       top: style && style.top,
       transform: style && style.transform
+    }
+  }
+
+  get flexStyle () {
+    // For FlexItem
+    const { style } = this.props // eslint-disable-line react/prop-types
+
+    return {
+      flexBasis: style && style.flexBasis
     }
   }
 
@@ -254,6 +280,7 @@ class View extends Component {
         {...omitProps(this.props, View.propTypes)}
         className={classnames({
           [styles.root]: true,
+          [styles.border]: this.hasBorder,
           [styles.debug]: debug,
           [styles[`textAlign--${textAlign}`]]: textAlign,
           [styles[`background--${background}`]]: background,
@@ -262,6 +289,7 @@ class View extends Component {
           [className]: className
         })}
         style={{
+          ...this.flexStyle,
           ...this.positionStyle,
           ...this.spacingStyle,
           ...this.borderStyle,

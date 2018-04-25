@@ -32,7 +32,7 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '../View'
 import FlexItem from './FlexItem'
 
 import styles from './styles.css'
@@ -61,11 +61,11 @@ export default class Flex extends Component {
     /**
     * Sets the height of the component's container (optional)
     */
-    height: PropTypes.string,
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
     * Sets the width of the component's container (optional)
     */
-    width: PropTypes.string,
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     inline: PropTypes.bool,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
@@ -132,8 +132,6 @@ export default class Flex extends Component {
 
     const classes = {
       [styles.root]: true,
-      [styles.flex]: !inline,
-      [styles.inline]: inline,
       [styles.visualDebug]: visualDebug,
       [styles.column]: direction === 'column',
       [styles[`justifyItems--${justifyItems}`]]: true,
@@ -141,20 +139,20 @@ export default class Flex extends Component {
       [styles.wrapItems]: wrapItems
     }
 
-    const style = { width, height }
-
     return (
-      <Container
+      <View
         {...props}
         className={classnames(classes)}
-        style={style}
         as={as}
-        textAlign={textAlign}
+        display={inline ? 'inline-flex' : 'flex'}
+        width={width}
+        height={height}
         margin={margin}
         padding={padding}
+        textAlign={textAlign}
       >
         {this.renderChildren()}
-      </Container>
+      </View>
     )
   }
 }

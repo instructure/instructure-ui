@@ -3,7 +3,6 @@
   font-size: var(--fontSize);
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-  border-style: var(--borderStyle);
 }
 
 .display--block {
@@ -15,16 +14,16 @@
   vertical-align: middle;
 }
 
-.textAlign--start {
-  text-align: start;
-}
-
 .display--flex {
   display: flex;
 }
 
 .display--inline-flex {
   display: inline-flex;
+}
+
+.textAlign--start {
+  text-align: start;
 }
 
 .textAlign--center {
@@ -39,16 +38,23 @@
   outline: 0.0625rem dashed var(--debugOutlineColor);
 }
 
+.border {
+  border-style: var(--borderStyle);
+  border-color: var(--borderColor);
+
+  &.background--inverse {
+    border-color: var(--borderColorInverse);
+  }
+}
+
 .background--default {
   color: var(--color);
   background: var(--background);
-  border-color: var(--borderColor);
 }
 
 .background--inverse {
   color: var(--colorInverse);
   background: var(--backgroundInverse);
-  border-color: var(--borderColorInverse);
 }
 
 .size--x-small {

@@ -9,7 +9,6 @@
 
 .column {
   /* useful defaults for column layouts */
-  width: 100%;
   overflow-y: auto;
 }
 
