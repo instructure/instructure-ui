@@ -2,6 +2,31 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.4.0"></a>
+# [5.4.0](https://github.com/instructure/instructure-ui/compare/v5.3.1...v5.4.0) (2018-04-25)
+
+
+### Bug Fixes
+
+* **ui-a11y:** Update Focus Region to focus on next tick ([eef1df2](https://github.com/instructure/instructure-ui/commit/eef1df2))
+* **ui-forms:** Only render checkmark when checked ([592d533](https://github.com/instructure/instructure-ui/commit/592d533))
+* **ui-forms,DateInput:** set newState to textInputValue vs raw ([dd16c75](https://github.com/instructure/instructure-ui/commit/dd16c75))
+* **ui-i18n:** Fix moment's version to >= 2.20 for toISOString(keepOffset ([5103a81](https://github.com/instructure/instructure-ui/commit/5103a81))
+* **ui-themes:** Make high-contrast theme backwards compatible with < 5.3 ([28b75ef](https://github.com/instructure/instructure-ui/commit/28b75ef))
+
+
+### Features
+
+* **build:** Add no semi lint rule until we can add prettier config ([cd97004](https://github.com/instructure/instructure-ui/commit/cd97004))
+* **ui-layout:** Add View and ContextView components ([497ccd5](https://github.com/instructure/instructure-ui/commit/497ccd5))
+
+
+### Performance Improvements
+
+* **ui-elements:** async avatar loading ([0501ae2](https://github.com/instructure/instructure-ui/commit/0501ae2))
+
+
+
 <a name="5.3.1"></a>
 ## [5.3.1](https://github.com/instructure/instructure-ui/compare/v5.3.0...v5.3.1) (2018-04-24)
 
