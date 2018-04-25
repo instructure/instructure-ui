@@ -66,6 +66,7 @@ fi
 
 printf "Version: $next_version ...\n"
 printf "Commit: $commit_msg ...\n"
+printf "Tag: $npm_tag ...\n"
 read -p "Continue? [y/n]" -n 1 -r; echo
 if ! [[ $REPLY =~ ^[Yy]$ ]]; then
   echo "Stopped"
@@ -86,20 +87,22 @@ $NPM_CLIENT run test
 printf "Publishing $next_version with tag $npm_tag\n"
 $(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=*
 
-######################
-# Tag release commit #
-######################
-git_tag="v$next_version"
+##########################################
+# Tag release commit for stable releases #
+##########################################
+if [[ "$release_type" == "stable" ]]; then
+  git_tag="v$next_version"
 
-printf "Tagging version $git_tag ...\n"
+  printf "Tagging version $git_tag ...\n"
 
-# Delete the local tag if it already exists
-if [ "`git tag --list $git_tag`" ]; then
-  git tag -d $git_tag
+  # Delete the local tag if it already exists
+  if [ "`git tag --list $git_tag`" ]; then
+    git tag -d $git_tag
+  fi
+
+  git tag -am "Version $next_version" $git_tag
+  git push origin $git_tag
 fi
-
-git tag -am "Version $next_version" $git_tag
-git push origin $git_tag
 
 #####################################
 # Build and deploy docs to gh-pages #
