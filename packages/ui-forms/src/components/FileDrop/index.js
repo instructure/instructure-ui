@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
@@ -420,9 +420,9 @@ export default class FileDrop extends Component {
           aria-disabled={disabled || readOnly ? 'true' : null}
         />
         {(this.hasMessages) ?
-          <Container display="block" margin="small 0 0">
+          <View display="block" margin="small 0 0">
             <FormFieldMessages id={this.messagesId} messages={this.props.messages} />
-          </Container>
+          </View>
         : null}
       </div>
     )
