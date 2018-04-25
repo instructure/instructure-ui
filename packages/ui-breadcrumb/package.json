@@ -32,7 +32,7 @@
     "react-dom": "^0.14.9 || ^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-container": "^5.4.0",
+    "@instructure/ui-layout": "^5.4.0",
     "@instructure/ui-elements": "^5.4.0",
     "@instructure/ui-icons": "^5.4.0",
     "@instructure/ui-themeable": "^5.4.0",

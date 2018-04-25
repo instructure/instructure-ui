@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -93,7 +93,7 @@ export default class Breadcrumb extends Component {
       [styles[this.props.size]]: true
     }
     return (
-      <Container
+      <View
         role="navigation"
         as="div"
         margin={this.props.margin}
@@ -101,7 +101,7 @@ export default class Breadcrumb extends Component {
         <ol className={classnames(classes)} aria-label={this.props.label}>
           {this.renderChildren()}
         </ol>
-      </Container>
+      </View>
     )
   }
 }
