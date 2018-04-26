@@ -27,8 +27,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
+import View from '@instructure/ui-layout/lib/components/View'
 
-import Container from '@instructure/ui-container/lib/components/Container'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -59,6 +59,10 @@ class Billboard extends Component {
     * the element type to render as
     */
     as: CustomPropTypes.elementType,
+    /**
+    * provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func,
     /**
     * The headline for the Billboard. Is styled as an h1 element by default
     */
@@ -103,7 +107,8 @@ class Billboard extends Component {
     size: 'medium',
     headingAs: 'span',
     headingLevel: 'h1',
-    as: 'span'
+    as: 'span',
+    elementRef: (el) => {}
   }
 
   renderHeading () {
@@ -189,7 +194,8 @@ class Billboard extends Component {
       readOnly,
       onClick,
       size,
-      margin
+      margin,
+      elementRef
     } = this.props
 
     const classes = {
@@ -201,10 +207,11 @@ class Billboard extends Component {
     const Element = getElementType(Billboard, this.props)
 
     return (
-      <Container
-        {...omitProps(this.props, Billboard.propTypes, ['padding'])}
+      <View
+        {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
         type={(Element === 'button') ? 'button' : null}
         as={Element}
+        elementRef={elementRef}
         className={classnames(classes)}
         margin={margin}
         href={href}
@@ -213,7 +220,7 @@ class Billboard extends Component {
         aria-disabled={(disabled || readOnly) ? 'true' : null}
       >
         {this.renderContent()}
-      </Container>
+      </View>
     )
   }
 }

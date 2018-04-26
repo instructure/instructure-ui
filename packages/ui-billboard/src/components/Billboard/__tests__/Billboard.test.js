@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
 import Billboard from '../index'
 
@@ -93,7 +93,7 @@ describe('<Billboard />', () => {
     const subject = testbed.render({
       padding: 'large medium small large'
     })
-    expect(subject.find(Container).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist
   })
 
   describe('when disabled', () => {
@@ -116,6 +116,45 @@ describe('<Billboard />', () => {
       subject.find('button').simulate('click')
 
       expect(onClick).to.not.have.been.called
+    })
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      elementRef: () => {},
+      as: 'div'
+    }
+
+    const ignore = [
+      'display'
+    ]
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+
+    it('should not pass display to View', () => {
+      const subject = testbed.render({
+        display: 'someTestValue'
+      })
+      expect(subject.find(View).props()['display']).to.equal(View.defaultProps['display'])
     })
   })
 

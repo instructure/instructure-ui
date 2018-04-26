@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
 import Billboard from '../index'
 
@@ -93,7 +93,7 @@ describe('<Billboard />', () => {
     const subject = testbed.render({
       padding: 'large medium small large'
     })
-    expect(subject.find(Container).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist
   })
 
   describe('when disabled', () => {
