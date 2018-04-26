@@ -30,7 +30,7 @@ import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import warning from '@instructure/ui-utils/lib/warning'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 /**
 ---
@@ -116,7 +116,7 @@ export default class Page extends Component {
     } = this.context
 
     return (
-      <Container
+      <View
         as="div"
         padding={props.padding}
         textAlign={props.textAlign}
@@ -125,7 +125,7 @@ export default class Page extends Component {
         {
           (children && typeof children === 'function') ? children(history, navigateToPreviousPage) : children
         }
-      </Container>
+      </View>
     )
   }
 }

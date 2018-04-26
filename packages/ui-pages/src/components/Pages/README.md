@@ -255,7 +255,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Container padding="large 0">
+      <View padding="large 0">
         <Popover
           on="click"
           show={this.state.showPopover}
@@ -359,7 +359,7 @@ class Example extends React.Component {
             </Pages>
           </PopoverContent>
         </Popover>
-      </Container>
+      </View>
     )
   }
 }

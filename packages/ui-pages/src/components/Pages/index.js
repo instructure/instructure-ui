@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
@@ -172,7 +172,7 @@ class Pages extends Component {
 
   render () {
     return this.activePage ? (
-      <Container
+      <View
         as="div"
         id={this._contentId}
         className={styles.root}
@@ -181,7 +181,7 @@ class Pages extends Component {
         elementRef={(el) => { this._contentElement = el }}
       >
         {this.activePage}
-      </Container>
+      </View>
     ) : null
   }
 }
