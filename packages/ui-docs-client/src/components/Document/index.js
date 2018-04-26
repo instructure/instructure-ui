@@ -116,15 +116,16 @@ export default class Document extends Component {
 
   renderUsage () {
     const { requirePath, id, displayName, packageName, title, resource } = this.props.doc
+    const importName = displayName || resource.displayName || resource.name
 
     if (!requirePath) return
 
     const example = `\
 /*** ES Modules ***/
-import ${displayName || resource.name} from '${requirePath}'
+import ${importName} from '${requirePath}'
 
 /*** CommonJS ***/
-const ${displayName || resource.name} = require('${requirePath}')
+const ${importName} = require('${requirePath}')
 `
     return (
       <Container margin="small">
