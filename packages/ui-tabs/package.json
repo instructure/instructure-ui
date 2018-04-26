@@ -22,7 +22,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/ui-container": "^5.4.0",
+    "@instructure/ui-layout": "^5.4.0",
     "@instructure/ui-motion": "^5.4.0",
     "@instructure/ui-themeable": "^5.4.0",
     "@instructure/ui-utils": "^5.4.0",

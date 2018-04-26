@@ -12,6 +12,10 @@
   color: var(--color);
 }
 
+.overflow {
+  overflow: auto;
+}
+
 .minimal,
 .simple {
   flex-basis: 100%;

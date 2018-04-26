@@ -22,8 +22,11 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
+export default function ({ colors, breakpoints }) {
   return {
-    minimalBackground: colors.backgroundLightest
+    minimalBackground: colors.backgroundLightest,
+    small: breakpoints.small,
+    medium: breakpoints.medium,
+    large: breakpoints.large
   }
 }

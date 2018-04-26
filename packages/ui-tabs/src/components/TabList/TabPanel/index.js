@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -66,17 +66,30 @@ export default class TabPanel extends Component {
     tabRef: (el) => {}
   }
 
+  renderContent () {
+    const classes = {
+      [styles.content]: true,
+      [styles.overflow]: this.props.maxHeight
+    }
+    return (
+      <View
+        className={classnames(classes)}
+        maxHeight={this.props.maxHeight}
+        as="div"
+        padding={this.props.padding}
+        textAlign={this.props.textAlign}
+      >
+        {this.props.children}
+      </View>
+    )
+  }
+
   render () {
     const classes = {
       [styles.root]: true,
       [styles[this.props.variant]]: true
     }
     const isHidden = !this.props.selected || !!this.props.disabled
-
-    const style = this.props.maxHeight ? {
-      maxHeight: this.props.maxHeight,
-      overflow: 'auto'
-    } : null
 
     return (
       <div
@@ -92,15 +105,7 @@ export default class TabPanel extends Component {
           unmountOnExit
           transitionExit={false}
         >
-          <Container
-            className={styles.content}
-            style={style}
-            as="div"
-            padding={this.props.padding}
-            textAlign={this.props.textAlign}
-          >
-            {this.props.children}
-          </Container>
+        {this.renderContent()}
         </Transition>
       </div>
     )
