@@ -32,6 +32,7 @@ import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import themeable from '@instructure/ui-themeable'
 
@@ -227,7 +228,7 @@ class Tray extends Component {
     }
   }
 
-  _timeouts = []
+  _raf = []
 
   componentDidMount () {
     this._isMounted = true
@@ -247,8 +248,8 @@ class Tray extends Component {
   }
 
   componentWillUnmount () {
-    this._isMounted = false
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
+    this._raf.forEach(request => request.cancel())
+    this._raf = []
   }
 
   get transition () {
@@ -272,15 +273,9 @@ class Tray extends Component {
   }
 
   handlePortalOpen = () => {
-    this._timeouts.push(
-      setTimeout(() => {
-        if (this._isMounted) {
-          this.setState({
-            portalOpen: true
-          })
-        }
-      })
-    )
+    this._raf.push(requestAnimationFrame(() => {
+      this.setState({ portalOpen: true })
+    }))
   }
 
   handleTransitionExited = () => {
