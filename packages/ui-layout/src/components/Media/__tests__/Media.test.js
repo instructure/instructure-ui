@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '../../View'
 import Media from '../index'
 
 describe('<Media />', () => {
@@ -50,7 +50,7 @@ describe('<Media />', () => {
     const subject = testbed.render({
       padding: 'large small medium large'
     })
-    expect(subject.find(Container).first().props().padding).to.not.exist
+    expect(subject.find(View).first().props().padding).to.not.exist
   })
 
   it('should meet a11y standards', (done) => {

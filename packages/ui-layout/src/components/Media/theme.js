@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, spacing, typography }) {
+export default function generator ({ colors, spacing, typography, breakpoints }) {
   return {
     fontFamily: typography.fontFamily,
     background: colors.backgroundLightest,
@@ -37,7 +37,11 @@ export default function generator ({ colors, spacing, typography }) {
 
     descriptionFontSize: typography.fontSizeMedium,
     descriptionFontWeight: typography.fontWeightNormal,
-    descriptionLineHeight: typography.lineHeightCondensed
+    descriptionLineHeight: typography.lineHeightCondensed,
+
+    small: breakpoints.small,
+    medium: breakpoints.medium,
+    large: breakpoints.large
   }
 }
 

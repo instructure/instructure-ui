@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '../View'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -82,12 +82,12 @@ class Media extends Component {
       })
     }
     return (
-      <Container
+      <View
         {...props}
         {...classes}
         as="figure"
         margin={this.props.margin}
-        size={this.props.size}
+        maxWidth={this.theme[this.props.size]}
       >
         <div className={styles.figure}>
           {this.props.children}
@@ -108,7 +108,7 @@ class Media extends Component {
             )
           }
         </figcaption>
-      </Container>
+      </View>
     )
   }
 }
