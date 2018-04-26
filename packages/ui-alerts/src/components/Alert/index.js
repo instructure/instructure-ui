@@ -30,7 +30,7 @@ import classNames from 'classnames'
 import keycode from 'keycode'
 
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
@@ -315,13 +315,13 @@ export default class Alert extends Component {
   renderAlert () {
     const { classNames } = this.variantUI()
     return (
-      <Container as="div" margin={this.props.margin} className={classNames} onKeyUp={this.handleKeyUp}>
+      <View as="div" margin={this.props.margin} className={classNames} onKeyUp={this.handleKeyUp}>
         {this.renderIcon()}
         <div className={styles.content}>
           {this.props.children}
         </div>
         {this.renderCloseButton()}
-      </Container>
+      </View>
     )
   }
 
