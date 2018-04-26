@@ -58,19 +58,6 @@ describe('<View />', () => {
     ).to.be.true
   })
 
-  it('should set ltr by default', () => {
-    const subject = testbed.render()
-    testbed.tick()
-    expect(subject.state('dir')).to.equal('ltr')
-  })
-
-  it('should set rtl when text direction is rtl', () => {
-    testbed.setTextDirection('rtl')
-    const subject = testbed.render()
-    testbed.tick()
-    expect(subject.state('dir')).to.equal('rtl')
-  })
-
   it('should pass style attributes', () => {
     const subject = testbed.render({
       style: {

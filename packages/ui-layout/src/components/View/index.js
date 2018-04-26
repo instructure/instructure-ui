@@ -27,14 +27,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import {
-  convertRtlShorthandCorners,
-  convertRtlShorthandEdges
-} from '@instructure/ui-themeable/lib/utils/convertRtlShorthand'
 import getShorthandPropValue from '@instructure/ui-themeable/lib/utils/getShorthandPropValue'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-
-import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
 
 import warning from '@instructure/ui-utils/lib/warning'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -157,18 +151,7 @@ class View extends Component {
   constructor (props) {
     super(props)
     this.verifySpanMargin(props)
-
-    this.state = {
-      dir: 'ltr'
-    }
-
     this._element = null
-  }
-
-  componentDidMount () {
-    this.setState({
-      dir: getTextDirection(this._element)
-    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -195,12 +178,13 @@ class View extends Component {
   }
 
   get borderStyle () {
-    let { borderRadius, borderWidth } = this.props
+    const { borderRadius, borderWidth } = this.props
 
-    if (this.state.dir === 'rtl') {
-      borderRadius = convertRtlShorthandCorners(borderRadius)
-      borderWidth = convertRtlShorthandEdges(borderWidth)
-    }
+    // TODO: Restore once we get a fixed direction for RTL support
+    // if (dir === 'rtl') {
+    //   borderRadius = convertRtlShorthandCorners(borderRadius)
+    //   borderWidth = convertRtlShorthandEdges(borderWidth)
+    // }
 
     return {
       borderRadius: getShorthandPropValue(this.displayName, this.theme, borderRadius, 'borderRadius'),
@@ -209,12 +193,13 @@ class View extends Component {
   }
 
   get spacingStyle () {
-    let { margin, padding } = this.props
+    const { margin, padding } = this.props
 
-    if (this.state.dir === 'rtl') {
-      margin = convertRtlShorthandEdges(margin)
-      padding = convertRtlShorthandEdges(padding)
-    }
+    // TODO: Restore once we get a fixed direction for RTL support
+    // if (dir === 'rtl') {
+    //   margin = convertRtlShorthandEdges(margin)
+    //   padding = convertRtlShorthandEdges(padding)
+    // }
 
     return {
       margin: getShorthandPropValue(this.displayName, this.theme, margin, 'margin'),

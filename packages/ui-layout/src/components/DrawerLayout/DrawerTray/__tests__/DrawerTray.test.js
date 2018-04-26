@@ -29,9 +29,12 @@ import styles from '../styles.css'
 
 describe('<DrawerTray />', () => {
   const testbed = new Testbed(
-    <DrawerTray label="Drawer Tray Test">
-      Hello from layout tray
-    </DrawerTray>
+    <DrawerTray
+      label="DrawerTray test"
+      render={() => {
+        return 'Hello from layout tray'
+      }}
+    />
   )
 
   function testTrayPlacement (placement) {
@@ -102,7 +105,7 @@ describe('<DrawerTray />', () => {
     const onSizeChange = testbed.spy()
     testbed.render({
       open: true,
-      children: <div style={{width: trayWidth}}>foo</div>,
+      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
       onSizeChange
     })
 
@@ -114,7 +117,7 @@ describe('<DrawerTray />', () => {
     const trayWidth = '200px'
     const onSizeChange = testbed.spy()
     const subject = testbed.render({
-      children: <div style={{width: trayWidth}}>foo</div>,
+      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
       onSizeChange
     })
 
@@ -131,7 +134,7 @@ describe('<DrawerTray />', () => {
     const onSizeChange = testbed.spy()
     const subject = testbed.render({
       open: true,
-      children: <div style={{width: trayWidth}}>foo</div>,
+      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
       onSizeChange
     })
 
@@ -163,13 +166,16 @@ describe('<DrawerTray />', () => {
   })
 
   it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true })
-    const tray = subject.ref('_trayContent').node
+    const subject = testbed.render({
+      label: 'a tray test',
+      open: true
+    })
+    const tray = subject.getDOMNode()
 
     testbed.tick()
     testbed.tick()
 
-    expect(tray.querySelector('[role="region"]')).to.exist
-    expect(tray.querySelector('[aria-label="Drawer Tray Test"]')).to.exist
+    expect(tray.getAttribute('role')).to.equal('region')
+    expect(tray.getAttribute('aria-label')).to.equal('a tray test')
   })
 })

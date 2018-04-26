@@ -81,11 +81,14 @@ export default class DrawerLayoutTestApp extends Component {
             open={this.trayOpen}
             placement={trayPlacement}
             label="Test DrawerTray"
-          >
-            <div style={{ width: trayWidth }}>
-              Hello from tray
-            </div>
-          </DrawerTray>
+            render={() => {
+              return (
+                <div style={{ width: trayWidth }}>
+                  Hello from tray
+                </div>
+              )
+            }}
+          />
           <DrawerContent
             label="Test DrawerContent"
             ref={(node) => { this._drawerContent = node }}

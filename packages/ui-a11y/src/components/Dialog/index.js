@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
@@ -158,9 +158,9 @@ class Dialog extends Component {
 
   render () {
     return this.props.open
-      ? <Container
+      ? <View
         {...omitProps(this.props, Dialog.propTypes)}
-        {...pickProps(this.props, Container.propTypes)}
+        {...pickProps(this.props, View.propTypes)}
         ref={el => {
           this._root = el
         }}
@@ -169,7 +169,7 @@ class Dialog extends Component {
         className={this.props.className} // eslint-disable-line react/prop-types
       >
         {this.props.children}
-      </Container>
+      </View>
       : null
   }
 }

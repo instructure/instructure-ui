@@ -30,7 +30,6 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^5.4.0",
     "@instructure/ui-container": "^5.4.0",
     "@instructure/ui-i18n": "^5.4.0",
     "@instructure/ui-motion": "^5.4.0",

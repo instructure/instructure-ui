@@ -10,6 +10,13 @@ be configured to overlay the `<DrawerContent />`
 The `minWidth` prop specifies a breakpoint. When the `<DrawerContent />` resizes such that the width is
 less than the designated `minWidth`, the tray overlays the content
 
+### Rendering Tray Content
+`<DrawerTray />` accepts a `render` function or `children` function which gets passed a single boolean
+argument `positioned`. The `positioned` argument indicates when the tray has finished transitioning.
+When rendering a `Dialog` for accessibility, the `positioned` argument can be used to conditionally
+render the `Dialog` after the `<DrawerTray />` is completely positioned. Otherwise the screen will
+jolt to the side when the `Dialog` receives focus and is yet to transition onscreen.
+
 ```js
 ---
 render: false
@@ -38,7 +45,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <div style={{height: '25rem'}}>
+      <View height="25rem">
         <DrawerLayout>
           <DrawerTray
             label="Drawer Tray Start Example"
@@ -46,23 +53,42 @@ class Example extends React.Component {
             open={this.state.open}
             placement="start"
             liveRegion={() => document.getElementById('flash-messages')}
-          >
-            <Container
-              as="div"
-              size="x-small"
-              textAlign="center"
-              margin="large auto"
-              padding="small"
-            >
-              {this.renderCloseButton(() => { 
-                this.setState({ open: false }) 
-              })}
-              <Avatar name="foo bar" margin="0 0 small 0" />
-              <Text as="div" size="x-small">
-                Hello from start tray with a small amount of placeholder content
-              </Text>
-            </Container>
-          </DrawerTray>
+            render={(positioned) => {
+              let trayContent = (
+                <View
+                  as="div"
+                  maxWidth="16rem"
+                  textAlign="center"
+                  margin="large auto"
+                  padding="small"
+                >
+                  {this.renderCloseButton(() => { 
+                    this.setState({ open: false }) 
+                  })}
+                  <Avatar name="foo bar" margin="0 0 small 0" />
+                  <Text as="div" size="x-small">
+                    Hello from start tray with a small amount of placeholder content
+                  </Text>
+                </View>
+              )
+
+              if (positioned) {
+                trayContent = (
+                  <Dialog
+                    open
+                    shouldContainFocus
+                    shouldCloseOnDocumentClick={false}
+                    shouldReturnFocus
+                    role="region"
+                  >
+                    {trayContent}
+                  </Dialog>
+                )
+              }
+
+              return trayContent
+            }}
+          />
           <DrawerContent label="Drawer content example">
             <div style={{background: 'white', height: '100%'}}>
               <Container as="div" padding="x-large">
@@ -90,7 +116,7 @@ class Example extends React.Component {
             </div>
           </DrawerContent>
         </DrawerLayout>
-      </div>
+      </View>
     )
   }
 }
@@ -130,7 +156,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <div style={{height: '40rem'}}>
+      <View height="40rem">
         <DrawerLayout>
           <DrawerTray
             label="Drawer Tray End Example"
@@ -138,22 +164,41 @@ class Example extends React.Component {
             open={this.state.endOpen}
             placement="end"
             onDismiss={() => {this.setState({ endOpen: false })}}
-          >
-            <Container
-              as="div"
-              size="medium"
-              textAlign="center"
-              margin="large auto"
-              padding="large"
-            >
-              {this.renderCloseButton(() => { 
-                this.setState({ endOpen: false }) 
-              })}   
-              <Text as="div" size="x-small">
-                Hello from end tray with a good amount of content as well
-              </Text>
-            </Container>
-          </DrawerTray>
+            render={(positioned) => {
+              let trayContent = (
+                <View
+                  as="div"
+                  maxWidth="48rem"
+                  textAlign="center"
+                  margin="large auto"
+                  padding="large"
+                >
+                  {this.renderCloseButton(() => { 
+                    this.setState({ endOpen: false }) 
+                  })}   
+                  <Text as="div" size="x-small">
+                    Hello from end tray with a good amount of content as well
+                  </Text>
+                </View>
+              )
+
+              if (positioned) {
+                trayContent = (
+                  <Dialog
+                    open
+                    shouldContainFocus
+                    shouldCloseOnDocumentClick={false}
+                    shouldReturnFocus
+                    role="region"
+                  >
+                    {trayContent}
+                  </Dialog>
+                )
+              }
+
+              return trayContent
+            }}
+          />
           <DrawerContent label="Drawer content example containing another layout">
             <DrawerLayout>
               <DrawerTray
@@ -161,23 +206,42 @@ class Example extends React.Component {
                 closeButtonLabel="Close"
                 open={this.state.startOpen}
                 placement="start"
-              >
-                <Container
-                  as="div"
-                  size="x-small"
-                  textAlign="center"
-                  margin="large auto"
-                  padding="small"
-                >
-                  {this.renderCloseButton(() => { 
-                    this.setState({ startOpen: false }) 
-                  })}
-                  <Avatar name="foo bar" margin="0 0 small 0" />
-                  <Text as="div" size="x-small">
-                    Hello from start tray with a small amount of placeholder content
-                  </Text>
-                </Container>
-              </DrawerTray>
+                render={(positioned) => {
+                  let trayContent = (
+                    <View
+                      as="div"
+                      maxWidth="16rem"
+                      textAlign="center"
+                      margin="large auto"
+                      padding="small"
+                    >
+                      {this.renderCloseButton(() => { 
+                        this.setState({ startOpen: false }) 
+                      })}
+                      <Avatar name="foo bar" margin="0 0 small 0" />
+                      <Text as="div" size="x-small">
+                        Hello from start tray with a small amount of placeholder content
+                      </Text>
+                    </View>
+                  )
+
+                  if (positioned) {
+                    trayContent = (
+                      <Dialog
+                        open
+                        shouldContainFocus
+                        shouldCloseOnDocumentClick={false}
+                        shouldReturnFocus
+                        role="region"
+                      >
+                        {trayContent}
+                      </Dialog>
+                    )
+                  }
+
+                  return trayContent
+                }}
+              />
               <DrawerContent label="Drawer content example containing a responsive ">
                 <div style={{background: 'white', height: '100%'}}>
                   <Container as="div" padding="x-large">
@@ -227,7 +291,7 @@ class Example extends React.Component {
             </DrawerLayout>
           </DrawerContent>
         </DrawerLayout>
-      </div>
+      </View>
     )
   }
 }

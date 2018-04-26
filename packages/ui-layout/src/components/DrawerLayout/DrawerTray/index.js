@@ -25,15 +25,16 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
+import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import ms from '@instructure/ui-utils/lib/ms'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -48,8 +49,16 @@ parent: DrawerLayout
 class DrawerTray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-
-    children: PropTypes.node,
+    /**
+     * Function returning content for `<DrawerTray />` which is called with a single boolean
+     * argument indicating when the tray has finished positioning.
+     */
+    children: PropTypes.func,
+    /**
+     * Function returning content for `<DrawerTray />`  which is called with a single boolean
+     * argument indicating when the tray has finished positioning.
+     */
+    render: PropTypes.func,
 
     /**
      * Placement of the `<DrawerTray />`
@@ -79,16 +88,6 @@ class DrawerTray extends Component {
      * Boolean designating if the `<DrawerTray />` is overlaying the content
      */
     overlay: PropTypes.bool,
-
-    /**
-     * Should `<DrawerTray />` contain focus
-     */
-    shouldContainFocus: PropTypes.bool,
-
-    /**
-     * An element or a function returning an element to focus by default
-     */
-    defaultFocusElement: PropTypes.oneOfType([PropTypes.element, PropTypes.func]),
 
     /**
      * Callback fired before the <DrawerTray /> transitions in
@@ -121,24 +120,16 @@ class DrawerTray extends Component {
     /**
      * Ref function for the <DrawerTray /> content
      */
-    contentRef: PropTypes.func,
-
-    /**
-     * Function that returns the DIV where screenreader alerts will be placed.
-     */
-    liveRegion: PropTypes.func
+    contentRef: PropTypes.func
   }
 
   static defaultProps = {
-    children: null,
     open: false,
     onOpen: () => {},
     shadow: true,
     overlay: false,
     border: true,
     placement: 'start',
-    shouldContainFocus: true,
-    defaultFocusElement: null,
     onEnter: () => {},
     onEntering: () => {},
     onEntered: () => {},
@@ -164,6 +155,11 @@ class DrawerTray extends Component {
       this.notifySizeChange()
       this.notifyOpen()
     }
+
+    warning(
+      (this.props.render || this.props.children),
+      `[${getDisplayName(DrawerTray)}] must have either a \`render\` prop or \`children\` prop.`
+    )
   }
 
   componentWillReceiveProps (nextProps) {
@@ -240,33 +236,18 @@ class DrawerTray extends Component {
   render () {
     const {
       open,
+      label,
       border,
       placement,
       onEnter,
       onEntered,
       onExit,
-      children
+      children,
+      render
     } = this.props
 
     const duration = ms(this.theme.duration)
-
-    let trayContent = children
-
-    // If we render the dialog before the content is positioned, we get
-    // jolted offscreen when the default focus element gets focus
-    if (this.state.positioned) {
-      trayContent = (
-        <Dialog
-          {...pickProps(this.props, Dialog.propTypes)}
-          open
-          shouldCloseOnDocumentClick={false}
-          shouldReturnFocus
-          role="region"
-        >
-          {trayContent}
-        </Dialog>
-      )
-    }
+    const renderFunc = children || render
 
     return (
       <BaseTransition
@@ -286,13 +267,15 @@ class DrawerTray extends Component {
       >
         <span
           ref={this.handleContentRef}
+          role="region"
+          aria-label={label}
           className={classnames({
             [styles.root]: true,
             [styles.border]: border,
             [styles[`placement--${placement}`]]: true
           })}
         >
-          {trayContent}
+          {renderFunc(this.state.positioned)}
         </span>
       </BaseTransition>
     )
