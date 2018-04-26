@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 function cleanup() {
   exit_code=$?
   set +e
@@ -17,8 +19,6 @@ function cleanup() {
 
 trap cleanup INT TERM EXIT
 
-set -e
-
 export COMPOSE_FILE=./docker-compose.test.yml
 
 echo "pull image..."
@@ -28,4 +28,13 @@ echo "building services..."
 docker-compose build
 
 echo "running tests..."
-docker-compose run -u "root" --rm test bash -c "yarn test"
+docker-compose run -u "root" test bash -c "yarn test"
+
+if [[ $TRAVIS_BRANCH == 'master' && -z "$TRAVIS_PULL_REQUEST" ]]; then
+  commit_msg=$(git log -1 --pretty=format:%s)
+
+  if [[ "$commit_msg" =~ "^chore(release): " ]]; then
+    echo "Running the release..."
+    docker-compose run -u "root" test bash -c "yarn release -t latest"
+  fi
+fi

@@ -17,8 +17,7 @@
     "build": "ui-build --bundle",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
-    "clean": "ui-build --clean",
-    "deploy": "touch __build__/.nojekyll && gh-pages -d __build__ -r git@github.com:instructure/instructure-ui.git"
+    "clean": "ui-build --clean"
   },
   "license": "MIT",
   "dependencies": {
@@ -53,7 +52,6 @@
     "@instructure/ui-toggle-details": "^5.4.0",
     "@instructure/ui-tree-browser": "^5.4.0",
     "@instructure/ui-utils": "^5.4.0",
-    "gh-pages": "^1.0.0",
     "http-server": "^0.11.1",
     "lorem-ipsum": "^1.0.4",
     "moment": "^2.22.1",

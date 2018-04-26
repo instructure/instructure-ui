@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -ex
+set -e
 
 echo "building services..."
 docker-compose build

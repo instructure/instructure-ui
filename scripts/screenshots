@@ -1,4 +1,6 @@
-#!/bin/bash -ex
+#!/bin/bash
+
+set -e
 
 NPM_CLIENT=$(npm bin)/yarn
 

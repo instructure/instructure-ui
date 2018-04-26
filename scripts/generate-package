@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
 
 PACKAGE_DIR=packages
 PACKAGE_TEMPLATE_DIR=scripts/templates/package

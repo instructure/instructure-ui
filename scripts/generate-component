@@ -1,4 +1,6 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
 
 NPM_CLIENT=$(npm bin)/yarn
 COMPONENT_TEMPLATE_DIR=scripts/templates/component/

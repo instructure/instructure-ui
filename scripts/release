@@ -1,20 +1,17 @@
-#!/bin/bash -e
+#!/bin/bash
+
+set -e
 
 NPM_CLIENT=$(npm bin)/yarn
 
 ########################################
 # Make sure working directory is clean #
 ########################################
-if [ ! -z "$(git status --porcelain)" ]; then
+if [ -n "$(git status --porcelain)" ]; then
   echo Refusing to operate on unclean working directory
   echo Use \"git status\" to see which files have been modified
   exit 1
 fi
-
-##################################
-# Fetch remote tags and branches #
-##################################
-git fetch origin --tags --force
 
 #########################
 # Determine the npm tag #
@@ -36,7 +33,7 @@ while getopts ":t:" opt; do
   esac
 done
 
-if ! [[ $npm_tag ]]; then
+if [[ -z "$npm_tag" ]]; then
   npm_tag=dev
 fi
 
@@ -45,15 +42,16 @@ fi
 ##############################
 if [[ "$npm_tag" == "stable" || "$npm_tag" == "latest" ]]; then
   release_type=stable
+  yes="--yes"
 else
   release_type=prerelease
+  yes=""
 fi
 
 #############################
 # Get version and commit id #
 #############################
 next_version=$(node -p "require('./package').version")
-commit=$(git rev-parse --short HEAD)
 commit_msg=$(git log -1 --pretty=oneline --abbrev-commit)
 
 ###########################################
@@ -64,42 +62,48 @@ if [[ "$release_type" == "prerelease" ]]; then
   read next_version
 fi
 
-printf "Version: $next_version ...\n"
-printf "Commit: $commit_msg ...\n"
-printf "Tag: $npm_tag ...\n"
-read -p "Continue? [y/n]" -n 1 -r; echo
-if ! [[ $REPLY =~ ^[Yy]$ ]]; then
-  echo "Stopped"
-  exit
+echo "Version: $next_version ..."
+echo "Commit: $commit_msg ..."
+echo "Tag: $npm_tag ..."
+
+if [[ -z "$CI" ]]; then
+  read -p "Continue? [y/n]" -n 1 -r; echo
+  if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Stopped"
+    exit
+  fi
 fi
 
-#######################
-# Prepare the release #
-#######################
-printf "Installing version $next_version ...\n"
-$NPM_CLIENT install
-printf "Preparing version $next_version ...\n"
-$NPM_CLIENT run test
+#####################
+# Fetch remote tags #
+#####################
+git fetch origin --tags --force
+git_tag="v$next_version"
+
+#######################################
+# Check if release tag already exists #
+#######################################
+if [ "`git tag --list $git_tag`" ]; then
+  echo "Git tag for $git_tag already exists!"
+  if [[ "$release_type" == "stable" ]]; then
+    echo "Run the bump \"yarn bump\" script to update the version prior to running a stable release."
+  else
+    echo "Run \"yarn info [package]@[version]\" to see published versions."
+  fi
+  exit
+fi
 
 ###########################
 # Publish packages to npm #
 ###########################
-printf "Publishing $next_version with tag $npm_tag\n"
-$(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=*
+echo "Publishing $next_version with tag $npm_tag"
+$(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=* $yes
 
 ##########################################
 # Tag release commit for stable releases #
 ##########################################
 if [[ "$release_type" == "stable" ]]; then
-  git_tag="v$next_version"
-
-  printf "Tagging version $git_tag ...\n"
-
-  # Delete the local tag if it already exists
-  if [ "`git tag --list $git_tag`" ]; then
-    git tag -d $git_tag
-  fi
-
+  echo "Tagging version $git_tag ..."
   git tag -am "Version $next_version" $git_tag
   git push origin $git_tag
 fi
@@ -108,8 +112,8 @@ fi
 # Build and deploy docs to gh-pages #
 #####################################
 if [[ "$npm_tag" == "latest" ]]; then
-  printf "Deploying version $next_version of the documentation...\n"
+  echo "Deploying version $next_version of the documentation..."
   $NPM_CLIENT run deploy
 fi
 
-printf "Version $next_version was successfully released!\n"
+echo "Version $next_version was successfully released!"
