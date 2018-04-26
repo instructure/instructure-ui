@@ -22,51 +22,46 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
+import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ModalBody from '../index'
 
-import styles from './styles.css'
-import theme from './theme'
+describe('<ModalBody />', () => {
+  const testbed = new Testbed(<ModalBody />)
 
-/**
----
-parent: Modal
----
-**/
-@themeable(theme, styles)
-export default class ModalBody extends Component {
-  static propTypes = {
-    children: PropTypes.node,
-    padding: ThemeablePropTypes.spacing,
-    elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType
-  }
+  it('should render', () => {
+    const subject = testbed.render()
+    expect(subject).to.exist
+  })
 
-  static defaultProps = {
-    padding: 'medium',
-    as: 'div'
-  }
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      padding: 'small',
+      elementRef: () => {},
+      as: 'section',
+      display: View.defaultProps.display
+    }
 
-  render () {
-    return (
-      <View
-        {...omitProps(this.props, { ...ModalBody.propTypes, ...View.propTypes })}
-        elementRef={this.props.elementRef}
-        as={this.props.as}
-        className={styles.root}
-        padding={this.props.padding}
-      >
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
-      </View>
-    )
-  }
-}
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).first().props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+  })
+
+})
