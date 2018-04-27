@@ -12,6 +12,9 @@ layouts with flexbox.
 Flex defaults to a `direction` of `row` (a horizontal) layout. Change `direction` to
 `column` to stack your FlexItems.
 
+When `direction` is set to `column`, FlexItems are set to handle vertical overflow by scrolling.
+_Note that this means that the overflow of FlexItems is no longer `visible` by default._
+
 ```js
 ---
 example: true
