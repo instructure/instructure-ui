@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import Tag from '../index'
 
@@ -44,11 +44,44 @@ describe('<Tag />', () => {
     expect(svg.length).to.equal(1)
   })
 
-  it('should not allow padding to be added as a propery', () => {
-    const subject = testbed.render({
-      padding: 'small medium large small'
+describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      as: 'span'
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
     })
-    expect(subject.find(Container).props().padding).to.not.exist
+    it(`should set the 'as' prop to 'div'`, () => {
+      const subject = testbed.render({
+        as: 'div'
+      })
+
+      expect(subject.instance().props.as).to.equal('div')
+    })
+    it(`should set the 'margin' prop to 'large'`, () => {
+      const subject = testbed.render({
+        margin: 'large'
+      })
+      expect(subject.instance().props.margin).to.equal('large')
+    })
   })
 
   it('should meet a11y standards', (done) => {

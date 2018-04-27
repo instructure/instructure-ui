@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -114,7 +114,7 @@ class Tag extends Component {
       variant
     } = this.props
 
-    const props = omitProps(this.props, Tag.propTypes, ['padding'])
+    const props = omitProps(this.props, {...Tag.propTypes, ...View.propTypes})
 
     const classes = {
       [styles.root]: true,
@@ -126,7 +126,7 @@ class Tag extends Component {
     }
 
     return (
-      <Container
+      <View
         {...props}
         ref={this.handleRef}
         className={classNames(className, classes)}
@@ -145,7 +145,7 @@ class Tag extends Component {
         {(onClick && dismissible)
           ? <IconX className={styles.icon} /> : null
         }
-      </Container>
+      </View>
     )
   }
 }
