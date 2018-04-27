@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -155,11 +155,11 @@ class RangeInput extends Component {
   renderValue () {
     if (this.props.displayValue) {
       return (
-        <ContextBox variant="inverse" placement="end">
+        <ContextView background="inverse" placement="end center">
           <output htmlFor={this.id} className={styles.value}>
             {this.props.formatValue(this.value)}
           </output>
-        </ContextBox>
+        </ContextView>
       )
     }
   }
