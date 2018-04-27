@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -105,15 +105,16 @@ class Table extends Component {
     }
 
     return (
-      <Container
-        {...omitProps(this.props, Table.propTypes, ['padding'])}
+      <View
+        {...omitProps(this.props, { ...Table.propTypes, ...View.propTypes })}
+        elementRef={this.props.elementRef}
         as="table"
         className={classnames(classes)}
         margin={this.props.margin}
       >
         <caption>{this.props.caption}</caption>
         {this.props.children}
-      </Container>
+      </View>
     )
   }
 }

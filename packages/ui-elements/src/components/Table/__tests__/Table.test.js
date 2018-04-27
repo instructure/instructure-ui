@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import Table from '../index'
 
 describe('<Table />', () => {
@@ -36,11 +36,40 @@ describe('<Table />', () => {
     expect(subject.find('caption').text()).to.equal('An amazing test table')
   })
 
-  it('should not allow padding to be added as a property', () => {
-    const subject = testbed.render({
-      padding: 'small medium large small'
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      as: 'table',
+      margin: 'small',
+      display: View.defaultProps.display,
+      elementRef: () => {}
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
     })
-    expect(subject.find(Container).props().padding).to.not.exist
+
+    it(`should not allow overriding the 'as' prop`, () => {
+      const subject = testbed.render({
+        as: 'div'
+      })
+      expect(subject.find(View).props().as).to.equal('table')
+    })
   })
 
   it('should meet a11y standards', (done) => {
