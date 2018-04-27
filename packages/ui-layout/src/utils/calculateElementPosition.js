@@ -54,13 +54,16 @@ import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
  */
 export default function calculateElementPosition (element, target, options) {
   if (!element || options.placement === 'offscreen') {
+    // hide offscreen content at the bottom of the DOM from screenreaders
+    // unless content is contained somewhere else
+    const hide = !options.container && element
     return {
       placement: options.placement,
       style: {
         left: '-9999em',
         overflow: 'hidden',
         position: 'absolute',
-        display: element ? 'none' : null
+        display: hide ? 'none' : null
       }
     }
   }
