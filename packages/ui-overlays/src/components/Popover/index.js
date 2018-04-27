@@ -25,9 +25,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import ContextView from '@instructure/ui-layout/lib/components/ContextView'
+import View from '@instructure/ui-layout/lib/components/View'
+
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -489,16 +491,33 @@ class Popover extends Component {
     }
 
     if (this.shown || this.props.shouldRenderOffscreen) {
+      let ViewElement
+      let viewProps = {
+        ref: c => this._view = c,
+        elementRef: this.props.contentRef,
+        background: this.props.variant
+      }
+
+      if (this.props.withArrow) {
+        ViewElement = ContextView
+        viewProps = {
+          ...viewProps,
+          placement: this.state.placement
+        }
+      } else {
+        ViewElement = View
+        viewProps = {
+          ...viewProps,
+          borderWidth: 'small',
+          borderRadius: 'medium'
+        }
+      }
+
       return (
-        <ContextBox
-          {...pickProps(this.props, ContextBox.propTypes)}
-          elementRef={this.props.contentRef}
-          placement={this.state.placement}
-          ref={c => this._contextBox = c}
-        >
+        <ViewElement {...viewProps}>
           {this.renderCloseButton()}
           {content}
-        </ContextBox>
+        </ViewElement>
       )
     } else {
       return null
@@ -508,10 +527,10 @@ class Popover extends Component {
   computeOffsets (placement) {
     let { offsetX, offsetY } = this.props
 
-    if (this.props.alignArrow && this._contextBox) {
+    if (this.props.alignArrow && this._view) {
       const secondaryPlacement = parsePlacement(placement)[1]
-      const { arrowSize, borderWidth } = this._contextBox.theme
-      const offsetAmount = (px(arrowSize) + px(borderWidth)) * 2
+      const { arrowSize, arrowBorderWidth } = this._view.theme
+      const offsetAmount = (px(arrowSize) + px(arrowBorderWidth)) * 2
       if (secondaryPlacement === 'start') {
         offsetX = offsetAmount
       } else if (secondaryPlacement === 'end') {

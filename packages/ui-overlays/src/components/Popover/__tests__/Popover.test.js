@@ -26,6 +26,8 @@ import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Position from '@instructure/ui-layout/lib/components/Position'
+import ContextView from '@instructure/ui-layout/lib/components/ContextView'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
 
@@ -154,6 +156,33 @@ describe('<Popover />', () => {
       button.simulate('click')
 
       expect(content).to.be.null
+    })
+  })
+
+  describe('withArrow', () => {
+    it('should render a ContextView component when withArrow is true', () => {
+      const subject = testbed.render({
+        withArrow: true
+      })
+
+      const button = subject.find('button')
+      button.simulate('click')
+
+      testbed.tick()
+
+      expect(subject.instance()._view instanceof ContextView).to.be.true
+    })
+
+    it('should render a View component when withArrow is false', () => {
+      const subject = testbed.render({
+        withArrow: false
+      })
+
+      const button = subject.find('button')
+      button.simulate('click')
+
+      testbed.tick()
+      expect(subject.instance()._view instanceof View).to.be.true
     })
   })
 
