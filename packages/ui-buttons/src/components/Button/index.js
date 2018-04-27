@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -182,14 +182,14 @@ class Button extends Component {
     const ElementType = this.elementType
 
     return (
-      <Container
+      <View
         {...props}
         display={null}
         as={ElementType}
         margin={margin}
       >
         <span className={styles.content}>{this.props.children}</span>
-      </Container>
+      </View>
     )
   }
 }

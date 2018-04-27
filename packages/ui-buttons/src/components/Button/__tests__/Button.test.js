@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import Button from '../index'
 
 describe('<Button/>', () => {
@@ -80,7 +80,7 @@ describe('<Button/>', () => {
     const subject = testbed.render({
       padding: 'medium large small large'
     })
-    expect(subject.find(Container).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist
   })
 
   it('focuses with the focus helper', () => {

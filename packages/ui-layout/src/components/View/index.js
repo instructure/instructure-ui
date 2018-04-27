@@ -52,7 +52,7 @@ category: components/layout
 class View extends Component {
   static propTypes = {
     /**
-    * The element to render as the component root
+    * The element to render as the component root, `span` by default
     */
     as: CustomPropTypes.elementType,
 
@@ -124,12 +124,16 @@ class View extends Component {
   }
 
   static defaultProps = {
-    as: 'span',
     elementRef: el => {},
     display: 'auto',
     children: null,
     background: 'transparent',
     debug: false,
+    // `as` will default to type span via getElementType, so for consistency and
+    // compatibility with Container we are leaving it undefined here. Otherwise
+    // it modifies behavior for consuming components because of the logic around
+    // default props in getElementType
+    as: undefined,
     // textAlign is undefined by default so that View can inherit text alignment
     // from parents
     textAlign: undefined,
