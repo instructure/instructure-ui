@@ -126,6 +126,10 @@ ReactWrapper.prototype.findText = function (text) {
   return this.findWhere(n => n.text() === text)
 }
 
+ReactWrapper.prototype.findElementWithText = function (type, text) {
+  return this.findWhere(n => n.type() === type && n.text() === text)
+}
+
 ReactWrapper.prototype.getA11yViolations = function (options, callback) {
   checkA11y(this.getDOMNode(), options, callback)
 }

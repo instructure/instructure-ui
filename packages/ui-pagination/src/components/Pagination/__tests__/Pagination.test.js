@@ -24,8 +24,6 @@
 
 import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
-import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
-import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton'
 
@@ -40,143 +38,187 @@ describe('<Pagination />', () => {
     })
   }
 
-  context('full', () => {
-    const testbed = new Testbed(
-      (
-        <Pagination>
-          {buildPages(5)}
-        </Pagination>
-      )
+  const testbed = new Testbed(
+    (
+      <Pagination>
+        {buildPages(5)}
+      </Pagination>
     )
+  )
 
+  context('full', () => {
     it('should render all pages', () => {
       const subject = testbed.render()
-      expect(subject.find(PaginationButton).length).to.eq(5)
+      expect(subject.find('button').length).to.eq(5)
       expect(subject.text().trim()).to.eq('#0#1#2#3#4')
     })
 
     it('should not render arrows', () => {
       const subject = testbed.render()
-      expect(subject.find(IconLeft)).to.have.length(0)
-      expect(subject.find(IconRight)).to.have.length(0)
+      expect(subject.find('button').findText('Prev')).to.have.length(0)
+      expect(subject.find('button').findText('Next')).to.have.length(0)
     })
   })
 
   context('compact', () => {
-    const compactTestbed = new Testbed(
-      (
-        <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
-          {buildPages()}
-        </Pagination>
-      )
-    )
-
     it('should render pages', () => {
-      const subject = compactTestbed.render()
-      expect(subject.find(PaginationButton).length).to.eq(4)
-      expect(subject.text().trim()).to.eq('#0#1#2#3')
+      const subject = testbed.render({
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
+      expect(subject.find('button').length).to.eq(5)
+      expect(subject.text().trim()).to.eq('#0#1#2#3#4')
     })
 
     it('should render a single page', () => {
-      const subject = compactTestbed.render({
+      const subject = testbed.render({
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev',
         children: <PaginationButton key="0">#000</PaginationButton>
       })
-      expect(subject.find(PaginationButton).length).to.eq(0)
-      expect(subject.find(IconLeft)).to.have.length(0)
-      expect(subject.find(IconRight)).to.have.length(0)
+      expect(subject.find('button')).to.have.length(1)
+      expect(subject.findElementWithText('button', '#000')).to.have.length(1)
     })
 
     it('should render no pages', () => {
-      const subject = compactTestbed.render({ children: [] })
-      expect(subject.find(PaginationButton).length).to.eq(0)
-      expect(subject.find(IconLeft)).to.have.length(0)
-      expect(subject.find(IconRight)).to.have.length(0)
+      const subject = testbed.render({
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev',
+        children: []
+      })
+      expect(subject.find('button').length).to.eq(0)
     })
 
     it('should truncate pages to context', () => {
-      const subject = compactTestbed.render({ children: buildPages(9, 3) })
-      expect(subject.find(PaginationButton).length).to.eq(7)
-      expect(subject.text().trim()).to.eq('#0...#2#3#4#5#6...#8')
+      const subject = testbed.render({
+        children: buildPages(9, 3),
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
+      expect(subject.find('button').length).to.eq(9)
+      expect(subject.text().trim()).to.eq('Prev#0...#2#3#4#5#6...#8Next')
     })
 
     it('should truncate start', () => {
-      const subject = compactTestbed.render({ children: buildPages(6, 5) })
-      expect(subject.find(PaginationButton).length).to.eq(3)
-      expect(subject.text().trim()).to.eq('#0...#4#5')
+      const subject = testbed.render({
+        children: buildPages(6, 5),
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
+      expect(subject.find('button').length).to.eq(4)
+      expect(subject.text().trim()).to.eq('Prev#0...#4#5')
     })
 
     it('should truncate end', () => {
-      const subject = compactTestbed.render({ children: buildPages(6) })
+      const subject = testbed.render({
+        children: buildPages(6),
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
       expect(subject.find(PaginationButton).length).to.eq(5)
-      expect(subject.text().trim()).to.eq('#0#1#2#3...#5')
+      expect(subject.text().trim()).to.eq('#0#1#2#3...#5Next')
     })
 
     it('should omit ellipses when bounds included in context', () => {
-      const subject = compactTestbed.render({ children: buildPages(7, 2) })
-      expect(subject.find(PaginationButton).length).to.eq(7)
-      expect(subject.text().trim()).to.eq('#0#1#2#3#4#5#6')
+      const subject = testbed.render({
+        children: buildPages(7, 2),
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
+      expect(subject.find('button').length).to.eq(9)
+      expect(subject.text().trim()).to.eq('Prev#0#1#2#3#4#5#6Next')
     })
 
     describe('arrows', () => {
       it('should render only when applicable', () => {
-        const subject = compactTestbed.render()
-        expect(subject.find(IconLeft)).to.have.length(0)
-        expect(subject.find(IconRight)).to.have.length(1)
+        const subject = testbed.render({
+          children: buildPages(6),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
 
-        subject.setProps({ children: buildPages(4, 3) })
-        expect(subject.find(IconLeft)).to.have.length(1)
-        expect(subject.find(IconRight)).to.have.length(0)
+        expect(subject.findElementWithText('button', 'Prev')).to.have.length(0)
+        expect(subject.findElementWithText('button', 'Next')).to.have.length(1)
+
+        subject.setProps({ children: buildPages(6, 5) })
+
+        expect(subject.findElementWithText('button', 'Prev')).to.have.length(1)
+        expect(subject.findElementWithText('button', 'Next')).to.have.length(0)
       })
 
       it('should navigate to adjacent pages', () => {
-        const onNextClick = compactTestbed.sandbox.stub()
-        const subject = compactTestbed.render({
+        const onClick = testbed.stub()
+        const subject = testbed.render({
           children: [
-            <PaginationButton key="cur" current>
-              Current
-            </PaginationButton>,
-            <PaginationButton key="next" onClick={onNextClick}>
-              Next
-            </PaginationButton>
-          ]
+            ...buildPages(6, 5),
+            <PaginationButton key="last" onClick={onClick}>Last</PaginationButton>
+          ],
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
         })
-        subject.find(IconRight).simulate('click')
-        expect(onNextClick).to.have.been.called
+
+        subject.findElementWithText('button', 'Next').click()
+
+        expect(onClick).to.have.been.called
       })
     })
 
     describe('when passing down props to View', () => {
       const allowedProps = {
         margin: 'small',
-        elementRef: () => {},
         as: 'section',
         display: View.defaultProps.display
       }
 
       Object.keys(View.propTypes)
-        .filter(prop => prop !== 'theme' && prop !== 'children')
+        .filter(prop => prop !== 'theme' && prop !== 'children' && prop !== 'elementRef')
         .forEach((prop) => {
           if (Object.keys(allowedProps).indexOf(prop) < 0) {
             it(`should NOT allow the '${prop}' prop`, () => {
-              const subject = compactTestbed.render({
+              const subject = testbed.render({
+                variant: 'compact',
+                labelNext: 'Next',
+                labelPrev: 'Prev',
                 [prop]: 'foo'
               })
               expect(subject.find(View).first().props()[prop]).to.not.exist
             })
           } else {
             it(`should allow the '${prop}' prop`, () => {
-              const subject = compactTestbed.render({
+              const subject = testbed.render({
+                variant: 'compact',
+                labelNext: 'Next',
+                labelPrev: 'Prev',
                 [prop]: allowedProps[prop]
               })
               expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
             })
           }
       })
+
+      it(`should pass down the elementRef prop`, () => {
+        const elementRef = testbed.stub()
+        testbed.render({ elementRef })
+        expect(elementRef).to.have.been.called
+      })
     })
 
     // Testing compact only, since it is a superset of components in full
     it('should meet a11y standards', done => {
-      const subject = compactTestbed.render()
+      const subject = testbed.render({
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: 'Prev'
+      })
 
       subject.should.be.accessible(done, {
         ignores: [

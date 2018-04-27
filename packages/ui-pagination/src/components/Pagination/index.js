@@ -35,7 +35,8 @@ import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-
+import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import PaginationButton from './PaginationButton'
 import theme from './theme'
 import styles from './styles.css'
@@ -82,27 +83,63 @@ export default class Pagination extends Component {
     /**
     * provides a reference to the underlying html root element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    /**
+    * For accessibility, Pagination sets focus on the first or last PaginationButtons,
+    * respectively, when the Previous or Next arrow buttons are removed from the DOM.
+    * Set this property to `false` to prevent this behavior.
+    */
+    shouldHandleFocus: PropTypes.bool
   }
 
   static defaultProps = {
     disabled: false,
     variant: 'full',
     as: 'div',
-    elementRef: (el) => {}
+    elementRef: (el) => {},
+    shouldHandleFocus: true
   }
 
-  hasCurrentPage () {
-    return this._current >= 0
+  componentDidUpdate () {
+    if (this.props.shouldHandleFocus === false || this.compactView === false) {
+      return
+    }
+
+    const focusable = findTabbable(this._root)
+
+    if (this.currentPageIndex === (this.pages.length - 1)) { // last page
+      focusable[focusable.length - 1].focus()
+    } else if (this.currentPageIndex === 0) { // first page
+      focusable[0].focus()
+    }
   }
 
-  isCompact () {
-    return this.props.variant === 'compact' && this.hasCurrentPage()
+  get compactView () {
+    return (this.props.variant === 'compact') && this.pages.length > 5
+  }
+
+  get pages () {
+    return React.Children.map(this.props.children,
+      (page) => React.cloneElement(page, { disabled: this.props.disabled })
+    )
+  }
+
+  get currentPageIndex () {
+    return this.pages.findIndex((p) => p.props.current)
+  }
+
+  handleElementRef = (el) => {
+    if (el) {
+      this._root = el
+      if (typeof this.props.elementRef === 'function') {
+        this.props.elementRef(el)
+      }
+    }
   }
 
   renderLabel () {
     if (this.props.label) {
-      const display = this.isCompact() ? 'block' : 'inline-block'
+      const display = (this.props.variant === 'compact') ? 'block' : 'inline-block'
       return (
         <View padding="small" display={display}>{this.props.label}</View>
       )
@@ -110,71 +147,70 @@ export default class Pagination extends Component {
   }
 
   renderPages () {
-    const allPages = this._pages
-    let pages = allPages
+    const allPages = [...this.pages]
+    let visiblePages = [...allPages]
 
-    if (this.isCompact()) {
+    if (this.compactView) {
       const firstIndex = 0
       const lastIndex = allPages.length - 1
 
-      const sliceStart = Math.max(this._current - 1, firstIndex)
-      const sliceEnd = Math.min(this._current + 4, lastIndex)
-      pages = allPages.slice(sliceStart, sliceEnd)
+      const sliceStart = Math.max(this.currentPageIndex - 1, firstIndex)
+      const sliceEnd = Math.min(this.currentPageIndex + 4, lastIndex)
+
+      visiblePages = allPages.slice(sliceStart, sliceEnd)
 
       const firstPage = allPages[firstIndex]
       const lastPage = allPages[lastIndex]
 
-      if ((sliceStart - firstIndex) > 1) pages.unshift(<span key="first" aria-hidden>...</span>)
-      if ((sliceStart - firstIndex) > 0) pages.unshift(firstPage)
-      if ((lastIndex - sliceEnd + 1) > 1) pages.push(<span key="last" aria-hidden>...</span>)
-      if ((lastIndex - sliceEnd + 1) > 0) pages.push(lastPage)
+      if ((sliceStart - firstIndex) > 1) visiblePages.unshift(<span key="first" aria-hidden="true">...</span>)
+      if ((sliceStart - firstIndex) > 0) visiblePages.unshift(firstPage)
+      if ((lastIndex - sliceEnd + 1) > 1) visiblePages.push(<span key="last" aria-hidden="true">...</span>)
+      if ((lastIndex - sliceEnd + 1) > 0) visiblePages.push(lastPage)
     }
 
     return (
-      <View display="inline-block">{pages}</View>
+      <View display="inline-block">{visiblePages}</View>
     )
   }
 
-  renderArrowButton (Icon, title) {
-    if (this.isCompact()) {
-      const diff = Icon === IconLeft ? -1 : 1
-      const relPage = this._pages[this._current + diff]
-      const relProps = omitProps(relPage.props, PaginationButton.propTypes)
-      return (
-        <Button
-          variant="icon"
-          {...relProps}
-          title={title}
-        >
-          <Icon />
-        </Button>
-      )
-    }
+  renderArrowButton (Icon, title, direction) {
+    const { onClick, disabled } = this.pages[this.currentPageIndex + direction].props
+    return (
+      <Button
+        onClick={onClick}
+        disabled={disabled}
+        variant="icon"
+        title={title}
+      >
+        <Icon />
+        <ScreenReaderContent>{title}</ScreenReaderContent>
+      </Button>
+    )
+  }
+
+  get showPrevButton () {
+    return (this.currentPageIndex > 0) && this.compactView
+  }
+
+  get showNextButton () {
+    return (this.currentPageIndex < this.pages.length - 1) && this.compactView
   }
 
   render () {
-    this._pages = React.Children.map(this.props.children,
-      (page) => React.cloneElement(page, { disabled: this.props.disabled })
-    )
-    // Don't render for single or empty pages
-    if (this._pages.length < 2) return null
-
-    this._current = this._pages.findIndex((p) => p.props.current)
-
     return (
       <View
         {...omitProps(this.props, { ...Pagination.propTypes, ...View.propTypes })}
         role="navigation"
         as={this.props.as}
-        elementRef={this.props.elementRef}
+        elementRef={this.handleElementRef}
         margin={this.props.margin}
         className={styles.root}
       >
         {this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
-          {this._current > 0 && this.renderArrowButton(IconLeft, this.props.labelPrev)}
-          {this.renderPages()}
-          {this._current < this._pages.length - 1 && this.renderArrowButton(IconRight, this.props.labelNext)}
+          { this.showPrevButton ? this.renderArrowButton(IconLeft, this.props.labelPrev, -1) : null }
+          { this.renderPages() }
+          { this.showNextButton ? this.renderArrowButton(IconRight, this.props.labelNext, 1) : null }
         </View>
       </View>
     )
