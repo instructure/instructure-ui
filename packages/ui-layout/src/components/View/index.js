@@ -124,11 +124,7 @@ class View extends Component {
   }
 
   static defaultProps = {
-    elementRef: el => {},
     display: 'auto',
-    children: null,
-    background: 'transparent',
-    debug: false,
     // `as` will default to type span via getElementType, so for consistency and
     // compatibility with Container we are leaving it undefined here. Otherwise
     // it modifies behavior for consuming components because of the logic around
@@ -139,6 +135,7 @@ class View extends Component {
     textAlign: undefined,
     // The following props should be undefined because default values are passed in
     // as inline styles which break the styling of the consuming components
+    background: undefined,
     margin: undefined,
     padding: undefined,
     height: undefined,

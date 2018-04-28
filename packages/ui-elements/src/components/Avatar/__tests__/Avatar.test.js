@@ -23,6 +23,8 @@
  */
 
 import React from 'react'
+import View from '@instructure/ui-layout/lib/components/View'
+
 import Avatar from '../index'
 
 import styles from '../styles.css'
@@ -123,6 +125,42 @@ describe('<Avatar />', () => {
     it('should set the role attribute to img', () => {
       const subject = testbed.render({alt: 'This is a test'})
       expect(subject.find('[role]').getAttribute('role')).to.equal('img')
+    })
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      elementRef: () => {},
+      as: 'div',
+      display: 'inline-block'
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+
+    it(`should set the 'display' prop based on the 'inline' prop`, () => {
+      const subject = testbed.render({
+        inline: true
+      })
+      expect(subject.find(View).props().display).to.equal('inline-block')
     })
   })
 })

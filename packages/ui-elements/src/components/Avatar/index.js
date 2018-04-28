@@ -25,11 +25,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -118,27 +119,26 @@ export default class Avatar extends Component {
   }
 
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles[this.props.size]]: true,
-      [styles[this.props.variant]]: true
-    }
-
-    const style = this.state.loaded ? {
-      backgroundImage: `url('${this.props.src}')`
-    } : null
-
     return (
-      <Container
-        style={style}
-        className={classnames(classes)}
+      <View
+        {...omitProps(this.props, { ...Avatar.propTypes, ...View.propTypes })}
+        style={{
+          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined
+        }}
+        className={classnames({
+          [styles.root]: true,
+          [styles[this.props.size]]: true,
+          [styles[this.props.variant]]: true
+        })}
         aria-label={this.props.alt ? this.props.alt : null}
         role={this.props.alt ? 'img' : null}
+        as={this.props.as}
+        elementRef={this.props.elementRef}
         margin={this.props.margin}
-        display={this.props.inline ? 'inline' : 'block'}
+        display={this.props.inline ? 'inline-block' : 'block'}
       >
         {!this.state.loaded && this.renderInitials()}
-      </Container>
+      </View>
     )
   }
 }
