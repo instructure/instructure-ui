@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import View from '@instructure/ui-layout/lib/components/View'
 import ProgressBar from '../index'
 
 describe('<ProgressBar />', () => {
@@ -47,5 +48,34 @@ describe('<ProgressBar />', () => {
     const subject = testbed.render()
 
     subject.should.be.accessible(done)
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      as: 'div',
+      margin: 'small',
+      display: View.defaultProps.display,
+      elementRef: () => {}
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
   })
 })

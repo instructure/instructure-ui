@@ -25,10 +25,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -84,7 +86,9 @@ export default class ProgressCircle extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    elementRef: PropTypes.func,
+    as: CustomPropTypes.elementType
   }
 
   static defaultProps = {
@@ -93,9 +97,9 @@ export default class ProgressCircle extends Component {
     valueMax: 100,
     valueNow: 0,
     variant: 'default',
-    showValue: false,
     animateOnMount: false,
-    successColor: true
+    successColor: true,
+    as: 'div'
   }
 
   constructor (props) {
@@ -178,8 +182,10 @@ export default class ProgressCircle extends Component {
     const radius = this.radius()
 
     return (
-      <Container
-        as="div"
+      <View
+        {...omitProps(this.props, { ...ProgressCircle.propTypes, ...View.propTypes })}
+        as={this.props.as}
+        elementRef={this.props.elementRef}
         className={classnames(classes)}
         margin={this.props.margin}
         role="progressbar"
@@ -217,7 +223,7 @@ export default class ProgressCircle extends Component {
             r={radius}
           />
         </svg>
-      </Container>
+      </View>
     )
   }
 }
