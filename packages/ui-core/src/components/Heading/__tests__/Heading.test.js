@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import Heading from '../index'
 
 describe('<Heading />', () => {
@@ -72,6 +72,6 @@ describe('<Heading />', () => {
       padding: 'medium large small medium'
     })
 
-    expect(subject.find(Container).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist
   })
 })

@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -69,7 +69,8 @@ export default class Heading extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-     margin: ThemeablePropTypes.spacing
+     margin: ThemeablePropTypes.spacing,
+     elementRef: PropTypes.func
    }
 
    static defaultProps = {
@@ -86,38 +87,34 @@ export default class Heading extends Component {
       color,
       level,
       ellipsis,
-      margin
+      margin,
+      elementRef
     } = this.props
 
-     const className = classnames({
-       [styles.root]: true,
-       [styles[level]]: true,
-       [styles[`color-${color}`]]: color,
-       [styles[`border-${border}`]]: border !== 'none',
-       [styles.ellipsis]: ellipsis
-     })
+    const ElementType = getElementType(Heading, this.props, () => {
+      if (level === 'reset') {
+       return 'span'
+      } else {
+       return level
+      }
+    })
 
-     const props = {
-       ...omitProps(this.props, Heading.propTypes, ['padding']),
-       className
-     }
-
-     const ElementType = getElementType(Heading, this.props, () => {
-       if (level === 'reset') {
-         return 'span'
-       } else {
-         return level
-       }
-     })
-
-     return (
-       <Container
-         {...props}
-         as={ElementType}
-         margin={margin}
-       >
-         {children}
-       </Container>
-     )
-   }
+    return (
+      <View
+       {...omitProps(this.props, {...Heading.propTypes, ...View.propTypes})}
+       className={classnames({
+         [styles.root]: true,
+         [styles[level]]: true,
+         [styles[`color-${color}`]]: color,
+         [styles[`border-${border}`]]: border !== 'none',
+         [styles.ellipsis]: ellipsis
+       })}
+       as={ElementType}
+       margin={margin}
+       elementRef={elementRef}
+      >
+       {children}
+      </View>
+    )
+  }
 }
