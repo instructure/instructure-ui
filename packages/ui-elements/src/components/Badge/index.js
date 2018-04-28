@@ -25,13 +25,14 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -79,8 +80,13 @@ class Badge extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
+    /**
+    * provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func,
     formatOverflowText: PropTypes.func,
-    formatOutput: PropTypes.func
+    formatOutput: PropTypes.func,
+    as: CustomPropTypes.elementType
   }
 
   static defaultProps = {
@@ -89,6 +95,7 @@ class Badge extends Component {
     variant: 'primary',
     pulse: false,
     placement: 'top end',
+    elementRef: (el) => {},
     formatOverflowText: (count, countUntil) => `${countUntil - 1} +`
   }
 
@@ -147,14 +154,14 @@ class Badge extends Component {
     }
 
     return (
-      <Container
+      <View
         margin={(standalone) ? margin : 'none'}
         className={classnames(classes)}
         title={(type === 'count' && this.countOverflow()) ? count : null}
         id={(!standalone) ? this._defaultId : null}
       >
         {this.renderOutput()}
-      </Container>
+      </View>
     )
   }
 
@@ -169,21 +176,24 @@ class Badge extends Component {
   render () {
     const {
       margin,
-      standalone
+      elementRef,
+      standalone,
+      as
     } = this.props
 
     if (standalone) {
       return this.renderBadge()
     } else {
       return (
-        <Container
-          as="span"
+        <View
+          as={as}
           margin={margin}
+          elementRef={elementRef}
           className={styles.wrapper}
         >
           {this.renderChildren()}
           {this.renderBadge()}
-        </Container>
+        </View>
       )
     }
   }
