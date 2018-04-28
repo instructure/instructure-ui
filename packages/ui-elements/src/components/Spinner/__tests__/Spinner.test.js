@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import View from '@instructure/ui-layout/lib/components/View'
 import Spinner from '../index'
 
 describe('<Spinner />', () => {
@@ -38,6 +39,35 @@ describe('<Spinner />', () => {
   it('should render the title prop text in the SVG element title', () => {
     const spinner = testbed.render({ size: 'large' })
     expect(spinner.find('svg > title').text()).to.equal('Loading')
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      as: 'div',
+      elementRef: () => {},
+      display: View.defaultProps.display
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
   })
 
   it('should meet a11y standards', (done) => {

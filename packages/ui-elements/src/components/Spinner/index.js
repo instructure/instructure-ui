@@ -25,12 +25,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -60,10 +62,13 @@ export default class Spinner extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    elementRef: PropTypes.func,
+    as: CustomPropTypes.elementType
   }
 
   static defaultProps = {
+    as: 'div',
     size: 'medium',
     variant: 'default'
   }
@@ -97,8 +102,10 @@ export default class Spinner extends Component {
       [styles.ie11]: ie11
     }
     return (
-      <Container
-        as="div"
+      <View
+        {...omitProps(this.props, { ...Spinner.propTypes, ...View.propTypes })}
+        as={this.props.as}
+        elementRef={this.props.elementRef}
         className={classNames(classes)}
         margin={this.props.margin}
       >
@@ -115,7 +122,7 @@ export default class Spinner extends Component {
             <circle className={styles.circleSpin} cx="50%" cy="50%" r={this.radius()} />
           </g>
         </svg>
-      </Container>
+      </View>
     )
   }
 }
