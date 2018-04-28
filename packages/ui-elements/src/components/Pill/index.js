@@ -25,11 +25,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -50,7 +51,9 @@ class Pill extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary'])
+    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary']),
+    elementRef: PropTypes.func,
+    as: CustomPropTypes.elementType
   }
 
   static defaultProps = {
@@ -61,10 +64,12 @@ class Pill extends Component {
     const {
       margin,
       text,
-      variant
+      variant,
+      as,
+      elementRef
     } = this.props
 
-    const props = omitProps(this.props, Pill.propTypes, ['padding'])
+    const props = omitProps(this.props, {...Pill.propTypes, ...View.propTypes})
 
     const classes = classnames({
       [styles.root]: true,
@@ -72,18 +77,18 @@ class Pill extends Component {
     })
 
     return (
-      <Container
+      <View
         {...props}
         className={classes}
-        as="span"
-        display={null}
+        as={as}
+        elementRef={elementRef}
         margin={margin}
         title={text}
       >
         <span className={styles.text}>
           {text}
         </span>
-      </Container>
+      </View>
     )
   }
 }
