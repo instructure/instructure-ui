@@ -26,8 +26,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
@@ -128,7 +129,8 @@ class Rating extends Component {
     const valueText = formatValueText(this.filled, iconCount)
 
     return (
-      <Container
+      <View
+        {...omitProps(this.props, { ...Rating.propTypes, ...View.propTypes })}
         className={classnames(classes)}
         margin={margin}
         role="progressbar"
@@ -156,7 +158,7 @@ class Rating extends Component {
             />
           ))
         }
-      </Container>
+      </View>
     )
   }
 }

@@ -25,6 +25,7 @@
 import React from 'react'
 import IconStar from '@instructure/ui-icons/lib/Solid/IconStar'
 import IconStarLight from '@instructure/ui-icons/lib/Solid/IconStarLight'
+import View from '@instructure/ui-layout/lib/components/View'
 import Rating from '../index'
 import RatingIcon from '../RatingIcon'
 
@@ -95,6 +96,45 @@ describe('<Rating />', () => {
     })
     const svg = subject.find(IconStar)
     expect(svg.length).to.equal(5)
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      display: 'auto'
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+    it(`should set the 'margin' prop to 'small'`, () => {
+      const subject = testbed.render({
+        margin: 'small'
+      })
+      expect(subject.find(View).props().margin).to.equal('small')
+    })
+    it(`should set the 'display' prop to 'auto'`, () => {
+      const subject = testbed.render({
+        display: 'auto'
+      })
+      expect(subject.find(View).props().display).to.equal('auto')
+    })
   })
 
   it('should meet a11y standards', (done) => {
