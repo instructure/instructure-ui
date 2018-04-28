@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -98,7 +98,17 @@ class Link extends Component {
   }
 
   render () {
-    const { children, disabled, onClick, variant, linkRef, href, margin, ellipsis } = this.props
+    const {
+      children,
+      disabled,
+      onClick,
+      variant,
+      linkRef,
+      href,
+      margin,
+      ellipsis,
+      elementRef
+    } = this.props
 
     const ElementType = getElementType(Link, this.props)
 
@@ -113,7 +123,7 @@ class Link extends Component {
         this._link = c
         linkRef.apply(this, [c].concat(args))
       },
-      ...omitProps(this.props, Link.propTypes),
+      ...omitProps(this.props, {...Link.propTypes, ...View.propTypes}),
       className: classnames(classes),
       href: href,
       type: href ? null : 'button',
@@ -130,11 +140,15 @@ class Link extends Component {
       : children
 
     return (
-      <Container margin={margin} className={styles.root}>
+      <View
+        margin={margin}
+        className={styles.root}
+        elementRef={elementRef}
+      >
         <ElementType {...props}>
           {text}
         </ElementType>
-      </Container>
+      </View>
     )
   }
 }

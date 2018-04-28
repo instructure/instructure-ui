@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import View from '@instructure/ui-layout/lib/components/View'
 import Link from '../index'
 
 describe('<Link />', () => {
@@ -138,6 +139,33 @@ describe('<Link />', () => {
 
       expect(subject.find('[href="example.html"]'))
         .to.have.length(1)
+    })
+  })
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      elementRef: () => {},
+      display: View.defaultProps.display
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).first().props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
     })
   })
 })
