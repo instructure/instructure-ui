@@ -25,7 +25,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -73,7 +73,8 @@ export default class List extends Component {
       'large',
       'x-large',
       'xx-large'
-    ])
+    ]),
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -100,12 +101,13 @@ export default class List extends Component {
   }
 
   render () {
-    const props = omitProps(this.props, List.propTypes, ['padding'])
+    const props = omitProps(this.props, {...List.propTypes, ...View.propTypes})
 
     const {
       as,
       margin,
-      variant
+      variant,
+      elementRef
     } = this.props
 
     const classes = {
@@ -116,14 +118,15 @@ export default class List extends Component {
     }
 
     return (
-      <Container
+      <View
         {...props}
         className={classnames(classes)}
         as={as}
         margin={margin}
+        elementRef={elementRef}
       >
         {this.renderChildren()}
-      </Container>
+      </View>
     )
   }
 }

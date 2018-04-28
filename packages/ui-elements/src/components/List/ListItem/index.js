@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -43,7 +43,6 @@ parent: List
 **/
 @themeable(theme, styles)
 export default class ListItem extends Component {
-  /* eslint-disable react/require-default-props */
   static propTypes = {
     children: PropTypes.node.isRequired,
     variant: deprecatePropValues(
@@ -69,12 +68,12 @@ export default class ListItem extends Component {
       'large',
       'x-large',
       'xx-large'
-    ])
+    ]),
+    elementRef: PropTypes.func
   }
-  /* eslint-enable react/require-default-props */
 
   render () {
-    const props = omitProps(this.props, ListItem.propTypes, ['padding'])
+    const props = omitProps(this.props, {...ListItem.propTypes, ...View.propTypes})
     const delimiter = (this.props.variant === 'pipe') ? 'pipe' : this.props.delimiter
     const variant = (this.props.variant === 'pipe') ? 'inline' : this.props.variant
     const size = (this.props.variant === 'pipe') ? 'small' : this.props.size
@@ -97,11 +96,12 @@ export default class ListItem extends Component {
     }
 
     return (
-      <Container
+      <View
         {...props}
         as="li"
         margin={this.props.margin}
         className={classnames(classes)}
+        elementRef={this.props.elementRef}
       >
         {this.props.children}
         {!noDelimiter && (
@@ -110,7 +110,7 @@ export default class ListItem extends Component {
             aria-hidden="true"
           />
         )}
-      </Container>
+      </View>
     )
   }
 }

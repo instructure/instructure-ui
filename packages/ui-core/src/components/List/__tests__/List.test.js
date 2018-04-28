@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import List from '../index'
 import ListItem from '../ListItem'
 
@@ -64,7 +64,7 @@ describe('<List />', () => {
       padding: 'small medium large small'
     })
 
-    expect(subject.find(Container).at(0).props().padding).to.not.exist
+    expect(subject.find(View).at(0).props().padding).to.not.exist
   })
 
   it('should pass down itemSpacing to ListItems', () => {
