@@ -34,8 +34,6 @@ import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import themeable from '@instructure/ui-themeable'
 
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 
 import styles from './styles.css'

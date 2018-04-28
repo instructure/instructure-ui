@@ -1,7 +1,7 @@
 .image {
   /*
   * reset image styles (initial: all was causing conflicts
-  * w/ Container's CSS and overriding height/width attrs)
+  * w/ View's CSS and overriding height/width attrs)
   */
   margin: 0;
   padding: 0;

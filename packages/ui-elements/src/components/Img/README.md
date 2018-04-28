@@ -20,11 +20,11 @@ the image a block-level element.
 ---
 example: true
 ---
-<Container textAlign="center" as="div">
+<View textAlign="center" as="div">
   <Img margin="small" alt="A placeholder image" src={placeholderImage(300, 200)} />
   <Img margin="small" src={placeholderImage(200, 200)} />
   <Img inline={false} margin="small auto" src={placeholderImage(400, 200)} />
-</Container>
+</View>
 ```
 
 ### Color overlay
@@ -36,7 +36,7 @@ in mind that Internet Explorer currently ignores CSS blend mode rules.)
 ---
 example: true
 ---
-  <Container textAlign="center" as="div">
+  <View textAlign="center" as="div">
     <Img
       src={placeholderImage(200, 200)}
       overlay={{color: '#008ee2', opacity: 7}}
@@ -55,7 +55,7 @@ example: true
       alt="A placeholder image"
       margin="x-small"
     />
-  </Container>
+  </View>
 ```
 
 ### Cover
@@ -68,11 +68,7 @@ containing element, while maintaining the aspect ratio of the source image.
 example: true
 ---
 <div style={{width: '66%', height: '11rem'}}>
-  <Img
-    src={avatarImage}
-    overlay={{color: 'rebeccapurple', opacity: 8}}
-    cover
-  />
+  <Img src={avatarImage} cover />
 </div>
 ```
 
@@ -85,7 +81,7 @@ are not supported in Internet Explorer.
 ---
 example: true
 ---
-  <Container textAlign="center" as="div">
+  <View textAlign="center" as="div">
     <Img
       grayscale
       src={avatarImage}
@@ -98,5 +94,5 @@ example: true
       alt="A placeholder image"
       margin="x-small"
     />
-  </Container>
+  </View>
 ```

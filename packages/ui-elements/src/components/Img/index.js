@@ -25,12 +25,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Container from '@instructure/ui-container/lib/components/Container'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import supportsObjectFit from '@instructure/ui-utils/lib/dom/supportsObjectFit'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -63,7 +63,8 @@ export default class Img extends Component {
     }),
     grayscale: PropTypes.bool,
     blur: PropTypes.bool,
-    cover: PropTypes.bool
+    cover: PropTypes.bool,
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -72,6 +73,10 @@ export default class Img extends Component {
     grayscale: false,
     blur: false,
     cover: false
+  }
+
+  get supportsObjectFit () {
+    return supportsObjectFit()
   }
 
   renderFilter () {
@@ -98,73 +103,84 @@ export default class Img extends Component {
       overlay,
       grayscale,
       blur,
-      cover
+      cover,
+      width,
+      height,
+      elementRef
     } = this.props
 
-    // Detect browser support for object-fit
-    // Don't need to sniff for Edge 16 bc it supports object-fit for <img>
-    const supportsObjectFit = 'objectFit' in document.documentElement.style !== false
-
-    const imgClasses = {
-      [styles.image]: true,
-      [styles['has-overlay']]: overlay,
-      [styles['has-filter']]: blur || grayscale,
-      [styles.cover]: cover && supportsObjectFit
+    const a11yProps = {
+      alt: alt || '',
+      role: 'img'
     }
 
-    const imgStyle = {
-      filter: (blur || grayscale) ? this.renderFilter() : 'none'
+    const imageProps = {
+      className: classnames({
+        [styles.image]: true,
+        [styles['has-overlay']]: overlay,
+        [styles['has-filter']]: blur || grayscale,
+        [styles.cover]: this.supportsObjectFit && cover
+      }),
+      style: {
+        filter: (blur || grayscale) ? this.renderFilter() : 'none'
+      },
+      src
     }
 
-    const props = {
-      ...omitProps(this.props, Img.propTypes, ['padding']),
-      className: classnames(imgClasses),
-      src,
-      alt
+    const passthroughProps = {
+      ...omitProps(this.props, { ...Img.propTypes, ...View.propTypes }),
+      width,
+      height,
+      margin,
+      display: inline ? 'inline-block' : 'block',
+      elementRef
     }
 
-    if (overlay) {
-      const containerClasses = {
-        [styles['container--has-overlay']]: true,
-        [styles['container--has-cover']]: cover,
-        [styles['container--has-background']]: !supportsObjectFit
-      }
+    const hasBackground = !this.supportsObjectFit && cover
 
-      const containerStyle = {
-        backgroundImage: !supportsObjectFit ? `url(${src})` : null
-      }
-
-      const overlayStyle = {
-        backgroundColor: overlay.color,
-        opacity: overlay.opacity * 0.1,
-        mixBlendMode: (overlay.blend) ? overlay.blend : null
-      }
-
-      /* eslint-disable jsx-a11y/alt-text, jsx-a11y/no-redundant-roles*/
-      const image = <img {...props} className={classnames(imgClasses)} style={imgStyle} role="img"/>
-      /* eslint-enable jsx-a11y/alt-text, jsx-a11y/no-redundant-roles */
+    if (overlay || hasBackground) {
+      // if a background image is rendered we add the a11y props on the container element
+      const containerProps = hasBackground ? {
+        ...a11yProps,
+        ...passthroughProps
+      } : passthroughProps
 
       return (
-        <Container
+        <View
+          {...containerProps}
           as="span"
-          margin={margin}
-          display={(inline) ? 'inline' : 'block'}
-          className={classnames(containerClasses)}
-          style={containerStyle}
+          className={classnames({
+            [styles['container--has-overlay']]: overlay,
+            [styles['container--has-cover']]: cover,
+            [styles['container--has-background']]: hasBackground
+          })}
+          style={{
+            backgroundImage: hasBackground ? `url(${src})` : undefined
+          }}
         >
-          {(!supportsObjectFit) ? <ScreenReaderContent>{image}</ScreenReaderContent> : image}
-          <span className={styles.overlay} style={overlayStyle} />
-        </Container>
+          {
+            !hasBackground && <img {...imageProps} {...a11yProps} /> // eslint-disable-line jsx-a11y/alt-text
+          }
+          { overlay && (
+              <span
+                className={styles.overlay}
+                style={{
+                  backgroundColor: overlay.color,
+                  opacity: overlay.opacity * 0.1,
+                  mixBlendMode: overlay.blend ? overlay.blend : null
+                }}
+              />
+            )
+          }
+        </View>
       )
     } else {
       return (
-        <Container
-          {...props}
+        <View
+          {...passthroughProps}
+          {...imageProps}
+          {...a11yProps}
           as="img"
-          margin={margin}
-          display={(inline) ? 'inline' : 'block'}
-          className={classnames(imgClasses)}
-          style={imgStyle}
         />
       )
     }

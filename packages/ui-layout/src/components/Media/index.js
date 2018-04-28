@@ -65,7 +65,8 @@ class Media extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -73,18 +74,14 @@ class Media extends Component {
   }
 
   render () {
-    const props = omitProps(this.props, Media.propTypes, ['padding'])
-
-    const classes = {
-      className: classnames({
-        [styles.root]: true,
-        [styles[this.props.alignContent]]: true
-      })
-    }
     return (
       <View
-        {...props}
-        {...classes}
+        {...omitProps(this.props, { ...Media.propTypes, ...View.propTypes })}
+        elementRef={this.props.elementRef}
+        className={classnames({
+          [styles.root]: true,
+          [styles[this.props.alignContent]]: true
+        })}
         as="figure"
         margin={this.props.margin}
         maxWidth={this.theme[this.props.size]}

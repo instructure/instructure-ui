@@ -46,18 +46,47 @@ describe('<Media />', () => {
     expect(subject).to.be.present
   })
 
-  it('should not allow padding to be added as a property', () => {
-    const subject = testbed.render({
-      padding: 'large small medium large'
-    })
-    expect(subject.find(View).first().props().padding).to.not.exist
-  })
-
   it('should meet a11y standards', (done) => {
     const subject = testbed.render()
 
     subject.should.be.accessible(done, {
       ignores: [ ]
+    })
+  })
+
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      elementRef: () => {},
+      as: 'figure',
+      display: 'auto'
+    }
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).first().props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+
+    it(`should pass 'figure' for the 'as' prop`, () => {
+      const subject = testbed.render({
+        as: 'foo'
+      })
+      expect(subject.find(View).first().props().as).to.equal('figure')
     })
   })
 })

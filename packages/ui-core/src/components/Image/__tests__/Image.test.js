@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import Image from '../index'
 
 describe('<Image />', () => {
@@ -55,7 +55,7 @@ describe('<Image />', () => {
       const subject = testbed.render({
         padding: 'small medium large small'
       })
-      expect(subject.find(Container).props().padding).to.not.exist
+      expect(subject.find(View).props().padding).to.not.exist
     })
 
     it('should render a blur filter', () => {
