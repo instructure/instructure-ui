@@ -85,7 +85,8 @@ export function browserTimeZone () {
 */
 export function toLocaleString (dateString, locale, timezone, format) {
   const d = parse(dateString, locale, timezone)
-  return format ? d.format(format) : d.toISOString(true)
+  const iso8601format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
+  return format ? d.format(format) : d.format(iso8601format)
 }
 
 export default {
