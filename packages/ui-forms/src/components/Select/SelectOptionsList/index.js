@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
-import ContextBox from '@instructure/ui-elements/lib/components/ContextBox'
+import View from '@instructure/ui-layout/lib/components/View'
 import Spinner from '@instructure/ui-elements/lib/components/Spinner'
 
 import getOptionId from '../utils/getOptionId'
@@ -230,15 +230,16 @@ class SelectOptionsList extends Component {
 
   render () {
     const { optionsId, menuRef, visibleOptionsCount, maxWidth, ...props } = this.props
-    const contextStyles = Object.assign({
-      maxWidth: maxWidth || '0'
-    }, props.style)
 
     return (
-      <ContextBox
-        style={contextStyles} // must also pass the style prop for positioning
+      <View
+        style={props.style} // must pass the style prop for positioning
         className={styles.container}
-        withArrow={false}
+        maxWidth={maxWidth || 0}
+        borderWidth="small"
+        borderRadius="medium"
+        shadow="resting"
+        background="default"
       >
         <ul
           className={styles.optionsList}
@@ -262,7 +263,7 @@ class SelectOptionsList extends Component {
         >
           {this.renderOptions()}
         </ul>
-      </ContextBox>
+      </View>
     )
   }
 }

@@ -58,17 +58,53 @@ describe('<View />', () => {
     ).to.be.true
   })
 
-  it('should pass style attributes', () => {
+  it('should pass position style attributes', () => {
     const subject = testbed.render({
       style: {
-        position: 'absolute',
+        top: '10rem',
         left: '5px',
-        top: '10rem'
+        minWidth: '20px',
+        minHeight: '13rem',
+        position: 'absolute',
+        transform: 'translate(30px, 15px)',
+        overflow: 'hidden'
       }
     })
-    expect(subject.getDOMNode().style['position']).to.equal('absolute')
-    expect(subject.getDOMNode().style['left']).to.equal('5px')
-    expect(subject.getDOMNode().style['top']).to.equal('10rem')
+
+    const styles = subject.getDOMNode().style
+    expect(styles['top']).to.equal('10rem')
+    expect(styles['left']).to.equal('5px')
+    expect(styles['minWidth']).to.equal('20px')
+    expect(styles['minHeight']).to.equal('13rem')
+    expect(styles['position']).to.equal('absolute')
+    expect(styles['transform']).to.equal('translate(30px, 15px)')
+    expect(styles['overflow']).to.equal('hidden')
+  })
+
+  it('should pass flex style', () => {
+    const subject = testbed.render({
+      style: {
+        flexBasis: '30rem'
+      }
+    })
+
+    const styles = subject.getDOMNode().style
+    expect(styles['flexBasis']).to.equal('30rem')
+  })
+
+  it('should not pass all styles', () => {
+    const subject = testbed.render({
+      style: {
+        backgroundColor: 'red',
+        borderStyle: 'dotted',
+        opacity: '0.5'
+      }
+    })
+
+    const styles = subject.getDOMNode().style
+    expect(styles['backgroundColor']).to.equal('')
+    expect(styles['borderStyle']).to.equal('')
+    expect(styles['opacity']).to.equal('')
   })
 
   it('should pass className', () => {

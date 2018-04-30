@@ -222,10 +222,13 @@ class View extends Component {
     const { style } = this.props // eslint-disable-line react/prop-types
 
     return {
-      position: style && style.position,
-      left: style && style.left,
       top: style && style.top,
-      transform: style && style.transform
+      left: style && style.left,
+      minWidth: style && style.minWidth,
+      minHeight: style && style.minHeight,
+      position: style && style.position,
+      transform: style && style.transform,
+      overflow: style && style.overflow
     }
   }
 
@@ -262,6 +265,27 @@ class View extends Component {
       className // eslint-disable-line react/prop-types
     } = this.props
 
+    const viewStyles = {
+      ...this.spacingStyle,
+      ...this.borderStyle,
+      ...this.shadowStyle,
+      width,
+      height,
+      minWidth,
+      minHeight,
+      maxWidth,
+      maxHeight
+    }
+
+    // When View style values are undefined, we need to remove both the
+    // key and value from the styles object so that the undefined value
+    // does not override approved styles
+    Object.keys(viewStyles).forEach(key => {
+      if (viewStyles[key] === undefined) {
+        delete viewStyles[key]
+      }
+    })
+
     const ElementType = getElementType(View, this.props)
 
     return (
@@ -278,17 +302,9 @@ class View extends Component {
           [className]: className
         })}
         style={{
-          ...this.flexStyle,
           ...this.positionStyle,
-          ...this.spacingStyle,
-          ...this.borderStyle,
-          ...this.shadowStyle,
-          width,
-          height,
-          minWidth,
-          minHeight,
-          maxWidth,
-          maxHeight
+          ...this.flexStyle,
+          ...viewStyles
         }}
         ref={this.handleElementRef}
       >

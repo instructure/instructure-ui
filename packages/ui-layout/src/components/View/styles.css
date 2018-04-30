@@ -1,8 +1,5 @@
 .root {
   box-sizing: border-box;
-  font-size: var(--fontSize);
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
 }
 
 .display--block {

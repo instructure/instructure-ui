@@ -28,10 +28,6 @@ import makeThemeVars from '@instructure/ui-themeable/lib/utils/makeThemeVars'
 
 export default function generator ({ typography, colors, borders, spacing, shadows, breakpoints }) {
   return {
-    fontSize: typography.fontSizeMedium,
-    fontFamily: typography.fontFamily,
-    fontWeight: typography.fontWeightNormal,
-
     color: colors.oxford,
     background: colors.white,
     borderColor: colors.tiara,
