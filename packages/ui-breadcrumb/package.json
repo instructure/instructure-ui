@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-breadcrumb",
-  "version": "5.4.0",
+  "version": "5.4.1-dev.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,8 +22,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.4.0",
-    "@instructure/ui-themes": "^5.4.0",
+    "@instructure/ui-presets": "^5.4.1-dev.1",
+    "@instructure/ui-themes": "^5.4.1-dev.1",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
@@ -32,11 +32,11 @@
     "react-dom": "^0.14.9 || ^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-layout": "^5.4.0",
-    "@instructure/ui-elements": "^5.4.0",
-    "@instructure/ui-icons": "^5.4.0",
-    "@instructure/ui-themeable": "^5.4.0",
-    "@instructure/ui-utils": "^5.4.0",
+    "@instructure/ui-elements": "^5.4.1-dev.1",
+    "@instructure/ui-icons": "^5.4.1-dev.1",
+    "@instructure/ui-layout": "^5.4.1-dev.1",
+    "@instructure/ui-themeable": "^5.4.1-dev.1",
+    "@instructure/ui-utils": "^5.4.1-dev.1",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   },
