@@ -35,7 +35,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -217,28 +217,24 @@ class View extends Component {
     }
   }
 
-  get positionStyle () {
-    // For Position
+  get styleProps () {
     const { style } = this.props // eslint-disable-line react/prop-types
-
-    return {
-      top: style && style.top,
-      left: style && style.left,
-      minWidth: style && style.minWidth,
-      minHeight: style && style.minHeight,
-      position: style && style.position,
-      transform: style && style.transform,
-      overflow: style && style.overflow
-    }
-  }
-
-  get flexStyle () {
-    // For FlexItem
-    const { style } = this.props // eslint-disable-line react/prop-types
-
-    return {
-      flexBasis: style && style.flexBasis
-    }
+    return pickProps(style, {}, [
+      // Position/calculateElementPosition:
+      'top',
+      'left',
+      'position',
+      'transform',
+      'overflow',
+      'minWidth',
+      'minHeight',
+      // Img:
+      'filter',
+      // FlexItem:
+      'flexBasis',
+      // Avatar:
+      'backgroundImage'
+    ])
   }
 
   handleElementRef = (el) => {
@@ -265,27 +261,6 @@ class View extends Component {
       className // eslint-disable-line react/prop-types
     } = this.props
 
-    const viewStyles = {
-      ...this.spacingStyle,
-      ...this.borderStyle,
-      ...this.shadowStyle,
-      width,
-      height,
-      minWidth,
-      minHeight,
-      maxWidth,
-      maxHeight
-    }
-
-    // When View style values are undefined, we need to remove both the
-    // key and value from the styles object so that the undefined value
-    // does not override approved styles
-    Object.keys(viewStyles).forEach(key => {
-      if (viewStyles[key] === undefined) {
-        delete viewStyles[key]
-      }
-    })
-
     const ElementType = getElementType(View, this.props)
 
     return (
@@ -302,9 +277,16 @@ class View extends Component {
           [className]: className
         })}
         style={{
-          ...this.positionStyle,
-          ...this.flexStyle,
-          ...viewStyles
+          ...this.spacingStyle,
+          ...this.borderStyle,
+          ...this.shadowStyle,
+          width,
+          height,
+          minWidth,
+          minHeight,
+          maxWidth,
+          maxHeight,
+          ...this.styleProps, // whitelisted style props will override View defaults
         }}
         ref={this.handleElementRef}
       >

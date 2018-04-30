@@ -35,33 +35,33 @@ import warning from '@instructure/ui-utils/lib/warning'
  * from the theme object.
  *
  * @param {String} componentName - the name of the component (for warnings)
- * @param {Object} theme - a theme object of keys and values
- * @param {String} propValues - a space delimited string of values
+ * @param {Object} componentTheme - a theme object of keys and values
+ * @param {String} propValue - a space delimited string of values
  * @param {String} propName - a prefix to combine with each propValue
  * @returns {String} a string with each value replaced with a value from the theme object
  */
-export default function getShorthandPropValue (componentName, theme, propValues, propName) {
-  if (typeof propValues !== 'string') {
-    return null
+export default function getShorthandPropValue (componentName, componentTheme, propValue, propName) {
+  if (typeof propValue !== 'string') {
+    return
   }
 
-  return propValues
+  return propValue
     .split(' ')
-    .map((propValue) => {
-      if (propValue === 'auto' || propValue === '0') {
-        return propValue
+    .map((shortHandValue) => {
+      if (shortHandValue === 'auto' || shortHandValue === '0') {
+        return shortHandValue
       }
 
-      if (propValue === 'none') {
+      if (shortHandValue === 'none') {
         return '0'
       }
 
-      const value = camelize(`${propName}-${propValue}`)
+      const themeVariableName = camelize(`${propName}-${shortHandValue}`)
+      const themeVariableValue = componentTheme[themeVariableName]
 
-      const theme_value = theme[value]
-      warning(theme_value, '[%s] %s is an invalid %s value.', componentName, value, propName)
+      warning(themeVariableValue, '[%s] %s is an invalid %s value.', componentName, themeVariableName, propName)
 
-      return theme_value || '0'
+      return themeVariableValue || '0'
     })
     .join(' ')
     .trim()
