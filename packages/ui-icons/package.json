@@ -13,7 +13,7 @@
   "scripts": {
     "clean": "ui-build --clean",
     "build": "gulp",
-    "export": "gulp export",
+    "export": "gulp export && gulp",
     "build:watch": "gulp watch"
   },
   "license": "MIT",
