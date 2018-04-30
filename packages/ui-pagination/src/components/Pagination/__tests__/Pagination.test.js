@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import Pagination from '../index'
@@ -145,6 +145,35 @@ describe('<Pagination />', () => {
       })
     })
 
+    describe('when passing down props to View', () => {
+      const allowedProps = {
+        margin: 'small',
+        elementRef: () => {},
+        as: 'section',
+        display: View.defaultProps.display
+      }
+
+      Object.keys(View.propTypes)
+        .filter(prop => prop !== 'theme' && prop !== 'children')
+        .forEach((prop) => {
+          if (Object.keys(allowedProps).indexOf(prop) < 0) {
+            it(`should NOT allow the '${prop}' prop`, () => {
+              const subject = compactTestbed.render({
+                [prop]: 'foo'
+              })
+              expect(subject.find(View).first().props()[prop]).to.not.exist
+            })
+          } else {
+            it(`should allow the '${prop}' prop`, () => {
+              const subject = compactTestbed.render({
+                [prop]: allowedProps[prop]
+              })
+              expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+            })
+          }
+      })
+    })
+
     // Testing compact only, since it is a superset of components in full
     it('should meet a11y standards', done => {
       const subject = compactTestbed.render()
@@ -154,15 +183,6 @@ describe('<Pagination />', () => {
           'color-contrast' // brand color doesn't meet 4.5:1 contrast req
         ]
       })
-    })
-
-    it('should not allow margin or padding to be added as properties', () => {
-      const subject = compactTestbed.render({
-        margin: 'small medium large small',
-        padding: 'large small medium large'
-      })
-      expect(subject.find(Container).first().props().margin).to.not.exist
-      expect(subject.find(Container).first().props().padding).to.not.exist
     })
   })
 })

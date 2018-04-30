@@ -36,6 +36,8 @@ class Example extends React.Component {
 
     return (
       <Pagination
+        as="nav"
+        margin="small"
         variant="compact"
         labelNext="Next Page"
         labelPrev="Previous Page"

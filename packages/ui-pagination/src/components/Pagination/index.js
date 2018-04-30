@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from '@instructure/ui-buttons/lib/components/Button'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
@@ -34,6 +34,7 @@ import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 import PaginationButton from './PaginationButton'
 import theme from './theme'
@@ -67,12 +68,28 @@ export default class Pagination extends Component {
     * Accessible label for previous button
     */
     labelPrev: PropTypes.string,
-    variant: PropTypes.oneOf(['full', 'compact'])
+    variant: PropTypes.oneOf(['full', 'compact']),
+    /**
+    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+    */
+    margin: ThemeablePropTypes.spacing,
+    /**
+    * the element type to render as
+    */
+    as: CustomPropTypes.elementType,
+    /**
+    * provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     disabled: false,
-    variant: 'full'
+    variant: 'full',
+    as: 'div',
+    elementRef: (el) => {}
   }
 
   hasCurrentPage () {
@@ -85,9 +102,9 @@ export default class Pagination extends Component {
 
   renderLabel () {
     if (this.props.label) {
-      const display = this.isCompact() ? 'block' : 'inline'
+      const display = this.isCompact() ? 'block' : 'inline-block'
       return (
-        <Container padding="small" display={display}>{this.props.label}</Container>
+        <View padding="small" display={display}>{this.props.label}</View>
       )
     }
   }
@@ -114,9 +131,7 @@ export default class Pagination extends Component {
     }
 
     return (
-      <Container display="inline">
-        {pages}
-      </Container>
+      <View display="inline-block">{pages}</View>
     )
   }
 
@@ -145,17 +160,23 @@ export default class Pagination extends Component {
     if (this._pages.length < 2) return null
 
     this._current = this._pages.findIndex((p) => p.props.current)
-    const props = omitProps(this.props, Pagination.propTypes, ['padding', 'margin'])
 
     return (
-      <Container role="navigation" as="div" {...props} className={styles.root}>
+      <View
+        {...omitProps(this.props, { ...Pagination.propTypes, ...View.propTypes })}
+        role="navigation"
+        as={this.props.as}
+        elementRef={this.props.elementRef}
+        margin={this.props.margin}
+        className={styles.root}
+      >
         {this.renderLabel()}
-        <Container display="inline" className={styles.pages}>
+        <View display="inline-block" className={styles.pages}>
           {this._current > 0 && this.renderArrowButton(IconLeft, this.props.labelPrev)}
           {this.renderPages()}
           {this._current < this._pages.length - 1 && this.renderArrowButton(IconRight, this.props.labelNext)}
-        </Container>
-      </Container>
+        </View>
+      </View>
     )
   }
 }

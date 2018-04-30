@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
 import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
 import Pagination from '../index'
@@ -156,13 +156,11 @@ describe('<Pagination />', () => {
       })
     })
 
-    it('should not allow margin or padding to be added as properties', () => {
+    it('should not allow padding to be added as properties', () => {
       const subject = compactTestbed.render({
-        margin: 'small medium large small',
         padding: 'large small medium large'
       })
-      expect(subject.find(Container).first().props().margin).to.not.exist
-      expect(subject.find(Container).first().props().padding).to.not.exist
+      expect(subject.find(View).first().props().padding).to.not.exist
     })
   })
 })
