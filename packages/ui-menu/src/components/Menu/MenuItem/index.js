@@ -96,7 +96,7 @@ class MenuItem extends Component {
   constructor (props) {
     super()
 
-    if (props.selected === undefined) {
+    if (typeof props.selected === 'undefined') {
       this.state = {
         selected: props.defaultSelected
       }
@@ -128,7 +128,7 @@ class MenuItem extends Component {
       return
     }
 
-    if (this.props.selected === undefined) {
+    if (typeof this.props.selected === 'undefined') {
       this.setState({ selected })
     }
 
@@ -196,7 +196,7 @@ class MenuItem extends Component {
   }
 
   get selected () {
-    return this.props.selected === undefined ? this.state.selected : this.props.selected
+    return (typeof this.props.selected === 'undefined') ? this.state.selected : this.props.selected
   }
 
   get focused () {

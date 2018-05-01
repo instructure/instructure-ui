@@ -31,6 +31,6 @@
  */
 export default function warning (condition, message, ...args) {
   if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-    console.warn.apply(undefined, [`Warning: ${message}`, ...args])
+    console.warn.apply(undefined, [`Warning: ${message}`, ...args]) // eslint-disable-line no-undefined
   }
 }

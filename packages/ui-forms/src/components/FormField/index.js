@@ -61,7 +61,6 @@ class FormField extends Component {
   static defaultProps = {
     inline: false,
     layout: 'stacked',
-    messagesId: undefined,
     labelAlign: 'end',
     vAlign: 'middle'
   }

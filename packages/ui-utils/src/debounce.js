@@ -73,7 +73,7 @@ export default function debounce (func, wait = 0, options = {}) {
     const args = lastArgs
     const thisArg = lastThis
 
-    lastArgs = lastThis = undefined
+    lastArgs = lastThis = undefined // eslint-disable-line no-undefined
     lastInvokeTime = time
     if (cancelled !== true) {
       result = func.apply(thisArg, args)
@@ -105,7 +105,7 @@ export default function debounce (func, wait = 0, options = {}) {
     // Either this is the first call, activity has stopped and we're at the
     // trailing edge, the system time has gone backwards and we're treating
     // it as the trailing edge, or we've hit the `maxWait` limit.
-    return (lastCallTime === undefined || (timeSinceLastCall >= wait) ||
+    return (typeof lastCallTime === 'undefined' || (timeSinceLastCall >= wait) ||
       (timeSinceLastCall < 0) || (maxing && timeSinceLastInvoke >= maxWait))
   }
 
@@ -127,7 +127,7 @@ export default function debounce (func, wait = 0, options = {}) {
       return invokeFunc(time)
     }
 
-    lastArgs = lastThis = undefined
+    lastArgs = lastThis = undefined // eslint-disable-line no-undefined
     return result
   }
 
@@ -135,7 +135,7 @@ export default function debounce (func, wait = 0, options = {}) {
     cancelled = true
     clearAllTimers()
     lastInvokeTime = 0
-    lastArgs = lastCallTime = lastThis = undefined
+    lastArgs = lastCallTime = lastThis = undefined // eslint-disable-line no-undefined
   }
 
   function flush () {

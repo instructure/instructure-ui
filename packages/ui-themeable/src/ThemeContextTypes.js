@@ -57,5 +57,7 @@ export function makeThemeContext (theme, immutable) {
  * @param {ReactContext} context React context object
  */
 export function getThemeContext (context) {
-  return context ? context[CONTEXT_KEY] : undefined
+  if (context) {
+    return context[CONTEXT_KEY]
+  }
 }

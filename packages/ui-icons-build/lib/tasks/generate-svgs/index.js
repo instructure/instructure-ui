@@ -64,7 +64,7 @@ gulp.task('generate-svgs-index', (cb) => {
 
   return gulp.src(require.resolve('./index.ejs'))
     .pipe(
-      consolidate('lodash', { glyphs: JSON.stringify(glyphs, undefined, 2) })
+      consolidate('lodash', { glyphs: JSON.stringify(glyphs, undefined, 2) }) // eslint-disable-line no-undefined
     )
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)

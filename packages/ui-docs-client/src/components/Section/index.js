@@ -35,8 +35,6 @@ export default class Section extends Component {
   }
 
   static defaultProps = {
-    id: undefined,
-    heading: undefined,
     children: null
   }
 

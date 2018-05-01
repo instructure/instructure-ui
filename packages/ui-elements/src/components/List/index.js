@@ -64,7 +64,6 @@ export default class List extends Component {
     * Sets the margin separating each ListItem.
     */
     itemSpacing: PropTypes.oneOf([
-      undefined,
       'xxx-small',
       'xx-small',
       'x-small',
@@ -82,8 +81,7 @@ export default class List extends Component {
     margin: 'none',
     variant: 'default',
     delimiter: 'none',
-    size: 'medium',
-    itemSpacing: undefined
+    size: 'medium'
   }
 
   renderChildren () {

@@ -87,7 +87,7 @@ export default class CheckboxGroup extends Component {
   constructor (props) {
     super()
 
-    if (props.value === undefined) {
+    if (typeof props.value === 'undefined') {
       this.state = {
         value: props.defaultValue
       }
@@ -114,7 +114,7 @@ export default class CheckboxGroup extends Component {
       newValue.splice(newValue.indexOf(e.target.value), 1)
     }
 
-    if (this.props.value === undefined) {
+    if (typeof this.props.value === 'undefined') {
       this.setState({value: newValue})
     }
 
@@ -124,10 +124,10 @@ export default class CheckboxGroup extends Component {
   };
 
   get value () {
-    if (this.props.value === undefined && this.state.value === undefined) {
+    if (typeof this.props.value === 'undefined' && typeof this.state.value === 'undefined') {
       return []
     } else {
-      return (this.props.value === undefined) ? [...this.state.value] : [...this.props.value]
+      return (typeof this.props.value === 'undefined') ? [...this.state.value] : [...this.props.value]
     }
   }
 

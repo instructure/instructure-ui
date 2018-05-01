@@ -28,7 +28,7 @@ describe('createChainedFunction', () => {
   const testbed = new Testbed()
 
   it('should return null if no function provided', () => {
-    expect(createChainedFunction(null, undefined)).to.equal(null)
+    expect(createChainedFunction(null, undefined)).to.equal(null) // eslint-disable-line no-undefined
   })
 
   it('should return a function', () => {

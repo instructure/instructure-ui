@@ -97,7 +97,7 @@ class RangeInput extends Component {
   constructor (props) {
     super()
 
-    if (props.value === undefined) {
+    if (typeof props.value === 'undefined') {
       this.state = {
         value: props.defaultValue
       }
@@ -128,7 +128,7 @@ class RangeInput extends Component {
   handleChange = (event) => {
     const { onChange, value } = this.props
 
-    if (value === undefined) {
+    if (typeof value === 'undefined') {
       this.setState({ value: event.target.value })
     }
 
@@ -141,7 +141,7 @@ class RangeInput extends Component {
   noopChange = () => {}
 
   get value () {
-    return (this.props.value === undefined) ? this.state.value : this.props.value
+    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
   }
 
   get invalid () {

@@ -133,9 +133,9 @@ export default class FlexItem extends Component {
        className={classnames(classes)}
        style={style}
        as={as}
-       width={dirColumn ? '100%' : undefined}
-       minHeight={dirColumn ? size : undefined}
-       minWidth={direction === 'row' ? size : undefined}
+       width={dirColumn ? '100%' : undefined} // eslint-disable-line no-undefined
+       minHeight={dirColumn ? size : undefined} // eslint-disable-line no-undefined
+       minWidth={direction === 'row' ? size : undefined} // eslint-disable-line no-undefined
        textAlign={textAlign}
        margin={margin}
        padding={padding}

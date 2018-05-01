@@ -108,7 +108,7 @@ class Checkbox extends Component {
       hovered: false
     }
 
-    if (props.checked === undefined) {
+    if (typeof props.checked === 'undefined') {
       this.state.checked = !!props.defaultChecked
     }
 
@@ -123,7 +123,7 @@ class Checkbox extends Component {
       return
     }
 
-    if (checked === undefined) {
+    if (typeof checked === 'undefined') {
       this.setState({ checked: !this.state.checked })
     }
 
@@ -169,7 +169,7 @@ class Checkbox extends Component {
   }
 
   get checked () {
-    return (this.props.checked === undefined) ? this.state.checked : this.props.checked
+    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
   }
 
   get focused () {

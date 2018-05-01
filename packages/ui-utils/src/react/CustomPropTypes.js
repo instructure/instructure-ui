@@ -342,7 +342,7 @@ Otherwise, set '${handlerName}'.`
    * @returns {Error} if prop is an invalid react element
    */
   elementType (props, propName, componentName, location, propFullName) {
-    if (props[propName] === undefined) {
+    if (typeof props[propName] === 'undefined') {
       return
     }
 

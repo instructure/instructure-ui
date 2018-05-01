@@ -109,7 +109,7 @@ export default class TreeBrowser extends Component {
 
     this.state = {}
 
-    if (this.props.expanded === undefined) {
+    if (typeof this.props.expanded === 'undefined') {
       this.state.expanded = props.defaultExpanded
     }
   }
@@ -117,7 +117,7 @@ export default class TreeBrowser extends Component {
   handleCollectionClick = (collection) => {
     const { onCollectionClick } = this.props
 
-    if (this.props.expanded === undefined) {
+    if (typeof this.props.expanded === 'undefined') {
       this.setState((state, props) => {
         const expanded = [].concat(this.getExpanded(state, props))
 
@@ -155,9 +155,9 @@ export default class TreeBrowser extends Component {
   get collections () {
     const { collections, rootId, showRootCollection } = this.props
 
-    if (rootId !== undefined && showRootCollection) {
+    if (typeof rootId !== 'undefined' && showRootCollection) {
       return [collections[rootId]]
-    } else if (rootId !== undefined) {
+    } else if (typeof rootId !== 'undefined') {
       return collections[rootId].collections
         .map(id => collections[id])
         .filter(collection => collection != null)
@@ -173,7 +173,7 @@ export default class TreeBrowser extends Component {
   }
 
   getExpanded (state, props) {
-    return (props.expanded === undefined) ? state.expanded : props.expanded
+    return (typeof props.expanded === 'undefined') ? state.expanded : props.expanded
   }
 
   getNavigableNodes () {

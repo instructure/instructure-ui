@@ -183,8 +183,8 @@ describe('<DateTimeInput />', () => {
   })
 
   it('should provide the html elements for date and time input', () => {
-    let dref = undefined
-    let tref = undefined
+    let dref
+    let tref
     const subject = testbed.render({
       dateInputRef: (el) => {dref = el},
       timeInputRef: (el) => {tref = el}
@@ -228,9 +228,9 @@ describe('<DateTimeInput />', () => {
     })
     setDateInputValue(subject, 'foobar')
     expect(subject.instance().state).to.eql({
-      date: undefined,
+      date: undefined, // eslint-disable-line no-undefined
       time: '13:30:00.000-04:00',
-      result: undefined,
+      result: undefined, // eslint-disable-line no-undefined
       messages: [{text: "whoops", type: "error"}]
     })
   })

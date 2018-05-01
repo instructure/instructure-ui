@@ -317,7 +317,7 @@ describe('<DateInput />', () => {
     subject.find('input').keyDown('enter')
 
     expect(onDateChange).to.have.been.called
-    expect(onDateChange.getCall(1).args[1]).to.equal(undefined)
+    expect(onDateChange.getCall(1).args[1]).to.equal(undefined) // eslint-disable-line no-undefined
   })
 
   it('should fire the onDateChange event with rawConversionFailed=true when TextInput value is invalid', () => {

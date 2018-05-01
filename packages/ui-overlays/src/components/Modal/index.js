@@ -302,7 +302,7 @@ export default class Modal extends Component {
         label={this.props.label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={
-          shouldCloseOnOverlayClick === undefined
+          (typeof shouldCloseOnOverlayClick === 'undefined')
             ? shouldCloseOnDocumentClick
             : shouldCloseOnOverlayClick
         }

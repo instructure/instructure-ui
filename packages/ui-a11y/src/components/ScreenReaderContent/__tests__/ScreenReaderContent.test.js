@@ -51,7 +51,7 @@ describe('<ScreenReaderContent />', () => {
     const height = subject.getComputedStyle().getPropertyValue('height')
     const opacity = subject.getComputedStyle().getPropertyValue('opacity')
 
-    expect(height).to.not.equal(0 || undefined)
-    expect(opacity).to.not.equal(0 || undefined)
+    expect(height).to.not.equal(0 || undefined) // eslint-disable-line no-undefined
+    expect(opacity).to.not.equal(0 || undefined) // eslint-disable-line no-undefined
   })
 })

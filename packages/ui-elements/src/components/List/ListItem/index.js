@@ -59,7 +59,6 @@ export default class ListItem extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     spacing: PropTypes.oneOf([
-      undefined,
       'xxx-small',
       'xx-small',
       'x-small',

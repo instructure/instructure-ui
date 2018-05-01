@@ -38,9 +38,7 @@ export default class Header extends Component {
     name: PropTypes.string.isRequired,
     version: PropTypes.string
   }
-  static defaultProps = {
-    version: undefined
-  }
+
   render () {
     return (
       <div className={styles.root}>

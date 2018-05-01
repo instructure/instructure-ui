@@ -95,7 +95,7 @@ export function shorthandPropType (validValues) {
   return function (props, propName, componentName, location) {
     const propValue = props[propName]
 
-    if (propValue === undefined) {
+    if (typeof propValue === 'undefined') {
       return
     }
 

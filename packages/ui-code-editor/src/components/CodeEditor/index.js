@@ -86,7 +86,7 @@ export default class CodeEditor extends Component {
     super()
     this._id = generateElementId('CodeEditor')
 
-    if (props.value === undefined) {
+    if (typeof props.value === 'undefined') {
       this.state = {
         value: props.defaultValue || props.code // eslint-disable-line react/prop-types
       }
@@ -122,7 +122,7 @@ export default class CodeEditor extends Component {
   }
 
   get value () {
-    return (this.props.value === undefined) ? this.state.value : this.props.value
+    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
   }
 
   render () {
@@ -141,7 +141,7 @@ export default class CodeEditor extends Component {
             options={this.options}
             value={this.value}
             onBeforeChange={(editor, data, value) => {
-              if (this.props.value === undefined) {
+              if (typeof this.props.value === 'undefined') {
                 this.setState({ value })
               }
             }}

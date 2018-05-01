@@ -109,7 +109,7 @@ export default class PopoverMenu extends Component {
 
     this.state = {}
 
-    if (props.show === undefined) {
+    if (typeof props.show === 'undefined') {
       this.state.show = props.defaultShow
     }
 
@@ -136,7 +136,7 @@ export default class PopoverMenu extends Component {
   }
 
   get show () {
-    return this.props.show === undefined ? this.state.show : this.props.show
+    return (typeof this.props.show === 'undefined') ? this.state.show : this.props.show
   }
 
   maybeFocusTrigger () {
@@ -149,7 +149,7 @@ export default class PopoverMenu extends Component {
     let show
     this.setState(
       (state, props) => {
-        show = props.show === undefined ? !state.show : !props.show
+        show = (typeof props.show === 'undefined') ? !state.show : !props.show
         return { show }
       },
       () => {

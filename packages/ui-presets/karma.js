@@ -56,17 +56,21 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
     reporters.push('coverage')
   }
 
-  const coverageReporter = withCoverage ? {
-    reporters: [
-      { type: 'text-summary' },
-      {
-        type: 'lcov',
-        dir: coverageDirectory,
-        subdir: '.'
-      }
-    ],
-    check: coverageThreshold
-  } : undefined
+  let coverageReporter
+
+  if (withCoverage) {
+    coverageReporter = {
+        reporters: [
+        { type: 'text-summary' },
+        {
+          type: 'lcov',
+          dir: coverageDirectory,
+          subdir: '.'
+        }
+      ],
+      check: coverageThreshold
+    }
+  }
 
   return function config (config) {
     config.set({

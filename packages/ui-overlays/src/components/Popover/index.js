@@ -260,7 +260,6 @@ class Popover extends Component {
 
   static defaultProps = {
     children: null,
-    show: undefined,
     onToggle: open => {},
     onClick: event => {},
     onFocus: event => {},
@@ -304,7 +303,7 @@ class Popover extends Component {
       offsetY: props.offsetY
     }
 
-    if (props.show === undefined) {
+    if (typeof props.show === 'undefined') {
       this.state.show = props.defaultShow
     }
   }
@@ -328,11 +327,11 @@ class Popover extends Component {
   }
 
   get shown () {
-    return this.props.show === undefined ? this.state.show : this.props.show
+    return (typeof this.props.show === 'undefined') ? this.state.show : this.props.show
   }
 
   show = () => {
-    if (this.props.show === undefined) {
+    if (typeof this.props.show === 'undefined') {
       this.setState({ show: true })
     }
 
@@ -347,7 +346,7 @@ class Popover extends Component {
       onToggle
     } = this.props
 
-    if (this.props.show === undefined) {
+    if (typeof this.props.show === 'undefined') {
       this.setState(({ show }) => {
         if (show) {
           onDismiss(e, documentClick)

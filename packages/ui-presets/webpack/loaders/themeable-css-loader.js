@@ -41,9 +41,12 @@ module.exports = function (source, map) {
     to: file,
     map: {
       inline: false, // inline sourcemaps will break the js templates
-      annotation: false,
-      prev: (map && map.mappings) ? map : undefined
+      annotation: false
     }
+  }
+
+  if (map && map.mappings) {
+    opts.map.prev = map
   }
 
   Promise.resolve().then(() => {

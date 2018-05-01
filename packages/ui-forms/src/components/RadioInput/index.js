@@ -81,7 +81,7 @@ class RadioInput extends Component {
 
     this.state = {}
 
-    if (props.checked === undefined) {
+    if (typeof props.checked === 'undefined') {
       this.state.checked = false
     }
 
@@ -103,7 +103,7 @@ class RadioInput extends Component {
       return
     }
 
-    if (this.props.checked === undefined) {
+    if (typeof this.props.checked === 'undefined') {
       this.setState({ checked: !this.state.checked })
     }
 
@@ -123,7 +123,7 @@ class RadioInput extends Component {
   }
 
   get checked () {
-    return (this.props.checked === undefined) ? this.state.checked : this.props.checked
+    return (typeof this.props.checked === 'undefined') ? this.state.checked : this.props.checked
   }
 
   render () {

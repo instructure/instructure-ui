@@ -50,7 +50,7 @@ describe('<Popover />', () => {
   function testShowContent (on, eventType) {
     it(`should show content on ${on}`, () => {
       // If on is hover, also add focus to avoid warning
-      const onValue = [on, on === 'hover' ? 'focus' : undefined]
+      const onValue = [on, on === 'hover' ? 'focus' : undefined] // eslint-disable-line no-undefined
       const subject = testbed.render({ on: onValue })
       const button = subject.find(Button)
 

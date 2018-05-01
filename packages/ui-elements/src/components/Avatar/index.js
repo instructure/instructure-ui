@@ -123,7 +123,7 @@ export default class Avatar extends Component {
       <View
         {...omitProps(this.props, { ...Avatar.propTypes, ...View.propTypes })}
         style={{
-          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined
+          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined // eslint-disable-line no-undefined
         }}
         className={classnames({
           [styles.root]: true,

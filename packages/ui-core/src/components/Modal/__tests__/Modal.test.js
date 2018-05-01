@@ -45,7 +45,7 @@ describe('<Modal />', () => {
   it('should render nothing and have a node with no parent when closed', () => {
     const subject = testbed.render()
     const node = subject.find(Portal).unwrap().node
-    expect(node).to.equal(undefined)
+    expect(node).to.equal(undefined) // eslint-disable-line no-undefined
   })
 
   it('should render children and have a node with a parent when open', () => {

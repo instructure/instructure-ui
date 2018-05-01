@@ -94,8 +94,7 @@ class Select extends Component {
     layout: 'stacked',
     messages: [],
     disabled: false,
-    selectRef: function (select) {},
-    onKeyDown: undefined
+    selectRef: function (select) {}
   }
 
   constructor (props) {

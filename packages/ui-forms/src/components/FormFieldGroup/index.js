@@ -75,8 +75,7 @@ export default class FormFieldGroup extends Component {
     disabled: false,
     rowSpacing: 'medium',
     colSpacing: 'small',
-    vAlign: 'middle',
-    messagesId: undefined
+    vAlign: 'middle'
   }
 
   get invalid () {

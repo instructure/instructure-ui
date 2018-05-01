@@ -191,21 +191,12 @@ class DateTimeInput extends Component {
 
   static defaultProps = {
     layout: 'inline',
-    datePlaceholder: undefined,
     timeStep: 30,
-    locale: undefined,
     timezone: '',
-    dateFormat: undefined,  // defaults to DateInput's default
-    timeFormat: undefined,  // defaults to TimeInput's default
     messageFormat: 'LLL',
-    onChange: undefined,
-    value: undefined,
-    defaultValue: undefined,
     required: false,
     disabled: false,
-    readOnly: false,
-    dateInputRef: undefined,
-    timeInputRef: undefined,
+    readOnly: false
   }
 
   static contextTypes = {
@@ -218,7 +209,7 @@ class DateTimeInput extends Component {
 
     let date, time, result
     let messages = []
-    let initialValue = props.value || props.defaultValue || undefined
+    let initialValue = props.value || props.defaultValue || undefined // eslint-disable-line no-undefined
     const locale = props.locale || context.locale || Locale.browserLocale()
     const timezone = props.timezone || context.timezone || DateTime.browserTimeZone()
     if (initialValue) {
@@ -292,6 +283,7 @@ class DateTimeInput extends Component {
     if (typeof invalidDateTimeMessage === 'function') {
       invalidDateTimeMessage = invalidDateTimeMessage(rawDateValue, rawTimeValue)
     }
+    // eslint-disable-next-line no-undefined
     return invalidDateTimeMessage ? {text: invalidDateTimeMessage, type: 'error'} : undefined
   }
 
@@ -316,16 +308,16 @@ class DateTimeInput extends Component {
     if (datetime) {
       const dtarr = datetime.split('T')
       return {
-        date: dtarr[0] || undefined,
-        time: dtarr[1] || undefined
+        date: dtarr[0] || undefined, // eslint-disable-line no-undefined
+        time: dtarr[1] || undefined // eslint-disable-line no-undefined
       }
     }
-    return {date: undefined, time: undefined}
+    return {date: undefined, time: undefined}  // eslint-disable-line no-undefined
   }
 
   combineDateAndTime (date, time) {
     let retval = {
-      result: undefined,
+      result: undefined,  // eslint-disable-line no-undefined
       messages: []
     }
     if (date && time) {
@@ -341,7 +333,7 @@ class DateTimeInput extends Component {
       }
     } else if (this.props.required) {
       retval = {
-        result: undefined,
+        result: undefined,  // eslint-disable-line no-undefined
         messages: [this.errorMessage(date, time)]
       }
     }
@@ -356,9 +348,9 @@ class DateTimeInput extends Component {
   }
 
   onDateChange = (event, newISODate, rawValue, isInvalid) => {
-    let newD = undefined
+    let newD
     let newT = this.state.time
-    let result = undefined
+    let result
     let messages = []
     if (newISODate) {
       newD = newISODate.replace(/T.*/, '')
@@ -367,7 +359,7 @@ class DateTimeInput extends Component {
       }
     }
     if (isInvalid) {
-      messages.push(this.errorMessage(rawValue, undefined))
+      messages.push(this.errorMessage(rawValue, undefined))  // eslint-disable-line no-undefined
     } else {
       ({result, messages} = this.combineDateAndTime(newD, newT))
     }
@@ -378,16 +370,16 @@ class DateTimeInput extends Component {
   }
 
   onTimeChange = (event, timeVal) => {
-    let newT = undefined
+    let newT
     let messages = []
-    let result = undefined
+    let result
     if (timeVal && timeVal.value) {
       // put in local time, or it may get the date wrong
       newT = DateTime.parse(timeVal.value, this.locale, this.timezone)
       newT = newT.format().replace(/.*T/, '')
     }
     if (!this.state.date) {
-      messages.push(this.errorMessage(undefined, timeVal.label))
+      messages.push(this.errorMessage(undefined, timeVal.label))  // eslint-disable-line no-undefined
     } else {
       ({result, messages} = this.combineDateAndTime(this.state.date, newT))
     }
@@ -399,7 +391,7 @@ class DateTimeInput extends Component {
 
   onInputBlur = (event) => {
     if (this.props.required && !this.state.result) {
-      const messages = [this.errorMessage(undefined, this.state.time)]
+      const messages = [this.errorMessage(undefined, this.state.time)]  // eslint-disable-line no-undefined
       this.setState({messages})
     }
   }

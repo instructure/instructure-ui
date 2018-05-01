@@ -56,8 +56,8 @@ describe('Decimal', () => {
 
   describe('#parse', () => {
     it('returns NaN when input is undefined', () => {
-      expect(Decimal.parse(undefined).isNaN()).to.be.true
-      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true
+      expect(Decimal.parse().isNaN()).to.be.true
+      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true // eslint-disable-line no-undefined
     })
 
     it('returns 0 when input is null', () => {
@@ -218,8 +218,8 @@ describe('Decimal', () => {
     })
 
     it('returns empty string if the number given is undefined', () => {
-      expect(Decimal.toLocaleString(undefined)).to.equal('')
-      expect(Decimal.toLocaleString(undefined, 'de')).to.equal('')
+      expect(Decimal.toLocaleString()).to.equal('')
+      expect(Decimal.toLocaleString(undefined, 'de')).to.equal('') // eslint-disable-line no-undefined
     })
 
     describe('correctly converts all floating numbers', () => {

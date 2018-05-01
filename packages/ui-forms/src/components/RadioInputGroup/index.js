@@ -100,7 +100,7 @@ export default class RadioInputGroup extends Component {
   constructor (props) {
     super()
 
-    if (props.value === undefined) {
+    if (typeof props.value === 'undefined') {
       this.state = {
         value: props.defaultValue
       }
@@ -121,7 +121,7 @@ export default class RadioInputGroup extends Component {
       return
     }
 
-    if (this.props.value === undefined) {
+    if (typeof this.props.value === 'undefined') {
       this.setState({value})
     }
 
@@ -131,7 +131,7 @@ export default class RadioInputGroup extends Component {
   };
 
   get value () {
-    return (this.props.value === undefined) ? this.state.value : this.props.value
+    return (typeof this.props.value === 'undefined') ? this.state.value : this.props.value
   }
 
   renderChildren () {
@@ -180,7 +180,7 @@ export default class RadioInputGroup extends Component {
         vAlign={(variant === 'toggle') ? 'middle' : 'top'}
         rowSpacing={(variant === 'toggle') ? 'none' : 'small'}
         colSpacing={(variant === 'toggle') ? 'none' : 'small'}
-        startAt={(variant === 'toggle') ? 'small' : undefined}
+        startAt={(variant === 'toggle') ? 'small' : undefined} // eslint-disable-line no-undefined
         messagesId={this._messagesId}
       >
         {this.renderChildren()}

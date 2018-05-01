@@ -37,7 +37,7 @@ describe('getOptionId', () => {
   it('prioritizes id attribute over value', () => {
     expect(getOptionId({ id: 1, value: 2 })).to.equal(1)
     expect(getOptionId({ notId: 1, value: 2 })).to.equal(2)
-    expect(getOptionId({ id: undefined, value: 2 })).to.equal(2)
+    expect(getOptionId({ id: undefined, value: 2 })).to.equal(2) // eslint-disable-line no-undefined
     expect(getOptionId({ id: null, value: 2 })).to.equal(2)
     expect(getOptionId({ id: 'not null?', value: 2 })).to.equal('not null?')
     let id = {}

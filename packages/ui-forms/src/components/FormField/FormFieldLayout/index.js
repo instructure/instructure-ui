@@ -85,8 +85,7 @@ class FormFieldLayout extends Component {
     inline: false,
     layout: 'stacked',
     as: 'label',
-    labelAlign: 'end',
-    messagesId: undefined
+    labelAlign: 'end'
   }
 
   constructor (props) {
@@ -126,7 +125,7 @@ class FormFieldLayout extends Component {
 
     return (
       <FormFieldLabel
-        as={isLegend ? 'legend' : undefined}
+        as={isLegend ? 'legend' : undefined}  // eslint-disable-line no-undefined
       >
         { this.props.label }
         { isLegend && this.renderScreenReaderMessages() }

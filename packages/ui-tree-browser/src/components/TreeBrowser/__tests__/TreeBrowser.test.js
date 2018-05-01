@@ -84,7 +84,7 @@ describe('<TreeBrowser />', () => {
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', () => {
-    const tree = testbed.render({rootId: undefined})
+    const tree = testbed.render({rootId: undefined}) // eslint-disable-line no-undefined
     expect(tree.find('button').length).to.equal(4)
   })
 

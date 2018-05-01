@@ -36,7 +36,7 @@ import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
  */
 export default function getTextDirection (element) {
   if (canUseDOM) {
-    const el = element === undefined ? document.documentElement : element
+    const el = (typeof element === 'undefined') ? document.documentElement : element
     return getComputedStyle(el).direction
   }
 }

@@ -103,8 +103,7 @@ class ToggleDetails extends Component {
     iconPosition: 'start',
     expanded: null,
     defaultExpanded: false,
-    onToggle: function (event, expanded) {},
-    children: undefined
+    onToggle: function (event, expanded) {}
   }
 
   constructor (props) {

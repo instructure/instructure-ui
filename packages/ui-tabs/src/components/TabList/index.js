@@ -105,7 +105,7 @@ export default class TabList extends Component {
       focus: props.focus
     }
 
-    if (props.selectedIndex === undefined) {
+    if (typeof props.selectedIndex === 'undefined') {
       this.state.selectedIndex = props.defaultSelectedIndex
     }
 
@@ -165,7 +165,7 @@ export default class TabList extends Component {
   }
 
   get selectedIndex () {
-    return (this.props.selectedIndex === undefined) ? this.state.selectedIndex : this.props.selectedIndex
+    return (typeof this.props.selectedIndex === 'undefined') ? this.state.selectedIndex : this.props.selectedIndex
   }
 
   get tabIds () {
@@ -195,12 +195,12 @@ export default class TabList extends Component {
     warning(this.isValidIndex(index), `[Tablist] Invalid tab index: ${index}`)
 
     const handleChange = () => {
-      if (selectedIndex !== undefined && typeof this.props.onChange === 'function') {
+      if (typeof selectedIndex !== 'undefined' && typeof this.props.onChange === 'function') {
         this.props.onChange(index, selectedIndex)
       }
     }
 
-    if (this.props.selectedIndex === undefined) {
+    if (typeof this.props.selectedIndex === 'undefined') {
       this.setState((state, props) => {
         selectedIndex = state.selectedIndex
 

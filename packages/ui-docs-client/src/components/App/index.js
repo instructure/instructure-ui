@@ -86,9 +86,9 @@ export default class App extends Component {
     super()
 
     this.state = {
-      key: undefined,
+      key: undefined, // eslint-disable-line no-undefined
       showMenu: true,
-      themeKey: undefined
+      themeKey: undefined // eslint-disable-line no-undefined
     }
   }
 
@@ -201,12 +201,14 @@ export default class App extends Component {
     }
 
     const description = descriptions[doc.id]
+    // eslint-disable-next-line no-undefined
+    const heading = doc.extension !== '.md' ? doc.title : undefined
 
     return (
       <div>
         { this.renderThemeSelect() }
         { doc.experimental && <div><Pill text="Experimental" variant="primary" margin="small 0" /></div>}
-        <Section id={doc.id} heading={doc.extension !== '.md' ? doc.title : undefined}>
+        <Section id={doc.id} heading={heading}>
           <Document
             doc={{
               ...doc,

@@ -94,7 +94,7 @@ export default class MenuItemGroup extends Component {
   constructor (props) {
     super()
 
-    if (props.selected === undefined) {
+    if (typeof props.selected === 'undefined') {
       this.state = {
         selected: this.selectedFromChildren(props) || props.defaultSelected
       }
@@ -158,10 +158,10 @@ export default class MenuItemGroup extends Component {
   }
 
   get selected () {
-    if (this.props.selected === undefined && this.state.selected === undefined) {
+    if (typeof this.props.selected === 'undefined' && typeof this.state.selected === 'undefined') {
       return []
     } else {
-      return (this.props.selected === undefined) ? [...this.state.selected] : [...this.props.selected]
+      return (typeof this.props.selected === 'undefined') ? [...this.state.selected] : [...this.props.selected]
     }
   }
 

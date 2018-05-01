@@ -124,29 +124,16 @@ class View extends Component {
   }
 
   static defaultProps = {
-    display: 'auto',
-    // `as` will default to type span via getElementType, so for consistency and
+    display: 'auto'
+    // Note:
+    // - `as` will default to type span via getElementType, so for consistency and
     // compatibility with Container we are leaving it undefined here. Otherwise
     // it modifies behavior for consuming components because of the logic around
     // default props in getElementType
-    as: undefined,
-    // textAlign is undefined by default so that View can inherit text alignment
+    // - `textAlign` is undefined by default so that View can inherit text alignment
     // from parents
-    textAlign: undefined,
-    // The following props should be undefined because default values are passed in
-    // as inline styles which break the styling of the consuming components
-    background: undefined,
-    margin: undefined,
-    padding: undefined,
-    height: undefined,
-    width: undefined,
-    maxHeight: undefined,
-    maxWidth: undefined,
-    minHeight: undefined,
-    minWidth: undefined,
-    borderWidth: undefined,
-    borderRadius: undefined,
-    shadow: undefined
+    // - Any props used to set inline styles should be undefined so that they
+    // don't break consuming components' CSS
   }
 
   constructor (props) {

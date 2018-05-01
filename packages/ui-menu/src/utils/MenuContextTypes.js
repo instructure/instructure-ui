@@ -41,5 +41,7 @@ export function makeMenuContext ({ registerMenuItem, removeMenuItem }) {
 }
 
 export function getMenuContext (context) {
-  return context ? context[CONTEXT_KEY] : undefined
+  if (context) {
+    return context[CONTEXT_KEY]
+  }
 }

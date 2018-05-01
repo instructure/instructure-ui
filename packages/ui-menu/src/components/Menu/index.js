@@ -158,7 +158,6 @@ class Menu extends Component {
     trigger: null,
     placement: 'bottom center',
     defaultShow: false,
-    show: undefined,
     onToggle: (shown, menu) => {},
     onSelect: (event, value, selected, item) => {},
     onDismiss: (event, documentClick) => {},
@@ -172,8 +171,7 @@ class Menu extends Component {
     mountNode: null,
     liveRegion: null,
     shouldHideOnSelect: true,
-    shouldFocusTriggerOnClose: true,
-    type: undefined
+    shouldFocusTriggerOnClose: true
   }
 
   state = { hasFocus: false }

@@ -114,7 +114,7 @@ class Testbed {
     }
 
     this.rootNode && this.rootNode.remove()
-    this.rootNode = undefined
+    delete this.rootNode
 
     document.documentElement.removeAttribute('dir')
   }

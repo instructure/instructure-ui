@@ -173,18 +173,11 @@ export default class DateInput extends Component {
     messages: [],
     format: 'LL',
     validationFeedback: true,
-    locale: undefined,
-    timezone: undefined,
-    defaultDateValue: undefined,
     onDateChange: (e, isoValue, rawValue, rawConversionFailed, dateIsDisabled) => {},
-    dateValue: undefined,
     datePickerRef: el => {},
     inputRef: el => {},
     invalidDateMessage: (textInputValue) => {},
     required: false,
-    placeholder: undefined,
-    todayValue: undefined,
-    width: undefined,
     inline: false,
     size: 'medium',
     disabled: false,
@@ -202,7 +195,7 @@ export default class DateInput extends Component {
   constructor (props, context) {
     super(props, context)
 
-    const initialDateValue = props.dateValue || props.defaultDateValue || undefined
+    const initialDateValue = props.dateValue || props.defaultDateValue || undefined // eslint-disable-line no-undefined
     const locale = this._locale(props, context)
     const timezone = this._timezone(props, context)
     const parsedDate = this._parseDate(initialDateValue, locale, timezone)
@@ -217,7 +210,7 @@ export default class DateInput extends Component {
       ...this.computeState(initialDateValue, parsedDate, props)
     }
 
-    this._input = undefined
+    delete this._input
   }
 
   componentWillReceiveProps (nextProps) {
@@ -266,7 +259,7 @@ export default class DateInput extends Component {
   get calendarSelectedValue () {
     const { acceptedValue } = this.state
 
-    let value = acceptedValue ? this.parseDate(acceptedValue) : undefined
+    let value = acceptedValue ? this.parseDate(acceptedValue) : undefined // eslint-disable-line no-undefined
 
     if (!value || !value.isValid()) {
       value = DateTime.now(this.locale, this.timezone)
@@ -442,7 +435,7 @@ export default class DateInput extends Component {
     } else {
       return {
         isValidOrEmpty: !rawValue,
-        acceptedValue: undefined,
+        acceptedValue: undefined, // eslint-disable-line no-undefined
         textInputValue: state ? state.textInputValue : '',
         hour: 0,
         minute: 0,

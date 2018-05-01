@@ -50,7 +50,7 @@ class SVGIcon extends Component {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
-    size: PropTypes.oneOf([undefined, 'x-small', 'small', 'medium', 'large', 'x-large'])
+    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large'])
   }
 
   static defaultProps = {

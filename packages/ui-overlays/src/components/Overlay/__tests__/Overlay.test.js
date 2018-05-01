@@ -32,7 +32,7 @@ describe('<Overlay />', () => {
   it('should render nothing when closed', () => {
     const subject = testbed.render()
     const portal = subject.find(Portal).unwrap()
-    expect(portal.node).to.equal(undefined)
+    expect(portal.node).to.equal(undefined) // eslint-disable-line no-undefined
   })
 
   it('should render children and have a node with a parent when open', () => {

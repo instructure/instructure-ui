@@ -66,7 +66,8 @@ module.exports = {
       mustMatch: 'The MIT License \\(MIT\\)',
       templateFile: require.resolve('./copyright.js')
     }],
-    'import/no-extraneous-dependencies': 'error'
+    'import/no-extraneous-dependencies': 'error',
+    'no-undefined': 'error'
   },
   overrides: [
     {

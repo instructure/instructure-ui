@@ -50,11 +50,6 @@ export default class Document extends Component {
     themeKey: PropTypes.string
   }
 
-  static defaultProps = {
-    description: undefined,
-    themeKey: undefined
-  }
-
   renderProps (doc) {
     const {
       id,

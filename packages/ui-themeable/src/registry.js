@@ -54,7 +54,7 @@ const validateRegistry = function (registry) {
   const defaultRegistry = makeRegistry()
 
   Object.keys(defaultRegistry).forEach((key) => {
-    if (!registry || registry[key] === undefined) {
+    if (!registry || typeof registry[key] === 'undefined') {
       valid = false
     }
   })

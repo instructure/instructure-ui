@@ -101,7 +101,7 @@ const createFontTask = function (variant) {
 
 gulp.task('generate-fonts-index', (cb) => {
   return gulp.src(require.resolve('./index.ejs'))
-    .pipe(consolidate('lodash', { glyphs: JSON.stringify(GLYPHS, undefined, 2) }))
+    .pipe(consolidate('lodash', { glyphs: JSON.stringify(GLYPHS, undefined, 2) })) // eslint-disable-line no-undefined
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.fonts.destination))

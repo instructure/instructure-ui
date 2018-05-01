@@ -218,7 +218,7 @@ class TextArea extends Component {
       return
     }
 
-    if (value === undefined) { // if uncontrolled
+    if (typeof value === 'undefined') { // if uncontrolled
       this.autoGrow()
     }
 

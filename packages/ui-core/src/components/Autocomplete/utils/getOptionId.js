@@ -37,11 +37,11 @@ export default function getOptionId (option) {
     return null
   }
 
-  if (option.id !== undefined && option.id !== null) {
+  if (typeof option.id !== 'undefined' && option.id !== null) {
     return option.id
   }
 
-  if (option.value !== undefined && option.value !== null) {
+  if (typeof option.value !== 'undefined' && option.value !== null) {
     return option.value
   }
 

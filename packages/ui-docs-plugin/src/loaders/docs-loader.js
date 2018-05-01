@@ -45,6 +45,7 @@ module.exports = function DocsLoader () {
   const icons = parseIcons(options.icons)
 
   const files = options.files.map(file => path.resolve(options.projectRoot, file))
+  // eslint-disable-next-line no-undefined
   const ignore = options.ignore ? options.ignore.map(file => path.resolve(options.projectRoot, file)) : undefined
 
   globby(files, { ignore }).then((matches) => {

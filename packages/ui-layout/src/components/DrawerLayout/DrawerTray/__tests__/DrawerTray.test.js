@@ -65,7 +65,7 @@ describe('<DrawerTray />', () => {
 
   it('should not render tray content when closed', () => {
     const subject = testbed.render()
-    expect(subject.ref('_trayContent').node).to.equal(undefined)
+    expect(subject.ref('_trayContent').node).to.equal(undefined) // eslint-disable-line no-undefined
   })
 
   it('should call the contentRef', () => {

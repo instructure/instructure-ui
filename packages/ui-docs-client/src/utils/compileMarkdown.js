@@ -283,6 +283,7 @@ function createRenderer () {
 
   renderer.tablecell = function (content, flag) {
     const tag = flag.header ? 'th' : 'td'
+    // eslint-disable-next-line no-undefined
     return addElement(tag, {className: flag.align ? `text-${flag.align}` : undefined}, content)
   }
 
