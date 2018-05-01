@@ -163,11 +163,11 @@ class Button extends Component {
     }
 
     const props = {
+      ...omitProps(this.props, { ...Button.propTypes, ...View.propTypes }),
       elementRef: (c, ...args) => {
         this._button = c
         buttonRef.apply(this, [c].concat(args))
       },
-      ...omitProps(this.props, Button.propTypes, ['padding']),
       className: classnames(classes),
       disabled: disabled || readOnly,
       'aria-disabled': disabled || readOnly ? 'true' : null,

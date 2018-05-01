@@ -221,6 +221,53 @@ describe('<Button/>', () => {
     })
   })
 
+  describe('when passing down props to View', () => {
+    const allowedProps = {
+      margin: 'small',
+      as: 'div'
+    }
+
+    const ignore = [
+      'elementRef'
+    ]
+
+    Object.keys(View.propTypes)
+      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
+      .forEach((prop) => {
+        if (Object.keys(allowedProps).indexOf(prop) < 0) {
+          it(`should NOT allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: 'foo'
+            })
+            expect(subject.find(View).props()[prop]).to.not.exist
+          })
+        } else {
+          it(`should allow the '${prop}' prop`, () => {
+            const subject = testbed.render({
+              [prop]: allowedProps[prop]
+            })
+            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          })
+        }
+    })
+
+    it('sets the elementRef prop on View when the buttonRef prop is passed', () => {
+      const buttonRef = testbed.spy()
+      const subject = testbed.render({
+        buttonRef
+      })
+
+      const el = <div>test</div>
+      const elementRef = subject.find(View).props()['elementRef']
+
+      // call the View element ref function manually with a test value to ensure
+      // it has received the button ref function and calls it correctly
+      elementRef(el)
+
+      expect(buttonRef.lastCall.args[0]).to.equal(el)
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()
