@@ -23,7 +23,7 @@ In your .babelrc file:
 
 ```json
 {
-  "presets": ["@instructure/ui-presets"]
+  "presets": ["@instructure/ui-presets/babel"]
 }
 ```
 
