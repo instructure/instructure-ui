@@ -120,7 +120,7 @@ class Example extends React.Component {
             <option key="de" value="de">de</option>
             <option key="en" value="en">en</option>
         </Select>
-        <Container padding="small">
+        <View padding="small">
           <NumberInput
             label={label}
             step={0.1}
@@ -128,7 +128,7 @@ class Example extends React.Component {
             locale={this.state.locale}
             defaultValue={2.4}
           />
-        </Container>
+        </View>
       </div>
     )
   }
@@ -166,20 +166,20 @@ inline and accept a fixed `width`. *Note: IE11 needs a `width` prop if the input
 example: true
 ---
 <div>
-  <Container as="div" margin="0 0 medium">
+  <View as="div" margin="0 0 medium">
     <NumberInput
       label="Points"
       layout="inline"
     />
-  </Container>
-  <Container as="div">
+  </View>
+  <View as="div">
     <NumberInput
       label="Points"
       layout="inline"
       inline
       width="9rem"
     />
-  </Container>
+  </View>
 </div>
 ```
 
@@ -211,9 +211,9 @@ example: true
       />
     </GridCol>
     <GridCol width="auto">
-      <Container margin="0 0 x-small" display="block">
+      <View margin="0 0 x-small" display="block">
         <Text weight="bold">%</Text>
-      </Container>
+      </View>
     </GridCol>
   </GridRow>
 </Grid>

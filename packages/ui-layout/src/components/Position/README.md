@@ -160,7 +160,7 @@ class Example extends React.Component {
 
     return (
     <span>
-      <Container as="div" padding="x-large" textAlign="center">
+      <View as="div" padding="x-large" textAlign="center">
         <Position
           placement={placement}
           offsetX={offsetX}
@@ -189,7 +189,7 @@ class Example extends React.Component {
             </ContextView>
           </PositionContent>
         </Position>
-      </Container>
+      </View>
       <div
         style={{
           position: 'relative',

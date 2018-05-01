@@ -34,14 +34,14 @@ class Example extends React.Component {
   render () {
     return (
       <div>
-        <Container as="div" padding="small 0" >
+        <View as="div" padding="small 0" >
           <Select
             inline
             label="Choose Locale"
             onChange={(e, selectedOption) => this.setState({locale: selectedOption.value})}>
               {locales.map(loc => <option key={loc} value={loc}>{loc}</option>)}
           </Select>
-        </Container>
+        </View>
         <DatePicker
           previousLabel="previous month"
           nextLabel="next month"

@@ -103,7 +103,7 @@ Default is `top end`. Note that standalone badges can't be placed.
 example: true
 ---
 <div>
-  <Container as="div" margin="0 0 medium">
+  <View as="div" margin="0 0 medium">
     <Badge count={21} margin="0 large 0 0" placement="top start">
       <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
     </Badge>
@@ -122,8 +122,8 @@ example: true
     <Badge count={21} placement="end center">
       <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
     </Badge>
-  </Container>
-  <Container as="div">
+  </View>
+  <View as="div">
     <Badge type="notification" margin="0 large 0 0" placement="top start">
       <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
     </Badge>
@@ -142,6 +142,6 @@ example: true
     <Badge type="notification" placement="end center">
       <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
     </Badge>
-  </Container>
+  </View>
 </div>
 ```

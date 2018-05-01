@@ -44,7 +44,7 @@ class Example extends React.Component {
         >
           <PopoverTrigger><Button onClick={this.showPopover}>Click Me</Button></PopoverTrigger>
           <PopoverContent>
-            <Container padding="large" display="block">
+            <View padding="large" display="inline-block">
               <CloseButton
                 placement="end"
                 offset="x-small"
@@ -54,7 +54,7 @@ class Example extends React.Component {
                 Close
               </CloseButton>
               <Heading>Hello</Heading>
-            </Container>
+            </View>
           </PopoverContent>
         </Popover>
       </div>

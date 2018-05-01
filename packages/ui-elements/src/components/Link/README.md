@@ -30,7 +30,7 @@ inverse: true
 
 Use the `margin` prop to add space to the left or right of the Link. Because
 Link displays `inline`, top and bottom margin will not work. If you need
-to add margin to the top or bottom of Link, wrap it inside a `<Container />`.
+to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 
 ```js
 ---

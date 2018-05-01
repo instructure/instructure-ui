@@ -107,7 +107,7 @@ class Example extends React.Component {
         <Button onClick={this.addAlert.bind(this)}>Add Alert</Button>
         {this.state.alerts.map((alert) => {
           return (
-            <Container
+            <View
               key={alert.key}
               margin="small 0"
             >
@@ -120,7 +120,7 @@ class Example extends React.Component {
               >
                 This is a {alert.variant} alert
               </Alert>
-            </Container>
+            </View>
           )
         })}
       </div>

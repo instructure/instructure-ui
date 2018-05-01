@@ -91,7 +91,7 @@ class Example extends React.Component {
           />
           <DrawerContent label="Drawer content example">
             <div style={{background: 'white', height: '100%'}}>
-              <Container as="div" padding="x-large">
+              <View as="div" padding="x-large">
                 <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
                   <GridRow>
@@ -112,7 +112,7 @@ class Example extends React.Component {
                 <Text size="x-small">
                   <p>{lorem.paragraph()}</p>
                 </Text>
-              </Container>
+              </View>
             </div>
           </DrawerContent>
         </DrawerLayout>
@@ -244,7 +244,7 @@ class Example extends React.Component {
               />
               <DrawerContent label="Drawer content example containing a responsive ">
                 <div style={{background: 'white', height: '100%'}}>
-                  <Container as="div" padding="x-large">
+                  <View as="div" padding="x-large">
                     <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
                       <GridRow>
@@ -285,7 +285,7 @@ class Example extends React.Component {
                     <Text size="x-small">
                       <p>{lorem.paragraph()}</p>
                     </Text>
-                  </Container>
+                  </View>
                 </div>
               </DrawerContent>
             </DrawerLayout>

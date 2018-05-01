@@ -14,7 +14,7 @@ Default is `medium`.
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto xx-large auto"
   padding="x-small x-small x-large x-small"
@@ -47,7 +47,7 @@ example: true
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with the `layout` prop set to `inline`
@@ -58,7 +58,7 @@ example: true
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto xx-large auto"
   padding="x-small"
@@ -67,7 +67,7 @@ example: true
     <option value="foo">Foo</option>
     <option disabled value="bar">Bar</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with default value set using `defaultOption`
@@ -77,7 +77,7 @@ Select with `formatSelectedOption` configured to show a `Badge` component in fro
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto medium auto"
   padding="x-small"
@@ -108,7 +108,7 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with the `disabled` prop
@@ -117,7 +117,7 @@ example: true
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto medium auto"
   padding="x-small"
@@ -140,7 +140,7 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with icons
@@ -149,7 +149,7 @@ example: true
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto xx-large auto"
   padding="x-small"
@@ -158,7 +158,7 @@ example: true
     <option value="foo" icon={PlaceholderIcon}>Foo</option>
     <option value="bar" icon={PlaceholderIcon}>Bar</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with groups
@@ -191,7 +191,7 @@ example: true
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto xx-large auto"
   padding="x-small x-small x-large x-small"
@@ -215,7 +215,7 @@ example: true
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Select with assistive text and a label visible only to screenreaders
@@ -224,7 +224,7 @@ example: true
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto xx-large auto"
   padding="x-small x-small x-large x-small"
@@ -238,7 +238,7 @@ example: true
     <option value="bananas">Bananas</option>
     <option value="candy">Candy</option>
   </Select>
-</Container>
+</View>
 ```
 
 ### Disabled Selects
@@ -249,7 +249,7 @@ You can disable an entire Select or the child options.
 ---
 example: true
 ---
-<Container
+<View
   as="div"
   margin="0 auto x-large auto"
   padding="x-small"
@@ -268,7 +268,7 @@ example: true
     <option value="bananas">Bananas</option>
     <option value="candy">Candy</option>
   </Select>
-</Container>
+</View>
 ```
 ### Select with autocomplete
 
