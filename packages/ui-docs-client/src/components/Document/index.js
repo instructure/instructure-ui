@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Text from '@instructure/ui-elements/lib/components/Text'
-import Container from '@instructure/ui-container/lib/components/Container'
+import View from '@instructure/ui-layout/lib/components/View'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 import TabList, { TabPanel } from '@instructure/ui-tabs/lib/components/TabList'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
@@ -61,12 +61,12 @@ export default class Document extends Component {
       props
     } = doc
     return props ? (
-      <Container margin="small">
+      <View margin="x-large 0" display="block">
         <Heading level="h3" id={`${id}Properties`} margin="0 0 small 0">
           Properties
         </Heading>
         <Properties props={props} />
-      </Container>
+      </View>
     ) : null
   }
 
@@ -76,12 +76,12 @@ export default class Document extends Component {
     const theme = (typeof generateTheme === 'function') && generateTheme(themeKey)
 
     return theme && Object.keys(theme).length > 0 ? (
-      <Container margin="small">
-        <Heading level="h3" id={`${doc.id}Theme`} margin="large 0 small 0">
+      <View margin="x-large 0" display="block">
+        <Heading level="h3" id={`${doc.id}Theme`} margin="0 0 small 0">
           Theme Variables
         </Heading>
         <ComponentTheme theme={theme} />
-      </Container>
+      </View>
     ) : null
   }
 
@@ -128,25 +128,25 @@ import ${importName} from '${requirePath}'
 const ${importName} = require('${requirePath}')
 `
     return (
-      <Container margin="small">
-        <Heading level="h3" id={`${id}Usage`} margin="large 0 small 0">
+      <View margin="xx-large 0" display="block">
+        <Heading level="h3" id={`${id}Usage`} margin="0 0 small 0">
           Usage
         </Heading>
-        <Container margin="0 0 small 0" display="block">
+        <View margin="0 0 small 0" display="block">
           <CodeEditor
             label={`How to install ${title}`}
             value={`yarn add ${packageName}`}
             language="shell"
             readOnly
           />
-        </Container>
+        </View>
         <CodeEditor
           label={`How to use ${title}`}
           value={example}
           language="javascript"
           readOnly
         />
-      </Container>
+      </View>
     )
   }
 
@@ -157,12 +157,12 @@ const ${importName} = require('${requirePath}')
     } = doc
 
     return params ? (
-      <Container margin="small">
+      <View margin="small 0" display="block">
         <Heading level="h3" id={`${id}Parameters`} margin="0 0 small 0">
           Parameters
         </Heading>
         <Params params={params} />
-      </Container>
+      </View>
     ) : null
   }
 
@@ -173,12 +173,12 @@ const ${importName} = require('${requirePath}')
     } = doc
 
     return returns ? (
-      <Container margin="small">
+      <View margin="small 0" display="block">
         <Heading level="h3" id={`${id}Returns`} margin="0 0 small 0">
           Returns
         </Heading>
         <Returns types={returns} />
-      </Container>
+      </View>
     ) : null
   }
 
@@ -189,12 +189,12 @@ const ${importName} = require('${requirePath}')
     } = doc
 
     return (methods && methods.length > 0) ? (
-      <Container margin="small">
+      <View margin="small 0" display="block">
         <Heading level="h3" id={`${id}Methods`} margin="0 0 small 0">
           Methods
         </Heading>
         <Methods methods={methods} />
-      </Container>
+      </View>
     ) : null
   }
 
@@ -239,14 +239,14 @@ const ${importName} = require('${requirePath}')
 
     if (doc.sections) {
       sections = doc.sections.map(section => (
-        <Container margin="small" key={`${doc.id}.${section.name}`}>
+        <View margin="small 0" display="block" key={`${doc.id}.${section.name}`}>
           <Heading level="h3" id={`${doc.id}.${section.name}`} margin="large 0 small 0">
             { section.kind && <code>{section.kind}</code> }
             {section.title}
           </Heading>
           {this.renderDescription(section, section.description)}
           {this.renderDetails(section)}
-        </Container>
+        </View>
       ))
     }
 
