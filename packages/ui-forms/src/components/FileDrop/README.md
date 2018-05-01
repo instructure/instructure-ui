@@ -128,6 +128,7 @@ example: true
 
       <FileDrop
         allowMultiple={true}
+        onDropAccepted={(files) => { console.log(`Files accepted ${files.map((f) => f.name).join(',')}`) }}
         label={
           <Billboard
             size="small"

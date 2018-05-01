@@ -30,12 +30,17 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import keycode from 'keycode'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldMessages from '../FormField/FormFieldMessages'
 
 import styles from './styles.css'
 import theme from './theme'
+
+function keyEventIsClickButton (e) {
+  return (e.keyCode === keycode.codes.space || e.keyCode === keycode.codes.enter)
+}
 
 // Used try-catch due to missing document/navigator references in Jenkins
 function isBrowserMS () {
@@ -91,7 +96,6 @@ export function accepts (file, acceptProp) {
   return true
 }
 
-const ENTER_KEY = 'Enter'
 const IS_MS = isBrowserMS()
 
 /**
@@ -125,6 +129,10 @@ export default class FileDrop extends Component {
     *   }`
     */
     messages: PropTypes.arrayOf(FormPropTypes.message),
+    /**
+    * callback called when clicking on drop area to select files to upload
+    */
+    onClick: PropTypes.func,
     /**
     * callback called when dropping files or when the file dialog window exits successfully
     */
@@ -167,6 +175,10 @@ export default class FileDrop extends Component {
     */
     minSize: PropTypes.number,
     /**
+     * Whether or not to allow the file browser to upload the same file more than once.
+     */
+    allowRepeatFileSelection: PropTypes.bool,
+    /**
      * Whether or not to disable the input
      */
     disabled: PropTypes.bool,
@@ -177,6 +189,7 @@ export default class FileDrop extends Component {
   }
 
   static defaultProps = {
+    onClick: function(e) {},
     onDrop: function (acceptedFiles, rejectedFiles, e) {},
     onDropAccepted: function (acceptedFiles, e) {},
     onDropRejected: function (rejectedFiles, e) {},
@@ -186,6 +199,7 @@ export default class FileDrop extends Component {
 
     enablePreview: false,
     allowMultiple: false,
+    allowRepeatFileSelection: true,
     maxSize: Infinity,
     minSize: 0,
     readOnly: false,
@@ -221,7 +235,6 @@ export default class FileDrop extends Component {
 
   getDataTransferItems (event, enablePreview) {
     let list = Array.prototype.slice.call(getEventFiles(event, this.fileInputEl))
-    this.fileInputEl.value = null
 
     if (list.length > 1) {
       list = this.props.allowMultiple ? list : [list[0]]
@@ -365,14 +378,23 @@ export default class FileDrop extends Component {
   handleRef = (el) => { this.fileInputEl = el }
   handleFocus = () => this.setState({ focused: true })
   handleBlur = () => this.setState({ focused: false })
+  handleOnClick = (e) => {
+    if (this.fileInputEl.value && this.props.allowRepeatFileSelection) { this.fileInputEl.value = null }
+    this.props.onClick(e)
+  }
   handleKeyDown = (event) => {
-    // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
-    // So we need to apply this logic only on MS browsers
-    /* istanbul ignore if  */
-    if (IS_MS && this.state.focused && event.key === ENTER_KEY) {
-      event.stopPropagation()
-      event.preventDefault()
-      this.fileInputEl.click()
+    if (this.state.focused && keyEventIsClickButton(event)){
+      if (this.props.allowRepeatFileSelection){
+        this.fileInputEl.value = null
+      }
+      // This bit of logic is necessary for MS browsers but causes unwanted warnings in Firefox
+      // So we need to apply this logic only on MS browsers
+      /* istanbul ignore if  */
+      if (IS_MS) {
+        event.stopPropagation()
+        event.preventDefault()
+        this.fileInputEl.click()
+      }
     }
   }
 
@@ -405,6 +427,7 @@ export default class FileDrop extends Component {
         </label>
         <input
           {...props}
+          onClick={this.handleOnClick}
           type="file"
           className={styles.input}
           id={id}
