@@ -81,7 +81,7 @@ describe('<Badge />', () => {
       as: 'span',
       margin: 'small',
       elementRef: (el) => {},
-      display: View.defaultProps.display
+      display: 'inline-block'
     }
 
     Object.keys(View.propTypes)
@@ -102,6 +102,22 @@ describe('<Badge />', () => {
             expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
           })
         }
+    })
+
+    it(`should not allow overriding the display prop by default`, () => {
+      const subject = testbed.render({
+        display: 'block'
+      })
+      expect(subject.find(View).at(0).props().display).to.equal('inline-block')
+      expect(subject.find(View).at(1).props().display).to.equal('block')
+    })
+
+    it(`should not allow overriding the display prop when standalone`, () => {
+      const subject = testbed.render({
+        standalone: true,
+        display: 'block'
+      })
+      expect(subject.find(View).first().props().display).to.equal('inline-block')
     })
   })
 

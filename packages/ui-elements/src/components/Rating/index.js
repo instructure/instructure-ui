@@ -138,6 +138,7 @@ class Rating extends Component {
         aria-valuenow={this.filled}
         aria-valuemax={this.props.iconCount}
         title={this.props.label}
+        display="inline-block"
       >
         {
           [...Array(this.filled)].map((x, i) => (

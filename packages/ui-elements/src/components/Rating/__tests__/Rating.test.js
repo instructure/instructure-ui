@@ -101,7 +101,7 @@ describe('<Rating />', () => {
   describe('when passing down props to View', () => {
     const allowedProps = {
       margin: 'small',
-      display: 'auto'
+      display: 'inline-block'
     }
 
     Object.keys(View.propTypes)
@@ -115,7 +115,7 @@ describe('<Rating />', () => {
             expect(subject.find(View).props()[prop]).to.not.exist
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
+          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
             const subject = testbed.render({
               [prop]: allowedProps[prop]
             })
@@ -123,17 +123,11 @@ describe('<Rating />', () => {
           })
         }
     })
-    it(`should set the 'margin' prop to 'small'`, () => {
-      const subject = testbed.render({
-        margin: 'small'
-      })
-      expect(subject.find(View).props().margin).to.equal('small')
-    })
-    it(`should set the 'display' prop to 'auto'`, () => {
+    it(`should not allow overriding the display prop`, () => {
       const subject = testbed.render({
         display: 'auto'
       })
-      expect(subject.find(View).props().display).to.equal('auto')
+      expect(subject.find(View).props().display).to.equal('inline-block')
     })
   })
 

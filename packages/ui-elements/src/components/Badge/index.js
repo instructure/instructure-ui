@@ -140,25 +140,24 @@ class Badge extends Component {
       variant
     } = this.props
 
-    const classes = {
-      [styles.badge]: true,
-      [styles[type]]: type,
-      [styles[variant]]: variant,
-      [styles['positioned--top']]: placement.indexOf('top') > -1,
-      [styles['positioned--bottom']]: placement.indexOf('bottom') > -1,
-      [styles['positioned--start']]: placement.indexOf('start') > -1,
-      [styles['positioned--end']]: placement.indexOf('end') > -1,
-      [styles['positioned--center']]: placement.indexOf('center') > -1,
-      [styles.standalone]: standalone,
-      [styles.pulse]: pulse
-    }
-
     return (
       <View
         margin={(standalone) ? margin : 'none'}
-        className={classnames(classes)}
+        className={classnames({
+          [styles.badge]: true,
+          [styles[type]]: type,
+          [styles[variant]]: variant,
+          [styles['positioned--top']]: placement.indexOf('top') > -1,
+          [styles['positioned--bottom']]: placement.indexOf('bottom') > -1,
+          [styles['positioned--start']]: placement.indexOf('start') > -1,
+          [styles['positioned--end']]: placement.indexOf('end') > -1,
+          [styles['positioned--center']]: placement.indexOf('center') > -1,
+          [styles.standalone]: standalone,
+          [styles.pulse]: pulse
+        })}
         title={(type === 'count' && this.countOverflow()) ? count : null}
         id={(!standalone) ? this._defaultId : null}
+        display={standalone ? 'inline-block' : 'block'}
       >
         {this.renderOutput()}
       </View>
@@ -190,6 +189,7 @@ class Badge extends Component {
           margin={margin}
           elementRef={elementRef}
           className={styles.wrapper}
+          display="inline-block"
         >
           {this.renderChildren()}
           {this.renderBadge()}

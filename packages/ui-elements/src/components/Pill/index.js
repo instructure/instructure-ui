@@ -84,6 +84,7 @@ class Pill extends Component {
         elementRef={elementRef}
         margin={margin}
         title={text}
+        display="inline-flex"
       >
         <span className={styles.text}>
           {text}

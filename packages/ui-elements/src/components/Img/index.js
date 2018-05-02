@@ -155,7 +155,7 @@ export default class Img extends Component {
             [styles['container--has-background']]: hasBackground
           })}
           style={{
-            backgroundImage: hasBackground ? `url(${src})` : undefined
+            backgroundImage: hasBackground ? `url(${src})` : undefined // eslint-disable-line no-undefined
           }}
         >
           {

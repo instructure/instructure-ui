@@ -46,7 +46,7 @@ describe('<Pill />', () => {
       margin: 'small',
       as: 'span',
       elementRef: () => {},
-      display: View.defaultProps.display
+      display: 'inline-flex'
     }
 
     Object.keys(View.propTypes)
@@ -67,6 +67,13 @@ describe('<Pill />', () => {
             expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
           })
         }
+    })
+
+    it(`should not allow overriding the display prop`, () => {
+      const subject = testbed.render({
+        display: 'block'
+      })
+      expect(subject.find(View).props().display).to.equal('inline-flex')
     })
   })
 

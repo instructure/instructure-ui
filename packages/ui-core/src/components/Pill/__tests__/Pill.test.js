@@ -34,33 +34,11 @@ describe('<Pill />', () => {
     expect(subject).to.be.present
   })
 
-  describe('when passing down props to View', () => {
-    const allowedProps = {
-      margin: 'small',
-      as: 'span',
-      elementRef: () => {},
-      display: View.defaultProps.display
-    }
-
-    Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist
-          })
-        } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
-          })
-        }
+  it('should not allow padding to be added as a property', () => {
+    const subject = testbed.render({
+      padding: 'small medium large large'
     })
+    expect(subject.find(View).props().padding).to.not.exist
   })
 
   it('should meet a11y standards', (done) => {

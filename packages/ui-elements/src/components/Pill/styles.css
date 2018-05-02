@@ -1,9 +1,7 @@
 /* Variables are defined in ./theme.js */
 
 .root {
-  display: inline-flex;
   align-items: center;
-  vertical-align: middle;
   font-family: var(--fontFamily);
   background: var(--background);
   box-sizing: border-box;

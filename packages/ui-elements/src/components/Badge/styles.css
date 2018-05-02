@@ -12,7 +12,6 @@
   border-radius: var(--borderRadius);
 
   &:not(.standalone) {
-    display: block;
     position: absolute;
     /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
     z-index: 1;
@@ -101,11 +100,6 @@
     }
   }
 
-  &.standalone {
-    display: inline-block;
-    vertical-align: middle;
-  }
-
   &.count {
     line-height: var(--size);
     min-width: var(--size);
@@ -175,8 +169,6 @@
 
 .wrapper {
   position: relative;
-  display: inline-block;
-  vertical-align: middle;
   box-sizing: border-box;
 
   svg { /* stylelint-disable-line selector-max-type */

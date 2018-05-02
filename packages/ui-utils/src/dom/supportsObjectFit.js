@@ -23,6 +23,18 @@
  */
 import canUseDOM from './canUseDOM'
 
+/**
+ * ---
+ * category: utilities/DOM
+ * ---
+ *
+ * Performs simple test to determine the browser supports CSS object-fit.
+ *
+ * https://caniuse.com/#feat=object-fit
+ *
+ * @module
+ * @returns {boolean} true if object-fit is supported
+ */
 export default function supportsObjectFit () {
   if (!canUseDOM) {
     return false
