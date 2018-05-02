@@ -78,11 +78,9 @@ render () {
           </Button>
         </PositionTarget>
         <PositionContent>
-          <ContextView placement={this.state.adjusted} size="small" padding="small">
+          <ContextView placement={this.state.adjusted} maxWidth="22rem" padding="small">
             <Heading level="h3">{placement}</Heading>
-            <p>
-            {fpo}
-            </p>
+            <p>{fpo}</p>
           </ContextView>
         </PositionContent>
       </Position>
@@ -179,7 +177,7 @@ class Example extends React.Component {
           <PositionContent>
             <ContextView
               placement={this.state.adjusted}
-              size="small"
+              maxWidth="20rem"
               padding="small"
             >
               <Heading level="h3">{placement}</Heading>

@@ -50,7 +50,7 @@ example: true
     margin="x-large 0 0"
   >
     <Text size="small">
-      This ContextView uses the inverse background and medium padding. Its size prop is set to small, which causes long strings like this to wrap. It also has top margin to separate it from the ContextViews above it.
+      This ContextView uses the inverse background and medium padding. Its width prop is set to `30rem`, which causes long strings like this to wrap. It also has top margin to separate it from the ContextViews above it.
     </Text>
   </ContextView>
 </div>
