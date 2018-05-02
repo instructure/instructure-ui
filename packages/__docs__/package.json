@@ -28,7 +28,6 @@
     "@instructure/ui-breadcrumb": "^5.4.0",
     "@instructure/ui-buttons": "^5.4.0",
     "@instructure/ui-code-editor": "^5.4.0",
-    "@instructure/ui-container": "^5.4.0",
     "@instructure/ui-docs-client": "^5.4.0",
     "@instructure/ui-docs-plugin": "^5.4.0",
     "@instructure/ui-elements": "^5.4.0",

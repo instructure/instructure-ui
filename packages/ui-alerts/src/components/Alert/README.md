@@ -109,6 +109,7 @@ class Example extends React.Component {
           return (
             <View
               key={alert.key}
+              display="block"
               margin="small 0"
             >
               <Alert

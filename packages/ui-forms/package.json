@@ -30,7 +30,6 @@
   "dependencies": {
     "@instructure/ui-a11y": "^5.4.0",
     "@instructure/ui-buttons": "^5.4.0",
-    "@instructure/ui-container": "^5.4.0",
     "@instructure/ui-elements": "^5.4.0",
     "@instructure/ui-i18n": "^5.4.0",
     "@instructure/ui-icons": "^5.4.0",

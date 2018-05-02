@@ -150,7 +150,7 @@ class View extends Component {
     const { as, display, margin } = props
 
     warning(
-      !(as === 'span' || typeof as === 'undefined' && display === 'auto' && margin && margin !== 'none' && margin !== '0'),
+      !((as === 'span' || typeof as === 'undefined') && display === 'auto' && margin && margin !== 'none' && margin !== '0'),
       `[${this.displayName}] element of type 'span' and display 'auto' is inline ` +
       `and will allow for horizontal margins only`
     )
