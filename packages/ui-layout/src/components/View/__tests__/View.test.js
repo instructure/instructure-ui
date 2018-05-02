@@ -67,7 +67,8 @@ describe('<View />', () => {
         minHeight: '13rem',
         position: 'absolute',
         transform: 'translate(30px, 15px)',
-        overflow: 'hidden'
+        overflow: 'hidden',
+        display: 'none'
       }
     })
 
@@ -79,6 +80,7 @@ describe('<View />', () => {
     expect(styles['position']).to.equal('absolute')
     expect(styles['transform']).to.equal('translate(30px, 15px)')
     expect(styles['overflow']).to.equal('hidden')
+    expect(styles['display']).to.equal('none')
   })
 
   it('should pass flex style', () => {

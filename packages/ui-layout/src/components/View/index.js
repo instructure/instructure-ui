@@ -208,6 +208,7 @@ class View extends Component {
       'top',
       'left',
       'position',
+      'display',
       'transform',
       'overflow',
       'minWidth',
