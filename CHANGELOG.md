@@ -2,6 +2,30 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+
+<a name="5.5.0"></a>
+# [5.5.0](https://github.com/instructure/instructure-ui/compare/v5.4.0...v5.5.0) (2018-04-26)
+
+
+### Bug Fixes
+
+* **media-capture:** Update the FileSave submit button to prevent default ([fd47f2a](https://github.com/instructure/instructure-ui/commit/fd47f2a))
+* **ui-docs-client:** Fix source code path ([7c23cac](https://github.com/instructure/instructure-ui/commit/7c23cac))
+* **ui-docs-client:** Use resource displayName instead of name for usage ([8357c5c](https://github.com/instructure/instructure-ui/commit/8357c5c))
+* **ui-forms:** Preserve [FileDrop](#FileDrop) event during onDrop ([e45b70d](https://github.com/instructure/instructure-ui/commit/e45b70d))
+* **ui-i18n:** Fix moment version dependency ([b6289c2](https://github.com/instructure/instructure-ui/commit/b6289c2))
+* **ui-overlays:** Fix a11y issues in Tooltip and Popover ([352b8ca](https://github.com/instructure/instructure-ui/commit/352b8ca))
+
+
+### Features
+
+* **ui-forms,DateInput:** Add support for disabled days ([c1067ad](https://github.com/instructure/instructure-ui/commit/c1067ad))
+* **ui-icons,IconX:** Updated IconX to be a little smaller ([1bdcd86](https://github.com/instructure/instructure-ui/commit/1bdcd86))
+* **ui-layout,View:** Add style prop white list (incl backgroundImage) ([d8a35ab](https://github.com/instructure/instructure-ui/commit/d8a35ab))
+* **ui-overlays,Tray:** Replace timeout with requestAnimationFrame ([ddd9096](https://github.com/instructure/instructure-ui/commit/ddd9096))
+* **ui-presets,eslint:** Add no-undefined eslint rule ([ff896ea](https://github.com/instructure/instructure-ui/commit/ff896ea))
+
+
 <a name="5.4.0"></a>
 # [5.4.0](https://github.com/instructure/instructure-ui/compare/v5.3.1...v5.4.0) (2018-04-25)
 
