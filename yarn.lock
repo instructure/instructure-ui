@@ -10485,9 +10485,9 @@ posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
 
-postcss-bidirection@2.4.0:
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/postcss-bidirection/-/postcss-bidirection-2.4.0.tgz#7cfa21448630e8f8f705b8342a198de4c104687b"
+postcss-bidirection@2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/postcss-bidirection/-/postcss-bidirection-2.6.0.tgz#2458a0521d86332f899e85727f7cb761dbfa2ade"
   dependencies:
     postcss "^5.0.10"
 
