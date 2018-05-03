@@ -21,14 +21,13 @@ trap cleanup INT TERM EXIT
 
 export COMPOSE_FILE=./docker-compose.test.yml
 
-commit_msg=$(git log -1 --pretty=format:%s)
-
-echo "Branch: $TRAVIS_BRANCH..."
-echo "Commit: $commit_msg..."
-echo "Commit: $TRAVIS_COMMIT_MESSAGE..."
-echo "Pull Request: $TRAVIS_PULL_REQUEST..."
-echo "Npm User: $NPM_USERNAME..."
-echo "Github User: $GH_USERNAME..."
+if [[ $TRAVIS ]]; then
+  echo "Branch: $TRAVIS_BRANCH..."
+  echo "Commit: $TRAVIS_COMMIT_MESSAGE..."
+  echo "Pull Request: $TRAVIS_PULL_REQUEST..."
+  echo "Npm User: $NPM_USERNAME..."
+  echo "Github User: $GH_USERNAME..."
+fi
 
 echo "Pulling image..."
 docker-compose pull
@@ -39,9 +38,12 @@ docker-compose build
 echo "Running tests..."
 docker-compose run -u "root" test bash -c "yarn test"
 
-if [[ $TRAVIS_BRANCH == 'master' && -z "$TRAVIS_PULL_REQUEST" ]]; then
-  if [[ $commit_msg == *"chore(release) "* ]]; then
-    echo "Running the release..."
+if [[ $TRAVIS_BRANCH == 'master' && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
+  if [[ $TRAVIS_COMMIT_MESSAGE =~ "^chore(release): " ]]; then
+    echo "Running the latest release..."
     docker-compose run -u "root" test bash -c "yarn release -t latest"
+  else
+    echo "Running a beta release..."
+    docker-compose run -u "root" test bash -c "yarn release -t beta"
   fi
 fi
