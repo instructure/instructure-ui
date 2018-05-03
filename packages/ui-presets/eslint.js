@@ -28,13 +28,15 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
     'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended'
+    'plugin:jsx-a11y/recommended',
+    'plugin:instructure-ui/recommended'
   ],
   plugins: [
     'react',
     'jsx-a11y',
     'mocha',
-    'notice'
+    'notice',
+    'instructure-ui'
   ],
   env: {
     node: true,
