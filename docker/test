@@ -6,10 +6,10 @@ function cleanup() {
   exit_code=$?
   set +e
 
-  echo "copying coverage reports..."
+  echo "Copying coverage reports..."
   docker cp $(docker-compose ps -q coverage):/usr/src/app/coverage .
 
-  echo "cleaning up..."
+  echo "Cleaning up..."
   docker-compose stop test
   docker-compose rm -f test
   docker rmi -f $(docker images -qf "dangling=true") &>/dev/null
@@ -21,19 +21,26 @@ trap cleanup INT TERM EXIT
 
 export COMPOSE_FILE=./docker-compose.test.yml
 
-echo "pull image..."
+commit_msg=$(git log -1 --pretty=format:%s)
+
+echo "Branch: $TRAVIS_BRANCH..."
+echo "Commit: $commit_msg..."
+echo "Commit: $TRAVIS_COMMIT_MESSAGE..."
+echo "Pull Request: $TRAVIS_PULL_REQUEST..."
+echo "Npm User: $NPM_USERNAME..."
+echo "Github User: $GH_USERNAME..."
+
+echo "Pulling image..."
 docker-compose pull
 
-echo "building services..."
+echo "Building services..."
 docker-compose build
 
-echo "running tests..."
+echo "Running tests..."
 docker-compose run -u "root" test bash -c "yarn test"
 
 if [[ $TRAVIS_BRANCH == 'master' && -z "$TRAVIS_PULL_REQUEST" ]]; then
-  commit_msg=$(git log -1 --pretty=format:%s)
-
-  if [[ "$commit_msg" =~ "^chore(release): " ]]; then
+  if [[ $commit_msg == *"chore(release) "* ]]; then
     echo "Running the release..."
     docker-compose run -u "root" test bash -c "yarn release -t latest"
   fi

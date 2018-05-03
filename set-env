@@ -18,7 +18,9 @@ if ! [ -f .npmrc ]; then
     echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
   fi
 
-  echo "@instructure:registry=https://registry.npmjs.org/" >> .npmrc
+  if [ -n "${NPM_SCOPE}" ]; then
+    echo "${NPM_SCOPE}" >> .npmrc
+  fi
 
   if [ -n "${NPM_EMAIL}" ]; then
     echo "email=${NPM_EMAIL}" >> .npmrc
@@ -29,7 +31,8 @@ if ! [ -f .npmrc ]; then
   fi
 fi
 
-cat .npmrc
+echo "npm whoami"
+npm whoami
 
 ########################
 # set local git config #
