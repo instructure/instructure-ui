@@ -14,38 +14,45 @@ Before beginning you will need:
 - Permissions to publish to the instructure org on npm.
 - Write/push permissions to `gh-pages` branch in the instructure-ui Github repository.
 - Set up a `.env` file with your Github and Npm account information (see `.env.example`).
+- Run `./scripts/set-env`.
 
-A. To bump the package versions in preparation for a stable release:
+To bump the package versions in preparation for a stable release:
 
 1. Run `git fetch origin --tags`.
 1. Run `git checkout -B your_local_release_branch --track origin/master`.
 1. Run `yarn bump` to update the package version.
 1. If necessary, manually update the CHANGELOG.md file to add any additional information about the release.
 1. Push up the version bump commit for review and testing: `git push origin HEAD:refs/for/master`
-1. Merge the bump commit into the `master` branch.
+1. Merge the bump commit into the `master` branch (and, COMING SOON: wait for the post-merge CI build to complete the release.)
+1. Verify that the release was tagged in Github and published to npm by running `yarn info [package]@[version]`.
+1. Verify that the documentation was updated on gh-pages.
 
-B. To create a stable release after the bump commit is merged:
+If you need to manually run the release:
 
 1. Run `git fetch origin --tags`.
 1. Run `git checkout -B your_local_release_branch --track origin/master`.
-1. Run `yarn release -t latest` to publish the packages and git tag the release.
-1. Verify that the release was tagged in Github and released to npm by running `yarn info [package]@[version]`.
+1. Run `yarn release` to publish the packages and git tag the release.
+1. Verify that the release was tagged in Github and published to npm by running `yarn info [package]@[version]`.
 1. Verify that the documentation was updated on gh-pages.
 
 
-### Dev Releases
+### Pre-releases
+
+COMING SOON: RC pre-releases are run for every commit merged to the master branch as part of the CI build.
+
+However, if you need to run a pre-release manually, follow the instructions below.
 
 Before beginning you will need:
 
 - Permissions to publish to the instructure org on npm.
-- Set up a `.env` file with your Github and Npm account information (see `.env.example`).
+- Set up a `.env` file with your Github and npm account information (see `.env.example`).
+- Run `./scripts/set-env`.
 
-To create a dev release:
+To create a pre-release:
 
-1. Make sure you've checked out the branch you want to release
-1. Run `yarn release -t dev`.
-1. Enter a version with the 'dev' flag when the script asks for it (e.g. X.Y.0-dev.1)
-1. Verify that the release was released to npm by running `yarn info [package]@[version]`.
+1. Make sure you've checked out the branch/commit you want to release
+1. Run `yarn release -t your_tag_here`.
+1. Verify that the release was published to npm by running `yarn info [package]@[version]`.
 
 
 ### Patching Older Releases
@@ -55,6 +62,7 @@ Before beginning you will need:
 - Permissions to publish to the instructure org on npm.
 - Permissions to create remote branches if the release branch isn't already set up (see A below).
 - Set up a `.env` file with your Github and Npm account information (see `.env.example`).
+- Run `./scripts/set-env`.
 
 A. To set up a branch for a patch release (e.g. 1.4.1 when the `master` branch is already at 2.0.0):
 
@@ -79,5 +87,5 @@ C. To create the patch release commit (e.g. 1.4.1):
 
 D. To run the patch release:
 
-1. From the local release branch (steps B (1, 2) above) run `yarn release -t stable`.
-1. Verify that the release was tagged in Github and released to npm by running `yarn info [package]@[version]`.
+1. From the local release branch (steps B (1, 2) above) run `yarn release -t patch`. (Note the tag option here!!)
+1. Verify that the release was tagged in Github and published to npm by running `yarn info [package]@[version]`.

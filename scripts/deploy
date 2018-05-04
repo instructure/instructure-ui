@@ -32,4 +32,4 @@ echo "Repository: $GH_REPO..."
 
 touch $GH_PAGES_CONTENT/.nojekyll
 
-$(npm bin)/gh-pages -d "$GH_PAGES_CONTENT" -r "https://$GH_TOKEN@github.com/$GH_OWNER/$GH_REPO.git"
+$(npm bin)/gh-pages -d "$GH_PAGES_CONTENT" -r "$GH_PAGES_REPO"

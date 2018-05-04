@@ -37,18 +37,20 @@ npm whoami
 ########################
 # set local git config #
 ########################
-if [ -z "$(git config remote.origin.url)" ]; then
-  if [ -n "$GH_REMOTE" ]; then
-    git remote add origin $GH_REMOTE
-  fi
-fi
-
 if [ -n "${GH_EMAIL}" ]; then
   git config user.email "$GH_EMAIL"
 fi
 
 if [ -n "$GH_USERNAME" ]; then
   git config user.name "$GH_USERNAME"
+fi
+
+if [ -z "$(git config remote.origin.url)" ]; then
+  if [ -n "$GH_REMOTE" ]; then
+    git remote add origin $GH_REMOTE
+    # git config credential.helper store
+    # echo "$GH_REMOTE" > ~/.git-credentials
+  fi
 fi
 
 git config push.default simple

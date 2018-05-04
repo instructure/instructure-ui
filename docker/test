@@ -6,6 +6,9 @@ function cleanup() {
   exit_code=$?
   set +e
 
+  echo "Lerna debug log..."
+  cat lerna-debug.log
+
   echo "Copying coverage reports..."
   docker cp $(docker-compose ps -q coverage):/usr/src/app/coverage .
 
@@ -21,29 +24,11 @@ trap cleanup INT TERM EXIT
 
 export COMPOSE_FILE=./docker-compose.test.yml
 
-if [[ $TRAVIS ]]; then
-  echo "Branch: $TRAVIS_BRANCH..."
-  echo "Commit: $TRAVIS_COMMIT_MESSAGE..."
-  echo "Pull Request: $TRAVIS_PULL_REQUEST..."
-  echo "Npm User: $NPM_USERNAME..."
-  echo "Github User: $GH_USERNAME..."
-fi
-
 echo "Pulling image..."
 docker-compose pull
 
 echo "Building services..."
 docker-compose build
 
-echo "Running tests..."
-docker-compose run -u "root" test bash -c "yarn test"
-
-if [[ $TRAVIS_BRANCH == 'master' && "$TRAVIS_PULL_REQUEST" == "false" ]]; then
-  if [[ $TRAVIS_COMMIT_MESSAGE =~ "^chore(release): " ]]; then
-    echo "Running the latest release..."
-    docker-compose run -u "root" test bash -c "yarn release -t latest"
-  else
-    echo "Running a beta release..."
-    docker-compose run -u "root" test bash -c "yarn release -t beta"
-  fi
-fi
+echo "Running ci script..."
+docker-compose run -u "root" test bash -c "./scripts/ci"

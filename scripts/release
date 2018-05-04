@@ -13,6 +13,18 @@ if [ -n "$(git status --porcelain)" ]; then
   exit 1
 fi
 
+#####################
+# Fetch remote tags #
+#####################
+git fetch origin --tags --force
+
+#######################
+# Get the commit info #
+#######################
+commit=$(git rev-parse --short HEAD)
+commit_msg=$(git log -1 --pretty=oneline --abbrev-commit)
+description=$(git describe)
+
 #########################
 # Determine the npm tag #
 #########################
@@ -34,7 +46,11 @@ while getopts ":t:" opt; do
 done
 
 if [[ -z "$npm_tag" ]]; then
-  npm_tag=dev
+  if [[ "$commit" =~ "^chore(release): " ]]; then
+    npm_tag=latest
+  else
+    npm_tag=rc
+  fi
 fi
 
 ##############################
@@ -42,42 +58,25 @@ fi
 ##############################
 if [[ "$npm_tag" == "stable" || "$npm_tag" == "latest" ]]; then
   release_type=stable
-  yes="--yes"
 else
   release_type=prerelease
-  yes=""
 fi
-
-#############################
-# Get version and commit id #
-#############################
-next_version=$(node -p "require('./package').version")
-commit_msg=$(git log -1 --pretty=oneline --abbrev-commit)
 
 ###########################################
 # Determine next version for pre-releases #
 ###########################################
 if [[ "$release_type" == "prerelease" ]]; then
-  printf "Enter version or <ENTER> to release $next_version: "
-  read next_version
+  $(npm bin)/standard-version
 fi
 
-echo "Version: $next_version ..."
-echo "Commit: $commit_msg ..."
-echo "Tag: $npm_tag ..."
+next_version=$(node -p "require('./package').version")
 
-if [[ -z "$CI" ]]; then
-  read -p "Continue? [y/n]" -n 1 -r; echo
-  if ! [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "Stopped"
-    exit
-  fi
+if [[ "$release_type" == "prerelease" ]]; then
+  index=$(echo $description| cut -d'-' -f 2)
+  next_version="${next_version}-${npm_tag}.${index}+${commit}"
+  git reset --hard $commit
 fi
 
-#####################
-# Fetch remote tags #
-#####################
-git fetch origin --tags --force
 git_tag="v$next_version"
 
 #######################################
@@ -93,11 +92,26 @@ if [ "`git tag --list $git_tag`" ]; then
   exit
 fi
 
+echo "Commit SHA: $commit ..."
+echo "Commit Message: $commit_msg ..."
+echo "Commit Description: $description ..."
+echo "Npm Tag: $npm_tag ..."
+echo "Git Tag: $git_tag ..."
+echo "Next Version: $next_version ..."
+
+if [[ -z "$JENKINS" ]]; then
+  read -p "Continue? [y/n]" -n 1 -r; echo
+  if ! [[ $REPLY =~ ^[Yy]$ ]]; then
+    echo "Stopped"
+    exit
+  fi
+fi
+
 ###########################
 # Publish packages to npm #
 ###########################
 echo "Publishing $next_version with tag $npm_tag"
-$(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=* $yes
+$(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=* --yes
 
 ##########################################
 # Tag release commit for stable releases #
