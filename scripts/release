@@ -46,7 +46,7 @@ while getopts ":t:" opt; do
 done
 
 if [[ -z "$npm_tag" ]]; then
-  if [[ "$commit" =~ "^chore(release): " ]]; then
+  if [[ "$commit_msg" =~ "chore(release): " ]]; then
     npm_tag=latest
   else
     npm_tag=rc
