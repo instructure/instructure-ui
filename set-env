@@ -14,20 +14,20 @@ dotenv
 # create a local .npmrc #
 #########################
 if ! [ -f .npmrc ]; then
-  if [ -n "${NPM_TOKEN}" ]; then
-    echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> .npmrc
+  if [ -n "$NPM_TOKEN" ]; then
+    echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
   fi
 
-  if [ -n "${NPM_SCOPE}" ]; then
-    echo "${NPM_SCOPE}" >> .npmrc
+  if [ -n "$NPM_SCOPE" ]; then
+    echo "$NPM_SCOPE" >> .npmrc
   fi
 
-  if [ -n "${NPM_EMAIL}" ]; then
-    echo "email=${NPM_EMAIL}" >> .npmrc
+  if [ -n "$NPM_EMAIL" ]; then
+    echo "email=$NPM_EMAIL" >> .npmrc
   fi
 
-  if [ -n "${NPM_USERNAME}" ]; then
-    echo "name=${NPM_USERNAME}" >> .npmrc
+  if [ -n "$NPM_USERNAME" ]; then
+    echo "name=$NPM_USERNAME" >> .npmrc
   fi
 fi
 
@@ -38,17 +38,17 @@ npm whoami
 # set local git config #
 ########################
 if [ -z "$(git config remote.origin.url)" ]; then
-  if [ -n "${GH_REMOTE}" ]; then
-    git remote add origin ${GH_REMOTE}
+  if [ -n "$GH_REMOTE" ]; then
+    git remote add origin $GH_REMOTE
   fi
 fi
 
 if [ -n "${GH_EMAIL}" ]; then
-  git config user.email "${GH_EMAIL}"
+  git config user.email "$GH_EMAIL"
 fi
 
-if [ -n "${GH_USERNAME}" ]; then
-  git config user.name "${GH_USERNAME}"
+if [ -n "$GH_USERNAME" ]; then
+  git config user.name "$GH_USERNAME"
 fi
 
 git config push.default simple

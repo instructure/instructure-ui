@@ -14,4 +14,4 @@ before_install:
   - docker-compose --version
 
 script:
-  - travis_retry ./docker/test
+  - ./docker/test
