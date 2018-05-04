@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.6.0"></a>
+# [5.6.0](https://github.com/instructure/instructure-ui/compare/v5.5.0...v5.6.0) (2018-05-04)
+
+
+### Bug Fixes
+
+* **ui-utils:** Remove relative package imports ([b8fd970](https://github.com/instructure/instructure-ui/commit/b8fd970))
+
+
+### Features
+
+* **ui-presets:** Add an eslint rule to prevent relative package imports ([d23b53d](https://github.com/instructure/instructure-ui/commit/d23b53d))
+
+
 
 <a name="5.5.0"></a>
 # [5.5.0](https://github.com/instructure/instructure-ui/compare/v5.4.0...v5.5.0) (2018-04-26)
