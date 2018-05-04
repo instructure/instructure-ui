@@ -2,6 +2,7 @@ import path from 'path'
 import { configure } from '@storybook/react'
 import { setOptions } from "@storybook/addon-options";
 import { getStorybook, storiesOf } from '@storybook/react'
+import { initializeRTL } from 'storybook-addon-rtl'
 
 import '../packages/ui-themes/src/canvas'
 
@@ -10,9 +11,11 @@ setOptions({
   url: "http://instructure.github.io/instructure-ui/#index",
   goFullScreen: false,
   showStoriesPanel: true,
-  showAddonPanel: false,
+  showAddonPanel: true,
   showSearchBox: false
 })
+
+initializeRTL()
 
 configure(() => {
   // Automatically import all example js files

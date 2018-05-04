@@ -66,6 +66,7 @@
     "react-dom": "15.6.2",
     "standard-version": "4.3.0",
     "story2sketch": "^0.2.1",
+    "storybook-addon-rtl": "^0.1.1",
     "validate-commit-msg": "2.14.0",
     "yarn": "1.6.0"
   },
