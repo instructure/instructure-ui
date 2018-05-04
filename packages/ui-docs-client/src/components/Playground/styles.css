@@ -5,12 +5,6 @@
   margin: 2rem 0;
 }
 
-.actions {
-  display: flex;
-  justify-content: flex-start;
-  padding: 0.5rem;
-}
-
 .close {
   background-color: #0084d1;
   color: white;

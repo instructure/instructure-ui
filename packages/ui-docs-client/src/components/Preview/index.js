@@ -45,13 +45,15 @@ export default class Preview extends Component {
     render: PropTypes.bool,
     language: PropTypes.string.isRequired,
     fullscreen: PropTypes.bool,
-    inverse: PropTypes.bool
+    inverse: PropTypes.bool,
+    rtl: PropTypes.bool
   }
 
   static defaultProps = {
     render: true,
     fullscreen: false,
-    inverse: false
+    inverse: false,
+    rtl: false
   }
 
   static contextTypes = {
@@ -163,7 +165,10 @@ export default class Preview extends Component {
     }
 
     return (
-      <div className={classnames(classes)}>
+      <div
+        className={classnames(classes)}
+        dir={(this.props.rtl) ? 'rtl' : 'ltr'}
+      >
         <div ref={(el) => { this._mountNode = el }} />
         {this.state.error && <pre className={styles.error}>{this.state.error}</pre>}
       </div>

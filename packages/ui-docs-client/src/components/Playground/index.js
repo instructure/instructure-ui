@@ -29,10 +29,13 @@ import ReactDOM from 'react-dom'
 import themeable from '@instructure/ui-themeable'
 
 import Modal, { ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
+import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
+import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 
 import Preview from '../Preview'
 import CodePenButton from '../CodePenButton'
@@ -75,7 +78,8 @@ export default class Playground extends Component {
     this.state = {
       code: props.code,
       fullscreen: false,
-      showCode: false
+      showCode: false,
+      rtl: false
     }
   }
 
@@ -97,6 +101,12 @@ export default class Playground extends Component {
   handleCodeToggle = () => {
     this.setState({
       showCode: !this.state.showCode
+    })
+  }
+
+  handleBidirectionToggle = () => {
+    this.setState({
+      rtl: !this.state.rtl
     })
   }
 
@@ -146,8 +156,23 @@ export default class Playground extends Component {
     )
   }
 
+  renderBidirectionToggle () {
+    return (
+      <Checkbox
+        label={
+          <AccessibleContent alt="Render component with right-to-left text direction">
+            RTL
+          </AccessibleContent>
+        }
+        variant="toggle"
+        size="small"
+        onChange={this.handleBidirectionToggle}
+      />
+    )
+  }
+
   render () {
-    const { code, fullscreen } = this.state
+    const { code, fullscreen, rtl } = this.state
 
     const preview = (
       <Preview
@@ -156,6 +181,7 @@ export default class Playground extends Component {
         language={this.props.language}
         inverse={this.props.inverse}
         fullscreen={fullscreen}
+        rtl={rtl}
       />
     )
 
@@ -179,35 +205,47 @@ export default class Playground extends Component {
 
         { this.state.showCode && this.renderEditor() }
 
-        <div className={styles.actions}>
-          <Tooltip variant="inverse" tip="Fullscreen" placement="bottom">
-            <Button
-              onClick={this.handleMaximize}
-              ref={(c) => { this._fullScreenButton = c }}
-              size="small"
-            >
-              <SVGIcon viewBox="0 0 24 24" title="Full screen view">
-                {fullScreenIconPath}
-              </SVGIcon>
-            </Button>
-          </Tooltip>
+        <Flex alignItems="center" padding="xx-small 0 0">
+          <FlexItem shrink grow>
 
-          <Tooltip variant="inverse" tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
-            <Button margin="0 small" onClick={this.handleCodeToggle} size="small">
-              <SVGIcon viewBox="0 0 32 32" title="Code">
-                {codeIconPath}
-              </SVGIcon>
-            </Button>
-          </Tooltip>
+            <Flex>
+              <FlexItem>
+                <Tooltip variant="inverse" tip="Fullscreen" placement="bottom">
+                  <Button
+                    onClick={this.handleMaximize}
+                    ref={(c) => { this._fullScreenButton = c }}
+                    size="small"
+                  >
+                    <SVGIcon viewBox="0 0 24 24" title="Full screen view">
+                      {fullScreenIconPath}
+                    </SVGIcon>
+                  </Button>
+                </Tooltip>
+              </FlexItem>
+              <FlexItem>
+                <Tooltip variant="inverse" tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
+                  <Button margin="0 x-small" onClick={this.handleCodeToggle} size="small">
+                    <SVGIcon viewBox="0 0 32 32" title="Code">
+                      {codeIconPath}
+                    </SVGIcon>
+                  </Button>
+                </Tooltip>
+              </FlexItem>
+              { this.context.library.codepen && <FlexItem>
+                <CodePenButton
+                  code={code}
+                  title={`${this.props.title} Example`}
+                  language={this.props.language}
+                  render={this.props.render}
+                  options={this.context.library.codepen}
+                />
+              </FlexItem> }
+            </Flex>
 
-          { this.context.library.codepen && <CodePenButton
-            code={code}
-            title={`${this.props.title} Example`}
-            language={this.props.language}
-            render={this.props.render}
-            options={this.context.library.codepen}
-          /> }
-        </div>
+          </FlexItem>
+
+          <FlexItem>{this.renderBidirectionToggle()}</FlexItem>
+        </Flex>
       </div>
     )
   }
