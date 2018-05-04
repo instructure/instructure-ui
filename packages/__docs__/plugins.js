@@ -30,6 +30,7 @@ const ENV = process.env.NODE_ENV
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
 
 const projectRoot = path.resolve(__dirname, '../../')
+// eslint-disable-next-line instructure-ui/no-relative-package-imports
 const pkg = require('../../package.json')
 
 let plugins = require('@instructure/ui-presets/webpack/plugins')()

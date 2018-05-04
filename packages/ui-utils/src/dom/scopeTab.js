@@ -21,15 +21,46 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- import UIScopeTab from '../../../ui-a11y/lib/utils/scopeTab'
-
  import { changedPackageWarning } from '../react/deprecated'
  import warning from '../warning'
+ import findTabbable from './findTabbable'
+ import findDOMNode from './findDOMNode'
+ import containsActiveElement from './containsActiveElement'
+ import isActiveElement from './isActiveElement'
+ import getActiveElement from './getActiveElement'
 
  export default function scopeTab (element, event) {
    warning(false, '[%s] was deprecated in version %s. %s', 'scopeTab', '5.0.0', changedPackageWarning(
      'ui-utils',
      'ui-a11y'
    ) || '')
-   return UIScopeTab(element, event)
+   const node = findDOMNode(element)
+   const tabbable = findTabbable(node)
+
+   if (!tabbable.length) {
+     event.preventDefault()
+     return
+   }
+
+   // Account for a changing tabindex of the active element
+   // (a case that happens with Menu for KO a11y)
+   if (containsActiveElement(element)) {
+     const activeElement = getActiveElement()
+     if (tabbable.indexOf(activeElement) === -1) {
+       tabbable.push(activeElement)
+     }
+   }
+
+   const finalTabbable = tabbable[event.shiftKey ? 0 : tabbable.length - 1]
+   const leavingFinalTabbable = (
+     isActiveElement(finalTabbable) ||
+     // handle immediate shift+tab after opening with mouse
+     isActiveElement(node)
+   )
+
+   if (!leavingFinalTabbable) return
+
+   event.preventDefault()
+   const target = tabbable[event.shiftKey ? tabbable.length - 1 : 0]
+   target.focus()
  }

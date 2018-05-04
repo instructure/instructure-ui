@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import Locale from '../../../ui-i18n/lib/Locale'
-
+import canUseDOM from '../dom/canUseDOM'
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
 
@@ -39,7 +38,7 @@ export default {
   * Return the locale from the browser
   * @returns {String} locale (defaults to 'en')
   */
-  browserLocale (nav = navigator) {
+  browserLocale (nav) {
     warning(
       false,
       '[%s] was deprecated in version %s. %s',
@@ -48,6 +47,16 @@ export default {
       changedPackageWarning('ui-utils', 'ui-i18n')
     )
 
-    return Locale.browserLocale(nav)
+    let language = 'en-US'
+
+    if (canUseDOM && window && window.navigator) {
+      if (window.navigator.languages && window.navigator.languages.length > 0) {
+        language = window.navigator.languages[0]
+      } else if (window.navigator.language) {
+        language = window.navigator.language || window.navigator.browserLanguage
+      }
+    }
+
+    return nav ? nav.language : language
   }
 }

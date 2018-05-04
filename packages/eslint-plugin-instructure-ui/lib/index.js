@@ -29,7 +29,7 @@ module.exports.rules = {
 module.exports.configs = {
   recommended: {
     rules: {
-      'inst/no-relative-package-imports': 1
+      'instructure-ui/no-relative-package-imports': 2
     }
   }
 }

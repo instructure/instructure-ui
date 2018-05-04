@@ -29,8 +29,7 @@ import debounce from '../debounce'
 import { warnDeprecatedComponent } from '../react/deprecated'
 import findDOMNode from '../dom/findDOMNode'
 import getDisplayName from '../react/getDisplayName'
-
-import parseQuery from '../../../ui-layout/lib/utils/parseQuery'
+import px from '../px'
 
 /**
  * ---
@@ -141,4 +140,35 @@ export default function containerQuery (query) {
 
 function toPairs (obj) {
   return Object.keys(obj).map((key) => [key, obj[key]])
+}
+
+function parseQuery (query, el) {
+  const rules = []
+
+  Object.keys(query).forEach((selectorName) => {
+    const { minWidth, maxWidth, minHeight, maxHeight } = query[selectorName]
+    rules.push([
+      selectorName,
+      {
+        minWidth: px(minWidth, el) || 0,
+        maxWidth: px(maxWidth, el) || Infinity,
+        minHeight: px(minHeight, el) || 0,
+        maxHeight: px(maxHeight, el) || Infinity
+      }
+    ])
+  })
+
+  return function ({width, height}) {
+    const selectorMap = {}
+
+    rules.forEach((rule) => {
+      const [selectorName, { minWidth, maxWidth, minHeight, maxHeight }] = rule
+      selectorMap[selectorName] = (
+        minWidth <= width && width <= maxWidth &&
+        minHeight <= height && height <= maxHeight
+      )
+    })
+
+    return selectorMap
+  }
 }

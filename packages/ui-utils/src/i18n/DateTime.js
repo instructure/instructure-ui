@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import DateTime from '../../../ui-i18n/lib/DateTime'
+ import moment from 'moment-timezone'
+ import 'moment-timezone/builds/moment-timezone-with-data'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
@@ -49,7 +50,8 @@ export function now (locale, timezone) {
     '5.0.0',
     changedPackageWarning('ui-utils', 'ui-i18n')
   )
-  return DateTime.now(locale, timezone)
+  _checkParams(locale, timezone)
+  return moment().locale(locale).tz(timezone)
 }
 
 /**
@@ -67,7 +69,9 @@ export function parse (dateString, locale, timezone) {
     '5.0.0',
     changedPackageWarning('ui-utils', 'ui-i18n')
   )
-  return DateTime.parse(dateString, locale, timezone)
+  _checkParams(locale, timezone)
+  // list all available localized formats, from most specific to least
+  return moment.tz(dateString, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
 }
 
 /**
@@ -83,7 +87,7 @@ export function isValid (dateString) {
     '5.0.0',
     changedPackageWarning('ui-utils', 'ui-i18n')
   )
-  return DateTime.isValid(dateString)
+  return moment(dateString, [moment.ISO_8601]).isValid()
 }
 
 /**
@@ -99,7 +103,7 @@ export function browserTimeZone () {
     '5.0.0',
     changedPackageWarning('ui-utils', 'ui-i18n')
   )
-  return DateTime.browserTimeZone()
+  return moment.tz.guess()
 }
 
 export default {
@@ -107,4 +111,9 @@ export default {
   parse,
   browserTimeZone,
   isValid
+}
+
+function _checkParams (locale, timezone) {
+  if (locale == null) throw Error('locale must be specified')
+  if (timezone == null) throw Error('timezone must be specified')
 }
