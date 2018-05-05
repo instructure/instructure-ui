@@ -23,7 +23,7 @@ git fetch origin --tags --force
 #######################
 commit=$(git rev-parse --short HEAD)
 commit_msg=$(git log -1 --pretty=oneline --abbrev-commit)
-description=$(git describe)
+description=$(git describe --match "v[0-9]*" --first-parent)
 
 #########################
 # Determine the npm tag #
