@@ -35,7 +35,7 @@ import * as VideoStates from '../videoStates'
 
 /**
 ---
-private: true
+parent: VideoPlayer
 ---
 **/
 @themeable({}, styles)
