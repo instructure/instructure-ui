@@ -44,6 +44,7 @@ import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 class PopoverTrigger extends ComponentIdentifier {
   static displayName = 'PopoverTrigger'
@@ -92,6 +93,11 @@ class Popover extends Component {
     ]),
 
     variant: PropTypes.oneOf(['default', 'inverse']),
+
+    /**
+    * Controls the z-index depth for the `<Popover />` content
+    */
+    stacking: ThemeablePropTypes.stacking,
 
     /**
      * Whether or not the content should be rendered on initial render.
@@ -269,6 +275,7 @@ class Popover extends Component {
     onShow: position => {},
     onDismiss: (event, documentClick) => {},
     placement: 'bottom center',
+    stacking: 'topmost',
     offsetX: 0,
     offsetY: 0,
     variant: 'default',
@@ -480,6 +487,7 @@ class Popover extends Component {
       content = (
         <Dialog
           {...pickProps(this.props, Dialog.propTypes)}
+          display="block"
           open={this.shown}
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
@@ -494,7 +502,9 @@ class Popover extends Component {
       let viewProps = {
         ref: c => this._view = c,
         elementRef: this.props.contentRef,
-        background: this.props.variant
+        background: this.props.variant,
+        stacking: this.props.stacking,
+        display: 'block'
       }
 
       if (this.props.withArrow) {

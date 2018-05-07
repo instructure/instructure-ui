@@ -34,6 +34,8 @@ import PropTypes from 'prop-types'
 export default {
   shadow: PropTypes.oneOf(['resting', 'above', 'topmost']),
 
+  stacking: PropTypes.oneOf(['deepest', 'below', 'resting', 'above', 'topmost']),
+
   borderWidth: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
   borderRadius: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
 

@@ -117,6 +117,11 @@ class View extends Component {
     shadow: ThemeablePropTypes.shadow,
 
     /**
+    * Controls the z-index depth for the `<View />`
+    */
+    stacking: ThemeablePropTypes.stacking,
+
+    /**
     * Activate a dotted outline around the component to make building your
     * layout easier
     */
@@ -195,12 +200,6 @@ class View extends Component {
     }
   }
 
-  get shadowStyle () {
-    return {
-      boxShadow: getShorthandPropValue(this.displayName, this.theme, this.props.shadow, 'shadow')
-    }
-  }
-
   get styleProps () {
     const { style } = this.props // eslint-disable-line react/prop-types
     return pickProps(style, {}, [
@@ -242,6 +241,8 @@ class View extends Component {
       minHeight,
       maxWidth,
       maxHeight,
+      stacking,
+      shadow,
       size, // eslint-disable-line react/prop-types
       className // eslint-disable-line react/prop-types
     } = this.props
@@ -259,12 +260,13 @@ class View extends Component {
           [styles[`background--${background}`]]: background,
           [styles[`display--${display}`]]: display && display !== 'auto',
           [styles[`size--${size}`]]: size && size !== 'auto',
+          [styles[`stacking--${stacking}`]]: stacking,
+          [styles[`shadow--${shadow}`]]: shadow,
           [className]: className
         })}
         style={{
           ...this.spacingStyle,
           ...this.borderStyle,
-          ...this.shadowStyle,
           width,
           height,
           minWidth,

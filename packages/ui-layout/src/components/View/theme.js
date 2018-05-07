@@ -26,7 +26,7 @@
 
 import makeThemeVars from '@instructure/ui-themeable/lib/utils/makeThemeVars'
 
-export default function generator ({ typography, colors, borders, spacing, shadows, breakpoints }) {
+export default function generator ({ typography, colors, borders, spacing, shadows, stacking, breakpoints }) {
   return {
     color: colors.oxford,
     background: colors.white,
@@ -49,6 +49,7 @@ export default function generator ({ typography, colors, borders, spacing, shado
     ...makeThemeVars('margin', spacing),
     ...makeThemeVars('padding', spacing),
     ...makeThemeVars('shadow', shadows),
+    ...makeThemeVars('stacking', stacking),
     ...makeThemeVars('border', borders)
   }
 }

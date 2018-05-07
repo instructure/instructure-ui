@@ -30,6 +30,7 @@ import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroug
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import FocusRegionManager from '../../utils/FocusRegionManager'
 
@@ -51,6 +52,13 @@ class Dialog extends Component {
      * The children to be rendered within the `<Dialog />`
      */
     children: PropTypes.node,
+
+    /**
+    * The element to render as the component root, `span` by default
+    */
+    as: CustomPropTypes.elementType,
+
+    display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
 
     label: PropTypes.string,
 

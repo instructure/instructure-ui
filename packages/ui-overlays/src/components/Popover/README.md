@@ -6,66 +6,7 @@ A `<Popover/>` is a small overlay of content that contains secondary information
 you can use a [Tooltip](#Tooltip) or a [Menu](#Menu) component, but if you need
 something custom that behaves more like a dialog, use a `<Popover/>`.
 
-```js
----
-render: false
-example: true
----
-class Example extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      showPopover: false
-    }
-  }
-
-  showPopover = () => {
-    this.setState({
-      showPopover: true
-    })
-  }
-
-  hidePopover = () => {
-    this.setState({
-      showPopover: false
-    })
-  }
-  render () {
-    return (
-      <div style={{ paddingBottom: 25 }}>
-        <Popover
-          on="click"
-          shouldContainFocus
-          shouldReturnFocus
-          shouldCloseOnDocumentClick
-          show={this.state.showPopover}
-          onDismiss={this.hidePopover}
-        >
-          <PopoverTrigger><Button onClick={this.showPopover}>Click Me</Button></PopoverTrigger>
-          <PopoverContent>
-            <View padding="large" display="inline-block">
-              <CloseButton
-                placement="end"
-                offset="x-small"
-                variant="icon"
-                onClick={this.hidePopover}
-              >
-                Close
-              </CloseButton>
-              <Heading>Hello</Heading>
-            </View>
-          </PopoverContent>
-        </Popover>
-      </div>
-    )
-  }
-}
-
-render(<Example />)
-```
-
-`<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property
+Note that `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property
 set, it will trap focus inside the `<Popover />`.
 
 ```js

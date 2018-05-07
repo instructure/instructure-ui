@@ -88,6 +88,11 @@ class ContextView extends Component {
     shadow: ThemeablePropTypes.shadow,
 
     /**
+    * Controls the z-index depth for the `<ContextView />`
+    */
+    stacking: ThemeablePropTypes.stacking,
+
+    /**
     * Designates the background style of the `<ContextView />`
     */
     background: PropTypes.oneOf(['default', 'inverse']),
@@ -140,6 +145,7 @@ class ContextView extends Component {
       padding,
       placement,
       shadow,
+      stacking,
       style, // eslint-disable-line react/prop-types
       textAlign
     } = this.props
@@ -160,6 +166,7 @@ class ContextView extends Component {
         debug={debug}
         elementRef={elementRef}
         margin={margin}
+        stacking={stacking}
       >
         <View
           className={styles.content}

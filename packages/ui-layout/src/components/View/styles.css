@@ -74,3 +74,33 @@
 .size--fullscreen {
   max-width: 100vw;
 }
+
+.stacking--topmost {
+  z-index: var(--stackingTopmost);
+}
+
+.stacking--above {
+  z-index: var(--stackingAbove);
+}
+
+.stacking--resting {}
+
+.stacking--below {
+  z-index: var(--stackingBelow);
+}
+
+.stacking--deepest {
+  z-index: var(--stackingDeepest);
+}
+
+.shadow--topmost {
+  box-shadow: var(--shadowTopmost);
+}
+
+.shadow--resting {
+  box-shadow: var(--shadowResting);
+}
+
+.shadow--above {
+  box-shadow: var(--shadowAbove);
+}
