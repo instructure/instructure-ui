@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.7.0"></a>
+# [5.7.0](https://github.com/instructure/instructure-ui/compare/v5.6.0...v5.7.0) (2018-05-07)
+
+
+### Bug Fixes
+
+* **release:** Fix auto-release script ([f2b99d3](https://github.com/instructure/instructure-ui/commit/f2b99d3))
+* **ui-overlays,Popover:** Pass down stacking/z-index to ContextView/View ([a2a39ef](https://github.com/instructure/instructure-ui/commit/a2a39ef))
+
+
+### Features
+
+* **ui-docs-client:** Add RTL toggle to Playground ([21a0a34](https://github.com/instructure/instructure-ui/commit/21a0a34))
+
+
+
 <a name="5.6.0"></a>
 # [5.6.0](https://github.com/instructure/instructure-ui/compare/v5.5.0...v5.6.0) (2018-05-04)
 
