@@ -22,13 +22,9 @@
  * SOFTWARE.
  */
 
-module.exports = [
-  'last 2 chrome versions',
-  'last 2 firefox versions',
-  'last 2 edge versions',
-  'last 2 ios versions',
-  'last 2 opera versions',
-  'last 2 safari versions',
-  'last 2 ChromeAndroid versions',
-  'ie >= 11'
-]
+/**
+ * You probably don't need to use this in your code, and can just use the
+ * `@instructure/canvas-supported-browsers` npm module directly.
+ * This is just provided for backwards-compatibility.
+ */
+module.exports = require('@instructure/canvas-supported-browsers')

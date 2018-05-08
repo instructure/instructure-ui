@@ -109,7 +109,7 @@ function getNodeEnvConfig () {
 function getWebEnvConfig (opts) {
   return {
     targets: {
-      browsers: loadConfig('browserslist', require('./browserslist'))
+      browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers'))
     },
     modules: opts.esModules ? false : 'commonjs',
     useBuiltIns: true

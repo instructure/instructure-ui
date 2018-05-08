@@ -101,6 +101,10 @@
     sketch-constants "^1.1.0"
     sketchapp-json-plugin "^0.1.2"
 
+"@instructure/canvas-supported-browsers@^1":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@instructure/canvas-supported-browsers/-/canvas-supported-browsers-1.0.0.tgz#dd82d1ab612892edea11693f6e5057b565eb467e"
+
 "@instructure/conventional-changelog@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@instructure/conventional-changelog/-/conventional-changelog-1.0.0.tgz#db8956069e604861278be61c532f27650d2e3403"

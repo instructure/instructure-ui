@@ -30,7 +30,7 @@ const CORE_PLUGINS = [
       return `[dir="${direction}"] ${selector}`
     }
   }],
-  ['autoprefixer', { browsers: loadConfig('browserslist', require('./browserslist')) }],
+  ['autoprefixer', { browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers')) }],
   ['postcss-initial'],
   ['postcss-reporter']
 ]

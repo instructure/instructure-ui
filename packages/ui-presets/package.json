@@ -23,6 +23,7 @@
     "@instructure/babel-plugin-themeable-styles": "^5.7.0",
     "@instructure/babel-plugin-transform-class-display-name": "^5.7.0",
     "@instructure/postcss-themeable-styles": "^5.7.0",
+    "@instructure/canvas-supported-browsers": "^1",
     "@instructure/ui-testbed": "^5.7.0",
     "autoprefixer": "^8.0.0",
     "babel-cli": "^6.26.0",
