@@ -39,7 +39,6 @@ import theme from './theme'
 /**
 ---
 category: components/layout
-experimental: true
 ---
 **/
 @themeable(theme, styles)
@@ -67,6 +66,10 @@ class DrawerLayout extends Component {
     onOverlayTrayChange: (overlayTray) => {}
   }
 
+  static childContextTypes = {
+    overlay: PropTypes.bool
+  }
+
   state = {
     overlayTray: false,
     transitioning: false
@@ -78,6 +81,12 @@ class DrawerLayout extends Component {
   _transitionContent = true
   _updatingLayout = false
   _unappliedLayoutChanges = false
+
+  getChildContext() {
+    return {
+      overlay: this.state.overlayTray && this._transitionContent
+    }
+  }
 
   componentWillMount () {
     // When the tray is open initially, we need to prevent
@@ -185,7 +194,6 @@ class DrawerLayout extends Component {
         return safeCloneElement(child, {
           key: child.props.label,
           onSizeChange: this.handleTraySizeChange,
-          overlay: this.state.overlayTray && this._transitionContent,
           onEnter: this.handleTrayTransitionBegin,
           onEntered: this.handleTrayTransitionEnd,
           onExit: this.handleTrayTransitionBegin,

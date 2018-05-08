@@ -16,17 +16,32 @@ example: true
 ---
 <div>
   <p>
-    <Tooltip tip="Hello. I'm a tool tip" as={Link} href="https://instructure.github.io/instructure-ui/">
+    <Tooltip
+      tip="Hello. I'm a tool tip"
+      as={Link}
+      href="https://instructure.github.io/instructure-ui/"
+      mountNode={() => document.getElementById('main')}
+    >
       Hover or focus me
     </Tooltip>
   </p>
   <p>
-    <Tooltip tip="Hello" placement="end" as={Button}>
+    <Tooltip
+      tip="Hello"
+      placement="end"
+      as={Button}
+      mountNode={() => document.getElementById('main')}
+    >
       Hover or focus me
     </Tooltip>
   </p>
   <p>
-    <Tooltip variant="inverse" tip="Hello" placement="bottom">
+    <Tooltip
+      variant="inverse"
+      tip="Hello"
+      placement="bottom"
+      mountNode={() => document.getElementById('main')}
+    >
       <TextInput
         inline
         label="Enter some text"

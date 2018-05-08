@@ -60,6 +60,7 @@ class Example extends React.Component {
           shouldCloseOnDocumentClick
           label="Popover Dialog Example"
           offsetY="16px"
+          mountNode={() => document.getElementById('main')}
         >
           <PopoverTrigger>
             <Button
@@ -97,7 +98,12 @@ class Example extends React.Component {
 render () {
   return (
       <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
-        <Popover show placement="end top" alignArrow>
+        <Popover
+          show
+          placement="end top"
+          alignArrow
+          mountNode={() => document.getElementById('main')}
+        >
           <PopoverTrigger>
             <div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>
           </PopoverTrigger>

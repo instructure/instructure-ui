@@ -25,7 +25,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import containerQuery from '@instructure/ui-utils/lib/react/containerQuery'
+import debounce from '@instructure/ui-utils/lib/debounce'
+import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
+import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -36,7 +38,6 @@ import theme from './theme'
 parent: DrawerLayout
 ---
 **/
-@containerQuery()
 @themeable(theme, styles)
 class DrawerContent extends Component {
   static propTypes = {
@@ -50,17 +51,38 @@ class DrawerContent extends Component {
     /**
      * Should the `<DrawerContent />` transition
      */
-    transition: PropTypes.bool
+    transition: PropTypes.bool,
+    role: PropTypes.string
   }
 
   static defaultProps = {
     children: null,
     contentRef: (node) => {},
     onSizeChange: (size) => {},
-    transition: true
+    transition: true,
+    role: 'region'
   }
 
   _content = null
+
+  componentDidMount () {
+    const rect = getBoundingClientRect(this._content)
+    // set initial size
+    this.props.onSizeChange({width: rect.width, height: rect.height})
+    // listen for changes to size
+    this._debounced = debounce(this.props.onSizeChange, 100, {leading: false, trailing: true})
+    this._resizeListener = addResizeListener(this._content, this._debounced)
+  }
+
+  componentWillUnmount () {
+    if (this._resizeListener) {
+      this._resizeListener.remove()
+    }
+
+    if (this._debounced) {
+      this._debounced.cancel()
+    }
+  }
 
   handleContentRef = (node) => {
     if (typeof this.props.contentRef === 'function') {
@@ -73,12 +95,13 @@ class DrawerContent extends Component {
     const {
       style, // eslint-disable-line react/prop-types
       transition,
-      label
+      label,
+      role
     } = this.props
 
     return (
       <div
-        role="region"
+        role={role}
         style={style}
         ref={this.handleContentRef}
         aria-label={label}

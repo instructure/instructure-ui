@@ -62,13 +62,19 @@ export default class Tooltip extends Component {
     ]),
     variant: PropTypes.oneOf(['default', 'inverse']),
     placement: LayoutPropTypes.placement,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+     * An element or a function returning an element to use as the mount node
+     * for the `<Tooltip />` (defaults to `document.body`)
+     */
+    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
   }
 
   static defaultProps = {
     variant: 'default',
     placement: 'top',
-    size: 'small'
+    size: 'small',
+    mountNode: null
   }
 
   constructor (props) {
@@ -100,6 +106,7 @@ export default class Tooltip extends Component {
         shouldReturnFocus={false}
         placement={this.props.placement}
         variant={this.props.variant}
+        mountNode={this.props.mountNode}
       >
         <PopoverTrigger
           aria-describedby={this._id}

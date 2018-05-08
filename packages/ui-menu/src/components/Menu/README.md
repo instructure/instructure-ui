@@ -21,6 +21,7 @@ example: true
     trigger={
       <Button>Menu</Button>
     }
+    mountNode={() => document.getElementById('main')}
   >
     <MenuItem value="mastery">Learning Mastery</MenuItem>
     <MenuItem href="https://instructure.github.io/instructure-ui/">Default (Grid view)</MenuItem>
@@ -98,6 +99,7 @@ class Example extends React.Component {
         trigger={
           <Button>Menu</Button>
         }
+        mountNode={() => document.getElementById('main')}
       >
         <MenuItem value="mastery">Learning Mastery</MenuItem>
         <MenuItem href="https://instructure.github.io/instructure-ui/">Default (Grid view)</MenuItem>

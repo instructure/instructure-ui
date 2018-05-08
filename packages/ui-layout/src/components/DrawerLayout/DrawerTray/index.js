@@ -29,12 +29,15 @@ import BaseTransition from '@instructure/ui-motion/lib/components/Transition/Bas
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import ms from '@instructure/ui-utils/lib/ms'
 import warning from '@instructure/ui-utils/lib/warning'
+
+import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -78,17 +81,10 @@ class DrawerTray extends Component {
      * Should the `<DrawerTray />` have a border
      */
     border: PropTypes.bool,
-
     /**
      * Should the `<DrawerTray />` have a shadow
      */
     shadow: PropTypes.bool,
-
-    /**
-     * Boolean designating if the `<DrawerTray />` is overlaying the content
-     */
-    overlay: PropTypes.bool,
-
     /**
      * Callback fired before the <DrawerTray /> transitions in
      */
@@ -120,16 +116,21 @@ class DrawerTray extends Component {
     /**
      * Ref function for the <DrawerTray /> content
      */
-    contentRef: PropTypes.func
+    contentRef: PropTypes.func,
+    /**
+     * An element or a function returning an element to use as the mount node
+     * for the `<DrawerTray />` when tray is overlaying content
+     */
+    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func])
   }
 
   static defaultProps = {
     open: false,
     onOpen: () => {},
     shadow: true,
-    overlay: false,
     border: true,
     placement: 'start',
+    mountNode: null,
     onEnter: () => {},
     onEntering: () => {},
     onEntered: () => {},
@@ -138,6 +139,10 @@ class DrawerTray extends Component {
     onExited: () => {},
     onSizeChange: (size) => {},
     contentRef: (node) => {}
+  }
+
+  static contextTypes = {
+    overlay: PropTypes.bool
   }
 
   state = {
@@ -176,10 +181,8 @@ class DrawerTray extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const {
-      overlay,
-      shadow
-    } = this.props
+    const { shadow } = this.props
+    const { overlay } = this.context
 
     // This could live in the render method with the standard class
     // logic for trayContent. However, currently when the overlay prop
@@ -243,13 +246,16 @@ class DrawerTray extends Component {
       onEntered,
       onExit,
       children,
-      render
+      render,
+      mountNode
     } = this.props
+
+    const { overlay } = this.context
 
     const duration = ms(this.theme.duration)
     const renderFunc = children || render
 
-    return (
+    const content = (
       <BaseTransition
         {...pickProps(this.props, BaseTransition.propTypes)}
         onEnter={createChainedFunction(this.handleTransitionEnter, onEnter)}
@@ -279,6 +285,19 @@ class DrawerTray extends Component {
         </span>
       </BaseTransition>
     )
+
+    if (overlay && mountNode) {
+      return (
+        <Portal
+          mountNode={mountNode}
+          open={true}
+        >
+          {content}
+        </Portal>
+      )
+    }
+
+    return content
   }
 }
 

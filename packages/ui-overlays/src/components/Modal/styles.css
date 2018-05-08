@@ -7,7 +7,6 @@
   box-shadow: var(--boxShadow);
   border: 0.0625rem solid var(--borderColor);
   border-radius: var(--borderRadius);
-  z-index: var(--zIndex);
 
   &.ie11 {
     display: block;
@@ -55,6 +54,7 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
+  z-index: var(--zIndex);
 }
 
 .fullscreen {

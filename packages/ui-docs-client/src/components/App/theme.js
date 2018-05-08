@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography }) {
+export default function ({ colors, typography, stacking }) {
   return {
     foregroundColor: colors.backgroundDarkest,
     backgroundColor: colors.backgroundLightest,
@@ -32,6 +32,7 @@ export default function ({ colors, typography }) {
     fontFamily: typography.fontFamily,
     fontFamilyMonospace: typography.fontFamilyMonospace,
     lineHeight: typography.lineHeight,
-    fontWeight: typography.fontWeightNormal
+    fontWeight: typography.fontWeightNormal,
+    zIndex: stacking.topmost
   }
 }

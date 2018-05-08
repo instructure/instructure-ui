@@ -30,8 +30,10 @@ import GithubCorner from 'react-github-corner'
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import Select from '@instructure/ui-forms/lib/components/Select'
-import Tray from '@instructure/ui-overlays/lib/components/Tray'
+import View from '@instructure/ui-layout/lib/components/View'
+import DrawerLayout, { DrawerTray, DrawerContent } from '@instructure/ui-layout/lib/components/DrawerLayout'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Pill from '@instructure/ui-elements/lib/components/Pill'
@@ -88,6 +90,7 @@ export default class App extends Component {
     this.state = {
       key: undefined, // eslint-disable-line no-undefined
       showMenu: true,
+      trayOverlay: false,
       themeKey: undefined // eslint-disable-line no-undefined
     }
   }
@@ -116,6 +119,14 @@ export default class App extends Component {
     this.setState({
       themeKey: option.value
     })
+  }
+
+  handleOverlayTrayChange = (tray) => {
+    this.setState({trayOverlay: tray})
+  }
+
+  handleTrayDismiss = (e) => {
+    this.setState({showMenu: false})
   }
 
   componentDidMount () {
@@ -294,6 +305,24 @@ export default class App extends Component {
     ) : null
   }
 
+  renderCloseButton () {
+    return (
+      <div className={styles.menuToggle}>
+        <Button
+          onClick={this.handleMenuToggle}
+          aria-controls="nav"
+          aria-expanded={this.state.showMenu ? 'true' : 'false'}
+        >
+          <span className={styles.hamburger}>
+            <span className={styles.line}>
+              <ScreenReaderContent>Toggle Navigation</ScreenReaderContent>
+            </span>
+          </span>
+        </Button>
+      </div>
+    )
+  }
+
   render () {
     const classes = {
       [styles.root]: true,
@@ -305,50 +334,64 @@ export default class App extends Component {
     } = this.props.library
     return (
       <div className={classnames(classes)}>
-        <div className={styles.container}>
-          <div className={styles.menuToggle}>
-            <Button
-              onClick={this.handleMenuToggle}
-              aria-controls="nav"
-              aria-expanded={this.state.showMenu ? 'true' : 'false'}
-            >
-              <span className={styles.hamburger}>
-                <span className={styles.line}>
-                  <ScreenReaderContent>Toggle Navigation</ScreenReaderContent>
-                </span>
-              </span>
-            </Button>
-          </div>
-          <div
-            className={styles.content}
-            ref={c => {
-              this._content = c
+        <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
+          <DrawerTray
+            label="Navigation"
+            placement="start"
+            open={this.state.showMenu}
+            mountNode={this.state.trayOverlay ? document.body : null}
+            render={(positioned) => {
+              let trayContent = (
+                <View as="div" width="16rem">
+                  <Header name={name} version={version} />
+                  <Nav
+                    selected={this.state.key}
+                    sections={this.props.sections}
+                    docs={this.props.docs}
+                    themes={this.props.themes}
+                    icons={this.props.icons}
+                  />
+                </View>
+              )
+
+              if (positioned && this.state.trayOverlay) {
+                trayContent = (
+                  <Dialog
+                    open
+                    shouldContainFocus
+                    shouldCloseOnDocumentClick
+                    shouldCloseOnEscape
+                    shouldReturnFocus
+                    onDismiss={this.handleTrayDismiss}
+                    role="region"
+                  >
+                    {trayContent}
+                  </Dialog>
+                )
+              }
+
+              return trayContent
             }}
           >
-            <div className={styles.main} role="main" id="main">
-              {this.renderContent(this.state.key)}
-
-              {this.renderFooter()}
-            </div>
-          </div>
-          <Tray
-            label="Navigation"
-            open={this.state.showMenu}
-            size="x-small"
-            mountNode={() => document.getElementById('nav')}
-          >
-            <div className={styles.nav}>
-              <Header name={name} version={version} />
-              <Nav
-                selected={this.state.key}
-                sections={this.props.sections}
-                docs={this.props.docs}
-                themes={this.props.themes}
-                icons={this.props.icons}
-              />
-            </div>
-          </Tray>
-        </div>
+          </DrawerTray>
+          <DrawerContent label={this.state.key || this.props.library.name} role="main">
+            {this.renderCloseButton()}
+            <View
+              as="div"
+              padding="x-large xx-large"
+              minWidth="18rem"
+              height="100vh"
+              ref={c => {
+                this._content = c
+              }}
+            >
+              <div className={styles.main} id="main">
+                {this.renderContent(this.state.key)}
+                {this.renderFooter()}
+              </div>
+            </View>
+          </DrawerContent>
+        </DrawerLayout>
         <GithubCorner href="https://www.github.com/instructure/instructure-ui" />
       </div>
     )

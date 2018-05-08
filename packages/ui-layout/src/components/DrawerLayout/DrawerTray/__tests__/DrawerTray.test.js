@@ -146,11 +146,12 @@ describe('<DrawerTray />', () => {
     })
   })
 
-  it('drops a shadow if the prop is set, and it is overlaying content', (done) => {
+  it('drops a shadow if the prop is set, and it is overlaying content', () => {
     const subject = testbed.render({
       open: true,
-      overlay: true,
       shadow: true
+    },{
+      overlay: true
     })
 
     testbed.tick()
@@ -158,11 +159,9 @@ describe('<DrawerTray />', () => {
 
     expect(subject.hasClass(styles['shadow'])).to.be.true
 
-    subject.setProps({ overlay: false }, () => {
-      testbed.tick()
-      expect(subject.hasClass(styles['shadow'])).to.be.false
-      done()
-    })
+    subject.setContext({overlay: false})
+
+    expect(subject.hasClass(styles['shadow'])).to.be.false
   })
 
   it('should apply the a11y attributes', () => {
