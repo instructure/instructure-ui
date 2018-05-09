@@ -67,14 +67,14 @@ module.exports = [
   },
   {
     // eslint-disable-next-line no-useless-escape
-    test: /\.(eot|woff2?|svg|ttf)([\?]?.*)$/,
+    test: /\.(eot|woff2?|otf|svg|ttf)([\?]?.*)$/,
     loader: 'url-loader',
     options: {
       limit: 10000
     }
   },
   {
-    test: /\.(png|jpg|jpeg)$/,
+    test: /\.(png|jpg|jpeg|gif)$/,
     loader: 'url-loader',
     options: {
       limit: 10000
