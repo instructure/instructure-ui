@@ -36,6 +36,7 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -129,6 +130,14 @@ class ToggleDetails extends Component {
     return typeof props.expanded === 'boolean'
   }
 
+  get focused () {
+    return isActiveElement(this._button)
+  }
+
+  focus () {
+    this._button.focus()
+  }
+
   componentDidMount () {
     this.shouldAnimateContent = true
   }
@@ -151,6 +160,8 @@ class ToggleDetails extends Component {
 
     this.props.onToggle(event, !this.expanded)
   }
+
+  getButtonRef = el => this._button = el
 
   renderSummary () {
     const {
@@ -186,6 +197,7 @@ class ToggleDetails extends Component {
           {...omitProps(props, ToggleDetails.propTypes)}
           {...a11yProps}
           fluidWidth
+          buttonRef={this.getButtonRef}
         >
           {this.renderSummary()}
         </Button>
@@ -198,6 +210,7 @@ class ToggleDetails extends Component {
           className={classnames(styles.toggle, styles[variant], {
             [styles.fluidWidth]: this.props.fluidWidth
           })}
+          ref={this.getButtonRef}
         >
           {this.renderSummary()}
         </a>
@@ -211,6 +224,7 @@ class ToggleDetails extends Component {
           className={classnames(styles.toggle, styles[variant], {
             [styles.fluidWidth]: this.props.fluidWidth
           })}
+          ref={this.getButtonRef}
         >
           {this.renderSummary()}
         </button>

@@ -106,4 +106,12 @@ describe('<ToggleDetails />', () => {
       ignores: []
     })
   })
+
+  it('focuses with the focus helper', () => {
+    const subject = testbed.render()
+
+    subject.instance().focus()
+
+    expect(subject.instance().focused).to.be.true
+  })
 })
