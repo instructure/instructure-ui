@@ -1,3 +1,7 @@
 $icons-<%= variant %>: (<% _.each(glyphs, function(glyph, index) { %>
   <%= glyph.glyphName %>: "\<%= glyph.codepoint %>"<% if (index < glyphs.length - 1) { %>,<% } }); %>
 );
+
+$icons-<%= variant %>-bidirectional: (<% _.each(glyphs, function(glyph, index) { %>
+<% if (glyph.bidirectional) { %><%= glyph.glyphName %>: "true"<% if (index < glyphs.length - 1) { %>,<% } } }); %>
+);

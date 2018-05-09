@@ -86,7 +86,8 @@ export default class Glyph extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     variants: PropTypes.object.isRequired,
-    onClick: PropTypes.func.isRequired
+    onClick: PropTypes.func.isRequired,
+    rtl: PropTypes.bool
   }
 
   renderGlyphInfo (glyph) {
@@ -103,7 +104,7 @@ export default class Glyph extends Component {
 
     return (
       <div className={styles.root}>
-        <div className={styles.variants}>
+        <div className={styles.variants} dir={this.props.rtl ? "rtl" : null}>
           {
             Object.keys(variants)
               .map(variant => (

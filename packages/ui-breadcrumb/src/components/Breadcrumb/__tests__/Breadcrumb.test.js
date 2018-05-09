@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 
 import Breadcrumb from '../index'
 import BreadcrumbLink from '../BreadcrumbLink'
@@ -42,9 +42,9 @@ describe('<Breadcrumb />', () => {
     expect(subject.find('ol[aria-label]').getAttribute('aria-label')).to.equal('This is a test')
   })
 
-  it('should render IconArrowOpenRightSolid by default as a separator', () => {
+  it('should render IconArrowOpenEnd by default as a separator', () => {
     const subject = testbed.render()
-    expect(subject.find(IconArrowOpenRight)).to.be.present
+    expect(subject.find(IconArrowOpenEnd)).to.be.present
   })
 
   it('should meet a11y standards', (done) => {

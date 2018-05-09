@@ -45,6 +45,7 @@ let GLYPHS = {}
 const createReactSvgDataTask = function (variant) {
   const key = `react-svg-data-${variant}`
   const deprecated = config.deprecated || {}
+  const bidirectional = config.bidirectional || []
 
   gulp.task(key, () => {
     return gulp.src(`${path.join(config.react.source, variant)}/*.svg`)
@@ -61,6 +62,7 @@ const createReactSvgDataTask = function (variant) {
             name,
             variant,
             deprecated: toComponentName(deprecated[baseName]),
+            bidirectional: bidirectional.indexOf(baseName) !== -1,
             path: path.join(config.react.destination, variant, name),
             viewBox: $svg.attr('viewBox'), // we only care about the viewBox attr
             source: svgtojsx($svg.html())

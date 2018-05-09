@@ -56,7 +56,7 @@ import * as UITreeBrowser from '@instructure/ui-tree-browser/lib/components'
 import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
-import IconArrowOpenLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
+import IconArrowOpenStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
 
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
@@ -102,7 +102,7 @@ const globals = {
   PlaceholderIcon: IconUser,
   IconPlus,
   IconX,
-  IconArrowOpenLeft,
+  IconArrowOpenStart,
   locales: moment.locales(),
   avatarImage,
   iconExample,

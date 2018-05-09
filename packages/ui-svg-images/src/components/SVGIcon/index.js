@@ -50,11 +50,13 @@ class SVGIcon extends Component {
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large'])
+    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
+    bidirectional: PropTypes.bool
   }
 
   static defaultProps = {
-    rotate: '0'
+    rotate: '0',
+    bidirectional: false
   }
 
   render () {
@@ -62,6 +64,7 @@ class SVGIcon extends Component {
       rotate,
       className,
       size,
+      bidirectional,
       ...props
     } = this.props
 
@@ -73,6 +76,7 @@ class SVGIcon extends Component {
           [styles.root]: true,
           [styles[`rotate--${rotate}`]]: rotate && rotate !== '0',
           [styles[`size--${size}`]]: size,
+          [styles.bidirectional]: bidirectional,
           [className]: className
         })}
       />

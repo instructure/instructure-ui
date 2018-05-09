@@ -11,11 +11,6 @@
   transform: rotate(90deg);
 }
 
-/* stylelint-disable-next-line selector-max-type */
-html[dir="rtl"] .rotate--90 {
-  transform: rotate(-90deg);
-}
-
 .rotate--180 {
   transform: rotate(180deg);
 }
@@ -24,9 +19,20 @@ html[dir="rtl"] .rotate--90 {
   transform: rotate(270deg);
 }
 
-/* stylelint-disable-next-line selector-max-type */
-html[dir="rtl"] .rotate--270 {
-  transform: rotate(-270deg);
+[dir="rtl"] .bidirectional {
+  transform: scale3d(-1, 1, 1);
+
+  &.rotate--90 {
+    transform: scale3d(-1, 1, 1) rotate(90deg);
+  }
+
+  .rotate--180 {
+    transform: scale3d(-1, 1, 1) rotate(180deg);
+  }
+
+  .rotate--270 {
+    transform: scale3d(-1, 1, 1) rotate(270deg);
+  }
 }
 
 .size--x-small {

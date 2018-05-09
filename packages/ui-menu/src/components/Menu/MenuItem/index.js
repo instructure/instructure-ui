@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import classnames from 'classnames'
 import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
-import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
@@ -221,7 +221,7 @@ class MenuItem extends Component {
         </span>
         {type === 'flyout' &&
           <span className={styles.icon}>
-            <IconArrowOpenRight />
+            <IconArrowOpenEnd />
           </span>}
       </span>
     )

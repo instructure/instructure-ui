@@ -23,6 +23,9 @@ export default class <%= name %> extends Component {
         {...this.props}
         name="<%= name %>"
         viewBox="<%= viewBox %>"
+        <% if (bidirectional) { %>
+        bidirectional
+        <% } %>
       >
         <%= source %>
       </SVGIcon>

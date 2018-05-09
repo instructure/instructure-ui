@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import Button from '@instructure/ui-buttons/lib/components/Button'
 
-import IconArrowOpenRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
 
 import themeable from '@instructure/ui-themeable'
@@ -99,7 +99,7 @@ class ToggleDetails extends Component {
     variant: 'default',
     size: 'medium',
     fluidWidth: false,
-    icon: IconArrowOpenRight,
+    icon: IconArrowOpenEnd,
     iconExpanded: IconArrowOpenDown,
     iconPosition: 'start',
     expanded: null,

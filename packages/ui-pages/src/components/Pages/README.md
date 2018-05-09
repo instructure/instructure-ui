@@ -48,7 +48,7 @@ class Example extends React.Component {
         variant="icon"
         onClick={navigateToPreviousPage}
       >
-        <IconArrowOpenLeft />
+        <IconArrowOpenStart />
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
     )
@@ -235,7 +235,7 @@ class Example extends React.Component {
         variant="icon"
         onClick={navigateToPreviousPage}
       >
-        <IconArrowOpenLeft />
+        <IconArrowOpenStart />
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
     )

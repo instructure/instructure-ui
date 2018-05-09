@@ -43,5 +43,13 @@
   text-align: center;
 }
 
-<% _.each(glyphs, function(glyph) { %>.<%= glyph.className %>:before { content: "\<%= glyph.codepoint %>" }
-<% }); %>
+<% _.each(glyphs, function(glyph) { %>
+  .<%= glyph.className %>::before {
+    content: "\<%= glyph.codepoint %>";
+  }
+  <% if (glyph.bidirectional) { %>
+  [dir="rtl"] .<%= glyph.className %>::before {
+    transform: scale3d(-1, 1, 1);
+  }
+  <% } %>
+ <% }); %>

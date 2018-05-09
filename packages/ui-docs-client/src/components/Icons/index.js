@@ -33,6 +33,8 @@ import FormFieldGroup from '@instructure/ui-forms/lib/components/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
+import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
+import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
 
 import themeable from '@instructure/ui-themeable'
 
@@ -56,7 +58,8 @@ export default class Icons extends Component {
       query: '',
       name: null,
       variant: null,
-      glyph: null
+      glyph: null,
+      rtl: false
     }
   }
 
@@ -92,6 +95,12 @@ export default class Icons extends Component {
     this.setState({ name: null, variant: null, glyph: null })
   }
 
+  handleBidirectionToggle = () => {
+    this.setState({
+      rtl: !this.state.rtl
+    })
+  }
+
   renderHeader () {
     const { formats } = this.props
     return (
@@ -120,6 +129,7 @@ export default class Icons extends Component {
               <option value={key} key={`${key}`}>{formats[key].format}</option>
             ))}
           </Select>
+          {this.renderBidirectionToggle()}
         </FormFieldGroup>
       </div>
     )
@@ -138,6 +148,21 @@ export default class Icons extends Component {
           readOnly
         />
       </div>
+    )
+  }
+
+  renderBidirectionToggle () {
+    return (
+      <Checkbox
+        label={
+          <AccessibleContent alt="Render icons with right-to-left text direction">
+            RTL
+          </AccessibleContent>
+        }
+        variant="toggle"
+        size="small"
+        onChange={this.handleBidirectionToggle}
+      />
     )
   }
 
@@ -192,6 +217,7 @@ class MyIcon extends React.Component {
           name={name}
           variants={variants}
           onClick={this.handleVariantClick}
+          rtl={this.state.rtl}
         />
       </div>
     )

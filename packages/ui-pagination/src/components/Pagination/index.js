@@ -28,8 +28,8 @@ import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import IconLeft from '@instructure/ui-icons/lib/Solid/IconArrowOpenLeft'
-import IconRight from '@instructure/ui-icons/lib/Solid/IconArrowOpenRight'
+import IconStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
+import IconEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -208,9 +208,9 @@ export default class Pagination extends Component {
       >
         {this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
-          { this.showPrevButton ? this.renderArrowButton(IconLeft, this.props.labelPrev, -1) : null }
+          { this.showPrevButton ? this.renderArrowButton(IconStart, this.props.labelPrev, -1) : null }
           { this.renderPages() }
-          { this.showNextButton ? this.renderArrowButton(IconRight, this.props.labelNext, 1) : null }
+          { this.showNextButton ? this.renderArrowButton(IconEnd, this.props.labelNext, 1) : null }
         </View>
       </View>
     )
