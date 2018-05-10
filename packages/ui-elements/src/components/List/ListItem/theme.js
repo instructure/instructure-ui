@@ -45,7 +45,9 @@ export default function generator ({ borders, colors, spacing, typography }) {
     spacingMedium: spacing.medium,
     spacingLarge: spacing.large,
     spacingXLarge: spacing.xLarge,
-    spacingXXLarge: spacing.xxLarge
+    spacingXXLarge: spacing.xxLarge,
+    delimiterDashedBorder: `${borders.widthSmall} dashed ${colors.borderMedium}`,
+    delimiterSolidBorder: `${borders.widthSmall} solid ${colors.borderMedium}`
   }
 }
 

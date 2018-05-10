@@ -40,6 +40,35 @@ example: true
   <ListItem><Link href="https://www.arcmedia.com">Arc by Instructure</Link></ListItem>
 </List>
 ```
+
+### `delimiter`
+
+The `delimiter` lets you set a separator between items of the list.
+
+```js
+---
+example: true
+---
+<List delimiter="solid">
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>{lorem.sentence()}</ListItem>
+</List>
+```
+
+For a dashed line, set `delimiter` to `dashed`:
+
+```js
+---
+example: true
+---
+<List delimiter="dashed" variant="unstyled">
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>{lorem.sentence()}</ListItem>
+  <ListItem>{lorem.sentence()}</ListItem>
+</List>
+```
+
 ### `inline`
 
 The `inline` variant renders a horizontal list of items. You can separate each `ListItem` with a delimiter by setting the `delimiter` prop.

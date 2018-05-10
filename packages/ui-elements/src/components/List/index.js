@@ -59,7 +59,7 @@ export default class List extends Component {
     margin: ThemeablePropTypes.spacing,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
+    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow', 'dashed', 'solid']),
     /**
     * Sets the margin separating each ListItem.
     */

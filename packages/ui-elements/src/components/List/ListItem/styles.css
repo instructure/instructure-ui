@@ -38,6 +38,22 @@
   }
 }
 
+.delimiter--dashed {
+  list-style-position: inside;
+
+  &:not(:first-child) {
+    border-top: var(--delimiterDashedBorder);
+  }
+}
+
+.delimiter--solid {
+  list-style-position: inside;
+
+  &:not(:first-child) {
+    border-top: var(--delimiterSolidBorder);
+  }
+}
+
 .inline {
   display: inline-block;
   vertical-align: middle;

@@ -50,7 +50,7 @@ export default class ListItem extends Component {
       ['pipe'],
       'For the same functionality, use `inline` on the `variant` prop and set the `delimiter` prop to `pipe`.'
     ),
-    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow']),
+    delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow', 'dashed', 'solid']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
