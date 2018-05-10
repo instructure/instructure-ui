@@ -42,7 +42,7 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 
 /**
 ---
-category: components
+category: components/navigation
 ---
 **/
 @themeable(theme, styles)
