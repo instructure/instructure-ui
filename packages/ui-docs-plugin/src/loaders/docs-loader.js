@@ -87,7 +87,7 @@ function parseThemes (themes = [], options) {
 }
 
 function parseIcons (icons = {}) {
-  const formats = Object.keys(icons.formats).map((format) => {
+  const formats = Object.keys(icons.formats || []).map((format) => {
     return `\
 'icons-${format.toLowerCase()}': {
   format: '${format}',
