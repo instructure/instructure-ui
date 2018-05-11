@@ -41,6 +41,7 @@
     "bump": "./scripts/bump",
     "prerelease": "yarn build",
     "release": "./scripts/release",
+    "run:script": "./scripts/run-script",
     "predeploy": "yarn build:docs",
     "deploy": "./scripts/deploy -d packages/__docs__/__build__",
     "storybook": "start-storybook -p 9001 -c .storybook",

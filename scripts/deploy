@@ -28,8 +28,12 @@ while getopts ":d:" opt; do
 done
 
 echo "Deploying $GH_PAGES_CONTENT to Github pages..."
-echo "Repository: $GH_REPO..."
+echo "Repository: $GH_PAGES_REPO..."
 
 touch $GH_PAGES_CONTENT/.nojekyll
+
+if [ -n "$GH_PAGES_CNAME" ]; then
+  echo "$GH_PAGES_CNAME" >> $GH_PAGES_CONTENT/CNAME
+fi
 
 $(npm bin)/gh-pages -d "$GH_PAGES_CONTENT" -r "$GH_PAGES_REPO"

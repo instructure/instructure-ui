@@ -1,0 +1,14 @@
+#!/bin/bash
+
+set -e
+
+package=$(node -p "require('./package').name")
+version=$(node -p "require('./package').version")
+published=$(npm info $package@$version version)
+
+if [[ "$version" = "$published" ]]; then
+  echo "⚠️   $package@$version is already published!"
+else
+  echo "📦  Publishing: $package@$version (published: $published)"
+  yarn publish
+fi

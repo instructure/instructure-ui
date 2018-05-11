@@ -8,8 +8,8 @@ NPM_CLIENT=$(npm bin)/yarn
 # Make sure working directory is clean #
 ########################################
 if [ -n "$(git status --porcelain)" ]; then
-  echo Refusing to operate on unclean working directory
-  echo Use \"git status\" to see which files have been modified
+  echo "⚠️   Refusing to operate on unclean working directory"
+  echo "Use \"git status\" to see which files have been modified"
   exit 1
 fi
 
@@ -83,7 +83,7 @@ git_tag="v$next_version"
 # Check if release tag already exists #
 #######################################
 if [ "`git tag --list $git_tag`" ]; then
-  echo "Git tag for $git_tag already exists!"
+  echo "⚠️   Git tag for $git_tag already exists!"
   if [[ "$release_type" == "stable" ]]; then
     echo "Run the bump \"yarn bump\" script to update the version prior to running a stable release."
   else
@@ -99,7 +99,7 @@ echo "Npm Tag: $npm_tag ..."
 echo "Git Tag: $git_tag ..."
 echo "Next Version: $next_version ..."
 
-if [[ -z "$JENKINS" ]]; then
+if [[ -z "$POST_MERGE_BUILD" ]]; then
   read -p "Continue? [y/n]" -n 1 -r; echo
   if ! [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Stopped"
@@ -110,7 +110,7 @@ fi
 ###########################
 # Publish packages to npm #
 ###########################
-echo "Publishing $next_version with tag $npm_tag"
+echo "📦  Publishing $next_version with tag $npm_tag"
 $(npm bin)/lerna publish --skip-git --npm-tag $npm_tag --repo-version $next_version --force-publish=* --yes
 
 ##########################################

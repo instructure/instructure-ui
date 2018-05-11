@@ -4,17 +4,10 @@ set -e
 
 NPM_CLIENT=$(npm bin)/yarn
 
-if [[ $JENKINS ]]; then
-  ./scripts/set-env
-
-  echo "Npm User: $NPM_USERNAME..."
-  echo "Github User: $GH_USERNAME..."
-fi
-
 echo "Building and running tests..."
 $NPM_CLIENT run test
 
-if [[ $JENKINS ]]; then
+if [[ $POST_MERGE_BUILD ]]; then
   echo "Running the release..."
   $NPM_CLIENT run release
 fi
