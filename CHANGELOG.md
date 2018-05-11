@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.8.0"></a>
+# [5.8.0](https://github.com/instructure/instructure-ui/compare/v5.7.0...v5.8.0) (2018-05-11)
+
+
+### Bug Fixes
+
+* **build:** Fixes so that the release script doesn't fail ([72eca18](https://github.com/instructure/instructure-ui/commit/72eca18))
+* **ui-docs-plugin:** handle missing icons config ([3168132](https://github.com/instructure/instructure-ui/commit/3168132))
+
+
+### Features
+
+* **storybook,RTLaddon:** add a RTL button for switching storybook examp ([2b9e0dd](https://github.com/instructure/instructure-ui/commit/2b9e0dd))
+* **ToggleDetails:** Add focus and focused ([d80db8a](https://github.com/instructure/instructure-ui/commit/d80db8a))
+* **ui-elements:** Add a TruncateText component ([86ee847](https://github.com/instructure/instructure-ui/commit/86ee847))
+* **ui-presets:** Webpack loading for gif and otf ([ffa0fa4](https://github.com/instructure/instructure-ui/commit/ffa0fa4))
+
+
+
 <a name="5.7.0"></a>
 # [5.7.0](https://github.com/instructure/instructure-ui/compare/v5.6.0...v5.7.0) (2018-05-07)
 
