@@ -137,6 +137,7 @@
 
 .summaryText {
   min-width: 0.0625rem;
+  flex-grow: 1;
 }
 
 .positionIconAtEnd .summaryText {
