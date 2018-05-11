@@ -35,6 +35,7 @@ import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
 
 import applyVariablesToNode from './utils/applyVariablesToNode'
 import getCssText from './utils/getCssText'
+import setTextDirection from './utils/setTextDirection'
 
 import {
   registerComponentTheme,
@@ -156,6 +157,8 @@ export default function themeable (theme, styles = {}) {
       componentDidMount () {
         this.applyTheme()
 
+        setTextDirection()
+
         if (super.componentDidMount) {
           super.componentDidMount()
         }
@@ -192,6 +195,8 @@ export default function themeable (theme, styles = {}) {
           !deepEqual(getThemeFromContext(prevContext), getThemeFromContext(this.context))) {
           this.applyTheme()
         }
+
+        setTextDirection()
 
         if (super.componentDidUpdate) {
           super.componentDidUpdate(prevProps, prevState, prevContext)

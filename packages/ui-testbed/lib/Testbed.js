@@ -87,6 +87,7 @@ class Testbed {
   }
 
   setup () {
+    document.documentElement.setAttribute('dir', 'ltr')
     this.rootNode = document.createElement('div')
     document.body.appendChild(this.rootNode)
     this.disableCSSTransitions()
