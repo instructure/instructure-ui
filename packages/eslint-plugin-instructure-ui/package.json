@@ -1,7 +1,7 @@
 {
   "name": "eslint-plugin-instructure-ui",
   "private": false,
-  "version": "5.8.0",
+  "version": "5.8.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

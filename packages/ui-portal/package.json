@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-portal",
-  "version": "5.8.0",
+  "version": "5.8.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,12 +22,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.8.0",
+    "@instructure/ui-presets": "^5.8.1",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-utils": "^5.8.0",
+    "@instructure/ui-utils": "^5.8.1",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {

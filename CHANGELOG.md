@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.8.1"></a>
+## [5.8.1](https://github.com/instructure/instructure-ui/compare/v5.8.0...v5.8.1) (2018-05-11)
+
+
+### Bug Fixes
+
+* Set a default text direction to fix broken bidirectional styles ([77f6aed](https://github.com/instructure/instructure-ui/commit/77f6aed))
+
+
+
 <a name="5.8.0"></a>
 # [5.8.0](https://github.com/instructure/instructure-ui/compare/v5.7.0...v5.8.0) (2018-05-11)
 
