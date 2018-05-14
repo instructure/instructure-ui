@@ -13,9 +13,7 @@
 .content {
   box-sizing: border-box;
   flex: 1;
-  display: flex;
   min-width: 0.0625rem;
-  align-items: center;
   font-size: var(--contentFontSize);
   font-family: var(--contentFontFamily);
   font-weight: var(--contentFontWeight);
