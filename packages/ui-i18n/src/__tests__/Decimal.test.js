@@ -90,6 +90,10 @@ describe('Decimal', () => {
       expect(Decimal.parse('-12345679.09').toNumber()).to.equal(-12345679.09)
     })
 
+    it('correctly parses in progress negative numbers', () => {
+      expect(Decimal.parse('-').isNaN()).to.be.true
+    })
+
     it('correctly parses positive floats beginning with +', () => {
       expect(Decimal.parse('+12345679.09').toNumber()).to.equal(12345679.09)
     })

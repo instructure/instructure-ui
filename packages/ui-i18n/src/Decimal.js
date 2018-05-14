@@ -168,7 +168,7 @@ function _format (input, locale) {
     result = `${result}${decimal}${parts[1]}`
   }
 
-  if (isNegative) {
+  if (isNegative && result) {
     result = `-${result}`
   }
 
