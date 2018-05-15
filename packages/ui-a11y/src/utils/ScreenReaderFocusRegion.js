@@ -90,7 +90,7 @@ export default class ScreenReaderFocusRegion {
 
   handleDOMMutation = (records) => {
     records.forEach((record) => {
-      record.addedNodes.forEach((addedNode) => {
+      Array.from(record.addedNodes).forEach((addedNode) => {
         this.hideNode(addedNode)
       })
 
