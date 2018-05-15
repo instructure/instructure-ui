@@ -30,6 +30,7 @@ if (canUseDOM) {
   require('codemirror/mode/css/css')
   require('codemirror/mode/htmlmixed/htmlmixed')
   require('codemirror/mode/markdown/markdown')
+  require('codemirror/mode/yaml/yaml')
 }
 
 export default CodeMirror

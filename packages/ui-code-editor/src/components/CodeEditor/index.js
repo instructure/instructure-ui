@@ -58,7 +58,9 @@ export default class CodeEditor extends Component {
       'shell',
       'css',
       'html',
-      'markdown'
+      'markdown',
+      'yaml',
+      'yml'
     ]),
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
@@ -108,6 +110,8 @@ export default class CodeEditor extends Component {
       return 'shell'
     } else if (language === 'html') {
       return 'htmlmixed'
+    } else if (language === 'yml') {
+      return 'yaml'
     } else {
       return language
     }
