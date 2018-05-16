@@ -84,6 +84,7 @@ plugins = plugins.concat([
       'packages/ui-docs-client/**/*.js',
       'packages/ui-docs-plugin/**/*.js',
       'packages/ui-elements/src/components/ContextBox/**',
+      'packages/ui-media-player/src/**',
       'packages/ui-menu/src/utils/**',
       'packages/ui-utils/src/i18n/*.js',
       'packages/ui-utils/src/index.js',

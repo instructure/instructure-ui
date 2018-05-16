@@ -40,7 +40,6 @@ module.exports = {
     ],
     'instructure-ui': [
       '@instructure/media-capture',
-      '@instructure/ui-media-player',
       '@instructure/ui-a11y',
       '@instructure/ui-alerts',
       '@instructure/ui-billboard',
@@ -87,7 +86,6 @@ module.exports = {
     alias: {
       // set up aliases to get webpack to rebuild when we make changes to these packages
       '@instructure/media-capture$': path.resolve(__dirname, '../media-capture/src'),
-      '@instructure/ui-media-player$': path.resolve(__dirname, '../ui-media-player/src'),
       '@instructure/ui-a11y$': path.resolve(__dirname, '../ui-a11y/src/'),
       '@instructure/ui-alerts$': path.resolve(__dirname, '../ui-alerts/src/'),
       '@instructure/ui-billboard$': path.resolve(__dirname, '../ui-billboard/src/'),
@@ -115,7 +113,6 @@ module.exports = {
       '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
 
       '@instructure/media-capture/lib': path.resolve(__dirname, '../media-capture/src'),
-      '@instructure/ui-media-player/lib': path.resolve(__dirname, '../ui-media-player/src'),
       '@instructure/ui-a11y/lib': path.resolve(__dirname, '../ui-a11y/src'),
       '@instructure/ui-alerts/lib': path.resolve(__dirname, '../ui-alerts/src'),
       '@instructure/ui-billboard/lib': path.resolve(__dirname, '../ui-billboard/src'),

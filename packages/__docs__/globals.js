@@ -40,7 +40,6 @@ import * as UIForms from '@instructure/ui-forms/lib/components'
 import * as UII18n from '@instructure/ui-i18n/lib/components'
 import * as UILayout from '@instructure/ui-layout/lib/components'
 import * as MediaCapture from '@instructure/media-capture/lib/components'
-import * as UIMediaPlayer from '@instructure/ui-media-player/lib/components'
 import * as UIMenu from '@instructure/ui-menu/lib/components'
 import * as UIMotion from '@instructure/ui-motion/lib/components'
 import * as UINavigation from '@instructure/ui-navigation/lib/components'
@@ -81,7 +80,6 @@ const components = Object.assign(
   UII18n,
   UILayout,
   MediaCapture,
-  UIMediaPlayer,
   UIMenu,
   UIMotion,
   UINavigation,
