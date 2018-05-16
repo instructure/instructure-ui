@@ -132,10 +132,11 @@ describe('<Alert />', () => {
 
     testbed.render({
       liveRegion: () => liver,
+      liveRegionPoliteness: 'polite',
       transition: 'none'
     })
-
     expect(liver.innerText).to.include('Success: Sample alert text.')
+    expect(liver.getAttribute("aria-live")).to.equal('polite')
   })
 
   describe('screen reader only', () => {

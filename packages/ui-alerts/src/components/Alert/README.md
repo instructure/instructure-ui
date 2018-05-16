@@ -64,6 +64,8 @@ example: true
 </Alert>
 ```
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
+Use `liveRegionPoliteness` to choose an `aria-live` politeness setting of either `polite`
+or `assertive` (default).
 
 ```js
 ---
@@ -80,15 +82,18 @@ class Example extends React.Component {
 
     this.i = 0
     this.variants = ['info', 'success', 'warning', 'error']
+    this.politeness = ['polite', 'assertive']
   }
 
   addAlert () {
     const variant = this.variants[this.i++ % this.variants.length]
+    const politeness = Math.random() < 0.5 ? 'polite' : 'assertive'
     const alerts = [...this.state.alerts]
     const key = new Number(this.i)
     alerts.push({
       key,
       variant,
+      politeness,
       onDismiss: () => this.closeAlert(key)
     })
     this.setState({ alerts })
@@ -117,9 +122,10 @@ class Example extends React.Component {
                 closeButtonLabel="Close"
                 onDismiss={alert.onDismiss}
                 liveRegion={() => document.getElementById('flash-messages')}
+                liveRegionPoliteness={alert.politeness}
                 margin="small 0"
               >
-                This is a {alert.variant} alert
+                This is {alert.politeness === 'polite' ? 'a' : 'an'} {alert.politeness} {alert.variant} alert
               </Alert>
             </View>
           )

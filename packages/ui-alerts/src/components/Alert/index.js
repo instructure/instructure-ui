@@ -82,6 +82,10 @@ export default class Alert extends Component {
     */
     liveRegion: PropTypes.func,
     /**
+    * Choose the politeness level of screenreader alerts.
+    */
+    liveRegionPoliteness: PropTypes.oneOf(['polite', 'assertive']),
+    /**
      * If the alert should only be visible to screen readers
      */
     screenReaderOnly: PropTypes.bool,
@@ -114,7 +118,8 @@ export default class Alert extends Component {
     timeout: 0,
     transition: 'fade',
     open: true,
-    screenReaderOnly: false
+    screenReaderOnly: false,
+    liveRegionPoliteness: 'assertive'
   }
 
   constructor (props) {
@@ -200,7 +205,7 @@ export default class Alert extends Component {
     )
 
     if (liveRegion) {
-      liveRegion.setAttribute('aria-live', 'assertive')
+      liveRegion.setAttribute('aria-live', this.props.liveRegionPoliteness)
       liveRegion.setAttribute('aria-relevant', 'additions text')
       liveRegion.setAttribute('aria-atomic', 'false')
     }
