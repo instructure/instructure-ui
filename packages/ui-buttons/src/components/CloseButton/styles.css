@@ -25,35 +25,41 @@
 }
 
 .placement--end {
-  right: 0;
+  offset-inline-end: 0;
   offset-inline-start: auto;
 
   &.offset--x-small {
     offset-inline-end: var(--offsetXSmall);
+    offset-inline-start: auto;
   }
 
   &.offset--small {
     offset-inline-end: var(--offsetSmall);
+    offset-inline-start: auto;
   }
 
   &.offset--medium {
     offset-inline-end: var(--offsetMedium);
+    offset-inline-start: auto;
   }
 }
 
 .placement--start {
-  left: 0;
+  offset-inline-start: 0;
   offset-inline-end: auto;
 
   &.offset--x-small {
     offset-inline-start: var(--offsetXSmall);
+    offset-inline-end: auto;
   }
 
   &.offset--small {
     offset-inline-start: var(--offsetSmall);
+    offset-inline-end: auto;
   }
 
   &.offset--medium {
     offset-inline-start: var(--offsetMedium);
+    offset-inline-end: auto;
   }
 }

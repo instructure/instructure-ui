@@ -22,67 +22,72 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
-import warning from '@instructure/ui-utils/lib/warning'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import getTextDirection from '../../utils/getTextDirection'
 
-import { ThemeContextTypes, makeThemeContext, getThemeContext } from '../../ThemeContextTypes'
-import themeable from '../../themeable'
+import {
+  TextDirectionContextTypes,
+  makeTextDirectionContext,
+  getTextDirectionContext,
+  DIRECTION
+} from '../../TextDirectionContextTypes'
 
 /**
 ---
 category: components/utilities
 ---
 **/
-export default class ApplyTheme extends Component {
+export default class ApplyTextDirection extends Component {
   static propTypes = {
     /**
-    * set theme variables to override the defaults
+    * string 'ltr' or 'rtl' representing the document direction
     */
-    theme: PropTypes.object,
+    dir: PropTypes.oneOf(Object.values(DIRECTION)),
     /**
     * accepts only one child (children must be wrapped in a single component/element)
     */
     children: PropTypes.node,
     /**
-    * Prevent overriding this theme via a child ApplyTheme component or theme props
+    * accepts only one child (children must be wrapped in a single component/element)
     */
-    immutable: PropTypes.bool
+    as: CustomPropTypes.elementType
   }
 
   static defaultProps = {
-    immutable: false
+    as: 'span'
   }
 
-  static childContextTypes = ThemeContextTypes
+  static childContextTypes = TextDirectionContextTypes
 
-  static contextTypes = ThemeContextTypes
+  static contextTypes = TextDirectionContextTypes
 
-  static generateTheme = themeable.generateTheme
+  _defaultDirection = getTextDirection()
 
   getChildContext () {
-    let theme = this.props.theme || {}
+    return makeTextDirectionContext(this.dir)
+  }
 
-    const parentThemeContext = getThemeContext(this.context) || {}
+  get dir () {
+    const context = getTextDirectionContext(this.context) || {}
 
-    if (parentThemeContext.immutable && parentThemeContext.theme) {
-      warning(
-        !this.props.theme,
-        '[ApplyTheme] Parent theme is immutable. Cannot apply theme: %O',
-        this.props.theme
-      )
-      theme = parentThemeContext.theme
-    } else if (parentThemeContext.theme) {
-      theme = mergeDeep(parentThemeContext.theme, theme)
-    }
-
-    return makeThemeContext(theme, parentThemeContext.immutable || this.props.immutable)
+    return this.props.dir ||
+      context.dir ||
+      this._defaultDirection
   }
 
   render () {
-    return ensureSingleChild(this.props.children)
+    const ElementType = getElementType(ApplyTextDirection, this.props)
+
+    return (
+      <ElementType dir={this.dir}>
+        {this.props.children}
+      </ElementType>
+    )
   }
 }
+
+export { DIRECTION } from '../../TextDirectionContextTypes'

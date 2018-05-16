@@ -19,6 +19,14 @@ yarn add --dev @instructure/ui-i18n
 ### Components
 The `ui-i18n` package contains the following:
 - [ApplyLocale](#ApplyLocale)
+- [ApplyTextDirection](#ApplyTextDirection)
+
+### Utilities
+The `ui-i18n` package contains the following utilities:
+- [bidirectional](#bidirectional)
+- [DateTime](#DateTime)
+- [Decimal](#Decimal)
+- [Locale](#Locale)
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-i18n.svg

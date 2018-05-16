@@ -27,6 +27,7 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-i18n": "^5.9.0",
     "@instructure/ui-utils": "^5.9.0",
     "prop-types": "^15.5.10"
   },

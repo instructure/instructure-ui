@@ -22,29 +22,29 @@
  * SOFTWARE.
  */
 
-import { convertRtlShorthandCorners, convertRtlShorthandEdges } from '../convertRtlShorthand'
+import { mirrorShorthandCorners, mirrorShorthandEdges } from '../mirrorShorthand'
 
 describe('convertRtlShorthandEdges', () => {
   it('should not modify 1 value syntax', () => {
     const value = 'x-small'
-    const result = convertRtlShorthandEdges(value)
+    const result = mirrorShorthandEdges(value)
     expect(result).to.equal(value)
   })
 
   it('should not modify 2 value syntax', () => {
     const value = 'x-small xx-large'
-    const result = convertRtlShorthandEdges(value)
+    const result = mirrorShorthandEdges(value)
     expect(result).to.equal(value)
   })
 
   it('should not modify 3 value syntax', () => {
     const value = 'x-small medium x-large'
-    const result = convertRtlShorthandEdges(value)
+    const result = mirrorShorthandEdges(value)
     expect(result).to.equal(value)
   })
 
   it('should swap the second and fourth values with 4 value syntax', () => {
-    const result = convertRtlShorthandEdges('auto x-small none x-large')
+    const result = mirrorShorthandEdges('auto x-small none x-large')
     expect(result).to.equal('auto x-large none x-small')
   })
 })
@@ -52,22 +52,22 @@ describe('convertRtlShorthandEdges', () => {
 describe('convertRtlShorthandCorners', () => {
   it('should not modify 1 value syntax', () => {
     const value = 'x-small'
-    const result = convertRtlShorthandCorners(value)
+    const result = mirrorShorthandCorners(value)
     expect(result).to.equal(value)
   })
 
   it('should swap the first and second values with 2 value syntax', () => {
-    const result = convertRtlShorthandCorners('x-small xx-large')
+    const result = mirrorShorthandCorners('x-small xx-large')
     expect(result).to.equal('xx-large x-small')
   })
 
   it('should convert 3 value syntax to 4 value syntax and switch the values appropriately', () => {
-    const result = convertRtlShorthandCorners('x-small medium x-large')
+    const result = mirrorShorthandCorners('x-small medium x-large')
     expect(result).to.equal('medium x-small medium x-large')
   })
 
   it('should appropriately switch shorthand values to rtl with 4 value syntax', () => {
-    const result = convertRtlShorthandCorners('auto x-small none x-large')
+    const result = mirrorShorthandCorners('auto x-small none x-large')
     expect(result).to.equal('x-small auto x-large none')
   })
 })

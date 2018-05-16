@@ -24,6 +24,64 @@
 
 import PropTypes from 'prop-types'
 
+export const SHADOW_TYPES = {
+  resting: 'resting',
+  above: 'above',
+  topmost: 'topmost'
+}
+
+export const STACKING_TYPES = {
+  deepest: 'deepest',
+  below: 'below',
+  resting: 'resting',
+  above: 'above',
+  topmost: 'topmost'
+}
+
+export const BORDER_WIDTHS = {
+  '0': '0',
+  none: 'none',
+  small: 'small',
+  medium: 'medium',
+  large: 'large'
+}
+
+export const BORDER_RADII = {
+  '0': '0',
+  none: 'none',
+  small: 'small',
+  medium: 'medium',
+  large: 'large'
+}
+
+export const BACKGROUNDS = {
+  default: 'default',
+  inverse: 'inverse',
+  transparent: 'transparent'
+}
+
+export const SIZES = {
+  xSmall: 'x-small',
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  xLarge: 'x-large'
+}
+
+export const SPACING = {
+  '0': '0',
+  none: 'none',
+  auto: 'auto',
+  xxxSmall: 'xxx-small',
+  xxSmall: 'xx-small',
+  xSmall: 'x-small',
+  small: 'small',
+  medium: 'medium',
+  large: 'large',
+  xLarge: 'x-large',
+  xxLarge: 'xx-large'
+}
+
 /**
  * ---
  * category: utilities/themes
@@ -32,65 +90,13 @@ import PropTypes from 'prop-types'
  * @module ThemeablePropTypes
  */
 export default {
-  shadow: PropTypes.oneOf(['resting', 'above', 'topmost']),
-
-  stacking: PropTypes.oneOf(['deepest', 'below', 'resting', 'above', 'topmost']),
-
-  borderWidth: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
-  borderRadius: shorthandPropType(['0', 'none', 'small', 'medium', 'large']),
-
-  background: PropTypes.oneOf(['default', 'inverse', 'transparent']),
-
-  size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large', 'x-large']),
-
-  /**
-   *
-   * Validate spacing prop constraining it to the following enumerated values
-   *
-   *  - '0'
-   *  - 'none'
-   *  - 'auto'
-   *  - 'xxx-small'
-   *  - 'xx-small'
-   *  - 'x-small'
-   *  - 'small'
-   *  - 'medium'
-   *  - 'large'
-   *  - 'x-large'
-   *  - 'xx-large'
-   *
-   * Valid inputs include a single value or a string with CSS
-   * shorthand like syntax with a maximum of 4 values.
-   *
-   * Examples of valid inputs:
-   * 'x-small' (single value)
-   * 'small large' (CSS shorthand)
-   * '0 small large x-large' (CSS shorthand max 4 values)
-   *
-   * Examples of invalid inputs:
-   * '5px' (must be a string from the enumerated values)
-   * '0 large small 0 0' (invalid shorthand syntax w/5 values)
-   *
-   * @param {Object} props - object containing the component props
-   * @param {string} propName - name of the given prop
-   * @param {string} componentName - name of the component
-   * @param {string} location
-   * @param {string} propFullName
-   * @returns {Error} if is not one of the enumerated values or the shorthand syntax is incorrect
-   */
-  spacing: shorthandPropType([
-    '0',
-    'none',
-    'auto',
-    'xxx-small',
-    'xx-small',
-    'x-small',
-    'small',
-    'medium',
-    'large',
-    'x-large',
-    'xx-large'
-  ])
+  shadow: PropTypes.oneOf(Object.values(SHADOW_TYPES)),
+  stacking: PropTypes.oneOf(Object.values(STACKING_TYPES)),
+  borderWidth: shorthandPropType(Object.values(BORDER_WIDTHS)),
+  borderRadius: shorthandPropType(Object.values(BORDER_RADII)),
+  background: PropTypes.oneOf(Object.values(BACKGROUNDS)),
+  size: PropTypes.oneOf(Object.values(SIZES)),
+  spacing: shorthandPropType(Object.values(SPACING))
 }
 
 export function shorthandPropType (validValues) {

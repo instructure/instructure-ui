@@ -29,6 +29,9 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import getShorthandPropValue from '@instructure/ui-themeable/lib/utils/getShorthandPropValue'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-themeable/lib/utils/mirrorShorthand'
+import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
+
 
 import warning from '@instructure/ui-utils/lib/warning'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -48,6 +51,7 @@ category: components/layout
 @deprecated('5.4.0', {
   size: 'maxWidth'
 })
+@bidirectional()
 @themeable(theme, styles)
 class View extends Component {
   static propTypes = {
@@ -171,13 +175,12 @@ class View extends Component {
   }
 
   get borderStyle () {
-    const { borderRadius, borderWidth } = this.props
+    let { borderRadius, borderWidth } = this.props
 
-    // TODO: Restore once we get a fixed direction for RTL support
-    // if (dir === 'rtl') {
-    //   borderRadius = convertRtlShorthandCorners(borderRadius)
-    //   borderWidth = convertRtlShorthandEdges(borderWidth)
-    // }
+    if (this.dir === DIRECTION.rtl) {
+      borderRadius = mirrorShorthandCorners(borderRadius)
+      borderWidth = mirrorShorthandEdges(borderWidth)
+    }
 
     return {
       borderRadius: getShorthandPropValue(this.displayName, this.theme, borderRadius, 'borderRadius'),
@@ -186,13 +189,12 @@ class View extends Component {
   }
 
   get spacingStyle () {
-    const { margin, padding } = this.props
+    let { margin, padding } = this.props
 
-    // TODO: Restore once we get a fixed direction for RTL support
-    // if (dir === 'rtl') {
-    //   margin = convertRtlShorthandEdges(margin)
-    //   padding = convertRtlShorthandEdges(padding)
-    // }
+    if (this.dir === 'rtl') {
+      margin = mirrorShorthandEdges(margin)
+      padding = mirrorShorthandEdges(padding)
+    }
 
     return {
       margin: getShorthandPropValue(this.displayName, this.theme, margin, 'margin'),

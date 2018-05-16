@@ -34,13 +34,12 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import themeable from '@instructure/ui-themeable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
-
-import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -64,6 +63,7 @@ category: components/dialogs
   closeButtonVariant: true,
   applicationElement: true
 })
+@bidirectional()
 @themeable(theme, styles)
 class Tray extends Component {
   static propTypes = {
@@ -232,10 +232,6 @@ class Tray extends Component {
 
   componentDidMount () {
     this._isMounted = true
-
-    this.setState({
-      dir: getTextDirection(this._content)
-    })
   }
 
   componentWillReceiveProps (nextProps) {
@@ -254,16 +250,15 @@ class Tray extends Component {
 
   get transition () {
     const { placement, open } = this.props
-    const { dir } = this.state
 
     return classnames({
       'slide-down':
         (placement === 'top' && open) || (placement === 'bottom' && !open),
       'slide-up':
         (placement === 'bottom' && open) || (placement === 'top' && !open),
-      [`slide-${dir === 'rtl' ? 'right' : 'left'}`]:
+      [`slide-${this.dir === 'rtl' ? 'right' : 'left'}`]:
         (placement === 'start' && !open) || (placement === 'end' && open),
-      [`slide-${dir === 'rtl' ? 'left' : 'right'}`]:
+      [`slide-${this.dir === 'rtl' ? 'left' : 'right'}`]:
         (placement === 'end' && !open) || (placement === 'start' && open)
     })
   }

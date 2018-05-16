@@ -37,10 +37,10 @@ import ReactDOM from 'react-dom'
 export default function findDOMNode (el) {
   const node = typeof el === 'function' ? el() : el
 
-  if (node === window) {
-    return node
-  } else if (node === document) {
+  if (node === document) {
     return document.documentElement
+  } else if (node === window || (node && typeof node.nodeType !== 'undefined')) {
+    return node
   } else if (node) {
     return ReactDOM.findDOMNode(node) // eslint-disable-line react/no-find-dom-node
   }

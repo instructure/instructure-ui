@@ -26,6 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
+
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
@@ -40,6 +42,7 @@ category: components/utilities
   isOpen: 'open',
   onReady: 'onOpen'
 })
+@bidirectional()
 export default class Portal extends Component {
   static propTypes = {
     /**
@@ -130,6 +133,7 @@ export default class Portal extends Component {
       // Create node if it doesn't already exist
       if (!this._node) {
         this._node = document.createElement('span')
+        this._node.setAttribute('dir', this.dir)
       }
 
       // Append node to container if it isn't already

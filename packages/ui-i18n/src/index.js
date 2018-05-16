@@ -25,6 +25,7 @@
 export * from './components'
 
 /* list utils in alphabetical order */
+export bidirectional from './bidirectional'
 export DateTime from './DateTime'
 export Locale from './Locale'
 export Decimal from './Decimal'

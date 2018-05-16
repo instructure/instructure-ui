@@ -21,5 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export ApplyTextDirection from './ApplyTextDirection'
-export ApplyLocale from './ApplyLocale'
+
+/**
+ * ---
+ * category: utilities/i18n
+ * ---
+ * @module TextDirectionContextTypes
+ */
+import PropTypes from 'prop-types'
+
+const CONTEXT_KEY = '@@bidirectional'
+
+export const DIRECTION = {
+  ltr: 'ltr',
+  rtl: 'rtl'
+}
+
+/**
+ * React context types for [bidirectional](#bidirectional) components and
+ * the [ApplyTextDirection](#ApplyTextDirection) component.
+ */
+export const TextDirectionContextTypes = {
+  [CONTEXT_KEY]: PropTypes.shape({
+    dir: PropTypes.oneOf(Object.values(DIRECTION))
+  })
+}
+
+/**
+ * create direction context
+ * @param {string} dir
+ */
+export function makeTextDirectionContext (dir) {
+  return {[CONTEXT_KEY]: {
+    dir
+  }}
+}
+
+/**
+ * get a direction context from a context object
+ * @param {ReactContext} context React context object
+ * @returns {Object} a direction context object
+ */
+export function getTextDirectionContext (context) {
+  if (context) {
+    return context[CONTEXT_KEY]
+  }
+}

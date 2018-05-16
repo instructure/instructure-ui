@@ -30,6 +30,7 @@ import axe from 'react-axe'
 
 import { transform } from 'babel-standalone'
 
+import ApplyTextDirection, { DIRECTION } from '@instructure/ui-i18n/lib/components/ApplyTextDirection'
 import themeable, { ApplyTheme } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -86,7 +87,7 @@ export default class Preview extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    if (this.props.code !== prevProps.code) {
+    if (this.props.code !== prevProps.code || this.props.rtl !== prevProps.rtl) {
       this.executeCode(this.props.code)
     }
   }
@@ -121,7 +122,15 @@ export default class Preview extends Component {
     const render = (el) => {
       const { themeKey, themes } = this.context
       const theme = ApplyTheme.generateTheme(themeKey)
-      let elToRender = el
+
+      let elToRender = (
+        <ApplyTextDirection
+          dir={this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr}
+          as="div"
+        >
+          {el}
+        </ApplyTextDirection>
+      )
 
       if (themeKey && themes[themeKey]) {
         elToRender = (
@@ -165,10 +174,7 @@ export default class Preview extends Component {
     }
 
     return (
-      <div
-        className={classnames(classes)}
-        dir={(this.props.rtl) ? 'rtl' : 'ltr'}
-      >
+      <div className={classnames(classes)}>
         <div ref={(el) => { this._mountNode = el }} />
         {this.state.error && <pre className={styles.error}>{this.state.error}</pre>}
       </div>

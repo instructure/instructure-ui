@@ -21,5 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export ApplyTextDirection from './ApplyTextDirection'
-export ApplyLocale from './ApplyLocale'
+
+import React from 'react'
+import bidirectional from '../bidirectional'
+import { makeTextDirectionContext } from '../TextDirectionContextTypes'
+
+describe('@bidirectional', () => {
+  @bidirectional()
+  class BidirectionalComponent extends React.Component {
+    render () {
+      return <div>Hello World</div>
+    }
+  }
+
+  const testbed = new Testbed(<BidirectionalComponent />)
+
+  beforeEach(() => {
+    testbed.setTextDirection('ltr')
+  })
+
+  it('should take on the direction of the document by default', () => {
+    const subject = testbed.render()
+
+    expect(subject.instance().dir).to.equal('ltr')
+  })
+
+  it('should set the text direction via props', () => {
+    const subject = testbed.render({ dir: 'rtl' })
+
+    expect(subject.instance().dir).to.equal('rtl')
+  })
+
+  it('should give context preference when props and context are present', () => {
+    const context = makeTextDirectionContext('rtl')
+    const subject = testbed.render({ dir: 'ltr' }, context)
+
+    expect(subject.instance().dir).to.equal('rtl')
+  })
+})

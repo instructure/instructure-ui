@@ -30,21 +30,21 @@
  */
 
 /**
- * Convert shorthand CSS properties for edges to rtl
+ * Mirror shorthand CSS properties for bidirectional text
  *
  * Given a string representing a CSS shorthand for edges,
- * swaps the values such that 4 value syntax is rtl instead
- * of ltr.
+ * swaps the values such that 4 value syntax is RTL instead
+ * of LTR.
  *
  * See the following for further reference:
  * https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties
  *
  * @param {String} values - space delimited string values representing a CSS shorthand
- * @returns {String} a space delimited CSS shorthand string converted to rtl
+ * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-export function convertRtlShorthandEdges (values) {
+export function mirrorShorthandEdges (values) {
   if (typeof values !== 'string') {
-    return null
+    return
   }
 
   const valuesArr = values.split(' ')
@@ -68,11 +68,11 @@ export function convertRtlShorthandEdges (values) {
  * https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties
  *
  * @param {String} values - space delimited string values representing a CSS shorthand
- * @returns {String} a space delimited CSS shorthand string converted to rtl
+ * @returns {String} a space delimited CSS shorthand string converted to RTL
  */
-export function convertRtlShorthandCorners (values) {
+export function mirrorShorthandCorners (values) {
   if (typeof values !== 'string') {
-    return null
+    return
   }
 
   const valuesArr = values.split(' ')
