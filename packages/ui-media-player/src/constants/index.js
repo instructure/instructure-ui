@@ -21,16 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function generator ({ colors, borders, spacing }) {
-  return {
-    backgroundColor: colors.backgroundBrand,
-    color: colors.textLightest,
-    margin: spacing.xxSmall,
-    border: 'none',
-    padding: `0 ${spacing.small}`,
-    focusOutlineColor: colors.borderBrand,
-    focusOutlineWeight: borders.widthMedium,
-    focusBorderColor: colors.borderLightest,
-    focusBorderWeight: borders.widthSmall
-  }
-}
+export * from './screenStates'
+export * from './videoStates'

@@ -27,6 +27,8 @@ let translations = {
   ARIA_VIDEO_LABEL: 'Video Player',
   PLAYBACK_PAUSE: 'Pause',
   PLAYBACK_PLAY: 'Play',
+  FULL_SCREEN: 'Full Screen',
+  WINDOWED_SCREEN: 'Windowed Screen'
 }
 
 export const TranslationPropTypes =

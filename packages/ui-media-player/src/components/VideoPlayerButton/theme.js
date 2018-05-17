@@ -21,5 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export VideoPlayer from './VideoPlayer'
-export VideoPlayerControls from './VideoPlayerControls'
+export default function generator ({ colors, borders, spacing }) {
+  return {
+    backgroundColor: colors.backgroundBrand,
+    color: colors.textLightest,
+    margin: spacing.xxSmall,
+    borderColor: 'transparent',
+    borderWeight: borders.widthSmall,
+    padding: `0 ${spacing.small}`,
+    focusOutlineColor: colors.borderBrand,
+    focusOutlineWeight: borders.widthMedium,
+    focusBorderColor: colors.borderLightest
+  }
+}

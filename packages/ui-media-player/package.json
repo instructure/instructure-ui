@@ -32,7 +32,8 @@
     "@instructure/ui-themeable": "^5.12.0",
     "@instructure/ui-utils": "^5.12.0",
     "classnames": "^2.2.5",
-    "prop-types": "^15.6.0"
+    "prop-types": "^15.6.0",
+    "screenfull": "^3.3.2"
   },
   "devDependencies": {
     "@instructure/ui-presets": "^5.12.0",

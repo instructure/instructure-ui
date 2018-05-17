@@ -24,21 +24,22 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import * as VideoStates from './videoStates'
+import * as VideoStates from '../../constants/videoStates'
+import * as ScreenStates from '../../constants/screenStates'
 
 const VideoPlayerState = {
   state: PropTypes.shape({
     videoState: PropTypes.oneOf(Object.values(VideoStates)).isRequired,
+    screenState: PropTypes.oneOf(Object.values(ScreenStates)).isRequired,
     loadingSrc: PropTypes.bool.isRequired,
     showControls: PropTypes.bool.isRequired,
     videoId: PropTypes.string.isRequired
   }).isRequired,
   actions: PropTypes.shape({
-    play: PropTypes.func.isRequired,
-    pause: PropTypes.func.isRequired,
     seek: PropTypes.func.isRequired,
+    showControls: PropTypes.func.isRequired,
     togglePlay: PropTypes.func.isRequired,
-    showControls: PropTypes.func.isRequired
+    toggleFullScreen: PropTypes.func.isRequired
   }).isRequired
 }
 

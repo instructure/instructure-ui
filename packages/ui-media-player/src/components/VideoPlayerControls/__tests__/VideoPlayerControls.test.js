@@ -22,27 +22,27 @@
  * SOFTWARE.
  */
 import React from 'react'
+
 import VideoPlayerControls from '../index'
+import { Provider } from '../../VideoPlayer/VideoPlayerContext'
+import { PAUSED, WINDOWED_SCREEN } from '../../../constants'
 
 import styles from '../styles.css'
-
-import { Provider } from '../../VideoPlayerContext'
-import { PLAYING } from '../../videoStates'
 
 describe('<VideoPlayerControls />', () => {
   const providerState = {
     state: {
-      videoState: PLAYING,
+      videoState: PAUSED,
+      screenState: WINDOWED_SCREEN,
       loadingSrc: false,
       showControls: false,
       videoId: 'uuid-123'
     },
     actions: {
-      play: () => {},
-      pause: () => {},
       seek: () => {},
+      showControls: () => {},
       togglePlay: () => {},
-      showControls: () => {}
+      toggleFullScreen: () => {}
     }
   }
 
@@ -51,6 +51,7 @@ describe('<VideoPlayerControls />', () => {
       <VideoPlayerControls>
         <VideoPlayerControls.PlayPauseButton />
         <VideoPlayerControls.Timebar />
+        <VideoPlayerControls.FullScreenButton />
       </VideoPlayerControls>
     </Provider>
   )
@@ -107,6 +108,13 @@ describe('<VideoPlayerControls />', () => {
       but for now, below is the alternative solution
     */
 
+    /*
+      Below is a 2nd render in this `it` block. This will throw the following warning in console:
+
+      ```
+      Testbed.render called more than once in the same test for Provider !!
+      ```
+    */
     const hiddenComponent = testbed.render({ value: hidingControlsProviderState })
     expect(hiddenComponent.find(`.${styles.container}`).hasClass(styles.hidden)).to.eql(true)
   })
@@ -120,10 +128,11 @@ describe('<VideoPlayerControls />', () => {
       }
     }
     const component = testbed.render({ value: customProviderState })
-    const button = component.find('PlayPauseButton')
+    const button = component.find('PlayPauseButton').find('VideoPlayerButton')
     expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
-    expect(button.prop('variant')).to.eql(PLAYING)
-    button.simulate('click')
+    expect(button.text()).to.match(/Play/)
+    expect(button.find('IconPlay').length).to.eql(1)
+    button.click()
     expect(customProviderState.actions.togglePlay).to.have.been.called
   })
 
@@ -149,5 +158,22 @@ describe('<VideoPlayerControls />', () => {
     expect(timebar.prop('videoId')).to.eql(customProviderState.state.videoId)
     timebar.prop('onClick')(123)
     expect(customProviderState.actions.seek).to.have.been.calledWith(123)
+  })
+
+  it('renders a FullScreenButton', () => {
+    const customProviderState = {
+      ...providerState,
+      actions: {
+        ...providerState.actions,
+        toggleFullScreen: testbed.stub()
+      }
+    }
+    const component = testbed.render({ value: customProviderState })
+    const button = component.find('FullScreenButton').find('VideoPlayerButton')
+    expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
+    expect(button.text()).to.match(/Full/)
+    expect(button.find('IconFullScreen').length).to.eql(1)
+    button.click()
+    expect(customProviderState.actions.toggleFullScreen).to.have.been.called
   })
 })

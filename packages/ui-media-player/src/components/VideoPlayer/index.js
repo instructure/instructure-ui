@@ -23,22 +23,24 @@
  */
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import screenfull from 'screenfull'
 import themeable from '@instructure/ui-themeable'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
-import VideoPlayerControls from './VideoPlayerControls'
 import Loading from '../Loading'
+import VideoPlayerControls from '../VideoPlayerControls'
 import { translate } from '../../constants/translated/translations'
 import { Provider } from './VideoPlayerContext'
-
-import styles from './styles.css'
-import theme from './theme'
-
 import {
   PAUSED,
   PLAYING,
-  ENDED
-} from './videoStates'
+  ENDED,
+  WINDOWED_SCREEN,
+  FULL_SCREEN
+} from '../../constants'
+
+import styles from './styles.css'
+import theme from './theme'
 
 export const SEEK_INTERVAL_SECONDS = 5
 export const JUMP_INTERVAL_SECONDS = 30
@@ -76,22 +78,21 @@ class VideoPlayer extends Component {
         <VPC>
           <VPC.PlayPauseButton />
           <VPC.Timebar />
+          <VPC.FullScreenButton />
         </VPC>
       )
     },
     alwaysShowControls: false
   }
 
-  constructor (props) {
-    super(props)
-
-    this.video = null
-    this.state = {
-      videoState: PAUSED,
-      loadingSrc: true,
-      showControls: true,
-      videoId: generateElementId('VideoPlayer')
-    }
+  video = null
+  videoWrapper = null
+  state = {
+    videoState: PAUSED,
+    screenState: WINDOWED_SCREEN,
+    loadingSrc: true,
+    showControls: true,
+    videoId: generateElementId('VideoPlayer')
   }
 
   componentDidMount () {
@@ -99,17 +100,20 @@ class VideoPlayer extends Component {
   }
 
   componentWillUnmount () {
+    screenfull.off('change', this.updateScreenState)
     MEDIA_ELEMENT_EVENTS.forEach((evt) => {
       this.video.removeEventListener(evt, this.applyVideoProps)
     })
     // remove the video ref and stop applying video props
     this.video = null
+    this.videoWrapper = null
   }
 
   _registerEventHandlers () {
     MEDIA_ELEMENT_EVENTS.forEach((evt) => {
       this.video.addEventListener(evt, this.applyVideoProps)
     })
+    screenfull.on('change', this.updateScreenState)
   }
 
   handleKeyPress = (e) => {
@@ -130,6 +134,18 @@ class VideoPlayer extends Component {
       },
       ' ': () => {
         this.togglePlay()
+      },
+      /*
+        Bug specific to IE 11 for fullscreen keyboard shortcut.
+        onKeyDown on neither 'f' nor 'F' work, but clicking the
+        FullScreenButton works. I've also tried getting the
+        FullScreenButton's ref and invoking click() (HTML API).
+      */
+      f: () => {
+        this.toggleFullScreen()
+      },
+      F: () => {
+        this.toggleFullScreen()
       }
     }
 
@@ -174,6 +190,12 @@ class VideoPlayer extends Component {
     }
   }
 
+  toggleFullScreen = () => {
+    if (screenfull.enabled) {
+      screenfull.toggle(this.videoWrapper)
+    }
+  }
+
   seek = (time) => {
     const { duration } = this.state
     this.video.currentTime = Math.min(Math.max(0, time), duration)
@@ -204,9 +226,25 @@ class VideoPlayer extends Component {
     })
   }
 
+  updateScreenState = () => {
+    if (!this.videoWrapper) {
+      return
+    }
+
+    const screenState = screenfull.isFullscreen ? FULL_SCREEN : WINDOWED_SCREEN
+
+    this.setState({ screenState })
+  }
+
   setVideoRef = (el) => {
     if (this.video === null) {
       this.video = el
+    }
+  }
+
+  setVideoWrapperRef = (el) => {
+    if (this.videoWrapper === null) {
+      this.videoWrapper = el
     }
   }
 
@@ -220,11 +258,10 @@ class VideoPlayer extends Component {
     const { src, controls } = this.props
 
     const actions = {
-      play: this.play,
-      pause: this.pause,
       seek: this.seek,
       showControls: this.showControls,
-      togglePlay: this.togglePlay
+      togglePlay: this.togglePlay,
+      toggleFullScreen: this.toggleFullScreen
     }
 
     // default values for VideoPlayerContext
@@ -241,7 +278,8 @@ class VideoPlayer extends Component {
       onClick: this.togglePlay,
       tabIndex: 0,
       role: 'presentation',
-      'aria-label': translate('ARIA_VIDEO_LABEL')
+      'aria-label': translate('ARIA_VIDEO_LABEL'),
+      ref: this.setVideoWrapperRef
     }
 
     /* eslint-disable jsx-a11y/media-has-caption, jsx-a11y/no-noninteractive-tabindex */
@@ -266,4 +304,3 @@ class VideoPlayer extends Component {
 }
 
 export default VideoPlayer
-export { VideoPlayerControls }

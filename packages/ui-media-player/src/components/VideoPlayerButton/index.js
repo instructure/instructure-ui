@@ -21,5 +21,59 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export VideoPlayer from './VideoPlayer'
-export VideoPlayerControls from './VideoPlayerControls'
+
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import themeable from '@instructure/ui-themeable'
+
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+private: true
+---
+**/
+@themeable(theme, styles)
+class VideoPlayerButton extends Component {
+  static propTypes = {
+    /**
+     * Id of the video element. Used to ensure
+     * correct aria properties are applied.
+     */
+    videoId: PropTypes.string.isRequired,
+    forwardRef: PropTypes.func,
+    onClick: PropTypes.func,
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    forwardRef: (ref) => {},
+    onClick: (e) => {}
+  }
+
+  handleKeyDown = (e) => {
+    // prevent FF from emitting a keyboard event
+    if (e.key === ' ') {
+      e.stopPropagation()
+    }
+  }
+
+  render () {
+    const { videoId, onClick, forwardRef, children } = this.props
+
+    return (
+      <button
+        className={styles.button}
+        onClick={onClick}
+        onKeyDown={this.handleKeyDown}
+        aria-controls={videoId}
+        ref={forwardRef}
+      >
+        {children}
+      </button>
+    )
+  }
+}
+
+export default VideoPlayerButton

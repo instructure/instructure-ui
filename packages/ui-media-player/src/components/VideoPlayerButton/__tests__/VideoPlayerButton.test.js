@@ -21,25 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
-import PlayPauseButton from '../index'
 
-import {
-  PAUSED,
-  PLAYING,
-  ENDED
-} from '../../videoStates'
+import VideoPlayerButton from '../index'
 
-describe('<PlayPauseButton />', () => {
+describe('<VideoPlayerButton />', () => {
   const videoId = 'uuid-123'
-  const testbed = new Testbed(<PlayPauseButton videoId={videoId} />)
+  const testbed = new Testbed(<VideoPlayerButton videoId={videoId} />)
 
   it('should render', () => {
     expect(testbed.render()).to.be.present
   })
 
-  it('defaults to the paused variant', () => {
-    expect(testbed.render().text()).to.match(/Play/)
+  it('invokes forwardRef prop on mount', () => {
+    const forwardRef = testbed.stub()
+    testbed.render({ forwardRef })
+    expect(forwardRef).to.have.been.called
   })
 
   it('invokes onClick prop when clicked', () => {
@@ -54,37 +52,5 @@ describe('<PlayPauseButton />', () => {
     const button = testbed.render()
     button.simulate('keyDown', event)
     expect(event.stopPropagation).to.have.been.called
-  })
-
-  it('invokes forwardRef prop on mount', () => {
-    const forwardRef = testbed.stub()
-    testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
-  })
-
-  describe('variants', () => {
-    context('PAUSED', () => {
-      it('renders a play button', () => {
-        const button = testbed.render({ variant: PAUSED })
-        expect(button.text()).to.match(/Play/)
-        expect(button.find('IconPlay').length).to.eql(1)
-      })
-    })
-
-    context('ENDED', () => {
-      it('renders a play button', () => {
-        const button = testbed.render({ variant: ENDED })
-        expect(button.text()).to.match(/Play/)
-        expect(button.find('IconPlay').length).to.eql(1)
-      })
-    })
-
-    context('PLAYING', () => {
-      it('renders a pause button', () => {
-        const button = testbed.render({ variant: PLAYING })
-        expect(button.text()).to.match(/Pause/)
-        expect(button.find('IconPause').length).to.eql(1)
-      })
-    })
   })
 })

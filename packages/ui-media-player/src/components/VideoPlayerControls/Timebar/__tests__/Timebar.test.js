@@ -143,7 +143,7 @@ describe('<Timebar />', () => {
       const timebar = testbed.render({ onClick })
       timebar.setState({ hoverTime: 33 })
 
-      timebar.simulate('click')
+      timebar.click()
       expect(onClick).to.have.been.calledWith(33)
     })
   })

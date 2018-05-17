@@ -78,13 +78,9 @@ class Timebar extends Component {
     forwardRef: (ref) => { }
   }
 
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      timebarHoverTime: null,
-      timebarTooltipPosition: null
-    }
+  state = {
+    timebarHoverTime: null,
+    timebarTooltipPosition: null
   }
 
   handleTimebarScrub = (e) => {

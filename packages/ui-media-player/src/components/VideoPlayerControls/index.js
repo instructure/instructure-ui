@@ -26,10 +26,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 
-import PlayPauseButton from '../PlayPauseButton'
-import Timebar from '../Timebar'
-import { Consumer } from '../VideoPlayerContext'
+import PlayPauseButton from './PlayPauseButton'
+import Timebar from './Timebar'
+import FullScreenButton from './FullScreenButton'
+import { Consumer } from '../VideoPlayer/VideoPlayerContext'
 
+import theme from './theme'
 import styles from './styles.css'
 
 /**
@@ -37,7 +39,7 @@ import styles from './styles.css'
 parent: VideoPlayer
 ---
 **/
-@themeable({}, styles)
+@themeable(theme, styles)
 class VideoPlayerControls extends Component {
   static propTypes = {
     children: PropTypes.node
@@ -55,23 +57,9 @@ class VideoPlayerControls extends Component {
     )
   }
 
-  static PlayPauseButton = (props) => {
-    return (
-      <Consumer>
-        {({
-          state,
-          actions
-        }) => (
-          <PlayPauseButton
-            variant={state.videoState}
-            onClick={actions.togglePlay}
-            videoId={state.videoId}
-            {...props}
-          />
-        )}
-      </Consumer>
-    )
-  }
+  static PlayPauseButton = PlayPauseButton
+
+  static FullScreenButton = FullScreenButton
 
   static Timebar = (props) => {
     return (

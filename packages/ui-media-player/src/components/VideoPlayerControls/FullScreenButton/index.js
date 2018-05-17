@@ -21,88 +21,73 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
 
-import IconPlaySolid from '@instructure/ui-icons/lib/Solid/IconPlay'
-import IconPauseSolid from '@instructure/ui-icons/lib/Solid/IconPause'
+import IconFullScreenSolid from '@instructure/ui-icons/lib/Solid/IconFullScreen'
+import IconExitFullScreenSolid from '@instructure/ui-icons/lib/Solid/IconExitFullScreen'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
-import * as VideoStates from '../videoStates'
+import VideoPlayerButton from '../../VideoPlayerButton'
+import { Consumer } from '../../VideoPlayer/VideoPlayerContext'
+import { WINDOWED_SCREEN, FULL_SCREEN } from '../../../constants'
 import { translate } from '../../../constants/translated/translations'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 private: true
 ---
 **/
-@themeable(theme, styles)
-class PlayPauseButton extends Component {
+class FullScreenButton extends Component {
   static propTypes = {
-    /**
-     * Id of the video element. Used to ensure
-     * correct aria properties are applied.
-     */
-    videoId: PropTypes.string.isRequired,
-    variant: PropTypes.oneOf(Object.values(VideoStates)),
-    onClick: PropTypes.func,
     forwardRef: PropTypes.func
   }
 
   static defaultProps = {
-    variant: VideoStates.PAUSED,
-    onClick: (e) => {},
     forwardRef: (ref) => {}
   }
 
   config (variant) {
     const VARIANTS = {
-      [VideoStates.PAUSED]: {
-        label: translate('PLAYBACK_PLAY'),
-        Icon: IconPlaySolid
+      [WINDOWED_SCREEN]: {
+        label: translate('FULL_SCREEN'),
+        Icon: IconFullScreenSolid
       },
-      [VideoStates.ENDED]: {
-        label: translate('PLAYBACK_PLAY'),
-        Icon: IconPlaySolid
-      },
-      [VideoStates.PLAYING]: {
-        label: translate('PLAYBACK_PAUSE'),
-        Icon: IconPauseSolid
+      [FULL_SCREEN]: {
+        label: translate('WINDOWED_SCREEN'),
+        Icon: IconExitFullScreenSolid
       }
     }
 
     return VARIANTS[variant]
   }
 
-  handleKeyDown = (e) => {
-    // prevent FF from emitting a keyboard event
-    if (e.key === ' ') {
-      e.stopPropagation()
-    }
-  }
-
   render () {
-    const { variant, onClick, forwardRef, videoId } = this.props
-
-    const { label, Icon } = this.config(variant)
+    const { forwardRef } = this.props
 
     return (
-      <button
-        className={styles.button}
-        onClick={onClick}
-        onKeyDown={this.handleKeyDown}
-        aria-controls={videoId}
-        ref={forwardRef}
-      >
-        <ScreenReaderContent>{label}</ScreenReaderContent>
-        <Icon size="x-small" />
-      </button>
+      <Consumer>
+        {({
+          state,
+          actions
+        }) => {
+          const { label, Icon } = this.config(state.screenState)
+
+          return (
+            <VideoPlayerButton
+              videoId={state.videoId}
+              onClick={actions.toggleFullScreen}
+              forwardRef={forwardRef}
+            >
+              <ScreenReaderContent>{label}</ScreenReaderContent>
+              <Icon size="x-small" />
+            </VideoPlayerButton>
+          )
+        }}
+      </Consumer>
     )
   }
 }
 
-export default PlayPauseButton
+export default FullScreenButton

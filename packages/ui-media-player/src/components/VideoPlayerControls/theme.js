@@ -21,5 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export VideoPlayer from './VideoPlayer'
-export VideoPlayerControls from './VideoPlayerControls'
+export default function generator ({ spacing }) {
+  return {
+    controlsMargin: spacing.xxSmall
+  }
+}

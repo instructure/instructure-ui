@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export VideoPlayer from './VideoPlayer'
-export VideoPlayerControls from './VideoPlayerControls'
+export const FULL_SCREEN = 'FULL_SCREEN'
+export const WINDOWED_SCREEN = 'WINDOWED_SCREEN'

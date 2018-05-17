@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 import React from 'react'
+
 import VideoPlayer, {
   SEEK_INTERVAL_SECONDS,
   JUMP_INTERVAL_SECONDS,
   MEDIA_ELEMENT_EVENTS
 } from '../index'
-import {
-  PAUSED,
-  PLAYING
-} from '../videoStates'
+import { PAUSED, PLAYING } from '../../../constants'
 import testVideo from './fixtures/testVideo'
 
 describe('<VideoPlayer />', () => {
@@ -132,6 +130,9 @@ describe('<VideoPlayer />', () => {
 
       const timebar = controls.find('Timebar')
       expect(timebar.exists()).to.eql(true)
+
+      const fullScreenButton = controls.find('FullScreenButton')
+      expect(fullScreenButton.exists()).to.eql(true)
     })
 
     it('can render custom controls', () => {
@@ -147,7 +148,7 @@ describe('<VideoPlayer />', () => {
   it('toggles play when clicked', () => {
     const player = renderWithMockVideo()
     expect(player.state('videoState')).to.eql(PAUSED)
-    player.simulate('click')
+    player.click()
     player.instance().applyVideoProps()
     expect(player.state('videoState')).to.eql(PLAYING)
   })
@@ -195,10 +196,46 @@ describe('<VideoPlayer />', () => {
       expect(player.state('videoState')).to.eql(PAUSED)
     })
 
+    /*
+
+      Problem: https://stackoverflow.com/questions/29281986/run-a-website-in-fullscreen-mode/30970886
+      Fullscreen API: https://developer.mozilla.org/en-US/docs/Web/API/Fullscreen_API
+      Context: The Fullscreen API doesn't allow you to toggle fullscreen programmatically. If you do
+      try, it'll throw a warning:
+
+      ```Failed to execute 'requestFullscreen' on 'Element': API can only
+      be initiated by a user gesture.```
+
+      and it won't fullscreen your DOM target. This prevents me from seeing if screenState has changed.
+      screenState's value gets updated when a DOM element is being fullscreened/windowed, i.e.
+      windowed -> full screen OR full screen -> windowed.
+
+      I tried the following test:
+
+      ```
+      it('can toggle fullscreen', () => {
+        const player = renderWithMockVideo()
+        keyboardEvent(player, 'f') // TODO: also test onKeyDown 'F'
+        expect(player.state('screenState')).to.eql(FULL_SCREEN)
+        keyboardEvent(player, 'f') // TODO: also test onKeyDown 'F'
+        expect(player.state('screenState')).to.eql(WINDOWED_SCREEN)
+      })
+      ```
+    */
+
+    /*
+      Pressing 'f' or 'F' will give the following warning in the Console:
+
+      ```Failed to execute 'requestFullscreen' on 'Element': API can only
+      be initiated by a user gesture.```
+
+      However, adding 'f' and 'F' is still a valid test to see if showControls
+      have been called.
+    */
     it('shows the controls when a keybinding is activated', () => {
       const player = renderWithMockVideo()
       player.instance().showControls = testbed.stub()
-      return ['ArrowRight', 'ArrowLeft', 'PageUp', 'PageDown', ' '].forEach((key) => {
+      return ['ArrowRight', 'ArrowLeft', 'PageUp', 'PageDown', ' ', 'f', 'F'].forEach((key) => {
         player.instance().showControls.resetHistory()
         keyboardEvent(player, key)
         expect(player.instance().showControls).to.have.been.called

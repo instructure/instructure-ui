@@ -25,10 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Provider, Consumer } from '../VideoPlayerContext'
-import {
-  PAUSED,
-  PLAYING
-} from '../videoStates'
+import { PAUSED, PLAYING, WINDOWED_SCREEN } from '../../../constants'
 
 class ComponentWithConsumer extends Component {
   static propTypes = {
@@ -45,42 +42,41 @@ class ComponentWithConsumer extends Component {
 }
 
 describe('VideoPlayerContext', () => {
-  let customStub, testbed
-
   const providerState = {
     state: {
       videoState: PAUSED,
+      screenState: WINDOWED_SCREEN,
       loadingSrc: false,
       showControls: false,
       videoId: 'uuid-123'
     },
     actions: {
-      play: () => {},
-      pause: () => {},
       seek: () => {},
+      showControls: () => {},
       togglePlay: () => {},
-      showControls: () => {}
+      toggleFullScreen: () => {}
     }
   }
 
+  const testbed = new Testbed(
+    <Provider value={providerState}>
+      <ComponentWithConsumer />
+    </Provider>
+  )
+  let customStub
   beforeEach(() => {
-    customStub = sinon.stub()
+    customStub = testbed.stub()
     customStub.returns(<div />)
-    testbed = new Testbed(
-      <Provider value={providerState}>
-        <ComponentWithConsumer customRenderProp={customStub} />
-      </Provider>
-    )
   })
 
   it('should propagate providerState down to Consumer', () => {
-    testbed.render()
+    testbed.render({ children: <ComponentWithConsumer customRenderProp={customStub} /> })
     expect(customStub).to.have.been.calledWith(providerState)
   })
 
   it('rerenders everytime state changes', (done) => {
     expect(customStub).not.to.have.been.called
-    const component = testbed.render()
+    const component = testbed.render({ children: <ComponentWithConsumer customRenderProp={customStub} /> })
     expect(customStub.callCount).to.eql(1)
 
     const newState = {
