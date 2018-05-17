@@ -48,6 +48,8 @@ module.exports = function DocsLoader () {
   // eslint-disable-next-line no-undefined
   const ignore = options.ignore ? options.ignore.map(file => path.resolve(options.projectRoot, file)) : undefined
 
+  const showMenu = options.showMenu ? 'true' : 'false'
+
   globby(files, { ignore }).then((matches) => {
     const docs = matches.map((filepath) => processFile(path.resolve(options.context, filepath)))
 
@@ -67,6 +69,8 @@ module.exports = function DocsLoader () {
       )
 
       props.icons = ${icons}
+
+      props.showMenu = ${showMenu}
 
       renderClient(props, document.getElementById('app'))
     `)

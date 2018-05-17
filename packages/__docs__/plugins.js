@@ -40,6 +40,7 @@ plugins = plugins.concat([
     projectRoot,
     title: `${pkg.name} : ${pkg.description} (${pkg.version})`,
     favicon: '../../logo.png',
+    showMenu: true,
     library: {
       name: pkg.name,
       version: pkg.version,

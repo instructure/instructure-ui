@@ -67,7 +67,8 @@ export default class App extends Component {
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    library: LibraryPropType.isRequired
+    library: LibraryPropType.isRequired,
+    showMenu: PropTypes.bool
   }
 
   static defaultProps = {
@@ -75,7 +76,8 @@ export default class App extends Component {
     themes: {},
     parents: {},
     sections: {},
-    descriptions: {}
+    descriptions: {},
+    showMenu: false
   }
 
   static childContextTypes = {
@@ -84,12 +86,12 @@ export default class App extends Component {
     themeKey: PropTypes.string
   }
 
-  constructor () {
+  constructor (props) {
     super()
 
     this.state = {
       key: undefined, // eslint-disable-line no-undefined
-      showMenu: true,
+      showMenu: props.showMenu,
       trayOverlay: false,
       themeKey: undefined // eslint-disable-line no-undefined
     }
@@ -330,7 +332,8 @@ export default class App extends Component {
     }
     const {
       name,
-      version
+      version,
+      repository
     } = this.props.library
     return (
       <div className={classnames(classes)}>
@@ -392,7 +395,7 @@ export default class App extends Component {
             </View>
           </DrawerContent>
         </DrawerLayout>
-        <GithubCorner href="https://www.github.com/instructure/instructure-ui" />
+        { repository && <GithubCorner href={repository} /> }
       </div>
     )
   }
