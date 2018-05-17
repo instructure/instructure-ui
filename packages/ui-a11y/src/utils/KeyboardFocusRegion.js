@@ -180,7 +180,15 @@ export default class KeyboardFocusRegion {
     }
   }
 
+  handleClick = event => {
+    this._wasDocumentClick = true
+  }
+
   handleBlur = event => {
+    if (this._wasDocumentClick) {
+      this._wasDocumentClick = false
+      return
+    }
     this._needToFocus = true
   }
 
@@ -216,6 +224,7 @@ export default class KeyboardFocusRegion {
       }
 
       if (this._options.shouldContainFocus) {
+        this._listeners.push(addEventListener(this.doc, 'click', this.handleClick, true))
         this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
 
         this._listeners.push(addEventListener(this.win, 'blur', this.handleBlur, false))
