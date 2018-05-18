@@ -32,6 +32,7 @@ describe('<ListItem />', () => {
 
   describe('when passing down props to View', () => {
     const allowedProps = {
+      padding: 'small',
       margin: 'small',
       as: 'li',
       display: View.defaultProps.display,

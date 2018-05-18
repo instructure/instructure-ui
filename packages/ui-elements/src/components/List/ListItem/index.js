@@ -58,6 +58,12 @@ export default class ListItem extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
+    /**
+    * Valid values are `0`, `none`, `xxx-small`, `xx-small`, `x-small`,
+    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+    * familiar CSS-like shorthand. For example: `padding="small x-large large"`.
+    */
+    padding: ThemeablePropTypes.spacing,
     spacing: PropTypes.oneOf([
       'xxx-small',
       'xx-small',
@@ -88,10 +94,10 @@ export default class ListItem extends Component {
 
     const classes = {
       [styles.root]: true,
-      [styles[variant]]: variant,
+      [styles.inline]: variant === 'inline',
       [styles[size]]: size,
       [styles[`delimiter--${delimiter}`]]: true,
-      [styles[`spacing--${this.props.spacing}`]]: !noSpacing
+      [styles[`spacing--${this.props.spacing}`]]: this.props.spacing && !noSpacing
     }
 
     return (
@@ -99,6 +105,7 @@ export default class ListItem extends Component {
         {...props}
         as="li"
         margin={this.props.margin}
+        padding={this.props.padding}
         className={classnames(classes)}
         elementRef={this.props.elementRef}
       >
