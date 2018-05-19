@@ -1,0 +1,8 @@
+#!/bin/bash
+
+set -e
+
+current_version=$(git describe --exact-match)
+previous_version=$(git describe --abbrev=0 --tags `git rev-list --tags --skip=1  --max-count=1`)
+issues=$(git log ${previous_version}..${current_version} | grep -Eo '([A-Z]{3,}-)([0-9]+)')
+echo $issues
