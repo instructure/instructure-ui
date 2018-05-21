@@ -210,7 +210,7 @@ example: true
       Cancel
     </Button>
     <Button variant="success">
-      <PlaceholderIcon />
+      <IconUser.Solid />
       Add user
     </Button>
   </FlexItem>
@@ -273,22 +273,22 @@ example: true
     <Flex visualDebug justifyItems="space-between">
       <FlexItem>
         <Button variant="icon">
-          <PlaceholderIcon title="Some app function" />
+          <IconUser.Solid title="Some app function" />
         </Button>
       </FlexItem>
       <FlexItem>
         <Button variant="icon">
-          <PlaceholderIcon title="Some app function" />
+          <IconUser.Solid title="Some app function" />
         </Button>
       </FlexItem>
       <FlexItem>
         <Button variant="icon">
-          <PlaceholderIcon title="Some app function" />
+          <IconUser.Solid title="Some app function" />
         </Button>
       </FlexItem>
       <FlexItem>
         <Button variant="icon">
-          <PlaceholderIcon title="Some app function" />
+          <IconUser.Solid title="Some app function" />
         </Button>
       </FlexItem>
     </Flex>

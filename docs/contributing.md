@@ -10,13 +10,26 @@ order: 1
 
 - `yarn start:watch` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser and changes to the source should auto-refresh.
 
+### Adding packages
+
+Before adding a package, create an RFC (request for comment) document by running `yarn generate:rfc`. This script
+creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review. Once the RFC is
+approved and merged you can go ahead and add your new package:
+
+1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
+2. If you will have React components in your package, add the package components directory to `packages/__docs__/components.js`.
+3. Add an alias for your package in `packages/__docs__/resolve.js`.
+3. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new package.
+4. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package and its components listed in the docs.
+5. Start making changes to your components and watch them update in the browser automatically.
+
 ### Adding components
 
 Before adding a component, create an RFC (request for comment) document by running `yarn generate:rfc`. This script
 creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review. Once the RFC is
 approved and merged you can go ahead and add your new component:
 
-1. Run `yarn generate:component` and choose a name for your component (use Pascal case, e.g. 'MyComponent').
+1. Run `yarn generate:component` and choose a name and package for your component (use Pascal case, e.g. 'MyComponent').
 2. Import/export your component in `packages/[package]src/components/index.js`.
 3. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new component.
 4. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.

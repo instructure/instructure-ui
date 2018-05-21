@@ -120,7 +120,7 @@ Linting is run as part of the build. If you use the Sublime Text, Atom, or VSCod
 
 ### Local Development with React Storybook
 
-The storybook displays component examples, documented via a `.examples.js` file in the `__tests__` directory
+The storybook displays component examples, documented via a `.examples.js` file in the `__examples__` directory
 for each component.
 
 React Storybook has some excellent tools for local development and documentation, including an HCM/background switcher,

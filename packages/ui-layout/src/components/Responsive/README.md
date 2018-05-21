@@ -69,7 +69,7 @@ example: true
       return (
         <Billboard
           message="Large breakpoint"
-          hero={<PlaceholderIcon />}
+          hero={<IconUser.Solid />}
         />
       )
     } else if (matches.includes('medium') && !matches.includes('large')) {

@@ -4503,6 +4503,21 @@ eslint-module-utils@^2.2.0:
     debug "^2.6.8"
     pkg-dir "^1.0.0"
 
+eslint-plugin-import@^2.12.0:
+  version "2.12.0"
+  resolved "https://registry.npmjs.org/eslint-plugin-import/-/eslint-plugin-import-2.12.0.tgz#dad31781292d6664b25317fd049d2e2b2f02205d"
+  dependencies:
+    contains-path "^0.1.0"
+    debug "^2.6.8"
+    doctrine "1.5.0"
+    eslint-import-resolver-node "^0.3.1"
+    eslint-module-utils "^2.2.0"
+    has "^1.0.1"
+    lodash "^4.17.4"
+    minimatch "^3.0.3"
+    read-pkg-up "^2.0.0"
+    resolve "^1.6.0"
+
 eslint-plugin-import@^2.7.0:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.11.0.tgz#15aeea37a67499d848e8e981806d4627b5503816"
@@ -4536,10 +4551,11 @@ eslint-plugin-mocha@^4.11.0:
   dependencies:
     ramda "^0.25.0"
 
-eslint-plugin-notice@^0.5.6:
-  version "0.5.6"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-notice/-/eslint-plugin-notice-0.5.6.tgz#f34bf59230d9cfe73f10810e390e439719e0e5cb"
+eslint-plugin-notice@^0.7.7:
+  version "0.7.7"
+  resolved "https://registry.npmjs.org/eslint-plugin-notice/-/eslint-plugin-notice-0.7.7.tgz#cc47d5b52b5907a23b1dcc008e69ab5607ee8789"
   dependencies:
+    find-root "^1.1.0"
     lodash ">=2.4.0"
     metric-lcs "^0.1.2"
 
@@ -5163,6 +5179,10 @@ find-parent-dir@^0.3.0:
 find-root@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/find-root/-/find-root-1.0.0.tgz#962ff211aab25c6520feeeb8d6287f8f6e95807a"
+
+find-root@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/find-root/-/find-root-1.1.0.tgz#abcfc8ba76f708c42a97b3d685b7e9450bfb9ce4"
 
 find-up@^1.0.0:
   version "1.1.2"

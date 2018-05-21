@@ -24,6 +24,7 @@
   "devDependencies": {
     "@instructure/ui-presets": "^5.8.1",
     "@instructure/ui-themes": "^5.8.1",
+    "postcss-input-range": "4.0.0",
     "react": "^0.14.9 || ^15.6.2",
     "react-dom": "^0.14.9 || ^15.6.2"
   },

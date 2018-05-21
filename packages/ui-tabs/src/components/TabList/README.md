@@ -34,7 +34,7 @@ example: true
 example: true
 ---
 <TabList defaultSelectedIndex={0}>
-  <TabPanel title={<PlaceholderIcon />}>
+  <TabPanel title={<IconUser.Solid />}>
     <Text>Hello World</Text>
   </TabPanel>
   <TabPanel title={<span><div>Stacked</div><div>{'Text divs'}</div></span>}>

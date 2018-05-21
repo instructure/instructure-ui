@@ -149,7 +149,7 @@ example: true
   <RadioInput
     label={
       <span>
-        <PlaceholderIcon />
+        <IconUser.Solid />
         <ScreenReaderContent>
           This option makes something inactive
         </ScreenReaderContent>
@@ -161,7 +161,7 @@ example: true
   <RadioInput
     label={
       <span>
-        <PlaceholderIcon />
+        <IconUser.Solid />
         <ScreenReaderContent>
           This option is an inadvisable choice
         </ScreenReaderContent>
@@ -173,7 +173,7 @@ example: true
   <RadioInput
     label={
       <span>
-        <PlaceholderIcon />
+        <IconUser.Solid />
         <ScreenReaderContent>
           This option is a bad choice
         </ScreenReaderContent>
@@ -185,7 +185,7 @@ example: true
   <RadioInput
     label={
       <span>
-        <PlaceholderIcon />
+        <IconUser.Solid />
         <ScreenReaderContent>
           This option is a good choice
         </ScreenReaderContent>

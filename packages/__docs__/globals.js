@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
 import ReactDOM from 'react-dom'
 
@@ -29,34 +28,8 @@ import lorem from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
 
-import * as UIA11y from '@instructure/ui-a11y/lib/components'
-import * as UIAlerts from '@instructure/ui-alerts/lib/components'
-import * as UIBillboard from '@instructure/ui-billboard/lib/components'
-import * as UIBreadcrumb from '@instructure/ui-breadcrumb/lib/components'
-import * as UIButtons from '@instructure/ui-buttons/lib/components'
-import * as UICodeEditor from '@instructure/ui-code-editor/lib/components'
-import * as UIElements from '@instructure/ui-elements/lib/components'
-import * as UIForms from '@instructure/ui-forms/lib/components'
-import * as UII18n from '@instructure/ui-i18n/lib/components'
-import * as UILayout from '@instructure/ui-layout/lib/components'
-import * as MediaCapture from '@instructure/media-capture/lib/components'
-import * as UIMenu from '@instructure/ui-menu/lib/components'
-import * as UIMotion from '@instructure/ui-motion/lib/components'
-import * as UINavigation from '@instructure/ui-navigation/lib/components'
-import * as UIOverlays from '@instructure/ui-overlays/lib/components'
-import * as UIPages from '@instructure/ui-pages/lib/components'
-import * as UIPagination from '@instructure/ui-pagination/lib/components'
-import * as UIPortal from '@instructure/ui-portal/lib/components'
-import * as UISVGImages from '@instructure/ui-svg-images/lib/components'
-import * as UITabs from '@instructure/ui-tabs/lib/components'
-import * as UIThemeable from '@instructure/ui-themeable/lib/components'
-import * as UIToggleDetails from '@instructure/ui-toggle-details/lib/components'
-import * as UITreeBrowser from '@instructure/ui-tree-browser/lib/components'
-
-import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
-import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
-import IconArrowOpenStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
+// eslint-plugin-import doesn't like 'import * as Components' here
+const Components = require('./components')
 
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
@@ -67,42 +40,8 @@ import avatarImage from './placeholder-avatar.jpg'
 import placeholderImage from './placeholder-image'
 import placeholderLogo from './placeholder-logo'
 
-const components = Object.assign(
-  {},
-  UIA11y,
-  UIAlerts,
-  UIBillboard,
-  UIBreadcrumb,
-  UIButtons,
-  UICodeEditor,
-  UIElements,
-  UIForms,
-  UII18n,
-  UILayout,
-  MediaCapture,
-  UIMenu,
-  UIMotion,
-  UINavigation,
-  UIOverlays,
-  UIPages,
-  UIPagination,
-  UIPortal,
-  UISVGImages,
-  UITabs,
-  UIThemeable,
-  UIToggleDetails,
-  UITreeBrowser
-)
-
-Object.keys(components).forEach((key) => {
-  global[key] = components[key]
-})
-
 const globals = {
-  PlaceholderIcon: IconUser,
-  IconPlus,
-  IconX,
-  IconArrowOpenStart,
+  ...Components,
   locales: moment.locales(),
   avatarImage,
   iconExample,
@@ -135,3 +74,5 @@ const globals = {
 Object.keys(globals).forEach((key) => {
   global[key] = globals[key]
 })
+
+export default globals

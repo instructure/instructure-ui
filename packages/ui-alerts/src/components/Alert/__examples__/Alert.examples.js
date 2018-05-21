@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import Alert from './index'
+import Alert from '../index'
 
 export const variantInfo = () => {
   return (

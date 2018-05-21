@@ -69,9 +69,9 @@ class Example extends React.Component {
     return (
       <TreeBrowser
         variant="indent"
-        collectionIcon={IconPlus}
-        collectionIconExpanded={IconX}
-        itemIcon={PlaceholderIcon}
+        collectionIcon={IconUser.Solid}
+        collectionIconExpanded={IconX.Solid}
+        itemIcon={IconUser.Solid}
         collections={{
           1: { id: 1, name: "Grade 1", collections: [2,3,6] },
           2: { id: 2, name: "Math Outcomes", collections: [4], items: [3,4], descriptor: "1 Group | 2 Outcomes" },

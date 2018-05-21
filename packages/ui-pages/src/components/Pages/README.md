@@ -247,7 +247,7 @@ class Example extends React.Component {
         variant="icon"
         onClick={this.hidePopover}
       >
-        <IconX />
+        <IconX.Solid />
         <ScreenReaderContent>Close</ScreenReaderContent>
       </Button>
     )

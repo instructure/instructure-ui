@@ -19,13 +19,8 @@ yarn add @instructure/ui-media-player
 
 ### Usage
 
-```js
----
-example: true
----
-var src = "http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4";
-
-<VideoPlayer src={src} />
+```javascript
+<VideoPlayer src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" />
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-media-player.svg

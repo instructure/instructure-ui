@@ -28,7 +28,7 @@ example: true
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <PlaceholderIcon size={size} />}
+  hero={(size) => <IconUser.Solid size={size} />}
   disabled
 />
 ```
@@ -57,14 +57,14 @@ example: true
         onClick={function () {
           alert('This Billboard was clicked!')
         }}
-        hero={(size) => <PlaceholderIcon size={size} />}
+        hero={(size) => <IconUser.Solid size={size} />}
       />
     </GridCol>
     <GridCol>
       <Billboard
         message="Click this link"
         href="http://instructure.com"
-        hero={(size) => <PlaceholderIcon size={size} />}
+        hero={(size) => <IconUser.Solid size={size} />}
       />
     </GridCol>
     <GridCol>
@@ -74,7 +74,7 @@ example: true
         onClick={function () {
           alert('This Billboard was clicked!')
         }}
-        hero={(size) => <PlaceholderIcon size={size} />}
+        hero={(size) => <IconUser.Solid size={size} />}
       />
     </GridCol>
   </GridRow>

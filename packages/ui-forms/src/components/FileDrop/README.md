@@ -72,7 +72,7 @@ example: true
           <Billboard
             size="small"
             message="Only .jpg files"
-            hero={<IconPlus />}
+            hero={<IconUser.Solid />}
           />
         }
       />
@@ -88,7 +88,7 @@ example: true
           <Billboard
             size="small"
             message="Only .png files"
-            hero={<IconPlus />}
+            hero={<IconUser.Solid />}
           />
         }
       />
@@ -104,7 +104,7 @@ example: true
           <Billboard
             size="small"
             message="All video file types"
-            hero={<IconPlus />}
+            hero={<IconUser.Solid />}
           />
         }
       />
@@ -135,7 +135,7 @@ example: true
             heading="Upload your files"
             headingLevel="h3"
             message="Allow multiple files"
-            hero={<IconPlus />}
+            hero={<IconUser.Solid />}
           />
         }
       />
@@ -150,7 +150,7 @@ example: true
             heading="Upload your file"
             message="Allow only one file"
             headingLevel="h3"
-            hero={<IconPlus />}
+            hero={<IconUser.Solid />}
           />
         }
       />

@@ -21,43 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import VideoPlayer from '../index'
 
-const path = require('path')
-
-const ENV = process.env.NODE_ENV
-const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
-
-const outputPath = path.resolve(__dirname, '__build__')
-
-module.exports = {
-  cache: DEBUG,
-  bail: !DEBUG,
-  entry: {
-    common: [
-      '@instructure/ui-polyfill-loader!',
-      'react',
-      'react-dom'
-    ],
-    globals: './globals.js',
-    components: './components.js'
-  },
-  output: {
-    path: outputPath,
-    filename: '[name].js'
-  },
-  devServer: {
-    disableHostCheck: true,
-    contentBase: outputPath,
-    host: '0.0.0.0',
-    port: 8080
-  },
-  module: {
-    rules: require('@instructure/ui-presets/webpack/module/rules')
-  },
-  plugins: require('./plugins'),
-  // eslint-disable-next-line no-undefined
-  resolve: DEBUG ? require('./resolve') : undefined,
-  // eslint-disable-next-line no-undefined
-  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
-  devtool: 'cheap-module-source-map'
-}
+export const basicUsage = () => <VideoPlayer src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" />

@@ -27,7 +27,7 @@ example: true
       }}
     >
       <Button variant="icon">
-        <PlaceholderIcon title="Edits" />
+        <IconUser.Solid title="Edits" />
       </Button>
     </Badge>
     <Badge
@@ -37,7 +37,7 @@ example: true
       }}
     >
       <Button variant="icon">
-        <PlaceholderIcon title="Edits" />
+        <IconUser.Solid title="Edits" />
       </Button>
     </Badge>
   </div>
@@ -105,42 +105,42 @@ example: true
 <div>
   <View as="div" margin="0 0 medium">
     <Badge count={21} margin="0 large 0 0" placement="top start">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="bottom start">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="bottom end">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="start center">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge count={21} placement="end center">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
   </View>
   <View as="div">
     <Badge type="notification" margin="0 large 0 0" placement="top start">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="bottom start">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="bottom end">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="start center">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
     <Badge type="notification" placement="end center">
-      <Button variant="icon"><PlaceholderIcon title="Edit page" /></Button>
+      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
     </Badge>
   </View>
 </div>

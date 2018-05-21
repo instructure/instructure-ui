@@ -19,7 +19,7 @@ initializeRTL()
 
 configure(() => {
   // Automatically import all example js files
-  const req = require.context('../packages', true,  /src\/\S+\/examples\.js$/)
+  const req = require.context('../packages', true,  /src\/\S+\.examples\.js$/)
 
   req.keys().forEach((pathToExamples) => {
     const Examples = req(pathToExamples)
@@ -37,5 +37,6 @@ function getComponentNameFromDirectory (filePath) {
   const directories = path.dirname(filePath)
     .split(path.sep)
     .filter(part => part !== '__tests__')
+    .filter(part => part !== '__examples__')
   return directories.pop()
 }

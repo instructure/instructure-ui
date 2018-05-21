@@ -53,7 +53,7 @@ plugins = plugins.concat([
         // this is usually whatever webpack entries you've defined
         js_external: [
           `${pkg.homepage}common.js`,
-          `${pkg.homepage}instructure-ui.js`,
+          `${pkg.homepage}components.js`,
           `${pkg.homepage}globals.js`
         ].join(';')
       }
@@ -70,20 +70,22 @@ plugins = plugins.concat([
     ignore: [
       '**/templates/**',
       '**/node_modules/**',
+      '**/__docs__/**',
+      '**/__examples__/**',
       '**/__svg__/**',
       '**/__testfixtures__/**',
       '**/__tests__/**',
       '**/locales/**',
+      'packages/ui-docs-client/**/*.js',
+      'packages/ui-docs-plugin/**/*.js',
       '**/src/index.js',
       '**/src/components/index.js',
       '**/src/utils/index.js',
       '**/theme.js',
-      'packages/__docs__/**',
+      'packages/media-capture/src/**',
       'packages/ui-container/**',
       'packages/ui-core/**',
       'packages/ui-core/**/*.js',
-      'packages/ui-docs-client/**/*.js',
-      'packages/ui-docs-plugin/**/*.js',
       'packages/ui-elements/src/components/ContextBox/**',
       'packages/ui-media-player/src/**',
       'packages/ui-menu/src/utils/**',
@@ -112,7 +114,7 @@ plugins = plugins.concat([
     template: './index.ejs'
   }),
   new webpack.optimize.CommonsChunkPlugin({
-    name: ['common', 'instructure-ui'].reverse(),
+    name: ['common', 'components', 'globals'].reverse(),
     minChunks: Infinity
   })
 ])

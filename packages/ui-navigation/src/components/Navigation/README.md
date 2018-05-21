@@ -31,22 +31,22 @@ example: true
         onClick={() => { this.loadSubNav('account') }}
       />
       <NavigationItem
-        icon={<PlaceholderIcon />}
+        icon={<IconUser.Solid />}
         label="Admin"
         href="#"
       />
       <NavigationItem selected
-        icon={<PlaceholderIcon />} 
+        icon={<IconUser.Solid />} 
         label="Dashboard"
         href="#"
       />
       <NavigationItem
-        icon={<Badge count={99}><PlaceholderIcon /></Badge>}
+        icon={<Badge count={99}><IconUser.Solid /></Badge>}
         label="Inbox"
         href="#"
       />
       <NavigationItem
-        icon={<PlaceholderIcon />}
+        icon={<IconUser.Solid />}
         label="Supercalifragilistic"
         href="#"
       />

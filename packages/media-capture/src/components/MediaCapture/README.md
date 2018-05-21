@@ -4,11 +4,7 @@ describes: MediaCapture
 
 *Experimental component. At this time, only __Chrome__ and __Firefox__ are supported.*
 
-```js
----
-render: false
-example: true
----
+```javascript
 class Example extends React.Component {
   constructor (props) {
     super(props)
@@ -70,6 +66,4 @@ class Example extends React.Component {
     )
   }
 }
-
-render(<Example />)
 ```

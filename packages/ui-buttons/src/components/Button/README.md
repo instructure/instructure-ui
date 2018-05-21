@@ -46,7 +46,7 @@ example: true
     Primary button
   </Button>
   <Button href="https://instructure.github.io/instructure-ui/" variant="success" margin="0 x-small 0 0">
-    <PlaceholderIcon />
+    <IconUser.Solid />
     Success button
   </Button>
   <Button variant="danger" margin="0 x-small 0 0">
@@ -56,11 +56,11 @@ example: true
     Light Button
   </Button>
   <Button variant="ghost" margin="0 x-small 0 0">
-    <IconPlus />
+    <IconPlus.Solid />
     Ghost Button
   </Button>
   <Button variant="link">
-    <PlaceholderIcon />
+    <IconUser.Solid />
     Link Button
   </Button>
 </div>
@@ -74,13 +74,13 @@ example: true
 ---
 <div>
   <Button variant="icon" margin="0 x-small 0 0">
-    <PlaceholderIcon title="Accessible Button Label" />
+    <IconUser.Solid title="Accessible Button Label" />
   </Button>
   <Button variant="circle-primary" margin="0 x-small 0 0">
-    <IconPlus title="Accessible Button Label" />
+    <IconPlus.Solid title="Accessible Button Label" />
   </Button>
   <Button variant="circle-danger">
-    <IconX title="Accessible Button Label" />
+    <IconX.Solid title="Accessible Button Label" />
   </Button>
 </div>
 ```
@@ -95,7 +95,7 @@ inverse: true
 <div>
   <Button variant="ghost-inverse" margin="0 x-small 0 0">Ghost Button</Button>
   <Button variant="icon-inverse">
-    <PlaceholderIcon title="Accessible Button Label" />
+    <IconUser.Solid title="Accessible Button Label" />
   </Button>
   <Button variant="link-inverse">Link Button</Button>
 </div>
