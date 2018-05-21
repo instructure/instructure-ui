@@ -79,9 +79,6 @@ export default class RadioInputGroup extends Component {
     children: CustomPropTypes.Children.oneOf([RadioInput]),
     variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
     size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
-    * Note: `columns` will render as `stacked` when variant is `toggle`
-    */
     layout: PropTypes.oneOf([
       'stacked',
       'columns',
@@ -176,10 +173,10 @@ export default class RadioInputGroup extends Component {
         {...omitProps(this.props, RadioInputGroup.propTypes)}
         {...pickProps(this.props, FormFieldGroup.propTypes)}
         // TODO: split out toggle variant into its own component
-        layout={(variant === 'toggle') ? 'columns' : layout}
+        layout={(layout === 'columns' && variant === 'toggle') ? 'stacked' : layout} // toggles already display in cols
         vAlign={(variant === 'toggle') ? 'middle' : 'top'}
-        rowSpacing={(variant === 'toggle') ? 'none' : 'small'}
-        colSpacing={(variant === 'toggle') ? 'none' : 'small'}
+        rowSpacing="small"
+        colSpacing={(variant === 'toggle') ? 'none' : 'small'} // keep toggles close together
         startAt={(variant === 'toggle') ? 'small' : undefined} // eslint-disable-line no-undefined
         messagesId={this._messagesId}
       >
