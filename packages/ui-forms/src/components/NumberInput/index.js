@@ -111,6 +111,12 @@ class NumberInput extends Component {
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
     /**
+     * a boolean prop to control formatting a controlled NumberInput value prop to a normalized
+     * and localized representation on each render cycle. Setting this prop to false is useful for
+     * scenarios where the user should be allowed to type naturally prior to the value being formatted.
+     */
+    formatValueOnRender: PropTypes.bool,
+    /**
     * the event may be of type blur under certain conditions
     */
     onChange: PropTypes.func,
@@ -135,6 +141,7 @@ class NumberInput extends Component {
     readOnly: false,
     layout: 'stacked',
     inputRef: function (input) {},
+    formatValueOnRender: true,
     onChange: function (event, numberAsString, parsedNumber) {},
     onKeyDown: function (event) {},
     onFocus: function (event) {},
@@ -239,6 +246,12 @@ class NumberInput extends Component {
 
   get value () {
     return this._input.value
+  }
+
+  conditionalFormat (value) {
+    return value && this.props.formatValueOnRender
+      ? Decimal.parse(value).toLocaleString(this.locale)
+      : value
   }
 
   handleRef = (element, ...args) => {
@@ -391,7 +404,7 @@ class NumberInput extends Component {
             onBlur={this.handleBlur}
             type="text"
             inputMode="numeric"
-            value={value ? Decimal.parse(value).toLocaleString(this.locale) : value}
+            value={this.conditionalFormat(value)}
             defaultValue={defaultValue ? Decimal.parse(defaultValue).toLocaleString(this.locale) : defaultValue}
             placeholder={placeholder}
             ref={this.handleRef}

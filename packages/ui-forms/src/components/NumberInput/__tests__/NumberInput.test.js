@@ -258,6 +258,29 @@ describe('<NumberInput />', () => {
 
       expect(input.node.value).to.equal('2,1')
     })
+
+    describe('conditionalFormat', () => {
+      it('formats on render when formatValueOnRender is true and value is present', () => {
+        const subject = testbed.render({ locale: 'fr', value: '7.3' })
+        const input = subject.find('input')
+
+        expect(input.node.value).to.equal('7,3')
+      })
+
+      it('does not format on render when formatValueOnRender is false', () => {
+        const subject = testbed.render({ locale: 'fr', value: '7.3', formatValueOnRender: false })
+        const input = subject.find('input')
+
+        expect(input.node.value).to.equal('7.3')
+      })
+
+      it('does not format on render when value is falsey', () => {
+        const subject = testbed.render({ locale: 'fr' })
+        const input = subject.find('input')
+
+        expect(input.node.value).to.equal('')
+      })
+    })
   })
 
   describe('onBlur formatting', () => {
