@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-elements",
-  "version": "5.8.1",
+  "version": "5.9.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,19 +22,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.8.1",
-    "@instructure/ui-themes": "^5.8.1",
+    "@instructure/ui-presets": "^5.9.0",
+    "@instructure/ui-themes": "^5.9.0",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^5.8.1",
-    "@instructure/ui-container": "^5.8.1",
-    "@instructure/ui-icons": "^5.8.1",
-    "@instructure/ui-layout": "^5.8.1",
-    "@instructure/ui-motion": "^5.8.1",
-    "@instructure/ui-themeable": "^5.8.1",
-    "@instructure/ui-utils": "^5.8.1",
+    "@instructure/ui-a11y": "^5.9.0",
+    "@instructure/ui-container": "^5.9.0",
+    "@instructure/ui-icons": "^5.9.0",
+    "@instructure/ui-layout": "^5.9.0",
+    "@instructure/ui-motion": "^5.9.0",
+    "@instructure/ui-themeable": "^5.9.0",
+    "@instructure/ui-utils": "^5.9.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   },

@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.9.0"></a>
+# [5.9.0](https://github.com/instructure/instructure-ui/compare/v5.8.1...v5.9.0) (2018-05-21)
+
+
+### Bug Fixes
+
+* **build:** Add scripts, cname, and update env vars ([576a6ca](https://github.com/instructure/instructure-ui/commit/576a6ca))
+* **Decimal:** allow in progress negative numbers ([fab4a48](https://github.com/instructure/instructure-ui/commit/fab4a48))
+* **docs:** Fix broken component examples in ie11 ([ea091ab](https://github.com/instructure/instructure-ui/commit/ea091ab))
+* **scripts:** fix bump script ([64f1eef](https://github.com/instructure/instructure-ui/commit/64f1eef))
+* **ui-a11y:** focus manager does not steal focus on document click ([0d59b0b](https://github.com/instructure/instructure-ui/commit/0d59b0b))
+* **ui-a11y:** IE11 compatibility fix ([1a03ff1](https://github.com/instructure/instructure-ui/commit/1a03ff1))
+* **ui-alerts,Alert:** remove flex rule on contents ([240ba81](https://github.com/instructure/instructure-ui/commit/240ba81))
+* **ui-pagination,Pagination:** Manage focus ([b0a3364](https://github.com/instructure/instructure-ui/commit/b0a3364))
+
+
+### Features
+
+* **ui-alerts,Alert:** make aria-live configurable ([8689784](https://github.com/instructure/instructure-ui/commit/8689784))
+* **ui-code-editor:** support yaml/yml formats ([2ffc130](https://github.com/instructure/instructure-ui/commit/2ffc130))
+* **ui-docs-client:** prop to showMenu by default ([7fb0fd5](https://github.com/instructure/instructure-ui/commit/7fb0fd5))
+* **ui-elements,List:** add line delimiters for vertical lists ([9cba13d](https://github.com/instructure/instructure-ui/commit/9cba13d))
+* **ui-elements,ListItem:** Add padding prop to ListItem ([5d866a2](https://github.com/instructure/instructure-ui/commit/5d866a2))
+* **ui-icons:** Adds closed captioning and full screen icons ([57a0abb](https://github.com/instructure/instructure-ui/commit/57a0abb))
+* **ui-icons,ui-icons-build,ui-svg-images:** RTL for icon build ([f5f40f6](https://github.com/instructure/instructure-ui/commit/f5f40f6))
+* **ui-media-player:** Add ui-media-player package ([fb5689e](https://github.com/instructure/instructure-ui/commit/fb5689e))
+* **ui-toggle-details,ToggleDetails:** allow full-width summary ([fa39e0f](https://github.com/instructure/instructure-ui/commit/fa39e0f))
+
+
+
 <a name="5.8.1"></a>
 ## [5.8.1](https://github.com/instructure/instructure-ui/compare/v5.8.0...v5.8.1) (2018-05-11)
 
