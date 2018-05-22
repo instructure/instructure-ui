@@ -87,7 +87,7 @@ class Tray extends Component {
     placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end']),
 
     /**
-     * Wheter or not the `<Tray />` is open
+     * Whether or not the `<Tray />` is open
      */
     open: PropTypes.bool,
 
@@ -108,7 +108,7 @@ class Tray extends Component {
     closeButtonRef: PropTypes.func,
 
     /**
-     * Whether focus should contained within the `<Tray/>` when it is open
+     * Whether focus should be contained within the `<Tray/>` when it is open
      */
     shouldContainFocus: PropTypes.bool,
 
