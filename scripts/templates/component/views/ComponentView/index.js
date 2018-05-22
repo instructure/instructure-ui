@@ -22,9 +22,38 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import ${COMPONENT} from '../index'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-console.log('[${COMPONENT}]: React version', React.version) // eslint-disable-line no-console
+import themeable from '@instructure/ui-themeable'
 
-export const example = () => <${COMPONENT} />
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
+class ${COMPONENT}View extends Component {
+  static propTypes = {
+    /**
+    * description of replaceMe prop
+    */
+    replaceMe: PropTypes.string
+  }
+
+  static defaultProps = {
+    replaceMe: 'hello world'
+  }
+
+  render () {
+    const { replaceMe, ...props } = this.props
+    return (
+      <div
+        {...props}
+        className={styles.root}
+      >
+        Hello World
+      </div>
+    )
+  }
+}
+
+export default ${COMPONENT}View

@@ -51,7 +51,7 @@ function parseDocs (docs, library) {
   .forEach((doc) => {
     const { category, id, parent, describes } = doc
 
-    warning((!doc.undocumented), `[${doc.srcPath}] is undocumented.`)
+    warning((!(doc.undocumented && id !== 'index')), `[${doc.srcPath}] is undocumented.`)
     warning((!docs[id]), `[${id}] is a duplicate document ID.`)
 
     if (doc.undocumented === true) return

@@ -22,9 +22,36 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import ${COMPONENT} from '../index'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-console.log('[${COMPONENT}]: React version', React.version) // eslint-disable-line no-console
+export default ${COMPONENT}Controller extends Component {
+  static propTypes = {
+    /**
+    * description of `replaceMe` prop
+    */
+    replaceMe: PropTypes.string
+  }
 
-export const example = () => <${COMPONENT} />
+  static defaultProps = {
+    replaceMe: 'hello world'
+  }
+
+  render () {
+    const { children, render = children } = this.props
+
+    if (typeof render === 'function') {
+      return render({
+        getViewProps: (props) => {
+          return {
+            /* component specific view props go here */
+            /* consumers can override them by passing in an overrides object */
+            ...props
+          }
+        }
+      })
+    } else {
+     return null
+    }
+  }
+}

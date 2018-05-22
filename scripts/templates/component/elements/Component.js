@@ -22,9 +22,41 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import ${COMPONENT} from '../index'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-console.log('[${COMPONENT}]: React version', React.version) // eslint-disable-line no-console
+import ${COMPONENT}Controller from '../controllers/${COMPONENT}Controller'
+import ${COMPONENT}View from '../views/${COMPONENT}View'
 
-export const example = () => <${COMPONENT} />
+/**
+---
+category: components
+id: ${COMPONENT}
+---
+**/
+export default ${COMPONENT} extends Component {
+  static propTypes = {
+    /**
+    * description of replaceMe prop
+    */
+    replaceMe: PropTypes.string
+  }
+
+  static defaultProps = {
+    replaceMe: 'hello world'
+  }
+
+  render () {
+    return (
+      <${COMPONENT}Controller {...this.props}>
+      {({ getViewProps }) => {
+        return (
+          <${COMPONENT}View
+            {...getViewProps(/* view prop overrides go here */)}
+          />
+        )
+      }}
+      </${COMPONENT}Controller>
+    )
+  }
+}
