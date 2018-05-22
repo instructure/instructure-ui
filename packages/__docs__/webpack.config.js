@@ -33,13 +33,13 @@ module.exports = {
   cache: DEBUG,
   bail: !DEBUG,
   entry: {
+    // Note: these entries have to keep these names so that old codepens still work
     common: [
       '@instructure/ui-polyfill-loader!',
       'react',
       'react-dom'
     ],
-    globals: './globals.js',
-    components: './components.js'
+    globals: './globals.js'
   },
   output: {
     path: outputPath,

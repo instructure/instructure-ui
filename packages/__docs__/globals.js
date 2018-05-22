@@ -28,6 +28,8 @@ import lorem from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
 
+import '@instructure/ui-themes/lib/canvas'
+
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
 
