@@ -49,12 +49,15 @@ cp -r $COMPONENT_TEMPLATE_DIR $COMPONENT_DIR
 # Export this variable so it's available in the find and sed commands below
 export COMPONENT
 
-# Update file names
-find $COMPONENT_DIR -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
-
 # Update file contents
 if [[ "$OSTYPE" == darwin* ]]; then
   find $COMPONENT_DIR -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 else
   find $COMPONENT_DIR -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 fi
+
+# Update file names
+find $COMPONENT_DIR -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+
+# Update directory names
+find $COMPONENT_DIR -depth -name 'Component*' -type d -execdir bash -c 'mv "$1" "${1//Component/$COMPONENT}"' -- {} \;

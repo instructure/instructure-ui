@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 const CATEGORY_DELIMITER = '/'
 
 module.exports = function getClientProps (docs, themes, library) {
@@ -51,10 +50,12 @@ function parseDocs (docs, library) {
   .forEach((doc) => {
     const { category, id, parent, describes } = doc
 
-    warning((!(doc.undocumented && id !== 'index')), `[${doc.srcPath}] is undocumented.`)
-    warning((!docs[id]), `[${id}] is a duplicate document ID.`)
+    if (doc.undocumented) {
+      warning((!doc.alias), `[${doc.srcPath}] is undocumented.`)
+      return
+    }
 
-    if (doc.undocumented === true) return
+    warning((!docs[id]), `[${id}] is a duplicate document ID.`)
 
     parsed.docs[id] = {
       ...doc,

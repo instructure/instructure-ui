@@ -31,19 +31,14 @@ import ${COMPONENT}View from '../views/${COMPONENT}View'
 /**
 ---
 category: components
-id: ${COMPONENT}
 ---
 **/
-export default ${COMPONENT} extends Component {
+class ${COMPONENT} extends Component {
   static propTypes = {
     /**
-    * description of replaceMe prop
+    * FIXME: description of the children prop goes here
     */
-    replaceMe: PropTypes.string
-  }
-
-  static defaultProps = {
-    replaceMe: 'hello world'
+    children: PropTypes.node
   }
 
   render () {
@@ -53,10 +48,14 @@ export default ${COMPONENT} extends Component {
         return (
           <${COMPONENT}View
             {...getViewProps(/* view prop overrides go here */)}
-          />
+          >
+            {this.props.children}
+          </${COMPONENT}View>
         )
       }}
       </${COMPONENT}Controller>
     )
   }
 }
+
+export default ${COMPONENT}

@@ -22,4 +22,9 @@
  * SOFTWARE.
  */
 
-export default './elements/${COMPONENT}'
+ /**
+ ---
+ alias: ${COMPONENT}
+ ---
+ **/
+ export default from './elements/${COMPONENT}'

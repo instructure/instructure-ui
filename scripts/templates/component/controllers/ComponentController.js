@@ -22,19 +22,20 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-export default ${COMPONENT}Controller extends Component {
+class ${COMPONENT}Controller extends Component {
   static propTypes = {
     /**
-    * description of `replaceMe` prop
-    */
-    replaceMe: PropTypes.string
-  }
-
-  static defaultProps = {
-    replaceMe: 'hello world'
+     * @param {Object} renderProps
+     * @param {Function} renderProps.getViewProps - Props to be spread onto the view element
+     */
+    children: PropTypes.func,
+    /**
+     * Identical to children
+     */
+    render: PropTypes.func,
   }
 
   render () {
@@ -55,3 +56,5 @@ export default ${COMPONENT}Controller extends Component {
     }
   }
 }
+
+export default ${COMPONENT}Controller

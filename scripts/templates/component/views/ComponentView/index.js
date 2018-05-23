@@ -30,27 +30,28 @@ import themeable from '@instructure/ui-themeable'
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+parent: ${COMPONENT}
+---
+**/
 @themeable(theme, styles)
 class ${COMPONENT}View extends Component {
   static propTypes = {
     /**
-    * description of replaceMe prop
+    * FIXME: description of the children prop goes here
     */
-    replaceMe: PropTypes.string
-  }
-
-  static defaultProps = {
-    replaceMe: 'hello world'
+    children: PropTypes.node
   }
 
   render () {
-    const { replaceMe, ...props } = this.props
+    const { children, ...props } = this.props
     return (
       <div
         {...props}
         className={styles.root}
       >
-        Hello World
+        {children}
       </div>
     )
   }
