@@ -26,7 +26,7 @@
  * ---
  * category: utilities/themes
  * ---
- * @module convertRtlShorthand
+ * @module mirrorShorthand
  */
 
 /**

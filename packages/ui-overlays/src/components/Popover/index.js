@@ -29,6 +29,7 @@ import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
@@ -44,6 +45,7 @@ import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 class PopoverTrigger extends ComponentIdentifier {
@@ -69,6 +71,7 @@ category: components/dialogs
   closeButtonRef: true,
   applicationElement: true
 })
+@bidirectional()
 class Popover extends Component {
   static Trigger = PopoverTrigger
   static Content = PopoverContent
@@ -329,8 +332,13 @@ class Popover extends Component {
   }
 
   get placement () {
-    const { shouldRenderOffscreen, placement } = this.props
-    return !this.shown && shouldRenderOffscreen ? 'offscreen' : placement
+    let { placement } = this.props
+
+    if (this.rtl) {
+      placement = mirrorHorizontalPlacement(placement, ' ')
+    }
+
+    return !this.shown && this.props.shouldRenderOffscreen ? 'offscreen' : placement
   }
 
   get shown () {
@@ -507,11 +515,13 @@ class Popover extends Component {
         display: 'block'
       }
 
+      const { placement } = this.state
+
       if (this.props.withArrow) {
         ViewElement = ContextView
         viewProps = {
           ...viewProps,
-          placement: this.state.placement
+          placement: this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
         }
       } else {
         ViewElement = View

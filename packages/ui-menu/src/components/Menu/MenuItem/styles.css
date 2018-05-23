@@ -28,8 +28,6 @@
   display: block;
 
   &.flyout {
-    padding-inline-end: var(--labelPadding);
-
     .icon {
       offset-inline-start: auto;
       offset-inline-end: var(--iconPadding);

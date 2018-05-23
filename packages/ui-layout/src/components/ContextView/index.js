@@ -31,7 +31,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import LayoutPropTypes from '../../utils/LayoutPropTypes'
-import { mirrorPlacement } from '../../utils/calculateElementPosition'
+import mirrorPlacement from '../../utils/mirrorPlacement'
 import View from '../View'
 
 import styles from './styles.css'
@@ -124,8 +124,7 @@ class ContextView extends Component {
   }
 
   get mirroredPlacement () {
-    const { placement } = this.props
-    return mirrorPlacement(placement.split(' ')).filter(value => value).join('-')
+    return mirrorPlacement(this.props.placement, '-')
   }
 
   render () {

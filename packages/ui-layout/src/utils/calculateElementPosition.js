@@ -29,6 +29,7 @@ import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
+import mirrorPlacement from './mirrorPlacement'
 
 /**
  * ---
@@ -458,18 +459,4 @@ export function parsePlacement (placement) {
 
 function formatPlacement (placement) {
   return placement.join(' ')
-}
-
-export function mirrorPlacement (placement) {
-  const [first, second] = placement
-
-  const mirror = {
-    center: 'center',
-    start: 'end',
-    end: 'start',
-    top: 'bottom',
-    bottom: 'top',
-    stretch: 'stretch'
-  }
-  return [mirror[first], second]
 }

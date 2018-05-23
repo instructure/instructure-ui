@@ -81,6 +81,14 @@ export default function bidirectional () {
           this.props.dir ||
           this._defaultDirection
       }
+
+      get rtl () {
+        return this.dir === DIRECTION.rtl
+      }
+
+      get ltr () {
+        return this.dir === DIRECTION.ltr
+      }
     }
 
     return BidirectionalComponent

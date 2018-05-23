@@ -211,4 +211,17 @@ describe('<Popover />', () => {
       expect(position.prop('offsetY')).to.equal(-2)
     })
   })
+
+  describe('rtl', () => {
+    it('mirrors the placement when rtl is set', () => {
+      const subject = testbed.render({
+        placement: 'start top',
+        dir: 'rtl'
+      })
+
+      testbed.tick()
+      const position = subject.find(Position)
+      expect(position.prop('placement')).to.equal('end top')
+    })
+  })
 })
