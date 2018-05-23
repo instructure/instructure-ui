@@ -34,6 +34,7 @@ export default MyToggleDetails = function () {
 ### Components
 The `ui-toggle-details` package contains the following:
 - [ToggleDetails](#ToggleDetails)
+- [ToggleGroup](#ToggleGroup)
 
 ### Contribute
 

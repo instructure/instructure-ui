@@ -29,9 +29,13 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-a11y": "^5.10.0",
     "@instructure/ui-buttons": "^5.10.0",
     "@instructure/ui-elements": "^5.10.0",
     "@instructure/ui-icons": "^5.10.0",
+    "@instructure/ui-layout": "^5.10.0",
+    "@instructure/ui-menu": "^5.10.0",
+    "@instructure/ui-motion": "^5.10.0",
     "@instructure/ui-themeable": "^5.10.0",
     "@instructure/ui-utils": "^5.10.0",
     "classnames": "^2.2.5",

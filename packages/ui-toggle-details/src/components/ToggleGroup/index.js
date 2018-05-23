@@ -21,5 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export ToggleDetails from './ToggleDetails'
-export ToggleGroup from './ToggleGroup'
+
+export default from './elements/ToggleGroup'
