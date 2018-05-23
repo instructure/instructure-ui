@@ -78,7 +78,7 @@
   },
   "engines": {
     "node": ">=8.6.0",
-    "yarn": ">=1.1.0"
+    "yarn": ">=1.6.0"
   },
   "standard-version": {
     "skip": {
