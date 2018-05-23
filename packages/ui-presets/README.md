@@ -106,6 +106,34 @@ module.exports = require('@instructure/ui-presets/eslint')
 module.exports = require('@instructure/ui-presets/stylelint')
 ```
 
+### Themeable Components
+
+If your application already has a babel config and webpack config,
+and it is costly to convert fully to the ui-presets, you can introduce
+themeable components incrementally by adding the appropriate loader and resolve loader
+to your existing webpack config.
+
+```js
+/* webpack.config.js */
+{
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        exclude: [/node_modules/],
+        use: [
+          { loader: 'babel-loader', options: {} },
+          'themeable-css-loader',
+          { loader: 'css-loader', options: {} },
+          { loader: 'postcss-loader', options: {} }
+        ]
+      }
+    ]
+  },
+  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader')
+}
+```
+
 [npm]: https://img.shields.io/npm/v/@instructure/ui-presets.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-presets
 
