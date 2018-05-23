@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="5.10.0"></a>
+# [5.10.0](https://github.com/instructure/instructure-ui/compare/v5.9.0...v5.10.0) (2018-05-23)
+
+
+### Bug Fixes
+
+* **docs:** Fix codepens ([0e70c81](https://github.com/instructure/instructure-ui/commit/0e70c81))
+* **eslint-plugin-instructure-ui:** Add publishConfig ([ac4640c](https://github.com/instructure/instructure-ui/commit/ac4640c))
+* **NumberInput:** formatValueOnRender prop ([e734b8a](https://github.com/instructure/instructure-ui/commit/e734b8a))
+* **scripts:** Fix generate:component script ([24f5e21](https://github.com/instructure/instructure-ui/commit/24f5e21))
+
+
+### Features
+
+* **scripts:** Update generate:component template to reflect new pattern ([69a10ce](https://github.com/instructure/instructure-ui/commit/69a10ce))
+* **ui-forms,RadioInputGroup:** let toggle support inline layout ([ca611da](https://github.com/instructure/instructure-ui/commit/ca611da))
+* **ui-i18n:** ApplyDirection and bidirectional components ([06f052b](https://github.com/instructure/instructure-ui/commit/06f052b))
+
+
+
 <a name="5.9.0"></a>
 # [5.9.0](https://github.com/instructure/instructure-ui/compare/v5.8.1...v5.9.0) (2018-05-21)
 
