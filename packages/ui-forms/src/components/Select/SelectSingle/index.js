@@ -193,9 +193,18 @@ class SelectSingle extends Component {
     const inputValue = this._input.value
     const loweredInputValue = inputValue.toLowerCase()
     const selectedOption = newSelectedOption || prevState.selectedOption
-    const match = prevState.filteredOptions.find(
-      option => option.label.toLowerCase() === loweredInputValue
-    )
+    let match
+    if (newSelectedOption) {
+      // find option with a value that matches curent selected value
+      match = prevState.filteredOptions.find(
+        option => option.value === selectedOption.value
+      )
+    } else {
+      // find option with a label that matches input's value
+      match = prevState.filteredOptions.find(
+        option => option.label.toLowerCase() === loweredInputValue
+      )
+    }
 
     if (match) {
       this._input.value = match.label
