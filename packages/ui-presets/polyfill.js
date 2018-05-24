@@ -30,5 +30,6 @@ module.exports = [
   'es6.string.starts-with',
   'es6.string.includes',
   'es7.array.includes',
-  'es6.symbol'
+  'es6.symbol',
+  'es7.object.values'
 ]

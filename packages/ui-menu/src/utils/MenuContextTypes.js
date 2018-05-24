@@ -26,6 +26,13 @@ import PropTypes from 'prop-types'
 
 const CONTEXT_KEY = '@@menu'
 
+/**
+---
+private: true
+---
+@module MenuContextTypes
+**/
+
 export const MenuContextTypes = {
   [CONTEXT_KEY]: PropTypes.shape({
     registerMenuItem: PropTypes.func,

@@ -81,20 +81,22 @@ plugins = plugins.concat([
       '**/__tests__/**',
       '**/locales/**',
       '**/theme.js',
+
       '**/src/index.js',
       '**/src/components/index.js',
       '**/src/utils/index.js',
       'packages/ui-utils/src/index.js',
       'packages/ui-utils/src/{react,dom}/index.js',
-      'packages/ui-docs-client/**/*.js',
-      'packages/ui-docs-plugin/**/*.js',
+
+      'packages/ui-docs-client/src/**',
+      'packages/ui-docs-plugin/src/**',
       'packages/media-capture/src/**',
       'packages/ui-media-player/src/**',
+
       'packages/ui-container/**',
       'packages/ui-core/**',
-      'packages/ui-core/**/*.js',
       'packages/ui-elements/src/components/ContextBox/**',
-      'packages/ui-menu/src/utils/**',
+
       'packages/ui-utils/src/i18n/*.js',
       'packages/ui-utils/src/dom/calculateElementPosition.js',
       'packages/ui-utils/src/dom/findTabbable.js',
