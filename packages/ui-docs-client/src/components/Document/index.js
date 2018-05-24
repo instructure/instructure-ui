@@ -120,7 +120,7 @@ export default class Document extends Component {
 import ${importName} from '${requirePath}'
 
 /*** CommonJS ***/
-const ${importName} = require('${requirePath}')
+const ${importName} = require('${requirePath}').default
 `
     return (
       <View margin="xx-large 0" display="block">
