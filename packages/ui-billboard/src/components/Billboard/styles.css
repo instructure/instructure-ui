@@ -4,8 +4,8 @@
   box-sizing: border-box;
   position: relative;
   font-family: var(--fontFamily);
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: auto; /* stylelint-disable-line property-blacklist */
+  margin-right: auto; /* stylelint-disable-line property-blacklist */
   text-align: center;
   display: block;
 

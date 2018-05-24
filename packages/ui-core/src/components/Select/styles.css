@@ -27,9 +27,9 @@
     border-width: var(--borderWidth);
     border-style: var(--borderStyle);
     border-top-color: var(--borderTopColor);
-    border-right-color: var(--borderRightColor);
+    border-right-color: var(--borderRightColor); /* stylelint-disable-line property-blacklist */
     border-bottom-color: var(--borderBottomColor);
-    border-left-color: var(--borderLeftColor);
+    border-left-color: var(--borderLeftColor); /* stylelint-disable-line property-blacklist */
     border-radius: var(--borderRadius);
     transition: all 0.2s ease-out;
     outline: 0.1875rem solid transparent;

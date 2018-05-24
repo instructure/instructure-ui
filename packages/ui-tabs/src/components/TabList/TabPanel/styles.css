@@ -21,8 +21,8 @@
   flex-basis: 100%;
 
   .content {
-    border-left: none;
-    border-right: none;
+    border-left: none; /* stylelint-disable-line property-blacklist */
+    border-right: none; /* stylelint-disable-line property-blacklist */
     border-bottom: none;
   }
 }

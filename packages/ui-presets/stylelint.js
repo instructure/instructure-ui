@@ -52,6 +52,33 @@ module.exports = {
     'selector-max-type': 0,
     'selector-max-universal': 0,
     'selector-no-vendor-prefix': true,
-    'selector-class-pattern': '^[a-z]+[a-zA-Z0-9\\-]*[a-zA-Z0-9]*$'
+    'selector-class-pattern': '^[a-z]+[a-zA-Z0-9\\-]*[a-zA-Z0-9]*$',
+
+    'declaration-property-value-blacklist': {
+      'text-align': [ 'left', 'right' ],
+      'float': [ 'left', 'right' ],
+      'clear': [ 'left', 'right' ]
+    },
+
+    'property-blacklist': [
+      'padding-left',
+      'padding-right',
+      'border-left',
+      'border-right',
+      'border-left-color',
+      'border-right-color',
+      'border-left-style',
+      'border-right-style',
+      'border-left-width',
+      'border-right-width',
+      'border-top-left-radius',
+      'border-top-right-radius',
+      'border-bottom-left-radius',
+      'border-bottom-right-radius',
+      'margin-left',
+      'margin-right',
+      'left',
+      'right'
+    ]
   }
 }

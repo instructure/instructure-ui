@@ -86,8 +86,8 @@
 
 .hover {
   > tbody > tr {
-    border-left: 0.1875rem solid transparent;
-    border-right: 0.1875rem solid transparent;
+    border-left: 0.1875rem solid transparent; /* stylelint-disable-line property-blacklist */
+    border-right: 0.1875rem solid transparent; /* stylelint-disable-line property-blacklist */
 
     &:hover {
       border-color: var(--hoverBorderColor);

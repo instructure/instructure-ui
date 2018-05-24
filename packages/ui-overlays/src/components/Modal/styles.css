@@ -47,8 +47,8 @@
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
+  right: 0; /* stylelint-disable-line property-blacklist */
   bottom: 0;
   overflow: auto;
   display: flex;

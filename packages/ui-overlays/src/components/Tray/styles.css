@@ -48,8 +48,8 @@
 }
 
 .placement--center {
-  left: 0;
-  right: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
+  right: 0; /* stylelint-disable-line property-blacklist */
   top: 0;
   bottom: 0;
 }

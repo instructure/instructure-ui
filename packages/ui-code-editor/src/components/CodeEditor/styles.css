@@ -53,8 +53,8 @@
   /* CURSOR */
 
   .CodeMirror-cursor {
-    border-left: 0.0625rem solid var(--cursorColor);
-    border-right: none;
+    border-left: 0.0625rem solid var(--cursorColor); /* stylelint-disable-line property-blacklist */
+    border-right: none; /* stylelint-disable-line property-blacklist */
     width: 0;
     position: absolute;
     pointer-events: none;
@@ -89,7 +89,7 @@
   }
 
   .CodeMirror .CodeMirror-secondarycursor {
-    border-left: 0.0625rem solid var(--secondaryCursorColor);
+    border-left: 0.0625rem solid var(--secondaryCursorColor); /* stylelint-disable-line property-blacklist */
   }
 
   .cm-fat-cursor-mark {
@@ -117,15 +117,15 @@
 
   .CodeMirror-rulers {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
+    right: 0; /* stylelint-disable-line property-blacklist */
     top: -50px;
     bottom: -20px;
     overflow: hidden;
   }
 
   .CodeMirror-ruler {
-    border-left: 0.0625rem solid var(--rulerColor);
+    border-left: 0.0625rem solid var(--rulerColor); /* stylelint-disable-line property-blacklist */
     top: 0;
     bottom: 0;
     position: absolute;
@@ -153,7 +153,7 @@
   .CodeMirror-scroll {
     overflow: scroll !important;
     margin-bottom: -30px;
-    margin-right: -30px;
+    margin-right: -30px; /* stylelint-disable-line property-blacklist */
     padding-bottom: 30px;
     height: 100%;
     outline: none;
@@ -162,7 +162,7 @@
 
   .CodeMirror-sizer {
     position: relative;
-    border-right: 30px solid transparent;
+    border-right: 30px solid transparent; /* stylelint-disable-line property-blacklist */
   }
 
   .CodeMirror-vscrollbar,
@@ -175,7 +175,7 @@
   }
 
   .CodeMirror-vscrollbar {
-    right: 0;
+    right: 0; /* stylelint-disable-line property-blacklist */
     top: 0;
     overflow-x: hidden;
     overflow-y: scroll;
@@ -183,32 +183,32 @@
 
   .CodeMirror-hscrollbar {
     bottom: 0;
-    left: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
     overflow-y: hidden;
     overflow-x: scroll;
   }
 
   .CodeMirror-scrollbar-filler {
-    right: 0;
+    right: 0; /* stylelint-disable-line property-blacklist */
     bottom: 0;
   }
 
   .CodeMirror-gutter-filler {
-    left: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
     bottom: 0;
   }
 
   /* GUTTER */
 
   .CodeMirror-gutters {
-    border-top-left-radius: var(--borderRadius);
-    border-bottom-left-radius: var(--borderRadius);
-    border-right: 0.0625rem solid var(--gutterBorder);
+    border-top-left-radius: var(--borderRadius); /* stylelint-disable-line property-blacklist */
+    border-bottom-left-radius: var(--borderRadius); /* stylelint-disable-line property-blacklist */
+    border-right: 0.0625rem solid var(--gutterBorder); /* stylelint-disable-line property-blacklist */
     overflow: hidden;
     background: var(--gutterBackground);
     white-space: nowrap;
     position: absolute;
-    left: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
     top: 0;
     min-height: 100%;
     z-index: calc(var(--zIndex) + 4);
@@ -217,7 +217,7 @@
   .CodeMirror-linenumber {
     padding: 0 0.1875rem 0 0.3125rem;
     min-width: 1.25rem;
-    text-align: right;
+    text-align: right; /* stylelint-disable-line declaration-property-value-blacklist */
     color: var(--lineNumberColor);
     white-space: nowrap;
   }
@@ -271,8 +271,8 @@
 
   .CodeMirror-linebackground {
     position: absolute;
-    left: 0;
-    right: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
+    right: 0; /* stylelint-disable-line property-blacklist */
     top: 0;
     bottom: 0;
     z-index: calc(var(--zIndex) + 1);
@@ -328,7 +328,7 @@
   }
 
   .cm-force-border {
-    padding-right: 0.1px;
+    padding-right: 0.1px; /* stylelint-disable-line property-blacklist */
   }
 
   @media print {
@@ -447,16 +447,16 @@
 
 .attached--top {
   :global .CodeMirror {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; /* stylelint-disable-line property-blacklist */
+    border-bottom-right-radius: 0; /* stylelint-disable-line property-blacklist */
     margin-top: 0.25rem;
   }
 }
 
 .attached--bottom {
   :global .CodeMirror {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    border-top-left-radius: 0; /* stylelint-disable-line property-blacklist */
+    border-top-right-radius: 0; /* stylelint-disable-line property-blacklist */
     margin-bottom: 0.25rem;
   }
 }

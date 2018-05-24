@@ -43,7 +43,7 @@
     content: "";
     position: absolute;
     top: -0.25rem;
-    left: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
     width: calc(100% + 0.5rem);
     height: calc(100% + 0.5rem);
     box-sizing: border-box;
@@ -61,7 +61,7 @@
   text-align: center;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
   transition: all 0.2s;
   transform: translate3d(0, 0, 0);
 }
@@ -79,7 +79,7 @@
   content: "";
   position: absolute;
   top: var(--borderWidth);
-  left: var(--borderWidth);
+  left: var(--borderWidth); /* stylelint-disable-line property-blacklist */
   height: calc(100% - (var(--borderWidth) * 2));
   width: calc(100% - (var(--borderWidth) * 2));
   background: var(--toggleBackground);

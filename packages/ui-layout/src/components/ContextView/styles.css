@@ -45,7 +45,7 @@
 
 .placement--offscreen {
   position: absolute;
-  left: -999em;
+  left: -999em; /* stylelint-disable-line property-blacklist */
 }
 
 .arrow,

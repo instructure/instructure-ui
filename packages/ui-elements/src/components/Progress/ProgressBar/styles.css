@@ -34,13 +34,13 @@
 .value {
   line-height: 1;
   box-sizing: border-box;
-  padding-left: var(--valuePadding);
+  padding-left: var(--valuePadding); /* stylelint-disable-line property-blacklist */
   flex: 0 0 5.625rem;
 }
 
 .slash {
-  margin-left: 0.1875rem;
-  margin-right: 0.1875rem;
+  margin-left: 0.1875rem; /* stylelint-disable-line property-blacklist */
+  margin-right: 0.1875rem; /* stylelint-disable-line property-blacklist */
 }
 
 .x-small {

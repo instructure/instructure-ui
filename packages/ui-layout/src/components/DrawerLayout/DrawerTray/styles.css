@@ -17,19 +17,19 @@
 }
 
 .placement--start {
-  left: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
 
   &.border {
-    border-right-width: var(--borderWidth);
+    border-right-width: var(--borderWidth); /* stylelint-disable-line property-blacklist */
     box-sizing: border-box;
   }
 }
 
 .placement--end {
-  right: 0;
+  right: 0; /* stylelint-disable-line property-blacklist */
 
   &.border {
-    border-left-width: var(--borderWidth);
+    border-left-width: var(--borderWidth); /* stylelint-disable-line property-blacklist */
     box-sizing: border-box;
   }
 }

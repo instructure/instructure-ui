@@ -4,7 +4,7 @@
   background-color: var(--backgroundColor);
   padding: var(--padding);
   position: absolute;
-  left: 0.9375rem;
+  left: 0.9375rem; /* stylelint-disable-line property-blacklist */
   top: 0.9375rem;
   text-align: center;
 }

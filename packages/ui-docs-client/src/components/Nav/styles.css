@@ -64,7 +64,7 @@
 }
 
 .categoryLink {
-  padding-left: 1rem;
+  padding-left: 1rem; /* stylelint-disable-line property-blacklist */
 
   &:first-child {
     padding-top: 0.8rem;

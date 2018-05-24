@@ -8,8 +8,8 @@
   float: none;
   top: auto;
   bottom: auto;
-  left: auto;
-  right: auto;
+  left: auto; /* stylelint-disable-line property-blacklist */
+  right: auto; /* stylelint-disable-line property-blacklist */
   line-height: normal;
   position: static;
   transform: none;
@@ -27,7 +27,7 @@
 .overlay {
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
   width: 100%;
   height: 100%;
   transition: all var(--overlayTransitionDuration);

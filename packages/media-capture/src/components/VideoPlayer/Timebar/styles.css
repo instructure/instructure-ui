@@ -35,8 +35,8 @@
   font-size: var(--timestampFontSize);
   padding: var(--timestampPadding);
   position: absolute;
-  left: 0;
-  right: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
+  right: 0; /* stylelint-disable-line property-blacklist */
   top: 0;
   bottom: 0;
   display: flex;
@@ -82,8 +82,8 @@
   border-top: var(--tooltipCaretSize) solid var(--tooltipBackgroundColor);
   width: 0;
   height: 0;
-  border-left: var(--tooltipCaretSize) solid transparent;
-  border-right: var(--tooltipCaretSize) solid transparent;
+  border-left: var(--tooltipCaretSize) solid transparent; /* stylelint-disable-line property-blacklist */
+  border-right: var(--tooltipCaretSize) solid transparent; /* stylelint-disable-line property-blacklist */
 }
 
 .tooltipLine {

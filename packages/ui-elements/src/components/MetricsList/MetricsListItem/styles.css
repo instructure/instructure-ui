@@ -7,7 +7,7 @@
   font-family: var(--fontFamily);
 
   &.start {
-    text-align: left;
+    text-align: left; /* stylelint-disable-line declaration-property-value-blacklist */
   }
 
   &.center {
@@ -15,7 +15,7 @@
   }
 
   &.end {
-    text-align: right;
+    text-align: right; /* stylelint-disable-line declaration-property-value-blacklist */
   }
 }
 

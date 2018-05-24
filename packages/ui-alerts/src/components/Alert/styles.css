@@ -29,7 +29,7 @@
   align-items: center;
   justify-content: center;
   font-size: 1.4rem;
-  border-right: var(--borderWidth) var(--borderStyle); /* or else icon looks off center */
+  border-right: var(--borderWidth) var(--borderStyle); /* stylelint-disable-line property-blacklist */
 }
 
 .closeButton {
@@ -38,7 +38,7 @@
   align-items: flex-start;
   order: 1;
   margin-top: var(--closeButtonMarginTop);
-  margin-right: var(--closeButtonMarginRight);
+  margin-right: var(--closeButtonMarginRight); /* stylelint-disable-line property-blacklist */
 }
 
 .success {
@@ -46,7 +46,7 @@
 
   .icon {
     background-color: var(--successIconBackground);
-    border-right-color: var(--successIconBackground);
+    border-right-color: var(--successIconBackground); /* stylelint-disable-line property-blacklist */
   }
 }
 
@@ -55,7 +55,7 @@
 
   .icon {
     background: var(--infoIconBackground);
-    border-right-color: var(--infoIconBackground);
+    border-right-color: var(--infoIconBackground); /* stylelint-disable-line property-blacklist */
   }
 }
 
@@ -64,7 +64,7 @@
 
   .icon {
     background: var(--dangerIconBackground);
-    border-right-color: var(--dangerIconBackground);
+    border-right-color: var(--dangerIconBackground); /* stylelint-disable-line property-blacklist */
   }
 }
 
@@ -73,6 +73,6 @@
 
   .icon {
     background: var(--warningIconBackground);
-    border-right-color: var(--warningIconBackground);
+    border-right-color: var(--warningIconBackground); /* stylelint-disable-line property-blacklist */
   }
 }

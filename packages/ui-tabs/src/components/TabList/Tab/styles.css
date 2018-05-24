@@ -32,14 +32,14 @@
   box-sizing: border-box;
   padding: 0.7em 1em;
   color: var(--simpleColor);
-  margin-right: 0.2em;
+  margin-right: 0.2em; /* stylelint-disable-line property-blacklist */
   margin-bottom: -0.0625rem; /* To overlay Tab over TabPanel top border */
   border: 0.0625rem solid transparent;
-  border-top-left-radius: 0.1875rem;
-  border-top-right-radius: 0.1875rem;
+  border-top-left-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
+  border-top-right-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
 
   &:first-of-type {
-    margin-left: 0;
+    margin-left: 0; /* stylelint-disable-line property-blacklist */
   }
 
   &:not([aria-selected]):not([aria-disabled]):hover,
@@ -81,7 +81,7 @@
     height: 0.25rem;
     width: 100%;
     position: absolute;
-    left: 0;
+    left: 0; /* stylelint-disable-line property-blacklist */
     bottom: -0.0625rem;
     opacity: 0;
   }

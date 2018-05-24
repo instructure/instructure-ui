@@ -39,8 +39,8 @@
     content: "";
     position: absolute;
     top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
     bottom: -0.25rem;
     border: var(--focusBorderWidth) var(--focusBorderStyle) var(--focusBorderColor);
     border-radius: var(--borderRadius);

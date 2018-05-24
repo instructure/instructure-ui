@@ -22,7 +22,7 @@
   display: block;
   position: absolute;
   top: 0;
-  left: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
 }
 
 .center {
@@ -32,7 +32,7 @@
   position: absolute;
   transform: translate3d(0, 0, 0);
   top: 0;
-  left: 0;
+  left: 0; /* stylelint-disable-line property-blacklist */
   height: 100%;
   width: 100%;
   border-radius: 50%;

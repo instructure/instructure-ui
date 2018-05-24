@@ -73,8 +73,8 @@
 .link-inverse {
   &.small {
     font-size: var(--smallFontSize);
-    padding-left: var(--smallPadding);
-    padding-right: var(--smallPadding);
+    padding-left: var(--smallPadding); /* stylelint-disable-line property-blacklist */
+    padding-right: var(--smallPadding); /* stylelint-disable-line property-blacklist */
 
     /* subtract the top and bottom border */
     line-height: calc(var(--smallHeight) - (var(--borderWidth) * 2));
@@ -87,8 +87,8 @@
 
   &.medium {
     font-size: var(--mediumFontSize);
-    padding-left: var(--mediumPadding);
-    padding-right: var(--mediumPadding);
+    padding-left: var(--mediumPadding); /* stylelint-disable-line property-blacklist */
+    padding-right: var(--mediumPadding); /* stylelint-disable-line property-blacklist */
 
     /* subtract the top and bottom border */
     line-height: calc(var(--mediumHeight) - (var(--borderWidth) * 2));
@@ -101,8 +101,8 @@
 
   &.large {
     font-size: var(--largeFontSize);
-    padding-left: var(--largePadding);
-    padding-right: var(--largePadding);
+    padding-left: var(--largePadding); /* stylelint-disable-line property-blacklist */
+    padding-right: var(--largePadding); /* stylelint-disable-line property-blacklist */
 
     /* subtract the top and bottom border */
     line-height: calc(var(--largeHeight) - (var(--borderWidth) * 2));
@@ -160,8 +160,8 @@
     content: "";
     position: absolute;
     top: -0.25rem;
-    left: -0.25rem;
-    right: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
     bottom: -0.25rem;
     border: var(--focusBorder);
     border-radius: calc(var(--focusBorderRadius) + 0.125rem);

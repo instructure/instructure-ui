@@ -5,11 +5,11 @@
   line-height: 1;
 
   &:first-of-type {
-    margin-left: 0;
+    margin-left: 0; /* stylelint-disable-line property-blacklist */
   }
 
   &:last-of-type {
-    margin-right: 0;
+    margin-right: 0; /* stylelint-disable-line property-blacklist */
   }
 }
 

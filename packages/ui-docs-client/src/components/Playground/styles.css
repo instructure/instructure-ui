@@ -10,8 +10,8 @@
   color: white;
   display: flex;
   justify-content: flex-end;
-  border-top-left-radius: 3px;
-  border-top-right-radius: 3px;
+  border-top-left-radius: 3px; /* stylelint-disable-line property-blacklist */
+  border-top-right-radius: 3px; /* stylelint-disable-line property-blacklist */
 }
 
 .editor {}

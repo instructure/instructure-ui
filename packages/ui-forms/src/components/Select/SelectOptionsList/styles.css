@@ -70,7 +70,7 @@
 }
 
 .icon {
-  margin-right: var(--iconPaddingEnd);
+  margin-right: var(--iconPaddingEnd); /* stylelint-disable-line property-blacklist */
 }
 
 .container {

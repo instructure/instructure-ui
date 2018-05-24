@@ -10,7 +10,7 @@
 }
 
 .cellDesc {
-  padding-left: 1rem;
+  padding-left: 1rem; /* stylelint-disable-line property-blacklist */
   font-weight: 300;
   line-height: 1.4;
 
