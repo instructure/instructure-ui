@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
-import axe from 'react-axe'
 
 import { transform } from 'babel-standalone'
 
@@ -73,16 +72,6 @@ export default class Preview extends Component {
   componentDidMount () {
     if (this.props.code) {
       this.executeCode(this.props.code)
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      _createElement = React.createElement
-
-      axe(React, ReactDOM, 1500, {
-        rules: [
-          { id: 'color-contrast', enabled: false }
-        ]
-      })
     }
   }
 

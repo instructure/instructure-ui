@@ -20,9 +20,9 @@
   "dependencies": {
     "@instructure/ui-docs-client": "^5.10.0",
     "@instructure/ui-presets": "^5.10.0",
-    "favicons-webpack-plugin": "^0.0.7",
+    "favicons-webpack-plugin": "^0.0.9",
     "globby": "^7.1.1",
-    "gray-matter": "^3.0.2",
+    "gray-matter": "^4.0.1",
     "html-webpack-plugin": "^2.29.0",
     "jsdoc-api": "^4.0.1",
     "loader-utils": "^1.1.0",

@@ -23,8 +23,9 @@
  */
 
 const path = require('path')
-const webpack = require('webpack')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const DocsPlugin = require('@instructure/ui-docs-plugin')
+const webpack = require('webpack')
 
 const ENV = process.env.NODE_ENV
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
@@ -129,16 +130,12 @@ plugins = plugins.concat([
 
 if (!DEBUG) {
   plugins = plugins.concat([
-    new webpack.optimize.UglifyJsPlugin({
+    new UglifyJsPlugin({
       sourceMap: true,
-      compressor: {
-        screw_ie8: true,
-        warnings: false
-      },
-      mangle: false,
-      output: {
-        comments: false,
-        screw_ie8: true
+      uglifyOptions: {
+        ecma: 5,
+        ie8: false,
+        safari10: true
       }
     })
   ])

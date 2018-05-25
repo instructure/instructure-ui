@@ -20,11 +20,15 @@
     "clean": "ui-build --clean"
   },
   "license": "MIT",
+  "resolve": {
+    "uglifyjs-webpack-plugin": "^1.2.5"
+  },
   "devDependencies": {
     "@instructure/ui-polyfill-loader": "^5.10.0",
     "http-server": "^0.11.1",
     "raw-loader": "^0.5.1",
     "svg-inline-loader": "^0.8.0",
+    "uglifyjs-webpack-plugin": "^1.2.5",
     "webpack": "^3.11.0"
   },
   "dependencies": {
