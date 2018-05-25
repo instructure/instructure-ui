@@ -92,9 +92,9 @@
     lodash "^4.2.0"
     to-fast-properties "^2.0.0"
 
-"@brainly/html-sketchapp@^2.0.0":
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/@brainly/html-sketchapp/-/html-sketchapp-2.0.2.tgz#a4d38fb00090fb046631ec9218647f2584ab8494"
+"@brainly/html-sketchapp@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.npmjs.org/@brainly/html-sketchapp/-/html-sketchapp-3.1.0.tgz#bfe12bc12348378e27dc3ec6c37f9d7773975677"
   dependencies:
     murmur2js "^1.0.0"
     normalize-css-color "^1.0.2"
@@ -143,7 +143,7 @@
     react-inspector "^2.2.2"
     uuid "^3.2.1"
 
-"@storybook/addon-links@3.4.5", "@storybook/addon-links@^3.4.2":
+"@storybook/addon-links@3.4.5", "@storybook/addon-links@^3.4.5":
   version "3.4.5"
   resolved "https://registry.npmjs.org/@storybook/addon-links/-/addon-links-3.4.5.tgz#c885dae976f5084faa0ae026755f2d6068da034f"
   dependencies:
@@ -152,7 +152,7 @@
     global "^4.3.2"
     prop-types "^15.6.1"
 
-"@storybook/addon-options@^3.4.2":
+"@storybook/addon-options@^3.4.5":
   version "3.4.5"
   resolved "https://registry.npmjs.org/@storybook/addon-options/-/addon-options-3.4.5.tgz#f1aeb1a8e5f9a804e4cc2b8aa86edcdf18dfe252"
   dependencies:
@@ -264,7 +264,7 @@
   dependencies:
     babel-runtime "^6.5.0"
 
-"@storybook/react@^3.4.2":
+"@storybook/react@^3.4.5":
   version "3.4.5"
   resolved "https://registry.npmjs.org/@storybook/react/-/react-3.4.5.tgz#1979423f365252cf03a4508db26b676f239c1e80"
   dependencies:
@@ -12773,11 +12773,12 @@ stealthy-require@^1.1.0:
   version "1.1.1"
   resolved "https://registry.npmjs.org/stealthy-require/-/stealthy-require-1.1.1.tgz#35b09875b4ff49f26a777e509b3090a3226bf24b"
 
-story2sketch@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/story2sketch/-/story2sketch-0.2.1.tgz#295c90745d15f52ba9043b49620cd2b88cf39f89"
+story2sketch@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.npmjs.org/story2sketch/-/story2sketch-1.0.1.tgz#352e038cc8d5d0e6daf281a4e22a95b8e59f1d10"
   dependencies:
-    "@brainly/html-sketchapp" "^2.0.0"
+    "@brainly/html-sketchapp" "^3.1.0"
+    babel-runtime "^6.26.0"
     chalk "^2.3.0"
     cosmiconfig "^4.0.0"
     find-up "^2.1.0"

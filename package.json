@@ -53,9 +53,10 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/conventional-changelog": "1.0.0",
-    "@storybook/addon-links": "^3.4.2",
-    "@storybook/addon-options": "^3.4.2",
-    "@storybook/react": "^3.4.2",
+    "@storybook/addon-links": "^3.4.5",
+    "@storybook/addon-options": "^3.4.5",
+    "@storybook/addons": "3.4.5",
+    "@storybook/react": "^3.4.5",
     "commitizen": "^2.10.1",
     "dotenv": "^5.0.1",
     "gh-pages": "^1.0.0",
@@ -68,7 +69,7 @@
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
     "standard-version": "^4.4.0",
-    "story2sketch": "^0.2.1",
+    "story2sketch": "^1.0.1",
     "storybook-addon-rtl": "^0.1.1",
     "validate-commit-msg": "2.14.0",
     "yarn": "1.7.0"

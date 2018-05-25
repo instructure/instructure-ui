@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "peerDependencies": {
-    "postcss": "^6.0.8"
+    "postcss": "^6.0.19"
   },
   "publishConfig": {
     "access": "public"
