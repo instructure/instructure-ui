@@ -107,22 +107,22 @@ cp.exec('git describe --exact-match', (err, out) => {
           SLACK_USERNAME,
           SLACK_EMOJI,
           CHANGELOG_URL,
-          SLACK_TOKEN
+          SLACK_WEBHOOK
         } = process.env
 
-        if (SLACK_CHANNEL && SLACK_USERNAME) {
+        if (SLACK_CHANNEL && SLACK_USERNAME && SLACK_WEBHOOK) {
           console.log(`Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
           const message = `PSA!\n *${pkg.name} v${pkg.version} has been published!* :party: \n ${CHANGELOG_URL} \nIssues in this release: ${issueKeys.join(', ')}`
           const payload = {
             'channel': SLACK_CHANNEL,
             'username': SLACK_USERNAME,
-            'icon_emoji': SLACK_EMOJI || ':party:',
+            'icon_emoji': SLACK_EMOJI,
             'text': message,
             'link_names': 1
           }
 
           const req = https.request({
-            path: `/services/T028ZAGUD/B46KAQ20P/${SLACK_TOKEN}`,
+            path: `/services/${SLACK_WEBHOOK}`,
             hostname: 'hooks.slack.com',
             method: 'POST'
           })
