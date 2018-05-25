@@ -2,7 +2,7 @@ FROM instructure/node:8
 
 EXPOSE 8080
 
-ENV YARN_VERSION 1.6.0-1
+ENV YARN_VERSION 1.7.0-1
 
 ## Add Yarn
 RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \

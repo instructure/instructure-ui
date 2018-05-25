@@ -51,6 +51,7 @@ module.exports = {
   },
   parser: 'babel-eslint',
   rules: {
+    'react/no-deprecated': 0,
     'react/no-find-dom-node': 0,
     'no-console': ['error', { allow: ['warn', 'error'] }],
     'no-unused-vars': [
