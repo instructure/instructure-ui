@@ -35,7 +35,10 @@ module.exports = function checkA11y (node, options = {}, done) {
     }
   }
 
-  axe.a11yCheck({ include: [node], exclude }, axeConfig, (result) => {
+  axe.run({ include: [node], exclude }, axeConfig, (err, result) => {
+    if (err) {
+      done(err)
+    }
     const violations = reject(result.violations, (violation) => {
       return (ignores.indexOf(violation.id) >= 0)
     })

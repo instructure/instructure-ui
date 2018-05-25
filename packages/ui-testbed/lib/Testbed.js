@@ -44,7 +44,7 @@ const override = function (object, methodName, extra) {
 class Testbed {
   constructor (subject) {
     this.subject = subject
-    this.sandbox = sinon.sandbox.create()
+    this.sandbox = sinon.createSandbox()
 
     beforeEach(this.setup.bind(this))
     afterEach(this.teardown.bind(this))
