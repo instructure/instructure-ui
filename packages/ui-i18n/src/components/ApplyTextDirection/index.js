@@ -48,9 +48,12 @@ export default class ApplyTextDirection extends Component {
     */
     dir: PropTypes.oneOf(Object.values(DIRECTION)),
     /**
-    * accepts only one child (children must be wrapped in a single component/element)
+    * a single child (children must be wrapped in a single component/element) or function
+    * returning a child called with the following arguments:
+    * @param {string} dir - the string value 'rtl' or 'ltr'
+    * @param {Boolean} rtl - boolean value true if the direction is 'rtl'
     */
-    children: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * accepts only one child (children must be wrapped in a single component/element)
     */
@@ -81,10 +84,14 @@ export default class ApplyTextDirection extends Component {
 
   render () {
     const ElementType = getElementType(ApplyTextDirection, this.props)
+    const { children } = this.props
 
     return (
       <ElementType dir={this.dir}>
-        {this.props.children}
+        { typeof children === 'function'
+          ? children(this.dir, this.dir === DIRECTION.rtl)
+          : children
+        }
       </ElementType>
     )
   }

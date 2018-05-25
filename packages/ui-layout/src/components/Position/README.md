@@ -2,14 +2,22 @@
 describes: Position
 ---
 
-A Position component
+A component that positions content with respect to a designated target.
+The `placement` prop indicates where the content will be placed in relation to
+the target element.
+
+### Internationalization
+`Position` placement can be internationalized for right to left languages. The
+following examples are configured utilizing the [ApplyTextDirection](#ApplyTextDirection)
+component in conjunction with the [mirrorHorizontalPlacement](#mirrorPlacement)
+utility function.
 
 ```js
 ---
 render: false
 example: true
 ---
-const fpo = lorem.paragraph()
+const fpo = lorem.sentence()
 class Example extends React.Component {
 constructor (props) {
   super(props)
@@ -51,7 +59,7 @@ handlePositionChanged = ({ placement }) => {
 };
 
 render () {
-  const { placement } = this.state
+  const { placement, adjusted } = this.state
 
   let offset = {
     x: 0,
@@ -65,25 +73,38 @@ render () {
   }
 
   return (
-    <View as="div" padding="medium" textAlign="center">
-      <Position
-        placement={placement}
-        offsetX={offset.x}
-        offsetY={offset.y}
-        onPositionChanged={this.handlePositionChanged}
-      >
-        <PositionTarget>
-          <Button variant="primary" onClick={this.handleButtonClick}>
-            Change placement
-          </Button>
-        </PositionTarget>
-        <PositionContent>
-          <ContextView placement={this.state.adjusted} maxWidth="22rem" padding="small">
-            <Heading level="h3">{placement}</Heading>
-            <p>{fpo}</p>
-          </ContextView>
-        </PositionContent>
-      </Position>
+    <View 
+      as="div"
+      margin="x-large"
+      padding="x-large"
+      textAlign="center"
+    >
+      <ApplyTextDirection>
+        {(dir, rtl) => (
+          <Position
+            placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
+            offsetX={offset.x}
+            offsetY={offset.y}
+            onPositionChanged={this.handlePositionChanged}
+          >
+            <PositionTarget>
+              <Button variant="primary" onClick={this.handleButtonClick}>
+                Change placement
+              </Button>
+            </PositionTarget>
+            <PositionContent>
+              <ContextView 
+                placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted} 
+                maxWidth="22rem" padding="small"
+              >
+                <Heading level="h3">{placement}</Heading>
+                <p>{fpo}</p>
+              </ContextView>
+            </PositionContent>
+          </Position>
+        )
+      }
+      </ApplyTextDirection>
     </View>
   )
 }
@@ -100,7 +121,7 @@ render: false
 example: true
 ---
 
-const fpo = lorem.paragraph()
+const fpo = lorem.sentence()
 class Example extends React.Component {
   constructor (props) {
     super(props)
@@ -145,7 +166,7 @@ class Example extends React.Component {
   };
 
   render () {
-    const { placement } = this.state
+    const { placement, adjusted } = this.state
 
     let offsetX = 0
     let offsetY = 0
@@ -158,35 +179,44 @@ class Example extends React.Component {
 
     return (
     <span>
-      <View as="div" padding="x-large" textAlign="center">
-        <Position
-          placement={placement}
-          offsetX={offsetX}
-          offsetY={offsetY}
-          mountNode={() => this._mountNode}
-          onPositionChanged={this.handlePositionChanged}
-        >
-          <PositionTarget>
-            <Button
-              variant="primary"
-              onClick={this.handleButtonClick}
+      <View 
+        as="div"
+        margin="x-large"
+        padding="x-large"
+        textAlign="center"
+      >
+        <ApplyTextDirection>
+          {(dir, rtl) => (
+            <Position
+              placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
+              offsetX={offsetX}
+              offsetY={offsetY}
+              mountNode={() => this._mountNode}
+              onPositionChanged={this.handlePositionChanged}
             >
-              Change placement
-            </Button>
-          </PositionTarget>
-          <PositionContent>
-            <ContextView
-              placement={this.state.adjusted}
-              maxWidth="20rem"
-              padding="small"
-            >
-              <Heading level="h3">{placement}</Heading>
-              <p>
-                {fpo}
-              </p>
-            </ContextView>
-          </PositionContent>
-        </Position>
+              <PositionTarget>
+                <Button
+                  variant="primary"
+                  onClick={this.handleButtonClick}
+                >
+                  Change placement
+                </Button>
+              </PositionTarget>
+              <PositionContent>
+                <ContextView
+                  placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
+                  maxWidth="20rem"
+                  padding="small"
+                >
+                  <Heading level="h3">{placement}</Heading>
+                  <p>
+                    {fpo}
+                  </p>
+                </ContextView>
+              </PositionContent>
+            </Position>
+          )}
+        </ApplyTextDirection>
       </View>
       <div
         style={{
@@ -241,36 +271,40 @@ class Example extends React.Component {
 
     return (
       <div>
-        <Position
-          placement={placement}
-          over
-          insertAt="top"
-          mountNode={() => this._mountNode}
-        >
-          <PositionContent>
-            <div
-              style={{
-                backgroundColor: 'white',
-                padding: '1rem'
-              }}
+        <ApplyTextDirection>
+          {(dir, rtl) => (
+            <Position
+              placement={rtl ? mirrorHorizontalPlacement(placement, ' ') : placement}
+              over
+              insertAt="top"
+              mountNode={() => this._mountNode}
             >
-              <Heading level="h3">{placement}</Heading>
-            </div>
-          </PositionContent>
-          <PositionTarget>
-            <div
-              ref={(c) => { this._mountNode = c }}
-              style={{
-                overflowY: 'auto',
-                maxHeight: '10rem',
-                marginBottom: '1rem',
-                padding: '0.5rem'
-              }}
-            >
-              {fpo}
-            </div>
-          </PositionTarget>
-        </Position>
+              <PositionContent>
+                <div
+                  style={{
+                    backgroundColor: 'white',
+                    padding: '1rem'
+                  }}
+                >
+                  <Heading level="h3">{placement}</Heading>
+                </div>
+              </PositionContent>
+              <PositionTarget>
+                <div
+                  ref={(c) => { this._mountNode = c }}
+                  style={{
+                    overflowY: 'auto',
+                    maxHeight: '10rem',
+                    marginBottom: '1rem',
+                    padding: '0.5rem'
+                  }}
+                >
+                  {fpo}
+                </div>
+              </PositionTarget>
+            </Position>
+          )}
+        </ApplyTextDirection>
         <Button variant="primary" onClick={this.handleButtonClick}>
           Change placement
         </Button>

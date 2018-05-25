@@ -29,6 +29,7 @@ import moment from 'moment'
 import 'moment/min/locales'
 
 import '@instructure/ui-themes/lib/canvas'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
 
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
@@ -67,6 +68,7 @@ const globals = {
       })
     }
   },
+  mirrorHorizontalPlacement,
   placeholderImage,
   placeholderLogo,
   React,
