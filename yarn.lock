@@ -11188,9 +11188,9 @@ react-addons-test-utils@^15.6.0:
   version "15.6.2"
   resolved "https://registry.npmjs.org/react-addons-test-utils/-/react-addons-test-utils-15.6.2.tgz#c12b6efdc2247c10da7b8770d185080a7b047156"
 
-react-codemirror2@^4.2.1:
-  version "4.3.0"
-  resolved "https://registry.npmjs.org/react-codemirror2/-/react-codemirror2-4.3.0.tgz#e79aedca4da60d22402d2cd74f2885a3e5c009fd"
+react-codemirror2@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/react-codemirror2/-/react-codemirror2-5.0.2.tgz#f4fce815487fc9d29aa123994c185570520bf54b"
 
 react-dev-utils@^5.0.0:
   version "5.0.1"
