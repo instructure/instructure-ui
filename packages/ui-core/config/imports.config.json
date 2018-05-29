@@ -20,6 +20,10 @@
     "replace": "@instructure/ui-i18n/lib/components/ApplyLocale"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/Alert",
+    "replace": "@instructure/ui-alerts/lib/components/Alert"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Avatar",
     "replace": "@instructure/ui-elements/lib/components/Avatar"
   },
