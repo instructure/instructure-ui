@@ -42,7 +42,7 @@
     "@instructure/ui-utils": "^5.10.0",
     "babel-standalone": "^6.26.0",
     "classnames": "^2.2.5",
-    "gray-matter": "^4.0.1",
+    "gray-matter": "^3.0.2",
     "he": "^1.1.1",
     "marked": "^0.4.0",
     "prop-types": "^15.5.10",
