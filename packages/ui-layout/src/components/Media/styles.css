@@ -21,7 +21,8 @@ figcaption.caption { /* stylelint-disable-line selector-max-type */
 }
 
 .figure {
-  margin: var(--figureMargin);
+  margin-inline-start: 0;
+  margin-inline-end: var(--figureMargin);
 }
 
 .title {

@@ -28,7 +28,7 @@ export default function generator ({ colors, spacing, typography, breakpoints })
     background: colors.backgroundLightest,
     color: colors.textDarkest,
 
-    figureMargin: `0 ${spacing.small} 0 0`,
+    figureMargin: spacing.small,
     titleMargin: `0 0 ${spacing.xSmall} 0`,
 
     titleFontSize: typography.fontSizeLarge,
