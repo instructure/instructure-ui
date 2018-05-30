@@ -6,6 +6,10 @@
   align-items: center;
 }
 
+[dir="rtl"] .input {
+  direction: rtl;
+}
+
 .input {
   all: initial;
   flex: auto;
