@@ -28,8 +28,6 @@ input.input[type="radio"] {
   position: absolute;
   top: 0;
   left: 0; /* stylelint-disable-line property-blacklist */
-  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-  z-index: -1;
   opacity: 0.0001; /* selenium cannot find fully transparent elements */
 }
 
