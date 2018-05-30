@@ -120,6 +120,10 @@ function isRootSelector (selector) {
   return selector.match(/^(_|html|body|\:root)/i)
 }
 
+function isClassSelector (selector) {
+  return selector.match(/^(\.\S+)/)
+}
+
 function scopeSimpleSelector (selector, scope) {
   const parts = selector.split(':')
   parts[0] += scope
@@ -144,8 +148,13 @@ function scopeComplexSelector (selector, scope) {
     // eslint-disable-next-line no-useless-escape
     /(^|[\s>+~]+)((?:\[.+?\]|[^\s>+~=\[])+)/g,
 
-    (match, combinator, selector) => {
-      return scopeCompoundSelector(selector, combinator, scope)
+    function (match, combinator, selector) {
+      const offset = arguments[arguments.length - 2]
+      if (isClassSelector(selector) || offset > 0) {
+        return scopeCompoundSelector(selector, combinator, scope)
+      } else {
+        return selector
+      }
     }
   )
   return scopedSelector

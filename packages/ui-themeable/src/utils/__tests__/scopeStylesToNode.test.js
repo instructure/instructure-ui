@@ -28,6 +28,10 @@ describe('scopeStylesToNode', () => {
   const cssText = `
     .root{
       color: red;
+      text-align: left;
+    }
+    [dir="rtl"] .root {
+      text-align: right;
     }
     .background{
       background-color: purple;
@@ -37,6 +41,10 @@ describe('scopeStylesToNode', () => {
   const scopedCss = `
     .root[foo] {
       color: red;
+      text-align: left;
+    }
+    [dir="rtl"] .root[foo] {
+      text-align: right;
     }
     .background[foo] {
       background-color: purple;

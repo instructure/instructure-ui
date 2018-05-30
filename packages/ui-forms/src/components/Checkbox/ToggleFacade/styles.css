@@ -27,6 +27,14 @@
   }
 }
 
+[dir="rtl"] .root .facade {
+  &.checked {
+    .icon {
+      transform: translate3d(-50%, 0, 0);
+    }
+  }
+}
+
 .facade {
   background: var(--background);
   border-color: var(--borderColor);
@@ -61,7 +69,8 @@
   text-align: center;
   position: absolute;
   top: 0;
-  left: 0; /* stylelint-disable-line property-blacklist */
+  offset-inline-start: 0;
+  offset-inline-end: auto;
   transition: all 0.2s;
   transform: translate3d(0, 0, 0);
 }
