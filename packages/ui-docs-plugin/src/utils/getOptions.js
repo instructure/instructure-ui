@@ -23,7 +23,7 @@
  */
 
 const path = require('path')
-const loadConfig = require('@instructure/ui-presets')
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = function (pluginOptions = {}) {
   const options = Object.assign({}, loadConfig('docs'), pluginOptions)

@@ -25,7 +25,7 @@
 const webpack = require('webpack')
 const HappyPack = require('happypack')
 
-const loadConfig = require('../loadConfig')
+const loadConfig = require('@instructure/config-loader')
 const { generateScopedName } = loadConfig('themeable', require('../themeable'))
 
 const ENV = process.env.NODE_ENV

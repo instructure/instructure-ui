@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-module.exports = require('./loadConfig')
+module.exports = require('@instructure/config-loader')

@@ -15,6 +15,7 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "license": "MIT",
   "dependencies": {
+    "@instructure/config-loader": "^5.10.0",
     "@instructure/ui-presets": "^5.10.0",
     "core-js-builder": "^2.4.1",
     "loader-utils": "^1.1.0"

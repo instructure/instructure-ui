@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('./loadConfig')
+const loadConfig = require('@instructure/config-loader')
 
 const CORE_PLUGINS = [
   ['postcss-bidirection', {

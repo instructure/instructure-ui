@@ -25,7 +25,7 @@
 
 const coreJSBuilder = require('core-js-builder')
 const loaderUtils = require('loader-utils')
-const loadConfig = require('@instructure/ui-presets')
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = function BabelPolyFillLoader () {
   this.cacheable && this.cacheable()

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('./loadConfig')
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = function (context, opts = { themeable: false, esModules: false, coverage: false, node: false }) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)

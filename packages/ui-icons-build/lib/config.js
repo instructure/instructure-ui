@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-const loadConfig = require('@instructure/ui-presets')
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = loadConfig('icons')

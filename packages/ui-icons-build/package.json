@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/ui-presets": "^5.10.0",
+    "@instructure/config-loader": "^5.10.0",
     "del": "^3.0.0",
     "glob": "^7.1.2",
     "gulp": "^3.9.1",

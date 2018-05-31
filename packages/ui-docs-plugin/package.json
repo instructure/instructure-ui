@@ -17,9 +17,12 @@
     "build:watch": "ui-build --watch"
   },
   "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-presets": "^5.10.0"
+  },
   "dependencies": {
+    "@instructure/config-loader": "^5.10.0",
     "@instructure/ui-docs-client": "^5.10.0",
-    "@instructure/ui-presets": "^5.10.0",
     "favicons-webpack-plugin": "^0.0.9",
     "globby": "^7.1.1",
     "gray-matter": "^4.0.1",
