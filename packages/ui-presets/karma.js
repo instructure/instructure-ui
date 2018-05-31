@@ -22,22 +22,24 @@
  * SOFTWARE.
  */
 
-const webpack = require('webpack')
 const constants = require('karma').constants
-
-const ChromiumRevision = require('puppeteer/package.json').puppeteer.chromium_revision
-const Downloader = require('puppeteer/utils/ChromiumDownloader')
-
-const revisionInfo = Downloader.revisionInfo(Downloader.currentPlatform(), ChromiumRevision)
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 
 const debug = Boolean(process.env.DEBUG)
 const withCoverage = Boolean(process.env.COVERAGE)
 
-if (!debug) {
-  process.env.CHROME_BIN = revisionInfo.executablePath
-}
+const CHROME_FLAGS = [
+  '--no-sandbox',
+  '--disable-setuid-sandbox',
+  '--use-mock-keychain',
+  '--no-default-browser-check',
+  '--no-first-run',
+  '--disable-default-apps',
+  '--disable-popup-blocking',
+  '--disable-translate',
+  '--disable-extensions'
+]
 
 module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
   const browsers = []
@@ -76,7 +78,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
     config.set({
       basePath: '',
 
-      frameworks: ['mocha', 'chai-sinon'],
+      frameworks: ['mocha'],
 
       files: [ bundle ],
 
@@ -115,33 +117,26 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
       customLaunchers: {
         CustomChrome: {
           base: 'Chrome',
-          flags: [
-            '--no-default-browser-check',
-            '--no-first-run',
-            '--disable-default-apps',
-            '--disable-popup-blocking',
-            '--disable-translate',
-            '--no-sandbox'
-          ]
+          flags: CHROME_FLAGS
         },
         CustomChromeHeadless: {
-          base: 'ChromeHeadless',
-          flags: [
+          base: 'Chrome',
+          flags: CHROME_FLAGS.concat([
+            '-incognito',
+            '--headless',
             '--disable-gpu',
-            '--hide-scrollbar',
-            '--remote-debugging-port=9222',
-            '--no-sandbox'
-          ]
+            '--remote-debugging-port=9222'
+          ])
         }
       },
 
       // If browser does not capture in given timeout [ms], kill it
-      captureTimeout: 60000,
+      captureTimeout: 30000,
 
       // to avoid DISCONNECTED messages:
       browserDisconnectTimeout: 10000, // default 2000
-      browserDisconnectTolerance: 1, // default 0
-      browserNoActivityTimeout: 60000, // default 10000
+      browserDisconnectTolerance: 2, // default 0
+      browserNoActivityTimeout: 30000, // default 10000
 
       singleRun: !debug,
 
@@ -157,11 +152,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
         module: {
           rules: require('./webpack/module/rules')
         },
-        plugins: require('./webpack/plugins')().concat([
-          new webpack.ProvidePlugin({
-            Testbed: require.resolve('@instructure/ui-testbed')
-          })
-        ]),
+        plugins: require('./webpack/plugins')(),
         devtool: 'cheap-module-eval-source-map',
         performance: {
           hints: false

@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+const Testbed = require('@instructure/ui-testbed')
+
+global.Testbed = Testbed
 Testbed.init()
 
 const testsContext = require.context('./src', true, /\.test\.js$/)

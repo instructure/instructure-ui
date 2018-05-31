@@ -23,6 +23,7 @@
  */
 
 const sinon = require('sinon')
+const chai = require('chai')
 const { cloneElement } = require('react')
 const { StyleSheet } = require('glamor/lib/sheet')
 
@@ -174,7 +175,7 @@ Testbed.init = () => {
   `)
 
   require('./initConsole')()
-  require('./chaiWrapper')(global.chai)
+  require('./chaiWrapper')(chai)
   global.sinon = sinon
 }
 

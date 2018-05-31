@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const Testbed = require('@instructure/ui-testbed')
+
+global.Testbed = Testbed
 Testbed.init()
 
 require('@instructure/ui-themes/lib/canvas')

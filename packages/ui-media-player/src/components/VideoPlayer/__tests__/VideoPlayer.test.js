@@ -74,10 +74,12 @@ describe('<VideoPlayer />', () => {
     expect(testbed.render()).to.be.accessible(done)
   })
 
-  describe('source loaded', () => {
-    const player = testbed.render()
-    player.setState({ loadingSrc: false })
-    expect(player.find('Loading').length).to.eql(0)
+  describe('when the source is loaded', () => {
+    it('hides the loading indicator', () => {
+      const player = testbed.render()
+      player.setState({ loadingSrc: false })
+      expect(player.find('Loading').length).to.eql(0)
+    })
   })
 
   describe('#componentDidMount', () => {
@@ -143,7 +145,8 @@ describe('<VideoPlayer />', () => {
   })
 
   it('toggles play when clicked', () => {
-    const player = testbed.render()
+    const player = renderWithMockVideo()
+
     expect(player.state('state')).to.eql(PAUSED)
     player.simulate('click')
     player.instance().applyVideoProps()

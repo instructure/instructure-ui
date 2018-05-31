@@ -44,11 +44,15 @@ class Timer extends Component {
 
   componentDidMount () {
     this.interval = setInterval(() => {
-      this.setState({ time: this.state.time + 1 })
+      if (this._mounted) {
+        this.setState({ time: this.state.time + 1 })
+      }
     }, 1000)
+    this._mounted = true
   }
 
   componentWillUnmount () {
+    this._mounted = false
     clearInterval(this.interval)
   }
 
