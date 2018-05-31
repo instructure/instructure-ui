@@ -25,6 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import BaseTransition from '@instructure/ui-motion/lib/components/Transition/BaseTransition'
 
 import themeable from '@instructure/ui-themeable'
@@ -39,6 +40,8 @@ import warning from '@instructure/ui-utils/lib/warning'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
+import { mirrorHorizontalPlacement } from '../../../utils/mirrorPlacement'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -48,6 +51,7 @@ parent: DrawerLayout
 ---
 **/
 
+@bidirectional()
 @themeable(theme, styles)
 class DrawerTray extends Component {
   static propTypes = {
@@ -203,6 +207,11 @@ class DrawerTray extends Component {
     }
   }
 
+  get placement () {
+    const { placement } = this.props
+    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
+  }
+
   handleTransitionEnter = () => {
     this.notifySizeChange()
   }
@@ -241,7 +250,6 @@ class DrawerTray extends Component {
       open,
       label,
       border,
-      placement,
       onEnter,
       onEntered,
       onExit,
@@ -265,11 +273,11 @@ class DrawerTray extends Component {
         in={open}
         enterDelay={duration}
         exitDelay={duration}
-        transitionClassName={styles[`slide-${placement}`]}
-        exitedClassName={styles[`slide-${placement}--exited`]}
-        exitingClassName={styles[`slide-${placement}--exiting`]}
-        enteredClassName={styles[`slide-${placement}--entered`]}
-        enteringClassName={styles[`slide-${placement}--entering`]}
+        transitionClassName={styles[`slide-${this.placement}`]}
+        exitedClassName={styles[`slide-${this.placement}--exited`]}
+        exitingClassName={styles[`slide-${this.placement}--exiting`]}
+        enteredClassName={styles[`slide-${this.placement}--entered`]}
+        enteringClassName={styles[`slide-${this.placement}--entering`]}
       >
         <span
           ref={this.handleContentRef}
@@ -278,7 +286,7 @@ class DrawerTray extends Component {
           className={classnames({
             [styles.root]: true,
             [styles.border]: border,
-            [styles[`placement--${placement}`]]: true
+            [styles[`placement--${this.placement}`]]: true
           })}
         >
           {renderFunc(this.state.positioned)}

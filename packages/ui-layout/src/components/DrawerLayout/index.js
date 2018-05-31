@@ -24,12 +24,15 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
+
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import px from '@instructure/ui-utils/lib/px'
 
+import { mirrorHorizontalPlacement } from '../../utils/mirrorPlacement'
 import DrawerContent from './DrawerContent'
 import DrawerTray from './DrawerTray'
 
@@ -41,6 +44,7 @@ import theme from './theme'
 category: components/layout
 ---
 **/
+@bidirectional()
 @themeable(theme, styles)
 class DrawerLayout extends Component {
   static propTypes = {
@@ -100,6 +104,11 @@ class DrawerLayout extends Component {
     return Children.toArray(this.props.children).filter(
       (child) => matchComponentTypes(child, [DrawerTray])
     )[0].props
+  }
+
+  get trayPlacement () {
+    const { placement } = this.trayProps
+    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
   get contentMargin () {
@@ -203,8 +212,8 @@ class DrawerLayout extends Component {
         return safeCloneElement(child, {
           key: child.props.label,
           style: {
-            marginLeft: `${this.trayProps.placement === 'start' ? this.contentMargin : 0}px`,
-            marginRight: `${this.trayProps.placement === 'end' ? this.contentMargin : 0}px`,
+            marginLeft: `${this.trayPlacement === 'start' ? this.contentMargin : 0}px`,
+            marginRight: `${this.trayPlacement === 'end' ? this.contentMargin : 0}px`,
             minWidth: minWidth
           },
           transition: this._transitionContent,
