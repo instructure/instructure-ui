@@ -85,6 +85,7 @@
 
       &.notification {
         offset-inline-start: calc(-1 * var(--sizeNotification) / 2);
+        offset-inline-end: auto;
       }
     }
 
@@ -96,6 +97,7 @@
 
       &.notification {
         offset-inline-end: calc(-1 * var(--sizeNotification) / 2);
+        offset-inline-start: auto;
       }
     }
   }
