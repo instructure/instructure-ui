@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import IconMoveLeft from '@instructure/ui-icons/lib/Line/IconMoveLeft'
+import IconMoveStart from '@instructure/ui-icons/lib/Line/IconMoveStart'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import NavigationItem from './NavigationItem'
@@ -165,7 +165,7 @@ class Navigation extends Component {
           <NavigationItem
             aria-expanded={!this.minimized}
             onClick={this.handleNavToggle}
-            icon={<IconMoveLeft className={styles.toggleIcon}/>}
+            icon={<IconMoveStart className={styles.toggleIcon}/>}
             label={<ScreenReaderContent>{this.toggleMessage()}</ScreenReaderContent>}
           >
           </NavigationItem>
