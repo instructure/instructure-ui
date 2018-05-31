@@ -132,7 +132,7 @@
   border-radius: var(--inlineBorderRadius);
   color: var(--inlineColor);
   cursor: text;
-  margin: 0 0.2rem 0.2rem 0.2rem;
+  margin: 0 0.1875rem 0.1875rem 0.1875rem;
 
   &.button {
     &::before {
@@ -153,7 +153,8 @@
       font-size: 0.75rem;
       padding: 0.25rem;
       position: absolute;
-      right: 0; /* stylelint-disable-line property-blacklist */
+      offset-inline-end: 0;
+      offset-inline-start: auto;
       top: 0;
       transform: translate(40%, -40%);
     }
@@ -166,4 +167,7 @@
   }
 }
 
+[dir="rtl"] .inline.dismissible .icon {
+  transform: translate(-40%, -40%);
+}
 /* stylelint-enable selector-max-class, no-descending-specificity, max-nesting-depth */
