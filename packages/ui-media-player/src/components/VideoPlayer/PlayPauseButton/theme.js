@@ -25,7 +25,7 @@ export default function generator ({ colors, borders, spacing }) {
   return {
     backgroundColor: colors.backgroundBrand,
     color: colors.textLightest,
-    margin: `0 ${spacing.xxSmall} 0 0`,
+    margin: spacing.xxSmall,
     border: 'none',
     padding: `0 ${spacing.small}`,
     focusOutlineColor: colors.borderBrand,

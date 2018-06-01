@@ -2,7 +2,8 @@
   background-color: var(--backgroundColor);
   border: var(--border);
   color: var(--color);
-  margin: var(--margin);
+  margin-inline-end: var(--margin);
+  margin-inline-start: 0;
   padding: var(--padding);
   cursor: pointer;
   height: 100%;
