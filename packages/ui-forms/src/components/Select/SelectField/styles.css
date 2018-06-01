@@ -65,6 +65,7 @@ input[type].input {
   width: 100%;
   cursor: default;
   box-sizing: border-box;
+  text-align: start;
 
   &::-ms-clear {
     display: none;
@@ -122,12 +123,14 @@ input[type].input {
   display: flex;
   align-items: center;
   margin-inline-start: var(--inputPadding);
+  margin-inline-end: 0;
 }
 
 .icon {
   display: flex;
   align-self: center;
   margin-inline-end: var(--inputPadding);
+  margin-inline-start: 0;
   pointer-events: none;
   fill: var(--iconColor);
 }
