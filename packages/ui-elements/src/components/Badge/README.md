@@ -26,8 +26,8 @@ example: true
         )
       }}
     >
-      <Button variant="icon">
-        <IconUser.Solid title="Edits" />
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edits</ScreenReaderContent>
       </Button>
     </Badge>
     <Badge
@@ -36,8 +36,8 @@ example: true
         return <ScreenReaderContent>You have new edits to review</ScreenReaderContent>
       }}
     >
-      <Button variant="icon">
-        <IconUser.Solid title="Edits" />
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edits</ScreenReaderContent>
       </Button>
     </Badge>
   </div>
@@ -105,42 +105,66 @@ example: true
 <div>
   <View as="div" margin="0 0 medium">
     <Badge count={21} margin="0 large 0 0" placement="top start">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="bottom start">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="bottom end">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge count={21} margin="0 large 0 0" placement="start center">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge count={21} placement="end center">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
   </View>
   <View as="div">
     <Badge type="notification" margin="0 large 0 0" placement="top start">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="bottom start">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="bottom end">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge type="notification" margin="0 large 0 0" placement="start center">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
     <Badge type="notification" placement="end center">
-      <Button variant="icon"><IconUser.Solid title="Edit page" /></Button>
+      <Button variant="icon" icon={IconUser.Solid}>
+        <ScreenReaderContent>Edit page</ScreenReaderContent>
+      </Button>
     </Badge>
   </View>
 </div>

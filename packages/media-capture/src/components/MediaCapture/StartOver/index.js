@@ -53,8 +53,8 @@ export default class StartOver extends Component {
         onClick={actions.startoverClicked}
         variant="light"
         size="small"
+        icon={IconResetSolid}
         theme={{ iconPlusTextFontSize: '0.8em' }}>
-        <IconResetSolid />
         { translate('START_OVER') }
       </Button>
     )

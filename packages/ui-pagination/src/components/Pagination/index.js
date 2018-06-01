@@ -211,7 +211,7 @@ export default class Pagination extends Component {
     )
   }
 
-  renderArrowButton (Icon, title, direction) {
+  renderArrowButton (icon, title, direction) {
     const { onClick, disabled } = this.pages[this.currentPageIndex + direction].props
     return (
       <Button
@@ -219,8 +219,8 @@ export default class Pagination extends Component {
         disabled={disabled}
         variant="icon"
         title={title}
+        icon={icon}
       >
-        <Icon />
         <ScreenReaderContent>{title}</ScreenReaderContent>
       </Button>
     )

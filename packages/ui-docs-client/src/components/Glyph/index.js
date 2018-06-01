@@ -72,8 +72,8 @@ class Variant extends Component {
           variant="icon"
           size="large"
           onClick={this.handleClick}
+          icon={icon}
         >
-          {icon}
           <ScreenReaderContent>View Usage</ScreenReaderContent>
         </Button>
       </div>

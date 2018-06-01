@@ -26,8 +26,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import View from '@instructure/ui-layout/lib/components/View'
-
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -35,6 +33,11 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import warning from '@instructure/ui-utils/lib/warning'
+
+import View from '@instructure/ui-layout/lib/components/View'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -87,7 +90,12 @@ class Button extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    /**
+    * Add an SVG icon to the button. Do not add icons directly as
+    * children.
+    */
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
   }
 
   static defaultProps = {
@@ -136,30 +144,107 @@ class Button extends Component {
     return isActiveElement(this._button)
   }
 
+  get hasVisibleChildren () {
+    return hasVisibleChildren(this.props.children)
+  }
+
+  get hasTextAndIcon () {
+    return this.hasVisibleChildren && this.props.icon // any button with an icon + text label
+  }
+
+  get hasOnlyIcon () {
+    return !this.hasVisibleChildren && this.props.icon // any button with just an icon visible
+  }
+
   focus () {
     findDOMNode(this._button).focus() // eslint-disable-line react/no-find-dom-node
+  }
+
+  renderIcon () {
+    const Icon = this.props.icon
+    if (typeof this.props.icon === 'function') {
+      return <span className={styles.iconSVG}><Icon inline={false} /></span>
+    } else if (Icon) {
+      return <span className={styles.iconSVG}>{Icon}</span>
+    } else {
+      return null
+    }
+  }
+
+  buttonWidth () {
+    const {
+      variant,
+      fluidWidth
+    } = this.props
+
+    const squareVariants = ['circle-primary', 'circle-danger', 'icon', 'icon-inverse']
+
+    if (this.hasOnlyIcon || squareVariants.indexOf(variant) !== -1) {
+      return 'icon'
+    } else if (fluidWidth) {
+      return 'fluid'
+    } else {
+      return 'auto'
+    }
+  }
+
+  renderContent () {
+    const {
+      children,
+      icon
+    } = this.props
+
+    // show warning if icon is added as a child
+    if (this.hasVisibleChildren) {
+      React.Children.forEach(children, (child) => {
+        const icon = typeof child === 'object' && child.type.glyphName !== undefined // eslint-disable-line no-undefined
+        warning(
+          !icon,
+          `Adding icons to Button as children is deprecated. Please use the icon prop instead.`
+        )
+      })
+    }
+
+    if (this.hasTextAndIcon) {
+      return (
+        <Flex height="100%" width="100%">
+          <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
+          <FlexItem grow shrink>
+            <span className={styles.content}>{children}</span>
+          </FlexItem>
+        </Flex>
+      )
+    } else { // all other button layouts (icon only and text only)
+      return (
+        <span className={styles.content}>
+          {(icon) && this.renderIcon()}
+          {children}
+        </span>
+      )
+    }
   }
 
   render () {
     const {
       variant,
       size,
-      fluidWidth,
       disabled,
       readOnly,
       href,
       type,
       onClick,
       buttonRef,
-      margin
+      margin,
+      icon
     } = this.props
 
     const classes = {
       [styles.root]: true,
       [styles[variant]]: true,
       [styles[size]]: size,
-      [styles.fluidWidth]: fluidWidth,
-      [styles.disabled]: disabled
+      [styles[`width--${this.buttonWidth()}`]]: true,
+      [styles.disabled]: disabled,
+      [styles['has-icon']]: icon
     }
 
     const props = {
@@ -188,7 +273,7 @@ class Button extends Component {
         as={ElementType}
         margin={margin}
       >
-        <span className={styles.content}>{this.props.children}</span>
+        {this.renderContent()}
       </View>
     )
   }

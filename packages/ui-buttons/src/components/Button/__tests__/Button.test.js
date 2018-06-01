@@ -24,6 +24,7 @@
 
 import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
+import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import Button from '../index'
 
 describe('<Button/>', () => {
@@ -74,6 +75,14 @@ describe('<Button/>', () => {
     })
 
     expect(subject.find('button[type="submit"]')).to.be.present
+  })
+
+  it('should pass down an icon via the icon property', () => {
+    const subject = testbed.render({
+      icon: IconTrash
+    })
+
+    expect(subject.find('IconTrash').length).to.eql(1)
   })
 
   it('should not allow padding as a property', () => {

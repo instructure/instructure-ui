@@ -30,12 +30,9 @@ example: true
 <Button href="https://instructure.github.io/instructure-ui/">Click Here</Button>
 ```
 
+### Variants
 Button variants for different contexts using the `variant` prop are shown below. Note also
 the `margin` prop used to add space between the buttons.
-
-Note that for non-icon-variant buttons, SVG icons imported from
-[@instructure/ui-icons](#ui-icons)
-will be sized appropriately and given right-margin to offset them from the text.
 
 ```js
 ---
@@ -46,7 +43,6 @@ example: true
     Primary button
   </Button>
   <Button href="https://instructure.github.io/instructure-ui/" variant="success" margin="0 x-small 0 0">
-    <IconUser.Solid />
     Success button
   </Button>
   <Button variant="danger" margin="0 x-small 0 0">
@@ -56,36 +52,52 @@ example: true
     Light Button
   </Button>
   <Button variant="ghost" margin="0 x-small 0 0">
-    <IconPlus.Solid />
     Ghost Button
   </Button>
   <Button variant="link">
-    <IconUser.Solid />
     Link Button
   </Button>
 </div>
 ```
 
-Buttons with icons:
+### Using icons in Button
+Use the `icon` prop to pass your icon to the Button. Don't forget to add [ScreenReaderContent](#ScreenReaderContent)
+if there is no visible text on the Button. **Please do not add icons as children of Button.**
 
 ```js
 ---
 example: true
 ---
 <div>
-  <Button variant="icon" margin="0 x-small 0 0">
-    <IconUser.Solid title="Accessible Button Label" />
+  <Button margin="0 x-small 0 0" icon={IconPlus.Solid}>
+    Button label
   </Button>
-  <Button variant="circle-primary" margin="0 x-small 0 0">
-    <IconPlus.Solid title="Accessible Button Label" />
-  </Button>
-  <Button variant="circle-danger">
-    <IconX.Solid title="Accessible Button Label" />
+  <Button margin="0 x-small 0 0" icon={IconUser.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
 </div>
 ```
 
-Inverse variants:
+The following Button variants should only be used with a single icon.
+
+```js
+---
+example: true
+---
+<div>
+  <Button variant="icon" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
+  </Button>
+  <Button variant="circle-primary" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
+  </Button>
+  <Button variant="circle-danger" icon={IconX.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
+  </Button>
+</div>
+```
+
+### Inverse variants
 
 ```js
 ---
@@ -94,13 +106,14 @@ inverse: true
 ---
 <div>
   <Button variant="ghost-inverse" margin="0 x-small 0 0">Ghost Button</Button>
-  <Button variant="icon-inverse">
-    <IconUser.Solid title="Accessible Button Label" />
+  <Button variant="icon-inverse" icon={IconUser.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
   <Button variant="link-inverse">Link Button</Button>
 </div>
 ```
 
+### Sizes
 Change the `size` prop to `small` or `large` to produce smaller or larger buttons than the default.
 
 ```js
@@ -114,6 +127,7 @@ example: true
 </div>
 ```
 
+### `fluidWidth`
 Set the `fluidWidth` prop if you want the button to fill the width of its container element
 and wrap the text.
 
@@ -121,27 +135,5 @@ and wrap the text.
 ---
 example: true
 ---
-<div>
-  <div style={{width: 300}}>
-    <Button fluidWidth size="small">Small fluidWidth button</Button>
-    <br />
-    <Button fluidWidth size="small">
-      <b>Small fluidWidth Button with line breaks.</b> {lorem.sentence()}
-    </Button>
-    <br />
-    <Button fluidWidth>Medium fluidWidth button</Button>
-    <br />
-    <Button fluidWidth>
-      <b>Medium fluidWidth Button with line breaks.</b> {lorem.sentence()}
-    </Button>
-    <br />
-    <Button fluidWidth size="large" href="http://instructure.github.io/instructure-ui">
-      Large fluidWidth link-button
-    </Button>
-    <br />
-    <Button fluidWidth size="large">
-      <b>Large fluidWidth Button with line breaks.</b> {lorem.sentence()}
-    </Button>
-  </div>
-</div>
+<Button fluidWidth icon={IconUser.Solid}>{lorem.paragraph()}</Button>
 ```

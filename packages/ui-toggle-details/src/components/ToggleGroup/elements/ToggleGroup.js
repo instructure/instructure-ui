@@ -154,9 +154,9 @@ class ToggleGroup extends Component {
         buttonRef={(el) => {
           this._button = el
         }}
+        icon={this.renderIcon(expanded)}
       >
         <ScreenReaderContent>{label}</ScreenReaderContent>
-        {this.renderIcon(expanded)}
       </Button>
     )
   }

@@ -103,7 +103,10 @@ export default function generator ({ colors, borders, forms, spacing, typography
     iconHoverColor: colors.textBrand,
     iconFocusBoxShadow: `${focusShadow} ${colors.borderBrand}`,
     iconPlusTextFontSize: '1.25rem',
-    iconPlusTextMargin: spacing.xxSmall,
+    iconSizeSmall: '1rem',
+    iconSizeMedium: '1.25rem',
+    iconSizeLarge: '1.625rem',
+    iconPlusTextMargin: spacing.xSmall,
 
     iconInverseColor: colors.textLightest,
     iconInverseHoverColor: colors.textLightest,

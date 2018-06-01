@@ -229,13 +229,15 @@ export const assignmentsExample = () => {
           actions={
             <div>
               <Pill text="2 rules" />
-              <Button variant="icon" margin="0 0 0 xx-small">
-                <IconAdd title="Add assignment" />
+              <Button variant="icon" margin="0 0 0 xx-small" icon={IconAdd}>
+                <ScreenReaderContent>Add assignment</ScreenReaderContent>
               </Button>
               <Menu
                 placement="bottom"
                 trigger={
-                  <Button variant="icon"><IconMore title="More options" /></Button>
+                  <Button variant="icon" icon={IconMore}>
+                    <ScreenReaderContent>More options</ScreenReaderContent>
+                  </Button>
                 }
               >
                 <MenuItem value="one">Option 1</MenuItem>
@@ -266,13 +268,19 @@ export const assignmentsExample = () => {
             actions={
               <div>
                 <Text color="secondary" size="small">100 points</Text>
-                <Button variant="icon" margin="0 0 0 small">
-                  <IconPublish size="x-small" title="Quiz" style={{color: '#00AC18'}} />
+                <Button
+                  variant="icon"
+                  margin="0 0 0 small"
+                  icon={<IconPublish style={{color: '#00AC18'}} />}
+                >
+                  <ScreenReaderContent>Quiz</ScreenReaderContent>
                 </Button>
                 <Menu
                   placement="bottom"
                   trigger={
-                    <Button variant="icon"><IconMore title="More options" /></Button>
+                    <Button variant="icon" icon={IconMore}>
+                      <ScreenReaderContent>More options</ScreenReaderContent>
+                    </Button>
                   }
                 >
                   <MenuItem value="one">Option 1</MenuItem>
@@ -300,13 +308,19 @@ export const assignmentsExample = () => {
             actions={
               <div>
                 <Text color="secondary" size="small">10 points</Text>
-                <Button variant="icon" margin="0 0 0 small">
-                  <IconPublish size="x-small" title="Quiz" style={{color: '#00AC18'}} />
+                <Button
+                  variant="icon"
+                  margin="0 0 0 small"
+                  icon={<IconPublish style={{color: '#00AC18'}} />}
+                >
+                  <ScreenReaderContent>Quiz</ScreenReaderContent>
                 </Button>
                 <Menu
                   placement="bottom"
                   trigger={
-                    <Button variant="icon"><IconMore title="More options" /></Button>
+                    <Button variant="icon" icon={IconMore}>
+                      <ScreenReaderContent>More options</ScreenReaderContent>
+                    </Button>
                   }
                 >
                   <MenuItem value="one">Option 1</MenuItem>

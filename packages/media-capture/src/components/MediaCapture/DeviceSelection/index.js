@@ -67,11 +67,11 @@ class DeviceSelection extends Component {
     const VARIANTS = {
       audio: {
         label: translate('DEVICE_AUDIO'),
-        icon: <IconMicSolid />
+        icon: IconMicSolid
       },
       video: {
         label: translate('DEVICE_VIDEO'),
-        icon: <IconVideoSolid />
+        icon: IconVideoSolid
       }
     }
 
@@ -116,8 +116,7 @@ class DeviceSelection extends Component {
       <Menu
         placement="bottom"
         trigger={
-          <Button variant="light" margin="0 large 0">
-            {this.state.icon}
+          <Button variant="light" margin="0 large 0" icon={this.state.icon}>
             {this.state.label}
           </Button>
         }

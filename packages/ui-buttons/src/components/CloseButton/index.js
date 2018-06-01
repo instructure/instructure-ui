@@ -78,8 +78,7 @@ class CloseButton extends Component {
           [styles[`offset--${offset}`]]: offset
         })}
       >
-        <Button {...pickProps(this.props, Button.propTypes)}>
-          <IconX />
+        <Button {...pickProps(this.props, Button.propTypes)} icon={IconX}>
           <ScreenReaderContent>
             {this.props.children}
           </ScreenReaderContent>

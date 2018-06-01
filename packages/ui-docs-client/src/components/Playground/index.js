@@ -138,11 +138,13 @@ export default class Playground extends Component {
             size="small"
             variant="icon-inverse"
             onClick={this.handleCodeToggle}
+            icon={
+              <SVGIcon viewBox="0 0 2000 2000">
+                {closeIconPath}
+              </SVGIcon>
+            }
           >
             <ScreenReaderContent>Hide Code</ScreenReaderContent>
-            <SVGIcon viewBox="0 0 2000 2000">
-              {closeIconPath}
-            </SVGIcon>
           </Button>
         </div>
         <CodeEditor
@@ -215,19 +217,29 @@ export default class Playground extends Component {
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
                     size="small"
+                    icon={
+                      <SVGIcon viewBox="0 0 24 24">
+                        {fullScreenIconPath}
+                      </SVGIcon>
+                    }
                   >
-                    <SVGIcon viewBox="0 0 24 24" title="Full screen view">
-                      {fullScreenIconPath}
-                    </SVGIcon>
+                    <ScreenReaderContent>Full screen view</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </FlexItem>
               <FlexItem>
                 <Tooltip variant="inverse" tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
-                  <Button margin="0 x-small" onClick={this.handleCodeToggle} size="small">
-                    <SVGIcon viewBox="0 0 32 32" title="Code">
-                      {codeIconPath}
-                    </SVGIcon>
+                  <Button
+                    margin="0 x-small"
+                    onClick={this.handleCodeToggle}
+                    size="small"
+                    icon={
+                      <SVGIcon viewBox="0 0 32 32">
+                        {codeIconPath}
+                      </SVGIcon>
+                    }
+                  >
+                    <ScreenReaderContent>View code</ScreenReaderContent>
                   </Button>
                 </Tooltip>
               </FlexItem>
