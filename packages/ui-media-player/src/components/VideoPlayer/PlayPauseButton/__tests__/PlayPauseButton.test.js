@@ -56,10 +56,10 @@ describe('<PlayPauseButton />', () => {
     expect(event.stopPropagation).to.have.been.called
   })
 
-  it('invokes buttonRef prop on mount', () => {
-    const buttonRef = testbed.stub()
-    testbed.render({ buttonRef })
-    expect(buttonRef).to.have.been.called
+  it('invokes forwardRef prop on mount', () => {
+    const forwardRef = testbed.stub()
+    testbed.render({ forwardRef })
+    expect(forwardRef).to.have.been.called
   })
 
   describe('variants', () => {

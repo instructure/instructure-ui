@@ -11,6 +11,11 @@ category: packages
 
 A cross-browser HTML5 media player.
 
+### Browser Support
+
+- Internet Explorer 11 and Edge
+- Chrome, Safari, Firefox (last two versions)
+
 ### Installation
 
 ```sh

@@ -29,6 +29,7 @@ import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import VideoPlayerControls from './VideoPlayerControls'
 import Loading from '../Loading'
 import { translate } from '../../constants/translated/translations'
+import { Provider } from './VideoPlayerContext'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -70,8 +71,13 @@ class VideoPlayer extends Component {
   }
 
   static defaultProps = {
-    controls: (state, actions) => {
-      return <VideoPlayerControls {...state} actions={actions} />
+    controls: (VPC) => {
+      return (
+        <VPC>
+          <VPC.PlayPauseButton />
+          <VPC.Timebar />
+        </VPC>
+      )
     },
     alwaysShowControls: false
   }
@@ -81,7 +87,7 @@ class VideoPlayer extends Component {
 
     this.video = null
     this.state = {
-      state: PAUSED,
+      videoState: PAUSED,
       loadingSrc: true,
       showControls: true,
       videoId: generateElementId('VideoPlayer')
@@ -145,7 +151,7 @@ class VideoPlayer extends Component {
 
     this.setState({ showControls: true }, () => {
       this._hideControlsTimeoutId = setTimeout(() => {
-        if (this.state.state === PLAYING) {
+        if (this.state.videoState === PLAYING) {
           this.setState({ showControls: false })
         }
       }, hideControlsTimeout)
@@ -161,7 +167,7 @@ class VideoPlayer extends Component {
   }
 
   togglePlay = () => {
-    if (this.state.state === PLAYING) {
+    if (this.state.videoState === PLAYING) {
       this.pause()
     } else {
       this.play()
@@ -180,18 +186,18 @@ class VideoPlayer extends Component {
 
     const buffered = this.video.buffered
 
-    let state = this.video.paused ? PAUSED : PLAYING
+    let videoState = this.video.paused ? PAUSED : PLAYING
     if (this.video.ended) {
-      state = ENDED
+      videoState = ENDED
     }
 
     this.setState({
-      state,
+      videoState,
       currentTime: this.video.currentTime,
       duration: this.video.duration,
       buffered: buffered.length > 0 ? buffered.end(buffered.length - 1) : 0
     }, () => {
-      if (this.state.state === ENDED) {
+      if (this.state.videoState === ENDED) {
         this.seek(0)
         this.showControls()
       }
@@ -221,6 +227,12 @@ class VideoPlayer extends Component {
       togglePlay: this.togglePlay
     }
 
+    // default values for VideoPlayerContext
+    const providerState = {
+      state: this.state,
+      actions
+    }
+
     const wrapperProps = {
       className: styles.container,
       onKeyDown: this.handleKeyPress,
@@ -244,7 +256,9 @@ class VideoPlayer extends Component {
           tabIndex="-1"
           onCanPlay={this.hideSpinner}
         />
-        { controls(this.state, actions) }
+        <Provider value={providerState}>
+          { controls(VideoPlayerControls) }
+        </Provider>
       </div>
     )
     /* eslint-enable jsx-a11y/media-has-caption, jsx-a11y/no-noninteractive-tabindex */

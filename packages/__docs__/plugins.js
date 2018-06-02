@@ -92,7 +92,6 @@ plugins = plugins.concat([
       'packages/ui-docs-client/src/**',
       'packages/ui-docs-plugin/src/**',
       'packages/media-capture/src/**',
-      'packages/ui-media-player/src/**',
 
       'packages/ui-container/**',
       'packages/ui-core/**',

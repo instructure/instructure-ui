@@ -50,13 +50,13 @@ class PlayPauseButton extends Component {
     videoId: PropTypes.string.isRequired,
     variant: PropTypes.oneOf(Object.values(VideoStates)),
     onClick: PropTypes.func,
-    buttonRef: PropTypes.func
+    forwardRef: PropTypes.func
   }
 
   static defaultProps = {
     variant: VideoStates.PAUSED,
     onClick: (e) => {},
-    buttonRef: (ref) => {}
+    forwardRef: (ref) => {}
   }
 
   config (variant) {
@@ -86,7 +86,7 @@ class PlayPauseButton extends Component {
   }
 
   render () {
-    const { variant, onClick, buttonRef, videoId } = this.props
+    const { variant, onClick, forwardRef, videoId } = this.props
 
     const { label, Icon } = this.config(variant)
 
@@ -96,7 +96,7 @@ class PlayPauseButton extends Component {
         onClick={onClick}
         onKeyDown={this.handleKeyDown}
         aria-controls={videoId}
-        ref={buttonRef}
+        ref={forwardRef}
       >
         <ScreenReaderContent>{label}</ScreenReaderContent>
         <Icon size="x-small" />

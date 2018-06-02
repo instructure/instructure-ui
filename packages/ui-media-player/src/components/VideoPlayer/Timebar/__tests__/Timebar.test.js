@@ -57,10 +57,10 @@ describe('<Timebar />', () => {
     expect(buffered.prop('style').flexBasis).to.eql('30%')
   })
 
-  it('invokes timebarRef on mount', () => {
-    const timebarRef = testbed.stub()
-    testbed.render({ timebarRef })
-    expect(timebarRef).to.have.been.called
+  it('invokes forwardRef on mount', () => {
+    const forwardRef = testbed.stub()
+    testbed.render({ forwardRef })
+    expect(forwardRef).to.have.been.called
   })
 
   describe('moving the mouse around on the timebar', () => {

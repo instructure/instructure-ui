@@ -45,6 +45,7 @@
     "@instructure/ui-i18n": "^5.10.0",
     "@instructure/ui-icons": "^5.10.0",
     "@instructure/ui-layout": "^5.10.0",
+    "@instructure/ui-media-player": "^5.10.0",
     "@instructure/ui-menu": "^5.10.0",
     "@instructure/ui-motion": "^5.10.0",
     "@instructure/ui-navigation": "^5.10.0",

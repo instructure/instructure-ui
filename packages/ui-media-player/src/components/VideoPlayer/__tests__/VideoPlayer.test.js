@@ -125,13 +125,13 @@ describe('<VideoPlayer />', () => {
     it('renders a VideoPlayerControls by default', () => {
       const player = testbed.render()
       const controls = player.find('VideoPlayerControls')
-      expect(controls.prop('actions')).to.eql({
-        play: player.instance().play,
-        pause: player.instance().pause,
-        seek: player.instance().seek,
-        showControls: player.instance().showControls,
-        togglePlay: player.instance().togglePlay
-      })
+      expect(controls.exists()).to.eql(true)
+
+      const playPauseButton = controls.find('PlayPauseButton')
+      expect(playPauseButton.exists()).to.eql(true)
+
+      const timebar = controls.find('Timebar')
+      expect(timebar.exists()).to.eql(true)
     })
 
     it('can render custom controls', () => {
@@ -146,11 +146,10 @@ describe('<VideoPlayer />', () => {
 
   it('toggles play when clicked', () => {
     const player = renderWithMockVideo()
-
-    expect(player.state('state')).to.eql(PAUSED)
+    expect(player.state('videoState')).to.eql(PAUSED)
     player.simulate('click')
     player.instance().applyVideoProps()
-    expect(player.state('state')).to.eql(PLAYING)
+    expect(player.state('videoState')).to.eql(PLAYING)
   })
 
   describe('keybindings', () => {
@@ -191,9 +190,9 @@ describe('<VideoPlayer />', () => {
     it('can toggle play', () => {
       const player = renderWithMockVideo()
       keyboardEvent(player, ' ')
-      expect(player.state('state')).to.eql(PLAYING)
+      expect(player.state('videoState')).to.eql(PLAYING)
       keyboardEvent(player, ' ')
-      expect(player.state('state')).to.eql(PAUSED)
+      expect(player.state('videoState')).to.eql(PAUSED)
     })
 
     it('shows the controls when a keybinding is activated', () => {
@@ -219,7 +218,7 @@ describe('<VideoPlayer />', () => {
       context('when alwaysShowControls is true', () => {
         it('never dismisses the controls', () => {
           const player = testbed.render({ alwaysShowControls: true })
-          player.setState({ state: PLAYING })
+          player.setState({ videoState: PLAYING })
           player.instance().showControls()
           testbed.tick(5000)
           expect(player.state('showControls')).to.eql(true)
@@ -237,7 +236,7 @@ describe('<VideoPlayer />', () => {
         context('when video playing', () => {
           it('hides the controls after a timeout', () => {
             const player = testbed.render()
-            player.setState({ state: PLAYING })
+            player.setState({ videoState: PLAYING })
             player.instance().showControls(100)
             expect(player.state('showControls')).to.eql(true)
             testbed.tick(100)
@@ -259,7 +258,7 @@ describe('<VideoPlayer />', () => {
         context('if invoked another time within the timeout', () => {
           it('clears the initial timeout', () => {
             const player = testbed.render()
-            player.setState({ state: PLAYING })
+            player.setState({ videoState: PLAYING })
             player.instance().showControls(100)
             testbed.tick(50)
             expect(player.state('showControls')).to.eql(true)

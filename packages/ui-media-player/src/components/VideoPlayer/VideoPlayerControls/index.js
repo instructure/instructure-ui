@@ -28,10 +28,9 @@ import themeable from '@instructure/ui-themeable'
 
 import PlayPauseButton from '../PlayPauseButton'
 import Timebar from '../Timebar'
+import { Consumer } from '../VideoPlayerContext'
 
 import styles from './styles.css'
-
-import * as VideoStates from '../videoStates'
 
 /**
 ---
@@ -41,101 +40,87 @@ parent: VideoPlayer
 @themeable({}, styles)
 class VideoPlayerControls extends Component {
   static propTypes = {
-    actions: PropTypes.shape({
-      seek: PropTypes.func.isRequired,
-      togglePlay: PropTypes.func.isRequired,
-      showControls: PropTypes.func.isRequired
-    }).isRequired,
-    /**
-     * Id of the video element. Used to ensure
-     * correct aria properties are applied.
-     */
-    videoId: PropTypes.string.isRequired,
-    state: PropTypes.oneOf(Object.values(VideoStates)).isRequired,
-    /**
-     * Number of seconds that have been buffered.
-     */
-    buffered: PropTypes.number,
-    /**
-     * The current playback time in seconds.
-     */
-    currentTime: PropTypes.number,
-    /**
-     * The length of the video in seconds.
-     */
-    duration: PropTypes.number,
-    showControls: PropTypes.bool,
-    onMount: PropTypes.func
+    children: PropTypes.node
   }
 
   static defaultProps = {
-    showControls: false,
-    duration: 0,
-    buffered: 0,
-    currentTime: 0,
-    onMount ({ playButton, timebar }) { }
+    showControls: false
   }
 
-  componentDidMount () {
-    this.props.onMount({
-      playButton: this.playButton,
-      timebar: this.timebar
-    })
+  static CustomControls = (props) => {
+    return (
+      <Consumer>
+        {props.children}
+      </Consumer>
+    )
   }
 
-  preventBubbling = (e) => {
+  static PlayPauseButton = (props) => {
+    return (
+      <Consumer>
+        {({
+          state,
+          actions
+        }) => (
+          <PlayPauseButton
+            variant={state.videoState}
+            onClick={actions.togglePlay}
+            videoId={state.videoId}
+            {...props}
+          />
+        )}
+      </Consumer>
+    )
+  }
+
+  static Timebar = (props) => {
+    return (
+      <Consumer>
+        {({
+          state,
+          actions
+        }) => (
+          <Timebar
+            duration={state.duration}
+            currentTime={state.currentTime}
+            buffered={state.buffered}
+            videoId={state.videoId}
+            onClick={actions.seek}
+            {...props}
+          />
+        )}
+      </Consumer>
+    )
+  }
+
+  handleOnClick = (showControls) => (e) => {
     e.stopPropagation()
-    this.props.actions.showControls()
-  }
-
-  handleTimebarClick = (time) => {
-    this.props.actions.seek(time)
-  }
-
-  buttonRef = (el) => {
-    this.playButton = el
-  }
-
-  timebarRef = (el) => {
-    this.timebar = el
+    showControls()
   }
 
   render () {
-    const {
-      state,
-      duration,
-      buffered,
-      currentTime,
-      showControls,
-      actions,
-      videoId
-    } = this.props
-
-    const classes = {
-      [styles.container]: true,
-      [styles.hidden]: !showControls
-    }
-
-    /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
     return (
-      <div className={classnames(classes)} onClick={this.preventBubbling}>
-        <PlayPauseButton
-          variant={state}
-          onClick={actions.togglePlay}
-          videoId={videoId}
-          buttonRef={this.buttonRef}
-        />
-        <Timebar
-          duration={duration}
-          currentTime={currentTime}
-          buffered={buffered}
-          videoId={videoId}
-          onClick={this.handleTimebarClick}
-          timebarRef={this.timebarRef}
-        />
-      </div>
+      <Consumer>
+        {({
+          state,
+          actions
+        }) => {
+          const { showControls } = state
+          const classes = {
+            [styles.container]: true,
+            [styles.hidden]: !showControls
+          }
+
+          /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+          return (
+            <div className={classnames(classes)} onClick={this.handleOnClick(actions.showControls)}>
+              {this.props.children}
+            </div>
+          )
+          /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
+        }}
+      </Consumer>
     )
-    /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/click-events-have-key-events */
   }
 }
 

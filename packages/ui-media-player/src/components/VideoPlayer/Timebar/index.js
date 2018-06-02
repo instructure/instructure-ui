@@ -67,7 +67,7 @@ class Timebar extends Component {
      * Invoked with time (in seconds) at the coordinates clicked.
      */
     onClick: PropTypes.func,
-    timebarRef: PropTypes.func
+    forwardRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -75,7 +75,7 @@ class Timebar extends Component {
     buffered: 0,
     currentTime: 0,
     onClick: (time) => {},
-    timebarRef: (ref) => { }
+    forwardRef: (ref) => { }
   }
 
   constructor (props) {
@@ -118,7 +118,7 @@ class Timebar extends Component {
   }
 
   render () {
-    const { duration, buffered, currentTime, videoId, timebarRef } = this.props
+    const { duration, buffered, currentTime, videoId, forwardRef } = this.props
 
     const viewedPercent = (currentTime / duration) * 100 || 0
     const bufferedPercent = ((buffered / duration) * 100) - viewedPercent || 0
@@ -129,7 +129,7 @@ class Timebar extends Component {
       onMouseMove: this.handleTimebarScrub,
       onMouseLeave: this.handleTimebarLeave,
       onClick: this.handleTimebarClick,
-      ref: timebarRef,
+      ref: forwardRef,
       tabIndex: '0',
       role: 'slider',
       'aria-valuemin': 0,

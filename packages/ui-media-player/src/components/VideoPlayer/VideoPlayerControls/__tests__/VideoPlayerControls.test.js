@@ -26,66 +26,128 @@ import VideoPlayerControls from '../index'
 
 import styles from '../styles.css'
 
+import { Provider } from '../../VideoPlayerContext'
 import { PLAYING } from '../../videoStates'
 
 describe('<VideoPlayerControls />', () => {
-  const videoId = 'uuid-123'
-  const stubActions = {
-    seek: () => {},
-    showControls: () => {},
-    togglePlay: () => {}
+  const providerState = {
+    state: {
+      videoState: PLAYING,
+      loadingSrc: false,
+      showControls: false,
+      videoId: 'uuid-123'
+    },
+    actions: {
+      play: () => {},
+      pause: () => {},
+      seek: () => {},
+      togglePlay: () => {},
+      showControls: () => {}
+    }
   }
+
   const testbed = new Testbed(
-    <VideoPlayerControls actions={stubActions} videoId={videoId} state={PLAYING} />
+    <Provider value={providerState}>
+      <VideoPlayerControls>
+        <VideoPlayerControls.PlayPauseButton />
+        <VideoPlayerControls.Timebar />
+      </VideoPlayerControls>
+    </Provider>
   )
 
   it('prevents bubbling and shows controls when clicked', () => {
-    const showControls = testbed.stub()
+    const customProviderState = {
+      ...providerState,
+      actions: {
+        ...providerState.actions,
+        showControls: testbed.stub()
+      }
+    }
+    const component = testbed.render({ value: customProviderState }).find(`.${styles.container}`)
     const event = { stopPropagation: testbed.stub() }
-    const controls = testbed.render({ actions: { ...stubActions, showControls } })
-    controls.simulate('click', event)
+    component.simulate('click', event)
     expect(event.stopPropagation).to.have.been.called
-    expect(showControls).to.have.been.called
+    expect(customProviderState.actions.showControls).to.have.been.called
   })
 
   it('hides controls when showControls is false', () => {
-    const controls = testbed.render({ showControls: true })
-    expect(controls.hasClass(styles.hidden)).to.eql(false)
-    controls.setProps({ showControls: false })
-    expect(controls.hasClass(styles.hidden)).to.eql(true)
+    const showingControlsProviderState = {
+      ...providerState,
+      state: {
+        ...providerState.state,
+        showControls: true
+      }
+    }
+    const component = testbed.render({ value: showingControlsProviderState })
+    expect(component.find(`.${styles.container}`).hasClass(styles.hidden)).to.eql(false)
+
+    const hidingControlsProviderState = {
+      ...showingControlsProviderState,
+      state: {
+        ...showingControlsProviderState.state,
+        showControls: false
+      }
+    }
+
+    /*
+      https://github.com/airbnb/enzyme/issues/1229
+      Context: Ideally, this it() block would test `styles.hidden`'s value from
+      false to true (testbed.render() into setProps()) but there's an enzyme
+      bug that doesn't re-render when a component's props change (how it affects this test:
+      it only updates the prop(s) you passed in but not the styles' property (indirect changes?)
+      that depends on one of the props you've changed).
+
+      Wanted this to work
+      ```
+      component.setProps({ value: hidingControlsProviderState }, () => {
+        expect(component.find(`.${styles.container}`).hasClass(styles.hidden)).to.eql(true)
+        done()
+      })
+      ```
+      but for now, below is the alternative solution
+    */
+
+    const hiddenComponent = testbed.render({ value: hidingControlsProviderState })
+    expect(hiddenComponent.find(`.${styles.container}`).hasClass(styles.hidden)).to.eql(true)
   })
 
   it('renders a PlayPauseButton', () => {
-    const actions = {
-      ...stubActions,
-      togglePlay: testbed.stub()
+    const customProviderState = {
+      ...providerState,
+      actions: {
+        ...providerState.actions,
+        togglePlay: testbed.stub()
+      }
     }
-    const controls = testbed.render({ actions })
-    const button = controls.find('PlayPauseButton')
-    expect(button.prop('videoId')).to.eql(videoId)
+    const component = testbed.render({ value: customProviderState })
+    const button = component.find('PlayPauseButton')
+    expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
     expect(button.prop('variant')).to.eql(PLAYING)
     button.simulate('click')
-    expect(actions.togglePlay).to.have.been.called
+    expect(customProviderState.actions.togglePlay).to.have.been.called
   })
 
   it('renders a Timebar', () => {
-    const actions = {
-      ...stubActions,
-      seek: testbed.stub()
+    const customProviderState = {
+      ...providerState,
+      state: {
+        ...providerState.state,
+        currentTime: 123,
+        duration: 456,
+        buffered: 200
+      },
+      actions: {
+        ...providerState.actions,
+        seek: testbed.stub()
+      }
     }
-    const controls = testbed.render({ actions, currentTime: 123, duration: 456, buffered: 200 })
-    const timebar = controls.find('Timebar')
+    const component = testbed.render({ value: customProviderState })
+    const timebar = component.find('Timebar')
     expect(timebar.prop('currentTime')).to.eql(123)
     expect(timebar.prop('buffered')).to.eql(200)
     expect(timebar.prop('duration')).to.eql(456)
-    expect(timebar.prop('videoId')).to.eql(videoId)
+    expect(timebar.prop('videoId')).to.eql(customProviderState.state.videoId)
     timebar.prop('onClick')(123)
-    expect(actions.seek).to.have.been.calledWith(123)
-  })
-
-  it('invokes onMount after mounting', () => {
-    const onMount = testbed.stub()
-    testbed.render({ onMount })
-    expect(onMount).to.have.been.called
+    expect(customProviderState.actions.seek).to.have.been.calledWith(123)
   })
 })
