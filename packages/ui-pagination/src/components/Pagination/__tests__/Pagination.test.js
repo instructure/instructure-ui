@@ -136,6 +136,86 @@ describe('<Pagination />', () => {
       expect(subject.text().trim()).to.eq('Prev#0#1#2#3#4#5#6Next')
     })
 
+    context('when updating with the first page becoming current', () => {
+      it('should move focus from the Previous Page button to the first page button', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 1),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', 'Prev').focus()
+        subject.setProps({ children: buildPages(7, 0) })
+        expect(subject.findElementWithText('button', '#0').focused()).to.be.true
+      })
+
+      it('should not change focus when the Previous Page button did not have focus', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 1),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', '#1').focus()
+        subject.setProps({ children: buildPages(7, 0) })
+        expect(subject.findElementWithText('button', '#1').focused()).to.be.true
+      })
+
+      it('should not continue to change focus on subsequent updates', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 1),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', 'Prev').focus()
+        subject.setProps({ children: buildPages(7, 0) })
+        subject.findElementWithText('button', '#1').focus()
+        subject.setProps({ children: buildPages(7, 0) })
+        expect(subject.findElementWithText('button', '#1').focused()).to.be.true
+      })
+    })
+
+    context('when updating with the last page becoming current', () => {
+      it('should move focus from the Next Page button to the last page button', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 5),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', 'Next').focus()
+        subject.setProps({ children: buildPages(7, 6) })
+        expect(subject.findElementWithText('button', '#6').focused()).to.be.true
+      })
+
+      it('should not change focus when the Next Page button did not have focus', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 5),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', '#5').focus()
+        subject.setProps({ children: buildPages(7, 6) })
+        expect(subject.findElementWithText('button', '#5').focused()).to.be.true
+      })
+
+      it('should not continue to change focus on subsequent updates', () => {
+        const subject = testbed.render({
+          children: buildPages(7, 5),
+          variant: 'compact',
+          labelNext: 'Next',
+          labelPrev: 'Prev'
+        })
+        subject.findElementWithText('button', 'Next').focus()
+        subject.setProps({ children: buildPages(7, 6) })
+        subject.findElementWithText('button', '#5').focus()
+        subject.setProps({ children: buildPages(7, 6) })
+        expect(subject.findElementWithText('button', '#5').focused()).to.be.true
+      })
+    })
+
     describe('arrows', () => {
       it('should render only when applicable', () => {
         const subject = testbed.render({

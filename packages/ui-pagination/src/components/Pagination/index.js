@@ -41,6 +41,22 @@ import PaginationButton from './PaginationButton'
 import theme from './theme'
 import styles from './styles.css'
 
+function propsHaveCompactView (props) {
+  return props.variant === 'compact' && props.children.length > 5
+}
+
+function getCurrentPageIndex (props) {
+  return props.children.findIndex((p) => p.props.current)
+}
+
+function shouldShowPrevButton (props) {
+  return propsHaveCompactView(props) && getCurrentPageIndex(props) > 0
+}
+
+function shouldShowNextButton (props) {
+  return propsHaveCompactView(props) && getCurrentPageIndex(props) < props.children.length - 1
+}
+
 /**
 ---
 category: components/navigation
@@ -100,22 +116,44 @@ export default class Pagination extends Component {
     shouldHandleFocus: true
   }
 
+  componentWillReceiveProps (nextProps) {
+    if (!nextProps.shouldHandleFocus) {
+      return
+    }
+
+    if (!propsHaveCompactView(this.props) && !propsHaveCompactView(nextProps)) {
+      return
+    }
+
+    const focusable = findTabbable(this._root)
+    if (focusable[0] === document.activeElement && !shouldShowPrevButton(nextProps)) {
+      // Previous Page button has focus, but will no longer be rendered
+      this._moveFocusTo = 'first'
+      return
+    }
+
+    if (focusable[focusable.length - 1] === document.activeElement && !shouldShowNextButton(nextProps)) {
+      // Next Page button has focus, but will no longer be rendered
+      this._moveFocusTo = 'last'
+      return
+    }
+  }
+
   componentDidUpdate () {
     if (this.props.shouldHandleFocus === false || this.compactView === false) {
       return
     }
 
-    const focusable = findTabbable(this._root)
-
-    if (this.currentPageIndex === (this.pages.length - 1)) { // last page
-      focusable[focusable.length - 1].focus()
-    } else if (this.currentPageIndex === 0) { // first page
-      focusable[0].focus()
+    if (this._moveFocusTo != null) {
+      const focusable = findTabbable(this._root)
+      const focusIndex = this._moveFocusTo === 'first' ? 0 : focusable.length - 1
+      focusable[focusIndex].focus()
+      delete this._moveFocusTo
     }
   }
 
   get compactView () {
-    return (this.props.variant === 'compact') && this.pages.length > 5
+    return propsHaveCompactView(this.props)
   }
 
   get pages () {
@@ -125,7 +163,7 @@ export default class Pagination extends Component {
   }
 
   get currentPageIndex () {
-    return this.pages.findIndex((p) => p.props.current)
+    return getCurrentPageIndex(this.props)
   }
 
   handleElementRef = (el) => {
@@ -189,11 +227,11 @@ export default class Pagination extends Component {
   }
 
   get showPrevButton () {
-    return (this.currentPageIndex > 0) && this.compactView
+    return shouldShowPrevButton(this.props)
   }
 
   get showNextButton () {
-    return (this.currentPageIndex < this.pages.length - 1) && this.compactView
+    return shouldShowNextButton(this.props)
   }
 
   render () {
