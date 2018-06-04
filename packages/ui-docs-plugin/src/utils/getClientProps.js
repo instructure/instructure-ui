@@ -107,7 +107,7 @@ function parseDocs (docs, library) {
 function warning (condition, message, ...args) {
   if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
     // eslint-disable-next-line no-undefined
-    console.warn.apply(undefined, [`Warning: ${message}`, ...args])
+    console.warn(`Warning: ${message}`, ...args)
   }
 }
 
