@@ -5,8 +5,8 @@ coverage:
 test:
   build: .
   dockerfile: docker/Dockerfile.test
-  environment:
-    NODE_ENV: test
+  env_file:
+    - .env.test
   volumes_from:
     - coverage
   volumes:

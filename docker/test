@@ -2,6 +2,16 @@
 
 set -e
 
+env_file=.env.test
+
+dotenv () {
+  set -a
+  [ -f .env ] && . .env
+  set +a
+}
+
+dotenv
+
 function cleanup() {
   exit_code=$?
   set +e
@@ -16,6 +26,7 @@ function cleanup() {
   docker-compose stop test
   docker-compose rm -f test
   docker rmi -f $(docker images -qf "dangling=true") &>/dev/null
+  rm $env_file
 
   exit $exit_code
 }
@@ -24,11 +35,44 @@ trap cleanup INT TERM EXIT
 
 export COMPOSE_FILE=./docker-compose.test.yml
 
+echo "Creating ${env_file} file..."
+
+(
+cat << EOF
+NPM_TOKEN=${NPM_TOKEN}
+NPM_USERNAME=${NPM_USERNAME}
+NPM_EMAIL=${NPM_EMAIL}
+NPM_SCOPE=${NPM_SCOPE}
+GH_USERNAME=${GH_USERNAME}
+GH_EMAIL=${GH_EMAIL}
+GH_REMOTE=${GH_REMOTE}
+GH_PAGES_REPO=${GH_PAGES_REPO}
+GH_PAGES_CNAME=${GH_PAGES_CNAME}
+JIRA_HOST=${JIRA_HOST}
+JIRA_CONSUMER_KEY=${JIRA_CONSUMER_KEY}
+JIRA_TOKEN=${JIRA_TOKEN}
+JIRA_SECRET=${JIRA_SECRET}
+JIRA_PEM=${JIRA_PEM}
+JIRA_PROJECT_ID=${JIRA_PROJECT_ID}
+JIRA_PROJECT_KEY=${JIRA_PROJECT_KEY}
+SLACK_USERNAME=${SLACK_USERNAME}
+SLACK_CHANNEL=${SLACK_CHANNEL}
+SLACK_EMOJI=${SLACK_EMOJI}
+SLACK_WEBHOOK=${SLACK_WEBHOOK}
+CHANGELOG_URL=${CHANGELOG_URL}
+EOF
+) > $env_file
+
 echo "Pulling image..."
 docker-compose pull
 
 echo "Building services..."
 docker-compose build
 
-echo "Running ci script..."
-docker-compose run -u "root" test bash -c "./scripts/ci"
+if [[ "$GERRIT_EVENT_TYPE" == "change-merged" && "$GERRIT_BRANCH" == "master" ]]; then
+  echo "Running the post-merge script..."
+  docker-compose run -u "root" --rm test bash -c "./scripts/post-merge"
+else
+  echo "Running tests..."
+  docker-compose run -u "root" --rm test bash -c "yarn test"
+fi

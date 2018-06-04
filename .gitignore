@@ -16,3 +16,4 @@ __screenshots__
 screenshots.json
 .npmrc
 .env
+.env.test
