@@ -5,9 +5,10 @@ set -e
 ########################################
 # Make sure working directory is clean #
 ########################################
-if [ -n "$(git status --porcelain)" ]; then
-  echo Refusing to operate on unclean working directory
-  echo Use \"git status\" to see which files have been modified
+git_status=$(git status --porcelain)
+if [ -n "$git_status" ]; then
+  echo "⚠️   Refusing to operate on unclean working directory"
+  echo "$git_status"
   exit 1
 fi
 

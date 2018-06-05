@@ -7,9 +7,10 @@ NPM_CLIENT=$(npm bin)/yarn
 ########################################
 # Make sure working directory is clean #
 ########################################
-if [ -n "$(git status --porcelain)" ]; then
+git_status=$(git status --porcelain)
+if [ -n "$git_status" ]; then
   echo "⚠️   Refusing to operate on unclean working directory"
-  echo "Use \"git status\" to see which files have been modified"
+  echo "$git_status"
   exit 1
 fi
 
@@ -106,7 +107,7 @@ echo "Npm Tag: $npm_tag ..."
 echo "Git Tag: $git_tag ..."
 echo "Next Version: $next_version ..."
 
-if [[ -z "$POST_MERGE_BUILD" ]]; then
+if [[ $POST_MERGE_BUILD ]]; then
   read -p "Continue? [y/n]" -n 1 -r; echo
   if ! [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Stopped"

@@ -39,6 +39,7 @@ echo "Creating ${env_file} file..."
 
 (
 cat << EOF
+POST_MERGE_BUILD=${POST_MERGE_BUILD}
 NPM_TOKEN=${NPM_TOKEN}
 NPM_USERNAME=${NPM_USERNAME}
 NPM_EMAIL=${NPM_EMAIL}
@@ -69,7 +70,7 @@ docker-compose pull
 echo "Building services..."
 docker-compose build
 
-if [[ "$GERRIT_EVENT_TYPE" == "change-merged" && "$GERRIT_BRANCH" == "master" ]]; then
+if [[ $POST_MERGE_BUILD ]]; then
   echo "Running the post-merge script..."
   docker-compose run -u "root" --rm test bash -c "./scripts/post-merge"
 else
