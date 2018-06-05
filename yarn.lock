@@ -8367,11 +8367,7 @@ jsdoc@~3.5.5:
     taffydb "2.6.2"
     underscore "~1.8.3"
 
-jsdom-global@^3.0.2:
-  version "3.0.2"
-  resolved "https://registry.npmjs.org/jsdom-global/-/jsdom-global-3.0.2.tgz#6bd299c13b0c4626b2da2c0393cd4385d606acb9"
-
-jsdom@^11.5.1, jsdom@^11.6.2:
+jsdom@^11.5.1:
   version "11.11.0"
   resolved "https://registry.npmjs.org/jsdom/-/jsdom-11.11.0.tgz#df486efad41aee96c59ad7a190e2449c7eb1110e"
   dependencies:
