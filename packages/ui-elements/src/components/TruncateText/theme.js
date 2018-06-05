@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
-export default function generator ({ colors, typography }) {
-  return {}
+export default function generator ({ typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    lineHeight: typography.lineHeight
+  }
 }

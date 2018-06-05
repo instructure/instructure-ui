@@ -45,6 +45,8 @@ import cleanData from './cleanData'
  * @param {string} options.truncate=character Add ellipsis after words or after any character.
  * @param {string} options.ellipsis=\u2026 Where to place the ellipsis within the string.
  * @param {string[]} options.ignore Characters to ignore at truncated end of string.
+ * @param {number} options.lineHeight=1.2 Unitless multiplier to use in case element can have
+ * 'normal' lineHeight. Adjust this to better match your font if needed.
  */
 
 export function truncate (element, options) {
@@ -62,7 +64,8 @@ export default class Truncator {
       position: options.position || 'end',
       truncate: options.truncate || 'character',
       ellipsis: options.ellipsis || '\u2026',
-      ignore: options.ignore || [' ', '.', ',']
+      ignore: options.ignore || [' ', '.', ','],
+      lineHeight: options.lineHeight || 1.2
     }
 
     if (!element) {
@@ -91,10 +94,11 @@ export default class Truncator {
       return
     }
 
-    const { maxLines, truncate } = this._options
+    const { maxLines, truncate, lineHeight } = this._options
     const style = getComputedStyle(this._parent)
-    const lineHeight = style.lineHeight === 'normal'
-      ? 1.2 * parseFloat(style.fontSize)
+    // if no explicit lineHeight is inherited, use lineHeight multiplier for calculations
+    const actualLineHeight = style.lineHeight === 'normal'
+      ? lineHeight * parseFloat(style.fontSize)
       : parseFloat(style.lineHeight)
     const node = this._stage.firstChild.children
       ? this._stage.firstChild
@@ -122,10 +126,10 @@ export default class Truncator {
     this._nodeDataIndexes = cloneArray(nodeDataIndexes)
     this._maxHeight = maxLines === 'auto'
       ? getBoundingClientRect(this._parent).height
-      : maxLines * lineHeight
+      : maxLines * actualLineHeight
     this._maxWidth = measureText(this._nodeMap.map(item => item.node), this._parent)
     this._maxLines = maxLines === 'auto'
-      ? Math.round(this._maxHeight / lineHeight)
+      ? Math.round(this._maxHeight / actualLineHeight)
       : maxLines
   }
 

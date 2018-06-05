@@ -26,6 +26,7 @@
   display: block;
   overflow: hidden;
   word-wrap: break-word;
+  font-family: var(--fontFamily);
 }
 
 .auto {

@@ -24,6 +24,7 @@
 
 import React from 'react'
 import TruncateText from '../index'
+import Text from '../../Text'
 
 describe('<TruncateText />', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
@@ -143,6 +144,36 @@ describe('<TruncateText />', () => {
     expect(
       warning.lastCall.args[0].includes('Some children are too deep in the node tree and will not render.')
     ).to.be.true
+  })
+
+  it('should render text at any size with no lineHeight set', () => {
+    const subject = testbed.render({
+      style: {lineHeight: 'normal'},
+      children: (
+        <span id="stage">
+          <Text size="x-small">
+            <TruncateText>xsmall</TruncateText>
+          </Text>
+          <Text size="small">
+            <TruncateText>small</TruncateText>
+          </Text>
+          <Text size="medium">
+            <TruncateText>medium</TruncateText>
+          </Text>
+          <Text size="large">
+            <TruncateText>large</TruncateText>
+          </Text>
+          <Text size="x-large">
+            <TruncateText>xlarge</TruncateText>
+          </Text>
+          <Text size="xx-large">
+            <TruncateText>xxlarge</TruncateText>
+          </Text>
+        </span>
+      )
+    })
+    const stage = document.getElementById('stage')
+    expect(stage.textContent).to.equal('xsmallsmallmediumlargexlargexxlarge')
   })
 
   it('should meet a11y standards', (done) => {
