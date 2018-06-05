@@ -49,7 +49,7 @@ JIRA_HOST=${JIRA_HOST}
 JIRA_CONSUMER_KEY=${JIRA_CONSUMER_KEY}
 JIRA_TOKEN=${JIRA_TOKEN}
 JIRA_SECRET=${JIRA_SECRET}
-JIRA_PEM=${JIRA_PEM}
+JIRA_PEM=/home/docker/.ssh/gerritbot_jira.pem
 JIRA_PROJECT_ID=${JIRA_PROJECT_ID}
 JIRA_PROJECT_KEY=${JIRA_PROJECT_KEY}
 SLACK_USERNAME=${SLACK_USERNAME}
@@ -69,9 +69,14 @@ docker-compose build
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
-# copy ssh for host user
-docker cp ~/.ssh $container:/home/docker/.ssh
-docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
+if [[ $POST_MERGE_BUILD ]]; then
+  # copy ssh and jira pem for host user
+  docker cp ~/.ssh $container:/home/docker/.ssh
+  if [[ $JIRA_PEM ]]; then
+    docker cp $JIRA_PEM $container:/home/docker/.ssh/
+  fi
+  docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
+fi
 
 echo "Running tests..."
 docker exec $container bash -c "yarn test"

@@ -23,11 +23,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { error } = require('./utils/logger')
+const { error, info } = require('./utils/logger')
 
 require('dotenv').config()
 
-if (process.argv.includes('--release')) {
+const commands = [
+  '--release',
+  '--bump',
+  '--deploy',
+  '--publish',
+  '--pre-publish',
+  '--post-publish',
+  '--deprecate-package',
+  '--publish-package',
+  '--build',
+  '--test',
+  '--commit',
+  '--lint',
+  '--lint-commit',
+  '--clean'
+]
+
+function listCommands () {
+  info(`Commands: \n${commands.join(', \n')}`)
+}
+
+if (process.argv.includes('--help')) {
+  listCommands()
+} else if (process.argv.includes('--release')) {
   require('./release')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
@@ -57,4 +80,5 @@ if (process.argv.includes('--release')) {
   require('./build/clean')
 } else {
   error('[ui-scripts]: Invalid command!')
+  listCommands()
 }

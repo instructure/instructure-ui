@@ -38,19 +38,26 @@ const {
   JIRA_PROJECT_KEY
 } = process.env
 
-const JIRA = new Jira({
-  host: JIRA_HOST,
-  protocol: 'https',
-  oauth: {
-    consumer_key: JIRA_CONSUMER_KEY,
-    consumer_secret: fs.readFileSync(JIRA_PEM),
-    access_token: JIRA_TOKEN,
-    access_secret: JIRA_SECRET
+let JIRA
+
+function jiraClient () {
+  if (!JIRA) {
+    JIRA = new Jira({
+      host: JIRA_HOST,
+      protocol: 'https',
+      oauth: {
+        consumer_key: JIRA_CONSUMER_KEY,
+        consumer_secret: fs.readFileSync(JIRA_PEM),
+        access_token: JIRA_TOKEN,
+        access_secret: JIRA_SECRET
+      }
+    })
   }
-})
+  return JIRA
+}
 
 exports.createJiraVersion = async function createJiraVersion (name, version) {
-  const result = await JIRA.createVersion({
+  const result = await jiraClient().createVersion({
     name: `${name} v${version}`,
     archived: false,
     released: true,
@@ -92,7 +99,7 @@ exports.getIssuesInRelease = async function getIssuesInRelease () {
 
 exports.updateJiraIssues = async function updateJiraIssues (issueKeys, jiraVersionName) {
   await Promise.all(issueKeys.map((issueKey) => {
-      return JIRA.updateIssue(issueKey, {
+      return jiraClient().updateIssue(issueKey, {
         update: {
           fixVersions: [{ add: { name: jiraVersionName } }]
         }
