@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { error } = require('./utils/logger')
+const { bump } = require('./utils/release')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+try {
+  // optional release type argument: major, minor, patch
+  // ui-scripts --bump major
+  bump(process.argv[3])
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

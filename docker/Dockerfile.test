@@ -11,6 +11,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > "/etc/apt/sources.list.d/google.list" \
  && apt-get update --quiet=2 \
  && apt-get install libgconf-2-4 --quiet=2 \
+ && apt-get install --quiet=2 ssh > /dev/null \
  && apt-get install --quiet=2 google-chrome-beta > /dev/null \
  && apt-get install --quiet=2 yarn="$YARN_VERSION" \
  && apt-get clean \
@@ -20,7 +21,7 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
 RUN mkdir -p /usr/src/app/
 WORKDIR /usr/src/app/
 
-COPY ./package.json /usr/src/app/
+COPY ./package.json /usr/src/app
 COPY ./yarn.lock /usr/src/app
 COPY .yarnrc /usr/src/app
 

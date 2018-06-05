@@ -22,14 +22,6 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { commit } = require('./utils/git')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+process.exit(commit().status)

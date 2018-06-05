@@ -22,14 +22,42 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const https = require('https')
+const { info } = require('./logger')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+const {
+ SLACK_CHANNEL,
+ SLACK_USERNAME,
+ SLACK_EMOJI,
+ CHANGELOG_URL,
+ SLACK_WEBHOOK
+} = process.env
+
+exports.postReleaseSlackMessage = function postReleaseSlackMessage (jiraVersion, issueKeys) {
+  if (SLACK_CHANNEL && SLACK_WEBHOOK) {
+    info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
+
+    const message = `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:`
+    const changelog = CHANGELOG_URL ? `\n ${CHANGELOG_URL}` : ''
+    const issues = (issueKeys.length > 0) ? `\n\nIssues in this release: ${issueKeys.join(', ')}` : ''
+
+    const payload = {
+      'channel': SLACK_CHANNEL,
+      'username': SLACK_USERNAME,
+      'icon_emoji': SLACK_EMOJI,
+      'text': message + changelog + issues,
+      'link_names': 1
+    }
+
+    const req = https.request({
+      path: `/services/${SLACK_WEBHOOK}`,
+      hostname: 'hooks.slack.com',
+      method: 'POST'
+    })
+
+    req.write(JSON.stringify(payload))
+    req.end()
+
+    info(`💬  Posted Slack Message: "${message}"`) // eslint-disable-line no-console
+  }
+}

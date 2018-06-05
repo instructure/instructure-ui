@@ -23,12 +23,12 @@
     "test:watch": "lerna run test:watch --stream",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
-    "lint:commit": "rm -f .git/validate-commit-msg && git log -1 --pretty=%B > .git/validate-commit-msg && validate-commit-msg validate-commit-msg",
+    "lint:commit": "ui-scripts --lint-commit",
+    "lint:staged": "lerna exec lint-staged --stream --parallel",
     "generate:component": "./scripts/generate-component",
     "generate:package": "./scripts/generate-package",
     "generate:rfc": "./scripts/generate-rfc",
-    "precommit": "lerna exec lint-staged --stream --parallel",
-    "commit": "git-cz",
+    "commit": "ui-scripts --commit",
     "install:packages": "lerna bootstrap --reject-cycles",
     "bootstrap": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --ignore docs",
@@ -37,12 +37,13 @@
     "clean": "lerna run clean",
     "clean:modules": "lerna clean --yes",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
-    "bump": "./scripts/bump",
+    "bump": "ui-scripts --bump",
+    "publish:packages": "lerna exec ui-scripts --publish-package --stream --ignore docs",
+    "deprecate:packages": "lerna exec ui-scripts --deprecate-package --stream --ignore docs",
     "prerelease": "yarn build",
-    "release": "./scripts/release",
-    "run:script": "./scripts/run-script",
+    "release": "ui-scripts --release",
     "predeploy": "yarn build:docs",
-    "deploy": "./scripts/deploy -d packages/__docs__/__build__",
+    "deploy": "ui-scripts --deploy",
     "storybook": "start-storybook -p 9001 -c .storybook",
     "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
     "build:examples": "webpack --config .happo/webpack.config.js",
@@ -54,36 +55,30 @@
     "postcss-syntax": "0.26.1"
   },
   "devDependencies": {
-    "@instructure/conventional-changelog": "1.0.0",
     "@storybook/addon-links": "^3.4.5",
     "@storybook/addon-options": "^3.4.5",
     "@storybook/addons": "^3.4.6",
     "@storybook/react": "^3.4.5",
-    "commitizen": "^2.10.1",
-    "dotenv": "^5.0.1",
-    "gh-pages": "^1.0.0",
     "happo": "^5.0.0",
     "happo-target-firefox": "^5.0.0",
-    "jira-client": "^6.4.1",
+    "husky": "v1.0.0-rc.8",
     "lerna": "3.0.0-beta.21",
     "lint-staged": "^7.1.2",
     "npm-run-all": "^4.1.3",
     "react": "^15.6.2",
     "react-dom": "^15.6.2",
-    "standard-version": "^4.4.0",
     "story2sketch": "^1.0.1",
     "storybook-addon-rtl": "^0.1.1",
-    "validate-commit-msg": "2.14.0",
     "yarn": "1.7.0"
+  },
+  "engines": {
+    "node": ">=8.0.0 && <9.0.0",
+    "yarn": ">=1.6.0"
   },
   "config": {
     "commitizen": {
       "path": "./node_modules/@instructure/conventional-changelog"
     }
-  },
-  "engines": {
-    "node": ">=8.0.0",
-    "yarn": ">=1.6.0"
   },
   "standard-version": {
     "skip": {
@@ -95,5 +90,11 @@
   "lint-staged": {
     "*.js": "eslint",
     "*.css": "stylelint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint:staged",
+      "pre-push": "yarn lint:commit"
+    }
   }
 }

@@ -22,14 +22,23 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { lintCommitMessage } = require('./utils/git')
+const { error, info } = require('./utils/logger')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+async function lintCommit () {
+  const isValid = await lintCommitMessage()
+
+  if (isValid) {
+    process.exit(0)
+  } else {
+    info('(See https://www.npmjs.com/package/conventional-changelog-angular)')
+    process.exit(1)
+  }
+}
+
+try {
+  lintCommit()
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

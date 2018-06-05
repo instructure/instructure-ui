@@ -22,14 +22,12 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const chalk = require('chalk')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+exports.info = function info (...args) {
+  console.info(chalk.blue(...args)) // eslint-disable-line no-console
+}
+
+exports.error = function error (...args) {
+  console.error(chalk.red('⚠️   ', ...args))
+}

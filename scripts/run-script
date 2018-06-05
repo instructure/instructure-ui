@@ -1,5 +1,0 @@
-#!/bin/bash
-
-set -e
-
-$(npm bin)/lerna exec --ignore docs --bail=false -- "\${LERNA_ROOT_PATH}/scripts/$@"

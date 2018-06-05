@@ -21,15 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { error } = require('./utils/logger')
+const { prePublish } = require('./utils/release')
 
-const { runCommands, getCommand } = require('../utils/command')
-
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+try {
+  prePublish()
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

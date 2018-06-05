@@ -23,7 +23,7 @@
  */
 
 
-const { getCommand, runCommands } = require('../utils')
+const { getCommand, runCommands } = require('../utils/command')
 
 const vars = ['NODE_ENV=test']
 const args = ['start']

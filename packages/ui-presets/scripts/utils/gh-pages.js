@@ -22,14 +22,40 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const ghpages = require('gh-pages')
+const { runCommandAsync } = require('./command')
+const { getPackageJSON } = require('./get-package')
+const { info } = require('./logger')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+const {
+ GH_PAGES_DIR,
+ GH_PAGES_BRANCH,
+ GH_PAGES_REPO,
+ GH_PAGES_CNAME
+} = process.env
+
+exports.publishGithubPages = async function publishGithubPages (callback) {
+  info(`📖   Deploying ${GH_PAGES_DIR} to Github pages...`)
+  info(`📖   Repository: ${GH_PAGES_REPO}...`)
+  info(`📖   Branch: ${GH_PAGES_BRANCH}...`)
+
+  await runCommandAsync(`touch ${GH_PAGES_DIR}/.nojekyll`)
+
+  if (GH_PAGES_CNAME) {
+    await runCommandAsync(`echo "${GH_PAGES_CNAME}" >> ${GH_PAGES_DIR}/CNAME`)
+  }
+
+  ghpages.publish(GH_PAGES_DIR, {
+    branch: GH_PAGES_BRANCH,
+    repo: GH_PAGES_REPO
+  }, (err) => {
+    if (!err) {
+      const { name, version } = getPackageJSON()
+      info(`📖   Deployed version ${version} of the ${name} documentation...`)
+    }
+
+    if (typeof callback === 'function') {
+      callback(err)
+    }
+  })
+}

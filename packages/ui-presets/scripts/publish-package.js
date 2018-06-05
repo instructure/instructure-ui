@@ -22,14 +22,16 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { publishPackage } = require('./utils/release')
+const { error } = require('./utils/logger')
+const { getPackageJSON } = require('./utils/get-package')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+try {
+  const { version } = getPackageJSON()
+  // optional version argument
+  // ui-scripts --publish-package 5.12.2
+  publishPackage(process.argv[3] || version)
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

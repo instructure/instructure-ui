@@ -16,9 +16,6 @@ function cleanup() {
   exit_code=$?
   set +e
 
-  echo "Lerna debug log..."
-  cat lerna-debug.log
-
   echo "Copying coverage reports..."
   docker cp $(docker-compose ps -q coverage):/usr/src/app/coverage .
 
@@ -44,9 +41,8 @@ NPM_TOKEN=${NPM_TOKEN}
 NPM_USERNAME=${NPM_USERNAME}
 NPM_EMAIL=${NPM_EMAIL}
 NPM_SCOPE=${NPM_SCOPE}
-GH_USERNAME=${GH_USERNAME}
-GH_EMAIL=${GH_EMAIL}
-GH_REMOTE=${GH_REMOTE}
+GH_PAGES_DIR=${GH_PAGES_DIR}
+GH_PAGES_BRANCH=${GH_PAGES_BRANCH}
 GH_PAGES_REPO=${GH_PAGES_REPO}
 GH_PAGES_CNAME=${GH_PAGES_CNAME}
 JIRA_HOST=${JIRA_HOST}
@@ -70,10 +66,19 @@ docker-compose pull
 echo "Building services..."
 docker-compose build
 
+echo "Preparing container..."
+container=$(docker-compose run -d --rm test tail -f /dev/null)
+
+# copy ssh for host user
+docker cp ~/.ssh $container:/home/docker/.ssh
+docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
+
+echo "Running tests..."
+docker exec $container bash -c "yarn test"
+
 if [[ $POST_MERGE_BUILD ]]; then
-  echo "Running the post-merge script..."
-  docker-compose run -u "root" --rm test bash -c "./scripts/post-merge"
-else
-  echo "Running tests..."
-  docker-compose run -u "root" --rm test bash -c "yarn test"
+  echo "Running release..."
+  docker exec $container bash -c "yarn release"
 fi
+
+docker stop $container

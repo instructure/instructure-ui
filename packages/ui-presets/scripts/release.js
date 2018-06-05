@@ -22,14 +22,41 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const rl = require('readline')
+const { getReleaseVersion, publish, postPublish } = require('./utils/release')
+const { info, error } = require('./utils/logger')
+const { getPackageJSON } = require('./utils/get-package')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+async function release () {
+  const { name, version } = getPackageJSON()
+  const releaseVersion = await getReleaseVersion()
+
+  const confirm = rl.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  })
+
+  info(`Releasing version ${releaseVersion} of ${name}...`)
+
+  confirm.question('Continue? [y/n]\n', function (reply) {
+    confirm.close()
+    if (!['Y', 'y'].includes(reply.trim())) {
+      process.exit(0)
+    }
+  })
+
+  await publish(releaseVersion)
+
+  if (releaseVersion === version) {
+    await postPublish()
+  }
+
+  info(`Version ${releaseVersion} of ${name} was successfully released!`)
+}
+
+try {
+  release()
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

@@ -14,7 +14,6 @@ Before beginning you will need:
 - Permissions to publish to the instructure org on npm.
 - Write/push permissions to `gh-pages` branch in the instructure-ui Github repository.
 - Set up a `.env` file with your Github and Npm account information (see `.env.example`).
-- Run `./scripts/set-env`.
 
 To bump the package versions in preparation for a stable release:
 
@@ -46,7 +45,6 @@ Before beginning you will need:
 
 - Permissions to publish to the instructure org on npm.
 - Set up a `.env` file with your Github and npm account information (see `.env.example`).
-- Run `./scripts/set-env`.
 
 To create a pre-release:
 
@@ -62,7 +60,6 @@ Before beginning you will need:
 - Permissions to publish to the instructure org on npm.
 - Permissions to create remote branches if the release branch isn't already set up (see A below).
 - Set up a `.env` file with your Github and Npm account information (see `.env.example`).
-- Run `./scripts/set-env`.
 
 A. To set up a branch for a patch release (e.g. 1.4.1 when the `master` branch is already at 2.0.0):
 

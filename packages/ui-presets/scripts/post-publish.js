@@ -22,14 +22,12 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { postPublish } = require('./utils/release')
+const { error } = require('./utils/logger')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+try {
+  postPublish()
+} catch (err) {
+  error(err)
+  process.exit(1)
+}

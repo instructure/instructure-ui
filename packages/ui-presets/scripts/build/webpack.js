@@ -23,7 +23,7 @@
  */
 
 
-const { runCommands, getCommand } = require('../utils')
+const { runCommands, getCommand } = require('../utils/command')
 
 let result
 

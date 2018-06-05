@@ -21,15 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const readPkgUp = require('read-pkg-up')
+const fs = require('fs')
 
-const { runCommands, getCommand } = require('../utils/command')
-
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+exports.getPackageJSON = function getPackageJSON () {
+  return readPkgUp.sync({
+    cwd: fs.realpathSync(process.cwd()),
+  }).pkg
+}

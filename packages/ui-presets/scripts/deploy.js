@@ -21,15 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { publishGithubPages } = require('./utils/gh-pages')
 
-const { runCommands, getCommand } = require('../utils/command')
-
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
-    '__build__',
-    'es',
-    'dist',
-    'lib',
-    '.babel-cache'
-  ])
-}))
+publishGithubPages((err) => {
+  if (err) {
+    process.exit(1)
+  }
+})

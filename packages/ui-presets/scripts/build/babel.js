@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils')
+const { runCommands, getCommand } = require('../utils/command')
 
 const vars = []
 const args = ['src', '--ignore *.test.js']

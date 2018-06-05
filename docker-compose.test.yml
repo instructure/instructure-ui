@@ -5,9 +5,7 @@ coverage:
 test:
   build: .
   dockerfile: docker/Dockerfile.test
-  env_file:
-    - .env.test
   volumes_from:
     - coverage
-  volumes:
-    - "./.git:/usr/src/app/.git"
+  env_file:
+    - ./.env.test

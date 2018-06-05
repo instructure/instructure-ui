@@ -26,37 +26,54 @@ const fs = require('fs')
 const path = require('path')
 const which = require('which')
 const spawn = require('cross-spawn')
+const { error } = require('./logger')
+
+const cp = require('child_process')
+const util = require('util')
+const exec = util.promisify(cp.exec)
 
 function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) {
-  let pathFromWhich
-  try {
-    pathFromWhich = fs.realpathSync(which.sync(executable))
-  } catch (_error) {
-    // ignore _error
-  }
-  try {
-    const modPkgPath = require.resolve(`${modName}/package.json`)
-    const modPkgDir = path.dirname(modPkgPath)
-    const { bin } = require(modPkgPath)
-    const binPath = typeof bin === 'string' ? bin : bin[executable]
-    const fullPathToBin = path.join(modPkgDir, binPath)
-    if (fullPathToBin === pathFromWhich) {
-      return executable
-    }
-    return fullPathToBin.replace(cwd, '.')
-  } catch (error) {
-    if (pathFromWhich) {
-      return executable
-    }
-    throw error
-  }
+ let pathFromWhich
+ try {
+   pathFromWhich = fs.realpathSync(which.sync(executable))
+ } catch (_error) {
+   // ignore _error
+ }
+ try {
+   const modPkgPath = require.resolve(`${modName}/package.json`)
+   const modPkgDir = path.dirname(modPkgPath)
+   const { bin } = require(modPkgPath)
+   const binPath = typeof bin === 'string' ? bin : bin[executable]
+   const fullPathToBin = path.join(modPkgDir, binPath)
+   if (fullPathToBin === pathFromWhich) {
+     return executable
+   }
+   return fullPathToBin.replace(cwd, '.')
+ } catch (error) {
+   if (pathFromWhich) {
+     return executable
+   }
+   throw error
+ }
 }
 
-function getCommand (vars, command, args) {
+exports.resolveCommand = function resolveCommand (command) {
+  return resolveBin(command)
+}
+
+exports.getCommand = function getCommand (vars, command, args) {
   return `${resolveBin('cross-env')} ${vars.join(' ')} ${resolveBin(command)} ${args.join(' ')}`
 }
 
-function runCommands (commands) {
+exports.runCommand = function runCommand (command, args = []) {
+  return spawn.sync(
+    command,
+    args,
+    { stdio: 'inherit' }
+  )
+}
+
+exports.runCommands = function runCommands (commands) {
   const args = [
     '--kill-others-on-fail',
     '--prefix', '[{name}]',
@@ -78,5 +95,12 @@ function runCommands (commands) {
   )
 }
 
-exports.runCommands = runCommands
-exports.getCommand = getCommand
+exports.runCommandAsync = async function runCommandAsync (command) {
+  const { stderr, stdout } = await exec(command)
+  if (stderr) {
+    error(stderr)
+    return
+  } else if (typeof stdout === 'string') {
+    return stdout.trim()
+  }
+}

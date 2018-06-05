@@ -23,7 +23,7 @@
  */
 
 
-const { runCommands, getCommand } = require('../utils')
+const { runCommands, getCommand } = require('../utils/command')
 
 const commands = {
   eslint: getCommand([], 'eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.']),
