@@ -34,19 +34,22 @@ import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 export default {
   /**
   * Return the locale from the browser
-  * @returns {String} locale (defaults to 'en')
+  * @returns {String} locale (defaults to 'en-US')
   */
-  browserLocale (nav) {
-    let language = 'en-US'
+  browserLocale (nav, hasDOM = canUseDOM) {
+    const defaultLocale = 'en-US'
 
-    if (canUseDOM && window && window.navigator) {
-      if (window.navigator.languages && window.navigator.languages.length > 0) {
-        language = window.navigator.languages[0]
-      } else if (window.navigator.language) {
-        language = window.navigator.language || window.navigator.browserLanguage
-      }
-    }
+    if (nav) return nav.language
+    if (!hasDOM) return defaultLocale
 
-    return nav ? nav.language : language
+    const documentLanguage = window.document.documentElement.lang
+    if (documentLanguage) return documentLanguage
+
+    const hasNavigatorLanguages = window.navigator && window.navigator.languages && window.navigator.languages.length
+    const hasNavigatorLanguage = window.navigator && window.navigator.language
+    if (hasNavigatorLanguages) return window.navigator.languages[0]
+    if (hasNavigatorLanguage) return window.navigator.language || window.navigator.browserLanguage
+
+    return defaultLocale
   }
 }
