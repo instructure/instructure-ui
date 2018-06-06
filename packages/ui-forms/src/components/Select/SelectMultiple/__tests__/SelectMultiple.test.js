@@ -343,6 +343,90 @@ describe('<SelectMultiple />', () => {
     })
   })
 
+  describe('default options', () => {
+    function testDefaultValue(defaultProp) {
+      it(`updates the selected options when ${defaultProp} is set and the options update`, (done) => {
+        const subject = testbed.render({
+          [defaultProp]: ['4', '5']
+        })
+
+        expect(subject.find('button').length).to.equal(0)
+
+        subject.setProps({
+          options: [
+            ...options,
+            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+            { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
+          ]}, () => {
+            expect(subject.find('button').length).to.equal(2)
+            expect(subject.find('button[title="Argentina"]')).to.exist
+            expect(subject.find('button[title="Uruguay"]')).to.exist
+            done()
+          }
+        )
+      })
+    }
+
+    testDefaultValue('defaultSelectedOption')
+    testDefaultValue('selectedOption')
+
+    it('updates correctly when default options are provided and some of the corresponding options are loaded later', (done) => {
+      const testOptions = [
+        ...options,
+        { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+      ]
+
+      const subject = testbed.render({
+        defaultSelectedOption: ['4', '5'],
+        options: testOptions
+      })
+
+      expect(subject.find('button').length).to.equal(1)
+      expect(subject.find('button[title="Argentina"]')).to.exist
+
+      subject.setProps({
+        options: [
+          ...testOptions,
+          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
+        ]}, () => {
+          expect(subject.find('button').length).to.equal(2)
+          expect(subject.find('button[title="Uruguay"]')).to.exist
+          done()
+        }
+      )
+    })
+
+    it('does not re render option when a default option has been dismissed and the options update', (done) => {
+      const testOptions = [
+        ...options,
+        { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+      ]
+
+      const subject = testbed.render({
+        defaultSelectedOption: ['4', '5'],
+        options: testOptions
+      })
+
+      subject.find('button').click() // dismiss argentina
+
+      expect(subject.find('button').length).to.equal(0)
+
+      subject.setProps({
+        options: [
+          ...testOptions,
+          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
+        ]}, () => {
+          // on option update, argentina should not get amended to the selected
+          // options since it has already been dismissed
+          expect(subject.find('button').length).to.equal(1)
+          expect(subject.find('button[title="Uruguay"]')).to.exist
+          expect(subject.find('button[title="Argentina"]')).to.not.exist
+          done()
+        }
+      )
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()

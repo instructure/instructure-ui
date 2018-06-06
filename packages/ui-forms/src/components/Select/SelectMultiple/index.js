@@ -196,7 +196,7 @@ class SelectMultiple extends Component {
       }
 
       return option
-    })
+    }).filter(option => option)
   }
 
   getFilteredOptions (
@@ -231,16 +231,60 @@ class SelectMultiple extends Component {
     }
   }
 
-  handleClose = (event) => this.setState((prevState, props) => {
-    const loweredInputValue = this._input.value.toLowerCase()
-    const match = prevState.filteredOptions.find(
-      option => option.label.toLowerCase() === loweredInputValue
-    )
-    this.cleanInput()
+  componentDidUpdate (prevProps, prevState) {
+    // When we provide a default value or values (either via the selectedOption
+    // or defaultSelectedOption prop) and we update the options, if the default
+    // value or values match the updated options, we should update the input values
+    if (this.props.options !== prevProps.options) {
+      // only search the updated options
+      const amendedOptions = this.props.options.filter(
+        option => !prevProps.options.find(
+          prevOption => deepEqual(prevOption, option)
+        )
+      )
 
-    if (match) {
-      const selectedOption = [...prevState.selectedOption, match]
-      props.onChange(event, selectedOption)
+      const selectedOption = this.getSelectedOptionFromProps(
+        this.props.selectedOption || this.props.defaultSelectedOption,
+        amendedOptions
+      )
+
+      if (selectedOption && selectedOption.length > 0) {
+        this.setState((prevState, props) => {
+          const matches = this.matchSelectedOptions(prevState, selectedOption)
+          this.cleanInput()
+
+          return this.amendMatchesToState(prevState, props, matches, (selectedOption) => {
+            props.onChange(null, selectedOption)
+          })
+        })
+      }
+    }
+  }
+
+  matchSelectedOptions = (state, selectedOption) => {
+    if (selectedOption) {
+      // find options with values that match curent selected values
+      return state.filteredOptions.filter(
+        option => selectedOption.find(
+          selected => selected.value === option.value
+        )
+      )
+    } else {
+      // find an option with a label that matches input's value
+      return [state.filteredOptions.find(
+        option => option.label.toLowerCase() === this._input.value.toLowerCase()
+      )].filter(value => value)
+    }
+  }
+
+  amendMatchesToState = (state, props, matches, onChange) => {
+    if (matches && matches.length > 0) {
+      const selectedOption = [...state.selectedOption, ...matches]
+
+      if (typeof onChange === 'function') {
+        onChange(selectedOption)
+      }
+
       return {
         filterText: '',
         filteredOptions: this.getFilteredOptions(props, '', selectedOption),
@@ -249,8 +293,17 @@ class SelectMultiple extends Component {
     }
     return {
       filterText: '',
-      filteredOptions: this.getFilteredOptions(props, '', prevState.selectedOption)
+      filteredOptions: this.getFilteredOptions(props, '', state.selectedOption)
     }
+  }
+
+  handleClose = (event) => this.setState((prevState, props) => {
+    const matches = this.matchSelectedOptions(prevState)
+    this.cleanInput()
+
+    return this.amendMatchesToState(prevState, props, matches, (selectedOption) => {
+      props.onChange(event, selectedOption)
+    })
   }, this.props.onClose)
 
   handleInputChange = (event, value) => {
@@ -326,7 +379,7 @@ class SelectMultiple extends Component {
   }
 
   renderTags () {
-    return this.state.selectedOption.map((tag, index) => {
+    return this.state.selectedOption.filter(option => option).map((tag, index) => {
       const isDismissible = tag.dismissible !== false
       let dismissibleProps = {}
       if (isDismissible) {
@@ -352,7 +405,7 @@ class SelectMultiple extends Component {
   }
 
   renderInputs () {
-    return this.state.selectedOption.map((tag, index) => {
+    return this.state.selectedOption.filter(option => option).map((tag, index) => {
       return (
         <input
           type="hidden"

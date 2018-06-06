@@ -144,9 +144,9 @@ class SelectSingle extends Component {
     this._input && this._input.focus()
   }
 
-  getSelectedOptionFromProps (selectedOption) {
+  getSelectedOptionFromProps (selectedOption, options = this.props.options) {
     if (typeof selectedOption === 'string') {
-      const foundOption = this.props.options.find((o) => getOptionId(o) === selectedOption)
+      const foundOption = options.find((o) => getOptionId(o) === selectedOption)
 
       warning(foundOption, '[Select] The selectedOption is a string but doesn\'t correspond to an option')
 
@@ -174,7 +174,7 @@ class SelectSingle extends Component {
       const oldId = getOptionId(this.props.selectedOption)
       const newId = getOptionId(nextProps.selectedOption)
       if (newId !== null && newId !== oldId) {
-        const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption)
+        const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption, nextProps.options)
         this.setState({ selectedOption })
 
         if (this._input.value !== selectedOption.label) {
@@ -189,30 +189,57 @@ class SelectSingle extends Component {
     }
   }
 
-  handleClose = (event, newSelectedOption) => this.setState((prevState, props) => {
+  componentDidUpdate (prevProps, prevState) {
+    // When we provide a default value (either via the selectedOption or
+    // defaultSelectedOption prop) and we update the options, if the default
+    // value matches the updated options, we should update the input value
+    if (this.props.options !== prevProps.options) {
+      const selectedOption = this.getSelectedOptionFromProps(
+        this.props.selectedOption || this.props.defaultSelectedOption
+      )
+
+      if (!this.state.selectedOption && selectedOption) {
+        this.setState((prevState, props) => {
+          const match = this.matchSelectedOption(prevState, selectedOption)
+          if (match) {
+            this._input.value = match.label
+          } else {
+            this._input.value = ''
+          }
+          return { selectedOption: match || selectedOption }
+        })
+      }
+    }
+  }
+
+  matchSelectedOption = (state, selectedOption) => {
     const inputValue = this._input.value
-    const loweredInputValue = inputValue.toLowerCase()
-    const selectedOption = newSelectedOption || prevState.selectedOption
+
     let match
-    if (newSelectedOption) {
+    if (selectedOption) {
       // find option with a value that matches curent selected value
-      match = prevState.filteredOptions.find(
+      match = state.filteredOptions.find(
         option => option.value === selectedOption.value
       )
     } else {
       // find option with a label that matches input's value
-      match = prevState.filteredOptions.find(
-        option => option.label.toLowerCase() === loweredInputValue
+      match = state.filteredOptions.find(
+        option => option.label.toLowerCase() === inputValue.toLowerCase()
       )
     }
+
+    return match
+  }
+
+  handleClose = (event, newSelectedOption) => this.setState((prevState, props) => {
+    const inputValue = this._input.value
+    const match = this.matchSelectedOption(prevState, newSelectedOption)
+    const selectedOption = newSelectedOption || prevState.selectedOption
 
     if (match) {
       this._input.value = match.label
 
-      if (
-        !selectedOption ||
-        getOptionId(match) !== getOptionId(selectedOption)
-      ) {
+      if (!selectedOption || getOptionId(match) !== getOptionId(selectedOption)) {
         props.onChange(event, match)
       }
     } else if (selectedOption) {

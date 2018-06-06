@@ -257,6 +257,56 @@ describe('<SelectSingle />', () => {
     })
   })
 
+  describe('default option', () => {
+    function testDefaultValue (defaultProp) {
+      it(`should update the input value if ${defaultProp} is set and the options update`, (done) => {
+        const subject = testbed.render({
+          [defaultProp]: '4'
+        })
+
+        expect(subject.find('input').node.value).to.equal('')
+
+        subject.setProps({
+          options: [
+            ...options,
+            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+          ]
+        }, () => {
+          expect(subject.find('input').node.value).to.equal('Argentina')
+          done()
+        })
+      })
+    }
+
+    testDefaultValue('defaultSelectedOption')
+    testDefaultValue('selectedOption')
+
+    it('should not override a selected option if the default option is set and the options update', (done) => {
+      const subject = testbed.render({
+        defaultSelectedOption: '4'
+      })
+      subject.find('input').click()
+      testbed.tick()
+
+      // TODO: query document for portal content instead of finding SelectField here when
+      // we have the new test utils
+      const item = subject.find(SelectField).getDOMNode().querySelector('li[role="option"]')
+      item.click()
+
+      const value = subject.find('input').node.value
+
+      subject.setProps({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+        ]
+      }, () => {
+        expect(subject.find('input').node.value).to.equal(value)
+        done()
+      })
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()
