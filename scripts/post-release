@@ -60,13 +60,20 @@ cp.exec('git describe --exact-match', (err, out) => {
     }
   })
 
+  let jiraVersion = {}
+
   jira.createVersion({
     name: `${pkg.name} ${pkg.version}`,
     archived: false,
     released: true,
     projectId: JIRA_PROJECT_ID
-  }).then((version) => {
-    // let version = {
+  }).then((result) => {
+    jiraVersion = {
+      ...result,
+      url: `https://${JIRA_HOST}/projects/${JIRA_PROJECT_KEY}/versions/${result.id}`
+    }
+
+    // let jiraVersion = {
     //   "self":"https://instructure.atlassian.net/rest/api/2/version/46639",
     //   "id":"46639",
     //   "name":"instructure-ui 5.10.0",
@@ -74,9 +81,8 @@ cp.exec('git describe --exact-match', (err, out) => {
     //   "released":true,
     //   "projectId":17900
     // }
-    // version.url = `https://${JIRA_HOST}/projects/${JIRA_PROJECT_KEY}/versions/${version.id}`
 
-    console.log(`Created ${version.name}:`, JSON.stringify(version)) // eslint-disable-line no-console
+    console.log(`Created ${jiraVersion.name}:`, JSON.stringify(jiraVersion)) // eslint-disable-line no-console
 
     let issueKeys = []
 
@@ -95,7 +101,7 @@ cp.exec('git describe --exact-match', (err, out) => {
       Promise.all(issueKeys.map((issueKey) => {
           return jira.updateIssue(issueKey, {
             update: {
-              fixVersions: [{ add: { name: version.name } }]
+              fixVersions: [{ add: { name: jiraVersion.name } }]
             }
           })
       }))
@@ -112,7 +118,8 @@ cp.exec('git describe --exact-match', (err, out) => {
 
         if (SLACK_CHANNEL && SLACK_USERNAME && SLACK_WEBHOOK) {
           console.log(`Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
-          const message = `PSA!\n *${pkg.name} v${pkg.version} has been published!* :party: \n ${CHANGELOG_URL} \nIssues in this release: ${issueKeys.join(', ')}`
+          const versionLink = `<${jiraVersion.url}|${pkg.name} v${pkg.version}>`
+          const message = `PSA!\n *${versionLink} has been published!* :party: \n ${CHANGELOG_URL} \nIssues in this release: ${issueKeys.join(', ')}`
           const payload = {
             'channel': SLACK_CHANNEL,
             'username': SLACK_USERNAME,

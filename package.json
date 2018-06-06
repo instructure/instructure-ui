@@ -88,7 +88,8 @@
   "standard-version": {
     "skip": {
       "tag": true,
-      "commit": true
+      "commit": true,
+      "changelog": true
     }
   },
   "lint-staged": {

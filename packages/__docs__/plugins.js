@@ -70,6 +70,7 @@ plugins = plugins.concat([
       'packages/ui-utils/src/**/*.js'
     ],
     ignore: [
+      'packages/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
       '**/controllers/**',

@@ -141,7 +141,7 @@ if [[ "$npm_tag" == "latest" ]]; then
   ###########################
   # Run post release script #
   ###########################
-  ./post-release
+  ./scripts/post-release
 fi
 
 echo "Version $next_version was successfully released!"
