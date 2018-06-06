@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-container",
-  "version": "5.10.0",
+  "version": "5.11.0",
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,15 +22,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.10.0",
-    "@instructure/ui-testbed": "^5.10.0",
-    "@instructure/ui-themes": "^5.10.0",
+    "@instructure/ui-presets": "^5.11.0",
+    "@instructure/ui-testbed": "^5.11.0",
+    "@instructure/ui-themes": "^5.11.0",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-themeable": "^5.10.0",
-    "@instructure/ui-utils": "^5.10.0",
+    "@instructure/ui-themeable": "^5.11.0",
+    "@instructure/ui-utils": "^5.11.0",
     "classnames": "^2.2.5",
     "prop-types": "^15.5.10"
   },

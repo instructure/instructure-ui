@@ -1,6 +1,45 @@
 # Change Log
 
-All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="5.11.0"></a>
+# [5.11.0](https://github.com/instructure/instructure-ui/compare/v5.10.0...v5.11.0) (2018-06-06)
+
+
+### Bug Fixes
+
+* **docs:** Add Object.values polyfill to fix IE11 ([af17ebd](https://github.com/instructure/instructure-ui/commit/af17ebd))
+* **inputs:** remove negative z-index from radio and checkbox inputs ([b49249b](https://github.com/instructure/instructure-ui/commit/b49249b))
+* **Locale:** use documentElement.lang prior to window.navigator for defaults ([2ea6603](https://github.com/instructure/instructure-ui/commit/2ea6603))
+* **ui-core,codemod:** add import from ui-core to ui-alerts for Alert ([6e524f5](https://github.com/instructure/instructure-ui/commit/6e524f5))
+* **ui-docs-client:** Update usage examples for commonjs imports ([b8ef639](https://github.com/instructure/instructure-ui/commit/b8ef639))
+* **ui-forms:** Fix selected option matching in SelectSingle ([193da1f](https://github.com/instructure/instructure-ui/commit/193da1f))
+* **ui-pagination:** Change focus only when necessary ([fc5642f](https://github.com/instructure/instructure-ui/commit/fc5642f))
+* **ui-utils:** fix console.warn.apply(undefined) ([e7dc6ad](https://github.com/instructure/instructure-ui/commit/e7dc6ad))
+
+
+### Features
+
+* **config-loader:** Add a config-loader package ([832ff12](https://github.com/instructure/instructure-ui/commit/832ff12))
+* **release:** Add a post-release script to update Jira ([eb3642d](https://github.com/instructure/instructure-ui/commit/eb3642d))
+* **ui-elements,Badge:** RTL support start center/end center placement ([175f25c](https://github.com/instructure/instructure-ui/commit/175f25c))
+* **ui-elements,Progress:** RTL support for ProgressBar with visible val ([5756a8e](https://github.com/instructure/instructure-ui/commit/5756a8e))
+* **ui-elements,Tag:** RTL support for the inline variant ([953f870](https://github.com/instructure/instructure-ui/commit/953f870))
+* **ui-forms:** Rtl support for Checkbox toggle variant ([1de3e0a](https://github.com/instructure/instructure-ui/commit/1de3e0a))
+* **ui-forms:** Rtl support for select ([f0732d4](https://github.com/instructure/instructure-ui/commit/f0732d4))
+* **ui-forms,RangeInput:** ensure the min max values switch when "rtl" ([5bdc70a](https://github.com/instructure/instructure-ui/commit/5bdc70a))
+* **ui-i18n,docs:** ApplyTextDirection child func/position docs ([248c7e6](https://github.com/instructure/instructure-ui/commit/248c7e6))
+* **ui-layout:** Rtl support for DrawerLayout ([fdeee39](https://github.com/instructure/instructure-ui/commit/fdeee39))
+* **ui-layout,Media:** RTL support for Media ([1b8790a](https://github.com/instructure/instructure-ui/commit/1b8790a))
+* **ui-media-player:** Adopt Legacy Context API ([7416dd4](https://github.com/instructure/instructure-ui/commit/7416dd4))
+* **ui-media-player,media-capture:** Rtl support for VideoPlayer ([bbe0f60](https://github.com/instructure/instructure-ui/commit/bbe0f60))
+* **ui-navigation,Navigation:** RTL support for nav toggle action ([dca378d](https://github.com/instructure/instructure-ui/commit/dca378d))
+* **ui-overlays:** Mirror Popover placement for rtl ([046ec0c](https://github.com/instructure/instructure-ui/commit/046ec0c))
+* **ui-presets:** Add stylelint rules for bidrectional text support ([b58ea17](https://github.com/instructure/instructure-ui/commit/b58ea17))
+* **ui-toggle-details:** ToggleGroup component ([d828826](https://github.com/instructure/instructure-ui/commit/d828826))
+
+
 
 <a name="5.10.0"></a>
 # [5.10.0](https://github.com/instructure/instructure-ui/compare/v5.9.0...v5.10.0) (2018-05-23)
