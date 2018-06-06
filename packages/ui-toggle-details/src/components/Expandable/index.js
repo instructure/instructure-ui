@@ -31,6 +31,11 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 
 const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
 
+/**
+---
+category: components/utilities
+---
+*/
 class Expandable extends Component {
   static propTypes = {
     /**
