@@ -137,3 +137,35 @@ example: true
 ---
 <Button fluidWidth icon={IconUser.Solid}>{lorem.paragraph()}</Button>
 ```
+
+### Responsive Buttons
+
+When [Responsive](#Responsive) detects that the _Button parent's_ width is a
+minimum of `31rem`, the button will show text as well as an icon.
+
+To track the entire window width instead, add `match="media"` to Responsive.
+
+```js
+---
+example: true
+---
+<Responsive
+  query={{
+    fullButton: { minWidth: '31rem' }
+  }}
+>
+  {(props, matches) => {
+    const text = 'Button label text'
+    const fullButton = matches.includes('fullButton')
+
+    return (
+      <View borderWidth="small" background="default" padding="small" as="div">
+        <Text as="div">The <code>fullButton</code> query is <b>{fullButton ? 'true' : 'false'}</b>.</Text>
+        <Button icon={IconUser.Solid} margin="small 0 0">
+          {(fullButton) ? text : <ScreenReaderContent>{text}</ScreenReaderContent>}
+        </Button>
+      </View>
+    )
+  }}
+</Responsive>
+```
