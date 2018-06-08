@@ -22,27 +22,21 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * category: utilities
- * ---
- * Generate a unique id. For valid HTML element IDs use [generateElementId](#generateElementId)
- *
- * @module uid
- * @param {String} alphabet a custom alphabet (e.g. '1234567890abcdef')
- * @param {Number} idLength id length
- * @returns {String} a unique id
- */
+import uid from '../uid'
 
-function segment() {
-  return Math.floor((1 + Math.random()) * 0x10000)
-    .toString(16)
-    .substring(1)
-}
+describe('uid', () => {
+  it('generates a specified length', () => {
+    expect(uid('', 5).length).to.be.eql(5)
+    expect(uid('', 8).length).to.be.eql(8)
+    expect(uid('', 12).length).to.be.eql(12)
+    expect(uid('', 16).length).to.be.eql(16)
+  })
 
-export default function uid(alphabet = '', idLength = 12) {
-  return Array.from(Array(Math.ceil(idLength / 4)))
-    .map(segment)
-    .join('')
-    .substr(0, idLength)
-}
+  it('should run a bunch and never get duplicates', () => {
+    const results = new Set()
+    for (let x = 0; x < 5000; x++) {
+      results.add(expect(uid('', 7)))
+    }
+    expect(results.size).to.be.eql(5000)
+  })
+})
