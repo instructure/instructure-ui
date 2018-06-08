@@ -176,7 +176,7 @@ class PositionedElement {
       const parent = parents[i]
       const child = parents[i - 1]
 
-      offsetY = offsetY + (parent.scrollTop - child.scrollTop)
+      offsetY = offsetY + (this.normalizeScrollTop(parent) - this.normalizeScrollTop(child))
       offsetX = offsetX + (parent.scrollLeft - child.scrollLeft)
     }
 
@@ -200,7 +200,8 @@ class PositionedElement {
 
       offsetY = offsetY + (child.top - parent.top)
       offsetX = offsetX + (child.left - parent.left)
-      scrollY = scrollY + parents[i].scrollTop
+
+      scrollY = scrollY + this.normalizeScrollTop(parents[i])
     }
     // Account for any scrolling on positioned parents
     // Without this, unnecessary scroll offset could be applied
@@ -208,6 +209,12 @@ class PositionedElement {
     offsetY = offsetY + scrollY
 
     return { top: offsetY, left: offsetX }
+  }
+
+  normalizeScrollTop (element) {
+    // Account for cross browser differences with scrollTop attribute on the
+    // body element https://bugs.chromium.org/p/chromium/issues/detail?id=766938
+    return ownerDocument(this.node).body === element ? 0 : element.scrollTop
   }
 }
 
