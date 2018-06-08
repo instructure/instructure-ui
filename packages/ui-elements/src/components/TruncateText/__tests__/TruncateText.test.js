@@ -147,7 +147,7 @@ describe('<TruncateText />', () => {
   })
 
   it('should render text at any size with no lineHeight set', () => {
-    const subject = testbed.render({
+    testbed.render({
       style: {lineHeight: 'normal'},
       children: (
         <span id="stage">

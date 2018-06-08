@@ -76,14 +76,12 @@ if [[ $POST_MERGE_BUILD ]]; then
     docker cp $JIRA_PEM $container:/home/docker/.ssh/
   fi
   docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
-fi
 
-echo "Running tests..."
-docker exec $container bash -c "yarn test"
-
-if [[ $POST_MERGE_BUILD ]]; then
   echo "Running release..."
-  docker exec $container bash -c "yarn release"
+  docker exec $container bash -c "yarn release --yes"
+else
+  echo "Running tests..."
+  docker exec $container bash -c "yarn test"
 fi
 
 docker stop $container
