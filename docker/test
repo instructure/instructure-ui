@@ -77,6 +77,8 @@ if [[ $POST_MERGE_BUILD ]]; then
   fi
   docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
 
+  docker exec $container bash -c "yarn bootstrap"
+
   echo "Running release..."
   docker exec $container bash -c "yarn release --yes"
 else
