@@ -97,12 +97,13 @@ exports.publish = async function publish (releaseVersion) {
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
   const releaseCommit = await isReleaseCommit()
-  const npmTag = (version === releaseVersion) ? 'latest' : null
+  const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
   const args = [
     '--yes',
     '--skip-git',
     '--force-publish=*',
-    `--repo-version ${releaseVersion}`
+    `--repo-version ${releaseVersion}`,
+    `--npm-tag ${npmTag}`
   ]
 
   await checkWorkingDirectory()
@@ -118,12 +119,6 @@ exports.publish = async function publish (releaseVersion) {
 
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${name}...`)
 
-  if (npmTag) {
-    args.concat([
-      `--npm-tag ${npmTag}`,
-    ])
-  }
-
   try {
     await runCommandAsync(`$(npm bin)/lerna publish ${args.join(' ')}`)
   } catch (err) {
@@ -138,8 +133,7 @@ exports.publishPackage = async function publishPackage (releaseVersion) {
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
   const releaseCommit = await isReleaseCommit()
-  const npmTag = (version === releaseVersion) ? 'latest' : null
-  const args = npmTag ? `--tag ${npmTag}` : ''
+  const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
 
   await checkWorkingDirectory()
   await checkPackagePublished(name, releaseVersion)
@@ -154,7 +148,7 @@ exports.publishPackage = async function publishPackage (releaseVersion) {
   }
 
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${name}...`)
-  await runCommandAsync(`$(npm bin)/yarn publish ${args}`)
+  await runCommandAsync(`$(npm bin)/yarn publish --tag ${npmTag}`)
   info(`📦  Version ${releaseVersion} of ${name} was successfully published!`)
 }
 
@@ -218,5 +212,5 @@ exports.bump = async function bump (releaseType) {
 
   info(`💾  Committing version bump commit for ${name} ${version}...`)
 
-  await runCommandAsync(`git commit -a -m "chore(release): ${version}" --no-verify`)
+  await runCommandAsync(`git commit -a -m "chore(release): ${version}"`)
 }
