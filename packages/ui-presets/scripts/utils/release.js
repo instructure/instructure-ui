@@ -86,7 +86,7 @@ exports.prePublish = async function prePublish () {
     await runCommandAsync('$(npm bin)/standard-version')
     const nextVersion = getPackageJSON().version
     await runCommandAsync(`git reset --hard ${commit}`)
-    releaseVersion = `${nextVersion}-rc.${index}+${commit}`
+    releaseVersion = `${nextVersion}-rc.${index}`
   }
 
   info(releaseVersion)
