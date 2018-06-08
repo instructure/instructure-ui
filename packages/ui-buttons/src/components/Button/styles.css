@@ -48,7 +48,6 @@ the icon is inserted as a child:
   font-weight: var(--fontWeight);
   text-transform: var(--textTransform);
   letter-spacing: var(--letterSpacing);
-  border-radius: var(--borderRadius);
   border-style: var(--borderStyle);
   border-width: var(--borderWidth);
 
@@ -67,7 +66,6 @@ the icon is inserted as a child:
     right: -0.25rem; /* stylelint-disable-line property-blacklist */
     bottom: -0.25rem;
     border: var(--focusBorder);
-    border-radius: calc(var(--focusBorderRadius) + 0.125rem);
     opacity: 0;
     transform: scale(0.01);
     transition: all 0.2s;
@@ -91,6 +89,24 @@ the icon is inserted as a child:
 
 .content {
   box-sizing: border-box;
+}
+
+/* Rectangular and square Buttons */
+.borderRadius--rounded {
+  border-radius: var(--borderRadius);
+
+  &::before {
+    border-radius: calc(var(--focusBorderRadius) + 0.125rem);
+  }
+}
+
+/* Circular Buttons */
+.borderRadius--circle {
+  border-radius: 50%;
+
+  &::before {
+    border-radius: 50%;
+  }
 }
 
 /* Styles for square Buttons w/ only an icon and no visible children */
@@ -453,12 +469,25 @@ the icon is inserted as a child:
   }
 }
 
-.circle-primary,
-.circle-danger {
-  border-radius: 50%;
+.circle-default {
+  background: var(--circleDefaultBackground);
+  color: var(--circleDefaultColor);
+  border-color: var(--circleDefaultBorderColor);
 
-  &::before {
-    border-radius: 50%;
+  &:hover,
+  &:active {
+    background: var(--circleDefaultHoverBackground);
+  }
+
+  &:focus,
+  &:hover,
+  &:active {
+    color: var(--circleDefaultColor);
+  }
+
+  &:active {
+    background: var(--circleDefaultActiveBackground);
+    box-shadow: var(--circleDefaultActiveBoxShadow);
   }
 }
 

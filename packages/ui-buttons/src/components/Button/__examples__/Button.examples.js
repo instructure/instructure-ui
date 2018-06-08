@@ -382,6 +382,18 @@ export const variantIconDisabled = () => {
   )
 }
 
+export const variantCircleDefault = () => {
+  return (
+    <Button variant="circle-default" icon={IconTrash}><ScreenReaderContent>Button Label</ScreenReaderContent></Button>
+  )
+}
+
+export const variantCircleDefaultDisabled = () => {
+  return (
+    <Button disabled variant="circle-default" icon={IconTrash}><ScreenReaderContent>Button Label</ScreenReaderContent></Button>
+  )
+}
+
 export const variantCirclePrimary = () => {
   return (
     <Button variant="circle-primary" icon={IconTrash}><ScreenReaderContent>Button Label</ScreenReaderContent></Button>

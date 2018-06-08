@@ -63,6 +63,7 @@ class Button extends Component {
       'ghost-inverse',
       'link',
       'link-inverse',
+      'circle-default',
       'circle-primary',
       'circle-danger',
       'icon',
@@ -171,13 +172,33 @@ class Button extends Component {
     }
   }
 
+  buttonBorderRadius () {
+    const circleVariants = [
+      'circle-primary',
+      'circle-danger',
+      'circle-default'
+    ]
+
+    if (circleVariants.indexOf(this.props.variant) !== -1) {
+      return 'circle'
+    } else {
+      return 'rounded'
+    }
+  }
+
   buttonWidth () {
     const {
       variant,
       fluidWidth
     } = this.props
 
-    const squareVariants = ['circle-primary', 'circle-danger', 'icon', 'icon-inverse']
+    const squareVariants = [
+      'circle-default',
+      'circle-primary',
+      'circle-danger',
+      'icon',
+      'icon-inverse'
+    ]
 
     if (this.hasOnlyIcon || squareVariants.indexOf(variant) !== -1) {
       return 'icon'
@@ -243,6 +264,7 @@ class Button extends Component {
       [styles[variant]]: true,
       [styles[size]]: size,
       [styles[`width--${this.buttonWidth()}`]]: true,
+      [styles[`borderRadius--${this.buttonBorderRadius()}`]]: true,
       [styles.disabled]: disabled,
       [styles['has-icon']]: icon
     }

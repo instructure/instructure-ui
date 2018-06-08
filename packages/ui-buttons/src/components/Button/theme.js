@@ -139,6 +139,12 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ),
 
     ...buttonVariant(
+      'circleDefault',
+      colors.backgroundLight,
+      colors.textDarkest
+    ),
+
+    ...buttonVariant(
       'circlePrimary',
       colors.backgroundBrand,
       colors.textLightest

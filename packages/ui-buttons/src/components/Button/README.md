@@ -88,6 +88,9 @@ example: true
   <Button variant="icon" margin="0 x-small 0 0" icon={IconPlus.Solid}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
+  <Button variant="circle-default" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
+  </Button>
   <Button variant="circle-primary" margin="0 x-small 0 0" icon={IconPlus.Solid}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
