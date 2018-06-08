@@ -176,15 +176,13 @@ function _format (input, locale) {
 }
 
 function _localize (input, locale) {
-  const sourceLocale = Locale.browserLocale() // eslint-disable-line no-param-reassign
-
-  if (locale === sourceLocale) {
+  if (locale === Locale.defaultLocale) {
     return input
   }
 
   let result = input
 
-  const sourceDelimiters = Decimal.getDelimiters(sourceLocale)
+  const sourceDelimiters = Decimal.getDelimiters(Locale.defaultLocale)
   const destinationDelimiters = Decimal.getDelimiters(locale)
 
   const check = [sourceDelimiters.thousands, destinationDelimiters.thousands]

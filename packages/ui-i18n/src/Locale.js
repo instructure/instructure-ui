@@ -24,6 +24,8 @@
 
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 
+const defaultLocale = 'en-US'
+
 /**
 * ---
 * category: utilities/i18n
@@ -32,13 +34,13 @@ import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 * @module Locale
 */
 export default {
+  defaultLocale,
+
   /**
   * Return the locale from the browser
   * @returns {String} locale (defaults to 'en-US')
   */
   browserLocale (nav, hasDOM = canUseDOM) {
-    const defaultLocale = 'en-US'
-
     if (nav) return nav.language
     if (!hasDOM) return defaultLocale
 

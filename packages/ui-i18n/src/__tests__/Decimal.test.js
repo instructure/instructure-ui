@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import Locale from '../Locale'
 import Decimal from '../Decimal'
 
 describe('Decimal', () => {
@@ -561,6 +562,21 @@ describe('Decimal', () => {
           `-765${thousands}432${decimal}1`
         )
       })
+    })
+  })
+
+  context('with browser locale "fr"', () => {
+    beforeEach(() => {
+      sinon.stub(Locale, 'browserLocale').returns('fr')
+    })
+
+    afterEach(() => {
+      Locale.browserLocale.restore()
+    })
+
+    it('formats French numbers correctly', () => {
+      const decimal = new Decimal(12.34)
+      expect(decimal.toLocaleString('fr')).to.equal('12,34')
     })
   })
 })
