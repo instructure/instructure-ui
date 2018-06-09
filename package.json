@@ -77,7 +77,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/@instructure/conventional-changelog"
+      "path": "./node_modules/@instructure/cz-lerna-changelog"
     }
   },
   "standard-version": {
