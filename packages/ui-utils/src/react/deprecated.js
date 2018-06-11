@@ -69,7 +69,7 @@ export default function deprecated (version, oldProps, message) {
         }
       }
 
-      componentWillReceiveProps (nextProps) {
+      componentWillReceiveProps (nextProps, nextContext) {
         if (oldProps) {
           warnDeprecatedProps(displayName, version, nextProps, oldProps, message)
         } else {
@@ -77,7 +77,7 @@ export default function deprecated (version, oldProps, message) {
         }
 
         if (super.componentWillReceiveProps) {
-          super.componentWillReceiveProps(nextProps)
+          super.componentWillReceiveProps(nextProps, nextContext)
         }
       }
     }

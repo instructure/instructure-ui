@@ -51,10 +51,6 @@ describe('browserLocale', () => {
     expect(Locale.browserLocale()).to.equal(expectedLanguage)
   })
 
-  it('returns the default "en-US" if navigator is undefined', () => {
-    expect(Locale.browserLocale(null)).to.equal('en-US')
-  })
-
   it('returns the default "en-US" if navigator is undefined and the DOM is unavailable', () => {
     expect(Locale.browserLocale(null, false)).to.equal('en-US')
   })

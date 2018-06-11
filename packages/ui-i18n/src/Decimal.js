@@ -23,7 +23,7 @@
  */
 
 import Locale from './Locale'
-import Decimal from 'decimal.js/decimal'
+import BaseDecimal from 'decimal.js/decimal'
 
 /**
 * ---
@@ -35,12 +35,12 @@ import Decimal from 'decimal.js/decimal'
 * @module Decimal
 */
 
+const Decimal = BaseDecimal.clone()
+
 Decimal.set({
   precision: 100,
   toExpPos: 100
 })
-
-Decimal.isDecimal = Decimal.isDecimal
 
 Decimal.getDelimiters = function (locale) {
   const numberIntl = new Intl.NumberFormat(locale || Locale.browserLocale())
@@ -59,13 +59,8 @@ Decimal.getDelimiters = function (locale) {
 */
 Decimal.parse = function (input, locale) {
   locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
-
-  const d = new Decimal(
-    (Decimal.isDecimal(input) || typeof input === 'number') ? input : _parse(input, locale)
-  )
-
+  const d = new Decimal(_parse(input, locale))
   d.l = locale
-
   return d
 }
 
@@ -89,21 +84,31 @@ Decimal.toLocaleString = function (input, locale) {
   return Decimal.parse(input, locale).toLocaleString(locale)
 }
 
+Decimal.prototype._toFixed = Decimal.prototype.toFixed
+Decimal.prototype.toFixed = _localizePrecision(Decimal.prototype._toFixed)
+
+Decimal.prototype._toPrecision = Decimal.prototype.toPrecision
+Decimal.prototype.toPrecision = _localizePrecision(Decimal.prototype._toPrecision)
+
 export default Decimal
 
-const patterns = []
+// TODO: simplify this, it supports many formats we don't need. It should be
+// enough to strip thousands separators and change the decimal separator to `.`.
+const patterns = {}
 function _parse (input, locale) {
-  locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
-
-  let result = _format(input, locale)
-
   if (input === null) {
     return '0'
-  } else if (typeof input !== 'string') {
+  } else if (Decimal.isDecimal(input) || typeof input === 'number' || input instanceof Number) {
+    return input
+  } else if (typeof input !== 'string' && !(input instanceof String)) {
     return NaN
   }
 
+  locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
   const { thousands, decimal } = Decimal.getDelimiters(locale)
+
+  let result = _format(input, locale)
+
   const patternIndex = `${thousands}${decimal}`
 
   let pattern = patterns[patternIndex]
@@ -136,10 +141,6 @@ function _format (input, locale) {
   locale = locale || Locale.browserLocale() // eslint-disable-line no-param-reassign
 
   let result = input
-
-  if (typeof result !== 'string') {
-    return NaN
-  }
 
   const { thousands, decimal } = Decimal.getDelimiters(locale)
   const isNegative = (result[0] === '-')
@@ -179,10 +180,6 @@ function _format (input, locale) {
 }
 
 function _localize (input, locale) {
-  if (locale === Locale.defaultLocale) {
-    return input
-  }
-
   let result = input
 
   const sourceDelimiters = Decimal.getDelimiters(Locale.defaultLocale)
@@ -198,4 +195,22 @@ function _localize (input, locale) {
     .replace(new RegExp(`\\${sourceDelimiters.decimal}`, 'g'), placeholder)
     .replace(new RegExp(`\\${sourceDelimiters.thousands}`, 'g'), thousands)
     .replace(new RegExp(`\\${placeholder}`, 'g'), destinationDelimiters.decimal)
+}
+
+function _localizePrecision (fn) {
+  return function (precision, rounding, locale) {
+    /* eslint-disable no-param-reassign */
+    if (locale == null && typeof rounding === 'string' || rounding instanceof String) {
+      locale = rounding
+      rounding = void 0
+    }
+    /* eslint-enable no-param-reassign */
+    let value = fn.call(this, precision, rounding)
+
+    // Convert exponential notation to decimal
+    if (value.indexOf('e') !== -1) value = Number(value).toString()
+
+    if (locale == null) return value
+    return _format(_localize(value, locale), locale)
+  }
 }

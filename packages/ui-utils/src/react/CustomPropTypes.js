@@ -364,5 +364,41 @@ Otherwise, set '${handlerName}'.`
     }
   },
 
-  element: canUseDOM ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)]) : PropTypes.element
+  element: canUseDOM ? PropTypes.oneOfType([PropTypes.element, PropTypes.instanceOf(Element)]) : PropTypes.element,
+
+  /**
+   * Verify that a prop cannot be given if one or more other props are also
+   * given.
+   *
+   * ```js
+   *  class Foo extends Component {
+   *    static propTypes = {
+   *      decimalPrecision: CustomPropTypes.xor(PropTypes.number, 'significantDigits'),
+   *      significantDigits: CustomPropTypes.xor(PropTypes.number, 'decimalPrecision')
+   *    }
+   *  ...
+   * ```
+   *
+   * This will throw an error if both the `decimalPrecision` and
+   * `significantDigits` props are provided.
+   *
+   * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
+   * @param {...string} otherPropNames - reject if any of these other props are also given
+   * @returns {Error} if any of the other props are also given
+   */
+  xor (propType, ...otherPropNames) {
+    return function (props, propName, componentName) {
+      if (props[propName] != null) {
+        const otherProps = otherPropNames.map(name => props[name]).filter(prop => prop != null)
+        if (otherProps.length > 0) {
+          return new Error(
+            `Invalid prop \`${propName}\` supplied to \`${componentName}\`: expected only one of ` +
+              `${[propName].concat(otherPropNames).map(name => `\`${name}\``).join(', ')} to be set.`
+          )
+        }
+      }
+
+      return propType.apply(null, arguments)
+    }
+  }
 }

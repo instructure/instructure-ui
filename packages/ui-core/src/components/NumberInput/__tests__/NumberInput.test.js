@@ -228,14 +228,14 @@ describe('<NumberInput />', () => {
     })
 
     it('increments the number in the appropriate locale when the up arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenUp).click()
+      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
+      subject.find(IconArrowOpenUp).simulate('mouseDown')
       expect(subject.find('input').node.value).to.equal('2,6')
     })
 
     it('decrements the number in the appropriate locale when the down arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenDown).click()
+      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
+      subject.find(IconArrowOpenDown).simulate('mouseDown')
       expect(subject.find('input').node.value).to.equal('2,4')
     })
 
@@ -261,45 +261,34 @@ describe('<NumberInput />', () => {
   })
 
   describe('onBlur formatting', () => {
-    it('should clean letter characters', () => {
-      const subject = testbed.render()
+    const inputValueOnBlur = (value, props) => {
+      const subject = testbed.render(props)
       const input = subject.find('input')
-      input.setValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      input.setValue(value)
       input.blur()
-      expect(input.getDOMNode().value).to.equal('')
+      return input.getDOMNode().value
+    }
+
+    it("should not clean values that can't be parsed into a number", () => {
+      const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      expect(inputValueOnBlur(value)).to.equal(value)
     })
 
     it('should reject all symbols except for - and the locale decimal delimiter', () => {
       // locale is set to 'en' so the decimal delimiter is '.'
-      const subject = testbed.render()
-      const input = subject.find('input')
-      input.setValue('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('0')
+      expect(inputValueOnBlur('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')).to.equal('0')
     })
 
     it('should apply the locale specific thousands delimiter', () => {
-      const subject = testbed.render({ locale: 'es' })
-      const input = subject.find('input')
-      input.setValue('1234567890')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('1.234.567.890')
+      expect(inputValueOnBlur('1234567890', { locale: 'es' })).to.equal('1.234.567.890')
     })
 
     it('should remove leading zeros', () => {
-      const subject = testbed.render({ locale: 'es' })
-      const input = subject.find('input')
-      input.setValue('aabb0.0.0.1')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('1')
+      expect(inputValueOnBlur('aabb0.0.0.1', { locale: 'es' })).to.equal('1')
     })
 
     it('should leave only the last decimal delimiter', () => {
-      const subject = testbed.render({ locale: 'fr' })
-      const input = subject.find('input')
-      input.setValue(',1,,2,,,3,,4')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('123,4')
+      expect(inputValueOnBlur(',1,,2,,,3,,4', { locale: 'fr' })).to.equal('123,4')
     })
   })
 
@@ -350,11 +339,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(IconArrowOpenUp).click()
+      subject.find(IconArrowOpenUp).simulate('mouseDown')
 
       expect(onChange).to.have.been.called
       expect(onChange.firstCall.args[1]).to.equal('1')
-      expect(onChange.firstCall.args[2]).to.equal(1)
+      expect(onChange.firstCall.args[2]).to.equal('1')
       expect(subject.find('input').getDOMNode().value).to.equal('1')
     })
 
@@ -365,11 +354,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(IconArrowOpenDown).click('click')
+      subject.find(IconArrowOpenDown).simulate('mouseDown')
 
       expect(onChange).to.have.been.called
       expect(onChange.firstCall.args[1]).to.equal('-1')
-      expect(onChange.firstCall.args[2]).to.equal(-1)
+      expect(onChange.firstCall.args[2]).to.equal('-1')
       expect(subject.find('input').getDOMNode().value).to.equal('-1')
     })
 

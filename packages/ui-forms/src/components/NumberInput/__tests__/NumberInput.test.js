@@ -228,14 +228,14 @@ describe('<NumberInput />', () => {
     })
 
     it('increments the number in the appropriate locale when the up arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenUp).click()
+      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
+      subject.find(IconArrowOpenUp).simulate('mouseDown')
       expect(subject.find('input').node.value).to.equal('2,6')
     })
 
     it('decrements the number in the appropriate locale when the down arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: '2.5', step: '0.1', locale: 'de' })
-      subject.find(IconArrowOpenDown).click()
+      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
+      subject.find(IconArrowOpenDown).simulate('mouseDown')
       expect(subject.find('input').node.value).to.equal('2,4')
     })
 
@@ -260,18 +260,18 @@ describe('<NumberInput />', () => {
     })
 
     describe('conditionalFormat', () => {
-      it('formats on render when formatValueOnRender is true and value is present', () => {
-        const subject = testbed.render({ locale: 'fr', value: '7.3' })
+      it('formats on render when a number value props is given', () => {
+        const subject = testbed.render({ locale: 'fr', value: 7.3 })
         const input = subject.find('input')
 
         expect(input.node.value).to.equal('7,3')
       })
 
-      it('does not format on render when formatValueOnRender is false', () => {
-        const subject = testbed.render({ locale: 'fr', value: '7.3', formatValueOnRender: false })
+      it('does not format on render when a string value prop is given', () => {
+        const subject = testbed.render({ locale: 'fr', value: 'foo' })
         const input = subject.find('input')
 
-        expect(input.node.value).to.equal('7.3')
+        expect(input.node.value).to.equal('foo')
       })
 
       it('does not format on render when value is falsey', () => {
@@ -283,46 +283,111 @@ describe('<NumberInput />', () => {
     })
   })
 
-  describe('onBlur formatting', () => {
-    it('should clean letter characters', () => {
-      const subject = testbed.render()
+  describe('onChange handler', () => {
+    const onChangeArgs = (value, props = {}) => {
+      const onChange = testbed.stub()
+      const subject = testbed.render({ ...props, onChange })
       const input = subject.find('input')
-      input.setValue('abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+      input.setValue(value)
+
+      expect(onChange).to.have.been.called
+      return onChange.lastCall.args
+    }
+
+    const baseProps = {
+      decimalPrecision: 2,
+      locale: 'de'
+    }
+
+    it('receives the raw string value of the input as the second argument', () => {
+      const value = '-12.501,5'
+      expect(onChangeArgs(value, baseProps)[1]).to.equal(value)
+    })
+
+    it('receives the normalized string value of the input as the third argument', () => {
+      const value = '-12.501,5'
+      expect(onChangeArgs(value, baseProps)[2]).to.equal('-12501.50')
+    })
+
+    it("receives null as the third argument if the value can't be parsed", () => {
+      const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      expect(onChangeArgs(value, baseProps)[2]).to.be.null
+    })
+
+    it('receives the min value as the third argument if value is less than min', () => {
+      const min = 1
+      const value = '0'
+      expect(onChangeArgs(value, { ...baseProps, min })[2]).to.equal('1.00')
+    })
+
+    it('receives the max value as the third argument if value is greater than max', () => {
+      const max = 99.9
+      const value = '100'
+      expect(onChangeArgs(value, { ...baseProps, max })[2]).to.equal('99.90')
+    })
+
+    context('when value is less precise than specified precision', () => {
+      it('receives a third argument with trailing zeros', () => {
+        expect(onChangeArgs('3.9', { significantDigits: 3 })[2]).to.equal('3.90')
+      })
+    })
+
+    context('when value is more precise than specified precision', () => {
+      it('receives a third argument rounded to the given decimal precision', () => {
+        expect(onChangeArgs('9.99', { decimalPrecision: 1 })[2]).to.equal('10.0')
+      })
+
+      it('receives a third argument rounded to the given significant digits', () => {
+        expect(onChangeArgs('9.175', { significantDigits: 3 })[2]).to.equal('9.18')
+      })
+    })
+  })
+
+  describe('onBlur formatting', () => {
+    const inputValueOnBlur = (value, props) => {
+      const subject = testbed.render(props)
+      const input = subject.find('input')
+      input.setValue(value)
       input.blur()
-      expect(input.getDOMNode().value).to.equal('')
+      return input.getDOMNode().value
+    }
+
+    it("should not clean values that can't be parsed into a number", () => {
+      const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      expect(inputValueOnBlur(value)).to.equal(value)
     })
 
     it('should reject all symbols except for - and the locale decimal delimiter', () => {
       // locale is set to 'en' so the decimal delimiter is '.'
-      const subject = testbed.render()
-      const input = subject.find('input')
-      input.setValue('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('0')
+      expect(inputValueOnBlur('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')).to.equal('0')
     })
 
     it('should apply the locale specific thousands delimiter', () => {
-      const subject = testbed.render({ locale: 'es' })
-      const input = subject.find('input')
-      input.setValue('1234567890')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('1.234.567.890')
+      expect(inputValueOnBlur('1234567890', { locale: 'es' })).to.equal('1.234.567.890')
     })
 
     it('should remove leading zeros', () => {
-      const subject = testbed.render({ locale: 'es' })
-      const input = subject.find('input')
-      input.setValue('aabb0.0.0.1')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('1')
+      expect(inputValueOnBlur('aabb0.0.0.1', { locale: 'es' })).to.equal('1')
     })
 
     it('should leave only the last decimal delimiter', () => {
-      const subject = testbed.render({ locale: 'fr' })
-      const input = subject.find('input')
-      input.setValue(',1,,2,,,3,,4')
-      input.blur()
-      expect(input.getDOMNode().value).to.equal('123,4')
+      expect(inputValueOnBlur(',1,,2,,,3,,4', { locale: 'fr' })).to.equal('123,4')
+    })
+
+    context('when value is less precise than specified precision', () => {
+      it('adds trailing zeros', () => {
+        expect(inputValueOnBlur('123', { decimalPrecision: 2 })).to.equal('123.00')
+      })
+    })
+
+    context('when value is more precise than specified precision', () => {
+      it('rounds to the given decimal precision', () => {
+        expect(inputValueOnBlur('123.58', { decimalPrecision: 1 })).to.equal('123.6')
+      })
+
+      it('rounds to the given significant digits', () => {
+        expect(inputValueOnBlur('123', { significantDigits: 2 })).to.equal('120')
+      })
     })
   })
 
@@ -373,11 +438,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(IconArrowOpenUp).click()
+      subject.find(IconArrowOpenUp).simulate('mouseDown')
 
       expect(onChange).to.have.been.called
       expect(onChange.firstCall.args[1]).to.equal('1')
-      expect(onChange.firstCall.args[2]).to.equal(1)
+      expect(onChange.firstCall.args[2]).to.equal('1')
       expect(subject.find('input').getDOMNode().value).to.equal('1')
     })
 
@@ -388,11 +453,11 @@ describe('<NumberInput />', () => {
         onChange
       })
 
-      subject.find(IconArrowOpenDown).click('click')
+      subject.find(IconArrowOpenDown).simulate('mouseDown')
 
       expect(onChange).to.have.been.called
       expect(onChange.firstCall.args[1]).to.equal('-1')
-      expect(onChange.firstCall.args[2]).to.equal(-1)
+      expect(onChange.firstCall.args[2]).to.equal('-1')
       expect(subject.find('input').getDOMNode().value).to.equal('-1')
     })
 
@@ -442,6 +507,94 @@ describe('<NumberInput />', () => {
       subject.find('input').simulate('focus')
 
       expect(onFocus).to.have.been.called
+    })
+  })
+
+  context('when controlled', () => {
+    class Example extends React.Component {
+      state = { value: '' }
+
+      handleChange = (event, value) => this.setState({ value })
+
+      render () {
+        return <NumberInput
+          {...this.props}
+          label="controlled"
+          onChange={this.handleChange}
+          value={this.state.value}
+        />
+      }
+    }
+
+    const controlledTestbed = new Testbed(<Example />)
+
+    it('allows negative numbers to be typed into the input', () => {
+      const subject = controlledTestbed.render()
+      const input = subject.find('input')
+      input.simulate('change', { target: { value: '-' } })
+      expect(input.node.value).to.equal('-')
+      input.simulate('change', { target: { value: '-1' } })
+      expect(input.node.value).to.equal('-1')
+    })
+
+    it('allows periods to be typed into the input', () => {
+      const subject = controlledTestbed.render()
+      const input = subject.find('input')
+      input.simulate('change', { target: { value: '.' } })
+      expect(input.node.value).to.equal('.')
+      input.simulate('change', { target: { value: '.5' } })
+      expect(input.node.value).to.equal('.5')
+    })
+
+    it('allows commas to be typed into the input', () => {
+      const subject = controlledTestbed.render()
+      const input = subject.find('input')
+      input.simulate('change', { target: { value: ',' } })
+      expect(input.node.value).to.equal(',')
+      input.simulate('change', { target: { value: ',5' } })
+      expect(input.node.value).to.equal(',5')
+    })
+
+    it('formats the value according to the locale on blur', () => {
+      const subject = controlledTestbed.render({ locale: 'de' })
+      const input = subject.find('input')
+      const value = '12345,6789'
+      input.simulate('change', { target: { value } })
+      expect(input.node.value).to.equal(value)
+      input.simulate('blur')
+      expect(input.node.value).to.equal('12.345,6789')
+    })
+
+    it('sets the value to the specified precision on blur', () => {
+      const subject = controlledTestbed.render({ significantDigits: 2 })
+      const input = subject.find('input')
+      const value = '102'
+      input.simulate('change', { target: { value } })
+      expect(input.node.value).to.equal(value)
+      input.simulate('blur')
+      expect(input.node.value).to.equal('100')
+    })
+  })
+
+  describe('componentWillReceiveProps', () => {
+    it('updates value if locale changes', () => {
+      const onChange = testbed.stub()
+      const subject = testbed.render({ locale: 'en', onChange })
+      const input = subject.find('input')
+      input.node.value = '1234.5'
+      subject.setProps({ locale: 'de' })
+      expect(input.node.value).to.equal('1.234,5')
+      expect(onChange.lastCall.args[1]).to.equal('1.234,5')
+    })
+
+    it('updates value if precision changes', () => {
+      const onChange = testbed.stub()
+      const subject = testbed.render({ onChange, significantDigits: 3 })
+      const input = subject.find('input')
+      input.node.value = '12.5'
+      subject.setProps({ decimalPrecision: 2, significantDigits: null })
+      expect(input.node.value).to.equal('12.50')
+      expect(onChange.lastCall.args[1]).to.equal('12.50')
     })
   })
 

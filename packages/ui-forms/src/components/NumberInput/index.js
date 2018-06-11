@@ -34,7 +34,7 @@ import Decimal from '@instructure/ui-i18n/lib/Decimal'
 
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import transformSelection from '@instructure/ui-utils/lib/dom/transformSelection'
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
@@ -51,8 +51,6 @@ const keyDirections = {
   ArrowDown: -1
 }
 
-function noop () {}
-
 /**
 ---
 category: components/forms
@@ -67,6 +65,22 @@ class NumberInput extends Component {
     step: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     min: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     max: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * Specify the number of digits to display after the decimal separator. If
+     * the input has more digits after the decimal separator, it will be
+     * rounded on blur. If it has less, trailing zeros will be added on blur.
+     *
+     * Pass either decimalPrecision or significantDigits, not both.
+     */
+    decimalPrecision: CustomPropTypes.xor(PropTypes.number, 'significantDigits'),
+    /**
+     * Specify the number of significant digits. If the input has more
+     * significant digits, it will be rounded on blur. If it has less, traling
+     * zeros will be added on blur.
+     *
+     * Pass either decimalPrecision or significantDigits, not both.
+     */
+    significantDigits: CustomPropTypes.xor(PropTypes.number, 'decimalPrecision'),
     /**
     * object with shape: `{
     * text: PropTypes.string,
@@ -105,19 +119,25 @@ class NumberInput extends Component {
     */
     defaultValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     /**
-    * the selected value (must be accompanied by an `onChange` prop)
+    * The selected value (must be accompanied by an `onChange` prop). If this
+    * is a number, it will be formatted according to the current locale. If a
+    * string is given, it should already be in the correct format for the
+    * current locale.
     */
     value: CustomPropTypes.controllable(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
     /**
-     * a boolean prop to control formatting a controlled NumberInput value prop to a normalized
-     * and localized representation on each render cycle. Setting this prop to false is useful for
-     * scenarios where the user should be allowed to type naturally prior to the value being formatted.
-     */
-    formatValueOnRender: PropTypes.bool,
-    /**
-    * the event may be of type blur under certain conditions
+    * Called whenever the value of the input changes. The second argument is
+    * the string value of the input; the third argument is a normalized string
+    * value obtained by parsing the input string according to the current
+    * locale, removing thousands separators, using the period `.` as decimal
+    * separator, and rounding to the specified precision. This third argument
+    * is `null` if the input value cannot be parsed.
+    *
+    * `onChange` is called on blur, as the value is formatted when the
+    * component loses focus. In this case, `onChange` is always called *before*
+    * `onBlur`.
     */
     onChange: PropTypes.func,
     onKeyDown: PropTypes.func,
@@ -131,9 +151,9 @@ class NumberInput extends Component {
 
   static defaultProps = {
     showArrows: true,
-    step: '1',
-    min: '',
-    max: '',
+    step: 1,
+    min: null,
+    max: null,
     inline: false,
     size: 'medium',
     messages: [],
@@ -141,8 +161,7 @@ class NumberInput extends Component {
     readOnly: false,
     layout: 'stacked',
     inputRef: function (input) {},
-    formatValueOnRender: true,
-    onChange: function (event, numberAsString, parsedNumber) {},
+    onChange: function (event, value, normalizedValue) {},
     onKeyDown: function (event) {},
     onFocus: function (event) {},
     onBlur: function (event) {}
@@ -160,54 +179,53 @@ class NumberInput extends Component {
   }
 
   componentWillReceiveProps (nextProps, nextContext) {
+    if (!this._input.value) return
+
+    // If the locale or precision props change, update the input value accordingly
     const currentLocale = this.getLocale(this.props, this.context)
     const nextLocale = this.getLocale(nextProps, nextContext)
-    let decimalValue
+    const currentPrecision = this.getPrecision(this.props)
+    const nextPrecision = this.getPrecision(nextProps)
+    if (currentLocale === nextLocale && deepEqual(currentPrecision, nextPrecision)) return
 
-    if (currentLocale !== nextLocale) {
-      decimalValue = Decimal.parse(this._input.value, currentLocale)
-      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(nextLocale))
-    }
+    const decimalValue = Decimal.parse(this._input.value, currentLocale)
+    if (decimalValue.isNaN()) return
 
-    // controlled
-    if (nextProps.value !== this.props.value && typeof nextProps.value === 'number') {
-      decimalValue = Decimal.parse(nextProps.value)
-      this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(nextLocale))
-    }
+    const formattedString = this.formatValue(decimalValue, nextLocale, nextPrecision)
+    this._input.value = formattedString
+    nextProps.onChange(null, formattedString, this.normalizeValue(decimalValue))
   }
 
   // Replicate the arrow behavior commonly seen in inputs of type number
   applyStep = (dir) => {
-    const { min, max, step } = this.props
-
     let d = Decimal.parse(this._input.value || '0', this.locale)
 
-    if (!d.mod(step).equals(0)) {
+    if (!d.mod(this.step).equals(0)) {
       // case when value is between steps, so we snap to the next step
-      const steps = d.div(step)
+      const steps = d.div(this.step)
 
       if (dir > 0) {
-        d = steps.floor().times(step)
+        d = steps.floor().times(this.step)
       } else {
-        d = steps.ceil().times(step)
+        d = steps.ceil().times(this.step)
       }
     }
 
     // then we add the step
     if (dir > 0) {
-      d = d.plus(step)
+      d = d.plus(this.step)
     } else {
-      d = d.minus(step)
+      d = d.minus(this.step)
     }
 
     // case when value is less than minimum
-    if (min && d.lt(min)) {
-      return Decimal.parse(min)
+    if (this.min && d.lt(this.min)) {
+      return this.min
     }
 
     // case when value is more than maximum
-    if (max && d.gt(max)) {
-      return Decimal.parse(max)
+    if (this.max && d.gt(this.max)) {
+      return this.max
     }
 
     return d
@@ -217,12 +235,44 @@ class NumberInput extends Component {
     this._input.focus()
   }
 
-  getLocale = (props = {}, context = {}) => {
+  getLocale (props, context) {
     return props.locale || context.locale || Locale.browserLocale()
   }
 
+  getPrecision (props) {
+    return pickProps(props, {}, ['decimalPrecision', 'significantDigits'])
+  }
+
+  get min () {
+    return this.props.min && Decimal.parse(this.props.min, Locale.defaultLocale)
+  }
+
+  get max () {
+    return this.props.max && Decimal.parse(this.props.max, Locale.defaultLocale)
+  }
+
+  get step () {
+    return this.props.step && Decimal.parse(this.props.step, Locale.defaultLocale)
+  }
+
+  get defaultValue () {
+    const { defaultValue } = this.props
+    if (defaultValue == null) return defaultValue
+
+    // If defaultValue is a string, parse it as an en-US number
+    const decimalValue = Decimal.parse(defaultValue, Locale.defaultLocale)
+
+    // If it can be parsed as a number, format it according to the current
+    // locale. Otherwise just return it as-is
+    return decimalValue.isNaN() ? defaultValue : this.formatValue(decimalValue, this.locale)
+  }
+
   get locale () {
-    return this.props.locale || this.context.locale || Locale.browserLocale()
+    return this.getLocale(this.props, this.context)
+  }
+
+  get precision () {
+    return this.getPrecision(this.props)
   }
 
   get invalid () {
@@ -240,18 +290,41 @@ class NumberInput extends Component {
     return isActiveElement(this._input)
   }
 
-  getDecimalValue (value, locale) {
-    return Decimal.parse(value, locale)
+  getDecimalValue (value) {
+    return Decimal.parse(value, this.locale)
   }
 
   get value () {
     return this._input.value
   }
 
+  isControlled () {
+    return typeof this.props.value !== 'undefined'
+  }
+
+  shouldFormatValueOnRender () {
+    return this.isControlled() && typeof this.props.value === 'number' || this.props.value instanceof Number
+  }
+
   conditionalFormat (value) {
-    return value && this.props.formatValueOnRender
-      ? Decimal.parse(value).toLocaleString(this.locale)
+    return this.shouldFormatValueOnRender()
+      ? this.formatValue(this.getDecimalValue(value), this.locale)
       : value
+  }
+
+  formatValue (decimal, locale, precision = this.precision) {
+    const { decimalPrecision, significantDigits } = precision
+    if (decimalPrecision) return decimal.toFixed(decimalPrecision, locale)
+    if (significantDigits) return decimal.toPrecision(significantDigits, locale)
+    return locale ? decimal.toLocaleString(locale) : decimal.toString()
+  }
+
+  normalizeValue (decimal) {
+    if (decimal.isNaN()) return null
+    let value = decimal
+    if (this.min && value.lt(this.min)) value = this.min
+    if (this.max && value.gt(this.max)) value = this.max
+    return this.formatValue(value)
   }
 
   handleRef = (element, ...args) => {
@@ -260,86 +333,69 @@ class NumberInput extends Component {
   }
 
   handleFocus = (event) => {
-    this.setState(() => ({ focus: true }))
+    this.setState({ focus: true })
     this.props.onFocus(event)
   }
 
   handleBlur = (event) => {
-    const { min, max } = this.props
-    let decimalValue = this.getDecimalValue(event.target.value, this.locale)
+    let decimalValue = this.getDecimalValue(event.target.value)
 
     // case when value is less than minimum
-    if (min && decimalValue.lt(min)) {
-      decimalValue = Decimal.parse(min)
+    if (this.min && decimalValue.lt(this.min)) {
+      decimalValue = this.min
     }
 
     // case when value is more than maximum
-    if (max && decimalValue.gt(max)) {
-      decimalValue = Decimal.parse(max)
+    if (this.max && decimalValue.gt(this.max)) {
+      decimalValue = this.max
     }
 
-    this._input.value = decimalValue.isNaN() ? '' : decimalValue.toLocaleString(this.locale)
-    this.setState(() => ({ focus: false }))
+    const formattedString = decimalValue.isNaN()
+      ? this._input.value
+      : this.formatValue(decimalValue, this.locale)
+    if (!this.isControlled()) this._input.value = formattedString
 
+    this.setState({ focus: false })
+
+    this.props.onChange(event, formattedString, this.normalizeValue(decimalValue))
     this.props.onBlur(event)
-    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
   }
 
   handleChange = (event) => {
-    const decimalValue = this.getDecimalValue(event.target.value, this.locale)
-    this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
-  }
-
-  updateInput = (value) => {
-    const newSelection = transformSelection(this._input, value)
-    this._input.value = value
-    this._input.selectionStart = newSelection.selectionStart
-    this._input.selectionEnd = newSelection.selectionEnd
-    this._input.selectionDirection = newSelection.selectionDirection
+    const decimalValue = this.getDecimalValue(event.target.value)
+    this.props.onChange(event, event.target.value, this.normalizeValue(decimalValue))
   }
 
   handleKeyDown = (event) => {
+    this.props.onKeyDown(event)
+
     const dir = keyDirections[event.key]
+    if (!dir) return
 
-    if (!this.props.disabled && !this.props.readOnly) {
-      if (dir) {
-        event.preventDefault()
-
-        const decimalValue = this.applyStep(dir)
-
-        this.updateInput((decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale))
-
-        this.props.onKeyDown(event)
-        this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
-      } else {
-        this.props.onKeyDown(event)
-      }
-    }
+    event.preventDefault()
+    this.handleStep(dir)
   }
 
   handleClickUp = (event) => {
     event.preventDefault()
-
-    if (!this.props.disabled && !this.props.readOnly) {
-      const decimalValue = this.applyStep(1)
-
-      this._input.focus()
-      this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
-
-      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
-    }
+    this.handleStep(1)
+    this.focus()
   }
 
   handleClickDown = (event) => {
     event.preventDefault()
+    this.handleStep(-1)
+    this.focus()
+  }
 
-    if (!this.props.disabled && !this.props.readOnly) {
-      const decimalValue = this.applyStep(-1)
+  handleStep (step) {
+    if (this.props.disabled || this.props.readOnly) return
 
-      this._input.focus()
-      this._input.value = (decimalValue.isNaN()) ? '' : decimalValue.toLocaleString(this.locale)
-
-      this.props.onChange(event, decimalValue.toString(), decimalValue.toNumber())
+    const decimalValue = this.applyStep(step)
+    if (!decimalValue.isNaN()) {
+      const formattedString = decimalValue.toLocaleString(this.locale)
+      if (!this.isControlled()) this._input.value = formattedString
+      this.props.onChange(event, formattedString, this.normalizeValue(decimalValue))
     }
   }
 
@@ -348,16 +404,14 @@ class NumberInput extends Component {
       <span className={styles.arrowContainer}>
         <span
           className={styles.arrow}
-          onClick={this.handleClickUp}
-          onKeyDown={noop}
+          onMouseDown={this.handleClickUp}
           role="presentation"
         >
           <IconArrowOpenUp />
         </span>
         <span
           className={styles.arrow}
-          onClick={this.handleClickDown}
-          onKeyDown={noop}
+          onMouseDown={this.handleClickDown}
           role="presentation"
         >
           <IconArrowOpenDown />
@@ -374,7 +428,6 @@ class NumberInput extends Component {
       value,
       disabled,
       readOnly,
-      defaultValue,
       required,
       width,
       inline
@@ -405,7 +458,7 @@ class NumberInput extends Component {
             type="text"
             inputMode="numeric"
             value={this.conditionalFormat(value)}
-            defaultValue={defaultValue ? Decimal.parse(defaultValue).toLocaleString(this.locale) : defaultValue}
+            defaultValue={this.defaultValue}
             placeholder={placeholder}
             ref={this.handleRef}
             id={this.id}

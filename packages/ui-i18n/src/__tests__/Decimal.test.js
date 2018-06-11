@@ -55,6 +55,9 @@ describe('Decimal', () => {
     })
   })
 
+  // TODO: we're trying to parse a lot of weird formats that we don't need to
+  // support here (e.g. '/-$%&/()=000,010,00[]}„...–0.000'). We should just fail
+  // for these formats.
   describe('#parse', () => {
     it('returns NaN when input is undefined', () => {
       expect(Decimal.parse().isNaN()).to.be.true
@@ -569,20 +572,71 @@ describe('Decimal', () => {
         )
       })
     })
+
+    context('with browser locale "fr"', () => {
+      beforeEach(() => {
+        sinon.stub(Locale, 'browserLocale').returns('fr')
+      })
+
+      afterEach(() => {
+        Locale.browserLocale.restore()
+      })
+
+      it('formats French numbers correctly', () => {
+        const decimal = new Decimal(12.34)
+        expect(decimal.toLocaleString('fr')).to.equal('12,34')
+      })
+    })
   })
 
-  context('with browser locale "fr"', () => {
-    beforeEach(() => {
-      sinon.stub(Locale, 'browserLocale').returns('fr')
+  describe('#toFixed', () => {
+    const number = 123456.789
+    const decimal = new Decimal(number)
+
+    context('with locale', () => {
+      const locale = 'de'
+
+      it('adds trailing zeros when precision is higher than value', () => {
+        expect(decimal.toFixed(5, locale)).to.equal('123.456,78900')
+      })
+
+      it('rounds when precision is higher than value', () => {
+        expect(decimal.toFixed(1, locale)).to.equal('123.456,8')
+      })
     })
 
-    afterEach(() => {
-      Locale.browserLocale.restore()
+    context('without locale', () => {
+      it('behaves the same as Number.prototype.toFixed', () => {
+        expect(decimal.toFixed(5)).to.equal(number.toFixed(5))
+        expect(decimal.toFixed(1)).to.equal(number.toFixed(1))
+      })
+    })
+  })
+
+  describe('#toPrecision', () => {
+    const number = 123456.789
+    const decimal = new Decimal(number)
+
+    context('with locale', () => {
+      const locale = 'de'
+
+      it('adds trailing zeros when precision is higher than value', () => {
+        expect(decimal.toPrecision(11, locale)).to.equal('123.456,78900')
+      })
+
+      it('rounds when precision is higher than value', () => {
+        expect(decimal.toPrecision(5, locale)).to.equal('123.460')
+      })
     })
 
-    it('formats French numbers correctly', () => {
-      const decimal = new Decimal(12.34)
-      expect(decimal.toLocaleString('fr')).to.equal('12,34')
+    context('without locale', () => {
+      it('behaves the same as Number.prototype.toPrecision when precision is higher than value', () => {
+        expect(decimal.toPrecision(11)).to.equal(number.toPrecision(11))
+      })
+
+      it("doesn't use exponential notation when precision is lower than value", () => {
+        expect(decimal.toPrecision(4)).to.equal('123500')
+      })
     })
   })
 })
