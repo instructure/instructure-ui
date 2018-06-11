@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pagination",
-  "version": "5.11.0",
+  "version": "5.12.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,20 +22,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.11.0",
-    "@instructure/ui-testbed": "^5.11.0",
-    "@instructure/ui-themes": "^5.11.0",
+    "@instructure/ui-presets": "^5.12.0",
+    "@instructure/ui-testbed": "^5.12.0",
+    "@instructure/ui-themes": "^5.12.0",
     "react": "15.6.2",
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-a11y": "^5.11.0",
-    "@instructure/ui-buttons": "^5.11.0",
-    "@instructure/ui-elements": "^5.11.0",
-    "@instructure/ui-icons": "^5.11.0",
-    "@instructure/ui-layout": "^5.11.0",
-    "@instructure/ui-themeable": "^5.11.0",
-    "@instructure/ui-utils": "^5.11.0",
+    "@instructure/ui-a11y": "^5.12.0",
+    "@instructure/ui-buttons": "^5.12.0",
+    "@instructure/ui-elements": "^5.12.0",
+    "@instructure/ui-icons": "^5.12.0",
+    "@instructure/ui-layout": "^5.12.0",
+    "@instructure/ui-themeable": "^5.12.0",
+    "@instructure/ui-utils": "^5.12.0",
     "prop-types": "^15.5.10"
   },
   "peerDependencies": {

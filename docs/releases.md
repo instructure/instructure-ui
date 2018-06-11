@@ -22,7 +22,7 @@ To bump the package versions in preparation for a stable release:
 1. Run `yarn bump` to update the package version.
 1. If necessary, manually update the CHANGELOG.md file to add any additional information about the release.
 1. Push up the version bump commit for review and testing: `git push origin HEAD:refs/for/master`
-1. Merge the bump commit into the `master` branch (and, COMING SOON: wait for the post-merge CI build to complete the release.)
+1. Merge the bump commit into the `master` branch and wait for the post-merge CI build to complete the release.
 1. Verify that the release was tagged in Github and published to npm by running `yarn info [package]@[version]`.
 1. Verify that the documentation was updated on gh-pages.
 
@@ -37,7 +37,7 @@ If you need to manually run the release:
 
 ### Pre-releases
 
-COMING SOON: RC pre-releases are run for every commit merged to the master branch as part of the CI build.
+RC pre-releases are run for every commit merged to the master branch as part of the CI build.
 
 However, if you need to run a pre-release manually, follow the instructions below.
 

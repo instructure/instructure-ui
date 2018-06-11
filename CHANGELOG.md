@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.12.0"></a>
+# [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
+
+
+### Bug Fixes
+
+* **ui-i18n,Decimal:** fix toLocaleString ([b32e06c](https://github.com/instructure/instructure-ui/commit/b32e06c))
+* **ui-elements:** Fix lineHeight default in TruncateText ([cbbf35f](https://github.com/instructure/instructure-ui/commit/cbbf35f))
+* **ui-forms,Select:** Change selected option when Select children update ([5dc9391](https://github.com/instructure/instructure-ui/commit/5dc9391))
+* **ui-presets:** Always pass an npm tag to publish ([da06936](https://github.com/instructure/instructure-ui/commit/da06936))
+* **ui-presets:** Remove meta data from pre-release versions ([ecc8d1c](https://github.com/instructure/instructure-ui/commit/ecc8d1c))
+* **ui-tabs:** add min-width so long string doesn't break layout ([a0a9981](https://github.com/instructure/instructure-ui/commit/a0a9981))
+
+
+### Features
+
+* **ui-buttons,Button:** Add icon prop ([3e63ef7](https://github.com/instructure/instructure-ui/commit/3e63ef7))
+* **ui-buttons,Button:** Responsive button docs ([4f52006](https://github.com/instructure/instructure-ui/commit/4f52006))
+* **ui-presets:** Add ui-scripts for release and publish ([1e7409f](https://github.com/instructure/instructure-ui/commit/1e7409f))
+
+
+
+
+
 <a name="5.11.0"></a>
 # [5.11.0](https://github.com/instructure/instructure-ui/compare/v5.10.0...v5.11.0) (2018-06-06)
 

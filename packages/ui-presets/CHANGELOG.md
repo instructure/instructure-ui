@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.12.0"></a>
+# [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
+
+
+### Bug Fixes
+
+* **ui-presets:** Always pass an npm tag to publish ([da06936](https://github.com/instructure/instructure-ui/commit/da06936))
+* **ui-presets:** Remove meta data from pre-release versions ([ecc8d1c](https://github.com/instructure/instructure-ui/commit/ecc8d1c))
+
+
+### Features
+
+* **ui-presets:** Add ui-scripts for release and publish ([1e7409f](https://github.com/instructure/instructure-ui/commit/1e7409f))
+
+
+
+
+
 <a name="5.11.0"></a>
 # [5.11.0](https://github.com/instructure/instructure-ui/compare/v5.10.0...v5.11.0) (2018-06-06)
 
