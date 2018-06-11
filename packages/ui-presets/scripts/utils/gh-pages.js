@@ -25,7 +25,8 @@
 const ghpages = require('gh-pages')
 const { runCommandAsync } = require('./command')
 const { getPackageJSON } = require('./get-package')
-const { info } = require('./logger')
+const { error, info } = require('./logger')
+const fs = require('fs')
 
 const {
  GH_PAGES_DIR,
@@ -35,6 +36,11 @@ const {
 } = process.env
 
 exports.publishGithubPages = async function publishGithubPages (callback) {
+  if (!fs.existsSync(`${GH_PAGES_DIR}`)) {
+    error(`GH pages directory doesn't exist!`)
+    process.exit(1)
+  }
+
   info(`📖   Deploying ${GH_PAGES_DIR} to Github pages...`)
   info(`📖   Repository: ${GH_PAGES_REPO}...`)
   info(`📖   Branch: ${GH_PAGES_BRANCH}...`)

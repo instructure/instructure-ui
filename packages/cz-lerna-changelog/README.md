@@ -17,6 +17,19 @@ Prompts for conventional changelog standard in a lerna environment.
 yarn add @instructure/cz-lerna-changelog
 ```
 
+Add the following to your package.json file:
+
+```json
+"config": {
+  "commitizen": {
+    "path": "./node_modules/@instructure/cz-lerna-changelog"
+  },
+  "cz-customizable": {
+    "config": "./node_modules/@instructure/cz-lerna-changelog/.cz-config.js"
+  }
+}
+```
+
 [npm]: https://img.shields.io/npm/v/@instructure/cz-lerna-changelog.svg
 [npm-url]: https://npmjs.com/package/@instructure/cz-lerna-changelog
 

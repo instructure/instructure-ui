@@ -22,28 +22,31 @@
  * SOFTWARE.
  */
 
-const { runCommandAsync } = require('./command')
-const { getPackageJSON } = require('./get-package')
 const fs = require('fs')
 const path = require('path')
+const rl = require('readline')
 
-const {
-  fetchGitTags,
-  checkWorkingDirectory,
-  createGitTagForRelease,
-  checkIfGitTagExists,
-  checkIfCommitIsReviewed,
-  isReleaseCommit
-} = require('./git')
-
+const { runCommandAsync } = require('./command')
+const { getPackageJSON } = require('./get-package')
 const {
   getIssuesInRelease,
   createJiraVersion,
-  updateJiraIssues
+  updateJiraIssues,
+  getIssuesInCommit
 } = require('./jira')
-
-const { publishGithubPages } = require('./gh-pages')
-const { postReleaseSlackMessage } = require('./slack')
+const {
+  postStableReleaseSlackMessage,
+  postReleaseCandidateSlackMessage
+} = require('./slack')
+const {
+  createGitConfig,
+  fetchGitTags,
+  checkWorkingDirectory,
+  checkIfGitTagExists,
+  checkIfCommitIsReviewed,
+  isReleaseCommit,
+  createGitTagForRelease
+} = require('./git')
 const { error, info } = require('./logger')
 
 async function checkPackagePublished (name, version) {
@@ -70,7 +73,7 @@ async function createNPMRCFile () {
   await runCommandAsync('npm whoami')
 }
 
-exports.prePublish = async function prePublish () {
+const getReleaseVersion = async function getReleaseVersion () {
   let releaseVersion = getPackageJSON().version
 
   await checkWorkingDirectory()
@@ -92,8 +95,9 @@ exports.prePublish = async function prePublish () {
   info(releaseVersion)
   return releaseVersion
 }
+exports.getReleaseVersion = getReleaseVersion
 
-exports.publish = async function publish (releaseVersion) {
+const publish = async function publish (releaseVersion) {
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
   const releaseCommit = await isReleaseCommit()
@@ -128,6 +132,7 @@ exports.publish = async function publish (releaseVersion) {
 
   info(`📦  Version ${npmTag} ${releaseVersion} of ${name} was successfully published!`)
 }
+exports.publish = publish
 
 exports.publishPackage = async function publishPackage (releaseVersion) {
   await createNPMRCFile()
@@ -161,28 +166,6 @@ exports.deprecatePackage = async function deprecatePackage (message) {
   await runCommandAsync(`npm deprecate ${pkg} ${message}`)
 }
 
-exports.postPublish = async function postPublish () {
-  if (!await isReleaseCommit()) {
-    error(`Post publish should only run on release commits!`)
-    return
-  }
-
-  await checkIfCommitIsReviewed()
-
-  const { name, version } = getPackageJSON()
-
-  await createGitTagForRelease(version)
-
-  const issueKeys = await getIssuesInRelease()
-  const jiraVersion = await createJiraVersion(name, version)
-
-  await updateJiraIssues(issueKeys, jiraVersion.name)
-
-  publishGithubPages()
-
-  postReleaseSlackMessage(jiraVersion, issueKeys)
-}
-
 exports.bump = async function bump (releaseType) {
   await checkWorkingDirectory()
   await fetchGitTags()
@@ -213,4 +196,50 @@ exports.bump = async function bump (releaseType) {
   info(`💾  Committing version bump commit for ${name} ${version}...`)
 
   await runCommandAsync(`git commit -a -m "chore(release): ${version}"`)
+}
+
+exports.release = async function release (version) {
+  const { name } = getPackageJSON()
+
+  let releaseVersion = version
+
+  createGitConfig()
+
+  if (!releaseVersion) {
+    info(`Determining release version for ${name}...`)
+    releaseVersion = await getReleaseVersion()
+  }
+
+  info(`Publishing version ${releaseVersion} of ${name}...`)
+
+  if (!process.env.CI) {
+    const confirm = rl.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    })
+
+    confirm.question('Continue? [y/n]\n', function (reply) {
+      confirm.close()
+      if (!['Y', 'y'].includes(reply.trim())) {
+        process.exit(0)
+      }
+    })
+  }
+
+  await publish(releaseVersion)
+
+  if (!await isReleaseCommit()) {
+    info(`Running post-publish steps for ${releaseVersion} of ${name}...`)
+    await checkIfCommitIsReviewed()
+    await createGitTagForRelease(releaseVersion)
+    const issueKeys = await getIssuesInRelease()
+    const jiraVersion = await createJiraVersion(name, releaseVersion)
+    await updateJiraIssues(issueKeys, jiraVersion.name)
+    postStableReleaseSlackMessage(jiraVersion, issueKeys)
+  } else {
+    const issueKeys = await getIssuesInCommit()
+    postReleaseCandidateSlackMessage(name, releaseVersion, issueKeys)
+  }
+
+  info(`Version ${releaseVersion} of ${name} was successfully released!`)
 }

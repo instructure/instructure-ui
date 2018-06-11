@@ -42,6 +42,7 @@
     "deprecate:packages": "lerna exec ui-scripts --deprecate-package --stream --ignore docs",
     "prerelease": "yarn bootstrap",
     "release": "ui-scripts --release",
+    "postrelease": "yarn deploy",
     "predeploy": "yarn build:docs",
     "deploy": "ui-scripts --deploy",
     "storybook": "start-storybook -p 9001 -c .storybook",
@@ -78,6 +79,9 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/@instructure/cz-lerna-changelog"
+    },
+    "cz-customizable": {
+      "config": "./node_modules/@instructure/cz-lerna-changelog/.cz-config.js"
     }
   },
   "standard-version": {

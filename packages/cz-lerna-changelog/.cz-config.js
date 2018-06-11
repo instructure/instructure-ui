@@ -1,0 +1,3 @@
+module.exports = {
+  footerPrefix: "refs:"
+}

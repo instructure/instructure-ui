@@ -29,6 +29,21 @@ exports.commit = function () {
   return runCommand('git-cz')
 }
 
+exports.createGitConfig = function createGitConfig () {
+  const {
+   GIT_EMAIL,
+   GIT_USERNAME,
+   GIT_REMOTE
+  } = process.env
+
+  info('Writing git config with environment variables...')
+
+  runCommand(`git config user.email ${GIT_EMAIL}`)
+  runCommand(`git config user.name ${GIT_USERNAME}`)
+  runCommand(`git remote add origin ${GIT_REMOTE}`)
+  runCommand(`git config push.default simple`)
+}
+
 exports.lintCommitMessage = async function lintCommitMessage () {
   const commitMessage = await runCommandAsync(`git log -1 --pretty=%B`)
   return validateMessage(commitMessage)
@@ -36,7 +51,7 @@ exports.lintCommitMessage = async function lintCommitMessage () {
 
 exports.isReleaseCommit = async function isReleaseCommit () {
   const commitMessage = await runCommandAsync(`git log --oneline --format=%B -n 1 HEAD | head -n 1`)
-  return commitMessage.includes('chore(release): ')
+  return commitMessage.indexOf('chore(release): ') !== -1
 }
 
 exports.checkWorkingDirectory = async function checkWorkingDirectory () {

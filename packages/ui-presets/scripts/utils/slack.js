@@ -33,7 +33,7 @@ const {
  SLACK_WEBHOOK
 } = process.env
 
-exports.postReleaseSlackMessage = function postReleaseSlackMessage (jiraVersion, issueKeys) {
+exports.postStableReleaseSlackMessage = function postReleaseSlackMessage (jiraVersion, issueKeys) {
   if (SLACK_CHANNEL && SLACK_WEBHOOK) {
     info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
 
@@ -58,6 +58,34 @@ exports.postReleaseSlackMessage = function postReleaseSlackMessage (jiraVersion,
     req.write(JSON.stringify(payload))
     req.end()
 
-    info(`💬  Posted Slack Message: "${message}"`) // eslint-disable-line no-console
+    info(`💬  Posted Slack Message: "${message + changelog + issues}"`) // eslint-disable-line no-console
+  }
+}
+
+exports.postReleaseCandidateSlackMessage = function postReleaseSlackMessage (name, version, issueKeys) {
+  if (SLACK_CHANNEL && SLACK_WEBHOOK) {
+    info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
+
+    const message = `PSA!\n *A release candidate for ${name} has been published!* :party:`
+    const issues = (issueKeys.length > 0) ? `\n\nIssues in this RC: ${issueKeys.join(', ')}` : ''
+
+    const payload = {
+      'channel': SLACK_CHANNEL,
+      'username': SLACK_USERNAME,
+      'icon_emoji': SLACK_EMOJI,
+      'text': message + issues,
+      'link_names': 1
+    }
+
+    const req = https.request({
+      path: `/services/${SLACK_WEBHOOK}`,
+      hostname: 'hooks.slack.com',
+      method: 'POST'
+    })
+
+    req.write(JSON.stringify(payload))
+    req.end()
+
+    info(`💬  Posted Slack Message: "${message + issues}"`) // eslint-disable-line no-console
   }
 }

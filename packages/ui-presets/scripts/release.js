@@ -22,46 +22,13 @@
  * SOFTWARE.
  */
 
-const rl = require('readline')
-const { prePublish, publish, postPublish } = require('./utils/release')
-const { info, error } = require('./utils/logger')
-const { getPackageJSON } = require('./utils/get-package')
-
-async function release (skipConfirm) {
-  const { name } = getPackageJSON()
-
-  info(`Running pre-publish steps for ${name}...`)
-
-  const releaseVersion = await prePublish()
-
-  info(`Publishing version ${releaseVersion} of ${name}...`)
-
-  if (!skipConfirm) {
-    const confirm = rl.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    })
-
-    confirm.question('Continue? [y/n]\n', function (reply) {
-      confirm.close()
-      if (!['Y', 'y'].includes(reply.trim())) {
-        process.exit(0)
-      }
-    })
-  }
-
-  await publish(releaseVersion)
-
-  info(`Running post-publish steps...`)
-
-  await postPublish()
-
-  info(`Version ${releaseVersion} of ${name} was successfully released!`)
-}
+const { release } = require('./utils/release')
+const { error } = require('./utils/logger')
 
 try {
-  // ui-scripts --release --yes
-  release(process.argv.includes('--yes'))
+  // optional version argument:
+  // ui-scripts --release 5.11.0
+  release(process.argv[3])
 } catch (err) {
   error(err)
   process.exit(1)

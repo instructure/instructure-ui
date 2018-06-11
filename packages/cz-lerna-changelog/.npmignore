@@ -1,4 +1,2 @@
 **/.*
 **/__tests__
-*.config.js
-*.conf.js

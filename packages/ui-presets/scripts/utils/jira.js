@@ -82,15 +82,31 @@ exports.createJiraVersion = async function createJiraVersion (name, version) {
 }
 
 exports.getIssuesInRelease = async function getIssuesInRelease () {
+  info(`Looking up issues for the ${JIRA_PROJECT_KEY} project...`)
   const currentReleaseTag = await runCommandAsync('git describe --exact-match')
   const previousReleaseCommit = await runCommandAsync('git rev-list --tags --skip=1 --max-count=1')
   const previousReleaseTag = await runCommandAsync(`git describe --abbrev=0 --tags ${previousReleaseCommit}`)
   const result = await runCommandAsync(`git log ${previousReleaseTag}..${currentReleaseTag} | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
 
   let issueKeys = []
-  issueKeys = (result ? result.split(' ') : [])
-    .map(key => key.trim())
-    .filter(key => key && key.includes(JIRA_PROJECT_KEY))
+  issueKeys = (result ? result.split(/\s+/g) : [])
+
+  issueKeys = issueKeys
+    .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
+
+  info(`Issues in this release: ${issueKeys.join(', ')}`)
+
+  return issueKeys
+}
+
+exports.getIssuesInCommit = async function getIssuesInCommit () {
+  const result = await runCommandAsync(`git log -1 --pretty=%B | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+
+  let issueKeys = []
+  issueKeys = (result ? result.split(/\s+/g) : [])
+
+  issueKeys = issueKeys
+    .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
 
   info(`Issues in this release: ${issueKeys.join(', ')}`)
 
