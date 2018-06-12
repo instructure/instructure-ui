@@ -34,6 +34,7 @@ import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -68,14 +69,24 @@ class Link extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    /**
+    * Add an SVG icon to the Link. Do not add icons directly as
+    * children.
+    */
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+    /**
+    * Place the icon before or after the text in the Link.
+    */
+    iconPlacement: PropTypes.oneOf(['start', 'end'])
   }
 
   static defaultProps = {
     variant: 'default',
     as: 'button',
     linkRef: function (link) {},
-    ellipsis: false
+    ellipsis: false,
+    iconPlacement: 'start'
   }
 
   handleClick = e => {
@@ -93,29 +104,48 @@ class Link extends Component {
     return isActiveElement(this._link)
   }
 
+  get hasVisibleChildren () {
+    return hasVisibleChildren(this.props.children)
+  }
+
   focus () {
     findDOMNode(this._link).focus() // eslint-disable-line react/no-find-dom-node
   }
 
+  renderIcon () {
+    const Icon = this.props.icon
+    if (typeof this.props.icon === 'function') {
+      return <span className={styles.icon}><Icon /></span>
+    } else if (Icon) {
+      return <span className={styles.icon}>{Icon}</span>
+    } else {
+      return null
+    }
+  }
+
   render () {
     const {
-      children,
       disabled,
+      children,
       onClick,
       variant,
       linkRef,
       href,
       margin,
       ellipsis,
-      elementRef
+      elementRef,
+      icon,
+      iconPlacement
     } = this.props
 
     const ElementType = getElementType(Link, this.props)
 
     const classes = {
       [styles.link]: true,
-      [styles[variant]]: true,
-      [styles.ellipsis]: ellipsis
+      [styles.inverse]: variant === 'inverse',
+      [styles.ellipsis]: ellipsis,
+      [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
+      [styles.iconOnly]: icon && !this.hasVisibleChildren
     }
 
     const props = {
@@ -133,12 +163,6 @@ class Link extends Component {
       onClick: this.handleClick
     }
 
-    const text = ellipsis
-      ? (<span className={styles.text}>
-        {children}
-      </span>)
-      : children
-
     return (
       <View
         margin={margin}
@@ -146,7 +170,11 @@ class Link extends Component {
         elementRef={elementRef}
       >
         <ElementType {...props}>
-          {text}
+          <span className={(ellipsis) ? styles.text : null}>
+            {(icon && iconPlacement === 'start') && this.renderIcon()}
+            {children}
+            {(icon && iconPlacement === 'end') && this.renderIcon()}
+          </span>
         </ElementType>
       </View>
     )

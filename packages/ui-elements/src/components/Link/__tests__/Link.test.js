@@ -24,7 +24,9 @@
 
 import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
+import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import Link from '../index'
+import styles from '../styles.css'
 
 describe('<Link />', () => {
   const testbed = new Testbed(<Link>Hello World</Link>)
@@ -81,6 +83,14 @@ describe('<Link />', () => {
     })
 
     expect(linkRef).to.have.been.calledWith(subject.find('button').unwrap())
+  })
+
+  it('should pass down an icon via the icon property', () => {
+    const subject = testbed.render({
+      icon: IconTrash
+    })
+
+    expect(subject.find('IconTrash').length).to.eql(1)
   })
 
   describe('when disabled', () => {

@@ -12,10 +12,18 @@
   text-decoration: var(--textDecoration);
   transition: color 0.2s;
   outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
+  outline-offset: var(--outlineOffset); /* does not work in Edge or IE */
 
   &:focus,
   &:active {
     outline: var(--outlineWidth) var(--outlineStyle) var(--focusOutlineColor);
+  }
+
+  &.iconOnly {
+    &:focus,
+    &:active {
+      outline: var(--outlineWidth) var(--outlineStyle) var(--focusIconOutlineColor);
+    }
   }
 
   &:focus,
@@ -47,6 +55,13 @@
   &:active {
     outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseOutlineColor);
   }
+
+  &.iconOnly {
+    &:focus,
+    &:active {
+      outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseIconOutlineColor);
+    }
+  }
 }
 
 .root button.link {
@@ -76,6 +91,20 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
+}
+
+.icon {
+  font-size: 1.125em; /* make icon slightly larger than inherited font-size */
+}
+
+.iconPlacement--start .icon {
+  margin-inline-end: var(--iconPlusTextMargin);
+  margin-inline-start: 0;
+}
+
+.iconPlacement--end .icon {
+  margin-inline-end: 0;
+  margin-inline-start: var(--iconPlusTextMargin);
 }
 
 /* stylelint-enable selector-max-class, no-descending-specificity, selector-max-type */

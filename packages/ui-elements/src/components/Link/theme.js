@@ -24,7 +24,7 @@
 
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
-export default function generator ({ colors, typography, borders }) {
+export default function generator ({ colors, typography, borders, spacing }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -35,10 +35,15 @@ export default function generator ({ colors, typography, borders }) {
     outlineWidth: borders.widthSmall,
     outlineColor: 'transparent',
     outlineStyle: borders.style,
+    outlineOffset: spacing.xxxSmall,
     focusOutlineColor: 'transparent',
+    focusIconOutlineColor: colors.textBrand,
 
     colorInverse: colors.textLight,
-    focusInverseOutlineColor: 'transparent'
+    focusInverseOutlineColor: 'transparent',
+    focusInverseIconOutlineColor: colors.textLight,
+
+    iconPlusTextMargin: spacing.xxSmall
   }
 }
 

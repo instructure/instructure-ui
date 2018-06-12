@@ -38,3 +38,38 @@ example: true
 ---
 <Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I am a link with left margin</Link>
 ```
+
+### Using icons
+
+Use the `icon` property to put an [icon](#iconography) inside a Link. To position the
+icon _after_ the link text, change the `iconPlacement` property to `end`. You can also
+render a Link with just an icon. Don't forget to add text for screen readers, though.
+
+```js
+---
+example: true
+---
+<div>
+  <p>
+    <Link href="https://instructure.design" icon={IconUser.Solid}>Icon before text</Link>
+  </p>
+  <p>
+    <Link
+      href="https://instructure.design"
+      icon={IconUser.Solid}
+      iconPlacement="end"
+    >
+      Icon after text
+    </Link>
+  </p>
+  <p>
+    Link consisting of only an icon&nbsp;
+    <Link
+      href="https://instructure.design"
+      icon={IconUser.Solid}
+    >
+      <ScreenReaderContent>Descriptive text</ScreenReaderContent>
+    </Link>.
+  </p>
+</div>
+```
