@@ -153,6 +153,9 @@ function _format (input, locale) {
   // remove the leading zeros using positive lookahead
   result = result.replace(new RegExp(`^[0${thousands}]+(?=\\d|0${decimal})`, ''), '')
 
+  // add leading zero to decimal, if not present
+  result = result.charAt(0) === decimal ? result.replace(/^/, '0') : result
+
   const parts = result.split(decimal)
   const thousandSections = []
 

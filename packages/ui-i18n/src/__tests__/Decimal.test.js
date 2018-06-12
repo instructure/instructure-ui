@@ -170,6 +170,12 @@ describe('Decimal', () => {
           'toNumber',
           0.1
         )
+        expectResult(
+          Decimal.parse,
+          [`${decimal}1`, locale],
+          'toNumber',
+          0.1
+        )
       })
     })
 
