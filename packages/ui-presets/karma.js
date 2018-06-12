@@ -78,6 +78,10 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
     config.set({
       basePath: '',
 
+      // The default has some problems inside a monorepo, but specifying this manually
+      // seems to pull in all karma plugins across disparate node_modules/ dirs
+      plugins: ['karma-*'],
+
       frameworks: ['mocha'],
 
       files: [ bundle ],
