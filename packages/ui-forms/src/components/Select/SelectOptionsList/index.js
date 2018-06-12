@@ -215,7 +215,7 @@ class SelectOptionsList extends Component {
             [styles.groupItem]: groupItem
           })}
           tabIndex="-1"
-          aria-selected={index === highlightedIndex ? 'true' : 'false'}
+          aria-selected={selected ? 'true' : 'false'}
           aria-disabled={disabled || groupLabel ? 'true' : null}
         >
           <span className={styles.label}>
