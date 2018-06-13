@@ -67,6 +67,10 @@ class Tag extends Component {
     * If you add an onClick prop, Tag renders as a clickable button
     */
     onClick: PropTypes.func,
+    /**
+    * Provides a reference to the underlying html root element
+    */
+    elementRef: PropTypes.func,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['default', 'inline'])
   }
@@ -129,6 +133,7 @@ class Tag extends Component {
       <View
         {...props}
         ref={this.handleRef}
+        elementRef={this.props.elementRef}
         className={classNames(className, classes)}
         as={(onClick) ? 'button' : 'span'}
         margin={margin}

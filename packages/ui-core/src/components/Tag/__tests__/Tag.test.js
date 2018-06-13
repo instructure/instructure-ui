@@ -47,7 +47,8 @@ describe('<Tag />', () => {
 describe('when passing down props to View', () => {
     const allowedProps = {
       margin: 'small',
-      as: 'span'
+      as: 'span',
+      elementRef: () => {}
     }
 
     Object.keys(View.propTypes)
