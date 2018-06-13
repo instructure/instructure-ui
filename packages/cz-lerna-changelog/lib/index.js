@@ -84,18 +84,21 @@ function makePrompter() {
 
     cz.prompt(autocompleteQuestions(questions))
       .then((answers) => {
-        if (answers.testplan) {
-          // eslint-disable-next-line no-param-reassign
-          answers.body = answers.body + `\nTest plan:${answers.testplan}`
-        }
+        const {
+          scope,
+          body,
+          testplan,
+          footer
+        } = answers
 
-        if (answers.scope && answers.scope.length > 0) {
-          answers.scope = answers.scope.join(',') // eslint-disable-line no-param-reassign
-        } else {
-          answers.scope = '*' // eslint-disable-line no-param-reassign
-        }
-
-        const message = buildCommit(answers)
+        const message = buildCommit({
+          ...answers,
+          body: (testplan) ? body + `\nTEST PLAN:\n${testplan}\n` : body,
+          scope: (scope && scope.length > 0) ? scope.join(',') : '*',
+          footer: (footer) ? footer + '\n\n' : ''
+        }, {
+          footerPrefix: 'refs:'
+        })
 
         commitAnalyzer({}, {
           commits: [{

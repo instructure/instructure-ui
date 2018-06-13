@@ -20,7 +20,7 @@
     "@semantic-release/commit-analyzer": "^2.0.0",
     "@lerna/package": "^3.0.0-beta.17",
     "chalk": "^2.4.1",
-    "cz-customizable": "^4.0.0",
+    "cz-customizable": "^5.2.0",
     "glob": "^7.1.2",
     "inquirer-autocomplete-prompt": "^0.7.0",
     "read-pkg": "^3.0.0",

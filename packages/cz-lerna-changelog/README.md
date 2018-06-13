@@ -23,9 +23,6 @@ Add the following to your package.json file:
 "config": {
   "commitizen": {
     "path": "./node_modules/@instructure/cz-lerna-changelog"
-  },
-  "cz-customizable": {
-    "config": "./node_modules/@instructure/cz-lerna-changelog/.cz-config.js"
   }
 }
 ```
