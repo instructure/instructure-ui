@@ -35,9 +35,12 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import Position, { PositionContent } from '@instructure/ui-layout/lib/components/Position'
 import FormField from '../../FormField'
+import FormFieldLayout from '../../FormField/FormFieldLayout'
 
 import SelectOptionsList from '../SelectOptionsList'
 import getOptionId from '../utils/getOptionId'
@@ -552,8 +555,28 @@ class SelectField extends Component {
       inputProps['aria-activedescendant'] = null
     }
 
+
+    let wrappedLabel = (
+      // eslint-disable-next-line jsx-a11y/label-has-for
+      <label
+        htmlFor={this.id}
+        className={styles.label}
+      >
+        {this.props.label}
+      </label>
+    )
+
+    if (!hasVisibleChildren(this.props.label)) {
+      wrappedLabel = <ScreenReaderContent>{wrappedLabel}</ScreenReaderContent>
+    }
+
     return (
-      <FormField {...pickProps(this.props, FormField.propTypes)} id={this.id}>
+      <FormFieldLayout
+        {...pickProps(this.props, FormFieldLayout.propTypes)}
+        as="span"
+        label={wrappedLabel}
+        id={this.id}
+      >
         <span
           style={{
             width: width || 'auto'
@@ -637,7 +660,7 @@ class SelectField extends Component {
         >
           {assistiveText}
         </span>
-      </FormField>
+      </FormFieldLayout>
     )
   }
 }

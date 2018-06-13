@@ -62,6 +62,31 @@ describe('<SelectField />', () => {
     expect(subject.find('label').length).to.equal(1)
   })
 
+  it('should not render label implicitly', () => {
+    // Verify that the input is not wrapped by a label
+    // element as this causes issues with a11y
+    const subject = testbed.render()
+    const label = subject.find('label').getDOMNode()
+    const input = subject.find('input').getDOMNode()
+
+    let labelIsAncestor = false
+    let el = input.parentElement
+
+    while (el) {
+      if (el === label) {
+        labelIsAncestor = true
+      }
+
+      if (el === subject.getDOMNode()) {
+        break
+      }
+
+      el = el.parentElement
+    }
+
+    expect(labelIsAncestor).to.be.false
+  })
+
   it('should provide an inputRef prop', () => {
     const inputRef = testbed.stub()
     const subject = testbed.render({ inputRef })

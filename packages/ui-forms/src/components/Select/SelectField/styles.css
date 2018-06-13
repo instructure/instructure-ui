@@ -135,4 +135,14 @@ input[type].input {
   fill: var(--iconColor);
 }
 
+.label {
+  all: initial;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0;
+  text-align: inherit;
+}
+
 /* stylelint-enable selector-max-class */
