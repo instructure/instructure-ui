@@ -39,8 +39,7 @@ const {
   postReleaseCandidateSlackMessage
 } = require('./slack')
 const {
-  createGitConfig,
-  fetchGitTags,
+  setupGit,
   checkWorkingDirectory,
   checkIfGitTagExists,
   checkIfCommitIsReviewed,
@@ -77,7 +76,6 @@ const getReleaseVersion = async function getReleaseVersion () {
   let releaseVersion = getPackageJSON().version
 
   await checkWorkingDirectory()
-  await fetchGitTags()
 
   if (await isReleaseCommit(releaseVersion)) {
     await checkIfGitTagExists(releaseVersion)
@@ -98,6 +96,7 @@ const getReleaseVersion = async function getReleaseVersion () {
 exports.getReleaseVersion = getReleaseVersion
 
 const publish = async function publish (releaseVersion) {
+  await setupGit()
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
   const releaseCommit = await isReleaseCommit(releaseVersion)
@@ -135,6 +134,7 @@ const publish = async function publish (releaseVersion) {
 exports.publish = publish
 
 exports.publishPackage = async function publishPackage (releaseVersion) {
+  await setupGit()
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
   const releaseCommit = await isReleaseCommit(releaseVersion)
@@ -167,8 +167,8 @@ exports.deprecatePackage = async function deprecatePackage (message) {
 }
 
 exports.bump = async function bump (releaseType) {
+  await setupGit()
   await checkWorkingDirectory()
-  await fetchGitTags()
 
   const versionArgs = releaseType ? `--release-as ${releaseType}` : ''
   await runCommandAsync(`$(npm bin)/standard-version ${versionArgs}`)
@@ -201,9 +201,9 @@ exports.bump = async function bump (releaseType) {
 exports.release = async function release (version) {
   const { name } = getPackageJSON()
 
-  let releaseVersion = version
+  await setupGit()
 
-  createGitConfig()
+  let releaseVersion = version
 
   if (!releaseVersion) {
     info(`Determining release version for ${name}...`)

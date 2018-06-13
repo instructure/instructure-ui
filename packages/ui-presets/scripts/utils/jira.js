@@ -29,7 +29,7 @@ const { runCommandAsync } = require('./command')
 const { info } = require('./logger')
 
 const {
-  JIRA_PEM,
+  JIRA_PEM_PATH,
   JIRA_TOKEN,
   JIRA_HOST,
   JIRA_CONSUMER_KEY,
@@ -47,7 +47,7 @@ function jiraClient () {
       protocol: 'https',
       oauth: {
         consumer_key: JIRA_CONSUMER_KEY,
-        consumer_secret: fs.readFileSync(JIRA_PEM),
+        consumer_secret: fs.readFileSync(JIRA_PEM_PATH),
         access_token: JIRA_TOKEN,
         access_secret: JIRA_SECRET
       }

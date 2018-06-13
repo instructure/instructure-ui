@@ -23,6 +23,7 @@ function cleanup() {
   docker-compose stop test
   docker-compose rm -f test
   docker rmi -f $(docker images -qf "dangling=true") &>/dev/null
+
   rm $env_file
 
   exit $exit_code
@@ -33,15 +34,16 @@ trap cleanup INT TERM EXIT
 export COMPOSE_FILE=./docker-compose.test.yml
 
 echo "Creating ${env_file} file..."
-
 (
 cat << EOF
-POST_MERGE_BUILD=${POST_MERGE_BUILD}
+CI=true
 NPM_TOKEN=${NPM_TOKEN}
 NPM_USERNAME=${NPM_USERNAME}
 NPM_EMAIL=${NPM_EMAIL}
 NPM_SCOPE=${NPM_SCOPE}
-GIT_REMOTE=${GIT_REMOTE}
+GIT_HOST_NAME=${GIT_HOST_NAME}
+GIT_REMOTE_NAME=${GIT_REMOTE_NAME}
+GIT_REMOTE_URL=${GIT_REMOTE_URL}
 GIT_EMAIL=${GIT_EMAIL}
 GIT_USERNAME=${GIT_USERNAME}
 GH_PAGES_DIR=${GH_PAGES_DIR}
@@ -52,7 +54,7 @@ JIRA_HOST=${JIRA_HOST}
 JIRA_CONSUMER_KEY=${JIRA_CONSUMER_KEY}
 JIRA_TOKEN=${JIRA_TOKEN}
 JIRA_SECRET=${JIRA_SECRET}
-JIRA_PEM=/home/docker/.ssh/gerritbot_jira.pem
+JIRA_PEM_PATH=/home/docker/.ssh/gerritbot_jira.pem
 JIRA_PROJECT_ID=${JIRA_PROJECT_ID}
 JIRA_PROJECT_KEY=${JIRA_PROJECT_KEY}
 SLACK_USERNAME=${SLACK_USERNAME}
@@ -60,21 +62,16 @@ SLACK_CHANNEL=${SLACK_CHANNEL}
 SLACK_EMOJI=${SLACK_EMOJI}
 SLACK_WEBHOOK=${SLACK_WEBHOOK}
 CHANGELOG_URL=${CHANGELOG_URL}
-CI=true
 EOF
 ) > $env_file
 
-echo "Pulling image..."
-docker-compose pull
-
-echo "Building services..."
-docker-compose build
+echo "Building docker images..."
+docker-compose build --pull test
 
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
 if [[ $POST_MERGE_BUILD ]]; then
-  # copy ssh and jira pem for host user
   docker cp ~/.ssh $container:/home/docker/.ssh
   docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
 

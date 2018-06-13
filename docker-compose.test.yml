@@ -1,11 +1,17 @@
-coverage:
-  dockerfile: docker/Dockerfile.coverage
-  build: .
+version: '2.1'
 
-test:
-  build: .
-  dockerfile: docker/Dockerfile.test
-  volumes_from:
-    - coverage
-  env_file:
-    - ./.env.test
+services:
+
+  coverage:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.coverage
+
+  test:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.test
+    volumes_from:
+      - coverage
+    env_file:
+      - ./.env.test
