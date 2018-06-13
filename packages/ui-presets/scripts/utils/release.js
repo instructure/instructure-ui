@@ -79,7 +79,7 @@ const getReleaseVersion = async function getReleaseVersion () {
   await checkWorkingDirectory()
   await fetchGitTags()
 
-  if (await isReleaseCommit()) {
+  if (await isReleaseCommit(releaseVersion)) {
     await checkIfGitTagExists(releaseVersion)
     await checkIfCommitIsReviewed()
   } else {
@@ -100,7 +100,7 @@ exports.getReleaseVersion = getReleaseVersion
 const publish = async function publish (releaseVersion) {
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
-  const releaseCommit = await isReleaseCommit()
+  const releaseCommit = await isReleaseCommit(releaseVersion)
   const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
   const args = [
     '--yes',
@@ -137,7 +137,7 @@ exports.publish = publish
 exports.publishPackage = async function publishPackage (releaseVersion) {
   await createNPMRCFile()
   const { name, version } = getPackageJSON()
-  const releaseCommit = await isReleaseCommit()
+  const releaseCommit = await isReleaseCommit(releaseVersion)
   const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
 
   await checkWorkingDirectory()
@@ -228,13 +228,17 @@ exports.release = async function release (version) {
 
   await publish(releaseVersion)
 
-  if (!await isReleaseCommit()) {
+  if (await isReleaseCommit(releaseVersion)) {
     info(`Running post-publish steps for ${releaseVersion} of ${name}...`)
     await checkIfCommitIsReviewed()
     await createGitTagForRelease(releaseVersion)
+
+    await runCommandAsync(`yarn deploy`)
+
     const issueKeys = await getIssuesInRelease()
     const jiraVersion = await createJiraVersion(name, releaseVersion)
     await updateJiraIssues(issueKeys, jiraVersion.name)
+
     postStableReleaseSlackMessage(jiraVersion, issueKeys)
   } else {
     const issueKeys = await getIssuesInCommit()

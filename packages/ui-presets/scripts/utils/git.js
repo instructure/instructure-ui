@@ -49,9 +49,9 @@ exports.lintCommitMessage = async function lintCommitMessage () {
   return validateMessage(commitMessage)
 }
 
-exports.isReleaseCommit = async function isReleaseCommit () {
-  const commitMessage = await runCommandAsync(`git log --oneline --format=%B -n 1 HEAD | head -n 1`)
-  return commitMessage.indexOf('chore(release): ') !== -1
+exports.isReleaseCommit = async function isReleaseCommit (version) {
+  const result = await runCommandAsync(`git log --oneline --format=%B -n 1 HEAD | head -n 1 | grep "chore(release)"`)
+  return (result.trim() === `chore(release): ${version}`)
 }
 
 exports.checkWorkingDirectory = async function checkWorkingDirectory () {
@@ -74,9 +74,8 @@ exports.checkIfGitTagExists = async function checkIfGitTagExists (version) {
 }
 
 exports.checkIfCommitIsReviewed = async function checkIfCommitIsReviewed () {
-  try {
-    await runCommandAsync('git log -n 1 | grep Reviewed-on')
-  } catch (err) {
+  const result = await runCommandAsync('git log -n 1 | grep Reviewed-on')
+  if (!result) {
     error('The version bump commit must be merged prior to running the release!')
     error('Use "git pull --rebase" to pull down the latest from the remote.')
     process.exit(1)
