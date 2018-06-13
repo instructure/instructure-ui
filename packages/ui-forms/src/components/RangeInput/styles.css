@@ -87,6 +87,11 @@
   }
 }
 
+/* patch broken MSEdge keyboard focus styles in 16 and up */
+.edge16Up .input:focus {
+  outline: 0.0625rem solid var(--handleBackground);
+}
+
 .value {
   all: initial;
   box-sizing: border-box;

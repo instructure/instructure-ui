@@ -33,6 +33,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import FormField from '../FormField'
 import FormPropTypes from '../../utils/FormPropTypes'
@@ -172,11 +173,14 @@ class RangeInput extends Component {
       readOnly
     } = this.props
 
+    const edge16Up = Browser.msedge && parseFloat(Browser.version) >= 16
+
     const props = omitProps(this.props, RangeInput.propTypes)
 
     const classes = {
       [styles.root]: true,
-      [styles[size]]: size
+      [styles[size]]: size,
+      [styles.edge16Up]: edge16Up
     }
 
     /* eslint-disable jsx-a11y/no-redundant-roles */
