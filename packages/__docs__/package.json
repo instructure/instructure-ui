@@ -1,5 +1,5 @@
 {
-  "name": "docs",
+  "name": "docs-app",
   "private": true,
   "version": "5.19.0",
   "description": "Documentation for A UI library made by Instructure Inc.",
@@ -20,15 +20,12 @@
     "clean": "ui-build --clean"
   },
   "license": "MIT",
-  "resolve": {
-    "uglifyjs-webpack-plugin": "^1.2.5"
-  },
   "devDependencies": {
     "@instructure/ui-polyfill-loader": "^5.19.0",
     "http-server": "^0.11.1",
     "raw-loader": "^0.5.1",
     "svg-inline-loader": "^0.8.0",
-    "uglifyjs-webpack-plugin": "^1.2.5",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^3.11.0"
   },
   "dependencies": {
@@ -62,8 +59,8 @@
     "@instructure/ui-toggle-details": "^5.19.0",
     "@instructure/ui-tree-browser": "^5.19.0",
     "@instructure/ui-utils": "^5.19.0",
-    "lorem-ipsum": "^1.0.4",
-    "moment": "^2.22.1",
+    "lorem-ipsum": "^1.0.5",
+    "moment": "^2.22.2",
     "react": "^15.6.2",
     "react-dom": "^15.6.2"
   }

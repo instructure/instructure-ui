@@ -153,40 +153,6 @@ Linting is run as part of the build. If you use the Sublime Text, Atom, or VSCod
 1. Please do not include the output of `yarn build` in your commits.
 
 
-### Local Development with React Storybook
-
-The storybook displays component examples, documented via a `.examples.js` file in the `__examples__` directory
-for each component.
-
-React Storybook has some excellent tools for local development and documentation, including an HCM/background switcher,
-viewport switchers, action loggers, and many more that may be implemented as we continue to develop this feature.
-
-Here's how to use it:
-
-- Run `yarn storybook` to spin up the storybook on [localhost:9001](http://localhost:9001)
-
-Here are some links to some useful Storybook Docs:
-
-- [Storybook Docs](https://storybook.js.org/basics/introduction/)
-- [Writing Stories](https://storybook.js.org/basics/writing-stories/)
-- [Addons](https://storybook.js.org/addons/addon-gallery/)
-
-
-### Sketch Asset Generation
-
-[Sketch](https://www.sketchapp.com/) assets for each component can be generated from the component examples that are
-displayed in the storybook.
-
-In order to import the components into Sketch, you'll need to first install the `asketch2sketch.sketchplugin` by downloading [html-sketchapp](https://github.com/brainly/html-sketchapp/archive/master.zip) and copying the `asketch2sketch.sketchplugin`
-file into your Sketch `Plugins` directory.
-
-Then to generate the Sketch assets:
-
-1. Run `yarn storybook` to spin up the storybook on [localhost:9001](http://localhost:9001)
-1. Run `yarn generate:sketch` to generate a `stories.asketch.json` file.
-1. Once in Sketch, open the "Plugins" menu, select "From *Almost* Sketch to Sketch", and select the `stories.asketch.json` file.
-
-
 ### Documentation
 
 Please update the documentation and examples with any changes, the code and docs should always be in sync.

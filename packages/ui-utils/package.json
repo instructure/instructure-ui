@@ -28,11 +28,11 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
-    "bowser": "^1.9.1",
-    "decimal.js": "^9.0.1",
+    "bowser": "^1.9.4",
+    "decimal.js": "^10.0.1",
     "fast-deep-equal": "^2",
     "keycode": "^2.1.8",
-    "moment-timezone": "^0.5.14",
+    "moment-timezone": "^0.5.21",
     "numeral": "^2.0.6",
     "object.omit": "^3.0.0",
     "object.pick": "^1.2.0",

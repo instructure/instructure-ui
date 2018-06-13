@@ -293,7 +293,7 @@ export default class App extends Component {
           </span>
         ) }
         { repository && (
-          <a href={repository} className={styles.githubLink} target="_blank">
+          <a href={repository} rel="noopener noreferrer" className={styles.githubLink} target="_blank">
             <IconGithub className={styles.footerIcon} />
             <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
           </a>

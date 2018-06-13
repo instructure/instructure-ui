@@ -11,9 +11,6 @@ __build__
 .idea
 .DS_Store
 .viminfo
-stories.asketch.json
-__screenshots__
-screenshots.json
 .npmrc
 .env
 .env.test

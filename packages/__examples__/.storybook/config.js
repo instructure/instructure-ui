@@ -4,7 +4,7 @@ import { setOptions } from "@storybook/addon-options";
 import { getStorybook, storiesOf } from '@storybook/react'
 import { initializeRTL } from 'storybook-addon-rtl'
 
-import '../packages/ui-themes/src/canvas'
+import '@instructure/ui-themes/lib/canvas'
 
 setOptions({
   name: "Instructure UI",
@@ -19,7 +19,7 @@ initializeRTL()
 
 configure(() => {
   // Automatically import all example js files
-  const req = require.context('../packages', true,  /src\/\S+\.examples\.js$/)
+  const req = require.context('../../', true,  /src\/\S+\.examples\.js$/)
 
   req.keys().forEach((pathToExamples) => {
     const Examples = req(pathToExamples)

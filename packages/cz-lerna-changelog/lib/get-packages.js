@@ -26,9 +26,20 @@ const path = require('path')
 const glob = require('glob')
 const Package = require('@lerna/package')
 
+function getPackageConfigs () {
+  const pkgJSON = readPkg.sync(process.cwd()) || {}
+  const { workspaces } = pkgJSON
+  if (Array.isArray(workspaces)) {
+    return workspaces
+  } else if (workspaces && Array.isArray(workspaces.packages)) {
+    return workspaces.packages
+  } else {
+    return ['packages/**']
+  }
+}
+
 module.exports = function getPackages () {
-    const pkg = readPkg.sync(process.cwd())
-    const packageConfigs = (pkg && pkg.workspaces) || ['packages/**']
+    const packageConfigs = getPackageConfigs()
     const packages = []
     const globOpts = {
       cwd: process.cwd(),
@@ -58,7 +69,7 @@ module.exports = function getPackages () {
         .forEach(globResult => {
           const packageConfigPath = path.normalize(globResult)
           const packageDir = path.dirname(packageConfigPath)
-          const packageJson = readPkg.sync(packageConfigPath, { normalize: false })
+          const packageJson = readPkg.sync({ cwd: packageDir, normalize: false })
           packages.push(new Package(packageJson, packageDir))
         })
     })

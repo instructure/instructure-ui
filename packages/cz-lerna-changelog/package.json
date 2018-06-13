@@ -18,13 +18,13 @@
   "license": "MIT",
   "dependencies": {
     "@lerna/package": "^3.0.0-beta.17",
-    "@semantic-release/commit-analyzer": "^2.0.0",
+    "@semantic-release/commit-analyzer": "^5.0.5",
     "chalk": "^2.4.1",
     "cz-customizable": "^5.2.0",
     "glob": "^7.1.2",
-    "inquirer-autocomplete-prompt": "^0.7.0",
-    "read-pkg": "^3.0.0",
-    "shelljs": "0.7.0"
+    "inquirer-autocomplete-prompt": "^0.12.2",
+    "read-pkg": "^4.0.1",
+    "shelljs": "0.8.2"
   },
   "peerDependencies": {
     "lerna": "^3.0.0-beta.21"

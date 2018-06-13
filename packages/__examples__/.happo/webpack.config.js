@@ -33,12 +33,7 @@ module.exports = {
     filename: '[name].js'
   },
   module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
-      }
-    ]
-  }
+    rules: require('@instructure/ui-presets/webpack/module/rules')
+  },
+  plugins: require('@instructure/ui-presets/webpack/plugins')()
 }

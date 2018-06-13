@@ -25,8 +25,6 @@
 import React from 'react'
 import Checkbox from '../index'
 
-console.log('[Checkbox]: React version', React.version) // eslint-disable-line no-console
-
 export const unchecked = () => {
   return (
     <Checkbox label="Unchecked checkbox" value="unchecked" />

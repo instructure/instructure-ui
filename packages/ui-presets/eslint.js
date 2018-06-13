@@ -70,7 +70,8 @@ module.exports = {
       templateFile: require.resolve('./copyright.js')
     }],
     'import/no-extraneous-dependencies': 'error',
-    'no-undefined': 'error'
+    'no-undefined': 'error',
+    'jsx-a11y/label-has-for': 0
   },
   overrides: [
     {

@@ -33,7 +33,7 @@ import '@instructure/ui-themes/lib/canvas'
 const TESTS = []
 
 // Automatically import all component .examples.js files in packages
-const requireExamples = require.context('../packages', true,  /src\/\S+\/examples\.js$/)
+const requireExamples = require.context('../../', true,  /src\/\S+\.examples\.js$/)
 
 // assemble the tests from the examples
 requireExamples.keys()
@@ -77,5 +77,6 @@ function getComponentNameFromDirectory (filePath) {
   const directories = path.dirname(filePath)
     .split(path.sep)
     .filter(part => part !== '__tests__')
+    .filter(part => part !== '__examples__')
   return directories.pop()
 }

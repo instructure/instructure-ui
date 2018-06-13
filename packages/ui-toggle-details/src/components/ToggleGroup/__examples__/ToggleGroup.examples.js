@@ -42,8 +42,6 @@ import IconQuiz from '@instructure/ui-icons/lib/Line/IconQuiz'
 import IconPublish from '@instructure/ui-icons/lib/Solid/IconPublish'
 import ToggleGroup from '../index'
 
-console.log('[ToggleGroup]: React version', React.version) // eslint-disable-line no-console
-
 class Header extends React.Component {
   static propTypes = {
     content: PropTypes.node,

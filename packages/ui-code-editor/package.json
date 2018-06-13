@@ -33,9 +33,9 @@
     "@instructure/ui-themeable": "^5.19.0",
     "@instructure/ui-utils": "^5.19.0",
     "classnames": "^2.2.5",
-    "codemirror": "^5.36.0",
+    "codemirror": "^5.39.0",
     "prop-types": "^15.5.10",
-    "react-codemirror2": "^5.0.2"
+    "react-codemirror2": "^5.1.0"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.6.2",

@@ -19,7 +19,7 @@
     "@instructure/postcss-themeable-styles": "^5.19.0",
     "babel-template": "^6.26.0",
     "css-modules-require-hook": "^4.2.3",
-    "read-pkg-up": "^3.0.0"
+    "read-pkg-up": "^4.0.0"
   },
   "peerDependencies": {
     "babel-core": "^6.26.0"

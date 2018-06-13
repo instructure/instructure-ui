@@ -18,10 +18,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "23.1.0"
+    "jest": "23.4.0"
   },
   "dependencies": {
-    "jscodeshift": "^0.5.0"
+    "jscodeshift": "^0.5.1"
   },
   "publishConfig": {
     "access": "public"

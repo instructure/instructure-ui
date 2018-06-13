@@ -100,19 +100,18 @@ function makePrompter() {
           scope: (scope && scope.length > 0) ? scope.join(',') : '*'
         })
 
-        commitAnalyzer({}, {
-          commits: [{
-            hash: '',
-            message,
-          }],
-        }, (err, type) => {
-          /* eslint-disable no-console */
-          console.log(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
-          console.log('\n\nCommit message:')
-          console.log(chalk.blue(`\n\n${message}\n`))
-          /* eslint-enable no-console */
-          commit(message)
-        })
+        commitAnalyzer({}, { commits: [{ hash: '', message }], logger: console })
+          .then((type) => {
+            /* eslint-disable no-console */
+            console.log(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
+            console.log('\n\nCommit message:')
+            console.log(chalk.blue(`\n\n${message}\n`))
+            /* eslint-enable no-console */
+            commit(message)
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       })
   }
 }

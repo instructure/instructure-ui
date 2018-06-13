@@ -2,12 +2,16 @@
 
 set -e
 
-NPM_CLIENT=$(npm bin)/yarn
+cleanup() {
+  git checkout --quiet -
+}
+
+trap cleanup INT TERM EXIT
 
 run-happo() {
   git checkout --quiet $1
 
-  $NPM_CLIENT run build:examples
+  yarn build
 
   happo run
 }
@@ -17,3 +21,5 @@ run-happo HEAD^
 
 # Check out the latest version and check for diffs
 run-happo -
+
+git checkout --quiet -

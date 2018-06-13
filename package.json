@@ -10,18 +10,20 @@
   },
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
-  "workspaces": [
-    "packages/*"
-  ],
+  "workspaces": {
+    "packages": ["packages/**"]
+  },
   "scripts": {
     "prestart": "yarn bootstrap",
     "start": "lerna run start --stream",
     "start:watch": "lerna run start:watch --stream",
     "pretest": "yarn bootstrap && yarn check",
-    "test": "npm-run-all lint:commit lint test:packages",
+    "test": "npm-run-all --parallel lint:commit lint:changes test:changes",
+    "test:changes": "yarn test:packages --since HEAD^ --concurrency 1",
     "test:packages": "lerna run test",
     "test:watch": "lerna run test:watch --stream",
     "lint": "lerna run lint",
+    "lint:changes": "yarn lint --since HEAD^",
     "lint:fix": "lerna run lint:fix",
     "lint:commit": "ui-scripts --lint-commit",
     "lint:staged": "lerna exec lint-staged --stream --parallel",
@@ -31,9 +33,9 @@
     "commit": "ui-scripts --commit",
     "install:packages": "lerna bootstrap --reject-cycles",
     "bootstrap": "npm-run-all clean:modules install:packages clean build",
-    "build": "lerna run build --ignore docs",
-    "build:watch": "lerna run build:watch --stream --ignore docs",
-    "build:docs": "lerna run build --scope docs",
+    "build": "lerna run build --ignore docs-*",
+    "build:watch": "lerna run build:watch --stream --ignore docs-*",
+    "build:docs": "lerna run build --scope docs-app",
     "clean": "lerna run clean",
     "clean:modules": "lerna clean --yes",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
@@ -44,31 +46,18 @@
     "release": "ui-scripts --release",
     "predeploy": "yarn build:docs",
     "deploy": "ui-scripts --deploy-docs",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
-    "build:examples": "webpack --config .happo/webpack.config.js",
-    "generate:screenshots": "./scripts/screenshots",
-    "review:screenshots": "happo review"
+    "start:examples": "lerna run start --stream --scope docs-examples",
+    "build:examples": "lerna run build --strema --scope docs-examples",
+    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
+    "generate:screenshots": "lerna run generate:screenshots --stream --scope docs-examples",
+    "review:screenshots": "lerna run review:screenshots --stream --scope docs-examples"
   },
   "license": "MIT",
-  "resolutions": {
-    "postcss-syntax": "0.26.1"
-  },
   "devDependencies": {
-    "@storybook/addon-links": "^3.4.5",
-    "@storybook/addon-options": "^3.4.5",
-    "@storybook/addons": "^3.4.6",
-    "@storybook/react": "^3.4.5",
-    "happo": "^5.0.0",
-    "happo-target-firefox": "^5.0.0",
     "husky": "v1.0.0-rc.8",
     "lerna": "3.0.0-beta.21",
-    "lint-staged": "^7.1.2",
+    "lint-staged": "^7.1.3",
     "npm-run-all": "^4.1.3",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2",
-    "story2sketch": "^1.0.1",
-    "storybook-addon-rtl": "^0.1.1",
     "yarn": "1.7.0"
   },
   "engines": {
