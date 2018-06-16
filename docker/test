@@ -65,19 +65,22 @@ CHANGELOG_URL=${CHANGELOG_URL}
 EOF
 ) > $env_file
 
-echo "Building docker images..."
-docker-compose build --pull test
+echo "Pulling image..."
+docker-compose pull
+
+echo "Building services..."
+docker-compose build
 
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
+docker cp ~/.ssh $container:/home/docker/.ssh
+docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
+
+docker cp .git $container:/usr/src/app/.git
+docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
+
 if [[ $POST_MERGE_BUILD ]]; then
-  docker cp ~/.ssh $container:/home/docker/.ssh
-  docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
-
-  docker cp .git $container:/usr/src/app/.git
-  docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
-
   echo "Running release..."
   docker exec $container bash -c "yarn release"
 else

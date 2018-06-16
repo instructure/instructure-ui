@@ -26,7 +26,7 @@ const fs = require('fs')
 const Jira = require('jira-client')
 
 const { runCommandAsync } = require('./command')
-const { info } = require('./logger')
+const { info, error } = require('./logger')
 
 const {
   JIRA_PEM_PATH,
@@ -83,10 +83,16 @@ exports.createJiraVersion = async function createJiraVersion (name, version) {
 
 exports.getIssuesInRelease = async function getIssuesInRelease () {
   info(`Looking up issues for the ${JIRA_PROJECT_KEY} project...`)
-  const currentReleaseTag = await runCommandAsync('git describe --exact-match')
-  const previousReleaseCommit = await runCommandAsync('git rev-list --tags --skip=1 --max-count=1')
-  const previousReleaseTag = await runCommandAsync(`git describe --abbrev=0 --tags ${previousReleaseCommit}`)
-  const result = await runCommandAsync(`git log ${previousReleaseTag}..${currentReleaseTag} | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+  let result
+
+  try {
+    const currentReleaseTag = await runCommandAsync('git describe --exact-match')
+    const previousReleaseCommit = await runCommandAsync('git rev-list --tags --skip=1 --max-count=1')
+    const previousReleaseTag = await runCommandAsync(`git describe --abbrev=0 --tags ${previousReleaseCommit}`)
+    result = await runCommandAsync(`git log ${previousReleaseTag}..${currentReleaseTag} | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+  } catch (e) {
+    error(e)
+  }
 
   let issueKeys = []
   issueKeys = (result ? result.split(/\s+/g) : [])
