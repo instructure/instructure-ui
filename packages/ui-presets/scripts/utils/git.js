@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 const { runCommandAsync, runCommand } = require('./command')
-const { error, info } = require('./logger')
+const { error } = require('./logger')
 const validateMessage = require('validate-commit-msg')
 
 exports.commit = function () {
@@ -41,8 +41,6 @@ exports.setupGit = async function setupGit () {
 
   try {
     config = await runCommandAsync(`git config --list`)
-
-    info(config)
 
     if (!await runCommandAsync(`git remote | grep ${GIT_REMOTE_NAME}`)) {
       await runCommandAsync(`git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL}`)
@@ -66,8 +64,6 @@ exports.setupGit = async function setupGit () {
     error(e)
     process.exit(1)
   }
-
-  info(config)
 }
 
 exports.lintCommitMessage = async function lintCommitMessage () {

@@ -100,13 +100,21 @@ exports.getIssuesInRelease = async function getIssuesInRelease () {
   issueKeys = issueKeys
     .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
 
-  info(`Issues in this release: ${issueKeys.join(', ')}`)
+  if (issueKeys.length > 0) {
+    info(`Issues in this release: ${issueKeys.join(', ')}`)
+  }
 
   return issueKeys
 }
 
 exports.getIssuesInCommit = async function getIssuesInCommit () {
-  const result = await runCommandAsync(`git log -1 --pretty=%B | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+  let result
+
+  try {
+    result = await runCommandAsync(`git log -1 --pretty=%B | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+  } catch (e) {
+    error(e)
+  }
 
   let issueKeys = []
   issueKeys = (result ? result.split(/\s+/g) : [])
@@ -114,7 +122,9 @@ exports.getIssuesInCommit = async function getIssuesInCommit () {
   issueKeys = issueKeys
     .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
 
-  info(`Issues in this release: ${issueKeys.join(', ')}`)
+  if (issueKeys.length > 0) {
+    info(`Issues in this release: ${issueKeys.join(', ')}`)
+  }
 
   return issueKeys
 }
