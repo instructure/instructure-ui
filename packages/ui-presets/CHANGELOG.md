@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
+
+
+### Bug Fixes
+
+* **karma:** Improve plugin support inside monorepos ([94d0d2a](https://github.com/instructure/instructure-ui/commit/94d0d2a))
+* **ui-presets:** catch error w/ no issues ([0443262](https://github.com/instructure/instructure-ui/commit/0443262))
+* **ui-presets:** include version in slack message ([c762e86](https://github.com/instructure/instructure-ui/commit/c762e86))
+* **ui-presets:** only run deploy after a stable release ([387501c](https://github.com/instructure/instructure-ui/commit/387501c))
+* **ui-presets:** release script changes for Jenkins ([511ddb3](https://github.com/instructure/instructure-ui/commit/511ddb3))
+
+
+### Features
+
+* **cz-lerna-changelog,ui-presets:** add lerna changelog package ([f7592eb](https://github.com/instructure/instructure-ui/commit/f7592eb))
+
+
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
 

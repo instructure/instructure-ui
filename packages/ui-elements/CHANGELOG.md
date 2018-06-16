@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
+
+
+### Bug Fixes
+
+* **Tag:** pass down elementRef ([ccb7a11](https://github.com/instructure/instructure-ui/commit/ccb7a11))
+
+
+### Features
+
+* **ui-elements,Link:** Add icon prop to Link ([8953edb](https://github.com/instructure/instructure-ui/commit/8953edb))
+
+
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
 

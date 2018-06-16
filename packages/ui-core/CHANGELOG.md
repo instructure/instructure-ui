@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
+
+
+### Bug Fixes
+
+* **NumberInput:** fix controlled component ([1ec816a](https://github.com/instructure/instructure-ui/commit/1ec816a))
+* **Tag:** pass down elementRef ([ccb7a11](https://github.com/instructure/instructure-ui/commit/ccb7a11))
+
+
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
 

@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
+
+
+### Bug Fixes
+
+* **cz-lerna-changelog:** pass in config for footer prefix ([9822f1f](https://github.com/instructure/instructure-ui/commit/9822f1f))
+* **karma:** Improve plugin support inside monorepos ([94d0d2a](https://github.com/instructure/instructure-ui/commit/94d0d2a))
+* **NumberInput:** fix controlled component ([1ec816a](https://github.com/instructure/instructure-ui/commit/1ec816a))
+* **Tag:** pass down elementRef ([ccb7a11](https://github.com/instructure/instructure-ui/commit/ccb7a11))
+* **ui-forms:** fix aria-selected values on Select options ([d84098a](https://github.com/instructure/instructure-ui/commit/d84098a))
+* **ui-forms:** Select input shouldn't be wrapped w/label ([4c6e6c1](https://github.com/instructure/instructure-ui/commit/4c6e6c1))
+* **ui-forms,RangeInput:** focus styles for Edge 16 up ([bbdf9e6](https://github.com/instructure/instructure-ui/commit/bbdf9e6))
+* **ui-i18n:** Fix leading zero decimal parsing ([3224dc8](https://github.com/instructure/instructure-ui/commit/3224dc8))
+* **ui-layout:** Make body scrollTop attribute consistent for positioning ([55e5ed2](https://github.com/instructure/instructure-ui/commit/55e5ed2))
+* **ui-presets:** catch error w/ no issues ([0443262](https://github.com/instructure/instructure-ui/commit/0443262))
+* **ui-presets:** include version in slack message ([c762e86](https://github.com/instructure/instructure-ui/commit/c762e86))
+* **ui-presets:** only run deploy after a stable release ([387501c](https://github.com/instructure/instructure-ui/commit/387501c))
+* **ui-presets:** release script changes for Jenkins ([511ddb3](https://github.com/instructure/instructure-ui/commit/511ddb3))
+
+
+### Features
+
+* **cz-lerna-changelog,ui-presets:** add lerna changelog package ([f7592eb](https://github.com/instructure/instructure-ui/commit/f7592eb))
+* **ui-buttons,Button:** Add circle-default variant ([addb97c](https://github.com/instructure/instructure-ui/commit/addb97c))
+* **ui-elements,Link:** Add icon prop to Link ([8953edb](https://github.com/instructure/instructure-ui/commit/8953edb))
+* **ui-media-player:** Add FullScreenButton to ([2ba3722](https://github.com/instructure/instructure-ui/commit/2ba3722))
+
+
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
 

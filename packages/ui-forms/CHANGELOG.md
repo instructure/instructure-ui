@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.0"></a>
+# [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
+
+
+### Bug Fixes
+
+* **NumberInput:** fix controlled component ([1ec816a](https://github.com/instructure/instructure-ui/commit/1ec816a))
+* **ui-forms:** fix aria-selected values on Select options ([d84098a](https://github.com/instructure/instructure-ui/commit/d84098a))
+* **ui-forms:** Select input shouldn't be wrapped w/label ([4c6e6c1](https://github.com/instructure/instructure-ui/commit/4c6e6c1))
+* **ui-forms,RangeInput:** focus styles for Edge 16 up ([bbdf9e6](https://github.com/instructure/instructure-ui/commit/bbdf9e6))
+
+
+
+
+
 <a name="5.12.0"></a>
 # [5.12.0](https://github.com/instructure/instructure-ui/compare/v5.11.0...v5.12.0) (2018-06-11)
 
