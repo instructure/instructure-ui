@@ -193,7 +193,7 @@ class NumberInput extends Component {
 
     const formattedString = this.formatValue(decimalValue, nextLocale, nextPrecision)
     this._input.value = formattedString
-    nextProps.onChange(null, formattedString, this.normalizeValue(decimalValue))
+    nextProps.onChange(null, formattedString, this.normalizeValue(decimalValue, nextPrecision))
   }
 
   // Replicate the arrow behavior commonly seen in inputs of type number
@@ -319,12 +319,12 @@ class NumberInput extends Component {
     return locale ? decimal.toLocaleString(locale) : decimal.toString()
   }
 
-  normalizeValue (decimal) {
+  normalizeValue (decimal, precision = this.precision) {
     if (decimal.isNaN()) return null
     let value = decimal
     if (this.min && value.lt(this.min)) value = this.min
     if (this.max && value.gt(this.max)) value = this.max
-    return this.formatValue(value)
+    return this.formatValue(value, void 0, precision)
   }
 
   handleRef = (element, ...args) => {

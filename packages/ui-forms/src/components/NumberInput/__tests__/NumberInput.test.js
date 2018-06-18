@@ -585,6 +585,7 @@ describe('<NumberInput />', () => {
       subject.setProps({ locale: 'de' })
       expect(input.node.value).to.equal('1.234,5')
       expect(onChange.lastCall.args[1]).to.equal('1.234,5')
+      expect(onChange.lastCall.args[2]).to.equal('1234.5')
     })
 
     it('updates value if precision changes', () => {
@@ -595,6 +596,7 @@ describe('<NumberInput />', () => {
       subject.setProps({ decimalPrecision: 2, significantDigits: null })
       expect(input.node.value).to.equal('12.50')
       expect(onChange.lastCall.args[1]).to.equal('12.50')
+      expect(onChange.lastCall.args[2]).to.equal('12.50')
     })
   })
 
