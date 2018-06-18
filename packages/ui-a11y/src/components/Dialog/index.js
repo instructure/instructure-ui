@@ -113,13 +113,21 @@ class Dialog extends Component {
     }
   }
 
+  componentWillUpdate (nextProps) {
+    const { open } = this.props
+
+    if (open && !nextProps.open) {
+      // we need to blur the region before the component updates
+      // while we still have access to our contentElement ref
+      this.blur()
+    }
+  }
+
   componentDidUpdate (prevProps) {
     const { open } = this.props
 
     if (open && !prevProps.open) {
       this.focus()
-    } else if (!open && prevProps.open) {
-      this.blur()
     }
   }
 

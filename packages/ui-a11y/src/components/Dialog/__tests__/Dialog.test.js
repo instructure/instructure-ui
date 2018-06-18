@@ -101,12 +101,18 @@ describe('<Dialog /> managed focus', () => {
       return (
         <div>
           <input
+            id="input-trigger"
             type="text"
             ref={c => {
               this._input = c
             }}
           />
-          <Dialog {...this.props} label="A Modal">
+          <Dialog
+            {...this.props}
+            shouldContainFocus
+            shouldReturnFocus
+            label="A Modal"
+          >
             <div>
               <input type="text" id="input-one" />
               <input type="text" id="input-two" />
@@ -152,5 +158,28 @@ describe('<Dialog /> managed focus', () => {
     testbed.tick()
 
     expect(document.getElementById('input-two') === document.activeElement).to.be.true
+  })
+
+  it('should return focus', () => {
+    const subject = testbed.render({
+      open: false
+    })
+
+    expect(document.getElementById('input-trigger') === document.activeElement)
+      .to.be.true
+
+    subject.setProps({ open: true })
+
+    testbed.tick()
+
+    expect(document.getElementById('input-one') === document.activeElement)
+      .to.be.true
+
+    subject.setProps({ open: false })
+
+    testbed.tick()
+
+    expect(document.getElementById('input-trigger') === document.activeElement)
+      .to.be.true
   })
 })
