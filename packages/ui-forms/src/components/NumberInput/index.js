@@ -373,22 +373,24 @@ class NumberInput extends Component {
     if (!dir) return
 
     event.preventDefault()
-    this.handleStep(dir)
+    this.handleStep(event, dir)
+  }
+
+  handleArrowClick = (event, step) => {
+    event.preventDefault()
+    this.handleStep(event, step)
+    this.focus()
   }
 
   handleClickUp = (event) => {
-    event.preventDefault()
-    this.handleStep(1)
-    this.focus()
+    this.handleArrowClick(event, 1)
   }
 
   handleClickDown = (event) => {
-    event.preventDefault()
-    this.handleStep(-1)
-    this.focus()
+    this.handleArrowClick(event, -1)
   }
 
-  handleStep (step) {
+  handleStep (event, step) {
     if (this.props.disabled || this.props.readOnly) return
 
     const decimalValue = this.applyStep(step)
