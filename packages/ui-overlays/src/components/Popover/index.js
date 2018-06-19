@@ -36,7 +36,9 @@ import Position, { PositionTarget, PositionContent } from '@instructure/ui-layou
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
+import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import px from '@instructure/ui-utils/lib/px'
@@ -316,6 +318,8 @@ class Popover extends Component {
     if (typeof props.show === 'undefined') {
       this.state.show = props.defaultShow
     }
+
+    this._raf = []
   }
 
   componentWillMount () {
@@ -325,6 +329,11 @@ class Popover extends Component {
     this._handleMouseOut = handleMouseOverOut.bind(null, () => {
       this.hide()
     })
+  }
+
+  componentWillUnmount () {
+    this._raf.forEach(request => request.cancel())
+    this._raf = []
   }
 
   shouldComponentUpdate (nextProps, nextState) {
@@ -385,6 +394,10 @@ class Popover extends Component {
     }
   }
 
+  handleDialogBlur = (event) => {
+    this.hide(event)
+  }
+
   handlePositionChanged = ({ placement }) => {
     this.setState({
       closeButtonPlacement: this.getCloseButtonPlacement(this.props),
@@ -437,8 +450,12 @@ class Popover extends Component {
         onFocus = () => {
           this.show()
         }
-        onBlur = () => {
-          this.hide()
+        onBlur = (event) => {
+          this._raf.push(requestAnimationFrame(() => {
+            if (!containsActiveElement(this._view)) {
+              this.hide()
+            }
+          }))
         }
       }
 
@@ -497,6 +514,7 @@ class Popover extends Component {
           {...pickProps(this.props, Dialog.propTypes)}
           display="block"
           open={this.shown}
+          onBlur={this.handleDialogBlur}
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
         >

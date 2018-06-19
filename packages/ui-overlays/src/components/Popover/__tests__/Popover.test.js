@@ -30,6 +30,7 @@ import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
+import PopoverInlineExample from './__testfixtures__/PopoverInlineExample'
 
 describe('<Popover />', () => {
   let content
@@ -209,6 +210,50 @@ describe('<Popover />', () => {
       const position = subject.find(Position)
       expect(position.prop('offsetX')).to.equal(-1)
       expect(position.prop('offsetY')).to.equal(-2)
+    })
+  })
+
+  describe('focus and blur', () => {
+    const testbed = new Testbed(
+      <PopoverInlineExample />
+    )
+
+    it('should be able to navigate to focusable content when content is rendered inline with trigger', () => {
+      let trigger, content
+
+      testbed.render({
+        triggerRef: (el) => { trigger = el },
+        contentRef: (el) => { content = el }
+      })
+
+      trigger.focus()
+      testbed.tick()
+
+      content.focus()
+      testbed.raf()
+
+      expect(content).to.not.be.null
+    })
+
+    it('should dismiss the popover when tabbing out of focusable content', () => {
+      let trigger, content
+
+      testbed.render({
+        shouldContainFocus: false,
+        triggerRef: (el) => { trigger = el },
+        contentRef: (el) => { content = el }
+      })
+
+      trigger.focus()
+      testbed.tick()
+
+      content.focus()
+
+      const contentWrapper = Testbed.wrap(content)
+      contentWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
+      testbed.raf()
+
+      expect(content).to.be.null
     })
   })
 

@@ -108,10 +108,10 @@ describe('<Dialog /> managed focus', () => {
             }}
           />
           <Dialog
-            {...this.props}
             shouldContainFocus
             shouldReturnFocus
             label="A Modal"
+            {...this.props}
           >
             <div>
               <input type="text" id="input-one" />
@@ -182,4 +182,35 @@ describe('<Dialog /> managed focus', () => {
     expect(document.getElementById('input-trigger') === document.activeElement)
       .to.be.true
   })
+
+  function testOnBlur (shouldContainFocus) {
+    it(`should ${shouldContainFocus ? 'not ' : ''}call onBlur when focus leaves and shouldContainFocus is ${shouldContainFocus}`, () => {
+      const onBlur = testbed.spy()
+      testbed.render({
+        defaultFocusElement: () => document.getElementById('input-two'),
+        shouldContainFocus,
+        open: true,
+        onBlur
+      })
+
+      testbed.tick()
+
+      const inputTwo = document.getElementById('input-two')
+      expect(inputTwo === document.activeElement)
+        .to.be.true
+
+      const inputWrapper = Testbed.wrap(inputTwo)
+
+      inputWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
+
+      if (!shouldContainFocus) {
+        expect(onBlur).to.have.been.calledOnce
+      } else {
+        expect(onBlur).to.not.have.been.called
+      }
+    })
+  }
+
+  testOnBlur(false)
+  testOnBlur(true)
 })

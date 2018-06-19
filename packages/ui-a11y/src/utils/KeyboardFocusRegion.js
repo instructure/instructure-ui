@@ -55,6 +55,7 @@ export default class KeyboardFocusRegion {
       shouldCloseOnEscape: true,
       shouldContainFocus: true,
       shouldReturnFocus: true,
+      onBlur: (event) => {},
       onDismiss: (event) => {},
       defaultFocusElement: null
     }
@@ -180,8 +181,10 @@ export default class KeyboardFocusRegion {
   }
 
   handleKeyDown = event => {
-    if (this.shouldContainFocus && event.keyCode === keycode.codes.tab) {
-      scopeTab(this._contextElement, event)
+    if (event.keyCode === keycode.codes.tab) {
+      scopeTab(this._contextElement, event, !this.shouldContainFocus ? () => {
+        this._options.onBlur(event)
+      } : null)
     }
   }
 
@@ -224,13 +227,16 @@ export default class KeyboardFocusRegion {
 
   setup () {
     if (!this._setup) {
+      if (this.tabbable.length > 0) {
+        this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
+      }
+
       if (this._options.shouldCloseOnEscape) {
         this._listeners.push(addEventListener(this.doc, 'keyup', this.handleKeyUp))
       }
 
       if (this._options.shouldContainFocus) {
         this._listeners.push(addEventListener(this.doc, 'click', this.handleClick, true))
-        this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
 
         this._listeners.push(addEventListener(this.win, 'blur', this.handleBlur, false))
         this._listeners.push(addEventListener(this.doc, 'focus', this.handleFocus, true))

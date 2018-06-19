@@ -68,6 +68,12 @@ class Dialog extends Component {
      */
     open: PropTypes.bool,
 
+    /**
+     * Function called when tab focus leaves the `<Dialog />` focusable content. This only
+     * occurs when `shouldContainFocus` is set to false.
+     */
+    onBlur: PropTypes.func,
+
     onDismiss: PropTypes.func,
 
     /**
@@ -103,7 +109,8 @@ class Dialog extends Component {
     defaultFocusElement: null,
     contentElement: null,
     liveRegion: null,
-    onDismiss: () => {}
+    onBlur: (event) => {},
+    onDismiss: (event) => {}
   }
 
   _raf = []

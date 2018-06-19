@@ -40,8 +40,10 @@ import findTabbable from './findTabbable'
  *
  * @param {ReactElement|DOMNode} element
  * @param {Event} event the DOM Event that was fired
+ * @param {function} function executed when leaving final tabbable instead of the default behavior
  */
-export default function scopeTab (element, event) {
+
+export default function scopeTab (element, event, onLeavingFinalTabbable) {
   const node = findDOMNode(element)
   const tabbable = findTabbable(node)
 
@@ -67,6 +69,11 @@ export default function scopeTab (element, event) {
   )
 
   if (!leavingFinalTabbable) return
+
+  if (typeof onLeavingFinalTabbable === 'function') {
+    onLeavingFinalTabbable()
+    return
+  }
 
   event.preventDefault()
   const target = tabbable[event.shiftKey ? tabbable.length - 1 : 0]
