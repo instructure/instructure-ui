@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import themeable from '@instructure/ui-themeable'
 
@@ -43,7 +44,11 @@ export default class CheckboxFacade extends Component {
     checked: PropTypes.bool,
     focused: PropTypes.bool,
     hovered: PropTypes.bool,
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+    * Visual state showing that child checkboxes are a combination of checked and unchecked
+    */
+    indeterminate: PropTypes.bool
   }
 
   static defaultProps = {
@@ -53,17 +58,32 @@ export default class CheckboxFacade extends Component {
     size: 'medium'
   }
 
+  renderIcon () {
+    if (this.props.indeterminate) {
+      return (
+        <SVGIcon viewBox="0 0 1920 1920" inline={false}>
+          <rect x="140" y="820" width="1640" height="280" />
+        </SVGIcon>
+      )
+    } else if (this.props.checked) {
+      return <IconCheckMark inline={false} />
+    } else {
+      return null
+    }
+  }
+
   render () {
     const {
       size,
       checked,
       focused,
-      hovered
+      hovered,
+      indeterminate
     } = this.props
 
     const classes = {
       [styles.root]: true,
-      [styles.checked]: checked,
+      [styles.checked]: checked || indeterminate,
       [styles.focused]: focused,
       [styles.hovered]: hovered,
       [styles[size]]: true
@@ -72,7 +92,7 @@ export default class CheckboxFacade extends Component {
     return (
       <span className={classnames(classes)}>
         <span className={styles.facade} aria-hidden="true">
-          { checked && <IconCheckMark inline={false} /> }
+          {this.renderIcon()}
         </span>
         <span className={styles.label}>
           {this.props.children}

@@ -33,6 +33,7 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import { FormFieldMessages } from '../FormField'
 import FormPropTypes from '../../utils/FormPropTypes'
@@ -88,6 +89,10 @@ class Checkbox extends Component {
      * Works just like disabled but keeps the same styles as if it were active
      */
     readOnly: PropTypes.bool,
+    /**
+    * Visual state showing that child checkboxes are a combination of checked and unchecked
+    */
+    indeterminate: PropTypes.bool,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['simple', 'toggle']),
     inline: PropTypes.bool
@@ -97,7 +102,8 @@ class Checkbox extends Component {
     size: 'medium',
     variant: 'simple',
     disabled: false,
-    inline: false
+    inline: false,
+    indeterminate: false
   }
 
   constructor (props) {
@@ -113,6 +119,18 @@ class Checkbox extends Component {
     }
 
     this._defaultId = generateElementId('Checkbox')
+  }
+
+  componentDidMount() {
+    // see https://github.com/facebook/react/issues/1798
+    this._input.indeterminate = this.props.indeterminate
+  }
+
+  componentDidUpdate(prevProps) {
+    // see https://github.com/facebook/react/issues/1798
+    if (prevProps.indeterminate !== this.props.indeterminate) {
+      this._input.indeterminate = this.props.indeterminate
+    }
   }
 
   handleChange = (e) => {
@@ -186,7 +204,8 @@ class Checkbox extends Component {
       disabled,
       variant,
       label,
-      readOnly
+      readOnly,
+      indeterminate
     } = this.props
 
     const {
@@ -214,6 +233,7 @@ class Checkbox extends Component {
           hovered={hovered}
           focused={focused}
           checked={this.checked}
+          indeterminate={indeterminate}
         >
           {label}
         </CheckboxFacade>
@@ -232,7 +252,10 @@ class Checkbox extends Component {
       onFocus,
       onBlur,
       onMouseOver,
-      onMouseOut
+      onMouseOut,
+      indeterminate,
+      checked,
+      variant
     } = this.props
 
     const props = omitProps(this.props, Checkbox.propTypes)
@@ -242,6 +265,11 @@ class Checkbox extends Component {
       [styles.disabled]: disabled,
       [styles.inline]: inline
     }
+
+    warning(
+      !(variant === 'toggle' && indeterminate),
+      `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
+    )
 
     /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 
@@ -259,6 +287,7 @@ class Checkbox extends Component {
           ref={(c) => { this._input = c }}
           disabled={disabled || readOnly ? 'true' : null}
           aria-disabled={disabled || readOnly ? 'true' : null}
+          aria-checked={(indeterminate) ? 'mixed' : (checked) ? 'true' : 'false'}
           className={styles.input}
           onChange={this.handleChange}
           onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}

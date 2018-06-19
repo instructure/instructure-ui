@@ -24,7 +24,7 @@
 
 import React from 'react'
 import Checkbox from '../index'
-import CheckboxFacade from '../CheckboxFacade'
+import CheckboxFacade from '../CheckboxFacade/'
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 
 describe('<Checkbox />', () => {
@@ -47,6 +47,17 @@ describe('<Checkbox />', () => {
 
     const facade = subject.find(CheckboxFacade)
     expect(facade.find(IconCheckMark)).to.not.exist
+  })
+
+  it('`simple` variant supports indeterminate/mixed state', () => {
+    const subject = testbed.render({
+      variant: 'simple',
+      defaultChecked: true,
+      indeterminate: true
+    })
+
+    const input = subject.find('input')
+    expect(input.getAttribute('aria-checked')).to.equal('mixed')
   })
 
   describe('events', () => {
