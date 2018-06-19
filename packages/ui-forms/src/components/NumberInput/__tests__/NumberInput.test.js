@@ -389,6 +389,18 @@ describe('<NumberInput />', () => {
         expect(inputValueOnBlur('123', { significantDigits: 2 })).to.equal('120')
       })
     })
+
+    context('when value is negative and min is 0', () => {
+      it('sets the value to 0', () => {
+        expect(inputValueOnBlur('-1', { min: 0 })).to.equal('0')
+      })
+    })
+
+    context('when value is positive and max is 0', () => {
+      it('sets the value to 0', () => {
+        expect(inputValueOnBlur('1', { max: 0 })).to.equal('0')
+      })
+    })
   })
 
   it('should accept a default value', () => {

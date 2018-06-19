@@ -199,6 +199,7 @@ class NumberInput extends Component {
   // Replicate the arrow behavior commonly seen in inputs of type number
   applyStep = (dir) => {
     let d = Decimal.parse(this._input.value || '0', this.locale)
+    if (this.step.isNaN()) return d
 
     if (!d.mod(this.step).equals(0)) {
       // case when value is between steps, so we snap to the next step
@@ -219,12 +220,12 @@ class NumberInput extends Component {
     }
 
     // case when value is less than minimum
-    if (this.min && d.lt(this.min)) {
+    if (d.lt(this.min)) {
       return this.min
     }
 
     // case when value is more than maximum
-    if (this.max && d.gt(this.max)) {
+    if (d.gt(this.max)) {
       return this.max
     }
 
@@ -243,24 +244,28 @@ class NumberInput extends Component {
     return pickProps(props, {}, ['decimalPrecision', 'significantDigits'])
   }
 
+  getDecimalFromNormalizedString (value) {
+    // For some reason Decimal.parse treats null as 0, so we have to check for it here
+    return Decimal.parse(value === null ? NaN : value, Locale.defaultLocale)
+  }
+
   get min () {
-    return this.props.min && Decimal.parse(this.props.min, Locale.defaultLocale)
+    return this.getDecimalFromNormalizedString(this.props.min)
   }
 
   get max () {
-    return this.props.max && Decimal.parse(this.props.max, Locale.defaultLocale)
+    return this.getDecimalFromNormalizedString(this.props.max)
   }
 
   get step () {
-    return this.props.step && Decimal.parse(this.props.step, Locale.defaultLocale)
+    return this.getDecimalFromNormalizedString(this.props.step)
   }
 
   get defaultValue () {
     const { defaultValue } = this.props
-    if (defaultValue == null) return defaultValue
 
     // If defaultValue is a string, parse it as an en-US number
-    const decimalValue = Decimal.parse(defaultValue, Locale.defaultLocale)
+    const decimalValue = this.getDecimalFromNormalizedString(defaultValue)
 
     // If it can be parsed as a number, format it according to the current
     // locale. Otherwise just return it as-is
@@ -322,8 +327,8 @@ class NumberInput extends Component {
   normalizeValue (decimal, precision = this.precision) {
     if (decimal.isNaN()) return null
     let value = decimal
-    if (this.min && value.lt(this.min)) value = this.min
-    if (this.max && value.gt(this.max)) value = this.max
+    if (value.lt(this.min)) value = this.min
+    if (value.gt(this.max)) value = this.max
     return this.formatValue(value, void 0, precision)
   }
 
@@ -341,12 +346,12 @@ class NumberInput extends Component {
     let decimalValue = this.getDecimalValue(event.target.value)
 
     // case when value is less than minimum
-    if (this.min && decimalValue.lt(this.min)) {
+    if (decimalValue.lt(this.min)) {
       decimalValue = this.min
     }
 
     // case when value is more than maximum
-    if (this.max && decimalValue.gt(this.max)) {
+    if (decimalValue.gt(this.max)) {
       decimalValue = this.max
     }
 
