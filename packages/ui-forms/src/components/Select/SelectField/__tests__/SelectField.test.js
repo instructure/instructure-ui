@@ -168,6 +168,20 @@ describe('<SelectField />', () => {
     expect(subject.instance().expanded).to.be.false
   })
 
+  it('returns focus to input on close', () => {
+    const subject = testbed.render()
+    subject.find('input').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.true
+    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
+    testbed.tick()
+    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.false
+    testbed.tick()
+    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
+    testbed.tick()
+    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.true
+  })
+
   it('changes highlights with arrows and selects with Enter', () => {
     const onSelect = testbed.stub()
     const subject = testbed.render({ onSelect })

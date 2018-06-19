@@ -448,6 +448,10 @@ class SelectField extends Component {
     const key = keycode.names[event.keyCode]
     if (key === 'esc' && this.expanded) {
       event.preventDefault()
+      // ensure focus returns to input
+      if (this._input) {
+        this._input.focus()
+      }
       this.close(event)
     }
     this.props.onKeyUp(event)
