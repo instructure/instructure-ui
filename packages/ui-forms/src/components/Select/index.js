@@ -157,6 +157,10 @@ class Select extends Component {
      */
     assistiveText: PropTypes.string,
     /**
+     * Additional text to provide screenreader feedback upon user action
+     */
+    announcement: PropTypes.string,
+    /**
      * The filter function applied to the options when writing on the input
      */
     filter: PropTypes.func,
@@ -192,6 +196,10 @@ class Select extends Component {
      * Callback fired when on the onChange of the internal input.
      */
     onInputChange: PropTypes.func,
+    /**
+     * Callback fired when the options displayed in the menu change
+     */
+    onOptionsChange: PropTypes.func,
     /**
      * Callback fired when on the onBlur of the internal input
      */

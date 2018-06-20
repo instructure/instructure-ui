@@ -125,6 +125,10 @@ class SelectMultiple extends Component {
      */
     onInputChange: PropTypes.func,
     /**
+     * Callback fired when the options displayed in the menu change
+     */
+    onOptionsChange: PropTypes.func,
+    /**
      * Callback fired on the onKeyDown of the internal input
      */
     onKeyDown: PropTypes.func,
@@ -140,6 +144,7 @@ class SelectMultiple extends Component {
     onClose: () => {},
     onChange: (event, selectedOption) => {},
     onInputChange: (event) => {},
+    onOptionsChange: (filteredOptions) => {},
     onKeyDown: (event) => {},
     closeOnSelect: true
   }
@@ -258,6 +263,10 @@ class SelectMultiple extends Component {
           })
         })
       }
+    }
+
+    if (!deepEqual(this.state.filteredOptions, prevState.filteredOptions)) {
+      this.props.onOptionsChange(this.state.filteredOptions)
     }
   }
 

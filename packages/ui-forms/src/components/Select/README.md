@@ -223,22 +223,62 @@ example: true
 ```js
 ---
 example: true
+render: false
 ---
-<View
-  as="div"
-  margin="0 auto xx-large auto"
-  padding="x-small x-small x-large x-small"
->
-  <Select
-    label={<ScreenReaderContent>What would you like for a snack?</ScreenReaderContent>}
-    assistiveText="4 options available. Use the down arrow to navigate options."
-  >
-    <option value="apples">Apples</option>
-    <option value="oranges">Oranges</option>
-    <option value="bananas">Bananas</option>
-    <option value="candy">Candy</option>
-  </Select>
-</View>
+class Example extends React.Component {
+  constructor () {
+    super()
+    this.state = { announcement: null }
+  }
+
+  render () {
+    const options = [
+      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Delaware', 'District Of Columbia',
+      'Federated States Of Micronesia', 'Florida', 'Georgia',
+      'Guam', 'Hawaii', 'Idaho', 'Illinois'
+    ]
+
+    return (
+      <Select
+        {...this.props}
+        assistiveText="Start typing to search. Press the down arrow to navigate results."
+        announcement={this.state.announcement}
+        onOptionsChange={(options) => {
+          const num = options.length
+          this.setState({announcement: `${num} option${num !== 1 ? 's' : ''} available.`})
+        }}
+        onOpen={() => {
+          this.setState({announcement: 'Dropdown is expanded.'})
+        }}
+        onClose={() => {
+          this.setState({announcement: 'Dropdown is collapsed.'})
+        }}
+        formatSelectedOption={(tag) => (
+          <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
+        )}
+      >
+        {options.map((label, index) => (
+          <option key={label} value={'' + index}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    )
+  }
+}
+
+render(
+  <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
+    <Example
+      label="Choose a state"
+      name="state"
+      defaultOption="12"
+      editable
+    />
+  </div>
+)
 ```
 
 ### Disabled Selects
@@ -280,29 +320,31 @@ example: true
 render: false
 ---
 class Example extends React.Component {
-render () {
-  const options = [
-    'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-    'Arkansas', 'California', 'Colorado', 'Connecticut',
-    'Delaware', 'District Of Columbia',
-    'Federated States Of Micronesia', 'Florida', 'Georgia',
-    'Guam', 'Hawaii', 'Idaho', 'Illinois'
-  ]
+  render () {
+    const options = [
+      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
+      'Arkansas', 'California', 'Colorado', 'Connecticut',
+      'Delaware', 'District Of Columbia',
+      'Federated States Of Micronesia', 'Florida', 'Georgia',
+      'Guam', 'Hawaii', 'Idaho', 'Illinois'
+    ]
 
-  return (
-    <Select {...this.props}
-      formatSelectedOption={(tag) => (
-        <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
-      )}
-    >
-      {options.map((label, index) => (
-        <option key={label} value={'' + index}>
-          {label}
-        </option>
-      ))}
-    </Select>
-  )
-}
+    return (
+      <Select
+        {...this.props}
+        assistiveText="Start typing to search. Press the down arrow to navigate results."
+        formatSelectedOption={(tag) => (
+          <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
+        )}
+      >
+        {options.map((label, index) => (
+          <option key={label} value={'' + index}>
+            {label}
+          </option>
+        ))}
+      </Select>
+    )
+  }
 }
 
 render(
@@ -311,8 +353,6 @@ render(
       label="Choose a state"
       name="state"
       defaultOption="12"
-      onChange={(event, value) => console.log(value.label)}
-      assistiveText="Start typing to search. Press the down arrow to navigate results."
       editable
     />
     <br />
@@ -320,7 +360,6 @@ render(
       label="Choose a few states"
       name="states"
       defaultOption={["0", "12", "15"]}
-      assistiveText="Start typing to search. Press the down arrow to navigate results."
       editable
       multiple
     />

@@ -29,6 +29,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import warning from '@instructure/ui-utils/lib/warning'
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
@@ -104,6 +105,10 @@ class SelectSingle extends Component {
      */
     onInputChange: PropTypes.func,
     /**
+     * Callback fired when the options displayed in the menu change
+     */
+    onOptionsChange: PropTypes.func,
+    /**
     * should the menu be closed when a selection happens
     */
     closeOnSelect: PropTypes.bool
@@ -114,6 +119,7 @@ class SelectSingle extends Component {
     onClose: () => {},
     onChange: (event, selectedOption) => {},
     onInputChange: (event, value) => {},
+    onOptionsChange: (filteredOptions) => {},
     closeOnSelect: true
   }
 
@@ -209,6 +215,10 @@ class SelectSingle extends Component {
           return { selectedOption: match || selectedOption }
         })
       }
+    }
+
+    if (!deepEqual(this.state.filteredOptions, prevState.filteredOptions)) {
+      this.props.onOptionsChange(this.state.filteredOptions)
     }
   }
 

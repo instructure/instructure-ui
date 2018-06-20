@@ -119,6 +119,10 @@ class SelectField extends Component {
      */
     assistiveText: PropTypes.string,
     /**
+     * Additional text to provide screenreader feedback upon user action
+     */
+    announcement: PropTypes.string,
+    /**
      * Callback fired when the options have been positioned
      */
     onPositioned: PropTypes.func,
@@ -200,6 +204,7 @@ class SelectField extends Component {
     selectedOption: null,
     size: 'medium',
     loadingText: null,
+    announcement: null,
     options: [],
     visibleOptionsCount: 8,
     closeOnSelect: true,
@@ -543,7 +548,8 @@ class SelectField extends Component {
       children,
       onStaticClick,
       assistiveText,
-      layout
+      layout,
+      announcement
     } = this.props
 
     const inputProps = omitProps(this.props, SelectField.propTypes, [
@@ -666,6 +672,15 @@ class SelectField extends Component {
         >
           {assistiveText}
         </span>
+        <ScreenReaderContent>
+          <span
+            role="log"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            {announcement}
+          </span>
+        </ScreenReaderContent>
       </FormFieldLayout>
     )
   }
