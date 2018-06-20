@@ -319,8 +319,8 @@ class NumberInput extends Component {
 
   formatValue (decimal, locale, precision = this.precision) {
     const { decimalPrecision, significantDigits } = precision
-    if (decimalPrecision) return decimal.toFixed(decimalPrecision, locale)
-    if (significantDigits) return decimal.toPrecision(significantDigits, locale)
+    if (parseInt(decimalPrecision) >= 0) return decimal.toFixed(decimalPrecision, locale)
+    if (parseInt(significantDigits) >= 1) return decimal.toPrecision(significantDigits, locale)
     return locale ? decimal.toLocaleString(locale) : decimal.toString()
   }
 

@@ -152,8 +152,8 @@ class Example extends React.Component {
         </Select>
         <br />
         <NumberInput
-          label="Precision"
-          min={1}
+          label={this.state.precisionType}
+          min={0}
           max={10}
           decimalPrecision={0}
           value={this.state.precisionValue}

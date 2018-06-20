@@ -390,6 +390,12 @@ describe('<NumberInput />', () => {
       })
     })
 
+    context('when the specified precision is 0', () => {
+      it('rounds the decimal precision to 0', () => {
+        expect(inputValueOnBlur('123.93', { decimalPrecision: 0 })).to.equal('124')
+      })
+    })
+
     context('when value is negative and min is 0', () => {
       it('sets the value to 0', () => {
         expect(inputValueOnBlur('-1', { min: 0 })).to.equal('0')
