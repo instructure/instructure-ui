@@ -538,7 +538,8 @@ class SelectField extends Component {
       visibleOptionsCount,
       children,
       onStaticClick,
-      assistiveText
+      assistiveText,
+      layout
     } = this.props
 
     const inputProps = omitProps(this.props, SelectField.propTypes, [
@@ -576,6 +577,7 @@ class SelectField extends Component {
         as="span"
         label={wrappedLabel}
         id={this.id}
+        vAlign={(layout === 'inline') ? 'middle' : null}
       >
         <span
           style={{
