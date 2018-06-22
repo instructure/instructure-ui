@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.13.1"></a>
+## [5.13.1](https://github.com/instructure/instructure-ui/compare/v5.13.0...v5.13.1) (2018-06-22)
+
+
+### Bug Fixes
+
+* **NumberInput:** accept zero for decimal places ([d4cdd6b](https://github.com/instructure/instructure-ui/commit/d4cdd6b))
+* **NumberInput:** don't use window.event ([943a0c9](https://github.com/instructure/instructure-ui/commit/943a0c9))
+* **NumberInput:** handle min={0} and max={0} props ([5b09754](https://github.com/instructure/instructure-ui/commit/5b09754))
+* **NumberInput:** onChange with updated precision ([fa33d06](https://github.com/instructure/instructure-ui/commit/fa33d06))
+* **ui-forms:** fix inline input and label alignment in Select ([a696dcc](https://github.com/instructure/instructure-ui/commit/a696dcc))
+* **ui-forms:** select should return focus to input on close ([0baa76f](https://github.com/instructure/instructure-ui/commit/0baa76f))
+
+
+
+
+
 <a name="5.13.0"></a>
 # [5.13.0](https://github.com/instructure/instructure-ui/compare/v5.12.0...v5.13.0) (2018-06-16)
 
