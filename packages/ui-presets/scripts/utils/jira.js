@@ -131,11 +131,19 @@ exports.getIssuesInCommit = async function getIssuesInCommit () {
 
 exports.updateJiraIssues = async function updateJiraIssues (issueKeys, jiraVersionName) {
   await Promise.all(issueKeys.map((issueKey) => {
-      return jiraClient().updateIssue(issueKey, {
-        update: {
-          fixVersions: [{ add: { name: jiraVersionName } }]
-        }
-      })
+      let result
+      try {
+        result = jiraClient().updateIssue(issueKey, {
+          update: {
+            fixVersions: [{ add: { name: jiraVersionName } }]
+          }
+        })
+      } catch (err) {
+        error(err)
+        result = new Promise()
+      }
+
+      return result
   }))
 
   info(`Updated ${issueKeys.join(', ')} to reflect the fix version: ${jiraVersionName}.`)

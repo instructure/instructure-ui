@@ -40,7 +40,7 @@
     "bump": "ui-scripts --bump",
     "publish:packages": "lerna exec ui-scripts --publish-package --stream --ignore docs",
     "deprecate:packages": "lerna exec ui-scripts --deprecate-package --stream --ignore docs",
-    "prerelease": "yarn bootstrap",
+    "prerelease": "yarn bootstrap && yarn build:docs",
     "release": "ui-scripts --release",
     "predeploy": "yarn build:docs",
     "deploy": "ui-scripts --deploy",

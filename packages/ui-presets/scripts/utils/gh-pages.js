@@ -35,7 +35,7 @@ const {
  GH_PAGES_CNAME
 } = process.env
 
-exports.publishGithubPages = async function publishGithubPages (callback) {
+exports.publishGithubPages = async function publishGithubPages () {
   if (!fs.existsSync(`${GH_PAGES_DIR}`)) {
     error(`GH pages directory doesn't exist!`)
     process.exit(1)
@@ -51,17 +51,23 @@ exports.publishGithubPages = async function publishGithubPages (callback) {
     await runCommandAsync(`echo "${GH_PAGES_CNAME}" >> ${GH_PAGES_DIR}/CNAME`)
   }
 
-  ghpages.publish(GH_PAGES_DIR, {
-    branch: GH_PAGES_BRANCH,
-    repo: GH_PAGES_REPO
-  }, (err) => {
-    if (!err) {
-      const { name, version } = getPackageJSON()
-      info(`📖   Deployed version ${version} of the ${name} documentation...`)
-    }
+  return new Promise((resolve, reject) => {
+    ghpages.publish(GH_PAGES_DIR, {
+      branch: GH_PAGES_BRANCH,
+      repo: GH_PAGES_REPO
+    }, (err) => {
+      if (err) {
+        if (typeof reject === 'function') {
+          reject(err)
+        }
+      } else {
+        const { name, version } = getPackageJSON()
+        info(`📖   Deployed version ${version} of the ${name} documentation...`)
 
-    if (typeof callback === 'function') {
-      callback(err)
-    }
+        if (typeof resolve === 'function') {
+          resolve()
+        }
+      }
+    })
   })
 }

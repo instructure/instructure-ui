@@ -47,6 +47,7 @@ const {
   createGitTagForRelease
 } = require('./git')
 const { error, info } = require('./logger')
+const { publishGithubPages } = require('./gh-pages')
 
 async function checkPackagePublished (name, version) {
   const result = runCommandAsync(`npm info ${name}@${version} version`)
@@ -132,6 +133,31 @@ const publish = async function publish (releaseVersion) {
   info(`📦  Version ${npmTag} ${releaseVersion} of ${name} was successfully published!`)
 }
 exports.publish = publish
+
+const postPublish = async function postPublish (name, releaseVersion) {
+  if (await isReleaseCommit(releaseVersion)) {
+    info(`Running post-publish steps for ${releaseVersion} of ${name}...`)
+    await checkIfCommitIsReviewed()
+    await createGitTagForRelease(releaseVersion)
+
+    try {
+      await publishGithubPages()
+    } catch (err) {
+      error(err)
+      process.exit(1)
+    }
+
+    const issueKeys = await getIssuesInRelease()
+    const jiraVersion = await createJiraVersion(name, releaseVersion)
+    await updateJiraIssues(issueKeys, jiraVersion.name)
+
+    postStableReleaseSlackMessage(jiraVersion, issueKeys)
+  } else {
+    const issueKeys = await getIssuesInCommit()
+    postReleaseCandidateSlackMessage(name, releaseVersion, issueKeys)
+  }
+}
+exports.postPublish = postPublish
 
 exports.publishPackage = async function publishPackage (releaseVersion) {
   await setupGit()
@@ -228,22 +254,7 @@ exports.release = async function release (version) {
 
   await publish(releaseVersion)
 
-  if (await isReleaseCommit(releaseVersion)) {
-    info(`Running post-publish steps for ${releaseVersion} of ${name}...`)
-    await checkIfCommitIsReviewed()
-    await createGitTagForRelease(releaseVersion)
-
-    await runCommandAsync(`yarn deploy`)
-
-    const issueKeys = await getIssuesInRelease()
-    const jiraVersion = await createJiraVersion(name, releaseVersion)
-    await updateJiraIssues(issueKeys, jiraVersion.name)
-
-    postStableReleaseSlackMessage(jiraVersion, issueKeys)
-  } else {
-    const issueKeys = await getIssuesInCommit()
-    postReleaseCandidateSlackMessage(name, releaseVersion, issueKeys)
-  }
+  await postPublish(name, releaseVersion)
 
   info(`Version ${releaseVersion} of ${name} was successfully released!`)
 }

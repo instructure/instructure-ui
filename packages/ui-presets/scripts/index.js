@@ -29,6 +29,7 @@ require('dotenv').config()
 
 const commands = [
   '--release',
+  '--post-publish',
   '--bump',
   '--deploy',
   '--deprecate-package',
@@ -49,6 +50,8 @@ if (process.argv.includes('--help')) {
   listCommands()
 } else if (process.argv.includes('--release')) {
   require('./release')
+} else if (process.argv.includes('--post-publish')) {
+  require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
 } else if (process.argv.includes('--deploy')) {
