@@ -326,6 +326,13 @@ describe('<NumberInput />', () => {
       expect(onChangeArgs(value, { ...baseProps, max })[2]).to.equal('99.90')
     })
 
+    context('when precision not specified', () => {
+      it('includes trailing zeros in third argument', () => {
+        const value = '5,00'
+        expect(onChangeArgs(value, { ...baseProps, decimalPrecision: null })[2]).to.equal('5.00')
+      })
+    })
+
     context('when value is less precise than specified precision', () => {
       it('receives a third argument with trailing zeros', () => {
         expect(onChangeArgs('3.9', { significantDigits: 3 })[2]).to.equal('3.90')
@@ -372,6 +379,10 @@ describe('<NumberInput />', () => {
 
     it('should leave only the last decimal delimiter', () => {
       expect(inputValueOnBlur(',1,,2,,,3,,4', { locale: 'fr' })).to.equal('123,4')
+    })
+
+    it('should not strip trailing zeros', () => {
+      expect(inputValueOnBlur('1.000')).to.equal('1.000')
     })
 
     context('when value is less precise than specified precision', () => {

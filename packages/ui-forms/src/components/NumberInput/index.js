@@ -240,8 +240,26 @@ class NumberInput extends Component {
     return props.locale || context.locale || Locale.browserLocale()
   }
 
+  // Return the current precision, either from props if given, or from the
+  // input value itself
   getPrecision (props) {
-    return pickProps(props, {}, ['decimalPrecision', 'significantDigits'])
+    const { decimalPrecision, significantDigits } = props
+    if (decimalPrecision != null) return { decimalPrecision }
+    if (significantDigits != null) return { significantDigits }
+
+    if (this._input) {
+      const precisionFromInput = this.getDecimals(this._input.value).length
+      if (precisionFromInput > 0) return { decimalPrecision: precisionFromInput }
+    }
+
+    return {}
+  }
+
+  // Return the portion of the given string that follows the decimal separator
+  getDecimals (string, locale = this.locale) {
+    const { decimal } = Decimal.getDelimiters(locale)
+    const match = string.match(new RegExp(`\\${decimal}(\\d+?)$`))
+    return match ? match[1] : ''
   }
 
   getDecimalFromNormalizedString (value) {
