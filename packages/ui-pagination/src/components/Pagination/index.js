@@ -218,6 +218,7 @@ export default class Pagination extends Component {
         onClick={onClick}
         disabled={disabled}
         variant="icon"
+        size="small"
         title={title}
         icon={icon}
       >
