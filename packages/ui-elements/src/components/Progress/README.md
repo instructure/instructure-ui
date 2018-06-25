@@ -125,9 +125,8 @@ example: true
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Text weight="bold">
-          {Math.round(valueNow / valueMax * 100)}
-          <Text color="secondary" weight="light"><sup>%</sup></Text>
+        <Text>
+          {Math.round(valueNow / valueMax * 100)}%
         </Text>
       )
     }}
@@ -141,9 +140,8 @@ example: true
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Text weight="bold" size="large">
-          {Math.round(valueNow / valueMax * 100)}
-          <Text color="secondary" weight="light"><sup>%</sup></Text>
+        <Text>
+          {Math.round(valueNow / valueMax * 100)}%
         </Text>
       )
     }}
@@ -190,8 +188,8 @@ example: true
         <span>
           <Text size="x-large" weight="bold">{valueNow}</Text>
           <br />
-          <Text color="secondary" size="small">/&nbsp;</Text>
-          <Text color="secondary" size="small">{valueMax}</Text>
+          <Text size="small">/&nbsp;</Text>
+          <Text size="small">{valueMax}</Text>
         </span>
       )
     }}
@@ -286,8 +284,8 @@ example: true
         <span>
           <Text size="xx-large" weight="bold">{valueNow}</Text>
           <br />
-          <Text color="secondary" size="small">of </Text>
-          <Text color="secondary" size="small">{valueMax}</Text>
+          <Text size="small">of </Text>
+          <Text size="small">{valueMax}</Text>
         </span>
       )
     }}
@@ -316,14 +314,8 @@ example: true
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Text weight="bold" color="primary-inverse">
-          {Math.round(valueNow / valueMax * 100)}
-          <Text
-            color="secondary"
-            weight="light"
-            color="secondary-inverse">
-              <sup>%</sup>
-          </Text>
+        <Text color="primary-inverse">
+          {Math.round(valueNow / valueMax * 100)}%
         </Text>
       )
     }}
@@ -337,14 +329,8 @@ example: true
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       return (
-        <Text weight="bold" color="primary-inverse">
-          {Math.round(valueNow / valueMax * 100)}
-          <Text
-            color="secondary"
-            weight="light"
-            color="secondary-inverse">
-              <sup>%</sup>
-          </Text>
+        <Text color="primary-inverse">
+          {Math.round(valueNow / valueMax * 100)}%
         </Text>
       )
     }}
