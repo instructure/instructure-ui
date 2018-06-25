@@ -21,59 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
-
-import styles from './styles.css'
-import theme from './theme'
+import { PAUSED, WINDOWED_SCREEN } from '../../../../constants'
 
 /**
----
-private: true
----
-**/
-@themeable(theme, styles)
-class VideoPlayerButton extends Component {
-  static propTypes = {
-    /**
-     * Id of the video element. Used to ensure
-     * correct aria properties are applied.
-     */
-    videoId: PropTypes.string.isRequired,
-    forwardRef: PropTypes.func,
-    onClick: PropTypes.func,
-    children: PropTypes.node
-  }
-
-  static defaultProps = {
-    forwardRef: (ref) => {},
-    onClick: (e) => {}
-  }
-
-  handleKeyDown = (e) => {
-    // prevent FF from emitting a keyboard event
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.stopPropagation()
-    }
-  }
-
-  render () {
-    const { videoId, onClick, forwardRef, children } = this.props
-
-    return (
-      <button
-        className={styles.button}
-        onClick={onClick}
-        onKeyDown={this.handleKeyDown}
-        aria-controls={videoId}
-        ref={forwardRef}
-      >
-        {children}
-      </button>
-    )
+ * providerStateForTest is a provider state that is used as a reference to create
+ * a new providerState object in test files. NEVER reference this file as it can
+ * change their values.
+ */
+const providerStateForTest = {
+  state: {
+    videoState: PAUSED,
+    screenState: WINDOWED_SCREEN,
+    muted: false,
+    volume: 1,
+    loadingSrc: false,
+    showControls: false,
+    videoId: 'uuid-123'
+  },
+  mediaPlayerWrapperRef: () => {},
+  actions: {
+    play: () => {},
+    pause: () => {},
+    seek: () => {},
+    setVolume: () => {},
+    showControls: () => {},
+    togglePlay: () => {},
+    toggleFullScreen: () => {},
+    toggleMute: () => {}
   }
 }
 
-export default VideoPlayerButton
+export default providerStateForTest

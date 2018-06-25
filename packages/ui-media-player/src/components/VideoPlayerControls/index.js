@@ -28,6 +28,7 @@ import themeable from '@instructure/ui-themeable'
 
 import PlayPauseButton from './PlayPauseButton'
 import Timebar from './Timebar'
+import VolumeContainer from './VolumeContainer'
 import FullScreenButton from './FullScreenButton'
 import { Consumer } from '../VideoPlayer/VideoPlayerContext'
 
@@ -42,6 +43,9 @@ parent: VideoPlayer
 @themeable(theme, styles)
 class VideoPlayerControls extends Component {
   static propTypes = {
+    /**
+     * Children of the <VideoPlayerControls />
+     */
     children: PropTypes.node
   }
 
@@ -49,37 +53,35 @@ class VideoPlayerControls extends Component {
     showControls: false
   }
 
-  static CustomControls = (props) => {
-    return (
-      <Consumer>
-        {props.children}
-      </Consumer>
-    )
-  }
+  static CustomControls = (props) => (
+    <Consumer>
+      {props.children}
+    </Consumer>
+  )
 
   static PlayPauseButton = PlayPauseButton
 
-  static FullScreenButton = FullScreenButton
+  static Timebar = (props) => (
+    <Consumer>
+      {({
+        state,
+        actions
+      }) => (
+        <Timebar
+          duration={state.duration}
+          currentTime={state.currentTime}
+          buffered={state.buffered}
+          videoId={state.videoId}
+          onClick={actions.seek}
+          {...props}
+        />
+      )}
+    </Consumer>
+  )
 
-  static Timebar = (props) => {
-    return (
-      <Consumer>
-        {({
-          state,
-          actions
-        }) => (
-          <Timebar
-            duration={state.duration}
-            currentTime={state.currentTime}
-            buffered={state.buffered}
-            videoId={state.videoId}
-            onClick={actions.seek}
-            {...props}
-          />
-        )}
-      </Consumer>
-    )
-  }
+  static Volume = VolumeContainer
+
+  static FullScreenButton = FullScreenButton
 
   handleOnClick = (showControls) => (e) => {
     e.stopPropagation()

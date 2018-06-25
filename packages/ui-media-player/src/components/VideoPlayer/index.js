@@ -24,6 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import screenfull from 'screenfull'
+
 import themeable from '@instructure/ui-themeable'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
@@ -44,7 +45,9 @@ import theme from './theme'
 
 export const SEEK_INTERVAL_SECONDS = 5
 export const JUMP_INTERVAL_SECONDS = 30
-export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate', 'seeked', 'ended']
+export const SEEK_VOLUME_INTERVAL = 0.05
+export const JUMP_VOLUME_INTERVAL = 0.1
+export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate', 'seeked', 'ended', 'volumechange']
 
 /**
 ---
@@ -78,6 +81,7 @@ class VideoPlayer extends Component {
         <VPC>
           <VPC.PlayPauseButton />
           <VPC.Timebar />
+          <VPC.Volume />
           <VPC.FullScreenButton />
         </VPC>
       )
@@ -85,11 +89,14 @@ class VideoPlayer extends Component {
     alwaysShowControls: false
   }
 
-  video = null
+  mediaPlayerWrapper = null
   videoWrapper = null
+  video = null
   state = {
     videoState: PAUSED,
     screenState: WINDOWED_SCREEN,
+    muted: false,
+    volume: 1,
     loadingSrc: true,
     showControls: true,
     videoId: generateElementId('VideoPlayer')
@@ -107,6 +114,7 @@ class VideoPlayer extends Component {
     // remove the video ref and stop applying video props
     this.video = null
     this.videoWrapper = null
+    this.mediaPlayerWrapper = null
   }
 
   _registerEventHandlers () {
@@ -117,7 +125,7 @@ class VideoPlayer extends Component {
   }
 
   handleKeyPress = (e) => {
-    const { currentTime } = this.state
+    const { currentTime, duration } = this.state
 
     const keyHandlers = {
       ArrowLeft: () => {
@@ -126,13 +134,28 @@ class VideoPlayer extends Component {
       ArrowRight: () => {
         this.seek(currentTime + SEEK_INTERVAL_SECONDS)
       },
+      ArrowUp: () => {
+        this.seek(currentTime + SEEK_INTERVAL_SECONDS)
+      },
+      ArrowDown: () => {
+        this.seek(currentTime - SEEK_INTERVAL_SECONDS)
+      },
       PageUp: () => {
         this.seek(currentTime + JUMP_INTERVAL_SECONDS)
       },
       PageDown: () => {
         this.seek(currentTime - JUMP_INTERVAL_SECONDS)
       },
+      Home: () => {
+        this.seek(0)
+      },
+      End: () => {
+        this.seek(duration)
+      },
       ' ': () => {
+        this.togglePlay()
+      },
+      Enter: () => {
         this.togglePlay()
       },
       /*
@@ -146,6 +169,12 @@ class VideoPlayer extends Component {
       },
       F: () => {
         this.toggleFullScreen()
+      },
+      m: () => {
+        this.toggleMute()
+      },
+      M: () => {
+        this.toggleMute()
       }
     }
 
@@ -192,13 +221,33 @@ class VideoPlayer extends Component {
 
   toggleFullScreen = () => {
     if (screenfull.enabled) {
-      screenfull.toggle(this.videoWrapper)
+      screenfull.toggle(this.mediaPlayerWrapper)
     }
   }
 
   seek = (time) => {
     const { duration } = this.state
     this.video.currentTime = Math.min(Math.max(0, time), duration)
+  }
+
+  toggleMute = () => {
+    this.setState(prevState => ({ muted: !prevState.muted }), () => {
+      if (this.state.muted) {
+        this.video.volume = 0
+      } else {
+        this.video.volume = this.state.volume
+      }
+    })
+  }
+
+  setVolume = (volume) => {
+    if (!this.video) {
+      return
+    }
+
+    const v = Math.min(Math.max(0, volume), 1)
+    this.setState({ muted: false, volume: v })
+    this.video.volume = v
   }
 
   applyVideoProps = () => {
@@ -213,8 +262,11 @@ class VideoPlayer extends Component {
       videoState = ENDED
     }
 
+    const muted = this.state.muted
+
     this.setState({
       videoState,
+      muted,
       currentTime: this.video.currentTime,
       duration: this.video.duration,
       buffered: buffered.length > 0 ? buffered.end(buffered.length - 1) : 0
@@ -227,7 +279,7 @@ class VideoPlayer extends Component {
   }
 
   updateScreenState = () => {
-    if (!this.videoWrapper) {
+    if (!this.mediaPlayerWrapper) {
       return
     }
 
@@ -248,30 +300,44 @@ class VideoPlayer extends Component {
     }
   }
 
+  setMediaPlayerWrapperRef = (el) => {
+    if (this.mediaPlayerWrapper === null) {
+      this.mediaPlayerWrapper = el
+    }
+  }
+
   hideSpinner = () => {
-    this.setState({
-      loadingSrc: false
-    })
+    this.setState({ loadingSrc: false })
   }
 
   render () {
     const { src, controls } = this.props
 
     const actions = {
+      play: this.play,
+      pause: this.pause,
       seek: this.seek,
+      setVolume: this.setVolume,
       showControls: this.showControls,
       togglePlay: this.togglePlay,
-      toggleFullScreen: this.toggleFullScreen
+      toggleFullScreen: this.toggleFullScreen,
+      toggleMute: this.toggleMute
     }
 
     // default values for VideoPlayerContext
     const providerState = {
       state: this.state,
+      mediaPlayerWrapperRef: () => this.mediaPlayerWrapper,
       actions
     }
 
-    const wrapperProps = {
-      className: styles.container,
+    const mediaPlayerWrapperProps = {
+      className: styles.mediaPlayerContainer,
+      ref: this.setMediaPlayerWrapperRef
+    }
+
+    const videoPlayerWrapperProps = {
+      className: styles.videoPlayerContainer,
       onKeyDown: this.handleKeyPress,
       onFocus: () => this.showControls(),
       onMouseMove: () => this.showControls(),
@@ -284,19 +350,21 @@ class VideoPlayer extends Component {
 
     /* eslint-disable jsx-a11y/media-has-caption, jsx-a11y/no-noninteractive-tabindex */
     return (
-      <div {...wrapperProps}>
-        { this.state.loadingSrc && <Loading /> }
-        <video
-          ref={this.setVideoRef}
-          src={src}
-          id={this.state.videoId}
-          className={styles.video}
-          tabIndex="-1"
-          onCanPlay={this.hideSpinner}
-        />
-        <Provider value={providerState}>
-          { controls(VideoPlayerControls) }
-        </Provider>
+      <div {...mediaPlayerWrapperProps}>
+        <div {...videoPlayerWrapperProps}>
+          { this.state.loadingSrc && <Loading /> }
+          <video
+            ref={this.setVideoRef}
+            src={src}
+            id={this.state.videoId}
+            className={styles.video}
+            tabIndex="-1"
+            onCanPlay={this.hideSpinner}
+          />
+          <Provider value={providerState}>
+            { controls(VideoPlayerControls) }
+          </Provider>
+        </div>
       </div>
     )
     /* eslint-enable jsx-a11y/media-has-caption, jsx-a11y/no-noninteractive-tabindex */

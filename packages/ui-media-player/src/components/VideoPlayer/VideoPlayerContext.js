@@ -31,15 +31,22 @@ const VideoPlayerState = {
   state: PropTypes.shape({
     videoState: PropTypes.oneOf(Object.values(VideoStates)).isRequired,
     screenState: PropTypes.oneOf(Object.values(ScreenStates)).isRequired,
+    muted: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
     loadingSrc: PropTypes.bool.isRequired,
     showControls: PropTypes.bool.isRequired,
     videoId: PropTypes.string.isRequired
   }).isRequired,
+  mediaPlayerWrapperRef: PropTypes.func,
   actions: PropTypes.shape({
+    play: PropTypes.func.isRequired,
+    pause: PropTypes.func.isRequired,
     seek: PropTypes.func.isRequired,
+    setVolume: PropTypes.func.isRequired,
     showControls: PropTypes.func.isRequired,
     togglePlay: PropTypes.func.isRequired,
-    toggleFullScreen: PropTypes.func.isRequired
+    toggleFullScreen: PropTypes.func.isRequired,
+    toggleMute: PropTypes.func.isRequired
   }).isRequired
 }
 

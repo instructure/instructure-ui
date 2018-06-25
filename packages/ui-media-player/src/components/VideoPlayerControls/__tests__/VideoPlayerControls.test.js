@@ -25,32 +25,18 @@ import React from 'react'
 
 import VideoPlayerControls from '../index'
 import { Provider } from '../../VideoPlayer/VideoPlayerContext'
-import { PAUSED, WINDOWED_SCREEN } from '../../../constants'
+import providerStateForTest from '../../VideoPlayer/__tests__/fixtures/providerStateForTest'
 
 import styles from '../styles.css'
 
 describe('<VideoPlayerControls />', () => {
-  const providerState = {
-    state: {
-      videoState: PAUSED,
-      screenState: WINDOWED_SCREEN,
-      loadingSrc: false,
-      showControls: false,
-      videoId: 'uuid-123'
-    },
-    actions: {
-      seek: () => {},
-      showControls: () => {},
-      togglePlay: () => {},
-      toggleFullScreen: () => {}
-    }
-  }
-
+  const providerState = { ...providerStateForTest }
   const testbed = new Testbed(
     <Provider value={providerState}>
       <VideoPlayerControls>
         <VideoPlayerControls.PlayPauseButton />
         <VideoPlayerControls.Timebar />
+        <VideoPlayerControls.Volume />
         <VideoPlayerControls.FullScreenButton />
       </VideoPlayerControls>
     </Provider>
@@ -158,6 +144,30 @@ describe('<VideoPlayerControls />', () => {
     expect(timebar.prop('videoId')).to.eql(customProviderState.state.videoId)
     timebar.prop('onClick')(123)
     expect(customProviderState.actions.seek).to.have.been.calledWith(123)
+  })
+
+  it('renders a Volume (button & slider)', () => {
+    const popoverContentWrapperId = 'popover-content-wrapper'
+    let popoverContentWrapper = document.createElement('div')
+    popoverContentWrapper.setAttribute("id", `${popoverContentWrapperId}`)
+    document.body.appendChild(popoverContentWrapper)
+    const customProviderState = {
+      ...providerState,
+      state: {
+        ...providerState.state,
+        showControls: true
+      },
+      mediaPlayerWrapperRef: () => (popoverContentWrapper)
+    }
+    const component = testbed.render({ value: customProviderState })
+    const button = component.find('Volume').find('VideoPlayerButton')
+    expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
+    expect(button.text()).to.match(/Unmuted/)
+    expect(button.find('IconAudio').length).to.eql(1)
+    button.click()
+    const slider = document.getElementById(`${popoverContentWrapperId}`)
+    expect(slider).to.not.be.null
+    slider.remove()
   })
 
   it('renders a FullScreenButton', () => {

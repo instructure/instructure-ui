@@ -30,6 +30,7 @@ import VideoPlayer, {
 } from '../index'
 import { PAUSED, PLAYING } from '../../../constants'
 import testVideo from './fixtures/testVideo'
+import styles from '../styles.css'
 
 describe('<VideoPlayer />', () => {
   const testbed = new Testbed(<VideoPlayer src={testVideo} />)
@@ -47,6 +48,8 @@ describe('<VideoPlayer />', () => {
       ended: false,
       play () { this.paused = false },
       pause () { this.paused = true },
+      muted: false,
+      volume: 1,
       addEventListener: testbed.stub(),
       removeEventListener: testbed.stub()
     }
@@ -56,12 +59,11 @@ describe('<VideoPlayer />', () => {
     const player = testbed.render()
     player.instance().video = { ...mockVideo, ...videoOverrides }
     player.instance().applyVideoProps()
-
     return player
   }
 
   it('should render', () => {
-    expect(testbed.render()).to.be.present
+    expect(testbed.render()).to.be.present()
   })
 
   it('should render a </Loading />', () => {
@@ -131,6 +133,9 @@ describe('<VideoPlayer />', () => {
       const timebar = controls.find('Timebar')
       expect(timebar.exists()).to.eql(true)
 
+      const volume = controls.find('Volume')
+      expect(volume.exists()).to.eql(true)
+
       const fullScreenButton = controls.find('FullScreenButton')
       expect(fullScreenButton.exists()).to.eql(true)
     })
@@ -148,29 +153,43 @@ describe('<VideoPlayer />', () => {
   it('toggles play when clicked', () => {
     const player = renderWithMockVideo()
     expect(player.state('videoState')).to.eql(PAUSED)
-    player.click()
+    player.find(`.${styles.videoPlayerContainer}`).click()
     player.instance().applyVideoProps()
     expect(player.state('videoState')).to.eql(PLAYING)
   })
 
   describe('keybindings', () => {
     function keyboardEvent (player, key) {
-      player.simulate('keyDown', { key })
+      player.find(`.${styles.videoPlayerContainer}`).simulate('keyDown', { key })
       // allow internal state to update
       player.instance().applyVideoProps()
     }
 
-    it('can seek forward', () => {
+    it('can seek forward with ArrowRight', () => {
       const oldTime = mockVideo.currentTime
       const player = renderWithMockVideo()
       keyboardEvent(player, 'ArrowRight')
       expect(player.state('currentTime')).to.eql(oldTime + SEEK_INTERVAL_SECONDS)
     })
 
-    it('can seek backward', () => {
+    it('can seek backward with ArrowLeft', () => {
       mockVideo.currentTime = 15
       const player = renderWithMockVideo()
       keyboardEvent(player, 'ArrowLeft')
+      expect(player.state('currentTime')).to.eql(15 - SEEK_INTERVAL_SECONDS)
+    })
+
+    it('can seek forward with ArrowUp', () => {
+      const oldTime = mockVideo.currentTime
+      const player = renderWithMockVideo()
+      keyboardEvent(player, 'ArrowUp')
+      expect(player.state('currentTime')).to.eql(oldTime + SEEK_INTERVAL_SECONDS)
+    })
+
+    it('can seek backward with ArrowDown', () => {
+      mockVideo.currentTime = 15
+      const player = renderWithMockVideo()
+      keyboardEvent(player, 'ArrowDown')
       expect(player.state('currentTime')).to.eql(15 - SEEK_INTERVAL_SECONDS)
     })
 
@@ -188,12 +207,58 @@ describe('<VideoPlayer />', () => {
       expect(player.state('currentTime')).to.eql(90 - JUMP_INTERVAL_SECONDS)
     })
 
-    it('can toggle play', () => {
+    it('can seek to the beginning of video', () => {
+      mockVideo.currentTime = 50
+      const player = renderWithMockVideo()
+      keyboardEvent(player, 'Home')
+      expect(player.state('currentTime')).to.eql(0)
+    })
+
+    it('can seek to the end of video', () => {
+      mockVideo.currentTime = 50
+      const player = renderWithMockVideo()
+      keyboardEvent(player, 'End')
+      expect(player.state('currentTime')).to.eql(mockVideo.duration)
+    })
+
+    it('can toggle play with Space', () => {
       const player = renderWithMockVideo()
       keyboardEvent(player, ' ')
       expect(player.state('videoState')).to.eql(PLAYING)
       keyboardEvent(player, ' ')
       expect(player.state('videoState')).to.eql(PAUSED)
+    })
+
+    it('can toggle play with Enter', () => {
+      const player = renderWithMockVideo()
+      keyboardEvent(player, 'Enter')
+      expect(player.state('videoState')).to.eql(PLAYING)
+      keyboardEvent(player, 'Enter')
+      expect(player.state('videoState')).to.eql(PAUSED)
+    })
+
+    it('can toggle mute with m', () => {
+      const player = renderWithMockVideo()
+      const oldVolume = player.state('volume')
+
+      keyboardEvent(player, 'm')
+      expect(player.state('muted')).to.eql(true)
+      expect(player.state('volume')).to.eql(oldVolume)
+      keyboardEvent(player, 'm')
+      expect(player.state('muted')).to.eql(false)
+      expect(player.state('volume')).to.eql(oldVolume)
+    })
+
+    it('can toggle mute with M', () => {
+      const player = renderWithMockVideo()
+      const oldVolume = player.state('volume')
+
+      keyboardEvent(player, 'M')
+      expect(player.state('muted')).to.eql(true)
+      expect(player.state('volume')).to.eql(oldVolume)
+      keyboardEvent(player, 'M')
+      expect(player.state('muted')).to.eql(false)
+      expect(player.state('volume')).to.eql(oldVolume)
     })
 
     /*
@@ -235,7 +300,9 @@ describe('<VideoPlayer />', () => {
     it('shows the controls when a keybinding is activated', () => {
       const player = renderWithMockVideo()
       player.instance().showControls = testbed.stub()
-      return ['ArrowRight', 'ArrowLeft', 'PageUp', 'PageDown', ' ', 'f', 'F'].forEach((key) => {
+      return ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown',
+              'PageUp', 'PageDown', 'Home', 'End', ' ', 'Enter',
+              'f', 'F', 'm', 'M'].forEach((key) => {
         player.instance().showControls.resetHistory()
         keyboardEvent(player, key)
         expect(player.instance().showControls).to.have.been.called
@@ -316,14 +383,14 @@ describe('<VideoPlayer />', () => {
       it('shows controls on focus', () => {
         const player = testbed.render()
         player.setState({ showControls: false })
-        player.simulate('focus')
+        player.find(`.${styles.videoPlayerContainer}`).simulate('focus')
         expect(player.state('showControls')).to.eql(true)
       })
 
       it('shows controls on mouse move', () => {
         const player = testbed.render()
         player.setState({ showControls: false })
-        player.simulate('mouseMove')
+        player.find(`.${styles.videoPlayerContainer}`).simulate('mouseMove')
         expect(player.state('showControls')).to.eql(true)
       })
     })

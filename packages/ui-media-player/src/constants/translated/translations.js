@@ -28,7 +28,9 @@ let translations = {
   PLAYBACK_PAUSE: 'Pause',
   PLAYBACK_PLAY: 'Play',
   FULL_SCREEN: 'Full Screen',
-  WINDOWED_SCREEN: 'Windowed Screen'
+  WINDOWED_SCREEN: 'Windowed Screen',
+  VOLUME_UNMUTED: 'Unmuted',
+  VOLUME_MUTED: 'Muted'
 }
 
 export const TranslationPropTypes =

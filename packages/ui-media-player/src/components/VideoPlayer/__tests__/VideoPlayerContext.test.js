@@ -25,7 +25,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { Provider, Consumer } from '../VideoPlayerContext'
-import { PAUSED, PLAYING, WINDOWED_SCREEN } from '../../../constants'
+import providerStateForTest from './fixtures/providerStateForTest'
+import { PLAYING } from '../../../constants'
 
 class ComponentWithConsumer extends Component {
   static propTypes = {
@@ -42,21 +43,7 @@ class ComponentWithConsumer extends Component {
 }
 
 describe('VideoPlayerContext', () => {
-  const providerState = {
-    state: {
-      videoState: PAUSED,
-      screenState: WINDOWED_SCREEN,
-      loadingSrc: false,
-      showControls: false,
-      videoId: 'uuid-123'
-    },
-    actions: {
-      seek: () => {},
-      showControls: () => {},
-      togglePlay: () => {},
-      toggleFullScreen: () => {}
-    }
-  }
+  const providerState = { ...providerStateForTest }
 
   const testbed = new Testbed(
     <Provider value={providerState}>

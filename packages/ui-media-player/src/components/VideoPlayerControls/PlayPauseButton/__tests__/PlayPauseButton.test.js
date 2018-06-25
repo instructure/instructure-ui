@@ -25,29 +25,15 @@ import React from 'react'
 
 import PlayPauseButton from '../index'
 import { Provider } from '../../../VideoPlayer/VideoPlayerContext'
+import providerStateForTest from '../../../VideoPlayer/__tests__/fixtures/providerStateForTest'
 import {
   PAUSED,
   PLAYING,
-  ENDED,
-  WINDOWED_SCREEN
+  ENDED
 } from '../../../../constants'
 
 describe('<PlayPauseButton />', () => {
-  const providerState = {
-    state: {
-      videoState: PAUSED,
-      screenState: WINDOWED_SCREEN,
-      loadingSrc: false,
-      showControls: false,
-      videoId: 'uuid-123'
-    },
-    actions: {
-      seek: () => {},
-      showControls: () => {},
-      togglePlay: () => {},
-      toggleFullScreen: () => {}
-    }
-  }
+  const providerState = { ...providerStateForTest }
   const testbed = new Testbed(
     <Provider value={providerState}>
       <PlayPauseButton />
@@ -56,7 +42,7 @@ describe('<PlayPauseButton />', () => {
 
   it('should render', () => {
     const component = testbed.render().find('VideoPlayerButton')
-    expect(component).to.be.present
+    expect(component).to.be.present()
   })
 
   it('defaults to the paused variant', () => {

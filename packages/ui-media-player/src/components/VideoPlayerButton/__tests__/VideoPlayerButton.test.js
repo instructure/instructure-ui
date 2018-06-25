@@ -31,7 +31,7 @@ describe('<VideoPlayerButton />', () => {
   const testbed = new Testbed(<VideoPlayerButton videoId={videoId} />)
 
   it('should render', () => {
-    expect(testbed.render()).to.be.present
+    expect(testbed.render()).to.be.present()
   })
 
   it('invokes forwardRef prop on mount', () => {
@@ -49,6 +49,13 @@ describe('<VideoPlayerButton />', () => {
 
   it('stops bubbling when space is pressed', () => {
     const event = { stopPropagation: testbed.stub(), key: ' ' }
+    const button = testbed.render()
+    button.simulate('keyDown', event)
+    expect(event.stopPropagation).to.have.been.called
+  })
+
+  it('stops bubbling when Enter is pressed', () => {
+    const event = { stopPropagation: testbed.stub(), key: 'Enter' }
     const button = testbed.render()
     button.simulate('keyDown', event)
     expect(event.stopPropagation).to.have.been.called

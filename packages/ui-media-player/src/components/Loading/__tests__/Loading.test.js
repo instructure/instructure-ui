@@ -29,7 +29,7 @@ describe('<Loading />', () => {
 
   it('should render', () => {
     const loading = testbed.render()
-    expect(loading).to.be.present
+    expect(loading).to.be.present()
   })
 
   it('should render a <Spinner />', () => {

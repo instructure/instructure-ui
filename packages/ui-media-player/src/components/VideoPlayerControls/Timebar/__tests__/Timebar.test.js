@@ -31,7 +31,7 @@ describe('<Timebar />', () => {
   const testbed = new Testbed(<Timebar videoId={videoId} duration={100} />)
 
   it('should render', () => {
-    expect(testbed.render()).to.be.present
+    expect(testbed.render()).to.be.present()
   })
 
   it('includes correct aria attributes', () => {

@@ -21,59 +21,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
 
-import styles from './styles.css'
-import theme from './theme'
+import View from '@instructure/ui-layout/lib/components/View'
+import RangeInput from '@instructure/ui-forms/lib/components/RangeInput'
 
-/**
----
-private: true
----
-**/
-@themeable(theme, styles)
-class VideoPlayerButton extends Component {
+import { SEEK_VOLUME_INTERVAL } from '../../../VideoPlayer'
+
+class VolumeSlider extends Component {
   static propTypes = {
-    /**
-     * Id of the video element. Used to ensure
-     * correct aria properties are applied.
-     */
-    videoId: PropTypes.string.isRequired,
-    forwardRef: PropTypes.func,
-    onClick: PropTypes.func,
-    children: PropTypes.node
+    value: PropTypes.number.isRequired,
+    onKeyDown: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+    label: PropTypes.element.isRequired
   }
 
   static defaultProps = {
-    forwardRef: (ref) => {},
-    onClick: (e) => {}
+    value: 1,
+    onKeyDown: (e) => {},
+    onChange: (volume) => {},
+    label: 'Unmuted'
   }
 
-  handleKeyDown = (e) => {
-    // prevent FF from emitting a keyboard event
-    if (e.key === ' ' || e.key === 'Enter') {
-      e.stopPropagation()
-    }
-  }
+  formatValue = volume => parseInt(volume * 100)
 
-  render () {
-    const { videoId, onClick, forwardRef, children } = this.props
+  render() {
+    const { value, onKeyDown, onChange, label } = this.props
 
     return (
-      <button
-        className={styles.button}
-        onClick={onClick}
-        onKeyDown={this.handleKeyDown}
-        aria-controls={videoId}
-        ref={forwardRef}
-      >
-        {children}
-      </button>
+      <View padding="medium" as="div">
+        <RangeInput
+          defaultValue={1}
+          value={value}
+          max={1}
+          min={0}
+          step={SEEK_VOLUME_INTERVAL}
+          onKeyDown={onKeyDown}
+          onChange={onChange}
+          formatValue={this.formatValue}
+          displayValue={false}
+          label={label}
+        />
+      </View>
     )
   }
 }
 
-export default VideoPlayerButton
+export default VolumeSlider
