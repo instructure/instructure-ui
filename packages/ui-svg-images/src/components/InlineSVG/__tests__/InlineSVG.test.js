@@ -25,6 +25,7 @@
 import React from 'react'
 
 import InlineSVG from '../index'
+import styles from '../styles.css'
 
 describe('<InlineSVG />', () => {
   const testbed = new Testbed(<InlineSVG />)
@@ -133,6 +134,14 @@ describe('<InlineSVG />', () => {
     })
 
     expect(subject.getComputedStyle().getPropertyValue('display')).to.contain('block')
+  })
+
+  it('should change the SVG color property', () => {
+    const subject = testbed.render({
+      color: 'success'
+    })
+
+    expect(subject.find(`.${styles.success}`)).to.be.present
   })
 
   it('should allow passing in the svg src as a string', () => {

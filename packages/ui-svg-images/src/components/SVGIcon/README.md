@@ -60,23 +60,32 @@ example: true
 
 ### Changing icon color
 
-The `fill` is set to `currentColor`: To change the color of the icon via CSS, use the `color`
-rule on the component's parent element.
+By default SVGIcon inherits the color of its parent element. However,
+[InlineSVG](#InlineSVG), the child component of SVGIcon, supports setting
+the icon to one of the theme colors via the `color` property.
 
 ```js
 ---
 example: true
 ---
 <div>
-  <span style={{color: 'tomato'}}>
-    <SVGIcon src={iconExample} size="large" title="Icon Example" />
-  </span>
-  <span style={{color: 'rebeccapurple'}}>
-    <SVGIcon src={iconExample} size="large" title="Icon Example" />
-  </span>
-  <span style={{color: 'limegreen'}}>
-    <SVGIcon src={iconExample} size="large" title="Icon Example" />
-  </span>
+  <SVGIcon color="primary" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="secondary" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="brand" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="success" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="warning" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="error" src={iconExample} size="large" title="Icon Example" />
+</div>
+```
+
+```js
+---
+example: true
+inverse: true
+---
+<div>
+  <SVGIcon color="primary-inverse" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="secondary-inverse" src={iconExample} size="large" title="Icon Example" />
 </div>
 ```
 

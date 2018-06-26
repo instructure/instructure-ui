@@ -48,7 +48,17 @@ export default class InlineSVG extends Component {
     focusable: PropTypes.bool,
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+    color: PropTypes.oneOf([
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'secondary-inverse',
+      'success',
+      'error',
+      'warning',
+      'brand'
+    ])
   }
 
   static defaultProps = {
@@ -140,6 +150,7 @@ export default class InlineSVG extends Component {
       focusable,
       children,
       src,
+      color,
       ...props
     } = this.props
 
@@ -162,7 +173,8 @@ export default class InlineSVG extends Component {
           [styles.root]: true,
           [styles.inline]: this.props.inline,
           [styles.block]: !this.props.inline,
-          [props.className]: props.className
+          [props.className]: props.className,
+          [styles[`color--${color}`]]: color
         })}
       >
         {this.renderTitle()}

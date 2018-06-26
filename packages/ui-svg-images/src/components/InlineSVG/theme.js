@@ -25,6 +25,22 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-export default function generator ({ colors, typography }) {
-  return {}
+export default function generator ({ colors }) {
+  return {
+    primaryInverseColor: colors.textLightest,
+    primaryColor: colors.textDarkest,
+    secondaryColor: colors.textDark,
+    secondaryInverseColor: colors.textLight,
+    warningColor: colors.textWarning,
+    brandColor: colors.textBrand,
+    errorColor: colors.textDanger,
+    successColor: colors.textSuccess
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    primaryColor: variables['ic-brand-font-color-dark'],
+    brandColor: variables['ic-brand-primary']
+  }
 }
