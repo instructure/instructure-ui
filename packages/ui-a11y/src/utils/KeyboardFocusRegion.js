@@ -23,6 +23,7 @@
  */
 
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+
 import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
 import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
@@ -49,7 +50,7 @@ import findFocusable from './findFocusable'
  */
 export default class KeyboardFocusRegion {
   constructor (element, options) {
-    this._contextElement = findDOMNode(element)
+    this._contextElement = element
     this._options = options || {
       shouldCloseOnEscape: true,
       shouldContainFocus: true,
@@ -110,6 +111,10 @@ export default class KeyboardFocusRegion {
 
   get win () {
     return ownerWindow(this._contextElement)
+  }
+
+  updateElement (element) {
+    this._contextElement = element
   }
 
   focus () {

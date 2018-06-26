@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import warning from '@instructure/ui-utils/lib/warning'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -106,20 +107,11 @@ class Dialog extends Component {
   }
 
   _raf = []
+  _focusRegion = null
 
   componentDidMount () {
     if (this.props.open) {
       this.focus()
-    }
-  }
-
-  componentWillUpdate (nextProps) {
-    const { open } = this.props
-
-    if (open && !nextProps.open) {
-      // we need to blur the region before the component updates
-      // while we still have access to our contentElement ref
-      this.blur()
     }
   }
 
@@ -128,6 +120,12 @@ class Dialog extends Component {
 
     if (open && !prevProps.open) {
       this.focus()
+    } else if (!open && prevProps.open) {
+      this.blur()
+    }
+
+    if (this._focusRegion) {
+      this._focusRegion.updateElement(this.contentElement)
     }
   }
 
@@ -147,29 +145,37 @@ class Dialog extends Component {
       ...options
     } = this.props
 
+    if (!open || !this.contentElement) {
+      warning(false, '[Dialog] Can\'t focus a Dialog that isn\'t open.')
+    }
+
     this._raf.push(requestAnimationFrame(() => {
-      FocusRegionManager.focusRegion(this.contentElement, {
+      this._focusRegion = FocusRegionManager.focusRegion(this.contentElement, {
         ...options
       })
     }))
   }
 
   blur () {
-    FocusRegionManager.blurRegion(this.contentElement)
-  }
-
-  get focused () {
-    return FocusRegionManager.isFocused(this.contentElement)
+    if (this._focusRegion) {
+      FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
+    }
   }
 
   get contentElement () {
     let contentElement = findDOMNode(this.props.contentElement)
 
     if (!contentElement) {
-      contentElement = this._root
+      contentElement = findDOMNode(this._root)
     }
 
     return contentElement
+  }
+
+  get focused () {
+    return this.contentElement &&
+      this._focusRegion &&
+      FocusRegionManager.isFocused(this.contentElement, this._focusRegion.id)
   }
 
   render () {

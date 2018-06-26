@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-
 /**
  * ---
  * category: utilities/a11y
@@ -38,8 +36,8 @@ export default class ScreenReaderFocusRegion {
     shouldContainFocus: true,
     liveRegion: []
   }) {
-    this._liveRegion = Array.isArray(options.liveRegion) ? options.liveRegion : [findDOMNode(options.liveRegion)]
-    this._contextElement = findDOMNode(element)
+    this._liveRegion = Array.isArray(options.liveRegion) ? options.liveRegion : [options.liveRegion]
+    this._contextElement = element
     this._options = options
   }
 
@@ -47,6 +45,10 @@ export default class ScreenReaderFocusRegion {
   _attributes = []
   _nodes = []
   _parents = []
+
+  updateElement (element) {
+    this._contextElement = element
+  }
 
   muteNode (node) {
     if (node) {

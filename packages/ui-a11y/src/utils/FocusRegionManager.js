@@ -48,6 +48,7 @@ export default class FocusRegionManager {
     region.focus()
 
     const entry = {
+      id: region.id,
       element,
       region,
       children: [],
@@ -67,8 +68,13 @@ export default class FocusRegionManager {
     return ENTRIES.find(({ region }) => region.focused)
   }
 
-  static removeEntry = (element) => {
-    const index = ENTRIES.findIndex((entry) => entry.element === element)
+  static removeEntry = (element, id) => {
+    let index
+    if (id) {
+      index = ENTRIES.findIndex((entry) => entry.id === id)
+    } else {
+      index = ENTRIES.findIndex((entry) => entry.element === element)
+    }
     const entry = ENTRIES[index]
 
     if (index > -1) {
@@ -78,17 +84,21 @@ export default class FocusRegionManager {
     return entry
   }
 
-  static isFocused = (element) => {
+  static isFocused = (element, id) => {
     const entry = FocusRegionManager.getActiveEntry()
-    return entry && entry.region && entry.region.element === element
+    if (id) {
+      return entry && entry.region && entry.id === id
+    } else {
+      return entry && entry.region && entry.element === element
+    }
   }
 
   static clearEntries = () => {
     ENTRIES = []
   }
 
-  static blurRegion = (element) => {
-    const entry = FocusRegionManager.removeEntry(element)
+  static blurRegion = (element, id) => {
+    const entry = FocusRegionManager.removeEntry(element, id)
 
     if (entry) {
       const { children, region, parent } = entry
@@ -98,8 +108,8 @@ export default class FocusRegionManager {
 
       // and any regions created from it
       if (children) {
-        children.forEach(({ element }) => {
-          const entry = FocusRegionManager.removeEntry(element)
+        children.forEach(({ id, element }) => {
+          const entry = FocusRegionManager.removeEntry(element, id)
           entry && entry.region && entry.region.teardown()
         })
       }

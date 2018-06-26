@@ -23,8 +23,8 @@
  */
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
+import uid from '@instructure/ui-utils/lib/uid'
 
 import ScreenReaderFocusRegion from './ScreenReaderFocusRegion'
 import KeyboardFocusRegion from './KeyboardFocusRegion'
@@ -45,15 +45,26 @@ export default class FocusRegion {
       shouldCloseOnDocumentClick: true,
       onDismiss: (event) => {}
     }
-    this._contextElement = findDOMNode(element)
+    this._contextElement = element
     this._screenReaderFocusRegion = new ScreenReaderFocusRegion(element, options)
     this._keyboardFocusRegion = new KeyboardFocusRegion(element, options)
+    this._id = uid()
   }
 
   _contextElement = null
   _preventCloseOnDocumentClick = false
   _listeners = []
   _setup = false
+
+  updateElement (element) {
+    this._contextElement = element
+    if (this._keyboardFocusRegion) {
+      this._keyboardFocusRegion.updateElement(element)
+    }
+    if (this._screenReaderFocusRegion) {
+      this._screenReaderFocusRegion.updateElement(element)
+    }
+  }
 
   handleDismiss = (event, documentClick) => {
     this._options.onDismiss(event, documentClick)
@@ -70,6 +81,10 @@ export default class FocusRegion {
         !event.defaultPrevented) {
       this.handleDismiss(event, true)
     }
+  }
+
+  get id () {
+    return this._id
   }
 
   get focused () {
