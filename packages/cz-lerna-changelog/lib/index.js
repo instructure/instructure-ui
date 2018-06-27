@@ -87,17 +87,17 @@ function makePrompter() {
         const {
           scope,
           body,
-          testplan,
-          footer
+          footer,
+          ...rest
         } = answers
 
+        const testplan = (answers.testplan) ? `\nTEST PLAN:\n${answers.testplan}\n\n` : ''
+        const issues = (footer) ? `\n\nrefs: ${footer}\n\n` : ''
+
         const message = buildCommit({
-          ...answers,
-          body: (testplan) ? body + `\nTEST PLAN:\n${testplan}\n` : body,
-          scope: (scope && scope.length > 0) ? scope.join(',') : '*',
-          footer: (footer) ? footer + '\n\n' : ''
-        }, {
-          footerPrefix: 'refs:'
+          ...rest,
+          body: issues + body + testplan,
+          scope: (scope && scope.length > 0) ? scope.join(',') : '*'
         })
 
         commitAnalyzer({}, {
