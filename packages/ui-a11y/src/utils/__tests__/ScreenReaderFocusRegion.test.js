@@ -39,7 +39,7 @@ describe('ScreenReaderFocusRegion', () => {
       </div>
       <div data-test-parent aria-hidden="true" id="test-parent2">
         <div data-test-child></div>
-        <div role="region" aria-label="some content" data-test-parent id="test-parent1">
+        <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
           <div data-test-content>
             <div>Hello world</div>
             <button>click me</button>

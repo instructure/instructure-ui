@@ -4,6 +4,7 @@
   z-index: var(--zIndex);
   overflow-y: auto;
   overflow-x: hidden;
+  box-sizing: content-box;
 }
 
 .shadow {
@@ -38,29 +39,4 @@
 .placement--end {
   top: 0;
   bottom: 0;
-}
-
-.slide-start,
-.slide-end {
-  transition: transform var(--duration);
-}
-
-.slide-start--entering,
-.slide-end--entering {
-  transform: translate3d(0, 0, 0);
-}
-
-.slide-start--entered,
-.slide-end--entered {
-  transform: translate3d(0, 0, 0);
-}
-
-.slide-start--exited,
-.slide-start--exiting {
-  transform: translate3d(-100%, 0, 0);
-}
-
-.slide-end--exited,
-.slide-end--exiting {
-  transform: translate3d(100%, 0, 0);
 }

@@ -37,10 +37,8 @@ exports.setupGit = async function setupGit () {
    GIT_REMOTE_NAME
   } = process.env
 
-  let config
-
   try {
-    config = await runCommandAsync(`git config --list`)
+    await runCommandAsync(`git config --list`)
 
     if (!await runCommandAsync(`git remote | grep ${GIT_REMOTE_NAME}`)) {
       await runCommandAsync(`git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL}`)
@@ -59,7 +57,7 @@ exports.setupGit = async function setupGit () {
 
     await runCommandAsync(`git config push.default simple`)
 
-    config = await runCommandAsync(`git config --list`)
+    await runCommandAsync(`git config --list`)
   } catch (e) {
     error(e)
     process.exit(1)

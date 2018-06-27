@@ -27,6 +27,7 @@ import Button from '@instructure/ui-buttons/lib/components/Button'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Tray from '../index'
+import styles from '../styles.css'
 
 describe('<Tray />', () => {
   const testbed = new Testbed(
@@ -34,16 +35,38 @@ describe('<Tray />', () => {
   )
 
   it('should render nothing and have a node with no parent when closed', () => {
-    const subject = testbed.render()
-    const node = subject.find(Portal).unwrap().node
-    expect(node).to.equal(undefined) // eslint-disable-line no-undefined
+    testbed.render()
+    expect(document.querySelector('[aria-label="Tray Example"]'))
+      .to.equal(null)
   })
 
   it('should render children and have a node with a parent when open', () => {
-    const subject = testbed.render({ open: true })
-    const portal = subject.find(Portal).unwrap()
-    expect(portal.node.parentNode).to.equal(document.body)
+    testbed.render({ open: true })
+    testbed.tick()
+    testbed.tick()
+    expect(document.querySelector('[aria-label="Tray Example"]'))
+      .to.exist
   })
+
+  it('should apply theme overrides when open', () => {
+    testbed.render({
+      open: true,
+      size: 'small',
+      theme: {
+        smallWidth: '10em'
+      },
+      children: [
+        <div key="body">Hello</div>
+      ],
+      placement: 'start'
+    })
+
+    testbed.tick()
+
+    expect(window.getComputedStyle(document.querySelector(`.${styles.root}`)).width)
+      .to.equal('160px')
+  })
+
 
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true })
@@ -52,7 +75,7 @@ describe('<Tray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(portal.node.querySelector('[role="region"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist
     expect(portal.node.querySelector('[aria-label="Tray Example"]')).to.exist
   })
 
@@ -62,6 +85,8 @@ describe('<Tray />', () => {
       open: true,
       onOpen
     })
+
+    testbed.tick() // wait for animation
     testbed.tick() // wait for animation
 
     expect(onOpen).to.have.been.called
@@ -124,10 +149,10 @@ describe('<Tray />', () => {
     const placements = {
       ltr: {
         enteringPlacements: {
-          start: 'slide-right',
-          end: 'slide-left',
-          top: 'slide-down',
-          bottom: 'slide-up'
+          start: 'slide-left',
+          end: 'slide-right',
+          top: 'slide-up',
+          bottom: 'slide-down'
         },
         exitingPlacements: {
           start: 'slide-left',
@@ -138,8 +163,8 @@ describe('<Tray />', () => {
       },
       rtl: {
         enteringPlacements: {
-          start: 'slide-left',
-          end: 'slide-right'
+          start: 'slide-right',
+          end: 'slide-left'
         },
         exitingPlacements: {
           start: 'slide-right',
@@ -149,11 +174,11 @@ describe('<Tray />', () => {
     }
 
     for (const dir in placements) {
-      describe(`dir=${dir}`, () => {
+      describe(`when text direction is '${dir}'`, () => {
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].enteringPlacements) {
           const val = placements[dir].enteringPlacements[placement]
-          it(`returns ${val}`, () => {
+          it(`returns ${val} for ${placement} when entering`, () => {
             testbed.setTextDirection(dir)
 
             const subject = testbed.render({
@@ -167,7 +192,7 @@ describe('<Tray />', () => {
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
-          it(`returns ${val}`, () => {
+          it(`returns ${val} for ${placement} when exiting`, () => {
             testbed.setTextDirection(dir)
 
             const subject = testbed.render({
@@ -216,6 +241,7 @@ describe('<Tray /> managed focus', () => {
     })
 
     testbed.tick()
+    testbed.tick()
 
     expect(closeButton === document.activeElement).to.be.true
   })
@@ -229,6 +255,7 @@ describe('<Tray /> managed focus', () => {
     })
 
     testbed.tick()
+    testbed.tick()
 
     expect(document.getElementById('input-one') === document.activeElement).to.be.true
   })
@@ -241,6 +268,7 @@ describe('<Tray /> managed focus', () => {
       onDismiss
     })
 
+    testbed.tick()
     testbed.tick()
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')

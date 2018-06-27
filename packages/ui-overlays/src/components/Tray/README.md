@@ -13,6 +13,7 @@ or `end` and defines the width of the Tray.
 render: false
 example: true
 ---
+const FPO = lorem.paragraph()
 class Example extends React.Component {
   constructor (props) {
     super(props)
@@ -94,7 +95,7 @@ class Example extends React.Component {
           <View as="div" padding="x-large large">
             {this.renderCloseButton()}
             <Heading>Hello</Heading>
-            <Text as="p" lineHeight="double">{lorem.paragraph()}</Text>
+            <Text as="p" lineHeight="double">{FPO}</Text>
           </View>
         </Tray>
       </div>

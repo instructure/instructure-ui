@@ -1,5 +1,3 @@
-/* stylelint-disable color-no-hex, unit-blacklist, color-named, no-descending-specificity, selector-max-class */
-
 /* stylelint-disable selector-max-type */
 html,
 body {
@@ -8,7 +6,7 @@ body {
   font-family: var(--fontFamily);
   line-height: var(--lineHeight);
   font-weight: var(--fontWeight);
-  background-color: var(--backgroundColor);
+  background: var(--background);
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -16,8 +14,8 @@ body {
 
 code {
   font-family: var(--fontFamilyMonospace);
-  background-color: #eee;
-  border-radius: 3px;
+  background-color: var(--codeBackground);
+  border-radius: var(--codeBorderRadius);
   padding: 0.125em;
 }
 
@@ -50,97 +48,6 @@ table code {
   margin: 2rem auto 2rem auto;
 }
 
-.menuToggle {
-  cursor: pointer;
-  background: var(--backgroundColor);
-  padding: 0.5rem 0.7rem;
-  position: fixed;
-  font-size: 0.6rem;
-  z-index: var(--zIndex);
-}
-
-.hamburger {
-  font-size: 1rem;
-  display: block;
-  cursor: pointer;
-  position: relative;
-  padding: 0.75em 1.5em 1em 0;
-  color: transparent;
-  background: transparent;
-  border: none;
-  width: 1.5em;
-  height: 1.5em;
-  line-height: 1.5em;
-  text-indent: 1.5em;
-  box-sizing: border-box;
-
-  &:focus,
-  &:active {
-    outline: none;
-
-    .line,
-    .line::before,
-    .line::after {
-      background: var(--focusColor);
-    }
-  }
-}
-
-.hamburger .line,
-.hamburger .line::before,
-.hamburger .line::after {
-  background: var(--foregroundColor);
-  cursor: pointer;
-  border-radius: 3px;
-  height: 0.25em;
-  line-height: 0.25em;
-  width: 1.5em;
-  position: absolute;
-  display: block;
-  transition: all 300ms ease-in-out;
-}
-
-.hamburger .line::before,
-.hamburger .line::after {
-  content: "";
-}
-
-.hamburger .line::before {
-  top: -0.625em;
-}
-
-.hamburger .line::after {
-  bottom: -0.625em;
-}
-
-.show-menu {
-  .container {
-    transform: translate3d(0, 0, 0);
-    transition: transform 300ms ease;
-  }
-
-  .content {
-    margin-right: 0; /* stylelint-disable-line property-blacklist */
-  }
-
-  .hamburger .line {
-    background-color: transparent;
-  }
-
-  .hamburger .line::before,
-  .hamburger .line::after {
-    top: 0;
-  }
-
-  .hamburger .line::before {
-    transform: rotate(45deg);
-  }
-
-  .hamburger .line::after {
-    transform: rotate(-45deg);
-  }
-}
-
 .footer {
   margin-top: 3rem;
   padding: 2rem;
@@ -154,7 +61,7 @@ table code {
 }
 
 .githubLink {
-  color: black;
+  color: var(--color);
 }
 
 .docsSectionHeader {
@@ -162,4 +69,8 @@ table code {
   justify-content: flex-end;
 }
 
-/* stylelint-enable color-no-hex, unit-blacklist, color-named, no-descending-specificity, selector-max-class */
+.hamburger {
+  position: fixed;
+  z-index: var(--menuToggleZIndex);
+  padding: 0.5rem 0.7rem;
+}

@@ -23,6 +23,7 @@
  */
 export default function ({ transitions }) {
   return {
-    duration: transitions.duration
+    duration: transitions.duration,
+    timing: transitions.timing
   }
 }

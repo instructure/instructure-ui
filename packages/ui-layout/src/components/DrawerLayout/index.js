@@ -30,7 +30,9 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import px from '@instructure/ui-utils/lib/px'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import { mirrorHorizontalPlacement } from '../../utils/mirrorPlacement'
 import DrawerContent from './DrawerContent'
@@ -67,43 +69,32 @@ class DrawerLayout extends Component {
   static defaultProps = {
     children: null,
     minWidth: '30rem',
-    onOverlayTrayChange: (overlayTray) => {}
+    onOverlayTrayChange: (shouldOverlayTray) => {}
   }
 
   static childContextTypes = {
-    overlay: PropTypes.bool
+    shouldOverlayTray: PropTypes.bool
   }
 
   state = {
-    overlayTray: false,
-    transitioning: false
+    shouldOverlayTray: false,
+    trayWidth: 0,
+    contentWidth: 0
   }
 
   _content = null
-  _trayWidth = 0
-  _contentWidth = 0
-  _transitionContent = true
-  _updatingLayout = false
-  _unappliedLayoutChanges = false
 
-  getChildContext() {
+  getChildContext () {
     return {
-      overlay: this.state.overlayTray && this._transitionContent
-    }
-  }
-
-  componentWillMount () {
-    // When the tray is open initially, we need to prevent
-    // the content transition, otherwise it moves on page load
-    if (this.trayProps.open) {
-      this._transitionContent = false
+      shouldOverlayTray: this.state.shouldOverlayTray
     }
   }
 
   get trayProps () {
-    return Children.toArray(this.props.children).filter(
+    const tray = Children.toArray(this.props.children).filter(
       (child) => matchComponentTypes(child, [DrawerTray])
-    )[0].props
+    )[0]
+    return tray.props
   }
 
   get trayPlacement () {
@@ -112,118 +103,164 @@ class DrawerLayout extends Component {
   }
 
   get contentMargin () {
-    if (this.state.overlayTray) {
-      return 0
-    }
-    return this._trayWidth
+    const trayWidth = this.state.trayWidth || 0
+    return (this.state.shouldOverlayTray) ? 0 : trayWidth
   }
 
-  get minWidth () {
-    return px(this.props.minWidth, this._content)
-  }
+  get contentStyle () {
+    const shouldOverlayTray = this.shouldOverlayTray(
+      this.props.minWidth,
+      this.state.trayWidth,
+      this.state.contentWidth,
+      this.state.shouldOverlayTray
+    )
+    let marginLeft = 0
+    let marginRight = 0
 
-  handleContentSizeChange = (size) => {
-    this._contentWidth = size.width
-    if (!this.state.transitioning) {
-      this.updateLayout()
-    }
-  }
-
-  handleTraySizeChange = (size) => {
-    this._trayWidth = size.width
-    if (this._transitionContent) {
-      this._contentWidth = this._contentWidth - this._trayWidth
-    }
-    this.updateLayout()
-  }
-
-  handleTrayTransitionBegin = () => {
-    this.setState({ transitioning: true })
-  }
-
-  handleTrayTransitionEnd = () => {
-    // We only prevent content transition for the first transition cycle
-    // when the tray is open initially
-    if (!this._transitionContent) {
-      this._transitionContent = true
-    }
-
-    this.setState({ transitioning: false })
-  }
-
-  updateLayout = () => {
-    // We setState when overlayTray is configured to true or false.
-    // If we're currently making a setState call when a new layout
-    // update comes in, we wait until setState is finished
-    if (this._updatingLayout) {
-      this._unappliedLayoutChanges = true
-      return
-    }
-
-    const contentWidth = this._contentWidth
-    const trayWidth = this._trayWidth
-
-    if (this.state.overlayTray) {
-      // Take the tray width into account if we're collapsed. We need room such
-      // that the difference between the content width and the overlayed tray
-      // is greater than the designated min width
-      if (contentWidth - trayWidth > this.minWidth) {
-        this.applyLayoutChanges(false)
+    if (!shouldOverlayTray) {
+      if (this.trayPlacement === 'start') {
+        marginLeft = this.contentMargin
       }
+
+      if (this.trayPlacement === 'end') {
+        marginRight = this.contentMargin
+      }
+    }
+
+    return {
+      marginLeft: `${marginLeft}px`,
+      marginRight: `${marginRight}px`
+    }
+  }
+
+  handleContentRef = (el) => {
+    this._content = el
+  }
+
+  handleTrayContentRef = (el) => {
+    this._tray = el
+  }
+
+  shouldOverlayTray (minWidth, trayWidth, contentWidth, trayIsOverlayed) {
+    if (!this._content) return false
+
+    const minWidthPx = px(minWidth, this._content)
+
+    if (trayIsOverlayed) {
+      return (contentWidth - trayWidth) < minWidthPx
     } else {
-      if (contentWidth <= this.minWidth) {
-        this.applyLayoutChanges(true)
-      }
+      return contentWidth < minWidthPx
     }
   }
 
-  applyLayoutChanges = (overlayTray) => {
-    const { onOverlayTrayChange } = this.props
+  getNextState (minWidth, trayWidth, contentWidth, trayIsOverlayed) {
+    const shouldOverlayTray = this.shouldOverlayTray(
+      minWidth,
+      trayWidth,
+      contentWidth,
+      trayIsOverlayed
+    )
 
-    if (typeof onOverlayTrayChange === 'function') {
-      onOverlayTrayChange(overlayTray)
+    return {
+      trayWidth,
+      contentWidth,
+      shouldOverlayTray
     }
+  }
 
-    this._updatingLayout = true
-    this.setState({ overlayTray }, () => {
-      this._updatingLayout = false
+  notifyOverlayTrayChange (shouldOverlayTray) {
+    const { onOverlayTrayChange } = this.props
+    if (typeof onOverlayTrayChange === 'function') {
+      onOverlayTrayChange(shouldOverlayTray)
+    }
+  }
 
-      if (this._unappliedLayoutChanges) {
-        this._unappliedLayoutChanges = false
-        this.updateLayout()
+  handleContentSizeChange = ({ width }) => {
+    this.setState((state, props) => {
+      const nextState = this.getNextState(
+        props.minWidth,
+        state.trayWidth,
+        width,
+        state.shouldOverlayTray
+      )
+
+      if (state.shouldOverlayTray !== nextState.shouldOverlayTray) {
+        this.notifyOverlayTrayChange(nextState.shouldOverlayTray)
       }
+
+      return nextState
     })
   }
 
-  renderChildren () {
-    const { children, minWidth } = this.props
+  handleTraySizeChange = ({ width }) => {
+    this.setState((state, props) => {
+      const nextState = this.getNextState(
+        props.minWidth,
+        width,
+        state.contentWidth,
+        true
+      )
 
-    return Children.map(children, (child, index) => {
+      if (state.shouldOverlayTray !== nextState.shouldOverlayTray) {
+        this.notifyOverlayTrayChange(nextState.shouldOverlayTray)
+      }
+
+      return nextState
+    })
+  }
+
+  handleTrayTransitionEnter = () => {
+    let width = 0
+
+    if (this._tray) {
+      width = getBoundingClientRect(this._tray).width
+    }
+
+    this.handleTraySizeChange({ width })
+  }
+
+  handleTrayTransitionExit = () => {
+    this.handleTraySizeChange({ width: 0 })
+  }
+
+  renderChildren () {
+    let trayCount = 0
+    let contentCount = 0
+
+    const shouldOverlayTray = this.shouldOverlayTray(
+      this.props.minWidth,
+      this.state.trayWidth,
+      this.state.contentWidth,
+      this.state.shouldOverlayTray
+    )
+
+    const children = Children.map(this.props.children, (child, index) => {
       if (matchComponentTypes(child, [DrawerTray])) {
+        trayCount++
         return safeCloneElement(child, {
           key: child.props.label,
-          onSizeChange: this.handleTraySizeChange,
-          onEnter: this.handleTrayTransitionBegin,
-          onEntered: this.handleTrayTransitionEnd,
-          onExit: this.handleTrayTransitionBegin,
-          onExited: this.handleTrayTransitionEnd
+          contentRef: this.handleTrayContentRef,
+          onEnter: this.handleTrayTransitionEnter,
+          onExit: this.handleTrayTransitionExit
         })
       } else if (matchComponentTypes(child, [DrawerContent])) {
-        return safeCloneElement(child, {
+        contentCount++
+        return (this.state.trayWidth !== null) ? safeCloneElement(child, {
           key: child.props.label,
-          style: {
-            marginLeft: `${this.trayPlacement === 'start' ? this.contentMargin : 0}px`,
-            marginRight: `${this.trayPlacement === 'end' ? this.contentMargin : 0}px`,
-            minWidth: minWidth
-          },
-          transition: this._transitionContent,
+          style: this.contentStyle,
           onSizeChange: this.handleContentSizeChange,
-          contentRef: (node) => { this._content = node }
-        })
+          contentRef: this.handleContentRef,
+          shouldTransition: !shouldOverlayTray
+        }) : null
       } else {
         return child
       }
     })
+
+    warning((trayCount <= 1), `[DrawerLayout] Only one DrawerTray per DrawerLayout is supported.`)
+    warning((contentCount <= 1), `[DrawerLayout] Only one DrawerContent per DrawerLayout is supported.`)
+
+    return children
   }
 
   render () {

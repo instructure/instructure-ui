@@ -60,7 +60,7 @@ describe('<Modal />', () => {
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true })
     const portal = subject.find(Portal).unwrap()
-    expect(portal.node.querySelector('[role="region"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist
     expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist
   })
 

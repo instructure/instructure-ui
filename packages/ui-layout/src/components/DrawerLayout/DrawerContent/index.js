@@ -48,10 +48,6 @@ class DrawerContent extends Component {
      * Callback fired whenever the `<DrawerContent />` changes size
      */
     onSizeChange: PropTypes.func,
-    /**
-     * Should the `<DrawerContent />` transition
-     */
-    transition: PropTypes.bool,
     role: PropTypes.string
   }
 
@@ -59,11 +55,17 @@ class DrawerContent extends Component {
     children: null,
     contentRef: (node) => {},
     onSizeChange: (size) => {},
-    transition: true,
     role: 'region'
   }
 
+  state = {
+    shouldTransition: false
+  }
+
   _content = null
+  _resizeListener = null
+  _debounced = null
+  _timeouts = []
 
   componentDidMount () {
     const rect = getBoundingClientRect(this._content)
@@ -74,6 +76,14 @@ class DrawerContent extends Component {
     this._resizeListener = addResizeListener(this._content, this._debounced)
   }
 
+  componentDidUpdate () {
+    this._timeouts.push(setTimeout(() => {
+      this.setState({
+        shouldTransition: true
+      })
+    }))
+  }
+
   componentWillUnmount () {
     if (this._resizeListener) {
       this._resizeListener.remove()
@@ -82,6 +92,10 @@ class DrawerContent extends Component {
     if (this._debounced) {
       this._debounced.cancel()
     }
+
+    this._timeouts.forEach((timeout) => {
+      clearTimeout(timeout)
+    })
   }
 
   handleContentRef = (node) => {
@@ -94,11 +108,9 @@ class DrawerContent extends Component {
   render () {
     const {
       style, // eslint-disable-line react/prop-types
-      transition,
       label,
       role
     } = this.props
-
     return (
       <div
         role={role}
@@ -107,7 +119,7 @@ class DrawerContent extends Component {
         aria-label={label}
         className={classnames({
           [styles.root]: true,
-          [styles.transition]: transition
+          [styles.transition]: this.state.shouldTransition
         })}
       >
         {this.props.children}

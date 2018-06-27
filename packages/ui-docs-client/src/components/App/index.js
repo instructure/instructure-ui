@@ -30,18 +30,16 @@ import GithubCorner from 'react-github-corner'
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import View from '@instructure/ui-layout/lib/components/View'
 import DrawerLayout, { DrawerTray, DrawerContent } from '@instructure/ui-layout/lib/components/DrawerLayout'
-
+import Mask from '@instructure/ui-overlays/lib/components/Mask'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Pill from '@instructure/ui-elements/lib/components/Pill'
 
 import IconHeart from '@instructure/ui-icons/lib/Solid/IconHeart'
 import IconGithub from '@instructure/ui-icons/lib/Solid/IconGithub'
 
-import classnames from 'classnames'
 import Document from '../Document'
 import Header from '../Header'
 import Nav from '../Nav'
@@ -49,7 +47,7 @@ import Theme from '../Theme'
 import Section from '../Section'
 import Icons from '../Icons'
 
-import Button from '../Button'
+import HamburgerButton from '../HamburgerButton'
 
 import compileMarkdown from '../../utils/compileMarkdown'
 
@@ -112,8 +110,10 @@ export default class App extends Component {
   }
 
   handleMenuToggle = () => {
-    this.setState({
-      showMenu: !this.state.showMenu
+    this.setState((state) => {
+      return {
+        showMenu: !state.showMenu
+      }
     })
   }
 
@@ -123,8 +123,8 @@ export default class App extends Component {
     })
   }
 
-  handleOverlayTrayChange = (tray) => {
-    this.setState({trayOverlay: tray})
+  handleOverlayTrayChange = (trayIsOverlayed) => {
+    this.setState({ trayOverlay: trayIsOverlayed })
   }
 
   handleTrayDismiss = (e) => {
@@ -137,14 +137,14 @@ export default class App extends Component {
     window.addEventListener('hashchange', this.updateKey, false)
   }
 
-  componentWillUnmount () {
-    window.removeEventListener('hashchange', this.updateKey, false)
-  }
-
   componentDidUpdate (prevProps, prevState) {
-    if (prevState.key !== this.state.key) {
+    if (prevState.key !== this.state.key && this._content) {
       this._content.scrollTop = 0
     }
+  }
+
+  componentWillUnmount () {
+    window.removeEventListener('hashchange', this.updateKey, false)
   }
 
   renderThemeSelect () {
@@ -307,78 +307,45 @@ export default class App extends Component {
     ) : null
   }
 
-  renderCloseButton () {
-    return (
-      <div className={styles.menuToggle}>
-        <Button
-          onClick={this.handleMenuToggle}
-          aria-controls="nav"
-          aria-expanded={this.state.showMenu ? 'true' : 'false'}
-        >
-          <span className={styles.hamburger}>
-            <span className={styles.line}>
-              <ScreenReaderContent>Toggle Navigation</ScreenReaderContent>
-            </span>
-          </span>
-        </Button>
-      </div>
-    )
-  }
-
   render () {
-    const classes = {
-      [styles.root]: true,
-      [styles['show-menu']]: this.state.showMenu
-    }
     const {
       name,
       version,
       repository
     } = this.props.library
+
     return (
-      <div className={classnames(classes)}>
+      <div className={styles.root}>
+        { this.state.trayOverlay && this.state.showMenu && <Mask onClick={this.handleMenuToggle} /> }
         <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
           <DrawerTray
             label="Navigation"
             placement="start"
             open={this.state.showMenu}
             mountNode={this.state.trayOverlay ? document.body : null}
-            render={(positioned) => {
-              let trayContent = (
-                <View as="div" width="16rem">
-                  <Header name={name} version={version} />
-                  <Nav
-                    selected={this.state.key}
-                    sections={this.props.sections}
-                    docs={this.props.docs}
-                    themes={this.props.themes}
-                    icons={this.props.icons}
-                  />
-                </View>
-              )
-
-              if (positioned && this.state.trayOverlay) {
-                trayContent = (
-                  <Dialog
-                    open
-                    shouldContainFocus
-                    shouldCloseOnDocumentClick
-                    shouldCloseOnEscape
-                    shouldReturnFocus
-                    onDismiss={this.handleTrayDismiss}
-                    role="region"
-                  >
-                    {trayContent}
-                  </Dialog>
-                )
-              }
-
-              return trayContent
-            }}
+            onDismiss={this.handleTrayDismiss}
           >
+            <View as="div" width="16rem">
+              <Header name={name} version={version} />
+              <Nav
+                selected={this.state.key}
+                sections={this.props.sections}
+                docs={this.props.docs}
+                themes={this.props.themes}
+                icons={this.props.icons}
+              />
+            </View>
           </DrawerTray>
           <DrawerContent label={this.state.key || this.props.library.name} role="main">
-            {this.renderCloseButton()}
+            <div className={styles.hamburger}>
+              <HamburgerButton
+                onClick={this.handleMenuToggle}
+                controls="nav"
+                expanded={this.state.showMenu}
+              >
+                Toggle Navigation
+              </HamburgerButton>
+            </div>
             <View
               as="div"
               padding="x-large xx-large"

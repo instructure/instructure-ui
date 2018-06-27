@@ -30,7 +30,7 @@ import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
@@ -241,7 +241,8 @@ export default class Modal extends Component {
     this._timeouts.forEach(timeout => clearTimeout(timeout))
   }
 
-  handlePortalOpen = () => {
+  handlePortalOpen = (DOMNode) => {
+    this.applyTheme(DOMNode)
     this._timeouts.push(
       setTimeout(() => {
         if (this._isMounted) {
@@ -284,12 +285,30 @@ export default class Modal extends Component {
 
   render () {
     const {
+      label,
+      closeButtonLabel,
+      children,
+      size,
+      open,
+      onOpen,
+      onClose,
+      onDismiss,
+      contentRef,
+      closeButtonRef,
+      mountNode,
+      insertAt,
+      liveRegion,
+      transition,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      defaultFocusElement,
+      shouldReturnFocus,
       shouldCloseOnDocumentClick,
       shouldCloseOnOverlayClick, // eslint-disable-line react/prop-types
-      children,
-      contentRef,
-      onDismiss,
-      size,
       ...props
     } = this.props
 
@@ -298,7 +317,7 @@ export default class Modal extends Component {
     const dialog = (
       <Dialog
         {...omitProps(props, Modal.propTypes)}
-        {...pickProps(this.props, Dialog.propTypes)}
+        onDismiss={onDismiss}
         label={this.props.label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={
@@ -308,6 +327,8 @@ export default class Modal extends Component {
         }
         shouldCloseOnEscape
         shouldContainFocus
+        shouldReturnFocus={shouldReturnFocus}
+        liveRegion={liveRegion}
         open={this.state.open}
         className={classnames({
           [styles.content]: true,
@@ -328,17 +349,23 @@ export default class Modal extends Component {
 
     return (
       <Portal
-        {...pickProps(this.props, Portal.propTypes)}
-        open={this.props.open || this.state.transitioning}
-        onOpen={createChainedFunction(this.handlePortalOpen, this.props.onOpen)}
+        mountNode={mountNode}
+        insertAt={insertAt}
+        open={open || this.state.transitioning}
+        onOpen={createChainedFunction(this.handlePortalOpen, onOpen)}
+        onClose={onClose}
       >
         <Transition
-          {...pickProps(this.props, Transition.propTypes)}
-          in={this.props.open}
+          in={open}
           transitionOnMount
           unmountOnExit
-          type={this.props.transition}
-          onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
+          type={transition}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={onEntered}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={createChainedFunction(this.handleTransitionExited, onExited)}
         >
           { size === 'fullscreen' ? (
               <span className={styles.layout}>{dialog}</span>

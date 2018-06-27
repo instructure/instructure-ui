@@ -111,14 +111,6 @@ export default class Portal extends Component {
 
     let children = props.children
 
-    // Notify that subtree has been rendered if props ask for it
-    const handleMount = () => {
-      // Only fire onOpen if Portal was closed and is now open
-      if ((isInitialMount || (!this.props.open && props.open)) && typeof props.onOpen === 'function') {
-        props.onOpen()
-      }
-    }
-
     // Wrap text in a span since subtree will only render a single top-level node
     if (typeof children === 'string' && children.length > 0) {
       children = (
@@ -142,6 +134,14 @@ export default class Portal extends Component {
           mountNode.appendChild(this._node)
         } else {
           mountNode.insertBefore(this._node, mountNode.firstChild)
+        }
+      }
+
+      // Notify that subtree has been rendered if props ask for it
+      const handleMount = () => {
+        // Only fire onOpen if Portal was closed and is now open
+        if ((isInitialMount || (!this.props.open && props.open)) && typeof props.onOpen === 'function') {
+          props.onOpen(this._node)
         }
       }
 

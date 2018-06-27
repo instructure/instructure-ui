@@ -123,11 +123,13 @@ class Dialog extends Component {
   }
 
   componentDidUpdate (prevProps) {
-    const { open } = this.props
+    const { open, shouldContainFocus } = this.props
 
-    if (open && !prevProps.open) {
+    if (open && !prevProps.open ||
+      open && shouldContainFocus && !prevProps.shouldContainFocus) {
       this.focus()
-    } else if (!open && prevProps.open) {
+    } else if (!open && prevProps.open ||
+      !open && !shouldContainFocus && prevProps.shouldContainFocus) {
       this.blur()
     }
 
@@ -193,7 +195,7 @@ class Dialog extends Component {
         ref={el => {
           this._root = el
         }}
-        role={this.props.label ? 'region' : null}
+        role={this.props.label ? 'dialog' : null}
         aria-label={this.props.label}
         className={this.props.className} // eslint-disable-line react/prop-types
       >

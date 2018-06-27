@@ -22,5 +22,6 @@
  * SOFTWARE.
  */
 export default Object.freeze({
-  duration: '300ms'
+  duration: '300ms',
+  timing: 'ease-in-out'
 })

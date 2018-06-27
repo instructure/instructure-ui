@@ -42,6 +42,21 @@ describe('<Modal />', () => {
     )
   )
 
+  it('should apply theme overrides when open', () => {
+    testbed.render({
+      open: true,
+      size: 'small',
+      theme: {
+        smallMaxWidth: '10em'
+      },
+      children: [
+        <ModalBody key="body">Foo Bar Baz</ModalBody>
+      ]
+    })
+    expect(window.getComputedStyle(document.querySelector('[aria-label="Modal Dialog"]')).width)
+      .to.equal('160px')
+  })
+
   it('should render nothing and have a node with no parent when closed', () => {
     const subject = testbed.render()
     const node = subject.find(Portal).unwrap().node
@@ -61,7 +76,7 @@ describe('<Modal />', () => {
     const subject = testbed.render({ open: true })
     const portal = subject.find(Portal).unwrap()
 
-    expect(portal.node.querySelector('[role="region"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist
     expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist
   })
 

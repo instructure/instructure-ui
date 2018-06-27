@@ -74,6 +74,10 @@ export default class Transition extends Component {
      */
     transitionExit: PropTypes.bool,
     /**
+     * Callback fired when transitioning to the next state
+     */
+    onTransition: PropTypes.func,
+    /**
      * Callback fired before the "entering" classes are applied
      */
     onEnter: PropTypes.func,
@@ -112,8 +116,11 @@ export default class Transition extends Component {
     onEntered: function () {},
     onExit: function () {},
     onExiting: function () {},
-    onExited: function () {}
+    onExited: function () {},
+    onTransition: function (toState, fromState) {}
   }
+
+  static states = BaseTransition.states
 
   render () {
     const {
@@ -124,19 +131,26 @@ export default class Transition extends Component {
 
     const duration = ms(this.theme.duration)
 
-    return type ? (
+    const classNames = type ? {
+      'exited': styles[`${type}--exited`],
+      'exiting': styles[`${type}--exiting`],
+      'entering': styles[`${type}--entered`],
+      'entered': styles[`${type}--entering`]
+    } : {}
+
+    return (
       <BaseTransition
         {...props}
         enterDelay={duration}
         exitDelay={duration}
         transitionClassName={styles[type]}
-        exitedClassName={styles[`${type}--exited`]}
-        exitingClassName={styles[`${type}--exiting`]}
-        enteredClassName={styles[`${type}--entered`]}
-        enteringClassName={styles[`${type}--entering`]}
+        exitedClassName={classNames.exited}
+        exitingClassName={classNames.exiting}
+        enteredClassName={classNames.entering}
+        enteringClassName={classNames.entered}
       >
         {children}
       </BaseTransition>
-    ) : children
+    )
   }
 }

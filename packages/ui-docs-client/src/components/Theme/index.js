@@ -57,14 +57,9 @@ export default class Theme extends Component {
   }
 
   renderRows (section) {
-    const rows = []
-
-    for (const name in section) {
-      const value = section[name]
-      rows.push(this.renderVariable(name, value))
-    }
-
-    return rows
+    return Object.keys(section).map((name) => {
+      return this.renderVariable(name, section[name])
+    })
   }
 
   renderSection (name, content) {

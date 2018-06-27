@@ -31,6 +31,7 @@
     "react-dom": "15.6.2"
   },
   "dependencies": {
+    "@instructure/ui-a11y": "^5.15.0",
     "@instructure/ui-i18n": "^5.15.0",
     "@instructure/ui-motion": "^5.15.0",
     "@instructure/ui-portal": "^5.15.0",

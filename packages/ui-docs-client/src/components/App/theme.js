@@ -22,17 +22,16 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, stacking }) {
+export default function ({ colors, typography, stacking, transitions, borders }) {
   return {
-    foregroundColor: colors.backgroundDarkest,
-    backgroundColor: colors.backgroundLightest,
-    focusColor: '#0084D1',
-    borderColor: '#c7cdd1',
+    background: colors.backgroundLightest,
     color: colors.textDarkest,
     fontFamily: typography.fontFamily,
     fontFamilyMonospace: typography.fontFamilyMonospace,
     lineHeight: typography.lineHeight,
     fontWeight: typography.fontWeightNormal,
-    zIndex: stacking.topmost
+    codeBorderRadius: borders.radiusSmall,
+    codeBackground: '#eee',
+    menuToggleZIndex: stacking.above,
   }
 }

@@ -34,15 +34,17 @@ describe('<Tray />', () => {
   )
 
   it('should render nothing and have a node with no parent when closed', () => {
-    const subject = testbed.render()
-    const node = subject.find(Portal).unwrap().node
-    expect(node).to.equal(undefined) // eslint-disable-line no-undefined
+    testbed.render()
+    expect(document.querySelector('[aria-label="Tray Example"]'))
+      .to.equal(null)
   })
 
   it('should render children and have a node with a parent when open', () => {
-    const subject = testbed.render({ open: true })
-    const portal = subject.find(Portal).unwrap()
-    expect(portal.node.parentNode).to.equal(document.body)
+    testbed.render({ open: true })
+    testbed.tick()
+    testbed.tick()
+    expect(document.querySelector('[aria-label="Tray Example"]'))
+      .to.exist
   })
 
   it('should apply the a11y attributes', () => {
@@ -52,7 +54,7 @@ describe('<Tray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(portal.node.querySelector('[role="region"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist
     expect(portal.node.querySelector('[aria-label="Tray Example"]')).to.exist
   })
 
@@ -62,6 +64,8 @@ describe('<Tray />', () => {
       open: true,
       onOpen
     })
+
+    testbed.tick() // wait for animation
     testbed.tick() // wait for animation
 
     expect(onOpen).to.have.been.called
@@ -120,39 +124,63 @@ describe('<Tray />', () => {
   })
 
   describe('transition()', () => {
-    const enteringPlacements = {
-      start: 'slide-right',
-      end: 'slide-left',
-      top: 'slide-down',
-      bottom: 'slide-up'
+
+    const placements = {
+      ltr: {
+        enteringPlacements: {
+          start: 'slide-left',
+          end: 'slide-right',
+          top: 'slide-up',
+          bottom: 'slide-down'
+        },
+        exitingPlacements: {
+          start: 'slide-left',
+          end: 'slide-right',
+          top: 'slide-up',
+          bottom: 'slide-down'
+        }
+      },
+      rtl: {
+        enteringPlacements: {
+          start: 'slide-right',
+          end: 'slide-left'
+        },
+        exitingPlacements: {
+          start: 'slide-right',
+          end: 'slide-left'
+        }
+      }
     }
 
-    const exitingPlacements = {
-      start: 'slide-left',
-      end: 'slide-right',
-      top: 'slide-up',
-      bottom: 'slide-down'
-    }
+    for (const dir in placements) {
+      describe(`when text direction is '${dir}'`, () => {
+        // eslint-disable-next-line no-restricted-syntax
+        for (const placement in placements[dir].enteringPlacements) {
+          const val = placements[dir].enteringPlacements[placement]
+          it(`returns ${val} for ${placement} when entering`, () => {
+            testbed.setTextDirection(dir)
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const placement in enteringPlacements) {
-      it(`returns ${enteringPlacements[placement]}`, () => {
-        const subject = testbed.render({
-          open: true,
-          placement: placement
-        })
-        expect(subject.instance().transition).to.equal(enteringPlacements[placement])
-      })
-    }
+            const subject = testbed.render({
+              open: true,
+              placement: placement
+            })
+            expect(subject.instance().transition).to.equal(val)
+          })
+        }
 
-    // eslint-disable-next-line no-restricted-syntax
-    for (const placement in exitingPlacements) {
-      it(`returns ${exitingPlacements[placement]}`, () => {
-        const subject = testbed.render({
-          open: false,
-          placement: placement
-        })
-        expect(subject.instance().transition).to.equal(exitingPlacements[placement])
+        // eslint-disable-next-line no-restricted-syntax
+        for (const placement in placements[dir].exitingPlacements) {
+          const val = placements[dir].exitingPlacements[placement]
+          it(`returns ${val} for ${placement} when exiting`, () => {
+            testbed.setTextDirection(dir)
+
+            const subject = testbed.render({
+              open: false,
+              placement: placement
+            })
+            expect(subject.instance().transition).to.equal(val)
+          })
+        }
       })
     }
   })
@@ -192,6 +220,7 @@ describe('<Tray /> managed focus', () => {
     })
 
     testbed.tick()
+    testbed.tick()
 
     expect(closeButton === document.activeElement).to.be.true
   })
@@ -205,6 +234,7 @@ describe('<Tray /> managed focus', () => {
     })
 
     testbed.tick()
+    testbed.tick()
 
     expect(document.getElementById('input-one') === document.activeElement).to.be.true
   })
@@ -217,6 +247,7 @@ describe('<Tray /> managed focus', () => {
       onDismiss
     })
 
+    testbed.tick()
     testbed.tick()
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')

@@ -28,16 +28,16 @@ import classnames from 'classnames'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import themeable from '@instructure/ui-themeable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
@@ -82,7 +82,7 @@ class Tray extends Component {
     size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
 
     /**
-    * Placment to determine where the `<Tray />` should display in the viewport
+    * Placement to determine where the `<Tray />` should display in the viewport
     */
     placement: PropTypes.oneOf(['top', 'bottom', 'start', 'end']),
 
@@ -155,6 +155,10 @@ class Tray extends Component {
     liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
 
     /**
+     * Callback fired when the <Tray /> transitions in/out
+     */
+    onTransition: PropTypes.func,
+    /**
      * Callback fired before the <Tray /> transitions in
      */
     onEnter: PropTypes.func,
@@ -218,131 +222,161 @@ class Tray extends Component {
     children: null
   }
 
-  constructor (props) {
-    super(props)
+  state = {
+    transitioning: false
+  }
 
-    this.state = {
-      portalOpen: false,
-      transitioning: false,
-      dir: 'ltr'
+  componentDidUpdate (prevProps) {
+    if (this.props.open !== prevProps.open) {
+      this.setState({ transitioning: true })
     }
   }
 
-  _raf = []
-
-  componentDidMount () {
-    this._isMounted = true
+  get placement () {
+    const { placement } = this.props
+    return this.rtl ? mirrorHorizontalPlacement(placement, ' ') : placement
   }
 
-  componentWillReceiveProps (nextProps) {
-    if (this.props.open && !nextProps.open) {
-      // closing
-      this.setState({
-        transitioning: true
-      })
+  get direction () {
+    switch (this.placement) {
+      case 'top':
+        return 'up'
+      case 'bottom':
+        return 'down'
+      case 'end':
+        return 'right'
+      default: // start
+        return 'left'
     }
-  }
-
-  componentWillUnmount () {
-    this._raf.forEach(request => request.cancel())
-    this._raf = []
   }
 
   get transition () {
-    const { placement, open } = this.props
-
-    return classnames({
-      'slide-down':
-        (placement === 'top' && open) || (placement === 'bottom' && !open),
-      'slide-up':
-        (placement === 'bottom' && open) || (placement === 'top' && !open),
-      [`slide-${this.dir === 'rtl' ? 'right' : 'left'}`]:
-        (placement === 'start' && !open) || (placement === 'end' && open),
-      [`slide-${this.dir === 'rtl' ? 'left' : 'right'}`]:
-        (placement === 'end' && !open) || (placement === 'start' && open)
-    })
+    return `slide-${this.direction}`
   }
 
   get defaultFocusElement () {
     return this.props.defaultFocusElement || (() => this._closeButton)
   }
 
-  handlePortalOpen = () => {
-    this._raf.push(requestAnimationFrame(() => {
-      this.setState({ portalOpen: true })
-    }))
+  handleTransitionComplete = () => {
+    this.setState({ transitioning: false })
   }
 
-  handleTransitionExited = () => {
-    this.setState({
-      transitioning: false
-    })
+  handlePortalOpen = (DOMNode) => {
+    // We apply the theme here because now we have a DOM node (provided by Portal)
+    this.applyTheme(DOMNode)
   }
 
   renderCloseButton () {
-    return this.props.closeButtonLabel
-      ? <CloseButton
+    return this.props.closeButtonLabel ? (
+      <CloseButton
         placement={this.props.placement === 'end' ? 'start' : 'end'}
         offset="x-small"
         variant={this.props.closeButtonVariant}
         buttonRef={el => {
           this._closeButton = el
           if (typeof this.props.closeButtonRef === 'function') {
-            this.props.closeButtonRef(el)
+           this.props.closeButtonRef(el)
           }
         }}
         onClick={this.props.onDismiss}
-      >
-        {this.props.closeButtonLabel}
-      </CloseButton>
-      : null
+     >
+       {this.props.closeButtonLabel}
+     </CloseButton>
+    ) : null
+  }
+
+  renderContent () {
+    return (
+      <div>
+        {this.renderCloseButton()}
+        {this.props.children}
+      </div>
+    )
   }
 
   render () {
-    const { children, contentRef, open, onOpen, ...props } = this.props
+    const {
+      label,
+      closeButtonLabel,
+      children,
+      size,
+      placement,
+      open,
+      defaultFocusElement,
+      contentRef,
+      closeButtonRef,
+      shouldContainFocus,
+      shouldReturnFocus,
+      shouldCloseOnDocumentClick,
+      onOpen,
+      onClose,
+      onDismiss,
+      mountNode,
+      insertAt,
+      liveRegion,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      onTransition,
+      closeButtonVariant,
+      border,
+      shadow,
+      ...props
+    } = this.props
 
     return (
       <Portal
-        {...pickProps(props, Portal.propTypes)}
-        open={this.props.open || this.state.transitioning}
-        onOpen={createChainedFunction(this.handlePortalOpen, onOpen)}
+        open={open || this.state.transitioning}
+        onOpen={this.handlePortalOpen}
+        insertAt={insertAt}
+        mountNode={mountNode}
       >
         <Transition
-          {...pickProps(this.props, Transition.propTypes)}
-          in={this.props.open}
-          transitionOnMount
-          transitionExit
-          unmountOnExit
+          in={open}
           type={this.transition}
-          onExited={createChainedFunction(this.handleTransitionExited, this.props.onExited)}
+          onTransition={onTransition}
+          onEnter={onEnter}
+          onEntering={onEntering}
+          onEntered={createChainedFunction(this.handleTransitionComplete, onEntered, onOpen)}
+          onExit={onExit}
+          onExiting={onExiting}
+          onExited={createChainedFunction(this.handleTransitionComplete, onExited, onClose)}
+          transitionOnMount
+          transitionEnter
+          transitionExit
         >
           <span
-            {...omitProps(this.props, Tray.propTypes)}
+            {...omitProps(props, Tray.propTypes)}
             className={classnames({
               [styles.root]: true,
-              [styles.border]: this.props.border,
-              [styles.shadow]: this.props.shadow,
-              [styles[this.props.size]]: true,
-              [styles[`placement--${this.props.placement}`]]: true,
-              [this.props.className]: this.props.className // eslint-disable-line react/prop-types
+              [styles.border]: border,
+              [styles.shadow]: shadow,
+              [styles[size]]: true,
+              [styles[`placement--${this.props.placement}`]]: true
             })}
-            ref={(el) => {
-              this._content = el
-
-              if (typeof contentRef === 'function') {
-                contentRef(el)
-              }
-            }}
+            ref={contentRef}
           >
-            <Dialog
-              {...pickProps(props, Dialog.propTypes)}
-              defaultFocusElement={this.defaultFocusElement}
-              open={this.state.portalOpen || this.state.transitioning}
-              shouldCloseOnEscape
-            >
-              {this.renderCloseButton()}
-              {children}
-            </Dialog>
+            {
+              (this.state.transitioning) ? this.renderContent() : (
+                <Dialog
+                  label={label}
+                  defaultFocusElement={this.defaultFocusElement}
+                  open
+                  shouldContainFocus={shouldContainFocus}
+                  shouldReturnFocus={shouldReturnFocus}
+                  shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+                  shouldCloseOnEscape
+                  liveRegion={liveRegion}
+                  onDismiss={onDismiss}
+                >
+                  {this.renderContent()}
+                </Dialog>
+              )
+            }
           </span>
         </Transition>
       </Portal>

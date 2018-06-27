@@ -24,21 +24,21 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-
 import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 
-export const UNMOUNTED = 0
-export const EXITED = 1
-export const ENTERING = 2
-export const ENTERED = 3
-export const EXITING = 4
+const STATES = {
+  EXITED: -2,
+  EXITING: -1,
+  ENTERING: 1,
+  ENTERED: 2
+}
 
 /**
   Note: this is forked from https://github.com/react-bootstrap/react-overlays/blob/master/src/Transition.js
   so that it works with css modules. The internals are pretty different now, but it has roughly the same api.
 **/
-export default class Transition extends React.Component {
+export default class BaseTransition extends React.Component {
   static propTypes = {
     /**
      * Show the component? Triggers the enter or exit animation.
@@ -107,6 +107,11 @@ export default class Transition extends React.Component {
     enteringClassName: PropTypes.string,
 
     /**
+     * Callback fired when transitioning to the next state
+     */
+    onTransition: PropTypes.func,
+
+    /**
      * Callback fired before the "entering" classes are applied
      */
     onEnter: PropTypes.func,
@@ -144,8 +149,8 @@ export default class Transition extends React.Component {
     transitionEnter: true,
     transitionExit: true,
 
-    enterDelay: 5000,
-    exitDelay: 5000,
+    enterDelay: 300,
+    exitDelay: 300,
 
     onEnter: function () {},
     onEntering: function () {},
@@ -153,140 +158,67 @@ export default class Transition extends React.Component {
 
     onExit: function () {},
     onExiting: function () {},
-    onExited: function () {}
+    onExited: function () {},
+    onTransition: function (toState, fromState) {}
   }
 
-  constructor (props, context) {
-    super(props, context)
+  static states = STATES
 
-    this._transitionClassName = null
+  _timeouts = []
 
-    this._timeouts = []
-
-    this.state = {
-      transitioning: false
-    }
+  state = {
+    transitioning: false
   }
 
   componentDidMount () {
-    if (this.props.in) {
-      if (this.props.transitionOnMount) {
-        this.transitionTo(EXITED, () => {
-          this.performEnter()
-        })
-      } else {
-        this.performEnter()
-      }
-    } else {
-      this.transitionTo(EXITED)
+    this.startTransition(this.props.in, this.props.transitionOnMount)
+  }
+
+  componentWillReceiveProps (nextProps, nextState) {
+    if (nextProps.in !== this.props.in && this.state.transitioning) {
+      this.clearTransition(this.props.transitionClassName)
     }
   }
 
-  componentWillReceiveProps (nextProps) {
-    if ((nextProps.in !== this.props.in) &&
-      ((nextProps.in && this.props.transitionEnter) ||
-        (!nextProps.in && this.props.transitionExit))) {
-      this.setState({ transitioning: true })
-    }
-  }
-
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     if (this.props.transitionClassName !== prevProps.transitionClassName) {
       this.clearTransition(prevProps.transitionClassName)
-      this.transitionTo(prevProps.in ? ENTERED : EXITED)
     }
 
-    if (this.props.in !== prevProps.in) {
-      if (this.props.in) {
-        this.transitionTo(EXITED, () => {
-          this.performEnter()
-        })
-      } else {
-        this.performExit()
-      }
+    if (prevProps.in !== this.props.in) {
+      this.startTransition(this.props.in, true)
     }
   }
 
   componentWillUnmount () {
-    this._unmounted = true
-
     this._timeouts.forEach((timeout) => {
       clearTimeout(timeout)
     })
-
-    this._timeouts = null
+    this._unmounted = true
   }
 
-  performEnter = () => {
-    if (this._unmounted) return
-
-    const { props } = this
-
-    props.onEnter()
-
-    if (props.transitionEnter) {
-      props.onEntering()
-
-      this.transitionTo(ENTERING, () => {
-        this.transitionTo(ENTERED, () => {
-          if (this._unmounted) return
-
-          this.setState({
-            transitioning: false
-          }, () => {
-            props.onEntered()
-          })
-        })
-      }, this.props.enterDelay)
+  startTransition = (transitionIn, transitionOnStart) => {
+    const {
+      transitionEnter,
+      transitionExit
+    } = this.props
+    if (transitionIn) {
+      this.enter((transitionEnter && transitionOnStart) ? STATES.EXITED : null)
     } else {
-      this.transitionTo(ENTERED, () => {
-        props.onEntered()
-      })
+      this.exit((transitionExit && transitionOnStart) ? STATES.ENTERED : null)
     }
   }
 
-  performExit () {
-    if (this._unmounted) return
-
-    const { props } = this
-
-    props.onExit()
-
-    if (props.transitionExit) {
-      props.onExiting()
-      this.transitionTo(EXITING, () => {
-        this.transitionTo(EXITED, () => {
-          if (this._unmounted) return
-
-          this.setState({
-            transitioning: false
-          }, () => {
-            props.onExited()
-          })
-        })
-      }, this.props.exitDelay)
-    } else {
-      this.transitionTo(EXITED, () => {
-        props.onExited()
-      })
-    }
-  }
-
-  transitionTo (transitionState, transitionCallback, transitionDuration = 0) {
+  transition = (toState, fromState, transitionCallback, transitionDuration = 0) => {
     if (this._unmounted) return
 
     const classList = getClassList(this)
-    const transitionClassName = this.getTransitionClassName(transitionState)
-    const prevTransitionClassName = this._transitionClassName
+
+    const transitionClassName = this.getTransitionClassName(toState)
+    const prevTransitionClassName = this.getTransitionClassName(fromState)
     const baseTransitionClassName = this.props.transitionClassName
 
-    this._transitionClassName = transitionClassName
-
-    if (!classList || this._timeouts === null) {
-      return
-    }
-
-    if (this.transitionEnabled(transitionState)) {
+    if (fromState && transitionDuration && this.transitionEnabled(toState)) {
       classList.add(baseTransitionClassName)
     } else {
       classList.remove(baseTransitionClassName)
@@ -300,8 +232,14 @@ export default class Transition extends React.Component {
       classList.add(transitionClassName)
     }
 
+    if (toState && fromState) {
+      this.props.onTransition(toState, fromState)
+    }
+
     this._timeouts.push(
       setTimeout(() => {
+        if (this._unmounted) return
+
         if (typeof transitionCallback === 'function') {
           transitionCallback()
         }
@@ -312,18 +250,92 @@ export default class Transition extends React.Component {
   clearTransition (transitionClassName) {
     if (this._unmounted) return
 
-    getClassList(this).remove(transitionClassName)
+    this.setState({ transitioning: false }, () => {
+      if (this._unmounted) return
+
+      const classList = getClassList(this)
+
+      Object.keys(STATES).forEach((state) => {
+        classList.remove(this.getTransitionClassName(state))
+      })
+
+      classList.remove(transitionClassName)
+    })
+  }
+
+  enter = (initialState) => {
+    if (this.state.transitioning || this._unmounted) return
+
+    const { props } = this
+    props.onEnter()
+
+    if (props.transitionEnter) {
+      this.setState({ transitioning: true }, () => {
+        const enter = () => {
+          props.onEntering()
+          this.transition(STATES.ENTERED, STATES.ENTERING, () => {
+            this.setState({ transitioning: false }, () => {
+              props.onEntered()
+            })
+          })
+        }
+        if (initialState) {
+          this.transition(initialState, null, () => {
+            this.transition(STATES.ENTERING, initialState, enter, props.enterDelay)
+          })
+        } else {
+          enter()
+        }
+      })
+    } else {
+      this.setState({ transitioning: false }, () => {
+        this.transition(STATES.ENTERED, STATES.EXITED)
+        props.onEntered()
+      })
+    }
+  }
+
+  exit = (initialState) => {
+    if (this.state.transitioning) return
+
+    const { props } = this
+    props.onExit()
+
+    if (props.transitionExit) {
+      this.setState({ transitioning: true }, () => {
+        const exit = () => {
+          props.onExiting()
+          this.transition(STATES.EXITED, STATES.EXITING, () => {
+            this.setState({ transitioning: false }, () => {
+              props.onExited()
+            })
+          })
+        }
+        if (initialState) {
+          this.transition(initialState, null, () => {
+            this.transition(STATES.EXITING, initialState, exit, props.exitDelay)
+          })
+        } else {
+          exit()
+        }
+      })
+    } else {
+      this.setState({ transitioning: false }, () => {
+        this.transition(STATES.EXITED, STATES.ENTERED)
+        props.onExited()
+      })
+    }
   }
 
   transitionEnabled (toState) {
     const { props } = this
 
     switch (toState) {
-      case EXITED:
-      case EXITING:
+      case STATES.EXITED:
+      case STATES.EXITING:
         return props.transitionExit
-      case ENTERED:
-      case ENTERING:
+      case STATES.ENTERED:
+      case STATES.ENTERING:
         return props.transitionEnter
       default:
         return false
@@ -332,15 +344,14 @@ export default class Transition extends React.Component {
 
   getTransitionClassName (transitionState) {
     const { props } = this
-
     switch (transitionState) {
-      case EXITED:
+      case STATES.EXITED:
         return props.exitedClassName
-      case ENTERING:
+      case STATES.ENTERING:
         return props.enteringClassName
-      case ENTERED:
+      case STATES.ENTERED:
         return props.enteredClassName
-      case EXITING:
+      case STATES.EXITING:
         return props.exitingClassName
       default:
         return null
@@ -348,12 +359,10 @@ export default class Transition extends React.Component {
   }
 
   render () {
-    const child = ensureSingleChild(this.props.children)
-
     if (!this.props.in && this.props.unmountOnExit && !this.state.transitioning) {
       return null
     } else {
-      return child
+      return ensureSingleChild(this.props.children)
     }
   }
 }

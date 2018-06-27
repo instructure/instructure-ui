@@ -26,7 +26,6 @@ import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import Link from '../index'
-import styles from '../styles.css'
 
 describe('<Link />', () => {
   const testbed = new Testbed(<Link>Hello World</Link>)

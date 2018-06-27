@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default function generator ({ colors, borders, stacking, shadows, transitions }) {
+
+export default function ({ colors, transitions, borders }) {
   return {
+    foreground: colors.backgroundDarkest,
     background: colors.backgroundLightest,
-    borderColor: colors.borderMedium,
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    zIndex: stacking.topmost,
-    boxShadow: shadows.depth3
+    focusColor: '#0084D1',
+    lineBorderRadius: borders.radiusSmall,
+    transitionDuration: transitions.duration,
+    transitionTiming: transitions.timing
   }
 }

@@ -43,6 +43,16 @@ export default function getClassList (element) {
   const node = findDOMNode(element)
 
   return {
+    toArray () {
+      if (node && node.classList) {
+        return [...node.classList]
+      } else if (node && node.className) {
+        return node.className.split(/[ ,]+/)
+      } else {
+        return []
+      }
+    },
+
     contains (className) {
       return node && hasClass(node, className)
     },

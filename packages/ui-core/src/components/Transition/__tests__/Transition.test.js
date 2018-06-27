@@ -32,7 +32,7 @@ describe('<Transition />', () => {
     </Transition>
   )
 
-  it('should remove component from DOM when `unmountOnExit` is set', (done) => {
+  it('should remove component from DOM when `unmountOnExit` is set', () => {
     const subject = testbed.render({
       in: true,
       unmountOnExit: true
@@ -40,24 +40,27 @@ describe('<Transition />', () => {
 
     expect(subject.getDOMNode()).to.not.equal(null)
 
-    subject.setProps({ in: false }, () => {
-      testbed.defer(() => {
-        testbed.tick() // entered -> exiting
-        testbed.tick() // exiting -> exited
-        expect(subject.getDOMNode()).to.equal(null)
-        done()
-      })
-    })
+    subject.setProps({ in: false })
+
+    testbed.tick() // entered -> exiting
+    testbed.tick() // exiting -> exited
+
+    expect(subject.getDOMNode()).to.equal(null)
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', () => {
     const onEntering = testbed.stub()
 
-    testbed.render({
-      in: true,
+    const subject = testbed.render({
+      in: false,
       transitionEnter: false,
       onEntering
     })
+
+    subject.setProps({ in: true })
+
+    testbed.tick()
+    testbed.tick()
 
     expect(onEntering).to.not.have.been.called
   })
@@ -65,11 +68,16 @@ describe('<Transition />', () => {
   it('should not execute exit transition with `transitionExit` set to false', () => {
     const onExiting = testbed.stub()
 
-    testbed.render({
+    const subject = testbed.render({
       in: true,
       transitionExit: false,
       onExiting
     })
+
+    subject.setProps({ in: false })
+
+    testbed.tick() // entered -> exiting
+    testbed.tick() // exiting -> exited
 
     expect(onExiting).to.not.have.been.called
   })
@@ -94,7 +102,7 @@ describe('<Transition />', () => {
     expect(onEntered).to.have.been.called
   })
 
-  it('should correctly call exit methods', (done) => {
+  it('should correctly call exit methods', () => {
     const onExit = testbed.stub()
     const onExiting = testbed.stub()
     const onExited = testbed.stub()
@@ -106,15 +114,13 @@ describe('<Transition />', () => {
       onExited
     })
 
-    subject.setProps({ in: false }, () => {
-      testbed.defer(() => {
-        testbed.tick() // entered -> exiting
-        testbed.tick() // exiting -> exited
-        expect(onExit).to.have.been.called
-        expect(onExiting).to.have.been.called
-        expect(onExited).to.have.been.called
-        done()
-      })
-    })
+    subject.setProps({ in: false })
+
+    testbed.tick() // entered -> exiting
+    testbed.tick() // exiting -> exited
+
+    expect(onExit).to.have.been.called
+    expect(onExiting).to.have.been.called
+    expect(onExited).to.have.been.called
   })
 })

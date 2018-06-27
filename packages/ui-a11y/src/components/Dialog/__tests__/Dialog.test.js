@@ -49,7 +49,7 @@ describe('<Dialog />', () => {
 
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true, label: 'Dialog Example' })
-    expect(subject.find('[role="region"]')).to.be.present
+    expect(subject.find('[role="dialog"]')).to.be.present
     expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
   })
 

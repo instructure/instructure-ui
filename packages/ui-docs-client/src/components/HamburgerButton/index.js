@@ -24,57 +24,51 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-
-import Table from '@instructure/ui-elements/lib/components/Table'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
-import ColorSwatch from '../ColorSwatch'
+import Button from '../Button'
 
 import styles from './styles.css'
 import theme from './theme'
 
 @themeable(theme, styles)
-export default class ComponentTheme extends Component {
+export default class HamburgerButton extends Component {
   static propTypes = {
-    theme: PropTypes.object.isRequired
+    children: PropTypes.node.isRequired,
+    expanded: PropTypes.bool,
+    controls: PropTypes.string
   }
 
-  renderRows () {
-    const { theme } = this.props
-
-    return Object.keys(theme).map((name) => {
-      const value = theme[name]
-      return (
-        <tr key={name}>
-          <td>
-            <code>{name}</code>
-          </td>
-          <td>
-            <ColorSwatch color={value} />
-            <code>{value}</code>
-          </td>
-        </tr>
-      )
-    })
+  static defaultProps = {
+    expanded: false
   }
 
   render () {
-    return this.props.theme && Object.keys(this.props.theme).length > 0 ? (
-      <div className={styles.root}>
-        <Table caption={<ScreenReaderContent>Component theme</ScreenReaderContent>}>
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Value</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderRows()}
-          </tbody>
-        </Table>
-      </div>
-    ) : null
+    const classes = {
+      [styles.root]: true,
+      [styles['expanded']]: this.props.expanded
+    }
+    const {
+      controls,
+      children,
+      expanded,
+      ...props
+    } = this.props
+    return (
+      <Button
+        aria-controls={controls}
+        aria-expanded={expanded ? 'true' : 'false'}
+        {...props}
+      >
+        <span className={classnames(classes)}>
+          <span className={styles.line}>
+            <ScreenReaderContent>{children}</ScreenReaderContent>
+          </span>
+        </span>
+      </Button>
+    )
   }
 }

@@ -23,13 +23,13 @@
  */
 
 import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
 
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import warning from '@instructure/ui-utils/lib/warning'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
 import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
 
@@ -203,11 +203,11 @@ export default function themeable (theme, styles = {}) {
         }
       }
 
-      applyTheme () {
+      applyTheme (DOMNode) {
         const defaultTheme = generateThemeForContextKey()
 
         applyVariablesToNode(
-          ReactDOM.findDOMNode(this), // eslint-disable-line react/no-find-dom-node
+          DOMNode || findDOMNode(this), // eslint-disable-line react/no-find-dom-node
           this.theme,
           defaultTheme,
           componentId,

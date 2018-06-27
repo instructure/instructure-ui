@@ -22,15 +22,13 @@
  * SOFTWARE.
  */
 import React from 'react'
-import px from '@instructure/ui-utils/lib/px'
-import within from '@instructure/ui-utils/lib/within'
 import DrawerTray from '../index'
 import styles from '../styles.css'
 
 describe('<DrawerTray />', () => {
   const testbed = new Testbed(
     <DrawerTray
-      label="DrawerTray test"
+      label="DrawerTray Example"
       render={() => {
         return 'Hello from layout tray'
       }}
@@ -55,17 +53,34 @@ describe('<DrawerTray />', () => {
   testTrayPlacement('end')
 
   it('should render tray content when open', () => {
-    const subject = testbed.render({ open: true })
+    testbed.render({ open: true })
 
     testbed.tick()
     testbed.tick()
 
-    expect(subject.ref('_trayContent').node).to.exist
+    expect(document.querySelector('[aria-label="DrawerTray Example"]')).to.exist
   })
 
   it('should not render tray content when closed', () => {
     const subject = testbed.render()
     expect(subject.ref('_trayContent').node).to.equal(undefined) // eslint-disable-line no-undefined
+  })
+
+  it('should apply theme overrides when open', () => {
+    const subject = testbed.render({
+      open: true,
+      theme: {
+        zIndex: '333'
+      }
+    })
+
+    testbed.tick()
+    testbed.tick()
+
+    const tray = subject.getDOMNode()
+
+    expect(window.getComputedStyle(tray).zIndex)
+      .to.equal('333')
   })
 
   it('should call the contentRef', () => {
@@ -78,72 +93,57 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(contentRef).to.have.been.calledWith(subject.ref('_trayContent').node)
+    expect(contentRef).to.have.been.calledWith(subject.ref('_content').node)
   })
 
-  it('should call onOpen ', (done) => {
+  it('should call onOpen ', () => {
     const onOpen = testbed.spy()
-    const subject = testbed.render({ onOpen })
+    const subject = testbed.render({
+      open: false,
+      onOpen
+     })
+
+    testbed.tick()
+    testbed.tick()
 
     expect(onOpen).to.not.have.been.called
 
-    subject.setProps({ open: true }, () => {
-      expect(onOpen).to.have.been.called
-      done()
+    subject.setProps({
+      open: true
     })
-  })
 
-  it('should call onOpen when open initially', () => {
-    const onOpen = testbed.spy()
-    testbed.render({ onOpen, open: true })
+    testbed.tick()
+    testbed.tick()
 
     expect(onOpen).to.have.been.called
   })
 
-  it('calls onSizeChange with the correct width, when open initially', () => {
-    const trayWidth = '200px'
-    const onSizeChange = testbed.spy()
-    testbed.render({
-      open: true,
-      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
-      onSizeChange
-    })
+  it('should call onOpen when open initially', () => {
+    const onOpen = testbed.spy()
 
-    const calledSize = onSizeChange.lastCall.args[0]
-    expect(within(calledSize.width, px(trayWidth), 2)).to.be.true
+    testbed.render({ onOpen, open: true })
+
+    testbed.tick()
+    testbed.tick()
+
+    expect(onOpen).to.have.been.called
   })
 
-  it('calls onSizeChange, with the correct width, when going from closed to open', (done) => {
-    const trayWidth = '200px'
-    const onSizeChange = testbed.spy()
-    const subject = testbed.render({
-      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
-      onSizeChange
-    })
+  it('should call onClose ', () => {
+    const onClose = testbed.spy()
+    const subject = testbed.render({ onClose, open: true })
 
-    subject.setProps({ open: true }, () => {
-      testbed.tick()
-      const calledSize = onSizeChange.lastCall.args[0]
-      expect(within(calledSize.width, px(trayWidth), 2)).to.be.true
-      done()
-    })
-  })
+    testbed.tick()
+    testbed.tick()
 
-  it('calls onSizeChange, with a value of 0, when going from open to closed', (done) => {
-    const trayWidth = '200px'
-    const onSizeChange = testbed.spy()
-    const subject = testbed.render({
-      open: true,
-      render: () => <div style={{width: trayWidth}}>foo</div>, // eslint-disable-line react/display-name
-      onSizeChange
-    })
+    expect(onClose).to.not.have.been.called
 
-    subject.setProps({ open: false }, () => {
-      testbed.tick()
-      const calledSize = onSizeChange.lastCall.args[0]
-      expect(calledSize.width).to.equal(0)
-      done()
-    })
+    subject.setProps({ open: false })
+
+    testbed.tick()
+    testbed.tick()
+
+    expect(onClose).to.have.been.called
   })
 
   it('drops a shadow if the prop is set, and it is overlaying content', () => {
@@ -151,7 +151,7 @@ describe('<DrawerTray />', () => {
       open: true,
       shadow: true
     },{
-      overlay: true
+      shouldOverlayTray: true
     })
 
     testbed.tick()
@@ -159,22 +159,21 @@ describe('<DrawerTray />', () => {
 
     expect(subject.hasClass(styles['shadow'])).to.be.true
 
-    subject.setContext({overlay: false})
+    subject.setContext({shouldOverlayTray: false})
 
     expect(subject.hasClass(styles['shadow'])).to.be.false
   })
 
   it('should apply the a11y attributes', () => {
-    const subject = testbed.render({
+    testbed.render({
       label: 'a tray test',
       open: true
     })
-    const tray = subject.getDOMNode()
 
     testbed.tick()
     testbed.tick()
 
-    expect(tray.getAttribute('role')).to.equal('region')
-    expect(tray.getAttribute('aria-label')).to.equal('a tray test')
+    const tray = document.querySelector('[aria-label="a tray test"]')
+    expect(tray.getAttribute('role')).to.equal('dialog')
   })
 })
