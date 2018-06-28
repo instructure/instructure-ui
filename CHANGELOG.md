@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.14.0"></a>
+# [5.14.0](https://github.com/instructure/instructure-ui/compare/v5.13.1...v5.14.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **cz-lerna-changelog:** ensure changeID is the last element of commit msg ([fe64e52](https://github.com/instructure/instructure-ui/commit/fe64e52))
+* **ui-forms:** [NumberInput](#NumberInput) don't strip trailing zeros ([9ddfeb8](https://github.com/instructure/instructure-ui/commit/9ddfeb8))
+* **ui-a11y:** use unique ids for [FocusRegion](#FocusRegion), [Dialog](#Dialog) ([f4fccb9](https://github.com/instructure/instructure-ui/commit/f4fccb9))
+* **ui-presets:** fix post publish script ([693a7a4](https://github.com/instructure/instructure-ui/commit/693a7a4))
+* **ui-pagination:** make default ArrowIcon for [Pagination](#Pagination) small ([e8d5a95](https://github.com/instructure/instructure-ui/commit/e8d5a95))
+
+
+### Features
+
+* **ui-forms:** add indeterminate state to [Checkbox](#Checkbox) ([8752390](https://github.com/instructure/instructure-ui/commit/8752390))
+* **ui-svg-images:** add color property to [InlineSVG](#InlineSVG) ([596b9c6](https://github.com/instructure/instructure-ui/commit/596b9c6))
+
+
+
+
+
 <a name="5.13.1"></a>
 ## [5.13.1](https://github.com/instructure/instructure-ui/compare/v5.13.0...v5.13.1) (2018-06-22)
 

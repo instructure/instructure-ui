@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.14.0"></a>
+# [5.14.0](https://github.com/instructure/instructure-ui/compare/v5.13.1...v5.14.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **NumberInput:** don't strip trailing zeros ([9ddfeb8](https://github.com/instructure/instructure-ui/commit/9ddfeb8))
+
+
+### Features
+
+* **ui-forms:** add indeterminate state to Checkbox ([8752390](https://github.com/instructure/instructure-ui/commit/8752390))
+
+
+
+
+
 <a name="5.13.1"></a>
 ## [5.13.1](https://github.com/instructure/instructure-ui/compare/v5.13.0...v5.13.1) (2018-06-22)
 
