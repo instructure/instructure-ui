@@ -66,7 +66,7 @@ exports.postReleaseCandidateSlackMessage = function postReleaseSlackMessage (nam
   if (SLACK_CHANNEL && SLACK_WEBHOOK) {
     info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
 
-    const message = `PSA!\n *A release candidate, ${version}, for ${name} has been published!* :party:`
+    const message = `*A release candidate, ${version}, for ${name} has been published!* :party:`
     const issues = (issueKeys.length > 0) ? `\n\nIssues in this RC: ${issueKeys.join(', ')}` : ''
 
     const payload = {
