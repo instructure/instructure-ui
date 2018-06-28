@@ -1,6 +1,6 @@
 {
   "name": "@instructure/cz-lerna-changelog",
-  "version": "5.14.0",
+  "version": "5.15.0",
   "description": "Prompts for conventional changelog standard in a lerna environment.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

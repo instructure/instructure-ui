@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.15.0"></a>
+# [5.15.0](https://github.com/instructure/instructure-ui/compare/v5.14.0...v5.15.0) (2018-06-28)
+
+
+### Bug Fixes
+
+* **ui-a11y,ui-overlays:** Improve KO navigation for Popover ([8d547ce](https://github.com/instructure/instructure-ui/commit/8d547ce))
+
+
+
+
+
 <a name="5.14.0"></a>
 # [5.14.0](https://github.com/instructure/instructure-ui/compare/v5.13.1...v5.14.0) (2018-06-28)
 
