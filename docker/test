@@ -74,6 +74,8 @@ docker-compose build
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
+ssh-keyscan github.com >> ~/.ssh/known_hosts 2> /dev/null
+
 docker cp ~/.ssh $container:/home/docker/.ssh
 docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
 
