@@ -41,20 +41,21 @@ import PaginationButton from './PaginationButton'
 import theme from './theme'
 import styles from './styles.css'
 
+/** This is an [].findIndex optimized to work on really big, but sparse, arrays */
+const fastFindIndex = (arr, fn) => Number(Object.keys(arr).find(k => fn(arr[Number(k)])))
+
 function propsHaveCompactView (props) {
   return props.variant === 'compact' && props.children.length > 5
 }
 
-function getCurrentPageIndex (props) {
-  return props.children.findIndex((p) => p.props.current)
+
+
+function shouldShowPrevButton (props, currentPageIndex) {
+  return propsHaveCompactView(props) && (currentPageIndex > 0)
 }
 
-function shouldShowPrevButton (props) {
-  return propsHaveCompactView(props) && getCurrentPageIndex(props) > 0
-}
-
-function shouldShowNextButton (props) {
-  return propsHaveCompactView(props) && getCurrentPageIndex(props) < props.children.length - 1
+function shouldShowNextButton (props, currentPageIndex) {
+  return propsHaveCompactView(props) && (currentPageIndex < props.children.length - 1)
 }
 
 /**
@@ -156,14 +157,10 @@ export default class Pagination extends Component {
     return propsHaveCompactView(this.props)
   }
 
-  get pages () {
-    return React.Children.map(this.props.children,
-      (page) => React.cloneElement(page, { disabled: this.props.disabled })
-    )
-  }
-
-  get currentPageIndex () {
-    return getCurrentPageIndex(this.props)
+  transferDisabledPropToChildren(children) {
+    return this.props.disabled
+      ? React.Children.map(children, page => React.cloneElement(page, { disabled: this.props.disabled }))
+      : children
   }
 
   handleElementRef = (el) => {
@@ -184,16 +181,16 @@ export default class Pagination extends Component {
     }
   }
 
-  renderPages () {
-    const allPages = [...this.pages]
-    let visiblePages = [...allPages]
+  renderPages (currentPageIndex) {
+    const allPages = this.props.children
+    let visiblePages = allPages
 
     if (this.compactView) {
       const firstIndex = 0
       const lastIndex = allPages.length - 1
 
-      const sliceStart = Math.max(this.currentPageIndex - 1, firstIndex)
-      const sliceEnd = Math.min(this.currentPageIndex + 4, lastIndex)
+      const sliceStart = Math.max(currentPageIndex - 1, firstIndex)
+      const sliceEnd = Math.min(currentPageIndex + 4, lastIndex)
 
       visiblePages = allPages.slice(sliceStart, sliceEnd)
 
@@ -207,16 +204,16 @@ export default class Pagination extends Component {
     }
 
     return (
-      <View display="inline-block">{visiblePages}</View>
+      <View display="inline-block">{this.transferDisabledPropToChildren(visiblePages)}</View>
     )
   }
 
-  renderArrowButton (icon, title, direction) {
-    const { onClick, disabled } = this.pages[this.currentPageIndex + direction].props
+  renderArrowButton (icon, title, direction, currentPageIndex) {
+    const { onClick, disabled } = this.props.children[currentPageIndex + direction].props
     return (
       <Button
         onClick={onClick}
-        disabled={disabled}
+        disabled={this.props.disabled || disabled}
         variant="icon"
         size="small"
         title={title}
@@ -227,15 +224,9 @@ export default class Pagination extends Component {
     )
   }
 
-  get showPrevButton () {
-    return shouldShowPrevButton(this.props)
-  }
-
-  get showNextButton () {
-    return shouldShowNextButton(this.props)
-  }
-
   render () {
+    const currentPageIndex = fastFindIndex(this.props.children, p => p && p.props && p.props.current)
+
     return (
       <View
         {...omitProps(this.props, { ...Pagination.propTypes, ...View.propTypes })}
@@ -247,9 +238,9 @@ export default class Pagination extends Component {
       >
         {this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
-          { this.showPrevButton ? this.renderArrowButton(IconStart, this.props.labelPrev, -1) : null }
-          { this.renderPages() }
-          { this.showNextButton ? this.renderArrowButton(IconEnd, this.props.labelNext, 1) : null }
+          { shouldShowPrevButton(this.props, currentPageIndex) && this.renderArrowButton(IconStart, this.props.labelPrev, -1, currentPageIndex) }
+          { this.renderPages(currentPageIndex) }
+          { shouldShowNextButton(this.props, currentPageIndex) && this.renderArrowButton(IconEnd, this.props.labelNext, 1, currentPageIndex) }
         </View>
       </View>
     )
