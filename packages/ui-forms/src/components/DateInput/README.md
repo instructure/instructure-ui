@@ -4,7 +4,10 @@ describes: DateInput
 
 A DateInput component is used to input a date either with a
 [DatePicker](#DatePicker) in a [Popover](#Popover), or by typing a date into a
-[TextInput](#TextInput).
+[TextInput](#TextInput). 
+- A `placeholder` prop is available to be used as hint text in the input.
+- A `defaultDateValue` can be used that will override the placeholder text.
+- Input can be set to `disabled`.
 
 ```js
 ---
@@ -179,5 +182,5 @@ according to the specified format.
 
 As characters are typed into the TextInput, the DateInput attempts to parse
 the string according to the specified locale. The results are passed to the
-TextInput as a success for fail message. When successful, typing `ENTER` will replace
+TextInput as a success or fail message. When successful, typing `ENTER` will replace
 the TextInput value with the formatted date.
