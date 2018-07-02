@@ -98,13 +98,45 @@ describe('<Img />', () => {
     expect(objectFit).to.equal('cover')
   })
 
-  it('should set overlay container height and width to 100% when cover is true', () => {
+  it('should apply CSS object-fit: cover when constrain="cover"', () => {
+    const subject = testbed.render({ constrain: "cover" })
+    const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
+    expect(objectFit).to.equal('cover')
+  })
+
+  it('should apply CSS object-fit: contain when constrain="contain"', () => {
+    const subject = testbed.render({ constrain: "contain" })
+    const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
+    expect(objectFit).to.equal('contain')
+  })
+
+  it('applies the container--has-cover class when the cover property is used with overlay', () => {
     const subject = testbed.render({
       alt: 'testing123',
       cover: true,
       overlay: {color: '#ff0000', opacity: 7}
     })
     expect(subject.hasClass(styles['container--has-cover'])).to.be.true
+    expect(subject.find('[alt="testing123"]')).to.be.present
+  })
+
+  it('applies the container--has-cover class when constrain="cover" is used with overlay', () => {
+    const subject = testbed.render({
+      alt: 'testing123',
+      constrain: "cover",
+      overlay: {color: '#ff0000', opacity: 7}
+    })
+    expect(subject.hasClass(styles['container--has-cover'])).to.be.true
+    expect(subject.find('[alt="testing123"]')).to.be.present
+  })
+
+  it('applies the container--has-contain class when constrain="contain" is used with overlay', () => {
+    const subject = testbed.render({
+      alt: 'testing123',
+      constrain: "contain",
+      overlay: {color: '#ff0000', opacity: 7}
+    })
+    expect(subject.hasClass(styles['container--has-contain'])).to.be.true
     expect(subject.find('[alt="testing123"]')).to.be.present
   })
 

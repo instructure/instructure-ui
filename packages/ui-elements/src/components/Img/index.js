@@ -31,6 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import supportsObjectFit from '@instructure/ui-utils/lib/dom/supportsObjectFit'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -40,6 +41,9 @@ import theme from './theme'
 category: components
 ---
 **/
+@deprecated('6.0.0', {
+  cover: 'constrain'
+})
 @themeable(theme, styles)
 export default class Img extends Component {
   static propTypes = {
@@ -64,6 +68,7 @@ export default class Img extends Component {
     grayscale: PropTypes.bool,
     blur: PropTypes.bool,
     cover: PropTypes.bool,
+    constrain: PropTypes.oneOf(['cover', 'contain']),
     elementRef: PropTypes.func
   }
 
@@ -104,6 +109,7 @@ export default class Img extends Component {
       grayscale,
       blur,
       cover,
+      constrain,
       width,
       height,
       elementRef
@@ -119,7 +125,8 @@ export default class Img extends Component {
         [styles.image]: true,
         [styles['has-overlay']]: overlay,
         [styles['has-filter']]: blur || grayscale,
-        [styles.cover]: this.supportsObjectFit && cover
+        [styles.cover]: this.supportsObjectFit && (cover || constrain === 'cover'),
+        [styles.contain]: this.supportsObjectFit && constrain === 'contain'
       }),
       style: {
         filter: (blur || grayscale) ? this.renderFilter() : 'none'
@@ -136,7 +143,9 @@ export default class Img extends Component {
       elementRef
     }
 
-    const hasBackground = !this.supportsObjectFit && cover
+    // if browser does not support ObjectFit CSS, and Img needs cover (deprecated) or constrain,
+    // serve up a background-image instead
+    const hasBackground = !this.supportsObjectFit && (cover || constrain)
 
     if (overlay || hasBackground) {
       // if a background image is rendered we add the a11y props on the container element
@@ -151,7 +160,8 @@ export default class Img extends Component {
           as="span"
           className={classnames({
             [styles['container--has-overlay']]: overlay,
-            [styles['container--has-cover']]: cover,
+            [styles['container--has-cover']]: cover || constrain === 'cover',
+            [styles['container--has-contain']]: constrain === 'contain',
             [styles['container--has-background']]: hasBackground
           })}
           style={{

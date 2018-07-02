@@ -60,7 +60,7 @@ example: true
 
 ### Cover
 
-When the `cover` prop is `true` Image fills the full width and height of its
+When the `constrain` prop is set to `cover` Image fills the *full* width and height of its
 containing element, while maintaining the aspect ratio of the source image.
 
 ```js
@@ -68,8 +68,22 @@ containing element, while maintaining the aspect ratio of the source image.
 example: true
 ---
 <div style={{width: '66%', height: '11rem'}}>
-  <Img src={avatarImage} cover />
+  <Img src={avatarSquare} constrain="cover" />
 </div>
+```
+
+### Contain
+
+When the `constrain` prop is set to `contain` Image fits within the width and height of its
+containing element, while maintaining the aspect ratio of the source image.
+
+```js
+---
+example: true
+---
+<View as="div" background="inverse" width="200px" height="200px" textAlign="center">
+  <Img src={avatarPortrait} constrain="contain" />
+</View>
 ```
 
 ### Grayscale and blur filters
@@ -84,13 +98,13 @@ example: true
   <View textAlign="center" as="div">
     <Img
       grayscale
-      src={avatarImage}
+      src={avatarSquare}
       alt="A placeholder image"
       margin="x-small"
     />
     <Img
       blur
-      src={avatarImage}
+      src={avatarSquare}
       alt="A placeholder image"
       margin="x-small"
     />

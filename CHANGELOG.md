@@ -1646,10 +1646,10 @@ Changes to our `<Avatar>` component:
     </tr>
     <tr>
       <td>
-      userImgUrl: {avatarImage}
+      userImgUrl: {avatarSquare}
       </td>
       <td>
-      src: {avatarImage}
+      src: {avatarSquare}
       </td>
     </tr>
   </tbody>

@@ -40,7 +40,8 @@ import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import iconExample from '!svg-inline-loader!./heart_lg.svg'
-import avatarImage from './placeholder-avatar.jpg'
+import avatarSquare from './avatarSquare.jpg'
+import avatarPortrait from './avatarPortrait.jpg'
 import placeholderImage from './placeholder-image'
 import placeholderLogo from './placeholder-logo'
 
@@ -48,7 +49,8 @@ const globals = {
   ...Icons,
   ...Components,
   locales: moment.locales(),
-  avatarImage,
+  avatarSquare,
+  avatarPortrait,
   iconExample,
   lorem: {
     sentence () {

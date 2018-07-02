@@ -8,7 +8,7 @@ An Avatar component:
 ---
 example: true
 ---
-<Avatar name="Sarah Robinson" src={avatarImage} />
+<Avatar name="Sarah Robinson" src={avatarSquare} />
 ```
 
 When an image src is not supplied the user's initials will display.

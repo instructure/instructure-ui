@@ -133,7 +133,7 @@ example: true
 ---
 <Flex alignItems="end" visualDebug>
   <FlexItem>
-    <Avatar name="Sarah Robinson" size="large" src={avatarImage} />
+    <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
   </FlexItem>
   <FlexItem grow shrink>
     I should be aligned to the bottom of the Avatar.
@@ -157,7 +157,7 @@ example: true
 <div>
   <Flex justifyItems="center" margin="0 0 large" visualDebug>
     <FlexItem>
-      <Avatar name="Sarah Robinson" size="large" src={avatarImage} />
+      <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </FlexItem>
     <FlexItem>
       We are all centered!
@@ -169,7 +169,7 @@ example: true
 
   <Flex justifyItems="space-between" visualDebug margin="0 0 large">
     <FlexItem>
-      <Avatar name="Sarah Robinson" size="large" src={avatarImage} />
+      <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </FlexItem>
     <FlexItem>
       Ah, a little more space.
@@ -181,7 +181,7 @@ example: true
 
   <Flex justifyItems="end" visualDebug>
     <FlexItem>
-      <Avatar name="Sarah Robinson" size="large" src={avatarImage} />
+      <Avatar name="Sarah Robinson" size="large" src={avatarSquare} />
     </FlexItem>
     <FlexItem>
       Smooshed again.
