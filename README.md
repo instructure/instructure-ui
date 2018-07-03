@@ -48,6 +48,41 @@
 - Internet Explorer 11 and Edge
 - Chrome, Safari, Firefox (last two versions)
 
+### Quick Start
+
+Instructure-UI has a number of beautiful and accessible React components with baked-in styles and theming and helpful utility functions.
+
+To start using Instructure-UI React components, you must do the following:
+
+1. Activate a style theme.
+2. Import and render an Instructure-UI component.
+
+To get the default styles as shown in the examples, use the pre-built Canvas theme.
+
+Example:
+```bash
+$ yarn add @instructure/ui-themes @instructure/ui-elements
+```
+
+```javascript
+import React, { Component } from 'react'
+import theme from '@instructure/ui-themes/lib/canvas'
+import Heading from '@instructure/ui-elements/lib/components/Heading'
+
+theme.use()
+
+class App extends Component {
+  render() {
+    return (
+      <div className="App">
+        <Heading>Now using Instructure-UI components with default Canvas theme!</Heading>
+      </div>
+    )
+  }
+}
+
+export default App
+```
 
 ### Contribute
 
