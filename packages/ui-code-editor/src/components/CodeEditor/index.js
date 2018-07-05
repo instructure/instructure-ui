@@ -60,7 +60,8 @@ export default class CodeEditor extends Component {
       'html',
       'markdown',
       'yaml',
-      'yml'
+      'yml',
+      'bash'
     ]),
     readOnly: PropTypes.bool,
     onChange: PropTypes.func,
