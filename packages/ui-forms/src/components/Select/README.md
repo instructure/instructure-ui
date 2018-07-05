@@ -8,7 +8,7 @@ Select is an accessible, custom styled combobox component with optional autocomp
 
 ### Select size variants
 
-Default is `medium`.
+Default is `medium`. As with other form elements, the sizes align with the `Button` options for a nice layout.
 
 ```js
 ---
@@ -704,59 +704,3 @@ render(
 )
 ```
 
-### Select of differing sizes next to a [Button](#Button)
-
-```js
----
-example: true
-render: false
----
-class Example extends React.Component {
-  render () {
-    const options = [
-      'Alabama', 'Alaska', 'American Samoa', 'Arizona',
-      'Arkansas', 'California', 'Colorado', 'Connecticut',
-      'Delaware', 'District Of Columbia',
-      'Federated States Of Micronesia', 'Florida', 'Georgia',
-      'Guam', 'Hawaii', 'Idaho', 'Illinois'
-    ]
-
-    return (
-      <FormFieldGroup
-        layout="columns"
-        vAlign="bottom"
-        rowSpacing="medium"
-        description={
-          <ScreenReaderContent>
-            {this.props.label}
-          </ScreenReaderContent>
-        }
-      >
-        <Select {...this.props} editable>
-          {options.map((label, index) => (
-            <option key={label} value={'' + index}>{label}</option>
-          ))}
-        </Select>
-        <Button size={this.props.size}>Click me</Button>
-      </FormFieldGroup>
-    )
-  }
-}
-
-render(
-  <div style={{ padding: '0 0 16rem 0', margin: '0 auto' }}>
-    <Example label="Default-size Select and button" />
-    <br/>
-    <Example
-      label="Small-size Select and button"
-      size="small"
-    />
-    <br/>
-    <Example
-      label="Large-size Select and button"
-      size="large"
-    />
-    <br/>
-  </div>
-)
-```
