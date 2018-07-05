@@ -22,29 +22,21 @@
  * SOFTWARE.
  */
 
-import findFocusable from './findFocusable'
+import findDOMNode from './findDOMNode'
 
 /**
  * ---
- * category: utilities/a11y
+ * category: utilities/DOM
  * ---
  *
- * Given an element, finds and returns all visible, tabbable children.
- * Tabbable elements include input, select, textarea, button, and object.
- * Anchor tags are also tabbable if they include an href or zero or positive
- * tabindex attribute (to include elements with negative tabindex attributes,
- * use findFocusable).
+ * Polyfill for Element.matches (https://developer.mozilla.org/en-US/docs/Web/API/Element/matches)
  *
  * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
- * @returns {Array} array of all tabbable children
+ * @param {String} selectorString - a string representing the selector to test
+ * @returns {boolean} if the element would be selected by the specified selector string
  */
-export default function findTabbable (el, shouldSearchRootNode) {
-  return findFocusable(el, (element) => {
-    return !isInvalidTabIndex(element.getAttribute('tabindex'))
-  }, shouldSearchRootNode)
-}
-
-function isInvalidTabIndex (tabIndex) {
-  return !isNaN(tabIndex) && tabIndex < 0
+export default function elementMatches (el, selectorString) {
+  const node = el && findDOMNode(el)
+  if (!node) return false
+  return node.matches ? node.matches(selectorString) : node.msMatchesSelector(selectorString)
 }

@@ -61,7 +61,7 @@ class View extends Component {
     as: CustomPropTypes.elementType,
 
     /**
-    * provides a reference to the underlying html root element
+    * provides a reference to the underlying html element
     */
     elementRef: PropTypes.func,
 

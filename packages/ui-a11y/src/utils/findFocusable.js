@@ -36,6 +36,7 @@
 
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import elementMatches from '@instructure/ui-utils/lib/dom/elementMatches'
 
 /**
 * ---
@@ -49,16 +50,22 @@ import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 *
 * @param {ReactComponent|DomNode} el - component or DOM node
 * @param {Function} filter - a function to filter the matching nodes
+* @param {Boolean} shouldSearchRootNode - should the root node be included in the search
 * @returns {Array} array of all tabbable children
 */
-export default function findFocusable (el, filter) {
+export default function findFocusable (el, filter, shouldSearchRootNode) {
   const element = findDOMNode(el)
+
   if (!element || typeof element.querySelectorAll !== 'function') {
     return []
   }
 
   const focusableSelector = 'a[href],frame,iframe,object,input:not([type=hidden]),select,textarea,button,*[tabindex]'
-  const matches = element.querySelectorAll(focusableSelector)
+  let matches = element.querySelectorAll(focusableSelector)
+
+  if (shouldSearchRootNode && elementMatches(element, focusableSelector)) {
+    matches = [...matches, element]
+  }
 
   return [].slice.call(matches, 0).filter((el) => {
     if (typeof filter === 'function') {

@@ -22,37 +22,49 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import findTabbable from '../findTabbable'
 
 describe('findTabbable', () => {
-  let container
-
-  beforeEach(() => {
-    container = document.createElement('div')
-    container.innerHTML = `
-      <a href="javascript://">Yep</a>
-      <div>Nope</div>
-      <div tabindex="1">Yep</div>
-      <input type="text" value="Yep"/>
+  describe('tabbable content', () => {
+    /* eslint-disable jsx-a11y/anchor-is-valid */
+    /* eslint-disable jsx-a11y/tabindex-no-positive */
+    /* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+    const testbed = new Testbed(
       <div>
-        <button>Yep</button>
-        <button style="display:none;">Nope</button>
+        <a href="javascript://">Yep</a>
+        <div>Nope</div>
+        <div tabIndex="1">Yep</div>
+        <input type="text" value="Yep" readOnly />
+        <div>
+          <button>Yep</button>
+          <button style={{display: 'none'}}>Nope</button>
+        </div>
+        <div style={{width: 0, height: 0}}>
+          <button>Nope</button>
+        </div>
       </div>
-      <div style="width:0; height:0;">
-        <button>Nope</button>
-      </div>
-    `
-    document.body.appendChild(container)
+    )
+    /* eslint-enable jsx-a11y/no-noninteractive-tabindex */
+    /* eslint-enable jsx-a11y/tabindex-no-positive */
+    /* eslint-enable jsx-a11y/anchor-is-valid */
+
+    it('should find tabbable descendants', () => {
+      const subject = testbed.render()
+      expect(findTabbable(subject.getDOMNode()).length).to.equal(4)
+    })
   })
 
-  afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container)
-    }
-  })
+  describe('tabbable root', () => {
+    const testbed = new Testbed(
+      <button><span>hello</span></button>
+    )
 
-  it('should find tabbable descendants', () => {
-    expect(findTabbable(container).length).to.equal(4)
+    it('should search the root node when shouldSearchRootNode is set', () => {
+      const subject = testbed.render()
+      expect(findTabbable(subject.getDOMNode()).length).to.equal(0)
+      expect(findTabbable(subject.getDOMNode(), true).length).to.equal(1)
+    })
   })
 
   it('should gracefully handle null', () => {

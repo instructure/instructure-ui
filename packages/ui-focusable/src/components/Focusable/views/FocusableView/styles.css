@@ -1,0 +1,110 @@
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2015 - present Instructure, Inc.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+/* stylelint-disable selector-max-class, no-descending-specificity */
+
+.root[type="button"],
+.root[type="reset"],
+.root[type="submit"],
+.root {
+  appearance: none;
+}
+
+/* removes default dotted focus outline in Firefox */
+
+.root {
+  all: initial;
+  box-sizing: border-box;
+  max-width: 100%;
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+  overflow: visible;
+  direction: inherit;
+  margin: 0;
+  text-decoration: none; /* for links styled as buttons */
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  background: transparent;
+  border: none;
+  font-family: var(--fontFamily);
+  outline: none;
+
+  &.rectangular,
+  &.circular {
+    &::before {
+      pointer-events: none;
+      content: "";
+      position: absolute;
+      top: -0.25rem;
+      left: -0.25rem; /* stylelint-disable-line property-blacklist */
+      right: -0.25rem; /* stylelint-disable-line property-blacklist */
+      bottom: -0.25rem;
+      border-style: solid;
+      border-width: var(--borderWidth);
+      opacity: 0;
+      transform: scale(0.01);
+      transition: all 0.2s;
+    }
+  }
+
+  &.primary {
+    &::before {
+      border-color: var(--borderColorPrimary);
+    }
+  }
+
+  &.error {
+    &::before {
+      border-color: var(--borderColorError);
+    }
+  }
+
+  &.inverse {
+    &::before {
+      border-color: var(--borderColorInverse);
+    }
+  }
+
+  &.rectangular {
+    &::before {
+      border-radius: calc(var(--borderRadiusRectangular) + 0.125rem);
+    }
+  }
+
+  &.circular {
+    &::before {
+      border-radius: var(--borderRadiusCircular);
+    }
+  }
+
+  &.focused {
+    &::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}

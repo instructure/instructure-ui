@@ -22,29 +22,10 @@
  * SOFTWARE.
  */
 
-import findFocusable from './findFocusable'
-
-/**
- * ---
- * category: utilities/a11y
- * ---
- *
- * Given an element, finds and returns all visible, tabbable children.
- * Tabbable elements include input, select, textarea, button, and object.
- * Anchor tags are also tabbable if they include an href or zero or positive
- * tabindex attribute (to include elements with negative tabindex attributes,
- * use findFocusable).
- *
- * @param {ReactComponent|DomNode} el - component or DOM node
- * @param {Boolean} shouldSearchRootNode - should the root node be included in the search
- * @returns {Array} array of all tabbable children
- */
-export default function findTabbable (el, shouldSearchRootNode) {
-  return findFocusable(el, (element) => {
-    return !isInvalidTabIndex(element.getAttribute('tabindex'))
-  }, shouldSearchRootNode)
-}
-
-function isInvalidTabIndex (tabIndex) {
-  return !isNaN(tabIndex) && tabIndex < 0
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }

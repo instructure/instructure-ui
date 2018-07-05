@@ -41,6 +41,7 @@
     "@instructure/ui-docs-client": "^5.18.0",
     "@instructure/ui-docs-plugin": "^5.18.0",
     "@instructure/ui-elements": "^5.18.0",
+    "@instructure/ui-focusable": "^5.18.0",
     "@instructure/ui-forms": "^5.18.0",
     "@instructure/ui-i18n": "^5.18.0",
     "@instructure/ui-icons": "^5.18.0",
