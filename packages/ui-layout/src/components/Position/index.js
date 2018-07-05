@@ -122,7 +122,16 @@ class Position extends Component {
      */
     insertAt: PropTypes.oneOf(['bottom', 'top']),
 
-    constrain: PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
+    /**
+     * The parent in which to constrain the placement.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
+     */
+    constrain: PropTypes.oneOfType([
+      CustomPropTypes.element,
+      PropTypes.func,
+      PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
+    ])
   }
 
   static defaultProps = {

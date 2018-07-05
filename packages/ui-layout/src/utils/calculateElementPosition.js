@@ -242,6 +242,10 @@ class PositionData {
       this.constrainTo(getScrollParents(this.target.node)[0])
     } else if (constrain === 'parent') {
       this.constrainTo(this.container)
+    } else if (typeof constrain === 'function') {
+      this.constrainTo(findDOMNode(constrain.call(null)))
+    } else if (typeof constrain === 'object') {
+      this.constrainTo(findDOMNode(constrain))
     }
   }
 
@@ -302,15 +306,20 @@ class PositionData {
   }
 
   overflow (element) {
-    const bounds = getBoundingClientRect(element)
+    const parentWindow = ownerWindow(element)
+    const elementBounds = getBoundingClientRect(element)
+    const windowBounds = getBoundingClientRect(parentWindow)
     const offsets = addOffsets([this.target.position, this.offset])
-    const parentOffsetTop = this.element.positionedParentsOffset.top + this.element.scrollParentsOffset.top
+    const parentOffset = {
+      top: this.element.positionedParentsOffset.top + this.element.scrollParentsOffset.top,
+      left: this.element.positionedParentsOffset.left + this.element.scrollParentsOffset.left
+    }
 
-    const left = offsets.left
-    const right = left + this.element.positionedParentsOffset.left + this.element.width
+    let left = offsets.left + parentOffset.left
+    let right = offsets.left + this.element.width + parentOffset.left
 
-    let top = offsets.top + parentOffsetTop
-    let bottom = offsets.top + this.element.height + parentOffsetTop
+    let top = offsets.top + parentOffset.top
+    let bottom = offsets.top + this.element.height + parentOffset.top
 
     // adjust for vertical placements
     if (this.element.placement[0] === "bottom") {
@@ -318,6 +327,13 @@ class PositionData {
     } else if (this.element.placement[0] === "top") {
       bottom += this.element.height + this.target.height
     }
+
+    if (this.element.placement[1] === "start") {
+      left -= this.element.width - this.target.width
+    } else if (this.element.placement[1] === "end") {
+      right += this.element.width - this.target.width
+    }
+
     // adjust for horizontal placements
     if (this.element.placement[1] === "top") {
       top -= this.element.height - this.target.height
@@ -325,11 +341,24 @@ class PositionData {
       bottom += this.element.height - this.target.height
     }
 
+    if (this.element.placement[0] === "end") {
+      left -= this.element.width + this.target.width
+    } else if (this.element.placement[0] === "start") {
+      right += this.element.width + this.target.width
+    }
+
+    const bounds = element === parentWindow ? elementBounds : {
+      top: windowBounds.top + elementBounds.top,
+      bottom: elementBounds.top + elementBounds.height,
+      left: windowBounds.left + elementBounds.left,
+      right: elementBounds.left + elementBounds.width
+    }
+
     return {
-      top: (top < bounds.top) ? bounds.top - top : 0,
-      bottom: (bottom > bounds.bottom) ? bottom - bounds.bottom : 0,
-      left: (left < bounds.left) ? bounds.left - left : 0,
-      right: (right > bounds.right) ? right - bounds.right : 0
+      top: top < bounds.top ? bounds.top - top : 0,
+      bottom: bottom > bounds.bottom ? bottom - bounds.bottom : 0,
+      left: left < bounds.left ? bounds.left - left : 0,
+      right: right > bounds.right ? right - bounds.right : 0
     }
   }
 
@@ -367,6 +396,7 @@ class PositionData {
           this.element.placement[0] = 'top'
           this.target.placement[0] = 'bottom'
         }
+
       } else if (oob.top) {
         // if top bound broken, position below
         this.element.placement[0] = 'bottom'
@@ -388,12 +418,25 @@ class PositionData {
         this.target.placement[1] = 'bottom'
       }
 
-      if (oob.left) {
-        this.element.placement[0] = 'end'
-        this.target.placement[0] = 'start'
-      } else if (oob.right) {
-        this.element.placement[0] = 'start'
-        this.target.placement[0] = 'end'
+      if (oob.left && oob.right) {
+        // if left and right bounds broken
+        if (overflow.left > overflow.right) {
+          // more room at end, position after
+          this.element.placement[0] = 'end'
+          this.target.placement[0] = 'start'
+        } else {
+          // more room at start, position before
+          this.element.placement[0] = 'start'
+          this.target.placement[0] = 'end'
+        }
+      } else {
+        if (oob.left) {
+          this.element.placement[0] = 'end'
+          this.target.placement[0] = 'start'
+        } else if (oob.right) {
+          this.element.placement[0] = 'start'
+          this.target.placement[0] = 'end'
+        }
       }
     }
   }

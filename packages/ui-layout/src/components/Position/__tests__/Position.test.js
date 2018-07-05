@@ -45,34 +45,52 @@ describe('<Position />', () => {
       ...Position.propTypes
     }
 
+    static defaultProps = {
+      parentWidth: 500,
+      parentHeight: 150,
+      parentPadding: 100,
+      paddingOverflow: 'auto',
+      constrainTo: 'window',
+      mountToNode: false
+    }
+
     render () {
       const { ...props } = this.props
 
       delete props.children
 
       return (
-        <div
-          style={{
-            width: 500,
-            height: 150,
-            padding: 100,
-            textAlign: 'center'
-          }}
-        >
-          <Position {...props}>
-            <PositionTarget>
-              <button>Target</button>
-            </PositionTarget>
-            <PositionContent>
-              <div
-                ref={el => {
-                  this._content = el
-                }}
-              >
-                <div>Content</div>
-              </div>
-            </PositionContent>
-          </Position>
+        <div style={{padding: '50px'}}>
+          <div ref={(el) => {this._mounNode = el}}></div>
+          <div
+            style={{
+              width: props.parentWidth,
+              height: props.parentHeight,
+              padding: props.parentPadding,
+              overflow: props.parentOverflow,
+              textAlign: 'center',
+              position: 'relative'
+            }}
+          >
+            <Position
+              {...props}
+              constrain={props.constrainTo}
+              mountNode={props.mountToNode ? () => this._mountNode : null}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div
+                  ref={el => {
+                    this._content = el
+                  }}
+                >
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
         </div>
       )
     }
@@ -228,6 +246,80 @@ describe('<Position />', () => {
     assertOffset('bottom', 10, (contentRect, top, left) => {
       expect(within(contentRect.top, top + 10, 1)).to.be.true
       expect(within(contentRect.left, left - 10, 1)).to.be.true
+    })
+  })
+
+  describe('when constrained to scroll-parent', () => {
+    it('should re-position below target', () => {
+      const subject = testbed.render({
+        placement: 'top',
+        parentWidth: 50,
+        parentHeight: 50,
+        parentOverflow: 'scroll',
+        constrainTo: 'scroll-parent',
+        mountToNode: true,
+        parentPadding: '0 50px 50px 50px'
+      })
+
+      testbed.tick()
+
+      const { targetRect, contentRect } = findAll(subject)
+
+      expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true
+    })
+
+    it('should re-position above target', () => {
+      const subject = testbed.render({
+        placement: 'bottom',
+        parentWidth: 50,
+        parentHeight: 0,
+        parentOverflow: 'scroll',
+        constrainTo: 'scroll-parent',
+        mountToNode: true,
+        parentPadding: '50px 50px 0 50px'
+      })
+
+      testbed.tick()
+
+      const { targetRect, contentRect } = findAll(subject)
+
+      expect(within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)).to.be.true
+    })
+
+    it('should re-position after target', () => {
+      const subject = testbed.render({
+        placement: 'start',
+        parentWidth: 50,
+        parentHeight: 50,
+        parentOverflow: 'scroll',
+        constrainTo: 'scroll-parent',
+        mountToNode: true,
+        parentPadding: '50px 80px 50px 0'
+      })
+
+      testbed.tick()
+
+      const { targetRect, contentRect } = findAll(subject)
+
+      expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)).to.be.true
+    })
+
+    it('should re-position before target', () => {
+      const subject = testbed.render({
+        placement: 'end',
+        parentWidth: 50,
+        parentHeight: 50,
+        parentOverflow: 'scroll',
+        constrainTo: 'scroll-parent',
+        mountToNode: true,
+        parentPadding: '50px 0 50px 80px'
+      })
+
+      testbed.tick()
+
+      const { targetRect, contentRect } = findAll(subject)
+
+      expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true
     })
   })
 })
