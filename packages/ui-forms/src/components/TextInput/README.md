@@ -2,52 +2,13 @@
 describes: TextInput
 ---
 
-`TextInput` renders a custom HTML `input` element.
+`TextInput` renders a custom HTML `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 
 ```js
 ---
 example: true
 ---
 <TextInput label="Name" placeholder="Doe, John Doe" />
-```
-
-`TextInput` supports textAlign set to `start` _(default)_ or `center`. Center is ONLY to be used in very specific circumstances that have been directed by design.
-```js
----
-example: true
----
-<Table
-  caption={<ScreenReaderContent>Center Align Use Case</ScreenReaderContent>}>
-  <thead>
-    <tr>
-      <th scope="col"><ScreenReaderContent>Band</ScreenReaderContent></th>
-      <th scope="col"><ScreenReaderContent>Album</ScreenReaderContent></th>
-      <th scope="col"><ScreenReaderContent>Song</ScreenReaderContent></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <TextInput
-          textAlign="center"
-          label={<ScreenReaderContent>Best Band</ScreenReaderContent>}
-          placeholder="Best Band" />
-      </td>
-      <td>
-        <TextInput
-          textAlign="center"
-          label={<ScreenReaderContent>Best Album</ScreenReaderContent>}
-          placeholder="Best Album" />
-      </td>
-      <td>
-        <TextInput
-          textAlign="center"
-          label={<ScreenReaderContent>Best Song</ScreenReaderContent>}
-          placeholder="Best Song" />
-      </td>
-    </tr>
-  </tbody>
-</Table>
 ```
 
 A `TextInput` with errors:
@@ -110,46 +71,15 @@ example: true
 </div>
 ```
 
-A `TextInput` as a password field:
+Default is `medium.  As with other form elements, the sizes align with the `Button` options for a nice layout.
 
 ```js
 ---
 example: true
 ---
-<TextInput label="Password" type="password" />
-```
-
-A text input field next to a [Button](#Button). Note: Form layout components
-are coming soon. Please ignore the inline styles in the example.
-
-```js
----
-example: true
----
-<Grid vAlign="bottom">
-  <GridRow>
-    <GridCol>
-      <TextInput label="Default-size input and button" />
-    </GridCol>
-    <GridCol>
-      <Button>Click me</Button>
-    </GridCol>
-  </GridRow>
-  <GridRow>
-    <GridCol>
-      <TextInput size="small" label="Small-size input and button" />
-    </GridCol>
-    <GridCol>
-      <Button size="small">Click me</Button>
-    </GridCol>
-  </GridRow>
-  <GridRow>
-    <GridCol>
-      <TextInput size="large" label="Large-size input and button" />
-    </GridCol>
-    <GridCol>
-      <Button size="large">Click me</Button>
-    </GridCol>
-  </GridRow>
-</Grid>
+<div>
+  <TextInput size="small" label="Small-size input" /><br/>
+  <TextInput label="Default-size input" /><br/>
+  <TextInput size="large" label="Large-size input" />
+</div>
 ```
