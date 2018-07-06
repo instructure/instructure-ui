@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.16.0"></a>
+# [5.16.0](https://github.com/instructure/instructure-ui/compare/v5.15.0...v5.16.0) (2018-07-06)
+
+
+### Bug Fixes
+
+* **ui-layout,ui-motion,ui-overlays:** theme prop should work w/ Portal ([2c20181](https://github.com/instructure/instructure-ui/commit/2c20181))
+* **ui-pagination:** fix perf for lots of pages ([40e18e9](https://github.com/instructure/instructure-ui/commit/40e18e9))
+
+
+### Features
+
+* **ui-code-editor:** add bash language type to code editor ([5fba1f9](https://github.com/instructure/instructure-ui/commit/5fba1f9))
+* **ui-icons:** add check-mark-indeterminate icon ([886e700](https://github.com/instructure/instructure-ui/commit/886e700))
+* **ui-icons:** add quiz-title and quiz-instructions icon ([6cf0691](https://github.com/instructure/instructure-ui/commit/6cf0691))
+
+
+
+
+
 <a name="5.15.0"></a>
 # [5.15.0](https://github.com/instructure/instructure-ui/compare/v5.14.0...v5.15.0) (2018-06-28)
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.16.0"></a>
+# [5.16.0](https://github.com/instructure/instructure-ui/compare/v5.15.0...v5.16.0) (2018-07-06)
+
+
+### Features
+
+* **ui-code-editor:** add bash language type to code editor ([5fba1f9](https://github.com/instructure/instructure-ui/commit/5fba1f9))
+
+
+
+
+
 <a name="5.15.0"></a>
 # [5.15.0](https://github.com/instructure/instructure-ui/compare/v5.14.0...v5.15.0) (2018-06-28)
 
