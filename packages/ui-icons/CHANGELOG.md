@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.17.0"></a>
+# [5.17.0](https://github.com/instructure/instructure-ui/compare/v5.16.0...v5.17.0) (2018-07-06)
+
+
+### Features
+
+* **ui-icons:** add calculator icon ([df2f9ce](https://github.com/instructure/instructure-ui/commit/df2f9ce))
+
+
+
+
+
 <a name="5.16.0"></a>
 # [5.16.0](https://github.com/instructure/instructure-ui/compare/v5.15.0...v5.16.0) (2018-07-06)
 
