@@ -22,40 +22,25 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
+import ${COMPONENT}View from '../index'
 
-import ${COMPONENT}Controller from '../controllers/${COMPONENT}Controller'
-import ${COMPONENT}View from '../views/${COMPONENT}View'
+describe('<${COMPONENT}View />', () => {
+  const testbed = new Testbed(<${COMPONENT}View />)
 
-/**
----
-category: components
----
-**/
-class ${COMPONENT} extends Component {
-  static propTypes = {
-    /**
-    * FIXME: description of the children prop goes here
-    */
-    children: PropTypes.node
-  }
+  it('should render', () => {
+    const subject = testbed.render(/* override default props here */)
 
-  render () {
-    return (
-      <${COMPONENT}Controller {...this.props}>
-      {({ getViewProps }) => {
-        return (
-          <${COMPONENT}View
-            {...getViewProps(/* view prop overrides go here */)}
-          >
-            {this.props.children}
-          </${COMPONENT}View>
-        )
-      }}
-      </${COMPONENT}Controller>
-    )
-  }
-}
+    expect(subject).to.be.present
+  })
 
-export default ${COMPONENT}
+  it('should have tests')
+
+  it('should meet a11y standards', (done) => {
+    const subject = testbed.render()
+
+    subject.should.be.accessible(done, {
+      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
+    })
+  })
+})

@@ -22,4 +22,40 @@
  * SOFTWARE.
  */
 
- export default from './elements/${COMPONENT}'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
+class ${COMPONENT} extends Component {
+  static propTypes = {
+    /**
+     * @param {Object} renderProps
+     * @param {Function} renderProps.getViewProps - Props to be spread onto the view element
+     */
+    children: PropTypes.func,
+    /**
+     * Identical to children
+     */
+    render: PropTypes.func,
+  }
+
+  render () {
+    const { children, render = children } = this.props
+
+    if (typeof render === 'function') {
+      return render({
+        getViewProps: (props) => {
+          return {
+            /* component specific view props go here */
+            /* consumers can override them by passing in an overrides object */
+            ...props
+          }
+        }
+      })
+    } else {
+     return null
+    }
+  }
+}
+
+export default ${COMPONENT}
+export { default as ${COMPONENT}View } from './views/${COMPONENT}View'

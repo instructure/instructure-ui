@@ -35,12 +35,4 @@ describe('<${COMPONENT} />', () => {
   })
 
   it('should have tests')
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-    })
-  })
 })
