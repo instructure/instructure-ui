@@ -224,8 +224,15 @@ class SelectField extends Component {
     onClose: event => {}
   }
 
-  constructor () {
-    super(...arguments)
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      focus: false,
+      highlightedIndex: this.getSelectedIndex(props),
+      expanded: false,
+      positioned: false
+    }
 
     this._defaultId = generateElementId('Select')
     this._optionsId = generateElementId('Select-Options')
@@ -237,13 +244,6 @@ class SelectField extends Component {
   _inputContainer = null
   _timeouts = []
   timeoutId = null
-
-  state = {
-    focus: false,
-    highlightedIndex: 0,
-    expanded: false,
-    positioned: false
-  }
 
   get id () {
     return this.props.id || this._defaultId
@@ -268,6 +268,21 @@ class SelectField extends Component {
     )
   }
 
+  get selectedIndex () {
+    return this.getSelectedIndex(this.props)
+  }
+
+  getSelectedIndex (props) {
+    if (props.selectedOption) {
+      const index = props.options.findIndex(
+        option => getOptionId(option) === getOptionId(props.selectedOption)
+      )
+      return Math.max(index, 0)
+    } else {
+      return -1
+    }
+  }
+
   componentWillReceiveProps (nextProps) {
     if (this.props.options !== nextProps.options) {
       this.highlightSelectedOption()
@@ -290,8 +305,7 @@ class SelectField extends Component {
 
   close = (event, selectedOption) => {
     this.setState(() => ({
-      expanded: false,
-      highlightedIndex: 0
+      expanded: false
     }))
     this.props.onClose(event, selectedOption)
   }
@@ -305,14 +319,11 @@ class SelectField extends Component {
   }
 
   highlightSelectedOption = () => {
-    if (this.props.selectedOption !== null) {
+    if (this.selectedIndex >= 0) {
       // setTimeout forced due to the need to wait for the browser to render the menu
       this._timeouts.push(
         setTimeout(() => {
-          const index = this.props.options.findIndex(
-            option => getOptionId(option) === getOptionId(this.props.selectedOption)
-          )
-          this.highlightOption(Math.max(index, 0))
+          this.highlightOption(this.selectedIndex)
         }, 0)
       )
     } else {

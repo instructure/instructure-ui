@@ -122,7 +122,6 @@ class SelectOptionsList extends Component {
     loadingText: null,
     emptyOption: '---',
     size: 'medium',
-    highlightedIndex: 0,
     expanded: false,
     menuRef: el => {},
     onHighlightOption: event => {},

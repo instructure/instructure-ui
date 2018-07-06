@@ -199,12 +199,14 @@ describe('<SelectField />', () => {
 
     expect(onSelect).to.not.have.been.called
 
+    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
+
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault })
     testbed.tick()
     expect(subject.instance().expanded).to.be.false
 
-    const value = '0'
-    const label = 'Alabama'
+    const value = '1'
+    const label = 'Alaska'
     expect(onSelect).to.have.been.calledOnce
     expect(onSelect.firstCall.args[0].target).to.exist
     expect(onSelect.firstCall.args[1]).to.eql({ value, label, id: value, children: label })
