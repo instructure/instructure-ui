@@ -32,7 +32,9 @@ const {
  GH_PAGES_DIR,
  GH_PAGES_BRANCH,
  GH_PAGES_REPO,
- GH_PAGES_CNAME
+ GH_PAGES_CNAME,
+ GIT_USERNAME,
+ GIT_EMAIL
 } = process.env
 
 exports.publishGithubPages = async function publishGithubPages () {
@@ -54,7 +56,11 @@ exports.publishGithubPages = async function publishGithubPages () {
   return new Promise((resolve, reject) => {
     ghpages.publish(GH_PAGES_DIR, {
       branch: GH_PAGES_BRANCH,
-      repo: GH_PAGES_REPO
+      repo: GH_PAGES_REPO,
+      user: {
+        name: GIT_USERNAME,
+        email: GIT_EMAIL
+      }
     }, (err) => {
       if (err) {
         if (typeof reject === 'function') {
