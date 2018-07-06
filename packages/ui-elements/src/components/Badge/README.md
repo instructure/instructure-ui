@@ -75,6 +75,9 @@ example: true
 Setting the `standalone` prop to `true` renders Badge as a standalone
 element that is not positioned relative to a child and displays inline-block.
 
+`notification`-type Badges render as circles and should not contain visible
+text.
+
 ```js
 ---
 example: true
@@ -86,11 +89,31 @@ example: true
   &nbsp;&nbsp;
   <Badge standalone variant="danger" count={18} countUntil={10} />
   &nbsp;&nbsp;
-  <Badge standalone type="notification" />
+  <Badge
+    type="notification"
+    standalone
+    formatOutput={function () {
+      return <ScreenReaderContent>This is a notification</ScreenReaderContent>
+    }}
+  />
   &nbsp;&nbsp;
-  <Badge standalone type="notification" variant="success" />
+  <Badge
+    variant="success"
+    type="notification"
+    standalone
+    formatOutput={function () {
+      return <ScreenReaderContent>This is a success notification</ScreenReaderContent>
+    }}
+  />
   &nbsp;&nbsp;
-  <Badge standalone type="notification" variant="danger" />
+  <Badge
+    variant="danger"
+    type="notification"
+    standalone
+    formatOutput={function () {
+      return <ScreenReaderContent>This is a danger notification</ScreenReaderContent>
+    }}
+  />
 </div>
 ```
 
@@ -136,32 +159,72 @@ example: true
     </Badge>
   </View>
   <View as="div">
-    <Badge type="notification" margin="0 large 0 0" placement="top start">
+    <Badge
+      type="notification"
+      margin="0 large 0 0"
+      placement="top start"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
     </Badge>
-    <Badge type="notification" margin="0 large 0 0">
+    <Badge
+      type="notification"
+      margin="0 large 0 0"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
     </Badge>
-    <Badge type="notification" margin="0 large 0 0" placement="bottom start">
+    <Badge
+      type="notification"
+      margin="0 large 0 0"
+      placement="bottom start"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
     </Badge>
-    <Badge type="notification" margin="0 large 0 0" placement="bottom end">
+    <Badge
+      type="notification"
+      margin="0 large 0 0"
+      placement="bottom end"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
     </Badge>
-    <Badge type="notification" margin="0 large 0 0" placement="start center">
+    <Badge
+      type="notification"
+      margin="0 large 0 0"
+      placement="start center"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
     </Badge>
-    <Badge type="notification" placement="end center">
+    <Badge
+      type="notification"
+      placement="end center"
+      formatOutput={function () {
+        return <ScreenReaderContent>Updates are available for your account</ScreenReaderContent>
+      }}
+    >
       <Button variant="icon" icon={IconUser.Solid}>
         <ScreenReaderContent>Edit page</ScreenReaderContent>
       </Button>
