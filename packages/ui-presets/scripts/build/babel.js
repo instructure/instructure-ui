@@ -23,9 +23,15 @@
  */
 
 const { runCommands, getCommand } = require('../utils/command')
-
+// ui-build src --watch
+// ui-build --watch src
+const src = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1))[0] || 'src'
 const vars = []
-const args = ['src', '--ignore *.test.js']
+const args = [src, '--ignore *.test.js']
+
+if (process.argv.includes('--copy-files')) {
+  args.push('--copy-files')
+}
 
 if (process.argv.includes('--watch')) {
   vars.push('NODE_ENV=development')

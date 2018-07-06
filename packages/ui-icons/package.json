@@ -4,6 +4,7 @@
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
+  "module": "./es/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"
@@ -12,9 +13,9 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "clean": "ui-build --clean",
-    "build": "gulp",
+    "build": "gulp && ui-build __build__ --copy-files",
     "export": "gulp export && gulp",
-    "build:watch": "gulp watch"
+    "build:watch": "gulp watch && ui-build __build__ --watch --copy-files"
   },
   "license": "MIT",
   "devDependencies": {

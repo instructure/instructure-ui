@@ -24,7 +24,7 @@
 const libraryName = 'InstructureIcons'
 const packageName = '@instructure/ui-icons'
 const source = './src/'
-const destination = './lib/'
+const destination = './__build__/'
 
 const svg = {
   source: `${source}**/*.sketch`,
@@ -41,8 +41,7 @@ const fonts = {
 
 const react = {
   source: svg.destination,
-  tmp: './__build__/',
-  destination: `${destination}`,
+  destination,
   componentBaseName: 'Icon'
 }
 

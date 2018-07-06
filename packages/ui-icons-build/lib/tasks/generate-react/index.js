@@ -28,7 +28,6 @@ const consolidate = require('gulp-consolidate')
 const rename = require('gulp-rename')
 const cheerio = require('gulp-cheerio')
 const path = require('path')
-const babel = require('gulp-babel')
 const svgtojsx = require('svg-to-jsx')
 
 const formatName = require('../../util/format-name')
@@ -86,7 +85,7 @@ const createReactComponentTask = function (data) {
       .pipe(consolidate('lodash', data))
       .pipe(rename({ basename: data.name, extname: '.js' }))
       .on('error', handleErrors)
-      .pipe(gulp.dest(path.join(config.react.tmp, data.variant)))
+      .pipe(gulp.dest(path.join(config.react.destination, data.variant)))
   })
   return key
 }
@@ -110,21 +109,23 @@ const createMainIndexTask = function () {
 
   const glyphs = Object.keys(GLYPHS)
     .map((name) => {
-      const variants = Object.keys(GLYPHS[name])
+      const glyph = Object.assign({ name }, GLYPHS[name])
+      glyph.variants = Object.keys(GLYPHS[name])
         .map((variant) => {
-          const glyph = GLYPHS[name][variant]
-          return `${glyph.variant}: require('./${path.relative(destination, glyph.path)}').default`
+          return Object.assign(
+            {},
+            GLYPHS[name][variant],
+            { name: variant, path: path.relative(destination, GLYPHS[name][variant].path) }
+          )
         })
-        .join(',\n  ')
-
-      return `${name}: {\n  ${variants}\n}`
+      return glyph
     })
 
   gulp.task(key, () => {
-    return gulp.src(require.resolve('./index.ejs'))
+    return gulp.src(require.resolve('./main.ejs'))
       .pipe(consolidate(
         'lodash',
-        { glyphs: glyphs.join(',\n') }
+        { glyphs }
       ))
       .pipe(rename({ basename: 'index', extname: '.js' }))
       .on('error', handleErrors)
@@ -138,32 +139,23 @@ const createVariantIndexTask = function (variant) {
   const key = `react-index-${variant}`
   const destination = path.join(config.react.destination, variant)
 
-  const glyphs = Object.keys(GLYPHS).map((name) => {
-    const glyph = GLYPHS[name][variant]
-    return `  ${glyph.name}: require('./${path.relative(destination, glyph.path)}').default`
-  })
+  const glyphs = Object.keys(GLYPHS)
+    .map((name) => {
+      const glyph = Object.assign({ name }, GLYPHS[name][variant])
+      glyph.variant = variant
+      glyph.path = path.relative(destination, glyph.path)
+      return glyph
+    })
 
   gulp.task(key, () => {
-    return gulp.src(require.resolve('./index.ejs'))
+    return gulp.src(require.resolve('./variant.ejs'))
       .pipe(consolidate(
         'lodash',
-        { glyphs: glyphs.join(',\n') }
+        { glyphs }
       ))
       .pipe(rename({ basename: 'index', extname: '.js' }))
       .on('error', handleErrors)
       .pipe(gulp.dest(destination))
-  })
-
-  return key
-}
-
-const createReactTranspileTask = function () {
-  const key = 'react-lib-transpile'
-
-  gulp.task(key, () => {
-    return gulp.src(`${config.react.tmp}**/*.js`)
-      .pipe(babel())
-      .pipe(gulp.dest(config.react.destination))
   })
 
   return key
@@ -192,7 +184,6 @@ gulp.task('generate-react', ['generate-react-svg-data'], (cb) => {
 
   sequence(
     createReactComponentsTasks(),
-    [createReactTranspileTask()],
     indexTasks,
     cb
   )

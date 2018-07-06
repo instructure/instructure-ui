@@ -1,0 +1,9 @@
+<% _.each(glyphs, function(glyph) { %>
+export { default as <%= glyph.name %><%= glyph.variant %> } from './<%= glyph.path %>'
+<% }); %>
+
+export default {
+  <% _.each(glyphs, function(glyph) { %>
+  <%= glyph.name %>: require('./<%= glyph.path %>').default,
+  <% }); %>
+}

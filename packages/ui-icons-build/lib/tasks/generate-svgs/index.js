@@ -62,9 +62,27 @@ gulp.task('generate-svgs-index', (cb) => {
     }
   })
 
+  const glyphExports = Object.keys(glyphs)
+    .map((glyph) => {
+      return {
+        name: glyph,
+        variants: Object.keys(glyphs[glyph])
+          .map((variant) => {
+            const data = Object.assign({ variant }, glyphs[glyph][variant])
+            return {
+              name: variant,
+              json: JSON.stringify(data, undefined, 2) // eslint-disable-line no-undefined
+            }
+          })
+      }
+    })
+
   return gulp.src(require.resolve('./index.ejs'))
     .pipe(
-      consolidate('lodash', { glyphs: JSON.stringify(glyphs, undefined, 2) }) // eslint-disable-line no-undefined
+      consolidate('lodash', {
+        glyphs: glyphExports,
+        json: JSON.stringify(glyphs, undefined, 2) // eslint-disable-line no-undefined
+      })
     )
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)

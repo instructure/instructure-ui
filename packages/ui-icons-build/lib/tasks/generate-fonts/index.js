@@ -104,8 +104,22 @@ const createFontTask = function (variant) {
 }
 
 gulp.task('generate-fonts-index', (cb) => {
+  const glyphs = Object.keys(GLYPHS)
+    .map((glyph) => {
+      return {
+        name: glyph,
+        variants: Object.keys(GLYPHS[glyph])
+          .map((variant) => {
+            const data = Object.assign({ variant }, GLYPHS[glyph][variant])
+            return {
+              name: variant,
+              json: JSON.stringify(data, undefined, 2) // eslint-disable-line no-undefined
+            }
+          })
+      }
+    })
   return gulp.src(require.resolve('./index.ejs'))
-    .pipe(consolidate('lodash', { glyphs: JSON.stringify(GLYPHS, undefined, 2) })) // eslint-disable-line no-undefined
+    .pipe(consolidate('lodash', { glyphs: glyphs, json: JSON.stringify(GLYPHS, undefined, 2) })) // eslint-disable-line no-undefined
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.fonts.destination))

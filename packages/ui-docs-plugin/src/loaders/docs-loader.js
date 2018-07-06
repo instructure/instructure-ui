@@ -92,11 +92,12 @@ function parseThemes (themes = [], options) {
 
 function parseIcons (icons = {}) {
   const formats = Object.keys(icons.formats || []).map((format) => {
+    const requirePath = icons.formats[format]
     return `\
 'icons-${format.toLowerCase()}': {
   format: '${format}',
-  glyphs: require('${icons.formats[format]}'),
-  requirePath: '${icons.formats[format]}'
+  glyphs: require('${requirePath}').default,
+  requirePath: '${requirePath}'
 }`
   })
 
