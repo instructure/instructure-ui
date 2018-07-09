@@ -108,8 +108,9 @@ whatever output they desire - using whatever markup and internationalization
 library tags they need. Common usage examples are shown below. Note the
 use of the [Text](#Text) component for easy text formatting.
 
-Don't forget to use the `formatValueText` prop to create easily
-understandable output for screenreader users.
+**Note that `formatDisplayedValue` will not be spoken by screenreaders.**
+Any essential information in `formatDisplayedValue` must also be conveyed
+via `formatValueText` for screenreader users.
 
 #### Showing percent
 
@@ -210,7 +211,8 @@ example: true
   <Progress
     label="Quiz score"
     formatValueText={function (valueNow, valueMax) {
-      return valueNow + ' of ' + valueMax
+      const passing = valueNow > (valueMax / 2) ? 'pass' : 'fail'
+      return `${valueNow} of ${valueMax}: ${passing}`
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       if (valueNow > (valueMax / 2)) {
@@ -235,7 +237,8 @@ example: true
   <Progress
     label="Quiz score"
     formatValueText={function (valueNow, valueMax) {
-      return valueNow + ' of ' + valueMax
+      const passing = valueNow > (valueMax / 2) ? 'pass' : 'fail'
+      return `${valueNow} of ${valueMax}: ${passing}`
     }}
     formatDisplayedValue={function (valueNow, valueMax) {
       if (valueNow > (valueMax / 2)) {

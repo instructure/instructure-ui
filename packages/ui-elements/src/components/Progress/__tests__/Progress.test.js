@@ -63,9 +63,10 @@ describe('<Progress />', () => {
       }
     })
 
-    expect(subject.getAttribute('aria-valuenow')).to.equal('25')
-    expect(subject.getAttribute('aria-valuemax')).to.equal('80')
-    expect(subject.getAttribute('aria-valuetext')).to.equal('25 out of 80')
+    const progress = subject.find('progress')
+    expect(progress.getAttribute('aria-valuenow')).to.equal('25')
+    expect(progress.getAttribute('aria-valuemax')).to.equal('80')
+    expect(progress.getAttribute('aria-valuetext')).to.equal('25 out of 80')
   })
 
   it('should meet a11y standards when rendered as a progress bar', (done) => {

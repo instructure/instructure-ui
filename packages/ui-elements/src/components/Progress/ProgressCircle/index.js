@@ -25,6 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -173,6 +174,12 @@ export default class ProgressCircle extends Component {
     } = this.props
 
     const valueText = formatValueText(valueNow, valueMax)
+
+    // consolidating the label and aria-valuetext to put in aria-label because
+    // NVDA does not read aria-valuetext: https://github.com/nvaccess/nvda/issues/913
+    // But leaving aria-valuetext because JAWS ignores aria-label
+    const labelAndValueText = `${label} ${valueText}`
+
     const value = (typeof formatDisplayedValue === 'function') && formatDisplayedValue(valueNow, valueMax)
 
     const style = this.state.animateOnMount ? null : {
@@ -188,13 +195,22 @@ export default class ProgressCircle extends Component {
         elementRef={this.props.elementRef}
         className={classnames(classes)}
         margin={this.props.margin}
-        role="progressbar"
-        aria-valuetext={valueText}
-        aria-valuenow={valueNow}
-        aria-valuemax={valueMax}
-        aria-label={label}
       >
-        { value && <span className={styles.center}><span className={styles.value}>{value}</span></span> }
+        <ScreenReaderContent>
+          <progress
+            max={valueMax}
+            value={valueNow}
+            aria-valuetext={valueText}
+            aria-valuenow={valueNow}
+            aria-valuemax={valueMax}
+            aria-label={labelAndValueText}
+          />
+        </ScreenReaderContent>
+        { value &&
+          <span className={styles.center} aria-hidden="true">
+            <span className={styles.value}>{value}</span>
+          </span>
+        }
         <svg
           className={styles.circle}
           role="presentation"

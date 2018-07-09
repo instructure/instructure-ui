@@ -135,7 +135,11 @@ export default class ProgressBar extends Component {
           aria-valuemax={valueMax}
           aria-label={label}
         />
-        { value && <span className={styles.value}>{value}</span> }
+        { value &&
+          <span className={styles.value} aria-hidden="true">
+            {value}
+          </span>
+        }
       </View>
     )
     /* eslint-enable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
