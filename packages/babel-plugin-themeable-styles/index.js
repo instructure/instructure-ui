@@ -31,6 +31,7 @@ const {
   isAbsolute
 } = require('path')
 
+const readPkgUp = require('read-pkg-up')
 
 const template = require('babel-template')
 const requireHook = require('css-modules-require-hook')
@@ -62,8 +63,15 @@ module.exports = exports.default = function transformThemeableStyles ({ types: t
         ([plugin]) => plugin.manipulateOptions === pluginApi.manipulateOptions
       )[0][1]
 
+      let hashPrefix = Date.now()
+      const { pkg } = readPkgUp.sync({cwd, normalize: false})
+      if (pkg) {
+        hashPrefix = `${pkg.name}${pkg.version}`
+      }
+
       requireHook({
         ignore: thisPluginOptions.ignore,
+        hashPrefix,
         generateScopedName: getScopedNameGenerator(thisPluginOptions.themeablerc),
         prepend: getPostCSSPlugins(thisPluginOptions.postcssrc),
         processCss: (css, filepath) => {

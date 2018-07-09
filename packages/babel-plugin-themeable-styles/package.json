@@ -18,7 +18,8 @@
   "dependencies": {
     "@instructure/postcss-themeable-styles": "^5.18.0",
     "babel-template": "^6.26.0",
-    "css-modules-require-hook": "^4.2.3"
+    "css-modules-require-hook": "^4.2.3",
+    "read-pkg-up": "^3.0.0"
   },
   "peerDependencies": {
     "babel-core": "^6.26.0"

@@ -25,11 +25,19 @@
 const webpack = require('webpack')
 const HappyPack = require('happypack')
 
+const readPkgUp = require('read-pkg-up')
+
 const loadConfig = require('@instructure/config-loader')
 const { generateScopedName } = loadConfig('themeable', require('../themeable'))
 
 const ENV = process.env.NODE_ENV
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
+
+let hashPrefix = Date.now()
+const { pkg } = readPkgUp.sync({cwd: process.cwd(), normalize: false})
+if (pkg) {
+  hashPrefix = `${pkg.name}${pkg.version}`
+}
 
 module.exports = function plugins (options = {}) {
   const threadPool = options.threadPool || new HappyPack.ThreadPool({ size: 4 })
@@ -59,6 +67,7 @@ module.exports = function plugins (options = {}) {
           options: {
             modules: true,
             importLoaders: 1,
+            hashPrefix,
             localIdentName:
               typeof generateScopedName === 'function' &&
               generateScopedName({
