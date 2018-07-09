@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.18.0"></a>
+# [5.18.0](https://github.com/instructure/instructure-ui/compare/v5.17.0...v5.18.0) (2018-07-09)
+
+
+### Bug Fixes
+
+* **ui-presets:** add git user and email ([f210506](https://github.com/instructure/instructure-ui/commit/f210506))
+
+
+### Features
+
+* **ui-presets:** move .env variables into package.json for ui-scripts ([5e97982](https://github.com/instructure/instructure-ui/commit/5e97982))
+
+
+
+
+
 <a name="5.17.0"></a>
 # [5.17.0](https://github.com/instructure/instructure-ui/compare/v5.16.0...v5.17.0) (2018-07-06)
 
