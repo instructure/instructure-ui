@@ -52,6 +52,8 @@ import warning from '../warning'
 */
 export default function deprecated (version, oldProps, message) {
   return function (ComposedComponent) {
+    if (process.env.NODE_ENV === 'production') return ComposedComponent
+
     const displayName = getDisplayName(ComposedComponent)
 
     class DeprecatedComponent extends ComposedComponent {
