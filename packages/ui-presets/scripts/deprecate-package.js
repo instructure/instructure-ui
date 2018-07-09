@@ -24,13 +24,15 @@
 
 const { deprecatePackage } = require('./utils/release')
 const { error } = require('./utils/logger')
+const { getPackageJSON, getConfig } = require('./utils/get-package')
 
 try {
   // optional fix version argument:
   // ui-scripts --deprecate-package 5.11.0
   const fixVersion = process.argv[3]
   const message = fixVersion ? `A critical bug was fixed in ${fixVersion}` : ''
-  deprecatePackage(message)
+  const pkgJSON = getPackageJSON()
+  deprecatePackage(pkgJSON.name, pkgJSON.version, message, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)

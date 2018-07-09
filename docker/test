@@ -40,28 +40,16 @@ CI=true
 NPM_TOKEN=${NPM_TOKEN}
 NPM_USERNAME=${NPM_USERNAME}
 NPM_EMAIL=${NPM_EMAIL}
-NPM_SCOPE=${NPM_SCOPE}
-GIT_HOST_NAME=${GIT_HOST_NAME}
-GIT_REMOTE_NAME=${GIT_REMOTE_NAME}
-GIT_REMOTE_URL=${GIT_REMOTE_URL}
 GIT_EMAIL=${GIT_EMAIL}
 GIT_USERNAME=${GIT_USERNAME}
-GH_PAGES_DIR=${GH_PAGES_DIR}
-GH_PAGES_BRANCH=${GH_PAGES_BRANCH}
-GH_PAGES_REPO=${GH_PAGES_REPO}
-GH_PAGES_CNAME=${GH_PAGES_CNAME}
-JIRA_HOST=${JIRA_HOST}
+GIT_REMOTE_URL=${GIT_REMOTE_URL}
+GIT_REMOTE_NAME=${GIT_REMOTE_NAME}
 JIRA_CONSUMER_KEY=${JIRA_CONSUMER_KEY}
 JIRA_TOKEN=${JIRA_TOKEN}
 JIRA_SECRET=${JIRA_SECRET}
 JIRA_PEM_PATH=/home/docker/.ssh/gerritbot_jira.pem
-JIRA_PROJECT_ID=${JIRA_PROJECT_ID}
-JIRA_PROJECT_KEY=${JIRA_PROJECT_KEY}
 SLACK_USERNAME=${SLACK_USERNAME}
-SLACK_CHANNEL=${SLACK_CHANNEL}
-SLACK_EMOJI=${SLACK_EMOJI}
 SLACK_WEBHOOK=${SLACK_WEBHOOK}
-CHANGELOG_URL=${CHANGELOG_URL}
 EOF
 ) > $env_file
 
@@ -73,8 +61,6 @@ docker-compose build
 
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
-
-ssh-keyscan github.com >> ~/.ssh/known_hosts 2> /dev/null
 
 docker cp ~/.ssh $container:/home/docker/.ssh
 docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh

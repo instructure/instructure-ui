@@ -31,19 +31,16 @@ const { info, error } = require('./logger')
 const {
   JIRA_PEM_PATH,
   JIRA_TOKEN,
-  JIRA_HOST,
   JIRA_CONSUMER_KEY,
-  JIRA_SECRET,
-  JIRA_PROJECT_ID,
-  JIRA_PROJECT_KEY
+  JIRA_SECRET
 } = process.env
 
 let JIRA
 
-function jiraClient () {
+function jiraClient (config = {}) {
   if (!JIRA) {
     JIRA = new Jira({
-      host: JIRA_HOST,
+      host: config.jira_host,
       protocol: 'https',
       oauth: {
         consumer_key: JIRA_CONSUMER_KEY,
@@ -56,12 +53,12 @@ function jiraClient () {
   return JIRA
 }
 
-exports.createJiraVersion = async function createJiraVersion (name, version) {
+exports.createJiraVersion = async function createJiraVersion (name, version, config = {}) {
   const result = await jiraClient().createVersion({
     name: `${name} v${version}`,
     archived: false,
     released: true,
-    projectId: JIRA_PROJECT_ID
+    projectId: config.jira_project_id
   })
 
   // result = {
@@ -77,12 +74,12 @@ exports.createJiraVersion = async function createJiraVersion (name, version) {
 
   return {
     ...result,
-    url: `https://${JIRA_HOST}/projects/${JIRA_PROJECT_KEY}/versions/${result.id}`
+    url: `https://${config.jira_host}/projects/${config.jira_project_key}/versions/${result.id}`
   }
 }
 
-exports.getIssuesInRelease = async function getIssuesInRelease () {
-  info(`Looking up issues for the ${JIRA_PROJECT_KEY} project...`)
+exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
+  info(`Looking up issues for the ${config.jira_project_key} project...`)
   let result
 
   try {
@@ -98,7 +95,7 @@ exports.getIssuesInRelease = async function getIssuesInRelease () {
   issueKeys = (result ? result.split(/\s+/g) : [])
 
   issueKeys = issueKeys
-    .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
+    .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
 
   if (issueKeys.length > 0) {
     info(`Issues in this release: ${issueKeys.join(', ')}`)
@@ -107,7 +104,7 @@ exports.getIssuesInRelease = async function getIssuesInRelease () {
   return issueKeys
 }
 
-exports.getIssuesInCommit = async function getIssuesInCommit () {
+exports.getIssuesInCommit = async function getIssuesInCommit (config = {}) {
   let result
 
   try {
@@ -120,7 +117,7 @@ exports.getIssuesInCommit = async function getIssuesInCommit () {
   issueKeys = (result ? result.split(/\s+/g) : [])
 
   issueKeys = issueKeys
-    .filter(key => key.indexOf(`${JIRA_PROJECT_KEY}`) != -1)
+    .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
 
   if (issueKeys.length > 0) {
     info(`Issues in this release: ${issueKeys.join(', ')}`)

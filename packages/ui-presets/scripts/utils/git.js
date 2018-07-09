@@ -40,13 +40,17 @@ exports.setupGit = async function setupGit () {
   try {
     await runCommandAsync(`git config --list`)
 
-    if (!await runCommandAsync(`git remote | grep ${GIT_REMOTE_NAME}`)) {
-      await runCommandAsync(`git remote add ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL}`)
-    } else {
-      await runCommandAsync(`git remote set-url ${GIT_REMOTE_NAME} ${GIT_REMOTE_URL}`)
+    const origin = GIT_REMOTE_NAME || 'origin'
+
+    if (GIT_REMOTE_URL) {
+      if (!await runCommandAsync(`git remote | grep ${origin}`)) {
+        await runCommandAsync(`git remote add ${origin} ${GIT_REMOTE_URL}`)
+      } else {
+        await runCommandAsync(`git remote set-url ${origin} ${GIT_REMOTE_URL}`)
+      }
     }
 
-    await runCommandAsync(`git fetch ${GIT_REMOTE_NAME} --tags --force`)
+    await runCommandAsync(`git fetch ${origin} --tags --force`)
 
     if (GIT_EMAIL) {
       await runCommandAsync(`git config user.email "${GIT_EMAIL}"`)
@@ -145,9 +149,11 @@ exports.checkIfCommitIsReviewed = async function checkIfCommitIsReviewed () {
 exports.createGitTagForRelease = async function createGitTagForRelease (version) {
   const tag = `v${version}`
   const { GIT_REMOTE_NAME } = process.env
+  const origin = GIT_REMOTE_NAME || 'origin'
+
   try {
     await runCommandAsync(`git tag -am "Version ${version}" ${tag}`)
-    await runCommandAsync(`git push ${GIT_REMOTE_NAME} ${tag}`)
+    await runCommandAsync(`git push ${origin} ${tag}`)
   } catch (e) {
     error(e)
     process.exit(1)

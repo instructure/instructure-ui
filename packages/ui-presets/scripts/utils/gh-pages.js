@@ -29,34 +29,34 @@ const { error, info } = require('./logger')
 const fs = require('fs')
 
 const {
- GH_PAGES_DIR,
- GH_PAGES_BRANCH,
- GH_PAGES_REPO,
- GH_PAGES_CNAME,
+ GIT_REMOTE_URL,
  GIT_USERNAME,
  GIT_EMAIL
 } = process.env
 
-exports.publishGithubPages = async function publishGithubPages () {
-  if (!fs.existsSync(`${GH_PAGES_DIR}`)) {
-    error(`GH pages directory doesn't exist!`)
+exports.publishGithubPages = async function publishGithubPages (config = {
+  gh_pages_dir: '.',
+  gh_pages_branch: 'gh-pages'
+}) {
+  if (!fs.existsSync(`${config.gh_pages_dir}`)) {
+    error(`GH pages directory doesn't exist! Do you need to build the documentation?`)
     process.exit(1)
   }
 
-  info(`📖   Deploying ${GH_PAGES_DIR} to Github pages...`)
-  info(`📖   Repository: ${GH_PAGES_REPO}...`)
-  info(`📖   Branch: ${GH_PAGES_BRANCH}...`)
+  info(`📖   Deploying '${config.gh_pages_dir}' to Github pages...`)
+  info(`📖   Repository: ${GIT_REMOTE_URL}...`)
+  info(`📖   Branch: ${config.gh_pages_branch}...`)
 
-  await runCommandAsync(`touch ${GH_PAGES_DIR}/.nojekyll`)
+  await runCommandAsync(`touch ${config.gh_pages_dir}/.nojekyll`)
 
-  if (GH_PAGES_CNAME) {
-    await runCommandAsync(`echo "${GH_PAGES_CNAME}" >> ${GH_PAGES_DIR}/CNAME`)
+  if (config.gh_pages_cname) {
+    await runCommandAsync(`echo "${config.gh_pages_cname}" >> ${config.gh_pages_dir}/CNAME`)
   }
 
   return new Promise((resolve, reject) => {
-    ghpages.publish(GH_PAGES_DIR, {
-      branch: GH_PAGES_BRANCH,
-      repo: GH_PAGES_REPO,
+    ghpages.publish(config.gh_pages_dir, {
+      branch: config.gh_pages_branch,
+      repo: GIT_REMOTE_URL,
       user: {
         name: GIT_USERNAME,
         email: GIT_EMAIL

@@ -24,13 +24,13 @@
 
 const { publishPackage } = require('./utils/release')
 const { error } = require('./utils/logger')
-const { getPackageJSON } = require('./utils/get-package')
+const { getPackageJSON, getConfig } = require('./utils/get-package')
 
 try {
-  const { version } = getPackageJSON()
+  const pkgJSON = getPackageJSON()
   // optional version argument
   // ui-scripts --publish-package 5.12.2
-  publishPackage(process.argv[3] || version)
+  publishPackage(pkgJSON.name, pkgJSON.version, process.argv[3] || pkgJSON.version, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)

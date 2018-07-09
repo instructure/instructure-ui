@@ -26,53 +26,20 @@ const https = require('https')
 const { info } = require('./logger')
 
 const {
- SLACK_CHANNEL,
  SLACK_USERNAME,
- SLACK_EMOJI,
- CHANGELOG_URL,
  SLACK_WEBHOOK
 } = process.env
 
-exports.postStableReleaseSlackMessage = function postReleaseSlackMessage (jiraVersion, issueKeys) {
-  if (SLACK_CHANNEL && SLACK_WEBHOOK) {
-    info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
+function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':robot_face:'}) {
+  if (config.slack_channel && SLACK_WEBHOOK) {
+    info(`💬  Pinging slack channel: ${config.slack_channel}`)
 
-    const message = `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:`
-    const changelog = CHANGELOG_URL ? `\n ${CHANGELOG_URL}` : ''
     const issues = (issueKeys.length > 0) ? `\n\nIssues in this release: ${issueKeys.join(', ')}` : ''
 
     const payload = {
-      'channel': SLACK_CHANNEL,
+      'channel': config.slack_channel,
       'username': SLACK_USERNAME,
-      'icon_emoji': SLACK_EMOJI,
-      'text': message + changelog + issues,
-      'link_names': 1
-    }
-
-    const req = https.request({
-      path: `/services/${SLACK_WEBHOOK}`,
-      hostname: 'hooks.slack.com',
-      method: 'POST'
-    })
-
-    req.write(JSON.stringify(payload))
-    req.end()
-
-    info(`💬  Posted Slack Message: "${message + changelog + issues}"`) // eslint-disable-line no-console
-  }
-}
-
-exports.postReleaseCandidateSlackMessage = function postReleaseSlackMessage (name, version, issueKeys) {
-  if (SLACK_CHANNEL && SLACK_WEBHOOK) {
-    info(`💬  Pinging slack channel: ${SLACK_CHANNEL}`) // eslint-disable-line no-console
-
-    const message = `*A release candidate, ${version}, for ${name} has been published!* :party:`
-    const issues = (issueKeys.length > 0) ? `\n\nIssues in this RC: ${issueKeys.join(', ')}` : ''
-
-    const payload = {
-      'channel': SLACK_CHANNEL,
-      'username': SLACK_USERNAME,
-      'icon_emoji': SLACK_EMOJI,
+      'icon_emoji': config.slack_emoji,
       'text': message + issues,
       'link_names': 1
     }
@@ -86,6 +53,17 @@ exports.postReleaseCandidateSlackMessage = function postReleaseSlackMessage (nam
     req.write(JSON.stringify(payload))
     req.end()
 
-    info(`💬  Posted Slack Message: "${message + issues}"`) // eslint-disable-line no-console
+    info(`💬  Posted Slack Message: "${message + issues}"`)
   }
+}
+
+exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], config = {}) => {
+  const message = `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:`
+  const changelog = config.changelog_url ? `\n ${config.changelog_url}` : ''
+  postSlackMessage(message + changelog, issueKeys, config)
+}
+
+exports.postReleaseCandidateSlackMessage = (packageName, releaseVersion, issueKeys, config = {}) => {
+  const message = `*A release candidate, ${releaseVersion}, for ${packageName} has been published!* :party:`
+  postSlackMessage(message, config)
 }

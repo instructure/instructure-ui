@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-const { getPackageJSON } = require('./utils/get-package')
+const { getPackageJSON, getConfig } = require('./utils/get-package')
 const { postPublish } = require('./utils/release')
 const { error } = require('./utils/logger')
 
 try {
-  const { version, name } = getPackageJSON()
-  postPublish(name, version)
+  const pkgJSON = getPackageJSON()
+  postPublish(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)

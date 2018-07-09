@@ -49,32 +49,31 @@ const {
 const { error, info } = require('./logger')
 const { publishGithubPages } = require('./gh-pages')
 
-async function checkPackagePublished (name, version) {
-  const result = runCommandAsync(`npm info ${name}@${version} version`)
-  if (result === version) {
-    error(`$package@$version is already published!`)
+async function checkPackagePublished (packageName, currentVersion) {
+  const result = runCommandAsync(`npm info ${packageName}@${currentVersion} version`)
+  if (result === currentVersion) {
+    error(`${packageName}@${currentVersion} is already published!`)
     process.exit(1)
   }
 }
 
-async function createNPMRCFile () {
+async function createNPMRCFile (config = {}) {
   const {
    NPM_TOKEN,
-   NPM_SCOPE,
    NPM_EMAIL,
    NPM_USERNAME
   } = process.env
 
   fs.writeFileSync(
     path.resolve(process.cwd(), '.npmrc'),
-    `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${NPM_SCOPE}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
+    `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${config.npm_scope}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
   )
 
   await runCommandAsync('npm whoami')
 }
 
-const getReleaseVersion = async function getReleaseVersion () {
-  let releaseVersion = getPackageJSON().version
+const getReleaseVersion = async function getReleaseVersion (currentVersion) {
+  let releaseVersion = currentVersion
 
   await checkWorkingDirectory()
 
@@ -96,12 +95,12 @@ const getReleaseVersion = async function getReleaseVersion () {
 }
 exports.getReleaseVersion = getReleaseVersion
 
-const publish = async function publish (releaseVersion) {
+const publish = async function publish (packageName, currentVersion, releaseVersion, config = {}) {
   await setupGit()
-  await createNPMRCFile()
-  const { name, version } = getPackageJSON()
+  await createNPMRCFile(config)
+
   const releaseCommit = await isReleaseCommit(releaseVersion)
-  const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
+  const npmTag = (currentVersion === releaseVersion) ? 'latest' : 'rc'
   const args = [
     '--yes',
     '--skip-git',
@@ -112,7 +111,7 @@ const publish = async function publish (releaseVersion) {
 
   await checkWorkingDirectory()
 
-  if (version === releaseVersion) {
+  if (currentVersion === releaseVersion) {
     if (releaseCommit) {
       checkIfCommitIsReviewed()
     } else {
@@ -121,7 +120,7 @@ const publish = async function publish (releaseVersion) {
     }
   }
 
-  info(`📦  Publishing ${npmTag} ${releaseVersion} of ${name}...`)
+  info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
 
   try {
     await runCommandAsync(`$(npm bin)/lerna publish ${args.join(' ')}`)
@@ -130,46 +129,46 @@ const publish = async function publish (releaseVersion) {
     process.exit(1)
   }
 
-  info(`📦  Version ${npmTag} ${releaseVersion} of ${name} was successfully published!`)
+  info(`📦  Version ${npmTag} ${releaseVersion} of ${packageName} was successfully published!`)
 }
 exports.publish = publish
 
-const postPublish = async function postPublish (name, releaseVersion) {
+const postPublish = async function postPublish (packageName, releaseVersion, config = {}) {
   if (await isReleaseCommit(releaseVersion)) {
-    info(`Running post-publish steps for ${releaseVersion} of ${name}...`)
+    info(`Running post-publish steps for ${releaseVersion} of ${packageName}...`)
     await checkIfCommitIsReviewed()
     await createGitTagForRelease(releaseVersion)
 
     try {
-      await publishGithubPages()
+      await publishGithubPages(config)
     } catch (err) {
       error(err)
       process.exit(1)
     }
 
-    const issueKeys = await getIssuesInRelease()
-    const jiraVersion = await createJiraVersion(name, releaseVersion)
-    await updateJiraIssues(issueKeys, jiraVersion.name)
+    const issueKeys = await getIssuesInRelease(config)
+    const jiraVersion = await createJiraVersion(packageName, releaseVersion, config)
+    await updateJiraIssues(issueKeys, jiraVersion.name, config)
 
-    postStableReleaseSlackMessage(jiraVersion, issueKeys)
+    postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
   } else {
-    const issueKeys = await getIssuesInCommit()
-    postReleaseCandidateSlackMessage(name, releaseVersion, issueKeys)
+    const issueKeys = await getIssuesInCommit(config)
+    postReleaseCandidateSlackMessage(packageName, releaseVersion, issueKeys, config)
   }
 }
 exports.postPublish = postPublish
 
-exports.publishPackage = async function publishPackage (releaseVersion) {
+exports.publishPackage = async function publishPackage (packageName, currentVersion, releaseVersion, config = {}) {
   await setupGit()
-  await createNPMRCFile()
-  const { name, version } = getPackageJSON()
+  await createNPMRCFile(config)
+
   const releaseCommit = await isReleaseCommit(releaseVersion)
-  const npmTag = (version === releaseVersion) ? 'latest' : 'rc'
+  const npmTag = (currentVersion === releaseVersion) ? 'latest' : 'rc'
 
   await checkWorkingDirectory()
-  await checkPackagePublished(name, releaseVersion)
+  await checkPackagePublished(packageName, releaseVersion)
 
-  if (version === releaseVersion) {
+  if (currentVersion === releaseVersion) {
     if (releaseCommit) {
       checkIfCommitIsReviewed()
     } else {
@@ -178,21 +177,20 @@ exports.publishPackage = async function publishPackage (releaseVersion) {
     }
   }
 
-  info(`📦  Publishing ${npmTag} ${releaseVersion} of ${name}...`)
+  info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
   await runCommandAsync(`$(npm bin)/yarn publish --tag ${npmTag}`)
-  info(`📦  Version ${releaseVersion} of ${name} was successfully published!`)
+  info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
 }
 
-exports.deprecatePackage = async function deprecatePackage (message) {
-  await createNPMRCFile()
-  const { name, version } = getPackageJSON()
-  const pkg = `${name}@${version}`
+exports.deprecatePackage = async function deprecatePackage (packageName, currentVersion, message, config = {}) {
+  await createNPMRCFile(config)
+  const pkg = `${packageName}@${currentVersion}`
 
   info(`📦  Deprecating ${pkg}...`)
   await runCommandAsync(`npm deprecate ${pkg} ${message}`)
 }
 
-exports.bump = async function bump (releaseType) {
+exports.bump = async function bump (releaseType, config = {}) {
   await setupGit()
   await checkWorkingDirectory()
 
@@ -224,19 +222,17 @@ exports.bump = async function bump (releaseType) {
   await runCommandAsync(`git commit -a -m "chore(release): ${version}"`)
 }
 
-exports.release = async function release (version) {
-  const { name } = getPackageJSON()
-
+exports.release = async function release (packageName, currentVersion, releaseVersion, config = {}) {
   await setupGit()
 
-  let releaseVersion = version
+  let versionToRelease = releaseVersion
 
-  if (!releaseVersion) {
-    info(`Determining release version for ${name}...`)
-    releaseVersion = await getReleaseVersion()
+  if (!versionToRelease) {
+    info(`Determining release version for ${packageName}...`)
+    versionToRelease = await getReleaseVersion(currentVersion)
   }
 
-  info(`Publishing version ${releaseVersion} of ${name}...`)
+  info(`Publishing version ${versionToRelease} of ${packageName}...`)
 
   if (!process.env.CI) {
     const confirm = rl.createInterface({
@@ -252,9 +248,9 @@ exports.release = async function release (version) {
     })
   }
 
-  await publish(releaseVersion)
+  await publish(packageName, currentVersion, versionToRelease, config)
 
-  await postPublish(name, releaseVersion)
+  await postPublish(packageName, versionToRelease, config)
 
-  info(`Version ${releaseVersion} of ${name} was successfully released!`)
+  info(`Version ${versionToRelease} of ${packageName} was successfully released!`)
 }

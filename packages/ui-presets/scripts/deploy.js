@@ -23,9 +23,10 @@
  */
 const { publishGithubPages } = require('./utils/gh-pages')
 const { error } = require('./utils/logger')
+const { getPackageJSON, getConfig } = require('./utils/get-package')
 
 try {
-  publishGithubPages()
+  publishGithubPages(getConfig(getPackageJSON()))
 } catch (err) {
   error(err)
   process.exit(1)

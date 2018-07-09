@@ -29,3 +29,7 @@ exports.getPackageJSON = function getPackageJSON () {
     cwd: fs.realpathSync(process.cwd()),
   }).pkg
 }
+
+exports.getConfig = function getConfig (pkgJSON = {}) {
+  return (pkgJSON.config && pkgJSON.config['ui-scripts']) ? pkgJSON.config['ui-scripts'] : {}
+}
