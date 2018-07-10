@@ -30,7 +30,7 @@
   "dependencies": {
     "bowser": "^1.9.1",
     "decimal.js": "^9.0.1",
-    "deep-equal": "^1.0.1",
+    "fast-deep-equal": "^2",
     "keycode": "^2.1.8",
     "moment-timezone": "^0.5.14",
     "numeral": "^2.0.6",

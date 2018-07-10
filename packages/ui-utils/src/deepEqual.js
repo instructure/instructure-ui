@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-import deepEqual from 'deep-equal'
+import deepEqual from 'fast-deep-equal'
 /**
  * ---
  * category: utilities
  * ---
- * A wrapper for [deep-equal](https://www.npmjs.com/package/deep-equal)
+ * A wrapper for [fast-deep-equal](https://www.npmjs.com/package/fast-deep-equal)
  */
 export default deepEqual

@@ -24,8 +24,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import deepEqual from 'deep-equal'
 
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
