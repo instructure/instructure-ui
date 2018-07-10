@@ -77,8 +77,7 @@ export default class FocusRegion {
   }
 
   handleDocumentClick = event => {
-    if (this._options.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick &&
-        !event.defaultPrevented) {
+    if (this._options.shouldCloseOnDocumentClick && !this._preventCloseOnDocumentClick) {
       this.handleDismiss(event, true)
     }
   }
