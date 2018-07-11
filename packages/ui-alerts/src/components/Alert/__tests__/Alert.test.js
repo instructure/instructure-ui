@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import IconComplete from '@instructure/ui-icons/lib/Solid/IconComplete'
+import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
 import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
 
@@ -92,7 +92,7 @@ describe('<Alert />', () => {
   describe('`variant` is success', () => {
     const variantModifications = {
       className: styles.success,
-      iconComponent: IconComplete
+      iconComponent: IconCheckMark
     }
     variantChanges('success', variantModifications)
   })

@@ -76,7 +76,8 @@ const deprecated = {
   'text-left' : 'text-start',
   'text-right' : 'text-end',
   'toggle-left' : 'toggle-start',
-  'toggle-right' : 'toggle-end'
+  'toggle-right' : 'toggle-end',
+  'unpublish' : 'unpublished'
 }
 
 const bidirectional = [
