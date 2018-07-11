@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 const { runCommandAsync, runCommand } = require('./command')
-const { error } = require('./logger')
+const { info, error } = require('./logger')
 const validateMessage = require('validate-commit-msg')
 
 exports.commit = function () {
@@ -87,7 +87,7 @@ exports.isReleaseCommit = async function isReleaseCommit (version) {
   try {
     result = await runCommandAsync(`git log --oneline --format=%B -n 1 HEAD | head -n 1 | grep "chore(release)"`)
   } catch (e) {
-    error(e)
+    info(`Not on a release commit - this is a release candidate`)
     return false
   }
 
