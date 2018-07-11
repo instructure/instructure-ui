@@ -65,8 +65,7 @@ export default class App extends Component {
     themes: PropTypes.object,
     icons: PropTypes.object,
     descriptions: PropTypes.object,
-    library: LibraryPropType.isRequired,
-    showMenu: PropTypes.bool
+    library: LibraryPropType.isRequired
   }
 
   static defaultProps = {
@@ -74,8 +73,7 @@ export default class App extends Component {
     themes: {},
     parents: {},
     sections: {},
-    descriptions: {},
-    showMenu: false
+    descriptions: {}
   }
 
   static childContextTypes = {
@@ -88,10 +86,8 @@ export default class App extends Component {
     super()
 
     this.state = {
-      key: undefined, // eslint-disable-line no-undefined
-      showMenu: props.showMenu,
-      trayOverlay: false,
-      themeKey: undefined // eslint-disable-line no-undefined
+      showMenu: false,
+      trayOverlay: false
     }
   }
 
@@ -214,8 +210,7 @@ export default class App extends Component {
     }
 
     const description = descriptions[doc.id]
-    // eslint-disable-next-line no-undefined
-    const heading = doc.extension !== '.md' ? doc.title : undefined
+    const heading = (doc.extension !== '.md') && doc.title
 
     return (
       <div>
