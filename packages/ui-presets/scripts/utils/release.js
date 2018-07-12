@@ -219,7 +219,7 @@ exports.bump = async function bump (releaseType, config = {}) {
 
   info(`💾  Committing version bump commit for ${name} ${version}...`)
 
-  await runCommandAsync(`git commit -a --no-verify -m "chore(release): ${version}"`)
+  await runCommandAsync(`git commit -a -m "chore(release): ${version}"`)
 }
 
 exports.release = async function release (packageName, currentVersion, releaseVersion, config = {}) {
