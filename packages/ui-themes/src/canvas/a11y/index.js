@@ -22,29 +22,25 @@
  * SOFTWARE.
  */
 
-import { registerTheme, makeTheme } from '@instructure/ui-themeable/lib/registry'
+import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 import warning from '@instructure/ui-utils/lib/warning'
 
 import KEYS from '../../keys'
 
 import colors from '../high-contrast/colors'
-import base from '../base'
-
-const theme = {
-  key: KEYS.CANVAS_A11Y,
-  immutable: true,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables: {
-    ...base.variables,
-    colors
-  }
-}
+import { baseVariables } from '../base'
 
 warning(
   false,
   `The '${KEYS.CANVAS_A11Y}' theme was deprecated in 5.0.0. Use '${KEYS.CANVAS_HIGH_CONTRAST}' instead.`
 )
 
-registerTheme(theme)
-
-export default makeTheme({ theme })
+export default registerTheme({
+  key: KEYS.CANVAS_A11Y,
+  immutable: true,
+  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
+  variables: {
+    ...baseVariables,
+    colors
+  }
+})

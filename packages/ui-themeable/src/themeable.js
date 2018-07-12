@@ -38,9 +38,9 @@ import getCssText from './utils/getCssText'
 import setTextDirection from './utils/setTextDirection'
 
 import {
-  registerComponentTheme,
   generateComponentTheme,
-  generateTheme
+  generateTheme,
+  registerComponentTheme
 } from './registry'
 
 import StyleSheet from './StyleSheet'
@@ -118,12 +118,9 @@ export default function themeable (theme, styles = {}) {
     }
 
     class ThemeableComponent extends ComposedComponent {
-      constructor (props, context) {
-        super(props, context)
 
-        this._themeCache = null
-        this._instanceId = generateElementId(displayName)
-      }
+      _themeCache = null
+      _instanceId = generateElementId(displayName)
 
       static displayName = displayName
       // For testing purposes
@@ -166,17 +163,17 @@ export default function themeable (theme, styles = {}) {
 
       shouldComponentUpdate (nextProps, nextState, nextContext) {
         const themeContextWillChange = !deepEqual(getThemeContext(this.context), getThemeContext(nextContext))
-        let shouldUpdate = true
+        if (themeContextWillChange) return true
 
         if (super.shouldComponentUpdate) {
-          shouldUpdate = super.shouldComponentUpdate(nextProps, nextState, nextContext)
-          return themeContextWillChange || shouldUpdate
-        } else {
-          return themeContextWillChange ||
-            !shallowEqual(this.props, nextProps) ||
-            !shallowEqual(this.state, nextState) ||
-            !shallowEqual(this.context, nextContext)
+          return super.shouldComponentUpdate(nextProps, nextState, nextContext)
         }
+
+        return (
+          !shallowEqual(this.props, nextProps) ||
+          !shallowEqual(this.state, nextState) ||
+          !shallowEqual(this.context, nextContext)
+        )
       }
 
       componentWillUpdate (nextProps, nextState, nextContext) {

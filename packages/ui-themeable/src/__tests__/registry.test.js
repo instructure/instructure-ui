@@ -29,8 +29,7 @@ import {
   registerTheme,
   getRegistry,
   clearRegistry,
-  setRegistry,
-  makeTheme
+  setRegistry
 } from '../registry'
 
 describe('registry', () => {
@@ -54,7 +53,6 @@ describe('registry', () => {
     }
   }
 
-  const bar = { key: 'bar', variables: { red: 'magenta', brand: 'turquoise' } }
   const baz = { key: 'baz', variables: { red: 'pink' } }
   const accessible = {
     key: 'accessible',
@@ -69,19 +67,19 @@ describe('registry', () => {
     purple: 'purple'
   }
 
-  const defaultTheme = makeTheme({
-    theme: bar,
-    a11y: accessible
-  })
+  let defaultTheme
 
   beforeEach(() => {
     clearRegistry()
 
     registerComponentTheme(KEY, generator)
 
-    registerTheme(bar)
     registerTheme(baz)
-    registerTheme(accessible)
+
+    defaultTheme = registerTheme({
+      key: 'bar', variables: { red: 'magenta', brand: 'turquoise' },
+      a11y: registerTheme(accessible)
+    })
 
     defaultTheme.use({ overrides })
   })

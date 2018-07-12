@@ -22,22 +22,18 @@
  * SOFTWARE.
  */
 
-import { registerTheme, makeTheme } from '@instructure/ui-themeable/lib/registry'
+import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 import KEYS from '../../keys'
 
 import colors from './colors'
-import base from '../base'
+import { baseVariables } from '../base'
 
-const theme = {
+export default registerTheme({
   key: KEYS.CANVAS_HIGH_CONTRAST,
   immutable: true,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   variables: {
-    ...base.variables,
+    ...baseVariables,
     colors
   }
-}
-
-registerTheme(theme)
-
-export default makeTheme({ theme })
+})

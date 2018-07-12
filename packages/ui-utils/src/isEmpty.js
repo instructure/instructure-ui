@@ -21,23 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const hasOwnProperty = Object.prototype.hasOwnProperty
 
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
-import Browser from '@instructure/ui-utils/lib/Browser'
-
-let cachedReturnVal
-/**
- * ---
- * category: utilities/DOM
- * ---
- * check if CSS custom properties (CSS variables) are supported
- * @returns {Boolean} true if the DOM is available and CSS variables are supported
- */
-export default function customPropertiesSupported () {
-  if (typeof cachedReturnVal !== 'undefined') return cachedReturnVal
-  return cachedReturnVal = (
-    canUseDOM &&
-    !(Browser.msedge) && // polyfill edge until improved css variable support
-    window.CSS && window.CSS.supports && window.CSS.supports('color', 'var(--primary)')
-  )
+export default function isEmpty (obj) {
+  if (typeof obj !== 'object') return false
+  for (let key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false
+  }
+  return true
 }

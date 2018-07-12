@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 
-import { registerTheme, makeTheme } from '@instructure/ui-themeable/lib/registry'
+import { registerTheme } from '@instructure/ui-themeable/lib/registry'
+
 import KEYS from '../../keys'
 
 import borders from './borders'
@@ -36,9 +37,9 @@ import breakpoints from './breakpoints'
 import shadows from './shadows'
 import stacking from './stacking'
 
-const key = KEYS.CANVAS
+export const key = KEYS.CANVAS
 
-const variables = {
+export const baseVariables = {
   borders,
   colors,
   transitions,
@@ -71,12 +72,12 @@ export const brandVariables = {
   'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
 
-const theme = {
-  key,
-  variables
+export const variables = {
+  ...baseVariables,
+  ...brandVariables
 }
 
-// register the brand variables but don't export them because we don't want canvas-high-contrast to inherit them
-registerTheme({ key, variables: { ...variables, ...brandVariables } })
-
-export default makeTheme({ theme })
+export default registerTheme({
+  key: KEYS.CANVAS,
+  variables
+})

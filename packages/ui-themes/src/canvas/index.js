@@ -22,12 +22,13 @@
  * SOFTWARE.
  */
 
-import { makeTheme } from '@instructure/ui-themeable/lib/registry'
+import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 
-import theme from './base'
+import { key, variables } from './base'
 import highContrast from './high-contrast'
 
-export default makeTheme({
-  theme,
+export default registerTheme({
+  key,
+  variables,
   a11y: highContrast
 })
