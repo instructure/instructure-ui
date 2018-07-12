@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.19.0"></a>
+# [5.19.0](https://github.com/instructure/instructure-ui/compare/v5.18.0...v5.19.0) (2018-07-12)
+
+
+### Bug Fixes
+
+* **babel-plugin-themeable-styles,ui-presets:** add hashPrefix to CSS classes ([3e0d269](https://github.com/instructure/instructure-ui/commit/3e0d269))
+
+
+
+
+
 <a name="5.18.0"></a>
 # [5.18.0](https://github.com/instructure/instructure-ui/compare/v5.17.0...v5.18.0) (2018-07-09)
 

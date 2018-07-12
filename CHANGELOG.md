@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.19.0"></a>
+# [5.19.0](https://github.com/instructure/instructure-ui/compare/v5.18.0...v5.19.0) (2018-07-12)
+
+
+### Bug Fixes
+
+* **babel-plugin-themeable-styles,ui-presets:** add hashPrefix to CSS classes ([3e0d269](https://github.com/instructure/instructure-ui/commit/3e0d269))
+* **docs,ui-docs-client:** make menu closed by default ([2f5b14f](https://github.com/instructure/instructure-ui/commit/2f5b14f))
+* **ui-a11y:** dismiss FocusRegion even when source event's default is prevented ([babd1fc](https://github.com/instructure/instructure-ui/commit/babd1fc))
+* **ui-forms:** stop JAWS always reading the first option ([b41bd4f](https://github.com/instructure/instructure-ui/commit/b41bd4f))
+* **ui-presets:** quiet down some noisy output ([09c2789](https://github.com/instructure/instructure-ui/commit/09c2789))
+* **ui-presets:** remove no-verify for bump commit ([b7a6be1](https://github.com/instructure/instructure-ui/commit/b7a6be1))
+
+
+### Features
+
+* **ui-a11y,ui-focusable:** add Focusable component ([555bb30](https://github.com/instructure/instructure-ui/commit/555bb30))
+* **ui-icons-build,ui-icons:** add es modules version of ui-icons ([b6b8de5](https://github.com/instructure/instructure-ui/commit/b6b8de5))
+* **ui-media-player:** Add Volume to VideoPlayerControls ([762242e](https://github.com/instructure/instructure-ui/commit/762242e))
+
+
+### Performance Improvements
+
+* **ui-forms,ui-utils:** use 'fast-deep-equal' instead of 'deep-equal' ([7732ff3](https://github.com/instructure/instructure-ui/commit/7732ff3))
+* **ui-themeable:** some things to make themeable faster ([fc0a269](https://github.com/instructure/instructure-ui/commit/fc0a269))
+* **ui-utils:** improve perf of `DeprecatedComponent` in prod ([66888e5](https://github.com/instructure/instructure-ui/commit/66888e5))
+
+
+
+
+
 <a name="5.18.0"></a>
 # [5.18.0](https://github.com/instructure/instructure-ui/compare/v5.17.0...v5.18.0) (2018-07-09)
 
