@@ -47,11 +47,14 @@ export default class TreeButton extends Component {
     type: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
-    expanded: PropTypes.bool,
     collectionIcon: PropTypes.func,
     collectionIconExpanded: PropTypes.func,
     itemIcon: PropTypes.func,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    expanded: PropTypes.bool,
+    level: PropTypes.number,
+    position: PropTypes.number,
+    setSize: PropTypes.number
   }
 
   static defaultProps = {
@@ -101,7 +104,10 @@ export default class TreeButton extends Component {
       descriptor,
       expanded,
       variant,
-      size
+      size,
+      level,
+      position,
+      setSize
     } = this.props
 
     const classes = {
@@ -115,10 +121,14 @@ export default class TreeButton extends Component {
       <button
         tabIndex={-1}
         type="button"
-        aria-expanded={expanded}
+        role="treeitem"
         className={classnames(classes)}
         onClick={this.handleClick}
         title={name}
+        aria-level={level}
+        aria-posinset={position}
+        aria-setsize={setSize}
+        aria-expanded={expanded}
       >
         <span className={styles.layout}>
           {this.renderIcon()}

@@ -227,6 +227,18 @@ describe('<TreeBrowser />', () => {
       expect(button.getAttribute('aria-expanded')).to.eq('true')
     })
 
+    it('correctly calculates aria treeview attributes', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const firstListItem = tree.find('li').first()
+      const secondList = firstListItem.find('ul').first()
+      const button = secondList.find('button').first()
+
+      expect(button.getAttribute('role')).to.eq('treeitem')
+      expect(button.getAttribute('aria-posinset')).to.eq('1')
+      expect(button.getAttribute('aria-level')).to.eq('2')
+      expect(button.getAttribute('aria-setsize')).to.eq('3')
+    })
+
     it('updates tabindex on keyboard nav', () => {
       const tree = testbed.render({defaultExpanded: [2]})
       const button = tree.find('button').first()

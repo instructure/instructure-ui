@@ -238,6 +238,9 @@ export default class TreeBrowser extends Component {
         {...pickProps(this.props, TreeCollection.propTypes)}
         {...this.getCollectionProps(collection)}
         onCollectionClick={this.handleCollectionClick}
+        numChildren={1}
+        level={1}
+        position={1}
       />
     ))
   }
@@ -250,7 +253,7 @@ export default class TreeBrowser extends Component {
         ref={(el) => { this._root = el }}
         aria-label={this.props.treeLabel}
       >
-        <ul className={styles.list} tabIndex={0}>
+        <ul className={styles.list} tabIndex={0} role="tree">
           {this.renderRoot()}
         </ul>
       </div>

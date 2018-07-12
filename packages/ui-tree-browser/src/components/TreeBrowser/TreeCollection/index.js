@@ -57,7 +57,10 @@ export default class TreeCollection extends Component {
     collectionIconExpanded: PropTypes.func,
     itemIcon: PropTypes.func,
     onItemClick: PropTypes.func,
-    onCollectionClick: PropTypes.func
+    onCollectionClick: PropTypes.func,
+    numChildren: PropTypes.number,
+    level: PropTypes.number,
+    position: PropTypes.number
   }
 
   static defaultProps = {
@@ -82,32 +85,35 @@ export default class TreeCollection extends Component {
     }
   }
 
-  get hasChildren () {
-    const {
-      collections,
-      items
-    } = this.props
+  get collectionsCount () {
+    const collections = this.props.collections
+    return (collections && collections.length > 0) ? collections.length : 0
+  }
 
-    const hasItems = items && items.length > 0
-    const hasCollections = collections && collections.length > 0
+  get itemsCount () {
+    const items = this.props.items
+    return (items && items.length > 0) ? items.length : 0
+  }
 
-    return (hasCollections || hasItems)
+  get childCount () {
+    return this.collectionsCount + this.itemsCount
   }
 
   renderChildren () {
     const { expanded, collections, items, name } = this.props
-    return expanded && this.hasChildren &&
-      <ul aria-label={name} className={styles.list} >
+
+    return expanded && (this.childCount > 0) &&
+      <ul aria-label={name} className={styles.list} role="group">
         {collections.map((collection, i) => {
-          return this.renderCollectionNode(collection, i)
+          return this.renderCollectionNode(collection, i, this.childCount)
         })}
         {items.map((item, i) => {
-          return this.renderItemNode(item, i)
+          return this.renderItemNode(item, i, this.childCount, this.collectionsCount)
         })}
       </ul>
   }
 
-  renderCollectionNode (collection, i) {
+  renderCollectionNode (collection, i, childCount) {
     return (
       <TreeCollection
         {...this.props}
@@ -118,11 +124,14 @@ export default class TreeCollection extends Component {
         expanded={collection.expanded}
         items={collection.items}
         collections={collection.collections}
+        numChildren={childCount}
+        level={this.props.level + 1}
+        position={i + 1}
       />
     )
   }
 
-  renderItemNode (item, i) {
+  renderItemNode (item, i, numChildren, numCollections) {
     return (
       <li
         key={`i${i}`}
@@ -135,6 +144,9 @@ export default class TreeCollection extends Component {
           descriptor={item.descriptor}
           type="item"
           onClick={this.props.onItemClick}
+          level={this.props.level + 1}
+          position={(i + 1) + numCollections}
+          setSize={numChildren}
         />
       </li>
     )
@@ -157,7 +169,9 @@ export default class TreeCollection extends Component {
       variant,
       expanded,
       collectionIcon,
-      collectionIconExpanded
+      collectionIconExpanded,
+      level,
+      position
     } = this.props
 
     // remove when Edge sorts out styles-on-pseudo-elements issues:
@@ -182,6 +196,9 @@ export default class TreeCollection extends Component {
           collectionIconExpanded={collectionIconExpanded}
           type="collection"
           onClick={this.handleCollectionClick}
+          level={level}
+          position={position}
+          setSize={this.props.numChildren}
         />
         {this.renderChildren()}
       </li>
