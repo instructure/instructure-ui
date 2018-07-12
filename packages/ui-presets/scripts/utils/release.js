@@ -134,17 +134,11 @@ const publish = async function publish (packageName, currentVersion, releaseVers
 exports.publish = publish
 
 const postPublish = async function postPublish (packageName, releaseVersion, config = {}) {
+  info(`Running post-publish steps for ${releaseVersion} of ${packageName}...`)
+
   if (await isReleaseCommit(releaseVersion)) {
-    info(`Running post-publish steps for ${releaseVersion} of ${packageName}...`)
     await checkIfCommitIsReviewed()
     await createGitTagForRelease(releaseVersion)
-
-    try {
-      await publishGithubPages(config)
-    } catch (err) {
-      error(err)
-      process.exit(1)
-    }
 
     const issueKeys = await getIssuesInRelease(config)
     const jiraVersion = await createJiraVersion(packageName, releaseVersion, config)
@@ -157,6 +151,20 @@ const postPublish = async function postPublish (packageName, releaseVersion, con
   }
 }
 exports.postPublish = postPublish
+
+const deployDocs = async function deployDocs (packageName, currentVersion, config = {}) {
+  if (await isReleaseCommit(currentVersion)) {
+    info(`Deploying documentation for ${currentVersion} of ${packageName}...`)
+    try {
+      await publishGithubPages(config)
+    } catch (err) {
+      error(err)
+      process.exit(1)
+    }
+    info(`Documentation for ${currentVersion} of ${packageName} was successfully deployed!`)
+  }
+}
+exports.deployDocs = deployDocs
 
 exports.publishPackage = async function publishPackage (packageName, currentVersion, releaseVersion, config = {}) {
   await setupGit()

@@ -31,7 +31,7 @@ const commands = [
   '--release',
   '--post-publish',
   '--bump',
-  '--deploy',
+  '--deploy-docs',
   '--deprecate-package',
   '--publish-package',
   '--build',
@@ -54,8 +54,8 @@ if (process.argv.includes('--help')) {
   require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
-} else if (process.argv.includes('--deploy')) {
-  require('./deploy')
+} else if (process.argv.includes('--deploy-docs')) {
+  require('./deploy-docs')
 } else if (process.argv.includes('--deprecate-package')) {
   require('./deprecate-package')
 } else if (process.argv.includes('--publish-package')) {

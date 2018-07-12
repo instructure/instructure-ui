@@ -76,6 +76,7 @@ docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
 if [[ $POST_MERGE_BUILD ]]; then
   echo "Running release..."
   docker exec $container bash -c "yarn release"
+  docker exec $container bash -c "yarn deploy"
 else
   echo "Running tests..."
   docker exec $container bash -c "yarn test"

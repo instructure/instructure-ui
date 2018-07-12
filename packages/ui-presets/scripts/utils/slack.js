@@ -23,7 +23,7 @@
  */
 
 const https = require('https')
-const { info } = require('./logger')
+const { info, error } = require('./logger')
 
 const {
  SLACK_USERNAME,
@@ -54,16 +54,24 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
     req.end()
 
     info(`💬  Posted Slack Message: "${message + issues}"`)
+  } else if (config.slack_channel && !SLACK_WEBHOOK) {
+    error(`'SLACK_WEBHOOK' env variable isn't set for ${config.slack_channel}!`)
   }
 }
 
 exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], config = {}) => {
-  const message = `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:`
   const changelog = config.changelog_url ? `\n ${config.changelog_url}` : ''
-  postSlackMessage(message + changelog, issueKeys, config)
+  postSlackMessage(
+    `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:${changelog}`,
+    issueKeys,
+    config
+  )
 }
 
 exports.postReleaseCandidateSlackMessage = (packageName, releaseVersion, issueKeys, config = {}) => {
-  const message = `*A release candidate, ${releaseVersion}, for ${packageName} has been published!* :party:`
-  postSlackMessage(message, config)
+  postSlackMessage(
+    `*A release candidate, ${releaseVersion}, for ${packageName} has been published!* :party:`,
+    issueKeys,
+    config
+  )
 }

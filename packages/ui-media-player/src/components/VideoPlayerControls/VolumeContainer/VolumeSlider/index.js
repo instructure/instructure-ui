@@ -29,7 +29,12 @@ import RangeInput from '@instructure/ui-forms/lib/components/RangeInput'
 
 import { SEEK_VOLUME_INTERVAL } from '../../../VideoPlayer'
 
-class VolumeSlider extends Component {
+/**
+---
+private: true
+---
+**/
+export default class VolumeSlider extends Component {
   static propTypes = {
     value: PropTypes.number.isRequired,
     onKeyDown: PropTypes.func.isRequired,
@@ -67,5 +72,3 @@ class VolumeSlider extends Component {
     )
   }
 }
-
-export default VolumeSlider

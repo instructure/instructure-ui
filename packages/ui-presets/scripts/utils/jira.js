@@ -54,12 +54,19 @@ function jiraClient (config = {}) {
 }
 
 exports.createJiraVersion = async function createJiraVersion (name, version, config = {}) {
-  const result = await jiraClient().createVersion({
-    name: `${name} v${version}`,
-    archived: false,
-    released: true,
-    projectId: config.jira_project_id
-  })
+  let result
+
+  try {
+    result = await jiraClient(config).createVersion({
+      name: `${name} v${version}`,
+      archived: false,
+      released: true,
+      projectId: config.jira_project_id
+    })
+  } catch (e) {
+    error(`An error occured creating Jira Release version: ${name} v${version}!`)
+    error(e)
+  }
 
   // result = {
   //   "self":"https://instructure.atlassian.net/rest/api/2/version/46639",
@@ -98,6 +105,7 @@ exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
     .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
 
   if (issueKeys.length > 0) {
+    issueKeys = Array.from(new Set(issueKeys))
     info(`Issues in this release: ${issueKeys.join(', ')}`)
   }
 
@@ -113,29 +121,30 @@ exports.getIssuesInCommit = async function getIssuesInCommit (config = {}) {
     error(e)
   }
 
-  let issueKeys = []
-  issueKeys = (result ? result.split(/\s+/g) : [])
+  let issueKeys = (result ? result.split(/\s+/g) : [])
 
   issueKeys = issueKeys
     .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
 
   if (issueKeys.length > 0) {
+    issueKeys = Array.from(new Set(issueKeys))
     info(`Issues in this release: ${issueKeys.join(', ')}`)
   }
 
   return issueKeys
 }
 
-exports.updateJiraIssues = async function updateJiraIssues (issueKeys, jiraVersionName) {
+exports.updateJiraIssues = async function updateJiraIssues (issueKeys, jiraVersionName, config) {
   await Promise.all(issueKeys.map((issueKey) => {
       let result
       try {
-        result = jiraClient().updateIssue(issueKey, {
+        result = jiraClient(config).updateIssue(issueKey, {
           update: {
             fixVersions: [{ add: { name: jiraVersionName } }]
           }
         })
       } catch (err) {
+        error(`An error occured updating Jira issue ${issueKey}!`)
         error(err)
         result = new Promise()
       }

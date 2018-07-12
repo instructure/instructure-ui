@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { publishGithubPages } = require('./utils/gh-pages')
+const { deployDocs } = require('./utils/release')
 const { error } = require('./utils/logger')
 const { getPackageJSON, getConfig } = require('./utils/get-package')
 
 try {
-  publishGithubPages(getConfig(getPackageJSON()))
+  const pkgJSON = getPackageJSON()
+  deployDocs(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)
