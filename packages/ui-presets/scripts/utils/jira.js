@@ -95,7 +95,7 @@ exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
     const previousReleaseTag = await runCommandAsync(`git describe --abbrev=0 --tags ${previousReleaseCommit}`)
     result = await runCommandAsync(`git log ${previousReleaseTag}..${currentReleaseTag} | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
   } catch (e) {
-    error(e)
+    info(`No Jira issues found in commit messages!`)
   }
 
   let issueKeys = []
@@ -118,7 +118,7 @@ exports.getIssuesInCommit = async function getIssuesInCommit (config = {}) {
   try {
     result = await runCommandAsync(`git log -1 --pretty=%B | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
   } catch (e) {
-    error(e)
+    info(`No Jira issues found in commit message!`)
   }
 
   let issueKeys = (result ? result.split(/\s+/g) : [])

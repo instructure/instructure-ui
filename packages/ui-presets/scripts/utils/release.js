@@ -24,9 +24,9 @@
 
 const fs = require('fs')
 const path = require('path')
-const rl = require('readline')
 
 const { runCommandAsync } = require('./command')
+const { confirm } = require('./confirm')
 const { getPackageJSON } = require('./get-package')
 const {
   getIssuesInRelease,
@@ -75,18 +75,14 @@ async function createNPMRCFile (config = {}) {
 const getReleaseVersion = async function getReleaseVersion (currentVersion) {
   let releaseVersion = currentVersion
 
-  await checkWorkingDirectory()
-
   if (await isReleaseCommit(releaseVersion)) {
     await checkIfGitTagExists(releaseVersion)
     await checkIfCommitIsReviewed()
   } else {
-    const commit = await runCommandAsync(`git rev-parse --short HEAD`)
     const description = await runCommandAsync(`git describe --match "v[0-9]*" --first-parent`)
     const index = await runCommandAsync(`echo ${description}| cut -d'-' -f 2`)
     await runCommandAsync('$(npm bin)/standard-version')
     const nextVersion = getPackageJSON().version
-    await runCommandAsync(`git reset --hard ${commit}`)
     releaseVersion = `${nextVersion}-rc.${index}`
   }
 
@@ -109,15 +105,20 @@ const publish = async function publish (packageName, currentVersion, releaseVers
     `--npm-tag ${npmTag}`
   ]
 
-  await checkWorkingDirectory()
-
-  if (currentVersion === releaseVersion) {
-    if (releaseCommit) {
-      checkIfCommitIsReviewed()
-    } else {
+  if (releaseCommit) {
+    try {
+      await checkIfCommitIsReviewed()
+    } catch (e) {
       error('Latest release should be run from a merged version bump commit!')
+      error(e)
       process.exit(1)
     }
+    if (currentVersion !== releaseVersion) {
+      error('Version mismatch for stable release!')
+      process.exit(1)
+    }
+  } else {
+    args.push('--conventional-commits')
   }
 
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
@@ -134,7 +135,7 @@ const publish = async function publish (packageName, currentVersion, releaseVers
 exports.publish = publish
 
 const postPublish = async function postPublish (packageName, releaseVersion, config = {}) {
-  info(`Running post-publish steps for ${releaseVersion} of ${packageName}...`)
+  info(`📦  Running post-publish steps for ${releaseVersion} of ${packageName}...`)
 
   if (await isReleaseCommit(releaseVersion)) {
     await checkIfCommitIsReviewed()
@@ -154,14 +155,14 @@ exports.postPublish = postPublish
 
 const deployDocs = async function deployDocs (packageName, currentVersion, config = {}) {
   if (await isReleaseCommit(currentVersion)) {
-    info(`Deploying documentation for ${currentVersion} of ${packageName}...`)
+    info(`📖   Deploying documentation for ${currentVersion} of ${packageName}...`)
     try {
       await publishGithubPages(config)
     } catch (err) {
       error(err)
       process.exit(1)
     }
-    info(`Documentation for ${currentVersion} of ${packageName} was successfully deployed!`)
+    info(`📖   Documentation for ${currentVersion} of ${packageName} was successfully deployed!`)
   }
 }
 exports.deployDocs = deployDocs
@@ -232,6 +233,7 @@ exports.bump = async function bump (releaseType, config = {}) {
 
 exports.release = async function release (packageName, currentVersion, releaseVersion, config = {}) {
   await setupGit()
+  await checkWorkingDirectory()
 
   let versionToRelease = releaseVersion
 
@@ -240,25 +242,18 @@ exports.release = async function release (packageName, currentVersion, releaseVe
     versionToRelease = await getReleaseVersion(currentVersion)
   }
 
-  info(`Publishing version ${versionToRelease} of ${packageName}...`)
+  info(`📦  Releasing version ${versionToRelease} of ${packageName}...`)
 
   if (!process.env.CI) {
-    const confirm = rl.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    })
-
-    confirm.question('Continue? [y/n]\n', function (reply) {
-      confirm.close()
-      if (!['Y', 'y'].includes(reply.trim())) {
-        process.exit(0)
-      }
-    })
+    const reply = await confirm('Continue? [y/n]\n')
+    if (!['Y', 'y'].includes(reply.trim())) {
+      process.exit(0)
+    }
   }
 
   await publish(packageName, currentVersion, versionToRelease, config)
 
   await postPublish(packageName, versionToRelease, config)
 
-  info(`Version ${versionToRelease} of ${packageName} was successfully released!`)
+  info(`📦  Version ${versionToRelease} of ${packageName} was successfully released!`)
 }
