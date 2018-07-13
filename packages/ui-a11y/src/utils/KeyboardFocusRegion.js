@@ -70,7 +70,7 @@ export default class KeyboardFocusRegion {
   _needToFocus = false
   _listeners = []
   _raf = []
-  _setup = false
+  _active = false
 
   get focused () {
     return containsActiveElement(this._contextElement)
@@ -225,8 +225,8 @@ export default class KeyboardFocusRegion {
     }
   }
 
-  setup () {
-    if (!this._setup) {
+  activate () {
+    if (!this._active) {
       if (this.tabbable.length > 0) {
         this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
       }
@@ -242,12 +242,12 @@ export default class KeyboardFocusRegion {
         this._listeners.push(addEventListener(this.doc, 'focus', this.handleFocus, true))
       }
 
-      this._setup = true
+      this._active = true
     }
   }
 
-  teardown () {
-    if (this._setup) {
+  deactivate () {
+    if (this._active) {
       this._listeners.forEach(listener => {
         listener.remove()
       })
@@ -258,7 +258,7 @@ export default class KeyboardFocusRegion {
 
       this._preventCloseOnDocumentClick = false
 
-      this._setup = false
+      this._active = false
     }
   }
 }

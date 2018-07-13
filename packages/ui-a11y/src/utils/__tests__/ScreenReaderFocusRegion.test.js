@@ -94,7 +94,7 @@ describe('ScreenReaderFocusRegion', () => {
       }
     )
 
-    screenReaderFocusRegion.setup()
+    screenReaderFocusRegion.activate()
 
     findChildren(subject).forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.exist
@@ -107,7 +107,7 @@ describe('ScreenReaderFocusRegion', () => {
     const subject = testbed.render()
 
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
-    screenReaderFocusRegion.setup()
+    screenReaderFocusRegion.activate()
 
     findParents(subject).forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist
@@ -120,7 +120,7 @@ describe('ScreenReaderFocusRegion', () => {
     const subject = testbed.render()
 
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
-    screenReaderFocusRegion.setup()
+    screenReaderFocusRegion.activate()
 
     findDescendants(subject).forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist
@@ -136,8 +136,8 @@ describe('ScreenReaderFocusRegion', () => {
     const childNodes = subject.node.querySelectorAll('[data-test-child]:not([aria-hidden="true"])')
     const exception = subject.node.querySelector('[data-test-child][aria-hidden="true"]')
 
-    screenReaderFocusRegion.setup()
-    screenReaderFocusRegion.teardown()
+    screenReaderFocusRegion.activate()
+    screenReaderFocusRegion.deactivate()
 
     childNodes.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist
@@ -155,8 +155,8 @@ describe('ScreenReaderFocusRegion', () => {
       attrsMap[node.getAttribute('id')] = [...node.attributes]
     })
 
-    screenReaderFocusRegion.setup()
-    screenReaderFocusRegion.teardown()
+    screenReaderFocusRegion.activate()
+    screenReaderFocusRegion.deactivate()
 
     parentNodes.forEach((node) => {
       const preNodeAttrs = attrsMap[node.getAttribute('id')]

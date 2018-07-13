@@ -107,7 +107,7 @@ export default class ScreenReaderFocusRegion {
     })
   }
 
-  setup () {
+  activate () {
     if (!this._options.shouldContainFocus) {
       return
     }
@@ -134,7 +134,7 @@ export default class ScreenReaderFocusRegion {
     }
   }
 
-  teardown () {
+  deactivate () {
     if (this._observer) {
       this._observer.disconnect()
       this._observer = null

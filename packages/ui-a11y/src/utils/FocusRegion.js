@@ -25,6 +25,7 @@ import contains from '@instructure/ui-utils/lib/dom/contains'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import uid from '@instructure/ui-utils/lib/uid'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import ScreenReaderFocusRegion from './ScreenReaderFocusRegion'
 import KeyboardFocusRegion from './KeyboardFocusRegion'
@@ -54,7 +55,7 @@ export default class FocusRegion {
   _contextElement = null
   _preventCloseOnDocumentClick = false
   _listeners = []
-  _setup = false
+  _active = false
 
   updateElement (element) {
     this._contextElement = element
@@ -86,45 +87,49 @@ export default class FocusRegion {
     return this._id
   }
 
+  // Focused returns when the focus region is active. Checking focused with the active element
+  // is inconsistent across browsers (Safari/Firefox do not focus elements on click)
   get focused () {
-    return this._keyboardFocusRegion.focused
+    return this._active
   }
 
-  setup () {
-    if (!this._setup) {
+  activate () {
+    if (!this._active) {
       const doc = ownerDocument(this._contextElement)
 
-      this._keyboardFocusRegion.setup()
-      this._screenReaderFocusRegion.setup()
+      this._keyboardFocusRegion.activate()
+      this._screenReaderFocusRegion.activate()
 
       if (this._options.shouldCloseOnDocumentClick) {
         this._listeners.push(addEventListener(doc, 'click', this.captureDocumentClick, true))
         this._listeners.push(addEventListener(doc, 'click', this.handleDocumentClick))
       }
 
-      this._setup = true
+      this._active = true
     }
   }
 
-  teardown () {
-    if (this._setup) {
+  deactivate () {
+    if (this._active) {
       this._listeners.forEach(listener => {
         listener.remove()
       })
       this._listeners = []
 
-      this._keyboardFocusRegion.teardown()
-      this._screenReaderFocusRegion.teardown()
+      this._keyboardFocusRegion.deactivate()
+      this._screenReaderFocusRegion.deactivate()
 
-      this._setup = false
+      this._active = false
     }
   }
 
   focus () {
+    warning(this._active, `[FocusRegion] Calling 'focus' on a region that is currently not active`)
     this._keyboardFocusRegion.focus()
   }
 
   blur () {
+    warning(!this._active, `[FocusRegion] Calling 'blur' on a region that is currently active`)
     this._keyboardFocusRegion.blur()
   }
 }

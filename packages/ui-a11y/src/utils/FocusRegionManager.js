@@ -41,10 +41,10 @@ export default class FocusRegionManager {
     const activeEntry = FocusRegionManager.getActiveEntry()
 
     ENTRIES.forEach(({ region }) => {
-      region && region.teardown()
+      region && region.deactivate()
     })
 
-    region.setup()
+    region.activate()
     region.focus()
 
     const entry = {
@@ -103,19 +103,19 @@ export default class FocusRegionManager {
     if (entry) {
       const { children, region, parent } = entry
 
-      // teardown the region...
-      region && region.teardown()
+      // deactivate the region...
+      region && region.deactivate()
 
       // and any regions created from it
       if (children) {
         children.forEach(({ id, element }) => {
           const entry = FocusRegionManager.removeEntry(element, id)
-          entry && entry.region && entry.region.teardown()
+          entry && entry.region && entry.region.deactivate()
         })
       }
 
-      // setup the region's parent if it exists
-      parent && parent.region && parent.region.setup()
+      // activate the region's parent if it exists
+      parent && parent.region && parent.region.activate()
 
       region && region.blur() // this should focus the parent region
     }
