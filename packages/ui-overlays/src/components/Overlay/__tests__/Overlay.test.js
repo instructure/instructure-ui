@@ -27,7 +27,7 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 import Overlay from '../index'
 
 describe('<Overlay />', () => {
-  const testbed = new Testbed(<Overlay />)
+  const testbed = new Testbed(<Overlay label="Overlay Testbed"/>)
 
   it('should render nothing when closed', () => {
     const subject = testbed.render()

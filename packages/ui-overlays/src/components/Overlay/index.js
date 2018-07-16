@@ -64,8 +64,10 @@ class Overlay extends Component {
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */
     insertAt: PropTypes.oneOf(['bottom', 'top']),
-
-    label: PropTypes.string,
+    /**
+     * An accessible label for the `<Overlay />` content
+     */
+    label: PropTypes.string.isRequired,
     /**
      * Callback fired when the `<Overlay />` is requesting to be closed
      */
