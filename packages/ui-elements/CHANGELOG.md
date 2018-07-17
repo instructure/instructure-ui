@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.20.0"></a>
+# [5.20.0](https://github.com/instructure/instructure-ui/compare/v5.19.0...v5.20.0) (2018-07-17)
+
+
+### Bug Fixes
+
+* **ui-elements:** Improve circle Progress for SRs ([76c6ecb](https://github.com/instructure/instructure-ui/commit/76c6ecb))
+
+
+### Features
+
+* **ui-elements:** add constrain prop to Img ([d2911a2](https://github.com/instructure/instructure-ui/commit/d2911a2))
+
+
+
+
+
 <a name="5.19.0"></a>
 # [5.19.0](https://github.com/instructure/instructure-ui/compare/v5.18.0...v5.19.0) (2018-07-12)
 

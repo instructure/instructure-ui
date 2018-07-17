@@ -2,7 +2,7 @@
   "name": "instructure-ui",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "5.19.0",
+  "version": "5.20.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -11,7 +11,9 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "workspaces": {
-    "packages": ["packages/**"]
+    "packages": [
+      "packages/**"
+    ]
   },
   "scripts": {
     "prestart": "yarn bootstrap",
