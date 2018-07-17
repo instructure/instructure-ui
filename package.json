@@ -46,7 +46,7 @@
     "deprecate:packages": "lerna exec ui-scripts --deprecate-package --stream --ignore docs",
     "prerelease": "yarn bootstrap",
     "release": "ui-scripts --release",
-    "predeploy": "yarn build:docs",
+    "predeploy": "yarn bootstrap && yarn build:docs",
     "deploy": "ui-scripts --deploy-docs",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "build:examples": "lerna run build --strema --scope docs-examples",

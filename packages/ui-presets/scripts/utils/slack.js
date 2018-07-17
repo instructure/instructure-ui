@@ -30,6 +30,21 @@ const {
  SLACK_WEBHOOK
 } = process.env
 
+function hasSlackConfig (config = {}) {
+  const hasEnv = SLACK_USERNAME && SLACK_WEBHOOK
+  const hasConfig = !!config.slack_channel
+
+  info(`slack_channel: '${config.slack_channel}'`)
+
+  if (!hasEnv) {
+    info(`Skipping Slack update.\
+Set SLACK_USERNAME and SLACK_WEBHOOK environment variables to enable.`)
+  }
+
+  return hasEnv && hasConfig
+}
+exports.hasSlackConfig = hasSlackConfig
+
 function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':robot_face:'}) {
   if (config.slack_channel && SLACK_WEBHOOK) {
     info(`💬  Pinging slack channel: ${config.slack_channel}`)
@@ -61,16 +76,17 @@ function postSlackMessage (message, issueKeys = [], config = { slack_emoji: ':ro
 
 exports.postStableReleaseSlackMessage = (jiraVersion = {}, issueKeys = [], config = {}) => {
   const changelog = config.changelog_url ? `\n ${config.changelog_url}` : ''
+  const releaseName = jiraVersion.url ? `<${jiraVersion.url}|${jiraVersion.name}>` : jiraVersion.name
   postSlackMessage(
-    `PSA!\n *<${jiraVersion.url}|${jiraVersion.name}> has been published!* :party:${changelog}`,
+    `PSA!\n *${releaseName} has been published!* :party:${changelog}`,
     issueKeys,
     config
   )
 }
 
-exports.postReleaseCandidateSlackMessage = (packageName, releaseVersion, issueKeys, config = {}) => {
+exports.postReleaseCandidateSlackMessage = (releaseName, issueKeys, config = {}) => {
   postSlackMessage(
-    `*A release candidate, ${releaseVersion}, for ${packageName} has been published!* :party:`,
+    `*A release candidate, ${releaseName} has been published!* :party:`,
     issueKeys,
     config
   )

@@ -29,12 +29,14 @@ const { runCommandAsync } = require('./command')
 const { confirm } = require('./confirm')
 const { getPackageJSON } = require('./get-package')
 const {
+  hasJiraConfig,
   getIssuesInRelease,
-  createJiraVersion,
+  getJiraVersion,
   updateJiraIssues,
   getIssuesInCommit
 } = require('./jira')
 const {
+  hasSlackConfig,
   postStableReleaseSlackMessage,
   postReleaseCandidateSlackMessage
 } = require('./slack')
@@ -137,18 +139,33 @@ exports.publish = publish
 const postPublish = async function postPublish (packageName, releaseVersion, config = {}) {
   info(`📦  Running post-publish steps for ${releaseVersion} of ${packageName}...`)
 
+  let version = {
+    name: `${packageName} v${releaseVersion}`
+  }
+  let issueKeys = []
+
   if (await isReleaseCommit(releaseVersion)) {
     await checkIfCommitIsReviewed()
     await createGitTagForRelease(releaseVersion)
 
-    const issueKeys = await getIssuesInRelease(config)
-    const jiraVersion = await createJiraVersion(packageName, releaseVersion, config)
-    await updateJiraIssues(issueKeys, jiraVersion.name, config)
+    if (hasJiraConfig(config)) {
+      issueKeys = await getIssuesInRelease(config)
+      version = await getJiraVersion(version.name, config)
+      if (issueKeys.length > 0 && version.id) {
+        await updateJiraIssues(issueKeys, version.name, config)
+      }
+    }
 
-    postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
+    if (hasSlackConfig(config)) {
+      postStableReleaseSlackMessage(version, issueKeys, config)
+    }
   } else {
-    const issueKeys = await getIssuesInCommit(config)
-    postReleaseCandidateSlackMessage(packageName, releaseVersion, issueKeys, config)
+    if (hasJiraConfig(config)) {
+      const issueKeys = await getIssuesInCommit(config)
+      if (issueKeys.length > 0) {
+        postReleaseCandidateSlackMessage(version.name, issueKeys, config)
+      }
+    }
   }
 }
 exports.postPublish = postPublish
