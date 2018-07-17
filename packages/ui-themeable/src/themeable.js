@@ -26,6 +26,7 @@ import PropTypes from 'prop-types'
 
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
+import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import warning from '@instructure/ui-utils/lib/warning'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
@@ -83,6 +84,9 @@ import StyleSheet from './StyleSheet'
 * @param {object} styles - The component styles object.
 * @return {function} composes the themeable component.
 */
+
+const emptyObj = {}
+
 export default function themeable (theme, styles = {}) {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)
@@ -109,7 +113,7 @@ export default function themeable (theme, styles = {}) {
           immutable: themeContext.immutable
         }
       } else {
-        return {}
+        return emptyObj
       }
     }
 
@@ -141,10 +145,11 @@ export default function themeable (theme, styles = {}) {
       static generateTheme = generateThemeForContextKey
 
       componentWillMount () {
-        const defaultTheme = generateThemeForContextKey()
-        const cssText = getCssText(template, defaultTheme, componentId)
-
-        StyleSheet.mount(componentId, cssText)
+        if (!StyleSheet.mounted(componentId)) {
+          const defaultTheme = generateThemeForContextKey()
+          const cssText = getCssText(template, defaultTheme, componentId)
+          StyleSheet.mount(componentId, cssText)
+        }
 
         if (super.componentWillMount) {
           super.componentWillMount()
@@ -232,7 +237,9 @@ export default function themeable (theme, styles = {}) {
               this.props.theme
             )
           } else {
-            theme = {...theme, ...this.props.theme}
+            theme = isEmpty(theme)
+              ? this.props.theme
+              : {...theme, ...this.props.theme}
           }
         }
 

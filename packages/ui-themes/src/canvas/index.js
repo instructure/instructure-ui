@@ -24,11 +24,15 @@
 
 import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 
-import { key, variables } from './base'
 import highContrast from './high-contrast'
+import { key, variables } from './base'
 
-export default registerTheme({
+const theme = registerTheme({
   key,
   variables,
   a11y: highContrast
 })
+
+theme.use()
+
+export default theme

@@ -145,7 +145,7 @@ export default class App extends Component {
 
   renderThemeSelect () {
     const themeKeys = Object.keys(this.props.themes)
-    return themeKeys.length > 0 ? (
+    return themeKeys.length > 1 ? (
       <div className={styles.docsSectionHeader}>
         <div className={styles.themeSelect}>
           <Select

@@ -53,6 +53,14 @@ export default {
         rules: insert(toRules(cssText))
       }
     }
+  },
+
+  /**
+  * Check if the stylesheet for the given `id` is already mounted
+  * @param {String} id - a unique id for the set of styles
+  */
+  mounted (id) {
+    return id in STYLES
   }
 }
 

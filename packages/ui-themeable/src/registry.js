@@ -63,15 +63,11 @@ const validateRegistry = (registry) => {
     }
   })
 
-  warning(valid, '[themeable] Inavlid theme registry.')
+  warning(valid, '[themeable] Invalid global theme registry!')
 
   return registry
 }
 
-warning(
-  (typeof global[GLOBAL_THEME_REGISTRY] === 'undefined'),
-  '[themeable] Multiple copies of the theme registry have been loaded!'
-)
 global[GLOBAL_THEME_REGISTRY] = validateRegistry(global[GLOBAL_THEME_REGISTRY])
 
 /**
@@ -113,16 +109,20 @@ export const getDefaultThemeKey = () => {
 */
 export const setDefaultTheme = (themeKey, overrides, immutable) => {
   const registry = getRegistry()
-  let theme = registry.themes[themeKey] || {}
+  let theme = registry.themes[themeKey]
 
-  warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
-
-  theme.immutable = !!immutable
+  if (!theme) {
+    warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    theme = {}
+  }
 
   registry.defaultThemeKey = themeKey
   registry.overrides = overrides
 
-  return theme
+  return {
+    ...theme,
+    immutable: !!immutable
+  }
 }
 
 /**
@@ -157,27 +157,37 @@ export const makeTheme = ({
 
 export const registerTheme = (theme) => {
   const registry = getRegistry()
-  const t = makeTheme(theme)
-  registry.registered.push(t.key)
-  return registry.themes[t.key] = t
-}
+  let registeredTheme
 
-export const getRegisteredTheme = (themeKey, defaultTheme) => {
-  const registry = getRegistry()
-  const theme = registry.themes[themeKey]
-
-  if (!defaultTheme) {
-    warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+  if (theme.key && registry.themes[theme.key]) {
+    registeredTheme = registry.themes[theme.key]
+  } else {
+    registeredTheme = makeTheme(theme)
+    registry.themes[registeredTheme.key] = registeredTheme
+    registry.registered.push(registeredTheme.key)
   }
 
-  return theme || defaultTheme
+  return registeredTheme
 }
 
-const getVariablesWithOverrides = (themeKey, overrides = {}) => {
-  const theme = getRegisteredTheme(themeKey, {}) || {}
-  const variables = theme.variables || {}
+export const getRegisteredTheme = (themeKey, defaultTheme = {}) => {
+  if (!themeKey) return defaultTheme
 
-  if (!isEmpty(overrides) && theme.immutable) {
+  const theme = getRegistry().themes[themeKey]
+  if (theme) {
+    return theme
+  } else {
+    warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    return defaultTheme
+  }
+}
+
+const getVariablesWithOverrides = (themeKey, overrides) => {
+  const theme = getRegisteredTheme(themeKey)
+  const variables = theme.variables || {}
+  const overridesIsEmpty = isEmpty(overrides)
+
+  if (!overridesIsEmpty && theme.immutable) {
     warning(
       false,
       `[themeable] Theme, '%s', is immutable. Cannot apply overrides: %o`,
@@ -185,13 +195,12 @@ const getVariablesWithOverrides = (themeKey, overrides = {}) => {
       overrides
     )
     return variables
-  } else if (!isEmpty(variables) && !isEmpty(overrides)){
-    return mergeDeep(variables, overrides)
-  } else if (isEmpty(variables)) {
-    return overrides
-  } else {
-    return variables
   }
+
+  const variablesIsEmpty = isEmpty(variables)
+  if (!variablesIsEmpty && !overridesIsEmpty) return mergeDeep(variables, overrides)
+  if (variablesIsEmpty) return overrides || {}
+  return variables
 }
 
 /**
@@ -201,17 +210,17 @@ const getVariablesWithOverrides = (themeKey, overrides = {}) => {
 * @param {Object} variable Theme overrides
 * @return {Object} A merged variables object
 */
-const mergeWithDefaultThemeVariables = (themeKey, overrides = {}) => {
-  const registry = getRegistry()
-  let variables = {}
+const mergeWithDefaultThemeVariables = (themeKey, overrides) => {
+  let variables
 
   if (themeKey) {
     variables = getVariablesWithOverrides(themeKey, overrides)
   } else { // fall back to defaults, but still apply overrides
-    const defaultOverrides = registry.overrides || {}
-    if (!isEmpty(defaultOverrides) && !isEmpty(overrides)) {
+    const defaultOverrides = getRegistry().overrides
+    const defaultOverridesIsEmpty = isEmpty(defaultOverrides)
+    if (!defaultOverridesIsEmpty && !isEmpty(overrides)) {
       variables = mergeDeep(defaultOverrides, overrides)
-    } else if (isEmpty(defaultOverrides)) {
+    } else if (defaultOverridesIsEmpty) {
       variables = overrides
     } else {
       variables = defaultOverrides
@@ -330,9 +339,7 @@ export const generateTheme = (themeKey, overrides) => {
 * @param {String} themeKey The theme to use to generate the variables
 * @return {Object} A theme config to use with `<ApplyTheme />`
 */
-export const getTheme = (themeKey) => {
-  return getRegisteredTheme(themeKey, {}).variables || {}
-}
+export const getTheme = themeKey => getRegisteredTheme(themeKey).variables || {}
 
 /**
  * Generate theme variables for a @themeable component.
@@ -344,26 +351,33 @@ export const getTheme = (themeKey) => {
  * @return {Object} A theme config for the component
  */
 export const generateComponentTheme = (componentKey, themeKey, overrides) => {
-  const variables = mergeWithDefaultThemeVariables(themeKey)
-
-  // fall back to the default component theme functions
   const t = themeKey || getDefaultThemeKey()
-  const componentThemeFunction = getRegisteredComponent(t, componentKey)
+  const theme = getRegisteredTheme(t)
 
   let componentTheme = {}
-  if (typeof componentThemeFunction === 'function') {
-    try {
-      componentTheme = componentThemeFunction(variables)
-    } catch (e) {
-      if (process.env.NODE_ENV !== 'production') {
-        console.error(e) // eslint-disable-line no-console
+  let cachedComponentTheme = theme[componentKey]
+
+  if (cachedComponentTheme) {
+    // use the cached component theme if it exists
+    componentTheme = cachedComponentTheme
+  } else {
+    const variables = mergeWithDefaultThemeVariables(themeKey)
+    const componentThemeFunction = getRegisteredComponent(t, componentKey)
+
+    if (typeof componentThemeFunction === 'function') {
+      try {
+        componentTheme = componentThemeFunction(variables)
+      } catch (e) {
+        if (process.env.NODE_ENV !== 'production') {
+          console.error(e) // eslint-disable-line no-console
+        }
       }
     }
   }
 
-  const theme = getRegisteredTheme(t, {})
-
-  if (!isEmpty(overrides) && theme.immutable) {
+  if (isEmpty(overrides)) {
+    return (theme[componentKey] = componentTheme)
+  } else if (theme.immutable) {
     warning(
       false,
       `[themeable] Theme '%s' is immutable. Cannot apply overrides for '%s': %o`,
@@ -371,8 +385,6 @@ export const generateComponentTheme = (componentKey, themeKey, overrides) => {
       componentKey.toString(),
       overrides
     )
-    return componentTheme
-  } else if (isEmpty(overrides)) {
     return componentTheme
   } else {
     return { ...componentTheme, ...overrides }

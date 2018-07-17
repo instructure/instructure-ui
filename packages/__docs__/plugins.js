@@ -106,7 +106,7 @@ plugins = plugins.concat([
       'packages/ui-utils/src/Decimal.js'
     ],
     themes: [
-      require.resolve('@instructure/ui-themes/lib/canvas'),
+      require.resolve('@instructure/ui-themes/lib/canvas/base'),
       require.resolve('@instructure/ui-themes/lib/canvas/high-contrast')
     ],
     icons: {
