@@ -24,6 +24,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { sourcesType } from './PropTypes'
 import * as VideoStates from '../../constants/videoStates'
 import * as ScreenStates from '../../constants/screenStates'
 
@@ -34,6 +35,8 @@ const VideoPlayerState = {
     muted: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
     playbackSpeed: PropTypes.number.isRequired,
+    selectedSrc: PropTypes.string,
+    sources: sourcesType,
     loadingSrc: PropTypes.bool.isRequired,
     showControls: PropTypes.bool.isRequired,
     videoId: PropTypes.string.isRequired
@@ -45,6 +48,7 @@ const VideoPlayerState = {
     seek: PropTypes.func.isRequired,
     setVolume: PropTypes.func.isRequired,
     setPlaybackSpeed: PropTypes.func.isRequired,
+    setSource: PropTypes.func.isRequired,
     showControls: PropTypes.func.isRequired,
     togglePlay: PropTypes.func.isRequired,
     toggleFullScreen: PropTypes.func.isRequired,

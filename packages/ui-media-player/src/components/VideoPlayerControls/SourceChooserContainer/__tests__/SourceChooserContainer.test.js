@@ -25,13 +25,13 @@ import React from 'react'
 
 import providerStateForTest from '../../../VideoPlayer/__tests__/fixtures/providerStateForTest'
 import { Provider } from '../../../VideoPlayer/VideoPlayerContext'
-import PlaybackSpeedContainer from '../index'
+import SourceChooserContainer from '../index'
 
-describe('<PlaybackSpeedContainer />', () => {
+describe('<SourceChooserContainer />', () => {
   const providerState = { ...providerStateForTest }
   const testbed = new Testbed(
     <Provider value={providerState}>
-      <PlaybackSpeedContainer />
+      <SourceChooserContainer />
     </Provider>
   )
 
@@ -41,7 +41,7 @@ describe('<PlaybackSpeedContainer />', () => {
 
   it('passes down forwardRef to VideoPlayerButton', () => {
     const forwardRef = testbed.stub()
-    testbed.render({ children: <PlaybackSpeedContainer forwardRef={forwardRef} /> })
+    testbed.render({ children: <SourceChooserContainer forwardRef={forwardRef} /> })
     expect(forwardRef).to.have.been.called
   })
 
@@ -49,7 +49,7 @@ describe('<PlaybackSpeedContainer />', () => {
     const e = new KeyboardEvent('keydown', { key: 'Space' })
     const showControls = testbed.stub()
     const component = testbed.render()
-    component.find('PlaybackSpeedContainer').node.handleKeyDown(showControls)(e)
+    component.find('SourceChooserContainer').node.handleKeyDown(showControls)(e)
     expect(showControls).to.have.been.called
   })
 
@@ -57,21 +57,21 @@ describe('<PlaybackSpeedContainer />', () => {
     const e = new KeyboardEvent('keydown', { key: 'Enter' })
     const showControls = testbed.stub()
     const component = testbed.render()
-    component.find('PlaybackSpeedContainer').node.handleKeyDown(showControls)(e)
+    component.find('SourceChooserContainer').node.handleKeyDown(showControls)(e)
     expect(showControls).to.have.been.called
   })
 
-  it('sets the right speed when its corresponding MenuItem is selected', () => {
-    const setPlaybackSpeed = testbed.stub()
+  it('sets the right source when its corresponding MenuItem is selected', () => {
+    const setSource = testbed.stub()
     const component = testbed.render()
-    component.find('PlaybackSpeedContainer').node.handleOnSelect(setPlaybackSpeed)({}, [1.5])
-    expect(setPlaybackSpeed).to.have.been.calledWith(1.5)
+    component.find('SourceChooserContainer').node.handleOnSelect(setSource)({}, ['123'])
+    expect(setSource).to.have.been.calledWith('123')
   })
 
   it('should persist Menu\'s visibility when its content is being hovered', () => {
     const showControls = testbed.stub()
     const component = testbed.render()
-    component.find('PlaybackSpeedContainer').node.handleOnMouseMove(showControls)()
+    component.find('SourceChooserContainer').node.handleOnMouseMove(showControls)()
     expect(showControls).to.have.been.called
   })
 })

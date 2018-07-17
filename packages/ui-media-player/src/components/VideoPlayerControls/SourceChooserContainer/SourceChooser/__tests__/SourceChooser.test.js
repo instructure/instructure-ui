@@ -23,40 +23,30 @@
  */
 import React from 'react'
 
-import Volume from '../index'
+import SourceChooser from '../index'
 
-describe('<Volume />', () => {
-  const prop = {
-    muted: false,
-    volume: 1,
-    showPopover: false,
-    togglePopover: () => {},
-    videoId: 'uuid-123',
-    onChange: () => {},
-    onKeyDown: () => {},
-    mountNode: () => {},
-    handleShowControls: () => {},
-  }
-  let testProp = { ...prop }
-  const testbed = new Testbed(<Volume {...testProp} />)
+describe('<SourceChooser />', () => {
+  const testbed = new Testbed(
+    <SourceChooser
+      showPopover={false}
+      togglePopover={() => {}}
+      videoId='uuid-123'
+      mountNode={() => <div />}
+      selectedSrc={'123'}
+      setSource={() => {}}
+      sources={['123', '456']}
+      handleKeyDown={() => {}}
+      handleOnSelect={() => {}}
+      handleOnMouseMove={() => {}}
+    />
+  )
 
-  beforeEach(() => {
-    testProp = { ...prop }
+  it('should render', () => {
+    expect(testbed.render()).to.be.present()
   })
 
-  it('renders volume button', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component).to.be.present()
-  })
-
-  it('passes down videoId prop to VideoPlayerButton', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component.prop('videoId')).to.be.eql('uuid-123')
-  })
-
-  it('invokes forwardRef prop on mount', () => {
-    const forwardRef = testbed.stub()
-    testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
+  it('shows Source Chooser on ScreenReaderContent', () => {
+    const component = testbed.render()
+    expect(component.find('PopoverTrigger').text()).to.match(/Source Chooser/)
   })
 })

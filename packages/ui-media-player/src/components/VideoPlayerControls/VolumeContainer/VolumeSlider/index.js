@@ -34,7 +34,7 @@ import { SEEK_VOLUME_INTERVAL } from '../../../VideoPlayer'
 private: true
 ---
 **/
-export default class VolumeSlider extends Component {
+class VolumeSlider extends Component {
   static propTypes = {
     value: PropTypes.number.isRequired,
     onKeyDown: PropTypes.func.isRequired,
@@ -43,7 +43,7 @@ export default class VolumeSlider extends Component {
     handleShowControls: PropTypes.func.isRequired
   }
 
-  formatValue = volume => parseInt(volume * 100)
+  formatValue = (volume) => parseInt(volume * 100)
 
   handleOnMouseMove = () => {
     this.props.handleShowControls()
@@ -73,3 +73,5 @@ export default class VolumeSlider extends Component {
     )
   }
 }
+
+export default VolumeSlider

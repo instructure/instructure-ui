@@ -30,6 +30,7 @@ import PlayPauseButton from './PlayPauseButton'
 import Timebar from './Timebar'
 import Volume from './VolumeContainer'
 import PlaybackSpeed from './PlaybackSpeedContainer'
+import SourceChooser from './SourceChooserContainer'
 import FullScreenButton from './FullScreenButton'
 import { Consumer } from '../VideoPlayer/VideoPlayerContext'
 
@@ -83,6 +84,8 @@ class VideoPlayerControls extends Component {
   static Volume = Volume
 
   static PlaybackSpeed = PlaybackSpeed
+
+  static SourceChooser = SourceChooser
 
   static FullScreenButton = FullScreenButton
 

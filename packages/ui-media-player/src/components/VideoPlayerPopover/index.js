@@ -21,42 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import { Component } from 'react'
+import PropTypes from 'prop-types'
 
-import Volume from '../index'
-
-describe('<Volume />', () => {
-  const prop = {
-    muted: false,
-    volume: 1,
-    showPopover: false,
-    togglePopover: () => {},
-    videoId: 'uuid-123',
-    onChange: () => {},
-    onKeyDown: () => {},
-    mountNode: () => {},
-    handleShowControls: () => {},
+/**
+---
+private: true
+---
+@module VideoPlayerPopover
+**/
+class VideoPlayerPopover extends Component {
+  static propTypes = {
+    showControls: PropTypes.bool.isRequired,
+    children: PropTypes.func
   }
-  let testProp = { ...prop }
-  const testbed = new Testbed(<Volume {...testProp} />)
 
-  beforeEach(() => {
-    testProp = { ...prop }
-  })
+  static defaultProps = {
+    children: null
+  }
 
-  it('renders volume button', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component).to.be.present()
-  })
+  state = {
+    showPopover: false
+  }
 
-  it('passes down videoId prop to VideoPlayerButton', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component.prop('videoId')).to.be.eql('uuid-123')
-  })
 
-  it('invokes forwardRef prop on mount', () => {
-    const forwardRef = testbed.stub()
-    testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
-  })
-})
+  componentDidUpdate(prevProps) {
+    if (this.props.showControls !== prevProps.showControls && !this.props.showControls) {
+      this.hidePopover()
+    }
+  }
+
+  togglePopover = () => {
+    this.setState(prevState => ({ showPopover: !prevState.showPopover }))
+  }
+
+  hidePopover = () => {
+    this.setState({ showPopover: false })
+  }
+
+  render() {
+    return (
+      this.props.children(this.state, this.togglePopover)
+    )
+  }
+}
+
+export default VideoPlayerPopover

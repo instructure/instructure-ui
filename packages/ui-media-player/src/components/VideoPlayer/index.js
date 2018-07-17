@@ -30,6 +30,7 @@ import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import Loading from '../Loading'
 import VideoPlayerControls from '../VideoPlayerControls'
+import { sourcesType } from './PropTypes'
 import { translate } from '../../constants/translated/translations'
 import { Provider } from './VideoPlayerContext'
 import {
@@ -61,9 +62,9 @@ experimental: true
 class VideoPlayer extends Component {
   static propTypes = {
     /**
-     * URL of video to play
+     * URL(s) of video to play
      */
-    src: PropTypes.string.isRequired,
+    sources: sourcesType,
     /**
      * Function invoked on every render with state and actions.
      * Use this to provide a custom set of video controls.
@@ -84,6 +85,7 @@ class VideoPlayer extends Component {
           <VPC.Timebar />
           <VPC.Volume />
           <VPC.PlaybackSpeed />
+          <VPC.SourceChooser />
           <VPC.FullScreenButton />
         </VPC>
       )
@@ -101,6 +103,8 @@ class VideoPlayer extends Component {
     volume: 1,
     playbackSpeed: 1,
     loadingSrc: true,
+    selectedSrc: this.getSourceFromProps(),
+    sources: this.props.sources,
     showControls: true,
     videoId: generateElementId('VideoPlayer')
   }
@@ -112,7 +116,7 @@ class VideoPlayer extends Component {
   componentWillUnmount () {
     screenfull.off('change', this.updateScreenState)
     MEDIA_ELEMENT_EVENTS.forEach((evt) => {
-      this.video.removeEventListener(evt, this.applyVideoProps)
+      this.video.removeEventListener(evt, this.getDerivedStateFromVideoProps)
     })
     // remove the video ref and stop applying video props
     this.video = null
@@ -122,7 +126,7 @@ class VideoPlayer extends Component {
 
   _registerEventHandlers () {
     MEDIA_ELEMENT_EVENTS.forEach((evt) => {
-      this.video.addEventListener(evt, this.applyVideoProps)
+      this.video.addEventListener(evt, this.getDerivedStateFromVideoProps)
     })
     screenfull.on('change', this.updateScreenState)
   }
@@ -248,7 +252,37 @@ class VideoPlayer extends Component {
     this.video.playbackRate = playbackSpeed
   }
 
-  applyVideoProps = () => {
+  setSource = (src) => {
+    if (this.video.currentSrc === src) {
+      return
+    }
+    this.video.src = src
+  }
+
+  getSourceFromProps() {
+    const { sources } = this.props
+
+    if (typeof sources === 'string') {
+      return sources
+    }
+
+    if (sources.length === 0) {
+      return null
+    }
+
+    if (typeof sources[0] === 'string') {
+      return sources[0]
+    }
+
+    for (let i = 0; i < sources.length; i++) {
+      if (sources[i].defaultSelected) {
+        return sources[i].src
+      }
+    }
+    return sources[0].src
+  }
+
+  getDerivedStateFromVideoProps = () => {
     if (!this.video) {
       return
     }
@@ -265,11 +299,14 @@ class VideoPlayer extends Component {
 
     const playbackSpeed = this.video.playbackRate
 
+    const selectedSrc = this.video.currentSrc
+
     this.setState({
       videoState,
       muted,
       volume,
       playbackSpeed,
+      selectedSrc,
       currentTime: this.video.currentTime,
       duration: this.video.duration,
       buffered: buffered.length > 0 ? buffered.end(buffered.length - 1) : 0
@@ -309,12 +346,25 @@ class VideoPlayer extends Component {
     }
   }
 
+  showSpinner = () => {
+    this.setState({ loadingSrc: true })
+  }
+
   hideSpinner = () => {
     this.setState({ loadingSrc: false })
   }
 
+  renderSource = () => {
+    const { selectedSrc } = this.state
+
+    if (selectedSrc) {
+      return <source src={selectedSrc} />
+    }
+  }
+
   render () {
-    const { src, controls } = this.props
+    const { controls } = this.props
+    const { loadingSrc, videoId } = this.state
 
     const actions = {
       play: this.play,
@@ -322,6 +372,7 @@ class VideoPlayer extends Component {
       seek: this.seek,
       setVolume: this.setVolume,
       setPlaybackSpeed: this.setPlaybackSpeed,
+      setSource: this.setSource,
       showControls: this.showControls,
       togglePlay: this.togglePlay,
       toggleFullScreen: this.toggleFullScreen,
@@ -356,15 +407,17 @@ class VideoPlayer extends Component {
     return (
       <div {...mediaPlayerWrapperProps}>
         <div {...videoPlayerWrapperProps}>
-          { this.state.loadingSrc && <Loading /> }
+          { loadingSrc && <Loading /> }
           <video
             ref={this.setVideoRef}
-            src={src}
-            id={this.state.videoId}
+            id={videoId}
             className={styles.video}
             tabIndex="-1"
+            onLoadStart={this.showSpinner}
             onCanPlay={this.hideSpinner}
-          />
+          >
+            { this.renderSource() }
+          </video>
           <Provider value={providerState}>
             { controls(VideoPlayerControls) }
           </Provider>

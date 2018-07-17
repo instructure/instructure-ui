@@ -24,25 +24,24 @@
 
 import React, { Component } from 'react'
 
-import PlaybackSpeed from './PlaybackSpeed'
 import VideoPlayerPopover from '../../VideoPlayerPopover'
-import { PLAYBACK_SPEED_OPTIONS } from '../../VideoPlayer'
+import SourceChooser from './SourceChooser'
 import { Consumer } from '../../VideoPlayer/VideoPlayerContext'
 
 /**
 ---
 private: true
 ---
-@module PlaybackSpeedContainer
+@module SourceChooserContainer
 **/
-export default class PlaybackSpeedContainer extends Component {
+export default class SourceChooserContainer extends Component {
   handleKeyDown = (showControls) => (e) => {
     e.preventDefault()
     showControls()
   }
 
-  handleOnSelect = (setPlaybackSpeed) => (e, [speed]) => {
-    setPlaybackSpeed(speed)
+  handleOnSelect = (setSource) => (e, [source]) => {
+    setSource(source)
   }
 
   handleOnMouseMove = (showControls) => () => {
@@ -57,22 +56,22 @@ export default class PlaybackSpeedContainer extends Component {
           mediaPlayerWrapperRef,
           actions
         }) => (
-            <VideoPlayerPopover showControls={state.showControls}>
-              {({ showPopover }, togglePopover ) => (
-                <PlaybackSpeed
-                  showPopover={showPopover}
-                  togglePopover={togglePopover}
-                  videoId={state.videoId}
-                  mountNode={mediaPlayerWrapperRef}
-                  playbackSpeed={state.playbackSpeed}
-                  playbackSpeedOptions={PLAYBACK_SPEED_OPTIONS}
-                  handleKeyDown={this.handleKeyDown(actions.showControls)}
-                  handleOnSelect={this.handleOnSelect(actions.setPlaybackSpeed)}
-                  handleOnMouseMove={this.handleOnMouseMove(actions.showControls)}
-                  {...this.props}
-                />
-              )}
-            </VideoPlayerPopover>
+          <VideoPlayerPopover showControls={state.showControls}>
+            {({ showPopover }, togglePopover ) => (
+              <SourceChooser
+                showPopover={showPopover}
+                togglePopover={togglePopover}
+                videoId={state.videoId}
+                mountNode={mediaPlayerWrapperRef}
+                selectedSrc={state.selectedSrc}
+                sources={state.sources}
+                handleKeyDown={this.handleKeyDown(actions.showControls)}
+                handleOnSelect={this.handleOnSelect(actions.setSource)}
+                handleOnMouseMove={this.handleOnMouseMove(actions.showControls)}
+                {...this.props}
+              />
+            )}
+          </VideoPlayerPopover>
         )}
       </Consumer>
     )

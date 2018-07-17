@@ -33,7 +33,7 @@ import testVideo from './fixtures/testVideo'
 import styles from '../styles.css'
 
 describe('<VideoPlayer />', () => {
-  const testbed = new Testbed(<VideoPlayer src={testVideo} />)
+  const testbed = new Testbed(<VideoPlayer sources={testVideo} />)
   let mockVideo
 
   beforeEach(() => {
@@ -59,7 +59,7 @@ describe('<VideoPlayer />', () => {
   function renderWithMockVideo (videoOverrides = {}) {
     const player = testbed.render()
     player.instance().video = { ...mockVideo, ...videoOverrides }
-    player.instance().applyVideoProps()
+    player.instance().getDerivedStateFromVideoProps()
     return player
   }
 
@@ -100,7 +100,7 @@ describe('<VideoPlayer />', () => {
   describe('#componentWillUnmount', () => {
     it('removes the video event listeners', () => {
       const player = renderWithMockVideo()
-      const listenerCb = player.instance().applyVideoProps
+      const listenerCb = player.instance().getDerivedStateFromVideoProps
       player.unmount()
 
       MEDIA_ELEMENT_EVENTS.forEach((evt) => {
@@ -115,7 +115,7 @@ describe('<VideoPlayer />', () => {
   describe('#_registerEventListeners', () => {
     it('adds event listeners on the video element', () => {
       const player = renderWithMockVideo()
-      const listenerCb = player.instance().applyVideoProps
+      const listenerCb = player.instance().getDerivedStateFromVideoProps
       mockVideo.addEventListener.resetHistory()
       player.instance()._registerEventHandlers()
 
@@ -146,6 +146,9 @@ describe('<VideoPlayer />', () => {
       const playbackSpeed = controls.find('PlaybackSpeed')
       expect(playbackSpeed.exists()).to.eql(true)
 
+      const sourceChooser = controls.find('SourceChooser')
+      expect(sourceChooser.exists()).to.eql(true)
+
       const fullScreenButton = controls.find('FullScreenButton')
       expect(fullScreenButton.exists()).to.eql(true)
     })
@@ -168,7 +171,7 @@ describe('<VideoPlayer />', () => {
     const player = renderWithMockVideo()
     expect(player.state('videoState')).to.eql(PAUSED)
     player.find(`.${styles.videoPlayerContainer}`).click()
-    player.instance().applyVideoProps()
+    player.instance().getDerivedStateFromVideoProps()
     expect(player.state('videoState')).to.eql(PLAYING)
   })
 
@@ -178,7 +181,7 @@ describe('<VideoPlayer />', () => {
     expect(player.state('volume')).to.eql(oldVolume)
     const newVolume = 0.5
     player.instance().setVolume(newVolume)
-    player.instance().applyVideoProps()
+    player.instance().getDerivedStateFromVideoProps()
     expect(player.state('volume')).to.eql(newVolume)
   })
 
@@ -186,7 +189,7 @@ describe('<VideoPlayer />', () => {
     const player = renderWithMockVideo({ muted: true })
     expect(player.state('muted')).to.eql(true)
     player.instance().setVolume(0.5)
-    player.instance().applyVideoProps()
+    player.instance().getDerivedStateFromVideoProps()
     expect(player.state('muted')).to.eql(false)
   })
 
@@ -196,15 +199,72 @@ describe('<VideoPlayer />', () => {
     expect(player.state('playbackSpeed')).to.eql(oldSpeed)
     const newSpeed = 0.5
     player.instance().setPlaybackSpeed(newSpeed)
-    player.instance().applyVideoProps()
+    player.instance().getDerivedStateFromVideoProps()
     expect(player.state('playbackSpeed')).to.eql(newSpeed)
+  })
+
+  it('handles a single source', () => {
+    const sources = 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
+    const component = testbed.render({ sources })
+    expect(component.find('source').node.src).to.eql(sources)
+  })
+
+  describe('accepts an array of sources', () => {
+    const source1 = {
+      src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4',
+      label: '1080p'
+    }
+    const source2 = {
+      src: 'https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4',
+      label: '360p'
+    }
+
+    it('handles an empty array', () => {
+      const component = testbed.render({ sources: [] })
+      expect(component.find('source')).to.not.be.present()
+    })
+
+    it('handles an array with 1 source', () => {
+      const component = testbed.render({ sources: [source1.src] })
+      expect(component.find('source').node.src).to.eql(source1.src)
+    })
+
+    it('handles multiple sources', () => {
+      const component = testbed.render({ sources: [source1, source2] })
+      expect(component.find('source').node.src).to.eql(source1.src)
+    })
+
+    it('handles multiple sources with default selected', () => {
+      const defaultSource = { ...source2, defaultSelected: true }
+      const component = testbed.render({ sources: [source1, defaultSource] })
+      expect(component.find('source').node.src).to.eql(defaultSource.src)
+    })
+  })
+
+  /**
+   * Problem: getDerivedStateFromVideoProps() doesn't properly update VideoPlayer's
+   * state.selectedSrc (which decides the video's source), even though it works fine in the app.
+   *
+   * What should happen is setSource(newSrc) sets the video.src to newSrc and the VideoPlayer's event listener
+   * listens to that change and getDerivedStateFromVideoProps (the listener's callback function) gets invoked
+   * to update VideoPlayer's state.selectedSrc.
+   *
+   * Ideally, we want to assert `expect(component.find('source').node.src).to.eql(newSrc)`.
+   */
+  it('can set the video\'s source', () => {
+    const sources = 'https://archive.org/download/ElephantsDream/ed_1024_512kb.mp4'
+    const component = testbed.render({ sources })
+    const newSrc = 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
+    component.instance().setSource(newSrc)
+    component.instance().getDerivedStateFromVideoProps()
+    expect(component.instance().video.src).to.eql(newSrc)
   })
 
   describe('keybindings', () => {
     function keyboardEvent (player, key) {
       player.find(`.${styles.videoPlayerContainer}`).simulate('keyDown', { key })
       // allow internal state to update
-      player.instance().applyVideoProps()
+      player.instance().getDerivedStateFromVideoProps()
     }
 
     it('can seek forward with ArrowRight', () => {
@@ -442,7 +502,7 @@ describe('<VideoPlayer />', () => {
     it('resets to the beginning and shows controls', () => {
       const player = renderWithMockVideo({ currentTime: 100, ended: true })
       player.setState({ showControls: false })
-      player.instance().applyVideoProps()
+      player.instance().getDerivedStateFromVideoProps()
       expect(player.state('currentTime')).to.eql(0)
       expect(player.state('showControls')).to.eql(true)
     })

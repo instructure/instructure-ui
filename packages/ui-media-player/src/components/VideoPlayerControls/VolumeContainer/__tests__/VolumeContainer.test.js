@@ -192,10 +192,9 @@ describe('<VolumeContainer />', () => {
       return ['ArrowRight', 'ArrowLeft', 'ArrowUp', 'ArrowDown',
               'PageUp', 'PageDown', 'Home', 'End', ' ', 'Enter',
               'm', 'M'].forEach((key) => {
-        const showControlsStub = customProviderState.actions.showControls
-        showControlsStub.resetHistory()
+        customProviderState.actions.showControls.resetHistory()
         keyboardEvent(component, key)
-        expect(showControlsStub).to.have.been.called
+        expect(customProviderState.actions.showControls).to.have.been.called
       })
     })
 

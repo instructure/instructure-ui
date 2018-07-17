@@ -31,7 +31,8 @@ let translations = {
   WINDOWED_SCREEN: 'Windowed Screen',
   VOLUME_UNMUTED: 'Unmuted',
   VOLUME_MUTED: 'Muted',
-  PLAYBACK_SPEED: 'Playback Speed'
+  PLAYBACK_SPEED: 'Playback Speed',
+  SOURCE_CHOOSER: 'Source Chooser'
 }
 
 export const TranslationPropTypes =

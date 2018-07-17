@@ -21,32 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 
-import PlaybackSpeed from '../index'
+import VideoPlayerPopover from '../index'
 
-describe('<PlaybackSpeed />', () => {
+describe('<VideoPlayerPopover />', () => {
+  const triggerId = 'trigger'
+  const popoverId = 'some-popover-id'
   const testbed = new Testbed(
-    <PlaybackSpeed
-      showPopover={false}
-      togglePopover={() => {}}
-      videoId='uuid-123'
-      playbackSpeed={1}
-      mountNode={() => <div />}
-      setPlaybackSpeed={() => {}}
-      handleKeyDown={() => {}}
-      handleOnSelect={() => {}}
-      handleOnMouseMove={() => {}}
-      playbackSpeedOptions={[0.5, 1, 1.5, 2]}
-    />
+    <VideoPlayerPopover showControls={false}>
+      {({ showPopover }, togglePopover) => (
+        <div>
+          <button id={triggerId} onClick={togglePopover} />
+          {showPopover && <div id={popoverId} />}
+        </div>
+      )}
+    </VideoPlayerPopover>
   )
 
-  it('should render', () => {
-    expect(testbed.render()).to.be.present()
+  it('does not show popover by default', () => {
+    const component = testbed.render()
+    expect(component.find(`#${popoverId}`)).to.not.be.present()
   })
 
-  it('shows Playback Speed on ScreenReaderContent', () => {
+  it('shows popover when toggled', () => {
     const component = testbed.render()
-    expect(component.find('PopoverTrigger').text()).to.match(/Playback Speed[0-9]?\.?[0-9]x/)
+    expect(component.find(`#${popoverId}`)).to.not.be.present()
+    component.find(`#${triggerId}`).click()
+    expect(component.find(`#${popoverId}`)).to.be.present()
+  })
+
+  it('hides popover when it\'s open and other controls are hidden (showControls is false)', () => {
+    const component = testbed.render({ showControls: true })
+    component.setState({ showPopover: true }, () => {
+      expect(component.find(`#${popoverId}`)).to.be.present()
+      component.setProps({ showControls: false }, () => {
+        expect(component.find(`#${popoverId}`)).to.not.be.present()
+      })
+    })
   })
 })

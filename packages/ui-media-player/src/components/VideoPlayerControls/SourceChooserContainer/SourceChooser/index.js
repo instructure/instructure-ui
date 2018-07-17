@@ -29,6 +29,7 @@ import Menu, { MenuItemGroup, MenuItem } from '@instructure/ui-menu/lib/componen
 import Text from '@instructure/ui-elements/lib/components/Text'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
+import { sourcesType } from '../../../VideoPlayer/PropTypes'
 import VideoPlayerButton from '../../../VideoPlayerButton'
 import { translate } from '../../../../constants/translated/translations'
 
@@ -37,14 +38,14 @@ import { translate } from '../../../../constants/translated/translations'
 private: true
 ---
 **/
-class PlaybackSpeed extends Component {
+class SourceChooser extends Component {
   static propTypes = {
     showPopover: PropTypes.bool.isRequired,
     togglePopover: PropTypes.func.isRequired,
     videoId: PropTypes.string.isRequired,
     mountNode: PropTypes.func.isRequired,
-    playbackSpeed: PropTypes.number.isRequired,
-    playbackSpeedOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+    selectedSrc: PropTypes.string,
+    sources: sourcesType,
     handleKeyDown: PropTypes.func.isRequired,
     handleOnSelect: PropTypes.func.isRequired,
     handleOnMouseMove: PropTypes.func.isRequired,
@@ -55,27 +56,58 @@ class PlaybackSpeed extends Component {
     forwardRef: (ref) => {}
   }
 
-  renderPlaybackSpeedOptionLabels = (playbackSpeedOptions) => (
-    playbackSpeedOptions.map((playbackSpeed) => {
-      const playbackSpeedOptionLabel = `${playbackSpeed}x`
+  state = {
+    showPopover: false
+  }
 
+  renderSourcesLabels = (sources) => {
+    if (typeof sources[0] === 'string') {
       return (
-        <MenuItem key={playbackSpeed.toString()} value={playbackSpeed} onKeyDown={this.props.handleKeyDown}>
-          {playbackSpeedOptionLabel}
-        </MenuItem>
+        sources.map((src, idx) => (
+          <MenuItem key={src} value={src} onKeyDown={this.props.handleKeyDown}>
+            Source{idx}
+          </MenuItem>
+        ))
       )
-    })
-  )
+    }
+
+    return (
+      sources.map((source) => {
+        const { src, label } = source
+
+        return (
+          <MenuItem key={src} value={src} onKeyDown={this.props.handleKeyDown}>
+            {label}
+          </MenuItem>
+        )
+      })
+    )
+  }
 
   render () {
+    if (typeof this.props.sources === 'string' || this.props.sources.length <= 1) {
+      return null
+    }
+
     const {
-      showPopover, togglePopover, videoId, playbackSpeed,
-      mountNode, handleOnSelect, handleOnMouseMove,
-      playbackSpeedOptions, forwardRef
+      showPopover, togglePopover, videoId, mountNode,
+      selectedSrc, sources, handleOnMouseMove, handleOnSelect,
+      forwardRef
     } = this.props
-    const MAX_WIDTH = '57px'
-    const label = translate('PLAYBACK_SPEED')
+    const MAX_WIDTH = '72px'
+    const label = translate('SOURCE_CHOOSER')
     const screenReaderContent = <ScreenReaderContent>{label}</ScreenReaderContent>
+    let selectedSrcText
+    for (let i = 0; i < sources.length; i++) {
+      if (sources[i].src === selectedSrc) {
+        selectedSrcText = sources[i].label
+        break
+      } else if (sources[i] === selectedSrc) {
+        selectedSrcText = `Source${i}`
+        break
+      }
+      selectedSrcText = '-1'
+    }
 
     return (
       <Menu
@@ -89,7 +121,7 @@ class PlaybackSpeed extends Component {
             theme={{ padding: '0 auto', width: MAX_WIDTH }}
           >
             {screenReaderContent}
-            <Text>{`${playbackSpeed}x`}</Text>
+            <Text>{selectedSrcText}</Text>
           </VideoPlayerButton>
         }
         mountNode={mountNode()}
@@ -98,14 +130,14 @@ class PlaybackSpeed extends Component {
         <MenuItemGroup
           onMouseMove={handleOnMouseMove}
           label={screenReaderContent}
-          selected={[playbackSpeed]}
+          selected={[selectedSrc]}
           onSelect={handleOnSelect}
         >
-          {this.renderPlaybackSpeedOptionLabels(playbackSpeedOptions)}
+          {this.renderSourcesLabels(sources)}
         </MenuItemGroup>
       </Menu>
     )
   }
 }
 
-export default PlaybackSpeed
+export default SourceChooser

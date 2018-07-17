@@ -35,6 +35,19 @@ const providerStateForTest = {
     muted: false,
     volume: 1,
     playbackSpeed: 1,
+    selectedSrc: null,
+    sources:
+    [
+      {
+        src: 'src1',
+        label: '1080p'
+      },
+      {
+        src: 'src2',
+        label: '360p',
+        defaultSelected: true
+      }
+    ],
     loadingSrc: false,
     showControls: false,
     videoId: 'uuid-123'
@@ -46,6 +59,7 @@ const providerStateForTest = {
     seek: () => {},
     setVolume: () => {},
     setPlaybackSpeed: () => {},
+    setSource: () => {},
     showControls: () => {},
     togglePlay: () => {},
     toggleFullScreen: () => {},

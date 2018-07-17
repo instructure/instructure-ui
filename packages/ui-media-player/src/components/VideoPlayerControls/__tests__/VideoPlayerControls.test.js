@@ -66,6 +66,7 @@ describe('<VideoPlayerControls />', () => {
         <VideoPlayerControls.Timebar />
         <VideoPlayerControls.Volume />
         <VideoPlayerControls.PlaybackSpeed />
+        <VideoPlayerControls.SourceChooser />
         <VideoPlayerControls.FullScreenButton />
       </VideoPlayerControls>
     </Provider>
@@ -176,6 +177,10 @@ describe('<VideoPlayerControls />', () => {
   })
 
   it('renders a Volume (button & slider)', () => {
+    const popoverContentWrapperId = 'popover-content-wrapper'
+    const popoverContentWrapper = document.createElement('div')
+    popoverContentWrapper.setAttribute("id", `${popoverContentWrapperId}`)
+    document.body.appendChild(popoverContentWrapper)
     const customProviderState = {
       ...providerState,
       mediaPlayerWrapperRef: () => (popoverContentWrapper)
@@ -188,10 +193,14 @@ describe('<VideoPlayerControls />', () => {
     button.click()
     const slider = document.getElementById(`${popoverContentWrapperId}`)
     expect(slider).to.not.be.null
-    slider.remove()
+    popoverContentWrapper.remove()
   })
 
   it('renders a PlaybackSpeed (button & menu)', () => {
+    const menuContentWrapperId = 'menu-content-wrapper'
+    const menuContentWrapper = document.createElement('div')
+    menuContentWrapper.setAttribute("id", menuContentWrapperId)
+    document.body.appendChild(menuContentWrapper)
     const customProviderState = {
       ...providerState,
       mediaPlayerWrapperRef: () => (menuContentWrapper)
@@ -203,7 +212,26 @@ describe('<VideoPlayerControls />', () => {
     button.click()
     const playbackSpeedMenu = document.getElementById(menuContentWrapperId)
     expect(playbackSpeedMenu).to.not.be.null
-    playbackSpeedMenu.remove()
+    menuContentWrapper.remove()
+  })
+
+  it('renders a SourceChooser (button & menu)', () => {
+    const menuContentWrapperId = 'menu-content-wrapper'
+    const menuContentWrapper = document.createElement('div')
+    menuContentWrapper.setAttribute("id", menuContentWrapperId)
+    document.body.appendChild(menuContentWrapper)
+    const customProviderState = {
+      ...providerState,
+      mediaPlayerWrapperRef: () => (menuContentWrapper)
+    }
+    const component = testbed.render({ value: customProviderState })
+    const button = component.find('SourceChooser').find('VideoPlayerButton')
+    expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
+    expect(button.text()).to.match(/Source Chooser/)
+    button.click()
+    const sourceChooserMenu = document.getElementById(menuContentWrapperId)
+    expect(sourceChooserMenu).to.not.be.null
+    menuContentWrapper.remove()
   })
 
   it('renders a FullScreenButton', () => {

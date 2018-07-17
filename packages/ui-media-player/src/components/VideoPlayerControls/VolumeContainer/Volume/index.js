@@ -25,9 +25,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
+import IconAudioSolid from '@instructure/ui-icons/lib/Solid/IconAudio'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import VolumeSlider from '../VolumeSlider'
 import VideoPlayerButton from '../../../VideoPlayerButton'
+import { translate } from '../../../../constants/translated/translations'
 
 /**
 ---
@@ -36,13 +39,14 @@ private: true
 **/
 class Volume extends Component {
   static propTypes = {
+    muted: PropTypes.bool.isRequired,
+    volume: PropTypes.number.isRequired,
+    showPopover: PropTypes.bool.isRequired,
+    togglePopover: PropTypes.func.isRequired,
     videoId: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
     onChange: PropTypes.func.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     mountNode: PropTypes.func.isRequired,
-    label: PropTypes.node.isRequired,
-    showControls: PropTypes.bool.isRequired,
     handleShowControls: PropTypes.func.isRequired,
     forwardRef: PropTypes.func,
     children: PropTypes.node
@@ -52,40 +56,29 @@ class Volume extends Component {
     forwardRef: (ref) => {}
   }
 
-  state = {
-    showPopover: false
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.showControls !== prevProps.showControls && !this.props.showControls) {
-      this.hidePopover()
+  config (muted) {
+    if (!muted) {
+      return translate('VOLUME_UNMUTED')
     }
-  }
 
-  togglePopover = () => {
-    this.setState(prevState => ({ showPopover: !prevState.showPopover }))
-  }
-
-  hidePopover = () => {
-    this.setState({ showPopover: false })
+    return translate('VOLUME_MUTED')
   }
 
   render() {
     const {
-      videoId, value, onChange, onKeyDown,
-      mountNode, label, forwardRef, children,
+      muted, volume, showPopover, togglePopover, videoId,
+      onChange, onKeyDown, mountNode, forwardRef,
       handleShowControls
     } = this.props
+    const value = muted ? 0 : volume
+    const label = <ScreenReaderContent>{this.config(muted)}</ScreenReaderContent>
 
     return (
       <Popover
         placement="top"
         on="click"
-        show={this.state.showPopover}
-        onToggle={this.togglePopover}
-        shouldReturnFocus
-        shouldCloseOnDocumentClick
-        shouldCloseOnEscape
+        show={showPopover}
+        onToggle={togglePopover}
         mountNode={mountNode()}
         variant="inverse"
       >
@@ -95,7 +88,7 @@ class Volume extends Component {
             forwardRef={forwardRef}
           >
             {label}
-            {children}
+            <IconAudioSolid size="x-small" />
           </VideoPlayerButton>
         </PopoverTrigger>
         <PopoverContent>

@@ -21,42 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import PropTypes from 'prop-types'
 
-import Volume from '../index'
-
-describe('<Volume />', () => {
-  const prop = {
-    muted: false,
-    volume: 1,
-    showPopover: false,
-    togglePopover: () => {},
-    videoId: 'uuid-123',
-    onChange: () => {},
-    onKeyDown: () => {},
-    mountNode: () => {},
-    handleShowControls: () => {},
-  }
-  let testProp = { ...prop }
-  const testbed = new Testbed(<Volume {...testProp} />)
-
-  beforeEach(() => {
-    testProp = { ...prop }
-  })
-
-  it('renders volume button', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component).to.be.present()
-  })
-
-  it('passes down videoId prop to VideoPlayerButton', () => {
-    const component = testbed.render().find('VideoPlayerButton')
-    expect(component.prop('videoId')).to.be.eql('uuid-123')
-  })
-
-  it('invokes forwardRef prop on mount', () => {
-    const forwardRef = testbed.stub()
-    testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
-  })
-})
+export const sourcesType = PropTypes.oneOfType([
+  PropTypes.string,
+  PropTypes.arrayOf(
+    PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.shape({
+        src: PropTypes.string.isRequired,
+        label: PropTypes.string.isRequired,
+        defaultSelected: PropTypes.bool
+      })
+  ]))
+]).isRequired

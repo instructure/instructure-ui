@@ -23,13 +23,10 @@
  */
 import React, { Component } from 'react'
 
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import IconAudioSolid from '@instructure/ui-icons/lib/Solid/IconAudio'
-
+import VideoPlayerPopover from '../../VideoPlayerPopover'
 import Volume from './Volume'
 import { Consumer } from '../../VideoPlayer/VideoPlayerContext'
 import { SEEK_VOLUME_INTERVAL, JUMP_VOLUME_INTERVAL } from '../../VideoPlayer'
-import { translate } from '../../../constants/translated/translations'
 
 /**
 ---
@@ -98,14 +95,6 @@ export default class VolumeContainer extends Component {
     }
   }
 
-  config (muted) {
-    if (!muted) {
-      return translate('VOLUME_UNMUTED')
-    }
-
-    return translate('VOLUME_MUTED')
-  }
-
   render () {
     return (
       <Consumer>
@@ -113,26 +102,25 @@ export default class VolumeContainer extends Component {
           state,
           mediaPlayerWrapperRef,
           actions
-        }) => {
-          const rangeInputValue = state.muted ? 0 : state.volume
-          const label = <ScreenReaderContent>{this.config(state.muted)}</ScreenReaderContent>
-
-          return (
-            <Volume
-              videoId={state.videoId}
-              value={rangeInputValue}
-              onChange={volume => { this.handleOnChange(volume, actions) }}
-              onKeyDown={e => { this.handleKeyPress(e, state, actions) }}
-              mountNode={mediaPlayerWrapperRef}
-              label={label}
-              showControls={state.showControls}
-              handleShowControls={actions.showControls}
-              {...this.props}
-            >
-              <IconAudioSolid size="x-small" />
-            </Volume>
-          )
-        }}
+        }) => (
+          <VideoPlayerPopover showControls={state.showControls}>
+            {({ showPopover }, togglePopover) => (
+              <Volume
+                muted={state.muted}
+                volume={state.volume}
+                showPopover={showPopover}
+                togglePopover={togglePopover}
+                videoId={state.videoId}
+                onChange={volume => { this.handleOnChange(volume, actions) }}
+                onKeyDown={e => { this.handleKeyPress(e, state, actions) }}
+                mountNode={mediaPlayerWrapperRef}
+                showControls={state.showControls}
+                handleShowControls={actions.showControls}
+                {...this.props}
+              />
+            )}
+          </VideoPlayerPopover>
+        )}
       </Consumer>
     )
   }
