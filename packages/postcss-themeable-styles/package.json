@@ -15,8 +15,8 @@
     "lint:fix": "eslint . --fix"
   },
   "license": "MIT",
-  "peerDependencies": {
-    "postcss": "^6.0.19"
+  "dependencies": {
+    "postcss": "^6"
   },
   "publishConfig": {
     "access": "public"

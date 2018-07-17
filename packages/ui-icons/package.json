@@ -19,17 +19,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-icons-build": "^5.20.0",
-    "@instructure/ui-presets": "^5.20.0",
+    "@instructure/ui-icons-build": "^5",
+    "@instructure/ui-presets": "^5",
     "gulp": "3.9.1"
   },
   "dependencies": {
-    "@instructure/ui-svg-images": "^5.20.0",
-    "prop-types": "^15.5.10"
-  },
-  "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.2",
-    "react-dom": "^0.14.9 || ^15.6.2"
+    "@instructure/ui-svg-images": "^5",
+    "prop-types": "^15",
+    "react": "^0.14.9 || ^15"
   },
   "publishConfig": {
     "access": "public"

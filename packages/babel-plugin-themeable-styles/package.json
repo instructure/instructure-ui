@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/postcss-themeable-styles": "^5.20.0",
+    "@instructure/postcss-themeable-styles": "^5",
     "babel-template": "^6.26.0",
     "css-modules-require-hook": "^4.2.3",
     "read-pkg-up": "^4.0.0"

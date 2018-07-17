@@ -161,10 +161,10 @@ const postPublish = async function postPublish (packageName, releaseVersion, con
     }
   } else {
     if (hasJiraConfig(config)) {
-      const issueKeys = await getIssuesInCommit(config)
-      if (issueKeys.length > 0) {
-        postReleaseCandidateSlackMessage(version.name, issueKeys, config)
-      }
+      issueKeys = await getIssuesInCommit(config)
+    }
+    if (hasSlackConfig(config) && issueKeys.length > 0) {
+      postReleaseCandidateSlackMessage(version.name, issueKeys, config)
     }
   }
 }

@@ -34,7 +34,7 @@ function getPackageConfigs () {
   } else if (workspaces && Array.isArray(workspaces.packages)) {
     return workspaces.packages
   } else {
-    return ['packages/**']
+    return ['packages/*']
   }
 }
 

@@ -22,20 +22,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.20.0",
-    "@instructure/ui-testbed": "^5.20.0",
-    "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "@instructure/ui-presets": "^5",
+    "@instructure/ui-testbed": "^5"
   },
   "dependencies": {
-    "@instructure/ui-utils": "^5.20.0",
+    "@instructure/ui-utils": "^5",
     "glamor": "^2.20.37",
-    "prop-types": "^15.5.10",
+    "prop-types": "^15",
+    "react": "^0.14.9 || ^15",
     "tinycolor2": "^1.4.1"
-  },
-  "peerDependencies": {
-    "react": "^0.14.9 || ^15.6.2",
-    "react-dom": "^0.14.9 || ^15.6.2"
   },
   "publishConfig": {
     "access": "public"

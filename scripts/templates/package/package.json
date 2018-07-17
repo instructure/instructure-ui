@@ -22,9 +22,14 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^${VERSION}",
-    "@instructure/ui-testbed": "^${VERSION}",
-    "@instructure/ui-themes": "^${VERSION}"
+    "@instructure/ui-presets": "^5",
+    "@instructure/ui-testbed": "^5",
+    "@instructure/ui-themes": "^5"
+  },
+  "dependencies": {
+    "@instructure/ui-themeable": "^5",
+    "prop-types": "^15",
+    "react": "^0.14.9 || ^15"
   },
   "publishConfig": {
     "access": "public"

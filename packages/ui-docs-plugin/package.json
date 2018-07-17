@@ -18,22 +18,20 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.20.0"
+    "@instructure/ui-presets": "^5"
   },
   "dependencies": {
-    "@instructure/config-loader": "^5.20.0",
-    "@instructure/ui-docs-client": "^5.20.0",
+    "@instructure/config-loader": "^5",
+    "@instructure/ui-docs-client": "^5",
     "favicons-webpack-plugin": "^0.0.9",
     "globby": "^7.1.1",
     "gray-matter": "^4.0.1",
     "html-webpack-plugin": "^2.29.0",
     "jsdoc-api": "^4.0.1",
     "loader-utils": "^1.1.0",
-    "react-docgen": "^3.0.0-beta8",
-    "script-ext-html-webpack-plugin": "^1.8.8"
-  },
-  "peerDependencies": {
-    "webpack": ">=2.2.1"
+    "react-docgen": "3.0.0-beta11",
+    "script-ext-html-webpack-plugin": "^1.8.8",
+    "webpack": "^3"
   },
   "publishConfig": {
     "access": "public"
