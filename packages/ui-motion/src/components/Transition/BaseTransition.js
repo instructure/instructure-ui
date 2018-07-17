@@ -26,6 +26,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 
 const STATES = {
   EXITED: -2,
@@ -358,11 +359,17 @@ export default class BaseTransition extends React.Component {
     }
   }
 
+  renderChildren () {
+    return safeCloneElement(ensureSingleChild(this.props.children), {
+      'aria-hidden': !this.props.in ? true : null
+    })
+  }
+
   render () {
     if (!this.props.in && this.props.unmountOnExit && !this.state.transitioning) {
       return null
     } else {
-      return ensureSingleChild(this.props.children)
+      return this.renderChildren()
     }
   }
 }
