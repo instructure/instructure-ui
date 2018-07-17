@@ -51,7 +51,6 @@ class PresentationContent extends Component {
     const props = {
       ...omitProps(this.props, PresentationContent.propTypes),
       'aria-hidden': 'true',
-      role: 'presentation'
     }
 
     const ElementType = getElementType(PresentationContent, this.props)
