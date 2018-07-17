@@ -68,6 +68,7 @@ and an icon.
 a legacy-Canvas-only requirement. Recommendation is to deprecate this property and use
 `<Button display="block" />` for Buttons that need to display block level.
 
+The now-deprecated Button component:
 ```javascript
 <Button
   icon={IconUserSolid}
@@ -91,9 +92,9 @@ These variants support an `inverse` prop:
 `<LinkButton inverse/>`
 
 
-### **Internal API** Button views
+### Button Variant Components
 
-The internal view components control the button's color scheme, like the
+The variant components control the button's color scheme, like the
 `variant` property does now, dictating the button's background color, text
 color, border color, hover/active background color, and focus ring color.
 
@@ -114,13 +115,13 @@ color, border color, hover/active background color, and focus ring color.
 | type | oneOf: 'button', 'submit', 'reset' | 'button' | |
 
 
-Render function for `<DefaultButtonView />`:
+Render function for `<DefaultButton />`:
 ```javascript
 render () {
   return (
   <FocusableView
     type={this.props.type}
-    as={getElementType(DefaultButtonView, this.props)}
+    as={getElementType(DefaultButton, this.props)}
     href={this.props.href}
     margin={this.props.margin}
     disabled={this.props.disabled}
@@ -131,14 +132,14 @@ render () {
     shape={this.props.shape}
     display={this.props.display === 'inline' ? 'inline-block' : 'block'}
   >
-  // render the button view (everything but the focus ring which FocusableView handles)
+  // render the button variant (everything but the focus ring which FocusableView handles)
   </FocusableView>
   )
 }
 ```
 
 
-#### `<DefaultButtonView />`
+#### `<DefaultButton />`
 ```javascript
 ---
 example: true
@@ -154,7 +155,7 @@ example: true
 </div>
 ```
 
-#### `<PrimaryButtonView/>`
+#### `<PrimaryButton/>`
 ```javascript
 ---
 example: true
@@ -170,7 +171,7 @@ example: true
 </div>
 ```
 
-#### `<DangerButtonView/>`
+#### `<DangerButton/>`
 ```javascript
 ---
 example: true
@@ -186,7 +187,7 @@ example: true
 </div>
 ```
 
-#### `<SuccessButtonView/>`
+#### `<SuccessButton/>`
 ```javascript
 ---
 example: true
@@ -199,7 +200,7 @@ example: true
 </div>
 ```
 
-#### `<LightButtonView/>`
+#### `<LightButton/>`
 ```javascript
 ---
 example: true
@@ -212,7 +213,7 @@ example: true
 </div>
 ```
 
-#### `<LinkButtonView/>`
+#### `<LinkButton/>`
 ```javascript
 ---
 example: true
@@ -225,7 +226,7 @@ example: true
 </div>
 ```
 
-#### `<LinkButtonView inverse />`
+#### `<LinkButton inverse />`
 ```javascript
 ---
 example: true
@@ -239,7 +240,7 @@ inverse: true
 </div>
 ```
 
-#### `<GhostButtonView/>`
+#### `<GhostButton/>`
 ```javascript
 ---
 example: true
@@ -252,7 +253,7 @@ example: true
 </div>
 ```
 
-#### `<GhostButtonView inverse />`
+#### `<GhostButton inverse />`
 ```javascript
 ---
 example: true
@@ -266,16 +267,16 @@ inverse: true
 </div>
 ```
 
-### Composing the button views
+### Composing the button variants for backwards compatibility
 
 Render function for `<Button />`:
 ```javascript
 render () {
-  const ButtonView = getButtonView(this.props.variant)
+  const ButtonVariant = getButtonVariant(this.props.variant)
   return (
     <Focusable>
       {({ focused }) => (
-        <ButtonView
+        <ButtonVariant
           focused={focused}
           icon={this.props.icon}
           borderRadius="small"
@@ -283,31 +284,7 @@ render () {
           display={this.props.display === 'inline' ? 'inline-block' : 'block'}
         >
           {this.props.children}
-        </ButtonView>
-      )}
-    </Focusable>
-  )
-}
-```
-
-Render function for `<IconButton />`:
-```javascript
-render () {
-  const ButtonView = getButtonView(this.props.variant)
-  return (
-    <Focusable>
-      {({ focused }) => (
-        <ButtonView
-          focused={focused}
-          icon={this.props.icon}
-          borderRadius={this.props.shape === 'circle' ? 'circle' : 'small'}
-          size={this.props.size}
-          display="inline-block"
-        >
-          <ScreenReaderContent>
-            {this.props.label}
-          </ScreenReaderContent>
-        </ButtonView>
+        </ButtonVariant>
       )}
     </Focusable>
   )
@@ -316,7 +293,7 @@ render () {
 
 ### **Internal API** Shared button styles
 
-If when we break out the view components, we determine that we'd like
+If when we break out the variant components, we determine that we'd like
 to share some of the styles across them, we could make a shared view, e.g.
 `<ButtonLayout/>` that would handle the shared styles/theme variables.
 
@@ -324,19 +301,14 @@ to share some of the styles across them, we could make a shared view, e.g.
 components (or composed in the `<Button/>` and `<IconButton/>` components).
 
 The recommendation is to start with duplicated code and only move to shared
-styles once all of the views are broken out.
+styles once all of the variants are broken out.
 
 
 ### Dependencies
-The new components would live in ui-buttons with the existing Button
-component.
+The new components would live in ui-buttons with the existing Button component.
 
 ### Theme Variables
-The Button and IconButton components wouldn't have any theme variables and should delegate to
-the view components for all display/styles.
-
-Each Button view component would have a set of theme variables associated with it. We should
-display these as tabs/child components on the Button component doc page.
+Each Button variant component would have a set of theme variables associated with it.
 
 ### Accessibility Requirements
 Nothing new from the current Button.
