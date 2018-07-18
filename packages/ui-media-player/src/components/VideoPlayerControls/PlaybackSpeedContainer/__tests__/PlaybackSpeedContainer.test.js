@@ -21,36 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { PAUSED, WINDOWED_SCREEN } from '../../../../constants'
+import React from 'react'
 
-/**
- * providerStateForTest is a provider state that is used as a reference to create
- * a new providerState object in test files. NEVER reference this file as it can
- * change their values.
- */
-const providerStateForTest = {
-  state: {
-    videoState: PAUSED,
-    screenState: WINDOWED_SCREEN,
-    muted: false,
-    volume: 1,
-    playbackSpeed: 1,
-    loadingSrc: false,
-    showControls: false,
-    videoId: 'uuid-123'
-  },
-  mediaPlayerWrapperRef: () => {},
-  actions: {
-    play: () => {},
-    pause: () => {},
-    seek: () => {},
-    setVolume: () => {},
-    setPlaybackSpeed: () => {},
-    showControls: () => {},
-    togglePlay: () => {},
-    toggleFullScreen: () => {},
-    toggleMute: () => {}
-  }
-}
+import providerStateForTest from '../../../VideoPlayer/__tests__/fixtures/providerStateForTest'
+import { Provider } from '../../../VideoPlayer/VideoPlayerContext'
+import PlaybackSpeedContainer from '../index'
 
-export default providerStateForTest
+describe('<PlaybackSpeedContainer />', () => {
+  const providerState = { ...providerStateForTest }
+  const testbed = new Testbed(
+    <Provider value={providerState}>
+      <PlaybackSpeedContainer />
+    </Provider>
+  )
+
+  it('should render', () => {
+    expect(testbed.render()).to.be.present()
+  })
+
+  it('passes down forwardRef to VideoPlayerButton', () => {
+    const forwardRefStub = testbed.stub()
+    testbed.render({ children: <PlaybackSpeedContainer forwardRef={forwardRefStub} /> })
+    expect(forwardRefStub).to.have.been.called
+  })
+})

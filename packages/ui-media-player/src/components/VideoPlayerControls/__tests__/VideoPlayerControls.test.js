@@ -37,6 +37,7 @@ describe('<VideoPlayerControls />', () => {
         <VideoPlayerControls.PlayPauseButton />
         <VideoPlayerControls.Timebar />
         <VideoPlayerControls.Volume />
+        <VideoPlayerControls.PlaybackSpeed />
         <VideoPlayerControls.FullScreenButton />
       </VideoPlayerControls>
     </Provider>
@@ -153,10 +154,6 @@ describe('<VideoPlayerControls />', () => {
     document.body.appendChild(popoverContentWrapper)
     const customProviderState = {
       ...providerState,
-      state: {
-        ...providerState.state,
-        showControls: true
-      },
       mediaPlayerWrapperRef: () => (popoverContentWrapper)
     }
     const component = testbed.render({ value: customProviderState })
@@ -168,6 +165,25 @@ describe('<VideoPlayerControls />', () => {
     const slider = document.getElementById(`${popoverContentWrapperId}`)
     expect(slider).to.not.be.null
     slider.remove()
+  })
+
+  it('renders a PlaybackSpeed (button & menu)', () => {
+    const menuContentWrapperId = 'menu-content-wrapper'
+    let menuContentWrapper = document.createElement('div')
+    menuContentWrapper.setAttribute("id", menuContentWrapperId)
+    document.body.appendChild(menuContentWrapper)
+    const customProviderState = {
+      ...providerState,
+      mediaPlayerWrapperRef: () => (menuContentWrapper)
+    }
+    const component = testbed.render({ value: customProviderState })
+    const button = component.find('PlaybackSpeed').find('VideoPlayerButton')
+    expect(button.prop('videoId')).to.eql(customProviderState.state.videoId)
+    expect(button.text()).to.match(/Playback Speed/)
+    button.click()
+    const playbackSpeedMenu = document.getElementById(menuContentWrapperId)
+    expect(playbackSpeedMenu).to.not.be.null
+    playbackSpeedMenu.remove()
   })
 
   it('renders a FullScreenButton', () => {

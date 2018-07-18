@@ -33,6 +33,7 @@ const VideoPlayerState = {
     screenState: PropTypes.oneOf(Object.values(ScreenStates)).isRequired,
     muted: PropTypes.bool.isRequired,
     volume: PropTypes.number.isRequired,
+    playbackSpeed: PropTypes.number.isRequired,
     loadingSrc: PropTypes.bool.isRequired,
     showControls: PropTypes.bool.isRequired,
     videoId: PropTypes.string.isRequired
@@ -43,6 +44,7 @@ const VideoPlayerState = {
     pause: PropTypes.func.isRequired,
     seek: PropTypes.func.isRequired,
     setVolume: PropTypes.func.isRequired,
+    setPlaybackSpeed: PropTypes.func.isRequired,
     showControls: PropTypes.func.isRequired,
     togglePlay: PropTypes.func.isRequired,
     toggleFullScreen: PropTypes.func.isRequired,

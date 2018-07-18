@@ -28,7 +28,8 @@ import themeable from '@instructure/ui-themeable'
 
 import PlayPauseButton from './PlayPauseButton'
 import Timebar from './Timebar'
-import VolumeContainer from './VolumeContainer'
+import Volume from './VolumeContainer'
+import PlaybackSpeed from './PlaybackSpeedContainer'
 import FullScreenButton from './FullScreenButton'
 import { Consumer } from '../VideoPlayer/VideoPlayerContext'
 
@@ -79,7 +80,9 @@ class VideoPlayerControls extends Component {
     </Consumer>
   )
 
-  static Volume = VolumeContainer
+  static Volume = Volume
+
+  static PlaybackSpeed = PlaybackSpeed
 
   static FullScreenButton = FullScreenButton
 

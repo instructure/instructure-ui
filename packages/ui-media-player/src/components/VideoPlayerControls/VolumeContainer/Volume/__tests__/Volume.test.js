@@ -34,6 +34,7 @@ describe('<Volume />', () => {
     mountNode: () => {},
     label: <div />,
     showControls: false,
+    handleShowControls: () => {},
     forwardRef: () => {}
   }
   let testProp = { ...prop }

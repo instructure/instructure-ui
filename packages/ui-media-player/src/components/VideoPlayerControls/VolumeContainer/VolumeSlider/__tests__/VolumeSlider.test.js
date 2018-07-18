@@ -33,6 +33,7 @@ describe('<VolumeSlider />', () => {
       onKeyDown={() => {}}
       onChange={() => {}}
       label={<div />}
+      handleShowControls={() => {}}
     />
   )
 
@@ -86,6 +87,13 @@ describe('<VolumeSlider />', () => {
 
   it('does not display current value', () => {
     expect(testbed.render().find('RangeInput').prop('displayValue')).to.eql(false)
+  })
+
+  it('should call handleShowControls when slider is hovered', () => {
+    const handleShowControls = testbed.stub()
+    const component = testbed.render({ handleShowControls })
+    component.instance().handleOnMouseMove()
+    expect(handleShowControls).to.have.been.called
   })
 
   describe('keybindings', () => {

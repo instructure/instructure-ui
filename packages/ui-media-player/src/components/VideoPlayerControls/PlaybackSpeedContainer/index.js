@@ -21,36 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { PAUSED, WINDOWED_SCREEN } from '../../../../constants'
+
+import React, { Component } from 'react'
+
+import PlaybackSpeed from './PlaybackSpeed'
+import { PLAYBACK_SPEED_OPTIONS } from '../../VideoPlayer'
+import { Consumer } from '../../VideoPlayer/VideoPlayerContext'
 
 /**
- * providerStateForTest is a provider state that is used as a reference to create
- * a new providerState object in test files. NEVER reference this file as it can
- * change their values.
- */
-const providerStateForTest = {
-  state: {
-    videoState: PAUSED,
-    screenState: WINDOWED_SCREEN,
-    muted: false,
-    volume: 1,
-    playbackSpeed: 1,
-    loadingSrc: false,
-    showControls: false,
-    videoId: 'uuid-123'
-  },
-  mediaPlayerWrapperRef: () => {},
-  actions: {
-    play: () => {},
-    pause: () => {},
-    seek: () => {},
-    setVolume: () => {},
-    setPlaybackSpeed: () => {},
-    showControls: () => {},
-    togglePlay: () => {},
-    toggleFullScreen: () => {},
-    toggleMute: () => {}
+---
+private: true
+---
+**/
+class PlaybackSpeedContainer extends Component {
+  render () {
+    return (
+      <Consumer>
+        {({
+          state,
+          mediaPlayerWrapperRef,
+          actions
+        }) => (
+          <PlaybackSpeed
+            showControls={state.showControls}
+            videoId={state.videoId}
+            playbackSpeed={state.playbackSpeed}
+            mountNode={mediaPlayerWrapperRef}
+            handleShowControls={actions.showControls}
+            setPlaybackSpeed={actions.setPlaybackSpeed}
+            playbackSpeedOptions={PLAYBACK_SPEED_OPTIONS}
+            setToPrevSpeed={actions.setToPrevSpeed}
+            setToNextSpeed={actions.setToNextSpeed}
+            {...this.props}
+          />
+        )}
+      </Consumer>
+    )
   }
 }
 
-export default providerStateForTest
+export default PlaybackSpeedContainer

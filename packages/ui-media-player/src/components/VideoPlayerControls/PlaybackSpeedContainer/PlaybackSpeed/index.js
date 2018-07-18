@@ -21,31 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
+import Menu, { MenuItemGroup, MenuItem } from '@instructure/ui-menu/lib/components/Menu'
+import Text from '@instructure/ui-elements/lib/components/Text'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
-import VolumeSlider from '../VolumeSlider'
 import VideoPlayerButton from '../../../VideoPlayerButton'
+import { translate } from '../../../../constants/translated/translations'
 
 /**
 ---
 private: true
 ---
 **/
-class Volume extends Component {
+class PlaybackSpeed extends Component {
   static propTypes = {
-    videoId: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired,
-    onChange: PropTypes.func.isRequired,
-    onKeyDown: PropTypes.func.isRequired,
-    mountNode: PropTypes.func.isRequired,
-    label: PropTypes.node.isRequired,
     showControls: PropTypes.bool.isRequired,
+    videoId: PropTypes.string.isRequired,
+    playbackSpeed: PropTypes.number.isRequired,
+    mountNode: PropTypes.func.isRequired,
     handleShowControls: PropTypes.func.isRequired,
-    forwardRef: PropTypes.func,
-    children: PropTypes.node
+    setPlaybackSpeed: PropTypes.func.isRequired,
+    playbackSpeedOptions: PropTypes.arrayOf(PropTypes.number).isRequired,
+    forwardRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -70,46 +71,65 @@ class Volume extends Component {
     this.setState({ showPopover: false })
   }
 
-  render() {
-    const {
-      videoId, value, onChange, onKeyDown,
-      mountNode, label, forwardRef, children,
-      handleShowControls
-    } = this.props
+  handleKeyDown = e => {
+    e.preventDefault()
+    this.props.handleShowControls()
+  }
+
+  renderPlaybackSpeedOptionLabels = (playbackSpeedOptions) => (
+    playbackSpeedOptions.map((playbackSpeed, idx) => {
+      const playbackSpeedOptionLabel = `${playbackSpeed}x`
+
+      return (
+        <MenuItem key={idx} value={playbackSpeed} onKeyDown={this.handleKeyDown}>
+          {playbackSpeedOptionLabel}
+        </MenuItem>
+      )
+    })
+  )
+
+  handleOnSelect = (e, [speed]) => {
+    this.props.setPlaybackSpeed(speed)
+  }
+
+  handleOnMouseMove = () => {
+    this.props.handleShowControls()
+  }
+
+  render () {
+    const { videoId, playbackSpeed, mountNode, playbackSpeedOptions, forwardRef } = this.props
+    const label = translate('PLAYBACK_SPEED')
+    const screenReaderContent = <ScreenReaderContent>{label}</ScreenReaderContent>
 
     return (
-      <Popover
+      <Menu
         placement="top"
-        on="click"
         show={this.state.showPopover}
         onToggle={this.togglePopover}
-        shouldReturnFocus
-        shouldCloseOnDocumentClick
-        shouldCloseOnEscape
-        mountNode={mountNode()}
-        variant="inverse"
-      >
-        <PopoverTrigger>
+        trigger={
           <VideoPlayerButton
             videoId={videoId}
             forwardRef={forwardRef}
+            theme={{ padding: '0 auto', width: '57px' }}
           >
-            {label}
-            {children}
+            {screenReaderContent}
+            <Text>{`${playbackSpeed}x`}</Text>
           </VideoPlayerButton>
-        </PopoverTrigger>
-        <PopoverContent>
-          <VolumeSlider
-            value={value}
-            onChange={onChange}
-            onKeyDown={onKeyDown}
-            label={label}
-            handleShowControls={handleShowControls}
-          />
-        </PopoverContent>
-      </Popover>
+        }
+        mountNode={mountNode()}
+        label={label}
+      >
+        <MenuItemGroup
+          onMouseMove={this.handleOnMouseMove}
+          label={screenReaderContent}
+          selected={[playbackSpeed]}
+          onSelect={this.handleOnSelect}
+        >
+          {this.renderPlaybackSpeedOptionLabels(playbackSpeedOptions)}
+        </MenuItemGroup>
+      </Menu>
     )
   }
 }
 
-export default Volume
+export default PlaybackSpeed

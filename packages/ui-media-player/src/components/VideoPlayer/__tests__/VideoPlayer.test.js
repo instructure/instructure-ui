@@ -50,6 +50,7 @@ describe('<VideoPlayer />', () => {
       pause () { this.paused = true },
       muted: false,
       volume: 1,
+      playbackRate: 1,
       addEventListener: testbed.stub(),
       removeEventListener: testbed.stub()
     }
@@ -71,7 +72,13 @@ describe('<VideoPlayer />', () => {
   })
 
   it('should be accessible', (done) => {
-    expect(testbed.render()).to.be.accessible(done)
+    expect(testbed.render()).to.be.accessible(done, {
+      ignores: [
+        // Menu's brand color doesn't meet 4.5:1 contrast req
+        // https://github.com/instructure/instructure-ui/blob/master/packages/ui-menu/src/components/Menu/__tests__/Menu.test.js#L75
+        'color-contrast'
+      ]
+    })
   })
 
   describe('when the source is loaded', () => {
@@ -136,15 +143,22 @@ describe('<VideoPlayer />', () => {
       const volume = controls.find('Volume')
       expect(volume.exists()).to.eql(true)
 
+      const playbackSpeed = controls.find('PlaybackSpeed')
+      expect(playbackSpeed.exists()).to.eql(true)
+
       const fullScreenButton = controls.find('FullScreenButton')
       expect(fullScreenButton.exists()).to.eql(true)
     })
 
     it('can render custom controls', () => {
       const player = testbed.render({
-        controls: () => { // eslint-disable-line react/display-name
-          return <div className="controls" />
-        }
+        controls: (VideoPlayerControls) => ( // eslint-disable-line react/display-name
+          <VideoPlayerControls>
+            <VideoPlayerControls.CustomControls>
+              {() => <div className="controls" />}
+            </VideoPlayerControls.CustomControls>
+          </VideoPlayerControls>
+        )
       })
       expect(player.find('.controls').length).to.eql(1)
     })
@@ -156,6 +170,34 @@ describe('<VideoPlayer />', () => {
     player.find(`.${styles.videoPlayerContainer}`).click()
     player.instance().applyVideoProps()
     expect(player.state('videoState')).to.eql(PLAYING)
+  })
+
+  it('sets volume with the right argument', () => {
+    const oldVolume = 1
+    const player = renderWithMockVideo({ volume: oldVolume })
+    expect(player.state('volume')).to.eql(oldVolume)
+    const newVolume = 0.5
+    player.instance().setVolume(newVolume)
+    player.instance().applyVideoProps()
+    expect(player.state('volume')).to.eql(newVolume)
+  })
+
+  it('set muted to false when setVolume is called', () => {
+    const player = renderWithMockVideo({ muted: true })
+    expect(player.state('muted')).to.eql(true)
+    player.instance().setVolume(0.5)
+    player.instance().applyVideoProps()
+    expect(player.state('muted')).to.eql(false)
+  })
+
+  it('sets playback speed with the right argument', () => {
+    const oldSpeed = 1
+    const player = renderWithMockVideo({ playbackRate: oldSpeed })
+    expect(player.state('playbackSpeed')).to.eql(oldSpeed)
+    const newSpeed = 0.5
+    player.instance().setPlaybackSpeed(newSpeed)
+    player.instance().applyVideoProps()
+    expect(player.state('playbackSpeed')).to.eql(newSpeed)
   })
 
   describe('keybindings', () => {

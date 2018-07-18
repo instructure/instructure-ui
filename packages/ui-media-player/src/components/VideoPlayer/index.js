@@ -47,7 +47,8 @@ export const SEEK_INTERVAL_SECONDS = 5
 export const JUMP_INTERVAL_SECONDS = 30
 export const SEEK_VOLUME_INTERVAL = 0.05
 export const JUMP_VOLUME_INTERVAL = 0.1
-export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate', 'seeked', 'ended', 'volumechange']
+export const PLAYBACK_SPEED_OPTIONS = [0.5, 1, 1.5, 2.0]
+export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate', 'seeked', 'ended', 'volumechange', 'ratechange']
 
 /**
 ---
@@ -82,6 +83,7 @@ class VideoPlayer extends Component {
           <VPC.PlayPauseButton />
           <VPC.Timebar />
           <VPC.Volume />
+          <VPC.PlaybackSpeed />
           <VPC.FullScreenButton />
         </VPC>
       )
@@ -97,6 +99,7 @@ class VideoPlayer extends Component {
     screenState: WINDOWED_SCREEN,
     muted: false,
     volume: 1,
+    playbackSpeed: 1,
     loadingSrc: true,
     showControls: true,
     videoId: generateElementId('VideoPlayer')
@@ -231,23 +234,18 @@ class VideoPlayer extends Component {
   }
 
   toggleMute = () => {
-    this.setState(prevState => ({ muted: !prevState.muted }), () => {
-      if (this.state.muted) {
-        this.video.volume = 0
-      } else {
-        this.video.volume = this.state.volume
-      }
-    })
+    this.video.muted = !this.video.muted
   }
 
   setVolume = (volume) => {
-    if (!this.video) {
-      return
+    if (this.video.muted) {
+      this.video.muted = false
     }
+    this.video.volume = Math.min(Math.max(0, volume), 1)
+  }
 
-    const v = Math.min(Math.max(0, volume), 1)
-    this.setState({ muted: false, volume: v })
-    this.video.volume = v
+  setPlaybackSpeed = (playbackSpeed) => {
+    this.video.playbackRate = playbackSpeed
   }
 
   applyVideoProps = () => {
@@ -262,11 +260,16 @@ class VideoPlayer extends Component {
       videoState = ENDED
     }
 
-    const muted = this.state.muted
+    const muted = this.video.muted
+    const volume = this.video.volume
+
+    const playbackSpeed = this.video.playbackRate
 
     this.setState({
       videoState,
       muted,
+      volume,
+      playbackSpeed,
       currentTime: this.video.currentTime,
       duration: this.video.duration,
       buffered: buffered.length > 0 ? buffered.end(buffered.length - 1) : 0
@@ -318,6 +321,7 @@ class VideoPlayer extends Component {
       pause: this.pause,
       seek: this.seek,
       setVolume: this.setVolume,
+      setPlaybackSpeed: this.setPlaybackSpeed,
       showControls: this.showControls,
       togglePlay: this.togglePlay,
       toggleFullScreen: this.toggleFullScreen,

@@ -30,7 +30,8 @@ let translations = {
   FULL_SCREEN: 'Full Screen',
   WINDOWED_SCREEN: 'Windowed Screen',
   VOLUME_UNMUTED: 'Unmuted',
-  VOLUME_MUTED: 'Muted'
+  VOLUME_MUTED: 'Muted',
+  PLAYBACK_SPEED: 'Playback Speed'
 }
 
 export const TranslationPropTypes =

@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import IconPlaySolid from '@instructure/ui-icons/lib/Solid/IconPlay'
 import IconPauseSolid from '@instructure/ui-icons/lib/Solid/IconPause'
@@ -39,14 +38,6 @@ private: true
 ---
 **/
 class PlayPauseButton extends Component {
-  static propTypes = {
-    forwardRef: PropTypes.func
-  }
-
-  static defaultProps = {
-    forwardRef: (ref) => {}
-  }
-
   config (variant) {
     const VARIANTS = {
       [PAUSED]: {
@@ -67,8 +58,6 @@ class PlayPauseButton extends Component {
   }
 
   render () {
-    const { forwardRef } = this.props
-
     return (
       <Consumer>
         {({
@@ -81,7 +70,7 @@ class PlayPauseButton extends Component {
             <VideoPlayerButton
               videoId={state.videoId}
               onClick={actions.togglePlay}
-              forwardRef={forwardRef}
+              {...this.props}
             >
               <ScreenReaderContent>{label}</ScreenReaderContent>
               <Icon size="x-small" />

@@ -36,6 +36,23 @@ describe('<VolumeContainer />', () => {
     </Provider>
   )
 
+  it('calls handleOnChange when volume is set by click', () => {
+    const customProviderState = {
+      ...providerState,
+      state: {
+        ...providerState.state,
+        volume: 1
+      },
+      actions: {
+        ...providerState.actions,
+        setVolume: testbed.stub()
+      }
+    }
+    const component = testbed.render({ value: customProviderState })
+    component.find('VolumeContainer').node.handleOnChange(0.5, customProviderState.actions)
+    expect(customProviderState.actions.setVolume).to.have.been.calledWith(parseFloat(0.5))
+  })
+
   describe('variants', () => {
     context('VOLUME_UNMUTED', () => {
       it('shows `Unmuted` on ScreenReaderContent', () => {

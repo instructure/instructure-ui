@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import IconAudioSolid from '@instructure/ui-icons/lib/Solid/IconAudio'
@@ -38,17 +37,8 @@ private: true
 ---
 **/
 class VolumeContainer extends Component {
-  static propTypes = {
-    forwardRef: PropTypes.func
-  }
-
-  static defaultProps = {
-    forwardRef: (ref) => {}
-  }
-
-  handleOnChange = (volume, { setVolume, showControls }) => {
+  handleOnChange = (volume, { setVolume }) => {
     setVolume(parseFloat(volume))
-    showControls()
   }
 
   calculateVolume = (volume, adjustVolume = 0) => {
@@ -116,8 +106,6 @@ class VolumeContainer extends Component {
   }
 
   render () {
-    const { forwardRef } = this.props
-
     return (
       <Consumer>
         {({
@@ -137,7 +125,8 @@ class VolumeContainer extends Component {
               mountNode={mediaPlayerWrapperRef}
               label={label}
               showControls={state.showControls}
-              forwardRef={forwardRef}
+              handleShowControls={actions.showControls}
+              {...this.props}
             >
               <IconAudioSolid size="x-small" />
             </Volume>

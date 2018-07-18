@@ -6,6 +6,7 @@
   padding: var(--padding);
   cursor: pointer;
   height: 100%;
+  width: var(--width);
 
   &:focus {
     outline: none;

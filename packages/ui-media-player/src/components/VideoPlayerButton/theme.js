@@ -31,6 +31,7 @@ export default function generator ({ colors, borders, spacing }) {
     padding: `0 ${spacing.small}`,
     focusOutlineColor: colors.borderBrand,
     focusOutlineWeight: borders.widthMedium,
-    focusBorderColor: colors.borderLightest
+    focusBorderColor: colors.borderLightest,
+    width: 'auto'
   }
 }

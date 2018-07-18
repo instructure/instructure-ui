@@ -39,23 +39,24 @@ export default class VolumeSlider extends Component {
     value: PropTypes.number.isRequired,
     onKeyDown: PropTypes.func.isRequired,
     onChange: PropTypes.func.isRequired,
-    label: PropTypes.element.isRequired
-  }
-
-  static defaultProps = {
-    value: 1,
-    onKeyDown: (e) => {},
-    onChange: (volume) => {},
-    label: 'Unmuted'
+    label: PropTypes.element.isRequired,
+    handleShowControls: PropTypes.func.isRequired
   }
 
   formatValue = volume => parseInt(volume * 100)
+
+  handleOnMouseMove = () => {
+    this.props.handleShowControls()
+  }
 
   render() {
     const { value, onKeyDown, onChange, label } = this.props
 
     return (
-      <View padding="medium" as="div">
+      <View
+        padding="medium"
+        as="div"
+        onMouseMove={this.handleOnMouseMove}>
         <RangeInput
           defaultValue={1}
           value={value}
