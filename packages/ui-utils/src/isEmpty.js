@@ -24,7 +24,7 @@
 const hasOwnProperty = Object.prototype.hasOwnProperty
 
 export default function isEmpty (obj) {
-  if (typeof obj !== 'object') return false
+  if (typeof obj !== 'object') return true
   for (let key in obj) {
     if (hasOwnProperty.call(obj, key)) return false
   }

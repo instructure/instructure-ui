@@ -102,7 +102,7 @@ export function clearRegistry () {
 */
 export const getDefaultThemeKey = () => {
   const { defaultThemeKey, registered } = getRegistry()
-  return defaultThemeKey || registered[0] || DEFAULT_THEME_KEY
+  return defaultThemeKey || registered[registered.length - 1] || DEFAULT_THEME_KEY
 }
 
 /**
