@@ -29,6 +29,7 @@ import styles from '../styles.css'
 describe('<SelectOptionsList />', () => {
   const testbed = new Testbed(
     <SelectOptionsList
+      expanded
       options={[
         {
           label: 'Alabama',

@@ -240,28 +240,29 @@ class SelectOptionsList extends Component {
         shadow="resting"
         background="default"
       >
-        <ul
-          className={styles.optionsList}
-          id={optionsId}
-          onKeyDown={this.props.onKeyDown}
-          onKeyUp={this.props.onKeyUp}
-          onBlur={this.props.onBlur}
-          tabIndex="-1"
-          ref={el => {
-            menuRef(el)
-            if (el) {
-              // store the height of the options
-              this.optionHeight = el.querySelector('li').clientHeight
-            }
-          }}
-          role="listbox"
-          style={{
-            maxHeight: `${visibleOptionsCount * this.optionHeight}px`,
-            display: this.props.expanded ? 'block' : 'none'
-          }}
-        >
-          {this.renderOptions()}
-        </ul>
+        {!!this.props.expanded && (
+          <ul
+            className={styles.optionsList}
+            id={optionsId}
+            onKeyDown={this.props.onKeyDown}
+            onKeyUp={this.props.onKeyUp}
+            onBlur={this.props.onBlur}
+            tabIndex="-1"
+            ref={el => {
+              menuRef(el)
+              if (el) {
+                // store the height of the   options
+                this.optionHeight = el.querySelector('li').clientHeight
+              }
+            }}
+            role="listbox"
+            style={{
+              maxHeight: `${visibleOptionsCount * this.optionHeight}px`,
+            }}
+          >
+            {this.renderOptions()}
+          </ul>
+        )}
       </View>
     )
   }

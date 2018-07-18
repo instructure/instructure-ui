@@ -129,10 +129,9 @@ describe('<Autocomplete />', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()
 
-      // ignored required children because of this bug https://github.com/dequelabs/axe-core/issues/160
-      subject.should.be.accessible(done, {
-        ignores: ['aria-required-children']
-      })
+      subject.find('input').simulate('click') // open it so it renders the opts
+
+      subject.should.be.accessible(done)
     })
 
     it('should set aria-invalid when errors prop is set', () => {

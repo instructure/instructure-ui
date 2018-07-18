@@ -97,6 +97,7 @@ describe('<TimeInput />', () => {
     const subject = testbed.render({
       defaultToFirstOption: true
     })
+    subject.find('input').simulate('click') // open it so it renders the options
 
     expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').textContent)
   })
@@ -110,6 +111,8 @@ describe('<TimeInput />', () => {
       onChange: () => {}
     })
 
+    subject.find('input').simulate('click') // open it so it renders the options
+
     const optionTexts = document.querySelectorAll('li > span')
     const expctedFirstOptionText = value.hour(0).minute(0).format(subject.prop('format'))
     const expctedSecondOptionText = value.hour(0).minute(15).format(subject.prop('format'))
@@ -120,8 +123,8 @@ describe('<TimeInput />', () => {
   it('should meet a11y standards', (done) => {
     const subject = testbed.render()
 
-    subject.should.be.accessible(done, {
-      ignores: ['aria-required-children']
-    })
+    subject.find('input').simulate('click') // open it so it renders the opts
+
+    subject.should.be.accessible(done)
   })
 })
