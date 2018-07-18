@@ -52,34 +52,35 @@ import warning from '../warning'
 */
 export default function deprecated (version, oldProps, message) {
   return function (ComposedComponent) {
-    if (process.env.NODE_ENV === 'production') return ComposedComponent
 
     const displayName = getDisplayName(ComposedComponent)
 
     class DeprecatedComponent extends ComposedComponent {
       static displayName = displayName
+    }
 
-      componentDidMount () {
+    if (process.env.NODE_ENV !== 'production') {
+      DeprecatedComponent.prototype.componentDidMount = function () {
         if (oldProps) {
           warnDeprecatedProps(displayName, version, this.props, oldProps, message)
         } else {
           warnDeprecatedComponent(version, displayName, message)
         }
 
-        if (super.componentDidMount) {
-          super.componentDidMount()
+        if (ComposedComponent.prototype.componentDidMount) {
+          ComposedComponent.prototype.componentDidMount.call(this)
         }
       }
 
-      componentWillReceiveProps (nextProps, nextContext) {
+      DeprecatedComponent.prototype.componentWillReceiveProps = function(nextProps, nextContext) {
         if (oldProps) {
           warnDeprecatedProps(displayName, version, nextProps, oldProps, message)
         } else {
           warnDeprecatedComponent(version, displayName, message)
         }
 
-        if (super.componentWillReceiveProps) {
-          super.componentWillReceiveProps(nextProps, nextContext)
+        if (ComposedComponent.prototype.componentWillReceiveProps) {
+          ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
         }
       }
     }
