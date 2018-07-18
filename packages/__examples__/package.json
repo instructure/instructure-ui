@@ -2,7 +2,7 @@
   "name": "docs-examples",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "5.20.0",
+  "version": "5.20.1",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -19,8 +19,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5.20.0",
-    "@instructure/ui-themes": "^5.20.0",
+    "@instructure/ui-presets": "^5.20.1",
+    "@instructure/ui-themes": "^5.20.1",
     "@storybook/addon-links": "^3.4.6",
     "@storybook/addon-options": "^3.4.7",
     "@storybook/addons": "^3.4.8",

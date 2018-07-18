@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-billboard",
-  "version": "5.20.0",
+  "version": "5.20.1",
   "description": "A UI component to display empty states, 404 pages, redirects, etc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.20.1"></a>
+## [5.20.1](https://github.com/instructure/instructure-ui/compare/v5.20.0...v5.20.1) (2018-07-18)
+
+
+### Bug Fixes
+
+* **ui-utils:** fix recent change of `DeprecatedComponent` ([c7dd5d7](https://github.com/instructure/instructure-ui/commit/c7dd5d7))
+* **ui-utils,ui-themeable:** fix bug applying high-contrast theme ([f42b126](https://github.com/instructure/instructure-ui/commit/f42b126))
+
+
+
+
+
 <a name="5.20.0"></a>
 # [5.20.0](https://github.com/instructure/instructure-ui/compare/v5.19.0...v5.20.0) (2018-07-17)
 

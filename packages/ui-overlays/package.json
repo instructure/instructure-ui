@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-overlays",
-  "version": "5.20.0",
+  "version": "5.20.1",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -37,8 +37,8 @@
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
     "classnames": "^2",
-    "prop-types": "^15",
     "no-scroll": "^2.1.0",
+    "prop-types": "^15",
     "react": "^0.14.9 || ^15"
   },
   "publishConfig": {
