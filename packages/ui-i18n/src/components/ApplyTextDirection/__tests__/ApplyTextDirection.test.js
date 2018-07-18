@@ -26,6 +26,7 @@ import React from 'react'
 import ApplyTextDirection from '../index'
 import bidirectional from '../../../bidirectional'
 import { makeTextDirectionContext } from '../../../TextDirectionContextTypes'
+import getTextDirection from '../../../utils/getTextDirection'
 
 describe('<ApplyTextDirection />', () => {
   @bidirectional()
@@ -47,6 +48,7 @@ describe('<ApplyTextDirection />', () => {
 
   beforeEach(() => {
     testbed.setTextDirection('rtl')
+    getTextDirection.resetDefault()
   })
 
   it('should take on the direction of the document element by default', () => {

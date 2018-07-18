@@ -25,6 +25,7 @@
 import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
+import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
 
 import Tray from '../index'
 import styles from '../styles.css'
@@ -180,6 +181,7 @@ describe('<Tray />', () => {
           const val = placements[dir].enteringPlacements[placement]
           it(`returns ${val} for ${placement} when entering`, () => {
             testbed.setTextDirection(dir)
+            getTextDirection.resetDefault()
 
             const subject = testbed.render({
               open: true,

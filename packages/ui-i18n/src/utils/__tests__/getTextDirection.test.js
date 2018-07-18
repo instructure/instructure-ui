@@ -29,6 +29,7 @@ describe('getTextDirection', () => {
 
   beforeEach(() => {
     testbed.setTextDirection('ltr')
+    getTextDirection.resetDefault()
   })
 
   it('defaults the dir of <html>', () => {
