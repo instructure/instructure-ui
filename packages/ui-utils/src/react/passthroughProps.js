@@ -32,6 +32,7 @@ import pick from 'object.pick'
  */
 
 
+const ALWAYS_EXCLUDE = ['theme', 'children', 'className', 'style']
  /**
   * Return a props object with the specified propTypes omitted.
   * Automatically excludes ('theme', 'children', 'className', 'style')
@@ -43,7 +44,7 @@ import pick from 'object.pick'
   */
 export function omitProps (props, propTypes = {}, exclude = []) {
   const keys = Object.keys(propTypes)
-    .concat(['theme', 'children', 'className', 'style'])
+    .concat(ALWAYS_EXCLUDE)
     .concat(exclude)
 
   return omit(props, keys)
