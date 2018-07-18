@@ -215,15 +215,17 @@ class Button extends Component {
       icon
     } = this.props
 
-    // show warning if icon is added as a child
-    if (this.hasVisibleChildren) {
-      React.Children.forEach(children, (child) => {
-        const icon = typeof child === 'object' && child.type.glyphName !== undefined // eslint-disable-line no-undefined
-        warning(
-          !icon,
-          `Adding icons to Button as children is deprecated. Please use the icon prop instead.`
-        )
-      })
+    if (process.env.NODE_ENV !== 'production' ) {
+      // show warning if icon is added as a child
+      if (this.hasVisibleChildren) {
+        React.Children.forEach(children, (child) => {
+          const icon = typeof child === 'object' && child.type.glyphName !== undefined // eslint-disable-line no-undefined
+          warning(
+            !icon,
+            `Adding icons to Button as children is deprecated. Please use the icon prop instead.`
+          )
+        })
+      }
     }
 
     if (this.hasTextAndIcon) {
