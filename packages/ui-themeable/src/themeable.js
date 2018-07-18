@@ -193,8 +193,6 @@ export default function themeable (theme, styles = {}) {
           this.applyTheme()
         }
 
-        setTextDirection()
-
         if (super.componentDidUpdate) {
           super.componentDidUpdate(prevProps, prevState, prevContext)
         }

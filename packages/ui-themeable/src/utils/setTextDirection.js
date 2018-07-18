@@ -24,6 +24,7 @@
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import warning from '@instructure/ui-utils/lib/warning'
 
+let hasRan = false
 /**
 * ---
 * category: utilities/themes
@@ -32,15 +33,15 @@ import warning from '@instructure/ui-utils/lib/warning'
 * bidirectional styles.
 */
 export default function setTextDirection () {
+  if (hasRan) return
+  hasRan = true
   if (canUseDOM) {
     const dir = document.documentElement.getAttribute('dir')
-
-    warning(dir,
-      `[themeable] component styles require setting a 'dir' attribute on the HTML element.
-      To prevent breaking changes, we'll set it to a default value: 'ltr'.`
-    )
-
     if (!dir) {
+      warning(dir,
+        `[themeable] component styles require setting a 'dir' attribute on the HTML element.
+        To prevent breaking changes, we'll set it to a default value: 'ltr'.`
+      )
       document.documentElement.setAttribute('dir', 'ltr')
     }
   }
