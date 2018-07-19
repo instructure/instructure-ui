@@ -169,7 +169,7 @@ class TextArea extends Component {
         this._listener = addEventListener(window, 'resize', this._debounced)
       }
 
-      this._request = requestAnimationFrame(this._debounced)
+      this._request = requestAnimationFrame(this.grow)
     }
   }
 
@@ -200,6 +200,11 @@ class TextArea extends Component {
         this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds height in pixels
         height = this.props.height
       }
+    }
+
+    if (this._container) {
+      // preserve height to prevent scroll jumping on long textareas
+      this._container.style.minHeight = height
     }
 
     this._textarea.style.height = height
@@ -279,6 +284,28 @@ class TextArea extends Component {
       maxHeight: maxHeight
     }
 
+    const textarea = (
+      <textarea
+        {...props}
+        value={value}
+        defaultValue={defaultValue}
+        placeholder={placeholder}
+        ref={(textarea, ...args) => {
+          this._textarea = textarea
+          textareaRef.apply(this, [textarea].concat(args))
+        }}
+        style={style}
+        id={this.id}
+        required={required}
+        aria-required={required}
+        aria-invalid={this.invalid ? 'true' : null}
+        disabled={disabled || readOnly}
+        aria-disabled={disabled || readOnly ? 'true' : null}
+        className={classnames(classes)}
+        onChange={this.handleChange}
+      />
+    )
+
     return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
@@ -286,25 +313,11 @@ class TextArea extends Component {
         id={this.id}
         ref={(el) => { this._node = el }}
       >
-        <textarea
-          {...props}
-          value={value}
-          defaultValue={defaultValue}
-          placeholder={placeholder}
-          ref={(textarea, ...args) => {
-            this._textarea = textarea
-            textareaRef.apply(this, [textarea].concat(args))
-          }}
-          style={style}
-          id={this.id}
-          required={required}
-          aria-required={required}
-          aria-invalid={this.invalid ? 'true' : null}
-          disabled={disabled || readOnly}
-          aria-disabled={disabled || readOnly ? 'true' : null}
-          className={classnames(classes)}
-          onChange={this.handleChange}
-        />
+        {!autoGrow ? textarea : (
+          <div ref={(el) => { this._container = el }}>
+            { textarea }
+          </div>
+        )}
       </FormField>
     )
   }
