@@ -33,9 +33,10 @@ import theme from './theme'
 ---
 private: true
 ---
+@module VideoPlayerButton
 **/
 @themeable(theme, styles)
-class VideoPlayerButton extends Component {
+export default class VideoPlayerButton extends Component {
   static propTypes = {
     /**
      * Id of the video element. Used to ensure
@@ -75,5 +76,3 @@ class VideoPlayerButton extends Component {
     )
   }
 }
-
-export default VideoPlayerButton

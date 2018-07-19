@@ -81,6 +81,7 @@ async function findJiraVersion (jiraVersionName, config = {}) {
   let result = []
 
   try {
+    info(`Looking for ${jiraVersionName} in Jira project: ${config.jira_project_key}...`)
     result = await jiraClient(config).getVersions(config.jira_project_key)
   } catch (e) {
     error(`Could not get Jira versions for project: ${config.jira_project_key}`)
@@ -109,6 +110,7 @@ async function createJiraVersion (jiraVersionName, config = {}) {
   }
 
   try {
+    info(`Creating ${jiraVersionName} in Jira project: ${config.jira_project_id}...`)
     result = await jiraClient(config).createVersion({
       name: `${jiraVersionName}`,
       archived: false,

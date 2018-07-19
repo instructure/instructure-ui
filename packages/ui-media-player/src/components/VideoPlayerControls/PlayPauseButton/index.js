@@ -36,8 +36,9 @@ import { translate } from '../../../constants/translated/translations'
 ---
 private: true
 ---
+@module PlayPauseButton
 **/
-class PlayPauseButton extends Component {
+export default class PlayPauseButton extends Component {
   config (variant) {
     const VARIANTS = {
       [PAUSED]: {
@@ -81,5 +82,3 @@ class PlayPauseButton extends Component {
     )
   }
 }
-
-export default PlayPauseButton

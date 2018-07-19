@@ -32,8 +32,9 @@ import { Consumer } from '../../VideoPlayer/VideoPlayerContext'
 ---
 private: true
 ---
+@module PlaybackSpeedContainer
 **/
-class PlaybackSpeedContainer extends Component {
+export default class PlaybackSpeedContainer extends Component {
   render () {
     return (
       <Consumer>
@@ -59,5 +60,3 @@ class PlaybackSpeedContainer extends Component {
     )
   }
 }
-
-export default PlaybackSpeedContainer

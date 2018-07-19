@@ -35,8 +35,9 @@ import { translate } from '../../../constants/translated/translations'
 ---
 private: true
 ---
+@module VolumeContainer
 **/
-class VolumeContainer extends Component {
+export default class VolumeContainer extends Component {
   handleOnChange = (volume, { setVolume }) => {
     setVolume(parseFloat(volume))
   }
@@ -136,5 +137,3 @@ class VolumeContainer extends Component {
     )
   }
 }
-
-export default VolumeContainer

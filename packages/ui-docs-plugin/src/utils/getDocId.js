@@ -42,6 +42,7 @@ module.exports = function getDocId (docData, options, context, interpolate) {
 function _getDocId (options, docData, context) {
   const { identifier } = options.document
   const { relativePath, id, describes } = docData
+  const lowerPath = relativePath.toLowerCase()
 
   if (typeof identifier === 'function') {
     return identifier(docData, context)
@@ -49,9 +50,9 @@ function _getDocId (options, docData, context) {
     return identifier
   } else if (id) {
     return id
-  } else if (relativePath.includes('/index.js')) {
+  } else if (lowerPath.includes('/index.js')) {
     return '[folder]'
-  } else if (relativePath.includes('README.md')) {
+  } else if (lowerPath.includes('readme.md')) {
     return describes ? '[folder]__README' : '[folder]'
   } else {
     return '[name]'
