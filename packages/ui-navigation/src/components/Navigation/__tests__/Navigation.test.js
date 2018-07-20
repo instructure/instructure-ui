@@ -45,7 +45,7 @@ describe('<Navigation />', () => {
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<Img src={image} cover />}
+          icon={<Img src={image} constrain="cover" />}
           label={<ScreenReaderContent>Home</ScreenReaderContent>}
           href="#"
         />

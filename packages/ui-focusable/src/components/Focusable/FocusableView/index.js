@@ -36,11 +36,6 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import styles from './styles.css'
 import theme from './theme'
 
-const SHAPE = {
-  RECTANGULAR: 'rectangular',
-  CIRCULAR: 'circular'
-}
-
 /**
 ---
 parent: Focusable
@@ -57,7 +52,7 @@ export default class FocusableView extends Component {
     /**
     * Shape of the focus ring
     */
-    shape: PropTypes.oneOf(Object.values(SHAPE)),
+    shape: PropTypes.oneOf(["circular", "rectangular"]),
     /**
     * Color of the focus ring
     */
@@ -87,14 +82,12 @@ export default class FocusableView extends Component {
 
   static defaultProps = {
     focused: false,
-    shape: SHAPE.RECTANGULAR,
+    shape: "rectangular",
     color: 'primary',
     display: 'auto',
     as: 'button',
     elementRef: function (element) {},
   }
-
-  static SHAPE = SHAPE
 
   render () {
     const {

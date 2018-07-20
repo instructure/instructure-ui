@@ -76,8 +76,7 @@ export default class Img extends Component {
     alt: '',
     inline: true,
     grayscale: false,
-    blur: false,
-    cover: false
+    blur: false
   }
 
   get supportsObjectFit () {

@@ -27,12 +27,12 @@ import React from 'react'
 import View from '../../../../../ui-layout/lib/components/View'
 import Text from '../../../../../ui-elements/lib/components/Text'
 /* eslint-enable instructure-ui/no-relative-package-imports */
-import FocusableView from '../views/FocusableView'
+import FocusableView from '../FocusableView'
 
 export const shapes = () => {
   return (
     <View display="block">
-      {Object.values(FocusableView.SHAPE).map((shape, index) => (
+      {["circular", "rectangular"].map((shape, index) => (
         <FocusableView
           key={index}
           focused={true}

@@ -17,7 +17,7 @@ example: true
       }}
     >
       <NavigationItem
-        icon={<Img src={placeholderLogo(85, 85)} cover />}
+        icon={<Img src={placeholderLogo(85, 85)} constrain="cover" />}
         label={<ScreenReaderContent>Home</ScreenReaderContent>}
         href="#"
         theme={{
@@ -36,7 +36,7 @@ example: true
         href="#"
       />
       <NavigationItem selected
-        icon={<IconUser.Solid />} 
+        icon={<IconUser.Solid />}
         label="Dashboard"
         href="#"
       />

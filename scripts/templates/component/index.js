@@ -58,4 +58,4 @@ class ${COMPONENT} extends Component {
 }
 
 export default ${COMPONENT}
-export { default as ${COMPONENT}View } from './views/${COMPONENT}View'
+export { default as ${COMPONENT}View } from './${COMPONENT}View'

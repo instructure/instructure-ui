@@ -189,4 +189,4 @@ class Focusable extends Component {
 }
 
 export default Focusable
-export { default as FocusableView } from './views/FocusableView'
+export { default as FocusableView } from './FocusableView'
