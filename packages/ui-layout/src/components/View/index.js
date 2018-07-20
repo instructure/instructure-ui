@@ -43,16 +43,6 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import styles from './styles.css'
 import theme from './theme'
 
-/**
----
-category: components/layout
----
-**/
-@deprecated('5.4.0', {
-  size: 'maxWidth'
-})
-@bidirectional()
-@themeable(theme, styles)
 class View extends Component {
   static propTypes = {
     /**
@@ -143,26 +133,6 @@ class View extends Component {
     // from parents
     // - Any props used to set inline styles should be undefined so that they
     // don't break consuming components' CSS
-  }
-
-  constructor (props) {
-    super(props)
-    this.verifySpanMargin(props)
-    this._element = null
-  }
-
-  componentWillReceiveProps (nextProps) {
-    this.verifySpanMargin(nextProps)
-  }
-
-  verifySpanMargin (props) {
-    const { as, display, margin } = props
-
-    warning(
-      !((as === 'span' || typeof as === 'undefined') && display === 'auto' && margin && margin !== 'none' && margin !== '0'),
-      `[${this.displayName}] element of type 'span' and display 'auto' is inline ` +
-      `and will allow for horizontal margins only`
-    )
   }
 
   get displayName () {
@@ -285,4 +255,28 @@ class View extends Component {
   }
 }
 
-export default View
+if (process.env.NODE_ENV !== 'production') {
+  View.prototype.componentWillReceiveProps = View.prototype.verifySpanMargin = function(props) {
+    const { as, display, margin } = props
+
+    warning(
+      !((as === 'span' || typeof as === 'undefined') && display === 'auto' && margin && margin !== 'none' && margin !== '0'),
+      `[${this.displayName}] element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
+    )
+  }
+
+  View.prototype.componentWillMount = function() {
+    this.verifySpanMargin(this.props)
+  }
+}
+
+/**
+---
+category: components/layout
+---
+**/
+export default deprecated('5.4.0', {size: 'maxWidth'})(
+bidirectional()(
+themeable(theme, styles)(
+  View
+)))
