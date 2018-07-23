@@ -49,7 +49,7 @@
     "predeploy": "yarn bootstrap && yarn build:docs",
     "deploy": "ui-scripts --deploy-docs",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "build:examples": "lerna run build --strema --scope docs-examples",
+    "build:examples": "lerna run build --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
     "generate:screenshots": "lerna run generate:screenshots --stream --scope docs-examples",
     "review:screenshots": "lerna run review:screenshots --stream --scope docs-examples"
