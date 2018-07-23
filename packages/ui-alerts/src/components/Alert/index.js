@@ -51,7 +51,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 

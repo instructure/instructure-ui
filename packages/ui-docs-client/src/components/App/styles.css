@@ -33,6 +33,15 @@ table code {
   border: none;
 }
 
+blockquote {
+  display: block;
+  background: var(--background);
+  padding: var(--quotePadding);
+  margin: var(--quoteMargin);
+  border-top: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-bottom: var(--borderWidth) var(--borderStyle) var(--borderColor);
+}
+
 /* stylelint-enable selector-max-type */
 
 .root {

@@ -64,11 +64,11 @@ export default class Theme extends Component {
 
   renderSection (name, content) {
     return (
-      <Table caption={<h3>{name}</h3>} key={name}>
+      <Table caption={<h3>{name}</h3>} key={name} margin="large 0 0">
         <thead>
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Value</th>
+            <th scope="col" style={{ width: '50%' }} >Name</th>
+            <th scope="col" style={{ width: '50%' }} >Value</th>
           </tr>
         </thead>
         <tbody>

@@ -36,7 +36,7 @@ import LayoutPropTypes from '../../utils/LayoutPropTypes'
 
 /**
 ---
-category: components/layout
+category: components
 ---
 **/
 class Responsive extends Component {

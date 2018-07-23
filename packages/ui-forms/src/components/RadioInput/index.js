@@ -35,7 +35,7 @@ import styles from './styles.css'
 import theme from './theme'
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 @themeable(theme, styles)

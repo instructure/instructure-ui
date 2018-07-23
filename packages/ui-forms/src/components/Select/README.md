@@ -3,6 +3,10 @@ describes: Select
 ---
 
 Select is an accessible, custom styled combobox component with optional autocomplete.
+- Select behaves similar to [Popover](#Popover) but provides additional semantic markup and focus behavior as a form input.
+- Select should not be used for navigation or as a list of actions/functions. (see [Menu](#Menu))
+- Select can provide autocomplete behavior.
+- Select can allow single or multiple selections.
 
 *Note: When Select is rendered inside a parent with `overflow:hidden` the options may be clipped.*
 

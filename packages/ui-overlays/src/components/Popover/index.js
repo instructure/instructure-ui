@@ -60,7 +60,7 @@ class PopoverContent extends ComponentIdentifier {
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 

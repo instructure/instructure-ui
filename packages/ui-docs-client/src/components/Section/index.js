@@ -41,7 +41,8 @@ export default class Section extends Component {
   render () {
     const heading = this.props.heading && (
       <Heading
-        level="h2"
+        level="h1"
+        as="h2"
         id={this.props.id}
       >
         {this.props.heading}

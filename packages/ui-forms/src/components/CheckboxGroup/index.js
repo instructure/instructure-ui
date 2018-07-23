@@ -37,7 +37,7 @@ import FormFieldGroup from '../FormFieldGroup'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 export default class CheckboxGroup extends Component {

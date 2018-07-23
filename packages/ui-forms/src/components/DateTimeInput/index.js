@@ -38,7 +38,7 @@ import FormFieldGroup from '../FormFieldGroup/index'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 class DateTimeInput extends Component {

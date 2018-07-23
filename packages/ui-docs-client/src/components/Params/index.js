@@ -62,7 +62,7 @@ export default class Params extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>}>
+      <Table caption={<ScreenReaderContent>Parameters</ScreenReaderContent>} margin="0 0 large">
         <thead>
           <tr>
             <th scope="col">Param</th>

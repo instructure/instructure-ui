@@ -1,6 +1,6 @@
 ---
 title: Themes
-category: Contributing
+category: Getting Started
 ---
 
 ## Themes

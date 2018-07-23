@@ -47,7 +47,7 @@ import theme from './theme'
 
 /**
 ---
-category: components
+category: components/navigation
 ---
 **/
 @deprecated('5.1.0', {

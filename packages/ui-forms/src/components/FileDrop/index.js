@@ -100,7 +100,7 @@ const IS_MS = isBrowserMS()
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 @themeable(theme, styles)

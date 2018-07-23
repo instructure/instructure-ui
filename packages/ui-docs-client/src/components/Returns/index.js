@@ -61,7 +61,7 @@ export default class Returns extends Component {
 
   render () {
     return (
-      <Table caption={<ScreenReaderContent>Returns</ScreenReaderContent>}>
+      <Table caption={<ScreenReaderContent>Returns</ScreenReaderContent>} margin="0 0 large">
         <thead>
           <tr>
             <th scope="col">Type</th>

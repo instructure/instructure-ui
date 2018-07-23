@@ -1,5 +1,5 @@
 ---
-category: Contributing/RFCs
+category: Getting Started/RFCs
 id: DragDropContextRFC
 title: DragDropContext
 ---

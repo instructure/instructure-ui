@@ -22,7 +22,11 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
+export default function ({ borders, colors }) {
   return {
+    borderWidth: `${borders.widthMedium}`,
+    borderColor: `${colors.borderBrand}`,
+    linkPadding: '0.25rem 0 0.25rem 0.875rem',
+    linkMargin: '0.375rem 0 0.375rem 0.375rem'
   }
 }

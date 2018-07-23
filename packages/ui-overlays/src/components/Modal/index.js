@@ -51,7 +51,7 @@ import ModalFooter from './ModalFooter'
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 

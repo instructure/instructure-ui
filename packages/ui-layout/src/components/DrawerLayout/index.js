@@ -43,7 +43,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/layout
+category: components
 ---
 **/
 @bidirectional()

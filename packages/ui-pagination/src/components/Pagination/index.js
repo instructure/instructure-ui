@@ -60,7 +60,7 @@ function shouldShowNextButton (props, currentPageIndex) {
 
 /**
 ---
-category: components/navigation
+category: components
 ---
 **/
 @themeable(theme, styles)

@@ -29,6 +29,7 @@ import Link from '@instructure/ui-elements/lib/components/Link'
 import themeable from '@instructure/ui-themeable'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
+import PandaLogo from './instui-panda.js'
 import styles from './styles.css'
 import theme from './theme'
 
@@ -42,6 +43,9 @@ export default class Header extends Component {
   render () {
     return (
       <div className={styles.root}>
+        <div className={styles.logo}>
+          <PandaLogo />
+        </div>
         <div className={styles.banner} role="banner">
           <Link
             theme={{

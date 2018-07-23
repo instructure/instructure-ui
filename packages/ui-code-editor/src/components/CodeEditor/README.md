@@ -1,8 +1,8 @@
 ---
 describes: CodeEditor
 ---
-
-The CodeEditor component can be used to display code.
+### Code layout
+The CodeEditor component can be used to display code via the `defaultValue` prop.
 
 ```js
 ---

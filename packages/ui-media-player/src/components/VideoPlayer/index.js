@@ -53,7 +53,7 @@ export const MEDIA_ELEMENT_EVENTS = ['loadedmetadata', 'progress', 'timeupdate',
 
 /**
 ---
-category: components/media
+category: components
 experimental: true
 ---
 **/

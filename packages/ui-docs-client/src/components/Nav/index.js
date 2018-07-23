@@ -126,7 +126,7 @@ export default class Nav extends Component {
           summary={title}
           onToggle={(e, toggleExpanded) => { this.handleToggleSection(id, toggleExpanded) }}
           expanded={expandedSections[id]}
-          iconPosition="end"
+          iconPosition="start"
         >
           {children}
         </NavToggle>

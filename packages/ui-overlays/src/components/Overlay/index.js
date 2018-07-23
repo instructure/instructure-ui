@@ -37,7 +37,7 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 class Overlay extends Component {

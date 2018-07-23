@@ -4,10 +4,10 @@ describes: Badge
 
 ### Making badges accessible
 Badge counts are automatically fed to screenreaders through the `aria-describedby`
-attribute. Often, though, a number alone doesn't give a screenreader user enough context.
+attribute. Often a stand alone number doesn't give a screenreader user enough context (_"3" vs. "3 unread emails"_). 
 The examples below use the `formatOutput` prop to make the badge more screenreader-friendly.
 
-Note the use of the `pulse` prop to make the Badge slowly pulse twice on mount,
+> Note the use of the `pulse` prop to make the Badge slowly pulse twice on mount.
 
 ```js
 ---
@@ -43,10 +43,10 @@ example: true
   </div>
 ```
 
-### countUntil
+### Limit the count
 
 Use the `countUntil` prop to set a limit for the count. Format the overflow
-text using `formatOverflowText` (default is "+").
+text using `formatOverflowText` _(default is "+" symbol)_.
 
 ```js
 ---
@@ -117,9 +117,9 @@ example: true
 </div>
 ```
 
-### placement
+### Placement
 
-Default is `top end`. Note that standalone badges can't be placed.
+Default is `top end`. __Note that standalone badges can't be placed.__
 
 ```js
 ---

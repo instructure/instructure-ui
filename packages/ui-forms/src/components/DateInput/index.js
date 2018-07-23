@@ -48,7 +48,7 @@ import { isDayDisabled } from "./utils/dateHelpers"
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 @themeable(theme, styles)

@@ -101,11 +101,11 @@ export default class Document extends Component {
     if (!srcUrl) return
 
     return (
-      <Text size="small">
+      <View as="div" margin="0 0 x-large 0">
         <Link href={srcUrl} theme={{ color: '#005A8F', hoverColor: darken('#005A8F', 10) }}>
           {srcPath}
         </Link>
-      </Text>
+      </View>
     )
   }
 
@@ -235,7 +235,7 @@ const ${importName} = require('${requirePath}').default
     if (doc.sections) {
       sections = doc.sections.map(section => (
         <View margin="small 0" display="block" key={`${doc.id}.${section.name}`}>
-          <Heading level="h3" id={`${doc.id}.${section.name}`} margin="large 0 small 0">
+          <Heading level="h3" color="secondary" id={`${doc.id}.${section.name}`} margin="large 0 small 0">
             { section.kind && <code>{section.kind}</code> }
             {section.title}
           </Heading>

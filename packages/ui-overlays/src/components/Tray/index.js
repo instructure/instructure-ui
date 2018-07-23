@@ -46,7 +46,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 @deprecated('3.0.0', {

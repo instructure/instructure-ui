@@ -46,7 +46,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 

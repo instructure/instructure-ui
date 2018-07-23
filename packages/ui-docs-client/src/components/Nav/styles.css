@@ -24,14 +24,12 @@
 }
 
 .link {
-  margin: 0;
   display: inline-block;
   vertical-align: middle;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 100%;
-  font-size: 0.875rem;
   transition: all 0.15s ease;
 
   &:first-child {
@@ -40,7 +38,8 @@
 }
 
 .link.level--0 {
-  padding: 0.8rem 0;
+  padding: var(--linkPadding);
+  margin: var(--linkMargin);
 
   &:last-child {
     padding-bottom: 0;
@@ -48,15 +47,13 @@
 }
 
 .link.level--1 {
-  padding: 0.6rem 0 0.4rem 1rem;
-
-  &:last-child {
-    padding-bottom: 0;
-  }
+  padding: var(--linkPadding);
+  margin: var(--linkMargin);
 }
 
 .link.level--2 {
-  padding: 0.2rem 0 0.2rem 1.5rem;
+  padding: var(--linkPadding);
+  margin: var(--linkMargin);
 
   &:last-child {
     padding-bottom: 0;
@@ -72,8 +69,10 @@
 }
 
 .selectedLink {
+  box-sizing: border-box;
   color: #0084d1;
   font-weight: 700;
+  box-shadow: inset var(--borderWidth) 0 0 var(--borderColor);
 }
 
 @media only screen and (max-width: 48rem) {

@@ -39,7 +39,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/typography
+category: components
 ---
 **/
 

@@ -53,7 +53,7 @@ const keyDirections = {
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 @themeable(theme, styles)

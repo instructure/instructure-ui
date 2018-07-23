@@ -32,7 +32,7 @@ import FormFieldLayout from './FormFieldLayout'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 class FormField extends Component {

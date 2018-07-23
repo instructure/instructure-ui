@@ -61,7 +61,7 @@ export default class NavToggle extends Component {
       color: '#333',
       textWeight: 'normal',
       textTransform: 'capitalize',
-      textSize: 'small'
+      textSize: 'medium'
     }
 
     const styles = variant === 'section' ? sectionStyles : categoryStyles

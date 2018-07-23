@@ -40,7 +40,7 @@ import FormField from '../FormField'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 @themeable(theme, styles)

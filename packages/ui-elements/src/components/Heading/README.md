@@ -1,10 +1,10 @@
 ---
 describes: Heading
 ---
-
-Generate content headings, from h1 to h5. The `as` prop controls what
-html element is outputted. The `level` prop sets its appearance.
-Use the `margin` prop to give the Heading margin.
+### Heading level
+Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
+- The `as` prop controls what html element is output. _(if not defined it will default to level)._ 
+- The `level` prop sets its appearance.
 
 ```js
 ---
@@ -16,12 +16,12 @@ example: true
   <Heading level="h3" margin="0 0 x-small">Heading level Three</Heading>
   <Heading level="h4" margin="0 0 x-small">Heading level Four</Heading>
   <Heading level="h5" margin="0 0 x-small">Heading level Five</Heading>
-  <Heading level="reset" as="h2">Heading level reset</Heading>
+  <Heading level="reset" as="h2">Heading level reset as a Two</Heading>
 </div>
 ```
 
-### Colors
-
+### Heading colors
+The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_). 
 ```js
 ---
 example: true
@@ -44,9 +44,9 @@ inverse: true
 </div>
 ```
 
-### Borders
+### Heading borders
 
-`Heading` defaults to no borders. However, using the `border` prop, you can
+The default is no borders. However, using the `border` prop, you can
 add either `top` or `bottom` borders to your heading.
 
 ```js
@@ -54,10 +54,10 @@ add either `top` or `bottom` borders to your heading.
 example: true
 ---
 <div>
-  <Heading border="bottom" level="h5">I have a bottom border</Heading>
+  <Heading level="h1" border="bottom">I have a bottom border</Heading>
   <br />
   <br />
-  <Heading border="top">I have a top border</Heading>
+  <Heading border="top" level="h3">I have a top border</Heading>
 </div>
 ```
 
@@ -70,5 +70,5 @@ wrap. Any overflow will be truncated with an ellipsis `...`
 ---
 example: true
 ---
-<Heading level="h1" ellipsis>{lorem.paragraph()}</Heading>
+<Heading level="h2" ellipsis>{lorem.paragraph()}</Heading>
 ```

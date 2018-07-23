@@ -22,4 +22,10 @@
   font-size: 0.875rem;
 }
 
+.logo {
+  box-sizing: border-box;
+  max-height: 7.5rem;
+  font-size: 7.25rem;
+  text-align: center;
+}
 /* stylelint-enable color-no-hex */

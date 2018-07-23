@@ -2,11 +2,13 @@
 describes: Tooltip
 ---
 
-Tooltips are small contextual overlays that appear on hover or focus.
+Tooltip is a special type of Popover for brief supplemental content that can be navigated to via the usual document flow (__no focus trapping or close button__).
+- Tooltip content should be concise word(s) that provide  a helpful hint or tip (usually related to the trigger element).
+- Usually triggered by hover and focus of the trigger element.
+- Tooltip uses [Popover](#Popover) internally and provides additional semantic markup and focus behavior.
 
-### What about 'focusable' elements?
-
-Content provided to the `tip` property should not contain any `focusable` elements. If you'd like to do
+> ### What was that about 'focusable' elements?
+> Content provided to the `tip` property __should not contain any focusable elements__. If you'd like to do
 that you should use the [Popover](#Popover) component and handle focus management yourself or
 consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
 

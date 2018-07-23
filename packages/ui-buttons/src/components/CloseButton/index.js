@@ -40,7 +40,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/utilities
+category: components
 ---
 **/
 @themeable(theme, styles)

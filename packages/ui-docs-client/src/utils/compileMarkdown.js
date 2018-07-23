@@ -40,7 +40,7 @@ import trimIndent from './trimIndent'
 /* eslint-disable react/prop-types, react/display-name */
 const elements = {
   h1: ({ id, children }) => <Heading id={id} level="h1" margin="0 0 large">{children}</Heading>,
-  h2: ({ id, children }) => <Heading id={id} level="h2" margin="0 0 large">{children}</Heading>,
+  h2: ({ id, children }) => <Heading id={id} level="h1" as="h2" margin="x-large 0 small 0">{children}</Heading>,
   h3: ({ id, children }) => <Heading id={id} level="h3" margin="large 0 small 0">{children}</Heading>,
   h4: ({ id, children }) => <Heading id={id} level="h4" margin="large 0 small 0">{children}</Heading>,
   img: ({ src, alt }) => <Img src={src} alt={alt} />,

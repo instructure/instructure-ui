@@ -43,7 +43,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/navigation
+category: components
 ---
 **/
 @themeable(theme, styles)

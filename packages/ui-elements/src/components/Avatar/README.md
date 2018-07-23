@@ -2,27 +2,22 @@
 describes: Avatar
 ---
 
-An Avatar component:
+When an image src is not supplied the user's initials will display. The avatar can be `circle` _(default)_ or `rectangle`. Use the `margin` prop to add space between Avatar and other content.
 
 ```js
 ---
 example: true
 ---
-<Avatar name="Sarah Robinson" src={avatarSquare} />
+<div>
+  <Avatar name="Sarah Robinson" src={avatarSquare} margin="0 small 0 0" />
+  <Avatar name="Sarah Robinson" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" src={avatarSquare} variant="rectangle" margin="0 small 0 0" />
+  <Avatar name="Kyle Montgomery" variant="rectangle" />
+</div>
 ```
 
-When an image src is not supplied the user's initials will display.
-
-```js
----
-example: true
----
-<Avatar name="Kyle Montgomery" />
-```
-
-The `size` prop allows you to select from `x-small`, `small`, `medium`, `large`, and `x-large` for
-default sizes. If the `auto` prop is set, the avatar size will adjust according to the font-size
-of its container. Use the `margin` prop to add space between Avatar and other content.
+The `size` prop allows you to select from `x-small`, `small`, `medium`, `large`, and `x-large`. If the `auto` prop is set, the avatar size will adjust according to the font-size
+of its container.
 
 ```js
 ---
@@ -35,13 +30,4 @@ example: true
   <Avatar name="Heather Wheeler" size="large" margin="0 small 0 0" />
   <Avatar name="David Herbert" size="x-large" />
 </div>
-```
-
-The avatar can be `circle` or `rectangle` shaped.
-
-```js
----
-example: true
----
-<Avatar alt="Grant Mitchell" name="Grant Mitchell" size="x-large" variant="rectangle" />
 ```

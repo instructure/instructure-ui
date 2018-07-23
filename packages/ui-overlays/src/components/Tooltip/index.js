@@ -41,7 +41,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/dialogs
+category: components
 ---
 **/
 @themeable(theme, styles)

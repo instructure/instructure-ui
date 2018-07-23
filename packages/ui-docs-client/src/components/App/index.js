@@ -171,7 +171,7 @@ export default class App extends Component {
     const theme = this.props.themes[themeKey]
     return (
       <Section id={themeKey}>
-        <Heading level="h2" margin="0 0 medium 0">
+        <Heading level="h1" as="h2" margin="0 0 medium 0">
           {themeKey}
         </Heading>
         <Theme
@@ -189,7 +189,7 @@ export default class App extends Component {
 
     return (
       <Section id={key}>
-        <Heading level="h2" margin="0 0 medium 0">
+        <Heading level="h1" as="h2" margin="0 0 medium 0">
           Iconography
         </Heading>
         <Icons
@@ -252,7 +252,7 @@ export default class App extends Component {
   renderError () {
     return (
       <Section id="error">
-        <Heading level="h2">Document not found</Heading>
+        <Heading level="h1" as="h2">Document not found</Heading>
       </Section>
     )
   }

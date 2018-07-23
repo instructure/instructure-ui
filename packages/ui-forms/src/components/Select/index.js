@@ -37,7 +37,7 @@ import parseOptions from './utils/parseOptions'
 
 /**
 ---
-category: components/forms
+category: components
 ---
 **/
 class Select extends Component {

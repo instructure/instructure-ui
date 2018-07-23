@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, stacking, transitions, borders }) {
+export default function ({ colors, typography, stacking, transitions, borders, shadows, spacing }) {
   return {
     background: colors.backgroundLightest,
     color: colors.textDarkest,
@@ -32,6 +32,12 @@ export default function ({ colors, typography, stacking, transitions, borders })
     fontWeight: typography.fontWeightNormal,
     codeBorderRadius: borders.radiusSmall,
     codeBackground: '#eee',
+    shadow: shadows.resting,
+    quotePadding: `${spacing.xSmall} ${spacing.medium}`,
+    quoteMargin: `${spacing.large} ${spacing.medium}`,
+    borderWidth: borders.widthLarge,
+    borderStyle: borders.style,
+    borderColor: colors.tiara,
     menuToggleZIndex: stacking.above,
   }
 }

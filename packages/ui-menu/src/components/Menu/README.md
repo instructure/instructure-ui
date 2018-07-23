@@ -2,7 +2,13 @@
 describes: Menu
 ---
 
-The `<Menu/>` component provides a list of actionable `<MenuItems/>` that are keyboard accessible.
+The `Menu` component is a special type of Popover that is meant to be used as a list of actions or functions (`<MenuItems/>` that are keyboard accessible)  that the user may want to invoke often related to or controlling some other content on the page.
+
+- Menu should not be used for navigation.
+- Menu should not be used as a form input.
+- Menu is usually triggered on click of a trigger element (often a ‘...’ or cog icon button).
+- The Menu provides custom focus management, trapping focus within the ContextView, allowing navigation between MenuItems via arrow keys.
+- Menu uses Popover internally and provides additional semantic markup and focus behavior.
 
 Passing a node to the `trigger` prop will render a toggle button which, when clicked, shows or hides
 the [Menu](#Menu) in a [Popover](#Popover).

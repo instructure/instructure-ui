@@ -42,7 +42,7 @@ import Expandable from '../Expandable'
 
 /**
 ---
-category: components/navigation
+category: components
 ---
 **/
 class ToggleGroup extends Component {

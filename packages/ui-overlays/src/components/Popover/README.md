@@ -1,10 +1,11 @@
 ---
 describes: Popover
 ---
-
-A `<Popover/>` is a small overlay of content that contains secondary information. Most of the time
-you can use a [Tooltip](#Tooltip) or a [Menu](#Menu) component, but if you need
-something custom that behaves more like a dialog, use a `<Popover/>`.
+Popover is  a [ContextView](#ContextView) that overlays (appears above) the rest of the content on the page. The Popover would usually show/hide  on click/touch or hover/focus of a trigger element and the component arrow would point to the trigger element.
+- Popovers can have close buttons and behave like a modal dialog by trapping focus within the ContextView. (Generally this would be the only case for using Popover directly vs using Tooltip, Menu, or Select). (Also note that quite often a Modal or Tray would be a better UX for a responsive UI vs a Popover that behaves like a modal dialog).
+- OR Popovers can display interactive content that can be focused and navigated to in the document order (following the trigger element). This is a type of Tooltip behavior.
+- OR Popovers can display non-interactive content that supplements the trigger element content. This is a type of Tooltip behavior.
+- OR Popovers can have custom focus handling to behave like a form element or navigation menu. See [Select](#Select) and [Menu](#Menu).
 
 Note that `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property
 set, it will trap focus inside the `<Popover />`.
