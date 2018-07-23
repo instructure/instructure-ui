@@ -44,6 +44,13 @@ describe('<Button/>', () => {
       .to.equal('BUTTON')
   })
 
+  it('should not error with a null child', () => {
+    const test = new Testbed(<Button>Hello World {null}</Button>)
+    const subject = test.render()
+
+    expect(subject.tagName()).to.equal('BUTTON')
+  })
+
   it('should render a link styled as a button if href is provided', () => {
     const subject = testbed.render({
       href: 'example.html'
