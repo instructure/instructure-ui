@@ -42,7 +42,7 @@
     "classnames": "^2",
     "luxon": "^0.3.1",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15",
+    "react": "^0.14.9 || ^15 || ^16",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",

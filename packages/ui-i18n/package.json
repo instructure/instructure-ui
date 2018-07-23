@@ -31,7 +31,7 @@
     "decimal.js": "^10",
     "moment-timezone": "^0.5",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15"
+    "react": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

@@ -44,8 +44,8 @@
     "he": "^1.1.1",
     "marked": "^0.4.0",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15",
-    "react-dom": "^0.14.9 || ^15",
+    "react": "^0.14.9 || ^15 || ^16",
+    "react-dom": "^0.14.9 || ^15 || ^16",
     "react-github-corner": "^2.1.0"
   },
   "publishConfig": {

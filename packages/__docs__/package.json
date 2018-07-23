@@ -61,7 +61,7 @@
     "@instructure/ui-utils": "^5.20.1",
     "lorem-ipsum": "^1.0.5",
     "moment": "^2.22.2",
-    "react": "^15.6.2",
-    "react-dom": "^15.6.2"
+    "react": "^0.14.9 || ^15 || ^16",
+    "react-dom": "^0.14.9 || ^15 || ^16"
   }
 }
