@@ -22,29 +22,24 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import Checkbox from '../index'
+import generateMessages from '../../../__tests__/generateMessages'
 
-export const unchecked = () => {
-  return (
-    <Checkbox label="Unchecked checkbox" value="unchecked" />
-  )
-}
-
-export const defaultChecked = () => {
-  return (
-    <Checkbox label="Default checked checkbox" value="checked" defaultChecked />
-  )
-}
-
-export const indeterminate = () => {
-  return (
-    <Checkbox label="Indeterminate checkbox" value="indeterminate" indeterminate />
-  )
-}
-
-export const disabled = () => {
-  return (
-    <Checkbox label="Disabled checkbox" value="disabled" disabled />
-  )
+export default {
+  sections: 'variant',
+  permutations: [
+    'variant',
+    'size',
+    'defaultChecked',
+    'indeterminate',
+    { messages: generateMessages()}
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        value: 'example',
+        label: 'A checkbox component'
+      },
+      filter: props.variant === 'toggle' && props.indeterminate
+    }
+  }
 }

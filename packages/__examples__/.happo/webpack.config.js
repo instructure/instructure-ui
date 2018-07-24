@@ -35,5 +35,6 @@ module.exports = {
   module: {
     rules: require('@instructure/ui-presets/webpack/module/rules')
   },
+  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
   plugins: require('@instructure/ui-presets/webpack/plugins')()
 }

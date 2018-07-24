@@ -66,7 +66,8 @@ plugins = plugins.concat([
       'packages/*/src/utils/**/*.js',
       'packages/ui-themeable/src/**/*.js',
       'packages/ui-i18n/src/**/*.js',
-      'packages/ui-utils/src/**/*.js'
+      'packages/ui-utils/src/**/*.js',
+      'packages/generate-examples/src/**/*.js'
     ],
     ignore: [
       'packages/**/CHANGELOG.md',

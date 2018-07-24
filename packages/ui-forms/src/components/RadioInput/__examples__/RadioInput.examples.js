@@ -22,37 +22,24 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import RadioInput from '../index'
-
-export const unchecked = () => {
-  return (
-    <RadioInput
-      label="Mickey"
-      value="mickey"
-      name="mickey"
-    />
-  )
-}
-
-export const checked = () => {
-  return (
-    <RadioInput
-      label="Minnie"
-      value="minnie"
-      name="minnie"
-      checked
-    />
-  )
-}
-
-export const disabled = () => {
-  return (
-    <RadioInput
-      label="Goofy"
-      value="goofy"
-      name="goofy"
-      disabled
-    />
-  )
+export default {
+  sections: 'variant',
+  permutations: [
+    'variant',
+    'size',
+    'disabled',
+    'checked',
+    'context'
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        label: 'A radio input'
+      },
+      filter: (
+        props.variant === 'simple' && props.context !== 'off' ||
+        props.variant === 'toggle' && !props.checked && props.context !== 'off'
+      )
+    }
+  }
 }

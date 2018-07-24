@@ -22,117 +22,28 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import IconEmail from '@instructure/ui-icons/lib/Line/IconEmail'
-import IconUser from '@instructure/ui-icons/lib/Line/IconUser'
 import IconSearch from '@instructure/ui-icons/lib/Line/IconSearch'
-import TextInput from '../index'
+import generateMessages from '../../../__tests__/generateMessages'
 
-export const small = () => {
-  return (
-    <TextInput
-      size="small"
-      type="text"
-      label="Small TextInput"
-      placeholder="notice the font size" />
-  )
-}
-
-export const medium = () => {
-  return (
-    <TextInput
-      size="medium"
-      type="text"
-      label="Medium (default) TextInput"
-      placeholder="notice the font size" />
-  )
-}
-
-export const large = () => {
-  return (
-    <TextInput
-      size="large"
-      type="text"
-      label="Large TextInput"
-      placeholder="notice the font size" />
-  )
-}
-
-export const layoutStacked = () => {
-  return (
-    <TextInput
-      layout="stacked"
-      type="text"
-      label="Default Stacked TextInput"
-      placeholder="label will appear above the input field" />
-  )
-}
-
-export const layoutInline = () => {
-  return (
-    <TextInput
-      layout="inline"
-      type="text"
-      label="Inline TextInput"
-      placeholder="label will appear to the left of the input field" />
-  )
-}
-
-export const inline = () => {
-  return (
-    <TextInput
-      layout="inline"
-      icon={IconSearch}
-      inline={true}
-      width="20rem"
-      type="text"
-      label="Inline TextInput"
-      placeholder="inline true must have a width" />
-  )
-}
-
-export const withIcon = () => {
-  return (
-    <TextInput
-      type="text"
-      icon={IconUser}
-      label="Icon TextInput"
-      placeholder="an icon will appear at the far right of the input" />
-  )
-}
-
-export const error = () => {
-  return (
-    <TextInput
-      type="email"
-      icon={IconEmail}
-      label="Stacked TextInput with error"
-      placeholder="please enter a valid email address"
-      messages={[{text: 'that does not appear to be a valid email address', type: 'error'}]}
-    />
-  )
-}
-
-export const hint = () => {
-  return (
-    <TextInput
-      type="search"
-      icon={IconSearch}
-      label="Stacked TextInput with hint"
-      placeholder="this is actually a search box"
-      messages={[{text: 'go ahead and search for what you need', type: 'hint'}]}
-    />
-  )
-}
-
-export const success = () => {
-  return (
-    <TextInput
-      layout="inline"
-      type="tel"
-      label="Inline TextInput with success"
-      placeholder="please enter a valid phone number"
-      messages={[{text: 'that appears to be a valid phone number', type: 'success'}]}
-    />
-  )
+export default {
+  sections: 'layout',
+  maxExamplesPerPage: 50,
+  permutations: [
+    'layout',
+    'size',
+    'disabled',
+    'textAlign',
+    { placeholder: [null, 'Some placeholder content'] },
+    { defaultValue: [null, 'A text input value'] },
+    { icon: [null, IconSearch] },
+    { messages: generateMessages() }
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        label: 'A text input'
+      },
+      filter: props.placeholder && props.defaultValue
+    }
+  }
 }

@@ -22,101 +22,20 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import IconFolder from '@instructure/ui-icons/lib/Line/IconFolder'
-import IconImage from '@instructure/ui-icons/lib/Line/IconImage'
-import IconBlueprint from '@instructure/ui-icons/lib/Line/IconBlueprint'
+import generateMessages from '../../../__tests__/generateMessages'
 
-/* eslint-disable instructure-ui/no-relative-package-imports */
-import Billboard from '../../../../../ui-billboard/lib/components/Billboard'
-/* eslint-disable instructure-ui/no-relative-package-imports */
-import FileDrop from '../index'
-
-export const textAsLabel = () => {
-  return (
-    <FileDrop
-      accept="image/*"
-      onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }} // eslint-disable-line no-console
-      onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }} // eslint-disable-line no-console
-      label="Upload your image here"
-    />
-  )
-}
-
-export const componentAsLabel = () => {
-  return (
-    <FileDrop
-      allowMultiple={false}
-      accept=".pdf"
-      onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }} // eslint-disable-line no-console
-      onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }} // eslint-disable-line no-console
-      label={
-        <Billboard
-          size="small"
-          heading="Upload your file here"
-          message="Allows only one pdf"
-          hero={<IconFolder/>}
-        />
+export default {
+  permutations: [
+    { messages: generateMessages()}
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        accept: 'image/*',
+        label: 'Upload a file',
+        onDropAccepted: ([file]) => { console.log(`File accepted ${file.name}`) }, // eslint-disable-line no-console
+        onDropRejected: ([file]) => { console.log(`File rejected ${file.name}`) } // eslint-disable-line no-console
       }
-    />
-  )
-}
-
-export const acceptsType = () => {
-  return (
-    <FileDrop
-      allowMultiple={false}
-      accept=".png"
-      onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }} // eslint-disable-line no-console
-      onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }} // eslint-disable-line no-console
-      label={
-        <Billboard
-          size="medium"
-          heading="Upload your Image here"
-          message="Allows only one png"
-          hero={<IconImage/>}
-        />
-      }
-    />
-  )
-}
-
-export const allowMultiple = () => {
-  return (
-    <FileDrop
-      allowMultiple={true}
-      accept=".pdf"
-      onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }} // eslint-disable-line no-console
-      onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }} // eslint-disable-line no-console
-      label={
-        <Billboard
-          size="large"
-          heading="Upload your files here"
-          message="Allows more than one"
-          hero={<IconBlueprint/>}
-        />
-      }
-    />
-  )
-}
-
-export const disabled = () => {
-  return (
-    <FileDrop
-      allowMultiple={true}
-      accept=".pdf"
-      onDropAccepted={([file]) => { console.log(`File accepted ${file.name}`) }} // eslint-disable-line no-console
-      onDropRejected={([file]) => { console.log(`File rejected ${file.name}`) }} // eslint-disable-line no-console
-      label={
-        <Billboard
-          size="medium"
-          heading="Upload your files here"
-          message="Allows more than one"
-          hero={<IconBlueprint/>}
-          disabled
-        />
-      }
-      disabled
-    />
-  )
+    }
+  }
 }

@@ -22,114 +22,19 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import TimeInput from '../index'
+import generateMessages from '../../../__tests__/generateMessages'
 
-export const basic = () => {
-  return (
-    <TimeInput label='Time' />
-  )
-}
-
-export const withValue = () => {
-  return (
-    <TimeInput
-      label='Time with value'
-      value='1986-05-17T19:00:00.000Z'
-      onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-
-    />
-  )
-}
-
-export const withDefaultValue = () => {
-  return (
-    <TimeInput
-      label='Time with defaultValue'
-      defaultValue='1986-05-17T14:00:00.000Z'
-      onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-    />
-  )
-}
-
-export const withStep = () => {
-  return (
-    <TimeInput
-      label='Time with step'
-      step={60}
-      format='LTS'
-    />
-  )
-}
-
-export const withTimeZone = () => {
-  return (
-    <div style={{height: 500, width: 500}}>
-      <TimeInput
-        label='Eastern'
-        value={new Date().toISOString()}
-        timezone='US/Eastern'
-        onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-      /><br/>
-      <TimeInput
-        label='Central'
-        value={new Date().toISOString()}
-        timezone='US/Central'
-        onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-      /><br/>
-      <TimeInput
-        label='Mountain'
-        value={new Date().toISOString()}
-        timezone='US/Mountain'
-        onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-      /><br/>
-      <TimeInput
-        label='Western'
-        value={new Date().toISOString()}
-        timezone='US/Pacific'
-        onChange={(e) => { console.log('onChange', e) }} // eslint-disable-line no-console
-      />
-    </div>
-  )
-}
-
-export const withLocale = () => {
-  return (
-    <TimeInput
-      label='Time with French locale'
-      format='LTS'
-      locale="fr"
-    />
-  )
-}
-
-export const defaultToFirstOption = () => {
-  return (
-    <TimeInput
-      label='Time with defaultToFirstOption'
-      defaultToFirstOption
-    />
-  )
-}
-
-export const disabled = () => {
-  return (
-    <TimeInput
-      label='Disabled Time'
-      format='LTS'
-      defaultValue='1986-05-17T18:00:00.000Z'
-      disabled
-    />
-  )
-}
-
-export const readOnly = () => {
-  return (
-    <TimeInput
-      label='Readonly Time'
-      format='LTS'
-      defaultValue='1986-05-17T18:00:00.000Z'
-      readOnly
-    />
-  )
+export default {
+  permutations: [
+    'disabled',
+    { defaultValue: [undefined, '1986-05-17T18:00:00.000Z'] }, // eslint-disable-line no-undefined
+    { messages: generateMessages() }
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        label: 'A time input'
+      }
+    }
+  }
 }

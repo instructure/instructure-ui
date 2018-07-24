@@ -21,57 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import Alert from '../index'
 
-export const variantInfo = () => {
-  return (
-    <Alert
-      variant="info"
-      closeButtonLabel="Close"
-      margin="small"
-      transition="none"
-    >
-      Sample info alert text. I will close w/o a transition out if you close me
-    </Alert>
-  )
-}
-
-export const variantSuccess = () => {
-  return (
-    <Alert
-      variant="success"
-      closeButtonLabel="Close"
-      margin="small"
-      transition="none"
-    >
-      Sample success alert text. I will close w/o a transition out if you close me
-    </Alert>
-  )
-}
-
-export const variantError = () => {
-  return(
-    <Alert
-      variant="error"
-      closeButtonLabel="Close"
-      margin="small"
-    >
-      Sample error text that continues for a while
-      to demonstrate what happens when the content stretches over
-      several lines. It really does take a lot of prose to get the
-      text to wrap when you are on a high resolution screen.
-    </Alert>
-  )
-}
-
-export const variantWarning = () => {
-  return(
-    <Alert
-      variant="warning"
-      margin="small"
-    >
-      Sample warning text. This alert is not dismissible and cannot be closed.
-    </Alert>
-  )
+export default {
+  sections: 'variant',
+  permutations: [
+    'variant',
+    { closeButtonLabel: [null, 'close'] },
+    { children: [
+      'An alert with some content',
+      'an alert with a ton of content that is going to wrap. It takes a ton of content to ' +
+      'get text to wrap when the screen is high resolution and there is a good amount of space ' +
+      'to fill'
+    ]}
+  ]
 }

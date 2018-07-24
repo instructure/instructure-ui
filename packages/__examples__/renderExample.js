@@ -23,54 +23,21 @@
  */
 
 import React from 'react'
-/* eslint-disable instructure-ui/no-relative-package-imports */
-import View from '../../../../../ui-layout/lib/components/View'
-import Text from '../../../../../ui-elements/lib/components/Text'
-/* eslint-enable instructure-ui/no-relative-package-imports */
-import FocusableView from '../FocusableView'
 
-export const shapes = () => {
-  return (
-    <View display="block">
-      {["circular", "rectangular"].map((shape, index) => (
-        <FocusableView
-          key={index}
-          focused={true}
-          shape={shape}
-          margin="0 small 0 0"
-        >
-          Focused
-        </FocusableView>
-      ))}
-    </View>
-  )
-}
+import ApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
+import View from '@instructure/ui-layout/lib/components/View'
 
-export const colors = () => {
+export default function renderExample (Component, componentProps, exampleProps, key) {
   return (
-    <View display="block">
-      <FocusableView
-        focused={true}
-        margin="0 small 0 0"
-        color="primary"
-      >
-        Focused
-      </FocusableView>
-      <FocusableView
-        focused={true}
-        margin="0 small 0 0"
-        color="error"
-      >
-        Focused
-      </FocusableView>
-      <View padding="small" background="inverse">
-        <FocusableView
-          focused={true}
-          color="inverse"
-        >
-          <Text color="primary-inverse">Focused</Text>
-        </FocusableView>
-      </View>
+    <View
+      key={key}
+      display="block"
+      padding="small"
+      background={exampleProps.background || 'default'}
+    >
+      <ApplyLocale locale="en-US">
+        <Component {...componentProps} />
+      </ApplyLocale>
     </View>
   )
 }

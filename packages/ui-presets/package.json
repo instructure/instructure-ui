@@ -85,6 +85,7 @@
     "postcss-nesting": "^6.0.0",
     "postcss-reporter": "^5.0.0",
     "postcss-simple-vars": "4.1.0",
+    "react-docgen": "3.0.0-rc.1",
     "rimraf": "^2.6.2",
     "standard-version": "^4.4.0",
     "style-loader": "^0.21.0",

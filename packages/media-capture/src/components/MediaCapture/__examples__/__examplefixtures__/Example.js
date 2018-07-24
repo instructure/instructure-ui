@@ -23,9 +23,9 @@
  */
 
 import React from 'react'
-import MediaCapture from '../index'
+import MediaCapture from '../../index'
 
-class Example extends React.Component {
+export default class Example extends React.Component {
   onCompleted = (file) => {
     const a = document.createElement('a')
     a.href = URL.createObjectURL(file)
@@ -53,5 +53,3 @@ class Example extends React.Component {
     )
   }
 }
-
-export const basicUsage = () => <Example />

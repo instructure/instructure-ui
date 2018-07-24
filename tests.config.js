@@ -31,6 +31,7 @@ module.exports = {
   ],
   // TODO convert these to use ui-test-utils and then remove them:
   TESTBED_REMOVE_THIS: [
+    'packages/generate-examples/',
     'packages/media-capture/',
     'packages/ui-a11y/',
     'packages/ui-alerts/',

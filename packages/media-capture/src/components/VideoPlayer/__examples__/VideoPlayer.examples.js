@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
-import VideoPlayer from '../index'
 
-export const basicUsage = () => <VideoPlayer src="http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4" />
+export default {
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
+      }
+    }
+  }
+}

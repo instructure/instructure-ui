@@ -1,10 +1,14 @@
 import path from 'path'
+
 import { configure } from '@storybook/react'
 import { setOptions } from "@storybook/addon-options";
 import { getStorybook, storiesOf } from '@storybook/react'
 import { initializeRTL } from 'storybook-addon-rtl'
+import generateExamples from '@instructure/generate-examples/lib/generateExamples'
 
 import '@instructure/ui-themes/lib/canvas'
+
+import renderExample from '../renderExample'
 
 setOptions({
   name: "Instructure UI",
@@ -18,25 +22,21 @@ setOptions({
 initializeRTL()
 
 configure(() => {
-  // Automatically import all example js files
-  const req = require.context('../../', true,  /src\/\S+\.examples\.js$/)
+  const examples = generateExamples(require('!!examples-loader!'), { renderExample })
 
-  req.keys().forEach((pathToExamples) => {
-    const Examples = req(pathToExamples)
-    const component = getComponentNameFromDirectory(pathToExamples)
-    const stories = storiesOf(component, module)
-    Object.keys(Examples).forEach((example) => {
-      stories.add(example, Examples[example])
+  if (examples) {
+    examples.forEach((example) => {
+      const stories = storiesOf(example.name, module)
+
+      example.sections.forEach((section) => {
+        const { pages } = section
+
+        pages.forEach((page, i) => {
+          stories.add(`${section.name}${pages.length > 1 ? ` (page ${i+1})` : ''}`, () => page)
+        })
+      })
     })
-  })
+  }
 }, module)
 
 export { getStorybook }
-
-function getComponentNameFromDirectory (filePath) {
-  const directories = path.dirname(filePath)
-    .split(path.sep)
-    .filter(part => part !== '__tests__')
-    .filter(part => part !== '__examples__')
-  return directories.pop()
-}

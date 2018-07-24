@@ -27,29 +27,30 @@ import { render, unmountComponentAtNode } from 'react-dom'
 import path from 'path'
 
 import '@instructure/ui-themes/lib/canvas'
+import generateExamples from '@instructure/generate-examples/lib/generateExamples'
+
+import renderExample from '../renderExample'
 
 /* global happo */
 
 const TESTS = []
 
-// Automatically import all component .examples.js files in packages
-const requireExamples = require.context('../../', true,  /src\/\S+\.examples\.js$/)
+const examples = generateExamples(require('!!examples-loader!'), { renderExample })
 
 // assemble the tests from the examples
-requireExamples.keys()
-  .forEach((pathToExamples) => {
-    const componentName = getComponentNameFromDirectory(pathToExamples)
-    const componentExamples = requireExamples(pathToExamples)
+examples.forEach((example) => {
+  example.sections.forEach((section) => {
+    const { pages } = section
 
-    Object.keys(componentExamples)
-      .forEach((exampleName) => {
-        TESTS.push({
-          component: componentName,
-          name: exampleName,
-          Example: componentExamples[exampleName]
-        })
+    pages.forEach((page, i) => {
+      TESTS.push({
+        component: example.name,
+        name: `${section.name}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
+        Example: () => page
       })
+    })
   })
+})
 
 // define the tests
 TESTS.forEach((test) => {
@@ -71,12 +72,4 @@ happo.cleanOutElement = function (element) {
 
 happo.getRootNodes = function () {
  return document.querySelectorAll('[data-reactroot]')
-}
-
-function getComponentNameFromDirectory (filePath) {
-  const directories = path.dirname(filePath)
-    .split(path.sep)
-    .filter(part => part !== '__tests__')
-    .filter(part => part !== '__examples__')
-  return directories.pop()
 }

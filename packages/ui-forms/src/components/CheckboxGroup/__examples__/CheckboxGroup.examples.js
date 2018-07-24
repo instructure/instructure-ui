@@ -23,175 +23,33 @@
  */
 
 import React from 'react'
-import CheckboxGroup from '../index'
 import Checkbox from '../../Checkbox'
 
-export const layoutStacked = () => {
-  return (
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
+import generateMessages from '../../../__tests__/generateMessages'
+
+const getChildren = (variant) => {
+  return [
+    <Checkbox variant={variant} key="tennis" label="Tennis" value="tennis" />,
+    <Checkbox variant={variant} key="lacrosse" label="Lacrosse" value="lacrosse" />,
+    <Checkbox variant={variant} key="water-polo" label="Water Polo" value="water-polo" />,
+    <Checkbox variant={variant} key="golf" label="Golf" value="golf" />
+  ]
 }
 
-export const layoutColumns = () => {
-  return (
-    <CheckboxGroup
-    layout="columns"
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const layoutInline = () => {
-  return (
-    <CheckboxGroup
-      layout="inline"
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const sizeSmall = () => {
-  return (
-    <CheckboxGroup
-      size="small"
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const sizeMedium = () => {
-  return (
-    <CheckboxGroup
-      size="medium"
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const sizeLarge = () => {
-  return (
-    <CheckboxGroup
-      size="large"
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const withToggle = () => {
-  return (
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-      size="small"
-    >
-      <Checkbox variant="toggle" label="Tennis" value="tennis" />
-      <Checkbox variant="toggle" label="Lacrosse" value="lacrosse" />
-      <Checkbox variant="toggle" label="Water Polo" value="water-polo" />
-      <Checkbox variant="toggle" label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const error = () => {
-  return (
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-      messages={[
-        { text: 'Please make a selection', type: 'error' }
-      ]}
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const hint = () => {
-  return (
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-      messages={[
-        { text: 'This is to help us decide on course offerings', type: 'hint' }
-      ]}
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const success = () => {
-  return (
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-      messages={[
-        { text: 'Woot... you did it', type: 'success' }
-      ]}
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
-}
-
-export const disabled = () => {
-  return (
-    <CheckboxGroup
-      disabled
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Tennis" value="tennis" />
-      <Checkbox label="Lacrosse" value="lacrosse" />
-      <Checkbox label="Water Polo" value="water-polo" />
-      <Checkbox label="Golf" value="golf" />
-    </CheckboxGroup>
-  )
+export default {
+  sections: 'layout',
+  permutations: [
+    'layout',
+    'size',
+    { children: [getChildren('simple'), getChildren('toggle')]},
+    { messages: generateMessages()}
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        name: 'sports',
+        description: 'Select your favorite sports'
+      }
+    }
+  }
 }

@@ -21,54 +21,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React from 'react'
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import Link from '../index'
 
-export const basicLink = () => {
-  return (
-    <Link href="http://instructure.design">Delete</Link>
-  )
-}
+const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
+const shortString = 'Delete'
+const srContent = <ScreenReaderContent key="example">{shortString}</ScreenReaderContent>
 
-export const iconOnly = () => {
-  return (
-    <Link href="http://instructure.design" icon={IconTrash}>
-      <ScreenReaderContent>Delete</ScreenReaderContent>
-    </Link>
-  )
-}
-
-export const iconBeforeText = () => {
-  return (
-    <Link href="http://instructure.design" icon={IconTrash}>
-      Delete
-    </Link>
-  )
-}
-
-export const iconAfterText = () => {
-  return (
-    <Link href="http://instructure.design" icon={IconTrash} iconPlacement="end">
-      Delete
-    </Link>
-  )
-}
-
-export const ellipsisOverflow = () => {
-  return (
-    <div>
-      <p>
-        <Link href="http://instructure.design" ellipsis>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-        </Link>
-      </p>
-      <p>
-        <Link href="http://instructure.design" ellipsis icon={IconTrash}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat
-        </Link>
-      </p>
-    </div>
-  )
+export default {
+  permutations: [
+    { children: [
+      shortString,
+      longString
+    ]},
+    { iconPlacement: [null, 'start', 'end']},
+    { icon: [null, IconTrash] },
+    'ellipsis',
+    'disabled'
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        href: 'http://instructure.design'
+      },
+      filter: (props.ellipsis && (props.children === shortString || props.children === srContent)) ||
+        (props.iconPlacement && !props.icon || !props.iconPlacement && props.icon)
+    }
+  }
 }

@@ -19,6 +19,9 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/generate-examples": "^5",
+    "@instructure/ui-i18n": "^5",
+    "@instructure/ui-layout": "^5",
     "@instructure/ui-presets": "^5",
     "@instructure/ui-themes": "^5",
     "@storybook/addon-links": "^3.4.10",
