@@ -174,6 +174,7 @@ class View extends Component {
 
   get styleProps () {
     const { style } = this.props // eslint-disable-line react/prop-types
+    if (!style) return {}
     return pickProps(style, {}, [
       // Position/calculateElementPosition:
       'top',

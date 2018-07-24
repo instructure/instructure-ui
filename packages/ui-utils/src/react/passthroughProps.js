@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import omit from 'object.omit'
-import pick from 'object.pick'
 /**
  * ---
  * category: utilities/react
@@ -31,8 +29,21 @@ import pick from 'object.pick'
  * @module passthroughProps
  */
 
+const hasOwnProperty = Object.prototype.hasOwnProperty
+const omit = (originalObject, keys) => {
+  // code based on babel's _objectWithoutProperties
+  const newObject = {}
+  for (const key in originalObject) {
+    // special case because we always want to omit these and === is faster than concat'ing them in
+    if (key === 'theme' || key === 'children' || key === 'className' || key === 'style') continue
 
-const ALWAYS_EXCLUDE = ['theme', 'children', 'className', 'style']
+    if (keys.includes(key) || !hasOwnProperty.call(originalObject, key)) continue
+    newObject[key] = originalObject[key]
+  }
+  return newObject
+}
+
+
  /**
   * Return a props object with the specified propTypes omitted.
   * Automatically excludes ('theme', 'children', 'className', 'style')
@@ -42,12 +53,26 @@ const ALWAYS_EXCLUDE = ['theme', 'children', 'className', 'style']
   * @param {Array} exclude an optional array of prop names to exclude
   * @returns {Object} props object without the excluded props
   */
-export function omitProps (props, propTypes = {}, exclude = []) {
-  const keys = Object.keys(propTypes)
-    .concat(ALWAYS_EXCLUDE)
-    .concat(exclude)
+export function omitProps (props, propTypes, exclude) {
+  const keys = Object.keys(propTypes || {})
+  const combined = exclude ? keys.concat(exclude) : keys
+  return omit(props, combined)
+}
 
-  return omit(props, keys)
+// this was the fastest implementation from testing: https://jsperf.com/pick-props
+function pick(obj, keys) {
+  const res = {}
+  const len = keys.length
+  let idx = -1
+  let key
+
+  while (++idx < len) {
+    key = keys[idx]
+    if (key in obj) {
+      res[key] = obj[key]
+    }
+  }
+  return res
 }
 
 /**
@@ -58,6 +83,8 @@ export function omitProps (props, propTypes = {}, exclude = []) {
  * @param {Array} include an optional array of prop names to include
  * @returns {Object} props object with only the included props
  */
-export function pickProps (props, propTypes = {}, include = []) {
-  return pick(props, Object.keys(propTypes).concat(include))
+export function pickProps (props, propTypes, include) {
+  const keys = Object.keys(propTypes || {})
+  const combined = include ? keys.concat(include) : keys
+  return pick(props, combined)
 }
