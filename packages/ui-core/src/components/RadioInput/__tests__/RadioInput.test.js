@@ -165,18 +165,5 @@ describe('<RadioInput />', () => {
 
       subject.should.be.accessible(done)
     })
-
-    it('should require a label', () => {
-      let error = false
-      try {
-        testbed.render({
-          label: null
-        })
-      } catch (e) {
-        error = true
-      }
-
-      expect(error).to.be.true
-    })
   })
 })

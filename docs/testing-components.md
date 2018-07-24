@@ -7,8 +7,8 @@ category: Contributing
 
 ### The TL;DR on writing tests:
 
-1. Run `yarn test:watch --scope @instructure/ui-core`.
-1. Edit the tests that were generated for you in `packages/ui-core/src/components/MyComponent/__tests__`.
+1. Run `yarn test:watch --scope @instructure/ui-elements`.
+1. Edit the tests that were generated for you in `packages/ui-elements/src/components/MyComponent/__tests__`.
 1. Watch your tests run in the console.
 
 For details on how to write component tests, see the [Testbed](#ui-testbed) documentation.

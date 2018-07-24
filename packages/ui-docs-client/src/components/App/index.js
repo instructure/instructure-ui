@@ -210,7 +210,7 @@ export default class App extends Component {
     }
 
     const description = descriptions[doc.id]
-    const heading = (doc.extension !== '.md') && doc.title
+    const heading = (doc.extension !== '.md') ? doc.title : ''
 
     return (
       <div>

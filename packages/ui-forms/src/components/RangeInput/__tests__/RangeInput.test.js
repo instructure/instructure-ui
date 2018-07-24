@@ -93,16 +93,11 @@ describe('<RangeInput />', () => {
   })
 
   it('requires an `onChange` prop with a `value` prop', () => {
-    let error = false
-    try {
+    expect(() => {
       testbed.render({
         value: 50
       })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
+    }).to.throw(Error)
   })
 
   it('formats the value displayed', () => {

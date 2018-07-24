@@ -21,22 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-
+const path = require('path')
+const { getPackages, getChangedPackages } = require('@instructure/pkg-util')
 const { getCommand, runCommands } = require('../utils/command')
 
 const vars = ['NODE_ENV=test']
-const args = ['start']
-const commands = {}
+const { argv } = process
 
-if (process.argv.includes('--watch')) {
+if (argv.includes('--watch')) {
   vars.push('DEBUG=1')
 } else {
   vars.push('COVERAGE=1')
 }
 
-commands.karma = getCommand(vars, 'karma', args)
+// yarn add --pure-lockfile -W react@${version}
+// yarn add --pure-lockfile -W react-dom@${version}
 
-const result = runCommands(commands)
+const scopeArgIndex = argv.indexOf('--scope')
+const pathArgIndex = argv.indexOf('--path')
+
+let paths = []
+
+if (scopeArgIndex > 0) {
+  const allPackages = getPackages()
+  const pkg = allPackages.find(pkg => pkg.name === argv[scopeArgIndex + 1])
+  if (pkg) {
+    paths = [path.relative('.', pkg.location) + path.sep]
+  }
+} else if (pathArgIndex > 0) {
+  paths = argv[pathArgIndex + 1].split(',').map(path => path.normalize(path.trim()))
+} else if (argv.includes('--changed')) {
+  const changedPackages = getChangedPackages('HEAD^1')
+  paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
+} else if (argv.includes('--staged')) {
+  const changedPackages = getChangedPackages('--cached')
+  paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
+}
+
+if (paths.length > 0) {
+  vars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
+}
+
+const result = runCommands({
+  karma: getCommand(vars, 'karma', ['start'])
+})
 
 process.exit(result.status)

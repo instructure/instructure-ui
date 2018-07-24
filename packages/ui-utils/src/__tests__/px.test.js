@@ -26,6 +26,18 @@ import px from '../px'
 import getFontSize from '../dom/getFontSize'
 
 describe('px', () => {
+  let node
+
+  beforeEach(() => {
+    node = document.createElement('div')
+    document.body.appendChild(node)
+  })
+
+  afterEach(() => {
+    node && node.parentNode && node.parentNode.removeChild(node)
+    node = null
+  })
+
   it('handles px units', () => {
     expect(px('30px')).to.equal(30)
   })
@@ -35,10 +47,8 @@ describe('px', () => {
   })
 
   it('converts em to px', () => {
-    const el = document.createElement('div')
-    el.style.fontSize = '24px'
-    document.body.appendChild(el)
-    expect(px('10em', el)).to.equal(10 * getFontSize(el))
+    node.style.fontSize = '24px'
+    expect(px('10em', node)).to.equal(10 * getFontSize(node))
   })
 
   it('handles unitless input', () => {

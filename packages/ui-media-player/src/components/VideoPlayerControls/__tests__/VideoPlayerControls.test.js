@@ -30,6 +30,34 @@ import providerStateForTest from '../../VideoPlayer/__tests__/fixtures/providerS
 import styles from '../styles.css'
 
 describe('<VideoPlayerControls />', () => {
+  const popoverContentWrapperId = 'popover-content-wrapper'
+  const menuContentWrapperId = 'menu-content-wrapper'
+
+  let popoverContentWrapper, menuContentWrapper
+
+  beforeEach(() => {
+    popoverContentWrapper = document.createElement('div')
+    popoverContentWrapper.setAttribute("id", `${popoverContentWrapperId}`)
+    document.body.appendChild(popoverContentWrapper)
+
+    menuContentWrapper = document.createElement('div')
+    menuContentWrapper.setAttribute("id", menuContentWrapperId)
+    document.body.appendChild(menuContentWrapper)
+  })
+
+  afterEach(() => {
+    popoverContentWrapper &&
+      popoverContentWrapper.parentNode &&
+      popoverContentWrapper.parentNode.removeChild(popoverContentWrapper)
+    popoverContentWrapper = null
+
+    menuContentWrapper &&
+      menuContentWrapper.parentNode &&
+      menuContentWrapper.parentNode.removeChild(menuContentWrapper)
+    menuContentWrapper = null
+  })
+
+
   const providerState = { ...providerStateForTest }
   const testbed = new Testbed(
     <Provider value={providerState}>
@@ -148,10 +176,6 @@ describe('<VideoPlayerControls />', () => {
   })
 
   it('renders a Volume (button & slider)', () => {
-    const popoverContentWrapperId = 'popover-content-wrapper'
-    let popoverContentWrapper = document.createElement('div')
-    popoverContentWrapper.setAttribute("id", `${popoverContentWrapperId}`)
-    document.body.appendChild(popoverContentWrapper)
     const customProviderState = {
       ...providerState,
       mediaPlayerWrapperRef: () => (popoverContentWrapper)
@@ -168,10 +192,6 @@ describe('<VideoPlayerControls />', () => {
   })
 
   it('renders a PlaybackSpeed (button & menu)', () => {
-    const menuContentWrapperId = 'menu-content-wrapper'
-    let menuContentWrapper = document.createElement('div')
-    menuContentWrapper.setAttribute("id", menuContentWrapperId)
-    document.body.appendChild(menuContentWrapper)
     const customProviderState = {
       ...providerState,
       mediaPlayerWrapperRef: () => (menuContentWrapper)

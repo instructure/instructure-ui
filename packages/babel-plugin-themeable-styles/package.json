@@ -16,10 +16,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/pkg-util": "^5",
     "@instructure/postcss-themeable-styles": "^5",
     "babel-template": "^6.26.0",
-    "css-modules-require-hook": "^4.2.3",
-    "read-pkg-up": "^4.0.0"
+    "css-modules-require-hook": "^4.2.3"
   },
   "peerDependencies": {
     "babel-core": "^6.26.0"

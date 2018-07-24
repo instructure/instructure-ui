@@ -24,7 +24,13 @@
 
 const loadConfig = require('@instructure/config-loader')
 
-const CORE_PLUGINS = [
+const CORE_PLUGINS_PRE = [
+  ['postcss-input-range'], // for RangeInput
+  ['postcss-mixins'], // for Grid
+  ['postcss-simple-vars'] // for Grid
+]
+
+const CORE_PLUGINS_POST = [
   ['postcss-bidirection', {
     buildSelector: function (selector, direction) {
       return `[dir="${direction}"] ${selector}`
@@ -40,8 +46,9 @@ const DEBUG = Boolean(process.env.DEBUG)
 module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
   return function (ctx = {}) {
     let plugins = [
+      ...CORE_PLUGINS_PRE,
       opts.nesting ? ['postcss-nesting'] : ['postcss-nested'],
-      ...CORE_PLUGINS
+      ...CORE_PLUGINS_POST
     ]
 
     if (DEBUG) {

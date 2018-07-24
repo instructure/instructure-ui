@@ -25,13 +25,16 @@
 import scopeTab from '../scopeTab'
 
 describe('scopeTab', () => {
-  let container
+  let container, node
   const MOCK_EVENT = {
     shiftKey: false,
     preventDefault: () => {}
   }
 
   beforeEach(() => {
+    node = document.createElement('div')
+    document.body.appendChild(node)
+
     container = document.createElement('div')
     container.innerHTML = `
       <div class="scopeTab--NESTED">
@@ -45,9 +48,10 @@ describe('scopeTab', () => {
   })
 
   afterEach(() => {
-    if (container && container.parentNode) {
-      container.parentNode.removeChild(container)
-    }
+    container && container.parentNode && container.parentNode.removeChild(container)
+    container = null
+    node && node.parentNode && node.parentNode.removeChild(node)
+    node = null
   })
 
   it('should scope tab within container', () => {
@@ -63,7 +67,6 @@ describe('scopeTab', () => {
   })
 
   it('should not attempt scoping when no tabbable children', () => {
-    const node = document.createElement('div')
     const two = document.querySelector('.scopeTab--TWO')
 
     two.focus()

@@ -64,19 +64,6 @@ describe('<Menu />', () => {
     expect(subject).to.be.present
   })
 
-  it('should not allow invalid children', () => {
-    let error = false
-    try {
-      testbed.render({
-        children: <div />
-      })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
-  })
-
   it('should call onSelect when menu item is selected', () => {
     const onSelect = testbed.stub()
     const subject = testbed.render({

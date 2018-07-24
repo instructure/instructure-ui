@@ -26,7 +26,7 @@ import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
-import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
+import Modal, { ModalBody } from '../index'
 
 describe('<Modal />', () => {
   const testbed = new Testbed(
@@ -178,42 +178,6 @@ describe('<Modal />', () => {
 
     // + 1 for x-icon button
     expect(subject.ref('_content').find(Button).length).to.equal(2)
-  })
-
-  describe('children validation', () => {
-    it('should pass validation when children are valid', () => {
-      function render () {
-        testbed.render({
-          open: true,
-          children: [
-            <ModalHeader key="header">Hello World</ModalHeader>,
-            <ModalBody key="body">Foo Bar Baz</ModalBody>,
-            <ModalFooter key="footer">
-              <Button>Cancel</Button>
-            </ModalFooter>
-          ]
-        })
-      }
-
-      expect(render).to.not.throw(Error)
-    })
-
-    it('should not pass validation when children are invalid', () => {
-      function render () {
-        testbed.render({
-          open: true,
-          children: [
-            <ModalBody key="body">Foo Bar Baz</ModalBody>,
-            <ModalFooter key="footer">
-              <Button>Cancel</Button>
-            </ModalFooter>,
-            <ModalHeader key="header">Hello World</ModalHeader>
-          ]
-        })
-      }
-
-      expect(render).to.throw(Error)
-    })
   })
 })
 

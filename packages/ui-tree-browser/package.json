@@ -12,8 +12,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "ui-test",
-    "test:watch": "ui-test --watch",
+    "test:node": "ui-test --node",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean",
@@ -22,9 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5",
-    "@instructure/ui-testbed": "^5",
-    "@instructure/ui-themes": "^5"
+    "@instructure/ui-presets": "^5"
   },
   "dependencies": {
     "@instructure/ui-icons": "^5",

@@ -44,15 +44,23 @@ before implementing your change. Be sure to note any breaking changes or depreca
 
 ### Testing
 
-- `yarn test` will run the tests.
-- `yarn test:watch --scope @instructure/[package]` will run the tests and watch for changes to the source code. Run this if you'd like to debug tests in the browser (Chrome).
+- `yarn test` will run the tests with a headless browser.
+- `yarn test:watch` will run the tests and watch for changes to the source code.
+Run this if you'd like to debug tests in the browser (Chrome).
+
+`yarn test`/`yarn test:watch` options:
+- `--changed` will run the tests against any package that has changes (since the previous commit, including un-staged changes).
+- `--staged` will run tests against packages that have been staged but not yet committed.
+- `--scope [package name from its package.json]` will run the tests against a single package.
+- `--path [test file paths (comma delimited)]` will
+run just the tests in a single test src file.
 
 All components should have good test coverage. See the [testing documentation](#testing-components) for details.
 
 
 ### Debugging
 
-1. Run `yarn test:watch --scope @instructure/[package]`. This command should automatically open up the Chrome browser.
+1. Run `yarn test:watch --scope [package name from its package.json]`. This command should automatically open up the Chrome browser.
 2. In Chrome click the 'Debug' button at the top of the page (you may have to scroll up).
 3. Open the [Developer tools](https://developers.google.com/web/tools/chrome-devtools/debug/?hl=en) (`Command + Shift + C`).
 3. Now you can add breakpoints in the test code or the component code to debug issues. (`Command + P` in the 'Sources' tab)

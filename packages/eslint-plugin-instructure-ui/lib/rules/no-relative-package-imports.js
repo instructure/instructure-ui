@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 const path = require('path')
-const readPkgUp = require('read-pkg-up')
+const { readPkgUp } = require('@instructure/pkg-util')
 
 const resolve = require('eslint-module-utils/resolve').default
 const resolveImportType = require('eslint-plugin-import/lib/core/importType').default

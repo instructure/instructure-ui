@@ -41,19 +41,6 @@ describe('<MetricsList />', () => {
       .to.equal(3)
   })
 
-  it('should not allow invalid children', () => {
-    let error = false
-    try {
-      testbed.render({
-        children: <div />
-      })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
-  })
-
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()

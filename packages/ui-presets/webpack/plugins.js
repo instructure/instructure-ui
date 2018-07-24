@@ -25,12 +25,12 @@
 const webpack = require('webpack')
 const HappyPack = require('happypack')
 
-const readPkgUp = require('read-pkg-up')
+const { readPkgUp } = require('@instructure/pkg-util')
 
 const loadConfig = require('@instructure/config-loader')
 const { generateScopedName } = loadConfig('themeable', require('../themeable'))
 
-const ENV = process.env.NODE_ENV
+const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
 
 let hashPrefix = Date.now()
@@ -39,14 +39,20 @@ if (pkg) {
   hashPrefix = `${pkg.name}${pkg.version}`
 }
 
+const envVars = {
+  NODE_ENV: ENV,
+  DEBUG: DEBUG
+}
+
+if (ENV === 'test') {
+  envVars.UI_TEST_SCOPE_PATHS = process.env.UI_TEST_SCOPE_PATHS
+}
+
 module.exports = function plugins (options = {}) {
   const threadPool = options.threadPool || new HappyPack.ThreadPool({ size: 4 })
 
   let plugins = [
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: 'development',
-      DEBUG: false
-    }),
+    new webpack.EnvironmentPlugin(envVars),
     new HappyPack({
       id: 'js',
       threadPool,

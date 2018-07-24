@@ -37,15 +37,19 @@ describe('<DrawerTray />', () => {
 
   function testTrayPlacement (placement) {
     it(`should place the tray correctly at ${placement}`, () => {
-      const subject = testbed.render({
+      let _contentEl
+      testbed.render({
         open: true,
-        placement
+        placement,
+        contentRef: (el) => {
+          _contentEl = el
+        }
       })
 
       testbed.tick()
       testbed.tick()
 
-      expect(subject.hasClass(styles[`placement--${placement}`])).to.be.true
+      expect(_contentEl.className.indexOf(styles[`placement--${placement}`]) > -1).to.be.true
     })
   }
 

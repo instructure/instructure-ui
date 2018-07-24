@@ -117,7 +117,8 @@ describe('<CheckboxGroup />', () => {
 
   it('should not update the value when the value prop is set', () => {
     const subject = testbed.render({
-      value: ['tester']
+      value: ['tester'],
+      onChange: testbed.stub()
     })
 
     expect(subject.instance().value).to.deep.equal(['tester'])

@@ -125,7 +125,7 @@ Run `yarn run` to list the available commands.
 1. Run `yarn build:watch` to build all of the packages for a development environment and watch for changes.
 1. Run `yarn start:watch` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should
 see the page auto-reload.
-1. Run `yarn test:watch --scope [@instructure/package name]` to run the tests for 'package name' and watch for changes.
+1. Run `yarn test:watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
 1. Run `yarn test` to run all the tests for every package.
 
 

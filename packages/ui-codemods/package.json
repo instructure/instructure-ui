@@ -11,7 +11,6 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "npm-run-all lint test:jest",
     "test:jest": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"

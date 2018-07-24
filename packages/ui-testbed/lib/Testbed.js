@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+const ReactDOM = require('react-dom')
 const sinon = require('sinon')
 const chai = require('chai')
 const { cloneElement } = require('react')
@@ -30,6 +30,7 @@ const { StyleSheet } = require('glamor/lib/sheet')
 const { ReactWrapper, mount } = require('./enzymeWrapper')
 
 const realSetTimeout = setTimeout
+const realConsoleError = console.error
 
 const override = function (object, methodName, extra) {
   // eslint-disable-next-line no-param-reassign, wrap-iife
@@ -42,13 +43,22 @@ const override = function (object, methodName, extra) {
   })(object[methodName], extra)
 }
 
+// this is a hack so that we can test for prop type validation errors in our tests
+const overrideConsoleError = function (firstMessage, ...rest) {
+  if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
+    throw new Error(`Unexpected React Warning: ${firstMessage}`)
+  }
+
+  return realConsoleError(firstMessage, ...rest)
+}
+
 class Testbed {
   constructor (subject) {
     this.subject = subject
     this.sandbox = sinon.createSandbox()
 
     beforeEach(this.setup.bind(this))
-    afterEach(this.teardown.bind(this))
+    afterEach(this.setup.bind(this))
   }
 
   get wrapper () {
@@ -88,37 +98,45 @@ class Testbed {
   }
 
   setup () {
+    this.teardown()
+
     document.documentElement.setAttribute('dir', 'ltr')
+    document.documentElement.setAttribute('lang', 'en-US')
+
     this.rootNode = document.createElement('div')
+    this.rootNode.setAttribute('data-ui-testbed', 'true')
     document.body.appendChild(this.rootNode)
+
     this.disableCSSTransitions()
 
     this.sandbox.useFakeTimers()
-  }
 
-  setTextDirection (dir) {
-    document.documentElement.setAttribute('dir', dir)
+    console.error = overrideConsoleError
   }
 
   teardown () {
     this.sandbox.resetHistory()
     this.sandbox.restore()
 
-    try {
-      if (this.$instance && typeof this.$instance.unmount === 'function') {
-        this.$instance.unmount()
-        this.$instance = null
-      }
-    } catch (e) {
-      const { type, name } = this.subject || {}
-      const s = (type && (type.displayName || type.name)) || name
-      console.warn(`Error in test teardown for ${s}: ${e}`) // eslint-disable-line no-console
+    this.unmount()
+
+    this.rootNode && this.rootNode.parentNode && this.rootNode.parentNode.removeChild(this.rootNode)
+    this.rootNode = document.querySelector('[data-ui-testbed]')
+    this.rootNode && this.rootNode.parentNode && this.rootNode.parentNode.removeChild(this.rootNode)
+    this.rootNode = null
+  }
+
+  unmount () {
+    if (this.$instance && typeof this.$instance.unmount === 'function') {
+      this.$instance.unmount()
     }
 
-    this.rootNode && this.rootNode.remove()
-    delete this.rootNode
+    this.rootNode && ReactDOM.unmountComponentAtNode(this.rootNode)
+    this.$instance = null
+  }
 
-    document.documentElement.removeAttribute('dir')
+  setTextDirection (dir) {
+    document.documentElement.setAttribute('dir', dir)
   }
 
   render (props = {}, context) {
@@ -127,12 +145,7 @@ class Testbed {
     }
 
     if (this.$instance) {
-      const { type, name } = this.subject || {}
-      const s = (type && (type.displayName || type.name)) || name
-      console.warn(
-        // eslint-disable-line no-console
-        `Testbed.render called more than once in the same test for ${s} !!`
-      )
+      this.unmount()
     }
 
     const subject = cloneElement(this.subject, Object.assign({}, this.subject.props, props))
@@ -174,9 +187,20 @@ Testbed.init = () => {
     }
   `)
 
-  require('./initConsole')()
   require('./chaiWrapper')(chai)
   global.sinon = sinon
+
+  // clear the console before rebundling.
+  /* eslint-disable no-console */
+  if (typeof console.clear === 'function') {
+    console.clear()
+  }
+  /* eslint-enable no-console */
+
+  process.once('unhandledRejection', (error) => {
+    console.error(`Unhandled rejection: ${error.stack}`)
+    process.exit(1)
+  })
 }
 
 Testbed.wrap = (element) => {

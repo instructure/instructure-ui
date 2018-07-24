@@ -52,11 +52,12 @@ describe('MediaRecorder', () => {
     const errorStub = sinon.stub()
     const mediaFile  = new MediaFile(getMedia().stream, 'video/webm', successStub, errorStub)
 
-    describe('#readAsArrayBuffer', () => {
+    describe('#readAsArrayBuffer', (done) => {
       const frReadAsArrayBufferSpy = sinon.spy(FileReader.prototype, 'readAsArrayBuffer')
       it("uses FileReader's readAsArrayBuffer to make the blob consumable by ebml", () => {
         mediaFile.readAsArrayBuffer('12345').then(() => {
           expect(frReadAsArrayBufferSpy.calledWith('12345')).to.be.true
+          done()
         })
       })
     })

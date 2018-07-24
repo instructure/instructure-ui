@@ -167,16 +167,11 @@ describe('<RadioInput />', () => {
     })
 
     it('should require a label', () => {
-      let error = false
-      try {
+      expect(() => {
         testbed.render({
           label: null
         })
-      } catch (e) {
-        error = true
-      }
-
-      expect(error).to.be.true
+      }).to.throw(Error)
     })
   })
 })

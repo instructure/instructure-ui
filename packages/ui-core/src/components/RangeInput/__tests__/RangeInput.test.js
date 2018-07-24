@@ -92,19 +92,6 @@ describe('<RangeInput />', () => {
       .to.equal('5')
   })
 
-  it('requires an `onChange` prop with a `value` prop', () => {
-    let error = false
-    try {
-      testbed.render({
-        value: 50
-      })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
-  })
-
   it('formats the value displayed', () => {
     const subject = testbed.render({
       defaultValue: 45,

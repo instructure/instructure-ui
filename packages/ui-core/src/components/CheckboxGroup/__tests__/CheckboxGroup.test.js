@@ -66,19 +66,6 @@ describe('<CheckboxGroup />', () => {
     expect(subject.find('legend').text()).to.equal(description)
   })
 
-  it('requires an `onChange` prop with a `value` prop', () => {
-    let error = false
-    try {
-      testbed.render({
-        value: ['basketball']
-      })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
-  })
-
   it('does not call the onChange prop when disabled', () => {
     const onChange = testbed.stub()
 
@@ -117,7 +104,8 @@ describe('<CheckboxGroup />', () => {
 
   it('should not update the value when the value prop is set', () => {
     const subject = testbed.render({
-      value: ['tester']
+      value: ['tester'],
+      onChange: testbed.stub()
     })
 
     expect(subject.instance().value).to.deep.equal(['tester'])

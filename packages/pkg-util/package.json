@@ -1,0 +1,31 @@
+{
+  "name": "@instructure/pkg-util",
+  "version": "5.22.0",
+  "description": "Utilities for managing node packages in a monorepo.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@lerna/package": "^3.0.0-beta.17",
+    "glob": "^7.1.2",
+    "read-pkg": "^4.0.1",
+    "read-pkg-up": "^4.0.0",
+    "shelljs": "0.8.2"
+  },
+  "peerDependencies": {
+    "lerna": "^3.0.0-beta.21"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

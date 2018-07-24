@@ -31,7 +31,7 @@ const {
   isAbsolute
 } = require('path')
 
-const readPkgUp = require('read-pkg-up')
+const { readPkgUp } = require('@instructure/pkg-util')
 
 const template = require('babel-template')
 const requireHook = require('css-modules-require-hook')

@@ -78,7 +78,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   if (opts.coverage) {
     plugins = [
       ['istanbul', {
-        include: ['src/**/*.js'],
+        include: ['**/src/**/*.js'],
         exclude: ['**/*.test.js']
       }]
     ].concat(plugins)

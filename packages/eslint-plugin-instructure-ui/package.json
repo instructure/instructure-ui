@@ -11,15 +11,14 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test yarn lint",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/pkg-util": "^5",
     "eslint-module-utils": "^2.2.0",
-    "eslint-plugin-import": "^2.13.0",
-    "read-pkg-up": "^4.0.0"
+    "eslint-plugin-import": "^2.13.0"
   },
   "publishConfig": {
     "access": "public"

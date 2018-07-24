@@ -45,19 +45,6 @@ describe('<RadioInputGroup />', () => {
       .to.equal(3)
   })
 
-  it('requires an `onChange` prop with a `value` prop', () => {
-    let error = false
-    try {
-      testbed.render({
-        value: 'banana'
-      })
-    } catch (e) {
-      error = true
-    }
-
-    expect(error).to.be.true
-  })
-
   it('calls the onChange prop', () => {
     const onChange = testbed.stub()
 

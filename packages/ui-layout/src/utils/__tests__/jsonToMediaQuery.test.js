@@ -26,6 +26,18 @@ import px from '@instructure/ui-utils/lib/px'
 import jsonToMediaQuery from '../jsonToMediaQuery'
 
 describe('@jsonToMediaQuery', () => {
+  let node
+
+  beforeEach(() => {
+    node = document.createElement('div')
+    document.body.appendChild(node)
+  })
+
+  afterEach(() => {
+    node && node.parentNode && node.parentNode.removeChild(node)
+    node = null
+  })
+
   describe('should convert json to properly formatted media queries', () => {
     it('should convert standard query', () => {
         const value = 200
@@ -46,13 +58,10 @@ describe('@jsonToMediaQuery', () => {
     })
 
     it('should convert query with em value', () => {
-        const el = document.createElement('div')
-        el.style.fontSize = '24px'
-        document.body.appendChild(el)
-
+        node.style.fontSize = '24px'
         const value = '25em'
         const query = { minHeight: value }
-        expect(jsonToMediaQuery(query, el)).to.equal(`(min-height: ${px(value, el)}px)`)
+        expect(jsonToMediaQuery(query, node)).to.equal(`(min-height: ${px(value, node)}px)`)
     })
   })
 

@@ -11,20 +11,16 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "test": "cross-env NODE_ENV=test yarn lint",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },
   "license": "MIT",
   "dependencies": {
-    "@lerna/package": "^3.0.0-beta.17",
+    "@instructure/pkg-util": "^5",
     "@semantic-release/commit-analyzer": "^5.0.5",
     "chalk": "^2.4.1",
     "cz-customizable": "^5.2.0",
-    "glob": "^7.1.2",
-    "inquirer-autocomplete-prompt": "^0.12.2",
-    "read-pkg": "^4.0.1",
-    "shelljs": "0.8.2"
+    "inquirer-autocomplete-prompt": "^0.12.2"
   },
   "peerDependencies": {
     "lerna": "^3.0.0-beta.21"

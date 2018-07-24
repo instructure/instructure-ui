@@ -79,7 +79,7 @@ if [[ $POST_MERGE_BUILD ]]; then
   docker exec $container bash -c "yarn deploy"
 else
   echo "Running tests..."
-  docker exec $container bash -c "yarn test"
+  docker exec $container bash -c "yarn test:ci"
 fi
 
 docker stop $container

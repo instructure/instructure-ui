@@ -32,8 +32,10 @@ import Alert from '../index'
 import styles from '../styles.css'
 
 describe('<Alert />', () => {
+  let srdiv
+
   beforeEach(() => {
-    const srdiv = document.createElement('div')
+    srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
     srdiv.setAttribute('role', 'alert')
     srdiv.setAttribute('aria-live', 'assertive')
@@ -41,9 +43,10 @@ describe('<Alert />', () => {
     srdiv.setAttribute('aria-atomic', 'false')
     document.body.appendChild(srdiv)
   })
+
   afterEach(() => {
-    const srdiv = document.getElementById('_alertLiveRegion')
-    srdiv.parentElement.removeChild(srdiv)
+    srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
+    srdiv = null
   })
 
   const testbed = new Testbed(<Alert variant="success">Success: Sample alert text.</Alert>)

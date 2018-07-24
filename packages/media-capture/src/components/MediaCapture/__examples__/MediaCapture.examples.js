@@ -24,19 +24,8 @@
 
 import React from 'react'
 import MediaCapture from '../index'
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
-import Modal, { ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 
 class Example extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = {
-      isOpen: false
-    }
-  }
-
   onCompleted = (file) => {
     const a = document.createElement('a')
     a.href = URL.createObjectURL(file)
@@ -46,45 +35,20 @@ class Example extends React.Component {
     a.click()
     URL.revokeObjectURL(a.href)
     a.remove()
-    this.setState({ isOpen: false })
+    console.log(`MediaCapture completed!`) // eslint-disable-line no-console
   }
 
   onClose = (state) => {
-    this.setState({ isOpen: false }, () => {
-      console.log(`MediaCapture closed: ${state}`) // eslint-disable-line no-console
-    })
+    console.log(`MediaCapture closed: ${state}`) // eslint-disable-line no-console
   }
-
-  renderCloseButton () {
-     return (
-       <CloseButton
-         placement="end"
-         offset="medium"
-         variant="icon"
-         onClick={() => this.setState({ isOpen: false })}
-       >
-         Close
-       </CloseButton>
-     )
-   }
 
   render () {
     return (
       <div ref={el => this.container = el}>
-        <Button onClick={() => { this.setState({ isOpen: !this.state.isOpen }) }}>
-          Show Media Capture Modal
-        </Button>
-        <Modal
-          open={this.state.isOpen}
-          onDismiss={() => { this.setState({ isOpen: false }) }}
-          label="Media Capture"
-          shouldCloseOnDocumentClick
-        >
-          <ModalBody padding="xx-large">
-            {this.renderCloseButton()}
-            <MediaCapture onCompleted={this.onCompleted} onClose={this.onClose} />
-          </ModalBody>
-        </Modal>
+        <MediaCapture
+          onCompleted={this.onCompleted}
+          onClose={this.onClose}
+        />
       </div>
     )
   }

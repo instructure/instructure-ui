@@ -12,6 +12,7 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
+    "test:node": "ui-test --node",
     "clean": "ui-build --clean",
     "build": "gulp && ui-build __build__ --copy-files",
     "export": "gulp export && gulp",

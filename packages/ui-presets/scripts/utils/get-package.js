@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const readPkgUp = require('read-pkg-up')
+const { readPkgUp } = require('@instructure/pkg-util')
 const fs = require('fs')
 
 exports.getPackageJSON = function getPackageJSON () {

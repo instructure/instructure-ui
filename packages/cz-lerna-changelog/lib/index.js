@@ -21,40 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const shell = require('shelljs')
-const path = require('path')
+
 const commitAnalyzer = require('@semantic-release/commit-analyzer')
 const chalk = require('chalk')
 const buildCommit = require('cz-customizable/buildCommit')
 const autocomplete = require('inquirer-autocomplete-prompt')
-const getPackages = require('./get-packages')
+const { getPackages, getChangedPackages } = require('@instructure/pkg-util')
 const makeDefaultQuestions = require('./make-default-questions')
 const autocompleteQuestions = require('./autocomplete-questions')
-
-function getChangedPackages (allPackages) {
-  const changedFiles = shell.exec('git diff --cached --name-only', {silent: true})
-    .stdout
-    .split('\n')
-
-  const changedPackages = allPackages
-    .filter(function (pkg) {
-      const packagePrefix = path.relative('.', pkg.location) + path.sep
-      for (let changedFile of changedFiles) {
-        if (changedFile.indexOf(packagePrefix) === 0) {
-          return true
-        }
-      }
-    })
-    .map(function (pkg) {
-      return pkg.name
-    })
-
-    if (changedPackages.length <= 0) {
-      return ['*']
-    } else {
-      return changedPackages
-    }
-}
 
 function getCommitTypeMessage (type) {
   if (!type) {
@@ -69,12 +43,10 @@ function getCommitTypeMessage (type) {
 
 function makePrompter() {
   return function (cz, commit) {
+    const scope = '@instructure'
     const allPackages = getPackages()
-    const packageNames = allPackages
-      .map((pkg) => pkg.name.replace('@instructure/', ''))
-    const changedPackages = getChangedPackages(allPackages)
-      .map((pkg) => pkg.replace('@instructure/', ''))
-
+    const changedPackages = getChangedPackages('--cached', allPackages).map(pkg => pkg.name.replace(`${scope}/`, ''))
+    const packageNames = allPackages.map(pkg => pkg.name.replace(`${scope}/`, ''))
     const questions = makeDefaultQuestions(packageNames, changedPackages)
 
     // eslint-disable-next-line no-console

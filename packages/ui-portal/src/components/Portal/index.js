@@ -126,6 +126,7 @@ export default class Portal extends Component {
       if (!this._node) {
         this._node = document.createElement('span')
         this._node.setAttribute('dir', this.dir)
+        this._node.setAttribute('data-ui-portal', 'true')
       }
 
       // Append node to container if it isn't already

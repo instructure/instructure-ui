@@ -38,10 +38,17 @@ const CHROME_FLAGS = [
   '--disable-default-apps',
   '--disable-popup-blocking',
   '--disable-translate',
-  '--disable-extensions'
+  '--disable-extensions',
+  '--use-fake-ui-for-media-stream',
+  '--use-fake-device-for-media-stream',
+  '--allow-file-access-from-files'
 ]
 
-module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThreshold }) {
+module.exports = function makeConfig ({
+  bundle,
+  coverageDirectory,
+  coverageThreshold
+}) {
   const browsers = []
 
   if (!noLaunchers) {
@@ -67,7 +74,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
         {
           type: 'lcov',
           dir: coverageDirectory,
-          subdir: '.'
+          subdir: 'chrome'
         }
       ],
       check: coverageThreshold
@@ -84,21 +91,17 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
 
       frameworks: ['mocha'],
 
-      files: [ bundle ],
+      files: [bundle],
 
       preprocessors: {
         [bundle]: ['webpack', 'sourcemap']
       },
 
-      reporters: reporters,
+      reporters,
 
       coverageReporter,
 
       client: {
-        mocha: {
-          reporter: 'html',
-          ui: 'bdd'
-        },
         chai: {
           includeStack: true
         }
@@ -108,7 +111,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
 
       colors: true,
 
-      logLevel: debug ? constants.LOG_DEBUG : constants.LOG_ERROR,
+      logLevel: constants.LOG_ERROR,
 
       autoWatch: true,
 

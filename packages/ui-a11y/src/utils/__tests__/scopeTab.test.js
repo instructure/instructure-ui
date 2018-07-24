@@ -26,6 +26,18 @@ import React from 'react'
 import scopeTab from '../scopeTab'
 
 describe('scopeTab', () => {
+  let node
+
+  beforeEach(() => {
+    node = document.createElement('div')
+    document.body.appendChild(node)
+  })
+
+  afterEach(() => {
+    node && node.parentNode && node.parentNode.removeChild(node)
+    node = null
+  })
+
   const testbed = new Testbed(
     <div>
       <div data-test-container>
@@ -61,7 +73,6 @@ describe('scopeTab', () => {
 
   it('should not attempt scoping when no tabbable children', () => {
     const subject = testbed.render()
-    const node = document.createElement('div')
     const two = findInput(subject, 2)
 
     two.focus()

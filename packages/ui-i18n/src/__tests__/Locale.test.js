@@ -30,18 +30,9 @@ describe('browserLocale', () => {
     expect(Locale.browserLocale(navigator)).to.equal('de')
   })
 
-  context('with document lang attribute', () => {
-    const originalLang = document.documentElement.lang
-
-    before(() => {
-      document.documentElement.lang = 'fr'
-    })
-
-    after(() => {
-      document.documentElement.lang = originalLang
-    })
-
+  describe('with document lang attribute', () => {
     it('returns the document locale if no navigator is passed', () => {
+      document.documentElement.lang = 'fr'
       expect(Locale.browserLocale()).to.equal('fr')
     })
   })
