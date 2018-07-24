@@ -33,6 +33,6 @@ import uid from '../uid'
  * @param {String} prefix a custom prefix
  * @returns {String} a unique id
  */
-export default function generateElementId(prefix = 'el') {
-  return `${prefix}__${uid('', 12)}`
+export default function generateElementId(prefix) {
+  return `${prefix || 'el'}__${uid('', 12)}`
 }
