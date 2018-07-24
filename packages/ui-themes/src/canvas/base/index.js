@@ -58,6 +58,7 @@ export const brandVariables = {
   'ic-brand-font-color-dark': colors.textDarkest,
 
   'ic-link-color': colors.textBrand,
+  'ic-link-decoration': 'none',
 
   'ic-brand-button--primary-bgd': colors.backgroundBrand,
   'ic-brand-button--primary-text': colors.textLightest,

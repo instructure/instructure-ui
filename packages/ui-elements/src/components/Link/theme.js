@@ -58,6 +58,7 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
 generator['canvas'] = function (variables) {
   return {
     color: variables['ic-link-color'],
+    textDecoration: variables['ic-link-decoration'],
     hoverColor: darken(variables['ic-link-color'], 10)
   }
 }
