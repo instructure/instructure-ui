@@ -36,13 +36,10 @@ describe('<TreeButton />', () => {
     expect(button).to.be.present()
   })
 
-  describe('onClick', () => {
-    it('calls functions passed and returns the id', () => {
-      const onClick = testbed.stub()
-      const button = testbed.render({ onClick })
-      button.find('button').simulate('click')
-      expect(onClick).to.have.been.called()
-      expect(onClick).to.have.been.calledWith({id: '1', type: 'treeButton'})
+  describe('selected', () => {
+    it('shows the selected class if the button is selected', () => {
+      const button = testbed.render({selected: true})
+      expect(button.find(`.${styles.selected}`)).to.have.length(1)
     })
   })
 

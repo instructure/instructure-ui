@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-export default function ({ spacing, typography }) {
+export default function ({ colors, spacing, typography, borders }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
     fontSize: typography.fontSizeSmall,
-    controlsTopMargin: spacing.small
+    controlsTopMargin: spacing.small,
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineColor: colors.borderBrand
   }
 }

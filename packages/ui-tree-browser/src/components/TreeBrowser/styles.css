@@ -8,4 +8,9 @@
   padding: 0;
   list-style-type: none;
   position: relative;
+
+  &:focus {
+    outline: 0;
+    box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
+  }
 }

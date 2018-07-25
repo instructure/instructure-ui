@@ -66,10 +66,17 @@ describe('<TreeCollection />', () => {
       expect(collection.find('ul')).to.have.length(0)
     })
 
-    it('passes an aria-expanded attribute to its button', () => {
+    it('passes an aria-expanded attribute to its list item', () => {
       const collection = testbed.render()
-      const button = collection.find('button')
-      expect(button.getAttribute('aria-expanded')).to.exist()
+
+      const li = collection.find('li')
+      expect(li.getAttribute('aria-expanded')).to.exist()
+    })
+
+    it('passes an aria-selected attribute to its list item', () => {
+      const collection = testbed.render({selection: 'collection_1'})
+      const li = collection.find('li')
+      expect(li.getAttribute('aria-selected')).to.exist()
     })
 
     describe('onCollectionClick', () => {
@@ -77,7 +84,8 @@ describe('<TreeCollection />', () => {
         const onCollectionClick = testbed.stub()
         const collection = testbed.render({ onCollectionClick })
         collection.find('button').simulate('click')
-        expect(onCollectionClick).to.have.been.calledWith({expanded: true, id: 1})
+        expect(onCollectionClick).to.have.been.calledOnce()
+        expect(onCollectionClick.lastCall.lastArg).to.deep.equal({id: 1, expanded: true, type: 'collection'})
       })
     })
   })
@@ -92,10 +100,12 @@ describe('<TreeCollection />', () => {
     it('calls any custom functions passed by onItemClick prop', () => {
       const onItemClick = testbed.stub()
       const collection = testbed.render({
-        onCollectionClick: onItemClick
+        onItemClick,
+        expanded: true
       })
-      collection.find('button').simulate('click')
-      expect(onItemClick).to.have.been.called()
+      collection.find('[title="Item 1"]').simulate('click')
+      expect(onItemClick).to.have.been.calledOnce()
+      expect(onItemClick.lastCall.lastArg).to.deep.equal({id: 1, type: 'item'})
     })
   })
 })

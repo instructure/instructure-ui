@@ -51,6 +51,7 @@ export default class TreeCollection extends Component {
     items: PropTypes.array,
     collections: PropTypes.array,
     expanded: PropTypes.bool,
+    selection: PropTypes.string,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
     collectionIcon: PropTypes.func,
@@ -58,6 +59,7 @@ export default class TreeCollection extends Component {
     itemIcon: PropTypes.func,
     onItemClick: PropTypes.func,
     onCollectionClick: PropTypes.func,
+    onKeyDown: PropTypes.func,
     numChildren: PropTypes.number,
     level: PropTypes.number,
     position: PropTypes.number
@@ -67,21 +69,53 @@ export default class TreeCollection extends Component {
     collections: [],
     items: [],
     expanded: false,
+    selection: '',
     size: 'medium',
     variant: 'folderTree',
     onItemClick: function () {},
-    onCollectionClick: function () {}
+    onCollectionClick: function () {},
+    onKeyDown: function () {}
+  }
+
+  constructor (props) {
+    super(props)
+
+    this.state = {focused: ''}
+  }
+
+  handleFocus = (e, item) => {
+    e.stopPropagation()
+    this.setState({focused: `${item.type}_${item.id}`})
+  }
+
+  handleBlur = (e, item) => {
+    e.stopPropagation()
+    this.setState({focused: ''})
   }
 
   handleCollectionClick = (e) => {
     const { id, onCollectionClick, expanded } = this.props
     const collection = {
       id,
-      expanded: !expanded
+      expanded: !expanded,
+      type: 'collection'
     }
 
     if (onCollectionClick && typeof onCollectionClick === 'function') {
-      onCollectionClick(collection) // TODO: this should pass the event as the first arg
+      onCollectionClick(e, collection)
+    }
+  }
+
+  handleCollectionKeyDown = (e) => {
+    const { id, onKeyDown, expanded } = this.props
+    const collection = {
+      id,
+      expanded: !expanded,
+      type: 'collection'
+    }
+
+    if (onKeyDown && typeof onKeyDown === 'function') {
+      onKeyDown(e, collection)
     }
   }
 
@@ -132,21 +166,33 @@ export default class TreeCollection extends Component {
   }
 
   renderItemNode (item, i, numChildren, numCollections) {
+    const ariaSelected = {}
+    if (this.props.selection) ariaSelected['aria-selected'] = (this.props.selection === `item_${item.id}`)
+    const itemHash = {id: item.id, type: 'item'}
     return (
       <li
         key={`i${i}`}
+        tabIndex="-1"
+        role="treeitem"
+        title={item.name}
         className={styles.item}
+        aria-level={this.props.level + 1}
+        aria-posinset={(i + 1) + numCollections}
+        aria-setsize={numChildren}
+        onClick={(e, n) => this.props.onItemClick(e, itemHash)}
+        onKeyDown={(e, n) => this.props.onKeyDown(e, itemHash)}
+        onFocus={(e, n) => this.handleFocus(e, itemHash)}
+        onBlur={(e, n) => this.handleBlur(e, itemHash)}
+        {...ariaSelected}
       >
         <TreeButton
           {...this.getCommonButtonProps()}
           id={item.id}
           name={item.name}
           descriptor={item.descriptor}
+          selected={this.props.selection === `item_${item.id}`}
+          focused={this.state.focused === `item_${item.id}`}
           type="item"
-          onClick={this.props.onItemClick}
-          level={this.props.level + 1}
-          position={(i + 1) + numCollections}
-          setSize={numChildren}
         />
       </li>
     )
@@ -165,6 +211,7 @@ export default class TreeCollection extends Component {
 
   render () {
     const {
+      id,
       size,
       variant,
       expanded,
@@ -186,19 +233,33 @@ export default class TreeCollection extends Component {
       [styles.expanded]: expanded,
       [styles.node]: true
     }
+    const ariaSelected = {}
+    if (this.props.selection) ariaSelected['aria-selected'] = (this.props.selection === `collection_${id}`)
 
     return (
-      <li className={classnames(classes)}>
+      <li
+        className={classnames(classes)}
+        tabIndex="-1"
+        role="treeitem"
+        title={this.props.name}
+        aria-level={level}
+        aria-posinset={position}
+        aria-setsize={this.props.numChildren}
+        aria-expanded={expanded}
+        onClick={this.handleCollectionClick}
+        onKeyDown={this.handleCollectionKeyDown}
+        onFocus={(e, n) => this.handleFocus(e, {id: id, type: 'collection'})}
+        onBlur={(e, n) => this.handleBlur(e, {id: id, type: 'collection'})}
+        {...ariaSelected}
+      >
         <TreeButton
           {...this.getCommonButtonProps()}
           expanded={expanded}
           collectionIcon={collectionIcon}
           collectionIconExpanded={collectionIconExpanded}
           type="collection"
-          onClick={this.handleCollectionClick}
-          level={level}
-          position={position}
-          setSize={this.props.numChildren}
+          selected={this.props.selection === `collection_${id}`}
+          focused={this.state.focused === `collection_${id}`}
         />
         {this.renderChildren()}
       </li>

@@ -51,7 +51,6 @@
 
   &:focus {
     outline: 0;
-    box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
   }
 }
 
@@ -210,6 +209,30 @@
   }
 }
 
+.focused {
+  outline: 0;
+  box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
+}
+
 .expanded {}
+
+.selected {
+  background-color: var(--selectedBackgroundColor);
+
+  &.folderTree::before {
+    visibility: hidden;
+  }
+
+  .textName,
+  .textDescriptor,
+  .icon {
+    color: var(--selectedTextColor);
+  }
+}
+
+.selected.focused {
+  outline: 0;
+  box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor), inset 0 0 0 var(--selectedOutlineWidth) var(--selectedTextColor);
+}
 
 /* stylelint-enable no-descending-specificity, selector-max-class */

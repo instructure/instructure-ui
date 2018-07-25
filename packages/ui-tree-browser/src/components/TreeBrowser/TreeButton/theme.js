@@ -44,7 +44,10 @@ export default function generator ({ colors, spacing, typography, borders }) {
     baseSpacingLarge: '1rem',
     borderWidth: borders.widthSmall,
     borderColor: colors.borderDark,
-    textLineHeight: typography.lineHeightCondensed
+    textLineHeight: typography.lineHeightCondensed,
+    selectedTextColor: colors.textLightest,
+    selectedBackgroundColor: colors.backgroundDark,
+    selectedOutlineWidth: borders.widthLarge
   }
 }
 

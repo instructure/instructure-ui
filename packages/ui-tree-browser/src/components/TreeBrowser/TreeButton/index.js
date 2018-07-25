@@ -52,15 +52,16 @@ export default class TreeButton extends Component {
     itemIcon: PropTypes.func,
     onClick: PropTypes.func,
     expanded: PropTypes.bool,
-    level: PropTypes.number,
-    position: PropTypes.number,
-    setSize: PropTypes.number
+    selected: PropTypes.bool,
+    focused: PropTypes.bool
   }
 
   static defaultProps = {
     type: 'treeButton',
     size: 'medium',
     variant: 'folderTree',
+    selected: false,
+    focused: false,
     onClick: function () {}
   }
 
@@ -91,44 +92,32 @@ export default class TreeButton extends Component {
     }
   }
 
-  handleClick = () => {
-    const { onClick, id, type } = this.props
-    if (onClick && typeof onClick === 'function') {
-      onClick({id, type}) // TODO: this should pass the event as the first argument
-    }
-  }
-
   render () {
     const {
       name,
       descriptor,
       expanded,
+      selected,
+      focused,
       variant,
-      size,
-      level,
-      position,
-      setSize
+      size
     } = this.props
 
     const classes = {
       [styles.root]: true,
       [styles[size]]: true,
       [styles[variant]]: true,
-      [styles.expanded]: this.expanded
+      [styles.expanded]: expanded,
+      [styles.selected]: selected,
+      [styles.focused]: focused
     }
 
+    // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
       <button
         tabIndex={-1}
         type="button"
-        role="treeitem"
         className={classnames(classes)}
-        onClick={this.handleClick}
-        title={name}
-        aria-level={level}
-        aria-posinset={position}
-        aria-setsize={setSize}
-        aria-expanded={expanded}
       >
         <span className={styles.layout}>
           {this.renderIcon()}

@@ -28,7 +28,7 @@ import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
 import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
 import TreeBrowser from '../index'
 
-describe('<TreeBrowser />', () => {
+describe('<TreeBrowser /> in ui-core', () => {
   const testbed = new Testbed(<TreeBrowser
     collections={{
       2: {
@@ -65,6 +65,13 @@ describe('<TreeBrowser />', () => {
     expect(tree).to.be.present()
   })
 
+  it('should be accessible', (done) => {
+    const tree = testbed.render()
+    tree.should.be.accessible(done, {
+      ignores: []
+    })
+  })
+
   it('should render subcollections', () => {
     const tree = testbed.render()
     expect(tree.find('button').length).to.equal(1)
@@ -80,7 +87,7 @@ describe('<TreeBrowser />', () => {
   it('should render first keyed collection if showRootCollection is true and rootId specified', () => {
     const tree = testbed.render()
     expect(tree.find('button').length).to.equal(1)
-    expect(tree.find('button').first().getAttribute('title')).to.equal('Root Directory')
+    expect(tree.find('li').first().getAttribute('title')).to.equal('Root Directory')
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', () => {
@@ -135,6 +142,24 @@ describe('<TreeBrowser />', () => {
       expect(tree.find('button').length).to.equal(4)
       expect(tree.instance().state.expanded).to.not.exist()
       expect(tree.instance().props.expanded).to.include(2)
+    })
+  })
+
+  describe('selected', () => {
+    it('does not show the selection if selectionType is "none"', () => {
+      const tree = testbed.render()
+      tree.find('button').simulate('click')
+      expect(tree.instance().state.selection).to.equal('')
+    })
+
+    it('shows the selection indicator on last clicked collection or item', () => {
+      const tree = testbed.render({selectionType: 'single'})
+      tree.find('button').simulate('click')
+      expect(tree.instance().state.selection).to.equal('collection_2')
+      tree.find('[title="Item 1"]').simulate('click')
+      expect(tree.instance().state.selection).to.equal('item_1')
+      tree.find('[title="Item 1"]').simulate('click')
+      expect(tree.instance().state.selection).to.equal('item_1')
     })
   })
 
@@ -204,17 +229,6 @@ describe('<TreeBrowser />', () => {
   })
 
   describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const tree = testbed.render()
-
-      tree.should.be.accessible(done, {
-        ignores: [
-          'listitem', // TODO: remove this when we move the role to the LI from the BUTTON
-          'aria-allowed-role' // TODO: remove this when we move the role to the LI from the BUTTON
-        ]
-      })
-    })
-
     it('accepts a treeLabel prop', () => {
       const tree = testbed.render({treeLabel: 'test'})
       expect(tree.getAttribute('aria-label')).to.eq('test')
@@ -222,15 +236,26 @@ describe('<TreeBrowser />', () => {
 
     it('toggles aria-expanded', () => {
       const tree = testbed.render()
-      const button = tree.find('button')
-      expect(button.getAttribute('aria-expanded')).to.eq('false')
+      const li = tree.find('li')
+      const button = li.find('button')
+      expect(li.getAttribute('aria-expanded')).to.eq('false')
       button.simulate('click')
-      expect(button.getAttribute('aria-expanded')).to.eq('true')
+      expect(li.getAttribute('aria-expanded')).to.eq('true')
+    })
+
+    it('uses aria-selected when selectionType is not "none"', () => {
+      const tree = testbed.render({selectionType: 'single', defaultExanded: [2]})
+      const li = tree.find('li')
+      const button = li.find('button')
+      expect(li.getAttribute('aria-selected')).to.eq(null)
+      button.simulate('click')
+      expect(li.getAttribute('aria-selected')).to.eq('true')
+      expect(tree.find('li').at(1).getAttribute('aria-selected')).to.eq('false')
     })
 
     it('updates tabindex on keyboard nav', () => {
       const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('button').first()
+      const button = tree.find('li').first()
       button.node.focus()
       button.keyDown('down')
       const b2 = tree.node.getNavigableNodes()[1]
@@ -240,7 +265,7 @@ describe('<TreeBrowser />', () => {
 
     it('should move focus down when down key is pressed', () => {
       const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('button').first()
+      const button = tree.find('li').first()
       button.node.focus()
       button.keyDown('down')
       const b2 = tree.node.getNavigableNodes()[1]
@@ -249,7 +274,7 @@ describe('<TreeBrowser />', () => {
 
     it('should move focus down when down "J" is pressed', () => {
       const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('button').first()
+      const button = tree.find('li').first()
       button.node.focus()
       button.keyDown('j')
       const b2 = tree.node.getNavigableNodes()[1]
@@ -258,20 +283,107 @@ describe('<TreeBrowser />', () => {
 
     it('should move focus up when up key is pressed', () => {
       const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('button').first()
-      const subButton = tree.node.getNavigableNodes()[1]
+      const button = tree.find('li').first()
+      const subButton = tree.find('li').at(1)
       subButton.focus()
-      button.keyDown('up')
-      expect(button.node === document.activeElement).to.be.true()
+
+      subButton.keyDown('up')
+      expect(button.node === document.activeElement).be.true()
     })
 
     it('should move focus up when down "K" is pressed', () => {
       const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('button').first()
-      const subButton = tree.node.getNavigableNodes()[1]
+      const button = tree.find('li').first()
+      const subButton = tree.find('li').at(1)
       subButton.focus()
-      button.keyDown('k')
+      subButton.keyDown('k')
       expect(button.node === document.activeElement).to.be.true()
+    })
+
+    it('should open collapsed collection when right arrow is pressed', () => {
+      const tree = testbed.render()
+      const button = tree.find('li').first()
+      expect(tree.find('button').length).to.equal(1)
+      button.focus()
+      button.keyDown('right')
+      expect(tree.find('button').length).to.equal(4)
+      expect(button.node === document.activeElement).to.be.true()
+    })
+
+    it('should move focus down when right arrow is pressed on expanded collection', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      const subButton = tree.find('li').at(1)
+      expect(tree.find('button').length).to.equal(4)
+      button.focus()
+      button.keyDown('right')
+      expect(tree.find('button').length).to.equal(4)
+      expect(subButton.node === document.activeElement).to.be.true()
+    })
+
+    it('should collapse expanded collection when left arrow is pressed', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      expect(tree.find('button').length).to.equal(4)
+      button.focus()
+      button.keyDown('left')
+      expect(tree.find('button').length).to.equal(1)
+      expect(button.node === document.activeElement).to.be.true()
+    })
+
+    it('should move focus up when left arrow is pressed on collapsed collection', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      const subButton = tree.find('li').at(1)
+      expect(tree.find('button').length).to.equal(4)
+      subButton.focus()
+      subButton.keyDown('left')
+      expect(tree.find('button').length).to.equal(4)
+      expect(button.node === document.activeElement).to.be.true()
+    })
+
+    it('should select the node on enter or space if selectionType is not "none"', () => {
+      const tree = testbed.render({selectionType: 'single', defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      const subButton = tree.find('li').at(1)
+      button.focus()
+      button.keyDown('enter')
+      expect(tree.instance().state.selection).to.equal('collection_2')
+      subButton.focus()
+      subButton.keyDown('space')
+      expect(tree.instance().state.selection).to.equal('collection_3')
+    })
+
+    it('if selectionType is not "none" it should not expand the node on enter or space', () => {
+      const tree = testbed.render({selectionType: 'single', defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      expect(tree.find('button').length).to.equal(4)
+      button.focus()
+      button.keyDown('enter')
+      expect(tree.instance().state.selection).to.equal('collection_2')
+      expect(tree.find('button').length).to.equal(4)
+    })
+
+    it('should move to the top node without expanding/collapsing anything when home is pressed', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      const lastButton = tree.find('li').last()
+      expect(tree.find('button').length).to.equal(4)
+      lastButton.focus()
+      button.keyDown('home')
+      expect(tree.find('button').length).to.equal(4)
+      expect(button.node === document.activeElement)
+    })
+
+    it('should move to the bottom node without expanding/collapsing anything when end is pressed', () => {
+      const tree = testbed.render({defaultExpanded: [2]})
+      const button = tree.find('li').first()
+      const lastButton = tree.find('li').last()
+      expect(tree.find('button').length).to.equal(4)
+      button.focus()
+      button.keyDown('end')
+      expect(tree.find('button').length).to.equal(4)
+      expect(lastButton.node === document.activeElement)
     })
   })
 })

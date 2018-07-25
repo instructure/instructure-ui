@@ -64,16 +64,19 @@ export default class TreeBrowser extends Component {
     **/
     rootId: PropTypes.number,
     /**
-    * an array of expanded collection ids, must be accompanied by an 'onCollectionClick' prop
+    * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
     */
     expanded: CustomPropTypes.controllable(
       PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
-      'onCollectionClick'
+      'onCollectionToggle'
     ),
     /**
     * an array of collection ids to expand by default
     */
     defaultExpanded: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
+    // There are 2 types of tree selection:  single and multi.
+    // This is set up to allow for "multi" in the future without having to deprecate the old API.
+    selectionType: PropTypes.oneOf(['none', 'single']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     variant: PropTypes.oneOf(['folderTree', 'indent']),
     collectionIcon: PropTypes.func,
@@ -85,6 +88,7 @@ export default class TreeBrowser extends Component {
     */
     showRootCollection: PropTypes.bool,
     onCollectionClick: PropTypes.func,
+    onCollectionToggle: PropTypes.func,
     onItemClick: PropTypes.func,
     /**
     * An optional label to assist visually impaired users
@@ -100,43 +104,40 @@ export default class TreeBrowser extends Component {
     collectionIconExpanded: IconFolder,
     itemIcon: IconDocument,
     defaultExpanded: [],
-    onItemClick: function () {},
-    onCollectionClick: function () {}
+    selectionType: 'none',
+    onItemClick: function (item) {},
+    onCollectionClick: function (id, collection) {},
+    onCollectionToggle: function (collection) {}
   }
 
   constructor (props) {
     super(props)
 
-    this.state = {}
+    this.state = {selection: ''}
 
     if (typeof this.props.expanded === 'undefined') {
       this.state.expanded = props.defaultExpanded
     }
   }
 
-  handleCollectionClick = (collection) => {
+  handleCollectionClick = (e, collection, expand=true) => {
+    e.stopPropagation()
     const { onCollectionClick } = this.props
 
-    if (typeof this.props.expanded === 'undefined') {
-      this.setState((state, props) => {
-        const expanded = [].concat(this.getExpanded(state, props))
-
-        const expandedIndex = this.getExpandedIndex(expanded, collection.id)
-
-        if (collection.expanded && expandedIndex < 0) {
-          expanded.push(collection.id)
-        } else if (expandedIndex >= 0) {
-          expanded.splice(expandedIndex, 1)
-        }
-
-        return { expanded }
-      })
-    }
-
+    if (expand) this.expandOrCollapseNode(collection)
     onCollectionClick(collection.id, collection) // TODO: this should pass the event as the first arg
+    this.handleSelection(collection.id, 'collection')
   }
 
-  handleKeyDown = (event) => {
+  handleItemClick = (e, item) => {
+    e.stopPropagation()
+    const { onItemClick } = this.props
+    onItemClick(item)
+    this.handleSelection(item.id, 'item') // TODO: this should pass the event as the first arg
+  }
+
+  handleKeyDown = (event, node) => {
+    event.stopPropagation()
     switch (event.keyCode) {
       case keycode.codes.down:
       case keycode.codes.j:
@@ -145,6 +146,18 @@ export default class TreeBrowser extends Component {
       case keycode.codes.up:
       case keycode.codes.k:
         this.moveFocus(-1)
+        break
+      case keycode.codes.home:
+      case keycode.codes.end:
+        this.homeOrEnd(event.keyCode)
+        break
+      case keycode.codes.left:
+      case keycode.codes.right:
+        this.handleLeftOrRightArrow(event.keyCode, node)
+        break
+      case keycode.codes.enter:
+      case keycode.codes.space:
+        this.handleActivation(event, node)
         break
       default:
         return
@@ -176,8 +189,39 @@ export default class TreeBrowser extends Component {
     return (typeof props.expanded === 'undefined') ? state.expanded : props.expanded
   }
 
+  expandOrCollapseNode (collection) {
+    this.props.onCollectionToggle(collection)
+    if (typeof this.props.expanded === 'undefined') {
+      this.setState((state, props) => {
+        const expanded = [].concat(this.getExpanded(state, props))
+
+        const expandedIndex = this.getExpandedIndex(expanded, collection.id)
+
+        if (collection.expanded && expandedIndex < 0) {
+          expanded.push(collection.id)
+        } else if (expandedIndex >= 0) {
+          expanded.splice(expandedIndex, 1)
+        }
+
+        return { expanded }
+      })
+    }
+  }
+
+  handleSelection (id, type) {
+    const { selectionType } = this.props
+    selectionType === 'single' && this.setState((state) => {
+      const selection = `${type}_${id}`
+      if (state.selection !== selection) {
+        return { selection }
+      } else {
+        return state
+      }
+    })
+  }
+
   getNavigableNodes () {
-    return [].slice.call(this._root.querySelectorAll('button'))
+    return [].slice.call(this._root.querySelectorAll('[role="treeitem"]'))
   }
 
   moveFocus (delta) {
@@ -192,6 +236,49 @@ export default class TreeBrowser extends Component {
     nodes.forEach((n) => { n.setAttribute('tabindex', '-1') })
     nodes[next].setAttribute('tabindex', '0')
     nodes[next].focus()
+  }
+
+  homeOrEnd (keyCode) {
+    const length = this.getNavigableNodes().length
+    if (keyCode === keycode.codes.home) {
+      this.moveFocus(1 - length)
+    } else {
+      this.moveFocus(length - 1)
+    }
+  }
+
+  handleLeftOrRightArrow (keyCode, node) {
+    const ltr = !(this._root.parentElement.dir === 'rtl' || document.dir === 'rtl')
+    if ((ltr && keyCode === keycode.codes.left) || (!ltr && keyCode == keycode.codes.right)) {
+      this.handleCloseOrPrevious(node)
+    } else {
+      this.handleOpenOrNext(node)
+    }
+  }
+
+  handleOpenOrNext(node) {
+    if (node && !this.expanded.includes(node.id) && node.type === 'collection') {
+      this.expandOrCollapseNode(node)
+    } else {
+      this.moveFocus(1)
+    }
+  }
+
+  handleCloseOrPrevious(node) {
+    if (node && this.expanded.includes(node.id) && node.type === 'collection') {
+      this.expandOrCollapseNode(node)
+    } else {
+      this.moveFocus(-1)
+    }
+  }
+
+  handleActivation (event, node) {
+    if (node == null) return
+    if (node.type === 'collection') {
+      this.handleCollectionClick(event, node, this.props.selectionType === 'none')
+    } else {
+      this.handleItemClick(event, node)
+    }
   }
 
   getSubCollections (collection) {
@@ -237,8 +324,11 @@ export default class TreeBrowser extends Component {
         key={i}
         {...pickProps(this.props, TreeCollection.propTypes)}
         {...this.getCollectionProps(collection)}
+        selection={this.state.selection}
+        onItemClick={this.handleItemClick}
         onCollectionClick={this.handleCollectionClick}
-        numChildren={1}
+        onKeyDown={this.handleKeyDown}
+        numChildren={this.collections.length}
         level={1}
         position={1}
       />

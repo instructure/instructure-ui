@@ -35,7 +35,7 @@ example: true
 />
 ```
 
-An example of a 'controlled' `<TreeBrowser />` with custom icons:
+An example of a controlled `<TreeBrowser />` with custom icons and selection highlighting:
 
 ```js
 ---
@@ -51,6 +51,10 @@ class Example extends React.Component {
   }
 
   handleCollectionClick = (id, collection) => {
+    console.log(collection.id)
+  };
+
+  handleCollectionToggle = (collection) => {
     this.setState((state) => {
       const expanded = [...state.expanded]
       const index = expanded.indexOf(collection.id)
@@ -72,6 +76,7 @@ class Example extends React.Component {
         collectionIcon={IconUser.Solid}
         collectionIconExpanded={IconX.Solid}
         itemIcon={IconUser.Solid}
+        selectionType="single"
         collections={{
           1: { id: 1, name: "Grade 1", collections: [2,3,6] },
           2: { id: 2, name: "Math Outcomes", collections: [4], items: [3,4], descriptor: "1 Group | 2 Outcomes" },
@@ -91,6 +96,7 @@ class Example extends React.Component {
         showRootCollection={false}
         rootId={1}
         expanded={this.state.expanded}
+        onCollectionToggle={this.handleCollectionToggle}
         onCollectionClick={this.handleCollectionClick}
       />
     )
