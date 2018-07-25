@@ -131,10 +131,16 @@ if (!DEBUG) {
   plugins = plugins.concat([
     new UglifyJsPlugin({
       sourceMap: true,
+      parallel: true,
       uglifyOptions: {
         ecma: 5,
-        ie8: false,
-        safari10: true
+        mangle: false, // leaves variable names as-is so it is easier to debug, gzip takes care of most of this anyway
+        compress: {
+          sequences: false // prevents it from combining a bunch of statements with ","s so it is easier to set breakpoints
+        },
+        output: {
+          semicolons: false // prevents everything being on one line so it's easer to read in devtools
+        }
       }
     })
   ])
