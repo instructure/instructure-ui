@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -24,12 +22,14 @@
  * SOFTWARE.
  */
 
-process.env['NODE_ENV'] = 'test'
+const { runCommands, getCommand } = require('../utils/command')
+const { getPackageJSON } = require('../utils/get-package')
 
-if (process.argv.includes('--lint')) {
-  require('./lint')
-} else if (process.argv.includes('--node')) {
-  require('./node')
-} else {
-  require('./karma')
+const { main } = getPackageJSON()
+const commands = {
+  node: getCommand([], 'node', [main || 'lib/index.js'])
 }
+
+const result = runCommands(commands)
+
+process.exit(result.status)

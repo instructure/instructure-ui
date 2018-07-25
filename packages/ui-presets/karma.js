@@ -108,7 +108,7 @@ module.exports = function makeConfig ({ bundle, coverageDirectory, coverageThres
 
       colors: true,
 
-      logLevel: constants.LOG_ERROR,
+      logLevel: debug ? constants.LOG_DEBUG : constants.LOG_ERROR,
 
       autoWatch: true,
 

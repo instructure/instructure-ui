@@ -33,7 +33,6 @@ if (process.argv.includes('--watch')) {
   vars.push('DEBUG=1')
 } else {
   vars.push('COVERAGE=1')
-  commands.node = 'node lib/index.js'
 }
 
 commands.karma = getCommand(vars, 'karma', args)
