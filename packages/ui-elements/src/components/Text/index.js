@@ -98,35 +98,38 @@ export default class Text extends Component {
     letterSpacing: 'normal'
   }
 
-  render () {
+  render() {
     const {
+      as,
       weight,
       fontStyle,
       size,
       lineHeight,
       letterSpacing,
       transform,
-      color
+      color,
+      children,
+      ...propsToPassThrough
     } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[size]]: size,
-      [styles[`weight-${weight}`]]: weight,
-      [styles[`style-${fontStyle}`]]: fontStyle,
-      [styles[`transform-${transform}`]]: transform,
-      [styles[`lineHeight-${lineHeight}`]]: lineHeight,
-      [styles[`letterSpacing-${letterSpacing}`]]: letterSpacing,
-      [styles[`color-${color}`]]: color
-    }
-
-    const props = {
-      ...omitProps(this.props, Text.propTypes),
-      className: classnames(classes)
-    }
 
     const ElementType = getElementType(Text, this.props)
 
-    return <ElementType {...props}>{this.props.children}</ElementType>
+    return (
+      <ElementType
+        {...propsToPassThrough}
+        className={classnames({
+          [styles.root]: true,
+          [styles[size]]: size,
+          [styles[`weight-${weight}`]]: weight,
+          [styles[`style-${fontStyle}`]]: fontStyle,
+          [styles[`transform-${transform}`]]: transform,
+          [styles[`lineHeight-${lineHeight}`]]: lineHeight,
+          [styles[`letterSpacing-${letterSpacing}`]]: letterSpacing,
+          [styles[`color-${color}`]]: color
+        })}
+      >
+        {children}
+      </ElementType>
+    )
   }
 }
