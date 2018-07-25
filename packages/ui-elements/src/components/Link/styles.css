@@ -77,6 +77,11 @@
   text-align: inherit;
 }
 
+/* Ensures that link or button element is always the event target */
+.layout {
+  pointer-events: none;
+}
+
 .ellipsis {
   display: inline-block;
   vertical-align: middle;

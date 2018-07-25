@@ -69,7 +69,6 @@ the icon is inserted as a child:
     opacity: 0;
     transform: scale(0.01);
     transition: all 0.2s;
-    pointer-events: none;
   }
 
   &:focus {
@@ -84,6 +83,15 @@ the icon is inserted as a child:
 
   &:hover {
     transform: var(--hoverTransform);
+  }
+
+  /*
+  * Ensures that button or link is always the event target.
+  * Used span element here because some buttons consume the Flex component,
+  * and did not want to add pointer-events: none to all Flex components.
+  */
+  * { /* stylelint-disable-line selector-max-universal */
+    pointer-events: none;
   }
 }
 
