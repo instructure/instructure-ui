@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-instructure-ui",
-  "version": "5.20.1",
+  "version": "5.21.0",
   "description": "An eslint plugin made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

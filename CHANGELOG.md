@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.21.0"></a>
+# [5.21.0](https://github.com/instructure/instructure-ui/compare/v5.20.1...v5.21.0) (2018-07-25)
+
+
+### Bug Fixes
+
+* add React,React-DOM 16 to dependencies ([d49430f](https://github.com/instructure/instructure-ui/commit/d49430f))
+* fix typo in \`build:examples\` script ([e0f9772](https://github.com/instructure/instructure-ui/commit/e0f9772))
+* **ui-a11y:** remove role presentation on PresentationContent ([0c777a0](https://github.com/instructure/instructure-ui/commit/0c777a0))
+* **ui-buttons:** prevent error on null child in Button component ([5681198](https://github.com/instructure/instructure-ui/commit/5681198))
+* **ui-docs-plugin:** fix docs build w/ docker ([565147e](https://github.com/instructure/instructure-ui/commit/565147e))
+* **ui-elements,ui-focusable,ui-navigation:** docs app fixes ([fe4f121](https://github.com/instructure/instructure-ui/commit/fe4f121))
+* **ui-forms:** prevent scroll jumping with long textareas ([61d7a2e](https://github.com/instructure/instructure-ui/commit/61d7a2e))
+* **ui-layout:** fix position constrain logic ([656d7c1](https://github.com/instructure/instructure-ui/commit/656d7c1))
+* **ui-motion:** apply aria-hidden to transition content when transitioned out ([ca818c1](https://github.com/instructure/instructure-ui/commit/ca818c1))
+
+
+### Features
+
+* **ui-alerts,ui-icons:** update/add icons, update icons within alerts ([da0c3f6](https://github.com/instructure/instructure-ui/commit/da0c3f6))
+* **ui-elements,ui-themes:** add link decoration brand variable to canvas theme ([e88ca27](https://github.com/instructure/instructure-ui/commit/e88ca27))
+* **ui-overlays:** make label prop required for overlay ([3fdd14c](https://github.com/instructure/instructure-ui/commit/3fdd14c))
+
+
+### Performance Improvements
+
+* **ui-buttons:** avoid work just to show a warning in production ([0f2cbe9](https://github.com/instructure/instructure-ui/commit/0f2cbe9))
+* **ui-themeable:** avoid doing work per-instance ([9b2a84c](https://github.com/instructure/instructure-ui/commit/9b2a84c))
+* **ui-themeable:** only run the code that adds "dir" to <html> once ([954ab88](https://github.com/instructure/instructure-ui/commit/954ab88))
+* **ui-utils:** use a constant array in omitProps to avoid garbage ([6b5d868](https://github.com/instructure/instructure-ui/commit/6b5d868))
+
+
+
+
+
 <a name="5.20.1"></a>
 ## [5.20.1](https://github.com/instructure/instructure-ui/compare/v5.20.0...v5.20.1) (2018-07-18)
 
