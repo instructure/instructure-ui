@@ -42,6 +42,20 @@ import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import styles from './styles.css'
 import theme from './theme'
 
+const circleVariants = [
+  'circle-primary',
+  'circle-danger',
+  'circle-default'
+]
+
+const squareVariants = [
+  'circle-default',
+  'circle-primary',
+  'circle-danger',
+  'icon',
+  'icon-inverse'
+]
+
 /**
 ---
 category: components
@@ -173,13 +187,7 @@ class Button extends Component {
   }
 
   buttonBorderRadius () {
-    const circleVariants = [
-      'circle-primary',
-      'circle-danger',
-      'circle-default'
-    ]
-
-    if (circleVariants.indexOf(this.props.variant) !== -1) {
+    if (circleVariants.includes(this.props.variant)) {
       return 'circle'
     } else {
       return 'rounded'
@@ -192,15 +200,7 @@ class Button extends Component {
       fluidWidth
     } = this.props
 
-    const squareVariants = [
-      'circle-default',
-      'circle-primary',
-      'circle-danger',
-      'icon',
-      'icon-inverse'
-    ]
-
-    if (this.hasOnlyIcon || squareVariants.indexOf(variant) !== -1) {
+    if (this.hasOnlyIcon || squareVariants.includes(variant)) {
       return 'icon'
     } else if (fluidWidth) {
       return 'fluid'
@@ -209,13 +209,23 @@ class Button extends Component {
     }
   }
 
-  renderContent () {
+  render () {
     const {
+      as,
+      buttonRef,
       children,
-      icon
+      disabled,
+      href,
+      icon,
+      margin,
+      onClick,
+      readOnly,
+      size,
+      type,
+      variant
     } = this.props
 
-    if (process.env.NODE_ENV !== 'production' ) {
+    if (process.env.NODE_ENV !== 'production') {
       // show warning if icon is added as a child
       if (this.hasVisibleChildren) {
         React.Children.forEach(children, (child) => {
@@ -228,76 +238,48 @@ class Button extends Component {
       }
     }
 
-    if (this.hasTextAndIcon) {
-      return (
-        <Flex height="100%" width="100%">
-          <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
-          <FlexItem grow shrink>
-            <span className={styles.content}>{children}</span>
-          </FlexItem>
-        </Flex>
-      )
-    } else { // all other button layouts (icon only and text only)
-      return (
-        <span className={styles.content}>
-          {(icon) && this.renderIcon()}
-          {children}
-        </span>
-      )
-    }
-  }
-
-  render () {
-    const {
-      variant,
-      size,
-      disabled,
-      readOnly,
-      href,
-      type,
-      onClick,
-      buttonRef,
-      margin,
-      icon
-    } = this.props
-
-    const classes = {
-      [styles.root]: true,
-      [styles[variant]]: true,
-      [styles[size]]: size,
-      [styles[`width--${this.buttonWidth()}`]]: true,
-      [styles[`borderRadius--${this.buttonBorderRadius()}`]]: true,
-      [styles.disabled]: disabled,
-      [styles['has-icon']]: icon
-    }
-
-    const props = {
-      ...omitProps(this.props, { ...Button.propTypes, ...View.propTypes }),
-      elementRef: (c, ...args) => {
-        this._button = c
-        buttonRef.apply(this, [c].concat(args))
-      },
-      className: classnames(classes),
-      disabled: disabled || readOnly,
-      'aria-disabled': disabled || readOnly ? 'true' : null,
-      onClick: this.handleClick,
-      onKeyDown: this.handleKeyDown,
-      href: href,
-      type: href ? null : type,
-      role: onClick && this.props.as ? 'button' : null,
-      tabIndex: onClick && this.props.as ? '0' : null
-    }
-
-    const ElementType = this.elementType
-
     return (
       <View
-        {...props}
+        {...omitProps(this.props, { ...Button.propTypes, ...View.propTypes })}
+        className={classnames({
+          [styles.root]: true,
+          [styles[variant]]: true,
+          [styles[size]]: size,
+          [styles[`width--${this.buttonWidth()}`]]: true,
+          [styles[`borderRadius--${this.buttonBorderRadius()}`]]: true,
+          [styles.disabled]: disabled,
+          [styles['has-icon']]: icon
+        })}
+        disabled={disabled || readOnly}
+        aria-disabled={disabled || readOnly ? 'true' : null}
+        onClick={this.handleClick}
+        onKeyDown={this.handleKeyDown}
+        href={href}
+        type={href ? null : type}
+        role={onClick && as ? 'button' : null}
+        tabIndex={onClick && as ? '0' : null}
+        elementRef={c => {
+          this._button = c
+          if (typeof buttonRef === 'function') buttonRef(c)
+        }}
         display={null}
-        as={ElementType}
+        as={this.elementType}
         margin={margin}
       >
-        {this.renderContent()}
+        {this.hasTextAndIcon ? (
+          <Flex height="100%" width="100%">
+            <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
+            <FlexItem grow shrink>
+              <span className={styles.content}>{children}</span>
+            </FlexItem>
+          </Flex>
+        ) : (
+          // all other button layouts (icon only and text only)
+          <span className={styles.content}>
+            {icon && this.renderIcon()}
+            {children}
+          </span>
+        )}
       </View>
     )
   }
