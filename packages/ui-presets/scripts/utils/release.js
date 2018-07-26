@@ -25,7 +25,7 @@
 const fs = require('fs')
 const path = require('path')
 
-const { runCommandAsync } = require('./command')
+const { runCommandAsync, resolveBin } = require('./command')
 const { confirm } = require('./confirm')
 const { getPackageJSON } = require('./get-package')
 const {
@@ -52,7 +52,7 @@ const { error, info } = require('./logger')
 const { publishGithubPages } = require('./gh-pages')
 
 async function checkPackagePublished (packageName, currentVersion) {
-  const result = runCommandAsync(`npm info ${packageName}@${currentVersion} version`)
+  const result = runCommandAsync('npm', ['info', `${packageName}@${currentVersion}`, 'version'])
   if (result === currentVersion) {
     error(`${packageName}@${currentVersion} is already published!`)
     process.exit(1)
@@ -71,7 +71,7 @@ async function createNPMRCFile (config = {}) {
     `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${config.npm_scope}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
   )
 
-  await runCommandAsync('npm whoami')
+  await runCommandAsync('npm', ['whoami'])
 }
 
 const getReleaseVersion = async function getReleaseVersion (currentVersion) {
@@ -81,9 +81,9 @@ const getReleaseVersion = async function getReleaseVersion (currentVersion) {
     await checkIfGitTagExists(releaseVersion)
     await checkIfCommitIsReviewed()
   } else {
-    const description = await runCommandAsync(`git describe --match "v[0-9]*" --first-parent`)
-    const index = await runCommandAsync(`echo ${description}| cut -d'-' -f 2`)
-    await runCommandAsync('$(npm bin)/standard-version')
+    const description = await runCommandAsync('git', ['describe', '--match', '"v[0-9]*"', '--first-parent'])
+    const index = await runCommandAsync('echo', [description, '|', resolveBin('cut'), '-d\'-\'', '-f', '2'])
+    await runCommandAsync('standard-version')
     const nextVersion = getPackageJSON().version
     releaseVersion = `${nextVersion}-rc.${index}`
   }
@@ -126,7 +126,7 @@ const publish = async function publish (packageName, currentVersion, releaseVers
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
 
   try {
-    await runCommandAsync(`$(npm bin)/lerna publish ${args.join(' ')}`)
+    await runCommandAsync('lerna', ['publish'].concat(args))
   } catch (err) {
     error(err)
     process.exit(1)
@@ -204,7 +204,7 @@ exports.publishPackage = async function publishPackage (packageName, currentVers
   }
 
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
-  await runCommandAsync(`$(npm bin)/yarn publish --tag ${npmTag}`)
+  await runCommandAsync('yarn', ['publish', '--tag', npmTag])
   info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
 }
 
@@ -213,31 +213,29 @@ exports.deprecatePackage = async function deprecatePackage (packageName, current
   const pkg = `${packageName}@${currentVersion}`
 
   info(`📦  Deprecating ${pkg}...`)
-  await runCommandAsync(`npm deprecate ${pkg} ${message}`)
+  await runCommandAsync('npm', ['deprecate', pkg, message])
 }
 
 exports.bump = async function bump (releaseType, config = {}) {
   await setupGit()
   await checkWorkingDirectory()
 
-  const versionArgs = releaseType ? `--release-as ${releaseType}` : ''
-  await runCommandAsync(`$(npm bin)/standard-version ${versionArgs}`)
+  await runCommandAsync('standard-version', (releaseType ? ['--release-as', releaseType] : []))
 
   const { name, version } = getPackageJSON()
 
   info(`📦  Updating ${name} packages and generating the changelog for ${version}...`)
 
-  const args = [
-    '--yes',
-    '--skip-git',
-    '--skip-npm',
-    '--force-publish=*',
-    '--conventional-commits',
-    `--repo-version ${version}`
-  ]
-
   try {
-    await runCommandAsync(`$(npm bin)/lerna publish ${args.join(' ')}`)
+    await runCommandAsync('lerna', ['publish',
+      '--yes',
+      '--skip-git',
+      '--skip-npm',
+      '--force-publish=*',
+      '--conventional-commits',
+      '--repo-version',
+      version
+    ])
   } catch (err) {
     error(err)
     process.exit(1)
@@ -245,7 +243,7 @@ exports.bump = async function bump (releaseType, config = {}) {
 
   info(`💾  Committing version bump commit for ${name} ${version}...`)
 
-  await runCommandAsync(`git commit -a -m "chore(release): ${version}"`)
+  await runCommandAsync('git', ['commit', '-a', '-m', `"chore(release): ${version}"`])
 }
 
 exports.release = async function release (packageName, currentVersion, releaseVersion, config = {}) {

@@ -25,7 +25,7 @@
 const fs = require('fs')
 const Jira = require('jira-client')
 
-const { runCommandAsync } = require('./command')
+const { runCommandAsync, resolveBin } = require('./command')
 const { info, error } = require('./logger')
 
 const {
@@ -147,10 +147,13 @@ exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
   let result
 
   try {
-    const currentReleaseTag = await runCommandAsync('git describe --exact-match')
-    const previousReleaseCommit = await runCommandAsync('git rev-list --tags --skip=1 --max-count=1')
-    const previousReleaseTag = await runCommandAsync(`git describe --abbrev=0 --tags ${previousReleaseCommit}`)
-    result = await runCommandAsync(`git log ${previousReleaseTag}..${currentReleaseTag} | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+    const currentReleaseTag = await runCommandAsync('git', ['describe', '--exact-match'])
+    const previousReleaseCommit = await runCommandAsync('git', ['rev-list', '--tags', '--skip=1', '--max-count=1'])
+    const previousReleaseTag = await runCommandAsync('git', ['describe', '--abbrev=0', '--tags', previousReleaseCommit])
+    result = await runCommandAsync('git', [
+      'log', `${previousReleaseTag}..${currentReleaseTag}`, '|',
+      resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
+    ])
   } catch (e) {
     info(`No Jira issues found in commit messages!`)
   }
@@ -173,7 +176,10 @@ async function getIssuesInCommit (config = {}) {
   let result
 
   try {
-    result = await runCommandAsync(`git log -1 --pretty=%B | grep -Eo '([A-Z]{3,}-)([0-9]+)'`)
+    result = await runCommandAsync('git', [
+      'log', '-1', '--pretty=%B', '|',
+      resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
+    ])
   } catch (e) {
     info(`No Jira issues found in commit message!`)
   }

@@ -23,7 +23,7 @@
  */
 const path = require('path')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-util')
-const { getCommand, runCommands } = require('../utils/command')
+const { getCommand, runCommandsConcurrently } = require('../utils/command')
 
 const vars = ['NODE_ENV=test']
 const { argv } = process
@@ -33,9 +33,6 @@ if (argv.includes('--watch')) {
 } else {
   vars.push('COVERAGE=1')
 }
-
-// yarn add --pure-lockfile -W react@${version}
-// yarn add --pure-lockfile -W react-dom@${version}
 
 const scopeArgIndex = argv.indexOf('--scope')
 const pathArgIndex = argv.indexOf('--path')
@@ -62,8 +59,8 @@ if (paths.length > 0) {
   vars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
 }
 
-const result = runCommands({
-  karma: getCommand(vars, 'karma', ['start'])
+const result = runCommandsConcurrently({
+  karma: getCommand('karma', ['start'], vars)
 })
 
 process.exit(result.status)

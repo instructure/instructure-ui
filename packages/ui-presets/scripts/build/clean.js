@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('../utils/command')
 
-process.exit(runCommands({
-  clean: getCommand([], 'rimraf', [
+process.exit(runCommandsConcurrently({
+  clean: getCommand('rimraf', [
     '__build__',
     'es',
     'dist',

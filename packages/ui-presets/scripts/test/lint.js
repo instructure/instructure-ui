@@ -23,13 +23,13 @@
  */
 
 
-const { runCommands, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('../utils/command')
 
 const commands = {
-  eslint: getCommand([], 'eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.']),
-  stylelint: getCommand([], 'stylelint', process.argv.includes('--fix') ? ['**/*.css', '--fix'] : ['**/*.css'])
+  eslint: getCommand('eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.']),
+  stylelint: getCommand('stylelint', process.argv.includes('--fix') ? ['**/*.css', '--fix'] : ['**/*.css'])
 }
 
-const result = runCommands(commands)
+const result = runCommandsConcurrently(commands)
 
 process.exit(result.status)

@@ -27,12 +27,11 @@ const path = require('path')
 const which = require('which')
 const spawn = require('cross-spawn')
 const { error } = require('./logger')
-
 const cp = require('child_process')
 const util = require('util')
 const exec = util.promisify(cp.exec)
 
-function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) {
+const resolveBin = exports.resolveBin = function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) {
  let pathFromWhich
  try {
    pathFromWhich = fs.realpathSync(which.sync(executable))
@@ -57,23 +56,15 @@ function resolveBin (modName, {executable = modName, cwd = process.cwd()} = {}) 
  }
 }
 
-exports.resolveCommand = function resolveCommand (command) {
-  return resolveBin(command)
-}
-
-exports.getCommand = function getCommand (vars, command, args) {
-  return `${resolveBin('cross-env')} ${vars.join(' ')} ${resolveBin(command)} ${args.join(' ')}`
-}
-
-exports.runCommand = function runCommand (command, args = []) {
-  return spawn.sync(
-    command,
+const getCommand = exports.getCommand = function getCommand(bin, args = [], vars = []) {
+  return {
+    bin: resolveBin(bin),
     args,
-    { stdio: 'inherit' }
-  )
+    vars
+  }
 }
 
-exports.runCommands = function runCommands (commands) {
+exports.runCommandsConcurrently = function runCommandsConcurrently (commands) {
   const args = [
     '--kill-others-on-fail',
     '--prefix', '[{name}]',
@@ -83,8 +74,9 @@ exports.runCommands = function runCommands (commands) {
   ]
 
   Object.keys(commands).forEach((name) => {
-    if (commands[name]) {
-      args.push(JSON.stringify(commands[name]))
+    const command = commands[name]
+    if (command) {
+      args.push(`${resolveBin('cross-env')} ${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
     }
   })
 
@@ -95,12 +87,20 @@ exports.runCommands = function runCommands (commands) {
   )
 }
 
-exports.runCommandAsync = async function runCommandAsync (command) {
-  const { stderr, stdout } = await exec(command)
+exports.runCommandSync = function runCommandSync (bin, args = [], vars = []) {
+  const command = getCommand(bin, args, vars)
+  return spawn.sync(command.bin, command.args, { stdio: 'inherit' })
+}
+
+exports.runCommandAsync = async function runCommandAsync (bin, args = [], vars = []) {
+  const command = getCommand(bin, args, vars)
+
+  const { stderr, stdout } = await exec(`${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
+
   if (stderr) {
     error(stderr)
-    return
-  } else if (typeof stdout === 'string') {
-    return stdout.trim()
+    throw new Error(stderr)
+  } else {
+    return stdout
   }
 }

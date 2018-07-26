@@ -47,10 +47,10 @@ exports.publishGithubPages = async function publishGithubPages (config = {
   info(`📖   Repository: ${GIT_REMOTE_URL}...`)
   info(`📖   Branch: ${config.gh_pages_branch}...`)
 
-  await runCommandAsync(`touch ${config.gh_pages_dir}/.nojekyll`)
+  await runCommandAsync('touch', [`${config.gh_pages_dir}/.nojekyll`])
 
   if (config.gh_pages_cname) {
-    await runCommandAsync(`echo "${config.gh_pages_cname}" >> ${config.gh_pages_dir}/CNAME`)
+    await runCommandAsync('echo', [`"${config.gh_pages_cname}"`, '>>', `${config.gh_pages_dir}/CNAME`])
   }
 
   return new Promise((resolve, reject) => {

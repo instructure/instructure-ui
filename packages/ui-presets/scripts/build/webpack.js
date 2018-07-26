@@ -23,17 +23,17 @@
  */
 
 
-const { runCommands, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('../utils/command')
 
 let result
 
 if (process.argv.includes('--watch')) {
-  result = runCommands({
-    webpack: getCommand(['NODE_ENV=development', 'DEBUG=1'], 'webpack-dev-server', [])
+  result = runCommandsConcurrently({
+    webpack: getCommand('webpack-dev-server', [], ['NODE_ENV=development', 'DEBUG=1'])
   })
 } else {
-  result = runCommands({
-    webpack: getCommand([`NODE_ENV=${process.env['NODE_ENV']}`], 'webpack', [])
+  result = runCommandsConcurrently({
+    webpack: getCommand('webpack', [], [`NODE_ENV=${process.env['NODE_ENV']}`])
   })
 }
 

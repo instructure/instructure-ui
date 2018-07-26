@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 
-const { runCommands, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('../utils/command')
 const { getPackageJSON } = require('../utils/get-package')
 
 const { main } = getPackageJSON()
 const commands = {
-  node: getCommand([], 'node', [main || 'lib/index.js'])
+  node: getCommand('node', [main || 'lib/index.js'], [])
 }
 
-const result = runCommands(commands)
+const result = runCommandsConcurrently(commands)
 
 process.exit(result.status)

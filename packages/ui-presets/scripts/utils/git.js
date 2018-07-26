@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandAsync, runCommand } = require('./command')
+const { runCommandAsync, runCommandSync, resolveBin } = require('./command')
 const { info, error } = require('./logger')
 const validateMessage = require('validate-commit-msg')
 
 exports.commit = function () {
-  return runCommand('git-cz')
+  return runCommandSync('git-cz')
 }
 
 exports.setupGit = async function setupGit () {
@@ -38,30 +38,30 @@ exports.setupGit = async function setupGit () {
   } = process.env
 
   try {
-    await runCommandAsync(`git config --list`)
+    await runCommandAsync('git', ['config', '--list'])
 
     const origin = GIT_REMOTE_NAME || 'origin'
 
     if (GIT_REMOTE_URL) {
-      if (!await runCommandAsync(`git remote | grep ${origin}`)) {
-        await runCommandAsync(`git remote add ${origin} ${GIT_REMOTE_URL}`)
+      if (!await runCommandAsync('git', ['remote', '|', resolveBin('grep'), origin])) {
+        await runCommandAsync('git', ['remote', 'add', origin, GIT_REMOTE_URL])
       } else {
-        await runCommandAsync(`git remote set-url ${origin} ${GIT_REMOTE_URL}`)
+        await runCommandAsync('git', ['remote', 'set-url', origin, GIT_REMOTE_URL])
       }
     }
 
-    await runCommandAsync(`git fetch ${origin} --tags --force`)
+    await runCommandAsync('git', ['fetch', origin, '--tags', '--force'])
 
     if (GIT_EMAIL) {
-      await runCommandAsync(`git config user.email "${GIT_EMAIL}"`)
+      await runCommandAsync('git', ['config', 'user.email', `"${GIT_EMAIL}"`])
     }
     if (GIT_USERNAME) {
-      await runCommandAsync(`git config user.name "${GIT_USERNAME}"`)
+      await runCommandAsync('git', ['config', 'user.name', `"${GIT_USERNAME}"`])
     }
 
-    await runCommandAsync(`git config push.default simple`)
+    await runCommandAsync('git', ['config', 'push.default', 'simple'])
 
-    await runCommandAsync(`git config --list`)
+    await runCommandAsync('git', ['config', '--list'])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -72,7 +72,7 @@ exports.lintCommitMessage = async function lintCommitMessage () {
   let commitMessage
 
   try {
-    commitMessage = await runCommandAsync(`git log -1 --pretty=%B`)
+    commitMessage = await runCommandAsync('git', ['log', '-1', '--pretty=%B'])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -85,7 +85,11 @@ exports.isReleaseCommit = async function isReleaseCommit (version) {
   let result
 
   try {
-    result = await runCommandAsync(`git log --oneline --format=%B -n 1 HEAD | head -n 1 | grep "chore(release)"`)
+    result = await runCommandAsync('git', [
+      'log', '--oneline', '--format=%B', '-n', '1', 'HEAD', '|',
+      resolveBin('head'), '-n', '1', '|',
+      resolveBin('grep'), '"chore(release)"'
+    ])
   } catch (e) {
     info(`Not on a release commit - this is a release candidate`)
     return false
@@ -98,7 +102,7 @@ exports.checkWorkingDirectory = async function checkWorkingDirectory () {
   let result
 
   try {
-    result = await runCommandAsync(`git status --porcelain`)
+    result = await runCommandAsync('git', ['status', '--porcelain'])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -116,7 +120,7 @@ exports.checkIfGitTagExists = async function checkIfGitTagExists (version) {
   let result
 
   try {
-    result = await runCommandAsync(`git tag --list ${tag}`)
+    result = await runCommandAsync('git', ['tag', '--list', tag])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -133,7 +137,7 @@ exports.checkIfCommitIsReviewed = async function checkIfCommitIsReviewed () {
   let result
 
   try {
-    result = await runCommandAsync('git log -n 1 | grep Reviewed-on')
+    result = await runCommandAsync('git', ['log', '-n', '1', '|', resolveBin('grep'), 'Reviewed-on'])
   } catch (e) {
     error(e)
     process.exit(1)
@@ -152,8 +156,8 @@ exports.createGitTagForRelease = async function createGitTagForRelease (version)
   const origin = GIT_REMOTE_NAME || 'origin'
 
   try {
-    await runCommandAsync(`git tag -am "Version ${version}" ${tag}`)
-    await runCommandAsync(`git push ${origin} ${tag}`)
+    await runCommandAsync('git', ['tag', '-am', `"Version ${version}"`, tag])
+    await runCommandAsync('git', ['push', origin, tag])
   } catch (e) {
     error(e)
     process.exit(1)
