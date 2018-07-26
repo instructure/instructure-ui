@@ -1,3 +1,7 @@
+---
+id: instructure-ui
+---
+
 ## instructure-ui
 
 [![build-status][build-status]][build-status-url]
