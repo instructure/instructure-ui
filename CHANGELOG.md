@@ -3,6 +3,37 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.22.0"></a>
+# [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
+
+
+### Bug Fixes
+
+* move React/ReactDOM back to peerDependencies ([99e9458](https://github.com/instructure/instructure-ui/commit/99e9458))
+* **docs:** add id to README ([d3a43d4](https://github.com/instructure/instructure-ui/commit/d3a43d4))
+* **ui-elements:** prevent invalid props error for Text ([1452a12](https://github.com/instructure/instructure-ui/commit/1452a12))
+* **ui-themeable,ui-themes:** fix theme.use({ accessible: true }) ([fe07a3a](https://github.com/instructure/instructure-ui/commit/fe07a3a))
+
+
+### Features
+
+* **ui-presets:** Separate out node test from karma ([01aea24](https://github.com/instructure/instructure-ui/commit/01aea24))
+
+
+### Performance Improvements
+
+* **ui-buttons:** speed up <Button>s ([54d7c71](https://github.com/instructure/instructure-ui/commit/54d7c71))
+* **ui-elements:** speed up <Text> ([6fff58b](https://github.com/instructure/instructure-ui/commit/6fff58b))
+* **ui-forms:** don't even render options <ul> when not open ([e3fa113](https://github.com/instructure/instructure-ui/commit/e3fa113))
+* **ui-i18n:** cache the default "dir" lookup ([ac746a8](https://github.com/instructure/instructure-ui/commit/ac746a8))
+* **ui-layout:** avoid View::verifySpanMargin check in prod ([b0c2691](https://github.com/instructure/instructure-ui/commit/b0c2691))
+* **ui-utils:** a faster uid() ([d0fc68e](https://github.com/instructure/instructure-ui/commit/d0fc68e))
+* **ui-utils:** speed up pickProps and omitProps ([e286ef6](https://github.com/instructure/instructure-ui/commit/e286ef6)), closes [/github.com/FormidableLabs/victory/issues/956#issuecomment-377567239](https://github.com//github.com/FormidableLabs/victory/issues/956/issues/issuecomment-377567239)
+
+
+
+
+
 <a name="5.21.0"></a>
 # [5.21.0](https://github.com/instructure/instructure-ui/compare/v5.20.1...v5.21.0) (2018-07-25)
 

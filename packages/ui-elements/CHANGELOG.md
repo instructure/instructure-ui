@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.22.0"></a>
+# [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
+
+
+### Bug Fixes
+
+* move React/ReactDOM back to peerDependencies ([99e9458](https://github.com/instructure/instructure-ui/commit/99e9458))
+* **ui-elements:** prevent invalid props error for Text ([1452a12](https://github.com/instructure/instructure-ui/commit/1452a12))
+
+
+### Performance Improvements
+
+* **ui-elements:** speed up <Text> ([6fff58b](https://github.com/instructure/instructure-ui/commit/6fff58b))
+
+
+
+
+
 <a name="5.21.0"></a>
 # [5.21.0](https://github.com/instructure/instructure-ui/compare/v5.20.1...v5.21.0) (2018-07-25)
 

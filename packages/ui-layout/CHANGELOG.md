@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.22.0"></a>
+# [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
+
+
+### Bug Fixes
+
+* move React/ReactDOM back to peerDependencies ([99e9458](https://github.com/instructure/instructure-ui/commit/99e9458))
+
+
+### Performance Improvements
+
+* **ui-layout:** avoid View::verifySpanMargin check in prod ([b0c2691](https://github.com/instructure/instructure-ui/commit/b0c2691))
+* **ui-utils:** speed up pickProps and omitProps ([e286ef6](https://github.com/instructure/instructure-ui/commit/e286ef6)), closes [/github.com/FormidableLabs/victory/issues/956#issuecomment-377567239](https://github.com//github.com/FormidableLabs/victory/issues/956/issues/issuecomment-377567239)
+
+
+
+
+
 <a name="5.21.0"></a>
 # [5.21.0](https://github.com/instructure/instructure-ui/compare/v5.20.1...v5.21.0) (2018-07-25)
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.22.0"></a>
+# [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
+
+
+### Features
+
+* **ui-presets:** Separate out node test from karma ([01aea24](https://github.com/instructure/instructure-ui/commit/01aea24))
+
+
+
+
+
 <a name="5.21.0"></a>
 # [5.21.0](https://github.com/instructure/instructure-ui/compare/v5.20.1...v5.21.0) (2018-07-25)
 
