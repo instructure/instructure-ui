@@ -27,7 +27,8 @@ const Testbed = require('@instructure/ui-testbed')
 global.Testbed = Testbed
 Testbed.init()
 
-require('@instructure/ui-themes/lib/canvas')
+const theme = require('@instructure/ui-themes/lib/canvas').default
+theme.use({ accessible: true })
 
 const testsContext = require.context('./src', true, /\.test\.js$/)
 testsContext.keys().forEach(testsContext)

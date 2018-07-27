@@ -138,18 +138,23 @@ export const makeTheme = ({
   immutable,
   description
 }) => {
+  const themeKey = key || uid()
   return {
-    key: key || uid(),
+    key: themeKey,
     variables,
     immutable,
     description,
     use: function ({ accessible, overrides } = {}) {
       if (accessible) {
-        warning(a11y, `[themeable] No accessible theme provided for ${key}.`)
-        setDefaultTheme(a11y.key, null, true)
+        warning(a11y, `[themeable] No accessible theme provided for ${themeKey}.`)
+        if (a11y && a11y.key) {
+          setDefaultTheme(a11y.key, null, true)
+        }
       } else {
-        warning(variables, `Invalid theme.`)
-        setDefaultTheme(key, overrides, false)
+        warning(variables && themeKey, `Invalid theme.`)
+        if (themeKey) {
+          setDefaultTheme(themeKey, overrides, false)
+        }
       }
     }
   }

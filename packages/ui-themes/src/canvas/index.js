@@ -30,7 +30,7 @@ import { key, variables } from './base'
 const theme = registerTheme({
   key,
   variables,
-  a11y: highContrast
+  a11y: {...highContrast}
 })
 
 theme.use()
