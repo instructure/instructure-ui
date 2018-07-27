@@ -159,18 +159,6 @@ class Button extends Component {
     return isActiveElement(this._button)
   }
 
-  get hasVisibleChildren () {
-    return hasVisibleChildren(this.props.children)
-  }
-
-  get hasTextAndIcon () {
-    return this.hasVisibleChildren && this.props.icon // any button with an icon + text label
-  }
-
-  get hasOnlyIcon () {
-    return !this.hasVisibleChildren && this.props.icon // any button with just an icon visible
-  }
-
   focus () {
     findDOMNode(this._button).focus() // eslint-disable-line react/no-find-dom-node
   }
@@ -194,13 +182,13 @@ class Button extends Component {
     }
   }
 
-  buttonWidth () {
+  buttonWidth (hasOnlyIcon) {
     const {
       variant,
       fluidWidth
     } = this.props
 
-    if (this.hasOnlyIcon || squareVariants.includes(variant)) {
+    if (hasOnlyIcon || squareVariants.includes(variant)) {
       return 'icon'
     } else if (fluidWidth) {
       return 'fluid'
@@ -225,6 +213,10 @@ class Button extends Component {
       variant
     } = this.props
 
+    const IHaveVisibleChildren = hasVisibleChildren(this.props.children)
+    const hasTextAndIcon = IHaveVisibleChildren && this.props.icon // any button with an icon + text label
+    const hasOnlyIcon = !IHaveVisibleChildren && this.props.icon // any button with just an icon visible
+
     if (process.env.NODE_ENV !== 'production') {
       // show warning if icon is added as a child
       if (this.hasVisibleChildren) {
@@ -238,6 +230,8 @@ class Button extends Component {
       }
     }
 
+
+
     return (
       <View
         {...omitProps(this.props, { ...Button.propTypes, ...View.propTypes })}
@@ -245,7 +239,7 @@ class Button extends Component {
           [styles.root]: true,
           [styles[variant]]: true,
           [styles[size]]: size,
-          [styles[`width--${this.buttonWidth()}`]]: true,
+          [styles[`width--${this.buttonWidth(hasOnlyIcon)}`]]: true,
           [styles[`borderRadius--${this.buttonBorderRadius()}`]]: true,
           [styles.disabled]: disabled,
           [styles['has-icon']]: icon
@@ -266,7 +260,7 @@ class Button extends Component {
         as={this.elementType}
         margin={margin}
       >
-        {this.hasTextAndIcon ? (
+        {hasTextAndIcon ? (
           <Flex height="100%" width="100%">
             <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
             <FlexItem grow shrink>

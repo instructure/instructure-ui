@@ -351,15 +351,11 @@ export default class TabList extends Component {
   }
 
   render () {
-    const classes = {
-      className: classnames({
-        [styles[this.props.variant]]: true
-      })
-    }
-
     return (
       <View
-        {...classes}
+        className={classnames({
+          [styles[this.props.variant]]: true
+        })}
         maxWidth={this.theme[this.props.size]}
         margin={this.props.margin}
         role="tablist"
