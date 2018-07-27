@@ -43,6 +43,12 @@ import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroug
 import styles from './styles.css'
 import theme from './theme'
 
+/**
+---
+category: components/layout
+---
+@module View
+**/
 class View extends Component {
   static propTypes = {
     /**
@@ -271,11 +277,6 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-/**
----
-category: components/layout
----
-**/
 export default deprecated('5.4.0', {size: 'maxWidth'})(
 bidirectional()(
 themeable(theme, styles)(

@@ -28,8 +28,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **ui-i18n:** cache the default "dir" lookup ([ac746a8](https://github.com/instructure/instructure-ui/commit/ac746a8))
 * **ui-layout:** avoid View::verifySpanMargin check in prod ([b0c2691](https://github.com/instructure/instructure-ui/commit/b0c2691))
 * **ui-utils:** a faster uid() ([d0fc68e](https://github.com/instructure/instructure-ui/commit/d0fc68e))
-* **ui-utils:** speed up pickProps and omitProps ([e286ef6](https://github.com/instructure/instructure-ui/commit/e286ef6)), closes [/github.com/FormidableLabs/victory/issues/956#issuecomment-377567239](https://github.com//github.com/FormidableLabs/victory/issues/956/issues/issuecomment-377567239)
-
+* **ui-utils:** speed up pickProps and omitProps ([e286ef6](https://github.com/instructure/instructure-ui/commit/e286ef6))
 
 
 
