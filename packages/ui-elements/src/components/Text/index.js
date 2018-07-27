@@ -100,7 +100,6 @@ export default class Text extends Component {
 
   render() {
     const {
-      as,
       weight,
       fontStyle,
       size,
@@ -108,15 +107,14 @@ export default class Text extends Component {
       letterSpacing,
       transform,
       color,
-      children,
-      ...propsToPassThrough
+      children
     } = this.props
 
     const ElementType = getElementType(Text, this.props)
 
     return (
       <ElementType
-        {...propsToPassThrough}
+        {...omitProps(this.props, Text.propTypes)}
         className={classnames({
           [styles.root]: true,
           [styles[size]]: size,
