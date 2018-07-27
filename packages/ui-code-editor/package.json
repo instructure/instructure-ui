@@ -33,8 +33,10 @@
     "classnames": "^2",
     "codemirror": "^5.39.0",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15 || ^16",
     "react-codemirror2": "^5.1.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

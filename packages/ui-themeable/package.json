@@ -29,8 +29,10 @@
     "@instructure/ui-utils": "^5.21.0",
     "glamor": "^2.20.37",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15 || ^16",
     "tinycolor2": "^1.4.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

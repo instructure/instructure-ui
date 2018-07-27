@@ -11831,7 +11831,7 @@ react-dom@15.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-"react-dom@^0.14.9 || ^15", "react-dom@^0.14.9 || ^15 || ^16":
+"react-dom@^0.14.9 || ^15 || ^16":
   version "15.6.2"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-15.6.2.tgz#41cfadf693b757faf2708443a1d1fd5a02bef730"
   dependencies:
@@ -11939,7 +11939,7 @@ react-style-proptype@^3.0.0:
   dependencies:
     prop-types "^15.5.4"
 
-react-test-renderer@15.6.2:
+react-test-renderer@^15:
   version "15.6.2"
   resolved "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-15.6.2.tgz#d0333434fc2c438092696ca770da5ed48037efa8"
   dependencies:
@@ -11980,7 +11980,7 @@ react@15.4.1:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-"react@^0.14.9 || ^15", "react@^0.14.9 || ^15 || ^16":
+"react@^0.14.9 || ^15 || ^16":
   version "15.6.2"
   resolved "https://registry.npmjs.org/react/-/react-15.6.2.tgz#dba0434ab439cfe82f108f0f511663908179aa72"
   dependencies:

@@ -36,7 +36,9 @@
     "@instructure/ui-utils": "^5.21.0",
     "classnames": "^2",
     "keycode": "^2",
-    "prop-types": "^15",
+    "prop-types": "^15"
+  },
+  "peerDependencies": {
     "react": "^0.14.9 || ^15 || ^16",
     "react-dom": "^0.14.9 || ^15 || ^16"
   },
