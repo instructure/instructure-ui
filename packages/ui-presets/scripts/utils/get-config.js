@@ -21,15 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 const { getPackageJSON } = require('@instructure/pkg-util')
 
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
-
-const { main } = getPackageJSON()
-const commands = {
-  node: getCommand('node', [main || 'lib/index.js'], [])
+exports.getConfig = function getConfig (pkgJSON) {
+  pkgJSON = pkgJSON || getPackageJSON() // eslint-disable-line no-param-reassign
+  return (pkgJSON.config && pkgJSON.config['ui-scripts']) ? pkgJSON.config['ui-scripts'] : {}
 }
-
-const result = runCommandsConcurrently(commands)
-
-process.exit(result.status)

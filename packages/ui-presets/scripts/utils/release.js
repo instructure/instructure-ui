@@ -25,9 +25,11 @@
 const fs = require('fs')
 const path = require('path')
 
+const { getPackageJSON } = require('@instructure/pkg-util')
+
 const { runCommandAsync, resolveBin } = require('./command')
 const { confirm } = require('./confirm')
-const { getPackageJSON } = require('./get-package')
+
 const {
   hasJiraConfig,
   getIssuesInRelease,

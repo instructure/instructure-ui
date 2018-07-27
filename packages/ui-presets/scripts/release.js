@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { getPackageJSON } = require('@instructure/pkg-util')
 
 const { release } = require('./utils/release')
 const { error } = require('./utils/logger')
-const { getPackageJSON, getConfig } = require('./utils/get-package')
+const { getConfig } = require('./utils/get-config')
 
 try {
   const pkgJSON = getPackageJSON()

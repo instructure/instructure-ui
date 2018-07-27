@@ -26,6 +26,6 @@ RUN yarn config set no-progress true \
 
 COPY --chown=docker:docker .yarnrc package.json yarn.lock $APP_HOME/
 
-RUN yarn --ignore-scripts --pure-lockfile
+RUN yarn --ignore-scripts --frozen-lockfile
 
 COPY --chown=docker:docker . $APP_HOME/

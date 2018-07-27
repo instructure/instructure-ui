@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const ghpages = require('gh-pages')
-const { runCommandAsync } = require('./command')
-const { getPackageJSON } = require('./get-package')
-const { error, info } = require('./logger')
 const fs = require('fs')
+const ghpages = require('gh-pages')
+const { getPackageJSON } = require('@instructure/pkg-util')
+
+const { runCommandAsync } = require('./command')
+const { error, info } = require('./logger')
 
 const {
  GIT_REMOTE_URL,

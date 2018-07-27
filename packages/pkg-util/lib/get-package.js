@@ -21,15 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { readPkgUp } = require('@instructure/pkg-util')
+const readPkgUp = require('read-pkg-up')
 const fs = require('fs')
 
-exports.getPackageJSON = function getPackageJSON () {
+const getPackage = exports.getPackage = () => {
   return readPkgUp.sync({
     cwd: fs.realpathSync(process.cwd()),
-  }).pkg
+    normalize: false
+  })
 }
 
-exports.getConfig = function getConfig (pkgJSON = {}) {
-  return (pkgJSON.config && pkgJSON.config['ui-scripts']) ? pkgJSON.config['ui-scripts'] : {}
+exports.getPackageJSON = () => {
+  return getPackage().pkg
+}
+
+exports.getPackagePath = () => {
+  return getPackage().path
 }

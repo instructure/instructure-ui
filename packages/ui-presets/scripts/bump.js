@@ -24,13 +24,12 @@
 
 const { error } = require('./utils/logger')
 const { bump } = require('./utils/release')
-const { getPackageJSON, getConfig } = require('./utils/get-package')
+const { getConfig } = require('./utils/get-config')
 
 try {
-  const pkgJSON = getPackageJSON()
   // optional release type argument: major, minor, patch
   // ui-scripts --bump major
-  bump(process.argv[3], getConfig(pkgJSON))
+  bump(process.argv[3], getConfig())
 } catch (err) {
   error(err)
   process.exit(1)

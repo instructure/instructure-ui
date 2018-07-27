@@ -21,8 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { getPackageJSON } = require('@instructure/pkg-util')
 
-const { getPackageJSON, getConfig } = require('./utils/get-package')
+const { getConfig } = require('./utils/get-config')
 const { postPublish } = require('./utils/release')
 const { error } = require('./utils/logger')
 
