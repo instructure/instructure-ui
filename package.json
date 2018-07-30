@@ -57,6 +57,10 @@
     "review:screenshots": "lerna run review:screenshots --stream --scope docs-examples"
   },
   "license": "MIT",
+  "resolutions": {
+    "react": "15.6.2",
+    "react-dom": "15.6.2"
+  },
   "devDependencies": {
     "husky": "v1.0.0-rc.8",
     "lerna": "3.0.0-beta.21",
