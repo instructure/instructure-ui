@@ -25,10 +25,7 @@
 module.exports = function transformCSSRequire (tokens, css) {
   return `{
       template: function (theme) {
-        const tmpl = function () {
-          return \`${css}\`
-        }
-        return tmpl.call(theme, theme)
+        return \`${css}\`
       },
       ${Object.keys(tokens).map(key => `'${key}': '${tokens[key]}'`).join(',\n')}
     }`

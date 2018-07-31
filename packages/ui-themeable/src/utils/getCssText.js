@@ -64,7 +64,7 @@ export function getCssTextWithVariables (template, variables, prefix) {
   let cssText = template(variableNames)
 
   // inject values for @custom-media rules (https://www.w3.org/TR/2016/WD-mediaqueries-4-20160126/#custom-mq)
-  const customMedia = variables ? formatVariableNames(variables) : {}
+  const customMedia = variables ? () => formatVariableNames(variables) : {}
   cssText = applyCustomMediaToCss(cssText, customMedia)
 
   const cssVariablesString = variables ? formatVariableNames(variables, prefix) : ''
@@ -78,19 +78,18 @@ export function getCssTextWithVariables (template, variables, prefix) {
   return cssText
 }
 
-function variablesToCSSText (variables) {
-  const names = Object.keys(variables || {})
-  const rules = names
-    .filter(name => typeof variables[name] !== 'undefined')
-    .map((name) => {
-      return `${name}: ${variables[name]}`
-    })
-    .join(';\n')
+function variablesToCSSText (variables = {}) {
+  const rules = []
+  for (const key in variables) {
+    if (Object.prototype.hasOwnProperty.call(variables, key) && typeof variables[key] !== 'undefined') {
+      rules.push(`${key}: ${variables[key]}`)
+    }
+  }
 
-  if (names.length > 0) {
+  if (rules.length > 0) {
     return `
       :root {
-        ${rules};
+        ${rules.join(';\n')};
       }
     `
   } else {

@@ -66,7 +66,7 @@ export function toRules (cssText) {
 
   if (node.rules && node.rules.length > 0) {
     rules = node.rules
-      .filter((rule) => filterUnusedVendorRule(rule.selector))
+      .filter(filterUnusedVendorRule)
       .map((rule) => toCssText(rule))
   } else {
     const cssText = toCssText(node)
@@ -118,18 +118,15 @@ function toCssText (node, text) {
   return result
 }
 
-function filterUnusedVendorRule (selector) {
-  if (!(Browser.msedge || Browser.msie) && selector.indexOf('-ms-') > -1) {
-    return false
-  }
+const filterUnusedVendorRule = (() => {
+  const ms = '-ms-'
+  const moz = '-moz-'
+  const webkit = '-webkit-'
 
-  if (!(Browser.webkit || Browser.msedge || Browser.blink) && selector.indexOf('-webkit-') > -1) {
-    return false
-  }
-
-  if (!Browser.gecko && selector.indexOf('-moz-') > -1) {
-    return false
-  }
-
-  return true
-}
+  if (Browser.blink) return ({selector}) => !(selector.includes(ms) || selector.includes(moz))
+  if (Browser.webkit) return ({selector}) => !(selector.includes(ms) || selector.includes(moz))
+  if (Browser.gecko) return ({selector}) => !(selector.includes(ms) || selector.includes(webkit))
+  if (Browser.msedge) return ({selector}) => !(selector.includes(moz))
+  if (Browser.msie) return ({selector}) => !(selector.includes(moz) || selector.includes(webkit))
+  return () => true
+})()

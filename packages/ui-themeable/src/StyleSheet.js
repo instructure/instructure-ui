@@ -90,7 +90,7 @@ function inject () {
 }
 
 function createSheet () {
-  const sheet = new GlamorStyleSheet({ speedy: !debug, maxLength: 40 })
+  const sheet = new GlamorStyleSheet({ speedy: !debug })
   sheet.inject()
   return sheet
 }
