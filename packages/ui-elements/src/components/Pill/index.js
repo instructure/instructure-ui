@@ -27,6 +27,12 @@ import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
+/* eslint-disable instructure-ui/no-relative-package-imports */
+import Tooltip from '../../../../ui-overlays/lib/components/Tooltip'
+/* eslint-enable instructure-ui/no-relative-package-imports */
+
+import TruncateText from '../TruncateText'
+
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -60,6 +66,20 @@ class Pill extends Component {
     variant: 'default'
   }
 
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      truncated: false
+    }
+  }
+
+  handleTruncation (truncated) {
+    this.setState({
+      truncated: truncated
+    })
+  }
+
   render () {
     const {
       margin,
@@ -76,21 +96,36 @@ class Pill extends Component {
       [styles[variant]]: variant
     })
 
-    return (
+    const pill = (
       <View
         {...props}
         className={classes}
         as={as}
         elementRef={elementRef}
         margin={margin}
-        title={text}
         display="inline-flex"
       >
         <span className={styles.text}>
-          {text}
+          <TruncateText
+            onUpdate={(truncated) => {
+              this.handleTruncation(truncated)
+            }}
+          >
+            {text}
+          </TruncateText>
         </span>
       </View>
     )
+
+    if (this.state.truncated) {
+      return (
+        <Tooltip tip={text}>
+          {pill}
+        </Tooltip>
+      )
+    } else {
+      return pill
+    }
   }
 }
 

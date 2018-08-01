@@ -23,6 +23,9 @@
  */
 
 import React from 'react'
+/* eslint-disable instructure-ui/no-relative-package-imports */
+import Tooltip from '../../../../../ui-overlays/lib/components/Tooltip'
+/* eslint-enable instructure-ui/no-relative-package-imports */
 import View from '@instructure/ui-layout/lib/components/View'
 import Pill from '../index'
 import styles from '../styles.css'
@@ -39,6 +42,18 @@ describe('<Pill />', () => {
     const subject = testbed.render()
     const textSpan = subject.find(`span.${styles.text}`)
     expect(textSpan.text()).to.equal('Overdue')
+  })
+
+  it('should render a Tooltip when text overflows max-width', () => {
+    const pill = testbed.render({
+      text: 'hello'
+    })
+    expect(pill.find(Tooltip)).to.not.exist
+
+    const overflowPill = testbed.render({
+      text: 'some really super incredibly long text that will force overflow'
+    })
+    expect(overflowPill.find(Tooltip)).to.exist
   })
 
   describe('when passing down props to View', () => {

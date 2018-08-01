@@ -10,6 +10,10 @@
   border-style: var(--borderStyle);
   height: var(--height);
   border-radius: 1rem;
+
+  &:focus {
+    outline: none; /* only becomes focusable when text truncation causes Tooltip to render */
+  }
 }
 
 .text {
@@ -23,9 +27,6 @@
   flex: 1 0 auto;
   line-height: 1;
   text-align: center;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .default {
