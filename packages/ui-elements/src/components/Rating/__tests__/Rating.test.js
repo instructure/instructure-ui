@@ -34,23 +34,6 @@ describe('<Rating />', () => {
     <Rating label="Course rating" />
   )
 
-  it('should have a title attribute', () => {
-    const subject = testbed.render()
-    expect(subject.getAttribute('title')).to.equal('Course rating')
-  })
-
-  it('should format screenreader text via formatValueText prop', () => {
-    const subject = testbed.render({
-      formatValueText: function (current, max) {
-        return `${current} out of ${max}`
-      },
-      iconCount: 5,
-      valueNow: 89,
-      valueMax: 100
-    })
-    expect(subject.getAttribute('aria-valuetext')).to.equal('4 out of 5')
-  })
-
   it('should render the correct number of icons', () => {
     const subject = testbed.render({
       iconCount: 5
@@ -131,8 +114,34 @@ describe('<Rating />', () => {
     })
   })
 
+  it('should set the required aria attribute values', () => {
+    const subject = testbed.render({
+      label: 'Course rating',
+      formatValueText: function (current, max) {
+        return `${current} out of ${max}`
+      },
+      iconCount: 5,
+      valueNow: 89,
+      valueMax: 100
+    })
+    // see https://www.w3.org/TR/wai-aria-1.1/#slider
+    expect(subject.getAttribute('role')).to.equal('slider')
+    expect(subject.getAttribute('aria-readonly')).to.equal('true')
+    expect(subject.getAttribute('aria-label')).to.equal('Course rating')
+    expect(subject.getAttribute('aria-valuenow')).to.equal('4')
+    expect(subject.getAttribute('aria-valuemax')).to.equal('5')
+    expect(subject.getAttribute('aria-valuemin')).to.equal('0')
+    expect(subject.getAttribute('aria-valuetext')).to.equal('4 out of 5')
+  })
+
   it('should meet a11y standards', (done) => {
     const subject = testbed.render()
-    subject.should.be.accessible(done)
+    // this will keep failing erroneously until the next release of axe-core
+    // https://github.com/dequelabs/axe-core/pull/964/commits/0a54a2380fc81a2da75ce2da18b184b8ebba1368
+    // so we'll test the attributes above and ignore that rule for now
+    subject.should.be.accessible(done, {
+      // TODO: remove this ignore when we upgrade axe-core
+      ignores: ['aria-allowed-attr']
+    })
   })
 })

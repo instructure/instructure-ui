@@ -133,11 +133,13 @@ class Rating extends Component {
         {...omitProps(this.props, { ...Rating.propTypes, ...View.propTypes })}
         className={classnames(classes)}
         margin={margin}
-        role="progressbar"
+        role="slider"
         aria-valuetext={valueText}
         aria-valuenow={this.filled}
         aria-valuemax={this.props.iconCount}
-        title={this.props.label}
+        aria-valuemin={0}
+        aria-label={this.props.label}
+        aria-readonly="true"
         display="inline-block"
       >
         {
