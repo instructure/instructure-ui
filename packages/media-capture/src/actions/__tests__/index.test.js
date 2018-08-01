@@ -25,6 +25,7 @@ import * as types from '../../constants/ActionTypes'
 import * as actions from '../index'
 
 describe('mediaCapture actions', () => {
+  const testbed = new Testbed()
   it('audioDeviceChanged should create AUDIO_DEVICE_CHANGED action', () => {
     expect(actions.audioDeviceChanged('102nsdfsdf02')).to.deep.equal({
       type: types.AUDIO_DEVICE_CHANGED,
@@ -33,7 +34,7 @@ describe('mediaCapture actions', () => {
   })
 
   it('closeClicked should create CLOSE_CLICKED action', () => {
-    const dispatch = sinon.stub()
+    const dispatch = testbed.stub()
     actions.closeClicked()(dispatch)
     expect(dispatch).to.have.been.calledWith({
       type: types.CLOSE_CLICKED
@@ -47,7 +48,7 @@ describe('mediaCapture actions', () => {
   })
 
   it('finishClicked should create FINISH_CLICKED action', () => {
-    const dispatch = sinon.stub()
+    const dispatch = testbed.stub()
     actions.finishClicked()(dispatch)
     expect(dispatch).to.have.been.called
   })
@@ -79,7 +80,7 @@ describe('mediaCapture actions', () => {
   })
 
   it('saveClicked should dispatch SAVE_CLICKED action', () => {
-    const dispatch = sinon.stub()
+    const dispatch = testbed.stub()
     actions.saveClicked('file')(dispatch)
     expect(dispatch).to.have.been.calledWith({
       type: types.SAVE_CLICKED,
@@ -116,7 +117,7 @@ describe('mediaCapture actions', () => {
   })
 
   it('devicesFound should create DEVICES_FOUND action', () => {
-    const dispatch = sinon.stub()
+    const dispatch = testbed.stub()
     const devices = { audioinput: [{ deviceId: 'default' }, { label: 'default:' }], videoinput: [{ label: 'id1', deviceId: '12345' }] }
     actions.devicesFound(devices, { label: 'id1' })(dispatch)
     expect(dispatch).to.have.been.calledWith({

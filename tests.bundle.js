@@ -21,14 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const React = require('react')
-const theme = require('./packages/ui-themes/lib/canvas').default
-
-theme.use({ accessible: true })
-
-global.Testbed = require('./packages/ui-testbed')
-global.Testbed.init()
-
-console.log('REACT VERSION: ', React.version)
-
-require('!!karma-tests-loader?pattern=packages/**/*.test.js&ignore[]=packages/ui-codemods/**&ignore[]=packages/ui-core/**!')
+require('./packages/ui-themes/lib/canvas')
+require('!!karma-tests-loader!')

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-util')
+const { getPackageJSON } = require('@instructure/pkg-utils')
 
 const { runCommandsConcurrently, getCommand } = require('../utils/command')
 

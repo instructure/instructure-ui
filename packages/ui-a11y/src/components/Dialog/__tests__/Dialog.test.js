@@ -44,7 +44,7 @@ describe('<Dialog />', () => {
     const subject = testbed.render({
       open: true
     })
-    expect(subject).to.include.text('Hello World')
+    expect(subject.find('button')).to.exist
   })
 
   it('should apply the a11y attributes', () => {

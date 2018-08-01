@@ -46,7 +46,6 @@ module.exports = {
   },
   globals: {
     expect: true,
-    sinon: true,
     Testbed: true
   },
   parser: 'babel-eslint',

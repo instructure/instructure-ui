@@ -1,5 +1,5 @@
 {
-  "name": "@instructure/pkg-util",
+  "name": "@instructure/pkg-utils",
   "version": "5.22.0",
   "description": "Utilities for managing node packages in a monorepo.",
   "author": "Instructure, Inc. Engineering and Product Design",

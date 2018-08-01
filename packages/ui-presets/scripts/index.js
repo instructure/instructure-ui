@@ -39,7 +39,8 @@ const commands = [
   '--commit',
   '--lint',
   '--lint-commit',
-  '--clean'
+  '--clean',
+  '--install-react'
 ]
 
 function listCommands () {
@@ -72,6 +73,8 @@ if (process.argv.includes('--help')) {
   require('./test/lint')
 } else if (process.argv.includes('--clean')) {
   require('./build/clean')
+} else if (process.argv.includes('--install-react')) {
+  require('./install-react')
 } else {
   error('[ui-scripts]: Invalid command!')
   listCommands()

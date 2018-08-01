@@ -24,8 +24,10 @@
 import SoundMeter from '../soundMeter'
 
 describe('SoundMeter', () => {
-  const closeStub = sinon.stub()
-  const disconnectStub = sinon.stub()
+  const testbed = new Testbed()
+
+  const closeStub = testbed.stub()
+  const disconnectStub = testbed.stub()
   const audioContext = () => {
     return {
       createScriptProcessor: () => {

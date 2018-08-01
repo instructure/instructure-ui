@@ -26,7 +26,7 @@
     "@instructure/canvas-supported-browsers": "^1",
     "@instructure/config-loader": "^5",
     "@instructure/cz-lerna-changelog": "^5",
-    "@instructure/pkg-util": "^5",
+    "@instructure/pkg-utils": "^5",
     "@instructure/postcss-themeable-styles": "^5",
     "autoprefixer": "^8.6.5",
     "babel-cli": "^6.26.0",
@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^7.9.1",
     "file-loader": "^1.1.5",
     "gh-pages": "^1.2.0",
-    "glob": "^7.1.2",
+    "globby": "^7.1.1",
     "happypack": "^5.0.0",
     "jira-client": "^6.4.1",
     "karma": "^2.0.4",
@@ -96,6 +96,9 @@
     "webpack": "^3",
     "webpack-dev-server": "^2.11.0",
     "which": "^1.3.1"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

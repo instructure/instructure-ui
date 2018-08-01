@@ -21,46 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const fs = require('fs')
 const path = require('path')
-const { getPackagePath, getPackages, getChangedPackages } = require('@instructure/pkg-util')
-const { getCommand, runCommandsConcurrently, runCommandSync } = require('../utils/command')
+const React = require('react')
+const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
+const { getCommand, runCommandsConcurrently } = require('../utils/command')
 
-const vars = ['NODE_ENV=test']
+const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`]
 const { argv } = process
 
 if (argv.includes('--watch')) {
   vars.push('DEBUG=1')
 } else {
   vars.push('COVERAGE=1')
-}
-
-const reactArgIndex = argv.indexOf('--react')
-if (reactArgIndex > 0) {
-  const version = argv[reactArgIndex + 1]
-  if (['15', '16'].includes(version)) {
-    const packagePath = getPackagePath()
-    const pkgJSON = JSON.parse(fs.readFileSync(packagePath))
-    const originalResolutions = pkgJSON.resolutions
-
-    pkgJSON.resolutions = {
-      ...(originalResolutions || {}),
-      'react': version,
-      'react-dom': version
-    }
-
-    fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
-
-    try {
-      runCommandSync('yarn', ['--pure-lockfile'])
-    } catch (err) {
-      console.error(err)
-      process.exit(1)
-    }
-
-    pkgJSON.resolutions = originalResolutions
-    fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
-  }
 }
 
 const scopeArgIndex = argv.indexOf('--scope')

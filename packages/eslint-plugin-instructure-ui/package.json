@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/pkg-util": "^5",
+    "@instructure/pkg-utils": "^5",
     "eslint-module-utils": "^2.2.0",
     "eslint-plugin-import": "^2.13.0"
   },

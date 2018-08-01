@@ -2,7 +2,7 @@
 category: packages
 ---
 
-## pkg-util
+## pkg-utils
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
@@ -14,11 +14,11 @@ Utilities for managing node packages in a monorepo.
 ### Installation
 
 ```sh
-yarn add @instructure/pkg-util
+yarn add @instructure/pkg-utils
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/pkg-util.svg
-[npm-url]: https://npmjs.com/package/@instructure/pkg-util
+[npm]: https://img.shields.io/npm/v/@instructure/pkg-utils.svg
+[npm-url]: https://npmjs.com/package/@instructure/pkg-utils
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

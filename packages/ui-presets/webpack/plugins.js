@@ -25,7 +25,7 @@
 const webpack = require('webpack')
 const HappyPack = require('happypack')
 
-const { readPkgUp } = require('@instructure/pkg-util')
+const { readPkgUp } = require('@instructure/pkg-utils')
 
 const loadConfig = require('@instructure/config-loader')
 const { generateScopedName } = loadConfig('themeable', require('../themeable'))

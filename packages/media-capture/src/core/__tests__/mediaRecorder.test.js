@@ -26,6 +26,7 @@ import { tools } from 'ts-ebml'
 import MediaFile, { startMediaRecorder } from '../mediaRecorder'
 
 describe('MediaRecorder', () => {
+  const testbed = new Testbed()
   window.audioContext = new AudioContext()
 
   const getMedia = () => {
@@ -41,19 +42,19 @@ describe('MediaRecorder', () => {
   }
 
   it('invokes the initialization callback', () => {
-    const onInitSpy = sinon.stub()
+    const onInitSpy = testbed.stub()
 
     startMediaRecorder(getMedia().stream, onInitSpy)
     expect(onInitSpy).to.have.been.called
   })
 
   describe('MediaFile', () => {
-    const successStub = sinon.stub()
-    const errorStub = sinon.stub()
+    const successStub = testbed.stub()
+    const errorStub = testbed.stub()
     const mediaFile  = new MediaFile(getMedia().stream, 'video/webm', successStub, errorStub)
 
     describe('#readAsArrayBuffer', (done) => {
-      const frReadAsArrayBufferSpy = sinon.spy(FileReader.prototype, 'readAsArrayBuffer')
+      const frReadAsArrayBufferSpy = testbed.spy(FileReader.prototype, 'readAsArrayBuffer')
       it("uses FileReader's readAsArrayBuffer to make the blob consumable by ebml", () => {
         mediaFile.readAsArrayBuffer('12345').then(() => {
           expect(frReadAsArrayBufferSpy.calledWith('12345')).to.be.true
@@ -62,15 +63,15 @@ describe('MediaRecorder', () => {
       })
     })
 
-    const ebmlDecoderStub = sinon.stub(mediaFile.decoder, 'decode')
+    const ebmlDecoderStub = testbed.stub(mediaFile.decoder, 'decode')
     ebmlDecoderStub.returns(['elm1', 'elm2', 'elm3'])
 
-    const ebmlReaderStub = sinon.stub(mediaFile.reader, 'read')
+    const ebmlReaderStub = testbed.stub(mediaFile.reader, 'read')
 
-    const makeMetadataSeekableStub = sinon.stub(tools, 'makeMetadataSeekable')
+    const makeMetadataSeekableStub = testbed.stub(tools, 'makeMetadataSeekable')
     makeMetadataSeekableStub.returns('seekableMetadatas')
 
-    const readAsArrayBufferStub = sinon.stub(mediaFile, 'readAsArrayBuffer')
+    const readAsArrayBufferStub = testbed.stub(mediaFile, 'readAsArrayBuffer')
     readAsArrayBufferStub.returns(Promise.resolve([0, 1, 2, 3, 4]))
 
     it('decodes and reads the chunks emitted by the mediaRecorder', (done) => {
@@ -82,15 +83,15 @@ describe('MediaRecorder', () => {
       .then(() => {
         expect(ebmlDecoderStub.callCount).to.eql(3)
         expect(ebmlReaderStub.callCount).to.eql(9)
-        done()
       })
+      .finally(done)
     })
 
     it('invokes the success callback when stopped', (done) => {
       mediaFile.onStop().then(() => {
         expect(successStub).to.have.been.called
-        done()
       })
+      .finally(done)
     })
 
     it('invokes the error callback with an error', () => {

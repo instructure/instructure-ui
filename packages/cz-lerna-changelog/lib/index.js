@@ -26,7 +26,7 @@ const commitAnalyzer = require('@semantic-release/commit-analyzer')
 const chalk = require('chalk')
 const buildCommit = require('cz-customizable/buildCommit')
 const autocomplete = require('inquirer-autocomplete-prompt')
-const { getPackages, getChangedPackages } = require('@instructure/pkg-util')
+const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
 const makeDefaultQuestions = require('./make-default-questions')
 const autocompleteQuestions = require('./autocomplete-questions')
 

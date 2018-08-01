@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { getPackageJSON } = require('@instructure/pkg-util')
+const { getPackageJSON } = require('@instructure/pkg-utils')
 
 exports.getConfig = function getConfig (pkgJSON) {
   pkgJSON = pkgJSON || getPackageJSON() // eslint-disable-line no-param-reassign

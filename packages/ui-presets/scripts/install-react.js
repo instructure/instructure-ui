@@ -21,17 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
+const fs = require('fs')
+const { getPackagePath } = require('@instructure/pkg-utils')
+const { runCommandSync } = require('./utils/command')
 
-const { deployDocs } = require('./utils/release')
-const { error } = require('./utils/logger')
+const { argv } = process
 
-const { getConfig } = require('./utils/get-config')
+const version = argv[argv.indexOf('--install-react') + 1]
+
+let packagePath, pkgJSON, originalResolutions
+
+if (['15', '16'].includes(version)) {
+  packagePath = getPackagePath()
+  pkgJSON = JSON.parse(fs.readFileSync(packagePath))
+  originalResolutions = pkgJSON.resolutions
+
+  pkgJSON.resolutions = {
+    ...(originalResolutions || {}),
+    'react': version,
+    'react-dom': version
+  }
+
+  fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
+}
 
 try {
-  const pkgJSON = getPackageJSON()
-  deployDocs(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
+  runCommandSync('yarn', ['--pure-lockfile'])
 } catch (err) {
-  error(err)
+  console.error(err)
   process.exit(1)
+}
+
+if (packagePath && pkgJSON) {
+  pkgJSON.resolutions = originalResolutions
+  fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
 }

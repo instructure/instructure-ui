@@ -23,48 +23,76 @@
  */
 const loaderUtils = require('loader-utils')
 const path = require('path')
-const glob = require('glob')
+const globby = require('globby')
+const loadConfig = require('@instructure/config-loader')
 
 module.exports = function (source, map) {
   this.cacheable && this.cacheable()
 
   const callback = this.async()
 
-  const options = loaderUtils.getOptions(this) || {}
+  const options = Object.assign({}, loadConfig('tests'), loaderUtils.getOptions(this))
+
+  const files = options.files || ['**/*.test.js']
   const ignore = (options.ignore || []).concat(['**/node_modules/**'])
   const cwd = options.cwd || process.cwd()
-  const pattern = options.pattern || '**/*.test.js'
 
-  glob(pattern, {
-    cwd,
-    strict: true,
-    absolute: true,
-    ignore,
-  }, (err, globResult) => {
-    if (err) {
-      callback(err)
-      return
-    }
+  globby(files, { ignore })
+    .then((matches) => {
+      const scopes = process.env.UI_TEST_SCOPE_PATHS
+      const allFilePaths = matches
+        .map(filePath => path.normalize(filePath))
+        .filter((testFilePath) => {
+          if (typeof scopes !== 'string') return true
+          const scopePaths = scopes.split(',').map(p => path.normalize(p.trim()))
+          return scopePaths
+            .findIndex(scopePath => (testFilePath === scopePath || testFilePath.startsWith(scopePath))) >= 0
+        })
 
-    const scopes = process.env.UI_TEST_SCOPE_PATHS
-    const testFilePaths = globResult.map(filePath => path.normalize(filePath))
-      .filter((testFilePath) => {
-        if (typeof scopes !== 'string') return true
-        const relativePath = path.relative(cwd, testFilePath)
-        const scopePaths = scopes.split(',').map(p => path.normalize(p.trim()))
-        return scopePaths
-          .findIndex(scopePath => (relativePath === scopePath || relativePath.startsWith(scopePath))) >= 0
-      })
-      .map(filePath => `require('${filePath}')`)
+      let result = ''
+      // BEGIN TODO once all of the legacy/Testbed tests are converted, remove the following:
+      const TESTBED_REMOVE_THIS = options.TESTBED_REMOVE_THIS || []
+      const matchesTestbedPath = function (filePath) {
+        return TESTBED_REMOVE_THIS.findIndex(testbedFilePath => filePath.startsWith(testbedFilePath)) >= 0
+      }
+      const testbedFilePaths = allFilePaths
+        .filter((filePath) => {
+          return matchesTestbedPath(filePath)
+        })
+      const testFilePaths = allFilePaths
+        .filter((filePath) => {
+          return !matchesTestbedPath(filePath)
+        })
 
-    let tests = ''
+      if (testbedFilePaths.length > 0 && parseFloat(process.env.REACT_VERSION) < 16) {
+        const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
+        const testbedTests = testbedFileRequires.join(';\n')
+        result = `
+  global.Testbed = require('./packages/ui-testbed');
+  global.Testbed.init();
+  ${testbedTests}
+  `
+      }
+      // END TODO (remove Testbed)
 
-    if (testFilePaths.length > 0) {
-      tests = testFilePaths.join(';\n')
-    } else {
-      tests = `describe('WHEN NO TESTS MATCH', function () { it('should pass', function () { expect(true) }) })`
-    }
+      if (testFilePaths.length > 0) {
+        const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
+        result = result + testFileRequires.join(';\n')
+      }
 
-    callback(null, tests, map)
-  })
+      if (!result) {
+        result = `
+describe('WHEN NO TESTS MATCH...', () => {
+  it('should still pass', () => {})
+})
+`
+      }
+
+      callback(null, `
+console.log('REACT VERSION', '${process.env.REACT_VERSION}');
+${result}
+`, map)
+    }).catch((error) => {
+      callback(error)
+    })
 }

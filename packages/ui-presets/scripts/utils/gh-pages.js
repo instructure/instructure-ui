@@ -23,7 +23,7 @@
  */
 const fs = require('fs')
 const ghpages = require('gh-pages')
-const { getPackageJSON } = require('@instructure/pkg-util')
+const { getPackageJSON } = require('@instructure/pkg-utils')
 
 const { runCommandAsync } = require('./command')
 const { error, info } = require('./logger')

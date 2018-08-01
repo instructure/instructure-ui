@@ -21,17 +21,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
 
-const { deployDocs } = require('./utils/release')
-const { error } = require('./utils/logger')
-
-const { getConfig } = require('./utils/get-config')
-
-try {
-  const pkgJSON = getPackageJSON()
-  deployDocs(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
-} catch (err) {
-  error(err)
-  process.exit(1)
+module.exports = {
+  files: [
+    'packages/**/*.test.js'
+  ],
+  ignore: [
+    'packages/ui-codemods/**',
+    'packages/ui-core/**'
+  ],
+  // TODO convert these to use ui-test-utils and then remove them:
+  TESTBED_REMOVE_THIS: [
+    'packages/media-capture/',
+    'packages/ui-a11y/',
+    'packages/ui-alerts/',
+    'packages/ui-billboard/',
+    'packages/ui-breadcrumb/',
+    'packages/ui-buttons/',
+    'packages/ui-code-editor/',
+    'packages/ui-container/',
+    'packages/ui-elements/',
+    'packages/ui-focusable/',
+    'packages/ui-forms/',
+    'packages/ui-i18n/',
+    'packages/ui-layout/',
+    'packages/ui-media-player/',
+    'packages/ui-menu/',
+    'packages/ui-motion/',
+    'packages/ui-navigation/',
+    'packages/ui-overlays/',
+    'packages/ui-pages/',
+    'packages/ui-pagination/',
+    'packages/ui-portal/',
+    'packages/ui-svg-images/',
+    'packages/ui-tabs/',
+    'packages/ui-themeable/',
+    'packages/ui-themes/',
+    'packages/ui-toggle-details/',
+    'packages/ui-tree-browser/',
+    'packages/ui-utils/'
+  ]
 }
