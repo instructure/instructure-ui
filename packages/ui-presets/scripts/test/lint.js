@@ -25,9 +25,32 @@
 
 const { runCommandsConcurrently, getCommand } = require('../utils/command')
 
-const commands = {
-  eslint: getCommand('eslint', process.argv.includes('--fix') ? ['.', '--fix'] : ['.']),
-  stylelint: getCommand('stylelint', process.argv.includes('--fix') ? ['**/*.css', '--fix'] : ['**/*.css'])
+const paths = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1)) || []
+let jspaths = ['.']
+let csspaths = ['**/*.css']
+
+if (paths.length) {
+  jspaths = paths.filter(p => (p.indexOf('.js') > -1))
+  csspaths = paths.filter(p => (p.indexOf('.css') > -1)) || ['**/*.css']
+
+  if (process.argv.includes('--fix')) {
+    if (jspaths.length) {
+      jspaths.push('--fix')
+    }
+    if (csspaths.length) {
+      csspaths.push('--fix')
+    }
+  }
+}
+
+let commands = {}
+
+if (jspaths.length) {
+  commands['eslint'] = getCommand('eslint', jspaths)
+}
+
+if (csspaths.length) {
+  commands['stylelint'] = getCommand('stylelint', csspaths)
 }
 
 const result = runCommandsConcurrently(commands)
