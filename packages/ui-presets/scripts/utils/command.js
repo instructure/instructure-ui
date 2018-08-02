@@ -94,13 +94,6 @@ exports.runCommandSync = function runCommandSync (bin, args = [], vars = []) {
 
 exports.runCommandAsync = async function runCommandAsync (bin, args = [], vars = []) {
   const command = getCommand(bin, args, vars)
-
-  const { stderr, stdout } = await exec(`${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
-
-  if (stderr) {
-    error(stderr)
-    throw new Error(stderr)
-  } else {
-    return stdout
-  }
+  const { stdout } = await exec(`${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
+  return stdout
 }
