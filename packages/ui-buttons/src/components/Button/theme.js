@@ -189,6 +189,9 @@ generator['canvas'] = function (variables) {
 
 generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
   return {
+    defaultBorderColor: colors.borderMedium,
+    lightBorderColor: colors.borderMedium,
+    circleDefaultBorderColor: colors.borderMedium,
     linkTextDecoration: 'underline',
     linkInverseFocusBorderColor: colors.borderLightest,
     linkFocusBorderColor: colors.borderBrand,
