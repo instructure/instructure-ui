@@ -59,11 +59,11 @@ export default function generator ({ borders, colors, forms, spacing, typography
     fontSizeSmall: typography.fontSizeXSmall,
     fontSizeMedium: typography.fontSizeSmall,
     fontSizeLarge: typography.fontSizeMedium,
-    padding: `0 ${spacing.small}`,
+    padding: `0 ${spacing.xSmall}`,
     paddingSmall: `0 ${spacing.xSmall}`,
     focusOutlineColor: colors.borderBrand,
     maxWidth: '10rem',
-    iconMargin: spacing.xxSmall,
+    iconMargin: spacing.small,
     transitionTiming: '0.2s',
 
     ...tagVariant('default', {
