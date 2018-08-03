@@ -57,7 +57,7 @@ class Pill extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary']),
+    variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
     elementRef: PropTypes.func,
     as: CustomPropTypes.elementType
   }

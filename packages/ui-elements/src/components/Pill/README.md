@@ -11,32 +11,35 @@ the component.
 example: true
 ---
 <div>
-  <div>
     <Pill
       text="Excused"
-      margin="0 0 x-small"
+      margin="x-small"
     />
-  </div>
-  <div>
     <Pill
       variant="danger"
       text="Missing"
-      margin="0 0 x-small"
+      margin="x-small"
     />
-  </div>
-  <div>
     <Pill
       variant="success"
       text="Checked In"
-      margin="0 0 x-small"
+      margin="x-small"
     />
-  </div>
-  <div>
     <Pill
       variant="primary"
       text="Draft"
+      margin="x-small"
     />
-  </div>
+    <Pill
+      variant="warning"
+      text="Late"
+      margin="x-small"
+    />
+    <Pill
+      variant="message"
+      text="Notification"
+      margin="x-small"
+    />
 </div>
 ```
 The component has a max-width, set by its theme. Any overflowing text will

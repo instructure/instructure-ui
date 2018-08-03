@@ -38,6 +38,8 @@ export default function generator ({ borders, colors, forms, spacing, typography
     primaryColor: colors.textBrand,
     dangerColor: colors.textDanger,
     successColor: colors.textSuccess,
+    warningColor: colors.textWarning,
+    messageColor: colors.textAlert,
     borderWidth: borders.widthSmall,
     borderStyle: borders.style
   }
