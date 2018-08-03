@@ -25,6 +25,20 @@ const { runCommandAsync, runCommandSync, resolveBin } = require('./command')
 const { info, error } = require('./logger')
 const validateMessage = require('validate-commit-msg')
 
+const runGitCommand = exports.runGitCommand = async function runGitCommand (args = []) {
+  let result
+
+  try {
+    const { stdout } = await runCommandAsync('git', args)
+    result = stdout.trim()
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  return result
+}
+
 exports.commit = function () {
   return runCommandSync('git-cz')
 }
@@ -37,47 +51,34 @@ exports.setupGit = async function setupGit () {
    GIT_REMOTE_NAME
   } = process.env
 
-  try {
-    await runCommandAsync('git', ['config', '--list'])
+  await runGitCommand(['config', '--list'])
 
-    const origin = GIT_REMOTE_NAME || 'origin'
+  const origin = GIT_REMOTE_NAME || 'origin'
 
-    if (GIT_REMOTE_URL) {
-      if (!await runCommandAsync('git', ['remote', '|', resolveBin('grep'), origin])) {
-        await runCommandAsync('git', ['remote', 'add', origin, GIT_REMOTE_URL])
-      } else {
-        await runCommandAsync('git', ['remote', 'set-url', origin, GIT_REMOTE_URL])
-      }
+  if (GIT_REMOTE_URL) {
+    if (!await runGitCommand(['remote', '|', resolveBin('grep'), origin])) {
+      await runGitCommand(['remote', 'add', origin, GIT_REMOTE_URL])
+    } else {
+      await runGitCommand(['remote', 'set-url', origin, GIT_REMOTE_URL])
     }
-
-    await runCommandAsync('git', ['fetch', origin, '--tags', '--force'])
-
-    if (GIT_EMAIL) {
-      await runCommandAsync('git', ['config', 'user.email', `"${GIT_EMAIL}"`])
-    }
-    if (GIT_USERNAME) {
-      await runCommandAsync('git', ['config', 'user.name', `"${GIT_USERNAME}"`])
-    }
-
-    await runCommandAsync('git', ['config', 'push.default', 'simple'])
-
-    await runCommandAsync('git', ['config', '--list'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
   }
+
+  await runGitCommand(['fetch', origin, '--tags', '--force'])
+
+  if (GIT_EMAIL) {
+    await runGitCommand(['config', 'user.email', `"${GIT_EMAIL}"`])
+  }
+  if (GIT_USERNAME) {
+    await runGitCommand(['config', 'user.name', `"${GIT_USERNAME}"`])
+  }
+
+  await runGitCommand(['config', 'push.default', 'simple'])
+
+  await runGitCommand(['config', '--list'])
 }
 
 exports.lintCommitMessage = async function lintCommitMessage () {
-  let commitMessage
-
-  try {
-    commitMessage = await runCommandAsync('git', ['log', '-1', '--pretty=%B'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
-
+  const commitMessage = await runGitCommand(['log', '-1', '--pretty=%B'])
   return validateMessage(commitMessage)
 }
 
@@ -85,11 +86,12 @@ exports.isReleaseCommit = async function isReleaseCommit (version) {
   let result
 
   try {
-    result = await runCommandAsync('git', [
+    const { stdout } = await runCommandAsync('git', [
       'log', '--oneline', '--format=%B', '-n', '1', 'HEAD', '|',
       resolveBin('head'), '-n', '1', '|',
       resolveBin('grep'), '"chore(release)"'
     ])
+    result = stdout.trim()
   } catch (e) {
     info(`Not on a release commit - this is a release candidate`)
     return false
@@ -99,14 +101,7 @@ exports.isReleaseCommit = async function isReleaseCommit (version) {
 }
 
 exports.checkWorkingDirectory = async function checkWorkingDirectory () {
-  let result
-
-  try {
-    result = await runCommandAsync('git', ['status', '--porcelain'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
+  const result = await runGitCommand(['status', '--porcelain'])
 
   if (result) {
     error(`Refusing to operate on unclean working directory!`)
@@ -117,14 +112,7 @@ exports.checkWorkingDirectory = async function checkWorkingDirectory () {
 
 exports.checkIfGitTagExists = async function checkIfGitTagExists (version) {
   const tag = `v${version}`
-  let result
-
-  try {
-    result = await runCommandAsync('git', ['tag', '--list', tag])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
+  const result = await runGitCommand(['tag', '--list', tag])
 
   if (result) {
     error(`Git tag ${tag} already exists!`)
@@ -134,17 +122,10 @@ exports.checkIfGitTagExists = async function checkIfGitTagExists (version) {
 }
 
 exports.checkIfCommitIsReviewed = async function checkIfCommitIsReviewed () {
-  let result
-
-  try {
-    result = await runCommandAsync('git', ['log', '-n', '1', '|', resolveBin('grep'), 'Reviewed-on'])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
+  const result = await runGitCommand(['log', '-n', '1', '|', resolveBin('grep'), 'Reviewed-on'])
 
   if (!result) {
-    error('The version bump commit must be merged prior to running the release!')
+    error('The release commit must be reviewed and merged prior to running the release!')
     error('Use "git pull --rebase" to pull down the latest from the remote.')
     process.exit(1)
   }
@@ -155,11 +136,33 @@ exports.createGitTagForRelease = async function createGitTagForRelease (version)
   const { GIT_REMOTE_NAME } = process.env
   const origin = GIT_REMOTE_NAME || 'origin'
 
-  try {
-    await runCommandAsync('git', ['tag', '-am', `"Version ${version}"`, tag])
-    await runCommandAsync('git', ['push', origin, tag])
-  } catch (e) {
-    error(e)
-    process.exit(1)
-  }
+  await runGitCommand(['tag', '-am', `"Version ${version}"`, tag])
+  await runGitCommand(['push', origin, tag])
+}
+
+exports.getCurrentReleaseTag = async function getCurrentReleaseTag () {
+  return runGitCommand(['describe', '--exact-match'])
+}
+
+exports.getNextReleaseTag = async function getCurrentReleaseTag () {
+  return runGitCommand(['describe', '--exact-match'])
+}
+
+const getPreviousReleaseCommit = exports.getPreviousReleaseCommit = async function getPreviousReleaseCommit () {
+  return runGitCommand(['rev-list', '--tags', '--skip=1', '--max-count=1'])
+}
+
+exports.getPreviousReleaseTag = async function getPreviousReleaseTag () {
+  const previousReleaseCommit = await getPreviousReleaseCommit()
+  return runGitCommand(['describe', '--abbrev=0', '--tags', previousReleaseCommit])
+}
+
+const getCommitDescription = exports.getCommitDescription = async function getCommitDescription () {
+  return runGitCommand(['describe', '--match', '"v[0-9]*"', '--first-parent'])
+}
+
+exports.getCommitIndex = async function getCommitIndex () {
+  const description = await getCommitDescription()
+  const { stdout } = await runCommandAsync('echo', [description, '|', resolveBin('cut'), '-d\'-\'', '-f', '2'])
+  return stdout.trim()
 }

@@ -26,7 +26,6 @@ const fs = require('fs')
 const path = require('path')
 const which = require('which')
 const spawn = require('cross-spawn')
-const { error } = require('./logger')
 const cp = require('child_process')
 const util = require('util')
 const exec = util.promisify(cp.exec)
@@ -94,6 +93,5 @@ exports.runCommandSync = function runCommandSync (bin, args = [], vars = []) {
 
 exports.runCommandAsync = async function runCommandAsync (bin, args = [], vars = []) {
   const command = getCommand(bin, args, vars)
-  const { stdout } = await exec(`${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
-  return stdout
+  return await exec(`${command.vars.join(' ')} ${command.bin} ${command.args.join(' ')}`)
 }

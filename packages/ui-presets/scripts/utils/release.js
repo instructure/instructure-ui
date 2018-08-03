@@ -27,7 +27,7 @@ const path = require('path')
 
 const { getPackageJSON } = require('@instructure/pkg-utils')
 
-const { runCommandAsync, resolveBin } = require('./command')
+const { runCommandAsync } = require('./command')
 const { confirm } = require('./confirm')
 
 const {
@@ -48,14 +48,15 @@ const {
   checkIfGitTagExists,
   checkIfCommitIsReviewed,
   isReleaseCommit,
-  createGitTagForRelease
+  createGitTagForRelease,
+  getCommitIndex
 } = require('./git')
 const { error, info } = require('./logger')
 const { publishGithubPages } = require('./gh-pages')
 
 async function checkPackagePublished (packageName, currentVersion) {
-  const result = runCommandAsync('npm', ['info', `${packageName}@${currentVersion}`, 'version'])
-  if (result === currentVersion) {
+  const { stdout } = await runCommandAsync('npm', ['info', `${packageName}@${currentVersion}`, 'version'])
+  if (stdout.trim() === currentVersion) {
     error(`${packageName}@${currentVersion} is already published!`)
     process.exit(1)
   }
@@ -83,8 +84,7 @@ const getReleaseVersion = async function getReleaseVersion (currentVersion) {
     await checkIfGitTagExists(releaseVersion)
     await checkIfCommitIsReviewed()
   } else {
-    const description = await runCommandAsync('git', ['describe', '--match', '"v[0-9]*"', '--first-parent'])
-    const index = await runCommandAsync('echo', [description, '|', resolveBin('cut'), '-d\'-\'', '-f', '2'])
+    const index = await getCommitIndex()
     await runCommandAsync('standard-version')
     const nextVersion = getPackageJSON().version
     releaseVersion = `${nextVersion}-rc.${index}`
@@ -110,13 +110,8 @@ const publish = async function publish (packageName, currentVersion, releaseVers
   ]
 
   if (releaseCommit) {
-    try {
-      await checkIfCommitIsReviewed()
-    } catch (e) {
-      error('Latest release should be run from a merged version bump commit!')
-      error(e)
-      process.exit(1)
-    }
+    await checkIfCommitIsReviewed()
+
     if (currentVersion !== releaseVersion) {
       error('Version mismatch for stable release!')
       process.exit(1)

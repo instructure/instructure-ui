@@ -27,6 +27,7 @@ const Jira = require('jira-client')
 
 const { runCommandAsync, resolveBin } = require('./command')
 const { info, error } = require('./logger')
+const { getCurrentReleaseTag, getPreviousReleaseTag } = require('./git')
 
 const {
   JIRA_PEM_PATH,
@@ -144,16 +145,18 @@ exports.createJiraVersion = createJiraVersion
 
 exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
   info(`Looking up issues for the ${config.jira_project_key} project...`)
+
+  const currentReleaseTag = await getCurrentReleaseTag()
+  const previousReleaseTag = await getPreviousReleaseTag()
+
   let result
 
   try {
-    const currentReleaseTag = await runCommandAsync('git', ['describe', '--exact-match'])
-    const previousReleaseCommit = await runCommandAsync('git', ['rev-list', '--tags', '--skip=1', '--max-count=1'])
-    const previousReleaseTag = await runCommandAsync('git', ['describe', '--abbrev=0', '--tags', previousReleaseCommit])
-    result = await runCommandAsync('git', [
+    const { stdout } = await runCommandAsync('git', [
       'log', `${previousReleaseTag}..${currentReleaseTag}`, '|',
       resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
     ])
+    result = stdout.trim()
   } catch (e) {
     info(`No Jira issues found in commit messages!`)
   }
@@ -176,10 +179,11 @@ async function getIssuesInCommit (config = {}) {
   let result
 
   try {
-    result = await runCommandAsync('git', [
+    const { stdout } = await runCommandAsync('git', [
       'log', '-1', '--pretty=%B', '|',
       resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
     ])
+    result = stdout.trim()
   } catch (e) {
     info(`No Jira issues found in commit message!`)
   }
