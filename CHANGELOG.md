@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.23.0"></a>
+# [5.23.0](https://github.com/instructure/instructure-ui/compare/v5.22.0...v5.23.0) (2018-08-03)
+
+
+### Bug Fixes
+
+* **docs-app:** fix codepens ([4c755f5](https://github.com/instructure/instructure-ui/commit/4c755f5))
+* **ui-buttons,ui-elements:** Fix event target ([8e29910](https://github.com/instructure/instructure-ui/commit/8e29910))
+* **ui-presets:** fix bump script ([14e6668](https://github.com/instructure/instructure-ui/commit/14e6668))
+
+
+### Features
+
+* **ui-elements:** handle Pill overflow with Tooltip ([64d75d1](https://github.com/instructure/instructure-ui/commit/64d75d1))
+* **ui-media-player:** Add SourceChooser to VideoPlayerControls ([44fdb71](https://github.com/instructure/instructure-ui/commit/44fdb71))
+* **ui-presets:** add an install-react script ([d4e87fe](https://github.com/instructure/instructure-ui/commit/d4e87fe))
+* **ui-presets:** Allow files passed to ui-test --lint ([47c1e5c](https://github.com/instructure/instructure-ui/commit/47c1e5c))
+* **ui-presets:** better cross platform support for scripts ([9343a7e](https://github.com/instructure/instructure-ui/commit/9343a7e))
+* **ui-presets:** run tests with react 15 and 16 ([148fe88](https://github.com/instructure/instructure-ui/commit/148fe88))
+* **ui-tree-browser:** improve aria support ([bad6cc9](https://github.com/instructure/instructure-ui/commit/bad6cc9))
+
+
+### Performance Improvements
+
+* **ui-buttons,ui-tabs:** a couple more small perf improvements ([2b00c1b](https://github.com/instructure/instructure-ui/commit/2b00c1b))
+
+
+
+
+
 <a name="5.22.0"></a>
 # [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
 

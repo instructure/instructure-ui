@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.23.0"></a>
+# [5.23.0](https://github.com/instructure/instructure-ui/compare/v5.22.0...v5.23.0) (2018-08-03)
+
+
+### Bug Fixes
+
+* **ui-presets:** fix bump script ([14e6668](https://github.com/instructure/instructure-ui/commit/14e6668))
+
+
+### Features
+
+* **ui-presets:** add an install-react script ([d4e87fe](https://github.com/instructure/instructure-ui/commit/d4e87fe))
+* **ui-presets:** Allow files passed to ui-test --lint ([47c1e5c](https://github.com/instructure/instructure-ui/commit/47c1e5c))
+* **ui-presets:** better cross platform support for scripts ([9343a7e](https://github.com/instructure/instructure-ui/commit/9343a7e))
+* **ui-presets:** run tests with react 15 and 16 ([148fe88](https://github.com/instructure/instructure-ui/commit/148fe88))
+
+
+
+
+
 <a name="5.22.0"></a>
 # [5.22.0](https://github.com/instructure/instructure-ui/compare/v5.21.0...v5.22.0) (2018-07-27)
 

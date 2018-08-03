@@ -2,7 +2,7 @@
   "name": "docs-examples",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "5.22.0",
+  "version": "5.23.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
