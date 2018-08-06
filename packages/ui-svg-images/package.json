@@ -26,6 +26,7 @@
   "dependencies": {
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "babel-runtime": "^6",
     "classnames": "^2",
     "prop-types": "^15"
   },

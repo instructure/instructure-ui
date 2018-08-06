@@ -38,6 +38,7 @@
     "@instructure/ui-themes": "^5",
     "@instructure/ui-toggle-details": "^5",
     "@instructure/ui-utils": "^5",
+    "babel-runtime": "^6",
     "babel-standalone": "^6.26.0",
     "classnames": "^2",
     "gray-matter": "^3.0.2",

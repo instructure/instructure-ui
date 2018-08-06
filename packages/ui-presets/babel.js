@@ -41,7 +41,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
       useBuiltIns: true
     }],
     ['transform-runtime', {
-      helpers: false,
+      helpers: true,
       polyfill: false,
       regenerator: false
     }],

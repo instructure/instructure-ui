@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@instructure/ui-svg-images": "^5",
+    "babel-runtime": "^6",
     "prop-types": "^15"
   },
   "peerDependencies": {

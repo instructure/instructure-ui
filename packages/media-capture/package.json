@@ -35,6 +35,7 @@
     "@instructure/ui-menu": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "babel-runtime": "^6",
     "classnames": "^2",
     "luxon": "^0.3.1",
     "prop-types": "^15",

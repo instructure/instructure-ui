@@ -24,6 +24,7 @@
     "@instructure/ui-presets": "^5"
   },
   "dependencies": {
+    "babel-runtime": "^6",
     "bowser": "^1.9.4",
     "decimal.js": "^10",
     "fast-deep-equal": "^2",
