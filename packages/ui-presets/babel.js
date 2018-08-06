@@ -49,6 +49,10 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
     require.resolve('@instructure/babel-plugin-transform-class-display-name')
   ]
 
+  if (process.env.NODE_ENV === 'production') {
+    plugins.push('transform-react-constant-elements')
+  }
+
   if (opts.themeable) {
     let themeableConfig = {
       ignore: 'node_modules/**/*',
