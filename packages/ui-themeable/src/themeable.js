@@ -105,12 +105,16 @@ export default function themeable (theme, styles = {}) {
 
     registerComponentTheme(contextKey, theme)
 
-    const getThemeFromContext = function (context) {
+    const getContext = function (context) {
       const themeContext = getThemeContext(context)
-      if (themeContext && themeContext.theme && themeContext.theme[contextKey]) {
+      return themeContext || emptyObj
+    }
+
+    const getThemeFromContext = function (context) {
+      const { theme } = getContext(context)
+      if (theme && theme[contextKey]) {
         return {
-          ...themeContext.theme[contextKey],
-          immutable: themeContext.immutable
+          ...theme[contextKey]
         }
       } else {
         return emptyObj
@@ -225,12 +229,14 @@ export default function themeable (theme, styles = {}) {
           return this._themeCache
         }
 
+        const { immutable } = getContext(this.context)
+
         let theme = getThemeFromContext(this.context)
 
         if (this.props.theme) {
           if (!theme) {
             theme = this.props.theme
-          } else if (theme.immutable) {
+          } else if (immutable) {
             warning(
               false,
               '[themeable] Parent theme is immutable. Cannot apply theme: %O',

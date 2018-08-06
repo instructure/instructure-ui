@@ -24,7 +24,7 @@
 
 //  based on: https://github.com/ai/nanoid/blob/master/non-secure.js
 
-const dictionary = '_getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
+const dictionary = 'getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
 const dictionaryLengthMinus1 = dictionary.length - 1
 
 function random (size) {

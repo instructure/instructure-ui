@@ -105,9 +105,8 @@ export const getDefaultThemeKey = () => {
 * Get the default theme key
 * @param {String} the default theme key
 * @param {Object} overrides for the theme variables
-* @param {Boolean} is the theme immutable/can it be overridden?
 */
-export const setDefaultTheme = (themeKey, overrides, immutable) => {
+export const setDefaultTheme = (themeKey, overrides) => {
   const registry = getRegistry()
   let theme = registry.themes[themeKey]
 
@@ -119,10 +118,7 @@ export const setDefaultTheme = (themeKey, overrides, immutable) => {
   registry.defaultThemeKey = themeKey
   registry.overrides = overrides
 
-  return {
-    ...theme,
-    immutable: !!immutable
-  }
+  return theme
 }
 
 /**
@@ -141,20 +137,17 @@ export const makeTheme = ({
   const themeKey = key || uid()
   return {
     key: themeKey,
-    variables,
     immutable,
+    variables: {...variables},
     description,
     use: function ({ accessible, overrides } = {}) {
       if (accessible) {
-        warning(a11y, `[themeable] No accessible theme provided for ${themeKey}.`)
+        warning(a11y && a11y.key, `[themeable] No accessible theme provided for ${themeKey}.`)
         if (a11y && a11y.key) {
-          setDefaultTheme(a11y.key, null, true)
+          setDefaultTheme(a11y.key)
         }
       } else {
-        warning(variables && themeKey, `Invalid theme.`)
-        if (themeKey) {
-          setDefaultTheme(themeKey, overrides, false)
-        }
+        setDefaultTheme(themeKey, overrides)
       }
     }
   }

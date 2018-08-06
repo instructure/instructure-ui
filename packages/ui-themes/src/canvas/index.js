@@ -24,13 +24,13 @@
 
 import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 
-import highContrast from './high-contrast'
+import highContrastTheme from './high-contrast'
 import { key, variables } from './base'
 
 const theme = registerTheme({
   key,
   variables,
-  a11y: {...highContrast}
+  a11y: { key: highContrastTheme.key }
 })
 
 theme.use()

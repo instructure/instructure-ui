@@ -28,12 +28,14 @@ import KEYS from '../../keys'
 import colors from './colors'
 import { baseVariables } from '../base'
 
+export const variables = {
+  ...baseVariables,
+  colors
+}
+
 export default registerTheme({
   key: KEYS.CANVAS_HIGH_CONTRAST,
   immutable: true,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables: {
-    ...baseVariables,
-    colors
-  }
+  variables
 })
