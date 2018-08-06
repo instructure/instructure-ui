@@ -125,6 +125,15 @@ describe('<View />', () => {
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })
 
+  it('should pass cursor', () => {
+    const cursor = 'cell'
+    const subject = testbed.render({
+      cursor
+    })
+    const styles = subject.getDOMNode().style
+    expect(styles['cursor']).to.equal(cursor)
+  })
+
   it('should meet a11y standards', (done) => {
     const subject = testbed.render()
 

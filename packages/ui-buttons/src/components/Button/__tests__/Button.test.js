@@ -240,7 +240,8 @@ describe('<Button/>', () => {
   describe('when passing down props to View', () => {
     const allowedProps = {
       margin: 'small',
-      as: 'div'
+      as: 'div',
+      cursor: 'move'
     }
 
     const ignore = [
@@ -281,6 +282,20 @@ describe('<Button/>', () => {
       elementRef(el)
 
       expect(buttonRef.lastCall.args[0]).to.equal(el)
+    })
+
+    it("passes cursor='pointer' to View by default", () => {
+      const subject = testbed.render()
+      expect(subject.find(View).prop('cursor')).to.equal('pointer')
+    })
+
+    it("passes cursor='not-allowed' to View when disabled", () => {
+      const { cursor } = allowedProps
+      const subject = testbed.render({
+        cursor,
+        disabled: true
+      })
+      expect(subject.find(View).prop('cursor')).to.equal('not-allowed')
     })
   })
 

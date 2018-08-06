@@ -110,7 +110,12 @@ class Button extends Component {
     * Add an SVG icon to the button. Do not add icons directly as
     * children.
     */
-    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+    /**
+     * Specify a mouse cursor to use when hovering over the button.
+     * The `pointer` cursor is used by default.
+     */
+    cursor: PropTypes.string
   }
 
   static defaultProps = {
@@ -120,7 +125,8 @@ class Button extends Component {
     size: 'medium',
     margin: '0',
     fluidWidth: false,
-    buttonRef: function (button) {}
+    buttonRef: function (button) {},
+    cursor: 'pointer'
   }
 
   handleClick = e => {
@@ -202,6 +208,7 @@ class Button extends Component {
       as,
       buttonRef,
       children,
+      cursor,
       disabled,
       href,
       icon,
@@ -230,8 +237,6 @@ class Button extends Component {
       }
     }
 
-
-
     return (
       <View
         {...omitProps(this.props, { ...Button.propTypes, ...View.propTypes })}
@@ -259,6 +264,7 @@ class Button extends Component {
         display={null}
         as={this.elementType}
         margin={margin}
+        cursor={disabled ? 'not-allowed' : cursor}
       >
         {hasTextAndIcon ? (
           <Flex height="100%" width="100%">

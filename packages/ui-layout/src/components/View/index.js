@@ -122,6 +122,11 @@ class View extends Component {
     stacking: ThemeablePropTypes.stacking,
 
     /**
+     * Specify a mouse cursor to use when hovering over the `<View />`
+     */
+    cursor: CustomPropTypes.cursor,
+
+    /**
     * Activate a dotted outline around the component to make building your
     * layout easier
     */
@@ -179,9 +184,8 @@ class View extends Component {
   }
 
   get styleProps () {
-    const { style } = this.props // eslint-disable-line react/prop-types
-    if (!style) return {}
-    return pickProps(style, {}, [
+    const { cursor, style } = this.props // eslint-disable-line react/prop-types
+    const whitelisted = pickProps(style || {}, {}, [
       // Position/calculateElementPosition:
       'top',
       'left',
@@ -198,6 +202,10 @@ class View extends Component {
       // Avatar:
       'backgroundImage'
     ])
+    if (cursor) {
+      whitelisted.cursor = cursor
+    }
+    return whitelisted
   }
 
   handleElementRef = (el) => {

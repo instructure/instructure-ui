@@ -172,3 +172,17 @@ example: true
   }}
 </Responsive>
 ```
+
+### Overriding the default cursor
+
+By default, the Button component uses the `pointer` cursor. To use a different
+cursor, pass a `cursor` prop.
+
+```js
+---
+example: true
+---
+<Button cursor="move" icon={IconDragHandle.Line}>
+  Move me
+</Button>
+```

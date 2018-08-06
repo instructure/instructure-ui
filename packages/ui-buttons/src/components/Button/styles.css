@@ -39,7 +39,6 @@ the icon is inserted as a child:
   direction: inherit;
   margin: 0;
   text-decoration: none; /* for links styled as buttons */
-  cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   transition: background 0.2s, transform 0.2s;
@@ -52,7 +51,6 @@ the icon is inserted as a child:
   border-width: var(--borderWidth);
 
   &.disabled {
-    cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
   }
