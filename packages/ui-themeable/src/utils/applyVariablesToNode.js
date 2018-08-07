@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-
+import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 
 import scopeStylesToNode from './scopeStylesToNode'
 import formatVariableNames from './formatVariableNames'
@@ -52,7 +52,7 @@ export default function applyVariablesToNode () {
 }
 
 export function applyVariablesPolyfillToNode (domNode, variables, defaults, prefix, template, scope) {
-  if (!domNode) {
+  if (!domNode || isEmpty(variables)) {
     return
   }
 
@@ -67,7 +67,7 @@ export function applyVariablesPolyfillToNode (domNode, variables, defaults, pref
 }
 
 export function applyVariablesToNodeStyle (domNode, variables, defaults, prefix) {
-  if (!domNode) {
+  if (!domNode || isEmpty(variables)) {
     return
   }
 

@@ -111,7 +111,9 @@ export const setDefaultTheme = (themeKey, overrides) => {
   let theme = registry.themes[themeKey]
 
   if (!theme) {
-    warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    if (themeKey !== DEFAULT_THEME_KEY) {
+      warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    }
     theme = {}
   }
 
@@ -175,7 +177,9 @@ export const getRegisteredTheme = (themeKey, defaultTheme = {}) => {
   if (theme) {
     return theme
   } else {
-    warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    if (themeKey !== DEFAULT_THEME_KEY) {
+      warning(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
+    }
     return defaultTheme
   }
 }
@@ -324,9 +328,14 @@ export const generateTheme = (themeKey, overrides) => {
 
   const variables = mergeWithDefaultThemeVariables(themeKey, overrides)
 
-  Object.getOwnPropertySymbols(components).forEach((componentKey) => {
-    theme[componentKey] = components[componentKey](variables)
-  })
+  if (isEmpty(variables)) {
+    return
+  }
+
+  Object.getOwnPropertySymbols(components)
+    .forEach((componentKey) => {
+      theme[componentKey] = components[componentKey](variables)
+    })
 
   return theme
 }
@@ -359,7 +368,20 @@ export const generateComponentTheme = (componentKey, themeKey, overrides) => {
     // use the cached component theme if it exists
     componentTheme = cachedComponentTheme
   } else {
-    const variables = mergeWithDefaultThemeVariables(themeKey)
+    const variables = {
+      borders: {},
+      breakpoints: {},
+      colors: {},
+      forms: {},
+      media: {},
+      shadows: {},
+      spacing: {},
+      stacking: {},
+      transitions: {},
+      typography: {},
+      ...mergeWithDefaultThemeVariables(themeKey)
+    }
+
     const componentThemeFunction = getRegisteredComponent(t, componentKey)
 
     if (typeof componentThemeFunction === 'function') {
@@ -384,6 +406,8 @@ export const generateComponentTheme = (componentKey, themeKey, overrides) => {
       overrides
     )
     return componentTheme
+  } else if (isEmpty(componentTheme)) {
+    return overrides
   } else {
     return { ...componentTheme, ...overrides }
   }

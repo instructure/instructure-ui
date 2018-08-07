@@ -80,9 +80,12 @@ export function getCssTextWithVariables (template, variables, prefix) {
 
 function variablesToCSSText (variables) {
   const names = Object.keys(variables || {})
-  const rules = names.map((name) => {
-    return `${name}: ${variables[name]}`
-  }).join(';\n')
+  const rules = names
+    .filter(name => typeof variables[name] !== 'undefined')
+    .map((name) => {
+      return `${name}: ${variables[name]}`
+    })
+    .join(';\n')
 
   if (names.length > 0) {
     return `

@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import { camelize } from '@instructure/ui-utils/lib/convertCase'
 import warning from '@instructure/ui-utils/lib/warning'
 
@@ -41,7 +41,7 @@ import warning from '@instructure/ui-utils/lib/warning'
  * @returns {String} a string with each value replaced with a value from the theme object
  */
 export default function getShorthandPropValue (componentName, componentTheme, propValue, propName) {
-  if (typeof propValue !== 'string') {
+  if (typeof propValue !== 'string' || isEmpty(componentTheme)) {
     return
   }
 

@@ -197,10 +197,7 @@ export default function themeable (theme, styles = {}) {
       }
 
       componentDidUpdate (prevProps, prevState, prevContext) {
-        if (!deepEqual(prevProps.theme, this.props.theme) ||
-          !deepEqual(getThemeFromContext(prevContext), getThemeFromContext(this.context))) {
-          this.applyTheme()
-        }
+        this.applyTheme()
 
         if (super.componentDidUpdate) {
           super.componentDidUpdate(prevProps, prevState, prevContext)
@@ -208,6 +205,10 @@ export default function themeable (theme, styles = {}) {
       }
 
       applyTheme (DOMNode) {
+        if (isEmpty(this.theme)) {
+          return
+        }
+
         const defaultTheme = generateThemeForContextKey()
 
         applyVariablesToNode(
