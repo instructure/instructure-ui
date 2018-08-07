@@ -55,6 +55,16 @@ describe('<DateInput />', () => {
     expect(getInputValue(subject)).to.equal('May 1, 2017')
   })
 
+  it('should clear the input value when an empty string is passed as the date value', () => {
+    const subject = testbed.render({
+      onDateChange: testbed.stub(),
+      dateValue: '2017-05-01'
+    })
+
+    subject.find('input').setValue('')
+    expect(getInputValue(subject)).to.equal('')
+  })
+
   it('should use the updated date value (when controlled)', () => {
     const subject = testbed.render({
       onDateChange: testbed.stub(),

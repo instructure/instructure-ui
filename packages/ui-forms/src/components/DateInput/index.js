@@ -433,10 +433,16 @@ export default class DateInput extends Component {
         millisecond: parsedDate.millisecond()
       }
     } else {
+      let textInputValue = state ? state.textInputValue : ''
+
+      if(rawValue === '') {
+        textInputValue = ''
+      }
+
       return {
         isValidOrEmpty: !rawValue,
         acceptedValue: undefined, // eslint-disable-line no-undefined
-        textInputValue: state ? state.textInputValue : '',
+        textInputValue: textInputValue || '',
         hour: 0,
         minute: 0,
         second: 0,

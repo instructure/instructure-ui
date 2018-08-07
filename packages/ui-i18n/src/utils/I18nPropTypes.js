@@ -45,7 +45,7 @@ export default {
    */
   iso8601 (props, propName, componentName, location) {
     const propValue = props[propName]
-    if (typeof propValue === 'undefined') return
+    if (typeof propValue === 'undefined' || propValue === '') return
 
     const propValueType = typeof propValue
     if (typeof propValueType !== 'string') {
