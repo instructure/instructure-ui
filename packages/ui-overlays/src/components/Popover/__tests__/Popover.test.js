@@ -24,7 +24,6 @@
 
 import React from 'react'
 import Button from '@instructure/ui-buttons/lib/components/Button'
-import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Position from '@instructure/ui-layout/lib/components/Position'
 import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 import View from '@instructure/ui-layout/lib/components/View'
@@ -45,7 +44,7 @@ describe('<Popover />', () => {
         <Button>Click Me</Button>
       </PopoverTrigger>
       <PopoverContent>
-        <Heading>Foo Bar Baz</Heading>
+        <h2>Foo Bar Baz</h2>
       </PopoverContent>
     </Popover>
   )

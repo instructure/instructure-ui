@@ -26,11 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
-
-/* eslint-disable instructure-ui/no-relative-package-imports */
-import Tooltip from '../../../../ui-overlays/lib/components/Tooltip'
-/* eslint-enable instructure-ui/no-relative-package-imports */
-
+import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 import TruncateText from '../TruncateText'
 
 import themeable from '@instructure/ui-themeable'

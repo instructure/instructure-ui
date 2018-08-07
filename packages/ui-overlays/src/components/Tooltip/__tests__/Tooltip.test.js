@@ -23,15 +23,12 @@
  */
 
 import React from 'react'
-import Heading from '@instructure/ui-elements/lib/components/Heading'
-import Link from '@instructure/ui-elements/lib/components/Link'
-
 import Tooltip from '../index'
 
 describe('<Tooltip />', () => {
   describe('using as', () => {
     const testbed = new Testbed(
-      <Tooltip tip={<Heading>Hello</Heading>} placement="end" as={Link} href="example.html">
+      <Tooltip tip={<h2>Hello</h2>} placement="end" as='a' href="example.html">
         Hover or focus me
       </Tooltip>
     )
@@ -84,7 +81,7 @@ describe('<Tooltip />', () => {
 
   describe('using children', () => {
     const testbed = new Testbed(
-      <Tooltip tip={<Heading>Hello</Heading>} children={<span />} /> // eslint-disable-line react/no-children-prop
+      <Tooltip tip={<h2>Hello</h2>} children={<span />} /> // eslint-disable-line react/no-children-prop
     )
 
     it('should call onClick of child', () => {

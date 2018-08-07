@@ -1,4 +1,6 @@
 **/.*
+**/__examples__
+**/__tests__
 babelrc.js
 *.config.js
 *.conf.js

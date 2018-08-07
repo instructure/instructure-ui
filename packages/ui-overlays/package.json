@@ -26,7 +26,6 @@
   "dependencies": {
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-buttons": "^5",
-    "@instructure/ui-elements": "^5",
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-layout": "^5",
     "@instructure/ui-motion": "^5",
