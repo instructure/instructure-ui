@@ -26,6 +26,7 @@ import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
 
 export default function generator ({ colors, typography, spacing, forms }) {
   return {
+    minWidth: '12.5rem',
 
     handleSize: '1.5rem',
     handleBackground: colors.backgroundBrand,
