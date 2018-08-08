@@ -40,6 +40,13 @@ describe('<Flex />', () => {
     expect(subject.find(FlexItem).length).to.eq(4)
   })
 
+  it('should render no markup if there are no children', () => {
+    const subject = testbed.render({
+      children: []
+    })
+    expect(subject.getDOMNode()).to.not.exist
+  })
+
   it('should accept width and height as props', () => {
     const subject = testbed.render({
       width: '400px',

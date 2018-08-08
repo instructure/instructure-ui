@@ -101,11 +101,15 @@ export default class Flex extends Component {
 
   renderChildren () {
     return Children.map(this.props.children, (child) => {
-      return safeCloneElement(child, {
-        visualDebug: this.props.visualDebug,
-        ...child.props, /* child visualDebug prop should override parent */
-        direction: this.props.direction
-      })
+      if (child) {
+        return safeCloneElement(child, {
+          visualDebug: this.props.visualDebug,
+          ...child.props, /* child visualDebug prop should override parent */
+          direction: this.props.direction
+        })
+      } else {
+        return null
+      }
     })
   }
 
@@ -117,6 +121,7 @@ export default class Flex extends Component {
 
     const {
       as,
+      children,
       direction,
       height,
       inline,
@@ -139,21 +144,25 @@ export default class Flex extends Component {
       [styles.wrapItems]: wrapItems
     }
 
-    return (
-      <View
-        {...props}
-        className={classnames(classes)}
-        as={as}
-        display={inline ? 'inline-flex' : 'flex'}
-        width={width}
-        height={height}
-        margin={margin}
-        padding={padding}
-        textAlign={textAlign}
-      >
-        {this.renderChildren()}
-      </View>
-    )
+    if (children && React.Children.count(children) > 0) {
+      return (
+        <View
+          {...props}
+          className={classnames(classes)}
+          as={as}
+          display={inline ? 'inline-flex' : 'flex'}
+          width={width}
+          height={height}
+          margin={margin}
+          padding={padding}
+          textAlign={textAlign}
+        >
+          {this.renderChildren()}
+        </View>
+      )
+    } else {
+      return null
+    }
   }
 }
 
