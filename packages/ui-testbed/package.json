@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-testbed",
-  "version": "5.23.0",
+  "version": "5.24.0",
   "description": "A test utility library for UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

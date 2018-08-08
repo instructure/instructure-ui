@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.24.0"></a>
+# [5.24.0](https://github.com/instructure/instructure-ui/compare/v5.23.0...v5.24.0) (2018-08-08)
+
+
+### Bug Fixes
+
+* **ui-docs-client,ui-themeable:** always apply theme when component updates ([a9f7d74](https://github.com/instructure/instructure-ui/commit/a9f7d74))
+* **ui-elements:** add aria attributes to Rating ([9b859ba](https://github.com/instructure/instructure-ui/commit/9b859ba))
+* **ui-elements:** remove relative import ([d0a184e](https://github.com/instructure/instructure-ui/commit/d0a184e))
+* **ui-forms:** clear out DateInput when passed an empty value ([0b8bbcb](https://github.com/instructure/instructure-ui/commit/0b8bbcb))
+* **ui-layout:** Make Flex ignore null children ([c49ec3d](https://github.com/instructure/instructure-ui/commit/c49ec3d))
+* **ui-presets:** trim command results ([eeb62c0](https://github.com/instructure/instructure-ui/commit/eeb62c0))
+* **ui-themeable,ui-themes,ui-utils:** remove immutable variable ([5b6178e](https://github.com/instructure/instructure-ui/commit/5b6178e))
+
+
+### Features
+
+* **ui-buttons:** add cursor prop to Button ([b47fbb5](https://github.com/instructure/instructure-ui/commit/b47fbb5))
+* **ui-elements:** add warning and message variants to pill ([7665242](https://github.com/instructure/instructure-ui/commit/7665242))
+
+
+### Performance Improvements
+
+* get babel helpers from 'babel-runtime' instead of inlining them ([1472658](https://github.com/instructure/instructure-ui/commit/1472658))
+* **ui-presets:** add babel constant elements transform ([a62f424](https://github.com/instructure/instructure-ui/commit/a62f424))
+
+
+
+
+
 <a name="5.23.0"></a>
 # [5.23.0](https://github.com/instructure/instructure-ui/compare/v5.22.0...v5.23.0) (2018-08-03)
 
