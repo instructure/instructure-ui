@@ -1,30 +1,14 @@
 .root {
   box-sizing: border-box;
-  padding: var(--padding);
   margin: 0;
-  background-color: var(--backgroundColor);
-  background-image:
-    linear-gradient(var(--gradientCheckerboard)),
-    linear-gradient(var(--gradientCheckerboard));
-  background-position: 0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2);
-  background-size: var(--gradientCheckerboardSize) var(--gradientCheckerboardSize);
-  border: var(--border);
-  border-radius: var(--borderRadius);
   position: relative;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .fullscreen {
   position: fixed;
   width: 100vw;
   height: 100vh;
-}
-
-.inverse {
-  background-color: var(--backgroundColorInverse);
-  background-image:
-    linear-gradient(var(--gradientCheckerboardInverse)),
-    linear-gradient(var(--gradientCheckerboardInverse));
 }
 
 .error {
@@ -43,4 +27,48 @@
     color: var(--colorError);
   }
   /* stylelint-enable selector-max-type */
+}
+
+.background--checkerboard,
+.background--checkerboard-inverse,
+.background--light {
+  padding: var(--padding);
+  border-width: var(--borderWidth);
+  border-style: solid;
+  border-color: var(--borderColor);
+  border-radius: var(--borderRadius);
+  background-color: var(--backgroundColorLight);
+}
+
+.background--checkerboard,
+.background--checkerboard-inverse {
+  background-position: 0 0, calc(var(--gradientCheckerboardSize) / 2) calc(var(--gradientCheckerboardSize) / 2);
+  background-size: var(--gradientCheckerboardSize) var(--gradientCheckerboardSize);
+}
+
+.background--checkerboard {
+  background-image:
+    linear-gradient(var(--gradientCheckerboard)),
+    linear-gradient(var(--gradientCheckerboard));
+}
+
+.background--checkerboard-inverse {
+  background-color: var(--backgroundColorInverse);
+  background-image:
+    linear-gradient(var(--gradientCheckerboardInverse)),
+    linear-gradient(var(--gradientCheckerboardInverse));
+}
+
+.background--inverse {
+  background-color: var(--backgroundColorInverse);
+}
+
+.background--none {
+  display: flex; /* no-background Previews will be static images, so center them */
+  justify-content: center;
+}
+
+.frameless {
+  padding: 0;
+  border: none;
 }

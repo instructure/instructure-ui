@@ -137,3 +137,22 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use the Info alert to notify the user of more information</FigureItem>
+    <FigureItem>Use the Error alert to notify user of an error</FigureItem>
+    <FigureItem>Use the Warning alert to notify user of a warning</FigureItem>
+    <FigureItem>Use the Success alert to notify user of a success event or action</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Have alert messaging that is more than two lines long</FigureItem>
+    <FigureItem>Overuse alerts on the same page</FigureItem>
+  </Figure>
+</Guidelines>
+```

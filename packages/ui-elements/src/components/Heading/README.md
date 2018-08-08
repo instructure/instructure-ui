@@ -36,7 +36,7 @@ example: true
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <div>
   <Heading color="primary-inverse">I am primary-inverse color</Heading>

@@ -21,7 +21,7 @@ example: true
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <Link variant="inverse">I am an inverse link for use with dark backgrounds</Link>
 ```

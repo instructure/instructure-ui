@@ -22,37 +22,36 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, spacing, borders, stacking }) {
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
-  return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColorLight: colors.backgroundLightest,
-    backgroundColorInverse: colors.backgroundDarkest,
-    borderWidth: borders.widthSmall,
-    borderColor: '#eee',
-    gradientCheckerboardSize: '1rem',
-    gradientCheckerboard: `
-      45deg,
-      ${colorCheckerboard} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboard} 75%,
-      ${colorCheckerboard}`,
-    gradientCheckerboardInverse: `
-      45deg,
-      ${colorCheckerboardInverse} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`,
-    fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-    fontSizeError: typography.fontSizeSmall,
-    backgroundError: colors.backgroundDanger,
-    colorError: colors.textLightest,
-    toolbarColor: colors.textLightest,
-    toolbarBackground: '#0084D1'
+import themeable from '@instructure/ui-themeable'
+
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
+
+import styles from './styles.css'
+import theme from './theme'
+
+@themeable(theme, styles)
+export default class Guidelines extends Component {
+  static propTypes = {
+    children: PropTypes.node
+  }
+
+  render () {
+    return (
+      <Flex
+        wrapItems
+        justifyItems="end"
+        alignItems="stretch"
+        margin="small none"
+      >
+        {React.Children.map(this.props.children, child => (
+          <FlexItem grow shrink size="14rem" margin="xx-small">
+            {child}
+          </FlexItem>
+        ))}
+      </Flex>
+    )
   }
 }

@@ -59,13 +59,13 @@ export default class Playground extends Component {
     code: PropTypes.string.isRequired,
     language: PropTypes.string.isRequired,
     render: PropTypes.bool,
-    inverse: PropTypes.bool,
+    background: PropTypes.oneOf(['checkerboard', 'checkerboard-inverse', 'light', 'inverse', 'none']),
     readOnly: PropTypes.bool
   }
 
   static defaultProps = {
     render: true,
-    inverse: false,
+    background: 'checkerboard',
     readOnly: false
   }
 
@@ -181,7 +181,7 @@ export default class Playground extends Component {
         code={code}
         render={this.props.render}
         language={this.props.language}
-        inverse={this.props.inverse}
+        background={this.props.background}
         fullscreen={fullscreen}
         rtl={rtl}
       />

@@ -105,7 +105,7 @@ example: true
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <div>
   <Button variant="ghost-inverse" margin="0 x-small 0 0">Ghost Button</Button>

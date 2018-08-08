@@ -22,37 +22,24 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, spacing, borders, stacking }) {
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
-
+export default function ({ borders, colors, spacing, shadows, stacking, typography }) {
   return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColorLight: colors.backgroundLightest,
-    backgroundColorInverse: colors.backgroundDarkest,
-    borderWidth: borders.widthSmall,
-    borderColor: '#eee',
-    gradientCheckerboardSize: '1rem',
-    gradientCheckerboard: `
-      45deg,
-      ${colorCheckerboard} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboard} 75%,
-      ${colorCheckerboard}`,
-    gradientCheckerboardInverse: `
-      45deg,
-      ${colorCheckerboardInverse} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`,
-    fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-    fontSizeError: typography.fontSizeSmall,
-    backgroundError: colors.backgroundDanger,
-    colorError: colors.textLightest,
-    toolbarColor: colors.textLightest,
-    toolbarBackground: '#0084D1'
+    shadow: shadows.depth2,
+    captionFontFamily: typography.fontFamily,
+    captionFontSize: typography.fontSizeSmall,
+    captionBackground: colors.porcelain,
+    captionPadding: spacing.small,
+    captionColor: colors.oxford,
+    borderWidth: borders.widthMedium,
+    borderColor: colors.oxford,
+    contentPadding: spacing.small,
+    contentBackground: colors.white,
+    yesColor: colors.shamrock,
+    noColor: colors.crimson,
+    iconColor: colors.white,
+    iconContainerStacking: stacking.above,
+    iconContainerSize: spacing.large,
+    floatMargin: spacing.large,
+    floatMarginSmall: spacing.xxSmall
   }
 }

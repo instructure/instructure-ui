@@ -45,15 +45,19 @@ export default class Preview extends Component {
     render: PropTypes.bool,
     language: PropTypes.string.isRequired,
     fullscreen: PropTypes.bool,
+    frameless: PropTypes.bool,
     inverse: PropTypes.bool,
-    rtl: PropTypes.bool
+    rtl: PropTypes.bool,
+    background: PropTypes.oneOf(['checkerboard', 'checkerboard-inverse', 'inverse', 'light', 'none'])
   }
 
   static defaultProps = {
     render: true,
     fullscreen: false,
+    frameless: false,
     inverse: false,
-    rtl: false
+    rtl: false,
+    background: 'checkerboard'
   }
 
   static contextTypes = {
@@ -154,17 +158,29 @@ export default class Preview extends Component {
     })
   }
 
+  renderContent () {
+    // Add div around content so parent's `display: flex` doesn't mess up component styles
+    const content = <div ref={(el) => { this._mountNode = el }} />
+
+    if (this.props.background === 'none') {
+      return <div>{content}</div>
+    } else {
+      return content
+    }
+  }
+
   render () {
     const classes = {
       [styles.root]: true,
-      [styles.inverse]: this.props.inverse,
       [styles.error]: this.state.error,
-      [styles.fullscreen]: this.props.fullscreen
+      [styles.fullscreen]: this.props.fullscreen,
+      [styles.frameless]: this.props.frameless,
+      [styles[`background--${this.props.background}`]]: true
     }
 
     return (
       <div className={classnames(classes)}>
-        <div ref={(el) => { this._mountNode = el }} />
+        {this.renderContent()}
         {this.state.error && <pre className={styles.error}>{this.state.error}</pre>}
       </div>
     )

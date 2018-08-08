@@ -26,8 +26,8 @@ color scheme designed to be more visible on dark backgrounds.
 
 ```js
 ---
-inverse: true
 example: true
+background: 'checkerboard-inverse'
 ---
 <Spinner title="Loading" variant="inverse" />
 ```

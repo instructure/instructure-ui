@@ -111,7 +111,7 @@ example: true
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <div>
   <Text color="primary-inverse">I&#39;m primary text</Text><br/>

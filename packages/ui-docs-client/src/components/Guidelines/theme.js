@@ -22,37 +22,7 @@
  * SOFTWARE.
  */
 
-export default function ({ colors, typography, spacing, borders, stacking }) {
-  const colorCheckerboard = '#eee'
-  const colorCheckerboardInverse = '#444'
-
+export default function ({ colors }) {
   return {
-    padding: spacing.small,
-    borderRadius: borders.radiusMedium,
-    backgroundColorLight: colors.backgroundLightest,
-    backgroundColorInverse: colors.backgroundDarkest,
-    borderWidth: borders.widthSmall,
-    borderColor: '#eee',
-    gradientCheckerboardSize: '1rem',
-    gradientCheckerboard: `
-      45deg,
-      ${colorCheckerboard} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboard} 75%,
-      ${colorCheckerboard}`,
-    gradientCheckerboardInverse: `
-      45deg,
-      ${colorCheckerboardInverse} 25%,
-      transparent 25%,
-      transparent 75%,
-      ${colorCheckerboardInverse} 75%,
-      ${colorCheckerboardInverse}`,
-    fontFamilyError: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
-    fontSizeError: typography.fontSizeSmall,
-    backgroundError: colors.backgroundDanger,
-    colorError: colors.textLightest,
-    toolbarColor: colors.textLightest,
-    toolbarBackground: '#0084D1'
   }
 }

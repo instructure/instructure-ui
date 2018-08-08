@@ -306,8 +306,8 @@ track dark instead of light.
 
 ```js
 ---
-inverse: true
 example: true
+background: 'checkerboard-inverse'
 ---
 <div>
   <Progress

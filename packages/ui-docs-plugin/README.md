@@ -215,14 +215,14 @@ example: true
 ```
 ````
 
-If you would like to display the component on a dark background, you can add some extra data as
+If you would like to display the component on a dark background or dark checkerboard, you can add some extra data as
 yaml front matter to your code block:
 
 ````md
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <Button variant"ghost-inverse">Click Me</Button>
 ```

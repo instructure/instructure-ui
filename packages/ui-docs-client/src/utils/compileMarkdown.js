@@ -27,6 +27,7 @@ import marked from 'marked'
 import he from 'he'
 import grayMatter from 'gray-matter'
 
+import View from '@instructure/ui-layout/lib/components/View'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Img from '@instructure/ui-elements/lib/components/Img'
 import Link from '@instructure/ui-elements/lib/components/Link'
@@ -34,6 +35,7 @@ import Table from '@instructure/ui-elements/lib/components/Table'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 
 import Playground from '../components/Playground'
+import Preview from '../components/Preview'
 
 import trimIndent from './trimIndent'
 
@@ -135,42 +137,80 @@ function createRenderer () {
     return `{{${elementId}}}`
   }
 
+  function getComponent (type, data) {
+    const {
+      matter,
+      language,
+      title,
+      readOnly
+    } = data
+
+    const componentType = type.toLowerCase()
+
+    if (componentType === 'playground') {
+      return (
+        <Playground
+          background={matter.data.background}
+          render={matter.data.render}
+          title={title}
+          code={matter.content}
+          language={language.split('_')[0]}
+          readOnly={readOnly}
+        />
+      )
+    } else if (componentType === 'codeeditor') {
+      return (
+        <CodeEditor
+          label={title}
+          value={matter.content}
+          language={language}
+          readOnly
+        />
+      )
+    } else if (componentType === 'preview') {
+      return (
+        <Preview
+          code={matter.content}
+          language={language}
+          background={data.background || 'checkerboard'}
+          frameless={data.frameless}
+        />
+      )
+    }
+  }
+
   renderer.code = function (code, language) {
     const elementId = tracker.nextElementId++
 
     function CodeComponent () {
+      let el = null
       if (typeof language === 'string') {
         const matter = grayMatter(trimIndent(code))
         const readOnly = matter.data ? matter.data.readOnly : true
         const title = tracker.context.title || matter.data.title || 'Code example'
+        const data = {matter, readOnly, title, language}
 
-        if (language.indexOf('_example') >= 0 || matter.data.example) {
-          return (
-            <Playground
-              inverse={matter.data.inverse}
-              render={matter.data.render}
-              title={title}
-              code={matter.content}
-              language={language.split('_')[0]}
-              readOnly={readOnly}
-            />
+        if (language.indexOf('_guidelines') >= 0 || matter.data.guidelines) {
+          el = getComponent('Preview', {...data, background: 'light', frameless: true})
+
+        } else if (language.indexOf('_example') >= 0 || matter.data.example) {
+          el = (
+            <View margin="medium none">
+              {getComponent('Playground', data)}
+            </View>
           )
         } else {
-          return (
-            <CodeEditor
-              label={title}
-              value={code}
-              language={language}
-              readOnly
-            />
-          )
+          el = getComponent('CodeEditor', data)
         }
       } else {
-        return <code>{code}</code>
+        el = <code>{code}</code>
       }
+
+      return {element: el, type: el.type.displayName}
     }
 
-    tracker.elements[elementId] = createElement(CodeComponent, { key: elementId })
+    const Element = () => CodeComponent().element
+    tracker.elements[elementId] = createElement(Element, { key: elementId, elementType: CodeComponent().type})
 
     tracker.tree.push(tracker.elements[elementId])
 
