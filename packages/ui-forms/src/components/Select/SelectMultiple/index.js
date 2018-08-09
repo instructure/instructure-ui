@@ -256,7 +256,6 @@ class SelectMultiple extends Component {
       if (selectedOption && selectedOption.length > 0) {
         this.setState((prevState, props) => {
           const matches = this.matchSelectedOptions(prevState, selectedOption)
-          this.cleanInput()
 
           return this.amendMatchesToState(prevState, props, matches, (selectedOption) => {
             props.onChange(null, selectedOption)
@@ -295,13 +294,11 @@ class SelectMultiple extends Component {
       }
 
       return {
-        filterText: '',
         filteredOptions: this.getFilteredOptions(props, '', selectedOption),
         selectedOption
       }
     }
     return {
-      filterText: '',
       filteredOptions: this.getFilteredOptions(props, '', state.selectedOption)
     }
   }
