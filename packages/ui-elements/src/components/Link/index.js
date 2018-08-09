@@ -148,11 +148,6 @@ class Link extends Component {
       [styles.iconOnly]: icon && !this.hasVisibleChildren
     }
 
-    const layoutClasses = {
-      [styles.layout]: true,
-      [styles.text]: ellipsis
-    }
-
     const props = {
       ref: (c, ...args) => {
         this._link = c
@@ -175,11 +170,9 @@ class Link extends Component {
         elementRef={elementRef}
       >
         <ElementType {...props}>
-          <span className={classnames(layoutClasses)}>
-            {(icon && iconPlacement === 'start') && this.renderIcon()}
-            {children}
-            {(icon && iconPlacement === 'end') && this.renderIcon()}
-          </span>
+          {(icon && iconPlacement === 'start') && this.renderIcon()}
+          {children}
+          {(icon && iconPlacement === 'end') && this.renderIcon()}
         </ElementType>
       </View>
     )

@@ -38,6 +38,13 @@
     pointer-events: none;
     opacity: 0.5;
   }
+
+  /*
+  * Ensures that button or link is always the event target.
+  */
+  * { /* stylelint-disable-line selector-max-universal */
+    pointer-events: none;
+  }
 }
 
 .root a.inverse:link,
@@ -77,25 +84,11 @@
   text-align: inherit;
 }
 
-/* Ensures that link or button element is always the event target */
-.layout {
-  pointer-events: none;
-}
-
 .ellipsis {
-  display: inline-block;
-  vertical-align: middle;
-  width: 100%;
-}
-
-.text {
-  box-sizing: border-box;
   display: block;
-  line-height: 1.2;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 100%;
 }
 
 .icon {
