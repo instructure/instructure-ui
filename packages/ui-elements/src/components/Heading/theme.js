@@ -29,16 +29,16 @@ export default function generator ({ borders, colors, spacing, typography }) {
     lineHeight: typography.lineHeightFit,
 
     h1FontSize: typography.fontSizeXXLarge,
-    h1FontWeight: typography.fontWeightNormal,
+    h1FontWeight: typography.fontWeightLight,
 
     h2FontSize: typography.fontSizeXLarge,
     h2FontWeight: typography.fontWeightNormal,
 
     h3FontSize: typography.fontSizeLarge,
-    h3FontWeight: typography.fontWeightNormal,
+    h3FontWeight: typography.fontWeightBold,
 
     h4FontSize: typography.fontSizeMedium,
-    h4FontWeight: typography.fontWeightNormal,
+    h4FontWeight: typography.fontWeightBold,
 
     h5FontSize: typography.fontSizeSmall,
     h5FontWeight: typography.fontWeightNormal,

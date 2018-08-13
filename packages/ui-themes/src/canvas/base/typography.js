@@ -31,13 +31,13 @@ export default Object.freeze({
   fontSizeMedium: '1rem', // 16px
   fontSizeLarge: '1.375rem', // 22px
   fontSizeXLarge: '1.75rem',  // 28px
-  fontSizeXXLarge: '2.25rem', // 36px
+  fontSizeXXLarge: '2.375rem', // 38px
 
   fontWeightLight: 300,
   fontWeightNormal: 400,
   fontWeightBold: 700,
 
-  lineHeight: 1.4,
+  lineHeight: 1.5, // 24px
   lineHeightFit: 1.125,
   lineHeightCondensed: 1.25,
   lineHeightDouble: 2,
