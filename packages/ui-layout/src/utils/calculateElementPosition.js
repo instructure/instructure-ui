@@ -374,15 +374,17 @@ class PositionData {
     }
 
     if (this.element.hasVerticalPlacement) {
-      if (oob.left && oob.right) {
-        this.element.placement[1] = 'center'
-        this.target.placement[1] = 'center'
-      } else if (oob.left) {
-        this.element.placement[1] = 'start'
-        this.target.placement[1] = 'start'
-      } else if (oob.right) {
-        this.element.placement[1] = 'end'
-        this.target.placement[1] = 'end'
+      if (this.element.placement[1] !== 'stretch') {
+        if (oob.left && oob.right) {
+          this.element.placement[1] = 'center'
+          this.target.placement[1] = 'center'
+        } else if (oob.left) {
+          this.element.placement[1] = 'start'
+          this.target.placement[1] = 'start'
+        } else if (oob.right) {
+          this.element.placement[1] = 'end'
+          this.target.placement[1] = 'end'
+        }
       }
 
       if (oob.top && oob.bottom) {
