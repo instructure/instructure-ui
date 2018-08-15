@@ -36,7 +36,9 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 import PaginationButton from './PaginationButton'
 import theme from './theme'
 import styles from './styles.css'
@@ -47,8 +49,6 @@ const fastFindIndex = (arr, fn) => Number(Object.keys(arr).find(k => fn(arr[Numb
 function propsHaveCompactView (props) {
   return props.variant === 'compact' && props.children.length > 5
 }
-
-
 
 function shouldShowPrevButton (props, currentPageIndex) {
   return propsHaveCompactView(props) && (currentPageIndex > 0)
@@ -208,19 +208,20 @@ export default class Pagination extends Component {
     )
   }
 
-  renderArrowButton (icon, title, direction, currentPageIndex) {
+  renderArrowButton (icon, label, direction, currentPageIndex) {
     const { onClick, disabled } = this.props.children[currentPageIndex + direction].props
     return (
-      <Button
-        onClick={onClick}
-        disabled={this.props.disabled || disabled}
-        variant="icon"
-        size="small"
-        title={title}
-        icon={icon}
-      >
-        <ScreenReaderContent>{title}</ScreenReaderContent>
-      </Button>
+      <Tooltip tip={<PresentationContent>{label}</PresentationContent>}>
+        <Button
+          onClick={onClick}
+          disabled={this.props.disabled || disabled}
+          variant="icon"
+          size="small"
+          icon={icon}
+        >
+          <ScreenReaderContent>{label}</ScreenReaderContent>
+        </Button>
+      </Tooltip>
     )
   }
 

@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import Portal from '@instructure/ui-portal/lib/components/Portal'
 import View from '@instructure/ui-layout/lib/components/View'
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton'
@@ -134,6 +135,22 @@ describe('<Pagination />', () => {
       })
       expect(subject.find('button').length).to.eq(9)
       expect(subject.text().trim()).to.eq('Prev#0#1#2#3#4#5#6Next')
+    })
+
+    it('should display tooltips on the next and previous arrow buttons', () => {
+      const prevLabelText = 'Previous'
+      const subject = testbed.render({
+        children: buildPages(9, 3),
+        variant: 'compact',
+        labelNext: 'Next',
+        labelPrev: prevLabelText
+      })
+
+      const prevButton = subject.find('button').first()
+      prevButton.simulate('focus')
+      // TODO: Remove this by querying for Portal text with new test utils, once merged
+      const tooltipContent = subject.find(Portal).unwrap().node
+      expect(tooltipContent.textContent).to.include(prevLabelText)
     })
 
     context('when updating with the first page becoming current', () => {
