@@ -115,7 +115,7 @@ class Position extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Position />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: LayoutPropTypes.mountNode,
 
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
@@ -127,11 +127,7 @@ class Position extends Component {
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: PropTypes.oneOfType([
-      CustomPropTypes.element,
-      PropTypes.func,
-      PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
-    ])
+    constrain: LayoutPropTypes.constrain
   }
 
   static defaultProps = {

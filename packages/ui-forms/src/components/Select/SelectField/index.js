@@ -194,6 +194,12 @@ class SelectField extends Component {
     * should the menu be closed when a selection happens
     */
     closeOnSelect: PropTypes.bool,
+    /**
+     * The parent in which to constrain the menu.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
+     */
+    constrain: LayoutPropTypes.constrain,
     disabled: PropTypes.bool,
     readOnly: PropTypes.bool,
     required: PropTypes.bool
@@ -210,6 +216,7 @@ class SelectField extends Component {
     closeOnSelect: true,
     editable: false,
     inline: false,
+    constrain: 'scroll-parent',
     onPositioned: () => {},
     onSelect: (event, selectedOption) => {},
     onStaticClick: event => {},
@@ -560,7 +567,8 @@ class SelectField extends Component {
       onStaticClick,
       assistiveText,
       layout,
-      announcement
+      announcement,
+      constrain
     } = this.props
 
     const inputProps = omitProps(this.props, SelectField.propTypes, [
@@ -653,6 +661,7 @@ class SelectField extends Component {
           onPositioned={this.handlePositioned}
           target={this._inputContainer}
           mountNode={this._inputContainer}
+          constrain={constrain}
         >
           <PositionContent>
             <SelectOptionsList

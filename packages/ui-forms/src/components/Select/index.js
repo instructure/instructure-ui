@@ -211,7 +211,13 @@ class Select extends Component {
     /**
     * should the menu be closed when a selection happens
     */
-    closeOnSelect: PropTypes.bool
+    closeOnSelect: PropTypes.bool,
+    /**
+     * The parent in which to constrain the menu.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
+     */
+    constrain: LayoutPropTypes.constrain,
   }
 
   static defaultProps = {
@@ -228,7 +234,8 @@ class Select extends Component {
       return options.filter(option => option.label.toLowerCase().startsWith(filterText.toLowerCase()))
     },
     formatSelectedOption: tag => tag.label || tag.children,
-    closeOnSelect: true
+    closeOnSelect: true,
+    constrain: 'scroll-parent'
   }
 
   constructor (props) {

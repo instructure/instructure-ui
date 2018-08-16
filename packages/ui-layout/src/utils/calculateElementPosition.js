@@ -393,7 +393,7 @@ class PositionData {
           // more room on bottom, position below
           this.element.placement[0] = 'bottom'
           this.target.placement[0] = 'top'
-        } else {
+        } else if (overflow.bottom > overflow.top) {
           // more room on top, position above
           this.element.placement[0] = 'top'
           this.target.placement[0] = 'bottom'
@@ -426,7 +426,7 @@ class PositionData {
           // more room at end, position after
           this.element.placement[0] = 'end'
           this.target.placement[0] = 'start'
-        } else {
+        } else if (overflow.left < overflow.right) {
           // more room at start, position before
           this.element.placement[0] = 'start'
           this.target.placement[0] = 'end'
