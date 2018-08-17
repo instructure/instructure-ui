@@ -87,7 +87,7 @@ example: true
            </ModalBody>
            <ModalFooter>
              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-             <Button onClick={this.handleButtonClick} variant="primary">Submit</Button>
+             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
            </ModalFooter>
          </Modal>
        </div>
@@ -161,7 +161,7 @@ const fpo = lorem.paragraphs(1)
            </ModalBody>
            <ModalFooter>
              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-             <Button onClick={this.handleButtonClick} variant="primary">Submit</Button>
+             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
            </ModalFooter>
          </Modal>
        </div>
