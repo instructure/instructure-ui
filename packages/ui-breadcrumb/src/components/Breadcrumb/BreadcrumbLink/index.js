@@ -73,7 +73,6 @@ export default class BreadcrumbLink extends Component {
           ellipsis
           href={href}
           onClick={onClick}
-          title={children}
         >
           {children}
         </Link>

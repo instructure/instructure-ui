@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import themeable from '@instructure/ui-themeable'
@@ -97,8 +98,9 @@ export default class Breadcrumb extends Component {
         role="navigation"
         as="div"
         margin={this.props.margin}
+        aria-label={this.props.label}
       >
-        <ol className={classnames(classes)} aria-label={this.props.label}>
+        <ol className={classnames(classes)}>
           {this.renderChildren()}
         </ol>
       </View>

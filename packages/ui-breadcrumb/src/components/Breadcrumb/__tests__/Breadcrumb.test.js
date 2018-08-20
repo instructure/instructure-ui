@@ -39,7 +39,7 @@ describe('<Breadcrumb />', () => {
 
   it('should render the label as an aria-label attribute', () => {
     const subject = testbed.render({label: 'This is a test'})
-    expect(subject.find('ol[aria-label]').getAttribute('aria-label')).to.equal('This is a test')
+    expect(subject.getAttribute('aria-label')).to.equal('This is a test')
   })
 
   it('should render IconArrowOpenEnd by default as a separator', () => {
