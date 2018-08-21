@@ -551,7 +551,6 @@ class Menu extends Component {
               this._trigger = el
             },
             'aria-haspopup': true,
-            'aria-expanded': this.shown ? 'true' : 'false',
             id: this._labelId,
             onMouseOver: this.handleTriggerMouseOver,
             onKeyDown: this.handleTriggerKeyDown,
