@@ -6,8 +6,9 @@ Renders available pages of content, and reacts to selection of another page.
 Expects array of `PaginationButton` children. Focus and announcement of page change is
 the responsibility of your app.
 
-The `compact` variant truncates pages to show only the first, last, and
-pages surrounding the current one.
+If there are more than 5 pages, the `compact` variant truncates the page navigation
+to show only the first, last, and pages surrounding the current page. At fewer than
+5 pages, no next/previous arrow buttons will be shown, and all pages will be listed.
 
 Provide an `onClick` to `PaginationButton` to handle navigation.
 
