@@ -362,7 +362,9 @@ class SelectMultiple extends Component {
   }
 
   dismiss = (event, tag) => {
-    event.preventDefault() // to prevent expanding the menu onClick
+    // to prevent expanding the menu onClick
+    event.preventDefault()
+    event.stopPropagation()
 
     const tagId = getOptionId(tag)
     const newSelectedOption = this.state.selectedOption.filter((o) => getOptionId(o) !== tagId)
@@ -391,7 +393,11 @@ class SelectMultiple extends Component {
       if (isDismissible) {
         dismissibleProps = {
           dismissible: true,
-          onClick: (event) => this.dismiss(event, tag)
+          onClick: (event) => this.dismiss(event, tag),
+          onMouseDown: (event) => {
+            // prevent event from propagating up to SelectField
+            event.stopPropagation()
+          }
         }
       }
 

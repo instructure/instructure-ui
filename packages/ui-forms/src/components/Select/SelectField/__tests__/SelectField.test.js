@@ -117,9 +117,16 @@ describe('<SelectField />', () => {
     expect(subject.instance().props.placement).to.equal('end top')
   })
 
-  it('expands on click', () => {
+  it('expands when input is clicked', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.true
+  })
+
+  it('expands when formfield is clicked', () => {
+    const subject = testbed.render()
+    subject.ref('_inputContainer').simulate('click')
     testbed.tick()
     expect(subject.instance().expanded).to.be.true
   })
@@ -145,6 +152,26 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('change', { target: { value: 'a' } })
     testbed.tick()
     expect(subject.instance().expanded).to.be.true
+  })
+
+  it('closes when input is clicked', () => {
+    const subject = testbed.render()
+    subject.find('input').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.true
+    subject.find('input').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.false
+  })
+
+  it('closes when formfield is clicked', () => {
+    const subject = testbed.render()
+    subject.ref('_inputContainer').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.true
+    subject.ref('_inputContainer').simulate('click')
+    testbed.tick()
+    expect(subject.instance().expanded).to.be.false
   })
 
   it('closes on blur', () => {

@@ -33,6 +33,7 @@ import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
@@ -480,6 +481,10 @@ class SelectField extends Component {
     this.props.onKeyUp(event)
   }
 
+  handleMouseDown = event => {
+    event.preventDefault()
+  }
+
   handleFocus = event => {
     this.setState(() => ({ focus: true }))
     this.props.onFocus(event)
@@ -509,13 +514,14 @@ class SelectField extends Component {
   }
 
   handleClick = event => {
+    event.preventDefault()
     if (!this.expanded) {
-      event.preventDefault()
-      // make sure safari focuses readonly input
-      if (this._input && !this.props.editable) {
+      if (this._input && !isActiveElement(this._input)) {
         this._input.focus()
       }
       this.open()
+    } else {
+      this.close()
     }
     this.props.onClick(event)
   }
@@ -607,6 +613,8 @@ class SelectField extends Component {
         label={wrappedLabel}
         id={this.id}
         vAlign={(layout === 'inline') ? 'middle' : null}
+        onClick={this.handleClick}
+        onMouseDown={this.handleMouseDown}
       >
         <span
           style={{
@@ -630,7 +638,6 @@ class SelectField extends Component {
                 [styles.editable]: editable
               })}
               onFocus={this.handleFocus}
-              onClick={this.handleClick}
               onChange={editable ? this.handleChange : null}
               onKeyDown={this.handleKeyDown}
               onKeyUp={this.handleKeyUp}
