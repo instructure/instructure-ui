@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.25.0"></a>
+# [5.25.0](https://github.com/instructure/instructure-ui/compare/v5.24.0...v5.25.0) (2018-08-24)
+
+
+### Bug Fixes
+
+* **ui-forms,ui-layout:** add constrain prop to select ([25bfc2e](https://github.com/instructure/instructure-ui/commit/25bfc2e))
+* **ui-layout:** account for stretch positioning in constrain logic ([d21ac1c](https://github.com/instructure/instructure-ui/commit/d21ac1c))
+
+
+
+
+
 <a name="5.24.0"></a>
 # [5.24.0](https://github.com/instructure/instructure-ui/compare/v5.23.0...v5.24.0) (2018-08-08)
 

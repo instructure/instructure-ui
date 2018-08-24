@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.25.0"></a>
+# [5.25.0](https://github.com/instructure/instructure-ui/compare/v5.24.0...v5.25.0) (2018-08-24)
+
+
+### Bug Fixes
+
+* **ui-breadcrumb:** Implement WebAIM recommendations ([4e3ec0e](https://github.com/instructure/instructure-ui/commit/4e3ec0e))
+* **ui-buttons,ui-elements:** Fix Safari focus issue ([7825b13](https://github.com/instructure/instructure-ui/commit/7825b13))
+* **ui-forms:** do not clear input when receiving new options ([e4ca8ca](https://github.com/instructure/instructure-ui/commit/e4ca8ca))
+* **ui-forms:** fix select expand/collapse click events ([3d3bcc1](https://github.com/instructure/instructure-ui/commit/3d3bcc1))
+* **ui-forms:** RangeInput needs min-width ([d1118d1](https://github.com/instructure/instructure-ui/commit/d1118d1))
+* **ui-forms,ui-layout:** add constrain prop to select ([25bfc2e](https://github.com/instructure/instructure-ui/commit/25bfc2e))
+* **ui-layout:** account for stretch positioning in constrain logic ([d21ac1c](https://github.com/instructure/instructure-ui/commit/d21ac1c))
+
+
+### Features
+
+* **ui-pagination:** Add tooltips to Pagination ([0df511b](https://github.com/instructure/instructure-ui/commit/0df511b))
+
+
+### Performance Improvements
+
+* **babel-plugin-themeable-styles,ui-themeable:** more small perf improvements ([cf51ab9](https://github.com/instructure/instructure-ui/commit/cf51ab9))
+
+
+
+
+
 <a name="5.24.0"></a>
 # [5.24.0](https://github.com/instructure/instructure-ui/compare/v5.23.0...v5.24.0) (2018-08-08)
 

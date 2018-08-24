@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.25.0"></a>
+# [5.25.0](https://github.com/instructure/instructure-ui/compare/v5.24.0...v5.25.0) (2018-08-24)
+
+
+### Features
+
+* **ui-pagination:** Add tooltips to Pagination ([0df511b](https://github.com/instructure/instructure-ui/commit/0df511b))
+
+
+
+
+
 <a name="5.24.0"></a>
 # [5.24.0](https://github.com/instructure/instructure-ui/compare/v5.23.0...v5.24.0) (2018-08-08)
 
