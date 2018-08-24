@@ -69,10 +69,13 @@ async function createNPMRCFile (config = {}) {
    NPM_USERNAME
   } = process.env
 
-  fs.writeFileSync(
-    path.resolve(process.cwd(), '.npmrc'),
-    `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${config.npm_scope}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
-  )
+  // Only write an npmrc file if these are defined, otherwise assume the system is properly configured
+  if (NPM_TOKEN) {
+    fs.writeFileSync(
+      path.resolve(process.cwd(), '.npmrc'),
+      `//registry.npmjs.org/:_authToken=${NPM_TOKEN}\n${config.npm_scope}\nemail=${NPM_EMAIL}\nname=${NPM_USERNAME}`
+    )
+  }
 
   await runCommandAsync('npm', ['whoami'])
 }
