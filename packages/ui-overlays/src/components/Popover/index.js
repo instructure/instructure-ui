@@ -237,15 +237,17 @@ class Popover extends Component {
     trackPosition: PropTypes.bool,
 
     /**
-     * Should the `<Popover />` be positioned within some container.
+     * The parent in which to constrain the popover.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
      */
-    constrain: Position.propTypes.constrain,
+    constrain: LayoutPropTypes.constrain,
 
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Popover />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: LayoutPropTypes.mountNode,
 
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'

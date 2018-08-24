@@ -131,7 +131,13 @@ class Menu extends Component {
      * If a trigger is supplied, an element or a function returning an element to use as the mount node
      * for the `<Menu />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: LayoutPropTypes.mountNode,
+    /**
+     * The parent in which to constrain the menu.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
+     */
+    constrain: LayoutPropTypes.constrain,
     /**
      * If a trigger is supplied, an element, function returning an element, or array of elements that will not
      * be hidden from the screen reader when the `<Menu />` is open
@@ -169,6 +175,7 @@ class Menu extends Component {
     menuRef: el => {},
     popoverRef: el => {},
     mountNode: null,
+    constrain: 'window',
     liveRegion: null,
     shouldHideOnSelect: true,
     shouldFocusTriggerOnClose: true

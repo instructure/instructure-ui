@@ -67,14 +67,21 @@ export default class Tooltip extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: LayoutPropTypes.mountNode,
+    /**
+     * The parent in which to constrain the tooltip.
+     * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
+     * or a function returning an element
+     */
+    constrain: LayoutPropTypes.constrain
   }
 
   static defaultProps = {
     variant: 'default',
     placement: 'top',
     size: 'small',
-    mountNode: null
+    mountNode: null,
+    constrain: 'window'
   }
 
   constructor (props) {
@@ -107,6 +114,7 @@ export default class Tooltip extends Component {
         placement={this.props.placement}
         variant={this.props.variant}
         mountNode={this.props.mountNode}
+        constrain={this.props.constrain}
       >
         <PopoverTrigger
           aria-describedby={this._id}
