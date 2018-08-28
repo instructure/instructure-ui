@@ -378,7 +378,13 @@ describe('<SelectField />', () => {
   })
 
   describe('for a11y', () => {
-    it('should meet standards', done => {
+    it('should meet standards when closed', (done) => {
+      const subject = testbed.render()
+
+      subject.should.be.accessible(done)
+    })
+
+    it('should meet standards when open', done => {
       const subject = testbed.render()
 
       subject.find('input').simulate('click') // open it so it renders the opts

@@ -585,7 +585,7 @@ class SelectField extends Component {
     ])
 
     const highlightedOption = options[this.state.highlightedIndex]
-    if (highlightedOption) {
+    if (highlightedOption && this.expanded) {
       inputProps['aria-activedescendant'] = `${this._optionsId}_${highlightedOption.id}`
     } else {
       inputProps['aria-activedescendant'] = null
@@ -646,9 +646,9 @@ class SelectField extends Component {
               ref={createChainedFunction(this.props.inputRef, this.handleInputRef)}
               role="combobox"
               aria-expanded={this.expanded}
-              aria-owns={this._optionsId}
+              aria-owns={this.expanded ? this._optionsId : null}
               aria-describedby={this._assistId}
-              aria-controls={this._optionsId}
+              aria-controls={this.expanded ? this._optionsId : null}
               aria-autocomplete={editable ? 'list' : null}
               aria-haspopup="true"
               autoComplete={editable ? 'off' : null}
