@@ -25,6 +25,7 @@
 const constants = require('karma').constants
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
+const noHeadless = process.argv.some((arg) => arg === '--no-headless')
 
 const debug = Boolean(process.env.DEBUG)
 const withCoverage = Boolean(process.env.COVERAGE)
@@ -52,7 +53,7 @@ module.exports = function makeConfig ({
   const browsers = []
 
   if (!noLaunchers) {
-    if (debug) {
+    if (noHeadless) {
       browsers.push('CustomChrome')
     } else {
       browsers.push('CustomChromeHeadless')
