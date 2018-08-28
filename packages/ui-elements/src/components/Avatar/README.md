@@ -31,3 +31,20 @@ example: true
   <Avatar name="David Herbert" size="x-large" />
 </div>
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Ensure the appropriate size is being used for its placement (in a table, stand-alone, etc…)</FigureItem>
+    <FigureItem>Use circle variant in Canvas</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use inline in sentence</FigureItem>
+  </Figure>
+</Guidelines>
+```
+
