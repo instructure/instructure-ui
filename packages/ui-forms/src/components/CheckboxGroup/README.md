@@ -79,3 +79,21 @@ example: true
   <Checkbox label="Soccer" value="soccer" variant="toggle" />
 </CheckboxGroup>
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Align to the left side of the label</FigureItem>
+    <FigureItem>Use when multiple selections are allowed</FigureItem>
+    <FigureItem>Use to save space from toggles</FigureItem>
+    <FigureItem>Stack vertically if there is more than two options to select</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Run more than two checkboxes horizontally</FigureItem>
+  </Figure>
+</Guidelines>
+```
