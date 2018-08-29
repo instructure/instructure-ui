@@ -83,3 +83,21 @@ example: true
   <TextInput size="large" label="Large-size input" />
 </div>
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Left align text (exceptions may apply)</FigureItem>
+    <FigureItem>Place labels on top or to the left (inline)</FigureItem>
+    <FigureItem>Make placeholder text different than the label</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Place labels to the right of the input</FigureItem>
+    <FigureItem>Place inputs in the middle of sentences or phrases</FigureItem>
+  </Figure>
+</Guidelines>
+```
