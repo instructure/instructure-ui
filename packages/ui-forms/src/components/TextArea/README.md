@@ -80,8 +80,6 @@ example: true
     height="10em"
     maxHeight="250px"
   />
-  &nbsp;
-  <Text>foo</Text>
 </div>
 ```
 
@@ -110,4 +108,23 @@ class Example extends React.Component {
 }
 
 render(<Example/>)
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Align text to the left</FigureItem>
+    <FigureItem>Place labels on top or to the left (inline)</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Repeat label text if using placeholder text</FigureItem>
+    <FigureItem>Use for rich text editing</FigureItem>
+    <FigureItem>Allow resizing of the TextArea to break the layout of a page</FigureItem>
+    <FigureItem>Place labels to the right of the TextArea</FigureItem>
+  </Figure>
+</Guidelines>
 ```

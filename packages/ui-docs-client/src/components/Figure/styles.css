@@ -39,6 +39,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  color: var(--iconColor);
 }
 
 .recommendation--no {
@@ -55,8 +56,4 @@
   .iconContainer {
     background: var(--yesColor);
   }
-}
-
-.icon {
-  color: var(--iconColor);
 }
