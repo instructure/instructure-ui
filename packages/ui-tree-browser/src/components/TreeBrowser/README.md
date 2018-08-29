@@ -100,3 +100,18 @@ class Example extends React.Component {
 
 render(<Example/>)
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use for browsing hierarchical content</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use for site navigation</FigureItem>
+  </Figure>
+</Guidelines>
+```
