@@ -4,10 +4,8 @@ describes: Badge
 
 ### Making badges accessible
 Badge counts are automatically fed to screenreaders through the `aria-describedby`
-attribute. Often a stand alone number doesn't give a screenreader user enough context (_"3" vs. "3 unread emails"_). 
+attribute. Often a stand alone number doesn't give a screenreader user enough context (_"3" vs. "You have 3 unread emails"_). 
 The examples below use the `formatOutput` prop to make the badge more screenreader-friendly.
-
-> Note the use of the `pulse` prop to make the Badge slowly pulse twice on mount.
 
 ```js
 ---
@@ -43,60 +41,48 @@ example: true
   </div>
 ```
 
+> Note the use of the `pulse` prop in the first example to make the Badge slowly pulse twice on mount.
+
 ### Limit the count
 
-Use the `countUntil` prop to set a limit for the count. Format the overflow
-text using `formatOverflowText` _(default is "+" symbol)_.
+Use the `countUntil` prop to set a limit for the count. The default for `formatOverflowText` is a "+" symbol.
 
 ```js
 ---
 example: true
 ---
 <div>
-  <Badge count={100} countUntil={100} margin="0 medium 0 0">
+  <Badge count={105} countUntil={100} margin="0 medium 0 0">
     <Button>Inbox</Button>
   </Badge>
-  <Badge
-    count={100}
-    countUntil={100}
-    formatOverflowText={function (count, countUntil) {
-      return 'Over ' + (countUntil - 1)
-    }}
-  >
-    <Button>
-      Assignments
-    </Button>
+  <Badge count={250} countUntil={100}>
+    <Button>Assignments</Button>
   </Badge>
 </div>
 ```
 
-### Standalone badges and color variants
+### Standalone, notification and color variants
 
 Setting the `standalone` prop to `true` renders Badge as a standalone
 element that is not positioned relative to a child and displays inline-block.
-
-`notification`-type Badges render as circles and should not contain visible
-text.
+Setting `type="notification"` will render small circles that should not contain any visible text.
 
 ```js
 ---
 example: true
 ---
 <div>
-  <Badge standalone count={6} />
-  &nbsp;&nbsp;
-  <Badge standalone variant="success" count={12} />
-  &nbsp;&nbsp;
-  <Badge standalone variant="danger" count={18} countUntil={10} />
-  &nbsp;&nbsp;
+  <Badge standalone count={6} margin="0 small 0 0" />
+  <Badge standalone variant="success" count={12} margin="0 small 0 0"  />
+  <Badge standalone variant="danger" count={18} countUntil={10} margin="0 small 0 0" />
   <Badge
     type="notification"
     standalone
     formatOutput={function () {
       return <ScreenReaderContent>This is a notification</ScreenReaderContent>
     }}
+    margin="0 small 0 0"
   />
-  &nbsp;&nbsp;
   <Badge
     variant="success"
     type="notification"
@@ -104,8 +90,8 @@ example: true
     formatOutput={function () {
       return <ScreenReaderContent>This is a success notification</ScreenReaderContent>
     }}
+    margin="0 small 0 0"
   />
-  &nbsp;&nbsp;
   <Badge
     variant="danger"
     type="notification"
@@ -231,4 +217,23 @@ example: true
     </Badge>
   </View>
 </div>
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use count for up to 2 digits of numbers</FigureItem>
+    <FigureItem>Use "+" symbol for more than 2 digits (99+)</FigureItem>
+    <FigureItem>Use for numeric count (like unread messages)</FigureItem>
+    <FigureItem>Provide accessible text for what the number represents</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use as a status indicator refer to Pill</FigureItem>
+    <FigureItem>Use for text strings</FigureItem>
+  </Figure>
+</Guidelines>
 ```
