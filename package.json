@@ -47,6 +47,7 @@
     "clean:modules": "lerna clean --yes",
     "export:icons": "lerna run export --stream --scope @instructure/ui-icons",
     "bump": "ui-scripts --bump",
+    "link:packages": "ui-scripts --link-packages",
     "publish:packages": "lerna exec ui-scripts --publish-package --stream --ignore docs",
     "deprecate:packages": "lerna exec ui-scripts --deprecate-package --stream --ignore docs",
     "prerelease": "yarn bootstrap",
