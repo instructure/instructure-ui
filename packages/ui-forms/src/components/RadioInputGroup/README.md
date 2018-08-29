@@ -16,9 +16,9 @@ example: true
 ---
 function Example () {
   const inputs = [
-    {value: 'foo', label: lorem.sentence() },
-    {value: 'bar', label: lorem.sentence() },
-    {value: 'baz', label: lorem.sentence() }
+    {value: 'foo', label: 'Radio option one' },
+    {value: 'bar', label: 'Radio option two' },
+    {value: 'baz', label: 'Radio option three' }
   ]
   const handleChange = function (event, value) {
     console.log(value)
@@ -42,9 +42,9 @@ example: true
 ---
 function Example () {
   const inputs = [
-    {value: 'foo', label: lorem.sentence() },
-    {value: 'bar', label: lorem.sentence() },
-    {value: 'baz', label: lorem.sentence() }
+    {value: 'foo', label: 'Classical' },
+    {value: 'bar', label: 'Electronic' },
+    {value: 'baz', label: 'Country' }
   ]
   return (
     <RadioInputGroup
@@ -69,9 +69,9 @@ example: true
 ---
 function Example () {
   const inputs = [
-    {value: 'foo', label: lorem.sentence() },
-    {value: 'bar', label: lorem.sentence() },
-    {value: 'baz', label: lorem.sentence() }
+    {value: 'foo', label: 'Extremely happy' },
+    {value: 'bar', label: 'Very annoyed' },
+    {value: 'baz', label: 'Somewhat apathetic' }
   ]
   return (
     <RadioInputGroup
@@ -274,4 +274,23 @@ example: true
   <RadioInput label="Orange" value="orange" />
   <RadioInput label="Banana" value="banana" />
 </RadioInputGroup>
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use sentence-style capitalization</FigureItem>
+    <FigureItem>Use a clear and concise label for RadioInput</FigureItem>
+    <FigureItem>Optionally include a heading to provide further clarity</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Have a single RadioInput</FigureItem>
+    <FigureItem>Use long labels for RadioInput</FigureItem>
+    <FigureItem>Display more than two radio inputs horizontally</FigureItem>
+  </Figure>
+</Guidelines>
 ```

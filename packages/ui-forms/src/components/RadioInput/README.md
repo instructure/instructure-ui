@@ -12,9 +12,28 @@ Adjust the size of the RadioInput and its label text via the `size` prop. The de
 example: true
 ---
 <RadioInput
-  label={lorem.sentence()}
+  label="See RadioInputGroup for more details"
   value="foo"
   name="bar"
   checked
 />
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use sentence-style capitalization</FigureItem>
+    <FigureItem>Use a clear and concise label for RadioInput</FigureItem>
+    <FigureItem>Optionally include a heading to provide further clarity</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Have a single RadioInput</FigureItem>
+    <FigureItem>Use long labels for RadioInput</FigureItem>
+    <FigureItem>Display more than two radio inputs horizontally</FigureItem>
+  </Figure>
+</Guidelines>
 ```
