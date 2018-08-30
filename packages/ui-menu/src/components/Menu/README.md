@@ -100,3 +100,21 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Make the text within Menu direct so users can quickly decide on an action</FigureItem>
+    <FigureItem>Use for radio or checkbox type interactions</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Nest MenuItems more than two levels deep</FigureItem>
+    <FigureItem>Use content that is not a MenuItem (links or buttons)</FigureItem>
+    <FigureItem>Include complex content</FigureItem>
+  </Figure>
+</Guidelines>
+```
