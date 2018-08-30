@@ -131,3 +131,18 @@ example: true
   </Text>
 </ToggleDetails>
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use ToggleDetails when descriptive text is longer than a short phrase</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Nest ToggleDetails within another ToggleDetails</FigureItem>
+  </Figure>
+</Guidelines>
+```
