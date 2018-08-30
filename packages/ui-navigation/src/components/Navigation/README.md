@@ -2,7 +2,7 @@
 describes: Navigation
 ---
 
-A `Navigation` component [WIP]
+A top-level `Navigation` component
 
 ```js
 ---
@@ -52,4 +52,20 @@ example: true
       />
     </Navigation>
   </div>
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use for top-level Navigation</FigureItem>
+    <FigureItem>Remember that Navigation can be themed by the institution</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Add LTI links to the main area</FigureItem>
+  </Figure>
+</Guidelines>
 ```
