@@ -118,3 +118,16 @@ example: true
   <PaginationButton href="/pages/3">R-Z</PaginationButton>
 </Pagination>
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use for splitting up content or data into several pages</FigureItem>
+    <FigureItem>Use if there are more than 20 items displayed in one view</FigureItem>
+  </Figure>
+</Guidelines>
+```

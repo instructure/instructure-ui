@@ -32,7 +32,7 @@ export default function ({ borders, colors, spacing, shadows, stacking, typograp
     captionColor: colors.oxford,
     borderWidth: borders.widthMedium,
     borderColor: colors.oxford,
-    contentPadding: spacing.small,
+    contentPadding: spacing.medium,
     contentBackground: colors.white,
     yesColor: colors.shamrock,
     noColor: colors.crimson,
