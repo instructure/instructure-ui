@@ -198,3 +198,24 @@ const fpo = lorem.paragraphs(1)
 
 render(<Example />)
 ```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use it to validate user decisions or to gain secondary confirmation</FigureItem>
+    <FigureItem>Provide input areas that the user may interact with such as Forms, Dropdowns, Selectors, and Links</FigureItem>
+    <FigureItem>Provide a way to dismiss the Modal: the "x" close button, the ESC key, clicking outside the modal, alternative response button (done, etc...)</FigureItem>
+    <FigureItem>Place optional response button(s) on the right side within the ModalFooter</FigureItem>
+    <FigureItem>Place primary button on the far right with secondary response buttons to the left of the primary</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use when the workflow should NOT be interrupted</FigureItem>
+    <FigureItem>Use to show error, success, or warning messages/notifications (see Alert)</FigureItem>
+    <FigureItem>Add content to a modal that would be better suited in its own page</FigureItem>
+  </Figure>
+</Guidelines>
+```
