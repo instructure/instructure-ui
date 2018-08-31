@@ -130,7 +130,7 @@ example: true
 </div>
 ```
 
-### `fluidWidth`
+### Fluid width
 Set the `fluidWidth` prop if you want the button to fill the width of its container element
 and wrap the text.
 
@@ -138,7 +138,9 @@ and wrap the text.
 ---
 example: true
 ---
-<Button fluidWidth icon={IconUser.Solid}>{lorem.paragraph()}</Button>
+<View as="div" width="10rem">
+  <Button fluidWidth icon={IconUser.Solid}>20 characters max</Button>
+</View>
 ```
 
 ### Responsive Buttons
@@ -185,4 +187,29 @@ example: true
 <Button cursor="move" icon={IconDragHandle.Line}>
   Move me
 </Button>
+```
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use the primary button only once for each section of content</FigureItem>
+<FigureItem>Use the primary button when the task of the view requires an action to be taken</FigureItem>
+<FigureItem>Use the success and danger buttons for grading activities</FigureItem>
+<FigureItem>Use the danger button to warn the user of potentially destructive actions</FigureItem>
+<FigureItem>Use the default button as as secondary or tertiary option for actions such as Cancel</FigureItem>
+<FigureItem>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</FigureItem>
+<FigureItem>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</FigureItem>
+<FigureItem>Use the link button when the action is navigational</FigureItem>
+<FigureItem>The maximum string length of any button, including spaces, should be 20 characters</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use more than one primary button per section of content
+</FigureItem>
+    <FigureItem>Use the ghost button excessively or when another variant would work</FigureItem>
+  </Figure>
+</Guidelines>
 ```
