@@ -22,7 +22,7 @@
     "pretest:ci": "yarn bootstrap && yarn check",
     "test:ci": "npm-run-all lint:commit lint:changes test:node test:jest test:changes install:react:16 test:changes install:react",
     "test": "ui-test",
-    "test:watch": "ui-test --watch",
+    "test:watch": "ui-test --watch --no-headless",
     "test:changes": "ui-test --changed",
     "test:jest": "lerna run test:jest --stream",
     "test:node": "lerna run test:node --stream",

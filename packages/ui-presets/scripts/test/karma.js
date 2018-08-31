@@ -28,11 +28,20 @@ const { getCommand, runCommandsConcurrently } = require('../utils/command')
 
 const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`]
 const { argv } = process
+const args = ['start']
 
 if (argv.includes('--watch')) {
   vars.push('DEBUG=1')
 } else {
   vars.push('COVERAGE=1')
+}
+
+if (argv.includes('--no-launch')) {
+  args.push('--no-launch')
+}
+
+if (argv.includes('--no-headless')) {
+  args.push('--no-headless')
 }
 
 const scopeArgIndex = argv.indexOf('--scope')
@@ -61,7 +70,7 @@ if (paths.length > 0) {
 }
 
 const result = runCommandsConcurrently({
-  karma: getCommand('karma', ['start'], vars)
+  karma: getCommand('karma', args, vars)
 })
 
 process.exit(result.status)
