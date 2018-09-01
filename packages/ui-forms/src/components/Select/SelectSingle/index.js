@@ -89,7 +89,7 @@ class SelectSingle extends Component {
      */
     readOnly: PropTypes.bool,
     /**
-     * The filter function applied to the options when writting on the input
+     * The filter function applied to the options when writing on the input
      */
     filter: PropTypes.func,
     /**
@@ -169,7 +169,9 @@ class SelectSingle extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.options !== nextProps.options) {
+    const optionsChanged = this.props.options !== nextProps.options
+
+    if (optionsChanged) {
       this.setState({
         filteredOptions: nextProps.filter(nextProps.options, this.state.filterText)
       })
@@ -179,17 +181,14 @@ class SelectSingle extends Component {
     if (!this.props.disabled && !this.props.readOnly) {
       const oldId = getOptionId(this.props.selectedOption)
       const newId = getOptionId(nextProps.selectedOption)
-      if (newId !== null && newId !== oldId) {
-        const selectedOption = this.getSelectedOptionFromProps(nextProps.selectedOption, nextProps.options)
-        this.setState({ selectedOption })
+      const selectedChanged = newId !== oldId
 
-        if (this._input.value !== selectedOption.label) {
-          this._input.value = selectedOption.label
-          this.props.onInputChange(null, this._input.value)
-        }
-      } else if (newId === null && newId !== oldId) {
-        this.setState({ selectedOption: null })
-        this._input.value = ''
+      if (selectedChanged || optionsChanged) {
+        const id = selectedChanged ? newId : getOptionId(this.state.selectedOption)
+        const selectedOption = this.getSelectedOptionFromProps(id, nextProps.options)
+
+        this.setState({ selectedOption })
+        this._input.value = selectedOption ? selectedOption.label : ''
         this.props.onInputChange(null, this._input.value)
       }
     }

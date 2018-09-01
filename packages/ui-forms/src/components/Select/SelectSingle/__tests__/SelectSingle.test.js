@@ -281,6 +281,27 @@ describe('<SelectSingle />', () => {
     testDefaultValue('defaultSelectedOption')
     testDefaultValue('selectedOption')
 
+    it(`should update input value if selected option update`, (done) => {
+      const subject = testbed.render({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+        ],
+        selectedOption: '4',
+      })
+
+      expect(subject.find('input').node.value).to.equal('Argentina')
+
+      subject.setProps({
+        options: [
+          ...options,
+          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+        ],
+      })
+      expect(subject.find('input').node.value).to.equal('Foo')
+      done()
+    })
+
     it('should not override a selected option if the default option is set and the options update', (done) => {
       const subject = testbed.render({
         defaultSelectedOption: '4'

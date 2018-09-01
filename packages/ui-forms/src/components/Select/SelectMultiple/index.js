@@ -223,10 +223,10 @@ class SelectMultiple extends Component {
 
     if ((updateSelectedOption || updateOptions) && !this.props.disabled && !this.props.readOnly) {
       this.setState((prevState) => {
-        const selectedOption = updateSelectedOption ? this.getSelectedOptionFromProps(
-          nextProps.selectedOption,
-          nextProps.options
-        ) : prevState.selectedOption
+        const ids = updateSelectedOption
+          ? nextProps.selectedOption
+          : prevState.selectedOption.map(getOptionId)
+        const selectedOption = this.getSelectedOptionFromProps(ids, nextProps.options)
 
         return {
           filteredOptions: this.getFilteredOptions(nextProps, prevState.filterText, selectedOption),

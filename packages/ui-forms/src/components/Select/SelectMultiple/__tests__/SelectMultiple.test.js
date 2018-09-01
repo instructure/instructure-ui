@@ -370,6 +370,33 @@ describe('<SelectMultiple />', () => {
     testDefaultValue('defaultSelectedOption')
     testDefaultValue('selectedOption')
 
+    it('updates the selected options when selected options update', (done) => {
+      const subject = testbed.render({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' },
+        ],
+        selectedOption: ['4', '5'],
+      })
+
+      expect(subject.find('button').length).to.equal(2)
+      expect(subject.find('button[title="Argentina"]')).to.exist
+      expect(subject.find('button[title="Uruguay"]')).to.exist
+
+      subject.setProps({
+        options: [
+          ...options,
+          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+          { label: 'Bar', children: 'Bar', value: '5', id: '5' },
+        ],
+      })
+      expect(subject.find('button').length).to.equal(2)
+      expect(subject.find('button[title="Foo"]')).to.exist
+      expect(subject.find('button[title="Bar"]')).to.exist
+      done()
+    })
+
     it('updates correctly when default options are provided and some of the corresponding options are loaded later', (done) => {
       const testOptions = [
         ...options,
