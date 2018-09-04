@@ -127,6 +127,23 @@ describe('ScreenReaderFocusRegion', () => {
     })
   })
 
+  it('should not apply aria-hidden to dynamically added descendants of content', () => {
+    const subject = testbed.render()
+
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
+    screenReaderFocusRegion.activate()
+
+    const desc = document.createElement('div')
+    findContent(subject).appendChild(desc)
+    screenReaderFocusRegion.handleDOMMutation([
+      { addedNodes: [desc], removedNodes: [] }
+    ])
+
+    findContent(subject).childNodes.forEach((node) => {
+      expect(node.getAttribute('aria-hidden')).to.not.exist
+    })
+  })
+
   it('should remove aria-hidden from children unless they had aria-hidden before', () => {
     const subject = testbed.render()
 

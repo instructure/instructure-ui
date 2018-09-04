@@ -79,11 +79,11 @@ export default class ScreenReaderFocusRegion {
     if (
       node &&
       node.nodeType === 1 &&
-      node !== this._contextElement &&
       node.getAttribute('aria-hidden') !== 'true' &&
       this._parents.indexOf(node) === -1 &&
       this._nodes.indexOf(node) === -1 &&
-      this._liveRegion.indexOf(node) === -1
+      this._liveRegion.indexOf(node) === -1 &&
+      !this._contextElement.contains(node)
     ) {
       node.setAttribute('aria-hidden', 'true')
       this._nodes.push(node)
@@ -101,6 +101,7 @@ export default class ScreenReaderFocusRegion {
         // removed from our list of hidden nodes as well
         const index = this._nodes.indexOf(removedNode)
         if (index >= 0) {
+          removedNode.removeAttribute('aria-hidden')
           this._nodes.splice(index, 1)
         }
       })
