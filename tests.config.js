@@ -27,8 +27,7 @@ module.exports = {
     'packages/**/*.test.js'
   ],
   ignore: [
-    'packages/ui-codemods/**',
-    'packages/ui-core/**'
+    'packages/ui-codemods/**'
   ],
   // TODO convert these to use ui-test-utils and then remove them:
   TESTBED_REMOVE_THIS: [
@@ -40,6 +39,7 @@ module.exports = {
     'packages/ui-buttons/',
     'packages/ui-code-editor/',
     'packages/ui-container/',
+    'packages/ui-core/',
     'packages/ui-elements/',
     'packages/ui-focusable/',
     'packages/ui-forms/',

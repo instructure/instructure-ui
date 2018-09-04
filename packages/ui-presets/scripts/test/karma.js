@@ -51,9 +51,10 @@ let paths = []
 
 if (scopeArgIndex > 0) {
   const allPackages = getPackages()
-  const pkg = allPackages.find(pkg => pkg.name === argv[scopeArgIndex + 1])
-  if (pkg) {
-    paths = [path.relative('.', pkg.location) + path.sep]
+  const scopes = argv[scopeArgIndex + 1].split(',').map(scope => scope.trim())
+  const pkgs = allPackages.filter(pkg => scopes.includes(pkg.name))
+  if (pkgs.length > 0) {
+    paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
   }
 } else if (pathArgIndex > 0) {
   paths = argv[pathArgIndex + 1].split(',').map(path => path.normalize(path.trim()))

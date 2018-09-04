@@ -43,7 +43,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
     ['transform-runtime', {
       helpers: true,
       polyfill: false,
-      regenerator: false
+      regenerator: true
     }],
     'transform-decorators-legacy',
     require.resolve('@instructure/babel-plugin-transform-class-display-name')

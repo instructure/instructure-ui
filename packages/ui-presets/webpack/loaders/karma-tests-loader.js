@@ -59,26 +59,20 @@ module.exports = function (source, map) {
         .filter((filePath) => {
           return matchesTestbedPath(filePath)
         })
-      const testFilePaths = allFilePaths
-        .filter((filePath) => {
-          return !matchesTestbedPath(filePath)
-        })
-
       if (testbedFilePaths.length > 0 && parseFloat(process.env.REACT_VERSION) < 16) {
         const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         const testbedTests = testbedFileRequires.join(';\n')
         result = `
-  global.Testbed = require('./packages/ui-testbed');
-  global.Testbed.init();
-  ${testbedTests}
+  describe('ui-testbed', function () {
+    global.Testbed = require('${require.resolve('@instructure/ui-testbed')}');
+    before(() => {
+      global.Testbed.init()
+    })
+    ${testbedTests}
+  })
   `
       }
       // END TODO (remove Testbed)
-
-      if (testFilePaths.length > 0) {
-        const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
-        result = result + testFileRequires.join(';\n')
-      }
 
       if (!result) {
         result = `
@@ -89,6 +83,23 @@ describe('WHEN NO TESTS MATCH...', () => {
       }
 
       callback(null, `
+// clear the console before rebundling:
+if (typeof console.clear === 'function') {
+  console.clear()
+}
+process.once('unhandledRejection', (error) => {
+  console.error('Unhandled rejection: ' + error.stack)
+  process.exit(1)
+})
+// so that we can test for prop type validation errors in our tests:
+const consoleError = console.error
+console.error = (firstMessage, ...rest) => {
+  if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
+    throw new Error('Unexpected React Warning: ' + firstMessage)
+  }
+
+  return consoleError(firstMessage, ...rest)
+}
 console.log('REACT VERSION', '${process.env.REACT_VERSION}');
 ${result}
 `, map)

@@ -30,7 +30,7 @@ module.exports = function getReactDoc (source, error) {
   let doc = {}
 
   try {
-    doc = reactDocgen.parse(source)
+    doc = reactDocgen.parse(source, null, null, {legacyDecorators: true})
   } catch (err) {
     if (err.message !== ERROR_MISSING_DEFINITION) {
       error(err)

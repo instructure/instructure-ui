@@ -21,32 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import axeCore from 'axe-core'
 
-const reject = require('lodash.reject')
-const axe = require('axe-core')
-
-module.exports = function checkA11y (node, options = {}, done) {
-  const exclude = options.exclude || []
-  const ignores = options.ignores || []
-  const axeConfig = {
+export default async function runAxe (element, options = {}) {
+  let result = true
+  const context = {
+    include: [element],
+    exclude: options.exclude
+  }
+  const config = {
     runOnly: {
       type: 'tag',
       values: ['wcag2a', 'wcag2aa', 'section508', 'best-practice']
     }
   }
 
-  axe.run({ include: [node], exclude }, axeConfig, (err, result) => {
-    if (err) {
-      done(err)
-    }
-    const violations = reject(result.violations, (violation) => {
-      return (ignores.indexOf(violation.id) >= 0)
-    })
+  try {
+    const axeResult = await axeCore.run(context, config)
+
+    // violations to ignore/filter out
+    const ignores = [...(options.ignores || []), 'color-contrast'] // we test color contrast in theme tests
+
+    const violations = (axeResult.violations || [])
+      .filter(violation => !ignores.includes(violation.id))
 
     violations.forEach((violation) => {
       /* eslint-disable no-console */
       console.groupCollapsed(`[${violation.id}] ${violation.help}`)
-      violation.nodes.forEach((node) => {
+      violation.nodes.forEach(function (node) {
         const el = document.querySelector(node.target.toString())
         if (!el) {
           console.log(node.target.toString())
@@ -58,18 +60,20 @@ module.exports = function checkA11y (node, options = {}, done) {
       /* eslint-enable no-console */
     })
 
-    done({
-      violations,
-      error: violations.length > 0 ? new Error(formatError(violations)) : null
-    })
-  })
+    if (violations.length > 0) {
+      result = new Error(formatError(violations))
+    }
+  } catch (err) {
+    result = err
+  }
+  return result
 }
 
 function formatError (violations) {
   return violations.map((violation) => {
     return [
       `[${violation.id}] ${violation.help}`,
-      violation.nodes.map((node) => {
+      violation.nodes.map(function (node) {
         return node.target.toString()
       }).join('\n'),
       violation.description,

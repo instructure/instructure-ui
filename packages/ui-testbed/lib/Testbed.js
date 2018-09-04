@@ -23,14 +23,12 @@
  */
 const ReactDOM = require('react-dom')
 const sinon = require('sinon')
-const chai = require('chai')
 const { cloneElement } = require('react')
 const { StyleSheet } = require('glamor/lib/sheet')
 
 const { ReactWrapper, mount } = require('./enzymeWrapper')
 
 const realSetTimeout = setTimeout
-const realConsoleError = console.error
 
 const override = function (object, methodName, extra) {
   // eslint-disable-next-line no-param-reassign, wrap-iife
@@ -41,15 +39,6 @@ const override = function (object, methodName, extra) {
       return result
     }
   })(object[methodName], extra)
-}
-
-// this is a hack so that we can test for prop type validation errors in our tests
-const overrideConsoleError = function (firstMessage, ...rest) {
-  if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
-    throw new Error(`Unexpected React Warning: ${firstMessage}`)
-  }
-
-  return realConsoleError(firstMessage, ...rest)
 }
 
 class Testbed {
@@ -110,8 +99,6 @@ class Testbed {
     this.disableCSSTransitions()
 
     this.sandbox.useFakeTimers()
-
-    console.error = overrideConsoleError
   }
 
   teardown () {
@@ -162,6 +149,7 @@ class Testbed {
 }
 
 Testbed.init = () => {
+  console.log('Initializing test bed...') // eslint-disable-line no-console
   const sheet = new StyleSheet({ speedy: true, maxLength: 40 })
 
   sheet.inject()
@@ -187,20 +175,8 @@ Testbed.init = () => {
     }
   `)
 
-  require('./chaiWrapper')(chai)
-  global.sinon = sinon
-
-  // clear the console before rebundling.
-  /* eslint-disable no-console */
-  if (typeof console.clear === 'function') {
-    console.clear()
-  }
-  /* eslint-enable no-console */
-
-  process.once('unhandledRejection', (error) => {
-    console.error(`Unhandled rejection: ${error.stack}`)
-    process.exit(1)
-  })
+  const chai = require('./chaiWrapper')()
+  global.expect = chai.expect
 }
 
 Testbed.wrap = (element) => {

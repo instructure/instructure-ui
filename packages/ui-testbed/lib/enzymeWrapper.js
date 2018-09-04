@@ -21,11 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+const runAxeCheck = require('@instructure/ui-axe-check').default
 const { ReactWrapper, mount } = require('enzyme')
 const keycode = require('keycode')
 
-const checkA11y = require('./checkA11y')
+ReactWrapper.prototype.getA11yViolations = function (done, options) {
+  runAxeCheck(this.getDOMNode(), options).then((result) => {
+    if (result instanceof Error) {
+      done(result)
+    } else {
+      done()
+    }
+  }, done)
+}
 
 ReactWrapper.prototype.unwrap = function () {
   return this.node
@@ -128,10 +136,6 @@ ReactWrapper.prototype.findText = function (text) {
 
 ReactWrapper.prototype.findElementWithText = function (type, text) {
   return this.findWhere(n => n.type() === type && n.text() === text)
-}
-
-ReactWrapper.prototype.getA11yViolations = function (options, callback) {
-  checkA11y(this.getDOMNode(), options, callback)
 }
 
 const originalRef = ReactWrapper.prototype.ref

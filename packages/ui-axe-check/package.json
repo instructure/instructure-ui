@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/pkg-utils",
+  "name": "@instructure/ui-axe-check",
   "version": "5.25.0",
-  "description": "Utilities for managing node packages in a monorepo.",
+  "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -11,19 +11,18 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
   },
   "license": "MIT",
   "dependencies": {
-    "@lerna/package": "^3.0.0",
-    "glob": "^7.1.2",
-    "read-pkg": "^4.0.1",
-    "read-pkg-up": "^4.0.0",
-    "shelljs": "0.8.2"
+    "axe-core": "^3.1.1"
   },
-  "peerDependencies": {
-    "lerna": "^3.1.4"
+  "devDependencies": {
+    "@instructure/ui-presets": "^5"
   },
   "publishConfig": {
     "access": "public"

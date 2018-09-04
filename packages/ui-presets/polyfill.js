@@ -31,5 +31,7 @@ module.exports = [
   'es6.string.includes',
   'es7.array.includes',
   'es6.symbol',
-  'es7.object.values'
+  'es7.object.values',
+  'es.promise',
+  'es.promise.finally'
 ]

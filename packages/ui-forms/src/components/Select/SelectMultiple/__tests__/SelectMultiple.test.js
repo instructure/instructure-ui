@@ -460,8 +460,11 @@ describe('<SelectMultiple />', () => {
 
       subject.find('input').simulate('click') // open it so it renders the opts
 
-      // ignored required children because of this bug https://github.com/dequelabs/axe-core/issues/160
-      subject.should.be.accessible(done)
+      subject.should.be.accessible(done, {
+        ignores: [
+          'aria-allowed-role' // TODO: remove this when we fix it
+        ]
+      })
     })
 
     it('should set aria-invalid when errors prop is set', () => {

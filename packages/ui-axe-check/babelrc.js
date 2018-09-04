@@ -21,36 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const runAxeCheck = require('@instructure/ui-axe-check').default
-const chai = require('chai')
 
-module.exports = function () {
-  chai.should()
-  chai.use(require('sinon-chai'))
-  chai.use(require('chai-string'))
-  chai.use(require('chai-enzyme')())
-
-  chai.use(function (chai, utils) {
-    utils.addMethod(chai.Assertion.prototype, 'accessible', function (done, options = {}) {
-      const obj = utils.flag(this, 'object')
-      let element = obj
-      if (typeof obj.getA11yViolations === 'function') {
-        obj.getA11yViolations(done, options)
-      } else if (obj instanceof Element) {
-        runAxeCheck(element, options).then((result) => {
-          if (result instanceof Error) {
-            done(result)
-          } else {
-            done()
-          }
-        }, done)
-      } else {
-        done(new Error('[ui-testbed] accessibility check can only run on a single DOM Element!'))
-      }
-    })
-  })
-
-  chai.use(require('dirty-chai'))
-
-  return chai
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel') ]]
 }

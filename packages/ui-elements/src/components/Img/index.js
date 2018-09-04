@@ -115,8 +115,7 @@ export default class Img extends Component {
     } = this.props
 
     const a11yProps = {
-      alt: alt || '',
-      role: 'img'
+      alt: alt || ''
     }
 
     const imageProps = {

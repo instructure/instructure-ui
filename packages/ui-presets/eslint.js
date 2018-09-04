@@ -74,11 +74,10 @@ module.exports = {
   },
   overrides: [
     {
-        files: '*.test.js',
-        rules: {
-          'mocha/no-exclusive-tests': 'error',
-          'no-unused-expressions': 0
-        }
+      files: '*.test.js',
+      rules: {
+        'mocha/no-exclusive-tests': 'error'
+      }
     }
   ]
 }

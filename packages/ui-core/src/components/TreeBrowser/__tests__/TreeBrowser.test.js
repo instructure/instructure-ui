@@ -209,7 +209,8 @@ describe('<TreeBrowser />', () => {
 
       tree.should.be.accessible(done, {
         ignores: [
-          'color-contrast' // brand color doesn't meet 4.5:1 contrast req
+          'listitem', // TODO: remove this when we move the role to the LI from the BUTTON
+          'aria-allowed-role' // TODO: remove this when we move the role to the LI from the BUTTON
         ]
       })
     })

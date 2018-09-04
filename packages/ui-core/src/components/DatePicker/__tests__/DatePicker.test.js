@@ -100,7 +100,7 @@ describe('<DatePicker />', () => {
       todayValue: '2017-04-02'
     })
     subject.should.be.accessible(done, {
-      ignores: [ 'color-contrast' ] // checked manually for 3:1 in theme tests
+      ignores: [ 'color-contrast', 'aria-allowed-role' ] // checked manually for 3:1 in theme tests
     })
   })
 })

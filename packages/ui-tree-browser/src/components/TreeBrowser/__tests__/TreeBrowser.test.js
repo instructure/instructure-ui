@@ -62,7 +62,17 @@ describe('<TreeBrowser />', () => {
 
   it('should render a tree', () => {
     const tree = testbed.render()
-    expect(tree).to.be.present
+    expect(tree).to.be.present()
+  })
+
+  it('should be accessible', (done) => {
+    const tree = testbed.render()
+    tree.should.be.accessible(done, {
+      ignores: [
+        'listitem', // TODO: remove this when we move the role to the LI from the BUTTON
+        'aria-allowed-role' // TODO: remove this when we move the role to the LI from the BUTTON
+      ]
+    })
   })
 
   it('should render subcollections', () => {
@@ -110,7 +120,7 @@ describe('<TreeBrowser />', () => {
       const onCollectionClick = testbed.stub()
       const tree = testbed.render({onCollectionClick})
       tree.find('button').simulate('click')
-      expect(onCollectionClick).to.have.been.called
+      expect(onCollectionClick).to.have.been.called()
     })
 
     it('persists the state of expanded children when parent collapsed', () => {
@@ -133,7 +143,7 @@ describe('<TreeBrowser />', () => {
       expect(tree.find('button').length).to.equal(4)
       tree.find('[title="Sub Root 1"]').simulate('click')
       expect(tree.find('button').length).to.equal(4)
-      expect(tree.instance().state.expanded).to.not.exist
+      expect(tree.instance().state.expanded).to.not.exist()
       expect(tree.instance().props.expanded).to.include(2)
     })
   })
@@ -204,16 +214,6 @@ describe('<TreeBrowser />', () => {
   })
 
   describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const tree = testbed.render()
-
-      tree.should.be.accessible(done, {
-        ignores: [
-          'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-        ]
-      })
-    })
-
     it('accepts a treeLabel prop', () => {
       const tree = testbed.render({treeLabel: 'test'})
       expect(tree.getAttribute('aria-label')).to.eq('test')

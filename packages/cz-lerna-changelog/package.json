@@ -23,7 +23,7 @@
     "inquirer-autocomplete-prompt": "^0.12.2"
   },
   "peerDependencies": {
-    "lerna": "^3.0.0-beta.21"
+    "lerna": "^3.1.4"
   },
   "publishConfig": {
     "access": "public"

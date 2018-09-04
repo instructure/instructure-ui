@@ -406,7 +406,7 @@ class Menu extends Component {
       const isTabbable = !this.state.hasFocus && count === 1
 
       if (matchComponentTypes(child, ['MenuItemSeparator'])) {
-        return child
+        return <li>{child}</li>
       }
 
       const controls = (
