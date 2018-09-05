@@ -36,7 +36,12 @@ export default class ScreenReaderFocusRegion {
     shouldContainFocus: true,
     liveRegion: []
   }) {
-    this._liveRegion = Array.isArray(options.liveRegion) ? options.liveRegion : [options.liveRegion]
+    const liveRegion = typeof options.liveRegion === 'function'
+      ? options.liveRegion()
+      : options.liveRegion
+    this._liveRegion = Array.isArray(liveRegion)
+      ? liveRegion
+      : [liveRegion]
     this._contextElement = element
     this._options = options
   }

@@ -81,6 +81,24 @@ describe('ScreenReaderFocusRegion', () => {
     return subject.find('[data-test-descendant]').nodes
   }
 
+  it('should accept a function for liveRegion', () => {
+    const subject = testbed.render()
+
+    const ignore = findIgnore(subject)
+
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(
+      findContent(subject),
+      {
+        liveRegion: () => ignore,
+        shouldContainFocus: true
+      }
+    )
+
+    screenReaderFocusRegion.activate()
+
+    expect(ignore.getAttribute('aria-hidden')).to.not.exist()
+  })
+
   it('should apply aria-hidden to all children of content\'s parent nodes unless they are live regions', () => {
     const subject = testbed.render()
 
@@ -97,10 +115,10 @@ describe('ScreenReaderFocusRegion', () => {
     screenReaderFocusRegion.activate()
 
     findChildren(subject).forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.exist
+      expect(node.getAttribute('aria-hidden')).to.exist()
     })
 
-    expect(ignore.getAttribute('aria-hidden')).to.not.exist
+    expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should mute designated attributes for content\'s parent nodes', () => {
@@ -110,9 +128,9 @@ describe('ScreenReaderFocusRegion', () => {
     screenReaderFocusRegion.activate()
 
     findParents(subject).forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.not.exist
-      expect(node.getAttribute('aria-label')).to.not.exist
-      expect(node.getAttribute('role')).to.not.exist
+      expect(node.getAttribute('aria-hidden')).to.not.exist()
+      expect(node.getAttribute('aria-label')).to.not.exist()
+      expect(node.getAttribute('role')).to.not.exist()
     })
   })
 
@@ -123,7 +141,7 @@ describe('ScreenReaderFocusRegion', () => {
     screenReaderFocusRegion.activate()
 
     findDescendants(subject).forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.not.exist
+      expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })
 
@@ -157,9 +175,9 @@ describe('ScreenReaderFocusRegion', () => {
     screenReaderFocusRegion.deactivate()
 
     childNodes.forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.not.exist
+      expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
-    expect(exception.getAttribute('aria-hidden')).to.exist
+    expect(exception.getAttribute('aria-hidden')).to.exist()
   })
 
   it('should properly restore and unmute parent attributes', () => {
