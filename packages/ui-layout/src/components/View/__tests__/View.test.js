@@ -42,13 +42,13 @@ describe('<View />', () => {
     expect(subject.find('h1')).to.have.length(1)
   })
 
-  it('should warn when as=span, display=auto, and margins are set', () => {
+  it('should warn when as=span, display=auto, and vertical margins are set', () => {
     const warning = testbed.spy(console, 'warn')
 
-    testbed.render({
+    const subject = testbed.render({
       as: 'span',
       display: 'auto',
-      margin: 'small'
+      margin: '0 0 small 0'
     })
 
     expect(
@@ -56,6 +56,12 @@ describe('<View />', () => {
         `element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
       )
     ).to.be.true
+
+    subject.setProps({
+      margin: 'none small'
+    })
+
+    expect(warning).to.have.been.calledOnce()
   })
 
   it('should pass position style attributes', () => {

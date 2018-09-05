@@ -273,9 +273,32 @@ class View extends Component {
 if (process.env.NODE_ENV !== 'production') {
   View.prototype.componentWillReceiveProps = View.prototype.verifySpanMargin = function(props) {
     const { as, display, margin } = props
+    const marginValues = margin ? margin.split(' ') : null
+    // warn if all 3 of the following conditions are true
+    let verticalMargin = false
+    let displayAuto = false
+    let asSpan = false
+
+    // either top or bottom margin are set
+    if (margin) {
+      if (marginValues[0] && (marginValues[0] !== 'none' && marginValues[0] !== '0')) {
+        verticalMargin = true
+      }
+      if (marginValues[2] && (marginValues[2] !== 'none' && marginValues[2] !== '0')) {
+        verticalMargin = true
+      }
+    }
+    // rendered as a span
+    if (as === 'span' || typeof as === 'undefined') {
+      asSpan = true
+    }
+    // display is auto
+    if (display === 'auto') {
+      displayAuto = true
+    }
 
     warning(
-      !((as === 'span' || typeof as === 'undefined') && display === 'auto' && margin && margin !== 'none' && margin !== '0'),
+      !(verticalMargin && asSpan && displayAuto),
       `[${this.displayName}] element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
     )
   }
