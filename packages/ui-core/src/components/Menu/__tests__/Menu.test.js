@@ -61,7 +61,7 @@ describe('<Menu />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should call onSelect when menu item is selected', () => {
@@ -70,7 +70,7 @@ describe('<Menu />', () => {
       onSelect
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
   })
 
   it('should call onKeyDown when menu item is selected', () => {
@@ -79,7 +79,7 @@ describe('<Menu />', () => {
       onSelect
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
   })
 
   it('should not call onSelect when disabled', () => {
@@ -89,7 +89,7 @@ describe('<Menu />', () => {
       disabled: true
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
   })
 
   it(`should call onDismiss after escape press`, () => {
@@ -104,7 +104,7 @@ describe('<Menu />', () => {
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
 
-    expect(onDismiss).to.have.been.calledOnce
+    expect(onDismiss).to.have.been.calledOnce()
   })
 
   it('should have focus index -1 by default', () => {
@@ -139,7 +139,7 @@ describe('<Menu />', () => {
       children: <MenuItem>foo</MenuItem>
     })
     subject.simulate('focus')
-    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true
+    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true()
   })
 
   it('should set aria attributes and title properly', () => {
@@ -149,10 +149,10 @@ describe('<Menu />', () => {
       disabled: true,
       title: 'title'
     })
-    expect(subject.getAttribute('aria-labelledby')).to.exist
-    expect(subject.getAttribute('aria-controls')).to.exist
-    expect(subject.getAttribute('aria-disabled')).to.exist
-    expect(subject.getAttribute('title')).to.exist
+    expect(subject.getAttribute('aria-labelledby')).to.exist()
+    expect(subject.getAttribute('aria-controls')).to.exist()
+    expect(subject.getAttribute('aria-disabled')).to.exist()
+    expect(subject.getAttribute('title')).to.exist()
   })
 
   it('should meet a11y standards', (done) => {

@@ -89,13 +89,13 @@ describe('<Responsive />', () => {
     })
 
     updateMatches(['small'], () => {
-      expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true
+      expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
 
       updateMatches(['large'], () => {
-        expect(deepEqual(renderSpy.lastCall.args[0], props.large)).to.be.true
+        expect(deepEqual(renderSpy.lastCall.args[0], props.large)).to.be.true()
 
         updateMatches(['medium'], () => {
-          expect(deepEqual(renderSpy.lastCall.args[0], props.medium)).to.be.true
+          expect(deepEqual(renderSpy.lastCall.args[0], props.medium)).to.be.true()
           done()
         })
       })
@@ -115,7 +115,7 @@ describe('<Responsive />', () => {
     })
 
     updateMatches(['medium', 'large'], () => {
-      expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true
+      expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true()
 
       updateMatches(['small', 'medium', 'large'], () => {
         expect(
@@ -123,7 +123,7 @@ describe('<Responsive />', () => {
             renderSpy.lastCall.args[0],
             Object.assign({...props.small}, Object.assign({...props.medium}, {...props.large}))
           )
-        ).to.be.true
+        ).to.be.true()
         done()
       })
     })
@@ -142,7 +142,7 @@ describe('<Responsive />', () => {
     updateMatches(['small', 'medium'], () => {
       expect(
         warning.lastCall.args[0].includes('The prop `background` is defined at 2 or more breakpoints')
-      ).to.be.true
+      ).to.be.true()
       done()
     })
   })

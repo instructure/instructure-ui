@@ -37,7 +37,7 @@ describe('<TruncateText />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should truncate text', () => {
@@ -117,7 +117,7 @@ describe('<TruncateText />', () => {
     })
 
     testbed.tick()
-    expect(onUpdate).to.not.have.been.called
+    expect(onUpdate).to.not.have.been.called()
 
     subject.getDOMNode().style.width = '100px'
 
@@ -143,7 +143,7 @@ describe('<TruncateText />', () => {
 
     expect(
       warning.lastCall.args[0].includes('Some children are too deep in the node tree and will not render.')
-    ).to.be.true
+    ).to.be.true()
   })
 
   it('should render text at any size with no lineHeight set', () => {

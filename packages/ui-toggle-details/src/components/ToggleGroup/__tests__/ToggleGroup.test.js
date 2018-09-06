@@ -146,6 +146,6 @@ describe('<ToggleGroup />', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 })

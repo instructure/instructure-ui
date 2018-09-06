@@ -69,7 +69,7 @@ describe('<Menu />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {
@@ -94,7 +94,7 @@ describe('<Menu />', () => {
       error = true
     }
 
-    expect(error).to.be.true
+    expect(error).to.be.true()
   })
 
   it('should call onSelect when menu item is selected', () => {
@@ -103,7 +103,7 @@ describe('<Menu />', () => {
       onSelect
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
   })
 
   it('should not call onSelect when disabled', () => {
@@ -113,7 +113,7 @@ describe('<Menu />', () => {
       disabled: true
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
   })
 
   it('should move focus properly', () => {
@@ -148,7 +148,7 @@ describe('<Menu />', () => {
       onSelect
     })
     subject.find('MenuItem').first().simulate('click')
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
   })
 
   it('should have focus index -1 by default', () => {
@@ -161,7 +161,7 @@ describe('<Menu />', () => {
       children: <MenuItem>foo</MenuItem>
     })
     subject.simulate('focus')
-    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true
+    expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true()
   })
 
   it('should set aria attributes and title properly', () => {
@@ -169,8 +169,8 @@ describe('<Menu />', () => {
       disabled: true,
       title: 'title'
     })
-    expect(subject.getAttribute('aria-disabled')).to.exist
-    expect(subject.getAttribute('title')).to.exist
+    expect(subject.getAttribute('aria-disabled')).to.exist()
+    expect(subject.getAttribute('title')).to.exist()
   })
 })
 
@@ -204,7 +204,7 @@ describe('<Menu trigger />', () => {
     const subject = testbed.render({
       defaultShow: true
     })
-    expect(subject.instance()._menu.getAttribute('aria-labelledby')).to.exist
+    expect(subject.instance()._menu.getAttribute('aria-labelledby')).to.exist()
   })
 
   it('should render a <Popover />', () => {
@@ -220,7 +220,7 @@ describe('<Menu trigger />', () => {
 
     subject.find('button').simulate('focus')
 
-    expect(onFocus).to.have.been.called
+    expect(onFocus).to.have.been.called()
   })
 
   it('should render when show and onToggle props are set', () => {
@@ -229,13 +229,13 @@ describe('<Menu trigger />', () => {
       onToggle: () => {}
     })
 
-    expect(subject.instance()._menu).to.exist
+    expect(subject.instance()._menu).to.exist()
   })
 
   it('should not show by default', () => {
     const subject = testbed.render()
 
-    expect(subject.instance()._menu).to.not.exist
+    expect(subject.instance()._menu).to.not.exist()
   })
 
   it('should accept a default show', () => {
@@ -243,7 +243,7 @@ describe('<Menu trigger />', () => {
       defaultShow: true
     })
 
-    expect(subject.instance()._menu).to.exist
+    expect(subject.instance()._menu).to.exist()
   })
 
   it('should provide a menu ref', () => {
@@ -277,7 +277,7 @@ describe('<Menu trigger />', () => {
 
     testbed.tick()
 
-    expect(subject.instance()._menu === document.activeElement).to.be.true
+    expect(subject.instance()._menu === document.activeElement).to.be.true()
   })
 
   it('should call onToggle on click', () => {
@@ -288,7 +288,7 @@ describe('<Menu trigger />', () => {
 
     subject.find('button').click()
 
-    expect(onToggle).to.have.been.called
+    expect(onToggle).to.have.been.called()
   })
 
   it('should have an aria-haspopup attribute', () => {
@@ -351,7 +351,7 @@ describe('<Menu flyout />', () => {
       findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(findFlyout(subject).shown).to.be.true
+      expect(findFlyout(subject).shown).to.be.true()
     })
   }
 
@@ -362,7 +362,7 @@ describe('<Menu flyout />', () => {
       findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(findFlyout(subject).focused()).to.be.true
+      expect(findFlyout(subject).focused()).to.be.true()
     })
   }
 
@@ -387,7 +387,7 @@ describe('<Menu flyout />', () => {
     findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    expect(findFlyout(subject)).to.not.exist
+    expect(findFlyout(subject)).to.not.exist()
   })
 
   it('it should close the menu flyout on escape press', () => {
@@ -401,7 +401,7 @@ describe('<Menu flyout />', () => {
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
-    expect(findFlyout(subject).shown).to.be.false
+    expect(findFlyout(subject).shown).to.be.false()
   })
 
   it('it should close the menu flyout on left press', () => {
@@ -413,7 +413,7 @@ describe('<Menu flyout />', () => {
     Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'left')
     testbed.tick()
 
-    expect(flyout.shown).to.be.false
+    expect(flyout.shown).to.be.false()
   })
 
   it('it should call onDismiss on tab press', () => {
@@ -433,7 +433,7 @@ describe('<Menu flyout />', () => {
     Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'tab')
     testbed.tick()
 
-    expect(onDismiss).to.have.been.calledOnce
+    expect(onDismiss).to.have.been.calledOnce()
   })
 
   it('it should call onSelect when flyout option is selected', () => {
@@ -450,7 +450,7 @@ describe('<Menu flyout />', () => {
     menuItem.click()
     testbed.tick()
 
-    expect(onSelect).to.have.been.calledOnce
+    expect(onSelect).to.have.been.calledOnce()
   })
 
   it('it should call onToggle on click and on dismiss', () => {
@@ -468,13 +468,13 @@ describe('<Menu flyout />', () => {
     findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    expect(onToggle).to.have.been.calledOnce
+    expect(onToggle).to.have.been.calledOnce()
     expect(onToggle.lastCall.args[0]).to.equal(true)
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
-    expect(onToggle).to.have.been.calledTwice
+    expect(onToggle).to.have.been.calledTwice()
     expect(onToggle.lastCall.args[0]).to.equal(false)
   })
 
@@ -493,6 +493,6 @@ describe('<Menu flyout />', () => {
     })
     findFlyoutTrigger(subject).mouseOver()
 
-    expect(onMouseOver).to.have.been.calledOnce
+    expect(onMouseOver).to.have.been.calledOnce()
   })
 })

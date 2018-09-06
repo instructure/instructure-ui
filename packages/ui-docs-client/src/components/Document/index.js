@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import Link from '@instructure/ui-elements/lib/components/Link'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
-import Text from '@instructure/ui-elements/lib/components/Text'
 import View from '@instructure/ui-layout/lib/components/View'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
 import TabList, { TabPanel } from '@instructure/ui-tabs/lib/components/TabList'

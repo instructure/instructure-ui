@@ -33,7 +33,7 @@ describe('<TreeButton />', () => {
 
   it('should render', () => {
     const button = testbed.render()
-    expect(button).to.be.present
+    expect(button).to.be.present()
   })
 
   describe('onClick', () => {
@@ -41,7 +41,7 @@ describe('<TreeButton />', () => {
       const onClick = testbed.stub()
       const button = testbed.render({ onClick })
       button.find('button').simulate('click')
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
       expect(onClick).to.have.been.calledWith({id: '1', type: 'treeButton'})
     })
   })

@@ -62,13 +62,13 @@ describe('<SelectMultiple />', () => {
   it('should focus the input when focus is called', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.find('input[type="text"]').focused()).to.be.true
+    expect(subject.find('input[type="text"]').focused()).to.be.true()
   })
 
   it('should provide an focused getter', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   it('should provide an inputRef prop', () => {
@@ -106,10 +106,10 @@ describe('<SelectMultiple />', () => {
     subject.find('input[type="text"]').simulate('click')
     subject.instance()._input.value = label
     subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]
-    expect(eventArg.target).to.exist
+    expect(eventArg.target).to.exist()
     expect(selectedOptionArg.length).to.equal(1)
     expect(selectedOptionArg[0]).to.eql({ value, label, id: value, children: label })
   })
@@ -121,8 +121,8 @@ describe('<SelectMultiple />', () => {
     testbed.tick()
     subject.instance()._input.value = label
     subject.find('input[type="text"]').simulate('change', { preventDefault })
-    expect(onInputChange.firstCall).to.exist
-    expect(onInputChange.firstCall.args[0]).to.exist
+    expect(onInputChange.firstCall).to.exist()
+    expect(onInputChange.firstCall.args[0]).to.exist()
     expect(onInputChange.firstCall.args[0].target.value).to.eql(label)
     expect(onInputChange.firstCall.args[1]).to.eql(label)
   })
@@ -156,7 +156,7 @@ describe('<SelectMultiple />', () => {
     const subject = testbed.render({ onChange, onInputChange })
     testbed.tick()
     const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist
+    expect(onSelect).to.exist()
 
     subject.instance()._input.value = 'Key La'
 
@@ -164,13 +164,13 @@ describe('<SelectMultiple />', () => {
 
     onSelect({ preventDefault, target: 1 }, newSelection)
 
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]
     expect(eventArg.target).to.equal(1)
     expect(selectedOptionArg[0]).to.equal(newSelection)
 
-    expect(onInputChange.firstCall).to.exist
+    expect(onInputChange.firstCall).to.exist()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal('')
 
@@ -178,7 +178,7 @@ describe('<SelectMultiple />', () => {
     expect(subject.instance().state.selectedOption.length).to.equal(1)
 
     const tags = subject.find('Tag')
-    expect(tags).to.exist
+    expect(tags).to.exist()
     expect(tags.length).to.equal(1)
   })
 
@@ -193,7 +193,7 @@ describe('<SelectMultiple />', () => {
     const subject = testbed.render({ onChange })
     testbed.tick()
     const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist
+    expect(onSelect).to.exist()
 
     expect(subject.instance().state.selectedOption.length).to.equal(0)
     onSelect({ preventDefault, target: 1 }, firstSelection)
@@ -201,16 +201,16 @@ describe('<SelectMultiple />', () => {
     onSelect({ preventDefault, target: 2 }, secondSelection)
     expect(subject.instance().state.selectedOption.length).to.equal(2)
 
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     expect(onChange.firstCall.args[0].target).to.equal(1)
     expect(onChange.firstCall.args[1]).to.eql([firstSelection])
 
-    expect(onChange.getCall(1)).to.exist
+    expect(onChange.getCall(1)).to.exist()
     expect(onChange.getCall(1).args[0].target).to.equal(2)
     expect(onChange.getCall(1).args[1]).to.eql([firstSelection, secondSelection])
 
     const tags = subject.find('Tag')
-    expect(tags).to.exist
+    expect(tags).to.exist()
     expect(tags.length).to.equal(2)
   })
 
@@ -227,18 +227,18 @@ describe('<SelectMultiple />', () => {
 
     const onSelect = subject.find(SelectField).unwrap().props.onSelect
 
-    expect(onSelect).to.exist
+    expect(onSelect).to.exist()
 
     expect(subject.instance().state.selectedOption.length).to.equal(1)
     onSelect({ preventDefault, target: 10 }, newSelection)
     expect(subject.instance().state.selectedOption.length).to.equal(1)
 
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     expect(onChange.firstCall.args[0].target).to.equal(10)
     expect(onChange.firstCall.args[1]).to.eql([...selectedOption, newSelection])
 
     const tags = subject.find('Tag')
-    expect(tags).to.exist
+    expect(tags).to.exist()
     expect(tags.length).to.equal(1)
   })
 
@@ -254,7 +254,7 @@ describe('<SelectMultiple />', () => {
     testbed.tick()
 
     const tags = subject.find('Tag')
-    expect(tags).to.exist
+    expect(tags).to.exist()
     expect(tags.length).to.equal(1)
 
     subject.setProps({
@@ -263,7 +263,7 @@ describe('<SelectMultiple />', () => {
       testbed.defer(() => { // wait for re-render
         testbed.tick()
         const tags = subject.find('Tag')
-        expect(tags).to.exist
+        expect(tags).to.exist()
         expect(tags.length).to.equal(2)
         done()
       })
@@ -282,7 +282,7 @@ describe('<SelectMultiple />', () => {
     })
     testbed.tick()
     const tags = subject.find('Tag')
-    expect(tags).to.exist
+    expect(tags).to.exist()
     expect(tags.length).to.equal(3)
   })
 
@@ -303,7 +303,7 @@ describe('<SelectMultiple />', () => {
 
     tags.at(1).simulate('click', { target: 1, preventDefault })
 
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     const selectedOptionArg = onChange.firstCall.args[1]
     expect(selectedOptionArg.length).to.equal(2)
   })
@@ -359,8 +359,8 @@ describe('<SelectMultiple />', () => {
             { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
           ]}, () => {
             expect(subject.find('button').length).to.equal(2)
-            expect(subject.find('button[title="Argentina"]')).to.exist
-            expect(subject.find('button[title="Uruguay"]')).to.exist
+            expect(subject.find('button[title="Argentina"]')).to.exist()
+            expect(subject.find('button[title="Uruguay"]')).to.exist()
             done()
           }
         )
@@ -381,8 +381,8 @@ describe('<SelectMultiple />', () => {
       })
 
       expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Argentina"]')).to.exist
-      expect(subject.find('button[title="Uruguay"]')).to.exist
+      expect(subject.find('button[title="Argentina"]')).to.exist()
+      expect(subject.find('button[title="Uruguay"]')).to.exist()
 
       subject.setProps({
         options: [
@@ -392,8 +392,8 @@ describe('<SelectMultiple />', () => {
         ],
       })
       expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Foo"]')).to.exist
-      expect(subject.find('button[title="Bar"]')).to.exist
+      expect(subject.find('button[title="Foo"]')).to.exist()
+      expect(subject.find('button[title="Bar"]')).to.exist()
       done()
     })
 
@@ -409,7 +409,7 @@ describe('<SelectMultiple />', () => {
       })
 
       expect(subject.find('button').length).to.equal(1)
-      expect(subject.find('button[title="Argentina"]')).to.exist
+      expect(subject.find('button[title="Argentina"]')).to.exist()
 
       subject.setProps({
         options: [
@@ -417,7 +417,7 @@ describe('<SelectMultiple />', () => {
           { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
         ]}, () => {
           expect(subject.find('button').length).to.equal(2)
-          expect(subject.find('button[title="Uruguay"]')).to.exist
+          expect(subject.find('button[title="Uruguay"]')).to.exist()
           done()
         }
       )
@@ -446,8 +446,8 @@ describe('<SelectMultiple />', () => {
           // on option update, argentina should not get amended to the selected
           // options since it has already been dismissed
           expect(subject.find('button').length).to.equal(1)
-          expect(subject.find('button[title="Uruguay"]')).to.exist
-          expect(subject.find('button[title="Argentina"]')).to.not.exist
+          expect(subject.find('button[title="Uruguay"]')).to.exist()
+          expect(subject.find('button[title="Argentina"]')).to.not.exist()
           done()
         }
       )
@@ -473,7 +473,7 @@ describe('<SelectMultiple />', () => {
       })
 
       expect(subject.find('input[type="text"]').getAttribute('aria-invalid'))
-        .to.exist
+        .to.exist()
     })
   })
 })

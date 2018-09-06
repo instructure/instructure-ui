@@ -53,7 +53,7 @@ describe('<MenuItemFlyout />', () => {
       findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(findFlyout(subject).shown).to.be.true
+      expect(findFlyout(subject).shown).to.be.true()
     })
   }
 
@@ -64,13 +64,13 @@ describe('<MenuItemFlyout />', () => {
       findFlyoutTrigger(subject).simulate(event.type, event.code)
       testbed.tick()
 
-      expect(findFlyout(subject).focused()).to.be.true
+      expect(findFlyout(subject).focused()).to.be.true()
     })
   }
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.exist
+    expect(subject).to.exist()
   })
 
   testShowFlyoutOnEvent({type: 'click'})
@@ -93,7 +93,7 @@ describe('<MenuItemFlyout />', () => {
     findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    expect(findFlyout(subject)).to.not.exist
+    expect(findFlyout(subject)).to.not.exist()
   })
 
   it('it should close the menu flyout on escape press', () => {
@@ -107,7 +107,7 @@ describe('<MenuItemFlyout />', () => {
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
-    expect(findFlyout(subject).shown).to.be.false
+    expect(findFlyout(subject).shown).to.be.false()
   })
 
   it('it should close the menu flyout on left press', () => {
@@ -119,7 +119,7 @@ describe('<MenuItemFlyout />', () => {
     Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'left')
     testbed.tick()
 
-    expect(flyout.shown).to.be.false
+    expect(flyout.shown).to.be.false()
   })
 
   it('it should call onDismiss on tab press', () => {
@@ -139,7 +139,7 @@ describe('<MenuItemFlyout />', () => {
     Testbed.wrap(flyout._menu).dispatchNativeKeyboardEvent('keydown', 'tab')
     testbed.tick()
 
-    expect(onDismiss).to.have.been.calledOnce
+    expect(onDismiss).to.have.been.calledOnce()
   })
 
   it('it should call onSelect when flyout option is selected', () => {
@@ -156,7 +156,7 @@ describe('<MenuItemFlyout />', () => {
     menuItem.click()
     testbed.tick()
 
-    expect(onSelect).to.have.been.calledOnce
+    expect(onSelect).to.have.been.calledOnce()
   })
 
   it('it should call onToggle on click and on dismiss', () => {
@@ -174,13 +174,13 @@ describe('<MenuItemFlyout />', () => {
     findFlyoutTrigger(subject).click()
     testbed.tick()
 
-    expect(onToggle).to.have.been.calledOnce
+    expect(onToggle).to.have.been.calledOnce()
     expect(onToggle.lastCall.args[0]).to.equal(true)
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
     testbed.tick()
 
-    expect(onToggle).to.have.been.calledTwice
+    expect(onToggle).to.have.been.calledTwice()
     expect(onToggle.lastCall.args[0]).to.equal(false)
   })
 
@@ -199,7 +199,7 @@ describe('<MenuItemFlyout />', () => {
     })
     findFlyoutTrigger(subject).mouseOver()
 
-    expect(onMouseOver).to.have.been.calledOnce
+    expect(onMouseOver).to.have.been.calledOnce()
   })
 
   it('it should provide a ref to the flyout content', () => {

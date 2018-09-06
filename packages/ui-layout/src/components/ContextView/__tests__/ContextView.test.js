@@ -32,7 +32,7 @@ describe('<ContextView />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {
@@ -52,7 +52,7 @@ describe('<ContextView />', () => {
       background: 'inverse'
     })
 
-    expect(subject.find(`.${styles['arrow--inverse']}`)).to.exist
+    expect(subject.find(`.${styles['arrow--inverse']}`)).to.exist()
   })
 
   function testPlacement (placement) {
@@ -62,7 +62,7 @@ describe('<ContextView />', () => {
       })
 
       expect(subject.hasClass(styles[`placement--${placement.split(' ').join('-')}`]))
-        .to.be.true
+        .to.be.true()
     })
   }
 
@@ -86,7 +86,7 @@ describe('<ContextView />', () => {
         placement
       })
       const mirroredStyle = `arrow--${mirror.split(' ').join('-')}`
-      expect(subject.find(`.${styles[mirroredStyle]}`)).to.exist
+      expect(subject.find(`.${styles[mirroredStyle]}`)).to.exist()
     })
   }
 

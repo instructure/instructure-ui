@@ -29,60 +29,60 @@ describe('@parseQuery', () => {
     const query = {small: { minWidth: 100 }, medium: { minWidth: 500 }, large: { maxWidth: 700 }}
 
     let results = parseQuery(query)({ width: 100, height: 500 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.false
-    expect(results.large).to.be.true
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.false()
+    expect(results.large).to.be.true()
 
     results = parseQuery(query)({ width: 500, height: 500 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.true
-    expect(results.large).to.be.true
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.true()
+    expect(results.large).to.be.true()
 
     results = parseQuery(query)({ width: 701, height: 500 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.true
-    expect(results.large).to.be.false
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.true()
+    expect(results.large).to.be.false()
   })
 
   it('returns the correct matches for height', () => {
     const query = {small: { minHeight: 100 }, medium: { maxHeight: 500 }, large: { minHeight: 700 }}
 
     let results = parseQuery(query)({ width: 500, height: 100 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.true
-    expect(results.large).to.be.false
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.true()
+    expect(results.large).to.be.false()
 
     results = parseQuery(query)({ width: 500, height: 501 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.false
-    expect(results.large).to.be.false
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.false()
+    expect(results.large).to.be.false()
 
     results = parseQuery(query)({ width: 500, height: 700 })
-    expect(results.small).to.be.true
-    expect(results.medium).to.be.false
-    expect(results.large).to.be.true
+    expect(results.small).to.be.true()
+    expect(results.medium).to.be.false()
+    expect(results.large).to.be.true()
   })
 
   it('returns the correct matches for combinations of width and height', () => {
     const query = {foo: { minHeight: 100 }, bar: { minWidth: 200 }, baz: { maxHeight: 700 }, qux: { maxWidth: 500}}
 
     let results = parseQuery(query)({ width: 200, height: 100 })
-    expect(results.foo).to.be.true
-    expect(results.bar).to.be.true
-    expect(results.baz).to.be.true
-    expect(results.qux).to.be.true
+    expect(results.foo).to.be.true()
+    expect(results.bar).to.be.true()
+    expect(results.baz).to.be.true()
+    expect(results.qux).to.be.true()
 
     results = parseQuery(query)({ width: 501, height: 701 })
 
-    expect(results.foo).to.be.true
-    expect(results.bar).to.be.true
-    expect(results.baz).to.be.false
-    expect(results.qux).to.be.false
+    expect(results.foo).to.be.true()
+    expect(results.bar).to.be.true()
+    expect(results.baz).to.be.false()
+    expect(results.qux).to.be.false()
 
     results = parseQuery(query)({ width: 199, height: 99 })
-    expect(results.foo).to.be.false
-    expect(results.bar).to.be.false
-    expect(results.baz).to.be.true
-    expect(results.qux).to.be.true
+    expect(results.foo).to.be.false()
+    expect(results.bar).to.be.false()
+    expect(results.baz).to.be.true()
+    expect(results.qux).to.be.true()
   })
 })

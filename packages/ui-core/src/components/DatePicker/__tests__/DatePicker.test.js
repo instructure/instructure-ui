@@ -90,7 +90,7 @@ describe('<DatePicker />', () => {
       onRenderedChange
     })
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(onRenderedChange).to.have.been.called
+    expect(onRenderedChange).to.have.been.called()
   })
 
   it('should meet a11y standards', (done) => {

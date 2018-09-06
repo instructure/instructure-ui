@@ -60,7 +60,7 @@ describe('<Timebar />', () => {
   it('invokes forwardRef on mount', () => {
     const forwardRef = testbed.stub()
     testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
+    expect(forwardRef).to.have.been.called()
   })
 
   describe('moving the mouse around on the timebar', () => {

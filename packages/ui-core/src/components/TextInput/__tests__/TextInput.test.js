@@ -50,7 +50,7 @@ describe('<TextInput/>', () => {
 
     subject.instance().focus()
 
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should provide an inputRef prop', () => {
@@ -72,7 +72,7 @@ describe('<TextInput/>', () => {
 
   it('should provide messageId to FormField', () => {
     const subject = testbed.render()
-    expect(subject.find('FormField').prop('messagesId')).to.not.be.empty
+    expect(subject.find('FormField').prop('messagesId')).to.not.be.empty()
   })
 
   it('should provide messageId to FormField', () => {
@@ -82,7 +82,7 @@ describe('<TextInput/>', () => {
         type: 'error'
       }]
     })
-    expect(subject.find('input').prop('aria-describedby')).to.not.be.empty
+    expect(subject.find('input').prop('aria-describedby')).to.not.be.empty()
   })
 
   it('should have equal messagesId and aria-describedby values', () => {
@@ -107,7 +107,7 @@ describe('<TextInput/>', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -119,7 +119,7 @@ describe('<TextInput/>', () => {
 
       subject.find('input').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -131,7 +131,7 @@ describe('<TextInput/>', () => {
 
       subject.find('input').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
   })
 
@@ -148,7 +148,7 @@ describe('<TextInput/>', () => {
       })
 
       expect(subject.find('input').getAttribute('aria-invalid'))
-        .to.exist
+        .to.exist()
     })
   })
 })

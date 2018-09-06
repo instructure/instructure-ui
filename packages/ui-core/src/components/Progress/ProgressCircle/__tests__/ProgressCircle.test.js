@@ -37,7 +37,7 @@ describe('<ProgressCircle />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render the value if a formatter function is provided', () => {

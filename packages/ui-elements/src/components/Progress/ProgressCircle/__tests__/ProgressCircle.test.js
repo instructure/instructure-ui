@@ -40,14 +40,14 @@ describe('<ProgressCircle />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('meter should have a radius', () => {
     const subject = testbed.render()
     const meterCircle = subject.find(`circle.${styles.meter}`)
 
-    expect(meterCircle.getAttribute('r')).to.exist
+    expect(meterCircle.getAttribute('r')).to.exist()
   })
 
   it('meter should have a stroke-dashoffset', () => {
@@ -55,7 +55,7 @@ describe('<ProgressCircle />', () => {
     const meterCircle = subject.find(`circle.${styles.meter}`)
 
     expect(meterCircle.getComputedStyle()
-      .getPropertyValue('stroke-dashoffset')).to.exist
+      .getPropertyValue('stroke-dashoffset')).to.exist()
   })
 
   it('stroke-dashoffset should be 0 if valueNow > valueMax', () => {
@@ -86,7 +86,7 @@ describe('<ProgressCircle />', () => {
       const subject = testbed.render({ size: 'x-small' })
       const meterCircle = subject.find(`circle.${styles.meter}`)
 
-      expect(meterCircle.getAttribute('r')).to.exist
+      expect(meterCircle.getAttribute('r')).to.exist()
     })
 
     it('meter should have a stroke-dashoffset', () => {
@@ -94,7 +94,7 @@ describe('<ProgressCircle />', () => {
       const meterCircle = subject.find(`circle.${styles.meter}`)
 
       expect(meterCircle.getComputedStyle()
-        .getPropertyValue('stroke-dashoffset')).to.exist
+        .getPropertyValue('stroke-dashoffset')).to.exist()
     })
   })
 
@@ -120,7 +120,7 @@ describe('<ProgressCircle />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

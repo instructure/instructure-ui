@@ -55,7 +55,7 @@ describe('@containerQuery', () => {
   it('adds attributes to the container element based on its dimensions and the query', (done) => {
     const subject = testbed.render()
     expect(subject.getAttribute('data-width_less_than_200'))
-      .to.not.exist
+      .to.not.exist()
 
     subject.setProps({
       width: '100px'
@@ -64,7 +64,7 @@ describe('@containerQuery', () => {
       testbed.tick() // for the debounce
 
       expect(subject.getAttribute('data-width_less_than_200'))
-        .to.exist
+        .to.exist()
       done()
     })
   })
@@ -73,7 +73,7 @@ describe('@containerQuery', () => {
     const subject = testbed.render()
 
     expect(subject.getAttribute('data-width_between_251_and_300'))
-      .to.not.exist
+      .to.not.exist()
 
     subject.setProps({
       width: '275px'
@@ -81,7 +81,7 @@ describe('@containerQuery', () => {
       testbed.raf() // for the listener
       testbed.tick() // for the debounce
       expect(subject.getAttribute('data-width_between_251_and_300'))
-        .to.exist
+        .to.exist()
       done()
     })
   })
@@ -90,7 +90,7 @@ describe('@containerQuery', () => {
     const subject = testbed.render()
 
     expect(subject.getAttribute('data-width_less_than_2em'))
-      .to.not.exist
+      .to.not.exist()
 
     subject.setProps({
       width: '30px'
@@ -99,7 +99,7 @@ describe('@containerQuery', () => {
       testbed.tick() // for the debounce
 
       expect(subject.getAttribute('data-width_less_than_2em'))
-        .to.exist
+        .to.exist()
       done()
     })
   })
@@ -110,7 +110,7 @@ describe('@containerQuery', () => {
     })
 
     expect(subject.getAttribute('data-width_between_251_and_300'))
-      .to.exist
+      .to.exist()
 
     subject.setProps({
       width: '301px'
@@ -118,7 +118,7 @@ describe('@containerQuery', () => {
       testbed.raf() // for the listener
       testbed.tick() // for the debounce
       expect(subject.getAttribute('data-width_between_251_and_300'))
-        .to.not.exist
+        .to.not.exist()
       done()
     })
   })

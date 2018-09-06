@@ -40,7 +40,7 @@ describe('<DeviceSelection />', () => {
 
   it('should render', () => {
     const DeviceSelection = testbed.render()
-    expect(DeviceSelection).to.be.present
+    expect(DeviceSelection).to.be.present()
   })
 
   it('should render a <Menu />', () => {

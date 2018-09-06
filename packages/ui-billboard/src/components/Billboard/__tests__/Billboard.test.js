@@ -32,7 +32,7 @@ describe('<Billboard />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render a heading with the correct tag', () => {
@@ -86,14 +86,14 @@ describe('<Billboard />', () => {
     const onClick = testbed.stub()
     const subject = testbed.render({onClick})
     subject.find('button').simulate('click')
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('should not allow padding to be added as a property', () => {
     const subject = testbed.render({
       padding: 'large medium small large'
     })
-    expect(subject.find(View).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist()
   })
 
   describe('when disabled', () => {
@@ -115,7 +115,7 @@ describe('<Billboard />', () => {
 
       subject.find('button').simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
   })
 
@@ -138,7 +138,7 @@ describe('<Billboard />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

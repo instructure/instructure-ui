@@ -44,7 +44,7 @@ describe('<DateInput />', () => {
 
     subject.instance().focus()
 
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should use the date value (when controlled)', () => {
@@ -137,7 +137,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('5/1/2017')
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault })
 
-    expect(preventDefault).to.have.been.called
+    expect(preventDefault).to.have.been.called()
     expect(getInputValue(subject)).to.equal('May 1, 2017')
   })
 
@@ -148,7 +148,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('not a date')
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault })
 
-    expect(preventDefault).to.have.been.called
+    expect(preventDefault).to.have.been.called()
     expect(getInputValue(subject)).to.equal('not a date')
   })
 
@@ -223,7 +223,7 @@ describe('<DateInput />', () => {
       dateValue: new Date('2017-05-02T13:40:00').toISOString()
     })
     subject.instance().handleCalendarSelect(null, '2017-05-01')
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[1]).to.include('2017-05-01')
   })
 
@@ -234,7 +234,7 @@ describe('<DateInput />', () => {
       dateValue: new Date('2017-05-02T13:40:00').toISOString()
     })
     subject.instance().handleCalendarSelect(null, '2017-05-01')
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(false)
   })
 
@@ -249,7 +249,7 @@ describe('<DateInput />', () => {
 
     subject.instance().handleCalendarSelect(null, 'not a date')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(true)
   })
 
@@ -260,7 +260,7 @@ describe('<DateInput />', () => {
     const dateInput = subject.find('input')
     dateInput.setValue('not a date')
     dateInput.simulate('blur')
-    expect(onDateChange).to.have.been.calledOnce
+    expect(onDateChange).to.have.been.calledOnce()
   })
 
   it('fires the onDateChange event when DatePicker value is changed from an invalid value to empty', () => {
@@ -272,7 +272,7 @@ describe('<DateInput />', () => {
     dateInput.simulate('blur')
     dateInput.setValue('')
     dateInput.simulate('blur')
-    expect(onDateChange).to.have.been.calledTwice
+    expect(onDateChange).to.have.been.calledTwice()
   })
 
   it('should fire the onDateChange event with dateIsDisabled=true event when the date is disabled', () => {
@@ -288,7 +288,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('5/3/2017')
     subject.find('input').simulate('blur')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[4]).to.equal(true)
   })
 
@@ -305,7 +305,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('5/4/2017')
     subject.find('input').simulate('blur')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[4]).to.equal(false)
   })
 
@@ -320,7 +320,7 @@ describe('<DateInput />', () => {
 
     subject.instance().handleCalendarSelect(null, '2017-05-02T00:00:00+02:00')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[1]).to.eq('2017-05-02T13:40:00+02:00')
   })
 
@@ -331,7 +331,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('5/1/2017')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[1]).to.include('2017-05-01')
   })
 
@@ -342,12 +342,12 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('Nov')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.calledOnce
+    expect(onDateChange).to.have.been.calledOnce()
 
     subject.find('input').setValue('Nove')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.calledOnce
+    expect(onDateChange).to.have.been.calledOnce()
   })
 
   it('should fire the onDateChange event with rawConversionFailed=false when value is valid', () => {
@@ -357,7 +357,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('5/1/2017')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(false)
   })
 
@@ -368,7 +368,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(false)
   })
 
@@ -382,7 +382,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('invalid')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(1).args[1]).to.equal(undefined) // eslint-disable-line no-undefined
   })
 
@@ -393,7 +393,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('invalid')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(true)
   })
 
@@ -404,7 +404,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('May 1 2017 panda')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange).to.have.been.called
+    expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[2]).to.equal('May 1, 2017')
   })
 

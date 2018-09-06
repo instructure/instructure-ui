@@ -59,7 +59,7 @@ describe('<Select />', () => {
     } catch (e) {
       error = true
     }
-    expect(error).to.be.true
+    expect(error).to.be.true()
   })
 
   it('should include a label', () => {
@@ -92,7 +92,7 @@ describe('<Select />', () => {
       ]
     })
 
-    expect(subject.instance().invalid).to.be.true
+    expect(subject.instance().invalid).to.be.true()
   })
 
   it('provides a focused getter', () => {
@@ -100,7 +100,7 @@ describe('<Select />', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   describe('events', () => {
@@ -113,7 +113,7 @@ describe('<Select />', () => {
 
       subject.find('select').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -125,7 +125,7 @@ describe('<Select />', () => {
 
       subject.find('select').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -137,7 +137,7 @@ describe('<Select />', () => {
 
       subject.find('select').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
 
     it('responds to onKeyDown event', () => {
@@ -149,7 +149,7 @@ describe('<Select />', () => {
 
       subject.find('select').keyDown('a')
 
-      expect(onKeyDown).to.have.been.called
+      expect(onKeyDown).to.have.been.called()
     })
   })
 
@@ -164,7 +164,7 @@ describe('<Select />', () => {
 
       subject.find('select').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('should not respond to onKeyDown event', () => {
@@ -177,7 +177,7 @@ describe('<Select />', () => {
 
       subject.find('select').keyDown('a')
 
-      expect(onKeyDown).to.not.have.been.called
+      expect(onKeyDown).to.not.have.been.called()
     })
   })
 
@@ -197,7 +197,7 @@ describe('<Select />', () => {
       } catch (e) {
         error = true
       }
-      expect(error).to.be.true
+      expect(error).to.be.true()
     })
   })
 })

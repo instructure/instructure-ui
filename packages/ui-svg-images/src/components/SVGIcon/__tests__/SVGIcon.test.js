@@ -66,7 +66,7 @@ describe('<SVGIcon />', () => {
       size: 'large'
     })
 
-    expect(subject.hasClass(styles['size--large'])).to.be.true
+    expect(subject.hasClass(styles['size--large'])).to.be.true()
   })
 
   it('should prioritize deprecated width and height over size', () => {

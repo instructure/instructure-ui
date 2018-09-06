@@ -51,7 +51,7 @@ describe('<Page />', () => {
 
     subject.instance().focus()
 
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should use context', () => {

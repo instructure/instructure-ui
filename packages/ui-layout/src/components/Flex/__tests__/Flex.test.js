@@ -44,7 +44,7 @@ describe('<Flex />', () => {
     const subject = testbed.render({
       children: []
     })
-    expect(subject.getDOMNode()).to.not.exist
+    expect(subject.getDOMNode()).to.not.exist()
   })
 
   it('should accept width and height as props', () => {

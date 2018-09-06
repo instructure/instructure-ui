@@ -57,7 +57,7 @@ if (scopeArgIndex > 0) {
     paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
   }
 } else if (pathArgIndex > 0) {
-  paths = argv[pathArgIndex + 1].split(',').map(path => path.normalize(path.trim()))
+  paths = argv[pathArgIndex + 1].split(',').map(path => path.trim())
 } else if (argv.includes('--changed')) {
   const changedPackages = getChangedPackages('HEAD^1')
   paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)

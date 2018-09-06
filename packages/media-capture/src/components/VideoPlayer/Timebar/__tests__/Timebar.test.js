@@ -31,7 +31,7 @@ describe('<Timebar />', () => {
   const testbed = new Testbed(<Timebar videoId={videoId} duration={100} />)
 
   it('should render', () => {
-    expect(testbed.render()).to.be.present
+    expect(testbed.render()).to.be.present()
   })
 
   it('includes correct aria attributes', () => {
@@ -60,7 +60,7 @@ describe('<Timebar />', () => {
   it('invokes timebarRef on mount', () => {
     const timebarRef = testbed.stub()
     testbed.render({ timebarRef })
-    expect(timebarRef).to.have.been.called
+    expect(timebarRef).to.have.been.called()
   })
 
   describe('moving the mouse around on the timebar', () => {

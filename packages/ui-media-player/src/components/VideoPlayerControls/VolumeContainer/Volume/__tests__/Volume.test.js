@@ -57,6 +57,6 @@ describe('<Volume />', () => {
   it('invokes forwardRef prop on mount', () => {
     const forwardRef = testbed.stub()
     testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
+    expect(forwardRef).to.have.been.called()
   })
 })

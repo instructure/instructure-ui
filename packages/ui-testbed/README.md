@@ -63,7 +63,7 @@ const subject = testbed.render({
 
 subject.find('input').simulate('click')
 
-expect(onClick).to.have.been.called
+expect(onClick).to.have.been.called()
 ```
 
 The testbed provides a reference to a [sinon sandbox](http://sinonjs.org/docs/#sandbox) that you can use to stub out functions for your tests. See the [sinon documentation](http://sinonjs.org/docs/) for more details.

@@ -29,7 +29,7 @@ describe('<Timer />', () => {
 
   it('should render', () => {
     const timer = testbed.render()
-    expect(timer).to.be.present
+    expect(timer).to.be.present()
   })
 
   it('initializes correct state', () => {

@@ -342,7 +342,7 @@ describe('generateExamples', () => {
           renderExample: optionsRenderExample
         })
 
-        expect(optionsRenderExample).to.not.have.been.called
+        expect(optionsRenderExample).to.not.have.been.called()
         expect(configRenderExample.callCount).to.equal(sections[0].examples.length)
       })
     })
@@ -398,10 +398,10 @@ describe('generateExamples', () => {
           renderLayout: optionsRenderLayout
         })
 
-        expect(optionsRenderExample).to.not.have.been.called
-        expect(optionsRenderLayout).to.not.have.been.called
+        expect(optionsRenderExample).to.not.have.been.called()
+        expect(optionsRenderLayout).to.not.have.been.called()
         expect(configRenderExample.callCount).to.equal(sections[0].examples.length)
-        expect(configRenderLayout).to.have.been.calledOnce
+        expect(configRenderLayout).to.have.been.calledOnce()
       })
     })
   })
@@ -469,7 +469,7 @@ describe('generateExamples', () => {
         expect(spy.lastCall.args[0].includes(
           property === 'displayName' ? `${errorMessage} component` : `${errorMessage} TestComponent`
         )).to.equal(true)
-        expect(result).to.not.exist
+        expect(result).to.not.exist()
       })
     }
 

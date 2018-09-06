@@ -36,12 +36,12 @@ describe('<DatePicker />', () => {
 
   it('styles today date', () => {
     const subject = testbed.render()
-    expect(subject.find(`.${styles.today}`)).to.be.present
+    expect(subject.find(`.${styles.today}`)).to.be.present()
   })
 
   it('styles the selected date', () => {
     const subject = testbed.render()
-    expect(subject.find(`.${styles.selected}`)).to.be.present
+    expect(subject.find(`.${styles.selected}`)).to.be.present()
   })
 
   it('styles dates outside the selected month', () => {
@@ -54,9 +54,9 @@ describe('<DatePicker />', () => {
     const subject = testbed.render({onSelectedChange})
     const cell = subject.find(`.${styles.outside}`).first()
     cell.simulate('click')
-    expect(onSelectedChange).to.have.been.called
+    expect(onSelectedChange).to.have.been.called()
     const onChangeArg = onSelectedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok()
     expect(cell.props().disabled).to.eq(false)
   })
 
@@ -65,7 +65,7 @@ describe('<DatePicker />', () => {
     const subject = testbed.render({ disabledDaysOfWeek: [0, 1, 2, 3, 4, 5, 6], onSelectedChange })
     const cell = subject.find(`.${styles.outside}`).first()
     cell.simulate('click')
-    expect(onSelectedChange).to.not.have.been.called
+    expect(onSelectedChange).to.not.have.been.called()
     expect(cell.props().disabled).to.eq(true)
   })
 
@@ -74,7 +74,7 @@ describe('<DatePicker />', () => {
     const subject = testbed.render({ disabledDays: [new Date(2017, 5, 5)], onSelectedChange })
     const cell = subject.find(`.${styles.cell}`).at(8)
     cell.simulate('click')
-    expect(onSelectedChange).to.not.have.been.called
+    expect(onSelectedChange).to.not.have.been.called()
     expect(cell.props().disabled).to.eq(true)
   })
 
@@ -84,7 +84,7 @@ describe('<DatePicker />', () => {
     const subject = testbed.render({ disabledDays: disabledDays, onSelectedChange })
     const cell = subject.find(`.${styles.cell}`).at(8)
     cell.simulate('click')
-    expect(onSelectedChange).to.not.have.been.called
+    expect(onSelectedChange).to.not.have.been.called()
     expect(cell.props().disabled).to.eq(true)
   })
 
@@ -94,9 +94,9 @@ describe('<DatePicker />', () => {
     const slider = subject.find(`.${paginationStyles.root}`)
     const nextButton = slider.find('Button').first()
     nextButton.simulate('click')
-    expect(onRenderedChange).to.have.been.called
+    expect(onRenderedChange).to.have.been.called()
     const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok()
   })
 
   it('fires onRenderedChange when previous arrow is clicked', () => {
@@ -105,9 +105,9 @@ describe('<DatePicker />', () => {
     const slider = subject.find(`.${paginationStyles.root}`)
     const prevButton = slider.find('Button').last()
     prevButton.simulate('click')
-    expect(onRenderedChange).to.have.been.called
+    expect(onRenderedChange).to.have.been.called()
     const onChangeArg = onRenderedChange.getCall(0).args[1]
-    expect(DateTime.isValid(onChangeArg)).to.be.ok
+    expect(DateTime.isValid(onChangeArg)).to.be.ok()
   })
 
   it('localizes the calendar layout', () => {
@@ -128,7 +128,7 @@ describe('<DatePicker />', () => {
     expect(subject.get)
     const cell = subject.find(`.${styles.outside}`).first()
     cell.simulate('click')
-    expect(onSelectedChange).to.have.been.called
+    expect(onSelectedChange).to.have.been.called()
     expect(onSelectedChange.getCall(0).args[1]).to.include('2017-04-30T00:00:00+02:00')
   })
 
@@ -215,7 +215,7 @@ describe('<DatePicker />', () => {
       onRenderedChange
     })
     subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(onRenderedChange).to.have.been.called
+    expect(onRenderedChange).to.have.been.called()
   })
 
   it('should move slider to a different month when date is selected out of month', () => {
@@ -225,7 +225,7 @@ describe('<DatePicker />', () => {
       onRenderedChange
     })
     subject.find(`.${styles.outside}`).first().simulate('click')
-    expect(onRenderedChange).to.have.been.called
+    expect(onRenderedChange).to.have.been.called()
   })
 
   it('should meet a11y standards', (done) => {

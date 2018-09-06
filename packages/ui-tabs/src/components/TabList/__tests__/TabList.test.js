@@ -70,7 +70,7 @@ describe('<TabList />', () => {
       error = true
     }
 
-    expect(error).to.be.false
+    expect(error).to.be.false()
   })
 
   it('should not allow invalid children', () => {
@@ -83,7 +83,7 @@ describe('<TabList />', () => {
       error = true
     }
 
-    expect(error).to.be.true
+    expect(error).to.be.true()
   })
 
   it('should preserve TabPanel keys', (done) => {
@@ -115,7 +115,7 @@ describe('<TabList />', () => {
       error = true
     }
 
-    expect(error).to.be.true
+    expect(error).to.be.true()
   })
 
   it('should default to selectedIndex being 0', () => {
@@ -125,7 +125,7 @@ describe('<TabList />', () => {
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
     expect(tabs(0).getAttribute('aria-selected')).to.equal('true')
-    expect(panels(0).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(0).getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should honor the defaultSelectedIndex prop', () => {
@@ -137,7 +137,7 @@ describe('<TabList />', () => {
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
     expect(tabs(1).getAttribute('aria-selected')).to.equal('true')
-    expect(panels(1).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(1).getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should not allow selecting a disabled tab', () => {
@@ -148,7 +148,7 @@ describe('<TabList />', () => {
     const tabs = (n) => subject.find('[role="presentation"]').at(n)
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
-    expect(tabs(2).getAttribute('aria-selected')).to.not.exist
+    expect(tabs(2).getAttribute('aria-selected')).to.not.exist()
     expect(panels(2).getAttribute('aria-hidden')).to.equal('true')
   })
 
@@ -187,7 +187,7 @@ describe('<TabList />', () => {
 
     const tabs = subject.find('[role="tab"]')
 
-    expect(tabs.at(1).focused()).to.be.true
+    expect(tabs.at(1).focused()).to.be.true()
   })
 
   it('should focus the selectedIndex tab when focus is set', (done) => {
@@ -198,10 +198,10 @@ describe('<TabList />', () => {
 
     const tabs = (n) => subject.find('[role="tab"]').at(n)
 
-    expect(tabs(1).focused()).to.be.true
+    expect(tabs(1).focused()).to.be.true()
 
     subject.setProps({ selectedIndex: 0 }, () => {
-      expect(tabs(0).focused()).to.be.true
+      expect(tabs(0).focused()).to.be.true()
       done()
     })
   })
@@ -214,16 +214,16 @@ describe('<TabList />', () => {
     const tabs = (n) => subject.find('[role="tab"]').at(n)
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
-    expect(tabs(0).getAttribute('aria-selected')).to.not.exist
+    expect(tabs(0).getAttribute('aria-selected')).to.not.exist()
     expect(tabs(1).getAttribute('aria-selected')).to.equal('true')
 
-    expect(panels(1).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(1).getAttribute('aria-hidden')).to.not.exist()
 
     subject.find('[aria-selected="true"]').keyDown('right')
     subject.find('[aria-selected="true"]').keyDown('down')
 
     expect(tabs(1).getAttribute('aria-selected')).to.equal('true')
-    expect(panels(1).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(1).getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should update the selected tab via keyboard ENTER keys on screen reader tabs', () => {
@@ -234,11 +234,11 @@ describe('<TabList />', () => {
     const tabs = (n) => subject.find('[role="tab"]').at(n)
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
-    expect(tabs(0).getAttribute('aria-selected')).to.not.exist
+    expect(tabs(0).getAttribute('aria-selected')).to.not.exist()
     expect(tabs(1).getAttribute('aria-selected')).to.equal('true')
 
     expect(panels(0).getAttribute('aria-hidden')).to.equal('true')
-    expect(panels(1).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(1).getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should update the selected tab when clicked', () => {
@@ -250,11 +250,11 @@ describe('<TabList />', () => {
     const tabs = (n) => subject.find('[role="tab"]').at(n)
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
-    expect(tabs(0).getAttribute('aria-selected')).to.not.exist
+    expect(tabs(0).getAttribute('aria-selected')).to.not.exist()
     expect(tabs(1).getAttribute('aria-selected')).to.equal('true')
 
     expect(panels(0).getAttribute('aria-hidden')).to.equal('true')
-    expect(panels(1).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(1).getAttribute('aria-hidden')).to.not.exist()
   })
 
   it('should not change selectedIndex when clicking a disabled tab', () => {
@@ -266,9 +266,9 @@ describe('<TabList />', () => {
     const panels = (n) => subject.find('[role="tabpanel"]').at(n)
 
     expect(tabs(0).getAttribute('aria-selected')).to.equal('true')
-    expect(tabs(2).getAttribute('aria-selected')).to.not.exist
+    expect(tabs(2).getAttribute('aria-selected')).to.not.exist()
 
-    expect(panels(0).getAttribute('aria-hidden')).to.not.exist
+    expect(panels(0).getAttribute('aria-hidden')).to.not.exist()
     expect(panels(2).getAttribute('aria-hidden')).to.equal('true')
   })
 

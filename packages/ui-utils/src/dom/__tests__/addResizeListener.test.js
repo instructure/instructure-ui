@@ -37,7 +37,7 @@ describe('addResizeListener', () => {
 
     testbed.raf()
 
-    expect(callback).to.have.been.calledOnce
+    expect(callback).to.have.been.calledOnce()
     expect(typeof listener.remove).to.equal('function')
 
     listener.remove()

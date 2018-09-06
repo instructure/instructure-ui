@@ -103,6 +103,6 @@ describe('getShorthandPropValue', () => {
       warning.lastCall.args[0].includes(
         `[%s] %s is an invalid %s value.`
       )
-    ).to.be.true
+    ).to.be.true()
   })
 })

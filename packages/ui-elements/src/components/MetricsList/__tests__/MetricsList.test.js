@@ -51,7 +51,7 @@ describe('<MetricsList />', () => {
       error = true
     }
 
-    expect(error).to.be.true
+    expect(error).to.be.true()
   })
 
   describe('for a11y', () => {

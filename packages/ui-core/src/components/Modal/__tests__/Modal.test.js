@@ -60,8 +60,8 @@ describe('<Modal />', () => {
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true })
     const portal = subject.find(Portal).unwrap()
-    expect(portal.node.querySelector('[role="dialog"]')).to.exist
-    expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist()
+    expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist()
   })
 
   it('should use transition', () => {
@@ -79,12 +79,12 @@ describe('<Modal />', () => {
 
     testbed.tick()
 
-    expect(onEnter).to.have.been.called
+    expect(onEnter).to.have.been.called()
 
     testbed.tick()
 
-    expect(onEntering).to.have.been.called
-    expect(onEntered).to.have.been.called
+    expect(onEntering).to.have.been.called()
+    expect(onEntered).to.have.been.called()
   })
 
   it('should support onOpen prop', () => {
@@ -96,7 +96,7 @@ describe('<Modal />', () => {
 
     testbed.tick()
 
-    expect(onOpen).to.have.been.called
+    expect(onOpen).to.have.been.called()
   })
 
   it('should support onClose prop', done => {
@@ -114,7 +114,7 @@ describe('<Modal />', () => {
         // wait for re-render after state change
         testbed.tick()
         testbed.tick()
-        expect(onClose).to.have.been.called
+        expect(onClose).to.have.been.called()
         done()
       })
     })
@@ -134,7 +134,7 @@ describe('<Modal />', () => {
       bubbles: true
     })
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 
   it('should dismiss when overlay clicked with prop', () => {
@@ -151,7 +151,7 @@ describe('<Modal />', () => {
       bubbles: true
     })
 
-    expect(onDismiss).to.not.have.been.called
+    expect(onDismiss).to.not.have.been.called()
   })
 
   it('should dismiss when close button is clicked', () => {
@@ -163,7 +163,7 @@ describe('<Modal />', () => {
 
     subject.ref('_content').find(Button).simulate('click')
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 
   it('should render children', () => {
@@ -216,7 +216,7 @@ describe('<Modal /> managed focus', () => {
 
     testbed.tick()
 
-    expect(closeButton === document.activeElement).to.be.true
+    expect(closeButton === document.activeElement).to.be.true()
   })
 
   it('should take a prop for finding default focus', () => {
@@ -229,7 +229,7 @@ describe('<Modal /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
   })
 
   it('should call onDismiss prop when Esc key pressed by default', () => {
@@ -243,6 +243,6 @@ describe('<Modal /> managed focus', () => {
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 })

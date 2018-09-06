@@ -35,7 +35,7 @@ describe('<InlineSVG />', () => {
       children: <path d="962" stroke="none" strokeWidth="1" fillRule="evenodd" />
     })
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should have role "presentation" when no title is provided', () => {
@@ -71,7 +71,7 @@ describe('<InlineSVG />', () => {
       title: 'testIconTitle'
     })
 
-    expect(subject.find('title')).to.be.present
+    expect(subject.find('title')).to.be.present()
   })
 
   it('should not render description when no description prop is provided', () => {
@@ -85,7 +85,7 @@ describe('<InlineSVG />', () => {
       description: 'testIconDesc'
     })
 
-    expect(subject.find('desc')).to.be.present
+    expect(subject.find('desc')).to.be.present()
   })
 
   it('should produce null for "labelledBy" when no title or desc are provided', () => {
@@ -140,8 +140,7 @@ describe('<InlineSVG />', () => {
     const subject = testbed.render({
       color: 'success'
     })
-
-    expect(subject.find(`.${styles.success}`)).to.be.present
+    expect(subject.find(`.${styles['color--success']}`)).to.be.present()
   })
 
   it('should allow passing in the svg src as a string', () => {

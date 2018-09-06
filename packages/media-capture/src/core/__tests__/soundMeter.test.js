@@ -61,7 +61,7 @@ describe('SoundMeter', () => {
     const soundMeter = new SoundMeter(audioContext())
     soundMeter.context.state = 'inactive'
     soundMeter.stop()
-    expect(closeStub).to.have.been.called
-    expect(disconnectStub).to.have.been.called
+    expect(closeStub).to.have.been.called()
+    expect(disconnectStub).to.have.been.called()
   })
 })

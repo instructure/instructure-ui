@@ -37,27 +37,27 @@ describe('<VideoPlayerButton />', () => {
   it('invokes forwardRef prop on mount', () => {
     const forwardRef = testbed.stub()
     testbed.render({ forwardRef })
-    expect(forwardRef).to.have.been.called
+    expect(forwardRef).to.have.been.called()
   })
 
   it('invokes onClick prop when clicked', () => {
     const onClick = testbed.stub()
     const button = testbed.render({ onClick })
     button.click()
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('stops bubbling when space is pressed', () => {
     const event = { stopPropagation: testbed.stub(), key: ' ' }
     const button = testbed.render()
     button.simulate('keyDown', event)
-    expect(event.stopPropagation).to.have.been.called
+    expect(event.stopPropagation).to.have.been.called()
   })
 
   it('stops bubbling when Enter is pressed', () => {
     const event = { stopPropagation: testbed.stub(), key: 'Enter' }
     const button = testbed.render()
     button.simulate('keyDown', event)
-    expect(event.stopPropagation).to.have.been.called
+    expect(event.stopPropagation).to.have.been.called()
   })
 })

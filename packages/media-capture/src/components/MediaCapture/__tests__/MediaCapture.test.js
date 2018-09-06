@@ -35,7 +35,7 @@ describe('<MediaCapture />', () => {
 
   it('should render', () => {
     const mediaCapture = testbed.render()
-    expect(mediaCapture).to.be.present
+    expect(mediaCapture).to.be.present()
   })
 
   it('passes onClose prop to MediaCaptureProvider', () => {

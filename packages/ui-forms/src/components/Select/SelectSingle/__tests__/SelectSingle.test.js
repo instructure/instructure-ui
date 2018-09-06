@@ -60,13 +60,13 @@ describe('<SelectSingle />', () => {
   it('should focus the input when focus is called', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should provide an focused getter', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   it('should provide an inputRef prop', () => {
@@ -83,7 +83,7 @@ describe('<SelectSingle />', () => {
     subject.instance()._input.value = 'Arub'
     subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(subject.instance()._input.value).to.equal('')
-    expect(onInputChange).to.have.been.calledOnce
+    expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal('')
   })
@@ -98,7 +98,7 @@ describe('<SelectSingle />', () => {
     })
 
     expect(subject.instance()._input.value).to.equal(label)
-    expect(onInputChange).to.not.have.been.called
+    expect(onInputChange).to.not.have.been.called()
 
     label = 'Jamaica'
     value = '1'
@@ -106,7 +106,7 @@ describe('<SelectSingle />', () => {
       selectedOption: { label, value, children: label, id: value }
     }, () => {
       testbed.defer(() => { // wait for re-render
-        expect(onInputChange).to.have.been.calledOnce
+        expect(onInputChange).to.have.been.calledOnce()
         expect(onInputChange.firstCall.args[0]).to.equal(null)
         expect(onInputChange.firstCall.args[1]).to.equal(label)
         expect(subject.instance()._input.value).to.equal(label)
@@ -127,7 +127,7 @@ describe('<SelectSingle />', () => {
     subject.find('input').simulate('click')
     subject.instance()._input.value = 'Arub'
     subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(onInputChange).to.have.been.calledOnce
+    expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(label)
     expect(subject.instance()._input.value).to.equal(label)
@@ -143,12 +143,12 @@ describe('<SelectSingle />', () => {
     subject.find('input').simulate('click')
     subject.instance()._input.value = label
     subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(onChange).to.have.been.calledOnce
-    expect(onChange.firstCall.args[0].target).to.exist
+    expect(onChange).to.have.been.calledOnce()
+    expect(onChange.firstCall.args[0].target).to.exist()
     expect(onChange.firstCall.args[0].target.value).to.equal(label)
     expect(onChange.firstCall.args[1]).to.eql({ value, label, id: value, children: label })
 
-    expect(onInputChange).to.not.have.been.called
+    expect(onInputChange).to.not.have.been.called()
   })
 
   it('calls onInputChange when input changes', () => {
@@ -161,8 +161,8 @@ describe('<SelectSingle />', () => {
     testbed.tick()
     subject.instance()._input.value = label
     subject.find('input').simulate('change', { preventDefault })
-    expect(onInputChange.firstCall).to.exist
-    expect(onInputChange.firstCall.args[0]).to.exist
+    expect(onInputChange.firstCall).to.exist()
+    expect(onInputChange.firstCall.args[0]).to.exist()
     expect(onInputChange.firstCall.args[0].target.value).to.eql(label)
     expect(onInputChange.firstCall.args[1]).to.eql(label)
   })
@@ -182,7 +182,7 @@ describe('<SelectSingle />', () => {
   it('renders SelectField', () => {
     const subject = testbed.render()
     testbed.tick()
-    expect(subject.find(SelectField).unwrap()).to.exist
+    expect(subject.find(SelectField).unwrap()).to.exist()
   })
 
   it('responds to selection done by SelectField', () => {
@@ -194,17 +194,17 @@ describe('<SelectSingle />', () => {
     const subject = testbed.render({ onChange, onInputChange })
     testbed.tick()
     const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist
+    expect(onSelect).to.exist()
 
     onSelect({ preventDefault, target: 1 }, newSelection)
 
-    expect(onChange.firstCall).to.exist
+    expect(onChange.firstCall).to.exist()
     const eventArg = onChange.firstCall.args[0]
     const selectedOptionArg = onChange.firstCall.args[1]
     expect(eventArg.target).to.equal(1)
     expect(selectedOptionArg).to.eql(newSelection)
 
-    expect(onInputChange).to.have.been.calledOnce
+    expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(newSelection.label)
     expect(subject.instance().state.filterText).to.equal('')
@@ -219,7 +219,7 @@ describe('<SelectSingle />', () => {
     testbed.tick()
     expect(subject.instance()._input.value).to.equal(options[0].label)
     expect(subject.instance().state.selectedOption).to.eql(options[0])
-    expect(onInputChange).to.not.have.been.called
+    expect(onInputChange).to.not.have.been.called()
 
     subject.setProps({
       selectedOption: '1'
@@ -229,7 +229,7 @@ describe('<SelectSingle />', () => {
         expect(subject.instance()._input.value).to.equal(options[1].label)
         expect(subject.instance().state.selectedOption).to.eql(options[1])
 
-        expect(onInputChange).to.have.been.calledOnce
+        expect(onInputChange).to.have.been.calledOnce()
         expect(onInputChange.firstCall.args[0]).to.equal(null)
         expect(onInputChange.firstCall.args[1]).to.equal(options[1].label)
         done()
@@ -347,7 +347,7 @@ describe('<SelectSingle />', () => {
       })
 
       expect(subject.find('input').getAttribute('aria-invalid'))
-        .to.exist
+        .to.exist()
     })
   })
 })

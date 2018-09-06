@@ -118,7 +118,7 @@ describe('<RangeInput />', () => {
       ]
     })
 
-    expect(subject.instance().invalid).to.be.true
+    expect(subject.instance().invalid).to.be.true()
   })
 
   describe('for a11y', () => {

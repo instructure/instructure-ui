@@ -41,7 +41,7 @@ describe('<Tag />', () => {
     const onClick = testbed.stub()
     const tag = testbed.render({onClick})
     tag.find('button').simulate('click')
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('should render a close icon when it is dismissible and clickable', () => {
@@ -66,7 +66,7 @@ describe('when passing down props to View', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

@@ -30,6 +30,6 @@ describe('<MediaOverlay />', () => {
   it('should render', () => {
     const container = testbed.render()
 
-    expect(container).to.be.present
+    expect(container).to.be.present()
   })
 })

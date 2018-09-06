@@ -70,7 +70,7 @@ describe('<Navigation />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render a single semantic nav element', () => {
@@ -99,6 +99,6 @@ describe('<Navigation />', () => {
     const toggle = subject.find(NavigationItem).last()
     toggle.find('button').simulate('click')
 
-    expect(subject.find('nav').hasClass(styles['minimized'])).to.be.true
+    expect(subject.find('nav').hasClass(styles['minimized'])).to.be.true()
   })
 })

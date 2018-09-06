@@ -118,7 +118,7 @@ describe('mergeDeep', () => {
   })
 
   it('should copy source properties', () => {
-    expect(mergeDeep({ test: true }).test).to.be.true
+    expect(mergeDeep({ test: true }).test).to.be.true()
   })
 
   it('should not clone objects created with custom constructor', () => {

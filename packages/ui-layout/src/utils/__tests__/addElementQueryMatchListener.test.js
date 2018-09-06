@@ -73,10 +73,10 @@ describe('@addElementQueryMatchListener', (done) => {
 
     const listener = addListener(query, subject.getDOMNode())
 
-    expect(matches.includes('wide')).to.be.true
-    expect(matches.includes('thin')).to.be.false
-    expect(matches.includes('tall')).to.be.true
-    expect(matches.includes('short')).to.be.false
+    expect(matches.includes('wide')).to.be.true()
+    expect(matches.includes('thin')).to.be.false()
+    expect(matches.includes('tall')).to.be.true()
+    expect(matches.includes('short')).to.be.false()
 
     listener.remove()
   })
@@ -92,10 +92,10 @@ describe('@addElementQueryMatchListener', (done) => {
 
     const listener = addListener(query, subject.getDOMNode())
 
-    expect(matches.includes('wide')).to.be.false
-    expect(matches.includes('thin')).to.be.false
-    expect(matches.includes('tall')).to.be.false
-    expect(matches.includes('short')).to.be.true
+    expect(matches.includes('wide')).to.be.false()
+    expect(matches.includes('thin')).to.be.false()
+    expect(matches.includes('tall')).to.be.false()
+    expect(matches.includes('short')).to.be.true()
 
     subject.setProps({
       width: '200px',
@@ -104,10 +104,10 @@ describe('@addElementQueryMatchListener', (done) => {
       testbed.raf() // for the listener
       testbed.tick() // for the debounce
 
-      expect(matches.includes('wide')).to.be.false
-      expect(matches.includes('thin')).to.be.true
-      expect(matches.includes('tall')).to.be.true
-      expect(matches.includes('short')).to.be.false
+      expect(matches.includes('wide')).to.be.false()
+      expect(matches.includes('thin')).to.be.true()
+      expect(matches.includes('tall')).to.be.true()
+      expect(matches.includes('short')).to.be.false()
 
       subject.setProps({
         width: '600px',
@@ -116,10 +116,10 @@ describe('@addElementQueryMatchListener', (done) => {
         testbed.raf()
         testbed.tick()
 
-        expect(matches.includes('wide')).to.be.true
-        expect(matches.includes('thin')).to.be.false
-        expect(matches.includes('tall')).to.be.false
-        expect(matches.includes('short')).to.be.false
+        expect(matches.includes('wide')).to.be.true()
+        expect(matches.includes('thin')).to.be.false()
+        expect(matches.includes('tall')).to.be.false()
+        expect(matches.includes('short')).to.be.false()
 
         listener.remove()
         done()
@@ -142,8 +142,8 @@ describe('@addElementQueryMatchListener', (done) => {
       testbed.raf() // for the listener
       testbed.tick() // for the debounce
 
-      expect(matches.includes('one')).to.be.false
-      expect(matches.includes('two')).to.be.false
+      expect(matches.includes('one')).to.be.false()
+      expect(matches.includes('two')).to.be.false()
 
       subject.setProps({
         width: '220px'
@@ -151,8 +151,8 @@ describe('@addElementQueryMatchListener', (done) => {
         testbed.raf()
         testbed.tick()
 
-        expect(matches.includes('one')).to.be.true
-        expect(matches.includes('two')).to.be.false
+        expect(matches.includes('one')).to.be.true()
+        expect(matches.includes('two')).to.be.false()
 
         subject.setProps({
           width: '230px'
@@ -160,8 +160,8 @@ describe('@addElementQueryMatchListener', (done) => {
           testbed.raf()
           testbed.tick()
 
-          expect(matches.includes('one')).to.be.true
-          expect(matches.includes('two')).to.be.true
+          expect(matches.includes('one')).to.be.true()
+          expect(matches.includes('two')).to.be.true()
           listener.remove()
           done()
         })

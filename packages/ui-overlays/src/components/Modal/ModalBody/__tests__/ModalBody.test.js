@@ -32,7 +32,7 @@ describe('<ModalBody />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.exist
+    expect(subject).to.exist()
   })
 
   describe('when passing down props to View', () => {
@@ -51,7 +51,7 @@ describe('<ModalBody />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).first().props()[prop]).to.not.exist
+            expect(subject.find(View).first().props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

@@ -32,7 +32,7 @@ describe('<Message />', () => {
 
   it('should render', () => {
     const message = testbed.render()
-    expect(message).to.be.present
+    expect(message).to.be.present()
   })
 
   describe('as an error', () => {

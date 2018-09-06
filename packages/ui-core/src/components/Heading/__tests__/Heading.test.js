@@ -72,6 +72,6 @@ describe('<Heading />', () => {
       padding: 'medium large small medium'
     })
 
-    expect(subject.find(View).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist()
   })
 })

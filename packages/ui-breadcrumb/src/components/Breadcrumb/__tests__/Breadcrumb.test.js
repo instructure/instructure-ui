@@ -44,7 +44,7 @@ describe('<Breadcrumb />', () => {
 
   it('should render IconArrowOpenEnd by default as a separator', () => {
     const subject = testbed.render()
-    expect(subject.find(IconArrowOpenEnd)).to.be.present
+    expect(subject.find(IconArrowOpenEnd)).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {

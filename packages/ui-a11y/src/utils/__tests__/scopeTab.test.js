@@ -88,7 +88,7 @@ describe('scopeTab', () => {
     const spy = testbed.spy()
 
     scopeTab(findContainer(subject), MOCK_EVENT, spy)
-    expect(spy).to.have.been.calledOnce
+    expect(spy).to.have.been.calledOnce()
     expect(document.activeElement).to.not.equal(findInput(subject, 1))
   })
 })

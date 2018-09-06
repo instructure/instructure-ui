@@ -40,7 +40,7 @@ describe('<RatingIcon />', () => {
     testbed.tick() // delay
     testbed.raf()
 
-    expect(subject.find(Transition)).to.be.present
+    expect(subject.find(Transition)).to.be.present()
   })
 
   it('transitions when filled after render and animateFill is true', (done) => {
@@ -56,7 +56,7 @@ describe('<RatingIcon />', () => {
     }, () => {
       testbed.defer(() => { // update state
         testbed.raf()
-        expect(subject.find(Transition)).to.be.present
+        expect(subject.find(Transition)).to.be.present()
         done()
       })
     })

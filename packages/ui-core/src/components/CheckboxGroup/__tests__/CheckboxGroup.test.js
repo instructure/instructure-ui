@@ -81,7 +81,7 @@ describe('<CheckboxGroup />', () => {
       }
     })
 
-    expect(onChange).to.not.have.been.called
+    expect(onChange).to.not.have.been.called()
   })
 
   it('does not call the onChange prop when readOnly', () => {
@@ -99,7 +99,7 @@ describe('<CheckboxGroup />', () => {
       }
     })
 
-    expect(onChange).to.not.have.been.called
+    expect(onChange).to.not.have.been.called()
   })
 
   it('should not update the value when the value prop is set', () => {
@@ -130,10 +130,10 @@ describe('<CheckboxGroup />', () => {
     })
 
     expect(subject.find('input[value="football"]').getDOMNode().checked)
-      .to.be.true
+      .to.be.true()
 
     expect(subject.find('input[value="volleyball"]').getDOMNode().checked)
-      .to.be.true
+      .to.be.true()
   })
 
   it('should remove the checkbox value from the value list when it is unchecked', () => {

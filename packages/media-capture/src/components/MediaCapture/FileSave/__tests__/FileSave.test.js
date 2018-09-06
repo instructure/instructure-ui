@@ -39,7 +39,7 @@ describe('<FileSave />', () => {
 
   it('should render', () => {
     const FileSave = testbed.render()
-    expect(FileSave).to.be.present
+    expect(FileSave).to.be.present()
   })
 
   it('should render a <TextInput />', () => {
@@ -57,14 +57,14 @@ describe('<FileSave />', () => {
       const saveClickedSpy = testbed.spy()
       const FileSave = testbed.render({ actions: { saveClicked: saveClickedSpy } })
       FileSave.find('Button').simulate('click')
-      expect(saveClickedSpy).to.have.been.called
+      expect(saveClickedSpy).to.have.been.called()
     })
 
     it('prevents default handling of the form', () => {
       const preventDefault = testbed.stub()
       const FileSave = testbed.render()
       FileSave.find('Button').simulate('click', { preventDefault })
-      expect(preventDefault).to.have.been.called
+      expect(preventDefault).to.have.been.called()
     })
   })
 

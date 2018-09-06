@@ -50,14 +50,14 @@ describe('<ContextBox />', () => {
       })
 
       expect(subject.hasClass(styles['positioned--top']))
-        .to.be.true
+        .to.be.true()
     })
 
     it('should render with an arrow', () => {
       const subject = testbed.render()
 
       expect(subject.hasClass(styles['with-arrow']))
-        .to.be.true
+        .to.be.true()
     })
   })
 
@@ -68,7 +68,7 @@ describe('<ContextBox />', () => {
       })
 
       expect(subject.hasClass(styles.withArrow))
-        .to.be.false
+        .to.be.false()
     })
   })
 
@@ -81,7 +81,7 @@ describe('<ContextBox />', () => {
       })
 
       expect(subject.hasClass(styles[`positioned--${placement}`]))
-        .to.be.true
+        .to.be.true()
     })
   })
 })

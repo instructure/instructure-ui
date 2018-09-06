@@ -66,7 +66,7 @@ describe('applyVariablesToNode', () => {
 
       const styleNode = domNode.querySelector('style')
 
-      expect(styleNode).to.exist
+      expect(styleNode).to.exist()
 
       if (styleNode.scoped) {
         expect(styleNode.innerText).to.equalIgnoreSpaces(
@@ -86,7 +86,7 @@ describe('applyVariablesToNode', () => {
             background: white;
           }
           `)
-        expect(domNode.getAttribute('themeablecomponent')).to.exist
+        expect(domNode.getAttribute('themeablecomponent')).to.exist()
       }
     })
   })

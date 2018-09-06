@@ -33,7 +33,7 @@ describe('<CloseButton />', () => {
     const subject = testbed.render()
     const iconX = subject.find(IconX)
 
-    expect(subject).to.be.present
-    expect(iconX).to.be.present
+    expect(subject).to.be.present()
+    expect(iconX).to.be.present()
   })
 })

@@ -32,7 +32,7 @@ describe('<FocusableView />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should provide an element ref', () => {
@@ -64,8 +64,8 @@ describe('<FocusableView />', () => {
       as: 'span'
     })
 
-    expect(subject.getDOMNode().getAttribute('tabindex')).to.not.exist
-    expect(subject.getDOMNode().getAttribute('role')).to.not.exist
+    expect(subject.getDOMNode().getAttribute('tabindex')).to.not.exist()
+    expect(subject.getDOMNode().getAttribute('role')).to.not.exist()
   })
 
   describe('when passing down props to View', () => {
@@ -84,7 +84,7 @@ describe('<FocusableView />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

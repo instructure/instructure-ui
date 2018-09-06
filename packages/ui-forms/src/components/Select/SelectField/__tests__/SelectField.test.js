@@ -84,7 +84,7 @@ describe('<SelectField />', () => {
       el = el.parentElement
     }
 
-    expect(labelIsAncestor).to.be.false
+    expect(labelIsAncestor).to.be.false()
   })
 
   it('should provide an inputRef prop', () => {
@@ -95,12 +95,12 @@ describe('<SelectField />', () => {
 
   it('should provide an expanded getter', () => {
     const subject = testbed.render()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
   })
 
   it('should provide a placement getter', () => {
     const subject = testbed.render()
-    expect(subject.instance().placement).to.exist
+    expect(subject.instance().placement).to.exist()
   })
 
   it('placement should be `bottom stretch` by default', () => {
@@ -121,28 +121,28 @@ describe('<SelectField />', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
   })
 
   it('expands when formfield is clicked', () => {
     const subject = testbed.render()
     subject.ref('_inputContainer').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
   })
 
   it('expands on keyDown ArrowDown', () => {
     const subject = testbed.render()
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
   })
 
   it('expands on keyDown ArrowUp', () => {
     const subject = testbed.render()
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.up, preventDefault })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
   })
 
   it('expands on change', () => {
@@ -151,27 +151,27 @@ describe('<SelectField />', () => {
     })
     subject.find('input').simulate('change', { target: { value: 'a' } })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
   })
 
   it('closes when input is clicked', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
   })
 
   it('closes when formfield is clicked', () => {
     const subject = testbed.render()
     subject.ref('_inputContainer').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     subject.ref('_inputContainer').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
   })
 
   it('closes on blur', () => {
@@ -179,34 +179,34 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('click')
     subject.find('input').focus()
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     subject.find('input').simulate('blur')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
   })
 
   it('closes on Escape key', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
   })
 
   it('returns focus to input on close', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
     testbed.tick()
-    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.false
+    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.false()
     testbed.tick()
     subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     testbed.tick()
-    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.true
+    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.true()
   })
 
   it('changes highlights with arrows and selects with Enter', () => {
@@ -215,7 +215,7 @@ describe('<SelectField />', () => {
 
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     expect(subject.instance().state.highlightedIndex).to.equal(0)
 
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
@@ -224,18 +224,18 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.up, preventDefault })
     expect(subject.instance().state.highlightedIndex).to.equal(0)
 
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
 
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
 
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
 
     const value = '1'
     const label = 'Alaska'
-    expect(onSelect).to.have.been.calledOnce
-    expect(onSelect.firstCall.args[0].target).to.exist
+    expect(onSelect).to.have.been.calledOnce()
+    expect(onSelect.firstCall.args[0].target).to.exist()
     expect(onSelect.firstCall.args[1]).to.eql({ value, label, id: value, children: label })
   })
 
@@ -244,7 +244,7 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('click')
     testbed.tick()
 
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     expect(subject.instance().state.highlightedIndex).to.equal(0)
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.end })
     expect(subject.instance().state.highlightedIndex).to.equal(2)
@@ -261,7 +261,7 @@ describe('<SelectField />', () => {
 
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     expect(subject.instance().state.highlightedIndex).to.equal(1)
   })
 
@@ -273,7 +273,7 @@ describe('<SelectField />', () => {
     })
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     const menu = subject.ref('_menu')
     expect(menu.find('li').length).to.equal(1)
     expect(menu.find('li').text().trim()).to.equal(emptyOption)
@@ -286,7 +286,7 @@ describe('<SelectField />', () => {
     })
     subject.find('input').simulate('click')
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
     const menu = subject.ref('_menu')
     expect(menu.find('li').length).to.equal(1)
     expect(menu.find('li').text().trim()).to.equal('Loading options')
@@ -297,7 +297,7 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('click')
     testbed.tick()
 
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
 
     const highlights = []
     highlights.push(subject.instance().state.highlightedIndex)
@@ -310,27 +310,27 @@ describe('<SelectField />', () => {
     subject.find('input').simulate('keyDown', { key: 'ArrowUp', preventDefault })
     highlights.push(subject.instance().state.highlightedIndex)
 
-    expect(highlights.every(h => h === highlights[0])).to.be.true
+    expect(highlights.every(h => h === highlights[0])).to.be.true()
   })
 
   it('should preventDefault onKeyDown of Enter when expanded', () => {
     const subject = testbed.render()
     subject.find('input').simulate('click', { preventDefault })
     testbed.tick()
-    expect(subject.instance().expanded).to.be.true
+    expect(subject.instance().expanded).to.be.true()
 
     const preventDefaultStub = testbed.stub()
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault: preventDefaultStub })
-    expect(preventDefaultStub).to.have.been.called
+    expect(preventDefaultStub).to.have.been.called()
   })
 
   it('should not preventDefault onKeyDown of Enter when collapsed', () => {
     const subject = testbed.render()
-    expect(subject.instance().expanded).to.be.false
+    expect(subject.instance().expanded).to.be.false()
 
     const preventDefaultStub = testbed.stub()
     subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault: preventDefaultStub })
-    expect(preventDefaultStub).to.not.have.been.called
+    expect(preventDefaultStub).to.not.have.been.called()
   })
 
   describe('events', () => {
@@ -339,7 +339,7 @@ describe('<SelectField />', () => {
       testbed.render({ onPositioned })
       testbed.tick()
 
-      expect(onPositioned).to.have.been.called
+      expect(onPositioned).to.have.been.called()
     })
 
     it('responds to onInputChange event', () => {
@@ -351,7 +351,7 @@ describe('<SelectField />', () => {
 
       subject.find('input').simulate('change', { target: { value: 'a' } })
 
-      expect(onInputChange).to.have.been.called
+      expect(onInputChange).to.have.been.called()
       expect(onInputChange.firstCall.args[0].type).to.equal('change')
       expect(onInputChange.firstCall.args[1]).to.equal('a')
     })
@@ -363,7 +363,7 @@ describe('<SelectField />', () => {
 
       subject.find('input').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -373,7 +373,7 @@ describe('<SelectField />', () => {
 
       subject.find('input').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
   })
 
@@ -405,7 +405,7 @@ describe('<SelectField />', () => {
         messages: [{ type: 'error', text: 'some error message' }]
       })
 
-      expect(subject.find('input').getAttribute('aria-invalid')).to.exist
+      expect(subject.find('input').getAttribute('aria-invalid')).to.exist()
     })
   })
 })

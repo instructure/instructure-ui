@@ -40,7 +40,7 @@ describe('<FormFieldGroup />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('can handle null children', () => {
@@ -48,7 +48,7 @@ describe('<FormFieldGroup />', () => {
       children: [<TextInput label="First" key="foo" />, null]
     })
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('links the messages to the fieldset via aria-describedby', () => {

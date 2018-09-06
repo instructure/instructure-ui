@@ -49,7 +49,7 @@ describe('<Expandable />', () => {
   it('should set expanded to false by default', () => {
     testbed.render({render})
     const args = renderSpy.lastCall.args[0]
-    expect(args.expanded).to.be.false
+    expect(args.expanded).to.be.false()
   })
 
   it('should correctly provide the aria-expanded attribute', () => {
@@ -58,7 +58,7 @@ describe('<Expandable />', () => {
     })
     const args = renderSpy.lastCall.args[0]
     const ariaExpanded = args.getToggleProps()['aria-expanded']
-    expect(ariaExpanded).to.be.false
+    expect(ariaExpanded).to.be.false()
   })
 
   it('should provide the toggle and details with a shared, unique id', () => {
@@ -69,7 +69,7 @@ describe('<Expandable />', () => {
     const detailsId = args.getDetailsProps()['id']
     expect(toggleId).to.equal(subject.instance()._contentId)
     expect(detailsId).to.equal(subject.instance()._contentId)
-    expect(toggleId === detailsId).to.be.true
+    expect(toggleId === detailsId).to.be.true()
   })
 
   it('should call onToggle when onClick is called', () => {
@@ -94,6 +94,6 @@ describe('<Expandable />', () => {
       render
     })
     const args = renderSpy.lastCall.args[0]
-    expect(args.expanded).to.be.true
+    expect(args.expanded).to.be.true()
   })
 })

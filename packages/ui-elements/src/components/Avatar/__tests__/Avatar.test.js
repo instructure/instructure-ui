@@ -42,7 +42,7 @@ describe('<Avatar />', () => {
     it('should have aria-hidden=true', () => {
       const subject = testbed.render()
 
-      expect(subject.find('[aria-hidden]')).to.be.present
+      expect(subject.find('[aria-hidden]')).to.be.present()
     })
   })
 
@@ -50,7 +50,7 @@ describe('<Avatar />', () => {
     it('should should display as a circle', () => {
       const subject = testbed.render()
 
-      expect(subject.hasClass(styles.circle)).to.be.true
+      expect(subject.hasClass(styles.circle)).to.be.true()
     })
 
     it('should render initials', () => {
@@ -82,7 +82,7 @@ describe('<Avatar />', () => {
         variant: 'rectangle'
       })
 
-      expect(subject.hasClass(styles.rectangle)).to.be.true
+      expect(subject.hasClass(styles.rectangle)).to.be.true()
     })
   })
 
@@ -144,7 +144,7 @@ describe('<Avatar />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

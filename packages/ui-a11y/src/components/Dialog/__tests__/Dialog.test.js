@@ -44,13 +44,13 @@ describe('<Dialog />', () => {
     const subject = testbed.render({
       open: true
     })
-    expect(subject.find('button')).to.exist
+    expect(subject.find('button')).to.exist()
   })
 
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true, label: 'Dialog Example' })
-    expect(subject.find('[role="dialog"]')).to.be.present
-    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
+    expect(subject.find('[role="dialog"]')).to.be.present()
+    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present()
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -64,7 +64,7 @@ describe('<Dialog />', () => {
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 
   it('should call onDismiss prop when the document is clicked', () => {
@@ -81,7 +81,7 @@ describe('<Dialog />', () => {
       bubbles: true
     })
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 })
 
@@ -132,7 +132,7 @@ describe('<Dialog /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
   })
 
   it('should focus the first tabbable element when open prop becomes true', () => {
@@ -144,7 +144,7 @@ describe('<Dialog /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
   })
 
   it('should take a prop for finding default focus', () => {
@@ -157,7 +157,7 @@ describe('<Dialog /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-two') === document.activeElement).to.be.true
+    expect(document.getElementById('input-two') === document.activeElement).to.be.true()
   })
 
   it('should return focus', () => {
@@ -166,21 +166,21 @@ describe('<Dialog /> managed focus', () => {
     })
 
     expect(document.getElementById('input-trigger') === document.activeElement)
-      .to.be.true
+      .to.be.true()
 
     subject.setProps({ open: true })
 
     testbed.tick()
 
     expect(document.getElementById('input-one') === document.activeElement)
-      .to.be.true
+      .to.be.true()
 
     subject.setProps({ open: false })
 
     testbed.tick()
 
     expect(document.getElementById('input-trigger') === document.activeElement)
-      .to.be.true
+      .to.be.true()
   })
 
   function testOnBlur (shouldContainFocus) {
@@ -197,16 +197,16 @@ describe('<Dialog /> managed focus', () => {
 
       const inputTwo = document.getElementById('input-two')
       expect(inputTwo === document.activeElement)
-        .to.be.true
+        .to.be.true()
 
       const inputWrapper = Testbed.wrap(inputTwo)
 
       inputWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
 
       if (!shouldContainFocus) {
-        expect(onBlur).to.have.been.calledOnce
+        expect(onBlur).to.have.been.calledOnce()
       } else {
-        expect(onBlur).to.not.have.been.called
+        expect(onBlur).to.not.have.been.called()
       }
     })
   }

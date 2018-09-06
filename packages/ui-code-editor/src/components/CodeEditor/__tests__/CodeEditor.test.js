@@ -31,6 +31,6 @@ describe('<CodeEditor />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 })

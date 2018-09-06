@@ -45,7 +45,7 @@ describe('<TreeCollection />', () => {
 
   it('should render', () => {
     const collection = testbed.render()
-    expect(collection).to.be.present
+    expect(collection).to.be.present()
   })
 
   describe('collections', () => {
@@ -69,7 +69,7 @@ describe('<TreeCollection />', () => {
     it('passes an aria-expanded attribute to its button', () => {
       const collection = testbed.render()
       const button = collection.find('button')
-      expect(button.getAttribute('aria-expanded')).to.exist
+      expect(button.getAttribute('aria-expanded')).to.exist()
     })
 
     describe('onCollectionClick', () => {
@@ -86,7 +86,7 @@ describe('<TreeCollection />', () => {
     it('does not pass an aria-expanded attribute to its button', () => {
       const collection = testbed.render({expanded: true})
       const itemButton = collection.find('[title="Item 1"]').node
-      expect(itemButton.getAttribute('aria-expanded')).to.not.exist
+      expect(itemButton.getAttribute('aria-expanded')).to.not.exist()
     })
 
     it('calls any custom functions passed by onItemClick prop', () => {
@@ -95,7 +95,7 @@ describe('<TreeCollection />', () => {
         onCollectionClick: onItemClick
       })
       collection.find('button').simulate('click')
-      expect(onItemClick).to.have.been.called
+      expect(onItemClick).to.have.been.called()
     })
   })
 })

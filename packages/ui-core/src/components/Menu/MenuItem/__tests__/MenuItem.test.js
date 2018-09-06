@@ -33,7 +33,7 @@ describe('<MenuItem />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render as a link when an href is provided', () => {
@@ -52,9 +52,9 @@ describe('<MenuItem />', () => {
 
     subject.simulate('click')
 
-    expect(onSelect).to.have.been.calledOnce
+    expect(onSelect).to.have.been.calledOnce()
     expect(onSelect.args[0][1]).to.equal('foo')
-    expect(onSelect.args[0][2]).to.be.true
+    expect(onSelect.args[0][2]).to.be.true()
   })
 
   it('should call onClick after click', () => {
@@ -65,7 +65,7 @@ describe('<MenuItem />', () => {
 
     subject.simulate('click')
 
-    expect(onClick).to.have.been.calledOnce
+    expect(onClick).to.have.been.calledOnce()
   })
 
   it('should call onSelect after SPACE key is pressed', () => {
@@ -76,7 +76,7 @@ describe('<MenuItem />', () => {
 
     subject.keyUp('space')
 
-    expect(onSelect).to.have.been.calledOnce
+    expect(onSelect).to.have.been.calledOnce()
   })
 
   it('should call onSelect after ENTER key is pressed', () => {
@@ -87,7 +87,7 @@ describe('<MenuItem />', () => {
 
     subject.keyDown('enter')
 
-    expect(onSelect).to.have.been.calledOnce
+    expect(onSelect).to.have.been.calledOnce()
   })
 
   it('should not be able to select when the disabled prop is set', () => {
@@ -100,14 +100,14 @@ describe('<MenuItem />', () => {
     subject.keyUp('enter')
     subject.keyUp('space')
 
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
   })
 
   it('should set the tabIndex attribute', () => {
     const subject = testbed.render()
 
     expect(subject.find('[tabIndex="-1"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the aria-controls attribute', () => {
@@ -115,7 +115,7 @@ describe('<MenuItem />', () => {
       controls: 'testId'
     })
     expect(subject.find('[aria-controls="testId"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the aria-disabled attribute', () => {
@@ -123,7 +123,7 @@ describe('<MenuItem />', () => {
       disabled: true
     })
     expect(subject.find('[aria-disabled="true"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the aria-checked attribute when defaultSelected prop is true', () => {
@@ -132,7 +132,7 @@ describe('<MenuItem />', () => {
       defaultSelected: true
     })
     expect(subject.find('[aria-checked="true"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the aria-checked attribute when selected prop is true', () => {
@@ -143,13 +143,13 @@ describe('<MenuItem />', () => {
       onSelect
     })
     expect(subject.find('[aria-checked="true"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should default to the "menuitem" role', () => {
     const subject = testbed.render()
     expect(subject.find('[role="menuitem"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the role to "menuitemcheckbox" when the type is "checkbox"', () => {
@@ -157,7 +157,7 @@ describe('<MenuItem />', () => {
       type: 'checkbox'
     })
     expect(subject.find('[role="menuitemcheckbox"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should set the role to "menuitemradio" when the type is "radio"', () => {
@@ -165,7 +165,7 @@ describe('<MenuItem />', () => {
       type: 'radio'
     })
     expect(subject.find('[role="menuitemradio"]'))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should render an icon for "checkbox" type when selected', () => {
@@ -174,7 +174,7 @@ describe('<MenuItem />', () => {
       defaultSelected: true
     })
     expect(subject.find(IconCheck))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should render an icon for "radio" type when selected', () => {
@@ -184,17 +184,17 @@ describe('<MenuItem />', () => {
       onSelect: testbed.stub()
     })
     expect(subject.find(IconCheck))
-      .to.be.present
+      .to.be.present()
   })
 
   it('should focus properly', () => {
     const subject = testbed.render()
 
-    expect(subject.focused()).to.be.false
+    expect(subject.focused()).to.be.false()
 
     subject.instance().focus()
 
-    expect(subject.focused()).to.be.true
-    expect(subject.instance().focused).to.be.true
+    expect(subject.focused()).to.be.true()
+    expect(subject.instance().focused).to.be.true()
   })
 })

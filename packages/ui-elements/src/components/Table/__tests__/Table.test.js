@@ -52,7 +52,7 @@ describe('<Table />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

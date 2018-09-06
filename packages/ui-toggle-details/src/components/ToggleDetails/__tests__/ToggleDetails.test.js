@@ -38,7 +38,7 @@ describe('<ToggleDetails />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should hide its content', () => {
@@ -53,7 +53,7 @@ describe('<ToggleDetails />', () => {
       summary: <span>Click me</span>
     })
     const summary = subject.find(`.${styles.summary}`)
-    expect(summary.childAt(1).hasClass(styles.icon)).to.be.true
+    expect(summary.childAt(1).hasClass(styles.icon)).to.be.true()
   })
 
   it('should have an aria-controls attribute', () => {
@@ -112,6 +112,6 @@ describe('<ToggleDetails />', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 })

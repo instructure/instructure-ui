@@ -32,13 +32,13 @@ describe('<PresentationContent />', () => {
   it('should render', () => {
     const subject = testbed.render(/* override default props here */)
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render aria-hidden flag', () => {
     const subject = testbed.render()
 
-    expect(subject.find('span[aria-hidden]')).to.exist
+    expect(subject.find('span[aria-hidden]')).to.exist()
   })
 
   it('should render the specified tag when `as` prop is set', () => {

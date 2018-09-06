@@ -35,7 +35,7 @@ describe('<PlayPauseButton />', () => {
   const testbed = new Testbed(<PlayPauseButton videoId={videoId} />)
 
   it('should render', () => {
-    expect(testbed.render()).to.be.present
+    expect(testbed.render()).to.be.present()
   })
 
   it('defaults to the paused variant', () => {
@@ -46,20 +46,20 @@ describe('<PlayPauseButton />', () => {
     const onClick = testbed.stub()
     const button = testbed.render({ onClick })
     button.click()
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('stops bubbling when space is pressed', () => {
     const event = { stopPropagation: testbed.stub(), key: ' ' }
     const button = testbed.render()
     button.simulate('keyDown', event)
-    expect(event.stopPropagation).to.have.been.called
+    expect(event.stopPropagation).to.have.been.called()
   })
 
   it('invokes buttonRef prop on mount', () => {
     const buttonRef = testbed.stub()
     testbed.render({ buttonRef })
-    expect(buttonRef).to.have.been.called
+    expect(buttonRef).to.have.been.called()
   })
 
   describe('variants', () => {

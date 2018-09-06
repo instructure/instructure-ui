@@ -43,7 +43,7 @@ describe('<Transition />', () => {
         type: type
       })
 
-      expect(subject.hasClass(styles[`${type}--entered`])).to.be.true
+      expect(subject.hasClass(styles[`${type}--entered`])).to.be.true()
     })
   }
 
@@ -60,7 +60,7 @@ describe('<Transition />', () => {
     testbed.tick() // entering
 
     expect(subject.hasClass(styles['fade--entered']))
-      .to.be.true
+      .to.be.true()
 
     subject.setProps({ in: false })
 
@@ -68,7 +68,7 @@ describe('<Transition />', () => {
     testbed.tick()
 
     expect(subject.hasClass(styles['fade--exited']))
-      .to.be.true
+      .to.be.true()
   })
 
   it('should remove component from DOM when `unmountOnExit` is set', () => {
@@ -101,7 +101,7 @@ describe('<Transition />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onEntering).to.not.have.been.called
+    expect(onEntering).to.not.have.been.called()
   })
 
   it('should not execute exit transition with `transitionExit` set to false', () => {
@@ -118,7 +118,7 @@ describe('<Transition />', () => {
     testbed.tick() // entered -> exiting
     testbed.tick() // exiting -> exited
 
-    expect(onExiting).to.not.have.been.called
+    expect(onExiting).to.not.have.been.called()
   })
 
   it('should correctly call enter methods', () => {
@@ -136,9 +136,9 @@ describe('<Transition />', () => {
     testbed.tick() // exited -> entering
     testbed.tick() // entering -> entered
 
-    expect(onEnter).to.have.been.called
-    expect(onEntering).to.have.been.called
-    expect(onEntered).to.have.been.called
+    expect(onEnter).to.have.been.called()
+    expect(onEntering).to.have.been.called()
+    expect(onEntered).to.have.been.called()
   })
 
   it('should correctly call exit methods', () => {
@@ -158,8 +158,8 @@ describe('<Transition />', () => {
     testbed.tick() // entered -> exiting
     testbed.tick() // exiting -> exited
 
-    expect(onExit).to.have.been.called
-    expect(onExiting).to.have.been.called
-    expect(onExited).to.have.been.called
+    expect(onExit).to.have.been.called()
+    expect(onExiting).to.have.been.called()
+    expect(onExited).to.have.been.called()
   })
 })

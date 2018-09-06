@@ -63,10 +63,10 @@ describe('@addMediaQueryMatchListener', () => {
 
     addListener(query, { width: 250, height: 350 })
 
-    expect(matches.includes('wide')).to.be.true
-    expect(matches.includes('thin')).to.be.false
-    expect(matches.includes('tall')).to.be.true
-    expect(matches.includes('short')).to.be.false
+    expect(matches.includes('wide')).to.be.true()
+    expect(matches.includes('thin')).to.be.false()
+    expect(matches.includes('tall')).to.be.true()
+    expect(matches.includes('short')).to.be.false()
   })
 
   it('should update matches correctly on window resize', () => {
@@ -79,22 +79,22 @@ describe('@addMediaQueryMatchListener', () => {
 
     addListener(query)
 
-    expect(matches.includes('wide')).to.be.false
-    expect(matches.includes('thin')).to.be.true
-    expect(matches.includes('tall')).to.be.false
-    expect(matches.includes('short')).to.be.true
+    expect(matches.includes('wide')).to.be.false()
+    expect(matches.includes('thin')).to.be.true()
+    expect(matches.includes('tall')).to.be.false()
+    expect(matches.includes('short')).to.be.true()
 
     resizeWindow(800, 500)
-    expect(matches.includes('wide')).to.be.false
-    expect(matches.includes('thin')).to.be.false
-    expect(matches.includes('tall')).to.be.false
-    expect(matches.includes('short')).to.be.false
+    expect(matches.includes('wide')).to.be.false()
+    expect(matches.includes('thin')).to.be.false()
+    expect(matches.includes('tall')).to.be.false()
+    expect(matches.includes('short')).to.be.false()
 
     resizeWindow(1200, 960)
-    expect(matches.includes('wide')).to.be.true
-    expect(matches.includes('thin')).to.be.false
-    expect(matches.includes('tall')).to.be.true
-    expect(matches.includes('short')).to.be.false
+    expect(matches.includes('wide')).to.be.true()
+    expect(matches.includes('thin')).to.be.false()
+    expect(matches.includes('tall')).to.be.true()
+    expect(matches.includes('short')).to.be.false()
   })
 
   it('should handle overlapping queries', () => {
@@ -110,36 +110,36 @@ describe('@addMediaQueryMatchListener', () => {
     addListener(query)
 
     resizeWindow(100, 100)
-    expect(matches.includes('one')).to.be.false
-    expect(matches.includes('two')).to.be.false
-    expect(matches.includes('three')).to.be.true
-    expect(matches.includes('four')).to.be.true
-    expect(matches.includes('five')).to.be.true
-    expect(matches.includes('six')).to.be.true
+    expect(matches.includes('one')).to.be.false()
+    expect(matches.includes('two')).to.be.false()
+    expect(matches.includes('three')).to.be.true()
+    expect(matches.includes('four')).to.be.true()
+    expect(matches.includes('five')).to.be.true()
+    expect(matches.includes('six')).to.be.true()
 
     resizeWindow(250, 701)
-    expect(matches.includes('one')).to.be.true
-    expect(matches.includes('two')).to.be.false
-    expect(matches.includes('three')).to.be.true
-    expect(matches.includes('four')).to.be.true
-    expect(matches.includes('five')).to.be.false
-    expect(matches.includes('six')).to.be.true
+    expect(matches.includes('one')).to.be.true()
+    expect(matches.includes('two')).to.be.false()
+    expect(matches.includes('three')).to.be.true()
+    expect(matches.includes('four')).to.be.true()
+    expect(matches.includes('five')).to.be.false()
+    expect(matches.includes('six')).to.be.true()
 
     resizeWindow(350, 801)
-    expect(matches.includes('one')).to.be.true
-    expect(matches.includes('two')).to.be.true
-    expect(matches.includes('three')).to.be.false
-    expect(matches.includes('four')).to.be.true
-    expect(matches.includes('five')).to.be.false
-    expect(matches.includes('six')).to.be.false
+    expect(matches.includes('one')).to.be.true()
+    expect(matches.includes('two')).to.be.true()
+    expect(matches.includes('three')).to.be.false()
+    expect(matches.includes('four')).to.be.true()
+    expect(matches.includes('five')).to.be.false()
+    expect(matches.includes('six')).to.be.false()
 
     resizeWindow(501, 100)
-    expect(matches.includes('one')).to.be.true
-    expect(matches.includes('two')).to.be.true
-    expect(matches.includes('three')).to.be.false
-    expect(matches.includes('four')).to.be.false
-    expect(matches.includes('five')).to.be.true
-    expect(matches.includes('six')).to.be.true
+    expect(matches.includes('one')).to.be.true()
+    expect(matches.includes('two')).to.be.true()
+    expect(matches.includes('three')).to.be.false()
+    expect(matches.includes('four')).to.be.false()
+    expect(matches.includes('five')).to.be.true()
+    expect(matches.includes('six')).to.be.true()
   })
 })
 

@@ -49,7 +49,7 @@ describe('<PopoverMenu />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render when show and onToggle props are set', () => {
@@ -58,13 +58,13 @@ describe('<PopoverMenu />', () => {
       onToggle: () => {}
     })
 
-    expect(subject.ref('_menu')).to.be.present
+    expect(subject.instance()['_menu']).to.exist()
   })
 
   it('should not show by default', () => {
     const subject = testbed.render()
 
-    expect(subject.instance().show).to.be.false
+    expect(subject.instance().show).to.be.false()
   })
 
   it('should accept a default show', () => {
@@ -72,7 +72,7 @@ describe('<PopoverMenu />', () => {
       defaultShow: true
     })
 
-    expect(subject.ref('_menu')).to.be.present
+    expect(subject.instance()['_menu']).to.exist()
   })
 
   it('should provide content ref', () => {
@@ -85,7 +85,7 @@ describe('<PopoverMenu />', () => {
       }
     })
 
-    expect(content).to.not.be.null
+    expect(content).to.not.be.null()
   })
 
   it('should focus the menu', () => {
@@ -96,7 +96,7 @@ describe('<PopoverMenu />', () => {
     testbed.tick()
     testbed.raf()
 
-    expect(subject.ref('_menu').focused()).to.be.true
+    expect(subject.ref('_menu').focused()).to.be.true()
   })
 
   it('should call onToggle on click', () => {
@@ -107,7 +107,7 @@ describe('<PopoverMenu />', () => {
 
     subject.find('button').simulate('click')
 
-    expect(onToggle).to.have.been.called
+    expect(onToggle).to.have.been.called()
   })
 
   it('should call onFocus on focus', () => {
@@ -118,7 +118,7 @@ describe('<PopoverMenu />', () => {
 
     subject.find('button').simulate('focus')
 
-    expect(onFocus).to.have.been.called
+    expect(onFocus).to.have.been.called()
   })
 
   it('should have an aria-haspopup attribute', () => {

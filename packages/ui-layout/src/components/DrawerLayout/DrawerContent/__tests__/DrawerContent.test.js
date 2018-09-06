@@ -32,7 +32,7 @@ describe('<DrawerContent />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should should not have a transition class if `shouldTransition` is set to false', () => {
@@ -40,13 +40,13 @@ describe('<DrawerContent />', () => {
       shouldTransition: false
     })
 
-    expect(subject.hasClass(styles['transition'])).to.be.false
+    expect(subject.hasClass(styles['transition'])).to.be.false()
 
     subject.setProps({ shouldTransition: true })
 
     testbed.tick()
 
-    expect(subject.hasClass(styles['transition'])).to.be.true
+    expect(subject.hasClass(styles['transition'])).to.be.true()
   })
 
   it('should should call the content ref', () => {

@@ -63,8 +63,8 @@ describe('<Grid />', () => {
       children
     })
 
-    expect(subject.find('span[role="grid"][aria-hidden]')).to.be.present
-    expect(subject.find('span[role="presentation"][aria-live="polite"]')).to.be.present
-    expect(subject.find('span[role="presentation"][aria-disabled]')).to.be.present
+    expect(subject.find('span[role="grid"][aria-hidden]')).to.be.present()
+    expect(subject.find('span[role="presentation"][aria-live="polite"]')).to.be.present()
+    expect(subject.find('span[role="presentation"][aria-disabled]')).to.be.present()
   })
 })

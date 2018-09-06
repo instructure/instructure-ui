@@ -105,7 +105,7 @@ describe('<Position />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should absolutely position content', () => {
@@ -131,7 +131,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right))).to.be.true
+    expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right))).to.be.true()
   })
 
   it('should render top stretched inside of target', () => {
@@ -141,8 +141,8 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)).to.be.true
-    expect(within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)).to.be.true
+    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)).to.be.true()
+    expect(within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)).to.be.true()
   })
 
   it('should render below target', () => {
@@ -152,7 +152,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true
+    expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
   })
 
   it('should render left of target', () => {
@@ -162,7 +162,7 @@ describe('<Position />', () => {
 
     const { targetRect, contentRect } = findAll(subject)
 
-    expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left))).to.be.true
+    expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left))).to.be.true()
   })
 
   it('should render above target', () => {
@@ -185,7 +185,7 @@ describe('<Position />', () => {
     // eslint-disable-next-line no-mixed-operators
     const center = Math.floor(targetRect.top + (targetRect.height / 2 - contentRect.height / 2))
 
-    expect(within(top, center)).to.be.true
+    expect(within(top, center)).to.be.true()
   })
 
   it('should center horizontally', () => {
@@ -200,7 +200,7 @@ describe('<Position />', () => {
     const contentCenter = contentRect.width / 2
     const center = Math.floor(targetRect.left + (targetCenter - contentCenter))
 
-    expect(within(left, center)).to.be.true
+    expect(within(left, center)).to.be.true()
   })
 
   describe('with offset props', () => {
@@ -229,23 +229,23 @@ describe('<Position />', () => {
     }
 
     assertOffset('top', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 1)).to.be.true
-      expect(within(contentRect.left, left - 10, 1)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true()
+      expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
     assertOffset('start', '10px', (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 1)).to.be.true
-      expect(within(contentRect.left, left - 10, 1)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true()
+      expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
 
     assertOffset('end', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top - 10, 1)).to.be.true
-      expect(within(contentRect.left, left + 10, 1)).to.be.true
+      expect(within(contentRect.top, top - 10, 1)).to.be.true()
+      expect(within(contentRect.left, left + 10, 1)).to.be.true()
     })
 
     assertOffset('bottom', 10, (contentRect, top, left) => {
-      expect(within(contentRect.top, top + 10, 1)).to.be.true
-      expect(within(contentRect.left, left - 10, 1)).to.be.true
+      expect(within(contentRect.top, top + 10, 1)).to.be.true()
+      expect(within(contentRect.left, left - 10, 1)).to.be.true()
     })
   })
 
@@ -265,7 +265,7 @@ describe('<Position />', () => {
 
       const { targetRect, contentRect } = findAll(subject)
 
-      expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true
+      expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
     })
 
     it('should re-position above target', () => {
@@ -283,7 +283,7 @@ describe('<Position />', () => {
 
       const { targetRect, contentRect } = findAll(subject)
 
-      expect(within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)).to.be.true
+      expect(within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)).to.be.true()
     })
 
     it('should re-position after target', () => {
@@ -301,7 +301,7 @@ describe('<Position />', () => {
 
       const { targetRect, contentRect } = findAll(subject)
 
-      expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)).to.be.true
+      expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)).to.be.true()
     })
 
     it('should re-position before target', () => {
@@ -319,7 +319,7 @@ describe('<Position />', () => {
 
       const { targetRect, contentRect } = findAll(subject)
 
-      expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true
+      expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true()
     })
   })
 })

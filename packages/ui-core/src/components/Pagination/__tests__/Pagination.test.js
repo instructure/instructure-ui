@@ -159,7 +159,7 @@ describe('<Pagination />', () => {
       const subject = testbed.render({
         padding: 'large small medium large'
       })
-      expect(subject.find(View).first().props().padding).to.not.exist
+      expect(subject.find(View).first().props().padding).to.not.exist()
     })
 
     // Testing compact only, since it is a superset of components in full

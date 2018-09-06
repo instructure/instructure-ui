@@ -32,7 +32,7 @@ describe('<MediaPlayback />', () => {
 
   it('should render', () => {
     const playback = testbed.render()
-    expect(playback).to.be.present
+    expect(playback).to.be.present()
   })
 
   it('should render a video element', () => {

@@ -46,7 +46,7 @@ describe('<Tray />', () => {
     testbed.tick()
     testbed.tick()
     expect(document.querySelector('[aria-label="Tray Example"]'))
-      .to.exist
+      .to.exist()
   })
 
   it('should apply theme overrides when open', () => {
@@ -76,8 +76,8 @@ describe('<Tray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(portal.node.querySelector('[role="dialog"]')).to.exist
-    expect(portal.node.querySelector('[aria-label="Tray Example"]')).to.exist
+    expect(portal.node.querySelector('[role="dialog"]')).to.exist()
+    expect(portal.node.querySelector('[aria-label="Tray Example"]')).to.exist()
   })
 
   it('should support onOpen prop', () => {
@@ -90,7 +90,7 @@ describe('<Tray />', () => {
     testbed.tick() // wait for animation
     testbed.tick() // wait for animation
 
-    expect(onOpen).to.have.been.called
+    expect(onOpen).to.have.been.called()
   })
 
   it('should support onClose prop', done => {
@@ -108,7 +108,7 @@ describe('<Tray />', () => {
         // wait for re-render after state change
         testbed.tick()
         testbed.tick()
-        expect(onClose).to.have.been.called
+        expect(onClose).to.have.been.called()
         done()
       })
     })
@@ -245,7 +245,7 @@ describe('<Tray /> managed focus', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(closeButton === document.activeElement).to.be.true
+    expect(closeButton === document.activeElement).to.be.true()
   })
 
   it('should take a prop for finding default focus', () => {
@@ -259,7 +259,7 @@ describe('<Tray /> managed focus', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -275,6 +275,6 @@ describe('<Tray /> managed focus', () => {
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 })

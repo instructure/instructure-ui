@@ -44,8 +44,8 @@ describe('<VideoPlayerControls />', () => {
     const event = { stopPropagation: testbed.stub() }
     const controls = testbed.render({ actions: { ...stubActions, showControls } })
     controls.simulate('click', event)
-    expect(event.stopPropagation).to.have.been.called
-    expect(showControls).to.have.been.called
+    expect(event.stopPropagation).to.have.been.called()
+    expect(showControls).to.have.been.called()
   })
 
   it('hides controls when showControls is false', () => {
@@ -65,7 +65,7 @@ describe('<VideoPlayerControls />', () => {
     expect(button.prop('videoId')).to.eql(videoId)
     expect(button.prop('variant')).to.eql(PLAYING)
     button.simulate('click')
-    expect(actions.togglePlay).to.have.been.called
+    expect(actions.togglePlay).to.have.been.called()
   })
 
   it('renders a Timebar', () => {
@@ -86,6 +86,6 @@ describe('<VideoPlayerControls />', () => {
   it('invokes onMount after mounting', () => {
     const onMount = testbed.stub()
     testbed.render({ onMount })
-    expect(onMount).to.have.been.called
+    expect(onMount).to.have.been.called()
   })
 })

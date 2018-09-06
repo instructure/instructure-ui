@@ -35,26 +35,33 @@ describe('<DrawerTray />', () => {
     />
   )
 
-  function testTrayPlacement (placement) {
-    it(`should place the tray correctly at ${placement}`, () => {
-      let _contentEl
-      testbed.render({
-        open: true,
-        placement,
-        contentRef: (el) => {
-          _contentEl = el
-        }
-      })
-
-      testbed.tick()
-      testbed.tick()
-
-      expect(_contentEl.className.indexOf(styles[`placement--${placement}`]) > -1).to.be.true
+  it(`should place the tray correctly with placement=start`, () => {
+    testbed.render({
+      open: true,
+      placement: 'start'
     })
-  }
 
-  testTrayPlacement('start')
-  testTrayPlacement('end')
+    testbed.tick()
+    testbed.tick()
+
+    const elementWithPlacementClass = document.querySelector(`.${styles['placement--start']}`)
+
+    expect(elementWithPlacementClass).to.exist()
+  })
+
+  it(`should place the tray correctly with placement=end`, () => {
+    testbed.render({
+      open: true,
+      placement: 'end'
+    })
+
+    testbed.tick()
+    testbed.tick()
+
+    const elementWithPlacementClass = document.querySelector(`.${styles['placement--end']}`)
+
+    expect(elementWithPlacementClass).to.exist()
+  })
 
   it('should render tray content when open', () => {
     testbed.render({ open: true })
@@ -62,7 +69,7 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(document.querySelector('[aria-label="DrawerTray Example"]')).to.exist
+    expect(document.querySelector('[aria-label="DrawerTray Example"]')).to.exist()
   })
 
   it('should not render tray content when closed', () => {
@@ -110,7 +117,7 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onOpen).to.not.have.been.called
+    expect(onOpen).to.not.have.been.called()
 
     subject.setProps({
       open: true
@@ -119,7 +126,7 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onOpen).to.have.been.called
+    expect(onOpen).to.have.been.called()
   })
 
   it('should call onOpen when open initially', () => {
@@ -130,7 +137,7 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onOpen).to.have.been.called
+    expect(onOpen).to.have.been.called()
   })
 
   it('should call onClose ', () => {
@@ -140,14 +147,14 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onClose).to.not.have.been.called
+    expect(onClose).to.not.have.been.called()
 
     subject.setProps({ open: false })
 
     testbed.tick()
     testbed.tick()
 
-    expect(onClose).to.have.been.called
+    expect(onClose).to.have.been.called()
   })
 
   it('drops a shadow if the prop is set, and it is overlaying content', () => {
@@ -161,11 +168,11 @@ describe('<DrawerTray />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(subject.hasClass(styles['shadow'])).to.be.true
+    expect(subject.hasClass(styles['shadow'])).to.be.true()
 
     subject.setContext({shouldOverlayTray: false})
 
-    expect(subject.hasClass(styles['shadow'])).to.be.false
+    expect(subject.hasClass(styles['shadow'])).to.be.false()
   })
 
   it('should apply the a11y attributes', () => {

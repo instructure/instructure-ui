@@ -30,7 +30,7 @@ describe('<FormFieldLabel />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {

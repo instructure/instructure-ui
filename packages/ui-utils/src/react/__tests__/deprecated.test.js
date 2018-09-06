@@ -92,7 +92,7 @@ describe('@deprecated', () => {
         bar: 'Jane'
       })
 
-      spy.should.not.have.been.called
+      spy.should.not.have.been.called()
     })
   })
 

@@ -32,7 +32,7 @@ describe('<Spinner />', () => {
 
   it('should render', () => {
     const spinner = testbed.render({ size: 'small' })
-    expect(spinner).to.be.present
+    expect(spinner).to.be.present()
   })
 
   it('should render the title prop text in the SVG element title', () => {

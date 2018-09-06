@@ -33,7 +33,7 @@ describe('<FormFieldLayout />', () => {
   it('should render', () => {
     const subject = testbed.render(/* override default props here */)
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {

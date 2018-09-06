@@ -57,7 +57,7 @@ describe('<PlayPauseButton />', () => {
   it('passes down forwardRef prop to VideoPlayerButton', () => {
     const forwardRef = testbed.stub()
     const component = testbed.render({ children: <PlayPauseButton forwardRef={forwardRef} /> }).find('VideoPlayerButton')
-    expect(component.prop('forwardRef')).to.have.been.called
+    expect(component.prop('forwardRef')).to.have.been.called()
   })
 
   it('invokes onClick prop when clicked', () => {
@@ -71,7 +71,7 @@ describe('<PlayPauseButton />', () => {
     }
     const component = testbed.render({ value: customProviderState }).find('VideoPlayerButton')
     component.click()
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   describe('variants', () => {

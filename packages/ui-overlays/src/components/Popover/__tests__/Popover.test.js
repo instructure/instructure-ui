@@ -58,7 +58,7 @@ describe('<Popover />', () => {
 
       button.simulate(eventType)
 
-      expect(content).to.not.be.null
+      expect(content).to.not.be.null()
     })
   }
 
@@ -72,7 +72,7 @@ describe('<Popover />', () => {
         button.simulate(type)
       })
 
-      expect(spy).to.have.been.called
+      expect(spy).to.have.been.called()
     })
   }
 
@@ -86,7 +86,7 @@ describe('<Popover />', () => {
     const button = subject.find(Button)
 
     expect(button.length).to.equal(1)
-    expect(content).to.be.null
+    expect(content).to.be.null()
   })
 
   testShowContent('click', 'click')
@@ -108,7 +108,7 @@ describe('<Popover />', () => {
 
     testbed.tick()
 
-    expect(content).to.be.null
+    expect(content).to.be.null()
   })
 
   it('should close when trigger is clicked', () => {
@@ -118,14 +118,14 @@ describe('<Popover />', () => {
     button.simulate('click')
     button.simulate('click')
 
-    expect(content).to.be.null
+    expect(content).to.be.null()
   })
 
   describe('controlled', () => {
     it('should show content if defaultShow is true', () => {
       testbed.render({defaultShow: true})
 
-      expect(content).to.not.be.null
+      expect(content).to.not.be.null()
     })
 
     it('should support show prop', (done) => {
@@ -133,7 +133,7 @@ describe('<Popover />', () => {
       const subject = testbed.render({ show: false, onToggle })
 
       subject.setProps({ show: true }, () => {
-        expect(content).to.not.be.null
+        expect(content).to.not.be.null()
         done()
       })
     })
@@ -155,7 +155,7 @@ describe('<Popover />', () => {
 
       button.simulate('click')
 
-      expect(content).to.be.null
+      expect(content).to.be.null()
     })
   })
 
@@ -170,7 +170,7 @@ describe('<Popover />', () => {
 
       testbed.tick()
 
-      expect(subject.instance()._view instanceof ContextView).to.be.true
+      expect(subject.instance()._view instanceof ContextView).to.be.true()
     })
 
     it('should render a View component when withArrow is false', () => {
@@ -182,7 +182,7 @@ describe('<Popover />', () => {
       button.simulate('click')
 
       testbed.tick()
-      expect(subject.instance()._view instanceof View).to.be.true
+      expect(subject.instance()._view instanceof View).to.be.true()
     })
   })
 
@@ -231,7 +231,7 @@ describe('<Popover />', () => {
       content.focus()
       testbed.raf()
 
-      expect(content).to.not.be.null
+      expect(content).to.not.be.null()
     })
 
     it('should dismiss the popover when tabbing out of focusable content', () => {
@@ -252,7 +252,7 @@ describe('<Popover />', () => {
       contentWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
       testbed.raf()
 
-      expect(content).to.be.null
+      expect(content).to.be.null()
     })
   })
 

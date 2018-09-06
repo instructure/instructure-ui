@@ -47,7 +47,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('click')
 
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
     })
 
     it('does not respond to onClick event when disabled', () => {
@@ -60,7 +60,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
 
     it('does not respond to onClick event when readOnly', () => {
@@ -73,7 +73,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
 
     it('responds to onChange event', () => {
@@ -85,7 +85,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('does not respond to onChange event when disabled', () => {
@@ -98,7 +98,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('does not respond to onChange event when readOnly', () => {
@@ -111,7 +111,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -123,7 +123,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -135,7 +135,7 @@ describe('<RadioInput />', () => {
 
       subject.find('input').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
 
     it('sets input to checked when selected', () => {
@@ -143,8 +143,8 @@ describe('<RadioInput />', () => {
         checked: true
       })
 
-      expect(subject.instance().checked).to.be.true
-      expect(subject.find('input').unwrap().checked).to.be.true
+      expect(subject.instance().checked).to.be.true()
+      expect(subject.find('input').unwrap().checked).to.be.true()
     })
 
     it('focuses with the focus helper', () => {
@@ -152,8 +152,8 @@ describe('<RadioInput />', () => {
 
       subject.instance().focus()
 
-      expect(subject.instance().focused).to.be.true
-      expect(subject.find('input').focused()).to.be.true
+      expect(subject.instance().focused).to.be.true()
+      expect(subject.find('input').focused()).to.be.true()
     })
   })
 

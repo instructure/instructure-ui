@@ -46,7 +46,7 @@ describe('<Checkbox />', () => {
     })
 
     const facade = subject.find(CheckboxFacade)
-    expect(facade.find(IconCheckMark)).to.not.exist
+    expect(facade.find(IconCheckMark)).to.not.exist()
   })
 
   it('`simple` variant supports indeterminate/mixed state', () => {
@@ -70,7 +70,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('click')
 
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
     })
 
     it('responds to onChange event', () => {
@@ -82,7 +82,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('does not respond to onChange event when disabled', () => {
@@ -95,7 +95,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('does not respond to onChange event when readOnly', () => {
@@ -108,7 +108,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('responds to onChange when enter key is pressed', () => {
@@ -121,7 +121,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').keyDown('enter')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -133,7 +133,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -145,7 +145,7 @@ describe('<Checkbox />', () => {
 
       subject.find('input').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
 
     it('focuses with the focus helper', () => {
@@ -153,8 +153,8 @@ describe('<Checkbox />', () => {
 
       subject.instance().focus()
 
-      expect(subject.instance().focused).to.be.true
-      expect(subject.find('input').focused()).to.be.true
+      expect(subject.instance().focused).to.be.true()
+      expect(subject.find('input').focused()).to.be.true()
     })
 
     it('sets hover states', () => {
@@ -162,11 +162,11 @@ describe('<Checkbox />', () => {
 
       subject.simulate('mouseOver')
 
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.true
+      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.true()
 
       subject.simulate('mouseOut')
 
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.false
+      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.false()
     })
   })
 
@@ -197,7 +197,7 @@ describe('<Checkbox />', () => {
         error = true
       }
 
-      expect(error).to.be.true
+      expect(error).to.be.true()
     })
   })
 })

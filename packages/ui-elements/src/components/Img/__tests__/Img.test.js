@@ -43,13 +43,13 @@ describe('<Img />', () => {
     it('should render an empty alt attribute by default', () => {
       const subject = testbed.render()
 
-      expect(subject.find('[alt=""]')).to.be.present
+      expect(subject.find('[alt=""]')).to.be.present()
     })
 
     it('should render the provided alt attribute', () => {
       const subject = testbed.render({ alt: 'Foo' })
 
-      expect(subject.find('[alt="Foo"]')).to.be.present
+      expect(subject.find('[alt="Foo"]')).to.be.present()
     })
   })
 
@@ -58,7 +58,7 @@ describe('<Img />', () => {
       overlay: {color: '#ff0000', opacity: 7}
     })
     const overlay = subject.find(`.${styles.overlay}`)
-    expect(overlay).to.be.present
+    expect(overlay).to.be.present()
   })
 
   it('should render a blur filter', () => {
@@ -116,8 +116,8 @@ describe('<Img />', () => {
       cover: true,
       overlay: {color: '#ff0000', opacity: 7}
     })
-    expect(subject.hasClass(styles['container--has-cover'])).to.be.true
-    expect(subject.find('[alt="testing123"]')).to.be.present
+    expect(subject.hasClass(styles['container--has-cover'])).to.be.true()
+    expect(subject.find('[alt="testing123"]')).to.be.present()
   })
 
   it('applies the container--has-cover class when constrain="cover" is used with overlay', () => {
@@ -126,8 +126,8 @@ describe('<Img />', () => {
       constrain: "cover",
       overlay: {color: '#ff0000', opacity: 7}
     })
-    expect(subject.hasClass(styles['container--has-cover'])).to.be.true
-    expect(subject.find('[alt="testing123"]')).to.be.present
+    expect(subject.hasClass(styles['container--has-cover'])).to.be.true()
+    expect(subject.find('[alt="testing123"]')).to.be.present()
   })
 
   it('applies the container--has-contain class when constrain="contain" is used with overlay', () => {
@@ -136,8 +136,8 @@ describe('<Img />', () => {
       constrain: "contain",
       overlay: {color: '#ff0000', opacity: 7}
     })
-    expect(subject.hasClass(styles['container--has-contain'])).to.be.true
-    expect(subject.find('[alt="testing123"]')).to.be.present
+    expect(subject.hasClass(styles['container--has-contain'])).to.be.true()
+    expect(subject.find('[alt="testing123"]')).to.be.present()
   })
 
   describe('when passing down props to View', () => {
@@ -158,7 +158,7 @@ describe('<Img />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

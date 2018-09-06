@@ -36,7 +36,7 @@ describe('<Tooltip />', () => {
     it('should render', () => {
       const subject = testbed.render()
 
-      expect(subject).to.be.present
+      expect(subject).to.be.present()
     })
 
     it('should render the children', () => {
@@ -49,14 +49,14 @@ describe('<Tooltip />', () => {
       const subject = testbed.render()
       const attr = subject.find('a').getAttribute('aria-describedby')
 
-      expect(attr).to.exist
+      expect(attr).to.exist()
     })
 
     it('should have an aria-controls attribute', () => {
       const subject = testbed.render()
       const attr = subject.find('a').getAttribute('aria-controls')
 
-      expect(attr).to.exist
+      expect(attr).to.exist()
     })
 
     it('should pass down the href attribute', () => {
@@ -96,7 +96,7 @@ describe('<Tooltip />', () => {
 
       subject.find('button').click()
 
-      onClick.should.have.been.calledOnce
+      onClick.should.have.been.calledOnce()
     })
   })
 })

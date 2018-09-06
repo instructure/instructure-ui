@@ -62,7 +62,7 @@ describe('<Transition />', () => {
     testbed.tick()
     testbed.tick()
 
-    expect(onEntering).to.not.have.been.called
+    expect(onEntering).to.not.have.been.called()
   })
 
   it('should not execute exit transition with `transitionExit` set to false', () => {
@@ -79,7 +79,7 @@ describe('<Transition />', () => {
     testbed.tick() // entered -> exiting
     testbed.tick() // exiting -> exited
 
-    expect(onExiting).to.not.have.been.called
+    expect(onExiting).to.not.have.been.called()
   })
 
   it('should correctly call enter methods', () => {
@@ -97,9 +97,9 @@ describe('<Transition />', () => {
     testbed.tick() // exited -> entering
     testbed.tick() // entering -> entered
 
-    expect(onEnter).to.have.been.called
-    expect(onEntering).to.have.been.called
-    expect(onEntered).to.have.been.called
+    expect(onEnter).to.have.been.called()
+    expect(onEntering).to.have.been.called()
+    expect(onEntered).to.have.been.called()
   })
 
   it('should correctly call exit methods', () => {
@@ -119,8 +119,8 @@ describe('<Transition />', () => {
     testbed.tick() // entered -> exiting
     testbed.tick() // exiting -> exited
 
-    expect(onExit).to.have.been.called
-    expect(onExiting).to.have.been.called
-    expect(onExited).to.have.been.called
+    expect(onExit).to.have.been.called()
+    expect(onExiting).to.have.been.called()
+    expect(onExited).to.have.been.called()
   })
 })

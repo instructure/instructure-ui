@@ -57,12 +57,12 @@ describe('<Overlay />', () => {
 
     testbed.tick()
 
-    expect(onEnter).to.have.been.called
+    expect(onEnter).to.have.been.called()
 
     testbed.tick()
 
-    expect(onEntering).to.have.been.called
-    expect(onEntered).to.have.been.called
+    expect(onEntering).to.have.been.called()
+    expect(onEntered).to.have.been.called()
   })
 
   it('should support onOpen prop', () => {
@@ -74,7 +74,7 @@ describe('<Overlay />', () => {
 
     testbed.tick()
 
-    expect(onOpen).to.have.been.called
+    expect(onOpen).to.have.been.called()
   })
 
   it('should support onClose prop', done => {
@@ -85,10 +85,10 @@ describe('<Overlay />', () => {
       open: true
     })
 
-    expect(onClose).to.not.have.been.called
+    expect(onClose).to.not.have.been.called()
 
     subject.setProps({ open: false }, () => {
-      expect(onClose).to.have.been.called
+      expect(onClose).to.have.been.called()
       done()
     })
   })

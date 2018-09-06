@@ -96,7 +96,7 @@ describe('<DateTimeInput />', () => {
   it('should focus the DateInput when focus is called', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   it('should set time to local midnight when only date is set', () => {
@@ -120,7 +120,7 @@ describe('<DateTimeInput />', () => {
     })
     setTimeInputValue(subject, '1:00 PM')
 
-    expect(stub).to.have.been.called
+    expect(stub).to.have.been.called()
     const errText = getMessageText(subject)
     expect(errText).to.equal('whoops')
   })
@@ -131,7 +131,7 @@ describe('<DateTimeInput />', () => {
 
     setDateInputValue(subject, '5/1/2017')
 
-    expect(onChange).to.have.been.called
+    expect(onChange).to.have.been.called()
     expect(onChange.getCall(0).args[1]).to.include('2017-05-01')
   })
 
@@ -141,11 +141,11 @@ describe('<DateTimeInput />', () => {
 
     setDateInputValue(subject, 'Nov')
 
-    expect(onChange).to.have.been.calledOnce
+    expect(onChange).to.have.been.calledOnce()
 
     setDateInputValue(subject, 'Nove')
 
-    expect(onChange).to.have.been.calledOnce
+    expect(onChange).to.have.been.calledOnce()
   })
 
   it('should fire the onChange event when TimeInput value changes', () => {
@@ -158,7 +158,7 @@ describe('<DateTimeInput />', () => {
     // get expected 3AM string in UTC, which is how it comes out of TimeInput
     const newValue = new Date(DateTime.parse('2017-05-01T03:00', locale, timezone)).valueOf()
 
-    expect(onChange).to.have.been.called
+    expect(onChange).to.have.been.called()
     const onChangeArg = new Date(onChange.firstCall.args[1]).valueOf()
     expect(onChangeArg).to.equal(newValue)
   })
@@ -191,10 +191,10 @@ describe('<DateTimeInput />', () => {
     })
 
     const dateInput = subject.find('DateInput').find('input').nodes[0]
-    expect(dateInput === dref).to.be.true
+    expect(dateInput === dref).to.be.true()
 
     const timeInput = subject.find('TimeInput').find('input').nodes[0]
-    expect(timeInput === tref).to.be.true
+    expect(timeInput === tref).to.be.true()
   })
 
   it('should update state when value prop changes', () => {

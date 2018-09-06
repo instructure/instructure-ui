@@ -35,7 +35,7 @@ describe('DateTime', () => {
     } catch(ex) {
       whoops = true
     } finally {
-      expect(whoops).to.be.true
+      expect(whoops).to.be.true()
     }
     whoops = false
     try {
@@ -43,7 +43,7 @@ describe('DateTime', () => {
     } catch(ex) {
       whoops = true
     } finally {
-      expect(whoops).to.be.true
+      expect(whoops).to.be.true()
     }
   })
 
@@ -59,10 +59,10 @@ describe('DateTime', () => {
   })
 
   it('validates', () => {
-    expect(isValid('2018-04-15T23:30:00Z')).to.be.true
-    expect(isValid('2018-04-15T23:30')).to.be.true
-    expect(isValid('2018-04-15')).to.be.true
-    expect(isValid('2018')).to.be.false
+    expect(isValid('2018-04-15T23:30:00Z')).to.be.true()
+    expect(isValid('2018-04-15T23:30')).to.be.true()
+    expect(isValid('2018-04-15')).to.be.true()
+    expect(isValid('2018')).to.be.false()
   })
 
   it('parses iso8601', () => {

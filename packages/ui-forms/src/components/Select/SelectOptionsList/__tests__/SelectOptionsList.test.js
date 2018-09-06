@@ -55,7 +55,7 @@ describe('<SelectOptionsList />', () => {
 
   it('should render options', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
     expect(subject.find('li').length).to.equal(3)
   })
 
@@ -83,7 +83,7 @@ describe('<SelectOptionsList />', () => {
     const subject = testbed.render({ onSelect })
 
     subject.find('li').first().simulate('click')
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
   })
 
   it('should call onHighlightOption', () => {
@@ -91,7 +91,7 @@ describe('<SelectOptionsList />', () => {
     const subject = testbed.render({ onHighlightOption })
 
     subject.find('li').first().simulate('mouseEnter')
-    expect(onHighlightOption).to.have.been.called
+    expect(onHighlightOption).to.have.been.called()
   })
 
   it('should call onStaticClick when static option is selected', () => {
@@ -107,7 +107,7 @@ describe('<SelectOptionsList />', () => {
     expect(empty.text().trim()).to.equal('no results')
 
     empty.simulate('click')
-    expect(onStaticClick).to.have.been.called
+    expect(onStaticClick).to.have.been.called()
   })
 
   it('should not allow disabled options to be selected', () => {
@@ -138,6 +138,6 @@ describe('<SelectOptionsList />', () => {
     })
 
     subject.find('li').first().simulate('click')
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
   })
 })

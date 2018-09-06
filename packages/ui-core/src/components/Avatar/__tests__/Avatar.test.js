@@ -38,7 +38,7 @@ describe('<Avatar />', () => {
     it('should have aria-hidden=true', () => {
       const subject = testbed.render()
 
-      expect(subject.find('[aria-hidden]')).to.be.present
+      expect(subject.find('[aria-hidden]')).to.be.present()
     })
   })
 

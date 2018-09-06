@@ -36,21 +36,21 @@ describe('Decimal', () => {
 
   describe('getDelimiters', () => {
     it('is a function', () => {
-      expect(Decimal.getDelimiters).to.exist
+      expect(Decimal.getDelimiters).to.exist()
       expect(typeof Decimal.getDelimiters).to.equal('function')
     });
 
     ['bg', 'chs', 'da', 'hi', 'zh'].forEach((locale) => {
       it(`has locale ${locale} with decimal strings of one character`, () => {
         const { decimal } = Decimal.getDelimiters(locale)
-        expect(decimal).to.exist
+        expect(decimal).to.exist()
         expect(typeof decimal).to.equal('string')
         expect(decimal.length).to.equal(1)
       })
 
       it(`has locale ${locale} with thousands strings of one character`, () => {
         const { thousands } = Decimal.getDelimiters(locale)
-        expect(thousands).to.exist
+        expect(thousands).to.exist()
         expect(typeof thousands).to.equal('string')
         expect(thousands.length).to.equal(1)
       })
@@ -62,8 +62,8 @@ describe('Decimal', () => {
   // for these formats.
   describe('#parse', () => {
     it('returns NaN when input is undefined', () => {
-      expect(Decimal.parse().isNaN()).to.be.true
-      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true // eslint-disable-line no-undefined
+      expect(Decimal.parse().isNaN()).to.be.true()
+      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true() // eslint-disable-line no-undefined
     })
 
     it('returns 0 when input is null', () => {
@@ -97,7 +97,7 @@ describe('Decimal', () => {
     })
 
     it('correctly parses in progress negative numbers', () => {
-      expect(Decimal.parse('-').isNaN()).to.be.true
+      expect(Decimal.parse('-').isNaN()).to.be.true()
     })
 
     it('correctly parses positive floats beginning with +', () => {
@@ -105,7 +105,7 @@ describe('Decimal', () => {
     })
 
     it('returns NaN if a value can\'t be parsed', () => {
-      expect(Decimal.parse('whatever').isNaN()).to.be.true
+      expect(Decimal.parse('whatever').isNaN()).to.be.true()
     })
 
     it('returns NaN if group size is not three', () => {

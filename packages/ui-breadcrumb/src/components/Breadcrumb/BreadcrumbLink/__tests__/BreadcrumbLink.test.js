@@ -34,19 +34,19 @@ describe('<BreadcrumbLink />', () => {
 
   it('should render a Link component when given an href prop', () => {
     const subject = testbed.render({href: '#'})
-    expect(subject.find(Link)).to.be.present
+    expect(subject.find(Link)).to.be.present()
   })
 
   it('should render as a button and respond to onClick event', () => {
     const onClick = testbed.stub()
     const subject = testbed.render({onClick})
     subject.find('button').simulate('click')
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('should not render a Link component when not given an href prop', () => {
     const subject = testbed.render()
-    expect(subject.find(`.${styles.text}`)).to.be.present
+    expect(subject.find(`.${styles.text}`)).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {

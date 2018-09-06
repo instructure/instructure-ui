@@ -37,7 +37,7 @@ describe('<Focusable />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should call children function with focused when element receives focus', () => {
@@ -155,14 +155,14 @@ describe('<Focusable />', () => {
 
     expect(
       lastCall(warning).includes('Exactly one focusable child is required (2 found)')
-    ).to.be.true
+    ).to.be.true()
 
     subject.setProps({
       children: (args) => <span>hello!</span> // eslint-disable-line react/display-name
     }, () => {
       expect(
         lastCall(warning).includes('Exactly one focusable child is required (0 found)')
-      ).to.be.true
+      ).to.be.true()
       done()
     })
   })

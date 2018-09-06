@@ -29,6 +29,6 @@ describe('<CapturePresentation />', () => {
 
   it('should render', () => {
     const presentation = testbed.render()
-    expect(presentation).to.be.present
+    expect(presentation).to.be.present()
   })
 })

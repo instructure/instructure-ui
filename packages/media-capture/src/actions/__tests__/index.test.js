@@ -50,7 +50,7 @@ describe('mediaCapture actions', () => {
   it('finishClicked should create FINISH_CLICKED action', () => {
     const dispatch = testbed.stub()
     actions.finishClicked()(dispatch)
-    expect(dispatch).to.have.been.called
+    expect(dispatch).to.have.been.called()
   })
 
   it('onComplete should create ONCOMPLETE action', () => {

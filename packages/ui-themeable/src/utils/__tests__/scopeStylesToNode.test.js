@@ -64,7 +64,7 @@ describe('scopeStylesToNode', () => {
         expect(styleNode.innerText).to.equalIgnoreSpaces(cssText)
       } else {
         expect(styleNode.innerText).to.equalIgnoreSpaces(scopedCss)
-        expect(domNode.getAttribute('foo')).to.exist
+        expect(domNode.getAttribute('foo')).to.exist()
       }
     })
     it('should remove scoped css from node', () => {
@@ -75,8 +75,8 @@ describe('scopeStylesToNode', () => {
 
       const styleNode = domNode.querySelector('style')
 
-      expect(styleNode).to.not.exist
-      expect(domNode.getAttribute('foo')).to.not.exist
+      expect(styleNode).to.not.exist()
+      expect(domNode.getAttribute('foo')).to.not.exist()
     })
   })
 

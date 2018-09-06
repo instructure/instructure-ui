@@ -48,9 +48,9 @@ describe('<Tab />', () => {
     const subject = testbed.render()
 
     expect(subject.getAttribute('aria-selected'))
-      .to.not.exist
+      .to.not.exist()
     expect(subject.getAttribute('aria-disabled'))
-      .to.not.exist
+      .to.not.exist()
   })
 
   it('should set the aria-selected attribute', () => {
@@ -95,7 +95,7 @@ describe('<Tab />', () => {
     })
 
     expect(subject.getAttribute('tabindex'))
-      .to.not.exist
+      .to.not.exist()
   })
 
   it('should call onClick when clicked', () => {
@@ -109,7 +109,7 @@ describe('<Tab />', () => {
 
     subject.simulate('click')
 
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
     expect(onClick.args[0][0]).to.equal(2)
   })
 
@@ -123,7 +123,7 @@ describe('<Tab />', () => {
 
     subject.simulate('click')
 
-    expect(onClick).to.not.have.been.called
+    expect(onClick).to.not.have.been.called()
   })
 
   it('should call onKeyDown when keys are pressed', () => {
@@ -137,7 +137,7 @@ describe('<Tab />', () => {
 
     subject.keyDown('enter')
 
-    expect(onKeyDown).to.have.been.called
+    expect(onKeyDown).to.have.been.called()
     expect(onKeyDown.args[0][0]).to.equal(2)
   })
 
@@ -151,7 +151,7 @@ describe('<Tab />', () => {
 
     subject.keyDown('enter')
 
-    expect(onKeyDown).to.not.have.been.called
+    expect(onKeyDown).to.not.have.been.called()
   })
 
   it('should focus itself when focus is set and it is selected', () => {
@@ -160,7 +160,7 @@ describe('<Tab />', () => {
       focus: true
     })
 
-    expect(subject.focused()).to.be.true
+    expect(subject.focused()).to.be.true()
   })
 
   it('should not focus itself when it is not selected', () => {
@@ -169,6 +169,6 @@ describe('<Tab />', () => {
       focus: true
     })
 
-    expect(subject.focused()).to.be.false
+    expect(subject.focused()).to.be.false()
   })
 })

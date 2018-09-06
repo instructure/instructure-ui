@@ -74,7 +74,7 @@ describe('<Button/>', () => {
       type: 'submit'
     })
 
-    expect(subject.find('button[type="submit"]')).to.be.present
+    expect(subject.find('button[type="submit"]')).to.be.present()
   })
 
   it('should pass down an icon via the icon property', () => {
@@ -89,7 +89,7 @@ describe('<Button/>', () => {
     const subject = testbed.render({
       padding: 'medium large small large'
     })
-    expect(subject.find(View).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist()
   })
 
   it('focuses with the focus helper', () => {
@@ -97,8 +97,8 @@ describe('<Button/>', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
-    expect(subject.focused()).to.be.true
+    expect(subject.instance().focused).to.be.true()
+    expect(subject.focused()).to.be.true()
   })
 
   it('should provide a buttonRef prop', () => {
@@ -120,7 +120,7 @@ describe('<Button/>', () => {
 
       subject.simulate('click')
 
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
     })
 
     it('should not call onClick when button is disabled', () => {
@@ -133,7 +133,7 @@ describe('<Button/>', () => {
 
       subject.simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
 
     it('should not call onClick when button is disabled and an href prop is provided', () => {
@@ -147,7 +147,7 @@ describe('<Button/>', () => {
 
       subject.simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
 
     it('should call onClick when space key is pressed if href is provided', () => {
@@ -160,7 +160,7 @@ describe('<Button/>', () => {
 
       subject.keyDown('space')
 
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
     })
 
     it('should call onClick when enter key is pressed when not a button or link', () => {
@@ -173,7 +173,7 @@ describe('<Button/>', () => {
 
       subject.keyDown('enter')
 
-      expect(onClick).to.have.been.called
+      expect(onClick).to.have.been.called()
     })
 
     it('should not call onClick when button is disabled and space key is pressed', () => {
@@ -186,7 +186,7 @@ describe('<Button/>', () => {
 
       subject.keyDown('space')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
   })
 
@@ -203,7 +203,7 @@ describe('<Button/>', () => {
         href: 'example.html'
       })
 
-      expect(subject.getAttribute('aria-disabled')).to.exist
+      expect(subject.getAttribute('aria-disabled')).to.exist()
     })
 
     describe('when disabled', () => {
@@ -212,7 +212,7 @@ describe('<Button/>', () => {
           disabled: true
         })
 
-        expect(subject.getAttribute('aria-disabled')).to.exist
+        expect(subject.getAttribute('aria-disabled')).to.exist()
       })
 
       it('sets the disabled attribute so that the button is not in tab order', () => {
@@ -220,7 +220,7 @@ describe('<Button/>', () => {
           disabled: true
         })
 
-        expect(subject.getAttribute('disabled')).to.exist
+        expect(subject.getAttribute('disabled')).to.exist()
       })
 
       it('sets the aria-disabled attribute when an href is provided', () => {
@@ -229,7 +229,7 @@ describe('<Button/>', () => {
           href: 'example.html'
         })
 
-        expect(subject.getAttribute('aria-disabled')).to.exist
+        expect(subject.getAttribute('aria-disabled')).to.exist()
       })
     })
   })

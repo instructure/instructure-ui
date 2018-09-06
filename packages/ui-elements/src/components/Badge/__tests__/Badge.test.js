@@ -52,10 +52,10 @@ describe('<Badge />', () => {
     const subject = testbed.render({placement: 'bottom start'})
 
     const badgeBottom = subject.find(`span.${styles['positioned--bottom']}`)
-    expect(badgeBottom).to.be.present
+    expect(badgeBottom).to.be.present()
 
     const badgeStart = subject.find(`span.${styles['positioned--start']}`)
-    expect(badgeStart).to.be.present
+    expect(badgeStart).to.be.present()
   })
 
   it('should not render a wrapper for a standalone Badge', () => {
@@ -92,7 +92,7 @@ describe('<Badge />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).first().props()[prop]).to.not.exist
+            expect(subject.find(View).first().props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

@@ -39,19 +39,19 @@ describe('<PaginationButton />', () => {
     const onClick = testbed.sandbox.stub()
     const subject = testbed.render({ onClick })
     subject.find(Button).simulate('click')
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('should disable navigation to current page', () => {
     const onClick = testbed.sandbox.stub()
     const subject = testbed.render({ onClick, current: true })
     subject.find(Button).simulate('click')
-    expect(onClick).to.not.have.been.called
+    expect(onClick).to.not.have.been.called()
   })
 
   it('should navigate using link when href provided', () => {
     const subject = testbed.render({ href: 'inst.biz' })
-    expect(subject.find('a[href="inst.biz"]')).to.be.present
+    expect(subject.find('a[href="inst.biz"]')).to.be.present()
   })
 
   it('should meet a11y standards with defaults', (done) => {

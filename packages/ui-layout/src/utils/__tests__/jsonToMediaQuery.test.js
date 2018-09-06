@@ -75,7 +75,7 @@ describe('@jsonToMediaQuery', () => {
           error = true
         }
 
-        expect(error).to.be.true
+        expect(error).to.be.true()
     })
 
     it('should error if query has more than one key', () => {
@@ -87,7 +87,7 @@ describe('@jsonToMediaQuery', () => {
         error = true
       }
 
-      expect(error).to.be.true
+      expect(error).to.be.true()
     })
 
     it('should error if query value is not a string or number', () => {
@@ -99,7 +99,7 @@ describe('@jsonToMediaQuery', () => {
         error = true
       }
 
-      expect(error).to.be.true
+      expect(error).to.be.true()
     })
 
     it('should error if query has no value', () => {
@@ -111,7 +111,7 @@ describe('@jsonToMediaQuery', () => {
         error = true
       }
 
-      expect(error).to.be.true
+      expect(error).to.be.true()
     })
   })
 })

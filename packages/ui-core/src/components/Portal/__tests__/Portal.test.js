@@ -69,7 +69,7 @@ describe('<Portal />', () => {
       const subject = testbed.render({ open: true })
       const node = subject.instance().node
 
-      expect(typeof node).to.equal('undefined')
+      expect(node).to.equal(undefined) // eslint-disable-line no-undefined
     })
   })
 
@@ -80,7 +80,7 @@ describe('<Portal />', () => {
       const subject = testbed.render()
       const node = subject.instance().node
 
-      expect(typeof node).to.equal('undefined')
+      expect(node).to.equal(undefined) // eslint-disable-line no-undefined
     })
 
     it('should render children and have a node with a parent when open', () => {

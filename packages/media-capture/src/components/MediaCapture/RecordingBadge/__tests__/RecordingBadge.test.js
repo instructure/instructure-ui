@@ -29,7 +29,7 @@ describe('<RecordingBadge />', () => {
 
   it('should render', () => {
     const recordingBadge = testbed.render()
-    expect(recordingBadge).to.be.present
+    expect(recordingBadge).to.be.present()
   })
 
   it('should render a <Timer />', () => {

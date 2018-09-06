@@ -33,9 +33,9 @@ describe('makeThemeVars', () => {
     }
 
     const result = makeThemeVars('margin', vars)
-    expect(result['xSmall']).to.not.exist
-    expect(result['medium']).to.not.exist
-    expect(result['xxLarge']).to.not.exist
+    expect(result['xSmall']).to.not.exist()
+    expect(result['medium']).to.not.exist()
+    expect(result['xxLarge']).to.not.exist()
 
     expect(result['marginXSmall']).to.equal('foo')
     expect(result['marginMedium']).to.equal('bar')

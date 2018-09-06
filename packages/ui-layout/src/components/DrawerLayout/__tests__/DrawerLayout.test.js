@@ -39,53 +39,78 @@ describe('<DrawerLayout />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
-  function testDrawerContentMargin (placement) {
-    it(`with no overlay, layout content should have margin equal to tray width with placement ${placement}`, () => {
-      const trayWidth = '250px'
-      const subject = testbed.render({
-        trayWidth,
-        trayPlacement: placement,
-        layoutWidth: '800px',
-        trayOpen: true
-      })
-
-      testbed.tick()
-      testbed.tick()
-
-      const node = subject.find('[aria-label="Test DrawerContent"]')
-
-      const margin = px(node.props().style[placement === 'start' ? 'marginLeft' : 'marginRight'])
-
-      expect(within(margin, px(trayWidth), 2)).to.be.true // added some tolerance for client rect measurements
+  it(`with no overlay, layout content should have margin equal to tray width with placement=start`, () => {
+    const trayWidth = '250px'
+    const subject = testbed.render({
+      trayWidth,
+      trayPlacement: 'start',
+      layoutWidth: '800px',
+      trayOpen: true
     })
-  }
 
-  function testOmitDrawerContentMargin (placement) {
-    it(`with overlay, layout content should have a margin of zero with placement ${placement}`, () => {
-      testbed.render({
-        trayWidth: '250px',
-        trayPlacement: placement,
-        layoutWidth: '700px',
-        trayOpen: true
-      })
+    testbed.tick()
+    testbed.tick()
 
-      testbed.tick()
-      testbed.tick()
+    const node = subject.find('[aria-label="Test DrawerContent"]')
 
-      const node = document.querySelector('[aria-label="Test DrawerContent"]')
-      const margin = placement === 'start' ? 'marginLeft' : 'marginRight'
-      expect(node.style[margin]).to.equal('0px')
+    const margin = px(node.props().style['marginLeft'])
+
+    expect(within(margin, px(trayWidth), 2)).to.be.true() // added some tolerance for client rect measurements
+  })
+
+  it(`with no overlay, layout content should have margin equal to tray width with placement=end`, () => {
+    const trayWidth = '250px'
+    const subject = testbed.render({
+      trayWidth,
+      trayPlacement: 'end',
+      layoutWidth: '800px',
+      trayOpen: true
     })
-  }
 
-  testDrawerContentMargin('start')
-  testDrawerContentMargin('end')
+    testbed.tick()
+    testbed.tick()
 
-  testOmitDrawerContentMargin('start')
-  testOmitDrawerContentMargin('end')
+    const node = subject.find('[aria-label="Test DrawerContent"]')
+
+    const margin = px(node.props().style['marginRight'])
+
+    expect(within(margin, px(trayWidth), 2)).to.be.true() // added some tolerance for client rect measurements
+  })
+
+  it(`with overlay, layout content should have a margin of zero with placement=start`, () => {
+    testbed.render({
+      trayWidth: '250px',
+      trayPlacement: 'start',
+      layoutWidth: '700px',
+      trayOpen: true
+    })
+
+    testbed.tick()
+    testbed.tick()
+
+    const node = document.querySelector('[aria-label="Test DrawerContent"]')
+
+    expect(node.style['marginLeft']).to.equal('0px')
+  })
+
+  it(`with overlay, layout content should have a margin of zero with placement=end`, () => {
+    testbed.render({
+      trayWidth: '250px',
+      trayPlacement: 'end',
+      layoutWidth: '700px',
+      trayOpen: true
+    })
+
+    testbed.tick()
+    testbed.tick()
+
+    const node = document.querySelector('[aria-label="Test DrawerContent"]')
+
+    expect(node.style['marginRight']).to.equal('0px')
+  })
 
   it('the tray should overlay the content when the content is less than the minWidth', () => {
     const onOverlayTrayChange = testbed.spy()

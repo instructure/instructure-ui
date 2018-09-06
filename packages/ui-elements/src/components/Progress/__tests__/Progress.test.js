@@ -33,13 +33,13 @@ describe('<Progress />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render a progress element', () => {
     const subject = testbed.render()
     const progress = subject.find('progress')
-    expect(progress).to.be.present
+    expect(progress).to.be.present()
     expect(progress.getAttribute('value')).to.equal('30')
     expect(progress.getAttribute('aria-valuemax')).to.equal('60')
     expect(progress.getAttribute('aria-valuetext')).to.equal('30 / 60')

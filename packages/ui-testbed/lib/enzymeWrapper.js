@@ -145,7 +145,7 @@ ReactWrapper.prototype.ref = function () {
   // eslint-disable-next-line no-prototype-builtins
   if (instance.hasOwnProperty(ref)) {
     return new ReactWrapper(instance[ref], true)
-  } else {
+  } else if (typeof originalRef === 'function') {
     return originalRef.apply(this, arguments)
   }
 }

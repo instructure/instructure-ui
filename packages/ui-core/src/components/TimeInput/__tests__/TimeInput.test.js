@@ -33,7 +33,7 @@ describe('<TimeInput />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('renders the specified value when present', () => {

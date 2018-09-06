@@ -36,14 +36,14 @@ describe('<AudioSignal />', () => {
 
   it('should render', () => {
     const AudioSignal = testbed.render()
-    expect(AudioSignal).to.be.present
+    expect(AudioSignal).to.be.present()
   })
 
   it('gets the current volume from the soundMeter', () => {
     const getVolumeSpy = testbed.spy(AudioSignal.prototype, 'getVolume')
     testbed.render()
     testbed.tick(200)
-    expect(getVolumeSpy).to.have.been.called
+    expect(getVolumeSpy).to.have.been.called()
   })
 
   it('should render a <progress />', () => {

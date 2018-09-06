@@ -34,7 +34,7 @@ describe('<View />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should render children', () => {
@@ -55,7 +55,7 @@ describe('<View />', () => {
       warning.lastCall.args[0].includes(
         `element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
       )
-    ).to.be.true
+    ).to.be.true()
 
     subject.setProps({
       margin: 'none small'

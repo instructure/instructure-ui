@@ -29,7 +29,7 @@ describe('<CountdownTimer />', () => {
 
   it('should render', () => {
     const countdownTimer = testbed.render()
-    expect(countdownTimer).to.be.present
+    expect(countdownTimer).to.be.present()
   })
 
   describe('counting down', () => {

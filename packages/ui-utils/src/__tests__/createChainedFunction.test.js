@@ -48,7 +48,7 @@ describe('createChainedFunction', () => {
     chain()
 
     spies.forEach(spy => {
-      expect(spy).to.have.been.calledOnce
+      expect(spy).to.have.been.calledOnce()
     })
   })
 })

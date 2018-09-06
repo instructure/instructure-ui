@@ -255,7 +255,7 @@ describe('<TreeBrowser />', () => {
       button.node.focus()
       button.keyDown('down')
       const b2 = tree.node.getNavigableNodes()[1]
-      expect(b2 === document.activeElement).be.true
+      expect(b2 === document.activeElement).to.be.true()
     })
 
     it('should move focus down when down "J" is pressed', () => {
@@ -264,7 +264,7 @@ describe('<TreeBrowser />', () => {
       button.node.focus()
       button.keyDown('j')
       const b2 = tree.node.getNavigableNodes()[1]
-      expect(b2 === document.activeElement).be.true
+      expect(b2 === document.activeElement).to.be.true()
     })
 
     it('should move focus up when up key is pressed', () => {
@@ -273,7 +273,7 @@ describe('<TreeBrowser />', () => {
       const subButton = tree.node.getNavigableNodes()[1]
       subButton.focus()
       button.keyDown('up')
-      expect(button.node === document.activeElement).be.true
+      expect(button.node === document.activeElement).to.be.true()
     })
 
     it('should move focus up when down "K" is pressed', () => {
@@ -282,7 +282,7 @@ describe('<TreeBrowser />', () => {
       const subButton = tree.node.getNavigableNodes()[1]
       subButton.focus()
       button.keyDown('k')
-      expect(button.node === document.activeElement).be.true
+      expect(button.node === document.activeElement).to.be.true()
     })
   })
 })

@@ -43,7 +43,7 @@ describe('<Media />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {
@@ -70,7 +70,7 @@ describe('<Media />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).first().props()[prop]).to.not.exist
+            expect(subject.find(View).first().props()[prop]).to.not.exist()
           })
         } else {
           it(`should allow the '${prop}' prop`, () => {

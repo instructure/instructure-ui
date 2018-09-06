@@ -31,7 +31,7 @@ describe('<Mask />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should have tabIndex -1 when onClick is provided', () => {
@@ -48,6 +48,6 @@ describe('<Mask />', () => {
       onClick
     })
     subject.click()
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 })

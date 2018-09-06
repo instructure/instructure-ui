@@ -48,7 +48,7 @@ describe('<Controller />', () => {
 
   it('should render', () => {
     const controller = testbed.render()
-    expect(controller).to.be.present
+    expect(controller).to.be.present()
   })
 
   it('renders children', () => {

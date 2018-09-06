@@ -62,7 +62,7 @@ describe('VideoPlayerContext', () => {
   })
 
   it('rerenders everytime state changes', (done) => {
-    expect(customStub).not.to.have.been.called
+    expect(customStub).not.to.have.been.called()
     const component = testbed.render({ children: <ComponentWithConsumer customRenderProp={customStub} /> })
     expect(customStub.callCount).to.eql(1)
 

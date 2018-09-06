@@ -93,7 +93,7 @@ describe('<VideoPlayer />', () => {
     it('adds event listeners on the video element', () => {
       testbed.spy(VideoPlayer.prototype, '_registerEventHandlers')
       testbed.render()
-      expect(VideoPlayer.prototype._registerEventHandlers).to.have.been.called
+      expect(VideoPlayer.prototype._registerEventHandlers).to.have.been.called()
     })
   })
 
@@ -407,7 +407,7 @@ describe('<VideoPlayer />', () => {
               'f', 'F', 'm', 'M'].forEach((key) => {
         player.instance().showControls.resetHistory()
         keyboardEvent(player, key)
-        expect(player.instance().showControls).to.have.been.called
+        expect(player.instance().showControls).to.have.been.called()
       })
     })
 
@@ -415,7 +415,7 @@ describe('<VideoPlayer />', () => {
       const player = renderWithMockVideo()
       player.instance().showControls = testbed.stub()
       keyboardEvent(player, 'a')
-      expect(player.instance().showControls).to.not.have.been.called
+      expect(player.instance().showControls).to.not.have.been.called()
     })
   })
 

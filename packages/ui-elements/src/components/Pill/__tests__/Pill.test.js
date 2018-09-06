@@ -35,7 +35,7 @@ describe('<Pill />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should display text', () => {
@@ -48,12 +48,12 @@ describe('<Pill />', () => {
     const pill = testbed.render({
       text: 'hello'
     })
-    expect(pill.find(Tooltip)).to.not.exist
+    expect(pill.find(Tooltip)).to.not.exist()
 
     const overflowPill = testbed.render({
       text: 'some really super incredibly long text that will force overflow'
     })
-    expect(overflowPill.find(Tooltip)).to.exist
+    expect(overflowPill.find(Tooltip)).to.exist()
   })
 
   describe('when passing down props to View', () => {
@@ -72,7 +72,7 @@ describe('<Pill />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

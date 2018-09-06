@@ -42,20 +42,20 @@ describe('<Image />', () => {
     it('should render an empty alt attribute by default', () => {
       const subject = testbed.render()
 
-      expect(subject.find('[alt=""]')).to.be.present
+      expect(subject.find('[alt=""]')).to.be.present()
     })
 
     it('should render the provided alt attribute', () => {
       const subject = testbed.render({ alt: 'Foo' })
 
-      expect(subject.find('[alt="Foo"]')).to.be.present
+      expect(subject.find('[alt="Foo"]')).to.be.present()
     })
 
     it('should not allow padding to be added as a property', () => {
       const subject = testbed.render({
         padding: 'small medium large small'
       })
-      expect(subject.find(View).props().padding).to.not.exist
+      expect(subject.find(View).props().padding).to.not.exist()
     })
 
     it('should render a blur filter', () => {

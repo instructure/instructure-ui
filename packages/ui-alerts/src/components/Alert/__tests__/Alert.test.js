@@ -25,8 +25,9 @@
 import React from 'react'
 
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
-import IconInfo from '@instructure/ui-icons/lib/Solid/IconInfo'
-import IconWarning from '@instructure/ui-icons/lib/Solid/IconWarning'
+import IconInfoBorderless from '@instructure/ui-icons/lib/Solid/IconInfoBorderless'
+import IconWarningBorderless from '@instructure/ui-icons/lib/Solid/IconWarningBorderless'
+import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
 
 import Alert from '../index'
 import styles from '../styles.css'
@@ -53,7 +54,7 @@ describe('<Alert />', () => {
 
   it('should render', () => {
     const alert = testbed.render()
-    expect(alert).to.be.present
+    expect(alert).to.be.present()
   })
 
   it('should not render the Close button when `closeButtonLabel` is not provided', () => {
@@ -75,20 +76,20 @@ describe('<Alert />', () => {
     testbed.tick() // Transition exiting
     testbed.tick() // Transition exited
 
-    expect(onDismiss.called).to.be.true
+    expect(onDismiss.called).to.be.true()
   })
 
   const variantChanges = function (variant, variantModifications) {
     it('should add a class to main div based on `variant`', () => {
       const alert = testbed.render({ variant, transition: 'none' })
       const mainDiv = alert.find(`.${variantModifications.className}`)
-      expect(mainDiv).to.be.present
+      expect(mainDiv).to.be.present()
     })
 
     it('should change the icon based on `variant`', () => {
       const alert = testbed.render({ variant, transition: 'none' })
       const icon = alert.find(variantModifications.iconComponent)
-      expect(icon).to.be.present
+      expect(icon).to.be.present()
     })
   }
 
@@ -103,7 +104,7 @@ describe('<Alert />', () => {
   describe('`variant` is error', () => {
     const variantModifications = {
       className: styles.error,
-      iconComponent: IconWarning
+      iconComponent: IconNo
     }
     variantChanges('error', variantModifications)
   })
@@ -111,7 +112,7 @@ describe('<Alert />', () => {
   describe('`variant` is warning', () => {
     const variantModifications = {
       className: styles.warning,
-      iconComponent: IconWarning
+      iconComponent: IconWarningBorderless
     }
     variantChanges('warning', variantModifications)
   })
@@ -119,7 +120,7 @@ describe('<Alert />', () => {
   describe('`variant` is info', () => {
     const variantModifications = {
       className: styles.info,
-      iconComponent: IconInfo
+      iconComponent: IconInfoBorderless
     }
     variantChanges('info', variantModifications)
   })
@@ -199,7 +200,7 @@ describe('<Alert />', () => {
       liveRegion: () => liver,
       onDismiss: () => {
         expect(liver.children.length).to.equal(0)
-        expect(alert.getDOMNode()).to.be.null
+        expect(alert.getDOMNode()).to.be.null()
         done()
       }
     })

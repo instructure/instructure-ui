@@ -36,7 +36,7 @@ describe('<CapturedMedia />', () => {
 
   it('should render', () => {
     const media = testbed.render()
-    expect(media).to.be.present
+    expect(media).to.be.present()
   })
 
   describe("#MediaStreamGuard", () => {

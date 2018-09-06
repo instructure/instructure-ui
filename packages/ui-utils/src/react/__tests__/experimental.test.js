@@ -72,7 +72,7 @@ describe('@experimental', () => {
         qux: 'Jane'
       })
 
-      spy.should.not.have.been.called
+      spy.should.not.have.been.called()
     })
   })
 

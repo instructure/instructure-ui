@@ -93,7 +93,7 @@ describe('<VolumeSlider />', () => {
     const handleShowControls = testbed.stub()
     const component = testbed.render({ handleShowControls })
     component.instance().handleOnMouseMove()
-    expect(handleShowControls).to.have.been.called
+    expect(handleShowControls).to.have.been.called()
   })
 
   describe('keybindings', () => {
@@ -107,7 +107,7 @@ describe('<VolumeSlider />', () => {
         }
         const component = testbed.render({ onKeyDown: handleKeyPress })
         component.find('RangeInput').prop('onKeyDown')({ key: 'ArrowRight' })
-        expect(keyDownStub).to.have.been.called
+        expect(keyDownStub).to.have.been.called()
       })
     })
   })

@@ -42,7 +42,7 @@ describe('<PlaybackSpeedContainer />', () => {
   it('passes down forwardRef to VideoPlayerButton', () => {
     const forwardRef = testbed.stub()
     testbed.render({ children: <PlaybackSpeedContainer forwardRef={forwardRef} /> })
-    expect(forwardRef).to.have.been.called
+    expect(forwardRef).to.have.been.called()
   })
 
   it('doesn\'t bubble on Space keydown when the focus is on MenuItem', () => {
@@ -50,7 +50,7 @@ describe('<PlaybackSpeedContainer />', () => {
     const showControls = testbed.stub()
     const component = testbed.render()
     component.find('PlaybackSpeedContainer').node.handleKeyDown(showControls)(e)
-    expect(showControls).to.have.been.called
+    expect(showControls).to.have.been.called()
   })
 
   it('doesn\'t bubble on Enter keydown when the focus is on MenuItem', () => {
@@ -58,7 +58,7 @@ describe('<PlaybackSpeedContainer />', () => {
     const showControls = testbed.stub()
     const component = testbed.render()
     component.find('PlaybackSpeedContainer').node.handleKeyDown(showControls)(e)
-    expect(showControls).to.have.been.called
+    expect(showControls).to.have.been.called()
   })
 
   it('sets the right speed when its corresponding MenuItem is selected', () => {
@@ -72,6 +72,6 @@ describe('<PlaybackSpeedContainer />', () => {
     const showControls = testbed.stub()
     const component = testbed.render()
     component.find('PlaybackSpeedContainer').node.handleOnMouseMove(showControls)()
-    expect(showControls).to.have.been.called
+    expect(showControls).to.have.been.called()
   })
 })

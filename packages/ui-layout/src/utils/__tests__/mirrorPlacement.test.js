@@ -40,7 +40,7 @@ describe('@mirrorPlacement', () => {
 
     it('returns array of values when delimiter is not provided', () => {
       const result = executeMirrorFunction('start center', mirrorFunction)
-      expect(Array.isArray(result)).to.be.true
+      expect(Array.isArray(result)).to.be.true()
       expect(result.length).to.equal(2)
       expect(result[0]).to.equal('start')
       expect(result[1]).to.equal('center')
@@ -48,7 +48,7 @@ describe('@mirrorPlacement', () => {
 
     it('returns a string when delimiter is provided', () => {
       const result = executeMirrorFunction('start center', mirrorFunction, ' ')
-      expect(typeof result === 'string').to.be.true
+      expect(typeof result === 'string').to.be.true()
       expect(result).to.equal('start center')
     })
 

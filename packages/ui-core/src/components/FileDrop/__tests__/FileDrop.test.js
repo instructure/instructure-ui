@@ -31,7 +31,7 @@ describe('<FileDrop />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should meet a11y standards', (done) => {
@@ -75,14 +75,14 @@ describe('<FileDrop />', () => {
       const subject = testbed.render({ onDrop })
       subject.find('label').simulate('drop')
 
-      expect(onDrop).to.have.been.called
+      expect(onDrop).to.have.been.called()
     })
 
     it('responds to change event', () => {
       const subject = testbed.render({ onDrop })
       subject.find('input').simulate('change')
 
-      expect(onDrop).to.have.been.called
+      expect(onDrop).to.have.been.called()
     })
 
     it('accepts correct files using mymetypes', () => {
@@ -95,8 +95,8 @@ describe('<FileDrop />', () => {
       subject.find('label').simulate('drop', imageDropEvent)
 
       expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
-      expect(onDropAccepted).to.have.been.called
-      expect(onDropRejected).to.not.have.been.called
+      expect(onDropAccepted).to.have.been.called()
+      expect(onDropRejected).to.not.have.been.called()
     })
 
     it('accepts correct files using extensions', () => {
@@ -109,8 +109,8 @@ describe('<FileDrop />', () => {
       subject.find('label').simulate('drop', imageDropEvent)
 
       expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
-      expect(onDropAccepted).to.have.been.called
-      expect(onDropRejected).to.not.have.been.called
+      expect(onDropAccepted).to.have.been.called()
+      expect(onDropRejected).to.not.have.been.called()
     })
 
     it('rejects incorrect files using mymetypes', () => {
@@ -123,8 +123,8 @@ describe('<FileDrop />', () => {
       subject.find('label').simulate('drop', docDropEvent)
 
       expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
-      expect(onDropAccepted).to.not.have.been.called
-      expect(onDropRejected).to.have.been.called
+      expect(onDropAccepted).to.not.have.been.called()
+      expect(onDropRejected).to.have.been.called()
     })
 
     it('rejects incorrect files using extensions', () => {
@@ -137,8 +137,8 @@ describe('<FileDrop />', () => {
       subject.find('label').simulate('drop', docDropEvent)
 
       expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
-      expect(onDropAccepted).to.not.have.been.called
-      expect(onDropRejected).to.have.been.called
+      expect(onDropAccepted).to.not.have.been.called()
+      expect(onDropRejected).to.have.been.called()
     })
   })
 
@@ -151,7 +151,7 @@ describe('<FileDrop />', () => {
       )
 
       const subject = testbed.render({ label })
-      expect(subject.find('#test-id')).to.be.present
+      expect(subject.find('#test-id')).to.be.present()
     })
 
     it('renders component label', () => {
@@ -162,13 +162,13 @@ describe('<FileDrop />', () => {
       )
 
       const subject = testbed.render({ label })
-      expect(subject.find('#test-id')).to.be.present
+      expect(subject.find('#test-id')).to.be.present()
     })
 
     it('passes isDragAccepted and isDragRejected boolean props to component label', () => {
       const label = ({ isDragAccepted, isDragRejected }) => {
-        expect(typeof isDragAccepted === 'boolean').to.be.true
-        expect(typeof isDragRejected === 'boolean').to.be.true
+        expect(typeof isDragAccepted === 'boolean').to.be.true()
+        expect(typeof isDragRejected === 'boolean').to.be.true()
         return null
       }
 
@@ -177,8 +177,8 @@ describe('<FileDrop />', () => {
 
     it(`label component's props are false by default`, () => {
       const label = ({ isDragAccepted, isDragRejected }) => {
-        expect(isDragAccepted).to.be.false
-        expect(isDragRejected).to.be.false
+        expect(isDragAccepted).to.be.false()
+        expect(isDragRejected).to.be.false()
         return null
       }
 
@@ -193,7 +193,7 @@ describe('<FileDrop />', () => {
       const subject = testbed.render({ onDragEnter })
       subject.find('label').simulate('dragenter')
 
-      expect(onDragEnter).to.have.been.called
+      expect(onDragEnter).to.have.been.called()
     })
 
     it('responds to onDragOver event', () => {
@@ -202,7 +202,7 @@ describe('<FileDrop />', () => {
       const subject = testbed.render({ onDragOver })
       subject.find('label').simulate('dragover')
 
-      expect(onDragOver).to.have.been.called
+      expect(onDragOver).to.have.been.called()
     })
 
     it('responds to onDragLeave event', () => {
@@ -211,7 +211,7 @@ describe('<FileDrop />', () => {
       const subject = testbed.render({ onDragLeave })
       subject.find('label').simulate('dragleave')
 
-      expect(onDragLeave).to.have.been.called
+      expect(onDragLeave).to.have.been.called()
     })
   })
 
@@ -287,37 +287,37 @@ describe('<FileDrop />', () => {
     }
 
     it('should take image/* to mean any image type', () => {
-      expect(accepts(dropImage, 'image/*')).to.be.true
+      expect(accepts(dropImage, 'image/*')).to.be.true()
     })
 
     it('should reject anything that is not an image, given image/*', () => {
-      expect(accepts(dropFile, 'image/*')).to.be.false
+      expect(accepts(dropFile, 'image/*')).to.be.false()
     })
 
     it('should match the exact file extensions given', () => {
-      expect(accepts(dropImage, '.jpg')).to.be.true
-      expect(accepts(dropImage, '.jpg, .png')).to.be.true
-      expect(accepts(dropImage, '.png')).to.be.false
-      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true
-      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true
+      expect(accepts(dropImage, '.jpg')).to.be.true()
+      expect(accepts(dropImage, '.jpg, .png')).to.be.true()
+      expect(accepts(dropImage, '.png')).to.be.false()
+      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
+      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
     })
 
     it('should handle chrome dragenter file data', () => {
-      expect(accepts(chromeDragEnterFile, 'image/*')).to.be.true
-      expect(accepts(chromeDragEnterFile, '.jpeg')).to.be.true
-      expect(accepts(chromeDragEnterFile, '.png')).to.not.be.true
-      expect(accepts(chromeDragEnterFile, '.pdf')).to.not.be.true
+      expect(accepts(chromeDragEnterFile, 'image/*')).to.be.true()
+      expect(accepts(chromeDragEnterFile, '.jpeg')).to.be.true()
+      expect(accepts(chromeDragEnterFile, '.png')).to.not.be.true()
+      expect(accepts(chromeDragEnterFile, '.pdf')).to.not.be.true()
     })
 
     it(`should always be true for firefox's dragenter file data`, () => {
-      expect(accepts(firefoxDragEnterFile, 'image/*')).to.be.true
-      expect(accepts(firefoxDragEnterFile, '.jpeg')).to.be.true
-      expect(accepts(firefoxDragEnterFile, '.png')).to.be.true
-      expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true
+      expect(accepts(firefoxDragEnterFile, 'image/*')).to.be.true()
+      expect(accepts(firefoxDragEnterFile, '.jpeg')).to.be.true()
+      expect(accepts(firefoxDragEnterFile, '.png')).to.be.true()
+      expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true()
     })
 
     it('allows extensions without leading dot', () => {
-      expect(accepts(dropImage, 'jpg, png')).to.be.true
+      expect(accepts(dropImage, 'jpg, png')).to.be.true()
     })
   })
 })

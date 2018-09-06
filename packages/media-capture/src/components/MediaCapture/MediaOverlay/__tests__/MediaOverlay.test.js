@@ -42,7 +42,7 @@ describe('<MediaOverlay />', () => {
   it('should render', () => {
     const overlay = testbed.render()
 
-    expect(overlay).to.be.present
+    expect(overlay).to.be.present()
   })
 
   describe('captureStates', () => {

@@ -163,7 +163,7 @@ describe('<Pagination />', () => {
         })
         subject.findElementWithText('button', 'Prev').focus()
         subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#0').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#0').focused()).to.be.true()
       })
 
       it('should not change focus when the Previous Page button did not have focus', () => {
@@ -175,7 +175,7 @@ describe('<Pagination />', () => {
         })
         subject.findElementWithText('button', '#1').focus()
         subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#1').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#1').focused()).to.be.true()
       })
 
       it('should not continue to change focus on subsequent updates', () => {
@@ -189,7 +189,7 @@ describe('<Pagination />', () => {
         subject.setProps({ children: buildPages(7, 0) })
         subject.findElementWithText('button', '#1').focus()
         subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#1').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#1').focused()).to.be.true()
       })
     })
 
@@ -203,7 +203,7 @@ describe('<Pagination />', () => {
         })
         subject.findElementWithText('button', 'Next').focus()
         subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#6').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#6').focused()).to.be.true()
       })
 
       it('should not change focus when the Next Page button did not have focus', () => {
@@ -215,7 +215,7 @@ describe('<Pagination />', () => {
         })
         subject.findElementWithText('button', '#5').focus()
         subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#5').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#5').focused()).to.be.true()
       })
 
       it('should not continue to change focus on subsequent updates', () => {
@@ -229,7 +229,7 @@ describe('<Pagination />', () => {
         subject.setProps({ children: buildPages(7, 6) })
         subject.findElementWithText('button', '#5').focus()
         subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#5').focused()).to.be.true
+        expect(subject.findElementWithText('button', '#5').focused()).to.be.true()
       })
     })
 
@@ -265,7 +265,7 @@ describe('<Pagination />', () => {
 
         subject.findElementWithText('button', 'Next').click()
 
-        expect(onClick).to.have.been.called
+        expect(onClick).to.have.been.called()
       })
     })
 
@@ -287,7 +287,7 @@ describe('<Pagination />', () => {
                 labelPrev: 'Prev',
                 [prop]: 'foo'
               })
-              expect(subject.find(View).first().props()[prop]).to.not.exist
+              expect(subject.find(View).first().props()[prop]).to.not.exist()
             })
           } else {
             it(`should allow the '${prop}' prop`, () => {
@@ -305,7 +305,7 @@ describe('<Pagination />', () => {
       it(`should pass down the elementRef prop`, () => {
         const elementRef = testbed.stub()
         testbed.render({ elementRef })
-        expect(elementRef).to.have.been.called
+        expect(elementRef).to.have.been.called()
       })
     })
 

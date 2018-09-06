@@ -158,7 +158,7 @@ describe('ScreenReaderFocusRegion', () => {
     ])
 
     findContent(subject).childNodes.forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.not.exist
+      expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })
 

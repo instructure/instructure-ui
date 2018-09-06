@@ -39,13 +39,13 @@ describe('<NavigationItem />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should have an aria attribute for the tooltip label when the nav is minimized ', () => {
     const subject = testbed.render({minimized: true})
     const attr = subject.find('button').getAttribute('aria-controls')
 
-    expect(attr).to.exist
+    expect(attr).to.exist()
   })
 })

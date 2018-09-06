@@ -62,7 +62,7 @@ describe('<RadioInputGroup />', () => {
 
     subject.find('input').first().simulate('change')
 
-    expect(onChange).to.have.been.called
+    expect(onChange).to.have.been.called()
   })
 
   it('does not call the onChange prop when disabled', () => {
@@ -75,7 +75,7 @@ describe('<RadioInputGroup />', () => {
 
     subject.find('input').first().simulate('change')
 
-    expect(onChange).to.not.have.been.called
+    expect(onChange).to.not.have.been.called()
   })
 
   it('does not call the onChange prop when readOnly', () => {
@@ -88,7 +88,7 @@ describe('<RadioInputGroup />', () => {
 
     subject.find('input').first().simulate('change')
 
-    expect(onChange).to.not.have.been.called
+    expect(onChange).to.not.have.been.called()
   })
 
   it('should not update the value when the value prop is set', () => {

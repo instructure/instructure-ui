@@ -39,19 +39,19 @@ describe('<Autocomplete />', () => {
   it('should focus the input when focus is called', () => {
     const subject = testbed.render()
     subject.instance().focus()
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should provide an focused getter', () => {
     const subject = testbed.render()
-    expect(subject.instance().focused).to.be.false
+    expect(subject.instance().focused).to.be.false()
     subject.instance().focus()
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   it('should provide an invalid getter', () => {
     const subject = testbed.render({})
-    expect(subject.instance().invalid).to.be.false
+    expect(subject.instance().invalid).to.be.false()
   })
 
   it('should be invalid if given error messages', () => {
@@ -60,7 +60,7 @@ describe('<Autocomplete />', () => {
         { text: 'Invalid name', type: 'error' }
       ]
     })
-    expect(subject.instance().invalid).to.be.true
+    expect(subject.instance().invalid).to.be.true()
   })
 
   it('should provide an inputRef prop', () => {
@@ -144,7 +144,7 @@ describe('<Autocomplete />', () => {
       })
 
       expect(subject.find('input').getAttribute('aria-invalid'))
-        .to.exist
+        .to.exist()
     })
   })
 })

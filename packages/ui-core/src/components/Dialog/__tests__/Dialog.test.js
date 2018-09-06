@@ -50,8 +50,8 @@ describe('<Dialog />', () => {
 
   it('should apply the a11y attributes', () => {
     const subject = testbed.render({ open: true, label: 'Dialog Example' })
-    expect(subject.find('[role="dialog"]')).to.be.present
-    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present
+    expect(subject.find('[role="dialog"]')).to.be.present()
+    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present()
   })
 
   it('should call onDismiss prop when Esc key pressed', () => {
@@ -66,7 +66,7 @@ describe('<Dialog />', () => {
 
     testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 
   it('should call onDismiss prop when the document is clicked', () => {
@@ -83,7 +83,7 @@ describe('<Dialog />', () => {
       bubbles: true
     })
 
-    expect(onDismiss).to.have.been.called
+    expect(onDismiss).to.have.been.called()
   })
 })
 
@@ -128,7 +128,7 @@ describe('<Dialog /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true
+    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
   })
 
   it('should focus the first tabbable element when open prop becomes true', done => {
@@ -142,7 +142,7 @@ describe('<Dialog /> managed focus', () => {
       },
       () => {
         testbed.tick()
-        expect(document.getElementById('input-one') === document.activeElement).to.be.true
+        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
         done()
       }
     )
@@ -158,6 +158,6 @@ describe('<Dialog /> managed focus', () => {
 
     testbed.tick()
 
-    expect(document.getElementById('input-two') === document.activeElement).to.be.true
+    expect(document.getElementById('input-two') === document.activeElement).to.be.true()
   })
 })

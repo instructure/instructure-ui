@@ -166,25 +166,25 @@ describe('<VolumeContainer />', () => {
     it('can toggle mute with space', () => {
       const component = testbed.render()
       keyboardEvent(component, ' ')
-      expect(customProviderState.actions.toggleMute).to.have.been.called
+      expect(customProviderState.actions.toggleMute).to.have.been.called()
     })
 
     it('can toggle mute with Enter', () => {
       const component = testbed.render()
       keyboardEvent(component, 'Enter')
-      expect(customProviderState.actions.toggleMute).to.have.been.called
+      expect(customProviderState.actions.toggleMute).to.have.been.called()
     })
 
     it('can toggle mute with m', () => {
       const component = testbed.render()
       keyboardEvent(component, 'm')
-      expect(customProviderState.actions.toggleMute).to.have.been.called
+      expect(customProviderState.actions.toggleMute).to.have.been.called()
     })
 
     it('can toggle mute with M', () => {
       const component = testbed.render()
       keyboardEvent(component, 'M')
-      expect(customProviderState.actions.toggleMute).to.have.been.called
+      expect(customProviderState.actions.toggleMute).to.have.been.called()
     })
 
     it('shows the controls when a keybinding is activated', () => {
@@ -194,14 +194,14 @@ describe('<VolumeContainer />', () => {
               'm', 'M'].forEach((key) => {
         customProviderState.actions.showControls.resetHistory()
         keyboardEvent(component, key)
-        expect(customProviderState.actions.showControls).to.have.been.called
+        expect(customProviderState.actions.showControls).to.have.been.called()
       })
     })
 
     it('does not show controls when key is ignored', () => {
       const component = testbed.render()
       keyboardEvent(component, 'a')
-      expect(customProviderState.actions.showControls).to.not.have.been.called
+      expect(customProviderState.actions.showControls).to.not.have.been.called()
     })
   })
 })

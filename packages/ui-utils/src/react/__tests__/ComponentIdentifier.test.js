@@ -84,6 +84,6 @@ describe('ComponentIdentifier', () => {
     })
     const button = subject.find('button').unwrap()
     button.click()
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 })

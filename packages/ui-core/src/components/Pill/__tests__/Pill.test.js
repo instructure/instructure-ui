@@ -31,14 +31,14 @@ describe('<Pill />', () => {
 
   it('should render', () => {
     const subject = testbed.render()
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should not allow padding to be added as a property', () => {
     const subject = testbed.render({
       padding: 'small medium large large'
     })
-    expect(subject.find(View).props().padding).to.not.exist
+    expect(subject.find(View).props().padding).to.not.exist()
   })
 
   it('should meet a11y standards', (done) => {

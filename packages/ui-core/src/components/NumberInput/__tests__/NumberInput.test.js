@@ -311,7 +311,7 @@ describe('<NumberInput />', () => {
 
     subject.instance().focus()
 
-    expect(subject.find('input').focused()).to.be.true
+    expect(subject.find('input').focused()).to.be.true()
   })
 
   it('should provide an inputRef prop', () => {
@@ -341,7 +341,7 @@ describe('<NumberInput />', () => {
 
       subject.find(IconArrowOpenUp).simulate('mouseDown')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('1')
       expect(onChange.firstCall.args[2]).to.equal('1')
       expect(subject.find('input').getDOMNode().value).to.equal('1')
@@ -356,7 +356,7 @@ describe('<NumberInput />', () => {
 
       subject.find(IconArrowOpenDown).simulate('mouseDown')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('-1')
       expect(onChange.firstCall.args[2]).to.equal('-1')
       expect(subject.find('input').getDOMNode().value).to.equal('-1')
@@ -371,7 +371,7 @@ describe('<NumberInput />', () => {
 
       subject.find('input').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('responds to onKeyDown event', () => {
@@ -383,7 +383,7 @@ describe('<NumberInput />', () => {
 
       subject.find('input').keyDown('ArrowUp')
 
-      expect(onKeyDown).to.have.been.called
+      expect(onKeyDown).to.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -395,7 +395,7 @@ describe('<NumberInput />', () => {
 
       subject.find('input').blur()
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -407,7 +407,7 @@ describe('<NumberInput />', () => {
 
       subject.find('input').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
   })
 
@@ -423,7 +423,7 @@ describe('<NumberInput />', () => {
         messages: [{ type: 'error', text: 'some error message' }]
       })
 
-      expect(subject.find('input').getAttribute('aria-invalid')).to.exist
+      expect(subject.find('input').getAttribute('aria-invalid')).to.exist()
     })
   })
 })

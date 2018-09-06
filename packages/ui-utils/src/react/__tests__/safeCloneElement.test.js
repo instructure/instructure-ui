@@ -42,8 +42,8 @@ describe('safeCloneElement', () => {
       props: { ref: cloneRef }
     })
 
-    expect(origRef).to.have.been.called
-    expect(cloneRef).to.have.been.called
+    expect(origRef).to.have.been.called()
+    expect(cloneRef).to.have.been.called()
   })
 
   it('should throw an error for string refs', () => {
@@ -67,8 +67,8 @@ describe('safeCloneElement', () => {
 
     subject.find('button').click()
 
-    expect(onClickA).to.have.been.called
-    expect(onClickB).to.have.been.called
+    expect(onClickA).to.have.been.called()
+    expect(onClickB).to.have.been.called()
   })
 
   it('should preserve already chained functions', () => {
@@ -83,8 +83,8 @@ describe('safeCloneElement', () => {
 
     subject.find('button').click()
 
-    expect(onClickA).to.have.been.called
-    expect(onClickB).to.have.been.called
-    expect(onClickC).to.have.been.called
+    expect(onClickA).to.have.been.called()
+    expect(onClickB).to.have.been.called()
+    expect(onClickC).to.have.been.called()
   })
 })

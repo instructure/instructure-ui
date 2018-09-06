@@ -58,7 +58,7 @@ describe('<Rating />', () => {
       valueMax: 100
     })
 
-    expect(subject.find(RatingIcon).at(4).props().animateFill).to.be.true
+    expect(subject.find(RatingIcon).at(4).props().animateFill).to.be.true()
   })
 
   it('should fill the correct number of icons', () => {
@@ -95,7 +95,7 @@ describe('<Rating />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).props()[prop]).to.not.exist
+            expect(subject.find(View).props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

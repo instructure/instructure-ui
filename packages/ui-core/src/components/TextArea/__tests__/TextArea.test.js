@@ -88,7 +88,7 @@ describe('TextArea', () => {
 
     subject.instance().focus()
 
-    expect(subject.find('textarea').focused()).to.be.true
+    expect(subject.find('textarea').focused()).to.be.true()
   })
 
   it('provides a focused getter', () => {
@@ -96,7 +96,7 @@ describe('TextArea', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
+    expect(subject.instance().focused).to.be.true()
   })
 
   it('should provide an textareaRef prop', () => {
@@ -126,7 +126,7 @@ describe('TextArea', () => {
 
       subject.find('textarea').simulate('change')
 
-      expect(onChange).to.have.been.called
+      expect(onChange).to.have.been.called()
     })
 
     it('does not respond to onChange event when disabled', () => {
@@ -139,7 +139,7 @@ describe('TextArea', () => {
 
       subject.find('textarea').simulate('change')
 
-      expect(onChange).to.not.have.been.called
+      expect(onChange).to.not.have.been.called()
     })
 
     it('responds to onBlur event', () => {
@@ -151,7 +151,7 @@ describe('TextArea', () => {
 
       subject.find('textarea').simulate('blur')
 
-      expect(onBlur).to.have.been.called
+      expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', () => {
@@ -163,7 +163,7 @@ describe('TextArea', () => {
 
       subject.find('textarea').simulate('focus')
 
-      expect(onFocus).to.have.been.called
+      expect(onFocus).to.have.been.called()
     })
   })
 
@@ -179,7 +179,7 @@ describe('TextArea', () => {
         messages: [{ type: 'error', text: 'some error message' }]
       })
 
-      expect(subject.find('textarea').getAttribute('aria-invalid')).to.exist
+      expect(subject.find('textarea').getAttribute('aria-invalid')).to.exist()
     })
   })
 })

@@ -47,7 +47,7 @@ describe('<ListItem />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).first().props()[prop]).to.not.exist
+            expect(subject.find(View).first().props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

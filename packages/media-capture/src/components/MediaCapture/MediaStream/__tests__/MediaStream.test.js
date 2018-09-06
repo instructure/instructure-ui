@@ -61,14 +61,14 @@ describe('<MediaStream />', () => {
 
   it('should render', () => {
     const stream = testbed.render()
-    expect(stream).to.be.present
+    expect(stream).to.be.present()
   })
 
   describe('accessing the clients audio and video devices', () => {
     it('calls getUserMedia', () => {
       const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserMedia')
       testbed.render()
-      expect(getUserMediaSpy).to.have.been.called
+      expect(getUserMediaSpy).to.have.been.called()
     })
 
     it('handles the streamSuccess callback', () => {
@@ -87,14 +87,14 @@ describe('<MediaStream />', () => {
       stream.instance().streamSuccess(media.stream)
       expect(stream.instance().video.srcObject).to.equal(media.stream)
       stream.instance().streamLoaded()
-      expect(deviceRequestAcceptedStub).to.have.been.called
+      expect(deviceRequestAcceptedStub).to.have.been.called()
     })
 
     it('handles the error callback', () => {
       const errorSpy = testbed.spy()
       const stream = testbed.render({ actions: { errorOccurred: errorSpy }})
       stream.instance().error({ name: 'NotAllowedError' })
-      expect(errorSpy).to.have.been.called
+      expect(errorSpy).to.have.been.called()
     })
 
     describe('changing devices', () => {
@@ -104,7 +104,7 @@ describe('<MediaStream />', () => {
         const stream = testbed.render({ captureState: READY })
         stream.instance().streamSuccess(media.stream)
         stream.setProps({ audioDeviceId: '12345' })
-        expect(getUserMediaSpy).to.have.been.called
+        expect(getUserMediaSpy).to.have.been.called()
       })
     })
   })
@@ -118,7 +118,7 @@ describe('<MediaStream />', () => {
       stream.instance().streamSuccess(media.stream)
       stream.setProps({ captureState: RECORDING })
 
-      expect(startMediaRecorderSpy).to.have.been.called
+      expect(startMediaRecorderSpy).to.have.been.called()
     })
 
     it('handles the blobSuccess callback', () => {
@@ -126,7 +126,7 @@ describe('<MediaStream />', () => {
       const stream = testbed.render({ actions: { videoObjectGenerated: videoObjectGeneratedSpy }})
       stream.instance().blobSuccess(new File(['hello'], 'hello.txt'))
 
-      expect(videoObjectGeneratedSpy).to.have.been.called
+      expect(videoObjectGeneratedSpy).to.have.been.called()
     })
   })
 

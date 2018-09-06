@@ -70,7 +70,12 @@ module.exports = {
     }],
     'import/no-extraneous-dependencies': 'error',
     'no-undefined': 'error',
-    'jsx-a11y/label-has-for': 0
+    'jsx-a11y/label-has-for': 0,
+    'no-unused-expressions': ['error', {
+      'allowShortCircuit': true,
+      'allowTernary': true,
+      'allowTaggedTemplates': true
+    }]
   },
   overrides: [
     {

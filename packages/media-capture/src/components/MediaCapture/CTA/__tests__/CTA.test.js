@@ -40,7 +40,7 @@ describe('<CTA />', () => {
 
   it('should render', () => {
     const CTA = testbed.render()
-    expect(CTA).to.be.present
+    expect(CTA).to.be.present()
   })
 
   it('should have a <Button />', () => {

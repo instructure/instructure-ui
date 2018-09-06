@@ -39,13 +39,13 @@ describe('<MenuItemGroup />', () => {
   it('should render', () => {
     const subject = testbed.render()
 
-    expect(subject).to.be.present
+    expect(subject).to.be.present()
   })
 
   it('should set the role to "group"', () => {
     const subject = testbed.render()
 
-    expect(subject.find('[role="group"]')).to.be.present
+    expect(subject.find('[role="group"]')).to.be.present()
   })
 
   it('should render the label and aria-labelledby attributes', () => {
@@ -131,7 +131,7 @@ describe('<MenuItemGroup />', () => {
 
     subject.find('span[role="menuitemradio"]').first().simulate('click')
 
-    expect(onSelect).to.have.been.called
+    expect(onSelect).to.have.been.called()
     expect(onSelect.args[0][1]).to.deep.equal([0])
   })
 
@@ -144,7 +144,7 @@ describe('<MenuItemGroup />', () => {
 
     subject.find(MenuItem).first().simulate('click')
 
-    expect(onSelect).to.not.have.been.called
+    expect(onSelect).to.not.have.been.called()
   })
 
   it('updates the selected items when allowMultiple is true', () => {

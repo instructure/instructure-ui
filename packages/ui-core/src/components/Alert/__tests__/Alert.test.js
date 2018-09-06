@@ -45,7 +45,7 @@ describe('<Alert />', () => {
 
   it('should render', () => {
     const alert = testbed.render()
-    expect(alert).to.be.present
+    expect(alert).to.be.present()
   })
 
   it('should not render the Close button when `closeButtonLabel` is not provided', () => {
@@ -67,7 +67,7 @@ describe('<Alert />', () => {
     testbed.tick() // Transition exiting
     testbed.tick() // Transition exited
 
-    expect(onDismiss.called).to.be.true
+    expect(onDismiss.called).to.be.true()
   })
 
   it('should meet a11y standards', done => {
@@ -145,7 +145,7 @@ describe('<Alert />', () => {
       liveRegion: () => liver,
       onDismiss: () => {
         expect(liver.children.length).to.equal(0)
-        expect(alert.getDOMNode()).to.be.null
+        expect(alert.getDOMNode()).to.be.null()
         done()
       }
     })

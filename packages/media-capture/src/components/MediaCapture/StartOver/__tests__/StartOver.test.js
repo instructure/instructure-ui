@@ -30,7 +30,7 @@ describe('<StartOver />', () => {
 
   it('should render', () => {
     const StartOver = testbed.render()
-    expect(StartOver).to.be.present
+    expect(StartOver).to.be.present()
   })
 
   it('should render an appropriate label', () => {
@@ -47,6 +47,6 @@ describe('<StartOver />', () => {
     const startoverClickedSpy = testbed.spy()
     const StartOver = testbed.render({ actions: { startoverClicked: startoverClickedSpy }})
     StartOver.click()
-    expect(startoverClickedSpy).to.have.been.called
+    expect(startoverClickedSpy).to.have.been.called()
   })
 })

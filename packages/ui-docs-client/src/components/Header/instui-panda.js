@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
 
 export default function PandaLogo() {

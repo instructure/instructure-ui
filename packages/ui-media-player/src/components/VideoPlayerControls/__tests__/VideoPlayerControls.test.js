@@ -83,8 +83,8 @@ describe('<VideoPlayerControls />', () => {
     const component = testbed.render({ value: customProviderState }).find(`.${styles.container}`)
     const event = { stopPropagation: testbed.stub() }
     component.simulate('click', event)
-    expect(event.stopPropagation).to.have.been.called
-    expect(customProviderState.actions.showControls).to.have.been.called
+    expect(event.stopPropagation).to.have.been.called()
+    expect(customProviderState.actions.showControls).to.have.been.called()
   })
 
   it('hides controls when showControls is false', () => {
@@ -149,7 +149,7 @@ describe('<VideoPlayerControls />', () => {
     expect(button.text()).to.match(/Play/)
     expect(button.find('IconPlay').length).to.eql(1)
     button.click()
-    expect(customProviderState.actions.togglePlay).to.have.been.called
+    expect(customProviderState.actions.togglePlay).to.have.been.called()
   })
 
   it('renders a Timebar', () => {
@@ -192,7 +192,7 @@ describe('<VideoPlayerControls />', () => {
     expect(button.find('IconAudio').length).to.eql(1)
     button.click()
     const slider = document.getElementById(`${popoverContentWrapperId}`)
-    expect(slider).to.not.be.null
+    expect(slider).to.not.be.null()
     popoverContentWrapper.remove()
   })
 
@@ -211,7 +211,7 @@ describe('<VideoPlayerControls />', () => {
     expect(button.text()).to.match(/Playback Speed/)
     button.click()
     const playbackSpeedMenu = document.getElementById(menuContentWrapperId)
-    expect(playbackSpeedMenu).to.not.be.null
+    expect(playbackSpeedMenu).to.not.be.null()
     menuContentWrapper.remove()
   })
 
@@ -230,7 +230,7 @@ describe('<VideoPlayerControls />', () => {
     expect(button.text()).to.match(/Source Chooser/)
     button.click()
     const sourceChooserMenu = document.getElementById(menuContentWrapperId)
-    expect(sourceChooserMenu).to.not.be.null
+    expect(sourceChooserMenu).to.not.be.null()
     menuContentWrapper.remove()
   })
 
@@ -248,6 +248,6 @@ describe('<VideoPlayerControls />', () => {
     expect(button.text()).to.match(/Full/)
     expect(button.find('IconFullScreen').length).to.eql(1)
     button.click()
-    expect(customProviderState.actions.toggleFullScreen).to.have.been.called
+    expect(customProviderState.actions.toggleFullScreen).to.have.been.called()
   })
 })

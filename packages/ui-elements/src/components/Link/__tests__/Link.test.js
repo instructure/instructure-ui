@@ -59,8 +59,8 @@ describe('<Link />', () => {
 
     subject.instance().focus()
 
-    expect(subject.instance().focused).to.be.true
-    expect(subject.find('button').focused()).to.be.true
+    expect(subject.instance().focused).to.be.true()
+    expect(subject.find('button').focused()).to.be.true()
   })
 
   it('should call the onClick prop when clicked', () => {
@@ -72,7 +72,7 @@ describe('<Link />', () => {
 
     subject.find('button').simulate('click')
 
-    expect(onClick).to.have.been.called
+    expect(onClick).to.have.been.called()
   })
 
   it('should provide a linkRef prop', () => {
@@ -112,7 +112,7 @@ describe('<Link />', () => {
 
       subject.find('button').simulate('click')
 
-      expect(onClick).to.not.have.been.called
+      expect(onClick).to.not.have.been.called()
     })
   })
 
@@ -165,7 +165,7 @@ describe('<Link />', () => {
             const subject = testbed.render({
               [prop]: 'foo'
             })
-            expect(subject.find(View).first().props()[prop]).to.not.exist
+            expect(subject.find(View).first().props()[prop]).to.not.exist()
           })
         } else {
           it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {

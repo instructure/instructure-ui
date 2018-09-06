@@ -45,7 +45,7 @@ describe('MediaRecorder', () => {
     const onInitSpy = testbed.stub()
 
     startMediaRecorder(getMedia().stream, onInitSpy)
-    expect(onInitSpy).to.have.been.called
+    expect(onInitSpy).to.have.been.called()
   })
 
   describe('MediaFile', () => {
@@ -57,7 +57,7 @@ describe('MediaRecorder', () => {
       const frReadAsArrayBufferSpy = testbed.spy(FileReader.prototype, 'readAsArrayBuffer')
       it("uses FileReader's readAsArrayBuffer to make the blob consumable by ebml", () => {
         mediaFile.readAsArrayBuffer('12345').then(() => {
-          expect(frReadAsArrayBufferSpy.calledWith('12345')).to.be.true
+          expect(frReadAsArrayBufferSpy.calledWith('12345')).to.be.true()
           done()
         })
       })
@@ -89,7 +89,7 @@ describe('MediaRecorder', () => {
 
     it('invokes the success callback when stopped', (done) => {
       mediaFile.onStop().then(() => {
-        expect(successStub).to.have.been.called
+        expect(successStub).to.have.been.called()
       })
       .finally(done)
     })
