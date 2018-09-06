@@ -24,6 +24,7 @@
 
 import React from 'react'
 import Mask from '../index'
+import styles from '../styles.css'
 
 describe('<Mask />', () => {
   const testbed = new Testbed(<Mask />)
@@ -49,5 +50,13 @@ describe('<Mask />', () => {
     })
     subject.click()
     expect(onClick).to.have.been.called()
+  })
+
+  it('should apply fullscreen class when prop is true', () => {
+    const subject = testbed.render({
+      fullscreen: true
+    })
+
+    expect(subject.hasClass(styles['fullscreen'])).to.be.true()
   })
 })

@@ -186,7 +186,11 @@ export default class Modal extends Component {
     /**
      * Callback fired after the <Modal /> finishes transitioning out
      */
-    onExited: PropTypes.func
+    onExited: PropTypes.func,
+    /**
+     * Constrain the Modal to the document window or its closest positioned parent
+     */
+    constrain: PropTypes.oneOf(['window', 'parent'])
   }
 
   static defaultProps = {
@@ -209,7 +213,8 @@ export default class Modal extends Component {
     shouldCloseOnDocumentClick: true,
     shouldReturnFocus: true,
     defaultFocusElement: null,
-    children: null
+    children: null,
+    constrain: 'window'
   }
 
   constructor (props) {
@@ -239,6 +244,14 @@ export default class Modal extends Component {
   componentWillUnmount () {
     this._isMounted = false
     this._timeouts.forEach(timeout => clearTimeout(timeout))
+  }
+
+  get defaultFocusElement () {
+    return this.props.defaultFocusElement || (() => this._closeButton)
+  }
+
+  get ie11 () {
+    return Browser.msie && Browser.version > 10
   }
 
   handlePortalOpen = (DOMNode) => {
@@ -279,46 +292,26 @@ export default class Modal extends Component {
       : null
   }
 
-  get defaultFocusElement () {
-    return this.props.defaultFocusElement || (() => this._closeButton)
-  }
-
-  render () {
+  renderModal () {
     const {
-      label,
-      closeButtonLabel,
-      children,
-      size,
-      open,
-      onOpen,
-      onClose,
       onDismiss,
-      contentRef,
-      closeButtonRef,
-      mountNode,
-      insertAt,
-      liveRegion,
-      transition,
-      onEnter,
-      onEntering,
-      onEntered,
-      onExit,
-      onExiting,
-      onExited,
-      defaultFocusElement,
-      shouldReturnFocus,
-      shouldCloseOnDocumentClick,
+      label,
       shouldCloseOnOverlayClick, // eslint-disable-line react/prop-types
+      shouldCloseOnDocumentClick,
+      shouldReturnFocus,
+      liveRegion,
+      size,
+      contentRef,
+      children,
+      constrain,
       ...props
     } = this.props
-
-    const ie11 = Browser.msie && Browser.version > 10
 
     const dialog = (
       <Dialog
         {...omitProps(props, Modal.propTypes)}
         onDismiss={onDismiss}
-        label={this.props.label}
+        label={label}
         defaultFocusElement={this.defaultFocusElement}
         shouldCloseOnDocumentClick={
           (typeof shouldCloseOnOverlayClick === 'undefined')
@@ -331,9 +324,9 @@ export default class Modal extends Component {
         liveRegion={liveRegion}
         open={this.state.open}
         className={classnames({
-          [styles.content]: true,
+          [styles.root]: true,
           [styles[size]]: true,
-          [styles.ie11]: ie11
+          [styles.ie11]: this.ie11
         })}
         ref={el => {
           this._content = el
@@ -346,6 +339,42 @@ export default class Modal extends Component {
         {children}
       </Dialog>
     )
+
+    const fullscreenLayoutClass = classnames({
+      [styles.fullscreenLayout]: true,
+      [styles[`fullscreenLayout--${constrain}`]]: true
+    })
+
+    if (size === 'fullscreen') {
+      return <span className={fullscreenLayoutClass}>{dialog}</span>
+    } else {
+      return (
+        <Mask
+          placement={this.ie11 ? 'top' : 'center'}
+          fullscreen={constrain === 'window'}
+        >
+          {dialog}
+        </Mask>
+      )
+    }
+  }
+
+  render () {
+    const {
+      open,
+      onOpen,
+      onClose,
+      mountNode,
+      insertAt,
+      transition,
+      onEnter,
+      onEntering,
+      onEntered,
+      onExit,
+      onExiting,
+      onExited,
+      constrain
+    } = this.props
 
     return (
       <Portal
@@ -367,16 +396,12 @@ export default class Modal extends Component {
           onExiting={onExiting}
           onExited={createChainedFunction(this.handleTransitionExited, onExited)}
         >
-          { size === 'fullscreen' ? (
-              <span className={styles.layout}>{dialog}</span>
-            ) : (
-              <Mask
-                placement={ie11 ? 'top' : 'center'}
-                fullscreen
-              >
-                { dialog }
-              </Mask>
-            )
+          {
+            (constrain === 'parent') ?
+              <span className={styles.constrainContext}>
+                {this.renderModal()}
+              </span>
+              : this.renderModal()
           }
         </Transition>
       </Portal>

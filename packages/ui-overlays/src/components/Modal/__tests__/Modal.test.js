@@ -27,6 +27,7 @@ import Button from '@instructure/ui-buttons/lib/components/Button'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
+import styles from '../styles.css'
 
 describe('<Modal />', () => {
   const testbed = new Testbed(
@@ -70,6 +71,26 @@ describe('<Modal />', () => {
     const portal = subject.find(Portal).unwrap()
 
     expect(portal.node.parentNode).to.equal(document.body)
+  })
+
+  it('should render its own layout wrapper if fullscreen', () => {
+    const subject = testbed.render({
+      open: true,
+      size: 'fullscreen'
+    })
+
+    const fullscreenLayout = subject.find(Portal).unwrap().node.querySelector(`.${styles['fullscreenLayout']}`)
+    expect(fullscreenLayout).to.exist()
+  })
+
+  it('should render its own positioning context if constrained to parent', () => {
+    const subject = testbed.render({
+      open: true,
+      constrain: 'parent'
+    })
+
+    const constrain = subject.find(Portal).unwrap().node.querySelector(`.${styles['constrainContext']}`)
+    expect(constrain).to.exist()
   })
 
   it('should apply the a11y attributes', () => {

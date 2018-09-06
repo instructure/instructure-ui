@@ -98,8 +98,13 @@ example: true
  render(<Example />)
 ```
 
-A Modal may contain components which "break out" of their container using absolute position elements,
-such as an Autocomplete and it's options list.
+### Constraining Modal to a parent element
+
+By default, Modals are positioned relative to the document body. Setting the `constrain`
+property to `parent` will constrain the Modal within the element it is mounted from
+(specified via the `mountNode` property). _Note: in these cases, the `mountNode`
+element should have an explicit `height` set: Because Modal is absolutely positioned,
+it has no height of its own._
 
 ```js
 ---
@@ -145,16 +150,18 @@ const fpo = lorem.paragraphs(1)
          <Modal
            open={this.state.open}
            onDismiss={() => { this.setState({ open: false }) }}
-           size="medium"
+           size="fullscreen"
            label="Modal Dialog: Hello World"
            shouldCloseOnDocumentClick
+           mountNode={() => document.getElementById('constrainExample')}
+           constrain="parent"
          >
            <ModalHeader>
              {this.renderCloseButton()}
              <Heading>This Modal contains an Autocomplete</Heading>
            </ModalHeader>
            <ModalBody>
-             <Text lineHeight="double">{fpo}</Text>
+             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
              <ModalAutoCompleteExample
               label="Choose a state" defaultOption="12"
               onChange={(e, o) => console.log(o.label)} />
@@ -164,6 +171,7 @@ const fpo = lorem.paragraphs(1)
              <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
            </ModalFooter>
          </Modal>
+         <View margin="medium auto none" display="block" width="25rem" height="25rem" borderWidth="large" id="constrainExample"></View>
        </div>
      )
    }
