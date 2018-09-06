@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-focusable",
-  "version": "5.25.0",
+  "version": "5.26.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

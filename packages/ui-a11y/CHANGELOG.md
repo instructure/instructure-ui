@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.26.0"></a>
+# [5.26.0](https://github.com/instructure/instructure-ui/compare/v5.25.0...v5.26.0) (2018-09-06)
+
+
+### Bug Fixes
+
+* **ui-a11y:** evaluate functional liveRegion prop in ScreenReaderFocusRegion ([3425bf7](https://github.com/instructure/instructure-ui/commit/3425bf7))
+* **ui-a11y:** remove aria-hidden before node is removed ([112f9ba](https://github.com/instructure/instructure-ui/commit/112f9ba))
+
+
+
+
+
 <a name="5.25.0"></a>
 # [5.25.0](https://github.com/instructure/instructure-ui/compare/v5.24.0...v5.25.0) (2018-08-24)
 

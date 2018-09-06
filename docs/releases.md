@@ -8,10 +8,6 @@ category: Getting Started
 
 ### Stable (Major, Minor, Patch) Release Process
 
-> __Before beginning you will need:__
-> - Permissions to publish to the instructure org on npm.
-> - Set up a `.env` file with your Gerrit and npm account information (see `.env.example`).
-
 __To bump the package versions in preparation for a stable release:__
 
 1. Run `git checkout -B your_local_release_branch --track origin/master`.
@@ -23,10 +19,16 @@ __To bump the package versions in preparation for a stable release:__
 1. Verify that the release was published to npm by running `yarn info [package]@[version]`.
 1. Verify that the [documentation was updated](https://instructure.design/).
 
+__To manually run the release:__
 
-  Note: if you need to manually run the release:
-  1. Run `git checkout -B your_local_release_branch --track origin/master`.
-  1. Run `yarn release` to publish the packages and git tag the release.
+You shouldn't need to do this, as new releases are published automatically by the post-merge CI build. If you're sure, read on:
+
+> __Before beginning you will need:__
+> - Permissions to publish to the instructure org on npm.
+> - Set up a `.env` file with your Gerrit and npm account information (see `.env.example`).
+
+1. Run `git checkout -B your_local_release_branch --track origin/master`.
+1. Run `yarn release` to publish the packages and git tag the release.
 
 
 ### Pre-releases

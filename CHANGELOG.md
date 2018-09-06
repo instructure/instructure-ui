@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.26.0"></a>
+# [5.26.0](https://github.com/instructure/instructure-ui/compare/v5.25.0...v5.26.0) (2018-09-06)
+
+
+### Bug Fixes
+
+* **ui-a11y:** evaluate functional liveRegion prop in ScreenReaderFocusRegion ([3425bf7](https://github.com/instructure/instructure-ui/commit/3425bf7))
+* **ui-a11y:** remove aria-hidden before node is removed ([112f9ba](https://github.com/instructure/instructure-ui/commit/112f9ba))
+* **ui-forms:** invalid aria attributes when closed ([410f1a9](https://github.com/instructure/instructure-ui/commit/410f1a9))
+* **ui-forms:** Update input when selected options updated ([128e3dd](https://github.com/instructure/instructure-ui/commit/128e3dd))
+* **ui-layout:** improve vertical margin warning on View ([9c4fb19](https://github.com/instructure/instructure-ui/commit/9c4fb19))
+* **ui-menu,ui-overlays:** Remove aria-expanded from Menu ([2ea110d](https://github.com/instructure/instructure-ui/commit/2ea110d))
+* **ui-presets:** don't write incorrect npmrc files ([0528899](https://github.com/instructure/instructure-ui/commit/0528899))
+* **ui-presets:** pass args to karma ([5cbeb21](https://github.com/instructure/instructure-ui/commit/5cbeb21))
+
+
+### Features
+
+* **ui-axe-check:** Add axe-core wrapper utility ([3264318](https://github.com/instructure/instructure-ui/commit/3264318))
+* **ui-docs-client:** add figure/guideline for do/don't section ([b253910](https://github.com/instructure/instructure-ui/commit/b253910))
+* **ui-menu,ui-overlays:** add constrain prop to tooltip and menu ([98797aa](https://github.com/instructure/instructure-ui/commit/98797aa))
+* **ui-presets:** Add --no-headless flag for karma ([be4b0c0](https://github.com/instructure/instructure-ui/commit/be4b0c0))
+
+
+
+
+
 <a name="5.25.0"></a>
 # [5.25.0](https://github.com/instructure/instructure-ui/compare/v5.24.0...v5.25.0) (2018-08-24)
 
