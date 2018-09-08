@@ -455,7 +455,6 @@ class Example extends React.Component {
         loadingText={this.state.loading ? 'Loading options' : null}
         emptyOption={this.state.emptyOption}
         onInputChange={this.handleInputChange}
-        onChange={this.props.multiple ? undefined : this.cleanResults}
         onClose={this.handleClose}
         filter={this.handleFilter}
         {...this.props}

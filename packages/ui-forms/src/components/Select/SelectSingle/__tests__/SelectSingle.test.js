@@ -43,6 +43,16 @@ describe('<SelectSingle />', () => {
       (option) => option.label.toLowerCase().startsWith(filterText.toLowerCase())
     )
   }
+  const changeInput = (subject, value) => {
+    const instance = subject.instance()
+
+    instance._input.value = value
+    subject.find('input').simulate('change', {
+      target: {
+        value,
+      },
+    })
+  }
 
   const testbed = new Testbed(
     <SelectSingle
@@ -207,7 +217,7 @@ describe('<SelectSingle />', () => {
     expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(newSelection.label)
-    expect(subject.instance().state.filterText).to.equal('')
+    expect(subject.instance().state.filterText).to.equal(null)
   })
 
   it('recalculates selectedOption when it changes', (done) => {
@@ -251,7 +261,7 @@ describe('<SelectSingle />', () => {
       testbed.defer(() => { // wait for re-render
         testbed.tick()
         expect(subject.instance()._input.value).to.equal('')
-        expect(subject.instance().state.selectedOption).to.equal(null)
+        expect(subject.instance().state.selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
         done()
       })
     })
@@ -298,6 +308,84 @@ describe('<SelectSingle />', () => {
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
         ],
       })
+      expect(subject.find('input').node.value).to.equal('Foo')
+      done()
+    })
+
+    it(`should not update input value if filter has been set`, (done) => {
+      const subject = testbed.render({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+        ],
+        selectedOption: '4',
+        editable: true,
+      })
+
+      changeInput(subject, 'foo')
+      expect(subject.state('filterText')).to.equal('foo')
+
+      subject.setProps({
+        options: [
+          ...options,
+          { label: 'Arub', children: 'Arub', value: '4', id: '4' },
+        ],
+      })
+      expect(subject.find('input').node.value).to.equal('foo')
+
+      changeInput(subject, '')
+      expect(subject.state('filterText')).to.equal('')
+
+      subject.setProps({
+        options: [],
+      })
+      expect(subject.find('input').node.value).to.equal('')
+      done()
+    })
+
+    it(`should render input value even if selected option cannot be found in options`, (done) => {
+      const subject = testbed.render({
+        selectedOption: { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+      })
+
+      expect(subject.find('input').node.value).to.equal('Foo')
+
+      subject.setProps({
+        selectedOption: { label: 'Bar', children: 'Bar', value: '4', id: '4' },
+      })
+      expect(subject.find('input').node.value).to.equal('Bar')
+      done()
+    })
+
+    it(`should be able to select option when options are loaded asynchronously`, (done) => {
+      const subject = testbed.render({
+        defaultSelectedOption: '3',
+        editable: true,
+      })
+
+      // type to search
+      changeInput(subject, 'f')
+
+      // options reloaded
+      subject.setProps({
+        options: [
+          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+        ],
+      })
+
+      expect(subject.find('input').node.value).to.equal('f')
+
+      // select the first option
+      subject.find(SelectField)
+        .getDOMNode()
+        .querySelector('li[role="option"]')
+        .click()
+
+      // options reloaded
+      subject.setProps({
+        options: [],
+      })
+
       expect(subject.find('input').node.value).to.equal('Foo')
       done()
     })

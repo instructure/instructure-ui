@@ -152,15 +152,14 @@ class SelectMultiple extends Component {
   constructor (props) {
     super(props)
 
+    const selectedOption = this.getSelectedOptionFromProps(props)
+    const filteredOptions = this.getFilteredOptions(props, '', selectedOption)
+
     this.state = {
       filterText: '',
-      selectedOption: this.getSelectedOptionFromProps(
-        this.props.selectedOption || this.props.defaultSelectedOption,
-        this.props.options
-      )
+      selectedOption,
+      filteredOptions,
     }
-
-    this.state.filteredOptions = this.getFilteredOptions(this.props, '')
   }
 
   _input = null
@@ -188,90 +187,70 @@ class SelectMultiple extends Component {
     }
   }
 
-  getSelectedOptionFromProps (selectedOption = [], options = []) {
-    return selectedOption.map((option) => {
-      if (typeof option === 'string') {
-        const foundOption = options.find((o) => getOptionId(o) === option)
-        warning(
-          foundOption,
-          `[Select] The option (${option}) doesn't correspond to an option's id or (in case of no id) value`
-        )
-
-        return foundOption
-      }
-
-      return option
-    }).filter(option => option)
+  getOptionMap (options) {
+    return options.reduce((map, option) => {
+      map[getOptionId(option)] = option // eslint-disable-line no-param-reassign
+      return map
+    }, {})
   }
 
-  getFilteredOptions (
-    { filter, options },
-    filterText,
-    selectedOption = this.state.selectedOption
-  ) {
+  findSelectedOptions (options = [], selected = []) {
+    const optionMap = this.getOptionMap(options)
+
+    return selected.map((option) => {
+      const id = getOptionId(option)
+      const foundOption = optionMap[id]
+
+      warning(foundOption, `[Select] The option (${option.label || id}) doesn't correspond to an option`)
+      if (typeof option === 'object') {
+        return {
+          ...option,
+          ...foundOption,
+        }
+      }
+      return foundOption || option
+    })
+  }
+
+  getSelectedOptionFromProps (props, selected) {
+    return selected
+      ? this.findSelectedOptions(props.options, selected)
+      : this.findSelectedOptions(props.options, props.selectedOption || props.defaultSelectedOption)
+  }
+
+  getFilteredOptions ({ filter, options }, filterText, selectedOption = []) {
     const filteredOptions = filter(options, filterText)
-    const selectedIds = selectedOption.map((o) => getOptionId(o))
-    return filteredOptions.filter((o) => !selectedIds.includes(getOptionId(o)))
+    const optionMap = this.getOptionMap(selectedOption)
+
+    return filteredOptions.filter((o) => !optionMap[getOptionId(o)])
   }
 
   componentWillReceiveProps (nextProps) {
-    const updateOptions = this.props.options !== nextProps.options
-    const updateSelectedOption = (
-      this.props.selectedOption !== nextProps.selectedOption &&
-      !deepEqual(this.props.selectedOption, nextProps.selectedOption)
-    )
+    const optionsChanged = !deepEqual(this.props.options, nextProps.options)
+    const selectedChanged = !deepEqual(this.props.selectedOption, nextProps.selectedOption)
+      && !this.props.disabled
+      && !this.props.readOnly
 
-    if ((updateSelectedOption || updateOptions) && !this.props.disabled && !this.props.readOnly) {
+    if (optionsChanged || selectedChanged) {
       this.setState((prevState) => {
-        const ids = updateSelectedOption
-          ? nextProps.selectedOption
-          : prevState.selectedOption.map(getOptionId)
-        const selectedOption = this.getSelectedOptionFromProps(ids, nextProps.options)
+        const selected = selectedChanged ? null : prevState.selectedOption
+        const selectedOption = this.getSelectedOptionFromProps(nextProps, selected)
+        const filteredOptions = this.getFilteredOptions(nextProps, prevState.filterText, selectedOption)
 
+        if (optionsChanged) {
+          this.props.onOptionsChange(filteredOptions)
+        }
         return {
-          filteredOptions: this.getFilteredOptions(nextProps, prevState.filterText, selectedOption),
-          selectedOption
+          selectedOption,
+          filteredOptions,
         }
       })
     }
   }
 
-  componentDidUpdate (prevProps, prevState) {
-    // When we provide a default value or values (either via the selectedOption
-    // or defaultSelectedOption prop) and we update the options, if the default
-    // value or values match the updated options, we should update the input values
-    if (this.props.options !== prevProps.options) {
-      // only search the updated options
-      const amendedOptions = this.props.options.filter(
-        option => !prevProps.options.find(
-          prevOption => deepEqual(prevOption, option)
-        )
-      )
-
-      const selectedOption = this.getSelectedOptionFromProps(
-        this.props.selectedOption || this.props.defaultSelectedOption,
-        amendedOptions
-      )
-
-      if (selectedOption && selectedOption.length > 0) {
-        this.setState((prevState, props) => {
-          const matches = this.matchSelectedOptions(prevState, selectedOption)
-
-          return this.amendMatchesToState(prevState, props, matches, (selectedOption) => {
-            props.onChange(null, selectedOption)
-          })
-        })
-      }
-    }
-
-    if (!deepEqual(this.state.filteredOptions, prevState.filteredOptions)) {
-      this.props.onOptionsChange(this.state.filteredOptions)
-    }
-  }
-
   matchSelectedOptions = (state, selectedOption) => {
     if (selectedOption) {
-      // find options with values that match curent selected values
+      // find options with values that match current selected values
       return state.filteredOptions.filter(
         option => selectedOption.find(
           selected => selected.value === option.value
@@ -314,11 +293,12 @@ class SelectMultiple extends Component {
 
   handleInputChange = (event, value) => {
     this.props.onInputChange(event, value)
+
     const filterText = value.toLowerCase()
     if (this.state.filterText !== filterText) {
       this.setState((prevState, props) => ({
         filterText,
-        filteredOptions: this.getFilteredOptions(props, filterText)
+        filteredOptions: this.getFilteredOptions(props, filterText, prevState.selectedOption)
       }))
     }
   }
@@ -387,7 +367,7 @@ class SelectMultiple extends Component {
   }
 
   renderTags () {
-    return this.state.selectedOption.filter(option => option).map((tag, index) => {
+    return this.state.selectedOption.filter(option => option && option.label).map((tag, index) => {
       const isDismissible = tag.dismissible !== false
       let dismissibleProps = {}
       if (isDismissible) {
@@ -417,7 +397,7 @@ class SelectMultiple extends Component {
   }
 
   renderInputs () {
-    return this.state.selectedOption.filter(option => option).map((tag, index) => {
+    return this.state.selectedOption.filter(option => option && option.label).map((tag, index) => {
       return (
         <input
           type="hidden"

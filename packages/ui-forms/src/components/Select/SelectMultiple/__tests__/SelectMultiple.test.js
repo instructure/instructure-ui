@@ -370,7 +370,7 @@ describe('<SelectMultiple />', () => {
     testDefaultValue('defaultSelectedOption')
     testDefaultValue('selectedOption')
 
-    it('updates the selected options when selected options update', (done) => {
+    it('updates the input values if selected options update', (done) => {
       const subject = testbed.render({
         options: [
           ...options,
@@ -394,6 +394,74 @@ describe('<SelectMultiple />', () => {
       expect(subject.find('button').length).to.equal(2)
       expect(subject.find('button[title="Foo"]')).to.exist()
       expect(subject.find('button[title="Bar"]')).to.exist()
+      done()
+    })
+
+    it(`should render input values even if selected options cannot be found in options`, (done) => {
+      const subject = testbed.render({
+        selectedOption: [
+          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+          { label: 'Bar', children: 'Bar', value: '5', id: '5' },
+          '6'
+        ],
+      })
+
+      expect(subject.find('button').length).to.equal(2)
+      expect(subject.find('button[title="Foo"]')).to.exist()
+      expect(subject.find('button[title="Bar"]')).to.exist()
+
+      subject.setProps({
+        selectedOption: [
+          '3',
+          { label: 'Baz', children: 'Baz', value: '5', id: '5' },
+        ],
+      })
+      expect(subject.find('button').length).to.equal(2)
+      expect(subject.find('button[title="Bahama"]')).to.exist()
+      expect(subject.find('button[title="Baz"]')).to.exist()
+      done()
+    })
+
+    it(`should be able to select option when options are loaded asynchronously`, (done) => {
+      const subject = testbed.render({
+        defaultSelectedOption: ['1', '2'],
+        editable: true,
+      })
+
+      // type to search
+      subject.instance()._input.value = 'f'
+      subject.find('input[type="text"]').simulate('change', {
+        target: {
+          value: 'f',
+        },
+      })
+
+      expect(subject.find('button[title="Jamaica"]')).to.exist()
+      expect(subject.find('button[title="Bermuda"]')).to.exist()
+      expect(subject.instance()._input.value).to.equal('f')
+
+      // options reloaded
+      subject.setProps({
+        options: [
+          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+        ],
+      })
+
+      // select the first option
+      subject.find(SelectField)
+        .getDOMNode()
+        .querySelector('li[role="option"]')
+        .click()
+
+      // options reloaded
+      subject.setProps({
+        options: [],
+      })
+
+      expect(subject.find('button').length).to.equal(3)
+      expect(subject.find('button[title="Jamaica"]')).to.exist()
+      expect(subject.find('button[title="Bermuda"]')).to.exist()
+      expect(subject.find('button[title="Foo"]')).to.exist()
       done()
     })
 

@@ -127,11 +127,9 @@ class SelectSingle extends Component {
     super(props)
 
     this.state = {
-      filterText: '',
+      filterText: null,
       filteredOptions: props.options,
-      selectedOption: this.getSelectedOptionFromProps(
-        this.props.selectedOption || this.props.defaultSelectedOption
-      )
+      selectedOption: this.getSelectedOptionFromProps(props)
     }
   }
 
@@ -150,74 +148,51 @@ class SelectSingle extends Component {
     this._input && this._input.focus()
   }
 
-  getSelectedOptionFromProps (selectedOption, options = this.props.options) {
-    if (typeof selectedOption === 'string') {
-      const foundOption = options.find((o) => getOptionId(o) === selectedOption)
+  findSelectedOption (options, selected) {
+    const id = getOptionId(selected)
+    const foundOption = options.find((option) => getOptionId(option) === id)
 
-      warning(foundOption, '[Select] The selectedOption is a string but doesn\'t correspond to an option')
+    warning(foundOption, '[Select] The selected option doesn\'t correspond to an option')
+    return foundOption || selected
+  }
 
-      return foundOption
-    }
-
-    return selectedOption
+  getSelectedOptionFromProps (props, selected) {
+    return selected
+      ? this.findSelectedOption(props.options, selected)
+      : this.findSelectedOption(props.options, props.selectedOption || props.defaultSelectedOption)
   }
 
   componentDidMount () {
     if (this.state.selectedOption) {
-      this._input.value = this.state.selectedOption.label
+      this._input.value = this.state.selectedOption.label || ''
     }
   }
 
   componentWillReceiveProps (nextProps) {
-    const optionsChanged = this.props.options !== nextProps.options
+    const optionsChanged = !deepEqual(this.props.options, nextProps.options)
+    const selectedChanged = !deepEqual(this.props.selectedOption, nextProps.selectedOption)
+      && !this.props.disabled
+      && !this.props.readOnly
 
-    if (optionsChanged) {
-      this.setState({
-        filteredOptions: nextProps.filter(nextProps.options, this.state.filterText)
+    if (optionsChanged || selectedChanged) {
+      this.setState((prevState) => {
+        const selected = selectedChanged ? null : prevState.selectedOption
+        const selectedOption = this.getSelectedOptionFromProps(nextProps, selected)
+        const filteredOptions = nextProps.filter(nextProps.options, prevState.filterText || '')
+        const value = (selectedOption && selectedOption.label) || ''
+
+        if (prevState.filterText === null && this._input.value !== value) {
+          this._input.value = value
+          this.props.onInputChange(null, this._input.value)
+        }
+        if (optionsChanged) {
+          this.props.onOptionsChange(filteredOptions)
+        }
+        return {
+          selectedOption,
+          filteredOptions,
+        }
       })
-    }
-
-    // When the component is controlled and selectedOption changes, update the input and state
-    if (!this.props.disabled && !this.props.readOnly) {
-      const oldId = getOptionId(this.props.selectedOption)
-      const newId = getOptionId(nextProps.selectedOption)
-      const selectedChanged = newId !== oldId
-
-      if (selectedChanged || optionsChanged) {
-        const id = selectedChanged ? newId : getOptionId(this.state.selectedOption)
-        const selectedOption = this.getSelectedOptionFromProps(id, nextProps.options)
-
-        this.setState({ selectedOption })
-        this._input.value = selectedOption ? selectedOption.label : ''
-        this.props.onInputChange(null, this._input.value)
-      }
-    }
-  }
-
-  componentDidUpdate (prevProps, prevState) {
-    // When we provide a default value (either via the selectedOption or
-    // defaultSelectedOption prop) and we update the options, if the default
-    // value matches the updated options, we should update the input value
-    if (this.props.options !== prevProps.options) {
-      const selectedOption = this.getSelectedOptionFromProps(
-        this.props.selectedOption || this.props.defaultSelectedOption
-      )
-
-      if (!this.state.selectedOption && selectedOption) {
-        this.setState((prevState, props) => {
-          const match = this.matchSelectedOption(prevState, selectedOption)
-          if (match) {
-            this._input.value = match.label
-          } else {
-            this._input.value = ''
-          }
-          return { selectedOption: match || selectedOption }
-        })
-      }
-    }
-
-    if (!deepEqual(this.state.filteredOptions, prevState.filteredOptions)) {
-      this.props.onOptionsChange(this.state.filteredOptions)
     }
   }
 
@@ -226,7 +201,7 @@ class SelectSingle extends Component {
 
     let match
     if (selectedOption) {
-      // find option with a value that matches curent selected value
+      // find option with a value that matches current selected value
       match = state.filteredOptions.find(
         option => option.value === selectedOption.value
       )
@@ -255,7 +230,7 @@ class SelectSingle extends Component {
       if (props.allowEmpty && this._input.value === '') {
         props.onChange(event, null)
         return {
-          filterText: '',
+          filterText: null,
           filteredOptions: props.options,
           selectedOption: null
         }
@@ -273,7 +248,7 @@ class SelectSingle extends Component {
     }
 
     return {
-      filterText: '',
+      filterText: null,
       filteredOptions: props.options,
       selectedOption: match || selectedOption
     }
@@ -286,7 +261,7 @@ class SelectSingle extends Component {
     if (this.state.filterText !== filterText) {
       this.setState((prevState, props) => ({
         filterText,
-        filteredOptions: props.filter(this.props.options, filterText)
+        filteredOptions: props.filter(this.props.options, filterText || '')
       }))
     }
   }
@@ -298,7 +273,7 @@ class SelectSingle extends Component {
     }
 
     this.setState({
-      filterText: '',
+      filterText: null,
       filteredOptions: this.props.options,
       selectedOption
     }, () => this.focus())
