@@ -255,7 +255,7 @@ class Button extends Component {
         onKeyDown={this.handleKeyDown}
         href={href}
         type={href ? null : type}
-        role={onClick && as ? 'button' : null}
+        role={onClick && as !== 'button' ? 'button' : null}
         tabIndex={onClick && as ? '0' : null}
         elementRef={c => {
           this._button = c

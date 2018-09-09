@@ -306,6 +306,13 @@ describe('<Button/>', () => {
       subject.should.be.accessible(done)
     })
 
+    it('should meet standards when onClick is given', (done) => {
+      const onClick = testbed.stub()
+      const subject = testbed.render({ onClick })
+
+      subject.should.be.accessible(done)
+    })
+
     describe('when disabled', () => {
       it('sets the aria-disabled attribute', () => {
         const subject = testbed.render({
