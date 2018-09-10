@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.27.0"></a>
+# [5.27.0](https://github.com/instructure/instructure-ui/compare/v5.26.0...v5.27.0) (2018-09-10)
+
+
+### Bug Fixes
+
+* **ui-buttons:** no role="button" for buttons ([be78aac](https://github.com/instructure/instructure-ui/commit/be78aac))
+
+
+### Features
+
+* **docs-examples,generate-examples:** autogenerate component examples ([b50fae5](https://github.com/instructure/instructure-ui/commit/b50fae5))
+
+
+
+
+
 <a name="5.26.0"></a>
 # [5.26.0](https://github.com/instructure/instructure-ui/compare/v5.25.0...v5.26.0) (2018-09-06)
 
