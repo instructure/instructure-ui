@@ -52,5 +52,15 @@ example: true
       </TextInput>
     </Tooltip>
   </p>
+  <p>
+    <Tooltip
+      tip="Hello. I'm a tool tip"
+      on={['click', 'hover', 'focus']}
+    >
+      <Button variant="icon" icon={IconInfo.Line}>
+        <ScreenReaderContent>toggle tooltip</ScreenReaderContent>
+      </Button>
+    </Tooltip>
+  </p>
 </div>
 ```
