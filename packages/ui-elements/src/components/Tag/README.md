@@ -2,32 +2,13 @@
 describes: Tag
 ---
 
-### Use `<Tag />` to represent a category or group in a form
-
-Tag can be static (informational only) or clickable (when the `onClick` prop is
-supplied).
+Use `<Tag />` to represent a category or group in a form.
 
 ```js
 ---
 example: true
 ---
-<div>
-  <Tag text="Static" margin="0 xx-small 0 0" />
-  <Tag
-    text="Clickable"
-    margin="0 xx-small 0 0"
-    onClick={function () {
-      alert("This Tag was clicked")
-    }}
-  />
-  <Tag
-    disabled
-    text="Disabled clickable"
-    onClick={function () {
-      alert("This Tag was clicked")
-    }}
-  />
-</div>
+<Tag text="Static" margin="0 xx-small 0 0" />
 ```
 
 ### Dismissible
@@ -35,8 +16,6 @@ example: true
 When the `dismissible` prop is added to a clickable Tag, the button
 renders an X/close icon (the Tag should be dismissed via the `onClick`
 prop).
-
-#### Be sure to add accessible screen reader content to clarify that the tag is dismissible.
 
 ```js
 ---
@@ -55,21 +34,8 @@ example: true
   }}
 />
 ```
+>Be sure to add accessible screen reader content to clarify that the tag is dismissible.
 
-### Sizes
-
-`medium` is the default Tag size.
-
-```js
----
-example: true
----
-<div>
-  <Tag text="Small" size="small" margin="0 xx-small 0 0" />
-  <Tag text="Medium" margin="0 xx-small 0 0" />
-  <Tag text="Large" size="large" margin="0 xx-small 0 0" />
-</div>
-```
 
 ### Disabled
 
@@ -88,6 +54,21 @@ example: true
     alert("This Tag was dismissed. This shouldn't happen")
   }}
 />
+```
+
+### Sizes
+
+`medium` is the default Tag size.
+
+```js
+---
+example: true
+---
+<div>
+  <Tag text="Small" size="small" margin="0 xx-small 0 0" />
+  <Tag text="Medium" margin="0 xx-small 0 0" />
+  <Tag text="Large" size="large" margin="0 xx-small 0 0" />
+</div>
 ```
 
 ### Max-width
