@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import escapeHtml from 'escape-html'
+
 import cloneArray from '@instructure/ui-utils/lib/cloneArray'
 import warning from '@instructure/ui-utils/lib/warning'
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
@@ -172,6 +174,7 @@ export default class Truncator {
       const key = keys[i]
       const mapItem = this._nodeMap[key]
       const text = data[key].join('')
+      const safeText = escapeHtml(text)
 
       if (mapItem.node.nodeType === 1) {
         const name = mapItem.node.nodeName
@@ -181,11 +184,12 @@ export default class Truncator {
           const att = attr[j]
           attributes += ` ${att.nodeName}="${att.nodeValue}"`
         }
-        html += `<${name}${attributes}>${text}</${name}>`
+        html += `<${name}${attributes}>${safeText}</${name}>`
       } else if (mapItem.node.nodeType === 3) {
-        html += text
+        html += safeText
       }
     }
+
     return html
   }
 

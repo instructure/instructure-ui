@@ -179,4 +179,24 @@ describe('Truncator', () => {
     expect(text.length).to.not.equal(1)
     expect(result.constraints.height).to.equal(22.4)
   })
+
+  it('should escape node content', () => {
+    const log = testbed.spy(console, 'log')
+    const content = '"><img src=a onerror=console.log("hello world") />'
+    testbed.render({
+      style: {width: '1000px', height: '200px'},
+      children: (
+        <span id="truncate-stage">
+          {content}
+        </span>
+      )
+    })
+
+    const stage = document.getElementById('truncate-stage')
+
+    truncate(stage)
+
+    expect(stage.textContent).to.equal(content)
+    expect(log).to.not.have.been.calledWith('hello world')
+  })
 })
