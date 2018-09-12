@@ -205,10 +205,11 @@ class TimeInput extends Component {
     if (!value) {
       return
     }
+    const date = DateTime.parse(value, locale, timezone)
 
     return {
-      value: value,
-      label: DateTime.parse(value, locale, timezone).format(format)
+      value: date.toISOString(),
+      label: date.format(format)
     }
   }
 

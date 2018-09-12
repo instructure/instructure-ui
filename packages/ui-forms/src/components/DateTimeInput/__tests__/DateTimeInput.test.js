@@ -24,7 +24,7 @@
 
 import React from 'react'
 import DateTimeInput from '../index'
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 const locale = 'en-US'
 const timezone = "US/Eastern"
@@ -41,6 +41,10 @@ function getMessageText (subject) {
   // the DateInput object has a FormFieldMessage in it too,
   // the 2nd one found is ours
   return subject.find('FormFieldMessage').nodes[1].props.children
+}
+
+function getMessages (subject) {
+  return subject.find('FormFieldGroup').props().messages
 }
 
 describe('<DateTimeInput />', () => {
@@ -167,7 +171,7 @@ describe('<DateTimeInput />', () => {
     const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = testbed.render({ defaultValue: defaultValue.format() })
 
-    const text = subject.find('FormFieldMessage').nodes[1].props.children
+    const text = getMessageText(subject)
     expect(text).to.equal('May 1, 2017 1:30 PM')
   })
 
@@ -202,55 +206,82 @@ describe('<DateTimeInput />', () => {
     const moment_dt = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = testbed.render({ value: moment_dt.toISOString(), onChange })
     expect(subject.instance().state).to.eql({
-      date: '2017-05-01',
-      time: '13:30:00.000-04:00',
-      result: '2017-05-01T13:30:00.000-04:00',
-      messages: [{text: "May 1, 2017 1:30 PM", type: "success"}]
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "May 1, 2017 1:30 PM", type: "success"}
     })
 
     subject.setProps({value: '2018-03-29T16:30Z'})
     expect(subject.instance().state).to.eql({
-      date: '2018-03-29',
-      time: '12:30:00.000-04:00',
-      result: '2018-03-29T12:30:00.000-04:00',
-      messages: [{text: "March 29, 2018 12:30 PM", type: "success"}]
+      iso: '2018-03-29T12:30:00.000-04:00',
+      message: {text: "March 29, 2018 12:30 PM", type: "success"}
     })
   })
+
+  it('should update state when locale changed', () => {
+    const onChange = testbed.stub()
+    const moment_dt = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const subject = testbed.render({ value: moment_dt.toISOString(), onChange })
+    expect(subject.instance().state).to.eql({
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "May 1, 2017 1:30 PM", type: "success"}
+    })
+
+    subject.setProps({
+      locale: 'fr',
+    })
+    expect(subject.instance().state).to.eql({
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "1 mai 2017 13:30", type: "success"}
+    })
+  })
+
+  it('should update state when timezone changed', () => {
+    const onChange = testbed.stub()
+    const moment_dt = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
+    const subject = testbed.render({ value: moment_dt.toISOString(), onChange })
+    expect(subject.instance().state).to.eql({
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "May 1, 2017 1:30 PM", type: "success"}
+    })
+
+    subject.setProps({
+      timezone: 'Europe/Paris',
+    })
+    expect(subject.instance().state).to.eql({
+      iso: '2017-05-01T19:30:00.000+02:00',
+      message: {text: "May 1, 2017 7:30 PM", type: "success"}
+    })
+  })
+
   it('should update state with error message when value is invalid', () => {
     const onChange = testbed.stub()
     const moment_dt = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = testbed.render({ value: moment_dt.toISOString(), onChange })
     expect(subject.instance().state).to.eql({
-      date: '2017-05-01',
-      time: '13:30:00.000-04:00',
-      result: '2017-05-01T13:30:00.000-04:00',
-      messages: [{text: "May 1, 2017 1:30 PM", type: "success"}]
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "May 1, 2017 1:30 PM", type: "success"}
     })
     setDateInputValue(subject, 'foobar')
     expect(subject.instance().state).to.eql({
-      date: undefined, // eslint-disable-line no-undefined
-      time: '13:30:00.000-04:00',
-      result: undefined, // eslint-disable-line no-undefined
-      messages: [{text: "whoops", type: "error"}]
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "whoops", type: "error"}
     })
   })
+
   it('should show supplied message', () => {
     const onChange = testbed.stub()
     const moment_dt = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = testbed.render({ defaultValue: moment_dt.toISOString(), onChange })
     expect(subject.instance().state).to.eql({
-      date: '2017-05-01',
-      time: '13:30:00.000-04:00',
-      result: '2017-05-01T13:30:00.000-04:00',
-      messages: [{text: "May 1, 2017 1:30 PM", type: "success"}]
+      iso: '2017-05-01T13:30:00.000-04:00',
+      message: {text: "May 1, 2017 1:30 PM", type: "success"}
     })
 
     subject.setProps({messages: [{text: 'hello world', type: 'success'}]})
-    expect(subject.instance().state).to.eql({
-      date: '2017-05-01',
-      time: '13:30:00.000-04:00',
-      result: '2017-05-01T13:30:00.000-04:00',
-      messages: [{text: "May 1, 2017 1:30 PM", type: "success"}, {text: 'hello world', type: 'success'}]
-    })
+
+    expect(getMessages(subject)).to.eql([
+      {text: "May 1, 2017 1:30 PM", type: "success"},
+      {text: 'hello world', type: 'success'},
+    ])
   })
 })

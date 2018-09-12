@@ -112,7 +112,7 @@ export default class DateInput extends Component {
     /**
       Called when the date value of the input has changed.
       The parameters are the triggering event, new date value in ISO 8601 format,
-      the raw user input, if the conversion from raw to a date was succesful, and
+      the raw user input, if the conversion from raw to a date was successful, and
       if the selected date is disabled.
     **/
     onDateChange: PropTypes.func,
@@ -202,7 +202,7 @@ export default class DateInput extends Component {
 
     warning(
       (!initialDateValue || parsedDate.isValid()),
-      `[DateInput] Unexpected date format received for dateValue prop: ${initialDateValue}`
+      `[DateInput] Unexpected date format received: ${initialDateValue}`
     )
 
     this.state = {
@@ -214,20 +214,28 @@ export default class DateInput extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    if (this.props.dateValue !== nextProps.dateValue) {
-      const parsedDate = this.parseDate(nextProps.dateValue)
+    const valueChanged = nextProps.dateValue !== this.props.dateValue
+      || nextProps.defaultDateValue !== this.props.defaultDateValue
+    const isUpdated = valueChanged
+      || nextProps.locale !== this.props.locale
+      || nextProps.timezone !== this.props.timezone
 
-      warning(
-        (!nextProps.dateValue || parsedDate.isValid()),
-        `[DateInput] Unexpected date format received for dateValue prop: ${nextProps.dateValue}`
-      )
+    if (isUpdated) {
+      this.setState((prevState) => {
+        const value = valueChanged
+          ? (nextProps.dateValue || nextProps.defaultDateValue || undefined) // eslint-disable-line no-undefined
+          : prevState.acceptedValue
+        const locale = nextProps.locale || this.locale
+        const timezone = nextProps.timezone || this.timezone
+        const parsedDate = this._parseDate(value, locale, timezone)
 
-      this.setState((state, props) => {
+        warning(!value || parsedDate.isValid(), `[DateInput] Unexpected date format received: ${value}`)
+
         return this.computeState(
-          nextProps.dateValue,
+          value,
           parsedDate,
           nextProps,
-          state
+          prevState,
         )
       })
     }
@@ -265,7 +273,7 @@ export default class DateInput extends Component {
       value = DateTime.now(this.locale, this.timezone)
     }
 
-    return value.format()
+    return value.toISOString(true)
   }
 
   get locale () {
@@ -425,7 +433,7 @@ export default class DateInput extends Component {
     if (parsedDate.isValid()) {
       return {
         isValidOrEmpty: true,
-        acceptedValue: parsedDate.format(),
+        acceptedValue: parsedDate.toISOString(true),
         textInputValue: parsedDate.format(props.format),
         hour: parsedDate.hour(),
         minute: parsedDate.minute(),

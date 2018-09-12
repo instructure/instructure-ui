@@ -78,6 +78,34 @@ describe('<DateInput />', () => {
     expect(getInputValue(subject)).to.equal('June 1, 2017')
   })
 
+  it('should update date when locale changed', () => {
+    const subject = testbed.render({
+      onDateChange: testbed.stub(),
+      dateValue: '2017-05-01',
+      locale: 'en-US'
+    })
+
+    expect(getInputValue(subject)).to.equal('May 1, 2017')
+
+    subject.setProps({locale: 'fr'})
+
+    expect(getInputValue(subject)).to.equal('1 mai 2017')
+  })
+
+  it('should update date when timezone changed', () => {
+    const subject = testbed.render({
+      onDateChange: testbed.stub(),
+      dateValue: '2017-05-01T02:00:00+08:00',
+      timezone: 'Asia/Shanghai'
+    })
+
+    expect(getInputValue(subject)).to.equal('May 1, 2017')
+
+    subject.setProps({timezone: 'America/Denver'})
+
+    expect(getInputValue(subject)).to.equal('April 30, 2017')
+  })
+
   it('should use the specified date format in TextInput', () => {
     const subject = testbed.render({ defaultDateValue: '2017-05-01', format: 'DD/YYYY/MM' })
     expect(getInputValue(subject)).to.equal('01/2017/05')
@@ -94,7 +122,7 @@ describe('<DateInput />', () => {
     subject.find('input').setValue('1/5/2017')
     subject.find('input').keyDown('enter')
 
-    expect(onDateChange.getCall(0).args[1]).to.equal('2017-05-01T00:00:00+02:00')
+    expect(onDateChange.getCall(0).args[1]).to.equal('2017-05-01T00:00:00.000+02:00')
   })
 
   it('should forward the current date, locale, timezone, disabledDays, and disabledDaysOfWeek to the DatePicker', () => {
@@ -117,7 +145,7 @@ describe('<DateInput />', () => {
     expect(datePicker.props).to.include({
       locale: 'fr',
       timezone: 'Europe/Paris',
-      selectedValue: '2017-05-01T00:00:00+02:00',
+      selectedValue: '2017-05-01T00:00:00.000+02:00',
       disabledDays
     })
 
@@ -321,7 +349,7 @@ describe('<DateInput />', () => {
     subject.instance().handleCalendarSelect(null, '2017-05-02T00:00:00+02:00')
 
     expect(onDateChange).to.have.been.called()
-    expect(onDateChange.getCall(0).args[1]).to.eq('2017-05-02T13:40:00+02:00')
+    expect(onDateChange.getCall(0).args[1]).to.eq('2017-05-02T13:40:00.000+02:00')
   })
 
   it('should fire the onDateChange event when TextInput value changes', () => {

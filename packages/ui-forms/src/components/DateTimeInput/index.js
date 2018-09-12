@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import FormPropTypes from '../../utils/FormPropTypes'
-import warning from '@instructure/ui-utils/lib/warning'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
 
@@ -192,7 +191,6 @@ class DateTimeInput extends Component {
   static defaultProps = {
     layout: 'inline',
     timeStep: 30,
-    timezone: '',
     messageFormat: 'LLL',
     required: false,
     disabled: false,
@@ -207,63 +205,29 @@ class DateTimeInput extends Component {
   constructor (props, context) {
     super(props, context)
 
-    let date, time, result
-    let messages = []
-    let initialValue = props.value || props.defaultValue || undefined // eslint-disable-line no-undefined
-    const locale = props.locale || context.locale || Locale.browserLocale()
-    const timezone = props.timezone || context.timezone || DateTime.browserTimeZone()
-    if (initialValue) {
-      // guarantee the initialValue is in the given timezone
-      initialValue = DateTime.toLocaleString(initialValue, locale, timezone); // eslint-disable-line semi
-      ({date, time} = this.splitDateAndTime(initialValue));  // eslint-disable-line semi
-      ({result, messages} = this.combineDateAndTime(date, time))
-    }
-    messages = this.mergeMessages(messages, this.props)
-
     this.state = {
-      date, time, result, messages
+      ...this.parseISO(props.value || props.defaultValue),
     }
-
     this._dateInput = null
     this._timeInput = null
   }
 
   componentWillReceiveProps (nextProps) {
-    warning(
-      (nextProps.locale === this.locale || nextProps.timezone === this.timezone),
-      'You cannot change the locale or timezone of a DateTimeInput. The new value(s) will be ignored.'
-    )
+    const valueChanged = nextProps.value !== this.props.value
+      || nextProps.defaultValue !== this.props.defaultValue
+    const isUpdated = valueChanged
+      || nextProps.locale !== this.props.locale
+      || nextProps.timezone !== this.props.timezone
 
-    if (nextProps.value) {
-      // guarantee the new datetime remains in the given timezone
-      let newValue = DateTime.toLocaleString(nextProps.value, this.locale, this.timezone)
-      const {date, time} = this.splitDateAndTime(newValue)
-      let {result, messages} = this.combineDateAndTime(date, time)
-      messages = this.mergeMessages(messages, nextProps)
-      this.setState({date, time, result, messages})
-    } else {
-      this.setState({messages: this.mergeMessages(this.state.messages, nextProps)})
+    if (isUpdated) {
+      this.setState((prevState) => {
+        const iso = valueChanged ? (nextProps.value || nextProps.defaultValue) : prevState.iso
+
+        return {
+          ...this.parseISO(iso, nextProps.locale, nextProps.timezone),
+        }
+      })
     }
-  }
-
-  mergeMessages (messages, props) {
-    return props.messages ? messages.concat(props.messages) : messages
-  }
-  /**
-  * Focus me.
-  *
-  * When this `DateTimeInput` gets focus, we hand it off to the
-  * underlying `DateInput`.
-  */
-  focus () {
-    if (this._dateInput) {
-      this._dateInput.focus()
-    }
-  }
-
-  get focused () {
-    return this._dateInput && this._dateInput.focused ||
-           this._timeInput && this._timeInput.focused
   }
 
   get locale () {
@@ -274,131 +238,110 @@ class DateTimeInput extends Component {
     return this.props.timezone || this.context.timezone || DateTime.browserTimeZone()
   }
 
-  parseDate (datetime) {
-    return DateTime.parse(datetime, this.locale, this.timezone)
+  getErrorMessage (rawDateValue, rawTimeValue) {
+    const { invalidDateTimeMessage } = this.props
+    const text = typeof invalidDateTimeMessage === 'function'
+      ? invalidDateTimeMessage(rawDateValue, rawTimeValue)
+      : invalidDateTimeMessage
+
+    return text ? {text, type: 'error'} : null
   }
 
-  errorMessage (rawDateValue, rawTimeValue) {
-    let { invalidDateTimeMessage } = this.props
-    if (typeof invalidDateTimeMessage === 'function') {
-      invalidDateTimeMessage = invalidDateTimeMessage(rawDateValue, rawTimeValue)
-    }
-    // eslint-disable-next-line no-undefined
-    return invalidDateTimeMessage ? {text: invalidDateTimeMessage, type: 'error'} : undefined
-  }
+  parseISO (iso = '', locale = this.locale, timezone = this.timezone) {
+    const parsed = DateTime.parse(iso, locale, timezone)
 
-  validMessage(datetime) {
-    const parsedDate = this.parseDate(datetime)
-
-    let message = ''
-    if (!parsedDate.isValid()) {
-      const [d, t] = datetime.split('T')
-      message = this.errorMessage(d, t)
-    }
-    else {
-      message = {
-        text: parsedDate.format(this.props.messageFormat),
-        type: 'success'
-      }
-    }
-    return message
-  }
-
-  splitDateAndTime (datetime) {
-    if (datetime) {
-      const dtarr = datetime.split('T')
+    if (parsed.isValid()) {
       return {
-        date: dtarr[0] || undefined, // eslint-disable-line no-undefined
-        time: dtarr[1] || undefined // eslint-disable-line no-undefined
+        iso: parsed.toISOString(true),
+        message: {
+          type: 'success',
+          text: parsed.format(this.props.messageFormat),
+        },
       }
     }
-    return {date: undefined, time: undefined}  // eslint-disable-line no-undefined
-  }
-
-  combineDateAndTime (date, time) {
-    let retval = {
-      result: undefined,  // eslint-disable-line no-undefined
-      messages: []
-    }
-    if (date && time) {
-      const datetime = `${date}T${time}`
-      retval = {
-        result: datetime,
-        messages: [this.validMessage(datetime)]
-      }
-    } else if (date) {  // time will come from the date
-      retval = {
-        result: date,
-        messages: [this.validMessage(date)]
-      }
-    } else if (this.props.required) {
-      retval = {
-        result: undefined,  // eslint-disable-line no-undefined
-        messages: [this.errorMessage(date, time)]
-      }
-    }
-    // note: no date + a valid time is handled in onTimeChange
-    return retval
-  }
-
-  fireChange (event) {
-    if (this.props.onChange) {
-      this.props.onChange(event, this.state.result)
+    return {
+      iso: undefined, // eslint-disable-line no-undefined
+      message: iso ? this.getErrorMessage(...iso.split('T')) : null,
     }
   }
 
-  onDateChange = (event, newISODate, rawValue, isInvalid) => {
-    let newD
-    let newT = this.state.time
-    let result
-    let messages = []
-    if (newISODate) {
-      newD = newISODate.replace(/T.*/, '')
-      if (!newT) {
-        newT = '23:59'  // until a time is given, this is consistent with existing components in canvas.
-      }
+  combineDateAndTime (dateISO, timeISO) {
+    if (!dateISO) {
+      return ''
     }
-    if (isInvalid) {
-      messages.push(this.errorMessage(rawValue, undefined))  // eslint-disable-line no-undefined
+    if (!timeISO) {
+      return dateISO
+    }
+    const date = dateISO.replace(/T.*/, '')
+    const time = timeISO.replace(/.*T/, '')
+
+    return `${date}T${time}`
+  }
+
+  handleChange = (e, date, time) => {
+    const value = this.combineDateAndTime(date, time)
+    const {iso, message} = this.parseISO(value)
+
+    if (iso || !message) {
+      if (this.props.onChange) {
+        this.props.onChange(e, iso)
+      }
+      return this.setState({ iso, message })
+    }
+    return this.setState({ message })
+  }
+
+  handleDateChange = (e, isoValue, rawValue, rawConversionFailed, dateIsDisabled) => {
+    const date = rawConversionFailed ? rawValue : isoValue
+
+    this.handleChange(e, date, this.state.iso)
+  }
+
+  handleTimeChange = (e, option) => {
+    const date = this.state.iso
+
+    if (date) {
+      const time = option && option.value || ''
+
+      this.handleChange(e, date, time)
     } else {
-      ({result, messages} = this.combineDateAndTime(newD, newT))
+      const label = option && option.label || ''
+
+      this.setState({
+        message: this.getErrorMessage('', label)
+      })
     }
-    messages = this.mergeMessages(messages, this.props)
-    // only fire onChange if the value has actually changed
-    const fireChange = result !== this.state.result ? this.fireChange.bind(this, event) : null
-    this.setState({date: newD, time: newT, result, messages}, fireChange)
   }
 
-  onTimeChange = (event, timeVal) => {
-    let newT
-    let messages = []
-    let result
-    if (timeVal && timeVal.value) {
-      // put in local time, or it may get the date wrong
-      newT = DateTime.parse(timeVal.value, this.locale, this.timezone)
-      newT = newT.format().replace(/.*T/, '')
+  handleBlur = (e) => {
+    if (this.props.required && !this.state.iso) {
+      this.setState({
+        message: this.getErrorMessage(),
+      })
     }
-    if (!this.state.date) {
-      messages.push(this.errorMessage(undefined, timeVal.label))  // eslint-disable-line no-undefined
-    } else {
-      ({result, messages} = this.combineDateAndTime(this.state.date, newT))
-    }
-    messages = this.mergeMessages(messages, this.props)
-    // only fire onChange if the value has actually changed
-    const fireChange = result !== this.state.result ? this.fireChange.bind(this, event) : null
-    this.setState({time: newT, result, messages}, fireChange)
   }
 
-  onInputBlur = (event) => {
-    if (this.props.required && !this.state.result) {
-      const messages = [this.errorMessage(undefined, this.state.time)]  // eslint-disable-line no-undefined
-      this.setState({messages})
+  /**
+   * Focus me.
+   *
+   * When this `DateTimeInput` gets focus, we hand it off to the
+   * underlying `DateInput`.
+   */
+  focus () {
+    if (this._dateInput) {
+      this._dateInput.focus()
     }
+  }
+
+  get focused () {
+    return (this._dateInput && this._dateInput.focused)
+      || (this._timeInput && this._timeInput.focused)
   }
 
   dateInputComponentRef = (node) => {
     this._dateInput = node
   }
+
   timeInputComponentRef = (node) => {
     this._timeInput = node
   }
@@ -406,12 +349,25 @@ class DateTimeInput extends Component {
   render () {
     const {
       description,
-      datePlaceholder, dateLabel, dateNextLabel, datePreviousLabel, dateFormat, dateInputRef,
-      timeLabel, timeFormat, timeStep, timeInputRef,
-      layout, required, disabled, readOnly
+      datePlaceholder,
+      dateLabel,
+      dateNextLabel,
+      datePreviousLabel,
+      dateFormat,
+      dateInputRef,
+      timeLabel,
+      timeFormat,
+      timeStep,
+      timeInputRef,
+      locale,
+      timezone,
+      messages,
+      layout,
+      required,
+      disabled,
+      readOnly,
     } = this.props
-    const locale = this.locale
-    const timezone = this.timezone
+    const {iso, message} = this.state
 
     return (
       <FormFieldGroup
@@ -420,19 +376,22 @@ class DateTimeInput extends Component {
         rowSpacing="small"
         layout={layout}
         vAlign="top"
-        messages={this.state.messages}
+        messages={[
+          ...(message ? [message] : []),
+          ...(messages || [])
+        ]}
       >
         <DateInput
-          dateValue={this.state.result}
-          inputRef={dateInputRef}
+          dateValue={iso}
+          onDateChange={this.handleDateChange}
+          onBlur={this.handleBlur}
           ref={this.dateInputComponentRef}
+          inputRef={dateInputRef}
           placeholder={datePlaceholder}
           label={dateLabel}
           locale={locale}
           format={dateFormat}
           nextLabel={dateNextLabel}
-          onDateChange={this.onDateChange}
-          onBlur={this.onInputBlur}
           previousLabel={datePreviousLabel}
           timezone={timezone}
           validationFeedback={false}
@@ -441,15 +400,15 @@ class DateTimeInput extends Component {
           readOnly={readOnly}
         />
         <TimeInput
+          value={iso}
+          onChange={this.handleTimeChange}
+          onBlur={this.handleBlur}
           ref={this.timeInputComponentRef}
           label={timeLabel}
           locale={locale}
           format={timeFormat}
-          onChange={this.onTimeChange}
-          onBlur={this.onInputBlur}
           step={timeStep}
           timezone={timezone}
-          value={this.state.result}
           inputRef={timeInputRef}
           disabled={disabled}
           readOnly={readOnly}
