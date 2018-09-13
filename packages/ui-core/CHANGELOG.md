@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.28.0"></a>
+# [5.28.0](https://github.com/instructure/instructure-ui/compare/v5.27.0...v5.28.0) (2018-09-13)
+
+
+### Bug Fixes
+
+* **ui-forms:** Update DateTimeInput when changing locale or timezone ([524307d](https://github.com/instructure/instructure-ui/commit/524307d))
+
+
+### Features
+
+* **ui-tree-browser:** add selection styling to TreeBrowser ([4643c66](https://github.com/instructure/instructure-ui/commit/4643c66))
+
+
+
+
+
 <a name="5.27.0"></a>
 # [5.27.0](https://github.com/instructure/instructure-ui/compare/v5.26.0...v5.27.0) (2018-09-10)
 

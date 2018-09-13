@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.28.0"></a>
+# [5.28.0](https://github.com/instructure/instructure-ui/compare/v5.27.0...v5.28.0) (2018-09-13)
+
+
+### Bug Fixes
+
+* **ui-forms:** Render selected option when not exist in options ([c821efa](https://github.com/instructure/instructure-ui/commit/c821efa))
+* **ui-forms:** Update DateTimeInput when changing locale or timezone ([524307d](https://github.com/instructure/instructure-ui/commit/524307d))
+
+
+
+
+
 <a name="5.27.0"></a>
 # [5.27.0](https://github.com/instructure/instructure-ui/compare/v5.26.0...v5.27.0) (2018-09-10)
 
