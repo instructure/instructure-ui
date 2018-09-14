@@ -327,16 +327,16 @@ class SelectField extends Component {
   }
 
   highlightSelectedOption = () => {
-    if (this.selectedIndex >= 0) {
-      // setTimeout forced due to the need to wait for the browser to render the menu
-      this._timeouts.push(
-        setTimeout(() => {
-          this.highlightOption(this.selectedIndex)
-        }, 0)
-      )
-    } else {
-      this.highlightOption(0)
+    let index = 0
+    if (this.selectedIndex > 0) {
+      index = this.selectedIndex
     }
+    // setTimeout forced due to the need to wait for the browser to render the menu
+    this._timeouts.push(
+      setTimeout(() => {
+        this.highlightOption(index)
+      }, 0)
+    )
   }
 
   highlightOption = index => {

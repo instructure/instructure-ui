@@ -57,6 +57,17 @@ describe('<SelectField />', () => {
     )
   )
 
+  const changeInput = (subject, value) => {
+    const instance = subject.instance()
+
+    instance._input.value = value
+    subject.find('input').simulate('change', {
+      target: {
+        value,
+      },
+    })
+  }
+
   it('should include a label', () => {
     const subject = testbed.render()
     expect(subject.find('label').length).to.equal(1)
@@ -263,6 +274,22 @@ describe('<SelectField />', () => {
     testbed.tick()
     expect(subject.instance().expanded).to.be.true()
     expect(subject.instance().state.highlightedIndex).to.equal(1)
+  })
+
+  it(`should highlight first option when options are loaded asynchronously`, () => {
+    const highlight = testbed.stub()
+    const subject = testbed.render({
+      editable: true,
+      options: [],
+      onHighlight: highlight
+    })
+
+    changeInput(subject, 'a')
+    subject.setProps({
+      options: [{ label: 'Alabama', value: '0', id: '0', children: 'Alabama' }]
+    })
+    testbed.tick()
+    expect(highlight).to.have.been.calledWith(0)
   })
 
   it('renders only emptyOption prop in menu when options are empty', () => {
