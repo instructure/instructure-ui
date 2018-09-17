@@ -2,11 +2,9 @@
 describes: Tray
 ---
 
-The Tray is a dialog component that slides out from the top/bottom/left/right of
-the viewport.
+The Tray is an actionable container that is triggered by click and does not need to be connected to the element that triggered it. The Tray is on the same hierarchy as the Popover but contains more content. The Tray slides out from the top/bottom/start/end of the viewport.
 
-Note that the `size` property only applies when the Tray is positioned at `start`
-or `end` and defines the width of the Tray.
+>Note that the `size` property only applies when the Tray is positioned at `start` or `end` and defines the width of the Tray.
 
 ```js
 ---
@@ -104,4 +102,29 @@ class Example extends React.Component {
 }
 
 render(<Example />)
+```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Configure Tray to enter from the end on desktop, bottom on mobile/tablet</FigureItem>
+    <FigureItem>Use when it is useful to still see information contained on the page or not lose context of the page that triggered the Tray</FigureItem>
+    <FigureItem>Use 2 tabs max if using TabList in small size</FigureItem>
+    <FigureItem>Use 5 tabs max if using TabList in medium/large size</FigureItem>
+    <FigureItem>Prefer Tray to close when user clicks outside of the Tray</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use TabList in the x-small size</FigureItem>
+    <FigureItem>Use for Sub Nav or <Link href="/#DrawerLayout">Drawer Layout</Link></FigureItem>
+    <FigureItem>Use with an <Link href="/#Overlay">Overlay</Link></FigureItem>
+    <FigureItem>Use a Tray on top of a <Link href="/#Modal">Modal</Link></FigureItem>
+    <FigureItem>Use for <Link href="#Alert">Alerts</Link> or Confirmation Dialogs</FigureItem>
+    <FigureItem>Allow Tray to push the content of the page</FigureItem>
+  </Figure>
+</Guidelines>
 ```
