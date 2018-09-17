@@ -28,6 +28,7 @@ import cloneArray from '@instructure/ui-utils/lib/cloneArray'
 import warning from '@instructure/ui-utils/lib/warning'
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
+import isVisible from '@instructure/ui-utils/lib/dom/isVisible'
 
 import measureText from './measureText'
 import cleanString from './cleanString'
@@ -142,13 +143,14 @@ export default class Truncator {
     for (let i = 0; i < rootNode.childNodes.length; i++) {
       const node = rootNode.childNodes[i]
       if (node.nodeType === 1 || node.nodeType === 3) {
+        const visible = isVisible(node, false)
         const textContent = node.textContent + ' '
         map.push({
           node: node,
           data: truncate === 'word'
             // eslint-disable-next-line no-useless-escape
-            ? textContent.match(/.*?[\.\s\/]+?/g)
-            : node.textContent.split('')
+            ? visible ? textContent.match(/.*?[\.\s\/]+?/g) : ''
+            : visible ? node.textContent.split('') : []
         })
       }
     }
