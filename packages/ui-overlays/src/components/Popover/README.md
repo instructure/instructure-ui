@@ -1,14 +1,7 @@
 ---
 describes: Popover
 ---
-Popover is  a [ContextView](#ContextView) that overlays (appears above) the rest of the content on the page. The Popover would usually show/hide  on click/touch or hover/focus of a trigger element and the component arrow would point to the trigger element.
-- Popovers can have close buttons and behave like a modal dialog by trapping focus within the ContextView. (Generally this would be the only case for using Popover directly vs using Tooltip, Menu, or Select). (Also note that quite often a Modal or Tray would be a better UX for a responsive UI vs a Popover that behaves like a modal dialog).
-- OR Popovers can display interactive content that can be focused and navigated to in the document order (following the trigger element). This is a type of Tooltip behavior.
-- OR Popovers can display non-interactive content that supplements the trigger element content. This is a type of Tooltip behavior.
-- OR Popovers can have custom focus handling to behave like a form element or navigation menu. See [Select](#Select) and [Menu](#Menu).
-
-Note that `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property
-set, it will trap focus inside the `<Popover />`.
+Popovers are actionable containers that are triggered by click. When opened, it remains connected with element that triggered it. Popovers are on the same hierarchy as the [Tray](#Tray) but contains less content.
 
 ```js
 ---
@@ -88,6 +81,10 @@ class Example extends React.Component {
 render(<Example />)
 
 ```
+
+>Note that `<Popover />` can act as a dialog with a close button. With the `shouldContainFocus` property set, it will trap focus inside the `<Popover />`.
+
+
 The `alignArrow` prop will offset the popover content to adjust for the offset of the arrow.
 This will override offsetX for start/end placements, and will override offsetY for top/bottom placements.
 ```js
@@ -118,4 +115,23 @@ render () {
 }
 
 render(<Example />)
+```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Consider using a <Link href="/#Tray">Tray</Link> if the content is beyond a mobile screen size</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Put content on the same row as the close "x"</FigureItem>
+    <FigureItem>Use with an <Link href="#Overlay">Overlay</Link></FigureItem>
+    <FigureItem>Have multiple Popovers open at the same time</FigureItem>
+    <FigureItem>Use in place of a <Link href="/#Tooltip">Tooltip</Link> or <Link href="/#Menu">Menu</Link></FigureItem>
+  </Figure>
+</Guidelines>
 ```
