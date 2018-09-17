@@ -167,6 +167,16 @@ describe('<DateTimeInput />', () => {
     expect(onChangeArg).to.equal(newValue)
   })
 
+  it('should show correct message when TimeInput value changes', () => {
+    const subject = testbed.render({
+      defaultValue: '2018-01-18T13:00',
+    })
+
+    setTimeInputValue(subject, '5:00 PM')
+    const text = getMessageText(subject)
+    expect(text).to.equal('January 18, 2018 5:00 PM')
+  })
+
   it('should show the formatted date-time message', () => {
     const defaultValue = DateTime.parse('2017-05-01T17:30Z', locale, timezone)
     const subject = testbed.render({ defaultValue: defaultValue.format() })

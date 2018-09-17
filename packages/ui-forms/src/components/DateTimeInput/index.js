@@ -278,8 +278,7 @@ class DateTimeInput extends Component {
     return `${date}T${time}`
   }
 
-  handleChange = (e, date, time) => {
-    const value = this.combineDateAndTime(date, time)
+  handleChange = (e, value) => {
     const {iso, message} = this.parseISO(value)
 
     if (iso || !message) {
@@ -293,17 +292,18 @@ class DateTimeInput extends Component {
 
   handleDateChange = (e, isoValue, rawValue, rawConversionFailed, dateIsDisabled) => {
     const date = rawConversionFailed ? rawValue : isoValue
+    const value = this.combineDateAndTime(date, this.state.iso)
 
-    this.handleChange(e, date, this.state.iso)
+    this.handleChange(e, value)
   }
 
   handleTimeChange = (e, option) => {
     const date = this.state.iso
 
     if (date) {
-      const time = option && option.value || ''
+      const value = option && option.value || ''
 
-      this.handleChange(e, date, time)
+      this.handleChange(e, value)
     } else {
       const label = option && option.label || ''
 
