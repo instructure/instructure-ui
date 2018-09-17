@@ -35,6 +35,12 @@ example: true
      this.setState({ size: o.value })
    };
 
+   handleFormSubmit = e => {
+     e.preventDefault()
+     console.log('form submitted')
+     this.setState(state => ({ open: false }))
+   }
+
    renderCloseButton () {
      return (
        <CloseButton
@@ -72,7 +78,9 @@ example: true
            {this.state.open ? 'Close' : 'Open'} the Modal
          </Button>
          <Modal
+           as="form"
            open={this.state.open}
+           onSubmit={this.handleFormSubmit}
            onDismiss={() => { this.setState({ open: false }) }}
            size={this.state.size}
            label="Modal Dialog: Hello World"
@@ -83,11 +91,12 @@ example: true
              <Heading>Hello World</Heading>
            </ModalHeader>
            <ModalBody>
+             <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
              <Text lineHeight="double">{fpo}</Text>
            </ModalBody>
            <ModalFooter>
              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
+             <Button variant="primary" type="submit">Submit</Button>
            </ModalFooter>
          </Modal>
        </div>
