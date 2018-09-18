@@ -281,7 +281,7 @@ class DateTimeInput extends Component {
   handleChange = (e, value) => {
     const {iso, message} = this.parseISO(value)
 
-    if (iso || !message) {
+    if ((iso && iso !== this.state.iso) || !message) {
       if (this.props.onChange) {
         this.props.onChange(e, iso)
       }

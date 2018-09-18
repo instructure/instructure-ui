@@ -74,6 +74,87 @@ example: true
 </View>
 ```
 
+### Controlled Select with `allowCustom`
+
+Permits arbitrary text to be entered in the text box, similar to the Windows ComboBox.
+
+Note: `allowCustom` is currently only valid for single select.
+
+Subscribe to `onInputChange` to be kept abreast of typed input. If typed input exactly matches an option (ignoring case) when the dropdown closes, `onChange` is fired with the selected option after the last `onInputChange`.
+```js
+---
+example: true
+render: false
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+    this.state = {
+      selectedOption: null,
+      value: null // initialize with '', and Select will complain about the string not being found in options
+                  // once the user starts interacting with it, will be set to the string value.
+    }
+    this._select = null
+  }
+
+  onInputChange = (event, value) => {
+    this.setState({
+      selectedOption: null, // if the new text just matched an option, we'll find out in onChange
+      value
+    })
+  }
+
+  onChange = (event, selection) => {
+    this.setState({
+      value: selection ? selection.value : this.state.value,  // of no selection, leave the value alone for allowCustom
+      selectedOption: selection ? selection.value : null,
+    })
+  }
+
+  ch = () => {
+    let o = this.state.selectedOption ? (parseInt(this.state.selectedOption)+1)%3+1 : 1
+    this.setState({selectedOption: `${o}`})
+  }
+
+  cl = () => {
+    this.setState({selectedOption: null, value: null})
+  }
+
+  render () {
+    return (
+      <View
+        as="div"
+        margin="0 auto xx-large auto"
+        padding="x-small x-small x-large x-small"
+      >
+        <p>
+          <Button onClick={this.ch} margin="0 medium 0 0">change selected option</Button>
+          <Button onClick={this.cl} margin="0 medium 0 0">clear selected option</Button>
+          Current Value: <span style={{whiteSpace: 'pre'}}>'{this._select ? this._select.value : ''}'</span>
+        </p>
+        <Select
+          ref={el => this._select = el}
+          label="Type anything."
+          allowCustom
+          onInputChange={this.onInputChange}
+          onChange={this.onChange}
+          value={this.state.value}
+          selectedOption={this.state.selectedOption}
+        >
+          <option value="1">Foo</option>
+          <option value="2">Bar</option>
+          <option value="3">Baz</option>
+        </Select>
+      </View>
+    )
+  }
+}
+
+render(<Example/>)
+```
+
+
+
 ### Select with default value set using `defaultOption`
 Select with `formatSelectedOption` configured to show a `Badge` component in front of label
 

@@ -29,6 +29,8 @@ import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import SelectSingle from './SelectSingle'
@@ -125,6 +127,12 @@ class Select extends Component {
     * for not multiple Select, allows the user to empty selection
     */
     allowEmpty: PropTypes.bool,
+    /**
+     * SelectSingle only (Mutually exclusive with multiple=true)
+     * If true, the user can freely enter a value not available in the options list.
+     * Implies editable is true.
+     */
+    allowCustom: PropTypes.bool,
 
     id: PropTypes.string,
 
@@ -223,6 +231,7 @@ class Select extends Component {
   static defaultProps = {
     editable: false,
     allowEmpty: true,
+    allowCustom: false,
     emptyOption: '---',
     selectedOption: null,
     size: 'medium',
@@ -241,6 +250,11 @@ class Select extends Component {
   constructor (props) {
     super(props)
     const options = parseOptions(props.children)
+
+    warning(
+      !(props.allowCustom && props.multiple),
+      `[${getDisplayName(Select)}] The allowCustom and multiple are mutually exclusive properties.`
+    )
 
     this.state = { options }
   }
@@ -277,10 +291,14 @@ class Select extends Component {
 
   render () {
     const Component = this.props.multiple ? SelectMultiple : SelectSingle
-    let defaultSelectedOption = this.props.defaultOption || this.props.value
+    let defaultSelectedOption = this.props.defaultOption
+    if (!defaultSelectedOption && !this.props.allowCustom) {
+      defaultSelectedOption = this.props.value
+    }
 
     // select first non-disabled option for standard select components
     if (!this.props.editable &&
+        !this.props.allowCustom &&
         !this.props.multiple &&
         typeof defaultSelectedOption === 'undefined'
     ) {

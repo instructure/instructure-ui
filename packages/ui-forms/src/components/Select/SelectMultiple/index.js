@@ -135,7 +135,11 @@ class SelectMultiple extends Component {
     /**
     * should the menu be closed when a selection happens
     */
-    closeOnSelect: PropTypes.bool
+    closeOnSelect: PropTypes.bool,
+    /**
+     * must be false for multiple select
+     */
+    allowCustom: PropTypes.oneOf([false]),
   }
 
   static defaultProps = {
@@ -146,7 +150,8 @@ class SelectMultiple extends Component {
     onInputChange: (event) => {},
     onOptionsChange: (filteredOptions) => {},
     onKeyDown: (event) => {},
-    closeOnSelect: true
+    closeOnSelect: true,
+    allowCustom: false,
   }
 
   constructor (props) {

@@ -416,6 +416,102 @@ describe('<SelectSingle />', () => {
     })
   })
 
+  it('allowCustom permits arbitrary input', () => {
+    const label = 'Cuba'
+    const onInputChange = testbed.stub()
+    const subject = testbed.render({
+      allowCustom: true,
+      onInputChange
+    })
+    testbed.tick()
+    subject.focus()
+    subject.instance()._input.value = label[0]
+    subject.find('input').simulate('change', { preventDefault })
+    expect(subject.instance()._input.value).to.equal(label[0])
+    expect(subject.instance().value).to.equal(label[0])
+    expect(subject.instance().state.selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
+
+    subject.instance()._input.value = label
+    subject.find('input').simulate('change', { preventDefault })
+    expect(onInputChange.secondCall).to.exist()
+    expect(onInputChange.secondCall.args[0]).to.exist()
+    expect(onInputChange.secondCall.args[0].target.value).to.eql(label)
+    expect(onInputChange.secondCall.args[1]).to.eql(label)
+    expect(subject.instance().value).to.eql(label)
+  })
+
+  it('allowCustom sets selectedOption after some freeform entry', (done) => {
+    const label = 'Cuba'  // not one of the options
+    const onInputChange = testbed.stub()
+    const subject = testbed.render({
+      allowCustom: true,
+      onInputChange
+    })
+    testbed.tick()
+    subject.instance()._input.value = label
+    subject.find('input').simulate('change', { preventDefault })
+    expect(subject.instance().state.selectedOption).to.equal(undefined)  // eslint-disable-line no-undefined
+    expect(subject.instance().value).to.equal(label)
+
+    subject.setProps({
+      selectedOption: '1'
+    }, () => {
+      testbed.defer(() => { // wait for re-render
+        expect(subject.instance()._input.value).to.equal('Jamaica')
+        expect(subject.instance().value).to.equal('1')
+        expect(subject.instance().state.selectedOption).to.equal(options[1])
+        done()
+      })
+    })
+  })
+
+  it('allowCustom sets arbitrary text after selecting from options', () => {
+    const subject = testbed.render({
+      allowCustom: true,
+      selectedOption: '1',
+    })
+    testbed.tick()
+    expect(subject.instance().value).to.equal(options[1].value)
+
+    const newValue = subject.instance()._input.value + 'x'
+    subject.instance()._input.value = newValue
+    subject.find('input').simulate('change', { preventDefault })
+    subject.find('input').simulate('blur', { preventDefault })
+    testbed.tick()
+    expect(subject.instance().state.selectedOption).to.equal(undefined)  // eslint-disable-line no-undefined
+    expect(subject.instance().value).to.equal(newValue)
+  })
+
+  it('allowCustom selects option when typed input matches', () => {
+    const label = 'jamaica'
+    const onInputChange = testbed.stub()
+    const onChange = testbed.stub()
+    const subject = testbed.render({
+      allowCustom: true,
+      onInputChange,
+      onChange
+    })
+    testbed.tick()
+    // type in 'jamaica'
+    subject.instance()._input.value = label
+    subject.find('input').simulate('change')
+    // and the select's value is 'jamaica'
+    expect(subject.instance().selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
+    expect(subject.instance().value).to.equal('jamaica')
+
+    // blur will cause the input to match an option
+    subject.find('input').simulate('blur')
+    testbed.tick()
+
+    expect(onInputChange.callCount).to.eql(2)
+    expect(onInputChange.firstCall.args[1]).to.eql('jamaica')   // when the string was typed
+    expect(onInputChange.secondCall.args[1]).to.eql('Jamaica')  // when it matched an option's label
+
+    expect(onChange.firstCall.args[1]).to.eql(options[1])
+    expect(subject.instance().value).to.eql('1')
+    expect(subject.instance().state.selectedOption).to.equal(options[1])
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()

@@ -81,6 +81,11 @@ class SelectSingle extends Component {
     */
     allowEmpty: PropTypes.bool,
     /**
+     * If true, the user can freely enter a value not available in the options list.
+     * Implies editable is true.
+     */
+    allowCustom: PropTypes.bool,
+    /**
      * Whether or not to disable the input
      */
     disabled: PropTypes.bool,
@@ -111,7 +116,11 @@ class SelectSingle extends Component {
     /**
     * should the menu be closed when a selection happens
     */
-    closeOnSelect: PropTypes.bool
+    closeOnSelect: PropTypes.bool,
+    /**
+     * the current value. The selected option's value, or the entered text if allowCustom is true
+     */
+    value: PropTypes.string,
   }
 
   static defaultProps = {
@@ -120,7 +129,7 @@ class SelectSingle extends Component {
     onChange: (event, selectedOption) => {},
     onInputChange: (event, value) => {},
     onOptionsChange: (filteredOptions) => {},
-    closeOnSelect: true
+    closeOnSelect: true,
   }
 
   constructor (props) {
@@ -141,7 +150,13 @@ class SelectSingle extends Component {
 
   get value () {
     const selected = this.state.selectedOption
-    return selected && selected.value
+    if (selected) {
+      return selected.value
+    }
+    if (this.props.allowCustom) {
+      return this._input.value
+    }
+    return null
   }
 
   focus = () => {
@@ -152,7 +167,7 @@ class SelectSingle extends Component {
     const id = getOptionId(selected)
     const foundOption = options.find((option) => getOptionId(option) === id)
 
-    warning(foundOption, '[Select] The selected option doesn\'t correspond to an option')
+    warning((!selected || foundOption), '[Select] The selected option doesn\'t correspond to an option')
     return foundOption || selected
   }
 
@@ -170,23 +185,33 @@ class SelectSingle extends Component {
 
   componentWillReceiveProps (nextProps) {
     const optionsChanged = !deepEqual(this.props.options, nextProps.options)
-    const selectedChanged = !deepEqual(this.props.selectedOption, nextProps.selectedOption)
-      && !this.props.disabled
-      && !this.props.readOnly
+    const selectedChanged = this.props.selectedOption != nextProps.selectedOption     // undefined == null -> no change
+                            && !deepEqual(this.props.selectedOption, nextProps.selectedOption)
+                            && !this.props.disabled
+                            && !this.props.readOnly
+    const valueChanged = this.props.value !== nextProps.value
 
-    if (optionsChanged || selectedChanged) {
+    if (optionsChanged || selectedChanged || valueChanged) {
       this.setState((prevState) => {
         const selected = selectedChanged ? null : prevState.selectedOption
         const selectedOption = this.getSelectedOptionFromProps(nextProps, selected)
-        const filteredOptions = nextProps.filter(nextProps.options, prevState.filterText || '')
-        const value = (selectedOption && selectedOption.label) || ''
+        let filterText = prevState.filterText || ''
+        if (nextProps.allowCustom && (selectedChanged && !this.props.selectedOption) ) {
+          // went from custom text entry to a selection from the options
+          filterText = (selectedOption && selectedOption.label) || ''
+        }
+        const filteredOptions = nextProps.filter(nextProps.options, filterText)
+        const value = (selectedOption && selectedOption.label) || nextProps.value || ''
 
-        if (prevState.filterText === null && this._input.value !== value) {
+        if ((nextProps.allowCustom || prevState.filterText === null) && this._input.value !== value) {
           this._input.value = value
-          this.props.onInputChange(null, this._input.value)
+          nextProps.onInputChange(null, this._input.value)
         }
         if (optionsChanged) {
-          this.props.onOptionsChange(filteredOptions)
+          nextProps.onOptionsChange(filteredOptions)
+        }
+        if (selectedChanged) {
+          nextProps.onChange(null, selectedOption)
         }
         return {
           selectedOption,
@@ -234,11 +259,11 @@ class SelectSingle extends Component {
           filteredOptions: props.options,
           selectedOption: null
         }
-      } else {
+      } else if (!this.props.allowCustom) {
         // reset the value to the last valid value
         this._input.value = selectedOption.label
       }
-    } else {
+    } else if (!this.props.allowCustom) {
       // clean wrong values
       this._input.value = ''
     }
@@ -248,7 +273,7 @@ class SelectSingle extends Component {
     }
 
     return {
-      filterText: null,
+      filterText: this.props.allowCustom ? this._input.value : null,
       filteredOptions: props.options,
       selectedOption: match || selectedOption
     }
@@ -259,10 +284,18 @@ class SelectSingle extends Component {
 
     const filterText = value.toLowerCase()
     if (this.state.filterText !== filterText) {
-      this.setState((prevState, props) => ({
-        filterText,
-        filteredOptions: props.filter(this.props.options, filterText || '')
-      }))
+      this.setState((prevState, props) => {
+        const filteredOptions = props.filter(this.props.options, filterText || '')
+        let selectedOption = prevState.selectedOption
+        if (props.allowCustom && filteredOptions.length === 0) {
+          selectedOption = undefined    // eslint-disable-line no-undefined
+        }
+        return {
+          filterText,
+          filteredOptions,
+          selectedOption
+        }
+      })
     }
   }
 
@@ -290,7 +323,7 @@ class SelectSingle extends Component {
     return (
       <SelectField
         {...omitProps(this.props, SelectSingle.propTypes)}
-        editable={this.props.editable}
+        editable={this.props.allowCustom || this.props.editable}  // allowCustom requires editable
         inputRef={this.handleInputRef}
         options={this.state.filteredOptions}
         selectedOption={this.state.selectedOption}
