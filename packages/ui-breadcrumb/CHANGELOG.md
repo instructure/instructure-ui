@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.28.1"></a>
+## [5.28.1](https://github.com/instructure/instructure-ui/compare/v5.28.0...v5.28.1) (2018-09-18)
+
+
+### Bug Fixes
+
+* **ui-breadcrumb:** vertical alignment ([699416a](https://github.com/instructure/instructure-ui/commit/699416a))
+
+
+
+
+
 <a name="5.28.0"></a>
 # [5.28.0](https://github.com/instructure/instructure-ui/compare/v5.27.0...v5.28.0) (2018-09-13)
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.28.1"></a>
+## [5.28.1](https://github.com/instructure/instructure-ui/compare/v5.28.0...v5.28.1) (2018-09-18)
+
+
+### Bug Fixes
+
+* **ui-forms:** fix asyncronous Select option highlighting ([5638ccb](https://github.com/instructure/instructure-ui/commit/5638ccb))
+* **ui-forms:** Fix time input in DateTimeInput ([372d8ff](https://github.com/instructure/instructure-ui/commit/372d8ff))
+
+
+
+
+
 <a name="5.28.0"></a>
 # [5.28.0](https://github.com/instructure/instructure-ui/compare/v5.27.0...v5.28.0) (2018-09-13)
 

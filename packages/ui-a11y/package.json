@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y",
-  "version": "5.28.0",
+  "version": "5.28.1",
   "description": "A collection of utilities and components to make UI components accessible",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
