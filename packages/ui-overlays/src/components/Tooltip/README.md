@@ -2,12 +2,9 @@
 describes: Tooltip
 ---
 
-Tooltip is a special type of Popover for brief supplemental content that can be navigated to via the usual document flow (__no focus trapping or close button__).
-- Tooltip content should be concise word(s) that provide  a helpful hint or tip (usually related to the trigger element).
-- Usually triggered by hover and focus of the trigger element.
-- Tooltip uses [Popover](#Popover) internally and provides additional semantic markup and focus behavior.
+Tooltips are small text-only  contextual overlays that are triggered by hover/focus. Use anywhere additional explanation might be needed but space is limited on the triggering element.
 
-> ### What was that about 'focusable' elements?
+> ### What about 'focusable' elements?
 > Content provided to the `tip` property __should not contain any focusable elements__. If you'd like to do
 that you should use the [Popover](#Popover) component and handle focus management yourself or
 consider using a [Modal](#Modal) or a [Tray](#Tray) as those will work better on smaller screens.
@@ -63,4 +60,27 @@ example: true
     </Tooltip>
   </p>
 </div>
+```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use on icons with no labels</FigureItem>
+    <FigureItem>Use on condensed dates</FigureItem>
+    <FigureItem>Use on table content if items are getting truncated</FigureItem>
+    <FigureItem>Use to provide more specific data (ie. user hovers over a chart element, Tooltip shows precise info)</FigureItem>
+    <FigureItem>Try to stay within 50 characters</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Repeat the exact information contained on the triggering element</FigureItem>
+    <FigureItem>Contain links or focusable items</FigureItem>
+    <FigureItem>Use icons inside Tooltips</FigureItem>
+    <FigureItem>Use in place of a <Link href="/#Popover">Popover</Link> or <Link href="/#Menu">Menu</Link></FigureItem>
+  </Figure>
+</Guidelines>
 ```
