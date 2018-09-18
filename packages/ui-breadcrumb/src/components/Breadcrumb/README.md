@@ -67,6 +67,22 @@ example: true
   <BreadcrumbLink>A Great Module</BreadcrumbLink>
 </Breadcrumb>
 ```
+
+You can include icons inside `BreadcrumbLink`:
+
+```js
+---
+example: true
+---
+<Breadcrumb label="You are here:">
+  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">
+    <IconBank.Line size="small" /> Item Bank
+  </BreadcrumbLink>
+  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">History</BreadcrumbLink>
+  <BreadcrumbLink>Question</BreadcrumbLink>
+</Breadcrumb>
+```
+
 ### Guidelines
 
 ```js

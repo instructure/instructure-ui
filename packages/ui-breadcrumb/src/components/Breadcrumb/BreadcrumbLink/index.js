@@ -57,7 +57,7 @@ export default class BreadcrumbLink extends Component {
     size: PropTypes.oneOf(['small', 'medium', 'large'])
   }
 
-  renderChildren () {
+  render () {
     const {
       children,
       href,
@@ -84,13 +84,5 @@ export default class BreadcrumbLink extends Component {
         </span>
       )
     }
-  }
-
-  render () {
-    return (
-      <span className={styles.root}>
-        {this.renderChildren()}
-      </span>
-    )
   }
 }
