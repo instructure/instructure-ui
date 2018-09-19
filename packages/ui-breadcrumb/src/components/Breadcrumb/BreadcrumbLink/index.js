@@ -25,18 +25,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@instructure/ui-elements/lib/components/Link'
-import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-
-import styles from './styles.css'
-import theme from './theme'
 
 /**
 ---
 parent: Breadcrumb
 ---
 **/
-@themeable(theme, styles)
 export default class BreadcrumbLink extends Component {
   static propTypes = {
     /**
@@ -54,35 +49,44 @@ export default class BreadcrumbLink extends Component {
     /**
     * Sets the font-size of the breadcrumb text
     */
-    size: PropTypes.oneOf(['small', 'medium', 'large'])
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+    * Add an icon to the BreadcrumbLink
+    */
+    icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
+    /**
+    * Place the icon before or after the text in the BreadcrumbLink
+    */
+    iconPlacement: PropTypes.oneOf(['start', 'end'])
   }
 
   render () {
     const {
       children,
       href,
+      icon,
+      iconPlacement,
       onClick
     } = this.props
 
     const props = omitProps(this.props, BreadcrumbLink.propTypes)
 
-    if (href || onClick) {
-      return (
-        <Link
-          {...props}
-          ellipsis
-          href={href}
-          onClick={onClick}
-        >
-          {children}
-        </Link>
-      )
-    } else {
-      return (
-        <span className={styles.text}>
-          <span className={styles.ellipsis}>{children}</span>
-        </span>
-      )
-    }
+    // Link will display a button by default, even if there is no action.
+    // Force a span in this case.
+    const as = href || onClick ? void 0 : 'span'
+
+    return (
+      <Link
+        as={as}
+        {...props}
+        ellipsis
+        href={href}
+        icon={icon}
+        iconPlacement={iconPlacement}
+        onClick={onClick}
+      >
+        {children}
+      </Link>
+    )
   }
 }

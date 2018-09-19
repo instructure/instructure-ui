@@ -31,6 +31,7 @@ import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import BreadcrumbLink from './BreadcrumbLink'
 
@@ -88,10 +89,16 @@ export default class Breadcrumb extends Component {
   }
 
   render () {
+    // FF and EDGE calculate flex baseline alignment differently, and do better with `center`
+    // in this case: http://kizu.ru/en/blog/flex-baseline/#another-way
+    const preferAlignCenter = Browser.firefox || Browser.msedge
+
     const classes = {
       [styles.root]: true,
+      [styles.preferAlignCenter]: preferAlignCenter,
       [styles[this.props.size]]: true
     }
+
     return (
       <View
         role="navigation"

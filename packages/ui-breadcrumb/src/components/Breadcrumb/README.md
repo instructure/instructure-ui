@@ -68,18 +68,16 @@ example: true
 </Breadcrumb>
 ```
 
-You can include icons inside `BreadcrumbLink`:
+You can include icons in `BreadcrumbLink`:
 
 ```js
 ---
 example: true
 ---
-<Breadcrumb label="You are here:">
-  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">
-    <IconBank.Line size="small" /> Item Bank
-  </BreadcrumbLink>
-  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">History</BreadcrumbLink>
-  <BreadcrumbLink>Question</BreadcrumbLink>
+<Breadcrumb label="Breadcrumb with icons">
+  <BreadcrumbLink icon={<IconBank.Line size="small" />} href="#Breadcrumb">Item Bank</BreadcrumbLink>
+  <BreadcrumbLink icon={<IconClock.Line size="small" />} onClick={() => {}}>History</BreadcrumbLink>
+  <BreadcrumbLink icon={IconPlus.Line} iconPlacement="end">New Question</BreadcrumbLink>
 </Breadcrumb>
 ```
 
@@ -100,4 +98,3 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
-

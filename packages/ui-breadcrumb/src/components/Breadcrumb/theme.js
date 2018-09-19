@@ -24,6 +24,7 @@
 
 export default function generator ({ colors, typography }) {
   return {
+    fontFamily: typography.fontFamily,
     separatorColor: colors.borderDark,
 
     smallSeparatorFontSize: '0.5rem',

@@ -23,18 +23,15 @@
  */
 
 import React from 'react'
-import Link from '@instructure/ui-elements/lib/components/Link'
 
 import BreadcrumbLink from '../index'
-
-import styles from '../styles.css'
 
 describe('<BreadcrumbLink />', () => {
   const testbed = new Testbed(<BreadcrumbLink>Content</BreadcrumbLink>)
 
-  it('should render a Link component when given an href prop', () => {
+  it('should render a link when given an href prop', () => {
     const subject = testbed.render({href: '#'})
-    expect(subject.find(Link)).to.be.present()
+    expect(subject.find('a')).to.be.present()
   })
 
   it('should render as a button and respond to onClick event', () => {
@@ -44,9 +41,14 @@ describe('<BreadcrumbLink />', () => {
     expect(onClick).to.have.been.called()
   })
 
-  it('should not render a Link component when not given an href prop', () => {
+  it('should not render a link when not given an href prop', () => {
     const subject = testbed.render()
-    expect(subject.find(`.${styles.text}`)).to.be.present()
+    expect(subject.find('a')).not.to.be.present()
+  })
+
+  it('should not render a button when not given an onClick prop', () => {
+    const subject = testbed.render()
+    expect(subject.find('button')).not.to.be.present()
   })
 
   it('should meet a11y standards', (done) => {

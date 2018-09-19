@@ -47,6 +47,7 @@
   }
 }
 
+.root .inverse,
 .root a.inverse:link,
 .root a.inverse:visited,
 .root button.inverse {
@@ -79,16 +80,19 @@
   font-size: 1em;
   margin: 0;
   padding: 0;
-  display: inline-flex;
-  align-content: flex-start;
-  text-align: inherit;
 }
 
 .ellipsis {
+  box-sizing: border-box;
   display: block;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+button.ellipsis {
+  width: 100%;
+  text-align: start;
 }
 
 .icon {
