@@ -21,14 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
-
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+export function bindElementToMethods (element, methods) {
+  if (element instanceof Element) {
+    return Object.entries(methods).reduce((bound, [key, fn]) => {
+      bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
+      return bound
+    }, {})
+  } else {
+    console.warn('[ui-test-utils] could not bind methods to invalid HTMLElement')
+  }
+}

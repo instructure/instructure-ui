@@ -21,14 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { wait } from 'dom-testing-library'
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+import Sandbox from './utils/sandbox'
+import { bindElementToUtilities as within } from './utils/bindElementToUtilities'
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
+import { expect } from './utils/expect'
+import testable from './utils/testable'
+import { find, findAll, findAllFrames, findFrame } from './utils/queries'
+import { debug } from './utils/helpers'
 
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+const mount = (element, context) => Sandbox.mount(element, context)
+const stub = (obj, method, fn) => Sandbox.stub(obj, method, fn)
+const spy = (obj, method) => Sandbox.spy(obj, method)
+
+export {
+  within,
+  wait,
+  expect,
+  testable,
+  mount,
+  stub,
+  spy,
+  find,
+  findAll,
+  findAllFrames,
+  findFrame,
+  debug
+}

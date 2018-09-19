@@ -21,14 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { fireEvent } from 'dom-testing-library'
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+import * as helpers from './helpers'
+import * as queries from './queries'
+import { bindElementToMethods } from './bindElementToMethods'
+import { bindElementToEvents } from './bindElementToEvents'
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+export function bindElementToUtilities ($element, customMethods = {}) {
+  let element = $element
+  if (typeof $element.getDOMNode === 'function') {
+    element = $element.getDOMNode()
+  }
+  return {
+    ...bindElementToMethods(element, queries),
+    ...bindElementToEvents(element, fireEvent),
+    ...bindElementToMethods(element, helpers),
+    ...bindElementToMethods(element, customMethods)
+  }
+}

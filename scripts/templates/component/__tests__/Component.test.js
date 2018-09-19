@@ -23,16 +23,18 @@
  */
 
 import React from 'react'
-import ${COMPONENT} from '../index'
+import { expect, mount } from '@instructure/ui-test-utils'
+
+import ${COMPONENT} from '../fixture'
 
 describe('<${COMPONENT} />', () => {
-  const testbed = new Testbed(<${COMPONENT} />)
-
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+  it('should render', async () => {
+    const subject = await mount(<${COMPONENT} />)
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should have tests')
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<${COMPONENT} />)
+    expect(await subject.accessible()).to.be.true()
+  })
 })

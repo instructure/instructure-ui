@@ -21,14 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { testable } from '@instructure/ui-test-utils'
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+import Portal from './index'
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+export default testable()(Portal)

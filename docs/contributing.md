@@ -14,7 +14,7 @@ category: Getting Started
 ### Adding packages
 
 >__Before adding a package, create an RFC__ (request for comment) document by running `yarn generate:rfc`. This script
-creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review. 
+creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review.
 
 Once the RFC is approved and merged you can go ahead and add your new package:
 
@@ -28,7 +28,7 @@ Once the RFC is approved and merged you can go ahead and add your new package:
 
 ### Adding components
 
->__Before adding a component, create an RFC__ (request for comment) document by running `yarn generate:rfc`. This script creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review. 
+>__Before adding a component, create an RFC__ (request for comment) document by running `yarn generate:rfc`. This script creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review.
 
 Once the RFC is approved and merged you can go ahead and add your new component:
 
@@ -54,7 +54,7 @@ Run this if you'd like to debug tests in the browser (Chrome).
 Options that can be run with `yarn test`/`yarn test:watch`:
 - `--changed` will run the tests against any package that has changes (since the previous commit, including un-staged changes).
 - `--staged` will run tests against packages that have been staged but not yet committed.
-- `--scope [package name from its package.json]` will run the tests against a single package.
+- `--scope [package name from its package.json (comma delimited)]` will run the tests against a single package.
 - `--path [test file paths (comma delimited)]` will run just the tests in a single test src file.
 
 
@@ -67,7 +67,7 @@ Options that can be run with `yarn test`/`yarn test:watch`:
 
 
   > To run the tests in a browser other than Chrome (e.g. Firefox or Safari)
-  > 
+  >
   > `NODE_ENV=test karma start --browsers=Firefox`.
 
 

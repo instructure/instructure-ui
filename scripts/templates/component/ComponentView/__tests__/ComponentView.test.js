@@ -23,24 +23,18 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
+
 import ${COMPONENT}View from '../index'
 
 describe('<${COMPONENT}View />', () => {
-  const testbed = new Testbed(<${COMPONENT}View />)
-
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+  it('should render', async () => {
+    const subject = await mount(<${COMPONENT}View />)
+    expect(subject).to.exist()
   })
 
-  it('should have tests')
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-    })
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<${COMPONENT}View />)
+    expect(await subject.accessible()).to.be.true()
   })
 })

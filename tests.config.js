@@ -53,7 +53,6 @@ module.exports = {
     'packages/ui-overlays/',
     'packages/ui-pages/',
     'packages/ui-pagination/',
-    'packages/ui-portal/',
     'packages/ui-svg-images/',
     'packages/ui-tabs/',
     'packages/ui-themeable/',

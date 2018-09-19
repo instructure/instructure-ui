@@ -23,109 +23,135 @@
  */
 
 import React from 'react'
-import Portal from '../index'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+
+import Portal from '../fixture'
 
 describe('<Portal />', () => {
-  describe('with or without yo...er a container', () => {
-    const testbed = new Testbed(<Portal />)
+  it('should render', async () => {
+    await mount(
+      <Portal open>Hello World</Portal>
+    )
+    const portal = await Portal.find({ text: 'Hello World' })
+    expect(portal.getDOMNode()).to.exist()
+  })
 
-    it('should support onOpen prop', () => {
-      const onOpen = testbed.stub()
-      testbed.render({
-        open: true,
-        children: (
-          <ul>
-            <li>Bono</li>
-            <li>The Edge</li>
-            <li>Adam Clayton</li>
-            <li>Larry Mullen Jr.</li>
-          </ul>
-        ),
-        onOpen
-      })
+  it('should be accessible', async () => {
+    await mount(
+      <Portal open>Hello World</Portal>
+    )
+    const portal = await Portal.find({ text: 'Hello World' })
+    expect(await portal.accessible()).to.be.true()
+  })
 
-      testbed.tick()
+  it('should support onOpen prop', async () => {
+    const onOpen = stub()
+    await mount(
+      <Portal open onOpen={onOpen}>
+        Hello World
+      </Portal>
+    )
+    expect(onOpen).to.have.been.called()
+  })
 
-      expect(onOpen).to.have.been.called()
+  it('should support onClose prop', async () => {
+    const onClose = stub()
+    const subject = await mount(
+      <Portal onClose={onClose} open>
+        Hello World
+      </Portal>
+    )
+
+    expect(onClose).to.not.have.been.called()
+
+    subject.setProps({ open: false })
+
+    expect(onClose).to.have.been.called()
+  })
+
+  it('should not render if children are empty', async () => {
+    await mount(<Portal open />)
+    const portal = await Portal.findAll({
+      timeout: 0,
+      errorIfNotFound: false
     })
-
-    it('should support onClose prop', (done) => {
-      const onClose = testbed.stub()
-      const subject = testbed.render({
-        onClose,
-        open: true,
-        children: 'Hello World'
-      })
-
-      expect(onClose).to.not.have.been.called()
-
-      subject.setProps({ open: false }, () => {
-        expect(onClose).to.have.been.called()
-        done()
-      })
-    })
-
-    it('should not render if children are empty', () => {
-      const subject = testbed.render({ open: true })
-      const node = subject.instance().node
-
-      expect(typeof node).to.equal('undefined')
-    })
+    expect(portal.length).to.equal(0)
   })
 
   describe('without a mountNode prop', () => {
-    const testbed = new Testbed(<Portal />)
-
-    it('should render nothing and have a node with no parent when closed', () => {
-      const subject = testbed.render()
-      const node = subject.instance().node
-
-      expect(typeof node).to.equal('undefined')
+    it('should render nothing when closed', async () => {
+      await mount(
+        <Portal>
+          Hello World
+        </Portal>
+      )
+      const portal = await Portal.findAll({
+        errorIfNotFound: false,
+        timeout: 0
+      })
+      expect(portal.length).to.equal(0)
     })
 
-    it('should render children and have a node with a parent when open', () => {
-      const subject = testbed.render({
-        open: true,
-        children: 'Hello World'
-      })
-      const node = subject.instance().node
+    it('should render children and have a node with a parent when open', async () => {
+      const onKeyDown = stub()
+      await mount(
+        <Portal open>
+          <button onKeyDown={onKeyDown}>
+            Hello World
+          </button>
+        </Portal>
+      )
 
-      expect(node.innerHTML).to.contain('Hello World')
-      expect(node.nodeName.toUpperCase()).to.equal('SPAN')
-      expect(node.parentNode).to.equal(document.body)
-    })
+      const portal = await Portal.find({ text: 'Hello World' })
+      const button = await within(portal).find('button')
 
-    it('should render children elements', () => {
-      const subject = testbed.render({
-        open: true,
-        children: <div>Foo Bar Baz</div>
-      })
-      const node = subject.instance().node
+      button.keyDown('Enter')
 
-      expect(node.children.length).to.equal(1)
-      expect(node.innerHTML).to.contain('Foo Bar Baz')
+      expect(onKeyDown).to.have.been.called()
+
+      expect(portal.parent())
+        .to.equal(document.body)
     })
   })
 
   describe('when a mountNode prop is provided', () => {
-    const getMountNode = () => document.getElementById('portal-mount-node')
-    const testbed = new Testbed(
-      <div>
-        <Portal
-          open
-          mountNode={getMountNode}
-        >
-          Greetings from the Portal
-        </Portal>
-        <div id="portal-mount-node" />
-      </div>
-    )
+    it('should render nothing when closed', async () => {
+      await mount(
+        <div>
+          <Portal
+            mountNode={() => document.getElementById('portal-mount-node')}
+          >
+            Hello World
+          </Portal>
+          <div id="portal-mount-node" />
+        </div>
+      )
+      const portal = await Portal.find({
+        text: 'Hello World',
+        timeout: 0,
+        errorIfNotFound: false
+      })
 
-    it('should render into the mount node', () => {
-      const subject = testbed.render().find(Portal)
-      const node = subject.unwrap().node
+      expect(portal).to.not.exist()
+    })
 
-      expect(node.parentNode).to.equal(document.getElementById('portal-mount-node'))
+    it('should render children and have a node with a parent when open', async () => {
+      await mount(
+        <div>
+          <Portal
+            open
+            mountNode={() => document.getElementById('portal-mount-node')}
+          >
+            Hello World
+          </Portal>
+          <div id="portal-mount-node" />
+        </div>
+      )
+
+      const portal = await Portal.find({ text: 'Hello World'})
+
+      expect(portal.getDOMNode().parentNode)
+        .to.equal(document.getElementById('portal-mount-node'))
     })
   })
 })

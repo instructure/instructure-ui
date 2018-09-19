@@ -70,6 +70,7 @@ plugins = plugins.concat([
       'packages/generate-examples/src/**/*.js'
     ],
     ignore: [
+      'docs/testing-best-practices.md',
       'packages/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
@@ -79,6 +80,7 @@ plugins = plugins.concat([
       '**/__docs__/**',
       '**/__examples__/**',
       '**/__svg__/**',
+      '**/__fixtures__/**',
       '**/__testfixtures__/**',
       '**/__tests__/**',
       '**/locales/**',
@@ -89,6 +91,8 @@ plugins = plugins.concat([
       '**/src/utils/index.js',
       'packages/ui-utils/src/index.js',
       'packages/ui-utils/src/{react,dom}/index.js',
+
+      'packages/ui-test-utils/**',
 
       'packages/ui-docs-client/src/**',
       'packages/ui-docs-plugin/src/**',

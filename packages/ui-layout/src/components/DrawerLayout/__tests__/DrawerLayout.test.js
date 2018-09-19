@@ -26,11 +26,11 @@ import React from 'react'
 import px from '@instructure/ui-utils/lib/px'
 import within from '@instructure/ui-utils/lib/within'
 
-import DrawerLayoutTestApp from './__testfixtures__/DrawerLayoutTestApp'
+import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
 
 describe('<DrawerLayout />', () => {
   const testbed = new Testbed(
-    <DrawerLayoutTestApp />
+    <DrawerLayoutFixture />
   )
 
   beforeEach(() => {

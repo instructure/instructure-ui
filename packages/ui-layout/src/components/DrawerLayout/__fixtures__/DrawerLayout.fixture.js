@@ -26,9 +26,9 @@ import PropTypes from 'prop-types'
 
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import DrawerLayout, { DrawerTray, DrawerContent } from '../../index'
+import DrawerLayout, { DrawerTray, DrawerContent } from '../index'
 
-export default class DrawerLayoutTestApp extends Component {
+export default class DrawerLayoutFixture extends Component {
   static propTypes = {
     layoutWidth: PropTypes.string,
     minWidth: PropTypes.string,

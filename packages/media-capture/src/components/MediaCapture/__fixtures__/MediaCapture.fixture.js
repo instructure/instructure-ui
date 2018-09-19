@@ -22,13 +22,34 @@
  * SOFTWARE.
  */
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+import React from 'react'
+import MediaCapture from '../index'
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
+export default class MediaCaptureFixture extends React.Component {
+  onCompleted = (file) => {
+    const a = document.createElement('a')
+    a.href = URL.createObjectURL(file)
+    a.download = `${file.name}.webm`
+    a.style = { display: 'none' }
+    this.container.append(a)
+    a.click()
+    URL.revokeObjectURL(a.href)
+    a.remove()
+    console.log(`MediaCapture completed!`) // eslint-disable-line no-console
+  }
 
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+  onClose = (state) => {
+    console.log(`MediaCapture closed: ${state}`) // eslint-disable-line no-console
+  }
+
+  render () {
+    return (
+      <div ref={el => this.container = el}>
+        <MediaCapture
+          onCompleted={this.onCompleted}
+          onClose={this.onClose}
+        />
+      </div>
+    )
+  }
+}

@@ -21,14 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+export default function initConsole () {
+  /* eslint-disable no-console */
+  // clear the console before rebundling:
+  if (typeof console.clear === 'function') {
+    console.clear()
+  }
+  process.once('unhandledRejection', (error) => {
+    console.error('Unhandled rejection: ' + error.stack)
+    process.exit(1)
+  })
+  // so that we can test for prop type validation errors in our tests:
+  const consoleError = console.error
+  console.error = (firstMessage, ...rest) => {
+    if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
+      throw new Error('Unexpected React Warning: ' + firstMessage)
+    }
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
-
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+    return consoleError(firstMessage, ...rest)
+  }
+  /* eslint-enable no-console */
+}

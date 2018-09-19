@@ -70,6 +70,10 @@ if (paths.length > 0) {
   vars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
 }
 
+if (argv.includes('--testbed')) {
+  vars.push('USE_TESTBED=1')
+}
+
 const result = runCommandsConcurrently({
   karma: getCommand('karma', args, vars)
 })

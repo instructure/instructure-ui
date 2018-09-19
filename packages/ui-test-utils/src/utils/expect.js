@@ -21,14 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import chai from 'chai'
+import sinon from 'sinon-chai'
+import string from 'chai-string'
+import dirty from 'dirty-chai'
+import promised from 'chai-as-promised'
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+const init = (chai) => {
+  chai.use(sinon)
+  chai.use(string)
+  chai.use(promised)
+  chai.use(dirty)
+  return chai
+}
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+export const expect = init(chai).expect

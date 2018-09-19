@@ -53,4 +53,4 @@ module.exports = function () {
   chai.use(require('dirty-chai'))
 
   return chai
-}
+}()

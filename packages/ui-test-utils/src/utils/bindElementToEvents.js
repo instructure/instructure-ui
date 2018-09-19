@@ -22,13 +22,31 @@
  * SOFTWARE.
  */
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
+import keycode from 'keycode'
 
-// global mocha before
-before(() => {
-  Testbed.init()
-})
+export function bindElementToEvents (element, events) {
+  if (element instanceof Element) {
+    return Object.entries(events).reduce((bound, [key, fn]) => {
+      if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
+        bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))// eslint-disable-line no-param-reassign
+      } else {
+        bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
+      }
+      return bound
+    }, {})
+  } else {
+    console.warn('[ui-test-utils] could not bind events to invalid HTMLElement')
+  }
+}
 
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+function fireKeyboardEvent (fireEvent, whichKey, init) {
+  const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
+  const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
+
+  fireEvent({
+    ...init,
+    key,
+    which: keyCode,
+    keyCode
+  })
+}

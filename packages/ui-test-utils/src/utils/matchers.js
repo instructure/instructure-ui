@@ -21,35 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { fuzzyMatches, matches, getNodeText } from 'dom-testing-library'
 
-import React from 'react'
-import MediaCapture from '../../index'
+// polyfill for IE
+// TODO: check SVGElement support
+if (!Element.prototype.matches) {
+ Element.prototype.matches = Element.prototype.msMatchesSelector
+}
 
-export default class Example extends React.Component {
-  onCompleted = (file) => {
-    const a = document.createElement('a')
-    a.href = URL.createObjectURL(file)
-    a.download = `${file.name}.webm`
-    a.style = { display: 'none' }
-    this.container.append(a)
-    a.click()
-    URL.revokeObjectURL(a.href)
-    a.remove()
-    console.log(`MediaCapture completed!`) // eslint-disable-line no-console
-  }
+function matchElementByText (element, text, options = {}) {
+  const { exact, collapseWhitespace, trim } = options
+  const matcher = exact ? matches : fuzzyMatches
+  return matcher(getNodeText(element), element, text, { collapseWhitespace, trim })
+}
 
-  onClose = (state) => {
-    console.log(`MediaCapture closed: ${state}`) // eslint-disable-line no-console
-  }
+function matchElementByAttribute (element, name, value, options = {}) {
+  const { exact, collapseWhitespace, trim } = options
+  const matcher = exact ? matches : fuzzyMatches
+  return matcher(element.getAttribute(name), element, value, { collapseWhitespace, trim })
+}
 
-  render () {
-    return (
-      <div ref={el => this.container = el}>
-        <MediaCapture
-          onCompleted={this.onCompleted}
-          onClose={this.onClose}
-        />
-      </div>
-    )
-  }
+function matchElementBySelector (element, selector) {
+  return element.matches(selector)
+}
+
+export {
+  matchElementByText,
+  matchElementByAttribute,
+  matchElementBySelector
 }

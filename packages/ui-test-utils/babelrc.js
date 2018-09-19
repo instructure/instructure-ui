@@ -22,13 +22,6 @@
  * SOFTWARE.
  */
 
-const Testbed = require('./Testbed')
-const chai = require('./chaiWrapper')
-
-// global mocha before
-before(() => {
-  Testbed.init()
-})
-
-exports.expect = global.expect = chai.expect
-exports.Testbed = global.Testbed = Testbed
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel') ]]
+}

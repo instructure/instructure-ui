@@ -49,8 +49,10 @@ module.exports = function (source, map) {
             .findIndex(scopePath => (testFilePath === scopePath || testFilePath.startsWith(scopePath))) >= 0
         })
 
-      let result = ''
+      let result
+
       // BEGIN TODO once all of the legacy/Testbed tests are converted, remove the following:
+      const USE_TESTBED = process.env.USE_TESTBED
       const TESTBED_REMOVE_THIS = options.TESTBED_REMOVE_THIS || []
       const matchesTestbedPath = function (filePath) {
         return TESTBED_REMOVE_THIS.findIndex(testbedFilePath => filePath.startsWith(testbedFilePath)) >= 0
@@ -59,20 +61,34 @@ module.exports = function (source, map) {
         .filter((filePath) => {
           return matchesTestbedPath(filePath)
         })
-      if (testbedFilePaths.length > 0 && parseFloat(process.env.REACT_VERSION) < 16) {
-        const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
-        const testbedTests = testbedFileRequires.join(';\n')
-        result = `
-  describe('ui-testbed', function () {
-    global.Testbed = require('${require.resolve('@instructure/ui-testbed')}');
-    before(() => {
-      global.Testbed.init()
-    })
-    ${testbedTests}
-  })
-  `
-      }
+
+      const testFilePaths = allFilePaths
+        .filter((filePath) => {
+          return !matchesTestbedPath(filePath)
+        })
+
+      if (USE_TESTBED) {
+        if (testbedFilePaths.length > 0 && parseFloat(process.env.REACT_VERSION) < 16) {
+          const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
+          const testbedTests = testbedFileRequires.join(';\n')
+          result = `
+describe('ui-testbed', function () {
+  require('${require.resolve('@instructure/ui-testbed')}');
+  ${testbedTests}
+})
+`
+        }
       // END TODO (remove Testbed)
+    } else {
+      if (testFilePaths.length > 0) {
+        const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
+        result = `
+describe('ui-test-utils', function () {
+${testFileRequires.join(';\n')}
+})
+`
+      }
+    }
 
       if (!result) {
         result = `
@@ -83,26 +99,10 @@ describe('WHEN NO TESTS MATCH...', () => {
       }
 
       callback(null, `
-// clear the console before rebundling:
-if (typeof console.clear === 'function') {
-  console.clear()
-}
-process.once('unhandledRejection', (error) => {
-  console.error('Unhandled rejection: ' + error.stack)
-  process.exit(1)
-})
-// so that we can test for prop type validation errors in our tests:
-const consoleError = console.error
-console.error = (firstMessage, ...rest) => {
-  if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
-    throw new Error('Unexpected React Warning: ' + firstMessage)
-  }
-
-  return consoleError(firstMessage, ...rest)
-}
-console.log('REACT VERSION', '${process.env.REACT_VERSION}');
 ${result}
+console.log('REACT VERSION', '${process.env.REACT_VERSION}');
 `, map)
+
     }).catch((error) => {
       callback(error)
     })
