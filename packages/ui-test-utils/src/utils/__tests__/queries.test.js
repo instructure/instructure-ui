@@ -53,7 +53,7 @@ describe('find, findAll', () => {
   describe('by text', () => {
     it('can get elements by matching their text content', async () => {
       await mount(
-        <div>
+        <div data-locator="TestLocator">
           <span>Currently showing</span>
           <span>
             {`Step
@@ -67,17 +67,49 @@ describe('find, findAll', () => {
       expect(await findAll({ text: 'Step 1 of 4' })).to.have.length(1)
     })
 
+    it('can get elements by matching their nested contents', async () => {
+      await mount(
+        <div>
+          <span>Currently showing</span>
+        </div>
+      )
+
+      expect(await findAll({
+        contains: 'Currently showing'
+      }))
+        .to.have.length(3) // div (mount node), div, span
+    })
+
+    it('should filter out non-matching results', async () => {
+      await mount(
+        <div data-locator="TestLocator">
+          <span>Currently showing</span>
+        </div>
+      )
+
+      expect(await findAll({
+        locator: '[data-locator="TestLocator"]',
+        text: 'Foo',
+        errorIfNotFound: false,
+        timeout: 0
+      })).to.have.length(0)
+    })
+
     it('can get elements by matching their text across adjacent text nodes', async () => {
-      const textDiv = document.createElement('div')
+      const div = document.createElement('div')
       const textNodeContent = ['£', '24', '.', '99']
       textNodeContent
         .map(text => document.createTextNode(text))
-        .forEach(textNode => textDiv.appendChild(textNode))
+        .forEach(textNode => div.appendChild(textNode))
 
       const subject = await mount(<div />)
-      subject.getDOMNode().appendChild(textDiv)
+      subject.getDOMNode().appendChild(div)
 
-      expect(await findAll({ text: '£24.99' })).to.have.length(1)
+      const nodes = await findAll({
+        text: '£24.99'
+      })
+
+      expect(nodes).to.have.length(1)
     })
 
     it('matches case with RegExp matcher', async () => {
@@ -86,7 +118,6 @@ describe('find, findAll', () => {
       expect(await findAll({ text: /Step 1 of 4/, errorIfNotFound: false, timeout: 0 }))
         .to.have.length(0)
     })
-
   })
 
   describe('by label', () => {

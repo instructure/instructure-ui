@@ -32,7 +32,7 @@ describe('<Portal />', () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ text: 'Hello World' })
+    const portal = await Portal.find({ contains: 'Hello World' })
     expect(portal.getDOMNode()).to.exist()
   })
 
@@ -40,7 +40,7 @@ describe('<Portal />', () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ text: 'Hello World' })
+    const portal = await Portal.find({ contains: 'Hello World' })
     expect(await portal.accessible()).to.be.true()
   })
 
@@ -102,7 +102,7 @@ describe('<Portal />', () => {
         </Portal>
       )
 
-      const portal = await Portal.find({ text: 'Hello World' })
+      const portal = await Portal.find({ contains: 'Hello World' })
       const button = await within(portal).find('button')
 
       button.keyDown('Enter')
@@ -127,7 +127,7 @@ describe('<Portal />', () => {
         </div>
       )
       const portal = await Portal.find({
-        text: 'Hello World',
+        contains: 'Hello World',
         timeout: 0,
         errorIfNotFound: false
       })
@@ -148,7 +148,7 @@ describe('<Portal />', () => {
         </div>
       )
 
-      const portal = await Portal.find({ text: 'Hello World'})
+      const portal = await Portal.find({ contains: 'Hello World'})
 
       expect(portal.getDOMNode().parentNode)
         .to.equal(document.getElementById('portal-mount-node'))

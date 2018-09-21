@@ -21,7 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { matchElementByAttribute, matchElementByText, matchElementBySelector } from './matchers'
+import {
+  matchElementByAttribute,
+  matchElementByText,
+  matchElementBySelector,
+  matchElementByContents
+} from './matchers'
 
 function filterBySelector (container, results, selector, options) {
   if (Array.isArray(results)) {
@@ -33,12 +38,12 @@ function filterBySelector (container, results, selector, options) {
 }
 
 function filterByAttribute (container, results, name, value, options = {}) {
-  return Array.isArray(results) ? results : queryAllBySelector(container, `[${name}]`)
+  return (Array.isArray(results) ? results : queryAllBySelector(container, `[${name}]`))
     .filter(element => matchElementByAttribute(element, name, value, options))
 }
 
 function filterByTitle (container, results, title, options) {
-  return Array.isArray(results) ? results : queryAllBySelector(container, '[title], svg > title')
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '[title], svg > title'))
     .filter((element) => {
       if (matchElementBySelector(element, 'svg > title')) {
         return matchElementByText(element, title, options)
@@ -50,11 +55,15 @@ function filterByTitle (container, results, title, options) {
     })
 }
 
-function filterByText (container, results, text, options) {
-  return Array.isArray(results) ? results : queryAllBySelector(container, '*')
-    .filter(element => matchElementByText(element, text, options))
+function filterByContents (container, results, elementOrString, options) {
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => matchElementByContents(element, elementOrString, options))
 }
 
+function filterByText (container, results, text, options) {
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => matchElementByText(element, text, options))
+}
 
 function filterByLabelText (container, results, text, options = {}) {
   // aria-labelledby may not refer to a label element, so we get elements with ids too
@@ -102,6 +111,7 @@ function queryAllBySelector (element = document.documentElement, selector = '*')
 
 export {
   filterByLabelText,
+  filterByContents,
   filterByText,
   filterByTitle,
   filterByAttribute,

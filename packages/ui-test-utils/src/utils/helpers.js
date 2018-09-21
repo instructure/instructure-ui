@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import runAxeCheck from '@instructure/ui-axe-check'
-import { fireEvent, prettyDOM, getNodeText } from 'dom-testing-library'
+import { fireEvent, prettyDOM } from 'dom-testing-library'
 
 function typeIn (element, value) {
   element.value = value // eslint-disable-line no-param-reassign
@@ -34,7 +34,7 @@ function typeIn (element, value) {
 }
 
 function text (element) {
-  return getNodeText(element)
+  return element.textContent
 }
 
 function visible (element) {

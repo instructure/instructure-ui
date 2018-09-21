@@ -35,6 +35,17 @@ function matchElementByText (element, text, options = {}) {
   return matcher(getNodeText(element), element, text, { collapseWhitespace, trim })
 }
 
+function matchElementByContents (element, elementOrString, options = {}) {
+  const { exact, collapseWhitespace, trim } = options
+  const matcher = exact ? matches : fuzzyMatches
+
+  if (elementOrString instanceof Element) {
+    return element.contains(elementOrString)
+  } else {
+    return matcher(element.textContent, element, elementOrString, { collapseWhitespace, trim })
+  }
+}
+
 function matchElementByAttribute (element, name, value, options = {}) {
   const { exact, collapseWhitespace, trim } = options
   const matcher = exact ? matches : fuzzyMatches
@@ -47,6 +58,7 @@ function matchElementBySelector (element, selector) {
 
 export {
   matchElementByText,
+  matchElementByContents,
   matchElementByAttribute,
   matchElementBySelector
 }

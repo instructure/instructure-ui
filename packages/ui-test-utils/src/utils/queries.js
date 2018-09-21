@@ -31,6 +31,7 @@ import { waitForQueryResult } from './waitForQueryResult'
 import {
   filterByLabelText,
   filterByText,
+  filterByContents,
   filterByTitle,
   filterByAttribute,
   filterBySelector
@@ -53,6 +54,7 @@ async function findAll (...args) {
     css,
     tag,
     text,
+    contains,
     label,
     title,
     value,
@@ -80,6 +82,10 @@ async function findAll (...args) {
 
     if (text) {
       result = filterByText(element, result, text, options)
+    }
+
+    if (contains) {
+      result = filterByContents(element, result, contains, options)
     }
 
     if (value) {
@@ -152,6 +158,7 @@ function parseQueryArguments () {
       css,
       tag,
       text,
+      contains,
       label,
       value,
       attribute,
@@ -163,6 +170,7 @@ function parseQueryArguments () {
       title,
       tag,
       text,
+      contains,
       label,
       value,
       attribute
