@@ -23,125 +23,113 @@
  */
 
 import React from 'react'
-import IconStar from '@instructure/ui-icons/lib/Solid/IconStar'
-import IconStarLight from '@instructure/ui-icons/lib/Solid/IconStarLight'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Rating from '../index'
-import RatingIcon from '../RatingIcon'
+import RatingLocator from '../locator'
 
-describe('<Rating />', () => {
-  const testbed = new Testbed(
-    <Rating label="Course rating" />
-  )
-
-  it('should render the correct number of icons', () => {
-    const subject = testbed.render({
-      iconCount: 5
-    })
-    const svg = subject.find(IconStarLight)
-    expect(svg.length).to.equal(5)
+describe('<Rating />', async () => {
+  it('should render the correct number of icons', async () => {
+    await mount(<Rating label="Course rating" iconCount={5} />)
+    const icons = await RatingLocator.findAll({ tag: 'svg' })
+    expect(icons.length).to.equal(5)
   })
 
-  it('should handle a valueMax of zero', () => {
-    const subject = testbed.render({
-      valueMax: 0
-    })
-    const svg = subject.find(IconStarLight)
-    expect(svg.length).to.equal(3)
+  it('should handle a valueMax of zero', async () => {
+    await mount(<Rating label="Course rating" valueMax={0} />)
+    const icons = await RatingLocator.findAll({ tag: 'svg' })
+    expect(icons.length).to.equal(3)
   })
 
-  it('transitions when animateFill is set', () => {
-    const subject = testbed.render({
-      iconCount: 5,
-      animateFill: true,
-      valueNow: 100,
-      valueMax: 100
-    })
+  it('should fill the correct number of icons', async () => {
+    await mount(
+      <Rating
+        label="Course rating"
+        iconCount={5}
+        valueNow={89}
+        valueMax={100}
+      />
+    )
 
-    expect(subject.find(RatingIcon).at(4).props().animateFill).to.be.true()
+    const rating = await RatingLocator.find()
+    const filledIcons = await rating.findAllFilledIcons()
+
+    expect(filledIcons.length).to.equal(4)
   })
 
-  it('should fill the correct number of icons', () => {
-    const subject = testbed.render({
-      iconCount: 5,
-      valueNow: 89,
-      valueMax: 100
-    })
-    const svg = subject.find(IconStar)
-    expect(svg.length).to.equal(4)
+  it('never renders more than `iconCount` icons', async () => {
+    await mount(
+      <Rating
+        label="Course rating"
+        iconCount={5}
+        valueNow={110}
+        valueMax={100}
+      />
+    )
+
+    const icons = await RatingLocator.findAll({ tag: 'svg' })
+    expect(icons.length).to.equal(5)
   })
 
-  it('never renders more than `iconCount` icons', () => {
-    const subject = testbed.render({
-      iconCount: 5,
-      valueNow: 110,
-      valueMax: 100
-    })
-    const svg = subject.find(IconStar)
-    expect(svg.length).to.equal(5)
+  it('should set the required aria attribute values', async () => {
+    await mount(
+      <Rating
+        label="Course rating"
+        iconCount={5}
+        valueNow={89}
+        valueMax={100}
+        formatValueText={(current, max) => `${current} out of ${max}`}
+      />
+    )
+
+    const rating = await RatingLocator.find()
+
+    // see https://www.w3.org/TR/wai-aria-1.1/#slider
+    expect(rating.getAttribute('role')).to.equal('slider')
+    expect(rating.getAttribute('aria-readonly')).to.equal('true')
+    expect(rating.getAttribute('aria-label')).to.equal('Course rating')
+    expect(rating.getAttribute('aria-valuenow')).to.equal('4')
+    expect(rating.getAttribute('aria-valuemax')).to.equal('5')
+    expect(rating.getAttribute('aria-valuemin')).to.equal('0')
+    expect(rating.getAttribute('aria-valuetext')).to.equal('4 out of 5')
   })
 
-  describe('when passing down props to View', () => {
+  it('should meet a11y standards', async () => {
+    await mount(<Rating label="Course rating" iconCount={5} />)
+    const rating = await RatingLocator.find()
+    expect(await rating.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
-      margin: 'small',
-      display: 'inline-block'
+      margin: 'small'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Rating)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Rating label="Course rating" iconCount={5} {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Rating label="Course rating" iconCount={5} {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-    it(`should not allow overriding the display prop`, () => {
-      const subject = testbed.render({
-        display: 'auto'
-      })
-      expect(subject.find(View).props().display).to.equal('inline-block')
-    })
-  })
-
-  it('should set the required aria attribute values', () => {
-    const subject = testbed.render({
-      label: 'Course rating',
-      formatValueText: function (current, max) {
-        return `${current} out of ${max}`
-      },
-      iconCount: 5,
-      valueNow: 89,
-      valueMax: 100
-    })
-    // see https://www.w3.org/TR/wai-aria-1.1/#slider
-    expect(subject.getAttribute('role')).to.equal('slider')
-    expect(subject.getAttribute('aria-readonly')).to.equal('true')
-    expect(subject.getAttribute('aria-label')).to.equal('Course rating')
-    expect(subject.getAttribute('aria-valuenow')).to.equal('4')
-    expect(subject.getAttribute('aria-valuemax')).to.equal('5')
-    expect(subject.getAttribute('aria-valuemin')).to.equal('0')
-    expect(subject.getAttribute('aria-valuetext')).to.equal('4 out of 5')
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-    // this will keep failing erroneously until the next release of axe-core
-    // https://github.com/dequelabs/axe-core/pull/964/commits/0a54a2380fc81a2da75ce2da18b184b8ebba1368
-    // so we'll test the attributes above and ignore that rule for now
-    subject.should.be.accessible(done, {
-      // TODO: remove this ignore when we upgrade axe-core
-      ignores: ['aria-allowed-attr']
     })
   })
 })

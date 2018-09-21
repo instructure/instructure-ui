@@ -65,6 +65,7 @@ export default class ListItem extends Component {
     */
     padding: ThemeablePropTypes.spacing,
     spacing: PropTypes.oneOf([
+      'none',
       'xxx-small',
       'xx-small',
       'x-small',
@@ -78,14 +79,23 @@ export default class ListItem extends Component {
   }
 
   render () {
-    const props = omitProps(this.props, {...ListItem.propTypes, ...View.propTypes})
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, ListItem.propTypes),
+      ListItem
+    )
+
     const delimiter = (this.props.variant === 'pipe') ? 'pipe' : this.props.delimiter
     const variant = (this.props.variant === 'pipe') ? 'inline' : this.props.variant
     const size = (this.props.variant === 'pipe') ? 'small' : this.props.size
 
     const noDelimiter = (delimiter === 'none' && variant !== 'inline')
 
-    const noSpacing = this.props.delimiter !== 'none' || this.props.variant === 'pipe'
+    const noSpacing = (
+      this.props.delimiter !== 'none' ||
+      this.props.variant === 'pipe' ||
+      this.props.spacing === 'none'
+    )
+
     warning(
       !(noSpacing && this.props.spacing),
       `[List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\`
@@ -99,10 +109,9 @@ export default class ListItem extends Component {
       [styles[`delimiter--${delimiter}`]]: true,
       [styles[`spacing--${this.props.spacing}`]]: this.props.spacing && !noSpacing
     }
-
     return (
       <View
-        {...props}
+        {...passthroughProps}
         as="li"
         margin={this.props.margin}
         padding={this.props.padding}

@@ -51,6 +51,10 @@
   letter-spacing: 0.0313em;
 }
 
+.loadImage {
+  display: none;
+}
+
 .circle {
   width: 2.5em;
   position: relative;

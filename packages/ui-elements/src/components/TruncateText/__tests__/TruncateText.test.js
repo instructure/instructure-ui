@@ -23,134 +23,142 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, stub, wait, within } from '@instructure/ui-test-utils'
+
 import TruncateText from '../index'
 import Text from '../../Text'
 
-describe('<TruncateText />', () => {
+describe('<TruncateText />', async () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
-  const testbed = new Testbed(
-    <div style={{width: '200px'}}>
-      <TruncateText>{defaultText}</TruncateText>
-    </div>
-  )
 
-  it('should render', () => {
-    const subject = testbed.render()
+  it('should truncate text', async () => {
+    const subject = await mount(
+      <div style={{width: '200px'}}>
+        <TruncateText>{defaultText}</TruncateText>
+      </div>
+    )
 
-    expect(subject).to.be.present()
-  })
-
-  it('should truncate text', () => {
-    const subject = testbed.render()
-    const tt = subject.find('TruncateText')
-
-    const text = tt.text()
+    const renderedContent = within(subject.getDOMNode())
+    const text = renderedContent.getTextContent()
 
     expect(text.indexOf('truncate')).to.equal(-1)
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
-  it('should recalculate when parent width changes', () => {
-    const subject = testbed.render()
-    const tt = subject.find('TruncateText')
+  it('should recalculate when parent width changes', async () => {
+    let container
+    const subject = await mount(
+      <div style={{width: '200px'}} componentRef={(el) => { container = el }}>
+        <TruncateText>{defaultText}</TruncateText>
+      </div>
+    )
 
-    const text1 = tt.text()
+    const renderedContent = within(subject.getDOMNode())
+    const text1 = renderedContent.getTextContent()
 
-    subject.getDOMNode().style.width = '100px'
-    testbed.tick()
+    container.style.width = '100px'
 
-    const text2 = tt.text()
+    let text2
+    await wait(() => {
+      text2 = renderedContent.getTextContent()
+      expect(text1).to.not.equal(text2)
+    })
 
-    expect(text1).to.not.equal(text2)
+    container.style.width = '400px'
 
-    subject.getDOMNode().style.width = '400px'
-    testbed.tick()
-
-    const text3 = tt.text()
-    expect(text2).to.not.equal(text3)
+    await wait(() => {
+      expect(renderedContent.getTextContent()).to.not.equal(text2)
+    })
   })
 
-  it('should preserve node structure', () => {
-    const subject = testbed.render({
-      children: (
+  it('should preserve node structure', async () => {
+    const subject = await mount(
+      <div style={{width: '200px'}}>
         <TruncateText>
           <p className="testClass">Hello world! <strong>This is a</strong> long string that <em>should truncate</em></p>
         </TruncateText>
-      )
-    })
-    const p = subject.unwrap().children[0].firstChild
+      </div>
+    )
 
-    expect(p.childNodes[1].nodeType).to.equal(3)
-    expect(p.childNodes[3].nodeType).to.equal(1)
+    const renderedContent = within(subject.getDOMNode())
+    const pQuery = await renderedContent.find({ tag: 'p' })
+
+    expect(await pQuery.find({ tag: 'strong' })).to.exist()
+    expect(await pQuery.find({ tag: 'em' })).to.exist()
+
+    const p = pQuery.getDOMNode()
     expect(p.children.length).to.equal(3)
     expect(p.nodeName).to.equal('P')
     expect(p.className).to.equal('testClass')
   })
 
-  it('should recalculate if props change', (done) => {
-    const subject = testbed.render()
-    testbed.tick()
+  it('should recalculate if props change', async () => {
+    const subject = await mount(
+      <div style={{width: '200px'}}>
+        <TruncateText>{defaultText}</TruncateText>
+      </div>
+    )
 
-    const text1 = subject.find('TruncateText').text()
+    const renderedContent = within(subject.getDOMNode())
+    const text = renderedContent.getTextContent()
 
-    subject.setProps({
+    await subject.setProps({
       children: (
-        <TruncateText position="middle" ellipsis="(...)">{defaultText}</TruncateText>
-      )
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        const text2 = subject.find('TruncateText').text()
-        expect(text1).to.not.equal(text2)
-        done()
-      })
-    })
-  })
-
-  it('should call onUpdate when text changes', () => {
-    const onUpdate = testbed.stub()
-    const subject = testbed.render({
-      style: {width: '700px'},
-      children: (
-        <TruncateText onUpdate={onUpdate}>{defaultText}</TruncateText>
-      )
-    })
-
-    testbed.tick()
-    expect(onUpdate).to.not.have.been.called()
-
-    subject.getDOMNode().style.width = '100px'
-
-    testbed.tick()
-    expect(onUpdate).to.have.been.calledWith(true)
-
-    subject.getDOMNode().style.width = '800px'
-
-    testbed.tick()
-    expect(onUpdate).to.have.been.calledWith(false)
-  })
-
-  it('should warn if children prop receives too deep of a node tree', () => {
-    const warning = testbed.spy(console, 'warn')
-
-    testbed.render({
-      children: (
-        <TruncateText>
-          Hello world! <strong><span>This is a</span></strong> long string that should truncate
+        <TruncateText position="middle" ellipsis="(...)">
+          {defaultText}
         </TruncateText>
       )
     })
+
+    await wait(() => {
+      expect(renderedContent.getTextContent()).to.not.equal(text)
+    })
+  })
+
+  it('should call onUpdate when text changes', async () => {
+    const onUpdate = stub()
+
+    let container
+    await mount(
+      <div style={{width: '700px'}} componentRef={(el) => { container = el }}>
+        <TruncateText onUpdate={onUpdate}>{defaultText}</TruncateText>
+      </div>
+    )
+
+    expect(onUpdate).to.not.have.been.called()
+
+    container.style.width = '100px'
+    await wait(() => {
+      expect(onUpdate).to.have.been.calledWith(true)
+    })
+
+    container.style.width = '800px'
+    await wait(() => {
+      expect(onUpdate).to.have.been.calledWith(false)
+    })
+  })
+
+  it('should warn if children prop receives too deep of a node tree', async () => {
+    const warning = spy(console, 'warn')
+
+    await mount(
+      <div style={{width: '200px'}}>
+        <TruncateText>
+          Hello world! <strong><span>This is a</span></strong> long string that should truncate
+        </TruncateText>
+      </div>
+    )
 
     expect(
       warning.lastCall.args[0].includes('Some children are too deep in the node tree and will not render.')
     ).to.be.true()
   })
 
-  it('should render text at any size with no lineHeight set', () => {
-    testbed.render({
-      style: {lineHeight: 'normal'},
-      children: (
-        <span id="stage">
+  it('should render text at any size with no lineHeight set', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px'}}>
+        <span ref={(el) => { stage = el }}>
           <Text size="x-small">
             <TruncateText>xsmall</TruncateText>
           </Text>
@@ -170,17 +178,19 @@ describe('<TruncateText />', () => {
             <TruncateText>xxlarge</TruncateText>
           </Text>
         </span>
-      )
-    })
-    const stage = document.getElementById('stage')
+      </div>
+    )
+
     expect(stage.textContent).to.equal('xsmallsmallmediumlargexlargexxlarge')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
-    })
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <div style={{width: '200px'}}>
+        <TruncateText>{defaultText}</TruncateText>
+      </div>
+    )
+    const renderedContent = within(subject.getDOMNode())
+    expect(await renderedContent.accessible()).to.be.true()
   })
 })

@@ -32,6 +32,7 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import supportsObjectFit from '@instructure/ui-utils/lib/dom/supportsObjectFit'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,6 +42,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @deprecated('6.0.0', {
   cover: 'constrain'
 })
@@ -69,7 +71,9 @@ export default class Img extends Component {
     blur: PropTypes.bool,
     cover: PropTypes.bool,
     constrain: PropTypes.oneOf(['cover', 'contain']),
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -133,7 +137,7 @@ export default class Img extends Component {
     }
 
     const passthroughProps = {
-      ...omitProps(this.props, { ...Img.propTypes, ...View.propTypes }),
+      ...View.omitViewProps(omitProps(this.props, Img.propTypes), Img),
       width,
       height,
       margin,

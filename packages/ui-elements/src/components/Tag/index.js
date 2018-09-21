@@ -32,6 +32,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -42,6 +43,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 class Tag extends Component {
   static propTypes = {
@@ -118,8 +120,6 @@ class Tag extends Component {
       variant
     } = this.props
 
-    const props = omitProps(this.props, {...Tag.propTypes, ...View.propTypes})
-
     const classes = {
       [styles.root]: true,
       [styles[variant]]: true,
@@ -129,9 +129,14 @@ class Tag extends Component {
       [styles.disabled]: disabled
     }
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Tag.propTypes),
+      Tag
+    )
+
     return (
       <View
-        {...props}
+        {...passthroughProps}
         ref={this.handleRef}
         elementRef={this.props.elementRef}
         className={classNames(className, classes)}

@@ -23,60 +23,54 @@
  */
 
 import React from 'react'
+import { expect, mount, find, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Table from '../index'
 
-describe('<Table />', () => {
-  const testbed = new Testbed(<Table caption="Test table" />)
-
-  it('should render a caption', () => {
-    const subject = testbed.render({
-      caption: 'An amazing test table'
-    })
-    expect(subject.find('caption').text()).to.equal('An amazing test table')
+describe('<Table />', async () => {
+  it('should render a caption', async () => {
+    await mount(<Table caption="Test table" />)
+    const table = await find({ tag: 'table' })
+    expect(await table.find({ tag: 'caption', contains: 'Test table' })).to.exist()
   })
 
-  describe('when passing down props to View', () => {
+  it('should meet a11y standards', async () => {
+    await mount(<Table caption="Test table" />)
+    const table = await find({ tag: 'table' })
+    expect(await table.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
-      as: 'table',
       margin: 'small',
-      display: View.defaultProps.display,
       elementRef: () => {}
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Table)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Table caption="Test table" {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Table caption="Test table" {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-
-    it(`should not allow overriding the 'as' prop`, () => {
-      const subject = testbed.render({
-        as: 'div'
-      })
-      expect(subject.find(View).props().as).to.equal('table')
-    })
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
     })
   })
 })

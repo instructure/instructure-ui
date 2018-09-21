@@ -33,6 +33,7 @@ import Browser from '@instructure/ui-utils/lib/Browser'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -42,6 +43,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class Spinner extends Component {
   static propTypes = {
@@ -101,9 +103,15 @@ export default class Spinner extends Component {
       [styles[this.props.variant]]: true,
       [styles.ie11]: ie11
     }
+
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Spinner.propTypes),
+      Spinner
+    )
+
     return (
       <View
-        {...omitProps(this.props, { ...Spinner.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
         className={classNames(classes)}

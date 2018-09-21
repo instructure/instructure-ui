@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 import ms from '@instructure/ui-utils/lib/ms'
+import testable from '@instructure/ui-testable'
 
 import BaseTransition from './BaseTransition'
 
@@ -37,6 +38,7 @@ import theme from './theme'
 category: components/utilities
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class Transition extends Component {
   static propTypes = {

@@ -23,30 +23,34 @@
  */
 
 import React from 'react'
-import MetricsList, { MetricsListItem } from '../index'
+import { expect, mount } from '@instructure/ui-test-utils'
 
-describe('<MetricsList />', () => {
-  const testbed = new Testbed(
-    <MetricsList>
-      <MetricsListItem label="Grade" value="80%" />
-      <MetricsListItem label="Late" value="4" />
-      <MetricsListItem label="Missing" value="2" />
-    </MetricsList>
-  )
+import MetricsList from '../index'
+import MetricsListItem from '../MetricsListItem'
+import MetricsListLocator from '../locator'
 
-  it('should render children', () => {
-    const subject = testbed.render()
+describe('<MetricsList />', async () => {
+  it('should render children', async () => {
+    await mount(
+      <MetricsList>
+        <MetricsListItem label="Grade" value="80%" />
+        <MetricsListItem label="Late" value="4" />
+        <MetricsListItem label="Missing" value="2" />
+      </MetricsList>
+    )
 
-    expect(subject.find(MetricsListItem).length)
-      .to.equal(3)
+    const items = await MetricsListLocator.findAll('div[role="row"]')
+    expect(items.length).to.equal(3)
   })
 
-  it('should not allow invalid children', () => {
+  it('should not allow invalid children', async () => {
     let error = false
     try {
-      testbed.render({
-        children: <div />
-      })
+      await mount(
+        <MetricsList>
+          <div>foo</div>
+        </MetricsList>
+      )
     } catch (e) {
       error = true
     }
@@ -54,25 +58,44 @@ describe('<MetricsList />', () => {
     expect(error).to.be.true()
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      await mount(
+        <MetricsList>
+          <MetricsListItem label="Grade" value="80%" />
+          <MetricsListItem label="Late" value="4" />
+          <MetricsListItem label="Missing" value="2" />
+        </MetricsList>
+      )
 
-      subject.should.be.accessible(done)
+      const metricsList = await MetricsListLocator.find()
+      expect(await metricsList.accessible()).to.be.true()
     })
 
-    it('should have role=grid', () => {
-      const subject = testbed.render()
+    it('should have role=grid', async () => {
+      await mount(
+        <MetricsList>
+          <MetricsListItem label="Grade" value="80%" />
+          <MetricsListItem label="Late" value="4" />
+          <MetricsListItem label="Missing" value="2" />
+        </MetricsList>
+      )
 
-      expect(subject.getAttribute('role'))
-        .to.equal('grid')
+      const metricsList = await MetricsListLocator.find()
+      expect(metricsList.getAttribute('role')).to.equal('grid')
     })
 
-    it('should have aria-readonly=true', () => {
-      const subject = testbed.render()
+    it('should have aria-readonly=true', async () => {
+      await mount(
+        <MetricsList>
+          <MetricsListItem label="Grade" value="80%" />
+          <MetricsListItem label="Late" value="4" />
+          <MetricsListItem label="Missing" value="2" />
+        </MetricsList>
+      )
 
-      expect(subject.getAttribute('aria-readonly'))
-        .to.equal('true')
+      const metricsList = await MetricsListLocator.find()
+      expect(metricsList.getAttribute('aria-readonly')).to.equal('true')
     })
   })
 })

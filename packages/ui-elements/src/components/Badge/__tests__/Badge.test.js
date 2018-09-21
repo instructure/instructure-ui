@@ -23,109 +23,81 @@
  */
 
 import React from 'react'
-import View from '@instructure/ui-layout/lib/components/View'
+
+import { expect, mount, within } from '@instructure/ui-test-utils'
+
 import Badge from '../index'
 import styles from '../styles.css'
 
 describe('<Badge />', () => {
-  const testbed = new Testbed(
-    <Badge count={100}>
-      <button type="button">Inbox</button>
-    </Badge>
-  )
+  it('should be accessible', async () => {
+    const subject = await mount(
+      <Badge count={100}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-  it('should show the count', () => {
-    const subject = testbed.render()
-
-    const badge = subject.find(`.${styles.badge}`)
-    expect(badge.findText('100').length).to.equal(1)
+    const badge = within(subject.getDOMNode())
+    expect(await badge.accessible()).to.be.true()
   })
 
-  it('should truncate the count via countUntil', () => {
-    const subject = testbed.render({countUntil: 100})
+  it('should show the count', async () => {
+    const subject = await mount(
+      <Badge count={100}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-    const badge = subject.find(`.${styles.badge}`)
-    expect(badge.findText('99 +').length).to.equal(1)
+    const badge = within(subject.getDOMNode())
+    expect(await badge.find({ contains: '100' })).to.exist()
   })
 
-  it('should change postion based on the placement prop', () => {
-    const subject = testbed.render({placement: 'bottom start'})
+  it('should truncate the count via countUntil', async () => {
+    const subject = await mount(
+      <Badge count={100} countUntil={100}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-    const badgeBottom = subject.find(`span.${styles['positioned--bottom']}`)
-    expect(badgeBottom).to.be.present()
-
-    const badgeStart = subject.find(`span.${styles['positioned--start']}`)
-    expect(badgeStart).to.be.present()
+    const badge = within(subject.getDOMNode())
+    expect(await badge.find({ contains: '99 +' })).to.exist()
   })
 
-  it('should not render a wrapper for a standalone Badge', () => {
-    const subject = testbed.render({standalone: true})
+  it('should change postion based on the placement prop', async () => {
+    const subject = await mount(
+      <Badge count={100} placement="bottom start">
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-    expect(subject.find(`.${styles.wrapper}`).length).to.equal(0)
+    const badge = within(subject.getDOMNode())
+    expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
+    expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
   })
 
-  it('should change its output via the formatOutput prop', () => {
-    const subject = testbed.render({
-      count: 15,
-      formatOutput: function (formattedCount) {
-        return `My count is ${formattedCount}`
-      }
-    })
+  it('should not render a wrapper for a standalone Badge', async () => {
+    const subject = await mount(
+      <Badge count={100} as="li" standalone={true}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-    const badge = subject.find(`.${styles.badge}`)
-    expect(badge.findText('My count is 15').length).to.equal(1)
+    const badge = within(subject.getDOMNode())
+    expect(await badge.find({ tag: 'li', expectEmpty: true })).to.not.exist()
   })
 
-  describe('when passing down props to View', () => {
-    const allowedProps = {
-      as: 'span',
-      margin: 'small',
-      elementRef: (el) => {},
-      display: 'inline-block'
+  it('should change its output via the formatOutput prop', async () => {
+    const formatOutput = (formattedCount) => {
+      return `My count is ${formattedCount}`
     }
 
-    Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
-          })
-        } else {
-          it(`should allow the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
-          })
-        }
-    })
+    const subject = await mount(
+      <Badge count={15} formatOutput={formatOutput}>
+        <button type="button">Inbox</button>
+      </Badge>
+    )
 
-    it(`should not allow overriding the display prop by default`, () => {
-      const subject = testbed.render({
-        display: 'block'
-      })
-      expect(subject.find(View).at(0).props().display).to.equal('inline-block')
-      expect(subject.find(View).at(1).props().display).to.equal('block')
-    })
-
-    it(`should not allow overriding the display prop when standalone`, () => {
-      const subject = testbed.render({
-        standalone: true,
-        display: 'block'
-      })
-      expect(subject.find(View).first().props().display).to.equal('inline-block')
-    })
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-    })
+    const badge = within(subject.getDOMNode())
+    expect(await badge.find({ text: 'My count is 15' })).to.exist()
   })
 })

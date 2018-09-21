@@ -35,6 +35,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -44,6 +45,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
@@ -54,6 +56,10 @@ class Link extends Component {
     * provides a reference to the underlying focusable (`button` or `a`) element
     */
     linkRef: PropTypes.func,
+    /**
+    * provides a reference to the underlying html element
+    */
+    elementRef: PropTypes.func,
     /**
     * the element type to render as (will default to `<a>` if href is provided)
     */
@@ -153,12 +159,17 @@ class Link extends Component {
     const type = onClick || as === 'button' ? 'button' : null
     const tabIndex = role === 'button' ? '0' : null
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Link.propTypes),
+      Link
+    )
+
     const props = {
       ref: (c, ...args) => {
         this._link = c
         linkRef.apply(this, [c].concat(args))
       },
-      ...omitProps(this.props, {...Link.propTypes, ...View.propTypes}),
+      ...passthroughProps,
       className: classnames(classes),
       href: href,
       'aria-disabled': disabled ? 'true' : null,

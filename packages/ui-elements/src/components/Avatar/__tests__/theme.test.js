@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+
 import Avatar from '../index'
 
 describe('Avatar.theme', () => {

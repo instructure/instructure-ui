@@ -23,144 +23,165 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
 
 import Avatar from '../index'
+import AvatarLocator from '../locator'
 
 import styles from '../styles.css'
 
-describe('<Avatar />', () => {
-  const testbed = new Testbed(<Avatar name="Jessica Jones" />)
-
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
-
-      subject.should.be.accessible(done)
+describe('<Avatar />', async () => {
+  describe('for a11y', async () => {
+    it('should be accessible', async () => {
+      await mount(<Avatar name="Jessica Jones" />)
+      const avatar = await AvatarLocator.find()
+      expect(await avatar.accessible()).to.be.true()
     })
 
-    it('should have aria-hidden=true', () => {
-      const subject = testbed.render()
-
-      expect(subject.find('[aria-hidden]')).to.be.present()
-    })
-  })
-
-  describe('with the default props', () => {
-    it('should should display as a circle', () => {
-      const subject = testbed.render()
-
-      expect(subject.hasClass(styles.circle)).to.be.true()
-    })
-
-    it('should render initials', () => {
-      const subject = testbed.render()
-
-      expect(subject.text())
-        .to.equal('JJ')
+    it('initials should have aria-hidden=true', async () => {
+      await mount(<Avatar name="Jessica Jones" />)
+      const avatar = await AvatarLocator.find()
+      const initials = await avatar.find({ text: 'JJ' })
+      expect(initials.getAttribute('aria-hidden')).to.equal('true')
     })
   })
 
-  describe('when an image src url is provided', () => {
-    it('should display the image url provided', () => {
-      // eslint-disable-next-line max-len
-      const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+  describe('with the default props', async () => {
+    it('should should display as a circle', async () => {
+      await mount(<Avatar name="Jessica Jones" />)
+      expect(await AvatarLocator.find(`.${styles.circle}`)).to.exist()
+    })
 
-      const subject = testbed.render({ src })
-      const image = Testbed.wrap(subject.instance()._image)
-
-      image.dispatchNativeEvent('load')
-
-      expect(subject.getComputedStyle().getPropertyValue('background-image'))
-        .to.contain(src)
+    it('should render initials', async () => {
+      await mount(<Avatar name="Jessica Jones" />)
+      expect(await AvatarLocator.find({ contains: 'JJ' })).to.exist()
     })
   })
 
-  describe('when variant is set to "rectangle"', () => {
-    it('should display as a rectangle', () => {
-      const subject = testbed.render({
-        variant: 'rectangle'
+  describe('when an image src url is provided', async () => {
+    // eslint-disable-next-line max-len
+    const src = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+
+    it('should display the image url provided', async () => {
+      await mount(
+        <Avatar
+          name="Foo bar"
+          src={src}
+        />
+      )
+
+      const avatar = await AvatarLocator.find()
+      const image = await avatar.find({
+        tag: 'img',
+        visible: false
       })
 
-      expect(subject.hasClass(styles.rectangle)).to.be.true()
-    })
-  })
+      await image.load()
 
-  describe('when the user name has no spaces', () => {
-    it('should render a single initial', () => {
-      const subject = testbed.render({
-        name: 'Jessica'
+      expect(avatar.getDOMNode().style.backgroundImage).to.contain(src)
+    })
+
+    it('should call onImageLoaded once the image loads', async () => {
+      const onImageLoaded = stub()
+
+      await mount(
+        <Avatar
+          name="Foo bar"
+          src={src}
+          onImageLoaded={onImageLoaded}
+        />
+      )
+
+      const avatar = await AvatarLocator.find()
+      const image = await avatar.find({
+        tag: 'img',
+        visible: false
       })
 
-      expect(subject.text()).to.equal('J')
+      await image.load()
+
+      expect(onImageLoaded).to.have.been.called()
     })
   })
 
-  describe('when the user name has leading spaces', () => {
-    it('should skip them', () => {
-      const subject = testbed.render({
-        name: ' Jessica Jones'
-      })
-
-      expect(subject.text()).to.equal('JJ')
+  describe('when variant is set to "rectangle"', async () => {
+    it('should display as a rectangle', async () => {
+      await mount(<Avatar name="Jessica Jones" variant="rectangle" />)
+      expect(await AvatarLocator.find(`.${styles.rectangle}`)).to.exist()
     })
   })
 
-  describe('when the user name is empty', () => {
-    it('should render', () => {
-      const subject = testbed.render({
-        name: ''
-      })
-
-      expect(subject.text()).to.equal('')
+  describe('when the user name has no spaces', async () => {
+    it('should render a single initial', async () => {
+      await mount(<Avatar name="Jessica" />)
+      expect(await AvatarLocator.find({ contains: 'J' })).to.exist()
     })
   })
 
-  describe('when alt text is provided', () => {
-    it('should render the text as an aria-label attribute', () => {
-      const subject = testbed.render({alt: 'This is a test'})
-      expect(subject.find('[aria-label]').getAttribute('aria-label')).to.equal('This is a test')
-    })
-
-    it('should set the role attribute to img', () => {
-      const subject = testbed.render({alt: 'This is a test'})
-      expect(subject.find('[role]').getAttribute('role')).to.equal('img')
+  describe('when the user name has leading spaces', async () => {
+    it('should skip them', async () => {
+      await mount(<Avatar name=" Jessica Jones" />)
+      expect(await AvatarLocator.find({ contains: 'JJ' })).to.exist()
     })
   })
 
-  describe('when passing down props to View', () => {
+  describe('when the user name is empty', async () => {
+    it('should render', async () => {
+      await mount(<Avatar name="" />)
+
+      const initials = await AvatarLocator.find(`.${styles.initials}`)
+
+      expect(initials).to.exist()
+      expect(initials.getTextContent()).to.equal('')
+    })
+  })
+
+  describe('when alt text is provided', async () => {
+    it('should render the text as an aria-label attribute', async () => {
+      await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
+
+      expect(await AvatarLocator.find({ label: 'This is a test' })).to.exist()
+    })
+
+    it('should set the role attribute to img', async () => {
+      await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
+      const avatar = await AvatarLocator.find()
+      expect(avatar.getAttribute('role')).to.equal('img')
+    })
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
       elementRef: () => {},
-      as: 'div',
-      display: 'inline-block'
+      as: 'div'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Avatar)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Avatar name="Jessica Jones" {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Avatar name="Jessica Jones" {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-
-    it(`should set the 'display' prop based on the 'inline' prop`, () => {
-      const subject = testbed.render({
-        inline: true
-      })
-      expect(subject.find(View).props().display).to.equal('inline-block')
     })
   })
 })

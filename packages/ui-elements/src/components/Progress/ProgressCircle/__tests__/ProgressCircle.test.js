@@ -23,111 +23,177 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
 
 import ProgressCircle from '../index'
+
 import styles from '../styles.css'
 
-describe('<ProgressCircle />', () => {
-  const testbed = new Testbed(
-    <ProgressCircle
-      label="Loading completion"
-      valueNow={40}
-      valueMax={60}
-    />
-  )
+describe('<ProgressCircle />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={40}
+        valueMax={60}
+      />
+    )
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('meter should have a radius', () => {
-    const subject = testbed.render()
-    const meterCircle = subject.find(`circle.${styles.meter}`)
+  it('meter should have a radius', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={40}
+        valueMax={60}
+      />
+    )
 
+    const progressCircle = within(subject.getDOMNode())
+    const meterCircle = await progressCircle.find(`circle.${styles.meter}`)
     expect(meterCircle.getAttribute('r')).to.exist()
   })
 
-  it('meter should have a stroke-dashoffset', () => {
-    const subject = testbed.render()
-    const meterCircle = subject.find(`circle.${styles.meter}`)
+  it('meter should have a stroke-dashoffset', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={40}
+        valueMax={60}
+      />
+    )
 
-    expect(meterCircle.getComputedStyle()
-      .getPropertyValue('stroke-dashoffset')).to.exist()
+    const progressCircle = within(subject.getDOMNode())
+    const meterCircle = await progressCircle.find(`circle.${styles.meter}`)
+
+    expect(!!meterCircle.getComputedStyle()
+      .getPropertyValue('stroke-dashoffset')).to.be.true()
   })
 
-  it('stroke-dashoffset should be 0 if valueNow > valueMax', () => {
-    const subject = testbed.render({
-      valueNow: 70,
-      valueMax: 60
-    })
-    const meterCircle = subject.find(`circle.${styles.meter}`)
+  it('stroke-dashoffset should be 0 if valueNow > valueMax', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={70}
+        valueMax={60}
+      />
+    )
+
+    const progressCircle = within(subject.getDOMNode())
+    const meterCircle = await progressCircle.find(`circle.${styles.meter}`)
 
     expect(meterCircle.getComputedStyle().getPropertyValue('stroke-dashoffset'))
       .to.equal('0px')
   })
 
-  it('should render the value if a formatter function is provided', () => {
-    const subject = testbed.render({
-      valueNow: 40,
-      valueMax: 60,
-      formatDisplayedValue: function (valueNow, valueMax) {
-        return `${valueNow} / ${valueMax}`
-      }
-    })
+  it('should render the value if a formatter function is provided', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={40}
+        valueMax={60}
+        formatDisplayedValue={(valueNow, valueMax) => `${valueNow} / ${valueMax}`}
+      />
+    )
 
-    expect(subject.text()).to.contain('40 / 60')
+    const progressCircle = within(subject.getDOMNode())
+    expect(await progressCircle.find({ contains: '40 / 60' })).to.exist()
   })
 
   describe('size x-small', () => {
-    it('meter should have a radius', () => {
-      const subject = testbed.render({ size: 'x-small' })
-      const meterCircle = subject.find(`circle.${styles.meter}`)
+    it('meter should have a radius', async () => {
+      const subject = await mount(
+        <ProgressCircle
+          label="Loading completion"
+          valueNow={70}
+          valueMax={60}
+          size="x-small"
+        />
+      )
+
+      const progressCircle = within(subject.getDOMNode())
+      const meterCircle = await progressCircle.find(`circle.${styles.meter}`)
 
       expect(meterCircle.getAttribute('r')).to.exist()
     })
 
-    it('meter should have a stroke-dashoffset', () => {
-      const subject = testbed.render({ size: 'x-small' })
-      const meterCircle = subject.find(`circle.${styles.meter}`)
+    it('meter should have a stroke-dashoffset', async () => {
+      const subject = await mount(
+        <ProgressCircle
+          label="Loading completion"
+          valueNow={70}
+          valueMax={60}
+          size="x-small"
+        />
+      )
 
-      expect(meterCircle.getComputedStyle()
-        .getPropertyValue('stroke-dashoffset')).to.exist()
+      const progressCircle = within(subject.getDOMNode())
+      const meterCircle = await progressCircle.find(`circle.${styles.meter}`)
+
+      expect(!!meterCircle.getComputedStyle()
+        .getPropertyValue('stroke-dashoffset')).to.be.true()
     })
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <ProgressCircle
+        label="Loading completion"
+        valueNow={40}
+        valueMax={60}
+      />
+    )
 
-    subject.should.be.accessible(done)
+    const progressCircle = within(subject.getDOMNode())
+    expect(await progressCircle.accessible()).to.be.true()
   })
 
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
-      as: 'div',
       margin: 'small',
-      display: View.defaultProps.display,
-      elementRef: () => {}
+      elementRef: () => {},
+      as: 'div'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, ProgressCircle)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <ProgressCircle
+                label="Loading completion"
+                valueNow={40}
+                valueMax={60}
+                {...props}
+              />
+            )
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <ProgressCircle
+                label="Loading completion"
+                valueNow={40}
+                valueMax={60}
+                {...props}
+              />
+            )
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })

@@ -35,6 +35,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import warning from '@instructure/ui-utils/lib/warning'
+import testable from '@instructure/ui-testable'
 
 import { truncate } from './utils/Truncator'
 
@@ -46,6 +47,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class TruncateText extends Component {
   static propTypes = {

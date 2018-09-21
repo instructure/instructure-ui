@@ -23,56 +23,60 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Spinner from '../index'
+import SpinnerLocator from '../locator'
 
-describe('<Spinner />', () => {
-  const testbed = new Testbed(
-    <Spinner title="Loading" />
-  )
-
-  it('should render', () => {
-    const spinner = testbed.render({ size: 'small' })
-    expect(spinner).to.be.present()
+describe('<Spinner />', async () => {
+  it('should render', async () => {
+    await mount(<Spinner title="Loading" size="small" />)
+    expect(await SpinnerLocator.find()).to.exist()
   })
 
-  it('should render the title prop text in the SVG element title', () => {
-    const spinner = testbed.render({ size: 'large' })
-    expect(spinner.find('svg > title').text()).to.equal('Loading')
+  it('should render the title prop text in the SVG element title', async () => {
+    await mount(<Spinner title="Loading" size="large" />)
+    expect(await SpinnerLocator.find({ contains: 'Loading' })).to.exist()
   })
 
-  describe('when passing down props to View', () => {
+  it('should meet a11y standards', async () => {
+    await mount(<Spinner title="Loading" size="small" />)
+    const spinner = await SpinnerLocator.find()
+    expect(await spinner.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
-      as: 'div',
       elementRef: () => {},
-      display: View.defaultProps.display
+      as: 'div'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Spinner)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Spinner title="Loading" {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Spinner title="Loading" {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })
-  })
-
-  it('should meet a11y standards', (done) => {
-    const spinner = testbed.render()
-
-    spinner.should.be.accessible(done)
   })
 })

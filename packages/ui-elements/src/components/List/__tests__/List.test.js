@@ -23,83 +23,137 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import List from '../index'
 import ListItem from '../ListItem'
 
-describe('<List />', () => {
-  const testbed = new Testbed(
-    <List>
-      <ListItem>List item 1</ListItem>
-      <ListItem>List item 2</ListItem>
-      <ListItem>List item 3</ListItem>
-      <ListItem>List item 4</ListItem>
-      {null && <ListItem>ignore me 1</ListItem>}
-      {false && <ListItem>ignore me 2</ListItem>}
-    </List>
-  )
+import ListLocator from '../locator'
 
-  it('should render list items (and filter out null/falsy children', () => {
-    const subject = testbed.render()
-    expect(subject.find('li').length).to.equal(4)
+describe('<List />', async () => {
+  it('should render list items (and filter out null/falsy children', async () => {
+    await mount(
+      <List>
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+        {null && <ListItem>ignore me 1</ListItem>}
+        {false && <ListItem>ignore me 2</ListItem>}
+      </List>
+    )
+
+    const list = await ListLocator.find()
+    const listItems = await list.findAllItems()
+    expect(listItems.length).to.equal(4)
   })
 
-  it('should not render a delimiter when inline=false and delimiter=none', () => {
-    const subject = testbed.render({variant: 'unstyled', delimiter: 'none'})
-    expect(subject.find('li span').length).to.equal(0)
-  })
+  it('should not render a delimiter when inline=false and delimiter=none', async () => {
+    await mount(
+      <List
+        variant="unstyled"
+        delimiter="none"
+      >
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+      </List>
+    )
 
-  it('should render a delimiter when inline=true and delimiter=none', () => {
-    const subject = testbed.render({variant: 'inline', delimiter: 'none'})
-    expect(subject.find('li span').length).to.equal(4)
-  })
-
-  it('should render an ordered list', () => {
-    const subject = testbed.render({as: 'ol'})
-    expect(subject.find('ol').length).to.equal(1)
-  })
-
-  it('should pass down itemSpacing to ListItems', () => {
-    const subject = testbed.render({
-      itemSpacing: 'large'
+    const delimiters = await ListLocator.findAll({
+      css: '[aria-hidden="true"]',
+      expectEmpty: true
     })
 
-    const firstListItem = subject.find('ListItem').at(0)
-    expect(firstListItem.props().spacing).to.equal('large')
+    expect(delimiters.length).to.equal(0)
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should render a delimiter when inline=true and delimiter=none', async () => {
+    await mount(
+      <List
+        variant="inline"
+        delimiter="none"
+      >
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+      </List>
+    )
 
-    subject.should.be.accessible(done, {
-      ignores: []
+    const delimiters = await ListLocator.findAll({
+      css: '[aria-hidden="true"]'
     })
+
+    expect(delimiters.length).to.equal(4)
   })
 
-  describe('when passing down props to View', () => {
+  it('should render an ordered list', async () => {
+    await mount(
+      <List as="ol">
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+      </List>
+    )
+
+    expect(await ListLocator.find({ tag: 'ol' })).to.exist()
+  })
+
+  it('should meet a11y standards', async () => {
+    await mount(
+      <List>
+        <ListItem>List item 1</ListItem>
+        <ListItem>List item 2</ListItem>
+        <ListItem>List item 3</ListItem>
+        <ListItem>List item 4</ListItem>
+      </List>
+    )
+
+    const list = await ListLocator.find()
+    expect(await list.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
       as: 'ul',
-      display: View.defaultProps.display,
       elementRef: () => {}
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, List)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <List {...props}>
+                <ListItem>List item 1</ListItem>
+              </List>
+            )
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <List {...props}>
+                <ListItem>List item 1</ListItem>
+              </List>
+            )
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })

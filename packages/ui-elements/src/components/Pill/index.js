@@ -33,6 +33,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -42,7 +43,7 @@ import theme from './theme'
 category: components
 ---
 **/
-
+@testable()
 @themeable(theme, styles)
 class Pill extends Component {
   static propTypes = {
@@ -85,7 +86,10 @@ class Pill extends Component {
       elementRef
     } = this.props
 
-    const props = omitProps(this.props, {...Pill.propTypes, ...View.propTypes})
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Pill.propTypes),
+      Pill
+    )
 
     const classes = classnames({
       [styles.root]: true,
@@ -94,7 +98,7 @@ class Pill extends Component {
 
     const pill = (
       <View
-        {...props}
+        {...passthroughProps}
         className={classes}
         as={as}
         elementRef={elementRef}

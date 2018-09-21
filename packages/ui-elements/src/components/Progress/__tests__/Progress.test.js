@@ -23,69 +23,115 @@
  */
 
 import React from 'react'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
+
 import Progress from '../index'
+import ProgressLocator from '../locator'
 
-describe('<Progress />', () => {
-  const testbed = new Testbed(
-    <Progress label="Chapters read" valueMax={60} valueNow={30} />
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+describe('<Progress />', async () => {
+  it('should render', async () => {
+    await mount(<Progress label="Chapters read" valueMax={60} valueNow={30} />)
+    expect(await ProgressLocator.find()).to.exist()
   })
 
-  it('should render a progress element', () => {
-    const subject = testbed.render()
-    const progress = subject.find('progress')
-    expect(progress).to.be.present()
+  it('should render a progress element', async () => {
+    await mount(<Progress label="Chapters read" valueMax={60} valueNow={30} />)
+
+    const componentRoot = await ProgressLocator.find()
+    const progress = await componentRoot.find({ tag: 'progress' })
+
+    expect(progress).to.exist()
     expect(progress.getAttribute('value')).to.equal('30')
     expect(progress.getAttribute('aria-valuemax')).to.equal('60')
     expect(progress.getAttribute('aria-valuetext')).to.equal('30 / 60')
   })
 
-  it('should format the displayed value according to the formatDisplayedValue prop', () => {
-    const subject = testbed.render({formatDisplayedValue: function (valueNow, valueMax) {
-      return `${valueNow} of ${valueMax}`
-    }})
+  it('should provide an elementRef', async () => {
+    const elementRef = stub()
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={60}
+        valueNow={30}
+        elementRef={elementRef}
+      />
+    )
 
-    expect(subject.text()).to.equal('30 of 60')
+    const progress = await ProgressLocator.find()
+    expect(elementRef).to.have.been.calledWith(progress.getDOMNode())
   })
 
-  it('should display proper values when the variant is set to circle', () => {
-    const subject = testbed.render({
-      variant: 'circle',
-      valueMax: 80,
-      valueNow: 25,
-      formatValueText: function (valueNow, valueMax) {
-        return `${valueNow} out of ${valueMax}`
-      }
-    })
+  it('should render with the specified tag when `as` prop is set', async () => {
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={60}
+        valueNow={30}
+        as="li"
+      />
+    )
+    expect(await ProgressLocator.find({ tag: 'li' })).to.exist()
+  })
 
-    const progress = subject.find('progress')
+  it('should format the displayed value according to the formatDisplayedValue prop', async () => {
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={60}
+        valueNow={30}
+        formatDisplayedValue={(valueNow, valueMax) => `${valueNow} of ${valueMax}`}
+      />
+    )
+    expect(await ProgressLocator.find({ contains: '30 of 60' })).to.exist()
+  })
+
+  it('should display proper values when the variant is set to circle', async () => {
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={80}
+        valueNow={25}
+        formatValueText={(valueNow, valueMax) => `${valueNow} out of ${valueMax}`}
+      />
+    )
+
+    const componentRoot = await ProgressLocator.find()
+    const progress = await componentRoot.find({ tag: 'progress' })
     expect(progress.getAttribute('aria-valuenow')).to.equal('25')
     expect(progress.getAttribute('aria-valuemax')).to.equal('80')
     expect(progress.getAttribute('aria-valuetext')).to.equal('25 out of 80')
   })
 
-  it('should meet a11y standards when rendered as a progress bar', (done) => {
-    const subject = testbed.render({
-      variant: 'bar'
-    })
+  it('should meet a11y standards when rendered as a progress bar', async () => {
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={60}
+        valueNow={30}
+        variant="bar"
+      />
+    )
+    const progress = await ProgressLocator.find()
 
-    subject.should.be.accessible(done, {
+    expect(await progress.accessible({
       ignores: [
         'aria-allowed-role' // TODO: remove this when we fix the role
       ]
-    })
+    })).to.be.true()
   })
 
-  it('should meet a11y standards when rendered as a progress circle', (done) => {
-    const subject = testbed.render({
-      variant: 'circle'
-    })
+  it('should meet a11y standards when rendered as a progress circle', async () => {
+    await mount(
+      <Progress
+        label="Chapters read"
+        valueMax={60}
+        valueNow={30}
+        variant="circle"
+      />
+    )
 
-    subject.should.be.accessible(done)
+    const progress = await ProgressLocator.find()
+
+    expect(await progress.accessible()).to.be.true()
   })
 })

@@ -116,10 +116,14 @@ export default class ProgressBar extends Component {
     const valueText = formatValueText(valueNow, valueMax)
     const value = (typeof formatDisplayedValue === 'function') && formatDisplayedValue(valueNow, valueMax)
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, ProgressBar.propTypes, ['animateOnMount']),
+      ProgressBar
+    )
     /* eslint-disable jsx-a11y/no-redundant-roles, jsx-a11y/no-noninteractive-element-to-interactive-role */
     return (
       <View
-        {...omitProps(this.props, { ...ProgressBar.propTypes, ...View.propTypes }, ['animateOnMount'])}
+        {...passthroughProps}
         as={this.props.as}
         className={classnames(classes)}
         margin={this.props.margin}

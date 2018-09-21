@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import cleanData from '../cleanData'
 
-describe('cleanData', () => {
-  it('should remove spaces from the end of character data', () => {
+describe('cleanData', async () => {
+  it('should remove spaces from the end of character data', async () => {
     const data = [['T','e','s','t',' ','...']]
     const options = {
       truncate: 'character',
@@ -37,7 +38,7 @@ describe('cleanData', () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  it('should remove spaces from the end of word data', () => {
+  it('should remove spaces from the end of word data', async () => {
     const data = [['Test ','...']]
     const options = {
       truncate: 'word',
@@ -49,7 +50,7 @@ describe('cleanData', () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  it('should remove spaces from the middle of character data', () => {
+  it('should remove spaces from the middle of character data', async () => {
     const data = [['H','e','l','l','o',' ','...',' ','w','o','r','l','d']]
     const options = {
       truncate: 'character',
@@ -61,7 +62,7 @@ describe('cleanData', () => {
     expect(newData[0].join('')).to.equal('Hello...world')
   })
 
-  it('should remove spaces from the middle of word data', () => {
+  it('should remove spaces from the middle of word data', async () => {
     const data = [['Hello ','...','world']]
     const options = {
       truncate: 'word',
@@ -73,7 +74,7 @@ describe('cleanData', () => {
     expect(newData[0].join('')).to.equal('Hello...world')
   })
 
-  it('should do a thorough cleaning', () => {
+  it('should do a thorough cleaning', async () => {
     const data = [['T','e','s','t','.',' ','...']]
     const options = {
       truncate: 'character',
@@ -85,7 +86,7 @@ describe('cleanData', () => {
     expect(newData[0].join('')).to.equal('Test...')
   })
 
-  it('should remove spaces from the end of complex character data', () => {
+  it('should remove spaces from the end of complex character data', async () => {
     let data = [['H','e','l','l','o',' '],['...']]
     const options = {
       truncate: 'character',
@@ -104,7 +105,7 @@ describe('cleanData', () => {
     expect(text2).to.equal('Hello world...')
   })
 
-  it('should remove spaces from the middle of complex word data', () => {
+  it('should remove spaces from the middle of complex word data', async () => {
     let data = [['Hello ', '...'],['world']]
     const options = {
       truncate: 'word',
@@ -122,5 +123,4 @@ describe('cleanData', () => {
     expect(text).to.equal('Hello...world')
     expect(text2).to.equal('Hello...world')
   })
-
 })

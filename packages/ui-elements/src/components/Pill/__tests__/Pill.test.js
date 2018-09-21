@@ -23,82 +23,80 @@
  */
 
 import React from 'react'
-/* eslint-disable instructure-ui/no-relative-package-imports */
-import Tooltip from '../../../../../ui-overlays/lib/components/Tooltip'
-/* eslint-enable instructure-ui/no-relative-package-imports */
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Pill from '../index'
-import styles from '../styles.css'
+import PillLocator from '../locator'
 
-describe('<Pill />', () => {
-  const testbed = new Testbed(<Pill text="Overdue" />)
-
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+describe('<Pill />', async () => {
+  it('should render', async () => {
+    await mount(<Pill text="Overdue" />)
+    expect(await PillLocator.find()).to.exist()
   })
 
-  it('should display text', () => {
-    const subject = testbed.render()
-    const textSpan = subject.find(`span.${styles.text}`)
-    expect(textSpan.text()).to.equal('Overdue')
+  it('should display text', async () => {
+    await mount(<Pill text="Overdue" />)
+    const pill = await PillLocator.find()
+    expect(await pill.find({ contains: 'Overdue' })).to.exist()
   })
 
-  it('should render a Tooltip when text overflows max-width', () => {
-    const pill = testbed.render({
-      text: 'hello'
-    })
-    expect(pill.find(Tooltip)).to.not.exist()
-
-    const overflowPill = testbed.render({
-      text: 'some really super incredibly long text that will force overflow'
-    })
-    expect(overflowPill.find(Tooltip)).to.exist()
+  it('should render without a Tooltip when text overflows max-width', async () => {
+    await mount(<Pill text="hello" />)
+    const pill = await PillLocator.find()
+    expect(await pill.findTooltip({ expectEmpty: true })).to.not.exist()
   })
 
-  describe('when passing down props to View', () => {
+  it('should render with a Tooltip when text overflows max-width', async () => {
+    const text = "some really super incredibly long text that will force overflow"
+    await mount(<Pill text={text} />)
+
+    const pill = await PillLocator.find()
+    const tooltip = await pill.findTooltip()
+
+    expect(tooltip).to.exist()
+
+    const content = await tooltip.findPopoverContent()
+    expect(content.getTextContent()).to.equal(text)
+  })
+
+  it('should meet a11y standards', async () => {
+    await mount(<Pill text="Overdue" />)
+    const pill = await PillLocator.find()
+    expect(await pill.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
-      as: 'span',
       elementRef: () => {},
-      display: 'inline-flex'
+      as: 'div'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Pill)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Pill text="Overdue" {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Pill text="Overdue" {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-
-    it(`should not allow overriding the display prop`, () => {
-      const subject = testbed.render({
-        display: 'block'
-      })
-      expect(subject.find(View).props().display).to.equal('inline-flex')
-    })
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [
-        'color-contrast'
-      ]
     })
   })
 })

@@ -33,6 +33,7 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -43,6 +44,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 export default class Heading extends Component {
    static propTypes = {
@@ -99,9 +101,14 @@ export default class Heading extends Component {
       }
     })
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Heading.propTypes),
+      Heading
+    )
+
     return (
       <View
-       {...omitProps(this.props, {...Heading.propTypes, ...View.propTypes})}
+       {...passthroughProps}
        className={classnames({
          [styles.root]: true,
          [styles[level]]: true,

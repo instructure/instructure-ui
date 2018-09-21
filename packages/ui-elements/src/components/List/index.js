@@ -32,6 +32,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import testable from '@instructure/ui-testable'
 
 import ListItem from './ListItem'
 
@@ -43,6 +44,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class List extends Component {
   static propTypes = {
@@ -64,6 +66,7 @@ export default class List extends Component {
     * Sets the margin separating each ListItem.
     */
     itemSpacing: PropTypes.oneOf([
+      'none',
       'xxx-small',
       'xx-small',
       'x-small',
@@ -99,7 +102,10 @@ export default class List extends Component {
   }
 
   render () {
-    const props = omitProps(this.props, {...List.propTypes, ...View.propTypes})
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, List.propTypes),
+      List
+    )
 
     const {
       as,
@@ -117,7 +123,7 @@ export default class List extends Component {
 
     return (
       <View
-        {...props}
+        {...passthroughProps}
         className={classnames(classes)}
         as={as}
         margin={margin}

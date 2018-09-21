@@ -23,74 +23,71 @@
  */
 
 import React from 'react'
+
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Heading from '../index'
+import HeadingLocator from '../locator'
 
 describe('<Heading />', () => {
-  const testbed = new Testbed(<Heading>Hello World</Heading>)
-
-  it('should render as an H2 element', () => {
-    const subject = testbed.render()
-
-    expect(subject.tagName())
-      .to.equal('H2')
+  it('should render as an H2 element', async () => {
+    await mount(<Heading>Hello World</Heading>)
+    expect(await HeadingLocator.find({ tag: 'h2' })).to.exist()
   })
 
-  it('should render the children as text content', () => {
-    const subject = testbed.render()
-
-    expect(subject.text())
-      .to.equal('Hello World')
+  it('should render the children as text content', async () => {
+    await mount(<Heading>Hello World</Heading>)
+    expect(await HeadingLocator.find({ contains: 'Hello World' })).to.exist()
   })
 
-  it('should render as a SPAN if level is `reset`', () => {
-    const subject = testbed.render({
-      level: 'reset'
-    })
-
-    expect(subject.tagName())
-      .to.equal('SPAN')
+  it('should render as a SPAN if level is `reset`', async () => {
+    await mount(<Heading level="reset">Hello World</Heading>)
+    const heading = await HeadingLocator.find()
+    expect(heading.getTagName()).to.equal('span')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
+  it('should meet a11y standards', async () => {
+    await mount(<Heading>Hello World</Heading>)
+    const heading = await HeadingLocator.find()
+    expect(await heading.accessible()).to.be.true()
   })
 
-  it('should render with the specified tag when `as` prop is set', () => {
-    const subject = testbed.render({
-      as: 'div'
-    })
-
-    expect(subject.tagName())
-      .to.equal('DIV')
+  it('should render with the specified tag when `as` prop is set', async () => {
+    await mount(<Heading as="div">Hello World</Heading>)
+    const heading = await HeadingLocator.find()
+    expect(heading.getTagName()).to.equal('div')
   })
 
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
-      as: 'div',
-      display: View.defaultProps.display,
-      elementRef: () => {}
+      elementRef: () => {},
+      as: 'div'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Heading)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Heading {...props}>Hello World</Heading>)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Heading {...props}>Hello World</Heading>)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })

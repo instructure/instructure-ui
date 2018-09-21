@@ -23,129 +23,143 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
 import Img from '../index'
+import ImgLocator from '../locator'
+
 import styles from '../styles.css'
 
 describe('<Img />', () => {
   // eslint-disable-next-line max-len
   const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
-  const testbed = new Testbed(<Img src={image} />)
-
   describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
-
-      subject.should.be.accessible(done)
+    it('should meet standards', async () => {
+      await mount(<Img src={image} />)
+      const img = await ImgLocator.find()
+      expect(await img.accessible()).to.be.true()
     })
 
-    it('should render an empty alt attribute by default', () => {
-      const subject = testbed.render()
-
-      expect(subject.find('[alt=""]')).to.be.present()
+    it('should render an empty alt attribute by default', async () => {
+      await mount(<Img src={image} />)
+      expect(await ImgLocator.find('[alt=""]')).to.exist()
     })
 
-    it('should render the provided alt attribute', () => {
-      const subject = testbed.render({ alt: 'Foo' })
-
-      expect(subject.find('[alt="Foo"]')).to.be.present()
+    it('should render the provided alt attribute', async () => {
+      const alt = 'Foo'
+      await mount(<Img src={image} alt={alt} />)
+      expect(await ImgLocator.find(`[alt="${alt}"]`)).to.exist()
     })
   })
 
-  it('should render an overlay color', () => {
-    const subject = testbed.render({
-      overlay: {color: '#ff0000', opacity: 7}
-    })
-    const overlay = subject.find(`.${styles.overlay}`)
-    expect(overlay).to.be.present()
+  it('should render an overlay color', async () => {
+    await mount(<Img src={image} overlay={{ color: '#ff0000', opacity: 7 }} />)
+    expect(await ImgLocator.find(`.${styles.overlay}`)).to.exist()
   })
 
-  it('should render a blur filter', () => {
-    const subject = testbed.render({
-      blur: true
-    })
-    expect(subject.getComputedStyle().getPropertyValue('filter')).to.contain('blur')
+  it('should render a blur filter', async () => {
+    await mount(<Img src={image} blur={true} />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('blur')
   })
 
-  it('should render a grayscale filter', () => {
-    const subject = testbed.render({
-      grayscale: true
-    })
-    expect(subject.getComputedStyle().getPropertyValue('filter')).to.contain('grayscale')
+  it('should render a grayscale filter', async () => {
+    await mount(<Img src={image} grayscale={true} />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('filter')).to.contain('grayscale')
   })
 
   // If component renders as simple image
-  it('should display block-level when inline is false', () => {
-    const image = testbed.render({ inline: false })
-    expect(image.getComputedStyle().getPropertyValue('display')).to.contain('block')
+  it('should display block-level when inline is false', async () => {
+    await mount(<Img src={image} inline={false} />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
   // If component has an overlay and renders as image inside containing element
-  it('should display block-level with overlay when inline is false', () => {
-    const imageWithOverlay = testbed.render({
-      inline: false,
-      overlay: {color: 'tomato', opacity: 7}
-    })
-    expect(imageWithOverlay.find(View).props().display).to.equal('block')
-    const imageInsideOverlay = imageWithOverlay.find('img')
-    expect(imageInsideOverlay.getComputedStyle().getPropertyValue('display')).to.contain('block')
+  it('should display block-level with overlay when inline is false', async () => {
+    await mount(
+      <Img
+        src={image}
+        inline={false}
+        overlay={{ color: 'tomato', opacity: 7 }}
+      />
+    )
+
+    const container = await ImgLocator.find()
+    expect(container.getComputedStyle().getPropertyValue('display')).to.equal('block')
+
+    const img = await container.find({ tag: 'img' })
+    expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
-  it('should apply CSS object-fit: cover when cover is true', () => {
-    const subject = testbed.render({ cover: true })
-    const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
-    expect(objectFit).to.equal('cover')
+  it('should apply CSS object-fit: cover when cover is true', async () => {
+    await mount(<Img src={image} cover={true} />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('cover')
   })
 
-  it('should apply CSS object-fit: cover when constrain="cover"', () => {
-    const subject = testbed.render({ constrain: "cover" })
-    const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
-    expect(objectFit).to.equal('cover')
+  it('should apply CSS object-fit: cover when constrain="cover"', async () => {
+    await mount(<Img src={image} constrain="cover" />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('cover')
   })
 
-  it('should apply CSS object-fit: contain when constrain="contain"', () => {
-    const subject = testbed.render({ constrain: "contain" })
-    const objectFit = subject.getComputedStyle().getPropertyValue('object-fit')
-    expect(objectFit).to.equal('contain')
+  it('should apply CSS object-fit: contain when constrain="contain"', async () => {
+    await mount(<Img src={image} constrain="contain" />)
+    const img = await ImgLocator.find()
+    expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('contain')
   })
 
-  it('applies the container--has-cover class when the cover property is used with overlay', () => {
-    const subject = testbed.render({
-      alt: 'testing123',
-      cover: true,
-      overlay: {color: '#ff0000', opacity: 7}
-    })
-    expect(subject.hasClass(styles['container--has-cover'])).to.be.true()
-    expect(subject.find('[alt="testing123"]')).to.be.present()
+  it('applies the container--has-cover class when the cover property is used with overlay', async () => {
+    await mount(
+      <Img
+        src={image}
+        alt="testing123"
+        cover={true}
+        overlay={{color: '#ff0000', opacity: 7}}
+      />
+    )
+
+    expect(await ImgLocator.find(`.${styles['container--has-cover']}`)).to.exist()
+    expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
-  it('applies the container--has-cover class when constrain="cover" is used with overlay', () => {
-    const subject = testbed.render({
-      alt: 'testing123',
-      constrain: "cover",
-      overlay: {color: '#ff0000', opacity: 7}
-    })
-    expect(subject.hasClass(styles['container--has-cover'])).to.be.true()
-    expect(subject.find('[alt="testing123"]')).to.be.present()
+  it('applies the container--has-cover class when constrain="cover" is used with overlay', async () => {
+    await mount(
+      <Img
+        src={image}
+        alt="testing123"
+        constrain="cover"
+        overlay={{color: '#ff0000', opacity: 7}}
+      />
+    )
+
+    expect(await ImgLocator.find(`.${styles['container--has-cover']}`)).to.exist()
+    expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
-  it('applies the container--has-contain class when constrain="contain" is used with overlay', () => {
-    const subject = testbed.render({
-      alt: 'testing123',
-      constrain: "contain",
-      overlay: {color: '#ff0000', opacity: 7}
-    })
-    expect(subject.hasClass(styles['container--has-contain'])).to.be.true()
-    expect(subject.find('[alt="testing123"]')).to.be.present()
+  it('applies the container--has-contain class when constrain="contain" is used with overlay', async () => {
+    await mount(
+      <Img
+        src={image}
+        alt="testing123"
+        constrain="contain"
+        overlay={{color: '#ff0000', opacity: 7}}
+      />
+    )
+
+    expect(await ImgLocator.find(`.${styles['container--has-contain']}`)).to.exist()
+    expect(await ImgLocator.find('[alt="testing123"]')).to.exist()
   })
 
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
       elementRef: () => {},
-      as: 'img',
-      display: 'inline-block',
       width: 100,
       height: 200
     }
@@ -153,33 +167,26 @@ describe('<Img />', () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Img)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Img src={image} {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Img src={image} {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-
-    it(`should set the 'display' prop based on the 'inline' prop`, () => {
-      const subject = testbed.render({
-        inline: true
-      })
-      expect(subject.find(View).props().display).to.equal('inline-block')
-    })
-
-    it(`should not allow overriding the 'as' prop`, () => {
-      const subject = testbed.render({ as: 'div' })
-      expect(subject.find(View).props().as).to.equal('img')
     })
   })
 })

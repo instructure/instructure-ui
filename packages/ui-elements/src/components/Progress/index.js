@@ -25,6 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import testable from '@instructure/ui-testable'
 
 import ProgressBar from './ProgressBar'
 import ProgressCircle from './ProgressCircle'
@@ -34,6 +35,7 @@ import ProgressCircle from './ProgressCircle'
 category: components
 ---
 **/
+@testable()
 class Progress extends Component {
   static propTypes = {
     /**
@@ -79,7 +81,8 @@ class Progress extends Component {
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -89,7 +92,8 @@ class Progress extends Component {
     valueMax: 100,
     valueNow: 0,
     variant: 'bar',
-    successColor: true
+    successColor: true,
+    elementRef: (el) => {}
   }
 
   render () {

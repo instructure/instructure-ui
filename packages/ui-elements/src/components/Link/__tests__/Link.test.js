@@ -23,203 +23,195 @@
  */
 
 import React from 'react'
+
+import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
-import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
+
 import Link from '../index'
+import LinkLocator from '../locator'
 
-describe('<Link />', () => {
-  const testbed = new Testbed(<Link>Hello World</Link>)
-
-  it('should render the children as text content', () => {
-    const subject = testbed.render()
-
-    expect(subject.text())
-      .to.equal('Hello World')
+describe('<Link />', async () => {
+  it('should render the children as text content', async () => {
+    await mount(<Link>Hello World</Link>)
+    expect(await LinkLocator.find({ contains: 'Hello World' })).to.exist()
   })
 
-  it('should render a button', () => {
-    const subject = testbed.render()
-
-    expect(subject.find('button[type="button"]'))
-      .to.have.length(1)
+  it('should render a button', async () => {
+    await mount(<Link>Hello World</Link>)
+    expect(await LinkLocator.find('button[type="button"]')).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
-    })
+  it('should meet a11y standards', async () => {
+    await mount(<Link>Hello World</Link>)
+    const link = await LinkLocator.find()
+    expect(await link.accessible()).to.be.true()
   })
 
-  it('focuses with the focus helper', () => {
-    const subject = testbed.render()
+  it('focuses with the focus helper', async () => {
+    let linkRef
+    await mount(<Link componentRef={(el) => { linkRef = el }}>Hello World</Link>)
 
-    subject.instance().focus()
+    linkRef.focus()
+    expect(linkRef.focused).to.be.true()
 
-    expect(subject.instance().focused).to.be.true()
-    expect(subject.find('button').focused()).to.be.true()
+    const link = await LinkLocator.find()
+    const focusable = await link.find({ focusable: true })
+    expect(focusable.focused()).to.be.true()
   })
 
-  it('should call the onClick prop when clicked', () => {
-    const onClick = testbed.stub()
+  it('should call the onClick prop when clicked', async () => {
+    const onClick = stub()
+    await mount(<Link onClick={onClick}>Hello World</Link>)
 
-    const subject = testbed.render({
-      onClick
-    })
-
-    subject.find('button').simulate('click')
+    const clickable = await LinkLocator.find({ clickable: true })
+    await clickable.click()
 
     expect(onClick).to.have.been.called()
   })
 
-  it('should provide a linkRef prop', () => {
-    const linkRef = testbed.stub()
-    const subject = testbed.render({
-      linkRef
-    })
+  it('should provide a linkRef prop', async () => {
+    const linkRef = stub()
+    await mount(<Link linkRef={linkRef}>Hello World</Link>)
 
-    expect(linkRef).to.have.been.calledWith(subject.find('button').unwrap())
+    const link = await LinkLocator.find()
+    const focusable = await link.find({ focusable: true })
+
+    expect(linkRef).to.have.been.calledWith(focusable.getDOMNode())
   })
 
-  it('should pass down an icon via the icon property', () => {
-    const subject = testbed.render({
-      icon: IconTrash
-    })
+  it('should pass down an icon via the icon property', async () => {
+    const customIcon = (
+      <svg height="100" width="100">
+        <title>Custom icon</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
 
-    expect(subject.find('IconTrash').length).to.eql(1)
+    await mount(<Link icon={customIcon}>Hello World</Link>)
+    expect(await LinkLocator.find({ tag: 'svg', title: 'Custom icon' })).to.exist()
   })
 
-  describe('when disabled', () => {
-    it('should apply aria-disabled', () => {
-      const subject = testbed.render({
-        href: 'example.html',
-        disabled: true
-      })
-
-      expect(subject.find('a[aria-disabled]')).to.have.length(1)
+  describe('when disabled', async () => {
+    it('should apply aria-disabled', async () => {
+      await mount(<Link href="example.html" disabled>Hello World</Link>)
+      expect(await LinkLocator.find('a[aria-disabled]')).to.exist()
     })
 
-    it('should not be clickable', () => {
-      const onClick = testbed.stub()
+    it('should not be clickable', async () => {
+      const onClick = stub()
+      await mount(<Link onClick={onClick} disabled>Hello World</Link>)
 
-      const subject = testbed.render({
-        disabled: true,
-        onClick
-      })
-
-      subject.find('button').simulate('click')
+      const clickable = await LinkLocator.find({ clickable: true })
+      await clickable.click()
 
       expect(onClick).to.not.have.been.called()
     })
   })
 
-  context('with `as` prop', () => {
-    let onClick, subject
+  describe('with `as` prop', async () => {
+    describe('with `onClick`', async () => {
+      let onClick
 
-    beforeEach(() => {
-      subject = testbed.render({
-        as: 'span',
-        onClick
-      })
-    })
-
-    context('with `onClick`', () => {
+      // eslint-disable-next-line mocha/no-synchronous-tests
       before(() => {
         onClick = Function.prototype
       })
 
-      it('should render designated tag', () => {
-        expect(subject.tagName())
-          .to.equal('SPAN')
+      it('should render designated tag', async () => {
+        await mount(<Link as="li" onClick={onClick}>Hello World</Link>)
+        const componentRoot = await LinkLocator.find()
+        const link = await componentRoot.find({ text: 'Hello World' })
+        expect(link.getTagName()).to.equal('li')
       })
 
-      it('should set role="button"', () => {
-        expect(subject.find('[role="button"]'))
-          .to.have.length(1)
+      it('should set role="button"', async () => {
+        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        expect(await LinkLocator.find('[role="button"]')).to.exist()
       })
 
-      it('should set type="button"', () => {
-        expect(subject.find('[type="button"]'))
-          .to.have.length(1)
+      it('should set type="button"', async () => {
+        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        expect(await LinkLocator.find('[type="button"]')).to.exist()
       })
 
-      it('should set tabIndex="0"', () => {
-        expect(subject.find('[tabIndex="0"]'))
-          .to.have.length(1)
+      it('should set tabIndex="0"', async () => {
+        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        expect(await LinkLocator.find('[tabIndex="0"]')).to.exist()
       })
     })
 
-    context('without `onClick`', () => {
-      before(() => {
-        onClick = null
+    describe('without `onClick`', async () => {
+      it('should render designated tag', async () => {
+        await mount(<Link as="li">Hello World</Link>)
+        const componentRoot = await LinkLocator.find()
+        const link = await componentRoot.find({ text: 'Hello World' })
+        expect(link.getTagName()).to.equal('li')
       })
 
-      it('should render designated tag', () => {
-        expect(subject.tagName())
-          .to.equal('SPAN')
+      it('should not set role="button"', async () => {
+        await mount(<Link as="div">Hello World</Link>)
+        expect(await LinkLocator.find('[role="button"]', {
+          expectEmpty: true
+        })).to.not.exist()
       })
 
-      it('should not set role="button"', () => {
-        expect(subject.find('[role="button"]'))
-          .to.have.length(0)
+      it('should not set type="button"', async () => {
+        await mount(<Link as="div">Hello World</Link>)
+        expect(await LinkLocator.find('[type="button"]', {
+          expectEmpty: true
+        })).to.not.exist()
       })
 
-      it('should not set type="button"', () => {
-        expect(subject.find('[type="button"]'))
-          .to.have.length(0)
+      it('should not set tabIndex="0"', async () => {
+        await mount(<Link as="div">Hello World</Link>)
+        expect(await LinkLocator.find('[tabIndex="0"]', {
+          expectEmpty: true
+        })).to.not.exist()
       })
+    })
+  })
 
-      it('should not set tabIndex="0"', () => {
-        expect(subject.find('[tabIndex="0"]'))
-          .to.have.length(0)
-      })
+  describe('when an href is provided', async () => {
+    it('should render an anchor element', async () => {
+      await mount(<Link href="example.html">Hello World</Link>)
+      expect(await LinkLocator.find({ tag: 'a' })).to.exist()
+    })
+
+    it('should set the href attribute', async () => {
+      await mount(<Link href="example.html">Hello World</Link>)
+      expect(await LinkLocator.find('[href="example.html"]')).to.exist()
     })
   })
 
-  describe('when an href is provided', () => {
-    it('should render an anchor element', () => {
-      const subject = testbed.render({
-        href: 'example.html'
-      })
-
-      expect(subject.find('a')).to.have.length(1)
-    })
-
-    it('should set the href attribute', () => {
-      const subject = testbed.render({
-        href: 'example.html'
-      })
-
-      expect(subject.find('[href="example.html"]'))
-        .to.have.length(1)
-    })
-  })
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
       elementRef: () => {},
-      display: View.defaultProps.display
+      as: 'span'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Link)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Link {...props}>Hello World</Link>)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Link {...props}>Hello World</Link>)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })

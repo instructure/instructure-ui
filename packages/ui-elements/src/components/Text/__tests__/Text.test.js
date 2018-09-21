@@ -23,29 +23,24 @@
  */
 
 import React from 'react'
+import { expect, find, mount, within } from '@instructure/ui-test-utils'
+
 import Text from '../index'
 
-describe('<Text />', () => {
-  const testbed = new Testbed(<Text />)
-
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+describe('<Text />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<Text />)
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<Text />)
+    const text = within(subject.getDOMNode())
+    expect(await text.accessible()).to.be.true()
   })
 
-  it('should render with the specified tag when `as` prop is set', () => {
-    const subject = testbed.render({
-      as: 'div'
-    })
-
-    expect(subject.tagName())
-      .to.equal('DIV')
+  it('should render with the specified tag when `as` prop is set', async () => {
+    await mount(<Text as="li" />)
+    expect(await find({ tag: 'li' })).to.exist()
   })
 })

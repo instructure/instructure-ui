@@ -23,47 +23,73 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
 
 import ListItem from '../index'
 
-describe('<ListItem />', () => {
-  const testbed = new Testbed(<ListItem>List item</ListItem>)
+describe('<ListItem />', async () => {
+  it('should render children', async () => {
+    const subject = await mount(<ListItem>hello</ListItem>)
+    const listItem = within(subject.getDOMNode())
+    expect(await listItem.find({ contains: 'hello' })).to.exist()
+  })
 
-  describe('when passing down props to View', () => {
+  it('should not render delimiter by default', async () => {
+    const subject = await mount(<ListItem delimiter="none">List item</ListItem>)
+    const listItem = within(subject.getDOMNode())
+    expect(await listItem.find({
+      css: '[aria-hidden="true"]',
+      expectEmpty: true
+    })).to.not.exist()
+  })
+
+  it('should render delimiter', async () => {
+    const subject = await mount(<ListItem delimiter="slash">List item</ListItem>)
+    const listItem = within(subject.getDOMNode())
+    expect(await listItem.find({
+      css: '[aria-hidden="true"]'
+    })).to.exist()
+  })
+
+  it('should call elementRef', async () => {
+    const elementRef = stub()
+    const subject = await mount(<ListItem elementRef={elementRef}>List item</ListItem>)
+    const listItem = within(subject.getDOMNode())
+    expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       padding: 'small',
       margin: 'small',
-      as: 'li',
-      display: View.defaultProps.display,
       elementRef: () => {}
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, ListItem)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<ListItem {...props}>hello</ListItem>)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should pass down the '${prop}' prop and set it to '${allowedProps[prop]}'`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<ListItem {...props}>hello</ListItem>)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-
-    it(`should not allow overriding the 'as' prop`, () => {
-      const subject = testbed.render({
-        as: 'div'
-      })
-      expect(subject.find(View).first().props().as).to.equal('li')
     })
   })
 })

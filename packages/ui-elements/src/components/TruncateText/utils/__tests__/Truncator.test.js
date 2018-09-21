@@ -23,35 +23,37 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import { truncate } from '../Truncator'
 
 describe('Truncator', () => {
   const defaultText = 'Hello world! This is a long string that should truncate'
-  const testbed = new Testbed(
-    <div id="truncate-parent" style={{width: '200px'}}>
-      <span id="truncate-stage">{defaultText}</span>
-    </div>
-  )
 
-  it('should truncate text when no options are given', () => {
-    testbed.render()
+  it('should truncate text when no options are given', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px'}}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
-    const stage = document.getElementById('truncate-stage')
     truncate(stage)
-
     const text = stage.textContent
 
     expect(text.indexOf('truncate')).to.equal(-1)
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
-  it('should truncate in the middle of a string', () => {
-    testbed.render()
+  it('should truncate in the middle of a string', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px'}}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
-    const stage = document.getElementById('truncate-stage')
-
-    truncate(stage, {position: 'middle'})
-
+    truncate(stage, { position: 'middle' })
     const text = stage.textContent
 
     expect(text.indexOf('long')).to.equal(-1)
@@ -60,14 +62,15 @@ describe('Truncator', () => {
     expect(text.indexOf('\u2026')).to.not.equal(-1)
   })
 
-  it('should truncate at words', () => {
-    testbed.render({
-      style: {width: '220px'},
-    })
+  it('should truncate at words', async () => {
+    let stage
+    await mount(
+      <div style={{width: '220px'}}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
-    const stage = document.getElementById('truncate-stage')
-
-    truncate(stage, {truncate: 'word'})
+    truncate(stage, { truncate: 'word' })
 
     const text = stage.textContent
 
@@ -76,26 +79,29 @@ describe('Truncator', () => {
     expect(text.indexOf('long')).to.not.equal(-1)
   })
 
-  it('should allow custom ellipsis', () => {
-    testbed.render()
+  it('should allow custom ellipsis', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px'}}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
-    const stage = document.getElementById('truncate-stage')
-
-    truncate(stage, {ellipsis: '(...)'})
-
+    truncate(stage, { ellipsis: '(...)' })
     const text = stage.textContent
 
     expect(text.slice(-5)).to.equal('(...)')
   })
 
-  it('should preserve node structure', () => {
-    testbed.render({
-      children: (
-        <p id="truncate-stage" className="testClass">Hello world! <strong>This is a</strong> long string that <em>should truncate</em></p>
-      )
-    })
-
-    const stage = document.getElementById('truncate-stage')
+  it('should preserve node structure', async () => {
+    let stage
+    await mount(
+      <div style={{width: '200px'}}>
+        <p ref={(el) => { stage = el }} className="testClass">
+          Hello world! <strong>This is a</strong> long string that <em>should truncate</em>
+        </p>
+      </div>
+    )
 
     truncate(stage)
 
@@ -106,59 +112,54 @@ describe('Truncator', () => {
     expect(stage.className).to.equal('testClass')
   })
 
-  it('should preserve attributes on nodes', () => {
-    testbed.render({
-      children: (
-        <span id="truncate-stage">
-          This is a <a id="text-link" href="http://google.com" className="tester">text link</a> with classes and an href.
+  it('should preserve attributes on nodes', async () => {
+    let stage
+    let link
+    await mount(
+      <div style={{width: '200px'}}>
+        <span ref={(el) => { stage = el }}>
+          This is a <a ref={(el) => { link = el }} href="http://google.com" className="tester">text link</a> with classes and an href.
         </span>
-      )
-    })
-
-    const stage = document.getElementById('truncate-stage')
+      </div>
+    )
 
     truncate(stage)
 
-    const link = document.getElementById('text-link')
-
-    expect(link.attributes.length).to.equal(3)
+    expect(link.attributes.length).to.equal(2)
+    expect(link.attributes.href).to.exist()
+    expect(link.attributes.class).to.exist()
   })
 
-  it('should calculate max width properly', () => {
-    const subject = testbed.render({
-      id: null,
-      style: {width: 'auto'},
-      children: (
+  it('should calculate max width properly', async () => {
+    let textContainer, stage
+    await mount(
+      <div style={{width: 'auto'}}>
         <div>
-          <span id="text1">{defaultText}</span>
-          <div id="truncate-parent" style={{width: '100px'}}>
-            <div id="truncate-stage">{defaultText}</div>
+          <span ref={(el) => { textContainer = el }}>{defaultText}</span>
+          <div style={{width: '100px'}}>
+            <div ref={(el) => { stage = el }}>{defaultText}</div>
           </div>
         </div>
-      )
-    })
-
-    const stage = document.getElementById('truncate-stage')
+      </div>
+    )
 
     const result = truncate(stage)
 
     const maxWidth = result.constraints.width
-    const actualMax = subject.find('#text1').getDOMNode().getBoundingClientRect().width
+    const actualMax = textContainer.getBoundingClientRect().width
 
     expect(maxWidth).to.equal(actualMax)
   })
 
-  it('should calculate `maxLines: auto` correctly', () => {
-    testbed.render({
-      style: {width: '50px', height: '180px', lineHeight: 2.8},
-      children: (
-        <span id="truncate-stage">{defaultText}</span>
-      )
-    })
+  it('should calculate `maxLines: auto` correctly', async () => {
+    let stage
+    await mount(
+      <div style={{ width: '50px', height: '180px', lineHeight: 2.8 }}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
-    const stage = document.getElementById('truncate-stage')
     const result = truncate(stage, {maxLines: 'auto'})
-
     const text = stage.textContent
 
     expect(text).to.not.equal({defaultText})
@@ -166,12 +167,13 @@ describe('Truncator', () => {
     expect(result.constraints.lines).to.equal(4)
   })
 
-  it('should calculate height correctly when `maxLines` is not `auto`', () => {
-    testbed.render({
-      style: {width: '200px', height: '200px', lineHeight: 1.4}
-    })
-
-    const stage = document.getElementById('truncate-stage')
+  it('should calculate height correctly when `maxLines` is not `auto`', async () => {
+    let stage
+    await mount(
+      <div style={{ width: '200px', height: '200px', lineHeight: 1.4 }}>
+        <span ref={(el) => { stage = el }}>{defaultText}</span>
+      </div>
+    )
 
     const result = truncate(stage)
     const text = stage.textContent
@@ -180,19 +182,16 @@ describe('Truncator', () => {
     expect(result.constraints.height).to.equal(22.4)
   })
 
-  it('should escape node content', () => {
-    const log = testbed.spy(console, 'log')
+  it('should escape node content', async () => {
+    const log = spy(console, 'log')
     const content = '"><img src=a onerror=console.log("hello world") />'
-    testbed.render({
-      style: {width: '1000px', height: '200px'},
-      children: (
-        <span id="truncate-stage">
-          {content}
-        </span>
-      )
-    })
 
-    const stage = document.getElementById('truncate-stage')
+    let stage
+    await mount(
+      <div style={{ width: '1000px', height: '200px' }}>
+        <span ref={(el) => { stage = el }}>{content}</span>
+      </div>
+    )
 
     truncate(stage)
 

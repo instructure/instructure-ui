@@ -35,7 +35,6 @@ module.exports = {
     'packages/media-capture/',
     'packages/ui-container/',
     'packages/ui-core/',
-    'packages/ui-elements/',
     'packages/ui-focusable/',
     'packages/ui-forms/',
     'packages/ui-media-player/',

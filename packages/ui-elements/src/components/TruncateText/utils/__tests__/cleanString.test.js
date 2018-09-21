@@ -22,24 +22,25 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import cleanString from '../cleanString'
 
-describe('cleanSring', () => {
-  it('should remove spaces from start and end of string', () => {
+describe('cleanSring', async () => {
+  it('should remove spaces from start and end of string', async () => {
     const string = ' Hello world '
 
     const newString = cleanString(string, [' '])
     expect(newString).to.equal('Hello world')
   })
 
-  it('should remove spaces from only the end of string', () => {
+  it('should remove spaces from only the end of string', async () => {
     const string = ' Hello world '
 
     const newString = cleanString(string, [' '], false)
     expect(newString).to.equal(' Hello world')
   })
 
-  it('should remove spaces and commas', () => {
+  it('should remove spaces and commas', async () => {
     const string = ' Hello world,'
 
     const newString = cleanString(string, [' ', ','])
@@ -47,7 +48,7 @@ describe('cleanSring', () => {
   })
 
 
-  it('should do a thorough cleaning', () => {
+  it('should do a thorough cleaning', async () => {
     const string = 'Hello world. '
 
     const newString = cleanString(string, [' ','.'], false, true, true)

@@ -23,13 +23,11 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
+
 import measureText from '../measureText'
 
-describe('measureText', () => {
-  const testbed = new Testbed(
-    <div id="measure-stage">Lorem ipsum <span>DOLOR SIT AMET.</span></div>
-  )
-
+describe('measureText', async () => {
   const getNodes = (root) => {
     let arr = []
     for (let i = 0; i < root.childNodes.length; i++) {
@@ -41,73 +39,77 @@ describe('measureText', () => {
     return arr
   }
 
-  it('should calculate width', () => {
-    testbed.render()
-    const stage = document.getElementById('measure-stage')
+  it('should calculate width', async () => {
+    let stage
+    await mount(
+      <div componentRef={(el) => { stage = el }}>
+        Lorem ipsum <span>DOLOR SIT AMET.</span>
+      </div>
+    )
+
     const nodes = getNodes(stage)
 
     const width = measureText(nodes, stage)
     expect(width).to.not.equal(0)
   })
 
-  it('should account for different nodes', (done) => {
-    const subject = testbed.render()
+  it('should account for different nodes', async () => {
+    let stage
+    const subject = await mount(
+      <div componentRef={(el) => { stage = el }}>
+        Lorem ipsum <span>DOLOR SIT AMET.</span>
+      </div>
+    )
 
-    const stage = document.getElementById('measure-stage')
     const nodes = getNodes(stage)
 
     const width = measureText(nodes, stage)
 
-    subject.setProps({
+    await subject.setProps({
       children: 'Lorem ipsum DOLOR SIT AMET.'
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        const nodes = getNodes(stage)
-        const width2 = measureText(nodes, stage)
-        expect(Math.floor(width)).to.equal(Math.floor(width2))
-        done()
-      })
     })
+
+    const nodes2 = getNodes(stage)
+    const width2 = measureText(nodes2, stage)
+
+    expect(Math.floor(width)).to.equal(Math.floor(width2))
   })
 
-  it('should account for font size styles', (done) => {
-    const subject = testbed.render()
+  it('should account for font size styles', async () => {
+    let stage
+    const subject = await mount(
+      <div componentRef={(el) => { stage = el }}>
+        Lorem ipsum <span>DOLOR SIT AMET.</span>
+      </div>
+    )
 
-    const stage = document.getElementById('measure-stage')
     const nodes = getNodes(stage)
-
     const width = measureText(nodes, stage)
 
-    subject.setProps({
-      style: {fontSize: '24px'}
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        const width2 = measureText(nodes, stage)
-        expect(width).to.not.equal(width2)
-        done()
-      })
+    await subject.setProps({
+      style: { fontSize: '24px' }
     })
+
+    const width2 = measureText(nodes, stage)
+    expect(width).to.not.equal(width2)
   })
 
-  it('should account for letter spacing styles', (done) => {
-    const subject = testbed.render()
+  it('should account for letter spacing styles', async () => {
+    let stage
+    const subject = await mount(
+      <div componentRef={(el) => { stage = el }}>
+        Lorem ipsum <span>DOLOR SIT AMET.</span>
+      </div>
+    )
 
-    const stage = document.getElementById('measure-stage')
     const nodes = getNodes(stage)
-
     const width = measureText(nodes, stage)
 
-    subject.setProps({
-      style: {letterSpacing: '5px'}
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        const width2 = measureText(nodes, stage)
-        expect(width).to.not.equal(width2)
-        done()
-      })
+    await subject.setProps({
+      style: { letterSpacing: '5px' }
     })
+
+    const width2 = measureText(nodes, stage)
+    expect(width).to.not.equal(width2)
   })
 })

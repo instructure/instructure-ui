@@ -31,6 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,6 +42,7 @@ category: components
 ---
 **/
 
+@testable()
 @deprecated('3.0.0', {
   tableData: true,
   rowHeaders: true,
@@ -87,7 +89,11 @@ class Table extends Component {
     /**
     * @deprecated
     */
-    rowHeaders: PropTypes.bool
+    rowHeaders: PropTypes.bool,
+    /**
+    * provides a reference to the underlying html element
+    */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -104,9 +110,14 @@ class Table extends Component {
       [styles.hover]: this.props.hover
     }
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Table.propTypes),
+      Table
+    )
+
     return (
       <View
-        {...omitProps(this.props, { ...Table.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         elementRef={this.props.elementRef}
         as="table"
         className={classnames(classes)}

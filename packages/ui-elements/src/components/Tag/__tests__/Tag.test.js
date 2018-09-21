@@ -23,80 +23,67 @@
  */
 
 import React from 'react'
+import { expect, find, mount, spy, stub, within } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+
 import Tag from '../index'
-import styles from '../styles.css'
 
-describe('<Tag />', () => {
-  const testbed = new Testbed(<Tag text="Summer" />)
-
-  it('should display text', () => {
-    const tag = testbed.render()
-    const textSpan = tag.find(`span.${styles.text}`)
-    expect(textSpan.text()).to.equal('Summer')
+describe('<Tag />', async () => {
+  it('should display text', async () => {
+    await mount(<Tag text="Summer" />)
+    expect(await find({ contains: 'Summer' })).to.exist()
   })
 
-  it('should render as a button and respond to onClick event', () => {
-    const onClick = testbed.stub()
-    const tag = testbed.render({onClick})
-    tag.find('button').simulate('click')
+  it('should render as a button and respond to onClick event', async () => {
+    const onClick = stub()
+    await mount(<Tag text="Summer" onClick={onClick} />)
+    const clickable = await find({ clickable: true })
+    await clickable.click()
     expect(onClick).to.have.been.called()
   })
 
-  it('should render a close icon when it is dismissible and clickable', () => {
-    const onClick = testbed.stub()
-    const tag = testbed.render({onClick, dismissible: true})
-    const svg = tag.find(IconX)
-    expect(svg.length).to.equal(1)
+  it('should render a close icon when it is dismissible and clickable', async () => {
+    const onClick = stub()
+    await mount(<Tag text="Summer" onClick={onClick} dismissible={true} />)
+    expect(await find({ tag: 'svg', name: 'IconX' })).to.exist()
   })
 
-describe('when passing down props to View', () => {
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<Tag text="Summer" />)
+    const tag = within(subject.getDOMNode())
+    expect(await tag.accessible()).to.be.true()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
-      as: 'span',
       elementRef: () => {}
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Tag)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Tag text="Summer" {...props} />)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<Tag text="Summer" {...props} />)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
-    })
-    it(`should set the 'as' prop to 'div'`, () => {
-      const subject = testbed.render({
-        as: 'div'
-      })
-
-      expect(subject.instance().props.as).to.equal('div')
-    })
-    it(`should set the 'margin' prop to 'large'`, () => {
-      const subject = testbed.render({
-        margin: 'large'
-      })
-      expect(subject.instance().props.margin).to.equal('large')
-    })
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
     })
   })
 })

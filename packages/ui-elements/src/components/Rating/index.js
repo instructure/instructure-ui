@@ -31,6 +31,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import testable from '@instructure/ui-testable'
 
 import RatingIcon from './RatingIcon'
 
@@ -42,6 +43,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class Rating extends Component {
   static propTypes = {
@@ -128,9 +130,14 @@ class Rating extends Component {
 
     const valueText = formatValueText(this.filled, iconCount)
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Rating.propTypes),
+      Rating
+    )
+
     return (
       <View
-        {...omitProps(this.props, { ...Rating.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         className={classnames(classes)}
         margin={margin}
         role="slider"

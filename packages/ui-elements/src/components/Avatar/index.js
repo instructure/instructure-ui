@@ -26,11 +26,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
-import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,6 +42,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 export default class Avatar extends Component {
   static propTypes = {
@@ -61,35 +63,29 @@ export default class Avatar extends Component {
     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
     */
     margin: ThemeablePropTypes.spacing,
-    inline: PropTypes.bool
+    inline: PropTypes.bool,
+    /**
+    * Callback fired when the avatar image has loaded
+    */
+    onImageLoaded: PropTypes.func,
+    /**
+    * the element type to render as
+    */
+    as: CustomPropTypes.elementType,
+    /**
+    * provides a reference to the underlying html element
+    */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     size: 'medium',
     variant: 'circle',
-    inline: true
+    inline: true,
+    onImageLoaded: (event) => {}
   }
 
   state = { loaded: false }
-  _image = null
-  _listeners = []
-
-  componentDidMount () {
-    if (this.props.src) {
-      this._image = new Image()
-      this._image.src = this.props.src
-
-      this._listeners.push(addEventListener(this._image, 'load', () => {
-        this.setState({ loaded: true })
-      }))
-    }
-  }
-
-  componentWillUnmount () {
-    this._listeners.forEach(listener => {
-      listener.remove()
-    })
-  }
 
   makeInitialsFromName () {
     let name = this.props.name
@@ -110,6 +106,24 @@ export default class Avatar extends Component {
     }
   }
 
+  handleImageLoaded = (event) => {
+    this.setState({ loaded: true })
+    this.props.onImageLoaded(event)
+  }
+
+  renderLoadImage () {
+    // This image element is visually hidden and is here for loading purposes only
+    return (
+      <img
+        src={this.props.src}
+        className={styles.loadImage}
+        alt={this.props.alt}
+        onLoad={this.handleImageLoaded}
+        aria-hidden="true"
+      />
+    )
+  }
+
   renderInitials () {
     return (
       <span className={styles.initials} aria-hidden="true">
@@ -119,9 +133,14 @@ export default class Avatar extends Component {
   }
 
   render () {
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Avatar.propTypes),
+      Avatar
+    )
+
     return (
       <View
-        {...omitProps(this.props, { ...Avatar.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         style={{
           backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined // eslint-disable-line no-undefined
         }}
@@ -137,6 +156,7 @@ export default class Avatar extends Component {
         margin={this.props.margin}
         display={this.props.inline ? 'inline-block' : 'block'}
       >
+        {this.renderLoadImage()}
         {!this.state.loaded && this.renderInitials()}
       </View>
     )

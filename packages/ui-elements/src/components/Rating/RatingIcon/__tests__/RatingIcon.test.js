@@ -23,47 +23,36 @@
  */
 
 import React from 'react'
+import { expect, mount, wait, within } from '@instructure/ui-test-utils'
+
+import TransitionLocator from '@instructure/ui-motion/lib/components/Transition/locator'
+
 import RatingIcon from '../index'
-import Transition from '@instructure/ui-motion/lib/components/Transition'
 
-describe('<RatingIcon />', () => {
-  const testbed = new Testbed(
-    <RatingIcon />
-  )
-
-  it('transitions when filled on render and animateFill is true', () => {
-    const subject = testbed.render({
-      filled: true,
-      animateFill: true
-    })
-
-    testbed.tick() // delay
-    testbed.raf()
-
-    expect(subject.find(Transition)).to.be.present()
+describe('<RatingIcon />', async () => {
+  it('transitions when filled on render and animateFill is true', async () => {
+    await mount(<RatingIcon filled animateFill />)
+    expect(await TransitionLocator.find()).to.exist()
   })
 
-  it('transitions when filled after render and animateFill is true', (done) => {
-    const subject = testbed.render({
-      filled: false,
-      animateFill: true
-    })
+  it('transitions when filled after render and animateFill is true', async () => {
+    const subject = await mount(
+      <RatingIcon
+        filled={false}
+        animateFill={true}
+      />
+    )
 
-    expect(subject.find(Transition).length).to.equal(0)
+    expect(await TransitionLocator.find({ expectEmpty: true })).to.not.exist()
 
-    subject.setProps({
-      filled: true
-    }, () => {
-      testbed.defer(() => { // update state
-        testbed.raf()
-        expect(subject.find(Transition)).to.be.present()
-        done()
-      })
-    })
+    await subject.setProps({ filled: true })
+    expect(await TransitionLocator.find()).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-    subject.should.be.accessible(done)
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<RatingIcon filled animateFill />)
+
+    const ratingIcon = within(subject.getDOMNode())
+    expect(await ratingIcon.accessible()).to.be.true()
   })
 })

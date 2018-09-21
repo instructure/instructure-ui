@@ -188,9 +188,14 @@ export default class ProgressCircle extends Component {
 
     const radius = this.radius()
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, ProgressCircle.propTypes, ['animateOnMount']),
+      ProgressCircle
+    )
+
     return (
       <View
-        {...omitProps(this.props, { ...ProgressCircle.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         as={this.props.as}
         elementRef={this.props.elementRef}
         className={classnames(classes)}
