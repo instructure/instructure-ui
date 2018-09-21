@@ -68,7 +68,7 @@ function filterByText (container, results, text, options) {
 function filterByLabelText (container, results, text, options = {}) {
   // aria-labelledby may not refer to a label element, so we get elements with ids too
   const matches = queryAllBySelector(container, 'label, [id]')
-    .filter(label => matchElementByText(label, text, options))
+    .filter(label => matchElementByContents(label, text, options))
     .map((label) => {
       if (label.getAttribute('for')) {
         // <label for="someId">text</label><input id="someId" />

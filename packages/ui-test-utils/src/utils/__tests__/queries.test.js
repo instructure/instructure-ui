@@ -151,7 +151,7 @@ describe('find, findAll', () => {
             <input id="first.id" />
           </div>
           <div>
-            <label htmlFor="last-id">Last name</label>
+            <label htmlFor="last-id"><span>Last name</span></label>
             <input id="last-id" />
           </div>
         </div>
