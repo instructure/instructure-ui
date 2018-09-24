@@ -50,7 +50,6 @@ async function findAll (...args) {
   } = parseQueryArguments(...args)
 
   const {
-    locator,
     css,
     tag,
     text,
@@ -63,10 +62,6 @@ async function findAll (...args) {
 
   const query = () => {
     let result
-
-    if (typeof locator === 'string') {
-      result = filterBySelector(element, result, locator, options)
-    }
 
     if (typeof css === 'string') {
       result = filterBySelector(element, result, css, options)
@@ -154,7 +149,6 @@ function parseQueryArguments () {
   } else if (selector) {
     const {
       title,
-      locator,
       css,
       tag,
       text,
@@ -166,7 +160,6 @@ function parseQueryArguments () {
     } = selector
     selector = {
       css,
-      locator,
       title,
       tag,
       text,

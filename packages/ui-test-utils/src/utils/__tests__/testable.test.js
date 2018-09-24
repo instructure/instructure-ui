@@ -21,17 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function bindElementToMethods (element, methods) {
-  if (element instanceof Element) {
-    return Object.entries(methods).reduce((bound, [key, fn]) => {
-      if (typeof fn === 'function') {
-        bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
-        return bound
-      } else {
-        throw Error(`[ui-test-utils] cannot bind to a non-function of type ${typeof fn}`, key)
-      }
-    }, {})
-  } else {
-    console.warn('[ui-test-utils] could not bind methods to invalid HTMLElement')
+import React from 'react'
+import { mount, expect } from '../../index'
+import testable from '../testable'
+
+class Component extends React.Component {
+  render () {
+    return (
+      <div id="componentRoot">
+        <input type="text"/>
+        <input type="password" />
+      </div>
+    )
   }
 }
+
+const TestableComponent = testable()(Component)
+
+describe('@testable', () => {
+  it('can find an element by attribute name and value', async () => {
+    await mount(<TestableComponent />)
+    expect(await TestableComponent.findAll({
+      tag: 'input',
+      attribute: { name: 'type', value: 'password' }
+    })).to.have.length(1)
+  })
+  it('adds a custom method to find the component root element', async () => {
+    await mount(<TestableComponent />)
+    const component = await TestableComponent.find({
+      tag: 'input',
+      attribute: { name: 'type', value: 'password' }
+    })
+    expect(component.getComponentRoot().getDOMNode())
+      .to.equal(document.getElementById('componentRoot'))
+  })
+})

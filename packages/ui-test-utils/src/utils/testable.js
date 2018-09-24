@@ -38,17 +38,28 @@ function testable (customMethods = {}) {
 
       static async findAll (...args) {
         const { element, selector, options } = parseQueryArguments(...args)
-        return findAll(
-          element,
-          {
-            ...selector,
-            locator: TestableComponent.locator
-          },
-          {
-            ...options,
-            customMethods: { ...customMethods, ...options.customMethods }
-          }
-        )
+
+        // Find all component root elements first...
+        const components = await findAll(element, { css: TestableComponent.locator }, options)
+
+        // then find within each of them, building a single array of matching elements...
+        return components.reduce(async (query, component) => {
+          const previousResults = await query
+          const currentResult = await component.findAll(
+            selector,
+            {
+              ...options,
+              customMethods: {
+                ...customMethods,
+                ...options.customMethods,
+                getComponentRoot: function getComponentRoot (element) {
+                  return component
+                }
+              }
+            }
+          )
+          return [...previousResults, ...currentResult]
+        }, Promise.resolve([]))
       }
 
       static async find (...args) {

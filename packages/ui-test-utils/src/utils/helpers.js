@@ -87,30 +87,18 @@ async function accessible (element = document.documentElement, options) {
   }
 }
 
-// aliases
-const parent = getParentNode
-const text = getTextContent
-const tag = getTagName
-const computedStyle = getComputedStyle
-const attribute = getAttribute
-
 export {
   getOwnerWindow,
   getOwnerDocument,
-  computedStyle,
   getComputedStyle,
-  tag,
   getTagName,
   typeIn,
-  attribute,
   getAttribute,
   getDOMNode,
   debug,
   accessible,
   getTextContent,
-  text,
   getParentNode,
-  parent,
   focused,
   visible
 }

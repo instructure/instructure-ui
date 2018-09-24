@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import Portal from '../fixture'
 
@@ -32,7 +32,7 @@ describe('<Portal />', () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ contains: 'Hello World' })
+    const portal = await Portal.find({ text: 'Hello World' })
     expect(portal.getDOMNode()).to.exist()
   })
 
@@ -40,7 +40,7 @@ describe('<Portal />', () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ contains: 'Hello World' })
+    const portal = await Portal.find({ text: 'Hello World' })
     expect(await portal.accessible()).to.be.true()
   })
 
@@ -102,14 +102,13 @@ describe('<Portal />', () => {
         </Portal>
       )
 
-      const portal = await Portal.find({ contains: 'Hello World' })
-      const button = await within(portal).find('button')
+      const button = await Portal.find({ tag: 'button', text: 'Hello World' })
 
       button.keyDown('Enter')
 
       expect(onKeyDown).to.have.been.called()
 
-      expect(portal.parent())
+      expect(button.getComponentRoot().getParentNode())
         .to.equal(document.body)
     })
   })
@@ -150,7 +149,7 @@ describe('<Portal />', () => {
 
       const portal = await Portal.find({ contains: 'Hello World'})
 
-      expect(portal.getDOMNode().parentNode)
+      expect(portal.getComponentRoot().getParentNode())
         .to.equal(document.getElementById('portal-mount-node'))
     })
   })
