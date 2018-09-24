@@ -24,6 +24,15 @@
 import runAxeCheck from '@instructure/ui-axe-check'
 import { fireEvent, prettyDOM } from 'dom-testing-library'
 
+function getOwnerDocument (element) {
+  return element.ownerDocument
+}
+
+function getOwnerWindow (element) {
+  const doc = getOwnerDocument(element)
+  return doc.defaultView || doc.parentWindow
+}
+
 function typeIn (element, value) {
   element.value = value // eslint-disable-line no-param-reassign
   fireEvent(element, new Event('change', {
@@ -33,8 +42,16 @@ function typeIn (element, value) {
   }))
 }
 
-function text (element) {
+function getTextContent (element) {
   return element.textContent
+}
+
+function getTagName (element) {
+  return element.tagName.toLowerCase()
+}
+
+function getComputedStyle (element) {
+  return getOwnerWindow(element).getComputedStyle(element)
 }
 
 function visible (element) {
@@ -45,12 +62,12 @@ function getAttribute (element, ...args) {
   return element.getAttribute(...args)
 }
 
-function parent (element) {
+function getParentNode (element) {
   return element.parentNode
 }
 
 function focused (element) {
-  return (element ===  element.ownerDocument.activeElement)
+  return (element === getOwnerDocument(element).activeElement)
 }
 
 function getDOMNode (element) {
@@ -70,13 +87,29 @@ async function accessible (element = document.documentElement, options) {
   }
 }
 
+// aliases
+const parent = getParentNode
+const text = getTextContent
+const tag = getTagName
+const computedStyle = getComputedStyle
+const attribute = getAttribute
+
 export {
+  getOwnerWindow,
+  getOwnerDocument,
+  computedStyle,
+  getComputedStyle,
+  tag,
+  getTagName,
   typeIn,
+  attribute,
   getAttribute,
   getDOMNode,
   debug,
   accessible,
+  getTextContent,
   text,
+  getParentNode,
   parent,
   focused,
   visible
