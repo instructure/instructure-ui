@@ -46,7 +46,7 @@ function matchElementByContents (element, elementOrString, options = {}) {
   }
 }
 
-function matchElementByAttribute (element, name, value, options = {}) {
+function matchElementByAttributeValue (element, name, value, options = {}) {
   const { exact, collapseWhitespace, trim } = options
   const matcher = exact ? matches : fuzzyMatches
   return matcher(element.getAttribute(name), element, value, { collapseWhitespace, trim })
@@ -59,6 +59,6 @@ function matchElementBySelector (element, selector) {
 export {
   matchElementByText,
   matchElementByContents,
-  matchElementByAttribute,
+  matchElementByAttributeValue,
   matchElementBySelector
 }

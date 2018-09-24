@@ -235,4 +235,27 @@ describe('find, findAll', () => {
       expect(await findAll({ value: 'Norris' })).to.have.length(1)
     })
   })
+
+  describe('by attribute', () => {
+    it('can find an element by attribute', async () => {
+      await mount(
+        <div>
+          <input type="text"/>
+          <input type="text" defaultValue="Norris"/>
+          <input type="text"/>
+        </div>
+      )
+      expect(await findAll({ tag: 'input', attribute: 'type' })).to.have.length(3)
+    })
+    it('can find an element by attribute name and value', async () => {
+      await mount(
+        <div>
+          <input type="text"/>
+          <input type="password" />
+        </div>
+      )
+      expect(await findAll({ tag: 'input', attribute: { name: 'type', value: 'password' } }))
+        .to.have.length(1)
+    })
+  })
 })

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import {
-  matchElementByAttribute,
+  matchElementByAttributeValue,
   matchElementByText,
   matchElementBySelector,
   matchElementByContents
@@ -38,8 +38,24 @@ function filterBySelector (container, results, selector, options) {
 }
 
 function filterByAttribute (container, results, name, value, options = {}) {
-  return (Array.isArray(results) ? results : queryAllBySelector(container, `[${name}]`))
-    .filter(element => matchElementByAttribute(element, name, value, options))
+  const selector = `[${name}]`
+
+  let result
+
+  // by name
+  if (Array.isArray(results)) {
+    result = results.filter(element => matchElementBySelector(element, selector))
+  } else {
+    result = queryAllBySelector(container, selector)
+  }
+
+  // by value
+  if (value) {
+    return result
+      .filter(element => matchElementByAttributeValue(element, name, value, options))
+  } else {
+    return result
+  }
 }
 
 function filterByTitle (container, results, title, options) {
@@ -49,7 +65,7 @@ function filterByTitle (container, results, title, options) {
         return matchElementByText(element, title, options)
       }
       if (matchElementBySelector(element, '[title]')) {
-        return matchElementByAttribute(element, 'title', title, options)
+        return matchElementByAttributeValue(element, 'title', title, options)
       }
       return false
     })
@@ -86,7 +102,7 @@ function filterByLabelText (container, results, text, options = {}) {
     // <button aria-label="text">text</button>
     .concat(
       queryAllBySelector(container, '[aria-label]')
-        .filter(element => matchElementByAttribute(element, 'aria-label', text, options))
+        .filter(element => matchElementByAttributeValue(element, 'aria-label', text, options))
     )
 
   if (Array.isArray(results)) {
