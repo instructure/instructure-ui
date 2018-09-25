@@ -28,6 +28,8 @@ import {
   matchElementByContents
 } from './matchers'
 
+import { firstOrNull } from './firstOrNull'
+
 function filterBySelector (container, results, selector, options) {
   if (Array.isArray(results)) {
     return results
@@ -88,13 +90,13 @@ function filterByLabelText (container, results, text, options = {}) {
     .map((label) => {
       if (label.getAttribute('for')) {
         // <label for="someId">text</label><input id="someId" />
-        return container.querySelector(`[id="${label.getAttribute('for')}"]`)
+        return queryBySelector(container, `[id="${label.getAttribute('for')}"]`)
       } else if (label.getAttribute('id')) {
         // <label id="someId">text</label><input aria-labelledby="someId" />
-        return container.querySelector(`[aria-labelledby~="${label.getAttribute('id')}"]`)
+        return queryBySelector(container, `[aria-labelledby~="${label.getAttribute('id')}"]`)
       } else if (label.childNodes.length) {
         // <label>text: <input /></label>
-        return label.querySelector('input')
+        return queryBySelector(label, 'input')
       }
       return null
     })
@@ -123,6 +125,10 @@ function queryAllBySelector (element = document.documentElement, selector = '*')
   } else {
     throw Error(`[ui-test-utils] Invalid HTMLElement for query`)
   }
+}
+
+function queryBySelector (...args) {
+  return firstOrNull(queryAllBySelector(...args))
 }
 
 export {

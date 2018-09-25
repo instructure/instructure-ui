@@ -21,31 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { findDOMNode } from 'react-dom'
-import { FIXTURE_ATTRIBUTE } from './fixture'
-
-function testable () {
-  return function (ComposedComponent) {
-    const displayName = ComposedComponent.displayName || ComposedComponent.name
-    class TestableComponent extends ComposedComponent {
-      static displayName = displayName
-    }
-    if (process.env.NODE_ENV !== 'production') {
-      TestableComponent.prototype.componentDidMount = function componentDidMount () {
-        if (ComposedComponent.prototype.componentDidMount) {
-          ComposedComponent.prototype.componentDidMount.call(this)
-        }
-        // Use this._portalContentNode for components that render as non-native Portals...
-        const rootNode = findDOMNode(this) || this._portalContentNode
-
-        if (rootNode) {
-          rootNode.setAttribute(FIXTURE_ATTRIBUTE, displayName)
-        }
-      }
-    }
-    return TestableComponent
-  }
+export function firstOrNull (result) {
+  return (Array.isArray(result)) ? result[0] || null : null
 }
-
-export default testable

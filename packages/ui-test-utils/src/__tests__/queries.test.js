@@ -22,9 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect } from '../../index'
-
-import { findAll, find } from '../queries'
+import { mount, expect, findAll, find } from '../index'
 
 describe('find, findAll', () => {
   it('throws an error message by default when nothing is found', async () => {

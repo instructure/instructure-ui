@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-import { prettyDOM } from 'dom-testing-library'
+import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
 import { visible } from './helpers'
+import { firstOrNull } from './firstOrNull'
 
 import { bindElementToUtilities } from './bindElementToUtilities'
 import { waitForQueryResult } from './waitForQueryResult'
@@ -37,9 +38,10 @@ import {
   filterBySelector
 } from './filters'
 
+const VALID_SELECTORS = [ 'css', 'tag', 'text', 'contains', 'label', 'title', 'value', 'attribute']
+
 async function find (...args) {
-  let result = await findAll(...args)
-  return (Array.isArray(result)) ? result[0] || null : null
+  return firstOrNull(await findAll(...args))
 }
 
 async function findAll (...args) {
@@ -104,8 +106,7 @@ async function findAll (...args) {
 }
 
 async function findFrame (...args) {
-  let result = await findAllFrames(...args)
-  return (Array.isArray(result)) ? result[0] || null : null
+  return firstOrNull(await findAllFrames(...args))
 }
 
 async function findAllFrames (...args) {
@@ -158,19 +159,15 @@ function parseQueryArguments () {
       attribute,
       ...rest
     } = selector
-    if (css || title || tag || text || contains || label || value || attribute) {
-      selector = {
-        css,
-        title,
-        tag,
-        text,
-        contains,
-        label,
-        value,
-        attribute
-      }
-    } else {
-      selector = null
+    selector = {
+      css,
+      title,
+      tag,
+      text,
+      contains,
+      label,
+      value,
+      attribute
     }
     options = { ...options, ...rest }
   }
@@ -181,7 +178,7 @@ function parseQueryArguments () {
 
   return {
     element,
-    selector,
+    selector: validateSelector(selector),
     options
   }
 }
@@ -220,6 +217,17 @@ async function getQueryResult (element, query, options, message) {
     )
   } else {
     return []
+  }
+}
+
+function validateSelector (selector = {}) {
+  const valid = Object.keys(selector)
+    .filter(key => !!selector[key] && VALID_SELECTORS.includes(key))
+    .reduce((result, key) => { return { ...result, [key]: selector[key] } }, {})
+  if (Object.keys(valid).length === 0) {
+    return null
+  } else {
+    return valid
   }
 }
 

@@ -22,10 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect } from '../../index'
-import testable from '../testable'
+import { mount, expect, testable, fixture } from '../index'
 
+@testable()
 class Component extends React.Component {
+  static displayName = 'Component'
   render () {
     return (
       <div id="componentRoot">
@@ -36,33 +37,33 @@ class Component extends React.Component {
   }
 }
 
-const TestableComponent = testable()(Component)
+const ComponentFixture = fixture(Component.displayName)
 
-describe('@testable', () => {
+describe('@testable, fixture', () => {
   it('should find component root elements without a selector', async () => {
-    await mount(<TestableComponent />)
-    expect(await TestableComponent.findAll()).to.have.length(1)
+    await mount(<Component />)
+    expect(await ComponentFixture.findAll()).to.have.length(1)
   })
   it('should filter out non-matching components with a selector', async () => {
-    await mount(<TestableComponent />)
-    expect(await TestableComponent.findAll({ tag: 'a', expectEmpty: true }))
+    await mount(<Component />)
+    expect(await ComponentFixture.findAll({ tag: 'a', expectEmpty: true }))
       .to.have.length(0)
   })
   it('should return no results when expected', async () => {
     await mount(<div />)
-    expect(await TestableComponent.findAll({ expectEmpty: true }))
+    expect(await ComponentFixture.findAll({ expectEmpty: true }))
       .to.have.length(0)
   })
   it('can find an element by attribute name and value', async () => {
-    await mount(<TestableComponent />)
-    expect(await TestableComponent.findAll({
+    await mount(<Component />)
+    expect(await ComponentFixture.findAll({
       tag: 'input',
       attribute: { name: 'type', value: 'password' }
     })).to.have.length(1)
   })
   it('adds a custom method to find the component root element', async () => {
-    await mount(<TestableComponent />)
-    const component = await TestableComponent.find({
+    await mount(<Component />)
+    const component = await ComponentFixture.find({
       tag: 'input',
       attribute: { name: 'type', value: 'password' }
     })

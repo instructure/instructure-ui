@@ -25,14 +25,15 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-import Portal from '../fixture'
+import Portal from '../index'
+import PortalFixture from '../fixture'
 
 describe('<Portal />', () => {
   it('should render', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ text: 'Hello World' })
+    const portal = await PortalFixture.find({ text: 'Hello World' })
     expect(portal.getDOMNode()).to.exist()
   })
 
@@ -40,7 +41,7 @@ describe('<Portal />', () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await Portal.find({ text: 'Hello World' })
+    const portal = await PortalFixture.find({ text: 'Hello World' })
     expect(await portal.accessible()).to.be.true()
   })
 
@@ -71,7 +72,7 @@ describe('<Portal />', () => {
 
   it('should not render if children are empty', async () => {
     await mount(<Portal open />)
-    const portal = await Portal.findAll({ expectEmpty: true })
+    const portal = await PortalFixture.findAll({ expectEmpty: true })
     expect(portal.length).to.equal(0)
   })
 
@@ -82,7 +83,7 @@ describe('<Portal />', () => {
           Hello World
         </Portal>
       )
-      const portal = await Portal.findAll({ expectEmpty: true })
+      const portal = await PortalFixture.findAll({ expectEmpty: true })
       expect(portal.length).to.equal(0)
     })
 
@@ -96,7 +97,7 @@ describe('<Portal />', () => {
         </Portal>
       )
 
-      const button = await Portal.find({ tag: 'button', text: 'Hello World' })
+      const button = await PortalFixture.find({ tag: 'button', text: 'Hello World' })
 
       button.keyDown('Enter')
 
@@ -119,7 +120,7 @@ describe('<Portal />', () => {
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await Portal.find({ expectEmpty: true })
+      const portal = await PortalFixture.find({ expectEmpty: true })
 
       expect(portal).to.not.exist()
     })
@@ -137,7 +138,7 @@ describe('<Portal />', () => {
         </div>
       )
 
-      const portal = await Portal.find({ contains: 'Hello World'})
+      const portal = await PortalFixture.find({ contains: 'Hello World'})
 
       expect(portal.getComponentRoot().getParentNode())
         .to.equal(document.getElementById('portal-mount-node'))

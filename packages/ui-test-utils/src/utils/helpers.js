@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 import runAxeCheck from '@instructure/ui-axe-check'
-import { fireEvent, prettyDOM } from 'dom-testing-library'
+import { fireEvent } from 'dom-testing-library/dist/events'
+import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
 
 function getOwnerDocument (element) {
   return element.ownerDocument

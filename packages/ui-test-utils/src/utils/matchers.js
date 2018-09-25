@@ -21,12 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fuzzyMatches, matches, getNodeText } from 'dom-testing-library'
+import { fuzzyMatches, matches } from 'dom-testing-library/dist/matches'
+import { getNodeText } from 'dom-testing-library/dist/get-node-text'
 
-// polyfill for IE
-// TODO: check SVGElement support
-if (!Element.prototype.matches) {
- Element.prototype.matches = Element.prototype.msMatchesSelector
+if (typeof Element !== 'undefined') { // is the DOM available?
+  // polyfill for IE
+  // TODO: check SVGElement support
+  if (!Element.prototype.matches) {
+   Element.prototype.matches = Element.prototype.msMatchesSelector
+  }
 }
 
 function matchElementByText (element, text, options = {}) {

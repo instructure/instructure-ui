@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { testable } from '@instructure/ui-test-utils'
+import { fixture } from '@instructure/ui-test-utils'
 
 import Portal from './index'
 
-export default testable()(Portal)
+export default fixture(Portal.displayName)
