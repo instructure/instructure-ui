@@ -30,7 +30,7 @@ export function waitForQueryResult (
   {
     element = document.body,
     timeout = 1900,
-    errorIfNotFound = true,
+    expectEmpty = false,
     mutationObserverOptions = {subtree: true, childList: true},
     message = ''
   } = {},
@@ -54,7 +54,8 @@ export function waitForQueryResult (
       }
       try {
         const result = query()
-        if (result && result.length > 0) {
+        if ((expectEmpty === false && result && result.length > 0) ||
+          (expectEmpty && result && result.length === 0)) {
           onDone(null, result)
         }
         // If `query` returns falsy value, wait for the next mutation or timeout.
@@ -65,18 +66,14 @@ export function waitForQueryResult (
       }
     }
     function onTimeout () {
-      if (errorIfNotFound) {
-        const timedoutError = new Error(
-          [
-            `[ui-test-utils] Timed out waiting for Element query results... ${message}`,
-            prettyDOM(element, 7000, { highlight: false })
-          ]
-            .filter(Boolean).join('\n\n')
-        )
-        onDone(lastError || timedoutError, [])
-      } else {
-        onDone(null, [])
-      }
+      const timedoutError = new Error(
+        [
+          `[ui-test-utils] Timed out waiting for Element query results... ${message}`,
+          prettyDOM(element, 7000, { highlight: false })
+        ]
+          .filter(Boolean).join('\n\n')
+      )
+      onDone(lastError || timedoutError, [])
     }
     timer = setTimeout(onTimeout, timeout)
     observer = new MutationObserver(onMutation)

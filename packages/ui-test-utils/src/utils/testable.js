@@ -38,28 +38,38 @@ function testable (customMethods = {}) {
 
       static async findAll (...args) {
         const { element, selector, options } = parseQueryArguments(...args)
+        const opts = {
+          ...options,
+          customMethods: {
+            ...customMethods,
+            ...options.customMethods
+          }
+        }
 
         // Find all component root elements first...
-        const components = await findAll(element, { css: TestableComponent.locator }, options)
+        const components = await findAll(element, { css: TestableComponent.locator }, opts)
 
-        // then find within each of them, building a single array of matching elements...
-        return components.reduce(async (query, component) => {
-          const previousResults = await query
-          const currentResult = await component.findAll(
-            selector,
-            {
-              ...options,
-              customMethods: {
-                ...customMethods,
-                ...options.customMethods,
-                getComponentRoot: function getComponentRoot (element) {
-                  return component
+        if (selector) {
+          // then find within each of them, building a single array of matching elements...
+          return components.reduce(async (query, component) => {
+            const previousResults = await query
+            const currentResult = await component.findAll(
+              selector,
+              {
+                ...opts,
+                customMethods: {
+                  ...opts.customMethods,
+                  getComponentRoot: function getComponentRoot (element) {
+                    return component
+                  }
                 }
               }
-            }
-          )
-          return [...previousResults, ...currentResult]
-        }, Promise.resolve([]))
+            )
+            return [...previousResults, ...currentResult]
+          }, Promise.resolve([]))
+        } else {
+          return components
+        }
       }
 
       static async find (...args) {

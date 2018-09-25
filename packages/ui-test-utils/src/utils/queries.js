@@ -128,7 +128,7 @@ function parseQueryArguments () {
   let element = document.body
   let selectorIndex = 0
   let options = {
-    errorIfNotFound: true,
+    expectEmpty: false,
     exact: true,
     regexp: false,
     trim: true,
@@ -158,15 +158,17 @@ function parseQueryArguments () {
       attribute,
       ...rest
     } = selector
-    selector = {
-      css,
-      title,
-      tag,
-      text,
-      contains,
-      label,
-      value,
-      attribute
+    if (css || title || tag || text || contains || label || value || attribute) {
+      selector = {
+        css,
+        title,
+        tag,
+        text,
+        contains,
+        label,
+        value,
+        attribute
+      }
     }
     options = { ...options, ...rest }
   }
@@ -193,12 +195,12 @@ async function getQueryResult (element, query, options, message) {
 
   let result
 
-  const { errorIfNotFound, timeout } = options
+  const { expectEmpty, timeout } = options
 
   if (timeout > 0) {
     result = await waitForQueryResult(
       queryResult,
-      { timeout, errorIfNotFound, element, message }
+      { timeout, expectEmpty, element, message }
     )
   } else {
     result = queryResult()
@@ -206,7 +208,7 @@ async function getQueryResult (element, query, options, message) {
 
   if (result && result.length > 0) {
     return result.map(el => bindElementToUtilities(el, options.customMethods))
-  } else if (errorIfNotFound) {
+  } else if (!expectEmpty) {
     throw new Error(
       [
         `[ui-test-utils] No matches found for Element query... ${message}`,

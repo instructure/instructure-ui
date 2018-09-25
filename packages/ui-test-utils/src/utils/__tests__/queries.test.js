@@ -33,13 +33,12 @@ describe('find, findAll', () => {
     expect(findAll({ label: 'pineapple', timeout: 0 })).to.eventually.throw()
     expect(findAll({ tag: 'pineapple', timeout: 0 })).to.eventually.throw()
     expect(findAll({ text: 'pineapple', timeout: 0 })).to.eventually.throw()
-    expect(findAll('table', { timeout: 200 })).to.eventually.throw()
+    expect(findAll('table', { timeout: 100 })).to.eventually.throw()
   })
 
-  it('should return empty array when configured to not throw', async () => {
+  it('should return empty array when configured to expect empty results', async () => {
     const options = {
-      timeout: 0,
-      errorIfNotFound: false
+      expectEmpty: true
     }
     expect(await findAll('[selected]', options)).to.have.length(0)
     expect(await findAll({ locator: '[selected]', ...options })).to.have.length(0)
@@ -47,7 +46,7 @@ describe('find, findAll', () => {
     expect(await findAll({ label: 'pineapple', ...options })).to.have.length(0)
     expect(await findAll({ tag: 'pineapple', ...options })).to.have.length(0)
     expect(await findAll({ text: 'pineapple', ...options })).to.have.length(0)
-    expect(await findAll({ title: 'pineapple', ...options, timeout: 200 })).to.have.length(0)
+    expect(await findAll({ title: 'pineapple', ...options })).to.have.length(0)
   })
 
   describe('by text', () => {
@@ -90,8 +89,7 @@ describe('find, findAll', () => {
       expect(await findAll({
         locator: '[data-locator="TestLocator"]',
         text: 'Foo',
-        errorIfNotFound: false,
-        timeout: 0
+        expectEmpty: true
       })).to.have.length(0)
     })
 
@@ -115,7 +113,7 @@ describe('find, findAll', () => {
     it('matches case with RegExp matcher', async () => {
       await mount(<span>STEP 1 of 4</span>)
       expect(await findAll({ text: /STEP 1 of 4/ })).to.have.length(1)
-      expect(await findAll({ text: /Step 1 of 4/, errorIfNotFound: false, timeout: 0 }))
+      expect(await findAll({ text: /Step 1 of 4/, expectEmpty: true }))
         .to.have.length(0)
     })
   })
@@ -177,13 +175,13 @@ describe('find, findAll', () => {
 
     it('handles a label with no form control', async () => {
       await mount(<label>First name</label>)
-      expect(await find({ label: /name/, errorIfNotFound: false, timeout: 0 }))
+      expect(await find({ label: /name/, expectEmpty: true }))
         .to.be.null()
     })
 
     it('handles a totally empty label', async () => {
       await mount(<label />)
-      expect(await find({ label: ' ', errorIfNotFound: false, timeout: 0 }))
+      expect(await find({ label: ' ', expectEmpty: true }))
         .to.be.null()
     })
 

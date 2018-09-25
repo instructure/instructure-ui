@@ -71,10 +71,7 @@ describe('<Portal />', () => {
 
   it('should not render if children are empty', async () => {
     await mount(<Portal open />)
-    const portal = await Portal.findAll({
-      timeout: 0,
-      errorIfNotFound: false
-    })
+    const portal = await Portal.findAll({ expectEmpty: true })
     expect(portal.length).to.equal(0)
   })
 
@@ -85,10 +82,7 @@ describe('<Portal />', () => {
           Hello World
         </Portal>
       )
-      const portal = await Portal.findAll({
-        errorIfNotFound: false,
-        timeout: 0
-      })
+      const portal = await Portal.findAll({ expectEmpty: true })
       expect(portal.length).to.equal(0)
     })
 
@@ -125,11 +119,7 @@ describe('<Portal />', () => {
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await Portal.find({
-        contains: 'Hello World',
-        timeout: 0,
-        errorIfNotFound: false
-      })
+      const portal = await Portal.find({ contains: 'Hello World', expectEmpty: true })
 
       expect(portal).to.not.exist()
     })

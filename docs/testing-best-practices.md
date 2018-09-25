@@ -112,7 +112,7 @@ title
 
 customMethods
 
-errorIfNotFound: true,
+expectEmpty: true,
 
 exact: true,
 regexp: false,

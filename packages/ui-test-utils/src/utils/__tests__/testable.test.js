@@ -39,6 +39,10 @@ class Component extends React.Component {
 const TestableComponent = testable()(Component)
 
 describe('@testable', () => {
+  it('should find component root elements without a selector', async () => {
+    await mount(<TestableComponent />)
+    expect(await TestableComponent.findAll()).to.have.length(1)
+  })
   it('can find an element by attribute name and value', async () => {
     await mount(<TestableComponent />)
     expect(await TestableComponent.findAll({
