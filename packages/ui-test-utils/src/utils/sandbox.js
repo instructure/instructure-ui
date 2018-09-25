@@ -24,6 +24,8 @@
 import sinon from 'sinon'
 import fetchMock from 'fetch-mock'
 
+import StyleSheet from '@instructure/ui-stylesheet'
+
 import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
@@ -56,6 +58,8 @@ class Sandbox {
   }
 
   teardown () {
+    StyleSheet.flush()
+
     this._observer.disconnect()
 
     this._sandbox.resetHistory()

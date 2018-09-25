@@ -21,4 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { default } from '@instructure/ui-stylesheet'
+
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel') ]]
+}

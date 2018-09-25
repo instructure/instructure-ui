@@ -45,6 +45,7 @@ import {
 } from './registry'
 
 import StyleSheet from './StyleSheet'
+import { toRules } from './utils/transformCss'
 
 /**
 * ---
@@ -152,7 +153,7 @@ export default function themeable (theme, styles = {}) {
         if (!StyleSheet.mounted(componentId)) {
           const defaultTheme = generateThemeForContextKey()
           const cssText = getCssText(template, defaultTheme, componentId)
-          StyleSheet.mount(componentId, cssText)
+          StyleSheet.mount(componentId, toRules(cssText))
         }
 
         if (super.componentWillMount) {
