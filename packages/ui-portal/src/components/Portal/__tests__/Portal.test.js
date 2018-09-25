@@ -119,7 +119,7 @@ describe('<Portal />', () => {
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await Portal.find({ contains: 'Hello World', expectEmpty: true })
+      const portal = await Portal.find({ expectEmpty: true })
 
       expect(portal).to.not.exist()
     })

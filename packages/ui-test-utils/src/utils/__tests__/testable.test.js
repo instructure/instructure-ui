@@ -43,6 +43,16 @@ describe('@testable', () => {
     await mount(<TestableComponent />)
     expect(await TestableComponent.findAll()).to.have.length(1)
   })
+  it('should filter out non-matching components with a selector', async () => {
+    await mount(<TestableComponent />)
+    expect(await TestableComponent.findAll({ tag: 'a', expectEmpty: true }))
+      .to.have.length(0)
+  })
+  it('should return no results when expected', async () => {
+    await mount(<div />)
+    expect(await TestableComponent.findAll({ expectEmpty: true }))
+      .to.have.length(0)
+  })
   it('can find an element by attribute name and value', async () => {
     await mount(<TestableComponent />)
     expect(await TestableComponent.findAll({

@@ -37,11 +37,8 @@ describe('find, findAll', () => {
   })
 
   it('should return empty array when configured to expect empty results', async () => {
-    const options = {
-      expectEmpty: true
-    }
+    const options = { expectEmpty: true }
     expect(await findAll('[selected]', options)).to.have.length(0)
-    expect(await findAll({ locator: '[selected]', ...options })).to.have.length(0)
     expect(await findAll({ css: '[selected]', ...options })).to.have.length(0)
     expect(await findAll({ label: 'pineapple', ...options })).to.have.length(0)
     expect(await findAll({ tag: 'pineapple', ...options })).to.have.length(0)
@@ -87,7 +84,7 @@ describe('find, findAll', () => {
       )
 
       expect(await findAll({
-        locator: '[data-locator="TestLocator"]',
+        css: '[data-locator="TestLocator"]',
         text: 'Foo',
         expectEmpty: true
       })).to.have.length(0)

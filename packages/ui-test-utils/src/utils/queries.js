@@ -169,6 +169,8 @@ function parseQueryArguments () {
         value,
         attribute
       }
+    } else {
+      selector = null
     }
     options = { ...options, ...rest }
   }

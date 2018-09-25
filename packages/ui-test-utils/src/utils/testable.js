@@ -38,8 +38,12 @@ function testable (customMethods = {}) {
 
       static async findAll (...args) {
         const { element, selector, options } = parseQueryArguments(...args)
+        const { expectEmpty, ...rest } = options
+
         const opts = {
-          ...options,
+          ...rest,
+          // if there is a selector, we should expect that there is at least one component rendered
+          expectEmpty: selector ? false : expectEmpty,
           customMethods: {
             ...customMethods,
             ...options.customMethods
@@ -57,6 +61,7 @@ function testable (customMethods = {}) {
               selector,
               {
                 ...opts,
+                expectEmpty, // here we pass along whatever we get in options
                 customMethods: {
                   ...opts.customMethods,
                   getComponentRoot: function getComponentRoot (element) {
