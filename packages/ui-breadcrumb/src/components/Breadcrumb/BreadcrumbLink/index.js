@@ -26,12 +26,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 /**
 ---
 parent: Breadcrumb
 ---
 **/
+@testable()
 export default class BreadcrumbLink extends Component {
   static propTypes = {
     /**

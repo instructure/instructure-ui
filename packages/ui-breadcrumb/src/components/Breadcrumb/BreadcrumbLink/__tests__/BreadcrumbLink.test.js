@@ -24,40 +24,72 @@
 
 import React from 'react'
 
+import { expect, mount, stub } from '@instructure/ui-test-utils'
+
 import BreadcrumbLink from '../index'
+import BreadcrumbLinkFixture from '../fixture'
 
-describe('<BreadcrumbLink />', () => {
-  const testbed = new Testbed(<BreadcrumbLink>Content</BreadcrumbLink>)
+describe('<BreadcrumbLink />', async () => {
+  it('should render a link when given an href prop', async () => {
+    await mount(
+      <BreadcrumbLink href="#">Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find({tag: 'a'})
 
-  it('should render a link when given an href prop', () => {
-    const subject = testbed.render({href: '#'})
-    expect(subject.find('a')).to.be.present()
+    expect(el).to.exist()
+    expect(el.getAttribute('href')).to.equal('#')
   })
 
-  it('should render as a button and respond to onClick event', () => {
-    const onClick = testbed.stub()
-    const subject = testbed.render({onClick})
-    subject.find('button').simulate('click')
-    expect(onClick).to.have.been.called()
+  it('should render as a button and respond to onClick event', async () => {
+    const onClick = stub()
+    await mount(
+      <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find({tag: 'button'})
+
+    el.click()
+    expect(onClick).to.have.been.calledOnce()
   })
 
-  it('should not render a link when not given an href prop', () => {
-    const subject = testbed.render()
-    expect(subject.find('a')).not.to.be.present()
-  })
-
-  it('should not render a button when not given an onClick prop', () => {
-    const subject = testbed.render()
-    expect(subject.find('button')).not.to.be.present()
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
+  it('should not render a link when not given an href prop', async () => {
+    await mount(
+      <BreadcrumbLink>Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find({
+      tag: 'a',
+      expectEmpty: true
     })
+
+    expect(el).to.not.exist()
+  })
+
+  it('should not render a button when not given an onClick prop', async () => {
+    await mount(
+      <BreadcrumbLink>Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find({
+      tag: 'button',
+      expectEmpty: true
+    })
+
+    expect(el).to.not.exist()
+  })
+
+  it('should meet a11y standards as a link', async () => {
+    await mount(
+      <BreadcrumbLink href="#">Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find()
+
+    expect(await el.accessible()).to.be.true()
+  })
+
+  it('should meet a11y standards as a span', async () => {
+    await mount(
+      <BreadcrumbLink>Test</BreadcrumbLink>
+    )
+    const el = await BreadcrumbLinkFixture.find()
+
+    expect(await el.accessible()).to.be.true()
   })
 })

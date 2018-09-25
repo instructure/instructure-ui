@@ -24,36 +24,44 @@
 
 import React from 'react'
 
-import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
+import { expect, mount } from '@instructure/ui-test-utils'
+import Breadcrumb, { BreadcrumbLink } from '../index'
+import BreadcrumbFixture from '../fixture'
 
-import Breadcrumb from '../index'
-import BreadcrumbLink from '../BreadcrumbLink'
+describe('<Breadcrumb />', async () => {
+  it('should render the label as an aria-label attribute', async () => {
+    await mount(
+      <Breadcrumb label="Settings">
+        <BreadcrumbLink>Account</BreadcrumbLink>
+      </Breadcrumb>
+    )
+    const el = await BreadcrumbFixture.find({label: 'Settings'})
+    const label = el.getAttribute('aria-label')
 
-describe('<Breadcrumb />', () => {
-  const testbed = new Testbed(
-    <Breadcrumb label="This is a test">
-      <BreadcrumbLink href="http://fakeurl.com">English 204</BreadcrumbLink>
-      <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
-    </Breadcrumb>
-  )
-
-  it('should render the label as an aria-label attribute', () => {
-    const subject = testbed.render({label: 'This is a test'})
-    expect(subject.getAttribute('aria-label')).to.equal('This is a test')
+    expect(label).to.equal('Settings')
   })
 
-  it('should render IconArrowOpenEnd by default as a separator', () => {
-    const subject = testbed.render()
-    expect(subject.find(IconArrowOpenEnd)).to.be.present()
+  it('should render an icon as a separator', async () => {
+    await mount(
+      <Breadcrumb label="Settings">
+        <BreadcrumbLink href="#">Account</BreadcrumbLink>
+        <BreadcrumbLink>Settings</BreadcrumbLink>
+      </Breadcrumb>
+    )
+    const el = await BreadcrumbFixture.find({tag: 'svg'})
+
+    expect(el).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    await mount(
+      <Breadcrumb label="Settings">
+        <BreadcrumbLink href="#">Account</BreadcrumbLink>
+        <BreadcrumbLink>Settings</BreadcrumbLink>
+      </Breadcrumb>
+    )
+    const el = await BreadcrumbFixture.find()
 
-    subject.should.be.accessible(done, {
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
-    })
+    expect(await el.accessible()).to.be.true()
   })
 })

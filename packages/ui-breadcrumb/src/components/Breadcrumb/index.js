@@ -32,6 +32,7 @@ import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import Browser from '@instructure/ui-utils/lib/Browser'
+import testable from '@instructure/ui-testable'
 
 import BreadcrumbLink from './BreadcrumbLink'
 
@@ -44,6 +45,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 export default class Breadcrumb extends Component {
   static propTypes = {
