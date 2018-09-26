@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-menu",
-  "version": "5.28.1",
+  "version": "5.29.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

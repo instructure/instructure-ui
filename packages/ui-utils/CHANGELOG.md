@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.29.0"></a>
+# [5.29.0](https://github.com/instructure/instructure-ui/compare/v5.28.1...v5.29.0) (2018-09-26)
+
+
+### Bug Fixes
+
+* **ui-elements,ui-utils:** prevent TruncateText from rendering hidden text ([b489a32](https://github.com/instructure/instructure-ui/commit/b489a32))
+
+
+
+
+
 <a name="5.28.1"></a>
 ## [5.28.1](https://github.com/instructure/instructure-ui/compare/v5.28.0...v5.28.1) (2018-09-18)
 
