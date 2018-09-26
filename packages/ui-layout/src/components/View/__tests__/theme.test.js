@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import View from '../index'
@@ -43,7 +44,7 @@ describe('View.theme', () => {
     })
   })
 
-  describe('with the high contrast canvas theme', () => {
+  describe('with the high contrast canvas theme', async () => {
     const variables = View.generateTheme('canvas-high-contrast')
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {

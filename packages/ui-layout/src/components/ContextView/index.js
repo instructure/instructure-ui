@@ -42,6 +42,7 @@ import theme from './theme'
 category: components
 ---
 **/
+
 @themeable(theme, styles)
 class ContextView extends Component {
   static propTypes = {

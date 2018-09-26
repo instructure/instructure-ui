@@ -22,100 +22,128 @@
  * SOFTWARE.
  */
 import React from 'react'
+
+import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import DrawerTray from '../index'
 import styles from '../styles.css'
 
-describe('<DrawerTray />', () => {
-  const testbed = new Testbed(
-    <DrawerTray
-      label="DrawerTray Example"
-      render={() => {
-        return 'Hello from layout tray'
-      }}
-    />
-  )
+const DrawerTrayLocator = locator(DrawerTray.displayName)
 
-  it(`should place the tray correctly with placement=start`, () => {
-    testbed.render({
-      open: true,
-      placement: 'start'
+describe('<DrawerTray />', async () => {
+  it(`should place the tray correctly with placement=start`, async () => {
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        placement="start"
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find()
+
+    expect(drawerTray).to.exist()
+    expect(drawerTray.hasClass(styles['placement--start'])).to.be.true()
+  })
+
+  it(`should place the tray correctly with placement=end`, async () => {
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        placement="end"
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find()
+
+    expect(drawerTray).to.exist()
+    expect(drawerTray.hasClass(styles['placement--end'])).to.be.true()
+  })
+
+  it('should render tray content when open', async () => {
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find({
+      label: 'DrawerTray Example',
+      text: 'Hello from layout tray'
     })
 
-    testbed.tick()
-    testbed.tick()
-
-    const elementWithPlacementClass = document.querySelector(`.${styles['placement--start']}`)
-
-    expect(elementWithPlacementClass).to.exist()
+    expect(drawerTray).to.exist()
   })
 
-  it(`should place the tray correctly with placement=end`, () => {
-    testbed.render({
-      open: true,
-      placement: 'end'
-    })
+  it('should not render tray content when closed', async () => {
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find({expectEmpty: true})
 
-    testbed.tick()
-    testbed.tick()
-
-    const elementWithPlacementClass = document.querySelector(`.${styles['placement--end']}`)
-
-    expect(elementWithPlacementClass).to.exist()
+    expect(drawerTray).to.not.exist()
   })
 
-  it('should render tray content when open', () => {
-    testbed.render({ open: true })
+  it('should apply theme overrides when open', async () => {
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        theme={{
+          zIndex: '333'
+        }}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find()
 
-    testbed.tick()
-    testbed.tick()
-
-    expect(document.querySelector('[aria-label="DrawerTray Example"]')).to.exist()
+    expect(drawerTray).to.exist()
+    expect(drawerTray.getComputedStyle().zIndex).to.equal('333')
   })
 
-  it('should not render tray content when closed', () => {
-    const subject = testbed.render()
-    expect(subject.ref('_trayContent').node).to.equal(undefined) // eslint-disable-line no-undefined
+  it('should call the contentRef', async () => {
+    const contentRef = stub()
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        contentRef={contentRef}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = (await DrawerTrayLocator.find()).getDOMNode()
+
+    expect(contentRef).to.have.been.calledWith(drawerTray)
   })
 
-  it('should apply theme overrides when open', () => {
-    const subject = testbed.render({
-      open: true,
-      theme: {
-        zIndex: '333'
-      }
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    const tray = subject.getDOMNode()
-
-    expect(window.getComputedStyle(tray).zIndex)
-      .to.equal('333')
-  })
-
-  it('should call the contentRef', () => {
-    const contentRef = testbed.spy()
-    const subject = testbed.render({
-      open: true,
-      contentRef
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(contentRef).to.have.been.calledWith(subject.ref('_content').node)
-  })
-
-  it('should call onOpen ', () => {
-    const onOpen = testbed.spy()
-    const subject = testbed.render({
-      open: false,
-      onOpen
-     })
-
-    testbed.tick()
-    testbed.tick()
+  it('should call onOpen ', async () => {
+    const onOpen = stub()
+    const subject = await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={false}
+        onOpen={onOpen}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
 
     expect(onOpen).to.not.have.been.called()
 
@@ -123,68 +151,91 @@ describe('<DrawerTray />', () => {
       open: true
     })
 
-    testbed.tick()
-    testbed.tick()
-
-    expect(onOpen).to.have.been.called()
+    await wait(() => {
+      expect(onOpen).to.have.been.called()
+    })
   })
 
-  it('should call onOpen when open initially', () => {
-    const onOpen = testbed.spy()
+  it('should call onOpen when open initially', async () => {
+    const onOpen = stub()
+    await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        onOpen={onOpen}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
 
-    testbed.render({ onOpen, open: true })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(onOpen).to.have.been.called()
+    await wait(() => {
+      expect(onOpen).to.have.been.called()
+    })
   })
 
-  it('should call onClose ', () => {
-    const onClose = testbed.spy()
-    const subject = testbed.render({ onClose, open: true })
-
-    testbed.tick()
-    testbed.tick()
+  it('should call onClose ', async () => {
+    const onClose = stub()
+    const subject = await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        onClose={onClose}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
 
     expect(onClose).to.not.have.been.called()
 
-    subject.setProps({ open: false })
+    subject.setProps({
+      open: false
+    })
 
-    testbed.tick()
-    testbed.tick()
-
-    expect(onClose).to.have.been.called()
+    await wait(() => {
+      expect(onClose).to.have.been.called()
+    })
   })
 
-  it('drops a shadow if the prop is set, and it is overlaying content', () => {
-    const subject = testbed.render({
-      open: true,
-      shadow: true
-    },{
+  it('drops a shadow if the prop is set, and it is overlaying content', async () => {
+    const onEntered = stub()
+    const subject = await mount(
+      <DrawerTray
+        label="DrawerTray Example"
+        open={true}
+        shadow={true}
+        onEntered={onEntered}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />)
+
+    const drawerTray = await DrawerTrayLocator.find()
+
+    subject.setContext({
       shouldOverlayTray: true
     })
 
-    testbed.tick()
-    testbed.tick()
-
-    expect(subject.hasClass(styles['shadow'])).to.be.true()
-
-    subject.setContext({shouldOverlayTray: false})
-
-    expect(subject.hasClass(styles['shadow'])).to.be.false()
+    await wait(() => {
+      expect(drawerTray.hasClass(styles['shadow'])).to.be.true()
+    })
   })
 
-  it('should apply the a11y attributes', () => {
-    testbed.render({
-      label: 'a tray test',
-      open: true
-    })
+  it('should apply the a11y attributes', async () => {
+    await mount(
+      <DrawerTray
+        label="a tray test"
+        open={true}
+        render={() => {
+          return 'Hello from layout tray'
+        }}
+      />
+    )
+    const drawerTray = await DrawerTrayLocator.find()
+    const dialog = await drawerTray.find({label: 'a tray test'})
 
-    testbed.tick()
-    testbed.tick()
-
-    const tray = document.querySelector('[aria-label="a tray test"]')
-    expect(tray.getAttribute('role')).to.equal('dialog')
+    expect(dialog).to.exist()
+    expect(dialog.getAttribute('role')).to.equal('dialog')
   })
 })

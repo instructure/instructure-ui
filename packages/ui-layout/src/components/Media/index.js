@@ -28,7 +28,8 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import warning from '@instructure/ui-utils/lib/warning'
 
 import View from '../View'
 
@@ -74,6 +75,17 @@ class Media extends Component {
   }
 
   render () {
+    // warn for unallowed view props
+    const Component = Media
+    const allowedProps = pickProps(pickProps(this.props, View.propTypes), Component.propTypes)
+    const viewProps = omitProps(pickProps(this.props, View.propTypes), allowedProps)
+    Object.keys(viewProps).forEach((prop) => {
+      warning(
+        (allowedProps[prop]),
+        `View prop ${prop} is not allowed on ${Component.displayName}`
+      )
+    })
+
     return (
       <View
         {...omitProps(this.props, { ...Media.propTypes, ...View.propTypes })}

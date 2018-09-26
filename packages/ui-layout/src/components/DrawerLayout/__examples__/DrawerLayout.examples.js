@@ -21,32 +21,45 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { DrawerTray, DrawerContent } from '../'
+import View from '../../View'
 
-module.exports = {
-  files: [
-    'packages/**/*.test.js'
-  ],
-  ignore: [
-    'packages/ui-codemods/**'
-  ],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-a11y/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-elements/',
-    'packages/ui-focusable/',
-    'packages/ui-forms/',
-    'packages/ui-i18n/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-pages/',
-    'packages/ui-pagination/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/',
-    'packages/ui-utils/'
-  ]
+export default {
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        children: [
+          <DrawerTray
+            key="0"
+            id="DrawerLayoutTrayExample1"
+            open={true}
+            placement="start"
+            label="Drawer Tray Start Example"
+          >
+            <View
+              as="div"
+              maxWidth="16rem"
+              textAlign="center"
+              margin="large auto"
+              padding="small"
+            >
+              Drawer tray
+            </View>
+          </DrawerTray>,
+          <DrawerContent key="1" label="Drawer content example">
+            <div style={{background: 'white', height: '100%'}}>
+              <View as="div" padding="x-large">
+                Drawer content
+              </View>
+            </div>
+          </DrawerContent>
+        ]
+      },
+      exampleProps: {
+        as: 'div',
+        borderWidth: 'small'
+      }
+    }
+  }
 }

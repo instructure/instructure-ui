@@ -31,8 +31,9 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
+import testable from '@instructure/ui-testable'
 
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import { mirrorHorizontalPlacement } from '../../../utils/mirrorPlacement'
@@ -45,10 +46,11 @@ import theme from './theme'
 parent: DrawerLayout
 ---
 **/
-
+@testable()
 @bidirectional()
 @themeable(theme, styles)
 class DrawerTray extends Component {
+  static locatorAttribute = 'data-drawer-tray'
   static propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),

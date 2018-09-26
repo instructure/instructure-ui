@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import { expect } from '@instructure/ui-test-utils'
 import addMediaQueryMatchListener from '../addMediaQueryMatchListener'
 import MediaQueryListProxy from './__testfixtures__/MediaQueryListProxy'
 
@@ -104,7 +106,7 @@ describe('@addMediaQueryMatchListener', () => {
       three: { maxWidth: 300 },
       four: { maxWidth: 500 },
       five: { maxHeight: 700 },
-      six: {maxHeight: 800}
+      six: { maxHeight: 800 }
     }
 
     addListener(query)
@@ -142,7 +144,3 @@ describe('@addMediaQueryMatchListener', () => {
     expect(matches.includes('six')).to.be.true()
   })
 })
-
-
-
-

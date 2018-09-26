@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import px from '@instructure/ui-utils/lib/px'
 import jsonToMediaQuery from '../jsonToMediaQuery'
 

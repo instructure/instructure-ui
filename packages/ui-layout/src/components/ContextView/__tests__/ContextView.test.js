@@ -23,46 +23,60 @@
  */
 
 import React from 'react'
+
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import ContextView from '../index'
 import styles from '../styles.css'
 
-describe('<ContextView />', () => {
-  const testbed = new Testbed(<ContextView />)
+describe('<ContextView />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <ContextView />
+    )
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <ContextView />
+    )
 
-    subject.should.be.accessible(done)
+    const contextView = within(subject.getDOMNode())
+    expect(await contextView.accessible()).to.be.true()
   })
 
-  it('should apply default styled arrow by default', () => {
-    const subject = testbed.render()
+  it('should apply default styled arrow by default', async () => {
+    const subject = await mount(
+      <ContextView />
+    )
 
-    subject.hasClass(styles['arrow--default'])
+    const contextView = within(subject.getDOMNode())
+    const arrow = await contextView.find({css: `.${styles['arrow']}`})
+
+    expect(arrow.hasClass(styles['arrow--default'])).to.be.true()
   })
 
-  it('should apply inverse arrow when inverse is set', () => {
-    const subject = testbed.render({
-      background: 'inverse'
-    })
+  it('should apply inverse arrow when inverse is set', async () => {
+    const subject = await mount(
+      <ContextView background="inverse" />
+    )
 
-    expect(subject.find(`.${styles['arrow--inverse']}`)).to.exist()
+    const contextView = within(subject.getDOMNode())
+    const arrow = await contextView.find({css: `.${styles['arrow']}`})
+
+    expect(arrow.hasClass(styles['arrow--inverse'])).to.be.true()
   })
 
   function testPlacement (placement) {
-    it(`should apply placement classes for ${placement}`, () => {
-      const subject = testbed.render({
-        placement
-      })
+    it(`should apply placement classes for ${placement}`, async () => {
+      const subject = await mount(
+        <ContextView placement={placement} />
+      )
+      const classname = styles[`placement--${placement.split(' ').join('-')}`]
+      const contextView = within(subject.getDOMNode())
 
-      expect(subject.hasClass(styles[`placement--${placement.split(' ').join('-')}`]))
-        .to.be.true()
+      expect(contextView.hasClass(classname)).to.be.true()
     })
   }
 
@@ -81,12 +95,15 @@ describe('<ContextView />', () => {
   testPlacement('offscreen')
 
   function testArrowPlacement (placement, mirror) {
-    it(`should mirror the arrow position based on the placement for ${placement}`, () => {
-      const subject = testbed.render({
-        placement
-      })
-      const mirroredStyle = `arrow--${mirror.split(' ').join('-')}`
-      expect(subject.find(`.${styles[mirroredStyle]}`)).to.exist()
+    it(`should mirror the arrow position based on the placement for ${placement}`, async () => {
+      const subject = await mount(
+        <ContextView placement={placement} />
+      )
+      const classname = styles[`arrow--${mirror.split(' ').join('-')}`]
+      const contextView = within(subject.getDOMNode())
+      const arrow = await contextView.find({css: `.${styles['arrow']}`})
+
+      expect(arrow.hasClass(classname)).to.be.true()
     })
   }
 

@@ -25,176 +25,173 @@ import React from 'react'
 
 import px from '@instructure/ui-utils/lib/px'
 import within from '@instructure/ui-utils/lib/within'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import DrawerLayoutFixture from '../__fixtures__/DrawerLayout.fixture'
+import DrawerLayoutLocator from '../locator'
 
-describe('<DrawerLayout />', () => {
-  const testbed = new Testbed(
-    <DrawerLayoutFixture />
-  )
+describe('<DrawerLayout />', async () => {
+  it('should render', async () => {
+    await mount(
+      <DrawerLayoutFixture />
+    )
+    const drawerLayout = await DrawerLayoutLocator.find()
 
-  beforeEach(() => {
-    testbed.setTextDirection('ltr')
+    expect(drawerLayout).to.exist()
   })
 
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+  it('should render a DrawerTray and DrawerContent', async () => {
+    await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="800px"
+        trayWidth="250px"
+      />
+    )
+
+    const drawerLayout = await DrawerLayoutLocator.find()
+    const drawerTray = await drawerLayout.findTray({contains: 'Hello from tray'})
+    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+
+    expect(drawerTray).to.exist()
+    expect(drawerContent).to.exist()
   })
 
-  it(`with no overlay, layout content should have margin equal to tray width with placement=start`, () => {
-    const trayWidth = '250px'
-    const subject = testbed.render({
-      trayWidth,
-      trayPlacement: 'start',
-      layoutWidth: '800px',
-      trayOpen: true
-    })
+  it(`with no overlay, layout content should have margin equal to tray width with placement=start`, async () => {
+    await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="800px"
+        trayWidth="250px"
+      />
+    )
 
-    testbed.tick()
-    testbed.tick()
+    const drawerLayout = await DrawerLayoutLocator.find()
+    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+    const margin = px(drawerContent.getComputedStyle().marginLeft)
 
-    const node = subject.find('[aria-label="Test DrawerContent"]')
-
-    const margin = px(node.props().style['marginLeft'])
-
-    expect(within(margin, px(trayWidth), 2)).to.be.true() // added some tolerance for client rect measurements
+    expect(within(margin, 250, 2)).to.be.true()
   })
 
-  it(`with no overlay, layout content should have margin equal to tray width with placement=end`, () => {
-    const trayWidth = '250px'
-    const subject = testbed.render({
-      trayWidth,
-      trayPlacement: 'end',
-      layoutWidth: '800px',
-      trayOpen: true
-    })
+  it(`with no overlay, layout content should have margin equal to tray width with placement=end`, async () => {
+    await mount(
+      <DrawerLayoutFixture
+        open={true}
+        placement="end"
+        layoutWidth="800px"
+        trayWidth="250px"
+      />
+    )
 
-    testbed.tick()
-    testbed.tick()
+    const drawerLayout = await DrawerLayoutLocator.find()
+    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+    const margin = px(drawerContent.getComputedStyle().marginRight)
 
-    const node = subject.find('[aria-label="Test DrawerContent"]')
-
-    const margin = px(node.props().style['marginRight'])
-
-    expect(within(margin, px(trayWidth), 2)).to.be.true() // added some tolerance for client rect measurements
+    expect(within(margin, 250, 2)).to.be.true()
   })
 
-  it(`with overlay, layout content should have a margin of zero with placement=start`, () => {
-    testbed.render({
-      trayWidth: '250px',
-      trayPlacement: 'start',
-      layoutWidth: '700px',
-      trayOpen: true
-    })
+  it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
+    await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="700px"
+        trayWidth="250px"
+      />
+    )
 
-    testbed.tick()
-    testbed.tick()
+    const drawerLayout = await DrawerLayoutLocator.find()
+    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+    const margin = px(drawerContent.getComputedStyle().marginLeft)
 
-    const node = document.querySelector('[aria-label="Test DrawerContent"]')
-
-    expect(node.style['marginLeft']).to.equal('0px')
+    expect(margin).to.equal(0)
   })
 
-  it(`with overlay, layout content should have a margin of zero with placement=end`, () => {
-    testbed.render({
-      trayWidth: '250px',
-      trayPlacement: 'end',
-      layoutWidth: '700px',
-      trayOpen: true
-    })
+  it(`with overlay, layout content should have a margin of zero with placement=end`, async () => {
+    await mount(
+      <DrawerLayoutFixture
+        open={true}
+        placement="end"
+        layoutWidth="700px"
+        trayWidth="250px"
+      />
+    )
 
-    testbed.tick()
-    testbed.tick()
+    const drawerLayout = await DrawerLayoutLocator.find()
+    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+    const margin = px(drawerContent.getComputedStyle().marginRight)
 
-    const node = document.querySelector('[aria-label="Test DrawerContent"]')
-
-    expect(node.style['marginRight']).to.equal('0px')
+    expect(margin).to.equal(0)
   })
 
-  it('the tray should overlay the content when the content is less than the minWidth', () => {
-    const onOverlayTrayChange = testbed.spy()
-
-    const subject = testbed.render({
-      trayOpen: true,
-      trayWidth: '200px',
-      layoutWidth: '800px',
-      onOverlayTrayChange
-    })
-
-    testbed.tick()
-    testbed.tick()
+  it('the tray should overlay the content when the content is less than the minWidth', async () => {
+    const onOverlayTrayChange = stub()
+    const subject = await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="800px"
+        onOverlayTrayChange={onOverlayTrayChange}
+      />
+    )
 
     subject.setProps({
-      layoutWidth: '695px'
+      layoutWidth: '295px'
     })
 
-    testbed.tick()
-    testbed.tick()
-
-    onOverlayTrayChange.should.have.been.calledWith(true)
+    await wait(() => {
+      expect(onOverlayTrayChange.lastCall.args[0]).to.be.true()
+    })
   })
 
-  it('the tray should stop overlaying the content when there is enough space for the content', () => {
-    const onOverlayTrayChange = testbed.spy()
-
-    const subject = testbed.render({
-      trayOpen: true,
-      trayWidth: '200px',
-      layoutWidth: '400px',
-      onOverlayTrayChange
-    })
-
-    testbed.tick()
-    testbed.tick()
+  it('the tray should stop overlaying the content when there is enough space for the content', async () => {
+    const onOverlayTrayChange = stub()
+    const subject = await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="400px"
+        onOverlayTrayChange={onOverlayTrayChange}
+      />
+    )
 
     subject.setProps({
       layoutWidth: '705px'
     })
 
-    testbed.tick()
-    testbed.tick()
-
-    onOverlayTrayChange.should.have.been.calledWith(false)
+    await wait(() => {
+      expect(onOverlayTrayChange.lastCall.args[0]).to.be.false()
+    })
   })
 
-  it('the tray should be set to overlay when it is opened and there is not enough space', () => {
-    const onOverlayTrayChange = testbed.spy()
-    const subject = testbed.render({
-      trayOpen: false,
-      trayWidth: '200px',
-      layoutWidth: '695px',
-      onOverlayTrayChange
+  it('the tray should be set to overlay when it is opened and there is not enough space', async () => {
+    const onOverlayTrayChange = stub()
+    const subject = await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="295px"
+        onOverlayTrayChange={onOverlayTrayChange}
+      />
+    )
+
+    subject.setProps({open: true})
+
+    await wait(() => {
+      expect(onOverlayTrayChange.lastCall.args[0]).to.be.true()
     })
-
-    testbed.tick()
-    testbed.tick()
-
-    subject.find('button').click() // opens tray
-
-    testbed.tick()
-    testbed.tick()
-
-    onOverlayTrayChange.should.have.been.calledWith(true)
   })
 
-  it('the tray should not overlay on open when there is enough space', () => {
-    const onOverlayTrayChange = testbed.spy()
-    const subject = testbed.render({
-      trayOpen: false,
-      trayWidth: '200px',
-      layoutWidth: '705px',
-      onOverlayTrayChange
+  it('the tray should not overlay on open when there is enough space', async() => {
+    const onOverlayTrayChange = stub()
+    const subject = await mount(
+      <DrawerLayoutFixture
+        open={true}
+        layoutWidth="705px"
+        onOverlayTrayChange={onOverlayTrayChange}
+      />
+    )
+
+    subject.setProps({open: true})
+
+    await wait(() => {
+      expect(onOverlayTrayChange.lastCall.args[0]).to.be.false()
     })
-
-    testbed.tick()
-    testbed.tick()
-
-    subject.find('button').click() // opens tray
-
-    testbed.tick()
-    testbed.tick()
-
-    onOverlayTrayChange.should.have.been.calledWith(false)
   })
 })

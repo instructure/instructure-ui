@@ -23,34 +23,29 @@
  */
 
 import React from 'react'
+
+import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import Responsive from '../index'
 
-describe('<Responsive />', () => {
-  const testbed = new Testbed(
-    <Responsive
-      query={{
-        small: { maxWidth: 300 },
-        medium: { minWidth: 300 },
-        large: { minWidth: 800 }
-      }}
-      render={(props, matches) => {
-        return <div>hello</div>
-      }}
-    />
-  )
-
+describe('<Responsive />', async () => {
   const props = {
     small: { withBorder: true, background: 'transparent' },
     medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
     large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
   }
 
+  const query = {
+    small: { maxWidth: 300 },
+    medium: { minWidth: 300 },
+    large: { minWidth: 800 }
+  }
+
   let updateMatches
 
   beforeEach(() => {
-    testbed.stub(Responsive.prototype, 'addMatchListener', (query, updateResponsiveMatches) => {
+    stub(Responsive.prototype, 'addMatchListener', (query, updateResponsiveMatches) => {
       updateMatches = updateResponsiveMatches
       return {
         remove () {}
@@ -58,35 +53,39 @@ describe('<Responsive />', () => {
     })
   })
 
-  it('should call render with the correct matches', (done) => {
-    const renderSpy = testbed.spy()
-    const render = (props, matches) => {
-      renderSpy(props, matches)
-      return <div>hello</div>
-    }
-    testbed.render({render})
+  it('should call render with the correct matches', async () => {
+    const renderSpy = spy()
+    await mount(
+      <Responsive
+        query={query}
+        render={(props, matches) => {
+          renderSpy(props, matches)
+          return <div>hello</div>
+        }}
+      />
+    )
 
     updateMatches(['small', 'medium', 'large'], () => {
       expect(renderSpy).to.have.been.calledWith(null, ['small', 'medium', 'large'])
 
       updateMatches(['medium'], () => {
         expect(renderSpy).to.have.been.calledWith(null, ['medium'])
-        done()
       })
     })
   })
 
-  it('should provide correct props for a given breakpoint', (done) => {
-    const renderSpy = testbed.spy()
-    const render = (props, matches) => {
-      renderSpy(props, matches)
-      return <div>hello</div>
-    }
-
-    testbed.render({
-      props,
-      render
-    })
+  it('should provide correct props for a given breakpoint', async () => {
+    const renderSpy = spy()
+    await mount(
+      <Responsive
+        props={props}
+        query={query}
+        render={(props, matches) => {
+          renderSpy(props, matches)
+          return <div>hello</div>
+        }}
+      />
+    )
 
     updateMatches(['small'], () => {
       expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
@@ -96,23 +95,23 @@ describe('<Responsive />', () => {
 
         updateMatches(['medium'], () => {
           expect(deepEqual(renderSpy.lastCall.args[0], props.medium)).to.be.true()
-          done()
         })
       })
     })
   })
 
-  it('should merge props correctly when more than one breakpoint is applied', (done) => {
-    const renderSpy = testbed.spy()
-    const render = (props, matches) => {
-      renderSpy(props, matches)
-      return <div>hello</div>
-    }
-
-    testbed.render({
-      props,
-      render
-    })
+  it('should merge props correctly when more than one breakpoint is applied', async () => {
+    const renderSpy = spy()
+    await mount(
+      <Responsive
+        props={props}
+        query={query}
+        render={(props, matches) => {
+          renderSpy(props, matches)
+          return <div>hello</div>
+        }}
+      />
+    )
 
     updateMatches(['medium', 'large'], () => {
       expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true()
@@ -124,26 +123,30 @@ describe('<Responsive />', () => {
             Object.assign({...props.small}, Object.assign({...props.medium}, {...props.large}))
           )
         ).to.be.true()
-        done()
       })
     })
   })
 
-  it('should warn when more than one breakpoint is applied and a prop value is overwritten', (done) => {
-    const warning = testbed.spy(console, 'warn')
+  it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
+    const warning = spy(console, 'warn')
 
-    testbed.render({
-      props: {
-        small: { withBorder: false, background: 'transparent', labeledBy: 'fakeId' },
-        medium: { background: 'solid', border: 'dashed', text: 'hello' }
-      }
-    })
+    await mount(
+      <Responsive
+        props={{
+          small: { withBorder: false, background: 'transparent', labeledBy: 'fakeId' },
+          medium: { background: 'solid', border: 'dashed', text: 'hello' }
+        }}
+        query={query}
+        render={(props, matches) => {
+          return <div>hello</div>
+        }}
+      />
+    )
 
     updateMatches(['small', 'medium'], () => {
       expect(
         warning.lastCall.args[0].includes('The prop `background` is defined at 2 or more breakpoints')
       ).to.be.true()
-      done()
     })
   })
 })

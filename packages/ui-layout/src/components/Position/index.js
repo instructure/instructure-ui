@@ -35,9 +35,9 @@ import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import testable from '@instructure/ui-testable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
-import testable from '@instructure/ui-testable'
 
 import calculateElementPosition from '../../utils/calculateElementPosition'
 import LayoutPropTypes from '../../utils/LayoutPropTypes'

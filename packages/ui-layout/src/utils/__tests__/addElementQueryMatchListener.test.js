@@ -23,6 +23,7 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { expect, mount, wait } from '@instructure/ui-test-utils'
 import addElementQueryMatchListener from '../addElementQueryMatchListener'
 
 class ElementComponent extends React.Component {
@@ -46,9 +47,8 @@ class ElementComponent extends React.Component {
   }
 }
 
-describe('@addElementQueryMatchListener', (done) => {
+describe('@addElementQueryMatchListener', async () => {
   let matches
-  const testbed = new Testbed(<ElementComponent />)
 
   const updateMatches = (queryMatches) => {
     matches = queryMatches
@@ -62,8 +62,8 @@ describe('@addElementQueryMatchListener', (done) => {
     matches = []
   })
 
-  it('should initialize with the correct queries matched', () => {
-    const subject = testbed.render()
+  it('should initialize with the correct queries matched', async () => {
+    const subject = await mount(<ElementComponent />)
     const query = {
       wide: { minWidth: 220 },
       thin: { maxWidth: 100 },
@@ -81,8 +81,8 @@ describe('@addElementQueryMatchListener', (done) => {
     listener.remove()
   })
 
-  it('should update matches correctly on element resize', (done) => {
-    const subject = testbed.render()
+  it('should update matches correctly on element resize', async () => {
+    const subject = await mount(<ElementComponent />)
     const query = {
       wide: { minWidth: 600 },
       thin: { maxWidth: 200 },
@@ -100,35 +100,32 @@ describe('@addElementQueryMatchListener', (done) => {
     subject.setProps({
       width: '200px',
       height: '400px'
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
+    })
 
+    await wait(() => {
       expect(matches.includes('wide')).to.be.false()
       expect(matches.includes('thin')).to.be.true()
       expect(matches.includes('tall')).to.be.true()
       expect(matches.includes('short')).to.be.false()
-
-      subject.setProps({
-        width: '600px',
-        height: '350px'
-      }, () => {
-        testbed.raf()
-        testbed.tick()
-
-        expect(matches.includes('wide')).to.be.true()
-        expect(matches.includes('thin')).to.be.false()
-        expect(matches.includes('tall')).to.be.false()
-        expect(matches.includes('short')).to.be.false()
-
-        listener.remove()
-        done()
-      })
     })
+
+    subject.setProps({
+      width: '600px',
+      height: '350px'
+    })
+
+    await wait(() => {
+      expect(matches.includes('wide')).to.be.true()
+      expect(matches.includes('thin')).to.be.false()
+      expect(matches.includes('tall')).to.be.false()
+      expect(matches.includes('short')).to.be.false()
+    })
+
+    listener.remove()
   })
 
-  it('should handle overlapping queries', (done) => {
-    const subject = testbed.render()
+  it('should handle overlapping queries', async () => {
+    const subject = await mount(<ElementComponent />)
     const query = {
       one: { minWidth: 220 },
       two: { minWidth: 230 }
@@ -138,34 +135,31 @@ describe('@addElementQueryMatchListener', (done) => {
 
     subject.setProps({
       width: '219px',
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
+    })
 
+    await wait(() => {
       expect(matches.includes('one')).to.be.false()
       expect(matches.includes('two')).to.be.false()
-
-      subject.setProps({
-        width: '220px'
-      }, () => {
-        testbed.raf()
-        testbed.tick()
-
-        expect(matches.includes('one')).to.be.true()
-        expect(matches.includes('two')).to.be.false()
-
-        subject.setProps({
-          width: '230px'
-        }, () => {
-          testbed.raf()
-          testbed.tick()
-
-          expect(matches.includes('one')).to.be.true()
-          expect(matches.includes('two')).to.be.true()
-          listener.remove()
-          done()
-        })
-      })
     })
+
+    subject.setProps({
+      width: '220px'
+    })
+
+    await wait(() => {
+      expect(matches.includes('one')).to.be.true()
+      expect(matches.includes('two')).to.be.false()
+    })
+
+    subject.setProps({
+      width: '230px'
+    })
+
+    await wait(() => {
+      expect(matches.includes('one')).to.be.true()
+      expect(matches.includes('two')).to.be.true()
+    })
+
+    listener.remove()
   })
 })

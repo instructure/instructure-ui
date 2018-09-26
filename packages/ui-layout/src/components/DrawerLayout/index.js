@@ -33,6 +33,8 @@ import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentT
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import px from '@instructure/ui-utils/lib/px'
 import warning from '@instructure/ui-utils/lib/warning'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import testable from '@instructure/ui-testable'
 
 import { mirrorHorizontalPlacement } from '../../utils/mirrorPlacement'
 import DrawerContent from './DrawerContent'
@@ -46,9 +48,11 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @bidirectional()
 @themeable(theme, styles)
 class DrawerLayout extends Component {
+  static locatorAttribute = 'data-drawer-layout'
   static propTypes = {
     /**
      * Exactly one of each of the following child types: `DrawerContent`, `DrawerTray`
@@ -76,10 +80,16 @@ class DrawerLayout extends Component {
     shouldOverlayTray: PropTypes.bool
   }
 
-  state = {
-    shouldOverlayTray: false,
-    trayWidth: 0,
-    contentWidth: 0
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      shouldOverlayTray: false,
+      trayWidth: 0,
+      contentWidth: 0
+    }
+
+    this._id = generateElementId('DrawerLayout')
   }
 
   _content = null
@@ -239,6 +249,7 @@ class DrawerLayout extends Component {
         trayCount++
         return safeCloneElement(child, {
           key: child.props.label,
+          [DrawerTray.locatorAttribute]: this._id,
           contentRef: this.handleTrayContentRef,
           onEnter: this.handleTrayTransitionEnter,
           onExit: this.handleTrayTransitionExit
@@ -247,6 +258,7 @@ class DrawerLayout extends Component {
         contentCount++
         return (this.state.trayWidth !== null) ? safeCloneElement(child, {
           key: child.props.label,
+          [DrawerContent.locatorAttribute]: this._id,
           style: this.contentStyle,
           onSizeChange: this.handleContentSizeChange,
           contentRef: this.handleContentRef,
@@ -264,8 +276,9 @@ class DrawerLayout extends Component {
   }
 
   render () {
+    const props = { [DrawerLayout.locatorAttribute]: this._id }
     return (
-      <div className={styles.root}>
+      <div {...props} className={styles.root}>
         {this.renderChildren()}
       </div>
     )

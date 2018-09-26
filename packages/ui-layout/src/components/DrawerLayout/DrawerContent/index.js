@@ -28,7 +28,9 @@ import classnames from 'classnames'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -38,8 +40,10 @@ import theme from './theme'
 parent: DrawerLayout
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class DrawerContent extends Component {
+  static locatorAttribute = 'data-drawer-content'
   static propTypes = {
     label: PropTypes.string.isRequired,
     children: PropTypes.node,
@@ -111,8 +115,10 @@ class DrawerContent extends Component {
       label,
       role
     } = this.props
+
     return (
       <div
+        {...omitProps(this.props, DrawerContent.propTypes, ['shouldTransition'])}
         role={role}
         style={style}
         ref={this.handleContentRef}

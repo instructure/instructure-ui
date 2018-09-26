@@ -23,70 +23,83 @@
  */
 
 import React from 'react'
-import View from '../../View'
-import Media from '../index'
 
-describe('<Media />', () => {
+import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+import Media from '../index'
+import View from '../../View'
+
+describe('<Media />', async () => {
   // eslint-disable-next-line max-len
   const image = <img alt="" src="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw==" />
 
+  it('should render', async () => {
+    const subject = await mount(
+      <Media
+        title="Hello World"
+        description="Test Image"
+      >
+        {image}
+      </Media>
+    )
 
-  const testbed = new Testbed(
-    <Media
-      title="Hello World"
-      description="Test Image"
-    >
-      {image}
-    </Media>
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <Media
+        title="Hello World"
+        description="Test Image"
+      >
+        {image}
+      </Media>
+    )
 
-    subject.should.be.accessible(done, {
-      ignores: [ ]
-    })
+    const media = within(subject.getDOMNode())
+    expect(await media.accessible()).to.be.true()
   })
 
-  describe('when passing down props to View', () => {
+  it(`should render a figure by default`, async () => {
+    await mount(
+      <Media as="foo">
+        {image}
+      </Media>
+    )
+
+    expect(await find({tag: 'figure'})).to.exist()
+  })
+
+  describe('when passing down props to View', async () => {
     const allowedProps = {
-      margin: 'small',
-      elementRef: () => {},
-      as: 'figure',
-      display: 'auto'
+      margin: 'small'
     }
 
+    const ignore = [
+      'elementRef'
+    ]
+
     Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
+      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = { [prop]: 'foo' }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <Media {...props}>{image}</Media>
+            )
+            expect(consoleWarn).to.have.been.calledOnce()
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(
+              <Media {...props}>{image}</Media>
+            )
+            expect(consoleWarn).to.not.have.been.called()
           })
         }
-    })
-
-    it(`should pass 'figure' for the 'as' prop`, () => {
-      const subject = testbed.render({
-        as: 'foo'
-      })
-      expect(subject.find(View).first().props().as).to.equal('figure')
     })
   })
 })

@@ -21,41 +21,50 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
+import FlexItem from '../FlexItem'
 
-import { expect, mount } from '@instructure/ui-test-utils'
+const regular = [
+  <FlexItem key="0">One</FlexItem>,
+  <FlexItem key="1">Two</FlexItem>,
+  <FlexItem key="2">Three</FlexItem>,
+  <FlexItem key="3">Four</FlexItem>
+]
 
-import Grid, { GridRow, GridCol } from '../index'
+const shrink = [
+  <FlexItem key="0" padding="x-small" shrink>
+    Villum dolore eu fugiat nulla pariatur.
+  </FlexItem>,
+  <FlexItem key="1" padding="x-small" shrink>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+  </FlexItem>,
+  <FlexItem key="2" padding="x-small" shrink>
+    Duis aute irure.
+  </FlexItem>,
+  <FlexItem key="3" padding="x-small" shrink>
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+  </FlexItem>
+]
 
-describe('<Grid />', async () => {
-  it('should render content in each column', async () => {
-    const subject = await mount(
-      <Grid>
-        <GridRow>
-          <GridCol>Foo</GridCol>
-          <GridCol>Bar</GridCol>
-          <GridCol>Baz</GridCol>
-        </GridRow>
-      </Grid>
-    )
+const grow = [
+  <FlexItem key="0" padding="x-small" size="200px">
+    I am always 200px.
+  </FlexItem>,
+  <FlexItem key="1" padding="x-small" shrink grow size="200px">
+    I can grow, and shrink down to 200px.
+  </FlexItem>,
+  <FlexItem key="2" padding="x-small" size="25%">
+    I am always 25%.
+  </FlexItem>
+]
 
-    expect(subject.getDOMNode().textContent).to.equal('FooBarBaz')
-  })
-
-  it('should pass aria and role attributes to underlying DOM elements', async () => {
-    await mount(
-      <Grid role="grid" aria-hidden="true">
-        <GridRow aria-live="polite" role="presentation">
-          <GridCol aria-disabled="true" role="presentation">
-            Foo
-          </GridCol>
-        </GridRow>
-      </Grid>
-    )
-
-    expect(await find({css: '[role="grid"][aria-hidden]'})).to.exist()
-    expect(await find({css: '[role="presentation"][aria-live="polite"]'})).to.exist()
-    expect(await find({css: '[role="presentation"][aria-disabled]'})).to.exist()
-  })
-})
+export default {
+  permutations: [
+    'visualDebug',
+    {children: [
+      regular,
+      shrink,
+      grow
+    ]}
+  ]
+}

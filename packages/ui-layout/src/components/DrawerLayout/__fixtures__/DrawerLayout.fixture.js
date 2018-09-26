@@ -31,70 +31,46 @@ import DrawerLayout, { DrawerTray, DrawerContent } from '../index'
 export default class DrawerLayoutFixture extends Component {
   static propTypes = {
     layoutWidth: PropTypes.string,
-    minWidth: PropTypes.string,
-    onOverlayTrayChange: PropTypes.func,
-    trayOpen: PropTypes.bool,
     trayWidth: PropTypes.string,
-    trayPlacement: PropTypes.oneOf(['start', 'end'])
+    placement: PropTypes.string,
+    open: PropTypes.bool,
+    onOverlayTrayChange: PropTypes.func
   }
 
   static defaultProps = {
-    trayOpen: false,
     layoutWidth: '600px',
     trayWidth: '200px',
-    minWidth: '500px',
-    trayPlacement: 'start',
-    onOverlayTrayChange: (overlayTray) => {}
-  }
-
-  state = {
-    trayOpen: false
-  }
-
-  _layout = null
-  _drawerContent = null
-  _contentId = 'DrawerLayoutTestApp__content'
-
-
-  get trayOpen () {
-    return this.state.trayOpen || this.props.trayOpen
-  }
-
-  handleDrawerTrayOpen = () => {
-    this.setState({ trayOpen: true })
+    open: false,
+    placement: 'start',
+    onOverlayTrayChange: () => {}
   }
 
   render () {
     const {
       layoutWidth,
       trayWidth,
-      trayPlacement
+      open,
+      placement,
+      onOverlayTrayChange
     } = this.props
 
     return (
-      <div style={{ width: layoutWidth }}>
+      <div style={{width: layoutWidth}}>
         <DrawerLayout
-          {...pickProps(this.props, DrawerLayout.propTypes)}
-          ref={(node) => { this._layout = node }}
+          minWidth="500px"
+          onOverlayTrayChange={onOverlayTrayChange}
         >
           <DrawerTray
-            open={this.trayOpen}
-            placement={trayPlacement}
+            open={open}
+            placement={placement}
             label="Test DrawerTray"
           >
-            <div style={{ width: trayWidth }}>
-              Hello from tray
-            </div>
+            <div style={{width: trayWidth}}>Hello from tray</div>
           </DrawerTray>
-          <DrawerContent
-            label="Test DrawerContent"
-            ref={(node) => { this._drawerContent = node }}
-          >
+          <DrawerContent label="Test DrawerContent">
             <div>
               Hello from content
-              <button onClick={this.handleDrawerTrayOpen}>
-                Expand
-              </button>
+              <button>Expand</button>
             </div>
           </DrawerContent>
         </DrawerLayout>

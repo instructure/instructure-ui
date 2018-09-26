@@ -23,107 +23,201 @@
  */
 
 import React from 'react'
+
+import { expect, mount, within} from '@instructure/ui-test-utils'
 import Flex, { FlexItem } from '../index'
 
-describe('<Flex />', () => {
-  const testbed = new Testbed(
-    <Flex>
-      <FlexItem align="stretch">Flex item 1</FlexItem>
-      <FlexItem grow shrink>Flex item 2</FlexItem>
-      <FlexItem size="100px">Flex item 3</FlexItem>
-      <FlexItem>Flex item 4</FlexItem>
-    </Flex>
-  )
+describe('<Flex />', async () => {
+  it('should render FlexItems as children', async () => {
+    const subject = await mount(
+      <Flex>
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
 
-  it('should render FlexItems as children', () => {
-    const subject = testbed.render()
-    expect(subject.find(FlexItem).length).to.eq(4)
+    expect(subject.getDOMNode().children.length).to.equal(4)
   })
 
-  it('should render no markup if there are no children', () => {
-    const subject = testbed.render({
-      children: []
-    })
+  it('should render no markup if there are no children', async () => {
+    const subject = await mount(
+      <Flex></Flex>
+    )
+
     expect(subject.getDOMNode()).to.not.exist()
   })
 
-  it('should accept width and height as props', () => {
-    const subject = testbed.render({
-      width: '400px',
-      height: '200px'
-    })
-    expect(subject.getComputedStyle().getPropertyValue('width')).to.contain('400')
-    expect(subject.getComputedStyle().getPropertyValue('height')).to.contain('200')
+  it('should accept width and height as props', async () => {
+    const subject = await mount(
+      <Flex width="400px" height="200px">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+
+    expect(flex.getComputedStyle().width).to.equal('400px')
+    expect(flex.getComputedStyle().height).to.equal('200px')
   })
 
-  it('should set flex-direction with the direction property', () => {
-    const subject = testbed.render({
-      direction: 'column'
-    })
-    expect(subject.getComputedStyle().getPropertyValue('flex-direction')).to.contain('column')
+  it('should set flex-direction with the direction property', async () => {
+    const subject = await mount(
+      <Flex direction="column">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    expect(flex.getComputedStyle()['flex-direction']).to.equal('column')
   })
 
-  it('should render an inline-flex container with the inline property', () => {
-    const subject = testbed.render({
-      inline: true
-    })
-    expect(subject.getComputedStyle().getPropertyValue('display')).to.contain('inline-flex')
+  it('should render an inline-flex container with the inline property', async () => {
+    const subject = await mount(
+      <Flex inline={true}>
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    expect(flex.getComputedStyle().display).to.equal('inline-flex')
   })
 
-  it('should set align-items with the alignItems property', () => {
-    const subject = testbed.render({
-      alignItems: 'start'
-    })
-    expect(subject.getComputedStyle().getPropertyValue('align-items')).to.contain('flex-start')
+  it('should set align-items with the alignItems property', async () => {
+    const subject = await mount(
+      <Flex alignItems="start">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+    const flex = within(subject.getDOMNode())
+
+    expect(flex.getComputedStyle()['align-items']).to.equal('flex-start')
   })
 
-  it('should set justify-content with the justifyItems property', () => {
-    const subject = testbed.render({
-      justifyItems: 'space-between'
-    })
-    expect(subject.getComputedStyle().getPropertyValue('justify-content')).to.contain('space-between')
+  it('should set justify-content with the justifyItems property', async () => {
+    const subject = await mount(
+      <Flex justifyItems="space-between">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    expect(flex.getComputedStyle()['justify-content']).to.equal('space-between')
   })
 
-  it('should set flex-wrap with the wrapItems property', () => {
-    const subject = testbed.render({
-      wrapItems: true
-    })
-    expect(subject.getComputedStyle().getPropertyValue('flex-wrap')).to.contain('wrap')
+  it('should set flex-wrap with the wrapItems property', async () => {
+    const subject = await mount(
+      <Flex wrapItems={true}>
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    expect(flex.getComputedStyle()['flex-wrap']).to.equal('wrap')
   })
 
-  it('should let FlexItems align themselves with the align property', () => {
-    const subject = testbed.render({
-      alignItems: 'end'
-    })
-    expect(subject.getComputedStyle().getPropertyValue('align-items')).to.contain('flex-end')
-    const item = subject.childAt(0)
-    expect(item.getComputedStyle().getPropertyValue('align-self')).to.contain('stretch')
+  it('should let FlexItems align themselves with the align property', async () => {
+    const subject = await mount(
+      <Flex as="div" alignItems="end">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    const item = await flex.find({text: 'Flex item 1'})
+
+    expect(flex.getComputedStyle()['align-items']).to.equal('flex-end')
+    expect(item.getComputedStyle()['align-self']).to.equal('stretch')
   })
 
-  it('should let FlexItems flex-grow with the grow property', () => {
-    const subject = testbed.render()
-    const item = subject.childAt(1)
-    expect(item.getComputedStyle().getPropertyValue('flex-grow')).to.contain('1')
+  it('should let FlexItems flex-grow with the grow property', async () => {
+    const subject = await mount(
+      <Flex as="div">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    const item1 = await flex.find({text: 'Flex item 1'})
+    const item2 = await flex.find({text: 'Flex item 2'})
+
+    expect(item1.getComputedStyle()['flex-grow']).to.equal('0')
+    expect(item2.getComputedStyle()['flex-grow']).to.equal('1')
   })
 
-  it('should let FlexItems flex-shrink with the shrink property', () => {
-    const subject = testbed.render()
-    const item = subject.childAt(1)
-    expect(item.getComputedStyle().getPropertyValue('flex-shrink')).to.contain('1')
+  it('should let FlexItems flex-shrink with the shrink property', async () => {
+    const subject = await mount(
+      <Flex as="div">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    const item1 = await flex.find({text: 'Flex item 1'})
+    const item2 = await flex.find({text: 'Flex item 2'})
+
+    expect(item1.getComputedStyle()['flex-shrink']).to.equal('0')
+    expect(item2.getComputedStyle()['flex-shrink']).to.equal('1')
   })
 
-  it('should set flex-basis and min-width on FlexItems with the size property', () => {
-    const subject = testbed.render()
-    const item = subject.childAt(2)
-    expect(item.getComputedStyle().getPropertyValue('flex-basis')).to.contain('100')
-    expect(item.getComputedStyle().getPropertyValue('min-width')).to.contain('100')
+  it('should set flex-basis and min-width on FlexItems with the size property', async () => {
+    const subject = await mount(
+      <Flex as="div">
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
+
+    const flex = within(subject.getDOMNode())
+    const item2 = await flex.find({text: 'Flex item 2'})
+    const item3 = await flex.find({text: 'Flex item 3'})
+
+    expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')
+    expect(item3.getComputedStyle()['min-width']).to.equal('100px')
+    expect(item2.getComputedStyle()['flex-basis']).to.equal('auto')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <Flex>
+        <FlexItem align="stretch">Flex item 1</FlexItem>
+        <FlexItem grow shrink>Flex item 2</FlexItem>
+        <FlexItem size="100px">Flex item 3</FlexItem>
+        <FlexItem>Flex item 4</FlexItem>
+      </Flex>
+    )
 
-    subject.should.be.accessible(done, {
-      ignores: []
-    })
+    const flex = within(subject.getDOMNode())
+    expect(await flex.accessible()).to.be.true()
   })
 })

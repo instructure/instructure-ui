@@ -21,32 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import View from '../../View'
 
-module.exports = {
-  files: [
-    'packages/**/*.test.js'
+export default {
+  permutations: [
+    'size',
+    'alignContent',
+    {title: [
+      null,
+      'Graham Taylor'
+    ]},
+    {description: [
+      'Aliquip magna in aliquip aliquip sint culpa ullamco aliquip.',
+      'Consectetur qui eiusmod labore eu ad commodo dolor ex consectetur sit id deserunt. Culpa cupidatat nisi pariatur non exercitation amet culpa Lorem sint do et laborum culpa. Eu pariatur eu elit culpa. Nisi minim irure fugiat irure ad deserunt eiusmod ex ipsum culpa proident aliquip aliqua aliquip.'
+    ]}
   ],
-  ignore: [
-    'packages/ui-codemods/**'
-  ],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-a11y/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-elements/',
-    'packages/ui-focusable/',
-    'packages/ui-forms/',
-    'packages/ui-i18n/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-pages/',
-    'packages/ui-pagination/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/',
-    'packages/ui-utils/'
-  ]
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        margin: 'x-large auto',
+        children: (
+          <View
+            as="div"
+            width="3rem"
+            height="3rem"
+            borderRadius="large"
+            background="inverse"
+          />
+        )
+      }
+    }
+  }
 }

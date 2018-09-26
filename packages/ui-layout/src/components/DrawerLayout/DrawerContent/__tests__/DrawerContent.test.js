@@ -22,39 +22,53 @@
  * SOFTWARE.
  */
 import React from 'react'
+
+import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import DrawerContent from '../index'
 import styles from '../styles.css'
 
-describe('<DrawerContent />', () => {
-  const testbed = new Testbed(
-    <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
-  )
+const DrawerContentLocator = locator(DrawerContent.displayName)
 
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+describe('<DrawerContent />', async () => {
+  it('should render', async () => {
+    await mount(
+      <DrawerContent label="DrawerContentTest">Hello World</DrawerContent>
+    )
+    const drawerContent = await DrawerContentLocator.find()
+
+    expect(drawerContent).to.exist()
   })
 
-  it('should should not have a transition class if `shouldTransition` is set to false', () => {
-    const subject = testbed.render({
-      shouldTransition: false
+  it('should should not have a transition class if `shouldTransition` is set to false', async () => {
+    const subject = await mount(
+      <DrawerContent label="DrawerContentTest" shouldTransition={false}>
+        Hello World
+      </DrawerContent>
+    )
+
+    const drawerContent = await DrawerContentLocator.find()
+
+    expect(drawerContent.hasClass(styles['transition'])).to.be.false()
+
+    subject.setProps({
+      shouldTransition: true,
+      label: 'test'
     })
 
-    expect(subject.hasClass(styles['transition'])).to.be.false()
-
-    subject.setProps({ shouldTransition: true })
-
-    testbed.tick()
-
-    expect(subject.hasClass(styles['transition'])).to.be.true()
+    await wait(() => {
+      expect(drawerContent.hasClass(styles['transition'])).to.be.true()
+    })
   })
 
-  it('should should call the content ref', () => {
-    const contentRef = testbed.spy()
-    const subject = testbed.render({
-      contentRef
-    })
+  it('should should call the content ref', async () => {
+    const contentRef = stub()
+    await mount(
+      <DrawerContent label="DrawerContentTest" contentRef={contentRef}>
+        Hello World
+      </DrawerContent>
+    )
+    const drawerContent = (await DrawerContentLocator.find()).getDOMNode()
 
-    expect(contentRef).to.have.been.calledWith(subject.ref('_content').node)
+    expect(contentRef).to.have.been.calledWith(drawerContent)
   })
 })

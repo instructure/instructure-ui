@@ -31,9 +31,18 @@ export default function renderExample (Component, componentProps, exampleProps, 
   return (
     <View
       key={key}
-      display="block"
-      padding="small"
+      display={exampleProps.display || 'auto'}
+      as={exampleProps.as || 'span'}
+      margin={exampleProps.margin || 'none'}
+      padding={exampleProps.padding || 'none'}
+      textAlign={exampleProps.textAlign || 'start'}
+      debug={exampleProps.debug || false}
+      borderWidth={exampleProps.borderWidth || 'none'}
       background={exampleProps.background || 'default'}
+      width={exampleProps.width || '100%'}
+      maxWidth={exampleProps.maxWidth || 'none'}
+      height={exampleProps.height || 'auto'}
+      maxHeight={exampleProps.maxHeight || 'none'}
     >
       <ApplyLocale locale="en-US">
         <Component {...componentProps} />

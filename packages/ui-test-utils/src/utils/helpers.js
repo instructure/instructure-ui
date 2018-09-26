@@ -144,6 +144,10 @@ function getDOMNode (element) {
   return element
 }
 
+function getBoundingClientRect (element) {
+  return element.getBoundingClientRect()
+}
+
 function hasClass (element, classname) {
   return element.classList.contains(classname)
 }
@@ -174,11 +178,12 @@ export {
   typeIn,
   getAttribute,
   getDOMNode,
-  hasClass,
   debug,
   accessible,
   getTextContent,
   getParentNode,
+  getBoundingClientRect,
+  hasClass,
   containsFocus,
   focused,
   visible,

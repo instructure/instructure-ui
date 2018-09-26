@@ -21,32 +21,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import GridCol from '../GridCol'
+import GridRow from '../GridRow'
 
-module.exports = {
-  files: [
-    'packages/**/*.test.js'
-  ],
-  ignore: [
-    'packages/ui-codemods/**'
-  ],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-a11y/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-elements/',
-    'packages/ui-focusable/',
-    'packages/ui-forms/',
-    'packages/ui-i18n/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-pages/',
-    'packages/ui-pagination/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/',
-    'packages/ui-utils/'
+const text1 = 'Occaecat quis qui anim quis cillum eu. Exercitation consectetur aute dolore adipisicing consectetur consectetur aliquip.'
+const text2 = 'Fugiat nisi Lorem non irure sunt ipsum excepteur. Incididunt in id culpa id reprehenderit minim. Cillum est occaecat proident qui sit laboris proident in voluptate minim amet deserunt. Laboris cupidatat nulla consequat nostrud Lorem.'
+
+const regular = (
+  <GridRow>
+    <GridCol>{text1}</GridCol>
+    <GridCol>{text2}</GridCol>
+    <GridCol>{text1}</GridCol>
+  </GridRow>
+)
+
+const widths = (
+  <GridRow>
+    <GridCol width={2}>{text1}</GridCol>
+    <GridCol width={4}>{text2}</GridCol>
+    <GridCol width={2}>{text1}</GridCol>
+  </GridRow>
+)
+
+export default {
+  permutations: [
+    'visualDebug',
+    {children: [
+      regular,
+      widths
+    ]},
+    'hAlign',
+    'vAlign'
   ]
 }

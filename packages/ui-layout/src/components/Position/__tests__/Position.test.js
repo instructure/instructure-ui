@@ -22,178 +22,302 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React from 'react'
 
+import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import within from '@instructure/ui-utils/lib/within'
 
 import Position, { PositionTarget, PositionContent } from '../index'
+import PositionLocator from '../locator'
 
-function findAll (subject) {
-  const position = subject.find(Position)
-  const target = subject.find('button').unwrap()
-  const content = subject.ref('_content').getDOMNode()
-
-  const targetRect = target.getBoundingClientRect()
-  const contentRect = content.getBoundingClientRect()
-
-  return { position, target, content, targetRect, contentRect }
-}
-
-describe('<Position />', () => {
-  class App extends Component {
-    static propTypes = {
-      ...Position.propTypes
-    }
-
-    static defaultProps = {
-      parentWidth: 500,
-      parentHeight: 150,
-      parentPadding: 100,
-      paddingOverflow: 'auto',
-      constrainTo: 'window',
-      mountToNode: false
-    }
-
-    render () {
-      const { ...props } = this.props
-
-      delete props.children
-
-      return (
-        <div style={{padding: '50px'}}>
-          <div ref={(el) => {this._mounNode = el}}></div>
-          <div
-            style={{
-              width: props.parentWidth,
-              height: props.parentHeight,
-              padding: props.parentPadding,
-              overflow: props.parentOverflow,
-              textAlign: 'center',
-              position: 'relative'
-            }}
-          >
-            <Position
-              {...props}
-              constrain={props.constrainTo}
-              mountNode={props.mountToNode ? () => this._mountNode : null}
-            >
-              <PositionTarget>
-                <button>Target</button>
-              </PositionTarget>
-              <PositionContent>
-                <div
-                  ref={el => {
-                    this._content = el
-                  }}
-                >
-                  <div>Content</div>
-                </div>
-              </PositionContent>
-            </Position>
-          </div>
-        </div>
-      )
-    }
+describe('<Position />', async () => {
+  const parentDefaults = {
+    parentWidth: 500,
+    parentHeight: 150,
+    parentPadding: 100,
+    paddingOverflow: 'auto'
   }
 
-  const testbed = new Testbed(<App />)
+  it('should render', async () => {
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position constrain="window">
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-  beforeEach(() => {
-    testbed.enableCSSTransitions()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+
+    expect(target).to.exist()
+    expect(content).to.exist()
   })
 
-  it('should render', () => {
-    const subject = testbed.render()
+  it('should absolutely position content', async () => {
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position constrain="window">
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    expect(subject).to.be.present()
+    const position = await PositionLocator.find()
+    const content = await position.findContent({contains: 'Content'})
+    expect(content.getDOMNode().style.position).to.equal('absolute')
   })
 
-  it('should absolutely position content', () => {
-    const subject = testbed.render()
+  it('should render right of target', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="end" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    const { content } = findAll(subject)
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    expect(content.style.position).to.equal('absolute')
-  })
-
-  it('should render `bottom center` placement by default', () => {
-    const subject = testbed.render()
-    testbed.tick() // portal
-
-    const { position } = findAll(subject)
-    expect(position.prop('placement')).to.equal('bottom center')
-  })
-
-  it('should render right of target', () => {
-    const subject = testbed.render({ placement: 'end' })
-
-    testbed.tick()
-
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right))).to.be.true()
   })
 
-  it('should render top stretched inside of target', () => {
-    const subject = testbed.render({ placement: 'top stretch', over: true })
+  it('should render top stretched inside of target', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="top stretch" over={true} onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     expect(within(Math.floor(contentRect.top), Math.floor(targetRect.top), 1)).to.be.true()
     expect(within(Math.floor(contentRect.width), Math.floor(targetRect.width), 1)).to.be.true()
   })
 
-  it('should render below target', () => {
-    const subject = testbed.render({ placement: 'bottom' })
+  it('should render below target', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="bottom" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
   })
 
-  it('should render left of target', () => {
-    const subject = testbed.render({ placement: 'start' })
+  it('should render left of target', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="start" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left))).to.be.true()
   })
 
-  it('should render above target', () => {
-    const subject = testbed.render({ placement: 'top' })
+  it('should render above target', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="top" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     expect(Math.floor(contentRect.bottom)).to.equal(Math.floor(targetRect.top))
   })
 
-  it('should center vertically', () => {
-    const subject = testbed.render({ placement: 'end' })
+  it('should center vertically', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="end" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
+
     const top = Math.floor(contentRect.top)
-    // eslint-disable-next-line no-mixed-operators
     const center = Math.floor(targetRect.top + (targetRect.height / 2 - contentRect.height / 2))
 
     expect(within(top, center)).to.be.true()
   })
 
-  it('should center horizontally', () => {
-    const subject = testbed.render({ placement: 'bottom' })
+  it('should center horizontally', async () => {
+    const onPositionChanged = stub()
+    await mount(
+      <div style={{padding: '50px'}}>
+        <div style={{...parentDefaults}}>
+          <Position placement="bottom" onPositionChanged={onPositionChanged}>
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      </div>
+    )
 
-    testbed.tick()
+    const position = await PositionLocator.find()
+    const target = await position.findTarget({contains: 'Target'})
+    const content = await position.findContent({contains: 'Content'})
+    // wait for positioning
+    await wait(() => {
+      expect(onPositionChanged).to.have.been.called()
+    })
 
-    const { targetRect, contentRect } = findAll(subject)
+    const targetRect = target.getBoundingClientRect()
+    const contentRect = content.getBoundingClientRect()
 
     const left = Math.floor(contentRect.left)
     const targetCenter = targetRect.width / 2
@@ -205,26 +329,44 @@ describe('<Position />', () => {
 
   describe('with offset props', () => {
     function assertOffset (placement, offset, assertion) {
-      it(`should render offset for ${placement}`, done => {
-        const subject = testbed.render({ placement, constrain: 'none' })
+      it(`should render offset for ${placement}`, async () => {
+        const onPositionChanged = stub()
+        const subject = await mount (
+          <Position
+            constrain="none"
+            placement={placement}
+            onPositionChanged={onPositionChanged}
+          >
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        )
 
-        testbed.tick()
+        const position = await PositionLocator.find()
+        const content = await position.findContent({contains: 'Content'})
 
-        const { contentRect } = findAll(subject)
+        await wait(() => {
+          expect(onPositionChanged).to.have.been.called()
+        })
+
+        const contentRect = content.getBoundingClientRect()
         const { top, left } = contentRect
         const offsetX = offset
         const offsetY = offset
 
-        subject.setProps({ offsetX, offsetY }, () => {
-          testbed.tick()
-          testbed.defer(() => {
-            const { contentRect } = findAll(subject)
-
-            assertion(contentRect, top, left)
-
-            done()
-          })
+        await subject.setProps({ offsetX, offsetY })
+        await wait(() => {
+          expect(onPositionChanged).to.have.been.called()
         })
+
+        const newContentRect = content.getBoundingClientRect()
+        assertion(newContentRect, top, left)
       })
     }
 
@@ -249,75 +391,159 @@ describe('<Position />', () => {
     })
   })
 
-  describe('when constrained to scroll-parent', () => {
-    it('should re-position below target', () => {
-      const subject = testbed.render({
-        placement: 'top',
-        parentWidth: 50,
-        parentHeight: 50,
-        parentOverflow: 'scroll',
-        constrainTo: 'scroll-parent',
-        mountToNode: true,
-        parentPadding: '0 50px 50px 50px'
+  describe('when constrained to scroll-parent', async () => {
+    it('should re-position below target', async () => {
+      const onPositionChanged = stub()
+      await mount(
+        <div style={{padding: '50px'}}>
+          <div id="mountNode">mount</div>
+          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '0 50px 50px 50px'}}>
+            <Position
+              placement="top"
+              constrain="scroll-parent"
+              mountNode={el => document.getElementById('mountNode')}
+              onPositionChanged={onPositionChanged}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div id="content">
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget({contains: 'Target'})
+      const content = await position.findContent({contains: 'Content'})
+      // wait for positioning
+      await wait(() => {
+        expect(onPositionChanged).to.have.been.called()
       })
 
-      testbed.tick()
-
-      const { targetRect, contentRect } = findAll(subject)
+      const targetRect = target.getBoundingClientRect()
+      const contentRect = content.getBoundingClientRect()
 
       expect(within(Math.floor(contentRect.top), Math.floor(targetRect.bottom), 1)).to.be.true()
     })
 
-    it('should re-position above target', () => {
-      const subject = testbed.render({
-        placement: 'bottom',
-        parentWidth: 50,
-        parentHeight: 0,
-        parentOverflow: 'scroll',
-        constrainTo: 'scroll-parent',
-        mountToNode: true,
-        parentPadding: '50px 50px 0 50px'
+    it('should re-position above target', async () => {
+      const onPositionChanged = stub()
+      await mount(
+        <div style={{padding: '50px'}}>
+          <div id="mountNode">mount</div>
+          <div style={{width: '50px', height: '0px', overflow: 'scroll', padding: '50px 50px 0 50px'}}>
+            <Position
+              placement="bottom"
+              constrain="scroll-parent"
+              mountNode={el => document.getElementById('mountNode')}
+              onPositionChanged={onPositionChanged}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div id="content">
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget({contains: 'Target'})
+      const content = await position.findContent({contains: 'Content'})
+      // wait for positioning
+      await wait(() => {
+        expect(onPositionChanged).to.have.been.called()
       })
 
-      testbed.tick()
-
-      const { targetRect, contentRect } = findAll(subject)
+      const targetRect = target.getBoundingClientRect()
+      const contentRect = content.getBoundingClientRect()
 
       expect(within(Math.floor(contentRect.bottom), Math.floor(targetRect.top), 1)).to.be.true()
     })
 
-    it('should re-position after target', () => {
-      const subject = testbed.render({
-        placement: 'start',
-        parentWidth: 50,
-        parentHeight: 50,
-        parentOverflow: 'scroll',
-        constrainTo: 'scroll-parent',
-        mountToNode: true,
-        parentPadding: '50px 80px 50px 0'
+    it('should re-position after target', async () => {
+      const onPositionChanged = stub()
+      await mount(
+        <div style={{padding: '50px'}}>
+          <div id="mountNode">mount</div>
+          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px 80px 50px 0'}}>
+            <Position
+              placement="start"
+              constrain="scroll-parent"
+              mountNode={el => document.getElementById('mountNode')}
+              onPositionChanged={onPositionChanged}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div id="content">
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget({contains: 'Target'})
+      const content = await position.findContent({contains: 'Content'})
+      // wait for positioning
+      await wait(() => {
+        expect(onPositionChanged).to.have.been.called()
       })
 
-      testbed.tick()
-
-      const { targetRect, contentRect } = findAll(subject)
+      const targetRect = target.getBoundingClientRect()
+      const contentRect = content.getBoundingClientRect()
 
       expect(within(Math.floor(contentRect.left), Math.floor(targetRect.right), 1)).to.be.true()
     })
 
-    it('should re-position before target', () => {
-      const subject = testbed.render({
-        placement: 'end',
-        parentWidth: 50,
-        parentHeight: 50,
-        parentOverflow: 'scroll',
-        constrainTo: 'scroll-parent',
-        mountToNode: true,
-        parentPadding: '50px 0 50px 80px'
+    it('should re-position before target', async () => {
+      const onPositionChanged = stub()
+      await mount(
+        <div style={{padding: '50px'}}>
+          <div id="mountNode">mount</div>
+          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px 0px 50px 80px'}}>
+            <Position
+              placement="end"
+              constrain="scroll-parent"
+              mountNode={el => document.getElementById('mountNode')}
+              onPositionChanged={onPositionChanged}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div id="content">
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget({contains: 'Target'})
+      const content = await position.findContent({contains: 'Content'})
+      // wait for positioning
+      await wait(() => {
+        expect(onPositionChanged).to.have.been.called()
       })
 
-      testbed.tick()
-
-      const { targetRect, contentRect } = findAll(subject)
+      const targetRect = target.getBoundingClientRect()
+      const contentRect = content.getBoundingClientRect()
 
       expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true()
     })

@@ -22,31 +22,40 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  files: [
-    'packages/**/*.test.js'
-  ],
-  ignore: [
-    'packages/ui-codemods/**'
-  ],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-a11y/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-elements/',
-    'packages/ui-focusable/',
-    'packages/ui-forms/',
-    'packages/ui-i18n/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-pages/',
-    'packages/ui-pagination/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/',
-    'packages/ui-utils/'
-  ]
+import {
+  findByQuery,
+  locator,
+  querySelectorAll
+} from '@instructure/ui-test-utils'
+
+import DrawerLayout, { DrawerContent, DrawerTray } from './index'
+
+export const DrawerContentLocator = locator(DrawerContent.displayName)
+export const DrawerTrayLocator = locator(DrawerTray.displayName)
+
+const query = (ComponentIdentifier, element, selector, options) => {
+  if (element instanceof Element) {
+    const id = element.getAttribute(DrawerLayout.locatorAttribute)
+    return querySelectorAll(
+      document.body,
+      { css: `[${ComponentIdentifier.locatorAttribute}="${id}"]` },
+    )
+  } else {
+    return []
+  }
 }
+
+const trayQuery = query.bind(null, DrawerTray)
+
+const DrawerLayoutLocator = locator(DrawerLayout.displayName, {
+  findContent: (...args) => {
+    return DrawerContentLocator.find(...args)
+  },
+  findTray: (...args) => {
+    return findByQuery(trayQuery, ...args)
+  }
+})
+
+DrawerLayoutLocator.trayQuery = trayQuery
+
+export default DrawerLayoutLocator
