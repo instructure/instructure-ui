@@ -67,7 +67,7 @@ describe('@testable, fixture', () => {
       tag: 'input',
       attribute: { name: 'type', value: 'password' }
     })
-    expect(component.getComponentRoot().getDOMNode())
+    expect(component.getComponentRoot())
       .to.equal(document.getElementById('componentRoot'))
   })
 })

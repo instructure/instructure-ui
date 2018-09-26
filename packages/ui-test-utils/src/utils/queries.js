@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { bindElementToUtilities } from './bindElementToUtilities'
 import { firstOrNull } from './firstOrNull'
 
 import {
@@ -49,23 +48,24 @@ async function findAll (...args) {
       if (selector) {
         // if there is a selector, query each component for matches...
         return components.reduce((previouResult, element) => {
+          const customMethods = {
+            ...options.customMethods,
+            getComponentRoot: () => {
+              return element
+            }
+          }
           const currentResult = bindResultsToUtilities(
             querySelector(element, selector, options),
-            {
-              ...options.customMethods,
-              getComponentRoot: () => {
-                return bindElementToUtilities(element, options.customMethods)
-              }
-            }
+            customMethods
           )
           return [ ...previouResult, ...currentResult]
         }, [])
       } else {
         // otherwise just return the components
-        return bindResultsToUtilities(components)
+        return bindResultsToUtilities(components, options.customMethods)
       }
     } else if (selector) {
-      return bindResultsToUtilities(querySelector(element, selector, options))
+      return bindResultsToUtilities(querySelector(element, selector, options), options.customMethods)
     } else {
       return []
     }

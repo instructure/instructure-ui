@@ -103,7 +103,7 @@ describe('<Portal />', () => {
 
       expect(onKeyDown).to.have.been.called()
 
-      expect(button.getComponentRoot().getParentNode())
+      expect(button.getComponentRoot().parentNode)
         .to.equal(document.body)
     })
   })
@@ -140,7 +140,7 @@ describe('<Portal />', () => {
 
       const portal = await PortalFixture.find({ contains: 'Hello World'})
 
-      expect(portal.getComponentRoot().getParentNode())
+      expect(portal.getComponentRoot().parentNode)
         .to.equal(document.getElementById('portal-mount-node'))
     })
   })
