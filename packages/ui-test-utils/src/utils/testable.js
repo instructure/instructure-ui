@@ -23,7 +23,8 @@
  */
 
 import { findDOMNode } from 'react-dom'
-import { FIXTURE_ATTRIBUTE } from './fixture'
+
+export const TESTABLE_ATTRIBUTE = 'data-ui-testable'
 
 function testable () {
   return function (ComposedComponent) {
@@ -40,7 +41,7 @@ function testable () {
         const rootNode = findDOMNode(this) || this._portalContentNode
 
         if (rootNode) {
-          rootNode.setAttribute(FIXTURE_ATTRIBUTE, displayName)
+          rootNode.setAttribute(TESTABLE_ATTRIBUTE, displayName)
         }
       }
     }

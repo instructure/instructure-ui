@@ -22,55 +22,30 @@
  * SOFTWARE.
  */
 
-import { findAll, parseQueryArguments } from './queries'
+import { findAll } from './queries'
+import { parseQueryArguments } from './query-helpers'
 import { firstOrNull } from './firstOrNull'
 
-export const FIXTURE_ATTRIBUTE = 'data-ui-testable'
+import { TESTABLE_ATTRIBUTE } from './testable'
 
 function fixture (componentId, customMethods = {}) {
   return class Fixture {
     static customMethods = customMethods
-    static locator = `[${FIXTURE_ATTRIBUTE}="${componentId}"]`
+    static locator = `[${TESTABLE_ATTRIBUTE}="${componentId}"]`
 
     static async findAll (...args) {
       const { element, selector, options } = parseQueryArguments(...args)
-      const { expectEmpty, ...rest } = options
-
-      const opts = {
-        ...rest,
-        // if there is a selector, we should expect that there is at least one component rendered
-        expectEmpty: selector ? false : expectEmpty,
-        customMethods: {
-          ...customMethods,
-          ...options.customMethods
+      return findAll(
+        element,
+        {
+          ...(selector || {}),
+          locator: Fixture.locator
+        },
+        {
+          ...options,
+          customMethods: { ...customMethods, ...options.customMethods }
         }
-      }
-
-      // Find all component root elements first...
-      const components = await findAll(element, { css: Fixture.locator }, opts)
-
-      if (selector) {
-        // then find within each of them, building a single array of matching elements...
-        return components.reduce(async (query, component) => {
-          const previousResults = await query
-          const currentResult = await component.findAll(
-            selector,
-            {
-              ...opts,
-              expectEmpty, // here we pass along whatever we get in options
-              customMethods: {
-                ...opts.customMethods,
-                getComponentRoot: function getComponentRoot (element) {
-                  return component
-                }
-              }
-            }
-          )
-          return [...previousResults, ...currentResult]
-        }, Promise.resolve([]))
-      } else {
-        return components
-      }
+      )
     }
 
     static async find (...args) {
