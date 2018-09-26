@@ -75,6 +75,10 @@ function getDOMNode (element) {
   return element
 }
 
+function hasClass (element, classname) {
+  return element.classList.contains(classname)
+}
+
 function debug (element = document.body) {
   // eslint-disable-next-line no-console
   console.log(prettyDOM(element))
@@ -96,6 +100,7 @@ export {
   typeIn,
   getAttribute,
   getDOMNode,
+  hasClass,
   debug,
   accessible,
   getTextContent,
