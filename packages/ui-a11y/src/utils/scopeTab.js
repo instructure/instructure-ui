@@ -65,7 +65,9 @@ export default function scopeTab (element, event, onLeavingFinalTabbable) {
   const leavingFinalTabbable = (
     isActiveElement(finalTabbable) ||
     // handle immediate shift+tab after opening with mouse
-    isActiveElement(node)
+    isActiveElement(node) ||
+    // already left final tabbable
+    !containsActiveElement(element)
   )
 
   if (!leavingFinalTabbable) return
