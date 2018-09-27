@@ -22,7 +22,13 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import ${COMPONENT} from '../index'
-
-export const example = () => <${COMPONENT} />
+ export default {
+   permutations: [],
+   renderProps: (props) => {
+     return {
+       componentProps: {
+         children: 'Hello world'
+       }
+     }
+   }
+ }

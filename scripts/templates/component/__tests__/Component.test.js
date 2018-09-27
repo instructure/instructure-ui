@@ -29,12 +29,8 @@ import ${COMPONENT} from '../fixture'
 
 describe('<${COMPONENT} />', () => {
   it('should render', async () => {
-    const subject = await mount(<${COMPONENT} />)
-    expect(subject.getDOMNode()).to.exist()
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<${COMPONENT} />)
-    expect(await subject.accessible()).to.be.true()
+    const render = stub()
+    await mount(<${COMPONENT} render={render} />)
+    expect(render).to.have.been.called()
   })
 })

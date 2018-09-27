@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/${PACKAGE}",
-  "version": "${VERSION}",
-  "description": "A UI component library made by Instructure Inc.",
+  "name": "@instructure/ui-testable",
+  "version": "5.29.0",
+  "description": "A UI component test utility made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -21,14 +21,10 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5",
-    "@instructure/ui-test-utils": "^5"
+    "@instructure/ui-presets": "^5"
   },
   "dependencies": {
-    "@instructure/ui-themeable": "^5",
-    "@instructure/ui-testable": "^5",
-    "prop-types": "^15",
-    "react": "^0.14.9 || ^15 || ^16"
+    "react-dom": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

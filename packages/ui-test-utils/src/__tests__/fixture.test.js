@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { querySelectorAll, findAllByQuery, mount, expect, testable, fixture } from '../index'
+import testable from '@instructure/ui-testable'
+
+import { querySelectorAll, findAllByQuery, mount, expect, fixture } from '../index'
 
 @testable()
 class Component extends React.Component {

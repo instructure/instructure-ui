@@ -21,10 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { testable } from '@instructure/ui-test-utils'
+import { fixture } from '@instructure/ui-test-utils'
 
-import ${COMPONENT} from './index'
+import ${COMPONENT}View from './index'
 
-export default testable({
+export default fixture(${COMPONENT}View.displayName, {
   /* custom test helper methods go here */
-})(${COMPONENT})
+})

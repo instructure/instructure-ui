@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { TESTABLE_ATTRIBUTE } from '@instructure/ui-testable'
+
 import { findAllByQuery } from './queries'
 import {
   querySelectorAll,
@@ -29,8 +31,6 @@ import {
   parseQueryArguments
 } from './query-helpers'
 import { firstOrNull } from './firstOrNull'
-
-import { TESTABLE_ATTRIBUTE } from './testable'
 
 function fixture (componentId, customMethods = {}) {
   return class Fixture {

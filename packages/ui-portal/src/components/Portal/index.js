@@ -31,7 +31,7 @@ import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import testable from '@instructure/ui-test-utils/lib/utils/testable'
+import testable from '@instructure/ui-testable'
 
 /**
 ---
