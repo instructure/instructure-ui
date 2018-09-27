@@ -54,14 +54,6 @@ const {
 const { error, info } = require('./logger')
 const { publishGithubPages } = require('./gh-pages')
 
-async function checkPackagePublished (packageName, currentVersion) {
-  const { stdout } = await runCommandAsync('npm', ['info', `${packageName}@${currentVersion}`, 'version'])
-  if (stdout.trim() === currentVersion) {
-    error(`${packageName}@${currentVersion} is already published!`)
-    process.exit(1)
-  }
-}
-
 async function createNPMRCFile (config = {}) {
   const {
    NPM_TOKEN,
@@ -192,11 +184,10 @@ exports.publishPackage = async function publishPackage (packageName, currentVers
   const npmTag = (currentVersion === releaseVersion) ? 'latest' : 'rc'
 
   await checkWorkingDirectory()
-  await checkPackagePublished(packageName, releaseVersion)
 
   if (currentVersion === releaseVersion) {
     if (releaseCommit) {
-      checkIfCommitIsReviewed()
+      await checkIfCommitIsReviewed()
     } else {
       error('Latest release should be run from a merged version bump commit!')
       process.exit(1)
@@ -204,7 +195,13 @@ exports.publishPackage = async function publishPackage (packageName, currentVers
   }
 
   info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
-  await runCommandAsync('yarn', ['publish', '--tag', npmTag])
+
+  try {
+    await runCommandAsync('yarn', ['publish', '--tag', npmTag])
+  } catch (err) {
+    error(err)
+  }
+
   info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
 }
 
