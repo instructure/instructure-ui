@@ -81,7 +81,8 @@ module.exports = {
     {
       files: '*.test.js',
       rules: {
-        'mocha/no-exclusive-tests': 'error'
+        'mocha/no-exclusive-tests': 'error',
+        'mocha/no-synchronous-tests': ['warning', { allowed: ['async']}]
       }
     }
   ]
