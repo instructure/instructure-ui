@@ -23,146 +23,118 @@
  */
 
 import React from 'react'
-import View from '@instructure/ui-layout/lib/components/View'
-import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
+import { mount, expect, stub } from '@instructure/ui-test-utils'
 import Billboard from '../index'
+import BillboardFixture from '../fixture'
 
-describe('<Billboard />', () => {
-  const testbed = new Testbed(<Billboard />)
-
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+describe('<Billboard />', async () => {
+  it('should render', async () => {
+    await mount(
+      <Billboard />
+    )
+    const billboard = await BillboardFixture.find()
+    expect(billboard).to.exist()
   })
 
-  it('should render a heading with the correct tag', () => {
-    const subject = testbed.render({
-      heading: 'Test heading',
-      headingAs: 'h2'
+  it('should render a heading with the correct tag', async () => {
+    await mount(
+      <Billboard
+        heading='Test heading'
+        headingAs='h2'
+      />
+    )
+    const headline = await BillboardFixture.find({
+      tag: 'h2',
+      text: 'Test heading',
     })
-    const headline = subject.find('h2')
-    expect(headline.findText('Test heading').length).to.equal(1)
+    expect(headline).to.exist()
   })
 
-  it('should use medium icon size if size is small', () => {
-    const subject = testbed.render({
-      size: 'small',
-      hero: function (size) { // eslint-disable-line react/display-name
-        return <IconA11y size={size} />
-      }
+  it('renders as a link if it has an href prop', async () => {
+    await mount (
+      <Billboard
+        href='#'
+      />
+    )
+    const link = await BillboardFixture.find({
+      tag: 'a'
     })
-    expect(subject.find(IconA11y).props().size).to.equal('medium')
+    expect(link).to.exist()
+    expect(link.getAttribute('href')).equal('#')
   })
 
-  it('should use large icon size if size is medium', () => {
-    const subject = testbed.render({
-      size: 'medium',
-      hero: function (size) { // eslint-disable-line react/display-name
-        return <IconA11y size={size} />
-      }
+  it('renders as a button and responds to onClick event', async () => {
+    const onClick = stub()
+    await mount (
+      <Billboard
+        onClick={onClick}
+      />
+    )
+    const button = await BillboardFixture.find({
+      tag: 'button'
     })
-    expect(subject.find(IconA11y).props().size).to.equal('large')
+    button.click()
+    expect(onClick).to.have.been.calledOnce()
   })
 
-  it('should use x-large icon size if size is large', () => {
-    const subject = testbed.render({
-      size: 'large',
-      hero: function (size) { // eslint-disable-line react/display-name
-        return <IconA11y size={size} />
-      }
-    })
-    expect(subject.find(IconA11y).props().size).to.equal('x-large')
-  })
-
-  it('renders as a link if it has an href prop', () => {
-    const subject = testbed.render({
-      href: 'example.html',
-      disabled: true
-    })
-    expect(subject.find('a')).to.have.length(1)
-  })
-
-  it('renders as a button and responds to onClick event', () => {
-    const onClick = testbed.stub()
-    const subject = testbed.render({onClick})
-    subject.find('button').simulate('click')
-    expect(onClick).to.have.been.called()
-  })
-
-  it('should not allow padding to be added as a property', () => {
-    const subject = testbed.render({
-      padding: 'large medium small large'
-    })
-    expect(subject.find(View).props().padding).to.not.exist()
-  })
-
-  describe('when disabled', () => {
-    it('should apply aria-disabled', () => {
-      const subject = testbed.render({
-        href: 'example.html',
-        disabled: true
+  describe('when disabled', async () => {
+    it('should apply aria-disabled', async () => {
+      await mount(
+        <Billboard
+          heading='I am disabled'
+          href='#'
+          disabled={true}
+        />
+      )
+      const disabled = await BillboardFixture.find({
+        attribute: 'aria-disabled'
       })
-      expect(subject.find('a[aria-disabled]')).to.have.length(1)
+      expect(disabled.getAttribute('aria-disabled')).to.equal('true')
     })
 
-    it('should not be clickable', () => {
-      const onClick = testbed.stub()
+    it('should not be clickable', async () => {
+      const onClick = stub()
+      await mount (
 
-      const subject = testbed.render({
-        disabled: true,
-        onClick
-      })
+        <Billboard
+          onClick={onClick}
+          disabled
+        />
+      )
+      const button = await BillboardFixture.find()
 
-      subject.find('button').simulate('click')
-
+      button.click()
       expect(onClick).to.not.have.been.called()
     })
   })
 
-  describe('when passing down props to View', () => {
-    const allowedProps = {
-      margin: 'small',
-      elementRef: () => {},
-      as: 'div'
-    }
-
-    const ignore = [
-      'display'
-    ]
-
-    Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
-          })
-        }
+  describe('when passing down props to View', async () => {
+    it('should support an elementRef prop', async () => {
+      const elementRef = stub()
+      await mount(
+        <Billboard elementRef={elementRef} />
+      )
+      const billboard = await BillboardFixture.find()
+      expect(elementRef).to.have.been.calledWith(billboard.getDOMNode())
     })
-
-    it('should not pass display to View', () => {
-      const subject = testbed.render({
-        display: 'someTestValue'
-      })
-      expect(subject.find(View).props()['display']).to.equal(View.defaultProps['display'])
+    it('should support an `as` prop', async () => {
+      await mount(
+        <Billboard as='div' />
+      )
+      const billboard = await BillboardFixture.find()
+      expect(billboard.getTagName()).to.equal('div')
     })
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
-    })
+  it('should meet a11y standards', async () => {
+    await mount(
+      <Billboard
+        heading='Test heading'
+        headingAs='h2'
+        message='this is what i am testing'
+      />
+    )
+    const billboard = await BillboardFixture.find()
+    expect(await billboard.accessible()).to.be.true()
   })
 })

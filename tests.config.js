@@ -35,7 +35,6 @@ module.exports = {
     'packages/media-capture/',
     'packages/ui-a11y/',
     'packages/ui-alerts/',
-    'packages/ui-billboard/',
     'packages/ui-buttons/',
     'packages/ui-code-editor/',
     'packages/ui-container/',
