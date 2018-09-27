@@ -83,7 +83,7 @@ describe('ui-testbed', function () {
       if (testFilePaths.length > 0) {
         const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         result = `
-describe('ui-test-utils', function () {
+describe('ui-test-utils', async function () {
 ${testFileRequires.join(';\n')}
 })
 `

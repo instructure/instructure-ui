@@ -28,7 +28,7 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import Portal from '../index'
 import PortalFixture from '../fixture'
 
-describe('<Portal />', () => {
+describe('<Portal />', async () => {
   it('should render', async () => {
     await mount(
       <Portal open>Hello World</Portal>

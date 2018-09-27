@@ -27,7 +27,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from '../index'
 
-describe('<${COMPONENT}View />', () => {
+describe('<${COMPONENT}View />', async () => {
   it('should render', async () => {
     const subject = await mount(<${COMPONENT}View />)
     expect(subject).to.exist()

@@ -27,7 +27,7 @@ import { expect, mount } from '@instructure/ui-test-utils'
 
 import ${COMPONENT} from '../fixture'
 
-describe('<${COMPONENT} />', () => {
+describe('<${COMPONENT} />', async () => {
   it('should render', async () => {
     const render = stub()
     await mount(<${COMPONENT} render={render} />)
