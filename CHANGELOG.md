@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.30.0"></a>
+# [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
+
+
+### Bug Fixes
+
+* **ui-portal:** ui-testable should be a dependency ([64117ad](https://github.com/instructure/instructure-ui/commit/64117ad))
+* **ui-portal,ui-test-utils:** return a DOM node from getComponentRoot ([2903d29](https://github.com/instructure/instructure-ui/commit/2903d29))
+
+
+### Features
+
+* **ui-test-utils:** add hasClass helper to test utils ([72c21ad](https://github.com/instructure/instructure-ui/commit/72c21ad))
+* **ui-test-utils:** add utils for making custom queries ([7ca0da9](https://github.com/instructure/instructure-ui/commit/7ca0da9))
+
+
+
+
+
 <a name="5.29.0"></a>
 # [5.29.0](https://github.com/instructure/instructure-ui/compare/v5.28.1...v5.29.0) (2018-09-26)
 
