@@ -79,6 +79,10 @@ function hasClass (element, classname) {
   return element.classList.contains(classname)
 }
 
+function getId (element) {
+  return element.id
+}
+
 function debug (element = document.body) {
   // eslint-disable-next-line no-console
   console.log(prettyDOM(element))
@@ -93,6 +97,7 @@ async function accessible (element = document.documentElement, options) {
 }
 
 export {
+  getId,
   getOwnerWindow,
   getOwnerDocument,
   getComputedStyle,

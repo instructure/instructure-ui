@@ -25,13 +25,11 @@ import { firstOrNull } from './firstOrNull'
 
 import {
   filterByAttribute,
-  filterBySelector,
 } from './filters'
 
 import {
-  bindResultsToUtilities,
   parseQueryArguments,
-  querySelector,
+  querySelectorAll,
   getQueryResult
 } from './query-helpers'
 
@@ -40,42 +38,14 @@ async function find (...args) {
 }
 
 async function findAll (...args) {
-  const { element, locator, selector, options } = parseQueryArguments(...args)
-  const query = () => {
-    if (locator) {
-      // find all of the components that match the locator...
-      const components = filterBySelector(element, null, locator, options)
-      if (selector) {
-        // if there is a selector, query each component for matches...
-        return components.reduce((previouResult, element) => {
-          const customMethods = {
-            ...options.customMethods,
-            getComponentRoot: () => {
-              return element
-            }
-          }
-          const currentResult = bindResultsToUtilities(
-            querySelector(element, selector, options),
-            customMethods
-          )
-          return [ ...previouResult, ...currentResult]
-        }, [])
-      } else {
-        // otherwise just return the components
-        return bindResultsToUtilities(components, options.customMethods)
-      }
-    } else if (selector) {
-      return bindResultsToUtilities(querySelector(element, selector, options), options.customMethods)
+  const query = (element, selector, options) => {
+    if (selector) {
+      return querySelectorAll(element, selector, options)
     } else {
       return []
     }
   }
-  return getQueryResult(
-    element,
-    query,
-    options,
-    JSON.stringify({ locator, selector })
-  )
+  return findAllByQuery(query, ...args)
 }
 
 async function findFrame (...args) {
@@ -83,17 +53,28 @@ async function findFrame (...args) {
 }
 
 async function findAllFrames (...args) {
+  return findAllByQuery(iframeQuery, ...args)
+}
+
+async function findAllByQuery (query, ...args) {
   const { element, selector, options } = parseQueryArguments(...args)
-  const query = () => {
-    let results = filterBySelector(element, null, 'iframe', options)
-    results = filterByAttribute(results, 'title', selector.title, options)
-      .map(frame => frame.contentWindow.document.documentElement)
-    return bindResultsToUtilities(results, options.customMethods)
-  }
-  return getQueryResult(element, query, options, JSON.stringify(selector))
+  return getQueryResult(
+    element,
+    query.bind(null, element, selector, options),
+    options,
+    JSON.stringify({ selector })
+  )
+}
+
+function iframeQuery (element, selector, options) {
+  let results = querySelectorAll(element, { tag: 'iframe' }, options)
+  results = filterByAttribute(results, 'title', selector.title, options)
+    .map(frame => frame.contentWindow.document.documentElement)
+  return results
 }
 
 export {
+  findAllByQuery,
   findAll,
   find,
   findAllFrames,

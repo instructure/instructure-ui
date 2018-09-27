@@ -29,15 +29,18 @@ import { bindElementToUtilities as within } from './utils/bindElementToUtilities
 import { expect } from './utils/expect'
 import testable from './utils/testable'
 import fixture from './utils/fixture'
-import { find, findAll, findAllFrames, findFrame } from './utils/queries'
+import { findAllByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
 import { debug } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
+import { querySelectorAll } from './utils/query-helpers'
 
 const mount = (element, context) => Sandbox.mount(element, context)
 const stub = (obj, method, fn) => Sandbox.stub(obj, method, fn)
 const spy = (obj, method) => Sandbox.spy(obj, method)
 
 export {
+  findAllByQuery,
+  querySelectorAll,
   fixture,
   firstOrNull,
   within,

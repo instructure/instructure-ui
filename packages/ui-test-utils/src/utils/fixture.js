@@ -22,8 +22,12 @@
  * SOFTWARE.
  */
 
-import { findAll } from './queries'
-import { parseQueryArguments } from './query-helpers'
+import { findAllByQuery } from './queries'
+import {
+  querySelectorAll,
+  bindResultsToUtilities,
+  parseQueryArguments
+} from './query-helpers'
 import { firstOrNull } from './firstOrNull'
 
 import { TESTABLE_ATTRIBUTE } from './testable'
@@ -35,21 +39,35 @@ function fixture (componentId, customMethods = {}) {
 
     static async findAll (...args) {
       const { element, selector, options } = parseQueryArguments(...args)
-      return findAll(
-        element,
-        {
-          ...(selector || {}),
-          locator: Fixture.locator
-        },
-        {
-          ...options,
-          customMethods: { ...customMethods, ...options.customMethods }
+      return findAllByQuery(Fixture.query, element, selector, {
+        ...options,
+        customMethods: {
+          ...Fixture.customMethods,
+          ...options.customMethods
         }
-      )
+      })
     }
 
     static async find (...args) {
       return firstOrNull(await Fixture.findAll(...args))
+    }
+
+    static query (element, selector, options) {
+      // find all of the components that match the locator...
+      const components = querySelectorAll(element, { locator: Fixture.locator }, options)
+      if (selector) {
+        // if there is a selector, query each component for matches...
+        return components.reduce((previouResults, element) => {
+          const results = bindResultsToUtilities(
+            querySelectorAll(element, selector, options),
+            { ...Fixture.customMethods, ...options.customMethods, getComponentRoot: () => element }
+          )
+          return [ ...previouResults, ...results]
+        }, [])
+      } else {
+        // otherwise just return the components
+        return components
+      }
     }
   }
 }

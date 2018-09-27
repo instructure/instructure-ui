@@ -52,7 +52,6 @@ function parseQueryArguments () {
     visible: true,
     timeout: 1900
   }
-  let locator
 
   if (arguments[0] instanceof Element) {
     element = arguments[0]
@@ -64,8 +63,8 @@ function parseQueryArguments () {
   if (typeof selector === 'string' || selector instanceof Element) {
     selector = { css: selector }
   } else if (selector) {
-    locator = selector.locator
     const {
+      locator,
       title,
       css,
       tag,
@@ -77,6 +76,7 @@ function parseQueryArguments () {
       ...rest
     } = selector
     selector = {
+      locator,
       css,
       title,
       tag,
@@ -95,14 +95,14 @@ function parseQueryArguments () {
 
   return {
     element,
-    locator,
     selector: validateSelector(selector),
     options
   }
 }
 
-function querySelector (element, selector, options) {
+function querySelectorAll (element, selector, options) {
   const {
+    locator,
     css,
     tag,
     text,
@@ -114,6 +114,10 @@ function querySelector (element, selector, options) {
   } = selector
 
   let result
+
+  if (typeof locator === 'string') {
+    result = filterBySelector(element, result, locator, options)
+  }
 
   if (typeof css === 'string') {
     result = filterBySelector(element, result, css, options)
@@ -155,6 +159,9 @@ function querySelector (element, selector, options) {
 async function getQueryResult (element, query, options, message) {
   const queryResult = () => {
     let results = query()
+    results = results.map((result) => {
+      return (typeof result.getDOMNode === 'function') ? result : bindElementToUtilities(result, options.customMethods)
+    })
     if (options.visible) {
       results = results.filter(result => result.visible())
     }
@@ -190,7 +197,8 @@ async function getQueryResult (element, query, options, message) {
 }
 
 function validateSelector (selector = {}) {
-  const VALID_SELECTORS = [ 'css', 'tag', 'text', 'contains', 'label', 'title', 'value', 'attribute']
+  if (!selector) return null
+  const VALID_SELECTORS = [ 'locator', 'css', 'tag', 'text', 'contains', 'label', 'title', 'value', 'attribute']
   const valid = Object.keys(selector)
     .filter(key => !!selector[key] && VALID_SELECTORS.includes(key))
     .reduce((result, key) => { return { ...result, [key]: selector[key] } }, {})
@@ -204,6 +212,7 @@ function validateSelector (selector = {}) {
 export {
   bindResultsToUtilities,
   parseQueryArguments,
-  querySelector,
-  getQueryResult
+  querySelectorAll,
+  getQueryResult,
+  validateSelector
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect, testable, fixture } from '../index'
+import { querySelectorAll, findAllByQuery, mount, expect, testable, fixture } from '../index'
 
 @testable()
 class Component extends React.Component {
@@ -38,6 +38,13 @@ class Component extends React.Component {
 }
 
 const ComponentFixture = fixture(Component.displayName)
+
+ComponentFixture.findAllInputs = async (...args) => {
+  const query = (element, selector, options) => {
+    return querySelectorAll(element, { ...selector, tag: 'input' }, options)
+  }
+  return findAllByQuery(query, ...args)
+}
 
 describe('@testable, fixture', () => {
   it('should find component root elements without a selector', async () => {
@@ -69,5 +76,9 @@ describe('@testable, fixture', () => {
     })
     expect(component.getComponentRoot())
       .to.equal(document.getElementById('componentRoot'))
+  })
+  it('should support custom queries', async () => {
+    await mount(<Component />)
+    expect(await ComponentFixture.findAllInputs()).to.have.length(2)
   })
 })
