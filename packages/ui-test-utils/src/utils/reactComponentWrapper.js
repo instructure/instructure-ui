@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { bindElementToUtilities } from './bindElementToUtilities'
 
 class ReactComponentWrapper {
-  mount (element, options) {
+  mount (element, options = {}) {
     this.unmount()
 
     const { type, ref, props } = element
@@ -127,9 +127,16 @@ function createMountWrapper (element, options = {}) {
     render () {
       const { Component } = this.props
       const { mount, props } = this.state
+
+      const {
+        componentRef,
+        ...componentProps
+      } = props
+
       if (!mount) return null
+
       return (
-        <Component {...props} />
+        <Component ref={componentRef} {...componentProps} />
       )
     }
   }
