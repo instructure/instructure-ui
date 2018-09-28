@@ -116,20 +116,67 @@ describe('<Link />', () => {
     })
   })
 
-  it('should render designated tag if `as` prop is specified', () => {
-    const subject = testbed.render({
-      as: 'span',
-      onClick: testbed.stub()
+  context('with `as` prop', () => {
+    let onClick, subject
+
+    beforeEach(() => {
+      subject = testbed.render({
+        as: 'span',
+        onClick
+      })
     })
 
-    expect(subject.tagName())
-      .to.equal('SPAN')
+    context('with `onClick`', () => {
+      before(() => {
+        onClick = Function.prototype
+      })
 
-    expect(subject.find('[role="button"]'))
-      .to.have.length(1)
+      it('should render designated tag', () => {
+        expect(subject.tagName())
+          .to.equal('SPAN')
+      })
 
-    expect(subject.find('[tabIndex="0"]'))
-      .to.have.length(1)
+      it('should set role="button"', () => {
+        expect(subject.find('[role="button"]'))
+          .to.have.length(1)
+      })
+
+      it('should set type="button"', () => {
+        expect(subject.find('[type="button"]'))
+          .to.have.length(1)
+      })
+
+      it('should set tabIndex="0"', () => {
+        expect(subject.find('[tabIndex="0"]'))
+          .to.have.length(1)
+      })
+    })
+
+    context('without `onClick`', () => {
+      before(() => {
+        onClick = null
+      })
+
+      it('should render designated tag', () => {
+        expect(subject.tagName())
+          .to.equal('SPAN')
+      })
+
+      it('should not set role="button"', () => {
+        expect(subject.find('[role="button"]'))
+          .to.have.length(0)
+      })
+
+      it('should not set type="button"', () => {
+        expect(subject.find('[type="button"]'))
+          .to.have.length(0)
+      })
+
+      it('should not set tabIndex="0"', () => {
+        expect(subject.find('[tabIndex="0"]'))
+          .to.have.length(0)
+      })
+    })
   })
 
   describe('when an href is provided', () => {

@@ -125,6 +125,7 @@ class Link extends Component {
 
   render () {
     const {
+      as,
       disabled,
       children,
       onClick,
@@ -148,6 +149,10 @@ class Link extends Component {
       [styles.iconOnly]: icon && !this.hasVisibleChildren
     }
 
+    const role = onClick && as !== 'button' ? 'button' : null
+    const type = onClick || as === 'button' ? 'button' : null
+    const tabIndex = role === 'button' ? '0' : null
+
     const props = {
       ref: (c, ...args) => {
         this._link = c
@@ -156,10 +161,10 @@ class Link extends Component {
       ...omitProps(this.props, {...Link.propTypes, ...View.propTypes}),
       className: classnames(classes),
       href: href,
-      type: href ? null : 'button',
       'aria-disabled': disabled ? 'true' : null,
-      role: onClick && this.props.as ? 'button' : null,
-      tabIndex: onClick && this.props.as ? '0' : null,
+      role,
+      type,
+      tabIndex,
       onClick: this.handleClick
     }
 
