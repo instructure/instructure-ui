@@ -73,6 +73,8 @@ describe('<FocusableView />', () => {
       margin: 'small',
       as: 'span',
       display: 'auto',
+      cursor: 'auto',
+      width: '100%',
       elementRef: () => {}
     }
 

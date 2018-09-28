@@ -77,16 +77,25 @@ export default class FocusableView extends Component {
     /**
     * Set the margin using familiar CSS shorthand
     */
-    margin: ThemeablePropTypes.spacing
+    margin: ThemeablePropTypes.spacing,
+    /**
+     * Specify a mouse cursor to use when hovering over the `<View />`
+     */
+    cursor: PropTypes.string,
+    /**
+     * Optionally set a width for the FocusableView (either a string or number)
+     */
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
     focused: false,
     shape: "rectangular",
     color: 'primary',
-    display: 'auto',
+    display: 'inline-block',
     as: 'button',
     elementRef: function (element) {},
+    cursor: 'auto'
   }
 
   render () {
@@ -94,6 +103,7 @@ export default class FocusableView extends Component {
       as,
       children,
       color,
+      cursor,
       display,
       elementRef,
       focused,
@@ -104,6 +114,7 @@ export default class FocusableView extends Component {
       shape,
       className, // eslint-disable-line react/prop-types
       to,  // eslint-disable-line react/prop-types
+      width,
       ...props
     } = this.props
 
@@ -112,9 +123,11 @@ export default class FocusableView extends Component {
         {...omitProps(props, { ...FocusableView.propTypes, ...View.propTypes })}
         display={display}
         as={as}
+        cursor={cursor}
         href={href}
         to={to}
         margin={margin}
+        width={width}
         elementRef={elementRef}
         className={classnames({
           [className]: className,

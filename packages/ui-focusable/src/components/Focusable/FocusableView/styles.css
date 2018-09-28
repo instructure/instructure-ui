@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-/* stylelint-disable selector-max-class, no-descending-specificity */
+/* stylelint-disable selector-max-class, selector-max-type, no-descending-specificity */
 
 .root[type="button"],
 .root[type="reset"],
@@ -31,21 +31,15 @@
   appearance: none;
 }
 
-/* removes default dotted focus outline in Firefox */
-
 .root {
-  all: initial;
   box-sizing: border-box;
   max-width: 100%;
-  display: inline-block;
-  vertical-align: middle;
   position: relative;
   overflow: visible;
   direction: inherit;
   margin: 0;
   text-decoration: none; /* for links styled as buttons */
   text-align: center;
-  cursor: pointer;
   user-select: none;
   touch-action: manipulation;
   background: transparent;
