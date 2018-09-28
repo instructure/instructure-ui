@@ -117,9 +117,9 @@ function filterByLabelText (container, results, text, options = {}) {
 
 function queryAllBySelector (element = document.documentElement, selector = '*') {
   if (element instanceof Element) {
-    const result = Array.from(element.querySelectorAll(selector))
+    let result = Array.from(element.querySelectorAll(selector))
     if (matchElementBySelector(element, selector)) {
-      result.push(element)
+      result = [element, ...result]
     }
     return result
   } else {

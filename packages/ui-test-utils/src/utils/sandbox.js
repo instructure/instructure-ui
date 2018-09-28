@@ -82,6 +82,9 @@ class Sandbox {
   setup () {
     this.teardown()
 
+    document.documentElement.setAttribute('dir', 'ltr')
+    document.documentElement.setAttribute('lang', 'en-US')
+
     this._observer.observe(document.head, { childList: true })
     this._observer.observe(document.body, { childList: true })
 

@@ -26,6 +26,7 @@ import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
 
 import { bindElementToUtilities } from './bindElementToUtilities'
 import { waitForQueryResult } from './waitForQueryResult'
+import { visible, getOwnerDocument } from './helpers'
 
 import {
  filterByLabelText,
@@ -153,19 +154,25 @@ function querySelectorAll (element, selector, options) {
     result = filterByAttribute(element, result, attribute, null, options)
   }
 
-  return result || []
+  return (result || [])
+    .filter((element) => {
+      const doc = getOwnerDocument(element)
+      if (!(doc && doc.body.contains(element))) {
+        return false
+      }
+      if (options.visible && !visible(element)) {
+        return false
+      }
+      return true
+    })
 }
 
 async function getQueryResult (element, query, options, message) {
   const queryResult = () => {
-    let results = query()
-    results = results.map((result) => {
-      return (typeof result.getDOMNode === 'function') ? result : bindElementToUtilities(result, options.customMethods)
-    })
-    if (options.visible) {
-      results = results.filter(result => result.visible())
-    }
-    return results
+    return query()
+      .map((result) => {
+        return (typeof result.getDOMNode === 'function') ? result : bindElementToUtilities(result, options.customMethods)
+      })
   }
 
   const { expectEmpty, timeout } = options
