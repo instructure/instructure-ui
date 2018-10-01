@@ -89,7 +89,7 @@ function debug (element = document.body) {
 }
 
 async function accessible (element = document.documentElement, options) {
-  if (element instanceof Element) {
+  if (element instanceof Element || element instanceof SVGElement) {
     return runAxeCheck(element, options)
   } else {
     throw Error('[ui-test-utils] accessibility check can only run on a single DOM Element!')

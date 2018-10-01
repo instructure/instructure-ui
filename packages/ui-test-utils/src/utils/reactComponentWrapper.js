@@ -49,7 +49,8 @@ class ReactComponentWrapper {
             ref: (el) => {
               if (el && typeof wrapper === 'undefined') {
                 const DOMNode = el.getDOMNode()
-                const utils = (DOMNode instanceof Element) ? bindElementToUtilities(DOMNode, options.customMethods) : {}
+                const utils = (DOMNode instanceof Element || DOMNode instanceof SVGElement) ?
+                  bindElementToUtilities(DOMNode, options.customMethods) : {}
 
                 wrapper = el
                 resolve({

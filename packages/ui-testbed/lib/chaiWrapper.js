@@ -36,7 +36,7 @@ module.exports = function () {
       let element = obj
       if (typeof obj.getA11yViolations === 'function') {
         obj.getA11yViolations(done, options)
-      } else if (obj instanceof Element) {
+      } else if (obj instanceof Element || obj instanceof SVGElement) {
         runAxeCheck(element, options).then((result) => {
           if (result instanceof Error) {
             done(result)

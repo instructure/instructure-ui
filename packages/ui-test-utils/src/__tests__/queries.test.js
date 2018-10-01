@@ -44,6 +44,19 @@ describe('find, findAll', () => {
     expect(await findAll({ title: 'pineapple', ...options })).to.have.length(0)
   })
 
+  it('works with SVG elements', async () => {
+    const subject = await mount(
+      <svg>
+        <title>Close</title>
+        <g>
+          <path />
+        </g>
+      </svg>
+    )
+
+    expect(await subject.findAll({ title: 'Close', visible: false })).to.have.length(1)
+  })
+
   describe('by text', () => {
     it('can get elements by matching their text content', async () => {
       await mount(
@@ -202,14 +215,12 @@ describe('find, findAll', () => {
 
     it('can find an SVG element by its title', async () => {
       await mount(
-        <div>
-          <svg>
-            <title>Close</title>
-            <g>
-              <path />
-            </g>
-          </svg>
-        </div>
+        <svg>
+          <title>Close</title>
+          <g>
+            <path />
+          </g>
+        </svg>
       )
 
       expect(await findAll({ title: 'Close', visible: false })).to.have.length(1)

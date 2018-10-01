@@ -116,7 +116,7 @@ function filterByLabelText (container, results, text, options = {}) {
 }
 
 function queryAllBySelector (element = document.documentElement, selector = '*') {
-  if (element instanceof Element) {
+  if (element instanceof Element || element instanceof SVGElement) {
     let result = Array.from(element.querySelectorAll(selector))
     if (matchElementBySelector(element, selector)) {
       result = [element, ...result]

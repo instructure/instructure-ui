@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 export function bindElementToMethods (element, methods) {
-  if (element instanceof Element) {
+  if (element instanceof Element || element instanceof SVGElement) {
     return Object.entries(methods).reduce((bound, [key, fn]) => {
       if (typeof fn === 'function') {
         bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
