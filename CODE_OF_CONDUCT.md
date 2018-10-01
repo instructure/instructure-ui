@@ -1,7 +1,6 @@
 ---
 title: Code of Conduct
 category: Getting Started
-order: 1
 ---
 
 ## Code of Conduct
