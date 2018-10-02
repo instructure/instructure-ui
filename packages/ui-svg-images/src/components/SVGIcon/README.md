@@ -116,7 +116,7 @@ example: true
 
 ### Children
 
-The SVGIcon component also accepts SVG content as jsx via the children prop.
+The SVGIcon component also accepts SVG content as jsx via the children prop. Note: if passing the path via the children prop, do not forget to include the **viewBox** attribute (see example).
 
 ```js
 ---

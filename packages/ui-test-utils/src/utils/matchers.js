@@ -42,7 +42,7 @@ function matchElementByContents (element, elementOrString, options = {}) {
   const { exact, collapseWhitespace, trim } = options
   const matcher = exact ? matches : fuzzyMatches
 
-  if (elementOrString instanceof Element || elementOrString instanceof SVGElement) {
+  if (elementOrString instanceof Element) {
     return element.contains(elementOrString)
   } else {
     return matcher(element.textContent, element, elementOrString, { collapseWhitespace, trim })

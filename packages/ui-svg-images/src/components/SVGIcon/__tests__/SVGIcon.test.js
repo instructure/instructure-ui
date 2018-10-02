@@ -23,72 +23,91 @@
  */
 
 import React from 'react'
+import { mount, expect } from '@instructure/ui-test-utils'
+
 import SVGIcon from '../index'
+import SVGIconFixture from '../fixture'
+
 import styles from '../styles.css'
 
-describe('<SVGIcon />', () => {
-  const testbed = new Testbed(<SVGIcon />)
-
-  it('should render', () => {
-    const subject = testbed.render({
-      src: `<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`
-    })
-
-    expect(subject.containsMatchingElement(<path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" />))
+describe('<SVGIcon />', async () => {
+  it('should render', async () => {
+   await mount(
+    <SVGIcon />
+    )
+    const icon = await SVGIconFixture.find()
+    expect(icon).to.exist()
   })
 
-  it('should set rotate to 0 by default', () => {
-    const subject = testbed.render()
-
-    expect(subject.props().rotate).to.equal('0')
+  it('should set rotate to 0 by default', async () => {
+   await mount(
+    <SVGIcon />
+    )
+    const icon = await SVGIconFixture.find({
+      attribute: 'rotate'
+    })
+    expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
-  it('should allow rotate prop to be overridden', () => {
-    const subject = testbed.render({
-      rotate: '90'
+  it('should allow rotate prop to be overridden', async () => {
+    await mount(
+      <SVGIcon
+        rotate="90"
+      />
+    )
+    const icon = await SVGIconFixture.find({
+      attribute: 'rotate'
     })
-
-    expect(subject.props().rotate).to.equal('90')
+    expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
-  it('should set custom width and height properly', () => {
-    const subject = testbed.render({
-      width: '2.75em',
-      height: '3.8em'
-    })
+  it('should set custom width and height properly', async () => {
+    await mount(
+      <SVGIcon
+        width='150px'
+        height='100px'
+      />
+    )
+    const custom = await SVGIconFixture.find()
+    const width = custom.getComputedStyle().width
+    const height = custom.getComputedStyle().height
 
-    expect(subject.props().width).to.equal('2.75em')
-    expect(subject.props().height).to.equal('3.8em')
+    expect(width).to.equal('150px')
+    expect(height).to.equal('100px')
   })
 
-  it('should set size', () => {
-    const subject = testbed.render({
-      size: 'large'
-    })
-
+  it('should set size', async () => {
+    await mount(
+      <SVGIcon
+        size='large'
+      />
+    )
+    const subject = await SVGIconFixture.find()
     expect(subject.hasClass(styles['size--large'])).to.be.true()
   })
 
-  it('should prioritize deprecated width and height over size', () => {
-    const subject = testbed.render({
-      size: 'x-small',
-      width: '200px',
-      height: '200px'
-    })
-
+  it('should prioritize deprecated width and height over size', async () => {
+    await mount(
+      <SVGIcon
+        width='200px'
+        height='200px'
+        size='x-small'
+      />
+    )
+    const subject = await SVGIconFixture.find()
     const width = subject.getComputedStyle().getPropertyValue('width')
-    expect(width).to.equal('200px')
     const height = subject.getComputedStyle().getPropertyValue('height')
+    expect(width).to.equal('200px')
     expect(height).to.equal('200px')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: [
-        /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */
-      ]
-    })
+  it('should meet a11y standards', async () => {
+    await mount(
+      <SVGIcon
+        size='large'
+      />
+    )
+    const subject = await SVGIconFixture.find()
+    expect(await subject.accessible()).to.be.true()
   })
 })

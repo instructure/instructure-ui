@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -38,6 +39,7 @@ import theme from './theme'
 category: components/utilities
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class InlineSVG extends Component {
   static propTypes = {

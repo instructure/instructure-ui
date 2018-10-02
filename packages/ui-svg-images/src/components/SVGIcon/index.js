@@ -30,6 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import InlineSVG from '../InlineSVG'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -39,6 +40,7 @@ import theme from './theme'
 category: components/utilities
 ---
 **/
+@testable()
 @themeable(theme, styles)
 @deprecated('5.0.0', {
   width: 'size',

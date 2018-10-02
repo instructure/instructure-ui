@@ -25,7 +25,7 @@
 import keycode from 'keycode'
 
 export function bindElementToEvents (element, events) {
-  if (element instanceof Element || element instanceof SVGElement) {
+  if (element instanceof Element) {
     return Object.entries(events).reduce((bound, [key, fn]) => {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))// eslint-disable-line no-param-reassign
