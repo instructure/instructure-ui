@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -41,6 +42,7 @@ import theme from './theme'
 parent: Navigation
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class NavigationItem extends Component {
   static propTypes = {

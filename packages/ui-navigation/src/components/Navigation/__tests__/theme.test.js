@@ -23,6 +23,7 @@
  */
 
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+import { expect } from '@instructure/ui-test-utils'
 
 import Navigation from '../index'
 

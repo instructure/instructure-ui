@@ -23,82 +23,158 @@
  */
 
 import React from 'react'
-  import Navigation, { NavigationItem } from '../index'
-  import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-  import Img from '@instructure/ui-elements/lib/components/Img'
-  import Avatar from '@instructure/ui-elements/lib/components/Avatar'
-  import Badge from '@instructure/ui-elements/lib/components/Badge'
-  import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
-  import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
+import { mount, expect } from '@instructure/ui-test-utils'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import Img from '@instructure/ui-elements/lib/components/Img'
+import Avatar from '@instructure/ui-elements/lib/components/Avatar'
+import Badge from '@instructure/ui-elements/lib/components/Badge'
+import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
+import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
+
+import Navigation, { NavigationItem } from '../index'
+import NavigationLocator from '../locator'
 
 import styles from '../styles.css'
 
-describe('<Navigation />', () => {
-  // eslint-disable-next-line max-len
-  const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
+describe('<Navigation />', async () => {
+  it('should render', async () => {
+    // eslint-disable-next-line max-len
+    const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
 
-  const testbed = new Testbed(
-    <div style={{height: '25rem'}}>
+    await mount(
       <Navigation
         label="Main navigation"
         toggleLabel={{
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<Img src={image} constrain="cover" />}
-          label={<ScreenReaderContent>Home</ScreenReaderContent>}
+          icon={<IconDashboard />}
+          label="Dashboard"
           href="#"
         />
+      </Navigation>
+    )
+
+    const nav = await NavigationLocator.find()
+    expect(nav).to.exist()
+  })
+
+  it('should render a single semantic nav element', async () => {
+    await mount(
+      <Navigation
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize Navigation',
+          minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<Avatar name="Ziggy Marley" size="x-small"/>}
-          label="Account"
-          onClick={() => { this.loadSubNav('account') }}
+          icon={<IconDashboard />}
+          label="Dashboard"
+          href="#"
+        />
+      </Navigation>
+    )
+    const nav = await NavigationLocator.findAll({ tag: 'nav' })
+    expect(nav).to.have.length(1)
+  })
+
+  it('should render a semantic list for the nav content', async () => {
+    await mount(
+      <Navigation
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize Navigation',
+          minimizedLabel: 'Expand Navigation'}}>
+        <NavigationItem
+          icon={<IconDashboard />}
+          label="Dashboard"
+          href="#"
         />
         <NavigationItem
           icon={<Badge count={99}><IconAdmin /></Badge>}
           label="Inbox"
           href="#"
         />
+      </Navigation>
+    )
+    const list = await NavigationLocator.findAll({ tag: 'ul' })
+    const items = await NavigationLocator.findAll({ tag: 'li' })
+    expect(list).to.have.length(1)
+    expect(items).to.have.length(2)
+  })
+
+  it('should switch aria-expanded when the Toggle Navigation button is clicked', async () => {
+    await mount(
+      <Navigation
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize Navigation',
+          minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
           icon={<IconDashboard />}
-          label="Supercalifragilistic"
+          label="Dashboard"
+          href="#"
+        />
+        <NavigationItem
+          icon={<Badge count={99}><IconAdmin /></Badge>}
+          label="Inbox"
           href="#"
         />
       </Navigation>
-    </div>
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
-  })
-
-  it('should render a single semantic nav element', () => {
-    const subject = testbed.render()
-    expect(subject.find('nav').length).to.equal(1)
-  })
-
-  it('should render a semantic list for the nav content', () => {
-    const subject = testbed.render()
-    expect(subject.find('li').length).to.equal(4)
-  })
-
-  it('should switch aria-expanded when the Toggle Navigation button is clicked', () => {
-    const subject = testbed.render()
-    const toggle = subject.find('NavigationItem').last()
-
+    )
+    const nav = await NavigationLocator.find()
+    const toggle = await NavigationLocator.find({ focusable: true, contains: 'Minimize Navigation'  })
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
-
-    toggle.find('button').simulate('click')
-
+    await toggle.click()
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
-  it('should add the minimized style to the root when the nav is collapsed', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(NavigationItem).last()
-    toggle.find('button').simulate('click')
+  it('should add the minimized style to the root when the nav is collapsed', async () => {
+    await mount(
+      <Navigation
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize Navigation',
+          minimizedLabel: 'Expand Navigation'}}
+        >
+        <NavigationItem
+          icon={<IconDashboard />}
+          label="Dashboard"
+          href="#"
+        />
+        <NavigationItem
+          icon={<Badge count={99}><IconAdmin /></Badge>}
+          label="Inbox"
+          href="#"
+        />
+      </Navigation>
+    )
+    const nav = await NavigationLocator.find()
+    const toggle = await NavigationLocator.find({ focusable: true, contains: 'Minimize Navigation' })
+    await toggle.click()
+    expect(nav.hasClass(styles['minimized'])).to.exist()
+  })
 
-    expect(subject.find('nav').hasClass(styles['minimized'])).to.be.true()
+  it('should meet a11y standards', async () => {
+    await mount(
+      <Navigation
+        label="Main navigation"
+        toggleLabel={{
+          expandedLabel: 'Minimize Navigation',
+          minimizedLabel: 'Expand Navigation'}}
+        >
+        <NavigationItem
+          icon={<IconDashboard />}
+          label="Dashboard"
+          href="#"
+        />
+        <NavigationItem
+          icon={<Badge count={99}><IconAdmin /></Badge>}
+          label="Inbox"
+          href="#"
+        />
+      </Navigation>
+    )
+    const nav = await NavigationLocator.find()
+    expect(await nav.accessible()).to.be.true()
   })
 })

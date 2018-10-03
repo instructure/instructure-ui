@@ -21,39 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator  } from '@instructure/ui-test-utils'
 
-module.exports = {
-  files: [
-    'packages/**/*.test.js'
-  ],
-  ignore: [
-    'packages/ui-codemods/**'
-  ],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-a11y/',
-    'packages/ui-alerts/',
-    'packages/ui-code-editor/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-elements/',
-    'packages/ui-focusable/',
-    'packages/ui-forms/',
-    'packages/ui-i18n/',
-    'packages/ui-layout/',
-    'packages/ui-media-player/',
-    'packages/ui-menu/',
-    'packages/ui-motion/',
-    'packages/ui-overlays/',
-    'packages/ui-pages/',
-    'packages/ui-pagination/',
-    'packages/ui-tabs/',
-    'packages/ui-themeable/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/',
-    'packages/ui-tree-browser/',
-    'packages/ui-utils/'
-  ]
-}
+import Navigation from './index'
+import NavigationItem from './NavigationItem/locator'
+
+const NavigationLocator = locator(Navigation.displayName, {
+  findAllItems: async (...args) => {
+    return NavigationItem.findAll(...args)
+  },
+  findItem: async (...args) => {
+    return NavigationItem.find(...args)
+  }
+})
+
+export default NavigationLocator
+
+export { default as NavigationItem } from './NavigationItem/locator'

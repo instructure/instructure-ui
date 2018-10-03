@@ -26,6 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -45,6 +46,7 @@ const navMinimized = ({ minimized }) => ({ minimized: !minimized })
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class Navigation extends Component {
   static propTypes = {

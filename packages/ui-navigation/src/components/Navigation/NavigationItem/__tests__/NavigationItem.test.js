@@ -23,29 +23,47 @@
  */
 
 import React from 'react'
-import NavigationItem from '../index'
-import Badge from '@instructure/ui-elements/lib/components/Badge'
+import { mount, expect } from '@instructure/ui-test-utils'
 import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
 
-describe('<NavigationItem />', () => {
+import NavigationItem from '../index'
+import NavigationItemLocator from '../locator'
 
-  const testbed = new Testbed(
-        <NavigationItem
-          icon={<Badge count={99}><IconAdmin /></Badge>}
-          label="Inbox"
-          onClick={() => { this.loadSubNav('account') }}
-        />
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+describe('<NavigationItem />', async () => {
+  it('should render', async () => {
+    await mount(
+      <NavigationItem
+        icon={<IconAdmin />}
+        label='Admin'
+        href='#'
+      />
+    )
+    const navItem = await NavigationItemLocator.find()
+    expect(navItem).to.exist()
   })
 
-  it('should have an aria attribute for the tooltip label when the nav is minimized ', () => {
-    const subject = testbed.render({minimized: true})
-    const attr = subject.find('button').getAttribute('aria-controls')
+  it('should have an aria attribute for the tooltip label when the nav is minimized ', async () => {
+    await mount(
+      <NavigationItem
+        icon={<IconAdmin />}
+        label="Admin"
+        onClick={() => { this.loadSubNav('account') }}
+        minimized={true}
+      />
+    )
+    const item = await NavigationItemLocator.find({ focusable: true })
+    expect(item.getAttribute('aria-controls')).to.exist()
+  })
 
-    expect(attr).to.exist()
+  it('should meet a11y standards', async () => {
+    await mount(
+      <NavigationItem
+        icon={<IconAdmin />}
+        label="Dashboard"
+        href="#"
+      />
+    )
+    const navItem = await NavigationItemLocator.find()
+    expect(await navItem.accessible()).to.be.true()
   })
 })
