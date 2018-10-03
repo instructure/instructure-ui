@@ -33,6 +33,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
+import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import List, { ListItem } from '@instructure/ui-elements/lib/components/List'
@@ -52,7 +53,7 @@ export default class Figure extends Component {
   static propTypes = {
     title: PropTypes.node,
     caption: PropTypes.node,
-    recommendation: PropTypes.oneOf(['yes', 'no', 'none']),
+    recommendation: PropTypes.oneOf(['yes', 'no', 'a11y', 'none']),
     iconTitle: PropTypes.string,
     float: PropTypes.oneOf(['start', 'end', 'none']),
     children: CustomPropTypes.Children.oneOf(['FigureItem'])
@@ -68,6 +69,8 @@ export default class Figure extends Component {
       return IconCheckMark
     } else if (this.props.recommendation === 'no') {
       return IconNo
+    } else if (this.props.recommendation === 'a11y') {
+      return IconA11y
     }
   }
 

@@ -57,3 +57,11 @@
     background: var(--yesColor);
   }
 }
+
+.recommendation--a11y {
+  border-top-color: var(--a11yColor);
+
+  .iconContainer {
+    background: var(--a11yColor);
+  }
+}

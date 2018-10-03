@@ -36,6 +36,7 @@ export default function ({ borders, colors, spacing, shadows, stacking, typograp
     contentBackground: colors.white,
     yesColor: colors.shamrock,
     noColor: colors.crimson,
+    a11yColor: colors.electric,
     iconColor: colors.white,
     iconContainerStacking: stacking.above,
     iconContainerSize: spacing.large,
