@@ -1,7 +1,8 @@
+/* stylelint-disable selector-max-type */
+
 .root {
   font-family: var(--fontFamily);
 
-  /* stylelint-disable selector-max-type */
   sub,
   sup {
     font-size: 75%;
@@ -39,125 +40,151 @@
     padding: 0;
     margin: var(--paragraphMargin);
   }
-  /* stylelint-enable selector-max-type */
 }
 
-.color-primary {
-  color: var(--primaryColor);
+input.root[type] {
+  outline: 0;
+  appearance: none;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  height: auto;
+  width: 100%;
+  line-height: inherit;
+  text-align: start;
+  box-shadow: none;
+  display: block;
 }
 
-.color-secondary {
-  color: var(--secondaryColor);
+.root,
+input.root[type] {
+  &:focus {
+    outline: none;
+  }
+
+  &.color-primary {
+    color: var(--primaryColor);
+  }
+
+  &.color-secondary {
+    color: var(--secondaryColor);
+  }
+
+  &.color-primary-inverse {
+    color: var(--primaryInverseColor);
+  }
+
+  &.color-secondary-inverse {
+    color: var(--secondaryInverseColor);
+  }
+
+  &.color-success {
+    color: var(--successColor);
+  }
+
+  &.color-brand {
+    color: var(--brandColor);
+  }
+
+  &.color-warning {
+    color: var(--warningColor);
+  }
+
+  &.color-error {
+    color: var(--errorColor);
+  }
+
+  &.weight-normal {
+    font-weight: var(--fontWeightNormal);
+  }
+
+  &.weight-light {
+    font-weight: var(--fontWeightLight);
+  }
+
+  &.weight-bold {
+    font-weight: var(--fontWeightBold);
+  }
+
+  &.style-normal {
+    font-style: normal;
+  }
+
+  &.style-italic {
+    font-style: italic;
+  }
+
+  &.x-small {
+    font-size: var(--fontSizeXSmall);
+  }
+
+  &.small {
+    font-size: var(--fontSizeSmall);
+  }
+
+  &.medium {
+    font-size: var(--fontSizeMedium);
+  }
+
+  &.large {
+    font-size: var(--fontSizeLarge);
+  }
+
+  &.x-large {
+    font-size: var(--fontSizeXLarge);
+  }
+
+  &.xx-large {
+    font-size: var(--fontSizeXXLarge);
+  }
+
+  &.lineHeight-default {
+    line-height: var(--lineHeight);
+  }
+
+  &.lineHeight-fit {
+    line-height: var(--lineHeightFit);
+  }
+
+  &.lineHeight-condensed {
+    line-height: var(--lineHeightCondensed);
+  }
+
+  &.lineHeight-double {
+    line-height: var(--lineHeightDouble);
+  }
+
+  &.letterSpacing-normal {
+    letter-spacing: var(--letterSpacingNormal);
+  }
+
+  &.letterSpacing-condensed {
+    letter-spacing: var(--letterSpacingCondensed);
+  }
+
+  &.letterSpacing-expanded {
+    letter-spacing: var(--letterSpacingExpanded);
+  }
+
+  &.transform-none {
+    text-transform: none;
+  }
+
+  &.transform-capitalize {
+    text-transform: capitalize;
+  }
+
+  &.transform-uppercase {
+    text-transform: uppercase;
+  }
+
+  &.transform-lowercase {
+    text-transform: lowercase;
+  }
 }
 
-.color-primary-inverse {
-  color: var(--primaryInverseColor);
-}
-
-.color-secondary-inverse {
-  color: var(--secondaryInverseColor);
-}
-
-.color-success {
-  color: var(--successColor);
-}
-
-.color-brand {
-  color: var(--brandColor);
-}
-
-.color-warning {
-  color: var(--warningColor);
-}
-
-.color-error {
-  color: var(--errorColor);
-}
-
-.weight-normal {
-  font-weight: var(--fontWeightNormal);
-}
-
-.weight-light {
-  font-weight: var(--fontWeightLight);
-}
-
-.weight-bold {
-  font-weight: var(--fontWeightBold);
-}
-
-.style-normal {
-  font-style: normal;
-}
-
-.style-italic {
-  font-style: italic;
-}
-
-.x-small {
-  font-size: var(--fontSizeXSmall);
-}
-
-.small {
-  font-size: var(--fontSizeSmall);
-}
-
-.medium {
-  font-size: var(--fontSizeMedium);
-}
-
-.large {
-  font-size: var(--fontSizeLarge);
-}
-
-.x-large {
-  font-size: var(--fontSizeXLarge);
-}
-
-.xx-large {
-  font-size: var(--fontSizeXXLarge);
-}
-
-.lineHeight-default {
-  line-height: var(--lineHeight);
-}
-
-.lineHeight-fit {
-  line-height: var(--lineHeightFit);
-}
-
-.lineHeight-condensed {
-  line-height: var(--lineHeightCondensed);
-}
-
-.lineHeight-double {
-  line-height: var(--lineHeightDouble);
-}
-
-.letterSpacing-normal {
-  letter-spacing: var(--letterSpacingNormal);
-}
-
-.letterSpacing-condensed {
-  letter-spacing: var(--letterSpacingCondensed);
-}
-
-.letterSpacing-expanded {
-  letter-spacing: var(--letterSpacingExpanded);
-}
-
-.transform-none {
-  text-transform: none;
-}
-
-.transform-capitalize {
-  text-transform: capitalize;
-}
-
-.transform-uppercase {
-  text-transform: uppercase;
-}
-
-.transform-lowercase {
-  text-transform: lowercase;
-}
+/* stylelint-enable selector-max-type */

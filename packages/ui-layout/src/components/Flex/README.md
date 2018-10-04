@@ -32,6 +32,18 @@ example: true
     <FlexItem>Three</FlexItem>
     <FlexItem>Four</FlexItem>
   </Flex>
+  <Flex visualDebug direction="row-reverse">
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
+  </Flex>
+  <Flex visualDebug direction="column-reverse">
+    <FlexItem>One</FlexItem>
+    <FlexItem>Two</FlexItem>
+    <FlexItem>Three</FlexItem>
+    <FlexItem>Four</FlexItem>
+  </Flex>
 </div>
 ```
 

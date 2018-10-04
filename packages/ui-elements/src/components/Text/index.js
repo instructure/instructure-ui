@@ -89,7 +89,8 @@ export default class Text extends Component {
       'warning',
       'brand'
     ]),
-    children: PropTypes.node
+    children: PropTypes.node,
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -125,6 +126,7 @@ export default class Text extends Component {
           [styles[`letterSpacing-${letterSpacing}`]]: letterSpacing,
           [styles[`color-${color}`]]: color
         })}
+        ref={this.props.elementRef}
       >
         {children}
       </ElementType>

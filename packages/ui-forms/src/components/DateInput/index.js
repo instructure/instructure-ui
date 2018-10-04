@@ -260,7 +260,9 @@ export default class DateInput extends Component {
   }
 
   get focused () {
-    return isActiveElement(this._input)
+    // either the input has focus, or the calendar is open, in which case
+    // it has focus
+    return isActiveElement(this._input) || this.state.showCalendar
   }
 
   get value () {

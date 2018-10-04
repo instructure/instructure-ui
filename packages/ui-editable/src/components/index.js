@@ -1,7 +1,7 @@
 /*
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 - present Instructure, Inc.
+ * Copyright (c) 2018 - present Instructure, Inc.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,67 +22,5 @@
  * SOFTWARE.
  */
 
-.root {
-  font-family: var(--fontFamily);
-  box-sizing: border-box;
-}
-
-.column {
-  flex-direction: column;
-}
-
-.column-reverse {
-  flex-direction: column-reverse;
-}
-
-.row {
-  flex-direction: row;
-}
-
-.row-reverse {
-  flex-direction: row-reverse;
-}
-
-.wrapItems {
-  flex-wrap: wrap;
-}
-
-.justifyItems--start {
-  justify-content: flex-start;
-}
-
-.justifyItems--end {
-  justify-content: flex-end;
-}
-
-.justifyItems--center {
-  justify-content: center;
-}
-
-.justifyItems--space-around {
-  justify-content: space-around;
-}
-
-.justifyItems--space-between {
-  justify-content: space-between;
-}
-
-.alignItems--center {
-  align-items: center;
-}
-
-.alignItems--start {
-  align-items: flex-start;
-}
-
-.alignItems--end {
-  align-items: flex-end;
-}
-
-.alignItems--stretch {
-  align-items: stretch;
-}
-
-.visualDebug {
-  outline: 0.0625rem dashed var(--debugOutlineColor);
-}
+export Editable from './Editable'
+export InPlaceEdit from './InPlaceEdit'

@@ -484,5 +484,31 @@ Otherwise, set '${handlerName}'.`
     'nwse-resize',
     'zoom-in',
     'zoom-out',
-  ])
+  ]),
+
+   /**
+   * Verify that either value is provided as a prop if as="input", and children
+   * if provided otherwise
+   *
+   * ```js
+   *  class Foo extends Component {
+   *    static propTypes = {
+   *      children: CustomPropTypes.childrenOrValue,
+   *      value: CustomPropTypes.childrenOrValue
+   *    }
+   *  ...
+   * ```
+   */
+  childrenOrValue (props, propName, componentName) {
+    if (props.as === 'input') {
+      if ((propName === 'children' && props.children) || props.value == undefined) { // eslint-disable-line no-undefined
+        return new Error(`Prop \`value\` and not \`children\` must be supplied if \`${componentName} as="input"\``)
+      }
+    } else {
+      if ((propName === 'value' && props.value != undefined) || !props.children) {  // eslint-disable-line no-undefined
+        return new Error(`Prop \`children\` and not \`value\` must be supplied unless \`${componentName} as="input"\``)
+      }
+    }
+    return
+  }
 }

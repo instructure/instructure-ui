@@ -188,6 +188,11 @@ class DateTimeInput extends Component {
     * The <input> element where the time is entered.
     **/
     timeInputRef: PropTypes.func,
+    /**
+     * onBlur event handler for when focus leaves DateTimeInput.
+     * Does not fire when focus moves between DateInput and TimeInput within the component
+     */
+    onBlur: PropTypes.func,
   }
 
   static defaultProps = {
@@ -320,6 +325,16 @@ class DateTimeInput extends Component {
       this.setState({
         message: this.getErrorMessage(),
       })
+    }
+    // when TABbing from the DateInput to TimeInput or visa-versa, the blur
+    // happens on the target before the relatedTarget gets focus.
+    // The timeout gives it a moment for that to happen
+    if(typeof this.props.onBlur === 'function') {
+      window.setTimeout(() => {
+        if ( !this.focused ) {
+          this.props.onBlur(e)
+        }
+      }, 0)
     }
   }
 

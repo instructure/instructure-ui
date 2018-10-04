@@ -38,6 +38,8 @@ import { default as Icons } from '@instructure/ui-icons'
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
+import {now, parse, isValid, browserTimeZone, toLocaleString} from '@instructure/ui-i18n/lib/DateTime'
+
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import iconExample from '!svg-inline-loader!./heart_lg.svg'
 import avatarSquare from './avatarSquare.jpg'
@@ -51,6 +53,9 @@ const globals = {
   locales: moment.locales(),
   avatarSquare,
   avatarPortrait,
+  DateTime: {
+    now, parse, isValid, browserTimeZone, toLocaleString
+  },
   iconExample,
   lorem: {
     sentence () {

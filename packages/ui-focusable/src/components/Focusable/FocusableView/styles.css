@@ -39,7 +39,7 @@
   direction: inherit;
   margin: 0;
   text-decoration: none; /* for links styled as buttons */
-  text-align: center;
+  text-align: inherit;
   user-select: none;
   touch-action: manipulation;
   background: transparent;

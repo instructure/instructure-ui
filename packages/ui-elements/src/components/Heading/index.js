@@ -49,7 +49,7 @@ category: components
 export default class Heading extends Component {
    static propTypes = {
      border: PropTypes.oneOf(['none', 'top', 'bottom']),
-     children: PropTypes.node.isRequired,
+     children: CustomPropTypes.childrenOrValue,
      color: deprecatePropValues(
        PropTypes.oneOf([
          'primary',

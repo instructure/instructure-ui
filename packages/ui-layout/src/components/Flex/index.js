@@ -57,7 +57,7 @@ export default class Flex extends Component {
     /**
     * Sets the flex-direction to row (horizontal) or column (vertical)
     */
-    direction: PropTypes.oneOf(['row', 'column']),
+    direction: PropTypes.oneOf(['row', 'column', 'row-reverse', 'column-reverse']),
     /**
     * Sets the height of the component's container (optional)
     */
@@ -104,7 +104,7 @@ export default class Flex extends Component {
         return safeCloneElement(child, {
           visualDebug: this.props.visualDebug,
           ...child.props, /* child visualDebug prop should override parent */
-          direction: this.props.direction
+          direction: this.props.direction.replace(/-reverse/, '')
         })
       } else {
         return null
@@ -135,12 +135,11 @@ export default class Flex extends Component {
 
     // When flex direction is row, 'center' is the most useful default because it
     // vertically aligns FlexItems. For column direction, though, we want 'stretch'.
-    const alignItems = this.props.alignItems || (direction === 'column' ? 'stretch' : 'center')
+    const alignItems = this.props.alignItems || (direction === 'column' || direction === 'column-reverse' ? 'stretch' : 'center')
 
     const classes = {
       [styles.root]: true,
       [styles.visualDebug]: visualDebug,
-      [styles.column]: direction === 'column',
       [styles[`justifyItems--${justifyItems}`]]: true,
       [styles[`alignItems--${alignItems}`]]: true,
       [styles.wrapItems]: wrapItems
@@ -150,7 +149,7 @@ export default class Flex extends Component {
       return (
         <View
           {...props}
-          className={classnames(classes)}
+          className={classnames(classes, styles[direction])}
           as={as}
           display={inline ? 'inline-flex' : 'flex'}
           width={width}

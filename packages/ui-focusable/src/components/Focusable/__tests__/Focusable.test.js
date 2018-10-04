@@ -44,27 +44,32 @@ describe('<Focusable />', async () => {
   it('should call children function with focused when element receives focus', async () => {
     const renderSpy = spy()
 
-    await mount(
-      <Focusable>
-        {(args) => {
-          renderSpy(args)
-          return <button>foo</button>
-        }}
-      </Focusable>
+    const subject = await mount(
+      <div>
+        <Focusable>
+          {(args) => {
+            renderSpy(args)
+            return <button type="button">foo</button>
+          }}
+        </Focusable>
+        <input type="text" id="input" />
+      </div>
     )
 
     const focusable = await find(':focusable')
 
-    expect(lastCall(renderSpy).focused).to.equal(false)
+    expect(lastCall(renderSpy).focused).to.be.false()
     expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
-    expect(lastCall(renderSpy).focusVisible).to.equal(false)
+    expect(lastCall(renderSpy).focusVisible).to.be.false()
 
     await focusable.keyDown() // make sure we're back in keyboard mode
     await focusable.focus()
 
-    expect(lastCall(renderSpy).focused).to.equal(true)
+    expect(focusable.focused()).to.be.true()
+    expect(lastCall(renderSpy).focused).to.be.true()
     expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
-    expect(lastCall(renderSpy).focusVisible).to.equal(true)
+
+    expect(lastCall(renderSpy).focusVisible).to.be.true()
 
     await focusable.blur()
 

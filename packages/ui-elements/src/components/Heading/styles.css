@@ -7,6 +7,30 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* stylelint-disable-next-line selector-max-type */
+input.root[type] {
+  outline: 0;
+  appearance: none;
+  box-sizing: border-box;
+  background: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  margin: -6px 0 0 0;   /* stylelint-disable-line unit-blacklist */
+  color: inherit;
+  height: auto;
+  width: 100%;
+  line-height: inherit;
+  text-align: start;
+  box-shadow: none;
+  display: block;
+
+  /* stylelint-disable-next-line selector-max-type */
+  &:focus {
+    outline: none;
+  }
+}
+
 .h1 {
   font-size: var(--h1FontSize);
   font-weight: var(--h1FontWeight);
