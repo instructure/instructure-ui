@@ -39,6 +39,8 @@ export default function generator ({ typography, colors, borders, spacing, shado
     borderColorInverse: 'transparent',
     debugOutlineColor: colors.borderDebug,
 
+    backgroundLight: colors.porcelain,
+
     borderStyle: borders.style,
 
     arrowSize: '0.5rem',

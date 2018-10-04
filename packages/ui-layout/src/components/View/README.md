@@ -55,6 +55,17 @@ example: true
     margin="small"
     padding="small"
     textAlign="center"
+    background="light"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    textAlign="center"
     background="inverse"
   >
     {lorem.sentence()}

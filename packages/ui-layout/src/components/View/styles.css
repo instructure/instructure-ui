@@ -56,6 +56,11 @@
   background: var(--backgroundInverse);
 }
 
+.background--light {
+  color: var(--color);
+  background: var(--backgroundLight);
+}
+
 .size--x-small {
   max-width: var(--xSmallMaxWidth);
 }

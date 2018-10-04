@@ -37,6 +37,10 @@ describe('View.theme', () => {
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.backgroundInverse, variables.colorInverse)).to.be.above(3)
     })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundLight, variables.color)).to.be.above(3)
+    })
   })
 
   describe('with the high contrast canvas theme', () => {
@@ -48,6 +52,10 @@ describe('View.theme', () => {
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.backgroundInverse, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundLight, variables.color)).to.be.above(4.5)
     })
   })
 })

@@ -109,7 +109,7 @@ class View extends Component {
     /**
     * Designates the background style of the `<View />`
     */
-    background: PropTypes.oneOf(['default', 'inverse', 'transparent']),
+    background: PropTypes.oneOf(['default', 'inverse', 'light', 'transparent']),
 
     /**
     * Controls the shadow depth for the `<View />`
