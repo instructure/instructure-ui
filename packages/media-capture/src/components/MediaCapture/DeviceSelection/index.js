@@ -28,6 +28,7 @@ import IconMicSolid from '@instructure/ui-icons/lib/Solid/IconMic'
 import IconVideoSolid from '@instructure/ui-icons/lib/Solid/IconVideo'
 import Menu, { MenuItem, MenuItemGroup } from '@instructure/ui-menu/lib/components/Menu'
 import themeable from '@instructure/ui-themeable'
+import keycode from 'keycode'
 
 import { translate } from '../../../constants/translated/translations'
 import styles from './styles.css'
@@ -111,10 +112,17 @@ class DeviceSelection extends Component {
     })
   }
 
+  handleKeyDown = e => {
+    if (e.keyCode === keycode.codes.esc) {
+      e.stopPropagation()
+    }
+  }
+
   render () {
     return (
       <Menu
         placement="bottom"
+        onKeyDown={this.handleKeyDown}
         trigger={
           <Button variant="light" margin="0 large 0" icon={this.state.icon}>
             {this.state.label}
