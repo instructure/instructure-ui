@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -43,6 +44,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class CloseButton extends Component {
   static propTypes = {

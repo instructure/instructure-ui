@@ -21,19 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React from 'react'
-import { mount, expect } from '@instructure/ui-test-utils'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
-import CloseButton from '../index'
-import CloseButtonLocator from '../locator'
-
-describe('<CloseButton />', async () => {
-  it('should render with x icon', async () => {
-    await mount(
-      <CloseButton>Close</CloseButton>
-    )
-    const iconX = await CloseButtonLocator.find( { tag: 'svg', attribute: 'name'} )
-    expect(iconX.getAttribute('name')).to.equal('IconX')
-  })
-})
+import { locator  } from '@instructure/ui-test-utils'
+import CloseButton from './index'
+export default locator(CloseButton.displayName)

@@ -26,10 +26,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
@@ -62,6 +63,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 class Button extends Component {
   static propTypes = {
@@ -236,6 +238,17 @@ class Button extends Component {
         })
       }
     }
+
+    // warn for unallowed view props
+    const Component = Button
+    const allowedProps = pickProps(pickProps(this.props, View.propTypes), Component.propTypes)
+    const viewProps = omitProps(pickProps(this.props, View.propTypes), allowedProps)
+    Object.keys(viewProps).forEach((prop) => {
+      warning(
+        (allowedProps[prop]),
+        `View prop ${prop} is not allowed on ${Component.displayName}`
+      )
+    })
 
     return (
       <View
