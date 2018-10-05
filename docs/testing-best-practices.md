@@ -62,8 +62,8 @@ it('does what it is supposed to do', async () => {
 import { mount, expect } from '@instructure/ui-test-utils'
 
 it('does what it is supposed to do', async () => {
-  const subject = await mount(<Component />)
-  // await subject.find
+  await mount(<Component />)
+  // await ComponentFixture.find
 })
 ```
 
@@ -72,14 +72,14 @@ import { mount, expect } from '@instructure/ui-test-utils'
 
 // good
 it('does what it is supposed to do', async () => {
-  const subject = await mount(<Component/>)
-  // await subject.findAll
+  await mount(<Component/>)
+  // await ComponentFixture.findAll
 })
 
 // bad (finds based on source order)
 it('does what it is supposed to do', async () => {
-  const subject = await mount(<Component />)
-
+  await mount(<Component />)
+  // await ComponentFixture.findAll
 })
 ```
 
@@ -87,14 +87,14 @@ it('does what it is supposed to do', async () => {
 import { mount, expect } from '@instructure/ui-test-utils'
 
 it('does what it is supposed to do', async () => {
-  const subject = await mount(<Component />)
+  await mount(<Component />)
   // await find
 })
 ```
 
 ```js
 it('does what it is supposed to do', async () => {
-  const subject = await mount(<Component />)
+  await mount(<Component />)
   // await findInFrame
 })
 ```
@@ -126,15 +126,17 @@ timeout: 1900
 ### DOM assertions
 
 ```js
-const subject = await mount(<Component />)
+await mount(<Component />)
+
+const component = await ComponentFixture.find()
 
 // assert that node exists (doesn't throw an Error)
-expect(subject).to.exist()
+expect(component).to.exist()
 
 // assert that node doesn't exist (throws an Error)
-expect(subject).to.not.exist()
+expect(component).to.not.exist()
 
-expect(subject.find('input')).to.not.exist()
+expect(component.find('input')).to.not.exist()
 ```
 
 TODO add getDOMNode/chai-dom examples
@@ -220,8 +222,9 @@ TODO
 import { mount, expect } from '@instructure/ui-test-utils'
 
 it('should meet a11y standards', async (done) => {
-  const subject = await mount(<Component />)
-  expect(await subject.accessible()).to.be.true()
+  await mount(<Component />)
+  const component = await ComponentFixture.find()
+  expect(await component.accessible()).to.be.true()
 })
 ```
 

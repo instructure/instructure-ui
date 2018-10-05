@@ -26,15 +26,19 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from '../index'
+import ${COMPONENT}ViewFixture from '../fixture'
 
 describe('<${COMPONENT}View />', async () => {
   it('should render', async () => {
-    const subject = await mount(<${COMPONENT}View />)
-    expect(subject).to.exist()
+    await mount(<${COMPONENT}View />)
+    const component = ${COMPONENT}ViewFixture.find()
+    expect(component).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<${COMPONENT}View />)
-    expect(await subject.accessible()).to.be.true()
+    await mount(<${COMPONENT}View />)
+    const component = ${COMPONENT}ViewFixture.find()
+
+    expect(await component.accessible()).to.be.true()
   })
 })

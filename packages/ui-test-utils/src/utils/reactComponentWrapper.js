@@ -25,8 +25,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import { bindElementToUtilities } from './bindElementToUtilities'
-
 class ReactComponentWrapper {
   mount (element, options = {}) {
     this.unmount()
@@ -39,7 +37,7 @@ class ReactComponentWrapper {
     document.body.appendChild(this._mountNode)
 
     return new Promise((resolve, reject) => {
-      let wrapper
+      let wrapper, resolved
       try {
         ReactDOM.render(
           React.createElement(Wrapper, {
@@ -47,24 +45,20 @@ class ReactComponentWrapper {
             props: { ...props, ...options.props },
             context: options.context,
             ref: (el) => {
-              if (el && typeof wrapper === 'undefined') {
-                const DOMNode = el.getDOMNode()
-                const utils = (DOMNode instanceof Element) ?
-                  bindElementToUtilities(DOMNode, options.customMethods) : {}
-
-                wrapper = el
+              wrapper = el
+              if (wrapper && !resolved) {
                 resolve({
-                  setProps (newProps, callback) {
-                    wrapper.setChildProps(newProps, callback)
+                  setProps (newProps) {
+                    return wrapper.setChildProps(newProps)
                   },
-                  setContext (newContext, callback)  {
-                    wrapper.setChildContext(newContext, callback)
+                  setContext (newContext)  {
+                    return wrapper.setChildContext(newContext)
                   },
                   getDOMNode () {
                     return wrapper.getDOMNode()
-                  },
-                  ...utils
+                  }
                 })
+                resolved = true
               }
               if (typeof ref === 'function') {
                 ref(el)
@@ -96,7 +90,7 @@ function createMountWrapper (element, options = {}) {
     }
 
     static defaultProps = {
-      context: null
+      context: {}
     }
 
     constructor (...args) {
@@ -105,7 +99,7 @@ function createMountWrapper (element, options = {}) {
       this.state = {
         mount: true,
         props,
-        context,
+        context
       }
     }
 
@@ -113,16 +107,16 @@ function createMountWrapper (element, options = {}) {
       return ReactDOM.findDOMNode(this)
     }
 
-    setChildProps (newProps, callback) {
+    setChildProps (newProps) {
       const { props: oldProps } = this.state
       const props = { ...oldProps, ...newProps }
-      this.setState({ props }, callback)
+      return new Promise(resolve => this.setState({ props }, resolve))
     }
 
-    setChildContext (newContext, callback) {
+    setChildContext (newContext) {
       const { context: oldContext } = this.state
       const context = { ...oldContext, ...newContext }
-      this.setState({ context }, callback)
+      return new Promise(resolve => this.setState({ context }, resolve))
     }
 
     render () {
@@ -142,13 +136,12 @@ function createMountWrapper (element, options = {}) {
     }
   }
 
-  if (options.context && (element.type.contextTypes || options.childContextTypes)) {
+  if (element.type.contextTypes) {
     const childContextTypes = {
-      ...element.type.contextTypes,
-      ...options.childContextTypes,
+      ...element.type.contextTypes
     }
 
-    WrapperComponent.prototype.getChildContext = function getChildContext() {
+    WrapperComponent.prototype.getChildContext = function getChildContext () {
       return this.state.context
     }
     WrapperComponent.childContextTypes = childContextTypes

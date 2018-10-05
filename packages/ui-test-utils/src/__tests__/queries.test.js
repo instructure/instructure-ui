@@ -45,7 +45,7 @@ describe('find, findAll', () => {
   })
 
   it('works with SVG elements', async () => {
-    const subject = await mount(
+    await mount(
       <svg>
         <title>Close</title>
         <g>
@@ -54,7 +54,7 @@ describe('find, findAll', () => {
       </svg>
     )
 
-    expect(await subject.findAll({ title: 'Close', visible: false })).to.have.length(1)
+    expect(await findAll({ title: 'Close', visible: false })).to.have.length(1)
   })
 
   describe('by text', () => {

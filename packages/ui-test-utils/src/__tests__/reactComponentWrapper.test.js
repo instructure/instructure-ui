@@ -22,12 +22,17 @@
  * SOFTWARE.
  */
 import React from 'react'
+import PropTypes from 'prop-types'
 import ReactComponentWrapper from '../utils/reactComponentWrapper'
 
 import { expect, stub } from '../index'
 
 class Component extends React.Component {
   static displayName = 'Component'
+
+  static contextTypes = {
+    foo: PropTypes.string
+  }
 
   test (cb) {
     cb('test')
@@ -56,5 +61,64 @@ describe('reactComponentWrapper', async () => {
       <Component componentRef={(el) => {component = el}} />
     )
     expect(component.props.componentRef).to.not.exist()
+  })
+
+  describe('options', async () => {
+    it('should support setting props', async () => {
+      let component
+      await ReactComponentWrapper.mount(
+        <Component componentRef={(el) => {component = el}} />,
+        {
+          props: {
+            foo: 'bar'
+          }
+        }
+      )
+
+      expect(component.props.foo).to.equal('bar')
+    })
+    it('should support setting context', async () => {
+      let component
+      await ReactComponentWrapper.mount(
+        <Component componentRef={(el) => {component = el}} />,
+        {
+          context: {
+            foo: 'bar'
+          }
+        }
+      )
+
+      expect(component.context.foo).to.equal('bar')
+    })
+  })
+
+  describe('#setProps', async () => {
+    it('should support setting props', async () => {
+      let component
+      const subject = await ReactComponentWrapper.mount(
+        <Component componentRef={(el) => {component = el}} />
+      )
+
+      await subject.setProps({
+        foo: 'bar'
+      })
+
+      expect(component.props.foo).to.equal('bar')
+    })
+  })
+
+  describe('#setContext', async () => {
+    it('should support setting context', async () => {
+      let component
+      const subject = await ReactComponentWrapper.mount(
+        <Component componentRef={(el) => {component = el}} />
+      )
+
+      await subject.setContext({
+        foo: 'bar'
+      })
+
+      expect(component.context.foo).to.equal('bar')
+    })
   })
 })
