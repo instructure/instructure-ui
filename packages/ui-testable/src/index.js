@@ -37,8 +37,8 @@ function testable () {
         if (ComposedComponent.prototype.componentDidMount) {
           ComposedComponent.prototype.componentDidMount.call(this)
         }
-        // Use this._portalContentNode for components that render as non-native Portals...
-        const rootNode = findDOMNode(this) || this._portalContentNode
+        // Use this.DOMNode for components that render as non-native Portals...
+        const rootNode = findDOMNode(this) || this.DOMNode
 
         if (rootNode) {
           rootNode.setAttribute(TESTABLE_ATTRIBUTE, displayName)

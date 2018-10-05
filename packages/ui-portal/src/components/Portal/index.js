@@ -108,7 +108,7 @@ export default class Portal extends Component {
   }
 
   renderPortal (props) {
-    const isInitialMount = !this._portalContentNode
+    const isInitialMount = !this.DOMNode
     const mountNode = this.mountNode
 
     let children = props.children
@@ -125,17 +125,17 @@ export default class Portal extends Component {
     // Render subtree if Portal is open and has children to render
     if (props.open && React.Children.count(children) > 0) {
       // Create node if it doesn't already exist
-      if (!this._portalContentNode) {
-        this._portalContentNode = document.createElement('span')
-        this._portalContentNode.setAttribute('dir', this.dir)
+      if (!this.DOMNode) {
+        this.DOMNode = document.createElement('span')
+        this.DOMNode.setAttribute('dir', this.dir)
       }
 
       // Append node to container if it isn't already
-      if (this._portalContentNode.parentNode !== mountNode) {
+      if (this.DOMNode.parentNode !== mountNode) {
         if (this.props.insertAt === 'bottom') {
-          mountNode.appendChild(this._portalContentNode)
+          mountNode.appendChild(this.DOMNode)
         } else {
-          mountNode.insertBefore(this._portalContentNode, mountNode.firstChild)
+          mountNode.insertBefore(this.DOMNode, mountNode.firstChild)
         }
       }
 
@@ -143,11 +143,11 @@ export default class Portal extends Component {
       const handleMount = () => {
         // Only fire onOpen if Portal was closed and is now open
         if ((isInitialMount || (!this.props.open && props.open)) && typeof props.onOpen === 'function') {
-          props.onOpen(this._portalContentNode)
+          props.onOpen(this.DOMNode)
         }
       }
 
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, children, this._portalContentNode, handleMount)
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, children, this.DOMNode, handleMount)
     } else {
       this.removePortal(props)
     }
@@ -156,10 +156,10 @@ export default class Portal extends Component {
   removePortal (props) {
     let unmounted
 
-    if (this._portalContentNode) {
-      unmounted = ReactDOM.unmountComponentAtNode(this._portalContentNode)
-      this._portalContentNode.parentNode && this._portalContentNode.parentNode.removeChild(this._portalContentNode)
-      this._portalContentNode = null
+    if (this.DOMNode) {
+      unmounted = ReactDOM.unmountComponentAtNode(this.DOMNode)
+      this.DOMNode.parentNode && this.DOMNode.parentNode.removeChild(this.DOMNode)
+      this.DOMNode = null
     }
 
     if (unmounted && typeof props.onClose === 'function') {
@@ -183,7 +183,16 @@ export default class Portal extends Component {
     return mountNode
   }
 
+  get DOMNode () {
+    return this._node
+  }
+
+  set DOMNode (el) {
+    this._node = el
+  }
+
+  // for backwards compatibility:
   get node () {
-    return this._portalContentNode
+    return this.DOMNode
   }
 }

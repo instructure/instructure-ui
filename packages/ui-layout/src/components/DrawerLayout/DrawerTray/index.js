@@ -201,11 +201,20 @@ class DrawerTray extends Component {
   }
 
   handlePortalOpen = (DOMNode) => {
+    this.DOMNode = DOMNode
     // We apply the theme here because now we have a DOM node (provided by Portal)
-    this.applyTheme(DOMNode)
+    DOMNode && this.applyTheme(DOMNode)
     this.setState({
       portalOpen: true
     })
+  }
+
+  get DOMNode () {
+    return this._DOMNode
+  }
+
+  set DOMNode (el) {
+    this._DOMNode = el
   }
 
   renderContent () {

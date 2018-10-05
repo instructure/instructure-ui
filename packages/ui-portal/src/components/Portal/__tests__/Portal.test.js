@@ -52,7 +52,8 @@ describe('<Portal />', async () => {
         Hello World
       </Portal>
     )
-    expect(onOpen).to.have.been.called()
+    const portal = await PortalFixture.find({ contains: 'Hello World' })
+    expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
   })
 
   it('should support onClose prop', async () => {
@@ -68,6 +69,17 @@ describe('<Portal />', async () => {
     subject.setProps({ open: false })
 
     expect(onClose).to.have.been.called()
+  })
+
+  it('should add a dir attribute to the root DOM node', async () => {
+    const onOpen = stub()
+    await mount(
+      <Portal open onOpen={onOpen}>
+        Hello World
+      </Portal>
+    )
+    const portal = await PortalFixture.find({ contains: 'Hello World' })
+    expect(portal.getAttribute('dir')).to.equal('ltr')
   })
 
   it('should not render if children are empty', async () => {

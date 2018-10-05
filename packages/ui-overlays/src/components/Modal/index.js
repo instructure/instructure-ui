@@ -254,8 +254,17 @@ export default class Modal extends Component {
     return Browser.msie && Browser.version > 10
   }
 
+  get DOMNode () {
+    return this._DOMNode
+  }
+
+  set DOMNode (el) {
+    this._DOMNode = el
+  }
+
   handlePortalOpen = (DOMNode) => {
-    this.applyTheme(DOMNode)
+    this.DOMNode = DOMNode
+    DOMNode && this.applyTheme(DOMNode)
     this._timeouts.push(
       setTimeout(() => {
         if (this._isMounted) {

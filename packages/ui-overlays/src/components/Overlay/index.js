@@ -198,7 +198,17 @@ class Overlay extends Component {
     this._timeouts.forEach(timeout => clearTimeout(timeout))
   }
 
-  handlePortalOpen = () => {
+  get DOMNode () {
+    return this._DOMNode
+  }
+
+  set DOMNode (el) {
+    this._DOMNode = el
+  }
+
+  handlePortalOpen = (DOMNode) => {
+    this.DOMNode = DOMNode
+
     this._timeouts.push(
       setTimeout(() => {
         if (this._isMounted) {
