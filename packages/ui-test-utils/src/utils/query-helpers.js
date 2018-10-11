@@ -50,6 +50,7 @@ function parseQueryArguments () {
     regexp: false,
     trim: true,
     collapseWhitespace: true,
+    ignore: 'script, style',
     visible: true,
     timeout: 1900
   }

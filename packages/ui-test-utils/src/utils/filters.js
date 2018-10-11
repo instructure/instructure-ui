@@ -74,12 +74,16 @@ function filterByTitle (container, results, title, options) {
 }
 
 function filterByContents (container, results, elementOrString, options) {
+  const { ignore } = options
   return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => !ignore || !element.matches(ignore))
     .filter(element => matchElementByContents(element, elementOrString, options))
 }
 
 function filterByText (container, results, text, options) {
+  const { ignore } = options
   return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => !ignore || !element.matches(ignore))
     .filter(element => matchElementByText(element, text, options))
 }
 
@@ -87,19 +91,22 @@ function filterByLabelText (container, results, text, options = {}) {
   // aria-labelledby may not refer to a label element, so we get elements with ids too
   const matches = queryAllBySelector(container, 'label, [id]')
     .filter(label => matchElementByContents(label, text, options))
-    .map((label) => {
+    .reduce((labelledElements, label) => {
+      let elements
+
       if (label.getAttribute('for')) {
         // <label for="someId">text</label><input id="someId" />
-        return queryBySelector(container, `[id="${label.getAttribute('for')}"]`)
+        elements = [queryBySelector(container, `[id="${label.getAttribute('for')}"]`)]
       } else if (label.getAttribute('id')) {
         // <label id="someId">text</label><input aria-labelledby="someId" />
-        return queryBySelector(container, `[aria-labelledby~="${label.getAttribute('id')}"]`)
+        // Note: this could be multiple elements...
+        elements = [queryBySelector(container, `[aria-labelledby~="${label.getAttribute('id')}"]`)]
       } else if (label.childNodes.length) {
         // <label>text: <input /></label>
-        return queryBySelector(label, 'input')
+        elements = [queryBySelector(label, 'input')]
       }
-      return null
-    })
+      return labelledElements.concat(elements)
+    }, [])
     .filter(element => element !== null)
     // <button aria-label="text">text</button>
     .concat(

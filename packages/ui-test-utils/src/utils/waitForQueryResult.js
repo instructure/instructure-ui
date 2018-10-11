@@ -28,13 +28,22 @@ import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
 export function waitForQueryResult (
   query,
   {
-    element = document.body,
+    element,
     timeout = 1900,
     expectEmpty = false,
     mutationObserverOptions = {subtree: true, childList: true},
     message = ''
   } = {},
 ) {
+  if (typeof element === 'undefined') {
+    if (typeof document === 'undefined') {
+     throw new Error('Could not find a valid HtmlElement for query.')
+    } else {
+     // eslint-disable-next-line no-param-reassign
+     element = document.body
+    }
+  }
+
   return new Promise((resolve, reject) => {
     // Disabling eslint prefer-const below: either prefer-const or no-use-before-define triggers.
     let lastError, observer, timer // eslint-disable-line prefer-const

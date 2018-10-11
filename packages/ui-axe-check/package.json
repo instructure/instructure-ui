@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "axe-core": "^3.1.1"
+    "axe-core": "^3.1.2"
   },
   "devDependencies": {
     "@instructure/ui-presets": "^5"
