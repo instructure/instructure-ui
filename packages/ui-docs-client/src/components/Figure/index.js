@@ -71,6 +71,8 @@ export default class Figure extends Component {
       return IconNo
     } else if (this.props.recommendation === 'a11y') {
       return IconA11y
+    } else {
+      return null
     }
   }
 

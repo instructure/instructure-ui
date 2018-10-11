@@ -69,7 +69,7 @@ function lex (text) {
 
   chars.forEach((char, i) => {
     switch (char) {
-      case '{': // eslint-disable-line no-case-declarations
+      case '{': {
         if (!node.rules) {
           node.rules = []
         }
@@ -82,12 +82,15 @@ function lex (text) {
         }
         parent.rules.push(node)
         break
-      case '}':
+      }
+      case '}': {
         node.end = i + 1
         node = node.parent || rootNode
         break
-      default:
+      }
+      default: {
         break
+      }
     }
   })
   return rootNode

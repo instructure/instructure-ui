@@ -128,16 +128,19 @@ describe('find, findAll', () => {
 
   describe('by label', () => {
     it('can find an input with an aria-labelledby attribute', async () => {
+      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label">Name</label>
           <input aria-labelledby="name-label" id="name-id" />
         </div>
       )
+      /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll({ label: 'Name' })).to.have.length(1)
     })
 
     it('can find an input with a complex aria-labelledby attribute', async () => {
+      /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
         <div>
           <label id="name-label-one">Name</label>
@@ -145,6 +148,7 @@ describe('find, findAll', () => {
           <input aria-labelledby="name-label-one name-label-two" id="name-id" />
         </div>
       )
+      /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll({ label: 'Name' })).to.have.length(1)
       expect(await findAll({ label: '(Last, First)' })).to.have.length(1)
     })
@@ -182,12 +186,14 @@ describe('find, findAll', () => {
     })
 
     it('handles a label with no form control', async () => {
+      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label>First name</label>)
       expect(await find({ label: /name/, expectEmpty: true }))
         .to.be.null()
     })
 
     it('handles a totally empty label', async () => {
+      // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label />)
       expect(await find({ label: ' ', expectEmpty: true }))
         .to.be.null()
