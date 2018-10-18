@@ -223,7 +223,7 @@ export default class DateInput extends Component {
     if (isUpdated) {
       this.setState((prevState) => {
         const value = valueChanged
-          ? (nextProps.dateValue || nextProps.defaultDateValue || undefined) // eslint-disable-line no-undefined
+          ? (nextProps.dateValue != null ? nextProps.dateValue : (nextProps.defaultDateValue || undefined)) // eslint-disable-line no-undefined
           : prevState.acceptedValue
         const locale = nextProps.locale || this.locale
         const timezone = nextProps.timezone || this.timezone

@@ -61,7 +61,10 @@ describe('<DateInput />', () => {
       dateValue: '2017-05-01'
     })
 
-    subject.find('input').setValue('')
+    expect(getInputValue(subject)).to.equal('May 1, 2017')
+
+    subject.setProps({dateValue: ''})
+
     expect(getInputValue(subject)).to.equal('')
   })
 
