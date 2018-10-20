@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
+import { prettyDOM } from 'dom-testing-library'
 
 import { bindElementToUtilities } from './bindElementToUtilities'
 import { waitForQueryResult } from './waitForQueryResult'
@@ -126,6 +126,9 @@ function querySelectorAll (element, selector, options) {
   }
 
   if (typeof tag === 'string') {
+    if (tag === 'span' || tag === 'div') {
+      throw new Error('[ui-test-utils] Element queries should only use semantic tags (not `div` or `span`).')
+    }
     result = filterBySelector(element, result, tag, options)
   }
 

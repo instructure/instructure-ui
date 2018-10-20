@@ -35,6 +35,7 @@ module.exports = {
       .filter(part => part !== '__tests__')
       .filter(part => part !== '__testfixtures__')
       .filter(part => part !== '__examples__')
+      .filter(part => part !== '__fixtures__')
       .filter(part => part !== '__examplefixtures__')
     return directories.pop()
   }

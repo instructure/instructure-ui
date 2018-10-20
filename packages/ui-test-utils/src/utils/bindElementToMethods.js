@@ -28,10 +28,10 @@ export function bindElementToMethods (element, methods) {
         bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
         return bound
       } else {
-        throw Error(`[ui-test-utils] cannot bind to a non-function of type ${typeof fn}`, key)
+        throw new Error(`[ui-test-utils] cannot bind to a non-function of type ${typeof fn}`, key)
       }
     }, {})
   } else {
-    console.warn('[ui-test-utils] could not bind methods to invalid HTMLElement')
+    console.warn('[ui-test-utils] could not bind methods to invalid Element')
   }
 }

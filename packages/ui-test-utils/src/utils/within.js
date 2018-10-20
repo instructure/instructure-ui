@@ -21,46 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { bindElementToUtilities } from './bindElementToUtilities'
 
-import { Component } from 'react'
-import PropTypes from 'prop-types'
-
-/**
----
-category: components
----
-**/
-class ${COMPONENT} extends Component {
-  static propTypes = {
-    /**
-     * @param {Object} renderProps
-     * @param {Function} renderProps.getViewProps - Props to be spread onto the view element
-     */
-    children: PropTypes.func,
-    /**
-     * Identical to children
-     */
-    render: PropTypes.func,
-  }
-
-  render () {
-    const { children, render = children } = this.props
-
-    if (typeof render === 'function') {
-      return render({
-        getViewProps: (props) => {
-          return {
-            /* component specific view props go here */
-            /* consumers can override them by passing in an overrides object */
-            ...props
-          }
-        }
-      })
-    } else {
-     return null
-    }
+export async function within (container, ...args) {
+  if (container instanceof Element) {
+    return Promise.resolve(bindElementToUtilities(container, ...args))
+  } else if (container && typeof container.find === 'function') {
+    return container.find(...args)
   }
 }
 
-export default ${COMPONENT}
-export { default as ${COMPONENT}View } from './${COMPONENT}View'
+export async function withinEach (container, ...args) {
+  if (Array.isArray(container)) {
+    return Promise.resolve(container.map(element => bindElementToUtilities(container, ...args)))
+  } else if (container && typeof container.findAll === 'function') {
+    return container.findAll(...args)
+  }
+}

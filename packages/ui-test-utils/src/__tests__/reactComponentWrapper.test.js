@@ -30,6 +30,10 @@ import { expect, stub } from '../index'
 class Component extends React.Component {
   static displayName = 'Component'
 
+  static propTypes = {
+    foo: PropTypes.string
+  }
+
   static contextTypes = {
     foo: PropTypes.string
   }
@@ -39,11 +43,20 @@ class Component extends React.Component {
   }
 
   render () {
-    return <div>Hello World</div>
+    const { foo } = this.props
+    return foo === 'baz' ? null : <div>Hello World</div>
   }
 }
 
 describe('reactComponentWrapper', async () => {
+  it('should handle components that render `null`', async () => {
+    const subject = await ReactComponentWrapper.mount(
+      <Component foo="baz" />
+    )
+
+    expect(subject.getDOMNode()).to.equal(null)
+  })
+
   it('should allow a componentRef to be passed via props', async () => {
     let component
     await ReactComponentWrapper.mount(

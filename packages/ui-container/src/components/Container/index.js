@@ -38,7 +38,7 @@ import theme from './theme'
 
 /**
 ---
-category: components/layout
+category: components
 ---
 **/
 @themeable(theme, styles)

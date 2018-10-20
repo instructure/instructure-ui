@@ -39,7 +39,7 @@ const TranslationsPropType = PropTypes.shape(TranslationPropTypes)
 
 /**
 ---
-category: components/media
+category: components
 experimental: true
 ---
 **/

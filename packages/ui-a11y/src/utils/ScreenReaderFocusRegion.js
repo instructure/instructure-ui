@@ -56,7 +56,7 @@ export default class ScreenReaderFocusRegion {
   }
 
   muteNode (node) {
-    if (node) {
+    if (node && !(node instanceof HTMLScriptElement)) {
       // When we are trapping screen reader focus on an element that
       // is deep inside the DOM, we can't apply aria-hidden to the
       // parents, so parent regions will be read if they have a role
@@ -84,6 +84,7 @@ export default class ScreenReaderFocusRegion {
     if (
       node &&
       node.nodeType === 1 &&
+      !(node instanceof HTMLScriptElement) &&
       node.getAttribute('aria-hidden') !== 'true' &&
       this._parents.indexOf(node) === -1 &&
       this._nodes.indexOf(node) === -1 &&

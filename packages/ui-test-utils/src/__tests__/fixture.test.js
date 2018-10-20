@@ -22,20 +22,27 @@
  * SOFTWARE.
  */
 import React from 'react'
+import PropTypes from 'prop-types'
 import testable from '@instructure/ui-testable'
 
 import { querySelectorAll, findAllByQuery, mount, expect, fixture } from '../index'
 
 @testable()
 class Component extends React.Component {
+  static propTypes = {
+    hide: PropTypes.bool
+  }
+  static defaultProps = {
+    hide: false
+  }
   static displayName = 'Component'
   render () {
-    return (
+    return !this.props.hide ? (
       <div id="componentRoot">
         <input type="text"/>
         <input type="password" />
       </div>
-    )
+    ) : null
   }
 }
 
@@ -49,6 +56,10 @@ ComponentFixture.findAllInputs = async (...args) => {
 }
 
 describe('@testable, fixture', async () => {
+  it('should handle components that render `null`', async () => {
+    await mount(<Component hide />)
+    expect(await ComponentFixture.findAll({ expectEmpty: true })).to.have.length(0)
+  })
   it('should find component root elements without a selector', async () => {
     await mount(<Component />)
     expect(await ComponentFixture.findAll()).to.have.length(1)

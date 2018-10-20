@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
-
+import { prettyDOM } from 'dom-testing-library'
 // original source: https://github.com/kentcdodds/dom-testing-library/blob/master/src/wait-for-element.js
 // this doesn't require the mutation observer shim because we don't run the tests with JSDOM
 export function waitForQueryResult (

@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 import runAxeCheck from '@instructure/ui-axe-check'
-import { fireEvent } from 'dom-testing-library/dist/events'
-import { prettyDOM } from 'dom-testing-library/dist/pretty-dom'
+import { fireEvent, prettyDOM } from 'dom-testing-library'
 
 function getOwnerDocument (element) {
   return element.ownerDocument
@@ -92,7 +91,7 @@ async function accessible (element = document.documentElement, options) {
   if (element instanceof Element || element instanceof SVGElement) {
     return runAxeCheck(element, options)
   } else {
-    throw Error('[ui-test-utils] accessibility check can only run on a single DOM Element!')
+    throw new Error('[ui-test-utils] accessibility check can only run on a single DOM Element!')
   }
 }
 

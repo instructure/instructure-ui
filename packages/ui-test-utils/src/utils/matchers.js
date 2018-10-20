@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fuzzyMatches, matches } from 'dom-testing-library/dist/matches'
-import { getNodeText } from 'dom-testing-library/dist/get-node-text'
+import { fuzzyMatches, matches, getNodeText } from 'dom-testing-library'
 
 if (typeof Element !== 'undefined') { // is the DOM available?
   // polyfill for IE

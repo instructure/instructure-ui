@@ -130,7 +130,7 @@ function queryAllBySelector (element = document.documentElement, selector = '*')
     }
     return result
   } else {
-    throw Error(`[ui-test-utils] Invalid HTMLElement for query`)
+    throw new Error(`[ui-test-utils] Invalid HTMLElement for query`)
   }
 }
 
