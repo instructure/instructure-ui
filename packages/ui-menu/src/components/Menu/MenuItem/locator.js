@@ -21,28 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator  } from '@instructure/ui-test-utils'
 
-import React, { Component } from 'react'
-import themeable from '@instructure/ui-themeable'
-import testable from '@instructure/ui-testable'
+import MenuItem from './index'
 
-import styles from './styles.css'
-import theme from './theme'
-
-/**
----
-parent: Menu
----
-@module MenuItemSeparator
-**/
-@testable()
-@themeable(theme, styles)
-class MenuItemSeparator extends Component {
-  render () {
-    return (
-      <div {...this.props} role="presentation" className={styles.root} />
-    )
-  }
-}
-
-export default MenuItemSeparator
+export default locator(MenuItem.displayName)

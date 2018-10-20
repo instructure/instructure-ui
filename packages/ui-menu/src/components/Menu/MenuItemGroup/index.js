@@ -34,6 +34,8 @@ import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
+import testable from '@instructure/ui-testable'
+
 import MenuItem from '../MenuItem'
 import MenuItemSeparator from '../MenuItemSeparator'
 
@@ -45,6 +47,7 @@ import theme from './theme'
 parent: Menu
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class MenuItemGroup extends Component {
   static propTypes = {

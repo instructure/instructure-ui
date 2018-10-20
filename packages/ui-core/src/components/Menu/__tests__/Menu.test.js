@@ -142,17 +142,17 @@ describe('<Menu />', () => {
     expect(subject.find('[role="menuitem"]').unwrap() === document.activeElement).to.be.true()
   })
 
-  it('should set aria attributes and title properly', () => {
+  it('should set aria attributes properly', () => {
     const subject = testbed.render({
       labelledBy: 'id',
       controls: 'id',
       disabled: true,
-      title: 'title'
+      label: 'title'
     })
     expect(subject.getAttribute('aria-labelledby')).to.exist()
     expect(subject.getAttribute('aria-controls')).to.exist()
     expect(subject.getAttribute('aria-disabled')).to.exist()
-    expect(subject.getAttribute('title')).to.exist()
+    expect(subject.getAttribute('aria-label')).to.exist()
   })
 
   it('should meet a11y standards', (done) => {

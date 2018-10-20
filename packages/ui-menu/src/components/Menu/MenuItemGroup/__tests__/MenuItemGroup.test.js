@@ -23,160 +23,291 @@
  */
 
 import React from 'react'
-import MenuItemGroup from '../index'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
+
 import MenuItem from '../../MenuItem'
 import MenuItemSeparator from '../../MenuItemSeparator'
 
-describe('<MenuItemGroup />', () => {
-  const testbed = new Testbed(
-    <MenuItemGroup label="Select one">
-      <MenuItem>Foo</MenuItem>
-      <MenuItem>Bar</MenuItem>
-      <MenuItemSeparator />
-    </MenuItemGroup>
-  )
+import MenuItemGroup from '../index'
 
-  it('should render', () => {
-    const subject = testbed.render()
+import MenuItemGroupLocator from '../locator'
 
-    expect(subject).to.be.present()
+describe('<MenuItemGroup />', async () => {
+  it('should render', async () => {
+    await mount(
+      <MenuItemGroup label="Select one">
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
+
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+
+    expect(group).to.exist()
   })
 
-  it('should set the role to "group"', () => {
-    const subject = testbed.render()
+  it('should set the role to "group"', async () => {
+    await mount(
+      <MenuItemGroup label="Select one">
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    expect(subject.find('[role="group"]')).to.be.present()
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+
+    expect(group.getAttribute('role')).to.equal('group')
   })
 
-  it('should render the label and aria-labelledby attributes', () => {
-    const subject = testbed.render()
-    const label = subject.findText('Select one').filterWhere(n => n.prop('id'))
-    const id = label.prop('id')
+  it('should default to children with type "radio"', async () => {
+    await mount(
+      <MenuItemGroup label="Select one">
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    expect(subject.find(`[aria-labelledby="${id}"]`).length).to.equal(1)
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const items = await group.findAllItems('[role="menuitemradio"]')
+
+    expect(items.length).to.equal(2)
   })
 
-  it('should default to children with type "radio"', () => {
-    const subject = testbed.render()
+  it('should render children with type "checkbox" if allowMultiple is true', async () => {
+    await mount(
+      <MenuItemGroup
+        label="Select a few"
+        allowMultiple
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    expect(subject.find('[role="menuitemradio"]').length).to.equal(2)
+    const group = await MenuItemGroupLocator.find({ label: 'Select a few' })
+    const items = await group.findAllItems('[role="menuitemcheckbox"]')
+
+    expect(items.length).to.equal(2)
   })
 
-  it('should render children with type "checkbox" if allowMultiple is true', () => {
-    const subject = testbed.render({
-      allowMultiple: true
-    })
+  it('should set aria-disabled', async () => {
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        disabled
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const items = await group.findAllItems('[aria-disabled]')
 
-    expect(subject.find('[role="menuitemcheckbox"]').length).to.equal(2)
+    expect(items.length).to.equal(2)
   })
 
-  it('should set aria-disabled', () => {
-    const subject = testbed.render({
-      disabled: true
-    })
+  it('should set selected from defaultSelected prop', async () => {
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        defaultSelected={[1]}
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    expect(subject.find('[aria-disabled="true"]').length).to.equal(3)
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const item = await group.findItem({ label: 'Bar' })
+
+    expect(item.getAttribute('aria-checked'))
+      .to.equal('true')
   })
 
-  it('should set selected from defaultSelected prop', () => {
-    const subject = testbed.render({
-      defaultSelected: [1]
-    })
+  it('should set selected from selected prop', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        onSelect={onSelect}
+        selected={[1]}
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    expect(subject.find('[aria-checked="true"]').length)
-      .to.equal(1)
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const item = await group.findItem({ label: 'Bar' })
+
+    expect(item.getAttribute('aria-checked'))
+      .to.equal('true')
   })
 
-  it('should set selected from selected prop', () => {
-    const subject = testbed.render({
-      onSelect: testbed.stub(),
-      selected: [1]
-    })
-
-    expect(subject.find('[aria-checked="true"]').length)
-      .to.equal(1)
-  })
-
-  it('should set selected from children', () => {
-    const subject = testbed.render({
-      allowMultiple: true,
-      children: [
-        <MenuItem key="foo" defaultSelected>Foo</MenuItem>,
+  it('should set selected from children', async () => {
+    await mount(
+      <MenuItemGroup
+        label="Select a few"
+        allowMultiple
+      >
+        <MenuItem key="foo" defaultSelected>Foo</MenuItem>
         <MenuItem key="bar" selected>Bar</MenuItem>
-      ]
-    })
+      </MenuItemGroup>
+    )
+    const group = await MenuItemGroupLocator.find({ label: 'Select a few' })
+    const items = await group.findAllItems('[aria-checked]')
 
-    expect(subject.find('[aria-checked="true"]').length)
-      .to.equal(2)
+    expect(items.length).to.equal(2)
   })
 
-  it('should honor the allowMultiple prop', () => {
-    const subject = testbed.render({
-      allowMultiple: false,
-      children: [
-        <MenuItem key="foo" defaultSelected>Foo</MenuItem>,
-        <MenuItem key="bar" selected>Bar</MenuItem>
-      ]
-    })
+  it('should honor the allowMultiple prop (defaults to false)', async () => {
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+      >
+        <MenuItem defaultSelected>Foo</MenuItem>
+        <MenuItem selected>Bar</MenuItem>
+      </MenuItemGroup>
+    )
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const items = await group.findAllItems('[aria-checked="true"]')
 
-    expect(subject.find('[aria-checked="true"]').length)
-      .to.equal(1)
+    expect(items.length).to.equal(1)
   })
 
-  it('calls onSelect when items are selected', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      onSelect
-    })
+  it('calls onSelect when items are selected', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        onSelect={onSelect}
+        selected={[1]}
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    subject.find('span[role="menuitemradio"]').first().simulate('click')
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const item = await group.findItem({ label: 'Foo' })
+
+    await item.click()
 
     expect(onSelect).to.have.been.called()
     expect(onSelect.args[0][1]).to.deep.equal([0])
   })
 
-  it('does not call onSelect when disabled', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      onSelect,
-      disabled: true
-    })
+  it('does not call onSelect when disabled', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        onSelect={onSelect}
+        disabled
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    subject.find(MenuItem).first().simulate('click')
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const item = await group.findItem({ label: 'Foo' })
+
+    await item.click()
 
     expect(onSelect).to.not.have.been.called()
   })
 
-  it('updates the selected items when allowMultiple is true', () => {
-    const subject = testbed.render({
-      allowMultiple: true
-    })
+  it('updates the selected items when allowMultiple is true', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItemGroup
+        label="Select some"
+        allowMultiple
+        onSelect={onSelect}
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    subject.find('span[role="menuitemcheckbox"]').first().simulate('click')
+    const group = await MenuItemGroupLocator.find({ label: 'Select some' })
+    const items = await group.findAllItems()
 
-    expect(subject.instance().selected)
-      .to.deep.equal([0])
+    await items[0].click()
 
-    subject.find('span[role="menuitemcheckbox"]').last().simulate('click')
+    expect(items[0].getAttribute('aria-checked'))
+      .to.equal('true')
 
-    expect(subject.instance().selected)
-      .to.deep.equal([0, 1])
+    expect(onSelect).to.have.been.calledOnce()
+    expect(onSelect.getCall(0).args[1]).to.deep.equal([0])
+    expect(onSelect.getCall(0).args[2]).to.be.true()
 
-    subject.find('span[role="menuitemcheckbox"]').first().simulate('click')
+    await items[1].click()
 
-    expect(subject.instance().selected)
-      .to.deep.equal([1])
+    expect(items[1].getAttribute('aria-checked'))
+      .to.equal('true')
+
+    expect(onSelect).to.have.been.calledTwice()
+    expect(onSelect.getCall(1).args[1]).to.deep.equal([0, 1])
+    expect(onSelect.getCall(1).args[2]).to.be.true()
+
+    await items[0].click()
+
+    expect(items[0].getAttribute('aria-checked'))
+      .to.equal('false')
+
+    expect(onSelect).to.have.been.calledThrice()
+    expect(onSelect.getCall(2).args[1]).to.deep.equal([1])
+    expect(onSelect.getCall(2).args[2]).to.be.false()
   })
 
-  it('updates the selected items when allowMultiple is false', () => {
-    const subject = testbed.render({
-      allowMultiple: false
-    })
+  it('updates the selected items when allowMultiple is false', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItemGroup
+        label="Select one"
+        onSelect={onSelect}
+      >
+        <MenuItem>Foo</MenuItem>
+        <MenuItem>Bar</MenuItem>
+        <MenuItemSeparator />
+      </MenuItemGroup>
+    )
 
-    subject.find('span[role="menuitemradio"]').first().simulate('click')
-    subject.find('span[role="menuitemradio"]').last().simulate('click')
+    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const items = await group.findAllItems()
 
-    expect(subject.instance().selected)
-      .to.deep.equal([1])
+    await items[0].click()
+
+    expect(items[0].getAttribute('aria-checked'))
+      .to.equal('true')
+    expect(items[1].getAttribute('aria-checked'))
+      .to.equal('false')
+
+    expect(onSelect).to.have.been.calledOnce()
+    expect(onSelect.getCall(0).args[1]).to.deep.equal([0])
+    expect(onSelect.getCall(0).args[2]).to.be.true()
+
+    await items[1].click()
+
+    expect(items[1].getAttribute('aria-checked'))
+      .to.equal('true')
+    expect(items[0].getAttribute('aria-checked'))
+      .to.equal('false')
+
+    expect(onSelect).to.have.been.calledTwice()
+    expect(onSelect.getCall(1).args[1]).to.deep.equal([1])
+    expect(onSelect.getCall(1).args[2]).to.be.true()
   })
 })

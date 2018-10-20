@@ -31,6 +31,7 @@ import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -38,6 +39,7 @@ import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import testable from '@instructure/ui-testable'
 
 import { MenuContextTypes, getMenuContext } from '../../../utils/MenuContextTypes'
 
@@ -49,6 +51,7 @@ import theme from './theme'
 parent: Menu
 ---
 **/
+@testable()
 @deprecated('5.0.0', {
   active: true
 })
@@ -101,6 +104,8 @@ class MenuItem extends Component {
         selected: props.defaultSelected
       }
     }
+
+    this.labelId = generateElementId('MenuItem')
   }
 
   componentDidMount () {
@@ -133,6 +138,7 @@ class MenuItem extends Component {
     }
 
     if (typeof onSelect === 'function') {
+      e.persist()
       onSelect(e, value, selected, this)
     }
 
@@ -216,7 +222,7 @@ class MenuItem extends Component {
           <span className={styles.icon}>
             {this.selected && <IconCheck />}
           </span>}
-        <span className={styles.label}>
+        <span className={styles.label} id={this.labelId}>
           {children}
         </span>
         {type === 'flyout' &&
@@ -251,6 +257,7 @@ class MenuItem extends Component {
         {...props}
         href={href}
         role={this.role}
+        aria-labelledby={this.labelId}
         aria-disabled={disabled ? 'true' : null}
         aria-controls={controls}
         aria-checked={type === 'checkbox' || type === 'radio' ? (this.selected ? 'true' : 'false') : null}

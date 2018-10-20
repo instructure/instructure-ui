@@ -23,180 +23,188 @@
  */
 
 import React from 'react'
-import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
+
 import MenuItem from '../index'
+import MenuItemFixture from '../locator'
 
-describe('<MenuItem />', () => {
-  const testbed = new Testbed(
-    <MenuItem>Hello World</MenuItem>
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
+describe('<MenuItem />', async () => {
+  it('should render', async () => {
+    await mount(<MenuItem>Hello</MenuItem>)
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+    expect(item).to.exist()
   })
 
-  it('should render as a link when an href is provided', () => {
-    const subject = testbed.render({
-      href: 'example.html'
+  it('should render as a link when an href is provided', async () => {
+    await mount(
+      <MenuItem href="example.html">Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+    const link = await item.find({
+      tag: 'a',
+      attribute: {
+        name: 'href',
+        value: 'example.html'
+      }
     })
 
-    expect(subject.tagName()).to.equal('A')
-    expect(subject.find('[href="example.html"]')).to.be.present()
+    expect(link).to.exist()
   })
 
-  it('should call onSelect after click', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      onSelect,
-      value: 'foo'
-    })
+  it('should call onSelect after click', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+    )
 
-    subject.simulate('click')
+    const item = await MenuItemFixture.find({ contains: 'Hello' })
+
+    await item.click()
 
     expect(onSelect).to.have.been.calledOnce()
     expect(onSelect.args[0][1]).to.equal('foo')
     expect(onSelect.args[0][2]).to.be.true()
   })
 
-  it('should call onClick after click', () => {
-    const onClick = testbed.stub()
-    const subject = testbed.render({
-      onClick
-    })
+  it('should call onClick after click', async () => {
+    const onClick = stub()
+    await mount(
+      <MenuItem onClick={onClick} value="foo">Hello</MenuItem>
+    )
 
-    subject.simulate('click')
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    await item.click()
 
     expect(onClick).to.have.been.calledOnce()
   })
 
-  it('should call onSelect after SPACE key is pressed', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      onSelect
-    })
+  it('should call onSelect after SPACE key is pressed', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+    )
 
-    subject.keyUp('space')
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    await item.keyUp('space')
+
+    expect(onSelect.getCall(0).args[1]).to.equal('foo')
+    expect(onSelect.getCall(0).args[2]).to.equal(true)
+  })
+
+  it('should call onSelect after ENTER key is pressed', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItem onSelect={onSelect} value="foo">Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    await item.keyDown('enter')
 
     expect(onSelect).to.have.been.calledOnce()
   })
 
-  it('should call onSelect after ENTER key is pressed', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      onSelect
-    })
+  it('should not be able to select when the disabled prop is set', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItem onSelect={onSelect} disabled>Hello</MenuItem>
+    )
 
-    subject.keyDown('enter')
+    const item = await MenuItemFixture.find({ label: 'Hello' })
 
-    expect(onSelect).to.have.been.calledOnce()
-  })
-
-  it('should not be able to select when the disabled prop is set', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      disabled: true
-    })
-
-    subject.simulate('click')
-    subject.keyUp('enter')
-    subject.keyUp('space')
+    await item.click()
+    await item.keyUp('enter')
+    await item.keyUp('space')
 
     expect(onSelect).to.not.have.been.called()
   })
 
-  it('should set the tabIndex attribute', () => {
-    const subject = testbed.render()
+  it('should set the tabIndex attribute', async () => {
+    await mount(
+      <MenuItem>Hello</MenuItem>
+    )
 
-    expect(subject.find('[tabIndex="-1"]'))
-      .to.be.present()
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('tabIndex'))
+      .to.equal('-1')
   })
 
-  it('should set the aria-controls attribute', () => {
-    const subject = testbed.render({
-      controls: 'testId'
-    })
-    expect(subject.find('[aria-controls="testId"]'))
-      .to.be.present()
+  it('should set the aria-controls attribute', async () => {
+    await mount(
+      <MenuItem controls="testId">Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('aria-controls'))
+      .to.equal('testId')
   })
 
-  it('should set the aria-disabled attribute', () => {
-    const subject = testbed.render({
-      disabled: true
-    })
-    expect(subject.find('[aria-disabled="true"]'))
-      .to.be.present()
+  it('should set the aria-disabled attribute', async () => {
+    await mount(
+      <MenuItem disabled>Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('aria-disabled'))
+      .to.equal('true')
   })
 
-  it('should set the aria-checked attribute when defaultSelected prop is true', () => {
-    const subject = testbed.render({
-      type: 'checkbox',
-      defaultSelected: true
-    })
-    expect(subject.find('[aria-checked="true"]'))
-      .to.be.present()
+  it('should set the aria-checked attribute when defaultSelected prop is true', async () => {
+    await mount(
+      <MenuItem type="checkbox" defaultSelected>Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('aria-checked'))
+      .to.equal('true')
   })
 
-  it('should set the aria-checked attribute when selected prop is true', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      type: 'checkbox',
-      selected: true,
-      onSelect
-    })
-    expect(subject.find('[aria-checked="true"]'))
-      .to.be.present()
+  it('should set the aria-checked attribute when selected prop is true', async () => {
+    const onSelect = stub()
+    await mount(
+      <MenuItem type="checkbox" selected onSelect={onSelect}>Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('aria-checked'))
+      .to.equal('true')
   })
 
-  it('should default to the "menuitem" role', () => {
-    const subject = testbed.render()
-    expect(subject.find('[role="menuitem"]'))
-      .to.be.present()
+  it('should default to the "menuitem" role', async () => {
+    await mount(
+      <MenuItem>Hello</MenuItem>
+    )
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('role'))
+      .to.equal('menuitem')
   })
 
-  it('should set the role to "menuitemcheckbox" when the type is "checkbox"', () => {
-    const subject = testbed.render({
-      type: 'checkbox'
-    })
-    expect(subject.find('[role="menuitemcheckbox"]'))
-      .to.be.present()
+  it('should set the role to "menuitemcheckbox" when the type is "checkbox"', async () => {
+    await mount(
+      <MenuItem type="checkbox">Hello</MenuItem>
+    )
+    const item = await MenuItemFixture.find({ label: 'Hello' })
+
+    expect(item.getAttribute('role'))
+      .to.equal('menuitemcheckbox')
   })
 
-  it('should set the role to "menuitemradio" when the type is "radio"', () => {
-    const subject = testbed.render({
-      type: 'radio'
-    })
-    expect(subject.find('[role="menuitemradio"]'))
-      .to.be.present()
-  })
+  it('should set the role to "menuitemradio" when the type is "radio"', async () => {
+    await mount(
+      <MenuItem type="radio">Hello</MenuItem>
+    )
+    const item = await MenuItemFixture.find({ label: 'Hello' })
 
-  it('should render an icon for "checkbox" type when selected', () => {
-    const subject = testbed.render({
-      type: 'checkbox',
-      defaultSelected: true
-    })
-    expect(subject.find(IconCheck))
-      .to.be.present()
-  })
-
-  it('should render an icon for "radio" type when selected', () => {
-    const subject = testbed.render({
-      type: 'radio',
-      selected: true,
-      onSelect: testbed.stub()
-    })
-    expect(subject.find(IconCheck))
-      .to.be.present()
-  })
-
-  it('should focus properly', () => {
-    const subject = testbed.render()
-
-    expect(subject.focused()).to.be.false()
-
-    subject.instance().focus()
-
-    expect(subject.focused()).to.be.true()
-    expect(subject.instance().focused).to.be.true()
+    expect(item.getAttribute('role'))
+      .to.equal('menuitemradio')
   })
 })

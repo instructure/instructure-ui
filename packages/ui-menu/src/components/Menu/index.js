@@ -38,6 +38,7 @@ import warning from '@instructure/ui-utils/lib/warning'
 import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import testable from '@instructure/ui-testable'
 
 import { MenuContextTypes, makeMenuContext, getMenuContext } from '../../utils/MenuContextTypes'
 import MenuItem from './MenuItem'
@@ -50,6 +51,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @deprecated('5.1.0', {
   title: 'label',
   labelledBy: 'aria-labelledby',
@@ -182,6 +184,7 @@ class Menu extends Component {
   }
 
   state = { hasFocus: false }
+  _rootNode = null
   _menuItems = []
   _popover = null
   _trigger = null
@@ -406,7 +409,7 @@ class Menu extends Component {
       const isTabbable = !this.state.hasFocus && count === 1
 
       if (matchComponentTypes(child, ['MenuItemSeparator'])) {
-        return <li>{child}</li>
+        return <li role="none">{child}</li>
       }
 
       const controls = (
@@ -418,7 +421,7 @@ class Menu extends Component {
 
       if (matchComponentTypes(child, ['MenuItem'])) {
         return (
-          <li>
+          <li role="none">
             {safeCloneElement(child, {
               controls,
               disabled: (disabled || child.props.disabled),
@@ -434,7 +437,7 @@ class Menu extends Component {
 
       if (matchComponentTypes(child, ['MenuItemGroup'])) {
         return (
-          <li>
+          <li role="none">
             {safeCloneElement(child, {
               controls,
               disabled: (disabled || child.props.disabled),
@@ -452,7 +455,7 @@ class Menu extends Component {
         const submenuDisabled = disabled || child.props.disabled
 
         return (
-          <li>
+          <li role="none">
             {safeCloneElement(child, {
               type: 'flyout',
               controls,
@@ -500,7 +503,7 @@ class Menu extends Component {
     return (
       <ul
         role="menu"
-        title={title || label}
+        aria-label={title || label}
         tabIndex={this.state.hasFocus ? null : '0'}
         className={styles.menu}
         aria-labelledby={labelledBy || (trigger && this._labelId)}
@@ -546,7 +549,6 @@ class Menu extends Component {
       >
         <PopoverTrigger>
           {safeCloneElement(trigger, {
-            role: 'button',
             ref: (el) => {
               this._trigger = el
             },
