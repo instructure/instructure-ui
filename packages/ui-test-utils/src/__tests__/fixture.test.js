@@ -48,7 +48,7 @@ ComponentFixture.findAllInputs = async (...args) => {
   return findAllByQuery(query, ...args)
 }
 
-describe('@testable, fixture', () => {
+describe('@testable, fixture', async () => {
   it('should find component root elements without a selector', async () => {
     await mount(<Component />)
     expect(await ComponentFixture.findAll()).to.have.length(1)

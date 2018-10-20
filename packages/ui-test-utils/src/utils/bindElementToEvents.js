@@ -28,14 +28,30 @@ export function bindElementToEvents (element, events) {
   if (element instanceof Element) {
     return Object.entries(events).reduce((bound, [key, fn]) => {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
-        bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))// eslint-disable-line no-param-reassign
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))
+      } if (key === 'focus') {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireFocusEvent.bind(null, element, fn.bind(null, element))
       } else {
         bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
       }
       return bound
     }, {})
   } else {
-    console.warn('[ui-test-utils] could not bind events to invalid HTMLElement')
+    console.warn('[ui-test-utils] could not bind events to invalid Element')
+  }
+}
+
+function fireFocusEvent (element, fireEvent, init) {
+  if (init) {
+    fireEvent(init)
+    console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
+Test event handlers (with event initialization) and focus state behavior separately.
+Note: this means that .focused will be false unless you call .focus without event initialization.`)
+  } else {
+    // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
+    element.focus()
   }
 }
 

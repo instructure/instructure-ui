@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect, findAll, find } from '../index'
+import { mount, expect, findAll, find, spy } from '../index'
 
-describe('find, findAll', () => {
+describe('find, findAll', async () => {
   it('throws an error message by default when nothing is found', async () => {
-    expect(findAll('[selected]', { timeout: 0 })).to.eventually.throw()
+    expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
     expect(findAll({ css: '[selected]', timeout: 0 })).to.eventually.throw()
     expect(findAll({ label: 'pineapple', timeout: 0 })).to.eventually.throw()
     expect(findAll({ tag: 'pineapple', timeout: 0 })).to.eventually.throw()
@@ -57,7 +57,7 @@ describe('find, findAll', () => {
     expect(await findAll({ title: 'Close', visible: false })).to.have.length(1)
   })
 
-  describe('by text', () => {
+  describe('by text', async () => {
     it('can get elements by matching their text content', async () => {
       await mount(
         <div data-locator="TestLocator">
@@ -126,7 +126,7 @@ describe('find, findAll', () => {
     })
   })
 
-  describe('by label', () => {
+  describe('by label', async () => {
     it('can find an input with an aria-labelledby attribute', async () => {
       /* eslint-disable jsx-a11y/label-has-associated-control */
       await mount(
@@ -205,7 +205,7 @@ describe('find, findAll', () => {
     })
   })
 
-  describe('by title', () => {
+  describe('by title', async () => {
     it('can find an element by its title', async () => {
       await mount(
         <div>
@@ -233,7 +233,7 @@ describe('find, findAll', () => {
     })
   })
 
-  describe('by value', () => {
+  describe('by value', async () => {
     it('can find an element by its value', async () => {
       await mount(
         <div>
@@ -246,7 +246,7 @@ describe('find, findAll', () => {
     })
   })
 
-  describe('by attribute', () => {
+  describe('by attribute', async () => {
     it('can find an element by attribute', async () => {
       await mount(
         <div>
@@ -266,6 +266,36 @@ describe('find, findAll', () => {
       )
       expect(await findAll({ tag: 'input', attribute: { name: 'type', value: 'password' } }))
         .to.have.length(1)
+    })
+  })
+
+  describe('event helpers', async () => {
+    describe('#focus', async () => {
+      it('should programmtically move focus', async () => {
+        await mount(
+          <button>hello</button>
+        )
+        const button = await find({ tag: 'button' })
+        button.focus()
+        expect(button.focused()).to.be.true()
+      })
+      it('should support initializing the event object', async () => {
+        const handleFocus = spy((e) => {
+          e.persist() // so that we can get the native event later
+        })
+
+        await mount(
+          <button onFocus={handleFocus}>hello</button>
+        )
+
+        const button = await find({ tag: 'button' })
+
+        button.focus({ bubbles: true })
+
+        const nativeEvent = handleFocus.getCall(0).args[0].nativeEvent
+
+        expect(nativeEvent.bubbles).to.be.true()
+      })
     })
   })
 })
