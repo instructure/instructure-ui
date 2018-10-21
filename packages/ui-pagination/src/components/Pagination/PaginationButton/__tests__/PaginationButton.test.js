@@ -23,50 +23,44 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
+
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import PaginationButton from '../index'
+import PaginationButtonLocator from '../locator'
 
-describe('<PaginationButton />', () => {
-  const testbed = new Testbed(<PaginationButton>A-G</PaginationButton>)
-
-  it('should designate current page', () => {
-    const subject = testbed.render({ current: true })
-    expect(subject.find(Button).prop('variant')).to.eq('primary')
+describe('<PaginationButton />', async () => {
+  it('should designate current page', async () => {
+    await mount(<PaginationButton current>1</PaginationButton>)
+    const button = await PaginationButtonLocator.find({ label: '1' })
+    expect(button.getAttribute('aria-current')).to.equal('page')
   })
 
-  it('should navigate using button when onClick provided', () => {
-    const onClick = testbed.sandbox.stub()
-    const subject = testbed.render({ onClick })
-    subject.find(Button).simulate('click')
+  it('should navigate using button when onClick provided', async () => {
+    const onClick = stub()
+    await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
+    const button = await PaginationButtonLocator.find({ label: '1' })
+    await button.click()
     expect(onClick).to.have.been.called()
   })
 
-  it('should disable navigation to current page', () => {
-    const onClick = testbed.sandbox.stub()
-    const subject = testbed.render({ onClick, current: true })
-    subject.find(Button).simulate('click')
+  it('should disable navigation to current page', async () => {
+    const onClick = stub()
+    await mount(
+      <PaginationButton onClick={onClick} current>
+        1
+      </PaginationButton>
+    )
+    const button = await PaginationButtonLocator.find({ label: '1' })
+    await button.click()
     expect(onClick).to.not.have.been.called()
   })
 
-  it('should navigate using link when href provided', () => {
-    const subject = testbed.render({ href: 'inst.biz' })
-    expect(subject.find('a[href="inst.biz"]')).to.be.present()
-  })
-
-  it('should meet a11y standards with defaults', (done) => {
-    const ignores = { ignores: [
-      'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-    ] }
-    const vanillaPage = testbed.render()
-    vanillaPage.should.be.accessible(done, ignores)
-  })
-
-  it('should meet a11y standards with current prop', (done) => {
-    const ignores = { ignores: [
-      'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-    ] }
-    const currentPage = testbed.render({ current: true })
-    currentPage.should.be.accessible(done, ignores)
+  it('should navigate using link when href provided', async () => {
+    await mount(
+      <PaginationButton href="https://instructure.design/">1</PaginationButton>
+    )
+    const button = await PaginationButtonLocator.find({ label: '1' })
+    expect(button.getAttribute('href')).to.equal('https://instructure.design/')
   })
 })

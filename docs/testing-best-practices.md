@@ -31,9 +31,9 @@ TODO
 ```js
 import { mount, expect } from '@instructure/ui-test-utils'
 
-it('does what it is supposed to do', () => {
+it('does what it is supposed to do', async () => {
   await mount()
-});
+})
 ```
 
 ### Finding nodes
@@ -49,13 +49,10 @@ Tests using [ui-test-utils](#ui-test-utils) would look like:
 import { mount, expect } from '@instructure/ui-test-utils'
 
 // good
-it('does what it is supposed to do', async () => {
-})
+it('does what it is supposed to do', async () => {})
 
 // bad (searches by non-semantic tag name and CSS class)
-it('does what it is supposed to do', async () => {
-
-})
+it('does what it is supposed to do', async () => {})
 ```
 
 ```js
@@ -72,7 +69,7 @@ import { mount, expect } from '@instructure/ui-test-utils'
 
 // good
 it('does what it is supposed to do', async () => {
-  await mount(<Component/>)
+  await mount(<Component />)
   // await ComponentFixture.findAll
 })
 
@@ -145,7 +142,6 @@ TODO add getDOMNode/chai-dom examples
 
 #### Testing events triggered by DOM
 
-
 ```js
 it('properly fires `onChange` when input changes', async () => {
   import { mount, expect, stub } from '@instructure/ui-test-utils'
@@ -202,11 +198,10 @@ import { mount, expect } from '@instructure/ui-test-utils'
 it('DOES allow `value` to override existing <input> value', async () => {
   const subject = await mount(<TextInput defaultValue="foo" />)
   // update the TextInput's props
-  subject.setProps({defaultValue: 'bar'})
-
+  subject.setProps({ defaultValue: 'bar' })
 
   // update the TextInput's props
-  subject.setProps({value: 'bar'})
+  subject.setProps({ value: 'bar' })
 
   // ensure that the <input> node's value has changed
 })
@@ -221,7 +216,7 @@ TODO
 ```javascript
 import { mount, expect } from '@instructure/ui-test-utils'
 
-it('should meet a11y standards', async (done) => {
+it('should meet a11y standards', async done => {
   await mount(<Component />)
   const component = await ComponentFixture.find()
   expect(await component.accessible()).to.be.true()

@@ -25,37 +25,38 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Button from '@instructure/ui-buttons/lib/components/Button'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import IconStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
-import IconEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
-
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
-import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
+
 import PaginationButton from './PaginationButton'
+import PaginationArrowButton from './PaginationArrowButton'
+
 import theme from './theme'
 import styles from './styles.css'
 
 /** This is an [].findIndex optimized to work on really big, but sparse, arrays */
-const fastFindIndex = (arr, fn) => Number(Object.keys(arr).find(k => fn(arr[Number(k)])))
+const fastFindIndex = (arr, fn) =>
+  Number(Object.keys(arr).find(k => fn(arr[Number(k)])))
 
 function propsHaveCompactView (props) {
   return props.variant === 'compact' && props.children.length > 5
 }
 
 function shouldShowPrevButton (props, currentPageIndex) {
-  return propsHaveCompactView(props) && (currentPageIndex > 0)
+  return propsHaveCompactView(props) && currentPageIndex > 0
 }
 
 function shouldShowNextButton (props, currentPageIndex) {
-  return propsHaveCompactView(props) && (currentPageIndex < props.children.length - 1)
+  return (
+    propsHaveCompactView(props) && currentPageIndex < props.children.length - 1
+  )
 }
 
 /**
@@ -63,49 +64,51 @@ function shouldShowNextButton (props, currentPageIndex) {
 category: components
 ---
 **/
+
+@testable()
 @themeable(theme, styles)
 export default class Pagination extends Component {
   static propTypes = {
     /**
-    * children of type PaginationButton
-    */
+     * children of type PaginationButton
+     */
     children: CustomPropTypes.Children.oneOf([PaginationButton]),
     /**
-    * Disables interaction with all pages
-    */
+     * Disables interaction with all pages
+     */
     disabled: PropTypes.bool,
     /**
-    * Visible label for component
-    */
+     * Visible label for component
+     */
     label: PropTypes.string,
     /**
-    * Accessible label for next button
-    */
+     * Accessible label for next button
+     */
     labelNext: PropTypes.string,
     /**
-    * Accessible label for previous button
-    */
+     * Accessible label for previous button
+     */
     labelPrev: PropTypes.string,
     variant: PropTypes.oneOf(['full', 'compact']),
     /**
-    * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
-    * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
-    * familiar CSS-like shorthand. For example: `margin="small auto large"`.
-    */
+     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
+     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
+     * familiar CSS-like shorthand. For example: `margin="small auto large"`.
+     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * the element type to render as
-    */
+     * the element type to render as
+     */
     as: CustomPropTypes.elementType,
     /**
-    * provides a reference to the underlying html root element
-    */
+     * provides a reference to the underlying html root element
+     */
     elementRef: PropTypes.func,
     /**
-    * For accessibility, Pagination sets focus on the first or last PaginationButtons,
-    * respectively, when the Previous or Next arrow buttons are removed from the DOM.
-    * Set this property to `false` to prevent this behavior.
-    */
+     * For accessibility, Pagination sets focus on the first or last PaginationButtons,
+     * respectively, when the Previous or Next arrow buttons are removed from the DOM.
+     * Set this property to `false` to prevent this behavior.
+     */
     shouldHandleFocus: PropTypes.bool
   }
 
@@ -113,8 +116,14 @@ export default class Pagination extends Component {
     disabled: false,
     variant: 'full',
     as: 'div',
-    elementRef: (el) => {},
+    elementRef: el => {},
     shouldHandleFocus: true
+  }
+
+  constructor (...args) {
+    super(...args)
+
+    this._labelId = generateElementId('Pagination')
   }
 
   componentWillReceiveProps (nextProps) {
@@ -127,13 +136,19 @@ export default class Pagination extends Component {
     }
 
     const focusable = findTabbable(this._root)
-    if (focusable[0] === document.activeElement && !shouldShowPrevButton(nextProps)) {
+    if (
+      focusable[0] === document.activeElement &&
+      !shouldShowPrevButton(nextProps)
+    ) {
       // Previous Page button has focus, but will no longer be rendered
       this._moveFocusTo = 'first'
       return
     }
 
-    if (focusable[focusable.length - 1] === document.activeElement && !shouldShowNextButton(nextProps)) {
+    if (
+      focusable[focusable.length - 1] === document.activeElement &&
+      !shouldShowNextButton(nextProps)
+    ) {
       // Next Page button has focus, but will no longer be rendered
       this._moveFocusTo = 'last'
       return
@@ -147,7 +162,8 @@ export default class Pagination extends Component {
 
     if (this._moveFocusTo != null) {
       const focusable = findTabbable(this._root)
-      const focusIndex = this._moveFocusTo === 'first' ? 0 : focusable.length - 1
+      const focusIndex =
+        this._moveFocusTo === 'first' ? 0 : focusable.length - 1
       focusable[focusIndex].focus()
       delete this._moveFocusTo
     }
@@ -159,7 +175,9 @@ export default class Pagination extends Component {
 
   transferDisabledPropToChildren(children) {
     return this.props.disabled
-      ? React.Children.map(children, page => React.cloneElement(page, { disabled: this.props.disabled }))
+      ? React.Children.map(children, page =>
+          React.cloneElement(page, { disabled: this.props.disabled })
+        )
       : children
   }
 
@@ -174,9 +192,12 @@ export default class Pagination extends Component {
 
   renderLabel () {
     if (this.props.label) {
-      const display = (this.props.variant === 'compact') ? 'block' : 'inline-block'
+      const display =
+        this.props.variant === 'compact' ? 'block' : 'inline-block'
       return (
-        <View padding="small" display={display}>{this.props.label}</View>
+        <View padding="small" display={display} id={this._labelId}>
+          {this.props.label}
+        </View>
       )
     }
   }
@@ -197,51 +218,81 @@ export default class Pagination extends Component {
       const firstPage = allPages[firstIndex]
       const lastPage = allPages[lastIndex]
 
-      if ((sliceStart - firstIndex) > 1) visiblePages.unshift(<span key="first" aria-hidden="true">...</span>)
-      if ((sliceStart - firstIndex) > 0) visiblePages.unshift(firstPage)
-      if ((lastIndex - sliceEnd + 1) > 1) visiblePages.push(<span key="last" aria-hidden="true">...</span>)
-      if ((lastIndex - sliceEnd + 1) > 0) visiblePages.push(lastPage)
+      if (sliceStart - firstIndex > 1)
+        visiblePages.unshift(
+          <span key="first" aria-hidden="true">
+            &hellip;
+          </span>
+        )
+      if (sliceStart - firstIndex > 0) visiblePages.unshift(firstPage)
+      if (lastIndex - sliceEnd + 1 > 1)
+        visiblePages.push(
+          <span key="last" aria-hidden="true">
+            &hellip;
+          </span>
+        )
+      if (lastIndex - sliceEnd + 1 > 0) visiblePages.push(lastPage)
     }
 
     return (
-      <View display="inline-block">{this.transferDisabledPropToChildren(visiblePages)}</View>
+      <View display="inline-block">
+        {this.transferDisabledPropToChildren(visiblePages)}
+      </View>
     )
   }
 
-  renderArrowButton (icon, label, direction, currentPageIndex) {
-    const { onClick, disabled } = this.props.children[currentPageIndex + direction].props
+  renderArrowButton (label, direction, currentPageIndex) {
+    const { onClick, disabled } = this.props.children[
+      currentPageIndex + direction
+    ].props
     return (
-      <Tooltip tip={<PresentationContent>{label}</PresentationContent>}>
-        <Button
-          onClick={onClick}
-          disabled={this.props.disabled || disabled}
-          variant="icon"
-          size="small"
-          icon={icon}
-        >
-          <ScreenReaderContent>{label}</ScreenReaderContent>
-        </Button>
-      </Tooltip>
+      <PaginationArrowButton
+        direction={direction === -1 ? 'prev' : 'next'}
+        label={label}
+        onClick={onClick}
+        disabled={disabled}
+      />
     )
   }
 
   render () {
-    const currentPageIndex = fastFindIndex(this.props.children, p => p && p.props && p.props.current)
+    if (!this.props.children) return null
+
+    const currentPageIndex = fastFindIndex(
+      this.props.children,
+      p => p && p.props && p.props.current
+    )
+
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Pagination.propTypes),
+      Pagination
+    )
 
     return (
       <View
-        {...omitProps(this.props, { ...Pagination.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         role="navigation"
         as={this.props.as}
         elementRef={this.handleElementRef}
         margin={this.props.margin}
         className={styles.root}
+        aria-labelledby={this.props.label && this._labelId}
       >
         {this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
-          { shouldShowPrevButton(this.props, currentPageIndex) && this.renderArrowButton(IconStart, this.props.labelPrev, -1, currentPageIndex) }
-          { this.renderPages(currentPageIndex) }
-          { shouldShowNextButton(this.props, currentPageIndex) && this.renderArrowButton(IconEnd, this.props.labelNext, 1, currentPageIndex) }
+          {shouldShowPrevButton(this.props, currentPageIndex) &&
+            this.renderArrowButton(
+              this.props.labelPrev,
+              -1,
+              currentPageIndex
+            )}
+          {this.renderPages(currentPageIndex)}
+          {shouldShowNextButton(this.props, currentPageIndex) &&
+            this.renderArrowButton(
+              this.props.labelNext,
+              1,
+              currentPageIndex
+            )}
         </View>
       </View>
     )

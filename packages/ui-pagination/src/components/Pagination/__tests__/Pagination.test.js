@@ -23,305 +23,468 @@
  */
 
 import React from 'react'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+
 import View from '@instructure/ui-layout/lib/components/View'
+
+import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+
 import Pagination from '../index'
-import PaginationButton from '../PaginationButton'
+import PaginationButton from '../PaginationButton/index'
+import PaginationLocator from '../locator'
 
-describe('<Pagination />', () => {
-  const buildPages = function (count = 4, current = 0) {
-    return Array.from(Array(count)).map((v, i) => {
-      return (
-        <PaginationButton key={i} current={i === current}>
-          #{i}
-        </PaginationButton>
-      )
-    })
-  }
+const buildPages = (count = 4, current = 0) => {
+  return Array.from(Array(count)).map((v, i) => {
+    return (
+      <PaginationButton key={i} current={i === current}>
+        #{i}
+      </PaginationButton>
+    )
+  })
+}
 
-  const testbed = new Testbed(
-    (
-      <Pagination>
-        {buildPages(5)}
+describe('<Pagination />', async () => {
+  it('should render all pages buttons', async () => {
+    await mount(
+      <Pagination variant="compact">
+        { buildPages(5) }
       </Pagination>
     )
-  )
 
-  context('full', () => {
-    it('should render all pages', () => {
-      const subject = testbed.render()
-      expect(subject.find('button').length).to.eq(5)
-      expect(subject.text().trim()).to.eq('#0#1#2#3#4')
+    const pagination = await PaginationLocator.find()
+    const buttons = await pagination.findAllPageButtons()
+
+    expect(buttons.length).to.equal(5)
+
+    const buttonsText = buttons.reduce((acc, button) => acc + button.getTextContent(), '')
+
+    expect(buttonsText).to.equal('#0#1#2#3#4')
+  })
+
+  it('should not render next/prev buttons', async () => {
+    await mount(
+      <Pagination
+        label="Example"
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(5) }
+      </Pagination>
+    )
+
+    const pagination = await PaginationLocator.find({ label: 'Example' })
+    const nextButton = await pagination.findArrowButton({ label: 'Next', expectEmpty: true })
+    const prevButton = await pagination.findArrowButton({ label: 'Prev', expectEmpty: true })
+
+    expect(nextButton).to.not.exist()
+    expect(prevButton).to.not.exist()
+  })
+
+  it('should meet a11y standards', async () => {
+    await mount(
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        { buildPages(5) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    expect(await pagination.accessible()).to.be.true()
+  })
+
+  it('should render page buttons', async () => {
+    await mount(
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        { buildPages(5) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    const buttons = await pagination.findAllPageButtons()
+
+    expect(buttons.length).to.equal(5)
+    expect(
+      buttons.reduce((acc, button) => acc + button.getTextContent(), '')
+    ).to.equal('#0#1#2#3#4')
+  })
+
+  it('should render a single page button', async () => {
+    await mount(
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev">
+        { buildPages(1) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    const buttons = await pagination.findAllPageButtons()
+
+    expect(buttons.length).to.equal(1)
+    expect(buttons[0].getTextContent()).to.equal(`#0`)
+  })
+
+  it('should render nothing if there are no pages', async () => {
+    await mount(
+      <Pagination variant="compact" labelNext="Next" labelPrev="Prev" />
+    )
+    const pagination = await PaginationLocator.find({ expectEmpty: true })
+
+    expect(pagination).to.not.exist()
+  })
+
+  it('should truncate pages to context', async () => {
+    await mount(
+      <Pagination
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(9, 3) }
+      </Pagination>
+    )
+
+    const pagination = await PaginationLocator.find()
+    const allButtons = await pagination.findAll({ tag: 'button' })
+    const paginationButtons = await pagination.findAllPageButtons()
+    const ellipses = await pagination.findAll({
+      attribute: 'aria-hidden',
+      contains: '…'
     })
 
-    it('should not render arrows', () => {
-      const subject = testbed.render()
-      expect(subject.find('button').findText('Prev')).to.have.length(0)
-      expect(subject.find('button').findText('Next')).to.have.length(0)
+    expect(allButtons.length).to.equal(9)
+    expect(paginationButtons.length).to.equal(7)
+    expect(ellipses.length).to.equal(2)
+
+    expect(pagination.getTextContent()).to.equal('Prev#0…#2#3#4#5#6…#8Next')
+  })
+
+  it('should truncate start', async () => {
+    await mount(
+      <Pagination
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(6, 5) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    const allButtons = await pagination.findAll({ tag: 'button' })
+    const paginationButtons = await pagination.findAllPageButtons()
+    const ellipses = await pagination.findAll({
+      attribute: 'aria-hidden',
+      contains: '…'
+    })
+
+    expect(allButtons.length).to.equal(4)
+    expect(paginationButtons.length).to.equal(3)
+    expect(ellipses.length).to.equal(1)
+
+    expect(pagination.getTextContent()).to.equal('Prev#0…#4#5')
+  })
+
+  it('should truncate end', async () => {
+    await mount(
+      <Pagination
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(6) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    const allButtons = await pagination.findAll({ tag: 'button' })
+    const paginationButtons = await pagination.findAllPageButtons()
+    const ellipses = await pagination.findAll({
+      attribute: 'aria-hidden',
+      contains: '…'
+    })
+
+    expect(allButtons.length).to.equal(6)
+    expect(paginationButtons.length).to.equal(5)
+    expect(ellipses.length).to.equal(1)
+
+    expect(pagination.getTextContent()).to.equal('#0#1#2#3…#5Next')
+  })
+
+  it('should omit ellipses when bounds included in context', async () => {
+    await mount(
+      <Pagination
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(7, 2) }
+      </Pagination>
+    )
+    const pagination = await PaginationLocator.find()
+    const allButtons = await pagination.findAll({ tag: 'button' })
+    const paginationButtons = await pagination.findAllPageButtons()
+    const ellipses = await pagination.findAll(
+      {
+        attribute: 'aria-hidden',
+        contains: '…'
+      },
+      { expectEmpty: true }
+    )
+
+    expect(allButtons.length).to.equal(9)
+    expect(paginationButtons.length).to.equal(7)
+    expect(ellipses.length).to.equal(0)
+
+    expect(
+      allButtons.reduce((acc, button) => acc + button.getTextContent(), '')
+    ).to.equal('Prev#0#1#2#3#4#5#6Next')
+  })
+
+  describe('when updating with the FIRST page becoming current', () => {
+    it('should move focus from the Previous Page button to the first page button', async () => {
+      const subject = await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(7, 1) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const prevButton = await pagination.findArrowButton({ label: 'Previous'  })
+
+      await prevButton.focus()
+
+      await subject.setProps({ children: buildPages(7, 0) })
+
+      const button0 = await pagination.findPageButton({ label: '#0' })
+
+      expect(button0.containsFocus()).to.be.true()
+    })
+
+    it('should not change focus when the Previous Page button did not have focus', async () => {
+      const subject = await mount(
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          { buildPages(7, 1) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const button1 = await pagination.findPageButton({ label: '#1' })
+
+      await button1.focus()
+
+      await subject.setProps({ children: buildPages(7, 0) })
+
+      expect(button1.containsFocus()).to.be.true()
+    })
+
+    it('should not continue to change focus on subsequent updates', async () => {
+      const subject = await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(7, 1) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const prevButton = await pagination.findArrowButton({ label: 'Previous' })
+
+      await prevButton.focus()
+
+      await subject.setProps({ children: buildPages(7, 0) })
+
+      const button1 = await pagination.findPageButton({ label: '#1' })
+
+      await button1.focus()
+
+      await subject.setProps({ children: buildPages(7, 0) })
+
+      expect(button1.containsFocus()).to.be.true()
     })
   })
 
-  context('compact', () => {
-    it('should render pages', () => {
-      const subject = testbed.render({
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
-      expect(subject.find('button').length).to.eq(5)
-      expect(subject.text().trim()).to.eq('#0#1#2#3#4')
+  describe('when updating with the LAST page becoming current', async () => {
+    it('should move focus from the Next Page button to the last page button', async () => {
+      const subject = await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(7, 5) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+
+      await nextButton.focus()
+
+      await subject.setProps({ children: buildPages(7, 6) })
+
+      const button6 = await pagination.findPageButton({ contains: '#6' })
+
+      expect(button6.containsFocus()).to.be.true()
     })
 
-    it('should render a single page', () => {
-      const subject = testbed.render({
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev',
-        children: <PaginationButton key="0">#000</PaginationButton>
-      })
-      expect(subject.find('button')).to.have.length(1)
-      expect(subject.findElementWithText('button', '#000')).to.have.length(1)
+    it('should not change focus when the Next Page button did not have focus', async () => {
+      const subject = await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(7, 5) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const button5 = await pagination.findPageButton({ contains: '#5' })
+
+      await button5.focus()
+
+      await subject.setProps({ children: buildPages(7, 6) })
+
+      expect(button5.containsFocus()).to.be.true()
     })
 
-    it('should render no pages', () => {
-      const subject = testbed.render({
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev',
-        children: []
-      })
-      expect(subject.find('button').length).to.eq(0)
+    it('should not continue to change focus on subsequent updates', async () => {
+      const subject = await mount(
+        <Pagination variant="compact" labelNext="Next" labelPrev="Previous">
+          {buildPages(7, 5)}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+
+      await nextButton.focus()
+
+      await subject.setProps({ children: buildPages(7, 6) })
+
+      const button5 = await pagination.findPageButton({ contains: '#5' })
+
+      await button5.focus()
+
+      await subject.setProps({ children: buildPages(7, 6) })
+
+      expect(button5.containsFocus()).to.be.true()
+    })
+  })
+
+  describe('arrows', async () => {
+    it('should not continue to change focus on subsequent updates', async () => {
+      const subject = await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(6) }
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+
+      let prevButton = await pagination.findArrowButton({ label: 'Previous', expectEmpty: true })
+
+      expect(prevButton).to.not.exist()
+
+      let nextButton = await pagination.findArrowButton({ label: 'Next' })
+
+      expect(nextButton).to.exist()
+
+      await subject.setProps({ children: buildPages(6, 5) })
+
+      prevButton = await pagination.findArrowButton({ label: 'Previous' })
+
+      expect(prevButton).to.exist()
+
+      nextButton = await pagination.findArrowButton({ label: 'Next', expectEmpty: true })
+
+      expect(nextButton).to.not.exist()
     })
 
-    it('should truncate pages to context', () => {
-      const subject = testbed.render({
-        children: buildPages(9, 3),
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
-      expect(subject.find('button').length).to.eq(9)
-      expect(subject.text().trim()).to.eq('Prev#0...#2#3#4#5#6...#8Next')
-    })
-
-    it('should truncate start', () => {
-      const subject = testbed.render({
-        children: buildPages(6, 5),
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
-      expect(subject.find('button').length).to.eq(4)
-      expect(subject.text().trim()).to.eq('Prev#0...#4#5')
-    })
-
-    it('should truncate end', () => {
-      const subject = testbed.render({
-        children: buildPages(6),
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
-      expect(subject.find(PaginationButton).length).to.eq(5)
-      expect(subject.text().trim()).to.eq('#0#1#2#3...#5Next')
-    })
-
-    it('should omit ellipses when bounds included in context', () => {
-      const subject = testbed.render({
-        children: buildPages(7, 2),
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
-      expect(subject.find('button').length).to.eq(9)
-      expect(subject.text().trim()).to.eq('Prev#0#1#2#3#4#5#6Next')
-    })
-
-    it('should display tooltips on the next and previous arrow buttons', () => {
-      const prevLabelText = 'Previous'
-      const subject = testbed.render({
-        children: buildPages(9, 3),
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: prevLabelText
-      })
-
-      const prevButton = subject.find('button').first()
-      prevButton.simulate('focus')
-      // TODO: Remove this by querying for Portal text with new test utils, once merged
-      const tooltipContent = subject.find(Portal).unwrap().node
-      expect(tooltipContent.textContent).to.include(prevLabelText)
-    })
-
-    context('when updating with the first page becoming current', () => {
-      it('should move focus from the Previous Page button to the first page button', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 1),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', 'Prev').focus()
-        subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#0').focused()).to.be.true()
-      })
-
-      it('should not change focus when the Previous Page button did not have focus', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 1),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', '#1').focus()
-        subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#1').focused()).to.be.true()
-      })
-
-      it('should not continue to change focus on subsequent updates', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 1),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', 'Prev').focus()
-        subject.setProps({ children: buildPages(7, 0) })
-        subject.findElementWithText('button', '#1').focus()
-        subject.setProps({ children: buildPages(7, 0) })
-        expect(subject.findElementWithText('button', '#1').focused()).to.be.true()
-      })
-    })
-
-    context('when updating with the last page becoming current', () => {
-      it('should move focus from the Next Page button to the last page button', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 5),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', 'Next').focus()
-        subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#6').focused()).to.be.true()
-      })
-
-      it('should not change focus when the Next Page button did not have focus', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 5),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', '#5').focus()
-        subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#5').focused()).to.be.true()
-      })
-
-      it('should not continue to change focus on subsequent updates', () => {
-        const subject = testbed.render({
-          children: buildPages(7, 5),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-        subject.findElementWithText('button', 'Next').focus()
-        subject.setProps({ children: buildPages(7, 6) })
-        subject.findElementWithText('button', '#5').focus()
-        subject.setProps({ children: buildPages(7, 6) })
-        expect(subject.findElementWithText('button', '#5').focused()).to.be.true()
-      })
-    })
-
-    describe('arrows', () => {
-      it('should render only when applicable', () => {
-        const subject = testbed.render({
-          children: buildPages(6),
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-
-        expect(subject.findElementWithText('button', 'Prev')).to.have.length(0)
-        expect(subject.findElementWithText('button', 'Next')).to.have.length(1)
-
-        subject.setProps({ children: buildPages(6, 5) })
-
-        expect(subject.findElementWithText('button', 'Prev')).to.have.length(1)
-        expect(subject.findElementWithText('button', 'Next')).to.have.length(0)
-      })
-
-      it('should navigate to adjacent pages', () => {
-        const onClick = testbed.stub()
-        const subject = testbed.render({
-          children: [
-            ...buildPages(6, 5),
-            <PaginationButton key="last" onClick={onClick}>Last</PaginationButton>
-          ],
-          variant: 'compact',
-          labelNext: 'Next',
-          labelPrev: 'Prev'
-        })
-
-        subject.findElementWithText('button', 'Next').click()
-
-        expect(onClick).to.have.been.called()
-      })
-    })
-
-    describe('when passing down props to View', () => {
+    describe('when passing down props to View', async () => {
       const allowedProps = {
         margin: 'small',
-        as: 'section',
-        display: View.defaultProps.display
+        as: 'section'
       }
 
       Object.keys(View.propTypes)
         .filter(prop => prop !== 'theme' && prop !== 'children' && prop !== 'elementRef')
         .forEach((prop) => {
+          const warning = `Warning: ${View.disallowedPropWarning(prop, Pagination)}`
+
           if (Object.keys(allowedProps).indexOf(prop) < 0) {
-            it(`should NOT allow the '${prop}' prop`, () => {
-              const subject = testbed.render({
-                variant: 'compact',
-                labelNext: 'Next',
-                labelPrev: 'Prev',
-                [prop]: 'foo'
-              })
-              expect(subject.find(View).first().props()[prop]).to.not.exist()
+            it(`should NOT allow the '${prop}' prop`, async () => {
+              const consoleWarn = spy(console, 'warn')
+              const props = { [prop]: 'foo' }
+              await mount(
+                <Pagination
+                  variant="compact"
+                  labelNext="Next"
+                  labelPrev="Previous"
+                  {...props}
+                >
+                  { buildPages(6) }
+                </Pagination>
+              )
+              expect(consoleWarn).to.have.been.calledWith(warning)
             })
           } else {
-            it(`should allow the '${prop}' prop`, () => {
-              const subject = testbed.render({
-                variant: 'compact',
-                labelNext: 'Next',
-                labelPrev: 'Prev',
-                [prop]: allowedProps[prop]
-              })
-              expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+            it(`should allow the '${prop}' prop`, async () => {
+              const consoleWarn = spy(console, 'warn')
+              const props = { [prop]: allowedProps[prop] }
+              await mount(
+                <Pagination
+                  variant="compact"
+                  labelNext="Next"
+                  labelPrev="Previous"
+                  {...props}
+                >
+                  { buildPages(6) }
+                </Pagination>
+              )
+              expect(consoleWarn).to.not.have.been.calledWith(warning)
             })
           }
-      })
-
-      it(`should pass down the elementRef prop`, () => {
-        const elementRef = testbed.stub()
-        testbed.render({ elementRef })
-        expect(elementRef).to.have.been.called()
-      })
+        })
     })
 
-    // Testing compact only, since it is a superset of components in full
-    it('should meet a11y standards', done => {
-      const subject = testbed.render({
-        variant: 'compact',
-        labelNext: 'Next',
-        labelPrev: 'Prev'
-      })
+    it(`should pass down the elementRef prop`, async () => {
+      const elementRef = stub()
+      const subject = await mount(
+        <Pagination
+          elementRef={elementRef}
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          { buildPages(6) }
+        </Pagination>
+      )
+      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+    })
 
-      subject.should.be.accessible(done, {
-        ignores: [
-          'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-        ]
-      })
+    it('should navigate to adjacent pages', async () => {
+      const onClick = stub()
+
+      await mount(
+        <Pagination
+          variant="compact"
+          labelNext="Next"
+          labelPrev="Previous"
+        >
+          {[...buildPages(6, 5), <PaginationButton key="last" onClick={onClick}>Last</PaginationButton>]}
+        </Pagination>
+      )
+
+      const pagination = await PaginationLocator.find()
+      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+
+      await nextButton.click()
+
+      expect(onClick).to.have.been.called()
     })
   })
 })

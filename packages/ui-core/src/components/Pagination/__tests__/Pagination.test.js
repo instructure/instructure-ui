@@ -100,7 +100,7 @@ describe('<Pagination />', () => {
         labelPrev: 'Prev'
       })
       expect(subject.find('button').length).to.eq(9)
-      expect(subject.text().trim()).to.eq('Prev#0...#2#3#4#5#6...#8Next')
+      expect(subject.text().trim()).to.eq('Prev#0…#2#3#4#5#6…#8Next')
     })
 
     it('should truncate start', () => {
@@ -111,7 +111,7 @@ describe('<Pagination />', () => {
         labelPrev: 'Prev'
       })
       expect(subject.find('button').length).to.eq(4)
-      expect(subject.text().trim()).to.eq('Prev#0...#4#5')
+      expect(subject.text().trim()).to.eq('Prev#0…#4#5')
     })
 
     it('should truncate end', () => {
@@ -122,7 +122,7 @@ describe('<Pagination />', () => {
         labelPrev: 'Prev'
       })
       expect(subject.find(PaginationButton).length).to.eq(5)
-      expect(subject.text().trim()).to.eq('#0#1#2#3...#5Next')
+      expect(subject.text().trim()).to.eq('#0#1#2#3…#5Next')
     })
 
     it('should omit ellipses when bounds included in context', () => {

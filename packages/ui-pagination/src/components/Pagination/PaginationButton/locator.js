@@ -21,21 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-module.exports = {
-  files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/'
-  ]
-}
+import PaginationButton from './index'
+
+export default locator(PaginationButton.displayName)

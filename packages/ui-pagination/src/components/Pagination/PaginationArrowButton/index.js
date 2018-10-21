@@ -25,44 +25,44 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
+import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import IconStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
+import IconEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
+
 import testable from '@instructure/ui-testable'
 /**
 ---
 parent: Pagination
 ---
 **/
-
 @testable()
-export default class PaginationButton extends Component {
+export default class PaginationArrowButton extends Component {
   static propTypes = {
-    /**
-     * Content to render as page selection
-     */
-    children: PropTypes.node.isRequired,
-    /**
-     * Whether the page is currently displayed
-     */
-    current: PropTypes.bool
-  }
-
-  static defaultProps = {
-    current: false
+    direction: PropTypes.oneOf(['next', 'prev']),
+    label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
   }
 
   render() {
-    const variant = this.props.current ? 'primary' : 'link'
-    const exclude = this.props.current ? ['onClick', 'href'] : []
-    const props = omitProps(this.props, PaginationButton.propTypes, exclude)
+    const { label, direction, ...props } = this.props
+    const Icon = direction === 'prev' ? IconStart : IconEnd
     return (
-      <Button
-        variant={variant}
-        {...props}
-        aria-current={this.props.current ? 'page' : null}
+      <Tooltip
+        on={['hover', 'focus']}
+        tip={<PresentationContent>{label}</PresentationContent>}
       >
-        {this.props.children}
-      </Button>
+        <Button
+          {...props}
+          variant="icon"
+          size="small"
+          icon={Icon}
+          rel={(props.href || props.to) ? direction : null}
+        >
+          <ScreenReaderContent>{label}</ScreenReaderContent>
+        </Button>
+      </Tooltip>
     )
   }
 }

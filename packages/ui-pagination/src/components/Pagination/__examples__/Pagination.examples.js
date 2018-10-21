@@ -21,21 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { PaginationButton } from '../index'
 
-module.exports = {
-  files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/'
-  ]
+const buildPages = (count = 4, current = 0) => {
+  return Array.from(Array(count)).map((v, i) => {
+    return (
+      <PaginationButton key={i} current={i === current}>
+        #{i}
+      </PaginationButton>
+    )
+  })
+}
+
+export default {
+  sections: 'variant',
+  permutations: [
+    'variant',
+    {
+      children: [
+        buildPages(5),
+        buildPages(1),
+        buildPages(7, 2)
+      ],
+      label: [
+        null,
+        'Example Pagination'
+      ]
+    }
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        labelNext: 'Next',
+        labelPrev: 'Previous'
+      }
+    }
+  }
 }

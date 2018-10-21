@@ -22,20 +22,37 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
-    'packages/media-capture/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-tabs/',
-    'packages/ui-themes/',
-    'packages/ui-toggle-details/'
-  ]
-}
+import React from 'react'
+
+import { expect, mount } from '@instructure/ui-test-utils'
+
+import PaginationArrowButton from '../index'
+import PaginationArrowButtonLocator from '../locator'
+
+describe('<PaginationArrowButton />', async () => {
+  it('should render', async () => {
+    await mount(
+      <PaginationArrowButton
+        direction="prev"
+        label="Label"
+      />
+    )
+
+    const button = await PaginationArrowButtonLocator.find()
+    expect(button).to.exist()
+  })
+
+  it('should display tooltips', async () => {
+    await mount(
+      <PaginationArrowButton
+        direction="prev"
+        label="Label"
+      />
+    )
+
+    const button = await PaginationArrowButtonLocator.find()
+    const tooltip = await button.findTooltip()
+
+    expect((await tooltip.findPopoverContent()).getTextContent()).to.equal('Label')
+  })
+})
