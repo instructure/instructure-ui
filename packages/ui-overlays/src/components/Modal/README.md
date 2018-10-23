@@ -13,98 +13,100 @@ by using the `padding` prop on the `<ModalBody/>` if the use case requires it.
 render: false
 example: true
 ---
- const fpo = lorem.paragraphs(5)
+const fpo = lorem.paragraphs(5)
 
- class Example extends React.Component {
-   constructor (props) {
-     super(props)
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
 
-     this.state = {
-       open: false,
-       size: 'auto'
-     }
-   }
+    this.state = {
+      open: false,
+      size: 'auto'
+    }
+  }
 
-   handleButtonClick = () => {
-     this.setState(function (state) {
-       return { open: !state.open }
-     })
-   };
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  };
 
-   handleSelectChange = (e, o) => {
-     this.setState({ size: o.value })
-   };
+  handleSelectChange = (e, o) => {
+    this.setState({ size: o.value })
+  };
 
-   handleFormSubmit = e => {
-     e.preventDefault()
-     console.log('form submitted')
-     this.setState(state => ({ open: false }))
-   }
+  handleFormSubmit = e => {
+    e.preventDefault()
+    console.log('form submitted')
+    this.setState(state => ({ open: false }))
+  }
 
-   renderCloseButton () {
-     return (
-       <CloseButton
-         placement="end"
-         offset="medium"
-         variant="icon"
-         onClick={this.handleButtonClick}
-       >
-         Close
-       </CloseButton>
-     )
-   }
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="medium"
+        variant="icon"
+        onClick={this.handleButtonClick}
+      >
+        Close
+      </CloseButton>
+    )
+  }
 
-   render () {
-     const variants = [
-       {value: 'auto', label: 'Auto'},
-       {value: 'small', label: 'Small'},
-       {value: 'medium', label: 'Medium'},
-       {value: 'large', label: 'Large'},
-       {value: 'fullscreen', label: 'Full Screen'}
-     ]
+  render () {
+    const variants = [
+      {value: 'auto', label: 'Auto'},
+      {value: 'small', label: 'Small'},
+      {value: 'medium', label: 'Medium'},
+      {value: 'large', label: 'Large'},
+      {value: 'fullscreen', label: 'Full Screen'}
+    ]
 
-     return (
-       <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
-         <Select
-           onChange={this.handleSelectChange}
-           value={this.state.size}
-           label={<ScreenReaderContent>Modal size</ScreenReaderContent>}
-           inline
-         >
-           {variants.map((s) => <option value={s.value} key={s.value}>{s.label}</option>)}
-         </Select>
-         &nbsp;
-         <Button onClick={this.handleButtonClick}>
-           {this.state.open ? 'Close' : 'Open'} the Modal
-         </Button>
-         <Modal
-           as="form"
-           open={this.state.open}
-           onSubmit={this.handleFormSubmit}
-           onDismiss={() => { this.setState({ open: false }) }}
-           size={this.state.size}
-           label="Modal Dialog: Hello World"
-           shouldCloseOnDocumentClick
-         >
-           <ModalHeader>
-             {this.renderCloseButton()}
-             <Heading>Hello World</Heading>
-           </ModalHeader>
-           <ModalBody>
-             <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
-             <Text lineHeight="double">{fpo}</Text>
-           </ModalBody>
-           <ModalFooter>
-             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-             <Button variant="primary" type="submit">Submit</Button>
-           </ModalFooter>
-         </Modal>
-       </div>
-     )
-   }
- }
+    return (
+      <div style={{ padding: '0 0 11rem 0', margin: '0 auto' }}>
+        <Select
+          onChange={this.handleSelectChange}
+          value={this.state.size}
+          label={<ScreenReaderContent>Modal size</ScreenReaderContent>}
+          inline
+        >
+          {variants.map((s) => <option value={s.value} key={s.value}>{s.label}</option>)}
+        </Select>
+        &nbsp;
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        {this.state.open && (
+          <Modal
+            as="form"
+            open={this.state.open}
+            onSubmit={this.handleFormSubmit}
+            onDismiss={() => { this.setState({ open: false }) }}
+            size={this.state.size}
+            label="Modal Dialog: Hello World"
+            shouldCloseOnDocumentClick
+          >
+            <ModalHeader>
+              {this.renderCloseButton()}
+              <Heading>Hello World</Heading>
+            </ModalHeader>
+            <ModalBody>
+              <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
+              <Text lineHeight="double">{fpo}</Text>
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
+              <Button variant="primary" type="submit">Submit</Button>
+            </ModalFooter>
+          </Modal>
+        )}
+      </div>
+    )
+  }
+}
 
- render(<Example />)
+render(<Example />)
 ```
 
 ### Constraining Modal to a parent element
@@ -121,72 +123,74 @@ render: false
 example: true
 ---
 const fpo = lorem.paragraphs(1)
- class Example extends React.Component {
-   constructor (props) {
-     super(props)
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
 
-     this.state = {
-       open: false,
-       size: 'auto'
-     }
-   }
+    this.state = {
+      open: false,
+      size: 'auto'
+    }
+  }
 
-   handleButtonClick = () => {
-     this.setState(function (state) {
-       return { open: !state.open }
-     })
-   }
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  }
 
-   renderCloseButton () {
-     return (
-       <CloseButton
-         placement="end"
-         offset="medium"
-         variant="icon"
-         onClick={this.handleButtonClick}
-       >
-         Close
-       </CloseButton>
-     )
-   }
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="medium"
+        variant="icon"
+        onClick={this.handleButtonClick}
+      >
+        Close
+      </CloseButton>
+    )
+  }
 
-   render () {
-     return (
-       <div>
-         <Button onClick={this.handleButtonClick}>
-           {this.state.open ? 'Close' : 'Open'} the Modal
-         </Button>
-         <Modal
-           open={this.state.open}
-           onDismiss={() => { this.setState({ open: false }) }}
-           size="fullscreen"
-           label="Modal Dialog: Hello World"
-           shouldCloseOnDocumentClick
-           mountNode={() => document.getElementById('constrainExample')}
-           constrain="parent"
-         >
-           <ModalHeader>
-             {this.renderCloseButton()}
-             <Heading>This Modal contains an Autocomplete</Heading>
-           </ModalHeader>
-           <ModalBody>
-             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
-             <ModalAutoCompleteExample
-              label="Choose a state" defaultOption="12"
-              onChange={(e, o) => console.log(o.label)} />
-           </ModalBody>
-           <ModalFooter>
-             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
-           </ModalFooter>
-         </Modal>
-         <View margin="medium auto none" display="block" width="25rem" height="25rem" borderWidth="large" id="constrainExample"></View>
-       </div>
-     )
-   }
- }
+  render () {
+    return (
+      <div>
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        {this.state.open && (
+          <Modal
+            open={this.state.open}
+            onDismiss={() => { this.setState({ open: false }) }}
+            size="fullscreen"
+            label="Modal Dialog: Hello World"
+            shouldCloseOnDocumentClick
+            mountNode={() => document.getElementById('constrainExample')}
+            constrain="parent"
+          >
+            <ModalHeader>
+              {this.renderCloseButton()}
+              <Heading>This Modal contains an Autocomplete</Heading>
+            </ModalHeader>
+            <ModalBody>
+              <View as="p" margin="none none small"><Text>{fpo}</Text></View>
+              <ModalAutoCompleteExample
+                label="Choose a state" defaultOption="12"
+                onChange={(e, o) => console.log(o.label)} />
+            </ModalBody>
+            <ModalFooter>
+              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
+              <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
+            </ModalFooter>
+          </Modal>
+        )}
+        <View margin="medium auto none" display="block" width="25rem" height="25rem" borderWidth="large" id="constrainExample"></View>
+      </div>
+    )
+  }
+}
 
- class ModalAutoCompleteExample extends React.Component {
+class ModalAutoCompleteExample extends React.Component {
   render () {
     const options = [
       'Alabama', 'Alaska', 'American Samoa', 'Arizona',
