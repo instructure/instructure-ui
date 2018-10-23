@@ -123,4 +123,13 @@ function setAttributes (element, attributes = []) {
 }
 
 // only allow one Sandbox instance
-export default new Sandbox()
+const sandbox = new Sandbox()
+const mount = (element, context) => sandbox.mount(element, context)
+const stub = (obj, method, fn) => sandbox.stub(obj, method, fn)
+const spy = (obj, method) => sandbox.spy(obj, method)
+
+export {
+  mount,
+  stub,
+  spy
+}

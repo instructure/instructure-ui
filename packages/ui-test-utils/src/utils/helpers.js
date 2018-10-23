@@ -22,7 +22,8 @@
  * SOFTWARE.
  */
 import runAxeCheck from '@instructure/ui-axe-check'
-import { fireEvent, prettyDOM } from 'dom-testing-library'
+import { prettyDOM } from 'dom-testing-library'
+import { fireEvent } from './events'
 
 function getOwnerDocument (element) {
   return element.ownerDocument
@@ -54,8 +55,35 @@ function getComputedStyle (element) {
   return getOwnerWindow(element).getComputedStyle(element)
 }
 
+function hidden (element) {
+  const cs = getComputedStyle(element)
+  return (
+    cs.display !== 'inline' &&
+    element.offsetWidth <= 0 &&
+    element.offsetHeight <= 0
+  ) || cs.display === 'none'
+}
+
+function positioned (element) {
+  const POS = ['fixed', 'absolute']
+  if (POS.includes(element.style.position.toLowerCase())) return true
+  if (POS.includes(getComputedStyle(element).getPropertyValue('position').toLowerCase())) return true
+  return false
+}
+
 function visible (element) {
-  return !!( element.offsetWidth || element.offsetHeight || element.getClientRects().length )
+  let node = element
+  while (node) {
+    if (node === document.body) break
+    if (hidden(node)) return false
+    if (positioned(node)) break
+    node = node.parentNode
+  }
+  return true
+}
+
+function focusable (element) {
+  return !element.disabled && visible(element)
 }
 
 function getAttribute (element, ...args) {
@@ -110,5 +138,6 @@ export {
   getTextContent,
   getParentNode,
   focused,
-  visible
+  visible,
+  focusable
 }

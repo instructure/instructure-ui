@@ -45,10 +45,10 @@ export function bindElementToEvents (element, events) {
 
 function fireFocusEvent (element, fireEvent, init) {
   if (init) {
-    fireEvent(init)
     console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
 Test event handlers (with event initialization) and focus state behavior separately.
 Note: this means that .focused will be false unless you call .focus without event initialization.`)
+    return fireEvent(init)
   } else {
     // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
     element.focus()
@@ -59,7 +59,7 @@ function fireKeyboardEvent (fireEvent, whichKey, init) {
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
   const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
 
-  fireEvent({
+  return fireEvent({
     ...init,
     key,
     which: keyCode,

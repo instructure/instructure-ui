@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fireEvent } from 'dom-testing-library'
+import { fireEvent } from './events'
 
 import * as helpers from './helpers'
 import * as queries from './queries'

@@ -176,12 +176,11 @@ class Billboard extends Component {
 
   handleClick = (e) => {
     const {
-      disabled,
       readOnly,
       onClick
     } = this.props
 
-    if (disabled || readOnly) {
+    if (readOnly) {
       e.preventDefault()
       e.stopPropagation()
     } else if (typeof onClick === 'function') {
@@ -218,7 +217,7 @@ class Billboard extends Component {
         margin={margin}
         href={href}
         onClick={this.handleClick}
-        disabled={disabled || readOnly}
+        disabled={disabled}
         aria-disabled={(disabled || readOnly) ? 'true' : null}
       >
         {this.renderContent()}

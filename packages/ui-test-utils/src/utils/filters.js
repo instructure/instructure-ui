@@ -122,6 +122,22 @@ function filterByLabelText (container, results, text, options = {}) {
   }
 }
 
+function filterByFocusable (container, results) {
+  const selector = [
+    'a[href]:not([disabled])',
+    'frame',
+    'iframe',
+    'object',
+    'input:not([type=hidden]):not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    'button:not([disabled])',
+    '*[tabindex]'
+  ]
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => matchElementBySelector(element, selector.join(',')))
+}
+
 function queryAllBySelector (element = document.documentElement, selector = '*') {
   if (element instanceof Element) {
     let result = Array.from(element.querySelectorAll(selector))
@@ -139,6 +155,7 @@ function queryBySelector (...args) {
 }
 
 export {
+  filterByFocusable,
   filterByLabelText,
   filterByContents,
   filterByText,

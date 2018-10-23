@@ -288,13 +288,31 @@ describe('find, findAll', async () => {
           <button onFocus={handleFocus}>hello</button>
         )
 
-        const button = await find({ tag: 'button' })
+        const button = await find({ focusable: true })
 
         button.focus({ bubbles: true })
 
         const nativeEvent = handleFocus.getCall(0).args[0].nativeEvent
 
         expect(nativeEvent.bubbles).to.be.true()
+      })
+    })
+    describe('#click', async () => {
+      it('should support spies on event methods', async () => {
+        const handleClick = spy((e) => {
+          e.persist() // so that we can get the native event later
+          e.preventDefault()
+        })
+
+        await mount(
+          <button onClick={handleClick}>hello</button>
+        )
+
+        const button = await find({ tag: 'button' })
+
+        const event = button.click()
+
+        expect(event.preventDefault).to.have.been.calledOnce()
       })
     })
   })

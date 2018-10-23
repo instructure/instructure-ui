@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
 import Billboard from '../index'
 import BillboardFixture from '../fixture'
 
@@ -95,7 +95,6 @@ describe('<Billboard />', async () => {
     it('should not be clickable', async () => {
       const onClick = stub()
       await mount (
-
         <Billboard
           onClick={onClick}
           disabled
@@ -104,6 +103,39 @@ describe('<Billboard />', async () => {
       const button = await BillboardFixture.find()
 
       button.click()
+
+      expect(onClick).to.not.have.been.called()
+    })
+  })
+
+  describe('when readOnly', async () => {
+    it('should apply aria-disabled', async () => {
+      await mount(
+        <Billboard
+          heading='I am disabled'
+          href='#'
+          readOnly
+        />
+      )
+      const disabled = await BillboardFixture.find({
+        attribute: 'aria-disabled'
+      })
+      expect(disabled.getAttribute('aria-disabled')).to.equal('true')
+    })
+
+    it('should not be clickable', async () => {
+      const onClick = stub()
+      await mount (
+        <Billboard
+          onClick={onClick}
+          readOnly
+        />
+      )
+      const button = await BillboardFixture.find()
+
+      const event = button.click()
+
+      expect(event.preventDefault).to.have.been.calledOnce()
       expect(onClick).to.not.have.been.called()
     })
   })

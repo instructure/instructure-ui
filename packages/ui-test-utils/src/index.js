@@ -23,8 +23,7 @@
  */
 import { wait } from 'dom-testing-library'
 
-import Sandbox from './utils/sandbox'
-
+import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
 import fixture from './utils/fixture'
@@ -32,10 +31,6 @@ import { findAllByQuery, find, findAll, findAllFrames, findFrame } from './utils
 import { debug } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
 import { querySelectorAll, parseQueryArguments } from './utils/query-helpers'
-
-const mount = (element, context) => Sandbox.mount(element, context)
-const stub = (obj, method, fn) => Sandbox.stub(obj, method, fn)
-const spy = (obj, method) => Sandbox.spy(obj, method)
 
 export {
   parseQueryArguments,

@@ -29,6 +29,7 @@ import { waitForQueryResult } from './waitForQueryResult'
 import { visible, getOwnerDocument } from './helpers'
 
 import {
+ filterByFocusable,
  filterByLabelText,
  filterByText,
  filterByContents,
@@ -66,6 +67,7 @@ function parseQueryArguments () {
     selector = { css: selector }
   } else if (selector) {
     const {
+      focusable,
       locator,
       title,
       css,
@@ -78,6 +80,7 @@ function parseQueryArguments () {
       ...rest
     } = selector
     selector = {
+      focusable,
       locator,
       css,
       title,
@@ -104,6 +107,7 @@ function parseQueryArguments () {
 
 function querySelectorAll (element, selector, options) {
   const {
+    focusable,
     locator,
     css,
     tag,
@@ -158,6 +162,10 @@ function querySelectorAll (element, selector, options) {
     result = filterByAttribute(element, result, attribute, null, options)
   }
 
+  if (focusable === true) {
+    result = filterByFocusable(element, result, options)
+  }
+
   return (result || [])
     .filter((element) => {
       const doc = getOwnerDocument(element)
@@ -209,7 +217,18 @@ async function getQueryResult (element, query, options, message) {
 
 function validateSelector (selector = {}) {
   if (!selector) return null
-  const VALID_SELECTORS = [ 'locator', 'css', 'tag', 'text', 'contains', 'label', 'title', 'value', 'attribute']
+  const VALID_SELECTORS = [
+    'focusable',
+    'locator',
+    'css',
+    'tag',
+    'text',
+    'contains',
+    'label',
+    'title',
+    'value',
+    'attribute'
+  ]
   const valid = Object.keys(selector)
     .filter(key => !!selector[key] && VALID_SELECTORS.includes(key))
     .reduce((result, key) => { return { ...result, [key]: selector[key] } }, {})
