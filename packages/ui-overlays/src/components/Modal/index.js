@@ -283,15 +283,24 @@ export default class Modal extends Component {
     })
   }
 
+  buttonRef = el => {
+    this._closeButton = el
+    if (typeof this.props.closeButtonRef === 'function') {
+      this.props.closeButtonRef(el)
+    }
+  }
+
+  contentRef = el => {
+    this._content = el
+    if (typeof this.props.contentRef === 'function') {
+      this.props.contentRef(el)
+    }
+  }
+
   renderCloseButton() {
     return this.props.closeButtonLabel
       ? <CloseButton
-        buttonRef={el => {
-          this._closeButton = el
-          if (typeof this.props.closeButtonRef === 'function') {
-            this.props.closeButtonRef(el)
-          }
-        }}
+        buttonRef={this.buttonRef}
         placement="end"
         offset="medium"
         onClick={this.props.onDismiss}
@@ -337,25 +346,23 @@ export default class Modal extends Component {
           [styles[size]]: true,
           [styles.ie11]: this.ie11
         })}
-        ref={el => {
-          this._content = el
-          if (typeof contentRef === 'function') {
-            contentRef(el)
-          }
-        }}
+        ref={this.contentRef}
       >
         {this.renderCloseButton()}
         {children}
       </Dialog>
     )
 
-    const fullscreenLayoutClass = classnames({
-      [styles.fullscreenLayout]: true,
-      [styles[`fullscreenLayout--${constrain}`]]: true
-    })
-
     if (size === 'fullscreen') {
-      return <span className={fullscreenLayoutClass}>{dialog}</span>
+      return (
+        <span
+          className={classnames({
+            [styles.fullscreenLayout]: true,
+            [styles[`fullscreenLayout--${constrain}`]]: true
+          })}>
+            {dialog}
+          </span>
+      )
     } else {
       return (
         <Mask
@@ -385,34 +392,38 @@ export default class Modal extends Component {
       constrain
     } = this.props
 
+    const portalIsOpen = open || this.state.transitioning
+
     return (
       <Portal
         mountNode={mountNode}
         insertAt={insertAt}
-        open={open || this.state.transitioning}
+        open={portalIsOpen}
         onOpen={createChainedFunction(this.handlePortalOpen, onOpen)}
         onClose={onClose}
       >
-        <Transition
-          in={open}
-          transitionOnMount
-          unmountOnExit
-          type={transition}
-          onEnter={onEnter}
-          onEntering={onEntering}
-          onEntered={onEntered}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={createChainedFunction(this.handleTransitionExited, onExited)}
-        >
-          {
-            (constrain === 'parent') ?
-              <span className={styles.constrainContext}>
-                {this.renderModal()}
-              </span>
-              : this.renderModal()
-          }
-        </Transition>
+        {portalIsOpen && (
+          <Transition
+            in={open}
+            transitionOnMount
+            unmountOnExit
+            type={transition}
+            onEnter={onEnter}
+            onEntering={onEntering}
+            onEntered={onEntered}
+            onExit={onExit}
+            onExiting={onExiting}
+            onExited={createChainedFunction(this.handleTransitionExited, onExited)}
+          >
+            {
+              (constrain === 'parent') ?
+                <span className={styles.constrainContext}>
+                  {this.renderModal()}
+                </span>
+                : this.renderModal()
+            }
+          </Transition>
+        )}
       </Portal>
     )
   }
