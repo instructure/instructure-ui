@@ -276,18 +276,20 @@ class Tray extends Component {
     DOMNode && this.applyTheme(DOMNode)
   }
 
+  closeButtonRef = el => {
+    this._closeButton = el
+    if (typeof this.props.closeButtonRef === 'function') {
+     this.props.closeButtonRef(el)
+    }
+  }
+
   renderCloseButton () {
     return this.props.closeButtonLabel ? (
       <CloseButton
         placement={this.props.placement === 'end' ? 'start' : 'end'}
         offset="x-small"
         variant={this.props.closeButtonVariant}
-        buttonRef={el => {
-          this._closeButton = el
-          if (typeof this.props.closeButtonRef === 'function') {
-           this.props.closeButtonRef(el)
-          }
-        }}
+        buttonRef={this.closeButtonRef}
         onClick={this.props.onDismiss}
      >
        {this.props.closeButtonLabel}
@@ -337,57 +339,61 @@ class Tray extends Component {
       ...props
     } = this.props
 
+    const portalIsOpen = open || this.state.transitioning
+
     return (
       <Portal
-        open={open || this.state.transitioning}
+        open={portalIsOpen}
         onOpen={this.handlePortalOpen}
         insertAt={insertAt}
         mountNode={mountNode}
       >
-        <Transition
-          in={open}
-          type={this.transition}
-          onTransition={onTransition}
-          onEnter={onEnter}
-          onEntering={onEntering}
-          onEntered={createChainedFunction(this.handleTransitionComplete, onEntered, onOpen)}
-          onExit={onExit}
-          onExiting={onExiting}
-          onExited={createChainedFunction(this.handleTransitionComplete, onExited, onClose)}
-          transitionOnMount
-          transitionEnter
-          transitionExit
-        >
-          <span
-            {...omitProps(props, Tray.propTypes)}
-            className={classnames({
-              [styles.root]: true,
-              [styles.border]: border,
-              [styles.shadow]: shadow,
-              [styles[size]]: true,
-              [styles[`placement--${this.props.placement}`]]: true
-            })}
-            ref={contentRef}
+        {portalIsOpen && (
+          <Transition
+            in={open}
+            type={this.transition}
+            onTransition={onTransition}
+            onEnter={onEnter}
+            onEntering={onEntering}
+            onEntered={createChainedFunction(this.handleTransitionComplete, onEntered, onOpen)}
+            onExit={onExit}
+            onExiting={onExiting}
+            onExited={createChainedFunction(this.handleTransitionComplete, onExited, onClose)}
+            transitionOnMount
+            transitionEnter
+            transitionExit
           >
-            {
-              (this.state.transitioning) ? this.renderContent() : (
-                <Dialog
-                  label={label}
-                  defaultFocusElement={this.defaultFocusElement}
-                  open
-                  shouldContainFocus={shouldContainFocus}
-                  shouldReturnFocus={shouldReturnFocus}
-                  shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
-                  shouldCloseOnEscape
-                  liveRegion={liveRegion}
-                  onDismiss={onDismiss}
-                >
-                  {this.renderContent()}
-                </Dialog>
-              )
-            }
-          </span>
-        </Transition>
+            <span
+              {...omitProps(props, Tray.propTypes)}
+              className={classnames({
+                [styles.root]: true,
+                [styles.border]: border,
+                [styles.shadow]: shadow,
+                [styles[size]]: true,
+                [styles[`placement--${this.props.placement}`]]: true
+              })}
+              ref={contentRef}
+            >
+              {
+                (this.state.transitioning) ? this.renderContent() : (
+                  <Dialog
+                    label={label}
+                    defaultFocusElement={this.defaultFocusElement}
+                    open
+                    shouldContainFocus={shouldContainFocus}
+                    shouldReturnFocus={shouldReturnFocus}
+                    shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
+                    shouldCloseOnEscape
+                    liveRegion={liveRegion}
+                    onDismiss={onDismiss}
+                  >
+                    {this.renderContent()}
+                  </Dialog>
+                )
+              }
+            </span>
+          </Transition>
+        )}
       </Portal>
     )
   }
