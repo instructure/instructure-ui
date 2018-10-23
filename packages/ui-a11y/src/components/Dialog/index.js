@@ -171,6 +171,10 @@ class Dialog extends Component {
     }
   }
 
+  getRef = el => {
+    this._root = el
+  }
+
   get contentElement () {
     let contentElement = findDOMNode(this.props.contentElement)
 
@@ -192,9 +196,7 @@ class Dialog extends Component {
     return this.props.open ? (
       <ElementType
         {...omitProps(this.props, Dialog.propTypes)}
-        ref={el => {
-          this._root = el
-        }}
+        ref={this.getRef}
         role={this.props.label ? 'dialog' : null}
         aria-label={this.props.label}
         className={this.props.className} // eslint-disable-line react/prop-types

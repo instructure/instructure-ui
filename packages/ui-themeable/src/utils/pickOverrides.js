@@ -34,8 +34,11 @@
 export default function pickOverrides (defaultTheme, theme) {
   const overrides = {}
 
+  // shortcut if possible
+  if ((defaultTheme === theme) || !theme) return overrides
+
   // filter out any properties that have values that are the same as in defaults
-  Object.keys(theme || {}).forEach((key) => {
+  Object.keys(theme).forEach((key) => {
     if (defaultTheme[key] !== theme[key]) {
       overrides[key] = theme[key]
     }

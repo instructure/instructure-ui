@@ -75,7 +75,7 @@ export function applyVariablesToNodeStyle (domNode, variables, defaults, prefix)
 
   const overrides = pickOverrides(defaults, variables)
 
-  if (overrides && Object.keys(overrides).length > 0) {
+  if (overrides && !isEmpty(overrides)) {
     setCustomProperties(domNode, formatVariableNames(overrides, prefix))
   }
 }
