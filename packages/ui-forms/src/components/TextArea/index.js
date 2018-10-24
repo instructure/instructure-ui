@@ -30,6 +30,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import themeable from '@instructure/ui-themeable'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
+import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -150,12 +151,23 @@ class TextArea extends Component {
       this._listener.remove()
     }
 
+    if (this._textareaResizeListener) {
+      this._textareaResizeListener.remove()
+    }
+
     if (this._request) {
       this._request.cancel()
     }
 
     if (this._debounced) {
       this._debounced.cancel()
+    }
+  }
+
+  _textareaResize = (evt) => {
+    if(this._textarea.style.height != this._height) {
+      this._manuallyResized = true
+      this._textarea.style.overflowY = 'auto'
     }
   }
 
@@ -169,12 +181,16 @@ class TextArea extends Component {
         this._listener = addEventListener(window, 'resize', this._debounced)
       }
 
+      if (this._textarea && !this._textareaResizeListener) {
+        this._textareaResizeListener = addResizeListener(this._textarea, this._textareaResize, ['height'])
+      }
+
       this._request = requestAnimationFrame(this.grow)
     }
   }
 
-  grow = () => {
-    if (!this._textarea) {
+  grow = (evt) => {
+    if (!this._textarea || this._manuallyResized) {
       return
     }
 
@@ -207,6 +223,7 @@ class TextArea extends Component {
       this._container.style.minHeight = height
     }
 
+    this._height = height
     this._textarea.style.height = height
     this._textarea.scrollTop = this._textarea.scrollHeight
   }

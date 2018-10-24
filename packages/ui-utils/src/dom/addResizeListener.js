@@ -40,9 +40,9 @@ import requestAnimationFrame from './requestAnimationFrame'
  * @param {function} handler - function to run when resize occurs
  * @returns {function} remove - cancel the listener and no longer execute the handler function
  */
-export default function addResizeListener (el, handler) {
+export default function addResizeListener (el, handler, dimensions = ['width']) {
   const node = findDOMNode(el)
-  let { width } = getBoundingClientRect(node)
+  let origSize = getBoundingClientRect(node)
   let cancelled = false
   let raf
 
@@ -57,11 +57,11 @@ export default function addResizeListener (el, handler) {
       height: boundingRect.height
     }
 
-    if (size.width !== width && typeof handler === 'function') {
+    if (dimensions.some((dim) => size[dim] != origSize[dim]) && typeof handler === 'function') {
       handler(size)
     }
 
-    width = size.width
+    origSize = size
 
     raf = requestAnimationFrame(checkDimensions)
   }
