@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.31.0"></a>
+# [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
+
+
+### Features
+
+* **ui-billboard:** update tests to run on React 16 ([a9b7912](https://github.com/instructure/instructure-ui/commit/a9b7912))
+* **ui-test-utils:** add spy on Event.preventDefault, focusable selector ([1e68a42](https://github.com/instructure/instructure-ui/commit/1e68a42))
+
+
+
+
+
 <a name="5.30.0"></a>
 # [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
 

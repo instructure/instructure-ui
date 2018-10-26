@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.31.0"></a>
+# [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **ui-test-utils,ui-testbed:** queries should work with SVG elements ([a25f720](https://github.com/instructure/instructure-ui/commit/a25f720))
+
+
+### Features
+
+* **ui-svg-images:** update tests to run on React 16 ([0f4e40a](https://github.com/instructure/instructure-ui/commit/0f4e40a))
+
+
+
+
+
 <a name="5.30.0"></a>
 # [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
 

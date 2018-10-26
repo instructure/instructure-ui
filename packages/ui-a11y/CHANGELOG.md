@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.31.0"></a>
+# [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **ui-a11y:** fix focus trapping for Dialog ([945b74c](https://github.com/instructure/instructure-ui/commit/945b74c))
+* **ui-test-utils:** add tests for components that render null ([e684860](https://github.com/instructure/instructure-ui/commit/e684860))
+
+
+
+
+
 <a name="5.30.0"></a>
 # [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
 

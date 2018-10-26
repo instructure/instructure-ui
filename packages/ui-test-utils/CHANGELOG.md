@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.31.0"></a>
+# [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **ui-test-utils:** .focus helper should programmatically focus ([36abbd6](https://github.com/instructure/instructure-ui/commit/36abbd6))
+* **ui-test-utils:** add tests for components that render null ([e684860](https://github.com/instructure/instructure-ui/commit/e684860))
+* **ui-test-utils:** filter in query instead of after ([50ae1c5](https://github.com/instructure/instructure-ui/commit/50ae1c5))
+* **ui-test-utils:** fix setContext method ([6834f87](https://github.com/instructure/instructure-ui/commit/6834f87))
+* **ui-test-utils,ui-testbed:** queries should work with SVG elements ([a25f720](https://github.com/instructure/instructure-ui/commit/a25f720))
+
+
+### Features
+
+* **ui-presets:** upgrade eslint ([a1dcf1f](https://github.com/instructure/instructure-ui/commit/a1dcf1f))
+* **ui-svg-images:** update tests to run on React 16 ([0f4e40a](https://github.com/instructure/instructure-ui/commit/0f4e40a))
+* **ui-test-utils:** add spy on Event.preventDefault, focusable selector ([1e68a42](https://github.com/instructure/instructure-ui/commit/1e68a42))
+
+
+
+
+
 <a name="5.30.0"></a>
 # [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
 

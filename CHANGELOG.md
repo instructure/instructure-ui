@@ -3,6 +3,46 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.31.0"></a>
+# [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
+
+
+### Bug Fixes
+
+* **media-capture:** esc key propagation for device inputs ([ea04778](https://github.com/instructure/instructure-ui/commit/ea04778))
+* **ui-a11y:** fix focus trapping for Dialog ([945b74c](https://github.com/instructure/instructure-ui/commit/945b74c))
+* **ui-elements:** Link role, type, tabIndex ([f42ab3b](https://github.com/instructure/instructure-ui/commit/f42ab3b))
+* **ui-focusable:** fix display property ([08a0bd5](https://github.com/instructure/instructure-ui/commit/08a0bd5))
+* **ui-forms:** DateInput should reset given an empty value ([b2130f8](https://github.com/instructure/instructure-ui/commit/b2130f8))
+* **ui-forms:** fix autogrow + resize interaction ([b65fdcd](https://github.com/instructure/instructure-ui/commit/b65fdcd))
+* **ui-layout,ui-overlays,ui-portal:** prevent error when Portal DOM node is not defined ([ad29d11](https://github.com/instructure/instructure-ui/commit/ad29d11))
+* **ui-presets:** fix publish-packages script ([1cca5af](https://github.com/instructure/instructure-ui/commit/1cca5af))
+* **ui-test-utils:** .focus helper should programmatically focus ([36abbd6](https://github.com/instructure/instructure-ui/commit/36abbd6))
+* **ui-test-utils:** add tests for components that render null ([e684860](https://github.com/instructure/instructure-ui/commit/e684860))
+* **ui-test-utils:** filter in query instead of after ([50ae1c5](https://github.com/instructure/instructure-ui/commit/50ae1c5))
+* **ui-test-utils:** fix setContext method ([6834f87](https://github.com/instructure/instructure-ui/commit/6834f87))
+* **ui-test-utils,ui-testbed:** queries should work with SVG elements ([a25f720](https://github.com/instructure/instructure-ui/commit/a25f720))
+
+
+### Features
+
+* **ui-billboard:** update tests to run on React 16 ([a9b7912](https://github.com/instructure/instructure-ui/commit/a9b7912))
+* **ui-breadcrumb:** update tests to run on React 16 ([02e9900](https://github.com/instructure/instructure-ui/commit/02e9900))
+* **ui-layout,View:** add light option to background prop ([764a372](https://github.com/instructure/instructure-ui/commit/764a372))
+* **ui-presets:** add warning for non-async tests ([00033a3](https://github.com/instructure/instructure-ui/commit/00033a3))
+* **ui-presets:** upgrade eslint ([a1dcf1f](https://github.com/instructure/instructure-ui/commit/a1dcf1f))
+* **ui-svg-images:** update tests to run on React 16 ([0f4e40a](https://github.com/instructure/instructure-ui/commit/0f4e40a))
+* **ui-test-utils:** add spy on Event.preventDefault, focusable selector ([1e68a42](https://github.com/instructure/instructure-ui/commit/1e68a42))
+
+
+### Reverts
+
+* WIP(*): adding Accessibility documentation to the docs ([f082fa4](https://github.com/instructure/instructure-ui/commit/f082fa4))
+
+
+
+
+
 <a name="5.30.0"></a>
 # [5.30.0](https://github.com/instructure/instructure-ui/compare/v5.29.0...v5.30.0) (2018-09-27)
 

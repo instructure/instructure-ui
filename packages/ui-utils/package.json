@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-utils",
-  "version": "5.30.0",
+  "version": "5.31.0",
   "description": "A collection of utilities for UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
