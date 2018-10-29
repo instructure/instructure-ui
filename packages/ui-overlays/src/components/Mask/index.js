@@ -70,11 +70,13 @@ class Mask extends Component {
     }
   }
 
+  contentRef = el => {
+    this._content = el
+  }
+
   render () {
     const content = ensureSingleChild(this.props.children, {
-      ref: el => {
-        this._content = el
-      }
+      ref: this.contentRef
     })
 
     const classes = classnames({
@@ -84,17 +86,15 @@ class Mask extends Component {
     })
 
     let props = omitProps(this.props, Mask.propTypes)
+    props.className = classes
 
     if (typeof this.props.onClick === 'function') {
-      props = {
-        ...props,
-        onClick: this.props.onClick,
-        tabIndex: -1
-      }
+      props.onClick = this.props.onClick
+      props.tabIndex = -1
     }
 
     return (
-      <span {...props} className={classes}>
+      <span {...props}>
         {content}
       </span>
     )
