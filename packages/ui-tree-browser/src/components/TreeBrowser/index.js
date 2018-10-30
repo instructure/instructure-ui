@@ -31,6 +31,7 @@ import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import testable from '@instructure/ui-testable'
 
 import TreeCollection from './TreeCollection'
 
@@ -42,6 +43,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class TreeBrowser extends Component {
   static propTypes = {
@@ -336,18 +338,16 @@ export default class TreeBrowser extends Component {
   }
 
   render () {
-    /* eslint-disable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */
     return (
-      <div
+      <ul
+        className={styles.list}
+        tabIndex={0} role="tree"
         onKeyDown={this.handleKeyDown}
         ref={(el) => { this._root = el }}
         aria-label={this.props.treeLabel}
       >
-        <ul className={styles.list} tabIndex={0} role="tree">
-          {this.renderRoot()}
-        </ul>
-      </div>
+        {this.renderRoot()}
+      </ul>
     )
-    /* eslint-enable jsx-a11y/no-static-element-interactions, jsx-a11y/no-noninteractive-tabindex */
   }
 }

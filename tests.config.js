@@ -52,7 +52,6 @@ module.exports = {
     'packages/ui-themeable/',
     'packages/ui-themes/',
     'packages/ui-toggle-details/',
-    'packages/ui-tree-browser/',
     'packages/ui-utils/'
   ]
 }

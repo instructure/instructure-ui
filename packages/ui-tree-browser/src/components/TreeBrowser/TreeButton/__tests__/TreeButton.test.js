@@ -23,58 +23,95 @@
  */
 
 import React from 'react'
-import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
+import { expect, mount, locator } from '@instructure/ui-test-utils'
 import TreeButton from '../index'
 import styles from '../styles.css'
 
-describe('<TreeButton />', () => {
-  const testbed = new Testbed(<TreeButton id="1" />)
+const TreeButtonLocator = locator(TreeButton.displayName)
 
-  it('should render', () => {
-    const button = testbed.render()
-    expect(button).to.be.present()
+describe('<TreeButton />', async () => {
+  it('should render', async () => {
+    await mount(
+      <TreeButton id="1" />
+    )
+    const treeButton = await TreeButtonLocator.find()
+    expect(treeButton).to.exist()
   })
 
-  describe('selected', () => {
-    it('shows the selected class if the button is selected', () => {
-      const button = testbed.render({selected: true})
-      expect(button.find(`.${styles.selected}`)).to.have.length(1)
-    })
-  })
-
-  describe('descriptor', () => {
-    it('does not render a descriptor element if no descriptor passed', () => {
-      const button = testbed.render()
-      expect(button.find(`.${styles.textDescriptor}`)).to.have.length(0)
-    })
-
-    it('renders a descriptor element if passed', () => {
-      const button = testbed.render({
-        descriptor: 'Some Descriptor'
-      })
-      expect(button.find(`.${styles.textDescriptor}`).text()).to.equal('Some Descriptor')
+  describe('selected', async () => {
+    it('should take the selected class if the button is selected', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          selected={true}
+        />
+      )
+      const treeButton = await TreeButtonLocator.find()
+      expect(treeButton.hasClass(styles['selected'])).to.be.true()
     })
   })
 
-  describe('icons', () => {
-    it('renders a passed collection Icon', () => {
-      const button = testbed.render({type: 'collection', collectionIcon: IconFolder})
-      const svg = button.find(IconFolder)
-      expect(svg.length).to.equal(1)
+  describe('descriptor', async () => {
+    it('should not render a descriptor element if no descriptor passed', async () => {
+      await mount(
+        <TreeButton id="1" />
+      )
+      expect(await TreeButtonLocator.find(`.${styles.textDescriptor}`,
+        { expectEmpty: true })).to.not.exist()
     })
 
-    it('renders a passed item Icon', () => {
-      const button = testbed.render({type: 'item', itemIcon: IconDocument})
-      const svg = button.find(IconDocument)
-      expect(svg.length).to.equal(1)
+    it('should render a descriptor element if descriptor passed', async () => {
+      await mount(
+        <TreeButton id="1" descriptor="Some Descriptor" />
+      )
+      const descriptor = await TreeButtonLocator.find(
+        `.${styles.textDescriptor}`,
+        { contains: 'Some Descriptor' }
+      )
+      expect(descriptor).to.exist()
+    })
+  })
+
+  describe('icons', async () => {
+    const Icon = (
+      <svg height="100" width="100">
+        <title>Test icon</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    it('should render a collection icon', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          type="collection"
+          collectionIcon={() => Icon}
+        />
+      )
+      const icon = await TreeButtonLocator.find({ tag: 'svg', contains: 'Test icon' })
+      expect(icon).to.exist()
     })
 
-    it('renders a TreeButton without icon if no icon prop passd', () => {
-      const button = testbed.render()
-      const svg1 = button.find(IconFolder)
-      const svg2 = button.find(IconDocument)
-      expect(svg1.length + svg2.length).to.equal(0)
+    it('should render an item icon', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          type="item"
+          itemIcon={() => Icon}
+        />
+      )
+      const icon = await TreeButtonLocator.find({ tag: 'svg', contains: 'Test icon' })
+      expect(icon).to.exist()
+    })
+
+    it('should render no icon if no icon prop passed', async () => {
+      await mount(
+        <TreeButton id="1" />
+      )
+      expect(await TreeButtonLocator.find(
+        { tag: 'svg' },
+        { expectEmpty: true }
+      )).to.not.exist()
     })
   })
 })

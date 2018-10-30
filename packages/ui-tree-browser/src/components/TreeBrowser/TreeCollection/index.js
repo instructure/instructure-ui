@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import Browser from '@instructure/ui-utils/lib/Browser'
+import testable from '@instructure/ui-testable'
 
 import TreeButton from '../TreeButton'
 
@@ -39,6 +40,8 @@ import theme from './theme'
 parent: TreeBrowser
 ---
 **/
+
+@testable()
 @themeable(theme, styles)
 export default class TreeCollection extends Component {
   static propTypes = {
@@ -174,7 +177,7 @@ export default class TreeCollection extends Component {
         key={`i${i}`}
         tabIndex="-1"
         role="treeitem"
-        title={item.name}
+        aria-label={item.name}
         className={styles.item}
         aria-level={this.props.level + 1}
         aria-posinset={(i + 1) + numCollections}
@@ -241,7 +244,7 @@ export default class TreeCollection extends Component {
         className={classnames(classes)}
         tabIndex="-1"
         role="treeitem"
-        title={this.props.name}
+        aria-label={this.props.name}
         aria-level={level}
         aria-posinset={position}
         aria-setsize={this.props.numChildren}

@@ -87,7 +87,7 @@ describe('<TreeBrowser /> in ui-core', () => {
   it('should render first keyed collection if showRootCollection is true and rootId specified', () => {
     const tree = testbed.render()
     expect(tree.find('button').length).to.equal(1)
-    expect(tree.find('li').first().getAttribute('title')).to.equal('Root Directory')
+    expect(tree.find('li').first().getAttribute('aria-label')).to.equal('Root Directory')
   })
 
   it('should render all collections at top level if showRootCollection is true and rootId is undefined', () => {
@@ -125,7 +125,7 @@ describe('<TreeBrowser /> in ui-core', () => {
       const rootCollection = tree.find('button')
       rootCollection.simulate('click')
       expect(tree.find('button').length).to.equal(4)
-      tree.find('[title="Sub Root 1"]').simulate('click')
+      tree.find('[aria-label="Sub Root 1"]').simulate('click')
       expect(tree.find('button').length).to.equal(5)
       rootCollection.simulate('click')
       expect(tree.find('button').length).to.equal(1)
@@ -138,7 +138,7 @@ describe('<TreeBrowser /> in ui-core', () => {
       expect(tree.find('button').length).to.equal(4)
       tree.find('button').first().simulate('click')
       expect(tree.find('button').length).to.equal(4)
-      tree.find('[title="Sub Root 1"]').simulate('click')
+      tree.find('[aria-label="Sub Root 1"]').simulate('click')
       expect(tree.find('button').length).to.equal(4)
       expect(tree.instance().state.expanded).to.not.exist()
       expect(tree.instance().props.expanded).to.include(2)
@@ -156,9 +156,9 @@ describe('<TreeBrowser /> in ui-core', () => {
       const tree = testbed.render({selectionType: 'single'})
       tree.find('button').simulate('click')
       expect(tree.instance().state.selection).to.equal('collection_2')
-      tree.find('[title="Item 1"]').simulate('click')
+      tree.find('[aria-label="Item 1"]').simulate('click')
       expect(tree.instance().state.selection).to.equal('item_1')
-      tree.find('[title="Item 1"]').simulate('click')
+      tree.find('[aria-label="Item 1"]').simulate('click')
       expect(tree.instance().state.selection).to.equal('item_1')
     })
   })

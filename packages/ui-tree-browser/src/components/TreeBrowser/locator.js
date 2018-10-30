@@ -21,14 +21,26 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import {
+  locator,
+  parseQueryArguments,
+  mergeCSSIntoSelector,
+  findAll,
+  find
+} from '@instructure/ui-test-utils'
 
-export default function ({ colors, spacing, typography, borders }) {
-  return {
-    fontFamily: typography.fontFamily,
-    baseSpacingSmall: spacing.xSmall,
-    baseSpacingMedium: spacing.small,
-    baseSpacingLarge: '1rem',
-    borderWidth: borders.widthSmall,
-    borderColor: colors.borderDark
+import TreeBrowser from './index'
+
+// TODO: if we make a TreeBrowserItem component + locator we could use it here.
+const itemSelector = '[role="treeitem"]'
+
+export default locator(TreeBrowser.displayName, {
+  findAllItems: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+  },
+  findItem: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
   }
-}
+})

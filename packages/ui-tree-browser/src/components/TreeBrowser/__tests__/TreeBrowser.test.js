@@ -23,389 +23,773 @@
  */
 
 import React from 'react'
-import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
-import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import TreeBrowser from '../index'
 
-describe('<TreeBrowser />', () => {
-  const testbed = new Testbed(<TreeBrowser
-    collections={{
-      2: {
-        id: 2,
-        name: 'Root Directory',
-        collections: [3, 4],
-        items: [1]
-      },
-      3: {
-        id: 3,
-        name: 'Sub Root 1',
-        collections: [5]
-      },
-      4: {
-        id: 4,
-        name: 'Sub Root 2'
-      },
-      5: {
-        id: 5,
-        name: 'Nested Sub Collection'
-      }
-    }}
-    items={{
-      1: {
-        id: 1,
-        name: 'Item 1'
-      }
-    }}
-    rootId={2}
-  />)
+import TreeBrowserLocator from '../locator'
 
-  it('should render a tree', () => {
-    const tree = testbed.render()
-    expect(tree).to.be.present()
+const COLLECTIONS_DATA = {
+  2: { id: 2, name: 'Root Directory', collections: [3, 4], items: [1] },
+  3: { id: 3, name: 'Sub Root 1', collections: [5] },
+  4: { id: 4, name: 'Sub Root 2' },
+  5: { id: 5, name: 'Nested Sub Collection' }
+}
+
+const ITEMS_DATA = {
+  1: { id: 1, name: 'Item 1' }
+}
+
+describe('<TreeBrowser />', async () => {
+  it('should render a tree', async () => {
+    await mount(
+      <TreeBrowser
+        collections={COLLECTIONS_DATA}
+        items={ITEMS_DATA}
+        rootId={2}
+      />
+    )
+    const tree = await TreeBrowserLocator.find()
+    expect(tree).to.exist()
   })
 
-  it('should be accessible', (done) => {
-    const tree = testbed.render()
-    tree.should.be.accessible(done, {
-      ignores: []
+  it('should render subcollections', async () => {
+    await mount(
+      <TreeBrowser
+        collections={COLLECTIONS_DATA}
+        items={ITEMS_DATA}
+        rootId={2}
+      />
+    )
+
+    const tree = await TreeBrowserLocator.find()
+    const items = await tree.findAllItems()
+
+    expect(items.length).to.equal(1)
+
+    await items[0].click()
+
+    const itemsAfterClick = await tree.findAllItems()
+
+    expect(itemsAfterClick.length).to.equal(4)
+  })
+
+  it('should render all collections at top level if showRootCollection is true and rootId is undefined', async () => {
+    await mount(
+      <TreeBrowser
+        collections={COLLECTIONS_DATA}
+        items={ITEMS_DATA}
+        rootId={undefined /* eslint-disable-line no-undefined */}
+      />
+    )
+
+    const tree = await TreeBrowserLocator.find()
+    const items = await tree.findAllItems()
+    expect(items.length).to.equal(4)
+  })
+
+  describe('expanded', async () => {
+    it('should not expand collections or items without defaultExpanded prop', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem({ label: 'Sub Root 1', expectEmpty: true })
+
+      expect(item).to.not.exist()
+    })
+
+    it('should accept an array of default expanded collections', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2, 3]}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+
+      const items = (await tree.findAllItems()).map(item => item.getAttribute('aria-label'))
+
+      expect(items.length).to.equal(5)
+
+      expect(await tree.findItem({ label: 'Sub Root 2' })).to.exist()
+      expect(await tree.findItem({ label: 'Nested Sub Collection' })).to.exist()
+    })
+
+    it('should persist the state of expanded children when parent collapsed', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      const rootCollection = items[0]
+
+      await rootCollection.click()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      const subCollection = await tree.findItem({ label: 'Sub Root 1' })
+
+      await subCollection.click()
+
+      items = await tree.findAllItems()
+      expect(items.length).to.equal(5)
+
+      await rootCollection.click()
+
+      items = await tree.findAllItems()
+      expect(items.length).to.equal(1)
+
+      await rootCollection.click()
+
+      items = await tree.findAllItems()
+      expect(items.length).to.equal(5)
+    })
+
+    it('should not update expanded on click when set as explicit prop', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          expanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      await items[0].click()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      await (await tree.findItem({ label: 'Sub Root 1' })).click()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      expect(await tree.findItem({ label: 'Nested Sub Collection', expectEmpty: true }))
+        .to.not.exist()
     })
   })
 
-  it('should render subcollections', () => {
-    const tree = testbed.render()
-    expect(tree.find('button').length).to.equal(1)
-    tree.find('button').simulate('click')
-    expect(tree.find('button').length).to.equal(4)
-  })
+  describe('selected', async () => {
+    it('should not show the selection if selectionType is none', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
 
-  it('should not show the first keyed collection if showRootCollection is false', () => {
-    const tree = testbed.render({showRootCollection: false})
-    expect(tree.find('button').length).to.equal(2)
-  })
+      const item = await tree.findItem()
 
-  it('should render first keyed collection if showRootCollection is true and rootId specified', () => {
-    const tree = testbed.render()
-    expect(tree.find('button').length).to.equal(1)
-    expect(tree.find('li').first().getAttribute('title')).to.equal('Root Directory')
-  })
+      item.click()
 
-  it('should render all collections at top level if showRootCollection is true and rootId is undefined', () => {
-    const tree = testbed.render({rootId: undefined}) // eslint-disable-line no-undefined
-    expect(tree.find('button').length).to.equal(4)
-  })
-
-  describe('expanded', () => {
-    it('expanded state is empty without defaultExpanded prop', () => {
-      const tree = testbed.render()
-      expect(tree.instance().state.expanded.length).to.equal(0)
+      expect(item.getAttribute('aria-selected')).to.not.exist()
     })
 
-    it('accepts an array of default expanded collections and sets state', () => {
-      const tree = testbed.render({defaultExpanded: [2, 3]})
-      expect(tree.instance().state.expanded).to.include(2, 3)
-      expect(tree.find('button').length).to.equal(5)
+    it('should show the selection indicator on last clicked collection or item', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          selectionType="single"
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+
+      const item = await tree.findItem({ label: 'Root Directory' })
+
+      await item.click()
+
+      expect(item.getAttribute('aria-selected')).to.exist()
+
+      const nestedItem = await tree.findItem({ label: 'Item 1' })
+
+      await nestedItem.click()
+
+      expect(nestedItem.getAttribute('aria-selected')).to.exist()
+    })
+  })
+
+  describe('collections', async () => {
+    it('should not show the first keyed collection if showRootCollection is false', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          showRootCollection={false}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+
+      const items = await tree.findAllItems()
+
+      expect(items.length).to.equal(2)
     })
 
-    it('updates expanded state on handleCollectionClick', () => {
-      const tree = testbed.render()
-      tree.find('button').simulate('click')
-      expect(tree.instance().state.expanded).to.include(2)
+    it('should render first keyed collection if showRootCollection is true and rootId specified', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+
+      const item = await tree.findItem({ label: 'Root Directory' })
+
+      expect(item).to.exist()
     })
 
-    it('calls onCollectionToggle when expanding and collapsing with mouse', () => {
-      const onCollectionToggle = testbed.stub()
-      const tree = testbed.render({onCollectionToggle})
-      tree.find('button').simulate('click')
+    it('should render a folder icon by default', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+
+      const iconFolder = await tree.findAll('[name="IconFolder"]')
+
+      expect(iconFolder.length).to.equal(1)
+    })
+
+    it('should render a custom icon', async () => {
+      const IconCustom = (
+        <svg height="100" width="100">
+          <title>Custom icon</title>
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+      )
+
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          collectionIcon={() => IconCustom}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem({ label: 'Root Directory' })
+      const icons = await item.findAll({ tag: 'svg', title: 'Custom icon' })
+
+      expect(icons.length).to.equal(1)
+    })
+
+    it('should render without icon if set to null', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          collectionIcon={null}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+
+      expect(await tree.find({ tag: 'svg', expectEmpty: true })).to.not.exist()
+    })
+
+    it('should call onCollectionToggle when expanding and collapsing with mouse', async () => {
+      const onCollectionToggle = stub()
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          onCollectionToggle={onCollectionToggle}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem()
+
+      await item.click()
+
       expect(onCollectionToggle).to.have.been.called()
     })
 
-    it('calls onCollectionToggle on arrow key expansion or collapse', () => {
-      const onCollectionToggle = testbed.stub()
-      const tree = testbed.render({onCollectionToggle})
-      const button = tree.find('button')
-      button.focus()
-      button.keyDown('right')
-      button.keyDown('left')
-      button.keyDown('left')
-      expect(onCollectionToggle).to.have.been.called.exactly(2)
+    it('should call onCollectionToggle on arrow key expansion or collapse', async () => {
+      const onCollectionToggle = stub()
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          onCollectionToggle={onCollectionToggle}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.find({ label: 'Root Directory' })
+
+      await item.focus()
+
+      expect(item.focused()).to.be.true()
+
+      await item.keyDown('right')
+      await item.keyDown('left')
+      await item.keyDown('left')
+
+      expect(onCollectionToggle).to.have.been.calledTwice()
     })
 
-    it('persists the state of expanded children when parent collapsed', () => {
-      const tree = testbed.render()
-      const rootCollection = tree.find('button')
-      rootCollection.simulate('click')
-      expect(tree.find('button').length).to.equal(4)
-      tree.find('[title="Sub Root 1"]').simulate('click')
-      expect(tree.find('button').length).to.equal(5)
-      rootCollection.simulate('click')
-      expect(tree.find('button').length).to.equal(1)
-      rootCollection.simulate('click')
-      expect(tree.find('button').length).to.equal(5)
-    })
+    it('should call onCollectionClick on button activation (space/enter or click)', async () => {
+      const onCollectionClick = stub()
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          onCollectionClick={onCollectionClick}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
 
-    it('should not update expanded on click when set as explicit prop', () => {
-      const tree = testbed.render({expanded: [2]})
-      expect(tree.find('button').length).to.equal(4)
-      tree.find('button').first().simulate('click')
-      expect(tree.find('button').length).to.equal(4)
-      tree.find('[title="Sub Root 1"]').simulate('click')
-      expect(tree.find('button').length).to.equal(4)
-      expect(tree.instance().state.expanded).to.not.exist()
-      expect(tree.instance().props.expanded).to.include(2)
-    })
-  })
+      const item = await tree.findItem({ label: 'Root Directory' })
 
-  describe('selected', () => {
-    it('does not show the selection if selectionType is "none"', () => {
-      const tree = testbed.render()
-      tree.find('button').simulate('click')
-      expect(tree.instance().state.selection).to.equal('')
-    })
+      await item.click()
+      await item.focus()
 
-    it('shows the selection indicator on last clicked collection or item', () => {
-      const tree = testbed.render({selectionType: 'single'})
-      tree.find('button').simulate('click')
-      expect(tree.instance().state.selection).to.equal('collection_2')
-      tree.find('[title="Item 1"]').simulate('click')
-      expect(tree.instance().state.selection).to.equal('item_1')
-      tree.find('[title="Item 1"]').simulate('click')
-      expect(tree.instance().state.selection).to.equal('item_1')
+      expect(item.focused()).to.be.true()
+
+      await item.keyDown('space')
+      await item.keyDown('enter')
+
+      expect(onCollectionClick).to.have.been.calledThrice()
     })
   })
 
-  describe('collections', () => {
-    it('renders a folder icon by default', () => {
-      const tree = testbed.render()
-      const svg = tree.find(IconFolder)
-      expect(svg.length).to.equal(1)
+  describe('items', async () => {
+    it('should render a document icon by default', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      const iconDoc = await tree.findAll('[name="IconDocument"]')
+
+      expect(iconDoc.length).to.equal(1)
     })
 
-    it('renders a custom icon when passed', () => {
-      const tree = testbed.render({collectionIcon: IconPlus})
-      const svg = tree.find(IconPlus)
-      expect(svg.length).to.equal(1)
+    it('should render a custom icon', async () => {
+      const IconCustom = (
+        <svg height="100" width="100">
+          <title>Custom icon</title>
+          <circle cx="50" cy="50" r="40" />
+        </svg>
+      )
+
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+          itemIcon={() => IconCustom}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem({ label: 'Item 1' })
+      const icons = await item.findAll({ tag: 'svg', title: 'Custom icon' })
+
+      expect(icons.length).to.equal(1)
     })
 
-    it('renders without an icon if collection icon explicitly set to null', () => {
-      const tree = testbed.render({collectionIcon: null})
-      const svg = tree.find(IconFolder)
-      expect(svg.length).to.equal(0)
-    })
+    it('should render without icon if set to null', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const icon = await tree.find('[name="IconDocument"]', { expectEmpty: true })
 
-    it('properly expands and collapses', () => {
-      const tree = testbed.render()
-      const button = tree.find('button')
-      expect(tree.find('li')).to.have.length(1)
-      button.simulate('click')
-      expect(tree.find('li')).to.have.length(4)
-    })
-
-    it('renders icons properly', () => {
-      const tree = testbed.render({
-        collectionIconExpanded: IconDocument
-      })
-      const button = tree.find('button')
-      expect(button.find(IconFolder).length).to.equal(1)
-      expect(button.find(IconDocument).length).to.equal(0)
-      button.simulate('click')
-      expect(button.find(IconFolder).length).to.equal(0)
-      expect(button.find(IconDocument).length).to.equal(1)
-      button.simulate('click')
-      expect(button.find(IconFolder).length).to.equal(1)
-      expect(button.find(IconDocument).length).to.equal(0)
-    })
-
-    it('calls onCollectionClick on button activation (space/enter or click)', () => {
-      const onCollectionClick = testbed.stub()
-      const tree = testbed.render({onCollectionClick})
-      const button = tree.find('button')
-      button.simulate('click')
-      button.focus()
-      button.keyDown('space')
-      button.keyDown('enter')
-      expect(onCollectionClick).to.have.been.called.exactly(3)
-    })
-  })
-
-  describe('items', () => {
-    it('renders a document icon by default', () => {
-      const tree = testbed.render()
-      tree.find('button').simulate('click')
-      const svg = tree.find(IconDocument)
-      expect(svg.length).to.equal(1)
-    })
-
-    it('renders a custom icon when passed', () => {
-      const tree = testbed.render({itemIcon: IconPlus})
-      tree.find('button').simulate('click')
-      const svg = tree.find(IconPlus)
-      expect(svg.length).to.equal(1)
-    })
-
-    it('renders without an icon if item icon explicitly set to null', () => {
-      const tree = testbed.render({itemIcon: null})
-      const svg = tree.find(IconDocument)
-      expect(svg.length).to.equal(0)
+      expect(icon).to.not.exist()
     })
   })
 
-  describe('for a11y', () => {
-    it('accepts a treeLabel prop', () => {
-      const tree = testbed.render({treeLabel: 'test'})
-      expect(tree.getAttribute('aria-label')).to.eq('test')
+  describe('for a11y', async () => {
+    it('should meet a11y standards', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      expect(await tree.accessible()).to.be.true()
     })
 
-    it('toggles aria-expanded', () => {
-      const tree = testbed.render()
-      const li = tree.find('li')
-      const button = li.find('button')
-      expect(li.getAttribute('aria-expanded')).to.eq('false')
-      button.simulate('click')
-      expect(li.getAttribute('aria-expanded')).to.eq('true')
+    it('should accept a treeLabel prop', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          treeLabel="Test treeLabel"
+        />
+      )
+      const tree = await TreeBrowserLocator.find({ label: 'Test treeLabel' })
+      expect(tree).to.exist()
     })
 
-    it('uses aria-selected when selectionType is not "none"', () => {
-      const tree = testbed.render({selectionType: 'single', defaultExanded: [2]})
-      const li = tree.find('li')
-      const button = li.find('button')
-      expect(li.getAttribute('aria-selected')).to.eq(null)
-      button.simulate('click')
-      expect(li.getAttribute('aria-selected')).to.eq('true')
-      expect(tree.find('li').at(1).getAttribute('aria-selected')).to.eq('false')
+    it('should toggle aria-expanded', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem()
+
+      expect(item.getAttribute('aria-expanded')).to.equal('false')
+
+      await item.click()
+
+      expect(item.getAttribute('aria-expanded')).to.equal('true')
     })
 
-    it('updates tabindex on keyboard nav', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      button.node.focus()
-      button.keyDown('down')
-      const b2 = tree.node.getNavigableNodes()[1]
-      expect(button.node.getAttribute('tabindex')).to.eq('-1')
-      expect(b2.getAttribute('tabindex')).to.eq('0')
+    it('should use aria-selected when selectionType is not none', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          selectionType="single"
+        />
+      )
+      const tree = await TreeBrowserLocator.find()
+      const item = await tree.findItem()
+
+      expect(item.getAttribute('aria-selected')).to.not.exist()
+
+      await item.click()
+
+      expect(item.getAttribute('aria-selected')).to.equal('true')
+
+      const nestedItem = await tree.findItem({ label: 'Sub Root 1' })
+
+      expect(nestedItem.getAttribute('aria-selected')).to.equal('false')
     })
 
-    it('should move focus down when down key is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      button.node.focus()
-      button.keyDown('down')
-      const b2 = tree.node.getNavigableNodes()[1]
-      expect(b2 === document.activeElement).to.be.true()
+    it('should move focus with the up/down arrow keys', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find({ focusable: true })
+      const items = await tree.findAllItems()
+
+      await tree.focus()
+
+      expect(tree.focused()).to.be.true()
+
+      await tree.keyDown('down')
+
+      expect(items[0].focused()).to.be.true()
+
+      await tree.keyDown('down')
+
+      expect(items[0].focused()).to.be.false()
+      expect(items[1].focused()).to.be.true()
+
+      await tree.keyDown('up')
+
+      expect(items[0].focused()).to.be.true()
     })
 
-    it('should move focus down when down "J" is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      button.node.focus()
-      button.keyDown('j')
-      const b2 = tree.node.getNavigableNodes()[1]
-      expect(b2 === document.activeElement).to.be.true()
+    it('should move focus via keyboard shortcuts', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      const items = await tree.findAllItems()
+
+      await tree.focus()
+
+      expect(tree.focused()).to.be.true()
+
+      await tree.keyDown('j')
+
+      expect(items[0].focused()).to.be.true()
+
+      await tree.keyDown('j')
+
+      expect(items[0].focused()).to.be.false()
+      expect(items[1].focused()).to.be.true()
+
+      await tree.keyDown('k')
+
+      expect(items[0].focused()).to.be.true()
     })
 
-    it('should move focus up when up key is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const subButton = tree.find('li').at(1)
-      subButton.focus()
+    it('should open collapsed collection with right arrow', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+        />
+      )
 
-      subButton.keyDown('up')
-      expect(button.node === document.activeElement).be.true()
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(1)
+
+      await items[0].focus()
+
+      expect(items[0].focused()).to.be.true()
+
+      await items[0].keyDown('right')
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
     })
 
-    it('should move focus up when down "K" is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const subButton = tree.find('li').at(1)
-      subButton.focus()
-      subButton.keyDown('k')
-      expect(button.node === document.activeElement).to.be.true()
+    it('should move focus down when right arrow is pressed on expanded collection', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      await items[0].focus()
+
+      expect(items[0].focused()).to.be.true()
+
+      await items[0].keyDown('right')
+
+      expect(items[1].focused()).to.be.true()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
     })
 
-    it('should open collapsed collection when right arrow is pressed', () => {
-      const tree = testbed.render()
-      const button = tree.find('li').first()
-      expect(tree.find('button').length).to.equal(1)
-      button.focus()
-      button.keyDown('right')
-      expect(tree.find('button').length).to.equal(4)
-      expect(button.node === document.activeElement).to.be.true()
+    it('should collapse expanded collection when left arrow is pressed', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      await items[0].focus()
+
+      await items[0].keyDown('left')
+
+      expect(items[0].focused()).to.be.true()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(1)
     })
 
-    it('should move focus down when right arrow is pressed on expanded collection', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const subButton = tree.find('li').at(1)
-      expect(tree.find('button').length).to.equal(4)
-      button.focus()
-      button.keyDown('right')
-      expect(tree.find('button').length).to.equal(4)
-      expect(subButton.node === document.activeElement).to.be.true()
+    it('should move focus up when left arrow is pressed on collapsed collection', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      const firstItem = items[0]
+      const secondItem = items[1]
+
+      await secondItem.focus()
+
+      await secondItem.keyDown('left')
+
+      expect(firstItem.focused()).to.be.true()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
     })
 
-    it('should collapse expanded collection when left arrow is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      expect(tree.find('button').length).to.equal(4)
-      button.focus()
-      button.keyDown('left')
-      expect(tree.find('button').length).to.equal(1)
-      expect(button.node === document.activeElement).to.be.true()
+    it('should select the node on enter or space if selectionType is not "none"', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+          selectionType="single"
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      const items = await tree.findAllItems()
+
+      const firstItem = items[0]
+      const secondItem = items[1]
+
+      await firstItem.focus()
+      await firstItem.keyDown('enter')
+
+      expect(firstItem.getAttribute('aria-selected')).to.equal('true')
+
+      await secondItem.focus()
+      await secondItem.keyDown('space')
+
+      expect(secondItem.getAttribute('aria-selected')).to.equal('true')
     })
 
-    it('should move focus up when left arrow is pressed on collapsed collection', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const subButton = tree.find('li').at(1)
-      expect(tree.find('button').length).to.equal(4)
-      subButton.focus()
-      subButton.keyDown('left')
-      expect(tree.find('button').length).to.equal(4)
-      expect(button.node === document.activeElement).to.be.true()
+    it('should not expand the node on enter or space if selectionType is not "none"', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          selectionType="single"
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(1)
+
+      const firstItem = items[0]
+
+      await firstItem.focus()
+
+      await firstItem.keyDown('enter')
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(1)
     })
 
-    it('should select the node on enter or space if selectionType is not "none"', () => {
-      const tree = testbed.render({selectionType: 'single', defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const subButton = tree.find('li').at(1)
-      button.focus()
-      button.keyDown('enter')
-      expect(tree.instance().state.selection).to.equal('collection_2')
-      subButton.focus()
-      subButton.keyDown('space')
-      expect(tree.instance().state.selection).to.equal('collection_3')
+    it('should move to the top node without expanding/collapsing anything when home is pressed', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
+
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
+
+      const firstItem = items[0]
+      const lastItem = items[3]
+
+      await lastItem.focus()
+      await firstItem.keyDown('home')
+
+      expect(firstItem.focused()).to.be.true()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
     })
 
-    it('if selectionType is not "none" it should not expand the node on enter or space', () => {
-      const tree = testbed.render({selectionType: 'single', defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      expect(tree.find('button').length).to.equal(4)
-      button.focus()
-      button.keyDown('enter')
-      expect(tree.instance().state.selection).to.equal('collection_2')
-      expect(tree.find('button').length).to.equal(4)
-    })
+    it('should move to the bottom node without expanding/collapsing anything when end is pressed', async () => {
+      await mount(
+        <TreeBrowser
+          collections={COLLECTIONS_DATA}
+          items={ITEMS_DATA}
+          rootId={2}
+          defaultExpanded={[2]}
+        />
+      )
 
-    it('should move to the top node without expanding/collapsing anything when home is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const lastButton = tree.find('li').last()
-      expect(tree.find('button').length).to.equal(4)
-      lastButton.focus()
-      button.keyDown('home')
-      expect(tree.find('button').length).to.equal(4)
-      expect(button.node === document.activeElement)
-    })
+      const tree = await TreeBrowserLocator.find()
+      let items = await tree.findAllItems()
 
-    it('should move to the bottom node without expanding/collapsing anything when end is pressed', () => {
-      const tree = testbed.render({defaultExpanded: [2]})
-      const button = tree.find('li').first()
-      const lastButton = tree.find('li').last()
-      expect(tree.find('button').length).to.equal(4)
-      button.focus()
-      button.keyDown('end')
-      expect(tree.find('button').length).to.equal(4)
-      expect(lastButton.node === document.activeElement)
+      const firstItem = items[0]
+      const lastItem = items[3]
+
+      await firstItem.focus()
+
+      await firstItem.keyDown('end')
+      expect(lastItem.focused()).to.be.true()
+
+      items = await tree.findAllItems()
+
+      expect(items.length).to.equal(4)
     })
   })
 })

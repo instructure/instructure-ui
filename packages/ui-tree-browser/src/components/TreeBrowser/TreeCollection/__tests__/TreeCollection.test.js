@@ -23,87 +23,211 @@
  */
 
 import React from 'react'
-import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
+import {
+  expect,
+  mount,
+  stub,
+  locator,
+  parseQueryArguments,
+  find,
+  findAll,
+  mergeCSSIntoSelector
+} from '@instructure/ui-test-utils'
+
 import TreeCollection from '../index'
 
-describe('<TreeCollection />', () => {
-  const testbed = new Testbed(<TreeCollection
-    id={1}
-    name={'Coll 1'}
-    descriptor={'Some Descriptor'}
-    collections={[
-      {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
-    ]}
-    items={[
-      {id: 1, name: 'Item 1'}
-    ]}
-    collectionIcon={IconFolder}
-    collectionIconExpanded={IconFolder}
-    itemIcon={IconDocument}
-  />)
 
-  it('should render', () => {
-    const collection = testbed.render()
-    expect(collection).to.be.present()
+// TODO: if we make a TreeBrowserItem component + locator we could use it here.
+const itemSelector = '[role="treeitem"]'
+
+const TreeCollectionLocator = locator(TreeCollection.displayName, {
+  findAllItems: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+  },
+  findItem: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
+  }
+})
+
+const IconFolder = (
+  <svg height="100" width="100">
+    <title>Folder icon</title>
+    <circle cx="50" cy="50" r="40" />
+  </svg>
+)
+
+const IconDocument = (
+  <svg height="100" width="100">
+    <title>Document icon</title>
+    <circle cx="50" cy="50" r="40" />
+  </svg>
+)
+
+describe('<TreeCollection />', async () => {
+  it('should render', async () => {
+    await mount(
+      <TreeCollection
+        id={1}
+        name="Coll 1"
+        collections={[
+          {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+        ]}
+        items={[
+          {id: 1, name: 'Item 1'}
+        ]}
+      />
+    )
+    const collection = await TreeCollectionLocator.find()
+    expect(collection).to.exist()
   })
 
-  describe('collections', () => {
-    it('renders icons properly on children', () => {
-      const collection = testbed.render({expanded: true})
-      expect(collection.find(IconFolder).length).to.equal(2)
-      expect(collection.find(IconDocument).length).to.equal(1)
+  describe('collections', async () => {
+    it('should render icons on children', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          ]}
+          items={[
+            {id: 1, name: 'Item 1'}
+          ]}
+          collectionIcon={() => IconFolder}
+          collectionIconExpanded={() => IconFolder}
+          itemIcon={() => IconDocument}
+          expanded={true}
+        />
+      )
+      const collection = await TreeCollectionLocator.find()
+
+      const folderIcons = await collection.findAll({ tag: 'svg', title: 'Folder icon' })
+      expect(folderIcons.length).to.equal(2)
+
+      const documentIcons = await collection.findAll({ tag: 'svg', title: 'Document icon' })
+      expect(documentIcons.length).to.equal(1)
     })
 
-    it('shows expanded icon without rendering a list if collection is empty', () => {
-      const collection = testbed.render({
-        collectionIconExpanded: IconDocument,
-        expanded: true,
-        collections: [],
-        items: []
-      })
-      expect(collection.find(IconDocument).length).to.equal(1)
-      expect(collection.find('ul')).to.have.length(0)
+    it('should pass an aria-expanded attribute to its list item', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          ]}
+          items={[
+            {id: 1, name: 'Item 1'}
+          ]}
+        />
+      )
+
+      const collection = await TreeCollectionLocator.find()
+      const item = await collection.findItem()
+
+      expect(item.getAttribute('aria-expanded')).to.exist()
     })
 
-    it('passes an aria-expanded attribute to its list item', () => {
-      const collection = testbed.render()
+    it('should pass an aria-selected attribute to its list item', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          ]}
+          items={[
+            {id: 1, name: 'Item 1'}
+          ]}
+          selection="collection_1"
+        />
+      )
 
-      const li = collection.find('li')
-      expect(li.getAttribute('aria-expanded')).to.exist()
+      const collection = await TreeCollectionLocator.find()
+      const item = await collection.findItem()
+
+      expect(item.getAttribute('aria-selected')).to.exist()
     })
 
-    it('passes an aria-selected attribute to its list item', () => {
-      const collection = testbed.render({selection: 'collection_1'})
-      const li = collection.find('li')
-      expect(li.getAttribute('aria-selected')).to.exist()
-    })
+    describe('onCollectionClick', async () => {
+      it('should return the correct collection params on click', async () => {
+        const onCollectionClick = stub()
+        await mount(
+          <TreeCollection
+            id={1}
+            name="Coll 1"
+            collections={[
+              {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+            ]}
+            items={[
+              {id: 1, name: 'Item 1'}
+            ]}
+            onCollectionClick={onCollectionClick}
+          />
+        )
 
-    describe('onCollectionClick', () => {
-      it('calls returns the correct collection params on click', () => {
-        const onCollectionClick = testbed.stub()
-        const collection = testbed.render({ onCollectionClick })
-        collection.find('button').simulate('click')
+        const collection = await TreeCollectionLocator.find()
+        const item = await collection.findItem()
+
+        await item.click()
+
         expect(onCollectionClick).to.have.been.calledOnce()
-        expect(onCollectionClick.lastCall.lastArg).to.deep.equal({id: 1, expanded: true, type: 'collection'})
+        expect(onCollectionClick.lastCall.lastArg).to.deep.equal({
+          id: 1,
+          expanded: true,
+          type: 'collection'
+        })
       })
     })
   })
 
-  describe('items', () => {
-    it('does not pass an aria-expanded attribute to its button', () => {
-      const collection = testbed.render({expanded: true})
-      const itemButton = collection.find('[title="Item 1"]').node
-      expect(itemButton.getAttribute('aria-expanded')).to.not.exist()
+  describe('items', async () => {
+    it('should not pass an aria-expanded attribute to its button', async () => {
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          ]}
+          items={[
+            {id: 1, name: 'Item 1'}
+          ]}
+          expanded={true}
+        />
+      )
+
+      const collection = await TreeCollectionLocator.find()
+      const item = await collection.findItem()
+      const button = await item.find('button')
+
+      expect(button.getAttribute('aria-expanded')).to.not.exist()
     })
 
-    it('calls any custom functions passed by onItemClick prop', () => {
-      const onItemClick = testbed.stub()
-      const collection = testbed.render({
-        onItemClick,
-        expanded: true
-      })
-      collection.find('[title="Item 1"]').simulate('click')
+    it('should call custom functions passed by onItemClick', async () => {
+      const onItemClick = stub()
+      await mount(
+        <TreeCollection
+          id={1}
+          name="Coll 1"
+          collections={[
+            {id: 2, name: 'Coll 2', descriptor: 'Another Descriptor'}
+          ]}
+          items={[
+            {id: 1, name: 'Item 1'}
+          ]}
+          onItemClick={onItemClick}
+          expanded={true}
+        />
+      )
+
+      const collection = await TreeCollectionLocator.find()
+      const item = await collection.findItem({ label: 'Item 1' })
+
+      await item.click()
+
       expect(onItemClick).to.have.been.calledOnce()
       expect(onItemClick.lastCall.lastArg).to.deep.equal({id: 1, type: 'item'})
     })
