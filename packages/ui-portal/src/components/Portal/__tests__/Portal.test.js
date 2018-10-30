@@ -111,7 +111,7 @@ describe('<Portal />', async () => {
 
       const button = await PortalFixture.find({ tag: 'button', text: 'Hello World' })
 
-      button.keyDown('Enter')
+      await button.keyDown('Enter')
 
       expect(onKeyDown).to.have.been.called()
 

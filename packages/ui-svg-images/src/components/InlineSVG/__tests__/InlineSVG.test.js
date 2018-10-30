@@ -30,135 +30,138 @@ import InlineSVGFixture from '../fixture'
 
 import styles from '../styles.css'
 
+const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
+
 describe('<InlineSVG />', async () => {
   it('should render', async () => {
     await mount(
-      <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
-      />
+      <InlineSVG src={SVG_SRC} />
     )
-    const subject = await InlineSVGFixture.find()
-    expect(subject).to.exist()
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg).to.exist()
   })
 
   it('should have role "presentation" when no title is provided', async () => {
     await mount(
-      <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
-      />
+      <InlineSVG src={SVG_SRC} />
     )
-    const noTitle = await InlineSVGFixture.find({
-      attribute: 'role'
-    })
-    expect(noTitle.getAttribute('role')).to.equal('presentation')
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getAttribute('role')).to.equal('presentation')
   })
 
   it('should have role "img" when a title is provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         title='testIconTitle'
       />
     )
-    const title = await InlineSVGFixture.find({
-      attribute: 'role'
-    })
-    expect(title.getAttribute('role')).to.equal('img')
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getAttribute('role')).to.equal('img')
   })
 
   it('should add a group with a role "presentation', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         title='testIconTitle'
       />
     )
-    const group = await InlineSVGFixture.find({
-      tag: 'g'
-    })
+    const svg = await InlineSVGFixture.find()
+    const group = await svg.find('g')
+
     expect(group.getAttribute('role')).to.equal('presentation')
   })
 
   it('should not render title when no title prop is provided', async () => {
     await mount(
-      <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
-      />
+      <InlineSVG src={SVG_SRC} />
     )
 
-    const emptyTitle = await InlineSVGFixture.find({
+    const svg = await InlineSVGFixture.find()
+    const title = await svg.find({
       tag: 'title',
       expectEmpty: true,
       visible: false
     })
-    expect(emptyTitle).to.not.exist()
+
+    expect(title).to.not.exist()
   })
 
   it('should render title when title prop is provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         title='testIconTitle'
       />
     )
-    const titles = await InlineSVGFixture.findAll({
+    const svg = await InlineSVGFixture.find()
+    const title = await svg.find({
       title: 'testIconTitle',
       visible: false
     })
 
-    expect(titles).to.have.length(1)
+    expect(title).to.exist()
   })
 
   it('should not render description when no description prop is provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
       />
     )
 
-    const emptyDescription = await InlineSVGFixture.find({
+    const svg = await InlineSVGFixture.find()
+    const description = await svg.find({
       tag: 'description',
       expectEmpty: true,
       visible: false
     })
-    expect(emptyDescription).to.not.exist()
+
+    expect(description).to.not.exist()
   })
 
   it('should render description when description prop is provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         description='testIconDesc'
       />
     )
 
-    const description = await InlineSVGFixture.findAll({
+    const svg = await InlineSVGFixture.find()
+    const description = await svg.find({
       tag: 'desc',
       visible: false
     })
-    expect(description).to.have.length(1)
+
+    expect(description).to.exist()
   })
 
   it('should produce null for "labelledBy" when no title or desc are provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
       />
     )
-    const labelled = await InlineSVGFixture.find()
-    expect(labelled.getAttribute('aria-labelledby')).to.not.exist()
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getAttribute('aria-labelledby')).to.not.exist()
   })
 
   it('should properly join ids when both title and desc attributes are provided', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         title='testIconTitle'
         description='testIconDescription'
       />
     )
-    const subject = await InlineSVGFixture.find()
-    const ids = subject.getAttribute('aria-labelledby').split(' ')
+    const svg = await InlineSVGFixture.find()
+    const ids = svg.getAttribute('aria-labelledby').split(' ')
 
     expect(ids).to.have.length(2)
   })
@@ -166,14 +169,14 @@ describe('<InlineSVG />', async () => {
   it('should set custom width and height properly', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         width='100px'
         height='200px'
       />
     )
-    const subject = await InlineSVGFixture.find()
-    const width = subject.getComputedStyle().width
-    const height = subject.getComputedStyle().height
+    const svg = await InlineSVGFixture.find()
+    const width = svg.getComputedStyle().width
+    const height = svg.getComputedStyle().height
 
     expect(width).to.equal('100px')
     expect(height).to.equal('200px')
@@ -182,71 +185,68 @@ describe('<InlineSVG />', async () => {
   it('should set focusable to false by default', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
       />
     )
-    const focus = await InlineSVGFixture.find({
-      attribute: 'focusable'
-    })
-    expect(focus.getAttribute('focusable')).to.equal('false')
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getAttribute('focusable')).to.equal('false')
   })
 
   it('should allow focusable to be overridden', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         focusable={true}
       />
     )
-    const focus = await InlineSVGFixture.find({
-      attribute: 'focusable'
-    })
-    expect(focus.getAttribute('focusable')).to.equal('true')
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getAttribute('focusable')).to.equal('true')
   })
 
   it('should display block when inline is false', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         inline={false}
       />
     )
-    const block = await InlineSVGFixture.find({
-      attribute: 'class'
-    })
-    expect(block.getComputedStyle().getPropertyValue('display')).to.equal('block')
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 
   it('should change the SVG color property', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
         color='success'
       />
     )
-    const color = await InlineSVGFixture.find()
-    expect(color.hasClass(styles['color--success'])).to.be.true()
+    const svg = await InlineSVGFixture.find()
+
+    expect(svg.hasClass(styles['color--success'])).to.be.true()
   })
 
   it('should allow passing in the svg src as a string', async () => {
     await mount(
-      <InlineSVG
-        src='<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>'
-      />
+      <InlineSVG src={`<svg><circle cx="50" cy="50" r="40" /></svg>`} />
     )
-    const subject = await InlineSVGFixture.find({
-      tag: 'g'
-    })
-    expect(subject.getDOMNode().innerHTML).to.equal('<path d="M962" stroke="none" strokewidth="1" fillrule="evenodd"></path>')
+    const svg = await InlineSVGFixture.find()
+    const group = await svg.find('g')
+
+    expect(group.getDOMNode().innerHTML)
+      .to.equal('<circle cx="50" cy="50" r="40"></circle>')
   })
 
   it('should meet a11y standards', async () => {
     await mount(
       <InlineSVG
-        src={`<svg><path d="M962" stroke="none" strokeWidth="1" fillRule="evenodd" /></svg>`}
+        src={SVG_SRC}
       />
     )
-    const subject = await InlineSVGFixture.find()
-    expect(await subject.accessible()).to.be.true()
+    const svg = await InlineSVGFixture.find()
+    expect(await svg.accessible()).to.be.true()
   })
 })

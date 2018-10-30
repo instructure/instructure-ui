@@ -43,9 +43,7 @@ describe('<SVGIcon />', async () => {
    await mount(
     <SVGIcon />
     )
-    const icon = await SVGIconFixture.find({
-      attribute: 'rotate'
-    })
+    const icon = await SVGIconFixture.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
@@ -55,9 +53,7 @@ describe('<SVGIcon />', async () => {
         rotate="90"
       />
     )
-    const icon = await SVGIconFixture.find({
-      attribute: 'rotate'
-    })
+    const icon = await SVGIconFixture.find()
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 

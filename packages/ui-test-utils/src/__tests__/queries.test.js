@@ -276,7 +276,7 @@ describe('find, findAll', async () => {
           <button>hello</button>
         )
         const button = await find({ tag: 'button' })
-        button.focus()
+        await button.focus()
         expect(button.focused()).to.be.true()
       })
       it('should support initializing the event object', async () => {
@@ -290,7 +290,7 @@ describe('find, findAll', async () => {
 
         const button = await find({ focusable: true })
 
-        button.focus({ bubbles: true })
+        await button.focus({ bubbles: true })
 
         const nativeEvent = handleFocus.getCall(0).args[0].nativeEvent
 
@@ -310,7 +310,7 @@ describe('find, findAll', async () => {
 
         const button = await find({ tag: 'button' })
 
-        const event = button.click()
+        const event = await button.click()
 
         expect(event.preventDefault).to.have.been.calledOnce()
       })

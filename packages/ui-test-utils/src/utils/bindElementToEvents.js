@@ -30,11 +30,12 @@ export function bindElementToEvents (element, events) {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))
-      } if (key === 'focus') {
+      } else if (key === 'focus') {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireFocusEvent.bind(null, element, fn.bind(null, element))
       } else {
-        bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireDOMEvent.bind(null, element, fn.bind(null, element))
       }
       return bound
     }, {})
@@ -43,26 +44,57 @@ export function bindElementToEvents (element, events) {
   }
 }
 
-function fireFocusEvent (element, fireEvent, init) {
+async function fireDOMEvent (element, fireEvent, init, options = { timeout: 0 }) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(fireEvent(init))
+      } catch (e) {
+        reject(e)
+      }
+    }, options.timeout)
+  })
+}
+
+async function fireFocusEvent (element, fireEvent, init, options = { timeout: 0 }) {
+  let returnValue
   if (init) {
     console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
 Test event handlers (with event initialization) and focus state behavior separately.
 Note: this means that .focused will be false unless you call .focus without event initialization.`)
-    return fireEvent(init)
+    returnValue = fireEvent(init)
   } else {
     // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
-    element.focus()
+    returnValue = element.focus()
   }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(returnValue)
+      } catch (e) {
+        reject(e)
+      }
+    }, options.timeout)
+  })
 }
 
-function fireKeyboardEvent (fireEvent, whichKey, init) {
+async function fireKeyboardEvent (fireEvent, whichKey, init, options = { timeout: 0 }) {
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
   const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
 
-  return fireEvent({
-    ...init,
-    key,
-    which: keyCode,
-    keyCode
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        resolve(fireEvent({
+          ...init,
+          key,
+          which: keyCode,
+          keyCode
+        }))
+      } catch (e) {
+        reject(e)
+      }
+    }, options.timeout)
   })
 }

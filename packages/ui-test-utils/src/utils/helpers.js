@@ -86,6 +86,10 @@ function focusable (element) {
   return !element.disabled && visible(element)
 }
 
+function tabbable (element) {
+  return focusable(element) && parseInt(element.getAttribute('tabindex')) > 0
+}
+
 function getAttribute (element, ...args) {
   return element.getAttribute(...args)
 }
@@ -139,5 +143,6 @@ export {
   getParentNode,
   focused,
   visible,
-  focusable
+  focusable,
+  tabbable
 }

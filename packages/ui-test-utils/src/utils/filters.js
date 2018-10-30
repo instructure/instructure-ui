@@ -61,10 +61,11 @@ function filterByAttribute (container, results, name, value, options = {}) {
 }
 
 function filterByTitle (container, results, title, options) {
-  return (Array.isArray(results) ? results : queryAllBySelector(container, '[title], svg > title'))
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '[title], svg'))
     .filter((element) => {
-      if (matchElementBySelector(element, 'svg > title')) {
-        return matchElementByText(element, title, options)
+      const titleElement = element.querySelector('title')
+      if (matchElementBySelector(element, 'svg') && titleElement) {
+        return matchElementByText(titleElement, title, options)
       }
       if (matchElementBySelector(element, '[title]')) {
         return matchElementByAttributeValue(element, 'title', title, options)
@@ -138,6 +139,10 @@ function filterByFocusable (container, results) {
     .filter(element => matchElementBySelector(element, selector.join(',')))
 }
 
+function filterByTabbable (container, results) {
+  return filterByFocusable.filter(element => parseInt(element.getAttribute('tabindex')) > 0)
+}
+
 function queryAllBySelector (element = document.documentElement, selector = '*') {
   if (element instanceof Element) {
     let result = Array.from(element.querySelectorAll(selector))
@@ -155,6 +160,7 @@ function queryBySelector (...args) {
 }
 
 export {
+  filterByTabbable,
   filterByFocusable,
   filterByLabelText,
   filterByContents,

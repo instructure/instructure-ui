@@ -34,10 +34,9 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find({tag: 'a'})
+    const link = await BreadcrumbLinkFixture.find({ tag: 'a' })
 
-    expect(el).to.exist()
-    expect(el.getAttribute('href')).to.equal('#')
+    expect(link.getAttribute('href')).to.equal('#')
   })
 
   it('should render as a button and respond to onClick event', async () => {
@@ -45,9 +44,10 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find({tag: 'button'})
+    const link = await BreadcrumbLinkFixture.find({ tag: 'button' })
 
-    el.click()
+    await link.click()
+
     expect(onClick).to.have.been.calledOnce()
   })
 
@@ -55,41 +55,39 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find({
-      tag: 'a',
-      expectEmpty: true
-    })
+    const link = await BreadcrumbLinkFixture.find()
+    const tagName = link.getTagName()
 
-    expect(el).to.not.exist()
+    expect(tagName).to.not.equal('button')
+    expect(tagName).to.not.equal('a')
   })
 
   it('should not render a button when not given an onClick prop', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find({
-      tag: 'button',
-      expectEmpty: true
-    })
+    const link = await BreadcrumbLinkFixture.find()
+    const tagName = link.getTagName()
 
-    expect(el).to.not.exist()
+    expect(tagName).to.not.equal('button')
+    expect(tagName).to.not.equal('a')
   })
 
   it('should meet a11y standards as a link', async () => {
     await mount(
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkFixture.find()
 
-    expect(await el.accessible()).to.be.true()
+    expect(await link.accessible()).to.be.true()
   })
 
   it('should meet a11y standards as a span', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const el = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkFixture.find()
 
-    expect(await el.accessible()).to.be.true()
+    expect(await link.accessible()).to.be.true()
   })
 })

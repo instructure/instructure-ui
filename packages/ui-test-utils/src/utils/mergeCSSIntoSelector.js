@@ -21,35 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { wait } from 'dom-testing-library'
+export function mergeCSSIntoSelector (selectorString, selectorObj = {}) {
+  const selector = selectorObj ? { ...selectorObj } : {}
+  const css = selector.css ? [selector.css] : []
 
-import { mount, stub, spy } from './utils/sandbox'
-import { within, withinEach } from './utils/within'
-import { expect } from './utils/expect'
-import fixture from './utils/fixture'
-import { findAllByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
-import { debug } from './utils/helpers'
-import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, parseQueryArguments } from './utils/query-helpers'
-import { mergeCSSIntoSelector } from './utils/mergeCSSIntoSelector'
+  css.push(selectorString)
 
-export {
-  mergeCSSIntoSelector,
-  parseQueryArguments,
-  findAllByQuery,
-  querySelectorAll,
-  fixture,
-  firstOrNull,
-  within,
-  withinEach,
-  wait,
-  expect,
-  mount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  selector.css  = css.join('')
+
+  return selector
 }

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, wait } from '@instructure/ui-test-utils'
+import { mount, expect, stub } from '@instructure/ui-test-utils'
 import Billboard from '../index'
 import BillboardFixture from '../fixture'
 
@@ -43,11 +43,12 @@ describe('<Billboard />', async () => {
         headingAs='h2'
       />
     )
-    const headline = await BillboardFixture.find({
+    const billboard = await BillboardFixture.find()
+    const heading = billboard.find({
       tag: 'h2',
-      text: 'Test heading',
+      contains: 'Test heading',
     })
-    expect(headline).to.exist()
+    expect(heading).to.exist()
   })
 
   it('renders as a link if it has an href prop', async () => {
@@ -56,10 +57,10 @@ describe('<Billboard />', async () => {
         href='#'
       />
     )
-    const link = await BillboardFixture.find({
+    const billboard = await BillboardFixture.find()
+    const link = await billboard.find({
       tag: 'a'
     })
-    expect(link).to.exist()
     expect(link.getAttribute('href')).equal('#')
   })
 
@@ -70,15 +71,18 @@ describe('<Billboard />', async () => {
         onClick={onClick}
       />
     )
-    const button = await BillboardFixture.find({
+    const billboard = await BillboardFixture.find()
+    const button = await billboard.find({
       tag: 'button'
     })
-    button.click()
+
+    await button.click()
+
     expect(onClick).to.have.been.calledOnce()
   })
 
   describe('when disabled', async () => {
-    it('should apply aria-disabled', async () => {
+    it('should apply aria-disabled to link', async () => {
       await mount(
         <Billboard
           heading='I am disabled'
@@ -86,10 +90,12 @@ describe('<Billboard />', async () => {
           disabled={true}
         />
       )
-      const disabled = await BillboardFixture.find({
-        attribute: 'aria-disabled'
+      const billboard = await BillboardFixture.find()
+      const link = await billboard.find({
+        tag: 'a'
       })
-      expect(disabled.getAttribute('aria-disabled')).to.equal('true')
+
+      expect(link.getAttribute('aria-disabled')).to.equal('true')
     })
 
     it('should not be clickable', async () => {
@@ -100,9 +106,12 @@ describe('<Billboard />', async () => {
           disabled
         />
       )
-      const button = await BillboardFixture.find()
+      const billboard = await BillboardFixture.find()
+      const button = await billboard.find({
+        tag: 'button'
+      })
 
-      button.click()
+      await button.click()
 
       expect(onClick).to.not.have.been.called()
     })
@@ -117,10 +126,12 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const disabled = await BillboardFixture.find({
-        attribute: 'aria-disabled'
+      const billboard = await BillboardFixture.find()
+      const link = await billboard.find({
+        tag: 'a'
       })
-      expect(disabled.getAttribute('aria-disabled')).to.equal('true')
+
+      expect(link.getAttribute('aria-disabled')).to.equal('true')
     })
 
     it('should not be clickable', async () => {
@@ -131,9 +142,12 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const button = await BillboardFixture.find()
+      const billboard = await BillboardFixture.find()
+      const button = await billboard.find({
+        tag: 'button'
+      })
 
-      const event = button.click()
+      const event = await button.click()
 
       expect(event.preventDefault).to.have.been.calledOnce()
       expect(onClick).to.not.have.been.called()

@@ -35,8 +35,8 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Account</BreadcrumbLink>
       </Breadcrumb>
     )
-    const el = await BreadcrumbFixture.find({label: 'Settings'})
-    const label = el.getAttribute('aria-label')
+    const breadcrumb = await BreadcrumbFixture.find({label: 'Settings'})
+    const label = breadcrumb.getAttribute('aria-label')
 
     expect(label).to.equal('Settings')
   })
@@ -48,9 +48,10 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Settings</BreadcrumbLink>
       </Breadcrumb>
     )
-    const el = await BreadcrumbFixture.find({tag: 'svg'})
+    const breadcrumb = await BreadcrumbFixture.find()
+    const icon = await breadcrumb.find({tag: 'svg'})
 
-    expect(el).to.exist()
+    expect(icon.getAttribute('aria-hidden')).to.equal('true')
   })
 
   it('should meet a11y standards', async () => {
@@ -60,8 +61,7 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Settings</BreadcrumbLink>
       </Breadcrumb>
     )
-    const el = await BreadcrumbFixture.find()
-
-    expect(await el.accessible()).to.be.true()
+    const breadcrumb = await BreadcrumbFixture.find()
+    expect(await breadcrumb.accessible()).to.be.true()
   })
 })

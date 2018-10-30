@@ -29,13 +29,14 @@ import { waitForQueryResult } from './waitForQueryResult'
 import { visible, getOwnerDocument } from './helpers'
 
 import {
- filterByFocusable,
- filterByLabelText,
- filterByText,
- filterByContents,
- filterByTitle,
- filterByAttribute,
- filterBySelector,
+  filterByTabbable,
+  filterByFocusable,
+  filterByLabelText,
+  filterByText,
+  filterByContents,
+  filterByTitle,
+  filterByAttribute,
+  filterBySelector
 } from './filters'
 
 function bindResultsToUtilities (result, customMethods) {
@@ -67,6 +68,7 @@ function parseQueryArguments () {
     selector = { css: selector }
   } else if (selector) {
     const {
+      tabbable,
       focusable,
       locator,
       title,
@@ -80,6 +82,7 @@ function parseQueryArguments () {
       ...rest
     } = selector
     selector = {
+      tabbable,
       focusable,
       locator,
       css,
@@ -107,6 +110,7 @@ function parseQueryArguments () {
 
 function querySelectorAll (element, selector, options) {
   const {
+    tabbable,
     focusable,
     locator,
     css,
@@ -166,6 +170,10 @@ function querySelectorAll (element, selector, options) {
     result = filterByFocusable(element, result, options)
   }
 
+  if (tabbable === true) {
+    result = filterByTabbable(element, result, options)
+  }
+
   return (result || [])
     .filter((element) => {
       const doc = getOwnerDocument(element)
@@ -218,6 +226,7 @@ async function getQueryResult (element, query, options, message) {
 function validateSelector (selector = {}) {
   if (!selector) return null
   const VALID_SELECTORS = [
+    'tabbable',
     'focusable',
     'locator',
     'css',
