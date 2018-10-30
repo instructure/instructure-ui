@@ -131,3 +131,14 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Ensure page links and the next/previous buttons are labeled correctly for screen readers</FigureItem>
+  </Figure>
+</Guidelines>
+```
