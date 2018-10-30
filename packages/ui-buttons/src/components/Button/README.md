@@ -213,3 +213,16 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Ensure buttons can be activated with both Enter and Spacebar keys</FigureItem>
+    <FigureItem>Disabled buttons do not need to meet color contrast ratio requirements or receive keyboard focus but should be read as "disabled" or "dimmed" by screen readers</FigureItem>
+    <FigureItem>Icon only buttons must have ScreenReaderContent added so screen readers indicate what the button is used for</FigureItem>
+  </Figure>
+</Guidelines>
+```
