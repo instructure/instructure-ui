@@ -23,78 +23,78 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
+
 import ApplyTextDirection from '../index'
 import bidirectional from '../../../bidirectional'
 import { makeTextDirectionContext } from '../../../TextDirectionContextTypes'
-import getTextDirection from '../../../utils/getTextDirection'
 
-describe('<ApplyTextDirection />', () => {
+describe('<ApplyTextDirection />', async () => {
   @bidirectional()
   class BidirectionalComponent extends React.Component {
     render () {
-      return <div>Hello World</div>
+      return <div data-dir={this.dir}>Hello world</div>
     }
   }
 
-  const getDirection = (subject) => {
-    return subject.getDOMNode().getAttribute('dir')
-  }
+  it('should take on the direction of the document element by default', async () => {
+    const subject = await mount(
+      <ApplyTextDirection>
+        Hello world
+      </ApplyTextDirection>
+    )
 
-  const testbed = new Testbed(
-    <ApplyTextDirection>
-      Hello world
-    </ApplyTextDirection>
-  )
-
-  beforeEach(() => {
-    testbed.setTextDirection('rtl')
-    getTextDirection.resetDefault()
+    expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
   })
 
-  it('should take on the direction of the document element by default', () => {
-    const subject = testbed.render()
-    expect(getDirection(subject)).to.equal('rtl')
-  })
-
-  it('should take on the context direction if dir prop is not supplied', () => {
-    const context = makeTextDirectionContext('ltr')
-    const subject = testbed.render({}, context)
-
-    expect(getDirection(subject)).to.equal('ltr')
-  })
-
-  it('should give dir prop preference over context and default document element when supplied', () => {
+  it('should take on the context direction if dir prop is not supplied', async () => {
     const context = makeTextDirectionContext('rtl')
-    const subject = testbed.render({ dir: 'ltr' }, context)
+    const subject = await mount(
+      <ApplyTextDirection>
+        Hello world
+      </ApplyTextDirection>
+    , context)
 
-    expect(getDirection(subject)).to.equal('ltr')
+    expect(subject.getDOMNode().getAttribute('dir')).to.equal('rtl')
   })
 
-  it('should pass direction via context to bidirectional children', () => {
-    let bidirectionalComponent
+  it('should give dir prop preference over context and default document element when supplied', async () => {
+    const context = makeTextDirectionContext('rtl')
+    const subject = await mount(
+      <ApplyTextDirection dir="ltr">
+        Hello world
+      </ApplyTextDirection>
+    , context)
 
-    testbed.render({
-      dir: 'ltr',
-      children: (
-        <BidirectionalComponent ref={(el) => { bidirectionalComponent = el }} />
-      )
-    })
-
-    expect(bidirectionalComponent.dir).to.equal('ltr')
+    expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
   })
 
-  it('when nested, should override parent ApplyTextDirection context', () => {
-    let bidirectionalComponent
+  it('should pass direction via context to bidirectional children', async () => {
+    const subject = await mount(
+      <ApplyTextDirection dir="rtl">
+        <BidirectionalComponent />
+      </ApplyTextDirection>
+    )
 
-    testbed.render({
-      dir: 'ltr',
-      children: (
-        <ApplyTextDirection dir="rtl">
-          <BidirectionalComponent ref={(el) => { bidirectionalComponent = el }} />
+    const component = within(subject.getDOMNode())
+    const text = await component.find({text: 'Hello world'})
+
+    expect(text.getAttribute('data-dir')).to.equal('rtl')
+  })
+
+  it('when nested, should override parent ApplyTextDirection context', async () => {
+
+    const subject = await mount(
+      <ApplyTextDirection dir="rtl">
+        <ApplyTextDirection dir="ltr">
+          <BidirectionalComponent />
         </ApplyTextDirection>
-      )
-    })
+      </ApplyTextDirection>
+    )
 
-    expect(bidirectionalComponent.dir).to.equal('rtl')
+    const component = within(subject.getDOMNode())
+    const text = await component.find({text: 'Hello world'})
+
+    expect(text.getAttribute('data-dir')).to.equal('ltr')
   })
 })

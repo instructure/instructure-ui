@@ -38,7 +38,6 @@ module.exports = {
     'packages/ui-elements/',
     'packages/ui-focusable/',
     'packages/ui-forms/',
-    'packages/ui-i18n/',
     'packages/ui-media-player/',
     'packages/ui-overlays/',
     'packages/ui-pagination/',

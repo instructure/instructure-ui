@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import { expect } from '@instructure/ui-test-utils'
 import { now, isValid, browserTimeZone, parse, toLocaleString } from '../DateTime'
 
 describe('DateTime', () => {
@@ -129,5 +129,4 @@ describe('DateTime', () => {
     result = toLocaleString('2018-04-15T13:00Z', 'fr', "America/Halifax") // -3
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
   })
-
 })

@@ -24,6 +24,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import { expect, mount, within } from '@instructure/ui-test-utils'
+
 import ApplyLocale from '../index'
 
 class LocalizableComponent extends React.Component {
@@ -33,24 +36,35 @@ class LocalizableComponent extends React.Component {
   }
 
   render () {
-    return <div />
+    return (
+      <div>
+        <span>{this.context.locale}</span>
+        <span>{this.context.timezone}</span>
+      </div>
+    )
   }
 }
 
-describe('<ApplyLocale />', () => {
-  const testbed = new Testbed(
-    <ApplyLocale locale="fr" timezone="Europe/Paris">
-      <LocalizableComponent />
-    </ApplyLocale>
-  )
+describe('<ApplyLocale />', async () => {
+  it('applies locale context', async () => {
+    const subject = await mount(
+      <ApplyLocale locale="fr" >
+        <LocalizableComponent />
+      </ApplyLocale>
+    )
 
-  it('applies locale context', () => {
-    const subject = testbed.render()
-    expect(subject.find(LocalizableComponent).unwrap().context).to.include({locale: 'fr'})
+    const component = within(subject.getDOMNode())
+    expect(await component.find({text: 'fr'})).to.exist()
   })
 
-  it('applies timezone context', () => {
-    const subject = testbed.render()
-    expect(subject.find(LocalizableComponent).unwrap().context).to.include({timezone: 'Europe/Paris'})
+  it('applies timezone context', async () => {
+    const subject = await mount(
+      <ApplyLocale timezone="Europe/Paris">
+        <LocalizableComponent />
+      </ApplyLocale>
+    )
+
+    const component = within(subject.getDOMNode())
+    expect(await component.find({text: 'Europe/Paris'})).to.exist()
   })
 })

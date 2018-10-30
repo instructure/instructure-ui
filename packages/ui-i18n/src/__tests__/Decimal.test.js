@@ -22,12 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect, stub } from '@instructure/ui-test-utils'
 import Locale from '../Locale'
 import Decimal from '../Decimal'
 
 describe('Decimal', () => {
-  const testbed = new Testbed()
-
   const uniqueDelimiters = {
     bg: Decimal.getDelimiters('bg'),
     chs: Decimal.getDelimiters('chs'),
@@ -577,7 +576,7 @@ describe('Decimal', () => {
 
     context('with browser locale "fr"', () => {
       beforeEach(() => {
-        testbed.stub(Locale, 'browserLocale').returns('fr')
+        stub(Locale, 'browserLocale').returns('fr')
       })
 
       it('formats French numbers correctly', () => {

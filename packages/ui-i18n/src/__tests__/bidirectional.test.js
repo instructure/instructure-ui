@@ -23,39 +23,38 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import bidirectional from '../bidirectional'
 import { makeTextDirectionContext } from '../TextDirectionContextTypes'
 
-describe('@bidirectional', () => {
+describe('@bidirectional', async () => {
   @bidirectional()
   class BidirectionalComponent extends React.Component {
     render () {
-      return <div>Hello World</div>
+      return <div data-dir={this.dir}>Hello World</div>
     }
   }
 
-  const testbed = new Testbed(<BidirectionalComponent />)
+  it('should take on the direction of the document by default', async () => {
+    const subject = await mount(
+      <BidirectionalComponent />
+    )
 
-  beforeEach(() => {
-    testbed.setTextDirection('ltr')
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('ltr')
   })
 
-  it('should take on the direction of the document by default', () => {
-    const subject = testbed.render()
+  it('should set the text direction via props', async () => {
+    const subject = await mount(
+      <BidirectionalComponent dir="rtl" />
+    )
 
-    expect(subject.instance().dir).to.equal('ltr')
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 
-  it('should set the text direction via props', () => {
-    const subject = testbed.render({ dir: 'rtl' })
-
-    expect(subject.instance().dir).to.equal('rtl')
-  })
-
-  it('should give context preference when props and context are present', () => {
+  it('should give context preference when props and context are present', async () => {
     const context = makeTextDirectionContext('rtl')
-    const subject = testbed.render({ dir: 'ltr' }, context)
+    const subject = await mount(<BidirectionalComponent dir="ltr" />, context)
 
-    expect(subject.instance().dir).to.equal('rtl')
+    expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
 })

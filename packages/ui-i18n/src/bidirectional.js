@@ -58,7 +58,6 @@ import getTextDirection from './utils/getTextDirection'
 export default function bidirectional () {
   return function (ComposedComponent) {
     const displayName = getDisplayName(ComposedComponent)
-
     class BidirectionalComponent extends ComposedComponent {
       static displayName = displayName
 

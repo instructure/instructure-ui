@@ -22,39 +22,32 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import getTextDirection from '../getTextDirection'
 
-describe('getTextDirection', () => {
-  const testbed = new Testbed(<div><h1>Hello</h1></div>)
-
-  beforeEach(() => {
-    testbed.setTextDirection('ltr')
-    getTextDirection.resetDefault()
-  })
-
-  it('defaults the dir of <html>', () => {
+describe('getTextDirection', async () => {
+  it('defaults the dir of <html>', async () => {
     expect(getTextDirection()).to.equal(document.documentElement.getAttribute('dir'))
   })
 
-  it('defaults to the dir of <html> when passed an element', () => {
-    const subject = testbed.render()
-
-    expect(getTextDirection(subject.node)).to.equal('ltr')
+  it('defaults to the dir of <html> when passed an element', async () => {
+    const subject = await mount(
+      <div><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode())).to.equal('ltr')
   })
 
-  it('returns "rtl" if the `dir` of the element is "rtl"', () => {
-    const subject = testbed.render({
-      dir: 'rtl'
-    })
-
-    expect(getTextDirection(subject.node)).to.equal('rtl')
+  it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
+    const subject = await mount(
+      <div dir="rtl"><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode())).to.equal('rtl')
   })
 
-  it('inherits value set by ancestor', () => {
-    const subject = testbed.render({
-      dir: 'rtl'
-    })
-
-    expect(getTextDirection(subject.find('h1').node)).to.equal('rtl')
+  it('inherits value set by ancestor', async () => {
+    const subject = await mount(
+      <div dir="rtl"><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode().firstChild)).to.equal('rtl')
   })
 })
