@@ -73,3 +73,16 @@ example: true
   </p>
 </div>
 ```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Links must have a non-empty href attribute in order to be considered true links and to be accessible to keyboard users</FigureItem>
+  </Figure>
+</Guidelines>
+```
