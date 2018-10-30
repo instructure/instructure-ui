@@ -40,3 +40,17 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Ensure content behind the overlay is hidden from users so they cannot navigate to it when using keyboard navigation and screen readers</FigureItem>
+    <FigureItem>Dismissable with the ESC key</FigureItem>
+  </Figure>
+</Guidelines>
+```
