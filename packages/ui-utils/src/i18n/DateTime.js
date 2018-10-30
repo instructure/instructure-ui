@@ -23,7 +23,6 @@
  */
 
  import moment from 'moment-timezone'
- import 'moment-timezone/builds/moment-timezone-with-data'
 
 import { changedPackageWarning } from '../react/deprecated'
 import warning from '../warning'
