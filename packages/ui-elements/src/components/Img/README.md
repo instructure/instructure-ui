@@ -110,3 +110,17 @@ example: true
     />
   </View>
 ```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Contextual images must have alternative text that describes the information or function represented by them</FigureItem>
+    <FigureItem>Decorative images that do not present important content, are used for layout or non-informative purposes, and do not appear within a link do not need to be presented to screen readers.  Decorative and spacer images should have null alternative text (alt="")</FigureItem>
+  </Figure>
+</Guidelines>
+```
