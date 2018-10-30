@@ -97,3 +97,14 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Ensure CheckboxGroups are labeled correctly so screen readers announce what the group of checkboxes are used for</FigureItem>
+  </Figure>
+</Guidelines>
+```
