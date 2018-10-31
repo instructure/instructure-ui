@@ -26,14 +26,14 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import Portal from '../index'
-import PortalFixture from '../fixture'
+import PortalLocator from '../locator'
 
 describe('<Portal />', async () => {
   it('should render', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalFixture.find({ text: 'Hello World' })
+    const portal = await PortalLocator.find({ text: 'Hello World' })
     expect(portal.getDOMNode()).to.exist()
   })
 
@@ -41,7 +41,7 @@ describe('<Portal />', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalFixture.find({ text: 'Hello World' })
+    const portal = await PortalLocator.find({ text: 'Hello World' })
     expect(await portal.accessible()).to.be.true()
   })
 
@@ -52,7 +52,7 @@ describe('<Portal />', async () => {
         Hello World
       </Portal>
     )
-    const portal = await PortalFixture.find({ contains: 'Hello World' })
+    const portal = await PortalLocator.find({ contains: 'Hello World' })
     expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
   })
 
@@ -78,13 +78,13 @@ describe('<Portal />', async () => {
         Hello World
       </Portal>
     )
-    const portal = await PortalFixture.find({ contains: 'Hello World' })
+    const portal = await PortalLocator.find({ contains: 'Hello World' })
     expect(portal.getAttribute('dir')).to.equal('ltr')
   })
 
   it('should not render if children are empty', async () => {
     await mount(<Portal open />)
-    const portal = await PortalFixture.findAll({ expectEmpty: true })
+    const portal = await PortalLocator.findAll({ expectEmpty: true })
     expect(portal.length).to.equal(0)
   })
 
@@ -95,7 +95,7 @@ describe('<Portal />', async () => {
           Hello World
         </Portal>
       )
-      const portal = await PortalFixture.findAll({ expectEmpty: true })
+      const portal = await PortalLocator.findAll({ expectEmpty: true })
       expect(portal.length).to.equal(0)
     })
 
@@ -109,7 +109,7 @@ describe('<Portal />', async () => {
         </Portal>
       )
 
-      const button = await PortalFixture.find({ tag: 'button', text: 'Hello World' })
+      const button = await PortalLocator.find({ tag: 'button', contains: 'Hello World' })
 
       await button.keyDown('Enter')
 
@@ -132,7 +132,7 @@ describe('<Portal />', async () => {
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await PortalFixture.find({ expectEmpty: true })
+      const portal = await PortalLocator.find({ expectEmpty: true })
 
       expect(portal).to.not.exist()
     })
@@ -150,7 +150,7 @@ describe('<Portal />', async () => {
         </div>
       )
 
-      const portal = await PortalFixture.find({ contains: 'Hello World'})
+      const portal = await PortalLocator.find({ contains: 'Hello World'})
 
       expect(portal.getComponentRoot().parentNode)
         .to.equal(document.getElementById('portal-mount-node'))

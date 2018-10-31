@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { fixture  } from '@instructure/ui-test-utils'
+import { locator  } from '@instructure/ui-test-utils'
 
 import InlineSVG from './index'
 
-export default fixture(InlineSVG.displayName)
+export default locator(InlineSVG.displayName)

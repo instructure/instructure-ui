@@ -26,7 +26,7 @@ import React from 'react'
 
 import { expect, mount } from '@instructure/ui-test-utils'
 import Breadcrumb, { BreadcrumbLink } from '../index'
-import BreadcrumbFixture from '../fixture'
+import BreadcrumbLocator from '../locator'
 
 describe('<Breadcrumb />', async () => {
   it('should render the label as an aria-label attribute', async () => {
@@ -35,7 +35,7 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Account</BreadcrumbLink>
       </Breadcrumb>
     )
-    const breadcrumb = await BreadcrumbFixture.find({label: 'Settings'})
+    const breadcrumb = await BreadcrumbLocator.find({label: 'Settings'})
     const label = breadcrumb.getAttribute('aria-label')
 
     expect(label).to.equal('Settings')
@@ -48,7 +48,7 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Settings</BreadcrumbLink>
       </Breadcrumb>
     )
-    const breadcrumb = await BreadcrumbFixture.find()
+    const breadcrumb = await BreadcrumbLocator.find()
     const icon = await breadcrumb.find({tag: 'svg'})
 
     expect(icon.getAttribute('aria-hidden')).to.equal('true')
@@ -61,7 +61,7 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Settings</BreadcrumbLink>
       </Breadcrumb>
     )
-    const breadcrumb = await BreadcrumbFixture.find()
+    const breadcrumb = await BreadcrumbLocator.find()
     expect(await breadcrumb.accessible()).to.be.true()
   })
 })

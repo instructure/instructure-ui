@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 
 import InlineSVG from '../index'
-import InlineSVGFixture from '../fixture'
+import InlineSVGLocator from '../locator'
 
 import styles from '../styles.css'
 
@@ -37,7 +37,7 @@ describe('<InlineSVG />', async () => {
     await mount(
       <InlineSVG src={SVG_SRC} />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg).to.exist()
   })
@@ -46,7 +46,7 @@ describe('<InlineSVG />', async () => {
     await mount(
       <InlineSVG src={SVG_SRC} />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('role')).to.equal('presentation')
   })
@@ -58,7 +58,7 @@ describe('<InlineSVG />', async () => {
         title='testIconTitle'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('role')).to.equal('img')
   })
@@ -70,7 +70,7 @@ describe('<InlineSVG />', async () => {
         title='testIconTitle'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const group = await svg.find('g')
 
     expect(group.getAttribute('role')).to.equal('presentation')
@@ -81,7 +81,7 @@ describe('<InlineSVG />', async () => {
       <InlineSVG src={SVG_SRC} />
     )
 
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const title = await svg.find({
       tag: 'title',
       expectEmpty: true,
@@ -98,7 +98,7 @@ describe('<InlineSVG />', async () => {
         title='testIconTitle'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const title = await svg.find({
       title: 'testIconTitle',
       visible: false
@@ -114,7 +114,7 @@ describe('<InlineSVG />', async () => {
       />
     )
 
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const description = await svg.find({
       tag: 'description',
       expectEmpty: true,
@@ -132,7 +132,7 @@ describe('<InlineSVG />', async () => {
       />
     )
 
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const description = await svg.find({
       tag: 'desc',
       visible: false
@@ -147,7 +147,7 @@ describe('<InlineSVG />', async () => {
         src={SVG_SRC}
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('aria-labelledby')).to.not.exist()
   })
@@ -160,7 +160,7 @@ describe('<InlineSVG />', async () => {
         description='testIconDescription'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const ids = svg.getAttribute('aria-labelledby').split(' ')
 
     expect(ids).to.have.length(2)
@@ -174,7 +174,7 @@ describe('<InlineSVG />', async () => {
         height='200px'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const width = svg.getComputedStyle().width
     const height = svg.getComputedStyle().height
 
@@ -188,7 +188,7 @@ describe('<InlineSVG />', async () => {
         src={SVG_SRC}
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('focusable')).to.equal('false')
   })
@@ -200,7 +200,7 @@ describe('<InlineSVG />', async () => {
         focusable={true}
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getAttribute('focusable')).to.equal('true')
   })
@@ -212,7 +212,7 @@ describe('<InlineSVG />', async () => {
         inline={false}
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
@@ -224,7 +224,7 @@ describe('<InlineSVG />', async () => {
         color='success'
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
 
     expect(svg.hasClass(styles['color--success'])).to.be.true()
   })
@@ -233,7 +233,7 @@ describe('<InlineSVG />', async () => {
     await mount(
       <InlineSVG src={`<svg><circle cx="50" cy="50" r="40" /></svg>`} />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     const group = await svg.find('g')
 
     expect(group.getDOMNode().innerHTML)
@@ -246,7 +246,7 @@ describe('<InlineSVG />', async () => {
         src={SVG_SRC}
       />
     )
-    const svg = await InlineSVGFixture.find()
+    const svg = await InlineSVGLocator.find()
     expect(await svg.accessible()).to.be.true()
   })
 })

@@ -26,7 +26,7 @@ import { wait } from 'dom-testing-library'
 import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
-import fixture from './utils/fixture'
+import locator from './utils/locator'
 import { findAllByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
 import { debug } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
@@ -38,7 +38,7 @@ export {
   parseQueryArguments,
   findAllByQuery,
   querySelectorAll,
-  fixture,
+  locator,
   firstOrNull,
   within,
   withinEach,

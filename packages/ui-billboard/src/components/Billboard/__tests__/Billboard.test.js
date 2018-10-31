@@ -23,16 +23,18 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { mount, expect, stub, locator } from '@instructure/ui-test-utils'
+
 import Billboard from '../index'
-import BillboardFixture from '../fixture'
+
+const BillboardLocator = locator(Billboard.displayName)
 
 describe('<Billboard />', async () => {
   it('should render', async () => {
     await mount(
       <Billboard />
     )
-    const billboard = await BillboardFixture.find()
+    const billboard = await BillboardLocator.find()
     expect(billboard).to.exist()
   })
 
@@ -43,7 +45,7 @@ describe('<Billboard />', async () => {
         headingAs='h2'
       />
     )
-    const billboard = await BillboardFixture.find()
+    const billboard = await BillboardLocator.find()
     const heading = billboard.find({
       tag: 'h2',
       contains: 'Test heading',
@@ -57,7 +59,7 @@ describe('<Billboard />', async () => {
         href='#'
       />
     )
-    const billboard = await BillboardFixture.find()
+    const billboard = await BillboardLocator.find()
     const link = await billboard.find({
       tag: 'a'
     })
@@ -71,7 +73,7 @@ describe('<Billboard />', async () => {
         onClick={onClick}
       />
     )
-    const billboard = await BillboardFixture.find()
+    const billboard = await BillboardLocator.find()
     const button = await billboard.find({
       tag: 'button'
     })
@@ -90,7 +92,7 @@ describe('<Billboard />', async () => {
           disabled={true}
         />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       const link = await billboard.find({
         tag: 'a'
       })
@@ -106,7 +108,7 @@ describe('<Billboard />', async () => {
           disabled
         />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       const button = await billboard.find({
         tag: 'button'
       })
@@ -126,7 +128,7 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       const link = await billboard.find({
         tag: 'a'
       })
@@ -142,7 +144,7 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       const button = await billboard.find({
         tag: 'button'
       })
@@ -160,14 +162,14 @@ describe('<Billboard />', async () => {
       await mount(
         <Billboard elementRef={elementRef} />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       expect(elementRef).to.have.been.calledWith(billboard.getDOMNode())
     })
     it('should support an `as` prop', async () => {
       await mount(
         <Billboard as='div' />
       )
-      const billboard = await BillboardFixture.find()
+      const billboard = await BillboardLocator.find()
       expect(billboard.getTagName()).to.equal('div')
     })
   })
@@ -180,7 +182,7 @@ describe('<Billboard />', async () => {
         message='this is what i am testing'
       />
     )
-    const billboard = await BillboardFixture.find()
+    const billboard = await BillboardLocator.find()
     expect(await billboard.accessible()).to.be.true()
   })
 })

@@ -32,35 +32,35 @@ import {
 } from './query-helpers'
 import { firstOrNull } from './firstOrNull'
 
-function fixture (componentId, customMethods = {}) {
-  return class Fixture {
+export default (componentId, customMethods = {}) => {
+  return class Locator {
     static customMethods = customMethods
     static locator = `[${TESTABLE_ATTRIBUTE}="${componentId}"]`
 
     static async findAll (...args) {
       const { element, selector, options } = parseQueryArguments(...args)
-      return findAllByQuery(Fixture.query, element, selector, {
+      return findAllByQuery(Locator.query, element, selector, {
         ...options,
         customMethods: {
-          ...Fixture.customMethods,
+          ...Locator.customMethods,
           ...options.customMethods
         }
       })
     }
 
     static async find (...args) {
-      return firstOrNull(await Fixture.findAll(...args))
+      return firstOrNull(await Locator.findAll(...args))
     }
 
     static query (element, selector, options) {
       // find all of the components that match the locator...
-      const components = querySelectorAll(element, { locator: Fixture.locator }, options)
+      const components = querySelectorAll(element, { locator: Locator.locator }, options)
       if (selector) {
         // if there is a selector, query each component for matches...
         return components.reduce((previouResults, element) => {
           const results = bindResultsToUtilities(
             querySelectorAll(element, selector, options),
-            { ...Fixture.customMethods, ...options.customMethods, getComponentRoot: () => element }
+            { ...Locator.customMethods, ...options.customMethods, getComponentRoot: () => element }
           )
           return [ ...previouResults, ...results]
         }, [])
@@ -71,5 +71,3 @@ function fixture (componentId, customMethods = {}) {
     }
   }
 }
-
-export default fixture

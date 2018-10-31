@@ -26,7 +26,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from '../index'
-import ${COMPONENT}ViewFixture from '../fixture'
+import ${COMPONENT}ViewLocator from '../locator'
 
 describe('<${COMPONENT}View />', async () => {
   it('should render', async () => {

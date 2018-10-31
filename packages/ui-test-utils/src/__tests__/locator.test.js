@@ -25,7 +25,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import testable from '@instructure/ui-testable'
 
-import { querySelectorAll, findAllByQuery, mount, expect, fixture } from '../index'
+import { querySelectorAll, findAllByQuery, mount, expect, locator } from '../index'
 
 @testable()
 class Component extends React.Component {
@@ -46,44 +46,44 @@ class Component extends React.Component {
   }
 }
 
-const ComponentFixture = fixture(Component.displayName)
+const ComponentLocator = locator(Component.displayName)
 
-ComponentFixture.findAllInputs = async (...args) => {
+ComponentLocator.findAllInputs = async (...args) => {
   const query = (element, selector, options) => {
     return querySelectorAll(element, { ...selector, tag: 'input' }, options)
   }
   return findAllByQuery(query, ...args)
 }
 
-describe('@testable, fixture', async () => {
+describe('@testable, locator', async () => {
   it('should handle components that render `null`', async () => {
     await mount(<Component hide />)
-    expect(await ComponentFixture.findAll({ expectEmpty: true })).to.have.length(0)
+    expect(await ComponentLocator.findAll({ expectEmpty: true })).to.have.length(0)
   })
   it('should find component root elements without a selector', async () => {
     await mount(<Component />)
-    expect(await ComponentFixture.findAll()).to.have.length(1)
+    expect(await ComponentLocator.findAll()).to.have.length(1)
   })
   it('should filter out non-matching components with a selector', async () => {
     await mount(<Component />)
-    expect(await ComponentFixture.findAll({ tag: 'a', expectEmpty: true }))
+    expect(await ComponentLocator.findAll({ tag: 'a', expectEmpty: true }))
       .to.have.length(0)
   })
   it('should return no results when expected', async () => {
     await mount(<div />)
-    expect(await ComponentFixture.findAll({ expectEmpty: true }))
+    expect(await ComponentLocator.findAll({ expectEmpty: true }))
       .to.have.length(0)
   })
   it('can find an element by attribute name and value', async () => {
     await mount(<Component />)
-    expect(await ComponentFixture.findAll({
+    expect(await ComponentLocator.findAll({
       tag: 'input',
       attribute: { name: 'type', value: 'password' }
     })).to.have.length(1)
   })
   it('adds a custom method to find the component root element', async () => {
     await mount(<Component />)
-    const component = await ComponentFixture.find({
+    const component = await ComponentLocator.find({
       tag: 'input',
       attribute: { name: 'type', value: 'password' }
     })
@@ -92,6 +92,6 @@ describe('@testable, fixture', async () => {
   })
   it('should support custom queries', async () => {
     await mount(<Component />)
-    expect(await ComponentFixture.findAllInputs()).to.have.length(2)
+    expect(await ComponentLocator.findAllInputs()).to.have.length(2)
   })
 })

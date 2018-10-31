@@ -27,14 +27,14 @@ import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import BreadcrumbLink from '../index'
-import BreadcrumbLinkFixture from '../fixture'
+import BreadcrumbLinkLocator from '../locator'
 
 describe('<BreadcrumbLink />', async () => {
   it('should render a link when given an href prop', async () => {
     await mount(
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find({ tag: 'a' })
+    const link = await BreadcrumbLinkLocator.find({ tag: 'a' })
 
     expect(link.getAttribute('href')).to.equal('#')
   })
@@ -44,7 +44,7 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find({ tag: 'button' })
+    const link = await BreadcrumbLinkLocator.find({ tag: 'button' })
 
     await link.click()
 
@@ -55,7 +55,7 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
 
     expect(tagName).to.not.equal('button')
@@ -66,7 +66,7 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkLocator.find()
     const tagName = link.getTagName()
 
     expect(tagName).to.not.equal('button')
@@ -77,7 +77,7 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkLocator.find()
 
     expect(await link.accessible()).to.be.true()
   })
@@ -86,7 +86,7 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkFixture.find()
+    const link = await BreadcrumbLinkLocator.find()
 
     expect(await link.accessible()).to.be.true()
   })

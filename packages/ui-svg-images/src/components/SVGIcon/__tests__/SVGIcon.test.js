@@ -26,7 +26,7 @@ import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 
 import SVGIcon from '../index'
-import SVGIconFixture from '../fixture'
+import SVGIconLocator from '../locator'
 
 import styles from '../styles.css'
 
@@ -35,7 +35,7 @@ describe('<SVGIcon />', async () => {
    await mount(
     <SVGIcon />
     )
-    const icon = await SVGIconFixture.find()
+    const icon = await SVGIconLocator.find()
     expect(icon).to.exist()
   })
 
@@ -43,7 +43,7 @@ describe('<SVGIcon />', async () => {
    await mount(
     <SVGIcon />
     )
-    const icon = await SVGIconFixture.find()
+    const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
   })
 
@@ -53,7 +53,7 @@ describe('<SVGIcon />', async () => {
         rotate="90"
       />
     )
-    const icon = await SVGIconFixture.find()
+    const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
@@ -64,7 +64,7 @@ describe('<SVGIcon />', async () => {
         height='100px'
       />
     )
-    const custom = await SVGIconFixture.find()
+    const custom = await SVGIconLocator.find()
     const width = custom.getComputedStyle().width
     const height = custom.getComputedStyle().height
 
@@ -78,7 +78,7 @@ describe('<SVGIcon />', async () => {
         size='large'
       />
     )
-    const subject = await SVGIconFixture.find()
+    const subject = await SVGIconLocator.find()
     expect(subject.hasClass(styles['size--large'])).to.be.true()
   })
 
@@ -90,7 +90,7 @@ describe('<SVGIcon />', async () => {
         size='x-small'
       />
     )
-    const subject = await SVGIconFixture.find()
+    const subject = await SVGIconLocator.find()
     const width = subject.getComputedStyle().getPropertyValue('width')
     const height = subject.getComputedStyle().getPropertyValue('height')
     expect(width).to.equal('200px')
@@ -103,7 +103,7 @@ describe('<SVGIcon />', async () => {
         size='large'
       />
     )
-    const subject = await SVGIconFixture.find()
+    const subject = await SVGIconLocator.find()
     expect(await subject.accessible()).to.be.true()
   })
 })
