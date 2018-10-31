@@ -25,6 +25,8 @@ import runAxeCheck from '@instructure/ui-axe-check'
 import { prettyDOM } from 'dom-testing-library'
 import { fireEvent } from './events'
 
+import { matchElementBySelector } from './matchers'
+
 function getOwnerDocument (element) {
   return element.ownerDocument
 }
@@ -82,8 +84,35 @@ function visible (element) {
   return true
 }
 
+function onscreen (element) {
+  const bounding = element.getBoundingClientRect()
+  const win = getOwnerWindow(element)
+  const doc = getOwnerDocument(element)
+  return (
+      bounding.top >= 0 &&
+      bounding.left >= 0 &&
+      bounding.bottom <= (win.innerHeight || doc.documentElement.clientHeight) &&
+      bounding.right <= (win.innerWidth || doc.documentElement.clientWidth)
+  )
+}
+
+function clickable (element) {
+  return focusable(element) && onscreen(element)
+}
+
 function focusable (element) {
-  return !element.disabled && visible(element)
+  const selector = [
+    'a[href]:not([disabled])',
+    'frame',
+    'iframe',
+    'object',
+    'input:not([type=hidden]):not([disabled])',
+    'select:not([disabled])',
+    'textarea:not([disabled])',
+    'button:not([disabled])',
+    '*[tabindex]'
+  ]
+  return !element.disabled && visible(element) && matchElementBySelector(element, selector.join(','))
 }
 
 function tabbable (element) {
@@ -144,5 +173,6 @@ export {
   focused,
   visible,
   focusable,
-  tabbable
+  tabbable,
+  clickable
 }

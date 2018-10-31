@@ -30,6 +30,8 @@ import {
 
 import { firstOrNull } from './firstOrNull'
 
+import { clickable, focusable, tabbable } from './helpers'
+
 function filterBySelector (container, results, selector, options) {
   if (Array.isArray(results)) {
     return results
@@ -124,23 +126,18 @@ function filterByLabelText (container, results, text, options = {}) {
 }
 
 function filterByFocusable (container, results) {
-  const selector = [
-    'a[href]:not([disabled])',
-    'frame',
-    'iframe',
-    'object',
-    'input:not([type=hidden]):not([disabled])',
-    'select:not([disabled])',
-    'textarea:not([disabled])',
-    'button:not([disabled])',
-    '*[tabindex]'
-  ]
   return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
-    .filter(element => matchElementBySelector(element, selector.join(',')))
+    .filter(element => focusable(element))
 }
 
 function filterByTabbable (container, results) {
-  return filterByFocusable.filter(element => parseInt(element.getAttribute('tabindex')) > 0)
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => tabbable(element))
+}
+
+function filterByClickable (container, results) {
+  return (Array.isArray(results) ? results : queryAllBySelector(container, '*'))
+    .filter(element => clickable(element))
 }
 
 function queryAllBySelector (element = document.documentElement, selector = '*') {
@@ -160,6 +157,7 @@ function queryBySelector (...args) {
 }
 
 export {
+  filterByClickable,
   filterByTabbable,
   filterByFocusable,
   filterByLabelText,

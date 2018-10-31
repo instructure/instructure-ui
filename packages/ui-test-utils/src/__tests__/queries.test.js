@@ -308,7 +308,7 @@ describe('find, findAll', async () => {
           <button onClick={handleClick}>hello</button>
         )
 
-        const button = await find({ tag: 'button' })
+        const button = await find({ clickable: true })
 
         const event = await button.click()
 

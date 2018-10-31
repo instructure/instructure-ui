@@ -29,6 +29,7 @@ import { waitForQueryResult } from './waitForQueryResult'
 import { visible, getOwnerDocument } from './helpers'
 
 import {
+  filterByClickable,
   filterByTabbable,
   filterByFocusable,
   filterByLabelText,
@@ -68,6 +69,7 @@ function parseQueryArguments () {
     selector = { css: selector }
   } else if (selector) {
     const {
+      clickable,
       tabbable,
       focusable,
       locator,
@@ -82,6 +84,7 @@ function parseQueryArguments () {
       ...rest
     } = selector
     selector = {
+      clickable,
       tabbable,
       focusable,
       locator,
@@ -110,6 +113,7 @@ function parseQueryArguments () {
 
 function querySelectorAll (element, selector, options) {
   const {
+    clickable,
     tabbable,
     focusable,
     locator,
@@ -164,6 +168,10 @@ function querySelectorAll (element, selector, options) {
     result = filterByAttribute(element, result, attribute.name, attribute.value, options)
   } else if (attribute) {
     result = filterByAttribute(element, result, attribute, null, options)
+  }
+
+  if (clickable === true) {
+    result = filterByClickable(element, result, options)
   }
 
   if (focusable === true) {
@@ -226,6 +234,7 @@ async function getQueryResult (element, query, options, message) {
 function validateSelector (selector = {}) {
   if (!selector) return null
   const VALID_SELECTORS = [
+    'clickable',
     'tabbable',
     'focusable',
     'locator',

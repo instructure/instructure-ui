@@ -144,12 +144,11 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const billboard = await BillboardLocator.find()
-      const button = await billboard.find({
-        tag: 'button'
+      const billboard = await BillboardLocator.find({
+        clickable: true
       })
 
-      const event = await button.click()
+      const event = await billboard.click()
 
       expect(event.preventDefault).to.have.been.calledOnce()
       expect(onClick).to.not.have.been.called()
