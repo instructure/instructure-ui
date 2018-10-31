@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.32.0"></a>
+# [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
+
+
+### Bug Fixes
+
+* **ui-i18n:** fix moment-timezone double import ([b2662a0](https://github.com/instructure/instructure-ui/commit/b2662a0))
+* **ui-test-utils:** fix event firing ([3852beb](https://github.com/instructure/instructure-ui/commit/3852beb))
+
+
+### Features
+
+* **ui-buttons:** update tests to run on React 16 ([8c3b7c8](https://github.com/instructure/instructure-ui/commit/8c3b7c8))
+* **ui-forms:** allow SingleSelect to accept arbitrary typed input ([8e324c8](https://github.com/instructure/instructure-ui/commit/8e324c8))
+* **ui-icons:** add filter icon to iconography ([5f8162e](https://github.com/instructure/instructure-ui/commit/5f8162e))
+* **ui-navigation:** update tests to run on React 16 ([9ea84f2](https://github.com/instructure/instructure-ui/commit/9ea84f2))
+
+
+### Performance Improvements
+
+* **ui-overlays:** improve perf of <Modal> ([dc1085f](https://github.com/instructure/instructure-ui/commit/dc1085f))
+* **ui-overlays:** improve perf of <Tray> ([7b4e622](https://github.com/instructure/instructure-ui/commit/7b4e622))
+* **ui-themeable:** avoid a forEach loop when possible ([3273839](https://github.com/instructure/instructure-ui/commit/3273839))
+* **ui-utils:** simplify getClassList since all browsers we support have classList API ([d388c04](https://github.com/instructure/instructure-ui/commit/d388c04))
+
+
+
+
+
 <a name="5.31.0"></a>
 # [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
 

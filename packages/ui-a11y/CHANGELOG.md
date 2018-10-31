@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.32.0"></a>
+# [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
+
+
+### Performance Improvements
+
+* **ui-themeable:** avoid a forEach loop when possible ([3273839](https://github.com/instructure/instructure-ui/commit/3273839))
+
+
+
+
+
 <a name="5.31.0"></a>
 # [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
 

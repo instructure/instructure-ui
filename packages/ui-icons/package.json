@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-icons",
-  "version": "5.31.0",
+  "version": "5.32.0",
   "description": "Icon set for Instructure, Inc. products",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

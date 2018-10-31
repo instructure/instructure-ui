@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.32.0"></a>
+# [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
+
+
+### Bug Fixes
+
+* **ui-i18n:** fix moment-timezone double import ([b2662a0](https://github.com/instructure/instructure-ui/commit/b2662a0))
+
+
+### Performance Improvements
+
+* **ui-utils:** simplify getClassList since all browsers we support have classList API ([d388c04](https://github.com/instructure/instructure-ui/commit/d388c04))
+
+
+
+
+
 <a name="5.31.0"></a>
 # [5.31.0](https://github.com/instructure/instructure-ui/compare/v5.30.0...v5.31.0) (2018-10-26)
 
