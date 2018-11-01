@@ -22,18 +22,19 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 import addEventListener from '../addEventListener'
 
-describe('addEventListener', () => {
-  const testbed = new Testbed()
-
-  it('should add an event listener and provide a remove method', () => {
-    const callback = testbed.spy()
-    const node = testbed.rootNode
+describe('addEventListener', async () => {
+  it('should add an event listener and provide a remove method', async () => {
+    const callback = spy()
+    const subject = await mount(<div />)
+    const node = subject.getDOMNode()
 
     const listener = addEventListener(node, 'click', callback)
 
-    node.click()
+    await node.click()
 
     expect(callback).to.have.been.calledOnce()
     expect(typeof listener.remove).to.equal('function')

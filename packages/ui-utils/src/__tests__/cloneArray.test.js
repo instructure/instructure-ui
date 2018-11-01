@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
+
 import cloneArray from '../cloneArray'
 import deepEqual from '../deepEqual'
 

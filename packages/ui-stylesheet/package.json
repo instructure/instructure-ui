@@ -23,7 +23,6 @@
     "@instructure/ui-presets": "^5"
   },
   "dependencies": {
-    "@instructure/ui-utils": "^5",
     "glamor": "^2.20.40"
   },
   "publishConfig": {

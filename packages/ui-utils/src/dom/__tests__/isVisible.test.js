@@ -23,32 +23,31 @@
  */
 
 import React from 'react'
+import { mount, expect } from '@instructure/ui-test-utils'
 import isVisible from '../isVisible'
 
-describe('isVisible', () => {
-  const testbed = new Testbed(
-    <div id="test">Hello world!</div>
-  )
-
-  it('should recognize visible elements', () => {
-    testbed.render()
+describe('isVisible', async () => {
+  it('should recognize visible elements', async () => {
+    await mount(
+      <div id="test">Hello world!</div>
+    )
     const visible = isVisible(document.getElementById('test'))
     expect(visible).to.equal(true)
   })
 
-  it('should recognize elements with display: none', () => {
-    testbed.render({
-      children: (
+  it('should recognize elements with display: none', async () => {
+    await mount(
+      <div id="test">
         <span id="test-2" style={{display: 'none'}}>Hello world!</span>
-      )
-    })
+      </div>
+    )
     const visible = isVisible(document.getElementById('test-2'))
     expect(visible).to.equal(false)
   })
 
-  it('should recognize elements hidden with clip', () => {
-    testbed.render({
-      children: (
+  it('should recognize elements hidden with clip', async () => {
+    await mount(
+      <div id="test">
         <span id="test-2" style={{
           position: 'absolute',
           overflow: 'hidden',
@@ -56,15 +55,16 @@ describe('isVisible', () => {
         }}>
           Hello world!
         </span>
-      )
-    })
+      </div>
+    )
+
     const visible = isVisible(document.getElementById('test-2'))
     expect(visible).to.equal(false)
   })
 
-  it('should recognize clipped elements that are not hidden', () => {
-    testbed.render({
-      children: (
+  it('should recognize clipped elements that are not hidden', async () => {
+    await mount(
+      <div id="test">
         <span id="test-2" style={{
           position: 'absolute',
           overflow: 'hidden',
@@ -72,21 +72,22 @@ describe('isVisible', () => {
         }}>
           Hello world!
         </span>
-      )
-    })
+      </div>
+    )
+
     const visible = isVisible(document.getElementById('test-2'))
     expect(visible).to.equal(true)
   })
 
-  it('should recursively check parent visibility', () => {
-    testbed.render({
-      style: {visibility: 'hidden'},
-      children: (
+  it('should recursively check parent visibility', async () => {
+    await mount(
+      <div id="test" style={{visibility: 'hidden'}}>
         <span>
           <span id="test-2" style={{visibility: 'visible'}}>Hello world!</span>
         </span>
-      )
-    })
+      </div>
+    )
+
     const nonrecursive = isVisible(document.getElementById('test-2'), false)
     const recursive = isVisible(document.getElementById('test-2'))
     expect(nonrecursive).to.equal(true)

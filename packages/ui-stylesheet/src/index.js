@@ -23,7 +23,6 @@
  */
 
 import { StyleSheet as GlamorStyleSheet } from 'glamor/lib/sheet'
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 
 const debug = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
 
@@ -70,6 +69,10 @@ export default {
     }
   }
 }
+
+const canUseDOM = !!(typeof window !== 'undefined' &&
+  window.document &&
+  window.document.createElement)
 
 function insert (rules) {
   const sheet = inject()

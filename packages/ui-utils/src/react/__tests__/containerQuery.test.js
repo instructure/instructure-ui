@@ -24,6 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { expect, mount, wait } from '@instructure/ui-test-utils'
 import containerQuery from '../containerQuery'
 
 const query = {
@@ -50,76 +51,59 @@ class ContainerComponent extends React.Component {
 }
 
 describe('@containerQuery', () => {
-  const testbed = new Testbed(<ContainerComponent />)
+  it('adds attributes to the container element based on its dimensions and the query', async () => {
+    const subject = await mount(<ContainerComponent />)
 
-  it('adds attributes to the container element based on its dimensions and the query', (done) => {
-    const subject = testbed.render()
-    expect(subject.getAttribute('data-width_less_than_200'))
-      .to.not.exist()
+    expect(subject.getDOMNode().getAttribute('data-width_less_than_200')).to.not.exist()
 
     subject.setProps({
       width: '100px'
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
+    })
 
-      expect(subject.getAttribute('data-width_less_than_200'))
-        .to.exist()
-      done()
+    await wait(() => {
+      expect(subject.getDOMNode().getAttribute('data-width_less_than_200')).to.exist()
     })
   })
 
-  it('converts rem units in the query to pixels', (done) => {
-    const subject = testbed.render()
+  it('converts rem units in the query to pixels', async () => {
+    const subject = await mount(<ContainerComponent />)
 
-    expect(subject.getAttribute('data-width_between_251_and_300'))
-      .to.not.exist()
+    expect(subject.getDOMNode().getAttribute('data-width_between_251_and_300')).to.not.exist()
 
     subject.setProps({
       width: '275px'
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
-      expect(subject.getAttribute('data-width_between_251_and_300'))
-        .to.exist()
-      done()
+    })
+
+    await wait(() => {
+      expect(subject.getDOMNode().getAttribute('data-width_between_251_and_300')).to.exist()
     })
   })
 
-  it('converts em units in the query to pixels', (done) => {
-    const subject = testbed.render()
+  it('converts em units in the query to pixels', async () => {
+    const subject = await mount(<ContainerComponent />)
 
-    expect(subject.getAttribute('data-width_less_than_2em'))
-      .to.not.exist()
+    expect(subject.getDOMNode().getAttribute('data-width_less_than_2em')).to.not.exist()
 
     subject.setProps({
       width: '30px'
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
+    })
 
-      expect(subject.getAttribute('data-width_less_than_2em'))
-        .to.exist()
-      done()
+    await wait(() => {
+      expect(subject.getDOMNode().getAttribute('data-width_less_than_2em')).to.exist()
     })
   })
 
-  it('parses pixels from strings in the query', (done) => {
-    const subject = testbed.render({
-      width: '300px'
-    })
+  it('parses pixels from strings in the query', async () => {
+    const subject = await mount(<ContainerComponent width="300px" />)
 
-    expect(subject.getAttribute('data-width_between_251_and_300'))
-      .to.exist()
+    expect(subject.getDOMNode().getAttribute('data-width_between_251_and_300')).to.exist()
 
     subject.setProps({
       width: '301px'
-    }, () => {
-      testbed.raf() // for the listener
-      testbed.tick() // for the debounce
-      expect(subject.getAttribute('data-width_between_251_and_300'))
-        .to.not.exist()
-      done()
+    })
+
+    await wait(() => {
+      expect(subject.getDOMNode().getAttribute('data-width_between_251_and_300')).to.not.exist()
     })
   })
 })

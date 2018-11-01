@@ -24,9 +24,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { mount, expect, stub } from '@instructure/ui-test-utils'
 import ComponentIdentifier, { pick } from '../ComponentIdentifier'
 
-describe('ComponentIdentifier', () => {
+describe('ComponentIdentifier', async () => {
   class Trigger extends ComponentIdentifier {
     static displayName = 'Trigger'
   }
@@ -48,42 +49,46 @@ describe('ComponentIdentifier', () => {
     }
   }
 
-  const testbed = new Testbed(<App />)
-
-  it('should render only child', () => {
-    const subject = testbed.render({
-      children: (
+  it('should render only child', async () => {
+    let buttonRef
+    await mount(
+      <App>
         <Trigger>
-          <button>Click Me</button>
+          <button ref={el => buttonRef = el}>Click Me</button>
         </Trigger>
-      )
-    })
-    const trigger = subject.find(Trigger).find('button')
+      </App>
+    )
 
-    expect(trigger.text()).to.equal('Click Me')
+    expect(buttonRef.textContent).to.equal('Click Me')
   })
 
-  it('should not error when no children provided', () => {
-    expect(() => {
-      testbed.render({
-        children: (
+  it('should not error when no children provided', async () => {
+    let error = false
+    try {
+      await mount(
+        <App>
           <Trigger />
-        )
-      })
-    }).to.not.throw(Error)
+        </App>
+      )
+    } catch (e) {
+      error = true
+    }
+
+    expect(error).to.be.false()
   })
 
-  it('should pass props', () => {
-    const onClick = testbed.stub()
-    const subject = testbed.render({
-      children: (
+  it('should pass props', async () => {
+    let buttonRef
+    const onClick = stub()
+    await mount(
+      <App>
         <Trigger onClick={onClick}>
-          <button>Click Me</button>
+          <button ref={el => buttonRef = el}>Click Me</button>
         </Trigger>
-      )
-    })
-    const button = subject.find('button').unwrap()
-    button.click()
+      </App>
+    )
+
+    await buttonRef.click()
     expect(onClick).to.have.been.called()
   })
 })

@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import scopeTab from '../scopeTab'
 
-describe('scopeTab', () => {
+describe('scopeTab', async () => {
   let container, node
   const MOCK_EVENT = {
     shiftKey: false,
@@ -54,22 +55,22 @@ describe('scopeTab', () => {
     node = null
   })
 
-  it('should scope tab within container', () => {
+  it('should scope tab within container', async () => {
     const nested = document.querySelector('.scopeTab--NESTED')
     const one = document.querySelector('.scopeTab--ONE')
     const two = document.querySelector('.scopeTab--TWO')
 
-    two.focus()
+    await two.focus()
 
     scopeTab(nested, MOCK_EVENT)
 
     expect(document.activeElement).to.equal(one)
   })
 
-  it('should not attempt scoping when no tabbable children', () => {
+  it('should not attempt scoping when no tabbable children', async () => {
     const two = document.querySelector('.scopeTab--TWO')
 
-    two.focus()
+    await two.focus()
 
     scopeTab(node, MOCK_EVENT)
 

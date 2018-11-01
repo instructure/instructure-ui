@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import getScrollParents from '../getScrollParents'
 
-describe('getScrollParents', () => {
-  const testbed = new Testbed(
+describe('getScrollParents', async () => {
+  const node = (
     <div>
       <div id="item-1">
         <div id="item-2">
@@ -55,8 +56,8 @@ describe('getScrollParents', () => {
     </div>
   )
 
-  it('should find scroll parent for inline elements', () => {
-    testbed.render()
+  it('should find scroll parent for inline elements', async () => {
+    await mount(node)
 
     const child = document.getElementById('scroll-child')
     const parent = document.getElementById('scroll-parent')
@@ -64,8 +65,8 @@ describe('getScrollParents', () => {
     expect(getScrollParents(child)[0]).to.be.equal(parent)
   })
 
-  it('should ignore static parents when absolute', () => {
-    testbed.render()
+  it('should ignore static parents when absolute', async () => {
+    await mount(node)
 
     const child = document.getElementById('scroll-child-rel')
     const parent = document.getElementById('scroll-parent-rel')
@@ -73,8 +74,8 @@ describe('getScrollParents', () => {
     expect(getScrollParents(child)[0]).to.be.equal(parent)
   })
 
-  it('should handle fixed', () => {
-    testbed.render()
+  it('should handle fixed', async () => {
+    await mount(node)
 
     const child = document.getElementById('scroll-child-fixed')
     const scrollParent = getScrollParents(child)[0]

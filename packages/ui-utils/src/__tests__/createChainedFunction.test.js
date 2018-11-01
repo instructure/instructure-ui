@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
+import { expect, spy } from '@instructure/ui-test-utils'
 import createChainedFunction from '../createChainedFunction'
 
 describe('createChainedFunction', () => {
-  const testbed = new Testbed()
-
   it('should return null if no function provided', () => {
     expect(createChainedFunction(null, undefined)).to.equal(null) // eslint-disable-line no-undefined
   })
@@ -42,7 +41,7 @@ describe('createChainedFunction', () => {
   })
 
   it('should execute all the functions', () => {
-    const spies = Array(5).fill(null).map(() => testbed.spy())
+    const spies = Array(5).fill(null).map(() => spy())
     const chain = createChainedFunction(...spies)
 
     chain()

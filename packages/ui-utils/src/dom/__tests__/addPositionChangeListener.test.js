@@ -22,14 +22,15 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
 import addPositionChangeListener from '../addPositionChangeListener'
 
-describe('addPositionChangeListener', () => {
-  const testbed = new Testbed()
-
-  it('should provide a remove method', (done) => {
-    const callback = testbed.spy()
-    const node = testbed.rootNode
+describe('addPositionChangeListener', async () => {
+  it('should provide a remove method', async () => {
+    const callback = spy()
+    const subject = await mount(<div />)
+    const node = subject.getDOMNode()
 
     node.style.position = 'relative'
 
@@ -37,15 +38,11 @@ describe('addPositionChangeListener', () => {
 
     node.style.top = '100px'
 
-    testbed.defer(() => {
-      testbed.raf()
-
+    await wait(() => {
       expect(callback).to.have.been.calledOnce()
       expect(typeof listener.remove).to.equal('function')
-
-      listener.remove()
-
-      done()
     })
+
+    listener.remove()
   })
 })

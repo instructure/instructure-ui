@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
+
 import px from '../px'
 import getFontSize from '../dom/getFontSize'
 

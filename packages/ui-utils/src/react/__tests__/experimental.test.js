@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import experimental from '../experimental'
 
 class TestComponent extends Component {
@@ -42,20 +44,17 @@ class TestComponent extends Component {
   }
 }
 
-describe('@experimental', () => {
-  describe('experimental props', () => {
+describe('@experimental', async () => {
+  describe('experimental props', async () => {
     const ExperimentalComponent = experimental(['bar'])(TestComponent)
 
-    const testbed = new Testbed(<ExperimentalComponent />)
 
-    it('should warn when using an experimental prop', () => {
-      const spy = testbed.spy(console, 'warn')
+    it('should warn when using an experimental prop', async () => {
+      const warning = spy(console, 'warn')
 
-      testbed.render({
-        bar: 'Jane'
-      })
+      await mount(<ExperimentalComponent bar="Jane" />)
 
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] The `%s` prop is experimental and its API could change significantly in a future release. %s',
         'TestComponent',
         'bar',
@@ -63,30 +62,24 @@ describe('@experimental', () => {
       )
     })
 
+    it('should not output a warning using a non-experimental prop', async () => {
+      const warning = spy(console, 'warn')
 
+      await mount(<ExperimentalComponent qux="Jane" />)
 
-    it('should not output a warning using a non-experimental prop', () => {
-      const spy = testbed.spy(console, 'warn')
-
-      testbed.render({
-        qux: 'Jane'
-      })
-
-      spy.should.not.have.been.called()
+      expect(warning).to.not.have.been.called()
     })
   })
 
-  describe('experimental component', () => {
+  describe('experimental component', async () => {
     const ExperimentalComponent = experimental()(TestComponent)
 
-    const testbed = new Testbed(<ExperimentalComponent />)
+    it('should warn that the entire component is experimental if no props are supplied', async () => {
+      const warning = spy(console, 'warn')
 
-    it('should warn that the entire component is experimental if no props are supplied', () => {
-      const spy = testbed.spy(console, 'warn')
+      await mount(<ExperimentalComponent />)
 
-      testbed.render()
-
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] is experimental and its API could change significantly in a future release. %s',
         'TestComponent',
         ''

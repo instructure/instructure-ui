@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { camelize, pascalize } from '../convertCase'
 
 describe('convertCase', () => {

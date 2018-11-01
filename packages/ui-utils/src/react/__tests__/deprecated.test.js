@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { expect, mount, spy } from '@instructure/ui-test-utils'
+
 import deprecated, { changedPackageWarning } from '../deprecated'
 
 class TestComponent extends Component {
@@ -42,23 +44,19 @@ class TestComponent extends Component {
   }
 }
 
-describe('@deprecated', () => {
-  describe('deprecated props', () => {
+describe('@deprecated', async () => {
+  describe('deprecated props', async () => {
     const DeprecatedComponent = deprecated('2.1.0', {
       foo: 'bar',
       baz: true
     })(TestComponent)
 
-    const testbed = new Testbed(<DeprecatedComponent />)
+    it('should warn when suggesting new prop when using old prop', async () => {
+      const warning = spy(console, 'warn')
 
-    it('should warn when suggesting new prop when using old prop', () => {
-      const spy = testbed.spy(console, 'warn')
+      await mount(<DeprecatedComponent foo="Jane" />)
 
-      testbed.render({
-        foo: 'Jane'
-      })
-
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] `%s` was deprecated in %s%s. %s',
         'TestComponent',
         'foo',
@@ -68,14 +66,12 @@ describe('@deprecated', () => {
       )
     })
 
-    it('should warn when using old prop with no new prop', () => {
-      const spy = testbed.spy(console, 'warn')
+    it('should warn when using old prop with no new prop', async () => {
+      const warning = spy(console, 'warn')
 
-      testbed.render({
-        baz: 'Goodbye'
-      })
+      await mount(<DeprecatedComponent baz="Goodbye" />)
 
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] `%s` was deprecated in %s%s. %s',
         'TestComponent',
         'baz',
@@ -85,28 +81,24 @@ describe('@deprecated', () => {
       )
     })
 
-    it('should not output a warning using new prop', () => {
-      const spy = testbed.spy(console, 'warn')
+    it('should not output a warning using new prop', async () => {
+      const warning = spy(console, 'warn')
 
-      testbed.render({
-        bar: 'Jane'
-      })
+      await mount(<DeprecatedComponent bar="Jane" />)
 
-      spy.should.not.have.been.called()
+      expect(warning).to.not.have.been.called()
     })
   })
 
-  describe('deprecated component', () => {
+  describe('deprecated component', async () => {
     const DeprecatedComponent = deprecated('3.4.0')(TestComponent)
 
-    const testbed = new Testbed(<DeprecatedComponent />)
+    it('should warn that the entire component is deprecated if no old props are supplied', async () => {
+      const warning = spy(console, 'warn')
 
-    it('should warn that the entire component is deprecated if no old props are supplied', () => {
-      const spy = testbed.spy(console, 'warn')
+      await mount(<DeprecatedComponent />)
 
-      testbed.render()
-
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] was deprecated in version %s. %s',
         'TestComponent',
         '3.4.0',
@@ -115,22 +107,20 @@ describe('@deprecated', () => {
     })
   })
 
-  describe('deprecated component with a changed package message', () => {
+  describe('deprecated component with a changed package message', async () => {
     const DeprecatedComponent = deprecated('5.0.0', null, changedPackageWarning(
       'ui-core',
       'ui-portal'
     ))(TestComponent)
 
-    const testbed = new Testbed(<DeprecatedComponent />)
+    it('should warn that the component is deprecated and output a warning that the package changed', async () => {
+      const warning = spy(console, 'warn')
 
-    it('should warn that the component is deprecated and output a warning that the package changed', () => {
-      const spy = testbed.spy(console, 'warn')
-
-      testbed.render()
+      await mount(<DeprecatedComponent />)
 
       const message = `It has been moved from @instructure/ui-core to @instructure/ui-portal.`
 
-      spy.should.have.been.calledWithExactly(
+      expect(warning).to.have.been.calledWithExactly(
         'Warning: [%s] was deprecated in version %s. %s',
         'TestComponent',
         '5.0.0',
