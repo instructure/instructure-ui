@@ -26,6 +26,7 @@ const fs = require('fs')
 const path = require('path')
 
 const { getPackageJSON } = require('@instructure/pkg-utils')
+const getChangedPackages = require('@instructure/pkg-utils/lib/get-changed-packages')
 
 const { runCommandAsync } = require('./command')
 const { confirm } = require('./confirm')
@@ -213,6 +214,50 @@ exports.deprecatePackage = async function deprecatePackage (packageName, current
   await runCommandAsync('npm', ['deprecate', pkg, message])
 }
 
+async function updateCrossPackageDependencies (name, version) {
+  const majorVersion = version.split('.')[0]
+  const changedPackages = await getChangedPackages()
+  const changedPackagesNames = changedPackages.map(pkg => pkg.name)
+
+  info(`💾  Updating cross-package dependencies for ${name} to ^${majorVersion}...`)
+
+  await Promise.all(
+    changedPackages.map(pkg => {
+      let packageChanged = false
+
+      const depCollections = [
+        'dependencies',
+        'devDependencies',
+        'optionalDependencies',
+        'peerDependencies'
+      ]
+
+      depCollections.forEach(depCollection => {
+        if (!pkg[depCollection]) return
+
+        const newDependencies = Object.keys(pkg[depCollection])
+          .filter(dep => {
+            return (
+              changedPackagesNames.includes(dep) &&
+              pkg[depCollection][dep] === `^${version}`
+            )
+          })
+          .reduce((obj, dep) => ({ ...obj, [dep]: `^${majorVersion}` }), {})
+
+        if (Object.entries(newDependencies).length > 0) {
+          pkg.set(
+            depCollection,
+            Object.assign(pkg[depCollection], newDependencies)
+          )
+          packageChanged = true
+        }
+      })
+
+      if (packageChanged) return pkg.serialize()
+    })
+  )
+}
+
 exports.bump = async function bump (releaseType, config = {}) {
   await setupGit()
   await checkWorkingDirectory()
@@ -233,6 +278,13 @@ exports.bump = async function bump (releaseType, config = {}) {
       '--repo-version',
       version
     ])
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  try {
+    await updateCrossPackageDependencies(name, version)
   } catch (err) {
     error(err)
     process.exit(1)
