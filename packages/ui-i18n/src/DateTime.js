@@ -33,10 +33,10 @@ import moment from 'moment-timezone'
 */
 
 /**
-* Return the current localized date + time with timezone
+* Return an instance of a [moment](https://momentjs.com) initialized with the current date + time
 * @param {String} locale
 * @param {String} timezone
-* @returns {String} ISO 8601 string
+* @returns {Object} an instance of a moment.
 */
 export function now (locale, timezone) {
   _checkParams(locale, timezone)
