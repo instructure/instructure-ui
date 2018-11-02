@@ -93,7 +93,6 @@ export default class Flex extends Component {
     as: 'span',
     direction: 'row',
     justifyItems: 'start',
-    alignItems: 'center',
     inline: false,
     visualDebug: false,
     wrapItems: false
@@ -128,12 +127,15 @@ export default class Flex extends Component {
       margin,
       padding,
       justifyItems,
-      alignItems,
       textAlign,
       visualDebug,
       width,
       wrapItems
     } = this.props
+
+    // When flex direction is row, 'center' is the most useful default because it
+    // vertically aligns FlexItems. For column direction, though, we want 'stretch'.
+    const alignItems = this.props.alignItems || (direction === 'column' ? 'stretch' : 'center')
 
     const classes = {
       [styles.root]: true,
