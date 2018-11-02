@@ -38,8 +38,8 @@ if (['15', '16'].includes(version)) {
 
   pkgJSON.resolutions = {
     ...(originalResolutions || {}),
-    'react': version,
-    'react-dom': version
+    'react': `^${version}`,
+    'react-dom': `^${version}`
   }
 
   fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')

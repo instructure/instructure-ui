@@ -29,7 +29,7 @@
     "@storybook/addons": "^3.4.11",
     "@storybook/react": "^3.4.11",
     "happo": "^5.0.0",
-    "happo-target-firefox": "^5.0.2",
+    "happo-target-firefox": "^5.0.3",
     "react": "^0.14.9 || ^15 || ^16",
     "react-dom": "^0.14.9 || ^15 || ^16",
     "story2sketch": "^1.3.0",

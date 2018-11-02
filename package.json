@@ -17,10 +17,10 @@
   },
   "scripts": {
     "prestart": "yarn bootstrap",
-    "start": "lerna run start --stream",
-    "start:watch": "lerna run start:watch --stream",
+    "start": "lerna run start --stream --scope docs-app",
+    "start:watch": "lerna run start:watch --stream --scope docs-app",
     "pretest:ci": "yarn bootstrap && yarn check",
-    "test:ci": "npm-run-all lint:commit lint:changes test:node test:jest test:changes test:changes:testbed install:react:16 test:changes install:react",
+    "test:ci": "npm-run-all lint:commit lint:changes test:node test:jest test:changes install:react:15 test:changes test:changes:testbed install:react",
     "test": "ui-test",
     "test:testbed": "ui-test --testbed",
     "test:watch": "ui-test --watch --no-headless",
@@ -29,7 +29,7 @@
     "test:changes:testbed": "ui-test --changed --testbed",
     "test:jest": "lerna run test:jest --stream",
     "test:node": "lerna run test:node --stream",
-    "test:react:16": "npm-run-all install:react:16 test install:react",
+    "test:react:15": "npm-run-all install:react:15 test test:testbed install:react",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
     "lint:fix": "lerna run lint:fix --stream",
@@ -40,7 +40,7 @@
     "generate:rfc": "./scripts/generate-rfc",
     "commit": "ui-scripts --commit",
     "install:react": "ui-scripts --install-react",
-    "install:react:16": "yarn install:react 16",
+    "install:react:15": "yarn install:react 15",
     "install:packages": "lerna bootstrap --reject-cycles",
     "bootstrap": "npm-run-all clean:modules install:packages clean build",
     "build": "lerna run build --stream --ignore docs-*",
@@ -65,15 +65,15 @@
   },
   "license": "MIT",
   "resolutions": {
-    "react": "15.6.2",
-    "react-dom": "15.6.2"
+    "react": "16.6.0",
+    "react-dom": "16.6.0"
   },
   "devDependencies": {
-    "husky": "^1.1.1",
+    "husky": "^1.1.3",
     "lerna": "3.0.0-beta.21",
     "lint-staged": "^7.3.0",
     "npm-run-all": "^4.1.3",
-    "yarn": "^1.10.1"
+    "yarn": "^1.12.1"
   },
   "engines": {
     "node": ">=10.0.0",

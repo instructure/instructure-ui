@@ -37,11 +37,15 @@ function testable () {
         if (ComposedComponent.prototype.componentDidMount) {
           ComposedComponent.prototype.componentDidMount.call(this)
         }
-        // Use this.DOMNode for components that render as non-native Portals...
-        const rootNode = findDOMNode(this) || this.DOMNode
+        try {
+          // Use this.DOMNode for components that render as non-native Portals...
+          const rootNode = findDOMNode(this) || this.DOMNode
 
-        if (rootNode) {
-          rootNode.setAttribute(TESTABLE_ATTRIBUTE, displayName)
+          if (rootNode) {
+            rootNode.setAttribute(TESTABLE_ATTRIBUTE, displayName)
+          }
+        } catch (e) {
+          console.warn(`[ui-testable] Could not attach testable locator attribute: ${e}`)
         }
       }
     }
