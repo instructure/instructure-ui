@@ -34,7 +34,6 @@ module.exports = {
     'packages/generate-examples/',
     'packages/media-capture/',
     'packages/ui-a11y/',
-    'packages/ui-code-editor/',
     'packages/ui-container/',
     'packages/ui-core/',
     'packages/ui-elements/',

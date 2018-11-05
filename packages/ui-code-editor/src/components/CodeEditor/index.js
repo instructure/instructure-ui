@@ -41,7 +41,6 @@ import CodeMirror from './codemirror'
 category: components
 ---
 **/
-
 @deprecated('5.1.0', {
   code: 'value'
 })
