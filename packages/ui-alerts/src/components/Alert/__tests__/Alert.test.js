@@ -24,15 +24,12 @@
 
 import React from 'react'
 
-import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
-import IconInfoBorderless from '@instructure/ui-icons/lib/Solid/IconInfoBorderless'
-import IconWarningBorderless from '@instructure/ui-icons/lib/Solid/IconWarningBorderless'
-import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
+import { expect, mount, spy, stub, wait, within } from '@instructure/ui-test-utils'
 
 import Alert from '../index'
 import styles from '../styles.css'
 
-describe('<Alert />', () => {
+describe('<Alert />', async () => {
   let srdiv
 
   beforeEach(() => {
@@ -50,160 +47,219 @@ describe('<Alert />', () => {
     srdiv = null
   })
 
-  const testbed = new Testbed(<Alert variant="success">Success: Sample alert text.</Alert>)
+  it('should render', async () => {
+    const subject = await mount(
+      <Alert variant="success">Success: Sample alert text.</Alert>
+    )
 
-  it('should render', () => {
-    const alert = testbed.render()
-    expect(alert).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should not render the Close button when `closeButtonLabel` is not provided', () => {
-    const alert = testbed.render()
+  it('should not render the Close button when `closeButtonLabel` is not provided', async () => {
+    const subject = await mount(
+      <Alert variant="success">Success: Sample alert text.</Alert>
+    )
 
-    expect(alert.find('button').length).to.equal(0)
-  })
-
-  it('should call `onDismiss` when the close button is clicked', () => {
-    const onDismiss = testbed.stub()
-
-    const alert = testbed.render({
-      closeButtonLabel: 'close',
-      onDismiss
+    const alert = within(subject.getDOMNode())
+    const closeButton = await alert.find({
+      focusable: true,
+      expectEmpty: true
     })
 
-    alert.find('button').simulate('click')
+    expect(closeButton).to.not.exist()
+  })
 
-    testbed.tick() // Transition exiting
-    testbed.tick() // Transition exited
+  it('should call `onDismiss` when the close button is clicked', async () => {
+    const onDismiss = stub()
+    const subject = await mount(
+      <Alert variant="success" closeButtonLabel="close" onDismiss={onDismiss}>
+        Success: Sample alert text.
+      </Alert>
+    )
 
-    expect(onDismiss.called).to.be.true()
+    const alert = within(subject.getDOMNode())
+    const closeButton = await alert.find({
+      focusable: true
+    })
+
+    await closeButton.click()
+    await wait(() => {
+      expect(onDismiss).to.have.been.called()
+    })
   })
 
   const variantChanges = function (variant, variantModifications) {
-    it('should add a class to main div based on `variant`', () => {
-      const alert = testbed.render({ variant, transition: 'none' })
-      const mainDiv = alert.find(`.${variantModifications.className}`)
-      expect(mainDiv).to.be.present()
+    it('should add a class to main div based on `variant`', async () => {
+      const subject = await mount(
+        <Alert variant={variant} transition="none">
+          Success: Sample alert text.
+        </Alert>
+      )
+      const alert = within(subject.getDOMNode())
+      const icon = await alert.find({css: `.${variantModifications.className}`})
+      expect(icon).to.exist()
     })
 
-    it('should change the icon based on `variant`', () => {
-      const alert = testbed.render({ variant, transition: 'none' })
-      const icon = alert.find(variantModifications.iconComponent)
-      expect(icon).to.be.present()
+    it('should change the icon based on `variant`', async () => {
+      const subject = await mount(
+        <Alert variant={variant} transition="none">
+          Success: Sample alert text.
+        </Alert>
+      )
+
+      const alert = within(subject.getDOMNode())
+      const icon = await alert.find({attribute: {
+        name: 'name',
+        value: variantModifications.iconComponent
+      }})
+      expect(icon).to.exist()
     })
   }
 
-  describe('`variant` is success', () => {
+  describe('`variant` is success', async () => {
     const variantModifications = {
       className: styles.success,
-      iconComponent: IconCheckMark
+      iconComponent: 'IconCheckMark'
     }
     variantChanges('success', variantModifications)
   })
 
-  describe('`variant` is error', () => {
+  describe('`variant` is error', async () => {
     const variantModifications = {
       className: styles.error,
-      iconComponent: IconNo
+      iconComponent: 'IconNo'
     }
     variantChanges('error', variantModifications)
   })
 
-  describe('`variant` is warning', () => {
+  describe('`variant` is warning', async () => {
     const variantModifications = {
       className: styles.warning,
-      iconComponent: IconWarningBorderless
+      iconComponent: 'IconWarningBorderless'
     }
     variantChanges('warning', variantModifications)
   })
 
-  describe('`variant` is info', () => {
+  describe('`variant` is info', async () => {
     const variantModifications = {
       className: styles.info,
-      iconComponent: IconInfoBorderless
+      iconComponent: 'IconInfoBorderless'
     }
     variantChanges('info', variantModifications)
   })
 
-  it('should meet a11y standards', done => {
-    const subject = testbed.render({ transition: 'none' })
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <Alert variant="success" transition="none">
+        Success: Sample alert text.
+      </Alert>
+    )
 
-    subject.should.be.accessible(done)
+    const alert = within(subject.getDOMNode())
+    expect(await alert.accessible()).to.be.true()
   })
 
-  it('should add alert text to aria live region, when present', () => {
+  it('should add alert text to aria live region, when present', async () => {
     const liver = document.getElementById('_alertLiveRegion')
+    await mount(
+      <Alert
+        variant="success"
+        transition="none"
+        liveRegion={() => liver}
+        liveRegionPoliteness="polite"
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
 
-    testbed.render({
-      liveRegion: () => liver,
-      liveRegionPoliteness: 'polite',
-      transition: 'none'
-    })
     expect(liver.innerText).to.include('Success: Sample alert text.')
     expect(liver.getAttribute("aria-live")).to.equal('polite')
   })
 
-  describe('screen reader only', () => {
-    let spy
+  describe('screen reader only', async () => {
+    let warning
 
     beforeEach(() => {
-      spy = testbed.spy(console, 'warn')
+      warning = spy(console, 'warn')
     })
 
     afterEach(() => {
-      spy.restore()
+      warning.restore()
     })
 
-    it('should not render anything when using live region and screen reader only', () => {
+    it('should not render anything when using live region and screen reader only', async () => {
       const liver = document.getElementById('_alertLiveRegion')
+      const subject = await mount(
+        <Alert
+          variant="success"
+          liveRegion={() => liver}
+          screenReaderOnly={true}
+        >
+          Success: Sample alert text.
+        </Alert>
+      )
 
-      const subject = testbed.render({
-        liveRegion: () => liver,
-        screenReaderOnly: true
-      })
-
-      expect(subject.html()).to.equal(null)
+      expect(subject.getDOMNode()).to.not.exist()
     })
 
-    it('should warn if screen reader only without live region', () => {
-      const subject = testbed.render({
-        screenReaderOnly: true
-      })
+    it('should warn if screen reader only without live region', async () => {
+      const subject = await mount(
+        <Alert
+          variant="success"
+          screenReaderOnly={true}
+        >
+          Success: Sample alert text.
+        </Alert>
+      )
 
-      expect(subject.html()).to.equal(null)
-      spy.should.have.been.calledWithExactly(
+      expect(subject.getDOMNode()).to.not.exist()
+      expect(warning).to.have.been.calledWithExactly(
         `Warning: [Alert] 'screenReaderOnly' must be used in conjunction with 'liveRegion'`
       )
     })
   })
 
-  it('should close when told to, with transition', done => {
+  it('should close when told to, with transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    const alert = testbed.render({
-      liveRegion: () => liver,
-      onDismiss: () => {
-        expect(liver.children.length).to.equal(0)
-        done()
-      }
+    const subject = await mount(
+      <Alert
+        variant="success"
+        liveRegion={() => liver}
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(liver.children.length).to.equal(1)
+
+    await subject.setProps({
+      open: false
     })
-    testbed.tick() // Transition entered
-    alert.setProps({ open: false }, () => {
-      testbed.tick() // Transition exiting
-      testbed.tick() // Transition exited
+
+    await wait(() => {
+      expect(liver.children.length).to.equal(0)
     })
   })
 
-  it('should close when told to, without transition', done => {
+  it('should close when told to, without transition', async () => {
     const liver = document.getElementById('_alertLiveRegion')
-    const alert = testbed.render({
-      transition: 'none',
-      liveRegion: () => liver,
-      onDismiss: () => {
-        expect(liver.children.length).to.equal(0)
-        expect(alert.getDOMNode()).to.be.null()
-        done()
-      }
+    const subject = await mount(
+      <Alert
+        variant="success"
+        transition="none"
+        liveRegion={() => liver}
+      >
+        Success: Sample alert text.
+      </Alert>
+    )
+
+    expect(liver.children.length).to.equal(1)
+
+    await subject.setProps({
+      open: false
     })
-    alert.setProps({ open: false })
+
+    expect(subject.getDOMNode()).to.not.exist()
+    expect(liver.children.length).to.equal(0)
   })
 })
