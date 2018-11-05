@@ -49,7 +49,6 @@ module.exports = {
     'packages/ui-pages/',
     'packages/ui-pagination/',
     'packages/ui-tabs/',
-    'packages/ui-themeable/',
     'packages/ui-themes/',
     'packages/ui-toggle-details/',
     'packages/ui-utils/'

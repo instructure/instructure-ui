@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
+import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import scopeStylesToNode, { scopeCssText } from '../scopeStylesToNode'
 
-describe('scopeStylesToNode', () => {
+describe('scopeStylesToNode', async () => {
   const cssText = `
     .root{
       color: red;
@@ -51,10 +53,10 @@ describe('scopeStylesToNode', () => {
     }
   `
 
-  describe('#scopeStylesToNode', () => {
-    const testbed = new Testbed()
-    it('should apply scoped css to node', () => {
-      const domNode = testbed.rootNode
+  describe('#scopeStylesToNode', async () => {
+    it('should apply scoped css to node', async () => {
+      const subject = await mount(<div />)
+      const domNode = subject.getDOMNode()
 
       scopeStylesToNode(domNode, cssText, 'Foo')
 
@@ -67,8 +69,9 @@ describe('scopeStylesToNode', () => {
         expect(domNode.getAttribute('foo')).to.exist()
       }
     })
-    it('should remove scoped css from node', () => {
-      const domNode = testbed.rootNode
+    it('should remove scoped css from node', async () => {
+      const subject = await mount(<div />)
+      const domNode = subject.getDOMNode()
 
       scopeStylesToNode(domNode, cssText, 'Foo')
       scopeStylesToNode(domNode, '', 'Foo')
@@ -80,12 +83,12 @@ describe('scopeStylesToNode', () => {
     })
   })
 
-  describe('#scopeCssText', () => {
-    it('scopes css text', () => {
+  describe('#scopeCssText', async () => {
+    it('scopes css text', async () => {
       expect(scopeCssText(cssText, '[foo]'))
         .to.equalIgnoreSpaces(scopedCss)
     })
-    it('should not apply scope to rules with a keyframes selector', () => {
+    it('should not apply scope to rules with a keyframes selector', async () => {
       const cssText = `
         @keyframes contentAnimation {
           to {
@@ -97,7 +100,7 @@ describe('scopeStylesToNode', () => {
       expect(scopeCssText(cssText, '[foo]'))
         .to.equalIgnoreSpaces(cssText)
     })
-    it('should apply scope to rules with a media query selector', () => {
+    it('should apply scope to rules with a media query selector', async () => {
       const cssText = `
       @media screen and (--Component-largeMin) {
         .Component__root {
@@ -117,7 +120,7 @@ describe('scopeStylesToNode', () => {
       expect(scopeCssText(cssText, '[foo]'))
         .to.equalIgnoreSpaces(scopedCss)
     })
-    it('should not apply scope to rules with a root selector', () => {
+    it('should not apply scope to rules with a root selector', async () => {
       const cssText = `
       html[dir="rtl"] .Component__root {
         color: blue;

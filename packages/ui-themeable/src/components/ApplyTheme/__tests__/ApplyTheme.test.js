@@ -23,11 +23,13 @@
  */
 
 import React from 'react'
+import { expect, mount, locator } from '@instructure/ui-test-utils'
+import testable from '@instructure/ui-testable'
 import themeable from '../../../themeable'
 
 import ApplyTheme from '../index'
 
-describe('<ApplyTheme />', () => {
+describe('<ApplyTheme />', async () => {
   const themeVariables = function () {
     return {
       textColor: 'red',
@@ -38,11 +40,11 @@ describe('<ApplyTheme />', () => {
   const themeStyles = {
     template: function (theme) {
       return `
-        .root { color: ${theme.textColor}; }
+        .root { color: ${theme.textColor}; background: ${theme.backgroundColor}; }
       `
     }
   }
-
+  @testable()
   @themeable(themeVariables, themeStyles)
   class ThemeableComponent extends React.Component {
     render () {
@@ -50,28 +52,27 @@ describe('<ApplyTheme />', () => {
     }
   }
 
-  const testbed = new Testbed(
-    <ApplyTheme>
-      <ThemeableComponent />
-    </ApplyTheme>
-  )
+  const ThemeableComponentLocator = locator(ThemeableComponent.displayName)
 
-  it('injects theme via context', () => {
-    const subject = testbed.render({
-      theme: {
-        [ThemeableComponent.theme]: {
-          textColor: 'green'
-        }
+  it('injects theme via context', async () => {
+    const theme = {
+      [ThemeableComponent.theme]: {
+        textColor: 'green'
       }
-    })
+    }
+    await mount(
+      <ApplyTheme theme={theme}>
+        <ThemeableComponent />
+      </ApplyTheme>
+    )
 
-    const themedComponent = subject.find(ThemeableComponent).unwrap()
+    const component = await ThemeableComponentLocator.find()
 
-    expect(themedComponent.theme.textColor).to.equal('green')
-    expect(themedComponent.theme.backgroundColor).to.equal('yellow')
+    expect(component.getComputedStyle().color).to.equal('rgb(0, 128, 0)') // green
+    expect(component.getComputedStyle().backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
   })
 
-  it('overrides the theme set via outer components', () => {
+  it('overrides the theme set via outer components', async () => {
     const outerTheme = {
       [ThemeableComponent.theme]: {
         textColor: 'green',
@@ -83,15 +84,17 @@ describe('<ApplyTheme />', () => {
         textColor: 'blue'
       }
     }
+    await mount(
+      <ApplyTheme theme={outerTheme}>
+        <ApplyTheme theme={innerTheme}>
+          <ThemeableComponent />
+        </ApplyTheme>
+      </ApplyTheme>
+    )
 
-    const subject = testbed.render({
-      theme: outerTheme,
-      children: <ApplyTheme theme={innerTheme}><ThemeableComponent /></ApplyTheme>
-    })
+    const component = await ThemeableComponentLocator.find()
 
-    const themedComponent = subject.find(ThemeableComponent).unwrap()
-
-    expect(themedComponent.theme.textColor).to.equal('blue')
-    expect(themedComponent.theme.backgroundColor).to.equal('grey')
+    expect(component.getComputedStyle().color).to.equal('rgb(0, 0, 255)') // blue
+    expect(component.getComputedStyle().backgroundColor).to.equal('rgb(128, 128, 128)') // grey
   })
 })

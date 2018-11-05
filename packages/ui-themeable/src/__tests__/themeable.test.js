@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import themeable from '../themeable'
 import { makeThemeContext } from '../ThemeContextTypes'
 
-describe('@themeable', () => {
+describe('@themeable', async () => {
   const theme = function () {
     return {
       textColor: 'rgb(0, 128, 0)',
@@ -48,28 +49,34 @@ describe('@themeable', () => {
   @themeable(theme, styles)
   class ThemeableComponent extends React.Component {
     render () {
-      return <div className={styles.root}>Hello World</div>
+      return (
+        <div className={styles.root} data-scope={this.scope}>
+          Hello World
+        </div>
+      )
     }
   }
 
-  const testbed = new Testbed(<ThemeableComponent />)
+  it('generates a valid component scope', async () => { // for IE/Edge
+    const subject = await mount(<ThemeableComponent />)
+    const scope = subject.getDOMNode().getAttribute('data-scope')
 
-  it('generates a valid component scope', () => { // for IE/Edge
-    const component = testbed.render().instance()
-    expect(() => { document.querySelector(`#${component.scope}`) }).to.not.throw(Error)
+    expect(scope).to.exist()
+    expect(scope).to.include('ThemeableComponent')
   })
 
-  it('allows configuration through props', () => {
+  it('allows configuration through props', async () => {
     const theme = {
       textColor: 'purple'
     }
-    const component = testbed.render({ theme }).instance()
+    const subject = await mount(<ThemeableComponent theme={theme} />)
+    const component = subject.getDOMNode()
 
-    expect(component.theme.textColor).to.equal('purple')
-    expect(component.theme.backgroundColor).to.equal('rgb(255, 255, 0)')
+    expect(getComputedStyle(component).color).to.equal('rgb(128, 0, 128)') // purple
+    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
   })
 
-  it('allows configuration through context', () => {
+  it('allows configuration through context', async () => {
     const context = makeThemeContext({
       [ThemeableComponent.theme]: {
         textColor: 'green',
@@ -79,40 +86,39 @@ describe('@themeable', () => {
     const theme = {
       textColor: 'purple'
     }
+    const subject = await mount(<ThemeableComponent theme={theme} />, context)
+    const component = subject.getDOMNode()
 
-    const component = testbed.render({ theme }, context).instance()
-
-    expect(component.theme.textColor).to.equal('purple')
-    expect(component.theme.backgroundColor).to.equal('yellow')
+    expect(getComputedStyle(component).color).to.equal('rgb(128, 0, 128)') // purple
+    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
   })
 
-  it('falls back to the default theme', () => {
-    const component = testbed.render().instance()
+  it('falls back to the default theme', async () => {
+    const subject = await mount(<ThemeableComponent />)
+    const component = subject.getDOMNode()
 
-    expect(component.theme.backgroundColor).to.equal('rgb(255, 255, 0)')
-    expect(component.theme.textColor).to.equal('rgb(0, 128, 0)')
+    expect(getComputedStyle(component).color).to.equal('rgb(0, 128, 0)') // green
+    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
   })
 
-  it('applies theme css variables to the root node', () => {
+  it('applies theme css variables to the root node', async () => {
     const theme = {
       textColor: 'purple'
     }
-    const component = testbed.render({ theme })
+    const subject = await mount(<ThemeableComponent theme={theme} />)
+    const component = subject.getDOMNode()
 
-    expect(component.getComputedStyle().getPropertyValue(`--${ThemeableComponent.componentId}-textColor`))
-      .to.equal('purple')
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
   })
 
-  it('updates css variables when props are updated', (done) => {
+  it('updates css variables when props are updated', async () => {
     const theme = {
       textColor: 'purple'
     }
-    const component = testbed.render()
+    const subject = await mount(<ThemeableComponent />)
+    const component = subject.getDOMNode()
 
-    component.setProps({ theme }, () => {
-      expect(component.getComputedStyle().getPropertyValue(`--${ThemeableComponent.componentId}-textColor`))
-        .to.equal('purple')
-      done()
-    })
+    await subject.setProps({theme})
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
   })
 })

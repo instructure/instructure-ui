@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import parseCss, { ruleTypes } from '../parseCss'
 
 describe('parseCss', () => {

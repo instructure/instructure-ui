@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect, spy } from '@instructure/ui-test-utils'
 import getShorthandPropValue from '../getShorthandPropValue'
 
 const theme = {
@@ -94,8 +95,7 @@ describe('getShorthandPropValue', () => {
   })
 
   it('warns if the theme value does not exist', () => {
-    const testbed = new Testbed()
-    const warning = testbed.spy(console, 'warn')
+    const warning = spy(console, 'warn')
 
     const value = 'x-small'
     getShorthandPropValue(name, theme, value, 'borderRadius')

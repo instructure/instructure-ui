@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { getCssTextWithPolyfill, getCssTextWithVariables } from '../getCssText'
 
 describe('getCssText', () => {

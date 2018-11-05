@@ -21,18 +21,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import { applyVariablesToNodeStyle, applyVariablesPolyfillToNode } from '../applyVariablesToNode'
 
 describe('applyVariablesToNode', () => {
-  const testbed = new Testbed()
   const variables = { color: 'red' }
   const defaults = { color: 'purple', background: 'white' }
   const prefix = 'ThemeableComponent'
 
-  describe('#applyVariablesToNodeStyle', () => {
-    it('applies prefixed css variables as custom properties to the node', () => {
-      const domNode = testbed.rootNode
+  describe('#applyVariablesToNodeStyle', async () => {
+    it('applies prefixed css variables as custom properties to the node', async () => {
+      const subject = await mount(<div />)
+      const domNode = subject.getDOMNode()
 
       applyVariablesToNodeStyle(domNode, variables, defaults, prefix)
 
@@ -41,9 +42,10 @@ describe('applyVariablesToNode', () => {
     })
   })
 
-  describe('#applyVariablesPolyfillToNode', () => {
-    it('injects scoped styles into the node', () => {
-      const domNode = testbed.rootNode
+  describe('#applyVariablesPolyfillToNode', async () => {
+    it('injects scoped styles into the node', async () => {
+      const subject = await mount(<div />)
+      const domNode = subject.getDOMNode()
       const template = function (theme) {
         return `
           .ThemeableComponent__root {

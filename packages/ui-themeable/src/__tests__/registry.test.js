@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { expect, stub } from '@instructure/ui-test-utils'
 import {
   registerComponentTheme,
   generateTheme,
@@ -32,9 +33,7 @@ import {
   setRegistry
 } from '../registry'
 
-describe('registry', () => {
-  const testbed = new Testbed()
-
+describe('registry', async () => {
   const KEY = Symbol('ThemedComponent')
   const registry = getRegistry()
 
@@ -136,7 +135,7 @@ describe('registry', () => {
       expect(theme[KEY].color).to.equal('maroon')
     })
     it('should NOT allow overriding an accessible theme', () => {
-      console.error = testbed.stub()
+      console.error = stub()
 
       defaultTheme.use({ accessible: true })
 
@@ -190,7 +189,7 @@ describe('registry', () => {
       expect(theme.color).to.equal('maroon')
     })
     it('should NOT allow overriding an accessible theme', () => {
-      console.error = testbed.stub()
+      console.error = stub()
 
       defaultTheme.use({ accessible: true })
 
@@ -207,7 +206,6 @@ describe('registry', () => {
       registerComponentTheme(KEY, generator)
 
       const theme = generateComponentTheme(KEY)
-
 
       expect(theme).to.deep.equal({
         color: undefined, // eslint-disable-line no-undefined
