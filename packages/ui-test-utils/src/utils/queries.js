@@ -37,7 +37,7 @@ async function find (...args) {
   return firstOrNull(await findAll(...args))
 }
 
-async function findAll (...args) {
+function findAll (...args) {
   const query = (element, selector, options) => {
     if (selector) {
       return querySelectorAll(element, selector, options)
@@ -52,11 +52,11 @@ async function findFrame (...args) {
   return firstOrNull(await findAllFrames(...args))
 }
 
-async function findAllFrames (...args) {
+function findAllFrames (...args) {
   return findAllByQuery(iframeQuery, ...args)
 }
 
-async function findAllByQuery (query, ...args) {
+function findAllByQuery (query, ...args) {
   const { element, selector, options } = parseQueryArguments(...args)
   return getQueryResult(
     element,
@@ -64,6 +64,10 @@ async function findAllByQuery (query, ...args) {
     options,
     JSON.stringify({ selector })
   )
+}
+
+async function findByQuery (...args) {
+  return firstOrNull(await findAllByQuery(...args))
 }
 
 function iframeQuery (element, selector, options) {
@@ -75,6 +79,7 @@ function iframeQuery (element, selector, options) {
 
 export {
   findAllByQuery,
+  findByQuery,
   findAll,
   find,
   findAllFrames,

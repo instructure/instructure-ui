@@ -30,19 +30,22 @@ import { querySelectorAll, findAllByQuery, mount, expect, locator } from '../ind
 @testable()
 class Component extends React.Component {
   static propTypes = {
-    hide: PropTypes.bool
+    hide: PropTypes.bool,
+    children: PropTypes.node
   }
   static defaultProps = {
-    hide: false
-  }
-  static displayName = 'Component'
-  render () {
-    return !this.props.hide ? (
+    hide: false,
+    children: (
       <div id="componentRoot">
         <input type="text"/>
         <input type="password" />
       </div>
-    ) : null
+    )
+  }
+  static displayName = 'Component'
+  render () {
+    const { hide, children } = this.props
+    return !hide ? children : null
   }
 }
 
@@ -81,17 +84,19 @@ describe('@testable, locator', async () => {
       attribute: { name: 'type', value: 'password' }
     })).to.have.length(1)
   })
-  it('adds a custom method to find the component root element', async () => {
-    await mount(<Component />)
-    const component = await ComponentLocator.find({
-      tag: 'input',
-      attribute: { name: 'type', value: 'password' }
-    })
-    expect(component.getComponentRoot())
-      .to.equal(document.getElementById('componentRoot'))
-  })
   it('should support custom queries', async () => {
     await mount(<Component />)
     expect(await ComponentLocator.findAllInputs()).to.have.length(2)
+  })
+  it('should always return the component root node', async () => {
+    await mount(<Component />)
+    const result = await ComponentLocator.find({ tag: 'input' })
+    expect(result.getDOMNode()).to.equal(document.querySelector('#componentRoot'))
+  })
+  it('should still find the component root element even when the root element changes', async () => {
+    const subject = await mount(<Component />)
+    expect(await ComponentLocator.find()).to.exist()
+    subject.setProps({ children: <ul><li>foo</li></ul> })
+    expect(await ComponentLocator.find()).to.exist()
   })
 })

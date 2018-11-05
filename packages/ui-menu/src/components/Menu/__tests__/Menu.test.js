@@ -22,152 +22,152 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { within, expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { within, expect, mount, stub, wait, accessible } from '@instructure/ui-test-utils'
 
 import Menu, { MenuItem, MenuItemSeparator } from '../index'
 
 import MenuLocator from '../locator'
 
 describe('<Menu />', async () => {
-  it('should render', async () => {
-    await mount(
-      <Menu label="Settings">
-        <MenuItem>Account</MenuItem>
-      </Menu>
-    )
-
-    const menu = await MenuLocator.findMenu({ label: 'Settings' })
-
-    expect(menu).to.exist()
-  })
-
-  it('should meet a11y standards', async () => {
-    await mount(
-      <Menu label="Settings">
-        <MenuItem>Account</MenuItem>
-      </Menu>
-    )
-
-    const menu = await MenuLocator.find({ label: 'Settings' })
-
-    expect(await menu.accessible()).to.be.true()
-  })
-
-  it('should not allow invalid children', async () => {
-    let error = false
-    try {
+  describe('without a trigger', async () => {
+    it('should render', async () => {
       await mount(
-        <Menu>
-          <div />
+        <Menu label="Settings">
+          <MenuItem>Account</MenuItem>
         </Menu>
       )
-    } catch (e) {
-      error = true
-    }
 
-    expect(error).to.be.true()
-  })
+      const menu = await MenuLocator.find({ label: 'Settings' })
 
-  it('should call onSelect when menu item is selected', async () => {
-    const onSelect = stub()
-    await mount(
-      <Menu
-        label="Settings"
-        onSelect={onSelect}
-      >
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
+      expect(menu).to.exist()
+    })
 
-    const menu = await MenuLocator.find({ label: 'Settings' })
-    const item = await menu.findItem({ label: 'Account' })
+    it('should meet a11y standards', async () => {
+      await mount(
+        <Menu label="Settings">
+          <MenuItem>Account</MenuItem>
+        </Menu>
+      )
 
-    await item.click()
+      const menu = await MenuLocator.find({ label: 'Settings' })
 
-    expect(onSelect).to.have.been.calledOnce()
-    expect(onSelect.getCall(0).args[1]).to.equal('Account')
-  })
+      expect(await menu.accessible()).to.be.true()
+    })
 
-  it('should not call onSelect when disabled', async () => {
-    const onSelect = stub()
-    await mount(
-      <Menu
-        label="Settings"
-        onSelect={onSelect}
-        disabled
-      >
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
+    it('should not allow invalid children', async () => {
+      let error = false
+      try {
+        await mount(
+          <Menu>
+            <div />
+          </Menu>
+        )
+      } catch (e) {
+        error = true
+      }
 
-    const menu = await MenuLocator.find({ label: 'Settings' })
-    const item = await menu.findItem({ label: 'Account' })
+      expect(error).to.be.true()
+    })
 
-    await item.click()
+    it('should call onSelect when menu item is selected', async () => {
+      const onSelect = stub()
+      await mount(
+        <Menu
+          label="Settings"
+          onSelect={onSelect}
+        >
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
 
-    expect(onSelect).to.not.have.been.called()
-  })
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      const item = await menu.findItem({ label: 'Account' })
 
-  it('should move focus properly', async () => {
-    await mount(
-      <Menu
-        label="Settings"
-      >
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
+      await item.click()
 
-    const menu = await MenuLocator.find({ label: 'Settings' })
-    const items = await menu.findAllItems()
+      expect(onSelect).to.have.been.calledOnce()
+      expect(onSelect.getCall(0).args[1]).to.equal('Account')
+    })
 
-    await menu.keyDown('up')
+    it('should not call onSelect when disabled', async () => {
+      const onSelect = stub()
+      await mount(
+        <Menu
+          label="Settings"
+          onSelect={onSelect}
+          disabled
+        >
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
 
-    expect(items[items.length - 1].focused()).to.be.true()
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      const item = await menu.findItem({ label: 'Account' })
 
-    await menu.keyDown('down')
+      await item.click()
 
-    expect(items[0].focused()).to.be.true()
-  })
+      expect(onSelect).to.not.have.been.called()
+    })
 
-  it('should provide a menu ref', async () => {
-    const menuRef = stub()
-    await mount(
-      <Menu
-        label="Settings"
-        menuRef={menuRef}
-      >
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
-    const menu = await MenuLocator.find({ label: 'Settings' })
-    expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
-  })
+    it('should move focus properly', async () => {
+      await mount(
+        <Menu
+          label="Settings"
+        >
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
 
-  it('should focus the first menu item when menu only has one item', async () => {
-    await mount(
-      <Menu label="Settings">
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
-    const menu = await MenuLocator.find({ label: 'Settings', focusable: true })
-    const items = await menu.findAllItems()
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      const items = await menu.findAllItems()
 
-    await menu.focus()
+      await menu.keyDown('up')
 
-    await wait(() => {
+      expect(items[items.length - 1].focused()).to.be.true()
+
+      await menu.keyDown('down')
+
       expect(items[0].focused()).to.be.true()
     })
-  })
 
-  it('should set aria attributes properly', async () => {
-    await mount(
-      <Menu disabled label="Settings">
-        <MenuItem value="Account">Account</MenuItem>
-      </Menu>
-    )
-    const menu = await MenuLocator.find({ label: 'Settings' })
-    expect(menu.getAttribute('aria-disabled')).to.exist()
-    expect(menu.getAttribute('aria-label')).to.exist()
+    it('should provide a menu ref', async () => {
+      const menuRef = stub()
+      await mount(
+        <Menu
+          label="Settings"
+          menuRef={menuRef}
+        >
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
+    })
+
+    it('should focus the first menu item when menu only has one item', async () => {
+      await mount(
+        <Menu label="Settings">
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      const items = await menu.findAllItems()
+
+      await menu.focus()
+
+      expect(items[0].focused()).to.be.true()
+    })
+
+    it('should set aria attributes properly', async () => {
+      await mount(
+        <Menu disabled label="Settings">
+          <MenuItem value="Account">Account</MenuItem>
+        </Menu>
+      )
+      const menu = await MenuLocator.find({ label: 'Settings' })
+      expect(menu.getAttribute('aria-disabled')).to.exist()
+      expect(menu.getAttribute('aria-label')).to.exist()
+    })
   })
 
   describe('with a trigger', async () => {
@@ -193,9 +193,13 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Settings' })
+      const subject = await MenuLocator.find()
+      const trigger = await subject.findPopoverTrigger()
+      const popover = await subject.findPopoverContent({ label: 'Settings' })
+      const menu = await popover.find(`[role="menu"]`)
 
-      expect(menu.getAttribute('aria-labelledby')).to.exist()
+      expect(menu).to.exist()
+      expect(menu.getAttribute('aria-labelledby')).to.equal(trigger.getAttribute('id'))
     })
 
     it('should call onFocus on focus', async () => {
@@ -210,13 +214,12 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const trigger = await MenuLocator.find({ focusable: true, contains: 'More' })
+      const menu = await MenuLocator.find()
+      const trigger = await menu.find({ label: 'More' })
 
       await trigger.focus()
 
-      await wait(() => {
-        expect(onFocus).to.have.been.called()
-      })
+      expect(onFocus).to.have.been.called()
     })
 
     it('should render when show and onToggle props are set', async () => {
@@ -231,9 +234,12 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'More' })
+      const menu = await MenuLocator.find()
+      const trigger = await menu.findPopoverTrigger({ label: 'More' })
+      const popover = await menu.findPopoverContent({ label: 'More' })
 
-      expect(menu).to.exist()
+      expect(trigger).to.exist()
+      expect(popover).to.exist()
     })
 
     it('should not show by default', async () => {
@@ -246,9 +252,12 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'More', expectEmpty: true })
+      const menu = await MenuLocator.find()
+      const trigger = await menu.findPopoverTrigger({ label: 'More' })
+      const popover = await menu.findPopoverContent({ label: 'More', expectEmpty: true })
 
-      expect(menu).to.not.exist()
+      expect(trigger).to.exist()
+      expect(popover).to.not.exist()
     })
 
     it('should accept a default show', async () => {
@@ -262,9 +271,10 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'More' })
+      const menu = await MenuLocator.find()
+      const popover = await menu.findPopoverContent({ label: 'More' })
 
-      expect(menu).to.exist()
+      expect(popover).to.exist()
     })
 
     it('should provide a menu ref', async () => {
@@ -280,9 +290,10 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'More' })
+      const menu = await MenuLocator.find()
+      const popover = await menu.findPopoverContent({ label: 'More' })
 
-      expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
+      expect(menuRef).to.have.been.calledWith(popover.getDOMNode())
     })
 
     it('should provide a popoverRef ref', async () => {
@@ -312,10 +323,11 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'More', focusable: true })
+      const menu = await MenuLocator.find()
+      const popover = await menu.findPopoverContent({ label: 'More' })
 
-      await wait(() => {
-        expect(menu.focused()).to.be.true()
+      await wait (() => {
+        expect(popover.focused()).to.be.true()
       })
     })
 
@@ -331,7 +343,8 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const trigger = await MenuLocator.find({ tag: 'button', contains: 'More' })
+      const menu = await MenuLocator.find()
+      const trigger = await menu.findPopoverTrigger({ label: 'More' })
 
       await trigger.click()
 
@@ -348,7 +361,8 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const trigger = await MenuLocator.find({ tag: 'button', contains: 'More' })
+      const menu = await MenuLocator.find()
+      const trigger = await menu.findPopoverTrigger({ label: 'More' })
 
       expect(trigger.getAttribute('aria-haspopup')).to.exist()
     })
@@ -364,9 +378,7 @@ describe('<Menu />', async () => {
           </Menu>
         )
 
-        const menu = await MenuLocator.find()
-
-        expect(await menu.accessible()).to.be.true()
+        expect(await accessible()).to.be.true()
       })
 
       it('should meet standards when menu is open', async () => {
@@ -380,27 +392,27 @@ describe('<Menu />', async () => {
           </Menu>
         )
 
-        const menu = await MenuLocator.find()
-
-        expect(await menu.accessible()).to.be.true()
+        expect(await accessible()).to.be.true()
       })
     })
   })
 
-  describe('with a flyout', async () => {
+  describe('with a sub-menu', async () => {
 
-    testShowFlyoutOnEvent({type: 'click'})
-    testShowFlyoutOnEvent({type: 'mouseOver'})
-    testShowFlyoutOnEvent({type: 'keyDown', which: 'right'})
-    testShowFlyoutOnEvent({type: 'keyUp', which: 'space'})
-    testShowFlyoutOnEvent({type: 'keyDown', which: 'enter'})
+    describe('...and keyboard and mouse interaction', async () => {
+      testShowFlyoutOnEvent({type: 'click'})
+      testShowFlyoutOnEvent({type: 'mouseOver'})
+      testShowFlyoutOnEvent({type: 'keyDown', which: 'right'})
+      testShowFlyoutOnEvent({type: 'keyUp', which: 'space'})
+      testShowFlyoutOnEvent({type: 'keyDown', which: 'enter'})
 
-    testFocusFlyoutOnEvent({type: 'click'})
-    testFocusFlyoutOnEvent({type: 'keyDown', which: 'right'})
-    testFocusFlyoutOnEvent({type: 'keyUp', which: 'space'})
-    testFocusFlyoutOnEvent({type: 'keyDown', which: 'enter'})
+      testFocusFlyoutOnEvent({type: 'click'})
+      testFocusFlyoutOnEvent({type: 'keyDown', which: 'right'})
+      testFocusFlyoutOnEvent({type: 'keyUp', which: 'space'})
+      testFocusFlyoutOnEvent({type: 'keyDown', which: 'enter'})
+    })
 
-    it('it should not open the flyout when disabled', async () => {
+    it('it should not open the sub-menu popover when disabled', async () => {
       await mount(
         <Menu label="Parent" disabled>
           <Menu label="Flyout">
@@ -411,17 +423,18 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
-      const flyout = await MenuLocator.findMenu({ label: 'Flyout', expectEmpty: true })
+      const subMenu = await MenuLocator.find({ label: 'Flyout' })
+      const popover = await subMenu.findPopoverContent({ label: 'Flyout', expectEmpty: true })
 
-      expect(flyout).to.not.exist()
+      expect(popover).to.not.exist()
     })
 
-    it('it should close the menu flyout on escape press', async () => {
+    it('it should close the sub-menu popover on escape press', async () => {
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout">
@@ -432,29 +445,31 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
-      let flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+      let subMenu = await MenuLocator.find({ label: 'Flyout' })
+      let popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(flyout.focused()).to.be.true()
+        expect(popover.focused()).to.be.true()
       })
 
-      flyout.keyUp('escape', {
+      await popover.keyUp('escape', {
         defaultPrevented: false,
         bubbles: true,
         button: 0
       })
 
-      flyout = await MenuLocator.findMenu({ label: 'Flyout', expectEmpty: true })
+      subMenu = await MenuLocator.find({ label: 'Flyout' })
+      popover = await subMenu.findPopoverContent({ label: 'Flyout', expectEmpty: true })
 
-      expect(flyout).to.not.exist()
+      expect(popover).to.not.exist()
     })
 
-    it('it should close the menu flyout on left press', async () => {
+    it('it should close the sub-menu popover on left press', async () => {
       await mount(
         <Menu label="Parent">
           <Menu label="Flyout">
@@ -465,22 +480,23 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
-      let flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+      const subMenu = await MenuLocator.find({ label: 'Flyout' })
+      let popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(flyout.focused()).to.be.true()
+        expect(popover.focused()).to.be.true()
       })
 
-      await flyout.keyDown('left')
+      await popover.keyDown('left')
 
-      flyout = await MenuLocator.findMenu({ label: 'Flyout', expectEmpty: true })
+      popover = await subMenu.findPopoverContent({ label: 'Flyout', expectEmpty: true })
 
-      expect(flyout).to.not.exist()
+      expect(popover).to.not.exist()
     })
 
     it('it should call onDismiss on tab press', async () => {
@@ -495,23 +511,24 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
-      const flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+      const subMenu = await MenuLocator.find({ label: 'Flyout' })
+      const popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(flyout.focused()).to.be.true()
+        expect(popover.focused()).to.be.true()
       })
 
-      await flyout.keyDown('tab')
+      await popover.keyDown('tab')
 
       expect(onDismiss).to.have.been.calledOnce()
     })
 
-    it('it should call onSelect when flyout option is selected', async () => {
+    it('it should call onSelect when sub-menu popover option is selected', async () => {
       const onSelect = stub()
       await mount(
         <Menu label="Parent">
@@ -523,18 +540,19 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
-      const flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+      const subMenu = await MenuLocator.find({ label: 'Flyout' })
+      const popover = await subMenu.findPopoverContent()
 
       await wait (() => {
-        expect(flyout.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
 
-      const menuItem = await flyout.findItem({ label: 'Foo' })
+      const menuItem = await popover.findItem({ label: 'Foo' })
 
       await menuItem.click()
 
@@ -553,21 +571,22 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.click()
 
       expect(onToggle).to.have.been.calledOnce()
       expect(onToggle.getCall(0).args[0]).to.equal(true)
 
-      const flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+      const subMenu = await MenuLocator.find({ label: 'Flyout' })
+      const popover = await subMenu.findPopoverContent()
 
       await wait (() => {
-        expect(flyout.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
 
-      await (await within(trigger.getOwnerDocument().documentElement))
+      await (await within(trigger.getOwnerDocument().body))
         .click()
 
       expect(onToggle).to.have.been.calledTwice()
@@ -589,8 +608,8 @@ describe('<Menu />', async () => {
       )
       /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 
-      const menu = await MenuLocator.findMenu({ label: 'Parent' })
-      const trigger = await menu.findItem({ contains: 'Flyout' })
+      const menu = await MenuLocator.find({ label: 'Parent' })
+      const trigger = await menu.findItem({ label: 'Flyout' })
 
       await trigger.mouseOver()
 
@@ -611,14 +630,15 @@ function testShowFlyoutOnEvent (event) {
       </Menu>
     )
 
-    const menu = await MenuLocator.findMenu({ label: 'Parent' })
-    const trigger = await menu.findItem({ contains: 'Flyout' })
+    const menu = await MenuLocator.find({ label: 'Parent' })
+    const trigger = await menu.findItem({ label: 'Flyout' })
 
     await trigger[event.type](event.which)
 
-    const flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+    const subMenu = await MenuLocator.find({ label: 'Flyout' })
+    const popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
-    expect(flyout).to.exist()
+    expect(popover).to.exist()
   })
 }
 
@@ -634,15 +654,16 @@ function testFocusFlyoutOnEvent (event) {
       </Menu>
     )
 
-    const menu = await MenuLocator.findMenu({ label: 'Parent' })
-    const trigger = await menu.findItem({ contains: 'Flyout' })
+    const menu = await MenuLocator.find({ label: 'Parent' })
+    const trigger = await menu.findItem({ label: 'Flyout' })
 
     await trigger[event.type](event.which)
 
-    const flyout = await MenuLocator.findMenu({ label: 'Flyout' })
+    const subMenu = await MenuLocator.find({ label: 'Flyout' })
+    const popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
-    await wait(() => {
-      expect(flyout.focused()).to.be.true()
+    await wait (() => {
+      expect(popover.focused()).to.be.true()
     })
   })
 }

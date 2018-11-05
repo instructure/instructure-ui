@@ -56,7 +56,8 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const container = await MenuItemGroupLocator.find()
+    const group = await container.find({ label: 'Select one' })
 
     expect(group.getAttribute('role')).to.equal('group')
   })

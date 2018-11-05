@@ -109,12 +109,8 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = await BillboardLocator.find()
-      const button = await billboard.find({
-        tag: 'button'
-      })
 
-      await button.click()
-
+      expect(billboard.click()).to.eventually.throw()
       expect(onClick).to.not.have.been.called()
     })
   })
@@ -144,9 +140,7 @@ describe('<Billboard />', async () => {
           readOnly
         />
       )
-      const billboard = await BillboardLocator.find({
-        clickable: true
-      })
+      const billboard = await BillboardLocator.find()
 
       const event = await billboard.click()
 

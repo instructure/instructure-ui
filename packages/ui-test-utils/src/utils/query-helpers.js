@@ -24,6 +24,7 @@
 
 import { prettyDOM } from 'dom-testing-library'
 
+import { firstOrNull } from './firstOrNull'
 import { bindElementToUtilities } from './bindElementToUtilities'
 import { waitForQueryResult } from './waitForQueryResult'
 import { visible, getOwnerDocument } from './helpers'
@@ -37,12 +38,9 @@ import {
   filterByContents,
   filterByTitle,
   filterByAttribute,
-  filterBySelector
+  filterBySelector,
+  filterByLocator
 } from './filters'
-
-function bindResultsToUtilities (result, customMethods) {
-  return Array.isArray(result) ? result.map(el => bindElementToUtilities(el, customMethods)) : []
-}
 
 function parseQueryArguments () {
   let element = document.body
@@ -111,7 +109,7 @@ function parseQueryArguments () {
   }
 }
 
-function querySelectorAll (element, selector, options) {
+function querySelectorAll (element, selector, options = {}) {
   const {
     clickable,
     tabbable,
@@ -129,8 +127,8 @@ function querySelectorAll (element, selector, options) {
 
   let result
 
-  if (typeof locator === 'string') {
-    result = filterBySelector(element, result, locator, options)
+  if (typeof locator === 'object' && locator !== null) {
+    result = filterByLocator(element, result, locator, options)
   }
 
   if (typeof css === 'string') {
@@ -195,12 +193,14 @@ function querySelectorAll (element, selector, options) {
     })
 }
 
+function querySelector (...args) {
+  return firstOrNull(querySelectorAll(...args))
+}
+
 async function getQueryResult (element, query, options, message) {
   const queryResult = () => {
-    return query()
-      .map((result) => {
-        return (typeof result.getDOMNode === 'function') ? result : bindElementToUtilities(result, options.customMethods)
-      })
+    const { customMethods } = options
+    return query().map(result => bindElementToUtilities(result, customMethods))
   }
 
   const { expectEmpty, timeout } = options
@@ -258,9 +258,9 @@ function validateSelector (selector = {}) {
 }
 
 export {
-  bindResultsToUtilities,
   parseQueryArguments,
   querySelectorAll,
+  querySelector,
   getQueryResult,
   validateSelector
 }

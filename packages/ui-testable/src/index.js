@@ -29,26 +29,44 @@ export const TESTABLE_ATTRIBUTE = 'data-ui-testable'
 function testable () {
   return function (ComposedComponent) {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
+
     class TestableComponent extends ComposedComponent {
       static displayName = displayName
     }
-    if (process.env.NODE_ENV !== 'production') {
-      TestableComponent.prototype.componentDidMount = function componentDidMount () {
-        if (ComposedComponent.prototype.componentDidMount) {
-          ComposedComponent.prototype.componentDidMount.call(this)
-        }
-        try {
-          // Use this.DOMNode for components that render as non-native Portals...
-          const rootNode = findDOMNode(this) || this.DOMNode
 
-          if (rootNode) {
-            rootNode.setAttribute(TESTABLE_ATTRIBUTE, displayName)
+    if (process.env.NODE_ENV !== 'production') {
+      const appendTestableAttribute = (node, displayName) => {
+        try {
+          const attribute = node.getAttribute(TESTABLE_ATTRIBUTE)
+          const names = typeof attribute === 'string' ? attribute.split(',') : []
+
+          if (!names.includes(displayName)) {
+            names.push(displayName)
           }
+
+          node.setAttribute(TESTABLE_ATTRIBUTE, names.join(','))
         } catch (e) {
           console.warn(`[ui-testable] Could not attach testable locator attribute: ${e}`)
         }
       }
+
+      TestableComponent.prototype.componentDidMount = function componentDidMount (...args) {
+        if (ComposedComponent.prototype.componentDidMount) {
+          ComposedComponent.prototype.componentDidMount.call(this, ...args)
+        }
+        // Use this.DOMNode for components that render as non-native Portals...
+        appendTestableAttribute(findDOMNode(this) || this.DOMNode, displayName)
+      }
+
+      TestableComponent.prototype.componentDidUpdate = function componentDidUpdate (...args) {
+        if (ComposedComponent.prototype.componentDidUpdate) {
+          ComposedComponent.prototype.componentDidUpdate.call(this, ...args)
+        }
+
+        appendTestableAttribute(findDOMNode(this) || this.DOMNode, displayName)
+      }
     }
+
     return TestableComponent
   }
 }

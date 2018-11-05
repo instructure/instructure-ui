@@ -96,7 +96,8 @@ describe('<Button/>', async () => {
     await mount(
       <Button icon={IconTrash}>Hello World</Button>
     )
-    const icon = await ButtonLocator.find({
+    const button = await ButtonLocator.find()
+    const icon = await button.find({
       tag: 'svg',
       attribute: 'name'
     })
@@ -163,7 +164,9 @@ describe('<Button/>', async () => {
           onClick={onClick}>Hello World</Button>
       )
       const button = await ButtonLocator.find()
-      await button.click()
+
+      expect(button.click()).to.eventually.throw()
+
       expect(onClick).to.have.not.been.called()
     })
 
@@ -175,7 +178,7 @@ describe('<Button/>', async () => {
           onClick={onClick}>Hello World</Button>
       )
       const button = await ButtonLocator.find()
-      await button.click()
+      expect(button.click()).to.eventually.throw()
       expect(onClick).to.have.not.been.called()
     })
 
@@ -199,7 +202,9 @@ describe('<Button/>', async () => {
           href="#">Hello World</Button>
       )
       const button = await ButtonLocator.find()
-      await button.click()
+
+      expect(button.click()).to.eventually.throw()
+
       expect(onClick).to.have.not.been.called()
     })
 

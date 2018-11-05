@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, accessible } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from '../index'
 import ${COMPONENT}ViewLocator from '../locator'
@@ -37,8 +37,7 @@ describe('<${COMPONENT}View />', async () => {
 
   it('should meet a11y standards', async () => {
     await mount(<${COMPONENT}View />)
-    const component = ${COMPONENT}ViewFixture.find()
 
-    expect(await component.accessible()).to.be.true()
+    expect(await accessible()).to.be.true()
   })
 })

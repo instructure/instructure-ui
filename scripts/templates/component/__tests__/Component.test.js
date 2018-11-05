@@ -23,12 +23,17 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, accessible } from '@instructure/ui-test-utils'
 
 describe('<${COMPONENT} />', async () => {
   it('should render', async () => {
     const render = stub()
     await mount(<${COMPONENT} render={render} />)
     expect(render).to.have.been.called()
+  })
+  it('should be accessible', async () => {
+    const render = stub()
+    await mount(<${COMPONENT} render={render} />)
+    expect(await accessible()).to.be.true()
   })
 })

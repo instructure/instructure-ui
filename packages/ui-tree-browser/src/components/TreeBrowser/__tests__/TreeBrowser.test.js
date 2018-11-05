@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import TreeBrowser from '../index'
 
 import TreeBrowserLocator from '../locator'
@@ -355,7 +355,7 @@ describe('<TreeBrowser />', async () => {
 
       await item.focus()
 
-      expect(item.focused()).to.be.true()
+      expect(item.containsFocus()).to.be.true()
 
       await item.keyDown('right')
       await item.keyDown('left')

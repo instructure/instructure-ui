@@ -25,6 +25,7 @@ import {
   matchElementByAttributeValue,
   matchElementByText,
   matchElementBySelector,
+  matchElementByLocator,
   matchElementByContents
 } from './matchers'
 
@@ -38,6 +39,15 @@ function filterBySelector (container, results, selector, options) {
       .filter(element => matchElementBySelector(element, selector))
   } else {
     return queryAllBySelector(container, selector)
+  }
+}
+
+function filterByLocator (container, results, locator, options) {
+  if (Array.isArray(results)) {
+    return results
+      .filter(element => matchElementByLocator(element, locator))
+  } else {
+    return queryAllByLocator(container, locator)
   }
 }
 
@@ -90,10 +100,11 @@ function filterByText (container, results, text, options) {
     .filter(element => matchElementByText(element, text, options))
 }
 
-function filterByLabelText (container, results, text, options = {}) {
+function filterByLabelText (container, results, labelText, options = {}) {
   // aria-labelledby may not refer to a label element, so we get elements with ids too
-  const matches = queryAllBySelector(container, 'label, [id]')
-    .filter(label => matchElementByContents(label, text, options))
+  // search the whole document...
+  let matches = queryAllBySelector(document.body, 'label, [id]')
+    .filter(label => matchElementByContents(label, labelText, options))
     .reduce((labelledElements, label) => {
       let elements
 
@@ -114,8 +125,15 @@ function filterByLabelText (container, results, text, options = {}) {
     // <button aria-label="text">text</button>
     .concat(
       queryAllBySelector(container, '[aria-label]')
-        .filter(element => matchElementByAttributeValue(element, 'aria-label', text, options))
+        .filter(element => matchElementByAttributeValue(element, 'aria-label', labelText, options))
     )
+    .concat(
+      queryAllBySelector(container, ['button', 'a[href]', '[role="button"]', '[role="link"]'].join(','))
+        .filter(element => matchElementByContents(element, labelText, options))
+    )
+
+    // remove duplicates
+  matches = matches.filter((match, i) => matches.indexOf(match) === i)
 
   if (Array.isArray(results)) {
     return results
@@ -140,16 +158,31 @@ function filterByClickable (container, results) {
     .filter(element => clickable(element))
 }
 
-function queryAllBySelector (element = document.documentElement, selector = '*') {
+function queryAll (element, query) {
   if (element instanceof Element) {
-    let result = Array.from(element.querySelectorAll(selector))
-    if (matchElementBySelector(element, selector)) {
-      result = [element, ...result]
-    }
-    return result
+    return query()
   } else {
     throw new Error(`[ui-test-utils] Invalid HTMLElement for query`)
   }
+}
+
+function queryAllBySelector (element = document.documentElement, selector = '*') {
+  return queryAll(element, () => {
+    let results = Array.from(element.querySelectorAll(selector))
+    if (matchElementBySelector(element, selector)) {
+      results = [element, ...results]
+    }
+    return results
+  })
+}
+
+function queryAllByLocator (element = document.documentElement, locator) {
+  return queryAll(element, () => {
+    let results = [element, ...Array.from(
+      element.querySelectorAll(`[${locator.attribute}*="${locator.value}"`)
+    )]
+    return results.filter(result => matchElementByLocator(result, locator))
+  })
 }
 
 function queryBySelector (...args) {
@@ -165,5 +198,6 @@ export {
   filterByText,
   filterByTitle,
   filterByAttribute,
-  filterBySelector
+  filterBySelector,
+  filterByLocator
 }

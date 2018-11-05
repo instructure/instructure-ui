@@ -28,7 +28,7 @@ import { fireEvent } from './events'
 import { matchElementBySelector } from './matchers'
 
 function getOwnerDocument (element) {
-  return element.ownerDocument
+  return element.ownerDocument || document
 }
 
 function getOwnerWindow (element) {
@@ -54,7 +54,11 @@ function getTagName (element) {
 }
 
 function getComputedStyle (element) {
-  return getOwnerWindow(element).getComputedStyle(element)
+  if (element instanceof Element) {
+    return getOwnerWindow(element).getComputedStyle(element)
+  } else {
+    throw new Error(`[ui-test-utils] cannot get computed style for an invalid Element: ${element}`)
+  }
 }
 
 function hidden (element) {
@@ -127,6 +131,11 @@ function getParentNode (element) {
   return element.parentNode
 }
 
+function containsFocus (element) {
+  const activeElement = getOwnerDocument(element).activeElement
+  return (element && (activeElement === element || element.contains(activeElement)))
+}
+
 function focused (element) {
   return (element === getOwnerDocument(element).activeElement)
 }
@@ -148,8 +157,8 @@ function debug (element = document.body) {
   console.log(prettyDOM(element))
 }
 
-async function accessible (element = document.documentElement, options) {
-  if (element instanceof Element || element instanceof SVGElement) {
+function accessible (element = document.body, options) {
+  if (element instanceof Element) {
     return runAxeCheck(element, options)
   } else {
     throw new Error('[ui-test-utils] accessibility check can only run on a single DOM Element!')
@@ -170,6 +179,7 @@ export {
   accessible,
   getTextContent,
   getParentNode,
+  containsFocus,
   focused,
   visible,
   focusable,

@@ -35,11 +35,11 @@ import TreeBrowser from './index'
 const itemSelector = '[role="treeitem"]'
 
 export default locator(TreeBrowser.displayName, {
-  findAllItems: async (...args) => {
+  findAllItems: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
   },
-  findItem: async (...args) => {
+  findItem: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
   }

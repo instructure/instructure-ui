@@ -23,10 +23,10 @@
  */
 import {
   locator,
-  findAllByQuery,
-  querySelectorAll,
-  firstOrNull,
   parseQueryArguments,
+  findByQuery,
+  querySelectorAll,
+  querySelector,
   mergeCSSIntoSelector
 } from '@instructure/ui-test-utils'
 
@@ -36,58 +36,58 @@ import MenuItem from './MenuItem/locator'
 import MenuItemGroup from './MenuItemGroup/locator'
 
 const customMethods = {
-  findAllItems: async (...args) => {
+  findAllItems: (...args) => {
     return MenuItem.findAll(...args)
   },
-  findItem: async (...args) => {
+  findItem: (...args) => {
     return MenuItem.find(...args)
   },
-  findAllGroups: async (...args) => {
+  findAllGroups: (...args) => {
     return MenuItemGroup.findAll(...args)
   },
-  findGroup: async (...args) => {
+  findGroup: (...args) => {
     return MenuItemGroup.find(...args)
-  }
-}
-
-const MenuFixture = locator(Menu.displayName, customMethods)
-
-MenuFixture.findAllMenus = async (...args) => {
-  const { element, selector, options } = parseQueryArguments(...args)
-
-  const query = (element, selector, options) => {
-
-    // this gets all of the menus rendered in place...
-    const menus = MenuFixture.query(element, mergeCSSIntoSelector('[role="menu"]', selector), options)
-
-    // there are likely menus rendered in portals,
-    // so we get them via their triggers...
-    const triggers = MenuFixture.query(element, { css: '[aria-haspopup]' }, options)
-
-    return triggers.reduce((menus, trigger) => {
-      const matches = querySelectorAll(
+  },
+  findPopoverTrigger: (...args) => {
+    const query = (element, selector, options) => {
+      return querySelectorAll(
         element,
-        mergeCSSIntoSelector(`[role="menu"][aria-labelledby="${trigger.getId()}"]`, selector),
+        mergeCSSIntoSelector('[aria-haspopup]', selector),
         options
       )
-      return [...menus, ...matches]
-    }, menus)
-  }
-
-  return findAllByQuery(query, element, selector, {
-    ...options,
-    customMethods: {
-      ...options.customMethods,
-      ...customMethods
     }
-  })
+    return findByQuery(query, ...args)
+  },
+  findPopoverContent: (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+
+    const query = (element, selector, options) => {
+      const trigger = querySelector(
+        element,
+        { css: '[aria-haspopup]' },
+        { timeout: options.timeout }
+      )
+      return querySelectorAll(
+        document.body,
+        mergeCSSIntoSelector(
+          `[role="menu"][aria-labelledby="${trigger.getAttribute('id')}"]`,
+          selector
+        ),
+        options
+      )
+    }
+
+    return findByQuery(query, element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
+      }
+    })
+  }
 }
 
-MenuFixture.findMenu = async (...args) => {
-  return firstOrNull(await MenuFixture.findAllMenus(...args))
-}
-
-export default MenuFixture
+export default locator(Menu.displayName, customMethods)
 
 export { default as MenuItem } from './MenuItem/locator'
 export { default as MenuItemGroup } from './MenuItemGroup/locator'

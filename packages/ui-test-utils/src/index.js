@@ -27,17 +27,20 @@ import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
 import locator from './utils/locator'
-import { findAllByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
-import { debug } from './utils/helpers'
+import { findAllByQuery, findByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
+import { debug, accessible } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, parseQueryArguments } from './utils/query-helpers'
+import { querySelectorAll, querySelector, parseQueryArguments } from './utils/query-helpers'
 import { mergeCSSIntoSelector } from './utils/mergeCSSIntoSelector'
 
 export {
+  accessible,
   mergeCSSIntoSelector,
   parseQueryArguments,
+  findByQuery,
   findAllByQuery,
   querySelectorAll,
+  querySelector,
   locator,
   firstOrNull,
   within,

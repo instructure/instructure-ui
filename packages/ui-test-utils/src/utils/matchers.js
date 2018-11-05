@@ -58,9 +58,21 @@ function matchElementBySelector (element, selector) {
   return element.matches(selector)
 }
 
+function matchElementByLocator (element, locator) {
+  if (locator.attribute && locator.value && element.getAttribute) {
+    const attribute = element.getAttribute(locator.attribute)
+    return typeof attribute === 'string' ? attribute.split(',').includes(locator.value) : false
+  } else if (typeof locator === 'string') {
+    return matchElementBySelector(element, locator)
+  } else {
+    return false
+  }
+}
+
 export {
   matchElementByText,
   matchElementByContents,
   matchElementByAttributeValue,
-  matchElementBySelector
+  matchElementBySelector,
+  matchElementByLocator
 }

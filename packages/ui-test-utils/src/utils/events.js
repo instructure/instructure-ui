@@ -330,7 +330,7 @@ function fireEvent(element, event) {
 Object.entries(eventMap).forEach(([key, {EventType, defaultInit}]) => {
   const eventName = key.toLowerCase()
 
-  fireEvent[key] = (node, init) => {
+  fireEvent[key] = (node, init = {}) => {
     const eventInit = {...defaultInit, ...init}
     const {target: {value, files, ...targetProperties} = {}} = eventInit
     Object.assign(node, targetProperties)

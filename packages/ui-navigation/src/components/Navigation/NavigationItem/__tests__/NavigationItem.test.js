@@ -51,8 +51,9 @@ describe('<NavigationItem />', async () => {
         minimized={true}
       />
     )
-    const item = await NavigationItemLocator.find({ focusable: true })
-    expect(item.getAttribute('aria-controls')).to.exist()
+    const item = await NavigationItemLocator.find()
+    const clickable = await item.find({ clickable: true })
+    expect(clickable.getAttribute('aria-controls')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

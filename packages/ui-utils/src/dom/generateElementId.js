@@ -30,9 +30,14 @@ import uid from '../uid'
  * Generate a valid unique id for a DOM element.
  *
  * @module generateElementId
- * @param {String} prefix a custom prefix
+ * @param {String} prefix a custom prefix to add when not in production env
  * @returns {String} a unique id
  */
 export default function generateElementId(prefix) {
-  return `${prefix || 'el'}__${uid('', 12)}`
+  const id = uid('', 12)
+  if (prefix && process.env.NODE_ENV !== 'production') {
+    return `${prefix}__${id}`
+  } else {
+    return `e${id}`
+  }
 }

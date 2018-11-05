@@ -23,28 +23,33 @@
  */
 
 import keycode from 'keycode'
+import { querySelector } from './query-helpers'
 
 export function bindElementToEvents (element, events) {
   if (element instanceof Element) {
     return Object.entries(events).reduce((bound, [key, fn]) => {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireKeyboardEvent.bind(null, fn.bind(null, element))
+        bound[key] = fireKeyboardEvent.bind(null, element, fn)
       } else if (key === 'focus') {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireFocusEvent.bind(null, element, fn.bind(null, element))
+        bound[key] = fireFocusEvent.bind(null, element, fn)
+      } else if (key === 'click') {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireClickEvent.bind(null, element, fn)
       } else {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireDOMEvent.bind(null, element, fn.bind(null, element))
+        bound[key] = fireDOMEvent.bind(null, element, fn)
       }
       return bound
     }, {})
   } else {
-    console.warn('[ui-test-utils] could not bind events to invalid Element')
+    throw new Error(`[ui-test-utils] could not bind events to invalid Element: ${element}`)
   }
 }
 
-async function fireDOMEvent (element, fireEvent, init, options = { timeout: 0 }) {
+function fireDOMEvent (element, fn, init, options = { timeout: 0 }) {
+  const fireEvent = fn.bind(null, element)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
@@ -56,22 +61,20 @@ async function fireDOMEvent (element, fireEvent, init, options = { timeout: 0 })
   })
 }
 
-async function fireFocusEvent (element, fireEvent, init, options = { timeout: 0 }) {
-  let returnValue
-  if (init) {
-    console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
-Test event handlers (with event initialization) and focus state behavior separately.
-Note: this means that .focused will be false unless you call .focus without event initialization.`)
-    returnValue = fireEvent(init)
-  } else {
-    // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
-    returnValue = element.focus()
-  }
+function fireClickEvent (element, fn, init, options = { timeout: 0 })  {
+  const clickable = querySelector(element, { clickable: true })
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        resolve(returnValue)
+        if (clickable instanceof Element) {
+          const fireEvent = fn.bind(null, clickable)
+          resolve(fireEvent(init))
+        } else {
+          reject(
+            new Error(`[ui-test-utils] could not fire a 'click' event on an element that is not 'clickable'`)
+          )
+        }
       } catch (e) {
         reject(e)
       }
@@ -79,19 +82,61 @@ Note: this means that .focused will be false unless you call .focus without even
   })
 }
 
-async function fireKeyboardEvent (fireEvent, whichKey, init, options = { timeout: 0 }) {
+
+
+function fireFocusEvent (element, fn, init, options = { timeout: 0 }) {
+  const focusable = querySelector(element, { focusable: true })
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        if (focusable instanceof Element)  {
+          if (init) {
+            const fireEvent = fn.bind(null, focusable)
+
+            console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
+        Test event handlers (with event initialization) and focus state behavior separately.
+        Note: this means that .focused will be false unless you call .focus without event initialization.`)
+
+            resolve(fireEvent(init))
+          } else {
+            // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
+            resolve(focusable.focus())
+          }
+        } else {
+          reject(
+            new Error(`[ui-test-utils] could not fire a 'focus' event on an element that is not 'focusable': ${element}`)
+          )
+        }
+      } catch (e) {
+        reject(e)
+      }
+    }, options.timeout)
+  })
+
+}
+
+function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0 }) {
+  const tabbable = querySelector(element, { focusable: true })
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
   const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        resolve(fireEvent({
-          ...init,
-          key,
-          which: keyCode,
-          keyCode
-        }))
+        if (tabbable instanceof Element) {
+          const fireEvent = fn.bind(null, tabbable)
+          resolve(fireEvent({
+            ...init,
+            key,
+            which: keyCode,
+            keyCode
+          }))
+        } else {
+          reject(
+            new Error(`[ui-test-utils] could not fire a ${key} event on an element that is not 'tabbable': ${element}`)
+          )
+        }
       } catch (e) {
         reject(e)
       }

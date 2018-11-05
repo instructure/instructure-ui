@@ -57,6 +57,70 @@ describe('find, findAll', async () => {
     expect(await findAll({ title: 'Close', visible: false })).to.have.length(1)
   })
 
+  describe('by locator', async () => {
+    it('finds a single element', async () => {
+      await mount(
+        <div data-locator="Foo">hello world</div>
+      )
+
+      expect(await find({ locator: {
+        attribute: 'data-locator',
+        value: 'Foo'
+      }})).to.exist()
+    })
+
+    it('finds multiple elements', async () => {
+      await mount(
+        <div>
+          <div data-locator="Foo">hello world</div>
+          <div data-locator="Foo">hello world</div>
+          <div data-locator="Bar">hello world</div>
+          <div data-locator="Foo">hello world</div>
+        </div>
+      )
+
+      expect(await findAll({ locator: {
+        attribute: 'data-locator',
+        value: 'Foo'
+      }})).to.have.length(3)
+    })
+
+    it('finds elements with comma separated attribute values', async () => {
+      await mount(
+        <div>
+          <div data-locator="Foo">hello world</div>
+          <div data-locator="Foo,Bar">hello world</div>
+          <div data-locator="Qux,Foo,Bar,Baz">hello world</div>
+          <div data-locator="Qux,Bar,Foo">hello world</div>
+        </div>
+      )
+
+      expect(await findAll({ locator: {
+        attribute: 'data-locator',
+        value: 'Foo'
+      }})).to.have.length(4)
+    })
+
+    it('does not find elements with attribute values that are substrings', async () => {
+      await mount(
+        <div>
+          <div data-locator="FooBar">hello world</div>
+          <div data-locator="Foooo">hello world</div>
+          <div data-locator="FooFooFoo">hello world</div>
+          <div data-locator="Baz,FooBar,QuxFoo,Fooo">hello world</div>
+        </div>
+      )
+
+      expect(await findAll({
+        locator: {
+          attribute: 'data-locator',
+          value: 'Foo'
+        },
+        expectEmpty: true
+      })).to.have.length(0)
+    })
+  })
+
   describe('by text', async () => {
     it('can get elements by matching their text content', async () => {
       await mount(

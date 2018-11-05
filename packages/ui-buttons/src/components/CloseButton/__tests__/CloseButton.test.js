@@ -24,7 +24,6 @@
 
 import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
 import CloseButton from '../index'
 import CloseButtonLocator from '../locator'
 
@@ -33,7 +32,8 @@ describe('<CloseButton />', async () => {
     await mount(
       <CloseButton>Close</CloseButton>
     )
-    const iconX = await CloseButtonLocator.find( { tag: 'svg', attribute: 'name'} )
-    expect(iconX.getAttribute('name')).to.equal('IconX')
+    const button = await CloseButtonLocator.find()
+    const icon = await button.find({tag: 'svg', attribute: 'name'})
+    expect(icon.getAttribute('name')).to.equal('IconX')
   })
 })

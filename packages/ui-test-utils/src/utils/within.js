@@ -23,18 +23,18 @@
  */
 import { bindElementToUtilities } from './bindElementToUtilities'
 
-export async function within (container, ...args) {
+export function within (container, ...args) {
   if (container instanceof Element) {
-    return Promise.resolve(bindElementToUtilities(container, ...args))
+    return bindElementToUtilities(container, ...args)
   } else if (container && typeof container.find === 'function') {
-    return container.find(...args)
+    return container
   }
 }
 
-export async function withinEach (container, ...args) {
-  if (Array.isArray(container)) {
-    return Promise.resolve(container.map(element => bindElementToUtilities(container, ...args)))
-  } else if (container && typeof container.findAll === 'function') {
-    return container.findAll(...args)
+export function withinEach (containers, ...args) {
+  if (Array.isArray(containers)) {
+    return containers.map(element => bindElementToUtilities(element, ...args))
+  } else if (containers && typeof containers.findAll === 'function') {
+    return containers
   }
 }

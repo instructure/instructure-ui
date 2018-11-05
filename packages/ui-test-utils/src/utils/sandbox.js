@@ -58,14 +58,14 @@ class Sandbox {
   }
 
   teardown () {
-    StyleSheet.flush()
-
     this._observer.disconnect()
+
+    ReactComponentWrapper.unmount()
+
+    StyleSheet.flush()
 
     this._sandbox.resetHistory()
     this._sandbox.restore()
-
-    ReactComponentWrapper.unmount()
 
     window.localStorage.clear()
     window.sessionStorage.clear()
@@ -106,7 +106,7 @@ class Sandbox {
     return this._sandbox.spy(obj, method)
   }
 
-  async mount (element, context) {
+  mount (element, context) {
     return ReactComponentWrapper.mount(element, { context })
   }
 }

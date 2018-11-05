@@ -115,7 +115,7 @@ describe('<Portal />', async () => {
 
       expect(onKeyDown).to.have.been.called()
 
-      expect(button.getComponentRoot().parentNode)
+      expect(button.getParentNode())
         .to.equal(document.body)
     })
   })
@@ -152,7 +152,7 @@ describe('<Portal />', async () => {
 
       const portal = await PortalLocator.find({ contains: 'Hello World'})
 
-      expect(portal.getComponentRoot().parentNode)
+      expect(portal.getParentNode())
         .to.equal(document.getElementById('portal-mount-node'))
     })
   })

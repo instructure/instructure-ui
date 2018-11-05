@@ -30,13 +30,14 @@ import BreadcrumbLink from '../index'
 import BreadcrumbLinkLocator from '../locator'
 
 describe('<BreadcrumbLink />', async () => {
-  it('should render a link when given an href prop', async () => {
+  it('should render a anchor tag when given an href prop', async () => {
     await mount(
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkLocator.find({ tag: 'a' })
+    const link = await BreadcrumbLinkLocator.find()
+    const anchor = await link.find({ tag: 'a' })
 
-    expect(link.getAttribute('href')).to.equal('#')
+    expect(anchor.getAttribute('href')).to.equal('#')
   })
 
   it('should render as a button and respond to onClick event', async () => {
@@ -44,9 +45,10 @@ describe('<BreadcrumbLink />', async () => {
     await mount(
       <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
     )
-    const link = await BreadcrumbLinkLocator.find({ tag: 'button' })
+    const link = await BreadcrumbLinkLocator.find()
+    const button = await link.find({ tag: 'button' })
 
-    await link.click()
+    await button.click()
 
     expect(onClick).to.have.been.calledOnce()
   })

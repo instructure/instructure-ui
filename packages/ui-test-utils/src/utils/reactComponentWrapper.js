@@ -74,10 +74,12 @@ class ReactComponentWrapper {
   }
 
   unmount () {
+    let result
     if (this._mountNode) {
-      ReactDOM.unmountComponentAtNode(this._mountNode)
+      result = ReactDOM.unmountComponentAtNode(this._mountNode)
       this._mountNode && this._mountNode.remove()
     }
+    return result
   }
 }
 

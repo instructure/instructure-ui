@@ -24,9 +24,6 @@
 
 import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import Img from '@instructure/ui-elements/lib/components/Img'
-import Avatar from '@instructure/ui-elements/lib/components/Avatar'
 import Badge from '@instructure/ui-elements/lib/components/Badge'
 import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
 import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
@@ -38,9 +35,6 @@ import styles from '../styles.css'
 
 describe('<Navigation />', async () => {
   it('should render', async () => {
-    // eslint-disable-next-line max-len
-    const image = 'data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=='
-
     await mount(
       <Navigation
         label="Main navigation"
@@ -122,7 +116,7 @@ describe('<Navigation />', async () => {
       </Navigation>
     )
     const nav = await NavigationLocator.find()
-    const toggle = await NavigationLocator.find({ focusable: true, contains: 'Minimize Navigation'  })
+    const toggle = await nav.find({ focusable: true, contains: 'Minimize Navigation'  })
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
     await toggle.click()
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
@@ -149,7 +143,7 @@ describe('<Navigation />', async () => {
       </Navigation>
     )
     const nav = await NavigationLocator.find()
-    const toggle = await NavigationLocator.find({ focusable: true, contains: 'Minimize Navigation' })
+    const toggle = await nav.find({ focusable: true, contains: 'Minimize Navigation' })
     await toggle.click()
     expect(nav.hasClass(styles['minimized'])).to.exist()
   })
