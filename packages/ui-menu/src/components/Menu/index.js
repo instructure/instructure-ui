@@ -156,7 +156,8 @@ class Menu extends Component {
     /**
      * The type of `<Menu />`
      */
-    type: PropTypes.oneOf(['flyout'])
+    type: PropTypes.oneOf(['flyout']),
+    id: PropTypes.string
   }
 
   static defaultProps = {
@@ -191,6 +192,11 @@ class Menu extends Component {
   _menu = null
   _labelId = generateElementId('Menu')
   _activeSubMenu = null
+
+  constructor (props) {
+    super(props)
+    this._id = this.props.id || generateElementId()
+  }
 
   static childContextTypes = MenuContextTypes
   static contextTypes = MenuContextTypes
@@ -536,6 +542,7 @@ class Menu extends Component {
     return trigger ? (
       <Popover
         {...pickProps(this.props, Popover.propTypes)}
+        id={this._id}
         on={['click']}
         shouldContainFocus
         shouldReturnFocus

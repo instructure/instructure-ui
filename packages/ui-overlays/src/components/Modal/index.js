@@ -347,6 +347,7 @@ export default class Modal extends Component {
           [styles.ie11]: this.ie11
         })}
         ref={this.contentRef}
+        // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
         {this.renderCloseButton()}
         {children}

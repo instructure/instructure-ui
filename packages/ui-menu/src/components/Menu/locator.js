@@ -23,17 +23,16 @@
  */
 import {
   locator,
-  parseQueryArguments,
   findByQuery,
-  querySelectorAll,
-  querySelector,
-  mergeCSSIntoSelector
+  parseQueryArguments
 } from '@instructure/ui-test-utils'
 
 import Menu from './index'
 
 import MenuItem from './MenuItem/locator'
 import MenuItemGroup from './MenuItemGroup/locator'
+
+import PopoverLocator, { PopoverTriggerLocator } from '@instructure/ui-overlays/lib/components/Popover/locator'
 
 const customMethods = {
   findAllItems: (...args) => {
@@ -49,41 +48,25 @@ const customMethods = {
     return MenuItemGroup.find(...args)
   },
   findPopoverTrigger: (...args) => {
-    const query = (element, selector, options) => {
-      return querySelectorAll(
-        element,
-        mergeCSSIntoSelector('[aria-haspopup]', selector),
-        options
-      )
-    }
-    return findByQuery(query, ...args)
+    return PopoverTriggerLocator.find(...args)
   },
   findPopoverContent: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
 
-    const query = (element, selector, options) => {
-      const trigger = querySelector(
-        element,
-        { css: '[aria-haspopup]' },
-        { timeout: options.timeout }
-      )
-      return querySelectorAll(
-        document.body,
-        mergeCSSIntoSelector(
-          `[role="menu"][aria-labelledby="${trigger.getAttribute('id')}"]`,
-          selector
-        ),
-        options
-      )
-    }
-
-    return findByQuery(query, element, selector, {
-      ...options,
-      customMethods: {
-        ...options.customMethods,
-        ...customMethods
+    return findByQuery(
+      (element, selector, options) => {
+        return PopoverLocator.contentQuery(PopoverLocator.query(element))
+      },
+      element,
+      selector,
+      {
+        ...options,
+        customMethods: {
+          ...options.customMethods,
+          ...customMethods
+        }
       }
-    })
+    )
   }
 }
 

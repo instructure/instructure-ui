@@ -46,14 +46,18 @@ import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import warning from '@instructure/ui-utils/lib/warning'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import testable from '@instructure/ui-testable'
 
+@testable()
 class PopoverTrigger extends ComponentIdentifier {
   static displayName = 'PopoverTrigger'
 }
 
+@testable()
 class PopoverContent extends ComponentIdentifier {
   static displayName = 'PopoverContent'
 }
@@ -63,7 +67,7 @@ class PopoverContent extends ComponentIdentifier {
 category: components
 ---
 **/
-
+@testable()
 @deprecated('3.0.0', {
   renderOffscreen: 'shouldRenderOffscreen',
   rootClose: 'shouldCloseOnDocumentClick'
@@ -268,7 +272,8 @@ class Popover extends Component {
     /**
      * should the content offset to align by its arrow
      */
-    alignArrow: PropTypes.bool
+    alignArrow: PropTypes.bool,
+    id: PropTypes.string
   }
 
   static defaultProps = {
@@ -320,6 +325,8 @@ class Popover extends Component {
     if (typeof props.show === 'undefined') {
       this.state.show = props.defaultShow
     }
+
+    this._id = this.props.id || generateElementId()
 
     this._raf = []
   }
@@ -596,7 +603,8 @@ class Popover extends Component {
       placement: this.placement,
       onPositioned: createChainedFunction(this.handlePositionChanged, this.props.onShow),
       onPositionChanged: this.handlePositionChanged,
-      target: this.props.positionTarget
+      target: this.props.positionTarget,
+      id: this._id
     }
   }
 

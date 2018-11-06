@@ -123,11 +123,11 @@ describe('<Menu />', async () => {
 
       await menu.keyDown('up')
 
-      expect(items[items.length - 1].focused()).to.be.true()
+      expect(items[items.length - 1].containsFocus()).to.be.true()
 
       await menu.keyDown('down')
 
-      expect(items[0].focused()).to.be.true()
+      expect(items[0].containsFocus()).to.be.true()
     })
 
     it('should provide a menu ref', async () => {
@@ -155,7 +155,7 @@ describe('<Menu />', async () => {
 
       await menu.focus()
 
-      expect(items[0].focused()).to.be.true()
+      expect(items[0].containsFocus()).to.be.true()
     })
 
     it('should set aria attributes properly', async () => {
@@ -290,10 +290,11 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.find()
-      const popover = await menu.findPopoverContent({ label: 'More' })
+      const subject = await MenuLocator.find()
+      const popover = await subject.findPopoverContent({ label: 'More' })
+      const menu = await popover.find(`[role="menu"]`)
 
-      expect(menuRef).to.have.been.calledWith(popover.getDOMNode())
+      expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
     })
 
     it('should provide a popoverRef ref', async () => {
@@ -327,7 +328,7 @@ describe('<Menu />', async () => {
       const popover = await menu.findPopoverContent({ label: 'More' })
 
       await wait (() => {
-        expect(popover.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
     })
 
@@ -454,7 +455,7 @@ describe('<Menu />', async () => {
       let popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(popover.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
 
       await popover.keyUp('escape', {
@@ -489,7 +490,7 @@ describe('<Menu />', async () => {
       let popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(popover.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
 
       await popover.keyDown('left')
@@ -520,7 +521,7 @@ describe('<Menu />', async () => {
       const popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
       await wait (() => {
-        expect(popover.focused()).to.be.true()
+        expect(popover.containsFocus()).to.be.true()
       })
 
       await popover.keyDown('tab')
@@ -663,7 +664,7 @@ function testFocusFlyoutOnEvent (event) {
     const popover = await subMenu.findPopoverContent({ label: 'Flyout' })
 
     await wait (() => {
-      expect(popover.focused()).to.be.true()
+      expect(popover.containsFocus()).to.be.true()
     })
   })
 }

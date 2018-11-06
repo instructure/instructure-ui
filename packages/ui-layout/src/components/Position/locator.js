@@ -21,21 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, findByQuery  } from '@instructure/ui-test-utils'
 
-import NavigationItem from './index'
-import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
+import {
+  findByQuery,
+  locator,
+  querySelectorAll
+} from '@instructure/ui-test-utils'
 
-const contentQuery = TooltipLocator.contentQuery
+import Position, { PositionTarget, PositionContent } from './index'
 
-const NavigationItemLocator = locator(NavigationItem.displayName, {
-  findTooltipContent: (...args) => {
-    return findByQuery((element, selector, options) => {
-      return contentQuery(TooltipLocator.query(element))
-    }, ...args)
+export const PositionTargetLocator = locator(PositionTarget.displayName)
+export const PositionContentLocator = locator(PositionContent.displayName)
+
+const query = (ComponentIdentifier, element, selector, options) => {
+  if (element instanceof Element)  {
+    const id = element.getAttribute(Position.locatorAttribute)
+    return querySelectorAll(
+      document.body, // content and target aren't necessarily a child of the component itself
+      { css: `[${ComponentIdentifier.locatorAttribute}="${id}"]` },
+    )
+  } else {
+    return []
+  }
+}
+
+const targetQuery = query.bind(null, PositionTarget)
+const contentQuery = query.bind(null, PositionContent)
+
+const PositionLocator = locator(Position.displayName, {
+  findTarget: (...args) => {
+    return findByQuery(targetQuery, ...args)
+  },
+  findContent: (...args) => {
+    return findByQuery(contentQuery, ...args)
   }
 })
 
-NavigationItemLocator.contentQuery = contentQuery
+PositionLocator.targetQuery = targetQuery
+PositionLocator.contentQuery = contentQuery
 
-export default NavigationItemLocator
+export default PositionLocator

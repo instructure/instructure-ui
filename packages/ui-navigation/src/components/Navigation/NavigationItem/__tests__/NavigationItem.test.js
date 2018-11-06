@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect } from '@instructure/ui-test-utils'
+import { mount, expect, stub } from '@instructure/ui-test-utils'
 import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
 
 import NavigationItem from '../index'
@@ -42,18 +42,19 @@ describe('<NavigationItem />', async () => {
     expect(navItem).to.exist()
   })
 
-  it('should have an aria attribute for the tooltip label when the nav is minimized ', async () => {
+  it('should show a tooltip when the nav is minimized ', async () => {
+    const onClick = stub()
     await mount(
       <NavigationItem
         icon={<IconAdmin />}
         label="Admin"
-        onClick={() => { this.loadSubNav('account') }}
+        onClick={onClick}
         minimized={true}
       />
     )
     const item = await NavigationItemLocator.find()
-    const clickable = await item.find({ clickable: true })
-    expect(clickable.getAttribute('aria-controls')).to.exist()
+    const tooltip = await item.findTooltipContent()
+    expect(tooltip).to.exist()
   })
 
   it('should meet a11y standards', async () => {

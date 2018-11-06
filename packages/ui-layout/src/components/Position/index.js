@@ -30,12 +30,14 @@ import themeable from '@instructure/ui-themeable'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPositionChangeListener'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
+import testable from '@instructure/ui-testable'
 
 import calculateElementPosition from '../../utils/calculateElementPosition'
 import LayoutPropTypes from '../../utils/LayoutPropTypes'
@@ -43,16 +45,20 @@ import LayoutPropTypes from '../../utils/LayoutPropTypes'
 import styles from './styles.css'
 import theme from './theme'
 
+@testable()
 class PositionTarget extends ComponentIdentifier {
   static displayName = 'PositionTarget'
+  static locatorAttribute = 'data-position-target'
 }
 
+@testable()
 class PositionContent extends ComponentIdentifier {
   static displayName = 'PositionContent'
   static propTypes = {
     children: PropTypes.node,
     placement: LayoutPropTypes.placement
   }
+  static locatorAttribute = 'data-position-content'
 }
 
 /**
@@ -60,10 +66,12 @@ class PositionContent extends ComponentIdentifier {
 category: components/utilities
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class Position extends Component {
   static Target = PositionTarget
   static Content = PositionContent
+  static locatorAttribute = 'data-position'
 
   static propTypes = {
     /**
@@ -127,7 +135,8 @@ class Position extends Component {
      * One of: 'window', 'scroll-parent', 'parent', 'none', an element,
      * or a function returning an element
      */
-    constrain: LayoutPropTypes.constrain
+    constrain: LayoutPropTypes.constrain,
+    id: PropTypes.string
   }
 
   static defaultProps = {
@@ -153,6 +162,7 @@ class Position extends Component {
     }
 
     this.position = debounce(this.position, 0, { leading: false, trailing: true })
+    this._id = this.props.id || generateElementId()
   }
 
   _timeouts = []
@@ -163,6 +173,10 @@ class Position extends Component {
       !shallowEqual(this.props, nextProps) ||
       !shallowEqual(this.context, nextContext)
     )
+  }
+
+  componentDidMount () {
+    this.toggleTargetLocatorAttribute(true)
   }
 
   componentDidUpdate (prevProps, prevState) {
@@ -188,6 +202,17 @@ class Position extends Component {
     this.position.cancel()
     this.stopTracking()
     this._timeouts.forEach(timeout => clearTimeout(timeout))
+    this.toggleTargetLocatorAttribute(false)
+  }
+
+  toggleTargetLocatorAttribute (set) {
+    const target = this._target
+
+    if (target && target.hasAttribute) {
+      set && !target.hasAttribute(PositionTarget.locatorAttribute)
+        ? target.setAttribute(PositionTarget.locatorAttribute, this._id)
+        : target.removeAttribute(PositionTarget.locatorAttribute)
+    }
   }
 
   handlePortalOpen = () => {
@@ -254,7 +279,8 @@ class Position extends Component {
         className: classnames({
           [styles.root]: true,
           [content.props.className]: content.props.className // eslint-disable-line react/prop-types
-        })
+        }),
+        [PositionContent.locatorAttribute]: this._id
       })
 
       content = (
@@ -269,22 +295,25 @@ class Position extends Component {
 
   renderTarget () {
     let target = pick(Position.Target, this.props.children)
+
     if (target) {
-      target = safeCloneElement(target, {
+      return safeCloneElement(target, {
         ref: el => {
           this._target = el
-        }
+        },
+        [PositionTarget.locatorAttribute]: this._id
       })
     } else if (this.props.target) {
-      this._target = this.props.target
+      this._target = (typeof this.props.target === 'function') ? this.props.target() :  this.props.target
+    } else {
+      return null
     }
-
-    return target
   }
 
   render () {
+    const props = { [Position.locatorAttribute]: this._id }
     return (
-      <span>
+      <span {...props}>
         {this.renderTarget()}
         {this.renderContent()}
       </span>

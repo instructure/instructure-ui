@@ -33,6 +33,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../Popover'
 
@@ -44,6 +45,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class Tooltip extends Component {
   static propTypes = {
@@ -118,7 +120,6 @@ export default class Tooltip extends Component {
       >
         <PopoverTrigger
           aria-describedby={this._id}
-          aria-controls={this._id}
         >
           {trigger}
         </PopoverTrigger>

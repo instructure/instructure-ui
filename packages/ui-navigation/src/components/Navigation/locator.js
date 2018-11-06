@@ -26,15 +26,13 @@ import { locator  } from '@instructure/ui-test-utils'
 import Navigation from './index'
 import NavigationItem from './NavigationItem/locator'
 
-const NavigationLocator = locator(Navigation.displayName, {
-  findAllItems: async (...args) => {
+export default locator(Navigation.displayName, {
+  findAllItems: (...args) => {
     return NavigationItem.findAll(...args)
   },
-  findItem: async (...args) => {
+  findItem: (...args) => {
     return NavigationItem.find(...args)
   }
 })
-
-export default NavigationLocator
 
 export { default as NavigationItem } from './NavigationItem/locator'

@@ -21,21 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, findByQuery  } from '@instructure/ui-test-utils'
 
-import NavigationItem from './index'
-import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
+import {
+  locator,
+  findByQuery
+} from '@instructure/ui-test-utils'
 
-const contentQuery = TooltipLocator.contentQuery
+import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+import Popover, { PopoverTrigger, PopoverContent } from './index'
 
-const NavigationItemLocator = locator(NavigationItem.displayName, {
-  findTooltipContent: (...args) => {
+export const PopoverTriggerLocator = locator(PopoverTrigger.displayName)
+export const PopoverContentLocator = locator(PopoverContent.displayName)
+
+const PopoverLocator = locator(Popover.displayName, {
+  findTrigger: (...args) => {
+    return PopoverTriggerLocator.find(...args)
+  },
+  findContent: (...args) => {
     return findByQuery((element, selector, options) => {
-      return contentQuery(TooltipLocator.query(element))
+      return PositionLocator.contentQuery(PositionLocator.query(element))
+    }, ...args)
+  },
+  findPositionTarget: (...args) => {
+    return findByQuery((element, selector, options) => {
+      return PositionLocator.targetQuery(PositionLocator.query(element))
     }, ...args)
   }
 })
 
-NavigationItemLocator.contentQuery = contentQuery
+PopoverLocator.contentQuery = PositionLocator.contentQuery
+PopoverLocator.targetQuery = PositionLocator.targetQuery
 
-export default NavigationItemLocator
+export default PopoverLocator

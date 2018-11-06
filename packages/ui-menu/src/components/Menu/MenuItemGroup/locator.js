@@ -28,10 +28,10 @@ import MenuItemGroup from './index'
 import MenuItem from '../MenuItem/locator'
 
 export default locator(MenuItemGroup.displayName, {
-  findAllItems: async (...args) => {
+  findAllItems: (...args) => {
     return MenuItem.findAll(...args)
   },
-  findItem: async (...args) => {
+  findItem: (...args) => {
     return MenuItem.find(...args)
   }
 })
