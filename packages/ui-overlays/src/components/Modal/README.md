@@ -240,3 +240,18 @@ guidelines: true
   </Figure>
 </Guidelines>
 ```
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Keyboard focus must be set in the modal when it appears; usually on the first interactive element</FigureItem>
+    <FigureItem>Modals must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</FigureItem>
+    <FigureItem>When a user closes a modal, focus must return to a logical place within the page. This is usually the element that triggered opening the modal</FigureItem>
+    <FigureItem>Modals should be able to be closed by clicking away, esc key and/or a close button</FigureItem>
+    <FigureItem>We recommend that modals begin with a heading (typically H2)</FigureItem>
+  </Figure>
+</Guidelines>
+```
