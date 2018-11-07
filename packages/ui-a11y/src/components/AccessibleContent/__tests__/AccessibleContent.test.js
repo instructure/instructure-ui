@@ -23,51 +23,50 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import AccessibleContent from '../index'
 
-import PresentationContent from '../../PresentationContent'
-import ScreenReaderContent from '../../ScreenReaderContent'
-
-describe('<AccessibleContent />', () => {
-  const testbed = new Testbed(<AccessibleContent />)
-
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+describe('<AccessibleContent />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<AccessibleContent />)
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should render a ScreenReaderContent', () => {
-    const subject = testbed.render({
-      alt: 'Screenreader text'
-    })
+  it('should render a ScreenReaderContent', async () => {
+    const subject = await mount(<AccessibleContent alt="Screenreader text" />)
+    const accessibleContent = within(subject.getDOMNode())
+    const screenReaderContent = await accessibleContent.find({text: 'Screenreader text'})
 
-    expect(subject.find(ScreenReaderContent).text()).to.equal('Screenreader text')
+    expect(accessibleContent.getTextContent()).to.equal('Screenreader text')
+    expect(screenReaderContent).to.exist()
   })
 
-  it('should render a PresentationContent', () => {
-    const subject = testbed.render({
-      children: 'Not screenreader text'
-    })
+  it('should render a PresentationContent', async () => {
+    const subject = await mount(
+      <AccessibleContent>
+        Not screenreader text
+      </AccessibleContent>
+    )
+    const accessibleContent = within(subject.getDOMNode())
+    const presentationContent = await accessibleContent.find({text: 'Not screenreader text'})
 
-    expect(subject.find(PresentationContent).find('span').text()).to.equal('Not screenreader text')
+    expect(accessibleContent.getTextContent()).to.equal('Not screenreader text')
+    expect(presentationContent).to.exist()
   })
 
-  it('should render with the specified tag when `as` prop is set', () => {
-    const subject = testbed.render({
-      as: 'div'
-    })
-
-    expect(subject.tagName())
-      .to.equal('DIV')
+  it('should render with the specified tag when `as` prop is set', async () => {
+    const subject = await mount(<AccessibleContent as="div" />)
+    expect(subject.getDOMNode().tagName).to.equal('DIV')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <AccessibleContent alt="Screenreader test">
+        Not screenreader text
+      </AccessibleContent>
+    )
 
-    subject.should.be.accessible(done, {
-      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-    })
+    const accessibleContent = within(subject.getDOMNode())
+    expect(await accessibleContent.accessible()).to.be.true()
   })
 })

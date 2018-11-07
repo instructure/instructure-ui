@@ -22,72 +22,116 @@
  * SOFTWARE.
  */
 import React from 'react'
+import { expect, mount, wait, within } from '@instructure/ui-test-utils'
 import FocusRegionManager from '../FocusRegionManager'
 
-describe('FocusRegionManager', () => {
+describe('FocusRegionManager', async () => {
   beforeEach(() => {
     FocusRegionManager.clearEntries()
   })
 
-  const testbed = new Testbed(
-    <div data-test-parent role="main" aria-label="test app" id="test-parent3">
-      <div data-test-ignore role="alert">
-        <span>test alert</span>
-      </div>
-      <div data-test-child>
-        <div data-test-descendant></div>
-        <div data-test-descendant>
-          <div data-test-descendant><button data-test-button>click me</button></div>
+  it('should focus the first tabbable element when focused', async () => {
+    const subject = await mount(
+      <div data-test-parent role="main" aria-label="test app" id="test-parent3">
+        <div data-test-ignore role="alert">
+          <span>test alert</span>
         </div>
-      </div>
-      <div data-test-parent aria-hidden="true" id="test-parent2">
-        <div data-test-child></div>
-        <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
-          <div data-test-content>
-            <div>Hello world</div>
-            <button data-test-first-tabbable>click me</button>
-            <button>or click me</button>
+        <div data-test-child>
+          <div data-test-descendant></div>
+          <div data-test-descendant>
+            <div data-test-descendant>
+              <button data-test-button>click me</button>
+            </div>
           </div>
-          <span data-test-child>
-            <ul data-test-descendant>
-              <li data-test-descendant>item 1</li>
-              <li data-test-descendant>item 2</li>
-              <li data-test-descendant>item 3</li>
-            </ul>
-          </span>
+        </div>
+        <div data-test-parent aria-hidden="true" id="test-parent2">
+          <div data-test-child></div>
+          <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
+            <div data-test-content>
+              <div>Hello world</div>
+              <button data-test-first-tabbable>click me</button>
+              <button>or click me</button>
+            </div>
+            <span data-test-child>
+              <ul data-test-descendant>
+                <li data-test-descendant>item 1</li>
+                <li data-test-descendant>item 2</li>
+                <li data-test-descendant>item 3</li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        <div data-test-child aria-hidden="true">
+          <div data-test-descendant></div>
+          <div data-test-descendant></div>
         </div>
       </div>
-      <div data-test-child aria-hidden="true">
-        <div data-test-descendant></div>
-        <div data-test-descendant></div>
-      </div>
-    </div>
-  )
+    )
 
-  it('should focus the first tabbable element when focused', () => {
-    const subject = testbed.render()
-    const button = subject.find('[data-test-button]').node
+    const main = within(subject.getDOMNode())
+    const button = (await main.find({attribute: 'data-test-button'})).getDOMNode()
+    const content = (await main.find({attribute: 'data-test-content'})).getDOMNode()
+    const firstTabbable = (await main.find({attribute: 'data-test-first-tabbable'})).getDOMNode()
 
-    button.focus()
+    await button.focus()
 
     expect(document.activeElement).to.equal(button)
 
-    FocusRegionManager.focusRegion(subject.find('[data-test-content]').node)
-    testbed.tick()
-    expect(document.activeElement).to.equal(subject.find('[data-test-first-tabbable]').node)
+    FocusRegionManager.focusRegion(content)
+
+    await wait(() => {
+      expect(document.activeElement).to.equal(firstTabbable)
+    })
   })
 
-  it('should return focus when blurred', () => {
-    const subject = testbed.render()
-    const button = subject.find('[data-test-button]').node
-    const element = subject.find('[data-test-content]').node
+  it('should return focus when blurred', async () => {
+    const subject = await mount(
+      <div data-test-parent role="main" aria-label="test app" id="test-parent3">
+        <div data-test-ignore role="alert">
+          <span>test alert</span>
+        </div>
+        <div data-test-child>
+          <div data-test-descendant></div>
+          <div data-test-descendant>
+            <div data-test-descendant>
+              <button data-test-button>click me</button>
+            </div>
+          </div>
+        </div>
+        <div data-test-parent aria-hidden="true" id="test-parent2">
+          <div data-test-child></div>
+          <div role="dialog" aria-label="some content" data-test-parent id="test-parent1">
+            <div data-test-content>
+              <div>Hello world</div>
+              <button data-test-first-tabbable>click me</button>
+              <button>or click me</button>
+            </div>
+            <span data-test-child>
+              <ul data-test-descendant>
+                <li data-test-descendant>item 1</li>
+                <li data-test-descendant>item 2</li>
+                <li data-test-descendant>item 3</li>
+              </ul>
+            </span>
+          </div>
+        </div>
+        <div data-test-child aria-hidden="true">
+          <div data-test-descendant></div>
+          <div data-test-descendant></div>
+        </div>
+      </div>
+    )
 
-    button.focus()
+    const main = within(subject.getDOMNode())
+    const button = (await main.find({attribute: 'data-test-button'})).getDOMNode()
+    const content = (await main.find({attribute: 'data-test-content'})).getDOMNode()
+
+    await button.focus()
 
     expect(document.activeElement).to.equal(button)
 
-    FocusRegionManager.focusRegion(element)
-    FocusRegionManager.blurRegion(element)
+    FocusRegionManager.focusRegion(content)
+    FocusRegionManager.blurRegion(content)
 
     expect(document.activeElement).to.equal(button)
   })

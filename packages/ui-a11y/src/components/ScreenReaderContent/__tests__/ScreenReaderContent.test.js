@@ -23,33 +23,34 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import ScreenReaderContent from '../index'
 
-describe('<ScreenReaderContent />', () => {
-  const testbed = new Testbed(<ScreenReaderContent />)
-
-  it('should render the specified tag when `as` prop is set', () => {
-    const subject = testbed.render({as: 'div'})
-
-    expect(subject.tagName())
-      .to.equal('DIV')
+describe('<ScreenReaderContent />', async () => {
+  it('should render the specified tag when `as` prop is set', async () => {
+    const subject = await mount(<ScreenReaderContent as="div" />)
+    expect(subject.getDOMNode().tagName).to.equal('DIV')
   })
 
-  it('accepts props like normal', () => {
-    const subject = testbed.render({hidden: 'true'})
-    expect(subject.prop('hidden')).to.equal('true')
+  it('accepts props like normal', async () => {
+    const subject = await mount(<ScreenReaderContent hidden />)
+    expect(subject.getDOMNode().getAttribute('hidden')).to.exist()
   })
 
-  it('renders children components', () => {
-    const childComponent = React.createElement('span')
-    const subject = testbed.render({children: childComponent})
-    expect(subject.find('span').length).to.equal(2)
+  it('renders children components', async () => {
+    const subject = await mount(
+      <ScreenReaderContent>
+        <span>Screenreader text</span>
+      </ScreenReaderContent>
+    )
+    expect(subject.getDOMNode().textContent).to.equal('Screenreader text')
   })
 
-  it('is accessible by screen readers', () => {
-    const subject = testbed.render()
-    const height = subject.getComputedStyle().getPropertyValue('height')
-    const opacity = subject.getComputedStyle().getPropertyValue('opacity')
+  it('is accessible by screen readers', async () => {
+    const subject = await mount(<ScreenReaderContent />)
+    const screenReaderContent = within(subject.getDOMNode())
+    const height = screenReaderContent.getComputedStyle().getPropertyValue('height')
+    const opacity = screenReaderContent.getComputedStyle().getPropertyValue('opacity')
 
     expect(height).to.not.equal(0 || undefined) // eslint-disable-line no-undefined
     expect(opacity).to.not.equal(0 || undefined) // eslint-disable-line no-undefined

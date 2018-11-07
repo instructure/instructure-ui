@@ -23,44 +23,42 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import PresentationContent from '../index'
 
-describe('<PresentationContent />', () => {
-  const testbed = new Testbed(<PresentationContent />)
-
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+describe('<PresentationContent />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<PresentationContent />)
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should render aria-hidden flag', () => {
-    const subject = testbed.render()
-
-    expect(subject.find('span[aria-hidden]')).to.exist()
+  it('should render aria-hidden flag', async () => {
+    const subject = await mount(<PresentationContent />)
+    const presentationContent = within(subject.getDOMNode())
+    expect(await presentationContent.find({css: 'span[aria-hidden]'})).to.exist()
   })
 
-  it('should render the specified tag when `as` prop is set', () => {
-    const subject = testbed.render({as: 'div'})
-
-    expect(subject.tagName())
-      .to.equal('DIV')
+  it('should render the specified tag when `as` prop is set', async () => {
+    const subject = await mount(<PresentationContent as="div" />)
+    expect(subject.getDOMNode().tagName).to.equal('DIV')
   })
 
-  it('should render children', () => {
-    const subject = testbed.render({
-      children: <div>Hello everybody</div>
-    })
+  it('should render children', async () => {
+    const subject = await mount(
+      <PresentationContent>
+        <div>Hello everybody</div>
+      </PresentationContent>
+    )
+    const presentationContent = within(subject.getDOMNode())
+    const div = await presentationContent.find({text: 'Hello everybody'})
 
-    expect(subject.find('div').text()).to.equal('Hello everybody')
+    expect(div.getTextContent()).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<PresentationContent />)
+    const presentationContent = within(subject.getDOMNode())
 
-    subject.should.be.accessible(done, {
-      ignores: [  /* add a11y standards rules to ignore here (https://dequeuniversity.com/rules/axe) */ ]
-    })
+    expect(await presentationContent.accessible()).to.be.true()
   })
 })

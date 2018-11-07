@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import ScreenReaderFocusRegion from '../ScreenReaderFocusRegion'
 
-describe('ScreenReaderFocusRegion', () => {
-  const testbed = new Testbed(
+describe('ScreenReaderFocusRegion', async () => {
+  const element = (
     <div data-test-parent role="main" aria-label="test app" id="test-parent3">
       <div data-test-ignore role="alert">
         <span>test alert</span>
@@ -61,33 +62,13 @@ describe('ScreenReaderFocusRegion', () => {
     </div>
   )
 
-  const findContent = (subject) => {
-    return subject.find('[data-test-content]').node
-  }
-
-  const findIgnore = (subject) => {
-    return subject.find('[data-test-ignore]').node
-  }
-
-  const findChildren = (subject) => {
-    return subject.find('[data-test-child]').nodes
-  }
-
-  const findParents = (subject) => {
-    return subject.find('[data-test-parent]').nodes
-  }
-
-  const findDescendants = (subject) => {
-    return subject.find('[data-test-descendant]').nodes
-  }
-
-  it('should accept a function for liveRegion', () => {
-    const subject = testbed.render()
-
-    const ignore = findIgnore(subject)
-
+  it('should accept a function for liveRegion', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
+    const content = (await main.find('[data-test-content]')).getDOMNode()
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(
-      findContent(subject),
+      content,
       {
         liveRegion: () => ignore,
         shouldContainFocus: true
@@ -99,13 +80,14 @@ describe('ScreenReaderFocusRegion', () => {
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should apply aria-hidden to all children of content\'s parent nodes unless they are live regions', () => {
-    const subject = testbed.render()
-
-    const ignore = findIgnore(subject)
-
+  it('should apply aria-hidden to all children of content\'s parent nodes unless they are live regions', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const children = await main.findAll('[data-test-child]')
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(
-      findContent(subject),
+      content,
       {
         liveRegion: ignore,
         shouldContainFocus: true
@@ -114,62 +96,70 @@ describe('ScreenReaderFocusRegion', () => {
 
     screenReaderFocusRegion.activate()
 
-    findChildren(subject).forEach((node) => {
+    children.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.exist()
     })
 
     expect(ignore.getAttribute('aria-hidden')).to.not.exist()
   })
 
-  it('should mute designated attributes for content\'s parent nodes', () => {
-    const subject = testbed.render()
+  it('should mute designated attributes for content\'s parent nodes', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const parents = await main.findAll('[data-test-parent]')
 
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
     screenReaderFocusRegion.activate()
 
-    findParents(subject).forEach((node) => {
+    parents.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
       expect(node.getAttribute('aria-label')).to.not.exist()
       expect(node.getAttribute('role')).to.not.exist()
     })
   })
 
-  it('should not apply aria-hidden to descendants', () => {
-    const subject = testbed.render()
+  it('should not apply aria-hidden to descendants', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const descendants = await main.findAll('[data-test-descendant]')
 
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
     screenReaderFocusRegion.activate()
 
-    findDescendants(subject).forEach((node) => {
+    descendants.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })
 
-  it('should not apply aria-hidden to dynamically added descendants of content', () => {
-    const subject = testbed.render()
+  it('should not apply aria-hidden to dynamically added descendants of content', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
 
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
     screenReaderFocusRegion.activate()
 
     const desc = document.createElement('div')
-    findContent(subject).appendChild(desc)
+    content.appendChild(desc)
+
     screenReaderFocusRegion.handleDOMMutation([
       { addedNodes: [desc], removedNodes: [] }
     ])
 
-    findContent(subject).childNodes.forEach((node) => {
+    content.childNodes.forEach((node) => {
       expect(node.getAttribute('aria-hidden')).to.not.exist()
     })
   })
 
-  it('should remove aria-hidden from children unless they had aria-hidden before', () => {
-    const subject = testbed.render()
-
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
-
-    // Enzyme doesn't support pseudo class css selectors so we use query selector here
-    const childNodes = subject.node.querySelectorAll('[data-test-child]:not([aria-hidden="true"])')
-    const exception = subject.node.querySelector('[data-test-child][aria-hidden="true"]')
+  it('should remove aria-hidden from children unless they had aria-hidden before', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
+    const childNodes = await main.findAll({css: '[data-test-child]:not([aria-hidden="true"])'})
+    const exception = await main.find({css: '[data-test-child][aria-hidden="true"]'})
 
     screenReaderFocusRegion.activate()
     screenReaderFocusRegion.deactivate()
@@ -180,14 +170,16 @@ describe('ScreenReaderFocusRegion', () => {
     expect(exception.getAttribute('aria-hidden')).to.exist()
   })
 
-  it('should properly restore and unmute parent attributes', () => {
-    const subject = testbed.render()
-    const screenReaderFocusRegion = new ScreenReaderFocusRegion(findContent(subject))
+  it('should properly restore and unmute parent attributes', async () => {
+    const subject = await mount(element)
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
 
     const attrsMap = {}
-    const parentNodes = findParents(subject)
+    const parentNodes = await main.findAll('[data-test-parent]')
     parentNodes.forEach((node) => {
-      attrsMap[node.getAttribute('id')] = [...node.attributes]
+      attrsMap[node.getAttribute('id')] = [...node.getDOMNode().attributes]
     })
 
     screenReaderFocusRegion.activate()
@@ -195,7 +187,7 @@ describe('ScreenReaderFocusRegion', () => {
 
     parentNodes.forEach((node) => {
       const preNodeAttrs = attrsMap[node.getAttribute('id')]
-      const postNodeAttrs = [...node.attributes]
+      const postNodeAttrs = [...node.getDOMNode().attributes]
 
       expect(preNodeAttrs.length).to.equal(postNodeAttrs.length) // both should have same number of attributes
 

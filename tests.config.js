@@ -33,7 +33,6 @@ module.exports = {
   TESTBED_REMOVE_THIS: [
     'packages/generate-examples/',
     'packages/media-capture/',
-    'packages/ui-a11y/',
     'packages/ui-container/',
     'packages/ui-core/',
     'packages/ui-elements/',

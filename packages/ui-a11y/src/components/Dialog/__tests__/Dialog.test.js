@@ -23,194 +23,205 @@
  */
 
 import React from 'react'
-
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import Dialog from '../index'
 
-describe('<Dialog />', () => {
-  const testbed = new Testbed(
-    (
+describe('<Dialog />', async () => {
+  it('should render nothing when closed', async () => {
+    const subject = await mount(
       <Dialog>
         <button>Hello World</button>
       </Dialog>
     )
-  )
 
-  it('should render nothing when closed', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.blank()
+    expect(subject.getDOMNode()).to.not.exist()
   })
 
-  it('should render children when open', () => {
-    const subject = testbed.render({
-      open: true
+  it('should render children when open', async () => {
+    const subject = await mount(
+      <Dialog open={true}>
+        <button>Hello World</button>
+      </Dialog>
+    )
+
+    const dialog = within(subject.getDOMNode())
+    expect(await dialog.find({focusable: true})).to.exist()
+  })
+
+  it('should apply the a11y attributes', async () => {
+    const subject = await mount(
+      <Dialog open={true} label="Dialog Example">
+        <button>Hello World</button>
+      </Dialog>
+    )
+
+    const dialog = within(subject.getDOMNode())
+
+    expect(await dialog.find({css: '[role="dialog"]'})).to.exist()
+    expect(await dialog.find({css: '[aria-label="Dialog Example"]'})).to.exist()
+  })
+
+  it('should call onDismiss prop when Esc key pressed', async () => {
+    const onDismiss = stub()
+    const subject = await mount(
+      <Dialog open={true} onDismiss={onDismiss}>
+        <button>Hello World</button>
+      </Dialog>
+    )
+
+    const dialog = within(subject.getDOMNode())
+
+    await wait(() => {
+      expect(dialog.containsFocus()).to.be.true()
     })
-    expect(subject.find('button')).to.exist()
+
+    await dialog.keyUp('escape')
+
+    await wait(() => {
+      expect(onDismiss).to.have.been.called()
+    })
   })
 
-  it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true, label: 'Dialog Example' })
-    expect(subject.find('[role="dialog"]')).to.be.present()
-    expect(subject.find('[aria-label="Dialog Example"]')).to.be.present()
-  })
+  it('should call onDismiss prop when the document is clicked', async () => {
+    const onDismiss = stub()
+    const subject = await mount(
+      <Dialog open={true} shouldCloseOnDocumentClick={true} onDismiss={onDismiss}>
+        <button>Hello World</button>
+      </Dialog>
+    )
 
-  it('should call onDismiss prop when Esc key pressed', () => {
-    const onDismiss = testbed.stub()
-    testbed.render({
-      open: true,
-      onDismiss
+    const dialog = within(subject.getDOMNode())
+
+    await wait(() => {
+      expect(dialog.containsFocus()).to.be.true()
     })
 
-    testbed.tick()
-
-    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
+    document.documentElement.click()
 
     expect(onDismiss).to.have.been.called()
   })
 
-  it('should call onDismiss prop when the document is clicked', () => {
-    const onDismiss = testbed.stub()
-    testbed.render({
-      open: true,
-      shouldCloseOnDocumentClick: true,
-      onDismiss
-    })
+  describe('managed focus', async () => {
+    class DialogExample extends React.Component {
+      static propTypes = {
+        ...Dialog.propTypes
+      }
 
-    testbed.tick()
+      componentDidMount () {
+        if (!this.props.open) {
+          this._input.focus()
+        }
+      }
 
-    testbed.wrapper.dispatchNativeMouseEvent('click', {
-      bubbles: true
-    })
-
-    expect(onDismiss).to.have.been.called()
-  })
-})
-
-describe('<Dialog /> managed focus', () => {
-  class DialogExample extends React.Component {
-    static propTypes = {
-      ...Dialog.propTypes
-    }
-
-    componentDidMount () {
-      if (!this.props.open) {
-        this._input.focus()
+      render () {
+        return (
+          <div>
+            <input
+              id="input-trigger"
+              type="text"
+              ref={c => {
+                this._input = c
+              }}
+            />
+            <Dialog
+              shouldContainFocus
+              shouldReturnFocus
+              label="A Modal"
+              {...this.props}
+            >
+              <div>
+                <input type="text" id="input-one" />
+                <input type="text" id="input-two" />
+              </div>
+            </Dialog>
+          </div>
+        )
       }
     }
 
-    render () {
-      return (
-        <div>
-          <input
-            id="input-trigger"
-            type="text"
-            ref={c => {
-              this._input = c
-            }}
-          />
-          <Dialog
-            shouldContainFocus
-            shouldReturnFocus
-            label="A Modal"
-            {...this.props}
-          >
-            <div>
-              <input type="text" id="input-one" />
-              <input type="text" id="input-two" />
-            </div>
-          </Dialog>
-        </div>
+    it('should focus the first tabbable element by default', async () => {
+      await mount(<DialogExample open={true} />)
+      await wait(() => {
+        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
+      })
+    })
+
+    it('should focus the first tabbable element when open prop becomes true', async () => {
+      const subject = await mount(<DialogExample open={false} />)
+
+      await subject.setProps({open: true})
+
+      await wait(() => {
+        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
+      })
+    })
+
+    it('should take a prop for finding default focus', async () => {
+      await mount(
+        <DialogExample
+          open={true}
+          defaultFocusElement={() => {
+            return document.getElementById('input-two')
+          }}
+        />
       )
-    }
-  }
 
-  const testbed = new Testbed(<DialogExample />)
-
-  it('should focus the first tabbable element by default', () => {
-    testbed.render({
-      open: true
+      await wait(() => {
+        expect(document.getElementById('input-two') === document.activeElement).to.be.true()
+      })
     })
 
-    testbed.tick()
+    it('should return focus', async () => {
+      const subject = await mount(<DialogExample open={false} />)
 
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
-  })
+      expect(document.getElementById('input-trigger') === document.activeElement).to.be.true()
 
-  it('should focus the first tabbable element when open prop becomes true', () => {
-    const subject = testbed.render({
-      open: false
-    })
+      await subject.setProps({open: true})
 
-    subject.setProps({ open: true })
-
-    testbed.tick()
-
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
-  })
-
-  it('should take a prop for finding default focus', () => {
-    testbed.render({
-      open: true,
-      defaultFocusElement: function () {
-        return document.getElementById('input-two')
-      }
-    })
-
-    testbed.tick()
-
-    expect(document.getElementById('input-two') === document.activeElement).to.be.true()
-  })
-
-  it('should return focus', () => {
-    const subject = testbed.render({
-      open: false
-    })
-
-    expect(document.getElementById('input-trigger') === document.activeElement)
-      .to.be.true()
-
-    subject.setProps({ open: true })
-
-    testbed.tick()
-
-    expect(document.getElementById('input-one') === document.activeElement)
-      .to.be.true()
-
-    subject.setProps({ open: false })
-
-    testbed.tick()
-
-    expect(document.getElementById('input-trigger') === document.activeElement)
-      .to.be.true()
-  })
-
-  function testOnBlur (shouldContainFocus) {
-    it(`should ${shouldContainFocus ? 'not ' : ''}call onBlur when focus leaves and shouldContainFocus is ${shouldContainFocus}`, () => {
-      const onBlur = testbed.spy()
-      testbed.render({
-        defaultFocusElement: () => document.getElementById('input-two'),
-        shouldContainFocus,
-        open: true,
-        onBlur
+      await wait(() => {
+        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
       })
 
-      testbed.tick()
+      await subject.setProps({open: false})
 
-      const inputTwo = document.getElementById('input-two')
-      expect(inputTwo === document.activeElement)
-        .to.be.true()
-
-      const inputWrapper = Testbed.wrap(inputTwo)
-
-      inputWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
-
-      if (!shouldContainFocus) {
-        expect(onBlur).to.have.been.calledOnce()
-      } else {
-        expect(onBlur).to.not.have.been.called()
-      }
+      await wait(() => {
+        expect(document.getElementById('input-trigger') === document.activeElement).to.be.true()
+      })
     })
-  }
 
-  testOnBlur(false)
-  testOnBlur(true)
+    function testOnBlur (shouldContainFocus) {
+      it(`should ${shouldContainFocus ? 'not ' : ''}call onBlur when focus leaves and shouldContainFocus is ${shouldContainFocus}`, async () => {
+        const onBlur = stub()
+        const subject = await mount(
+          <DialogExample
+            open={true}
+            shouldContainFocus={shouldContainFocus}
+            defaultFocusElement={() => {
+              return document.getElementById('input-two')
+            }}
+            onBlur={onBlur}
+          />
+        )
+        const main = within(subject.getDOMNode())
+        const inputTwo = await main.find({css: '[id=input-two]'})
+
+        await wait(() => {
+          expect(inputTwo.getDOMNode() === document.activeElement).to.be.true()
+        })
+
+        await inputTwo.keyDown('tab')
+
+        await wait(() => {
+          if (!shouldContainFocus) {
+            expect(onBlur).to.have.been.called()
+          } else {
+            expect(onBlur).to.not.have.been.called()
+          }
+        })
+      })
+    }
+
+    testOnBlur(false)
+    testOnBlur(true)
+  })
 })

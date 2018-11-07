@@ -23,14 +23,15 @@
  */
 
 import React from 'react'
+import { expect } from '@instructure/ui-test-utils'
 import hasVisibleChildren from '../hasVisibleChildren'
 import ScreenReaderContent from '../../components/ScreenReaderContent'
 
-describe('hasVisibleChildren', () => {
-  it('should not count ScreenReaderContent as visible content', () => {
+describe('hasVisibleChildren', async () => {
+  it('should not count ScreenReaderContent as visible content', async () => {
     expect(hasVisibleChildren(<ScreenReaderContent>Foo</ScreenReaderContent>)).to.be.false()
   })
-  it('should count everything else as visible', () => {
+  it('should count everything else as visible', async () => {
     expect(hasVisibleChildren(<div>Foo</div>)).to.be.true()
   })
 })
