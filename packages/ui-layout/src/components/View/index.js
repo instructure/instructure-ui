@@ -49,6 +49,7 @@ category: components
 ---
 @module View
 **/
+
 class View extends Component {
   static propTypes = {
     /**
@@ -308,8 +309,28 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
-export default deprecated('5.4.0', {size: 'maxWidth'})(
-bidirectional()(
-themeable(theme, styles)(
-  View
-)))
+const ComposedView = deprecated('5.4.0', {size: 'maxWidth'})(
+  bidirectional()(
+    themeable(theme, styles)(View)
+  )
+)
+
+// omitViewProps needs to be called on the composed View component so that the
+// View.propTypes in the method matches the View.propTypes that will be called in
+// the consumers. Otherwise the discrepency could cause unexpected props being
+// allowed through.
+ComposedView.omitViewProps = (props, Component) => {
+  if (process.env.NODE_ENV !== 'production') {
+    Object.keys(pickProps(props, ComposedView.propTypes)).forEach((prop) => {
+      warning(false, ComposedView.disallowedPropWarning(prop, Component))
+    })
+  }
+
+  return omitProps(props, ComposedView.propTypes)
+}
+
+ComposedView.disallowedPropWarning = (prop, Component) => (
+  `View prop ${prop} is not allowed on ${Component.displayName}`
+)
+
+export default ComposedView

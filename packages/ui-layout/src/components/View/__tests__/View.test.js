@@ -177,4 +177,25 @@ describe('<View />', async () => {
     const view = within(subject.getDOMNode())
     expect(await view.accessible()).to.be.true()
   })
+
+  describe('omitViewProps', async () => {
+    Object.keys(View.propTypes).forEach((prop) => {
+      it(`should warn when '${prop}' prop is present and it should omit it`, async () => {
+        const TestClass = { displayName: 'Foo' }
+        const warning = `Warning: ${View.disallowedPropWarning(prop, TestClass)}`
+
+        const props = {
+          [prop]: 'foo',
+          bar: 'bar',
+          baz: 'baz'
+        }
+
+        const consoleWarn = spy(console, 'warn')
+        const result = View.omitViewProps(props, TestClass)
+
+        expect(consoleWarn).to.have.been.calledWith(warning)
+        expect(result[prop]).to.not.exist()
+      })
+    })
+  })
 })

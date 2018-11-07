@@ -81,14 +81,20 @@ describe('<Media />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, Media)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
-            const props = { [prop]: 'foo' }
+            const props = {
+              [prop]: 'foo'
+            }
             const consoleWarn = spy(console, 'warn')
+
             await mount(
               <Media {...props}>{image}</Media>
             )
-            expect(consoleWarn).to.have.been.calledOnce()
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
@@ -97,7 +103,7 @@ describe('<Media />', async () => {
             await mount(
               <Media {...props}>{image}</Media>
             )
-            expect(consoleWarn).to.not.have.been.called()
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })
