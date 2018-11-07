@@ -33,7 +33,7 @@ export default function generator ({ borders, colors, forms, spacing, typography
     textTransformStyle: 'uppercase',
     textFontSize: typography.fontSizeXSmall,
     textFontWeight: typography.fontWeightBold,
-    maxWidth: '10rem',
+    maxWidth: '15rem',
     color: colors.textDark,
     primaryColor: colors.textBrand,
     dangerColor: colors.textDanger,
