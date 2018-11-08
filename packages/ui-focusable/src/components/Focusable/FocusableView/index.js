@@ -118,9 +118,14 @@ export default class FocusableView extends Component {
       ...props
     } = this.props
 
+    const passthroughProps = View.omitViewProps(
+      omitProps(props, FocusableView.propTypes),
+      FocusableView
+    )
+
     return (
       <View
-        {...omitProps(props, { ...FocusableView.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         display={display}
         as={as}
         cursor={cursor}

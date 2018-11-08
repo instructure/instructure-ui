@@ -23,52 +23,58 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
 import FocusableView from '../index'
 
-describe('<FocusableView />', () => {
-  const testbed = new Testbed(<FocusableView>Focus Me!</FocusableView>)
+describe('<FocusableView />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <FocusableView>Focus Me!</FocusableView>
+    )
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should provide an element ref', () => {
-    const elementRef = testbed.spy()
-    const subject = testbed.render({
-      elementRef
-    })
+  it('should provide an element ref', async () => {
+    const elementRef = spy()
+
+    const subject = await mount(
+      <FocusableView elementRef={elementRef}>Focus Me!</FocusableView>
+    )
+
     expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })
 
-  it('it should receive role button by default if onClick is provided and no role is specified', () => {
-    const subject = testbed.render({
-      onClick: (e) => {}
-    })
+  it('it should receive role button by default if onClick is provided and no role is specified', async () => {
+    await mount(
+      <FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>
+    )
 
-    expect(subject.getDOMNode().getAttribute('role')).to.equal('button')
+    const focusableView = await find('[role="button"]')
+    expect(focusableView).to.exist()
   })
 
-  it('it should set a tabindex if onClick is provided and no role is specified', () => {
-    const subject = testbed.render({
-      onClick: (e) => {}
-    })
+  it('it should set a tabindex if onClick is provided and no role is specified', async () => {
+    await mount(
+      <FocusableView onClick={(e) => {}}>Focus Me!</FocusableView>
+    )
 
-    expect(subject.getDOMNode().getAttribute('tabindex')).to.equal('0')
+    const focusableView = await find('[tabindex="0"]')
+    expect(focusableView).to.exist()
   })
 
-  it('it should render presentationally', () => {
-    const subject = testbed.render({
-      as: 'span'
-    })
+  it('it should render presentationally', async () => {
+    const subject = await mount(
+      <FocusableView as="span">Focus Me!</FocusableView>
+    )
 
     expect(subject.getDOMNode().getAttribute('tabindex')).to.not.exist()
     expect(subject.getDOMNode().getAttribute('role')).to.not.exist()
   })
 
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: 'small',
       as: 'span',
@@ -81,27 +87,35 @@ describe('<FocusableView />', () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
+        const warning = `Warning: ${View.disallowedPropWarning(prop, FocusableView)}`
+
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).props()[prop]).to.not.exist()
+            }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
+
+            expect(consoleWarn).to.have.been.calledWith(warning)
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
-              [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).props()[prop]).to.equal(allowedProps[prop])
+          it(`should allow the '${prop}' prop`, async () => {
+            const props = { [prop]: allowedProps[prop] }
+            const consoleWarn = spy(console, 'warn')
+            await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
+            expect(consoleWarn).to.not.have.been.calledWith(warning)
           })
         }
     })
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <FocusableView>Focus Me!</FocusableView>
+    )
+    const focusableView = within(subject.getDOMNode())
 
-    subject.should.be.accessible(done)
+    expect(await focusableView.accessible()).to.be.true()
   })
 })
