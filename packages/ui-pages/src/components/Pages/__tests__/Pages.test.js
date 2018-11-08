@@ -23,72 +23,82 @@
  */
 
 import React from 'react'
+import { expect, mount, spy, within } from '@instructure/ui-test-utils'
 import Pages, { Page } from '../index'
-import Button from '@instructure/ui-buttons/lib/components/Button'
 
-describe('<Pages />', () => {
-  const testbed = new Testbed(
-    <Pages>
-      <Page>{() => 'Foo'}</Page>
-      <Page>{() => 'Bar'}</Page>
-    </Pages>
-  )
+describe('<Pages />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <Pages>
+        <Page>{() => 'Foo'}</Page>
+        <Page>{() => 'Bar'}</Page>
+      </Pages>
+    )
 
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+    expect(subject.getDOMNode()).to.exist()
   })
 
-  it('should render a Page', () => {
-    const subject = testbed.render({
-      children: <Page>{() => 'Hello World'}</Page>
-    })
+  it('should render a Page', async () => {
+    const subject = await mount(
+      <Pages>
+        <Page>{() => 'Hello World'}</Page>
+      </Pages>
+    )
 
-    expect(subject.text()).to.equal('Hello World')
+    expect(subject.getDOMNode().textContent).to.equal('Hello World')
   })
 
-  it('should render the 0th Page by default', () => {
-    const subject = testbed.render()
-
-    expect(subject.text()).to.equal('Foo')
+  it('should render the 0th Page by default', async () => {
+    const subject = await mount(
+      <Pages>
+        <Page>{() => 'Foo'}</Page>
+        <Page>{() => 'Bar'}</Page>
+      </Pages>
+    )
+    expect(subject.getDOMNode().textContent).to.equal('Foo')
   })
 
-  it('should render the active Page', () => {
-    const subject = testbed.render({
-      activePageIndex: 1
-    })
+  it('should render the active Page', async () => {
+    const subject = await mount(
+      <Pages activePageIndex={1}>
+        <Page>{() => 'Foo'}</Page>
+        <Page>{() => 'Bar'}</Page>
+      </Pages>
+    )
 
-    expect(subject.text()).to.equal('Bar')
+    expect(subject.getDOMNode().textContent).to.equal('Bar')
   })
 
-  it('should pass history and navigateToPreviousPage to Page', () => {
-    const pageSpy = testbed.spy()
-    testbed.render({
-      children: <Page>{pageSpy}</Page>
-    })
+  it('should pass history and navigateToPreviousPage to Page', async () => {
+    const pageSpy = spy()
+    await mount(
+      <Pages>
+        <Page>{pageSpy}</Page>
+      </Pages>
+    )
 
-    expect(pageSpy.calledOnce).to.equal(true)
+    expect(pageSpy).to.have.been.calledOnce()
     expect(Array.isArray(pageSpy.args[0][0])).to.equal(true)
     expect(typeof pageSpy.args[0][1]).to.equal('function')
   })
 
-  it('should fire onPageIndexChange event', () => {
-    const onPageIndexChange = testbed.spy()
-    const subject = testbed.render({
-      activePageIndex: 0,
-      onPageIndexChange,
-      children: [
-        <Page key={0}>{() => 'Foo'}</Page>,
-        <Page key={1}>{(history, navigate) => <Button onClick={navigate}>Back</Button>}</Page>
-      ]
-    })
+  it('should fire onPageIndexChange event', async () => {
+    const onPageIndexChange = spy()
+    const subject = await mount(
+      <Pages activePageIndex={0} onPageIndexChange={onPageIndexChange}>
+        <Page key={0}>{() => 'Foo'}</Page>
+        <Page key={1}>{(history, navigate) => <button onClick={navigate}>Back</button>}</Page>
+      </Pages>
+    )
 
-    subject.setProps({ activePageIndex: 1 })
+    await subject.setProps({activePageIndex: 1})
 
-    subject.find(Button).simulate('click')
+    const pages = within(subject.getDOMNode())
+    const button = await pages.find({clickable: true})
 
-    expect(onPageIndexChange.calledOnce).to.equal(true)
-    expect(onPageIndexChange.calledWith(0, 1)).to.equal(true)
+    await button.click()
+
+    expect(onPageIndexChange).to.have.been.calledOnce()
+    expect(onPageIndexChange).to.have.been.calledWith(0, 1)
   })
 })

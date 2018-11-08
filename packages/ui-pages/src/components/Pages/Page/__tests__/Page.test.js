@@ -23,51 +23,50 @@
  */
 
 import React from 'react'
+import { expect, mount, within} from '@instructure/ui-test-utils'
 import Page from '../index'
 
-describe('<Page />', () => {
+describe('<Page />', async () => {
   let _input
-  const testbed = new Testbed(
-    <Page defaultFocusElement={() => { return _input }}>
-        {() => {
-          return (
-            <div>
-              <input type="text" ref={(el) => { _input = el }} />
-              <span>Hello World</span>
-            </div>
-          )
-        }}
-    </Page>
-  )
 
-  it('should render with a function as child', () => {
-    const subject = testbed.render()
+  it('should render with a function as child', async () => {
+    const subject = await mount(
+      <Page defaultFocusElement={() => { return _input }}>
+          {() => {
+            return (
+              <div>
+                <input type="text" ref={(el) => { _input = el }} />
+                <span>Hello World</span>
+              </div>
+            )
+          }}
+      </Page>
+    )
 
-    expect(subject.text()).to.equal('Hello World')
+    expect(subject.getDOMNode().textContent).to.equal('Hello World')
   })
 
-  it('should focus default element', () => {
-    const subject = testbed.render()
+  it('should focus default element', async () => {
+    const subject = await mount(
+      <Page defaultFocusElement={() => { return _input }}>
+          {() => {
+            return (
+              <div>
+                <input type="text" ref={(el) => { _input = el }} />
+                <span>Hello World</span>
+              </div>
+            )
+          }}
+      </Page>
+    )
 
-    subject.instance().focus()
+    const page = within(subject.getDOMNode())
+    const input = await page.find({focusable: true})
 
-    expect(subject.find('input').focused()).to.be.true()
+    await page.focus()
+
+    expect(input.focused()).to.be.true()
   })
 
-  it('should use context', () => {
-    const pageSpy = testbed.spy()
-    const history = [1, 4, 3]
-    const navigate = () => {}
 
-    testbed.render({
-        children: pageSpy
-      }, {
-        history,
-        navigateToPreviousPage: navigate
-      })
-
-    expect(pageSpy.calledOnce).to.equal(true)
-    expect(pageSpy.args[0][0]).to.equal(history)
-    expect(pageSpy.args[0][1]).to.equal(navigate)
-  })
 })

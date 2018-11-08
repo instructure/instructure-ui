@@ -41,7 +41,6 @@ module.exports = {
     'packages/ui-i18n/',
     'packages/ui-media-player/',
     'packages/ui-overlays/',
-    'packages/ui-pages/',
     'packages/ui-pagination/',
     'packages/ui-tabs/',
     'packages/ui-themes/',
