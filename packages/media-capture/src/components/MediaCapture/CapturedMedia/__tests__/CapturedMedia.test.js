@@ -32,7 +32,7 @@ import {
 } from '../../../../constants/CaptureStates'
 
 describe('<CapturedMedia />', () => {
-  const testbed = new Testbed(<CapturedMedia captureState={READY} actions={{}} videoSrc="" videoDeviceId="" audioDeviceId="" />)
+  const testbed = new Testbed(<CapturedMedia captureState={READY} actions={{}} videoSrc="" videoDeviceId="" audioDeviceId="" requestAudioOnly={false} />)
 
   it('should render', () => {
     const media = testbed.render()

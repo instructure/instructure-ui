@@ -50,6 +50,19 @@ export function getUserMedia (audioId, videoId, success, error) {
 
   navigator.mediaDevices.getUserMedia(constraints)
     .then(stream => success(stream))
+    .catch(err => getUserAudioOnly(audioId, success, error))
+}
+
+export function getUserAudioOnly (audioId, success, error) {
+  const constraints = {
+    audio: {
+      ...defaultConstraints.audio,
+      deviceId: audioId
+    }
+  }
+
+  navigator.mediaDevices.getUserMedia(constraints)
+    .then(stream => success(stream))
     .catch(err => error(err))
 }
 

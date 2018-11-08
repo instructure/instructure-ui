@@ -32,6 +32,7 @@ let translations = {
   DEVICE_VIDEO: 'Webcam',
   FILE_PLACEHOLDER: 'Untitled',
   FINISH: 'Finish',
+  NO_WEBCAM: 'No Video',
   NOT_ALLOWED_ERROR: 'Please allow Arc to access your webcam.',
   NOT_READABLE_ERROR: 'Your webcam may already be in use.',
   PLAYBACK_PAUSE: 'Pause',

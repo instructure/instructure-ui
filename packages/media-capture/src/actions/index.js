@@ -53,6 +53,7 @@ export const startClicked = () => ({ type: types.START_CLICKED })
 export const startoverClicked = () => ({ type: types.STARTOVER_CLICKED })
 export const titleEdited = text => ({ type: types.TITLE_EDITED, text })
 export const videoDeviceChanged = id => ({ type: types.VIDEO_DEVICE_CHANGED, id })
+export const videoDeviceDisabled = () => ({ type: types.VIDEO_DEVICE_DISABLED })
 export const deviceRequestAccepted = () => ({ type: types.DEVICE_REQUEST_ACCEPTED })
 export const mediaRecorderInitialized = (mr) => ({ type: types.MEDIA_RECORDER_INITIALIZED, mr })
 export const videoObjectGenerated = (src, blob) => ({ type: types.VIDEO_OBJECT_GENERATED, src, blob })
@@ -60,9 +61,12 @@ export const errorOccurred = (msg) => ({ type: types.ERROR_OCCURRED, msg })
 
 export const devicesFound = (devices, currentVideoTrack) => {
   return (dispatch) => {
-    const [selectedVideoTrack,] = devices.videoinput.filter(d => {
-      return d.label === currentVideoTrack.label
-    })
+    let selectedVideoTrack = null
+    if (currentVideoTrack) {
+      [selectedVideoTrack,] = devices.videoinput.filter(d => {
+        return d.label === currentVideoTrack.label
+      })
+    }
     const [selectedAudioTrack,] = devices.audioinput.filter(d => {
       return d.deviceId === 'default' || d.label.indexOf('default') !== -1
     })

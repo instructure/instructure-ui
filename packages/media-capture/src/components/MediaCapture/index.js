@@ -76,13 +76,13 @@ class MediaCapture extends Component {
      * Label overrides for i18n. Defaults to english
      * See src/constants/translated/translations.js for default values
      */
-    translations: TranslationsPropType
+    translations: TranslationsPropType,
   }
 
   static defaultProps = {
     onCancel: () => {},
     onClose: () => {},
-    translations: {}
+    translations: {},
   }
 
   render () {
@@ -101,7 +101,8 @@ class MediaCapture extends Component {
               soundMeter,
               devices,
               fileName,
-              hasStarted
+              hasStarted,
+              requestAudioOnly
             },
             actions
           }) => (
@@ -120,6 +121,7 @@ class MediaCapture extends Component {
                   devices={devices}
                   audioDeviceId={audioDeviceId}
                   videoDeviceId={videoDeviceId}
+                  requestAudioOnly={requestAudioOnly}
                   actions={actions}
                 />
               </MediaContainer>

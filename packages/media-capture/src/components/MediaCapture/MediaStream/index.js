@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
-import { getUserMedia, enumerateDevices, getAudioContext } from '../../../core/mediaDevices'
+import { getUserMedia, getUserAudioOnly, enumerateDevices, getAudioContext } from '../../../core/mediaDevices'
 import { startMediaRecorder } from '../../../core/mediaRecorder'
 import { LOADING, RECORDING, READY } from '../../../constants/CaptureStates'
 import { translate } from '../../../constants/translated/translations'
@@ -51,6 +51,7 @@ class MediaStream extends Component {
     captureState: PropTypes.string.isRequired,
     videoDeviceId: PropTypes.string.isRequired,
     audioDeviceId: PropTypes.string.isRequired,
+    requestAudioOnly: PropTypes.bool,
     actions: PropTypes.shape({
       deviceRequestAccepted: PropTypes.func,
       mediaRecorderInitialized: PropTypes.func,
@@ -63,6 +64,7 @@ class MediaStream extends Component {
   }
 
   static defaultProps = {
+    requestAudioOnly: false,
     actions: {
       deviceRequestAccepted: () => {},
       devicesFound: () => {},
@@ -81,12 +83,20 @@ class MediaStream extends Component {
   }
 
   componentDidMount () {
-    getUserMedia(
-      this.props.audioDeviceId,
-      this.props.videoDeviceId,
-      this.streamSuccess,
-      this.error
-    )
+    if (this.props.requestAudioOnly) {
+      getUserAudioOnly(
+        this.props.audioDeviceId,
+        this.streamSuccess,
+        this.error
+      )
+    } else {
+      getUserMedia(
+        this.props.audioDeviceId,
+        this.props.videoDeviceId,
+        this.streamSuccess,
+        this.error
+      )
+    }
   }
 
   deviceChanged = (audioId, videoId) => {
@@ -103,12 +113,21 @@ class MediaStream extends Component {
       if (this.deviceChanged(prevProps.audioDeviceId, prevProps.videoDeviceId)) {
         this.cleanUp()
         this.stopTracks()
-        getUserMedia(
-          this.props.audioDeviceId,
-          this.props.videoDeviceId,
-          this.streamSuccess,
-          this.error
-        )
+
+        if (this.props.requestAudioOnly) {
+          getUserAudioOnly(
+            this.props.audioDeviceId,
+            this.streamSuccess,
+            this.error
+          )
+        } else {
+          getUserMedia(
+            this.props.audioDeviceId,
+            this.props.videoDeviceId,
+            this.streamSuccess,
+            this.error
+          )
+        }
       }
     }
 

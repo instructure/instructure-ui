@@ -63,7 +63,8 @@ describe('<Controller />', () => {
         captureState: READY,
         actions: {
           audioDeviceChanged: () => {},
-          videoDeviceChanged: () => {}
+          videoDeviceChanged: () => {},
+          videoDeviceDisabled: () => {}
         }
       }
 

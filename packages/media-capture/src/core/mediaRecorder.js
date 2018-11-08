@@ -74,20 +74,23 @@ class MediaFile {
     this.fileError(e)
   }
 
-  onStop = () => {
-    return this.tasks.then(() => {
-      const webM = new Blob(this.chunks, { type: FILE_TYPE })
-      return this.readAsArrayBuffer(webM)
-    }).then((webMBuf) => {
-      const refinedMetadataBuf = tools.makeMetadataSeekable(
-        this.reader.metadatas, this.reader.duration, this.reader.cues
-      )
-      const body = webMBuf.slice(this.reader.metadataSize)
-      const refinedWebM = new Blob([refinedMetadataBuf, body], { type: FILE_TYPE })
-      this.fileSuccess(refinedWebM)
-    }).catch((e) => {
+  onStop = async () => {
+    try {
+      await this.tasks
+      let webM = new Blob(this.chunks, { type: FILE_TYPE })
+
+      if (this.chunks && this.chunks[0].type !== 'audio/ogg') {
+        const webMBuf = await this.readAsArrayBuffer(webM)
+        const refinedMetadataBuf = tools.makeMetadataSeekable(
+          this.reader.metadatas, this.reader.duration, this.reader.cues
+        )
+        const body = webMBuf.slice(this.reader.metadataSize)
+        webM = new Blob([refinedMetadataBuf, body], { type: FILE_TYPE })
+      }
+      this.fileSuccess(webM)
+    } catch (e) {
       this.onError(e)
-    })
+    }
   }
 }
 

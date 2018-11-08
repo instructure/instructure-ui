@@ -79,6 +79,12 @@ describe('mediaCapture actions', () => {
     })
   })
 
+  it('videoDeviceDisabled should create VIDEO_DEVICE_DISABLED action', () => {
+    expect(actions.videoDeviceDisabled()).to.deep.equal({
+      type: types.VIDEO_DEVICE_DISABLED,
+    })
+  })
+
   it('saveClicked should dispatch SAVE_CLICKED action', () => {
     const dispatch = testbed.stub()
     actions.saveClicked('file')(dispatch)
@@ -124,6 +130,18 @@ describe('mediaCapture actions', () => {
       type: types.DEVICES_FOUND,
       devices,
       selectedVideoId: '12345',
+      selectedAudioId: 'default'
+    })
+  })
+
+  it('devicesFound should be able to handle only audio devices', () => {
+    const dispatch = testbed.stub()
+    const devices = { audioinput: [{ deviceId: 'default' }, { label: 'default:' }], videoinput: [] }
+    actions.devicesFound(devices, null)(dispatch)
+    expect(dispatch).to.have.been.calledWith({
+      type: types.DEVICES_FOUND,
+      devices,
+      selectedVideoId: '',
       selectedAudioId: 'default'
     })
   })

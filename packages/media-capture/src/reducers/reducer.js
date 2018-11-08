@@ -33,6 +33,7 @@ import {
   STARTOVER_CLICKED,
   TITLE_EDITED,
   VIDEO_DEVICE_CHANGED,
+  VIDEO_DEVICE_DISABLED,
   DEVICE_REQUEST_ACCEPTED,
   MEDIA_RECORDER_INITIALIZED,
   VIDEO_OBJECT_GENERATED,
@@ -65,8 +66,9 @@ export function getInitialState (onCompleted) {
     },
     audioDeviceId: '',
     videoDeviceId: '',
+    requestAudioOnly: false,
     fileName: '',
-    onCompleted: onCompleted
+    onCompleted: onCompleted,
   }
 }
 
@@ -116,7 +118,6 @@ export function reducer (state, action) {
       }
 
     case DEVICES_FOUND:
-
       return {
         ...state,
         devices: action.devices,
@@ -154,7 +155,6 @@ export function reducer (state, action) {
     }
 
     case MEDIA_RECORDER_INITIALIZED:
-
       return {
         ...state,
         mediaRecorder: action.mr
@@ -202,7 +202,15 @@ export function reducer (state, action) {
     case VIDEO_DEVICE_CHANGED:
       return {
         ...state,
+        requestAudioOnly: false,
         videoDeviceId: action.id
+      }
+
+    case VIDEO_DEVICE_DISABLED:
+      return {
+        ...state,
+        requestAudioOnly: true,
+        videoDeviceId: ''
       }
 
     case VIDEO_OBJECT_GENERATED:

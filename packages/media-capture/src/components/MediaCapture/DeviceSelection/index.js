@@ -54,7 +54,8 @@ class DeviceSelection extends Component {
     ).isRequired,
     actions: PropTypes.shape({
       audioDeviceChanged: PropTypes.func.isRequired,
-      videoDeviceChanged: PropTypes.func.isRequired
+      videoDeviceChanged: PropTypes.func.isRequired,
+      videoDeviceDisabled: PropTypes.func.isRequired
     }).isRequired
   }
 
@@ -90,7 +91,11 @@ class DeviceSelection extends Component {
   deviceSelected = (e, [newSelected]) => {
     if (!newSelected) return
 
-    this.props.actions[`${this.props.variant}DeviceChanged`](newSelected)
+    if (newSelected === 'video_off') {
+      this.props.actions[`${this.props.variant}DeviceDisabled`]()
+    } else {
+      this.props.actions[`${this.props.variant}DeviceChanged`](newSelected)
+    }
   }
 
   isDeviceSelected (id) {
@@ -98,7 +103,7 @@ class DeviceSelection extends Component {
   }
 
   menuItems () {
-    return this.props.devices.map(d => {
+    const menuItems = this.props.devices.map(d => {
       return (
         <MenuItem
           key={`${d.deviceId}`}
@@ -110,6 +115,20 @@ class DeviceSelection extends Component {
         </MenuItem>
       )
     })
+
+    if (this.props.variant == "video") {
+      menuItems.push(
+        <MenuItem
+          key={'video_off'}
+          value={'video_off'}
+        >
+          <div className={styles.truncated}>
+            {translate('NO_WEBCAM')}
+          </div>
+        </MenuItem>
+      )
+    }
+    return menuItems
   }
 
   handleKeyDown = e => {
@@ -131,7 +150,7 @@ class DeviceSelection extends Component {
       >
         <MenuItemGroup
           label=""
-          selected={[this.props.selectedDeviceId]}
+          selected={this.props.selectedDeviceId ? [this.props.selectedDeviceId] : ['video_off']}
           onSelect={this.deviceSelected}
         >
           {this.menuItems()}

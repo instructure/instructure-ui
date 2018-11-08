@@ -28,7 +28,7 @@ describe('<MediaCapture />', () => {
   const defaultProps = {
     onCompleted: () => {},
     onCancel: () => {},
-    onClose: () => {}
+    onClose: () => {},
   }
 
   const testbed = new Testbed(<MediaCapture {...defaultProps} />)

@@ -48,6 +48,7 @@ describe('<MediaStream />', () => {
     captureState: LOADING,
     videoDeviceId: '',
     audioDeviceId: '',
+    requestAudioOnly: false,
     actions: {
       deviceRequestAccepted: () => {},
       soundMeterInitialized: () => {},
@@ -65,9 +66,15 @@ describe('<MediaStream />', () => {
   })
 
   describe('accessing the clients audio and video devices', () => {
-    it('calls getUserMedia', () => {
+    it('calls getUserMedia when requestAudioOnly is false', () => {
       const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserMedia')
       testbed.render()
+      expect(getUserMediaSpy).to.have.been.called()
+    })
+
+    it('calls getUserAudioOnly when requestAudioOnly is true', () => {
+      const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserAudioOnly')
+      testbed.render({requestAudioOnly: true})
       expect(getUserMediaSpy).to.have.been.called()
     })
 
@@ -98,10 +105,18 @@ describe('<MediaStream />', () => {
     })
 
     describe('changing devices', () => {
-      it('calls getUserMedia when a new device is to be used', () => {
+      it('calls getUserMedia when a new device is to be used and requestAudioOnly is false', () => {
         const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserMedia')
         const media = getMedia()
         const stream = testbed.render({ captureState: READY })
+        stream.instance().streamSuccess(media.stream)
+        stream.setProps({ audioDeviceId: '12345' })
+        expect(getUserMediaSpy).to.have.been.called()
+      })
+      it('calls getUserAudioOnly when a new device is to be used and requestAudioOnly is true', () => {
+        const getUserMediaSpy = testbed.spy(MediaDevices, 'getUserAudioOnly')
+        const media = getMedia()
+        const stream = testbed.render({ captureState: READY, requestAudioOnly: true })
         stream.instance().streamSuccess(media.stream)
         stream.setProps({ audioDeviceId: '12345' })
         expect(getUserMediaSpy).to.have.been.called()

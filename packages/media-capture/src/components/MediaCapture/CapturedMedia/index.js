@@ -48,6 +48,7 @@ export default class CapturedMedia extends Component {
     videoSrc: PropTypes.string.isRequired,
     videoDeviceId: PropTypes.string.isRequired,
     audioDeviceId: PropTypes.string.isRequired,
+    requestAudioOnly: PropTypes.bool.isRequired,
     actions: PropTypes.object.isRequired // eslint-disable-line react/forbid-prop-types
   }
 
@@ -60,6 +61,7 @@ export default class CapturedMedia extends Component {
           captureState={state}
           videoDeviceId={this.props.videoDeviceId}
           audioDeviceId={this.props.audioDeviceId}
+          requestAudioOnly={this.props.requestAudioOnly}
           actions={{...this.props.actions}}
         />
       )

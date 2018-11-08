@@ -32,7 +32,8 @@ describe('<DeviceSelection />', () => {
     variant: 'audio',
     actions: {
       audioDeviceChanged: () => {},
-      videoDeviceChanged: () => {}
+      videoDeviceChanged: () => {},
+      videoDeviceDisabled: () => {}
     }
   }
 
@@ -84,6 +85,16 @@ describe('<DeviceSelection />', () => {
         const DeviceSelection = testbed.render({ variant: 'video' })
         expect(DeviceSelection.find('IconVideo').length).to.eql(1)
       })
+
+      // TODO - this is not easily doable from the testbed environment. Once these
+      //        get moved over to ui-test-utils, re-write this unit test with
+      //        that framework
+      /*
+      it('renders an option to disable the video', () => {
+        const DeviceSelection = testbed.render({ variant: 'video' })
+        // TODO find menu items, make sure the `video_off` menu item exists
+      })
+      */
     })
   })
 
@@ -107,13 +118,30 @@ describe('<DeviceSelection />', () => {
           variant: 'audio',
           actions: {
             audioDeviceChanged: audioDeviceChangedStub,
-            videoDeviceChanged: () => {}
+            videoDeviceChanged: () => {},
+            videoDeviceDisabled: () => {}
           }
         }
 
         const DeviceSelection = testbed.render(props)
         DeviceSelection.instance().deviceSelected('event', ['newSelected'])
         expect(audioDeviceChangedStub).to.have.been.calledWith('newSelected')
+      })
+
+      it('invokes the disable webcam action if the event is video_off', () => {
+        const videoDeviceDisabledStub = testbed.spy()
+        const props = {
+          variant: 'video',
+          actions: {
+            audioDeviceChanged: () => {},
+            videoDeviceChanged: () => {},
+            videoDeviceDisabled: videoDeviceDisabledStub
+          }
+        }
+
+        const DeviceSelection = testbed.render(props)
+        DeviceSelection.instance().deviceSelected('event', ['video_off'])
+        expect(videoDeviceDisabledStub).to.have.been.calledWith()
       })
     })
   })

@@ -234,7 +234,18 @@ describe('capture reducer', () => {
         { type: types.VIDEO_DEVICE_CHANGED, id: '1028eowjdnf' }
       )
     ).to.deep.equal(
-      { captureState: states.READY, videoDeviceId: '1028eowjdnf' }
+      { captureState: states.READY, videoDeviceId: '1028eowjdnf', requestAudioOnly: false}
+    )
+  })
+
+  it('should handle VIDEO_DEVICE_DISABLED', () => {
+    expect(
+      reducer(
+        { captureState: states.READY },
+        { type: types.VIDEO_DEVICE_DISABLED, id: ''}
+      )
+    ).to.deep.equal(
+      { captureState: states.READY, videoDeviceId: '', requestAudioOnly: true }
     )
   })
 
