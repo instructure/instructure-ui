@@ -34,7 +34,7 @@ import List from './index'
 
 const itemSelector = 'li'
 
-export default locator(List.displayName, {
+export default locator(List.locator, {
   findAllItems: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)

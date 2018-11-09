@@ -30,10 +30,10 @@ import {
 import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
 import Popover, { PopoverTrigger, PopoverContent } from './index'
 
-export const PopoverTriggerLocator = locator(PopoverTrigger.displayName)
-export const PopoverContentLocator = locator(PopoverContent.displayName)
+export const PopoverTriggerLocator = locator(PopoverTrigger.locator)
+export const PopoverContentLocator = locator(PopoverContent.locator)
 
-const PopoverLocator = locator(Popover.displayName, {
+const PopoverLocator = locator(Popover.locator, {
   findTrigger: (...args) => {
     return PopoverTriggerLocator.find(...args)
   },

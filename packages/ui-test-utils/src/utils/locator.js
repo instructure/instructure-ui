@@ -22,20 +22,15 @@
  * SOFTWARE.
  */
 
-import { TESTABLE_ATTRIBUTE } from '@instructure/ui-testable'
-
 import { findAllByQuery } from './queries'
 import { querySelectorAll, parseQueryArguments } from './query-helpers'
 import { matchElementByLocator } from './matchers'
 import { firstOrNull } from './firstOrNull'
 
-export default (componentId, customMethods = {}) => {
+export default (locatorAttribute, customMethods = {}) => {
   return class Locator {
     static customMethods = customMethods
-    static locator = {
-      attribute: TESTABLE_ATTRIBUTE,
-      value: componentId
-    }
+    static locator = locatorAttribute
 
     static findAll (...args) {
       const { element, selector, options } = parseQueryArguments(...args)

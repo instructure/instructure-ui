@@ -34,7 +34,7 @@ import TreeBrowser from './index'
 // TODO: if we make a TreeBrowserItem component + locator we could use it here.
 const itemSelector = '[role="treeitem"]'
 
-export default locator(TreeBrowser.displayName, {
+export default locator(TreeBrowser.locator, {
   findAllItems: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)

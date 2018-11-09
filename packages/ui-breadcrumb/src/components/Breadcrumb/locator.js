@@ -27,7 +27,7 @@ import BreadcrumbLinkLocator from './BreadcrumbLink/locator'
 
 import Breadcrumb from './index'
 
-export default locator(Breadcrumb.displayName, {
+export default locator(Breadcrumb.locator, {
   findAllLinks: (...args) => {
     return BreadcrumbLinkLocator.findAll(...args)
   },

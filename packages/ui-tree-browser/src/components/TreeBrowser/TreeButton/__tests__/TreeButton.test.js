@@ -27,7 +27,7 @@ import { expect, mount, locator } from '@instructure/ui-test-utils'
 import TreeButton from '../index'
 import styles from '../styles.css'
 
-const TreeButtonLocator = locator(TreeButton.displayName)
+const TreeButtonLocator = locator(TreeButton.locator)
 
 describe('<TreeButton />', async () => {
   it('should render', async () => {

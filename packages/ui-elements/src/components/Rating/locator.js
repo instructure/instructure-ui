@@ -33,7 +33,7 @@ import styles from './RatingIcon/styles.css'
 
 const filledSelector = `.${styles.filled}`
 
-export default locator(Rating.displayName, {
+export default locator(Rating.locator, {
   findAllFilledIcons: async (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(filledSelector, selector), options)

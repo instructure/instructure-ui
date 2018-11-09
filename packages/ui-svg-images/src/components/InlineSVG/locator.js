@@ -25,4 +25,4 @@ import { locator  } from '@instructure/ui-test-utils'
 
 import InlineSVG from './index'
 
-export default locator(InlineSVG.displayName)
+export default locator(InlineSVG.locator)

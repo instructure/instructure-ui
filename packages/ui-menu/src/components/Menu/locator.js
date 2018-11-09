@@ -70,7 +70,7 @@ const customMethods = {
   }
 }
 
-export default locator(Menu.displayName, customMethods)
+export default locator(Menu.locator, customMethods)
 
 export { default as MenuItem } from './MenuItem/locator'
 export { default as MenuItemGroup } from './MenuItemGroup/locator'

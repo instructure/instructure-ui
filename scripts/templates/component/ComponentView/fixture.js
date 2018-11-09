@@ -25,6 +25,6 @@ import { locator } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from './index'
 
-export default locator(${COMPONENT}View.displayName, {
+export default locator(${COMPONENT}View.locator, {
   /* custom component query methods go here */
 })

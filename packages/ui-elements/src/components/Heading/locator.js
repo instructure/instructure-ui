@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Heading from './index'
 
-export default locator(Heading.displayName)
+export default locator(Heading.locator)

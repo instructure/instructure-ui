@@ -96,7 +96,8 @@ describe('<Dialog />', async () => {
       expect(dialog.containsFocus()).to.be.true()
     })
 
-    document.documentElement.click()
+    await within(dialog.getOwnerDocument().documentElement)
+      .click()
 
     expect(onDismiss).to.have.been.called()
   })

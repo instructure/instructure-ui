@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { mount, expect, findAll, find, spy } from '../index'
+import { mount, expect, findAll, find, spy, wait, within } from '../index'
 
 describe('find, findAll', async () => {
   it('throws an error message by default when nothing is found', async () => {
@@ -368,15 +368,17 @@ describe('find, findAll', async () => {
           e.preventDefault()
         })
 
-        await mount(
+        const subject = await mount(
           <button onClick={handleClick}>hello</button>
         )
 
-        const button = await find({ clickable: true })
+        const button = within(subject.getDOMNode())
 
         const event = await button.click()
 
-        expect(event.preventDefault).to.have.been.calledOnce()
+        await wait(() => {
+          expect(event.preventDefault).to.have.been.calledOnce()
+        })
       })
     })
   })

@@ -21,10 +21,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5"
+    "@instructure/ui-presets": "^5",
+    "@instructure/ui-test-utils": "^5",
+    "prop-types": "^15.6.2"
   },
-  "dependencies": {
-    "react-dom": "^0.14.9 || ^15 || ^16"
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15.0.0 || ^16.0.0",
+    "react-dom": "^0.14.9 || ^15.0.0 || ^16.0.0"
   },
   "publishConfig": {
     "access": "public"

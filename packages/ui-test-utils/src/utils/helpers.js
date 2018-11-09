@@ -101,7 +101,7 @@ function onscreen (element) {
 }
 
 function clickable (element) {
-  return focusable(element) && onscreen(element)
+  return onscreen(element)
 }
 
 function focusable (element) {

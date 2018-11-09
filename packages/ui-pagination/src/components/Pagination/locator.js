@@ -27,7 +27,7 @@ import Pagination from './index'
 import PaginationButton from './PaginationButton/locator'
 import PaginationArrowButton from './PaginationArrowButton/locator'
 
-export default locator(Pagination.displayName, {
+export default locator(Pagination.locator, {
   findAllPageButtons: async (...args) => PaginationButton.findAll(...args),
   findPageButton: async (...args) => PaginationButton.find(...args),
   findArrowButton: async (...args) => PaginationArrowButton.find(...args)

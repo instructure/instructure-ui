@@ -52,7 +52,7 @@ describe('<ApplyTheme />', async () => {
     }
   }
 
-  const ThemeableComponentLocator = locator(ThemeableComponent.displayName)
+  const ThemeableComponentLocator = locator(ThemeableComponent.locator)
 
   it('injects theme via context', async () => {
     const theme = {

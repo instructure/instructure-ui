@@ -30,8 +30,8 @@ import {
 
 import Position, { PositionTarget, PositionContent } from './index'
 
-export const PositionTargetLocator = locator(PositionTarget.displayName)
-export const PositionContentLocator = locator(PositionContent.displayName)
+export const PositionTargetLocator = locator(PositionTarget.locator)
+export const PositionContentLocator = locator(PositionContent.locator)
 
 const query = (ComponentIdentifier, element, selector, options) => {
   if (element instanceof Element)  {
@@ -48,7 +48,7 @@ const query = (ComponentIdentifier, element, selector, options) => {
 const targetQuery = query.bind(null, PositionTarget)
 const contentQuery = query.bind(null, PositionContent)
 
-const PositionLocator = locator(Position.displayName, {
+const PositionLocator = locator(Position.locator, {
   findTarget: (...args) => {
     return findByQuery(targetQuery, ...args)
   },

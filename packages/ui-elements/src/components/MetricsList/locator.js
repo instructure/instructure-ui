@@ -33,7 +33,7 @@ import MetricsList from './index'
 
 const itemSelector = '[role="row"]'
 
-export default locator(MetricsList.displayName, {
+export default locator(MetricsList.locator, {
   findAllItems: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)

@@ -34,7 +34,6 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -44,7 +43,6 @@ import theme from './theme'
 category: components
 ---
 **/
-@testable()
 @themeable(theme, styles)
 class Billboard extends Component {
   static propTypes = {

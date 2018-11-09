@@ -28,7 +28,6 @@
   "dependencies": {
     "@instructure/ui-elements": "^5",
     "@instructure/ui-layout": "^5",
-    "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
     "babel-runtime": "^6",

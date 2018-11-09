@@ -21,13 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { locator, find } from '@instructure/ui-test-utils'
 import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
 
 import PaginationArrowButton from './index'
 
-export default locator(PaginationArrowButton.displayName, {
+export default locator(PaginationArrowButton.locator, {
   findTooltip: (...args) => {
     return TooltipLocator.find(...args)
+  },
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
   }
 })

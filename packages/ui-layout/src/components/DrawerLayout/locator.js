@@ -30,8 +30,8 @@ import {
 
 import DrawerLayout, { DrawerContent, DrawerTray } from './index'
 
-export const DrawerContentLocator = locator(DrawerContent.displayName)
-export const DrawerTrayLocator = locator(DrawerTray.displayName)
+export const DrawerContentLocator = locator(DrawerContent.locator)
+export const DrawerTrayLocator = locator(DrawerTray.locator)
 
 const query = (ComponentIdentifier, element, selector, options) => {
   if (element instanceof Element) {
@@ -47,7 +47,7 @@ const query = (ComponentIdentifier, element, selector, options) => {
 
 const trayQuery = query.bind(null, DrawerTray)
 
-const DrawerLayoutLocator = locator(DrawerLayout.displayName, {
+const DrawerLayoutLocator = locator(DrawerLayout.locator, {
   findContent: (...args) => {
     return DrawerContentLocator.find(...args)
   },

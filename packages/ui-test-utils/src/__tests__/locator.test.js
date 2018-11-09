@@ -23,11 +23,9 @@
  */
 import React from 'react'
 import PropTypes from 'prop-types'
-import testable from '@instructure/ui-testable'
 
 import { querySelectorAll, findAllByQuery, mount, expect, locator } from '../index'
 
-@testable()
 class Component extends React.Component {
   static propTypes = {
     hide: PropTypes.bool,
@@ -36,7 +34,7 @@ class Component extends React.Component {
   static defaultProps = {
     hide: false,
     children: (
-      <div id="componentRoot">
+      <div id="componentRoot" data-test-id="test">
         <input type="text"/>
         <input type="password" />
       </div>
@@ -49,7 +47,10 @@ class Component extends React.Component {
   }
 }
 
-const ComponentLocator = locator(Component.displayName)
+const ComponentLocator = locator({
+  attribute: 'data-test-id',
+  value: 'test'
+})
 
 ComponentLocator.findAllInputs = async (...args) => {
   const query = (element, selector, options) => {
@@ -58,7 +59,7 @@ ComponentLocator.findAllInputs = async (...args) => {
   return findAllByQuery(query, ...args)
 }
 
-describe('@testable, locator', async () => {
+describe('locator', async () => {
   it('should handle components that render `null`', async () => {
     await mount(<Component hide />)
     expect(await ComponentLocator.findAll({ expectEmpty: true })).to.have.length(0)
@@ -92,11 +93,5 @@ describe('@testable, locator', async () => {
     await mount(<Component />)
     const result = await ComponentLocator.find({ tag: 'input' })
     expect(result.getDOMNode()).to.equal(document.querySelector('#componentRoot'))
-  })
-  it('should still find the component root element even when the root element changes', async () => {
-    const subject = await mount(<Component />)
-    expect(await ComponentLocator.find()).to.exist()
-    subject.setProps({ children: <ul><li>foo</li></ul> })
-    expect(await ComponentLocator.find()).to.exist()
   })
 })

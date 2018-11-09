@@ -26,7 +26,7 @@ import React from 'react'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton/index'
@@ -484,7 +484,9 @@ describe('<Pagination />', async () => {
 
       await nextButton.click()
 
-      expect(onClick).to.have.been.called()
+      await wait(() => {
+        expect(onClick).to.have.been.called()
+      })
     })
   })
 })

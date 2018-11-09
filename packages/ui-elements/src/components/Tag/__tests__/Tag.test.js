@@ -38,8 +38,8 @@ describe('<Tag />', async () => {
   it('should render as a button and respond to onClick event', async () => {
     const onClick = stub()
     await mount(<Tag text="Summer" onClick={onClick} />)
-    const clickable = await find({ clickable: true })
-    await clickable.click()
+    const button = await find({ tag: 'button' })
+    await button.click()
     expect(onClick).to.have.been.called()
   })
 

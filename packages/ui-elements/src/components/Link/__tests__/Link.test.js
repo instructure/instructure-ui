@@ -64,8 +64,9 @@ describe('<Link />', async () => {
     const onClick = stub()
     await mount(<Link onClick={onClick}>Hello World</Link>)
 
-    const clickable = await LinkLocator.find({ clickable: true })
-    await clickable.click()
+    const link = await LinkLocator.find()
+
+    await link.click()
 
     expect(onClick).to.have.been.called()
   })
@@ -102,8 +103,8 @@ describe('<Link />', async () => {
       const onClick = stub()
       await mount(<Link onClick={onClick} disabled>Hello World</Link>)
 
-      const clickable = await LinkLocator.find({ clickable: true })
-      await clickable.click()
+      const link = await LinkLocator.find()
+      await link.click()
 
       expect(onClick).to.not.have.been.called()
     })

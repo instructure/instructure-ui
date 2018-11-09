@@ -21,8 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { locator, find } from '@instructure/ui-test-utils'
 
 import Link from './index'
 
-export default locator(Link.displayName)
+export default locator(Link.locator, {
+  click: async (element, ...args) => {
+    return (await find(element, 'a,button,[role="button"]')).click(...args)
+  }
+})

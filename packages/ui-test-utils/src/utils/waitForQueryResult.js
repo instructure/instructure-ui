@@ -30,7 +30,7 @@ export function waitForQueryResult (
     element,
     timeout = 1900,
     expectEmpty = false,
-    mutationObserverOptions = {subtree: true, childList: true},
+    mutationObserverOptions = { attributes: true, childList: true, subtree: true },
     message = ''
   } = {},
 ) {

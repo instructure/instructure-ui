@@ -23,29 +23,27 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, locator } from '@instructure/ui-test-utils'
+import { mount, expect, stub, within } from '@instructure/ui-test-utils'
 
 import Billboard from '../index'
 
-const BillboardLocator = locator(Billboard.displayName)
-
 describe('<Billboard />', async () => {
   it('should render', async () => {
-    await mount(
+    const subject = await mount(
       <Billboard />
     )
-    const billboard = await BillboardLocator.find()
+    const billboard = within(subject.getDOMNode())
     expect(billboard).to.exist()
   })
 
   it('should render a heading with the correct tag', async () => {
-    await mount(
+    const subject = await mount(
       <Billboard
         heading='Test heading'
         headingAs='h2'
       />
     )
-    const billboard = await BillboardLocator.find()
+    const billboard = within(subject.getDOMNode())
     const heading = billboard.find({
       tag: 'h2',
       contains: 'Test heading',
@@ -54,12 +52,12 @@ describe('<Billboard />', async () => {
   })
 
   it('renders as a link if it has an href prop', async () => {
-    await mount (
+    const subject = await mount (
       <Billboard
         href='#'
       />
     )
-    const billboard = await BillboardLocator.find()
+    const billboard = within(subject.getDOMNode())
     const link = await billboard.find({
       tag: 'a'
     })
@@ -68,12 +66,12 @@ describe('<Billboard />', async () => {
 
   it('renders as a button and responds to onClick event', async () => {
     const onClick = stub()
-    await mount (
+    const subject = await mount (
       <Billboard
         onClick={onClick}
       />
     )
-    const billboard = await BillboardLocator.find()
+    const billboard = within(subject.getDOMNode())
     const button = await billboard.find({
       tag: 'button'
     })
@@ -85,14 +83,14 @@ describe('<Billboard />', async () => {
 
   describe('when disabled', async () => {
     it('should apply aria-disabled to link', async () => {
-      await mount(
+      const subject = await mount(
         <Billboard
           heading='I am disabled'
           href='#'
           disabled={true}
         />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
       const link = await billboard.find({
         tag: 'a'
       })
@@ -102,13 +100,13 @@ describe('<Billboard />', async () => {
 
     it('should not be clickable', async () => {
       const onClick = stub()
-      await mount (
+      const subject = await mount (
         <Billboard
           onClick={onClick}
           disabled
         />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
 
       expect(billboard.click()).to.eventually.throw()
       expect(onClick).to.not.have.been.called()
@@ -117,14 +115,14 @@ describe('<Billboard />', async () => {
 
   describe('when readOnly', async () => {
     it('should apply aria-disabled', async () => {
-      await mount(
+      const subject = await mount(
         <Billboard
           heading='I am disabled'
           href='#'
           readOnly
         />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
       const link = await billboard.find({
         tag: 'a'
       })
@@ -134,13 +132,13 @@ describe('<Billboard />', async () => {
 
     it('should not be clickable', async () => {
       const onClick = stub()
-      await mount (
+      const subject = await mount (
         <Billboard
           onClick={onClick}
           readOnly
         />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
 
       const event = await billboard.click()
 
@@ -152,30 +150,31 @@ describe('<Billboard />', async () => {
   describe('when passing down props to View', async () => {
     it('should support an elementRef prop', async () => {
       const elementRef = stub()
-      await mount(
+      const subject = await mount(
         <Billboard elementRef={elementRef} />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
       expect(elementRef).to.have.been.calledWith(billboard.getDOMNode())
     })
+
     it('should support an `as` prop', async () => {
-      await mount(
+      const subject = await mount(
         <Billboard as='div' />
       )
-      const billboard = await BillboardLocator.find()
+      const billboard = within(subject.getDOMNode())
       expect(billboard.getTagName()).to.equal('div')
     })
   })
 
   it('should meet a11y standards', async () => {
-    await mount(
+    const subject = await mount(
       <Billboard
         heading='Test heading'
         headingAs='h2'
         message='this is what i am testing'
       />
     )
-    const billboard = await BillboardLocator.find()
+    const billboard = within(subject.getDOMNode())
     expect(await billboard.accessible()).to.be.true()
   })
 })

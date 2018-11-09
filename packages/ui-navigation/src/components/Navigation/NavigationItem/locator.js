@@ -28,7 +28,7 @@ import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/loca
 
 const contentQuery = TooltipLocator.contentQuery
 
-const NavigationItemLocator = locator(NavigationItem.displayName, {
+const NavigationItemLocator = locator(NavigationItem.locator, {
   findTooltipContent: (...args) => {
     return findByQuery((element, selector, options) => {
       return contentQuery(TooltipLocator.query(element))

@@ -61,8 +61,12 @@ function fireDOMEvent (element, fn, init, options = { timeout: 0 }) {
   })
 }
 
-function fireClickEvent (element, fn, init, options = { timeout: 0 })  {
-  const clickable = querySelector(element, { clickable: true })
+function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: true })  {
+  let clickable = element
+
+  if (options.clickable) {
+    clickable = querySelector(element, { clickable: true })
+  }
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -84,8 +88,12 @@ function fireClickEvent (element, fn, init, options = { timeout: 0 })  {
 
 
 
-function fireFocusEvent (element, fn, init, options = { timeout: 0 }) {
-  const focusable = querySelector(element, { focusable: true })
+function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: true }) {
+  let focusable = element
+
+  if (options.focusable) {
+    focusable = querySelector(element, { focusable: true })
+  }
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -116,16 +124,21 @@ function fireFocusEvent (element, fn, init, options = { timeout: 0 }) {
 
 }
 
-function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0 }) {
-  const tabbable = querySelector(element, { focusable: true })
+function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0, focusable: true }) {
+  let focusable = element
+
+  if (options.focusable) {
+    focusable = querySelector(element, { focusable: true })
+  }
+
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
   const key = (typeof whichKey === 'number') ? keycode(whichKey) : whichKey
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (tabbable instanceof Element) {
-          const fireEvent = fn.bind(null, tabbable)
+        if (focusable instanceof Element) {
+          const fireEvent = fn.bind(null, focusable)
           resolve(fireEvent({
             ...init,
             key,
@@ -134,7 +147,7 @@ function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0 
           }))
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a ${key} event on an element that is not 'tabbable': ${element}`)
+            new Error(`[ui-test-utils] could not fire a ${key} event on an element that is not 'focusable': ${element}`)
           )
         }
       } catch (e) {

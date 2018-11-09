@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import PaginationButton from './index'
 
-export default locator(PaginationButton.displayName)
+export default locator(PaginationButton.locator)

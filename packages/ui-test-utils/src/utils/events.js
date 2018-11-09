@@ -323,6 +323,8 @@ const eventAliasMap = {
 function fireEvent(element, event) {
   // eslint-disable-next-line no-param-reassign
   event.preventDefault = spy(event, 'preventDefault')
+  // eslint-disable-next-line no-param-reassign
+  event.stopPropagation = spy(event, 'stopPropagation')
   element.dispatchEvent(event)
   return event
 }

@@ -40,7 +40,7 @@ import TreeCollection from '../index'
 // TODO: if we make a TreeBrowserItem component + locator we could use it here.
 const itemSelector = '[role="treeitem"]'
 
-const TreeCollectionLocator = locator(TreeCollection.displayName, {
+const TreeCollectionLocator = locator(TreeCollection.locator, {
   findAllItems: async (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
     return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)

@@ -28,7 +28,7 @@ import PopoverLocator, { PopoverTriggerLocator } from '../Popover/locator'
 
 const contentQuery = PopoverLocator.contentQuery
 
-const TooltipLocator = locator(Tooltip.displayName, {
+const TooltipLocator = locator(Tooltip.locator, {
   findPopoverTrigger: (...args) => {
     return PopoverTriggerLocator.find(...args)
   },

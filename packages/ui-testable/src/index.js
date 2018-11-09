@@ -24,46 +24,57 @@
 
 import { findDOMNode } from 'react-dom'
 
-export const TESTABLE_ATTRIBUTE = 'data-ui-testable'
-
 function testable () {
   return function (ComposedComponent) {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
+    const locator = {
+      attribute: 'data-ui-testable',
+      value: displayName
+    }
 
     class TestableComponent extends ComposedComponent {
       static displayName = displayName
-    }
+      static locator = locator
 
-    if (process.env.NODE_ENV !== 'production') {
-      const appendTestableAttribute = (node, displayName) => {
-        try {
-          const attribute = node.getAttribute(TESTABLE_ATTRIBUTE)
-          const names = typeof attribute === 'string' ? attribute.split(',') : []
+      componentDidMount (...args) {
+        if (super.componentDidMount) {
+          super.componentDidMount(...args)
+        }
+        this.appendLocatorAttribute(findDOMNode(this) || this.DOMNode)
+      }
 
-          if (!names.includes(displayName)) {
-            names.push(displayName)
+      componentDidUpdate (...args) {
+        if (super.componentDidUpdate) {
+          super.componentDidUpdate(...args)
+        }
+        this.appendLocatorAttribute(findDOMNode(this) || this.DOMNode)
+      }
+
+      componentWillUnmount (...args) {
+        if (super.componentWillUnmount) {
+          super.componentWillUnmount(...args)
+        }
+        clearTimeout(this.locatorTimeout)
+      }
+
+      appendLocatorAttribute (node) {
+        this.locatorTimeout = setTimeout(() => {
+          try {
+            // Use this.DOMNode for components that render as non-native Portals...
+            if (node && node.getAttribute) {
+              const attribute = node.getAttribute(locator.attribute)
+              const values = typeof attribute === 'string' ? attribute.split(',') : []
+
+              if (!values.includes(locator.value)) {
+                values.push(locator.value)
+              }
+
+              node.setAttribute(locator.attribute, values.join(','))
+            }
+          } catch (e) {
+            console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
           }
-
-          node.setAttribute(TESTABLE_ATTRIBUTE, names.join(','))
-        } catch (e) {
-          console.warn(`[ui-testable] Could not attach testable locator attribute: ${e}`)
-        }
-      }
-
-      TestableComponent.prototype.componentDidMount = function componentDidMount (...args) {
-        if (ComposedComponent.prototype.componentDidMount) {
-          ComposedComponent.prototype.componentDidMount.call(this, ...args)
-        }
-        // Use this.DOMNode for components that render as non-native Portals...
-        appendTestableAttribute(findDOMNode(this) || this.DOMNode, displayName)
-      }
-
-      TestableComponent.prototype.componentDidUpdate = function componentDidUpdate (...args) {
-        if (ComposedComponent.prototype.componentDidUpdate) {
-          ComposedComponent.prototype.componentDidUpdate.call(this, ...args)
-        }
-
-        appendTestableAttribute(findDOMNode(this) || this.DOMNode, displayName)
+        }, 0)
       }
     }
 

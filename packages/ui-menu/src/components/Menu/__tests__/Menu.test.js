@@ -587,7 +587,7 @@ describe('<Menu />', async () => {
         expect(popover.containsFocus()).to.be.true()
       })
 
-      await (await within(trigger.getOwnerDocument().body))
+      await within(trigger.getOwnerDocument().documentElement)
         .click()
 
       expect(onToggle).to.have.been.calledTwice()

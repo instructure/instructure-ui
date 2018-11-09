@@ -27,7 +27,7 @@ import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import DrawerTray from '../index'
 import styles from '../styles.css'
 
-const DrawerTrayLocator = locator(DrawerTray.displayName)
+const DrawerTrayLocator = locator(DrawerTray.locator)
 
 describe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {

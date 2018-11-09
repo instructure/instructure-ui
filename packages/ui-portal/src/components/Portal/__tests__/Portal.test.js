@@ -33,7 +33,7 @@ describe('<Portal />', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalLocator.find({ text: 'Hello World' })
+    const portal = await PortalLocator.find({ contains: 'Hello World' })
     expect(portal.getDOMNode()).to.exist()
   })
 

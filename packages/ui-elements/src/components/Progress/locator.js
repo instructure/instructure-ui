@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Progress from './index'
 
-export default locator(Progress.displayName)
+export default locator(Progress.locator)

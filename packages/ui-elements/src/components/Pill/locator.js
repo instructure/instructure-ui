@@ -27,7 +27,7 @@ import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/loca
 
 import Pill from './index'
 
-export default locator(Pill.displayName, {
+export default locator(Pill.locator, {
   findTooltip: async (...args) => {
     return TooltipLocator.find(...args)
   }
