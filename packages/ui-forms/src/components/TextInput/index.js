@@ -217,6 +217,10 @@ class TextInput extends Component {
             className={classnames(classes)}
             aria-describedby={descriptionIds !== '' ? descriptionIds : null}
           />
+          {
+            (!disabled && !readOnly)
+            ? <span className={styles.outline} aria-hidden="true"></span> : null
+          }
           {this.renderIcon()}
         </span>
       </FormField>
