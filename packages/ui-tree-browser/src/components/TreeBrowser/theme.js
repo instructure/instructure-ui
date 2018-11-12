@@ -27,8 +27,12 @@ export default function ({ colors, spacing, typography, borders }) {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
     fontSize: typography.fontSizeSmall,
+
     controlsTopMargin: spacing.small,
+    borderRadius: borders.radiusMedium,
+
     focusOutlineWidth: borders.widthMedium,
-    focusOutlineColor: colors.borderBrand
+    focusOutlineColor: colors.borderBrand,
+    focusOutlineStyle: borders.style
   }
 }

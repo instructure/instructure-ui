@@ -25,26 +25,36 @@
 export default function generator ({ colors, spacing, typography, borders }) {
   return {
     hoverBackgroundColor: colors.backgroundBrand,
+    hoverTextColor: colors.textLightest,
+
     focusOutlineWidth: borders.widthMedium,
     focusOutlineColor: colors.borderBrand,
+    focusOutlineStyle: borders.style,
+
     iconColor: colors.textDarkest,
     iconsMarginRight: spacing.xSmall,
+
     descriptorMarginTop: spacing.xxxSmall,
-    nameTextColor: colors.textBrand,
     descriptorTextColor: colors.textDarkest,
-    hoverTextColor: colors.textLightest,
-    nameFontSizeSmall: typography.fontSizeXSmall,
-    nameFontSizeMedium: typography.fontSizeSmall,
-    nameFontSizeLarge: typography.fontSizeMedium,
     descriptorFontSizeSmall: typography.fontSizeXSmall,
     descriptorFontSizeMedium: typography.fontSizeXSmall,
     descriptorFontSizeLarge: typography.fontSizeSmall,
+
+    nameTextColor: colors.textBrand,
+    nameFontSizeSmall: typography.fontSizeXSmall,
+    nameFontSizeMedium: typography.fontSizeSmall,
+    nameFontSizeLarge: typography.fontSizeMedium,
+
     baseSpacingSmall: spacing.xSmall,
     baseSpacingMedium: spacing.small,
     baseSpacingLarge: '1rem',
+
     borderWidth: borders.widthSmall,
+    borderRadius: borders.radiusMedium,
     borderColor: colors.borderDark,
+
     textLineHeight: typography.lineHeightCondensed,
+
     selectedTextColor: colors.textLightest,
     selectedBackgroundColor: colors.backgroundDark,
     selectedOutlineWidth: borders.widthLarge

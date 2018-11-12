@@ -23,9 +23,9 @@
   user-select: none;
   cursor: pointer;
   border: none;
+  border-radius: var(--borderRadius);
   position: relative;
-  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-  z-index: 1;
+  z-index: 1; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   transform: translate3d(-2%, 0, 0);
   opacity: 0.01;
   transform-origin: left center;
@@ -34,9 +34,33 @@
   animation-fill-mode: forwards;
   animation-timing-function: ease-out;
   animation-delay: 0.2s;
+  outline: 0;
+
+  &:not(.ie11)::after {
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: calc(var(--borderRadius) * 1.5);
+    transition: all 0.2s;
+
+    /* properties to transition on :focus */
+    opacity: 0;
+    transform: scale(0.95);
+  }
 
   &:hover {
     background-color: var(--hoverBackgroundColor);
+
+    &.selected {
+      background-color: var(--selectedBackgroundColor);
+    }
 
     &.folderTree::before {
       visibility: hidden;
@@ -49,8 +73,15 @@
     }
   }
 
-  &:focus {
-    outline: 0;
+  &.focused {
+    &:not(.ie11)::after {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &.ie11 {
+      outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    }
   }
 }
 
@@ -68,8 +99,7 @@
 
 .icon {
   position: relative;
-  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
-  z-index: 1;
+  z-index: 1; /* stylelint-disable-line scale-unlimited/declaration-strict-value */
   color: var(--iconColor);
 }
 
@@ -210,11 +240,6 @@
   }
 }
 
-.focused {
-  outline: 0;
-  box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
-}
-
 .expanded {}
 
 .selected {
@@ -229,11 +254,6 @@
   .icon {
     color: var(--selectedTextColor);
   }
-}
-
-.selected.focused {
-  outline: 0;
-  box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor), inset 0 0 0 var(--selectedOutlineWidth) var(--selectedTextColor);
 }
 
 /* stylelint-enable no-descending-specificity, selector-max-class */

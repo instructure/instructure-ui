@@ -8,9 +8,29 @@
   padding: 0;
   list-style-type: none;
   position: relative;
+  outline: none;
 
-  &:focus {
-    outline: 0;
-    box-shadow: inset 0 0 0 var(--focusOutlineWidth) var(--focusOutlineColor);
+  &::before {
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: calc(var(--borderRadius) * 1.5);
+    transition: all 0.2s;
+
+    /* properties to transition on :focus */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  &:focus::before {
+    opacity: 1;
+    transform: scale(1);
   }
 }
