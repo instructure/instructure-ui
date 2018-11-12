@@ -22,26 +22,27 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import Tab from '../index'
 
-describe('Tab.theme', () => {
-  describe('with the default theme', () => {
+describe('Tab.theme', async () => {
+  describe('with the default theme', async () => {
     const variables = Tab.generateTheme()
 
-    describe('simple variant', () => {
-      it('should ensure text and tab background meet 3:1 contrast', () => {
+    describe('simple variant', async () => {
+      it('should ensure text and tab background meet 3:1 contrast', async () => {
         expect(contrast(variables.simpleSelectedColor, variables.simpleSelectedBackground))
           .to.be.above(3)
       })
     })
   })
 
-  describe('with the "canvas-high-contrast" theme', () => {
+  describe('with the "canvas-high-contrast" theme', async () => {
     const variables = Tab.generateTheme('canvas-high-contrast')
 
-    describe('simple variant', () => {
-      it('should ensure text and tab background meet 4.5:1 contrast', () => {
+    describe('simple variant', async () => {
+      it('should ensure text and tab background meet 4.5:1 contrast', async () => {
         expect(contrast(variables.simpleSelectedColor, variables.simpleSelectedBackground))
           .to.be.above(4.5)
       })

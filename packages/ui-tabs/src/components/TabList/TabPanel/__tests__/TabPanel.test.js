@@ -23,24 +23,22 @@
  */
 
 import React from 'react'
+import { expect, find, mount } from '@instructure/ui-test-utils'
+
 import TabPanel from '../index'
 
-describe('<TabPanel />', () => {
-  const testbed = new Testbed(
-    <TabPanel selected title="Panel Title">Panel contents</TabPanel>
-  )
+describe('<TabPanel />', async () => {
+  it('should render children', async () => {
+    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
 
-  it('should render children', () => {
-    const subject = testbed.render()
-
-    expect(subject.text())
-      .to.equal('Panel contents')
+    const tabPanel = await find('[role="tabpanel"]')
+    expect(tabPanel.getTextContent()).to.equal('Panel contents')
   })
 
-  it('should have appropriate role attribute', () => {
-    const subject = testbed.render()
+  it('should have appropriate role attribute', async () => {
+    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
 
-    expect(subject.getAttribute('role'))
-      .to.equal('tabpanel')
+    const tabPanel = await find('[role="tabpanel"]')
+    expect(tabPanel.getAttribute('role')).to.equal('tabpanel')
   })
 })

@@ -34,7 +34,6 @@ module.exports = {
     'packages/ui-forms/',
     'packages/ui-media-player/',
     'packages/ui-overlays/',
-    'packages/ui-tabs/',
     'packages/ui-themes/',
     'packages/ui-toggle-details/'
   ]

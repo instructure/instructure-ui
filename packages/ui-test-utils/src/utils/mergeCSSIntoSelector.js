@@ -27,7 +27,7 @@ export function mergeCSSIntoSelector (selectorString, selectorObj = {}) {
 
   css.push(selectorString)
 
-  selector.css  = css.join('')
+  selector.css = css.join('')
 
   return selector
 }

@@ -37,6 +37,7 @@ import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentT
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import warning from '@instructure/ui-utils/lib/warning'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import testable from '@instructure/ui-testable'
 
 import Tab from './Tab'
 import TabPanel from './TabPanel'
@@ -50,6 +51,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 export default class TabList extends Component {
   static propTypes = {

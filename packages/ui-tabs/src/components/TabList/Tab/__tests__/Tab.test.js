@@ -23,152 +23,163 @@
  */
 
 import React from 'react'
+import { expect, find, mount, stub } from '@instructure/ui-test-utils'
+
 import Tab from '../index'
 
-describe('<Tab />', () => {
-  const testbed = new Testbed(
-    <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
-  )
+describe('<Tab />', async () => {
+  it('should render children', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
+    )
 
-  it('should render children', () => {
-    const subject = testbed.render()
+    const tab = await find('[role="tab"]')
 
-    expect(subject.text())
-      .to.equal('Tab Label')
+    expect(tab.getTextContent()).to.equal('Tab Label')
   })
 
-  it('should have appropriate role attribute', () => {
-    const subject = testbed.render()
-
-    expect(subject.getAttribute('role'))
-      .to.equal('tab')
+  it('should have appropriate role attribute', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
+    )
+    expect(await find('[role="tab"]')).to.exist()
   })
 
-  it('should have appropriate aria attributes', () => {
-    const subject = testbed.render()
+  it('should have appropriate aria attributes', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
+    )
 
-    expect(subject.getAttribute('aria-selected'))
-      .to.not.exist()
-    expect(subject.getAttribute('aria-disabled'))
-      .to.not.exist()
+    const tab = await find('[role="tab"]')
+
+    expect(tab.getAttribute('aria-selected')).to.not.exist()
+    expect(tab.getAttribute('aria-disabled')).to.not.exist()
   })
 
-  it('should set the aria-selected attribute', () => {
-    const subject = testbed.render({
-      selected: true
-    })
-
-    expect(subject.getAttribute('aria-selected'))
-      .to.equal('true')
+  it('should set the aria-selected attribute', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
+    )
+    expect(await find('[role="tab"][aria-selected="true"]')).to.exist()
   })
 
-  it('should set the aria-disabled attribute', () => {
-    const subject = testbed.render({
-      disabled: true
-    })
-
-    expect(subject.getAttribute('aria-disabled'))
-      .to.equal('true')
+  it('should set the aria-disabled attribute', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
+    )
+    expect(await find('[role="tab"][aria-disabled="true"]')).to.exist()
   })
 
-  it('should set the tabindex to 0 when selected', () => {
-    const subject = testbed.render({
-      selected: true
-    })
-
-    expect(subject.getAttribute('tabindex'))
-      .to.equal('0')
+  it('should set the tabindex to 0 when selected', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
+    )
+    expect(await find('[role="tab"][tabindex="0"]')).to.exist()
   })
 
-  it('should set the tabindex to -1 when not selected', () => {
-    const subject = testbed.render({
-      selected: false
-    })
-
-    expect(subject.getAttribute('tabindex'))
-      .to.equal('-1')
+  it('should set the tabindex to -1 when not selected', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
+    )
+    expect(await find('[role="tab"][tabindex="-1"]')).to.exist()
   })
 
-  it('should remove the tabindex attribute when disabled', () => {
-    const subject = testbed.render({
-      disabled: true
-    })
+  it('should remove the tabindex attribute when disabled', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
+    )
 
-    expect(subject.getAttribute('tabindex'))
-      .to.not.exist()
+    const tab = await find('[role="tab"]')
+
+    expect(tab.getAttribute('tabindex')).to.not.exist()
   })
 
-  it('should call onClick when clicked', () => {
-    const onClick = testbed.stub()
+  it('should call onClick when clicked', async () => {
+    const onClick = stub()
     const index = 2
 
-    const subject = testbed.render({
-      index,
-      onClick
-    })
+    await mount(
+      <Tab id="foo" index={index} controls="foo-panel" onClick={onClick}>Tab Label</Tab>
+    )
 
-    subject.simulate('click')
+    const tab = await find('[role="tab"]')
+    await tab.click()
 
     expect(onClick).to.have.been.called()
-    expect(onClick.args[0][0]).to.equal(2)
+    expect(onClick.args[0][0]).to.equal(index)
   })
 
-  it('should NOT call onClick when clicked and tab is disabled', () => {
-    const onClick = testbed.stub()
+  it('should NOT call onClick when clicked and tab is disabled', async () => {
+    const onClick = stub()
 
-    const subject = testbed.render({
-      disabled: true,
-      onClick
-    })
-
-    subject.simulate('click')
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} disabled>
+        Tab Label
+      </Tab>
+    )
+    const tab = await find('[role="tab"]')
+    await tab.click()
 
     expect(onClick).to.not.have.been.called()
   })
 
-  it('should call onKeyDown when keys are pressed', () => {
-    const onKeyDown = testbed.stub()
+  it('should call onKeyDown when keys are pressed', async () => {
+    const onKeyDown = stub()
     const index = 2
 
-    const subject = testbed.render({
-      index,
-      onKeyDown
-    })
+    await mount(
+      <Tab id="foo" index={index} controls="foo-panel" onKeyDown={onKeyDown}>
+        Tab Label
+      </Tab>
+    )
 
-    subject.keyDown('enter')
+    const tab = await find('[role="tab"]')
+    await tab.keyDown('enter')
 
     expect(onKeyDown).to.have.been.called()
-    expect(onKeyDown.args[0][0]).to.equal(2)
+    expect(onKeyDown.args[0][0]).to.equal(index)
   })
 
-  it('should NOT call onKeyDown when keys are pressed and tab is disabled', () => {
-    const onKeyDown = testbed.stub()
+  it('should NOT call onKeyDown when keys are pressed and tab is disabled', async () => {
+    const onKeyDown = stub()
 
-    const subject = testbed.render({
-      disabled: true,
-      onKeyDown
-    })
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" onKeyDown={onKeyDown} disabled>
+        Tab Label
+      </Tab>
+    )
+    const tab = await find('[role="tab"]')
 
-    subject.keyDown('enter')
+    let error = false
+    try {
+      await tab.keyDown('enter')
+    } catch (e) {
+      error = true
+    }
 
+    expect(error).to.be.true()
     expect(onKeyDown).to.not.have.been.called()
   })
 
-  it('should focus itself when focus is set and it is selected', () => {
-    const subject = testbed.render({
-      selected: true,
-      focus: true
-    })
+  it('should focus itself when focus is set and it is selected', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" selected focus>
+        Tab Label
+      </Tab>
+    )
+    const tab = await find('[role="tab"]')
 
-    expect(subject.focused()).to.be.true()
+    expect(tab.focused()).to.be.true()
   })
 
-  it('should not focus itself when it is not selected', () => {
-    const subject = testbed.render({
-      selected: false,
-      focus: true
-    })
+  it('should not focus itself when it is not selected', async () => {
+    await mount(
+      <Tab id="foo" index={0} controls="foo-panel" selected={false} focus>
+        Tab Label
+      </Tab>
+    )
+    const tab = await find('[role="tab"]')
 
-    expect(subject.focused()).to.be.false()
+    expect(tab.focused()).to.be.false()
   })
 })
