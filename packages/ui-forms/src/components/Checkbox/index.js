@@ -254,7 +254,6 @@ class Checkbox extends Component {
       onMouseOver,
       onMouseOut,
       indeterminate,
-      checked,
       variant
     } = this.props
 
@@ -286,8 +285,7 @@ class Checkbox extends Component {
           type="checkbox"
           ref={(c) => { this._input = c }}
           disabled={disabled || readOnly ? 'true' : null}
-          aria-disabled={disabled || readOnly ? 'true' : null}
-          aria-checked={(indeterminate) ? 'mixed' : (checked) ? 'true' : 'false'}
+          aria-checked={indeterminate ? 'mixed' : null}
           className={styles.input}
           onChange={this.handleChange}
           onKeyDown={createChainedFunction(onKeyDown, this.handleKeyDown)}
