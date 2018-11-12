@@ -22,8 +22,6 @@
  * SOFTWARE.
  */
 
-import { alpha } from '@instructure/ui-themeable/lib/utils/color'
-
 export default function generator ({ colors, borders, spacing, typography, forms }) {
   return {
     fontFamily: typography.fontFamily,
@@ -42,16 +40,12 @@ export default function generator ({ colors, borders, spacing, typography, forms
 
     padding: spacing.small,
 
-    focusBorderTopColor: colors.borderBrand,
-    focusBorderRightColor: colors.borderBrand,
-    focusBorderBottomColor: colors.borderBrand,
-    focusBorderLeftColor: colors.borderBrand,
-    focusOutlineColor: alpha(colors.borderBrand, 50),
-    boxShadowColor: 'transparent',
+    focusOutlineColor: colors.borderBrand,
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineStyle: borders.style,
 
     errorBorderColor: colors.borderDanger,
-    errorOutlineColor: alpha(colors.borderDanger, 50),
-    boxShadowErrorColor: 'transparent',
+    errorOutlineColor: colors.borderDanger,
 
     placeholderColor: colors.textDark,
 
@@ -69,10 +63,6 @@ export default function generator ({ colors, borders, spacing, typography, forms
 generator.canvas = function (variables) {
   return {
     color: variables['ic-brand-font-color-dark'],
-    focusBorderTopColor: variables['ic-brand-primary'],
-    focusBorderRightColor: variables['ic-brand-primary'],
-    focusBorderBottomColor: variables['ic-brand-primary'],
-    focusBorderLeftColor: variables['ic-brand-primary'],
-    focusOutlineColor: alpha(variables['ic-brand-primary'], 50)
+    focusOutlineColor: variables['ic-brand-primary']
   }
 }

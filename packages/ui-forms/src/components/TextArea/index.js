@@ -249,6 +249,10 @@ class TextArea extends Component {
     }
   }
 
+  handleContainerRef = (node) => {
+    this._container = node
+  }
+
   get minHeight () {
     return this._textarea.style.minHeight
   }
@@ -330,11 +334,13 @@ class TextArea extends Component {
         id={this.id}
         ref={(el) => { this._node = el }}
       >
-        {!autoGrow ? textarea : (
-          <div ref={(el) => { this._container = el }}>
-            { textarea }
-          </div>
-        )}
+        <div
+          className={styles.layout}
+          ref={this.handleContainerRef}
+        >
+          { textarea }
+          { (!disabled && !readOnly) ? <span className={styles.outline} aria-hidden="true"></span> : null }
+        </div>
       </FormField>
     )
   }
