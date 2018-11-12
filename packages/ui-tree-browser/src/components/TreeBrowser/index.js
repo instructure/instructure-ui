@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
+import IconFolder from '@instructure/ui-icons/lib/Line/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Line/IconDocument'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'

@@ -23,9 +23,9 @@
  */
 
 import React from 'react'
-import IconFolder from '@instructure/ui-icons/lib/Solid/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Solid/IconDocument'
-import IconPlus from '@instructure/ui-icons/lib/Solid/IconPlus'
+import IconFolder from '@instructure/ui-icons/lib/Line/IconFolder'
+import IconDocument from '@instructure/ui-icons/lib/Line/IconDocument'
+import IconPlus from '@instructure/ui-icons/lib/Line/IconPlus'
 import TreeBrowser from '../index'
 
 describe('<TreeBrowser /> in ui-core', () => {

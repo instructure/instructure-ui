@@ -58,6 +58,7 @@
   display: flex;
   align-items: center;
   line-height: 1;
+  min-height: 2rem;
 }
 
 .icon,
@@ -112,7 +113,7 @@
     padding: calc(var(--baseSpacingSmall) / 3) var(--baseSpacingSmall);
 
     &::before {
-      width: calc(var(--baseSpacingSmall) * 1.5);
+      width: calc(var(--baseSpacingSmall) - 0.0625rem);
     }
 
     .icon {
@@ -146,7 +147,7 @@
     padding: calc(var(--baseSpacingMedium) / 3) var(--baseSpacingMedium);
 
     &::before {
-      width: calc(var(--baseSpacingMedium) * 1.5);
+      width: calc(var(--baseSpacingMedium) - 0.0625rem);
     }
 
     .icon {
@@ -180,7 +181,7 @@
     padding: calc(var(--baseSpacingLarge) / 3) var(--baseSpacingLarge);
 
     &::before {
-      width: calc(var(--baseSpacingLarge) * 1.5);
+      width: calc(var(--baseSpacingLarge) - 0.0625rem);
     }
 
     .icon {

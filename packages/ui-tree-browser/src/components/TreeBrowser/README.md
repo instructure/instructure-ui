@@ -73,9 +73,9 @@ class Example extends React.Component {
     return (
       <TreeBrowser
         variant="indent"
-        collectionIcon={IconUser.Solid}
-        collectionIconExpanded={IconX.Solid}
-        itemIcon={IconUser.Solid}
+        collectionIcon={IconUser.Line}
+        collectionIconExpanded={IconX.Line}
+        itemIcon={IconUser.Line}
         selectionType="single"
         collections={{
           1: { id: 1, name: "Grade 1", collections: [2,3,6] },

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import TreeBrowser from '../index'
 
 import TreeBrowserLocator from '../locator'

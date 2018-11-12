@@ -32,9 +32,9 @@
 
 .folderTree .list::before {
   content: "";
-  height: 100%;
   position: absolute;
-  bottom: 0;
+  top: 0.25rem;
+  bottom: 1.1875rem;
   offset-inline-start: 0;
   offset-inline-end: auto;
   transform: scaleY(0.01);
