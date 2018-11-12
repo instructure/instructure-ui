@@ -464,36 +464,43 @@ class NumberInput extends Component {
         id={this.id}
       >
         <span
-          className={classnames(styles.inputContainer, {
+          className={classnames(styles.inputWidth, {
             [styles.invalid]: this.invalid,
-            [styles.disabled]: disabled,
-            [styles[size]]: size,
             [styles.focus]: this.state.focus,
             [styles.inline]: inline
           })}
           style={width ? { width } : null}
         >
-          <input
-            {...omitProps(this.props, NumberInput.propTypes)}
-            className={styles.input}
-            onChange={this.handleChange}
-            onKeyDown={this.handleKeyDown}
-            onFocus={this.handleFocus}
-            onBlur={this.handleBlur}
-            type="text"
-            inputMode="numeric"
-            value={this.conditionalFormat(value)}
-            defaultValue={this.defaultValue}
-            placeholder={placeholder}
-            ref={this.handleRef}
-            id={this.id}
-            required={required}
-            aria-required={required}
-            aria-invalid={this.invalid ? 'true' : null}
-            disabled={disabled || readOnly}
-            aria-disabled={disabled || readOnly ? 'true' : null}
-          />
-          {showArrows ? this.renderArrows() : null}
+          <span
+            className={classnames(styles.inputContainer, {
+              [styles.invalid]: this.invalid,
+              [styles.disabled]: disabled,
+              [styles[size]]: size,
+              [styles.focus]: this.state.focus,
+            })}
+          >
+            <input
+              {...omitProps(this.props, NumberInput.propTypes)}
+              className={styles.input}
+              onChange={this.handleChange}
+              onKeyDown={this.handleKeyDown}
+              onFocus={this.handleFocus}
+              onBlur={this.handleBlur}
+              type="text"
+              inputMode="numeric"
+              value={this.conditionalFormat(value)}
+              defaultValue={this.defaultValue}
+              placeholder={placeholder}
+              ref={this.handleRef}
+              id={this.id}
+              required={required}
+              aria-required={required}
+              aria-invalid={this.invalid ? 'true' : null}
+              disabled={disabled || readOnly}
+              aria-disabled={disabled || readOnly ? 'true' : null}
+            />
+            {showArrows ? this.renderArrows() : null}
+          </span>
         </span>
       </FormField>
     )
