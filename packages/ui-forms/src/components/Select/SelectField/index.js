@@ -620,46 +620,53 @@ class SelectField extends Component {
           style={{
             width: width || 'auto'
           }}
-          ref={this.handleInputContainerRef}
-          className={classnames(styles.inputContainer, {
+          className={classnames(styles.inputWidth, {
             [styles.invalid]: this.invalid,
-            [styles.disabled]: disabled,
-            [styles[size]]: size,
             [styles.focus]: this.state.focus
           })}
         >
-          {children}
-          <span className={styles.inputLayout}>
-            {selectedOption && this.renderIcon()}
-            <input
-              {...inputProps}
-              id={this.id}
-              className={classnames(styles.input, {
-                [styles.editable]: editable
-              })}
-              onFocus={this.handleFocus}
-              onChange={editable ? this.handleChange : null}
-              onKeyDown={this.handleKeyDown}
-              onKeyUp={this.handleKeyUp}
-              onBlur={this.handleBlur}
-              type="text"
-              ref={createChainedFunction(this.props.inputRef, this.handleInputRef)}
-              role="combobox"
-              aria-expanded={this.expanded}
-              aria-owns={this.expanded ? this._optionsId : null}
-              aria-describedby={this._assistId}
-              aria-controls={this.expanded ? this._optionsId : null}
-              aria-autocomplete={editable ? 'list' : null}
-              aria-haspopup="true"
-              autoComplete={editable ? 'off' : null}
-              required={required}
-              aria-required={required}
-              aria-invalid={this.invalid ? 'true' : null}
-              readOnly={!editable}
-              disabled={disabled || readOnly}
-              aria-disabled={disabled || readOnly ? 'true' : null}
-            />
-            <IconArrowDown className={styles.icon} />
+          <span
+            ref={this.handleInputContainerRef}
+            className={classnames(styles.inputContainer, {
+              [styles.invalid]: this.invalid,
+              [styles.disabled]: disabled,
+              [styles[size]]: size,
+              [styles.focus]: this.state.focus
+            })}
+          >
+            {children}
+            <span className={styles.inputLayout}>
+              {selectedOption && this.renderIcon()}
+              <input
+                {...inputProps}
+                id={this.id}
+                className={classnames(styles.input, {
+                  [styles.editable]: editable
+                })}
+                onFocus={this.handleFocus}
+                onChange={editable ? this.handleChange : null}
+                onKeyDown={this.handleKeyDown}
+                onKeyUp={this.handleKeyUp}
+                onBlur={this.handleBlur}
+                type="text"
+                ref={createChainedFunction(this.props.inputRef, this.handleInputRef)}
+                role="combobox"
+                aria-expanded={this.expanded}
+                aria-owns={this.expanded ? this._optionsId : null}
+                aria-describedby={this._assistId}
+                aria-controls={this.expanded ? this._optionsId : null}
+                aria-autocomplete={editable ? 'list' : null}
+                aria-haspopup="true"
+                autoComplete={editable ? 'off' : null}
+                required={required}
+                aria-required={required}
+                aria-invalid={this.invalid ? 'true' : null}
+                readOnly={!editable}
+                disabled={disabled || readOnly}
+                aria-disabled={disabled || readOnly ? 'true' : null}
+              />
+              <IconArrowDown className={styles.icon} />
+            </span>
           </span>
         </span>
         <Position

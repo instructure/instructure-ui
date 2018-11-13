@@ -1,35 +1,53 @@
 /* stylelint-disable selector-max-class */
 
+.inputWidth {
+  display: block;
+  position: relative;
+
+  &::before {
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: calc(var(--borderRadius) * 1.5);
+    transition: all 0.2s;
+
+    /* properties to transition on :focus */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  &.focus::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.focus.invalid::before {
+    border-color: var(--errorOutlineColor);
+  }
+}
+
 .inputContainer {
   box-sizing: border-box;
   display: flex;
   flex-wrap: wrap;
-  width: 100%;
   min-width: 0.0625rem;
   background: var(--background);
   margin: 0;
-  transition: all 0.2s ease-out;
-  outline: 0.1875rem solid transparent;
-  outline-offset: -0.5rem;
   overflow: hidden;
   font-family: var(--fontFamily);
   border: var(--borderWidth) var(--borderStyle) var(--borderColor);
   border-radius: var(--borderRadius);
 
-  &.focus {
-    border-color: var(--focusBorderColor);
-    outline: 0.1875rem solid var(--focusOutlineColor);
-    outline-offset: -0.1875rem;
-    box-shadow: initial;
-  }
-
-  &.invalid {
+  &.invalid,
+  &.invalid.focus {
     border-color: var(--errorBorderColor);
-
-    &.focus {
-      border-color: var(--errorBorderColor);
-      outline-color: var(--errorOutlineColor);
-    }
   }
 
   &.disabled {
