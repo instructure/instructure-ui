@@ -787,4 +787,15 @@ render(
   </div>
 )
 ```
+### Guidelines 
 
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>When implementing Select that allows multiple values, be sure to add AccessibleContent so that it announces what action will be taken when screen readers interact with the tags in the form</FigureItem>
+  </Figure>
+</Guidelines>
+```
