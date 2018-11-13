@@ -21,18 +21,28 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import {
+  find,
+  locator,
+  mergeCSSIntoSelector,
+  parseQueryArguments
+} from '@instructure/ui-test-utils'
 
-module.exports = {
-  files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/media-capture/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-themes/'
-  ]
-}
+import ToggleDetails from './index'
+
+const toggleSelector = '[aria-expanded]'
+const contentSelector = '[id]'
+
+export default locator(ToggleDetails.locator, {
+  click: async (element, ...args) => {
+    return (await find(element, toggleSelector)).click(...args)
+  },
+  findToggle: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, mergeCSSIntoSelector(toggleSelector, selector), options)
+  },
+  findContent: async (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, mergeCSSIntoSelector(contentSelector, selector), options)
+  }
+})

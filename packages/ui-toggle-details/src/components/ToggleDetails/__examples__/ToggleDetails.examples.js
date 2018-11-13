@@ -22,17 +22,24 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/media-capture/',
-    'packages/ui-container/',
-    'packages/ui-core/',
-    'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-themes/'
-  ]
+import React from 'react'
+
+export default {
+  sections: 'variant',
+  permutations: [
+    'variant',
+    'size',
+    'border',
+    'defaultExpanded',
+    'iconPosition',
+    'fluidWidth'
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        summary: 'This is the summary',
+        children: <span>hello content</span>
+      }
+    }
+  }
 }

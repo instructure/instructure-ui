@@ -37,6 +37,7 @@ import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
+import testable from '@instructure/ui-testable'
 
 import Expandable from '../Expandable'
 
@@ -45,6 +46,7 @@ import Expandable from '../Expandable'
 category: components
 ---
 **/
+@testable()
 class ToggleGroup extends Component {
   static propTypes = {
     /**

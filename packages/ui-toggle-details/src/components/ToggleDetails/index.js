@@ -36,6 +36,8 @@ import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import testable from '@instructure/ui-testable'
+
 import Expandable from '../Expandable'
 
 import styles from './styles.css'
@@ -46,6 +48,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class ToggleDetails extends Component {
   static propTypes = {

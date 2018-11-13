@@ -23,129 +23,235 @@
  */
 
 import React from 'react'
-import IconAdd from '@instructure/ui-icons/lib/Line/IconAdd'
-import IconEnd from '@instructure/ui-icons/lib/Line/IconEnd'
-import View from '@instructure/ui-layout/lib/components/View'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import ToggleGroup from '../index'
-
-const TOGGLE = 'button'
-const CONTENT = '[id]'
+import ToggleGroupLocator from '../locator'
 
 describe('<ToggleGroup />', () => {
-  const testbed = new Testbed(
-    <ToggleGroup
-      transition={false}
-      summary="This is the summary section"
-      toggleLabel="This is the toggleLabel"
-    >
-      This is the details section
-    </ToggleGroup>
-  )
+  it('should show its summary and hide its children by default', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+      >
+        This is the details section
+      </ToggleGroup>
+    )
 
-  it('should show its summary and hide its children by default', () => {
-    const subject = testbed.render()
+    const toggleGroup = await ToggleGroupLocator.find()
 
-    expect(subject.text()).to.contain('This is the summary section')
-    expect(subject.text()).not.to.contain('This is the details section')
+    expect(toggleGroup.getTextContent()).to.contain('This is the summary section')
+    expect(toggleGroup.getTextContent()).not.to.contain('This is the details section')
   })
 
-  it('should render with children showing with the defaultExpanded prop', () => {
-    const subject = testbed.render({ defaultExpanded: true })
-    const toggle = subject.find(TOGGLE)
+  it('should render with children showing with the defaultExpanded prop', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+        defaultExpanded
+      >
+        This is the details section
+      </ToggleGroup>
+    )
+    const toggleGroup = await ToggleGroupLocator.find()
+    const toggle = await toggleGroup.findToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
-    expect(subject.text()).to.contain('This is the details section')
+    expect(toggleGroup.getTextContent()).to.contain('This is the details section')
   })
 
-  it('should have an aria-controls attribute', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
-    const content = subject.find(CONTENT)
+  it('should have an aria-controls attribute', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+      >
+        This is the details section
+      </ToggleGroup>
+    )
 
-    expect(toggle.getAttribute('aria-controls')).to
-      .equal(content.getAttribute('id'))
+    const toggleGroup = await ToggleGroupLocator.find()
+    const toggle = await toggleGroup.findToggle()
+    const content = await toggleGroup.findContent()
+
+    expect(toggle.getAttribute('aria-controls')).to.equal(content.getAttribute('id'))
   })
 
-  it('should have an aria-expanded attribute', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
+  it('should have an aria-expanded attribute', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+      >
+        This is the details section
+      </ToggleGroup>
+    )
+
+    const toggleGroup = await ToggleGroupLocator.find()
+    const toggle = await toggleGroup.findToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
-  it('should toggle on click events', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
+  it('should toggle on click events', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+      >
+        This is the details section
+      </ToggleGroup>
+    )
 
-    toggle.simulate('click')
+    const toggleGroup = await ToggleGroupLocator.find()
+    await toggleGroup.click()
+
+    const toggle = await toggleGroup.findToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
   })
 
-  it('should call onToggle on click events', () => {
-    const onToggle = testbed.stub()
-    const subject = testbed.render({ expanded: false, onToggle })
-
-    subject.find(TOGGLE).simulate('click')
-
-    expect(onToggle.firstCall.args[0].type).to.equal('click')
-    expect(onToggle.firstCall.args[1]).to.eql(true)
-  })
-
-  it('should update the toggle screenreader label based on the expanded state', () => {
-    const subject = testbed.render({
-      toggleLabel: function (expanded) {
-        if (expanded) {
-          return 'Hide content'
-        } else {
-          return 'Show content'
-        }
-      }
+  it('should call onToggle on click events', async () => {
+    const onToggle = spy((e) => {
+      e.persist()
     })
-    const toggle = subject.find(TOGGLE)
-    expect(toggle.text()).to.equal('Show content')
 
-    toggle.simulate('click')
-    expect(toggle.text()).to.equal('Hide content')
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+        expanded={false}
+        onToggle={onToggle}
+      >
+        This is the details section
+      </ToggleGroup>
+    )
+    const toggleGroup = await ToggleGroupLocator.find()
+    await toggleGroup.click()
+
+    const { args } = onToggle.firstCall
+
+    expect(args[0].type).to.equal('click')
+    expect(args[1]).to.equal(true)
   })
 
-  it('should accept custom icons', () => {
-    const subject = testbed.render({
-      icon: IconAdd,
-      iconExpanded: IconEnd
-    })
-    expect(subject.find('IconAdd').length).to.eql(1)
-    expect(subject.find('IconEnd').length).to.eql(0)
+  it('should update the toggle screenreader label based on the expanded state', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel={expanded => expanded ? 'Hide content' : 'Show content'}
+      >
+        This is the details section
+      </ToggleGroup>
+    )
+    const toggleGroup = await ToggleGroupLocator.find()
+    const toggle = await toggleGroup.findToggle()
 
-    const toggle = subject.find(TOGGLE)
-    toggle.simulate('click')
-    expect(subject.find('IconAdd').length).to.eql(0)
-    expect(subject.find('IconEnd').length).to.eql(1)
+    expect(toggle.getTextContent()).to.equal('Show content')
+
+    await toggleGroup.click()
+
+    expect(toggle.getTextContent()).to.equal('Hide content')
   })
 
-  it('should render without a border', () => {
-    const subject = testbed.render({
-      border: false
-    })
-    expect(subject.find(View).first().props().borderWidth).to.equal('none')
+  it('should accept custom icons', async () => {
+    const Icon = (
+      <svg height="100" width="100">
+        <title>Icon collapsed</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    const IconExpanded = (
+      <svg height="50" width="50">
+        <title>Icon expanded</title>
+        <circle cx="25" cy="25" r="20" />
+      </svg>
+    )
+
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+        icon={() => Icon}
+        iconExpanded={() => IconExpanded}
+      >
+        This is the details section
+      </ToggleGroup>
+    )
+
+    const toggleGroup = await ToggleGroupLocator.find()
+
+    expect(await toggleGroup.find({
+      tag: 'svg',
+      title: 'Icon collapsed'
+    })).to.exist()
+
+    expect(await toggleGroup.find({
+      tag: 'svg',
+      title: 'Icon expanded',
+      expectEmpty: true
+    })).to.not.exist()
+
+    await toggleGroup.click()
+
+    expect(await toggleGroup.find({
+      tag: 'svg',
+      title: 'Icon collapsed',
+      expectEmpty: true
+    })).to.not.exist()
+
+    expect(await toggleGroup.find({
+      tag: 'svg',
+      title: 'Icon expanded'
+    })).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+      >
+        This is the details section
+      </ToggleGroup>
+    )
 
-    subject.should.be.accessible(done, {
-      ignores: [
-        'aria-allowed-role' // TODO remove this when we fix the issue
-      ]
-    })
+    const toggleGroup = await ToggleGroupLocator.find()
+    expect(await toggleGroup.accessible()).to.be.true()
   })
 
-  it('focuses with the focus helper', () => {
-    const subject = testbed.render()
+  it('focuses with the focus helper', async () => {
+    let toggleRef = null
+    await mount(
+      <ToggleGroup
+        transition={false}
+        summary="This is the summary section"
+        toggleLabel="This is the toggleLabel"
+        componentRef={(el) => { toggleRef = el }}
+      >
+        This is the details section
+      </ToggleGroup>
+    )
 
-    subject.instance().focus()
+    const toggleGroup = await ToggleGroupLocator.find()
+    const toggle = await toggleGroup.findToggle()
 
-    expect(subject.instance().focused).to.be.true()
+    expect(toggleRef.focused).to.be.false()
+    toggleRef.focus()
+
+    expect(toggleRef.focused).to.be.true()
+    expect(toggle.getDOMNode()).to.equal(document.activeElement)
   })
 })

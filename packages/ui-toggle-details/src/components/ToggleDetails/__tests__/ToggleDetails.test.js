@@ -23,95 +23,127 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 
 import ToggleDetails from '../index'
-import styles from '../styles.css'
+import ToggleDetailsLocator from '../locator'
 
-const TOGGLE = 'button'
-const CONTENT = '[id]'
+describe('<ToggleDetails />', async () => {
+  it('should hide its content', async () => {
+    await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
 
-describe('<ToggleDetails />', () => {
-  const testbed = new Testbed(
-    <ToggleDetails summary="Click me">Content</ToggleDetails>
-  )
-
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    expect(await ToggleDetailsLocator.find({
+      contains: 'Content',
+      expectEmpty: true
+    })).to.not.exist()
   })
 
-  it('should hide its content', () => {
-    const subject = testbed.render()
+  it('should place the icon after the summary when prop is set', async () => {
+    await mount(
+      <ToggleDetails
+        iconPosition="end"
+        summary="Click me"
+      >
+        Content
+      </ToggleDetails>
+    )
 
-    expect(subject.text()).not.to.contain('Content')
-  })
+    const toggleDetails = await ToggleDetailsLocator.find()
 
-  it('should place the icon after the summary when prop is set', () => {
-    const subject = testbed.render({
-      iconPosition: 'end',
-      summary: <span>Click me</span>
+    const summary = await toggleDetails.find({
+      contains: "Click me"
     })
-    const summary = subject.find(`.${styles.summary}`)
-    expect(summary.childAt(1).hasClass(styles.icon)).to.be.true()
+
+    expect(summary.getDOMNode().previousSibling).to.not.exist()
   })
 
-  it('should have an aria-controls attribute', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
-    const content = subject.find(CONTENT)
+  it('should have an aria-controls attribute', async () => {
+    await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
-    expect(toggle.getAttribute('aria-controls')).to
-      .equal(content.getAttribute('id'))
+    const toggleDetails = await ToggleDetailsLocator.find()
+    const toggle = await toggleDetails.findToggle()
+    const content = await toggleDetails.findContent({ visible: false })
+
+    expect(toggle.getAttribute('aria-controls')).to.equal(content.getAttribute('id'))
   })
 
-  it('should have an aria-expanded attribute', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
+  it('should have an aria-expanded attribute', async () => {
+    await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
+
+    const toggleDetails = await ToggleDetailsLocator.find()
+    const toggle = await toggleDetails.findToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
   })
 
-  it('should toggle on click events', () => {
-    const subject = testbed.render()
-    const toggle = subject.find(TOGGLE)
+  it('should toggle on click events', async () => {
+    await mount(<ToggleDetails summary="Click me">Details</ToggleDetails>)
 
-    toggle.simulate('click')
-
-    expect(toggle.getAttribute('aria-expanded')).to.equal('true')
-  })
-
-  it('should call onToggle on click events', () => {
-    const onToggle = testbed.stub()
-    const subject = testbed.render({ expanded: false, onToggle })
-
-    subject.find(TOGGLE).simulate('click')
-
-    expect(onToggle.firstCall.args[0].type).to.equal('click')
-    expect(onToggle.firstCall.args[1]).to.eql(true)
-  })
-
-  it('should be initialized by defaultExpanded prop', () => {
-    const subject = testbed.render({ defaultExpanded: true })
-    const toggle = subject.find(TOGGLE)
+    const toggleDetails = await ToggleDetailsLocator.find()
+    const toggle = await toggleDetails.findToggle()
+    await toggleDetails.click()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
-    expect(subject.text()).to.contain('Content')
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
+  it('should call onToggle on click events', async () => {
+    const onToggle = spy((e) => {
+      e.persist()
     })
+
+    await mount(
+      <ToggleDetails
+        summary="Click me"
+        expanded={false}
+        onToggle={onToggle}
+      >
+        Details
+      </ToggleDetails>
+    )
+
+    const toggleDetails = await ToggleDetailsLocator.find()
+    await toggleDetails.click()
+
+    const { args } = onToggle.firstCall
+
+    expect(args[0].type).to.equal('click')
+    expect(args[1]).to.be.true()
   })
 
-  it('focuses with the focus helper', () => {
-    const subject = testbed.render()
+  it('should be initialized by defaultExpanded prop', async () => {
+    await mount(<ToggleDetails summary="Click me" defaultExpanded>Content</ToggleDetails>)
 
-    subject.instance().focus()
+    const toggleDetails = await ToggleDetailsLocator.find()
 
-    expect(subject.instance().focused).to.be.true()
+    expect(await toggleDetails.findToggle({ css: '[aria-expanded="true"]' })).to.exist()
+    expect(await toggleDetails.findContent({ contains: 'Content' })).to.exist()
+  })
+
+  it('should meet a11y standards', async () => {
+    await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
+    const toggleDetails = await ToggleDetailsLocator.find()
+    expect(await toggleDetails.accessible()).to.be.true()
+  })
+
+  it('focuses with the focus helper', async () => {
+    let toggleRef = null
+
+    await mount(
+      <ToggleDetails
+        summary="Click me"
+        componentRef={(el) => { toggleRef = el }}
+      >
+        Content
+      </ToggleDetails>
+    )
+
+    const toggleDetails = await ToggleDetailsLocator.find()
+    const toggle = await toggleDetails.findToggle()
+
+    expect(toggleRef.focused).to.be.false()
+    toggleRef.focus()
+
+    expect(toggleRef.focused).to.be.true()
+    expect(toggle.getDOMNode()).to.equal(document.activeElement)
   })
 })

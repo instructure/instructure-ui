@@ -23,76 +23,90 @@
  */
 
 import React from 'react'
+import { expect, mount, spy } from '@instructure/ui-test-utils'
 import Expandable from '../index.js'
 
-describe('<Expandable />', () => {
-  const testbed = new Testbed(
-    <Expandable />
-  )
-
-  let render
-  let renderSpy
-
-  beforeEach(() => {
-    renderSpy = testbed.spy()
-    render = (args) => { // eslint-disable-line react/display-name
-      renderSpy(args)
-      return <div>hello</div>
+describe('<Expandable />', async () => {
+  it('should set expanded to false by default', async () => {
+    const props = {
+      // eslint-disable-next-line react/display-name
+      render: () => <div>hello</div>
     }
-  })
+    const renderSpy = spy(props, 'render')
+    await mount(<Expandable {...props} />)
 
-  afterEach(() => {
-    render = null
-    renderSpy = null
-  })
-
-  it('should set expanded to false by default', () => {
-    testbed.render({render})
     const args = renderSpy.lastCall.args[0]
     expect(args.expanded).to.be.false()
   })
 
-  it('should correctly provide the aria-expanded attribute', () => {
-    testbed.render({
-      render
-    })
+  it('should correctly provide the aria-expanded attribute', async () => {
+    const props = {
+      // eslint-disable-next-line react/display-name
+      render: () => <div>hello</div>
+    }
+    const renderSpy = spy(props, 'render')
+
+    await mount(<Expandable {...props} />)
+
     const args = renderSpy.lastCall.args[0]
     const ariaExpanded = args.getToggleProps()['aria-expanded']
     expect(ariaExpanded).to.be.false()
   })
 
-  it('should provide the toggle and details with a shared, unique id', () => {
-    const subject = testbed.render({ render })
+  it('should provide the toggle and details with a shared, unique id', async () => {
+    const props = {
+      // eslint-disable-next-line react/display-name
+      render: () => <div>hello</div>
+    }
+    const renderSpy = spy(props, 'render')
+
+    await mount(<Expandable {...props} />)
 
     const args = renderSpy.lastCall.args[0]
     const toggleId = args.getToggleProps()['aria-controls']
     const detailsId = args.getDetailsProps()['id']
-    expect(toggleId).to.equal(subject.instance()._contentId)
-    expect(detailsId).to.equal(subject.instance()._contentId)
-    expect(toggleId === detailsId).to.be.true()
+
+    expect(toggleId).to.exist()
+    expect(detailsId).to.exist()
+
+    expect(toggleId).to.equal(detailsId)
   })
 
-  it('should call onToggle when onClick is called', () => {
-    const onToggle = testbed.spy()
+  it('should call onToggle when onClick is called', async () => {
+    const onToggleSpy = spy()
 
-    testbed.render({
-      expanded: false,
-      onToggle,
-      render
-    })
+    const props = {
+      // eslint-disable-next-line react/display-name
+      render: () => <div>hello</div>,
+      onToggle: onToggleSpy,
+      expanded: false
+    }
+    const renderSpy = spy(props, 'render')
+
+    await mount(
+      <Expandable {...props} />
+    )
+
     const args = renderSpy.lastCall.args[0]
     const onClick = args.getToggleProps().onClick
     onClick(new Event('click'))
 
-    expect(onToggle.firstCall.args[0].type).to.equal('click')
-    expect(onToggle.firstCall.args[1]).to.eql(true)
+    expect(onToggleSpy.firstCall.args[0].type).to.equal('click')
+    expect(onToggleSpy.firstCall.args[1]).to.be.true()
   })
 
-  it('should set expanded to true when defaultExpanded is true', () => {
-    testbed.render({
-      defaultExpanded: true,
-      render
-    })
+  it('should set expanded to true when defaultExpanded is true', async () => {
+    const props = {
+      // eslint-disable-next-line react/display-name
+      render: () => <div>hello</div>,
+      defaultExpanded: true
+    }
+    const renderSpy = spy(props, 'render')
+
+    await mount(
+      <Expandable {...props} />
+    )
+
     const args = renderSpy.lastCall.args[0]
     expect(args.expanded).to.be.true()
   })
