@@ -30,18 +30,22 @@ export default function generator ({ colors, typography, borders, spacing }) {
     fontWeight: typography.fontWeightNormal,
     color: colors.textBrand,
     textDecoration: 'none',
+
+    borderWidth: borders.widthSmall,
+    borderStyle: borders.style,
+    borderColor: colors.borderMedium,
+    borderRadius: borders.radiusMedium,
+
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineColor: colors.borderBrand,
+    focusOutlineStyle: borders.style,
+
     hoverColor: darken(colors.textBrand, 10),
     hoverTextDecoration: 'underline',
-    outlineWidth: borders.widthSmall,
-    outlineColor: 'transparent',
-    outlineStyle: borders.style,
-    outlineOffset: spacing.xxxSmall,
-    focusOutlineColor: 'transparent',
-    focusIconOutlineColor: colors.textBrand,
 
     colorInverse: colors.textLight,
-    focusInverseOutlineColor: 'transparent',
-    focusInverseIconOutlineColor: colors.textLight,
+    focusInverseOutlineColor: colors.borderLightest,
+    focusInverseIconOutlineColor: colors.borderLightest,
 
     iconPlusTextMargin: spacing.xxSmall
   }
@@ -51,7 +55,7 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
   return {
     textDecoration: 'underline',
     focusOutlineColor: colors.borderBrand,
-    focusInverseOutlineColor: colors.borderLight
+    focusInverseOutlineColor: colors.borderLightest
   }
 }
 
@@ -59,6 +63,7 @@ generator['canvas'] = function (variables) {
   return {
     color: variables['ic-link-color'],
     textDecoration: variables['ic-link-decoration'],
+    focusOutlineColor: variables['ic-brand-primary'],
     hoverColor: darken(variables['ic-link-color'], 10)
   }
 }

@@ -36,6 +36,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 import testable from '@instructure/ui-testable'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -145,6 +146,8 @@ class Link extends Component {
       iconPlacement
     } = this.props
 
+    const ie11 = Browser.msie && Browser.version > 10
+
     const ElementType = getElementType(Link, this.props)
 
     const classes = {
@@ -152,7 +155,8 @@ class Link extends Component {
       [styles.inverse]: variant === 'inverse',
       [styles.ellipsis]: ellipsis,
       [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.iconOnly]: icon && !this.hasVisibleChildren
+      [styles.iconOnly]: icon && !this.hasVisibleChildren,
+      [styles.ie11]: ie11
     }
 
     const role = onClick && as !== 'button' ? 'button' : null

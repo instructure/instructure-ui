@@ -3,6 +3,8 @@
 .root a.link:link,
 .root a.link:visited,
 .root button.link {
+  position: relative;
+  outline: none;
   cursor: pointer;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -11,22 +13,37 @@
   color: var(--color);
   text-decoration: var(--textDecoration);
   transition: color 0.2s;
-  outline: var(--outlineWidth) var(--outlineStyle) var(--outlineColor);
-  outline-offset: var(--outlineOffset); /* does not work in Edge or IE */
 
-  &:focus,
-  &:active {
-    outline: var(--outlineWidth) var(--outlineStyle) var(--focusOutlineColor);
+  &:not(.ie11)::before {
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: calc(var(--borderRadius) * 1.5);
+    transition: all 0.2s;
+
+    /* properties to transition on :focus */
+    opacity: 0;
+    transform: scale(0.95);
   }
 
-  &.iconOnly {
-    &:focus,
-    &:active {
-      outline: var(--outlineWidth) var(--outlineStyle) var(--focusIconOutlineColor);
+  &:focus {
+    &:not(.ie11)::before {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    &.ie11 {
+      outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
     }
   }
 
-  &:focus,
   &:hover,
   &:active {
     text-decoration: var(--hoverTextDecoration);
@@ -37,13 +54,10 @@
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
-  }
 
-  /*
-  * Ensures that button or link is always the event target.
-  */
-  * { /* stylelint-disable-line selector-max-universal */
-    pointer-events: none;
+    &::before {
+      opacity: 0;
+    }
   }
 }
 
@@ -53,21 +67,19 @@
 .root button.inverse {
   color: var(--colorInverse);
 
+  &:not(.ie11)::before {
+    border-color: var(--focusInverseOutlineColor);
+  }
+
   &:hover,
   &:focus,
   &:active {
     color: var(--colorInverse);
   }
 
-  &:focus,
-  &:active {
-    outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseOutlineColor);
-  }
-
-  &.iconOnly {
-    &:focus,
-    &:active {
-      outline: var(--outlineWidth) var(--outlineStyle) var(--focusInverseIconOutlineColor);
+  &:focus {
+    &.ie11 {
+      outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusInverseOutlineColor);
     }
   }
 }
