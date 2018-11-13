@@ -34,8 +34,6 @@ example: true
   }}
 />
 ```
->Be sure to add accessible screen reader content to clarify that the tag is dismissible.
-
 
 ### Disabled
 
@@ -103,4 +101,17 @@ example: true
   />
   tag.
 </p>
+```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>When implementing dismissable tags, be sure to add AccessibleContent to clarify that the tag is dismissible to screen readers</FigureItem>
+  </Figure>
+</Guidelines>
 ```
