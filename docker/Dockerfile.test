@@ -2,7 +2,7 @@ FROM instructure/node:10
 
 USER root
 
-ENV YARN_VERSION 1.12.1-1
+ENV YARN_VERSION 1.12.3-1
 ENV DOCKER_HOME /home/docker
 ENV APP_HOME /usr/src/app
 ENV YARN_CACHE $DOCKER_HOME/.cache/yarn
