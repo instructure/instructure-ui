@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.33.0"></a>
+# [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
+
+
+### Bug Fixes
+
+* **ui-forms:** fix aria-checked on checkbox ([42351cc](https://github.com/instructure/instructure-ui/commit/42351cc))
+
+
+### Features
+
+* **ui-forms:** update TextArea focus styles ([19ae400](https://github.com/instructure/instructure-ui/commit/19ae400))
+* **ui-forms:** update TextInput focus styles ([8acc504](https://github.com/instructure/instructure-ui/commit/8acc504))
+
+
+
+
+
 <a name="5.32.0"></a>
 # [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
 

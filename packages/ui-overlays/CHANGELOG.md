@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.33.0"></a>
+# [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
+
+
+### Bug Fixes
+
+* **ui-test-utils:** update clickable requirement ([ef9d12d](https://github.com/instructure/instructure-ui/commit/ef9d12d))
+
+
+### Features
+
+* **ui-overlays:** add test fixture for Popover, Tooltip, Position ([aea476a](https://github.com/instructure/instructure-ui/commit/aea476a))
+
+
+### Performance Improvements
+
+* **ui-overlays:** fix ref in Mask to work w/shallowCompare ([0a0a706](https://github.com/instructure/instructure-ui/commit/0a0a706))
+
+
+
+
+
 <a name="5.32.0"></a>
 # [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
 

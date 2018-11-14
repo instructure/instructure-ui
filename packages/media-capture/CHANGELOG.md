@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.33.0"></a>
+# [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
+
+
+### Features
+
+* **media-capture:** Allow MediaCapture to work without a webcam ([1fd0ba7](https://github.com/instructure/instructure-ui/commit/1fd0ba7))
+
+
+
+
+
 <a name="5.32.0"></a>
 # [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
 

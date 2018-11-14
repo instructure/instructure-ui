@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.33.0"></a>
+# [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
+
+
+### Bug Fixes
+
+* **ui-elements:** increase maxWidth of Pill ([ce94e5f](https://github.com/instructure/instructure-ui/commit/ce94e5f))
+* **ui-forms:** fix aria-checked on checkbox ([42351cc](https://github.com/instructure/instructure-ui/commit/42351cc))
+* **ui-layout:** FlexItems width fix ([b161d96](https://github.com/instructure/instructure-ui/commit/b161d96))
+* **ui-test-utils:** locator find/findAll return component root ([5866235](https://github.com/instructure/instructure-ui/commit/5866235))
+* **ui-test-utils:** update clickable requirement ([ef9d12d](https://github.com/instructure/instructure-ui/commit/ef9d12d))
+
+
+### Features
+
+* **media-capture:** Allow MediaCapture to work without a webcam ([1fd0ba7](https://github.com/instructure/instructure-ui/commit/1fd0ba7))
+* **ui-forms:** update TextArea focus styles ([19ae400](https://github.com/instructure/instructure-ui/commit/19ae400))
+* **ui-forms:** update TextInput focus styles ([8acc504](https://github.com/instructure/instructure-ui/commit/8acc504))
+* **ui-layout:** add omitViewProps function to View ([55556a4](https://github.com/instructure/instructure-ui/commit/55556a4))
+* **ui-overlays:** add test fixture for Popover, Tooltip, Position ([aea476a](https://github.com/instructure/instructure-ui/commit/aea476a))
+* **ui-presets:** Use major version for x-package deps ([47b793b](https://github.com/instructure/instructure-ui/commit/47b793b))
+* **ui-test-utils:** add tabbable, clickable helpers ([2fbe6c2](https://github.com/instructure/instructure-ui/commit/2fbe6c2))
+
+
+### Performance Improvements
+
+* **ui-overlays:** fix ref in Mask to work w/shallowCompare ([0a0a706](https://github.com/instructure/instructure-ui/commit/0a0a706))
+
+
+
+
+
 <a name="5.32.0"></a>
 # [5.32.0](https://github.com/instructure/instructure-ui/compare/v5.31.0...v5.32.0) (2018-10-31)
 

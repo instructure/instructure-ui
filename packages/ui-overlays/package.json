@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-overlays",
-  "version": "5.32.0",
+  "version": "5.33.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -33,7 +33,6 @@
     "@instructure/ui-portal": "^5",
     "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
-    "@instructure/ui-testable": "^5",
     "@instructure/ui-utils": "^5",
     "babel-runtime": "^6",
     "classnames": "^2",
