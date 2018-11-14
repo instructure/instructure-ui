@@ -22,9 +22,10 @@
  * SOFTWARE.
  */
 
-
+import { expect } from '@instructure/ui-test-utils'
 import getOptionId from '../getOptionId'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('getOptionId', () => {
   it('gives out null when no valid id or value is present', () => {
     expect(getOptionId()).to.equal(null)
@@ -48,3 +49,4 @@ describe('getOptionId', () => {
     expect(getOptionId({ id, value: 2 })).to.equal(id)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

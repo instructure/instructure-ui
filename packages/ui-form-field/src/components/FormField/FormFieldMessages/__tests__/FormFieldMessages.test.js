@@ -23,32 +23,40 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import FormFieldMessages from '../index'
 
 describe('<FormFieldMessages />', () => {
-  const testbed = new Testbed(<FormFieldMessages messages={[
-    { text: 'Invalid name', type: 'error' },
-    { text: 'Good job!', type: 'success' },
-    { text: 'Full name, first and last', type: 'hint' }
-  ]}
-  />)
+  it('should render', async () => {
+    const messages = [
+      { text: 'Invalid name', type: 'error' },
+      { text: 'Good job!', type: 'success' },
+      { text: 'Full name, first and last', type: 'hint' }
+    ]
 
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render()
+    const subject = await mount(<FormFieldMessages messages={messages} />)
 
-    expect(subject).to.be.present()
+    const formFieldMessages = within(subject.getDOMNode())
+    expect(formFieldMessages).to.exist()
+    expect(formFieldMessages.getTextContent()).to.equal(
+      'Invalid nameGood job!Full name, first and last'
+    )
   })
 
-  it('should have tests')
+  it('should meet a11y standards', async () => {
+    const messages = [
+      { text: 'Invalid name', type: 'error' },
+      { text: 'Good job!', type: 'success' },
+      { text: 'Full name, first and last', type: 'hint' }
+    ]
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+    const subject = await mount(<FormFieldMessages messages={messages} />)
 
-    subject.should.be.accessible(done, {
+    const formFieldMessages = within(subject.getDOMNode())
+    expect(await formFieldMessages.accessible({
       ignores: [
         'color-contrast' // success and error colors don't meet 4.5:1
       ]
-    })
+    })).to.be.true()
   })
 })

@@ -22,12 +22,14 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { isSameMonth, isSameDay, isDayDisabled } from "../dateHelpers"
 import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
 
 const locale = 'en-US'
 const timezone = "US/Eastern"
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('isSameMonth', () => {
   it('returns true if the dates are in the same month', () => {
     expect(isSameMonth(DateTime.parse('2017-01-03', locale, timezone), DateTime.parse('2017-01-10', locale, timezone))).to.equal(true)
@@ -76,3 +78,4 @@ describe('isDayDisabled', () => {
     expect(isDayDisabled(day, disabledDaysOfWeek, disabledDays)).to.equal(false)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

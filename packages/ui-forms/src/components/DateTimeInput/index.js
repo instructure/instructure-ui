@@ -31,6 +31,7 @@ import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import Locale from '@instructure/ui-i18n/lib/Locale'
 import { FormFieldGroup } from '@instructure/ui-form-field'
+import testable from '@instructure/ui-testable'
 
 import DateInput from '../DateInput/index'
 import TimeInput from '../TimeInput/index'
@@ -40,6 +41,7 @@ import TimeInput from '../TimeInput/index'
 category: components
 ---
 **/
+@testable()
 class DateTimeInput extends Component {
   static propTypes = {
     /**

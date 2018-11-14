@@ -23,112 +23,174 @@
  */
 
 import React from 'react'
+import { expect, mount } from '@instructure/ui-test-utils'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 import TimeInput from '../index'
+import TimeInputLocator from '../locator'
 
-describe('<TimeInput />', () => {
-  const testbed = new Testbed(<TimeInput label="fake label" timezone="US/Eastern" />)
-
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+describe('<TimeInput />', async () => {
+  it('should render', async () => {
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+      />
+    )
+    expect(await TimeInputLocator.find()).to.exist()
   })
 
-  it('renders the specified value when present', () => {
+  it('renders the specified value when present', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    const subject = testbed.render({
-      value: value.toISOString(),
-      onChange: () => {}
-    })
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+        format="LT"
+        value={value.toISOString()}
+        onChange={() => {}}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).to.eq(value.format(subject.prop('format')))
+    expect(input.getDOMNode().value).to.equal(value.format('LT'))
   })
 
-  it('renders the specified default value when present', () => {
+  it('renders the specified default value when present', async () => {
     const defaultValue = DateTime.parse('1986-05-25T19:00:00.000Z', 'en', 'US/Eastern')
-    const subject = testbed.render({
-      defaultValue: defaultValue.toISOString()
-    })
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+        format="LT"
+        defaultValue={defaultValue.toISOString()}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).to.eq(defaultValue.format(subject.prop('format')))
+    expect(input.getDOMNode().value).to.equal(defaultValue.format('LT'))
   })
 
-  it('renders the specified value when both default value and value are set', () => {
+  it('renders the specified value when both default value and value are set', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
     const defaultValue = DateTime.parse('1986-05-25T19:00:00.000Z', 'en', 'US/Eastern')
-    const subject = testbed.render({
-      value: value.toISOString(),
-      defaultValue: defaultValue.toISOString(),
-      onChange: () => {}
-    })
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+        format="LT"
+        value={value.toISOString()}
+        defaultValue={defaultValue.toISOString()}
+        onChange={() => {}}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).to.eq(value.format(subject.prop('format')))
+    expect(input.getDOMNode().value).to.equal(value.format('LT'))
   })
 
-  it('renders using the specified timezone', () => {
+  it('renders using the specified timezone', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Central')
     const oneHourBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Mountain')
     const oneHourForwardBackValue = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    const subject = testbed.render({
-      value: value.toISOString(),
-      timezone: 'US/Central',
-      onChange: () => {}
-    })
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Central"
+        format="LT"
+        value={value.toISOString()}
+        onChange={() => {}}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).not.to.eq(oneHourBackValue.format(subject.prop('format')))
-    expect(subject.find('input').getDOMNode().value).not.to.eq(oneHourForwardBackValue.format(subject.prop('format')))
+    expect(input.getDOMNode().value).to.not.equal(oneHourBackValue.format('LT'))
+    expect(input.getDOMNode().value).to.not.equal(oneHourForwardBackValue.format('LT'))
   })
 
-  it('renders using the specified locale', () => {
+  it('renders using the specified locale', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
-    const subject = testbed.render({
-      value: value.toISOString(),
-      locale: 'fr',
-      onChange: () => {}
-    })
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+        locale="fr"
+        format="LT"
+        value={value.toISOString()}
+        onChange={() => {}}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).not.to.eq(value.format(subject.prop('format')))
-    expect(subject.find('input').getDOMNode().value).to.eq(value.locale('fr').format(subject.prop('format')))
+    expect(input.getDOMNode().value).to.not.equal(value.format('LT'))
+    expect(input.getDOMNode().value).to.equal(value.locale('fr').format('LT'))
   })
 
-  it('defaults to the first option when set to do so, no default value is set, and no value is set', () => {
-    const subject = testbed.render({
-      defaultToFirstOption: true
-    })
-    subject.find('input').simulate('click') // open it so it renders the options
+  it('defaults to the first option when set to do so, no default value is set, and no value is set', async () => {
+    await mount(
+      <TimeInput
+        defaultToFirstOption
+        label="fake label"
+        timezone="US/Eastern"
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    expect(subject.find('input').getDOMNode().value).to.eq(document.querySelector('li > span').textContent)
+    await input.click()
+
+    const item = await timeInput.findOption()
+
+    expect(input.getDOMNode().value).to.equal(item.getTextContent())
   })
 
-  it('renders using the specified step value', () => {
+  it('renders using the specified step value', async () => {
     const value = DateTime.parse('1986-05-17T18:00:00.000Z', 'en', 'US/Eastern')
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+        format="LT"
+        step={15}
+        value={value.toISOString()}
+        onChange={() => {}}
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    const input = await timeInput.findInput()
 
-    const subject = testbed.render({
-      step: 15,
-      value: value.toISOString(),
-      onChange: () => {}
-    })
+    await input.click()
 
-    subject.find('input').simulate('click') // open it so it renders the options
+    const items = await timeInput.findAllOptions()
 
-    const optionTexts = document.querySelectorAll('li > span')
-    const expctedFirstOptionText = value.hour(0).minute(0).format(subject.prop('format'))
-    const expctedSecondOptionText = value.hour(0).minute(15).format(subject.prop('format'))
-    expect(optionTexts[0].textContent).to.be.eq(expctedFirstOptionText)
-    expect(optionTexts[1].textContent).to.be.eq(expctedSecondOptionText)
+    expect(input.getDOMNode().value).to.equal(value.format('LT'))
+
+    const expectedFirstOptionText = value.hour(0).minute(0).format('LT')
+    const expectedSecondOptionText = value.hour(0).minute(15).format('LT')
+
+    expect(items[0].getTextContent()).to.equal(expectedFirstOptionText)
+    expect(items[1].getTextContent()).to.equal(expectedSecondOptionText)
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    await mount(
+      <TimeInput
+        label="fake label"
+        timezone="US/Eastern"
+      />
+    )
+    const timeInput = await TimeInputLocator.find()
+    await timeInput.click()
 
-    subject.find('input').simulate('click') // open it so it renders the options
-
-    subject.should.be.accessible(done, {
+    expect(await timeInput.accessible({
       ignores: [
         'aria-allowed-role' // TODO: remove this when we fix it
       ]
-    })
+    })).to.be.true()
   })
 })

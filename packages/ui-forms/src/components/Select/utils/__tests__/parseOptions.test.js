@@ -24,10 +24,11 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import parseOptions from '../parseOptions'
 
-describe('parseOptions', () => {
+describe('parseOptions', async () => {
   class Example extends React.Component {
     static propTypes = {
       children: PropTypes.node // eslint-disable-line react/require-default-props
@@ -41,9 +42,8 @@ describe('parseOptions', () => {
       return <select label="LABEL">{this.props.children}</select>
     }
   }
-  const testbed = new Testbed(<Example />)
 
-  it('has order matter', () => {
+  it('has order matter', async () => {
     const children = [{
       id: '1',
       value: '1',
@@ -72,12 +72,15 @@ describe('parseOptions', () => {
       groupLabel: null,
       groupItem: null
     }]
-    const subject = testbed.render({
-      children: children.map(({ value, label }) => (
-        <option key={value} value={value}>{label}</option>
-      ))
-    })
+    let ref
+    await mount(
+      <Example componentRef={el => ref = el}>
+        {children.map(({ value, label }) => (
+          <option key={value} value={value}>{label}</option>
+        ))}
+      </Example>
+    )
 
-    expect(parseOptions(subject.instance().props.children)).to.eql(children)
+    expect(parseOptions(ref.props.children)).to.deep.equal(children)
   })
 })

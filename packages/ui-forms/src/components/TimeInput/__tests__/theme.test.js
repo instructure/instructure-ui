@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import TimeInput from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('TimeInput.theme', () => {
   describe('with the default theme', () => {
     const variables = TimeInput.generateTheme()
@@ -43,3 +45,4 @@ describe('TimeInput.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

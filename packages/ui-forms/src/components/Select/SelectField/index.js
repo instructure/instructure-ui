@@ -40,6 +40,7 @@ import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import SelectOptionsList from '../SelectOptionsList'
@@ -54,6 +55,7 @@ import theme from './theme'
 parent: Select
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class SelectField extends Component {
   static propTypes = {

@@ -23,89 +23,146 @@
  */
 
 import React from 'react'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import RadioInput from '../../RadioInput'
 import RadioInputGroup from '../index'
 
-describe('<RadioInputGroup />', () => {
-  const testbed = new Testbed(
-    <RadioInputGroup
-      name="fruit"
-      description="Select a fruit"
-    >
-      <RadioInput label="Apple" value="apple" />
-      <RadioInput label="Banana" value="banana" />
-      <RadioInput label="Orange" value="orange" />
-    </RadioInputGroup>
-  )
-
-  it('adds the name props to all RadioInput types', () => {
-    const subject = testbed.render()
-
-    expect(subject.find('input[name="fruit"]').length)
-      .to.equal(3)
+describe('<RadioInputGroup />', async () => {
+  it('adds the name props to all RadioInput types', async () => {
+    const subject = await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const inputs = await group.findAll('input[name="fruit"]')
+    expect(inputs.length).to.equal(3)
   })
 
-  it('requires an `onChange` prop with a `value` prop', () => {
-    expect(() => {
-      testbed.render({
-        value: 'banana'
-      })
-    }).to.throw(Error)
+  it('requires an `onChange` prop with a `value` prop', async () => {
+    const consoleError = stub(console, 'error')
+    await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        value="banana"
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+
+    expect(consoleError).to.have.been.calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
   })
 
-  it('calls the onChange prop', () => {
-    const onChange = testbed.stub()
+  it('calls the onChange prop', async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        onChange={onChange}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const input = await group.find('input')
 
-    const subject = testbed.render({
-      onChange
-    })
-
-    subject.find('input').first().simulate('change')
-
+    await input.click()
     expect(onChange).to.have.been.called()
   })
 
-  it('does not call the onChange prop when disabled', () => {
-    const onChange = testbed.stub()
+  it('does not call the onChange prop when disabled', async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <RadioInputGroup
+        disabled
+        name="fruit"
+        description="Select a fruit"
+        onChange={onChange}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const input = await group.find('input')
 
-    const subject = testbed.render({
-      disabled: true,
-      onChange
-    })
-
-    subject.find('input').first().simulate('change')
-
+    await input.click()
     expect(onChange).to.not.have.been.called()
   })
 
-  it('does not call the onChange prop when readOnly', () => {
-    const onChange = testbed.stub()
+  it('does not call the onChange prop when readOnly', async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <RadioInputGroup
+        readOnly
+        name="fruit"
+        description="Select a fruit"
+        onChange={onChange}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const input = await group.find('input')
 
-    const subject = testbed.render({
-      readOnly: true,
-      onChange
-    })
-
-    subject.find('input').first().simulate('change')
-
+    await input.click()
     expect(onChange).to.not.have.been.called()
   })
 
-  it('should not update the value when the value prop is set', () => {
-    const subject = testbed.render({
-      value: 0
-    })
+  it('should not update the value when the value prop is set', async () => {
+    const subject = await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        value='orange'
+        onChange={() => {}}
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const banana = await group.find('input[value="banana"]')
 
-    expect(subject.prop('value')).to.equal(0)
+    await banana.click()
+
+    const orange = await group.find('input:label(Orange)')
+
+    expect(orange.getDOMNode().checked).to.be.true()
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      const subject = await mount(
+        <RadioInputGroup
+          name="fruit"
+          description="Select a fruit"
+        >
+          <RadioInput label="Apple" value="apple" />
+          <RadioInput label="Banana" value="banana" />
+          <RadioInput label="Orange" value="orange" />
+        </RadioInputGroup>
+      )
+      const group = within(subject.getDOMNode())
 
-      subject.should.be.accessible(done, {
+      expect(await group.accessible({
         ignores: [ 'radiogroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */
-      })
+      })).to.be.true()
     })
   })
 })

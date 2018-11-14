@@ -23,55 +23,85 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import FormFieldGroup from '../index'
 
-describe('<FormFieldGroup />', () => {
-  const testbed = new Testbed(
-    (
+describe('<FormFieldGroup />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>First: <input /></label>
         <label>Middle: <input /></label>
         <label>Last: <input /></label>
       </FormFieldGroup>
     )
-  )
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    const formFieldGroup = within(subject.getDOMNode())
+    expect(formFieldGroup).to.exist()
   })
 
-  it('can handle null children', () => {
-    const subject = testbed.render({
-      children: [<label key="foo">First: <input /></label>, null]
-    })
+  it('can handle null children', async () => {
+    const children = [
+      <label key="first">First: <input /></label>,
+      null
+    ]
 
-    expect(subject).to.be.present()
+    const subject = await mount(
+      <FormFieldGroup description="Please enter your full name">
+        {children}
+      </FormFieldGroup>
+    )
+
+    const formFieldGroup = within(subject.getDOMNode())
+    expect(formFieldGroup).to.exist()
   })
 
-  it('links the messages to the fieldset via aria-describedby', () => {
-    const subject = testbed.render({
-      messages: [{ text: 'Invalid name', type: 'error' }]
-    })
+  it('links the messages to the fieldset via aria-describedby', async () => {
+    const messages = [{ text: 'Invalid name', type: 'error' }]
 
-    const messagesId = subject.find('fieldset').getAttribute('aria-describedby')
+    const subject = await mount(
+      <FormFieldGroup description="Please enter your full name" messages={messages}>
+        <label>First: <input /></label>
+        <label>Middle: <input /></label>
+        <label>Last: <input /></label>
+      </FormFieldGroup>
+    )
 
-    expect(subject.find(`#${messagesId}`).text()).to.equal('Invalid name')
+    const formFieldGroup = within(subject.getDOMNode())
+    const fieldset = await formFieldGroup.find('fieldset')
+
+    const messagesId = fieldset.getAttribute('aria-describedby')
+    const message = await formFieldGroup.find(`#${messagesId}`)
+
+    expect(message.getTextContent()).to.equal('Invalid name')
   })
 
-  it('displays description message inside the legend', () => {
+  it('displays description message inside the legend', async () => {
     const description = 'Please enter your full name'
-    const subject = testbed.render({
-      description: description
-    })
 
-    expect(subject.find('legend').text()).to.contain(description)
+    const subject = await mount(
+      <FormFieldGroup description={description}>
+        <label>First: <input /></label>
+        <label>Middle: <input /></label>
+        <label>Last: <input /></label>
+      </FormFieldGroup>
+    )
+
+    const formFieldGroup = within(subject.getDOMNode())
+    const legend = await formFieldGroup.find(`legend:contains(${description})`)
+    expect(legend).to.exist()
   })
 
-  it('should meet a11y standards', done => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(
+      <FormFieldGroup description="Please enter your full name">
+        <label>First: <input /></label>
+        <label>Middle: <input /></label>
+        <label>Last: <input /></label>
+      </FormFieldGroup>
+    )
 
-    subject.should.be.accessible(done)
+    const formFieldGroup = within(subject.getDOMNode())
+    expect(await formFieldGroup.accessible()).to.exist()
   })
 })

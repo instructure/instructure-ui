@@ -23,54 +23,119 @@
  */
 
 import React from 'react'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import Select from '../index'
+import SelectLocator from '../locator'
 
-/*  eslint-disable mocha/no-synchronous-tests */
-describe('<Select />', () => {
-  const testbed = new Testbed(
-    <Select
-      label="Choose a vacation destination"
-    >
-      <option value="0">Aruba</option>
-      <option value="1">Jamaica</option>
-      <option value="2">Oh I want to take ya</option>
-    </Select>
-  )
+describe('<Select />', async () => {
+  it('should render', async () => {
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+      >
+        <option value="0">Aruba</option>
+        <option value="1">Jamaica</option>
+        <option value="2">Oh I want to take ya</option>
+      </Select>
+    )
 
-  it('should focus the input when focus is called', () => {
-    const subject = testbed.render()
-    subject.instance().focus()
-    expect(subject.find('input').focused()).to.be.true()
+    const select = await SelectLocator.find()
+
+    expect(select).to.exist()
   })
 
-  it('should provide an focused getter', () => {
-    const subject = testbed.render()
-    expect(subject.instance().focused).to.be.false()
-    subject.instance().focus()
-    expect(subject.instance().focused).to.be.true()
+  it('should focus the input when focus is called', async () => {
+    let selectRef
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+        componentRef={(el) => { selectRef = el }}
+      >
+        <option value="0">Aruba</option>
+        <option value="1">Jamaica</option>
+        <option value="2">Oh I want to take ya</option>
+      </Select>
+    )
+
+    const input = await SelectLocator.findInput()
+
+    selectRef.focus()
+
+    expect(input.focused()).to.be.true()
   })
 
-  it('should provide an invalid getter', () => {
-    const subject = testbed.render({})
-    expect(subject.instance().invalid).to.be.false()
+  it('should provide an focused getter', async () => {
+    let selectRef
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+        componentRef={(el) => { selectRef = el }}
+      >
+        <option value="0">Aruba</option>
+        <option value="1">Jamaica</option>
+        <option value="2">Oh I want to take ya</option>
+      </Select>
+    )
+    expect(selectRef.focused).to.be.false()
+
+    selectRef.focus()
+
+    expect(selectRef.focused).to.be.true()
+   })
+
+   it('should provide an invalid getter', async () => {
+     let selectRef
+     await mount(
+       <Select
+         label="Choose a vacation destination"
+         componentRef={(el) => { selectRef = el }}
+       >
+         <option value="0">Aruba</option>
+         <option value="1">Jamaica</option>
+         <option value="2">Oh I want to take ya</option>
+       </Select>
+     )
+
+     expect(selectRef.invalid).to.be.false()
+   })
+
+  it('should be invalid if given error messages', async () => {
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+        messages={[{text: 'Invalid name', type: 'error' }]}
+      >
+        <option value="0">Aruba</option>
+        <option value="1">Jamaica</option>
+        <option value="2">Oh I want to take ya</option>
+      </Select>
+    )
+
+    const input = await SelectLocator.findInput()
+
+    expect(input.getAttribute('aria-invalid')).to.equal('true')
   })
 
-  it('should be invalid if given error messages', () => {
-    const subject = testbed.render({
-      messages: [
-        { text: 'Invalid name', type: 'error' }
-      ]
-    })
-    expect(subject.instance().invalid).to.be.true()
+  it('should provide an inputRef prop', async () => {
+    const inputRef = stub()
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+        inputRef={inputRef}
+      >
+        <option value="0">Aruba</option>
+        <option value="1">Jamaica</option>
+        <option value="2">Oh I want to take ya</option>
+      </Select>
+    )
+
+    const select = await SelectLocator.find()
+    const input = await select.findInput()
+
+    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  it('should provide an inputRef prop', () => {
-    const inputRef = testbed.stub()
-    const subject = testbed.render({ inputRef })
-    expect(inputRef).to.have.been.calledWith(subject.find('input').unwrap())
-  })
-
-  it('recalculates options when children change', (done) => {
+  it('recalculates options when children change', async () => {
     const items = [{
       value: '3', label: 'Bermuda', icon: null, disabled: null, groupLabel: null, groupItem: null
     }, {
@@ -78,102 +143,117 @@ describe('<Select />', () => {
     }, {
       value: '5', label: 'come on pretty mama', icon: null, disabled: null, groupLabel: null, groupItem: null
     }]
-    const subject = testbed.render({
-      editable: true,
-      children: items.map((i) => <option key={i} value={i.value}>{i.label}</option>)
-    })
 
-    expect(subject.instance().state.options).to.eql(items.map(i => ({
-      label: i.label,
-      value: i.value,
-      children: i.label,
-      id: i.value,
-      icon: i.icon,
-      disabled: i.disabled,
-      groupLabel: i.groupLabel,
-      groupItem: i.groupItem
-    })))
+    const subject = await mount(
+      <Select
+        label="Choose a vacation destination"
+        editable={true}
+      >
+        {items.map((i) => <option key={i} value={i.value}>{i.label}</option>)}
+      </Select>
+    )
+    const select = await SelectLocator.find()
+    await select.click()
 
-    subject.setProps({
+    expect((await select.findAllOptions()).length).to.equal(3)
+
+    await subject.setProps({
       children: items.slice(1).map((i) => <option key={i} value={i.value}>{i.label}</option>)
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        expect(subject.instance().state.options).to.eql(items.slice(1).map(i => ({
-          label: i.label,
-          value: i.value,
-          children: i.label,
-          id: i.value,
-          icon: i.icon,
-          disabled: i.disabled,
-          groupLabel: i.groupLabel,
-          groupItem: i.groupItem
-        })))
-        done()
-      })
     })
+
+    expect((await select.findAllOptions()).length).to.equal(2)
   })
 
-  it('should allow optgroup tags as children', () => {
-    let error = false
-    try {
-      testbed.render({
-        children: [
-          <optgroup key="one" label="Group One">
-            <option value="item1">Item One</option>
-            <option value="item2">Item Two</option>
-          </optgroup>
-        ]
-      })
-    } catch (e) {
-      error = true
-    }
-    expect(error).to.be.false()
+  it('should allow optgroup tags as children', async () => {
+    const consoleError = stub(console, 'error')
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+      >
+        <optgroup key="one" label="Group One">
+          <option value="item1">Item One</option>
+          <option value="item2">Item Two</option>
+        </optgroup>
+      </Select>
+    )
+
+    expect(consoleError).to.not.have.been.calledWithMatch('Failed prop type')
   })
 
-  it('should reject children that are not option or optgroup tags', () => {
-    let error = false
-    try {
-      testbed.render({
-        children: [
-          <span key="invalid">Invalid!!!</span>
-        ]
-      })
-    } catch (e) {
-      error = true
-    }
-    expect(error).to.be.true()
+  it('should reject children that are not option or optgroup tags', async () => {
+    const consoleError = stub(console, 'error')
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+      >
+        <span key="invalid">Invalid!!!</span>
+      </Select>
+    )
+
+    expect(consoleError).to.have.been.calledWithMatch('Expected one of option, optgroup')
   })
 
-  describe('for a11y', () => {
-    it('should meet standards when closed', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards when closed', async () => {
+      await mount(
+        <Select
+          label="Choose a vacation destination"
+        >
+          <option value="0">Aruba</option>
+          <option value="1">Jamaica</option>
+          <option value="2">Oh I want to take ya</option>
+        </Select>
+      )
+      const select = await SelectLocator.find()
 
-      subject.should.be.accessible(done, {
+      expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      })).to.be.true()
     })
 
-    it('should meet standards when open', (done) => {
-      const subject = testbed.render()
+    it('should meet standards when open', async () => {
+      await mount(
+        <Select
+          label="Choose a vacation destination"
+        >
+          <option value="0">Aruba</option>
+          <option value="1">Jamaica</option>
+          <option value="2">Oh I want to take ya</option>
+        </Select>
+      )
+      const select = await SelectLocator.find()
 
-      subject.find('input').simulate('click') // open it so it renders the opts
+      await select.click()
 
-      subject.should.be.accessible(done, {
+      expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      })).to.be.true()
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
+    it('should set aria-invalid when errors prop is set', async () => {
+      await mount(
+        <Select
+          label="Choose a vacation destination"
+          messages={[{ type: 'error', text: 'some error message' }]}
+        >
+          <option value="0">Aruba</option>
+          <option value="1">Jamaica</option>
+          <option value="2">Oh I want to take ya</option>
+        </Select>
+      )
+      const select = await SelectLocator.find()
 
-      expect(subject.find('input').getAttribute('aria-invalid'))
-        .to.exist()
+      await select.click()
+
+      expect(await select.accessible({
+        ignores: [
+          'aria-allowed-role' // TODO: remove this when we fix it
+        ]
+      })).to.be.true()
     })
   })
 })

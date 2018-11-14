@@ -34,6 +34,9 @@ import themeable from '@instructure/ui-themeable'
 import { FormFieldMessages } from '@instructure/ui-form-field'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
+import accepts, { getAcceptList } from './utils/accepts'
+import getEventFiles from './utils/getEventFiles'
+
 import styles from './styles.css'
 import theme from './theme'
 
@@ -49,50 +52,6 @@ function isBrowserMS () {
   } catch (e) {} // eslint-disable-line no-empty
 
   return result
-}
-
-function getAcceptList (accept) {
-  const list = Array.isArray(accept) ? accept : accept.split(',')
-  return list.map(a => a.trim().replace(/^\w+$/, '.$&'))
-}
-
-export function getEventFiles (event, inputEl) {
-  const dt = event.dataTransfer
-
-  if (dt) {
-    if (dt.files && dt.files.length) {
-      return dt.files
-    } else if (dt.items && dt.items.length) {
-      return dt.items
-    }
-  } else if (inputEl && inputEl.files) {
-    return inputEl.files
-  }
-
-  return []
-}
-
-export function accepts (file, acceptProp) {
-  if (file && acceptProp && file.type !== 'application/x-moz-file') {
-    const acceptList = getAcceptList(acceptProp)
-    const mimeType = file.type || ''
-    const baseMimeType = mimeType.replace(/\/.*$/, '')
-
-    return acceptList.some(type => {
-      if (type.charAt(0) === '.') {
-        // type is an extension like .pdf
-        if (!file.name) {
-          return mimeType.endsWith(type.slice(1))
-        }
-        return file.name.toLowerCase().endsWith(type.toLowerCase())
-      } else if (/\/\*$/.test(type)) {
-        // type is something like a image/* mime type
-        return baseMimeType === type.replace(/\/.*$/, '')
-      }
-      return mimeType === type
-    })
-  }
-  return true
 }
 
 const IS_MS = isBrowserMS()

@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import TextArea from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('TextArea.theme', () => {
   describe('with the default theme', () => {
     const variables = TextArea.generateTheme()
@@ -58,3 +60,4 @@ describe('TextArea.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

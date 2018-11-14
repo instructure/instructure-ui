@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import DatePicker from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('DatePicker.theme', () => {
   describe('with the canvas theme', () => {
     const variables = DatePicker.generateTheme()
@@ -48,3 +50,4 @@ describe('DatePicker.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

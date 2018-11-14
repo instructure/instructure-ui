@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import RadioInput from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('RadioInput.theme', () => {
   describe('with the default theme', () => {
     const variables = RadioInput.generateTheme()
@@ -68,3 +70,4 @@ describe('RadioInput.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

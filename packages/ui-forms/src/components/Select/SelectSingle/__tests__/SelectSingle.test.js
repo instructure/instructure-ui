@@ -23,13 +23,27 @@
  */
 
 import React from 'react'
-import keycode from 'keycode'
+import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import SelectSingle from '../index'
-import SelectField from '../../SelectField'
 
-/* eslint-disable mocha/no-synchronous-tests */
-describe('<SelectSingle />', () => {
-  const preventDefault = () => {}
+import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+
+const InputLocator = locator('input[type="text"]')
+const OptionsLocator = locator('li')
+
+const SelectSingleLocator = locator(SelectSingle.selector, {
+  findInput: (...args) => InputLocator.find(...args),
+  findOption: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findAllOptions: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : null
+  }
+})
+
+describe('<SelectSingle />', async () => {
   const options = [{
     label: 'Aruba', children: 'Aruba', value: '0', id: '0'
   }, {
@@ -44,496 +58,644 @@ describe('<SelectSingle />', () => {
       (option) => option.label.toLowerCase().startsWith(filterText.toLowerCase())
     )
   }
-  const changeInput = (subject, value) => {
-    const instance = subject.instance()
 
-    instance._input.value = value
-    subject.find('input').simulate('change', {
-      target: {
-        value,
-      },
-    })
-  }
-
-  const testbed = new Testbed(
-    <SelectSingle
-      label="Choose a vacation destination"
-      options={options}
-      filter={filter}
-    />
-  )
-
-  it('should include a label', () => {
-    const subject = testbed.render()
-    expect(subject.find('label').length).to.equal(1)
+  it('should include a label', async () => {
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    expect(await select.find('label')).to.exist()
   })
 
-  it('should focus the input when focus is called', () => {
-    const subject = testbed.render()
-    subject.instance().focus()
-    expect(subject.find('input').focused()).to.be.true()
+  it('should focus the input when focus is called', async () => {
+    let ref
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        componentRef={el => ref = el}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+    ref.focus()
+    expect(input.focused()).to.be.true()
   })
 
-  it('should provide an focused getter', () => {
-    const subject = testbed.render()
-    subject.instance().focus()
-    expect(subject.instance().focused).to.be.true()
+  it('should provide an focused getter', async () => {
+    let ref
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        componentRef={el => ref = el}
+      />
+    )
+    ref.focus()
+    expect(ref.focused).to.be.true()
   })
 
-  it('should provide an inputRef prop', () => {
-    const inputRef = testbed.stub()
-    const subject = testbed.render({ inputRef })
-    expect(inputRef).to.have.been.calledWith(subject.find('input').unwrap())
+  it('should provide an inputRef prop', async () => {
+    const inputRef = stub()
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        inputRef={inputRef}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  it('resets input value to empty when closing the menu with no selectedOption', () => {
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({ onInputChange })
-    testbed.tick()
-    subject.find('input').simulate('click')
-    subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(subject.instance()._input.value).to.equal('')
+  it('resets input value to empty when closing the menu with no selectedOption', async () => {
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    input.getDOMNode().value = 'Arub'
+
+    await input.keyUp('esc')
+    expect(input.getDOMNode().value).to.equal('')
     expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal('')
   })
 
-  it('changes input value when selectedOption is changed as a prop', (done) => {
+  it('changes input value when selectedOption is changed as a prop', async () => {
     let label = 'Aruba'
     let value = '0'
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      onInputChange,
-      selectedOption: { label, value, children: label, id: value }
-    })
+    const onInputChange = stub()
+    const subject = await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption={{ label, value, children: label, id: value }}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
 
-    expect(subject.instance()._input.value).to.equal(label)
+    expect(input.getDOMNode().value).to.equal(label)
     expect(onInputChange).to.not.have.been.called()
 
     label = 'Jamaica'
     value = '1'
-    subject.setProps({
+    await subject.setProps({
       selectedOption: { label, value, children: label, id: value }
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        expect(onInputChange).to.have.been.calledOnce()
-        expect(onInputChange.firstCall.args[0]).to.equal(null)
-        expect(onInputChange.firstCall.args[1]).to.equal(label)
-        expect(subject.instance()._input.value).to.equal(label)
-        done()
-      })
     })
-  })
-
-  it('resets input value to selectedOption when closing the menu', () => {
-    const value = '0'
-    const label = 'Aruba'
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      selectedOption: { value, label, id: value, children: label },
-      onInputChange
-    })
-    testbed.tick()
-    subject.find('input').simulate('click')
-    subject.instance()._input.value = 'Arub'
-    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
     expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
     expect(onInputChange.firstCall.args[1]).to.equal(label)
-    expect(subject.instance()._input.value).to.equal(label)
+    expect(input.getDOMNode().value).to.equal(label)
   })
 
-  it('calls onChange when closing the menu and the input matches an option', () => {
-    const value = '0'
-    const label = 'Aruba'
-    const onChange = testbed.stub()
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({ onChange, onInputChange })
-    testbed.tick()
-    subject.find('input').simulate('click')
-    subject.instance()._input.value = label
-    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(onChange).to.have.been.calledOnce()
-    expect(onChange.firstCall.args[0].target).to.exist()
-    expect(onChange.firstCall.args[0].target.value).to.equal(label)
-    expect(onChange.firstCall.args[1]).to.eql({ value, label, id: value, children: label })
+  it('resets input value to selectedOption when closing the menu', async () => {
+    let label = 'Aruba'
+    let value = '0'
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption={{ value, label, id: value, children: label }}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
 
-    expect(onInputChange).to.not.have.been.called()
-  })
-
-  it('calls onInputChange when input changes', () => {
-    const label = 'Aruba'
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      editable: true,
-      onInputChange
-    })
-    testbed.tick()
-    subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
-    expect(onInputChange.firstCall).to.exist()
-    expect(onInputChange.firstCall.args[0]).to.exist()
-    expect(onInputChange.firstCall.args[0].target.value).to.eql(label)
-    expect(onInputChange.firstCall.args[1]).to.eql(label)
-  })
-
-  it('filters the options when input changes', () => {
-    const label = 'ARU'
-    const subject = testbed.render({
-      editable: true
-    })
-    testbed.tick()
-    subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
-    expect(subject.instance().state.filterText).to.equal(label.toLowerCase())
-    expect(subject.instance().state.filteredOptions.length).to.equal(1)
-  })
-
-  it('renders SelectField', () => {
-    const subject = testbed.render()
-    testbed.tick()
-    expect(subject.find(SelectField).unwrap()).to.exist()
-  })
-
-  it('responds to selection done by SelectField', () => {
-    const newSelection = {
-      value: '4', label: 'Key Largo'
-    }
-    const onChange = testbed.stub()
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({ onChange, onInputChange })
-    testbed.tick()
-    const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist()
-
-    onSelect({ preventDefault, target: 1 }, newSelection)
-
-    expect(onChange.firstCall).to.exist()
-    const eventArg = onChange.firstCall.args[0]
-    const selectedOptionArg = onChange.firstCall.args[1]
-    expect(eventArg.target).to.equal(1)
-    expect(selectedOptionArg).to.eql(newSelection)
+    await input.click()
+    input.getDOMNode().value = 'Arub'
+    await input.keyUp('esc')
 
     expect(onInputChange).to.have.been.calledOnce()
     expect(onInputChange.firstCall.args[0]).to.equal(null)
-    expect(onInputChange.firstCall.args[1]).to.equal(newSelection.label)
-    expect(subject.instance().state.filterText).to.equal(null)
+    expect(onInputChange.firstCall.args[1]).to.equal(label)
+    expect(input.getDOMNode().value).to.equal(label)
   })
 
-  it('recalculates selectedOption when it changes', (done) => {
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      selectedOption: '0',
-      onInputChange
-    })
-    testbed.tick()
-    expect(subject.instance()._input.value).to.equal(options[0].label)
-    expect(subject.instance().state.selectedOption).to.eql(options[0])
+  it('calls onChange when closing the menu and the input matches an option', async () => {
+    let label = 'Aruba'
+    let value = '0'
+    const onChange = stub()
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+        onChange={onChange}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+    input.getDOMNode().value = label
+    await input.keyUp('esc')
+
+    expect(onChange).to.have.been.calledOnce()
+    expect(onChange.firstCall.args[0]).to.exist()
+    expect(onChange.firstCall.args[1]).to.deep.equal({ value, label, id: value, children: label })
+    expect(onInputChange).to.not.have.been.called()
+  })
+
+  it('calls onInputChange when input changes', async () => {
+    let label = 'Aruba'
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+
+    await input.change({ target: { value: label } })
+
+    expect(onInputChange.firstCall).to.exist()
+    expect(onInputChange.firstCall.args[0]).to.exist()
+    expect(onInputChange.firstCall.args[1]).to.equal(label)
+  })
+
+  it('filters the options when input changes', async () => {
+    const label = 'ARU'
+    await mount(
+      <SelectSingle
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+    const select = await SelectSingleLocator.find()
+    const input = await select.findInput()
+
+    await input.change({ target: { value: label } })
+
+    expect((await select.findAllOptions()).length).to.equal(1)
+  })
+
+  it('responds to selection done by SelectField', async () => {
+    const onChange = stub()
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+        onChange={onChange}
+      />
+    )
+
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    await input.click()
+
+    const item = await select.findOption()
+
+    await item.keyDown('enter')
+
+    expect(onChange.firstCall).to.exist()
+    expect(onChange.firstCall.args[0]).to.exist()
+    expect(onChange.firstCall.args[1]).to.deep.equal(options[0])
+
+    expect(onInputChange).to.have.been.calledOnce()
+    expect(onInputChange.firstCall.args[0]).to.equal(null)
+    expect(onInputChange.firstCall.args[1]).to.equal(options[0].label)
+  })
+
+  it('recalculates selectedOption when it changes', async () => {
+    const onInputChange = stub()
+    const subject = await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+        selectedOption="0"
+      />
+    )
+
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    expect(input.getDOMNode().value).to.equal(options[0].label)
     expect(onInputChange).to.not.have.been.called()
 
-    subject.setProps({
+    await subject.setProps({
       selectedOption: '1'
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        expect(subject.instance()._input.value).to.equal(options[1].label)
-        expect(subject.instance().state.selectedOption).to.eql(options[1])
-
-        expect(onInputChange).to.have.been.calledOnce()
-        expect(onInputChange.firstCall.args[0]).to.equal(null)
-        expect(onInputChange.firstCall.args[1]).to.equal(options[1].label)
-        done()
-      })
     })
+
+    expect(input.getDOMNode().value).to.equal(options[1].label)
+    expect(onInputChange).to.have.been.calledOnce()
+    expect(onInputChange.firstCall.args[0]).to.equal(null)
+    expect(onInputChange.firstCall.args[1]).to.equal(options[1].label)
   })
 
-  it(`when controlled, should clear input when selectedOption is changed to null`, (done) => {
-    const selectedOption = '0'
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange, selectedOption })
-    testbed.tick()
+  it(`when controlled, should clear input when selectedOption is changed to null`, async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption="0"
+      />
+    )
 
-    expect(subject.instance()._input.value).to.equal('Aruba')
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
 
-    subject.setProps({
+    expect(input.getDOMNode().value).to.equal(options[0].label)
+
+    await subject.setProps({
       selectedOption: null
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        expect(subject.instance()._input.value).to.equal('')
-        expect(subject.instance().state.selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
-        done()
-      })
     })
+
+    expect(input.getDOMNode().value).to.equal('')
   })
 
-  describe('default option', () => {
-    function testDefaultValue (defaultProp) {
-      it(`should update the input value if ${defaultProp} is set and the options update`, (done) => {
-        // prevents the error that is fired when you select an option that isn't in the options list
-        // TODO: look into this more (should we even output this error?)
-        testbed.stub(console, 'error')
+  describe('default option', async () => {
+    it(`should update the input value if defaultSelectedOption is set and the options update`, async () => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      stub(console, 'error')
 
-        const subject = testbed.render({
-          [defaultProp]: '4'
-        })
+      const subject = await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          defaultSelectedOption="4"
+        />
+      )
 
-        expect(subject.find('input').node.value).to.equal('')
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-        subject.setProps({
-          options: [
-            ...options,
-            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
-          ]
-        }, () => {
-          expect(subject.find('input').node.value).to.equal('Argentina')
-          done()
-        })
-      })
-    }
+      expect(input.getDOMNode().value).to.equal('')
 
-    testDefaultValue('defaultSelectedOption')
-    testDefaultValue('selectedOption')
-
-    it(`should update input value if selected option update`, (done) => {
-      const subject = testbed.render({
+      await subject.setProps({
         options: [
           ...options,
-          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
-        ],
-        selectedOption: '4',
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+        ]
       })
 
-      expect(subject.find('input').node.value).to.equal('Argentina')
+      expect(input.getDOMNode().value).to.equal('Argentina')
+    })
 
-      subject.setProps({
+    it(`should update the input value if selectedOption is set and the options update`, async () => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      stub(console, 'error')
+
+      const subject = await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          selectedOption="4"
+        />
+      )
+
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
+
+      expect(input.getDOMNode().value).to.equal('')
+
+      await subject.setProps({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
+        ]
+      })
+
+      expect(input.getDOMNode().value).to.equal('Argentina')
+    })
+
+    it(`should update input value if selected option update`, async () => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      stub(console, 'error')
+
+      const subject = await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={[
+            ...options,
+            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+          ]}
+          filter={filter}
+          selectedOption="4"
+        />
+      )
+
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
+
+      expect(input.getDOMNode().value).to.equal('Argentina')
+
+      await subject.setProps({
         options: [
           ...options,
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
         ],
       })
-      expect(subject.find('input').node.value).to.equal('Foo')
-      done()
+
+      expect(input.getDOMNode().value).to.equal('Foo')
     })
 
-    it(`should not update input value if filter has been set`, (done) => {
+    it(`should not update input value if filter has been set`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        options: [
-          ...options,
-          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
-        ],
-        selectedOption: '4',
-        editable: true,
-      })
+      const subject = await mount(
+        <SelectSingle
+          editable
+          label="Choose a vacation destination"
+          options={[
+            ...options,
+            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+          ]}
+          filter={filter}
+          selectedOption="4"
+        />
+      )
 
-      changeInput(subject, 'foo')
-      expect(subject.state('filterText')).to.equal('foo')
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-      subject.setProps({
+      await input.change({ target: { value: 'foo' } })
+      expect(input.getDOMNode().value).to.equal('foo')
+
+      await subject.setProps({
         options: [
           ...options,
           { label: 'Arub', children: 'Arub', value: '4', id: '4' },
         ],
       })
-      expect(subject.find('input').node.value).to.equal('foo')
 
-      changeInput(subject, '')
-      expect(subject.state('filterText')).to.equal('')
+      expect(input.getDOMNode().value).to.equal('foo')
 
-      subject.setProps({
-        options: [],
+      await input.change({ target: { value: '' } })
+      expect(input.getDOMNode().value).to.equal('')
+
+      await subject.setProps({
+        options: []
       })
-      expect(subject.find('input').node.value).to.equal('')
-      done()
+
+      expect(input.getDOMNode().value).to.equal('')
     })
 
-    it(`should render input value even if selected option cannot be found in options`, (done) => {
+    it(`should render input value even if selected option cannot be found in options`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        selectedOption: { label: 'Foo', children: 'Foo', value: '4', id: '4' },
-      })
+      const subject = await mount(
+        <SelectSingle
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          selectedOption={{ label: 'Foo', children: 'Foo', value: '4', id: '4' }}
+        />
+      )
 
-      expect(subject.find('input').node.value).to.equal('Foo')
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-      subject.setProps({
+      expect(input.getDOMNode().value).to.equal('Foo')
+
+      await subject.setProps({
         selectedOption: { label: 'Bar', children: 'Bar', value: '4', id: '4' },
       })
-      expect(subject.find('input').node.value).to.equal('Bar')
-      done()
+
+      expect(input.getDOMNode().value).to.equal('Bar')
     })
 
-    it(`should be able to select option when options are loaded asynchronously`, (done) => {
+    it(`should be able to select option when options are loaded asynchronously`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        defaultSelectedOption: '3',
-        editable: true,
-      })
+      const subject = await mount(
+        <SelectSingle
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          defaultSelectedOption="3"
+        />
+      )
 
-      // type to search
-      changeInput(subject, 'f')
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-      // options reloaded
-      subject.setProps({
+      await input.change({ target: { value: 'f' } })
+
+      await subject.setProps({
         options: [
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
-        ],
+        ]
       })
 
-      expect(subject.find('input').node.value).to.equal('f')
+      expect(input.getDOMNode().value).to.equal('f')
 
-      // select the first option
-      subject.find(SelectField)
-        .getDOMNode()
-        .querySelector('li[role="option"]')
-        .click()
+      const item = await select.findOption()
+      await item.keyDown('enter')
 
-      // options reloaded
-      subject.setProps({
-        options: [],
+      await subject.setProps({
+        options: []
       })
 
-      expect(subject.find('input').node.value).to.equal('Foo')
-      done()
+      expect(input.getDOMNode().value).to.equal('Foo')
     })
 
-    it('should not override a selected option if the default option is set and the options update', (done) => {
+    it('should not override a selected option if the default option is set and the options update', async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        defaultSelectedOption: '4'
-      })
-      subject.find('input').click()
-      testbed.tick()
+      const subject = await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          defaultSelectedOption="4"
+        />
+      )
 
-      // TODO: query document for portal content instead of finding SelectField here when
-      // we have the new test utils
-      const item = subject.find(SelectField).getDOMNode().querySelector('li[role="option"]')
-      item.click()
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-      const value = subject.find('input').node.value
+      await input.click()
 
-      subject.setProps({
+      const item = await select.findOption()
+      await item.keyDown('enter')
+
+      const value = input.getDOMNode().value
+
+      await subject.setProps({
         options: [
           ...options,
           { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
         ]
-      }, () => {
-        expect(subject.find('input').node.value).to.equal(value)
-        done()
       })
+
+      expect(input.getDOMNode().value).to.equal(value)
     })
   })
 
-  it('allowCustom permits arbitrary input', () => {
+  it('allowCustom permits arbitrary input', async () => {
     const label = 'Cuba'
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      allowCustom: true,
-      onInputChange
+    const onInputChange = spy((e) => {
+      e.persist()
     })
-    testbed.tick()
-    subject.focus()
-    subject.instance()._input.value = label[0]
-    subject.find('input').simulate('change', { preventDefault })
-    expect(subject.instance()._input.value).to.equal(label[0])
-    expect(subject.instance().value).to.equal(label[0])
-    expect(subject.instance().state.selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
+    await mount(
+      <SelectSingle
+        allowCustom
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+      />
+    )
 
-    subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    await input.change({ target: { value: label[0] } })
+
+    expect(input.getDOMNode().value).to.equal(label[0])
+
+    await input.change({ target: { value: label } })
+
     expect(onInputChange.secondCall).to.exist()
     expect(onInputChange.secondCall.args[0]).to.exist()
-    expect(onInputChange.secondCall.args[0].target.value).to.eql(label)
-    expect(onInputChange.secondCall.args[1]).to.eql(label)
-    expect(subject.instance().value).to.eql(label)
+    expect(onInputChange.secondCall.args[0].target.value).to.equal(label)
+    expect(onInputChange.secondCall.args[1]).to.equal(label)
+    expect(input.getDOMNode().value).to.equal(label)
   })
 
-  it('allowCustom sets selectedOption after some freeform entry', (done) => {
-    const label = 'Cuba'  // not one of the options
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({
-      allowCustom: true,
-      onInputChange
-    })
-    testbed.tick()
-    subject.instance()._input.value = label
-    subject.find('input').simulate('change', { preventDefault })
-    expect(subject.instance().state.selectedOption).to.equal(undefined)  // eslint-disable-line no-undefined
-    expect(subject.instance().value).to.equal(label)
+  it('allowCustom sets selectedOption after some freeform entry', async () => {
+    const label = 'Cuba'
+    const onInputChange = stub()
+    const subject = await mount(
+      <SelectSingle
+        allowCustom
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+      />
+    )
 
-    subject.setProps({
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    await input.change({ target: { value: label } })
+    expect(input.getDOMNode().value).to.equal(label)
+
+    await subject.setProps({
       selectedOption: '1'
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        expect(subject.instance()._input.value).to.equal('Jamaica')
-        expect(subject.instance().value).to.equal('1')
-        expect(subject.instance().state.selectedOption).to.equal(options[1])
-        done()
-      })
     })
+
+    expect(input.getDOMNode().value).to.equal('Jamaica')
   })
 
-  it('allowCustom sets arbitrary text after selecting from options', () => {
-    const subject = testbed.render({
-      allowCustom: true,
-      selectedOption: '1',
-    })
-    testbed.tick()
-    expect(subject.instance().value).to.equal(options[1].value)
+  it('allowCustom sets arbitrary text after selecting from options', async () => {
+    let ref
+    await mount(
+      <SelectSingle
+        allowCustom
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption="1"
+        componentRef={el => ref = el}
+      />
+    )
 
-    const newValue = subject.instance()._input.value + 'x'
-    subject.instance()._input.value = newValue
-    subject.find('input').simulate('change', { preventDefault })
-    subject.find('input').simulate('blur', { preventDefault })
-    testbed.tick()
-    expect(subject.instance().state.selectedOption).to.equal(undefined)  // eslint-disable-line no-undefined
-    expect(subject.instance().value).to.equal(newValue)
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    expect(ref.value).to.equal(options[1].value)
+
+    const newValue = ref.value + 'x'
+    await input.change({ target: { value: newValue } })
+    await input.blur()
+
+    expect(input.getDOMNode().value).to.equal(newValue)
   })
 
-  it('allowCustom selects option when typed input matches', () => {
+  it('allowCustom selects option when typed input matches', async () => {
     const label = 'jamaica'
-    const onInputChange = testbed.stub()
-    const onChange = testbed.stub()
-    const subject = testbed.render({
-      allowCustom: true,
-      onInputChange,
-      onChange
-    })
-    testbed.tick()
+    const onChange = stub()
+    const onInputChange = stub()
+    await mount(
+      <SelectSingle
+        allowCustom
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+        onChange={onChange}
+      />
+    )
+
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
     // type in 'jamaica'
-    subject.instance()._input.value = label
-    subject.find('input').simulate('change')
+    await input.change({ target: { value: label } })
     // and the select's value is 'jamaica'
-    expect(subject.instance().selectedOption).to.equal(undefined) // eslint-disable-line no-undefined
-    expect(subject.instance().value).to.equal('jamaica')
-
+    expect(input.getDOMNode().value).to.equal('jamaica')
     // blur will cause the input to match an option
-    subject.find('input').simulate('blur')
-    testbed.tick()
+    await input.blur()
 
-    expect(onInputChange.callCount).to.eql(2)
-    expect(onInputChange.firstCall.args[1]).to.eql('jamaica')   // when the string was typed
-    expect(onInputChange.secondCall.args[1]).to.eql('Jamaica')  // when it matched an option's label
+    await wait(() => {
+      expect(onInputChange.callCount).to.equal(2)
+    })
 
-    expect(onChange.firstCall.args[1]).to.eql(options[1])
-    expect(subject.instance().value).to.eql('1')
-    expect(subject.instance().state.selectedOption).to.equal(options[1])
+    expect(onInputChange.firstCall.args[1]).to.equal('jamaica')   // when the string was typed
+    expect(onInputChange.secondCall.args[1]).to.equal('Jamaica')  // when it matched an option's label
+    expect(input.getDOMNode().value).to.equal('Jamaica')
   })
 
-  context('when options differ only in capitalization', () => {
+  context('when options differ only in capitalization', async () => {
     const options = [{
       label: 'aruba', children: 'aruba', value: '0', id: '0'
     }, {
@@ -542,46 +704,65 @@ describe('<SelectSingle />', () => {
       label: 'ARUBA', children: 'ARUBA', value: '2', id: '2'
     }]
 
-    it('calls onChange once when an option is selected', () => {
-      const onChange = testbed.stub().callsFake(event => event && event.persist())
-      const subject = testbed.render({
-        onChange,
-        options
-      })
+    it('calls onChange once when an option is selected', async () => {
+      const onChange = stub().callsFake(event => event && event.persist())
+      await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          onChange={onChange}
+        />
+      )
 
-      // Click the select field to open it
-      const selectField = subject.find(SelectField).getDOMNode()
-      selectField.click()
-      testbed.tick() // positioning of the options portal is deferred
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
 
-      // Select the second option
-      selectField.querySelectorAll('li[role="option"]')[1].click()
+      await input.click()
+
+      const items = await select.findAllOptions()
+
+      await items[1].mouseOver({relatedTarget: null})
+
+      await input.keyDown('enter')
 
       expect(onChange).to.have.been.calledOnce()
       expect(onChange.lastCall.args[1]).to.deep.include({ value: '1' })
     })
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      await mount(
+        <SelectSingle
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+        />
+      )
 
-      subject.find('input').simulate('click') // open it so it renders the opts
-
-      subject.should.be.accessible(done, {
+      const select = await SelectSingleLocator.find()
+      await select.click()
+      expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      })).to.be.true()
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
-
-      expect(subject.find('input').getAttribute('aria-invalid'))
-        .to.exist()
+    it('should set aria-invalid when errors prop is set', async () => {
+      await mount(
+        <SelectSingle
+          editable
+          messages={[{ type: 'error', text: 'some error message' }]}
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+        />
+      )
+      const select = await SelectSingleLocator.find()
+      const input = await select.find('input[type="text"]')
+      expect(input.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

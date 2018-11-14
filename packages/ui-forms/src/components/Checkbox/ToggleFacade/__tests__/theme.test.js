@@ -22,9 +22,11 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import ToggleFacade from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('ToggleFacade.theme', () => {
   describe('with the default theme', () => {
     const variables = ToggleFacade.generateTheme()
@@ -54,3 +56,4 @@ describe('ToggleFacade.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

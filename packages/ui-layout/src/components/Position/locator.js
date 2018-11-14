@@ -25,17 +25,25 @@
 import {
   findByQuery,
   locator,
+  querySelector,
   querySelectorAll
 } from '@instructure/ui-test-utils'
 
 import Position, { PositionTarget, PositionContent } from './index'
 
 const query = (ComponentIdentifier, element) => {
-  if (element instanceof Element)  {
-    const id = element.getAttribute(Position.locatorAttribute)
-    const attribute = ComponentIdentifier.locatorAttribute
-    // query document because content and target aren't necessarily a child of the component itself
-    return querySelectorAll(`[${attribute}="${id}"]`)
+  if (element instanceof Element) {
+    // Account for an element here that may not be the position root. This occurs when the
+    // `positionTarget` prop is set on Popover and the trigger and differs from the target
+    const positionRoot = querySelector(element, `[${Position.locatorAttribute}]`)
+    if (positionRoot) {
+      const id = positionRoot.getAttribute(Position.locatorAttribute)
+      const attribute = ComponentIdentifier.locatorAttribute
+      // query document because content and target aren't necessarily a child of the component itself
+      return querySelectorAll(`[${attribute}="${id}"]`)
+    } else {
+      return []
+    }
   } else {
     return []
   }

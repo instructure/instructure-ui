@@ -23,214 +23,290 @@
  */
 
 import React from 'react'
+import { expect, mount, stub, within, wait, find } from '@instructure/ui-test-utils'
 import TextArea from '../index'
 import styles from '../styles.css'
 
-describe('TextArea', () => {
-  const testbed = new Testbed(<TextArea label="Name" autoGrow={false} />)
+describe('TextArea', async () => {
+  it('should accept a default value', async () => {
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        defaultValue="Tom Servo"
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
 
-  it('should accept a default value', () => {
-    const subject = testbed.render({
-      defaultValue: 'Tom Servo'
-    })
-
-    testbed.raf()
-    testbed.tick()
-
-    expect(subject.find('textarea').unwrap().value).to.equal('Tom Servo')
+    expect(textarea.getDOMNode().value).to.equal('Tom Servo')
   })
 
-  it('should include a label', () => {
-    const subject = testbed.render()
-
-    expect(subject.find('label').length).to.equal(1)
+  it('should include a label', async () => {
+    await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+      />
+    )
+    const label = await find('label')
+    expect(label).to.exist()
   })
 
-  it('should set an initial height', () => {
-    const subject = testbed.render({
-      height: '100px'
-    })
-    expect(subject.find('textarea').getComputedStyle().getPropertyValue('height')).to.contain('100px')
+  it('should set an initial height', async () => {
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        height="100px"
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
+
+    expect(textarea.getComputedStyle().height).to.contain('100px')
   })
 
-  it('should resize if autoGrow is true', () => {
-    const subject = testbed.render({
-      autoGrow: true,
-      onChange: testbed.stub()
-    })
-
-    testbed.raf()
-    testbed.tick()
-
-    const textarea = subject.find('textarea')
-    const initialHeight = parseInt(textarea.getComputedStyle().getPropertyValue('height'), 10)
+  it('should resize if autoGrow is true', async () => {
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={true}
+        width="500px"
+        onChange={stub}
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
+    const initialHeight = parseInt(textarea.getComputedStyle().height, 10)
 
     /* eslint-disable max-len */
-    subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
+    await subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
     /* eslint-enable max-len */
 
-    testbed.raf()
-    testbed.tick()
-
-    const resizedHeight = parseInt(textarea.getComputedStyle().getPropertyValue('height'), 10)
-    expect(resizedHeight).to.be.above(initialHeight)
+    let resizedHeight
+    await wait(() => {
+      resizedHeight = parseInt(textarea.getComputedStyle().height, 10)
+      expect(resizedHeight).to.be.above(initialHeight)
+    })
 
     /* Ensure minHeight that matches input height is being applied to container */
-    const layout = subject.find(`.${styles.layout}`)
+    const layout = await label.find(`.${styles.layout}`)
     const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
     expect(resizedHeight).to.equal(layoutMinHeight)
   })
 
-  it('should set a maxHeight', () => {
-    const subject = testbed.render({
-      maxHeight: '10rem',
-      autoGrow: true,
-      onChange: testbed.stub(),
-      value: `Chartreuse celiac thundercats, distillery snackwave glossier
-      pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
-      meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
-      Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
-      gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
-      batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
-      cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
-      pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
-      pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
-      hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
-      Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
-      hexagon, scenester bushwick tacos
-      Chartreuse celiac thundercats, distillery snackwave glossier
-      pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
-      meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
-      Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
-      gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
-      batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
-      cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
-      pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
-      pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
-      hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
-      Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
-      hexagon, scenester bushwick tacos`
-    })
-    expect(subject.find('textarea').getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
+  it('should set a maxHeight', async () => {
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={true}
+        maxHeight="10rem"
+        onChange={stub()}
+        value={`Chartreuse celiac thundercats, distillery snackwave glossier
+        pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
+        meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
+        Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
+        gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
+        batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
+        cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
+        pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
+        pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
+        hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
+        Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
+        hexagon, scenester bushwick tacos
+        Chartreuse celiac thundercats, distillery snackwave glossier
+        pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
+        meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
+        Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
+        gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
+        batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
+        cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
+        pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
+        pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
+        hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
+        Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
+        hexagon, scenester bushwick tacos`}
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
 
+    expect(textarea.getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
     /* ensure maxHeight is being applied to input container and not exceeded by minHeight style */
-    const layout = subject.find(`.${styles.layout}`)
+    const layout = await label.find(`.${styles.layout}`)
     const layoutMaxHeight = parseInt(layout.getComputedStyle().getPropertyValue('max-height'), 10)
     const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
     expect(layoutMaxHeight).to.equal(160)
     expect(layoutMaxHeight).to.be.above(layoutMinHeight)
   })
 
-  it('should focus the textarea when focus is called', () => {
-    const subject = testbed.render()
+  it('should focus the textarea when focus is called', async () => {
+    let ref
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        componentRef={el => ref = el}
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
 
-    subject.instance().focus()
-
-    expect(subject.find('textarea').focused()).to.be.true()
+    ref.focus()
+    expect(textarea.focused()).to.be.true()
   })
 
-  it('provides a focused getter', () => {
-    const subject = testbed.render()
+  it('provides a focused getter', async () => {
+    let ref
+    await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        componentRef={el => ref = el}
+      />
+    )
 
-    subject.instance().focus()
-
-    expect(subject.instance().focused).to.be.true()
+    ref.focus()
+    expect(ref.focused).to.be.true()
   })
 
-  it('should provide an textareaRef prop', () => {
-    const textareaRef = testbed.stub()
-    const subject = testbed.render({
-      textareaRef
-    })
+  it('should provide an textareaRef prop', async () => {
+    const textareaRef = stub()
+    const subject = await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        textareaRef={textareaRef}
+      />
+    )
+    const label = within(subject.getDOMNode())
+    const textarea = await label.find('textarea')
 
-    expect(textareaRef).to.have.been.calledWith(subject.find('textarea').unwrap())
+    expect(textareaRef).to.have.been.calledWith(textarea.getDOMNode())
   })
 
-  it('should provide a value getter', () => {
-    const subject = testbed.render({
-      defaultValue: 'bar'
-    })
+  it('should provide a value getter', async () => {
+    let ref
+    await mount(
+      <TextArea
+        label="Name"
+        autoGrow={false}
+        defaultValue="bar"
+        componentRef={el => ref = el}
+      />
+    )
 
-    expect(subject.instance().value).to.equal('bar')
+    expect(ref.value).to.equal('bar')
   })
 
-  describe('events', () => {
-    it('responds to onChange event', () => {
-      const onChange = testbed.stub()
+  describe('events', async () => {
+    it('responds to onChange event', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+          onChange={onChange}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
 
-      const subject = testbed.render({
-        onChange
-      })
-
-      subject.find('textarea').simulate('change')
-
+      await textarea.change({ target: { value: 'foo' } })
       expect(onChange).to.have.been.called()
     })
 
-    it('does not respond to onChange event when disabled', () => {
-      const onChange = testbed.stub()
+    it('does not respond to onChange event when disabled', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <TextArea
+          disabled
+          label="Name"
+          autoGrow={false}
+          onChange={onChange}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
 
-      const subject = testbed.render({
-        disabled: true,
-        onChange
-      })
-
-      subject.find('textarea').simulate('change')
-
+      await textarea.change({ target: { value: 'foo' } })
       expect(onChange).to.not.have.been.called()
     })
 
-    it('does not respond to onChange event when readOnly', () => {
-      const onChange = testbed.stub()
+    it('does not respond to onChange event when readOnly', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <TextArea
+          readOnly
+          label="Name"
+          autoGrow={false}
+          onChange={onChange}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
 
-      const subject = testbed.render({
-        readOnly: true,
-        onChange
-      })
-
-      subject.find('textarea').simulate('change')
-
+      await textarea.change({ target: { value: 'foo' } })
       expect(onChange).to.not.have.been.called()
     })
 
-    it('responds to onBlur event', () => {
-      const onBlur = testbed.stub()
+    it('responds to onBlur event', async () => {
+      const onBlur = stub()
+      const subject = await mount(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+          onBlur={onBlur}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
 
-      const subject = testbed.render({
-        onBlur
-      })
-
-      subject.find('textarea').simulate('blur')
-
+      await textarea.blur()
       expect(onBlur).to.have.been.called()
     })
 
-    it('responds to onFocus event', () => {
-      const onFocus = testbed.stub()
+    it('responds to onFocus event', async () => {
+      const onFocus = stub()
+      const subject = await mount(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+          onFocus={onFocus}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
 
-      const subject = testbed.render({
-        onFocus
-      })
-
-      subject.find('textarea').simulate('focus')
-
+      await textarea.focus()
       expect(onFocus).to.have.been.called()
     })
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', done => {
-      const subject = testbed.render()
-
-      subject.should.be.accessible(done)
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      const subject = await mount(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      expect(await label.accessible()).to.be.true()
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
-
-      expect(subject.find('textarea').getAttribute('aria-invalid')).to.exist()
+    it('should set aria-invalid when errors prop is set', async () => {
+      const subject = await mount(
+        <TextArea
+          label="Name"
+          autoGrow={false}
+          messages={[{ type: 'error', text: 'some error message' }]}
+        />
+      )
+      const label = within(subject.getDOMNode())
+      const textarea = await label.find('textarea')
+      expect(textarea.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

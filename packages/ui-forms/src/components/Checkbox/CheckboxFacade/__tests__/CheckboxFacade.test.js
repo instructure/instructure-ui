@@ -23,21 +23,18 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import CheckboxFacade from '../index'
 
-describe('<CheckboxFacade />', () => {
-  const testbed = new Testbed(<CheckboxFacade>label text</CheckboxFacade>)
-
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+describe('<CheckboxFacade />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
+    const checkboxFacade = within(subject.getDOMNode())
+    expect(checkboxFacade).to.exist()
   })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<CheckboxFacade>label text</CheckboxFacade>)
+    const checkboxFacade = within(subject.getDOMNode())
+    expect(await checkboxFacade.accessible()).to.be.true()
   })
 })

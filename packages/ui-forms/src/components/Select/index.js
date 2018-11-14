@@ -31,6 +31,7 @@ import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import error from '@instructure/ui-utils/lib/error'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import SelectSingle from './SelectSingle'
 import SelectMultiple from './SelectMultiple'
@@ -41,6 +42,7 @@ import parseOptions from './utils/parseOptions'
 category: components
 ---
 **/
+@testable()
 class Select extends Component {
   static propTypes = {
     /**

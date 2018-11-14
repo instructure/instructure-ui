@@ -23,523 +23,1226 @@
  */
 
 import React from 'react'
-import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
-import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
+import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
 import NumberInput from '../index'
 
-describe('<NumberInput />', () => {
-  const testbed = new Testbed(<NumberInput label="Name" />)
+describe('<NumberInput />', async () => {
+  describe('NumberInput.applyStep', async () => {
+    it('should add steps', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+        />
+      )
 
-  describe('NumberInput.applyStep', () => {
-    it('should add steps', () => {
-      const subject = testbed.render({ defaultValue: '0', step: '1' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('1')
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('1')
     })
 
-    it('should subtract steps', () => {
-      const subject = testbed.render({ defaultValue: '0', step: '1' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-1')
+    it('should subtract steps', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="1"
+          step="1"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[1].mouseDown()
+      expect(input.getDOMNode().value).to.equal('0')
     })
 
-    it('should support fractional steps', () => {
-      const subject = testbed.render({ defaultValue: '3', step: '1.5' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('1.5')
+    it('should support fractional steps', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="3"
+          step="1.5"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[1].mouseDown()
+      expect(input.getDOMNode().value).to.equal('1.5')
     })
 
-    describe('with large numbers', () => {
-      it('should add steps', () => {
-        const subject = testbed.render({ defaultValue: '123456789012345678901', step: '1' })
-        expect(subject.instance().applyStep(1).toString()).to.equal('123456789012345678902')
+    describe('with large numbers', async () => {
+      it('should add steps', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="123456789012345678901"
+            step="1"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[0].mouseDown()
+        expect(input.getDOMNode().value).to.equal('123,456,789,012,345,678,902')
       })
 
-      it('should substract steps', () => {
-        const subject = testbed.render({ defaultValue: '1234567890123456789012345', step: '1' })
-        expect(subject.instance().applyStep(-1).toString()).to.equal('1234567890123456789012344')
+      it('should substract steps', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="1234567890123456789012345"
+            step="1"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('1,234,567,890,123,456,789,012,344')
       })
 
-      it('should not use scientific notation', () => {
-        const subject = testbed.render({ defaultValue: '123456789012345678901234567890', step: '5' })
-        expect(subject.instance().applyStep(1).toString()).to.equal('123456789012345678901234567895')
+      it('should not use scientific notation', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="123456789012345678901234567890"
+            step="5"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[0].mouseDown()
+        expect(input.getDOMNode().value).to.equal('123,456,789,012,345,678,901,234,567,895')
       })
     })
 
     describe('when the input is empty', () => {
-      it('should assume value is 0 web adding steps', () => {
-        const subject = testbed.render({ defaultValue: '', step: '123' })
-        expect(subject.instance().applyStep(1).toString()).to.equal('123')
+      it('should assume value is 0 web adding steps', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue=""
+            step="123"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[0].mouseDown()
+        expect(input.getDOMNode().value).to.equal('123')
       })
 
-      it('should assume value is 0 when subtracting steps', () => {
-        const subject = testbed.render({ defaultValue: '', step: '123' })
-        expect(subject.instance().applyStep(-1).toString()).to.equal('-123')
+      it('should assume value is 0 when subtracting steps', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue=""
+            step="123"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('-123')
       })
     })
 
-    describe('with a min prop', () => {
-      it('should limit min if given', () => {
-        const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-        expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
+    describe('with a min prop', async () => {
+      it('should limit min if given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="-9"
+            step="1"
+            min="-10"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('-10')
       })
 
-      it('should limit min if given', () => {
-        const subject = testbed.render({ defaultValue: '-10', step: '1', min: '-10' })
-        expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
+      it('should limit min if given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="-10"
+            step="1"
+            min="-10"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('-10')
       })
 
-      it('should limit min if given', () => {
-        const subject = testbed.render({ defaultValue: '0', step: '1', min: '0' })
-        expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
+      it('should limit min if given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="-9"
+            step="1"
+            min="-10"
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
+
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('-10')
+
+        await subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('-10')
       })
     })
 
-    it('should limit min if given', () => {
-      const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
+    it("should snap to the next step when value doesn't match the step increments", async () => {
+      it('should limit min if given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="2.5"
+            step="1"
+          />
+        )
 
-      subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+        const arrows = await numberInput.findAll('button')
 
-      subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
-    })
+        await arrows[0].mouseDown()
+        expect(input.getDOMNode().value).to.equal('3')
 
-    it('should limit min if given', () => {
-      const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
+        subject.setProps({ defaultValue: '2.5', step: '1' })
 
-      subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
-
-      subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
-    })
-
-    it('should limit min if given', () => {
-      const subject = testbed.render({ defaultValue: '-9', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
-
-      subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
-
-      subject.setProps({ defaultValue: '0', step: '1', min: '0' })
-      expect(subject.instance().applyStep('0', '1', -1, '0').toString()).to.equal('0')
-    })
-
-    it("should snap to the next step when value doesn't match the step increments", () => {
-      const subject = testbed.render({ defaultValue: '2.5', step: '1', min: null })
-      expect(subject.instance().applyStep(1).toString()).to.equal('3')
-
-      subject.setProps({ defaultValue: '2.5', step: '1', min: null })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('2')
-    })
-
-    it('should snap value to min if value is already smaller than min and dir is -1', () => {
-      const subject = testbed.render({
-        defaultValue: '-99',
-        step: '1',
-        min: '-10'
+        await arrows[1].mouseDown()
+        expect(input.getDOMNode().value).to.equal('2')
       })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('-10')
     })
 
-    it('should snap value to min when it is already smaller than min and dir is 1', () => {
-      const subject = testbed.render({
-        defaultValue: '-99',
-        step: '1',
-        min: '-10'
-      })
-      expect(subject.instance().applyStep(1).toString()).to.equal('-10')
+    it('should snap value to min if value is already smaller than min and dir is -1', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="-99"
+          step="1"
+          min="-10"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[1].mouseDown()
+      expect(input.getDOMNode().value).to.equal('-10')
     })
 
-    it('should limit max if given', () => {
-      const subject = testbed.render({ defaultValue: '6', step: '1', min: null, max: '7' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('7')
+    it('should snap value to min when it is already smaller than min and dir is 1', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="-99"
+          step="1"
+          min="-10"
+        />
+      )
 
-      subject.setProps({ defaultValue: '7', step: '1', min: null, max: '7' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('7')
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('-10')
     })
 
-    it('should snap value to max if value is already greater than max and dir is 1', () => {
-      const subject = testbed.render({ defaultValue: '99', step: '1', min: null, max: '10' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('10')
+    it('should limit max if given', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="6"
+          step="1"
+          max="7"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('7')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('7')
     })
 
-    it('should snap value to max when it is already greater than max and dir is -1', () => {
-      const subject = testbed.render({ defaultValue: '99', step: '1', min: null, max: '10' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('10')
+    it('should snap value to max if value is already greater than max and dir is 1', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="99"
+          step="1"
+          max="10"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('10')
     })
 
-    it('should use min when given as the base for step', () => {
-      const subject = testbed.render({ value: '1', step: '0.11', min: '1' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('1.1')
+    it('should snap value to max when it is already greater than max and dir is -1', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="99"
+          step="1"
+          max="10"
+        />
+      )
 
-      subject.setProps({ value: '0', step: '0.11', min: '0' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('0.11')
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
 
-      subject.setProps({ value: '-1', step: '0.3', min: '-1' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('-0.9')
-
-      subject.setProps({ value: '5.25', step: '1', min: '-2.75' })
-      expect(subject.instance().applyStep(-1).toString()).to.equal('5')
+      await arrows[1].mouseDown()
+      expect(input.getDOMNode().value).to.equal('10')
     })
 
-    it("should not pass over max when the last step doesn't match", () => {
-      const subject = testbed.render({ value: '2', step: '1', min: null, max: '2.75' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('2.75')
+    it("should not pass over max when the last step doesn't match", async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="2"
+          step="1"
+          max="2.75"
+        />
+      )
 
-      subject.setProps({ value: '3.4', step: '0.4', min: '3', max: '3.6' })
-      expect(subject.instance().applyStep(1).toString()).to.equal('3.6')
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('2.75')
     })
   })
 
-  describe('internationalization', () => {
-    it('can be passed a locale prop', () => {
-      const subject = testbed.render({ locale: 'de' })
-      expect(subject.instance().locale).to.equal('de')
+  describe('internationalization', async () => {
+    it('can be passed a locale prop', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0.5"
+          step="0.5"
+          locale="de"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getDOMNode().value).to.equal('0,5')
     })
 
-    it('uses the context locale if no locale prop is passed', () => {
-      const context = { locale: 'de' }
-      const subject = testbed.render({}, context)
-      expect(subject.instance().locale).to.equal('de')
+    it('uses the context locale if no locale prop is passed', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0.5"
+          step="0.5"
+          locale="de"
+        />, {
+          context: { locale: 'de' }
+        })
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getDOMNode().value).to.equal('0,5')
     })
 
-    it('uses the prop if locale is passed as a prop and locale is available on the context', () => {
-      const context = { locale: 'en-au' }
-      const subject = testbed.render({ locale: 'de' }, context)
-      expect(subject.instance().locale).to.equal('de')
+    it('uses the prop if locale is passed as a prop and locale is available on the context', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0.5"
+          step="0.5"
+          locale="de"
+        />, {
+          context: { locale: 'en-au' }
+        })
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getDOMNode().value).to.equal('0,5')
     })
 
-    it('formats default values in accordance with the locale', () => {
-      const subject = testbed.render({
-        defaultValue: 'a2.5',
-        locale: 'de'
-      })
-      expect(subject.find('input').node.value).to.equal('2,5')
+    it('formats default values in accordance with the locale', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="a2.5"
+          step="0.5"
+          locale="de"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getDOMNode().value).to.equal('2,5')
     })
 
-    it('updates the input value if the locale changes', done => {
-      const subject = testbed.render({ defaultValue: '2.5' })
-      expect(subject.find('input').node.value).to.equal('2.5')
-      subject.setProps({ locale: 'de' }, () => {
-        expect(subject.find('input').node.value).to.equal('2,5')
-        done()
-      })
+    it('updates the input value if the locale changes', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="a2.5"
+          step="0.5"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getDOMNode().value).to.equal('2.5')
+
+      await subject.setProps({ locale: 'de'})
+      expect(input.getDOMNode().value).to.equal('2,5')
     })
 
-    it('increments the number in the appropriate locale when the up arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
-      subject.find(IconArrowOpenUp).simulate('mouseDown')
-      expect(subject.find('input').node.value).to.equal('2,6')
+    it('increments the number in the appropriate locale when the up arrow is pressed', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="2.5"
+          step="0.1"
+          locale="de"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
+      expect(input.getDOMNode().value).to.equal('2,6')
     })
 
-    it('decrements the number in the appropriate locale when the down arrow is pressed', () => {
-      const subject = testbed.render({ defaultValue: 2.5, step: 0.1, locale: 'de' })
-      subject.find(IconArrowOpenDown).simulate('mouseDown')
-      expect(subject.find('input').node.value).to.equal('2,4')
+    it('decrements the number in the appropriate locale when the down arrow is pressed', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="2.5"
+          step="0.1"
+          locale="de"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[1].mouseDown()
+      expect(input.getDOMNode().value).to.equal('2,4')
     })
 
-    it('allows entering "." if the locale uses "." as a decimal delimiter', () => {
-      const subject = testbed.render()
-      const input = subject.find('input')
+    it('allows entering "." if the locale uses "." as a decimal delimiter', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+        />
+      )
 
-      input.setValue('2.1')
-      input.blur()
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      expect(input.node.value).to.equal('2.1')
+      await input.typeIn('2.1')
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('2.1')
     })
 
-    it('allows entering "," if the locale uses "," as a decimal delimiter', () => {
-      const subject = testbed.render({ locale: 'de' })
-      const input = subject.find('input')
+    it('allows entering "," if the locale uses "," as a decimal delimiter', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          locale="de"
+        />
+      )
 
-      input.setValue('2,1')
-      input.blur()
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      expect(input.node.value).to.equal('2,1')
+      await input.typeIn('2,1')
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('2,1')
     })
 
     describe('conditionalFormat', () => {
-      it('formats on render when a number value props is given', () => {
-        const subject = testbed.render({ locale: 'fr', value: 7.3 })
-        const input = subject.find('input')
+      it('formats on render when a number value props is given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            value={7.3}
+            step="1"
+            locale="fr"
+          />
+        )
 
-        expect(input.node.value).to.equal('7,3')
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        expect(input.getDOMNode().value).to.equal('7,3')
       })
 
-      it('does not format on render when a string value prop is given', () => {
-        const subject = testbed.render({ locale: 'fr', value: 'foo' })
-        const input = subject.find('input')
+      it('does not format on render when a string value prop is given', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            value="foo"
+            step="1"
+            locale="fr"
+          />
+        )
 
-        expect(input.node.value).to.equal('foo')
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        expect(input.getDOMNode().value).to.equal('foo')
       })
 
-      it('does not format on render when value is falsey', () => {
-        const subject = testbed.render({ locale: 'fr' })
-        const input = subject.find('input')
+      it('does not format on render when value is falsey', async () => {
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            step="1"
+            locale="fr"
+          />
+        )
 
-        expect(input.node.value).to.equal('')
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        expect(input.getDOMNode().value).to.equal('')
       })
     })
   })
 
-  describe('onChange handler', () => {
-    const onChangeArgs = (value, props = {}) => {
-      const onChange = testbed.stub()
-      const subject = testbed.render({ ...props, onChange })
-      const input = subject.find('input')
-      input.setValue(value)
+  describe('onChange handler', async () => {
+    it('receives the raw string value of the input as the second argument', async () => {
+      const value = '-12.501,5'
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          decimalPrecision={2}
+          locale="de"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
 
       expect(onChange).to.have.been.called()
-      return onChange.lastCall.args
-    }
-
-    const baseProps = {
-      decimalPrecision: 2,
-      locale: 'de'
-    }
-
-    it('receives the raw string value of the input as the second argument', () => {
-      const value = '-12.501,5'
-      expect(onChangeArgs(value, baseProps)[1]).to.equal(value)
+      expect(onChange.lastCall.args[1]).to.equal(value)
     })
 
-    it('receives the normalized string value of the input as the third argument', () => {
+    it('receives the normalized string value of the input as the third argument', async () => {
       const value = '-12.501,5'
-      expect(onChangeArgs(value, baseProps)[2]).to.equal('-12501.50')
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          decimalPrecision={2}
+          locale="de"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+
+      expect(onChange).to.have.been.called()
+      expect(onChange.lastCall.args[2]).to.equal('-12501.50')
     })
 
-    it("receives null as the third argument if the value can't be parsed", () => {
+    it("receives null as the third argument if the value can't be parsed", async () => {
       const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      expect(onChangeArgs(value, baseProps)[2]).to.be.null()
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          decimalPrecision={2}
+          locale="de"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+
+      expect(onChange).to.have.been.called()
+      expect(onChange.lastCall.args[2]).to.be.null()
     })
 
-    it('receives the min value as the third argument if value is less than min', () => {
-      const min = 1
+    it('receives the min value as the third argument if value is less than min', async () => {
       const value = '0'
-      expect(onChangeArgs(value, { ...baseProps, min })[2]).to.equal('1.00')
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          min={1}
+          decimalPrecision={2}
+          locale="de"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+
+      expect(onChange).to.have.been.called()
+      expect(onChange.lastCall.args[2]).to.equal('1.00')
     })
 
-    it('receives the max value as the third argument if value is greater than max', () => {
-      const max = 99.9
+    it('receives the max value as the third argument if value is greater than max', async () => {
       const value = '100'
-      expect(onChangeArgs(value, { ...baseProps, max })[2]).to.equal('99.90')
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          max={99.9}
+          decimalPrecision={2}
+          locale="de"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+
+      expect(onChange).to.have.been.called()
+      expect(onChange.lastCall.args[2]).to.equal('99.90')
     })
 
-    context('when precision not specified', () => {
-      it('includes trailing zeros in third argument', () => {
+    context('when precision not specified', async () => {
+      it('includes trailing zeros in third argument', async () => {
         const value = '5,00'
-        expect(onChangeArgs(value, { ...baseProps, decimalPrecision: null })[2]).to.equal('5.00')
+        const onChange = stub()
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            decimalPrecision={null}
+            locale="de"
+            onChange={onChange}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+
+        expect(onChange).to.have.been.called()
+        expect(onChange.lastCall.args[2]).to.equal('5.00')
       })
     })
 
-    context('when value is less precise than specified precision', () => {
-      it('receives a third argument with trailing zeros', () => {
-        expect(onChangeArgs('3.9', { significantDigits: 3 })[2]).to.equal('3.90')
+    context('when value is less precise than specified precision', async () => {
+      it('receives a third argument with trailing zeros', async () => {
+        const value = '3.9'
+        const onChange = stub()
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            significantDigits={3}
+            onChange={onChange}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+
+        expect(onChange).to.have.been.called()
+        expect(onChange.lastCall.args[2]).to.equal('3.90')
       })
     })
 
-    context('when value is more precise than specified precision', () => {
-      it('receives a third argument rounded to the given decimal precision', () => {
-        expect(onChangeArgs('9.99', { decimalPrecision: 1 })[2]).to.equal('10.0')
+    context('when value is more precise than specified precision', async () => {
+      it('receives a third argument rounded to the given decimal precision', async () => {
+        const value = '9.99'
+        const onChange = stub()
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            decimalPrecision={1}
+            onChange={onChange}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+
+        expect(onChange).to.have.been.called()
+        expect(onChange.lastCall.args[2]).to.equal('10.0')
       })
 
-      it('receives a third argument rounded to the given significant digits', () => {
-        expect(onChangeArgs('9.175', { significantDigits: 3 })[2]).to.equal('9.18')
+      it('receives a third argument rounded to the given significant digits', async () => {
+        const value = '9.175'
+        const onChange = stub()
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            significantDigits={3}
+            onChange={onChange}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+
+        expect(onChange).to.have.been.called()
+        expect(onChange.lastCall.args[2]).to.equal('9.18')
       })
     })
   })
 
-  describe('onBlur formatting', () => {
-    const inputValueOnBlur = (value, props) => {
-      const subject = testbed.render(props)
-      const input = subject.find('input')
-      input.setValue(value)
-      input.blur()
-      return input.getDOMNode().value
-    }
-
-    it("should not clean values that can't be parsed into a number", () => {
+  describe('onBlur formatting', async () => {
+    it("should not clean values that can't be parsed into a number", async () => {
       const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-      expect(inputValueOnBlur(value)).to.equal(value)
+      // expect(inputValueOnBlur(value)).to.equal(value)
+
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          significantDigits={3}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal(value)
     })
 
-    it('should reject all symbols except for - and the locale decimal delimiter', () => {
+    it('should reject all symbols except for - and the locale decimal delimiter', async () => {
       // locale is set to 'en' so the decimal delimiter is '.'
-      expect(inputValueOnBlur('-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0')).to.equal('0')
+      const value = '-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0'
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('0')
     })
 
-    it('should apply the locale specific thousands delimiter', () => {
-      expect(inputValueOnBlur('1234567890', { locale: 'es' })).to.equal('1.234.567.890')
+    it('should apply the locale specific thousands delimiter', async () => {
+      const value = '1234567890'
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          locale="es"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('1.234.567.890')
     })
 
-    it('should remove leading zeros', () => {
-      expect(inputValueOnBlur('aabb0.0.0.1', { locale: 'es' })).to.equal('1')
+    it('should remove leading zeros', async () => {
+      const value = 'aabb0.0.0.1'
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          locale="es"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('1')
     })
 
-    it('should leave only the last decimal delimiter', () => {
-      expect(inputValueOnBlur(',1,,2,,,3,,4', { locale: 'fr' })).to.equal('123,4')
+    it('should leave only the last decimal delimiter', async () => {
+      const value = ',1,,2,,,3,,4'
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          locale="fr"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('123,4')
     })
 
-    it('should not strip trailing zeros', () => {
-      expect(inputValueOnBlur('1.000')).to.equal('1.000')
+    it('should not strip trailing zeros', async () => {
+      const value = '1.000'
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('1.000')
     })
 
-    context('when value is less precise than specified precision', () => {
-      it('adds trailing zeros', () => {
-        expect(inputValueOnBlur('123', { decimalPrecision: 2 })).to.equal('123.00')
+    context('when value is less precise than specified precision', async () => {
+      it('adds trailing zeros', async () => {
+        const value = '123'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            decimalPrecision={2}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('123.00')
       })
     })
 
-    context('when value is more precise than specified precision', () => {
-      it('rounds to the given decimal precision', () => {
-        expect(inputValueOnBlur('123.58', { decimalPrecision: 1 })).to.equal('123.6')
+    context('when value is more precise than specified precision', async () => {
+      it('rounds to the given decimal precision', async () => {
+        const value = '123.58'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            decimalPrecision={1}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('123.6')
       })
 
-      it('rounds to the given significant digits', () => {
-        expect(inputValueOnBlur('123', { significantDigits: 2 })).to.equal('120')
+      it('rounds to the given significant digits', async () => {
+        const value = '123'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            significantDigits={2}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('120')
       })
     })
 
-    context('when the specified precision is 0', () => {
-      it('rounds the decimal precision to 0', () => {
-        expect(inputValueOnBlur('123.93', { decimalPrecision: 0 })).to.equal('124')
+    context('when the specified precision is 0', async () => {
+      it('rounds the decimal precision to 0', async () => {
+        const value = '123.93'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            decimalPrecision={0}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('124')
       })
     })
 
-    context('when value is negative and min is 0', () => {
-      it('sets the value to 0', () => {
-        expect(inputValueOnBlur('-1', { min: 0 })).to.equal('0')
+    context('when value is negative and min is 0', async () => {
+      it('sets the value to 0', async () => {
+        const value = '-1'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            min={0}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('0')
       })
     })
 
-    context('when value is positive and max is 0', () => {
-      it('sets the value to 0', () => {
-        expect(inputValueOnBlur('1', { max: 0 })).to.equal('0')
+    context('when value is positive and max is 0', async () => {
+      it('sets the value to 0', async () => {
+        const value = '1'
+        const subject = await mount(
+          <NumberInput
+            label="Name"
+            defaultValue="0"
+            step="1"
+            max={0}
+          />
+        )
+
+        const numberInput = within(subject.getDOMNode())
+        const input = await numberInput.find('input')
+
+        await input.change({ target: { value } })
+        await input.blur()
+
+        expect(input.getDOMNode().value).to.equal('0')
       })
     })
   })
 
-  it('should accept a default value', () => {
-    const subject = testbed.render({
-      defaultValue: '7'
-    })
+  it('should accept a default value', async () => {
+    const subject = await mount(
+      <NumberInput
+        label="Name"
+        defaultValue="7"
+        step="1"
+      />
+    )
 
-    expect(subject.find('input').getDOMNode().value).to.equal('7')
+    const numberInput = within(subject.getDOMNode())
+    const input = await numberInput.find('input')
+
+    expect(input.getDOMNode().value).to.equal('7')
   })
 
-  it('should include a label', () => {
-    const subject = testbed.render()
+  it('should include a label', async () => {
+    await mount(
+      <NumberInput
+        label="Name"
+        defaultValue="7"
+        step="1"
+      />
+    )
 
-    expect(subject.find('label').length).to.equal(1)
+    const label = await find('label')
+    expect(label).to.exist()
   })
 
-  it('should focus the input when focus is called', () => {
-    const subject = testbed.render()
+  it('should focus the input when focus is called', async () => {
+    let ref
+    const subject = await mount(
+      <NumberInput
+        label="Name"
+        defaultValue="7"
+        step="1"
+        componentRef={el => ref = el}
+      />
+    )
 
-    subject.instance().focus()
+    const numberInput = within(subject.getDOMNode())
 
-    expect(subject.find('input').focused()).to.be.true()
+    ref.focus()
+
+    expect(numberInput.containsFocus()).to.be.true()
   })
 
-  it('should provide an inputRef prop', () => {
-    const inputRef = testbed.stub()
-    const subject = testbed.render({
-      inputRef
-    })
+  it('should provide an inputRef prop', async () => {
+    const inputRef = stub()
+    const subject = await mount(
+      <NumberInput
+        label="Name"
+        defaultValue="7"
+        step="1"
+        inputRef={inputRef}
+      />
+    )
 
-    expect(inputRef).to.have.been.calledWith(subject.find('input').unwrap())
+    const numberInput = within(subject.getDOMNode())
+    const input = await numberInput.find('input')
+
+    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  it('should provide a value getter', () => {
-    const subject = testbed.render({
-      defaultValue: '9.7'
-    })
+  it('should provide a value getter', async () => {
+    let ref
+    await mount(
+      <NumberInput
+        label="Name"
+        defaultValue="9.7"
+        step="1"
+        componentRef={el => ref = el}
+      />
+    )
 
-    expect(subject.instance().value).to.equal('9.7')
+    expect(ref.value).to.equal('9.7')
   })
 
-  describe('events', () => {
-    it('up arrow responds to clicks', () => {
-      const onChange = testbed.stub()
+  describe('events', async () => {
+    it('up arrow responds to clicks', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        onChange
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find(IconArrowOpenUp).simulate('mouseDown')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[0].mouseDown()
 
       expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('1')
       expect(onChange.firstCall.args[2]).to.equal('1')
-      expect(subject.find('input').getDOMNode().value).to.equal('1')
+      expect(input.getDOMNode().value).to.equal('1')
     })
 
-    it('down arrow responds to clicks', () => {
-      const onChange = testbed.stub()
+    it('down arrow responds to clicks', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        onChange
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find(IconArrowOpenDown).simulate('mouseDown')
+      const arrows = await numberInput.findAll('button')
+
+      await arrows[1].mouseDown()
 
       expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('-1')
       expect(onChange.firstCall.args[2]).to.equal('-1')
-      expect(subject.find('input').getDOMNode().value).to.equal('-1')
+      expect(input.getDOMNode().value).to.equal('-1')
     })
 
-    it('responds to onChange event', () => {
-      const onChange = testbed.stub()
+    it('responds to onChange event', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        onChange
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find('input').simulate('change')
+      await input.change({ target: { value: '1'} })
 
       expect(onChange).to.have.been.called()
     })
 
-    it('responds to onKeyDown event', () => {
-      const onKeyDown = testbed.stub()
+    it('responds to onKeyDown event', async () => {
+      const onKeyDown = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onKeyDown={onKeyDown}
+        />
+      )
 
-      const subject = testbed.render({
-        onKeyDown
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find('input').keyDown('ArrowUp')
+      await input.keyDown('up')
 
       expect(onKeyDown).to.have.been.called()
     })
 
-    it('responds to onBlur event', () => {
-      const onBlur = testbed.stub()
+    it('responds to onBlur event', async () => {
+      const onBlur = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onBlur={onBlur}
+        />
+      )
 
-      const subject = testbed.render({
-        onBlur
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find('input').blur()
+      await input.blur()
 
       expect(onBlur).to.have.been.called()
     })
 
-    it('responds to onFocus event', () => {
-      const onFocus = testbed.stub()
+    it('responds to onFocus event', async () => {
+      const onFocus = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          onFocus={onFocus}
+        />
+      )
 
-      const subject = testbed.render({
-        onFocus
-      })
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
 
-      subject.find('input').simulate('focus')
+      await input.focus()
 
       expect(onFocus).to.have.been.called()
     })
   })
 
-  context('when controlled', () => {
+  context('when controlled', async () => {
     class Example extends React.Component {
       state = { value: '' }
 
@@ -555,93 +1258,165 @@ describe('<NumberInput />', () => {
       }
     }
 
-    const controlledTestbed = new Testbed(<Example />)
+    it('allows negative numbers to be typed into the input', async () => {
+      const subject = await mount(
+        <Example />
+      )
 
-    it('allows negative numbers to be typed into the input', () => {
-      const subject = controlledTestbed.render()
-      const input = subject.find('input')
-      input.simulate('change', { target: { value: '-' } })
-      expect(input.node.value).to.equal('-')
-      input.simulate('change', { target: { value: '-1' } })
-      expect(input.node.value).to.equal('-1')
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value: '-' } })
+      expect(input.getDOMNode().value).to.equal('-')
+
+      await input.change({ target: { value: '-1' } })
+      expect(input.getDOMNode().value).to.equal('-1')
     })
 
-    it('allows periods to be typed into the input', () => {
-      const subject = controlledTestbed.render()
-      const input = subject.find('input')
-      input.simulate('change', { target: { value: '.' } })
-      expect(input.node.value).to.equal('.')
-      input.simulate('change', { target: { value: '.5' } })
-      expect(input.node.value).to.equal('.5')
+    it('allows periods to be typed into the input', async () => {
+      const subject = await mount(
+        <Example />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value: '.' } })
+      expect(input.getDOMNode().value).to.equal('.')
+
+      await input.change({ target: { value: '.5' } })
+      expect(input.getDOMNode().value).to.equal('.5')
     })
 
-    it('allows commas to be typed into the input', () => {
-      const subject = controlledTestbed.render()
-      const input = subject.find('input')
-      input.simulate('change', { target: { value: ',' } })
-      expect(input.node.value).to.equal(',')
-      input.simulate('change', { target: { value: ',5' } })
-      expect(input.node.value).to.equal(',5')
+    it('allows commas to be typed into the input', async () => {
+      const subject = await mount(
+        <Example />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value: ',' } })
+      expect(input.getDOMNode().value).to.equal(',')
+
+      await input.change({ target: { value: ',5' } })
+      expect(input.getDOMNode().value).to.equal(',5')
     })
 
-    it('formats the value according to the locale on blur', () => {
-      const subject = controlledTestbed.render({ locale: 'de' })
-      const input = subject.find('input')
+    it('formats the value according to the locale on blur', async () => {
       const value = '12345,6789'
-      input.simulate('change', { target: { value } })
-      expect(input.node.value).to.equal(value)
-      input.simulate('blur')
-      expect(input.node.value).to.equal('12.345,6789')
+      const subject = await mount(
+        <Example locale="de" />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      expect(input.getDOMNode().value).to.equal(value)
+
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('12.345,6789')
     })
 
-    it('sets the value to the specified precision on blur', () => {
-      const subject = controlledTestbed.render({ significantDigits: 2 })
-      const input = subject.find('input')
+    it('sets the value to the specified precision on blur', async () => {
       const value = '102'
-      input.simulate('change', { target: { value } })
-      expect(input.node.value).to.equal(value)
-      input.simulate('blur')
-      expect(input.node.value).to.equal('100')
+      const subject = await mount(
+        <Example significantDigits={2} />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      await input.change({ target: { value } })
+      expect(input.getDOMNode().value).to.equal(value)
+
+      await input.blur()
+
+      expect(input.getDOMNode().value).to.equal('100')
     })
   })
 
-  describe('componentWillReceiveProps', () => {
-    it('updates value if locale changes', () => {
-      const onChange = testbed.stub()
-      const subject = testbed.render({ locale: 'en', onChange })
-      const input = subject.find('input')
-      input.node.value = '1234.5'
-      subject.setProps({ locale: 'de' })
-      expect(input.node.value).to.equal('1.234,5')
+  describe('componentWillReceiveProps', async () => {
+    it('updates value if locale changes', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          locale="en"
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      input.getDOMNode().value = '1234.5'
+
+      await subject.setProps({ locale: 'de' })
+
+      expect(input.getDOMNode().value).to.equal('1.234,5')
       expect(onChange.lastCall.args[1]).to.equal('1.234,5')
       expect(onChange.lastCall.args[2]).to.equal('1234.5')
     })
 
-    it('updates value if precision changes', () => {
-      const onChange = testbed.stub()
-      const subject = testbed.render({ onChange, significantDigits: 3 })
-      const input = subject.find('input')
-      input.node.value = '12.5'
-      subject.setProps({ decimalPrecision: 2, significantDigits: null })
-      expect(input.node.value).to.equal('12.50')
+    it('updates value if precision changes', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          significantDigits={3}
+          onChange={onChange}
+        />
+      )
+
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      input.getDOMNode().value = '12.5'
+
+      await subject.setProps({ decimalPrecision: 2, significantDigits: null })
+
+      expect(input.getDOMNode().value).to.equal('12.50')
       expect(onChange.lastCall.args[1]).to.equal('12.50')
       expect(onChange.lastCall.args[2]).to.equal('12.50')
     })
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', done => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+        />
+      )
 
-      subject.should.be.accessible(done)
+      const numberInput = within(subject.getDOMNode())
+
+      expect(await numberInput.accessible()).to.be.true()
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
+    it('should set aria-invalid when errors prop is set', async () => {
+      const subject = await mount(
+        <NumberInput
+          label="Name"
+          defaultValue="0"
+          step="1"
+          messages={ [{ type: 'error', text: 'some error message' }]}
+        />
+      )
 
-      expect(subject.find('input').getAttribute('aria-invalid')).to.exist()
+      const numberInput = within(subject.getDOMNode())
+      const input = await numberInput.find('input')
+
+      expect(input.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

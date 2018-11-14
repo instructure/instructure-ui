@@ -35,6 +35,7 @@ import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import debounce from '@instructure/ui-utils/lib/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import testable from '@instructure/ui-testable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
@@ -176,11 +177,12 @@ class Position extends Component {
   }
 
   componentDidMount () {
-    this.toggleTargetLocatorAttribute(true)
+    this.toggleLocatorAttributes(true)
   }
 
   componentDidUpdate (prevProps, prevState) {
     this.position()
+    this.toggleLocatorAttributes(true)
 
     if (this.props.trackPosition !== prevProps.trackPosition) {
       this.props.trackPosition ? this.startTracking() : this.stopTracking()
@@ -202,16 +204,36 @@ class Position extends Component {
     this.position.cancel()
     this.stopTracking()
     this._timeouts.forEach(timeout => clearTimeout(timeout))
-    this.toggleTargetLocatorAttribute(false)
+
+    this.toggleLocatorAttributes(false)
   }
 
-  toggleTargetLocatorAttribute (set) {
-    const target = this._target
+  toggleLocatorAttributes (set) {
+    // We have to find the actual DOM nodes and append the attributes
+    // directly, as we can't be sure when safe cloning the child that
+    // it will accept the data attribute as a prop
+    this.toggleLocatorAttribute(
+      findDOMNode(this._content),
+      PositionContent.locatorAttribute,
+      set
+    )
 
-    if (target && target.hasAttribute) {
-      set && !target.hasAttribute(PositionTarget.locatorAttribute)
-        ? target.setAttribute(PositionTarget.locatorAttribute, this._id)
-        : target.removeAttribute(PositionTarget.locatorAttribute)
+    this.toggleLocatorAttribute(
+      findDOMNode(this._target),
+      PositionTarget.locatorAttribute,
+      set
+    )
+  }
+
+  toggleLocatorAttribute(node, locator, set) {
+    if (node && node.hasAttribute) {
+      if (set && !node.hasAttribute(locator)) {
+        node.setAttribute(locator, this._id)
+      }
+
+      if (!set && node.hasAttribute(locator)) {
+        node.removeAttribute(locator)
+      }
     }
   }
 
@@ -300,8 +322,7 @@ class Position extends Component {
       return safeCloneElement(target, {
         ref: el => {
           this._target = el
-        },
-        [PositionTarget.locatorAttribute]: this._id
+        }
       })
     } else if (this.props.target) {
       this._target = (typeof this.props.target === 'function') ? this.props.target() :  this.props.target

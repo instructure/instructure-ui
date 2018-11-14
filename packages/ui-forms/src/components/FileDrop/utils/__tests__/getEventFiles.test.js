@@ -23,26 +23,55 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-themeable/lib/utils/color'
-
-import DateInput from '../index'
+import getEventFiles from '../getEventFiles'
 
 /* eslint-disable mocha/no-synchronous-tests */
-describe('DateInput.theme', () => {
-  describe('with the canvas theme', () => {
-    const variables = DateInput.generateTheme()
+describe('getEventFiles', () => {
+  const chromeDragEnter = {
+    dataTransfer: {
+      dropEffect: 'none',
+      effectAllowed: 'all',
+      files: [],
+      items: [{
+        kind: 'file',
+        type: 'image/jpeg'
+      }],
+      types: ['Files']
+    }
+  }
 
-    it('should have a background and text colors that meet 3:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(3)
-    })
+  const firefoxDragEnter = {
+    dataTransfer: {
+      dropEffect: 'move',
+      effectAllowed: 'uninitialized',
+      files: [],
+      items: [{
+        kind: 'file',
+        type: 'application/x-moz-file'
+      }],
+      types: ['application/x-moz-file', 'Files']
+    }
+  }
+
+  const safariDragEnter = {
+    dataTransfer: {
+      dropEffect: 'none',
+      effectAllowed: 'all',
+      files: [],
+      types: []
+    }
+  }
+
+  it('should return items on chrome dragenter event', () => {
+    expect(getEventFiles(chromeDragEnter)).to.be.equal(chromeDragEnter.dataTransfer.items)
   })
 
-  describe('with the high contrast canvas theme', () => {
-    const variables = DateInput.generateTheme('canvas-high-contrast')
+  it('should return items on a firefox dragenter event', () => {
+    expect(getEventFiles(firefoxDragEnter)).to.be.equal(firefoxDragEnter.dataTransfer.items)
+  })
 
-    it('should have a background and text colors that meet 4.5:1 contrast', () => {
-      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
-    })
+  it('should return empty array on a safari dragenter event', () => {
+    expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
   })
 })
 /* eslint-enable mocha/no-synchronous-tests */

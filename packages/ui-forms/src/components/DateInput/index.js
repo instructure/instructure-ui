@@ -38,6 +38,7 @@ import error from '@instructure/ui-utils/lib/error'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import DatePicker from './DatePicker'
 import TextInput from '../TextInput'
@@ -51,6 +52,7 @@ import { isDayDisabled } from "./utils/dateHelpers"
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class DateInput extends Component {
   static propTypes = {

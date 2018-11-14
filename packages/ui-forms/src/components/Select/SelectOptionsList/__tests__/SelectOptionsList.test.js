@@ -23,121 +23,250 @@
  */
 
 import React from 'react'
+import { locator, expect, mount, stub } from '@instructure/ui-test-utils'
 import SelectOptionsList from '../index'
+
 import styles from '../styles.css'
 
-describe('<SelectOptionsList />', () => {
-  const testbed = new Testbed(
-    <SelectOptionsList
-      expanded
-      options={[
-        {
-          label: 'Alabama',
-          value: '0',
-          id: '0',
-          children: 'Alabama'
-        },
-        {
+const OptionLocator = locator('li')
+const SelectedOptionLocator = locator(`.${styles.selected}`)
+const HighlightedOptionLocator = locator(`.${styles.highlighted}`)
+
+const SelectOptionsListLocator = locator(SelectOptionsList.selector, {
+  findAllOptions: (...args) => OptionLocator.findAll(...args),
+  findOption: (...args) => OptionLocator.find(...args),
+  findSelectedOption: (...args) => SelectedOptionLocator.find(...args),
+  findHighlightedOption: (...args) => HighlightedOptionLocator.find(...args)
+})
+
+
+describe('<SelectOptionsList />', async () => {
+  it('should render options', async () => {
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama'
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const items = await list.findAllOptions()
+
+    expect(list).to.exist()
+    expect(items.length).to.equal(3)
+  })
+
+  it('should set selectedOption correctly', async () => {
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama'
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+        selectedOption={{
           label: 'Alaska',
           value: '1',
           id: '1',
           children: 'Alaska'
-        },
-        {
-          label: 'America',
-          value: '2',
-          id: '2',
-          children: 'America'
-        }
-      ]}
-    />
-  )
-
-  it('should render options', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
-    expect(subject.find('li').length).to.equal(3)
+        }}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const selectedItem = await list.findSelectedOption()
+    expect(selectedItem.getTextContent()).to.equal('Alaska')
   })
 
-  it('should set selectedOption correctly', () => {
-    const subject = testbed.render({
-      selectedOption: {
-        label: 'Alaska',
-        value: '1',
-        id: '1',
-        children: 'Alaska'
-      }
-    })
-    expect(subject.find(`.${styles.selected}`).text().trim()).to.equal('Alaska')
+  it('should set highlightedIndex correctly', async () => {
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama'
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+        highlightedIndex={2}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const highlightedItem = await list.findHighlightedOption()
+    expect(highlightedItem.getTextContent()).to.equal('America')
   })
 
-  it('should set highlightedIndex correctly', () => {
-    const subject = testbed.render({
-      highlightedIndex: 2
-    })
-    expect(subject.find(`.${styles.highlighted}`).text().trim()).to.equal('America')
-  })
+  it('should call onSelect', async () => {
+    const onSelect = stub()
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama'
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+        onSelect={onSelect}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const item = await list.findOption()
 
-  it('should call onSelect', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({ onSelect })
-
-    subject.find('li').first().simulate('click')
+    await item.click()
     expect(onSelect).to.have.been.called()
   })
 
-  it('should call onHighlightOption', () => {
-    const onHighlightOption = testbed.stub()
-    const subject = testbed.render({ onHighlightOption })
+  it('should call onHighlightOption', async () => {
+    const onHighlightOption = stub()
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama'
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+        onHighlightOption={onHighlightOption}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const items = await list.findAllOptions()
 
-    subject.find('li').first().simulate('mouseEnter')
+    await items[1].mouseOver({relatedTarget: null})
     expect(onHighlightOption).to.have.been.called()
   })
 
-  it('should call onStaticClick when static option is selected', () => {
-    const onStaticClick = testbed.stub()
-    const subject = testbed.render({
-      options: [],
-      emptyOption: 'no results',
-      onStaticClick
-    })
+  it('should call onStaticClick when static option is selected', async () => {
+    const onStaticClick = stub()
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[]}
+        emptyOption="no results"
+        onStaticClick={onStaticClick}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const empty = await list.findAllOptions()
 
-    const empty = subject.find('li')
     expect(empty.length).to.equal(1)
-    expect(empty.text().trim()).to.equal('no results')
+    expect(empty[0]).to.exist()
+    expect(empty[0].getTextContent()).to.equal('no results')
 
-    empty.simulate('click')
+    await empty[0].click()
     expect(onStaticClick).to.have.been.called()
   })
 
-  it('should not allow disabled options to be selected', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({
-      options: [
-        {
-          label: 'Alabama',
-          value: '0',
-          id: '0',
-          children: 'Alabama',
-          disabled: true
-        },
-        {
-          label: 'Alaska',
-          value: '1',
-          id: '1',
-          children: 'Alaska'
-        },
-        {
-          label: 'America',
-          value: '2',
-          id: '2',
-          children: 'America'
-        }
-      ],
-      onSelect
-    })
+  it('should not allow disabled options to be selected', async () => {
+    const onSelect = stub()
+    await mount(
+      <SelectOptionsList
+        expanded
+        options={[
+          {
+            label: 'Alabama',
+            value: '0',
+            id: '0',
+            children: 'Alabama',
+            disabled: true
+          },
+          {
+            label: 'Alaska',
+            value: '1',
+            id: '1',
+            children: 'Alaska'
+          },
+          {
+            label: 'America',
+            value: '2',
+            id: '2',
+            children: 'America'
+          }
+        ]}
+        onSelect={onSelect}
+      />
+    )
+    const list = await SelectOptionsListLocator.find()
+    const item = await list.findOption()
 
-    subject.find('li').first().simulate('click')
+    await item.click()
     expect(onSelect).to.not.have.been.called()
   })
 })

@@ -21,7 +21,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5"
+    "@instructure/ui-presets": "^5",
+    "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
     "@instructure/ui-a11y": "^5",
@@ -34,6 +35,7 @@
     "@instructure/ui-number-input": "^5",
     "@instructure/ui-overlays": "^5",
     "@instructure/ui-svg-images": "^5",
+    "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
     "babel-runtime": "^6",

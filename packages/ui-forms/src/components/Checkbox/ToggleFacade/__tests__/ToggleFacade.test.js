@@ -23,21 +23,19 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import ToggleFacade from '../index'
 
-describe('<ToggleFacade />', () => {
-  const testbed = new Testbed(<ToggleFacade>label text</ToggleFacade>)
-
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+describe('<ToggleFacade />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
+    const toggleFacade = within(subject.getDOMNode())
+    expect(toggleFacade).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<ToggleFacade>label text</ToggleFacade>)
+    const toggleFacade = within(subject.getDOMNode())
+    expect(await toggleFacade.accessible()).to.be.true()
   })
 })

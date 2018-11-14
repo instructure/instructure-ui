@@ -23,172 +23,290 @@
  */
 
 import React from 'react'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import CheckboxGroup from '../index'
 import Checkbox from '../../Checkbox'
 
-describe('<CheckboxGroup />', () => {
-  const testbed = new Testbed(
-    <CheckboxGroup
-      name="sports"
-      description="Select your favorite sports"
-    >
-      <Checkbox label="Football" value="football" />
-      <Checkbox label="Basketball" value="basketball" />
-      <Checkbox label="Volleyball" value="volleyball" />
-      <Checkbox label="Other" value="other" />
-    </CheckboxGroup>
-  )
+describe('<CheckboxGroup />', async () => {
+  it('adds the name props to all Checkbox types', async () => {
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-  it('adds the name props to all Checkbox types', () => {
-    const subject = testbed.render()
-    expect(subject.find('input[name="sports"]').length).to.equal(4)
+    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxes = await checkboxGroup.findAll('input[name="sports"]')
+    expect(checkboxes.length).to.equal(4)
   })
 
-  it('links the messages to the fieldset via aria-describedby', () => {
-    const subject = testbed.render({
-      messages: [
-        { text: 'Invalid name', type: 'error' }
-      ]
-    })
+  it('links the messages to the fieldset via aria-describedby', async () => {
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        messages={[
+          { text: 'Invalid name', type: 'error' }
+        ]}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    const messagesId = subject.find('fieldset').getAttribute('aria-describedby')
+    const checkboxGroup = within(subject.getDOMNode())
+    const fieldset = await checkboxGroup.find('fieldset')
+    const messagesId = fieldset.getAttribute('aria-describedby')
+    const messages = await checkboxGroup.find(`#${messagesId}`)
 
-    expect(subject.find(`#${messagesId}`).text())
-      .to.equal('Invalid name')
+    expect(messages.getTextContent()).to.equal('Invalid name')
   })
 
-  it('displays description message inside the legend', () => {
+  it('displays description message inside the legend', async () => {
     const description = 'You should pick something'
-    const subject = testbed.render({
-      description: description
-    })
 
-    expect(subject.find('legend').text()).to.equal(description)
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description={description}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
+
+    const checkboxGroup = within(subject.getDOMNode())
+    const legend = await checkboxGroup.find('legend')
+    expect(legend.getTextContent()).to.equal(description)
   })
 
-  it('requires an `onChange` prop with a `value` prop', () => {
-    let error = false
-    try {
-      testbed.render({
-        value: ['basketball']
-      })
-    } catch (e) {
-      error = true
-    }
+  it('requires an `onChange` prop with a `value` prop', async () => {
+    const consoleError = stub(console, 'error')
 
-    expect(error).to.be.true()
+    await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        value={['basketball']}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
+
+    expect(consoleError).to.have.been.calledWithMatch(
+      `Failed prop type: You provided a 'value' prop without an 'onChange' handler on 'CheckboxGroup'`
+    )
   })
 
-  it('does not call the onChange prop when disabled', () => {
-    const onChange = testbed.stub()
+  it('does not call the onChange prop when disabled', async () => {
+    const onChange = stub()
 
-    const subject = testbed.render({
-      disabled: true,
-      onChange
-    })
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        onChange={onChange}
+        disabled
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    subject.find('input[value="football"]').simulate('change', {
-      target: {
-        checked: true,
-        value: 'football'
-      }
-    })
+    const checkboxGroup = within(subject.getDOMNode())
+    const input = await checkboxGroup.find('input[value="football"]')
+    await input.click()
 
     expect(onChange).to.not.have.been.called()
   })
 
-  it('does not call the onChange prop when readOnly', () => {
-    const onChange = testbed.stub()
+  it('does not call the onChange prop when readOnly', async () => {
+    const onChange = stub()
 
-    const subject = testbed.render({
-      readOnly: true,
-      onChange
-    })
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        onChange={onChange}
+        readOnly
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    subject.find('input[value="football"]').simulate('change', {
-      target: {
-        checked: true,
-        value: 'football'
-      }
-    })
+    const checkboxGroup = within(subject.getDOMNode())
+    const input = await checkboxGroup.find('input[value="football"]')
+    await input.click()
 
     expect(onChange).to.not.have.been.called()
   })
 
-  it('should not update the value when the value prop is set', () => {
-    const subject = testbed.render({
-      value: ['tester'],
-      onChange: testbed.stub()
+  it('should not update the value when the value prop is set', async () => {
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        value={['tester']}
+        onChange={stub()}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
+
+    const checkboxGroup = within(subject.getDOMNode())
+    const inputs = await checkboxGroup.findAll('input')
+    inputs.forEach((input) => {
+      expect(input.getDOMNode().checked).to.be.false()
     })
 
-    expect(subject.instance().value).to.deep.equal(['tester'])
+    const input = await checkboxGroup.find('input[value="football"]')
+    await input.click()
+
+    inputs.forEach((input) => {
+      expect(input.getDOMNode().checked).to.be.false()
+    })
   })
 
-  it('should add the checkbox value to the value list when it is checked', () => {
-    const subject = testbed.render()
+  it('should add the checkbox value to the value list when it is checked', async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        onChange={onChange}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    subject.find('input[value="football"]').simulate('change', {
-      target: {
-        checked: true,
-        value: 'football'
+    const checkboxGroup = within(subject.getDOMNode())
+    const input = await checkboxGroup.find('input[value="football"]')
+    await input.click()
+
+    expect(onChange.lastCall.args[0]).to.deep.equal(['football'])
+  })
+
+  it('should check the checkboxes based on the defaultValue prop', async () => {
+    const defaultValue = ['football', 'volleyball']
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        defaultValue={defaultValue}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
+
+    const checkboxGroup = within(subject.getDOMNode())
+    const inputs = await checkboxGroup.findAll('input')
+
+    inputs.forEach((input) => {
+      if (defaultValue.includes(input.getAttribute('value'))) {
+        expect(input.getDOMNode().checked).to.be.true()
+      } else {
+        expect(input.getDOMNode().checked).to.be.false()
       }
     })
-
-    expect(subject.instance().value).to.deep.equal(['football'])
   })
 
-  it('should check the checkboxes based on the defaultValue prop', () => {
-    const subject = testbed.render({
-      defaultValue: ['football', 'volleyball']
-    })
+  it('should remove the checkbox value from the value list when it is unchecked', async () => {
+    const onChange = stub()
 
-    expect(subject.find('input[value="football"]').getDOMNode().checked)
-      .to.be.true()
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        defaultValue={['football', 'basketball', 'volleyball']}
+        onChange={onChange}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    expect(subject.find('input[value="volleyball"]').getDOMNode().checked)
-      .to.be.true()
+    const checkboxGroup = within(subject.getDOMNode())
+    const input = await checkboxGroup.find('input[value="football"]')
+    await input.click()
+
+    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball'])
   })
 
-  it('should remove the checkbox value from the value list when it is unchecked', () => {
-    const subject = testbed.render({
-      defaultValue: ['football', 'basketball', 'volleyball']
-    })
+  it('passes the array of selected values to onChange handler', async () => {
+    const onChange = stub()
 
-    subject.find('input[value="football"]').simulate('change', {
-      target: {
-        checked: false,
-        value: 'football'
-      }
-    })
+    const subject = await mount(
+      <CheckboxGroup
+        name="sports"
+        description="Select your favorite sports"
+        defaultValue={['football', 'basketball', 'volleyball']}
+        onChange={onChange}
+      >
+        <Checkbox label="Football" value="football" />
+        <Checkbox label="Basketball" value="basketball" />
+        <Checkbox label="Volleyball" value="volleyball" />
+        <Checkbox label="Other" value="other" />
+      </CheckboxGroup>
+    )
 
-    expect(subject.instance().value).to.deep.equal(['basketball', 'volleyball'])
+    const checkboxGroup = within(subject.getDOMNode())
+    const input1 = await checkboxGroup.find('input[value="football"]')
+    const input2 = await checkboxGroup.find('input[value="other"]')
+
+    await input1.click()
+    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball'])
+
+    await input2.click()
+    expect(onChange.lastCall.args[0]).to.deep.equal(['basketball', 'volleyball', 'other'])
   })
 
-  it('passes the array of selected values to onChange handler', () => {
-    const onChange = testbed.stub()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      const subject = await mount(
+        <CheckboxGroup
+          name="sports"
+          description="Select your favorite sports"
+        >
+          <Checkbox label="Football" value="football" />
+          <Checkbox label="Basketball" value="basketball" />
+          <Checkbox label="Volleyball" value="volleyball" />
+          <Checkbox label="Other" value="other" />
+        </CheckboxGroup>
+      )
 
-    const subject = testbed.render({
-      value: ['football', 'basketball', 'volleyball'],
-      onChange
-    })
-
-    subject.find('input[value="football"]').simulate('change', {
-      target: {
-        checked: false,
-        value: 'football'
-      }
-    }) // triggers handleChange and removes 'football'
-
-    expect(onChange).to.have.been.calledWith(['basketball', 'volleyball'])
-  })
-
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
-
-      subject.should.be.accessible(done, {
+      const checkboxGroup = within(subject.getDOMNode())
+      expect(await checkboxGroup.accessible({
         ignores: [ 'checkboxgroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */
-      })
+      })).to.be.true()
     })
   })
 })

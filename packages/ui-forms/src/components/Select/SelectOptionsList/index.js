@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 
 import View from '@instructure/ui-layout/lib/components/View'
 import Spinner from '@instructure/ui-elements/lib/components/Spinner'
@@ -41,6 +42,7 @@ import theme from './theme'
 parent: Select
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class SelectOptionsList extends Component {
   static propTypes = {

@@ -22,42 +22,30 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import FormField from '../index'
+export default function accepts (file, acceptProp) {
+  if (file && acceptProp && file.type !== 'application/x-moz-file') {
+    const acceptList = getAcceptList(acceptProp)
+    const mimeType = file.type || ''
+    const baseMimeType = mimeType.replace(/\/.*$/, '')
 
-describe('<FormField />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+    return acceptList.some(type => {
+      if (type.charAt(0) === '.') {
+        // type is an extension like .pdf
+        if (!file.name) {
+          return mimeType.endsWith(type.slice(1))
+        }
+        return file.name.toLowerCase().endsWith(type.toLowerCase())
+      } else if (/\/\*$/.test(type)) {
+        // type is something like a image/* mime type
+        return baseMimeType === type.replace(/\/.*$/, '')
+      }
+      return mimeType === type
+    })
+  }
+  return true
+}
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
-  })
-
-  it('should require a label', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField id="bar" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
-    )
-  })
-
-  it('should require an id', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField label="foo" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
-    )
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
-
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
-  })
-})
+export function getAcceptList (accept) {
+  const list = Array.isArray(accept) ? accept : accept.split(',')
+  return list.map(a => a.trim().replace(/^\w+$/, '.$&'))
+}

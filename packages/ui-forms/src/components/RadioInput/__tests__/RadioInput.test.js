@@ -23,155 +23,236 @@
  */
 
 import React from 'react'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import RadioInput from '../index'
 
-describe('<RadioInput />', () => {
-  const testbed = new Testbed(
-    <RadioInput label="fake label" value="someValue" name="someName" />
-  )
+describe('<RadioInput />', async () => {
+  it('renders an input with type "radio"', async () => {
+    const subject = await mount(
+      <RadioInput
+        label="fake label"
+        value="someValue"
+        name="someName"
+      />
+    )
 
-  it('renders an input with type "radio"', () => {
-    const subject = testbed.render()
+    const radioInput = within(subject.getDOMNode())
+    const input = await radioInput.find('input[type="radio"]')
 
-    expect(subject.find('input').getDOMNode().type)
-      .to.equal('radio')
+    expect(input).to.exist()
   })
 
-  describe('events', () => {
-    it('responds to onClick event', () => {
-      const onClick = testbed.stub()
+  describe('events', async () => {
+    it('responds to onClick event', async () => {
+      const onClick = stub()
+      const subject = await mount(
+        <RadioInput
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+        />
+      )
 
-      const subject = testbed.render({
-        onClick
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('click')
-
+      await input.click()
       expect(onClick).to.have.been.called()
     })
 
-    it('does not respond to onClick event when disabled', () => {
-      const onClick = testbed.stub()
+    it('does not respond to onClick event when disabled', async () => {
+      const onClick = stub()
+      const subject = await mount(
+        <RadioInput
+          disabled
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+        />
+      )
 
-      const subject = testbed.render({
-        disabled: true,
-        onClick
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('click')
-
+      await input.click()
       expect(onClick).to.not.have.been.called()
     })
 
-    it('does not respond to onClick event when readOnly', () => {
-      const onClick = testbed.stub()
+    it('does not respond to onClick event when readOnly', async () => {
+      const onClick = stub()
+      const subject = await mount(
+        <RadioInput
+          readOnly
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+        />
+      )
 
-      const subject = testbed.render({
-        readOnly: true,
-        onClick
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('click')
-
+      await input.click()
       expect(onClick).to.not.have.been.called()
     })
 
-    it('responds to onChange event', () => {
-      const onChange = testbed.stub()
+    it('responds to onChange event', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <RadioInput
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        onChange
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('change')
-
+      await input.click()
       expect(onChange).to.have.been.called()
     })
 
-    it('does not respond to onChange event when disabled', () => {
-      const onChange = testbed.stub()
+    it('does not respond to onChange event when disabled', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <RadioInput
+          disabled
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        disabled: true,
-        onChange
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('change')
-
+      await input.click()
       expect(onChange).to.not.have.been.called()
     })
 
-    it('does not respond to onChange event when readOnly', () => {
-      const onChange = testbed.stub()
+    it('does not respond to onChange event when readOnly', async () => {
+      const onChange = stub()
+      const subject = await mount(
+        <RadioInput
+          readOnly
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onChange={onChange}
+        />
+      )
 
-      const subject = testbed.render({
-        readOnly: true,
-        onChange
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('change')
-
+      await input.click()
       expect(onChange).to.not.have.been.called()
     })
 
-    it('responds to onBlur event', () => {
-      const onBlur = testbed.stub()
+    it('responds to onBlur event', async () => {
+      const onBlur = stub()
+      const subject = await mount(
+        <RadioInput
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onBlur={onBlur}
+        />
+      )
 
-      const subject = testbed.render({
-        onBlur
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('blur')
-
+      await input.blur()
       expect(onBlur).to.have.been.called()
     })
 
-    it('responds to onFocus event', () => {
-      const onFocus = testbed.stub()
+    it('responds to onFocus event', async () => {
+      const onFocus = stub()
+      const subject = await mount(
+        <RadioInput
+          label="fake label"
+          value="someValue"
+          name="someName"
+          onFocus={onFocus}
+        />
+      )
 
-      const subject = testbed.render({
-        onFocus
-      })
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
 
-      subject.find('input').simulate('focus')
-
+      await input.focus()
       expect(onFocus).to.have.been.called()
     })
 
-    it('sets input to checked when selected', () => {
-      const subject = testbed.render({
-        checked: true
-      })
+    it('sets input to checked when selected', async () => {
+      const subject = await mount(
+        <RadioInput
+          checked
+          label="fake label"
+          value="someValue"
+          name="someName"
+        />
+      )
 
-      expect(subject.instance().checked).to.be.true()
-      expect(subject.find('input').unwrap().checked).to.be.true()
+      const radioInput = within(subject.getDOMNode())
+      const input = await radioInput.find('input[type="radio"]')
+      expect(input.getDOMNode().checked).to.be.true()
     })
 
-    it('focuses with the focus helper', () => {
-      const subject = testbed.render()
+    it('focuses with the focus helper', async () => {
+      let ref
+      const subject = await mount(
+        <RadioInput
+          label="fake label"
+          value="someValue"
+          name="someName"
+          componentRef={(el) => ref = el}
+        />
+      )
 
-      subject.instance().focus()
+      const radioInput = within(subject.getDOMNode())
 
-      expect(subject.instance().focused).to.be.true()
-      expect(subject.find('input').focused()).to.be.true()
+      ref.focus()
+
+      expect(ref.focused).to.be.true()
+      expect(radioInput.containsFocus()).to.be.true()
     })
   })
 
-  describe('for a11y', () => {
-    it('simple variant should meet standards', (done) => {
-      const subject = testbed.render({
-        variant: 'simple'
-      })
+  describe('for a11y', async () => {
+    it('simple variant should meet standards', async () => {
+      const subject = await mount(
+        <RadioInput
+          variant="simple"
+          label="fake label"
+          value="someValue"
+          name="someName"
+        />
+      )
 
-      subject.should.be.accessible(done)
+      const radioInput = within(subject.getDOMNode())
+      expect(await radioInput.accessible())
     })
 
-    it('should require a label', () => {
-      expect(() => {
-        testbed.render({
-          label: null
-        })
-      }).to.throw(Error)
+    it('should require a label', async () => {
+      const consoleError = stub(console, 'error')
+      await mount(
+        <RadioInput
+          variant="simple"
+          label={null}
+          value="someValue"
+          name="someName"
+        />
+      )
+
+      expect(consoleError).to.have.been.calledWithMatch('prop `label` is marked as required')
     })
   })
 })

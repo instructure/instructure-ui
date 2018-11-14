@@ -23,34 +23,45 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import FormFieldLayout from '../index'
-import { GridCol } from '@instructure/ui-layout/lib/components/Grid'
 
-describe('<FormFieldLayout />', () => {
-  const testbed = new Testbed(<FormFieldLayout label="Username" />)
+describe('<FormFieldLayout />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<FormFieldLayout label="Username" />)
 
-  /* example test (replace me) */
-  it('should render', () => {
-    const subject = testbed.render(/* override default props here */)
-
-    expect(subject).to.be.present()
+    const formFieldLayout = within(subject.getDOMNode())
+    expect(formFieldLayout).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<FormFieldLayout label="Username" />)
 
-    subject.should.be.accessible(done)
+    const formFieldLayout = within(subject.getDOMNode())
+    expect(await formFieldLayout.accessible()).to.be.true()
   })
 
-  it('should align label to right by default', () => {
-    const subject = testbed.render()
-    const col = subject.find(GridCol).first()
-    expect(col.prop('textAlign')).to.equal('end')
+  it('should align label to right by default', async () => {
+    const subject = await mount(
+      <FormFieldLayout label="Username" layout="inline">
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const formFieldLayout = within(subject.getDOMNode())
+    const label = await formFieldLayout.find(':textContent(Username)')
+    expect(label.getComputedStyle().textAlign).to.equal('right')
   })
 
-  it('should align label to left', () => {
-    const subject = testbed.render({ labelAlign: 'start' })
-    const col = subject.find(GridCol).first()
-    expect(col.prop('textAlign')).to.equal('start')
+  it('should align label to left', async () => {
+    const subject = await mount(
+      <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const formFieldLayout = within(subject.getDOMNode())
+    const label = await formFieldLayout.find(':textContent(Username)')
+    expect(label.getComputedStyle().textAlign).to.equal('left')
   })
 })

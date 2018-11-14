@@ -23,181 +23,302 @@
  */
 
 import React from 'react'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import Checkbox from '../index'
-import CheckboxFacade from '../CheckboxFacade/'
-import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 
-describe('<Checkbox />', () => {
-  const testbed = new Testbed(
-    <Checkbox label="fake label" defaultChecked value="someValue" name="someName" />
-  )
+describe('<Checkbox />', async () => {
+  it('renders an input with type "checkbox"', async () => {
+    const subject = await mount(
+      <Checkbox
+        label="fake label"
+        defaultChecked
+        value="someValue"
+        name="someName"
+      />
+    )
 
-  it('renders an input with type "checkbox"', () => {
-    const subject = testbed.render()
-
-    expect(subject.find('input').getDOMNode().type)
-      .to.equal('checkbox')
+    const checkbox = within(subject.getDOMNode())
+    const input = await checkbox.find('input')
+    expect(input.getDOMNode().type).to.equal('checkbox')
   })
 
-  it('`simple` variant only displays a checkmark when checked', () => {
-    const subject = testbed.render({
-      variant: 'simple',
-      defaultChecked: false
-    })
+  it('`simple` variant only displays a checkmark when checked', async () => {
+    const subject = await mount(
+      <Checkbox
+        label="fake label"
+        variant="simple"
+        defaultChecked={false}
+        value="someValue"
+        name="someName"
+      />
+    )
 
-    const facade = subject.find(CheckboxFacade)
-    expect(facade.find(IconCheckMark)).to.not.exist()
+    const checkbox = within(subject.getDOMNode())
+    expect(await checkbox.find('svg', { expectEmpty: true })).to.not.exist()
   })
 
-  it('`simple` variant supports indeterminate/mixed state', () => {
-    const subject = testbed.render({
-      variant: 'simple',
-      defaultChecked: true,
-      indeterminate: true
-    })
+  it('`simple` variant supports indeterminate/mixed state', async () => {
+    const subject = await mount(
+      <Checkbox
+        label="fake label"
+        variant="simple"
+        defaultChecked
+        indeterminate
+        value="someValue"
+        name="someName"
+      />
+    )
 
-    const input = subject.find('input')
+    const checkbox = within(subject.getDOMNode())
+    const input = await checkbox.find('input')
     expect(input.getAttribute('aria-checked')).to.equal('mixed')
   })
 
-  describe('events', () => {
-    it('responds to onClick event', () => {
-      const onClick = testbed.stub()
+  describe('events', async () => {
+    it('when clicked, fires onClick and onChange events', async () => {
+      const onClick = stub()
+      const onChange = stub()
 
-      const subject = testbed.render({
-        onClick
-      })
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+          onChange={onChange}
+        />
+      )
 
-      subject.find('input').simulate('click')
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.click()
 
       expect(onClick).to.have.been.called()
+      expect(onChange).to.have.been.called()
     })
 
-    it('responds to onChange event', () => {
-      const onChange = testbed.stub()
+    it('when clicked, does not call onClick or onChange when disabled', async () => {
+      const onClick = stub()
+      const onChange = stub()
 
-      const subject = testbed.render({
-        onChange
-      })
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+          onChange={onChange}
+          disabled
+        />
+      )
 
-      subject.find('input').simulate('change')
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.click()
+
+      expect(onClick).to.not.have.been.called()
+      expect(onChange).to.not.have.been.called()
+    })
+
+    it('when clicked, does not call onClick or onChange when readOnly', async () => {
+      const onClick = stub()
+      const onChange = stub()
+
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onClick={onClick}
+          onChange={onChange}
+          readOnly
+        />
+      )
+
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.click()
+
+      expect(onClick).to.not.have.been.called()
+      expect(onChange).to.not.have.been.called()
+    })
+
+    it('calls onChange when enter key is pressed', async () => {
+      const onChange = stub()
+
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          variant="toggle"
+          onChange={onChange}
+        />
+      )
+
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.keyDown('enter')
 
       expect(onChange).to.have.been.called()
     })
 
-    it('does not respond to onChange event when disabled', () => {
-      const onChange = testbed.stub()
+    it('responds to onBlur event', async () => {
+      const onBlur = stub()
 
-      const subject = testbed.render({
-        disabled: true,
-        onChange
-      })
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onBlur={onBlur}
+        />
+      )
 
-      subject.find('input').simulate('change')
-
-      expect(onChange).to.not.have.been.called()
-    })
-
-    it('does not respond to onChange event when readOnly', () => {
-      const onChange = testbed.stub()
-
-      const subject = testbed.render({
-        readOnly: true,
-        onChange
-      })
-
-      subject.find('input').simulate('change')
-
-      expect(onChange).to.not.have.been.called()
-    })
-
-    it('responds to onChange when enter key is pressed', () => {
-      const onChange = testbed.stub()
-
-      const subject = testbed.render({
-        onChange,
-        variant: 'toggle'
-      })
-
-      subject.find('input').keyDown('enter')
-
-      expect(onChange).to.have.been.called()
-    })
-
-    it('responds to onBlur event', () => {
-      const onBlur = testbed.stub()
-
-      const subject = testbed.render({
-        onBlur
-      })
-
-      subject.find('input').simulate('blur')
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.blur()
 
       expect(onBlur).to.have.been.called()
     })
 
-    it('responds to onFocus event', () => {
-      const onFocus = testbed.stub()
+    it('responds to onFocus event', async () => {
+      const onFocus = stub()
 
-      const subject = testbed.render({
-        onFocus
-      })
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onFocus={onFocus}
+        />
+      )
 
-      subject.find('input').simulate('focus')
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      await input.focus()
 
       expect(onFocus).to.have.been.called()
     })
 
-    it('focuses with the focus helper', () => {
-      const subject = testbed.render()
+    it('focuses with the focus helper', async () => {
+      let checkboxRef = null
 
-      subject.instance().focus()
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          componentRef={(el) => { checkboxRef = el }}
+        />
+      )
 
-      expect(subject.instance().focused).to.be.true()
-      expect(subject.find('input').focused()).to.be.true()
+      expect(checkboxRef.focused).to.be.false()
+
+      checkboxRef.focus()
+
+      expect(checkboxRef.focused).to.be.true()
+
+      const checkbox = within(subject.getDOMNode())
+      const input = await checkbox.find('input')
+      expect(input.focused()).to.be.true()
     })
 
-    it('sets hover states', () => {
-      const subject = testbed.render()
+    it('calls onMouseOver', async () => {
+      const onMouseOver = stub()
 
-      subject.simulate('mouseOver')
+      /* eslint-disable jsx-a11y/mouse-events-have-key-events */
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onMouseOver={onMouseOver}
+        />
+      )
+      /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.true()
+      const checkbox = within(subject.getDOMNode())
 
-      subject.simulate('mouseOut')
+      await checkbox.mouseOver()
 
-      expect(subject.find(CheckboxFacade).prop('hovered')).to.be.false()
+      expect(onMouseOver).to.have.been.called()
+    })
+
+    it('calls onMouseOut', async () => {
+      const onMouseOut = stub()
+
+      /* eslint-disable jsx-a11y/mouse-events-have-key-events */
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          onMouseOut={onMouseOut}
+        />
+      )
+      /* eslint-enable jsx-a11y/mouse-events-have-key-events */
+
+      const checkbox = within(subject.getDOMNode())
+
+      await checkbox.mouseOut()
+
+      expect(onMouseOut).to.have.been.called()
     })
   })
 
   describe('for a11y', () => {
-    it('`simple` variant should meet standards', (done) => {
-      const subject = testbed.render({
-        variant: 'simple'
-      })
-
-      subject.should.be.accessible(done)
+    it('`simple` variant should meet standards', async () => {
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          variant="simple"
+        />
+      )
+      const checkbox = within(subject.getDOMNode())
+      expect(await checkbox.accessible()).to.be.true()
     })
 
-    it('`toggle` variant should meet standards', (done) => {
-      const subject = testbed.render({
-        variant: 'toggle'
-      })
-
-      subject.should.be.accessible(done)
+    it('`toggle` variant should meet standards', async () => {
+      const subject = await mount(
+        <Checkbox
+          label="fake label"
+          defaultChecked
+          value="someValue"
+          name="someName"
+          variant="toggle"
+        />
+      )
+      const checkbox = within(subject.getDOMNode())
+      expect(await checkbox.accessible()).to.be.true()
     })
 
-    it('should require a label', () => {
-      let error = false
-      try {
-        testbed.render({
-          label: null
-        })
-      } catch (e) {
-        error = true
-      }
+    it('should require a label', async () => {
+      const consoleError = stub(console, 'error')
 
-      expect(error).to.be.true()
+      await mount(
+        <Checkbox
+          defaultChecked
+          value="someValue"
+          name="someName"
+        />
+      )
+
+      expect(consoleError).to.have.been.calledWithMatch(
+        'prop `label` is marked as required in `Checkbox`'
+      )
     })
   })
 })

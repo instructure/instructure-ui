@@ -23,301 +23,262 @@
  */
 
 import React from 'react'
-import FileDrop, { getEventFiles, accepts } from '../index'
+import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
+import FileDrop from '../index'
 
-describe('<FileDrop />', () => {
-  const testbed = new Testbed(<FileDrop label="fake label" />)
+describe('<FileDrop />', async () => {
+  it('should render', async () => {
+    const subject = await mount(<FileDrop label="fake label" />)
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    const fileInput = within(subject.getDOMNode())
+    expect(fileInput).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<FileDrop label="fake label" />)
 
-    subject.should.be.accessible(done)
+    const fileInput = within(subject.getDOMNode())
+    expect(await fileInput.accessible()).to.be.true()
   })
 
-  describe('file-type checking when onDrop', () => {
-    const onDrop = testbed.stub()
-    const onDropAccepted = testbed.stub()
-    const onDropRejected = testbed.stub()
+  describe('file-type checking when onDrop', async () => {
+    it('responds to drop event', async () => {
+      const onDrop = stub()
 
-    beforeEach(() => {
-      onDrop.reset()
-      onDropAccepted.reset()
-      onDropRejected.reset()
-    })
+      const subject = await mount(<FileDrop label="fake label" onDrop={onDrop} />)
 
-    const imageDropEvent = {
-      dataTransfer: {
-        files: [{
-          type: 'image/jpeg',
-          name: 'napoleon.jpg',
-          size: 3000
-        }]
-      }
-    }
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
 
-    const docDropEvent = {
-      dataTransfer: {
-        files: [{
-          type: 'application/pdf',
-          name: 'napoleon.pdf',
-          size: 3000
-        }]
-      }
-    }
-
-    it('responds to drop event', () => {
-      const subject = testbed.render({ onDrop })
-      subject.find('label').simulate('drop')
+      await label.drop()
 
       expect(onDrop).to.have.been.called()
     })
 
-    it('responds to change event', () => {
-      const subject = testbed.render({ onDrop })
-      subject.find('input').simulate('change')
+    it('responds to change event', async () => {
+      const onDrop = stub()
+
+      const subject = await mount(<FileDrop label="fake label" onDrop={onDrop} />)
+
+      const fileDrop = within(subject.getDOMNode())
+      const input = await fileDrop.find('input')
+      await input.change()
 
       expect(onDrop).to.have.been.called()
     })
 
-    it('accepts correct files using mymetypes', () => {
-      const subject = testbed.render({
-        accept: 'image/*',
-        onDrop,
-        onDropAccepted,
-        onDropRejected
+    it('accepts correct files using mymetypes', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
       })
-      subject.find('label').simulate('drop', imageDropEvent)
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
 
-      expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          accept="image/*"
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.png', { type: 'image/png' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([file])
+      expect(args[1]).to.deep.equal([])
+
       expect(onDropAccepted).to.have.been.called()
       expect(onDropRejected).to.not.have.been.called()
     })
 
-    it('accepts correct files using extensions', () => {
-      const subject = testbed.render({
-        accept: '.jpg',
-        onDrop,
-        onDropAccepted,
-        onDropRejected
+    it('accepts correct files using extensions', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
       })
-      subject.find('label').simulate('drop', imageDropEvent)
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
 
-      expect(onDrop).to.have.been.calledWith(imageDropEvent.dataTransfer.files, [])
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          accept="jpeg"
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.jpeg', { type: 'image/jpeg' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([file])
+      expect(args[1]).to.deep.equal([])
+
       expect(onDropAccepted).to.have.been.called()
       expect(onDropRejected).to.not.have.been.called()
     })
 
-    it('rejects incorrect files using mymetypes', () => {
-      const subject = testbed.render({
-        accept: 'image/*',
-        onDrop,
-        onDropAccepted,
-        onDropRejected
+    it('rejects incorrect files using mymetypes', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
       })
-      subject.find('label').simulate('drop', docDropEvent)
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
 
-      expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          accept="image/*"
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.pdf', { type: 'application/pdf' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([])
+      expect(args[1]).to.deep.equal([file])
+
       expect(onDropAccepted).to.not.have.been.called()
       expect(onDropRejected).to.have.been.called()
     })
 
-    it('rejects incorrect files using extensions', () => {
-      const subject = testbed.render({
-        accept: '.jpg',
-        onDrop,
-        onDropAccepted,
-        onDropRejected
+    it('rejects incorrect files using extensions', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
       })
-      subject.find('label').simulate('drop', docDropEvent)
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
 
-      expect(onDrop).to.have.been.calledWith([], docDropEvent.dataTransfer.files)
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          accept="jpeg"
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.pdf', { type: 'application/pdf' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([])
+      expect(args[1]).to.deep.equal([file])
+
       expect(onDropAccepted).to.not.have.been.called()
       expect(onDropRejected).to.have.been.called()
     })
   })
 
-  describe('label handling', () => {
-    it('renders element label directly', () => {
+  describe('label handling', async () => {
+    it('renders element label directly', async () => {
       const label = (
         <section id="test-id">
           This is an element label
         </section>
       )
 
-      const subject = testbed.render({ label })
-      expect(subject.find('#test-id')).to.be.present()
+      const subject = await mount(<FileDrop label={label} />)
+
+      const fileDrop = within(subject.getDOMNode())
+      expect(await fileDrop.find('section#test-id')).to.exist()
     })
 
-    it('renders component label', () => {
-      const label = () => (
-        <section id="test-id">
-          This is a component label
-        </section>
-      )
+    it('passes isDragAccepted and isDragRejected boolean props to component label', async () => {
+      let result = {}
 
-      const subject = testbed.render({ label })
-      expect(subject.find('#test-id')).to.be.present()
-    })
-
-    it('passes isDragAccepted and isDragRejected boolean props to component label', () => {
-      const label = ({ isDragAccepted, isDragRejected }) => {
-        expect(typeof isDragAccepted === 'boolean').to.be.true()
-        expect(typeof isDragRejected === 'boolean').to.be.true()
+      const label = (props) => {
+        result = {...props}
         return null
       }
 
-      testbed.render({ label })
+      await mount(<FileDrop label={label} />)
+
+      expect(typeof result.isDragAccepted === 'boolean').to.be.true()
+      expect(typeof result.isDragRejected === 'boolean').to.be.true()
     })
 
-    it(`label component's props are false by default`, () => {
-      const label = ({ isDragAccepted, isDragRejected }) => {
-        expect(isDragAccepted).to.be.false()
-        expect(isDragRejected).to.be.false()
+    it(`label component's props are false by default`, async () => {
+      let result = {}
+
+      const label = (props) => {
+        result = {...props}
         return null
       }
 
-      testbed.render({ label })
+      await mount(<FileDrop label={label} />)
+
+      expect(result.isDragAccepted).to.be.false()
+      expect(result.isDragRejected).to.be.false()
     })
   })
 
-  describe('onDrag events', () => {
-    it('responds to onDragEnter event', () => {
-      const onDragEnter = testbed.stub()
+  describe('onDrag events', async () => {
+    it('responds to onDragEnter event', async () => {
+      const onDragEnter = stub()
+      const subject = await mount(<FileDrop label="fake label" onDragEnter={onDragEnter} />)
 
-      const subject = testbed.render({ onDragEnter })
-      subject.find('label').simulate('dragenter')
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.dragEnter()
 
       expect(onDragEnter).to.have.been.called()
     })
 
-    it('responds to onDragOver event', () => {
-      const onDragOver = testbed.stub()
+    it('responds to onDragOver event', async () => {
+      const onDragOver = stub()
+      const subject = await mount(<FileDrop label="fake label" onDragOver={onDragOver} />)
 
-      const subject = testbed.render({ onDragOver })
-      subject.find('label').simulate('dragover')
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.dragOver()
 
       expect(onDragOver).to.have.been.called()
     })
 
-    it('responds to onDragLeave event', () => {
-      const onDragLeave = testbed.stub()
+    it('responds to onDragLeave event', async () => {
+      const onDragLeave = stub()
+      const subject = await mount(<FileDrop label="fake label" onDragLeave={onDragLeave} />)
 
-      const subject = testbed.render({ onDragLeave })
-      subject.find('label').simulate('dragleave')
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.dragLeave()
 
       expect(onDragLeave).to.have.been.called()
-    })
-  })
-
-  describe('FileDrop.getEventFiles', () => {
-    const chromeDragEnter = {
-      dataTransfer: {
-        dropEffect: 'none',
-        effectAllowed: 'all',
-        files: [],
-        items: [{
-          kind: 'file',
-          type: 'image/jpeg'
-        }],
-        types: ['Files']
-      }
-    }
-
-    const firefoxDragEnter = {
-      dataTransfer: {
-        dropEffect: 'move',
-        effectAllowed: 'uninitialized',
-        files: [],
-        items: [{
-          kind: 'file',
-          type: 'application/x-moz-file'
-        }],
-        types: ['application/x-moz-file', 'Files']
-      }
-    }
-
-    const safariDragEnter = {
-      dataTransfer: {
-        dropEffect: 'none',
-        effectAllowed: 'all',
-        files: [],
-        types: []
-      }
-    }
-
-    it('should return items on chrome dragenter event', () => {
-      expect(getEventFiles(chromeDragEnter)).to.be.equal(chromeDragEnter.dataTransfer.items)
-    })
-
-    it('should return items on a firefox dragenter event', () => {
-      expect(getEventFiles(firefoxDragEnter)).to.be.equal(firefoxDragEnter.dataTransfer.items)
-    })
-
-    it('should return empty array on a safari dragenter event', () => {
-      expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
-    })
-  })
-
-  describe('FileDrop.accepts', () => {
-    const dropImage = {
-      lastModified: 1489419040000,
-      name: 'whale whale whale.jpg',
-      size: 4419800,
-      type: 'image/jpeg'
-    }
-    const dropFile = {
-      lastModified: 1489419040000,
-      name: 'whale oil production.pdf',
-      size: 44198009,
-      type: 'application/pdf'
-    }
-    const chromeDragEnterFile = {
-      kind: 'file',
-      type: 'image/jpeg'
-    }
-    const firefoxDragEnterFile = {
-      kind: 'file',
-      type: 'application/x-moz-file'
-    }
-
-    it('should take image/* to mean any image type', () => {
-      expect(accepts(dropImage, 'image/*')).to.be.true()
-    })
-
-    it('should reject anything that is not an image, given image/*', () => {
-      expect(accepts(dropFile, 'image/*')).to.be.false()
-    })
-
-    it('should match the exact file extensions given', () => {
-      expect(accepts(dropImage, '.jpg')).to.be.true()
-      expect(accepts(dropImage, '.jpg, .png')).to.be.true()
-      expect(accepts(dropImage, '.png')).to.be.false()
-      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
-      expect(accepts(dropFile, '.jpg, .pdf')).to.be.true()
-    })
-
-    it('should handle chrome dragenter file data', () => {
-      expect(accepts(chromeDragEnterFile, 'image/*')).to.be.true()
-      expect(accepts(chromeDragEnterFile, '.jpeg')).to.be.true()
-      expect(accepts(chromeDragEnterFile, '.png')).to.not.be.true()
-      expect(accepts(chromeDragEnterFile, '.pdf')).to.not.be.true()
-    })
-
-    it(`should always be true for firefox's dragenter file data`, () => {
-      expect(accepts(firefoxDragEnterFile, 'image/*')).to.be.true()
-      expect(accepts(firefoxDragEnterFile, '.jpeg')).to.be.true()
-      expect(accepts(firefoxDragEnterFile, '.png')).to.be.true()
-      expect(accepts(firefoxDragEnterFile, '.pdf')).to.be.true()
-    })
-
-    it('allows extensions without leading dot', () => {
-      expect(accepts(dropImage, 'jpg, png')).to.be.true()
     })
   })
 })

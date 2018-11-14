@@ -161,7 +161,7 @@ class RadioInput extends Component {
           checked={this.checked}
           type="radio"
           className={styles.input}
-          disabled={disabled || readOnly ? 'true' : null}
+          disabled={disabled || readOnly}
           aria-disabled={disabled || readOnly ? 'true' : null}
           onChange={this.handleChange}
           onClick={this.handleClick}

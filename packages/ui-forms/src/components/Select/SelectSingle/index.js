@@ -30,6 +30,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import error from '@instructure/ui-utils/lib/error'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import testable from '@instructure/ui-testable'
 
 import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
@@ -46,6 +47,7 @@ const optionType = PropTypes.shape({
 parent: Select
 ---
 **/
+@testable()
 class SelectSingle extends Component {
   static propTypes = {
     /**

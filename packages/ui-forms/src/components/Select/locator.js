@@ -22,42 +22,35 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import FormField from '../index'
+import { locator } from '@instructure/ui-test-utils'
 
-describe('<FormField />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
-  })
+import Select from './index'
 
-  it('should require a label', async () => {
-    const consoleError = stub(console, 'error')
+const InputLocator = locator('input[type="text"]')
+const OptionsListLocator = locator('ul')
+const OptionsLocator = locator('li')
 
-    await mount(<FormField id="bar" />)
+const customMethods = {
+  findInput: (...args) => InputLocator.find(...args),
+  findOptionsList: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsListLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findOption: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findAllOptions: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : null
+  }
+}
 
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
-    )
-  })
+const SelectLocator = locator(Select.selector, customMethods)
 
-  it('should require an id', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField label="foo" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
-    )
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
-
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
-  })
-})
+export default {
+  ...SelectLocator,
+  ...customMethods
+}

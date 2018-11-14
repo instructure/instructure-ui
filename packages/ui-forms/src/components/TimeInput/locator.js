@@ -21,43 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import FormField from '../index'
+import TimeInput from './index'
 
-describe('<FormField />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+import SelectLocator from '../Select/locator'
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
-  })
-
-  it('should require a label', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField id="bar" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
-    )
-  })
-
-  it('should require an id', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField label="foo" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
-    )
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
-
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
-  })
+export default locator(TimeInput.selector, {
+  findInput: (...args) => SelectLocator.findInput(...args),
+  findOption: (...args) => SelectLocator.findOption(...args),
+  findAllOptions: (...args) => SelectLocator.findAllOptions(...args)
 })

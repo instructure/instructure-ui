@@ -37,6 +37,8 @@ import error from '@instructure/ui-utils/lib/error'
 import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
+import testable from '@instructure/ui-testable'
+
 import DatePickerPagination from './DatePickerPagination'
 import styles from './styles.css'
 import theme from './theme'
@@ -47,6 +49,7 @@ import { isSameMonth, isSameDay, isDayDisabled } from "../utils/dateHelpers"
 parent: DateInput
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class DatePicker extends Component {
   static propTypes = {
@@ -413,6 +416,7 @@ export default class DatePicker extends Component {
           onClick={handleDateClick}
           onFocus={handleDateFocus}
           disabled={disabled}
+          aria-current={isSameDay(day, today) ? 'date' : 'false'}
         >
           { day.format('D') }
         </button>

@@ -22,20 +22,18 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import FormFieldLabel from '../index'
+export default function getEventFiles (event, inputEl) {
+  const dt = event.dataTransfer
 
-describe('<FormFieldLabel />', () => {
-  const testbed = new Testbed(<FormFieldLabel>Foo</FormFieldLabel>)
+  if (dt) {
+    if (dt.files && dt.files.length) {
+      return dt.files
+    } else if (dt.items && dt.items.length) {
+      return dt.items
+    }
+  } else if (inputEl && inputEl.files) {
+    return inputEl.files
+  }
 
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
-  })
-})
+  return []
+}

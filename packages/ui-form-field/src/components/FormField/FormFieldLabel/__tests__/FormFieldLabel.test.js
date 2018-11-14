@@ -24,40 +24,37 @@
 
 import React from 'react'
 import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import FormField from '../index'
+import FormFieldLabel from '../index'
 
-describe('<FormField />', async () => {
+describe('<FormFieldLabel />', async () => {
   it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+    const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
+    const formFieldLabel = within(subject.getDOMNode())
+    expect(formFieldLabel).to.exist()
   })
 
-  it('should require a label', async () => {
-    const consoleError = stub(console, 'error')
+  it('should render as specified via the `as` prop', async () => {
+    const subject = await mount(<FormFieldLabel as="li">Foo</FormFieldLabel>)
 
-    await mount(<FormField id="bar" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
-    )
+    const formFieldLabel = within(subject.getDOMNode())
+    expect(await formFieldLabel.find('li:contains(Foo)')).to.exist()
   })
 
-  it('should require an id', async () => {
+  it('should require children', async () => {
     const consoleError = stub(console, 'error')
 
-    await mount(<FormField label="foo" />)
+    await mount(<FormFieldLabel />)
 
     expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
+      'prop `children` is marked as required in `FormFieldLabel`'
     )
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+    const subject = await mount(<FormFieldLabel>Foo</FormFieldLabel>)
 
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
+    const formFieldLabel = within(subject.getDOMNode())
+    expect(await formFieldLabel.accessible()).to.be.true()
   })
 })

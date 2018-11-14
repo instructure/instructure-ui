@@ -23,13 +23,27 @@
  */
 
 import React from 'react'
-import keycode from 'keycode'
+import { locator, expect, mount, stub, spy } from '@instructure/ui-test-utils'
 import SelectMultiple from '../index'
-import SelectField from '../../SelectField'
 
-/* eslint-disable mocha/no-synchronous-tests */
-describe('<SelectMultiple />', () => {
-  const preventDefault = () => {}
+import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+
+const InputLocator = locator('input[type="text"]')
+const OptionsLocator = locator('li')
+
+const SelectMultipleLocator = locator(SelectMultiple.selector, {
+  findInput: (...args) => InputLocator.find(...args),
+  findOption: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findAllOptions: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : null
+  }
+})
+
+describe('<SelectMultiple />', async () => {
   const options = [{
     label: 'Aruba', children: 'Aruba', value: '0', id: '0'
   }, {
@@ -45,544 +59,744 @@ describe('<SelectMultiple />', () => {
     )
   }
 
-  const testbed = new Testbed(
-    <SelectMultiple
-      editable
-      multiple
-      label="Choose a vacation destination"
-      options={options}
-      filter={filter}
-    />
-  )
+  it('should include a label', async () => {
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
 
-  it('should include a label', () => {
-    const subject = testbed.render()
-    expect(subject.find('label').length).to.equal(1)
+    expect(await SelectMultipleLocator.find()).to.exist()
   })
 
-  it('should focus the input when focus is called', () => {
-    const subject = testbed.render()
-    subject.instance().focus()
-    expect(subject.find('input[type="text"]').focused()).to.be.true()
+  it('should focus the input when focus is called', async () => {
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await select.focus()
+    expect(input.focused()).to.be.true()
   })
 
-  it('should provide an focused getter', () => {
-    const subject = testbed.render()
-    subject.instance().focus()
-    expect(subject.instance().focused).to.be.true()
+  it('should provide an focused getter', async () => {
+    let selectMultiple
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        componentRef={(el) => { selectMultiple = el }}
+      />
+    )
+    expect(selectMultiple.focused).to.be.false()
   })
 
-  it('should provide an inputRef prop', () => {
-    const inputRef = testbed.stub()
-    const subject = testbed.render({ inputRef })
-    expect(inputRef).to.have.been.calledWith(subject.find('input[type="text"]').unwrap())
+  it('should provide an inputRef prop', async () => {
+    const inputRef = stub()
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        inputRef={inputRef}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  it('resets input value to empty when closing the menu with selectedOption', () => {
-    const subject = testbed.render({
-      selectedOption: ['1']
-    })
-    testbed.tick()
-    subject.find('input[type="text"]').simulate('click')
-    subject.instance()._input.value = 'Arub'
-    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(subject.instance()._input.value).to.equal('')
+  it('resets input value to empty when closing the menu with selectedOption', async () => {
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption={['1']}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    input.getDOMNode().value = 'Arub'
+
+    await input.keyUp('esc')
+    expect(input.getDOMNode().value).to.equal('')
   })
 
-  it('resets input value to empty when closing the menu with no selectedOption', () => {
-    const subject = testbed.render()
-    testbed.tick()
-    subject.find('input[type="text"]').simulate('click')
-    subject.instance()._input.value = 'Arub'
-    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(subject.instance()._input.value).to.equal('')
+  it('resets input value to empty when closing the menu with no selectedOption', async () => {
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    input.getDOMNode().value = 'Arub'
+
+    await input.keyUp('esc')
+    expect(input.getDOMNode().value).to.equal('')
   })
 
-  it('calls onChange when closing the menu and the input matches an option', () => {
+  it('calls onChange when closing the menu and the input matches an option', async () => {
     const value = '0'
     const label = 'Aruba'
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange })
-    testbed.tick()
-    subject.find('input[type="text"]').simulate('click')
-    subject.instance()._input.value = label
-    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
+    const onChange = spy((e) => {
+      e.persist()
+    })
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    input.getDOMNode().value = label
+
+    await input.keyUp('esc')
     expect(onChange.firstCall).to.exist()
-    const eventArg = onChange.firstCall.args[0]
+    expect(onChange.firstCall.args[0]).to.exist()
+
     const selectedOptionArg = onChange.firstCall.args[1]
-    expect(eventArg.target).to.exist()
     expect(selectedOptionArg.length).to.equal(1)
-    expect(selectedOptionArg[0]).to.eql({ value, label, id: value, children: label })
+    expect(selectedOptionArg[0]).to.deep.equal({ value, label, id: value, children: label })
   })
 
-  it('calls onInputChange when input changes', () => {
+  it('calls onInputChange when input changes', async () => {
     const label = 'Aruba'
-    const onInputChange = testbed.stub()
-    const subject = testbed.render({ onInputChange })
-    testbed.tick()
-    subject.instance()._input.value = label
-    subject.find('input[type="text"]').simulate('change', { preventDefault })
+    const onInputChange = spy((e) => {
+      e.persist()
+    })
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.change({ target: { value: label } })
+
+    expect(onInputChange).to.have.been.called()
     expect(onInputChange.firstCall).to.exist()
     expect(onInputChange.firstCall.args[0]).to.exist()
-    expect(onInputChange.firstCall.args[0].target.value).to.eql(label)
-    expect(onInputChange.firstCall.args[1]).to.eql(label)
+    expect(onInputChange.firstCall.args[0].target.value).to.equal(label)
+    expect(onInputChange.firstCall.args[1]).to.equal(label)
   })
 
-  it('filters the options when input changes', () => {
+  it('filters the options when input changes', async () => {
     const label = 'ARU'
-    const subject = testbed.render({})
-    testbed.tick()
-    subject.instance()._input.value = label
-    subject.find('input[type="text"]').simulate('change', { preventDefault })
-    expect(subject.instance().state.filterText).to.equal(label.toLowerCase())
-    expect(subject.instance().state.filteredOptions.length).to.equal(1)
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.change({ target: { value: label } })
+
+    const items = await select.findAllOptions()
+    expect(items.length).to.equal(1)
   })
 
-  it('resets the options when closing the menu without a selection', () => {
-    const subject = testbed.render()
-    testbed.tick()
-    subject.find('input[type="text"]').simulate('click')
-    subject.instance()._input.value = 'Arub'
-    subject.find('input[type="text"]').simulate('change', { preventDefault })
-    subject.find('input[type="text"]').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    expect(subject.instance().state.filteredOptions.length).to.equal(4)
+  it('resets the options when closing the menu without a selection', async () => {
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.change({ target: { value: 'Arub' } })
+
+    expect((await select.findAllOptions()).length).to.equal(1)
+
+    await input.keyUp('esc')
+
+    const tag = await select.find('button[title="Aruba"]', {expectEmpty: true})
+
+    expect(tag).to.not.exist()
   })
 
-  it('responds to selection done by SelectField', () => {
-    const newSelection = {
-      value: '4', label: 'Key Largo'
-    }
-    const onInputChange = testbed.stub()
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange, onInputChange })
-    testbed.tick()
-    const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist()
+  it('responds to selection done by SelectField', async () => {
+    const onInputChange = stub()
+    const onChange = spy((e) => {
+      e.persist()
+    })
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        onInputChange={onInputChange}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
 
-    subject.instance()._input.value = 'Key La'
+    await input.click()
 
-    expect(subject.instance().state.selectedOption.length).to.equal(0)
+    await input.change({ target: { value: 'Arub' } })
 
-    onSelect({ preventDefault, target: 1 }, newSelection)
+    const items = await select.findAllOptions()
+
+    expect(items.length).to.equal(1)
+
+    expect((await select.findAll('button', {expectEmpty: true})).length).to.equal(0)
+
+    await items[0].keyDown('enter')
 
     expect(onChange.firstCall).to.exist()
-    const eventArg = onChange.firstCall.args[0]
-    const selectedOptionArg = onChange.firstCall.args[1]
-    expect(eventArg.target).to.equal(1)
-    expect(selectedOptionArg[0]).to.equal(newSelection)
+    expect(onChange.firstCall.args[1][0]).to.equal(options[0])
+    expect(onInputChange.lastCall).to.exist()
+    expect(onInputChange.lastCall.args[1]).to.equal('')
 
-    expect(onInputChange.firstCall).to.exist()
-    expect(onInputChange.firstCall.args[0]).to.equal(null)
-    expect(onInputChange.firstCall.args[1]).to.equal('')
-
-    expect(subject.instance().state.filterText).to.equal('')
-    expect(subject.instance().state.selectedOption.length).to.equal(1)
-
-    const tags = subject.find('Tag')
-    expect(tags).to.exist()
-    expect(tags.length).to.equal(1)
+    expect((await select.findAll('button')).length).to.equal(1)
   })
 
-  it('selection is additive', () => {
-    const firstSelection = {
-      value: '4', label: 'Key Largo'
-    }
-    const secondSelection = {
-      value: '5', label: 'Montego'
-    }
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange })
-    testbed.tick()
-    const onSelect = subject.find(SelectField).unwrap().props.onSelect
-    expect(onSelect).to.exist()
+  it('selection is additive', async () => {
+    const onChange = spy((e) => {
+      e.persist()
+    })
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
 
-    expect(subject.instance().state.selectedOption.length).to.equal(0)
-    onSelect({ preventDefault, target: 1 }, firstSelection)
-    expect(subject.instance().state.selectedOption.length).to.equal(1)
-    onSelect({ preventDefault, target: 2 }, secondSelection)
-    expect(subject.instance().state.selectedOption.length).to.equal(2)
+    await input.click()
 
-    expect(onChange.firstCall).to.exist()
-    expect(onChange.firstCall.args[0].target).to.equal(1)
-    expect(onChange.firstCall.args[1]).to.eql([firstSelection])
 
-    expect(onChange.getCall(1)).to.exist()
-    expect(onChange.getCall(1).args[0].target).to.equal(2)
-    expect(onChange.getCall(1).args[1]).to.eql([firstSelection, secondSelection])
+    const item1 = await select.findOption()
+    await item1.keyDown('enter')
+    expect(await select.find('button[title="Aruba"]')).to.exist()
+    expect(onChange.getCall(0).args[1]).to.deep.equal([options[0]])
 
-    const tags = subject.find('Tag')
-    expect(tags).to.exist()
-    expect(tags.length).to.equal(2)
+    await input.click()
+
+    const item2 = await select.findOption()
+    await item2.keyDown('enter')
+    expect(await select.find('button[title="Jamaica"]')).to.exist()
+    expect((await select.findAll('button')).length).to.equal(2)
+    expect(onChange.getCall(1).args[1]).to.deep.equal([options[0], options[1]])
   })
 
-  it(`when controlled, shouldn't update Tags by itself`, () => {
+  it(`when controlled, shouldn't update Tags by itself`, async () => {
     // prevents the error that is fired when you select an option that isn't in the options list
     // TODO: look into this more (should we even output this error?)
-    testbed.stub(console, 'error')
+    stub(console, 'error')
 
+    const onChange = spy((e) => {
+      e.persist()
+    })
+    const selectedOption = [{
+      value: '5', label: 'Montego'
+    }]
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption={selectedOption}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
+
+    await input.click()
+
+    expect((await select.findAll('button')).length).to.equal(1)
+    expect(await select.findAll('button[title="Montego"]')).to.exist()
+
+    const item = await select.findOption()
+    await item.keyDown('enter')
+
+    expect(onChange.firstCall).to.exist()
+    expect(onChange.firstCall.args[1]).to.deep.equal([...selectedOption, options[0]])
+    expect((await select.findAll('button')).length).to.equal(1)
+  })
+
+  it(`when controlled, should only update Tags when selectedOption props changes`, async () => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    stub(console, 'error')
+
+    const onChange = stub()
     const selectedOption = [{
       value: '5', label: 'Montego'
     }]
     const newSelection = {
       value: '4', label: 'Key Largo'
     }
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange, selectedOption })
-    testbed.tick()
+    const subject = await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption={selectedOption}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
 
-    const onSelect = subject.find(SelectField).unwrap().props.onSelect
+    await input.click()
 
-    expect(onSelect).to.exist()
+    expect((await select.findAll('button')).length).to.equal(1)
+    expect(await select.findAll('button[title="Montego"]')).to.exist()
 
-    expect(subject.instance().state.selectedOption.length).to.equal(1)
-    onSelect({ preventDefault, target: 10 }, newSelection)
-    expect(subject.instance().state.selectedOption.length).to.equal(1)
-
-    expect(onChange.firstCall).to.exist()
-    expect(onChange.firstCall.args[0].target).to.equal(10)
-    expect(onChange.firstCall.args[1]).to.eql([...selectedOption, newSelection])
-
-    const tags = subject.find('Tag')
-    expect(tags).to.exist()
-    expect(tags.length).to.equal(1)
-  })
-
-  it(`when controlled, should only update Tags when selectedOption props changes`, (done) => {
-    // prevents the error that is fired when you select an option that isn't in the options list
-    // TODO: look into this more (should we even output this error?)
-    testbed.stub(console, 'error')
-
-    const selectedOption = [{
-      value: '5', label: 'Montego'
-    }]
-    const newSelection = {
-      value: '4', label: 'Key Largo'
-    }
-    const onChange = testbed.stub()
-    const subject = testbed.render({ onChange, selectedOption })
-    testbed.tick()
-
-    const tags = subject.find('Tag')
-    expect(tags).to.exist()
-    expect(tags.length).to.equal(1)
-
-    subject.setProps({
+    await subject.setProps({
       selectedOption: [...selectedOption, newSelection]
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        const tags = subject.find('Tag')
-        expect(tags).to.exist()
-        expect(tags.length).to.equal(2)
-        done()
-      })
     })
+
+    expect((await select.findAll('button')).length).to.equal(2)
   })
 
-  it('renders Tags for each selectedOption', () => {
+  it('renders Tags for each selectedOption', async () => {
     // prevents the error that is fired when you select an option that isn't in the options list
     // TODO: look into this more (should we even output this error?)
-    testbed.stub(console, 'error')
+    stub(console, 'error')
 
-    const subject = testbed.render({
-      selectedOption: [{
-        value: '4', label: 'Key Largo'
-      }, {
-        value: '5', label: 'Montego'
-      }, {
-        value: '6', label: 'Baby why dont we go'
-      }]
-    })
-    testbed.tick()
-    const tags = subject.find('Tag')
-    expect(tags).to.exist()
-    expect(tags.length).to.equal(3)
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption={[
+          {
+            value: '4', label: 'Key Largo'
+          }, {
+            value: '5', label: 'Montego'
+          }, {
+            value: '6', label: 'Baby why dont we go'
+          }
+        ]}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    expect((await select.findAll('button')).length).to.equal(3)
   })
 
-  it('handles dismissing Tags', () => {
+  it('handles dismissing Tags', async () => {
     // prevents the error that is fired when you select an option that isn't in the options list
     // TODO: look into this more (should we even output this error?)
-    testbed.stub(console, 'error')
+    stub(console, 'error')
 
-    const onChange = testbed.stub()
-    const subject = testbed.render({
-      onChange,
-      selectedOption: [{
-        value: '4', label: 'Key Largo'
-      }, {
-        value: '5', label: 'Montego'
-      }, {
-        value: '6', label: 'Baby why dont we go'
-      }]
-    })
-    testbed.tick()
-    const tags = subject.find('Tag')
+    const onChange = stub()
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption={[
+          {
+            value: '4', label: 'Key Largo'
+          }, {
+            value: '5', label: 'Montego'
+          }, {
+            value: '6', label: 'Baby why dont we go'
+          }]
+        }
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const tags = await select.findAll('button')
 
-    tags.at(1).simulate('click', { target: 1, preventDefault })
+    await tags[1].click()
 
     expect(onChange.firstCall).to.exist()
     const selectedOptionArg = onChange.firstCall.args[1]
     expect(selectedOptionArg.length).to.equal(2)
   })
 
-  it('allows tags to be non-dismissible', () => {
+  it('allows tags to be non-dismissible', async () => {
     // prevents the error that is fired when you select an option that isn't in the options list
     // TODO: look into this more (should we even output this error?)
-    testbed.stub(console, 'error')
+    stub(console, 'error')
 
-    const onChange = testbed.stub()
-    const subject = testbed.render({
-      onChange,
-      selectedOption: [{
-        value: '4', label: 'Key Largo', dismissible: false
-      }]
-    })
-    testbed.tick()
-    const tags = subject.find('Tag')
-    const nonDismissibleTag = tags.at(0)
-    expect(nonDismissibleTag.prop('onChange')).to.equal(undefined) // eslint-disable-line no-undefined
-    expect(nonDismissibleTag.prop('dismissible')).to.equal(false)
+    const onChange = stub()
+    await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption={[{value: '4', label: 'Key Largo', dismissible: false}]
+        }
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+
+    expect(await select.find('button', {expectEmpty: true})).to.not.exist()
+    expect(await select.find('[title="Key Largo"]')).to.exist()
   })
 
-  it('recalculates selectedOption when it changes', (done) => {
-    const subject = testbed.render({
-      selectedOption: ['0']
-    })
-    testbed.tick()
-    expect(subject.instance()._input.value).to.equal('')
-    expect(subject.instance().state.selectedOption[0]).to.eql(options[0])
+  it('recalculates selectedOption when it changes', async () => {
+    const subject = await mount(
+      <SelectMultiple
+        editable
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        selectedOption={['0']}
+      />
+    )
+    const select = await SelectMultipleLocator.find()
+    const input = await select.findInput()
 
-    subject.setProps({
+    expect(input.getDOMNode().value).to.equal('')
+    expect((await select.find('button')).getAttribute('title')).to.equal(options[0].label)
+
+    await subject.setProps({
       selectedOption: ['1']
-    }, () => {
-      testbed.defer(() => { // wait for re-render
-        testbed.tick()
-        expect(subject.instance()._input.value).to.equal('')
-        expect(subject.instance().state.selectedOption[0]).to.eql(options[1])
-        done()
-      })
     })
+
+    expect(input.getDOMNode().value).to.equal('')
+    expect((await select.find('button')).getAttribute('title')).to.equal(options[1].label)
   })
 
-  describe('default options', () => {
-    function testDefaultValue(defaultProp) {
-      it(`updates the selected options when ${defaultProp} is set and the options update`, (done) => {
-        // prevents the error that is fired when you select an option that isn't in the options list
-        // TODO: look into this more (should we even output this error?)
-        testbed.stub(console, 'error')
+  describe('default options', async () => {
+    it(`updates the selected options when defaultSelectedOption is set and the options update`, async () => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      stub(console, 'error')
 
-        const subject = testbed.render({
-          [defaultProp]: ['4', '5']
-        })
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          defaultSelectedOption={['4', '5']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
+      const input = await select.findInput()
 
-        expect(subject.find('button').length).to.equal(0)
+      expect(input.getDOMNode().value).to.equal('')
+      expect(await select.find('button', {expectEmpty: true})).to.not.exist()
 
-        subject.setProps({
-          options: [
-            ...options,
-            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
-            { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
-          ]}, () => {
-            expect(subject.find('button').length).to.equal(2)
-            expect(subject.find('button[title="Argentina"]')).to.exist()
-            expect(subject.find('button[title="Uruguay"]')).to.exist()
-            done()
-          }
-        )
-      })
-    }
-
-    testDefaultValue('defaultSelectedOption')
-    testDefaultValue('selectedOption')
-
-    it('updates the input values if selected options update', (done) => {
-      const subject = testbed.render({
+      await subject.setProps({
         options: [
           ...options,
           { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
-          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' },
-        ],
-        selectedOption: ['4', '5'],
+          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
+        ]
       })
 
-      expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Argentina"]')).to.exist()
-      expect(subject.find('button[title="Uruguay"]')).to.exist()
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Argentina"]')).to.exist()
+      expect(await select.find('button[title="Uruguay"]')).to.exist()
+    })
 
-      subject.setProps({
+    it(`updates the selected options when selectedOption is set and the options update`, async () => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      stub(console, 'error')
+
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          selectedOption={['4', '5']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
+      const input = await select.findInput()
+
+      expect(input.getDOMNode().value).to.equal('')
+      expect(await select.find('button', {expectEmpty: true})).to.not.exist()
+
+      await subject.setProps({
+        options: [
+          ...options,
+          { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+          { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
+        ]
+      })
+
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Argentina"]')).to.exist()
+      expect(await select.find('button[title="Uruguay"]')).to.exist()
+    })
+
+
+    it('updates the input values if selected options update', async () => {
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={[
+            ...options,
+            { label: 'Argentina', children: 'Argentina', value: '4', id: '4' },
+            { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' },
+          ]}
+          filter={filter}
+          selectedOption={['4', '5']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
+
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Argentina"]')).to.exist()
+      expect(await select.find('button[title="Uruguay"]')).to.exist()
+
+      await subject.setProps({
         options: [
           ...options,
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
           { label: 'Bar', children: 'Bar', value: '5', id: '5' },
-        ],
+        ]
       })
-      expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Foo"]')).to.exist()
-      expect(subject.find('button[title="Bar"]')).to.exist()
-      done()
+
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Foo"]')).to.exist()
+      expect(await select.find('button[title="Bar"]')).to.exist()
     })
 
-    it(`should render input values even if selected options cannot be found in options`, (done) => {
+    it(`should render input values even if selected options cannot be found in options`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        selectedOption: [
-          { label: 'Foo', children: 'Foo', value: '4', id: '4' },
-          { label: 'Bar', children: 'Bar', value: '5', id: '5' },
-          '6'
-        ],
-      })
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          selectedOption={[
+            { label: 'Foo', children: 'Foo', value: '4', id: '4' },
+            { label: 'Bar', children: 'Bar', value: '5', id: '5' }
+          ]}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
 
-      expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Foo"]')).to.exist()
-      expect(subject.find('button[title="Bar"]')).to.exist()
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Foo"]')).to.exist()
+      expect(await select.find('button[title="Bar"]')).to.exist()
 
-      subject.setProps({
+      await subject.setProps({
         selectedOption: [
           '3',
           { label: 'Baz', children: 'Baz', value: '5', id: '5' },
         ],
       })
-      expect(subject.find('button').length).to.equal(2)
-      expect(subject.find('button[title="Bahama"]')).to.exist()
-      expect(subject.find('button[title="Baz"]')).to.exist()
-      done()
+
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Bahama"]')).to.exist()
+      expect(await select.find('button[title="Baz"]')).to.exist()
     })
 
-    it(`should be able to select option when options are loaded asynchronously`, (done) => {
+    it(`should be able to select option when options are loaded asynchronously`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
-      const subject = testbed.render({
-        defaultSelectedOption: ['1', '2'],
-        editable: true,
-      })
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+          defaultSelectedOption={['1', '2']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
+      const input = await select.findInput()
 
-      // type to search
-      subject.instance()._input.value = 'f'
-      subject.find('input[type="text"]').simulate('change', {
-        target: {
-          value: 'f',
-        },
-      })
+      await input.typeIn('f')
 
-      expect(subject.find('button[title="Jamaica"]')).to.exist()
-      expect(subject.find('button[title="Bermuda"]')).to.exist()
-      expect(subject.instance()._input.value).to.equal('f')
+      expect(await select.find('button[title="Jamaica"]')).to.exist()
+      expect(await select.find('button[title="Bermuda"]')).to.exist()
+      expect(input.getDOMNode().value).to.equal('f')
 
-      // options reloaded
-      subject.setProps({
+      await subject.setProps({
         options: [
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
         ],
       })
 
-      // select the first option
-      subject.find(SelectField)
-        .getDOMNode()
-        .querySelector('li[role="option"]')
-        .click()
+      await input.click()
+      const item = await select.findOption()
+      await item.keyDown('enter')
 
-      // options reloaded
-      subject.setProps({
+      await subject.setProps({
         options: [],
       })
 
-      expect(subject.find('button').length).to.equal(3)
-      expect(subject.find('button[title="Jamaica"]')).to.exist()
-      expect(subject.find('button[title="Bermuda"]')).to.exist()
-      expect(subject.find('button[title="Foo"]')).to.exist()
-      done()
+      expect((await select.findAll('button')).length).to.equal(3)
+      expect(await select.find('button[title="Jamaica"]')).to.exist()
+      expect(await select.find('button[title="Bermuda"]')).to.exist()
+      expect(await select.find('button[title="Foo"]')).to.exist()
     })
 
-    it('updates correctly when default options are provided and some of the corresponding options are loaded later', (done) => {
+    it('updates correctly when default options are provided and some of the corresponding options are loaded later', async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
       const testOptions = [
         ...options,
         { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
       ]
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={testOptions}
+          filter={filter}
+          defaultSelectedOption={['4', '5']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
 
-      const subject = testbed.render({
-        defaultSelectedOption: ['4', '5'],
-        options: testOptions
-      })
+      expect((await select.findAll('button')).length).to.equal(1)
+      expect(await select.find('button[title="Argentina"]')).to.exist()
 
-      expect(subject.find('button').length).to.equal(1)
-      expect(subject.find('button[title="Argentina"]')).to.exist()
-
-      subject.setProps({
+      await subject.setProps({
         options: [
           ...testOptions,
           { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
-        ]}, () => {
-          expect(subject.find('button').length).to.equal(2)
-          expect(subject.find('button[title="Uruguay"]')).to.exist()
-          done()
-        }
-      )
+        ]
+      })
+
+      expect((await select.findAll('button')).length).to.equal(2)
+      expect(await select.find('button[title="Uruguay"]')).to.exist()
     })
 
-    it('does not re render option when a default option has been dismissed and the options update', (done) => {
+    it('does not re render option when a default option has been dismissed and the options update', async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
       // TODO: look into this more (should we even output this error?)
-      testbed.stub(console, 'error')
+      stub(console, 'error')
 
       const testOptions = [
         ...options,
         { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
       ]
+      const subject = await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={testOptions}
+          filter={filter}
+          defaultSelectedOption={['4', '5']}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
 
-      const subject = testbed.render({
-        defaultSelectedOption: ['4', '5'],
-        options: testOptions
-      })
+      const tag = await select.find('button')
+      await tag.click()
 
-      subject.find('button').click() // dismiss argentina
+      expect(await select.find('button', {expectEmpty: true})).to.not.exist()
 
-      expect(subject.find('button').length).to.equal(0)
-
-      subject.setProps({
+      await subject.setProps({
         options: [
           ...testOptions,
           { label: 'Uruguay', children: 'Uruguay', value: '5', id: '5' }
-        ]}, () => {
-          // on option update, argentina should not get amended to the selected
-          // options since it has already been dismissed
-          expect(subject.find('button').length).to.equal(1)
-          expect(subject.find('button[title="Uruguay"]')).to.exist()
-          expect(subject.find('button[title="Argentina"]')).to.not.exist()
-          done()
-        }
-      )
+        ]
+      })
+
+      expect((await select.findAll('button')).length).to.equal(1)
+      expect(await select.find('button[title="Uruguay"]')).to.exist()
+      expect(await select.find('button[title="Argentina"]', {expectEmpty: true})).to.not.exist()
     })
   })
 
-  describe('for a11y', () => {
-    it('should meet standards', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards', async () => {
+      await mount(
+        <SelectMultiple
+          editable
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
 
-      subject.find('input').simulate('click') // open it so it renders the opts
-
-      subject.should.be.accessible(done, {
+      await select.click()
+      expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      })).to.be.true()
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
+    it('should set aria-invalid when errors prop is set', async () => {
+      await mount(
+        <SelectMultiple
+          editable
+          messages={[{ type: 'error', text: 'some error message' }]}
+          label="Choose a vacation destination"
+          options={options}
+          filter={filter}
+        />
+      )
+      const select = await SelectMultipleLocator.find()
+      const input = await select.findInput()
 
-      expect(subject.find('input[type="text"]').getAttribute('aria-invalid'))
-        .to.exist()
+      expect(input.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

@@ -32,6 +32,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import error from '@instructure/ui-utils/lib/error'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import testable from '@instructure/ui-testable'
 
 import Tag from '@instructure/ui-elements/lib/components/Tag'
 import SelectField from '../SelectField'
@@ -53,6 +54,7 @@ const optionType = PropTypes.shape({
 parent: Select
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class SelectMultiple extends Component {
   static propTypes = {

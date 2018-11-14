@@ -23,416 +23,689 @@
  */
 
 import React from 'react'
-import keycode from 'keycode'
+import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import SelectField from '../index'
+import styles from '../styles.css'
 
-describe('<SelectField />', () => {
-  const preventDefault = () => {}
-  const testbed = new Testbed(
-    (
+import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+
+const InputLocator = locator('input[type="text"]')
+const OptionsListLocator = locator('ul')
+const OptionsLocator = locator('li')
+
+const SelectFieldLocator = locator(SelectField.selector, {
+  findInput: (...args) => InputLocator.find(...args),
+  findOptionsList: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsListLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findOption: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.find(content.getDOMNode(), ...args) : null
+  },
+  findAllOptions: async (element, ...args) => {
+    const content = await PositionLocator.findContent(element)
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : null
+  }
+})
+
+describe('<SelectField />', async () => {
+  const options = [{
+    label: 'Alabama',
+    value: '0',
+    id: '0',
+    children: 'Alabama'
+  },
+  {
+    label: 'Alaska',
+    value: '1',
+    id: '1',
+    children: 'Alaska'
+  },
+  {
+    label: 'America',
+    value: '2',
+    id: '2',
+    children: 'America'
+  }]
+
+  it('should include a label', async () => {
+    await mount(
       <SelectField
         closeOnSelect
         label="Choose a state"
-        options={[
-          {
-            label: 'Alabama',
-            value: '0',
-            id: '0',
-            children: 'Alabama'
-          },
-          {
-            label: 'Alaska',
-            value: '1',
-            id: '1',
-            children: 'Alaska'
-          },
-          {
-            label: 'America',
-            value: '2',
-            id: '2',
-            children: 'America'
-          }
-        ]}
+        options={options}
       />
     )
-  )
 
-  const changeInput = (subject, value) => {
-    const instance = subject.instance()
-
-    instance._input.value = value
-    subject.find('input').simulate('change', {
-      target: {
-        value,
-      },
-    })
-  }
-
-  it('should include a label', () => {
-    const subject = testbed.render()
-    expect(subject.find('label').length).to.equal(1)
+    const selectField = await SelectFieldLocator.find()
+    expect(await selectField.find('label')).to.exist()
   })
 
-  it('should not render label implicitly', () => {
+  it('should not render label implicitly', async () => {
     // Verify that the input is not wrapped by a label
     // element as this causes issues with a11y
-    const subject = testbed.render()
-    const label = subject.find('label').getDOMNode()
-    const input = subject.find('input').getDOMNode()
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
 
-    let labelIsAncestor = false
-    let el = input.parentElement
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
 
-    while (el) {
-      if (el === label) {
-        labelIsAncestor = true
-      }
-
-      if (el === subject.getDOMNode()) {
-        break
-      }
-
-      el = el.parentElement
-    }
-
-    expect(labelIsAncestor).to.be.false()
+    expect(await input.findParent('label', { expectEmpty: true })).to.not.exist()
   })
 
-  it('should provide an inputRef prop', () => {
-    const inputRef = testbed.stub()
-    const subject = testbed.render({ inputRef })
-    expect(inputRef).to.have.been.calledWith(subject.find('input').unwrap())
+  it('should provide an inputRef prop', async () => {
+    const inputRef = stub()
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        inputRef={inputRef}
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
-  it('should provide an expanded getter', () => {
-    const subject = testbed.render()
-    expect(subject.instance().expanded).to.be.false()
+  it('should provide an expanded getter', async () => {
+    let selectField
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        componentRef={(el) => { selectField = el }}
+        options={options}
+      />
+    )
+
+    expect(selectField.expanded).to.be.false()
   })
 
-  it('should provide a placement getter', () => {
-    const subject = testbed.render()
-    expect(subject.instance().placement).to.exist()
+  it('should provide a placement getter', async () => {
+    let selectField
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        componentRef={(el) => { selectField = el }}
+        options={options}
+      />
+    )
+
+    expect(selectField.placement).to.exist()
   })
 
-  it('placement should be `bottom stretch` by default', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().placement).to.equal('bottom stretch')
-  })
+  it('placement should be `bottom stretch` by default', async () => {
+    await mount(
+      <div style={{padding: '200px 0'}}>
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+        />
+      </div>
+    )
 
-  it('placement should be accepted as a prop', () => {
-    const subject = testbed.render({
-      placement: 'end top'
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const menu = await selectField.findOptionsList()
+
+    await wait(() => {
+      expect(input.getBoundingClientRect().top).to.be.lessThan(menu.getBoundingClientRect().top)
     })
-    expect(subject.instance().props.placement).to.equal('end top')
+
   })
 
-  it('expands when input is clicked', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
+  it('placement should be accepted as a prop', async () => {
+    await mount(
+      <div style={{padding: '200px 0'}}>
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          placement="top stretch"
+          options={options}
+        />
+      </div>
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const menu = await selectField.findOptionsList()
+
+    expect(input.getBoundingClientRect().top).to.not.be.lessThan(menu.getBoundingClientRect().top)
   })
 
-  it('expands when formfield is clicked', () => {
-    const subject = testbed.render()
-    subject.ref('_inputContainer').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
+  it('expands when input is clicked', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
   })
 
-  it('expands on keyDown ArrowDown', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
+  it('expands when formfield is clicked', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const container = await selectField.find(`.${styles.inputContainer}`)
+
+    await container.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
   })
 
-  it('expands on keyDown ArrowUp', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.up, preventDefault })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
+  it('expands on keyDown ArrowDown', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.keyDown('down')
+    expect(await find('[aria-expanded="true"]')).to.exist()
   })
 
-  it('expands on change', () => {
-    const subject = testbed.render({
-      editable: true
+  it('expands on keyDown ArrowUp', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.keyDown('up')
+    expect(await find('[aria-expanded="true"]')).to.exist()
+  })
+
+  it('expands on change', async () => {
+    await mount(
+      <SelectField
+        editable
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.change({ target: { value: 'a' } })
+    expect(await find('[aria-expanded="true"]')).to.exist()
+  })
+
+  it('closes when input is clicked', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
+
+    await input.click()
+    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+  })
+
+  it('closes when formfield is clicked', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const container = await selectField.find(`.${styles.inputContainer}`)
+
+    await container.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
+
+    await container.click()
+    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+  })
+
+  it('closes on blur', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
+
+    await input.blur()
+    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+  })
+
+  it('closes on Escape key', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    expect(await find('[aria-expanded="true"]')).to.exist()
+
+    await input.keyUp('esc')
+    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+  })
+
+  it('returns focus to input on close', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    await input.keyDown('down')
+    expect(input.focused()).to.be.false()
+
+    await input.keyUp('esc')
+    expect(input.focused()).to.be.true()
+  })
+
+  it('changes highlights with arrows and selects with Enter', async () => {
+    const onSelect = spy((e) => {
+      e.persist()
     })
-    subject.find('input').simulate('change', { target: { value: 'a' } })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-  })
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        onSelect={onSelect}
+        options={options}
+      />
+    )
 
-  it('closes when input is clicked', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.false()
-  })
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
 
-  it('closes when formfield is clicked', () => {
-    const subject = testbed.render()
-    subject.ref('_inputContainer').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    subject.ref('_inputContainer').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.false()
-  })
+    await input.click()
 
-  it('closes on blur', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    subject.find('input').focus()
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    subject.find('input').simulate('blur')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.false()
-  })
+    const items = await selectField.findAllOptions()
 
-  it('closes on Escape key', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.false()
-  })
+    await input.keyDown('down')
+    expect(items[1].getDOMNode().className).to.include('highlighted')
 
-  it('returns focus to input on close', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
-    testbed.tick()
-    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.false()
-    testbed.tick()
-    subject.find('input').simulate('keyUp', { keyCode: keycode.codes.esc, preventDefault })
-    testbed.tick()
-    expect(subject.find('input').getDOMNode() === document.activeElement).to.be.true()
-  })
-
-  it('changes highlights with arrows and selects with Enter', () => {
-    const onSelect = testbed.stub()
-    const subject = testbed.render({ onSelect })
-
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    expect(subject.instance().state.highlightedIndex).to.equal(0)
-
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
-    expect(subject.instance().state.highlightedIndex).to.equal(1)
-
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.up, preventDefault })
-    expect(subject.instance().state.highlightedIndex).to.equal(0)
+    await input.keyDown('up')
+    expect(items[0].getDOMNode().className).to.include('highlighted')
 
     expect(onSelect).to.not.have.been.called()
 
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.down, preventDefault })
-
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.false()
+    await input.keyDown('down')
+    await input.keyDown('enter')
 
     const value = '1'
     const label = 'Alaska'
     expect(onSelect).to.have.been.calledOnce()
     expect(onSelect.firstCall.args[0].target).to.exist()
-    expect(onSelect.firstCall.args[1]).to.eql({ value, label, id: value, children: label })
+    expect(onSelect.firstCall.args[1]).to.deep.equal({ value, label, id: value, children: label })
   })
 
-  it('changes highlights with Home & End keys', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click')
-    testbed.tick()
+  it('changes highlights with Home & End keys', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
 
-    expect(subject.instance().expanded).to.be.true()
-    expect(subject.instance().state.highlightedIndex).to.equal(0)
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.end })
-    expect(subject.instance().state.highlightedIndex).to.equal(2)
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.home })
-    expect(subject.instance().state.highlightedIndex).to.equal(0)
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const items = await selectField.findAllOptions()
+
+    await input.keyDown('end')
+    expect(items[2].getDOMNode().className).to.include('highlighted')
+
+    await input.keyDown('home')
+    expect(items[0].getDOMNode().className).to.include('highlighted')
   })
 
-  it('highlights selectedOption when expanding', () => {
+  it('highlights selectedOption when expanding', async () => {
     const value = '1'
     const label = 'Alaska'
-    const subject = testbed.render({
-      selectedOption: { value, label, id: value, children: label }
-    })
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+        selectedOption={{ value, label, id: value, children: label }}
+      />
+    )
 
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    expect(subject.instance().state.highlightedIndex).to.equal(1)
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const items = await selectField.findAllOptions()
+    expect(items[1].getDOMNode().className).to.include('highlighted')
   })
 
-  it(`should highlight first option when options are loaded asynchronously`, () => {
-    const highlight = testbed.stub()
-    const subject = testbed.render({
-      editable: true,
-      options: [],
-      onHighlight: highlight
-    })
+  it(`should highlight first option when options are loaded asynchronously`, async () => {
+    const highlight = stub()
+    const subject = await mount(
+      <SelectField
+        editable
+        closeOnSelect
+        label="Choose a state"
+        options={[]}
+        onHighlight={highlight}
+      />
+    )
 
-    changeInput(subject, 'a')
-    subject.setProps({
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.typeIn('a')
+
+    await subject.setProps({
       options: [{ label: 'Alabama', value: '0', id: '0', children: 'Alabama' }]
     })
-    testbed.tick()
+
+    await input.click()
     expect(highlight).to.have.been.calledWith(0)
   })
 
-  it('renders only emptyOption prop in menu when options are empty', () => {
+  it('renders only emptyOption prop in menu when options are empty', async () => {
     const emptyOption = 'Oops! you seem to not have any options available'
-    const subject = testbed.render({
-      options: [],
-      emptyOption
-    })
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    const menu = subject.ref('_menu')
-    expect(menu.find('li').length).to.equal(1)
-    expect(menu.find('li').text().trim()).to.equal(emptyOption)
+    await mount(
+      <SelectField
+        editable
+        closeOnSelect
+        label="Choose a state"
+        options={[]}
+        emptyOption={emptyOption}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const item = await selectField.findOption()
+    expect(item.getTextContent()).to.equal(emptyOption)
   })
 
-  it('renders only Spinner when loading is true', () => {
-    const subject = testbed.render({
-      options: [{ id: '1', label: 'option 1', value: '1' }, { id: '2', label: 'option 2', value: '2' }],
-      loadingText: 'Loading options'
-    })
-    subject.find('input').simulate('click')
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
-    const menu = subject.ref('_menu')
-    expect(menu.find('li').length).to.equal(1)
-    expect(menu.find('li').text().trim()).to.equal('Loading options')
+  it('renders only Spinner when loading is true', async () => {
+    const loadingText = 'Loading options'
+    await mount(
+      <SelectField
+        editable
+        closeOnSelect
+        label="Choose a state"
+        loadingText={loadingText}
+        options={[{ id: '1', label: 'option 1', value: '1' }, { id: '2', label: 'option 2', value: '2' }]}
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const item = await selectField.findOption()
+    expect(item.getTextContent()).to.equal(loadingText)
   })
 
-  it('does not change highlight when there are no options', () => {
-    const subject = testbed.render({ options: [] })
-    subject.find('input').simulate('click')
-    testbed.tick()
+  it('does not change highlight when there are no options', async () => {
+    const highlight = stub()
+    await mount(
+      <SelectField
+        editable
+        closeOnSelect
+        label="Choose a state"
+        options={[]}
+        onHighlight={highlight}
+      />
+    )
 
-    expect(subject.instance().expanded).to.be.true()
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
 
-    const highlights = []
-    highlights.push(subject.instance().state.highlightedIndex)
-    subject.find('input').simulate('keyDown', { key: 'End', preventDefault })
-    highlights.push(subject.instance().state.highlightedIndex)
-    subject.find('input').simulate('keyDown', { key: 'Home', preventDefault })
-    highlights.push(subject.instance().state.highlightedIndex)
-    subject.find('input').simulate('keyDown', { key: 'ArrowDown', preventDefault })
-    highlights.push(subject.instance().state.highlightedIndex)
-    subject.find('input').simulate('keyDown', { key: 'ArrowUp', preventDefault })
-    highlights.push(subject.instance().state.highlightedIndex)
+    await input.click()
 
-    expect(highlights.every(h => h === highlights[0])).to.be.true()
+    await input.keyDown('end')
+    await input.keyDown('home')
+    await input.keyDown('down')
+    await input.keyDown('up')
+
+    expect(highlight).to.not.have.been.called()
   })
 
-  it('should preventDefault onKeyDown of Enter when expanded', () => {
-    const subject = testbed.render()
-    subject.find('input').simulate('click', { preventDefault })
-    testbed.tick()
-    expect(subject.instance().expanded).to.be.true()
+  it('should preventDefault onKeyDown of Enter when expanded', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
 
-    const preventDefaultStub = testbed.stub()
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault: preventDefaultStub })
-    expect(preventDefaultStub).to.have.been.called()
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+
+    const event = await input.keyDown('enter')
+    expect(event.preventDefault).to.have.been.called()
   })
 
-  it('should not preventDefault onKeyDown of Enter when collapsed', () => {
-    const subject = testbed.render()
-    expect(subject.instance().expanded).to.be.false()
+  it('should not preventDefault onKeyDown of Enter when collapsed', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+      />
+    )
 
-    const preventDefaultStub = testbed.stub()
-    subject.find('input').simulate('keyDown', { keyCode: keycode.codes.enter, preventDefault: preventDefaultStub })
-    expect(preventDefaultStub).to.not.have.been.called()
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    const event = await input.keyDown('enter')
+    expect(event.preventDefault).to.not.have.been.called()
   })
 
-  describe('events', () => {
-    it('calls onPositioned event', () => {
-      const onPositioned = testbed.stub()
-      testbed.render({ onPositioned })
-      testbed.tick()
+  describe('events', async () => {
+    it('calls onPositioned event', async () => {
+      const onPositioned = stub()
+      await mount(
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+          onPositioned={onPositioned}
+        />
+      )
 
-      expect(onPositioned).to.have.been.called()
-    })
-
-    it('responds to onInputChange event', () => {
-      const onInputChange = testbed.stub()
-      const subject = testbed.render({
-        editable: true,
-        onInputChange
+      await wait(() => {
+        expect(onPositioned).to.have.been.called()
       })
+    })
 
-      subject.find('input').simulate('change', { target: { value: 'a' } })
+    it('responds to onInputChange event', async () => {
+      const onInputChange = spy((e) => {
+        e.persist()
+      })
+      await mount(
+        <SelectField
+          editable
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+          onInputChange={onInputChange}
+        />
+      )
+
+      const selectField = await SelectFieldLocator.find()
+      const input = await selectField.findInput()
+
+      await input.change({ target: { value: 'a' } })
 
       expect(onInputChange).to.have.been.called()
       expect(onInputChange.firstCall.args[0].type).to.equal('change')
       expect(onInputChange.firstCall.args[1]).to.equal('a')
     })
 
-    it('responds to onBlur event', () => {
-      const onBlur = testbed.stub()
+    it('responds to onBlur event', async () => {
+      const onBlur = stub()
+      await mount(
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+          onBlur={onBlur}
+        />
+      )
 
-      const subject = testbed.render({ onBlur })
+      const selectField = await SelectFieldLocator.find()
+      const input = await selectField.findInput()
 
-      subject.find('input').simulate('blur')
-
+      await input.blur()
       expect(onBlur).to.have.been.called()
     })
 
-    it('responds to onFocus event', () => {
-      const onFocus = testbed.stub()
+    it('responds to onFocus event', async () => {
+      const onFocus = stub()
+      await mount(
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+          onFocus={onFocus}
+        />
+      )
 
-      const subject = testbed.render({ onFocus })
+      const selectField = await SelectFieldLocator.find()
+      const input = await selectField.findInput()
 
-      subject.find('input').simulate('focus')
-
+      await input.focus()
       expect(onFocus).to.have.been.called()
     })
   })
 
-  describe('for a11y', () => {
-    it('should meet standards when closed', (done) => {
-      const subject = testbed.render()
+  describe('for a11y', async () => {
+    it('should meet standards when closed', async () => {
+      await mount(
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+        />
+      )
 
-      subject.should.be.accessible(done, {
+      const selectField = await SelectFieldLocator.find()
+
+      expect(await selectField.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      }))
     })
 
-    it('should meet standards when open', done => {
-      const subject = testbed.render()
+    it('should meet standards when open', async () => {
+      await mount(
+        <SelectField
+          closeOnSelect
+          label="Choose a state"
+          options={options}
+        />
+      )
 
-      subject.find('input').simulate('click') // open it so it renders the opts
+      const selectField = await SelectFieldLocator.find()
+      await selectField.click()
 
-      subject.should.be.accessible(done, {
+      expect(await selectField.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
         ]
-      })
+      }))
     })
 
-    it('should set aria-invalid when errors prop is set', () => {
-      const subject = testbed.render({
-        messages: [{ type: 'error', text: 'some error message' }]
-      })
+    it('should set aria-invalid when errors prop is set', async () => {
+      await mount(
+        <SelectField
+          closeOnSelect
+          messages={[{ type: 'error', text: 'some error message' }]}
+          label="Choose a state"
+          options={options}
+        />
+      )
 
-      expect(subject.find('input').getAttribute('aria-invalid')).to.exist()
+      const selectField = await SelectFieldLocator.find()
+      const input = await selectField.findInput()
+
+      expect(input.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

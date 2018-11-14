@@ -28,8 +28,6 @@ module.exports = {
   // TODO convert these to use ui-test-utils and then remove them:
   TESTBED_REMOVE_THIS: [
     'packages/media-capture/',
-    'packages/ui-form-field/',
-    'packages/ui-forms/',
     'packages/ui-media-player/'
   ]
 }

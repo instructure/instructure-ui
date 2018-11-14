@@ -23,20 +23,21 @@
  */
 
 import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 import FormFieldMessage from '../index'
 
-describe('<FormFieldMessage />', () => {
-  const testbed = new Testbed(<FormFieldMessage />)
+describe('<FormFieldMessage />', async () => {
+  it('should render message', async () => {
+    const subject = await mount(<FormFieldMessage>hello world</FormFieldMessage>)
 
-  it('should render', () => {
-    const subject = testbed.render()
-
-    expect(subject).to.be.present()
+    const formFieldMessage = within(subject.getDOMNode())
+    expect(await formFieldMessage.find(':textContent(hello world)')).to.exist()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
+  it('should meet a11y standards', async () => {
+    const subject = await mount(<FormFieldMessage />)
 
-    subject.should.be.accessible(done)
+    const formFieldMessage = within(subject.getDOMNode())
+    expect(await formFieldMessage.accessible()).to.be.true()
   })
 })

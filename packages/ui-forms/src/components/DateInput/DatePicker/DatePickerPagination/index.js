@@ -74,10 +74,7 @@ export default class DatePickerPagination extends Component {
           variant="icon"
           onClick={this.handleNextClick}
           icon={
-            <IconArrowOpenEnd
-              className={styles.arrowIcon}
-              title={this.props.nextLabel}
-            />
+            <IconArrowOpenEnd className={styles.arrowIcon} />
           }
         >
           <ScreenReaderContent>{this.props.nextLabel}</ScreenReaderContent>

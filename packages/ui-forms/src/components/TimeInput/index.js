@@ -31,6 +31,7 @@ import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
+import testable from '@instructure/ui-testable'
 
 import Select from '../Select'
 
@@ -42,6 +43,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class TimeInput extends Component {
   /* eslint-disable react/require-default-props */

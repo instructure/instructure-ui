@@ -22,10 +22,12 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import SelectField from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('SelectField.theme', () => {
   describe('with the canvas theme', () => {
     const variables = SelectField.generateTheme()
@@ -51,3 +53,4 @@ describe('SelectField.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

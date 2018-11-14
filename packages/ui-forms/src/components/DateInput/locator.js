@@ -21,43 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
-import FormField from '../index'
+import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
 
-describe('<FormField />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
+import DateInput from './index'
+import DatePickerLocator from './DatePicker/locator'
 
-    const formField = within(subject.getDOMNode())
-    expect(formField).to.exist()
-  })
+const InputLocator = locator('input')
 
-  it('should require a label', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField id="bar" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `label` is marked as required in `FormField`'
-    )
-  })
-
-  it('should require an id', async () => {
-    const consoleError = stub(console, 'error')
-
-    await mount(<FormField label="foo" />)
-
-    expect(consoleError).to.have.been.calledWithMatch(
-      'prop `id` is marked as required in `FormField`'
-    )
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<FormField label="foo" id="bar" />)
-
-    const formField = within(subject.getDOMNode())
-    expect(await formField.accessible()).to.be.true()
-  })
+const DateInputLocator = locator(DateInput.selector, {
+  findInput: (...args) => InputLocator.find(...args),
+  findDatePicker: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element)
+    return content ? DatePickerLocator.find(content.getDOMNode()) : null
+  }
 })
+
+export default DateInputLocator

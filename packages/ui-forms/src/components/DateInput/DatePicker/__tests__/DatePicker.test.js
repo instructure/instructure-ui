@@ -23,222 +23,599 @@
  */
 
 import React from 'react'
-import keycode from 'keycode'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
+import { isSameDay } from "../../utils/dateHelpers"
+
 import DatePicker from '../index'
+import DatePickerLocator from '../locator'
 import styles from '../styles.css'
-import paginationStyles from '../DatePickerPagination/styles.css'
 
-describe('<DatePicker />', () => {
-  const testbed = new Testbed(<DatePicker previousLabel="foo" nextLabel="bar" todayValue="2017-06-01" />)
+describe('<DatePicker />', async () => {
+  it('styles today date', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        defaultSelectedValue="2017-06-02"
+      />
+    )
+    const datePicker = await DatePickerLocator.find()
+    const currentDate = await datePicker.findCurrentDate()
 
-  it('styles today date', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.today}`)).to.be.present()
+    expect(currentDate).to.exist()
+    expect(currentDate.hasClass(styles.today)).to.be.true()
   })
 
-  it('styles the selected date', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.selected}`)).to.be.present()
+  it('styles the selected date', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        defaultSelectedValue="2017-06-02"
+      />
+    )
+    const datePicker = await DatePickerLocator.find()
+    const selectedDate = await datePicker.findSelectedDate()
+
+    expect(selectedDate).to.exist()
+    expect(selectedDate.hasClass(styles.selected)).to.be.true()
   })
 
-  it('styles dates outside the selected month', () => {
-    const subject = testbed.render()
-    expect(subject.find(`.${styles.outside}`).length).to.be.above(0)
+  it('styles dates outside the selected month', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        defaultSelectedValue="2017-06-02"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const outside = await datePicker.findDate(':textContent(31)')
+
+    expect(outside).to.exist()
+    expect(outside.hasClass(styles.outside)).to.be.true()
   })
 
-  it('fires onSelectedChange when date is clicked', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render({onSelectedChange})
-    const cell = subject.find(`.${styles.outside}`).first()
-    cell.simulate('click')
+  it('fires onSelectedChange when date is clicked', async () => {
+    const onSelectedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onSelectedChange={onSelectedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const cell = await datePicker.findDate(':textContent(31)')
+
+    await cell.click()
+
     expect(onSelectedChange).to.have.been.called()
     const onChangeArg = onSelectedChange.getCall(0).args[1]
     expect(DateTime.isValid(onChangeArg)).to.be.ok()
-    expect(cell.props().disabled).to.eq(false)
+    expect(cell.getDOMNode().disabled).to.equal(false)
   })
 
-  it('should disable the date if the day is in disabledDaysOfWeek', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render({ disabledDaysOfWeek: [0, 1, 2, 3, 4, 5, 6], onSelectedChange })
-    const cell = subject.find(`.${styles.outside}`).first()
-    cell.simulate('click')
+  it('should disable the date if the day is in disabledDaysOfWeek', async () => {
+    const onSelectedChange = stub()
+    const disabledDaysOfWeek = [1, 6]
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onSelectedChange={onSelectedChange}
+        disabledDaysOfWeek={disabledDaysOfWeek}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const dates = await datePicker.findAllDates()
+
+    dates.forEach((date, i) => {
+      if (disabledDaysOfWeek.includes(i % 7)) {
+        expect(date.getDOMNode().disabled).to.be.true()
+      } else {
+        expect(date.getDOMNode().disabled).to.be.false()
+      }
+    })
+
+    const disabled = await datePicker.findDate('[disabled]')
+    await disabled.click()
+
     expect(onSelectedChange).to.not.have.been.called()
-    expect(cell.props().disabled).to.eq(true)
   })
 
-  it('should disable the date if the day is in disabledDays', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render({ disabledDays: [new Date(2017, 5, 5)], onSelectedChange })
-    const cell = subject.find(`.${styles.cell}`).at(8)
-    cell.simulate('click')
+  it('should disable the date if the day is in disabledDays', async () => {
+    const onSelectedChange = stub()
+    const disabledDays = [new Date(2017, 5, 5)]
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onSelectedChange={onSelectedChange}
+        disabledDays={disabledDays}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const dates = await datePicker.findAllDates()
+
+    const date = dates[8]
+    await date.click()
+
     expect(onSelectedChange).to.not.have.been.called()
-    expect(cell.props().disabled).to.eq(true)
+    expect(date.getDOMNode().disabled).to.equal(true)
   })
 
-  it('should disable the day if the disabledDays callback returns true', () => {
+  it('should disable the day if the disabledDays callback returns true', async () => {
     const disabledDays = (day) => true
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render({ disabledDays: disabledDays, onSelectedChange })
-    const cell = subject.find(`.${styles.cell}`).at(8)
-    cell.simulate('click')
+    const onSelectedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onSelectedChange={onSelectedChange}
+        disabledDays={disabledDays}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const dates = await datePicker.findAllDates()
+
+    dates.forEach((date, i) => {
+      expect(date.getDOMNode().disabled).to.be.true()
+    })
+    const date = await datePicker.findDate()
+    await date.click()
+
     expect(onSelectedChange).to.not.have.been.called()
-    expect(cell.props().disabled).to.eq(true)
   })
 
-  it('fires onRenderedChange when next arrow is clicked', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${paginationStyles.root}`)
-    const nextButton = slider.find('Button').first()
-    nextButton.simulate('click')
+  it('fires onRenderedChange when next arrow is clicked', async () => {
+    const onRenderedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onRenderedChange={onRenderedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const nextButton = await datePicker.find('button:label(bar)')
+
+    await nextButton.click()
+
     expect(onRenderedChange).to.have.been.called()
     const onChangeArg = onRenderedChange.getCall(0).args[1]
     expect(DateTime.isValid(onChangeArg)).to.be.ok()
   })
 
-  it('fires onRenderedChange when previous arrow is clicked', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({onRenderedChange})
-    const slider = subject.find(`.${paginationStyles.root}`)
-    const prevButton = slider.find('Button').last()
-    prevButton.simulate('click')
+  it('fires onRenderedChange when previous arrow is clicked', async () => {
+    const onRenderedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        onRenderedChange={onRenderedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const prevButton = await datePicker.find('button:label(foo)')
+
+    await prevButton.click()
+
     expect(onRenderedChange).to.have.been.called()
     const onChangeArg = onRenderedChange.getCall(0).args[1]
     expect(DateTime.isValid(onChangeArg)).to.be.ok()
   })
 
-  it('localizes the calendar layout', () => {
-    const subject = testbed.render({locale: 'fr'})
-    expect(subject.find('th PresentationContent').first().text().toLowerCase()).to.equal('lu')
-    expect(subject.find('th ScreenReaderContent').first().text().toLowerCase()).to.equal('lundi')
+  it('localizes the calendar layout', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        locale="fr"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    expect(await datePicker.find('[aria-hidden]:contains(lu)')).to.exist()
+    expect(await datePicker.find(':contains(lundi)')).to.exist()
   })
 
-  it('localizes the header', () => {
-    const subject = testbed.render({defaultRenderedValue: '2017-01-01', locale: 'fr'})
-    expect(subject.find(`.${styles.label}`).text()).to.equal('janvier2017')
+  it('localizes the header', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        locale="fr"
+        defaultRenderedValue="2017-01-01"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    expect(await datePicker.find(':contains(janvier)')).to.exist()
+    expect(await datePicker.find(':contains(2017)')).to.exist()
   })
 
-  it('uses the specified timezone', () => {
-    const onSelectedChange = testbed.stub()
-    const subject = testbed.render(
-      {defaultRenderedValue: '2017-05-01', timezone: 'Europe/Paris', onSelectedChange})
-    expect(subject.get)
-    const cell = subject.find(`.${styles.outside}`).first()
-    cell.simulate('click')
+  it('uses the specified timezone', async () => {
+    const onSelectedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        defaultRenderedValue="2017-05-01"
+        timezone="Europe/Paris"
+        onSelectedChange={onSelectedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const cell = await datePicker.findDate(':textContent(30)')
+    await cell.click()
+
     expect(onSelectedChange).to.have.been.called()
     expect(onSelectedChange.getCall(0).args[1]).to.include('2017-04-30T00:00:00+02:00')
   })
 
-  it('gets locale and timezone from context', () => {
-    const subject = testbed.render({}, {locale: 'fr', timezone: 'Europe/Paris'})
-    expect(subject.instance().locale).to.equal('fr')
-    expect(subject.instance().timezone).to.equal('Europe/Paris')
+  it('gets locale and timezone from context', async () => {
+    let datePicker = null
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        locale="fr"
+        timezone="Europe/Paris"
+        componentRef={(el) => { datePicker = el }}
+      />
+    )
+
+    expect(datePicker.locale).to.equal('fr')
+    expect(datePicker.timezone).to.equal('Europe/Paris')
   })
 
-  it('overrides locale and timezone context with properties', () => {
-    const subject = testbed.render({locale: 'ja', timezone: 'Asia/Tokyo'}, {locale: 'fr', timezone: 'Europe/Paris'})
-    expect(subject.instance().locale).to.equal('ja')
-    expect(subject.instance().timezone).to.equal('Asia/Tokyo')
-  })
+  it('overrides locale and timezone context with properties', async () => {
+    let datePicker = null
 
-  it('defaults the selected value to the today value', () => {
-    const subject = testbed.render({todayValue: '2017-04-01'})
-    expect(subject.instance().selectedValue).to.equal('2017-04-01')
-  })
+    const subject = await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-06-01"
+        locale="ja"
+        timezone="Asia/Tokyo"
+        componentRef={(el) => { datePicker = el }}
+      />
+    )
 
-  it('defaults the rendered value to the selected value', () => {
-    const subject = testbed.render({todayValue: '2017-04-01', defaultSelectedValue: '2017-05-01'})
-    expect(subject.instance().renderedValue).to.equal('2017-05-01')
-  })
-
-  it('should focus next day on key right', () => {
-    const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
-    expect(subject.instance().focusedValue).to.equal('2017-05-02T00:00:00+02:00')
-  })
-
-  it('should focus previous day on key left', () => {
-    const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(subject.instance().focusedValue).to.equal('2017-04-30T00:00:00+02:00')
-  })
-
-  it('should focus next week on key down', () => {
-    const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.down })
-    expect(subject.instance().focusedValue).to.equal('2017-05-08T00:00:00+02:00')
-  })
-
-  it('should focus previous week on key up', () => {
-    const subject = testbed.render({timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01'})
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.up })
-    expect(subject.instance().focusedValue).to.equal('2017-04-24T00:00:00+02:00')
-  })
-
-  it('should skip disabled days on key right', () => {
-    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 4, 2)] })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
-    expect(subject.instance().focusedValue).to.equal('2017-05-03T00:00:00+02:00')
-  })
-
-  it('should skip disabled days on key left', () => {
-    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 3, 30)] })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
-    expect(subject.instance().focusedValue).to.equal('2017-04-29T00:00:00+02:00')
-  })
-
-  it('should skip disabled days on key down', () => {
-    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 4, 8)] })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.down })
-    expect(subject.instance().focusedValue).to.equal('2017-05-15T00:00:00+02:00')
-  })
-
-  it('should skip disabled days on key up', () => {
-    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: [new Date(2017, 3, 24)] })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.up })
-    expect(subject.instance().focusedValue).to.equal('2017-04-17T00:00:00+02:00')
-  })
-
-  it('should stay on the current day on arrow change if more than the the following 60 days are disabled', () => {
-    const subject = testbed.render({ timezone: 'Europe/Paris', defaultSelectedValue: '2017-05-01', disabledDays: (date) => true })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.right })
-    expect(subject.instance().focusedValue).to.equal('2017-05-01')
-  })
-
-  it('should move slider to a different month when focus moves out of month', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({
-      defaultSelectedValue: '2017-05-01',
-      onRenderedChange
+    await subject.setContext({
+      locale: 'fr',
+      timezone: 'Europe/Paris'
     })
-    subject.ref('_calendar').simulate('keyDown', { keyCode: keycode.codes.left })
+
+    expect(datePicker.locale).to.equal('ja')
+    expect(datePicker.timezone).to.equal('Asia/Tokyo')
+  })
+
+  it('defaults the selected value to the today value', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const selectedDate = await datePicker.findSelectedDate()
+
+    expect(await datePicker.find(':contains(April)')).to.exist()
+    expect(await datePicker.find(':contains(2017)')).to.exist()
+
+    expect(selectedDate.getTextContent()).to.equal('1')
+  })
+
+  it('defaults the rendered value to the selected value', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2018-05-02"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const selectedDate = await datePicker.findSelectedDate()
+
+    expect(await datePicker.find(':contains(May)')).to.exist()
+    expect(await datePicker.find(':contains(2018)')).to.exist()
+
+    expect(selectedDate.getTextContent()).to.equal('2')
+  })
+
+  it('should focus next day on key right', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const nextDate = await datePicker.findDate(':textContent(18)')
+
+    await currentDate.keyDown('right')
+
+    expect(nextDate.focused()).to.be.true()
+  })
+
+  it('should focus previous day on key left', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const prevDate = await datePicker.findDate(':textContent(16)')
+
+    await currentDate.keyDown('left')
+
+    expect(prevDate.focused()).to.be.true()
+  })
+
+  it('should focus next week on key down', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const nextDate = await datePicker.findDate(':textContent(24)')
+
+    await currentDate.keyDown('down')
+
+    expect(nextDate.focused()).to.be.true()
+  })
+
+  it('should focus previous week on key up', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const prevDate = await datePicker.findDate(':textContent(10)')
+
+    await currentDate.keyDown('up')
+
+    expect(prevDate.focused()).to.be.true()
+  })
+
+  it('should skip disabled days on key right', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+        disabledDays={[new Date(2017, 4, 18)]}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const nextDate = await datePicker.findDate(':textContent(19)')
+
+    await currentDate.keyDown('right')
+
+    expect(nextDate.focused()).to.be.true()
+  })
+
+  it('should skip disabled days on key left', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+        disabledDays={[new Date(2017, 4, 16)]}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const prevDate = await datePicker.findDate(':textContent(15)')
+
+    await currentDate.keyDown('left')
+
+    expect(prevDate.focused()).to.be.true()
+  })
+
+  it('should skip disabled days on key down', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+        disabledDays={[new Date(2017, 4, 24)]}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const nextDate = await datePicker.findDate(':textContent(31)')
+
+    await currentDate.keyDown('down')
+
+    expect(nextDate.focused()).to.be.true()
+  })
+
+  it('should skip disabled days on key up', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-17"
+        timezone="Europe/Paris"
+        disabledDays={[new Date(2017, 4, 10)]}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+
+    const currentDate = await datePicker.findDate(':textContent(17)')
+    const prevDate = await datePicker.findDate(':textContent(3)')
+
+    await currentDate.keyDown('up')
+
+    expect(prevDate.focused()).to.be.true()
+  })
+
+  it('should stay on the current day on arrow change if more than the the following 60 days are disabled', async () => {
+    const defaultSelectedValue = "2017-05-01"
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue={defaultSelectedValue}
+        timezone="Europe/Paris"
+        disabledDays={(date) => !isSameDay(date, defaultSelectedValue)}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const date = await datePicker.findDate(':textContent(1)')
+
+    await date.focus()
+    await date.keyDown('right')
+
+    expect(date.focused()).to.be.true()
+  })
+
+  it('should move slider to a different month when focus moves out of month', async () => {
+    const onRenderedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-01"
+        onRenderedChange={onRenderedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const date = await datePicker.findDate(':textContent(1)')
+
+    await date.keyDown('left')
+
     expect(onRenderedChange).to.have.been.called()
   })
 
-  it('should move slider to a different month when date is selected out of month', () => {
-    const onRenderedChange = testbed.stub()
-    const subject = testbed.render({
-      defaultSelectedValue: '2017-05-01',
-      onRenderedChange
-    })
-    subject.find(`.${styles.outside}`).first().simulate('click')
+  it('should move slider to a different month when date is selected out of month', async () => {
+    const onRenderedChange = stub()
+
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-01"
+        defaultSelectedValue="2017-05-01"
+        onRenderedChange={onRenderedChange}
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    const date = await datePicker.findDate(':textContent(30)')
+
+    await date.click()
+
     expect(onRenderedChange).to.have.been.called()
   })
 
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render({
-      defaultRenderedValue: '2017-04-01',
-      defaultSelectedValue: '2017-04-01',
-      todayValue: '2017-04-02'
-    })
-    subject.should.be.accessible(done, {
+  it('should meet a11y standards', async () => {
+    await mount(
+      <DatePicker
+        previousLabel="foo"
+        nextLabel="bar"
+        todayValue="2017-04-02"
+        defaultSelectedValue="2017-04-01"
+        defaultRenderedValue="2017-04-01"
+      />
+    )
+
+    const datePicker = await DatePickerLocator.find()
+    expect(await datePicker.accessible({
       ignores: [
         'aria-allowed-role', // TODO remove this when we fix the issue
         'color-contrast' // checked manually for 3:1 in theme tests
       ]
-    })
+    })).to.be.true()
   })
 })
