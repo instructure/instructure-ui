@@ -27,7 +27,6 @@ module.exports = {
   ignore: ['packages/ui-codemods/**'],
   // TODO convert these to use ui-test-utils and then remove them:
   TESTBED_REMOVE_THIS: [
-    'packages/generate-examples/',
     'packages/media-capture/',
     'packages/ui-container/',
     'packages/ui-core/',

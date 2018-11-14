@@ -21,7 +21,8 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5"
+    "@instructure/ui-presets": "^5",
+    "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
     "@instructure/ui-layout": "^5",
