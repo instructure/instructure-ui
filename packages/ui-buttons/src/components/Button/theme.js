@@ -24,9 +24,9 @@
 
 import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
 
-const activeShadow = 'inset 0 0 3px 1px'
-const focusShadow = 'inset 0 0 0 1px'
-const focusOutline = '1px solid'
+const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
+const focusShadow = 'inset 0 0 0 0.0625rem'
+const focusOutline = '0.125rem solid'
 
 const buttonVariant = function (style, mainColor, textColor) {
   return {
@@ -64,7 +64,6 @@ export default function generator ({ colors, borders, forms, spacing, typography
     largePadding: spacing.medium,
     largeFontSize: typography.fontSizeLarge,
 
-    focusBorderRadius: borders.radiusMedium,
     focusBorder: `${focusOutline} ${colors.borderBrand}`,
     focusShadow: 'none',
 
@@ -86,7 +85,6 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ghostInverseColor: colors.textLightest,
     ghostInverseHoverBackground: alpha(colors.backgroundLightest, 10),
     ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
-    ghostInverseFocusBorder: `${focusOutline} ${colors.borderLightest}`,
 
     linkColor: colors.textBrand,
     linkBorderColor: 'transparent',
@@ -95,7 +93,8 @@ export default function generator ({ colors, borders, forms, spacing, typography
     linkTextDecoration: 'none',
 
     linkInverseColor: colors.textLight,
-    linkInverseFocusBorderColor: 'transparent',
+
+    inverseFocusBorder: `${focusOutline} ${colors.borderLightest}`,
 
     iconBorderColor: 'transparent',
     iconPadding: `0 ${spacing.xxSmall}`,
@@ -193,7 +192,6 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
     lightBorderColor: colors.borderMedium,
     circleDefaultBorderColor: colors.borderMedium,
     linkTextDecoration: 'underline',
-    linkInverseFocusBorderColor: colors.borderLightest,
-    linkFocusBorderColor: colors.borderBrand,
+    linkFocusBorderColor: colors.borderBrand
   }
 }

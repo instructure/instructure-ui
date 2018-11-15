@@ -55,25 +55,25 @@ the icon is inserted as a child:
     opacity: 0.5;
   }
 
-  &:not(.link)::before,
-  &.link.width--icon::before { /* still use focus ring on link variant if just an icon */
+  &::before {
     content: "";
     position: absolute;
-    top: -0.25rem;
-    left: -0.25rem; /* stylelint-disable-line property-blacklist */
-    right: -0.25rem; /* stylelint-disable-line property-blacklist */
-    bottom: -0.25rem;
+    top: -0.3125rem;
+    left: -0.3125rem; /* stylelint-disable-line property-blacklist */
+    right: -0.3125rem; /* stylelint-disable-line property-blacklist */
+    bottom: -0.3125rem;
     border: var(--focusBorder);
     opacity: 0;
-    transform: scale(0.01);
+    transform: scale(0.9);
     transition: all 0.2s;
+    pointer-events: none;
+    box-sizing: border-box;
   }
 
   &:focus {
     outline: none;
 
-    &:not(.link)::before,
-    &.link.width--icon::before {
+    &::before {
       opacity: 1;
       transform: scale(1);
     }
@@ -100,7 +100,7 @@ the icon is inserted as a child:
   border-radius: var(--borderRadius);
 
   &::before {
-    border-radius: calc(var(--focusBorderRadius) + 0.125rem);
+    border-radius: calc(var(--borderRadius) * 1.5);
   }
 }
 
@@ -428,7 +428,7 @@ the icon is inserted as a child:
 
   &:focus {
     &::before {
-      border: var(--ghostInverseFocusBorder);
+      border: var(--inverseFocusBorder);
     }
   }
 
@@ -443,12 +443,6 @@ the icon is inserted as a child:
   background: transparent;
   text-decoration: var(--linkTextDecoration);
   border-color: var(--linkBorderColor);
-
-  &:focus,
-  &:hover,
-  &:active {
-    text-decoration: underline;
-  }
 }
 
 .link {
@@ -457,8 +451,8 @@ the icon is inserted as a child:
   &:focus,
   &:hover,
   &:active {
-    border-color: var(--linkFocusBorderColor);
     color: var(--linkHoverColor);
+    text-decoration: underline;
   }
 }
 
@@ -468,8 +462,14 @@ the icon is inserted as a child:
   &:focus,
   &:hover,
   &:active {
-    border-color: var(--linkInverseFocusBorderColor);
     color: var(--linkInverseColor);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    &::before {
+      border: var(--inverseFocusBorder);
+    }
   }
 }
 

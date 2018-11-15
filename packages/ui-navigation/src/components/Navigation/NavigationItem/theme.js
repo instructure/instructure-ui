@@ -37,13 +37,13 @@ export default function generator ({ colors, typography, spacing, borders }) {
 
     hoverBackgroundColor: colors.backgroundDarkest,
     outerFocusOutline: `inset 0 0 0 0.125rem ${colors.borderDarkest}`,
-    innerFocusOutline: `inset 0 0 0 0.1875rem ${colors.borderLightest}`,
+    innerFocusOutline: `inset 0 0 0 0.25rem ${colors.borderLightest}`,
 
     selectedFontColor: colors.textBrand,
     selectedIconColor: colors.textBrand,
     selectedBackgroundColor: colors.backgroundLightest,
     selectedOuterFocusOutline: `inset 0 0 0 0.125rem ${colors.borderLightest}`,
-    selectedInnerFocusOutline: `inset 0 0 0 0.1875rem ${colors.borderBrand}`,
+    selectedInnerFocusOutline: `inset 0 0 0 0.25rem ${colors.borderBrand}`,
 
     contentPadding: spacing.xxSmall
   }
@@ -65,4 +65,3 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
     linkTextDecoration: 'underline'
   }
 }
-

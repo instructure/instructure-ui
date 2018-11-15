@@ -29,7 +29,7 @@ export default function generator ({ borders, colors }) {
     borderWidth: borders.widthMedium,
     borderStyle: 'dashed',
     hoverBorderColor: colors.borderBrand,
-    focusBorderWidth: borders.widthSmall,
+    focusBorderWidth: borders.widthMedium,
     focusBorderStyle: 'solid',
     focusBorderColor: colors.borderBrand,
     acceptedColor: colors.textBrand,

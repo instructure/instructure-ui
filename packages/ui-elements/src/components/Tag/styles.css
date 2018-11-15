@@ -50,15 +50,15 @@
   &::before {
     content: "";
     box-sizing: border-box;
-    width: calc(100% + 0.5rem);
-    height: calc(100% + 0.5rem);
-    border: var(--borderWidth) var(--borderStyle) var(--focusOutlineColor);
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
     border-radius: var(--borderRadius);
     position: absolute;
-    top: -0.25rem;
-    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    top: -0.3125rem;
+    bottom: -0.3125rem;
+    left: -0.3125rem; /* stylelint-disable-line property-blacklist */
+    right: -0.3125rem; /* stylelint-disable-line property-blacklist */
     opacity: 0;
-    transform: scale(0.01);
+    transform: scale(0.9);
     transition: all var(--transitionTiming);
     pointer-events: none;
   }
@@ -104,7 +104,6 @@
 
   &.button {
     &::before {
-      border: var(--defaultBorderWidth) var(--defaultBorderStyle) var(--focusOutlineColor);
       border-radius: var(--defaultBorderRadius);
     }
 
@@ -132,12 +131,11 @@
   border-radius: var(--inlineBorderRadius);
   color: var(--inlineColor);
   cursor: text;
-  margin: 0 0.1875rem 0.1875rem 0.1875rem;
+  margin: 0 0.1875rem 0.1875rem;
 
   &.button {
     &::before {
-      border: var(--inlineBorderWidth) var(--inlineBorderStyle) var(--focusOutlineColor);
-      border-radius: var(--inlineBorderRadius);
+      border-radius: calc(var(--inlineBorderRadius) * 1.5);
     }
 
     &:hover {

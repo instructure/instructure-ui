@@ -35,7 +35,7 @@ export default function generator ({ spacing, borders, colors, forms, shadows, t
     controlSize: '0.1875rem',
 
     focusBorderColor: colors.borderBrand,
-    focusBorderWidth: borders.widthSmall,
+    focusBorderWidth: borders.widthMedium,
     focusBorderStyle: borders.style,
 
     simpleFacadeSmallSize: '1rem',

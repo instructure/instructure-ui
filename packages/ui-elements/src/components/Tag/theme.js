@@ -62,6 +62,8 @@ export default function generator ({ borders, colors, forms, spacing, typography
     padding: `0 ${spacing.xSmall}`,
     paddingSmall: `0 ${spacing.xSmall}`,
     focusOutlineColor: colors.borderBrand,
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineStyle: borders.style,
     maxWidth: '10rem',
     iconMargin: spacing.small,
     transitionTiming: '0.2s',

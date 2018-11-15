@@ -34,7 +34,7 @@ export default function generator ({ colors, borders, forms, shadows, spacing, t
     uncheckedIconColor: colors.textDark,
     checkedIconColor: colors.textSuccess,
     focusOutlineColor: colors.borderBrand,
-    focusBorderWidth: borders.widthSmall,
+    focusBorderWidth: borders.widthMedium,
     focusBorderStyle: borders.style,
     toggleBackground: colors.backgroundLightest,
     toggleShadow: shadows.depth1,

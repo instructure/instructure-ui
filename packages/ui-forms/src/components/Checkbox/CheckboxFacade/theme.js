@@ -38,7 +38,7 @@ export default function generator ({ colors, borders, spacing, typography }) {
     hoverBorderColor: colors.borderDarkest,
 
     focusBorderColor: colors.borderBrand,
-    focusBorderWidth: borders.widthSmall,
+    focusBorderWidth: borders.widthMedium,
     focusBorderStyle: borders.style,
 
     labelColor: colors.textDarkest,
