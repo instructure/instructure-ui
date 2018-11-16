@@ -28,7 +28,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    color: colors.textBrand,
+    color: colors.textLink,
     textDecoration: 'none',
 
     borderWidth: borders.widthSmall,
@@ -40,7 +40,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
     focusOutlineColor: colors.borderBrand,
     focusOutlineStyle: borders.style,
 
-    hoverColor: darken(colors.textBrand, 10),
+    hoverColor: darken(colors.textLink, 10),
     hoverTextDecoration: 'underline',
 
     colorInverse: colors.textLight,

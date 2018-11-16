@@ -26,6 +26,7 @@
 
  const colors = {
    brand: '#0770A3',
+   link: '#0770A3',
    electric: '#0770A3',
    shamrock: '#127A1B',
    barney: '#B8309E',

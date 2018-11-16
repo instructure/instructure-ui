@@ -79,6 +79,14 @@ describe('canvas.colors', () => {
       expect(contrast(colors.textBrand, colors.backgroundLight)).to.be.above(4.5)
     })
   })
+  describe('textLink', () => {
+    it('should meet 4.5:1 contrast as a text color with `backgroundLightest` background', () => {
+      expect(contrast(colors.textLink, colors.backgroundLightest)).to.be.above(4.5)
+    })
+    it('should meet 4.5:1 contrast as a text color with `backgroundLight` background', () => {
+      expect(contrast(colors.textLink, colors.backgroundLight)).to.be.above(4.5)
+    })
+  })
   describe('textAlert', () => {
     it('should meet 4.5:1 contrast as a text color with `backgroundLightest` background', () => {
       expect(contrast(colors.textAlert, colors.backgroundLightest)).to.be.above(4.5)

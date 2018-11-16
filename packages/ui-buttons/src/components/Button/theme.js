@@ -86,10 +86,10 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ghostInverseHoverBackground: alpha(colors.backgroundLightest, 10),
     ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
 
-    linkColor: colors.textBrand,
+    linkColor: colors.textLink,
     linkBorderColor: 'transparent',
     linkFocusBorderColor: 'transparent',
-    linkHoverColor: darken(colors.textBrand, 10),
+    linkHoverColor: darken(colors.textLink, 10),
     linkTextDecoration: 'none',
 
     linkInverseColor: colors.textLight,

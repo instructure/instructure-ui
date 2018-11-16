@@ -23,6 +23,7 @@
  */
 const colors = {
   brand: '#008EE2',
+  link: '#2578CB',
   electric: '#008EE2',
   shamrock: '#00AC18',
   barney: '#BF32A4',
@@ -47,6 +48,7 @@ export function makeFunctionalColors (colors) {
     textLightest: colors.white,
 
     textBrand: colors.brand,
+    textLink: colors.link,
     textAlert: colors.barney,
     textInfo: colors.brand,
     textSuccess: colors.shamrock,
