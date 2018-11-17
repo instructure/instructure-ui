@@ -512,6 +512,35 @@ describe('<SelectSingle />', () => {
     expect(subject.instance().state.selectedOption).to.equal(options[1])
   })
 
+  context('when options differ only in capitalization', () => {
+    const options = [{
+      label: 'aruba', children: 'aruba', value: '0', id: '0'
+    }, {
+      label: 'Aruba', children: 'Aruba', value: '1', id: '1'
+    }, {
+      label: 'ARUBA', children: 'ARUBA', value: '2', id: '2'
+    }]
+
+    it('calls onChange once when an option is selected', () => {
+      const onChange = testbed.stub().callsFake(event => event && event.persist())
+      const subject = testbed.render({
+        onChange,
+        options
+      })
+
+      // Click the select field to open it
+      const selectField = subject.find(SelectField).getDOMNode()
+      selectField.click()
+      testbed.tick() // positioning of the options portal is deferred
+
+      // Select the second option
+      selectField.querySelectorAll('li[role="option"]')[1].click()
+
+      expect(onChange).to.have.been.calledOnce()
+      expect(onChange.lastCall.args[1]).to.deep.include({ value: '1' })
+    })
+  })
+
   describe('for a11y', () => {
     it('should meet standards', (done) => {
       const subject = testbed.render()

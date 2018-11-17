@@ -312,10 +312,12 @@ class SelectField extends Component {
   }
 
   close = (event, selectedOption) => {
-    this.setState(() => ({
-      expanded: false
-    }))
-    this.props.onClose(event, selectedOption)
+    this.setState(state => {
+      if (state.expanded) {
+        this.props.onClose(event, selectedOption)
+      }
+      return { expanded: false }
+    })
   }
 
   select = (event, selectedOption) => {
