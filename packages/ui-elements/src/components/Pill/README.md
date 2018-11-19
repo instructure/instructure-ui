@@ -50,6 +50,26 @@ be handled via ellipses.
 example: true
 ---
 <Pill
-  text="Long text that will force max-width overflow"
+  text="extraordinary superfluousness"
 />
+```
+
+### Guidelines
+
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Use all capital letters</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Use more than 2 words</FigureItem>
+    <FigureItem>Use for dismissible items (use a <Link href="/#Tag">Tag</Link> instead)</FigureItem>
+    <FigureItem>Use for counts (use a <Link href="/#Badge">Badge</Link> instead)</FigureItem>
+    <FigureItem>Put icons or actions next to the text</FigureItem>
+  </Figure>
+</Guidelines>
 ```
