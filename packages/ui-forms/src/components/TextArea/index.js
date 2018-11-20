@@ -336,6 +336,7 @@ class TextArea extends Component {
       >
         <div
           className={styles.layout}
+          style={{width: width}}
           ref={this.handleContainerRef}
         >
           { textarea }
