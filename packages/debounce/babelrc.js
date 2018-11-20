@@ -21,5 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import debounce from '@instructure/debounce'
-export default debounce
+
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
+}
