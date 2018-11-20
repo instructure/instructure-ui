@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themeable",
-  "version": "5.33.0",
+  "version": "5.34.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

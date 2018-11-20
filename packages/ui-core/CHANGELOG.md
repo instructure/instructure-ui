@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.34.0"></a>
+# [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
+
+
+### Features
+
+* **ui-tree-browser:** use outlined icons for TreeBrowser ([5d89c38](https://github.com/instructure/instructure-ui/commit/5d89c38))
+
+
+
+
+
 <a name="5.33.0"></a>
 # [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
 

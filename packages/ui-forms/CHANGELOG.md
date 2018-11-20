@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.34.0"></a>
+# [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
+
+
+### Bug Fixes
+
+* **ui-forms:** SelectSingle capitalization ([c740561](https://github.com/instructure/instructure-ui/commit/c740561))
+
+
+### Features
+
+* **ui-focusable:** update focus outline to 2px ([962e689](https://github.com/instructure/instructure-ui/commit/962e689))
+* **ui-forms:** copy focusable styles to numberinput ([e865a02](https://github.com/instructure/instructure-ui/commit/e865a02))
+* **ui-forms:** update focus styles for Select ([3d6912b](https://github.com/instructure/instructure-ui/commit/3d6912b))
+
+
+
+
+
 <a name="5.33.0"></a>
 # [5.33.0](https://github.com/instructure/instructure-ui/compare/v5.32.0...v5.33.0) (2018-11-14)
 
