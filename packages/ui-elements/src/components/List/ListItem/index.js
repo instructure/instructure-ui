@@ -28,6 +28,7 @@ import classnames from 'classnames'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -41,6 +42,7 @@ import theme from './theme'
 parent: List
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class ListItem extends Component {
   static propTypes = {

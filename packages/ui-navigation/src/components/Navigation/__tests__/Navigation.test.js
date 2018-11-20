@@ -67,7 +67,7 @@ describe('<Navigation />', async () => {
         />
       </Navigation>
     )
-    const nav = await NavigationLocator.findAll({ tag: 'nav' })
+    const nav = await NavigationLocator.findAll('nav')
     expect(nav).to.have.length(1)
   })
 
@@ -90,8 +90,8 @@ describe('<Navigation />', async () => {
         />
       </Navigation>
     )
-    const list = await NavigationLocator.findAll({ tag: 'ul' })
-    const items = await NavigationLocator.findAll({ tag: 'li' })
+    const list = await NavigationLocator.findAll('ul')
+    const items = await NavigationLocator.findAll('li')
     expect(list).to.have.length(1)
     expect(items).to.have.length(2)
   })
@@ -116,7 +116,7 @@ describe('<Navigation />', async () => {
       </Navigation>
     )
     const nav = await NavigationLocator.find()
-    const toggle = await nav.find({ focusable: true, contains: 'Minimize Navigation'  })
+    const toggle = await nav.find(':contains(Minimize Navigation):focusable')
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
     await toggle.click()
     expect(toggle.getAttribute('aria-expanded')).to.equal('false')
@@ -143,7 +143,7 @@ describe('<Navigation />', async () => {
       </Navigation>
     )
     const nav = await NavigationLocator.find()
-    const toggle = await nav.find({ focusable: true, contains: 'Minimize Navigation' })
+    const toggle = await nav.find(':contains(Minimize Navigation):focusable')
     await toggle.click()
     expect(nav.hasClass(styles['minimized'])).to.exist()
   })

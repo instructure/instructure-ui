@@ -52,7 +52,7 @@ describe('<ContextView />', async () => {
     )
 
     const contextView = within(subject.getDOMNode())
-    const arrow = await contextView.find({css: `.${styles['arrow']}`})
+    const arrow = await contextView.find(`.${styles['arrow']}`)
 
     expect(arrow.hasClass(styles['arrow--default'])).to.be.true()
   })
@@ -63,7 +63,7 @@ describe('<ContextView />', async () => {
     )
 
     const contextView = within(subject.getDOMNode())
-    const arrow = await contextView.find({css: `.${styles['arrow']}`})
+    const arrow = await contextView.find(`.${styles['arrow']}`)
 
     expect(arrow.hasClass(styles['arrow--inverse'])).to.be.true()
   })
@@ -101,7 +101,7 @@ describe('<ContextView />', async () => {
       )
       const classname = styles[`arrow--${mirror.split(' ').join('-')}`]
       const contextView = within(subject.getDOMNode())
-      const arrow = await contextView.find({css: `.${styles['arrow']}`})
+      const arrow = await contextView.find(`.${styles['arrow']}`)
 
       expect(arrow.hasClass(classname)).to.be.true()
     })

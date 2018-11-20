@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import runAxeCheck from '@instructure/ui-axe-check'
-import { prettyDOM } from 'dom-testing-library'
-import { fireEvent } from './events'
 
-import { matchElementBySelector } from './matchers'
+import { elementToString } from './elementToString'
+import runAxeCheck from '@instructure/ui-axe-check'
+
+import { fireEvent } from './events'
 
 function getOwnerDocument (element) {
   return element.ownerDocument || document
@@ -62,6 +62,10 @@ function getComputedStyle (element) {
 }
 
 function hidden (element) {
+  if (element instanceof HTMLDocument) {
+    return false
+  }
+
   const cs = getComputedStyle(element)
   return (
     cs.display !== 'inline' &&
@@ -71,6 +75,10 @@ function hidden (element) {
 }
 
 function positioned (element) {
+  if (element instanceof HTMLDocument) {
+    return false
+  }
+
   const POS = ['fixed', 'absolute']
   if (POS.includes(element.style.position.toLowerCase())) return true
   if (POS.includes(getComputedStyle(element).getPropertyValue('position').toLowerCase())) return true
@@ -78,6 +86,10 @@ function positioned (element) {
 }
 
 function visible (element) {
+  if (element instanceof HTMLDocument) {
+    return true
+  }
+
   let node = element
   while (node) {
     if (node === document.body) break
@@ -101,7 +113,7 @@ function onscreen (element) {
 }
 
 function clickable (element) {
-  return onscreen(element)
+  return visible(element) && onscreen(element)
 }
 
 function focusable (element) {
@@ -116,7 +128,7 @@ function focusable (element) {
     'button:not([disabled])',
     '*[tabindex]'
   ]
-  return !element.disabled && visible(element) && matchElementBySelector(element, selector.join(','))
+  return !element.disabled && visible(element) && element.matches(selector.join(','))
 }
 
 function tabbable (element) {
@@ -156,20 +168,25 @@ function getId (element) {
   return element.id
 }
 
-function debug (element = document.body) {
+function debug (...args) {
   // eslint-disable-next-line no-console
-  console.log(prettyDOM(element))
+  console.log(toString(...args))
+}
+
+function toString (...args) {
+  return elementToString(...args)
 }
 
 function accessible (element = document.body, options) {
   if (element instanceof Element) {
     return runAxeCheck(element, options)
   } else {
-    throw new Error('[ui-test-utils] accessibility check can only run on a single DOM Element!')
+    throw new Error('[ui-test-utils] accessibility check can only run on a single, valid DOM Element!')
   }
 }
 
 export {
+  toString,
   getId,
   getOwnerWindow,
   getOwnerDocument,
@@ -189,5 +206,6 @@ export {
   visible,
   focusable,
   tabbable,
-  clickable
+  clickable,
+  onscreen
 }

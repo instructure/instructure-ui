@@ -23,7 +23,7 @@
  */
 import { expect } from '@instructure/ui-test-utils'
 import { now, isValid, browserTimeZone, parse, toLocaleString } from '../DateTime'
-
+/* eslint-disable mocha/no-synchronous-tests */
 describe('DateTime', () => {
   const timezone = "America/Halifax"  // -3
   const locale = "en"
@@ -130,3 +130,4 @@ describe('DateTime', () => {
     expect(result).to.equal('2018-04-15T10:00:00.000-03:00')
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

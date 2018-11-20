@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import BreadcrumbLink from './index'
 
-export default locator(BreadcrumbLink.locator)
+export default locator(BreadcrumbLink.selector)

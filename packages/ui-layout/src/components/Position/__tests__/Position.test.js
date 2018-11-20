@@ -57,8 +57,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
 
     expect(target).to.exist()
     expect(content).to.exist()
@@ -83,7 +83,7 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const content = await position.findContent({contains: 'Content'})
+    const content = await position.findContent(':contains(Content)')
     expect(content.getDOMNode().style.position).to.equal('absolute')
   })
 
@@ -107,8 +107,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -140,8 +140,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -174,8 +174,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -207,8 +207,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -240,8 +240,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -273,8 +273,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -309,8 +309,8 @@ describe('<Position />', async () => {
     )
 
     const position = await PositionLocator.find()
-    const target = await position.findTarget({contains: 'Target'})
-    const content = await position.findContent({contains: 'Content'})
+    const target = await position.findTarget(':contains(Target)')
+    const content = await position.findContent(':contains(Content)')
     // wait for positioning
     await wait(() => {
       expect(onPositionChanged).to.have.been.called()
@@ -349,7 +349,7 @@ describe('<Position />', async () => {
         )
 
         const position = await PositionLocator.find()
-        const content = await position.findContent({contains: 'Content'})
+        const content = await position.findContent(':contains(Content)')
 
         await wait(() => {
           expect(onPositionChanged).to.have.been.called()
@@ -418,8 +418,8 @@ describe('<Position />', async () => {
       )
 
       const position = await PositionLocator.find()
-      const target = await position.findTarget({contains: 'Target'})
-      const content = await position.findContent({contains: 'Content'})
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
       // wait for positioning
       await wait(() => {
         expect(onPositionChanged).to.have.been.called()
@@ -457,8 +457,8 @@ describe('<Position />', async () => {
       )
 
       const position = await PositionLocator.find()
-      const target = await position.findTarget({contains: 'Target'})
-      const content = await position.findContent({contains: 'Content'})
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
       // wait for positioning
       await wait(() => {
         expect(onPositionChanged).to.have.been.called()
@@ -496,8 +496,8 @@ describe('<Position />', async () => {
       )
 
       const position = await PositionLocator.find()
-      const target = await position.findTarget({contains: 'Target'})
-      const content = await position.findContent({contains: 'Content'})
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
       // wait for positioning
       await wait(() => {
         expect(onPositionChanged).to.have.been.called()
@@ -535,8 +535,8 @@ describe('<Position />', async () => {
       )
 
       const position = await PositionLocator.find()
-      const target = await position.findTarget({contains: 'Target'})
-      const content = await position.findContent({contains: 'Content'})
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
       // wait for positioning
       await wait(() => {
         expect(onPositionChanged).to.have.been.called()

@@ -51,8 +51,11 @@ describe('<PaginationArrowButton />', async () => {
     )
 
     const button = await PaginationArrowButtonLocator.find()
-    const tooltip = await button.findTooltip()
 
-    expect((await tooltip.findPopoverContent()).getTextContent()).to.equal('Label')
+    await button.focus()
+
+    const tooltip = await button.findTooltipContent()
+
+    expect(tooltip.getTextContent()).to.equal('Label')
   })
 })

@@ -23,4 +23,4 @@
  */
 import { locator  } from '@instructure/ui-test-utils'
 import CloseButton from './index'
-export default locator(CloseButton.locator)
+export default locator(CloseButton.selector)

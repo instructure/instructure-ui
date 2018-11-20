@@ -5218,10 +5218,10 @@ dom-serializer@0, dom-serializer@~0.1.0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom-testing-library@^3.12.0:
-  version "3.12.0"
-  resolved "https://registry.npmjs.org/dom-testing-library/-/dom-testing-library-3.12.0.tgz#45c33124fe6a347410117802a367d3291514fe6f"
-  integrity sha512-eWykEDuKmffXOUKvv4IK00krvC4m+V2/y137M1YccWanUlfUzqS1+3eqm3GMC9qMqCJugfHWn6OpIaQd9rwqcw==
+dom-testing-library@^3.12.3:
+  version "3.12.3"
+  resolved "https://registry.npmjs.org/dom-testing-library/-/dom-testing-library-3.12.3.tgz#16c2fbd5198e175cb5499dabf9c64a893724015e"
+  integrity sha512-HvoxiKm8s4Gf+T52MX+gYHKXkGBM4ZiKYElIZxt8zPZtbT3wokrjKHskzryRqRD3oAKeg6chtUe3gchrurhmvA==
   dependencies:
     "@sheerun/mutationobserver-shim" "^0.3.2"
     pretty-format "^23.6.0"
@@ -14741,6 +14741,11 @@ sisteransi@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-0.1.1.tgz#5431447d5f7d1675aac667ccd0b865a4994cb3ce"
   integrity sha512-PmGOd02bM9YO5ifxpw36nrNMBTptEtfRl4qUYl9SndkolplkrZZOW7PGHjrZL53QvMVj9nQ+TKqUnRsw4tJa4g==
+
+sizzle@^2.3.3:
+  version "2.3.3"
+  resolved "https://registry.npmjs.org/sizzle/-/sizzle-2.3.3.tgz#4eb078c37231a56b52e4193f701e7ef8937e606b"
+  integrity sha1-TrB4w3IxpWtS5Bk/cB5++JN+YGs=
 
 sketch-constants@^1.1.0:
   version "1.1.0"

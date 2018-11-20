@@ -23,21 +23,20 @@
  */
 
 import React from 'react'
-import { expect, mount, accessible } from '@instructure/ui-test-utils'
+import { expect, mount, accessible, within } from '@instructure/ui-test-utils'
 
 import ${COMPONENT}View from '../index'
-import ${COMPONENT}ViewLocator from '../locator'
 
 describe('<${COMPONENT}View />', async () => {
   it('should render', async () => {
-    await mount(<${COMPONENT}View />)
-    const component = ${COMPONENT}ViewFixture.find()
+    const subject = await mount(<${COMPONENT}View />)
+    const component = within(subject.getDOMNode())
+
     expect(component).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    await mount(<${COMPONENT}View />)
-
+    const subject = await mount(<${COMPONENT}View />)
     expect(await accessible()).to.be.true()
   })
 })

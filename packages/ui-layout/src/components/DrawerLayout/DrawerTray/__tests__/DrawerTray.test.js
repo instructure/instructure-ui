@@ -27,7 +27,7 @@ import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import DrawerTray from '../index'
 import styles from '../styles.css'
 
-const DrawerTrayLocator = locator(DrawerTray.locator)
+const DrawerTrayLocator = locator(DrawerTray.selector)
 
 describe('<DrawerTray />', async () => {
   it(`should place the tray correctly with placement=start`, async () => {
@@ -74,10 +74,9 @@ describe('<DrawerTray />', async () => {
         }}
       />
     )
-    const drawerTray = await DrawerTrayLocator.find({
-      label: 'DrawerTray Example',
-      text: 'Hello from layout tray'
-    })
+    const drawerTray = await DrawerTrayLocator.find(
+      ':label(DrawerTray Example):contains(Hello from layout tray)'
+    )
 
     expect(drawerTray).to.exist()
   })
@@ -91,7 +90,7 @@ describe('<DrawerTray />', async () => {
         }}
       />
     )
-    const drawerTray = await DrawerTrayLocator.find({expectEmpty: true})
+    const drawerTray = await DrawerTrayLocator.find({ expectEmpty: true })
 
     expect(drawerTray).to.not.exist()
   })
@@ -233,7 +232,7 @@ describe('<DrawerTray />', async () => {
       />
     )
     const drawerTray = await DrawerTrayLocator.find()
-    const dialog = await drawerTray.find({label: 'a tray test'})
+    const dialog = await drawerTray.find(':label(a tray test)')
 
     expect(dialog).to.exist()
     expect(dialog.getAttribute('role')).to.equal('dialog')

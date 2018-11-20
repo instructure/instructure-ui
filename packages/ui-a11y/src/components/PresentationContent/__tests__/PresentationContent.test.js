@@ -24,18 +24,20 @@
 
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
+
 import PresentationContent from '../index'
 
 describe('<PresentationContent />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<PresentationContent />)
-    expect(subject.getDOMNode()).to.exist()
-  })
-
-  it('should render aria-hidden flag', async () => {
-    const subject = await mount(<PresentationContent />)
+  it('should render children with an aria-hidden attribute', async () => {
+    const subject = await mount(
+      <PresentationContent>
+        Hello World
+      </PresentationContent>
+    )
     const presentationContent = within(subject.getDOMNode())
-    expect(await presentationContent.find({css: 'span[aria-hidden]'})).to.exist()
+    const text = await presentationContent.find(':textContent(Hello World)')
+
+    expect(text.getAttribute('aria-hidden')).to.exist()
   })
 
   it('should render the specified tag when `as` prop is set', async () => {
@@ -43,20 +45,12 @@ describe('<PresentationContent />', async () => {
     expect(subject.getDOMNode().tagName).to.equal('DIV')
   })
 
-  it('should render children', async () => {
+  it('should meet a11y standards', async () => {
     const subject = await mount(
       <PresentationContent>
-        <div>Hello everybody</div>
+        Hello World
       </PresentationContent>
     )
-    const presentationContent = within(subject.getDOMNode())
-    const div = await presentationContent.find({text: 'Hello everybody'})
-
-    expect(div.getTextContent()).to.exist()
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(<PresentationContent />)
     const presentationContent = within(subject.getDOMNode())
 
     expect(await presentationContent.accessible()).to.be.true()

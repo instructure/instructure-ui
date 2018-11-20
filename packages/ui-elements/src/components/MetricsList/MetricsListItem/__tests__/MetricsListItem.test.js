@@ -23,32 +23,31 @@
  */
 
 import React from 'react'
-import { expect, find, mount } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import MetricsListItem from '../index'
-
-const itemSelector = '[role="row"]'
+import MetricsListItemLocator from '../locator'
 
 describe('<MetricsListItem />', async () => {
   it('should render the label', async () => {
     await mount(<MetricsListItem label="Grade" value="80%" />)
 
-    const metricsListItem = await find({ css: itemSelector })
-    expect(await metricsListItem.find({ contains: 'Grade' })).to.exist()
+    const metricsListItem = await MetricsListItemLocator.find()
+    expect(await metricsListItem.find(':contains(Grade)')).to.exist()
   })
 
   it('should render the value', async () => {
     await mount(<MetricsListItem label="Grade" value="80%" />)
 
-    const metricsListItem = await find({ css: itemSelector })
-    expect(await metricsListItem.find({ contains: '80%' })).to.exist()
+    const metricsListItem = await MetricsListItemLocator.find()
+    expect(await metricsListItem.find(':contains(80%)')).to.exist()
   })
 
   describe('for a11y', () => {
     it('should meet standards', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
-      const metricsListItem = await find({ css: itemSelector })
+      const metricsListItem = await MetricsListItemLocator.find()
       expect(await metricsListItem.accessible({
         ignores: ['aria-required-parent']
       })).to.be.true()
@@ -57,24 +56,24 @@ describe('<MetricsListItem />', async () => {
     it('should have role="row" for the container', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
-      const metricsListItem = await find({ css: itemSelector })
+      const metricsListItem = await MetricsListItemLocator.find()
       expect(metricsListItem.getAttribute('role')).to.equal('row')
     })
 
     it('should have role="gridcell" for the value', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
-      const metricsListItem = await find({ css: itemSelector })
-      const value = await metricsListItem.find({ contains: '80%' })
-      expect(value.getAttribute('role')).to.equal('gridcell')
+      const metricsListItem = await MetricsListItemLocator.find()
+      const value = await metricsListItem.find('[role="gridcell"]')
+      expect(value.getTextContent()).to.equal('80%')
     })
 
     it('should have role=rowheader for the label', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
-      const metricsListItem = await find({ css: itemSelector })
-      const label = await metricsListItem.find({ contains: 'Grade' })
-      expect(label.getAttribute('role')).to.equal('rowheader')
+      const metricsListItem = await MetricsListItemLocator.find()
+      const label = await metricsListItem.find('[role="rowheader"]')
+      expect(label.getTextContent()).to.equal('Grade')
     })
   })
 })

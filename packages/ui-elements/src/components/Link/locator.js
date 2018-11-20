@@ -25,7 +25,7 @@ import { locator, find } from '@instructure/ui-test-utils'
 
 import Link from './index'
 
-export default locator(Link.locator, {
+export default locator(Link.selector, {
   click: async (element, ...args) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }

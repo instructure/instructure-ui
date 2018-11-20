@@ -25,4 +25,4 @@ import { locator  } from '@instructure/ui-test-utils'
 
 import SVGIcon from './index'
 
-export default locator(SVGIcon.locator)
+export default locator(SVGIcon.selector)

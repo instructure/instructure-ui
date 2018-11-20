@@ -30,32 +30,26 @@ import {
 
 import DrawerLayout, { DrawerContent, DrawerTray } from './index'
 
-export const DrawerContentLocator = locator(DrawerContent.locator)
-export const DrawerTrayLocator = locator(DrawerTray.locator)
+export const DrawerContentLocator = locator(DrawerContent.selector)
+export const DrawerTrayLocator = locator(DrawerTray.selector)
 
-const query = (ComponentIdentifier, element, selector, options) => {
-  if (element instanceof Element) {
-    const id = element.getAttribute(DrawerLayout.locatorAttribute)
-    return querySelectorAll(
-      document.body,
-      { css: `[${ComponentIdentifier.locatorAttribute}="${id}"]` },
-    )
-  } else {
-    return []
-  }
-}
-
-const trayQuery = query.bind(null, DrawerTray)
-
-const DrawerLayoutLocator = locator(DrawerLayout.locator, {
+const DrawerLayoutLocator = locator(DrawerLayout.selector, {
   findContent: (...args) => {
     return DrawerContentLocator.find(...args)
   },
   findTray: (...args) => {
-    return findByQuery(trayQuery, ...args)
+    return findByQuery((element, selector, options) => {
+      if (element instanceof Element) {
+        const id = element.getAttribute(DrawerLayout.locatorAttribute)
+        return querySelectorAll(
+          document.body,
+          `[${DrawerTray.locatorAttribute}="${id}"]`,
+        )
+      } else {
+        return []
+      }
+    }, ...args)
   }
 })
-
-DrawerLayoutLocator.trayQuery = trayQuery
 
 export default DrawerLayoutLocator

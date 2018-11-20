@@ -61,8 +61,7 @@ describe('<Alert />', async () => {
     )
 
     const alert = within(subject.getDOMNode())
-    const closeButton = await alert.find({
-      focusable: true,
+    const closeButton = await alert.find(':focusable', {
       expectEmpty: true
     })
 
@@ -78,9 +77,7 @@ describe('<Alert />', async () => {
     )
 
     const alert = within(subject.getDOMNode())
-    const closeButton = await alert.find({
-      focusable: true
-    })
+    const closeButton = await alert.find(':focusable')
 
     await closeButton.click()
     await wait(() => {
@@ -96,7 +93,7 @@ describe('<Alert />', async () => {
         </Alert>
       )
       const alert = within(subject.getDOMNode())
-      const icon = await alert.find({css: `.${variantModifications.className}`})
+      const icon = await alert.find(`.${variantModifications.className}`)
       expect(icon).to.exist()
     })
 
@@ -108,10 +105,7 @@ describe('<Alert />', async () => {
       )
 
       const alert = within(subject.getDOMNode())
-      const icon = await alert.find({attribute: {
-        name: 'name',
-        value: variantModifications.iconComponent
-      }})
+      const icon = await alert.find(`[name=${variantModifications.iconComponent}]`)
       expect(icon).to.exist()
     })
   }

@@ -32,7 +32,6 @@ module.exports = {
     'packages/ui-core/',
     'packages/ui-forms/',
     'packages/ui-media-player/',
-    'packages/ui-overlays/',
-    'packages/ui-themes/'
+    'packages/ui-overlays/'
   ]
 }

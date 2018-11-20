@@ -23,40 +23,38 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
 import ListItem from '../index'
+import ListItemLocator from '../locator'
 
 describe('<ListItem />', async () => {
   it('should render children', async () => {
-    const subject = await mount(<ListItem>hello</ListItem>)
-    const listItem = within(subject.getDOMNode())
-    expect(await listItem.find({ contains: 'hello' })).to.exist()
+    await mount(<ListItem>hello</ListItem>)
+    const listItem = await ListItemLocator.find()
+    expect(await listItem.find(':contains(hello)')).to.exist()
   })
 
   it('should not render delimiter by default', async () => {
-    const subject = await mount(<ListItem delimiter="none">List item</ListItem>)
-    const listItem = within(subject.getDOMNode())
-    expect(await listItem.find({
-      css: '[aria-hidden="true"]',
+    await mount(<ListItem delimiter="none">List item</ListItem>)
+    const listItem = await ListItemLocator.find()
+    expect(await listItem.find('[aria-hidden="true"]', {
       expectEmpty: true
     })).to.not.exist()
   })
 
   it('should render delimiter', async () => {
-    const subject = await mount(<ListItem delimiter="slash">List item</ListItem>)
-    const listItem = within(subject.getDOMNode())
-    expect(await listItem.find({
-      css: '[aria-hidden="true"]'
-    })).to.exist()
+    await mount(<ListItem delimiter="slash">List item</ListItem>)
+    const listItem = await ListItemLocator.find()
+    expect(await listItem.find('[aria-hidden="true"]')).to.exist()
   })
 
   it('should call elementRef', async () => {
     const elementRef = stub()
-    const subject = await mount(<ListItem elementRef={elementRef}>List item</ListItem>)
-    const listItem = within(subject.getDOMNode())
+    await mount(<ListItem elementRef={elementRef}>List item</ListItem>)
+    const listItem = await ListItemLocator.find()
     expect(elementRef).to.have.been.calledWith(listItem.getDOMNode())
   })
 

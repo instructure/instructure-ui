@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
@@ -41,6 +42,7 @@ import theme from './theme'
 parent: TabList
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class TabPanel extends Component {
   static propTypes = {

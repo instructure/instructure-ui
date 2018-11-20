@@ -24,74 +24,100 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { querySelectorAll, findAllByQuery, mount, expect, locator } from '../index'
+import {
+  querySelectorAll,
+  matchesSelector,
+  findAllByQuery,
+  mount,
+  expect,
+  locator
+} from '../index'
+
+const componentLocator = {
+  attribute: 'data-test-id',
+  value: 'Component'
+}
+
+const props = {
+  [componentLocator.attribute]: componentLocator.value
+}
 
 class Component extends React.Component {
+  static displayName = 'Component'
+  static selector = `[${componentLocator.attribute}~="${componentLocator.value}"]`
+
   static propTypes = {
     hide: PropTypes.bool,
     children: PropTypes.node
   }
+
   static defaultProps = {
     hide: false,
     children: (
-      <div id="componentRoot" data-test-id="test">
+      <div id="componentRoot" {...props}>
         <input type="text"/>
         <input type="password" />
       </div>
     )
   }
-  static displayName = 'Component'
+
   render () {
     const { hide, children } = this.props
     return !hide ? children : null
   }
 }
 
-const ComponentLocator = locator({
-  attribute: 'data-test-id',
-  value: 'test'
-})
-
-ComponentLocator.findAllInputs = async (...args) => {
-  const query = (element, selector, options) => {
-    return querySelectorAll(element, { ...selector, tag: 'input' }, options)
+const ComponentLocator = locator(Component.selector, {
+  findAllInputs: (...args) => {
+    return findAllByQuery((element, selector, options) => {
+      const inputs = querySelectorAll(element, 'input')
+      if (selector) {
+        return inputs
+          .filter(input => matchesSelector(input, selector, options))
+      } else {
+        return inputs
+      }
+    }, ...args)
   }
-  return findAllByQuery(query, ...args)
-}
+})
 
 describe('locator', async () => {
   it('should handle components that render `null`', async () => {
     await mount(<Component hide />)
     expect(await ComponentLocator.findAll({ expectEmpty: true })).to.have.length(0)
   })
+
   it('should find component root elements without a selector', async () => {
     await mount(<Component />)
     expect(await ComponentLocator.findAll()).to.have.length(1)
   })
+
   it('should filter out non-matching components with a selector', async () => {
     await mount(<Component />)
-    expect(await ComponentLocator.findAll({ tag: 'a', expectEmpty: true }))
+    expect(await ComponentLocator.findAll('a', { expectEmpty: true }))
       .to.have.length(0)
   })
+
   it('should return no results when expected', async () => {
     await mount(<div />)
     expect(await ComponentLocator.findAll({ expectEmpty: true }))
       .to.have.length(0)
   })
+
   it('can find an element by attribute name and value', async () => {
     await mount(<Component />)
-    expect(await ComponentLocator.findAll({
-      tag: 'input',
-      attribute: { name: 'type', value: 'password' }
-    })).to.have.length(1)
+    expect(await ComponentLocator.findAll('input[type="password"]')).to.have.length(1)
   })
+
   it('should support custom queries', async () => {
     await mount(<Component />)
-    expect(await ComponentLocator.findAllInputs()).to.have.length(2)
+    const component = await ComponentLocator.find()
+    expect(await component.findAllInputs()).to.have.length(2)
   })
+
   it('should always return the component root node', async () => {
     await mount(<Component />)
-    const result = await ComponentLocator.find({ tag: 'input' })
+    const result = await ComponentLocator.find('input')
     expect(result.getDOMNode()).to.equal(document.querySelector('#componentRoot'))
   })
 })

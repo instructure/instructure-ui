@@ -72,9 +72,9 @@ describe('<Pagination />', async () => {
       </Pagination>
     )
 
-    const pagination = await PaginationLocator.find({ label: 'Example' })
-    const nextButton = await pagination.findArrowButton({ label: 'Next', expectEmpty: true })
-    const prevButton = await pagination.findArrowButton({ label: 'Prev', expectEmpty: true })
+    const pagination = await PaginationLocator.find(':label(Example)')
+    const nextButton = await pagination.findArrowButton(':label(Next)', { expectEmpty: true })
+    const prevButton = await pagination.findArrowButton(':label(Prev)', { expectEmpty: true })
 
     expect(nextButton).to.not.exist()
     expect(prevButton).to.not.exist()
@@ -139,12 +139,9 @@ describe('<Pagination />', async () => {
     )
 
     const pagination = await PaginationLocator.find()
-    const allButtons = await pagination.findAll({ tag: 'button' })
+    const allButtons = await pagination.findAll('button')
     const paginationButtons = await pagination.findAllPageButtons()
-    const ellipses = await pagination.findAll({
-      attribute: 'aria-hidden',
-      contains: '…'
-    })
+    const ellipses = await pagination.findAll('[aria-hidden]:contains("…")')
 
     expect(allButtons.length).to.equal(9)
     expect(paginationButtons.length).to.equal(7)
@@ -164,12 +161,9 @@ describe('<Pagination />', async () => {
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
-    const allButtons = await pagination.findAll({ tag: 'button' })
+    const allButtons = await pagination.findAll('button')
     const paginationButtons = await pagination.findAllPageButtons()
-    const ellipses = await pagination.findAll({
-      attribute: 'aria-hidden',
-      contains: '…'
-    })
+    const ellipses = await pagination.findAll('[aria-hidden]:contains(…)')
 
     expect(allButtons.length).to.equal(4)
     expect(paginationButtons.length).to.equal(3)
@@ -189,12 +183,9 @@ describe('<Pagination />', async () => {
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
-    const allButtons = await pagination.findAll({ tag: 'button' })
+    const allButtons = await pagination.findAll('button')
     const paginationButtons = await pagination.findAllPageButtons()
-    const ellipses = await pagination.findAll({
-      attribute: 'aria-hidden',
-      contains: '…'
-    })
+    const ellipses = await pagination.findAll('[aria-hidden]:contains(…)')
 
     expect(allButtons.length).to.equal(6)
     expect(paginationButtons.length).to.equal(5)
@@ -214,13 +205,10 @@ describe('<Pagination />', async () => {
       </Pagination>
     )
     const pagination = await PaginationLocator.find()
-    const allButtons = await pagination.findAll({ tag: 'button' })
+    const allButtons = await pagination.findAll('button')
     const paginationButtons = await pagination.findAllPageButtons()
     const ellipses = await pagination.findAll(
-      {
-        attribute: 'aria-hidden',
-        contains: '…'
-      },
+      '[aria-hidden]:contains(…)',
       { expectEmpty: true }
     )
 
@@ -246,13 +234,13 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const prevButton = await pagination.findArrowButton({ label: 'Previous'  })
+      const prevButton = await pagination.findArrowButton(':label(Previous)')
 
       await prevButton.focus()
 
       await subject.setProps({ children: buildPages(7, 0) })
 
-      const button0 = await pagination.findPageButton({ label: '#0' })
+      const button0 = await pagination.findPageButton(':label(#0)')
 
       expect(button0.containsFocus()).to.be.true()
     })
@@ -265,7 +253,7 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const button1 = await pagination.findPageButton({ label: '#1' })
+      const button1 = await pagination.findPageButton(':label(#1)')
 
       await button1.focus()
 
@@ -286,13 +274,13 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const prevButton = await pagination.findArrowButton({ label: 'Previous' })
+      const prevButton = await pagination.findArrowButton(':label(Previous)')
 
       await prevButton.focus()
 
       await subject.setProps({ children: buildPages(7, 0) })
 
-      const button1 = await pagination.findPageButton({ label: '#1' })
+      const button1 = await pagination.findPageButton(':label(#1)')
 
       await button1.focus()
 
@@ -315,13 +303,13 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+      const nextButton = await pagination.findArrowButton(':label(Next)')
 
       await nextButton.focus()
 
       await subject.setProps({ children: buildPages(7, 6) })
 
-      const button6 = await pagination.findPageButton({ contains: '#6' })
+      const button6 = await pagination.findPageButton(':label(#6)')
 
       expect(button6.containsFocus()).to.be.true()
     })
@@ -338,7 +326,7 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const button5 = await pagination.findPageButton({ contains: '#5' })
+      const button5 = await pagination.findPageButton(':label(#5)')
 
       await button5.focus()
 
@@ -355,13 +343,13 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+      const nextButton = await pagination.findArrowButton(':label(Next)')
 
       await nextButton.focus()
 
       await subject.setProps({ children: buildPages(7, 6) })
 
-      const button5 = await pagination.findPageButton({ contains: '#5' })
+      const button5 = await pagination.findPageButton(':label(#5)')
 
       await button5.focus()
 
@@ -385,21 +373,21 @@ describe('<Pagination />', async () => {
 
       const pagination = await PaginationLocator.find()
 
-      let prevButton = await pagination.findArrowButton({ label: 'Previous', expectEmpty: true })
+      let prevButton = await pagination.findArrowButton(':label(Previous)', { expectEmpty: true })
 
       expect(prevButton).to.not.exist()
 
-      let nextButton = await pagination.findArrowButton({ label: 'Next' })
+      let nextButton = await pagination.findArrowButton(':label(Next)')
 
       expect(nextButton).to.exist()
 
       await subject.setProps({ children: buildPages(6, 5) })
 
-      prevButton = await pagination.findArrowButton({ label: 'Previous' })
+      prevButton = await pagination.findArrowButton(':label(Previous)')
 
       expect(prevButton).to.exist()
 
-      nextButton = await pagination.findArrowButton({ label: 'Next', expectEmpty: true })
+      nextButton = await pagination.findArrowButton(':label(Next)', { expectEmpty: true })
 
       expect(nextButton).to.not.exist()
     })
@@ -480,7 +468,7 @@ describe('<Pagination />', async () => {
       )
 
       const pagination = await PaginationLocator.find()
-      const nextButton = await pagination.findArrowButton({ label: 'Next' })
+      const nextButton = await pagination.findArrowButton(':label(Next)')
 
       await nextButton.click()
 

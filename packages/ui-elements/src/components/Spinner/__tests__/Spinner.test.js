@@ -38,7 +38,7 @@ describe('<Spinner />', async () => {
 
   it('should render the title prop text in the SVG element title', async () => {
     await mount(<Spinner title="Loading" size="large" />)
-    expect(await SpinnerLocator.find({ contains: 'Loading' })).to.exist()
+    expect(await SpinnerLocator.find(':contains(Loading)')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

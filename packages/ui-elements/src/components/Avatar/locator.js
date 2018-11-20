@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Avatar from './index'
 
-export default locator(Avatar.locator)
+export default locator(Avatar.selector)

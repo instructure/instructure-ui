@@ -27,7 +27,7 @@ import { expect, mount, locator } from '@instructure/ui-test-utils'
 import TreeButton from '../index'
 import styles from '../styles.css'
 
-const TreeButtonLocator = locator(TreeButton.locator)
+const TreeButtonLocator = locator(TreeButton.selector)
 
 describe('<TreeButton />', async () => {
   it('should render', async () => {
@@ -65,8 +65,7 @@ describe('<TreeButton />', async () => {
         <TreeButton id="1" descriptor="Some Descriptor" />
       )
       const descriptor = await TreeButtonLocator.find(
-        `.${styles.textDescriptor}`,
-        { contains: 'Some Descriptor' }
+        `.${styles.textDescriptor}:contains(Some Descriptor)`
       )
       expect(descriptor).to.exist()
     })
@@ -88,7 +87,7 @@ describe('<TreeButton />', async () => {
           collectionIcon={() => Icon}
         />
       )
-      const icon = await TreeButtonLocator.find({ tag: 'svg', contains: 'Test icon' })
+      const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
@@ -100,7 +99,7 @@ describe('<TreeButton />', async () => {
           itemIcon={() => Icon}
         />
       )
-      const icon = await TreeButtonLocator.find({ tag: 'svg', contains: 'Test icon' })
+      const icon = await TreeButtonLocator.find('svg:contains(Test icon)')
       expect(icon).to.exist()
     })
 
@@ -109,7 +108,7 @@ describe('<TreeButton />', async () => {
         <TreeButton id="1" />
       )
       expect(await TreeButtonLocator.find(
-        { tag: 'svg' },
+        'svg',
         { expectEmpty: true }
       )).to.not.exist()
     })

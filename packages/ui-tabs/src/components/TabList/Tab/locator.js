@@ -22,16 +22,6 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-utils'
+import Tab from './index'
 
-import BreadcrumbLinkLocator from './BreadcrumbLink/locator'
-
-import Breadcrumb from './index'
-
-export default locator(Breadcrumb.selector, {
-  findAllLinks: (...args) => {
-    return BreadcrumbLinkLocator.findAll(...args)
-  },
-  findLink: (...args) => {
-    return BreadcrumbLinkLocator.find(...args)
-  }
-})
+export default locator(Tab.selector)

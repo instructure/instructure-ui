@@ -21,24 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, findByQuery } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import Tooltip from './index'
-import PopoverLocator, { PopoverTriggerLocator } from '../Popover/locator'
+import PopoverLocator from '../Popover/locator'
 
-const contentQuery = PopoverLocator.contentQuery
+const customMethods = {
+  findTrigger: (...args) => PopoverLocator.findTrigger(...args),
+  findContent: (...args) => PopoverLocator.findContent(...args)
+}
 
-const TooltipLocator = locator(Tooltip.locator, {
-  findPopoverTrigger: (...args) => {
-    return PopoverTriggerLocator.find(...args)
-  },
-  findPopoverContent: (...args) => {
-    return findByQuery((element, selector, options) => {
-      return contentQuery(PopoverLocator.query(element))
-    }, ...args)
-  }
-})
-
-TooltipLocator.contentQuery = contentQuery
-
-export default TooltipLocator
+export default {
+  ...locator(Tooltip.selector, customMethods),
+  ...customMethods
+}

@@ -24,6 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -34,6 +35,7 @@ import theme from './theme'
 parent: MetricsList
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class MetricsListItem extends Component {
   static propTypes = {

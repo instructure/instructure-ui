@@ -33,7 +33,7 @@ describe('<ContextBox />', () => {
   it('should render the children', async () => {
     const subject = await mount(<ContextBox>foo</ContextBox>)
     const contextBox = within(subject.getDOMNode())
-    expect(await contextBox.find({ contains: 'foo' })).to.exist()
+    expect(await contextBox.find(':contains(foo)')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

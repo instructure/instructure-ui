@@ -27,6 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 import cloneArray from '../cloneArray'
 import deepEqual from '../deepEqual'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('cloneArray', () => {
   it('should return an array', () => {
     const arr = [['one','two']['three']]
@@ -61,3 +62,4 @@ describe('cloneArray', () => {
     expect(deepEqual(arr, newArr2)).to.equal(false)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

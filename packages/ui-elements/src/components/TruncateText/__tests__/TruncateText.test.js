@@ -81,15 +81,13 @@ describe('<TruncateText />', async () => {
     )
 
     const renderedContent = within(subject.getDOMNode())
-    const pQuery = await renderedContent.find({ tag: 'p' })
+    const paragraph = await renderedContent.find('p')
 
-    expect(await pQuery.find({ tag: 'strong' })).to.exist()
-    expect(await pQuery.find({ tag: 'em' })).to.exist()
+    expect(await paragraph.find('strong')).to.exist()
+    expect(await paragraph.find('em')).to.exist()
 
-    const p = pQuery.getDOMNode()
-    expect(p.children.length).to.equal(3)
-    expect(p.nodeName).to.equal('P')
-    expect(p.className).to.equal('testClass')
+    expect(paragraph.hasClass('testClass')).to.be.true()
+    expect(paragraph.getDOMNode().children.length).to.equal(3)
   })
 
   it('should recalculate if props change', async () => {

@@ -21,17 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
-
-import BreadcrumbLinkLocator from './BreadcrumbLink/locator'
-
-import Breadcrumb from './index'
-
-export default locator(Breadcrumb.selector, {
-  findAllLinks: (...args) => {
-    return BreadcrumbLinkLocator.findAll(...args)
-  },
-  findLink: (...args) => {
-    return BreadcrumbLinkLocator.find(...args)
+export function parseQueryArguments (...args) {
+  let element
+  let selector
+  let options = {
+    expectEmpty: false,
+    exact: true,
+    trim: true,
+    collapseWhitespace: true,
+    ignore: 'script,style',
+    visible: true,
+    timeout: 1900
   }
-})
+
+  args.forEach((arg) => {
+    if (typeof arg === 'string' || arg instanceof String) {
+      selector = arg
+    } else if (arg instanceof Element) {
+      element = arg
+    } else if (typeof arg === 'object' || arg instanceof Object) {
+      options = arg ? { ...options, ...arg } : options
+    }
+  })
+
+  if (selector && (selector.includes('div') || selector.includes('span'))) {
+    throw new Error('[ui-test-utils] Selectors should only include semantic elements (not `div` or `span`).')
+  }
+
+  return { element, selector, options }
+}

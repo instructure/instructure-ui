@@ -35,7 +35,7 @@ describe('<BreadcrumbLink />', async () => {
       <BreadcrumbLink href="#">Test</BreadcrumbLink>
     )
     const link = await BreadcrumbLinkLocator.find()
-    const anchor = await link.find({ tag: 'a' })
+    const anchor = await link.find('a')
 
     expect(anchor.getAttribute('href')).to.equal('#')
   })
@@ -46,7 +46,7 @@ describe('<BreadcrumbLink />', async () => {
       <BreadcrumbLink onClick={onClick}>Test</BreadcrumbLink>
     )
     const link = await BreadcrumbLinkLocator.find()
-    const button = await link.find({ tag: 'button' })
+    const button = await link.find('button')
 
     await button.click()
 

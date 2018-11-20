@@ -23,91 +23,89 @@
  */
 
 import React from 'react'
-import { expect, mount, within, stub } from '@instructure/ui-test-utils'
+import { expect, mount, within, stub, wait } from '@instructure/ui-test-utils'
 import scopeTab from '../scopeTab'
 
+const MOCK_EVENT = {
+  shiftKey: false,
+  preventDefault: () => {}
+}
+
 describe('scopeTab', async () => {
-  let node
-
-  beforeEach(() => {
-    node = document.createElement('div')
-    document.body.appendChild(node)
-  })
-
-  afterEach(() => {
-    node && node.parentNode && node.parentNode.removeChild(node)
-    node = null
-  })
-
-  const MOCK_EVENT = {
-    shiftKey: false,
-    preventDefault: () => {}
-  }
-
   it('should scope tab within container', async () => {
     const subject = await mount(
       <div>
-        <div data-test-container>
-          <input data-test-input1 />
-          <input data-test-input2 />
+        <div id="container">
+          <input id="first" />
+          <input id="second" />
         </div>
-        <input data-test-input3 />
       </div>
     )
 
-    const element = within(subject.getDOMNode())
-    const container = (await element.find({css: '[data-test-container'})).getDOMNode()
-    const input1 = (await element.find({css: '[data-test-input1]'})).getDOMNode()
-    const input2 = (await element.find({css: '[data-test-input2]'})).getDOMNode()
+    const fixture = within(subject.getDOMNode())
 
-    await input2.focus()
+    const container = await fixture.find('#container')
+    const first = await fixture.find('#first')
+    const second = await fixture.find('#second')
 
-    scopeTab(container, MOCK_EVENT)
+    await second.focus()
 
-    expect(document.activeElement).to.equal(input1)
+    await wait(() => {
+      expect(second.focused()).to.be.true()
+    })
+
+    scopeTab(container.getDOMNode(), MOCK_EVENT)
+
+    await wait(() => {
+      expect(first.focused()).to.be.true()
+    })
   })
 
   it('should not attempt scoping when no tabbable children', async () => {
     const subject = await mount(
       <div>
-        <div data-test-container>
-          <input data-test-input1 />
-          <input data-test-input2 />
+        <div id="container">
+          Hello
         </div>
-        <input data-test-input3 />
+        <input />
       </div>
     )
 
-    const element = within(subject.getDOMNode())
-    const input2 = (await element.find({css: '[data-test-input2]'})).getDOMNode()
+    const fixture = within(subject.getDOMNode())
 
-    await input2.focus()
+    const input = await fixture.find('input')
+    const container = await fixture.find('#container')
 
-    scopeTab(node, MOCK_EVENT)
+    await input.focus()
 
-    expect(document.activeElement).to.equal(input2)
+    scopeTab(container.getDOMNode(), MOCK_EVENT)
+
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
   })
 
   it('should execute callback when provided instead of default behavior', async () => {
     const cb = stub()
     const subject = await mount(
       <div>
-        <div data-test-container>
-          <input data-test-input1 />
-          <input data-test-input2 />
+        <div id="container">
+          <input />
         </div>
-        <input data-test-input3 />
       </div>
     )
 
-    const element = within(subject.getDOMNode())
-    const container = (await element.find({css: '[data-test-container'})).getDOMNode()
-    const input2 = (await element.find({css: '[data-test-input2]'})).getDOMNode()
+    const fixture = within(subject.getDOMNode())
 
-    await input2.focus()
+    const container = await fixture.find('#container')
+    const input = await fixture.find('input')
 
-    scopeTab(container, MOCK_EVENT, cb)
+    await input.focus()
 
-    expect(cb).to.have.been.called()
+    scopeTab(container.getDOMNode(), MOCK_EVENT, cb)
+
+    await wait(() => {
+      expect(cb).to.have.been.called()
+    })
   })
 })

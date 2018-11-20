@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-utils'
+import TabPanel from './index'
 
-import ${COMPONENT}View from './index'
-
-export default locator(${COMPONENT}View.locator, {
-  /* custom component query methods go here */
-})
+export default locator(TabPanel.selector)

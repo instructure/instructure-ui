@@ -25,7 +25,7 @@
 import { expect, stub } from '@instructure/ui-test-utils'
 import Locale from '../Locale'
 import Decimal from '../Decimal'
-
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Decimal', () => {
   const uniqueDelimiters = {
     bg: Decimal.getDelimiters('bg'),
@@ -657,3 +657,4 @@ function expectResult (fn, args, method, expectedResult) {
       .to.equal(expectedResult)
   })
 }
+/* eslint-enable mocha/no-synchronous-tests */

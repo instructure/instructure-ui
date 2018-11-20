@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import Locale from '../Locale'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('browserLocale', () => {
   it('returns the navigator language if a navigator is explicity passed', () => {
     const navigator = { language: 'de' }
@@ -47,3 +48,4 @@ describe('browserLocale', () => {
     expect(Locale.browserLocale(null, false)).to.equal('en-US')
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

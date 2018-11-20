@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Img from './index'
 
-export default locator(Img.locator)
+export default locator(Img.selector)

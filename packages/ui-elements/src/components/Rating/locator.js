@@ -21,21 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  findAll,
-  locator,
-  mergeCSSIntoSelector,
-  parseQueryArguments
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import Rating from './index'
 import styles from './RatingIcon/styles.css'
 
-const filledSelector = `.${styles.filled}`
+const FilledIconLocator = locator(`.${styles.filled}`)
 
-export default locator(Rating.locator, {
-  findAllFilledIcons: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(filledSelector, selector), options)
+export default locator(Rating.selector, {
+  findAllFilledIcons: (...args) => {
+    return FilledIconLocator.findAll(...args)
   }
 })

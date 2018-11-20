@@ -21,17 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
+import { prettyDOM } from 'dom-testing-library'
 
-import BreadcrumbLinkLocator from './BreadcrumbLink/locator'
-
-import Breadcrumb from './index'
-
-export default locator(Breadcrumb.selector, {
-  findAllLinks: (...args) => {
-    return BreadcrumbLinkLocator.findAll(...args)
-  },
-  findLink: (...args) => {
-    return BreadcrumbLinkLocator.find(...args)
+export function elementToString (element, maxLength = 7000, options = { highlight: false }) {
+  if (element) {
+    return prettyDOM(element, maxLength, options)
+  } else {
+    return JSON.stringify(element)
   }
-})
+}

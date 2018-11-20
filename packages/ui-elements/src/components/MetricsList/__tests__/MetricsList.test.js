@@ -38,9 +38,9 @@ describe('<MetricsList />', async () => {
         <MetricsListItem label="Missing" value="2" />
       </MetricsList>
     )
+    const list = await MetricsListLocator.find()
 
-    const items = await MetricsListLocator.findAll('div[role="row"]')
-    expect(items.length).to.equal(3)
+    expect(list.getTextContent()).to.equal('Grade80%Late4Missing2')
   })
 
   it('should not allow invalid children', async () => {
@@ -72,7 +72,7 @@ describe('<MetricsList />', async () => {
       expect(await metricsList.accessible()).to.be.true()
     })
 
-    it('should have role=grid', async () => {
+    it('should have role=grid with aria-readonly=true', async () => {
       await mount(
         <MetricsList>
           <MetricsListItem label="Grade" value="80%" />
@@ -82,10 +82,13 @@ describe('<MetricsList />', async () => {
       )
 
       const metricsList = await MetricsListLocator.find()
-      expect(metricsList.getAttribute('role')).to.equal('grid')
+      const grids = await metricsList.findAll('[role="grid"]')
+
+      expect(grids.length).to.equal(1)
+      expect(grids[0].getAttribute('aria-readonly')).to.equal('true')
     })
 
-    it('should have aria-readonly=true', async () => {
+    it('should have role=row', async () => {
       await mount(
         <MetricsList>
           <MetricsListItem label="Grade" value="80%" />
@@ -95,7 +98,24 @@ describe('<MetricsList />', async () => {
       )
 
       const metricsList = await MetricsListLocator.find()
-      expect(metricsList.getAttribute('aria-readonly')).to.equal('true')
+      const rows = await metricsList.findAll('[role="row"]')
+
+      expect(rows.length).to.equal(3)
+    })
+
+    it('should have role=gridcell', async () => {
+      await mount(
+        <MetricsList>
+          <MetricsListItem label="Grade" value="80%" />
+          <MetricsListItem label="Late" value="4" />
+          <MetricsListItem label="Missing" value="2" />
+        </MetricsList>
+      )
+
+      const metricsList = await MetricsListLocator.find()
+      const cells = await metricsList.findAll('[role="gridcell"]')
+
+      expect(cells.length).to.equal(3)
     })
   })
 })

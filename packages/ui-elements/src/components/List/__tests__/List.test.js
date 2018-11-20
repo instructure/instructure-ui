@@ -63,8 +63,8 @@ describe('<List />', async () => {
       </List>
     )
 
-    const delimiters = await ListLocator.findAll({
-      css: '[aria-hidden="true"]',
+    const list = await ListLocator.find()
+    const delimiters = await list.findAll('[aria-hidden="true"]', {
       expectEmpty: true
     })
 
@@ -84,9 +84,8 @@ describe('<List />', async () => {
       </List>
     )
 
-    const delimiters = await ListLocator.findAll({
-      css: '[aria-hidden="true"]'
-    })
+    const list = await ListLocator.find()
+    const delimiters = await list.findAll('[aria-hidden="true"]')
 
     expect(delimiters.length).to.equal(4)
   })
@@ -100,8 +99,8 @@ describe('<List />', async () => {
         <ListItem>List item 4</ListItem>
       </List>
     )
-
-    expect(await ListLocator.find({ tag: 'ol' })).to.exist()
+    const list = await ListLocator.find()
+    expect(list.getTagName()).to.equal('ol')
   })
 
   it('should meet a11y standards', async () => {

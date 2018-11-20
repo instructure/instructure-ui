@@ -94,7 +94,7 @@ describe('<Pages />', async () => {
     await subject.setProps({activePageIndex: 1})
 
     const pages = within(subject.getDOMNode())
-    const button = await pages.find({ tag: 'button' })
+    const button = await pages.find('button')
 
     await button.click()
 

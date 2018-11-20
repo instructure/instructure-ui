@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+// original source: https://github.com/kentcdodds/dom-testing-library/blob/master/src/events.js
+// modified to add spy to Event methods
+
 import { spy } from './sandbox'
 
 const eventMap = {
@@ -374,5 +377,26 @@ function setNativeValue(element, value) {
 Object.entries(eventAliasMap).forEach(([aliasKey, key]) => {
   fireEvent[aliasKey] = (...args) => fireEvent[key](...args)
 })
+
+// React event system tracks native mouseOver/mouseOut events for
+// running onMouseEnter/onMouseLeave handlers
+// @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/EnterLeaveEventPlugin.js#L24-L31
+fireEvent.mouseEnter = fireEvent.mouseOver
+fireEvent.mouseLeave = fireEvent.mouseOut
+
+fireEvent.select = (node, init) => {
+  // React tracks this event only on focused inputs
+  node.focus()
+
+  // React creates this event when one of the following native events happens
+  // - contextMenu
+  // - mouseUp
+  // - dragEnd
+  // - keyUp
+  // - keyDown
+  // so we can use any here
+  // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
+  fireEvent.keyUp(node, init)
+}
 
 export { fireEvent, eventMap }

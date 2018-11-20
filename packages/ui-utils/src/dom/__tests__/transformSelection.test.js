@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import transformSelection, { transformCursor } from '../transformSelection'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('transformSelection', () => {
   it('should work with transformCursor', () => {
     const selectionStart = 2
@@ -86,3 +87,4 @@ describe('transformCursor', () => {
     )).to.equal(3)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

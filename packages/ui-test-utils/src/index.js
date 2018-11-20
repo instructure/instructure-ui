@@ -26,19 +26,19 @@ import { wait } from 'dom-testing-library'
 import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
-import locator from './utils/locator'
+import { locator } from './utils/locator'
 import { findAllByQuery, findByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
 import { debug, accessible } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, querySelector, parseQueryArguments } from './utils/query-helpers'
-import { mergeCSSIntoSelector } from './utils/mergeCSSIntoSelector'
+import { querySelectorAll, querySelector, matchesSelector } from './utils/selector'
+import { parseQueryArguments } from './utils/parseQueryArguments'
 
 export {
   accessible,
-  mergeCSSIntoSelector,
   parseQueryArguments,
   findByQuery,
   findAllByQuery,
+  matchesSelector,
   querySelectorAll,
   querySelector,
   locator,

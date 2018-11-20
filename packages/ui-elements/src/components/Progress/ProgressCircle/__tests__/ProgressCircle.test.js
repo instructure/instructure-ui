@@ -101,7 +101,7 @@ describe('<ProgressCircle />', async () => {
     )
 
     const progressCircle = within(subject.getDOMNode())
-    expect(await progressCircle.find({ contains: '40 / 60' })).to.exist()
+    expect(await progressCircle.find(':contains("40 / 60")')).to.exist()
   })
 
   describe('size x-small', () => {

@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
-import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -36,7 +35,6 @@ import theme from './theme'
 parent: ${COMPONENT}
 ---
 **/
-@testable()
 @themeable(theme, styles)
 class ${COMPONENT}View extends Component {
   static propTypes = {

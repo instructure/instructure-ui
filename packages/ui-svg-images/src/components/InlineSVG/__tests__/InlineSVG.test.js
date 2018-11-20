@@ -82,8 +82,7 @@ describe('<InlineSVG />', async () => {
     )
 
     const svg = await InlineSVGLocator.find()
-    const title = await svg.find({
-      tag: 'title',
+    const title = await svg.find('title', {
       expectEmpty: true,
       visible: false
     })
@@ -95,12 +94,11 @@ describe('<InlineSVG />', async () => {
     await mount(
       <InlineSVG
         src={SVG_SRC}
-        title='testIconTitle'
+        title='Test Title'
       />
     )
     const svg = await InlineSVGLocator.find()
-    const title = await svg.find({
-      title: 'testIconTitle',
+    const title = await svg.find(':title(Test Title)', {
       visible: false
     })
 
@@ -115,8 +113,7 @@ describe('<InlineSVG />', async () => {
     )
 
     const svg = await InlineSVGLocator.find()
-    const description = await svg.find({
-      tag: 'description',
+    const description = await svg.find('description', {
       expectEmpty: true,
       visible: false
     })
@@ -133,8 +130,7 @@ describe('<InlineSVG />', async () => {
     )
 
     const svg = await InlineSVGLocator.find()
-    const description = await svg.find({
-      tag: 'desc',
+    const description = await svg.find('desc', {
       visible: false
     })
 

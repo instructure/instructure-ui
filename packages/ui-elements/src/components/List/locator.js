@@ -22,25 +22,17 @@
  * SOFTWARE.
  */
 
-import {
-  locator,
-  parseQueryArguments,
-  mergeCSSIntoSelector,
-  findAll,
-  find
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import List from './index'
 
-const itemSelector = 'li'
+import ListItemLocator from './ListItem/locator'
 
-export default locator(List.locator, {
+export default locator(List.selector, {
   findAllItems: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return ListItemLocator.findAll(...args)
   },
   findItem: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return ListItemLocator.find(...args)
   }
 })

@@ -38,7 +38,7 @@ describe('<Progress />', async () => {
     await mount(<Progress label="Chapters read" valueMax={60} valueNow={30} />)
 
     const componentRoot = await ProgressLocator.find()
-    const progress = await componentRoot.find({ tag: 'progress' })
+    const progress = await componentRoot.find('progress')
 
     expect(progress).to.exist()
     expect(progress.getAttribute('value')).to.equal('30')
@@ -70,7 +70,7 @@ describe('<Progress />', async () => {
         as="li"
       />
     )
-    expect(await ProgressLocator.find({ tag: 'li' })).to.exist()
+    expect(await ProgressLocator.find('li')).to.exist()
   })
 
   it('should format the displayed value according to the formatDisplayedValue prop', async () => {
@@ -82,7 +82,7 @@ describe('<Progress />', async () => {
         formatDisplayedValue={(valueNow, valueMax) => `${valueNow} of ${valueMax}`}
       />
     )
-    expect(await ProgressLocator.find({ contains: '30 of 60' })).to.exist()
+    expect(await ProgressLocator.find(':contains(30 of 60)')).to.exist()
   })
 
   it('should display proper values when the variant is set to circle', async () => {
@@ -96,7 +96,7 @@ describe('<Progress />', async () => {
     )
 
     const componentRoot = await ProgressLocator.find()
-    const progress = await componentRoot.find({ tag: 'progress' })
+    const progress = await componentRoot.find('progress')
     expect(progress.getAttribute('aria-valuenow')).to.equal('25')
     expect(progress.getAttribute('aria-valuemax')).to.equal('80')
     expect(progress.getAttribute('aria-valuetext')).to.equal('25 out of 80')

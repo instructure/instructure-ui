@@ -41,6 +41,6 @@ describe('<Text />', async () => {
 
   it('should render with the specified tag when `as` prop is set', async () => {
     await mount(<Text as="li" />)
-    expect(await find({ tag: 'li' })).to.exist()
+    expect(await find('li')).to.exist()
   })
 })

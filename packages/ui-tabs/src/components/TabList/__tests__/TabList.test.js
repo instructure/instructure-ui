@@ -54,7 +54,7 @@ describe('<TabList />', async () => {
     )
 
     const tablist = await TabListLocator.find()
-    const screenReaderOnlyTabs = await tablist.findAllTabs({ css: '[role="tab"]' })
+    const screenReaderOnlyTabs = await tablist.findAllTabs('[role="tab"]')
 
     expect(screenReaderOnlyTabs).to.have.length(3)
   })
@@ -69,7 +69,7 @@ describe('<TabList />', async () => {
     )
 
     const tablist = await TabListLocator.find()
-    const presentationTabs = await tablist.findAllTabs({ css: '[role="presentation"]' })
+    const presentationTabs = await tablist.findAllTabs('[role="presentation"]')
 
     expect(presentationTabs).to.have.length(2)
   })
@@ -172,8 +172,8 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
 
-    expect(await tabList.findSelectedTab({ contains: 'First Tab' })).to.exist()
-    const selectedTabPanel = await tabList.findTabPanel({ contains: 'Tab 1 content'})
+    expect(await tabList.findSelectedTab(':contains(First Tab)')).to.exist()
+    const selectedTabPanel = await tabList.findTabPanel(':contains(Tab 1 content)')
     expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
@@ -188,8 +188,8 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
 
-    expect(await tabList.findSelectedTab({ contains: 'Second Tab' })).to.exist()
-    const secondPanel = await tabList.findTabPanel({ contains: 'Tab 2 content' })
+    expect(await tabList.findSelectedTab(':contains(Second Tab)')).to.exist()
+    const secondPanel = await tabList.findTabPanel(':contains(Tab 2 content)')
     expect(secondPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
@@ -204,9 +204,8 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
 
-    expect(await tabList.findSelectedTab({
-      expectEmpty: true,
-      contains: 'Third Tab'
+    expect(await tabList.findSelectedTab(':contains(Third Tab)', {
+      expectEmpty: true
     })).to.not.exist()
 
     const panels = await tabList.findAllTabPanels()
@@ -225,10 +224,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findTab({
-      css: '[role="presentation"]',
-      contains: 'Second Tab'
-    })
+    const secondTab = await tabList.findTab(':contains(Second Tab)[role="presentation"]')
 
     await secondTab.click()
 
@@ -248,14 +244,11 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
 
-    const secondTab = await tabList.findTab({
-      css: '[role="presentation"]',
-      contains: 'Second Tab'
-    })
+    const secondTab = await tabList.findTab(':contains(Second Tab)[role="presentation"]')
 
     await secondTab.click()
 
-    expect(await tabList.findSelectedTab({ contains: 'First Tab' })).to.exist()
+    expect(await tabList.findSelectedTab(':contains(First Tab)')).to.exist()
   })
 
   it('should focus the defaultSelectedIndex tab when focus is set', async () => {
@@ -268,7 +261,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findSelectedTab({ contains: 'Second Tab' })
+    const secondTab = await tabList.findSelectedTab(':contains(Second Tab)')
     expect(secondTab.focused()).to.be.true()
   })
 
@@ -282,12 +275,12 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findSelectedTab({ contains: 'Second Tab' })
+    const secondTab = await tabList.findSelectedTab(':contains(Second Tab)')
     expect(secondTab.focused()).to.be.true()
 
     await subject.setProps({ selectedIndex: 0 })
 
-    const firstTab = await tabList.findSelectedTab({ contains: 'First Tab' })
+    const firstTab = await tabList.findSelectedTab(':contains(First Tab)')
     expect(firstTab.focused()).to.be.true()
   })
 
@@ -302,29 +295,32 @@ describe('<TabList />', async () => {
 
     const tabList = await TabListLocator.find()
     let selectedTab = await tabList.findSelectedTab()
+
     await selectedTab.keyDown('left')
 
-    expect(await tabList.findSelectedTab({
-      contains: 'First Tab',
-      expectEmpty: true
-    })).to.not.exist()
+    selectedTab = await tabList.findSelectedTab()
 
-    expect(await tabList.findSelectedTab({ contains: 'Second Tab' })).to.exist()
-    let selectedTabPanel = await tabList.findTabPanel({
-      contains: 'Tab 2 content',
-    })
+    expect(selectedTab.getTextContent()).to.equal('Second Tab')
+
+    let selectedTabPanel = await tabList.findTabPanel(':contains(Tab 2 content)')
     expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
 
     selectedTab = await tabList.findSelectedTab()
+
     await selectedTab.keyDown('right')
 
     selectedTab = await tabList.findSelectedTab()
+    expect(selectedTab.getTextContent()).to.equal('First Tab')
+
+    selectedTabPanel = await tabList.findTabPanel(':contains(Tab 1 content)')
+    expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
+
     await selectedTab.keyDown('down')
 
-    expect(await tabList.findSelectedTab({ contains: 'Second Tab' })).to.exist()
-    selectedTabPanel = await tabList.findTabPanel({
-      contains: 'Tab 2 content'
-    })
+    selectedTab = await tabList.findSelectedTab()
+    expect(selectedTab.getTextContent()).to.equal('Second Tab')
+
+    selectedTabPanel = await tabList.findTabPanel(':contains(Tab 2 content)')
     expect(selectedTabPanel.getAttribute('aria-hidden')).to.not.exist()
   })
 
@@ -338,19 +334,13 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const tab = await tabList.findTab({
-      css: '[role="tab"]',
-      contains: 'Second Tab'
-    })
+    const tab = await tabList.findTab(':contains(Second Tab)[role="tab"]')
 
     await tab.keyDown('enter')
 
-    expect(await tabList.findSelectedTab({
-      contains: 'First Tab',
-      expectEmpty: true
-    })).to.not.exist()
+    let selectedTab = await tabList.findSelectedTab()
 
-    expect(await tabList.findSelectedTab({ contains: 'Second Tab' })).to.exist()
+    expect(selectedTab.getTextContent()).to.equal('Second Tab')
 
     const tabPanels = await tabList.findAllTabPanels()
     expect(tabPanels[0].getAttribute('aria-hidden')).to.equal('true')
@@ -367,18 +357,13 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const secondTab = await tabList.findTab({
-      css: '[role="presentation"]',
-      contains: 'Second Tab'
-    })
+    const secondTab = await tabList.findTab('[role="presentation"]:contains(Second Tab)')
+
     await secondTab.click()
 
-    expect(await tabList.findSelectedTab({
-      contains: 'First Tab',
-      expectEmpty: true
-    })).to.not.exist()
+    const selectedTab = await tabList.findSelectedTab()
 
-    expect(await tabList.findSelectedTab({ contains: 'Second Tab' })).to.exist()
+    expect(selectedTab.getTextContent()).to.equal('Second Tab')
 
     const tabPanels = await tabList.findAllTabPanels()
     expect(tabPanels[0].getAttribute('aria-hidden')).to.equal('true')
@@ -396,20 +381,15 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const thirdTab = await tabList.findTab({
-      css: '[role="presentation"]',
-      contains: 'Third Tab'
-    })
+    const thirdTab = await tabList.findTab(':contains(Third Tab)[role="presentation"]')
 
     await thirdTab.click()
 
     expect(onChange).to.not.have.been.called()
 
-    expect(await tabList.findSelectedTab({ contains: 'First Tab' })).to.exist()
-    expect(await tabList.findSelectedTab({
-      contains: 'Third Tab',
-      expectEmpty: true
-    })).to.not.exist()
+    const selectedTab = await tabList.findSelectedTab()
+
+    expect(selectedTab.getTextContent()).to.equal('First Tab')
 
     const tabPanels = await tabList.findAllTabPanels()
     expect(tabPanels[0].getAttribute('aria-hidden')).to.not.exist()
@@ -476,14 +456,9 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    const firstTab = await tabList.findTab({
-      css: '[role="tab"]',
-      contains: 'First Tab'
-    })
+    const firstTab = await tabList.findTab(':contains(First Tab)[role="tab"]')
 
-    const firstPanel = await tabList.findTabPanel({
-      contains: 'Tab 1 content'
-    })
+    const firstPanel = await tabList.findTabPanel(':contains(Tab 1 content)')
 
     expect(firstTab.getAttribute('aria-controls'))
       .to.equal(firstPanel.getAttribute('id'))

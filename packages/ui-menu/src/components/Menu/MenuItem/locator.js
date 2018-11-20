@@ -25,4 +25,4 @@ import { locator  } from '@instructure/ui-test-utils'
 
 import MenuItem from './index'
 
-export default locator(MenuItem.locator)
+export default locator(MenuItem.selector)

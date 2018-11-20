@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Portal from './index'
 
-export default locator(Portal.locator)
+export default locator(Portal.selector)

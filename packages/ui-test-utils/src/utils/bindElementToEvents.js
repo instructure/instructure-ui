@@ -23,7 +23,7 @@
  */
 
 import keycode from 'keycode'
-import { querySelector } from './query-helpers'
+import { querySelector } from './selector'
 
 export function bindElementToEvents (element, events) {
   if (element instanceof Element) {
@@ -65,7 +65,7 @@ function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: t
   let clickable = element
 
   if (options.clickable) {
-    clickable = querySelector(element, { clickable: true })
+    clickable = querySelector(element, ':clickable')
   }
 
   return new Promise((resolve, reject) => {
@@ -76,7 +76,7 @@ function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: t
           resolve(fireEvent(init))
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a 'click' event on an element that is not 'clickable'`)
+            new Error(`[ui-test-utils] could not fire a 'click' event on an element that is not 'clickable': ${element}`)
           )
         }
       } catch (e) {
@@ -92,7 +92,7 @@ function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: t
   let focusable = element
 
   if (options.focusable) {
-    focusable = querySelector(element, { focusable: true })
+    focusable = querySelector(element, ':focusable')
   }
 
   return new Promise((resolve, reject) => {
@@ -128,7 +128,7 @@ function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0,
   let focusable = element
 
   if (options.focusable) {
-    focusable = querySelector(element, { focusable: true })
+    focusable = querySelector(element, ':focusable')
   }
 
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey

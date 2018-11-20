@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Transition from './index'
 
-export default locator(Transition.locator)
+export default locator(Transition.selector)

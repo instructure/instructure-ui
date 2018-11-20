@@ -45,7 +45,7 @@ describe('<Dialog />', async () => {
     )
 
     const dialog = within(subject.getDOMNode())
-    expect(await dialog.find({focusable: true})).to.exist()
+    expect(await dialog.find(':focusable')).to.exist()
   })
 
   it('should apply the a11y attributes', async () => {
@@ -57,8 +57,8 @@ describe('<Dialog />', async () => {
 
     const dialog = within(subject.getDOMNode())
 
-    expect(await dialog.find({css: '[role="dialog"]'})).to.exist()
-    expect(await dialog.find({css: '[aria-label="Dialog Example"]'})).to.exist()
+    expect(await dialog.find('[role="dialog"]')).to.exist()
+    expect(await dialog.find('[aria-label="Dialog Example"]')).to.exist()
   })
 
   it('should call onDismiss prop when Esc key pressed', async () => {
@@ -204,7 +204,7 @@ describe('<Dialog />', async () => {
           />
         )
         const main = within(subject.getDOMNode())
-        const inputTwo = await main.find({css: '[id=input-two]'})
+        const inputTwo = await main.find('[id=input-two]')
 
         await wait(() => {
           expect(inputTwo.getDOMNode() === document.activeElement).to.be.true()

@@ -21,13 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export function mergeCSSIntoSelector (selectorString, selectorObj = {}) {
-  const selector = selectorObj ? { ...selectorObj } : {}
-  const css = selector.css ? [selector.css] : []
+import { locator } from '@instructure/ui-test-utils'
 
-  css.push(selectorString)
+import MetricsListItem from './index'
 
-  selector.css = css.join('')
-
-  return selector
-}
+export default locator(MetricsListItem.selector)

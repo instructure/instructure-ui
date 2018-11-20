@@ -29,12 +29,6 @@ import { mount, expect, find, findAll } from '@instructure/ui-test-utils'
 
 import testable from '../index'
 
-const locator = {
-  attribute: 'data-ui-testable',
-  value: 'Component'
-}
-
-@testable()
 class Component extends React.Component {
   static propTypes = {
    hide: PropTypes.bool,
@@ -57,14 +51,30 @@ class Component extends React.Component {
 }
 
 describe('@testable', async () => {
-  it('should handle components that render `null`', async () => {
-    await mount(<Component hide />)
-    expect(await findAll({ locator, expectEmpty: true })).to.have.length(0)
+  it('should define a component selector', async () => {
+    const TestableComponent = testable()(Component)
+
+    expect(TestableComponent.selector).to.equal('[data-uid~="Component"]')
   })
-  it('should still find the component root element even when the root element changes', async () => {
-    const subject = await mount(<Component />)
-    expect(await find({ locator })).to.exist()
+
+  it('should handle components that render `null`', async () => {
+    const TestableComponent = testable()(Component)
+
+    await mount(<TestableComponent hide />)
+
+    expect(await findAll(TestableComponent.selector, { expectEmpty: true }))
+      .to.have.length(0)
+  })
+
+  it('should still apply the attribute/value when the root element changes', async () => {
+    const TestableComponent = testable()(Component)
+
+    const subject = await mount(<TestableComponent />)
+
+    expect(await find(TestableComponent.selector)).to.exist()
+
     subject.setProps({ children: <ul><li>foo</li></ul> })
-    expect(await find({ locator })).to.exist()
+
+    expect(await find(TestableComponent.selector)).to.exist()
   })
 })

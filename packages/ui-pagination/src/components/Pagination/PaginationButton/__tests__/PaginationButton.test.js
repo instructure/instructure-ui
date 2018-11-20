@@ -32,14 +32,14 @@ import PaginationButtonLocator from '../locator'
 describe('<PaginationButton />', async () => {
   it('should designate current page', async () => {
     await mount(<PaginationButton current>1</PaginationButton>)
-    const button = await PaginationButtonLocator.find({ label: '1' })
+    const button = await PaginationButtonLocator.find(':label(1)')
     expect(button.getAttribute('aria-current')).to.equal('page')
   })
 
   it('should navigate using button when onClick provided', async () => {
     const onClick = stub()
     await mount(<PaginationButton onClick={onClick}>1</PaginationButton>)
-    const button = await PaginationButtonLocator.find({ label: '1' })
+    const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()
     expect(onClick).to.have.been.called()
   })
@@ -51,7 +51,7 @@ describe('<PaginationButton />', async () => {
         1
       </PaginationButton>
     )
-    const button = await PaginationButtonLocator.find({ label: '1' })
+    const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()
     expect(onClick).to.not.have.been.called()
   })
@@ -60,7 +60,7 @@ describe('<PaginationButton />', async () => {
     await mount(
       <PaginationButton href="https://instructure.design/">1</PaginationButton>
     )
-    const button = await PaginationButtonLocator.find({ label: '1' })
+    const button = await PaginationButtonLocator.find(':label(1)')
     expect(button.getAttribute('href')).to.equal('https://instructure.design/')
   })
 })

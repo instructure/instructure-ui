@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
@@ -37,6 +38,7 @@ import theme from './theme'
 parent: TabList
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class Tab extends Component {
   static propTypes = {

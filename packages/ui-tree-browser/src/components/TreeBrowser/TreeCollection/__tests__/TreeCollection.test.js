@@ -27,27 +27,20 @@ import {
   expect,
   mount,
   stub,
-  locator,
-  parseQueryArguments,
-  find,
-  findAll,
-  mergeCSSIntoSelector
+  locator
 } from '@instructure/ui-test-utils'
 
 import TreeCollection from '../index'
 
-
 // TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const itemSelector = '[role="treeitem"]'
+const TreeBrowserItemLocator =  locator('[role="treeitem"]')
 
-const TreeCollectionLocator = locator(TreeCollection.locator, {
-  findAllItems: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+const TreeCollectionLocator = locator(TreeCollection.selector, {
+  findAllItems: (...args) => {
+    return TreeBrowserItemLocator.findAll(...args)
   },
-  findItem: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
+  findItem: (...args) => {
+    return TreeBrowserItemLocator.find(...args)
   }
 })
 
@@ -103,10 +96,10 @@ describe('<TreeCollection />', async () => {
       )
       const collection = await TreeCollectionLocator.find()
 
-      const folderIcons = await collection.findAll({ tag: 'svg', title: 'Folder icon' })
+      const folderIcons = await collection.findAll('svg:title(Folder icon)')
       expect(folderIcons.length).to.equal(2)
 
-      const documentIcons = await collection.findAll({ tag: 'svg', title: 'Document icon' })
+      const documentIcons = await collection.findAll('svg:title(Document icon)')
       expect(documentIcons.length).to.equal(1)
     })
 
@@ -224,7 +217,7 @@ describe('<TreeCollection />', async () => {
       )
 
       const collection = await TreeCollectionLocator.find()
-      const item = await collection.findItem({ label: 'Item 1' })
+      const item = await collection.findItem(':label(Item 1)')
 
       await item.click()
 

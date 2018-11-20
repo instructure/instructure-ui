@@ -25,4 +25,4 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Spinner from './index'
 
-export default locator(Spinner.locator)
+export default locator(Spinner.selector)

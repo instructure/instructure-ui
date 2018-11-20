@@ -38,6 +38,7 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
+
     expect(await badge.accessible()).to.be.true()
   })
 
@@ -49,7 +50,8 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
-    expect(await badge.find({ contains: '100' })).to.exist()
+
+    expect(await badge.find(':contains(100)')).to.exist()
   })
 
   it('should truncate the count via countUntil', async () => {
@@ -60,7 +62,8 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
-    expect(await badge.find({ contains: '99 +' })).to.exist()
+
+    expect(await badge.find(':contains(99 +)')).to.exist()
   })
 
   it('should change postion based on the placement prop', async () => {
@@ -71,6 +74,7 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
+
     expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
     expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
   })
@@ -83,7 +87,8 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
-    expect(await badge.find({ tag: 'li', expectEmpty: true })).to.not.exist()
+
+    expect(await badge.find('li', { expectEmpty: true })).to.not.exist()
   })
 
   it('should change its output via the formatOutput prop', async () => {
@@ -98,6 +103,7 @@ describe('<Badge />', () => {
     )
 
     const badge = within(subject.getDOMNode())
-    expect(await badge.find({ text: 'My count is 15' })).to.exist()
+
+    expect(await badge.find(':textContent(My count is 15)')).to.exist()
   })
 })

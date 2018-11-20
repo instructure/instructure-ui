@@ -33,7 +33,7 @@ describe('<CloseButton />', async () => {
       <CloseButton>Close</CloseButton>
     )
     const button = await CloseButtonLocator.find()
-    const icon = await button.find({tag: 'svg', attribute: 'name'})
+    const icon = await button.find('svg[name]')
     expect(icon.getAttribute('name')).to.equal('IconX')
   })
 })

@@ -61,7 +61,7 @@ describe('<Page />', async () => {
     )
 
     const page = within(subject.getDOMNode())
-    const input = await page.find({focusable: true})
+    const input = await page.find(':focusable')
 
     await page.focus()
 

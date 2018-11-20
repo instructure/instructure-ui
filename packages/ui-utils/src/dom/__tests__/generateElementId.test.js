@@ -24,6 +24,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import generateElementId from '../generateElementId'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('generateElementId', () => {
   it('generates a valid element id', () => {
     expect(() => { document.querySelector(generateElementId()) }).to.not.throw(Error)
@@ -35,3 +36,4 @@ describe('generateElementId', () => {
     expect(generateElementId('myPrefix')).to.startWith('myPrefix__')
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

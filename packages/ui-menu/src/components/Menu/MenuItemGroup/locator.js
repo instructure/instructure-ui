@@ -27,7 +27,7 @@ import MenuItemGroup from './index'
 
 import MenuItem from '../MenuItem/locator'
 
-export default locator(MenuItemGroup.locator, {
+export default locator(MenuItemGroup.selector, {
   findAllItems: (...args) => {
     return MenuItem.findAll(...args)
   },

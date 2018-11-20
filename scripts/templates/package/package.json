@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@instructure/ui-themeable": "^5",
-    "@instructure/ui-testable": "^5",
     "prop-types": "^15",
     "react": "^0.14.9 || ^15 || ^16"
   },

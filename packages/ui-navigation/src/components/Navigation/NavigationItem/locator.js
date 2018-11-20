@@ -21,21 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, findByQuery  } from '@instructure/ui-test-utils'
+import { locator  } from '@instructure/ui-test-utils'
 
 import NavigationItem from './index'
 import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
 
-const contentQuery = TooltipLocator.contentQuery
-
-const NavigationItemLocator = locator(NavigationItem.locator, {
-  findTooltipContent: (...args) => {
-    return findByQuery((element, selector, options) => {
-      return contentQuery(TooltipLocator.query(element))
-    }, ...args)
-  }
+export default locator(NavigationItem.selector, {
+  findTooltipContent: (...args) => TooltipLocator.findContent(...args)
 })
-
-NavigationItemLocator.contentQuery = contentQuery
-
-export default NavigationItemLocator

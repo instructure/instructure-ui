@@ -27,7 +27,7 @@ import { expect, mount, stub, wait, locator } from '@instructure/ui-test-utils'
 import DrawerContent from '../index'
 import styles from '../styles.css'
 
-const DrawerContentLocator = locator(DrawerContent.locator)
+const DrawerContentLocator = locator(DrawerContent.selector)
 
 describe('<DrawerContent />', async () => {
   it('should render', async () => {

@@ -53,12 +53,13 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
 
-    const focusable = await find({ focusable: true })
+    const focusable = await find(':focusable')
 
     expect(lastCall(renderSpy).focused).to.equal(false)
     expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
     expect(lastCall(renderSpy).focusVisible).to.equal(false)
 
+    await focusable.keyDown() // make sure we're back in keyboard mode
     await focusable.focus()
 
     expect(lastCall(renderSpy).focused).to.equal(true)
@@ -84,7 +85,7 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
 
-    const focusable = await find({ focusable: true })
+    const focusable = await find(':focusable')
 
     await focusable.mouseDown()
     await focusable.focus()
@@ -105,7 +106,7 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
 
-    const firstButton = await find({ tag: 'button', label: 'foo' })
+    const firstButton = await find('button:label(foo)')
 
     await firstButton.focus()
 
@@ -122,7 +123,7 @@ describe('<Focusable />', async () => {
       }
     })
 
-    const secondButton = await find({ tag: 'button', label: 'bar' })
+    const secondButton = await find('button:label(bar)')
 
     await secondButton.focus()
 
@@ -182,7 +183,7 @@ describe('<Focusable />', async () => {
 
     expect(lastCall(renderSpy).focused).to.equal(false)
 
-    const button = await find({ tag: 'button', label: 'foo' })
+    const button = await find('button:label(foo)')
     await button.focus()
 
     expect(lastCall(renderSpy).focused).to.equal(true)
@@ -198,7 +199,7 @@ describe('<Focusable />', async () => {
 
     await focusable.focus()
 
-    const button = await find({ tag: 'button', label: 'hello world' })
+    const button = await find('button:label(hello world)')
 
     expect(button.getDOMNode()).to.equal(document.activeElement)
   })

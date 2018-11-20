@@ -29,14 +29,14 @@ import ApplyTextDirection from '../index'
 import bidirectional from '../../../bidirectional'
 import { makeTextDirectionContext } from '../../../TextDirectionContextTypes'
 
-describe('<ApplyTextDirection />', async () => {
-  @bidirectional()
-  class BidirectionalComponent extends React.Component {
-    render () {
-      return <div data-dir={this.dir}>Hello world</div>
-    }
+@bidirectional()
+class BidirectionalComponent extends React.Component {
+  render () {
+    return <div data-dir={this.dir}>Hello world</div>
   }
+}
 
+describe('<ApplyTextDirection />', async () => {
   it('should take on the direction of the document element by default', async () => {
     const subject = await mount(
       <ApplyTextDirection>
@@ -77,7 +77,7 @@ describe('<ApplyTextDirection />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    const text = await component.find({text: 'Hello world'})
+    const text = await component.find(':textContent(Hello world)')
 
     expect(text.getAttribute('data-dir')).to.equal('rtl')
   })
@@ -93,7 +93,7 @@ describe('<ApplyTextDirection />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    const text = await component.find({text: 'Hello world'})
+    const text = await component.find(':textContent(Hello world)')
 
     expect(text.getAttribute('data-dir')).to.equal('ltr')
   })

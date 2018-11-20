@@ -158,8 +158,8 @@ describe('ScreenReaderFocusRegion', async () => {
     const main = within(subject.getDOMNode())
     const content = (await main.find('[data-test-content]')).getDOMNode()
     const screenReaderFocusRegion = new ScreenReaderFocusRegion(content)
-    const childNodes = await main.findAll({css: '[data-test-child]:not([aria-hidden="true"])'})
-    const exception = await main.find({css: '[data-test-child][aria-hidden="true"]'})
+    const childNodes = await main.findAll('[data-test-child]:not([aria-hidden="true"])')
+    const exception = await main.find('[data-test-child][aria-hidden="true"]')
 
     screenReaderFocusRegion.activate()
     screenReaderFocusRegion.deactivate()

@@ -29,12 +29,14 @@ import ScreenReaderContent from '../index'
 describe('<ScreenReaderContent />', async () => {
   it('should render the specified tag when `as` prop is set', async () => {
     const subject = await mount(<ScreenReaderContent as="div" />)
-    expect(subject.getDOMNode().tagName).to.equal('DIV')
+    const screenReaderContent = within(subject.getDOMNode())
+    expect(screenReaderContent.getTagName()).to.equal('div')
   })
 
-  it('accepts props like normal', async () => {
+  it('accepts "passthrough" props', async () => {
     const subject = await mount(<ScreenReaderContent hidden />)
-    expect(subject.getDOMNode().getAttribute('hidden')).to.exist()
+    const screenReaderContent = within(subject.getDOMNode())
+    expect(screenReaderContent.getDOMNode().getAttribute('hidden')).to.exist()
   })
 
   it('renders children components', async () => {
@@ -43,7 +45,18 @@ describe('<ScreenReaderContent />', async () => {
         <span>Screenreader text</span>
       </ScreenReaderContent>
     )
-    expect(subject.getDOMNode().textContent).to.equal('Screenreader text')
+    const screenReaderContent = within(subject.getDOMNode())
+    expect(screenReaderContent.getTextContent()).to.equal('Screenreader text')
+  })
+
+  it('renders children offscreen', async () => {
+    const subject = await mount(
+      <ScreenReaderContent>
+        <span>Screenreader text</span>
+      </ScreenReaderContent>
+    )
+    const screenReaderContent = within(subject.getDOMNode())
+    expect(screenReaderContent.onscreen()).to.be.false()
   })
 
   it('is accessible by screen readers', async () => {

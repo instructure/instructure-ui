@@ -35,9 +35,9 @@ describe('<DrawerLayout />', async () => {
     await mount(
       <DrawerLayoutFixture />
     )
-    const drawerLayout = await DrawerLayoutLocator.find()
+    const layout = await DrawerLayoutLocator.find()
 
-    expect(drawerLayout).to.exist()
+    expect(layout).to.exist()
   })
 
   it('should render a DrawerTray and DrawerContent', async () => {
@@ -49,12 +49,12 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    const drawerLayout = await DrawerLayoutLocator.find()
-    const drawerTray = await drawerLayout.findTray({contains: 'Hello from tray'})
-    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
+    const layout = await DrawerLayoutLocator.find()
+    const tray = await layout.findTray(':contains(Hello from tray)')
+    const content = await layout.findContent(':label(Test DrawerContent)')
 
-    expect(drawerTray).to.exist()
-    expect(drawerContent).to.exist()
+    expect(tray).to.exist()
+    expect(content).to.exist()
   })
 
   it(`with no overlay, layout content should have margin equal to tray width with placement=start`, async () => {
@@ -66,11 +66,13 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    const drawerLayout = await DrawerLayoutLocator.find()
-    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
-    const margin = px(drawerContent.getComputedStyle().marginLeft)
+    const layout = await DrawerLayoutLocator.find()
+    const content = await layout.findContent()
 
-    expect(within(margin, 250, 2)).to.be.true()
+    await wait(() => {
+      const margin = px(content.getComputedStyle().marginLeft)
+      expect(within(margin, 250, 2)).to.be.true()
+    })
   })
 
   it(`with no overlay, layout content should have margin equal to tray width with placement=end`, async () => {
@@ -83,11 +85,13 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    const drawerLayout = await DrawerLayoutLocator.find()
-    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
-    const margin = px(drawerContent.getComputedStyle().marginRight)
+    const layout = await DrawerLayoutLocator.find()
+    const content = await layout.findContent()
 
-    expect(within(margin, 250, 2)).to.be.true()
+    await wait(() => {
+      const margin = px(content.getComputedStyle().marginRight)
+      expect(within(margin, 250, 2)).to.be.true()
+    })
   })
 
   it(`with overlay, layout content should have a margin of zero with placement=start`, async () => {
@@ -99,11 +103,13 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    const drawerLayout = await DrawerLayoutLocator.find()
-    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
-    const margin = px(drawerContent.getComputedStyle().marginLeft)
+    const layout = await DrawerLayoutLocator.find()
+    const content = await layout.findContent()
 
-    expect(margin).to.equal(0)
+    await wait(() => {
+      const margin = px(content.getComputedStyle().marginLeft)
+      expect(margin).to.equal(0)
+    })
   })
 
   it(`with overlay, layout content should have a margin of zero with placement=end`, async () => {
@@ -116,11 +122,13 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    const drawerLayout = await DrawerLayoutLocator.find()
-    const drawerContent = await drawerLayout.findContent({label: 'Test DrawerContent'})
-    const margin = px(drawerContent.getComputedStyle().marginRight)
+    const layout = await DrawerLayoutLocator.find()
+    const content = await layout.findContent(':label(Test DrawerContent)')
 
-    expect(margin).to.equal(0)
+    await wait(() => {
+      const margin = px(content.getComputedStyle().marginRight)
+      expect(margin).to.equal(0)
+    })
   })
 
   it('the tray should overlay the content when the content is less than the minWidth', async () => {
@@ -171,7 +179,7 @@ describe('<DrawerLayout />', async () => {
       />
     )
 
-    subject.setProps({open: true})
+    subject.setProps({ open: true })
 
     await wait(() => {
       expect(onOverlayTrayChange.lastCall.args[0]).to.be.true()

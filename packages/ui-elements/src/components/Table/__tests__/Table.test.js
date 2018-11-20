@@ -32,13 +32,13 @@ import Table from '../index'
 describe('<Table />', async () => {
   it('should render a caption', async () => {
     await mount(<Table caption="Test table" />)
-    const table = await find({ tag: 'table' })
-    expect(await table.find({ tag: 'caption', contains: 'Test table' })).to.exist()
+    const table = await find('table')
+    expect(await table.find('caption:contains(Test table)')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
     await mount(<Table caption="Test table" />)
-    const table = await find({ tag: 'table' })
+    const table = await find('table')
     expect(await table.accessible()).to.be.true()
   })
 

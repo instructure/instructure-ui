@@ -66,7 +66,7 @@ describe('<ProgressBar />', async () => {
     )
 
     const progressBar = within(subject.getDOMNode())
-    expect(await progressBar.find({ tag: 'li' })).to.exist()
+    expect(await progressBar.find('li')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

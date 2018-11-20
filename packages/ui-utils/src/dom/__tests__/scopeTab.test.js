@@ -22,58 +22,66 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
+import React from 'react'
+import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 import scopeTab from '../scopeTab'
 
+const MOCK_EVENT = {
+  shiftKey: false,
+  preventDefault: () => {}
+}
+
 describe('scopeTab', async () => {
-  let container, node
-  const MOCK_EVENT = {
-    shiftKey: false,
-    preventDefault: () => {}
-  }
-
-  beforeEach(() => {
-    node = document.createElement('div')
-    document.body.appendChild(node)
-
-    container = document.createElement('div')
-    container.innerHTML = `
-      <div class="scopeTab--NESTED">
-        <input class="scopeTab--ONE" />
-        <input class="scopeTab--TWO" />
-      </div>
-      <input class="scopeTab--THREE" />
-    `
-
-    document.body.appendChild(container)
-  })
-
-  afterEach(() => {
-    container && container.parentNode && container.parentNode.removeChild(container)
-    container = null
-    node && node.parentNode && node.parentNode.removeChild(node)
-    node = null
-  })
-
   it('should scope tab within container', async () => {
-    const nested = document.querySelector('.scopeTab--NESTED')
-    const one = document.querySelector('.scopeTab--ONE')
-    const two = document.querySelector('.scopeTab--TWO')
+    const subject = await mount(
+      <div>
+        <div id="container">
+          <input id="first" />
+          <input id="second" />
+        </div>
+      </div>
+    )
 
-    await two.focus()
+    const fixture = within(subject.getDOMNode())
 
-    scopeTab(nested, MOCK_EVENT)
+    const container = await fixture.find('#container')
+    const first = await fixture.find('#first')
+    const second = await fixture.find('#second')
 
-    expect(document.activeElement).to.equal(one)
+    await second.focus()
+
+    await wait(() => {
+      expect(second.focused()).to.be.true()
+    })
+
+    scopeTab(container.getDOMNode(), MOCK_EVENT)
+
+    await wait(() => {
+      expect(first.focused()).to.be.true()
+    })
   })
 
   it('should not attempt scoping when no tabbable children', async () => {
-    const two = document.querySelector('.scopeTab--TWO')
+    const subject = await mount(
+      <div>
+        <div id="container">
+          Hello
+        </div>
+        <input />
+      </div>
+    )
 
-    await two.focus()
+    const fixture = within(subject.getDOMNode())
 
-    scopeTab(node, MOCK_EVENT)
+    const input = await fixture.find('input')
+    const container = await fixture.find('#container')
 
-    expect(document.activeElement).to.equal(two)
+    await input.focus()
+
+    scopeTab(container.getDOMNode(), MOCK_EVENT)
+
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
   })
 })

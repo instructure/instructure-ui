@@ -21,26 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  locator,
-  parseQueryArguments,
-  mergeCSSIntoSelector,
-  findAll,
-  find
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import TreeBrowser from './index'
 
 // TODO: if we make a TreeBrowserItem component + locator we could use it here.
-const itemSelector = '[role="treeitem"]'
+const TreeBrowserItemLocator =  locator('[role="treeitem"]')
 
-export default locator(TreeBrowser.locator, {
+export default locator(TreeBrowser.selector, {
   findAllItems: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return TreeBrowserItemLocator.findAll(...args)
   },
   findItem: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return TreeBrowserItemLocator.find(...args)
   }
 })

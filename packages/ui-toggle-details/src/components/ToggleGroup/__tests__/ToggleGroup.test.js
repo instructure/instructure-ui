@@ -111,7 +111,7 @@ describe('<ToggleGroup />', () => {
     )
 
     const toggleGroup = await ToggleGroupLocator.find()
-    await toggleGroup.click()
+    await toggleGroup.clickToggle()
 
     const toggle = await toggleGroup.findToggle()
 
@@ -135,7 +135,7 @@ describe('<ToggleGroup />', () => {
       </ToggleGroup>
     )
     const toggleGroup = await ToggleGroupLocator.find()
-    await toggleGroup.click()
+    await toggleGroup.clickToggle()
 
     const { args } = onToggle.firstCall
 
@@ -158,7 +158,7 @@ describe('<ToggleGroup />', () => {
 
     expect(toggle.getTextContent()).to.equal('Show content')
 
-    await toggleGroup.click()
+    await toggleGroup.clickToggle()
 
     expect(toggle.getTextContent()).to.equal('Hide content')
   })
@@ -192,29 +192,15 @@ describe('<ToggleGroup />', () => {
 
     const toggleGroup = await ToggleGroupLocator.find()
 
-    expect(await toggleGroup.find({
-      tag: 'svg',
-      title: 'Icon collapsed'
-    })).to.exist()
+    let iconTitle = await toggleGroup.find('svg > title')
 
-    expect(await toggleGroup.find({
-      tag: 'svg',
-      title: 'Icon expanded',
-      expectEmpty: true
-    })).to.not.exist()
+    expect(iconTitle.getTextContent()).to.equal('Icon collapsed')
 
-    await toggleGroup.click()
+    await toggleGroup.clickToggle()
 
-    expect(await toggleGroup.find({
-      tag: 'svg',
-      title: 'Icon collapsed',
-      expectEmpty: true
-    })).to.not.exist()
+    iconTitle = await toggleGroup.find('svg > title')
 
-    expect(await toggleGroup.find({
-      tag: 'svg',
-      title: 'Icon expanded'
-    })).to.exist()
+    expect(iconTitle.getTextContent()).to.equal('Icon expanded')
   })
 
   it('should meet a11y standards', async () => {

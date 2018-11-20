@@ -26,7 +26,7 @@ import { expect, mount, wait, within } from '@instructure/ui-test-utils'
 import FocusRegionManager from '../FocusRegionManager'
 
 describe('FocusRegionManager', async () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     FocusRegionManager.clearEntries()
   })
 
@@ -69,9 +69,9 @@ describe('FocusRegionManager', async () => {
     )
 
     const main = within(subject.getDOMNode())
-    const button = (await main.find({attribute: 'data-test-button'})).getDOMNode()
-    const content = (await main.find({attribute: 'data-test-content'})).getDOMNode()
-    const firstTabbable = (await main.find({attribute: 'data-test-first-tabbable'})).getDOMNode()
+    const button = (await main.find('[data-test-button]')).getDOMNode()
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const firstTabbable = (await main.find('[data-test-first-tabbable]')).getDOMNode()
 
     await button.focus()
 
@@ -123,8 +123,8 @@ describe('FocusRegionManager', async () => {
     )
 
     const main = within(subject.getDOMNode())
-    const button = (await main.find({attribute: 'data-test-button'})).getDOMNode()
-    const content = (await main.find({attribute: 'data-test-content'})).getDOMNode()
+    const button = (await main.find('[data-test-button]')).getDOMNode()
+    const content = (await main.find('[data-test-content]')).getDOMNode()
 
     await button.focus()
 

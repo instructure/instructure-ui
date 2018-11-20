@@ -42,7 +42,7 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
 
     expect(group).to.exist()
   })
@@ -57,7 +57,7 @@ describe('<MenuItemGroup />', async () => {
     )
 
     const container = await MenuItemGroupLocator.find()
-    const group = await container.find({ label: 'Select one' })
+    const group = await container.find(':label(Select one)')
 
     expect(group.getAttribute('role')).to.equal('group')
   })
@@ -71,7 +71,7 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
     const items = await group.findAllItems('[role="menuitemradio"]')
 
     expect(items.length).to.equal(2)
@@ -89,7 +89,7 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select a few' })
+    const group = await MenuItemGroupLocator.find(':label(Select a few)')
     const items = await group.findAllItems('[role="menuitemcheckbox"]')
 
     expect(items.length).to.equal(2)
@@ -106,7 +106,7 @@ describe('<MenuItemGroup />', async () => {
         <MenuItemSeparator />
       </MenuItemGroup>
     )
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
     const items = await group.findAllItems('[aria-disabled]')
 
     expect(items.length).to.equal(2)
@@ -124,8 +124,8 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
-    const item = await group.findItem({ label: 'Bar' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
+    const item = await group.findItem(':label(Bar)')
 
     expect(item.getAttribute('aria-checked'))
       .to.equal('true')
@@ -145,8 +145,8 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
-    const item = await group.findItem({ label: 'Bar' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
+    const item = await group.findItem(':label(Bar)')
 
     expect(item.getAttribute('aria-checked'))
       .to.equal('true')
@@ -162,7 +162,7 @@ describe('<MenuItemGroup />', async () => {
         <MenuItem key="bar" selected>Bar</MenuItem>
       </MenuItemGroup>
     )
-    const group = await MenuItemGroupLocator.find({ label: 'Select a few' })
+    const group = await MenuItemGroupLocator.find(':label(Select a few)')
     const items = await group.findAllItems('[aria-checked]')
 
     expect(items.length).to.equal(2)
@@ -177,7 +177,7 @@ describe('<MenuItemGroup />', async () => {
         <MenuItem selected>Bar</MenuItem>
       </MenuItemGroup>
     )
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
     const items = await group.findAllItems('[aria-checked="true"]')
 
     expect(items.length).to.equal(1)
@@ -197,8 +197,8 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
-    const item = await group.findItem({ label: 'Foo' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
+    const item = await group.findItem(':label(Foo)')
 
     await item.click()
 
@@ -220,8 +220,8 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
-    const item = await group.findItem({ label: 'Foo' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
+    const item = await group.findItem(':label(Foo)')
 
     await item.click()
 
@@ -242,7 +242,7 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select some' })
+    const group = await MenuItemGroupLocator.find(':label(Select some)')
     const items = await group.findAllItems()
 
     await items[0].click()
@@ -286,7 +286,7 @@ describe('<MenuItemGroup />', async () => {
       </MenuItemGroup>
     )
 
-    const group = await MenuItemGroupLocator.find({ label: 'Select one' })
+    const group = await MenuItemGroupLocator.find(':label(Select one)')
     const items = await group.findAllItems()
 
     await items[0].click()

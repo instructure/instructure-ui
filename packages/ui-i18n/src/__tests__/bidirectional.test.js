@@ -27,14 +27,14 @@ import { expect, mount } from '@instructure/ui-test-utils'
 import bidirectional from '../bidirectional'
 import { makeTextDirectionContext } from '../TextDirectionContextTypes'
 
-describe('@bidirectional', async () => {
-  @bidirectional()
-  class BidirectionalComponent extends React.Component {
-    render () {
-      return <div data-dir={this.dir}>Hello World</div>
-    }
+@bidirectional()
+class BidirectionalComponent extends React.Component {
+  render () {
+    return <div data-dir={this.dir}>Hello World</div>
   }
+}
 
+describe('@bidirectional', async () => {
   it('should take on the direction of the document by default', async () => {
     const subject = await mount(
       <BidirectionalComponent />

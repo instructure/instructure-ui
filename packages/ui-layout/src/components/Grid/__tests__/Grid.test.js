@@ -54,8 +54,8 @@ describe('<Grid />', async () => {
       </Grid>
     )
 
-    expect(await find({css: '[role="grid"][aria-hidden]'})).to.exist()
-    expect(await find({css: '[role="presentation"][aria-live="polite"]'})).to.exist()
-    expect(await find({css: '[role="presentation"][aria-disabled]'})).to.exist()
+    expect(await find('[role="grid"][aria-hidden]')).to.exist()
+    expect(await find('[role="presentation"][aria-live="polite"]')).to.exist()
+    expect(await find('[role="presentation"][aria-disabled]')).to.exist()
   })
 })

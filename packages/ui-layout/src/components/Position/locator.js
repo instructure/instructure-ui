@@ -30,34 +30,28 @@ import {
 
 import Position, { PositionTarget, PositionContent } from './index'
 
-export const PositionTargetLocator = locator(PositionTarget.locator)
-export const PositionContentLocator = locator(PositionContent.locator)
-
-const query = (ComponentIdentifier, element, selector, options) => {
+const query = (ComponentIdentifier, element) => {
   if (element instanceof Element)  {
     const id = element.getAttribute(Position.locatorAttribute)
-    return querySelectorAll(
-      document.body, // content and target aren't necessarily a child of the component itself
-      { css: `[${ComponentIdentifier.locatorAttribute}="${id}"]` },
-    )
+    const attribute = ComponentIdentifier.locatorAttribute
+    // query document because content and target aren't necessarily a child of the component itself
+    return querySelectorAll(`[${attribute}="${id}"]`)
   } else {
     return []
   }
 }
 
-const targetQuery = query.bind(null, PositionTarget)
-const contentQuery = query.bind(null, PositionContent)
+const customMethods =  {
+  findTarget: (...args) => findByQuery(query.bind(null, PositionTarget), ...args),
+  findContent: (...args) => findByQuery(query.bind(null, PositionContent), ...args)
+}
 
-const PositionLocator = locator(Position.locator, {
-  findTarget: (...args) => {
-    return findByQuery(targetQuery, ...args)
-  },
-  findContent: (...args) => {
-    return findByQuery(contentQuery, ...args)
-  }
-})
+const PositionLocator = locator(Position.selector, customMethods)
 
-PositionLocator.targetQuery = targetQuery
-PositionLocator.contentQuery = contentQuery
+export const PositionTargetLocator = locator(PositionTarget.selector)
+export const PositionContentLocator = locator(PositionContent.selector)
 
-export default PositionLocator
+export default {
+  ...PositionLocator,
+  ...customMethods
+}

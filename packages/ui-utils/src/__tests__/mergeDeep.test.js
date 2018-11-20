@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import mergeDeep from '../mergeDeep'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('mergeDeep', () => {
   it('should merge object properties without affecting any object', () => {
     const obj1 = { a: 0, b: 1 }
@@ -128,3 +129,4 @@ describe('mergeDeep', () => {
     expect(mergeDeep(func)).to.deep.equal(func)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

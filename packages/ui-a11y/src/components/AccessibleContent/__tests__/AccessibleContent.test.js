@@ -27,36 +27,38 @@ import { expect, mount, within } from '@instructure/ui-test-utils'
 import AccessibleContent from '../index'
 
 describe('<AccessibleContent />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<AccessibleContent />)
-    expect(subject.getDOMNode()).to.exist()
-  })
-
-  it('should render a ScreenReaderContent', async () => {
-    const subject = await mount(<AccessibleContent alt="Screenreader text" />)
-    const accessibleContent = within(subject.getDOMNode())
-    const screenReaderContent = await accessibleContent.find({text: 'Screenreader text'})
-
-    expect(accessibleContent.getTextContent()).to.equal('Screenreader text')
-    expect(screenReaderContent).to.exist()
-  })
-
-  it('should render a PresentationContent', async () => {
+  it('should render screen reader content', async () => {
     const subject = await mount(
-      <AccessibleContent>
-        Not screenreader text
+      <AccessibleContent alt="Screen Reader Content">
+        Presentational Content
       </AccessibleContent>
     )
     const accessibleContent = within(subject.getDOMNode())
-    const presentationContent = await accessibleContent.find({text: 'Not screenreader text'})
+    const screenReaderContent = await accessibleContent.find(
+      ':textContent(Screen Reader Content)',
+      { visible: false }
+    )
 
-    expect(accessibleContent.getTextContent()).to.equal('Not screenreader text')
-    expect(presentationContent).to.exist()
+    expect(screenReaderContent.onscreen()).to.be.false()
+  })
+
+  it('should render a presentational content', async () => {
+    const subject = await mount(
+      <AccessibleContent alt="Screen Reader Content">
+        Presentational Content
+      </AccessibleContent>
+    )
+    const accessibleContent = within(subject.getDOMNode())
+    const presentationContent = await accessibleContent.find(':textContent(Presentational Content)')
+
+    expect(presentationContent.onscreen()).to.be.true()
+    expect(presentationContent.getAttribute('aria-hidden')).to.exist()
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
     const subject = await mount(<AccessibleContent as="div" />)
-    expect(subject.getDOMNode().tagName).to.equal('DIV')
+    const accessibleContent = within(subject.getDOMNode())
+    expect(accessibleContent.getTagName()).to.equal('div')
   })
 
   it('should meet a11y standards', async () => {

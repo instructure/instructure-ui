@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, find, mount, spy, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -31,22 +31,25 @@ import Tag from '../index'
 
 describe('<Tag />', async () => {
   it('should display text', async () => {
-    await mount(<Tag text="Summer" />)
-    expect(await find({ contains: 'Summer' })).to.exist()
+    const subject = await mount(<Tag text="Summer" />)
+    const tag = within(subject.getDOMNode())
+    expect(await tag.find(':contains(Summer)')).to.exist()
   })
 
   it('should render as a button and respond to onClick event', async () => {
     const onClick = stub()
-    await mount(<Tag text="Summer" onClick={onClick} />)
-    const button = await find({ tag: 'button' })
+    const subject = await mount(<Tag text="Summer" onClick={onClick} />)
+    const tag = within(subject.getDOMNode())
+    const button = await tag.find('button')
     await button.click()
     expect(onClick).to.have.been.called()
   })
 
   it('should render a close icon when it is dismissible and clickable', async () => {
     const onClick = stub()
-    await mount(<Tag text="Summer" onClick={onClick} dismissible={true} />)
-    expect(await find({ tag: 'svg', name: 'IconX' })).to.exist()
+    const subject = await mount(<Tag text="Summer" onClick={onClick} dismissible={true} />)
+    const tag = within(subject.getDOMNode())
+    expect(await tag.find('svg[name="IconX"]')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

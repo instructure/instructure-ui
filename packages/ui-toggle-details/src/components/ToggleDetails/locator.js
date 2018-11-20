@@ -22,27 +22,32 @@
  * SOFTWARE.
  */
 import {
-  find,
   locator,
-  mergeCSSIntoSelector,
-  parseQueryArguments
+  querySelectorAll,
+  findByQuery
 } from '@instructure/ui-test-utils'
 
 import ToggleDetails from './index'
 
-const toggleSelector = '[aria-expanded]'
-const contentSelector = '[id]'
+const ToggleLocator = locator('[aria-expanded]')
 
-export default locator(ToggleDetails.locator, {
-  click: async (element, ...args) => {
-    return (await find(element, toggleSelector)).click(...args)
+const contentQuery = (element, selector, options) => {
+  const toggle = ToggleLocator.query(element)
+  if (toggle && toggle.getAttribute) {
+    const contentId = toggle.getAttribute('aria-controls')
+    return querySelectorAll(element, `#${contentId}`, options)
+  }
+  return []
+}
+
+export default locator(ToggleDetails.selector, {
+  clickToggle: async (element, ...args) => {
+    return (await ToggleLocator.find(element)).click(...args)
   },
-  findToggle: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(toggleSelector, selector), options)
+  findToggle: (...args) => {
+    return ToggleLocator.find(...args)
   },
-  findContent: async (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(contentSelector, selector), options)
+  findContent: (...args) => {
+    return findByQuery(contentQuery, ...args)
   }
 })

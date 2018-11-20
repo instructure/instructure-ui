@@ -44,7 +44,7 @@ describe('<Responsive />', async () => {
 
   let updateMatches
 
-  beforeEach(() => {
+  beforeEach(async () => {
     stub(Responsive.prototype, 'addMatchListener', (query, updateResponsiveMatches) => {
       updateMatches = updateResponsiveMatches
       return {

@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import ms from '../ms'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('ms', () => {
   it('handles ms unit', () => {
     expect(ms('4ms')).to.equal(4)
@@ -42,3 +43,4 @@ describe('ms', () => {
     expect(ms(15)).to.equal(15)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

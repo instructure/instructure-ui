@@ -26,7 +26,7 @@ import { locator  } from '@instructure/ui-test-utils'
 import Navigation from './index'
 import NavigationItem from './NavigationItem/locator'
 
-export default locator(Navigation.locator, {
+export default locator(Navigation.selector, {
   findAllItems: (...args) => {
     return NavigationItem.findAll(...args)
   },

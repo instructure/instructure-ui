@@ -21,39 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  locator,
-  parseQueryArguments,
-  mergeCSSIntoSelector,
-  findAll,
-  find
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import TabList from './index'
 
-const tabSelector = '[aria-controls]'
-const selectedTabSelector = '[aria-selected="true"]'
-const tabPanelSelector = '[role="tabpanel"]'
+import TabLocator from './Tab/locator'
+import TabPanelLocator from './TabPanel/locator'
 
-export default locator(TabList.locator, {
+const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
+
+export default locator(TabList.selector, {
   findTab: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(tabSelector, selector), options)
+    return TabLocator.find(...args)
   },
   findAllTabs: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(tabSelector, selector), options)
+    return TabLocator.findAll(...args)
   },
   findSelectedTab: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(selectedTabSelector, selector), options)
+    return SelectedTabLocator.find( ...args)
   },
   findTabPanel: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(tabPanelSelector, selector), options)
+    return TabPanelLocator.find(...args)
   },
   findAllTabPanels: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(tabPanelSelector, selector), options)
-  },
+    return TabPanelLocator.findAll(...args)
+  }
 })

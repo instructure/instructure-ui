@@ -33,7 +33,7 @@ describe('<Portal />', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalLocator.find({ contains: 'Hello World' })
+    const portal = await PortalLocator.find(':contains(Hello World)')
     expect(portal.getDOMNode()).to.exist()
   })
 
@@ -41,7 +41,7 @@ describe('<Portal />', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalLocator.find({ text: 'Hello World' })
+    const portal = await PortalLocator.find(':contains(Hello World)')
     expect(await portal.accessible()).to.be.true()
   })
 
@@ -52,7 +52,7 @@ describe('<Portal />', async () => {
         Hello World
       </Portal>
     )
-    const portal = await PortalLocator.find({ contains: 'Hello World' })
+    const portal = await PortalLocator.find(':contains(Hello World)')
     expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
   })
 
@@ -78,7 +78,7 @@ describe('<Portal />', async () => {
         Hello World
       </Portal>
     )
-    const portal = await PortalLocator.find({ contains: 'Hello World' })
+    const portal = await PortalLocator.find(':contains(Hello World)')
     expect(portal.getAttribute('dir')).to.equal('ltr')
   })
 
@@ -109,7 +109,7 @@ describe('<Portal />', async () => {
         </Portal>
       )
 
-      const button = await PortalLocator.find({ tag: 'button', contains: 'Hello World' })
+      const button = await PortalLocator.find('button:label(Hello World)')
 
       await button.keyDown('Enter')
 
@@ -150,7 +150,7 @@ describe('<Portal />', async () => {
         </div>
       )
 
-      const portal = await PortalLocator.find({ contains: 'Hello World'})
+      const portal = await PortalLocator.find(':contains(Hello World)')
 
       expect(portal.getParentNode())
         .to.equal(document.getElementById('portal-mount-node'))

@@ -53,6 +53,7 @@ describe('<NavigationItem />', async () => {
       />
     )
     const item = await NavigationItemLocator.find()
+    await item.focus()
     const tooltip = await item.findTooltipContent()
     expect(tooltip).to.exist()
   })

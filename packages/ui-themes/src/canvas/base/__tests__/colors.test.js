@@ -21,10 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import colors from '../colors'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('canvas.colors', () => {
   describe('textDarkest', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
@@ -202,3 +203,4 @@ describe('canvas.colors', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

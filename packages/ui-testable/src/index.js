@@ -28,26 +28,27 @@ function testable () {
   return function (ComposedComponent) {
     const displayName = ComposedComponent.displayName || ComposedComponent.name
     const locator = {
-      attribute: 'data-ui-testable',
+      attribute: 'data-uid',
       value: displayName
     }
+    const selector = `[${locator.attribute}~="${locator.value}"]`
 
     class TestableComponent extends ComposedComponent {
       static displayName = displayName
-      static locator = locator
+      static selector = selector
 
       componentDidMount (...args) {
         if (super.componentDidMount) {
           super.componentDidMount(...args)
         }
-        this.appendLocatorAttribute(findDOMNode(this) || this.DOMNode)
+        this.appendLocatorAttribute()
       }
 
       componentDidUpdate (...args) {
         if (super.componentDidUpdate) {
           super.componentDidUpdate(...args)
         }
-        this.appendLocatorAttribute(findDOMNode(this) || this.DOMNode)
+        this.appendLocatorAttribute()
       }
 
       componentWillUnmount (...args) {
@@ -57,22 +58,26 @@ function testable () {
         clearTimeout(this.locatorTimeout)
       }
 
-      appendLocatorAttribute (node) {
+      appendLocatorAttribute () {
+        let node
+
+        try {
+          // Use this.DOMNode for components that render as non-native Portals...
+          node = findDOMNode(this) || this.DOMNode
+        } catch (e) {
+          console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
+        }
+
         this.locatorTimeout = setTimeout(() => {
-          try {
-            // Use this.DOMNode for components that render as non-native Portals...
-            if (node && node.getAttribute) {
-              const attribute = node.getAttribute(locator.attribute)
-              const values = typeof attribute === 'string' ? attribute.split(',') : []
+          if (node && node.getAttribute) {
+            const attribute = node.getAttribute(locator.attribute)
+            const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
 
-              if (!values.includes(locator.value)) {
-                values.push(locator.value)
-              }
-
-              node.setAttribute(locator.attribute, values.join(','))
+            if (!values.includes(locator.value)) {
+              values.push(locator.value)
             }
-          } catch (e) {
-            console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
+
+            node.setAttribute(locator.attribute, values.join(' '))
           }
         }, 0)
       }

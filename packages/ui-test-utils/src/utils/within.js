@@ -26,15 +26,15 @@ import { bindElementToUtilities } from './bindElementToUtilities'
 export function within (container, ...args) {
   if (container instanceof Element) {
     return bindElementToUtilities(container, ...args)
-  } else if (container && typeof container.find === 'function') {
-    return container
+  } else {
+    throw new Error('[ui-test-utils] within requires a valid DOM Element.')
   }
 }
 
 export function withinEach (containers, ...args) {
   if (Array.isArray(containers)) {
-    return containers.map(element => bindElementToUtilities(element, ...args))
-  } else if (containers && typeof containers.findAll === 'function') {
-    return containers
+    return containers.map(element => within(element))
+  } else {
+    return within(containers)
   }
 }

@@ -36,14 +36,18 @@ describe('<Avatar />', async () => {
   describe('for a11y', async () => {
     it('should be accessible', async () => {
       await mount(<Avatar name="Jessica Jones" />)
+
       const avatar = await AvatarLocator.find()
+
       expect(await avatar.accessible()).to.be.true()
     })
 
     it('initials should have aria-hidden=true', async () => {
       await mount(<Avatar name="Jessica Jones" />)
+
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find({ text: 'JJ' })
+      const initials = await avatar.find(':textContent(JJ)')
+
       expect(initials.getAttribute('aria-hidden')).to.equal('true')
     })
   })
@@ -51,12 +55,14 @@ describe('<Avatar />', async () => {
   describe('with the default props', async () => {
     it('should should display as a circle', async () => {
       await mount(<Avatar name="Jessica Jones" />)
+
       expect(await AvatarLocator.find(`.${styles.circle}`)).to.exist()
     })
 
     it('should render initials', async () => {
       await mount(<Avatar name="Jessica Jones" />)
-      expect(await AvatarLocator.find({ contains: 'JJ' })).to.exist()
+
+      expect(await AvatarLocator.find(':textContent(JJ)')).to.exist()
     })
   })
 
@@ -73,10 +79,7 @@ describe('<Avatar />', async () => {
       )
 
       const avatar = await AvatarLocator.find()
-      const image = await avatar.find({
-        tag: 'img',
-        visible: false
-      })
+      const image = await avatar.find('img', { visible: false })
 
       await image.load()
 
@@ -95,10 +98,7 @@ describe('<Avatar />', async () => {
       )
 
       const avatar = await AvatarLocator.find()
-      const image = await avatar.find({
-        tag: 'img',
-        visible: false
-      })
+      const image = await avatar.find('img', { visible: false })
 
       await image.load()
 
@@ -109,21 +109,27 @@ describe('<Avatar />', async () => {
   describe('when variant is set to "rectangle"', async () => {
     it('should display as a rectangle', async () => {
       await mount(<Avatar name="Jessica Jones" variant="rectangle" />)
-      expect(await AvatarLocator.find(`.${styles.rectangle}`)).to.exist()
+
+      const avatar = await AvatarLocator.find()
+      const rectangle = await avatar.find(`.${styles.rectangle}`)
+
+      expect(rectangle).to.exist()
     })
   })
 
   describe('when the user name has no spaces', async () => {
     it('should render a single initial', async () => {
       await mount(<Avatar name="Jessica" />)
-      expect(await AvatarLocator.find({ contains: 'J' })).to.exist()
+
+      expect(await AvatarLocator.find(':textContent(J)')).to.exist()
     })
   })
 
   describe('when the user name has leading spaces', async () => {
     it('should skip them', async () => {
       await mount(<Avatar name=" Jessica Jones" />)
-      expect(await AvatarLocator.find({ contains: 'JJ' })).to.exist()
+
+      expect(await AvatarLocator.find(':textContent(JJ)')).to.exist()
     })
   })
 
@@ -131,7 +137,8 @@ describe('<Avatar />', async () => {
     it('should render', async () => {
       await mount(<Avatar name="" />)
 
-      const initials = await AvatarLocator.find(`.${styles.initials}`)
+      const avatar = await AvatarLocator.find()
+      const initials = await avatar.find(`.${styles.initials}`)
 
       expect(initials).to.exist()
       expect(initials.getTextContent()).to.equal('')
@@ -142,13 +149,16 @@ describe('<Avatar />', async () => {
     it('should render the text as an aria-label attribute', async () => {
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
 
-      expect(await AvatarLocator.find({ label: 'This is a test' })).to.exist()
+      expect(await AvatarLocator.find(':label(This is a test)')).to.exist()
     })
 
     it('should set the role attribute to img', async () => {
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
+
       const avatar = await AvatarLocator.find()
-      expect(avatar.getAttribute('role')).to.equal('img')
+      const img = await avatar.find('[role="img"]')
+
+      expect(img).to.exist()
     })
   })
 

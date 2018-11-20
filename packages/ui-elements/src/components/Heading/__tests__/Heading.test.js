@@ -34,12 +34,12 @@ import HeadingLocator from '../locator'
 describe('<Heading />', () => {
   it('should render as an H2 element', async () => {
     await mount(<Heading>Hello World</Heading>)
-    expect(await HeadingLocator.find({ tag: 'h2' })).to.exist()
+    expect(await HeadingLocator.find('h2')).to.exist()
   })
 
   it('should render the children as text content', async () => {
     await mount(<Heading>Hello World</Heading>)
-    expect(await HeadingLocator.find({ contains: 'Hello World' })).to.exist()
+    expect(await HeadingLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render as a SPAN if level is `reset`', async () => {

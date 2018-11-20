@@ -92,7 +92,7 @@ describe('<Img />', () => {
     const container = await ImgLocator.find()
     expect(container.getComputedStyle().getPropertyValue('display')).to.equal('block')
 
-    const img = await container.find({ tag: 'img' })
+    const img = await container.find('img')
     expect(img.getComputedStyle().getPropertyValue('display')).to.equal('block')
   })
 

@@ -46,7 +46,7 @@ describe('<View />', async () => {
     )
 
     const view = within(subject.getDOMNode())
-    const h1 = await view.findAll({tag: 'h1'})
+    const h1 = await view.findAll('h1')
 
     expect(h1).to.have.length(1)
   })

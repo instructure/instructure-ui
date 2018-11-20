@@ -23,7 +23,6 @@
  */
 import {
   locator,
-  findByQuery,
   parseQueryArguments
 } from '@instructure/ui-test-utils'
 
@@ -32,7 +31,7 @@ import Menu from './index'
 import MenuItem from './MenuItem/locator'
 import MenuItemGroup from './MenuItemGroup/locator'
 
-import PopoverLocator, { PopoverTriggerLocator } from '@instructure/ui-overlays/lib/components/Popover/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
 
 const customMethods = {
   findAllItems: (...args) => {
@@ -48,29 +47,20 @@ const customMethods = {
     return MenuItemGroup.find(...args)
   },
   findPopoverTrigger: (...args) => {
-    return PopoverTriggerLocator.find(...args)
+    return PopoverLocator.findTrigger(...args)
   },
   findPopoverContent: (...args) => {
     const { element, selector, options } = parseQueryArguments(...args)
-
-    return findByQuery(
-      (element, selector, options) => {
-        return PopoverLocator.contentQuery(PopoverLocator.query(element))
-      },
-      element,
-      selector,
-      {
-        ...options,
-        customMethods: {
-          ...options.customMethods,
-          ...customMethods
-        }
+    return PopoverLocator.findContent(element, selector, {
+      ...options,
+      customMethods: {
+        ...options.customMethods,
+        ...customMethods
       }
-    )
+    })
   }
 }
 
-export default locator(Menu.locator, customMethods)
-
-export { default as MenuItem } from './MenuItem/locator'
-export { default as MenuItemGroup } from './MenuItemGroup/locator'
+export default locator(Menu.selector, customMethods)
+export { default as MenuItemLocator } from './MenuItem/locator'
+export { default as MenuItemGroupLocator } from './MenuItemGroup/locator'

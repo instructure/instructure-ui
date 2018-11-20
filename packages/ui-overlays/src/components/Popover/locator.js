@@ -22,34 +22,23 @@
  * SOFTWARE.
  */
 
-import {
-  locator,
-  findByQuery
-} from '@instructure/ui-test-utils'
+ import { locator } from '@instructure/ui-test-utils'
 
-import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
-import Popover, { PopoverTrigger, PopoverContent } from './index'
+ import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+ import Popover, { PopoverTrigger, PopoverContent } from './index'
 
-export const PopoverTriggerLocator = locator(PopoverTrigger.locator)
-export const PopoverContentLocator = locator(PopoverContent.locator)
+ export const PopoverTriggerLocator = locator(PopoverTrigger.selector)
+ export const PopoverContentLocator = locator(PopoverContent.selector)
 
-const PopoverLocator = locator(Popover.locator, {
-  findTrigger: (...args) => {
-    return PopoverTriggerLocator.find(...args)
-  },
-  findContent: (...args) => {
-    return findByQuery((element, selector, options) => {
-      return PositionLocator.contentQuery(PositionLocator.query(element))
-    }, ...args)
-  },
-  findPositionTarget: (...args) => {
-    return findByQuery((element, selector, options) => {
-      return PositionLocator.targetQuery(PositionLocator.query(element))
-    }, ...args)
-  }
-})
+ const customMethods = {
+   findContent: (...args) => PositionLocator.findContent(...args),
+   findPositionTarget: (...args) => PositionLocator.findTarget(...args),
+   findTrigger: (...args) => PopoverTriggerLocator.find(...args)
+ }
 
-PopoverLocator.contentQuery = PositionLocator.contentQuery
-PopoverLocator.targetQuery = PositionLocator.targetQuery
+const PopoverLocator = locator(Popover.selector, customMethods)
 
-export default PopoverLocator
+export default {
+  ...PopoverLocator,
+  ...customMethods
+}

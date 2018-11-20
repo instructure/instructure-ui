@@ -79,7 +79,7 @@ describe('<Transition />', async () => {
 
     await subject.setProps({in: false})
 
-    expect(await find({contains: 'hello', expectEmpty: true})).to.not.exist()
+    expect(await find(':contains(hello)', { expectEmpty: true})).to.not.exist()
   })
 
   it('should not execute enter transition with `transitionEnter` set to false', async () => {

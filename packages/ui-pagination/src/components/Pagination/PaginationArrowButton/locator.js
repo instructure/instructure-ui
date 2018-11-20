@@ -26,10 +26,8 @@ import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/loca
 
 import PaginationArrowButton from './index'
 
-export default locator(PaginationArrowButton.locator, {
-  findTooltip: (...args) => {
-    return TooltipLocator.find(...args)
-  },
+export default locator(PaginationArrowButton.selector, {
+  findTooltipContent: (...args) => TooltipLocator.findContent(...args),
   click: async (element, ...args) => {
     return (await find(element, 'a,button,[role="button"]')).click(...args)
   }

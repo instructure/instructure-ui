@@ -21,25 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  locator,
-  parseQueryArguments,
-  mergeCSSIntoSelector,
-  findAll,
-  find
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import MetricsList from './index'
 
-const itemSelector = '[role="row"]'
+import MetricsListItemLocator from './MetricsListItem/locator'
 
-export default locator(MetricsList.locator, {
+export default locator(MetricsList.selector, {
   findAllItems: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return findAll(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return MetricsListItemLocator.findAll(...args)
   },
   findItem: (...args) => {
-    const { element, selector, options } = parseQueryArguments(...args)
-    return find(element, mergeCSSIntoSelector(itemSelector, selector), options)
+    return MetricsListItemLocator.find(...args)
   }
 })

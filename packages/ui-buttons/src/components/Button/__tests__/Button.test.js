@@ -36,7 +36,7 @@ describe('<Button/>', async () => {
   await mount(
     <Button>Hello World</Button>
   )
-    expect(await ButtonLocator.find({ contains: 'Hello World' })).to.exist()
+    expect(await ButtonLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render a button', async () => {
@@ -50,7 +50,7 @@ describe('<Button/>', async () => {
     await mount(
       <Button>Hello World{null}</Button>
     )
-    expect( await ButtonLocator.find({ tag: 'button' })).to.exist()
+    expect( await ButtonLocator.find('button')).to.exist()
   })
 
   it('should render a link styled as a button if href is provided', async () => {
@@ -97,10 +97,7 @@ describe('<Button/>', async () => {
       <Button icon={IconTrash}>Hello World</Button>
     )
     const button = await ButtonLocator.find()
-    const icon = await button.find({
-      tag: 'svg',
-      attribute: 'name'
-    })
+    const icon = await button.find('svg[name]')
     expect(icon.getAttribute('name')).to.equal('IconTrash')
   })
 
@@ -111,7 +108,7 @@ describe('<Button/>', async () => {
         <Button fluidWidth>More Than Just Hello World</Button>
       </div>
     )
-    const button = await ButtonLocator.find({ tag: 'button' })
+    const button = await ButtonLocator.find('button')
     expect(button.hasClass(styles['width--fluid'])).to.be.true()
   })
 
@@ -141,7 +138,7 @@ describe('<Button/>', async () => {
     await mount(
       <Button buttonRef={buttonRef}>Hello World</Button>
     )
-    const button = await ButtonLocator.find({ contains: 'Hello World'})
+    const button = await ButtonLocator.find(':contains(Hello World)')
     expect(buttonRef).to.have.been.calledWith(button.getDOMNode())
   })
 

@@ -35,10 +35,10 @@ describe('<Breadcrumb />', async () => {
         <BreadcrumbLink>Account</BreadcrumbLink>
       </Breadcrumb>
     )
-    const breadcrumb = await BreadcrumbLocator.find({label: 'Settings'})
-    const label = breadcrumb.getAttribute('aria-label')
+    const breadcrumb = await BreadcrumbLocator.find()
+    const label = await breadcrumb.find(':label(Settings)')
 
-    expect(label).to.equal('Settings')
+    expect(label.getAttribute('aria-label')).to.equal('Settings')
   })
 
   it('should render an icon as a separator', async () => {
@@ -49,7 +49,7 @@ describe('<Breadcrumb />', async () => {
       </Breadcrumb>
     )
     const breadcrumb = await BreadcrumbLocator.find()
-    const icon = await breadcrumb.find({tag: 'svg'})
+    const icon = await breadcrumb.find('svg')
 
     expect(icon.getAttribute('aria-hidden')).to.equal('true')
   })

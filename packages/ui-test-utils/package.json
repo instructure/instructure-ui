@@ -25,17 +25,19 @@
   },
   "dependencies": {
     "@instructure/ui-axe-check": "^5",
+    "@instructure/debounce": "^5",
     "@instructure/ui-stylesheet": "^5",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
-    "dom-testing-library": "^3.12.0",
+    "dom-testing-library": "^3.12.3",
     "fetch-mock": "^7.0.7",
     "keycode": "^2",
     "mocha": "^5.0.1",
     "sinon": "^6.3.5",
-    "sinon-chai": "^3.2.0"
+    "sinon-chai": "^3.2.0",
+    "sizzle": "^2.3.3"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.0.0 || ^16.0.0",

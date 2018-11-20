@@ -34,7 +34,7 @@ import LinkLocator from '../locator'
 describe('<Link />', async () => {
   it('should render the children as text content', async () => {
     await mount(<Link>Hello World</Link>)
-    expect(await LinkLocator.find({ contains: 'Hello World' })).to.exist()
+    expect(await LinkLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render a button', async () => {
@@ -56,7 +56,7 @@ describe('<Link />', async () => {
     expect(linkRef.focused).to.be.true()
 
     const link = await LinkLocator.find()
-    const focusable = await link.find({ focusable: true })
+    const focusable = await link.find(':focusable')
     expect(focusable.focused()).to.be.true()
   })
 
@@ -76,7 +76,7 @@ describe('<Link />', async () => {
     await mount(<Link linkRef={linkRef}>Hello World</Link>)
 
     const link = await LinkLocator.find()
-    const focusable = await link.find({ focusable: true })
+    const focusable = await link.find(':focusable')
 
     expect(linkRef).to.have.been.calledWith(focusable.getDOMNode())
   })
@@ -90,7 +90,7 @@ describe('<Link />', async () => {
     )
 
     await mount(<Link icon={customIcon}>Hello World</Link>)
-    expect(await LinkLocator.find({ tag: 'svg', title: 'Custom icon' })).to.exist()
+    expect(await LinkLocator.find('svg:title(Custom icon)')).to.exist()
   })
 
   describe('when disabled', async () => {
@@ -122,7 +122,7 @@ describe('<Link />', async () => {
       it('should render designated tag', async () => {
         await mount(<Link as="li" onClick={onClick}>Hello World</Link>)
         const componentRoot = await LinkLocator.find()
-        const link = await componentRoot.find({ text: 'Hello World' })
+        const link = await componentRoot.find(':textContent(Hello World)')
         expect(link.getTagName()).to.equal('li')
       })
 
@@ -146,7 +146,7 @@ describe('<Link />', async () => {
       it('should render designated tag', async () => {
         await mount(<Link as="li">Hello World</Link>)
         const componentRoot = await LinkLocator.find()
-        const link = await componentRoot.find({ text: 'Hello World' })
+        const link = await componentRoot.find(':textContent(Hello World)')
         expect(link.getTagName()).to.equal('li')
       })
 
@@ -176,7 +176,7 @@ describe('<Link />', async () => {
   describe('when an href is provided', async () => {
     it('should render an anchor element', async () => {
       await mount(<Link href="example.html">Hello World</Link>)
-      expect(await LinkLocator.find({ tag: 'a' })).to.exist()
+      expect(await LinkLocator.find('a')).to.exist()
     })
 
     it('should set the href attribute', async () => {

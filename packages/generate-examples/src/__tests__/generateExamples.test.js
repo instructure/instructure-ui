@@ -21,9 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import { expect, spy } from '@instructure/ui-test-utils'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+
 import generateExamples from '../generateExamples'
 import generatePropCombinations from '../generatePropCombinations'
 import TestComponent, { testComponentProps } from './__testfixtures__/TestComponent'
@@ -59,8 +59,10 @@ const executeExampleGenerator = (module, options) => {
   return generateExamples([module], options)[0]
 }
 
-describe('generateExamples', async () => {
-  describe('sections', async () => {
+/* eslint-disable mocha/no-synchronous-tests */
+
+describe('generateExamples', () => {
+  describe('sections', () => {
     const verifySections = (examples, expectedSections) => {
       let result = true
       const sections = examples.map(example => example.name)
@@ -72,7 +74,7 @@ describe('generateExamples', async () => {
       return result
     }
 
-    it('should create sections based on the enumerated values', async () => {
+    it('should create sections based on the enumerated values', () => {
       const { sections } = executeExampleGenerator({
         ...baseModule,
         config: {
@@ -85,20 +87,20 @@ describe('generateExamples', async () => {
       expect(verifySections(sections, ['circle', 'rectangle'])).to.equal(true)
     })
 
-    it('should provide a default section when no sections are designated', async () => {
+    it('should provide a default section when no sections are designated', () => {
       const { sections } = executeExampleGenerator(baseModule)
 
       expect(sections.length).to.equal(1)
       expect(verifySections(sections, ['Examples'])).to.equal(true)
     })
 
-    it('should override default section name via options', async () => {
+    it('should override default section name via options', () => {
       const defaultSectionName = 'FooBarBaz'
       const { sections } = executeExampleGenerator(baseModule, { defaultSectionName })
       expect(verifySections(sections, [defaultSectionName])).to.equal(true)
     })
 
-    it('should override default section name via config', async () => {
+    it('should override default section name via config', () => {
       const defaultConfigSectionName = 'Qux'
       const defaultSectionName = 'FooBarBaz'
       const { sections } = executeExampleGenerator(
@@ -149,8 +151,8 @@ describe('generateExamples', async () => {
       }
     }
 
-    describe('render props', async () => {
-      it('generates components for every combination of props', async () => {
+    describe('render props', () => {
+      it('generates components for every combination of props', () => {
         const { sections } = executeExampleGenerator({
           ...baseModule,
           config: {
@@ -169,7 +171,7 @@ describe('generateExamples', async () => {
         expect(compareCombinations(testCombinations, resultCombinations)).to.equal(true)
       })
 
-      it('passes correct component props depending on the current combination', async () => {
+      it('passes correct component props depending on the current combination', () => {
         const circleChild = 'I am a circle child'
         const rectangleChild = 'I am a rectangle child'
 
@@ -197,7 +199,7 @@ describe('generateExamples', async () => {
         expect(compareCombinations(testCombinations, resultCombinations)).to.equal(true)
       })
 
-      it('filters components as designated in the config', async () => {
+      it('filters components as designated in the config', () => {
         const { sections } = executeExampleGenerator({
           ...baseModule,
           config: {
@@ -223,8 +225,8 @@ describe('generateExamples', async () => {
       })
     })
 
-    describe('render example', async () => {
-      it('should call the render example function when passed via options', async () => {
+    describe('render example', () => {
+      it('should call the render example function when passed via options', () => {
         const size = '30rem'
         const margin = 'small'
 
@@ -241,7 +243,7 @@ describe('generateExamples', async () => {
         })
       })
 
-      it('should call the render example function when passed via config', async () => {
+      it('should call the render example function when passed via config', () => {
         const size = '20rem'
         const rectangleBackground = 'default'
         const circleBackground = 'inverse'
@@ -327,7 +329,7 @@ describe('generateExamples', async () => {
         })
       })
 
-      it('render example function passed via config should override render example function passed via options', async () => {
+      it('render example function passed via config should override render example function passed via options', () => {
         const configRenderExample = spy()
         const optionsRenderExample = spy()
 
@@ -346,8 +348,8 @@ describe('generateExamples', async () => {
       })
     })
 
-    describe('render layout', async () => {
-      it('should call the render layout function when passed via options', async () => {
+    describe('render layout', () => {
+      it('should call the render layout function when passed via options', () => {
         const { sections } = executeExampleGenerator({
           ...baseModule,
           sections: 'variant'
@@ -362,7 +364,7 @@ describe('generateExamples', async () => {
         })
       })
 
-      it('should call the render layout function when passed via config', async () => {
+      it('should call the render layout function when passed via config', () => {
         const { sections } = executeExampleGenerator({
           ...baseModule,
           sections: 'variant',
@@ -378,7 +380,7 @@ describe('generateExamples', async () => {
         })
       })
 
-      it('render layout function passed via config should override render layout function passed via options', async () => {
+      it('render layout function passed via config should override render layout function passed via options', () => {
         const configRenderLayout = spy()
         const configRenderExample = spy()
 
@@ -405,7 +407,7 @@ describe('generateExamples', async () => {
     })
   })
 
-  describe('pages', async () => {
+  describe('pages', () => {
     const verifyMaxExamplesPerPage = (pages, max) => {
       let result = true
       pages.forEach((page) => {
@@ -416,14 +418,14 @@ describe('generateExamples', async () => {
       return result
     }
 
-    it('should include all examples in a single page by default', async  () => {
+    it('should include all examples in a single page by default',  () => {
       const { sections } = executeExampleGenerator(baseModule)
       const { pages } = sections[0]
       expect(pages.length).to.equal(1)
       expect(pages[0].props.children.length).to.equal(sections[0].examples.length)
     })
 
-    it('examples in a page should not exceed the max limit when set', async () => {
+    it('examples in a page should not exceed the max limit when set', () => {
       const maxExamplesPerPage = 2
       const { sections } = executeExampleGenerator(baseModule, {
         maxExamplesPerPage
@@ -432,7 +434,7 @@ describe('generateExamples', async () => {
       expect(verifyMaxExamplesPerPage(pages, maxExamplesPerPage)).to.equal(true)
     })
 
-    it('examples in a page should not exceed the max limit set for their section', async () => {
+    it('examples in a page should not exceed the max limit set for their section', () => {
       const { sections } = executeExampleGenerator({
         ...baseModule,
         config: {
@@ -455,9 +457,9 @@ describe('generateExamples', async () => {
     })
   })
 
-  describe('errors and warnings', async () => {
+  describe('errors and warnings', () => {
     const testRequiredProperty = (property) => {
-      it(`should fail to initialize if the ${property} property is not supplied`, async () => {
+      it(`should fail to initialize if the ${property} property is not supplied`, () => {
         const warningSpy = spy(console, 'warn')
         const result = executeExampleGenerator({
           ...baseModule,
@@ -475,7 +477,7 @@ describe('generateExamples', async () => {
     testRequiredProperty('displayName')
     testRequiredProperty('component')
 
-    it('should warn if component does not have prop specified in the config', async () => {
+    it('should warn if component does not have prop specified in the config', () => {
       const warningSpy = spy(console, 'warn')
       const fakeProp = 'foo'
       executeExampleGenerator({
@@ -493,3 +495,5 @@ describe('generateExamples', async () => {
     })
   })
 })
+
+/* eslint-enable mocha/no-synchronous-tests */

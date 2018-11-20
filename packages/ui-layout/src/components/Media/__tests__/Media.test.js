@@ -66,7 +66,7 @@ describe('<Media />', async () => {
       </Media>
     )
 
-    expect(await find({tag: 'figure'})).to.exist()
+    expect(await find('figure')).to.exist()
   })
 
   describe('when passing down props to View', async () => {

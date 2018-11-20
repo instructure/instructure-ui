@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import TransitionLocator from '@instructure/ui-motion/lib/components/Transition/locator'
 

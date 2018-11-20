@@ -112,7 +112,6 @@ customMethods
 expectEmpty: true,
 
 exact: true,
-regexp: false,
 trim: true,
 collapseWhitespace: true,
 
@@ -127,13 +126,13 @@ await mount(<Component />)
 
 const component = await ComponentFixture.find()
 
-// assert that node exists (doesn't throw an Error)
+// assert that node exists
 expect(component).to.exist()
 
-// assert that node doesn't exist (throws an Error)
+// assert that node doesn't exist
 expect(component).to.not.exist()
 
-expect(component.find('input')).to.not.exist()
+expect(await component.find('input', { expectEmpty: true })).to.not.exist()
 ```
 
 TODO add getDOMNode/chai-dom examples
@@ -151,7 +150,7 @@ it('properly fires `onChange` when input changes', async () => {
 
     // pass mock function to component as `onChange` prop
     await mount(<TextInput label="Name" onChange={onChange} />)
-    const input = await TestInput.find({ label: 'Name' })
+    const input = await TestInput.find(':label(Name)')
 
     const value = 'Here is a value'
 

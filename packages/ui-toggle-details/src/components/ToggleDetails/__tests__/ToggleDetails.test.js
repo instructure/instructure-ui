@@ -32,8 +32,7 @@ describe('<ToggleDetails />', async () => {
   it('should hide its content', async () => {
     await mount(<ToggleDetails summary="Click me">Content</ToggleDetails>)
 
-    expect(await ToggleDetailsLocator.find({
-      contains: 'Content',
+    expect(await ToggleDetailsLocator.find(':contains(Content)',  {
       expectEmpty: true
     })).to.not.exist()
   })
@@ -50,9 +49,7 @@ describe('<ToggleDetails />', async () => {
 
     const toggleDetails = await ToggleDetailsLocator.find()
 
-    const summary = await toggleDetails.find({
-      contains: "Click me"
-    })
+    const summary = await toggleDetails.find(':contains(Click me)')
 
     expect(summary.getDOMNode().previousSibling).to.not.exist()
   })
@@ -81,7 +78,7 @@ describe('<ToggleDetails />', async () => {
 
     const toggleDetails = await ToggleDetailsLocator.find()
     const toggle = await toggleDetails.findToggle()
-    await toggleDetails.click()
+    await toggleDetails.clickToggle()
 
     expect(toggle.getAttribute('aria-expanded')).to.equal('true')
   })
@@ -102,7 +99,7 @@ describe('<ToggleDetails />', async () => {
     )
 
     const toggleDetails = await ToggleDetailsLocator.find()
-    await toggleDetails.click()
+    await toggleDetails.clickToggle()
 
     const { args } = onToggle.firstCall
 
@@ -115,8 +112,11 @@ describe('<ToggleDetails />', async () => {
 
     const toggleDetails = await ToggleDetailsLocator.find()
 
-    expect(await toggleDetails.findToggle({ css: '[aria-expanded="true"]' })).to.exist()
-    expect(await toggleDetails.findContent({ contains: 'Content' })).to.exist()
+    const toggle = await toggleDetails.findToggle()
+    const content = await toggleDetails.findContent()
+
+    expect(toggle.getAttribute('aria-expanded')).to.exist()
+    expect(content.getTextContent()).to.equal('Content')
   })
 
   it('should meet a11y standards', async () => {

@@ -97,9 +97,10 @@ describe('<TreeBrowser />', async () => {
         />
       )
       const tree = await TreeBrowserLocator.find()
-      const item = await tree.findItem({ label: 'Sub Root 1', expectEmpty: true })
+      const items = await tree.findAllItems()
 
-      expect(item).to.not.exist()
+      expect(items.length).to.equal(1)
+      expect(items[0].getTextContent()).to.equal('Root Directory')
     })
 
     it('should accept an array of default expanded collections', async () => {
@@ -112,13 +113,12 @@ describe('<TreeBrowser />', async () => {
         />
       )
       const tree = await TreeBrowserLocator.find()
-
-      const items = (await tree.findAllItems()).map(item => item.getAttribute('aria-label'))
+      const items = await tree.findAllItems()
 
       expect(items.length).to.equal(5)
 
-      expect(await tree.findItem({ label: 'Sub Root 2' })).to.exist()
-      expect(await tree.findItem({ label: 'Nested Sub Collection' })).to.exist()
+      expect(await tree.findItem(':label(Sub Root 2)')).to.exist()
+      expect(await tree.findItem(':label(Nested Sub Collection)')).to.exist()
     })
 
     it('should persist the state of expanded children when parent collapsed', async () => {
@@ -141,7 +141,7 @@ describe('<TreeBrowser />', async () => {
 
       expect(items.length).to.equal(4)
 
-      const subCollection = await tree.findItem({ label: 'Sub Root 1' })
+      const subCollection = await tree.findItem(':label(Sub Root 1)')
 
       await subCollection.click()
 
@@ -181,13 +181,13 @@ describe('<TreeBrowser />', async () => {
 
       expect(items.length).to.equal(4)
 
-      await (await tree.findItem({ label: 'Sub Root 1' })).click()
+      await (await tree.findItem(':label(Sub Root 1)')).click()
 
       items = await tree.findAllItems()
 
       expect(items.length).to.equal(4)
 
-      expect(await tree.findItem({ label: 'Nested Sub Collection', expectEmpty: true }))
+      expect(await tree.findItem(':label(Nested Sub Collection)', { expectEmpty: true }))
         .to.not.exist()
     })
   })
@@ -222,13 +222,13 @@ describe('<TreeBrowser />', async () => {
 
       const tree = await TreeBrowserLocator.find()
 
-      const item = await tree.findItem({ label: 'Root Directory' })
+      const item = await tree.findItem(':label(Root Directory)')
 
       await item.click()
 
       expect(item.getAttribute('aria-selected')).to.exist()
 
-      const nestedItem = await tree.findItem({ label: 'Item 1' })
+      const nestedItem = await tree.findItem(':label(Item 1)')
 
       await nestedItem.click()
 
@@ -264,7 +264,7 @@ describe('<TreeBrowser />', async () => {
       )
       const tree = await TreeBrowserLocator.find()
 
-      const item = await tree.findItem({ label: 'Root Directory' })
+      const item = await tree.findItem(':label(Root Directory)')
 
       expect(item).to.exist()
     })
@@ -301,8 +301,8 @@ describe('<TreeBrowser />', async () => {
         />
       )
       const tree = await TreeBrowserLocator.find()
-      const item = await tree.findItem({ label: 'Root Directory' })
-      const icons = await item.findAll({ tag: 'svg', title: 'Custom icon' })
+      const item = await tree.findItem(':label(Root Directory)')
+      const icons = await item.findAll('svg:title(Custom icon)')
 
       expect(icons.length).to.equal(1)
     })
@@ -318,7 +318,7 @@ describe('<TreeBrowser />', async () => {
       )
       const tree = await TreeBrowserLocator.find()
 
-      expect(await tree.find({ tag: 'svg', expectEmpty: true })).to.not.exist()
+      expect(await tree.find('svg', { expectEmpty: true })).to.not.exist()
     })
 
     it('should call onCollectionToggle when expanding and collapsing with mouse', async () => {
@@ -351,7 +351,7 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      const item = await tree.find({ label: 'Root Directory' })
+      const item = await tree.find(':label(Root Directory)')
 
       await item.focus()
 
@@ -376,12 +376,9 @@ describe('<TreeBrowser />', async () => {
       )
       const tree = await TreeBrowserLocator.find()
 
-      const item = await tree.findItem({ label: 'Root Directory' })
+      const item = await tree.findItem(':label(Root Directory)')
 
       await item.click()
-      await item.focus()
-
-      expect(item.focused()).to.be.true()
 
       await item.keyDown('space')
       await item.keyDown('enter')
@@ -426,8 +423,8 @@ describe('<TreeBrowser />', async () => {
       )
 
       const tree = await TreeBrowserLocator.find()
-      const item = await tree.findItem({ label: 'Item 1' })
-      const icons = await item.findAll({ tag: 'svg', title: 'Custom icon' })
+      const item = await tree.findItem(':label(Item 1)')
+      const icons = await item.findAll('svg:title(Custom icon)')
 
       expect(icons.length).to.equal(1)
     })
@@ -469,7 +466,7 @@ describe('<TreeBrowser />', async () => {
           treeLabel="Test treeLabel"
         />
       )
-      const tree = await TreeBrowserLocator.find({ label: 'Test treeLabel' })
+      const tree = await TreeBrowserLocator.find(':label(Test treeLabel)')
       expect(tree).to.exist()
     })
 
@@ -509,7 +506,7 @@ describe('<TreeBrowser />', async () => {
 
       expect(item.getAttribute('aria-selected')).to.equal('true')
 
-      const nestedItem = await tree.findItem({ label: 'Sub Root 1' })
+      const nestedItem = await tree.findItem(':label(Sub Root 1)')
 
       expect(nestedItem.getAttribute('aria-selected')).to.equal('false')
     })
@@ -524,7 +521,7 @@ describe('<TreeBrowser />', async () => {
         />
       )
 
-      const tree = await TreeBrowserLocator.find({ focusable: true })
+      const tree = await TreeBrowserLocator.find(':focusable')
       const items = await tree.findAllItems()
 
       await tree.focus()
@@ -785,6 +782,7 @@ describe('<TreeBrowser />', async () => {
       await firstItem.focus()
 
       await firstItem.keyDown('end')
+
       expect(lastItem.focused()).to.be.true()
 
       items = await tree.findAllItems()

@@ -39,13 +39,13 @@ describe('<Pill />', async () => {
   it('should display text', async () => {
     await mount(<Pill text="Overdue" />)
     const pill = await PillLocator.find()
-    expect(await pill.find({ contains: 'Overdue' })).to.exist()
+    expect(await pill.find(':contains(Overdue)')).to.exist()
   })
 
   it('should render without a Tooltip when text overflows max-width', async () => {
     await mount(<Pill text="hello" />)
     const pill = await PillLocator.find()
-    expect(await pill.findTooltip({ expectEmpty: true })).to.not.exist()
+    expect(await pill.findTooltipContent({ expectEmpty: true })).to.not.exist()
   })
 
   it('should render with a Tooltip when text overflows max-width', async () => {
@@ -53,12 +53,12 @@ describe('<Pill />', async () => {
     await mount(<Pill text={text} />)
 
     const pill = await PillLocator.find()
-    const tooltip = await pill.findTooltip()
 
-    expect(tooltip).to.exist()
+    await pill.focus()
 
-    const content = await tooltip.findPopoverContent()
-    expect(content.getTextContent()).to.equal(text)
+    const tooltip = await pill.findTooltipContent()
+
+    expect(tooltip.getTextContent()).to.equal(text)
   })
 
   it('should meet a11y standards', async () => {

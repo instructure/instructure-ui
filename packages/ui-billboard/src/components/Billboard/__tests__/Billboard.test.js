@@ -44,10 +44,7 @@ describe('<Billboard />', async () => {
       />
     )
     const billboard = within(subject.getDOMNode())
-    const heading = billboard.find({
-      tag: 'h2',
-      contains: 'Test heading',
-    })
+    const heading = billboard.find('h2:contains(Test heading)')
     expect(heading).to.exist()
   })
 
@@ -58,9 +55,7 @@ describe('<Billboard />', async () => {
       />
     )
     const billboard = within(subject.getDOMNode())
-    const link = await billboard.find({
-      tag: 'a'
-    })
+    const link = await billboard.find('a')
     expect(link.getAttribute('href')).equal('#')
   })
 
@@ -72,9 +67,7 @@ describe('<Billboard />', async () => {
       />
     )
     const billboard = within(subject.getDOMNode())
-    const button = await billboard.find({
-      tag: 'button'
-    })
+    const button = await billboard.find('button')
 
     await button.click()
 
@@ -91,9 +84,7 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = within(subject.getDOMNode())
-      const link = await billboard.find({
-        tag: 'a'
-      })
+      const link = await billboard.find('a')
 
       expect(link.getAttribute('aria-disabled')).to.equal('true')
     })
@@ -123,9 +114,7 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = within(subject.getDOMNode())
-      const link = await billboard.find({
-        tag: 'a'
-      })
+      const link = await billboard.find('a')
 
       expect(link.getAttribute('aria-disabled')).to.equal('true')
     })

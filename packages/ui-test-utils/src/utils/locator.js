@@ -23,68 +23,40 @@
  */
 
 import { findAllByQuery } from './queries'
-import { querySelectorAll, parseQueryArguments } from './query-helpers'
-import { matchElementByLocator } from './matchers'
+import { parseQueryArguments } from './parseQueryArguments'
+import { querySelectorAllWithin } from './selector'
 import { firstOrNull } from './firstOrNull'
 
-export default (locatorAttribute, customMethods = {}) => {
-  return class Locator {
-    static customMethods = customMethods
-    static locator = locatorAttribute
-
-    static findAll (...args) {
-      const { element, selector, options } = parseQueryArguments(...args)
-      return findAllByQuery(Locator.queryAll, element, selector, {
-        ...options,
-        customMethods: {
-          ...Locator.customMethods,
-          ...options.customMethods
-        }
-      })
-    }
-
-    static async find (...args) {
-      return firstOrNull(await Locator.findAll(...args))
-    }
-
-    static queryAll (element, selector, options) {
-      // find all of the component root nodes that match the locator...
-      const components = querySelectorAll(element, { locator: Locator.locator }, options)
-      if (selector) {
-        // if there is a selector, query each component for matches...
-        return components.reduce((previouResults, element) => {
-          let results = querySelectorAll(element, selector, options)
-          results = results
-            .map((result) => {
-              const root = findClosestComponentRoot(result, Locator.locator)
-              // ignore matches that are in a nested component...
-              return (root !== element) ? null : root
-            })
-            .filter(result => result !== null)
-          return [ ...previouResults, ...results]
-        }, [])
-      } else {
-        // otherwise just return the component root nodes
-        return components
-      }
-    }
-
-    static query (...args) {
-      return firstOrNull(Locator.queryAll(...args))
-    }
+export function locator (componentSelector, customMethods = {}) {
+  const queryAll = (element, selector, options) => {
+    return querySelectorAllWithin(componentSelector, element, selector, options)
   }
-}
 
-function findClosestComponentRoot (element, locator) {
-  if (matchElementByLocator(element, locator)) {
-    return element
-  } else {
-    let parent = element.parentNode
+  const query = (...args) => {
+    return firstOrNull(queryAll(...args))
+  }
 
-    while (parent && !matchElementByLocator(parent, locator) && parent !== document) {
-      parent = parent.parentNode
-    }
+  const findAll = (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return findAllByQuery(queryAll, element, selector, {
+      ...options,
+      customMethods: {
+        ...customMethods,
+        ...options.customMethods
+      }
+    })
+  }
 
-    return (parent && matchElementByLocator(parent, locator)) ? parent : null
+  const find = async (...args) => {
+    return firstOrNull(await findAll(...args))
+  }
+
+  return {
+    customMethods,
+    selector: componentSelector,
+    query,
+    queryAll,
+    findAll,
+    find
   }
 }
