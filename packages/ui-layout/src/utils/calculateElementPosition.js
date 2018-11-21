@@ -202,6 +202,12 @@ class PositionedElement {
       offsetY = offsetY + (child.top - parent.top)
       offsetX = offsetX + (child.left - parent.left)
 
+      if (parents[i] === ownerDocument(this.node).body) {
+        // accounts for any margin on body
+        offsetY = offsetY + parent.top
+        offsetX = offsetX + parent.left
+      }
+
       scrollY = scrollY + this.normalizeScrollTop(parents[i])
     }
     // Account for any scrolling on positioned parents
