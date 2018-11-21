@@ -26,14 +26,14 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
-import FormPropTypes from '../../utils/FormPropTypes'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import Locale from '@instructure/ui-i18n/lib/Locale'
+import { FormFieldGroup } from '@instructure/ui-form-field'
 
 import DateInput from '../DateInput/index'
 import TimeInput from '../TimeInput/index'
-import FormFieldGroup from '../FormFieldGroup/index'
 
 /**
 ---

@@ -24,15 +24,14 @@
 
 import React from 'react'
 import FormFieldGroup from '../index'
-import TextInput from '../../TextInput'
 
 describe('<FormFieldGroup />', () => {
   const testbed = new Testbed(
     (
       <FormFieldGroup description="Please enter your full name">
-        <TextInput label="First" />
-        <TextInput label="Middle" />
-        <TextInput label="Last" />
+        <label>First: <input /></label>
+        <label>Middle: <input /></label>
+        <label>Last: <input /></label>
       </FormFieldGroup>
     )
   )
@@ -45,7 +44,7 @@ describe('<FormFieldGroup />', () => {
 
   it('can handle null children', () => {
     const subject = testbed.render({
-      children: [<TextInput label="First" key="foo" />, null]
+      children: [<label key="foo">First: <input /></label>, null]
     })
 
     expect(subject).to.be.present()

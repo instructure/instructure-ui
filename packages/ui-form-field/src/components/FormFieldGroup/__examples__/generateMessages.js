@@ -22,4 +22,21 @@
  * SOFTWARE.
  */
 
-export { default } from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+const generateText = (type) => `${type} message`
+
+export default function generateMessages (
+  types = ['hint', 'success', 'error'],
+  withEmptyMessage = true,
+  text = generateText
+) {
+  const messages = [
+    ...types.map((type) => {
+      return [{
+        text: typeof text === 'function' ? text(type) : text,
+        type
+      }]
+    })
+  ]
+
+  return withEmptyMessage ? [[], ...messages] : messages
+}

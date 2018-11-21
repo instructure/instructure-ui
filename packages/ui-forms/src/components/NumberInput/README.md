@@ -2,6 +2,8 @@
 describes: NumberInput
 ---
 
+**DEPRECATED:** use the [controlled `NumberInput` from ui-number-input](#NumberInputControlled) instead.
+
 A standard number input field with placeholder
 
 ```js

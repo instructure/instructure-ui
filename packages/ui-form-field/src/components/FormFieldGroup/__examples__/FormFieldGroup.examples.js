@@ -22,4 +22,35 @@
  * SOFTWARE.
  */
 
-export { default } from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import React from 'react'
+import generateMessages from './generateMessages'
+
+export default {
+  sections: 'layout',
+  maxExamplesPerPage: 50,
+  permutations: [
+    'layout',
+    'rowSpacing',
+    'colSpacing',
+    'vAlign',
+    'startAt',
+    { messages: generateMessages() }
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        description: 'A form field group',
+        children: [
+          <input key="foo" type="text" />,
+          <input key="bar" type="text" />,
+          <input key="bar" type="text" />
+        ]
+      },
+      filter: (
+        props.layout === 'columns' && props.rowSpacing !== 'none' ||
+        props.layout === 'rows' && props.colSpacing !== 'none' ||
+        props.layout !== 'inline' && props.vAlign !== 'middle'
+      )
+    }
+  }
+}

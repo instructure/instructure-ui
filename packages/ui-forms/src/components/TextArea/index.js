@@ -27,22 +27,21 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import themeable from '@instructure/ui-themeable'
-import debounce from '@instructure/ui-utils/lib/debounce'
+import FormField from '@instructure/ui-form-field'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
+import debounce from '@instructure/ui-utils/lib/debounce'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import px from '@instructure/ui-utils/lib/px'
+import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 
 import styles from './styles.css'
 import theme from './theme'
-
-import FormPropTypes from '../../utils/FormPropTypes'
-import FormField from '../FormField'
 
 /**
 ---

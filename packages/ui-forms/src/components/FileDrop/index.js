@@ -25,15 +25,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-
-import View from '@instructure/ui-layout/lib/components/View'
-import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import keycode from 'keycode'
 
-import FormPropTypes from '../../utils/FormPropTypes'
-import FormFieldMessages from '../FormField/FormFieldMessages'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import View from '@instructure/ui-layout/lib/components/View'
+import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import themeable from '@instructure/ui-themeable'
+import { FormFieldMessages } from '@instructure/ui-form-field'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

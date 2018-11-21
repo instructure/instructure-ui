@@ -24,39 +24,21 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
-import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
-import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
-
-import Locale from '@instructure/ui-i18n/lib/Locale'
-import Decimal from '@instructure/ui-i18n/lib/Decimal'
-
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import Decimal from '@instructure/ui-i18n/lib/Decimal'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import Locale from '@instructure/ui-i18n/lib/Locale'
+import NumberInputControlled from '@instructure/ui-number-input'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
-
-import themeable from '@instructure/ui-themeable'
-
-import styles from './styles.css'
-import theme from './theme'
-
-import FormPropTypes from '../../utils/FormPropTypes'
-import FormField from '../FormField'
-
-const keyDirections = {
-  ArrowUp: 1,
-  ArrowDown: -1
-}
 
 /**
 ---
 category: components
 ---
 **/
-@themeable(theme, styles)
 class NumberInput extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
@@ -167,16 +149,11 @@ class NumberInput extends Component {
     onBlur: function (event) {}
   }
 
-  constructor (props) {
-    super()
-    this._defaultId = generateElementId('NumberInput')
+  state = {
+    value: this.defaultValue || ''
   }
 
   _input = null
-
-  state = {
-    focus: false
-  }
 
   componentWillReceiveProps (nextProps, nextContext) {
     if (!this._input.value) return
@@ -192,7 +169,7 @@ class NumberInput extends Component {
     if (decimalValue.isNaN()) return
 
     const formattedString = this.formatValue(decimalValue, nextLocale, nextPrecision)
-    this._input.value = formattedString
+    this.setState({ value: formattedString })
     nextProps.onChange(null, formattedString, this.normalizeValue(decimalValue, nextPrecision))
   }
 
@@ -355,11 +332,6 @@ class NumberInput extends Component {
     this.props.inputRef.apply(this, [element].concat(args))
   }
 
-  handleFocus = (event) => {
-    this.setState({ focus: true })
-    this.props.onFocus(event)
-  }
-
   handleBlur = (event) => {
     let decimalValue = this.getDecimalValue(event.target.value)
 
@@ -376,41 +348,28 @@ class NumberInput extends Component {
     const formattedString = decimalValue.isNaN()
       ? this._input.value
       : this.formatValue(decimalValue, this.locale)
-    if (!this.isControlled()) this._input.value = formattedString
-
-    this.setState({ focus: false })
+    if (!this.isControlled()) {
+      this.setState({ value: formattedString })
+    }
 
     this.props.onChange(event, formattedString, this.normalizeValue(decimalValue))
     this.props.onBlur(event)
   }
 
-  handleChange = (event) => {
-    const decimalValue = this.getDecimalValue(event.target.value)
-    this.props.onChange(event, event.target.value, this.normalizeValue(decimalValue))
+  handleChange = (event, value) => {
+    const decimalValue = this.getDecimalValue(value)
+    this.props.onChange(event, value, this.normalizeValue(decimalValue))
+    if (!this.isControlled()) {
+      this.setState({ value })
+    }
   }
 
-  handleKeyDown = (event) => {
-    this.props.onKeyDown(event)
-
-    const dir = keyDirections[event.key]
-    if (!dir) return
-
-    event.preventDefault()
-    this.handleStep(event, dir)
+  handleIncrement = (event) => {
+    this.handleStep(event, 1)
   }
 
-  handleArrowClick = (event, step) => {
-    event.preventDefault()
-    this.handleStep(event, step)
-    this.focus()
-  }
-
-  handleClickUp = (event) => {
-    this.handleArrowClick(event, 1)
-  }
-
-  handleClickDown = (event) => {
-    this.handleArrowClick(event, -1)
+  handleDecrement = (event) => {
+    this.handleStep(event, -1)
   }
 
   handleStep (event, step) {
@@ -419,92 +378,60 @@ class NumberInput extends Component {
     const decimalValue = this.applyStep(step)
     if (!decimalValue.isNaN()) {
       const formattedString = decimalValue.toLocaleString(this.locale)
-      if (!this.isControlled()) this._input.value = formattedString
+      if (!this.isControlled()) {
+        this.setState({ value: formattedString })
+      }
       this.props.onChange(event, formattedString, this.normalizeValue(decimalValue))
     }
   }
 
-  renderArrows () {
-    return (
-      <span className={styles.arrowContainer}>
-        <span
-          className={styles.arrow}
-          onMouseDown={this.handleClickUp}
-          role="presentation"
-        >
-          <IconArrowOpenUp />
-        </span>
-        <span
-          className={styles.arrow}
-          onMouseDown={this.handleClickDown}
-          role="presentation"
-        >
-          <IconArrowOpenDown />
-        </span>
-      </span>
-    )
-  }
-
   render () {
     const {
-      size,
-      showArrows,
-      placeholder,
-      value,
       disabled,
+      id,
+      inline,
+      label,
+      layout,
+      messages,
+      onFocus,
+      onKeyDown,
+      placeholder,
       readOnly,
       required,
-      width,
-      inline
+      showArrows,
+      size,
+      value,
+      width
     } = this.props
 
     return (
-      <FormField
-        {...pickProps(this.props, FormField.propTypes)}
-        id={this.id}
-      >
-        <span
-          className={classnames(styles.inputWidth, {
-            [styles.invalid]: this.invalid,
-            [styles.focus]: this.state.focus,
-            [styles.inline]: inline
-          })}
-          style={width ? { width } : null}
-        >
-          <span
-            className={classnames(styles.inputContainer, {
-              [styles.invalid]: this.invalid,
-              [styles.disabled]: disabled,
-              [styles[size]]: size,
-              [styles.focus]: this.state.focus,
-            })}
-          >
-            <input
-              {...omitProps(this.props, NumberInput.propTypes)}
-              className={styles.input}
-              onChange={this.handleChange}
-              onKeyDown={this.handleKeyDown}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-              type="text"
-              inputMode="numeric"
-              value={this.conditionalFormat(value)}
-              defaultValue={this.defaultValue}
-              placeholder={placeholder}
-              ref={this.handleRef}
-              id={this.id}
-              required={required}
-              aria-required={required}
-              aria-invalid={this.invalid ? 'true' : null}
-              disabled={disabled || readOnly}
-              aria-disabled={disabled || readOnly ? 'true' : null}
-            />
-            {showArrows ? this.renderArrows() : null}
-          </span>
-        </span>
-      </FormField>
+      <NumberInputControlled
+        disabled={disabled}
+        id={id}
+        inline={inline}
+        inputRef={this.handleRef}
+        label={label}
+        layout={layout}
+        messages={messages}
+        onBlur={this.handleBlur}
+        onChange={this.handleChange}
+        onDecrement={this.handleDecrement}
+        onFocus={onFocus}
+        onIncrement={this.handleIncrement}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
+        readOnly={readOnly}
+        required={required}
+        showArrows={showArrows}
+        size={size}
+        value={this.conditionalFormat(value || this.state.value)}
+        width={width}
+      />
     )
   }
 }
 
-export default NumberInput
+export default deprecated('5.35.0', null, changedPackageWarning(
+  'ui-forms',
+  'ui-number-input'
+))(NumberInput)

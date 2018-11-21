@@ -26,15 +26,14 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import { FormFieldGroup } from '@instructure/ui-form-field'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import RadioInput from '../RadioInput'
-
-import FormPropTypes from '../../utils/FormPropTypes'
-import FormFieldGroup from '../FormFieldGroup'
 
 /**
 ---

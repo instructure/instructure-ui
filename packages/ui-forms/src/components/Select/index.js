@@ -25,13 +25,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import error from '@instructure/ui-utils/lib/error'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import FormPropTypes from '../../utils/FormPropTypes'
 import SelectSingle from './SelectSingle'
 import SelectMultiple from './SelectMultiple'
 import parseOptions from './utils/parseOptions'

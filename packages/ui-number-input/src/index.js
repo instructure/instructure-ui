@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export { default } from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+export { default } from './components/NumberInput'

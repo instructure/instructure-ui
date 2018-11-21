@@ -47,6 +47,7 @@
     "@instructure/ui-menu": "^5",
     "@instructure/ui-motion": "^5",
     "@instructure/ui-navigation": "^5",
+    "@instructure/ui-number-input": "^5",
     "@instructure/ui-overlays": "^5",
     "@instructure/ui-pages": "^5",
     "@instructure/ui-pagination": "^5",

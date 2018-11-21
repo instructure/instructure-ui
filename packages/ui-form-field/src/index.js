@@ -22,4 +22,6 @@
  * SOFTWARE.
  */
 
-export { default } from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+export { default } from './components/FormField'
+export * from './components/FormField'
+export { default as FormFieldGroup } from './components/FormFieldGroup'

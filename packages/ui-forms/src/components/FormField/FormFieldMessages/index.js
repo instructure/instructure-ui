@@ -22,64 +22,10 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormField/FormFieldMessages'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
-import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-
-import styles from './styles.css'
-import theme from './theme'
-
-import FormPropTypes from '../../../utils/FormPropTypes'
-import FormFieldMessage from '../FormFieldMessage'
-
-/**
----
-parent: FormField
----
-
-A FormFieldMessages component
-
-```js
----
-example: true
----
-<FormFieldMessages messages={[
-  { text: 'Invalid name', type: 'error' },
-  { text: 'Good job!', type: 'success' },
-  { text: 'Full name, first and last', type: 'hint' },
-]} />
-```
-**/
-@themeable(theme, styles)
-export default class FormFieldMessages extends Component {
-  static propTypes = {
-    /**
-    * object with shape: `{
-    * text: PropTypes.string,
-    * type: PropTypes.oneOf(['error', 'hint', 'success', 'screenreader-only'])
-    *   }`
-    */
-    messages: PropTypes.arrayOf(FormPropTypes.message)
-  }
-
-  render () {
-    const {messages} = this.props
-    return messages && messages.length > 0 ? (
-      <span className={styles.root} {...omitProps(this.props, FormFieldMessages.propTypes)}>
-        {
-          messages.map((msg, i) => {
-            return (
-              <span key={`error${i}`} className={styles.message}>
-                <FormFieldMessage variant={msg.type}>
-                  {msg.text}
-                </FormFieldMessage>
-              </span>
-            )
-          })
-        }
-      </span>
-    ) : null
-  }
-}
+export default deprecated('5.35.0', null, changedPackageWarning(
+  'ui-forms',
+  'ui-form-field'
+))(FormFieldMessages)

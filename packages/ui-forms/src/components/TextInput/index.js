@@ -27,16 +27,15 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import themeable from '@instructure/ui-themeable'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import FormField from '@instructure/ui-form-field'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import themeable from '@instructure/ui-themeable'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
-
-import FormPropTypes from '../../utils/FormPropTypes'
-import FormField from '../FormField'
 
 /**
 ---
