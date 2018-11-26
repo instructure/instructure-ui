@@ -178,20 +178,23 @@ example: true
   <br />
   <Select
     label="Multiple"
+    assistiveText="Start typing to search. Press the down arrow to select multiple options."
     defaultOption={['foo', 'bar']}
     formatSelectedOption={option => {
      return (
        <span>
          <Badge type="notification" variant={option.label === 'Foo' ? "primary" : "success"} standalone margin="0 xx-small xxx-small 0" />
-         {option.label}
+         <AccessibleContent alt={`Remove ${option.label}`}>{option.label}</AccessibleContent>
        </span>
      )}
     }
     multiple
+
     onChange={(event, options) => console.log(options)}
   >
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
+    <option value="baz">Baz</option>
   </Select>
 </View>
 ```
@@ -219,6 +222,9 @@ example: true
   <Select
     label="Multiple"
     defaultOption={['foo', 'bar']}
+    formatSelectedOption={(tag) => (
+      <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
+    )}
     multiple
     disabled
   >
@@ -560,6 +566,9 @@ render(
     <Example
       label="Choose a few states"
       defaultOption={[{ value: '1', label: 'Alaska' }]}
+      formatSelectedOption={(tag) => (
+        <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
+      )}
       multiple
     />
   </div>
@@ -614,6 +623,9 @@ class Example extends React.Component {
         <Select
           editable
           {...props}
+          formatSelectedOption={(tag) => (
+            <AccessibleContent alt={`Remove ${tag.label}`}>{tag.label}</AccessibleContent>
+          )}
           selectedOption={this.state.option}
           onChange={this.handleChange}
         >
