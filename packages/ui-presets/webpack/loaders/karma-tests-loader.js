@@ -72,7 +72,7 @@ module.exports = function (source, map) {
           const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
           const testbedTests = testbedFileRequires.join(';\n')
           result = `
-describe('ui-testbed', function () {
+describe('ui-testbed', () => {
   require('${require.resolve('@instructure/ui-testbed')}');
   ${testbedTests}
 })
@@ -83,7 +83,7 @@ describe('ui-testbed', function () {
       if (testFilePaths.length > 0) {
         const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         result = `
-describe('ui-test-utils', async function () {
+describe('ui-test-utils', async () => {
 ${testFileRequires.join(';\n')}
 })
 `

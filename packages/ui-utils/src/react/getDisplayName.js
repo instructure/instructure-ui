@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import warning from '../warning'
+import error from '../error'
 
 /**
  * ---
@@ -37,10 +37,11 @@ import warning from '../warning'
  * @returns {String} the component displayName
  */
 export default function getDisplayName (Component) {
-  warning(
+  error(
     typeof Component === 'string' || typeof Component.displayName !== 'undefined',
-    '%s is missing the property "displayName".',
-    Component.name
+    Component.name,
+    `is missing the property \`displayName\`.`,
+
   )
   return typeof Component === 'string' ? Component : Component.displayName
 }

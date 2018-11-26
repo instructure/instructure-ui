@@ -31,6 +31,7 @@ const debug = Boolean(process.env.DEBUG)
 const withCoverage = Boolean(process.env.COVERAGE)
 
 const CHROME_FLAGS = [
+  '--test-type',
   '--no-sandbox',
   '--disable-setuid-sandbox',
   '--use-mock-keychain',
@@ -40,6 +41,7 @@ const CHROME_FLAGS = [
   '--disable-popup-blocking',
   '--disable-translate',
   '--disable-extensions',
+  '--disable-web-security',
   '--use-fake-ui-for-media-stream',
   '--use-fake-device-for-media-stream',
   '--allow-file-access-from-files'

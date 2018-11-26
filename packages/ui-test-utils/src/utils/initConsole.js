@@ -27,18 +27,5 @@ export default function initConsole () {
   if (typeof console.clear === 'function') {
     console.clear()
   }
-  process.once('unhandledRejection', (error) => {
-    console.error('Unhandled rejection: ' + error.stack)
-    process.exit(1)
-  })
-  // so that we can test for prop type validation errors in our tests:
-  const consoleError = console.error
-  console.error = (firstMessage, ...rest) => {
-    if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
-      throw new Error('Unexpected React Warning: ' + firstMessage)
-    }
-
-    return consoleError(firstMessage, ...rest)
-  }
   /* eslint-enable no-console */
 }

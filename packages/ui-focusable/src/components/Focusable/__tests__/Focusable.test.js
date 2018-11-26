@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, find, mount, spy } from '@instructure/ui-test-utils'
+import { expect, find, mount, spy, stub } from '@instructure/ui-test-utils'
 
 import Focusable from '../index'
 
@@ -130,10 +130,10 @@ describe('<Focusable />', async () => {
     expect(lastCall(renderSpy).focused).to.equal(true)
   })
 
-  it('should warn when there is not exactly 1 focusable descendant', async () => {
-    const warning = spy(console, 'warn')
-
-    const subject = await mount(
+  it('should warn when there is more than one focusable descendant', async () => {
+    const consoleError = stub(console, 'error')
+    const warning = 'Warning: [Focusable] Exactly one focusable child is required (2 found).'
+    await mount(
       <Focusable>
         {(args) => {
           return (
@@ -147,18 +147,24 @@ describe('<Focusable />', async () => {
         }}
       </Focusable>
     )
+    expect(consoleError)
+      .to.be.calledWithExactly(warning)
+  })
 
-    expect(
-      lastCall(warning).includes('Exactly one focusable child is required (2 found)')
-    ).to.be.true()
-
-    await subject.setProps({
-      children: (args) => <span>hello!</span> // eslint-disable-line react/display-name
-    })
-
-    expect(
-      lastCall(warning).includes('Exactly one focusable child is required (0 found)')
-    ).to.be.true()
+  it('should warn when there are no focusable descendants', async () => {
+    const consoleError = stub(console, 'error')
+    const warning = 'Warning: [Focusable] Exactly one focusable child is required (0 found).'
+    await mount(
+      <Focusable>
+        {(args) => {
+          return (
+            <span>hello!</span>
+          )
+        }}
+      </Focusable>
+    )
+    expect(consoleError)
+      .to.be.calledWithExactly(warning)
   })
 
   it('should attach event listener correctly even when the focusable element is not the root', async () => {

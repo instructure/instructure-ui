@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import InputModeListener from '@instructure/ui-utils/lib/dom/InputModeListener'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 
@@ -132,7 +132,7 @@ class Focusable extends Component {
     const tabbable = findTabbable(this, true) || []
     const tabbableCount = tabbable && tabbable.length || 0
 
-    warning(tabbableCount === 1, `[Focusable] Exactly one focusable child is required (${tabbableCount} found)`)
+    error(tabbableCount === 1, 'Focusable', `Exactly one focusable child is required (${tabbableCount} found).`)
 
     const focusable = tabbable ? tabbable[0] : false
 

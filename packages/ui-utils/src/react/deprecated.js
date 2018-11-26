@@ -108,26 +108,43 @@ export const deprecatePropValues = (propType, deprecated = [], message) => {
   }
 }
 
-function warnDeprecatedProps (componentName, version, props, oldProps, message) {
+function warnDeprecatedProps (componentName, version, props, oldProps, message = '') {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
         ? oldProps[oldProp]
         : null
 
+      const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
+
       warning(
         false,
-        '[%s] `%s` was deprecated in %s%s. %s',
-        componentName, oldProp, version, (newProp ? `. Use \`${newProp}\` instead` : ''), message || ''
+        `[${componentName}] \`${oldProp}\` was deprecated in ${version}${newPropMessage}. ${message}`,
       )
     }
   })
 }
 
+/**
+ * ---
+ * category: utilities
+ * ---
+ * @param {String} version the version of the package in which the component or function was deprecated
+  * @param {String} componentName the displayName of the component or Function.name of the utility function
+ * @param {String} message a message to display as a console error in DEV env when condition is false
+ */
 export function warnDeprecatedComponent (version, componentName, message) {
-  warning(false, '[%s] was deprecated in version %s. %s', componentName, version, message || '')
+  warning(false, `[${componentName}] was deprecated in version ${version}. ${message || ''}`)
 }
 
+/**
+ * ---
+ * category: utilities
+ * ---
+ * @param {String} prevPackage the previous name of the package
+ * @param {String} newPackage the new version of the package
+ * @return {String} the formatted warning string
+ */
 export function changedPackageWarning (prevPackage, newPackage) {
   return `It has been moved from @instructure/${prevPackage} to @instructure/${newPackage}.`
 }

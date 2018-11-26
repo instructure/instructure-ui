@@ -52,41 +52,31 @@ describe('@deprecated', async () => {
     })(TestComponent)
 
     it('should warn when suggesting new prop when using old prop', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
+      const warning = 'Warning: [TestComponent] `foo` was deprecated in 2.1.0. Use `bar` instead.'
 
       await mount(<DeprecatedComponent foo="Jane" />)
 
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] `%s` was deprecated in %s%s. %s',
-        'TestComponent',
-        'foo',
-        '2.1.0',
-        '. Use `bar` instead',
-        ''
-      )
+      expect(consoleWarn)
+        .to.have.been.calledWithMatch(warning)
     })
 
     it('should warn when using old prop with no new prop', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
+      const warning = 'Warning: [TestComponent] `baz` was deprecated in 2.1.0.'
 
       await mount(<DeprecatedComponent baz="Goodbye" />)
 
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] `%s` was deprecated in %s%s. %s',
-        'TestComponent',
-        'baz',
-        '2.1.0',
-        '',
-        ''
-      )
+      expect(consoleWarn)
+        .to.have.been.calledWithMatch(warning)
     })
 
     it('should not output a warning using new prop', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
 
       await mount(<DeprecatedComponent bar="Jane" />)
 
-      expect(warning).to.not.have.been.called()
+      expect(consoleWarn).to.not.have.been.called()
     })
   })
 
@@ -94,16 +84,13 @@ describe('@deprecated', async () => {
     const DeprecatedComponent = deprecated('3.4.0')(TestComponent)
 
     it('should warn that the entire component is deprecated if no old props are supplied', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
+      const warning = 'Warning: [TestComponent] was deprecated in version 3.4.0.'
 
       await mount(<DeprecatedComponent />)
 
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] was deprecated in version %s. %s',
-        'TestComponent',
-        '3.4.0',
-        ''
-      )
+      expect(consoleWarn)
+        .to.have.been.calledWithMatch(warning)
     })
   })
 
@@ -114,18 +101,15 @@ describe('@deprecated', async () => {
     ))(TestComponent)
 
     it('should warn that the component is deprecated and output a warning that the package changed', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
+      const warning = [
+        'Warning: [TestComponent] was deprecated in version 5.0.0.',
+        `It has been moved from @instructure/ui-core to @instructure/ui-portal.`
+      ].join(' ')
 
       await mount(<DeprecatedComponent />)
 
-      const message = `It has been moved from @instructure/ui-core to @instructure/ui-portal.`
-
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] was deprecated in version %s. %s',
-        'TestComponent',
-        '5.0.0',
-        message
-      )
+      expect(consoleWarn).to.have.been.calledWithMatch(warning)
     })
   })
 })

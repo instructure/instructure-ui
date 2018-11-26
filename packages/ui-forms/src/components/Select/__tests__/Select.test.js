@@ -25,6 +25,7 @@
 import React from 'react'
 import Select from '../index'
 
+/*  eslint-disable mocha/no-synchronous-tests */
 describe('<Select />', () => {
   const testbed = new Testbed(
     <Select
@@ -176,3 +177,4 @@ describe('<Select />', () => {
     })
   })
 })
+/*  eslint-enable mocha/no-synchronous-tests */

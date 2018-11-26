@@ -53,7 +53,7 @@ describe('<ApplyTextDirection />', async () => {
       <ApplyTextDirection>
         Hello world
       </ApplyTextDirection>
-    , context)
+    , { context })
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('rtl')
   })
@@ -64,7 +64,7 @@ describe('<ApplyTextDirection />', async () => {
       <ApplyTextDirection dir="ltr">
         Hello world
       </ApplyTextDirection>
-    , context)
+    , { context })
 
     expect(subject.getDOMNode().getAttribute('dir')).to.equal('ltr')
   })

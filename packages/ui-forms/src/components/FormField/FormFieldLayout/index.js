@@ -31,7 +31,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -94,11 +94,11 @@ class FormFieldLayout extends Component {
     this._messagesId = props.messagesId || generateElementId('FormFieldLayout-messages')
 
     if (props.inline && props.layout === 'inline') {
-      warning(
+      error(
         !!props.width,
-        `[FormFieldLayout] The inline prop is true, and the layout is set to inline.
-        This will cause a layout issue in Internet Explorer 11 unless you also add a
-        value for the width prop.`
+        'FormFieldLayout',
+        `The 'inline' prop is true, and the 'layout' is set to 'inline'.
+        This will cause a layout issue in Internet Explorer 11 unless you also add a value for the 'width' prop.`
       )
     }
   }

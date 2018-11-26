@@ -27,6 +27,7 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Badge from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Badge.theme', () => {
   describe('with the default theme', () => {
     const variables = Badge.generateTheme()
@@ -56,3 +57,4 @@ describe('Badge.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

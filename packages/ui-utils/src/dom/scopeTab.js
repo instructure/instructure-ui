@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
+ import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
  import findTabbable from './findTabbable'
  import findDOMNode from './findDOMNode'
  import containsActiveElement from './containsActiveElement'
@@ -30,10 +29,10 @@
  import getActiveElement from './getActiveElement'
 
  export default function scopeTab (element, event) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'scopeTab', '5.0.0', changedPackageWarning(
+   warnDeprecatedComponent('5.0.0', 'scopeTab', changedPackageWarning(
      'ui-utils',
      'ui-a11y'
-   ) || '')
+   ))
    const node = findDOMNode(element)
    const tabbable = findTabbable(node)
 

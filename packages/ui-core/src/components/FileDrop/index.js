@@ -22,11 +22,14 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import warning from '@instructure/ui-utils/lib/warning'
+import deprecated, { warnDeprecatedComponent, changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 import FileDrop, { accepts as UIAccepts, getEventFiles as UIGetEventFiles } from '@instructure/ui-forms/lib/components/FileDrop'
 
+const packageWarning = changedPackageWarning(
+  'ui-core',
+  'ui-forms'
+) || ''
 
 export default deprecated('5.0.0', null, changedPackageWarning(
   'ui-core',
@@ -34,17 +37,11 @@ export default deprecated('5.0.0', null, changedPackageWarning(
 ))(FileDrop)
 
 export function accepts (file, acceptProp) {
-  warning(false, '[%s] was deprecated in version %s. %s', 'accepts', '5.0.0', changedPackageWarning(
-    'ui-core',
-    'ui-forms'
-  ) || '')
+  warnDeprecatedComponent(false, '5.0.0', 'accepts', packageWarning)
   return UIAccepts(file, acceptProp)
 }
 
 export function getEventFiles (event, inputEl) {
-  warning(false, '[%s] was deprecated in version %s. %s', 'getEventFiles', '5.0.0', changedPackageWarning(
-    'ui-core',
-    'ui-forms'
-  ) || '')
+  warnDeprecatedComponent(false, '5.0.0', 'getEventFiles', packageWarning)
   return UIGetEventFiles(event, inputEl)
 }

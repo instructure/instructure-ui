@@ -24,7 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import makeThemeVars from '../makeThemeVars'
-
+/* eslint-disable mocha/no-synchronous-tests */
 describe('makeThemeVars', () => {
   it('given a list of variables, should append a prefix and camel case each key', () => {
     const vars = {
@@ -43,3 +43,4 @@ describe('makeThemeVars', () => {
     expect(result['marginXxLarge']).to.equal('baz')
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

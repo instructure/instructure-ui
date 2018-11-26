@@ -31,7 +31,7 @@ export function bindElementToEvents (element, events) {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireKeyboardEvent.bind(null, element, fn)
-      } else if (key === 'focus') {
+      } else if (['focus'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireFocusEvent.bind(null, element, fn)
       } else if (key === 'click') {

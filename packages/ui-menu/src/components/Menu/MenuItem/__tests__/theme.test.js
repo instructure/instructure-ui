@@ -25,6 +25,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import MenuItem from '../index'
 
+/*  eslint-disable mocha/no-synchronous-tests */
 describe('MenuItem.theme', () => {
   describe('with the default theme', () => {
     const variables = MenuItem.generateTheme()
@@ -60,3 +61,4 @@ describe('MenuItem.theme', () => {
     })
   })
 })
+/*  eslint-enable mocha/no-synchronous-tests */

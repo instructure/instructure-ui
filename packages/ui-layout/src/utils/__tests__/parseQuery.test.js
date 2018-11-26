@@ -24,6 +24,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import parseQuery from '../parseQuery'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('@parseQuery', () => {
   it('returns the correct matches for width', () => {
     const query = {small: { minWidth: 100 }, medium: { minWidth: 500 }, large: { maxWidth: 700 }}
@@ -86,3 +87,4 @@ describe('@parseQuery', () => {
     expect(results.qux).to.be.true()
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within, wait } from '@instructure/ui-test-utils'
+import { expect, mount, within, wait, spy } from '@instructure/ui-test-utils'
 import scopeTab from '../scopeTab'
 
 const MOCK_EVENT = {
@@ -32,7 +32,7 @@ const MOCK_EVENT = {
 }
 
 describe('scopeTab', async () => {
-  it('should scope tab within container', async () => {
+  it('output the deprecation warning', async () => {
     const subject = await mount(
       <div>
         <div id="container">
@@ -45,7 +45,7 @@ describe('scopeTab', async () => {
     const fixture = within(subject.getDOMNode())
 
     const container = await fixture.find('#container')
-    const first = await fixture.find('#first')
+    const input = await fixture.find('input')
     const second = await fixture.find('#second')
 
     await second.focus()
@@ -54,31 +54,15 @@ describe('scopeTab', async () => {
       expect(second.focused()).to.be.true()
     })
 
-    scopeTab(container.getDOMNode(), MOCK_EVENT)
-
-    await wait(() => {
-      expect(first.focused()).to.be.true()
-    })
-  })
-
-  it('should not attempt scoping when no tabbable children', async () => {
-    const subject = await mount(
-      <div>
-        <div id="container">
-          Hello
-        </div>
-        <input />
-      </div>
-    )
-
-    const fixture = within(subject.getDOMNode())
-
-    const input = await fixture.find('input')
-    const container = await fixture.find('#container')
-
-    await input.focus()
+    const consoleWarn = spy(console, 'warn')
 
     scopeTab(container.getDOMNode(), MOCK_EVENT)
+
+    expect(consoleWarn)
+      .to.have.been.calledWith([
+        'Warning: [scopeTab] was deprecated in version 5.0.0.',
+        'It has been moved from @instructure/ui-utils to @instructure/ui-a11y.'
+      ].join(' '))
 
     await wait(() => {
       expect(input.focused()).to.be.true()

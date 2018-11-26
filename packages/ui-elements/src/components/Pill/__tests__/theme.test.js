@@ -26,6 +26,7 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Pill from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Pill.theme', () => {
   describe('with the canvas theme', () => {
     const variables = Pill.generateTheme()
@@ -43,3 +44,4 @@ describe('Pill.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

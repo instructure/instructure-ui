@@ -21,23 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React from 'react'
-import ContextBox from '../index'
-
-describe('<ContextBox />', () => {
-  const testbed = new Testbed(<ContextBox>foo</ContextBox>)
-
-  it('should render the children', () => {
-    const subject = testbed.render()
-
-    expect(subject.text())
-      .to.equal('foo')
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done)
-  })
-})
+/**
+ * ---
+ * category: utilities
+ * ---
+ * @param {Boolean} condition a condition that we expect to be true
+ * @param {String} context the displayName of the component or Function.name of the utility function
+ * @param {String} message a message to display as a console error in DEV env when condition is false
+ */
+export default function error (condition, context, message, ...args) {
+  if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+    console.error(`Warning: [${context}] ${message}`, ...args)
+  }
+}

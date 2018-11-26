@@ -21,55 +21,76 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import React from 'react'
+import React, {  Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
+import { getOwnerDocument } from './helpers'
+
 class ReactComponentWrapper {
   mount (element, options = {}) {
-    this.unmount()
-
     const { type, ref, props } = element
     const Wrapper = createMountWrapper(element, options)
+    const doc = getOwnerDocument(element)
 
-    this._mountNode = document.createElement('div')
+    this.unmount()
+
+    this._mountNode = doc.createElement('div')
     this._mountNode.setAttribute('data-ui-test-utils', 'true')
-    document.body.appendChild(this._mountNode)
 
-    return new Promise((resolve, reject) => {
-      let wrapper, resolved
-      try {
-        ReactDOM.render(
-          React.createElement(Wrapper, {
-            Component: type,
-            props: { ...props, ...options.props },
-            context: options.context,
-            ref: (el) => {
-              wrapper = el
-              if (wrapper && !resolved) {
-                resolve({
-                  setProps (newProps) {
-                    return wrapper.setChildProps(newProps)
-                  },
-                  setContext (newContext)  {
-                    return wrapper.setChildContext(newContext)
-                  },
-                  getDOMNode () {
-                    return wrapper.getDOMNode()
-                  }
-                })
-                resolved = true
-              }
-              if (typeof ref === 'function') {
-                ref(el)
-              }
-            }
-          }),
-          this._mountNode
-        )
-      } catch (err) {
-        reject(err)
+    doc.body.appendChild(this._mountNode)
+
+    let result, rendered
+
+    const wrapperRef = (wrapper) => {
+      if (wrapper && !rendered) {
+        result = {
+          setProps (newProps) {
+            return doAsync(() => { wrapper.setChildProps(newProps) })
+          },
+          setContext (newContext)  {
+            return doAsync(() => { wrapper.setChildContext(newContext) })
+          },
+          getDOMNode () {
+            return wrapper.getDOMNode()
+          }
+        }
+        rendered = true
       }
+      if (typeof ref === 'function') {
+        ref(wrapper)
+      }
+    }
+
+    const Element = React.createElement(Wrapper, {
+      Component: type,
+      props: { ...props, ...options.props },
+      context: options.context,
+      ref: wrapperRef
+    })
+
+    const doAsync = (actionFn) => {
+      return new Promise((resolve, reject) => {
+        let error
+        setTimeout(() => {
+          try {
+            actionFn()
+          } catch (e) {
+            // catch unhandeled errors
+            error = e
+          }
+
+          if (error) {
+            return reject(error)
+          } else {
+            return resolve(result)
+          }
+        })
+      })
+    }
+
+    return doAsync(() => {
+      ReactDOM.render(Element, this._mountNode)
     })
   }
 
@@ -84,7 +105,7 @@ class ReactComponentWrapper {
 }
 
 function createMountWrapper (element, options = {}) {
-  class WrapperComponent extends React.Component {
+  class WrapperComponent extends Component {
     static propTypes = {
       Component: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
       props: PropTypes.object.isRequired,
@@ -99,7 +120,6 @@ function createMountWrapper (element, options = {}) {
       super(...args)
       const { props, context } = this.props
       this.state = {
-        mount: true,
         props,
         context
       }
@@ -123,14 +143,12 @@ function createMountWrapper (element, options = {}) {
 
     render () {
       const { Component } = this.props
-      const { mount, props } = this.state
+      const { props } = this.state
 
       const {
         componentRef,
         ...componentProps
       } = props
-
-      if (!mount) return null
 
       return (
         <Component ref={componentRef} {...componentProps} />
@@ -146,6 +164,7 @@ function createMountWrapper (element, options = {}) {
     WrapperComponent.prototype.getChildContext = function getChildContext () {
       return this.state.context
     }
+
     WrapperComponent.childContextTypes = childContextTypes
   }
 

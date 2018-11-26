@@ -26,6 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import Alert from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Alert.theme', () => {
   describe('with the default theme', () => {
     const variables = Alert.generateTheme()
@@ -49,3 +50,4 @@ describe('Alert.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

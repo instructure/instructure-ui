@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, spy, stub, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import Alert from '../index'
 import styles from '../styles.css'
@@ -32,7 +32,7 @@ import styles from '../styles.css'
 describe('<Alert />', async () => {
   let srdiv
 
-  beforeEach(() => {
+  beforeEach(async () => {
     srdiv = document.createElement('div')
     srdiv.id = '_alertLiveRegion'
     srdiv.setAttribute('role', 'alert')
@@ -42,7 +42,7 @@ describe('<Alert />', async () => {
     document.body.appendChild(srdiv)
   })
 
-  afterEach(() => {
+  afterEach(async () => {
     srdiv && srdiv.parentNode && srdiv.parentNode.removeChild(srdiv)
     srdiv = null
   })
@@ -170,18 +170,8 @@ describe('<Alert />', async () => {
     expect(liver.getAttribute("aria-live")).to.equal('polite')
   })
 
-  describe('screen reader only', async () => {
-    let warning
-
-    beforeEach(() => {
-      warning = spy(console, 'warn')
-    })
-
-    afterEach(() => {
-      warning.restore()
-    })
-
-    it('should not render anything when using live region and screen reader only', async () => {
+  describe('with `screenReaderOnly', async () => {
+    it('should not render anything when using `liveRegion`', async () => {
       const liver = document.getElementById('_alertLiveRegion')
       const subject = await mount(
         <Alert
@@ -196,8 +186,10 @@ describe('<Alert />', async () => {
       expect(subject.getDOMNode()).to.not.exist()
     })
 
-    it('should warn if screen reader only without live region', async () => {
-      const subject = await mount(
+    it('should warn if `liveRegion` is not defined', async () => {
+      const consoleError = stub(console, 'error')
+      const warning = 'Warning: [Alert] The \'screenReaderOnly\' prop must be used in conjunction with \'liveRegion\'.'
+      await mount(
         <Alert
           variant="success"
           screenReaderOnly={true}
@@ -205,11 +197,7 @@ describe('<Alert />', async () => {
           Success: Sample alert text.
         </Alert>
       )
-
-      expect(subject.getDOMNode()).to.not.exist()
-      expect(warning).to.have.been.calledWithExactly(
-        `Warning: [Alert] 'screenReaderOnly' must be used in conjunction with 'liveRegion'`
-      )
+      expect(consoleError).to.be.calledWithExactly(warning)
     })
   })
 

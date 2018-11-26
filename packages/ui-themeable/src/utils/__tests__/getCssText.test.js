@@ -25,6 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { getCssTextWithPolyfill, getCssTextWithVariables } from '../getCssText'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('getCssText', () => {
   const prefix = 'ThemeableComponent'
 
@@ -132,3 +133,4 @@ describe('getCssText', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

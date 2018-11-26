@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -84,9 +84,10 @@ export default class Page extends Component {
       defaultFocusElement = tabbable && tabbable[0]
     }
 
-    warning(
+    error(
       defaultFocusElement && defaultFocusElement.focus,
-      '[Page] A default focusable element is required or focus will be lost.'
+      'Page',
+      'A default focusable element is required or focus will be lost.'
     )
 
     return defaultFocusElement

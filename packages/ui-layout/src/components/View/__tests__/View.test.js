@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, spy, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 import View from '../index'
 
 describe('<View />', async () => {
@@ -52,24 +52,25 @@ describe('<View />', async () => {
   })
 
   it('should warn when as=span, display=auto, and vertical margins are set', async () => {
-    const warning = spy(console, 'warn')
-    const subject = await mount(
+    const consoleError = stub(console, 'error')
+    const warning = `Warning: [View] as='span' and display='auto' is inline and will allow for horizontal margins only.`
+    await mount(
       <View as="span" display="auto" margin="0 0 small 0">
         <h1>Hello!</h1>
       </View>
     )
+    expect(consoleError)
+      .to.be.calledWithExactly(warning)
+  })
 
-    expect(
-      warning.lastCall.args[0].includes(
-        `element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
-      )
-    ).to.be.true()
-
-    subject.setProps({
-      margin: 'none small'
-    })
-
-    expect(warning).to.have.been.calledOnce()
+  it('should not warn when as=span, display=auto, and vertical margins are not set', async () => {
+    const consoleError = stub(console, 'error')
+    await mount(
+      <View as="span" display="auto" margin="none small">
+        <h1>Hello!</h1>
+      </View>
+    )
+    expect(consoleError).to.not.be.called()
   })
 
   it('should pass position style attributes', async () => {
@@ -182,7 +183,8 @@ describe('<View />', async () => {
     Object.keys(View.propTypes).forEach((prop) => {
       it(`should warn when '${prop}' prop is present and it should omit it`, async () => {
         const TestClass = { displayName: 'Foo' }
-        const warning = `Warning: ${View.disallowedPropWarning(prop, TestClass)}`
+        const warning = `Warning: [Foo] prop '${prop}' is not allowed.`
+        const consoleError = stub(console, 'error')
 
         const props = {
           [prop]: 'foo',
@@ -190,11 +192,9 @@ describe('<View />', async () => {
           baz: 'baz'
         }
 
-        const consoleWarn = spy(console, 'warn')
-        const result = View.omitViewProps(props, TestClass)
+        View.omitViewProps(props, TestClass)
 
-        expect(consoleWarn).to.have.been.calledWith(warning)
-        expect(result[prop]).to.not.exist()
+        expect(consoleError).to.have.been.calledWithExactly(warning)
       })
     })
   })

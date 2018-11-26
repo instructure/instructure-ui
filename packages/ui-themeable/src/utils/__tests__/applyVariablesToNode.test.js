@@ -25,7 +25,7 @@ import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
 import { applyVariablesToNodeStyle, applyVariablesPolyfillToNode } from '../applyVariablesToNode'
 
-describe('applyVariablesToNode', () => {
+describe('applyVariablesToNode', async () => {
   const variables = { color: 'red' }
   const defaults = { color: 'purple', background: 'white' }
   const prefix = 'ThemeableComponent'

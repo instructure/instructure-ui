@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import TruncateText from '../index'
 import Text from '../../Text'
@@ -137,8 +137,8 @@ describe('<TruncateText />', async () => {
   })
 
   it('should warn if children prop receives too deep of a node tree', async () => {
-    const warning = spy(console, 'warn')
-
+    const consoleError = stub(console, 'error')
+    const warning = 'Warning: [TruncateText] Some children are too deep in the node tree and will not render.'
     await mount(
       <div style={{width: '200px'}}>
         <TruncateText>
@@ -146,10 +146,8 @@ describe('<TruncateText />', async () => {
         </TruncateText>
       </div>
     )
-
-    expect(
-      warning.lastCall.args[0].includes('Some children are too deep in the node tree and will not render.')
-    ).to.be.true()
+    expect(consoleError)
+      .to.be.calledWithExactly(warning)
   })
 
   it('should render text at any size with no lineHeight set', async () => {

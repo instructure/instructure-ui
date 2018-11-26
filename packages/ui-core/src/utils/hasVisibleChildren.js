@@ -24,13 +24,12 @@
 
  import UIHasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
- import { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
- import warning from '@instructure/ui-utils/lib/warning'
+ import { changedPackageWarning, warnDeprecatedComponent } from '@instructure/ui-utils/lib/react/deprecated'
 
  export default function hasVisibleChildren (children) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'hasVisibleChildren', '5.0.0', changedPackageWarning(
+   warnDeprecatedComponent('5.0.0', 'hasVisibleChildren', changedPackageWarning(
      'ui-core',
      'ui-a11y'
-   ) || '')
+   ))
    return UIHasVisibleChildren(children)
  }

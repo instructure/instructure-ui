@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 import Media from '../index'
 import View from '../../View'
 
@@ -60,13 +60,24 @@ describe('<Media />', async () => {
   })
 
   it(`should render a figure by default`, async () => {
+    expect(await mount(
+      <Media>
+        {image}
+      </Media>
+    ))
+
+    expect(await find('figure')).to.exist()
+  })
+
+  it(`should not allow the 'as' prop`, async () => {
+    const consoleError = stub(console, 'error')
     await mount(
       <Media as="foo">
         {image}
       </Media>
     )
-
-    expect(await find('figure')).to.exist()
+    expect(consoleError)
+      .to.be.calledWithExactly('Warning: [Media] prop \'as\' is not allowed.')
   })
 
   describe('when passing down props to View', async () => {
@@ -81,29 +92,28 @@ describe('<Media />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children' && !ignore.includes(prop))
       .forEach((prop) => {
-        const warning = `Warning: ${View.disallowedPropWarning(prop, Media)}`
-
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Media] prop '${prop}' is not allowed.`
             const props = {
               [prop]: 'foo'
             }
-            const consoleWarn = spy(console, 'warn')
-
             await mount(
               <Media {...props}>{image}</Media>
             )
-
-            expect(consoleWarn).to.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
+            const consoleError = stub(console, 'error')
             await mount(
               <Media {...props}>{image}</Media>
             )
-            expect(consoleWarn).to.not.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.not.be.called()
           })
         }
     })

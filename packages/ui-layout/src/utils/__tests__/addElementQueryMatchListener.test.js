@@ -58,7 +58,7 @@ describe('@addElementQueryMatchListener', async () => {
     return addElementQueryMatchListener(query, node, updateMatches)
   }
 
-  afterEach(() => {
+  afterEach(async () => {
     matches = []
   })
 

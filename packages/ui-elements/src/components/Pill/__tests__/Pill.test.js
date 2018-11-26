@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -77,24 +77,23 @@ describe('<Pill />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
-        const warning = `Warning: ${View.disallowedPropWarning(prop, Pill)}`
-
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Pill] prop '${prop}' is not allowed.`
             const props = {
               [prop]: 'foo'
             }
-            const consoleWarn = spy(console, 'warn')
             await mount(<Pill text="Overdue" {...props} />)
-
-            expect(consoleWarn).to.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
             await mount(<Pill text="Overdue" {...props} />)
-            expect(consoleWarn).to.not.have.been.calledWith(warning)
+            expect(consoleError).to.not.be.called()
           })
         }
     })

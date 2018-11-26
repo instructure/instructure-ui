@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, spy } from '@instructure/ui-test-utils'
+import { mount, expect, stub } from '@instructure/ui-test-utils'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import Button from '../index'
@@ -102,9 +102,8 @@ describe('<Button/>', async () => {
   })
 
   it('should apply fluid-width styles when set to fluidWidth', async () => {
-    const divStyle = {width: '70px'}
     await mount(
-      <div style={divStyle}>
+      <div style={{ width: '70px' }}>
         <Button fluidWidth>More Than Just Hello World</Button>
       </div>
     )
@@ -113,14 +112,11 @@ describe('<Button/>', async () => {
   })
 
   it('should not allow padding as a property', async () => {
+    const consoleError = stub(console, 'error')
     await mount(
       <Button padding='24px 4px 24px 8px'>Hello World</Button>
     )
-    const padding = await ButtonLocator.find()
-    expect(padding.getComputedStyle()['padding-top']).to.equal('0px')
-    expect(padding.getComputedStyle()['padding-right']).to.equal('12px')
-    expect(padding.getComputedStyle()['padding-bottom']).to.equal('0px')
-    expect(padding.getComputedStyle()['padding-left']).to.equal('12px')
+    expect(consoleError).to.be.calledWithExactly(`Warning: [Button] prop 'padding' is not allowed.`)
   })
 
   it('focuses with the focus helper', async () => {
@@ -270,21 +266,22 @@ describe('<Button/>', async () => {
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Button] prop '${prop}' is not allowed.`
             const props = { [prop]: 'foo' }
-            const consoleWarn = spy(console, 'warn')
             await mount(
               <Button {...props}>Hello World</Button>
             )
-            expect(consoleWarn).to.have.been.calledOnce()
+            expect(consoleError).to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
+            const consoleError = stub(console, 'error')
             await mount(
               <Button {...props}>Hello World</Button>
             )
-            expect(consoleWarn).to.not.have.been.called()
+            expect(consoleError).to.not.be.called()
           })
         }
     })

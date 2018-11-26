@@ -25,8 +25,7 @@
 import { default as NumeralBase } from 'numeral'
 import './locales'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
 /**
  * ---
@@ -37,9 +36,6 @@ import warning from '../warning'
  export default class Numeral extends NumeralBase {
    constructor () {
      super()
-     warning(false, '[%s] was deprecated in version %s. %s', 'Numeral', '5.0.0', changedPackageWarning(
-       'ui-utils',
-       'ui-i18n'
-     ) || '')
+     warnDeprecatedComponent('5.0.0', 'Numeral',  false, changedPackageWarning('ui-utils', 'ui-i18n'))
    }
  }

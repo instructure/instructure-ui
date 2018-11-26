@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, within, stub } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 import FocusableView from '../index'
@@ -87,24 +87,24 @@ describe('<FocusableView />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
-        const warning = `Warning: ${View.disallowedPropWarning(prop, FocusableView)}`
-
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const warning = `Warning: [FocusableView] prop '${prop}' is not allowed.`
+            const consoleError = stub(console, 'error')
             const props = {
               [prop]: 'foo'
             }
-            const consoleWarn = spy(console, 'warn')
             await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
-
-            expect(consoleWarn).to.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
+            const consoleError = stub(console, 'error')
             await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
-            expect(consoleWarn).to.not.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.not.be.called()
           })
         }
     })

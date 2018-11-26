@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+/* istanbul ignore file */
+
 import PropTypes from 'prop-types'
 
 import addResizeListener from '../dom/addResizeListener'
@@ -98,7 +100,7 @@ export default function containerQuery (query) {
       }
 
       componentDidMount () {
-        warnDeprecatedComponent('5.0.0', 'containerQuery', 'Use the `Responsive` component instead')
+        warnDeprecatedComponent('5.0.0', 'containerQuery', 'Use the `Responsive` component instead.')
 
         const node = findDOMNode(this)
 

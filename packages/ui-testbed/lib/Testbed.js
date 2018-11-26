@@ -66,7 +66,7 @@ class Testbed {
     if (typeof fn === 'function') {
       return this.sandbox.stub(obj, method).callsFake(fn)
     } else {
-      return this.sandbox.stub()
+      return this.sandbox.stub(obj, method)
     }
   }
 
@@ -89,6 +89,17 @@ class Testbed {
   setup () {
     this.teardown()
 
+    // so that we can test for prop type validation errors in our tests:
+    if (typeof console.error === 'function') {
+      this._originalConsoleError = console.error
+      console.error = (firstMessage, ...rest) => {
+        if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
+          throw new Error(firstMessage)
+        }
+        return this._originalConsoleError(firstMessage, ...rest)
+      }
+    }
+
     document.documentElement.setAttribute('dir', 'ltr')
     document.documentElement.setAttribute('lang', 'en-US')
 
@@ -104,6 +115,10 @@ class Testbed {
   teardown () {
     this.sandbox.resetHistory()
     this.sandbox.restore()
+
+    if (this._originalConsoleError) {
+      console.error = this._originalConsoleError
+    }
 
     this.unmount()
 
@@ -156,20 +171,12 @@ Testbed.init = () => {
   if (typeof console.clear === 'function') {
     console.clear()
   }
+  /* eslint-enable no-console */
+
   process.once('unhandledRejection', (error) => {
     console.error('Unhandled rejection: ' + error.stack)
     process.exit(1)
   })
-  // so that we can test for prop type validation errors in our tests:
-  const consoleError = console.error
-  console.error = (firstMessage, ...rest) => {
-    if (typeof firstMessage === 'string' && firstMessage.startsWith('Warning:')) {
-      throw new Error('Unexpected React Warning: ' + firstMessage)
-    }
-
-    return consoleError(firstMessage, ...rest)
-  }
-  /* eslint-enable no-console */
 
   const sheet = new StyleSheet({ speedy: true, maxLength: 40 })
 

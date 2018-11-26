@@ -33,8 +33,7 @@ import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import testable from '@instructure/ui-testable'
 
 import { truncate } from './utils/Truncator'
@@ -168,9 +167,10 @@ class TruncateText extends Component {
           if (grandChild.props) {
             // currently we don't support node trees deeper than 2 levels
             // truncation will still occur on their text content, but their actual node structure will be lost
-            warning(
+            error(
               false,
-              `[${getDisplayName(TruncateText)}] Some children are too deep in the node tree and will not render.`
+              'TruncateText',
+              `Some children are too deep in the node tree and will not render.`
             )
           }
         })

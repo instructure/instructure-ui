@@ -48,26 +48,23 @@ describe('@experimental', async () => {
   describe('experimental props', async () => {
     const ExperimentalComponent = experimental(['bar'])(TestComponent)
 
-
     it('should warn when using an experimental prop', async () => {
-      const warning = spy(console, 'warn')
-
+      const consoleWarn = spy(console, 'warn')
       await mount(<ExperimentalComponent bar="Jane" />)
-
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] The `%s` prop is experimental and its API could change significantly in a future release. %s',
-        'TestComponent',
-        'bar',
-        ''
-      )
+      await expect(consoleWarn)
+        .to.have.been.calledWithMatch([
+          'Warning: [TestComponent] ',
+          'The `bar` prop is experimental and its API could change significantly in a future release.'
+        ].join(''))
     })
 
     it('should not output a warning using a non-experimental prop', async () => {
-      const warning = spy(console, 'warn')
+      const consoleWarn = spy(console, 'warn')
 
       await mount(<ExperimentalComponent qux="Jane" />)
 
-      expect(warning).to.not.have.been.called()
+      await expect(consoleWarn)
+        .to.not.have.been.called()
     })
   })
 
@@ -75,15 +72,12 @@ describe('@experimental', async () => {
     const ExperimentalComponent = experimental()(TestComponent)
 
     it('should warn that the entire component is experimental if no props are supplied', async () => {
-      const warning = spy(console, 'warn')
-
+      const consoleWarn = spy(console, 'warn')
       await mount(<ExperimentalComponent />)
+      const warning = 'Warning: [TestComponent] is experimental and its API could change significantly in a future release.'
 
-      expect(warning).to.have.been.calledWithExactly(
-        'Warning: [%s] is experimental and its API could change significantly in a future release. %s',
-        'TestComponent',
-        ''
-      )
+      await expect(consoleWarn)
+        .to.have.been.calledWithMatch(warning)
     })
   })
 })

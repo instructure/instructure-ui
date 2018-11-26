@@ -24,8 +24,7 @@
 
  import moment from 'moment-timezone'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
 /**
 * ---
@@ -42,13 +41,7 @@ import warning from '../warning'
 * @returns {String} ISO 8601 string
 */
 export function now (locale, timezone) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.now',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
+  warnDeprecatedComponent('5.0.0', 'DateTime.now', changedPackageWarning('ui-utils', 'ui-i18n'))
   _checkParams(locale, timezone)
   return moment().locale(locale).tz(timezone)
 }
@@ -61,13 +54,7 @@ export function now (locale, timezone) {
 * @returns {String} ISO 8601 string
 */
 export function parse (dateString, locale, timezone) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.parse',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
+  warnDeprecatedComponent('5.0.0', 'DateTime.parse', changedPackageWarning('ui-utils', 'ui-i18n'))
   _checkParams(locale, timezone)
   // list all available localized formats, from most specific to least
   return moment.tz(dateString, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
@@ -79,13 +66,7 @@ export function parse (dateString, locale, timezone) {
 * @returns {Boolean} true if dateString is a valid ISO 8601 string
 */
 export function isValid (dateString) {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.isValid',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
+  warnDeprecatedComponent('5.0.0', 'DateTime.isValid', changedPackageWarning('ui-utils', 'ui-i18n'))
   return moment(dateString, [moment.ISO_8601]).isValid()
 }
 
@@ -95,13 +76,7 @@ export function isValid (dateString) {
 * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 */
 export function browserTimeZone () {
-  warning(
-    false,
-    '[%s] was deprecated in version %s. %s',
-    'DateTime.browserTimeZone',
-    '5.0.0',
-    changedPackageWarning('ui-utils', 'ui-i18n')
-  )
+  warnDeprecatedComponent('5.0.0', 'DateTime.browserTimeZone', changedPackageWarning('ui-utils', 'ui-i18n'))
   return moment.tz.guess()
 }
 

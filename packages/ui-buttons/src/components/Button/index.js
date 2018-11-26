@@ -30,7 +30,7 @@ import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
@@ -233,26 +233,21 @@ class Button extends Component {
           const icon = child && child.type && typeof child.type.glyphName !== 'undefined'
           warning(
             !icon,
-            `Adding icons to Button as children is deprecated. Please use the icon prop instead.`
+            `[Button] Icons as children is deprecated. Please use the 'icon' prop instead.`
           )
         })
       }
     }
 
     // warn for unallowed view props
-    const Component = Button
-    const allowedProps = pickProps(pickProps(this.props, View.propTypes), Component.propTypes)
-    const viewProps = omitProps(pickProps(this.props, View.propTypes), allowedProps)
-    Object.keys(viewProps).forEach((prop) => {
-      warning(
-        (allowedProps[prop]),
-        `View prop ${prop} is not allowed on ${Component.displayName}`
-      )
-    })
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, Button.propTypes),
+      Button
+    )
 
     return (
       <View
-        {...omitProps(this.props, { ...Button.propTypes, ...View.propTypes })}
+        {...passthroughProps}
         className={classnames({
           [styles.root]: true,
           [styles[variant]]: true,

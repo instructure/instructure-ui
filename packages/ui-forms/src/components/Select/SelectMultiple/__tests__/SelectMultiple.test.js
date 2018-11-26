@@ -27,6 +27,7 @@ import keycode from 'keycode'
 import SelectMultiple from '../index'
 import SelectField from '../../SelectField'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('<SelectMultiple />', () => {
   const preventDefault = () => {}
   const options = [{
@@ -215,6 +216,10 @@ describe('<SelectMultiple />', () => {
   })
 
   it(`when controlled, shouldn't update Tags by itself`, () => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    testbed.stub(console, 'error')
+
     const selectedOption = [{
       value: '5', label: 'Montego'
     }]
@@ -243,6 +248,10 @@ describe('<SelectMultiple />', () => {
   })
 
   it(`when controlled, should only update Tags when selectedOption props changes`, (done) => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    testbed.stub(console, 'error')
+
     const selectedOption = [{
       value: '5', label: 'Montego'
     }]
@@ -271,6 +280,10 @@ describe('<SelectMultiple />', () => {
   })
 
   it('renders Tags for each selectedOption', () => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    testbed.stub(console, 'error')
+
     const subject = testbed.render({
       selectedOption: [{
         value: '4', label: 'Key Largo'
@@ -287,6 +300,10 @@ describe('<SelectMultiple />', () => {
   })
 
   it('handles dismissing Tags', () => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    testbed.stub(console, 'error')
+
     const onChange = testbed.stub()
     const subject = testbed.render({
       onChange,
@@ -309,6 +326,10 @@ describe('<SelectMultiple />', () => {
   })
 
   it('allows tags to be non-dismissible', () => {
+    // prevents the error that is fired when you select an option that isn't in the options list
+    // TODO: look into this more (should we even output this error?)
+    testbed.stub(console, 'error')
+
     const onChange = testbed.stub()
     const subject = testbed.render({
       onChange,
@@ -346,6 +367,10 @@ describe('<SelectMultiple />', () => {
   describe('default options', () => {
     function testDefaultValue(defaultProp) {
       it(`updates the selected options when ${defaultProp} is set and the options update`, (done) => {
+        // prevents the error that is fired when you select an option that isn't in the options list
+        // TODO: look into this more (should we even output this error?)
+        testbed.stub(console, 'error')
+
         const subject = testbed.render({
           [defaultProp]: ['4', '5']
         })
@@ -398,6 +423,10 @@ describe('<SelectMultiple />', () => {
     })
 
     it(`should render input values even if selected options cannot be found in options`, (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         selectedOption: [
           { label: 'Foo', children: 'Foo', value: '4', id: '4' },
@@ -423,6 +452,10 @@ describe('<SelectMultiple />', () => {
     })
 
     it(`should be able to select option when options are loaded asynchronously`, (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         defaultSelectedOption: ['1', '2'],
         editable: true,
@@ -466,6 +499,10 @@ describe('<SelectMultiple />', () => {
     })
 
     it('updates correctly when default options are provided and some of the corresponding options are loaded later', (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const testOptions = [
         ...options,
         { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
@@ -492,6 +529,10 @@ describe('<SelectMultiple />', () => {
     })
 
     it('does not re render option when a default option has been dismissed and the options update', (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const testOptions = [
         ...options,
         { label: 'Argentina', children: 'Argentina', value: '4', id: '4' }
@@ -545,3 +586,4 @@ describe('<SelectMultiple />', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

@@ -27,6 +27,7 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Tag from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Tag.theme', () => {
   const variants = ['default', 'inline']
 
@@ -60,3 +61,4 @@ describe('Tag.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

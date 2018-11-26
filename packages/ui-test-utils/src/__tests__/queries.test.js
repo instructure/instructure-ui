@@ -26,11 +26,11 @@ import { mount, expect, findAll, find, spy, wait, within } from '../index'
 
 describe('find, findAll', async () => {
   it('throws an error message by default when nothing is found', async () => {
-    expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
-    expect(findAll(':label(pineapple)', { timeout: 0 })).to.eventually.throw()
-    expect(findAll('pineapple', { timeout: 0 })).to.eventually.throw()
-    expect(findAll(':textContent(pineapple)', { timeout: 0 })).to.eventually.throw()
-    expect(findAll('table', { timeout: 100 })).to.eventually.throw()
+    await expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
+    await expect(findAll(':label(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(findAll('pineapple', { timeout: 0 })).to.be.rejected()
+    await expect(findAll(':textContent(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(findAll('table', { timeout: 100 })).to.be.rejected()
   })
 
   it('should return empty array when configured to expect empty results', async () => {

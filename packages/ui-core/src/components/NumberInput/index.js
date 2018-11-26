@@ -22,21 +22,18 @@
  * SOFTWARE.
  */
 
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-import warning from '@instructure/ui-utils/lib/warning'
+import deprecated, { changedPackageWarning, warnDeprecatedComponent } from '@instructure/ui-utils/lib/react/deprecated'
 
 import NumberInput, { cleanValue as UICleanValue } from '@instructure/ui-forms/lib/components/NumberInput'
 
-
-export default deprecated('5.0.0', null, changedPackageWarning(
+const packageWarning = changedPackageWarning(
   'ui-core',
   'ui-forms'
-))(NumberInput)
+) || ''
+
+export default deprecated('5.0.0', null, packageWarning)(NumberInput)
 
 export function cleanValue (value, locale, allowNegative) {
-  warning(false, '[%s] was deprecated in version %s. %s', 'cleanValue', '5.0.0', changedPackageWarning(
-    'ui-core',
-    'ui-forms'
-  ) || '')
+  warnDeprecatedComponent('5.0.0', 'cleanValue', packageWarning)
   return UICleanValue(value, locale, allowNegative)
 }

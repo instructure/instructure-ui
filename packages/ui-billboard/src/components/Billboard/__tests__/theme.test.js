@@ -27,6 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import Billboard from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('Billboard.theme', () => {
   describe('with the canvas theme', () => {
     const variables = Billboard.generateTheme()
@@ -46,3 +47,4 @@ describe('Billboard.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

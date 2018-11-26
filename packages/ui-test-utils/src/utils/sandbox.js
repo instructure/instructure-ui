@@ -34,7 +34,7 @@ class Sandbox {
   constructor () {
     initConsole()
 
-    // eslint-disable-next-line
+    // eslint-disable-next-line no-console
     console.log('[ui-test-utils] Initializing test sandbox...')
 
     this._sandbox = sinon.createSandbox()
@@ -70,6 +70,14 @@ class Sandbox {
     window.localStorage.clear()
     window.sessionStorage.clear()
 
+    if (this._originalWindowOnError) {
+      window.onerror = this._originalWindowOnError
+    }
+
+    if (this._originalConsoleError) {
+      console.error = this._originalConsoleError
+    }
+
     setAttributes(document.documentElement, this._attributes.document)
     setAttributes(document.body, this._attributes.body)
 
@@ -85,6 +93,18 @@ class Sandbox {
     document.documentElement.setAttribute('dir', 'ltr')
     document.documentElement.setAttribute('lang', 'en-US')
 
+    // override mocha's onerror handler
+    if (typeof window.onerror === 'function') {
+      this._originalWindowOnError = window.onerror
+      window.onerror = overrideWindowOnError(window.onerror)
+    }
+
+    // for prop-type warnings:
+    if (typeof console.error === 'function') {
+      this._originalConsoleError = console.error
+      console.error = overrideConsoleError(console.error)
+    }
+
     this._observer.observe(document.head, { childList: true })
     this._observer.observe(document.body, { childList: true })
 
@@ -98,7 +118,7 @@ class Sandbox {
     if (typeof fn === 'function') {
       return this._sandbox.stub(obj, method).callsFake(fn)
     } else {
-      return this._sandbox.stub()
+      return this._sandbox.stub(obj, method)
     }
   }
 
@@ -106,8 +126,45 @@ class Sandbox {
     return this._sandbox.spy(obj, method)
   }
 
-  mount (element, context) {
-    return ReactComponentWrapper.mount(element, { context })
+  mount (element, options) {
+    return ReactComponentWrapper.mount(element, options)
+  }
+}
+
+function overrideWindowOnError (windowOnError) {
+  return (err, url, line) => {
+    const error = (typeof err === 'string') ? err : err.toString()
+
+    // prevent default window errors for uncaught errors in React 16+ here
+    // we catch them in reactComponentWrapper so the promise returned by mount should be rejected
+    if (error.startsWith('Error: Warning:') ||
+      error.startsWith('Uncaught Error: Warning:') ||
+      error.startsWith('The above error occurred')) {
+      return true
+    }
+
+    return windowOnError(err, url, line)
+  }
+}
+
+function overrideConsoleError (consoleError) {
+  return (first, ...rest) => {
+    const error = (typeof first === 'string') ? first : first.toString()
+
+    // throw so that we can test for prop type validation errors in our tests:
+    if (error.startsWith('Warning:')) {
+      throw new Error(first)
+      // ignore the noisy uncaught error messages fired by React 16+
+    }
+
+    if (error.startsWith('Uncaught Error: Warning:') ||
+      error.startsWith('The above error occurred')) {
+      return
+    }
+
+    if (process.env.DEBUG) {
+      return consoleError(first, ...rest)
+    }
   }
 }
 

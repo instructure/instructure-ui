@@ -26,6 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import ProgressBar from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('ProgressBar.theme', () => {
   describe('with the default theme', () => {
     const variables = ProgressBar.generateTheme()
@@ -49,3 +50,4 @@ describe('ProgressBar.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

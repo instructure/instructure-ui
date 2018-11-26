@@ -66,7 +66,7 @@ describe('<Portal />', async () => {
 
     expect(onClose).to.not.have.been.called()
 
-    subject.setProps({ open: false })
+    await subject.setProps({ open: false })
 
     expect(onClose).to.have.been.called()
   })

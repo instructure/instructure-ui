@@ -29,8 +29,7 @@ import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import SelectSingle from './SelectSingle'
@@ -251,9 +250,10 @@ class Select extends Component {
     super(props)
     const options = parseOptions(props.children)
 
-    warning(
+    error(
       !(props.allowCustom && props.multiple),
-      `[${getDisplayName(Select)}] The allowCustom and multiple are mutually exclusive properties.`
+      'Select',
+      `The 'allowCustom' and 'multiple' props are mutually exclusive.`
     )
 
     this.state = { options }

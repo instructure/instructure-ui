@@ -27,6 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import Navigation from '../index'
 
+/*  eslint-disable mocha/no-synchronous-tests */
 describe('Navigation.theme', () => {
   describe('with the default theme', () => {
     const variables = Navigation.generateTheme()
@@ -44,3 +45,4 @@ describe('Navigation.theme', () => {
     })
   })
 })
+/*  eslint-enable mocha/no-synchronous-tests */

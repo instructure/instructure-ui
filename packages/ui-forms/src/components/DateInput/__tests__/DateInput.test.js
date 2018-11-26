@@ -30,7 +30,7 @@ import DateInput from '../index'
 function getInputValue (subject) {
   return subject.find('TextInput').props().value
 }
-
+/* eslint-disable mocha/no-synchronous-tests */
 describe('<DateInput />', () => {
   const testbed = new Testbed(<DateInput label="foo" previousLabel="bar" nextLabel="baz" />)
 
@@ -279,7 +279,6 @@ describe('<DateInput />', () => {
     })
 
     subject.instance().handleCalendarSelect(null, 'not a date')
-
     expect(onDateChange).to.have.been.called()
     expect(onDateChange.getCall(0).args[3]).to.equal(true)
   })
@@ -470,3 +469,4 @@ describe('<DateInput />', () => {
     ])
   })
 })
+/* eslint-disable mocha/no-synchronous-tests */

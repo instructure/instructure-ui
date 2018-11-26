@@ -83,25 +83,20 @@ export default function experimental (experimentalProps, message) {
   }
 }
 
-function warnExperimentalProps (displayName, props, experimentalProps, message) {
+function warnExperimentalProps (displayName, props, experimentalProps, message = '') {
   experimentalProps.forEach((experimentalProp) => {
     if (typeof props[experimentalProp] !== 'undefined') {
       warning(
         false,
-        '[%s] The `%s` prop is experimental and its API could change significantly in a future release. %s',
-        displayName,
-        experimentalProp,
-        message || ''
+        `[${displayName}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
       )
     }
   })
 }
 
-function warnExperimentalComponent (displayName, message) {
+function warnExperimentalComponent (displayName, message = '') {
   warning(
     false,
-    '[%s] is experimental and its API could change significantly in a future release. %s',
-    displayName,
-    message || ''
+    `[${displayName}] is experimental and its API could change significantly in a future release. ${message}`
   )
 }

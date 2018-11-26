@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import { wait } from 'dom-testing-library'
-
 import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'

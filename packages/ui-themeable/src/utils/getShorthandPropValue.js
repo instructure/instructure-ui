@@ -23,7 +23,7 @@
  */
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import { camelize } from '@instructure/ui-utils/lib/convertCase'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 
 /**
  * ---
@@ -34,7 +34,7 @@ import warning from '@instructure/ui-utils/lib/warning'
  * propName prefix and replaces it with a corresponding value
  * from the theme object.
  *
- * @param {String} componentName - the name of the component (for warnings)
+ * @param {String} componentName - the name of the component (for error messages)
  * @param {Object} componentTheme - a theme object of keys and values
  * @param {String} propValue - a space delimited string of values
  * @param {String} propName - a prefix to combine with each propValue
@@ -59,7 +59,7 @@ export default function getShorthandPropValue (componentName, componentTheme, pr
       const themeVariableName = camelize(`${propName}-${shortHandValue}`)
       const themeVariableValue = componentTheme[themeVariableName]
 
-      warning(themeVariableValue, '[%s] %s is an invalid %s value.', componentName, themeVariableName, propName)
+      error(themeVariableValue, componentName, `'${themeVariableName}' is an invalid '${propName}' value.`)
 
       return themeVariableValue || '0'
     })

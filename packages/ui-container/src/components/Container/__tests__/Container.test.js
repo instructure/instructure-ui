@@ -23,35 +23,19 @@
  */
 
 import React from 'react'
+import { mount, expect, spy } from '@instructure/ui-test-utils'
 import Container from '../index'
 
-describe('<Container />', () => {
-  const testbed = new Testbed(
-    <Container>
-      <h1>Hello!</h1>
-    </Container>
-  )
+describe('<Container />', async () => {
+  it('should render with deprecation warnings', async () => {
+    const consoleWarn = spy(console, 'warn')
+    await mount(<Container />)
 
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.be.present()
-  })
-
-  it('should render children', () => {
-    const subject = testbed.render()
-    expect(subject.find('h1')).to.have.length(1)
-  })
-
-  it('accepts x-small size prop type', () => {
-    const subject = testbed.render({ size: 'x-small' })
-    expect(subject.prop('size')).to.eq('x-small')
-  })
-
-  it('should meet a11y standards', (done) => {
-    const subject = testbed.render()
-
-    subject.should.be.accessible(done, {
-      ignores: []
-    })
+    expect(consoleWarn)
+      .to.have.been.calledWith([
+        'Warning: [Container] was deprecated in version 5.4.0.',
+        'It has been moved from @instructure/ui-container to @instructure/ui-layout.',
+        'It has also been renamed from [Container] to [View].'
+      ].join(' '))
   })
 })

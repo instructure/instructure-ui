@@ -28,8 +28,8 @@ import getActiveElement from '../dom/getActiveElement'
 import addEventListener from '../dom/addEventListener'
 import containsActiveElement from '../dom/containsActiveElement'
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
+import error from '../error'
 
 import findTabbable from './findTabbable'
 
@@ -45,11 +45,11 @@ import findTabbable from './findTabbable'
  */
 class FocusManager {
   constructor () {
-    warning(false, '[%s] was deprecated in version %s. %s', 'focusManager', '5.0.0', changedPackageWarning(
+    warnDeprecatedComponent('5.0.0', 'focusManager', changedPackageWarning(
       'ui-utils',
       'ui-a11y',
       'Use `FocusManager.focusRegion` to create a new focus region.'
-    ) || '')
+    ))
   }
 
   contextElement = null
@@ -97,8 +97,9 @@ class FocusManager {
     try {
       this.focusLaterElement.focus()
     } catch (e) {
-      warning(
+      error(
         false,
+        'focusManager',
         `
         You tried to return focus to ${this.focusLaterElement}
         but it is not in the DOM anymore: ${e}
@@ -110,8 +111,9 @@ class FocusManager {
 
   setupScopedFocus (el) {
     if (this.contextElement) {
-      warning(
+      error(
         false,
+        'focusManager',
         `
         Focus is already scoped to ${this.contextElement}.
         `

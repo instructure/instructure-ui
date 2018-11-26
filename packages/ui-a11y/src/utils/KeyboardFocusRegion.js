@@ -29,7 +29,7 @@ import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
 import keycode from 'keycode'
@@ -142,9 +142,10 @@ export default class KeyboardFocusRegion {
         try {
           element && element.focus()
         } catch (e) {
-          warning(
+          error(
             false,
-            '[KeyboardFocusRegion] A focusable element is required in order to set focus to a FocusRegion.'
+            'KeyboardFocusRegion',
+            'A focusable element is required in order to set focus to a FocusRegion.'
           )
           ownerDocument(this._contextElement).activeElement.blur()
         }
@@ -157,8 +158,9 @@ export default class KeyboardFocusRegion {
       try {
         this._focusLaterElement.focus()
       } catch (e) {
-        warning(
+        error(
           false,
+          'KeyboardFocusRegion',
           `
           You tried to return focus to ${this._focusLaterElement}
           but it is not in the DOM anymore: ${e}

@@ -29,7 +29,7 @@ import keycode from 'keycode'
 import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
@@ -200,9 +200,10 @@ export default class DateInput extends Component {
     const timezone = this._timezone(props, context)
     const parsedDate = this._parseDate(initialDateValue, locale, timezone)
 
-    warning(
+    error(
       (!initialDateValue || parsedDate.isValid()),
-      `[DateInput] Unexpected date format received: ${initialDateValue}`
+      'DateInput',
+      `Unexpected date format received: '${initialDateValue}'.`
     )
 
     this.state = {
@@ -229,7 +230,7 @@ export default class DateInput extends Component {
         const timezone = nextProps.timezone || this.timezone
         const parsedDate = this._parseDate(value, locale, timezone)
 
-        warning(!value || parsedDate.isValid(), `[DateInput] Unexpected date format received: ${value}`)
+        error(!value || parsedDate.isValid(), 'DateInput', `Unexpected date format received: '${value}'.`)
 
         return this.computeState(
           value,
@@ -358,7 +359,7 @@ export default class DateInput extends Component {
   handleCalendarSelect = (event, newValue) => {
     const parsedDate = this.parseDate(newValue)
 
-    warning(parsedDate.isValid(), `[DateInput] Unexpected date format received from DatePicker: ${newValue}`)
+    error(parsedDate.isValid(), 'DateInput', `Unexpected date format received from DatePicker: '${newValue}'.`)
 
     this.acceptValue(event, newValue)
 

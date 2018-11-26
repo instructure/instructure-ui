@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, find, spy } from '@instructure/ui-test-utils'
+import { expect, mount, find, stub } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -51,24 +51,24 @@ describe('<Table />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
-        const warning = `Warning: ${View.disallowedPropWarning(prop, Table)}`
-
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Table] prop '${prop}' is not allowed.`
             const props = {
               [prop]: 'foo'
             }
-            const consoleWarn = spy(console, 'warn')
             await mount(<Table caption="Test table" {...props} />)
-
-            expect(consoleWarn).to.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
+            const consoleError = stub(console, 'error')
             await mount(<Table caption="Test table" {...props} />)
-            expect(consoleWarn).to.not.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.not.be.called()
           })
         }
     })

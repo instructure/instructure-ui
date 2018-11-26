@@ -24,88 +24,75 @@
 
 import React from 'react'
 
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import Responsive from '../index'
 
 describe('<Responsive />', async () => {
-  const props = {
-    small: { withBorder: true, background: 'transparent' },
-    medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
-    large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
-  }
-
-  const query = {
-    small: { maxWidth: 300 },
-    medium: { minWidth: 300 },
-    large: { minWidth: 800 }
-  }
-
-  let updateMatches
-
-  beforeEach(async () => {
-    stub(Responsive.prototype, 'addMatchListener', (query, updateResponsiveMatches) => {
-      updateMatches = updateResponsiveMatches
-      return {
-        remove () {}
-      }
-    })
-  })
-
   it('should call render with the correct matches', async () => {
     const renderSpy = spy()
     await mount(
-      <Responsive
-        query={query}
-        render={(props, matches) => {
-          renderSpy(props, matches)
-          return <div>hello</div>
-        }}
-      />
+      <div style={{ width: 200 }}>
+        <Responsive
+          query={{
+            small: { maxWidth: 300 },
+            medium: { maxWidth: 300 },
+            large: { maxWidth: 300 }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+        />
+      </div>
     )
 
-    updateMatches(['small', 'medium', 'large'], () => {
-      expect(renderSpy).to.have.been.calledWith(null, ['small', 'medium', 'large'])
-
-      updateMatches(['medium'], () => {
-        expect(renderSpy).to.have.been.calledWith(null, ['medium'])
-      })
-    })
+    expect(renderSpy).to.have.been.calledWith(null, ['small', 'medium', 'large'])
   })
 
   it('should provide correct props for a given breakpoint', async () => {
     const renderSpy = spy()
+    const props = {
+      small: { withBorder: true, background: 'transparent' },
+      medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
+      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
+    }
     await mount(
-      <Responsive
-        props={props}
-        query={query}
-        render={(props, matches) => {
-          renderSpy(props, matches)
-          return <div>hello</div>
-        }}
-      />
+      <div style={{ width: 200 }}>
+        <Responsive
+          props={props}
+          query={{
+            small: { maxWidth: 300 },
+            medium: { minWidth: 300 },
+            large: { minWidth: 800 }
+          }}
+          render={(props, matches) => {
+            renderSpy(props, matches)
+            return <div>hello</div>
+          }}
+        />
+      </div>
     )
 
-    updateMatches(['small'], () => {
-      expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
-
-      updateMatches(['large'], () => {
-        expect(deepEqual(renderSpy.lastCall.args[0], props.large)).to.be.true()
-
-        updateMatches(['medium'], () => {
-          expect(deepEqual(renderSpy.lastCall.args[0], props.medium)).to.be.true()
-        })
-      })
-    })
+    expect(deepEqual(renderSpy.lastCall.args[0], props.small)).to.be.true()
   })
 
   it('should merge props correctly when more than one breakpoint is applied', async () => {
     const renderSpy = spy()
+    const props = {
+      small: { withBorder: true, background: 'transparent' },
+      medium: { options: [1, 2, 3], icons: { edit: true, flag: false }},
+      large: { margin: 'small', label: 'hello world', describedBy: 'fakeId'}
+    }
     await mount(
       <Responsive
         props={props}
-        query={query}
+        query={{
+          small: { maxWidth: 300 },
+          medium: { minWidth: 300 },
+          large: { minWidth: 300 }
+        }}
         render={(props, matches) => {
           renderSpy(props, matches)
           return <div>hello</div>
@@ -113,40 +100,36 @@ describe('<Responsive />', async () => {
       />
     )
 
-    updateMatches(['medium', 'large'], () => {
-      expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true()
-
-      updateMatches(['small', 'medium', 'large'], () => {
-        expect(
-          deepEqual(
-            renderSpy.lastCall.args[0],
-            Object.assign({...props.small}, Object.assign({...props.medium}, {...props.large}))
-          )
-        ).to.be.true()
-      })
-    })
+    expect(deepEqual(renderSpy.lastCall.args[0], Object.assign({...props.medium}, {...props.large}))).to.be.true()
   })
 
   it('should warn when more than one breakpoint is applied and a prop value is overwritten', async () => {
-    const warning = spy(console, 'warn')
-
+    const consoleError = stub(console, 'error')
     await mount(
-      <Responsive
-        props={{
-          small: { withBorder: false, background: 'transparent', labeledBy: 'fakeId' },
-          medium: { background: 'solid', border: 'dashed', text: 'hello' }
-        }}
-        query={query}
-        render={(props, matches) => {
-          return <div>hello</div>
-        }}
-      />
+      <div style={{ width: 200 }}>
+        <Responsive
+          props={{
+            small: { withBorder: false, background: 'transparent', labeledBy: 'fakeId' },
+            medium: { background: 'solid', border: 'dashed', text: 'hello' }
+          }}
+          query={{
+            small: { maxWidth: 300 },
+            medium: { maxWidth: 300 },
+            large: { minWidth: 800 }
+          }}
+          render={(props, matches) => {
+            return <div>hello</div>
+          }}
+        />
+      </div>
     )
-
-    updateMatches(['small', 'medium'], () => {
-      expect(
-        warning.lastCall.args[0].includes('The prop `background` is defined at 2 or more breakpoints')
-      ).to.be.true()
-    })
+    const warning = [
+      'Warning: [Responsive]',
+      'The prop `background` is defined at 2 or more breakpoints',
+      'which are currently applied at the same time. Its current value, `transparent`,',
+      'will be overwritten as `solid`.'
+    ].join(' ')
+    expect(consoleError)
+      .to.be.calledWithExactly(warning)
   })
 })

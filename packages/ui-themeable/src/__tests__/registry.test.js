@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect, stub } from '@instructure/ui-test-utils'
+import { expect, spy } from '@instructure/ui-test-utils'
 import {
   registerComponentTheme,
   generateTheme,
@@ -33,7 +33,8 @@ import {
   setRegistry
 } from '../registry'
 
-describe('registry', async () => {
+/* eslint-disable mocha/no-synchronous-tests */
+describe('registry', () => {
   const KEY = Symbol('ThemedComponent')
   const registry = getRegistry()
 
@@ -135,7 +136,7 @@ describe('registry', async () => {
       expect(theme[KEY].color).to.equal('maroon')
     })
     it('should NOT allow overriding an accessible theme', () => {
-      console.error = stub()
+      const consoleWarn = spy(console, 'warn')
 
       defaultTheme.use({ accessible: true })
 
@@ -143,6 +144,12 @@ describe('registry', async () => {
       const theme = generateTheme(undefined, {
         red: 'maroon'
       })
+
+      expect(consoleWarn)
+        .to.have.been.calledWith([
+          'Warning: [themeable] Theme, \'accessible\', is immutable.',
+          'Cannot apply overrides: {"red":"maroon"}'
+        ].join(' '))
 
       expect(theme[KEY].color).to.equal('salmon')
     })
@@ -189,7 +196,7 @@ describe('registry', async () => {
       expect(theme.color).to.equal('maroon')
     })
     it('should NOT allow overriding an accessible theme', () => {
-      console.error = stub()
+      const consoleWarn = spy(console, 'warn')
 
       defaultTheme.use({ accessible: true })
 
@@ -197,6 +204,11 @@ describe('registry', async () => {
       const theme = generateComponentTheme(KEY, undefined, {
         color: 'maroon'
       })
+
+      expect(consoleWarn).to.have.been.calledWith([
+        'Warning: [themeable] Theme \'accessible\' is immutable.',
+        'Cannot apply overrides for \'Symbol(ThemedComponent)\': {"color":"maroon"}'
+      ].join(' '))
 
       expect(theme.color).to.equal('salmon')
     })
@@ -216,3 +228,4 @@ describe('registry', async () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

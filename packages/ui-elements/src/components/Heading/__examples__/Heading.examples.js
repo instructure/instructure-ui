@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import View from '@instructure/ui-layout/lib/components/View'
-
 export default {
   sections: 'level',
   permutations: [

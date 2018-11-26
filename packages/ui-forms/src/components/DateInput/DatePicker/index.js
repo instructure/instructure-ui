@@ -32,7 +32,7 @@ import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import themeable from '@instructure/ui-themeable'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 
 import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
@@ -198,7 +198,7 @@ export default class DatePicker extends Component {
     const isEmpty = !dateStr
     const isValid = parsedDate.isValid()
 
-    warning(isEmpty || isValid, `[DatePicker] Unexpected date format received for ${propName} prop: ${dateStr}`)
+    error(isEmpty || isValid, 'DatePicker', `Unexpected date format received for '${propName}' prop: '${dateStr}'.`)
 
     return (isEmpty || !isValid) ? fallbackDateStr : dateStr
   }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { expect, spy } from '@instructure/ui-test-utils'
+import { expect, stub } from '@instructure/ui-test-utils'
 import getShorthandPropValue from '../getShorthandPropValue'
 
 const theme = {
@@ -43,6 +43,7 @@ const theme = {
 
 const name = 'TestComponent'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('getShorthandPropValue', () => {
   it('converts 1 value syntax', () => {
     const value = 'x-small'
@@ -95,14 +96,14 @@ describe('getShorthandPropValue', () => {
   })
 
   it('warns if the theme value does not exist', () => {
-    const warning = spy(console, 'warn')
-
     const value = 'x-small'
+    const consoleError = stub(console, 'error')
+    const warning = `Warning: [TestComponent] 'borderRadiusXSmall' is an invalid 'borderRadius' value.`
+
     getShorthandPropValue(name, theme, value, 'borderRadius')
-    expect(
-      warning.lastCall.args[0].includes(
-        `[%s] %s is an invalid %s value.`
-      )
-    ).to.be.true()
+
+    expect(consoleError)
+      .to.have.been.calledWithExactly(warning)
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

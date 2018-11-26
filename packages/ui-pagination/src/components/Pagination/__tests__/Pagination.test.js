@@ -26,7 +26,7 @@ import React from 'react'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
-import { expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton/index'
@@ -401,11 +401,12 @@ describe('<Pagination />', async () => {
       Object.keys(View.propTypes)
         .filter(prop => prop !== 'theme' && prop !== 'children' && prop !== 'elementRef')
         .forEach((prop) => {
-          const warning = `Warning: ${View.disallowedPropWarning(prop, Pagination)}`
+
 
           if (Object.keys(allowedProps).indexOf(prop) < 0) {
             it(`should NOT allow the '${prop}' prop`, async () => {
-              const consoleWarn = spy(console, 'warn')
+              const consoleError = stub(console, 'error')
+              const warning = `Warning: [Pagination] prop '${prop}' is not allowed.`
               const props = { [prop]: 'foo' }
               await mount(
                 <Pagination
@@ -417,12 +418,13 @@ describe('<Pagination />', async () => {
                   { buildPages(6) }
                 </Pagination>
               )
-              expect(consoleWarn).to.have.been.calledWith(warning)
+              expect(consoleError)
+                .to.be.calledWithExactly(warning)
             })
           } else {
             it(`should allow the '${prop}' prop`, async () => {
-              const consoleWarn = spy(console, 'warn')
               const props = { [prop]: allowedProps[prop] }
+              const consoleError = stub(console, 'error')
               await mount(
                 <Pagination
                   variant="compact"
@@ -433,7 +435,7 @@ describe('<Pagination />', async () => {
                   { buildPages(6) }
                 </Pagination>
               )
-              expect(consoleWarn).to.not.have.been.calledWith(warning)
+              expect(consoleError).to.not.be.called()
             })
           }
         })

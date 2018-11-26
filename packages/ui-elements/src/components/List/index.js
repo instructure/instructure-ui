@@ -95,7 +95,6 @@ export default class List extends Component {
         variant: this.props.variant,
         delimiter: this.props.delimiter,
         size: this.props.size,
-        as: this.props.as,
         spacing: this.props.itemSpacing
       })
     })

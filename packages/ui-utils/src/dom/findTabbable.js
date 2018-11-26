@@ -22,16 +22,15 @@
  * SOFTWARE.
  */
 
- import { changedPackageWarning } from '../react/deprecated'
- import warning from '../warning'
+ import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
  import findDOMNode from './findDOMNode'
 
  export default function findTabbable (el) {
-   warning(false, '[%s] was deprecated in version %s. %s', 'findTabbable', '5.0.0', changedPackageWarning(
+   warnDeprecatedComponent('5.0.0', 'findTabbable', changedPackageWarning(
      'ui-utils',
      'ui-a11y'
-   ) || '')
+   ))
 
   const element = findDOMNode(el)
 

@@ -27,8 +27,7 @@ import PropTypes from 'prop-types'
 
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 
 import addElementQueryMatchListener from '../../utils/addElementQueryMatchListener'
 import addMediaQueryMatchListener from '../../utils/addMediaQueryMatchListener'
@@ -82,9 +81,10 @@ class Responsive extends Component {
   }
 
   componentWillMount () {
-    warning(
+    error(
       (this.props.render || this.props.children),
-      `[${getDisplayName(Responsive)}] must have either a \`render\` prop or \`children\` prop.`
+      'Responsive',
+      `must have either a \`render\` prop or \`children\` prop.`
     )
   }
 
@@ -144,11 +144,15 @@ class Responsive extends Component {
       // multiple breakpoints, and more than one of those breakpoints is being
       // currently applied so we throw a warning.
       Object.keys(matchProps).forEach((prop) => {
-        warning(
-          !(prop in mergedProps),
-          `[${getDisplayName(Responsive)}] The prop \`${prop}\` is defined at 2 or more breakpoints ` +
-          `which are currently applied at the same time. Its current value, \`${mergedProps[prop]}\`, ` +
+        const warning = [
+          `The prop \`${prop}\` is defined at 2 or more breakpoints`,
+          `which are currently applied at the same time. Its current value, \`${mergedProps[prop]}\`,`,
           `will be overwritten as \`${matchProps[prop]}\`.`
+        ].join(' ')
+        error(
+          !(prop in mergedProps),
+          'Responsive',
+          warning
         )
       })
 

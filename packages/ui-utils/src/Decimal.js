@@ -23,8 +23,7 @@
  */
 
 import { default as DecimalBase } from 'decimal.js/decimal'
-import warning from './warning'
-import { changedPackageWarning } from './react/deprecated'
+import { changedPackageWarning, warnDeprecatedComponent } from './react/deprecated'
 
 DecimalBase.set({
   precision: 100,
@@ -42,9 +41,9 @@ DecimalBase.set({
 export default class Decimal extends DecimalBase {
   constructor () {
     super()
-    warning(false, '[%s] was deprecated in version %s. %s', 'Decimal', '5.0.0', changedPackageWarning(
+    warnDeprecatedComponent('5.0.0', 'Decimal', false, changedPackageWarning(
       'ui-utils',
       'ui-i18n'
-    ) || '')
+    ))
   }
 }

@@ -24,7 +24,7 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import { expect, mount, wait } from '@instructure/ui-test-utils'
+import { expect, mount, wait, spy } from '@instructure/ui-test-utils'
 import containerQuery from '../containerQuery'
 
 const query = {
@@ -105,5 +105,15 @@ describe('@containerQuery', () => {
     await wait(() => {
       expect(subject.getDOMNode().getAttribute('data-width_between_251_and_300')).to.not.exist()
     })
+  })
+
+  it('should output the deprecation warning', async () => {
+    const consoleWarn = spy(console, 'warn')
+    await mount(<ContainerComponent />)
+    expect(consoleWarn)
+      .to.have.been.calledWith([
+        'Warning: [containerQuery] was deprecated in version 5.0.0.',
+        'Use the `Responsive` component instead.'
+      ].join(' '))
   })
 })

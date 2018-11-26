@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -187,7 +187,7 @@ describe('<Link />', async () => {
 
   describe('when passing down props to View', async () => {
     const allowedProps = {
-      margin: 'small',
+      margin: '0 small',
       elementRef: () => {},
       as: 'span'
     }
@@ -195,24 +195,24 @@ describe('<Link />', async () => {
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
-        const warning = `Warning: ${View.disallowedPropWarning(prop, Link)}`
-
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
           it(`should NOT allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const warning = `Warning: [Link] prop '${prop}' is not allowed.`
             const props = {
               [prop]: 'foo'
             }
-            const consoleWarn = spy(console, 'warn')
             await mount(<Link {...props}>Hello World</Link>)
-
-            expect(consoleWarn).to.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
             const props = { [prop]: allowedProps[prop] }
-            const consoleWarn = spy(console, 'warn')
             await mount(<Link {...props}>Hello World</Link>)
-            expect(consoleWarn).to.not.have.been.calledWith(warning)
+            expect(consoleError)
+              .to.not.be.called()
           })
         }
     })

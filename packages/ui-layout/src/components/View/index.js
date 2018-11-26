@@ -33,7 +33,7 @@ import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-th
 import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
 
 
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
@@ -298,9 +298,10 @@ if (process.env.NODE_ENV !== 'production') {
       displayAuto = true
     }
 
-    warning(
+    error(
       !(verticalMargin && asSpan && displayAuto),
-      `[${this.displayName}] element of type 'span' and display 'auto' is inline and will allow for horizontal margins only`
+      'View',
+      `as='span' and display='auto' is inline and will allow for horizontal margins only.`
     )
   }
 
@@ -322,15 +323,11 @@ const ComposedView = deprecated('5.4.0', {size: 'maxWidth'})(
 ComposedView.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
     Object.keys(pickProps(props, ComposedView.propTypes)).forEach((prop) => {
-      warning(false, ComposedView.disallowedPropWarning(prop, Component))
+      error(false, Component.displayName, `prop '${prop}' is not allowed.`)
     })
   }
 
   return omitProps(props, ComposedView.propTypes)
 }
-
-ComposedView.disallowedPropWarning = (prop, Component) => (
-  `View prop ${prop} is not allowed on ${Component.displayName}`
-)
 
 export default ComposedView

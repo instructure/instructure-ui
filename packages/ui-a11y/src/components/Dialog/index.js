@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -155,7 +155,7 @@ class Dialog extends Component {
     } = this.props
 
     if (!open || !this.contentElement) {
-      warning(false, '[Dialog] Can\'t focus a Dialog that isn\'t open.')
+      error(false, 'Dialog', 'Can\'t focus a Dialog that isn\'t open.')
     }
 
     this._raf.push(requestAnimationFrame(() => {

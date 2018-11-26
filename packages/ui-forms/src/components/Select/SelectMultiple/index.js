@@ -30,7 +30,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import warning from '@instructure/ui-utils/lib/warning'
+import error from '@instructure/ui-utils/lib/error'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import Tag from '@instructure/ui-elements/lib/components/Tag'
@@ -206,7 +206,8 @@ class SelectMultiple extends Component {
       const id = getOptionId(option)
       const foundOption = optionMap[id]
 
-      warning(foundOption, `[Select] The option (${option.label || id}) doesn't correspond to an option`)
+      error(foundOption, 'Select', `The option '${option.label || id}' doesn't correspond to an option.`)
+
       if (typeof option === 'object') {
         return {
           ...option,

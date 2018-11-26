@@ -23,17 +23,14 @@
  */
 
 import { registerTheme } from '@instructure/ui-themeable/lib/registry'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warnDeprecatedComponent } from '@instructure/ui-utils/lib/react/deprecated'
 
 import KEYS from '../../keys'
 
 import colors from '../high-contrast/colors'
 import { baseVariables } from '../base'
 
-warning(
-  false,
-  `The '${KEYS.CANVAS_A11Y}' theme was deprecated in 5.0.0. Use '${KEYS.CANVAS_HIGH_CONTRAST}' instead.`
-)
+warnDeprecatedComponent('5.0.0', `'${KEYS.CANVAS_A11Y}' theme`, `Use the '${KEYS.CANVAS_HIGH_CONTRAST}' theme instead.`)
 
 export default registerTheme({
   key: KEYS.CANVAS_A11Y,

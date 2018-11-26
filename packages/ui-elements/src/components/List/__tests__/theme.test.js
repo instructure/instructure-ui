@@ -27,6 +27,7 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import List from '../index'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('List.theme', () => {
   describe('with the default theme', () => {
     const variables = List.generateTheme()
@@ -52,3 +53,4 @@ describe('List.theme', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

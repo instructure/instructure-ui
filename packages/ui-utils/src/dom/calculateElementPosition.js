@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
 import getBoundingClientRect from './getBoundingClientRect'
 import getScrollParents from './getScrollParents'
@@ -34,12 +33,10 @@ import ownerDocument from './ownerDocument'
 import ownerWindow from './ownerWindow'
 
 export default function calculateElementPosition (element, target, options) {
-  warning(false, '[%s] was deprecated in version %s. %s', 'calculateElementPosition', '5.0.0',
-    changedPackageWarning(
-      'ui-utils',
-      'ui-layout'
-    )
-  )
+  warnDeprecatedComponent('5.0.0', 'calculateElementPosition', changedPackageWarning(
+    'ui-utils',
+    'ui-layout'
+  ))
 
   if (!element || options.placement === 'offscreen') {
     // hide offscreen content at the bottom of the DOM from screenreaders

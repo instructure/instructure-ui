@@ -23,8 +23,7 @@
  */
 
 import canUseDOM from '../dom/canUseDOM'
-import { changedPackageWarning } from '../react/deprecated'
-import warning from '../warning'
+import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
 /**
 * ---
@@ -39,13 +38,7 @@ export default {
   * @returns {String} locale (defaults to 'en')
   */
   browserLocale (nav) {
-    warning(
-      false,
-      '[%s] was deprecated in version %s. %s',
-      'Locale.browserLocale',
-      '5.0.0',
-      changedPackageWarning('ui-utils', 'ui-i18n')
-    )
+    warnDeprecatedComponent('5.0.0', 'Locale.browserLocale', changedPackageWarning('ui-utils', 'ui-i18n'))
 
     let language = 'en-US'
 

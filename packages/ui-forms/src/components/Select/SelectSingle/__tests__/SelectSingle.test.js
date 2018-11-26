@@ -27,6 +27,7 @@ import keycode from 'keycode'
 import SelectSingle from '../index'
 import SelectField from '../../SelectField'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('<SelectSingle />', () => {
   const preventDefault = () => {}
   const options = [{
@@ -270,6 +271,10 @@ describe('<SelectSingle />', () => {
   describe('default option', () => {
     function testDefaultValue (defaultProp) {
       it(`should update the input value if ${defaultProp} is set and the options update`, (done) => {
+        // prevents the error that is fired when you select an option that isn't in the options list
+        // TODO: look into this more (should we even output this error?)
+        testbed.stub(console, 'error')
+
         const subject = testbed.render({
           [defaultProp]: '4'
         })
@@ -313,6 +318,10 @@ describe('<SelectSingle />', () => {
     })
 
     it(`should not update input value if filter has been set`, (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         options: [
           ...options,
@@ -344,6 +353,10 @@ describe('<SelectSingle />', () => {
     })
 
     it(`should render input value even if selected option cannot be found in options`, (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         selectedOption: { label: 'Foo', children: 'Foo', value: '4', id: '4' },
       })
@@ -358,6 +371,10 @@ describe('<SelectSingle />', () => {
     })
 
     it(`should be able to select option when options are loaded asynchronously`, (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         defaultSelectedOption: '3',
         editable: true,
@@ -391,6 +408,10 @@ describe('<SelectSingle />', () => {
     })
 
     it('should not override a selected option if the default option is set and the options update', (done) => {
+      // prevents the error that is fired when you select an option that isn't in the options list
+      // TODO: look into this more (should we even output this error?)
+      testbed.stub(console, 'error')
+
       const subject = testbed.render({
         defaultSelectedOption: '4'
       })
@@ -564,3 +585,4 @@ describe('<SelectSingle />', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

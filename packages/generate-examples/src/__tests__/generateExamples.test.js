@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { expect, spy } from '@instructure/ui-test-utils'
+import { expect, spy, stub } from '@instructure/ui-test-utils'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 
 import generateExamples from '../generateExamples'
@@ -460,17 +460,18 @@ describe('generateExamples', () => {
   describe('errors and warnings', () => {
     const testRequiredProperty = (property) => {
       it(`should fail to initialize if the ${property} property is not supplied`, () => {
-        const warningSpy = spy(console, 'warn')
-        const result = executeExampleGenerator({
+        const consoleError = stub(console, 'error')
+        const errorMessage = 'Warning: [generateExamples] Error: Could not initialize the examples generator for'
+
+        executeExampleGenerator({
           ...baseModule,
           [property]: null
         })
 
-        const errorMessage = 'Error initializing generator for'
-        expect(warningSpy.lastCall.args[0].includes(
-          property === 'displayName' ? `${errorMessage} component` : `${errorMessage} TestComponent`
-        )).to.equal(true)
-        expect(result).to.not.exist()
+        expect(consoleError)
+          .to.have.been.calledWithMatch(
+            property === 'displayName' ? `${errorMessage} component` : `${errorMessage} TestComponent`
+          )
       })
     }
 
@@ -478,8 +479,8 @@ describe('generateExamples', () => {
     testRequiredProperty('component')
 
     it('should warn if component does not have prop specified in the config', () => {
-      const warningSpy = spy(console, 'warn')
       const fakeProp = 'foo'
+      const consoleError = stub(console, 'error')
       executeExampleGenerator({
         ...baseModule,
         config: {
@@ -488,10 +489,10 @@ describe('generateExamples', () => {
           ]
         }
       })
-
-      expect(warningSpy.lastCall.args[0].includes(
-        `TestComponent does not have the following prop: '${fakeProp}'`
-      )).to.equal(true)
+      expect(consoleError)
+        .to.have.been.calledWithExactly(
+          `Warning: [ExampleGenerator] TestComponent does not have the following prop: '${fakeProp}'.`
+        )
     })
   })
 })

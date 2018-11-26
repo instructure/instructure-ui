@@ -26,6 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 import px from '@instructure/ui-utils/lib/px'
 import jsonToMediaQuery from '../jsonToMediaQuery'
 
+/* eslint-disable mocha/no-synchronous-tests */
 describe('@jsonToMediaQuery', () => {
   let node
 
@@ -116,3 +117,4 @@ describe('@jsonToMediaQuery', () => {
     })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */

@@ -53,7 +53,7 @@ describe('@bidirectional', async () => {
 
   it('should give context preference when props and context are present', async () => {
     const context = makeTextDirectionContext('rtl')
-    const subject = await mount(<BidirectionalComponent dir="ltr" />, context)
+    const subject = await mount(<BidirectionalComponent dir="ltr" />, { context })
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')
   })
