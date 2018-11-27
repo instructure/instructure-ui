@@ -58,7 +58,7 @@ export default class TabList extends Component {
     /**
     * children of type `TabPanel`
     */
-    children: CustomPropTypes.Children.oneOf([TabPanel]),
+    children: CustomPropTypes.Children.oneOf([TabPanel, null]),
 
     variant: PropTypes.oneOf(['simple', 'minimal']),
     /**

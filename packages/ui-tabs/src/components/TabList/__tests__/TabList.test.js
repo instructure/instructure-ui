@@ -44,6 +44,22 @@ describe('<TabList />', async () => {
     expect(panels).to.have.length(3)
   })
 
+  it('should render with null children', async () => {
+    await mount(
+      <TabList>
+        <TabPanel title="First Tab">Tab 1 content</TabPanel>
+        <TabPanel title="Second Tab">Tab 2 content</TabPanel>
+        <TabPanel title="Third Tab" disabled>Tab 3 content</TabPanel>
+        {null}
+      </TabList>
+    )
+
+    const tablist = await TabListLocator.find()
+    const panels = await tablist.findAllTabPanels()
+
+    expect(panels).to.have.length(3)
+  })
+
   it('should render screen reader only tabs', async () => {
     await mount(
       <TabList>

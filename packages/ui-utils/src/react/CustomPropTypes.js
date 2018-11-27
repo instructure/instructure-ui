@@ -83,14 +83,22 @@ export default {
     oneOf (validTypes) {
       return function (props, propName, componentName) {
         const children = React.Children.toArray(props[propName])
-        const validTypeNames = validTypes.map(type => getDisplayName(type))
+        const validTypeNames = validTypes.map(type => type  ? getDisplayName(type) : type)
 
         for (let i = 0; i < children.length; i++) {
-          const childName = getDisplayName(children[i].type)
+          const child = children[i]
 
-          if (validTypeNames.indexOf(childName) < 0) {
+          if (child && child.type) {
+            const childName = getDisplayName(child.type)
+
+            if (validTypeNames.indexOf(childName) < 0) {
+              return new Error(
+                `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              )
+            }
+          } else if (child) {
             return new Error(
-              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found an element with unknown type: ${child}`
             )
           }
         }
@@ -140,15 +148,23 @@ export default {
         })
 
         for (let i = 0; i < children.length; i++) {
-          const childName = getDisplayName(children[i].type)
+          const child = children[i]
 
-          if (validTypeNames.indexOf(childName) < 0) {
+          if (child && child.type) {
+            const childName = getDisplayName(child.type)
+
+            if (validTypeNames.indexOf(childName) < 0) {
+              return new Error(
+                `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              )
+            }
+
+            instanceCount[childName] = (instanceCount[childName] || 0) + 1
+          } else if (child) {
             return new Error(
-              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found '${childName}'`
+              `Expected one of ${validTypeNames.join(', ')} in ${componentName} but found an element of unknown type: ${child}`
             )
           }
-
-          instanceCount[childName] = (instanceCount[childName] || 0) + 1
         }
 
         const errors = []
@@ -261,17 +277,38 @@ ${errors.join('\n')}`
       }
 
       function formatTypes (componentName, types) {
-        const children = types.map(type => getDisplayName(type)).map(name => `  <${name} />`).join('\n')
+        const children = types
+          .map((type) => {
+            if (type) {
+              return getDisplayName(type)
+            } else {
+              return '??'
+            }
+          })
+          .map(name => `  <${name} />`)
+          .join('\n')
 
         return `<${componentName}>\n${children}\n</${componentName}>`
       }
 
       return function (props, propName, componentName) {
-        const childNames = React.Children.toArray(props[propName]).map(child => getDisplayName(child.type))
+        const childNames = React.Children.toArray(props[propName]).map((child) => {
+          if (child && child.type) {
+            return getDisplayName(child.type)
+          } else if (child) {
+            return null
+          }
+        })
 
         // Validate each group, if any of them are valid we're done
         for (let i = 0; i < validTypeGroups.length; i++) {
-          const validTypeNames = validTypeGroups[i].map(type => getDisplayName(type))
+          const validTypeNames = validTypeGroups[i].map((type) => {
+            if (type) {
+              return getDisplayName(type)
+            } else {
+              return '??'
+            }
+          })
 
           if (validateTypes(childNames, validTypeNames)) {
             return
