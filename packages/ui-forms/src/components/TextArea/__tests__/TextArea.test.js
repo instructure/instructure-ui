@@ -24,6 +24,7 @@
 
 import React from 'react'
 import TextArea from '../index'
+import styles from '../styles.css'
 
 describe('TextArea', () => {
   const testbed = new Testbed(<TextArea label="Name" autoGrow={false} />)
@@ -73,14 +74,51 @@ describe('TextArea', () => {
 
     const resizedHeight = parseInt(textarea.getComputedStyle().getPropertyValue('height'), 10)
     expect(resizedHeight).to.be.above(initialHeight)
+
+    /* Ensure minHeight that matches input height is being applied to container */
+    const layout = subject.find(`.${styles.layout}`)
+    const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
+    expect(resizedHeight).to.equal(layoutMinHeight)
   })
 
   it('should set a maxHeight', () => {
     const subject = testbed.render({
-      maxHeight: '100px',
-      autoGrow: true
+      maxHeight: '10rem',
+      autoGrow: true,
+      onChange: testbed.stub(),
+      value: `Chartreuse celiac thundercats, distillery snackwave glossier
+      pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
+      meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
+      Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
+      gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
+      batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
+      cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
+      pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
+      pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
+      hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
+      Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
+      hexagon, scenester bushwick tacos
+      Chartreuse celiac thundercats, distillery snackwave glossier
+      pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter,
+      meditation pitchfork meh narwhal copper mug gluten-free vegan next level.
+      Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard
+      gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small
+      batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos
+      cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray
+      pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel
+      pin tumeric retro fam scenester. Succulents keytar cronut, fanny pack kitsch
+      hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa.
+      Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch
+      hexagon, scenester bushwick tacos`
     })
-    expect(subject.find('textarea').getComputedStyle().getPropertyValue('max-height')).to.contain('100px')
+    expect(subject.find('textarea').getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
+
+    /* ensure maxHeight is being applied to input container and not exceeded by minHeight style */
+    const layout = subject.find(`.${styles.layout}`)
+    const layoutMaxHeight = parseInt(layout.getComputedStyle().getPropertyValue('max-height'), 10)
+    const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
+    expect(layoutMaxHeight).to.equal(160)
+    expect(layoutMaxHeight).to.be.above(layoutMinHeight)
   })
 
   it('should focus the textarea when focus is called', () => {

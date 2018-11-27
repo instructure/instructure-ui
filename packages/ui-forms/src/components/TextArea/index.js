@@ -165,9 +165,14 @@ class TextArea extends Component {
   }
 
   _textareaResize = (evt) => {
-    if(this._textarea.style.height != this._height) {
+    const textareaHeight = this._textarea.style.height
+
+    if (textareaHeight != this._height) {
       this._manuallyResized = true
       this._textarea.style.overflowY = 'auto'
+
+      // update container minHeight to ensure focus ring always wraps input
+      this._container.style.minHeight = textareaHeight
     }
   }
 
@@ -197,17 +202,18 @@ class TextArea extends Component {
     const offset = this._textarea.offsetHeight - this._textarea.clientHeight
     let height = ''
 
-    // Note:
+    // Notes:
     // 1. height has be reset to `auto` every time this method runs, or scrollHeight will not reset
-    this._textarea.style.height = 'auto'
     // 2. `this._textarea.scrollHeight` will not reset if assigned to a variable; it needs to be written out each time
-
+    this._textarea.style.height = 'auto'
     this._textarea.style.overflowY = 'hidden' // hide scrollbars for autoGrow textareas
     height = (this._textarea.scrollHeight + offset) + 'px'
 
+    const maxHeight = px(this.props.maxHeight, findDOMNode(this))
+
     if (
       this.props.maxHeight &&
-      (this._textarea.scrollHeight > px(this.props.maxHeight, findDOMNode(this)))) {
+      (this._textarea.scrollHeight > maxHeight)) {
       this._textarea.style.overflowY = 'auto' // add scroll if scrollHeight exceeds maxHeight in pixels
     } else if (this.props.height) {
       if (this._textarea.value === '') {
@@ -218,8 +224,10 @@ class TextArea extends Component {
       }
     }
 
-    if (this._container) {
-      // preserve height to prevent scroll jumping on long textareas
+    // preserve container height to prevent scroll jumping on long textareas,
+    // but make sure container doesn't exceed maxHeight prop
+    const heightExceedsMax = px(height) > maxHeight
+    if (!heightExceedsMax) {
       this._container.style.minHeight = height
     }
 
@@ -336,7 +344,10 @@ class TextArea extends Component {
       >
         <div
           className={styles.layout}
-          style={{width: width}}
+          style={{
+            width: width,
+            maxHeight: maxHeight
+          }}
           ref={this.handleContainerRef}
         >
           { textarea }
