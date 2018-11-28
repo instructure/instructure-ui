@@ -200,4 +200,86 @@ describe('ScreenReaderFocusRegion', async () => {
       })
     })
   })
+
+
+  it('should hide the body element of any iframes present on the page', async () => {
+    const subject = await mount(
+      <div>
+        <div data-test-ignore>
+          <iframe title="unhidden" width="100%" height="100px" />
+        </div>
+        <iframe title="hidden" width="100%" height="100px" />
+        <div>
+          <iframe title="hidden" width="100%" height="100px" />
+          <div data-test-content>
+            <span>
+              <iframe title="unhidden" width="100%" height="100px" />
+            </span>
+            <div>Hello world</div>
+            <button>click me</button>
+            <button>or click me</button>
+            <iframe title="unhidden" width="100%" height="100px"
+            />
+          </div>
+          <div>
+            <span>
+              <iframe title="hidden" width="100%" height="100px" />
+              <iframe title="hidden" width="100%" height="100px" />
+            </span>
+          </div>
+          <iframe title="always-hidden" width="100%" height="100px" />
+        </div>
+      </div>
+    )
+
+    const main = within(subject.getDOMNode())
+    const content = (await main.find('[data-test-content]')).getDOMNode()
+    const ignore = (await main.find('[data-test-ignore]')).getDOMNode()
+
+    const getIframeBody = iframe => iframe.getDOMNode().contentDocument.body
+
+    const alwaysHidden = getIframeBody(await main.find('iframe[title="always-hidden"]'))
+    alwaysHidden.setAttribute('aria-hidden', 'true')
+
+    const screenReaderFocusRegion = new ScreenReaderFocusRegion(
+      content,
+      {
+        liveRegion: ignore,
+        shouldContainFocus: true
+      }
+    )
+
+    // verify no iframe bodies are hidden unless they were hidden initially
+    const iframes = await main.findAll('iframe:not([title="always-hidden"])')
+    iframes.forEach((iframe) => {
+      expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
+    })
+
+    expect(alwaysHidden.getAttribute('aria-hidden')).to.equal('true')
+
+    screenReaderFocusRegion.activate()
+
+    // once activated, all iframe bodies should be hidden except for iframes that
+    // are contained in the defined content element or live region
+    const hiddenIframes = await main.findAll('iframe[title="hidden"]')
+    hiddenIframes.forEach((iframe) => {
+      expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.equal('true')
+    })
+
+    const unhiddenIframes = await main.findAll('iframe[title="unhidden"]')
+    unhiddenIframes.forEach((iframe) => {
+      expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
+    })
+
+    expect(alwaysHidden.getAttribute('aria-hidden')).to.equal('true')
+
+    screenReaderFocusRegion.deactivate()
+
+    // should restore all iframe bodies
+    iframes.forEach((iframe) => {
+      expect(getIframeBody(iframe).getAttribute('aria-hidden')).to.not.exist()
+    })
+
+    expect(alwaysHidden.getAttribute('aria-hidden')).to.equal('true')
+  })
 })

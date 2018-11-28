@@ -80,17 +80,32 @@ export default class ScreenReaderFocusRegion {
     }
   }
 
+  hideNodes (nodes) {
+    nodes.forEach((node) => {
+      if (
+        node &&
+        node.nodeType === 1 &&
+        !(node instanceof HTMLScriptElement) &&
+        this._parents.indexOf(node) === -1 &&
+        this._nodes.indexOf(node) === -1 &&
+        this._liveRegion.indexOf(node) === -1 &&
+        !this._contextElement.contains(node)
+      ) {
+        if (node.tagName !== 'IFRAME') {
+          this.hideNode(node)
+        }
+
+        const iframeBodies = this.parseIframeBodies(node)
+
+        iframeBodies.forEach((iframeBody) => {
+          this.hideNode(iframeBody)
+        })
+      }
+    })
+  }
+
   hideNode (node) {
-    if (
-      node &&
-      node.nodeType === 1 &&
-      !(node instanceof HTMLScriptElement) &&
-      node.getAttribute('aria-hidden') !== 'true' &&
-      this._parents.indexOf(node) === -1 &&
-      this._nodes.indexOf(node) === -1 &&
-      this._liveRegion.indexOf(node) === -1 &&
-      !this._contextElement.contains(node)
-    ) {
+    if (node.getAttribute('aria-hidden') !== 'true') {
       node.setAttribute('aria-hidden', 'true')
       this._nodes.push(node)
     }
@@ -98,20 +113,46 @@ export default class ScreenReaderFocusRegion {
 
   handleDOMMutation = (records) => {
     records.forEach((record) => {
-      Array.from(record.addedNodes).forEach((addedNode) => {
-        this.hideNode(addedNode)
-      })
+      this.hideNodes(Array.from(record.addedNodes))
 
       record.removedNodes.forEach((removedNode) => {
         // Node has been removed from the DOM, make sure it is
         // removed from our list of hidden nodes as well
-        const index = this._nodes.indexOf(removedNode)
-        if (index >= 0) {
-          removedNode.removeAttribute('aria-hidden')
-          this._nodes.splice(index, 1)
+        if (removedNode.tagName !== 'IFRAME') {
+          this.restoreNode(removedNode)
         }
+
+        const iframeBodies = this.parseIframeBodies(removedNode)
+        iframeBodies.forEach((iframeBody) => {
+          this.restoreNode(iframeBody)
+        })
       })
     })
+  }
+
+  restoreNode (removedNode) {
+    const index = this._nodes.indexOf(removedNode)
+
+    if (index >= 0) {
+      removedNode.removeAttribute('aria-hidden')
+      this._nodes.splice(index, 1)
+    }
+  }
+
+  parseIframeBodies (node) {
+    if (!node) return []
+
+    let iframes = []
+
+    if (node.tagName === 'IFRAME') {
+      iframes.push(node)
+    } else {
+      if (node.querySelectorAll) {
+        iframes = [...node.querySelectorAll('IFRAME')]
+      }
+    }
+
+    return iframes.map(iframe => iframe.contentDocument.body)
   }
 
   activate () {
@@ -131,10 +172,7 @@ export default class ScreenReaderFocusRegion {
 
         this.muteNode(parent)
 
-        Array.prototype.slice.call(parent.childNodes)
-          .forEach((child) => {
-            this.hideNode(child)
-          })
+        this.hideNodes(Array.prototype.slice.call(parent.childNodes))
       }
 
       node = node.parentNode // should never be null, will default to doc element
