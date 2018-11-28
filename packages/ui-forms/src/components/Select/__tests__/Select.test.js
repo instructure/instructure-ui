@@ -193,6 +193,38 @@ describe('<Select />', async () => {
     expect(consoleError).to.have.been.calledWithMatch('Expected one of option, optgroup')
   })
 
+  it('should include group value or label in onChange', async () => {
+    const onChange = stub()
+    await mount(
+      <Select
+        label="Choose a vacation destination"
+        onChange={onChange}
+      >
+        <optgroup key="one" label="Group One" value="group-1">
+          <option value="item1">Item One</option>
+        </optgroup>
+        <optgroup key="two" label="Group Two">
+          <option value="item2">Item Two</option>
+        </optgroup>
+      </Select>
+    )
+
+    const select = await SelectLocator.find()
+    const input = await select.findInput()
+    // select first item
+    await input.keyDown('down')
+    await input.keyDown('enter')
+
+    expect(onChange.getCall(0).args[1].group).to.equal('group-1')
+
+    // select second item
+    await input.keyDown('down')
+    await input.keyDown('down')
+    await input.keyDown('enter')
+
+    expect(onChange.getCall(1).args[1].group).to.equal('Group Two')
+  })
+
   describe('for a11y', async () => {
     it('should meet standards when closed', async () => {
       await mount(

@@ -194,8 +194,9 @@ class SelectOptionsList extends Component {
     }
 
     return options.map((option, index) => {
-      const { children, id, disabled, icon, groupLabel, groupItem } = option
+      const { children, id, icon, groupLabel, groupItem } = option
       const selected = getOptionId(selectedOption) === id
+      const disabled = this.props.disabled || groupLabel
       const handlers = {
         onMouseEnter: () => onHighlightOption(index),
         onClick: event => this.handleClick(event, option)
@@ -211,13 +212,13 @@ class SelectOptionsList extends Component {
             [styles.selected]: selected,
             [styles[size]]: size,
             [styles.highlighted]: index === highlightedIndex,
-            [styles.disabled]: disabled || groupLabel,
+            [styles.disabled]: disabled,
             [styles.groupLabel]: groupLabel,
             [styles.groupItem]: groupItem
           })}
           tabIndex="-1"
           aria-selected={selected ? 'true' : 'false'}
-          aria-disabled={disabled || groupLabel ? 'true' : null}
+          aria-disabled={disabled ? 'true' : null}
         >
           <span className={styles.label}>
             {icon && this.renderIcon(icon)}

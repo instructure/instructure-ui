@@ -49,35 +49,39 @@ describe('parseOptions', async () => {
       value: '1',
       children: 'Aruba',
       label: 'Aruba',
+      disabled: false,
       icon: null,
-      disabled: null,
-      groupLabel: null,
-      groupItem: null
+      group: null,
+      groupItem: false,
+      groupLabel: false
     }, {
       id: '2',
       value: '2',
       children: 'Jamaica',
       label: 'Jamaica',
+      disabled: false,
       icon: null,
-      disabled: null,
-      groupLabel: null,
-      groupItem: null
+      group: null,
+      groupItem: false,
+      groupLabel: false
     }, {
       id: '3',
       value: '3',
       children: 'Oh I want to take ya',
       label: 'Oh I want to take ya',
+      disabled: false,
       icon: null,
-      disabled: null,
-      groupLabel: null,
-      groupItem: null
+      group: null,
+      groupItem: false,
+      groupLabel: false
     }]
+
     let ref
     await mount(
       <Example componentRef={el => ref = el}>
-        {children.map(({ value, label }) => (
-          <option key={value} value={value}>{label}</option>
-        ))}
+      {children.map(({ label, value }) => (
+        <option key={value} value={value}>{label}</option>
+      ))}
       </Example>
     )
 

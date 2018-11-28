@@ -259,18 +259,21 @@ example: true
 example: true
 ---
 <div style={{ padding: '0 0 18rem 0', margin: '0 auto' }}>
-  <Select label="Group Select">
-  <optgroup label="Group One">
-    <option value="item1">Item One</option>
-    <option value="item2">Item Two</option>
-  </optgroup>
-  <optgroup label="Group Two">
-    <option value="item3">Item Three</option>
-  </optgroup>
-  <optgroup label="Group With an Icon" icon={IconUser.Solid}>
-    <option value="item5">Item Five</option>
-    <option value="item6">Item Six</option>
-  </optgroup>
+  <Select
+    label="Group Select"
+    onChange={(e, opt) => console.log(`option from '${opt.group}' selected`)}
+  >
+    <optgroup label="Group One" value="group-1">
+      <option value="item1">Item One</option>
+      <option value="item2">Item Two</option>
+    </optgroup>
+    <optgroup label="Group Two" value="group-2">
+      <option value="item3">Item Three</option>
+    </optgroup>
+    <optgroup label="Group With an Icon" icon={IconUser.Solid}>
+      <option value="item5" icon={IconUser.Solid}>Item Five</option>
+      <option value="item6" icon={IconUser.Solid}>Item Six</option>
+    </optgroup>
   </Select>
 
 </div>
@@ -799,7 +802,7 @@ render(
   </div>
 )
 ```
-### Guidelines 
+### Guidelines
 
 ```js
 ---

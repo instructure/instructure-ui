@@ -33,13 +33,15 @@ id: parseOptions
 */
 export default function parseOptions (children) {
   const options = Children.map(children, (child) => {
-    const { label, children } = child.props
+    const { label, value, children } = child.props
     if (child.type === 'optgroup') {
       const group = []
+      const groupValue = value || label
       group.push(
         <option
           {...child.props}
-          value={label}
+          value={groupValue}
+          group={groupValue}
           groupLabel
           disabled
         >
@@ -48,7 +50,11 @@ export default function parseOptions (children) {
       )
       Children.forEach(children, (option, index) => {
         group.push(
-          <option {...option.props} groupItem>
+          <option
+            {...option.props}
+            group={groupValue}
+            groupItem
+          >
             {option.props.children}
           </option>
         )
@@ -58,8 +64,9 @@ export default function parseOptions (children) {
       return child
     }
   })
+
   return Children.map(options, (option) => {
-    const { label, id, value, children, disabled, icon, groupLabel, groupItem } = option.props
+    const { label, id, value, children, disabled, icon, group, groupLabel, groupItem } = option.props
 
     error(typeof value === 'string', 'Select', `The 'value' prop on <option> must be a string.`)
 
@@ -67,11 +74,15 @@ export default function parseOptions (children) {
       id: id || value,
       label: label || children,
       children: children || label,
+      disabled: disabled || false,
+      value,
       icon: icon || null,
-      disabled: disabled || null,
-      groupLabel: groupLabel || null,
-      groupItem: groupItem || null,
-      value
+      // the value or label of the group this option belongs to
+      group: group || null,
+      // whether or not this option is just a label for a group
+      groupLabel: groupLabel || false,
+      // whether or not this option is an item in a group
+      groupItem: groupItem || false
     }
   }) || []
 }
