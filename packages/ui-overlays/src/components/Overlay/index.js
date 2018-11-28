@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 
+import testable from '@instructure/ui-testable'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
@@ -40,6 +41,7 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 category: components
 ---
 **/
+@testable()
 class Overlay extends Component {
   static propTypes = {
     children: PropTypes.node,

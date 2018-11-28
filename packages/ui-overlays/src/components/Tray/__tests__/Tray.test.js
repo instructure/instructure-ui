@@ -23,126 +23,207 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
-import getTextDirection from '@instructure/ui-i18n/lib/utils/getTextDirection'
+
+import { expect, mount, stub, spy, wait, within } from '@instructure/ui-test-utils'
 
 import Tray from '../index'
-import styles from '../styles.css'
+import TrayLocator from '../locator'
 
-describe('<Tray />', () => {
-  const testbed = new Testbed(
-    <Tray label="Tray Example" closeButtonLabel="Close" />
-  )
-
-  it('should render nothing and have a node with no parent when closed', () => {
-    testbed.render()
-    expect(document.querySelector('[aria-label="Tray Example"]'))
-      .to.equal(null)
+describe('<Tray />', async () => {
+  it('should render nothing and have a node with no parent when closed', async () => {
+    await mount(
+      <Tray label="Tray Example">
+        Hello World
+      </Tray>
+    )
+    const tray = await TrayLocator.find({ expectEmpty: true })
+    expect(tray).to.not.exist()
   })
 
-  it('should render children and have a node with a parent when open', () => {
-    testbed.render({ open: true })
-    testbed.tick()
-    testbed.tick()
-    expect(document.querySelector('[aria-label="Tray Example"]'))
-      .to.exist()
+  it('should render children and have a node with a parent when open', async () => {
+    await mount(
+      <Tray label="Tray Example" open>
+        Hello World
+      </Tray>
+    )
+    const tray = await TrayLocator.find(':label(Tray Example)')
+
+    expect(tray.getTextContent()).to.equal('Hello World')
   })
 
-  it('should apply theme overrides when open', () => {
-    testbed.render({
-      open: true,
-      size: 'small',
-      theme: {
-        smallWidth: '10em'
-      },
-      children: [
-        <div key="body">Hello</div>
-      ],
-      placement: 'start'
+  it('should apply theme overrides when open', async () => {
+    await mount(
+      <Tray
+        label="Tray Example"
+        open
+        size="small"
+        theme={{
+          smallWidth: '10em'
+        }}
+        placement="start"
+      >
+        <div>Hello</div>
+      </Tray>
+    )
+    const tray = await TrayLocator.find()
+    const dialog = await tray.find('[role="dialog"]')
+
+    await wait(() => {
+      expect(dialog.getComputedStyle().width)
+        .to.equal('160px')
     })
 
-    testbed.tick()
-
-    expect(window.getComputedStyle(document.querySelector(`.${styles.root}`)).width)
-      .to.equal('160px')
   })
 
+  it('should apply the a11y attributes', async () => {
+    await mount(
+      <Tray label="Tray Example" open>
+        Hello World
+      </Tray>
+    )
+    const tray = await TrayLocator.find()
+    const dialog = await tray.find('[role="dialog"]')
 
-  it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true })
-    const portal = subject.find(Portal).unwrap()
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(portal.node.querySelector('[role="dialog"]')).to.exist()
-    expect(portal.node.querySelector('[aria-label="Tray Example"]')).to.exist()
+    expect(dialog.getAttribute('aria-label')).to.equal('Tray Example')
   })
 
-  it('should support onOpen prop', () => {
-    const onOpen = testbed.stub()
-    testbed.render({
-      open: true,
-      onOpen
+  it('should support onOpen prop', async () => {
+    const onOpen = stub()
+    await mount(
+      <Tray
+        label="Tray Example"
+        open
+        onOpen={onOpen}
+      >
+        Hello World
+      </Tray>
+    )
+
+    await wait(() => {
+      expect(onOpen).to.have.been.calledOnce()
+    })
+  })
+
+  it('should support onClose prop', async () => {
+    const onClose = stub()
+    const subject = await mount(
+      <Tray
+        label="Tray Example"
+        open
+        onClose={onClose}
+      >
+        Hello World
+      </Tray>
+    )
+
+    await subject.setProps({ open: false })
+
+    await wait(() => {
+      expect(onClose).to.have.been.calledOnce()
+    })
+  })
+
+  it('should take a prop for finding default focus', async () => {
+    await mount(
+      <Tray
+        label="Tray Example"
+        open
+        defaultFocusElement={() => document.getElementById('my-input')}
+      >
+        Hello World
+        <input type="text" />
+        <input type="text" id="my-input"/>
+      </Tray>
+    )
+
+    const tray = await TrayLocator.find()
+    const input = await tray.find('#my-input')
+
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
+  })
+
+  it('should call onDismiss prop when Esc key pressed', async () => {
+    const onDismiss = stub()
+    await mount(
+      <Tray
+        open
+        label="Tray Example"
+        shouldCloseOnDocumentClick
+        onDismiss={onDismiss}
+      >
+        Hello World
+        <input type="text" />
+        <input type="text" id="my-input"/>
+      </Tray>
+    )
+
+    await within(document.body).keyUp('escape', {
+      defaultPrevented: false,
+      bubbles: true,
+      button: 0
     })
 
-    testbed.tick() // wait for animation
-    testbed.tick() // wait for animation
-
-    expect(onOpen).to.have.been.called()
+    await wait(() => {
+      expect(onDismiss).to.have.been.calledOnce()
+    })
   })
 
-  it('should support onClose prop', done => {
-    const onClose = testbed.stub()
+  describe('with a closeButtonLabel', async () => {
+    it('should log deprecation warnings', async () => {
+      const consoleWarn = spy(console, 'warn')
+      await mount(
+        <Tray
+          label="Tray Example"
+          closeButtonLabel="Close"
+          open
+        >
+          Hello World
+        </Tray>
+      )
 
-    const subject = testbed.render({
-      onClose,
-      open: true
+      expect(consoleWarn)
+        .to.have.been.calledWithMatch('Warning: [Tray] `closeButtonLabel` was deprecated in 5.0.0.')
     })
 
-    testbed.tick()
+    it('should render an "icon" style close button by default', async () => {
+      await mount(
+        <Tray
+          label="Tray Example"
+          closeButtonLabel="Close"
+          open
+        >
+          Hello World
+        </Tray>
+      )
+      const tray = await TrayLocator.find()
+      const button = await tray.find('button:label(Close)')
+      const icon = await button.find('svg[name="IconX"]')
 
-    subject.setProps({ open: false }, () => {
-      testbed.defer(() => {
-        // wait for re-render after state change
-        testbed.tick()
-        testbed.tick()
-        expect(onClose).to.have.been.called()
-        done()
+      expect(icon).to.exist()
+    })
+
+    it('should focus closeButton by default', async () => {
+      await mount(
+        <Tray
+          open
+          label="Tray Example"
+          closeButtonLabel="close"
+        >
+          <div>
+            <input type="text" />
+          </div>
+        </Tray>
+      )
+
+      const tray = await TrayLocator.find()
+      const button = await tray.find('button:label(close)')
+
+      await wait(() => {
+        expect(button.focused()).to.be.true()
       })
     })
-  })
-
-  it('should render an "icon" style close button by default', () => {
-    let content
-    testbed.render({
-      open: true,
-      contentRef: el => {
-        content = el
-      }
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(Testbed.wrap(content).find(Button).prop('variant')).to.equal('icon')
-  })
-
-  it('should support closeButtonVariant prop', () => {
-    let content
-    testbed.render({
-      open: true,
-      contentRef: el => {
-        content = el
-      },
-      closeButtonVariant: 'icon-inverse'
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(Testbed.wrap(content).find(Button).prop('variant')).to.equal('icon-inverse')
   })
 
   describe('transition()', () => {
@@ -179,102 +260,53 @@ describe('<Tray />', () => {
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].enteringPlacements) {
           const val = placements[dir].enteringPlacements[placement]
-          it(`returns ${val} for ${placement} when entering`, () => {
-            testbed.setTextDirection(dir)
-            getTextDirection.resetDefault()
+          it(`returns ${val} for ${placement} when entering`, async () => {
+            const onEntered = stub()
+            document.documentElement.setAttribute('dir', dir)
 
-            const subject = testbed.render({
-              open: true,
-              placement: placement
+            await mount(
+              <Tray
+                open
+                label="Tray Example"
+                placement={placement}
+                onEntered={onEntered}
+              >
+                Hello
+              </Tray>
+            )
+
+            await wait(() => {
+              expect(onEntered).to.have.been.calledWith(val)
             })
-            expect(subject.instance().transition).to.equal(val)
           })
         }
 
         // eslint-disable-next-line no-restricted-syntax
         for (const placement in placements[dir].exitingPlacements) {
           const val = placements[dir].exitingPlacements[placement]
-          it(`returns ${val} for ${placement} when exiting`, () => {
-            testbed.setTextDirection(dir)
+          it(`returns ${val} for ${placement} when exiting`, async () => {
+            const onExited = stub()
+            document.documentElement.setAttribute('dir', dir)
 
-            const subject = testbed.render({
-              open: false,
-              placement: placement
+            const subject = await mount(
+              <Tray
+                open
+                label="Tray Example"
+                placement={placement}
+                onExited={onExited}
+              >
+                Hello
+              </Tray>
+            )
+
+            await subject.setProps({ open: false })
+
+            await wait(() => {
+              expect(onExited).to.have.been.calledWith(val)
             })
-            expect(subject.instance().transition).to.equal(val)
           })
         }
       })
     }
-  })
-})
-
-describe('<Tray /> managed focus', () => {
-  class TrayExample extends React.Component {
-    static propTypes = {
-      ...Tray.propTypes
-    }
-
-    render () {
-      return (
-        <div>
-          <input type="text" />
-          <Tray {...this.props} closeButtonLabel="close">
-            <div>
-              <input type="text" id="input-one" />
-              <input type="text" id="input-two" />
-            </div>
-          </Tray>
-        </div>
-      )
-    }
-  }
-
-  const testbed = new Testbed(<TrayExample label="A Tray" />)
-
-  it('should focus closeButton by default', () => {
-    let closeButton
-
-    testbed.render({
-      open: true,
-      closeButtonRef: el => {
-        closeButton = el
-      }
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(closeButton === document.activeElement).to.be.true()
-  })
-
-  it('should take a prop for finding default focus', () => {
-    testbed.render({
-      open: true,
-      defaultFocusElement: function () {
-        return document.getElementById('input-one')
-      }
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
-  })
-
-  it('should call onDismiss prop when Esc key pressed', () => {
-    const onDismiss = testbed.stub()
-    testbed.render({
-      open: true,
-      shouldCloseOnDocumentClick: true,
-      onDismiss
-    })
-
-    testbed.tick()
-    testbed.tick()
-
-    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
-
-    expect(onDismiss).to.have.been.called()
   })
 })

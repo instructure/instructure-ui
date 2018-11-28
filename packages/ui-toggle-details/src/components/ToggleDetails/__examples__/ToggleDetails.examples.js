@@ -29,7 +29,6 @@ export default {
   permutations: [
     'variant',
     'size',
-    'border',
     'defaultExpanded',
     'iconPosition',
     'fluidWidth'

@@ -29,6 +29,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
@@ -40,6 +41,7 @@ import theme from './theme'
 parent: Modal
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class ModalBody extends Component {
   static propTypes = {
@@ -55,9 +57,14 @@ export default class ModalBody extends Component {
   }
 
   render () {
+    const passthroughProps = View.omitViewProps(
+      omitProps(this.props, ModalBody.propTypes),
+      ModalBody
+    )
     return (
       <View
-        {...omitProps(this.props, { ...ModalBody.propTypes, ...View.propTypes })}
+        {...passthroughProps}
+        display="block"
         elementRef={this.props.elementRef}
         as={this.props.as}
         className={styles.root}

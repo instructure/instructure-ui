@@ -52,6 +52,7 @@ function testable () {
       }
 
       componentWillUnmount (...args) {
+        this._testableUnmounted = true
         if (super.componentWillUnmount) {
           super.componentWillUnmount(...args)
         }
@@ -61,6 +62,10 @@ function testable () {
       appendLocatorAttribute () {
         this.locatorTimeout = setTimeout(() => {
           let node
+
+          if (this._testableUnmounted) {
+            return
+          }
 
           try {
             // Use this.DOMNode for components that render as non-native Portals...
@@ -79,7 +84,7 @@ function testable () {
 
             node.setAttribute(locator.attribute, values.join(' '))
           }
-        }, 0)
+        })
       }
     }
 

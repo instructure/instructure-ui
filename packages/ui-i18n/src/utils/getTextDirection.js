@@ -24,6 +24,9 @@
 
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
+import warning from '@instructure/ui-utils/lib/warning'
+
+let observer
 
 /**
  * ---
@@ -35,26 +38,22 @@ import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
 export default canUseDOM ? (() => {
-  const getTextDirection = element => {
-    if (typeof element === 'undefined' || (element === htmlEl)) return htmlElDir
-    return getComputedStyle(element).direction
-  }
-
   /**
    * use a cached value for the default of <html> element's "dir" so we don't
    * have to call the expensive getComputedStyle to look it it up every time
    */
   const htmlEl = document.documentElement
-  let htmlElDir
+  let htmlElDir = htmlEl.getAttribute('dir') || getComputedStyle(htmlEl).direction
 
-  /**
-   * Provides an escape hatch if you need to reset the cached value of the
-   * <html> element's "dir" for testing or whatever other purpose.
-   */
-  getTextDirection.resetDefault = () => {
-    htmlElDir = getComputedStyle(htmlEl).direction
+  if (!observer) {
+    observer = new MutationObserver(() => {
+      htmlElDir = htmlEl.getAttribute('dir')
+    })
+    observer.observe(htmlEl, { attributes: true })
   }
-  getTextDirection.resetDefault()
 
-  return getTextDirection
+  return element => {
+    if (typeof element === 'undefined' || (element === htmlEl)) return htmlElDir
+    return getComputedStyle(element).direction
+  }
 })() : function(){}

@@ -124,6 +124,18 @@ export default class Transition extends Component {
 
   static states = BaseTransition.states
 
+  handleExited = () => {
+    if (typeof this.props.onExited === 'function') {
+      this.props.onExited(this.props.type)
+    }
+  }
+
+  handleEntered = () => {
+    if (typeof this.props.onEntered === 'function') {
+      this.props.onEntered(this.props.type)
+    }
+  }
+
   render () {
     const {
       type,
@@ -150,6 +162,8 @@ export default class Transition extends Component {
         exitingClassName={classNames.exiting}
         enteredClassName={classNames.entering}
         enteringClassName={classNames.entered}
+        onEntered={this.handleEntered}
+        onExited={this.handleExited}
       >
         {children}
       </BaseTransition>

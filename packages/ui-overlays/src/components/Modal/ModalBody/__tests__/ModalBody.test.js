@@ -23,42 +23,51 @@
  */
 
 import React from 'react'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
+
 import View from '@instructure/ui-layout/lib/components/View'
 
 import ModalBody from '../index'
 
-describe('<ModalBody />', () => {
-  const testbed = new Testbed(<ModalBody />)
+import ModalBodyLocator from '../locator'
 
-  it('should render', () => {
-    const subject = testbed.render()
-    expect(subject).to.exist()
+describe('<ModalBody />', async () => {
+  it('should render', async () => {
+    await mount(<ModalBody />)
+    const body = await ModalBodyLocator.find()
+    expect(body).to.exist()
   })
 
-  describe('when passing down props to View', () => {
+  describe('when passing down props to View', async () => {
     const allowedProps = {
       padding: 'small',
       elementRef: () => {},
-      as: 'section',
-      display: View.defaultProps.display
+      as: 'section'
     }
 
     Object.keys(View.propTypes)
       .filter(prop => prop !== 'theme' && prop !== 'children')
       .forEach((prop) => {
         if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should NOT allow the '${prop}' prop`, async () => {
+            const warning = `Warning: [ModalBody] prop '${prop}' is not allowed.`
+            const consoleError = stub(console, 'error')
+            const props = {
               [prop]: 'foo'
-            })
-            expect(subject.find(View).first().props()[prop]).to.not.exist()
+            }
+            await mount(<ModalBody {...props} />)
+            expect(consoleError)
+              .to.be.calledWithExactly(warning)
           })
         } else {
-          it(`should allow the '${prop}' prop`, () => {
-            const subject = testbed.render({
+          it(`should allow the '${prop}' prop`, async () => {
+            const consoleError = stub(console, 'error')
+            const props = {
               [prop]: allowedProps[prop]
-            })
-            expect(subject.find(View).first().props()[prop]).to.equal(allowedProps[prop])
+            }
+            await mount(<ModalBody {...props} />)
+            expect(consoleError)
+              .to.not.be.called()
           })
         }
     })

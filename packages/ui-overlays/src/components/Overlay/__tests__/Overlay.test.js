@@ -23,73 +23,83 @@
  */
 
 import React from 'react'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+
 import Overlay from '../index'
+import OverlayLocator from '../locator'
 
-describe('<Overlay />', () => {
-  const testbed = new Testbed(<Overlay label="Overlay Testbed"/>)
-
-  it('should render nothing when closed', () => {
-    const subject = testbed.render()
-    const portal = subject.find(Portal).unwrap()
-    expect(portal.node).to.equal(undefined) // eslint-disable-line no-undefined
+describe('<Overlay />', async () => {
+  it('should render nothing when closed', async () => {
+    await mount(
+      <Overlay label="Overlay Example"/>
+    )
+    const overlay = await OverlayLocator.find({ expectEmpty: true })
+    expect(overlay).to.not.exist()
   })
 
-  it('should render children and have a node with a parent when open', () => {
-    const subject = testbed.render({
-      open: true
-    })
-    const node = subject.find(Portal).unwrap().node
-    expect(node.parentNode).to.equal(document.body)
+  it('should render children when open', async () => {
+    await mount(
+      <Overlay open label="Overlay Example">
+        Hello World
+      </Overlay>
+    )
+    const overlay = await OverlayLocator.find(':label(Overlay Example)')
+    expect(overlay.getTextContent()).to.equal('Hello World')
   })
 
-  it('should use transition', () => {
-    const onEnter = testbed.stub()
-    const onEntering = testbed.stub()
-    const onEntered = testbed.stub()
-    testbed.render({
-      open: true,
-      transition: 'fade',
-      onEnter,
-      onEntering,
-      onEntered
+  it('should fire transition callback props', async () => {
+    const onEnter = stub()
+    const onEntering = stub()
+    const onEntered = stub()
+    await mount(
+      <Overlay
+        open
+        transition="fade"
+        label="Overlay Example"
+        onEnter={onEnter}
+        onEntering={onEntering}
+        onEntered={onEntered}
+      />
+    )
+
+    await wait(() => {
+      expect(onEnter).to.have.been.calledOnce()
+      expect(onEntering).to.have.been.calledOnce()
+      expect(onEntered).to.have.been.calledOnce()
     })
-
-    testbed.tick()
-
-    expect(onEnter).to.have.been.called()
-
-    testbed.tick()
-
-    expect(onEntering).to.have.been.called()
-    expect(onEntered).to.have.been.called()
   })
 
-  it('should support onOpen prop', () => {
-    const onOpen = testbed.stub()
-    testbed.render({
-      open: true,
-      onOpen
+  it('should support onOpen prop', async () => {
+    const onOpen = stub()
+    await mount(
+      <Overlay
+        open
+        label="Overlay Example"
+        onOpen={onOpen}
+      />
+    )
+
+    await wait(() => {
+      expect(onOpen).to.have.been.calledOnce()
     })
-
-    testbed.tick()
-
-    expect(onOpen).to.have.been.called()
   })
 
-  it('should support onClose prop', done => {
-    const onClose = testbed.stub()
-
-    const subject = testbed.render({
-      onClose,
-      open: true
-    })
+  it('should support onClose prop', async () => {
+    const onClose = stub()
+    const subject = await mount(
+      <Overlay
+        open
+        label="Overlay Example"
+        onClose={onClose}
+      />
+    )
 
     expect(onClose).to.not.have.been.called()
 
-    subject.setProps({ open: false }, () => {
-      expect(onClose).to.have.been.called()
-      done()
+    await subject.setProps({ open: false })
+
+    await wait(() => {
+      expect(onClose).to.have.been.calledOnce()
     })
   })
 })

@@ -21,42 +21,43 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { PopoverTrigger, PopoverContent } from '../'
 
-import Mask from '../index'
-import styles from '../styles.css'
-
-describe('<Mask />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<Mask />)
-    expect(subject.getDOMNode()).to.exist()
-  })
-
-  it('should have tabIndex -1 when onClick is provided', async () => {
-    const onClick = stub()
-    const subject = await mount(<Mask onClick={onClick} />)
-    expect(subject.getDOMNode().getAttribute('tabindex'))
-      .to.equal('-1')
-  })
-
-  it('should call onClick prop when clicked', async () => {
-    const onClick = stub()
-    const subject = await mount(<Mask onClick={onClick} />)
-
-    const mask = within(subject.getDOMNode())
-    const clickable = await mask.find(':clickable')
-
-    await clickable.click()
-
-    expect(onClick).to.have.been.called()
-  })
-
-  it('should apply fullscreen class when prop is true', async () => {
-    const subject = await mount(<Mask fullscreen />)
-    const mask = within(subject.getDOMNode())
-    const fullscreen = await mask.find(`.${styles['fullscreen']}`)
-    expect(fullscreen).to.exist()
-  })
-})
+export default {
+  permutations: [
+    'withArrow',
+    {placement: [
+      'bottom center',
+      'start top'
+    ]},
+    {dir: [
+      'rtl',
+      'ltr'
+    ]}
+  ],
+  renderProps: (props) => {
+    return {
+      componentProps: {
+        defaultShow: true,
+        children: [
+          <PopoverTrigger key="trigger">
+            <button>Show Popup</button>
+          </PopoverTrigger>,
+          <PopoverContent key="content">
+            <h2>Hello World</h2>
+          </PopoverContent>
+        ]
+      },
+      exampleProps: {
+        dir: props.dir,
+        as: 'div',
+        width: '100%',
+        height: '10rem',
+        margin: 'small',
+        padding: 'small',
+        textAlign: 'center'
+      }
+    }
+  }
+}

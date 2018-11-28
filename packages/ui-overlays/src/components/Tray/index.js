@@ -35,6 +35,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
@@ -49,6 +50,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @deprecated('3.0.0', {
   onRequestClose: 'onDismiss',
   isOpen: 'open',
@@ -377,6 +379,7 @@ class Tray extends Component {
               {
                 (this.state.transitioning) ? this.renderContent() : (
                   <Dialog
+                    as="div"
                     label={label}
                     defaultFocusElement={this.defaultFocusElement}
                     open

@@ -30,7 +30,6 @@ module.exports = {
     'packages/media-capture/',
     'packages/ui-form-field/',
     'packages/ui-forms/',
-    'packages/ui-media-player/',
-    'packages/ui-overlays/'
+    'packages/ui-media-player/'
   ]
 }

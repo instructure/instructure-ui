@@ -23,70 +23,31 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import Position from '@instructure/ui-layout/lib/components/Position'
-import ContextView from '@instructure/ui-layout/lib/components/ContextView'
-import View from '@instructure/ui-layout/lib/components/View'
+import { expect, mount, spy, within, wait } from '@instructure/ui-test-utils'
 
 import Popover, { PopoverTrigger, PopoverContent } from '../index'
-import PopoverInlineExample from './__testfixtures__/PopoverInlineExample'
 
-describe('<Popover />', () => {
-  let content
+import PopoverLocator from '../locator'
 
-  const contentRef = (el) => {
-    content = el
-  }
+describe('<Popover />', async () => {
+  it('should not render content by default', async () => {
+    await mount(
+      <Popover on="click">
+        <PopoverTrigger>
+          <button>Click Me</button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <h2>Foo Bar Baz</h2>
+        </PopoverContent>
+      </Popover>
+    )
 
-  const testbed = new Testbed(
-    <Popover on="click" contentRef={contentRef}>
-      <PopoverTrigger>
-        <Button>Click Me</Button>
-      </PopoverTrigger>
-      <PopoverContent>
-        <h2>Foo Bar Baz</h2>
-      </PopoverContent>
-    </Popover>
-  )
+    const popover = await PopoverLocator.find(':label(Click Me)')
+    const trigger = await popover.findTrigger()
+    const content = await popover.findContent({ expectEmpty: true })
 
-  function testShowContent (on, eventType) {
-    it(`should show content on ${on}`, () => {
-      // If on is hover, also add focus to avoid warning
-      const onValue = [on, on === 'hover' ? 'focus' : undefined] // eslint-disable-line no-undefined
-      const subject = testbed.render({ on: onValue })
-      const button = subject.find(Button)
-
-      button.simulate(eventType)
-
-      expect(content).to.not.be.null()
-    })
-  }
-
-  function testEventHandler (handler, ...eventType) {
-    it(`should fire ${handler} handler`, () => {
-      const spy = testbed.spy()
-      const subject = testbed.render({ [handler]: spy })
-      const button = subject.find(Button)
-
-      eventType.forEach((type) => {
-        button.simulate(type)
-      })
-
-      expect(spy).to.have.been.called()
-    })
-  }
-
-  beforeEach(() => {
-    content = null
-  })
-
-  it('should not render content by default', () => {
-    const subject = testbed.render()
-
-    const button = subject.find(Button)
-
-    expect(button.length).to.equal(1)
-    expect(content).to.be.null()
+    expect(trigger.getTextContent()).to.equal('Click Me')
+    expect(content).to.not.exist()
   })
 
   testShowContent('click', 'click')
@@ -97,175 +58,269 @@ describe('<Popover />', () => {
   testEventHandler('onFocus', 'focus')
   testEventHandler('onBlur', 'focus', 'blur')
 
-  it('should close when clicked outside content by default', () => {
-    const subject = testbed.render()
-    const button = subject.find(Button)
-    button.simulate('click')
+  it('should close when clicked outside content by default', async () => {
+    await mount(
+      <Popover on="click">
+        <PopoverTrigger>
+          <button>Click Me</button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <h2>Foo Bar Baz</h2>
+        </PopoverContent>
+      </Popover>
+    )
 
-    testbed.tick()
+    const popover = await PopoverLocator.find(':label(Click Me)')
+    const trigger = await popover.findTrigger()
 
-    document.body.click()
+    await trigger.click()
 
-    testbed.tick()
+    await within(trigger.getOwnerDocument().documentElement)
+      .click()
 
-    expect(content).to.be.null()
+    const content = await popover.findContent({ expectEmpty: true })
+
+    expect(content).to.not.exist()
   })
 
-  it('should close when trigger is clicked', () => {
-    const subject = testbed.render()
-    const button = subject.find(Button)
+  it('should close when trigger is clicked', async () => {
+    await mount(
+      <Popover on="click">
+        <PopoverTrigger>
+          <button>Click Me</button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <h2>Foo Bar Baz</h2>
+        </PopoverContent>
+      </Popover>
+    )
 
-    button.simulate('click')
-    button.simulate('click')
+    const popover = await PopoverLocator.find()
+    const trigger = await popover.findTrigger()
 
-    expect(content).to.be.null()
+    await trigger.click()
+    await trigger.click()
+
+    const content = await popover.findContent({ expectEmpty: true })
+
+    expect(content).to.not.exist()
   })
 
-  describe('controlled', () => {
-    it('should show content if defaultShow is true', () => {
-      testbed.render({defaultShow: true})
+  describe('controlled', async () => {
+    it('should show content if defaultShow is true', async () => {
+      await mount(
+        <Popover on="click" defaultShow>
+          <PopoverTrigger>
+            <button>Click Me</button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <h2>Foo Bar Baz</h2>
+          </PopoverContent>
+        </Popover>
+      )
+      const popover = await PopoverLocator.find()
+      const content = await popover.findContent()
 
-      expect(content).to.not.be.null()
+      expect(content.getTextContent()).to.equal('Foo Bar Baz')
     })
 
-    it('should support show prop', (done) => {
-      const onToggle = testbed.spy()
-      const subject = testbed.render({ show: false, onToggle })
+    it('should support show prop', async () => {
+      const onToggle = spy()
+      const subject = await mount(
+        <Popover on="click" show={false} onToggle={onToggle}>
+          <PopoverTrigger>
+            <button>Click Me</button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <h2>Foo Bar Baz</h2>
+          </PopoverContent>
+        </Popover>
+      )
+      const popover = await PopoverLocator.find()
+      let content = await popover.findContent({ expectEmpty: true })
 
-      subject.setProps({ show: true }, () => {
-        expect(content).to.not.be.null()
-        done()
-      })
+      expect(content).to.not.exist()
+
+      await subject.setProps({ show: true })
+
+      content = await popover.findContent()
+
+      expect(content.getTextContent()).to.equal('Foo Bar Baz')
     })
 
-    it('should call onToggle', () => {
-      const onToggle = testbed.spy()
-      const subject = testbed.render({ show: false, onToggle })
-      const button = subject.find(Button)
+    it('should call onToggle', async () => {
+      const onToggle = spy()
+      await mount(
+        <Popover on="click" show={false} onToggle={onToggle}>
+          <PopoverTrigger>
+            <button>Click Me</button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <h2>Foo Bar Baz</h2>
+          </PopoverContent>
+        </Popover>
+      )
+      const popover = await PopoverLocator.find()
+      const trigger = await popover.findTrigger()
 
-      button.simulate('click')
+      await trigger.click()
 
       expect(onToggle).to.have.been.calledWith(true)
     })
 
-    it('should not show content on click', () => {
-      const onToggle = testbed.spy()
-      const subject = testbed.render({ show: false, onToggle })
-      const button = subject.find(Button)
+    it('should not show content on click', async () => {
+      const onToggle = spy()
+      await mount(
+        <Popover on="click" show={false} onToggle={onToggle}>
+          <PopoverTrigger>
+            <button>Click Me</button>
+          </PopoverTrigger>
+          <PopoverContent>
+            <h2>Foo Bar Baz</h2>
+          </PopoverContent>
+        </Popover>
+      )
+      const popover = await PopoverLocator.find()
+      const trigger = await popover.findTrigger()
 
-      button.simulate('click')
+      await trigger.click()
 
-      expect(content).to.be.null()
+      const content = await popover.findContent({ expectEmpty: true })
+
+      expect(content).to.not.exist()
     })
   })
 
-  describe('withArrow', () => {
-    it('should render a ContextView component when withArrow is true', () => {
-      const subject = testbed.render({
-        withArrow: true
-      })
+  describe('when content is rendered inline with trigger', async () => {
+    it('should not hide popover content if it contains the active focused element', async () => {
+      await mount(
+        <span>
+          <Popover
+            on={['hover', 'focus']}
+            mountNode={() => document.getElementById('container')}
+            defaultFocusElement={() => document.getElementById('trigger')}
+          >
+            <PopoverTrigger>
+              <button id="trigger">foo</button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <button>bar</button>
+            </PopoverContent>
+          </Popover>
+          <span id="container" />
+        </span>
+      )
 
-      const button = subject.find('button')
-      button.simulate('click')
+      const popover = await PopoverLocator.find()
+      const trigger = await popover.findTrigger()
 
-      testbed.tick()
+      await trigger.focus()
 
-      expect(subject.instance()._view instanceof ContextView).to.be.true()
+      let content = await popover.findContent()
+
+      expect(content).to.exist()
+
+      await content.focus()
+
+      content = await popover.findContent()
+
+      expect(content).to.exist()
     })
 
-    it('should render a View component when withArrow is false', () => {
-      const subject = testbed.render({
-        withArrow: false
-      })
+    it('should hide the popover when tabbing out of focusable content', async () => {
+      await mount(
+        <span>
+          <Popover
+            on={['hover', 'focus']}
+            mountNode={() => document.getElementById('container')}
+            defaultFocusElement={() => document.getElementById('trigger')}
+            shouldContainFocus={false}
+          >
+            <PopoverTrigger>
+              <button id="trigger">foo</button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <button>bar</button>
+            </PopoverContent>
+          </Popover>
+          <span id="container" />
+        </span>
+      )
 
-      const button = subject.find('button')
-      button.simulate('click')
+      const popover = await PopoverLocator.find()
+      const trigger = await popover.findTrigger()
 
-      testbed.tick()
-      expect(subject.instance()._view instanceof View).to.be.true()
-    })
-  })
+      await trigger.focus()
 
-  describe('alignArrow', () => {
-    it('sets the offset when alignArrow is true, and placement is not center', () => {
-      const subject = testbed.render({
-        alignArrow: true,
-        placement: 'bottom start',
-        defaultShow: true
-      })
-      testbed.tick()
-      const position = subject.find(Position)
-      expect(position.prop('offsetX')).to.not.equal(0)
-    })
+      let content = await popover.findContent()
 
-    it('uses the passed offset when alignArrow is false', () => {
-      const subject = testbed.render({
-        placement: 'bottom start',
-        defaultShow: true,
-        offsetX: -1,
-        offsetY: -2
-      })
-      testbed.tick()
-      const position = subject.find(Position)
-      expect(position.prop('offsetX')).to.equal(-1)
-      expect(position.prop('offsetY')).to.equal(-2)
-    })
-  })
+      expect(content).to.exist()
 
-  describe('focus and blur', () => {
-    const testbed = new Testbed(
-      <PopoverInlineExample />
-    )
+      await content.focus()
 
-    it('should be able to navigate to focusable content when content is rendered inline with trigger', () => {
-      let trigger, content
+      content = await popover.findContent()
 
-      testbed.render({
-        triggerRef: (el) => { trigger = el },
-        contentRef: (el) => { content = el }
-      })
+      await content.keyDown('tab')
 
-      trigger.focus()
-      testbed.tick()
+      content = await popover.findContent({ expectEmpty: true })
 
-      content.focus()
-      testbed.raf()
-
-      expect(content).to.not.be.null()
-    })
-
-    it('should dismiss the popover when tabbing out of focusable content', () => {
-      let trigger, content
-
-      testbed.render({
-        shouldContainFocus: false,
-        triggerRef: (el) => { trigger = el },
-        contentRef: (el) => { content = el }
-      })
-
-      trigger.focus()
-      testbed.tick()
-
-      content.focus()
-
-      const contentWrapper = Testbed.wrap(content)
-      contentWrapper.dispatchNativeKeyboardEvent('keydown', 'tab')
-      testbed.raf()
-
-      expect(content).to.be.null()
-    })
-  })
-
-  describe('rtl', () => {
-    it('mirrors the placement when rtl is set', () => {
-      const subject = testbed.render({
-        placement: 'start top',
-        dir: 'rtl'
-      })
-
-      testbed.tick()
-      const position = subject.find(Position)
-      expect(position.prop('placement')).to.equal('end top')
+      expect(content).to.not.exist()
+      expect(trigger.focused()).to.be.true()
     })
   })
 })
+
+function testShowContent (on, eventType) {
+  it(`should show content on ${on}`, async () => {
+    const onValue = [on, on === 'hover' ? 'focus' : null]
+    await mount(
+      <Popover on={onValue}>
+        <PopoverTrigger>
+          <button>Click Me</button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <h2>Foo Bar Baz</h2>
+        </PopoverContent>
+      </Popover>
+    )
+
+    const popover = await PopoverLocator.find()
+    const trigger = await popover.findTrigger()
+
+    await trigger[eventType]()
+
+    const content = await popover.findContent()
+
+    expect(content.getTextContent()).to.equal('Foo Bar Baz')
+  })
+}
+
+function testEventHandler (handler, ...eventType) {
+  it(`should fire ${handler} handler`, async () => {
+    const handlerSpy = spy()
+    const props = {
+      [handler]: handlerSpy
+    }
+    await mount(
+      <Popover {...props}>
+        <PopoverTrigger>
+          <button>Click Me</button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <h2>Foo Bar Baz</h2>
+        </PopoverContent>
+      </Popover>
+    )
+
+    const popover = await PopoverLocator.find()
+    const trigger = await popover.findTrigger()
+
+    eventType.forEach(async (type) => {
+      await trigger[type]()
+    })
+
+    await wait(() => {
+      expect(handlerSpy).to.have.been.calledOnce()
+    })
+  })
+}

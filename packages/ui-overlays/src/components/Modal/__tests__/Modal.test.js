@@ -23,300 +23,376 @@
  */
 
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import { expect, mount, stub, spy, wait, within } from '@instructure/ui-test-utils'
 
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
+import ModalLocator from '../locator'
 import styles from '../styles.css'
 
-describe('<Modal />', () => {
-  const testbed = new Testbed(
-    (
+describe('<Modal />', async () => {
+  it('should render nothing and have a node with no parent when closed', async () => {
+    await mount(
       <Modal
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+    const modal = await ModalLocator.find(':label(Modal Dialog)', { expectEmpty: true })
+
+    expect(modal).to.not.exist()
+  })
+
+  it('should render its own layout wrapper if fullscreen', async () => {
+    await mount(
+      <Modal
+        open
+        size="fullscreen"
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    const modal = await ModalLocator.find(':label(Modal Dialog)')
+    const layout = await modal.find(`.${styles['fullscreenLayout']}`)
+
+    expect(layout).to.exist()
+  })
+
+  it('should apply theme overrides when open', async () => {
+    await mount(
+      <Modal
+        open
+        size="small"
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+        theme={{
+          smallMaxWidth: '10em'
+        }}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    const modal = await ModalLocator.find()
+    const body = await modal.findBody()
+
+    expect(body.getComputedStyle().width)
+      .to.equal('158px') // subtract the borders
+  })
+
+  it('should render its own positioning context if constrained to parent', async () => {
+    await mount(
+      <Modal
+        open
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+        constrain="parent"
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    const modal = await ModalLocator.find(':label(Modal Dialog)')
+    const constrain = await modal.find(`.${styles['constrainContext']}`)
+
+    expect(constrain).to.exist()
+  })
+
+  it('should apply the aria attributes', async () => {
+    await mount(
+      <Modal
+        open
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+    const modal = await ModalLocator.find()
+    const dialog = await modal.find(':label(Modal Dialog)')
+
+    expect(dialog.getAttribute('role')).to.equal('dialog')
+  })
+
+  it('should use transition', async  () => {
+    const onEnter = stub()
+    const onEntering = stub()
+    const onEntered = stub()
+
+    await mount(
+      <Modal
+        open
+        onEnter={onEnter}
+        onEntering={onEntering}
+        onEntered={onEntered}
         transition="fade"
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    await wait(() => {
+      expect(onEnter).to.have.been.calledOnce()
+      expect(onEntering).to.have.been.calledOnce()
+      expect(onEntered).to.have.been.calledOnce()
+    })
+  })
+
+  it('should support onOpen prop', async () => {
+    const onOpen = stub()
+    await mount(
+      <Modal
+        open
+        onOpen={onOpen}
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    await wait(() => {
+      expect(onOpen).to.have.been.calledOnce()
+    })
+  })
+
+  it('should support onClose prop', async () => {
+    const onClose = stub()
+    const subject = await mount(
+      <Modal
+        open
+        onClose={onClose}
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    await subject.setProps({ open: false })
+
+    await wait (()  => {
+      expect(onClose).to.have.been.calledOnce()
+    })
+  })
+
+  it('should dismiss when overlay clicked by default', async () => {
+    const onDismiss = stub()
+    await mount(
+      <Modal
+        open
+        onDismiss={onDismiss}
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    const modal = await ModalLocator.find()
+
+    await within(modal.getOwnerDocument().body).click()
+
+    await wait (() => {
+      expect(onDismiss).to.have.been.calledOnce()
+    })
+  })
+
+  it('should NOT dismiss when overlay clicked with shouldCloseOnDocumentClick=false', async () => {
+    const onDismiss = stub()
+    await mount(
+      <Modal
+        open
+        onDismiss={onDismiss}
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+        shouldCloseOnDocumentClick={false}
+      >
+        <ModalBody>Foo Bar Baz</ModalBody>
+      </Modal>
+    )
+
+    let modal = await ModalLocator.find()
+
+    await within(modal.getOwnerDocument().body).click()
+
+    await wait (() => {
+      expect(onDismiss).to.not.have.been.called()
+    })
+
+    expect(modal).to.exist()
+  })
+
+  it('should dismiss when close button is clicked', async () => {
+    const onDismiss = stub()
+    const consoleWarn = spy(console, 'warn')
+
+    await mount(
+      <Modal
+        open
+        onDismiss={onDismiss}
         label="Modal Dialog"
         closeButtonLabel="Close"
         shouldReturnFocus={false}
       >
-        <ModalBody />
+        <ModalBody>Foo Bar Baz</ModalBody>
       </Modal>
     )
-  )
 
-  it('should apply theme overrides when open', () => {
-    testbed.render({
-      open: true,
-      size: 'small',
-      theme: {
-        smallMaxWidth: '10em'
-      },
-      children: [
-        <ModalBody key="body">Foo Bar Baz</ModalBody>
-      ]
+    expect(consoleWarn)
+      .to.have.been.calledWithMatch('Warning: [Modal] `closeButtonLabel` was deprecated in 5.0.0.')
+
+    const modal = await ModalLocator.find(':label(Modal Dialog)')
+    const closeButton = await modal.find(':label(Close)')
+
+    await closeButton.click()
+
+    await wait(() => {
+      expect(onDismiss).to.have.been.called()
     })
-    expect(window.getComputedStyle(document.querySelector('[aria-label="Modal Dialog"]')).width)
-      .to.equal('160px')
   })
 
-  it('should render nothing and have a node with no parent when closed', () => {
-    const subject = testbed.render()
-    const node = subject.find(Portal).unwrap().node
-    expect(node).to.equal(undefined) // eslint-disable-line no-undefined
+  it('should render children', async () => {
+    await mount(
+      <Modal
+        open
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        <ModalBody>
+          <button>Cancel</button>
+        </ModalBody>
+      </Modal>
+    )
+    const modal = await ModalLocator.find(':label(Modal Dialog)')
+    const cancelButton = await modal.find(':label(Cancel)')
+
+    expect(cancelButton).to.exist()
   })
 
-  it('should render children and have a node with a parent when open', () => {
-    const subject = testbed.render({
-      open: true
-    })
-    const portal = subject.find(Portal).unwrap()
-
-    expect(portal.node.parentNode).to.equal(document.body)
-  })
-
-  it('should render its own layout wrapper if fullscreen', () => {
-    const subject = testbed.render({
-      open: true,
-      size: 'fullscreen'
-    })
-
-    const fullscreenLayout = subject.find(Portal).unwrap().node.querySelector(`.${styles['fullscreenLayout']}`)
-    expect(fullscreenLayout).to.exist()
-  })
-
-  it('should render its own positioning context if constrained to parent', () => {
-    const subject = testbed.render({
-      open: true,
-      constrain: 'parent'
-    })
-
-    const constrain = subject.find(Portal).unwrap().node.querySelector(`.${styles['constrainContext']}`)
-    expect(constrain).to.exist()
-  })
-
-  it('should apply the a11y attributes', () => {
-    const subject = testbed.render({ open: true })
-    const portal = subject.find(Portal).unwrap()
-
-    expect(portal.node.querySelector('[role="dialog"]')).to.exist()
-    expect(portal.node.querySelector('[aria-label="Modal Dialog"]')).to.exist()
-  })
-
-  it('should use transition', () => {
-    const onEnter = testbed.stub()
-    const onEntering = testbed.stub()
-    const onEntered = testbed.stub()
-
-    testbed.render({
-      open: true,
-      transition: 'fade',
-      onEnter,
-      onEntering,
-      onEntered
+  describe('children validation', async () => {
+    it('should pass validation when children are valid', async () => {
+      await expect(
+        mount(
+          <Modal
+            open
+            label="Modal Dialog"
+            shouldReturnFocus={false}
+          >
+            <ModalHeader>Hello World</ModalHeader>
+            <ModalBody>Foo Bar Baz</ModalBody>
+            <ModalFooter>
+              <button>Cancel</button>
+            </ModalFooter>
+          </Modal>
+        )
+      ).to.not.be.rejected()
     })
 
-    testbed.tick()
-
-    expect(onEnter).to.have.been.called()
-
-    testbed.tick()
-
-    expect(onEntering).to.have.been.called()
-    expect(onEntered).to.have.been.called()
+    it('should not pass validation when children are invalid', async () => {
+      const consoleError = stub(console, 'error')
+      await mount(
+        <Modal
+          open
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+        >
+          <ModalBody>Foo Bar Baz</ModalBody>
+          <ModalFooter>
+            <button>Cancel</button>
+          </ModalFooter>
+          <ModalHeader>Hello World</ModalHeader>
+        </Modal>
+      )
+      expect(consoleError)
+        .to.have.been.calledWithMatch('Expected children of Modal in one of the following formats:')
+    })
   })
 
-  it('should support onOpen prop', () => {
-    const onOpen = testbed.stub()
-    testbed.render({
-      open: true,
-      onOpen
-    })
+  describe('managed focus', async () => {
+    class ModalExample extends React.Component {
+      static propTypes = {
+        ...Modal.propTypes
+      }
 
-    testbed.tick()
+      render () {
+        return (
+          <div>
+            <input type="text" />
+            <Modal {...this.props}>
+              <ModalHeader><button>Close</button></ModalHeader>
+              <ModalBody>
+                <input type="text" id="input-one" />
+                <input type="text" id="input-two" />
+              </ModalBody>
+              <ModalFooter>
+                <button>Cancel</button>
+              </ModalFooter>
+            </Modal>
+          </div>
+        )
+      }
+    }
 
-    expect(onOpen).to.have.been.called()
-  })
+    it('should focus closeButton by default', async () => {
+      await mount(
+        <ModalExample open label="A Modal" />
+      )
 
-  it('should support onClose prop', done => {
-    const onClose = testbed.stub()
+      const modal = await ModalLocator.find(':label(A Modal)')
+      const closeButton  = await modal.find(':label(Close)')
 
-    const subject = testbed.render({
-      onClose,
-      open: true
-    })
-
-    testbed.tick()
-
-    subject.setProps({ open: false }, () => {
-      testbed.defer(() => {
-        // wait for re-render after state change
-        testbed.tick()
-        testbed.tick()
-        expect(onClose).to.have.been.called()
-        done()
+      await wait(() => {
+        expect(closeButton.focused()).to.be.true()
       })
     })
-  })
 
-  it('should dismiss when overlay clicked by default', () => {
-    const onDismiss = testbed.stub()
-
-    testbed.render({
-      open: true,
-      onDismiss
-    })
-
-    testbed.tick()
-
-    testbed.wrapper.dispatchNativeMouseEvent('click', {
-      bubbles: true
-    })
-
-    expect(onDismiss).to.have.been.called()
-  })
-
-  it('should dismiss when overlay clicked with prop', () => {
-    const onDismiss = testbed.stub()
-
-    testbed.render({
-      open: true,
-      shouldCloseOnDocumentClick: false,
-      onDismiss
-    })
-
-    testbed.tick()
-
-    testbed.wrapper.dispatchNativeMouseEvent('click', {
-      bubbles: true
-    })
-
-    expect(onDismiss).to.not.have.been.called()
-  })
-
-  it('should dismiss when close button is clicked', () => {
-    const onDismiss = testbed.stub()
-    const subject = testbed.render({
-      open: true,
-      onDismiss
-    })
-
-    subject.ref('_content').find(Button).simulate('click')
-
-    expect(onDismiss).to.have.been.called()
-  })
-
-  it('should render children', () => {
-    const subject = testbed.render({
-      open: true,
-      children: (
-        <ModalBody>
-          <Button>Cancel</Button>
-        </ModalBody>
+    it('should take a prop for finding default focus', async () => {
+      await mount(
+        <ModalExample
+          open
+          label="A Modal"
+          defaultFocusElement={() => {
+            return document.getElementById('input-one')
+          }}
+        />
       )
+
+      const modal = await ModalLocator.find(':label(A Modal)')
+      const input = await modal.find('#input-one')
+
+      await wait(() => {
+        expect(input.focused()).to.be.true()
+      })
     })
 
-    // + 1 for x-icon button
-    expect(subject.ref('_content').find(Button).length).to.equal(2)
-  })
-
-  describe('children validation', () => {
-    it('should pass validation when children are valid', () => {
-      function render () {
-        testbed.render({
-          open: true,
-          children: [
-            <ModalHeader key="header">Hello World</ModalHeader>,
-            <ModalBody key="body">Foo Bar Baz</ModalBody>,
-            <ModalFooter key="footer">
-              <Button>Cancel</Button>
-            </ModalFooter>
-          ]
-        })
-      }
-
-      expect(render).to.not.throw(Error)
-    })
-
-    it('should not pass validation when children are invalid', () => {
-      function render () {
-        testbed.render({
-          open: true,
-          children: [
-            <ModalBody key="body">Foo Bar Baz</ModalBody>,
-            <ModalFooter key="footer">
-              <Button>Cancel</Button>
-            </ModalFooter>,
-            <ModalHeader key="header">Hello World</ModalHeader>
-          ]
-        })
-      }
-
-      expect(render).to.throw(Error)
-    })
-  })
-})
-
-describe('<Modal /> managed focus', () => {
-  class ModalExample extends React.Component {
-    static propTypes = {
-      ...Modal.propTypes
-    }
-
-    render () {
-      return (
-        <div>
-          <input type="text" />
-          <Modal {...this.props} closeButtonLabel="close">
-            <ModalBody>
-              <input type="text" id="input-one" />
-              <input type="text" id="input-two" />
-            </ModalBody>
-          </Modal>
-        </div>
+    it('should call onDismiss prop when Esc key pressed by default', async () => {
+      const onDismiss = stub()
+      await mount(
+        <ModalExample
+          open
+          onDismiss={onDismiss}
+          label="A Modal"
+          defaultFocusElement={() => {
+            return document.getElementById('input-one')
+          }}
+        />
       )
-    }
-  }
 
-  const testbed = new Testbed(<ModalExample label="A Modal" />)
+      const modal = await ModalLocator.find()
 
-  it('should focus closeButton by default', () => {
-    let closeButton
+      await within(modal.getOwnerDocument().body)
+        .keyUp('escape', null, { focusable: false })
 
-    testbed.render({
-      open: true,
-      closeButtonRef: el => {
-        closeButton = el
-      }
+      await wait(() => {
+        expect(onDismiss).to.have.been.called()
+      })
     })
-
-    testbed.tick()
-
-    expect(closeButton === document.activeElement).to.be.true()
-  })
-
-  it('should take a prop for finding default focus', () => {
-    testbed.render({
-      open: true,
-      defaultFocusElement: function () {
-        return document.getElementById('input-one')
-      }
-    })
-
-    testbed.tick()
-
-    expect(document.getElementById('input-one') === document.activeElement).to.be.true()
-  })
-
-  it('should call onDismiss prop when Esc key pressed by default', () => {
-    const onDismiss = testbed.stub()
-    testbed.render({
-      open: true,
-      onDismiss
-    })
-
-    testbed.tick()
-
-    testbed.wrapper.dispatchNativeKeyboardEvent('keyup', 'escape')
-
-    expect(onDismiss).to.have.been.called()
   })
 })

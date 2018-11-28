@@ -22,30 +22,22 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
-import testable from '@instructure/ui-testable'
+import { locator } from '@instructure/ui-test-utils'
 
-import styles from './styles.css'
-import theme from './theme'
+import Modal from './index'
 
-/**
----
-parent: Modal
----
-**/
-@testable()
-@themeable(theme, styles)
-export default class ModalHeader extends Component {
-  static propTypes = {
-    children: PropTypes.node
+import ModalHeaderLocator from './ModalHeader/locator'
+import ModalBodyLocator from './ModalBody/locator'
+import ModalFooterLocator from './ModalFooter/locator'
+
+export default locator(Modal.selector, {
+  findHeader: (...args) => {
+    return ModalHeaderLocator.find(...args)
+  },
+  findBody: (...args) => {
+    return ModalBodyLocator.find(...args)
+  },
+  findFooter: (...args)  => {
+    return ModalFooterLocator.find(...args)
   }
-  render () {
-    return (
-      <div className={styles.root}>
-        {this.props.children}
-      </div>
-    )
-  }
-}
+})

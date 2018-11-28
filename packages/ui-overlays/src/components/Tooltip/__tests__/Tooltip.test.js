@@ -23,73 +23,93 @@
  */
 
 import React from 'react'
+import { expect, mount, accessible, spy } from '@instructure/ui-test-utils'
+
 import Tooltip from '../index'
 
-describe('<Tooltip />', () => {
-  describe('using as', () => {
-    const testbed = new Testbed(
-      <Tooltip tip={<h2>Hello</h2>} placement="end" as='a' href="example.html">
-        Hover or focus me
-      </Tooltip>
-    )
+import TooltipLocator from '../locator'
 
-    it('should render', () => {
-      const subject = testbed.render()
+describe('<Tooltip />', async () => {
+  describe('using as', async () => {
+    it('should render', async () => {
+      await mount(
+        <Tooltip tip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+          Hover or focus me
+        </Tooltip>
+      )
 
-      expect(subject).to.be.present()
+      const tip = await TooltipLocator.find()
+
+      expect(tip).to.exist()
     })
 
-    it('should render the children', () => {
-      const subject = testbed.render()
+    it('should render the children', async () => {
+      await mount(
+        <Tooltip tip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+          Hover or focus me
+        </Tooltip>
+      )
 
-      expect(subject.find('a').length).to.be.equal(1)
+      const tip = await TooltipLocator.find()
+      const link = await tip.find('a')
+
+      expect(link).to.exist()
     })
 
-    it('should have an aria-describedby attribute', () => {
-      const subject = testbed.render()
-      const attr = subject.find('a').getAttribute('aria-describedby')
+    it('should have an aria-describedby attribute', async () => {
+      await mount(
+        <Tooltip tip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+          Hover or focus me
+        </Tooltip>
+      )
+      const tip = await TooltipLocator.find()
+      const link = await tip.find('a')
 
-      expect(attr).to.exist()
+      expect(link.getAttribute('aria-describedby')).to.exist()
     })
 
-    it('should pass down the href attribute', () => {
-      const subject = testbed.render()
-      const attr = subject.find('a').getAttribute('href')
+    it('should pass down the href attribute', async () => {
+      await mount(
+        <Tooltip tip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+          Hover or focus me
+        </Tooltip>
+      )
+      const tip = await TooltipLocator.find()
+      const link = await tip.find('a')
 
-      expect(attr).to.equal('example.html')
+      expect(link.getAttribute('href')).to.equal('example.html')
     })
 
-    describe('for a11y', () => {
-      it('should meet standards', (done) => {
-        const subject = testbed.render()
+    describe('for a11y', async () => {
+      it('should meet standards', async () => {
+        await mount(
+          <Tooltip tip={<h2>Hello</h2>} placement="end" as="a" href="example.html">
+            Hover or focus me
+          </Tooltip>
+        )
 
-        subject.should.be.accessible(done, {
-          ignores: [
-            'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-          ]
-        })
+        expect(await accessible()).to.be.true()
       })
     })
   })
 
-  describe('using children', () => {
-    const testbed = new Testbed(
-      <Tooltip tip={<h2>Hello</h2>} children={<span />} /> // eslint-disable-line react/no-children-prop
-    )
-
-    it('should call onClick of child', () => {
-      const onClick = testbed.spy()
-      const subject = testbed.render({
-        children: (
+  describe('using children', async () => {
+    it('should call onClick of child', async () => {
+      const onClick = spy()
+      await mount(
+        <Tooltip tip={<h2>Hello</h2>}>
           <button onClick={onClick}>
             Hover or focus me
           </button>
-        )
-      })
+        </Tooltip>
+      )
 
-      subject.find('button').click()
+      const tip = await TooltipLocator.find()
+      const button = await tip.find('button')
 
-      onClick.should.have.been.calledOnce()
+      await button.click()
+
+      expect(onClick).to.have.been.calledOnce()
     })
   })
 })

@@ -159,11 +159,11 @@ const eventMap = {
   },
   mouseOver: {
     EventType: 'MouseEvent',
-    defaultInit: {bubbles: true, cancelable: true},
+    defaultInit: {bubbles: true, cancelable: true, relatedTarget: document.documentElement},
   },
   mouseUp: {
     EventType: 'MouseEvent',
-    defaultInit: {bubbles: true, cancelable: true},
+    defaultInit: {bubbles: true, cancelable: true, relatedTarget: document.documentElement},
   },
   // Selection Events
   select: {

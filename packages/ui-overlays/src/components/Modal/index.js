@@ -38,6 +38,7 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 
 import Mask from '../Mask'
@@ -54,7 +55,7 @@ import ModalFooter from './ModalFooter'
 category: components
 ---
 **/
-
+@testable()
 @deprecated('3.0.0', {
   onRequestClose: 'onDismiss',
   isOpen: 'open',
