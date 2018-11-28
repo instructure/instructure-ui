@@ -63,6 +63,44 @@ function querySelector (...args) {
   return firstOrNull(querySelectorAll(...args))
 }
 
+function querySelectorParents (element, selector, options) {
+  let results = []
+  if (matchesSelector(element, selector)) {
+    results.push(element)
+  }
+  let parentNode = element.parentNode
+
+  while (
+    parentNode &&
+    parentNode !== document
+  ) {
+    if (matchesSelector(parentNode, selector, options)) {
+      results.push(parentNode)
+    }
+    parentNode = parentNode.parentNode
+  }
+
+  return results
+}
+
+function querySelectorParent (element, selector, options) {
+  if (matchesSelector(element, selector)) {
+    return element
+  } else {
+    let parentNode = element.parentNode
+
+    while (
+      parentNode &&
+      parentNode !== document &&
+      !matchesSelector(parentNode, selector, options)
+    ) {
+      parentNode = parentNode.parentNode
+    }
+
+    return matchesSelector(parentNode, selector, options) ? parentNode : null
+  }
+}
+
 function querySelectorAllWithin (containerSelector, element, selector, options) {
   // find all of the container root nodes that match the selector...
   const containers = querySelectorAll(element, containerSelector)
@@ -73,7 +111,7 @@ function querySelectorAllWithin (containerSelector, element, selector, options) 
       let results = querySelectorAll(element, selector, options)
       results = results
         .map((result) => {
-          const root = findClosestContainerRoot(result, containerSelector)
+          const root = querySelectorParent(result, containerSelector)
           // ignore matches that are in a nested container...
           // we always return the root so that customMethods work...
           return (root !== element) ? null : root
@@ -84,20 +122,6 @@ function querySelectorAllWithin (containerSelector, element, selector, options) 
   } else {
     // otherwise just return the container root nodes
     return containers
-  }
-}
-
-function findClosestContainerRoot (element, selector) {
-  if (matchesSelector(element, selector)) {
-    return element
-  } else {
-    let parent = element.parentNode
-
-    while (parent && !matchesSelector(parent, selector) && parent !== document) {
-      parent = parent.parentNode
-    }
-
-    return (parent && matchesSelector(parent, selector)) ? parent : null
   }
 }
 
@@ -213,5 +237,7 @@ export {
   matchesSelector,
   querySelector,
   querySelectorAll,
+  querySelectorParent,
+  querySelectorParents,
   querySelectorAllWithin
 }

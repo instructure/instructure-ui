@@ -135,8 +135,9 @@ function overrideWindowOnError (windowOnError) {
   return (err, url, line) => {
     const error = (typeof err === 'string') ? err : err.toString()
 
-    // prevent default window errors for uncaught errors in React 16+ here
-    // we catch them in reactComponentWrapper so the promise returned by mount should be rejected
+    // Prevent default window errors for uncaught errors in React 16+ here.
+    // The promise returned by the mount, setProps, and setContext utils will be rejected when they are thrown.
+    // Ignore them here so that they don't fail the test when they have been handled.
     if (error.startsWith('Error: Warning:') ||
       error.startsWith('Uncaught Error: Warning:') ||
       error.startsWith('The above error occurred')) {
@@ -151,12 +152,12 @@ function overrideConsoleError (consoleError) {
   return (first, ...rest) => {
     const error = (typeof first === 'string') ? first : first.toString()
 
-    // throw so that we can test for prop type validation errors in our tests:
     if (error.startsWith('Warning:')) {
+      // throw an error so that prop type validation errors are caught in our tests:
       throw new Error(first)
-      // ignore the noisy uncaught error messages fired by React 16+
     }
 
+    // ignore the noisy/extra uncaught error messages fired by React 16+
     if (error.startsWith('Uncaught Error: Warning:') ||
       error.startsWith('The above error occurred')) {
       return

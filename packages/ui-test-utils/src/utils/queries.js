@@ -25,9 +25,15 @@
 import { elementToString } from './elementToString'
 import { firstOrNull } from './firstOrNull'
 import { parseQueryArguments } from './parseQueryArguments'
-import { querySelectorAll, matchesSelector } from './selector'
 import { waitForQueryResult } from './waitForQueryResult'
 import { bindElementToUtilities } from './bindElementToUtilities'
+import {
+  querySelectorAll,
+  matchesSelector,
+  querySelectorParent,
+  querySelectorParents
+} from './selector'
+
 
 async function find (...args) {
   return firstOrNull(await findAll(...args))
@@ -35,6 +41,14 @@ async function find (...args) {
 
 function findAll (...args) {
   return findAllByQuery(querySelectorAll, ...args)
+}
+
+async function findParent (...args) {
+  return firstOrNull(await findAllByQuery(querySelectorParent, ...args))
+}
+
+function findParents (...args) {
+  return findAllByQuery(querySelectorParents, ...args)
 }
 
 async function findFrame (...args) {
@@ -80,7 +94,15 @@ async function getQueryResult (
   const { expectEmpty, timeout, customMethods } = options
 
   const queryResult = () => {
-    return query().map(result => bindElementToUtilities(result, customMethods))
+    const results = query()
+
+    if (Array.isArray(results)) {
+      return results.map(result => bindElementToUtilities(result, customMethods))
+    } else if (results instanceof Element) {
+      return [bindElementToUtilities(results, customMethods)]
+    } else {
+      return []
+    }
   }
 
   let result
@@ -116,5 +138,7 @@ export {
   findAll,
   find,
   findAllFrames,
-  findFrame
+  findFrame,
+  findParent,
+  findParents
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 export function parseQueryArguments (...args) {
-  let element
+  let element = document.body
   let selector
   let options = {
     expectEmpty: false,

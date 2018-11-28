@@ -24,7 +24,7 @@
 import React from 'react'
 import { mount, expect, findAll, find, spy, wait, within } from '../index'
 
-describe('find, findAll', async () => {
+describe('queries', async () => {
   it('throws an error message by default when nothing is found', async () => {
     await expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
     await expect(findAll(':label(pineapple)', { timeout: 0 })).to.be.rejected()
@@ -307,6 +307,63 @@ describe('find, findAll', async () => {
       )
       expect(await findAll('input[type="password"]'))
         .to.have.length(1)
+    })
+  })
+
+  describe('findParent', async () => {
+    it('can find a matching parent element', async () => {
+      await mount(
+        <form>
+          <input type="text"/>
+        </form>
+      )
+      const input = await find('input')
+      const form = await input.findParent('form')
+      expect(form).to.exist()
+    })
+    it('includes the element itself', async () => {
+      await mount(
+        <form>
+          <input type="text"/>
+        </form>
+      )
+      const input1 = await find('input')
+      const input2 = await input1.findParent('input')
+      expect(input1.getDOMNode()).to.equal(input2.getDOMNode())
+    })
+  })
+
+  describe('findParents', async () => {
+    it('can find matching parents', async () => {
+      await mount(
+        <div data-foo="bar">
+          <div>
+            <div data-foo="baz">
+              <input type="text"/>
+            </div>
+          </div>
+        </div>
+      )
+      const input = await find('input')
+
+      const parents = await input.findParents('[data-foo]')
+      expect(parents.length).to.equal(2)
+      expect(parents[1].getAttribute('data-foo')).to.equal('bar')
+    })
+    it('includes the element itself', async () => {
+      await mount(
+        <div data-foo="bar">
+          <div>
+            <div data-foo="baz">
+              <input type="text" data-foo="first" />
+            </div>
+          </div>
+        </div>
+      )
+      const input = await find('input')
+      const parents = await input.findParents('[data-foo]')
+      expect(parents.length).to.equal(3)
+      expect(parents[0].getAttribute('data-foo')).to.equal('first')
     })
   })
 

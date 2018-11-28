@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+// for a list of all features see https://github.com/zloirock/core-js#commonjs
 module.exports = [
   'es6.object.assign',
   'es6.array.find',
