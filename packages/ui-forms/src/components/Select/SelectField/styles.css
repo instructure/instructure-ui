@@ -84,6 +84,7 @@ input[type].input {
   cursor: default;
   box-sizing: border-box;
   text-align: start;
+  min-width: 0; /* override min-content size */
 
   &::-ms-clear {
     display: none;
@@ -151,6 +152,7 @@ input[type].input {
   margin-inline-start: 0;
   pointer-events: none;
   fill: var(--iconColor);
+  flex-shrink: 0;
 }
 
 .label {
