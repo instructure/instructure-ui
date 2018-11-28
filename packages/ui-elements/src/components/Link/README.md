@@ -39,6 +39,22 @@ example: true
 <Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I am a link with left margin</Link>
 ```
 
+### Ellipsis
+
+Add the `ellipsis` property to make Link display on a single line and truncate text
+that overflows its container with `...`
+
+```js
+---
+example: true
+---
+<View as="div" width="250px">
+  <Link ellipsis href="#Link">
+    I am a link with ellipsis to truncate long text strings like this one
+  </Link>
+</View>
+```
+
 ### Using icons
 
 Use the `icon` property to put an [icon](#iconography) inside a Link. To position the

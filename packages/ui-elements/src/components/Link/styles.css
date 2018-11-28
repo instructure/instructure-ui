@@ -1,20 +1,10 @@
 /* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
 
-.root a.link:link,
-.root a.link:visited,
-.root button.link {
+.root {
   position: relative;
-  outline: none;
-  cursor: pointer;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-family: var(--fontFamily);
-  font-weight: var(--fontWeight);
-  color: var(--color);
-  text-decoration: var(--textDecoration);
-  transition: color 0.2s;
+  vertical-align: baseline;
 
-  &:not(.ie11)::before {
+  &::before {
     content: "";
     pointer-events: none;
     box-sizing: border-box;
@@ -28,21 +18,36 @@
     border-radius: calc(var(--borderRadius) * 1.5);
     transition: all 0.2s;
 
-    /* properties to transition on :focus */
+    /* properties to transition on focus */
     opacity: 0;
     transform: scale(0.95);
   }
 
-  &:focus {
-    &:not(.ie11)::before {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    &.ie11 {
-      outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
-    }
+  &.inverse::before {
+    border-color: var(--focusInverseOutlineColor);
   }
+
+  &.focused::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.root .link {
+  outline: none;
+}
+
+.root a.link:link,
+.root a.link:visited,
+.root button.link {
+  cursor: pointer;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  color: var(--color);
+  text-decoration: var(--textDecoration);
+  transition: color 0.2s;
 
   &:hover,
   &:active {
@@ -54,10 +59,10 @@
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;
+  }
 
-    &::before {
-      opacity: 0;
-    }
+  &::-moz-focus-inner {
+    border: 0; /* removes default dotted focus outline in Firefox */
   }
 }
 
@@ -67,24 +72,15 @@
 .root button.inverse {
   color: var(--colorInverse);
 
-  &:not(.ie11)::before {
-    border-color: var(--focusInverseOutlineColor);
-  }
-
   &:hover,
   &:focus,
   &:active {
     color: var(--colorInverse);
   }
-
-  &:focus {
-    &.ie11 {
-      outline: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusInverseOutlineColor);
-    }
-  }
 }
 
 .root button.link {
+  appearance: none;
   user-select: text;
   background: none;
   border: none;
@@ -92,6 +88,7 @@
   font-size: 1em;
   margin: 0;
   padding: 0;
+  text-align: inherit;
 }
 
 .ellipsis {
@@ -104,7 +101,6 @@
 
 button.ellipsis {
   width: 100%;
-  text-align: start;
 }
 
 .icon {

@@ -30,27 +30,33 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import Link from '../index'
 import LinkLocator from '../locator'
+import styles from '../styles.css'
 
 describe('<Link />', async () => {
   it('should render the children as text content', async () => {
-    await mount(<Link>Hello World</Link>)
+    await mount(<Link href="https://instructure.design">Hello World</Link>)
     expect(await LinkLocator.find(':contains(Hello World)')).to.exist()
   })
 
   it('should render a button', async () => {
-    await mount(<Link>Hello World</Link>)
+    const onClick = stub()
+    await mount(<Link onClick={onClick}>Hello World</Link>)
     expect(await LinkLocator.find('button[type="button"]')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    await mount(<Link>Hello World</Link>)
+    await mount(<Link href="https://instructure.design">Hello World</Link>)
     const link = await LinkLocator.find()
     expect(await link.accessible()).to.be.true()
   })
 
   it('focuses with the focus helper', async () => {
     let linkRef
-    await mount(<Link componentRef={(el) => { linkRef = el }}>Hello World</Link>)
+    await mount(
+      <Link href="https://instructure.design" componentRef={(el) => { linkRef = el }}>
+        Hello World
+      </Link>
+    )
 
     linkRef.focus()
     expect(linkRef.focused).to.be.true()
@@ -58,6 +64,15 @@ describe('<Link />', async () => {
     const link = await LinkLocator.find()
     const focusable = await link.find(':focusable')
     expect(focusable.focused()).to.be.true()
+  })
+
+  it('applies a className when focused', async () => {
+    await mount(<Link href="example.html">Hello World</Link>)
+
+    const link = await LinkLocator.find()
+    await link.focus()
+
+    expect(await link.find(`.${styles.focused}`)).to.exist()
   })
 
   it('should call the onClick prop when clicked', async () => {
@@ -73,7 +88,9 @@ describe('<Link />', async () => {
 
   it('should provide a linkRef prop', async () => {
     const linkRef = stub()
-    await mount(<Link linkRef={linkRef}>Hello World</Link>)
+    await mount(
+      <Link href="https://instructure.design" linkRef={linkRef}>Hello World</Link>
+    )
 
     const link = await LinkLocator.find()
     const focusable = await link.find(':focusable')
@@ -89,7 +106,7 @@ describe('<Link />', async () => {
       </svg>
     )
 
-    await mount(<Link icon={customIcon}>Hello World</Link>)
+    await mount(<Link href="https://instructure.design" icon={customIcon}>Hello World</Link>)
     expect(await LinkLocator.find('svg:title(Custom icon)')).to.exist()
   })
 
@@ -183,6 +200,20 @@ describe('<Link />', async () => {
       await mount(<Link href="example.html">Hello World</Link>)
       expect(await LinkLocator.find('[href="example.html"]')).to.exist()
     })
+
+    it('should not set role="button"', async () => {
+      await mount(<Link href="example.html">Hello World</Link>)
+      expect(await LinkLocator.find('[role="button"]', {
+        expectEmpty: true
+      })).to.not.exist()
+    })
+
+    it('should not set type="button"', async () => {
+      await mount(<Link href="example.html">Hello World</Link>)
+      expect(await LinkLocator.find('[type="button"]', {
+        expectEmpty: true
+      })).to.not.exist()
+    })
   })
 
   describe('when passing down props to View', async () => {
@@ -202,7 +233,7 @@ describe('<Link />', async () => {
             const props = {
               [prop]: 'foo'
             }
-            await mount(<Link {...props}>Hello World</Link>)
+            await mount(<Link href="https://instructure.design" {...props}>Hello World</Link>)
             expect(consoleError)
               .to.be.calledWithExactly(warning)
           })

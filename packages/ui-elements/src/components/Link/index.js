@@ -1,42 +1,45 @@
 /*
- * The MIT License (MIT)
- *
- * Copyright (c) 2015 - present Instructure, Inc.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all
- * copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
- */
+* The MIT License (MIT)
+*
+* Copyright (c) 2015 - present Instructure, Inc.
+*
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* The above copyright notice and this permission notice shall be included in all
+* copies or substantial portions of the Software.
+*
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*/
+
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import findFocusable from '@instructure/ui-a11y/lib/utils/findFocusable'
+import warning from '@instructure/ui-utils/lib/warning'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 import testable from '@instructure/ui-testable'
-import Browser from '@instructure/ui-utils/lib/Browser'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -107,12 +110,20 @@ class Link extends Component {
     }
   }
 
+  get hasVisibleChildren () {
+    return hasVisibleChildren(this.props.children)
+  }
+
+  get element () {
+    return getElementType(Link, this.props)
+  }
+
   get focused () {
     return isActiveElement(this._link)
   }
 
-  get hasVisibleChildren () {
-    return hasVisibleChildren(this.props.children)
+  get focusable () {
+    return findFocusable(this._link)
   }
 
   focus () {
@@ -130,9 +141,8 @@ class Link extends Component {
     }
   }
 
-  render () {
+  renderContent (isFocused) {
     const {
-      as,
       disabled,
       children,
       onClick,
@@ -146,22 +156,17 @@ class Link extends Component {
       iconPlacement
     } = this.props
 
-    const ie11 = Browser.msie && Browser.version > 10
-
-    const ElementType = getElementType(Link, this.props)
-
     const classes = {
       [styles.link]: true,
       [styles.inverse]: variant === 'inverse',
       [styles.ellipsis]: ellipsis,
       [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.iconOnly]: icon && !this.hasVisibleChildren,
-      [styles.ie11]: ie11
+      [styles.iconOnly]: icon && !this.hasVisibleChildren
     }
 
-    const role = onClick && as !== 'button' ? 'button' : null
-    const type = onClick || as === 'button' ? 'button' : null
-    const tabIndex = role === 'button' ? '0' : null
+    const role = onClick && this.element !== 'button' ? 'button' : null
+    const type = onClick || this.element === 'button' ? 'button' : null
+    const tabIndex = (role === 'button' && !disabled) ? '0' : null
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Link.propTypes),
@@ -183,10 +188,18 @@ class Link extends Component {
       onClick: this.handleClick
     }
 
+    const ElementType = this.element
+
     return (
       <View
+        display={ellipsis ? 'block' : 'inline-block'}
         margin={margin}
-        className={styles.root}
+        className={classnames({
+          [styles.root]: true,
+          [styles.focused]: !(isFocused === 'undefined') && isFocused,
+          [styles.disabled]: disabled,
+          [styles.inverse]: variant === 'inverse'
+        })}
         elementRef={elementRef}
       >
         <ElementType {...props}>
@@ -196,6 +209,32 @@ class Link extends Component {
         </ElementType>
       </View>
     )
+  }
+
+  render () {
+    const {
+      onClick,
+      href,
+      disabled
+    } = this.props
+
+    warning(
+      (onClick || href),
+      '[Link] Link needs either onClick() or href to be focusable and clickable'
+    )
+
+    // Link should not be focusable if disabled or no onClick/href
+    if (disabled || (!onClick && !href)) {
+      return this.renderContent()
+    } else {
+      return (
+        <Focusable>
+          {({ focused }) => (
+            this.renderContent(focused)
+          )}
+        </Focusable>
+      )
+    }
   }
 }
 
