@@ -258,7 +258,6 @@ class Button extends Component {
           [styles['has-icon']]: icon
         })}
         disabled={disabled || readOnly}
-        aria-disabled={disabled || readOnly ? 'true' : null}
         onClick={this.handleClick}
         onKeyDown={this.handleKeyDown}
         href={href}

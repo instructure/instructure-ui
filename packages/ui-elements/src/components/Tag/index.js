@@ -145,7 +145,6 @@ class Tag extends Component {
         type={(onClick) ? 'button' : null}
         onClick={(onClick) ? this.handleClick : null}
         disabled={disabled || readOnly}
-        aria-disabled={(onClick && (disabled || readOnly)) ? 'true' : null}
         display={null}
         title={title || ((typeof text === 'string') ? text : null)}
       >

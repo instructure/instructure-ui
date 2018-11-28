@@ -212,7 +212,6 @@ class TextInput extends Component {
             aria-required={required}
             aria-invalid={this.invalid ? 'true' : null}
             disabled={disabled || readOnly}
-            aria-disabled={disabled || readOnly ? 'true' : null}
             className={classnames(classes)}
             aria-describedby={descriptionIds !== '' ? descriptionIds : null}
           />

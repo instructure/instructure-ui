@@ -325,14 +325,6 @@ describe('<Button/>', async () => {
     })
 
     describe('when disabled', async () => {
-      it('sets the aria-disabled attribute', async () => {
-        await mount(
-          <Button disabled>Hello World</Button>
-        )
-        const button = await ButtonLocator.find()
-        expect(button.getAttribute('aria-disabled')).to.exist()
-      })
-
       it('sets the disabled attribute so that the button is not in tab order', async () => {
         await mount(
           <Button disabled>Hello World</Button>
@@ -340,39 +332,15 @@ describe('<Button/>', async () => {
         const button = await ButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
       })
-
-      it('sets the aria-disabled attribute when an href is provided', async () => {
-        await mount(
-          <Button disabled href="example.com">Hello World</Button>
-        )
-        const button = await ButtonLocator.find()
-        expect(button.getAttribute('aria-disabled')).to.exist()
-      })
     })
 
     describe('when readOnly', () => {
-      it('sets the aria-disabled attribute', async () => {
-        await mount(
-          <Button readOnly>Hello World</Button>
-        )
-        const button = await ButtonLocator.find()
-        expect(button.getAttribute('aria-disabled')).to.exist()
-      })
-
-      it('sets the readOnly attribute so that the button is not in tab order', async () => {
+      it('sets the disabled attribute so that the button is not in tab order', async () => {
         await mount(
           <Button readOnly>Hello World</Button>
         )
         const button = await ButtonLocator.find()
         expect(button.getAttribute('disabled')).to.exist()
-      })
-
-      it('sets the aria-disabled attribute when an href is provided', async () => {
-        await mount(
-          <Button readOnly href="example.com">Hello World</Button>
-        )
-        const button = await ButtonLocator.find()
-        expect(button.getAttribute('aria-disabled')).to.exist()
       })
     })
   })

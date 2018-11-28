@@ -662,7 +662,6 @@ class SelectField extends Component {
                 aria-invalid={this.invalid ? 'true' : null}
                 readOnly={!editable}
                 disabled={disabled || readOnly}
-                aria-disabled={disabled || readOnly ? 'true' : null}
               />
               <IconArrowDown className={styles.icon} />
             </span>
