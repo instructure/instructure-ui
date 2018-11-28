@@ -59,16 +59,16 @@ function testable () {
       }
 
       appendLocatorAttribute () {
-        let node
-
-        try {
-          // Use this.DOMNode for components that render as non-native Portals...
-          node = findDOMNode(this) || this.DOMNode
-        } catch (e) {
-          console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
-        }
-
         this.locatorTimeout = setTimeout(() => {
+          let node
+
+          try {
+            // Use this.DOMNode for components that render as non-native Portals...
+            node = findDOMNode(this) || this.DOMNode
+          } catch (e) {
+            console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
+          }
+
           if (node && node.getAttribute) {
             const attribute = node.getAttribute(locator.attribute)
             const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
