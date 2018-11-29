@@ -258,21 +258,17 @@ describe('<Popover />', async () => {
 
       let content = await popover.findContent()
 
-      expect(content).to.exist()
-
       await content.focus()
 
-      content = await popover.findContent()
+      await wait(() => {
+        expect(content.containsFocus()).to.be.true()
+      })
 
       await content.keyDown('tab')
 
       content = await popover.findContent({ expectEmpty: true })
 
       expect(content).to.not.exist()
-
-      await wait(() => {
-        expect(trigger.focused()).to.be.true()
-      })
     })
   })
 })
