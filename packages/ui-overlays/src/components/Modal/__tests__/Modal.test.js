@@ -191,11 +191,15 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <ModalBody>Foo Bar Baz <button>click me</button></ModalBody>
       </Modal>
     )
 
     const modal = await ModalLocator.find()
+
+    await wait(() => {
+      expect(modal.containsFocus()).to.be.true()
+    })
 
     await within(modal.getOwnerDocument().body).click()
 
@@ -214,11 +218,15 @@ describe('<Modal />', async () => {
         shouldReturnFocus={false}
         shouldCloseOnDocumentClick={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <ModalBody>Foo Bar Baz <button>click me</button></ModalBody>
       </Modal>
     )
 
     let modal = await ModalLocator.find()
+
+    await wait(() => {
+      expect(modal.containsFocus()).to.be.true()
+    })
 
     await within(modal.getOwnerDocument().body).click()
 
@@ -250,6 +258,10 @@ describe('<Modal />', async () => {
 
     const modal = await ModalLocator.find(':label(Modal Dialog)')
     const closeButton = await modal.find(':label(Close)')
+
+    await wait(() => {
+      expect(modal.containsFocus()).to.be.true()
+    })
 
     await closeButton.click()
 
@@ -386,6 +398,10 @@ describe('<Modal />', async () => {
       )
 
       const modal = await ModalLocator.find()
+
+      await wait(() => {
+        expect(modal.containsFocus()).to.be.true()
+      })
 
       await within(modal.getOwnerDocument().body)
         .keyUp('escape', null, { focusable: false })

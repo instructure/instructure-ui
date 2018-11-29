@@ -116,7 +116,7 @@ describe('<Portal />', async () => {
       expect(onKeyDown).to.have.been.called()
 
       expect(button.getParentNode())
-        .to.equal(document.body)
+        .to.equal(button.getOwnerDocument().body)
     })
   })
 

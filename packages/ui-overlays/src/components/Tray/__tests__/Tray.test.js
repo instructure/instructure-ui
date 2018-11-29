@@ -159,11 +159,17 @@ describe('<Tray />', async () => {
       </Tray>
     )
 
-    await within(document.body).keyUp('escape', {
+    const tray = await TrayLocator.find()
+
+    await wait(()  => {
+      expect(tray.containsFocus()).to.be.true()
+    })
+
+    await within(tray.getOwnerDocument().body).keyUp('escape', {
       defaultPrevented: false,
       bubbles: true,
       button: 0
-    })
+    }, { focusable: false })
 
     await wait(() => {
       expect(onDismiss).to.have.been.calledOnce()
