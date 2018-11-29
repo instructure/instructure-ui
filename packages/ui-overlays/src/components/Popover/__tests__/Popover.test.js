@@ -52,7 +52,7 @@ describe('<Popover />', async () => {
 
   testShowContent('click', 'click')
   testShowContent('focus', 'focus')
-  testShowContent('hover', 'mouseOver')
+  testShowContent('hover', 'mouseOver', { relatedTarget: document.documentElement })
 
   testEventHandler('onClick', 'click')
   testEventHandler('onFocus', 'focus')
@@ -75,10 +75,14 @@ describe('<Popover />', async () => {
 
     await trigger.click()
 
+    let content = await popover.findContent()
+
+    expect(content).to.exist()
+
     await within(trigger.getOwnerDocument().documentElement)
       .click()
 
-    const content = await popover.findContent({ expectEmpty: true })
+    content = await popover.findContent({ expectEmpty: true })
 
     expect(content).to.not.exist()
   })
@@ -273,7 +277,7 @@ describe('<Popover />', async () => {
   })
 })
 
-function testShowContent (on, eventType) {
+function testShowContent (on, eventType, eventInit) {
   it(`should show content on ${on}`, async () => {
     const onValue = [on, on === 'hover' ? 'focus' : null]
     await mount(
@@ -290,7 +294,7 @@ function testShowContent (on, eventType) {
     const popover = await PopoverLocator.find()
     const trigger = await popover.findTrigger()
 
-    await trigger[eventType]()
+    await trigger[eventType](eventInit)
 
     const content = await popover.findContent()
 

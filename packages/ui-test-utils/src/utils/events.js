@@ -159,11 +159,11 @@ const eventMap = {
   },
   mouseOver: {
     EventType: 'MouseEvent',
-    defaultInit: {bubbles: true, cancelable: true, relatedTarget: document.documentElement},
+    defaultInit: {bubbles: true, cancelable: true},
   },
   mouseUp: {
     EventType: 'MouseEvent',
-    defaultInit: {bubbles: true, cancelable: true, relatedTarget: document.documentElement},
+    defaultInit: {bubbles: true, cancelable: true},
   },
   // Selection Events
   select: {
@@ -374,10 +374,6 @@ function setNativeValue(element, value) {
   }
 }
 
-Object.entries(eventAliasMap).forEach(([aliasKey, key]) => {
-  fireEvent[aliasKey] = (...args) => fireEvent[key](...args)
-})
-
 // React event system tracks native mouseOver/mouseOut events for
 // running onMouseEnter/onMouseLeave handlers
 // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/EnterLeaveEventPlugin.js#L24-L31
@@ -398,5 +394,9 @@ fireEvent.select = (node, init) => {
   // @link https://github.com/facebook/react/blob/b87aabdfe1b7461e7331abb3601d9e6bb27544bc/packages/react-dom/src/events/SelectEventPlugin.js#L203-L224
   fireEvent.keyUp(node, init)
 }
+
+Object.entries(eventAliasMap).forEach(([aliasKey, key]) => {
+  fireEvent[aliasKey] = (...args) => fireEvent[key](...args)
+})
 
 export { fireEvent, eventMap }

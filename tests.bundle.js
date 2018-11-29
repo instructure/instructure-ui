@@ -21,5 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-require('./packages/ui-themes/lib/canvas')
+
+require('@instructure/ui-themes/lib/canvas/high-contrast')
+
+const theme = require('@instructure/ui-themes/lib/canvas/base').default
+theme.use({ overrides: { transitions: { duration: '1ms' } } })
+
 require('!!karma-tests-loader!')
