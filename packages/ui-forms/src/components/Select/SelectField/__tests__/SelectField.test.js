@@ -203,7 +203,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
   })
 
   it('expands when formfield is clicked', async () => {
@@ -216,10 +218,13 @@ describe('<SelectField />', async () => {
     )
 
     const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
     const container = await selectField.find(`.${styles.inputContainer}`)
 
     await container.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
   })
 
   it('expands on keyDown ArrowDown', async () => {
@@ -235,7 +240,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.keyDown('down')
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
   })
 
   it('expands on keyDown ArrowUp', async () => {
@@ -251,7 +258,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.keyDown('up')
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
   })
 
   it('expands on change', async () => {
@@ -268,7 +277,47 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.change({ target: { value: 'a' } })
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
+  })
+
+  it('does not expand when disabled', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+        disabled
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
+  })
+
+  it('does not expand when readOnly', async () => {
+    await mount(
+      <SelectField
+        closeOnSelect
+        label="Choose a state"
+        options={options}
+        readOnly
+      />
+    )
+
+    const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
+
+    await input.click()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
   })
 
   it('closes when input is clicked', async () => {
@@ -284,10 +333,14 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
 
     await input.click()
-    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
   })
 
   it('closes when formfield is clicked', async () => {
@@ -300,13 +353,18 @@ describe('<SelectField />', async () => {
     )
 
     const selectField = await SelectFieldLocator.find()
+    const input = await selectField.findInput()
     const container = await selectField.find(`.${styles.inputContainer}`)
 
     await container.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
 
     await container.click()
-    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
   })
 
   it('closes on blur', async () => {
@@ -322,10 +380,14 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
 
     await input.blur()
-    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
   })
 
   it('closes on Escape key', async () => {
@@ -341,10 +403,14 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
-    expect(await find('[aria-expanded="true"]')).to.exist()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('true')
+    })
 
     await input.keyUp('esc')
-    expect(await find('[aria-expanded="true"]', {expectEmpty: true})).to.be.false()
+    await wait(() => {
+      expect(input.getAttribute('aria-expanded')).to.equal('false')
+    })
   })
 
   it('returns focus to input on close', async () => {

@@ -517,6 +517,11 @@ class SelectField extends Component {
 
   handleClick = event => {
     event.preventDefault()
+
+    if (this.props.disabled || this.props.readOnly) {
+      return
+    }
+
     if (!this.expanded) {
       if (this._input && !isActiveElement(this._input)) {
         this._input.focus()
