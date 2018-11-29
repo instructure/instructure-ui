@@ -265,7 +265,10 @@ describe('<Popover />', async () => {
       content = await popover.findContent({ expectEmpty: true })
 
       expect(content).to.not.exist()
-      expect(trigger.focused()).to.be.true()
+
+      await wait(() => {
+        expect(trigger.focused()).to.be.true()
+      })
     })
   })
 })
