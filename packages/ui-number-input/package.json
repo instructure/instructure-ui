@@ -28,8 +28,7 @@
   },
   "devDependencies": {
     "@instructure/ui-presets": "^5",
-    "@instructure/ui-test-utils": "^5",
-    "sinon": "^6.3.5"
+    "@instructure/ui-test-utils": "^5"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15 || ^16"
