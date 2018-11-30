@@ -146,6 +146,45 @@ describe('<RadioInputGroup />', async () => {
     expect(orange.getDOMNode().checked).to.be.true()
   })
 
+  it('adds the correct tabindex to RadioInputs when none are checked', async () => {
+    const subject = await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const inputs = await group.findAll('input[name="fruit"]')
+
+    expect(inputs[0].getAttribute('tabindex')).to.equal('0')
+    expect(inputs[1].getAttribute('tabindex')).to.equal('-1')
+    expect(inputs[2].getAttribute('tabindex')).to.equal('-1')
+  })
+
+  it('adds the correct tabindex to RadioInputs when checked', async () => {
+    const subject = await mount(
+      <RadioInputGroup
+        name="fruit"
+        description="Select a fruit"
+        defaultValue="banana"
+      >
+        <RadioInput label="Apple" value="apple" />
+        <RadioInput label="Banana" value="banana" />
+        <RadioInput label="Orange" value="orange" />
+      </RadioInputGroup>
+    )
+    const group = within(subject.getDOMNode())
+    const inputs = await group.findAll('input[name="fruit"]')
+
+    expect(inputs[0].getAttribute('tabindex')).to.equal('-1')
+    expect(inputs[1].getAttribute('tabindex')).to.equal('0')
+    expect(inputs[2].getAttribute('tabindex')).to.equal('-1')
+  })
+
   describe('for a11y', async () => {
     it('should meet standards', async () => {
       const subject = await mount(
