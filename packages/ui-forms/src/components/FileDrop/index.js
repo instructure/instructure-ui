@@ -361,6 +361,7 @@ export default class FileDrop extends Component {
     const id = this.props.id || this.defaultId
     const classes = {
       [styles.label]: true,
+      [styles.disabled]: disabled,
       [styles.dragRejected]: this.state.isDragRejected || this.invalid,
       [styles.dragAccepted]: this.state.isDragAccepted,
       [styles.focused]: this.state.focused

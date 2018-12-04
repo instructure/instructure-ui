@@ -28,7 +28,7 @@
   z-index: 1;
   text-align: center;
   border-radius: var(--borderRadius);
-  border: var(--borderWidth) var(--borderStyle) transparent;
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
   cursor: pointer;
 
   &:hover {
@@ -85,6 +85,14 @@
     .labelContent::before {
       border-color: var(--rejectedColor);
     }
+  }
+}
+
+.disabled {
+  pointer-events: none;
+
+  .labelContent {
+    border-color: var(--disabledColor);
   }
 }
 

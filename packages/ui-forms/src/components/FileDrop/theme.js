@@ -22,18 +22,22 @@
  * SOFTWARE.
  */
 
+import { alpha } from '@instructure/ui-themeable/lib/utils/color'
+
 export default function generator ({ borders, colors }) {
   return {
     backgroundColor: colors.backgroundLightest,
     borderRadius: borders.radiusLarge,
     borderWidth: borders.widthMedium,
     borderStyle: 'dashed',
+    borderColor: colors.borderMedium,
     hoverBorderColor: colors.borderBrand,
     focusBorderWidth: borders.widthMedium,
     focusBorderStyle: 'solid',
     focusBorderColor: colors.borderBrand,
     acceptedColor: colors.textBrand,
-    rejectedColor: colors.textDanger
+    rejectedColor: colors.textDanger,
+    disabledColor: alpha(colors.borderMedium, 50)
   }
 }
 
