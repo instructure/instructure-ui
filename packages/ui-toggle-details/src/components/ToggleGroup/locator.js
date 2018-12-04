@@ -23,36 +23,37 @@
  */
 import {
  locator,
- find,
- parseQueryArguments,
  querySelector,
  findByQuery
 } from '@instructure/ui-test-utils'
 
 import ToggleGroup from './index'
 
-const toggleSelector = '[aria-expanded][aria-controls]'
+const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
 const contentQuery = (element, selector, options) => {
-  const toggle = querySelector(element, toggleSelector)
-  let result = []
-  if (toggle && toggle.getAttribute) {
-    const contentId = toggle.getAttribute('aria-controls')
-    const content = querySelector(element, `#${contentId}`)
+  let results = []
+  let { result} = ToggleLocator.query(element)
+  let contentSelector
+  if (result && result.getAttribute) {
+    contentSelector = `#${result.getAttribute('aria-controls')}`
+    const content = querySelector(contentSelector, options)
     if (content) {
-      result.push(content)
+      results.push(content)
     }
   }
-  return result
+  return {
+    results,
+    selector: contentSelector
+  }
 }
 
 export default locator(ToggleGroup.selector, {
   clickToggle: async (element, ...args) => {
-    return (await find(element, toggleSelector)).click(...args)
+    return (await ToggleLocator.find(element)).click(...args)
   },
   findToggle: async (...args) => {
-    const { element, options } = parseQueryArguments(...args)
-    return find(element, toggleSelector, options)
+    return ToggleLocator.find(...args)
   },
   findContent: async (...args) => {
     return findByQuery(contentQuery, ...args)

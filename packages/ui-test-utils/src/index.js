@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { wait } from 'dom-testing-library'
+import { wait } from './utils/wait'
 import { mount, stub, spy } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
 import { locator } from './utils/locator'
-import { findAllByQuery, findByQuery, find, findAll, findAllFrames, findFrame } from './utils/queries'
 import { debug, accessible } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
 import { querySelectorAll, querySelector, matchesSelector } from './utils/selector'
 import { parseQueryArguments } from './utils/parseQueryArguments'
+import {
+  findAllByQuery,
+  findByQuery,
+  find,
+  findAll,
+  findAllFrames,
+  findFrame
+} from './utils/queries'
 
 export {
   accessible,

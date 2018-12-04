@@ -32,8 +32,7 @@ export function waitForQueryResult (
     element,
     timeout = 1900,
     expectEmpty = false,
-    mutationObserverOptions = { attributes: true, childList: true, subtree: true },
-    message = false
+    mutationObserverOptions = { attributes: true, childList: true, subtree: true }
   } = {},
 ) {
   if (typeof element === 'undefined') {
@@ -48,25 +47,27 @@ export function waitForQueryResult (
   return new Promise((resolve, reject) => {
     const debouncedQuery = debounce(runQuery, 10, { leading: false, trailing: true })
 
-    let lastError, observer, timer
+    let lastError, observer, timer, lastResult
 
     function runQuery () {
       if (typeof query !== 'function') {
         onDone(new Error([
           '[ui-test-utils] Invalid element query.',
           JSON.stringify(query)
-        ].join('\n')),  [])
+        ].join('\n')),  { results: [] })
         return
       }
 
       try {
-        const result = query() || []
+        lastResult = query()
+        const result = lastResult.results || []
+
         if (
           (!expectEmpty && result.length > 0) ||
           (expectEmpty && result.length === 0)
         ) {
           // Return the query result when we get what we expected:
-          onDone(null, result)
+          onDone(null, lastResult)
         }
       } catch (e) {
         // If `query` throws an error, wait for the next mutation or timeout.
@@ -95,12 +96,13 @@ export function waitForQueryResult (
       const timedoutError = new Error(
         [
           `[ui-test-utils] Timed out waiting for Element query results...`,
-          message,
+          expectEmpty ? `Expected to find nothing but found ${lastResult.results}` : '',
+          `with selector: "${lastResult.selector}"`,
           `element: ${elementToString(element, 7000, { highlight: false })}`
         ]
           .filter(Boolean).join('\n')
       )
-      onDone(lastError || timedoutError, [])
+      onDone(lastError || timedoutError, lastResult)
     }
 
     timer = setTimeout(onTimeout, timeout)

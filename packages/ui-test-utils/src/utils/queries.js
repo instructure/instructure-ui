@@ -34,21 +34,37 @@ import {
   querySelectorParents
 } from './selector'
 
-
 async function find (...args) {
   return firstOrNull(await findAll(...args))
 }
 
 function findAll (...args) {
-  return findAllByQuery(querySelectorAll, ...args)
+  return findAllByQuery((element, selector, options) => {
+    return {
+      results: querySelectorAll(element, selector, options),
+      selector
+    }
+  }, ...args)
 }
 
 async function findParent (...args) {
-  return firstOrNull(await findAllByQuery(querySelectorParent, ...args))
+  return firstOrNull(
+    await findAllByQuery((element, selector, options) => {
+      return {
+        results: querySelectorParent(element, selector, options),
+        selector: `parent: ${selector}`
+      }
+    }, ...args)
+  )
 }
 
 function findParents (...args) {
-  return findAllByQuery(querySelectorParents, ...args)
+  return findAllByQuery((element, selector, options) => {
+    return {
+      results: querySelectorParents(element, selector, options),
+      selector: `parents: ${selector}`
+    }
+  }, ...args)
 }
 
 async function findFrame (...args) {
@@ -56,7 +72,16 @@ async function findFrame (...args) {
 }
 
 function findAllFrames (...args) {
-  return findAllByQuery(iframeQuery, ...args)
+  return findAllByQuery((element, selector, options ) => {
+    const results = querySelectorAll(element, 'iframe')
+      .filter(frame => matchesSelector(frame, selector, options))
+      .map(frame => frame.contentWindow.document.documentElement)
+
+    return {
+      results,
+      selector: `iframe ${selector}`
+    }
+  }, ...args)
 }
 
 function findAllByQuery (query, ...args) {
@@ -65,21 +90,12 @@ function findAllByQuery (query, ...args) {
   return getQueryResult(
     element,
     query.bind(null, element, selector, options),
-    options,
-    `with selector: "${selector}"`
+    options
   )
 }
 
 async function findByQuery (...args) {
   return firstOrNull(await findAllByQuery(...args))
-}
-
-function iframeQuery (...args) {
-  const { element, selector, options } = parseQueryArguments(...args)
-
-  return querySelectorAll(element, 'iframe')
-    .filter(frame => matchesSelector(frame, selector, options))
-    .map(frame => frame.contentWindow.document.documentElement)
 }
 
 async function getQueryResult (
@@ -88,42 +104,40 @@ async function getQueryResult (
   options = {
     expectEmpty: false,
     timeout: 1900
-  },
-  message = ''
+  }
 ) {
   const { expectEmpty, timeout, customMethods } = options
 
   const queryResult = () => {
-    const results = query()
+    const { results, selector } = query()
+
+    let boundResults = []
 
     if (Array.isArray(results)) {
-      return results.map(result => bindElementToUtilities(result, customMethods))
+      boundResults = results.map(result => bindElementToUtilities(result, customMethods))
     } else if (results instanceof Element) {
-      return [bindElementToUtilities(results, customMethods)]
-    } else {
-      return []
+      boundResults = [bindElementToUtilities(results, customMethods)]
+    }
+
+    return {
+      results: boundResults,
+      selector
     }
   }
 
-  let result
+  const { results, selector } = (timeout > 0) ? (await waitForQueryResult(
+    queryResult,
+    { timeout, expectEmpty, element }
+  )) : queryResult()
 
-  if (timeout > 0) {
-    result = await waitForQueryResult(
-      queryResult,
-      { timeout, expectEmpty, element, message }
-    )
-  } else {
-    result = queryResult()
-  }
-
-  if (result && result.length > 0) {
-    return result
+  if (results && results.length > 0) {
+    return results
   } else if (!expectEmpty) {
     throw new Error(
       [
-        `[ui-test-utils] No matches found for element query...`,
-        `element: ${elementToString(element, 7000, { highlight: false })}`,
-        message
+        `[ui-test-utils] No matches found for Element query...`,
+        `with selector: "${selector}"`,
+        `element: ${elementToString(element, 7000, { highlight: false })}`
       ]
       .join('\n')
     )

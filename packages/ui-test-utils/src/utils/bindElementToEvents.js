@@ -34,6 +34,9 @@ export function bindElementToEvents (element, events) {
       } else if (['focus'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireFocusEvent.bind(null, element, fn)
+      } else if (['blur'].includes(key)) {
+        // eslint-disable-next-line no-param-reassign
+        bound[key] = fireBlurEvent.bind(null, element, fn)
       } else if (key === 'click') {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireClickEvent.bind(null, element, fn)
@@ -86,7 +89,30 @@ function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: t
   })
 }
 
+function fireBlurEvent (element, fn, init, options = { timeout: 0, focusable: true }) {
+  let focusable = element
 
+  if (options.focusable) {
+    focusable = querySelector(element, ':focusable')
+  }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        if (focusable instanceof Element) {
+          const fireEvent = fn.bind(null, focusable)
+          resolve(fireEvent(init))
+        } else {
+          reject(
+            new Error(`[ui-test-utils] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
+          )
+        }
+      } catch (e) {
+        reject(e)
+      }
+    }, options.timeout)
+  })
+}
 
 function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: true }) {
   let focusable = element
@@ -121,7 +147,6 @@ function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: t
       }
     }, options.timeout)
   })
-
 }
 
 function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0, focusable: true }) {

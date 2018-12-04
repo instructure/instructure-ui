@@ -29,11 +29,18 @@ import { firstOrNull } from './firstOrNull'
 
 export function locator (componentSelector, customMethods = {}) {
   const queryAll = (element, selector, options) => {
-    return querySelectorAllWithin(componentSelector, element, selector, options)
+    return {
+      results: querySelectorAllWithin(componentSelector, element, selector, options),
+      selector: componentSelector
+    }
   }
 
   const query = (...args) => {
-    return firstOrNull(queryAll(...args))
+    const { selector, results } = queryAll(...args)
+    return {
+      result: firstOrNull(results),
+      selector
+    }
   }
 
   const findAll = (...args) => {

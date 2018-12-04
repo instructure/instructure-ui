@@ -25,7 +25,7 @@
 import {
   findByQuery,
   locator,
-  querySelectorAll
+  querySelector
 } from '@instructure/ui-test-utils'
 
 import DrawerLayout, { DrawerContent, DrawerTray } from './index'
@@ -33,22 +33,29 @@ import DrawerLayout, { DrawerContent, DrawerTray } from './index'
 export const DrawerContentLocator = locator(DrawerContent.selector)
 export const DrawerTrayLocator = locator(DrawerTray.selector)
 
+const trayQuery = (element, selector, options) => {
+  let traySelector
+  let results = []
+  if (element && element.getAttribute) {
+    const id = element.getAttribute(DrawerLayout.locatorAttribute)
+    traySelector = `[${DrawerTray.locatorAttribute}="${id}"]`
+    results = querySelector(
+      traySelector,
+      options
+    )
+  }
+  return {
+    results,
+    selector: traySelector
+  }
+}
+
 const DrawerLayoutLocator = locator(DrawerLayout.selector, {
   findContent: (...args) => {
     return DrawerContentLocator.find(...args)
   },
   findTray: (...args) => {
-    return findByQuery((element, selector, options) => {
-      if (element instanceof Element) {
-        const id = element.getAttribute(DrawerLayout.locatorAttribute)
-        return querySelectorAll(
-          document.body,
-          `[${DrawerTray.locatorAttribute}="${id}"]`,
-        )
-      } else {
-        return []
-      }
-    }, ...args)
+    return findByQuery(trayQuery, ...args)
   }
 })
 

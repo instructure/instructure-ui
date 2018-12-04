@@ -70,12 +70,14 @@ class Component extends React.Component {
 const ComponentLocator = locator(Component.selector, {
   findAllInputs: (...args) => {
     return findAllByQuery((element, selector, options) => {
-      const inputs = querySelectorAll(element, 'input')
+      let results = querySelectorAll(element, 'input')
       if (selector) {
-        return inputs
+        results = results
           .filter(input => matchesSelector(input, selector, options))
-      } else {
-        return inputs
+      }
+      return {
+        results,
+        selector: ['input', selector].join(', ')
       }
     }, ...args)
   }
