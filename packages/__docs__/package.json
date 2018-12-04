@@ -40,6 +40,7 @@
     "@instructure/ui-elements": "^5",
     "@instructure/ui-focusable": "^5",
     "@instructure/ui-forms": "^5",
+    "@instructure/ui-form-field": "^5",
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-icons": "^5",
     "@instructure/ui-layout": "^5",

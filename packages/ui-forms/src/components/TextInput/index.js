@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import FormField from '@instructure/ui-form-field'
+import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'

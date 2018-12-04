@@ -19,7 +19,7 @@ yarn add @instructure/ui-form-field
 
 ```js
 import React from 'react'
-import FormField from '@instructure/ui-form-field'
+import FormField from '@instructure/ui-form-field/lib/components/FormField'
 
 export default function Example () {
   return (

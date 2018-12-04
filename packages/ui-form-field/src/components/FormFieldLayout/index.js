@@ -41,7 +41,7 @@ import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildre
 
 import FormFieldLabel from '../FormFieldLabel'
 import FormFieldMessages from '../FormFieldMessages'
-import FormPropTypes from '../../../utils/FormPropTypes'
+import FormPropTypes from '../../utils/FormPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -52,7 +52,7 @@ parent: FormField
 ---
 **/
 @themeable(theme, styles)
-class FormFieldLayout extends Component {
+export default class FormFieldLayout extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**
@@ -213,5 +213,3 @@ class FormFieldLayout extends Component {
     )
   }
 }
-
-export default FormFieldLayout

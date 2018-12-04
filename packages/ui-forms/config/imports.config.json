@@ -1,0 +1,10 @@
+[
+  {
+    "pattern": "^@instructure/ui-forms/lib/components/FormField",
+    "replace": "@instructure/ui-form-field/lib/components/FormField"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/components/FormFieldGroup",
+    "replace": "@instructure/ui-form-field/lib/components/FormFieldGroup"
+  }
+]

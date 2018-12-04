@@ -31,7 +31,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import styles from './styles.css'
 import theme from './theme'
 
-import FormPropTypes from '../../../utils/FormPropTypes'
+import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldMessage from '../FormFieldMessage'
 
 /**

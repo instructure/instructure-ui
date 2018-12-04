@@ -79,7 +79,7 @@ describe('<Popover />', async () => {
 
     expect(content).to.exist()
 
-    await within(trigger.getOwnerDocument().documentElement)
+    await within(trigger.getOwnerDocument().body)
       .click()
 
     content = await popover.findContent({ expectEmpty: true })

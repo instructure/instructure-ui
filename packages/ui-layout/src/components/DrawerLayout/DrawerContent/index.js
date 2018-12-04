@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import debounce from '@instructure/ui-utils/lib/debounce'
+import debounce from '@instructure/debounce'
 import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'

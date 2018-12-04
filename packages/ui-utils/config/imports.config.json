@@ -1,0 +1,6 @@
+[
+  {
+    "pattern": "^@instructure/ui-utils/lib/debounce",
+    "replace": "@instructure/debounce"
+  }
+]

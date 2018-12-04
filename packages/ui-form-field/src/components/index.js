@@ -22,10 +22,9 @@
  * SOFTWARE.
  */
 
-import FormFieldLabel from '@instructure/ui-form-field/lib/components/FormFieldLabel'
-import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
-
-export default deprecated('5.35.0', null, changedPackageWarning(
-  'ui-forms',
-  'ui-form-field'
-))(FormFieldLabel)
+export FormField from './FormField'
+export FormFieldLabel from './FormFieldLabel'
+export FormFieldMessage from './FormFieldMessage'
+export FormFieldMessages from './FormFieldMessages'
+export FormFieldLayout from './FormFieldLayout'
+export FormFieldGroup from './FormFieldGroup'

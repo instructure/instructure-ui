@@ -25,6 +25,7 @@
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
+    "@instructure/debounce": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-motion": "^5",

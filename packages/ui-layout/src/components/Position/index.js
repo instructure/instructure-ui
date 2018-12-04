@@ -33,7 +33,7 @@ import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPosition
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import debounce from '@instructure/ui-utils/lib/debounce'
+import debounce from '@instructure/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import testable from '@instructure/ui-testable'

@@ -28,14 +28,14 @@ import PropTypes from 'prop-types'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import FormPropTypes from '../../utils/FormPropTypes'
-import FormFieldLayout from './FormFieldLayout'
+import FormFieldLayout from '../FormFieldLayout'
 
 /**
 ---
 category: components
 ---
 **/
-class FormField extends Component {
+export default class FormField extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,
     /**
@@ -76,9 +76,3 @@ class FormField extends Component {
     )
   }
 }
-
-export default FormField
-export { default as FormFieldLayout } from './FormFieldLayout'
-export { default as FormFieldLabel } from './FormFieldLabel'
-export { default as FormFieldMessage } from './FormFieldMessage'
-export { default as FormFieldMessages } from './FormFieldMessages'

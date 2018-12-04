@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import debounce from '@instructure/ui-utils/lib/debounce'
+import debounce from '@instructure/debounce'
 import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'

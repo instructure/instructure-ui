@@ -22,6 +22,4 @@
  * SOFTWARE.
  */
 
-export { default } from './components/FormField'
-export * from './components/FormField'
-export { default as FormFieldGroup } from './components/FormFieldGroup'
+export * from './components'

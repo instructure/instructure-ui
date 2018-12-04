@@ -22,4 +22,12 @@
  * SOFTWARE.
  */
 import debounce from '@instructure/debounce'
-export default debounce
+import { changedPackageWarning, warnDeprecatedComponent } from './react/deprecated'
+
+export default (...args) => {
+  warnDeprecatedComponent('5.35.0', 'debounce', changedPackageWarning(
+    'ui-utils',
+    'debounce'
+  ))
+  return debounce(...args)
+}

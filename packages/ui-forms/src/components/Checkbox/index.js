@@ -34,7 +34,7 @@ import error from '@instructure/ui-utils/lib/error'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
-import { FormFieldMessages } from '@instructure/ui-form-field'
+import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import CheckboxFacade from './CheckboxFacade'

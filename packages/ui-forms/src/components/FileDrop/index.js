@@ -31,7 +31,7 @@ import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import View from '@instructure/ui-layout/lib/components/View'
 import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
 import themeable from '@instructure/ui-themeable'
-import { FormFieldMessages } from '@instructure/ui-form-field'
+import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import accepts, { getAcceptList } from './utils/accepts'

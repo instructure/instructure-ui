@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormField/FormFieldMessages'
+import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 export default deprecated('5.35.0', null, changedPackageWarning(

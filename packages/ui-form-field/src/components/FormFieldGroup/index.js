@@ -31,7 +31,7 @@ import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Gr
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
-import { FormFieldLayout } from '../FormField'
+import FormFieldLayout from '../FormFieldLayout'
 import FormPropTypes from '../../utils/FormPropTypes'
 
 import styles from './styles.css'

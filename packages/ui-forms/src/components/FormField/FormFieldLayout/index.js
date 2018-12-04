@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import FormFieldLayout from '@instructure/ui-form-field/lib/components/FormField/FormFieldLayout'
+import FormFieldLayout from '@instructure/ui-form-field/lib/components/FormFieldLayout'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 export default deprecated('5.35.0', null, changedPackageWarning(
