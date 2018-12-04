@@ -126,7 +126,12 @@ function createMountWrapper (element, options = {}) {
     }
 
     getDOMNode () {
-      return ReactDOM.findDOMNode(this)
+      try {
+        return ReactDOM.findDOMNode(this)
+      } catch (e) {
+        console.warn(`[ui-test-utils] ${e}`)
+        return null
+      }
     }
 
     setChildProps (newProps) {

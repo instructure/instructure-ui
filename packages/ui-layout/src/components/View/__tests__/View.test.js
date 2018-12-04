@@ -53,7 +53,7 @@ describe('<View />', async () => {
 
   it('should warn when as=span, display=auto, and vertical margins are set', async () => {
     const consoleError = stub(console, 'error')
-    const warning = `Warning: [View] as='span' and display='auto' is inline and will allow for horizontal margins only.`
+    const warning = `Warning: [View] display style is set to 'inline' and will allow for horizontal margins only.`
     await mount(
       <View as="span" display="auto" margin="0 0 small 0">
         <h1>Hello!</h1>

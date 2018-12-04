@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import getShorthandPropValue from '@instructure/ui-themeable/lib/utils/getShorthandPropValue'
+import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-themeable/lib/utils/mirrorShorthand'
 import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
@@ -272,13 +273,16 @@ class View extends Component {
 }
 
 if (process.env.NODE_ENV !== 'production') {
-  View.prototype.componentWillReceiveProps = View.prototype.verifySpanMargin = function(props) {
-    const { as, display, margin } = props
+  View.prototype.componentDidMount = View.prototype.verifySpanMargin = function() {
+    if (!this._element) {
+      return
+    }
+
+    const { margin } = this.props
     const marginValues = margin ? margin.split(' ') : null
-    // warn if all 3 of the following conditions are true
+    const display = getComputedStyle(this._element).display
+
     let verticalMargin = false
-    let displayAuto = false
-    let asSpan = false
 
     // either top or bottom margin are set
     if (margin) {
@@ -289,24 +293,12 @@ if (process.env.NODE_ENV !== 'production') {
         verticalMargin = true
       }
     }
-    // rendered as a span
-    if (as === 'span' || typeof as === 'undefined') {
-      asSpan = true
-    }
-    // display is auto
-    if (display === 'auto') {
-      displayAuto = true
-    }
 
     error(
-      !(verticalMargin && asSpan && displayAuto),
+      !(verticalMargin && display === 'inline'),
       'View',
-      `as='span' and display='auto' is inline and will allow for horizontal margins only.`
+      `display style is set to '${display}' and will allow for horizontal margins only.`
     )
-  }
-
-  View.prototype.componentWillMount = function() {
-    this.verifySpanMargin(this.props)
   }
 }
 

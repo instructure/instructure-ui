@@ -61,7 +61,7 @@ describe('<ListItem />', async () => {
   describe('when passing down props to View', async () => {
     const allowedProps = {
       padding: 'small',
-      margin: 'small',
+      margin: '0 small',
       elementRef: () => {}
     }
 
