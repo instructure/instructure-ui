@@ -25,6 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import keycode from 'keycode'
+
 import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -273,7 +275,12 @@ class Popover extends Component {
      * should the content offset to align by its arrow
      */
     alignArrow: PropTypes.bool,
-    id: PropTypes.string
+    id: PropTypes.string,
+
+    /**
+     * should the content become focused when the trigger is blurred
+     */
+    shouldFocusContentOnTriggerBlur: PropTypes.bool
   }
 
   static defaultProps = {
@@ -303,6 +310,7 @@ class Popover extends Component {
     shouldContainFocus: false,
     shouldReturnFocus: true,
     shouldCloseOnDocumentClick: true,
+    shouldFocusContentOnTriggerBlur: false,
     shouldCloseOnEscape: true,
     defaultFocusElement: null,
     label: null,
@@ -407,6 +415,29 @@ class Popover extends Component {
     this.hide(event)
   }
 
+  handleTriggerKeyDown = (event) => {
+    if (!this.props.shouldFocusContentOnTriggerBlur) {
+      return
+    }
+
+    if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
+      event.preventDefault()
+      this._raf.push(requestAnimationFrame(() => {
+        this._dialog && this._dialog.focus()
+      }))
+    }
+  }
+
+  handleTriggerBlur = (event) => {
+    if (this.props.on.indexOf('focus') > -1) {
+      this._raf.push(requestAnimationFrame(() => {
+        if (!containsActiveElement(this._view)) {
+          this.hide()
+        }
+      }))
+    }
+  }
+
   handlePositionChanged = ({ placement }) => {
     this.setState({
       closeButtonPlacement: this.getCloseButtonPlacement(this.props),
@@ -431,7 +462,6 @@ class Popover extends Component {
     if (trigger) {
       const { on, shouldContainFocus } = this.props
       let onClick
-      let onBlur
       let onFocus
       let onMouseOut
       let onMouseOver
@@ -460,13 +490,6 @@ class Popover extends Component {
         onFocus = () => {
           this.show()
         }
-        onBlur = (event) => {
-          this._raf.push(requestAnimationFrame(() => {
-            if (!containsActiveElement(this._view)) {
-              this.hide()
-            }
-          }))
-        }
       }
 
       if (shouldContainFocus) {
@@ -481,8 +504,9 @@ class Popover extends Component {
           this._trigger = el
         },
         'aria-expanded': expanded,
+        onKeyDown: createChainedFunction(this.handleTriggerKeyDown, this.props.onKeyDown),
         onClick: createChainedFunction(onClick, this.props.onClick),
-        onBlur: createChainedFunction(onBlur, this.props.onBlur),
+        onBlur: createChainedFunction(this.handleTriggerBlur, this.props.onBlur),
         onFocus: createChainedFunction(onFocus, this.props.onFocus),
         onMouseOut: createChainedFunction(onMouseOut, this.props.onMouseOut),
         onMouseOver: createChainedFunction(onMouseOver, this.props.onMouseOver)
@@ -522,11 +546,13 @@ class Popover extends Component {
       content = (
         <Dialog
           {...pickProps(this.props, Dialog.propTypes)}
+          ref={(el) => this._dialog = el}
           display="block"
           open={this.shown}
           onBlur={this.handleDialogBlur}
           onDismiss={this.hide}
           defaultFocusElement={this.defaultFocusElement}
+          shouldFocusOnOpen={!this.props.shouldFocusContentOnTriggerBlur}
         >
           {content}
         </Dialog>

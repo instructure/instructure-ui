@@ -133,7 +133,7 @@ export default class KeyboardFocusRegion {
       element = findDOMNode(element)
     }
 
-    if (!element) {
+    if (!element || !this._contextElement.contains(element)) {
       element = this.firstTabbable || this.firstFocusable || this._contextElement
     }
 
@@ -175,6 +175,10 @@ export default class KeyboardFocusRegion {
     this._options.onDismiss(event)
   }
 
+  handleBlur = event => {
+    this._options.onBlur(event)
+  }
+
   handleKeyUp = event => {
     if (this._options.shouldCloseOnEscape && event.keyCode === keycode.codes.escape &&
         !event.defaultPrevented) {
@@ -183,10 +187,8 @@ export default class KeyboardFocusRegion {
   }
 
   handleKeyDown = event => {
-    if (event.keyCode === keycode.codes.tab) {
-      scopeTab(this._contextElement, event, !this.shouldContainFocus ? () => {
-        this._options.onBlur(event)
-      } : null)
+    if (event.keyCode === keycode.codes.tab && containsActiveElement(this._contextElement)) {
+      scopeTab(this._contextElement, event)
     }
   }
 
@@ -194,7 +196,7 @@ export default class KeyboardFocusRegion {
     this._wasDocumentClick = true
   }
 
-  handleBlur = event => {
+  handleWindowBlur = event => {
     if (this._wasDocumentClick) {
       this._wasDocumentClick = false
       return
@@ -230,7 +232,11 @@ export default class KeyboardFocusRegion {
   activate () {
     if (!this._active) {
       if (this.tabbable.length > 0) {
-        this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
+        if (!this.shouldContainFocus) {
+          this._listeners.push(addEventListener(this.lastTabbable, 'blur', this.handleBlur))
+        } else {
+          this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
+        }
       }
 
       if (this._options.shouldCloseOnEscape) {
@@ -240,7 +246,7 @@ export default class KeyboardFocusRegion {
       if (this._options.shouldContainFocus) {
         this._listeners.push(addEventListener(this.doc, 'click', this.handleClick, true))
 
-        this._listeners.push(addEventListener(this.win, 'blur', this.handleBlur, false))
+        this._listeners.push(addEventListener(this.win, 'blur', this.handleWindowBlur, false))
         this._listeners.push(addEventListener(this.doc, 'focus', this.handleFocus, true))
       }
 

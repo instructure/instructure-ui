@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import error from '@instructure/ui-utils/lib/error'
 import FocusRegion from './FocusRegion'
 
 let ENTRIES = []
@@ -36,16 +37,59 @@ let ENTRIES = []
  * - Return focus to the marked element
  */
 export default class FocusRegionManager {
-  static focusRegion = (element, options) => {
+  static focusRegion = (element, idOrOptions = {}) => {
+    let entry
+    if (typeof idOrOptions === 'string' ) {
+      entry = FocusRegionManager.getEntry(element, idOrOptions)
+    } else {
+      entry = FocusRegionManager.addEntry(element, idOrOptions)
+    }
+    if (entry && entry.region && typeof entry.region.focus === 'function') {
+      entry.region.focus()
+      return entry.region
+    } else {
+      error(
+        false,
+        'FocusRegionManager',
+        `Could not focus region with element: ${element}`
+      )
+    }
+  }
+
+  static activateRegion = (element, options) => {
+    const { region } = FocusRegionManager.addEntry(element, options)
+    return region
+  }
+
+  static getActiveEntry = () => {
+    return ENTRIES.find(({ region }) => region.focused)
+  }
+
+  static findEntry = (element, id) => {
+    let index
+    if (id) {
+      index = ENTRIES.findIndex((entry) => entry.id === id)
+    } else {
+      index = ENTRIES.findIndex((entry) => entry.element === element)
+    }
+    return index
+  }
+
+  static getEntry = (element, id) => {
+    return ENTRIES[FocusRegionManager.findEntry(element, id)]
+  }
+
+  static addEntry = (element, options = {}) => {
     const region = new FocusRegion(element, options)
     const activeEntry = FocusRegionManager.getActiveEntry()
-
     ENTRIES.forEach(({ region }) => {
       region && region.deactivate()
     })
-
     region.activate()
-    region.focus()
+
+    if (options.shouldFocusOnOpen) {
+      region.focus()
+    }
 
     const entry = {
       id: region.id,
@@ -54,27 +98,15 @@ export default class FocusRegionManager {
       children: [],
       parent: activeEntry
     }
-
     ENTRIES.push(entry)
-
     if (activeEntry) {
       activeEntry.children.push(entry)
     }
-
-    return region
-  }
-
-  static getActiveEntry = () => {
-    return ENTRIES.find(({ region }) => region.focused)
+    return entry
   }
 
   static removeEntry = (element, id) => {
-    let index
-    if (id) {
-      index = ENTRIES.findIndex((entry) => entry.id === id)
-    } else {
-      index = ENTRIES.findIndex((entry) => entry.element === element)
-    }
+    const index = FocusRegionManager.findEntry(element, id)
     const entry = ENTRIES[index]
 
     if (index > -1) {

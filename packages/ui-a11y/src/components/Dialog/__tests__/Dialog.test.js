@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within, find} from '@instructure/ui-test-utils'
 import Dialog from '../index'
 
 describe('<Dialog />', async () => {
@@ -39,7 +39,7 @@ describe('<Dialog />', async () => {
 
   it('should render children when open', async () => {
     const subject = await mount(
-      <Dialog open={true}>
+      <Dialog open>
         <button>Hello World</button>
       </Dialog>
     )
@@ -50,7 +50,10 @@ describe('<Dialog />', async () => {
 
   it('should apply the a11y attributes', async () => {
     const subject = await mount(
-      <Dialog open={true} label="Dialog Example">
+      <Dialog
+        open
+        label="Dialog Example"
+      >
         <button>Hello World</button>
       </Dialog>
     )
@@ -64,7 +67,10 @@ describe('<Dialog />', async () => {
   it('should call onDismiss prop when Esc key pressed', async () => {
     const onDismiss = stub()
     const subject = await mount(
-      <Dialog open={true} onDismiss={onDismiss}>
+      <Dialog
+        open
+        onDismiss={onDismiss}
+      >
         <button>Hello World</button>
       </Dialog>
     )
@@ -85,7 +91,11 @@ describe('<Dialog />', async () => {
   it('should call onDismiss prop when the document is clicked', async () => {
     const onDismiss = stub()
     const subject = await mount(
-      <Dialog open={true} shouldCloseOnDocumentClick={true} onDismiss={onDismiss}>
+      <Dialog
+        open
+        shouldCloseOnDocumentClick
+        onDismiss={onDismiss}
+      >
         <button>Hello World</button>
       </Dialog>
     )
@@ -142,61 +152,101 @@ describe('<Dialog />', async () => {
 
     it('should focus the first tabbable element by default', async () => {
       await mount(<DialogExample open={true} />)
+      const input = await find('#input-one')
       await wait(() => {
-        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
+        expect(input.focused()).to.be.true()
       })
     })
 
     it('should focus the first tabbable element when open prop becomes true', async () => {
-      const subject = await mount(<DialogExample open={false} />)
+      const subject = await mount(
+        <DialogExample open={false} />
+      )
 
-      await subject.setProps({open: true})
+      await subject.setProps({ open: true })
+
+      const input = await find('#input-one')
 
       await wait(() => {
-        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
+        expect(input.focused()).to.be.true()
       })
     })
 
     it('should take a prop for finding default focus', async () => {
       await mount(
         <DialogExample
-          open={true}
+          open
           defaultFocusElement={() => {
             return document.getElementById('input-two')
           }}
         />
       )
 
+      const input = await find('#input-two')
+
       await wait(() => {
-        expect(document.getElementById('input-two') === document.activeElement).to.be.true()
+        expect(input.focused()).to.be.true()
       })
     })
 
     it('should return focus', async () => {
       const subject = await mount(<DialogExample open={false} />)
 
-      expect(document.getElementById('input-trigger') === document.activeElement).to.be.true()
+      const trigger = await find('#input-trigger')
 
-      await subject.setProps({open: true})
+      expect(trigger.focused()).to.be.true()
+
+      await subject.setProps({ open: true })
+
+      const input = await find('#input-one')
 
       await wait(() => {
-        expect(document.getElementById('input-one') === document.activeElement).to.be.true()
+        expect(input.focused()).to.be.true()
       })
 
-      await subject.setProps({open: false})
+      await subject.setProps({ open: false })
 
       await wait(() => {
-        expect(document.getElementById('input-trigger') === document.activeElement).to.be.true()
+        expect(trigger.focused()).to.be.true()
       })
     })
 
-    function testOnBlur (shouldContainFocus) {
-      it(`should ${shouldContainFocus ? 'not ' : ''}call onBlur when focus leaves and shouldContainFocus is ${shouldContainFocus}`, async () => {
+    describe('when focus leaves the last tabbable', async () => {
+      it(`should NOT call onBlur when shouldContainFocus=true`, async () => {
         const onBlur = stub()
         const subject = await mount(
           <DialogExample
-            open={true}
-            shouldContainFocus={shouldContainFocus}
+            open
+            shouldContainFocus
+            defaultFocusElement={() => {
+              return document.getElementById('input-two')
+            }}
+            onBlur={onBlur}
+          />
+        )
+        const main = within(subject.getDOMNode())
+        const inputOne = await main.find('[id=input-one]')
+        const inputTwo = await main.find('[id=input-two]')
+
+        await wait(() => {
+          expect(inputTwo.focused()).to.be.true()
+        })
+
+        await inputTwo.keyDown('tab')
+        await inputTwo.blur()
+
+        await wait(() => {
+          expect(onBlur).to.not.have.been.called()
+          expect(inputOne.focused()).to.be.true()
+        })
+      })
+
+      it(`should call onBlur when shouldContainFocus=false`, async () => {
+        const onBlur = stub()
+        const subject = await mount(
+          <DialogExample
+            open
+            shouldContainFocus={false}
             defaultFocusElement={() => {
               return document.getElementById('input-two')
             }}
@@ -206,23 +256,19 @@ describe('<Dialog />', async () => {
         const main = within(subject.getDOMNode())
         const inputTwo = await main.find('[id=input-two]')
 
+        await inputTwo.focus()
+
         await wait(() => {
-          expect(inputTwo.getDOMNode() === document.activeElement).to.be.true()
+          expect(inputTwo.focused()).to.be.true()
         })
 
         await inputTwo.keyDown('tab')
+        await inputTwo.blur()
 
         await wait(() => {
-          if (!shouldContainFocus) {
-            expect(onBlur).to.have.been.called()
-          } else {
-            expect(onBlur).to.not.have.been.called()
-          }
+          expect(onBlur).to.have.been.called()
         })
       })
-    }
-
-    testOnBlur(false)
-    testOnBlur(true)
+    })
   })
 })

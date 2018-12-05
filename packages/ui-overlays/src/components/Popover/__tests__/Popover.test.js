@@ -66,6 +66,7 @@ describe('<Popover />', async () => {
         </PopoverTrigger>
         <PopoverContent>
           <h2>Foo Bar Baz</h2>
+          <button>focus me</button>
         </PopoverContent>
       </Popover>
     )
@@ -73,13 +74,17 @@ describe('<Popover />', async () => {
     const popover = await PopoverLocator.find(':label(Click Me)')
     const trigger = await popover.findTrigger()
 
-    await trigger.click()
+    await trigger.click({
+      target: trigger.getOwnerDocument().documentElement
+    })
 
     let content = await popover.findContent()
 
-    expect(content).to.exist()
+    await wait(() => {
+      expect(content.containsFocus()).to.exist()
+    })
 
-    await within(trigger.getOwnerDocument().body)
+    await within(trigger.getOwnerDocument().documentElement)
       .click()
 
     content = await popover.findContent({ expectEmpty: true })
@@ -190,6 +195,63 @@ describe('<Popover />', async () => {
       await trigger.click()
 
       const content = await popover.findContent({ expectEmpty: true })
+
+      expect(content).to.not.exist()
+    })
+  })
+
+  describe('when shouldFocusContentOnTriggerBlur=true and shouldContainFocus=false', async () => {
+    it('should move focus into the content when the trigger is blurred', async () => {
+      await mount(
+        <span>
+          <button>focus me first</button>
+          <Popover
+            on={['hover', 'focus', 'click']}
+            mountNode={() => document.getElementById('container')}
+            shouldContainFocus={false}
+            shouldReturnFocus={false}
+            shouldFocusContentOnTriggerBlur
+          >
+            <PopoverTrigger>
+              <button>focus me</button>
+            </PopoverTrigger>
+            <PopoverContent>
+              <button>focus me after trigger</button>
+            </PopoverContent>
+          </Popover>
+          <span id="container" />
+          <button id="next">focus me last</button>
+        </span>
+      )
+
+      const popover = await PopoverLocator.find()
+      const trigger = await popover.findTrigger()
+
+      await trigger.focus()
+
+      let content = await popover.findContent()
+
+      await wait(() => {
+        expect(content.containsFocus()).to.be.false()
+        expect(trigger.focused()).to.be.true()
+      })
+
+      expect(content).to.exist()
+
+      await trigger.keyDown('tab')
+
+      content = await popover.findContent()
+
+      await wait(() => {
+        expect(trigger.focused()).to.be.false()
+        expect(content.containsFocus()).to.be.true()
+      })
+
+      const button = await content.find('button')
+
+      await button.blur()
+
+      content = await popover.findContent({ expectEmpty: true })
 
       expect(content).to.not.exist()
     })

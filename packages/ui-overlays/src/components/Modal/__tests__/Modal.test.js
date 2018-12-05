@@ -201,7 +201,8 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().body).click()
+    await within(modal.getOwnerDocument().documentElement)
+      .click()
 
     await wait (() => {
       expect(onDismiss).to.have.been.calledOnce()
@@ -228,7 +229,8 @@ describe('<Modal />', async () => {
       expect(modal.containsFocus()).to.be.true()
     })
 
-    await within(modal.getOwnerDocument().body).click()
+    await within(modal.getOwnerDocument().documentElement)
+      .click()
 
     await wait (() => {
       expect(onDismiss).to.not.have.been.called()
@@ -403,7 +405,7 @@ describe('<Modal />', async () => {
         expect(modal.containsFocus()).to.be.true()
       })
 
-      await within(modal.getOwnerDocument().body)
+      await within(modal.getOwnerDocument().documentElement)
         .keyUp('escape', null, { focusable: false })
 
       await wait(() => {

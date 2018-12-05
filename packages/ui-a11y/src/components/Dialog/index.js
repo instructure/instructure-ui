@@ -97,11 +97,13 @@ class Dialog extends Component {
     ]),
     shouldReturnFocus: PropTypes.bool,
     shouldCloseOnDocumentClick: PropTypes.bool,
-    shouldCloseOnEscape: PropTypes.bool
+    shouldCloseOnEscape: PropTypes.bool,
+    shouldFocusOnOpen: PropTypes.bool
   }
 
   static defaultProps = {
     open: false,
+    shouldFocusOnOpen: true,
     shouldContainFocus: false,
     shouldReturnFocus: false,
     shouldCloseOnDocumentClick: true,
@@ -118,19 +120,17 @@ class Dialog extends Component {
 
   componentDidMount () {
     if (this.props.open) {
-      this.focus()
+      this.open()
     }
   }
 
   componentDidUpdate (prevProps) {
-    const { open, shouldContainFocus } = this.props
+    const { open } = this.props
 
-    if (open && !prevProps.open ||
-      open && shouldContainFocus && !prevProps.shouldContainFocus) {
-      this.focus()
-    } else if (!open && prevProps.open ||
-      !open && !shouldContainFocus && prevProps.shouldContainFocus) {
-      this.blur()
+    if (open && !prevProps.open) {
+      this.open()
+    } else if (!open && prevProps.open) {
+      this.close()
     }
 
     if (this._focusRegion) {
@@ -140,35 +140,51 @@ class Dialog extends Component {
 
   componentWillUnmount () {
     if (this.props.open) {
-      this.blur()
+      this.close()
     }
 
     this._raf.forEach(request => request.cancel())
     this._raf = []
   }
 
-  focus () {
+  open () {
     const {
       open,
       contentElement,
       ...options
     } = this.props
 
-    if (!open || !this.contentElement) {
-      error(false, 'Dialog', 'Can\'t focus a Dialog that isn\'t open.')
-    }
-
     this._raf.push(requestAnimationFrame(() => {
-      this._focusRegion = FocusRegionManager.focusRegion(this.contentElement, {
+      this._focusRegion = FocusRegionManager.activateRegion(this.contentElement, {
         ...options
       })
     }))
   }
 
-  blur () {
+  close () {
     if (this._focusRegion) {
       FocusRegionManager.blurRegion(this.contentElement, this._focusRegion.id)
     }
+  }
+
+  focus () {
+    if (!this.props.open || !this.contentElement) {
+      error(false, 'Dialog', 'Can\'t focus a Dialog that isn\'t open.')
+      return
+    }
+
+    if (this._focusRegion) {
+      FocusRegionManager.focusRegion(this.contentElement, this._focusRegion.id)
+    }
+  }
+
+  blur () {
+    if (!this.props.open || !this.contentElement) {
+      error(false, 'Dialog', 'Can\'t blur a Dialog that isn\'t open.')
+      return
+    }
+
+    this.close()
   }
 
   getRef = el => {

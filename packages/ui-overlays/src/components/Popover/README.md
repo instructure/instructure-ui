@@ -117,6 +117,44 @@ render () {
 render(<Example />)
 ```
 
+If the `<Popover />` contains focusable content and should be rendered in the focus order
+immediately after the trigger, it can be configured using the `shouldFocusContentOnTriggerBlur`
+prop. Note that the `<Popover />` content must be rendered in the correct order in the document
+(using the `mountNode` prop).
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+render () {
+  return (
+    <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
+      <Popover
+        on={['hover', 'focus', 'click']}
+        shouldContainFocus={false}
+        shouldReturnFocus={false}
+        shouldFocusContentOnTriggerBlur
+        mountNode={() => document.getElementById('container')}
+      >
+        <PopoverTrigger>
+          <Button margin="small">focus me</Button>
+        </PopoverTrigger>
+        <PopoverContent>
+          <Button margin="small">focus me when trigger blurs</Button>
+        </PopoverContent>
+      </Popover>
+      <div id="container"/>
+      <Button id="next" margin="small">focus me next</Button>
+    </div>
+  )
+}
+}
+
+render(<Example />)
+```
+
+
 ### Guidelines
 
 ```js
