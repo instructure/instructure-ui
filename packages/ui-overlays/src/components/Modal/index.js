@@ -222,15 +222,8 @@ export default class Modal extends Component {
     super(props)
 
     this.state = {
-      open: props.open,
       transitioning: false
     }
-  }
-
-  _timeouts = []
-
-  componentDidMount () {
-    this._isMounted = true
   }
 
   componentWillReceiveProps (nextProps) {
@@ -240,11 +233,6 @@ export default class Modal extends Component {
         transitioning: this.props.transition !== null
       })
     }
-  }
-
-  componentWillUnmount () {
-    this._isMounted = false
-    this._timeouts.forEach(timeout => clearTimeout(timeout))
   }
 
   get defaultFocusElement () {
@@ -266,20 +254,10 @@ export default class Modal extends Component {
   handlePortalOpen = (DOMNode) => {
     this.DOMNode = DOMNode
     DOMNode && this.applyTheme(DOMNode)
-    this._timeouts.push(
-      setTimeout(() => {
-        if (this._isMounted) {
-          this.setState({
-            open: true
-          })
-        }
-      })
-    )
   }
 
   handleTransitionExited = () => {
     this.setState({
-      open: false,
       transitioning: false
     })
   }
@@ -341,7 +319,7 @@ export default class Modal extends Component {
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}
         liveRegion={liveRegion}
-        open={this.state.open}
+        open
         className={classnames({
           [styles.root]: true,
           [styles[size]]: true,

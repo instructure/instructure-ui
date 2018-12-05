@@ -77,30 +77,28 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        {this.state.open && (
-          <Modal
-            as="form"
-            open={this.state.open}
-            onSubmit={this.handleFormSubmit}
-            onDismiss={() => { this.setState({ open: false }) }}
-            size={this.state.size}
-            label="Modal Dialog: Hello World"
-            shouldCloseOnDocumentClick
-          >
-            <ModalHeader>
-              {this.renderCloseButton()}
-              <Heading>Hello World</Heading>
-            </ModalHeader>
-            <ModalBody>
-              <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
-              <Text lineHeight="double">{fpo}</Text>
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-              <Button variant="primary" type="submit">Submit</Button>
-            </ModalFooter>
-          </Modal>
-        )}
+        <Modal
+          as="form"
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          onSubmit={this.handleFormSubmit}
+          size={this.state.size}
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+        >
+          <ModalHeader>
+            {this.renderCloseButton()}
+            <Heading>Hello World</Heading>
+          </ModalHeader>
+          <ModalBody>
+            <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
+            <Text lineHeight="double">{fpo}</Text>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
+            <Button variant="primary" type="submit">Submit</Button>
+          </ModalFooter>
+        </Modal>
       </div>
     )
   }
@@ -158,32 +156,30 @@ class Example extends React.Component {
         <Button onClick={this.handleButtonClick}>
           {this.state.open ? 'Close' : 'Open'} the Modal
         </Button>
-        {this.state.open && (
-          <Modal
-            open={this.state.open}
-            onDismiss={() => { this.setState({ open: false }) }}
-            size="fullscreen"
-            label="Modal Dialog: Hello World"
-            shouldCloseOnDocumentClick
-            mountNode={() => document.getElementById('constrainExample')}
-            constrain="parent"
-          >
-            <ModalHeader>
-              {this.renderCloseButton()}
-              <Heading>This Modal contains an Autocomplete</Heading>
-            </ModalHeader>
-            <ModalBody>
-              <View as="p" margin="none none small"><Text>{fpo}</Text></View>
-              <ModalAutoCompleteExample
-                label="Choose a state" defaultOption="12"
-                onChange={(e, o) => console.log(o.label)} />
-            </ModalBody>
-            <ModalFooter>
-              <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
-              <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
-            </ModalFooter>
-          </Modal>
-        )}
+        <Modal
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size="fullscreen"
+          label="Modal Dialog: Hello World"
+          shouldCloseOnDocumentClick
+          mountNode={() => document.getElementById('constrainExample')}
+          constrain="parent"
+        >
+          <ModalHeader>
+            {this.renderCloseButton()}
+            <Heading>This Modal contains an Autocomplete</Heading>
+          </ModalHeader>
+          <ModalBody>
+            <View as="p" margin="none none small"><Text>{fpo}</Text></View>
+            <ModalAutoCompleteExample
+              label="Choose a state" defaultOption="12"
+              onChange={(e, o) => console.log(o.label)} />
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
+            <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
+          </ModalFooter>
+        </Modal>
         <View margin="medium auto none" display="block" width="25rem" height="25rem" borderWidth="large" id="constrainExample"></View>
       </div>
     )
