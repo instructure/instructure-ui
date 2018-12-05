@@ -30,8 +30,8 @@ export default function Example () {
 }
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-forms.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-forms
+[npm]: https://img.shields.io/npm/v/@instructure/ui-form-field.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-form-field
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
