@@ -1,6 +1,6 @@
 {
   "name": "@instructure/debounce",
-  "version": "5.33.0",
+  "version": "5.35.0",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -21,8 +21,6 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^5"
-  },
-  "dependencies": {
   },
   "publishConfig": {
     "access": "public"

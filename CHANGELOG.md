@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.35.0"></a>
+# [5.35.0](https://github.com/instructure/instructure-ui/compare/v5.34.0...v5.35.0) (2018-12-06)
+
+
+### Bug Fixes
+
+* **ui-a11y:** hide iframe content from screenreaders when outside of focus region ([573ef9d](https://github.com/instructure/instructure-ui/commit/573ef9d))
+* **ui-buttons,ui-elements,ui-forms:** remove aria-disabled for input components ([512fb92](https://github.com/instructure/instructure-ui/commit/512fb92))
+* **ui-elements:** fix focus outline for ellipsis Links ([7365c3c](https://github.com/instructure/instructure-ui/commit/7365c3c))
+* **ui-form-field:** add missing files to ui-form-field package ([ace6c0e](https://github.com/instructure/instructure-ui/commit/ace6c0e))
+* **ui-forms:** fix focus outline for fixed-width TextArea ([dad6e65](https://github.com/instructure/instructure-ui/commit/dad6e65))
+* **ui-forms:** focus lost with RadioInputGroup in Dialog ([73f7fb8](https://github.com/instructure/instructure-ui/commit/73f7fb8))
+* **ui-forms:** include select option groups in onChange ([f45c04b](https://github.com/instructure/instructure-ui/commit/f45c04b))
+* **ui-forms:** prevent disabled and readonly selects from expanding ([b9c3586](https://github.com/instructure/instructure-ui/commit/b9c3586))
+* **ui-forms:** prevent select arrow icon shrinking ([e47af0b](https://github.com/instructure/instructure-ui/commit/e47af0b))
+* **ui-forms:** TextArea overflow and focus ring updates ([4157ea9](https://github.com/instructure/instructure-ui/commit/4157ea9))
+* **ui-layout:** margin warning shouldn't apply to flexed elements ([854f3a3](https://github.com/instructure/instructure-ui/commit/854f3a3))
+* **ui-layout:** position miscalculates offset with body margin ([bb16787](https://github.com/instructure/instructure-ui/commit/bb16787))
+* **ui-overlays:** simplify Modal to rely solely on open prop in place of state ([a52ceaf](https://github.com/instructure/instructure-ui/commit/a52ceaf))
+* **ui-tabs,ui-utils:** allow null children in TabList ([496fceb](https://github.com/instructure/instructure-ui/commit/496fceb))
+* **ui-test-utils:** handle React 16 uncaught errors ([7fd8bec](https://github.com/instructure/instructure-ui/commit/7fd8bec))
+* **ui-testable:** look up the DOM node inside the timeout ([e212f64](https://github.com/instructure/instructure-ui/commit/e212f64))
+
+
+### Features
+
+* **debounce,ui-utils:** add debounce package ([862294b](https://github.com/instructure/instructure-ui/commit/862294b))
+* **ui-buttons,ui-elements,ui-themes:** update link color for standard theme ([78a18fa](https://github.com/instructure/instructure-ui/commit/78a18fa)), closes [#2578](https://github.com/instructure/instructure-ui/issues/2578)
+* **ui-editable,ui-elements:** In place edit ([d98d6b4](https://github.com/instructure/instructure-ui/commit/d98d6b4))
+* **ui-number-input:** add controlled NumberInput ([0d71026](https://github.com/instructure/instructure-ui/commit/0d71026))
+* **ui-test-utils:** add findParent, findParents utils ([1d5aeb7](https://github.com/instructure/instructure-ui/commit/1d5aeb7))
+* **ui-test-utils:** add selector to query failure messages ([e77358e](https://github.com/instructure/instructure-ui/commit/e77358e))
+* **ui-test-utils:** support Sizzle selectors ([65481ff](https://github.com/instructure/instructure-ui/commit/65481ff))
+
+
+
+
+
 <a name="5.34.0"></a>
 # [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
 

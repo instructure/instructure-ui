@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.35.0"></a>
+# [5.35.0](https://github.com/instructure/instructure-ui/compare/v5.34.0...v5.35.0) (2018-12-06)
+
+
+### Bug Fixes
+
+* **ui-test-utils:** handle React 16 uncaught errors ([7fd8bec](https://github.com/instructure/instructure-ui/commit/7fd8bec))
+
+
+### Features
+
+* **ui-buttons,ui-elements,ui-themes:** update link color for standard theme ([78a18fa](https://github.com/instructure/instructure-ui/commit/78a18fa)), closes [#2578](https://github.com/instructure/instructure-ui/issues/2578)
+* **ui-test-utils:** support Sizzle selectors ([65481ff](https://github.com/instructure/instructure-ui/commit/65481ff))
+
+
+
+
+
 <a name="5.34.0"></a>
 # [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
 

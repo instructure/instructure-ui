@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "5.34.0",
+  "version": "5.35.0",
   "description": "A library of @instructure/ui-themeable themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,8 +22,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-presets": "^5",
-    "@instructure/ui-utils": "^5",
-    "@instructure/ui-test-utils": "^5"
+    "@instructure/ui-test-utils": "^5",
+    "@instructure/ui-utils": "^5"
   },
   "dependencies": {
     "@instructure/ui-themeable": "^5",

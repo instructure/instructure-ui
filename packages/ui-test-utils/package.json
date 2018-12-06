@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-test-utils",
-  "version": "5.34.0",
+  "version": "5.35.0",
   "description": "A UI testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -24,8 +24,8 @@
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-axe-check": "^5",
     "@instructure/debounce": "^5",
+    "@instructure/ui-axe-check": "^5",
     "@instructure/ui-stylesheet": "^5",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",

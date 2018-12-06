@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.35.0"></a>
+# [5.35.0](https://github.com/instructure/instructure-ui/compare/v5.34.0...v5.35.0) (2018-12-06)
+
+
+### Bug Fixes
+
+* **ui-buttons,ui-elements,ui-forms:** remove aria-disabled for input components ([512fb92](https://github.com/instructure/instructure-ui/commit/512fb92))
+* **ui-forms:** fix focus outline for fixed-width TextArea ([dad6e65](https://github.com/instructure/instructure-ui/commit/dad6e65))
+* **ui-forms:** focus lost with RadioInputGroup in Dialog ([73f7fb8](https://github.com/instructure/instructure-ui/commit/73f7fb8))
+* **ui-forms:** include select option groups in onChange ([f45c04b](https://github.com/instructure/instructure-ui/commit/f45c04b))
+* **ui-forms:** prevent disabled and readonly selects from expanding ([b9c3586](https://github.com/instructure/instructure-ui/commit/b9c3586))
+* **ui-forms:** prevent select arrow icon shrinking ([e47af0b](https://github.com/instructure/instructure-ui/commit/e47af0b))
+* **ui-forms:** TextArea overflow and focus ring updates ([4157ea9](https://github.com/instructure/instructure-ui/commit/4157ea9))
+* **ui-test-utils:** handle React 16 uncaught errors ([7fd8bec](https://github.com/instructure/instructure-ui/commit/7fd8bec))
+
+
+### Features
+
+* **ui-editable,ui-elements:** In place edit ([d98d6b4](https://github.com/instructure/instructure-ui/commit/d98d6b4))
+* **ui-number-input:** add controlled NumberInput ([0d71026](https://github.com/instructure/instructure-ui/commit/0d71026))
+
+
+
+
+
 <a name="5.34.0"></a>
 # [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
 

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.35.0"></a>
+# [5.35.0](https://github.com/instructure/instructure-ui/compare/v5.34.0...v5.35.0) (2018-12-06)
+
+
+### Bug Fixes
+
+* **ui-layout:** margin warning shouldn't apply to flexed elements ([854f3a3](https://github.com/instructure/instructure-ui/commit/854f3a3))
+* **ui-test-utils:** handle React 16 uncaught errors ([7fd8bec](https://github.com/instructure/instructure-ui/commit/7fd8bec))
+
+
+### Features
+
+* **ui-test-utils:** add findParent, findParents utils ([1d5aeb7](https://github.com/instructure/instructure-ui/commit/1d5aeb7))
+* **ui-test-utils:** add selector to query failure messages ([e77358e](https://github.com/instructure/instructure-ui/commit/e77358e))
+* **ui-test-utils:** support Sizzle selectors ([65481ff](https://github.com/instructure/instructure-ui/commit/65481ff))
+
+
+
+
+
 <a name="5.34.0"></a>
 # [5.34.0](https://github.com/instructure/instructure-ui/compare/v5.33.0...v5.34.0) (2018-11-20)
 
