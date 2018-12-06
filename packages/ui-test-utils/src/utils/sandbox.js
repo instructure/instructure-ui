@@ -85,6 +85,10 @@ class Sandbox {
     this._addedNodes = []
 
     fetchMock.restore()
+
+    if (global.viewport) {
+      global.viewport.set('large')
+    }
   }
 
   setup () {
@@ -128,6 +132,13 @@ class Sandbox {
 
   mount (element, options) {
     return ReactComponentWrapper.mount(element, options)
+  }
+
+  viewport () {
+    if (!global.viewport) {
+      console.error('[ui-test-utils] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.')
+    }
+    return global.viewport
   }
 }
 
@@ -182,11 +193,13 @@ function setAttributes (element, attributes = []) {
 
 // only allow one Sandbox instance
 const sandbox = new Sandbox()
+const viewport = sandbox.viewport
 const mount = (element, context) => sandbox.mount(element, context)
 const stub = (obj, method, fn) => sandbox.stub(obj, method, fn)
 const spy = (obj, method) => sandbox.spy(obj, method)
 
 export {
+  viewport,
   mount,
   stub,
   spy

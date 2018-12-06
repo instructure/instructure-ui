@@ -92,7 +92,7 @@ module.exports = function makeConfig ({
       // seems to pull in all karma plugins across disparate node_modules/ dirs
       plugins: ['karma-*'],
 
-      frameworks: ['mocha'],
+      frameworks: ['mocha', 'viewport'],
 
       files: [bundle],
 
@@ -170,6 +170,33 @@ module.exports = function makeConfig ({
       },
 
       webpackMiddleware: { stats: 'errors-only' },
+
+      // TODO: pull breakpoints from theme
+      viewport: {
+        breakpoints: [
+          {
+            name: 'small',
+            size: {
+              width: 320,
+              height: 480
+            }
+          },
+          {
+            name: 'medium',
+            size: {
+              width: 768,
+              height: 1024
+            }
+          },
+          {
+            name: 'large',
+            size: {
+              width: 1440,
+              height: 900
+            }
+          }
+        ]
+      },
 
       mochaReporter: {
         showDiff: true

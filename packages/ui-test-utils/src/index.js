@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { wait } from './utils/wait'
-import { mount, stub, spy } from './utils/sandbox'
+import { mount, stub, spy, viewport } from './utils/sandbox'
 import { within, withinEach } from './utils/within'
 import { expect } from './utils/expect'
 import { locator } from './utils/locator'
@@ -40,6 +40,7 @@ import {
 } from './utils/queries'
 
 export {
+  viewport,
   accessible,
   parseQueryArguments,
   findByQuery,
