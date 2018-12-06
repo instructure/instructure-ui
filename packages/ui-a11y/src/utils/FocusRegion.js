@@ -21,12 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import keycode from 'keycode'
+
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import uid from '@instructure/ui-utils/lib/uid'
 import error from '@instructure/ui-utils/lib/error'
 
+import findTabbable from './findTabbable'
 import ScreenReaderFocusRegion from './ScreenReaderFocusRegion'
 import KeyboardFocusRegion from './KeyboardFocusRegion'
 
@@ -44,6 +48,7 @@ export default class FocusRegion {
   constructor (element, options) {
     this._options = options || {
       shouldCloseOnDocumentClick: true,
+      shouldCloseOnEscape: true,
       onDismiss: (event) => {}
     }
     this._contextElement = element
@@ -83,6 +88,13 @@ export default class FocusRegion {
     }
   }
 
+  handleKeyUp = event => {
+    if (this._options.shouldCloseOnEscape && event.keyCode === keycode.codes.escape &&
+        !event.defaultPrevented) {
+      this.handleDismiss(event)
+    }
+  }
+
   get id () {
     return this._id
   }
@@ -93,11 +105,19 @@ export default class FocusRegion {
     return this._active
   }
 
+  get keyboardFocusable () {
+    return (findTabbable(this._contextElement) || []).length > 0
+  }
+
   activate () {
     if (!this._active) {
       const doc = ownerDocument(this._contextElement)
 
-      this._keyboardFocusRegion.activate()
+      // Only activate keyboard focus region if region has keyboard focusable content
+      if (this.keyboardFocusable) {
+        this._keyboardFocusRegion.activate()
+      }
+
       this._screenReaderFocusRegion.activate()
 
       if (this._options.shouldCloseOnDocumentClick) {
@@ -105,18 +125,25 @@ export default class FocusRegion {
         this._listeners.push(addEventListener(doc, 'click', this.handleDocumentClick))
       }
 
+      if (this._options.shouldCloseOnEscape) {
+        this._listeners.push(addEventListener(doc, 'keyup', this.handleKeyUp))
+      }
+
       this._active = true
     }
   }
 
-  deactivate () {
+  deactivate ({ keyboard = true } = {}) {
     if (this._active) {
       this._listeners.forEach(listener => {
         listener.remove()
       })
       this._listeners = []
 
-      this._keyboardFocusRegion.deactivate()
+      if (keyboard) {
+        this._keyboardFocusRegion.deactivate()
+      }
+
       this._screenReaderFocusRegion.deactivate()
 
       this._active = false

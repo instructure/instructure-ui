@@ -211,8 +211,8 @@ describe('<Dialog />', async () => {
       })
     })
 
-    describe('when focus leaves the last tabbable', async () => {
-      it(`should NOT call onBlur when shouldContainFocus=true`, async () => {
+    describe('when focus leaves the first and last tabbable', async () => {
+      it(`should NOT call onBlur when shouldContainFocus=true and tab pressing last tabbable`, async () => {
         const onBlur = stub()
         const subject = await mount(
           <DialogExample
@@ -233,7 +233,6 @@ describe('<Dialog />', async () => {
         })
 
         await inputTwo.keyDown('tab')
-        await inputTwo.blur()
 
         await wait(() => {
           expect(onBlur).to.not.have.been.called()
@@ -241,7 +240,37 @@ describe('<Dialog />', async () => {
         })
       })
 
-      it(`should call onBlur when shouldContainFocus=false`, async () => {
+      it(`should NOT call onBlur when shouldContainFocus=true and tab pressing first tabbable`, async () => {
+        const onBlur = stub()
+        const subject = await mount(
+          <DialogExample
+            open
+            shouldContainFocus
+            defaultFocusElement={() => {
+              return document.getElementById('input-one')
+            }}
+            onBlur={onBlur}
+          />
+        )
+        const main = within(subject.getDOMNode())
+        const inputOne = await main.find('[id=input-one]')
+        const inputTwo = await main.find('[id=input-two]')
+
+        await wait(() => {
+          expect(inputOne.focused()).to.be.true()
+        })
+
+        await inputOne.keyDown('tab', {
+          shiftKey: true
+        })
+
+        await wait(() => {
+          expect(onBlur).to.not.have.been.called()
+          expect(inputTwo.focused()).to.be.true()
+        })
+      })
+
+      it(`should call onBlur when shouldContainFocus=false and tab pressing last tabbable`, async () => {
         const onBlur = stub()
         const subject = await mount(
           <DialogExample
@@ -263,10 +292,201 @@ describe('<Dialog />', async () => {
         })
 
         await inputTwo.keyDown('tab')
-        await inputTwo.blur()
 
         await wait(() => {
           expect(onBlur).to.have.been.called()
+        })
+      })
+
+      it(`should call onBlur when shouldContainFocus=false and tab pressing first tabbable`, async () => {
+        const onBlur = stub()
+        const subject = await mount(
+          <DialogExample
+            open
+            shouldContainFocus={false}
+            defaultFocusElement={() => {
+              return document.getElementById('input-one')
+            }}
+            onBlur={onBlur}
+          />
+        )
+        const main = within(subject.getDOMNode())
+        const inputOne = await main.find('[id=input-one]')
+
+        await inputOne.focus()
+
+        await wait(() => {
+          expect(inputOne.focused()).to.be.true()
+        })
+
+        await inputOne.keyDown('tab', {
+          shiftKey: true
+        })
+
+        await wait(() => {
+          expect(onBlur).to.have.been.called()
+        })
+      })
+
+      describe('when launching a dialog w/out focusable content from another dialog', () => {
+        class NestedDialogExample extends React.Component {
+          static propTypes = {
+            ...Dialog.propTypes
+          }
+
+          state = {
+            open: false
+          }
+
+          handleTriggerClick = e => {
+            this.setState({ open: true })
+          }
+
+          render () {
+            return (
+              <div>
+                <Dialog
+                  open
+                  shouldReturnFocus
+                  label="A dialog"
+                  {...this.props}
+                >
+                  <div>
+                    <div>
+                      <input onClick={this.handleTriggerClick} type="text" id="input-one" />
+                      <input onClick={this.handleTriggerClick} type="text" id="input-two" />
+                    </div>
+                    <Dialog
+                      open={this.state.open}
+                      label="Another dialog"
+                    >
+                      Hello world
+                    </Dialog>
+                  </div>
+                </Dialog>
+              </div>
+            )
+          }
+        }
+
+        it(`should contain focus when last tabbable element triggers dialog w/out focusable content`, async () => {
+          const onBlur = stub()
+
+          const subject = await mount(
+            <NestedDialogExample
+              onBlur={onBlur}
+              shouldContainFocus
+              defaultFocusElement={() => document.getElementById('input-two')}
+            />
+          )
+
+          const main = within(subject.getDOMNode())
+          const inputOne = await main.find('input#input-one')
+          const inputTwo = await main.find('input#input-two')
+
+          await inputTwo.click()
+
+          // Need to wait here to give new region time to activate
+          await wait(() => {
+            expect(inputTwo.focused()).to.be.true()
+          })
+
+          await inputTwo.keyDown('tab')
+
+          await wait(() => {
+            expect(onBlur).to.not.have.been.called()
+            expect(inputOne.focused()).to.be.true()
+          })
+        })
+
+        it(`should contain focus when first tabbable element triggers dialog w/out focusable content`, async () => {
+          const onBlur = stub()
+
+          const subject = await mount(
+            <NestedDialogExample
+              onBlur={onBlur}
+              shouldContainFocus
+              defaultFocusElement={() => document.getElementById('input-one')}
+            />
+          )
+
+          const main = within(subject.getDOMNode())
+          const inputOne = await main.find('input#input-one')
+          const inputTwo = await main.find('input#input-two')
+
+          await inputOne.click()
+
+          // Need to wait here to give new region time to activate
+          await wait(() => {
+            expect(inputOne.focused()).to.be.true()
+          })
+
+          await inputOne.keyDown('tab', {
+            shiftKey: true
+          })
+
+          await wait(() => {
+            expect(onBlur).to.not.have.been.called()
+            expect(inputTwo.focused()).to.be.true()
+          })
+        })
+
+        it(`should call onBlur when shouldContainFocus=false and last tabbable element triggers dialog w/out focusable content`, async () => {
+          const onBlur = stub()
+
+          const subject = await mount(
+            <NestedDialogExample
+              onBlur={onBlur}
+              shouldContainFocus={false}
+              defaultFocusElement={() => document.getElementById('input-two')}
+            />
+          )
+
+          const main = within(subject.getDOMNode())
+          const inputTwo = await main.find('input#input-two')
+
+          await inputTwo.click()
+
+          // Need to wait here to give new region time to activate
+          await wait(() => {
+            expect(inputTwo.focused()).to.be.true()
+          })
+
+          await inputTwo.keyDown('tab')
+
+          await wait(() => {
+            expect(onBlur).to.have.been.called()
+          })
+        })
+
+        it(`should call onBlur when shouldContainFocus=false and first tabbable element triggers dialog w/out focusable content`, async () => {
+          const onBlur = stub()
+
+          const subject = await mount(
+            <NestedDialogExample
+              onBlur={onBlur}
+              shouldContainFocus={false}
+              defaultFocusElement={() => document.getElementById('input-one')}
+            />
+          )
+
+          const main = within(subject.getDOMNode())
+          const inputOne = await main.find('input#input-one')
+
+          await inputOne.click()
+
+          // Need to wait here to give new region time to activate
+          await wait(() => {
+            expect(inputOne.focused()).to.be.true()
+          })
+
+          await inputOne.keyDown('tab', {
+            shiftKey: true
+          })
+
+          await wait(() => {
+            expect(onBlur).to.have.been.called()
+          })
         })
       })
     })

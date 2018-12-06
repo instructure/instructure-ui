@@ -82,9 +82,20 @@ export default class FocusRegionManager {
   static addEntry = (element, options = {}) => {
     const region = new FocusRegion(element, options)
     const activeEntry = FocusRegionManager.getActiveEntry()
+
+    const { keyboardFocusable } = region
+
     ENTRIES.forEach(({ region }) => {
-      region && region.deactivate()
+      if (region) {
+        // If the active region is triggering a new focus region that does not have
+        // keyboard focusable content, don't deactivate the active region's keyboard
+        // focus region
+        region.deactivate(
+          region.focused && !keyboardFocusable && { keyboard: false }
+        )
+      }
     })
+
     region.activate()
 
     if (options.shouldFocusOnOpen) {

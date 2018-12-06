@@ -249,7 +249,7 @@ describe('<Popover />', async () => {
 
       const button = await content.find('button')
 
-      await button.blur()
+      await button.keyDown('tab')
 
       content = await popover.findContent({ expectEmpty: true })
 

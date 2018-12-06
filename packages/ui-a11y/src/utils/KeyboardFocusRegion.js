@@ -52,7 +52,6 @@ export default class KeyboardFocusRegion {
   constructor (element, options) {
     this._contextElement = element
     this._options = options || {
-      shouldCloseOnEscape: true,
       shouldContainFocus: true,
       shouldReturnFocus: true,
       onBlur: (event) => {},
@@ -175,17 +174,6 @@ export default class KeyboardFocusRegion {
     this._options.onDismiss(event)
   }
 
-  handleBlur = event => {
-    this._options.onBlur(event)
-  }
-
-  handleKeyUp = event => {
-    if (this._options.shouldCloseOnEscape && event.keyCode === keycode.codes.escape &&
-        !event.defaultPrevented) {
-      this.handleDismiss(event)
-    }
-  }
-
   handleKeyDown = event => {
     if (event.keyCode === keycode.codes.tab && containsActiveElement(this._contextElement)) {
       scopeTab(this._contextElement, event)
@@ -222,10 +210,21 @@ export default class KeyboardFocusRegion {
           if (containsActiveElement(this._contextElement)) {
             return
           }
-
           this.firstTabbable && this.firstTabbable.focus()
         })
       )
+    }
+  }
+
+  handleFirstTabbableKeyDown = event => {
+    if (event.keyCode === keycode.codes.tab && event.shiftKey) {
+      this._options.onBlur(event)
+    }
+  }
+
+  handleLastTabbableKeyDown = event => {
+    if (event.keyCode === keycode.codes.tab && !event.shiftKey) {
+      this._options.onBlur(event)
     }
   }
 
@@ -233,14 +232,11 @@ export default class KeyboardFocusRegion {
     if (!this._active) {
       if (this.tabbable.length > 0) {
         if (!this.shouldContainFocus) {
-          this._listeners.push(addEventListener(this.lastTabbable, 'blur', this.handleBlur))
+          this._listeners.push(addEventListener(this.firstTabbable, 'keydown', this.handleFirstTabbableKeyDown))
+          this._listeners.push(addEventListener(this.lastTabbable, 'keydown', this.handleLastTabbableKeyDown))
         } else {
           this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
         }
-      }
-
-      if (this._options.shouldCloseOnEscape) {
-        this._listeners.push(addEventListener(this.doc, 'keyup', this.handleKeyUp))
       }
 
       if (this._options.shouldContainFocus) {
