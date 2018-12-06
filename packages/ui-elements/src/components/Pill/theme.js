@@ -41,7 +41,11 @@ export default function generator ({ borders, colors, forms, spacing, typography
     warningColor: colors.textWarning,
     messageColor: colors.textAlert,
     borderWidth: borders.widthSmall,
-    borderStyle: borders.style
+    borderStyle: borders.style,
+    borderRadius: '999rem',
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineColor: colors.borderBrand,
+    focusOutlineStyle: borders.style
   }
 }
 

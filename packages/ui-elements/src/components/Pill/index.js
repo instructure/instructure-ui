@@ -77,7 +77,7 @@ class Pill extends Component {
     })
   }
 
-  render () {
+  renderPill (focused, getTriggerProps) {
     const {
       margin,
       text,
@@ -90,15 +90,19 @@ class Pill extends Component {
       omitProps(this.props, Pill.propTypes),
       Pill
     )
+    const props = typeof getTriggerProps === 'function'
+      ? getTriggerProps(passthroughProps) : passthroughProps
 
     const classes = classnames({
       [styles.root]: true,
+      [styles.truncated]: this.state.truncated,
+      [styles.focused]: focused,
       [styles[variant]]: variant
     })
 
-    const pill = (
+    return (
       <View
-        {...passthroughProps}
+        {...props}
         className={classes}
         as={as}
         elementRef={elementRef}
@@ -116,15 +120,21 @@ class Pill extends Component {
         </span>
       </View>
     )
+  }
 
+  render () {
     if (this.state.truncated) {
       return (
-        <Tooltip tip={text}>
-          {pill}
+        <Tooltip tip={this.props.text}>
+          {({ focused, getTriggerProps }) => {
+            return (
+              this.renderPill(focused, getTriggerProps)
+            )
+          }}
         </Tooltip>
       )
     } else {
-      return pill
+      return this.renderPill()
     }
   }
 }

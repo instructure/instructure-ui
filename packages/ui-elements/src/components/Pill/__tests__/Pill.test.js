@@ -30,6 +30,8 @@ import View from '@instructure/ui-layout/lib/components/View'
 import Pill from '../index'
 import PillLocator from '../locator'
 
+import styles from '../styles.css'
+
 describe('<Pill />', async () => {
   it('should render', async () => {
     await mount(<Pill text="Overdue" />)
@@ -42,13 +44,13 @@ describe('<Pill />', async () => {
     expect(await pill.find(':contains(Overdue)')).to.exist()
   })
 
-  it('should render without a Tooltip when text overflows max-width', async () => {
+  it('should render without a Tooltip when text does not overflow max-width', async () => {
     await mount(<Pill text="hello" />)
     const pill = await PillLocator.find()
     expect(await pill.findTooltipContent({ expectEmpty: true })).to.not.exist()
   })
 
-  it('should render with a Tooltip when text overflows max-width', async () => {
+  it('should render a Tooltip when text overflows max-width', async () => {
     const text = "some really super incredibly long text that will force overflow"
     await mount(<Pill text={text} />)
 
@@ -57,8 +59,17 @@ describe('<Pill />', async () => {
     await pill.focus()
 
     const tooltip = await pill.findTooltipContent()
-
     expect(tooltip.getTextContent()).to.equal(text)
+  })
+
+  it('should apply focus styles when rendering with Tooltip', async () => {
+    const text = "some really super incredibly long text that will force overflow"
+    await mount(<Pill text={text} />)
+
+    const pill = await PillLocator.find()
+
+    await pill.focus()
+    expect(await pill.find(`.${styles.focused}`)).to.exist()
   })
 
   it('should meet a11y standards', async () => {

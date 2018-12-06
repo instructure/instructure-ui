@@ -1,4 +1,4 @@
-/* Variables are defined in ./theme.js */
+/* stylelint-disable selector-max-type, selector-max-class */
 
 .root {
   align-items: center;
@@ -9,10 +9,36 @@
   border-width: var(--borderWidth);
   border-style: var(--borderStyle);
   height: var(--height);
-  border-radius: 1rem;
+  border-radius: var(--borderRadius);
+}
 
-  &:focus {
-    outline: none; /* only becomes focusable when text truncation causes Tooltip to render */
+.root.truncated { /* renders as button so it's focusable when truncated */
+  position: relative;
+  outline: none;
+  overflow: visible;
+
+  &::before {
+    content: "";
+    pointer-events: none;
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    top: -0.375rem;
+    bottom: -0.375rem;
+    left: -0.375rem; /* stylelint-disable-line property-blacklist */
+    right: -0.375rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: var(--borderRadius);
+    transition: all 0.2s;
+
+    /* properties to transition on focus */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  &.focused::before {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 
@@ -76,3 +102,5 @@
     color: var(--messageColor);
   }
 }
+
+/* stylelint-enable selector-max-type, selector-max-class */

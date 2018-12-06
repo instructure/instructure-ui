@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
+import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
@@ -49,8 +50,13 @@ category: components
 @themeable(theme, styles)
 export default class Tooltip extends Component {
   static propTypes = {
+    /**
+    * @param {Object} renderProps
+    * @param {Boolean} renderProps.focused - Is the Tooltip trigger focused?
+    * @param {Function} renderProps.getTriggerProps - Props to be spread onto the trigger element
+    */
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
     tip: PropTypes.node.isRequired,
-    children: PropTypes.node.isRequired,
     /**
     * the element type to render as (assumes a single child if 'as' is undefined)
     */
@@ -92,50 +98,68 @@ export default class Tooltip extends Component {
     this._id = generateElementId('Tooltip')
   }
 
-  renderTrigger () {
-    if (this.props.as) {
+  renderTrigger (focused) {
+    const { children, as } = this.props
+    const triggerProps = {
+      'aria-describedby': this._id
+    }
+
+    if (as) {
       const Trigger = getElementType(Tooltip, this.props)
       const props = omitProps(this.props, Tooltip.propTypes)
       return (
-        <Trigger {...props}>
-          {this.props.children}
+        <Trigger {...props} {...triggerProps}>
+          {children}
         </Trigger>
       )
+    } else if (typeof children === 'function') {
+      return children(
+        {
+          focused,
+          getTriggerProps: (props) => {
+            return {
+              ...triggerProps,
+              ...props
+            }
+          }
+        }
+      )
     } else {
-      return ensureSingleChild(this.props.children)
+      return ensureSingleChild(this.props.children, triggerProps)
     }
   }
 
   render () {
-    const trigger = this.renderTrigger()
     return (
-      <Popover
-        on={this.props.on}
-        shouldRenderOffscreen
-        shouldReturnFocus={false}
-        placement={this.props.placement}
-        variant={this.props.variant}
-        mountNode={this.props.mountNode}
-        constrain={this.props.constrain}
-      >
-        <PopoverTrigger
-          aria-describedby={this._id}
-        >
-          {trigger}
-        </PopoverTrigger>
-        <PopoverContent>
-          <span
-            id={this._id}
-            className={classnames({
-              [styles.root]: true,
-              [styles[this.props.size]]: this.props.size
-            })}
-            role="tooltip"
+      <Focusable render={({ focused }) => {
+        return (
+          <Popover
+            on={this.props.on}
+            shouldRenderOffscreen
+            shouldReturnFocus={false}
+            placement={this.props.placement}
+            variant={this.props.variant}
+            mountNode={this.props.mountNode}
+            constrain={this.props.constrain}
           >
-            {this.props.tip}
-          </span>
-        </PopoverContent>
-      </Popover>
+            <PopoverTrigger>
+              {this.renderTrigger(focused)}
+            </PopoverTrigger>
+            <PopoverContent>
+              <span
+                id={this._id}
+                className={classnames({
+                  [styles.root]: true,
+                  [styles[this.props.size]]: this.props.size
+                })}
+                role="tooltip"
+              >
+                {this.props.tip}
+              </span>
+            </PopoverContent>
+          </Popover>
+        )
+      }} />
     )
   }
 }
