@@ -168,6 +168,20 @@ describe('<View />', async () => {
     expect(styles['cursor']).to.equal(cursor)
   })
 
+  it('should override default max-width', async () => {
+    const subject = await mount(
+      <View>
+        <h1>Hello!</h1>
+      </View>
+    )
+
+    const view = within(subject.getDOMNode())
+    expect(view.getComputedStyle().maxWidth).to.equal('100%')
+
+    await subject.setProps({maxWidth: '200px'})
+    expect(view.getComputedStyle().maxWidth).to.equal('200px')
+  })
+
   it('should meet a11y standards', async () => {
     const subject = await mount(
       <View>

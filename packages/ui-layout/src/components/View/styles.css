@@ -1,6 +1,7 @@
 .root {
   box-sizing: border-box;
   font-family: var(--fontFamily);
+  max-width: 100%;
 }
 
 .display--block {
