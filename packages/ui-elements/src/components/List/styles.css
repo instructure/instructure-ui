@@ -27,8 +27,7 @@
 }
 
 .unstyled,
-.inline,
-.steps {
+.inline {
   list-style-type: none;
   padding-inline-start: 0;
 }

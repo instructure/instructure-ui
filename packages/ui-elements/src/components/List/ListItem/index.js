@@ -107,7 +107,7 @@ export default class ListItem extends Component {
 
     const classes = {
       [styles.root]: true,
-      [styles.inline]: variant === 'inline',
+      [styles[variant]]: true,
       [styles[size]]: size,
       [styles[`delimiter--${delimiter}`]]: true,
       [styles[`spacing--${this.props.spacing}`]]: this.props.spacing && !noSpacing
