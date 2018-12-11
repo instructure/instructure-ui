@@ -44,8 +44,8 @@ See [this working example][example] for details.
 
 [MIT][license]
 
-[npm]: https://img.shields.io/npm/v/@instructure/ui-forms.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-forms
+[npm]: https://img.shields.io/npm/v/@instructure/ui-number-input.svg
+[npm-url]: https://npmjs.com/package/@instructure/ui-number-input
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
