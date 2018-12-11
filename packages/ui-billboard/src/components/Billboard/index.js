@@ -207,18 +207,22 @@ class Billboard extends Component {
 
     return (
       <View
-        {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
-        type={(Element === 'button') ? 'button' : null}
-        as={Element}
-        elementRef={elementRef}
-        className={classnames(classes)}
+        as="div"
         margin={margin}
-        href={href}
-        onClick={this.handleClick}
-        disabled={disabled}
-        aria-disabled={(disabled || readOnly) ? 'true' : null}
       >
-        {this.renderContent()}
+        <View
+          {...omitProps(this.props, { ...Billboard.propTypes, ...View.propTypes })}
+          type={(Element === 'button') ? 'button' : null}
+          as={Element}
+          elementRef={elementRef}
+          className={classnames(classes)}
+          href={href}
+          onClick={this.handleClick}
+          disabled={disabled}
+          aria-disabled={(disabled || readOnly) ? 'true' : null}
+        >
+          {this.renderContent()}
+        </View>
       </View>
     )
   }

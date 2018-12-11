@@ -30,38 +30,45 @@ _(see examples)_, and they will be sized correctly based on the Billboard's
 ---
 example: true
 ---
-<Grid startAt="medium" vAlign="middle">
-  <GridRow>
-    <GridCol>
-      <Billboard
-        heading="404"
-        message="Billboard is now a button"
-        size="small"
-        onClick={function () {
-          alert('This Billboard was clicked!')
-        }}
-        hero={(size) => <IconUser.Solid size={size} />}
-      />
-    </GridCol>
-    <GridCol>
-      <Billboard
-        message="Click this link"
-        href="http://instructure.com"
-        hero={(size) => <IconGradebook.Line size={size} />}
-      />
-    </GridCol>
-    <GridCol>
-      <Billboard
-        message="Create a new Module"
-        size="large"
-        onClick={function () {
-          alert('This Billboard was clicked!')
-        }}
-        hero={(size) => <IconPlus.Line size={size} />}
-      />
-    </GridCol>
-  </GridRow>
-</Grid>
+<View as="div" width="400px" debug>
+  <Billboard
+    margin="large"
+    heading="404"
+    message="Billboard is now a button"
+    size="small"
+    onClick={function () {
+      alert('This Billboard was clicked!')
+    }}
+    hero={(size) => <IconUser.Solid size={size} />}
+  />
+</View>
+```
+```js
+---
+example: true
+---
+<View as="div" width="600px" debug>
+  <Billboard
+    margin="large"
+    message="Click this link"
+    href="http://instructure.com"
+    hero={(size) => <IconGradebook.Line size={size} />}
+  />
+</View>
+```
+```js
+---
+example: true
+---
+<Billboard
+  readOnly
+  message="Create a new Module"
+  size="large"
+  onClick={function () {
+    alert('This Billboard was clicked!')
+  }}
+  hero={(size) => <IconPlus.Line size={size} />}
+/>
 ```
 
 

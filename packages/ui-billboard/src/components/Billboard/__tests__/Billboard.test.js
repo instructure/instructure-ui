@@ -128,10 +128,10 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = within(subject.getDOMNode())
+      const clickable = await billboard.find(':clickable')
+      const event = clickable.click()
 
-      const event = await billboard.click()
-
-      expect(event.preventDefault).to.have.been.calledOnce()
+      expect(event).to.eventually.throw()
       expect(onClick).to.not.have.been.called()
     })
   })
@@ -140,10 +140,15 @@ describe('<Billboard />', async () => {
     it('should support an elementRef prop', async () => {
       const elementRef = stub()
       const subject = await mount(
-        <Billboard elementRef={elementRef} />
+        <Billboard
+          elementRef={elementRef}
+          heading='Looking for Element Here'
+          href='#'
+        />
       )
       const billboard = within(subject.getDOMNode())
-      expect(elementRef).to.have.been.calledWith(billboard.getDOMNode())
+      const focusable = await billboard.find(':focusable')
+      expect(elementRef).to.have.been.calledWith(focusable.getDOMNode())
     })
 
     it('should support an `as` prop', async () => {
