@@ -231,11 +231,11 @@ export default class KeyboardFocusRegion {
   activate () {
     if (!this._active) {
       if (this.tabbable.length > 0) {
-        if (!this.shouldContainFocus) {
+        if (this.shouldContainFocus) {
+          this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
+        } else {
           this._listeners.push(addEventListener(this.firstTabbable, 'keydown', this.handleFirstTabbableKeyDown))
           this._listeners.push(addEventListener(this.lastTabbable, 'keydown', this.handleLastTabbableKeyDown))
-        } else {
-          this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
         }
       }
 

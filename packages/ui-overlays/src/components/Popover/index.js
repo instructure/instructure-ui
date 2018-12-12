@@ -36,6 +36,7 @@ import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
@@ -384,20 +385,19 @@ class Popover extends Component {
   hide = (e, documentClick) => {
     const {
       onDismiss,
-      onToggle
+      onToggle,
+      show
     } = this.props
 
-    if (typeof this.props.show === 'undefined') {
+    if (typeof show === 'undefined') {
       this.setState(({ show }) => {
         if (show) {
           onDismiss(e, documentClick)
         }
         return { show: false }
       })
-    } else {
-      if (this.props.show) {
-        onDismiss(e, documentClick)
-      }
+    } else if (show) {
+      onDismiss(e, documentClick)
     }
 
     onToggle(false)
@@ -411,7 +411,17 @@ class Popover extends Component {
     }
   }
 
+  handleDialogDismiss = (...args) => {
+    if (!this.props.shouldReturnFocus && this.props.shouldFocusContentOnTriggerBlur) {
+      findDOMNode(this._trigger).focus()
+    }
+    this.hide(...args)
+  }
+
   handleDialogBlur = (event) => {
+    if (event.keyCode === keycode.codes.tab && event.shiftKey && this.props.shouldFocusContentOnTriggerBlur) {
+      return
+    }
     this.hide(event)
   }
 
@@ -550,7 +560,7 @@ class Popover extends Component {
           display="block"
           open={this.shown}
           onBlur={this.handleDialogBlur}
-          onDismiss={this.hide}
+          onDismiss={this.handleDialogDismiss}
           defaultFocusElement={this.defaultFocusElement}
           shouldFocusOnOpen={!this.props.shouldFocusContentOnTriggerBlur}
         >

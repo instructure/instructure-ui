@@ -131,7 +131,7 @@ render () {
   return (
     <div style={{ paddingBottom: 25, display: 'flex', justifyContent: 'center' }}>
       <Popover
-        on={['hover', 'focus', 'click']}
+        on={['focus', 'click']}
         shouldContainFocus={false}
         shouldReturnFocus={false}
         shouldFocusContentOnTriggerBlur
