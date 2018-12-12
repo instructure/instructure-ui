@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.36.0"></a>
+# [5.36.0](https://github.com/instructure/instructure-ui/compare/v5.35.0...v5.36.0) (2018-12-12)
+
+
+### Bug Fixes
+
+* **ui-a11y:** Fix opening non kb focusable dialog from another dialog ([cf3af9a](https://github.com/instructure/instructure-ui/commit/cf3af9a))
+* **ui-elements:** fix delimeter in HC mode - IE11/EDGE ([9af87dc](https://github.com/instructure/instructure-ui/commit/9af87dc))
+* **ui-elements,ui-overlays:** Focus state for truncated Pill ([a5d5b1b](https://github.com/instructure/instructure-ui/commit/a5d5b1b))
+* **ui-number-input:** add missing dotfiles ([372eea9](https://github.com/instructure/instructure-ui/commit/372eea9))
+* **ui-overlays,ui-a11y:** fix Popover with inline content ([6ec67ad](https://github.com/instructure/instructure-ui/commit/6ec67ad))
+
+
+### Features
+
+* **ui-forms:** display dashed line around FileDrop component in default state ([9c9181d](https://github.com/instructure/instructure-ui/commit/9c9181d))
+* **ui-presets,ui-test-utils:** add karma viewport plugin ([138a2f8](https://github.com/instructure/instructure-ui/commit/138a2f8))
+
+
+
+
+
 <a name="5.35.0"></a>
 # [5.35.0](https://github.com/instructure/instructure-ui/compare/v5.34.0...v5.35.0) (2018-12-06)
 
