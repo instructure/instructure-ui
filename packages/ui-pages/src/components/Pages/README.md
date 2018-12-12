@@ -4,17 +4,92 @@ describes: Pages
 
 ```js
 ---
+render: false
 example: true
 ---
-<Pages activePageIndex={1}>
-  <Page>
-    Page One
-  </Page>
-  <Page>
-    Page Two
-  </Page>
-</Pages>
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      activePageIndex: 0
+    }
+  }
+
+  handlePagesBackButtonClick = (activePageIndex) => {
+    this.setState({
+      activePageIndex
+    })
+  }
+
+  handleLinkClick = () => {
+    this.setState({
+      activePageIndex: 1
+    })
+  }
+
+  renderBackButton (navigateToPreviousPage) {
+    return (
+      <Button
+        variant="icon"
+        onClick={navigateToPreviousPage}
+        icon={IconArrowOpenStart.Line}
+      >
+        <ScreenReaderContent>Back to Page One</ScreenReaderContent>
+      </Button>
+    )
+  }
+
+  render () {
+    return (
+      <Pages 
+        activePageIndex={this.state.activePageIndex}
+        onPageIndexChange={this.handlePagesBackButtonClick}
+        backButtonLabel="Back to previous page"
+      >
+        <Page>
+         {(history, navigateToPreviousPage) => {
+          return (
+            <div>
+              <View as="div" textAlign="end">
+                <Button 
+                  variant="link" 
+                  onClick={this.handleLinkClick}
+                >
+                  Go to page 2
+                </Button>
+              </View>
+              <View as="div" margin="large 0 0 0" textAlign="center">
+                <Text as="div">Page One</Text>
+              </View>
+            </div>
+          )
+        }}
+        </Page>
+        <Page>
+          {(history, navigateToPreviousPage) => {
+          return (
+            <div>
+              <View as="div" maxWidth="7rem">
+                {history.length > 1 && (
+                  this.renderBackButton(navigateToPreviousPage)
+                )}
+              </View>
+              <View as="div" margin="large 0 0 0" textAlign="center">
+                Hey Look - Page Two
+              </View>
+            </div>
+          )
+        }}
+        </Page>
+      </Pages>
+    )
+  }
+}
+
+render(<Example />)
 ```
+
 
 ```js
 ---
@@ -47,7 +122,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStart}
+        icon={IconArrowStart.Line}
       >
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
@@ -68,10 +143,12 @@ class Example extends React.Component {
               {history.length > 1 && (
                 this.renderBackButton(navigateToPreviousPage)
               )}
-              <Heading level="h1">Hello World</Heading>
+              <View display="inline-block" margin="large">
+                <Heading level="h1">Hello World</Heading>
+              </View>
               <Button
                 onClick={this.handleViewDetailsClick}
-                variant="link"
+                variant="primary"
               >
                 View Details
               </Button>
@@ -86,7 +163,9 @@ class Example extends React.Component {
               {history.length > 1 && (
                 this.renderBackButton(navigateToPreviousPage)
               )}
-              <Heading level="h1">Foo Bar Baz Qux</Heading>
+              <View display="inline-block" margin="large">
+                <Heading level="h1">Foo Bar Baz Qux</Heading>
+              </View>
               <FormField id="name" label="Name">
                 <input id="name"/>
               </FormField>
@@ -174,7 +253,6 @@ class Example extends React.Component {
 
   handlePagesBackButtonClick = (activePageIndex) => {
     this.setActivePageIndex(activePageIndex)
-
   }
 
   handleDetailsButtonClick = (activePageIndex) => {
@@ -209,15 +287,17 @@ class Example extends React.Component {
 
   renderUserMedia (user) {
     return (
-      <Button
-        variant="link"
-        onClick={this.handleDetailsButtonClick.bind(this, user.id)}
-        ref={(el) => { this._usersNav[user.id] = el }}
-      >
-        <Media description={user.name}>
-          <Avatar name={user.name} />
-        </Media>
-      </Button>
+      <View as="div" margin="small 0">
+        <Button
+          variant="link"
+          onClick={this.handleDetailsButtonClick.bind(this, user.id)}
+          ref={(el) => { this._usersNav[user.id] = el }}
+        >
+          <Media description={user.name}>
+            <Avatar name={user.name} />
+          </Media>
+        </Button>
+      </View>
     )
   }
 
@@ -234,7 +314,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStart}
+        icon={IconArrowOpenStart.Line}
       >
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
@@ -246,7 +326,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={this.hidePopover}
-        icon={IconX.Solid}
+        icon={IconX.Line}
       >
         <ScreenReaderContent>Close</ScreenReaderContent>
       </Button>
