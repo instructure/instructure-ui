@@ -152,8 +152,10 @@ describe('<Select />', async () => {
         {items.map((i) => <option key={i} value={i.value}>{i.label}</option>)}
       </Select>
     )
+
     const select = await SelectLocator.find()
-    await select.click()
+    const input = await select.findInput()
+    await input.click()
 
     expect((await select.findAllOptions()).length).to.equal(3)
 
@@ -255,9 +257,10 @@ describe('<Select />', async () => {
           <option value="2">Oh I want to take ya</option>
         </Select>
       )
-      const select = await SelectLocator.find()
 
-      await select.click()
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+      await input.click()
 
       expect(await select.accessible({
         ignores: [
@@ -277,9 +280,10 @@ describe('<Select />', async () => {
           <option value="2">Oh I want to take ya</option>
         </Select>
       )
-      const select = await SelectLocator.find()
 
-      await select.click()
+      const select = await SelectLocator.find()
+      const input = await select.findInput()
+      await input.click()
 
       expect(await select.accessible({
         ignores: [

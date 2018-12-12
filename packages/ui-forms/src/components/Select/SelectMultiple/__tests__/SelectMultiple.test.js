@@ -773,9 +773,11 @@ describe('<SelectMultiple />', async () => {
           filter={filter}
         />
       )
-      const select = await SelectMultipleLocator.find()
 
-      await select.click()
+      const select = await SelectMultipleLocator.find()
+      const input = await select.findInput()
+      await input.click()
+
       expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it

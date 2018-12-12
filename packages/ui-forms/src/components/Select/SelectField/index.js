@@ -600,7 +600,6 @@ class SelectField extends Component {
 
 
     let wrappedLabel = (
-      // eslint-disable-next-line jsx-a11y/label-has-for
       <label
         htmlFor={this.id}
         className={styles.label}
@@ -620,7 +619,6 @@ class SelectField extends Component {
         label={wrappedLabel}
         id={this.id}
         vAlign={(layout === 'inline') ? 'middle' : null}
-        onClick={this.handleClick}
         onMouseDown={this.handleMouseDown}
       >
         <span
@@ -642,7 +640,13 @@ class SelectField extends Component {
             })}
           >
             {children}
-            <span className={styles.inputLayout}>
+            {/* The click handler needs to be attached to the input layout because
+                the actual input does not always fill the entire layout */}
+            {/* eslint-disable jsx-a11y/click-events-have-key-events */}
+            {/* eslint-disable jsx-a11y/no-static-element-interactions */}
+            <span className={styles.inputLayout} onClick={this.handleClick}>
+            {/* eslint-enable jsx-a11y/click-events-have-key-events */}
+            {/* eslint-enable jsx-a11y/no-static-element-interactions */}
               {selectedOption && this.renderIcon()}
               <input
                 {...inputProps}

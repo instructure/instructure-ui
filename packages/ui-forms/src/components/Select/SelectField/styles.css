@@ -163,6 +163,7 @@ input[type].input {
   line-height: inherit;
   margin: 0;
   text-align: inherit;
+  display: block;
 }
 
 /* stylelint-enable selector-max-class */

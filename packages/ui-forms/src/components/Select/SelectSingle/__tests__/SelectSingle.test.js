@@ -742,7 +742,9 @@ describe('<SelectSingle />', async () => {
       )
 
       const select = await SelectSingleLocator.find()
-      await select.click()
+      const input = await select.findInput()
+      await input.click()
+
       expect(await select.accessible({
         ignores: [
           'aria-allowed-role' // TODO: remove this when we fix it
