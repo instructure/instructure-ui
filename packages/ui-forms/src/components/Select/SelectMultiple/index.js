@@ -208,8 +208,6 @@ class SelectMultiple extends Component {
       const id = getOptionId(option)
       const foundOption = optionMap[id]
 
-      error(foundOption, 'Select', `The option '${option.label || id}' doesn't correspond to an option.`)
-
       if (typeof option === 'object') {
         return {
           ...option,

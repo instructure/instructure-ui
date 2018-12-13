@@ -169,7 +169,6 @@ class SelectSingle extends Component {
     const id = getOptionId(selected)
     const foundOption = options.find((option) => getOptionId(option) === id)
 
-    error((!selected || foundOption), 'Select', 'The selected option doesn\'t correspond to an option.')
     return foundOption || selected
   }
 
