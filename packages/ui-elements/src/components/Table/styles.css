@@ -95,4 +95,8 @@
   }
 }
 
+.fixedLayout {
+  table-layout: fixed;
+}
+
 /* stylelint-enable selector-max-type, selector-max-class, no-descending-specificity */

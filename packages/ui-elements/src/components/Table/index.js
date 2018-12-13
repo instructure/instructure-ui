@@ -93,17 +93,24 @@ class Table extends Component {
     /**
     * provides a reference to the underlying html element
     */
-    elementRef: PropTypes.func
+    elementRef: PropTypes.func,
+    /**
+    * `auto` lets the browser determine table column widths based on cell content,
+    * while `fixed` forces columns of equal width.
+    */
+    layout: PropTypes.oneOf(['auto', 'fixed'])
   }
 
   static defaultProps = {
     hover: false,
-    size: 'medium'
+    size: 'medium',
+    layout: 'auto'
   }
 
   render () {
     const classes = {
       [styles.root]: true,
+      [styles.fixedLayout]: this.props.layout === 'fixed',
       [styles[this.props.size]]: true,
       [styles.rowStriped]: this.props.striped === 'rows',
       [styles.colStriped]: this.props.striped === 'columns',

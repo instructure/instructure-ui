@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, find, stub } from '@instructure/ui-test-utils'
+import { expect, mount, find, stub, within } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -40,6 +40,14 @@ describe('<Table />', async () => {
     await mount(<Table caption="Test table" />)
     const table = await find('table')
     expect(await table.accessible()).to.be.true()
+  })
+
+  it('applies a fixed column layout', async () => {
+    await mount(<Table caption="Test fixed table" layout="fixed" />)
+    const table = await find('table')
+
+    const tableNode = within(table.getDOMNode())
+    expect(tableNode.getComputedStyle().tableLayout).to.equal('fixed')
   })
 
   describe('when passing down props to View', async () => {

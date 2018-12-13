@@ -44,6 +44,48 @@ example: true
 </Table>
 ```
 
+### The `layout` property
+
+The `layout` default, `auto`, lets the browser determine table column widths based on cell content.
+`layout="fixed"` forces columns of equal width, regardless of content.
+
+> If you are using [TruncateText](#TruncateText) (or CSS ellipsis) in your Table, you need to set the
+> layout to `fixed`, or the text truncation will not work.
+
+#### Table with fixed layout
+```js
+---
+example: true
+---
+<Table
+  caption={<ScreenReaderContent>Napster</ScreenReaderContent>}
+  layout="fixed"
+>
+  <thead>
+    <tr>
+      <th scope="col">Band</th>
+      <th scope="col">Song</th>
+      <th scope="col">mp3 location</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Led Zeppelin</td>
+      <td>Stairway to Heaven</td>
+      <td>
+        <TruncateText
+          truncate="word"
+          position="middle"
+          ellipsis="... /"
+        >
+          http://napster.com/files/rock/70s/led_zeppelin/albums/led_zeppelin_iv/stairway_to_heaven.mp3
+        </TruncateText>
+      </td>
+    </tr>
+  </tbody>
+</Table>
+```
+
 ### Table style variants
 
 Use the `striped` prop to give the table row- or column-stripes. The `size`
