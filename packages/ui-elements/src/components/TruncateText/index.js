@@ -109,16 +109,20 @@ class TruncateText extends Component {
   }
 
   componentDidMount () {
-    this.checkChildren()
-    this._text = ensureSingleChild(this.props.children)
+    const { children } = this.props
 
-    this.truncate()
+    if (children) {
+      this.checkChildren()
+      this._text = ensureSingleChild(children)
 
-    if (this.props.debounce === 0) {
-      this._resizeListener = addResizeListener(this._ref, this.update)
-    } else {
-      this._debounced = debounce(this.update, this.props.debounce, { leading: true, trailing: true })
-      this._resizeListener = addResizeListener(this._ref, this._debounced)
+      this.truncate()
+
+      if (this.props.debounce === 0) {
+        this._resizeListener = addResizeListener(this._ref, this.update)
+      } else {
+        this._debounced = debounce(this.update, this.props.debounce, { leading: true, trailing: true })
+        this._resizeListener = addResizeListener(this._ref, this._debounced)
+      }
     }
   }
 
@@ -140,21 +144,28 @@ class TruncateText extends Component {
 
   componentDidUpdate (prevProps, prevState) {
     const {
+      children,
+      onUpdate
+    } = this.props
+
+    const {
       isTruncated,
       needsSecondRender,
       truncatedText
     } = this.state
 
-    if (prevProps !== this.props) {
-      this.checkChildren()
-      this._text = ensureSingleChild(this.props.children)
-    }
+    if (children) {
+      if (prevProps !== this.props) {
+        this.checkChildren()
+        this._text = ensureSingleChild(children)
+      }
 
-    if (!needsSecondRender && (isTruncated || this._prevTruncatedState)) {
-      this.props.onUpdate(isTruncated, truncatedText)
-      this._prevTruncatedState = isTruncated
-    } else {
-      this.truncate()
+      if (!needsSecondRender && (isTruncated || this._prevTruncatedState)) {
+        onUpdate(isTruncated, truncatedText)
+        this._prevTruncatedState = isTruncated
+      } else {
+        this.truncate()
+      }
     }
   }
 
@@ -260,10 +271,12 @@ class TruncateText extends Component {
           this._ref = el
         }}
       >
-        {truncatedElement ? null : (
-          <span ref={el => {this._stage = el}}>
-            {ensureSingleChild(children)}
-          </span>
+        {children && (
+          truncatedElement ? null : (
+            <span ref={el => {this._stage = el}}>
+              {ensureSingleChild(children)}
+            </span>
+          )
         )}
         {truncatedElement}
       </span>

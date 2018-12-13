@@ -180,6 +180,23 @@ describe('<TruncateText />', async () => {
     expect(stage.textContent).to.equal('xsmallsmallmediumlargexlargexxlarge')
   })
 
+  it('should handle the empty string as a child', async () => {
+    let error = false
+
+    try {
+      const subject = await mount(
+        <TruncateText>{''}</TruncateText>
+      )
+
+      await subject.setProps({ children: 'hello world' })
+      await subject.setProps({ children: '' })
+    } catch (e) {
+      error = true
+    }
+
+    expect(error).to.be.false()
+  })
+
   it('should meet a11y standards', async () => {
     const subject = await mount(
       <div style={{width: '200px'}}>
