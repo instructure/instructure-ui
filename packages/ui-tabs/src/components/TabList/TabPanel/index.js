@@ -46,6 +46,10 @@ parent: TabList
 @themeable(theme, styles)
 export default class TabPanel extends Component {
   static propTypes = {
+    /**
+    * The content that will be rendered in the corresponding <Tab /> and will label
+    * this `<TabPanel />` for screen readers
+    */
     title: PropTypes.node.isRequired,
     children: PropTypes.node,
     variant: PropTypes.oneOf(['simple', 'minimal']),
@@ -56,6 +60,9 @@ export default class TabPanel extends Component {
     disabled: PropTypes.bool,
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    /**
+    * A ref to this `<TabPanel />` component instance
+    */
     tabRef: PropTypes.func
   }
 
