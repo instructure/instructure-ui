@@ -15,7 +15,7 @@ example: true
 ---
 example: true
 ---
-<Link>I am a button that looks like a link because I have no href prop</Link>
+<Link onClick={() => 'click'}>I am a button that looks like a link because I have no href prop</Link>
 ```
 
 ```js
@@ -23,7 +23,7 @@ example: true
 example: true
 background: 'checkerboard-inverse'
 ---
-<Link variant="inverse">I am an inverse link for use with dark backgrounds</Link>
+<Link variant="inverse" onClick={() => 'click'}>I am an inverse link for use with dark backgrounds</Link>
 ```
 
 ### Adding margin

@@ -110,6 +110,16 @@ class Link extends Component {
     }
   }
 
+  get display () {
+    if (this.props.ellipsis) {
+      return 'block'
+    } else if (this.props.icon) {
+      return 'inline-block' // prevents irregularly shaped focus ring
+    } else {
+      return 'auto'
+    }
+  }
+
   get hasVisibleChildren () {
     return hasVisibleChildren(this.props.children)
   }
@@ -192,7 +202,7 @@ class Link extends Component {
 
     return (
       <View
-        display={ellipsis ? 'block' : 'inline-block'}
+        display={this.display}
         margin={margin}
         className={classnames({
           [styles.root]: true,

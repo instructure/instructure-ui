@@ -31,11 +31,6 @@ export default function generator ({ colors, typography, borders, spacing }) {
     color: colors.textLink,
     textDecoration: 'none',
 
-    borderWidth: borders.widthSmall,
-    borderStyle: borders.style,
-    borderColor: colors.borderMedium,
-    borderRadius: borders.radiusMedium,
-
     focusOutlineWidth: borders.widthMedium,
     focusOutlineColor: colors.borderBrand,
     focusOutlineStyle: borders.style,

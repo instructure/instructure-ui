@@ -3,33 +3,18 @@
 .root {
   position: relative;
   vertical-align: baseline;
+  outline-width: var(--focusOutlineWidth);
+  outline-style: var(--focusOutlineStyle);
+  outline-offset: 0.25rem;
+  outline-color: transparent;
+  transition: outline-color 0.2s;
 
-  &::before {
-    content: "";
-    pointer-events: none;
-    box-sizing: border-box;
-    display: block;
-    position: absolute;
-    top: -0.25rem;
-    bottom: -0.25rem;
-    left: -0.25rem; /* stylelint-disable-line property-blacklist */
-    right: -0.25rem; /* stylelint-disable-line property-blacklist */
-    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
-    border-radius: calc(var(--borderRadius) * 1.5);
-    transition: all 0.2s;
+  &.focused {
+    outline-color: var(--focusOutlineColor);
 
-    /* properties to transition on focus */
-    opacity: 0;
-    transform: scale(0.95);
-  }
-
-  &.inverse::before {
-    border-color: var(--focusInverseOutlineColor);
-  }
-
-  &.focused::before {
-    opacity: 1;
-    transform: scale(1);
+    &.inverse {
+      outline-color: var(--focusInverseOutlineColor);
+    }
   }
 }
 
@@ -47,7 +32,7 @@
   font-weight: var(--fontWeight);
   color: var(--color);
   text-decoration: var(--textDecoration);
-  transition: color 0.2s;
+  outline: none;
 
   &:hover,
   &:active {
