@@ -145,7 +145,8 @@ export function reducer (state, action) {
     case ONCOMPLETE: {
       if (![SAVING, FINISHED].includes(state.captureState)) { return state }
 
-      state.onCompleted(new File([state.videoBlob], state.fileName, { type: 'webm' }))
+      const type = state.requestAudioOnly ? 'audio/webm' : 'video/webm'
+      state.onCompleted(new File([state.videoBlob], state.fileName, { type }))
 
       return {
         ...state,
