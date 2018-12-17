@@ -81,7 +81,7 @@ class Tray extends Component {
     /*
      * The size (width) of the `<Tray />` when placement is `start` or `end`
      */
-    size: PropTypes.oneOf(['x-small', 'small', 'medium', 'large']),
+    size: PropTypes.oneOf(['x-small', 'small', 'regular', 'medium', 'large']),
 
     /**
     * Placement to determine where the `<Tray />` should display in the viewport

@@ -52,6 +52,7 @@ class Example extends React.Component {
     const sizeVariants = [
       {value: 'x-small', label: 'Extra Small'},
       {value: 'small', label: 'Small'},
+      {value: 'regular', label: 'Regular'},
       {value: 'medium', label: 'Medium'},
       {value: 'large', label: 'Large'}
     ]

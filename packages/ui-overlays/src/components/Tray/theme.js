@@ -32,6 +32,7 @@ export default function ({ colors, breakpoints, shadows, stacking, borders }) {
     boxShadow: shadows.depth3,
     xSmallWidth: breakpoints.xSmall,
     smallWidth: '20em', // 368px
+    regularWidth: breakpoints.small,
     mediumWidth: breakpoints.medium,
     largeWidth: breakpoints.large,
     zIndex: stacking.topmost

@@ -38,6 +38,10 @@
     width: var(--smallWidth);
   }
 
+  &.regular {
+    width: var(--regularWidth);
+  }
+
   &.medium {
     width: var(--mediumWidth);
   }
