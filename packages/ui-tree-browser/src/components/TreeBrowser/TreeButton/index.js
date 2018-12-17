@@ -28,6 +28,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
+import Img from '@instructure/ui-elements/lib/components/Img'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -54,6 +55,7 @@ export default class TreeButton extends Component {
     collectionIcon: PropTypes.func,
     collectionIconExpanded: PropTypes.func,
     itemIcon: PropTypes.func,
+    thumbnail: PropTypes.string,
     onClick: PropTypes.func,
     expanded: PropTypes.bool,
     selected: PropTypes.bool,
@@ -69,13 +71,13 @@ export default class TreeButton extends Component {
     onClick: function () {}
   }
 
-  renderIcon () {
+  renderImage () {
     const { type } = this.props
     switch (type) {
       case 'collection':
         return this.renderCollectionIcon()
       case 'item':
-        return this.renderItemIcon()
+        return this.renderItemImage()
       default:
         break
     }
@@ -89,8 +91,16 @@ export default class TreeButton extends Component {
     }
   }
 
-  renderItemIcon () {
+  renderItemImage () {
+    const thumbnail = this.props.thumbnail
     const Icon = this.props.itemIcon
+    if (thumbnail) {
+      return (
+        <div className={styles.thumbnail}>
+          <Img src={thumbnail} constrain="cover" alt="" />
+        </div>
+      )
+    }
     if (Icon) {
       return <Icon className={styles.icon} />
     }
@@ -127,7 +137,7 @@ export default class TreeButton extends Component {
         className={classnames(classes)}
       >
         <span className={styles.layout}>
-          {this.renderIcon()}
+          {this.renderImage()}
           <span className={styles.text}>
             <span className={styles.textName}>
               {name}

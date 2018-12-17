@@ -146,20 +146,38 @@
       width: calc(var(--baseSpacingSmall) - 0.0625rem);
     }
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: var(--baseSpacingSmall);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingSmall) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingSmall) * 2);
+      width: calc(var(--baseSpacingSmall) * 2);
     }
   }
 
   &.indent {
     padding: calc(var(--baseSpacingSmall) / 3) calc(var(--baseSpacingSmall) / 2);
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: calc(var(--baseSpacingSmall) / 2);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingSmall) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingSmall) * 2);
+      width: calc(var(--baseSpacingSmall) * 2);
     }
   }
 
@@ -180,20 +198,38 @@
       width: calc(var(--baseSpacingMedium) - 0.0625rem);
     }
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: var(--baseSpacingMedium);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingMedium) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingMedium) * 2);
+      width: calc(var(--baseSpacingMedium) * 2);
     }
   }
 
   &.indent {
     padding: calc(var(--baseSpacingMedium) / 3) calc(var(--baseSpacingMedium) / 2);
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: calc(var(--baseSpacingMedium) / 2);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingMedium) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingMedium) * 2);
+      width: calc(var(--baseSpacingMedium) * 2);
     }
   }
 
@@ -214,20 +250,38 @@
       width: calc(var(--baseSpacingLarge) - 0.0625rem);
     }
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: var(--baseSpacingLarge);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingLarge) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingLarge) * 2);
+      width: calc(var(--baseSpacingLarge) * 2);
     }
   }
 
   &.indent {
     padding: calc(var(--baseSpacingLarge) / 3) calc(var(--baseSpacingLarge) / 2);
 
-    .icon {
+    .icon,
+    .thumbnail {
       margin-inline-end: calc(var(--baseSpacingLarge) / 2);
       margin-inline-start: 0;
+    }
+
+    .icon {
       font-size: calc(var(--baseSpacingLarge) * 2);
+    }
+
+    .thumbnail {
+      height: calc(var(--baseSpacingLarge) * 2);
+      width: calc(var(--baseSpacingLarge) * 2);
     }
   }
 

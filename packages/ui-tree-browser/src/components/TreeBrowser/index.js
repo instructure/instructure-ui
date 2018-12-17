@@ -55,8 +55,8 @@ export default class TreeBrowser extends Component {
     */
     collections: PropTypes.object.isRequired,
     /**
-    * a hash of items, keyed by id ,that contain an :id, :name,
-    * and optional :descriptor text
+    * a hash of items, keyed by id, that contain an :id, :name,
+    * optional :descriptor text, and optional :thumbnail url
     */
     items: PropTypes.object.isRequired,
     /**

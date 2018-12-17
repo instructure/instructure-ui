@@ -193,6 +193,7 @@ export default class TreeCollection extends Component {
           id={item.id}
           name={item.name}
           descriptor={item.descriptor}
+          thumbnail={item.thumbnail}
           selected={this.props.selection === `item_${item.id}`}
           focused={this.state.focused === `item_${item.id}`}
           type="item"

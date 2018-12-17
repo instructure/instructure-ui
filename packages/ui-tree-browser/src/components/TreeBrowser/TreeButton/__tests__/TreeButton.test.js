@@ -112,5 +112,49 @@ describe('<TreeButton />', async () => {
         { expectEmpty: true }
       )).to.not.exist()
     })
+
+    it('should render a thumbnail instead of an icon if a thumbnail URL is passed', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          type="item"
+          thumbnail="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=="
+        />
+      )
+
+      const thumbnail = await TreeButtonLocator.find('img')
+      expect(thumbnail).to.exist()
+    })
+
+    it('should not render a thumbnail if no thumbnail URL is passed', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          type="item"
+        />
+      )
+
+      expect(await TreeButtonLocator.find(
+        'img',
+        { expectEmpty: true }
+      )).to.not.exist()
+    })
+
+    it('should render a thumbnail if a thumbnail and an icon are passed', async () => {
+      await mount(
+        <TreeButton
+          id="1"
+          type="item"
+          itemIcon={() => Icon}
+          thumbnail="data:image/gif;base64,R0lGODlhFAAUAJEAAP/9/fYQEPytrflWViH5BAAAAAAALAAAAAAUABQAQAJKhI+pGe09lnhBnEETfodatVHNh1BR+ZzH9LAOCYrVYpiAfWWJOxrC/5MASbyZT4d6AUIBlUYGoR1FsAXUuTN5YhxAEYbrpKRkQwEAOw=="
+        />
+      )
+
+      expect(await TreeButtonLocator.find(
+        'svg',
+        { expectEmpty: true }
+      )).to.not.exist()
+      expect(await TreeButtonLocator.find('img')).to.exist()
+    })
   })
 })

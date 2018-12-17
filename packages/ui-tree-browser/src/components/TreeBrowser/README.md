@@ -106,6 +106,33 @@ class Example extends React.Component {
 
 render(<Example/>)
 ```
+
+An example of a `<TreeBrowser />` with thumbnails:
+
+```js
+---
+example: true
+---
+<TreeBrowser
+  collections={{
+    1: {
+      id: 1,
+      name: "Pandas",
+      collections: [],
+      items: [1,2,3]
+    },
+  }}
+  items={{
+    1: { id: 1, name: "Bao Bao", thumbnail: avatarSquare},
+    2: { id: 2, name: "Bei Bei"},
+    3: { id: 3, name: "Mei Xiang", thumbnail: avatarPortrait}
+  }}
+  defaultExpanded={[1]}
+  itemIcon={IconUser.Solid}
+  rootId={1}
+  size="large"
+/>
+```
 ### Guidelines
 
 ```js
