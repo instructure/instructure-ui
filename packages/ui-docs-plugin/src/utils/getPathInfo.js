@@ -32,7 +32,8 @@ module.exports = function getPathInfo (resourcePath, options, context) {
     srcUrl: srcUrl(resourcePath, options, context),
     packageName: packageName(resourcePath, options, context),
     requirePath: requirePath(resourcePath, options, context),
-    requireStr: `require('${resourcePath}').default`
+    requireStr: `require('${resourcePath}').default`,
+    esPath: esPath(resourcePath, options, context)
   }
 }
 
@@ -77,6 +78,16 @@ function requirePath (resourcePath, options, context) {
     return requirePath(resourcePath, context)
   } else {
     return pathParts(relativePath(resourcePath, options).replace('/src/', '/lib/'), options.library)
+      .join(path.sep).replace(path.extname(resourcePath), '')
+  }
+}
+
+function esPath (resourcePath, options, context) {
+  const { esPath } = options.document
+  if (typeof esPath === 'function') {
+    return esPath(resourcePath, context)
+  } else {
+    return pathParts(relativePath(resourcePath, options).replace('/src/', '/es/'), options.library)
       .join(path.sep).replace(path.extname(resourcePath), '')
   }
 }

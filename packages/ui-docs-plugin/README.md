@@ -159,7 +159,10 @@ module.exports = {
     srcUrl: function (docPath, context) { // the href that links to the src
       ...
     },
-    requirePath: function (docPath, context) { // the path that displays in the 'Usage' section
+    requirePath: function (docPath, context) { // the path that displays for the 'commonJS' example in the 'Usage' section
+      ...
+    },
+    esPath: function (docPath, context) { // the path that displays for the 'ES Modules' example in the 'Usage' section
       ...
     }
   }

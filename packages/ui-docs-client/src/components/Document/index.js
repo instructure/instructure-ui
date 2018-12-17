@@ -109,18 +109,27 @@ export default class Document extends Component {
   }
 
   renderUsage () {
-    const { requirePath, id, displayName, packageName, title, resource } = this.props.doc
+    const { requirePath, esPath, id, displayName, packageName, title, resource } = this.props.doc
     const importName = displayName || resource.displayName || resource.name
 
-    if (!requirePath) return
+    let example = []
 
-    const example = `\
+    if (esPath) {
+      example.push(`\
 /*** ES Modules ***/
-import ${importName} from '${requirePath}'
+import ${importName} from '${esPath}'
+`)
+    }
 
+    if (requirePath) {
+      example.push(`\
 /*** CommonJS ***/
 const ${importName} = require('${requirePath}').default
-`
+`)
+    }
+
+    if (example.length === 0) return
+
     return (
       <View margin="xx-large 0" display="block">
         <Heading level="h3" id={`${id}Usage`} margin="0 0 small 0">
@@ -136,7 +145,7 @@ const ${importName} = require('${requirePath}').default
         </View>
         <CodeEditor
           label={`How to use ${title}`}
-          value={example}
+          value={example.join('\n')}
           language="javascript"
           readOnly
         />
