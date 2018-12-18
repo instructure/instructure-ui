@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.37.0"></a>
+# [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
+
+
+### Bug Fixes
+
+* **ui-elements:** truncateText should handle the empty string ([ff2f69d](https://github.com/instructure/instructure-ui/commit/ff2f69d))
+* **ui-elements:** update focus styles to use outline ([1b044d3](https://github.com/instructure/instructure-ui/commit/1b044d3))
+
+
+### Features
+
+* **ui-elements:** add layout prop to Table ([976a2f7](https://github.com/instructure/instructure-ui/commit/976a2f7))
+
+
+
+
+
 <a name="5.36.0"></a>
 # [5.36.0](https://github.com/instructure/instructure-ui/compare/v5.35.0...v5.36.0) (2018-12-12)
 

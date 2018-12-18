@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-axe-check",
-  "version": "5.36.0",
+  "version": "5.37.0",
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

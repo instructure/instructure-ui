@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.37.0"></a>
+# [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
+
+
+### Bug Fixes
+
+* **ui-forms:** eliminate unnecessary console warnings in Select ([9d9c3de](https://github.com/instructure/instructure-ui/commit/9d9c3de))
+* **ui-forms:** fix the closeOnSelect prop in Select ([2b6b5f4](https://github.com/instructure/instructure-ui/commit/2b6b5f4))
+
+
+
+
+
 <a name="5.36.0"></a>
 # [5.36.0](https://github.com/instructure/instructure-ui/compare/v5.35.0...v5.36.0) (2018-12-12)
 

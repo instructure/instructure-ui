@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.37.0"></a>
+# [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
+
+
+### Bug Fixes
+
+* **ui-a11y,ui-overlays:** shift+tab shouldn't skip Popover trigger ([8838a11](https://github.com/instructure/instructure-ui/commit/8838a11))
+* **ui-billboard:** fix margin + href/onClick alignment issues ([181746a](https://github.com/instructure/instructure-ui/commit/181746a))
+* **ui-docs-client,ui-docs-plugin:** fix ES path in usage examples ([2bd2baa](https://github.com/instructure/instructure-ui/commit/2bd2baa))
+* **ui-elements:** truncateText should handle the empty string ([ff2f69d](https://github.com/instructure/instructure-ui/commit/ff2f69d))
+* **ui-elements:** update focus styles to use outline ([1b044d3](https://github.com/instructure/instructure-ui/commit/1b044d3))
+* **ui-forms:** eliminate unnecessary console warnings in Select ([9d9c3de](https://github.com/instructure/instructure-ui/commit/9d9c3de))
+* **ui-forms:** fix the closeOnSelect prop in Select ([2b6b5f4](https://github.com/instructure/instructure-ui/commit/2b6b5f4))
+* **ui-layout:** add default max-width to View styles ([019557b](https://github.com/instructure/instructure-ui/commit/019557b))
+
+
+### Features
+
+* **ui-elements:** add layout prop to Table ([976a2f7](https://github.com/instructure/instructure-ui/commit/976a2f7))
+* **ui-icons:** add 'duplicate' icon ([b79ddb5](https://github.com/instructure/instructure-ui/commit/b79ddb5))
+
+
+
+
+
 <a name="5.36.0"></a>
 # [5.36.0](https://github.com/instructure/instructure-ui/compare/v5.35.0...v5.36.0) (2018-12-12)
 

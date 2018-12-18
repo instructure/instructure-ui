@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-buttons",
-  "version": "5.36.0",
+  "version": "5.37.0",
   "description": "Accessible button components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

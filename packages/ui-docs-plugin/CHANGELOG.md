@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.37.0"></a>
+# [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
+
+
+### Bug Fixes
+
+* **ui-docs-client,ui-docs-plugin:** fix ES path in usage examples ([2bd2baa](https://github.com/instructure/instructure-ui/commit/2bd2baa))
+
+
+
+
+
 <a name="5.36.0"></a>
 # [5.36.0](https://github.com/instructure/instructure-ui/compare/v5.35.0...v5.36.0) (2018-12-12)
 
