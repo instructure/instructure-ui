@@ -778,11 +778,7 @@ describe('<SelectMultiple />', async () => {
       const input = await select.findInput()
       await input.click()
 
-      expect(await select.accessible({
-        ignores: [
-          'aria-allowed-role' // TODO: remove this when we fix it
-        ]
-      })).to.be.true()
+      expect(await select.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {

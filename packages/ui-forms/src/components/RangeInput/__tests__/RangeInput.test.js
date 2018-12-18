@@ -217,11 +217,7 @@ describe('<RangeInput />', async () => {
         />
       )
       const label = within(subject.getDOMNode())
-      expect(await label.accessible({
-        ignores: [
-          'aria-allowed-role' // TODO: remove when we fix this
-        ]
-      })).to.be.true()
+      expect(await label.accessible()).to.be.true()
     })
 
     it('sets the input role to "slider"', async () => {

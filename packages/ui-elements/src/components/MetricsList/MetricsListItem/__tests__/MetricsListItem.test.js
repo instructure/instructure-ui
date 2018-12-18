@@ -49,6 +49,9 @@ describe('<MetricsListItem />', async () => {
 
       const metricsListItem = await MetricsListItemLocator.find()
       expect(await metricsListItem.accessible({
+        // MetricsListItem does have the required parent when it is used inside
+        // of MetricsList which generates a container with role="grid". Ignore
+        // here b/c we are testing it in isolation
         ignores: ['aria-required-parent']
       })).to.be.true()
     })

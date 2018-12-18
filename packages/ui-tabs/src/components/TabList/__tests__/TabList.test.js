@@ -422,12 +422,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    expect(await tabList.accessible({
-      exclude: [['[aria-disabled="true"]']], // ignore color contrast for disabled tab
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
-    })).to.be.true()
+    expect(await tabList.accessible()).to.be.true()
   })
 
   it('should meet a11y standards when set to the minimal variant', async () => {
@@ -440,12 +435,7 @@ describe('<TabList />', async () => {
     )
 
     const tabList = await TabListLocator.find()
-    expect(await tabList.accessible({
-      exclude: [['[aria-disabled="true"]']], // ignore color contrast for disabled tab
-      ignores: [
-        'color-contrast' // brand color doesn't meet 4.5:1 contrast req
-      ]
-    })).to.be.true()
+    expect(await tabList.accessible()).to.be.true()
   })
 
   it('should have appropriate aria attributes', async () => {

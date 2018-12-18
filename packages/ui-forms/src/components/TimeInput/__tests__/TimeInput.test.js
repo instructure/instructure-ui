@@ -187,10 +187,6 @@ describe('<TimeInput />', async () => {
     const timeInput = await TimeInputLocator.find()
     await timeInput.click()
 
-    expect(await timeInput.accessible({
-      ignores: [
-        'aria-allowed-role' // TODO: remove this when we fix it
-      ]
-    })).to.be.true()
+    expect(await timeInput.accessible()).to.be.true()
   })
 })

@@ -79,11 +79,7 @@ describe('<ProgressBar />', async () => {
     )
 
     const progressBar = within(subject.getDOMNode())
-    expect(await progressBar.accessible({
-      ignores: [
-        'aria-allowed-role' // TODO: remove this when we fix the role
-      ]
-    })).to.be.true()
+    expect(await progressBar.accessible()).to.be.true()
   })
 
   describe('when passing down props to View', async () => {

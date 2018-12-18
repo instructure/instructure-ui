@@ -833,11 +833,7 @@ describe('<SelectField />', async () => {
 
       const selectField = await SelectFieldLocator.find()
 
-      expect(await selectField.accessible({
-        ignores: [
-          'aria-allowed-role' // TODO: remove this when we fix it
-        ]
-      }))
+      expect(await selectField.accessible()).to.be.true()
     })
 
     it('should meet standards when open', async () => {
@@ -852,11 +848,7 @@ describe('<SelectField />', async () => {
       const selectField = await SelectFieldLocator.find()
       await selectField.click()
 
-      expect(await selectField.accessible({
-        ignores: [
-          'aria-allowed-role' // TODO: remove this when we fix it
-        ]
-      }))
+      expect(await selectField.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {

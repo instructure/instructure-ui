@@ -113,11 +113,7 @@ describe('<Progress />', async () => {
     )
     const progress = await ProgressLocator.find()
 
-    expect(await progress.accessible({
-      ignores: [
-        'aria-allowed-role' // TODO: remove this when we fix the role
-      ]
-    })).to.be.true()
+    expect(await progress.accessible()).to.be.true()
   })
 
   it('should meet a11y standards when rendered as a progress circle', async () => {

@@ -611,11 +611,6 @@ describe('<DatePicker />', async () => {
     )
 
     const datePicker = await DatePickerLocator.find()
-    expect(await datePicker.accessible({
-      ignores: [
-        'aria-allowed-role', // TODO remove this when we fix the issue
-        'color-contrast' // checked manually for 3:1 in theme tests
-      ]
-    })).to.be.true()
+    expect(await datePicker.accessible()).to.be.true()
   })
 })

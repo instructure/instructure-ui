@@ -53,10 +53,6 @@ describe('<FormFieldMessages />', () => {
     const subject = await mount(<FormFieldMessages messages={messages} />)
 
     const formFieldMessages = within(subject.getDOMNode())
-    expect(await formFieldMessages.accessible({
-      ignores: [
-        'color-contrast' // success and error colors don't meet 4.5:1
-      ]
-    })).to.be.true()
+    expect(await formFieldMessages.accessible()).to.be.true()
   })
 })
