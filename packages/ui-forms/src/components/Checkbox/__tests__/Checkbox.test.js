@@ -116,7 +116,7 @@ describe('<Checkbox />', async () => {
 
       const checkbox = within(subject.getDOMNode())
       const input = await checkbox.find('input')
-      await input.click()
+      await input.click(null, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
       expect(onChange).to.not.have.been.called()

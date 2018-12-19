@@ -45,15 +45,18 @@ describe('<NavigationItem />', async () => {
   it('should show a tooltip when the nav is minimized ', async () => {
     const onClick = stub()
     await mount(
-      <NavigationItem
-        icon={<IconAdmin />}
-        label="Admin"
-        onClick={onClick}
-        minimized={true}
-      />
+      <div style={{ width: 100 }}>
+        <NavigationItem
+          icon={<IconAdmin />}
+          label="Admin"
+          onClick={onClick}
+          minimized={true}
+        />
+      </div>
     )
     const item = await NavigationItemLocator.find()
-    await item.focus()
+    const button = await item.find('button')
+    await button.focus()
     const tooltip = await item.findTooltipContent()
     expect(tooltip).to.exist()
   })

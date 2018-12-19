@@ -68,7 +68,7 @@ describe('<Badge />', () => {
 
   it('should change postion based on the placement prop', async () => {
     const subject = await mount(
-      <Badge count={100} placement="bottom start">
+      <Badge count={3} placement="bottom start">
         <button type="button">Inbox</button>
       </Badge>
     )
@@ -93,7 +93,7 @@ describe('<Badge />', () => {
 
   it('should change its output via the formatOutput prop', async () => {
     const formatOutput = (formattedCount) => {
-      return `My count is ${formattedCount}`
+      return `${formattedCount}!`
     }
 
     const subject = await mount(
@@ -104,6 +104,6 @@ describe('<Badge />', () => {
 
     const badge = within(subject.getDOMNode())
 
-    expect(await badge.find(':textContent(My count is 15)')).to.exist()
+    expect(await badge.find(':textContent(15!)')).to.exist()
   })
 })

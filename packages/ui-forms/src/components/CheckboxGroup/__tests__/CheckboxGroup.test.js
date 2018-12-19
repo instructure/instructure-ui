@@ -65,7 +65,7 @@ describe('<CheckboxGroup />', async () => {
     const checkboxGroup = within(subject.getDOMNode())
     const fieldset = await checkboxGroup.find('fieldset')
     const messagesId = fieldset.getAttribute('aria-describedby')
-    const messages = await checkboxGroup.find(`#${messagesId}`)
+    const messages = await checkboxGroup.find(`#${messagesId}`, { visible: false })
 
     expect(messages.getTextContent()).to.equal('Invalid name')
   })
@@ -86,7 +86,7 @@ describe('<CheckboxGroup />', async () => {
     )
 
     const checkboxGroup = within(subject.getDOMNode())
-    const legend = await checkboxGroup.find('legend')
+    const legend = await checkboxGroup.find('legend', { visible: false })
     expect(legend.getTextContent()).to.equal(description)
   })
 
@@ -130,7 +130,7 @@ describe('<CheckboxGroup />', async () => {
 
     const checkboxGroup = within(subject.getDOMNode())
     const input = await checkboxGroup.find('input[value="football"]')
-    await input.click()
+    await input.click(null, { clickable: false })
 
     expect(onChange).to.not.have.been.called()
   })

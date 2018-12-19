@@ -103,7 +103,7 @@ function querySelectorParent (element, selector, options) {
 
 function querySelectorAllWithin (containerSelector, element, selector, options) {
   // find all of the container root nodes that match the selector...
-  const containers = querySelectorAll(element, containerSelector)
+  const containers = querySelectorAll(element, containerSelector, options)
 
   if (selector) {
     // if there is a selector, query within each container for matches inside...
@@ -111,7 +111,7 @@ function querySelectorAllWithin (containerSelector, element, selector, options) 
       let results = querySelectorAll(element, selector, options)
       results = results
         .map((result) => {
-          const root = querySelectorParent(result, containerSelector)
+          const root = querySelectorParent(result, containerSelector, options)
           // ignore matches that are in a nested container...
           // we always return the root so that customMethods work...
           return (root !== element) ? null : root

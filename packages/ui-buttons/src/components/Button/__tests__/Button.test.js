@@ -157,8 +157,7 @@ describe('<Button/>', async () => {
           onClick={onClick}>Hello World</Button>
       )
       const button = await ButtonLocator.find()
-
-      expect(button.click()).to.eventually.throw()
+      await button.click(null, { clickable: false })
 
       expect(onClick).to.have.not.been.called()
     })
@@ -171,7 +170,8 @@ describe('<Button/>', async () => {
           onClick={onClick}>Hello World</Button>
       )
       const button = await ButtonLocator.find()
-      expect(button.click()).to.eventually.throw()
+      await button.click(null, { clickable: false })
+
       expect(onClick).to.have.not.been.called()
     })
 
@@ -196,7 +196,7 @@ describe('<Button/>', async () => {
       )
       const button = await ButtonLocator.find()
 
-      expect(button.click()).to.eventually.throw()
+      await button.click(null, { clickable: false })
 
       expect(onClick).to.have.not.been.called()
     })

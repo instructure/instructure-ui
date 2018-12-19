@@ -138,7 +138,7 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="" />)
 
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find(`.${styles.initials}`)
+      const initials = await avatar.find(`.${styles.initials}`, { visible: false })
 
       expect(initials).to.exist()
       expect(initials.getTextContent()).to.equal('')

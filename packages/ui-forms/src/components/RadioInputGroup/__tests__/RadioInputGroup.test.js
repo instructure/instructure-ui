@@ -98,7 +98,7 @@ describe('<RadioInputGroup />', async () => {
     const group = within(subject.getDOMNode())
     const input = await group.find('input')
 
-    await input.click()
+    await input.click(null, { clickable: false })
     expect(onChange).to.not.have.been.called()
   })
 

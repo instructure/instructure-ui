@@ -244,15 +244,30 @@ describe('queries', async () => {
       await mount(<input aria-label="Name" />)
       expect(await findAll(':label(Name)')).to.have.length(1)
     })
+
+    it('can find a button by its text content', async () => {
+      await mount(<button>Submit</button>)
+      expect(await findAll(':label(Submit)')).to.have.length(1)
+    })
+
+    it('can find a fieldset by its legend', async () => {
+      await mount(
+        <fieldset>
+          <legend>Full name</legend>
+          <label>First name <input type="text"/></label>
+        </fieldset>
+      )
+      expect(await findAll(':label(Full name)')).to.have.length(1)
+    })
   })
 
   describe('by title', async () => {
     it('can find an element by its title', async () => {
       await mount(
         <div>
-          <span title="Ignore this" />
-          <span title="Delete" />
-          <span title="Ignore this as well" />
+          <span title="Ignore this">foo</span>
+          <span title="Delete">bar</span>
+          <span title="Ignore this as well">baz</span>
         </div>
       )
 

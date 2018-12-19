@@ -121,7 +121,7 @@ describe('<Link />', async () => {
       await mount(<Link onClick={onClick} disabled>Hello World</Link>)
 
       const link = await LinkLocator.find()
-      await link.click()
+      await link.click(null, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
     })
@@ -137,52 +137,52 @@ describe('<Link />', async () => {
       })
 
       it('should render designated tag', async () => {
-        await mount(<Link as="li" onClick={onClick}>Hello World</Link>)
+        await mount(<Link as="a" onClick={onClick}>Hello World</Link>)
         const componentRoot = await LinkLocator.find()
         const link = await componentRoot.find(':textContent(Hello World)')
-        expect(link.getTagName()).to.equal('li')
+        expect(link.getTagName()).to.equal('a')
       })
 
       it('should set role="button"', async () => {
-        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
         expect(await LinkLocator.find('[role="button"]')).to.exist()
       })
 
       it('should set type="button"', async () => {
-        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
         expect(await LinkLocator.find('[type="button"]')).to.exist()
       })
 
       it('should set tabIndex="0"', async () => {
-        await mount(<Link as="div" onClick={onClick}>Hello World</Link>)
+        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
         expect(await LinkLocator.find('[tabIndex="0"]')).to.exist()
       })
     })
 
     describe('without `onClick`', async () => {
       it('should render designated tag', async () => {
-        await mount(<Link as="li">Hello World</Link>)
+        await mount(<Link as="a">Hello World</Link>)
         const componentRoot = await LinkLocator.find()
         const link = await componentRoot.find(':textContent(Hello World)')
-        expect(link.getTagName()).to.equal('li')
+        expect(link.getTagName()).to.equal('a')
       })
 
       it('should not set role="button"', async () => {
-        await mount(<Link as="div">Hello World</Link>)
+        await mount(<Link as="span">Hello World</Link>)
         expect(await LinkLocator.find('[role="button"]', {
           expectEmpty: true
         })).to.not.exist()
       })
 
       it('should not set type="button"', async () => {
-        await mount(<Link as="div">Hello World</Link>)
+        await mount(<Link as="span">Hello World</Link>)
         expect(await LinkLocator.find('[type="button"]', {
           expectEmpty: true
         })).to.not.exist()
       })
 
       it('should not set tabIndex="0"', async () => {
-        await mount(<Link as="div">Hello World</Link>)
+        await mount(<Link as="span">Hello World</Link>)
         expect(await LinkLocator.find('[tabIndex="0"]', {
           expectEmpty: true
         })).to.not.exist()

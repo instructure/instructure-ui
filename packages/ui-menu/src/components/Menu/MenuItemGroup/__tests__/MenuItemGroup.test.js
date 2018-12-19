@@ -223,7 +223,7 @@ describe('<MenuItemGroup />', async () => {
     const group = await MenuItemGroupLocator.find(':label(Select one)')
     const item = await group.findItem(':label(Foo)')
 
-    await item.click()
+    await item.click(null, { clickable: false })
 
     expect(onSelect).to.not.have.been.called()
   })

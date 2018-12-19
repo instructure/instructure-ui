@@ -61,59 +61,182 @@ function getComputedStyle (element) {
   }
 }
 
-function hidden (element) {
-  if (element instanceof HTMLDocument) {
-    return false
-  }
-
-  const cs = getComputedStyle(element)
-  return (
-    cs.display !== 'inline' &&
-    element.offsetWidth <= 0 &&
-    element.offsetHeight <= 0
-  ) || cs.display === 'none'
-}
-
 function positioned (element) {
-  if (element instanceof HTMLDocument) {
-    return false
-  }
-
-  const POS = ['fixed', 'absolute']
-  if (POS.includes(element.style.position.toLowerCase())) return true
-  if (POS.includes(getComputedStyle(element).getPropertyValue('position').toLowerCase())) return true
-  return false
-}
-
-function visible (element) {
-  if (element instanceof HTMLDocument) {
-    return true
-  }
-
-  let node = element
-  while (node) {
-    if (node === document.body) break
-    if (hidden(node)) return false
-    if (positioned(node)) break
-    node = node.parentNode
-  }
-  return true
-}
-
-function onscreen (element) {
-  const bounding = element.getBoundingClientRect()
-  const win = getOwnerWindow(element)
-  const doc = getOwnerDocument(element)
-  return (
-      bounding.top >= 0 &&
-      bounding.left >= 0 &&
-      bounding.bottom <= (win.innerHeight || doc.documentElement.clientHeight) &&
-      bounding.right <= (win.innerWidth || doc.documentElement.clientWidth)
+  const style = getComputedStyle(element)
+  const transform = style.getPropertyValue('-webkit-transform') ||
+                    style.getPropertyValue('-moz-transform') ||
+                    style.getPropertyValue('-ms-transform') ||
+                    style.getPropertyValue('-o-transform') ||
+                    style.getPropertyValue('transform') || 'none'
+  return (style.position !== 'static' ||
+    // initial value of transform can be 'none' or a matrix equivalent
+    (transform !== 'none' && transform !== 'matrix(1, 0, 0, 1, 0, 0)')
   )
 }
 
+function getViewportRects (element) {
+  const doc = getOwnerDocument(element)
+  const viewport = {
+    width: Math.max(
+      doc.body.scrollWidth,
+      doc.documentElement.scrollWidth,
+      doc.body.offsetWidth,
+      doc.documentElement.offsetWidth,
+      doc.body.clientWidth,
+      doc.documentElement.clientWidth,
+      window.innerWidth || 0
+    ),
+    height: Math.max(
+      doc.body.scrollHeight,
+      doc.documentElement.scrollHeight,
+      doc.body.offsetHeight,
+      doc.documentElement.offsetHeight,
+      doc.body.clientHeight,
+      doc.documentElement.clientHeight,
+      window.innerHeight || 0
+    )
+  }
+
+  return [{
+    ...viewport,
+    top: 0,
+    right: viewport.width,
+    bottom: viewport.height,
+    left: 0,
+    overflow: null,
+    positioned: false
+  }]
+}
+
+function getPositionedParents (element) {
+  const parents = []
+  let parent = element
+
+  // eslint-disable-next-line no-cond-assign
+  while ((parent = parent.parentNode) &&
+    parent &&
+    parent instanceof HTMLElement &&
+    !(parent instanceof HTMLBodyElement)
+  ) {
+    if (positioned(parent)) {
+      parents.push(parent)
+    }
+  }
+
+  return parents
+}
+
+function rectToObject (rect) {
+  return {
+    top: rect.top,
+    right: rect.right,
+    bottom: rect.bottom,
+    left: rect.left,
+    width: rect.width,
+    height: rect.height,
+    x: rect.x,
+    y: rect.y
+  }
+}
+
+function getClientRects (element) {
+  const props = {
+    overflow: getComputedStyle(element).overflow,
+    positioned: positioned(element)
+  }
+  let rects = [{
+    ...rectToObject(element.getBoundingClientRect()),
+    ...props
+  }]
+  rects = rects.concat(
+    Array.from(element.getClientRects())
+      .map((rect) => {
+        return { ...rectToObject(rect), ...props }
+      })
+  )
+  return rects
+}
+
+function visible (element) {
+  if (element instanceof HTMLHtmlElement || element.nodeType !== 1) {
+    return true
+  }
+
+  const style = getComputedStyle(element)
+
+  if (style.visibility === 'hidden' || style.display === 'none') {
+    return false
+  }
+
+  const elementRects = getClientRects(element)
+
+  const elementWidth = element.offsetWidth || elementRects[0].width || 0
+  const elementHeight = element.offsetHeight || elementRects[0].height || 0
+  const children = Array.from(element.childNodes)
+
+  // handle inline elements with block children...
+  if (style.display === 'inline' && children.length > 0 && !(element instanceof HTMLIFrameElement)) {
+    if (children.length > 0) {
+      return children.reduce((previousChildIsVisible, child) => {
+        return previousChildIsVisible || visible(child)
+      }, false)
+    }
+  } else if (elementWidth <= 0 && elementHeight <= 0) {
+    return false
+  }
+
+  const rects = [elementRects]
+    .concat(getPositionedParents(element).map(parent => getClientRects(parent)))
+
+  rects.push(getViewportRects(element))
+
+  return rects
+    .reduce((previousIsVisible, childRects, index) => {
+      const parentRects = rects[index + 1]
+
+      if (!parentRects) {
+        return previousIsVisible
+      }
+
+      return previousIsVisible && (
+        parentRects.reduce((visibleInPreviousParent, parentRect) => {
+          return visibleInPreviousParent ||
+            childRects.reduce((previousChildIsVisible, childRect) => {
+              const childIsPositioned = (childRect.positioned && parentRect.overflow === 'visible')
+              const currentChildIsVisible = childIsPositioned || (
+                (childRect.top <= parentRect.bottom) &&
+                ((childRect.top + parentRect.bottom) >= 0) &&
+                (childRect.bottom > parentRect.top) &&
+                (childRect.left <= parentRect.right) &&
+                ((childRect.left + parentRect.right) >= 0) &&
+                (childRect.right > parentRect.left)
+              )
+              return previousChildIsVisible || currentChildIsVisible
+            }, false)
+        }, false)
+      )
+    }, true)
+}
+
+function onscreen (element) {
+  return visible(element)
+}
+
 function clickable (element) {
-  return visible(element) && onscreen(element)
+  const rects = Array.from(element.getClientRects())
+    .concat(element.getBoundingClientRect())
+  return visible(element) && rects.reduce((onscreen, rect) => {
+    if (onscreen) return true
+    const doc = getOwnerDocument(element)
+    for (let x = Math.floor(rect.left), maxX = Math.ceil(rect.right); x <= maxX; x++)
+    for (let y = Math.floor(rect.top), maxY = Math.ceil(rect.bottom); y <= maxY; y++) {
+      const elementFromPoint = doc.elementFromPoint(x, y)
+      if (element.contains(elementFromPoint) || element === elementFromPoint) {
+        return true
+      }
+    }
+    return false
+  }, false)
 }
 
 function focusable (element) {

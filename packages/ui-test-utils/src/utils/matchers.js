@@ -97,26 +97,27 @@ function matchElementByLabel (element, labelText, options) {
     )
   } else if (element.matches('button, a[href], [role="button"], [role="link"]')) {
     return matchElementByContents(element, labelText, options)
-  } else {
-    if (element.matches('[id]')) {
-      // <label for="someId">text</label><input id="someId" />
-      const labels = Array.from(doc.querySelectorAll(`[for="${element.getAttribute('id')}"]`))
-      const label = labels.map(label => label ? label.textContent : '').join(' ')
-      return matches(label, labelText, options)
-    } else if (element.matches('input,textarea,select')) {
-      // <label>text: <input /></label>
-      let parentNode = element.parentNode
+  } else if (element.matches('fieldset')) {
+    const legend = element.querySelector('legend')
+    return legend ? matchElementByContents(legend, labelText, options) : false
+  } else if (element.matches('[id]')) {
+    // <label for="someId">text</label><input id="someId" />
+    const labels = Array.from(doc.querySelectorAll(`[for="${element.getAttribute('id')}"]`))
+    const label = labels.map(label => label ? label.textContent : '').join(' ')
+    return matches(label, labelText, options)
+  } else if (element.matches('input,textarea,select')) {
+    // <label>text: <input /></label>
+    let parentNode = element.parentNode
 
-      while (
-        parentNode &&
-        parentNode !== document &&
-        parentNode.matches &&
-        !parentNode.matches('label')
-      ) {
-        parentNode = parentNode.parentNode
-      }
-      return matchElementByContents(parentNode, labelText, options)
+    while (
+      parentNode &&
+      parentNode !== document &&
+      parentNode.matches &&
+      !parentNode.matches('label')
+    ) {
+      parentNode = parentNode.parentNode
     }
+    return matchElementByContents(parentNode, labelText, options)
   }
 }
 

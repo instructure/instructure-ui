@@ -35,7 +35,7 @@ const query = (ComponentIdentifier, element, selector, options) => {
   let componentSelector
   // Account for an element here that may not be the position root. This occurs when the
   // `positionTarget` prop is set on Popover and the trigger and differs from the target
-  const positionRoot = querySelector(element, `[${Position.locatorAttribute}]`)
+  const positionRoot = querySelector(element, `[${Position.locatorAttribute}]`, { visible: false })
   if (positionRoot && positionRoot.getAttribute) {
     componentSelector = `[${ComponentIdentifier.locatorAttribute}="${positionRoot.getAttribute(Position.locatorAttribute)}"]`
     // query document because content and target aren't necessarily a child of the component itself

@@ -97,31 +97,45 @@ describe('<Img />', () => {
   })
 
   it('should apply CSS object-fit: cover when cover is true', async () => {
-    await mount(<Img src={image} cover={true} />)
+    await mount(
+      <div style={{ width: 16, height: 16 }}>
+        <Img src={image} cover={true} />
+      </div>
+    )
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('cover')
   })
 
   it('should apply CSS object-fit: cover when constrain="cover"', async () => {
-    await mount(<Img src={image} constrain="cover" />)
+    await mount(
+      <div style={{ width: 16, height: 16 }}>
+        <Img src={image} constrain="cover" />
+      </div>
+    )
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('cover')
   })
 
   it('should apply CSS object-fit: contain when constrain="contain"', async () => {
-    await mount(<Img src={image} constrain="contain" />)
+    await mount(
+      <div style={{ width: 16, height: 16 }}>
+        <Img src={image} constrain="contain" />
+      </div>
+    )
     const img = await ImgLocator.find()
     expect(img.getComputedStyle().getPropertyValue('object-fit')).to.equal('contain')
   })
 
   it('applies the container--has-cover class when the cover property is used with overlay', async () => {
     await mount(
-      <Img
-        src={image}
-        alt="testing123"
-        cover={true}
-        overlay={{color: '#ff0000', opacity: 7}}
-      />
+      <div style={{ width: 16, height: 16 }}>
+        <Img
+          src={image}
+          alt="testing123"
+          cover={true}
+          overlay={{color: '#ff0000', opacity: 7}}
+        />
+      </div>
     )
 
     expect(await ImgLocator.find(`.${styles['container--has-cover']}`)).to.exist()
@@ -130,12 +144,14 @@ describe('<Img />', () => {
 
   it('applies the container--has-cover class when constrain="cover" is used with overlay', async () => {
     await mount(
-      <Img
-        src={image}
-        alt="testing123"
-        constrain="cover"
-        overlay={{color: '#ff0000', opacity: 7}}
-      />
+      <div style={{ width: 16, height: 16 }}>
+        <Img
+          src={image}
+          alt="testing123"
+          constrain="cover"
+          overlay={{color: '#ff0000', opacity: 7}}
+        />
+      </div>
     )
 
     expect(await ImgLocator.find(`.${styles['container--has-cover']}`)).to.exist()
@@ -144,12 +160,14 @@ describe('<Img />', () => {
 
   it('applies the container--has-contain class when constrain="contain" is used with overlay', async () => {
     await mount(
-      <Img
-        src={image}
-        alt="testing123"
-        constrain="contain"
-        overlay={{color: '#ff0000', opacity: 7}}
-      />
+      <div style={{ width: 16, height: 16 }}>
+        <Img
+          src={image}
+          alt="testing123"
+          constrain="contain"
+          overlay={{color: '#ff0000', opacity: 7}}
+        />
+      </div>
     )
 
     expect(await ImgLocator.find(`.${styles['container--has-contain']}`)).to.exist()

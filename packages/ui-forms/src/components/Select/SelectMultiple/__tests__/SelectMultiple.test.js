@@ -309,13 +309,13 @@ describe('<SelectMultiple />', async () => {
         options={options}
         filter={filter}
         onChange={onChange}
+        constrain="window"
       />
     )
     const select = await SelectMultipleLocator.find()
     const input = await select.findInput()
 
     await input.click()
-
 
     const item1 = await select.findOption()
     await item1.keyDown('enter')
@@ -350,6 +350,7 @@ describe('<SelectMultiple />', async () => {
         filter={filter}
         onChange={onChange}
         selectedOption={selectedOption}
+        constrain="window"
       />
     )
     const select = await SelectMultipleLocator.find()

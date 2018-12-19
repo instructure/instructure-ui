@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 import ScreenReaderFocusRegion from '../ScreenReaderFocusRegion'
 
 describe('ScreenReaderFocusRegion', async () => {
@@ -33,9 +33,9 @@ describe('ScreenReaderFocusRegion', async () => {
         <span>test alert</span>
       </div>
       <div data-test-child>
-        <div data-test-descendant></div>
+        <div data-test-descendant>foo</div>
         <div data-test-descendant>
-          <div data-test-descendant></div>
+          <div data-test-descendant>bar</div>
         </div>
       </div>
       <div data-test-parent aria-hidden="true" id="test-parent2">
@@ -56,8 +56,8 @@ describe('ScreenReaderFocusRegion', async () => {
         </div>
       </div>
       <div data-test-child aria-hidden="true">
-        <div data-test-descendant></div>
-        <div data-test-descendant></div>
+        <div data-test-descendant>foo</div>
+        <div data-test-descendant>bar</div>
       </div>
     </div>
   )
@@ -164,9 +164,12 @@ describe('ScreenReaderFocusRegion', async () => {
     screenReaderFocusRegion.activate()
     screenReaderFocusRegion.deactivate()
 
-    childNodes.forEach((node) => {
-      expect(node.getAttribute('aria-hidden')).to.not.exist()
+    await wait(() => {
+      childNodes.forEach((node) => {
+        expect(node.getAttribute('aria-hidden')).to.not.exist()
+      })
     })
+
     expect(exception.getAttribute('aria-hidden')).to.exist()
   })
 

@@ -273,6 +273,7 @@ describe('<SelectSingle />', async () => {
         filter={filter}
         onInputChange={onInputChange}
         onChange={onChange}
+        constrain="window"
       />
     )
 
@@ -452,6 +453,7 @@ describe('<SelectSingle />', async () => {
           ]}
           filter={filter}
           selectedOption="4"
+          constrain="window"
         />
       )
 
@@ -556,6 +558,7 @@ describe('<SelectSingle />', async () => {
           options={options}
           filter={filter}
           defaultSelectedOption="4"
+          constrain="window"
         />
       )
 
@@ -712,6 +715,7 @@ describe('<SelectSingle />', async () => {
           options={options}
           filter={filter}
           onChange={onChange}
+          constrain="window"
         />
       )
 

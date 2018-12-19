@@ -43,7 +43,10 @@ describe('<FormFieldLayout />', async () => {
 
   it('should align label to right by default', async () => {
     const subject = await mount(
-      <FormFieldLayout label="Username" layout="inline">
+      <FormFieldLayout
+        label="Username"
+        layout="inline"
+      >
         <input type="text" />
       </FormFieldLayout>
     )
@@ -55,7 +58,11 @@ describe('<FormFieldLayout />', async () => {
 
   it('should align label to left', async () => {
     const subject = await mount(
-      <FormFieldLayout label="Username" layout="inline" labelAlign="start">
+      <FormFieldLayout
+        label="Username"
+        layout="inline"
+        labelAlign="start"
+      >
         <input type="text" />
       </FormFieldLayout>
     )

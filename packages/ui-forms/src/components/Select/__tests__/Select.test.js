@@ -148,6 +148,7 @@ describe('<Select />', async () => {
       <Select
         label="Choose a vacation destination"
         editable={true}
+        constrain="window"
       >
         {items.map((i) => <option key={i} value={i.value}>{i.label}</option>)}
       </Select>
@@ -160,7 +161,7 @@ describe('<Select />', async () => {
     expect((await select.findAllOptions()).length).to.equal(3)
 
     await subject.setProps({
-      children: items.slice(1).map((i) => <option key={i} value={i.value}>{i.label}</option>)
+      children: items.slice(1).map((i) => <option key={i.value} value={i.value}>{i.label}</option>)
     })
 
     expect((await select.findAllOptions()).length).to.equal(2)
@@ -281,4 +282,3 @@ describe('<Select />', async () => {
     })
   })
 })
-/*  eslint-enable mocha/no-synchronous-tests */

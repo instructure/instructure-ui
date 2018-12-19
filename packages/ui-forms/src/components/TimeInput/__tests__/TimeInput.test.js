@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, wait } from '@instructure/ui-test-utils'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 import TimeInput from '../index'
@@ -137,6 +137,7 @@ describe('<TimeInput />', async () => {
         defaultToFirstOption
         label="fake label"
         timezone="US/Eastern"
+        constrain="window"
       />
     )
     const timeInput = await TimeInputLocator.find()
@@ -158,6 +159,7 @@ describe('<TimeInput />', async () => {
         format="LT"
         step={15}
         value={value.toISOString()}
+        constrain="window"
         onChange={() => {}}
       />
     )
@@ -166,15 +168,14 @@ describe('<TimeInput />', async () => {
 
     await input.click()
 
-    const items = await timeInput.findAllOptions()
+    await wait(async () => {
+      const items = await timeInput.findAllOptions({ visible: false })
 
-    expect(input.getDOMNode().value).to.equal(value.format('LT'))
+      expect(input.getDOMNode().value).to.equal(value.format('LT'))
 
-    const expectedFirstOptionText = value.hour(0).minute(0).format('LT')
-    const expectedSecondOptionText = value.hour(0).minute(15).format('LT')
-
-    expect(items[0].getTextContent()).to.equal(expectedFirstOptionText)
-    expect(items[1].getTextContent()).to.equal(expectedSecondOptionText)
+      expect(items[0].getTextContent()).to.equal(value.hour(0).minute(0).format('LT'))
+      expect(items[1].getTextContent()).to.equal(value.hour(0).minute(15).format('LT'))
+    })
   })
 
   it('should meet a11y standards', async () => {
@@ -182,6 +183,7 @@ describe('<TimeInput />', async () => {
       <TimeInput
         label="fake label"
         timezone="US/Eastern"
+        constrain="window"
       />
     )
     const timeInput = await TimeInputLocator.find()

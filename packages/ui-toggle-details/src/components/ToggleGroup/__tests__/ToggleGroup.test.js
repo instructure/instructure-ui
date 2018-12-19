@@ -70,6 +70,7 @@ describe('<ToggleGroup />', () => {
         transition={false}
         summary="This is the summary section"
         toggleLabel="This is the toggleLabel"
+        defaultExpanded
       >
         This is the details section
       </ToggleGroup>

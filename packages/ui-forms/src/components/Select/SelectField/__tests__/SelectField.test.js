@@ -75,6 +75,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -90,6 +91,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -107,6 +109,7 @@ describe('<SelectField />', async () => {
         label="Choose a state"
         inputRef={inputRef}
         options={options}
+        constrain="window"
       />
     )
 
@@ -124,6 +127,7 @@ describe('<SelectField />', async () => {
         label="Choose a state"
         componentRef={(el) => { selectField = el }}
         options={options}
+        constrain="window"
       />
     )
 
@@ -138,6 +142,7 @@ describe('<SelectField />', async () => {
         label="Choose a state"
         componentRef={(el) => { selectField = el }}
         options={options}
+        constrain="window"
       />
     )
 
@@ -151,6 +156,7 @@ describe('<SelectField />', async () => {
           closeOnSelect
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       </div>
     )
@@ -165,17 +171,17 @@ describe('<SelectField />', async () => {
     await wait(() => {
       expect(input.getBoundingClientRect().top).to.be.lessThan(menu.getBoundingClientRect().top)
     })
-
   })
 
   it('placement should be accepted as a prop', async () => {
     await mount(
-      <div style={{padding: '200px 0'}}>
+      <div style={{ padding: '200px 0' }}>
         <SelectField
           closeOnSelect
           label="Choose a state"
           placement="top stretch"
           options={options}
+          constrain="window"
         />
       </div>
     )
@@ -196,6 +202,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -214,6 +221,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -345,6 +353,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -368,6 +377,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -392,6 +402,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -416,6 +427,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -439,6 +451,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -462,6 +475,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -488,6 +502,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           onSelect={onSelect}
           options={options}
+          constrain="window"
         />
       )
 
@@ -522,6 +537,7 @@ describe('<SelectField />', async () => {
           closeOnSelect
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       )
 
@@ -548,6 +564,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={options}
           selectedOption={{ value, label, id: value, children: label }}
+          constrain="window"
         />
       )
 
@@ -569,6 +586,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={[]}
           onHighlight={highlight}
+          constrain="window"
         />
       )
 
@@ -594,6 +612,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={[]}
           emptyOption={emptyOption}
+          constrain="window"
         />
       )
 
@@ -614,6 +633,7 @@ describe('<SelectField />', async () => {
           closeOnSelect
           label="Choose a state"
           loadingText={loadingText}
+          constrain="window"
           options={[{ id: '1', label: 'option 1', value: '1' }, { id: '2', label: 'option 2', value: '2' }]}
         />
       )
@@ -636,6 +656,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={[]}
           onHighlight={highlight}
+          constrain="window"
         />
       )
 
@@ -658,6 +679,7 @@ describe('<SelectField />', async () => {
           closeOnSelect={false}
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       )
 
@@ -685,6 +707,7 @@ describe('<SelectField />', async () => {
           options={options}
           onSelect={onSelect}
           onClick={onClick}
+          constrain="window"
         />
       )
 
@@ -715,6 +738,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -733,6 +757,7 @@ describe('<SelectField />', async () => {
         closeOnSelect
         label="Choose a state"
         options={options}
+        constrain="window"
       />
     )
 
@@ -752,6 +777,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={options}
           onPositioned={onPositioned}
+          constrain="window"
         />
       )
 
@@ -771,6 +797,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={options}
           onInputChange={onInputChange}
+          constrain="window"
         />
       )
 
@@ -792,6 +819,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={options}
           onBlur={onBlur}
+          constrain="window"
         />
       )
 
@@ -810,6 +838,7 @@ describe('<SelectField />', async () => {
           label="Choose a state"
           options={options}
           onFocus={onFocus}
+          constrain="window"
         />
       )
 
@@ -828,6 +857,7 @@ describe('<SelectField />', async () => {
           closeOnSelect
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       )
 
@@ -842,6 +872,7 @@ describe('<SelectField />', async () => {
           closeOnSelect
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       )
 
@@ -858,6 +889,7 @@ describe('<SelectField />', async () => {
           messages={[{ type: 'error', text: 'some error message' }]}
           label="Choose a state"
           options={options}
+          constrain="window"
         />
       )
 

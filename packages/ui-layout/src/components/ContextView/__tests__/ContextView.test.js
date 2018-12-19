@@ -97,7 +97,12 @@ describe('<ContextView />', async () => {
   function testArrowPlacement (placement, mirror) {
     it(`should mirror the arrow position based on the placement for ${placement}`, async () => {
       const subject = await mount(
-        <ContextView placement={placement} />
+        <ContextView
+          placement={placement}
+          padding="small"
+        >
+          Hello World
+        </ContextView>
       )
       const classname = styles[`arrow--${mirror.split(' ').join('-')}`]
       const contextView = within(subject.getDOMNode())

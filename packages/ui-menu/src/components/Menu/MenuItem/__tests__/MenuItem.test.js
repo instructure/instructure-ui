@@ -109,7 +109,7 @@ describe('<MenuItem />', async () => {
 
     const item = await MenuItemFixture.find(':label(Hello)')
 
-    await item.click()
+    await item.click(null, { clickable: false })
     await item.keyUp('enter')
     await item.keyUp('space')
 

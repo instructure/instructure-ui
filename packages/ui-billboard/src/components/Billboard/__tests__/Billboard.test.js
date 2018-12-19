@@ -98,8 +98,8 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = within(subject.getDOMNode())
+      await billboard.click(null, { clickable: false })
 
-      expect(billboard.click()).to.eventually.throw()
       expect(onClick).to.not.have.been.called()
     })
   })
@@ -128,10 +128,8 @@ describe('<Billboard />', async () => {
         />
       )
       const billboard = within(subject.getDOMNode())
-      const clickable = await billboard.find(':clickable')
-      const event = clickable.click()
+      await billboard.click(null, { clickable: false })
 
-      expect(event).to.eventually.throw()
       expect(onClick).to.not.have.been.called()
     })
   })

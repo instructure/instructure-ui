@@ -104,7 +104,7 @@ describe('<Menu />', async () => {
       const menu = await MenuLocator.find(':label(Settings)')
       const item = await menu.findItem(':label(Account)')
 
-      await item.click()
+      await item.click(null, { clickable: false })
 
       expect(onSelect).to.not.have.been.called()
     })
@@ -428,7 +428,7 @@ describe('<Menu />', async () => {
       const menu = await MenuLocator.find(':label(Parent)')
       const trigger = await menu.findItem(':label(Flyout)')
 
-      await trigger.click()
+      await trigger.click(null, { clickable: false })
 
       const subMenu = await MenuLocator.find(':label(Flyout)')
       const popover = await subMenu.findPopoverContent({ expectEmpty: true })

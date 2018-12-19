@@ -23,12 +23,12 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount, within, find } from '@instructure/ui-test-utils'
 import FormFieldGroup from '../index'
 
 describe('<FormFieldGroup />', async () => {
   it('should render', async () => {
-    const subject = await mount(
+    await mount(
       <FormFieldGroup description="Please enter your full name">
         <label>First: <input /></label>
         <label>Middle: <input /></label>
@@ -36,7 +36,7 @@ describe('<FormFieldGroup />', async () => {
       </FormFieldGroup>
     )
 
-    const formFieldGroup = within(subject.getDOMNode())
+    const formFieldGroup = find('fieldset:label("Please enter your full name")')
     expect(formFieldGroup).to.exist()
   })
 
@@ -71,7 +71,7 @@ describe('<FormFieldGroup />', async () => {
     const fieldset = await formFieldGroup.find('fieldset')
 
     const messagesId = fieldset.getAttribute('aria-describedby')
-    const message = await formFieldGroup.find(`#${messagesId}`)
+    const message = await formFieldGroup.find(`#${messagesId}`, { visible: false })
 
     expect(message.getTextContent()).to.equal('Invalid name')
   })
@@ -88,7 +88,7 @@ describe('<FormFieldGroup />', async () => {
     )
 
     const formFieldGroup = within(subject.getDOMNode())
-    const legend = await formFieldGroup.find(`legend:contains(${description})`)
+    const legend = await formFieldGroup.find(`legend:contains(${description})`, { visible: false })
     expect(legend).to.exist()
   })
 
