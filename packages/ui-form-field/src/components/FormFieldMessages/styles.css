@@ -1,4 +1,9 @@
 .root {
   padding: 0;
   margin: 0;
+  display: block;
+}
+
+.message {
+  display: block;
 }

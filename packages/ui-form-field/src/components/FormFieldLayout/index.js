@@ -121,36 +121,35 @@ export default class FormFieldLayout extends Component {
   }
 
   renderLabel () {
-    const isLegend = this.elementType === 'fieldset'
+    if (this.hasVisibleLabel) {
+      return (
+        <GridCol
+          textAlign={this.props.labelAlign}
+          width={(this.inlineContainerAndLabel) ? 'auto' : 3}
+        >
+          <FormFieldLabel
+            aria-hidden={this.elementType === 'fieldset' ? 'true' : null}>
+            { this.props.label }
+          </FormFieldLabel>
+        </GridCol>
+      )
+    } else if (this.elementType !== 'fieldset') {
+      // to avoid duplicate label/legend content
+      return this.props.label
+    } else {
+      return null
+    }
+  }
 
+  renderLegend () {
+    // note: the legend element must be the first child of a fieldset element for SR
+    // so we render it twice in that case (once for SR-only and one that is visible)
     return (
-      <FormFieldLabel
-        as={isLegend ? 'legend' : undefined}  // eslint-disable-line no-undefined
-      >
+      <ScreenReaderContent as="legend">
         { this.props.label }
-        { isLegend && this.renderScreenReaderMessages() }
-      </FormFieldLabel>
-    )
-  }
-
-  renderVisibleLabel () {
-    return this.hasVisibleLabel ? (
-      <GridCol
-        textAlign={this.props.labelAlign}
-        width={(this.inlineContainerAndLabel) ? 'auto' : 3}
-      >
-        { this.renderLabel() }
-      </GridCol>
-    ) : null
-  }
-
-  renderScreenReaderLabel () {
-    // label with no visible content should render inside GridCol
-    return !this.hasVisibleLabel ? (
-      <ScreenReaderContent>
-        { this.renderLabel() }
+        { this.hasMessages && <FormFieldMessages messages={this.props.messages} /> }
       </ScreenReaderContent>
-    ) : null
+    )
   }
 
   renderMessages () {
@@ -172,14 +171,6 @@ export default class FormFieldLayout extends Component {
     ) : null
   }
 
-  renderScreenReaderMessages () {
-    return this.hasMessages ? (
-      <ScreenReaderContent>
-        <FormFieldMessages messages={this.props.messages} />
-      </ScreenReaderContent>
-    ) : null
-  }
-
   render () {
     const ElementType = this.elementType
 
@@ -194,6 +185,7 @@ export default class FormFieldLayout extends Component {
         className={classnames(classes)}
         aria-describedby={this.hasMessages ? this._messagesId : null}
       >
+        { this.elementType === 'fieldset' && this.renderLegend() }
         <Grid
           rowSpacing="small"
           colSpacing="small"
@@ -201,9 +193,8 @@ export default class FormFieldLayout extends Component {
           {...pickProps(this.props, Grid.propTypes)}
         >
           <GridRow>
-            { this.renderVisibleLabel() }
+            { this.renderLabel() }
             <GridCol width={(this.inlineContainerAndLabel) ? 'auto' : null}>
-              { this.renderScreenReaderLabel() }
               { this.props.children }
             </GridCol>
           </GridRow>

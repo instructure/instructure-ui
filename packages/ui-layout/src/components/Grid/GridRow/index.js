@@ -32,6 +32,7 @@ import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLett
 import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import GridCol from '../GridCol'
 
@@ -46,7 +47,7 @@ parent: Grid
 @themeable(theme, styles)
 export default class GridRow extends Component {
   static propTypes = {
-    children: CustomPropTypes.Children.oneOf([GridCol]),
+    children: CustomPropTypes.Children.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),

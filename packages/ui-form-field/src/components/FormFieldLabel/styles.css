@@ -1,21 +1,19 @@
 /* stylelint-disable selector-max-type */
 
-legend.root,
-label.root {
-  all: initial;
-}
-
+.root.legend,
+label.root,
 .root {
+  all: initial;
   display: block;
 }
 
-legend.root {
+.root.legend {
   display: table;
   width: 100%;
 }
 
 .has-content,
-legend.has-content,
+.has-content.legend,
 label.has-content {
   color: var(--color);
   font-family: var(--fontFamily);
