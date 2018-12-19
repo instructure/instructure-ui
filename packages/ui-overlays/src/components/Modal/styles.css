@@ -1,4 +1,6 @@
 .root {
+  font-family: var(--fontFamily);
+  color: var(--textColor);
   display: flex;
   flex-direction: column;
   position: relative;

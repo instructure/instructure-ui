@@ -180,7 +180,15 @@ class Example extends React.Component {
             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
           </ModalFooter>
         </Modal>
-        <View margin="medium auto none" display="block" width="25rem" height="25rem" borderWidth="large" id="constrainExample"></View>
+        <View
+          background="inverse"
+          margin="medium auto none"
+          display="block"
+          width="25rem"
+          height="25rem"
+          borderWidth="large"
+          id="constrainExample">
+        </View>
       </div>
     )
   }

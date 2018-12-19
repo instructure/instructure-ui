@@ -102,6 +102,29 @@ describe('<Modal />', async () => {
     expect(constrain).to.exist()
   })
 
+  it('should not inherit its parent\'s font color', async () => {
+    await mount(
+      <div style={{color: 'rgb(255, 255, 255)'}}>
+        <Modal
+          open
+          label="Modal Dialog"
+          shouldReturnFocus={false}
+          constrain="parent"
+          theme={{
+            textColor: 'rgb(0, 0, 0)'
+          }}
+        >
+          <ModalBody>Foo Bar Baz</ModalBody>
+        </Modal>
+      </div>
+    )
+
+    const modal = await ModalLocator.find()
+    const body = await modal.findBody()
+
+    expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
+  })
+
   it('should apply the aria attributes', async () => {
     await mount(
       <Modal
