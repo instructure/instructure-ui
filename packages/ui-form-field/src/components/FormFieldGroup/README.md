@@ -113,3 +113,16 @@ example: true
     <Checkbox label="Love to Eat Dessert After Dinner" value="medium" variant="toggle" />
   </FormFieldGroup>
 ```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="a11y" title="Accessibility">
+    <FigureItem>Avoid placeholder text (it creates usability problems by increasing cognitive load, low contrast, lack of screen reader compatibility, etc.)</FigureItem>
+  </Figure>
+</Guidelines>
+```
