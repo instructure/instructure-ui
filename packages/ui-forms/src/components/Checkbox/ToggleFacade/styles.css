@@ -38,6 +38,7 @@
 .facade {
   background: var(--background);
   border-color: var(--borderColor);
+  cursor: pointer;
   display: inline-block;
   user-select: none;
   position: relative;
