@@ -34,3 +34,26 @@ example: true
   <Avatar name="Graham Taylor" />
 </Media>
 ```
+
+```js
+---
+example: true
+---
+<Media 
+  description={
+    <View display="block" margin="0 0 0 x-small">
+      <Heading level="h2">
+        <Link href="#">Clickable Heading</Link>
+      </Heading>
+      <Text 
+        size="x-small" 
+        transform="uppercase" 
+        letterSpacing="expanded"
+      >
+        Something here
+      </Text>
+    </View>
+  }>
+  <SVGIcon src={iconExample} title="love" size="small" color="success" />
+</Media>
+```

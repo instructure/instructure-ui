@@ -54,7 +54,7 @@ class Media extends Component {
     /**
     * the media description
     */
-    description: PropTypes.string,
+    description: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
     /**
     * how should the title and description align
     */

@@ -45,6 +45,30 @@ describe('<Media />', async () => {
     expect(subject.getDOMNode()).to.exist()
   })
 
+  it('should pass down div and its contents via the description property', async () => {
+    const description = (
+      <div>
+        <h2>
+          <a href="https://instructure.design">Clickable Heading</a>
+        </h2>
+        <p>
+          Something here
+        </p>
+      </div>
+    )
+
+    const subject = await mount(
+      <Media
+        description={description}
+      >
+        {image}
+      </Media>
+    )
+
+    const media = within(subject.getDOMNode())
+    expect(await media.find(':contains(Clickable Heading)')).to.exist()
+  })
+
   it('should meet a11y standards', async () => {
     const subject = await mount(
       <Media
