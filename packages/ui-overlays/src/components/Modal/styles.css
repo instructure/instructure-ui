@@ -51,6 +51,7 @@
   height: 100%;
   box-shadow: none;
   border: none;
+  border-radius: 0;
 }
 
 .fullscreenLayout {
