@@ -24,7 +24,6 @@
 
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
-import warning from '@instructure/ui-utils/lib/warning'
 
 let observer
 

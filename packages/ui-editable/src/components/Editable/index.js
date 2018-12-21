@@ -24,7 +24,6 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import contains from '@instructure/ui-utils/lib/dom/contains'
 import deepequal from '@instructure/ui-utils/lib/deepEqual'
 import warning from '@instructure/ui-utils/lib/warning'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'

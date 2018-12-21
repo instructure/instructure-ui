@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import error from '@instructure/ui-utils/lib/error'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import testable from '@instructure/ui-testable'
 

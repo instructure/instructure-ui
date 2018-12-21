@@ -60,19 +60,17 @@ plugins = plugins.concat([
     },
     files: [
       '**/*.md',
-      'packages/*/src/components/*/**/index.js',
-      'packages/*/src/components/**/elements/**/*.js',
-      'packages/*/src/components/*/**/README.md',
-      'packages/*/src/utils/**/*.js',
-      'packages/debounce/src/**/*.js',
-      'packages/ui-themeable/src/**/*.js',
-      'packages/ui-i18n/src/**/*.js',
-      'packages/ui-utils/src/**/*.js',
-      'packages/generate-examples/src/**/*.js'
+      '**/src/components/*/**/index.js',
+      '**/src/utils/**/*.js',
+      '**/ui-themeable/src/**/*.js',
+      '**/ui-i18n/src/**/*.js',
+      '**/ui-utils/src/**/*.js',
+      '**/debounce/src/**/*.js',
+      '**/generate-examples/src/**/*.js'
     ],
     ignore: [
-      'docs/testing-best-practices.md',
-      'packages/**/CHANGELOG.md',
+      '**/*-loader.js',
+      '**/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
       '**/controllers/**',
@@ -87,34 +85,39 @@ plugins = plugins.concat([
       '**/locales/**',
       '**/theme.js',
 
+      // ignore index files that just re-export
       '**/src/index.js',
       '**/src/components/index.js',
       '**/src/utils/index.js',
-      'packages/ui-utils/src/index.js',
-      'packages/ui-utils/src/{react,dom}/index.js',
+      '**/ui-utils/src/index.js',
+      '**/ui-utils/src/{react,dom}/index.js',
 
-      'packages/ui-test-utils/**',
+      // packages to ignore:
+      '**/ui-test-utils/src/**',
+      '**/ui-docs-client/src/**',
+      '**/ui-docs-plugin/src/**',
+      '**/media-capture/src/**',
 
-      'packages/ui-docs-client/src/**',
-      'packages/ui-docs-plugin/src/**',
-      'packages/media-capture/src/**',
+      // deprecated packages and modules:
+      '**/ui-container/**',
+      '**/ui-core/**',
+      '**/ui-elements/src/components/ContextBox/**',
+      '**/ui-forms/src/components/FormField/**',
+      '**/ui-forms/src/components/FormFieldGroup/**',
+      '**/ui-forms/src/utils/FormPropTypes.js',
+      '**/ui-utils/src/i18n/*.js',
+      '**/ui-utils/src/dom/calculateElementPosition.js',
+      '**/ui-utils/src/dom/findTabbable.js',
+      '**/ui-utils/src/dom/focusManager.js',
+      '**/ui-utils/src/dom/scopeTab.js',
+      '**/ui-utils/src/dom/isVisible.js',
+      '**/ui-utils/src/debounce.js',
+      '**/ui-utils/src/uid.js',
+      '**/ui-utils/src/react/containerQuery.js',
+      '**/ui-utils/src/Decimal.js',
 
-      'packages/ui-container/**',
-      'packages/ui-core/**',
-      'packages/ui-elements/src/components/ContextBox/**',
-      'packages/ui-forms/src/components/FormField/**',
-      'packages/ui-forms/src/components/FormFieldGroup/**',
-      'packages/ui-forms/src/utils/FormPropTypes.js',
-
-      'packages/ui-utils/src/i18n/*.js',
-      'packages/ui-utils/src/dom/calculateElementPosition.js',
-      'packages/ui-utils/src/dom/findTabbable.js',
-      'packages/ui-utils/src/dom/focusManager.js',
-      'packages/ui-utils/src/dom/scopeTab.js',
-      'packages/ui-utils/src/dom/isVisible.js',
-      'packages/ui-utils/src/debounce.js',
-      'packages/ui-utils/src/react/containerQuery.js',
-      'packages/ui-utils/src/Decimal.js'
+      // WIP docs:
+      '**/docs/testing-best-practices.md'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas/base'),

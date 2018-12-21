@@ -72,7 +72,9 @@ function makePrompter() {
           scope: (scope && scope.length > 0) ? scope.join(',') : '*'
         })
 
-        commitAnalyzer({}, { commits: [{ hash: '', message }], logger: console })
+        const cwd = process.cwd()
+
+        commitAnalyzer.analyzeCommits({}, { cwd, commits: [{ hash: '', message }], logger: console })
           .then((type) => {
             /* eslint-disable no-console */
             console.log(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
@@ -84,6 +86,9 @@ function makePrompter() {
           .catch((error) => {
             console.error(error)
           })
+      })
+      .catch((error) => {
+        console.error(error)
       })
   }
 }

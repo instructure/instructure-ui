@@ -111,7 +111,7 @@ describe('generateExamples', () => {
     })
   })
 
-  describe('render functions', async () => {
+  describe('render functions', () => {
     const permutations = {
       variant: ['circle', 'rectangle'],
       show: [true, false],
@@ -286,7 +286,7 @@ describe('generateExamples', () => {
         })
       })
 
-      it('example props from the config should override example props from the options when passed to render example function', async () => {
+      it('example props from the config should override example props from the options when passed to render example function', () => {
         const size = '20rem'
         const rectangleBackground = 'default'
         const circleBackground = 'inverse'

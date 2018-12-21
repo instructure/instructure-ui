@@ -44,7 +44,7 @@ describe('<Focusable />', async () => {
   it('should call children function with focused when element receives focus', async () => {
     const renderSpy = spy()
 
-    const subject = await mount(
+    await mount(
       <div>
         <Focusable>
           {(args) => {
