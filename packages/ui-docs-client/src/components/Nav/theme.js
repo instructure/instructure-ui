@@ -22,11 +22,13 @@
  * SOFTWARE.
  */
 
-export default function ({ borders, colors }) {
+export default function ({ borders, colors, spacing }) {
   return {
-    borderWidth: `${borders.widthMedium}`,
-    borderColor: `${colors.borderBrand}`,
-    linkPadding: '0.25rem 0 0.25rem 0.875rem',
-    linkMargin: '0.375rem 0 0.375rem 0.375rem'
+    borderWidth: borders.widthMedium,
+    borderColor: colors.borderBrand,
+    linkPadding: spacing.xSmall,
+    linkMargin: '0.375rem 0 0.375rem 0.375rem',
+    linkColor: colors.textDarkest,
+    linkColorSelected: colors.link
   }
 }

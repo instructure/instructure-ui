@@ -24,40 +24,14 @@
 }
 
 .link {
-  display: inline-block;
-  vertical-align: middle;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  width: 100%;
-  transition: all 0.15s ease;
-
-  &:first-child {
-    flex: 1;
-  }
-}
-
-.link.level--0 {
-  padding: var(--linkPadding);
-  margin: var(--linkMargin);
-
-  &:last-child {
-    padding-bottom: 0;
-  }
-}
-
-.link.level--1 {
-  padding: var(--linkPadding);
+  transition: all 0.2s;
+  padding-inline-start: var(--linkPadding);
   margin: var(--linkMargin);
 }
 
-.link.level--2 {
-  padding: var(--linkPadding);
-  margin: var(--linkMargin);
-
-  &:last-child {
-    padding-bottom: 0;
-  }
+.level--0,
+.level--1,
+.level--2 {
 }
 
 .categoryLink {

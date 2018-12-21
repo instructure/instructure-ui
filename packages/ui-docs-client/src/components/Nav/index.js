@@ -28,9 +28,9 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 
+import Button from '@instructure/ui-buttons/es/components/Button'
 import Text from '@instructure/ui-elements/lib/components/Text'
 import TextInput from '@instructure/ui-forms/lib/components/TextInput'
-import Link from '@instructure/ui-elements/lib/components/Link'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
@@ -106,10 +106,9 @@ export default class Nav extends Component {
     return (query && typeof query.test === 'function') ? query.test(str) : true
   }
 
-  linkTheme (isSelected) {
+  buttonTheme (isSelected) {
     return {
-      color: isSelected ? '#0084D1' : '#333',
-      textDecoration: 'none'
+      linkColor: isSelected ? this.theme.linkColorSelected : this.theme.linkColor
     }
   }
 
@@ -192,9 +191,9 @@ export default class Nav extends Component {
           [styles.selectedLink]: docSelected
         })}
       >
-        <Link theme={this.linkTheme(docSelected)} href={`#${docId}`}>
+        <Button href={`#${docId}`} variant="link" theme={this.buttonTheme(docSelected)}>
           {docs[docId].title}
-        </Link>
+        </Button>
       </div>
     )
   }
@@ -299,9 +298,9 @@ export default class Nav extends Component {
               [styles['level--0']]: true
             })}
           >
-            <Link theme={this.linkTheme(isSelected)} href={`#${themeKey}`}>
+            <Button theme={this.buttonTheme(isSelected)} href={`#${themeKey}`} variant="link">
               {themeKey}
-            </Link>
+            </Button>
           </div>
         )
       })

@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Heading from '@instructure/ui-elements/es/components/Heading'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import themeable from '@instructure/ui-themeable'
 import { darken } from '@instructure/ui-themeable/lib/utils/color'
@@ -47,30 +48,14 @@ export default class Header extends Component {
           <PandaLogo />
         </div>
         <div className={styles.banner} role="banner">
-          <Link
-            theme={{
-              color: '#0084D1',
-              hoverColor: darken('#0084D1', 10),
-              textDecoration: 'none',
-              hoverTextDecoration: 'underline'
-            }}
-            href="#index"
-          >
-            <h1 className={styles.heading}>
+          <Heading level="h2" as="h1">
+            <Link href="#index">
               {this.props.name || 'Documentation'}
-            </h1>
-          </Link>
+            </Link>
+          </Heading>
           { this.props.version && (
-            <div className={styles.version}>
-              <Link
-                theme={{
-                  color: '#005A8F',
-                  hoverColor: darken('#005A8F', 10),
-                  textDecoration: 'none',
-                  hoverTextDecoration: 'underline'
-                }}
-                href="#CHANGELOG"
-              >
+            <div>
+              <Link href="#CHANGELOG">
                 v{this.props.version}
               </Link>
             </div>
