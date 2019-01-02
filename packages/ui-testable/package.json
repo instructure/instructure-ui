@@ -25,6 +25,9 @@
     "@instructure/ui-test-utils": "^5",
     "prop-types": "^15.6.2"
   },
+  "dependencies": {
+    "@instructure/ui-decorator": "^5"
+  },
   "peerDependencies": {
     "react": "^0.14.9 || ^15.0.0 || ^16.0.0",
     "react-dom": "^0.14.9 || ^15.0.0 || ^16.0.0"

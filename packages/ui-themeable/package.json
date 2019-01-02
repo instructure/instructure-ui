@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "@instructure/uid": "^5",
+    "@instructure/ui-decorator": "^5",
     "@instructure/ui-stylesheet": "^5",
     "@instructure/ui-utils": "^5",
     "babel-runtime": "^6",

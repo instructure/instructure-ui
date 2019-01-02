@@ -24,7 +24,7 @@
 
 import PropTypes from 'prop-types'
 
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
+import decorator from '@instructure/ui-decorator'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import warning from '@instructure/ui-utils/lib/warning'
@@ -88,179 +88,139 @@ import { toRules } from './utils/transformCss'
 
 const emptyObj = {}
 
-export default function themeable (theme, styles = {}) {
-  return function (ComposedComponent) {
-    const displayName = getDisplayName(ComposedComponent)
-
-    const contextKey = Symbol(displayName)
-    const componentId = uid(displayName)
-
-    const template = (typeof styles.template === 'function') ? styles.template : () => {
-      warning(
-        false,
-        '[themeable] Invalid styles for: %O',
-        displayName
-      )
-      return ''
+const themeable = decorator((ComposedComponent, theme, styles = {}) => {
+  const displayName = ComposedComponent.displayName || ComposedComponent.name
+  const componentId = ComposedComponent.componentId || uid(displayName)
+  const contextKey = Symbol(componentId)
+  const template = (typeof styles.template === 'function') ? styles.template : () => {
+    warning(
+      false,
+      '[themeable] Invalid styles for: %O',
+      displayName
+    )
+    return ''
+  }
+  registerComponentTheme(contextKey, theme)
+  const getContext = function (context) {
+    const themeContext = getThemeContext(context)
+    return themeContext || emptyObj
+  }
+  const getThemeFromContext = function (context) {
+    const { theme } = getContext(context)
+    if (theme && theme[contextKey]) {
+      return {
+        ...theme[contextKey]
+      }
+    } else {
+      return emptyObj
     }
-
-    registerComponentTheme(contextKey, theme)
-
-    const getContext = function (context) {
-      const themeContext = getThemeContext(context)
-      return themeContext || emptyObj
+  }
+  const generateThemeForContextKey = function (themeKey, overrides) {
+    return generateComponentTheme(contextKey, themeKey, overrides)
+  }
+  class ThemeableComponent extends ComposedComponent {
+    _themeCache = null
+    _instanceId = uid(displayName)
+    static componentId = componentId
+    static theme = contextKey
+    static contextTypes = {
+      ...ComposedComponent.contextTypes,
+      ...ThemeContextTypes
     }
-
-    const getThemeFromContext = function (context) {
-      const { theme } = getContext(context)
-      if (theme && theme[contextKey]) {
-        return {
-          ...theme[contextKey]
-        }
-      } else {
-        return emptyObj
-      }
+    static propTypes = {
+      ...ComposedComponent.propTypes,
+      theme: PropTypes.object // eslint-disable-line react/forbid-prop-types
     }
-
-    const generateThemeForContextKey = function (themeKey, overrides) {
-      return generateComponentTheme(contextKey, themeKey, overrides)
-    }
-
-    class ThemeableComponent extends ComposedComponent {
-
-      _themeCache = null
-      _instanceId = uid(displayName)
-
-      static displayName = displayName
-      // For testing purposes
-      static componentId = componentId
-
-      static theme = contextKey
-
-      static contextTypes = {
-        ...ComposedComponent.contextTypes,
-        ...ThemeContextTypes
-      }
-
-      static propTypes = {
-        ...ComposedComponent.propTypes,
-        theme: PropTypes.object // eslint-disable-line react/forbid-prop-types
-      }
-
-      static generateTheme = generateThemeForContextKey
-
-      componentWillMount () {
-        if (!StyleSheet.mounted(componentId)) {
-          const defaultTheme = generateThemeForContextKey()
-          const cssText = getCssText(template, defaultTheme, componentId)
-          StyleSheet.mount(componentId, toRules(cssText))
-        }
-
-        if (super.componentWillMount) {
-          super.componentWillMount()
-        }
-      }
-
-      componentDidMount () {
-        this.applyTheme()
-
-        setTextDirection()
-
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
-      }
-
-      shouldComponentUpdate (nextProps, nextState, nextContext) {
-        const themeContextWillChange = !deepEqual(getThemeContext(this.context), getThemeContext(nextContext))
-        if (themeContextWillChange) return true
-
-        if (super.shouldComponentUpdate) {
-          return super.shouldComponentUpdate(nextProps, nextState, nextContext)
-        }
-
-        return (
-          !shallowEqual(this.props, nextProps) ||
-          !shallowEqual(this.state, nextState) ||
-          !shallowEqual(this.context, nextContext)
-        )
-      }
-
-      componentWillUpdate (nextProps, nextState, nextContext) {
-        if (!deepEqual(nextProps.theme, this.props.theme) ||
-          !deepEqual(getThemeFromContext(nextContext), getThemeFromContext(this.context))) {
-          this._themeCache = null
-        }
-
-        if (super.componentWillUpdate) {
-          super.componentWillUpdate(nextProps, nextState, nextContext)
-        }
-      }
-
-      componentDidUpdate (prevProps, prevState, prevContext) {
-        this.applyTheme()
-
-        if (super.componentDidUpdate) {
-          super.componentDidUpdate(prevProps, prevState, prevContext)
-        }
-      }
-
-      applyTheme (DOMNode) {
-        if (isEmpty(this.theme)) {
-          return
-        }
-
+    static generateTheme = generateThemeForContextKey
+    componentWillMount () {
+      if (!StyleSheet.mounted(componentId)) {
         const defaultTheme = generateThemeForContextKey()
-
-        applyVariablesToNode(
-          DOMNode || findDOMNode(this), // eslint-disable-line react/no-find-dom-node
-          this.theme,
-          defaultTheme,
-          componentId,
-          template, // for IE 11
-          this.scope // for IE 11
-        )
+        const cssText = getCssText(template, defaultTheme, componentId)
+        StyleSheet.mount(componentId, toRules(cssText))
       }
-
-      get scope () {
-        return this._instanceId
+      if (super.componentWillMount) {
+        super.componentWillMount()
       }
-
-      get theme () {
-        if (this._themeCache !== null) {
-          return this._themeCache
-        }
-
-        const { immutable } = getContext(this.context)
-
-        let theme = getThemeFromContext(this.context)
-
-        if (this.props.theme) {
-          if (!theme) {
-            theme = this.props.theme
-          } else if (immutable) {
-            warning(
-              false,
-              '[themeable] Parent theme is immutable. Cannot apply theme: %O',
-              this.props.theme
-            )
-          } else {
-            theme = isEmpty(theme)
-              ? this.props.theme
-              : {...theme, ...this.props.theme}
-          }
-        }
-
-        // pass in the component theme as overrides
-        this._themeCache = generateThemeForContextKey(null, theme)
-
+    }
+    componentDidMount () {
+      this.applyTheme()
+      setTextDirection()
+      if (super.componentDidMount) {
+        super.componentDidMount()
+      }
+    }
+    shouldComponentUpdate (nextProps, nextState, nextContext) {
+      const themeContextWillChange = !deepEqual(getThemeContext(this.context), getThemeContext(nextContext))
+      if (themeContextWillChange) return true
+      if (super.shouldComponentUpdate) {
+        return super.shouldComponentUpdate(nextProps, nextState, nextContext)
+      }
+      return (
+        !shallowEqual(this.props, nextProps) ||
+        !shallowEqual(this.state, nextState) ||
+        !shallowEqual(this.context, nextContext)
+      )
+    }
+    componentWillUpdate (nextProps, nextState, nextContext) {
+      if (!deepEqual(nextProps.theme, this.props.theme) ||
+        !deepEqual(getThemeFromContext(nextContext), getThemeFromContext(this.context))) {
+        this._themeCache = null
+      }
+      if (super.componentWillUpdate) {
+        super.componentWillUpdate(nextProps, nextState, nextContext)
+      }
+    }
+    componentDidUpdate (prevProps, prevState, prevContext) {
+      this.applyTheme()
+      if (super.componentDidUpdate) {
+        super.componentDidUpdate(prevProps, prevState, prevContext)
+      }
+    }
+    applyTheme (DOMNode) {
+      if (isEmpty(this.theme)) {
+        return
+      }
+      const defaultTheme = generateThemeForContextKey()
+      applyVariablesToNode(
+        DOMNode || findDOMNode(this), // eslint-disable-line react/no-find-dom-node
+        this.theme,
+        defaultTheme,
+        componentId,
+        template, // for IE 11
+        this.scope // for IE 11
+      )
+    }
+    get scope () {
+      return `${componentId}__${this._instanceId}`
+    }
+    get theme () {
+      if (this._themeCache !== null) {
         return this._themeCache
       }
+      const { immutable } = getContext(this.context)
+      let theme = getThemeFromContext(this.context)
+      if (this.props.theme) {
+        if (!theme) {
+          theme = this.props.theme
+        } else if (immutable) {
+          warning(
+            false,
+            '[themeable] Parent theme is immutable. Cannot apply theme: %O',
+            this.props.theme
+          )
+        } else {
+          theme = isEmpty(theme)
+            ? this.props.theme
+            : {...theme, ...this.props.theme}
+        }
+      }
+      // pass in the component theme as overrides
+      this._themeCache = generateThemeForContextKey(null, theme)
+      return this._themeCache
     }
-
-    return ThemeableComponent
   }
-}
+  return ThemeableComponent
+})
 
 /**
 * Utility to generate a theme for all themeable components that have been registered.
@@ -271,3 +231,5 @@ export default function themeable (theme, styles = {}) {
 * @return {Object} A theme config to use with `<ApplyTheme />`
 */
 themeable.generateTheme = generateTheme
+
+export default themeable

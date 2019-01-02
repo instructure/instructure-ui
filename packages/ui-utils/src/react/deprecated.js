@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import decorator from '@instructure/ui-decorator'
 
-import getDisplayName from './getDisplayName'
 import warning from '../warning'
 
 /**
@@ -50,44 +50,37 @@ import warning from '../warning'
 * @param {string} message
 * @return {function} React component with deprecated props behavior
 */
-export default function deprecated (version, oldProps, message) {
-  return function (ComposedComponent) {
+export default decorator((ComposedComponent, version, oldProps, message) => {
+  class DeprecatedComponent extends ComposedComponent {}
 
-    const displayName = getDisplayName(ComposedComponent)
-
-    class DeprecatedComponent extends ComposedComponent {
-      static displayName = displayName
-    }
-
-    if (process.env.NODE_ENV !== 'production') {
-      DeprecatedComponent.prototype.componentDidMount = function () {
-        if (oldProps) {
-          warnDeprecatedProps(displayName, version, this.props, oldProps, message)
-        } else {
-          warnDeprecatedComponent(version, displayName, message)
-        }
-
-        if (ComposedComponent.prototype.componentDidMount) {
-          ComposedComponent.prototype.componentDidMount.call(this)
-        }
+  if (process.env.NODE_ENV !== 'production') {
+    DeprecatedComponent.prototype.componentDidMount = function () {
+      if (oldProps) {
+        warnDeprecatedProps(ComposedComponent.displayName, version, this.props, oldProps, message)
+      } else {
+        warnDeprecatedComponent(version, ComposedComponent.displayName, message)
       }
 
-      DeprecatedComponent.prototype.componentWillReceiveProps = function(nextProps, nextContext) {
-        if (oldProps) {
-          warnDeprecatedProps(displayName, version, nextProps, oldProps, message)
-        } else {
-          warnDeprecatedComponent(version, displayName, message)
-        }
-
-        if (ComposedComponent.prototype.componentWillReceiveProps) {
-          ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
-        }
+      if (ComposedComponent.prototype.componentDidMount) {
+        ComposedComponent.prototype.componentDidMount.call(this)
       }
     }
 
-    return DeprecatedComponent
+    DeprecatedComponent.prototype.componentWillReceiveProps = function(nextProps, nextContext) {
+      if (oldProps) {
+        warnDeprecatedProps(ComposedComponent.displayName, version, nextProps, oldProps, message)
+      } else {
+        warnDeprecatedComponent(version, ComposedComponent.displayName, message)
+      }
+
+      if (ComposedComponent.prototype.componentWillReceiveProps) {
+        ComposedComponent.prototype.componentWillReceiveProps.call(this, nextProps, nextContext)
+      }
+    }
   }
-}
+
+  return DeprecatedComponent
+})
 
 /**
  *

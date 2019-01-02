@@ -24,16 +24,26 @@
 
 /**
  * ---
- * category: utilities/react
+ * category: utilities
  * ---
- * Get the displayName of a React component.
+ * Wraps (decorates) a React component to add additional functionality
  *
- * For [themeable](#themeable) components defined as ES6 classes, the displayName can
- * be added via [babel plugin](#babel-plugin-transform-class-display-name).
- *
- * @param {ReactComponent|String} Component
- * @returns {String} the component displayName
+ * @module decorator
+ * @param {Function} decorator a function that returns a decorated component
+ * @returns {Class} a decorated component class
  */
-export default function getDisplayName (Component) {
-  return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
+export default function decorator (decorate) {
+  return (...args) => {
+    return (ComposedComponent) => {
+      if (typeof decorate === 'function') {
+        const displayName = ComposedComponent.displayName || ComposedComponent.name
+        const DecoratedComponent = decorate(ComposedComponent, ...args)
+        DecoratedComponent.displayName = displayName
+        DecoratedComponent.componentId = ComposedComponent.componentId || DecoratedComponent.componentId
+        return DecoratedComponent
+      } else {
+        return ComposedComponent
+      }
+    }
+  }
 }

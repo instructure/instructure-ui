@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import decorator from '@instructure/ui-decorator'
 
-import getDisplayName from './getDisplayName'
 import warning from '../warning'
 
 /**
@@ -47,41 +47,33 @@ import warning from '../warning'
 * @param {string} message
 * @return {function} React component flagged as experimental
 */
-export default function experimental (experimentalProps, message) {
-  return function (ComposedComponent) {
-    const displayName = getDisplayName(ComposedComponent)
-
-    class ExperimentalComponent extends ComposedComponent {
-      static displayName = displayName
-
-      componentDidMount () {
-        if (experimentalProps) {
-          warnExperimentalProps(displayName, this.props, experimentalProps, message)
-        } else {
-          warnExperimentalComponent(displayName, message)
-        }
-
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
+export default decorator((ComposedComponent, experimentalProps, message) => {
+  return class ExperimentalComponent extends ComposedComponent {
+    componentDidMount () {
+      if (experimentalProps) {
+        warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
+      } else {
+        warnExperimentalComponent(ComposedComponent.displayName, message)
       }
 
-      componentWillReceiveProps (nextProps) {
-        if (experimentalProps) {
-          warnExperimentalProps(displayName, nextProps, experimentalProps, message)
-        } else {
-          warnExperimentalComponent(displayName, message)
-        }
-
-        if (super.componentWillReceiveProps) {
-          super.componentWillReceiveProps(nextProps)
-        }
+      if (super.componentDidMount) {
+        super.componentDidMount()
       }
     }
 
-    return ExperimentalComponent
+    componentWillReceiveProps (nextProps) {
+      if (experimentalProps) {
+        warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
+      } else {
+        warnExperimentalComponent(ComposedComponent.displayName, message)
+      }
+
+      if (super.componentWillReceiveProps) {
+        super.componentWillReceiveProps(nextProps)
+      }
+    }
   }
-}
+})
 
 function warnExperimentalProps (displayName, props, experimentalProps, message = '') {
   experimentalProps.forEach((experimentalProp) => {

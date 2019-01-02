@@ -24,72 +24,58 @@
 
 import { findDOMNode } from 'react-dom'
 
-function testable () {
-  return function (ComposedComponent) {
-    const displayName = ComposedComponent.displayName || ComposedComponent.name
-    const locator = {
-      attribute: 'data-uid',
-      value: displayName
-    }
-    const selector = `[${locator.attribute}~="${locator.value}"]`
+import decorator from '@instructure/ui-decorator'
 
-    class TestableComponent extends ComposedComponent {
-      static displayName = displayName
-      static selector = selector
-
-      componentDidMount (...args) {
-        if (super.componentDidMount) {
-          super.componentDidMount(...args)
-        }
-        this.appendLocatorAttribute()
-      }
-
-      componentDidUpdate (...args) {
-        if (super.componentDidUpdate) {
-          super.componentDidUpdate(...args)
-        }
-        this.appendLocatorAttribute()
-      }
-
-      componentWillUnmount (...args) {
-        this._testableUnmounted = true
-        if (super.componentWillUnmount) {
-          super.componentWillUnmount(...args)
-        }
-        clearTimeout(this.locatorTimeout)
-      }
-
-      appendLocatorAttribute () {
-        this.locatorTimeout = setTimeout(() => {
-          let node
-
-          if (this._testableUnmounted) {
-            return
-          }
-
-          try {
-            // Use this.DOMNode for components that render as non-native Portals...
-            node = findDOMNode(this) || this.DOMNode
-          } catch (e) {
-            console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
-          }
-
-          if (node && node.getAttribute) {
-            const attribute = node.getAttribute(locator.attribute)
-            const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
-
-            if (!values.includes(locator.value)) {
-              values.push(locator.value)
-            }
-
-            node.setAttribute(locator.attribute, values.join(' '))
-          }
-        })
-      }
-    }
-
-    return TestableComponent
+export default decorator((ComposedComponent) => {
+  const displayName = ComposedComponent.displayName || ComposedComponent.name
+  const locator = {
+    attribute: 'data-uid',
+    value: displayName
   }
-}
-
-export default testable
+  const selector = `[${locator.attribute}~="${locator.value}"]`
+  class TestableComponent extends ComposedComponent {
+    static selector = selector
+    componentDidMount (...args) {
+      if (super.componentDidMount) {
+        super.componentDidMount(...args)
+      }
+      this.appendLocatorAttribute()
+    }
+    componentDidUpdate (...args) {
+      if (super.componentDidUpdate) {
+        super.componentDidUpdate(...args)
+      }
+      this.appendLocatorAttribute()
+    }
+    componentWillUnmount (...args) {
+      this._testableUnmounted = true
+      if (super.componentWillUnmount) {
+        super.componentWillUnmount(...args)
+      }
+      clearTimeout(this.locatorTimeout)
+    }
+    appendLocatorAttribute () {
+      this.locatorTimeout = setTimeout(() => {
+        let node
+        if (this._testableUnmounted) {
+          return
+        }
+        try {
+          // Use this.DOMNode for components that render as non-native Portals...
+          node = findDOMNode(this) || this.DOMNode
+        } catch (e) {
+          console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
+        }
+        if (node && node.getAttribute) {
+          const attribute = node.getAttribute(locator.attribute)
+          const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
+          if (!values.includes(locator.value)) {
+            values.push(locator.value)
+          }
+          node.setAttribute(locator.attribute, values.join(' '))
+        }
+      })
+    }
+  }
+  return TestableComponent
+})

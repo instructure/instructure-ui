@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
+import decorator from '@instructure/ui-decorator'
 
 import { TextDirectionContextTypes, getTextDirectionContext, DIRECTION } from './TextDirectionContextTypes'
 import getTextDirection from './utils/getTextDirection'
@@ -55,43 +55,36 @@ import getTextDirection from './utils/getTextDirection'
 *
 * @return {function} composes the bidirectional component.
 */
-export default function bidirectional () {
-  return function (ComposedComponent) {
-    const displayName = getDisplayName(ComposedComponent)
-    class BidirectionalComponent extends ComposedComponent {
-      static displayName = displayName
-
-      static propTypes = {
-        ...ComposedComponent.propTypes,
-        dir: PropTypes.oneOf(Object.values(DIRECTION))
-      }
-
-      static contextTypes = {
-        ...ComposedComponent.contextTypes,
-        ...TextDirectionContextTypes
-      }
-
-      _defaultDirection = getTextDirection()
-
-      get dir () {
-        const context = getTextDirectionContext(this.context) || {}
-
-        return context.dir  ||
-          this.props.dir ||
-          this._defaultDirection
-      }
-
-      get rtl () {
-        return this.dir === DIRECTION.rtl
-      }
-
-      get ltr () {
-        return this.dir === DIRECTION.ltr
-      }
+export default decorator((ComposedComponent) => {
+  return class BidirectionalComponent extends ComposedComponent {
+    static propTypes = {
+      ...ComposedComponent.propTypes,
+      dir: PropTypes.oneOf(Object.values(DIRECTION))
     }
 
-    return BidirectionalComponent
+    static contextTypes = {
+      ...ComposedComponent.contextTypes,
+      ...TextDirectionContextTypes
+    }
+
+    _defaultDirection = getTextDirection()
+
+    get dir () {
+      const context = getTextDirectionContext(this.context) || {}
+
+      return context.dir  ||
+        this.props.dir ||
+        this._defaultDirection
+    }
+
+    get rtl () {
+      return this.dir === DIRECTION.rtl
+    }
+
+    get ltr () {
+      return this.dir === DIRECTION.ltr
+    }
   }
-}
+})
 
 export { DIRECTION } from './TextDirectionContextTypes'

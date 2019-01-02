@@ -21,19 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-/**
- * ---
- * category: utilities/react
- * ---
- * Get the displayName of a React component.
- *
- * For [themeable](#themeable) components defined as ES6 classes, the displayName can
- * be added via [babel plugin](#babel-plugin-transform-class-display-name).
- *
- * @param {ReactComponent|String} Component
- * @returns {String} the component displayName
- */
-export default function getDisplayName (Component) {
-  return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
-}
+export default from './decorator'

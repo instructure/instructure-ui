@@ -46,8 +46,7 @@ describe('@themeable', async () => {
     root: 'ThemeableComponent__root'
   }
 
-  @themeable(theme, styles)
-  class ThemeableComponent extends React.Component {
+  class ExampleComponent extends React.Component {
     render () {
       return (
         <div className={styles.root} data-scope={this.scope}>
@@ -57,12 +56,14 @@ describe('@themeable', async () => {
     }
   }
 
+  const ThemeableComponent = themeable(theme, styles)(ExampleComponent)
+
   it('generates a valid component scope', async () => { // for IE/Edge
     const subject = await mount(<ThemeableComponent />)
     const scope = subject.getDOMNode().getAttribute('data-scope')
 
     expect(scope).to.exist()
-    expect(scope).to.include('ThemeableComponent')
+    expect(scope).to.include('ExampleComponent')
   })
 
   it('allows configuration through props', async () => {

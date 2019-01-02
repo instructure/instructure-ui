@@ -67,7 +67,8 @@ plugins = plugins.concat([
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
       '**/generate-examples/src/**/*.js',
-      '**/uid/src/**/*.js'
+      '**/uid/src/**/*.js',
+      '**/ui-decorator/src/**/*.js'
     ],
     ignore: [
       '**/*-loader.js',

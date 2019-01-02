@@ -25,12 +25,12 @@
 /* istanbul ignore file */
 
 import PropTypes from 'prop-types'
+import decorator from '@instructure/ui-decorator'
 
 import addResizeListener from '../dom/addResizeListener'
 import debounce from '../debounce'
 import { warnDeprecatedComponent } from '../react/deprecated'
 import findDOMNode from '../dom/findDOMNode'
-import getDisplayName from '../react/getDisplayName'
 import px from '../px'
 
 /**
@@ -56,89 +56,86 @@ import px from '../px'
  * @param {Object} query
  * @returns {Function} a function that creates an element with containerQuery behavior
  */
-export default function containerQuery (query) {
+export default decorator((ComposedComponent, query) => {
   const getSelectorMap = function (el) {
     return query && parseQuery(query, el)
   }
 
-  return function (ComposedComponent) {
-    return class extends ComposedComponent {
-      static displayName = getDisplayName(ComposedComponent)
-      static getSelectorMap = getSelectorMap
+  return class extends ComposedComponent {
+    static getSelectorMap = getSelectorMap
 
-      static propTypes = {
-        ...ComposedComponent.propTypes,
-        onSizeChange: PropTypes.func
+    static propTypes = {
+      ...ComposedComponent.propTypes,
+      onSizeChange: PropTypes.func
+    }
+
+    updateAttributes = (size) => {
+      if (this._size && (this._size.width === size.width && this._size.height === size.height)) {
+        return
       }
 
-      updateAttributes = (size) => {
-        if (this._size && (this._size.width === size.width && this._size.height === size.height)) {
-          return
-        }
+      this._size = size
 
-        this._size = size
-
-        if (typeof this.props.onSizeChange === 'function') {
-          this.props.onSizeChange(size)
-        }
-
-        const container = findDOMNode(this)
-
-        if (typeof getSelectorMap(container) !== 'function') {
-          return
-        }
-        const selectorMap = getSelectorMap(container)(size)
-
-        // eslint-disable-next-line no-restricted-syntax
-        for (const [selectorName, isOn] of toPairs(selectorMap)) {
-          if (isOn) {
-            container.setAttribute(`data-${selectorName}`, '')
-          } else {
-            container.removeAttribute(`data-${selectorName}`)
-          }
-        }
+      if (typeof this.props.onSizeChange === 'function') {
+        this.props.onSizeChange(size)
       }
 
-      componentDidMount () {
-        warnDeprecatedComponent('5.0.0', 'containerQuery', 'Use the `Responsive` component instead.')
+      const container = findDOMNode(this)
 
-        const node = findDOMNode(this)
-
-        const size = {
-          width: node.offsetWidth,
-          height: node.offsetHeight
-        }
-
-        this._debounced = debounce(this.updateAttributes, 100, {leading: false, trailing: true})
-        this._resizeListener = addResizeListener(node, this._debounced)
-
-        this.updateAttributes(size)
-
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
+      if (typeof getSelectorMap(container) !== 'function') {
+        return
       }
+      const selectorMap = getSelectorMap(container)(size)
 
-      componentWillUnmount () {
-        if (this._resizeListener) {
-          this._resizeListener.remove()
+      // eslint-disable-next-line no-restricted-syntax
+      for (const [selectorName, isOn] of toPairs(selectorMap)) {
+        if (isOn) {
+          container.setAttribute(`data-${selectorName}`, '')
+        } else {
+          container.removeAttribute(`data-${selectorName}`)
         }
-
-        if (this._debounced) {
-          this._debounced.cancel()
-        }
-
-        if (super.componentWillUnmount) {
-          super.componentWillUnmount()
-        }
-      }
-
-      get size () {
-        return this._size
       }
     }
+
+    componentDidMount () {
+      warnDeprecatedComponent('5.0.0', 'containerQuery', 'Use the `Responsive` component instead.')
+
+      const node = findDOMNode(this)
+
+      const size = {
+        width: node.offsetWidth,
+        height: node.offsetHeight
+      }
+
+      this._debounced = debounce(this.updateAttributes, 100, {leading: false, trailing: true})
+      this._resizeListener = addResizeListener(node, this._debounced)
+
+      this.updateAttributes(size)
+
+      if (super.componentDidMount) {
+        super.componentDidMount()
+      }
+    }
+
+    componentWillUnmount () {
+      if (this._resizeListener) {
+        this._resizeListener.remove()
+      }
+
+      if (this._debounced) {
+        this._debounced.cancel()
+      }
+
+      if (super.componentWillUnmount) {
+        super.componentWillUnmount()
+      }
+    }
+
+    get size () {
+      return this._size
+    }
   }
-}
+})
 
 function toPairs (obj) {
   return Object.keys(obj).map((key) => [key, obj[key]])

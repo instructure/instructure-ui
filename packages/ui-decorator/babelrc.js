@@ -22,18 +22,10 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * category: utilities/react
- * ---
- * Get the displayName of a React component.
- *
- * For [themeable](#themeable) components defined as ES6 classes, the displayName can
- * be added via [babel plugin](#babel-plugin-transform-class-display-name).
- *
- * @param {ReactComponent|String} Component
- * @returns {String} the component displayName
- */
-export default function getDisplayName (Component) {
-  return typeof Component === 'string' ? Component : (Component.displayName || Component.name)
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }

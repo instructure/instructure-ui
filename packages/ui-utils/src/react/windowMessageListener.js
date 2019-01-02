@@ -21,8 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import decorator from '@instructure/ui-decorator'
 
-import getDisplayName from './getDisplayName'
 import ownerWindow from '../dom/ownerWindow'
 /**
  * ---
@@ -37,55 +37,51 @@ import ownerWindow from '../dom/ownerWindow'
  * @param {Function} validSource an optional function that would restrict message handling to a specified source.
  * @returns {Function} a function that decorates a React component with the behavior
  */
-export default function windowMessageListener (messageHandler, validSource) {
-  return function (ComposedComponent) {
-    return class extends ComposedComponent {
-      static displayName = getDisplayName(ComposedComponent)
+ export default decorator((ComposedComponent, messageHandler, validSource) => {
+   return class extends ComposedComponent {
+     static postMessage = function (target, message, origin) {
+       target.postMessage(message, origin)
+     }
 
-      static postMessage = function (target, message, origin) {
-        target.postMessage(message, origin)
-      }
+     componentDidMount () {
+       const win = ownerWindow(this)
 
-      componentDidMount () {
-        const win = ownerWindow(this)
+       win.addEventListener('message', this.handleMessage, false)
 
-        win.addEventListener('message', this.handleMessage, false)
+       if (super.componentDidMount) {
+         super.componentDidMount()
+       }
+     }
 
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
-      }
+     componentWillUnmount () {
+       const win = ownerWindow(this)
+       win.removeEventListener('message', this.handleMessage, false)
 
-      componentWillUnmount () {
-        const win = ownerWindow(this)
-        win.removeEventListener('message', this.handleMessage, false)
+       if (super.componentDidMount) {
+         super.componentDidMount()
+       }
+     }
 
-        if (super.componentDidMount) {
-          super.componentDidMount()
-        }
-      }
+     sourceIsValid (eventSource) {
+       const expectedSource = (typeof validSource === 'function') ? validSource.call(this) : validSource
+       if (!expectedSource) {
+         return true
+       } else if (eventSource) {
+         const sourceFrame = eventSource.frameElement
+         const sourceName = sourceFrame ? sourceFrame.getAttribute('name') : null
+         return sourceName === expectedSource
+       } else {
+         return false
+       }
+     }
 
-      sourceIsValid (eventSource) {
-        const expectedSource = (typeof validSource === 'function') ? validSource.call(this) : validSource
-        if (!expectedSource) {
-          return true
-        } else if (eventSource) {
-          const sourceFrame = eventSource.frameElement
-          const sourceName = sourceFrame ? sourceFrame.getAttribute('name') : null
-          return sourceName === expectedSource
-        } else {
-          return false
-        }
-      }
-
-      handleMessage = (e) => {
-        if (this.sourceIsValid(e.source) && e.origin === origin(this) && e.data) {
-          messageHandler.call(this, e.data)
-        }
-      }
-    }
-  }
-}
+     handleMessage = (e) => {
+       if (this.sourceIsValid(e.source) && e.origin === origin(this) && e.data) {
+         messageHandler.call(this, e.data)
+       }
+     }
+   }
+ })
 
 /**
  * Return the origin of the owner window of the DOM element
