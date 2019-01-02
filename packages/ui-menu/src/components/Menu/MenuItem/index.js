@@ -31,7 +31,7 @@ import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -105,7 +105,7 @@ class MenuItem extends Component {
       }
     }
 
-    this.labelId = generateElementId('MenuItem')
+    this.labelId = uid('MenuItem__label')
   }
 
   componentDidMount () {

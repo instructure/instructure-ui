@@ -26,7 +26,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 const toggleExpanded = ({ expanded }) => ({ expanded: !expanded })
@@ -76,7 +76,7 @@ class Expandable extends Component {
        expanded: this.isControlled(props) ? props.expanded : !!props.defaultExpanded
      }
 
-     this._contentId = generateElementId('Expandable')
+     this._contentId = uid('Expandable__content')
    }
 
    get expanded () {

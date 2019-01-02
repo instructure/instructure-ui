@@ -31,7 +31,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import testable from '@instructure/ui-testable'
 
@@ -78,7 +78,7 @@ export default class Spinner extends Component {
   constructor (props) {
     super()
 
-    this.titleId = generateElementId('Spinner')
+    this.titleId = uid('Spinner')
   }
 
   radius () {

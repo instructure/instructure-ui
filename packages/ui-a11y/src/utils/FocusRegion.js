@@ -27,7 +27,7 @@ import keycode from 'keycode'
 import contains from '@instructure/ui-utils/lib/dom/contains'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
-import uid from '@instructure/ui-utils/lib/uid'
+import uid from '@instructure/uid'
 import error from '@instructure/ui-utils/lib/error'
 
 import findTabbable from './findTabbable'

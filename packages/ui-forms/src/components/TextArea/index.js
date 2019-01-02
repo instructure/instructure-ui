@@ -33,7 +33,7 @@ import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import debounce from '@instructure/debounce'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import px from '@instructure/ui-utils/lib/px'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
@@ -134,7 +134,7 @@ class TextArea extends Component {
   constructor () {
     super()
 
-    this._defaultId = generateElementId('TextArea')
+    this._defaultId = uid('TextArea')
   }
 
   componentDidMount () {

@@ -29,10 +29,10 @@ import uid from '../uid'
 /* eslint-disable mocha/no-synchronous-tests */
 describe('uid', () => {
   it('generates a specified length', () => {
-    expect(uid('', 5).length).to.be.eql(5)
-    expect(uid('', 8).length).to.be.eql(8)
-    expect(uid('', 12).length).to.be.eql(12)
-    expect(uid('', 16).length).to.be.eql(16)
+    expect(uid('', 5).length).to.equal(8)
+    expect(uid('', 8).length).to.equal(11)
+    expect(uid('', 12).length).to.equal(15)
+    expect(uid('', 16).length).to.equal(19)
   })
 
   it('should run a bunch and never get duplicates', () => {

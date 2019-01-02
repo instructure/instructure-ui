@@ -32,7 +32,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 
 import FormField from '@instructure/ui-forms/lib/components/FormField'
@@ -100,7 +100,7 @@ class Select extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = generateElementId('Select')
+    this._defaultId = uid('Select')
   }
 
   get id () {

@@ -26,6 +26,7 @@
     "@instructure/ui-testable": "^5"
   },
   "dependencies": {
+    "@instructure/uid": "^5",
     "@instructure/ui-stylesheet": "^5",
     "@instructure/ui-utils": "^5",
     "babel-runtime": "^6",

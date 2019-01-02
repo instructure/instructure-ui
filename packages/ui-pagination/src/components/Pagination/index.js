@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
@@ -123,7 +123,7 @@ export default class Pagination extends Component {
   constructor (...args) {
     super(...args)
 
-    this._labelId = generateElementId('Pagination')
+    this._labelId = uid('Pagination')
   }
 
   componentWillReceiveProps (nextProps) {

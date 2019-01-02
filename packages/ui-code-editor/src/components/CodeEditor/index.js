@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
@@ -86,7 +86,7 @@ export default class CodeEditor extends Component {
 
   constructor (props) {
     super()
-    this._id = generateElementId('CodeEditor')
+    this._id = uid('CodeEditor')
 
     if (typeof props.value === 'undefined') {
       this.state = {

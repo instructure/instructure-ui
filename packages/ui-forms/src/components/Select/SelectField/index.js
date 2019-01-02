@@ -37,7 +37,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
@@ -242,9 +242,9 @@ class SelectField extends Component {
       positioned: false
     }
 
-    this._defaultId = generateElementId('Select')
-    this._optionsId = generateElementId('Select-Options')
-    this._assistId = generateElementId('Select-assistiveText')
+    this._defaultId = uid('Select')
+    this._optionsId = uid('Select-Options')
+    this._assistId = uid('Select-assistiveText')
   }
 
   _menu = null

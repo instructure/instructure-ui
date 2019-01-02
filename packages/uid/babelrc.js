@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-import uid from '@instructure/uid'
-import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
-
-export default (...args) => {
- warnDeprecatedComponent('5.38.0', 'generateElementId', changedPackageWarning(
-   'ui-utils',
-   'uid'
- ))
- return uid(...args)
+module.exports = {
+  presets: [[ require('@instructure/ui-presets/babel'), {
+    themeable: !process.env.DEBUG,
+    coverage: Boolean(process.env.COVERAGE),
+    esModules: Boolean(process.env.ES_MODULES)
+  }]]
 }

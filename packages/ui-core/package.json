@@ -23,6 +23,7 @@
     "@instructure/ui-presets": "^5"
   },
   "dependencies": {
+    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-alerts": "^5",
     "@instructure/ui-billboard": "^5",

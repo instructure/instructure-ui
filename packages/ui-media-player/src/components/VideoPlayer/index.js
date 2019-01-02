@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import screenfull from 'screenfull'
 
 import themeable from '@instructure/ui-themeable'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 
 import Loading from '../Loading'
 import VideoPlayerControls from '../VideoPlayerControls'
@@ -106,7 +106,7 @@ class VideoPlayer extends Component {
     selectedSrc: this.getSourceFromProps(),
     sources: this.props.sources,
     showControls: true,
-    videoId: generateElementId('VideoPlayer')
+    videoId: uid('VideoPlayer')
   }
 
   componentDidMount () {

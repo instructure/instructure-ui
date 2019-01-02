@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
@@ -85,7 +85,7 @@ class RadioInput extends Component {
       this.state.checked = false
     }
 
-    this._defaultId = generateElementId('RadioInput')
+    this._defaultId = uid('RadioInput')
   }
 
   handleClick = (e) => {

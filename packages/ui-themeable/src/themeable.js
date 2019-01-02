@@ -28,7 +28,7 @@ import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import warning from '@instructure/ui-utils/lib/warning'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 
@@ -93,7 +93,7 @@ export default function themeable (theme, styles = {}) {
     const displayName = getDisplayName(ComposedComponent)
 
     const contextKey = Symbol(displayName)
-    const componentId = generateElementId(displayName)
+    const componentId = uid(displayName)
 
     const template = (typeof styles.template === 'function') ? styles.template : () => {
       warning(
@@ -129,7 +129,7 @@ export default function themeable (theme, styles = {}) {
     class ThemeableComponent extends ComposedComponent {
 
       _themeCache = null
-      _instanceId = generateElementId(displayName)
+      _instanceId = uid(displayName)
 
       static displayName = displayName
       // For testing purposes

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import testable from '@instructure/ui-testable'
 
@@ -81,8 +81,8 @@ export default class InlineSVG extends Component {
   constructor () {
     super()
 
-    this.titleId = generateElementId('InlineSVG-title')
-    this.descId = generateElementId('InlineSVG-desc')
+    this.titleId = uid('InlineSVG-title')
+    this.descId = uid('InlineSVG-desc')
   }
 
   get role () {

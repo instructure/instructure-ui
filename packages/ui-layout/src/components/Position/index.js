@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPositionChangeListener'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import debounce from '@instructure/debounce'
@@ -163,7 +163,7 @@ class Position extends Component {
     }
 
     this.position = debounce(this.position, 0, { leading: false, trailing: true })
-    this._id = this.props.id || generateElementId()
+    this._id = this.props.id || uid('Position')
   }
 
   _timeouts = []

@@ -33,7 +33,7 @@ import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import error from '@instructure/ui-utils/lib/error'
 
 import Page from './Page'
@@ -96,7 +96,7 @@ class Pages extends Component {
       props.activePageIndex
     ]
 
-    this._contentId = generateElementId('Pages')
+    this._contentId = uid('Pages')
   }
 
   getChildContext () {

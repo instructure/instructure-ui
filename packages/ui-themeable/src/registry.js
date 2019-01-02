@@ -33,7 +33,7 @@ import warning from '@instructure/ui-utils/lib/warning'
 import error from '@instructure/ui-utils/lib/error'
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
-import uid from '@instructure/ui-utils/lib/uid'
+import uid from '@instructure/uid'
 
 const DEFAULT_THEME_KEY = '@@themeableDefaultTheme'
 const GLOBAL_THEME_REGISTRY = 'GLOBAL_THEME_REGISTRY'

@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -107,8 +107,8 @@ class TextInput extends Component {
   constructor (props) {
     super()
 
-    this._defaultId = generateElementId('TextInput')
-    this._messagesId = generateElementId('TextInput-messages')
+    this._defaultId = uid('TextInput')
+    this._messagesId = uid('TextInput-messages')
   }
 
   /**

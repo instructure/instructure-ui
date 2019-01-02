@@ -31,7 +31,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import error from '@instructure/ui-utils/lib/error'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
@@ -117,7 +117,7 @@ class Checkbox extends Component {
       this.state.checked = !!props.defaultChecked
     }
 
-    this._defaultId = generateElementId('Checkbox')
+    this._defaultId = uid('Checkbox')
   }
 
   componentDidMount() {

@@ -21,14 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import uid from '@instructure/uid'
-import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
-
-export default (...args) => {
- warnDeprecatedComponent('5.38.0', 'generateElementId', changedPackageWarning(
-   'ui-utils',
-   'uid'
- ))
- return uid(...args)
-}
+export default from './uid'

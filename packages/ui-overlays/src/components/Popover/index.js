@@ -49,7 +49,7 @@ import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import error from '@instructure/ui-utils/lib/error'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -335,7 +335,7 @@ class Popover extends Component {
       this.state.show = props.defaultShow
     }
 
-    this._id = this.props.id || generateElementId()
+    this._id = this.props.id || uid('Popover')
 
     this._raf = []
   }

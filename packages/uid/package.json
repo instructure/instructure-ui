@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/ui-layout",
+  "name": "@instructure/uid",
   "version": "5.38.0",
-  "description": "A UI component library made by Instructure Inc.",
+  "description": "A unique (CSS-safe) id generator made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "module": "./es/index.js",
@@ -23,23 +23,6 @@
   "devDependencies": {
     "@instructure/ui-presets": "^5",
     "@instructure/ui-test-utils": "^5"
-  },
-  "dependencies": {
-    "@instructure/debounce": "^5",
-    "@instructure/uid": "^5",
-    "@instructure/ui-a11y": "^5",
-    "@instructure/ui-i18n": "^5",
-    "@instructure/ui-motion": "^5",
-    "@instructure/ui-portal": "^5",
-    "@instructure/ui-testable": "^5",
-    "@instructure/ui-themeable": "^5",
-    "@instructure/ui-utils": "^5",
-    "babel-runtime": "^6",
-    "classnames": "^2",
-    "prop-types": "^15"
-  },
-  "peerDependencies": {
-    "react": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

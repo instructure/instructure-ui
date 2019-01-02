@@ -33,7 +33,7 @@ import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentT
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import px from '@instructure/ui-utils/lib/px'
 import error from '@instructure/ui-utils/lib/error'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 
 import { mirrorHorizontalPlacement } from '../../utils/mirrorPlacement'
@@ -89,7 +89,7 @@ class DrawerLayout extends Component {
       contentWidth: 0
     }
 
-    this._id = generateElementId('DrawerLayout')
+    this._id = uid('DrawerLayout')
   }
 
   _content = null

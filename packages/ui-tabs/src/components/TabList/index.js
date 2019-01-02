@@ -36,7 +36,7 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import error from '@instructure/ui-utils/lib/error'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 
 import Tab from './Tab'
@@ -176,7 +176,7 @@ export default class TabList extends Component {
     let diff = ids.length - this.tabs.length
 
     while (diff++ < 0) {
-      ids.push(generateElementId('Tab'))
+      ids.push(uid('Tab'))
     }
 
     this._tabIds = ids

@@ -37,7 +37,6 @@ import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional
 import error from '@instructure/ui-utils/lib/error'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import getDisplayName from '@instructure/ui-utils/lib/react/getDisplayName'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -148,10 +147,6 @@ class View extends Component {
     // don't break consuming components' CSS
   }
 
-  get displayName () {
-    return getDisplayName(View)
-  }
-
   get hasBorder () {
     const { borderWidth } = this.props
     return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
@@ -166,8 +161,8 @@ class View extends Component {
     }
 
     return {
-      borderRadius: getShorthandPropValue(this.displayName, this.theme, borderRadius, 'borderRadius'),
-      borderWidth: getShorthandPropValue(this.displayName, this.theme, borderWidth, 'borderWidth')
+      borderRadius: getShorthandPropValue('View', this.theme, borderRadius, 'borderRadius'),
+      borderWidth: getShorthandPropValue('View', this.theme, borderWidth, 'borderWidth')
     }
   }
 
@@ -180,8 +175,8 @@ class View extends Component {
     }
 
     return {
-      margin: getShorthandPropValue(this.displayName, this.theme, margin, 'margin'),
-      padding: getShorthandPropValue(this.displayName, this.theme, padding, 'padding')
+      margin: getShorthandPropValue('View', this.theme, margin, 'margin'),
+      padding: getShorthandPropValue('View', this.theme, padding, 'padding')
     }
   }
 

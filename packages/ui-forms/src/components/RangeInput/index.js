@@ -32,7 +32,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -102,7 +102,7 @@ class RangeInput extends Component {
       }
     }
 
-    this.defaultId = generateElementId('RangeInput')
+    this.defaultId = uid('RangeInput')
   }
 
   /* workaround for https://github.com/facebook/react/issues/554 */

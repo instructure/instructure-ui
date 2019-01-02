@@ -26,6 +26,7 @@
     "redux-devtools": "^3.4.1"
   },
   "dependencies": {
+    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-alerts": "^5",
     "@instructure/ui-buttons": "^5",

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
@@ -93,7 +93,7 @@ export default class CheckboxGroup extends Component {
       }
     }
 
-    this._messagesId = generateElementId('CheckboxGroup-messages')
+    this._messagesId = uid('CheckboxGroup-messages')
   }
 
   get hasMessages () {

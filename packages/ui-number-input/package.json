@@ -21,6 +21,7 @@
     "build:watch": "ui-build --watch"
   },
   "dependencies": {
+    "@instructure/uid": "^5",
     "@instructure/ui-form-field": "^5",
     "@instructure/ui-icons": "^5",
     "@instructure/ui-themeable": "^5",

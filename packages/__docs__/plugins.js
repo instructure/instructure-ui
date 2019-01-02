@@ -66,7 +66,8 @@ plugins = plugins.concat([
       '**/ui-i18n/src/**/*.js',
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
-      '**/generate-examples/src/**/*.js'
+      '**/generate-examples/src/**/*.js',
+      '**/uid/src/**/*.js'
     ],
     ignore: [
       '**/*-loader.js',
@@ -113,6 +114,7 @@ plugins = plugins.concat([
       '**/ui-utils/src/dom/isVisible.js',
       '**/ui-utils/src/debounce.js',
       '**/ui-utils/src/uid.js',
+      '**/ui-utils/src/dom/generateElementId.js',
       '**/ui-utils/src/react/containerQuery.js',
       '**/ui-utils/src/Decimal.js',
 

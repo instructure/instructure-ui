@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
- import moment from 'moment-timezone'
+import moment from 'moment-timezone'
 
 import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
 
@@ -88,6 +88,6 @@ export default {
 }
 
 function _checkParams (locale, timezone) {
-  if (locale == null) throw Error('locale must be specified')
-  if (timezone == null) throw Error('timezone must be specified')
+  if (locale == null) throw new Error('[DateTime] locale must be specified')
+  if (timezone == null) throw new Error('[DateTime] timezone must be specified')
 }

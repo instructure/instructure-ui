@@ -31,7 +31,7 @@ import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
-import generateElementId from '@instructure/ui-utils/lib/dom/generateElementId'
+import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -138,7 +138,7 @@ export default class NumberInput extends Component {
       return this.props.id
     }
     if (!this._id) {
-      this._id = generateElementId('NumberInput')
+      this._id = uid('NumberInput')
     }
     return this._id
   }

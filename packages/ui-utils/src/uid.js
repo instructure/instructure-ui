@@ -21,36 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import uid from '@instructure/uid'
+import { changedPackageWarning, warnDeprecatedComponent } from './react/deprecated'
 
-//  based on: https://github.com/ai/nanoid/blob/master/non-secure.js
-
-const dictionary = 'getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
-const dictionaryLengthMinus1 = dictionary.length - 1
-
-function random (size) {
-  const result = []
-  while (0 < size--) { /* eslint-disable-line no-param-reassign */
-    result.push(Math.floor(Math.random() * 256))
-  }
-  return result
-}
-
-/**
- * ---
- * category: utilities
- * ---
- * Generate a unique id. For valid HTML element IDs use [generateElementId](#generateElementId)
- *
- * @module uid
- * @param {String} _ignored this param is ignored but left here so as not to introduce a breaking change in the function signature
- * @param {Number} idLength id length
- * @returns {String} a unique id
- */
-export default function uid(_ignored, idLength = 12) {
-  var id = ''
-  var bytes = random(idLength)
-  while (0 < idLength--) { /* eslint-disable-line no-param-reassign */
-    id += dictionary[bytes[idLength] & dictionaryLengthMinus1]
-  }
-  return id
+export default (...args) => {
+  warnDeprecatedComponent('5.38.0', 'defaultId', changedPackageWarning(
+    'ui-utils',
+    'uid'
+  ))
+  return uid(...args)
 }

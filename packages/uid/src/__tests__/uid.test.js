@@ -21,14 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { expect } from '@instructure/ui-test-utils'
 
-import uid from '@instructure/uid'
-import { changedPackageWarning, warnDeprecatedComponent } from '../react/deprecated'
+import uid from '../index'
 
-export default (...args) => {
- warnDeprecatedComponent('5.38.0', 'generateElementId', changedPackageWarning(
-   'ui-utils',
-   'uid'
- ))
- return uid(...args)
-}
+/* eslint-disable mocha/no-synchronous-tests */
+describe('uid', () => {
+  it('generates a specified length', () => {
+    expect(uid('', 5).length).to.equal(8)
+    expect(uid('', 8).length).to.equal(11)
+    expect(uid('', 12).length).to.equal(15)
+    expect(uid('', 16).length).to.equal(19)
+  })
+
+  it('should run a bunch and never get duplicates', () => {
+    const results = new Set()
+    for (let x = 0; x < 5000; x++) {
+      results.add(expect(uid('', 7)))
+    }
+    expect(results.size).to.be.eql(5000)
+  })
+})
+/* eslint-enable mocha/no-synchronous-tests */

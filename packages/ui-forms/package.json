@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@instructure/debounce": "^5",
+    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-buttons": "^5",
     "@instructure/ui-elements": "^5",
