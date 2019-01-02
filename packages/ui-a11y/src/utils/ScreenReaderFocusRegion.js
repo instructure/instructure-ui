@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+import warning from '@instructure/ui-utils/lib/warning'
+
 /**
  * ---
  * category: utilities/a11y
@@ -152,7 +154,16 @@ export default class ScreenReaderFocusRegion {
       }
     }
 
-    return iframes.map(iframe => iframe.contentDocument.body)
+    return iframes.map((iframe) => {
+        let body = null
+        try {
+          body = iframe.contentDocument.body
+        } catch (e) {
+          warning(false, `[ui-a11y] could not find a document for iframe: ${e}`, iframe)
+        }
+        return body
+      })
+      .filter(body => body !== null)
   }
 
   activate () {

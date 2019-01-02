@@ -75,7 +75,16 @@ function findAllFrames (...args) {
   return findAllByQuery((element, selector, options ) => {
     const results = querySelectorAll(element, 'iframe')
       .filter(frame => matchesSelector(frame, selector, options))
-      .map(frame => frame.contentWindow.document.documentElement)
+      .map((frame) => {
+        let doc = null
+        try {
+          doc = frame.contentDocument.documentElement
+        } catch (e) {
+          console.warn(`[ui-test-utils] could not find document element for iframe: ${e}`)
+        }
+        return doc
+      })
+      .filter(doc => doc !== null)
 
     return {
       results,
