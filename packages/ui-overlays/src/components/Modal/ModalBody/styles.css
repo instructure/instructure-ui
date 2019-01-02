@@ -2,6 +2,10 @@
   box-sizing: border-box;
   overflow-y: auto;
   flex: 1 1 auto;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 .content {

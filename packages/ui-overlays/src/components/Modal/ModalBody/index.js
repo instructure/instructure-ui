@@ -69,6 +69,7 @@ export default class ModalBody extends Component {
         as={this.props.as}
         className={styles.root}
         padding={this.props.padding}
+        tabIndex="-1" // prevent FF from focusing view when scrollable
       >
         <div className={styles.content}>
           {this.props.children}
