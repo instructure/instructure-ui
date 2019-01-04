@@ -70,7 +70,7 @@ plugins = plugins.concat([
     ],
     ignore: [
       '**/*-loader.js',
-      '**/**/CHANGELOG.md',
+      '**/packages/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
       '**/controllers/**',
