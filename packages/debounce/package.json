@@ -1,6 +1,6 @@
 {
   "name": "@instructure/debounce",
-  "version": "5.37.0",
+  "version": "5.38.0",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.38.0"></a>
+# [5.38.0](https://github.com/instructure/instructure-ui/compare/v5.37.0...v5.38.0) (2019-01-04)
+
+
+### Bug Fixes
+
+* **ui-form-field:** ensure legend is the first child of fieldset ([1bd67a5](https://github.com/instructure/instructure-ui/commit/1bd67a5))
+* **ui-test-utils:** logic that determines visibility is incorrect ([f0d59b1](https://github.com/instructure/instructure-ui/commit/f0d59b1))
+
+
+
+
+
 <a name="5.37.0"></a>
 # [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
 

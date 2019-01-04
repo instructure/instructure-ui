@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.38.0"></a>
+# [5.38.0](https://github.com/instructure/instructure-ui/compare/v5.37.0...v5.38.0) (2019-01-04)
+
+
+### Bug Fixes
+
+* **ui-a11y,ui-test-utils:** handle iframes with inaccessible documents ([f155829](https://github.com/instructure/instructure-ui/commit/f155829))
+* **ui-form-field:** ensure legend is the first child of fieldset ([1bd67a5](https://github.com/instructure/instructure-ui/commit/1bd67a5))
+* **ui-forms:** use pointer cursor for toggle ([75d00d2](https://github.com/instructure/instructure-ui/commit/75d00d2))
+* **ui-overlays:** remove border-radius from fullscreen modal ([552ab68](https://github.com/instructure/instructure-ui/commit/552ab68))
+* **ui-overlays:** stop Modal inheriting parent font color ([68eb293](https://github.com/instructure/instructure-ui/commit/68eb293))
+* **ui-test-utils:** logic that determines visibility is incorrect ([f0d59b1](https://github.com/instructure/instructure-ui/commit/f0d59b1))
+
+
+### Features
+
+* **media-capture:** Update type for returned file ([6238b6f](https://github.com/instructure/instructure-ui/commit/6238b6f))
+* **ui-docs-client:** use Button in docs nav ([36bd57e](https://github.com/instructure/instructure-ui/commit/36bd57e))
+* **ui-icons:** update lti sketch file with existing integrations icon ([85a8e49](https://github.com/instructure/instructure-ui/commit/85a8e49))
+* **ui-layout:** allow node to be passed to Media description ([2987cd3](https://github.com/instructure/instructure-ui/commit/2987cd3))
+* **ui-overlays:** add a 'regular' size tray option ([396b9ad](https://github.com/instructure/instructure-ui/commit/396b9ad))
+* **ui-tree-browser:** allow item thumbnails in TreeBrowser ([a1ec11b](https://github.com/instructure/instructure-ui/commit/a1ec11b))
+
+
+
+
+
 <a name="5.37.0"></a>
 # [5.37.0](https://github.com/instructure/instructure-ui/compare/v5.36.0...v5.37.0) (2018-12-18)
 
