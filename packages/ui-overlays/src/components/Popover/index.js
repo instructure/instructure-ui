@@ -148,6 +148,8 @@ class Popover extends Component {
      */
     onBlur: PropTypes.func,
 
+    onKeyDown: PropTypes.func,
+
     /**
      * Callback fired when content is rendered and positioned
      */

@@ -21,4 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = require('./packages/ui-presets/postcss')()
+module.exports = require('@instructure/ui-postcss-config')()

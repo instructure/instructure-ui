@@ -34,7 +34,7 @@ const projectRoot = path.resolve(__dirname, '../../')
 // eslint-disable-next-line instructure-ui/no-relative-package-imports
 const pkg = require('../../package.json')
 
-let plugins = require('@instructure/ui-presets/webpack/plugins')()
+let plugins = require('@instructure/ui-webpack-config').plugins
 
 plugins = plugins.concat([
   new DocsPlugin({
@@ -67,7 +67,7 @@ plugins = plugins.concat([
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
       '**/generate-examples/src/**/*.js',
-      '**/ui-decorator/src/**/*.js',
+      '**/ui-decorator/src/**/*.js'
     ],
     ignore: [
       '**/*-loader.js',

@@ -1,0 +1,36 @@
+{
+  "name": "@instructure/ui-karma-config",
+  "version": "5.40.0",
+  "description": "A shared karma config made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/ui-webpack-config": "^5",
+    "karma": "^3.1.4",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-cli": "^1.0.1",
+    "karma-coverage": "^1.1.2",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-safari-launcher": "^1.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-viewport": "^1.0.3",
+    "karma-webpack": "^3.0.5",
+    "mocha": "^5.0.1"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

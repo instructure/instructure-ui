@@ -11,15 +11,16 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
   "dependencies": {
     "@instructure/pkg-utils": "^5",
     "@instructure/postcss-themeable-styles": "^5",
     "babel-template": "^6.26.0",
-    "css-modules-require-hook": "^4.2.3"
+    "css-modules-require-hook": "^4.2.3",
+    "generic-names": "^2.0.1"
   },
   "peerDependencies": {
     "babel-core": "^6.26.0"

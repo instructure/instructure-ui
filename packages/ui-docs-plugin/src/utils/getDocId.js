@@ -28,13 +28,13 @@ module.exports = function getDocId (docData, options, context, interpolate) {
   const id = interpolate(_getDocId(options, docData, context))
 
   if (Object.keys(DOCS).includes(id) && DOCS[id] !== docData.relativePath) {
-    console.warn('\x1b[33m%s\x1b[0m', `[${id}] is a duplicate id!!!!!!!`)
+    console.warn('\x1b[33m%s\x1b[0m', `${id}] is a duplicate id!!!!!!!`)
   }
 
   DOCS[id] = docData.relativePath
 
   // eslint-disable-next-line no-console
-  console.log(`[${id}] ${docData.relativePath}`)
+  console.log(`[ui-docs-plugin] #${id} - ${docData.relativePath}`)
 
   return id
 }

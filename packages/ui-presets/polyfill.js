@@ -22,17 +22,4 @@
  * SOFTWARE.
  */
 
-// for a list of all features see https://github.com/zloirock/core-js#commonjs
-module.exports = [
-  'es6.object.assign',
-  'es6.array.find',
-  'es6.array.find-index',
-  'es6.array.from',
-  'es6.string.starts-with',
-  'es6.string.includes',
-  'es7.array.includes',
-  'es6.symbol',
-  'es7.object.values',
-  'es.promise',
-  'es.promise.finally'
-]
+module.exports = require('@instructure/ui-babel-preset/lib/polyfill')

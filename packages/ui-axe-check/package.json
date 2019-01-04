@@ -22,7 +22,7 @@
     "axe-core": "^3.1.2"
   },
   "devDependencies": {
-    "@instructure/ui-presets": "^5"
+    "@instructure/ui-babel-preset": "^5"
   },
   "publishConfig": {
     "access": "public"

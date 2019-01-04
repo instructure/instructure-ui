@@ -22,8 +22,9 @@
  * SOFTWARE.
  */
 
-module.exports = function transformCSSRequire (tokens, css) {
+module.exports = function transformCSSRequire (tokens, css, componentId) {
   return `{
+      componentId: '${componentId}',
       template: function (theme) {
         return \`${css}\`
       },

@@ -24,7 +24,7 @@
 
 const path = require('path')
 
-module.exports = require('./packages/ui-presets/karma')({
+module.exports = require('@instructure/ui-karma-config')({
   bundle: './tests.bundle.js',
   coverageThreshold: {
     global: {

@@ -54,7 +54,7 @@ describe('@testable', async () => {
   it('should define a component selector', async () => {
     const TestableComponent = testable()(Component)
 
-    expect(TestableComponent.selector).to.equal('[data-uid~="Component"]')
+    expect(TestableComponent.selector).to.equal('[data-cid~="Component"]')
   })
 
   it('should handle components that render `null`', async () => {

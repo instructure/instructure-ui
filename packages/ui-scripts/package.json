@@ -1,0 +1,52 @@
+{
+  "name": "@instructure/ui-scripts",
+  "version": "5.40.0",
+  "description": "A UI build scripts library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "bin": {
+    "ui-scripts": "./lib/index.js",
+    "ui-test": "./lib/test/index.js",
+    "ui-build": "./lib/build/index.js"
+  },
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/cz-lerna-changelog": "^5",
+    "@instructure/pkg-utils": "^5",
+    "babel-cli": "^6.26.0",
+    "chalk": "^2.4.2",
+    "commitizen": "^3.0.5",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "cross-spawn": "^6.0.4",
+    "dotenv": "^6.2.0",
+    "eslint": "^5.12.0",
+    "gh-pages": "^2.0.1",
+    "jira-client": "^6.4.1",
+    "karma": "^3.1.4",
+    "lerna": "3.0.0-beta.21",
+    "rimraf": "^2.6.3",
+    "standard-version": "^4.4.0",
+    "stylelint": "^9.3.0",
+    "validate-commit-msg": "^2.14.0",
+    "which": "^1.3.1",
+    "webpack": "^3",
+    "webpack-dev-server": "^2.11.0"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15 || ^16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

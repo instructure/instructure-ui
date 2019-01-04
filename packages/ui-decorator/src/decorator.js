@@ -39,7 +39,6 @@ export default function decorator (decorate) {
         const displayName = ComposedComponent.displayName || ComposedComponent.name
         const DecoratedComponent = decorate(ComposedComponent, ...args)
         DecoratedComponent.displayName = displayName
-        DecoratedComponent.componentId = ComposedComponent.componentId || DecoratedComponent.componentId
         return DecoratedComponent
       } else {
         return ComposedComponent

@@ -85,7 +85,9 @@ export default class FocusableView extends Component {
     /**
      * Optionally set a width for the FocusableView (either a string or number)
      */
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    role: PropTypes.string,
+    onClick: PropTypes.func
   }
 
   static defaultProps = {
@@ -95,7 +97,8 @@ export default class FocusableView extends Component {
     display: 'inline-block',
     as: 'button',
     elementRef: function (element) {},
-    cursor: 'auto'
+    cursor: 'auto',
+    role: null
   }
 
   render () {
@@ -141,7 +144,7 @@ export default class FocusableView extends Component {
           [styles[shape]]: true,
           [styles.focused]: focused
         })}
-        role={role || onClick ? 'button' : null}
+        role={role || onClick ? role : null}
         tabIndex={onClick && !role ? '0' : null}
       >
         {children}

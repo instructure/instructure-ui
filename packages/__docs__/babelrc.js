@@ -23,8 +23,7 @@
  */
 
 module.exports = {
-  presets: [[ require('@instructure/ui-presets/babel'), {
-    themeable: !process.env.DEBUG,
+  presets: [[ require('@instructure/ui-babel-preset'), {
     coverage: Boolean(process.env.COVERAGE),
     esModules: Boolean(process.env.ES_MODULES)
   }]]

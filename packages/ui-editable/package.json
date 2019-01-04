@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5",
+    "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
@@ -31,10 +31,14 @@
     "@instructure/ui-icons": "^5",
     "@instructure/ui-layout": "^5",
     "@instructure/ui-utils": "^5",
-    "prop-types": "^15",
-    "react": "^0.14.9 || ^15 || ^16"
+    "prop-types": "^15"
+  },
+  "peerDependencies": {
+    "react": "^0.14.9 || ^15 || ^16",
+    "react-dom": "^0.14.9 || ^15 || ^16"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

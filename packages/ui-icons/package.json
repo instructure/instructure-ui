@@ -21,7 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-icons-build": "^5",
-    "@instructure/ui-presets": "^5",
+    "@instructure/ui-babel-preset": "^5",
     "gulp": "3.9.1"
   },
   "dependencies": {
@@ -34,5 +34,6 @@
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

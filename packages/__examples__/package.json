@@ -20,10 +20,11 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/generate-examples": "^5",
+    "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-layout": "^5",
-    "@instructure/ui-presets": "^5",
     "@instructure/ui-themes": "^5",
+    "@instructure/ui-webpack-config": "^5",
     "@storybook/addon-links": "^3.4.11",
     "@storybook/addon-options": "^3.4.11",
     "@storybook/addons": "^3.4.11",

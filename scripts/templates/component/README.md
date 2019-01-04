@@ -1,28 +1,30 @@
 ---
-describes: ${COMPONENT}
+category: packages
 ---
 
-A `${COMPONENT}` component [WIP]
+## ${PACKAGE}
 
-```javascript
----
-example: true
-render: false
----
-const Example = (props) => {
-  return (
-    <${COMPONENT}>
-    {({ getViewProps }) => {
-      return (
-        <${COMPONENT}View
-          {...getViewProps(/* view prop overrides go here */)}
-        >
-          {this.props.children}
-        </${COMPONENT}View>
-      )
-    }}
-    </${COMPONENT}>
-  )
-}
-render(Example)
+[![npm][npm]][npm-url]
+[![build-status][build-status]][build-status-url]
+[![MIT License][license-badge]][LICENSE]
+[![Code of Conduct][coc-badge]][coc]
+
+A UI component library made by Instructure Inc.
+
+### Installation
+
+```sh
+yarn add @instructure/${PACKAGE}
 ```
+
+[npm]: https://img.shields.io/npm/v/@instructure/${PACKAGE}.svg
+[npm-url]: https://npmjs.com/package/@instructure/${PACKAGE}
+
+[build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
+[build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"
+
+[license-badge]: https://img.shields.io/npm/l/instructure-ui.svg?style=flat-square
+[license]: https://github.com/instructure/instructure-ui/blob/master/LICENSE
+
+[coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
+[coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md

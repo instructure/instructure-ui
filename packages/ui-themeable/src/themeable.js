@@ -70,7 +70,7 @@ import { toRules } from './utils/transformCss'
 * ```
 *
 * Note: in the above example, the CSS file must be transformed into a JS object
-* via [babel](#babel-plugin-themeable-styles) or [webpack](#ui-presets) loader.
+* via [babel](#babel-plugin-themeable-styles) or [webpack](#ui-webpack-config) loader.
 *
 * Themeable components inject their themed styles into the document when they are mounted.
 *
@@ -90,12 +90,13 @@ const emptyObj = {}
 
 const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
-  const componentId = ComposedComponent.componentId || uid(displayName)
+  const componentId = (styles && styles.componentId) || displayName
+
   const contextKey = Symbol(componentId)
-  const template = (typeof styles.template === 'function') ? styles.template : () => {
+  const template = (styles && typeof styles.template === 'function') ? styles.template : () => {
     warning(
       false,
-      '[themeable] Invalid styles for: %O',
+      '[themeable] Invalid styles for: %O. Use @instructure/babel-plugin-themeable-styles to transform CSS imports.',
       displayName
     )
     return ''
@@ -121,7 +122,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   class ThemeableComponent extends ComposedComponent {
     _themeCache = null
     _instanceId = uid(displayName)
-    static componentId = componentId
+
     static theme = contextKey
     static contextTypes = {
       ...ComposedComponent.contextTypes,
@@ -132,6 +133,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       theme: PropTypes.object // eslint-disable-line react/forbid-prop-types
     }
     static generateTheme = generateThemeForContextKey
+
     componentWillMount () {
       if (!StyleSheet.mounted(componentId)) {
         const defaultTheme = generateThemeForContextKey()

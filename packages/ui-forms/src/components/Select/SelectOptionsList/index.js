@@ -114,7 +114,8 @@ class SelectOptionsList extends Component {
     onStaticClick: PropTypes.func,
     onBlur: PropTypes.func,
     highlightedIndex: PropTypes.number,
-    expanded: PropTypes.bool
+    expanded: PropTypes.bool,
+    disabled: PropTypes.bool
   }
 
   static defaultProps = {
@@ -128,7 +129,8 @@ class SelectOptionsList extends Component {
     menuRef: el => {},
     onHighlightOption: event => {},
     onSelect: (event, selectedOption) => {},
-    onStaticClick: event => {}
+    onStaticClick: event => {},
+    disabled: false
   }
 
   optionHeight = 5

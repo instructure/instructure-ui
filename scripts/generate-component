@@ -2,62 +2,68 @@
 
 set -e
 
-NPM_CLIENT=$(npm bin)/yarn
-COMPONENT_TEMPLATE_DIR=scripts/templates/component/
+PACKAGE_DIR=packages
+COMPONENT_TEMPLATE_DIR=scripts/templates/component
+
+current_version=$(node -p "require('./lerna').version")
+
+# If no args are supplied, ask for user input
+if [ $# -eq 0 ]; then
+  read -p 'Component name (PascalCase): ' component
+else
+  component=$1
+fi
+
+package=`echo ${component} | sed 's/\([a-z0-9]\)\([A-Z]\)/\1\-\2/g' | sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+
+export COMPONENT=$component
+export PACKAGE="ui-${package}"
+export VERSION=$current_version
+
+if [ ! -d "$PACKAGE_DIR" ]; then
+  echo Cannot find component directory!
+  exit 1
+fi
 
 if [ ! -d "$COMPONENT_TEMPLATE_DIR" ]; then
   echo Cannot find component template!
   exit 1
 fi
 
-read -p 'Component name: ' COMPONENT
-read -p 'Package name: ' PACKAGE
-
-PACKAGE_DIR=packages/$PACKAGE
-
-if [ ! -d "$PACKAGE_DIR" ]; then
-  echo The specified package does not exist.
-
-  read -p "Would you like to create a new package [$PACKAGE]? [y/n] " -n 1 -r; echo
-  if [[ $REPLY =~ ^[Yy]$ ]]; then
-    $NPM_CLIENT run generate:package $PACKAGE
-  else
-    echo "Stopped. No components or packages were generated."
-    exit
-  fi
-fi
-
-# Check one last time to make sure the generate:package script was successful
-if [ ! -d "$PACKAGE_DIR" ]; then
-  echo Failed to generate package $PACKAGE!
+if [ -d "$PACKAGE_DIR/$PACKAGE" ]; then
+  echo Oops! Package $PACKAGE exists!
   exit 1
 fi
 
-COMPONENT_DIR=$PACKAGE_DIR/src/components/$COMPONENT
+echo Generating $PACKAGE files in $PACKAGE_DIR/$PACKAGE
 
-if [ -d "$COMPONENT_DIR" ]; then
-  echo Oops! Component $COMPONENT exists!
-  exit 1
-fi
+cp -r $COMPONENT_TEMPLATE_DIR $PACKAGE_DIR/$PACKAGE
 
-echo Generating $COMPONENT files in $COMPONENT_DIR
-
-# Create component directory and copy template files
-mkdir -p $COMPONENT_DIR
-cp -r $COMPONENT_TEMPLATE_DIR $COMPONENT_DIR
-
-# Export this variable so it's available in the find and sed commands below
-export COMPONENT
+# Update file names
+find $PACKAGE_DIR/$PACKAGE -name 'Package*' -type f -exec bash -c 'mv "$1" "${1/Package/$PACKAGE}"' -- {} \;
 
 # Update file contents
 if [[ "$OSTYPE" == darwin* ]]; then
-  find $COMPONENT_DIR -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
 else
-  find $COMPONENT_DIR -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+fi
+
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${VERSION}/$VERSION/g" '{}' \;
+else
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${VERSION}/$VERSION/g" '{}' \;
+fi
+
+# Update file contents
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+else
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 fi
 
 # Update directory names
-find $COMPONENT_DIR -depth -name 'Component*' -type d -execdir bash -c 'mv "$1" "${1//Component/$COMPONENT}"' -- {} \;
+find $PACKAGE_DIR/$PACKAGE -depth -name 'Component*' -type d -execdir bash -c 'mv "$1" "${1//Component/$COMPONENT}"' -- {} \;
 
 # Update file names
-find $COMPONENT_DIR -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+find $PACKAGE_DIR/$PACKAGE -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;

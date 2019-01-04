@@ -29,7 +29,7 @@ import decorator from '@instructure/ui-decorator'
 export default decorator((ComposedComponent) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
   const locator = {
-    attribute: 'data-uid',
+    attribute: 'data-cid',
     value: displayName
   }
   const selector = `[${locator.attribute}~="${locator.value}"]`

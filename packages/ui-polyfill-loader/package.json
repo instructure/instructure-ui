@@ -16,9 +16,9 @@
   "license": "MIT",
   "dependencies": {
     "@instructure/config-loader": "^5",
-    "@instructure/ui-presets": "^5",
-    "core-js-builder": "^2.5.7",
-    "loader-utils": "^1.1.0",
+    "@instructure/ui-babel-preset": "^5",
+    "core-js-builder": "^2.6.1",
+    "loader-utils": "^1.2.3",
     "webpack": "^3"
   },
   "publishConfig": {

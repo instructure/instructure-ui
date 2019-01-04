@@ -21,10 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = {
-  presets: [[ require('@instructure/ui-presets/babel'), {
-    themeable: !process.env.DEBUG,
-    coverage: Boolean(process.env.COVERAGE),
-    esModules: Boolean(process.env.ES_MODULES)
-  }]]
-}
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES)
+     }
+   ]]
+ }

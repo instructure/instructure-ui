@@ -23,15 +23,17 @@
  */
 
 const path = require('path')
+const React = require('react')
+const baseConfig = require('@instructure/ui-webpack-config')
 
-const ENV = process.env.NODE_ENV
-const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
-
+const DEBUG = process.env.DEBUG || process.env.NODE_ENV === 'development'
 const outputPath = path.resolve(__dirname, '__build__')
 
+// eslint-disable-next-line no-console
+console.log(`Starting Docs with React version ${React.version}...`)
+
 module.exports = {
-  cache: DEBUG,
-  bail: !DEBUG,
+  ...baseConfig,
   entry: {
     // Note: these entries have to keep these names so that old codepens still work
     common: [
@@ -51,13 +53,10 @@ module.exports = {
     host: '0.0.0.0',
     port: 8080
   },
-  module: {
-    rules: require('@instructure/ui-presets/webpack/module/rules')
-  },
-  plugins: require('./plugins'),
-  // eslint-disable-next-line no-undefined
-  resolve: DEBUG ? require('./resolve') : undefined,
-  // eslint-disable-next-line no-undefined
-  resolveLoader: require('@instructure/ui-presets/webpack/resolveLoader'),
+  plugins: [
+    ...baseConfig.plugins,
+    ...require('./plugins')
+  ],
+  resolve: DEBUG ? require('./resolve') : {},
   devtool: 'cheap-module-source-map'
 }

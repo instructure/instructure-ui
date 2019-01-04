@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 
-module.exports = {
-  presets: [[ require('@instructure/ui-presets/babel') ]]
-}
+ module.exports = {
+   presets: [[ require('@instructure/ui-babel-preset') ]]
+ }

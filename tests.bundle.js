@@ -23,8 +23,9 @@
  */
 
 require('@instructure/ui-themes/lib/canvas/high-contrast')
+require('@instructure/ui-polyfill-loader!')
 
 const theme = require('@instructure/ui-themes/lib/canvas/base').default
 theme.use({ overrides: { transitions: { duration: '1ms' } } })
 
-require('!!karma-tests-loader!')
+require('ui-tests-loader!')

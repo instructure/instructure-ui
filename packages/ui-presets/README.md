@@ -121,12 +121,7 @@ to your existing webpack config.
       {
         test: /\.css$/,
         exclude: [/node_modules/],
-        use: [
-          { loader: 'babel-loader', options: {} },
-          'themeable-css-loader',
-          { loader: 'css-loader', options: {} },
-          { loader: 'postcss-loader', options: {} }
-        ]
+        use: [ 'babel-loader', 'themeable-css-loader' ]
       }
     ]
   },

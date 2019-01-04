@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-presets": "^5",
+    "@instructure/ui-babel-preset": "^5",
     "prop-types": "^15.6.2"
   },
   "dependencies": {
@@ -35,7 +35,6 @@
     "dom-testing-library": "^3.16.3",
     "fetch-mock": "^7.3.0",
     "keycode": "^2",
-    "mocha": "^5.0.1",
     "sinon": "^7.2.2",
     "sinon-chai": "^3.3.0",
     "sizzle": "^2.3.3"

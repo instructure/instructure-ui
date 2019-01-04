@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, spy } from '@instructure/ui-test-utils'
+import { expect, mount, spy, wait } from '@instructure/ui-test-utils'
 
 import ToggleGroup from '../index'
 import ToggleGroupLocator from '../locator'
@@ -193,15 +193,19 @@ describe('<ToggleGroup />', () => {
 
     const toggleGroup = await ToggleGroupLocator.find()
 
-    let iconTitle = await toggleGroup.find('svg > title')
+    let iconTitle
 
-    expect(iconTitle.getTextContent()).to.equal('Icon collapsed')
+    await wait(async () => {
+      iconTitle = await toggleGroup.find('svg > title')
+      expect(iconTitle.getTextContent()).to.equal('Icon collapsed')
+    })
 
     await toggleGroup.clickToggle()
 
-    iconTitle = await toggleGroup.find('svg > title')
-
-    expect(iconTitle.getTextContent()).to.equal('Icon expanded')
+    await wait(async () => {
+      iconTitle = await toggleGroup.find('svg > title')
+      expect(iconTitle.getTextContent()).to.equal('Icon expanded')
+    })
   })
 
   it('should meet a11y standards', async () => {

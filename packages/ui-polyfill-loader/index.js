@@ -32,7 +32,7 @@ module.exports = function BabelPolyFillLoader () {
 
   const callback = this.async()
 
-  const options = loaderUtils.getOptions(this) || loadConfig('polyfill', require('@instructure/ui-presets/polyfill'))
+  const options = loaderUtils.getOptions(this) || loadConfig('polyfill', require('@instructure/ui-babel-preset/lib/polyfill'))
 
   Promise.resolve().then(() => {
     return coreJSBuilder({

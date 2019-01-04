@@ -1,0 +1,37 @@
+{
+  "name": "@instructure/ui-postcss-config",
+  "version": "5.40.0",
+  "description": "A shared postcss config made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/canvas-supported-browsers": "^1",
+    "@instructure/config-loader": "^5",
+    "@instructure/postcss-themeable-styles": "^5",
+    "autoprefixer": "^8.6.5",
+    "postcss": "^6.0.23",
+    "postcss-bidirection": "^2.6.0",
+    "postcss-custom-properties": "^7.0.0",
+    "postcss-initial": "^3.0.0",
+    "postcss-input-range": "4.0.0",
+    "postcss-mixins": "6.2.0",
+    "postcss-nested": "^4.1.1",
+    "postcss-nesting": "^7.0.0",
+    "postcss-reporter": "^6.0.0",
+    "postcss-simple-vars": "4.1.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

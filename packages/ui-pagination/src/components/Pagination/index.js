@@ -247,6 +247,7 @@ export default class Pagination extends Component {
   }
 
   renderArrowButton (label, direction, currentPageIndex) {
+    // eslint-disable-next-line react/prop-types
     const { onClick, disabled } = this.props.children[
       currentPageIndex + direction
     ].props

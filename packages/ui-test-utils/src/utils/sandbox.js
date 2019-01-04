@@ -55,7 +55,7 @@ class Sandbox {
     })
 
     try {
-      // global mocha beforeEach
+      // global Mocha (or Jest?) beforeEach
       beforeEach(this.setup.bind(this))
     } catch (e) {} // eslint-disable-line no-empty
   }

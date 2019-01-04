@@ -1,5 +1,6 @@
 **/.*
 **/__tests__
+**/__testfixtures__
 *.config.js
-src/
 babelrc.js
+*.conf.js

@@ -1,1 +1,1 @@
-module.exports = require('./packages/ui-presets/eslint')
+module.exports = require('@instructure/ui-eslint-config')

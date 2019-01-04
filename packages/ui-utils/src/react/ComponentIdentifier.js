@@ -51,8 +51,8 @@ Abstract component identifier. Helpful for picking out a specific child.
     }
   }
 
-  class Title extends ComponentIdentifier { static displayName = "Title" }
-  class Content extends ComponentIdentifier { static displayName = "Content" }
+  class Title extends ComponentIdentifier { static displayName = 'Title' }
+  class Content extends ComponentIdentifier { static displayName = 'Content' }
 
   ReactDOM.render(
     <App>
