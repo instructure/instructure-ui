@@ -24,6 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -48,12 +49,14 @@ export default class ModalBody extends Component {
     children: PropTypes.node,
     padding: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType
+    as: CustomPropTypes.elementType,
+    variant: PropTypes.oneOf(['default', 'inverse'])
   }
 
   static defaultProps = {
     padding: 'medium',
-    as: 'div'
+    as: 'div',
+    variant: 'default'
   }
 
   render () {
@@ -61,13 +64,17 @@ export default class ModalBody extends Component {
       omitProps(this.props, ModalBody.propTypes),
       ModalBody
     )
+    const classes = classnames ({
+      [styles.root]: true,
+      [styles[this.props.variant]]: this.props.variant,
+    })
     return (
       <View
         {...passthroughProps}
         display="block"
         elementRef={this.props.elementRef}
         as={this.props.as}
-        className={styles.root}
+        className={classes}
         padding={this.props.padding}
         tabIndex="-1" // prevent FF from focusing view when scrollable
       >

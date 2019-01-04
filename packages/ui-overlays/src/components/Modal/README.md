@@ -223,6 +223,94 @@ class ModalAutoCompleteExample extends React.Component {
 
 render(<Example />)
 ```
+
+### Dark Modal
+Setting the `variant` prop to `"inverse"` will result in a dark version of Modal.
+
+```js
+---
+render: false
+example: true
+---
+const fpo = lorem.paragraphs(1)
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      open: false,
+      size: 'auto'
+    }
+  }
+
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  }
+
+  renderCloseButton () {
+    return (
+      <CloseButton
+        placement="end"
+        offset="medium"
+        variant="icon-inverse"
+        onClick={this.handleButtonClick}
+      >
+        Close
+      </CloseButton>
+    )
+  }
+
+  render () {
+    return (
+      <div>
+        <Button onClick={this.handleButtonClick}>
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size="fullscreen"
+          label="Modal Dialog: Hello Media"
+          shouldCloseOnDocumentClick
+          variant="inverse"
+        >
+          <ModalHeader>
+            {this.renderCloseButton()}
+            <Heading level="h2" ellipsis>
+              <Flex alignItems="center">
+                <FlexItem padding="0 small 0 0">
+                  <SVGIcon src={iconExample} size="small" title="Icon Example" />
+                </FlexItem>
+                <FlexItem>
+                  This Modal can contain media
+                </FlexItem>
+              </Flex>
+            </Heading>
+          </ModalHeader>
+          <ModalBody padding="0 medium">
+            <View
+              as="div"
+              margin="auto"
+              textAlign="center"
+              background="transparent"
+            >
+              <Img src={avatarPortrait} />
+            </View>
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
 ### Guidelines
 
 ```js
@@ -241,6 +329,7 @@ guidelines: true
     <FigureItem>Use when the workflow should NOT be interrupted</FigureItem>
     <FigureItem>Use to show error, success, or warning messages/notifications (see Alert)</FigureItem>
     <FigureItem>Add content to a modal that would be better suited in its own page</FigureItem>
+    <FigureItem>Use "inverse" variant for anything other than media</FigureItem>
   </Figure>
 </Guidelines>
 ```

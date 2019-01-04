@@ -9,3 +9,8 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.inverse {
+  background: var(--inverseBackground);
+  border-top: var(--borderWidth) solid var(--inverseBorderColor);
+}

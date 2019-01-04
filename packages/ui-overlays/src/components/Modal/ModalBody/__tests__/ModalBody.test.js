@@ -28,14 +28,25 @@ import { expect, mount, stub } from '@instructure/ui-test-utils'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import ModalBody from '../index'
-
 import ModalBodyLocator from '../locator'
+
+import styles from '../styles.css'
 
 describe('<ModalBody />', async () => {
   it('should render', async () => {
     await mount(<ModalBody />)
     const body = await ModalBodyLocator.find()
     expect(body).to.exist()
+  })
+
+  it('should set inverse styles', async () => {
+    await mount(
+      <ModalBody
+        variant="inverse" />
+    )
+
+    const body = await ModalBodyLocator.find()
+    expect(body.hasClass(styles['inverse'])).to.be.true()
   })
 
   describe('when passing down props to View', async () => {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import React, { Component } from 'react'
+import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
@@ -31,6 +31,7 @@ import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
@@ -98,6 +99,11 @@ export default class Modal extends Component {
      * The size of the `<Modal />` content
      */
     size: PropTypes.oneOf(['auto', 'small', 'medium', 'large', 'fullscreen']),
+
+    /**
+    * Designates the background style of the `<Modal />`
+    */
+    variant: PropTypes.oneOf(['default', 'inverse']),
 
     /**
      * Whether or not the `<Modal />` is open
@@ -197,6 +203,7 @@ export default class Modal extends Component {
   static defaultProps = {
     open: false,
     size: 'auto',
+    variant: 'default',
     transition: 'fade',
     onOpen: event => {},
     onClose: event => {},
@@ -283,10 +290,19 @@ export default class Modal extends Component {
         placement="end"
         offset="medium"
         onClick={this.props.onDismiss}
+        variant={this.props.variant === 'default' ? 'icon' : 'icon-inverse'}
       >
         {this.props.closeButtonLabel}
       </CloseButton>
       : null
+  }
+
+  renderChildren() {
+    return Children.map(this.props.children, (child) => {
+      return safeCloneElement(child, {
+        variant: this.props.variant
+      })
+    })
   }
 
   renderModal () {
@@ -298,8 +314,8 @@ export default class Modal extends Component {
       shouldReturnFocus,
       liveRegion,
       size,
+      variant,
       contentRef,
-      children,
       constrain,
       ...props
     } = this.props
@@ -323,13 +339,14 @@ export default class Modal extends Component {
         className={classnames({
           [styles.root]: true,
           [styles[size]]: true,
+          [styles[variant]]: variant,
           [styles.ie11]: this.ie11
         })}
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
         {this.renderCloseButton()}
-        {children}
+        {this.renderChildren()}
       </Dialog>
     )
 

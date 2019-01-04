@@ -13,3 +13,7 @@
   max-width: var(--contentMaxWidth);
   margin: 0 auto;
 }
+
+.inverse {
+  background: var(--inverseBackground);
+}

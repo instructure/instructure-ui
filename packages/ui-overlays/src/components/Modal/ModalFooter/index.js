@@ -24,6 +24,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import classnames from 'classnames'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
@@ -39,12 +41,23 @@ parent: Modal
 @themeable(theme, styles)
 export default class ModalFooter extends Component {
   static propTypes = {
-    children: PropTypes.node
+    children: PropTypes.node,
+    variant: PropTypes.oneOf(['default', 'inverse']),
+  }
+
+  static defaultProps = {
+    variant: 'default'
   }
 
   render () {
+    const classes = {
+      [styles.root]: true,
+      [styles[this.props.variant]]: this.props.variant,
+    }
+
     return (
-      <div className={styles.root}>
+      <div className={classnames(classes)}
+        {...omitProps(this.props, ModalFooter.propTypes)}>
         {this.props.children}
       </div>
     )

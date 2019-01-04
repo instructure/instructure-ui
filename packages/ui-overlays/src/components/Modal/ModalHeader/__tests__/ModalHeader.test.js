@@ -22,8 +22,31 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
-  return {
-    inverseBackground: colors.backgroundSecondary,
-  }
-}
+import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
+
+import ModalHeader from '../index'
+
+import styles from '../styles.css'
+
+describe('<ModalHeader />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <ModalHeader />
+    )
+
+    const header = within(subject.getDOMNode())
+    expect(header).to.exist()
+  })
+
+  it('should set inverse styles', async () => {
+    const subject = await mount(
+      <ModalHeader
+        variant="inverse" />
+    )
+
+    const header = within(subject.getDOMNode())
+    expect(header.hasClass(styles['inverse'])).to.be.true()
+  })
+
+})

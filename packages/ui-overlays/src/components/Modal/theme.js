@@ -30,6 +30,9 @@ export default function ({ colors, borders, breakpoints, shadows, stacking, typo
     borderColor: colors.borderMedium,
     borderRadius: borders.radiusMedium,
 
+    inverseBackground: colors.backgroundBrandSecondary,
+    inverseTextColor: colors.textLightest,
+
     autoMinWidth: breakpoints.xSmall,
     smallMaxWidth: breakpoints.small,
     mediumMaxWidth: breakpoints.medium,

@@ -350,6 +350,31 @@ describe('<Modal />', async () => {
       expect(consoleError)
         .to.have.been.calledWithMatch('Expected children of Modal in one of the following formats:')
     })
+
+    it('should pass inverse variant to children when set', async () => {
+      let headerRef
+      let bodyRef
+      let footerRef
+
+      await mount(
+        <Modal
+          open
+          label="Dark Modal"
+          shouldReturnFocus={false}
+          variant="inverse"
+        >
+          <ModalHeader ref={el => headerRef = el}>Hello Dark World</ModalHeader>
+          <ModalBody ref={el => bodyRef = el}>Foo Bar Baz</ModalBody>
+          <ModalFooter ref={el => footerRef = el}>
+            <button>Cancel</button>
+          </ModalFooter>
+        </Modal>
+      )
+
+      expect(headerRef.props.variant).to.equal('inverse')
+      expect(bodyRef.props.variant).to.equal('inverse')
+      expect(footerRef.props.variant).to.equal('inverse')
+    })
   })
 
   describe('managed focus', async () => {

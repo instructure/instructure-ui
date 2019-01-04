@@ -28,6 +28,9 @@ export default function ({ colors, borders, spacing }) {
     borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,
     borderRadius: borders.radiusMedium,
-    padding: spacing.small
+    padding: spacing.small,
+
+    inverseBackground: colors.backgroundDarkest,
+    inverseBorderColor: colors.borderDarkest
   }
 }

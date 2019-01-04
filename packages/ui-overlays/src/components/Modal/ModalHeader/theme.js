@@ -24,7 +24,11 @@
 
 export default function ({ colors, spacing }) {
   return {
+    background: colors.backgroundLightest,
     borderColor: colors.borderMedium,
-    padding: spacing.medium
+    padding: spacing.medium,
+
+    inverseBackground: colors.backgroundDarkest,
+    inverseBorderColor: colors.backgroundDarkest
   }
 }

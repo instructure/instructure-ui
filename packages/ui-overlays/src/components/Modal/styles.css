@@ -16,6 +16,11 @@
   }
 }
 
+.inverse {
+  background: var(--inverseBackground);
+  color: var(--inverseTextColor);
+}
+
 .auto,
 .small,
 .medium,

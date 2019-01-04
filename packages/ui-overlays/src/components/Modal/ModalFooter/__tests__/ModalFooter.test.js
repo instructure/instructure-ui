@@ -22,8 +22,31 @@
  * SOFTWARE.
  */
 
-export default function ({ colors }) {
-  return {
-    inverseBackground: colors.backgroundSecondary,
-  }
-}
+import React from 'react'
+import { expect, mount, within } from '@instructure/ui-test-utils'
+
+import ModalFooter from '../index'
+
+import styles from '../styles.css'
+
+describe('<ModalFooter />', async () => {
+  it('should render', async () => {
+    const subject = await mount(
+      <ModalFooter />
+    )
+
+    const footer = within(subject.getDOMNode())
+    expect(footer).to.exist()
+  })
+
+  it('should set inverse styles', async () => {
+    const subject = await mount(
+      <ModalFooter
+        variant="inverse" />
+    )
+
+    const footer = within(subject.getDOMNode())
+    expect(footer.hasClass(styles['inverse'])).to.be.true()
+  })
+
+})
