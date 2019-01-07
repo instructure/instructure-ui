@@ -394,6 +394,7 @@ export default class Modal extends Component {
             onExit={onExit}
             onExiting={onExiting}
             onExited={createChainedFunction(this.handleTransitionExited, onExited)}
+            theme={{ duration: this.ie11 && '0s' }} // IE11 doesn't always complete transition
           >
             {
               (constrain === 'parent') ?

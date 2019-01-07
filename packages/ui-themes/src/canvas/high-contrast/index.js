@@ -35,7 +35,7 @@ export const variables = {
 
 export default registerTheme({
   key: KEYS.CANVAS_HIGH_CONTRAST,
-  immutable: true,
+  immutable: false,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   variables
 })
