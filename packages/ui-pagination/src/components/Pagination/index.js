@@ -34,6 +34,7 @@ import uid from '@instructure/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
 import PaginationButton from './PaginationButton'
 import PaginationArrowButton from './PaginationArrowButton'
@@ -80,7 +81,7 @@ export default class Pagination extends Component {
     /**
      * Visible label for component
      */
-    label: PropTypes.string,
+    label: PropTypes.node,
     /**
      * Accessible label for next button
      */
@@ -191,15 +192,19 @@ export default class Pagination extends Component {
   }
 
   renderLabel () {
-    if (this.props.label) {
-      const display =
-        this.props.variant === 'compact' ? 'block' : 'inline-block'
-      return (
-        <View padding="small" display={display} id={this._labelId}>
-          {this.props.label}
-        </View>
-      )
-    }
+    const display = this.props.variant === 'compact' ? 'block' : 'inline-block'
+    const visibleLabel = hasVisibleChildren(this.props.label)
+
+    return (
+      <View
+        as="span"
+        padding={visibleLabel ? 'small' : '0'}
+        display={visibleLabel ? display : 'auto'}
+        id={this._labelId}
+      >
+        {this.props.label}
+      </View>
+    )
   }
 
   renderPages (currentPageIndex) {
@@ -278,7 +283,7 @@ export default class Pagination extends Component {
         className={styles.root}
         aria-labelledby={this.props.label && this._labelId}
       >
-        {this.renderLabel()}
+        {this.props.label && this.renderLabel()}
         <View display="inline-block" className={styles.pages}>
           {shouldShowPrevButton(this.props, currentPageIndex) &&
             this.renderArrowButton(

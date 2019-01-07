@@ -24,9 +24,10 @@
 
 import React from 'react'
 
+import ScreenReaderContent from '@instructure/ui-a11y/es/components/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import Pagination from '../index'
 import PaginationButton from '../PaginationButton/index'
@@ -88,6 +89,28 @@ describe('<Pagination />', async () => {
     )
     const pagination = await PaginationLocator.find()
     expect(await pagination.accessible()).to.be.true()
+  })
+
+  it('should render no additional space when label text is hidden', async () => {
+    const pagination = await mount(
+      <Pagination
+        variant="compact"
+        labelNext="Next"
+        labelPrev="Prev"
+      >
+        { buildPages(5) }
+      </Pagination>
+    )
+
+    const paginationNode = within(pagination.getDOMNode())
+    const heightWithNoLabel = paginationNode.getComputedStyle()['height']
+
+    await pagination.setProps({
+      label: <ScreenReaderContent>I am a hidden label</ScreenReaderContent>
+    })
+
+    const heightWithHiddenLabel = paginationNode.getComputedStyle()['height']
+    expect(heightWithNoLabel).to.equal(heightWithHiddenLabel)
   })
 
   it('should render page buttons', async () => {
