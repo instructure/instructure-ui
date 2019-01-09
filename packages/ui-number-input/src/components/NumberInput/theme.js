@@ -56,7 +56,7 @@ export default function generator ({ colors, typography, borders, spacing, forms
     mediumFontSize: typography.fontSizeMedium,
     mediumHeight: forms.inputHeightMedium,
 
-    largeFontSize: typography.fontSizeMedium,
+    largeFontSize: typography.fontSizeLarge,
     largeHeight: forms.inputHeightLarge
   }
 }

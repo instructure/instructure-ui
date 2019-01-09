@@ -142,6 +142,19 @@ function isInteger (number) {
 render(<Example />)
 ```
 
+
+NumberInput comes in 2 sizes. The default size is "medium". 
+
+```js
+---
+example: true
+---
+<div>
+  <NumberInput label="Default-size input" /><br/>
+  <NumberInput size="large" label="Large-size input" />
+</div>
+```
+
 ### Guidelines
 
 ```js
