@@ -17,6 +17,18 @@ A UI testing library made by Instructure Inc.
 yarn add @instructure/ui-test-utils
 ```
 
+### Usage
+
+```javascript
+import { mount, expect, find } from '@instructure/ui-test-utils'
+
+import MyComponent from '../'
+
+it('should render children', async () => {
+  await mount(<MyComponent>Hello World</MyComponent>)
+  expect(await find(':contains(Hello World)')).to.exist()
+})
+```
 [npm]: https://img.shields.io/npm/v/@instructure/ui-test-utils.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-test-utils
 

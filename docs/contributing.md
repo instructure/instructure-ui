@@ -6,72 +6,62 @@ category: Getting Started
 ## Contributing
 
 
+### Prerequisites and Installation
+
+>You'll need to have [Git](http://git-scm.com/) installed on your system.
+>
+>We use [Lerna](https://lernajs.io/) to manage inter-package dependencies in this monorepo.
+>
+>__Prerequisites__: Node.js v8+, Yarn v1.1.0+
+
+__Installation steps:__
+
+1. Install [Git](http://git-scm.com/).
+1. Install [Node](https://nodejs.org/en/)) and [nvm](https://github.com/creationix/nvm).
+1. Install [Yarn](https://yarnpkg.com/lang/en/docs/install/).
+1. Clone this repository: `git clone gerrit:instructure-ui`.
+1. Run `cd instructure-ui`
+1. Run `yarn`
+1. Run `yarn bootstrap`
+
+Run `yarn run` to list the available commands.
+
+
+### Running the documentation app
+
+1. Run `yarn start`
+1. Open [http://localhost:8001](http://localhost:8001) in your browser
+
+
 ### Development
 
-`yarn start:watch` runs the dev server to run/develop examples. You can then visit [http://localhost:8080](http://localhost:8080) in a browser and changes to the source should auto-refresh.
-
-
-### Adding packages
-
->__Before adding a package, create an RFC__ (request for comment) document by running `yarn generate:rfc`. This script
-creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review.
-
-Once the RFC is approved and merged you can go ahead and add your new package:
-
-1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
-2. If you will have React components in your package, add the package components directory to `packages/__docs__/components.js`.
-3. Add an alias for your package in `packages/__docs__/resolve.js`.
-3. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new package.
-4. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package and its components listed in the docs.
-5. Start making changes to your components and watch them update in the browser automatically.
-
-
-### Adding components
-
->__Before adding a component, create an RFC__ (request for comment) document by running `yarn generate:rfc`. This script creates an RFC document for you in `/rfcs`. Fill out this document and submit it for review.
-
-Once the RFC is approved and merged you can go ahead and add your new component:
-
-1. Run `yarn generate:component` and choose a name and package for your component (use Pascal case, e.g. 'MyComponent').
-2. Import/export your component in `packages/[package]src/components/index.js`.
-3. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new component.
-4. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
-5. Start making changes to your component and watch it update in the browser automatically.
-
-### Changes to existing components
-
-If your changes involve changes to the component API, you'll need to fill out an RFC (see above) and have it reviewed
-before implementing your change. Be sure to note any breaking changes or deprecations in the RFC document.
+1. Run `yarn build:watch` to build all of the packages for a development environment and watch for changes.
+1. Run `yarn start:watch` to start the dev server to run/develop examples and documentation. You can then visit [http://localhost:8080](http://localhost:8080) in a browser. When you make changes to the source code you should
+see the page auto-reload.
+1. Run `yarn test:watch --scope @instructure/[package name]` to run the tests for 'package name' and watch for changes.
+1. Run `yarn test` to run all the tests for every package.
 
 
 ### Testing
 
-All components should have good test coverage. See the [testing documentation](#testing-components) for details.
-- `yarn test` will run the tests with a headless browser.
-- `yarn test:watch` will run the tests and watch for changes to the source code.
-Run this if you'd like to debug tests in the browser (Chrome).
-
-Options that can be run with `yarn test`/`yarn test:watch`:
-- `--changed` will run the tests against any package that has changes (since the previous commit, including un-staged changes).
-- `--staged` will run tests against packages that have been staged but not yet committed.
-- `--scope [package name from its package.json (comma delimited)]` will run the tests against a single package.
-- `--path [test file paths (comma delimited)]` will run just the tests in a single test src file.
+See the [testing documentation](#testing-components) for details.
 
 
-### Debugging
+### Linters and Code Formatting
 
-1. Run `yarn test:watch --scope [package name from its package.json]`. This command should automatically open up the Chrome browser.
-2. In Chrome click the 'Debug' button at the top of the page (you may have to scroll up).
-3. Open the [Developer tools](https://developers.google.com/web/tools/chrome-devtools/debug/?hl=en) (`Command + Shift + C`).
-4. Now you can add breakpoints in the test code or the component code to debug issues. (`Command + P` in the 'Sources' tab).
+Linters are run as part of the build. If you use the Sublime Text, Atom, or VSCode editors, you can set up the following plugins to catch lint and formatting errors earlier.
 
-
-  > To run the tests in a browser other than Chrome (e.g. Firefox or Safari)
-  >
-  > `NODE_ENV=test karma start --browsers=Firefox`.
+1. Install the *Linter* plugin [Sublime](http://sublimelinter.readthedocs.org/en/latest/), [Atom](https://atom.io/packages/linter). Linting is included in VSCode.
+1. Install the *EditorConfig* plugin [Sublime](https://github.com/sindresorhus/editorconfig-sublime), [Atom](https://github.com/sindresorhus/atom-editorconfig), [VSCode](https://github.com/editorconfig/editorconfig-vscode)
+1. Install the *Eslint* plugin [Sublime](https://github.com/roadhump/SublimeLinter-eslint), [Atom](https://github.com/AtomLinter/linter-eslint), [VSCode](https://github.com/Microsoft/vscode-eslint)
+1. Install the *Stylelint* plugin [Sublime](https://github.com/kungfusheep/SublimeLinter-contrib-stylelint), [Atom](https://atom.io/packages/linter-stylelint), [VSCode](https://github.com/shinnn/vscode-stylelint)
+1. Run `yarn` to install the dependencies
+1. Restart your editor
 
 
 ### Documentation
+
+Please update the documentation and examples with any changes.
 
 - `yarn start` will build the production version of the documentation. You can view it at [http://localhost:8001](http://localhost:8001).
 - All components and utilities should be well documented, including examples.
@@ -79,11 +69,62 @@ Options that can be run with `yarn test`/`yarn test:watch`:
 always be in sync.
 
 
+### Commit Guidelines
+
+1. Run `yarn commit` to commit your changes and follow our commit message format.
+1. Please do not include the output of `yarn build` in your commits.
+
+
+### Updating build (repository) dependencies
+
+1. `yarn add <package-name>` or `yarn upgrade <package-name>`.
+1. Commit the result.
+
+
+### Updating individual package dependencies
+
+1. Update the relevant `package.json` file. Make sure to retain the `^` semver range.
+1. Run `yarn bootstrap` and commit the result.
+
+
+### Adding packages
+
+1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
+1. If you will have React components in your package, add the package components directory to `packages/__docs__/components.js`.
+1. Add an alias for your package in `packages/__docs__/resolve.js`.
+1. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new package.
+1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package and its components listed in the docs.
+1. Start making changes to your components and watch them update in the browser automatically.
+
+
+### Adding components
+
+1. Run `yarn generate:component` and choose a name and package for your component (use Pascal case, e.g. 'MyComponent').
+1. Import/export your component in `packages/[package]src/components/index.js`.
+1. Kill the server (if you had it running), and run `yarn start:watch` to pick up the new component.
+1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
+1. Start making changes to your component and watch it update in the browser automatically.
+
+
+### Proposing API changes
+
+If you'd like to propose changes to a component API or a new component, you'll need to fill out an RFC ("request for change") document and have it reviewed before implementing your change. Be sure to note any breaking changes or deprecations in the RFC document.
+
+1. Run `yarn generate:rfc`. This script creates an RFC document for you in `/rfcs`.
+1. Fill out this document and submit it for review.
+1. Once the RFC is approved and merged you can go ahead and make your change.
+
+
 ### Accessibility and Internationalization Requirements
 
 All components should:
 1. be high contrast aware (use theme variables for all colors, colors should meet [4.5:1](http://www.w3.org/TR/WCAG20-TECHS/G18.html) and [3:1](http://www.w3.org/TR/WCAG20-TECHS/G183.html) contrast ratios).
-2. be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
-3. be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
-4. support RTL languages.
-5. localize all dates, times, numbers and strings (or require localized content passed in via props).
+1. be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
+1. be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
+1. support RTL languages.
+1. localize all dates, times, numbers and strings (or require localized content passed in via props).
+
+
+### Releases
+
+See the [releases documentation](#releases) for information on the release process.

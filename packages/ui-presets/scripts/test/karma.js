@@ -44,6 +44,12 @@ if (argv.includes('--no-headless')) {
   args.push('--no-headless')
 }
 
+const browsersArgIndex = argv.findIndex(arg => arg.startsWith('--browsers='))
+
+if (browsersArgIndex) {
+  args.push(argv[browsersArgIndex])
+}
+
 const scopeArgIndex = argv.indexOf('--scope')
 const pathArgIndex = argv.indexOf('--path')
 

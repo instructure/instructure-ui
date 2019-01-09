@@ -5232,10 +5232,10 @@ dom-serializer@0, dom-serializer@~0.1.0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
-dom-testing-library@^3.16.1:
-  version "3.16.1"
-  resolved "https://registry.npmjs.org/dom-testing-library/-/dom-testing-library-3.16.1.tgz#9911d775adba1cf5b68ec30a02bbf6b2989727f9"
-  integrity sha512-dYVeCXo7cBviHP7c+bRlXm0r0HXSOcUeMt6kKqnpCSKhyPbRFas1IKhjB/APP4yhBDwn9XECIC84ZlgTEiCm4A==
+dom-testing-library@^3.16.3:
+  version "3.16.3"
+  resolved "https://registry.npmjs.org/dom-testing-library/-/dom-testing-library-3.16.3.tgz#9dbf88d0a0c12f653248ad8f2a5aa17cc66f85e9"
+  integrity sha512-AZJJ/lmw+/yZxUVWoua5BofYK9EAQ/7Ai2wldUb6mSjE1XZy2H/+IrhG57lp3GqYN5WK7c2HzBLu8lW3c6/bXQ==
   dependencies:
     "@babel/runtime" "^7.1.5"
     "@sheerun/mutationobserver-shim" "^0.3.2"
@@ -6406,14 +6406,13 @@ fd-slicer@~1.0.1:
   dependencies:
     pend "~1.2.0"
 
-fetch-mock@^7.2.7:
-  version "7.2.7"
-  resolved "https://registry.npmjs.org/fetch-mock/-/fetch-mock-7.2.7.tgz#9b109b424019b49c61340b3da67431c9268e8772"
-  integrity sha512-2iMiasd1G+5E8h3dOJcTpAgqBu9J+I0wXhXlTD4fFpvt4DHAS0lmQ6qbwF6s/9w9zq/JK2ZrMUsoj+9r8zr5eA==
+fetch-mock@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.npmjs.org/fetch-mock/-/fetch-mock-7.3.0.tgz#4bf41190c19477c4c86ce1739972035bb02b3add"
+  integrity sha512-KxBeS8vsADFbWPVomuwxYqOJ2obZo6CidgkypjDPeu6zl+tAJvh2GfLDmJ8u//xgBGM9iOGwOxafeqAclilH2A==
   dependencies:
     babel-polyfill "^6.26.0"
     glob-to-regexp "^0.4.0"
-    karma "^3.1.1"
     path-to-regexp "^2.2.1"
     whatwg-url "^6.5.0"
 
@@ -9699,6 +9698,11 @@ karma-coverage@^1.1.1:
     minimatch "^3.0.0"
     source-map "^0.5.1"
 
+karma-firefox-launcher@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/karma-firefox-launcher/-/karma-firefox-launcher-1.1.0.tgz#2c47030452f04531eb7d13d4fc7669630bb93339"
+  integrity sha512-LbZ5/XlIXLeQ3cqnCbYLn+rOVhuMIK9aZwlP6eOLGzWdo1UVp7t6CN3DP4SafiRLjexKwHeKHDm0c38Mtd3VxA==
+
 karma-mocha-reporter@^2.2.5:
   version "2.2.5"
   resolved "https://registry.npmjs.org/karma-mocha-reporter/-/karma-mocha-reporter-2.2.5.tgz#15120095e8ed819186e47a0b012f3cd741895560"
@@ -9714,6 +9718,11 @@ karma-mocha@^1.3.0:
   integrity sha1-7qrH/8DiAetjxGdEDStpx883eL8=
   dependencies:
     minimist "1.2.0"
+
+karma-safari-launcher@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.npmjs.org/karma-safari-launcher/-/karma-safari-launcher-1.0.0.tgz#96982a2cc47d066aae71c553babb28319115a2ce"
+  integrity sha1-lpgqLMR9BmquccVTursoMZEVos4=
 
 karma-sourcemap-loader@^0.3.7:
   version "0.3.7"

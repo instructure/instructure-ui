@@ -5,8 +5,7 @@ category: Getting Started
 
 ## Themes
 
-The react components use the [@instructure/ui-themeable](#themeable) library along
-with a [babel plugin](#babel-plugin-themeable-styles) to import CSS styles and generate theme
-variables.
-
 For details on how to theme components, see the [@instructure/ui-themeable](#themeable) documentation.
+
+To see details on the themes that are available,
+see the [canvas theme](#canvas) and the [high contrast canvas theme](#canvas-high-contrast) documentation.

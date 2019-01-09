@@ -53,8 +53,10 @@ class Sandbox {
       })
     })
 
-    // global mocha beforeEach
-    beforeEach(this.setup.bind(this))
+    try {
+      // global mocha beforeEach
+      beforeEach(this.setup.bind(this))
+    } catch (e) {} // eslint-disable-line no-empty
   }
 
   teardown () {
@@ -92,30 +94,34 @@ class Sandbox {
   }
 
   setup () {
-    this.teardown()
+    try {
+      this.teardown()
 
-    document.documentElement.setAttribute('dir', 'ltr')
-    document.documentElement.setAttribute('lang', 'en-US')
+      document.documentElement.setAttribute('dir', 'ltr')
+      document.documentElement.setAttribute('lang', 'en-US')
 
-    // override mocha's onerror handler
-    if (typeof window.onerror === 'function') {
-      this._originalWindowOnError = window.onerror
-      window.onerror = overrideWindowOnError(window.onerror)
+      // override mocha's onerror handler
+      if (typeof window.onerror === 'function') {
+        this._originalWindowOnError = window.onerror
+        window.onerror = overrideWindowOnError(window.onerror)
+      }
+
+      // for prop-type warnings:
+      if (typeof console.error === 'function') {
+        this._originalConsoleError = console.error
+        console.error = overrideConsoleError(console.error)
+      }
+
+      this._observer.observe(document.head, { childList: true })
+      this._observer.observe(document.body, { childList: true })
+
+      // We need to call 'mock' at least once
+      // in order to get fetch-mock to error out on unexpected actual fetch calls,
+      // so we call it with a bogus path that should never get hit.
+      fetchMock.mock('bananas', 'bananas')
+    } catch (e) {
+      console.warn(`[ui-test-utils] error in test setup: ${e}`)
     }
-
-    // for prop-type warnings:
-    if (typeof console.error === 'function') {
-      this._originalConsoleError = console.error
-      console.error = overrideConsoleError(console.error)
-    }
-
-    this._observer.observe(document.head, { childList: true })
-    this._observer.observe(document.body, { childList: true })
-
-    // We need to call 'mock' at least once
-    // in order to get fetch-mock to error out on unexpected actual fetch calls,
-    // so we call it with a bogus path that should never get hit.
-    fetchMock.mock('bananas', 'bananas')
   }
 
   stub (obj, method, fn) {

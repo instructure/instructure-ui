@@ -67,8 +67,7 @@ plugins = plugins.concat([
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
       '**/generate-examples/src/**/*.js',
-      '**/uid/src/**/*.js',
-      '**/ui-decorator/src/**/*.js'
+      '**/ui-decorator/src/**/*.js',
     ],
     ignore: [
       '**/*-loader.js',
@@ -95,7 +94,6 @@ plugins = plugins.concat([
       '**/ui-utils/src/{react,dom}/index.js',
 
       // packages to ignore:
-      '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
       '**/media-capture/src/**',
@@ -117,10 +115,7 @@ plugins = plugins.concat([
       '**/ui-utils/src/uid.js',
       '**/ui-utils/src/dom/generateElementId.js',
       '**/ui-utils/src/react/containerQuery.js',
-      '**/ui-utils/src/Decimal.js',
-
-      // WIP docs:
-      '**/docs/testing-best-practices.md'
+      '**/ui-utils/src/Decimal.js'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas/base'),

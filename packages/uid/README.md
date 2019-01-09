@@ -17,6 +17,14 @@ A unique (CSS-safe) id generator made by Instructure Inc.
 yarn add @instructure/uid
 ```
 
+### Usage
+
+```javascript
+import uid from '@instructure/uid'
+
+const id = uid()
+```
+
 [npm]: https://img.shields.io/npm/v/@instructure/uid.svg
 [npm-url]: https://npmjs.com/package/@instructure/uid
 
