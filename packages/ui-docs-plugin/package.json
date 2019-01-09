@@ -24,7 +24,7 @@
     "@instructure/config-loader": "^5",
     "@instructure/ui-docs-client": "^5",
     "favicons-webpack-plugin": "^0.0.9",
-    "globby": "^8.0.1",
+    "globby": "^8.0.2",
     "gray-matter": "^4.0.1",
     "html-webpack-plugin": "^2.29.0",
     "jsdoc-api": "^4.0.1",

@@ -44,7 +44,7 @@
     "classnames": "^2",
     "gray-matter": "^3.0.2",
     "he": "^1.2.0",
-    "marked": "^0.5.2",
+    "marked": "^0.6.0",
     "prop-types": "^15",
     "react-github-corner": "^2.1.0"
   },
