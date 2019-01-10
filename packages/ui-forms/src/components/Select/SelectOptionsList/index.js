@@ -196,7 +196,7 @@ class SelectOptionsList extends Component {
     return options.map((option, index) => {
       const { children, id, icon, groupLabel, groupItem } = option
       const selected = getOptionId(selectedOption) === id
-      const disabled = this.props.disabled || groupLabel
+      const disabled = option.disabled || groupLabel
       const handlers = {
         onMouseEnter: () => onHighlightOption(index),
         onClick: event => this.handleClick(event, option)

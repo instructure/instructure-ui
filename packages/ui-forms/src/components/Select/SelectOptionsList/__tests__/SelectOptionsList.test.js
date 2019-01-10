@@ -266,7 +266,8 @@ describe('<SelectOptionsList />', async () => {
     const list = await SelectOptionsListLocator.find()
     const item = await list.findOption()
 
-    await item.click()
+    await item.click(null, { disabled: true })
+
     expect(onSelect).to.not.have.been.called()
   })
 })
