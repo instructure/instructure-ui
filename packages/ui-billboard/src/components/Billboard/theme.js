@@ -34,13 +34,13 @@ export default function generator ({ borders, colors, spacing, typography }) {
     smallMargin: spacing.xSmall,
     mediumMargin: spacing.small,
     largeMargin: spacing.medium,
-    iconHoverColor: colors.textBrand,
+    iconHoverColor: colors.textLink,
     backgroundColor: colors.backgroundLightest,
     iconHoverColorInverse: colors.textLightest,
     buttonBorderWidth: borders.widthMedium,
     buttonBorderRadius: borders.radiusLarge,
     messageColor: colors.textDark,
-    messageColorClickable: colors.textBrand,
+    messageColorClickable: colors.textLink,
     messageColorInverse: colors.textLight,
     messageFontSizeSmall: typography.fontSizeSmall,
     messageFontSizeMedium: typography.fontSizeMedium,
@@ -54,8 +54,8 @@ export default function generator ({ borders, colors, spacing, typography }) {
 
 generator.canvas = function (variables) {
   return {
-    iconHoverColor: variables['ic-brand-primary'],
-    messageColorClickable: variables['ic-brand-primary'],
+    iconHoverColor: variables['ic-link-color'],
+    messageColorClickable: variables['ic-link-color'],
     clickableActiveBg: variables['ic-brand-primary']
   }
 }
