@@ -1,6 +1,6 @@
 {
   "name": "@instructure/media-capture",
-  "version": "5.38.0",
+  "version": "5.39.0",
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -26,7 +26,6 @@
     "redux-devtools": "^3.4.1"
   },
   "dependencies": {
-    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-alerts": "^5",
     "@instructure/ui-buttons": "^5",
@@ -36,6 +35,7 @@
     "@instructure/ui-menu": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "@instructure/uid": "^5",
     "babel-runtime": "^6",
     "classnames": "^2",
     "keycode": "^2.2.0",

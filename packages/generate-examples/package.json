@@ -1,6 +1,6 @@
 {
   "name": "@instructure/generate-examples",
-  "version": "5.38.0",
+  "version": "5.39.0",
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.39.0"></a>
+# [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **ui-overlays:** prevent ModalBody focus when scrollable ([a1fafa5](https://github.com/instructure/instructure-ui/commit/a1fafa5))
+* **ui-overlays:** set Modal transition to 0s for IE11 ([7a669e5](https://github.com/instructure/instructure-ui/commit/7a669e5))
+
+
+### Features
+
+* **ui-overlays:** add inverse variant to modal ([d0f6332](https://github.com/instructure/instructure-ui/commit/d0f6332))
+* **uid:** Add a uid package/util ([279bcda](https://github.com/instructure/instructure-ui/commit/279bcda))
+
+
+
+
+
 <a name="5.38.0"></a>
 # [5.38.0](https://github.com/instructure/instructure-ui/compare/v5.37.0...v5.38.0) (2019-01-04)
 

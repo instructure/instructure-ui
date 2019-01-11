@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.39.0"></a>
+# [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **docs-app:** add missing changelog in docs ([7c18ccd](https://github.com/instructure/instructure-ui/commit/7c18ccd))
+* **NumberInput:** display '0' passed as a number ([4935f95](https://github.com/instructure/instructure-ui/commit/4935f95))
+* **ui-forms:** fix disabled opacity for select options ([66101a6](https://github.com/instructure/instructure-ui/commit/66101a6))
+* **ui-overlays:** prevent ModalBody focus when scrollable ([a1fafa5](https://github.com/instructure/instructure-ui/commit/a1fafa5))
+* **ui-overlays:** set Modal transition to 0s for IE11 ([7a669e5](https://github.com/instructure/instructure-ui/commit/7a669e5))
+* **ui-pagination:** Fix hidden label text layout ([4b15da4](https://github.com/instructure/instructure-ui/commit/4b15da4))
+
+
+### Features
+
+* **ui-billboard:** use link color for billboard message ([d0049db](https://github.com/instructure/instructure-ui/commit/d0049db))
+* **ui-decorator:** add a ui-decorator package/util ([8179186](https://github.com/instructure/instructure-ui/commit/8179186))
+* **ui-overlays:** add inverse variant to modal ([d0f6332](https://github.com/instructure/instructure-ui/commit/d0f6332))
+* **ui-test-utils:** add MutationObserver, setImmediate shims ([97adeba](https://github.com/instructure/instructure-ui/commit/97adeba))
+* **uid:** Add a uid package/util ([279bcda](https://github.com/instructure/instructure-ui/commit/279bcda))
+
+
+
+
+
 <a name="5.38.0"></a>
 # [5.38.0](https://github.com/instructure/instructure-ui/compare/v5.37.0...v5.38.0) (2019-01-04)
 

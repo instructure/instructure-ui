@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-layout",
-  "version": "5.38.0",
+  "version": "5.39.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -26,7 +26,6 @@
   },
   "dependencies": {
     "@instructure/debounce": "^5",
-    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-motion": "^5",
@@ -34,6 +33,7 @@
     "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "@instructure/uid": "^5",
     "babel-runtime": "^6",
     "classnames": "^2",
     "prop-types": "^15"

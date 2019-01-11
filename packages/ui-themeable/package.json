@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themeable",
-  "version": "5.38.0",
+  "version": "5.39.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -26,10 +26,10 @@
     "@instructure/ui-testable": "^5"
   },
   "dependencies": {
-    "@instructure/uid": "^5",
     "@instructure/ui-decorator": "^5",
     "@instructure/ui-stylesheet": "^5",
     "@instructure/ui-utils": "^5",
+    "@instructure/uid": "^5",
     "babel-runtime": "^6",
     "prop-types": "^15",
     "tinycolor2": "^1.4.1"

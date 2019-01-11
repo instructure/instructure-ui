@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.39.0"></a>
+# [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
+
+
+### Bug Fixes
+
+* **NumberInput:** display '0' passed as a number ([4935f95](https://github.com/instructure/instructure-ui/commit/4935f95))
+* **ui-forms:** fix disabled opacity for select options ([66101a6](https://github.com/instructure/instructure-ui/commit/66101a6))
+
+
+### Features
+
+* **uid:** Add a uid package/util ([279bcda](https://github.com/instructure/instructure-ui/commit/279bcda))
+
+
+
+
+
 <a name="5.38.0"></a>
 # [5.38.0](https://github.com/instructure/instructure-ui/compare/v5.37.0...v5.38.0) (2019-01-04)
 
