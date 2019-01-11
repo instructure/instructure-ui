@@ -1116,6 +1116,20 @@ describe('<NumberInput />', async () => {
     expect(ref.value).to.equal('9.7')
   })
 
+  it('displays the number 0 passed as value prop', async () => {
+    const subject = await mount(
+      <NumberInput
+        label="Name"
+        value={0}
+      />
+    )
+
+    const numberInput = within(subject.getDOMNode())
+    const input = await numberInput.find('input')
+
+    expect(input.getDOMNode().value).to.equal('0')
+  })
+
   describe('events', async () => {
     it('up arrow responds to clicks', async () => {
       const onChange = stub()

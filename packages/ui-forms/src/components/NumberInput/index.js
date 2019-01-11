@@ -424,7 +424,7 @@ class NumberInput extends Component {
         required={required}
         showArrows={showArrows}
         size={size}
-        value={this.conditionalFormat(value || this.state.value)}
+        value={this.conditionalFormat(value == null ? this.state.value : value)}
         width={width}
       />
     )
