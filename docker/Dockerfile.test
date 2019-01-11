@@ -9,6 +9,7 @@ ENV YARN_CACHE $DOCKER_HOME/.cache/yarn
 
 ## Add Chrome and ssh
 RUN curl --silent "https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-key add - \
+ && curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
  && echo "deb https://dl.google.com/linux/chrome/deb/ stable main" > "/etc/apt/sources.list.d/google.list" \
  && apt-get update --quiet=2 \
  && apt-get install --quiet=2 --no-install-recommends --yes \
