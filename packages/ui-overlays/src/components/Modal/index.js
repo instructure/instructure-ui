@@ -81,7 +81,7 @@ export default class Modal extends Component {
     label: PropTypes.string.isRequired,
 
     /**
-     * An accessible label for the close button. The close button won't display without this label.
+     * __DEPRECATED (5.0.0)__ An accessible label for the close button. The close button won't display without this label.
      */
     closeButtonLabel: PropTypes.string,
 
@@ -148,7 +148,7 @@ export default class Modal extends Component {
 
     /**
      *
-     * A function that returns a reference to the close button element
+     * __DEPRECATED (5.0.0)__ A function that returns a reference to the close button element
      */
     closeButtonRef: PropTypes.func,
 
@@ -341,7 +341,7 @@ export default class Modal extends Component {
         className={classnames({
           [styles.root]: true,
           [styles[size]]: true,
-          [styles[variant]]: variant,
+          [styles.inverse]: this.props.variant === 'inverse',
           [styles.ie11]: this.ie11
         })}
         ref={this.contentRef}

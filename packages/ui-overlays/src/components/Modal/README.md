@@ -109,11 +109,9 @@ render(<Example />)
 
 ### Constraining Modal to a parent element
 
-By default, Modals are positioned relative to the document body. Setting the `constrain`
-property to `parent` will constrain the Modal within the element it is mounted from
-(specified via the `mountNode` property). _Note: in these cases, the `mountNode`
-element should have an explicit `height` set: Because Modal is absolutely positioned,
-it has no height of its own._
+By default, Modals are positioned relative to the document body.
+ 
+Setting the `constrain` property to `parent` will constrain the Modal within the element it is mounted from (specified via the `mountNode` property). Note: in these cases, the `mountNode` element should have an explicit `height` set: Because Modal is absolutely positioned, it has no height of its own.
 
 ```js
 ---
@@ -249,19 +247,6 @@ class Example extends React.Component {
     })
   }
 
-  renderCloseButton () {
-    return (
-      <CloseButton
-        placement="end"
-        offset="medium"
-        variant="icon-inverse"
-        onClick={this.handleButtonClick}
-      >
-        Close
-      </CloseButton>
-    )
-  }
-
   render () {
     return (
       <div>
@@ -277,17 +262,31 @@ class Example extends React.Component {
           variant="inverse"
         >
           <ModalHeader>
-            {this.renderCloseButton()}
-            <Heading level="h2" ellipsis>
-              <Flex alignItems="center">
-                <FlexItem padding="0 small 0 0">
-                  <SVGIcon src={iconExample} size="small" title="Icon Example" />
-                </FlexItem>
-                <FlexItem>
-                  This Modal can contain media
-                </FlexItem>
-              </Flex>
-            </Heading>
+            <Flex>
+              <FlexItem grow shrink>
+                <Flex alignItems="center">
+                  <FlexItem margin="0 x-small 0 0">
+                    <SVGIcon src={iconExample} size="small" title="Icon Example" />
+                  </FlexItem>
+                  <FlexItem grow shrink>
+                    <Heading level="h2" ellipsis>This Modal Contains Media    </Heading>
+                  </FlexItem>
+                </Flex>
+              </FlexItem>
+              <FlexItem>
+                <Button variant="icon-inverse" icon={IconPrinter.Solid} margin="0 x-small">
+                  <ScreenReaderContent>Print This</ScreenReaderContent>
+                </Button>
+                <Button variant="icon-inverse" icon={IconDownload.Solid} margin="0 x-small 0 0">
+                  <ScreenReaderContent>Download This</ScreenReaderContent>
+                </Button>
+                <Button variant="icon-inverse" icon={IconX.Solid}
+                  onClick={this.handleButtonClick}
+                >
+                  <ScreenReaderContent>Close</ScreenReaderContent>
+                </Button>
+              </FlexItem>
+            </Flex>
           </ModalHeader>
           <ModalBody padding="0 medium">
             <View

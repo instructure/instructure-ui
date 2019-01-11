@@ -52,7 +52,7 @@ export default class ModalFooter extends Component {
   render () {
     const classes = {
       [styles.root]: true,
-      [styles[this.props.variant]]: this.props.variant,
+      [styles.inverse]: this.props.variant === 'inverse'
     }
 
     return (

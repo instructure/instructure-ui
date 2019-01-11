@@ -1,7 +1,7 @@
 .root {
   box-sizing: border-box;
   padding: var(--padding);
-  padding-inline-end: calc(var(--padding) * 2 + 1em);
+  padding-inline-end: var(--padding);
   padding-inline-start: var(--padding);
   flex: 0 0 auto;
   background: var(--background);
@@ -13,4 +13,8 @@
 .inverse {
   background: var(--inverseBackground);
   border-bottom-color: var(--inverseBorderColor);
+}
+
+.withCloseButton {
+  padding-inline-end: calc(var(--padding) * 2 + 1em);
 }

@@ -66,7 +66,7 @@ export default class ModalBody extends Component {
     )
     const classes = classnames ({
       [styles.root]: true,
-      [styles[this.props.variant]]: this.props.variant,
+      [styles.inverse]: this.props.variant === 'inverse'
     })
     return (
       <View

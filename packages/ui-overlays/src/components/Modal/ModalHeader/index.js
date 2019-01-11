@@ -24,6 +24,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import classnames from 'classnames'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
@@ -50,9 +52,19 @@ export default class ModalHeader extends Component {
   }
 
   render () {
+
+    let usesCloseButton = false
+
+    React.Children.forEach(this.props.children, (child) => {
+      if (child && matchComponentTypes(child, [CloseButton])) {
+        usesCloseButton = true
+      }
+    })
+
     const classes = {
       [styles.root]: true,
-      [styles[this.props.variant]]: this.props.variant,
+      [styles.inverse]: this.props.variant === 'inverse',
+      [styles.withCloseButton]: usesCloseButton === true
     }
 
     return (

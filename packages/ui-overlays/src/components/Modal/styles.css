@@ -2,6 +2,7 @@
   font-family: var(--fontFamily);
   color: var(--textColor);
   display: flex;
+  min-width: 1px; /* stylelint-disable-line unit-blacklist */
   flex-direction: column;
   position: relative;
   box-sizing: border-box;
