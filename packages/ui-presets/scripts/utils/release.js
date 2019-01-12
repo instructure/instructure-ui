@@ -195,15 +195,26 @@ exports.publishPackage = async function publishPackage (packageName, currentVers
     }
   }
 
-  info(`📦  Publishing ${npmTag} ${releaseVersion} of ${packageName}...`)
+  let packageInfo = { versions: [] }
 
   try {
-    await runCommandAsync('yarn', ['publish', '--tag', npmTag])
-  } catch (err) {
-    error(err)
+    const { stdout } = await runCommandAsync('npm', ['info', '--json'])
+    packageInfo = JSON.parse(stdout)
+  } catch (e) {
+    error(e)
+    process.exit(1)
   }
 
-  info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
+  if (packageInfo.versions.includes(currentVersion)) {
+    info(`📦  v${currentVersion} is already published!`)
+  } else {
+    try {
+      await runCommandAsync('yarn', ['publish', '--tag', npmTag])
+      info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
+    } catch (err) {
+      error(err)
+    }
+  }
 }
 
 exports.deprecatePackage = async function deprecatePackage (packageName, currentVersion, message, config = {}) {
