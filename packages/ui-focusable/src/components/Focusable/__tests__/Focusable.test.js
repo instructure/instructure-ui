@@ -99,6 +99,88 @@ describe('<Focusable />', async () => {
     expect(lastCall(renderSpy).focusVisible).to.equal(false)
   })
 
+  it('should handle conditionally rendered focus elements', async () => {
+    const props = {
+      /* eslint-disable react/display-name */
+      /* eslint-disable react/prop-types */
+      render: ({ focused }) => {
+        return (
+          <div>
+            {focused
+              ? <input type="text" />
+              : <a href="http://focus.net">Click</a>
+            }
+          </div>
+        )
+      }
+      /* eslint-enable react/prop-types */
+      /* eslint-enable react/display-name */
+    }
+
+    const renderSpy = spy(props, 'render')
+
+    await mount(<Focusable {...props} />)
+
+    const firstFocusable = await find(':focusable')
+    expect(firstFocusable.getTagName()).to.equal('a')
+    expect(firstFocusable.focused()).to.be.false()
+
+    expect(lastCall(renderSpy).focused).to.be.false()
+    expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+
+    await firstFocusable.focus()
+
+    const nextFocusable = await find(':focusable')
+    expect(nextFocusable.getTagName()).to.equal('input')
+    expect(nextFocusable.focused()).to.be.true()
+
+    expect(lastCall(renderSpy).focused).to.be.true()
+    expect(lastCall(renderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+
+    await nextFocusable.blur()
+
+    const lastFocusable = await find(':focusable')
+    expect(lastFocusable.getTagName()).to.equal('a')
+    expect(lastFocusable.focused()).to.be.false()
+
+    expect(lastCall(renderSpy).focused).to.be.false()
+    expect(lastCall(renderSpy).focusable).to.equal(lastFocusable.getDOMNode())
+  })
+
+  it('should maintain focus when the focus element changes', async () => {
+    const props = {
+      /* eslint-disable react/display-name */
+      render: () => { return <a href="http://focus.net">Click</a> }
+      /* eslint-enable react/display-name */
+    }
+
+    const renderSpy = spy(props, 'render')
+
+    const subject = await mount(
+      <Focusable {...props} />
+    )
+
+    const firstFocusable = await find(':focusable')
+    await firstFocusable.focus()
+    expect(firstFocusable.focused()).to.be.true()
+    expect(lastCall(renderSpy).focused).to.be.true()
+    expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+
+    /* eslint-disable react/display-name */
+    const nextProps = { render: () => <button>Click</button> }
+    /* eslint-enable react/display-name */
+
+    const nextRenderSpy = spy(nextProps, 'render')
+    await subject.setProps(nextProps)
+
+    const nextFocusable = await find(':focusable')
+    expect(nextFocusable.getTagName()).to.equal('button')
+    expect(nextFocusable.focused()).to.be.true()
+
+    expect(lastCall(nextRenderSpy).focused).to.be.true()
+    expect(lastCall(nextRenderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+  })
+
   it('should update the focus element correctly', async () => {
     const renderSpy = spy()
 

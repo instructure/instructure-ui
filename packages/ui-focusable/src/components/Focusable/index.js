@@ -84,24 +84,41 @@ class Focusable extends Component {
     })
   }
 
-  componentDidUpdate (prevProps) {
+  componentDidUpdate (prevProps, prevState) {
     const { render, children } = this.props
 
-    if (prevProps.children !== children || prevProps.render !== render) {
-      const { focusable, focused } = this
+    // Check if the focusable element changed since the last render
+    if (prevState.focusable !== this.focusable) {
 
-      if (focusable !== this.state.focusable) {
-        this.removeEventListeners()
-        this.setState({ focusable, focused })
-        this.addEventListeners(focusable)
+      // If the element changed on or while focused, update the focusable element along with the
+      // listeners and ensure that we are still focused
+      if (this.state.focused) {
+        this.focusable.focus()
+        this.updateFocusable(true)
       } else {
-        this.setState({ focused })
+        this.updateFocusable()
       }
+    }
+
+    if (prevProps.children !== children || prevProps.render !== render) {
+      this.updateFocusable()
     }
   }
 
   componentWillUnmount () {
     this.removeEventListeners()
+  }
+
+  updateFocusable (focused = this.focused) {
+    const { focusable } = this
+
+    if (focusable !== this.state.focusable) {
+      this.removeEventListeners()
+      this.setState({ focusable, focused })
+      this.addEventListeners(focusable)
+    } else {
+      this.setState({ focused })
+    }
   }
 
   addEventListeners (focusable) {

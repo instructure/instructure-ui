@@ -6,7 +6,6 @@ The `Focusable` component can be used to identify when an element receives focus
 a `render` or `children` method that returns content which must have exactly one
 [focusable](https://html.spec.whatwg.org/multipage/interaction.html#focusable-area) element.
 
-
 ```javascript
 ---
 example: true
@@ -35,6 +34,32 @@ example: true
 </Focusable>
 ```
 
+Easily implement a "skip to content" link for keyboard-only or screenreader users.
+
+```javascript
+---
+example: true
+---
+<Focusable>
+{({ focused }) => {
+  const button = <Button href="#main">Skip to content</Button>
+  return (
+    <div>
+      {focused ?
+        button :
+        <div>
+          <ScreenReaderContent>{button}</ScreenReaderContent>
+          <Text color="error">
+            Tab into this code example to see the Skip to Content link appear
+          </Text>
+        </div>
+      }
+    </div>
+  )
+}}
+</Focusable>
+```
+
 The `FocusableView` component can be used with `Focusable` to render a minimal focus outline when
 `focused` is set. By default, `FocusableView` renders as a focusable element.
 
@@ -50,7 +75,6 @@ example: true
 )}
 </Focusable>
 ```
-
 
 `FocusableView` can also be used presentationally in conjunction with another focusable element.
 In the following example we render a `button` element and use `FocusableView`'s focus indication in
