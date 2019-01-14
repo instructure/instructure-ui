@@ -299,6 +299,8 @@ export default class Modal extends Component {
 
   renderChildren() {
     return Children.map(this.props.children, (child) => {
+      if (!child) return // ignore null, falsy children
+
       return safeCloneElement(child, {
         variant: this.props.variant
       })

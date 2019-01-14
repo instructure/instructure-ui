@@ -125,6 +125,23 @@ describe('<Modal />', async () => {
     expect(body.getComputedStyle().color).to.equal('rgb(0, 0, 0)')
   })
 
+  it('should handle null children', async () => {
+    await mount(
+      <Modal
+        open
+        label="Modal Dialog"
+        shouldReturnFocus={false}
+      >
+        {null}
+        <ModalBody>Foo Bar Baz</ModalBody>
+        {null}
+      </Modal>
+    )
+    const modal = await ModalLocator.find()
+
+    expect(modal).to.exist()
+  })
+
   it('should apply the aria attributes', async () => {
     await mount(
       <Modal
