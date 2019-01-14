@@ -470,7 +470,7 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-Use `InPlaceEdit` to edit `Text` with a `Select`
+Use `InPlaceEdit` to edit `Text` with a multi-`Select`
 
 ```js
 ---
@@ -483,7 +483,7 @@ class Example extends React.Component {
     super(props)
     this.state = {
       mode: props.mode || 'view',
-      value: 'Bananas',
+      value: ['Bananas'],
     }
   }
   handleChangeMode = (mode) => {
@@ -491,12 +491,13 @@ class Example extends React.Component {
   }
 
   handleChange = (event, selectedOption) => {
-    this.setState({value: selectedOption.value})
+    const value = selectedOption.map(o => o.value)
+    this.setState({value})
   }
 
   renderView = () => (
     <Text size="medium">
-      {this.state.value}
+      {this.state.value.join('|')}
     </Text>
   )
 
@@ -512,6 +513,7 @@ class Example extends React.Component {
       layout="stacked"
       onBlur={onBlur}
       inputRef={editorRef}
+      multiple
     >
       {this.getSelectOptions()}
     </Select>

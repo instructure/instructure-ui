@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, find } from '@instructure/ui-test-utils'
 import Select from '../index'
 import SelectLocator from '../locator'
 
@@ -63,6 +63,57 @@ describe('<Select />', async () => {
 
     expect(input.focused()).to.be.true()
   })
+
+  it('should respond to onBlur event appropriately', async () => {
+    const onBlur = stub()
+    await mount(
+      <div>
+        <Select
+          multiple
+          editable
+          label="Choose a vacation destination"
+          defaultOption={['0']}
+          onBlur={onBlur}
+        >
+          <option value="0">Item one</option>
+          <option value="1">Item two</option>
+          <option value="2">Item three</option>
+          <option value="3">Item four</option>
+        </Select>
+        <a href="/" id="link">focusable element</a>
+      </div>
+    )
+
+    const select = await SelectLocator.find()
+    const input = await select.findInput()
+    const tag = await select.find('button')
+    const link = await find('a')
+
+    // focus moves to input
+    await input.focus()
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
+
+    // focus moves to tag and back to input
+    await tag.click()
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
+
+    // focus moves from input to options
+    await input.keyDown('down')
+    await input.keyDown('down')
+
+    // focus entirely leaves select
+    await link.focus()
+    await wait(() => {
+      expect(link.focused()).to.be.true()
+    })
+
+    expect(onBlur).to.have.been.calledOnce()
+  })
+
 
   it('should provide an focused getter', async () => {
     let selectRef

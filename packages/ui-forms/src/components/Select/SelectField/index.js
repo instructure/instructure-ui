@@ -496,9 +496,9 @@ class SelectField extends Component {
     event.persist()
 
     const el = event.target.tagName === 'INPUT' ? this._menu : this._inputContainer
-
+    const stillFocused = this._inputContainer.contains(event.relatedTarget)
     this.setState(
-      () => ({ focus: false }),
+      () => ({ focus: stillFocused }),
       () => {
         if (this.expanded) {
           this._timeouts.push(
@@ -510,7 +510,9 @@ class SelectField extends Component {
             }, 0)
           )
         }
-        this.props.onBlur(event)
+        if (!stillFocused) {
+          this.props.onBlur(event)
+        }
       }
     )
   }
