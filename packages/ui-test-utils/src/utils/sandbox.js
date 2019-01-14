@@ -29,6 +29,7 @@ import StyleSheet from '@instructure/ui-stylesheet'
 import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
+import { newMutationObserver } from './shims'
 
 class Sandbox {
   constructor () {
@@ -45,7 +46,7 @@ class Sandbox {
     }
 
     this._addedNodes = []
-    this._observer = new MutationObserver((mutations) => {
+    this._observer = newMutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         Array.from(mutation.addedNodes).forEach((addedNode) => {
           this._addedNodes.push(addedNode)
