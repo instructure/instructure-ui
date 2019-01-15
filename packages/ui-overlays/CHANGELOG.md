@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.40.0"></a>
+# [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **ui-overlays:** ensure null can be passed as children to Modal ([80d7483](https://github.com/instructure/instructure-ui/commit/80d7483))
+
+
+
+
+
 <a name="5.39.0"></a>
 # [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
 

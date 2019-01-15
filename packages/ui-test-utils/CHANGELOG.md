@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.40.0"></a>
+# [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **ui-test-utils:** use MutationObserver shim ([2b0128c](https://github.com/instructure/instructure-ui/commit/2b0128c))
+
+
+
+
+
 <a name="5.39.0"></a>
 # [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
 

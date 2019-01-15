@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.40.0"></a>
+# [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **ui-forms:** pass NumberInput props to input ([4b61a84](https://github.com/instructure/instructure-ui/commit/4b61a84))
+* **ui-overlays:** ensure null can be passed as children to Modal ([80d7483](https://github.com/instructure/instructure-ui/commit/80d7483))
+* **ui-test-utils:** use MutationObserver shim ([2b0128c](https://github.com/instructure/instructure-ui/commit/2b0128c))
+
+
+### Features
+
+* **ui-presets:** check if version is published already ([57b8e8f](https://github.com/instructure/instructure-ui/commit/57b8e8f))
+
+
+
+
+
 <a name="5.39.0"></a>
 # [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.40.0"></a>
+# [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
+
+
+### Bug Fixes
+
+* **ui-forms:** pass NumberInput props to input ([4b61a84](https://github.com/instructure/instructure-ui/commit/4b61a84))
+
+
+
+
+
 <a name="5.39.0"></a>
 # [5.39.0](https://github.com/instructure/instructure-ui/compare/v5.38.0...v5.39.0) (2019-01-11)
 

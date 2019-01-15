@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-stylesheet",
-  "version": "5.39.0",
+  "version": "5.40.0",
   "description": "A wrapper around a Glamor StyleSheet.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
