@@ -33,6 +33,7 @@ import NumberInputControlled from '@instructure/ui-number-input/lib/components/N
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 /**
 ---
@@ -406,6 +407,7 @@ class NumberInput extends Component {
 
     return (
       <NumberInputControlled
+        {...omitProps(this.props, NumberInput.propTypes)}
         disabled={disabled}
         id={id}
         inline={inline}

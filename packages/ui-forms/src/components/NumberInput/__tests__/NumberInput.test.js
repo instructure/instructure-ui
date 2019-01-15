@@ -1130,6 +1130,20 @@ describe('<NumberInput />', async () => {
     expect(input.getDOMNode().value).to.equal('0')
   })
 
+  it('passes props through to input element', async () => {
+    const subject = await mount(
+      <NumberInput
+        label="Name"
+        data-automation="foo"
+      />
+    )
+
+    const numberInput = within(subject.getDOMNode())
+    const input = await numberInput.find('input')
+
+    expect(input.getDOMNode().dataset.automation).to.equal('foo')
+  })
+
   describe('events', async () => {
     it('up arrow responds to clicks', async () => {
       const onChange = stub()
