@@ -59,21 +59,70 @@ const executeExampleGenerator = (module, options) => {
   return generateExamples([module], options)[0]
 }
 
+const verifySections = (examples, expectedSections) => {
+  let result = true
+  const sections = examples.map(example => example.name)
+  expectedSections.forEach((expectedSection) => {
+    if (!sections.includes(expectedSection)) {
+      result = false
+    }
+  })
+  return result
+}
+
+const permutations = {
+  variant: ['circle', 'rectangle'],
+  show: [true, false],
+  message: [null, { value: 'hello' }]
+}
+
+const permutationsArray = Object.entries(permutations).map(([key, value]) => {
+  return { [key]: value }
+})
+
+const generateTestCombinations = (options, filter = () => true) => {
+  return generatePropCombinations(permutations)
+    .filter(filter)
+    .map((combination) => {
+      return {
+        ...combination,
+        ...options(combination)
+      }
+    })
+}
+
+const compareCombinations = (testCombinations, resultCombinations) => {
+  return deepEqual({ combinations: testCombinations }, { combinations: resultCombinations })
+}
+
+const renderExample = (Component, componentProps, exampleProps) => {
+  return {
+    componentProps,
+    exampleProps
+  }
+}
+
+const renderLayout = (examples, section) => {
+  return {
+    examples,
+    section
+  }
+}
+
+const verifyMaxExamplesPerPage = (pages, max) => {
+  let result = true
+  pages.forEach((page) => {
+    if (page.props.children.length > max) {
+      result = false
+    }
+  })
+  return result
+}
+
 /* eslint-disable mocha/no-synchronous-tests */
 
 describe('generateExamples', () => {
   describe('sections', () => {
-    const verifySections = (examples, expectedSections) => {
-      let result = true
-      const sections = examples.map(example => example.name)
-      expectedSections.forEach((expectedSection) => {
-        if (!sections.includes(expectedSection)) {
-          result = false
-        }
-      })
-      return result
-    }
-
     it('should create sections based on the enumerated values', () => {
       const { sections } = executeExampleGenerator({
         ...baseModule,
@@ -112,45 +161,6 @@ describe('generateExamples', () => {
   })
 
   describe('render functions', () => {
-    const permutations = {
-      variant: ['circle', 'rectangle'],
-      show: [true, false],
-      message: [null, { value: 'hello' }]
-    }
-
-    const permutationsArray = Object.entries(permutations).map(([key, value]) => {
-      return { [key]: value }
-    })
-
-    const generateTestCombinations = (options, filter = () => true) => {
-      return generatePropCombinations(permutations)
-        .filter(filter)
-        .map((combination) => {
-          return {
-            ...combination,
-            ...options(combination)
-          }
-        })
-    }
-
-    const compareCombinations = (testCombinations, resultCombinations) => {
-      return deepEqual({ combinations: testCombinations }, { combinations: resultCombinations })
-    }
-
-    const renderExample = (Component, componentProps, exampleProps) => {
-      return {
-        componentProps,
-        exampleProps
-      }
-    }
-
-    const renderLayout = (examples, section) => {
-      return {
-        examples,
-        section
-      }
-    }
-
     describe('render props', () => {
       it('generates components for every combination of props', () => {
         const { sections } = executeExampleGenerator({
@@ -408,16 +418,6 @@ describe('generateExamples', () => {
   })
 
   describe('pages', () => {
-    const verifyMaxExamplesPerPage = (pages, max) => {
-      let result = true
-      pages.forEach((page) => {
-        if (page.props.children.length > max) {
-          result = false
-        }
-      })
-      return result
-    }
-
     it('should include all examples in a single page by default',  () => {
       const { sections } = executeExampleGenerator(baseModule)
       const { pages } = sections[0]
@@ -458,25 +458,33 @@ describe('generateExamples', () => {
   })
 
   describe('errors and warnings', () => {
-    const testRequiredProperty = (property) => {
-      it(`should fail to initialize if the ${property} property is not supplied`, () => {
-        const consoleError = stub(console, 'error')
-        const errorMessage = 'Warning: [generateExamples] Error: Could not initialize the examples generator for'
+    it(`should fail to initialize if the 'displayName' property is not supplied`, () => {
+      const consoleError = stub(console, 'error')
 
-        executeExampleGenerator({
-          ...baseModule,
-          [property]: null
-        })
-
-        expect(consoleError)
-          .to.have.been.calledWithMatch(
-            property === 'displayName' ? `${errorMessage} component` : `${errorMessage} TestComponent`
-          )
+      executeExampleGenerator({
+        ...baseModule,
+        displayName: null
       })
-    }
 
-    testRequiredProperty('displayName')
-    testRequiredProperty('component')
+      expect(consoleError)
+        .to.have.been.calledWithMatch(
+          `Warning: [generateExamples] Error: Could not initialize the examples generator for component`
+        )
+    })
+
+    it(`should fail to initialize if the 'component' property is not supplied`, () => {
+      const consoleError = stub(console, 'error')
+
+      executeExampleGenerator({
+        ...baseModule,
+        component: null
+      })
+
+      expect(consoleError)
+        .to.have.been.calledWithMatch(
+          `Warning: [generateExamples] Error: Could not initialize the examples generator for TestComponent`
+        )
+    })
 
     it('should warn if component does not have prop specified in the config', () => {
       const fakeProp = 'foo'
