@@ -94,6 +94,7 @@ plugins = plugins.concat([
       '**/ui-utils/src/{react,dom}/index.js',
 
       // packages to ignore:
+      '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
       '**/media-capture/src/**',
