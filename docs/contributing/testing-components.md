@@ -1,6 +1,7 @@
 ---
 title: Testing
-category: Getting Started
+category: Contributing
+order: 4
 ---
 
 ## Testing

@@ -44,7 +44,7 @@ export default App
 
 ### Contributing
 
-Before contributing please read our [code of conduct](#CODE_OF_CONDUCT) and read the [contributing  documentation](#contributing).
+Before contributing please read our [code of conduct](#CODE_OF_CONDUCT) and read the [docs/contributing](#contributing) documentation.
 
 ### Browser Support
 

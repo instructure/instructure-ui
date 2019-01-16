@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+category: Contributing/RFCs
 id: bidirectionalRFC
 title: bidirectional
 ---
@@ -33,7 +33,7 @@ provides a direction getter method which does the following:
 3) checks the state for direction
 4) defaults to ltr
 
-We are still evaluating the best approach for setting the direction via state. We could possibly 
+We are still evaluating the best approach for setting the direction via state. We could possibly
 check in `componentDidMount` for text direction and update state, but there is a concern that that
 will cause errors (ex. in the case of DrawerTray for transitions). The other possibility is performing
 the check once in the `ApplyDirection` component and passing it purely via context.

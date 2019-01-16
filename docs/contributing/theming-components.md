@@ -1,6 +1,7 @@
 ---
 title: Themes
-category: Getting Started
+category: Contributing
+order: 5
 ---
 
 ## Themes

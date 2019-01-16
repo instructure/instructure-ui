@@ -1,10 +1,10 @@
 ---
-title: Contributing
-category: Getting Started
+title: Getting Started
+category: Contributing
+order: 1
 ---
 
-## Contributing
-
+## Getting Started
 
 ### Prerequisites and Installation
 
@@ -120,9 +120,7 @@ If you'd like to propose changes to a component API or a new component, you'll n
 ### Accessibility and Internationalization Requirements
 
 All components should:
-1. be high contrast aware (use theme variables for all colors, colors should meet [4.5:1](http://www.w3.org/TR/WCAG20-TECHS/G18.html) and [3:1](http://www.w3.org/TR/WCAG20-TECHS/G183.html) contrast ratios).
-1. be keyboard friendly (proper use of tabIndex, logical tab order, ESC to close modals, etc).
-1. be screenreader friendly (label all inputs, use native controls, use screenreader-only text).
+1. be accessible (See the [accessibility requirements](#accessibility) for more information).
 1. support RTL languages.
 1. localize all dates, times, numbers and strings (or require localized content passed in via props).
 

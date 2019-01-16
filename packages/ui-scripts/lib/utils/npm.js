@@ -108,12 +108,11 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
   if (releaseVersion === 'prerelease') {
     args = [
       '--canary',
-      '--preid',
-      preidAndTag,
-      '--dist-tag',
-      preidAndTag,
+      '--preid', preidAndTag,
+      '--dist-tag', preidAndTag,
       '--exact',
-      '--conventional-commits'
+      '--conventional-commits',
+      '--no-git-reset'
     ]
   } else {
     args = ['from-package', '--dist-tag', 'latest']
@@ -129,7 +128,6 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--yes',
       '--no-push',
       '--no-git-tag-version',
-      '--no-git-reset',
       '--force-publish=*'
     ])
 

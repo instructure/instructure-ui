@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+category: Contributing/RFCs
 id: ApplyDirectionRFC
 title: ApplyDirection
 ---
@@ -20,10 +20,10 @@ Will provide direction context for entire subtree of components that subscribe v
 
 
 ### Functional Requirements and API
-We will take a similar approach here to `ApplyTheme`. 
+We will take a similar approach here to `ApplyTheme`.
 
 We create the direction context by implementing the `getChildContext` method setting this.props.direction.
-The render method simply returns the children via the `ensureSingleChild` function. 
+The render method simply returns the children via the `ensureSingleChild` function.
 
 
 ### Examples

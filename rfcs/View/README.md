@@ -1,5 +1,5 @@
 ---
-category: Getting Started/RFCs
+category: Contributing/RFCs
 id: ViewRFC
 title: View
 ---
@@ -75,7 +75,7 @@ Notes:
 - For now, border color will be set and modified via theming. If the need arises in the future, we can modify
 to include a borderColor prop with enumerated values
 - arrow will not be defined here, it will be defined in ContextView. Popovers that need to support the `withArrow`
-prop will conditionally render a if `withArrow` is false `View` or `ContextView` 
+prop will conditionally render a if `withArrow` is false `View` or `ContextView`
 - In the future we may need to add an overflow/scroll prop or props
 - Sizing is `box-sizing: border-box`?
 - We should warn if `margin` prop is set and `as` is set to 'span'

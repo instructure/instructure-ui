@@ -24,7 +24,6 @@
 
 import React, { createElement } from 'react'
 import marked from 'marked'
-import he from 'he'
 import grayMatter from 'gray-matter'
 
 import View from '@instructure/ui-layout/lib/components/View'
@@ -91,45 +90,54 @@ function createRenderer () {
     return currentLevel
   }
 
-  function populateInlineContent (content = '') {
-    const contentArray = content.split(/(\{\{.*?\}\})/)
-    const extractedElements = contentArray.map((text) => {
-      const elementIdMatch = text.match(/\{\{(.*)\}\}/)
-      const decodedText = he.decode(text)
-      const htmlMatch = decodedText.match(/^<([a-z]+)([^<]+)*(?:>(.*)<\/\1>|\s+\/>)$/g)
+  function parseChildren (textContent) {
+    const contentArray = textContent.split(/(\{\{.*?\}\})/)
+    return contentArray
+      .map((subStr, index) => {
+        let child = subStr
 
-      if (elementIdMatch) {
-        tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1)
-        return tracker.elements[elementIdMatch[1]]
-      } else if (htmlMatch) {
-        return createElement('span', {
-          key: text,
-          dangerouslySetInnerHTML: {
-            __html: decodedText
-          }
-        })
-      } else if (text !== '') {
-        return decodedText
-      }
+        if (typeof child === 'string' && child.trim() === '') {
+          return null
+        }
 
-      return null
-    })
+        const elementIdMatch = subStr.match(/\{\{(.*)\}\}/)
+        if (elementIdMatch) {
+          tracker.tree.splice(tracker.tree.indexOf(tracker.elements[elementIdMatch[1]]), 1)
+          child = tracker.elements[elementIdMatch[1]]
+        } else {
+          child = createElement('span', {
+            key: `${textContent}${index}`,
+            dangerouslySetInnerHTML: {
+              __html: child
+            }
+          })
+        }
 
-    return extractedElements
+        return child
+      })
   }
 
-  function addElement (tag, props = {}, children) {
+  function addElement (tag, props = {}, content) {
     const elementId = tracker.nextElementId++
-    let inlineContent = null
+    let children = null
 
-    if (children) {
-      inlineContent = Array.isArray(children) ? children.map(populateInlineContent) : populateInlineContent(children)
+    if (Array.isArray(content)) {
+      children = content.map((text) => {
+        return parseChildren(text)
+      })
+    } else if (content) {
+      children = parseChildren(content)
+    }
+
+    const elementProps = {
+      ...props,
+      key: elementId
     }
 
     tracker.elements[elementId] = createElement(
       (elements && elements[tag]) || tag,
-      Object.assign({ key: elementId }, props),
-      inlineContent
+      elementProps,
+      children
     )
 
     tracker.tree.push(tracker.elements[elementId])
