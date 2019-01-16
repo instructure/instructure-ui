@@ -210,9 +210,6 @@ class SelectSingle extends Component {
         if (optionsChanged) {
           nextProps.onOptionsChange(filteredOptions)
         }
-        if (selectedChanged) {
-          nextProps.onChange(null, selectedOption)
-        }
         return {
           selectedOption,
           filteredOptions,

@@ -347,6 +347,36 @@ describe('<SelectSingle />', async () => {
     expect(input.getDOMNode().value).to.equal('')
   })
 
+  it(`when controlled, should fire onChange appropriately`, async () => {
+    const onChange = stub()
+    const subject = await mount(
+      <SelectSingle
+        label="Choose a vacation destination"
+        options={options}
+        filter={filter}
+        onChange={onChange}
+        selectedOption="0"
+      />
+    )
+
+    const select = await SelectSingleLocator.find()
+    const input = await select.find('input[type="text"]')
+
+    await subject.setProps({
+      selectedOption: '1'
+    })
+
+    expect(input.getDOMNode().value).to.equal(options[1].label)
+    expect(onChange).to.not.have.been.called()
+
+    await input.click()
+    await input.keyDown('down')
+    await input.keyDown('enter')
+
+    expect(input.getDOMNode().value).to.equal(options[2].label)
+    expect(onChange).to.have.been.calledOnce()
+  })
+
   describe('default option', async () => {
     it(`should update the input value if defaultSelectedOption is set and the options update`, async () => {
       // prevents the error that is fired when you select an option that isn't in the options list
