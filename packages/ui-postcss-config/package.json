@@ -19,17 +19,17 @@
     "@instructure/canvas-supported-browsers": "^1",
     "@instructure/config-loader": "^5",
     "@instructure/postcss-themeable-styles": "^5",
-    "autoprefixer": "^8.6.5",
-    "postcss": "^6.0.23",
+    "autoprefixer": "^9.4.4",
+    "postcss": "^7.0.14",
     "postcss-bidirection": "^2.6.0",
-    "postcss-custom-properties": "^7.0.0",
+    "postcss-custom-properties": "^8.0.9",
     "postcss-initial": "^3.0.0",
     "postcss-input-range": "4.0.0",
-    "postcss-mixins": "6.2.0",
+    "postcss-mixins": "^6.2.1",
     "postcss-nested": "^4.1.1",
     "postcss-nesting": "^7.0.0",
-    "postcss-reporter": "^6.0.0",
-    "postcss-simple-vars": "4.1.0"
+    "postcss-simple-vars": "^5.0.1",
+    "postcss-reporter": "^6.0.1"
   },
   "publishConfig": {
     "access": "public"

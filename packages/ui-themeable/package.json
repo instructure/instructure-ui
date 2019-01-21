@@ -26,11 +26,11 @@
     "@instructure/ui-testable": "^5"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
+    "@instructure/uid": "^5",
     "@instructure/ui-decorator": "^5",
     "@instructure/ui-stylesheet": "^5",
     "@instructure/ui-utils": "^5",
-    "@instructure/uid": "^5",
-    "babel-runtime": "^6",
     "prop-types": "^15",
     "tinycolor2": "^1.4.1"
   },

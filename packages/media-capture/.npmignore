@@ -1,6 +1,5 @@
 **/.*
 **/__tests__
-tests.bundle.js
-babelrc.js
+**/__testfixtures__
 *.config.js
 *.conf.js

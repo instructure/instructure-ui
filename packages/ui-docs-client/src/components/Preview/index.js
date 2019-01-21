@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 import classnames from 'classnames'
 
-import { transform } from 'babel-standalone'
+import { transform } from '@babel/standalone'
 
 import ApplyTextDirection, { DIRECTION } from '@instructure/ui-i18n/lib/components/ApplyTextDirection'
 import themeable, { ApplyTheme } from '@instructure/ui-themeable'
@@ -97,7 +97,12 @@ export default class Preview extends Component {
 
   compileCode (code) {
     return transform(code, {
-      presets: ['es2015', 'stage-1', 'react']
+      presets: [
+        'es2015',
+        ['stage-1', { decoratorsLegacy: true }],
+        'react'
+      ],
+      plugins: ['proposal-object-rest-spread']
     }).code
   }
 

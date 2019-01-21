@@ -29,9 +29,8 @@ const {
   isAbsolute
 } = require('path')
 
-const template = require('babel-template')
+const template = require('@babel/template').default
 const requireHook = require('css-modules-require-hook')
-const postCssPlugin = require('@instructure/postcss-themeable-styles')
 
 const transformCSSRequire = require('./transform')
 const generateComponentId = require('./generateComponentId')
@@ -39,15 +38,12 @@ const getScopedNameGenerator = require('./getScopedNameGenerator')
 
 const matchExtensions = /\.css$/i
 
-const DEBUG = Boolean(process.env.DEBUG)
-
 module.exports = function transformThemeableStyles ({ types: t }) {
   const STYLES = new Map()
 
   let componentId
 
   let requireHookInitialized = false
-  let thisPlugin = null
   let thisPluginOptions = {
     ignore: 'node_modules/**/*',
     themeablerc: null,
@@ -58,16 +54,18 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     manipulateOptions (options) {
       if (requireHookInitialized) return options
 
-      thisPlugin = Object.values(options.plugins).filter(
-        ([plugin]) => plugin.manipulateOptions === pluginApi.manipulateOptions
-      )[0]
+      if (Array.isArray(options.plugins)) {
+        const plugins = options.plugins
+          .filter(
+            (plugin) => plugin.manipulateOptions === pluginApi.manipulateOptions
+          )
 
-
-      if (thisPlugin) {
-        thisPluginOptions = thisPlugin[1]
+        if (plugins[0]) {
+          thisPluginOptions = plugins[0].options
+        }
       }
 
-      if (!DEBUG) {
+      if (process.env.NODE_ENV === 'production') {
         requireHook({
           ignore: thisPluginOptions.ignore,
           generateScopedName: (name, filepath, css) => {
@@ -85,7 +83,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
             return css
           },
-          append: [postCssPlugin]
+          append: [require('@instructure/postcss-themeable-styles')]
         })
 
         requireHookInitialized = true
@@ -101,7 +99,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         const { value } = path.parentPath.node.source
 
         if (matchExtensions.test(value)) {
-          if (requireHookInitialized && !DEBUG) {
+          if (requireHookInitialized && process.env.NODE_ENV === 'production') {
             const stylesheetPath = resolveStylesheetPath(requiringFile, value)
             const tokens = requireCssFile(stylesheetPath)
 
@@ -114,11 +112,6 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
             path.parentPath.replaceWith(
               generateVariableDeclaration(path.node.local.name, tokens, css, componentId)
-            )
-          } else {
-            const stylesheetPath = resolveStylesheetPath(requiringFile, value)
-            path.parentPath.replaceWith(
-              generateWebpackRequire(path.node.local.name, stylesheetPath)
             )
           }
         }
@@ -229,11 +222,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
   }
 
   function generateVariableDeclaration (name, tokens, css, componentId) {
-    return template(`const ${name} = ${transformCSSRequire(tokens, css, componentId)}`)()
-  }
-
-  function generateWebpackRequire (name, filePath) {
-    return template(`const ${name} = require('!!babel-loader!themeable-css-loader!${filePath}')`)()
+    return template.ast(`const ${name} = ${transformCSSRequire(tokens, css, componentId)}`)
   }
 
   function resolveModulePath (filename) {

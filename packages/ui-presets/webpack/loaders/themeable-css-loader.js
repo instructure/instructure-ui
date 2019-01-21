@@ -21,4 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = require('@instructure/ui-webpack-config/lib/loaders/themeable-css-loader')
+module.exports = require('@instructure/babel-plugin-themeable-styles/themeable-css-loader')

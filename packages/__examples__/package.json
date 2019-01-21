@@ -11,11 +11,12 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "start": "start-storybook -p 9001 -c .storybook",
-    "build": "webpack --config .happo/webpack.config.js",
-    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json",
-    "generate:screenshots": "./scripts/screenshots",
-    "review:screenshots": "happo review"
+    "prestart": "yarn build",
+    "start": "http-server __build__ -p 9001",
+    "start:watch": "DEBUG=1 start-storybook -p 9090",
+    "build": "build-storybook -o __build__",
+    "clean": "ui-build --clean",
+    "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json"
   },
   "license": "MIT",
   "dependencies": {
@@ -25,15 +26,10 @@
     "@instructure/ui-layout": "^5",
     "@instructure/ui-themes": "^5",
     "@instructure/ui-webpack-config": "^5",
-    "@storybook/addon-links": "^3.4.11",
-    "@storybook/addon-options": "^3.4.11",
-    "@storybook/addons": "^3.4.11",
-    "@storybook/react": "^3.4.11",
-    "happo": "^5.0.0",
-    "happo-target-firefox": "^5.0.3",
+    "@storybook/react": "^4.1.9",
+    "http-server": "^0.11.1",
     "react": "^0.14.9 || ^15 || ^16",
     "react-dom": "^0.14.9 || ^15 || ^16",
-    "story2sketch": "^1.4.0",
-    "storybook-addon-rtl": "^0.1.2"
+    "story2sketch": "^1.4.0"
   }
 }

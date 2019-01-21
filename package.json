@@ -19,6 +19,7 @@
     "prestart": "yarn bootstrap",
     "start": "lerna run start --stream --scope docs-app",
     "start:watch": "lerna run start:watch --stream --scope docs-app",
+    "dev": "yarn start:watch",
     "pretest:ci": "yarn bootstrap && yarn check",
     "test:ci": "npm-run-all lint:commit lint:changes test:node test:jest test:changes install:react:15 test:changes test:changes:testbed install:react",
     "test": "ui-test",
@@ -57,11 +58,10 @@
     "release": "ui-scripts --release",
     "predeploy": "npm-run-all bootstrap build:docs",
     "deploy": "ui-scripts --deploy-docs",
+    "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "build:examples": "lerna run build --stream --scope docs-examples",
-    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
-    "generate:screenshots": "lerna run generate:screenshots --stream --scope docs-examples",
-    "review:screenshots": "lerna run review:screenshots --stream --scope docs-examples"
+    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples"
   },
   "license": "MIT",
   "resolutions": {

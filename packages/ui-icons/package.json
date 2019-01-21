@@ -25,8 +25,8 @@
     "gulp": "3.9.1"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
     "@instructure/ui-svg-images": "^5",
-    "babel-runtime": "^6",
     "prop-types": "^15"
   },
   "peerDependencies": {

@@ -18,11 +18,12 @@
     "build:watch": "ui-build --watch"
   },
   "license": "MIT",
-  "dependencies": {
-    "axe-core": "^3.1.2"
-  },
   "devDependencies": {
     "@instructure/ui-babel-preset": "^5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7",
+    "axe-core": "^3.1.2"
   },
   "publishConfig": {
     "access": "public"

@@ -20,7 +20,7 @@
     "jest": "^23.6.0"
   },
   "dependencies": {
-    "jscodeshift": "^0.5.1"
+    "jscodeshift": "^0.6.3"
   },
   "publishConfig": {
     "access": "public"

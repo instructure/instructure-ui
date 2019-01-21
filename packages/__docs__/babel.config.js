@@ -22,19 +22,6 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const React = require('react')
-const baseConfig = require('@instructure/ui-webpack-config')
-
-console.log(`Starting Happo with React version ${React.version}...`)
-
 module.exports = {
-  ...baseConfig,
-  entry: {
-    config: path.resolve(__dirname, 'config.js')
-  },
-  output: {
-    path: path.resolve(__dirname, '__build__'),
-    filename: '[name].js'
-  }
+  presets: [require('@instructure/ui-babel-preset')]
 }

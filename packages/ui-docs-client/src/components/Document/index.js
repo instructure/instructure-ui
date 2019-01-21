@@ -117,7 +117,7 @@ export default class Document extends Component {
     if (esPath) {
       example.push(`\
 /*** ES Modules ***/
-import ${importName} from '${esPath}'
+import { ${importName} } from '${packageName}'
 `)
     }
 

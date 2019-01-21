@@ -21,9 +21,10 @@ yarn add @instructure/ui-karma-config
 
 In your Karma config file:
 
-```js
+```javascript
 /* karma.config.js */
 const path = require('path')
+
 module.exports = require('@instructure/ui-karma-config')({
   bundle: './tests.bundle.js',
   coverageThreshold: {
@@ -36,6 +37,18 @@ module.exports = require('@instructure/ui-karma-config')({
   },
   coverageDirectory: path.join(__dirname, '/coverage')
 })
+```
+
+In your `tests.bundle.js` file:
+
+```javascript
+/* tests.bundle.js */
+
+// import anything else you want to include before the tests here
+
+// import the tests:
+require('ui-tests-loader!')
+```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-karma-config.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-karma-config

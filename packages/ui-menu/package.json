@@ -25,6 +25,8 @@
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
+    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-elements": "^5",
     "@instructure/ui-icons": "^5",
@@ -33,8 +35,6 @@
     "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
-    "@instructure/uid": "^5",
-    "babel-runtime": "^6",
     "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"

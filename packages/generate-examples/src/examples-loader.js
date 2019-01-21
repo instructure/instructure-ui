@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const loaderUtils = require('loader-utils')
-const path = require('path')
-const fs = require('fs')
-const globby = require('globby')
-const loadConfig = require('@instructure/config-loader')
-const reactDocgen = require('react-docgen')
+import loaderUtils from 'loader-utils'
+import path from 'path'
+import fs from 'fs'
+import globby from 'globby'
+import loadConfig from '@instructure/config-loader'
+import { parse } from 'react-docgen'
 
-module.exports = function (source, map) {
+export default function (source, map) {
   this.cacheable && this.cacheable()
 
   const loader = this
@@ -61,7 +61,7 @@ module.exports = function (source, map) {
 
         let parsedSrc
         try {
-          parsedSrc = reactDocgen.parse(
+          parsedSrc = parse(
             fs.readFileSync(`${componentPath}${!componentPath.includes('.') ? '.js' : ''}`, 'utf8'),
             null,
             null,

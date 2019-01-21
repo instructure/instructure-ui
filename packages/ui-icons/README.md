@@ -46,7 +46,7 @@ function MyComponent () {
 
 - Verify that the art-boards are exported as SVG to the `/src/__svg__` directory. There should be directories for each variant based on the art-board names.
 
-- Run `yarn start:watch` from the repository root directory to start the local server and check the generated output.
+- Run `yarn dev` from the repository root directory to start the local server and check the generated output.
 
 - Verify icons display correctly by checking under `iconography` in the main nav
 

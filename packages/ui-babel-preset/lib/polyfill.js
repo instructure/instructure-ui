@@ -31,11 +31,13 @@ module.exports = [
   'es6.object.assign',
   'es6.set',
   'es6.string.code-point-at',
+  'es6.string.from-code-point',
   'es6.string.includes',
   'es6.string.repeat',
   'es6.string.starts-with',
   'es6.symbol',
   'es6.weak-set',
   'es7.array.includes',
-  'es7.object.values'
+  'es7.object.values',
+  'web.dom.iterable'
 ]

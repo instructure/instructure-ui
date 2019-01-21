@@ -21,14 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 module.exports = {
-  cache: !!process.env.DEBUG,
+  cache: process.env.NODE_ENV !== 'production',
   bail: !process.env.DEBUG,
+  devtool: '#cheap-module-source-map',
+  mode: process.env.DEBUG ? 'development' : 'production',
   resolveLoader: {
     alias: require('./resolveLoader/alias')
   },
   module: {
     rules: require('./module/rules')
   },
-  plugins: require('./plugins')
+  plugins: require('./plugins'),
+  optimization: require('./optimization'),
+  performance: {
+    hints: (process.env.NODE_ENV === 'production') ? 'warning' : false,
+  }
 }

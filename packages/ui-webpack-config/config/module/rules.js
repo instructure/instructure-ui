@@ -24,10 +24,15 @@
 
 const path = require('path')
 
-const ENV = process.env.NODE_ENV
-const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
-
+const DEBUG = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
 const exclude = [ /node_modules/, /\/lib\//, /\/es\// ]
+
+const babelLoader = {
+  loader: require.resolve('babel-loader'),
+  options: {
+    cacheDirectory: !DEBUG ? false : '.babel-cache'
+  }
+}
 
 module.exports = [
   {
@@ -47,11 +52,49 @@ module.exports = [
   },
   {
     test: /\.js$/,
-    exclude: [...exclude],
-    use: ['happypack/loader?id=js']
+    exclude: [...exclude, /\.examples\.js$/],
+    use: [
+      {
+        loader: 'thread-loader',
+        options: {
+          workers: 2,
+          workerParallelJobs: 50,
+          workerNodeArgs: ['--max-old-space-size=8192'],
+          poolRespawn: false,
+          poolTimeout: 2000,
+          name: 'babel-loader-pool'
+        }
+      },
+      babelLoader
+    ]
+  },
+  {
+    test: /\.js$/,
+    include: [/\.examples\.js/],
+    exclude,
+    use: [ babelLoader, 'component-examples-loader' ]
+  },
+  {
+    enforce: 'pre',
+    test: /\.css?$/,
+    exclude,
+    loader: 'postcss-loader',
+    options: {
+      ident: 'postcss',
+      plugins: (loader) => [
+        require('stylelint')(),
+        require('postcss-reporter')({ clearReportedMessages: true })
+      ]
+    }
   },
   {
     test: /\.css$/,
+    exclude: [...exclude, /ui-icons/],
+    use: [ babelLoader, 'themeable-css-loader', 'postcss-loader' ]
+  },
+  {
+    test: /\.css$/,
+    include: [/ui-icons/],
     use: [
       'style-loader',
       'css-loader'

@@ -29,11 +29,11 @@ let result
 
 if (process.argv.includes('--watch')) {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack-dev-server', [], ['NODE_ENV=development', 'DEBUG=1'])
+    webpack: getCommand('webpack-dev-server', ['--mode=development'], ['NODE_ENV=development', 'DEBUG=1'])
   })
 } else {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack', [], [`NODE_ENV=${process.env['NODE_ENV']}`])
+    webpack: getCommand('webpack', ['--mode=production'], [`NODE_ENV=${process.env['NODE_ENV']}`, 'NODE_OPTIONS=--max_old_space_size=8192'])
   })
 }
 

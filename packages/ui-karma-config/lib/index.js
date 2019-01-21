@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+const path = require('path')
 const constants = require('karma').constants
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
@@ -152,14 +152,17 @@ module.exports = function makeConfig ({
 
       webpack: {
         ...baseWebpackConfig,
+        mode: DEBUG ? 'development' : 'production',
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
           'react/addons': true
         },
-        devtool: 'cheap-module-eval-source-map',
-        performance: {
-          hints: false
+        resolveLoader: {
+          alias: {
+            ...baseWebpackConfig.resolveLoader.alias,
+            'ui-tests-loader': path.join(__dirname, './loaders/ui-tests-loader'),
+          }
         }
       },
 

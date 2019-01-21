@@ -23,6 +23,9 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "^5"
   },
+  "dependencies": {
+    "@babel/runtime": "^7"
+  },
   "publishConfig": {
     "access": "public"
   }

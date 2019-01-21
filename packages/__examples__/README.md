@@ -10,8 +10,8 @@ As you develop, you can run an application that displays component examples, doc
 From the root of the `instructure-ui` repo:
 
 1. Run `yarn`
-1. Run `yarn start:examples`
-1. Open [http://localhost:9001](http://localhost:9001) in your browser
+1. Run `yarn dev:examples`
+1. [http://localhost:9090](http://localhost:9090) should open automatically in your browser
 
 
 ### Sketch Asset Generation
@@ -29,12 +29,3 @@ Then to generate the Sketch assets:
 1. Run `yarn generate:sketch` to generate a `stories.asketch.json` file.
 1. Once in Sketch, open the "Plugins" menu, select "From *Almost* Sketch to Sketch", and select the
    `packages/__examples__/stories.asketch.json` file.
-
-### Test for Visual Regressions
-
-After committing style changes, you can see if you've caused any unexpected visual regressions:
-
-1. Run `yarn generate:screenshots` to generate the diff images in the `packages/__examples__/__screenshots__` directory.
-1. Run `yarn review:screenshots` to spin up an app to review the images.
-
-Note: this compares the HEAD commit to the previous commit, so you'll need to be sure to commit your changes first.

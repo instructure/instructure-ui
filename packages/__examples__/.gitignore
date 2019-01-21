@@ -1,4 +1,4 @@
-stories.asketch.json
-__screenshots__
-screenshots.json
-.cache
+node_modules/
+__build__/
+.babel-cache
+*.asketch.json

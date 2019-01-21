@@ -38,7 +38,7 @@ const CORE_PLUGINS_POST = [
   }],
   ['autoprefixer', { browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers')) }],
   ['postcss-initial'],
-  ['postcss-reporter']
+  ['postcss-reporter', { clearReportedMessages: true }]
 ]
 
 module.exports = function (opts = { before: {}, after: {}, nesting: false }) {

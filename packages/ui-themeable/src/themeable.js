@@ -90,7 +90,7 @@ const emptyObj = {}
 
 const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
-  const componentId = (styles && styles.componentId) || displayName
+  const componentId = `${displayName}__${(styles && styles.componentId) || uid()}`
 
   const contextKey = Symbol(componentId)
   const template = (styles && typeof styles.template === 'function') ? styles.template : () => {
@@ -123,6 +123,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
     _themeCache = null
     _instanceId = uid(displayName)
 
+    static componentId = componentId
     static theme = contextKey
     static contextTypes = {
       ...ComposedComponent.contextTypes,

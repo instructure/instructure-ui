@@ -27,7 +27,8 @@ const ENV = process.env.BABEL_ENV || process.env.NODE_ENV || 'development'
 const genericNames = require('generic-names')
 
 module.exports = function getScopedNameGenerator (config, componentId, name, filepath, css) { // for css modules class names
-  let scopedNamePattern = (ENV === 'production') ? `${componentId}__[local]` : `${componentId}__[folder]__[local]`
+  // for the default we assume the folder name is the same as the component displayName:
+  let scopedNamePattern = `[folder]__${componentId}-[local]`
 
   if (config && typeof config.generateScopedName === 'function') {
     scopedNamePattern = config.generateScopedName({ env: ENV }, componentId, name, filepath, css)

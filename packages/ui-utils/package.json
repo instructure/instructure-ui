@@ -25,10 +25,10 @@
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
     "@instructure/debounce": "^5",
     "@instructure/ui-decorator": "^5",
     "@instructure/uid": "^5",
-    "babel-runtime": "^6",
     "bowser": "^1.9.4",
     "decimal.js": "^10",
     "fast-deep-equal": "^2",

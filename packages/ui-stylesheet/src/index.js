@@ -24,7 +24,7 @@
 
 import { StyleSheet as GlamorStyleSheet } from 'glamor/lib/sheet'
 
-const debug = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
+const DEBUG = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
 
 let STYLES = {}
 let THEMEABLE_STYLESHEET
@@ -100,7 +100,7 @@ function inject () {
 }
 
 function createSheet () {
-  const sheet = new GlamorStyleSheet({ speedy: !debug })
+  const sheet = new GlamorStyleSheet({ speedy: !DEBUG })
   sheet.inject()
   return sheet
 }

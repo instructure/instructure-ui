@@ -2,5 +2,4 @@
 **/__tests__
 **/__testfixtures__
 *.config.js
-babelrc.js
 *.conf.js

@@ -16,14 +16,20 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@babel/template": "^7.2.2",
+    "@instructure/config-loader": "^5",
     "@instructure/pkg-utils": "^5",
     "@instructure/postcss-themeable-styles": "^5",
-    "babel-template": "^6.26.0",
+    "@instructure/ui-postcss-config": "^5",
     "css-modules-require-hook": "^4.2.3",
-    "generic-names": "^2.0.1"
+    "generic-names": "^2.0.1",
+    "postcss": "^7",
+    "postcss-modules": "^1.4.1",
+    "postcss-reporter": "^6.0.1"
   },
   "peerDependencies": {
-    "babel-core": "^6.26.0"
+    "@babel/core": "^7.2.2",
+    "webpack": "^3 || ^4"
   },
   "publishConfig": {
     "access": "public"

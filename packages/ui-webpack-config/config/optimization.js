@@ -22,9 +22,21 @@
  * SOFTWARE.
  */
 
+const TerserWebpackPlugin = require('terser-webpack-plugin')
+
 module.exports = {
-  presets: [[ require('@instructure/ui-babel-preset'), {
-    coverage: Boolean(process.env.COVERAGE),
-    esModules: Boolean(process.env.ES_MODULES)
-  }]]
+  splitChunks: {
+    chunks: 'all',
+  },
+  runtimeChunk: true,
+  minimizer: [
+    new TerserWebpackPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: true,
+      terserOptions: {
+        mangle: false,
+      },
+    }),
+  ]
 }

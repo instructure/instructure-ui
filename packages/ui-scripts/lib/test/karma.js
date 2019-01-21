@@ -26,7 +26,7 @@ const React = require('react')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
 const { getCommand, runCommandsConcurrently } = require('../utils/command')
 
-const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`]
+const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`, 'NODE_OPTIONS=--max_old_space_size=8192']
 const { argv } = process
 const args = ['start']
 

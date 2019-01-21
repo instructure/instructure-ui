@@ -80,8 +80,10 @@ describe('<Modal />', async () => {
     const modal = await ModalLocator.find()
     const body = await modal.findBody()
 
-    expect(body.getComputedStyle().width)
-      .to.equal('158px') // subtract the borders
+    await wait(() =>  {
+      expect(body.getComputedStyle().width)
+        .to.equal('158px') // subtract the borders
+    })
   })
 
   it('should render its own positioning context if constrained to parent', async () => {

@@ -21,4 +21,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = require('@instructure/ui-webpack-config/lib/loaders/ui-tests-loader')
+module.exports = require('@instructure/ui-karma-config/lib/loaders/ui-tests-loader')

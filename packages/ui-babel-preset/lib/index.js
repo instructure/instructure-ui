@@ -28,28 +28,22 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
-    ['env', envPresetConfig],
-    'stage-1',
-    'react'
+    ['@babel/preset-env', envPresetConfig],
+    ['@babel/preset-react']
   ]
 
   let plugins = [
-    ['transform-object-rest-spread', {
-      useBuiltIns: true
-    }],
-    ['transform-react-jsx', {
-      useBuiltIns: true
-    }],
-    ['transform-runtime', {
-      helpers: true,
-      polyfill: false,
-      regenerator: true
-    }],
-    'transform-decorators-legacy'
+    'babel-plugin-macros',
+    '@babel/plugin-transform-destructuring',
+    ['@babel/plugin-proposal-decorators', { legacy: true }], // must run before themeable-styles plugin below
+    ['@babel/plugin-proposal-class-properties', { loose: true }],
+    '@babel/plugin-proposal-export-default-from',
+    ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
+    '@babel/plugin-transform-runtime'
   ]
 
   if (process.env.NODE_ENV === 'production') {
-    plugins.push('transform-react-constant-elements')
+    plugins.push('@babel/plugin-transform-react-constant-elements')
   }
 
   let themeableOptions = {
@@ -108,7 +102,7 @@ function getNodeEnvConfig () {
     modules: 'commonjs',
     // this is for babel-plugin-transform-themeable. it currently doesn't work against native class syntax.
     // once it does, this line can be removed
-    include: ['transform-es2015-classes']
+    include: ['@babel/plugin-transform-classes']
   }
 }
 
@@ -118,6 +112,7 @@ function getWebEnvConfig (opts) {
       browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers'))
     },
     modules: opts.esModules ? false : 'commonjs',
-    useBuiltIns: true
+    useBuiltIns: 'entry',
+    exclude: ['transform-typeof-symbol']
   }
 }

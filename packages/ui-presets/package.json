@@ -16,8 +16,10 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@instructure/babel-plugin-themeable-styles": "^5",
     "@instructure/canvas-supported-browsers": "^1",
     "@instructure/config-loader": "^5",
+    "@instructure/generate-examples": "^5",
     "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-eslint-config": "^5",
     "@instructure/ui-postcss-config": "^5",

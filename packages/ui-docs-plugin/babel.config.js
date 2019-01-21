@@ -22,12 +22,6 @@
  * SOFTWARE.
  */
 
-export default {
-  renderProps: (props) => {
-    return {
-      componentProps: {
-        src: 'http://clips.vorwaerts-gmbh.de/big_buck_bunny.mp4'
-      }
-    }
-  }
+module.exports = {
+  presets: [ require('@instructure/ui-babel-preset') ]
 }

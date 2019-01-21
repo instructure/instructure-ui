@@ -21,13 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const path = require('path')
 const webpack = require('webpack')
-const HappyPack = require('happypack')
 
-const loadConfig = require('@instructure/config-loader')
-
-const happyPackConfig = loadConfig('happypack', require('./happyPack'))
-const threadPool = new HappyPack.ThreadPool(happyPackConfig.threadPool)
+const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 
 const ENV = process.env.NODE_ENV || 'production'
 const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
@@ -37,19 +34,7 @@ const envVars = {
   DEBUG: DEBUG
 }
 
-let plugins = [
+module.exports = [
   new webpack.EnvironmentPlugin(envVars),
-  new HappyPack({
-    id: 'js',
-    threadPool,
-    loaders: [{
-      loader: require.resolve('babel-loader'),
-      options: {
-        cacheDirectory: !DEBUG ? false : '.babel-cache'
-      }
-    }],
-    verbose: false
-  })
-]
-
-module.exports = plugins
+  DEBUG ? new WatchMissingNodeModulesPlugin(path.resolve('node_modules')) : null
+].filter(Boolean)

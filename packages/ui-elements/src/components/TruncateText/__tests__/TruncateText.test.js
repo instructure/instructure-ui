@@ -138,7 +138,7 @@ describe('<TruncateText />', async () => {
 
   it('should warn if children prop receives too deep of a node tree', async () => {
     const consoleError = stub(console, 'error')
-    const warning = 'Warning: [TruncateText] Some children are too deep in the node tree and will not render.'
+    const warning = 'Some children are too deep in the node tree and will not render.'
     await mount(
       <div style={{width: '200px'}}>
         <TruncateText>
@@ -146,8 +146,10 @@ describe('<TruncateText />', async () => {
         </TruncateText>
       </div>
     )
-    expect(consoleError)
-      .to.be.calledWithExactly(warning)
+    await wait(() => {
+      expect(consoleError)
+        .to.have.been.calledWithMatch(warning)
+    })
   })
 
   it('should render text at any size with no lineHeight set', async () => {

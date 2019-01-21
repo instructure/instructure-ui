@@ -57,6 +57,5 @@ module.exports = {
     ...baseConfig.plugins,
     ...require('./plugins')
   ],
-  resolve: DEBUG ? require('./resolve') : {},
-  devtool: 'cheap-module-source-map'
+  resolve: DEBUG ? require('./resolve') : {}
 }

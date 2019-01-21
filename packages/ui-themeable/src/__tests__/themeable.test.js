@@ -110,7 +110,7 @@ describe('@themeable', async () => {
     const subject = await mount(<ThemeableComponent theme={theme} />)
     const component = subject.getDOMNode()
 
-    expect(getComputedStyle(component).getPropertyValue(`--${styles.componentId}-textColor`)).to.equal('purple')
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
   })
 
   it('updates css variables when props are updated', async () => {
@@ -121,6 +121,6 @@ describe('@themeable', async () => {
     const component = subject.getDOMNode()
 
     await subject.setProps({theme})
-    expect(getComputedStyle(component).getPropertyValue(`--${styles.componentId}-textColor`)).to.equal('purple')
+    expect(getComputedStyle(component).getPropertyValue(`--${ThemeableComponent.componentId}-textColor`)).to.equal('purple')
   })
 })

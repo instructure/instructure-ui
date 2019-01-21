@@ -54,7 +54,8 @@ module.exports = {
         exclude: [/node_modules/],
         use: [
           'babel-loader',
-          'themeable-css-loader'
+          'themeable-css-loader',
+          'postcss-loader'
         ]
       }
     ]

@@ -25,6 +25,7 @@
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-buttons": "^5",
     "@instructure/ui-focusable": "^5",

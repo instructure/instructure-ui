@@ -1,29 +1,28 @@
-const baseConfig = require('@instructure/ui-webpack-config')
+const instConfig = require('@instructure/ui-webpack-config')
 const React = require('react')
 
 module.exports = (storybookBaseConfig, configType) => {
   const config = {
+    module: { rules: [] },
+    plugins: [],
     resolveLoader: { alias: {} },
-    resolve: { alias: {} },
     ...storybookBaseConfig
   }
 
   config.module.rules = [
-    ...baseConfig.module.rules,
-    ...config.module.rules
+    ...config.module.rules,
+    ...instConfig.module.rules
   ]
 
   config.plugins = [
     ...config.plugins,
-    ...baseConfig.plugins
+    ...instConfig.plugins
   ]
 
-  config.resolveLoader = {
-   ...config.resolveLoader,
-   alias: {
-     ...config.resolveLoader.alias,
-     ...baseConfig.resolveLoader.alias
-   }
+  config.resolveLoader.alias = {
+   ...config.resolveLoader.alias,
+   ...instConfig.resolveLoader.alias,
+   'examples-loader': require.resolve('@instructure/generate-examples/lib/examples-loader')
   }
 
   console.log(`Starting Storybook with React version ${React.version}...`)

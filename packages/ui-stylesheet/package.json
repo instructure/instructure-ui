@@ -23,6 +23,7 @@
     "@instructure/ui-babel-preset": "^5"
   },
   "dependencies": {
+    "@babel/runtime": "^7",
     "glamor": "^2.20.40"
   },
   "publishConfig": {

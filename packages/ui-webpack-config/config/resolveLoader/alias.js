@@ -22,10 +22,6 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-
 module.exports = {
-  'ui-tests-loader': path.join(__dirname, '../../lib/loaders/ui-tests-loader'),
-  'themeable-css-loader': path.join(__dirname, '../../lib/loaders/themeable-css-loader'),
-  'examples-loader': path.join(__dirname, '../../lib/loaders/examples-loader')
+  'themeable-css-loader': require.resolve('@instructure/babel-plugin-themeable-styles/themeable-css-loader')
 }
