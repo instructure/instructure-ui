@@ -67,3 +67,12 @@ generator.canvas = function (variables) {
     meterColorEnd: lighten(variables['ic-brand-primary'], 12)
   }
 }
+
+generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ colors }) {
+  return {
+    meterColorStart: colors.backgroundBrand,
+    meterColorEnd: colors.backgroundBrand,
+    doneMeterColorStart: colors.backgroundSuccess,
+    doneMeterColorEnd: colors.backgroundSuccess
+  }
+}
