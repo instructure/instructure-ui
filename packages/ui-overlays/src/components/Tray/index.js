@@ -72,7 +72,7 @@ class Tray extends Component {
     label: PropTypes.string.isRequired,
 
     /**
-     * An accessible label for the close button. The close button won't display without this label.
+     * __DEPRECATED (5.0.0)__ An accessible label for the close button. The close button won't display without this label.
      */
     closeButtonLabel: PropTypes.string,
 
@@ -105,7 +105,7 @@ class Tray extends Component {
     contentRef: PropTypes.func,
 
     /**
-     * A function that returns a reference to the close button element
+     * __DEPRECATED (5.0.0)__ A function that returns a reference to the close button element
      */
     closeButtonRef: PropTypes.func,
 
@@ -184,7 +184,9 @@ class Tray extends Component {
      * Callback fired after the <Tray /> finishes transitioning out
      */
     onExited: PropTypes.func,
-
+    /**
+    * __DEPRECATED (5.0.0)__
+    */
     closeButtonVariant: PropTypes.oneOf(['icon', 'icon-inverse']),
 
     /**

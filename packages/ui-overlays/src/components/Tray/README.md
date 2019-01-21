@@ -29,16 +29,41 @@ class Example extends React.Component {
   }
 
   renderCloseButton () {
-    return (
-      <CloseButton
-        placement={this.state.placement === 'end' ? 'start' : 'end'}
-        offset="x-small"
-        variant="icon"
-        onClick={this.hideTray}
-      >
-        Close
-      </CloseButton>
-    )
+    if (this.state.placement === 'end') {
+      return (
+        <Flex>
+          <FlexItem margin="0 small 0 0">
+            <Button
+              variant="icon"
+              icon={IconX.Line}
+              onClick={this.hideTray}
+            >
+              <ScreenReaderContent>Close</ScreenReaderContent>
+            </Button>
+          </FlexItem>
+          <FlexItem grow shrink>
+            <Heading ellipsis>Hello</Heading>
+          </FlexItem>
+        </Flex>
+      )
+    } else {
+      return (
+        <Flex>
+          <FlexItem grow shrink>
+            <Heading>Hello</Heading>
+          </FlexItem>
+          <FlexItem>
+            <Button
+              variant="icon"
+              icon={IconX.Line}
+              onClick={this.hideTray}
+            >
+              <ScreenReaderContent>Close</ScreenReaderContent>
+            </Button>
+          </FlexItem>
+        </Flex>
+      )
+    }
   }
 
   render () {
@@ -91,9 +116,8 @@ class Example extends React.Component {
           size={this.state.size}
           placement={this.state.placement}
         >
-          <View as="div" padding="x-large large">
+          <View as="div" padding="medium">
             {this.renderCloseButton()}
-            <Heading>Hello</Heading>
             <Text as="p" lineHeight="double">{FPO}</Text>
           </View>
         </Tray>
