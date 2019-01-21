@@ -43,7 +43,7 @@ category: components/utilities
 @themeable(theme, styles)
 export default class InlineSVG extends Component {
   static propTypes = {
-    children: PropTypes.node, // eslint-disable-line
+    children: PropTypes.node,
     src: PropTypes.string,
     title: PropTypes.string,
     description: PropTypes.string,

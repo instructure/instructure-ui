@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, within} from '@instructure/ui-test-utils'
+import { expect, mount, within, wait } from '@instructure/ui-test-utils'
 import Flex, { FlexItem } from '../index'
 
 describe('<Flex />', async () => {
@@ -61,8 +61,10 @@ describe('<Flex />', async () => {
 
     const flex = within(subject.getDOMNode())
 
-    expect(flex.getComputedStyle().width).to.equal('400px')
-    expect(flex.getComputedStyle().height).to.equal('200px')
+    await wait(() => {
+      expect(flex.getComputedStyle().width).to.equal('400px')
+      expect(flex.getComputedStyle().height).to.equal('200px')
+    })
   })
 
   it('should set flex-direction with the direction property', async () => {
@@ -76,12 +78,15 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    expect(flex.getComputedStyle()['flex-direction']).to.equal('column')
+
+    await wait(() => {
+      expect(flex.getComputedStyle()['flex-direction']).to.equal('column')
+    })
   })
 
   it('should render an inline-flex container with the inline property', async () => {
     const subject = await mount(
-      <Flex inline={true}>
+      <Flex inline>
         <FlexItem align="stretch">Flex item 1</FlexItem>
         <FlexItem grow shrink>Flex item 2</FlexItem>
         <FlexItem size="100px">Flex item 3</FlexItem>
@@ -90,7 +95,10 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    expect(flex.getComputedStyle().display).to.equal('inline-flex')
+
+    await wait(() => {
+      expect(flex.getComputedStyle().display).to.equal('inline-flex')
+    })
   })
 
   it('should set align-items with the alignItems property', async () => {
@@ -104,7 +112,9 @@ describe('<Flex />', async () => {
     )
     const flex = within(subject.getDOMNode())
 
-    expect(flex.getComputedStyle()['align-items']).to.equal('flex-start')
+    await wait(() => {
+      expect(flex.getComputedStyle()['align-items']).to.equal('flex-start')
+    })
   })
 
   it('should set justify-content with the justifyItems property', async () => {
@@ -118,7 +128,10 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    expect(flex.getComputedStyle()['justify-content']).to.equal('space-between')
+
+    await wait(() => {
+      expect(flex.getComputedStyle()['justify-content']).to.equal('space-between')
+    })
   })
 
   it('should set flex-wrap with the wrapItems property', async () => {
@@ -132,7 +145,10 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    expect(flex.getComputedStyle()['flex-wrap']).to.equal('wrap')
+
+    await wait(() => {
+      expect(flex.getComputedStyle()['flex-wrap']).to.equal('wrap')
+    })
   })
 
   it('should let FlexItems align themselves with the align property', async () => {
@@ -148,8 +164,10 @@ describe('<Flex />', async () => {
     const flex = within(subject.getDOMNode())
     const item = await flex.find(':textContent(Flex item 1)')
 
-    expect(flex.getComputedStyle()['align-items']).to.equal('flex-end')
-    expect(item.getComputedStyle()['align-self']).to.equal('stretch')
+    await wait(() => {
+      expect(flex.getComputedStyle()['align-items']).to.equal('flex-end')
+      expect(item.getComputedStyle()['align-self']).to.equal('stretch')
+    })
   })
 
   it('should let FlexItems flex-grow with the grow property', async () => {
@@ -166,8 +184,10 @@ describe('<Flex />', async () => {
     const item1 = await flex.find(':textContent(Flex item 1)')
     const item2 = await flex.find(':textContent(Flex item 2)')
 
-    expect(item1.getComputedStyle()['flex-grow']).to.equal('0')
-    expect(item2.getComputedStyle()['flex-grow']).to.equal('1')
+    await wait(() => {
+      expect(item1.getComputedStyle()['flex-grow']).to.equal('0')
+      expect(item2.getComputedStyle()['flex-grow']).to.equal('1')
+    })
   })
 
   it('should let FlexItems flex-shrink with the shrink property', async () => {
@@ -184,8 +204,10 @@ describe('<Flex />', async () => {
     const item1 = await flex.find(':textContent(Flex item 1)')
     const item2 = await flex.find(':textContent(Flex item 2)')
 
-    expect(item1.getComputedStyle()['flex-shrink']).to.equal('0')
-    expect(item2.getComputedStyle()['flex-shrink']).to.equal('1')
+    await wait(() => {
+      expect(item1.getComputedStyle()['flex-shrink']).to.equal('0')
+      expect(item2.getComputedStyle()['flex-shrink']).to.equal('1')
+    })
   })
 
   it('should set flex-basis and min-width on FlexItems with the size property', async () => {
@@ -202,9 +224,11 @@ describe('<Flex />', async () => {
     const item2 = await flex.find(':textContent(Flex item 2)')
     const item3 = await flex.find(':textContent(Flex item 3)')
 
-    expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')
-    expect(item3.getComputedStyle()['min-width']).to.equal('100px')
-    expect(item2.getComputedStyle()['flex-basis']).to.equal('auto')
+    await wait(() => {
+      expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')
+      expect(item3.getComputedStyle()['min-width']).to.equal('100px')
+      expect(item2.getComputedStyle()['flex-basis']).to.equal('auto')
+    })
   })
 
   it('should meet a11y standards', async () => {
@@ -218,6 +242,7 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
+
     expect(await flex.accessible()).to.be.true()
   })
 })

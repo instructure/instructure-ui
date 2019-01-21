@@ -28,7 +28,6 @@ import PropTypes from 'prop-types'
 import Heading from '@instructure/ui-elements/es/components/Heading'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import themeable from '@instructure/ui-themeable'
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
 
 import PandaLogo from './instui-panda.js'
 import styles from './styles.css'

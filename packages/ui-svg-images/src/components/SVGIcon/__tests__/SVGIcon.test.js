@@ -30,10 +30,12 @@ import SVGIconLocator from '../locator'
 
 import styles from '../styles.css'
 
+const SVG_SRC = `<svg><circle cx="50" cy="50" r="40" /></svg>`
+
 describe('<SVGIcon />', async () => {
   it('should render', async () => {
    await mount(
-    <SVGIcon />
+    <SVGIcon src={SVG_SRC} />
     )
     const icon = await SVGIconLocator.find()
     expect(icon).to.exist()
@@ -41,7 +43,7 @@ describe('<SVGIcon />', async () => {
 
   it('should set rotate to 0 by default', async () => {
    await mount(
-    <SVGIcon />
+    <SVGIcon src={SVG_SRC} />
     )
     const icon = await SVGIconLocator.find()
     expect(icon.getAttribute('rotate')).to.equal('0')
@@ -51,6 +53,7 @@ describe('<SVGIcon />', async () => {
     await mount(
       <SVGIcon
         rotate="90"
+        src={SVG_SRC}
       />
     )
     const icon = await SVGIconLocator.find()
@@ -62,6 +65,7 @@ describe('<SVGIcon />', async () => {
       <SVGIcon
         width='150px'
         height='100px'
+        src={SVG_SRC}
       />
     )
     const custom = await SVGIconLocator.find()
@@ -76,6 +80,7 @@ describe('<SVGIcon />', async () => {
     await mount(
       <SVGIcon
         size='large'
+        src={SVG_SRC}
       />
     )
     const subject = await SVGIconLocator.find()
@@ -88,6 +93,7 @@ describe('<SVGIcon />', async () => {
         width='200px'
         height='200px'
         size='x-small'
+        src={SVG_SRC}
       />
     )
     const subject = await SVGIconLocator.find()
@@ -101,6 +107,7 @@ describe('<SVGIcon />', async () => {
     await mount(
       <SVGIcon
         size='large'
+        src={SVG_SRC}
       />
     )
     const subject = await SVGIconLocator.find()

@@ -25,7 +25,7 @@ import uid from '@instructure/uid'
 import { changedPackageWarning, warnDeprecatedComponent } from './react/deprecated'
 
 export default (...args) => {
-  warnDeprecatedComponent('5.38.0', 'defaultId', changedPackageWarning(
+  warnDeprecatedComponent('5.38.0', 'uid', changedPackageWarning(
     'ui-utils',
     'uid'
   ))

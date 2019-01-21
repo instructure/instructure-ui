@@ -166,9 +166,9 @@ describe('<ToggleGroup />', () => {
 
   it('should accept custom icons', async () => {
     const Icon = (
-      <svg height="100" width="100">
+      <svg height="50" width="50">
         <title>Icon collapsed</title>
-        <circle cx="50" cy="50" r="40" />
+        <circle cx="25" cy="25" r="20" />
       </svg>
     )
 
@@ -193,19 +193,15 @@ describe('<ToggleGroup />', () => {
 
     const toggleGroup = await ToggleGroupLocator.find()
 
-    let iconTitle
+    const collapsedIcon = await toggleGroup.find(':title("Icon collapsed")')
 
-    await wait(async () => {
-      iconTitle = await toggleGroup.find('svg > title')
-      expect(iconTitle.getTextContent()).to.equal('Icon collapsed')
-    })
+    expect(collapsedIcon).to.exist()
 
     await toggleGroup.clickToggle()
 
-    await wait(async () => {
-      iconTitle = await toggleGroup.find('svg > title')
-      expect(iconTitle.getTextContent()).to.equal('Icon expanded')
-    })
+    const expandedIcon = await toggleGroup.find(':title("Icon expanded")')
+
+    expect(expandedIcon).to.exist()
   })
 
   it('should meet a11y standards', async () => {
