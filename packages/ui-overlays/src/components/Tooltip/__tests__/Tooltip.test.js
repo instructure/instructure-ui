@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, accessible, spy } from '@instructure/ui-test-utils'
+import { expect, mount, accessible, spy, wait } from '@instructure/ui-test-utils'
 
 import Tooltip from '../index'
 
@@ -51,9 +51,14 @@ describe('<Tooltip />', async () => {
       )
 
       const tip = await TooltipLocator.find()
-      const link = await tip.find('a')
+      const trigger = await tip.findTrigger()
 
-      expect(link).to.exist()
+      const content = await tip.findContent({ visible: false })
+
+      await wait(() => {
+        expect(trigger.getTextContent()).to.equal('Hover or focus me')
+        expect(content.getTextContent()).to.equal('Hello')
+      })
     })
 
     it('should have an aria-describedby attribute', async () => {
@@ -63,9 +68,16 @@ describe('<Tooltip />', async () => {
         </Tooltip>
       )
       const tip = await TooltipLocator.find()
-      const link = await tip.find('a')
+      const trigger = await tip.findTrigger()
 
-      expect(link.getAttribute('aria-describedby')).to.exist()
+      await trigger.focus()
+
+      const content = await tip.findContent()
+
+      await wait(() => {
+        expect(trigger.getAttribute('aria-describedby'))
+          .to.equal(content.getAttribute('id'))
+      })
     })
 
     it('should pass down the href attribute', async () => {

@@ -33,6 +33,7 @@ import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import uid from '@instructure/uid'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -43,6 +44,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 class Badge extends Component {
   static propTypes = {

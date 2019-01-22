@@ -21,32 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
-import Tooltip from './index'
-import PopoverLocator from '../Popover/locator'
+import Badge from './index'
 
-const customMethods = {
-  findTrigger: async (...args) => {
-    const trigger = await PopoverLocator.findTrigger()
-    if (trigger) {
-      return trigger.find('[aria-describedby]', ...args)
-    } else {
-      return null
-    }
-  },
-  findContent: async (...args) => {
-    const { options } = parseQueryArguments(...args)
-    const content = await PopoverLocator.findContent({ ...options, visible: false })
-    if (content) {
-      return content.find('[role="tooltip"]', options)
-    } else {
-      return null
-    }
-  }
-}
-
-export default {
-  ...locator(Tooltip.selector, customMethods),
-  ...customMethods
-}
+export default locator(Badge.selector)

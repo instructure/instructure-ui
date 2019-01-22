@@ -24,69 +24,71 @@
 
 import React from 'react'
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 
 import Badge from '../index'
+import BadgeLocator from '../locator'
+
 import styles from '../styles.css'
 
 describe('<Badge />', () => {
   it('should be accessible', async () => {
-    const subject = await mount(
+    await mount(
       <Badge count={100}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.accessible()).to.be.true()
   })
 
   it('should show the count', async () => {
-    const subject = await mount(
+    await mount(
       <Badge count={100}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.find(':contains(100)')).to.exist()
   })
 
   it('should truncate the count via countUntil', async () => {
-    const subject = await mount(
+    await mount(
       <Badge count={100} countUntil={100}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.find(':contains(99 +)')).to.exist()
   })
 
   it('should change postion based on the placement prop', async () => {
-    const subject = await mount(
+    await mount(
       <Badge count={3} placement="bottom start">
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.find(`.${styles['positioned--bottom']}`)).to.exist()
     expect(await badge.find(`.${styles['positioned--start']}`)).to.exist()
   })
 
   it('should not render a wrapper for a standalone Badge', async () => {
-    const subject = await mount(
+    await mount(
       <Badge count={100} as="li" standalone={true}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.find('li', { expectEmpty: true })).to.not.exist()
   })
@@ -96,13 +98,13 @@ describe('<Badge />', () => {
       return `${formattedCount}!`
     }
 
-    const subject = await mount(
+    await mount(
       <Badge count={15} formatOutput={formatOutput}>
         <button type="button">Inbox</button>
       </Badge>
     )
 
-    const badge = within(subject.getDOMNode())
+    const badge = await BadgeLocator.find()
 
     expect(await badge.find(':textContent(15!)')).to.exist()
   })
