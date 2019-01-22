@@ -30,7 +30,7 @@ export default function generator ({ colors, typography }) {
 
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
-    fontSize: typography.fontSizeXSmall,
+    fontSize: typography.fontSizeSmall,
     lineHeight: typography.lineHeight
   }
 }

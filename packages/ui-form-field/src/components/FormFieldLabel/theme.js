@@ -28,7 +28,7 @@ export default function generator ({ colors, typography }) {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightBold,
     fontSize: typography.fontSizeMedium,
-    lineHeight: typography.lineHeightCondensed
+    lineHeight: typography.lineHeightFit
   }
 }
 
