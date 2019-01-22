@@ -24,13 +24,18 @@
 
 import React from 'react'
 
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, within } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
 import Link from '../index'
 import LinkLocator from '../locator'
-import styles from '../styles.css'
+
+class TruncateText extends React.Component {
+  render () {
+    return <span>{this.props.children}</span>
+  }
+}
 
 describe('<Link />', async () => {
   it('should render the children as text content', async () => {
@@ -50,7 +55,7 @@ describe('<Link />', async () => {
     expect(await link.accessible()).to.be.true()
   })
 
-  it('focuses with the focus helper', async () => {
+  it('should focus with the focus helper', async () => {
     let linkRef
     await mount(
       <Link href="https://instructure.design" componentRef={(el) => { linkRef = el }}>
@@ -66,13 +71,33 @@ describe('<Link />', async () => {
     expect(focusable.focused()).to.be.true()
   })
 
-  it('applies a className when focused', async () => {
-    await mount(<Link href="example.html">Hello World</Link>)
+  it('should display block when TruncateText is a child', async () => {
+    const subject = await mount(
+      <Link href="example.html">
+        <TruncateText>Hello World</TruncateText>
+      </Link>
+    )
 
-    const link = await LinkLocator.find()
-    await link.focus()
+    const link = within(subject.getDOMNode())
+    expect(link.getComputedStyle().display).to.equal('block')
+  })
 
-    expect(await link.find(`.${styles.focused}`)).to.exist()
+  it('should display flex when TruncateText is a child and there is an icon', async () => {
+    const customIcon = (
+      <svg height="24" width="24">
+        <title>Custom icon</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    const subject = await mount(
+      <Link href="example.html" icon={customIcon}>
+        <TruncateText>Hello World</TruncateText>
+      </Link>
+    )
+
+    const link = within(subject.getDOMNode())
+    expect(link.getComputedStyle().display).to.equal('flex')
   })
 
   it('should call the onClick prop when clicked', async () => {
@@ -94,7 +119,6 @@ describe('<Link />', async () => {
 
     const link = await LinkLocator.find()
     const focusable = await link.find(':focusable')
-
     expect(linkRef).to.have.been.calledWith(focusable.getDOMNode())
   })
 
@@ -220,7 +244,8 @@ describe('<Link />', async () => {
     const allowedProps = {
       margin: '0 small',
       elementRef: () => {},
-      as: 'span'
+      as: 'span',
+      display: 'block'
     }
 
     Object.keys(View.propTypes)

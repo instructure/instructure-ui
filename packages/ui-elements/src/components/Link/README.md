@@ -39,19 +39,27 @@ example: true
 <Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I am a link with left margin</Link>
 ```
 
-### Ellipsis
+### Truncating text
 
-Add the `ellipsis` property to make Link display on a single line and truncate text
-that overflows its container with `...`
+The `ellipsis` property has been deprecated. Use [TruncateText](#TruncateText) instead to truncate text within Link.
+Like `ellipsis`, using TruncateText within Link will cause it to display block-level.
 
 ```js
 ---
 example: true
 ---
-<View as="div" width="250px">
-  <Link ellipsis href="#Link">
-    I am a link with ellipsis to truncate long text strings like this one
-  </Link>
+<View as="div">
+  <View as="div" margin="0 0 small">
+    <Link href="https://instructure.design">
+      <TruncateText position="middle">{lorem.paragraph()}</TruncateText>
+    </Link>
+  </View>
+  <View as="div">
+    <Link onClick={() => console.log('clicked')} icon={<IconUser.Line size="small" />}>
+      <TruncateText>{lorem.paragraph()}</TruncateText>
+    </Link>
+  </View>
+
 </View>
 ```
 
@@ -66,27 +74,24 @@ render a Link with just an icon. Don't forget to add text for screen readers, th
 example: true
 ---
 <div>
-  <p>
-    <Link href="https://instructure.design" icon={IconUser.Solid}>Icon before text</Link>
-  </p>
-  <p>
-    <Link
+  <View as="div" margin="0 0 small">
+    <Link href="https://instructure.design" icon={<IconUser.Line size="small" />}>Icon before text</Link>
+  </View>
+  <View as="div" margin="0 0 small">
+    This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      icon={IconUser.Solid}
+      icon={<IconUser.Solid />}
       iconPlacement="end"
     >
-      Icon after text
-    </Link>
-  </p>
-  <p>
-    Link consisting of only an icon&nbsp;
-    <Link
-      href="https://instructure.design"
-      icon={IconUser.Solid}
-    >
+      Icon appears after Link text
+    </Link>. This is more text after the link.
+  </View>
+  <View as="div">
+    This Link consists of only an icon&nbsp;
+    <Link onClick={() => console.log('clicked!')} icon={IconUser.Solid}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
-  </p>
+  </View>
 </div>
 ```
 

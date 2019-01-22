@@ -26,19 +26,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findFocusable from '@instructure/ui-a11y/lib/utils/findFocusable'
-import warning from '@instructure/ui-utils/lib/warning'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import warning from '@instructure/ui-utils/lib/warning'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -50,6 +51,7 @@ category: components
 ---
 **/
 @testable()
+@deprecated('5.40.0', { ellipsis: '<Link><TruncateText /></Link>' })
 @themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
@@ -71,7 +73,7 @@ class Link extends Component {
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     /**
-    * truncates the text to fit within the parent element (also changes display to block).
+    * __DEPRECATED (5.40.0)__ Use `<Link><TruncateText /></Link>` instead.
     */
     ellipsis: PropTypes.bool,
     /**
@@ -88,14 +90,17 @@ class Link extends Component {
     /**
     * Place the icon before or after the text in the Link.
     */
-    iconPlacement: PropTypes.oneOf(['start', 'end'])
+    iconPlacement: PropTypes.oneOf(['start', 'end']),
+    /**
+    * Set the CSS display property of the Link element. 'auto' sets no display property.
+    */
+    display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex'])
   }
 
   static defaultProps = {
     variant: 'default',
     as: 'button',
     linkRef: function (link) {},
-    ellipsis: false,
     iconPlacement: 'start'
   }
 
@@ -111,10 +116,22 @@ class Link extends Component {
   }
 
   get display () {
+    if (this.props.display) {
+      return this.props.display // user-entered display property
+    }
+
     if (this.props.ellipsis) {
-      return 'block'
-    } else if (this.props.icon) {
-      return 'inline-block' // prevents irregularly shaped focus ring
+      return 'block' // can delete this block when ellipsis is removed
+    }
+
+    if (this.props.icon) {
+      if (this.containsTruncateText) {
+        return 'flex' // TruncateText displays block, so avoid icon getting bumped
+      } else {
+        return 'inline-block' // avoid irregularly shaped focus outline
+      }
+    } else if (this.containsTruncateText) {
+      return 'block' // TruncateText displays block, so container needs to as well
     } else {
       return 'auto'
     }
@@ -136,12 +153,36 @@ class Link extends Component {
     return findFocusable(this._link)
   }
 
+  get containsTruncateText () {
+    let truncateText = false
+
+    React.Children.forEach(this.props.children, (child) => {
+      if (child && matchComponentTypes(child, ['TruncateText'])) {
+        truncateText = true
+      }
+    })
+
+    if (truncateText) {
+      warning( // if display prop is used, warn about icon or TruncateText
+        this.props.display === undefined, // eslint-disable-line no-undefined
+        '[Link] Using the display property with TruncateText may cause layout issues.'
+      )
+    }
+
+    return truncateText
+  }
+
   focus () {
     findDOMNode(this._link).focus() // eslint-disable-line react/no-find-dom-node
   }
 
   renderIcon () {
     const Icon = this.props.icon
+    warning( // if display prop is used, warn about icon or TruncateText
+      this.props.display === undefined, // eslint-disable-line no-undefined
+      '[Link] Using the display property with an icon may cause layout issues.'
+    )
+
     if (typeof this.props.icon === 'function') {
       return <span className={styles.icon}><Icon /></span>
     } else if (Icon) {
@@ -151,27 +192,27 @@ class Link extends Component {
     }
   }
 
-  renderContent (isFocused) {
+  render () {
     const {
       disabled,
       children,
       onClick,
       variant,
-      linkRef,
       href,
       margin,
       ellipsis,
-      elementRef,
       icon,
-      iconPlacement
+      iconPlacement,
+      linkRef,
+      elementRef
     } = this.props
 
     const classes = {
-      [styles.link]: true,
+      [styles.root]: true,
       [styles.inverse]: variant === 'inverse',
-      [styles.ellipsis]: ellipsis,
       [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.iconOnly]: icon && !this.hasVisibleChildren
+      [styles.truncates]: this.containsTruncateText,
+      [styles.ellipsis]: ellipsis
     }
 
     const role = onClick && this.element !== 'button' ? 'button' : null
@@ -184,67 +225,31 @@ class Link extends Component {
     )
 
     const props = {
-      ref: (c, ...args) => {
-        this._link = c
-        linkRef.apply(this, [c].concat(args))
-      },
       ...passthroughProps,
+      elementRef: (el) => {
+        this._link = el
+        if (typeof linkRef === 'function') linkRef(el)
+        if (typeof elementRef === 'function') elementRef(el)
+      },
+      as: this.element,
+      display: this.display,
+      margin: margin,
       className: classnames(classes),
       href: href,
+      onClick: this.handleClick,
       'aria-disabled': disabled ? 'true' : null,
       role,
       type,
-      tabIndex,
-      onClick: this.handleClick
+      tabIndex
     }
-
-    const ElementType = this.element
 
     return (
-      <View
-        display={this.display}
-        margin={margin}
-        className={classnames({
-          [styles.root]: true,
-          [styles.focused]: !(isFocused === 'undefined') && isFocused,
-          [styles.disabled]: disabled,
-          [styles.inverse]: variant === 'inverse'
-        })}
-        elementRef={elementRef}
-      >
-        <ElementType {...props}>
-          {(icon && iconPlacement === 'start') && this.renderIcon()}
-          {children}
-          {(icon && iconPlacement === 'end') && this.renderIcon()}
-        </ElementType>
+      <View {...props}>
+        {(icon && iconPlacement === 'start') && this.renderIcon()}
+        {children}
+        {(icon && iconPlacement === 'end') && this.renderIcon()}
       </View>
     )
-  }
-
-  render () {
-    const {
-      onClick,
-      href,
-      disabled
-    } = this.props
-
-    warning(
-      (onClick || href),
-      '[Link] Link needs either onClick() or href to be focusable and clickable'
-    )
-
-    // Link should not be focusable if disabled or no onClick/href
-    if (disabled || (!onClick && !href)) {
-      return this.renderContent()
-    } else {
-      return (
-        <Focusable>
-          {({ focused }) => (
-            this.renderContent(focused)
-          )}
-        </Focusable>
-      )
-    }
   }
 }
 

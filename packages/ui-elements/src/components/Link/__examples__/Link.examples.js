@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
-import React from 'react'
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
 const shortString = 'Delete'
-const srContent = <ScreenReaderContent key="example">{shortString}</ScreenReaderContent>
 
 export default {
   permutations: [
@@ -38,7 +35,6 @@ export default {
     ]},
     { iconPlacement: [null, 'start', 'end']},
     { icon: [null, IconTrash] },
-    'ellipsis',
     'disabled'
   ],
   renderProps: (props) => {
@@ -46,8 +42,7 @@ export default {
       componentProps: {
         href: 'http://instructure.design'
       },
-      filter: (props.ellipsis && (props.children === shortString || props.children === srContent)) ||
-        (props.iconPlacement && !props.icon || !props.iconPlacement && props.icon)
+      filter: props.ellipsis || (props.iconPlacement && !props.icon || !props.iconPlacement && props.icon)
     }
   }
 }

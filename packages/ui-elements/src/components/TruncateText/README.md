@@ -4,6 +4,8 @@ describes: TruncateText
 
 A component for truncating text content.
 
+> For best results, avoid using TruncateText inside parent containers that are inline (`display: inline/inline-block`) or that default to inline display (span, link, etc.).
+
 ### Single line
 
 ```javascript
@@ -23,9 +25,8 @@ example: true
         {lorem.paragraph()}
       </TruncateText>
     </Heading>
-    <br />
-
     <Text
+      as="p"
       weight="bold"
       size="large"
       transform="uppercase"
@@ -35,7 +36,6 @@ example: true
         {lorem.paragraph()}
       </TruncateText>
     </Text>
-
     <Text as="p">
       <TruncateText>
         {lorem.paragraph()}
@@ -48,7 +48,7 @@ example: true
           console.log(truncated, text)
         }}
       >
-        <span className="testClass">
+        <span>
           Regular sized text with <Link href="#">A Text Link </Link>and <Text weight="bold">some bold text.</Text>
         </span>
       </TruncateText>

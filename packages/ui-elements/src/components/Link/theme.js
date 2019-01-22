@@ -42,6 +42,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
     focusInverseOutlineColor: colors.borderLightest,
     focusInverseIconOutlineColor: colors.borderLightest,
 
+    iconSize: '1.125em', /* make icon slightly larger than inherited font-size */
     iconPlusTextMargin: spacing.xxSmall
   }
 }

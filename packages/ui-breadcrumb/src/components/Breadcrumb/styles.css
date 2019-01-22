@@ -7,10 +7,6 @@
   list-style-type: none;
   overflow: visible;
   display: flex;
-  align-items: baseline;
-}
-
-.root.preferAlignCenter {
   align-items: center;
 }
 

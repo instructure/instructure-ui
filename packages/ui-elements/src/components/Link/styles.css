@@ -1,43 +1,26 @@
 /* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
 
-.root {
+.root,
+a.root:link,
+a.root:visited,
+button.root {
   position: relative;
-  vertical-align: baseline;
-  outline-width: var(--focusOutlineWidth);
-  outline-style: var(--focusOutlineStyle);
-  outline-offset: 0.25rem;
-  outline-color: transparent;
-  transition: outline-color 0.2s;
-
-  &.focused {
-    outline-color: var(--focusOutlineColor);
-
-    &.inverse {
-      outline-color: var(--focusInverseOutlineColor);
-    }
-  }
-}
-
-.root .link {
-  outline: none;
-}
-
-.root a.link:link,
-.root a.link:visited,
-.root button.link {
-  cursor: pointer;
+  box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-  color: var(--color);
-  text-decoration: var(--textDecoration);
-  outline: none;
+  transition: outline-color 0.2s;
+  vertical-align: baseline; /* enforce for when Link renders inline-block via View */
 
-  &:hover,
-  &:active {
-    text-decoration: var(--hoverTextDecoration);
-    color: var(--hoverColor);
+  /* set up focus styles */
+  outline-color: transparent;
+  outline-width: var(--focusOutlineWidth);
+  outline-style: var(--focusOutlineStyle);
+  outline-offset: 0.25rem;
+
+  &:focus {
+    outline-color: var(--focusOutlineColor);
   }
 
   &[aria-disabled] {
@@ -51,11 +34,37 @@
   }
 }
 
-.root .inverse,
-.root a.inverse:link,
-.root a.inverse:visited,
-.root button.inverse {
+/*
+* If Link is not a button or link, it should not look clickable,
+* so scope those styles.
+*/
+a.root:link,
+a.root:visited,
+button.root {
+  cursor: pointer;
+  color: var(--color);
+  text-decoration: var(--textDecoration);
+
+  &:focus {
+    color: var(--color);
+  }
+
+  &:hover,
+  &:active {
+    text-decoration: var(--hoverTextDecoration);
+    color: var(--hoverColor);
+  }
+}
+
+.root.inverse,
+a.root.inverse:link,
+a.root.inverse:visited,
+button.root.inverse {
   color: var(--colorInverse);
+
+  &:focus {
+    outline-color: var(--focusInverseOutlineColor);
+  }
 
   &:hover,
   &:focus,
@@ -64,7 +73,7 @@
   }
 }
 
-.root button.link {
+button.root {
   appearance: none;
   user-select: text;
   background: none;
@@ -76,8 +85,35 @@
   text-align: inherit;
 }
 
-.ellipsis {
+.icon {
+  font-size: var(--iconSize);
   box-sizing: border-box;
+}
+
+.iconPlacement--start {
+  .icon {
+    padding-inline-start: 0;
+    padding-inline-end: var(--iconPlusTextMargin);
+  }
+}
+
+.iconPlacement--end {
+  .icon {
+    padding-inline-start: var(--iconPlusTextMargin);
+    padding-inline-end: 0;
+  }
+}
+
+/* If TruncateText is used in Link with icon, align the icon and the text vertically */
+.truncates {
+  &.iconPlacement--start,
+  &.iconPlacement--end {
+    align-items: center;
+  }
+}
+
+/* ellipsis is deprecated */
+.ellipsis {
   display: block;
   overflow: hidden;
   white-space: nowrap;
@@ -86,20 +122,6 @@
 
 button.ellipsis {
   width: 100%;
-}
-
-.icon {
-  font-size: 1.125em; /* make icon slightly larger than inherited font-size */
-}
-
-.iconPlacement--start .icon {
-  margin-inline-end: var(--iconPlusTextMargin);
-  margin-inline-start: 0;
-}
-
-.iconPlacement--end .icon {
-  margin-inline-end: 0;
-  margin-inline-start: var(--iconPlusTextMargin);
 }
 
 /* stylelint-enable selector-max-class, no-descending-specificity, selector-max-type */
