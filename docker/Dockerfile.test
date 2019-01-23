@@ -1,5 +1,5 @@
 FROM instructure/node:10
-
+ARG NODE_VERSION_LOCKED
 USER root
 
 ENV YARN_VERSION 1.12.3-1
@@ -29,6 +29,8 @@ RUN curl --silent "https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-
   ## && apt-get clean \
   ## && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
+RUN if [ -n "$NODE_VERSION_LOCKED" ] ; then npm install -g n && n "$NODE_VERSION_LOCKED" ; fi
+
 USER docker
 
 RUN mkdir -p $APP_HOME/
@@ -37,6 +39,7 @@ WORKDIR $APP_HOME/
 RUN mkdir -p $YARN_CACHE
 RUN yarn config set no-progress true \
  && yarn config set cache-folder $YARN_CACHE
+
 
 COPY --chown=docker:docker .yarnrc package.json yarn.lock $APP_HOME/
 

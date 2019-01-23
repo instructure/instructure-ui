@@ -1,11 +1,17 @@
-coverage:
-  dockerfile: docker/Dockerfile.coverage
-  build: .
+version: '2'
+services:
+  coverage:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.coverage
 
-test:
-  build: .
-  dockerfile: docker/Dockerfile.test
-  volumes_from:
-    - coverage
-  env_file:
-    - ./.env.test
+  test:
+    build:
+      context: .
+      dockerfile: 'docker/Dockerfile.test'
+      args:
+        NODE_VERSION_LOCKED: '${NODE_VERSION_LOCKED}'
+    env_file:
+      - ./.env.test
+    volumes_from:
+      - coverage
