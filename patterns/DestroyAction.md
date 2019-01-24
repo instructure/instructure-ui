@@ -62,7 +62,7 @@ class Example extends React.Component {
             <Heading level="h2">Delete</Heading>
           </ModalHeader>
           <ModalBody padding="large medium">
-            <Text>Are you sure you want to delete this assignment? This will affect 16 student's grades.</Text>
+            <Text>You are about to delete an active assignment. This will affect 16 students grades.</Text>
           </ModalBody>
           <ModalFooter>
             <Button onClick={this.handleButtonClick}>Cancel</Button>&nbsp;
