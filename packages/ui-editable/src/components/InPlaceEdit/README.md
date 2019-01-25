@@ -28,7 +28,7 @@ will render in the same style as the view, making for a nice user experience.  O
 the space it consumes in the app.
 
 Use `InPlaceEdit` to edit `Text` using `Text as="input"`. Also demonstrates how you might wish to handle
-the case when the text is empty.
+the case when the text is empty.  Use the checkbox to switch between inline and block layout.
 
 ```js
 ---
@@ -42,6 +42,7 @@ class Example extends React.Component {
     this.state = {
       mode: props.mode || 'view',
       value: 'This is some text',
+      inline: true
     }
   }
 
@@ -95,16 +96,26 @@ class Example extends React.Component {
     return InPlaceEdit.renderDefaultEditButton(props)
   }
 
+  onChangeLayout = (event) => {
+    this.setState({inline: event.target.checked})
+  }
+
   render () {
     return (
-      <InPlaceEdit
-        renderViewer={this.renderView}
-        renderEditor={this.renderEdit}
-        renderEditButton={this.renderEditButton}
-        onChangeMode={this.handleChangeMode}
-        mode={this.state.mode}
-        value={this.state.value}
-      />
+      <View as="div">
+        <InPlaceEdit
+          renderViewer={this.renderView}
+          renderEditor={this.renderEdit}
+          renderEditButton={this.renderEditButton}
+          onChangeMode={this.handleChangeMode}
+          mode={this.state.mode}
+          value={this.state.value}
+          inline={this.state.inline}
+        />
+        <View as="div" margin="small 0">
+          <Checkbox label="inline" checked={this.state.inline} onChange={this.onChangeLayout} />
+        </View>
+      </View>
     )
   }
 }

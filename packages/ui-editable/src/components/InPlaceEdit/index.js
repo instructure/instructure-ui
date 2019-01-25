@@ -107,12 +107,17 @@ export default class InPlaceEdit extends Component {
     /**
      * Put the edit button before or after the view
      */
-    editButtonPlacement: PropTypes.oneOf(['start', 'end'])
+    editButtonPlacement: PropTypes.oneOf(['start', 'end']),
+    /**
+     * Render outermost element inline v. block
+     */
+    inline: PropTypes.bool
   }
 
   static defaultProps = {
     readOnly: false,
-    showFocusRing: true
+    showFocusRing: true,
+    inline: true
   }
 
   constructor(props) {
@@ -173,7 +178,7 @@ export default class InPlaceEdit extends Component {
     const buttonMargin = this.props.editButtonPlacement === 'start' ? '0 xx-small 0 0' : '0 0 0 xx-small'
     return (
       <Flex
-        inline
+        inline={this.props.inline}
         direction={flexDir}
         justifyItems={justifyItems}
         {...getContainerProps()}
