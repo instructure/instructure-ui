@@ -200,7 +200,7 @@ export default class FileDrop extends Component {
 
     if (enablePreview) {
       return list.map((file) => (
-        Object.assign({}, file, { preview: window.URL.createObjectURL(file) })
+        Object.assign(file, { preview: window.URL.createObjectURL(file) })
       ))
     }
 

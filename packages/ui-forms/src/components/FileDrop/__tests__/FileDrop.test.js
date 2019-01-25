@@ -101,6 +101,76 @@ describe('<FileDrop />', async () => {
       expect(onDropRejected).to.not.have.been.called()
     })
 
+    it('rejects incorrect files using mymetypes and enablePreview', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
+      })
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
+
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          enablePreview
+          accept="image/*"
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.pdf', { type: 'application/pdf' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([])
+      expect(args[1]).to.deep.equal([file])
+
+      expect(onDropAccepted).to.not.have.been.called()
+      expect(onDropRejected).to.have.been.called()
+    })
+
+    it('accepts correct files using mymetypes and enablePreview', async () => {
+      const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
+        e.persist()
+      })
+      const onDropAccepted = spy()
+      const onDropRejected = spy()
+
+      const subject = await mount(
+        <FileDrop
+          label="fake label"
+          accept="image/*"
+          enablePreview
+          onDrop={onDrop}
+          onDropAccepted={onDropAccepted}
+          onDropRejected={onDropRejected}
+        />
+      )
+
+      const file = new File([''], 'napoleon.png', { type: 'image/png' })
+
+      const dataTransfer = new DataTransfer()
+      dataTransfer.items.add(file)
+
+      const fileDrop = within(subject.getDOMNode())
+      const label = await fileDrop.find('label')
+      await label.drop({ dataTransfer })
+
+      const { args } = onDrop.lastCall
+      expect(args[0]).to.deep.equal([file])
+      expect(args[1]).to.deep.equal([])
+
+      expect(onDropAccepted).to.have.been.called()
+      expect(onDropRejected).to.not.have.been.called()
+    })
+
     it('accepts correct files using extensions', async () => {
       const onDrop = spy((acceptedFiles, rejectedFiles, e) => {
         e.persist()
