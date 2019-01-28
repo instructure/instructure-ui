@@ -110,7 +110,7 @@ render(<Example />)
 ### Constraining Modal to a parent element
 
 By default, Modals are positioned relative to the document body.
- 
+
 Setting the `constrain` property to `parent` will constrain the Modal within the element it is mounted from (specified via the `mountNode` property). Note: in these cases, the `mountNode` element should have an explicit `height` set: Because Modal is absolutely positioned, it has no height of its own.
 
 ```js
@@ -221,23 +221,23 @@ class ModalAutoCompleteExample extends React.Component {
 
 render(<Example />)
 ```
+### Media (images, etc.) inside Modals
 
-### Dark Modal
-Setting the `variant` prop to `"inverse"` will result in a dark version of Modal.
+> Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. *Note that the `inverse` Modal does not currently support text or form input content.*
+
+**If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** ModalBody will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
 
 ```js
 ---
 render: false
 example: true
 ---
-const fpo = lorem.paragraphs(1)
 class Example extends React.Component {
   constructor (props) {
     super(props)
 
     this.state = {
-      open: false,
-      size: 'auto'
+      open: false
     }
   }
 
@@ -256,10 +256,123 @@ class Example extends React.Component {
         <Modal
           open={this.state.open}
           onDismiss={() => { this.setState({ open: false }) }}
-          size="fullscreen"
+          size="auto"
           label="Modal Dialog: Hello Media"
           shouldCloseOnDocumentClick
           variant="inverse"
+        >
+          <ModalHeader>
+            <Flex>
+              <FlexItem grow shrink>
+                <Heading level="h2" ellipsis>A small image</Heading>
+              </FlexItem>
+              <FlexItem>
+                <Button
+                  variant="icon-inverse"
+                  icon={IconX.Solid}
+                  onClick={this.handleButtonClick}
+                >
+                  <ScreenReaderContent>Close</ScreenReaderContent>
+                </Button>
+              </FlexItem>
+            </Flex>
+          </ModalHeader>
+          <ModalBody padding="none">
+            <Img
+              src={placeholderImage(500, 250)}
+              inline={false}
+              margin="0 auto"
+            />
+          </ModalBody>
+          <ModalFooter>
+            <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+    )
+  }
+}
+
+render(<Example />)
+```
+
+**When you have to display large media inside the Modal (or have no control over the size of the media)**, set `overflow` to `fit`. Doing so makes ModalBody fill 100% of the available width and height, enabling you to
+use the [Img](#Img) component's `constrain` property to fit the image inside ModalBody.
+
+> `<Img />` uses CSS's [`object-fit`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) for its constrain property. If you're not using `<Img />`, add an `object-fit` rule to your media, and it will work with `overflow="fit"`.
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      open: false,
+      imageFit: 'cover',
+      modalSize: 'fullscreen'
+    }
+  }
+
+  handleButtonClick = () => {
+    this.setState(function (state) {
+      return { open: !state.open }
+    })
+  }
+
+  handleImageFitChange = (event, value) => {
+    this.setState({ imageFit: value })
+  }
+
+  handleModalSizeChange = (event, value) => {
+    this.setState({ modalSize: value })
+  }
+
+  render () {
+    return (
+      <div>
+        <FormFieldGroup
+          description={<Heading level="h3" as="h3">Media Modal</Heading>}
+          rowSpacing="medium"
+        >
+          <RadioInputGroup
+            onChange={this.handleImageFitChange}
+            name="imageFit"
+            defaultValue="cover"
+            description="Img component's `constrain` prop"
+            variant="toggle"
+          >
+            <RadioInput label="Cover" value="cover" />
+            <RadioInput label="Contain" value="contain" />
+          </RadioInputGroup>
+          <RadioInputGroup
+            onChange={this.handleModalSizeChange}
+            name="modalSize"
+            defaultValue="fullscreen"
+            description="Modal size"
+            variant="toggle"
+          >
+            <RadioInput label="fullscreen" value="fullscreen" />
+            <RadioInput label="small" value="small" />
+            <RadioInput label="medium" value="medium" />
+            <RadioInput label="large" value="large" />
+            <RadioInput label="auto" value="auto" />
+          </RadioInputGroup>
+        </FormFieldGroup>
+        <Button onClick={this.handleButtonClick} margin="medium 0 0">
+          {this.state.open ? 'Close' : 'Open'} the Modal
+        </Button>
+        <Modal
+          open={this.state.open}
+          onDismiss={() => { this.setState({ open: false }) }}
+          size={this.state.modalSize}
+          label="Modal Dialog: Hello Media"
+          shouldCloseOnDocumentClick
+          variant="inverse"
+          overflow="fit"
         >
           <ModalHeader>
             <Flex>
@@ -269,7 +382,7 @@ class Example extends React.Component {
                     <SVGIcon src={iconExample} size="small" title="Icon Example" />
                   </FlexItem>
                   <FlexItem grow shrink>
-                    <Heading level="h2" ellipsis>This Modal Contains Media    </Heading>
+                    <Heading level="h2" ellipsis>This Modal Contains Media</Heading>
                   </FlexItem>
                 </Flex>
               </FlexItem>
@@ -288,15 +401,12 @@ class Example extends React.Component {
               </FlexItem>
             </Flex>
           </ModalHeader>
-          <ModalBody padding="0 medium">
-            <View
-              as="div"
-              margin="auto"
-              textAlign="center"
-              background="transparent"
-            >
-              <Img src={avatarPortrait} />
-            </View>
+          <ModalBody padding="none">
+            <Img
+              src={avatarSquare}
+              constrain={this.state.imageFit}
+              inline={false}
+            />
           </ModalBody>
           <ModalFooter>
             <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
@@ -323,6 +433,7 @@ guidelines: true
     <FigureItem>Provide a way to dismiss the Modal: the "x" close button, the ESC key, clicking outside the modal, alternative response button (done, etc...)</FigureItem>
     <FigureItem>Place optional response button(s) on the right side within the ModalFooter</FigureItem>
     <FigureItem>Place primary button on the far right with secondary response buttons to the left of the primary</FigureItem>
+    <FigureItem>Use size="fullscreen" when setting ModalBody to overflow="contain" to support media fitting within its container</FigureItem>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <FigureItem>Use when the workflow should NOT be interrupted</FigureItem>

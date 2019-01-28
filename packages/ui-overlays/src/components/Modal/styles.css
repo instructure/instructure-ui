@@ -32,6 +32,10 @@
   &.ie11 {
     max-height: none;
   }
+
+  &.overflow--fit:not(.ie11) {
+    transform: translateY(2.5%);
+  }
 }
 
 .auto {

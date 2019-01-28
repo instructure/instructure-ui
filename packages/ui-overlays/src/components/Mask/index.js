@@ -47,7 +47,7 @@ category: components/utilities
 class Mask extends Component {
   static propTypes = {
     onDismiss: PropTypes.func,
-    placement: PropTypes.oneOf(['top', 'center', 'bottom']),
+    placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
     fullscreen: PropTypes.bool,
     children: PropTypes.node,
     onClick: PropTypes.func

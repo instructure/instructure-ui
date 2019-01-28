@@ -394,6 +394,22 @@ describe('<Modal />', async () => {
       expect(bodyRef.props.variant).to.equal('inverse')
       expect(footerRef.props.variant).to.equal('inverse')
     })
+
+    it('should pass overflow to ModalBody', async () => {
+      let bodyRef
+
+      await mount(
+        <Modal
+          open
+          label="Modal"
+          shouldReturnFocus={false}
+          overflow="fit"
+        >
+          <ModalBody ref={el => bodyRef = el}>Foo Bar Baz</ModalBody>
+        </Modal>
+      )
+      expect(bodyRef.props.overflow).to.equal('fit')
+    })
   })
 
   describe('managed focus', async () => {

@@ -1,17 +1,11 @@
 .root {
   box-sizing: border-box;
-  overflow-y: auto;
   flex: 1 1 auto;
+  overflow-y: auto;
 
   &:focus {
     outline: none;
   }
-}
-
-.content {
-  box-sizing: border-box;
-  max-width: var(--contentMaxWidth);
-  margin: 0 auto;
 }
 
 .inverse {

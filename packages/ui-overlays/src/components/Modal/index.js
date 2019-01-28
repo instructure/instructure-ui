@@ -41,6 +41,7 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 
 import Mask from '../Mask'
 
@@ -197,7 +198,12 @@ export default class Modal extends Component {
     /**
      * Constrain the Modal to the document window or its closest positioned parent
      */
-    constrain: PropTypes.oneOf(['window', 'parent'])
+    constrain: PropTypes.oneOf(['window', 'parent']),
+    /**
+     * Should ModalBody handle overflow with scrollbars, or fit its
+     * content within its own height?
+     */
+    overflow: PropTypes.oneOf(['scroll', 'fit'])
   }
 
   static defaultProps = {
@@ -222,7 +228,8 @@ export default class Modal extends Component {
     shouldReturnFocus: true,
     defaultFocusElement: null,
     children: null,
-    constrain: 'window'
+    constrain: 'window',
+    overflow: 'scroll'
   }
 
   constructor (props) {
@@ -252,6 +259,16 @@ export default class Modal extends Component {
 
   get DOMNode () {
     return this._DOMNode
+  }
+
+  get maskPlacement () {
+    if (this.ie11) {
+      return 'top'
+    } else if (this.props.overflow === 'fit') {
+      return 'stretch'
+    } else {
+      return 'center'
+    }
   }
 
   set DOMNode (el) {
@@ -298,12 +315,25 @@ export default class Modal extends Component {
   }
 
   renderChildren() {
-    return Children.map(this.props.children, (child) => {
+    const {
+      children,
+      variant,
+      overflow
+    } = this.props
+
+    return Children.map(children, (child) => {
       if (!child) return // ignore null, falsy children
 
-      return safeCloneElement(child, {
-        variant: this.props.variant
-      })
+      if (matchComponentTypes(child, [ModalBody])) {
+        return safeCloneElement(child, {
+          variant: variant,
+          overflow: child.props.overflow || overflow
+        })
+      } else {
+        return safeCloneElement(child, {
+          variant: variant
+        })
+      }
     })
   }
 
@@ -342,6 +372,7 @@ export default class Modal extends Component {
           [styles.root]: true,
           [styles[size]]: true,
           [styles.inverse]: this.props.variant === 'inverse',
+          [styles['overflow--fit']]: this.props.overflow === 'fit',
           [styles.ie11]: this.ie11
         })}
         ref={this.contentRef}
@@ -365,7 +396,7 @@ export default class Modal extends Component {
     } else {
       return (
         <Mask
-          placement={this.ie11 ? 'top' : 'center'}
+          placement={this.maskPlacement}
           fullscreen={constrain === 'window'}
         >
           {dialog}

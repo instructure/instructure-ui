@@ -31,8 +31,10 @@ import View from '@instructure/ui-layout/lib/components/View'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
+import error from '@instructure/ui-utils/lib/error'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import Browser from '@instructure/ui-utils/lib/Browser'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -50,7 +52,8 @@ export default class ModalBody extends Component {
     padding: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
     as: CustomPropTypes.elementType,
-    variant: PropTypes.oneOf(['default', 'inverse'])
+    variant: PropTypes.oneOf(['default', 'inverse']),
+    overflow: PropTypes.oneOf(['scroll', 'fit'])
   }
 
   static defaultProps = {
@@ -60,27 +63,49 @@ export default class ModalBody extends Component {
   }
 
   render () {
+    const {
+      as,
+      elementRef,
+      overflow,
+      variant,
+      padding,
+      children
+    } = this.props
+
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, ModalBody.propTypes),
       ModalBody
     )
+
     const classes = classnames ({
       [styles.root]: true,
-      [styles.inverse]: this.props.variant === 'inverse'
+      [styles.inverse]: variant === 'inverse'
     })
+
+    const isFit = overflow === 'fit'
+    const ie11 = Browser.msie && Browser.version > 10
+
+    if (isFit) {
+      error(
+        !ie11,
+        'Modal',
+        `overflow="fit" is only supported with fullscreen modals in Internet Explorer`
+      )
+    }
+
     return (
       <View
         {...passthroughProps}
         display="block"
-        elementRef={this.props.elementRef}
-        as={this.props.as}
+        width={isFit ? '100%' : null}
+        height={isFit ? '100%' : null}
+        elementRef={elementRef}
+        as={as}
         className={classes}
-        padding={this.props.padding}
+        padding={padding}
         tabIndex="-1" // prevent FF from focusing view when scrollable
       >
-        <div className={styles.content}>
-          {this.props.children}
-        </div>
+        {children}
       </View>
     )
   }

@@ -49,6 +49,17 @@ describe('<ModalBody />', async () => {
     expect(body.hasClass(styles['inverse'])).to.be.true()
   })
 
+  it('should set 100% width and height when overflow is set to fit', async () => {
+    await mount(
+      <ModalBody overflow="fit" />
+    )
+
+    const body = await ModalBodyLocator.find()
+
+    expect(body.getDOMNode().style.width).to.equal('100%')
+    expect(body.getDOMNode().style.height).to.equal('100%')
+  })
+
   describe('when passing down props to View', async () => {
     const allowedProps = {
       padding: 'small',
