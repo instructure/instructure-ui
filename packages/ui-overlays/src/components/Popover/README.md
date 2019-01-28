@@ -133,7 +133,6 @@ render () {
       <Popover
         on={['focus', 'click']}
         shouldContainFocus={false}
-        shouldReturnFocus={false}
         shouldFocusContentOnTriggerBlur
         mountNode={() => document.getElementById('container')}
       >
