@@ -44,8 +44,9 @@ category: components/utilities
 @deprecated('5.0.0', {
   applicationElement: true
 },
-'Elements outside of the `<Dialog />` are now hidden from screen readers by default. ' +
-'Use the `ignore` prop to specify any elements that should not be hidden')
+'Elements outside of the `<Dialog />` are now hidden from screen readers automatically. ' +
+'when `shouldContainFocus` is set to `true` or `screenreader`. The `liveRegion` prop can ' +
+'be used to specify any elements that should not be hidden')
 
 class Dialog extends Component {
   static propTypes = {
