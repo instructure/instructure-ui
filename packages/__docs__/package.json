@@ -1,7 +1,7 @@
 {
   "name": "docs-app",
   "private": true,
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "Documentation for A UI library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {

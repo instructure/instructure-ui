@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-babel-preset",
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "A UI babel preset made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -21,8 +21,8 @@
     "@babel/plugin-proposal-decorators": "^7.3.0",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
     "@babel/plugin-proposal-object-rest-spread": "7.2.0",
-    "@babel/plugin-transform-destructuring": "^7.2.0",
     "@babel/plugin-transform-classes": "^7.2.0",
+    "@babel/plugin-transform-destructuring": "^7.2.0",
     "@babel/plugin-transform-react-constant-elements": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",

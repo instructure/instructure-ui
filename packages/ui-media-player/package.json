@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-media-player",
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "A cross-browser HTML5 media player.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -25,7 +25,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-elements": "^5",
     "@instructure/ui-forms": "^5",
@@ -35,6 +34,7 @@
     "@instructure/ui-overlays": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "@instructure/uid": "^5",
     "classnames": "^2",
     "prop-types": "^15",
     "screenfull": "^3.3.2"

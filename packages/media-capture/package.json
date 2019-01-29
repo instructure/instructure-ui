@@ -1,6 +1,6 @@
 {
   "name": "@instructure/media-capture",
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-alerts": "^5",
     "@instructure/ui-buttons": "^5",
@@ -37,6 +36,7 @@
     "@instructure/ui-menu": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",
+    "@instructure/uid": "^5",
     "classnames": "^2",
     "keycode": "^2.2.0",
     "luxon": "^0.3.1",

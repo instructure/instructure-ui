@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-presets",
-  "version": "5.40.0",
+  "version": "5.41.0",
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",
@@ -22,8 +22,8 @@
     "@instructure/generate-examples": "^5",
     "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-eslint-config": "^5",
-    "@instructure/ui-postcss-config": "^5",
     "@instructure/ui-karma-config": "^5",
+    "@instructure/ui-postcss-config": "^5",
     "@instructure/ui-scripts": "^5",
     "@instructure/ui-stylelint-config": "^5",
     "@instructure/ui-webpack-config": "^5"

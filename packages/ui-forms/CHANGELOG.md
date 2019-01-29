@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.41.0"></a>
+# [5.41.0](https://github.com/instructure/instructure-ui/compare/v5.40.0...v5.41.0) (2019-01-29)
+
+
+### Bug Fixes
+
+* **ui-editable,ui-forms:** select blurs when it shouldn't ([65563e8](https://github.com/instructure/instructure-ui/commit/65563e8))
+* **ui-forms:** fix enablePreview prop on FileDrop ([3c44424](https://github.com/instructure/instructure-ui/commit/3c44424))
+* **ui-forms:** prevent multiple onChange events from controlled selects ([cef91d7](https://github.com/instructure/instructure-ui/commit/cef91d7))
+
+
+
+
+
 <a name="5.40.0"></a>
 # [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
 

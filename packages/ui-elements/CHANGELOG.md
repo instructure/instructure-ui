@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="5.41.0"></a>
+# [5.41.0](https://github.com/instructure/instructure-ui/compare/v5.40.0...v5.41.0) (2019-01-29)
+
+
+### Bug Fixes
+
+* **ui-elements:** Make Link work with TruncateText ([5f49edc](https://github.com/instructure/instructure-ui/commit/5f49edc))
+* **ui-elements:** remove gradiant from HCM progress ([00d5b7b](https://github.com/instructure/instructure-ui/commit/00d5b7b))
+
+
+
+
+
 <a name="5.40.0"></a>
 # [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
 
