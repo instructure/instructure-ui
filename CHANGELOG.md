@@ -26,21 +26,6 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 * **ui-overlays:** allow support for icons alongside close button in inverse variant ([932a468](https://github.com/instructure/instructure-ui/commit/932a468))
 
 
-### BREAKING CHANGES
-
-* **ui-editable:** InPlaceEdit defaults to inline=false, when it used to render inline by default
-
-Change-Id: I3776ab24b20d8b50a5d287f3da092fb8f55f2f24
-Reviewed-on: https://gerrit.instructure.com/179342
-Tested-by: Jenkins
-Reviewed-by: Chris Hart <chart@instructure.com>
-Product-Review: Chris Hart <chart@instructure.com>
-QA-Review: Daniel Sasaki <dsasaki@instructure.com>
-
-
-
-
-
 <a name="5.40.0"></a>
 # [5.40.0](https://github.com/instructure/instructure-ui/compare/v5.39.0...v5.40.0) (2019-01-15)
 
