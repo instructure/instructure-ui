@@ -45,7 +45,11 @@ module.exports = [
         // this is usually whatever webpack entries you've defined
         js_external: [
           // should match entries in webpack.config.js
+          `${pkg.homepage}vendors~common~globals~ui-docs.js`,
+          `${pkg.homepage}vendors~globals~ui-docs.js`,
+          `${pkg.homepage}runtime~common.js`,
           `${pkg.homepage}common.js`,
+          `${pkg.homepage}runtime~globals.js`,
           `${pkg.homepage}globals.js`
         ].join(';')
       }
