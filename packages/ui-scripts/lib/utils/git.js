@@ -72,9 +72,11 @@ exports.setupGit = async function setupGit () {
     await runGitCommand(['config', 'user.name', `"${GIT_USERNAME}"`])
   }
 
-  await runGitCommand(['config', 'push.default', 'simple'])
-
-  await runGitCommand(['config', '--list'])
+  try {
+    await runGitCommand(['config', '--list'])
+  } catch (e) {
+    error(`Could not determine if git config update was successful: ${e}`)
+  }
 }
 
 exports.lintCommitMessage = async function lintCommitMessage () {

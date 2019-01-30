@@ -70,7 +70,11 @@ async function createNPMRCFile (config = {}) {
     )
   }
 
-  await runCommandAsync('npm', ['whoami'])
+  try  {
+    await runCommandAsync('npm', ['whoami'])
+  } catch (e) {
+    error(`Could not determine if NPM auth was successful: ${e}`)
+  }
 }
 
 const getReleaseVersion = async function getReleaseVersion (currentVersion) {
@@ -209,7 +213,7 @@ exports.publishPackage = async function publishPackage (packageName, currentVers
     info(`📦  v${currentVersion} is already published!`)
   } else {
     try {
-      await runCommandAsync('yarn', ['publish', '--tag', npmTag])
+      await runCommandAsync('npm', ['publish', '--tag', npmTag])
       info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
     } catch (err) {
       error(err)
