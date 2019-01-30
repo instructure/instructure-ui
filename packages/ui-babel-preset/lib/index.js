@@ -28,22 +28,22 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
-    ['@babel/preset-env', envPresetConfig],
-    ['@babel/preset-react']
+    [require('@babel/preset-env').default, envPresetConfig],
+    require('@babel/preset-react').default
   ]
 
   let plugins = [
-    'babel-plugin-macros',
-    '@babel/plugin-transform-destructuring',
-    ['@babel/plugin-proposal-decorators', { legacy: true }], // must run before themeable-styles plugin below
-    ['@babel/plugin-proposal-class-properties', { loose: true }],
-    '@babel/plugin-proposal-export-default-from',
-    ['@babel/plugin-proposal-object-rest-spread', { useBuiltIns: true }],
-    '@babel/plugin-transform-runtime'
+    require('babel-plugin-macros'),
+    require('@babel/plugin-transform-destructuring').default,
+    [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
+    [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
+    require('@babel/plugin-proposal-export-default-from').default,
+    [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
+    require('@babel/plugin-transform-runtime').default
   ]
 
   if (process.env.NODE_ENV === 'production') {
-    plugins.push('@babel/plugin-transform-react-constant-elements')
+    plugins.push(require('@babel/plugin-transform-react-constant-elements').default)
   }
 
   let themeableOptions = {
@@ -55,7 +55,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   }
 
   plugins = plugins.concat([
-    ['@instructure/babel-plugin-themeable-styles', themeableOptions]
+    [require('@instructure/babel-plugin-themeable-styles'), themeableOptions]
   ])
 
   if (opts.node) {
@@ -67,7 +67,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
 
   if (opts.coverage) {
     plugins = [
-      ['istanbul', {
+      [require('babel-plugin-istanbul').default, {
         include: ['**/src/**/*.js'],
         exclude: [
           '**/*.test.js',
@@ -102,7 +102,7 @@ function getNodeEnvConfig () {
     modules: 'commonjs',
     // this is for babel-plugin-transform-themeable. it currently doesn't work against native class syntax.
     // once it does, this line can be removed
-    include: ['@babel/plugin-transform-classes']
+    include: [require('@babel/plugin-transform-classes').default]
   }
 }
 

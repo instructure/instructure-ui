@@ -33,6 +33,7 @@
     "@instructure/config-loader": "^5",
     "@instructure/ui-postcss-config": "^5",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-macros": "^2.4.5",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-transform-ensure-ignore": "^0.1.0"
   },
