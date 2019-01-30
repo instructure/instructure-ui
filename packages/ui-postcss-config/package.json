@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-postcss-config",
-  "version": "5.41.0",
+  "version": "5.41.1",
   "description": "A shared postcss config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

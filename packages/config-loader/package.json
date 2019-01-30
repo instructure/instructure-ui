@@ -1,6 +1,6 @@
 {
   "name": "@instructure/config-loader",
-  "version": "5.41.0",
+  "version": "5.41.1",
   "description": "A library to load config files",
   "main": "./index.js",
   "scripts": {
