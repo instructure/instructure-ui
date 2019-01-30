@@ -25,27 +25,27 @@
 const loadConfig = require('@instructure/config-loader')
 
 const CORE_PLUGINS_PRE = [
-  ['postcss-input-range'], // for RangeInput
-  ['postcss-mixins'], // for Grid
-  ['postcss-simple-vars'] // for Grid
+  [require('postcss-input-range')], // for RangeInput
+  [require('postcss-mixins')], // for Grid
+  [require('postcss-simple-vars')] // for Grid
 ]
 
 const CORE_PLUGINS_POST = [
-  ['postcss-bidirection', {
+  [require('postcss-bidirection'), {
     buildSelector: function (selector, direction) {
       return `[dir="${direction}"] ${selector}`
     }
   }],
-  ['autoprefixer', { browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers')) }],
-  ['postcss-initial'],
-  ['postcss-reporter', { clearReportedMessages: true }]
+  [require('autoprefixer'), { browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers')) }],
+  [require('postcss-initial')],
+  [require('postcss-reporter'), { clearReportedMessages: true }]
 ]
 
 module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
   return function (ctx = {}) {
     let plugins = [
       ...CORE_PLUGINS_PRE,
-      opts.nesting ? ['postcss-nesting'] : ['postcss-nested'],
+      opts.nesting ? [require('postcss-nesting')] : [require('postcss-nested')],
       ...CORE_PLUGINS_POST
     ]
 
@@ -64,7 +64,8 @@ module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
     }
 
     return {
-      plugins: plugins.map((plugin) => require(plugin[0])(plugin[1]))
+      plugins: plugins
+        .map((plugin) => (typeof plugin[0] === 'string') ? require(plugin[0])(plugin[1]) : plugin[0](plugin[1]))
     }
   }
 }
