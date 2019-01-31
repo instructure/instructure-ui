@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export ${COMPONENT}, { ${COMPONENT}View } from './${COMPONENT}'
+export ${COMPONENT} from './${COMPONENT}'

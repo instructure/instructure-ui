@@ -25,15 +25,21 @@
 import React from 'react'
 import { expect, mount, accessible } from '@instructure/ui-test-utils'
 
+import ${COMPONENT} from '../index'
+import ${COMPONENT}Locator from '../locator'
+
 describe('<${COMPONENT} />', async () => {
   it('should render', async () => {
-    const render = stub()
-    await mount(<${COMPONENT} render={render} />)
-    expect(render).to.have.been.called()
+    await mount(<${COMPONENT} />)
+    const component = ${COMPONENT}Locator.find()
+
+    expect(component).to.exist()
   })
+
   it('should be accessible', async () => {
     const render = stub()
     await mount(<${COMPONENT} render={render} />)
+
     expect(await accessible()).to.be.true()
   })
 })

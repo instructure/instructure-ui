@@ -3,7 +3,8 @@
 set -e
 
 PACKAGE_DIR=packages
-COMPONENT_TEMPLATE_DIR=scripts/templates/component
+PACKAGE_TEMPLATE_DIR=scripts/templates/component
+COMPONENT_TEMPLATE_DIR=$PACKAGE_TEMPLATE_DIR/src/components/Component
 
 current_version=$(node -p "require('./lerna').version")
 
@@ -30,40 +31,44 @@ if [ ! -d "$COMPONENT_TEMPLATE_DIR" ]; then
   exit 1
 fi
 
+COMPONENT_DIR=$PACKAGE_DIR/$PACKAGE/src/components
+
 if [ -d "$PACKAGE_DIR/$PACKAGE" ]; then
-  echo Oops! Package $PACKAGE exists!
-  exit 1
-fi
+  read -p "Package $PACKAGE exists! Continue? [Y/n]" CONT
+  if [[ ! $CONT =~ ^[Yy]$ ]]; then
+    exit 1
+  else
+    echo Generating $COMPONENT files in $COMPONENT_DIR
 
-echo Generating $PACKAGE files in $PACKAGE_DIR/$PACKAGE
-
-cp -r $COMPONENT_TEMPLATE_DIR $PACKAGE_DIR/$PACKAGE
-
-# Update file names
-find $PACKAGE_DIR/$PACKAGE -name 'Package*' -type f -exec bash -c 'mv "$1" "${1/Package/$PACKAGE}"' -- {} \;
-
-# Update file contents
-if [[ "$OSTYPE" == darwin* ]]; then
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+    cp -r $COMPONENT_TEMPLATE_DIR $COMPONENT_DIR/$COMPONENT
+  fi
 else
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
-fi
+  echo Generating $PACKAGE files in $PACKAGE_DIR/$PACKAGE
 
-if [[ "$OSTYPE" == darwin* ]]; then
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${VERSION}/$VERSION/g" '{}' \;
-else
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${VERSION}/$VERSION/g" '{}' \;
-fi
+  cp -r $PACKAGE_TEMPLATE_DIR $PACKAGE_DIR/$PACKAGE
 
-# Update file contents
-if [[ "$OSTYPE" == darwin* ]]; then
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
-else
-  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  # Update file names
+  find $PACKAGE_DIR/$PACKAGE -name 'Package*' -type f -exec bash -c 'mv "$1" "${1/Package/$PACKAGE}"' -- {} \;
+
+  # Update file contents
+  if [[ "$OSTYPE" == darwin* ]]; then
+    find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+    find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${VERSION}/$VERSION/g" '{}' \;
+  else
+    find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${PACKAGE}/$PACKAGE/g" '{}' \;
+    find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${VERSION}/$VERSION/g" '{}' \;
+  fi
 fi
 
 # Update directory names
-find $PACKAGE_DIR/$PACKAGE -depth -name 'Component*' -type d -execdir bash -c 'mv "$1" "${1//Component/$COMPONENT}"' -- {} \;
+find $COMPONENT_DIR -depth -name 'Component*' -type d -execdir bash -c 'mv "$1" "${1//Component/$COMPONENT}"' -- {} \;
 
 # Update file names
-find $PACKAGE_DIR/$PACKAGE -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+find $COMPONENT_DIR/$COMPONENT -name 'Component*' -type f -exec bash -c 'mv "$1" "${1/Component/$COMPONENT}"' -- {} \;
+
+# Update file contents
+if [[ "$OSTYPE" == darwin* ]]; then
+  find $COMPONENT_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+else
+  find $COMPONENT_DIR/$COMPONENT -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+fi

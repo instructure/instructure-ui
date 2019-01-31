@@ -22,45 +22,39 @@
  * SOFTWARE.
  */
 
-import { Component } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
+import themeable from '@instructure/ui-themeable'
+
+import styles from './styles.css'
+import theme from './theme'
 
 /**
 ---
 category: components
 ---
 **/
+@themeable(theme, styles)
 class ${COMPONENT} extends Component {
   static propTypes = {
     /**
-     * @param {Object} renderProps
-     * @param {Function} renderProps.getViewProps - Props to be spread onto the view element
-     */
-    children: PropTypes.func,
-    /**
-     * Identical to children
-     */
-    render: PropTypes.func,
+    * FIXME: description of the children prop goes here
+    */
+    children: PropTypes.node
   }
 
   render () {
-    const { children, render = children } = this.props
-
-    if (typeof render === 'function') {
-      return render({
-        getViewProps: (props) => {
-          return {
-            /* component specific view props go here */
-            /* consumers can override them by passing in an overrides object */
-            ...props
-          }
-        }
-      })
-    } else {
-     return null
-    }
+    const { children, ...props } = this.props
+    return (
+      <div
+        {...props}
+        className={styles.root}
+      >
+        {children}
+      </div>
+    )
   }
 }
 
 export default ${COMPONENT}
-export { default as ${COMPONENT}View } from './${COMPONENT}View'

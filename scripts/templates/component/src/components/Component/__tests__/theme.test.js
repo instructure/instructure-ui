@@ -22,21 +22,26 @@
  * SOFTWARE.
  */
 
-import React from 'react'
-import { expect, mount, generateA11yTests, within } from '@instructure/ui-test-utils'
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
-import ${COMPONENT}View from '../index'
-import ${COMPONENT}ViewExamples from '../__examples__/${COMPONENT}View.examples'
+import ${COMPONENT} from '../index'
 
-describe('<${COMPONENT}View />', async () => {
-  it('should render', async () => {
-    const subject = await mount(<${COMPONENT}View />)
-    const component = within(subject.getDOMNode())
+/* eslint-disable mocha/no-synchronous-tests */
+describe('${COMPONENT}.theme', () => {
+  describe('with the default theme', () => {
+    const variables = ${COMPONENT}.generateTheme()
 
-    expect(component).to.exist()
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
   })
 
-  describe('with generated examples', async () => {
-    generateA11yTests(${COMPONENT}ViewExamples)
+  describe('with the high contrast canvas theme', () => {
+    const variables = ${COMPONENT}.generateTheme('canvas-high-contrast')
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
   })
 })
+/* eslint-enable mocha/no-synchronous-tests */
