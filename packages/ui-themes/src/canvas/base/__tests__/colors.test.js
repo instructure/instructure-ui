@@ -82,17 +82,6 @@ describe('canvas.colors', () => {
       expect(contrast(colors.textBrand, colors.backgroundDarkest)).to.be.above(3)
     })
   })
-  describe('textLink', () => {
-    it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
-      expect(contrast(colors.textLink, colors.backgroundLightest)).to.be.above(3)
-    })
-    it('should meet 3:1 contrast as a text color with `backgroundLight` background', () => {
-      expect(contrast(colors.textLink, colors.backgroundLight)).to.be.above(3)
-    })
-    it('should NOT meet 3:1 contrast as a text color with `backgroundDarkest` background', () => {
-      expect(contrast(colors.textLink, colors.backgroundDarkest)).to.not.be.above(3)
-    })
-  })
   describe('textAlert', () => {
     it('should meet 3:1 contrast as a text color with `backgroundLightest` background', () => {
       expect(contrast(colors.textAlert, colors.backgroundLightest)).to.be.above(3)

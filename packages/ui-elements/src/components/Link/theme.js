@@ -29,7 +29,7 @@ export default function generator ({ colors, typography, borders, spacing }) {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
     color: colors.textLink,
-    textDecoration: 'none',
+    textDecoration: 'underline',
 
     focusOutlineWidth: borders.widthMedium,
     focusOutlineColor: colors.borderBrand,
@@ -58,7 +58,6 @@ generator['canvas-a11y'] = generator['canvas-high-contrast'] = function ({ color
 generator['canvas'] = function (variables) {
   return {
     color: variables['ic-link-color'],
-    textDecoration: variables['ic-link-decoration'],
     focusOutlineColor: variables['ic-brand-primary'],
     hoverColor: darken(variables['ic-link-color'], 10)
   }

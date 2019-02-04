@@ -2,7 +2,7 @@
 describes: Link
 ---
 
-A Link component
+`Link` is intended for presenting actions inline with other content, such as within headings or sentences. Typically those actions navigate the user to a different view. If the action is not presented within other content or is grouped with other similar actions, use a [Button](#Button).
 
 ```js
 ---
@@ -50,7 +50,7 @@ example: true
 ---
 <View as="div">
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design">
+    <Link href="https://instructure.design/#Link">
       <TruncateText position="middle">{lorem.paragraph()}</TruncateText>
     </Link>
   </View>

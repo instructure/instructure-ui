@@ -101,7 +101,7 @@ export default class Document extends Component {
 
     return (
       <View as="div" margin="0 0 x-large 0">
-        <Link href={srcUrl} theme={{ color: '#005A8F', hoverColor: darken('#005A8F', 10) }}>
+        <Link href={srcUrl}>
           {srcPath}
         </Link>
       </View>

@@ -2,6 +2,8 @@
 describes: Button
 ---
 
+`Button` allows users to perform actions or trigger changes. Button should not be used inline with heading or paragraph text. For actions where the trigger should flow inline with other text, use [Link](#Link).
+
 The default button component:
 
 ```js
