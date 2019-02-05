@@ -1,0 +1,42 @@
+{
+  "name": "@instructure/ui-selectable",
+  "version": "5.46.1",
+  "description": "A UI component library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "test:node": "ui-test --node",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^5",
+    "@instructure/ui-test-utils": "^5"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7",
+    "@instructure/ui-utils": "^5",
+    "@instructure/ui-themeable": "^5",
+    "@instructure/ui-testable": "^5",
+    "@instructure/uid": "^5",
+    "prop-types": "^15",
+    "keycode": "^2",
+    "react": "^0.14.9 || ^15 || ^16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false,
+  "private": true
+}
