@@ -107,6 +107,11 @@ class Popover extends Component {
     variant: PropTypes.oneOf(['default', 'inverse']),
 
     /**
+    * Controls the shadow depth for the `<Popover />`
+    */
+    shadow: ThemeablePropTypes.shadow,
+
+    /**
     * Controls the z-index depth for the `<Popover />` content
     */
     stacking: ThemeablePropTypes.stacking,
@@ -298,6 +303,7 @@ class Popover extends Component {
     onDismiss: (event, documentClick) => {},
     placement: 'bottom center',
     stacking: 'topmost',
+    shadow: 'resting',
     offsetX: 0,
     offsetY: 0,
     variant: 'default',
@@ -578,6 +584,7 @@ class Popover extends Component {
         elementRef: this.props.contentRef,
         background: this.props.variant,
         stacking: this.props.stacking,
+        shadow: this.props.shadow,
         display: 'block'
       }
 

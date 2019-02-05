@@ -27,7 +27,8 @@ import PropTypes from 'prop-types'
 export const SHADOW_TYPES = {
   resting: 'resting',
   above: 'above',
-  topmost: 'topmost'
+  topmost: 'topmost',
+  none: 'none'
 }
 
 export const STACKING_TYPES = {

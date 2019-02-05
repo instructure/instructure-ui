@@ -245,7 +245,7 @@ class View extends Component {
           [styles[`display--${display}`]]: display && display !== 'auto',
           [styles[`size--${size}`]]: size && size !== 'auto',
           [styles[`stacking--${stacking}`]]: stacking,
-          [styles[`shadow--${shadow}`]]: shadow,
+          [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
           [className]: className
         })}
         style={{

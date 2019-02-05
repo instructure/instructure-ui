@@ -32,6 +32,7 @@ import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -70,7 +71,15 @@ export default class Tooltip extends Component {
     ]),
     variant: PropTypes.oneOf(['default', 'inverse']),
     placement: LayoutPropTypes.placement,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    /**
+    * __DEPRECATED 5.42__ `small` and `medium` will no longer be supported, use `large`
+    */
+    size: deprecatePropValues(
+      PropTypes.oneOf([
+        'large'
+      ]),
+      ['small', 'medium']
+    ),
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
@@ -141,6 +150,7 @@ export default class Tooltip extends Component {
             variant={this.props.variant}
             mountNode={this.props.mountNode}
             constrain={this.props.constrain}
+            shadow="none"
           >
             <PopoverTrigger>
               {this.renderTrigger(focused)}
