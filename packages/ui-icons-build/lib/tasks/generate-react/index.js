@@ -23,7 +23,7 @@
  */
 
 const gulp = require('gulp')
-const sequence = require('run-sequence')
+const merge = require('merge-stream')
 const consolidate = require('gulp-consolidate')
 const rename = require('gulp-rename')
 const cheerio = require('gulp-cheerio')
@@ -41,70 +41,7 @@ const toComponentName = function (name, variant = '') {
 
 let GLYPHS = {}
 
-const createReactSvgDataTask = function (variant) {
-  const key = `react-svg-data-${variant}`
-  const deprecated = config.deprecated || {}
-  const bidirectional = config.bidirectional || []
-
-  gulp.task(key, () => {
-    return gulp.src(`${path.join(config.react.source, variant)}/*.svg`)
-      .pipe(cheerio({
-        run: function ($, file) {
-          const $svg = $('svg')
-          const baseName = path.basename(file.path, '.svg')
-          const name = toComponentName(baseName)
-
-          GLYPHS[name] = GLYPHS[name] || {}
-
-          GLYPHS[name][variant] = {
-            glyphName: baseName,
-            name,
-            variant,
-            deprecated: toComponentName(deprecated[baseName]),
-            bidirectional: bidirectional.indexOf(baseName) !== -1,
-            path: path.join(config.react.destination, variant, name),
-            viewBox: $svg.attr('viewBox'), // we only care about the viewBox attr
-            source: svgtojsx($svg.html())
-          }
-        },
-        parserOptions: {
-          xmlMode: true
-        }
-      }))
-      .on('error', handleErrors)
-  })
-
-  return key
-}
-
-const createReactComponentTask = function (data) {
-  const key = `react-component-${data.name}--${data.variant}`
-
-  gulp.task(key, () => {
-    return gulp.src(require.resolve('./component.ejs'))
-      .pipe(consolidate('lodash', data))
-      .pipe(rename({ basename: data.name, extname: '.js' }))
-      .on('error', handleErrors)
-      .pipe(gulp.dest(path.join(config.react.destination, data.variant)))
-  })
-  return key
-}
-
-const createReactComponentsTasks = function () {
-  const tasks = []
-
-  Object.keys(GLYPHS).forEach((name) => {
-    Object.keys(GLYPHS[name])
-      .forEach((variant) => {
-        tasks.push(createReactComponentTask(GLYPHS[name][variant]))
-      })
-  })
-
-  return tasks
-}
-
 const createMainIndexTask = function () {
-  const key = 'react-index-main'
   const destination = config.react.destination
 
   const glyphs = Object.keys(GLYPHS)
@@ -121,70 +58,97 @@ const createMainIndexTask = function () {
       return glyph
     })
 
-  gulp.task(key, () => {
-    return gulp.src(require.resolve('./main.ejs'))
-      .pipe(consolidate(
-        'lodash',
-        { glyphs }
-      ))
-      .pipe(rename({ basename: 'index', extname: '.js' }))
-      .on('error', handleErrors)
-      .pipe(gulp.dest(destination))
-  })
-
-  return key
+  return gulp.src(require.resolve('./main.ejs'))
+    .pipe(consolidate(
+      'lodash',
+      { glyphs }
+    ))
+    .pipe(rename({ basename: 'index', extname: '.js' }))
+    .on('error', handleErrors)
+    .pipe(gulp.dest(destination))
 }
 
-const createVariantIndexTask = function (variant) {
-  const key = `react-index-${variant}`
-  const destination = path.join(config.react.destination, variant)
+gulp.task('generate-react-index-files', () => {
+  const tasks = readDirectories(config.react.source)
+    .map((variant) => {
+      const destination = path.join(config.react.destination, variant)
 
-  const glyphs = Object.keys(GLYPHS)
-    .map((name) => {
-      const glyph = Object.assign({ name }, GLYPHS[name][variant])
-      glyph.variant = variant
-      glyph.path = path.relative(destination, glyph.path)
-      return glyph
+      const glyphs = Object.keys(GLYPHS)
+        .map((name) => {
+          const glyph = Object.assign({ name }, GLYPHS[name][variant])
+          glyph.variant = variant
+          glyph.path = path.relative(destination, glyph.path)
+          return glyph
+        })
+
+      return gulp.src(require.resolve('./variant.ejs'))
+        .pipe(consolidate(
+          'lodash',
+          { glyphs }
+        ))
+        .pipe(rename({ basename: 'index', extname: '.js' }))
+        .on('error', handleErrors)
+        .pipe(gulp.dest(destination))
+    })
+  return merge(createMainIndexTask(), ...tasks)
+})
+
+gulp.task('generate-react-svg-data', () => {
+  const tasks = readDirectories(config.react.source)
+    .map((variant) => {
+      const deprecated = config.deprecated || {}
+      const bidirectional = config.bidirectional || []
+      return gulp.src(`${path.join(config.react.source, variant)}/*.svg`)
+        .pipe(cheerio({
+          run: function ($, file) {
+            const $svg = $('svg')
+            const baseName = path.basename(file.path, '.svg')
+            const name = toComponentName(baseName)
+
+            GLYPHS[name] = GLYPHS[name] || {}
+
+            GLYPHS[name][variant] = {
+              glyphName: baseName,
+              name,
+              variant,
+              deprecated: toComponentName(deprecated[baseName]),
+              bidirectional: bidirectional.indexOf(baseName) !== -1,
+              path: path.join(config.react.destination, variant, name),
+              viewBox: $svg.attr('viewBox'), // we only care about the viewBox attr
+              source: svgtojsx($svg.html())
+            }
+          },
+          parserOptions: {
+            xmlMode: true
+          }
+        }))
+        .on('error', handleErrors)
     })
 
-  gulp.task(key, () => {
-    return gulp.src(require.resolve('./variant.ejs'))
-      .pipe(consolidate(
-        'lodash',
-        { glyphs }
-      ))
-      .pipe(rename({ basename: 'index', extname: '.js' }))
-      .on('error', handleErrors)
-      .pipe(gulp.dest(destination))
-  })
-
-  return key
-}
-
-gulp.task('generate-react-svg-data', (cb) => {
-  const variants = readDirectories(config.react.source)
-  const tasks = []
-
-  GLYPHS = {} // clear the global glyphs object
-
-  variants.forEach((variant) => {
-    tasks.push(createReactSvgDataTask(variant))
-  })
-
-  sequence(tasks, cb)
+  return merge(...tasks)
 })
 
-gulp.task('generate-react', ['generate-react-svg-data'], (cb) => {
-  const indexTasks = [createMainIndexTask()]
-  const variants = readDirectories(config.react.source)
+gulp.task('generate-react-components', () => {
+  const tasks = readDirectories(config.react.source)
+    .map((variant) => {
+      const tasks = []
+      Object.keys(GLYPHS).forEach((name) => {
+        Object.keys(GLYPHS[name])
+          .forEach((variant) => {
+            const data = GLYPHS[name][variant]
+            tasks.push(
+              gulp.src(require.resolve('./component.ejs'))
+                .pipe(consolidate('lodash', data))
+                .pipe(rename({ basename: data.name, extname: '.js' }))
+                .on('error', handleErrors)
+                .pipe(gulp.dest(path.join(config.react.destination, data.variant)))
+            )
+          })
+      })
+      return tasks
+    })
 
-  variants.forEach((variant) => {
-    indexTasks.push(createVariantIndexTask(variant))
-  })
-
-  sequence(
-    createReactComponentsTasks(),
-    indexTasks,
-    cb
-  )
+  return merge(...tasks)
 })
+
+gulp.task('generate-react', gulp.series('generate-react-svg-data', 'generate-react-components', 'generate-react-index-files'))

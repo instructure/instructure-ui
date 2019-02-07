@@ -18,9 +18,9 @@
   "dependencies": {
     "babel-eslint": "^10.0.1",
     "eslint": "^5.12.1",
-    "eslint-plugin-import": "^2.15.0",
+    "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-instructure-ui": "^5",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-mocha": "^5.2.1",
     "eslint-plugin-notice": "^0.7.7",
     "eslint-plugin-react": "^7.12.4"

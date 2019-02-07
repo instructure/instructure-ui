@@ -23,56 +23,24 @@
  */
 
 const requireDir = require('require-dir')
+const gulp = require('gulp')
 
 requireDir('./tasks', { recurse: true })
 
-const sequence = require('run-sequence')
-
 const config = require('./config')
 
-exports.buildAll = (cb) => {
-  const tasks = []
+const tasks = ['generate-svgs-index']
 
-  if (config.react) {
-    tasks.push('generate-react')
-  }
-
-  if (config.fonts) {
-    tasks.push('generate-fonts')
-  }
-
-  sequence(
-     'generate-svgs',
-     tasks,
-     cb
-   )
+if (config.react) {
+  tasks.push('generate-react')
 }
 
-exports.exportFromSketch = (cb) => {
-  sequence(
-     'clean',
-     'generate-svgs-from-sketch',
-     cb
-   )
+if (config.fonts) {
+  tasks.push('generate-fonts')
 }
 
-exports.buildSVGs = (cb) => {
-  sequence(
-    'generate-svgs-index',
-    cb
-  )
-}
-
-exports.buildFonts = (cb) => {
-  sequence(
-     'generate-fonts',
-     cb
-   )
-}
-
-exports.buildReact = (cb) => {
-  sequence(
-     'generate-react',
-     cb
-   )
-}
+exports.buildAll = gulp.parallel(...tasks)
+exports.exportFromSketch = gulp.series('generate-svgs-from-sketch')
+exports.buildSVGs = gulp.series('generate-svgs')
+exports.buildFonts = gulp.series('generate-fonts')
+exports.buildReact = gulp.series('generate-react')

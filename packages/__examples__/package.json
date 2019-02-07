@@ -26,7 +26,7 @@
     "@instructure/ui-layout": "^5",
     "@instructure/ui-themes": "^5",
     "@instructure/ui-webpack-config": "^5",
-    "@storybook/react": "^4.1.9",
+    "@storybook/react": "^4.1.11",
     "http-server": "^0.11.1",
     "react": "^0.14.9 || ^15 || ^16",
     "react-dom": "^0.14.9 || ^15 || ^16",

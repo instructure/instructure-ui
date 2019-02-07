@@ -13,16 +13,16 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "test:node": "ui-test --node",
-    "clean": "ui-build --clean",
+    "clean": "gulp clean && ui-build --clean",
     "build": "gulp && ui-build __build__ --copy-files",
-    "export": "gulp export && gulp",
+    "export": "gulp clean && gulp export && gulp",
     "build:watch": "gulp watch && ui-build __build__ --watch --copy-files"
   },
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-icons-build": "^5",
-    "gulp": "3.9.1"
+    "gulp": "^4.0.0"
   },
   "dependencies": {
     "@babel/runtime": "^7",

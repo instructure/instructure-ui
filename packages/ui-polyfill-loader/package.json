@@ -17,9 +17,9 @@
   "dependencies": {
     "@instructure/config-loader": "^5",
     "@instructure/ui-babel-preset": "^5",
-    "core-js-builder": "^2.6.3",
+    "core-js-builder": "^2.6.4",
     "loader-utils": "^1.2.3",
-    "webpack": "^4.28.1"
+    "webpack": "^4"
   },
   "publishConfig": {
     "access": "public"

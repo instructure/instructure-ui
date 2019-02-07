@@ -28,7 +28,6 @@ const svgmin = require('gulp-svgmin')
 const cheerio = require('gulp-cheerio')
 const changed = require('gulp-changed')
 const rename = require('gulp-rename')
-const sequence = require('run-sequence')
 const consolidate = require('gulp-consolidate')
 const path = require('path')
 const glob = require('glob')
@@ -132,6 +131,4 @@ gulp.task('generate-svgs-from-sketch', () => {
     .pipe(gulp.dest(config.svg.destination))
 })
 
-gulp.task('generate-svgs', (cb) => {
-  sequence(['generate-svgs-from-sketch'], 'generate-svg-glyph-data', cb)
-})
+gulp.task('generate-svgs', gulp.series('generate-svgs-from-sketch', 'generate-svgs-index'))
