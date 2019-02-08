@@ -1,4 +1,4 @@
-/* stylelint-disable selector-max-class, no-descending-specificity */
+/* stylelint-disable selector-max-class, selector-max-type, no-descending-specificity */
 
 /*
 
@@ -17,19 +17,13 @@ the icon is inserted as a child:
 
 */
 
-.root[type="button"],
-.root[type="reset"],
-.root[type="submit"],
+button.root,
+button.root[type="submit"],
+button.root[type="button"],
+button.root[type="reset"],
+a.root,
 .root {
   appearance: none;
-}
-
-.root::-moz-focus-inner {
-  border: 0; /* removes default dotted focus outline in Firefox */
-}
-
-.root {
-  all: initial;
   box-sizing: border-box;
   max-width: 100%;
   display: inline-block;
@@ -38,10 +32,14 @@ the icon is inserted as a child:
   overflow: visible;
   direction: inherit;
   margin: 0;
+  padding: 0;
+  height: auto;
+  width: auto;
   text-decoration: none; /* for links styled as buttons */
   user-select: none;
   touch-action: manipulation;
   transition: background 0.2s, transform 0.2s;
+  background: none;
   transform: var(--transform);
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
@@ -49,6 +47,10 @@ the icon is inserted as a child:
   letter-spacing: var(--letterSpacing);
   border-style: var(--borderStyle);
   border-width: var(--borderWidth);
+
+  &::-moz-focus-inner {
+    border: 0; /* removes default dotted focus outline in Firefox */
+  }
 
   &.disabled {
     pointer-events: none;
@@ -91,11 +93,21 @@ the icon is inserted as a child:
   }
 }
 
+button.content,
+button.content[type="submit"],
+button.content[type="button"],
+button.content[type="reset"],
+a.content,
 .content {
   box-sizing: border-box;
 }
 
 /* Rectangular and square Buttons */
+button.borderRadius--rounded,
+button.borderRadius--rounded[type="submit"],
+button.borderRadius--rounded[type="button"],
+button.borderRadius--rounded[type="reset"],
+a.borderRadius--rounded,
 .borderRadius--rounded {
   border-radius: var(--borderRadius);
 
@@ -105,6 +117,11 @@ the icon is inserted as a child:
 }
 
 /* Circular Buttons */
+button.borderRadius--circle,
+button.borderRadius--circle[type="submit"],
+button.borderRadius--circle[type="button"],
+button.borderRadius--circle[type="reset"],
+a.borderRadius--circle,
 .borderRadius--circle {
   border-radius: 50%;
 
@@ -114,6 +131,11 @@ the icon is inserted as a child:
 }
 
 /* Styles for square Buttons w/ only an icon and no visible children */
+button.width--icon,
+button.width--icon[type="submit"],
+button.width--icon[type="button"],
+button.width--icon[type="reset"],
+a.width--icon,
 .width--icon {
   text-decoration: none;
   text-align: center;
@@ -173,7 +195,17 @@ the icon is inserted as a child:
 }
 
 /* Shared styles between auto-width and fluid-width buttons */
+button.width--auto,
+button.width--auto[type="submit"],
+button.width--auto[type="button"],
+button.width--auto[type="reset"],
+a.width--auto,
 .width--auto,
+button.width--fluid,
+button.width--fluid[type="submit"],
+button.width--fluid[type="button"],
+button.width--fluid[type="reset"],
+a.width--fluid,
 .width--fluid {
   &.small {
     font-size: var(--smallFontSize);
@@ -225,7 +257,7 @@ the icon is inserted as a child:
   }
 
   /* hide this selector from Buttons with icon prop, without breaking existing icons-as-children */
-  &:not(.has-icon) .content > svg { /* stylelint-disable-line selector-max-type */
+  &:not(.has-icon) .content > svg {
     font-size: var(--iconPlusTextFontSize);
     margin-inline-end: var(--iconPlusTextMargin);
     margin-inline-start: auto;
@@ -235,6 +267,11 @@ the icon is inserted as a child:
   }
 }
 
+button.width--auto,
+button.width--auto[type="submit"],
+button.width--auto[type="button"],
+button.width--auto[type="reset"],
+a.width--auto,
 .width--auto {
   .content {
     white-space: nowrap;
@@ -243,6 +280,11 @@ the icon is inserted as a child:
   }
 }
 
+button.width--fluid,
+button.width--fluid[type="submit"],
+button.width--fluid[type="button"],
+button.width--fluid[type="reset"],
+a.width--fluid,
 .width--fluid {
   display: block;
   width: 100%;
@@ -270,12 +312,27 @@ the icon is inserted as a child:
   }
 }
 
+button.default,
+button.default[type="submit"],
+button.default[type="button"],
+button.default[type="reset"],
+a.default,
 .default,
+button.ghost,
+button.ghost[type="submit"],
+button.ghost[type="button"],
+button.ghost[type="reset"],
+a.ghost,
 .ghost {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+button.default,
+button.default[type="submit"],
+button.default[type="button"],
+button.default[type="reset"],
+a.default,
 .default {
   background: var(--defaultBackground);
   color: var(--defaultColor);
@@ -298,6 +355,11 @@ the icon is inserted as a child:
   }
 }
 
+button.primary,
+button.primary[type="submit"],
+button.primary[type="button"],
+button.primary[type="reset"],
+a.primary,
 .primary {
   background: var(--primaryBackground);
   color: var(--primaryColor);
@@ -320,6 +382,11 @@ the icon is inserted as a child:
   }
 }
 
+button.success,
+button.success[type="submit"],
+button.success[type="button"],
+button.success[type="reset"],
+a.success,
 .success {
   background: var(--successBackground);
   color: var(--successColor);
@@ -342,6 +409,11 @@ the icon is inserted as a child:
   }
 }
 
+button.danger,
+button.danger[type="submit"],
+button.danger[type="button"],
+button.danger[type="reset"],
+a.danger,
 .danger {
   background: var(--dangerBackground);
   color: var(--dangerColor);
@@ -364,6 +436,11 @@ the icon is inserted as a child:
   }
 }
 
+button.light,
+button.light[type="submit"],
+button.light[type="button"],
+button.light[type="reset"],
+a.light,
 .light {
   background: var(--lightBackground);
   color: var(--lightColor);
@@ -386,6 +463,11 @@ the icon is inserted as a child:
   }
 }
 
+button.ghost,
+button.ghost[type="submit"],
+button.ghost[type="button"],
+button.ghost[type="reset"],
+a.ghost,
 .ghost {
   background: var(--ghostBackground);
   color: var(--ghostColor);
@@ -409,6 +491,11 @@ the icon is inserted as a child:
   }
 }
 
+button.ghost-inverse,
+button.ghost-inverse[type="submit"],
+button.ghost-inverse[type="button"],
+button.ghost-inverse[type="reset"],
+a.ghost-inverse,
 .ghost-inverse {
   background: var(--ghostInverseBackground);
   color: var(--ghostInverseColor);
@@ -438,13 +525,28 @@ the icon is inserted as a child:
   }
 }
 
+button.link,
+button.link[type="submit"],
+button.link[type="button"],
+button.link[type="reset"],
+a.link,
 .link,
+button.link-inverse,
+button.link-inverse[type="submit"],
+button.link-inverse[type="button"],
+button.link-inverse[type="reset"],
+a.link-inverse,
 .link-inverse {
   background: transparent;
   text-decoration: var(--linkTextDecoration);
   border-color: var(--linkBorderColor);
 }
 
+button.link,
+button.link[type="submit"],
+button.link[type="button"],
+button.link[type="reset"],
+a.link,
 .link {
   color: var(--linkColor);
 
@@ -452,10 +554,18 @@ the icon is inserted as a child:
   &:hover,
   &:active {
     color: var(--linkHoverColor);
+  }
+
+  &:hover {
     text-decoration: underline;
   }
 }
 
+button.link-inverse,
+button.link-inverse[type="submit"],
+button.link-inverse[type="button"],
+button.link-inverse[type="reset"],
+a.link-inverse,
 .link-inverse {
   color: var(--linkInverseColor);
 
@@ -463,6 +573,9 @@ the icon is inserted as a child:
   &:hover,
   &:active {
     color: var(--linkInverseColor);
+  }
+
+  &:hover {
     text-decoration: underline;
   }
 
@@ -473,6 +586,11 @@ the icon is inserted as a child:
   }
 }
 
+button.circle-default,
+button.circle-default[type="submit"],
+button.circle-default[type="button"],
+button.circle-default[type="reset"],
+a.circle-default,
 .circle-default {
   background: var(--circleDefaultBackground);
   color: var(--circleDefaultColor);
@@ -495,6 +613,11 @@ the icon is inserted as a child:
   }
 }
 
+button.circle-primary,
+button.circle-primary[type="submit"],
+button.circle-primary[type="button"],
+button.circle-primary[type="reset"],
+a.circle-primary,
 .circle-primary {
   background: var(--circlePrimaryBackground);
   color: var(--circlePrimaryColor);
@@ -517,6 +640,11 @@ the icon is inserted as a child:
   }
 }
 
+button.circle-danger,
+button.circle-danger[type="submit"],
+button.circle-danger[type="button"],
+button.circle-danger[type="reset"],
+a.circle-danger,
 .circle-danger {
   background: var(--circleDangerBackground);
   color: var(--circleDangerColor);
@@ -539,11 +667,26 @@ the icon is inserted as a child:
   }
 }
 
+button.icon,
+button.icon[type="submit"],
+button.icon[type="button"],
+button.icon[type="reset"],
+a.icon,
 .icon,
+button.icon-inverse,
+button.icon-inverse[type="submit"],
+button.icon-inverse[type="button"],
+button.icon-inverse[type="reset"],
+a.icon-inverse,
 .icon-inverse {
   border-color: var(--iconBorderColor);
 }
 
+button.icon-inverse,
+button.icon-inverse[type="submit"],
+button.icon-inverse[type="button"],
+button.icon-inverse[type="reset"],
+a.icon-inverse,
 .icon-inverse {
   color: var(--iconInverseColor);
 
@@ -561,6 +704,11 @@ the icon is inserted as a child:
   }
 }
 
+button.icon,
+button.icon[type="submit"],
+button.icon[type="button"],
+button.icon[type="reset"],
+a.icon,
 .icon {
   color: var(--iconColor);
 
@@ -573,8 +721,10 @@ the icon is inserted as a child:
 
 /* If icons are passed in as elements instead of functions, guarantee
 the SVG will display block */
-.iconSVG > svg { /* stylelint-disable-line selector-max-type */
+button.iconSVG > svg,
+a.iconSVG > svg,
+.iconSVG > svg {
   display: block;
 }
 
-/* stylelint-enable selector-max-class, no-descending-specificity */
+/* stylelint-enable selector-max-class, selector-max-type, no-descending-specificity */
