@@ -29,41 +29,22 @@ class Example extends React.Component {
   }
 
   renderCloseButton () {
-    if (this.state.placement === 'end') {
-      return (
-        <Flex>
-          <FlexItem margin="0 small 0 0">
-            <Button
-              variant="icon"
-              icon={IconX.Line}
-              onClick={this.hideTray}
-            >
-              <ScreenReaderContent>Close</ScreenReaderContent>
-            </Button>
-          </FlexItem>
-          <FlexItem grow shrink>
-            <Heading ellipsis>Hello</Heading>
-          </FlexItem>
-        </Flex>
-      )
-    } else {
-      return (
-        <Flex>
-          <FlexItem grow shrink>
-            <Heading>Hello</Heading>
-          </FlexItem>
-          <FlexItem>
-            <Button
-              variant="icon"
-              icon={IconX.Line}
-              onClick={this.hideTray}
-            >
-              <ScreenReaderContent>Close</ScreenReaderContent>
-            </Button>
-          </FlexItem>
-        </Flex>
-      )
-    }
+    return (
+      <Flex>
+        <FlexItem grow shrink>
+          <Heading>Hello</Heading>
+        </FlexItem>
+        <FlexItem>
+          <Button
+            variant="icon"
+            icon={IconX.Line}
+            onClick={this.hideTray}
+          >
+            <ScreenReaderContent>Close</ScreenReaderContent>
+          </Button>
+        </FlexItem>
+      </Flex>
+    )
   }
 
   render () {
@@ -142,6 +123,7 @@ guidelines: true
     <FigureItem>Use 2 tabs max if using TabList in small size</FigureItem>
     <FigureItem>Use 5 tabs max if using TabList in medium/large size</FigureItem>
     <FigureItem>Prefer Tray to close when user clicks outside of the Tray</FigureItem>
+    <FigureItem>Keep the close 'x' directly following the Tray title, no matter what side the Tray slides from</FigureItem>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <FigureItem>Use TabList in the x-small size</FigureItem>
