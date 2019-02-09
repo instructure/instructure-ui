@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { isValid } from '../DateTime'
+import { makeRequirable } from '@instructure/ui-prop-types'
 
 /**
  * ---
@@ -31,7 +31,7 @@ import { isValid } from '../DateTime'
  * Custom I18n prop types for React components.
  * @module I18nPropTypes
  */
-export default {
+const I18nPropTypes = {
   /**
    *
    * Verify that the given prop is a correctly formatted ISO 8601 formatted string.
@@ -55,7 +55,9 @@ export default {
       )
     }
 
-    if (!isValid(propValue)) {
+    const iso8601regex = /^([+-]?\d{4}(?!\d{2}\b))((-?)((0[1-9]|1[0-2])(\3([12]\d|0[1-9]|3[01]))?|W([0-4]\d|5[0-2])(-?[1-7])?|(00[1-9]|0[1-9]\d|[12]\d{2}|3([0-5]\d|6[1-6])))([T\s]((([01]\d|2[0-3])((:?)[0-5]\d)?|24:?00)([.,]\d+(?!:))?)?(\17[0-5]\d([.,]\d+)?)?([zZ]|([+-])([01]\d|2[0-3]):?([0-5]\d)?)?)?)?$/
+
+    if (!propValue.match(iso8601regex)) {
       return new Error(
         `Invalid ${location} \`${propName}\` \`${propValue}\` supplied to \`${componentName}\`, expected ` +
           `an ISO 8601 formatted string.`
@@ -63,3 +65,7 @@ export default {
     }
   }
 }
+
+I18nPropTypes.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
+
+export default I18nPropTypes

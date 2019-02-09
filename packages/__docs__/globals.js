@@ -50,6 +50,7 @@ import placeholderLogo from './placeholder-logo'
 const globals = {
   ...Icons,
   ...Components,
+  moment,
   locales: moment.locales(),
   avatarSquare,
   avatarPortrait,

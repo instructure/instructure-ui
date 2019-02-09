@@ -33,6 +33,7 @@
     "@instructure/ui-billboard": "^5.48.0",
     "@instructure/ui-breadcrumb": "^5.48.0",
     "@instructure/ui-buttons": "^5.48.0",
+    "@instructure/ui-calendar": "^5.48.0",
     "@instructure/ui-code-editor": "^5.48.0",
     "@instructure/ui-docs-client": "^5.48.0",
     "@instructure/ui-docs-plugin": "^5.48.0",

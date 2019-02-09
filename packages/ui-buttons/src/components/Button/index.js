@@ -116,7 +116,8 @@ class Button extends Component {
      * Specify a mouse cursor to use when hovering over the button.
      * The `pointer` cursor is used by default.
      */
-    cursor: PropTypes.string
+    cursor: PropTypes.string,
+    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   }
 
   static defaultProps = {
@@ -127,7 +128,8 @@ class Button extends Component {
     margin: '0',
     fluidWidth: false,
     buttonRef: function (button) {},
-    cursor: 'pointer'
+    cursor: 'pointer',
+    tabIndex: null
   }
 
   handleClick = e => {
@@ -218,7 +220,8 @@ class Button extends Component {
       readOnly,
       size,
       type,
-      variant
+      variant,
+      tabIndex
     } = this.props
 
     const IHaveVisibleChildren = hasVisibleChildren(this.props.children)
@@ -262,7 +265,7 @@ class Button extends Component {
         href={href}
         type={href ? null : type}
         role={onClick && as !== 'button' ? 'button' : null}
-        tabIndex={onClick && as ? '0' : null}
+        tabIndex={onClick && as ? (tabIndex || '0') : tabIndex}
         elementRef={c => {
           this._button = c
           if (typeof buttonRef === 'function') buttonRef(c)

@@ -86,7 +86,8 @@ export default class FocusableView extends Component {
      */
     width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     role: PropTypes.string,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    tabIndex: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
   }
 
   static defaultProps = {
@@ -97,7 +98,8 @@ export default class FocusableView extends Component {
     as: 'button',
     elementRef: function (element) {},
     cursor: 'auto',
-    role: null
+    role: null,
+    tabIndex: null
   }
 
   render () {
@@ -117,6 +119,7 @@ export default class FocusableView extends Component {
       className, // eslint-disable-line react/prop-types
       to,  // eslint-disable-line react/prop-types
       width,
+      tabIndex,
       ...props
     } = this.props
 
@@ -144,7 +147,8 @@ export default class FocusableView extends Component {
           [styles.focused]: focused
         })}
         role={role || onClick ? role : null}
-        tabIndex={onClick && !role ? '0' : null}
+        tabIndex={onClick && !role ? (tabIndex || '0') : tabIndex}
+        onClick={onClick}
       >
         {children}
       </View>
