@@ -21,15 +21,16 @@
     "start:watch": "lerna run start:watch --stream --scope docs-app",
     "dev": "yarn start:watch",
     "pretest:ci": "yarn bootstrap && yarn check",
-    "test:ci": "npm-run-all lint:commit lint:changes test:node test:jest test:changes install:react:15 test:changes test:changes:testbed install:react",
-    "test": "ui-test",
+    "test:ci": "npm-run-all lint:commit lint:changes test:jest test:mocha test:changes install:react:15 test:changes test:changes:testbed install:react",
+    "test": "npm-run-all test:jest test:mocha test:karma",
     "test:testbed": "ui-test --testbed",
     "test:watch": "ui-test --watch --no-headless",
     "test:watch:testbed": "ui-test --watch --no-headless --testbed",
     "test:changes": "ui-test --changed",
     "test:changes:testbed": "ui-test --changed --testbed",
+    "test:karma": "ui-test",
     "test:jest": "lerna run test:jest --stream",
-    "test:node": "lerna run test:node --stream",
+    "test:mocha": "lerna run test --stream",
     "test:react:15": "npm-run-all install:react:15 test test:testbed install:react",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
@@ -67,7 +68,8 @@
   "resolutions": {
     "react": "16.8.1",
     "react-dom": "16.8.1",
-    "react-docgen": "3.0.0"
+    "react-docgen": "3.0.0",
+    "prop-types": "15.7.1"
   },
   "devDependencies": {
     "husky": "^1.3.1",

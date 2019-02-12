@@ -34,12 +34,14 @@
     "dirty-chai": "^2.0.1",
     "dom-testing-library": "^3.16.5",
     "fetch-mock": "^7.3.0",
+    "jsdom-global": "^3.0.2",
     "keycode": "^2",
     "sinon": "^7.2.3",
     "sinon-chai": "^3.3.0",
     "sizzle": "^2.3.3"
   },
   "peerDependencies": {
+    "jsdom": ">=10.0.0",
     "react": "^0.14.9 || ^15.0.0 || ^16.0.0",
     "react-dom": "^0.14.9 || ^15.0.0 || ^16.0.0"
   },

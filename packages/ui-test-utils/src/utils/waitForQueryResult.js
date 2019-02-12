@@ -23,7 +23,6 @@
  */
 import { elementToString } from './elementToString'
 import debounce from '@instructure/debounce'
-import { newMutationObserver, getSetImmediate } from './shims'
 
 // original source: https://github.com/kentcdodds/dom-testing-library/blob/master/src/wait-for-element.js
 // this doesn't require the mutation observer shim because we don't run the tests with JSDOM
@@ -78,8 +77,6 @@ export function waitForQueryResult (
     }
 
     function onDone (e, result) {
-      const setImmediate = getSetImmediate()
-
       clearTimeout(timer)
       setImmediate(() => observer.disconnect())
       debouncedQuery.cancel()
@@ -109,7 +106,7 @@ export function waitForQueryResult (
     }
 
     timer = setTimeout(onTimeout, timeout)
-    observer = newMutationObserver(onMutation)
+    observer = new MutationObserver(onMutation)
     observer.observe(element, mutationObserverOptions)
 
     runQuery()

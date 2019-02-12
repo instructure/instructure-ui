@@ -21,31 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const path = require('path')
+const { runCommandsConcurrently, getCommand, resolveBin } = require('../utils/command')
 
-import MutationObserver from '@sheerun/mutationobserver-shim'
+let command = 'mocha'
+let args = [
+  '**/*.test.js',
+  '--colors',
+  '--require @babel/register',
+  '--require @babel/polyfill',
+  '--exit',
+  `--opts ${path.resolve(process.cwd(), 'mocha.opts')}`
+]
 
-function newMutationObserver (onMutation) {
-  const MutationObserverConstructor =
-    typeof window !== 'undefined' &&
-    typeof window.MutationObserver !== 'undefined'
-      ? window.MutationObserver
-      : MutationObserver
+const vars = [`NODE_ENV=test`]
 
-  return new MutationObserverConstructor(onMutation)
+if (process.argv.includes('--watch')) {
+  args.push('--watch')
+} else if (process.argv.includes('--coverage')) {
+  command = 'nyc'
+  args = [
+    resolveBin('mocha')
+  ].concat(args)
 }
 
-function getSetImmediate () {
-  /* istanbul ignore else */
-  if (typeof setImmediate === 'function') {
-    return setImmediate
-  } else {
-    return function setImmediate(fn) {
-      return setTimeout(fn, 0)
-    }
-  }
+const commands = {
+  node: getCommand(command, args, vars)
 }
 
-export {
-  getSetImmediate,
-  newMutationObserver
-}
+const result= runCommandsConcurrently(commands)
+
+process.exit(result.status)

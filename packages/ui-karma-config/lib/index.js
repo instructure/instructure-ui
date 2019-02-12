@@ -77,7 +77,7 @@ module.exports = function makeConfig ({
         {
           type: 'lcov',
           dir: coverageDirectory,
-          subdir: 'chrome'
+          subdir: '.'
         }
       ],
       check: coverageThreshold

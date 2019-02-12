@@ -21,45 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { mount, stub, spy, viewport } from './utils/sandbox'
-import { wait } from './utils/wait'
-import { within, withinEach } from './utils/within'
-import { expect } from './utils/expect'
-import { locator } from './utils/locator'
-import { debug, accessible } from './utils/helpers'
-import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, querySelector, matchesSelector } from './utils/selector'
-import { parseQueryArguments } from './utils/parseQueryArguments'
-import {
-  findAllByQuery,
-  findByQuery,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame
-} from './utils/queries'
+import jsdom from 'jsdom-global'
+import MutationObserverShim from '@sheerun/mutationobserver-shim'
+
+const noop = () => {}
+
+let cleanupGlobals = noop
+
+const initGlobals = () => {
+  if (typeof document === 'undefined') {
+    cleanupGlobals = jsdom()
+  }
+  // jsdom doesn't provide Date on the window object and we need it for wait-for-expect
+  global.window.Date = (global.window.Date && global.window.Date.now) ? global.window.Date : global.Date
+  // shims:
+  global.MutationObserver = window.MutationObserver || MutationObserverShim
+  global.setImmediate = window.setImmediate || function setImmediate(fn) {
+    return setTimeout(fn, 0)
+  }
+}
 
 export {
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  withinEach,
-  wait,
-  expect,
-  mount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+  cleanupGlobals,
+  initGlobals
 }

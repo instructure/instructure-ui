@@ -1,3 +1,4 @@
 lib/
 .babel-cache/
 es/
+.nyc_output/

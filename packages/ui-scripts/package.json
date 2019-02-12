@@ -22,6 +22,8 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.2.3",
+    "@babel/polyfill": "^7.2.5",
+    "@babel/register": "^7.0.0",
     "@instructure/cz-lerna-changelog": "^5",
     "@instructure/pkg-utils": "^5",
     "chalk": "^2.4.2",
@@ -35,6 +37,8 @@
     "jira-client": "^6.6.0",
     "karma-cli": "^2.0.0",
     "lerna": "3.0.0-beta.21",
+    "mocha": "^5.0.1",
+    "nyc": "^13.2.0",
     "rimraf": "^2.6.3",
     "standard-version": "^4.4.0",
     "stylelint": "^9.10.1",

@@ -29,10 +29,11 @@ import StyleSheet from '@instructure/ui-stylesheet'
 import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
-import { newMutationObserver } from './shims'
+import { initGlobals, cleanupGlobals } from './globals'
 
 class Sandbox {
   constructor () {
+    initGlobals()
     initConsole()
 
     // eslint-disable-next-line no-console
@@ -46,7 +47,7 @@ class Sandbox {
     }
 
     this._addedNodes = []
-    this._observer = newMutationObserver((mutations) => {
+    this._observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
         Array.from(mutation.addedNodes).forEach((addedNode) => {
           this._addedNodes.push(addedNode)
@@ -70,8 +71,8 @@ class Sandbox {
     this._sandbox.resetHistory()
     this._sandbox.restore()
 
-    window.localStorage.clear()
-    window.sessionStorage.clear()
+    window.localStorage && window.localStorage.clear()
+    window.sessionStorage &&  window.sessionStorage.clear()
 
     if (this._originalWindowOnError) {
       window.onerror = this._originalWindowOnError
@@ -92,11 +93,15 @@ class Sandbox {
     if (global.viewport) {
       global.viewport.set('large')
     }
+
+    cleanupGlobals()
   }
 
   setup () {
     try {
       this.teardown()
+
+      initGlobals()
 
       document.documentElement.setAttribute('dir', 'ltr')
       document.documentElement.setAttribute('lang', 'en-US')
