@@ -21,46 +21,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { runCommandsConcurrently, getCommand } = require('./utils/command')
 
-//  based on: https://github.com/ai/nanoid/blob/master/non-secure.js
+let result
 
-const dictionary = 'getRandomVcryp0123456789bfhijklqsuvwxzABCDEFGHIJKLMNOPQSTUWXYZ'
-const dictionaryLengthMinus1 = dictionary.length - 1
-
-/**
- * ---
- * category: utilities
- * ---
- * Generate a unique (CSS-safe) id string
- *
- * @module uid
- * @param {String} prefix a string to prefix the id for debugging in non-production env
- * @param {Number} length id length (in characters, minus the prefix)
- * @returns {String} a unique id
- */
-export default function uid (prefix = '', length = 12) {
-  const id = `u${_uid('', length - 1)}`
-  if (prefix && process.env.NODE_ENV !== 'production') {
-    return `${prefix}__${id}`
-  } else {
-    return id
-  }
+// ui-scripts --server -p 8080
+const args = process.argv.slice(2)
+const portIndex = args.findIndex(arg => arg === '-p')
+let port = '8080'
+if (portIndex > 0) {
+  port = args[portIndex + 1]
 }
 
-function _random (size) {
-  const result = []
-  while (0 < size--) { /* eslint-disable-line no-param-reassign */
-    result.push(Math.floor(Math.random() * 256))
-  }
-  return result
-}
+result = runCommandsConcurrently({
+  // http-server __build__ -p 8001
+  server: getCommand('http-server', ['__build__', '-p', port], [])
+})
 
-
-function _uid(_ignored, idLength = 12) {
-  var id = ''
-  var bytes = _random(idLength)
-  while (0 < idLength--) { /* eslint-disable-line no-param-reassign */
-    id += dictionary[bytes[idLength] & dictionaryLengthMinus1]
-  }
-  return id
-}
+process.exit(result.status)

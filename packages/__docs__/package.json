@@ -12,8 +12,8 @@
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
     "prestart": "yarn build",
-    "start": "http-server __build__ -p 8001",
-    "start:watch": "ui-build --bundle --watch",
+    "start": "ui-scripts --server -p 8001",
+    "start:watch": "ui-build --bundle --watch -p 8080",
     "build": "ui-build --bundle",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
@@ -24,7 +24,6 @@
     "@instructure/ui-babel-preset": "^5",
     "@instructure/ui-polyfill-loader": "^5",
     "@instructure/ui-webpack-config": "^5",
-    "http-server": "^0.11.1",
     "raw-loader": "^1.0.0",
     "svg-inline-loader": "^0.8.0"
   },

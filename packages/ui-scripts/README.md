@@ -23,29 +23,29 @@ yarn add @instructure/ui-scripts
 
 To build (babel transpile) a package to be consumed as a library:
 
-`yarn ui-scripts --build`
+`yarn ui-build`
 
 To build (webpack) a package to be consumed as an application:
 
-`yarn ui-scripts --build --bundle`
+`yarn ui-build --bundle`
 
 #### `clean`
 
 To clean out built/generated files from a package:
 
-`yarn ui-scripts --clean`
+`yarn ui-build --clean`
 
 #### `test`
 
 To run (karma/mocha) tests for a package:
 
-`yarn ui-scripts --test`
+`yarn ui-test`
 
 #### `lint`
 
 To lint (eslint/stylelint) a package:
 
-`yarn ui-scripts --lint`
+`yarn ui-test --lint`
 
 To lint a commit message (the `HEAD` commit):
 
@@ -112,6 +112,22 @@ To publish a package (if [version] is already published, it will tell you):
 To run for all packages, run from the repo root:
 
 `yarn lerna exec --stream -- ui-scripts --publish-package [version]`
+
+#### `examples`
+
+To build component examples and start up a dev server with hot reloading:
+
+`yarn ui-build --examples --watch -p 8080`
+
+To build component examples for deploying:
+
+`yarn ui-build --examples`
+
+#### `server`
+
+To start up a server to test production builds of examples or docs:
+
+`yarn ui-scripts --server -p 8080`
 
 
 ### Configuration

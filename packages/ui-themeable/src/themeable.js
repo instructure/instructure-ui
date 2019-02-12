@@ -90,7 +90,10 @@ const emptyObj = {}
 
 const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name
-  const componentId = `${displayName}__${(styles && styles.componentId) || uid()}`
+  let componentId = `${(styles && styles.componentId) || uid()}`
+  if (process.env.NODE_ENV !== 'production') {
+    componentId = `${displayName}__${componentId}`
+  }
 
   const contextKey = Symbol(componentId)
   const template = (styles && typeof styles.template === 'function') ? styles.template : () => {

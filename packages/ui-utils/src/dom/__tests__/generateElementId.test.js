@@ -30,7 +30,7 @@ describe('generateElementId', () => {
     expect(() => { document.querySelector(generateElementId()) }).to.not.throw(Error)
   })
   it('provides a default prefix', () => {
-    expect(generateElementId()).to.startWith('uid')
+    expect(generateElementId()).to.startWith('u')
   })
   it('adds a custom prefix', () => {
     expect(generateElementId('myPrefix')).to.startWith('myPrefix__')

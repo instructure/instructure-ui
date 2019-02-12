@@ -51,6 +51,6 @@ export default function ensureSingleChild (child, props = {}) {
       </span>
     )
   } else {
-    return safeCloneElement(child, props)
+    return safeCloneElement(Array.isArray(child) ? child[0] : child, props)
   }
 }

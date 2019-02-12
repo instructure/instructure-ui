@@ -25,15 +25,24 @@
 
 const { runCommandsConcurrently, getCommand } = require('../utils/command')
 
+const ENV = process.env.NODE_ENV || 'production'
+
 let result
+
+const args = process.argv.slice(2)
+const portIndex = args.findIndex(arg => arg === '-p')
+let port = '8080'
+if (portIndex > 0) {
+  port = args[portIndex + 1]
+}
 
 if (process.argv.includes('--watch')) {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack-dev-server', ['--mode=development'], ['NODE_ENV=development', 'DEBUG=1'])
+    webpack: getCommand('webpack-dev-server', ['--mode=development', `--port=${port}`], ['NODE_ENV=development', 'DEBUG=1'])
   })
 } else {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack', ['--mode=production'], [`NODE_ENV=${process.env['NODE_ENV']}`, 'NODE_OPTIONS=--max_old_space_size=8192'])
+    webpack: getCommand('webpack', ['--mode=production'], [`NODE_ENV=${ENV}`, 'NODE_OPTIONS=--max_old_space_size=8192'])
   })
 }
 
