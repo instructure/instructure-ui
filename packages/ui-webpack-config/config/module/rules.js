@@ -52,7 +52,7 @@ module.exports = [
   },
   {
     test: /\.js$/,
-    exclude: [...exclude, /\.examples\.js$/],
+    exclude: [...exclude],
     use: [
       {
         loader: 'thread-loader',
@@ -67,12 +67,6 @@ module.exports = [
       },
       babelLoader
     ]
-  },
-  {
-    test: /\.js$/,
-    include: [/\.examples\.js/],
-    exclude,
-    use: [ babelLoader, 'component-examples-loader' ]
   },
   {
     enforce: 'pre',

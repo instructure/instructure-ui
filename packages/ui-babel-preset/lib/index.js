@@ -33,13 +33,13 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   ]
 
   let plugins = [
-    require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
     [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
     require('@babel/plugin-proposal-export-default-from').default,
     [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
-    require('@babel/plugin-transform-runtime').default
+    require('@babel/plugin-transform-runtime').default,
+    require('@babel/plugin-syntax-dynamic-import').default
   ]
 
   if (process.env.NODE_ENV === 'production') {
@@ -60,7 +60,6 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
 
   if (opts.node) {
     plugins = plugins.concat([
-      require('babel-plugin-dynamic-import-node').default,
       require('babel-plugin-transform-ensure-ignore').default
     ])
   }
@@ -92,17 +91,13 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
 
 function getNodeEnvConfig () {
   return {
-    // the test-quick command that is ran directly in node (in quizzes land) and not using webpack
-    // needs commonjs modules, not es modules. But it only needs to transform js features
-    // that the current version of node doesn't support, not everything our lowest supported
-    // browser needs
     targets: {
       node: 'current'
     },
     modules: 'commonjs',
-    // this is for babel-plugin-transform-themeable. it currently doesn't work against native class syntax.
+    // this is for @instructure/ui-themeable. It currently doesn't work against native class syntax.
     // once it does, this line can be removed
-    include: [require('@babel/plugin-transform-classes').default]
+    include: ['transform-classes']
   }
 }
 

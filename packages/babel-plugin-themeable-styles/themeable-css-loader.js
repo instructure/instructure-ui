@@ -33,7 +33,9 @@ const getScopedNameGenerator = require('./getScopedNameGenerator')
 const themeableConfig = loadConfig('themeable')
 const noop = () => {}
 
-module.exports = function (source, map, meta) {
+module.exports = function (content, map, meta) {
+  this.cacheable && this.cacheable()
+
   const loader = this
   const callback = loader.async()
   const filePath = loader.resourcePath
@@ -54,6 +56,7 @@ module.exports = function (source, map, meta) {
   }
 
   // Reuse CSS AST (PostCSS AST e.g 'postcss-loader') to avoid reparsing
+  let source = content
   const ast = meta && meta.ast
   if (ast && ast.type === 'postcss' && ast.root) {
     // eslint-disable-next-line no-param-reassign
@@ -71,7 +74,7 @@ module.exports = function (source, map, meta) {
   }
 
   Promise.resolve().then(() => {
-    const componentId = generateComponentId(source)
+    const componentId = generateComponentId(content)
 
     return postcss([
       require('@instructure/postcss-themeable-styles'),

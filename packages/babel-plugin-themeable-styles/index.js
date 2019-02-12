@@ -38,6 +38,8 @@ const getScopedNameGenerator = require('./getScopedNameGenerator')
 
 const matchExtensions = /\.css$/i
 
+const DEBUG = Boolean(process.env.DEBUG)
+
 module.exports = function transformThemeableStyles ({ types: t }) {
   const STYLES = new Map()
 
@@ -65,7 +67,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         }
       }
 
-      if (process.env.NODE_ENV === 'production') {
+      if (!DEBUG) {
         requireHook({
           ignore: thisPluginOptions.ignore,
           generateScopedName: (name, filepath, css) => {
@@ -99,7 +101,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         const { value } = path.parentPath.node.source
 
         if (matchExtensions.test(value)) {
-          if (requireHookInitialized && process.env.NODE_ENV === 'production') {
+          if (requireHookInitialized && !DEBUG) {
             const stylesheetPath = resolveStylesheetPath(requiringFile, value)
             const tokens = requireCssFile(stylesheetPath)
 

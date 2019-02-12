@@ -90,9 +90,9 @@ always be in sync.
 ### Adding packages
 
 1. Run `yarn generate:package` and choose a name for your package (use "kebab" case (dashes), e.g. 'my-package').
-1. If you will have React components in your package, add the package components directory to `packages/__docs__/components.js`.
+1. If you will have React components in your package, import them in `packages/__docs__/components.js`.
 1. Add an alias for your package in `packages/__docs__/resolve.js`.
-1. Kill the server (if you had it running), and run `yarn dev` to pick up the new package.
+1. Kill the dev server (if you had it running), and run `yarn dev` to pick up the new package.
 1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your package and its components listed in the docs.
 1. Start making changes to your components and watch them update in the browser automatically.
 
@@ -101,7 +101,9 @@ always be in sync.
 
 1. Run `yarn generate:component` and choose a name and package for your component (use Pascal case, e.g. 'MyComponent').
 1. Import/export your component in `packages/[package]src/components/index.js`.
-1. Kill the server (if you had it running), and run `yarn dev` to pick up the new component.
+1. Add the component to `packages/__docs__/components.js`.
+1. Add an alias for your package in `packages/__docs__/resolve.js`.
+1. Kill the dev server (if you had it running), and run `yarn dev` to pick up the new component.
 1. Visit [http://localhost:8080](http://localhost:8080) in a browser. You should see your component listed in the docs.
 1. Start making changes to your component and watch it update in the browser automatically.
 

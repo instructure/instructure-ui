@@ -110,7 +110,7 @@ export default class Document extends Component {
 
   renderUsage () {
     const { requirePath, esPath, id, displayName, packageName, title, resource } = this.props.doc
-    const importName = displayName || resource.displayName || resource.name
+    const importName = displayName || resource.displayName || id
 
     let example = []
 
