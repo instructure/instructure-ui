@@ -4,7 +4,6 @@
 a.root:link,
 a.root:visited,
 button.root {
-  position: relative;
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
