@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import themeable from '@instructure/ui-themeable'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
@@ -70,7 +70,7 @@ export default class DatePicker extends Component {
       An ISO 8601 formatted string. Must be accompanied by an onSelectedChange property.
       Defaults to today's date.
     **/
-    selectedValue: CustomPropTypes.controllable(I18nPropTypes.iso8601,
+    selectedValue: controllable(I18nPropTypes.iso8601,
       'onSelectedChange', 'defaultSelectedValue'),
 
     /**
@@ -82,7 +82,7 @@ export default class DatePicker extends Component {
       An ISO 8601 formatted string. Must be accompanied by an onRenderedChange property.
       Defaults to today's date.
     **/
-    renderedValue: CustomPropTypes.controllable(I18nPropTypes.iso8601,
+    renderedValue: controllable(I18nPropTypes.iso8601,
       'onRenderedChange', 'defaultRenderedValue'),
 
     /**

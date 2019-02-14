@@ -29,7 +29,7 @@ import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { element } from '@instructure/ui-prop-types'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import testable from '@instructure/ui-testable'
 
@@ -117,7 +117,7 @@ class DrawerTray extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<DrawerTray />` when tray is overlaying content
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     /**
      * An element or a function returning an element to focus by default
      */

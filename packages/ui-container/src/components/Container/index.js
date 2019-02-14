@@ -29,7 +29,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -46,7 +45,7 @@ category: components
 @themeable(theme, styles)
 class Container extends Component {
   static propTypes = {
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     children: PropTypes.node,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**

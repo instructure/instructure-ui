@@ -26,7 +26,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -44,7 +43,7 @@ export default class Text extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     weight: PropTypes.oneOf([
       'normal',
       'light',

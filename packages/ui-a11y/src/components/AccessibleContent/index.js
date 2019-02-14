@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 
@@ -43,7 +42,7 @@ class AccessibleContent extends Component {
     /**
     * the element type to render the screen reader content as
     */
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

@@ -26,7 +26,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -43,7 +42,7 @@ class ScreenReaderContent extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * content meant for screen readers only
     */

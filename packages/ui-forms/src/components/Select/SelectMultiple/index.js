@@ -26,8 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
+import { controllable } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
@@ -68,7 +68,7 @@ class SelectMultiple extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    selectedOption: CustomPropTypes.controllable(
+    selectedOption: controllable(
       PropTypes.arrayOf(
         PropTypes.oneOfType([PropTypes.string, optionType])
       ),

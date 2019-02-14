@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
@@ -47,7 +47,7 @@ category: components
 @themeable(theme, styles)
 export default class Grid extends Component {
   static propTypes = {
-    children: CustomPropTypes.Children.oneOf([GridRow, ScreenReaderContent]),
+    children: ChildrenPropTypes.oneOf([GridRow, ScreenReaderContent]),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),

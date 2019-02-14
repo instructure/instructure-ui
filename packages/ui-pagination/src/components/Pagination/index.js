@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
@@ -73,7 +73,7 @@ export default class Pagination extends Component {
     /**
      * children of type PaginationButton
      */
-    children: CustomPropTypes.Children.oneOf([PaginationButton]),
+    children: Children.oneOf([PaginationButton]),
     /**
      * Disables interaction with all pages
      */
@@ -100,7 +100,7 @@ export default class Pagination extends Component {
     /**
      * the element type to render as
      */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
      * provides a reference to the underlying html root element
      */

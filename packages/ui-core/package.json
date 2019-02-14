@@ -40,6 +40,7 @@
     "@instructure/ui-overlays": "^5",
     "@instructure/ui-pagination": "^5",
     "@instructure/ui-portal": "^5",
+    "@instructure/ui-prop-types": "^5",
     "@instructure/ui-tabs": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-toggle-details": "^5",

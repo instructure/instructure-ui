@@ -31,7 +31,6 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import error from '@instructure/ui-utils/lib/error'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import FocusRegionManager from '../../utils/FocusRegionManager'
 
@@ -58,7 +57,7 @@ class Dialog extends Component {
     /**
     * The element to render as the component root, `span` by default
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
 
     display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
 

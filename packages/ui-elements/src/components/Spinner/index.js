@@ -32,7 +32,6 @@ import themeable from '@instructure/ui-themeable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -66,7 +65,7 @@ export default class Spinner extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

@@ -26,7 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 import themeable from '@instructure/ui-themeable'
@@ -47,7 +47,7 @@ parent: Grid
 @themeable(theme, styles)
 export default class GridRow extends Component {
   static propTypes = {
-    children: CustomPropTypes.Children.oneOf([GridCol, ScreenReaderContent]),
+    children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
     hAlign: PropTypes.oneOf(['start', 'center', 'end', 'space-around', 'space-between']),

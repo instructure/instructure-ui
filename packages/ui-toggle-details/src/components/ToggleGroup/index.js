@@ -30,7 +30,7 @@ import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
@@ -68,7 +68,7 @@ class ToggleGroup extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * provides a reference to the underlying html root element
     */
@@ -77,7 +77,7 @@ class ToggleGroup extends Component {
     /**
     * Whether the content is expanded or hidden
     */
-    expanded: CustomPropTypes.controllable(
+    expanded: controllable(
       PropTypes.bool,
       'onToggle',
       'defaultExpanded'

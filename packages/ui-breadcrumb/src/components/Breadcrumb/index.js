@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children } from '@instructure/ui-prop-types'
 import testable from '@instructure/ui-testable'
 
 import BreadcrumbLink from './BreadcrumbLink'
@@ -51,7 +51,7 @@ export default class Breadcrumb extends Component {
     /**
     * children of type BreadcrumbLink
     */
-    children: CustomPropTypes.Children.oneOf([BreadcrumbLink]),
+    children: Children.oneOf([BreadcrumbLink]),
     /**
     * An accessible label for the navigation
     */

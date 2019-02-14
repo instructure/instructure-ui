@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children } from '@instructure/ui-prop-types'
 
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
@@ -56,7 +56,7 @@ export default class Figure extends Component {
     recommendation: PropTypes.oneOf(['yes', 'no', 'a11y', 'none']),
     iconTitle: PropTypes.string,
     float: PropTypes.oneOf(['start', 'end', 'none']),
-    children: CustomPropTypes.Children.oneOf(['FigureItem'])
+    children: Children.oneOf(['FigureItem'])
   }
 
   static defaultProps = {

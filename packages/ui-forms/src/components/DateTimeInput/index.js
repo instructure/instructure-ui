@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
@@ -159,7 +159,7 @@ class DateTimeInput extends Component {
     * An ISO 8601 formatted date string representing the current date-time
     * (must be accompanied by an onChange prop).
     **/
-    value: CustomPropTypes.controllable(I18nPropTypes.iso8601, 'onChange'),
+    value: controllable(I18nPropTypes.iso8601, 'onChange'),
     /**
     * An ISO 8601 formatted date string to use if `value` isn't provided.
     **/

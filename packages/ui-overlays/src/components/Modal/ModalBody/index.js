@@ -33,7 +33,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import error from '@instructure/ui-utils/lib/error'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+
 import Browser from '@instructure/ui-utils/lib/Browser'
 
 import styles from './styles.css'
@@ -51,7 +51,7 @@ export default class ModalBody extends Component {
     children: PropTypes.node,
     padding: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     variant: PropTypes.oneOf(['default', 'inverse']),
     overflow: PropTypes.oneOf(['scroll', 'fit'])
   }

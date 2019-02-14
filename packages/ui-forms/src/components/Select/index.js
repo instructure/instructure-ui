@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
@@ -56,7 +56,7 @@ class Select extends Component {
     /**
     * Each children must be an option element.
     */
-    children: CustomPropTypes.Children.oneOf(['option', 'optgroup']),
+    children: Children.oneOf(['option', 'optgroup']),
     /**
     * a function that provides a reference to the internal input element
     */
@@ -65,7 +65,7 @@ class Select extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    selectedOption: CustomPropTypes.controllable(
+    selectedOption: controllable(
       PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({

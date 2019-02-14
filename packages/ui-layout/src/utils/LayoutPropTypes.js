@@ -24,7 +24,7 @@
 
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { element } from '@instructure/ui-prop-types'
 
 import jsonToMediaQuery from './jsonToMediaQuery'
 
@@ -104,14 +104,14 @@ export default {
    * An element or a function returning an element to use as the mount node
    */
   mountNode: PropTypes.oneOfType([
-    CustomPropTypes.element,
+    element,
     PropTypes.func
   ]),
   /**
    * The parent in which to constrain a placement
    */
   constrain: PropTypes.oneOfType([
-    CustomPropTypes.element,
+    element,
     PropTypes.func,
     PropTypes.oneOf(['window', 'scroll-parent', 'parent', 'none'])
   ])

@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { childrenOrValue } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -49,7 +49,7 @@ category: components
 export default class Heading extends Component {
    static propTypes = {
      border: PropTypes.oneOf(['none', 'top', 'bottom']),
-     children: CustomPropTypes.childrenOrValue,
+     children: childrenOrValue,
      color: deprecatePropValues(
        PropTypes.oneOf([
          'primary',
@@ -64,7 +64,7 @@ export default class Heading extends Component {
     /**
     * the element type to render as (defaults to the level)
     */
-     as: CustomPropTypes.elementType,
+     as: PropTypes.elementType,
      ellipsis: PropTypes.bool,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import React, {  Component } from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
@@ -107,7 +108,7 @@ class ReactComponentWrapper {
 function createMountWrapper (element, options = {}) {
   class WrapperComponent extends Component {
     static propTypes = {
-      Component: PropTypes.oneOfType([PropTypes.func, PropTypes.string]).isRequired,
+      Component: PropTypes.elementType.isRequired,
       props: PropTypes.object.isRequired,
       context: PropTypes.object
     }

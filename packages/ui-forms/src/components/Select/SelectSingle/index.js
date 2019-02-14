@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { controllable } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import testable from '@instructure/ui-testable'
@@ -60,7 +60,7 @@ class SelectSingle extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    selectedOption: CustomPropTypes.controllable(
+    selectedOption: controllable(
       PropTypes.oneOfType([PropTypes.string, optionType]),
       'onChange',
       'defaultSelectedOption'

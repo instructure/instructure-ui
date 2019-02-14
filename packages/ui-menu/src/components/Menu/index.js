@@ -29,7 +29,7 @@ import keycode from 'keycode'
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -63,7 +63,7 @@ class Menu extends Component {
     /**
      * Children of type `MenuItem`, `MenuItemGroup`, `MenuItemSeparator`, or `Menu`
      */
-    children: CustomPropTypes.Children.oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu']),
+    children: ChildrenPropTypes.oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu']),
     /**
      * Description of the `<Menu />`
      */
@@ -87,7 +87,7 @@ class Menu extends Component {
     /**
      * Is the `<Menu />` open (should be accompanied by `onToggle`)
      */
-    show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
+    show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
     /**
      * Callback fired when the `<Menu />` is toggled open/closed. When used with `show`,
      * the component will not control its own state.

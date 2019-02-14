@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { xor, controllable } from '@instructure/ui-prop-types'
 import Decimal from '@instructure/ui-i18n/lib/Decimal'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import Locale from '@instructure/ui-i18n/lib/Locale'
@@ -58,7 +58,7 @@ class NumberInput extends Component {
      *
      * Pass either decimalPrecision or significantDigits, not both.
      */
-    decimalPrecision: CustomPropTypes.xor(PropTypes.number, 'significantDigits'),
+    decimalPrecision: xor(PropTypes.number, 'significantDigits'),
     /**
      * Specify the number of significant digits. If the input has more
      * significant digits, it will be rounded on blur. If it has less, traling
@@ -66,7 +66,7 @@ class NumberInput extends Component {
      *
      * Pass either decimalPrecision or significantDigits, not both.
      */
-    significantDigits: CustomPropTypes.xor(PropTypes.number, 'decimalPrecision'),
+    significantDigits: xor(PropTypes.number, 'decimalPrecision'),
     /**
     * object with shape: `{
     * text: PropTypes.string,
@@ -110,7 +110,7 @@ class NumberInput extends Component {
     * string is given, it should already be in the correct format for the
     * current locale.
     */
-    value: CustomPropTypes.controllable(
+    value: controllable(
       PropTypes.oneOfType([PropTypes.string, PropTypes.number])
     ),
     /**

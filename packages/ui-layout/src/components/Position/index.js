@@ -27,12 +27,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
+import { element } from '@instructure/ui-prop-types'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPositionChangeListener'
 import uid from '@instructure/uid'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import debounce from '@instructure/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
@@ -83,7 +83,7 @@ class Position extends Component {
     /**
      * The target to be used when not using `<PositionTarget />`
      */
-    target: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    target: PropTypes.oneOfType([element, PropTypes.func]),
 
     /**
      * Whether or not you want the content to position over the `<PositionTarget />`

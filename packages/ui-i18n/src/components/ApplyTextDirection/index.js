@@ -25,7 +25,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import getTextDirection from '../../utils/getTextDirection'
 
@@ -57,7 +56,7 @@ export default class ApplyTextDirection extends Component {
     /**
     * accepts only one child (children must be wrapped in a single component/element)
     */
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

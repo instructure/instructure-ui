@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -67,7 +67,7 @@ export default class PopoverMenu extends Component {
     /**
     * children of type `MenuItem`, `MenuItemGroup`, or `MenuItemSeparator`
     */
-    children: CustomPropTypes.Children.oneOf([MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout]),
+    children: Children.oneOf([MenuItem, MenuItemGroup, MenuItemSeparator, MenuItemFlyout]),
     /**
     * should the menu be open for the initial render
     */
@@ -76,7 +76,7 @@ export default class PopoverMenu extends Component {
     /**
     * is the menu open (should be accompanied by `onToggle`)
     */
-    show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
+    show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
 
     /**
     * Call this function when the menu is toggled open/closed. When used with `show`,

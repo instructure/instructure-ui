@@ -30,7 +30,7 @@ import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import testable from '@instructure/ui-testable'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { element } from '@instructure/ui-prop-types'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
@@ -61,7 +61,7 @@ class Overlay extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Portal />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */

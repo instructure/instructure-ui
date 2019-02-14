@@ -33,9 +33,8 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-themeable/lib/utils/mirrorShorthand'
 import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
 
-
+import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import error from '@instructure/ui-utils/lib/error'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -55,7 +54,7 @@ class View extends Component {
     /**
     * The element to render as the component root, `span` by default
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
 
     /**
     * provides a reference to the underlying html element
@@ -128,7 +127,7 @@ class View extends Component {
     /**
      * Specify a mouse cursor to use when hovering over the `<View />`
      */
-    cursor: CustomPropTypes.cursor,
+    cursor: cursorPropTypes,
 
     /**
     * Activate a dotted outline around the component to make building your

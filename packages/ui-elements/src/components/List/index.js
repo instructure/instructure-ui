@@ -29,7 +29,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import testable from '@instructure/ui-testable'
@@ -51,7 +51,7 @@ export default class List extends Component {
     /**
     * Only accepts <ListItem> as a child
     */
-    children: CustomPropTypes.Children.oneOf([ListItem]),
+    children: ChildrenPropTypes.oneOf([ListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,

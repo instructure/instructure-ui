@@ -25,7 +25,7 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
@@ -54,7 +54,7 @@ export default class CheckboxGroup extends Component {
     /**
     * the selected values (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.array),
+    value: controllable(PropTypes.array),
     /**
     * when used with the `value` prop, the component will not control its own state
     */
@@ -71,7 +71,7 @@ export default class CheckboxGroup extends Component {
     /**
     * children of type `Checkbox`
     */
-    children: CustomPropTypes.Children.oneOf([Checkbox]),
+    children: ChildrenPropTypes.oneOf([Checkbox]),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf([
       'stacked',

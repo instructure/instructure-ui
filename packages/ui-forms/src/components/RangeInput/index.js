@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import Browser from '@instructure/ui-utils/lib/Browser'
 import ContextView from '@instructure/ui-layout/lib/components/ContextView'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
@@ -58,7 +58,7 @@ class RangeInput extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.number),
+    value: controllable(PropTypes.number),
     /**
     * when used with the `value` prop, the component will not control its own state
     */

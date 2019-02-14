@@ -31,7 +31,7 @@ import keycode from 'keycode'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -58,7 +58,7 @@ export default class TabList extends Component {
     /**
     * children of type `TabPanel`
     */
-    children: CustomPropTypes.Children.oneOf([TabPanel, null]),
+    children: Children.oneOf([TabPanel, null]),
 
     variant: PropTypes.oneOf(['simple', 'minimal']),
     /**
@@ -68,7 +68,7 @@ export default class TabList extends Component {
     /**
     * the index (zero based) of the panel that should be selected (should be accompanied by `onChange`)
     */
-    selectedIndex: CustomPropTypes.controllable(PropTypes.number, 'onChange', 'defaultSelectedIndex'),
+    selectedIndex: controllable(PropTypes.number, 'onChange', 'defaultSelectedIndex'),
     /**
     * Call this function when the selected tab changes. When used with `selectedIndex`,
     * the component will not control its own state.

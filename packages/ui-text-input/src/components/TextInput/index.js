@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
@@ -82,7 +82,7 @@ class TextInput extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.string),
+    value: controllable(PropTypes.string),
     /**
     * Content to display after the input text, such as an icon
     */

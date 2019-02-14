@@ -32,7 +32,6 @@ import TruncateText from '../TruncateText'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -56,7 +55,7 @@ class Pill extends Component {
     margin: ThemeablePropTypes.spacing,
     variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
     elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

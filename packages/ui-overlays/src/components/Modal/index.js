@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -89,7 +89,7 @@ export default class Modal extends Component {
     /**
      * The children to be rendered within the `<Modal />`
      */
-    children: CustomPropTypes.Children.enforceOrder(
+    children: ChildrenPropTypes.enforceOrder(
       [ModalHeader, ModalBody, ModalFooter],
       [ModalHeader, ModalBody],
       [ModalBody, ModalFooter],
@@ -157,7 +157,7 @@ export default class Modal extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Modal />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */

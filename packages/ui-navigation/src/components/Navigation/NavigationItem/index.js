@@ -28,7 +28,6 @@ import classnames from 'classnames'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
@@ -57,7 +56,7 @@ class NavigationItem extends Component {
     /**
     * The element type to render as (will default to `<a>` if href is provided)
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * If the NavigationItem goes to a new page, pass an href
     */

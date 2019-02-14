@@ -29,7 +29,6 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import testable from '@instructure/ui-testable'
 
@@ -71,7 +70,7 @@ export default class Avatar extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * provides a reference to the underlying html element
     */

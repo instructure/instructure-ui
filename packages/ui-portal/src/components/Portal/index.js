@@ -28,8 +28,8 @@ import ReactDOM from 'react-dom'
 
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 
+import { element } from '@instructure/ui-prop-types'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import testable from '@instructure/ui-testable'
 
@@ -66,7 +66,7 @@ export default class Portal extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Portal />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'
      */

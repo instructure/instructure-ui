@@ -26,8 +26,8 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
+import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import uid from '@instructure/uid'
@@ -56,11 +56,11 @@ export default class MenuItemGroup extends Component {
     /**
     * children of type `MenuItem`, `MenuItemSeparator`
     */
-    children: CustomPropTypes.Children.oneOf([MenuItem, MenuItemSeparator]),
+    children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
     /**
     * an array of the values (or indeces by default) for the selected items
     */
-    selected: CustomPropTypes.controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
+    selected: controllable(PropTypes.array, 'onSelect', 'defaultSelected'),
     /**
     * an array of the values (or indeces by default) for the selected items on initial render
     */

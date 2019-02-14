@@ -27,6 +27,7 @@
     "@babel/runtime": "^7",
     "@instructure/debounce": "^5",
     "@instructure/ui-decorator": "^5",
+    "@instructure/ui-prop-types": "^5",
     "@instructure/uid": "^5",
     "bowser": "^1.9.4",
     "decimal.js": "^10",

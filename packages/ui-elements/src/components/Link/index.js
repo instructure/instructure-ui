@@ -29,7 +29,6 @@ import classnames from 'classnames'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findFocusable from '@instructure/ui-a11y/lib/utils/findFocusable'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -69,7 +68,7 @@ class Link extends Component {
     /**
     * the element type to render as (will default to `<a>` if href is provided)
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
     /**

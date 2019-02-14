@@ -26,7 +26,6 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -49,7 +48,7 @@ export default class FormFieldGroup extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * object with shape: `{
     * text: PropTypes.string,

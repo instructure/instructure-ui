@@ -30,8 +30,8 @@ import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
+import { element } from '@instructure/ui-prop-types'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import themeable from '@instructure/ui-themeable'
@@ -143,7 +143,7 @@ class Tray extends Component {
      * An element or a function returning an element to use as the mount node
      * for the `<Tray />` (defaults to `document.body`)
      */
-    mountNode: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    mountNode: PropTypes.oneOfType([element, PropTypes.func]),
 
     /**
      * Insert the element at the 'top' of the mountNode or at the 'bottom'

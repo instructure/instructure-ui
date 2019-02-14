@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import keycode from 'keycode'
 import classnames from 'classnames'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import error from '@instructure/ui-utils/lib/error'
@@ -72,7 +72,7 @@ class Checkbox extends Component {
     /**
     * whether the input is checked or not (must be accompanied by an `onChange` prop)
     */
-    checked: CustomPropTypes.controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
+    checked: controllable(PropTypes.bool, 'onChange', 'defaultChecked'),
     /**
     * when used with the `checked` prop, the component will not control its own state
     */

@@ -35,7 +35,7 @@ import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable, element } from '@instructure/ui-prop-types'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
@@ -89,7 +89,7 @@ class Popover extends Component {
     /**
      * Children of the `<Popover />`
      */
-    children: CustomPropTypes.Children.oneOf([PopoverTrigger, PopoverContent]),
+    children: Children.oneOf([PopoverTrigger, PopoverContent]),
 
     /**
      * The placement of the content in relation to the trigger
@@ -124,7 +124,7 @@ class Popover extends Component {
     /**
     * Whether or not the `<Popover />` is shown (should be accompanied by `onToggle`)
     */
-    show: CustomPropTypes.controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
+    show: controllable(PropTypes.bool, 'onToggle', 'defaultShow'),
 
     /**
      *
@@ -277,7 +277,7 @@ class Popover extends Component {
     /**
      * Target element for positioning the Popover (if it differs from the trigger)
      */
-    positionTarget: PropTypes.oneOfType([CustomPropTypes.element, PropTypes.func]),
+    positionTarget: PropTypes.oneOfType([element, PropTypes.func]),
 
     /**
      * should the content offset to align by its arrow

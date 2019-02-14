@@ -23,7 +23,7 @@
  */
 import React, { Component } from 'react'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children } from '@instructure/ui-prop-types'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
@@ -44,7 +44,7 @@ export default class MetricsList extends Component {
     /**
     * children of type `MetricsListItem`
     */
-    children: CustomPropTypes.Children.oneOf([MetricsListItem])
+    children: Children.oneOf([MetricsListItem])
   }
 
   render () {

@@ -28,7 +28,6 @@ import classnames from 'classnames'
 
 import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
@@ -61,7 +60,7 @@ export default class Tooltip extends Component {
     /**
     * the element type to render as (assumes a single child if 'as' is undefined)
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
      * The action that causes the Content to display (`click`, `hover`, `focus`)
      */

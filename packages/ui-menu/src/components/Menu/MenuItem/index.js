@@ -32,7 +32,7 @@ import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -65,7 +65,7 @@ class MenuItem extends Component {
     /**
     * whether the menu item is selected or not (must be accompanied by an `onSelect` prop)
     */
-    selected: CustomPropTypes.controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
+    selected: controllable(PropTypes.bool, 'onSelect', 'defaultSelected'),
     /**
     * when used with the `selected` prop, the component will not control its own state
     */
@@ -82,7 +82,7 @@ class MenuItem extends Component {
     /**
     * the element type to render as (will default to `<a>` if href is provided)
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     href: PropTypes.string

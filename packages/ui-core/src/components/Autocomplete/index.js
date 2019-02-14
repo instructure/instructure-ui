@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
@@ -52,7 +52,7 @@ class Autocomplete extends Component {
     /**
     * Each children must be an option element.
     */
-    children: CustomPropTypes.Children.oneOf(['option']),
+    children: Children.oneOf(['option']),
     /**
     * a function that provides a reference to the internal input element
     */
@@ -60,7 +60,7 @@ class Autocomplete extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    selectedOption: CustomPropTypes.controllable(
+    selectedOption: controllable(
       PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.shape({

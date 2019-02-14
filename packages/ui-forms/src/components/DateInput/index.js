@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
@@ -122,7 +122,7 @@ export default class DateInput extends Component {
     /**
     * the selected value (must be accompanied by an `onDateChange` prop)
     */
-    dateValue: CustomPropTypes.controllable(I18nPropTypes.iso8601, 'onDateChange', 'defaultDateValue'),
+    dateValue: controllable(I18nPropTypes.iso8601, 'onDateChange', 'defaultDateValue'),
 
     /**
       Whether to display validation feedback while typing.

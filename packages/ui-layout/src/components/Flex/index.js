@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -49,11 +49,11 @@ export default class Flex extends Component {
     /**
     * Flex only accepts FlexItem as a child
     */
-    children: CustomPropTypes.Children.oneOf([FlexItem]),
+    children: ChildrenPropTypes.oneOf([FlexItem]),
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * Sets the flex-direction to row (horizontal) or column (vertical)
     */

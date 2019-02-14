@@ -30,7 +30,7 @@ import IconDocument from '@instructure/ui-icons/lib/Line/IconDocument'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import testable from '@instructure/ui-testable'
 
 import TreeCollection from './TreeCollection'
@@ -68,7 +68,7 @@ export default class TreeBrowser extends Component {
     /**
     * an array of expanded collection ids, must be accompanied by an 'onCollectionToggle' prop
     */
-    expanded: CustomPropTypes.controllable(
+    expanded: controllable(
       PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number])),
       'onCollectionToggle'
     ),

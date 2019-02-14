@@ -28,7 +28,6 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 
@@ -54,7 +53,7 @@ example: true
 @themeable(theme, styles)
 export default class FormFieldLabel extends Component {
   static propTypes = {
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     children: PropTypes.node.isRequired
   };
 

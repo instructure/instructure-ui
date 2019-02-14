@@ -2,5 +2,9 @@
   {
     "pattern": "^@instructure/ui-utils/lib/debounce",
     "replace": "@instructure/debounce"
+  },
+  {
+    "pattern": "^@instructure/ui-utils/lib/react/CustomPropTypes",
+    "replace": "@instructure/ui-prop-types"
   }
 ]

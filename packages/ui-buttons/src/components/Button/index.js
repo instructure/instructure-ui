@@ -28,7 +28,6 @@ import keycode from 'keycode'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -92,7 +91,7 @@ class Button extends Component {
     /**
     * the element type to render as (will be `<a>` if href is provided)
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
     * should the `<Button/>` fill the width of its container

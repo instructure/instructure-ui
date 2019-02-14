@@ -30,7 +30,6 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 
 import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import error from '@instructure/ui-utils/lib/error'
 import themeable from '@instructure/ui-themeable'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -62,7 +61,7 @@ export default class FormFieldLayout extends Component {
     /**
     * the element type to render as
     */
-    as: CustomPropTypes.elementType,
+    as: PropTypes.elementType,
     /**
     * object with shape: `{
     * text: PropTypes.string,

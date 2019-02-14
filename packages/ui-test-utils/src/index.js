@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 import { mount, stub, spy, viewport } from './utils/sandbox'
 import { wait } from './utils/wait'
 import { wrap } from './utils/wrap'

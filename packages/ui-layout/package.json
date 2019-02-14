@@ -30,6 +30,7 @@
     "@instructure/ui-i18n": "^5",
     "@instructure/ui-motion": "^5",
     "@instructure/ui-portal": "^5",
+    "@instructure/ui-prop-types": "^5",
     "@instructure/ui-testable": "^5",
     "@instructure/ui-themeable": "^5",
     "@instructure/ui-utils": "^5",

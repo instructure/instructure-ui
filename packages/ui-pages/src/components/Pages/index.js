@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import uid from '@instructure/uid'
 import error from '@instructure/ui-utils/lib/error'
@@ -51,7 +51,7 @@ class Pages extends Component {
   static Page = Page
 
   static propTypes = {
-    children: CustomPropTypes.Children.oneOf([
+    children: Children.oneOf([
       Page
     ]),
 
@@ -60,7 +60,7 @@ class Pages extends Component {
     /**
      * The currently active page index
      */
-    activePageIndex: CustomPropTypes.controllable(PropTypes.number, 'onPageIndexChange', 'defaultPageIndex'),
+    activePageIndex: controllable(PropTypes.number, 'onPageIndexChange', 'defaultPageIndex'),
 
     /**
      * Event handler fired anytime page index has changed due to back button being clicked

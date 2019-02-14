@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
@@ -103,7 +103,7 @@ class TimeInput extends Component {
      * An ISO 8601 formatted date string representing the current selected value
      * (must be accompanied by an onChange prop).
      */
-    value: CustomPropTypes.controllable(I18nPropTypes.iso8601),
+    value: controllable(I18nPropTypes.iso8601),
     /**
      * Whether or not to disable the select
      */

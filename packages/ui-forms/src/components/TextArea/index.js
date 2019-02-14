@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
@@ -114,7 +114,7 @@ class TextArea extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.string),
+    value: controllable(PropTypes.string),
     /**
     * when used with the `value` prop, the component will not control its own state
     */

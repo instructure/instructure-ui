@@ -32,7 +32,6 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePro
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import uid from '@instructure/uid'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -88,7 +87,7 @@ class Badge extends Component {
     elementRef: PropTypes.func,
     formatOverflowText: PropTypes.func,
     formatOutput: PropTypes.func,
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

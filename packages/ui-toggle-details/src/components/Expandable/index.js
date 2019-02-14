@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import uid from '@instructure/uid'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
@@ -41,10 +41,10 @@ class Expandable extends Component {
     /**
     * Whether the content is expanded or hidden
     */
-    expanded: CustomPropTypes.controllable(
-     PropTypes.bool,
-     'onToggle',
-     'defaultExpanded'
+    expanded: controllable(
+      PropTypes.bool,
+      'onToggle',
+      'defaultExpanded'
     ),
     /**
     * Whether the content is initially expanded or hidden (uncontrolled)

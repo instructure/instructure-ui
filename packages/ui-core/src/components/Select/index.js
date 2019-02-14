@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children, controllable } from '@instructure/ui-prop-types'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
@@ -51,7 +51,7 @@ class Select extends Component {
     /**
     * Children must be option tags.
     */
-    children: CustomPropTypes.Children.oneOf(['option']),
+    children: Children.oneOf(['option']),
     label: PropTypes.node.isRequired,
     disabled: PropTypes.bool,
     /**
@@ -78,7 +78,7 @@ class Select extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.string),
+    value: controllable(PropTypes.string),
     /**
     * when used with the `value` prop, the component will not control its own state
     */

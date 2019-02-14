@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 
 import themeable from '@instructure/ui-themeable'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
@@ -57,7 +57,7 @@ class DrawerLayout extends Component {
     /**
      * Exactly one of each of the following child types: `DrawerContent`, `DrawerTray`
      */
-    children: CustomPropTypes.Children.oneOfEach([DrawerContent, DrawerTray]),
+    children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
     /**
      * Min width for the `<DrawerContent />`
      */

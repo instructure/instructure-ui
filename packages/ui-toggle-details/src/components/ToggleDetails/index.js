@@ -33,7 +33,7 @@ import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown
 
 import themeable from '@instructure/ui-themeable'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable } from '@instructure/ui-prop-types'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import testable from '@instructure/ui-testable'
@@ -60,7 +60,7 @@ class ToggleDetails extends Component {
     /**
     * Whether the content is expanded or hidden
     */
-    expanded: CustomPropTypes.controllable(
+    expanded: controllable(
       PropTypes.bool,
       'onToggle',
       'defaultExpanded'

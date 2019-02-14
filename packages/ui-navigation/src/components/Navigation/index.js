@@ -28,8 +28,8 @@ import classnames from 'classnames'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
+import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import IconMoveStart from '@instructure/ui-icons/lib/Line/IconMoveStart'
 
@@ -53,11 +53,11 @@ class Navigation extends Component {
     /**
     * children of type NavigationItem
     */
-    children: CustomPropTypes.Children.oneOf([NavigationItem]),
+    children: ChildrenPropTypes.oneOf([NavigationItem]),
     /**
     * When minimized is set to true, the `<Navigation />` shows icons only while the text becomes a tooltip. When it is set to false, the `<Navigation />` shows text in addition to the icons
     */
-    minimized: CustomPropTypes.controllable(
+    minimized: controllable(
       PropTypes.bool,
       'onMinimized',
       'defaultMinimized'

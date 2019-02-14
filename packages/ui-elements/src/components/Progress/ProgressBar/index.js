@@ -30,7 +30,6 @@ import View from '@instructure/ui-layout/lib/components/View'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -83,7 +82,7 @@ export default class ProgressBar extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     elementRef: PropTypes.func,
-    as: CustomPropTypes.elementType
+    as: PropTypes.elementType
   }
 
   static defaultProps = {

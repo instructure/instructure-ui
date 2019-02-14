@@ -25,7 +25,7 @@
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
+import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
@@ -56,7 +56,7 @@ export default class RadioInputGroup extends Component {
     /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
-    value: CustomPropTypes.controllable(PropTypes.oneOfType([
+    value: controllable(PropTypes.oneOfType([
       PropTypes.string,
       PropTypes.number
     ])),
@@ -77,7 +77,7 @@ export default class RadioInputGroup extends Component {
     /**
     * children of type `RadioInput`
     */
-    children: CustomPropTypes.Children.oneOf([RadioInput]),
+    children: ChildrenPropTypes.oneOf([RadioInput]),
     variant: PropTypes.oneOf(['simple', 'toggle']), // TODO: split toggle out to its own component
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     layout: PropTypes.oneOf([
