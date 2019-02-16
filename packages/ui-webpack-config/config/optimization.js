@@ -29,14 +29,15 @@ module.exports = {
     chunks: 'all',
   },
   runtimeChunk: true,
+  sideEffects: true,
   minimizer: [
     new TerserWebpackPlugin({
       cache: true,
       parallel: true,
-      sourceMap: true,
+      // sourceMap: true, // this breaks storybook in production env
       terserOptions: {
-        mangle: false,
-      },
-    }),
+        mangle: false
+      }
+    })
   ]
 }

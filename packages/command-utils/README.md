@@ -2,23 +2,23 @@
 category: packages
 ---
 
-## pkg-utils
+## command-utils
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
-Utilities for managing node packages in a mono-repo using yarn workspaces.
+A Node CLI utility made by Instructure, Inc.
 
 ### Installation
 
 ```sh
-yarn add @instructure/pkg-utils
+yarn add @instructure/command-utils
 ```
 
-[npm]: https://img.shields.io/npm/v/@instructure/pkg-utils.svg
-[npm-url]: https://npmjs.com/package/@instructure/pkg-utils
+[npm]: https://img.shields.io/npm/v/@instructure/command-utils.svg
+[npm-url]: https://npmjs.com/package/@instructure/command-utils
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

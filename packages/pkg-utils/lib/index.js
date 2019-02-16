@@ -21,13 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackage, getPackageJSON, getPackagePath } = require('./get-package')
+const { readPackage, getPackage, getPackageJSON, getPackagePath } = require('./get-package')
 
 module.exports =  {
-  readPkgUp: require('read-pkg-up'),
-  readPkg: require('read-pkg'),
   getPackages: require('./get-packages'),
   getChangedPackages: require('./get-changed-packages'),
+  readPkgUp: require('read-pkg-up'),
+  readPkg: getPackageJSON,
+  readPackage,
   getPackage,
   getPackageJSON,
   getPackagePath

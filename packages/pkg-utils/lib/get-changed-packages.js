@@ -21,29 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const shell = require('shelljs')
+const { runCommandSync } = require('@instructure/command-utils')
 const path = require('path')
 const getPackages = require('./get-packages')
 
 module.exports = function getChangedPackages (commitIsh = 'HEAD^1', allPackages) {
-  if (commitIsh === '--cached') {
-    return getPackagesWithStagedChanges(allPackages)
-  }
-
   allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
 
-  const result = shell.exec(`lerna ls --since ${commitIsh} --json`, { silent: true })
-    .stdout
-  const changedPackages = JSON.parse(result).map(pkg => pkg.name)
-  return allPackages.filter(pkg => changedPackages.includes(pkg.name))
-}
-
-function getPackagesWithStagedChanges (allPackages) {
-  allPackages = allPackages || getPackages() // eslint-disable-line no-param-reassign
-
-  const changedFiles = shell.exec('git diff --cached --name-only', { silent: true })
-    .stdout
-    .split('\n')
+  const result = runCommandSync('git', ['diff', commitIsh, '--name-only'], [], { stdio: 'pipe' }).stdout
+  const changedFiles = result.split('\n')
 
   return allPackages
     .filter((pkg) => {

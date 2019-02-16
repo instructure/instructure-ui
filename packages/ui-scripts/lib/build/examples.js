@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 const path = require('path')
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 const rootPath = path.resolve(process.cwd(), '../../node_modules')
 

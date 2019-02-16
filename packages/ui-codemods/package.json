@@ -20,6 +20,7 @@
     "jest": "^24.1.0"
   },
   "dependencies": {
+    "babel-core": "^7.0.0-bridge.0",
     "jscodeshift": "^0.6.3"
   },
   "publishConfig": {

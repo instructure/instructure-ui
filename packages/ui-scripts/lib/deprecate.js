@@ -21,31 +21,49 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error, info } = require('@instructure/command-utils')
+const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
+const { runCommandAsync, error, info, confirm } = require('@instructure/commmand-utils')
 
-const { publishGithubPages } = require('./utils/gh-pages')
+const { createNPMRCFile } = require('./utils/npm')
 const { getConfig } = require('./utils/config')
-const { setupGit } = require('./utils/git')
 
 try {
+  // optional version and fix version arguments:
+  // e.g. ui-scripts --deprecate 5.11.0 5.11.1
   const pkgJSON = getPackageJSON()
-  deployDocs(pkgJSON.name, pkgJSON.version, getConfig(pkgJSON))
+  const versionToDeprecate = process.argv[3] || pkgJSON.version
+  const fixVersion = process.argv[4]
+
+  deprecate(versionToDeprecate, fixVersion, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-function deployDocs (packageName, currentVersion, config = {}) {
-  setupGit()
+async function deprecate (versionToDeprecate, fixVersion, config) {
+  const message = fixVersion ? `A critical bug was fixed in ${fixVersion}` : ''
+  createNPMRCFile(config)
 
-  info(`📖   Deploying documentation for ${currentVersion} of ${packageName}...`)
-
-  try {
-    publishGithubPages(config)
-  } catch (err) {
-    error(err)
+  info(`📦  Version to deprecate: ${versionToDeprecate}`)
+  const reply = await confirm('Continue? [y/n]\n')
+  if (!['Y', 'y'].includes(reply.trim())) {
+    process.exit(0)
   }
 
-  info(`📖   Documentation for ${currentVersion} of ${packageName} was successfully deployed!`)
+  return Promise.all(getPackages().map(async pkg => {
+    if (pkg.private) {
+      info(`${pkg.name} is private.`)
+    } else {
+      const toDeprecate = `${pkg.name}@${versionToDeprecate}`
+
+      info(`📦  Deprecating ${toDeprecate}...`)
+
+      try {
+        await runCommandAsync('npm', ['deprecate', toDeprecate, message])
+      } catch (err) {
+        error(err)
+      }
+      info(`📦  ${toDeprecate} was successfully deprecated!`)
+    }
+  }))
 }

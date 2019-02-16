@@ -21,16 +21,58 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const semver = require('semver')
+const { getPackageJSON } = require('@instructure/pkg-utils')
+const { error, info } = require('@instructure/command-utils')
 
-const { error } = require('./utils/logger')
-const { bump } = require('./utils/release')
-const { getConfig } = require('./utils/get-config')
+const { getConfig } = require('./utils/config')
+const {
+  commitVersionBump,
+  setupGit,
+  checkWorkingDirectory
+} = require('./utils/git')
+const {
+  updateCrossPackageDependencies,
+  bumpPackages
+} = require('./utils/npm')
 
 try {
-  // optional release type argument: major, minor, patch
-  // ui-scripts --bump major
-  bump(process.argv[3], getConfig())
+  const pkgJSON = getPackageJSON()
+  // optional release type/version argument: major, minor, patch, [version]
+  // e.g. ui-scripts --bump major
+  bump(pkgJSON.name, pkgJSON.version, process.argv[3], getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)
+}
+
+async function bump (packageName, currentVersion, requestedVersion, config = {}) {
+  setupGit()
+  checkWorkingDirectory()
+
+  let releaseVersion
+
+  try {
+    releaseVersion = await bumpPackages(packageName, requestedVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  try {
+    await updateCrossPackageDependencies(packageName, releaseVersion, `^${semver.major(releaseVersion)}`)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(`💾  Committing version bump commit for ${packageName} ${releaseVersion}...`)
+  try {
+    commitVersionBump(releaseVersion)
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  info(`💾  Version bump for ${packageName} to ${releaseVersion} complete!`)
 }

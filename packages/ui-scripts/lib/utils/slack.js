@@ -23,7 +23,7 @@
  */
 
 const https = require('https')
-const { info, error } = require('./logger')
+const { info, error } = require('@instructure/command-utils')
 
 const {
  SLACK_USERNAME,

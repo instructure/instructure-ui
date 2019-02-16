@@ -30,7 +30,7 @@
     "loader-utils": "^1.2.3",
     "object-hash": "^1.3.0",
     "prop-types": "^15",
-    "react-docgen": "^3"
+    "react-docgen": "^4"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15 || ^16"

@@ -1,28 +1,18 @@
-const instConfig = require('@instructure/ui-webpack-config')
 const React = require('react')
+const merge = require('webpack-merge')
 
 module.exports = (storybookBaseConfig, configType) => {
-  const config = {
-    module: { rules: [] },
-    plugins: [],
-    resolveLoader: { alias: {} },
-    ...storybookBaseConfig
+  const config = merge(storybookBaseConfig, require('@instructure/ui-webpack-config'))
+
+  // need to override this instead of merge...
+  config.optimization = require('@instructure/ui-webpack-config/config/optimization')
+  if (process.env.NODE_ENV === 'production') {
+    config.devtool = 'none'
   }
 
-  config.module.rules = [
-    ...config.module.rules,
-    ...instConfig.module.rules
-  ]
-
-  config.plugins = [
-    ...config.plugins,
-    ...instConfig.plugins
-  ]
-
   config.resolveLoader.alias = {
-   ...config.resolveLoader.alias,
-   ...instConfig.resolveLoader.alias,
-   'examples-loader': require.resolve('@instructure/generate-examples/lib/examples-loader')
+    ...config.resolveLoader.alias,
+    'examples-loader': require.resolve('@instructure/generate-examples/lib/examples-loader')
   }
 
   console.log(`Starting Storybook with React version ${React.version}...`)

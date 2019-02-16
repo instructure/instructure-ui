@@ -11,10 +11,10 @@
   "homepage": "https://instructure.github.io/instructure-ui/",
   "bugs": "https://github.com/instructure/instructure-ui/issues",
   "scripts": {
-    "prestart": "yarn build",
+    "prestart": "yarn bundle",
     "start": "ui-scripts --server -p 8001",
     "start:watch": "ui-build --bundle --watch -p 8080",
-    "build": "ui-build --bundle",
+    "bundle": "ui-build --bundle",
     "lint": "ui-test --lint",
     "lint:fix": "ui-test --lint --fix",
     "clean": "ui-build --clean"

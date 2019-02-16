@@ -24,9 +24,7 @@
 const fs = require('fs')
 const ghpages = require('gh-pages')
 const { getPackageJSON } = require('@instructure/pkg-utils')
-
-const { runCommandAsync } = require('./command')
-const { error, info } = require('./logger')
+const { runCommandSync, error, info } = require('@instructure/command-utils')
 
 const {
  GIT_REMOTE_URL,
@@ -34,7 +32,7 @@ const {
  GIT_EMAIL
 } = process.env
 
-exports.publishGithubPages = async function publishGithubPages (config = {
+exports.publishGithubPages = function publishGithubPages (config = {
   gh_pages_dir: '.',
   gh_pages_branch: 'gh-pages'
 }) {
@@ -47,10 +45,10 @@ exports.publishGithubPages = async function publishGithubPages (config = {
   info(`📖   Repository: ${GIT_REMOTE_URL}...`)
   info(`📖   Branch: ${config.gh_pages_branch}...`)
 
-  await runCommandAsync('touch', [`${config.gh_pages_dir}/.nojekyll`])
+  runCommandSync('touch', [`${config.gh_pages_dir}/.nojekyll`])
 
   if (config.gh_pages_cname) {
-    await runCommandAsync('echo', [`"${config.gh_pages_cname}"`, '>>', `${config.gh_pages_dir}/CNAME`])
+    fs.writeFileSync(`${config.gh_pages_dir}/CNAME`, config.gh_pages_cname)
   }
 
   return new Promise((resolve, reject) => {
@@ -60,7 +58,9 @@ exports.publishGithubPages = async function publishGithubPages (config = {
       user: {
         name: GIT_USERNAME,
         email: GIT_EMAIL
-      }
+      },
+      silent: true,
+      dotfiles: true
     }, (err) => {
       if (err) {
         if (typeof reject === 'function') {

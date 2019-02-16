@@ -8,18 +8,22 @@ COMPONENT_TEMPLATE_DIR=$PACKAGE_TEMPLATE_DIR/src/components/Component
 
 current_version=$(node -p "require('./lerna').version")
 
-# If no args are supplied, ask for user input
-if [ $# -eq 0 ]; then
-  read -p 'Component name (PascalCase): ' component
-else
-  component=$1
+read -p 'Component name (in PascalCase, e.g. NumberInput): ' component
+read -p 'Package name or <enter> to generate the package name: ' package
+
+if [ ! $component ]; then
+  echo Invalid component name!
+  exit 1
 fi
 
-package=`echo ${component} | sed 's/\([a-z0-9]\)\([A-Z]\)/\1\-\2/g' | sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+if [ ! $package ]; then
+  package=`echo ${component} | sed 's/\([a-z0-9]\)\([A-Z]\)/\1\-\2/g' | sed 'y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/'`
+  package="ui-${package}"
+fi
 
 export COMPONENT=$component
-export PACKAGE="ui-${package}"
 export VERSION=$current_version
+export PACKAGE=$package
 
 if [ ! -d "$PACKAGE_DIR" ]; then
   echo Cannot find component directory!

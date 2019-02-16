@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 const path = require('path')
-const { readPkgUp } = require('@instructure/pkg-utils')
+const { readPackage } = require('@instructure/pkg-utils')
 
 const resolve = require('eslint-module-utils/resolve').default
 const resolveImportType = require('eslint-plugin-import/lib/core/importType').default
@@ -35,7 +35,7 @@ module.exports = {
   create: function noRelativePackages (context) {
 
     function findNamedPackage (filePath) {
-      const found = readPkgUp.sync({cwd: filePath, normalize: false})
+      const found = readPackage({cwd: filePath})
       // console.log(found)
       if (found.pkg && !found.pkg.name) {
         return findNamedPackage(path.join(found.path, '../..'))

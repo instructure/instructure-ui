@@ -32,7 +32,7 @@
     "chai-as-promised": "^7.1.1",
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
-    "dom-testing-library": "^3.16.5",
+    "dom-testing-library": "^3.16.6",
     "fetch-mock": "^7.3.0",
     "jsdom-global": "^3.0.2",
     "keycode": "^2",

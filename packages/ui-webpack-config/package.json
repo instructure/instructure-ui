@@ -18,7 +18,7 @@
   "dependencies": {
     "@instructure/babel-plugin-themeable-styles": "^5",
     "@instructure/config-loader": "^5",
-    "babel-loader": "^8.0.5",
+    "@instructure/ui-babel-preset": "^5",
     "css-loader": "^2.1.0",
     "eslint-loader": "^2.1.2",
     "file-loader": "^3.0.1",

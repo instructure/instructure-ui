@@ -21,20 +21,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const readPkgUp = require('read-pkg-up')
-const fs = require('fs')
 
-const getPackage = exports.getPackage = () => {
+const fs = require('fs')
+const path = require('path')
+const readPkgUp = require('read-pkg-up')
+const Package = require('@lerna/package')
+
+exports.getPackage = function getPackage (options) {
+  const result = readPackage(options)
+  return new Package(result.pkg, path.dirname(result.path))
+}
+
+exports.getPackageJSON = function getPackageJSON (options) {
+  return readPackage(options).pkg
+}
+
+exports.getPackagePath = function getPackagePath (options) {
+  return readPackage(options).path
+}
+
+function readPackage (options) {
+  // eslint-disable-next-line no-param-reassign
+  options = {
+    cwd: process.cwd(),
+    normalize: false,
+    ...options
+  }
   return readPkgUp.sync({
-    cwd: fs.realpathSync(process.cwd()),
-    normalize: false
+    cwd: fs.realpathSync(options.cwd),
+    normalize: options.normalize
   })
 }
-
-exports.getPackageJSON = () => {
-  return getPackage().pkg
-}
-
-exports.getPackagePath = () => {
-  return getPackage().path
-}
+exports.readPackage = readPackage

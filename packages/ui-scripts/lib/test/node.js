@@ -22,14 +22,11 @@
  * SOFTWARE.
  */
 const { getPackageJSON } = require('@instructure/pkg-utils')
-
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 const { main } = getPackageJSON()
 const commands = {
   node: getCommand('node', [main || 'lib/index.js'], [])
 }
 
-const result = runCommandsConcurrently(commands)
-
-process.exit(result.status)
+process.exit(runCommandsConcurrently(commands).status)

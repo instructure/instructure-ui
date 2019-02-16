@@ -24,7 +24,7 @@
 
 const {
   resolve,
-  relative,
+  // relative,
   dirname,
   isAbsolute
 } = require('path')
@@ -77,7 +77,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
           prepend: getPostCSSPlugins(thisPluginOptions.postcssrc),
           processCss: (css, filepath) => {
             // eslint-disable-next-line no-console
-            console.log(`[transform-themeable]: ${relative(process.cwd(), filepath)}`)
+            // console.log(`[transform-themeable]: ${relative(process.cwd(), filepath)}`)
 
             if (!STYLES.has(filepath)) {
               STYLES.set(filepath, css)
@@ -110,7 +110,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             if (!css) return
 
             // eslint-disable-next-line no-console
-            console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
+            // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
 
             path.parentPath.replaceWith(
               generateVariableDeclaration(path.node.local.name, tokens, css, componentId)
@@ -139,7 +139,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             if (!css) return
 
             // eslint-disable-next-line no-console
-            console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
+            // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
 
             if (!t.isExpressionStatement(path.parent)) {
               path.replaceWithSourceString(transformCSSRequire(tokens, css, componentId))
@@ -161,6 +161,9 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
   function setDisplayNameAfter(path, id) {
     const displayName = id.name
+
+    // eslint-disable-next-line no-console
+    console.log(`[transform-themeable]: ${displayName}`)
 
     var blockLevelStmnt
     path.find(function (path) {

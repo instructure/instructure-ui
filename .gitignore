@@ -14,3 +14,4 @@ __build__
 .npmrc
 .env
 .env.test
+.tmp/

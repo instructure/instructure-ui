@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 const path = require('path')
-const { runCommandsConcurrently, getCommand, resolveBin } = require('../utils/command')
+const { runCommandsConcurrently, getCommand, resolveBin } = require('@instructure/command-utils')
 
 let command = 'mocha'
 let args = [
   '**/*.test.js',
   '--colors',
-  '--require @babel/register',
-  '--require @babel/polyfill',
+  '--require', '@babel/register',
+  '--require', '@babel/polyfill',
   '--exit',
   `--opts ${path.resolve(process.cwd(), 'mocha.opts')}`
 ]
@@ -49,6 +49,4 @@ const commands = {
   node: getCommand(command, args, vars)
 }
 
-const result= runCommandsConcurrently(commands)
-
-process.exit(result.status)
+process.exit(runCommandsConcurrently(commands).status)

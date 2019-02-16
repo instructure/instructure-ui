@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 // ui-build src --watch
 // ui-build --watch src
 const src = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1))[0] || 'src'
@@ -40,9 +40,7 @@ if (process.argv.includes('--watch')) {
   vars.push(`NODE_ENV=${process.env.NODE_ENV}`)
 }
 
-const result = runCommandsConcurrently({
-  es: getCommand('babel', [...args, '--out-dir es'], [...vars, 'ES_MODULES=1']),
-  lib: getCommand('babel', [...args, '--out-dir lib'], vars)
-})
-
-process.exit(result.status)
+process.exit(runCommandsConcurrently({
+  es: getCommand('babel', [...args, '--out-dir', 'es'], [...vars, 'ES_MODULES=1']),
+  lib: getCommand('babel', [...args, '--out-dir', 'lib'], vars)
+}).status)

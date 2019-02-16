@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 process.exit(runCommandsConcurrently({
   clean: getCommand('rimraf', [
@@ -33,4 +33,4 @@ process.exit(runCommandsConcurrently({
     '.babel-cache',
     '.cache'
   ])
-}))
+}).status)

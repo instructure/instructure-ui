@@ -39,7 +39,7 @@ module.exports = function (content, map, meta) {
   const loader = this
   const callback = loader.async()
   const filePath = loader.resourcePath
-  const relativePath = path.relative(process.cwd(), filePath)
+  // const relativePath = path.relative(process.cwd(), filePath)
 
   if (map) {
     if (typeof map === 'string') {
@@ -89,7 +89,7 @@ module.exports = function (content, map, meta) {
     .process(source, opts)
     .then((result) => {
       // eslint-disable-next-line no-console
-      console.log(`[themeable-css-loader]: ${relativePath}`)
+      // console.log(`[themeable-css-loader]: ${relativePath}`)
 
       result.warnings().forEach((msg) => {
         loader.emitWarning(msg.toString())

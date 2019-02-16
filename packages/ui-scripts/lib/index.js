@@ -23,17 +23,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { error, info } = require('./utils/logger')
+const { error, info } = require('@instructure/command-utils')
 
 require('dotenv').config()
 
 const commands = [
-  '--release',
+  '--publish',
+  '--fix-publish',
   '--post-publish',
   '--bump',
   '--deploy-docs',
-  '--deprecate-package',
-  '--publish-package',
   '--build',
   '--test',
   '--commit',
@@ -42,7 +41,9 @@ const commands = [
   '--lint-commit',
   '--clean',
   '--install-react',
-  '--server'
+  '--server',
+  '--tag',
+  '--deprecate'
 ]
 
 function listCommands () {
@@ -51,18 +52,16 @@ function listCommands () {
 
 if (process.argv.includes('--help')) {
   listCommands()
-} else if (process.argv.includes('--release')) {
-  require('./release')
 } else if (process.argv.includes('--post-publish')) {
   require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
+} else if (process.argv.includes('--publish')) {
+  require('./publish')
+} else if (process.argv.includes('--fix-publish')) {
+  require('./fix-publish')
 } else if (process.argv.includes('--deploy-docs')) {
   require('./deploy-docs')
-} else if (process.argv.includes('--deprecate-package')) {
-  require('./deprecate-package')
-} else if (process.argv.includes('--publish-package')) {
-  require('./publish-package')
 } else if (process.argv.includes('--build')) {
   require('./build')
 } else if (process.argv.includes('--test')) {
@@ -81,6 +80,10 @@ if (process.argv.includes('--help')) {
   require('./install-react')
 } else if (process.argv.includes('--server')) {
   require('./server')
+} else if (process.argv.includes('--tag')) {
+  require('./tag')
+} else if (process.argv.includes('--deprecate')) {
+  require('./deprecate')
 } else {
   error('[ui-scripts]: Invalid command!')
   listCommands()

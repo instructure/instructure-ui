@@ -27,9 +27,11 @@ const {
   buildSVGs,
   buildFonts,
   buildReact,
-  buildAll
+  buildAll,
+  clean
 } = require('@instructure/ui-icons-build')
 
+gulp.task('clean', clean)
 gulp.task('export', exportFromSketch)
 gulp.task('build:svgs', buildSVGs)
 gulp.task('build:fonts', buildFonts)

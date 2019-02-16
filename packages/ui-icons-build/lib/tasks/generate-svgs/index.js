@@ -23,7 +23,6 @@
  */
 
 const gulp = require('gulp')
-const sketch = require('gulp-sketch')
 const svgmin = require('gulp-svgmin')
 const cheerio = require('gulp-cheerio')
 const changed = require('gulp-changed')
@@ -37,6 +36,7 @@ const which = require('which')
 const handleErrors = require('../../util/handle-errors')
 const config = require('../../config')
 const formatName = require('../../util/format-name')
+const sketch = require('../../util/sketch')
 
 const toComponentName = function (name, variant = '') {
   return name ? formatName(config.react.componentBaseName) + formatName(name) + formatName(variant) : null

@@ -22,10 +22,8 @@
  * SOFTWARE.
  */
 
-const getPackages = require('@instructure/pkg-utils/lib/get-packages')
-
-const { info, error } = require('./utils/logger')
-const { runCommandAsync } = require('./utils/command')
+const getPackages = require('@instructure/pkg-utils')
+const { info, error, runCommandAsync } = require('@instructure/command-utils')
 
 info(
 `This script checks for packages used by a consuming app and then sets up (or removes, if you pass the --unlink flag) a yarn link for each package that it does use.
@@ -61,7 +59,7 @@ async function getUsedPackages() {
     getPackages().map(async pkg => {
       let packageIsUsed = false
       try {
-        const { stdout } = await runCommandAsync('yarn', ['why', pkg.name, '--cwd', appDir])
+        const { stdout } = await runCommandAsync('yarn', ['why', pkg.name, '--cwd', appDir], [], { stdio: 'pipe'})
         info(stdout)
         packageIsUsed = stdout.includes(' Found')
       } catch (err) {

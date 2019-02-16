@@ -21,38 +21,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const fs = require('fs')
-const { getPackagePath } = require('@instructure/pkg-utils')
-const { runCommandSync } = require('./utils/command')
+const semver = require('semver')
+const { getPackage } = require('@instructure/pkg-utils')
+const { runCommandSync, error, info } = require('@instructure/command-utils')
 
 const { argv } = process
 
-const version = argv[argv.indexOf('--install-react') + 1]
-
-let packagePath, pkgJSON, originalResolutions
-
-if (['15', '16'].includes(version)) {
-  packagePath = getPackagePath()
-  pkgJSON = JSON.parse(fs.readFileSync(packagePath))
-  originalResolutions = pkgJSON.resolutions
-
-  pkgJSON.resolutions = {
-    ...(originalResolutions || {}),
-    'react': `^${version}`,
-    'react-dom': `^${version}`
-  }
-
-  fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
-}
-
 try {
-  runCommandSync('yarn', ['--pure-lockfile'])
+  installReact()
 } catch (err) {
-  console.error(err)
+  error(err)
   process.exit(1)
 }
 
-if (packagePath && pkgJSON) {
-  pkgJSON.resolutions = originalResolutions
-  fs.writeFileSync(packagePath, JSON.stringify(pkgJSON, null, 2) + '\n')
+async function installReact () {
+  const pkgInfo = JSON.parse(
+    runCommandSync('yarn', ['info', 'react', '--json'], [], { stdio: 'pipe' }).stdout
+  ).data
+
+  const latest = pkgInfo['dist-tags'].latest
+
+  let version = `${argv[argv.indexOf('--install-react') + 1]}`.trim()
+  version = semver.coerce(version) || latest
+
+  info(`Version: ${version}`)
+
+  let originalResolutions, pkg
+
+  if ([15, 16].includes(semver.major(version))) {
+    pkg = getPackage()
+    originalResolutions = {...pkg.get('resolutions')}
+
+    pkg.set('resolutions', {
+      ...(originalResolutions || {}),
+      'react': `^${version}`,
+      'react-dom': `^${version}`
+    })
+
+    info(`Updating resolutions for React to ${version}...`)
+
+    await pkg.serialize()
+  }
+
+  try {
+    info(`Installing React...`)
+    runCommandSync('yarn', ['--pure-lockfile', '--force'])
+  } catch (err) {
+    error(err)
+    process.exit(1)
+  }
+
+  runCommandSync('yarn', ['list', 'react'])
+
+  if (pkg) {
+    info(`Resetting resolutions...`)
+    pkg.refresh()
+    pkg.set('resolutions', originalResolutions)
+    await pkg.serialize()
+  }
 }

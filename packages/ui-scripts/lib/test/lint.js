@@ -23,7 +23,7 @@
  */
 
 
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 const paths = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1)) || []
 let jspaths = ['.']
@@ -53,6 +53,4 @@ if (csspaths.length) {
   commands['stylelint'] = getCommand('stylelint', csspaths)
 }
 
-const result = runCommandsConcurrently(commands)
-
-process.exit(result.status)
+process.exit(runCommandsConcurrently(commands).status)

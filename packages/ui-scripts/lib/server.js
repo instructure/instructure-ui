@@ -21,9 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandsConcurrently, getCommand } = require('./utils/command')
-
-let result
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 // ui-scripts --server -p 8080
 const args = process.argv.slice(2)
@@ -33,9 +31,7 @@ if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-result = runCommandsConcurrently({
+process.exit(runCommandsConcurrently({
   // http-server __build__ -p 8001
   server: getCommand('http-server', ['__build__', '-p', port], [])
-})
-
-process.exit(result.status)
+}).status)

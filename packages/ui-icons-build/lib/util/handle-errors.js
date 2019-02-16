@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const gutil = require('gulp-util')
+const PluginError = require('plugin-error')
 
 module.exports = (errorObject) => {
-  gutil.log(errorObject)
   // Keep gulp from hanging on this task
-  if (this && typeof this.emit === 'function') this.emit('end')
+  if (this && typeof this.emit === 'function') {
+    this.emit('error', new PluginError('[ui-icons-build]', errorObject, { showStack: true }))
+  }
 }

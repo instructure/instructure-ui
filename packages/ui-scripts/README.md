@@ -69,19 +69,25 @@ To install a specific version of React and ReactDOM without updating `package.js
 To update all package versions
 (defaults to determining the version automatically using commit messages):
 
-`yarn ui-scripts --bump [version]`
+`yarn ui-scripts --bump [version|major|minor|patch]`
 
-#### `release`
+#### `publish`
 
-To release
-(NPM publish, create Git tag, deploy docs, create Jira version, Slack notification)
-for all packages (defaults to current version):
+To publish all packages (defaults to current version):
 
-`yarn ui-scripts --release [version]`
+`yarn ui-scripts --publish [version]`
+
+#### `fix-publish`
+
+If the publish command fails, you can run the `fix-publish` script to publish
+a version if it hasn't been published already. This script will try to determine
+(using `npm info`) if the version is already published before publishing.
+
+`yarn ui-scripts --fix-publish [version]`
 
 #### `post-publish`
 
-To run just the post-publish steps
+To run post-publish steps
 (create Git tag, create Jira version, Slack notification)
 of the release script:
 
@@ -89,29 +95,9 @@ of the release script:
 
 #### `deploy-docs`
 
-To run just the deploy of the documentation (to Github pages):
+To run the deploy of the documentation (to Github pages):
 
 `yarn ui-scripts --deploy-docs`
-
-#### `deprecate-package`
-
-To deprecate a package with the specified version (defaults to current version):
-
-`yarn ui-scripts --deprecate-package [version]`
-
-To run for all packages, run from the repo root:
-
-`yarn lerna exec --stream -- ui-scripts --deprecate-package [version]`
-
-#### `publish-package`
-
-To publish a package (if [version] is already published, it will tell you):
-
-`yarn ui-scripts --publish-package [version]`
-
-To run for all packages, run from the repo root:
-
-`yarn lerna exec --stream -- ui-scripts --publish-package [version]`
 
 #### `examples`
 
@@ -129,6 +115,21 @@ To start up a server to test production builds of examples or docs:
 
 `yarn ui-scripts --server -p 8080`
 
+#### `tag`
+
+To add an NPM dist-tag for all packages:
+
+`yarn ui-scripts --tag add 5.11.0 latest`
+
+To remove an NPM dist-tag for all packages:
+
+`yarn ui-scripts --tag rm 5.11.0 latest`
+
+#### `deprecate`
+
+To deprecate all packages (optional arguments: version, fix version):
+
+`yarn ui-scripts --deprecate 5.11.0 5.11.1`
 
 ### Configuration
 

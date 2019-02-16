@@ -23,7 +23,7 @@
  */
 
 
-const { runCommandsConcurrently, getCommand } = require('../utils/command')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 const ENV = process.env.NODE_ENV || 'production'
 

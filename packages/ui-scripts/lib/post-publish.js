@@ -22,10 +22,27 @@
  * SOFTWARE.
  */
 const { getPackageJSON } = require('@instructure/pkg-utils')
+const { error, info } = require('@instructure/command-utils')
 
-const { getConfig } = require('./utils/get-config')
-const { postPublish } = require('./utils/release')
-const { error } = require('./utils/logger')
+const { getConfig } = require('./utils/config')
+const {
+ hasSlackConfig,
+ postStableReleaseSlackMessage,
+ postReleaseCandidateSlackMessage
+} = require('./utils/slack')
+const {
+ hasJiraConfig,
+ getIssuesInRelease,
+ getJiraVersion,
+ updateJiraIssues,
+ getIssuesInCommit
+} = require('./utils/jira')
+const {
+  isReleaseCommit,
+  createGitTagForRelease,
+  setupGit,
+  checkWorkingDirectory
+} = require('./utils/git')
 
 try {
   const pkgJSON = getPackageJSON()
@@ -33,4 +50,39 @@ try {
 } catch (err) {
   error(err)
   process.exit(1)
+}
+
+async function postPublish (packageName, releaseVersion, config = {}) {
+  setupGit()
+  checkWorkingDirectory()
+
+  info(`📦  Running post-publish steps for ${releaseVersion} of ${packageName}...`)
+
+  let jiraVersion = { name: `${packageName} v${releaseVersion}` }
+  let issueKeys = []
+
+  if (isReleaseCommit(releaseVersion)) {
+   createGitTagForRelease(releaseVersion)
+
+   if (hasJiraConfig(config)) {
+     issueKeys = await getIssuesInRelease(config)
+     jiraVersion = await getJiraVersion(jiraVersion.name, config)
+     if (issueKeys.length > 0 && jiraVersion.id) {
+       await updateJiraIssues(issueKeys, jiraVersion.name, config)
+     }
+   }
+
+   if (hasSlackConfig(config)) {
+     postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
+   }
+  } else {
+   if (hasJiraConfig(config)) {
+     issueKeys = await getIssuesInCommit(config)
+   }
+   if (hasSlackConfig(config) && issueKeys.length > 0) {
+     postReleaseCandidateSlackMessage(jiraVersion.name, issueKeys, config)
+   }
+  }
+
+  info(`📦  Post-publish steps for ${releaseVersion} of ${packageName} complete!`)
 }

@@ -28,7 +28,7 @@ const DEBUG = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'developmen
 const exclude = [ /node_modules/, /\/lib\//, /\/es\// ]
 
 const babelLoader = {
-  loader: require.resolve('babel-loader'),
+  loader: 'babel-loader',
   options: {
     cacheDirectory: !DEBUG ? false : '.babel-cache'
   }

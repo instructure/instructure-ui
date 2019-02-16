@@ -21,20 +21,48 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { getPackageJSON } = require('@instructure/pkg-utils')
+const { getPackageJSON, getPackages } = require('@instructure/pkg-utils')
+const { runCommandAsync, error, info } = require('@instructure/command-utils')
 
-const { deprecatePackage } = require('./utils/release')
-const { error } = require('./utils/logger')
-const { getConfig } = require('./utils/get-config')
+const { createNPMRCFile } = require('./utils/npm')
+const { getConfig } = require('./utils/config')
 
 try {
   // optional fix version argument:
-  // ui-scripts --deprecate-package 5.11.0
-  const fixVersion = process.argv[3]
-  const message = fixVersion ? `A critical bug was fixed in ${fixVersion}` : ''
+  // e.g. ui-scripts --tag add 5.11.0 rc
+  // e.g. ui-scripts --tag rm 5.11.0 latest
   const pkgJSON = getPackageJSON()
-  deprecatePackage(pkgJSON.name, pkgJSON.version, message, getConfig(pkgJSON))
+  const command = process.argv[3] || 'add'
+  const versionToTag = process.argv[4] || pkgJSON.version
+  const tag = process.argv[5] || 'latest'
+
+  distTag(command, versionToTag, tag, getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)
+}
+
+async function distTag (command, versionToTag, tag, config) {
+  createNPMRCFile(config)
+
+  info(`📦  Version to tag as ${tag}: ${versionToTag}`)
+  const reply = await confirm('Continue? [y/n]\n')
+  if (!['Y', 'y'].includes(reply.trim())) {
+    process.exit(0)
+  }
+
+  return Promise.all(getPackages().map(async pkg => {
+    if (pkg.private) {
+      info(`${pkg.name} is private.`)
+    } else {
+      const toTag = `${pkg.name}@${versionToTag}`
+      info(`📦  Running 'dist-tag ${command} ${toTag} ${tag}'...`)
+      try {
+        await runCommandAsync('npm', ['dist-tag', command, toTag, tag])
+      } catch (err) {
+        error(err)
+      }
+      info(`📦  ${toTag} tags were successfully updated!`)
+    }
+  }))
 }

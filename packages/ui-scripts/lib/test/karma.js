@@ -24,7 +24,7 @@
 const path = require('path')
 const React = require('react')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
-const { getCommand, runCommandsConcurrently } = require('../utils/command')
+const { getCommand, runCommandsConcurrently } = require('@instructure/command-utils')
 
 const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`, 'NODE_OPTIONS=--max_old_space_size=8192']
 const { argv } = process
@@ -80,8 +80,6 @@ if (argv.includes('--testbed')) {
   vars.push('USE_TESTBED=1')
 }
 
-const result = runCommandsConcurrently({
+process.exit(runCommandsConcurrently({
   karma: getCommand('karma', args, vars)
-})
-
-process.exit(result.status)
+}).status)

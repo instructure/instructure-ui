@@ -60,7 +60,8 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
 
   if (opts.node) {
     plugins = plugins.concat([
-      require('babel-plugin-transform-ensure-ignore').default
+      require('babel-plugin-transform-ensure-ignore').default,
+      require('babel-plugin-dynamic-import-node')
     ])
   }
 
