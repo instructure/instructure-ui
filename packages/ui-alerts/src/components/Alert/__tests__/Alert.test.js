@@ -24,9 +24,10 @@
 
 import React from 'react'
 
-import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within, generateA11yTests } from '@instructure/ui-test-utils'
 
 import Alert from '../index'
+import AlertExamples from '../__examples__/Alert.examples'
 import styles from '../styles.css'
 
 describe('<Alert />', async () => {
@@ -53,6 +54,10 @@ describe('<Alert />', async () => {
     )
 
     expect(subject.getDOMNode()).to.exist()
+  })
+
+  describe('with generated examples', async () => {
+    generateA11yTests(AlertExamples)
   })
 
   it('should not render the Close button when `closeButtonLabel` is not provided', async () => {

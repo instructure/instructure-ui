@@ -21,47 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { mount, stub, spy, viewport } from './utils/sandbox'
-import { wait } from './utils/wait'
-import { within, withinEach } from './utils/within'
-import { expect } from './utils/expect'
-import { locator } from './utils/locator'
-import { debug, accessible } from './utils/helpers'
-import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, querySelector, matchesSelector } from './utils/selector'
-import { parseQueryArguments } from './utils/parseQueryArguments'
-import { generateA11yTests } from './utils/generateA11yTests'
-import {
-  findAllByQuery,
-  findByQuery,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame
-} from './utils/queries'
 
-export {
-  generateA11yTests,
-  viewport,
-  accessible,
-  parseQueryArguments,
-  findByQuery,
-  findAllByQuery,
-  matchesSelector,
-  querySelectorAll,
-  querySelector,
-  locator,
-  firstOrNull,
-  within,
-  withinEach,
-  wait,
-  expect,
-  mount,
-  stub,
-  spy,
-  find,
-  findAll,
-  findAllFrames,
-  findFrame,
-  debug
+import React from 'react'
+import { expect, accessible, mount } from '../index'
+
+export function generateA11yTests ({ componentName, sections, renderExample }, only = []) {
+  describe(`${componentName} should meet accessibility standards`, async () => {
+    sections.forEach(({ pages, sectionName, propName, propValue }, i) => {
+      if (only[0] && i === only[0]) return
+      const description = propName ? `rendered with prop '${propName}' = '${propValue}'` : 'rendered'
+      describe(`${description}`, async () => {
+        let rendered = 0
+        pages.forEach(({ examples }) => {
+          examples.forEach((example, j) => {
+            const index = j + rendered
+            if (only[1] && index !== only[1]) return
+
+            const Example = renderExample.bind(null, example)
+            const description = `with prop combination: ${JSON.stringify(example.componentProps, null, 2)} [${i},${j}]`
+            it(description, async () => {
+              await mount(<Example />)
+              expect(await accessible()).to.be.true()
+            })
+          })
+          rendered = rendered + examples.length
+        })
+      })
+    })
+  })
 }

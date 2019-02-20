@@ -24,9 +24,10 @@
 
 import React from 'react'
 
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, generateA11yTests } from '@instructure/ui-test-utils'
 import Breadcrumb, { BreadcrumbLink } from '../index'
 import BreadcrumbLocator from '../locator'
+import BreadcrumbExamples from '../__examples__/Breadcrumb.examples'
 
 describe('<Breadcrumb />', async () => {
   it('should render the label as an aria-label attribute', async () => {
@@ -41,6 +42,10 @@ describe('<Breadcrumb />', async () => {
     expect(label.getAttribute('aria-label')).to.equal('Settings')
   })
 
+  describe('with generated examples', async () => {
+    generateA11yTests(BreadcrumbExamples)
+  })
+
   it('should render an icon as a separator', async () => {
     await mount(
       <Breadcrumb label="Settings">
@@ -52,16 +57,5 @@ describe('<Breadcrumb />', async () => {
     const icon = await breadcrumb.find('svg')
 
     expect(icon.getAttribute('aria-hidden')).to.equal('true')
-  })
-
-  it('should meet a11y standards', async () => {
-    await mount(
-      <Breadcrumb label="Settings">
-        <BreadcrumbLink href="#">Account</BreadcrumbLink>
-        <BreadcrumbLink>Settings</BreadcrumbLink>
-      </Breadcrumb>
-    )
-    const breadcrumb = await BreadcrumbLocator.find()
-    expect(await breadcrumb.accessible()).to.be.true()
   })
 })

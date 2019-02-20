@@ -23,19 +23,20 @@
  */
 
 import React from 'react'
-import { mount, expect, stub } from '@instructure/ui-test-utils'
+import { mount, expect, stub, generateA11yTests } from '@instructure/ui-test-utils'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 import Button from '../index'
 import ButtonLocator from '../locator'
+import ButtonExamples from '../__examples__/Button.examples'
 
 import styles from '../styles.css'
 
 describe('<Button/>', async () => {
   it('should render the children as button text', async () => {
-  await mount(
-    <Button>Hello World</Button>
-  )
+    await mount(
+      <Button>Hello World</Button>
+    )
     expect(await ButtonLocator.find(':contains(Hello World)')).to.exist()
   })
 
@@ -306,12 +307,8 @@ describe('<Button/>', async () => {
   })
 
   describe('for a11y', async () => {
-    it('should meet standards', async () => {
-      await mount(
-        <Button>Hello World</Button>
-      )
-      const button = await ButtonLocator.find()
-      expect(await button.accessible()).to.be.true()
+    describe('with generated examples', async () => {
+      generateA11yTests(ButtonExamples)
     })
 
     it('should meet standards when onClick is given', async () => {

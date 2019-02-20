@@ -35,14 +35,14 @@ export default {
         <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
       ],
       [
-        <BreadcrumbLink key="0" onClick={() => {}}>
-          <IconBank size="small" /> Item Bank
+        <BreadcrumbLink key="0" onClick={() => {}} icon={IconBank}>
+          Item Bank
         </BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#">
-          <IconBank size="small" /> History
+        <BreadcrumbLink key="1" href="#" icon={IconBank}>
+          History
         </BreadcrumbLink>,
-        <BreadcrumbLink key="2">
-          <IconBank size="small" /> Question
+        <BreadcrumbLink key="2" icon={IconBank}>
+          Question
         </BreadcrumbLink>
       ]
     ]

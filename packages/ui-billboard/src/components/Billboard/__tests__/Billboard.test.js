@@ -23,9 +23,16 @@
  */
 
 import React from 'react'
-import { mount, expect, stub, within } from '@instructure/ui-test-utils'
+import {
+  mount,
+  expect,
+  stub,
+  within,
+  generateA11yTests
+} from '@instructure/ui-test-utils'
 
 import Billboard from '../index'
+import BillboardExamples from '../__examples__/Billboard.examples'
 
 describe('<Billboard />', async () => {
   it('should render', async () => {
@@ -34,6 +41,10 @@ describe('<Billboard />', async () => {
     )
     const billboard = within(subject.getDOMNode())
     expect(billboard).to.exist()
+  })
+
+  describe('with generated examples', async () => {
+    generateA11yTests(BillboardExamples)
   })
 
   it('should render a heading with the correct tag', async () => {
@@ -156,17 +167,5 @@ describe('<Billboard />', async () => {
       const billboard = within(subject.getDOMNode())
       expect(billboard.getTagName()).to.equal('div')
     })
-  })
-
-  it('should meet a11y standards', async () => {
-    const subject = await mount(
-      <Billboard
-        heading='Test heading'
-        headingAs='h2'
-        message='this is what i am testing'
-      />
-    )
-    const billboard = within(subject.getDOMNode())
-    expect(await billboard.accessible()).to.be.true()
   })
 })
