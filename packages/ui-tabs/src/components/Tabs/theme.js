@@ -22,30 +22,11 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-themeable/lib/utils/color'
-import TabPanel from '../index'
-
-describe('TabPanel.theme', async () => {
-  describe('with the default theme', async () => {
-    const variables = TabPanel.generateTheme()
-
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 3:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(3)
-      })
-    })
-  })
-
-  describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = TabPanel.generateTheme('canvas-high-contrast')
-
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(4.5)
-      })
-    })
-  })
-})
+export default function ({ colors, breakpoints }) {
+  return {
+    defaultBackground: colors.backgroundLightest,
+    small: breakpoints.small,
+    medium: breakpoints.medium,
+    large: breakpoints.large
+  }
+}

@@ -24,26 +24,26 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
-import TabPanel from '../index'
+import TabButton from '../index'
 
-describe('TabPanel.theme', async () => {
+describe('TabButton.theme', async () => {
   describe('with the default theme', async () => {
-    const variables = TabPanel.generateTheme()
+    const variables = TabButton.generateTheme()
 
     describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 3:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
+      it('should ensure text and tab background meet 3:1 contrast', async () => {
+        expect(contrast(variables.secondarySelectedColor, variables.secondarySelectedBackground))
           .to.be.above(3)
       })
     })
   })
 
   describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = TabPanel.generateTheme('canvas-high-contrast')
+    const variables = TabButton.generateTheme('canvas-high-contrast')
 
     describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
+      it('should ensure text and tab background meet 4.5:1 contrast', async () => {
+        expect(contrast(variables.secondarySelectedColor, variables.secondarySelectedBackground))
           .to.be.above(4.5)
       })
     })

@@ -22,3 +22,4 @@
  * SOFTWARE.
  */
 export TabList, { Tab, TabPanel } from './TabList'
+export Tabs from './Tabs'

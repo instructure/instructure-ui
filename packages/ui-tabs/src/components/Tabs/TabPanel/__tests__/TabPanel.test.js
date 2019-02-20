@@ -22,30 +22,23 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+import React from 'react'
+import { expect, find, mount } from '@instructure/ui-test-utils'
+
 import TabPanel from '../index'
 
-describe('TabPanel.theme', async () => {
-  describe('with the default theme', async () => {
-    const variables = TabPanel.generateTheme()
+describe('<TabPanel />', async () => {
+  it('should render children', async () => {
+    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
 
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 3:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(3)
-      })
-    })
+    const tabPanel = await find('[role="tabpanel"]')
+    expect(tabPanel.getTextContent()).to.equal('Panel contents')
   })
 
-  describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = TabPanel.generateTheme('canvas-high-contrast')
+  it('should have appropriate role attribute', async () => {
+    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
 
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(4.5)
-      })
-    })
+    const tabPanel = await find('[role="tabpanel"]')
+    expect(tabPanel.getAttribute('role')).to.equal('tabpanel')
   })
 })

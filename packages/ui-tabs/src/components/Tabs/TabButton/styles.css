@@ -1,0 +1,119 @@
+/* stylelint-disable no-descending-specificity */
+
+.root {
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  line-height: var(--lineHeight);
+  font-size: var(--fontSize);
+  cursor: pointer;
+  user-select: none;
+
+  &[aria-selected],
+  &[aria-disabled] {
+    cursor: default;
+  }
+
+  &[aria-disabled] {
+    opacity: 0.5;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.default,
+.secondary {
+  order: -1;
+  white-space: nowrap;
+}
+
+.secondary {
+  box-sizing: border-box;
+  padding: 0.7em 1em;
+  color: var(--secondaryColor);
+  margin-right: 0.2em; /* stylelint-disable-line property-blacklist */
+  margin-bottom: -0.0625rem; /* To overlay Tab over TabPanel top border */
+  border: 0.0625rem solid transparent;
+  border-top-left-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
+  border-top-right-radius: 0.1875rem; /* stylelint-disable-line property-blacklist */
+
+  &:first-of-type {
+    margin-left: 0; /* stylelint-disable-line property-blacklist */
+  }
+
+  &:not([aria-selected]):not([aria-disabled]):hover,
+  &[aria-selected] {
+    background: var(--secondarySelectedBackground);
+    border-color: var(--secondarySelectedBorderColor);
+  }
+
+  &:hover,
+  &[aria-selected],
+  &[aria-disabled] {
+    color: var(--secondarySelectedColor);
+  }
+
+  &[aria-selected] {
+    /* To overlay Tab over TabPanel top border */
+    /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+    z-index: 1;
+    border-bottom-color: var(--secondarySelectedBackground);
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.default {
+  padding: 1rem 1.25rem;
+  line-height: 1;
+  position: relative;
+  /* stylelint-disable-next-line scale-unlimited/declaration-strict-value */
+  z-index: 1;
+  color: var(--defaultColor);
+
+  &::after {
+    transition: all 0.2s ease-out;
+    transform: translate3d(0, 0, 0) scaleX(0.01);
+    content: "";
+    height: 0.25rem;
+    width: 100%;
+    position: absolute;
+    left: 0; /* stylelint-disable-line property-blacklist */
+    bottom: -0.0625rem;
+    opacity: 0;
+  }
+
+  &[aria-disabled] {
+    font-weight: normal;
+  }
+
+  &:not([aria-selected]):not([aria-disabled]):hover {
+    border-bottom-color: var(--defaultHoverBorderColor);
+  }
+
+  &[aria-selected]::after {
+    transform: translate3d(0, 0, 0) scaleX(1);
+    opacity: 1;
+    background-color: var(--defaultSelectedBorderColor);
+  }
+
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+.screenreader-only {
+  height: 0.0625rem;
+  width: 0.0625rem;
+  margin: -0.0625rem;
+  padding: 0;
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+/* stylelint-enable no-descending-specificity */

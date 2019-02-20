@@ -22,30 +22,18 @@
  * SOFTWARE.
  */
 
-import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-themeable/lib/utils/color'
-import TabPanel from '../index'
+export default function generator ({ colors, borders, spacing }) {
+  return {
+    color: colors.textDarkest,
+    background: colors.backgroundLightest,
+    borderColor: colors.borderMedium,
+    borderWidth: borders.widthSmall,
+    borderStyle: borders.style
+  }
+}
 
-describe('TabPanel.theme', async () => {
-  describe('with the default theme', async () => {
-    const variables = TabPanel.generateTheme()
-
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 3:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(3)
-      })
-    })
-  })
-
-  describe('with the "canvas-high-contrast" theme', async () => {
-    const variables = TabPanel.generateTheme('canvas-high-contrast')
-
-    describe('secondary variant', async () => {
-      it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
-        expect(contrast(variables.color, variables.background))
-          .to.be.above(4.5)
-      })
-    })
-  })
-})
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark']
+  }
+}
