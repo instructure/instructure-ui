@@ -21,20 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  sections: 'size',
-  permutations: [
-    'size',
-    { iconCount: [3, 5] },
-    { valueNow: [0, 2.4, 2.5, 5] }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'size',
+  propValues: {
+    size: ['small', 'medium', 'large'],
+    iconCount: [3, 5],
+    valueNow: [0, 2.4, 2.5, 5]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'Final rating',
-        valueMax: 5
-      }
+      label: 'Final rating',
+      valueMax: 5
     }
   }
 }

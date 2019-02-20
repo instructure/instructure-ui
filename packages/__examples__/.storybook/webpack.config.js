@@ -10,11 +10,6 @@ module.exports = (storybookBaseConfig, configType) => {
     config.devtool = 'none'
   }
 
-  config.resolveLoader.alias = {
-    ...config.resolveLoader.alias,
-    'examples-loader': require.resolve('@instructure/generate-examples/lib/examples-loader')
-  }
-
   console.log(`Starting Storybook with React version ${React.version}...`)
 
   if (parseFloat(React.version) < 16) {

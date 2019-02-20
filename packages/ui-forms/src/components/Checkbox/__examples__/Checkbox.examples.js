@@ -21,25 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'defaultChecked',
-    'indeterminate',
-    { messages: generateMessages()}
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        value: 'example',
-        label: 'A checkbox component'
-      },
-      filter: props.variant === 'toggle' && props.indeterminate
+      value: 'example',
+      label: 'A checkbox component'
     }
+  },
+  filter: (props) => {
+    return props.variant === 'toggle' && props.indeterminate
   }
 }

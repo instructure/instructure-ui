@@ -52,7 +52,7 @@ module.exports = [
   },
   {
     test: /\.js$/,
-    exclude: [...exclude],
+    exclude: [...exclude, /\.examples\.js$/],
     use: [
       {
         loader: 'thread-loader',
@@ -65,6 +65,15 @@ module.exports = [
           name: 'babel-loader-pool'
         }
       },
+      babelLoader
+    ]
+  },
+  {
+    test: /\.js$/,
+    include: [/\.examples\.js/],
+    exclude,
+    use: [
+      'component-examples-loader',
       babelLoader
     ]
   },
@@ -84,7 +93,11 @@ module.exports = [
   {
     test: /\.css$/,
     exclude: [...exclude, /ui-icons/],
-    use: [ babelLoader, 'themeable-css-loader', 'postcss-loader' ]
+    use: [
+      babelLoader,
+      'themeable-css-loader',
+      'postcss-loader'
+    ]
   },
   {
     test: /\.css$/,

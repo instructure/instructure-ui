@@ -22,44 +22,44 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { DrawerTray, DrawerContent } from '../'
+import { DrawerTray, DrawerContent } from '../index'
 import View from '../../View'
 
 export default {
-  renderProps: (props) => {
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: [
-          <DrawerTray
-            key="0"
-            id="DrawerLayoutTrayExample1"
-            open={true}
-            placement="start"
-            label="Drawer Tray Start Example"
+      children: [
+        <DrawerTray
+          key="0"
+          id="DrawerLayoutTrayExample1"
+          open={true}
+          placement="start"
+          label="Drawer Tray Start Example"
+        >
+          <View
+            as="div"
+            maxWidth="16rem"
+            textAlign="center"
+            margin="large auto"
+            padding="small"
           >
-            <View
-              as="div"
-              maxWidth="16rem"
-              textAlign="center"
-              margin="large auto"
-              padding="small"
-            >
-              Drawer tray
+            Drawer tray
+          </View>
+        </DrawerTray>,
+        <DrawerContent key="1" label="Drawer content example">
+          <div style={{background: 'white', height: '100%'}}>
+            <View as="div" padding="x-large">
+              Drawer content
             </View>
-          </DrawerTray>,
-          <DrawerContent key="1" label="Drawer content example">
-            <div style={{background: 'white', height: '100%'}}>
-              <View as="div" padding="x-large">
-                Drawer content
-              </View>
-            </div>
-          </DrawerContent>
-        ]
-      },
-      exampleProps: {
-        as: 'div',
-        borderWidth: 'small'
-      }
+          </div>
+        </DrawerContent>
+      ]
+    }
+  },
+  getExampleProps: (props) =>  {
+    return {
+      as: 'div',
+      borderWidth: 'small'
     }
   }
 }

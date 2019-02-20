@@ -22,42 +22,43 @@
  * SOFTWARE.
  */
 import React from 'react'
+
 import { PopoverTrigger, PopoverContent } from '../'
 
 export default {
-  permutations: [
-    'withArrow',
-    {placement: [
+  propValues: {
+    withArrow: [true, false],
+    placement: [
       'bottom center',
       'start top'
-    ]},
-    {dir: [
+    ],
+    dir: [
       'rtl',
       'ltr'
-    ]}
-  ],
-  renderProps: (props) => {
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        defaultShow: true,
-        children: [
-          <PopoverTrigger key="trigger">
-            <button>Show Popup</button>
-          </PopoverTrigger>,
-          <PopoverContent key="content">
-            <h2>Hello World</h2>
-          </PopoverContent>
-        ]
-      },
-      exampleProps: {
-        dir: props.dir,
-        as: 'div',
-        width: '100%',
-        height: '10rem',
-        margin: 'small',
-        padding: 'small',
-        textAlign: 'center'
-      }
+      defaultShow: true,
+      children: [
+        <PopoverTrigger key="trigger">
+          <button>Show Popup</button>
+        </PopoverTrigger>,
+        <PopoverContent key="content">
+          <h2>Hello World</h2>
+        </PopoverContent>
+      ]
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      dir: props.dir,
+      as: 'div',
+      width: '100%',
+      height: '10rem',
+      margin: 'small',
+      padding: 'small',
+      textAlign: 'center'
     }
   }
 }

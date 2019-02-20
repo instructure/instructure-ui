@@ -22,35 +22,32 @@
  * SOFTWARE.
  */
 import React from 'react'
+
 import View from '../../View'
 
 export default {
-  permutations: [
-    'size',
-    'alignContent',
-    {title: [
+  propValues: {
+    title: [
       null,
       'Graham Taylor'
-    ]},
-    {description: [
+    ],
+    description: [
       'Aliquip magna in aliquip aliquip sint culpa ullamco aliquip.',
       'Consectetur qui eiusmod labore eu ad commodo dolor ex consectetur sit id deserunt. Culpa cupidatat nisi pariatur non exercitation amet culpa Lorem sint do et laborum culpa. Eu pariatur eu elit culpa. Nisi minim irure fugiat irure ad deserunt eiusmod ex ipsum culpa proident aliquip aliqua aliquip.'
-    ]}
-  ],
-  renderProps: (props) => {
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        margin: 'x-large auto',
-        children: (
-          <View
-            as="div"
-            width="3rem"
-            height="3rem"
-            borderRadius="large"
-            background="inverse"
-          />
-        )
-      }
+      margin: 'x-large auto',
+      children: (
+        <View
+          as="div"
+          width="3rem"
+          height="3rem"
+          borderRadius="large"
+          background="inverse"
+        />
+      )
     }
   }
 }

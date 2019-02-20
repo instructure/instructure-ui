@@ -23,19 +23,15 @@
  */
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size'
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        title: 'Loading'
-      },
-      exampleProps: {
-        background: props.variant === 'inverse' ? 'inverse' : 'default'
-      }
+      title: 'Loading'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.variant === 'inverse' ? 'inverse' : 'default'
     }
   }
 }

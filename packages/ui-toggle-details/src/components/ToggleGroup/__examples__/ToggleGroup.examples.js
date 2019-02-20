@@ -25,19 +25,12 @@
 import React from 'react'
 
 export default {
-  sections: 'size',
-  permutations: [
-    'size',
-    'border',
-    'defaultExpanded'
-  ],
-  renderProps: (props) => {
+  sectionProp: 'size',
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        toggleLabel: 'Toggle the details',
-        summary: 'This is the summary',
-        children: <span>hello content</span>
-      }
+      toggleLabel: 'Toggle the details',
+      summary: 'This is the summary',
+      children: <span>hello content</span>
     }
   }
 }

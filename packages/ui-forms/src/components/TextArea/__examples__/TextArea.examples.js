@@ -21,25 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sections: 'layout',
-  permutations: [
-    'layout',
-    'size',
-    'disabled',
-    { placeholder: [null, 'Hello text area placeholder'] },
-    { defaultValue: [null, 'Some content for the text area'] },
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    placeholder: [null, 'Hello text area placeholder'],
+    defaultValue: [null, 'Some content for the text area'],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'A text area'
-      },
-      filter: props.placeholder && props.defaultValue
+      label: 'A text area'
     }
+  },
+  filter: (props) => {
+    return props.placeholder && props.defaultValue
   }
 }

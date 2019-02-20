@@ -21,22 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 const path = require('path')
 
 module.exports = {
-  cwd: path.resolve(__dirname, '../../'),
-  files: [
-    'packages/**/examples.json'
-  ],
-  parseExampleNameFromPath: function (filePath) {
-    const directories = path.dirname(filePath)
-      .split(path.sep)
-      .filter(part => part !== '__tests__')
-      .filter(part => part !== '__testfixtures__')
-      .filter(part => part !== '__examples__')
-      .filter(part => part !== '__fixtures__')
-      .filter(part => part !== '__examplefixtures__')
-    return directories.pop()
+  getComponentPath: (configFilePath) => {
+    return path.resolve(path.dirname(configFilePath), '../index.js')
   }
 }

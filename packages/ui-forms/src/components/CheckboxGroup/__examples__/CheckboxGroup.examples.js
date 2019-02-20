@@ -37,19 +37,16 @@ const getChildren = (variant) => {
 }
 
 export default {
-  sections: 'layout',
-  permutations: [
-    'layout',
-    'size',
-    { children: [getChildren('simple'), getChildren('toggle')]},
-    { messages: generateMessages()}
-  ],
-  renderProps: (props) => {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    children: [getChildren('simple'), getChildren('toggle')],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        name: 'sports',
-        description: 'Select your favorite sports'
-      }
+      name: 'sports',
+      description: 'Select your favorite sports'
     }
   }
 }

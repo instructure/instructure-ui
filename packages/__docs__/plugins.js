@@ -62,8 +62,8 @@ module.exports = [
       '**/ui-i18n/src/**/*.js',
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
-      '**/generate-examples/src/**/*.js',
-      '**/ui-decorator/src/**/*.js'
+      '**/ui-decorator/src/**/*.js',
+      '**/ui-component-examples/src/**/*.js'
     ],
     ignore: [
       '**/*-loader.js',
@@ -96,6 +96,7 @@ module.exports = [
       '**/media-capture/src/**',
 
       // deprecated packages and modules:
+      '**/generate-examples/**',
       '**/ui-container/**',
       '**/ui-core/**',
       '**/ui-elements/src/components/ContextBox/**',

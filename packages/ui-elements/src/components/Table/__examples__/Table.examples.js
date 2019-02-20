@@ -25,46 +25,44 @@
 import React from 'react'
 
 export default {
-  sections: 'size',
-  permutations: [
-    'size',
-    { striped: [undefined, 'columns', 'rows'] } // eslint-disable-line no-undefined
-  ],
-  renderProps: (props) => {
+  sectionProp: 'size',
+  propValues: {
+    size: ['small', 'medium', 'large'],
+    striped: [undefined, 'columns', 'rows'] // eslint-disable-line no-undefined
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        caption: 'Some great records',
-        children: [
-          <thead key="head">
-            <tr>
-              <th scope="col">Band</th>
-              <th scope="col">Best Album</th>
-              <th scope="col">Best Song</th>
-              <th scope="col">Record Label</th>
-            </tr>
-          </thead>,
-          <tbody key="body">
-            <tr>
-              <th scope="row">Beach House</th>
-              <td>Depression Cherry</td>
-              <td>Zebra</td>
-              <td>Sub Pop</td>
-            </tr>
-            <tr>
-              <th scope="row">Pixies</th>
-              <td>Surfer Rosa</td>
-              <td>Debaser</td>
-              <td>4AD</td>
-            </tr>
-            <tr>
-              <th scope="row">Falco</th>
-              <td>Falco III</td>
-              <td>Rock Me Amadeus</td>
-              <td>Capitol Europe</td>
-            </tr>
-          </tbody>
-        ]
-      }
+      caption: 'Some great records',
+      children: [
+        <thead key="head">
+          <tr>
+            <th scope="col">Band</th>
+            <th scope="col">Best Album</th>
+            <th scope="col">Best Song</th>
+            <th scope="col">Record Label</th>
+          </tr>
+        </thead>,
+        <tbody key="body">
+          <tr>
+            <th scope="row">Beach House</th>
+            <td>Depression Cherry</td>
+            <td>Zebra</td>
+            <td>Sub Pop</td>
+          </tr>
+          <tr>
+            <th scope="row">Pixies</th>
+            <td>Surfer Rosa</td>
+            <td>Debaser</td>
+            <td>4AD</td>
+          </tr>
+          <tr>
+            <th scope="row">Falco</th>
+            <td>Falco III</td>
+            <td>Rock Me Amadeus</td>
+            <td>Capitol Europe</td>
+          </tr>
+        </tbody>
+      ]
     }
   }
 }

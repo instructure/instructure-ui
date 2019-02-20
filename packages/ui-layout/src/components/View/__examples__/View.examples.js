@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import {
   SHADOW_TYPES,
   BORDER_WIDTHS,
@@ -29,23 +28,24 @@ import {
 } from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 export default {
-  sections: 'background',
-  permutations: [
-    'background',
-    { shadow: [undefined, ...Object.values(SHADOW_TYPES)] }, // eslint-disable-line no-undefined
-    { borderWidth: ['none', ...Object.values(BORDER_WIDTHS)] },
-    { borderRadius: ['none', ...Object.values(BORDER_RADII)] }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'background',
+  propValues: {
+    shadow: [undefined, ...Object.values(SHADOW_TYPES)], // eslint-disable-line no-undefined
+    borderWidth: [...Object.values(BORDER_WIDTHS)],
+    borderRadius: [...Object.values(BORDER_RADII)]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        padding: 'medium',
-        display: 'block',
-        children: 'Some content for the View'
-      },
+      padding: 'medium',
+      display: 'block',
+      children: 'Some content for the View'
+    }
+  },
+  filter: (props) => {
+    return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
-      filter: props.borderRadius === 'none' || props.borderWidth === 'none'
-    }
+      (props.borderRadius === 'none' || props.borderWidth === 'none')
+    )
   }
 }

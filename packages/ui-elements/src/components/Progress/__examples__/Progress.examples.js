@@ -21,34 +21,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
 
+const valueMax = 100
+
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'successColor',
-    { valueNow: [0, 40, 80, 100] },
-    { formatDisplayedValue: [
+  sectionProp: 'variant',
+  propValues: {
+    valueNow: [0, 40, 80, 100],
+    formatDisplayedValue: [
       null,
       // eslint-disable-next-line react/display-name
       (valueNow, valueMax) => <span>{Math.round(valueNow / valueMax * 100)}</span>
-    ]}
-  ],
-  renderProps: (props) => {
-    const valueMax = 100
-
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'Passing students',
-        valueMax
-      },
-      exampleProps: {
-        background: props.variant.includes('inverse') ? 'inverse' : 'default'
-      },
-      filter: props.valueNow !== valueMax && props.successColor
+      label: 'Passing students',
+      valueMax
     }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.variant.includes('inverse') ? 'inverse' : 'default'
+    }
+  },
+  filter: (props) => {
+    return props.valueNow !== valueMax && props.successColor
   }
 }

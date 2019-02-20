@@ -25,28 +25,35 @@ import React from 'react'
 import IconAnnouncement from '@instructure/ui-icons/lib/Line/IconAnnouncement'
 import Img from '@instructure/ui-elements/lib/components/Img'
 
-const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore'
-
 export default {
-  sections: 'size',
-  permutations: [
-    'size',
-    'headingLevel',
-    'disabled',
-    /* eslint-disable react/display-name */
-    { hero: [function (size) {
+  sectionProp: 'size',
+  maxExamplesPerPage: 50,
+  propValues: {
+    hero: [
+      function renderHero (size) {
         return <IconAnnouncement size={size} />
       },
-      <Img key="test" src={require('./testImage.jpg')} />] },
-    { href: [null, 'instructure.design'] }
-  ],
-  renderProps: (props) => {
+      <Img key="test" src={require('./testImage.jpg')} />,
+      null
+    ],
+    href: [null, 'instructure.design']
+  },
+  getComponentProps: () => {
     return {
-      componentProps: {
-        heading: 'I am a billboard',
-        message: longString,
-        margin: 'medium small'
-      }
+      heading: 'I am a billboard',
+      message: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore',
+      margin: 'medium small'
     }
+  },
+  filter: (props) => {
+    return (
+      props.size !== 'medium' &&
+      !(
+        props.hero === null &&
+        props.headingLevel === 'h1' &&
+        props.headingAs === 'h1' &&
+        props.disabled === false
+      )
+    )
   }
 }

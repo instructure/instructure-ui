@@ -21,32 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import generateMessages from '../../../__tests__/generateMessages'
 
-import React from 'react'
-
-import ApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
-import View from '@instructure/ui-layout/lib/components/View'
-
-export default function renderExample (Component, componentProps, exampleProps, key) {
-  return (
-    <View
-      key={key}
-      display={exampleProps.display || 'auto'}
-      as={exampleProps.as || 'span'}
-      margin={exampleProps.margin || 'none'}
-      padding={exampleProps.padding || 'none'}
-      textAlign={exampleProps.textAlign || 'start'}
-      debug={exampleProps.debug || false}
-      borderWidth={exampleProps.borderWidth || 'none'}
-      background={exampleProps.background || 'default'}
-      width={exampleProps.width || '100%'}
-      maxWidth={exampleProps.maxWidth || 'none'}
-      height={exampleProps.height || 'auto'}
-      maxHeight={exampleProps.maxHeight || 'none'}
-    >
-      <ApplyLocale locale="en-US">
-        <Component {...componentProps} />
-      </ApplyLocale>
-    </View>
-  )
+export default {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
+    return {
+      label: 'Opacity',
+      onChange: () => {}
+    }
+  }
 }

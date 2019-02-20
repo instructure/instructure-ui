@@ -24,11 +24,11 @@
 import React from 'react'
 import View from '../../View'
 
-import { PositionTarget, PositionContent } from '../'
+import { PositionTarget, PositionContent } from '../index'
 
 export default {
-  permutations: [
-    {placement: [
+  propValues: {
+    placement: [
       'top',
       'end',
       'bottom',
@@ -51,16 +51,13 @@ export default {
       'bottom stretch',
       'end stretch',
       'start stretch'
-    ]}
-  ],
-  renderProps: (props) => {
+    ]
+  },
+  getComponentProps: (props) => {
     const targetSize = '3px'
     const contentSize = '48px'
     const xStretch = props.placement == 'top stretch' || props.placement === 'bottom stretch'
     const yStretch = props.placement == 'end stretch' || props.placement === 'start stretch'
-    const paddingRegular = 'x-large'
-    const paddingXStretch = 'x-large none'
-    const paddingYStretch = 'none x-large'
     const contentProps = {
       as: 'div',
       width: contentSize,
@@ -76,53 +73,58 @@ export default {
     )
 
     return {
-      componentProps: {
-        constrain: 'none',
-        over: xStretch || yStretch,
-        offsetX: yStretch ? -parseInt(targetSize) : 0,
-        offsetY: xStretch ? -parseInt(targetSize) : 0,
-        children: xStretch || yStretch ? [
-          <PositionTarget key="0">
-            <View
-              as="div"
-              width={xStretch ? '100%' : targetSize}
-              height={xStretch ? targetSize : '100%'}
-              background="inverse" />
-          </PositionTarget>,
-          <PositionContent key="1">
-            <View
-              {...contentProps}
-              width={xStretch ? null : contentSize}
-              height={xStretch ? contentSize : null}
-            >
-              {text}
-            </View>
-          </PositionContent>
-        ] : [
-          <PositionTarget key="0">
-            <View
-              as="div"
-              width={targetSize}
-              height={targetSize}
-              background="inverse"
-            />
-          </PositionTarget>,
-          <PositionContent key="1">
-            <View {...contentProps}>
-              {text}
-            </View>
-          </PositionContent>
-        ]
-      },
-      exampleProps: {
-        as: 'div',
-        width: '99px',
-        height: '99px',
-        margin: 'small',
-        textAlign: 'center',
-        padding: yStretch ? paddingYStretch : xStretch ? paddingXStretch : paddingRegular,
-        debug: true
-      }
+      constrain: 'none',
+      over: xStretch || yStretch,
+      offsetX: yStretch ? -parseInt(targetSize) : 0,
+      offsetY: xStretch ? -parseInt(targetSize) : 0,
+      children: xStretch || yStretch ? [
+        <PositionTarget key="0">
+          <View
+            as="div"
+            width={xStretch ? '100%' : targetSize}
+            height={xStretch ? targetSize : '100%'}
+            background="inverse" />
+        </PositionTarget>,
+        <PositionContent key="1">
+          <View
+            {...contentProps}
+            width={xStretch ? null : contentSize}
+            height={xStretch ? contentSize : null}
+          >
+            {text}
+          </View>
+        </PositionContent>
+      ] : [
+        <PositionTarget key="0">
+          <View
+            as="div"
+            width={targetSize}
+            height={targetSize}
+            background="inverse"
+          />
+        </PositionTarget>,
+        <PositionContent key="1">
+          <View {...contentProps}>
+            {text}
+          </View>
+        </PositionContent>
+      ]
+    }
+  },
+  getExampleProps: (props) => {
+    const xStretch = props.placement == 'top stretch' || props.placement === 'bottom stretch'
+    const yStretch = props.placement == 'end stretch' || props.placement === 'start stretch'
+    const paddingRegular = 'x-large'
+    const paddingXStretch = 'x-large none'
+    const paddingYStretch = 'none x-large'
+    return {
+      as: 'div',
+      width: '99px',
+      height: '99px',
+      margin: 'small',
+      textAlign: 'center',
+      padding: yStretch ? paddingYStretch : xStretch ? paddingXStretch : paddingRegular,
+      debug: true
     }
   }
 }

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { PaginationButton } from '../index'
+import Pagination, { PaginationButton } from '../index'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((v, i) => {
@@ -35,27 +35,23 @@ const buildPages = (count = 4, current = 0) => {
 }
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    {
-      children: [
-        buildPages(5),
-        buildPages(1),
-        buildPages(7, 2)
-      ],
-      label: [
-        null,
-        'Example Pagination'
-      ]
-    }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    variant: ['full', 'compact'],
+    children: [
+      buildPages(5),
+      buildPages(1),
+      buildPages(7, 2)
+    ],
+    label: [
+      null,
+      'Example Pagination'
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        labelNext: 'Next',
-        labelPrev: 'Previous'
-      }
+      labelNext: 'Next',
+      labelPrev: 'Previous'
     }
   }
 }

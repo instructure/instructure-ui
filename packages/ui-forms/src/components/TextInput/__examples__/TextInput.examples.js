@@ -21,29 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import IconSearch from '@instructure/ui-icons/lib/Line/IconSearch'
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sections: 'layout',
+  sectionProp: 'layout',
   maxExamplesPerPage: 50,
-  permutations: [
-    'layout',
-    'size',
-    'disabled',
-    'textAlign',
-    { placeholder: [null, 'Some placeholder content'] },
-    { defaultValue: [null, 'A text input value'] },
-    { icon: [null, IconSearch] },
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  propValues: {
+    placeholder: [null, 'Some placeholder content'],
+    defaultValue: [null, 'A text input value'],
+    icon: [null, IconSearch],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'A text input'
-      },
-      filter: props.placeholder && props.defaultValue
+      label: 'A text input'
     }
+  },
+  filter: (props) => {
+    return props.placeholder && props.defaultValue
   }
 }

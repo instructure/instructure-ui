@@ -21,37 +21,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
 import View from '@instructure/ui-layout/lib/components/View'
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'type',
-    'pulse',
-    'standalone',
-    { placement: [ 'start top', 'end top', 'start bottom', 'end bottom' ]},
-    { countUntil: [ null, 100 ]}
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    placement: [ 'start top', 'end top', 'start bottom', 'end bottom' ],
+    countUntil: [ null, 100 ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        count: 100,
-        children: (
-          <View
-            display="block"
-            width="2rem"
-            height="2rem"
-            borderWidth="small"
-          />
-        )
-      },
-      filter: (
-        props.type === 'notification' && props.countUntil ||
-        props.standalone && props.placement !== 'start top'
+      count: 100,
+      children: (
+        <View
+          display="block"
+          width="2rem"
+          height="2rem"
+          borderWidth="small"
+        />
       )
     }
+  },
+  filter: (props) => {
+    return props.type === 'notification' && props.countUntil ||
+      props.standalone && props.placement !== 'start top'
   }
 }

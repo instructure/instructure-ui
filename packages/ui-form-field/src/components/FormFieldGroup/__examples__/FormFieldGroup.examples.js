@@ -23,34 +23,31 @@
  */
 
 import React from 'react'
+
 import generateMessages from './generateMessages'
 
 export default {
-  sections: 'layout',
+  sectionProp: 'layout',
   maxExamplesPerPage: 50,
-  permutations: [
-    'layout',
-    'rowSpacing',
-    'colSpacing',
-    'vAlign',
-    'startAt',
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  propValues: {
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        description: 'A form field group',
-        children: [
-          <input key="foo" type="text" />,
-          <input key="bar" type="text" />,
-          <input key="bar" type="text" />
-        ]
-      },
-      filter: (
-        props.layout === 'columns' && props.rowSpacing !== 'none' ||
-        props.layout === 'rows' && props.colSpacing !== 'none' ||
-        props.layout !== 'inline' && props.vAlign !== 'middle'
-      )
+      description: 'A form field group',
+      children: [
+        <input key="foo" type="text" />,
+        <input key="bar" type="text" />,
+        <input key="bar" type="text" />
+      ]
     }
+  },
+  filter: (props) => {
+    return  (
+      props.vAlign || props.startAt ||
+      props.layout === 'columns' && props.rowSpacing !== 'none' ||
+      props.layout === 'rows' && props.colSpacing !== 'none' ||
+      props.layout !== 'inline' && props.vAlign !== 'middle'
+    )
   }
 }

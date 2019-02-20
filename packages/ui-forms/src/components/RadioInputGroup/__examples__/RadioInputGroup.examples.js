@@ -21,48 +21,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
-import RadioInput from '../../RadioInput'
 
 import generateMessages from '../../../__tests__/generateMessages'
+import RadioInput from '../../RadioInput'
 
 let counter = 1
 const generateName = () => `Example${counter++}`
 
 export default {
-  sections: 'layout',
-  permutations: [
-    'layout',
-    'variant',
-    'size',
-    'disabled',
-    { defaultValue: [null, 'mickey'] },
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    defaultValue: [null, 'mickey'],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        name: generateName(),
-        description: 'A radio input group',
-        children: [
-          <RadioInput
-            key="minnie"
-            value="minnie"
-            label="Minnie"
-          />,
-          <RadioInput
-            key="mickey"
-            value="mickey"
-            label="Mickey"
-          />,
-          <RadioInput
-            key="goofy"
-            value="goofy"
-            label="Goofy"
-          />
-        ]
-      }
+      name: generateName(),
+      description: 'A radio input group',
+      children: [
+        <RadioInput
+          key="minnie"
+          value="minnie"
+          label="Minnie"
+        />,
+        <RadioInput
+          key="mickey"
+          value="mickey"
+          label="Mickey"
+        />,
+        <RadioInput
+          key="goofy"
+          value="goofy"
+          label="Goofy"
+        />
+      ]
     }
   }
 }

@@ -25,17 +25,15 @@
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  permutations: [
-    { messages: generateMessages()}
-  ],
-  renderProps: (props) => {
+  propValues: {
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        accept: 'image/*',
-        label: 'Upload a file',
-        onDropAccepted: ([file]) => { console.log(`File accepted ${file.name}`) }, // eslint-disable-line no-console
-        onDropRejected: ([file]) => { console.log(`File rejected ${file.name}`) } // eslint-disable-line no-console
-      }
+      accept: 'image/*',
+      label: 'Upload a file',
+      onDropAccepted: ([file]) => { console.log(`File accepted ${file.name}`) }, // eslint-disable-line no-console
+      onDropRejected: ([file]) => { console.log(`File rejected ${file.name}`) } // eslint-disable-line no-console
     }
   }
 }

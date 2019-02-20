@@ -21,21 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'disabled',
-    'dismissible',
-    { text: ['Some tag', 'A lot of content which will truncate'] }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    text: ['Some tag', 'A lot of content which will truncate']
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        onClick: () => {}
-      }
+      onClick: () => {}
     }
   }
 }

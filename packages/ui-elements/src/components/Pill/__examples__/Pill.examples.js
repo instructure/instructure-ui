@@ -23,8 +23,7 @@
  */
 
 export default {
-  permutations: [
-    'variant',
-    { text: ['Missing', 'Some really long text that will truncate'] }
-  ]
+  propValues: {
+    text: ['Missing', 'Some really long text that will truncate']
+  }
 }

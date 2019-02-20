@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import FlexItem from '../FlexItem'
+import { FlexItem } from '../index'
 
 const regular = [
   <FlexItem key="0">One</FlexItem>,
@@ -59,12 +59,14 @@ const grow = [
 ]
 
 export default {
-  permutations: [
-    'visualDebug',
-    {children: [
+  propValues: {
+    children: [
       regular,
       shrink,
       grow
-    ]}
-  ]
+    ]
+  },
+  filter: (props) => {
+    return props.visualDebug || props.inline || props.direction === 'row-reverse' || props.direction === 'column-reverse'
+  }
 }

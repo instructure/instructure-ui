@@ -27,21 +27,18 @@ import IconExpand from '@instructure/ui-icons/lib/Solid/IconExpand'
 import IconAnnotate from '@instructure/ui-icons/lib/Solid/IconAnnotate'
 
 export default {
-  sections: 'size',
-  permutations: [
-    'size',
-    'variant',
+  sectionProp: 'size',
+  propValues: {
     // eslint-disable-next-line no-undefined
-    { itemIcon: [undefined, IconAnnotate] },
+    itemIcon: [undefined, IconAnnotate],
     // eslint-disable-next-line no-undefined
-    { collectionIcon: [undefined, IconCollapse] },
+    collectionIcon: [undefined, IconCollapse],
     // eslint-disable-next-line no-undefined
-    { collectionIconExpanded: [undefined, IconExpand] },
-    { selectionType: ['none', 'single'] },
-  ],
-  renderProps: (props) => {
+    collectionIconExpanded: [undefined, IconExpand],
+    selectionType: ['none', 'single']
+  },
+  getComponentProps: (props) => {
     const rootCollectionName = (props.selectionType === 'single') ? 'Grade 1 (selectable items)' : 'Grade 1'
-
     const COLLECTIONS_DATA = {
       1: { id: 1, name: rootCollectionName, collections: [2,3,6] },
       2: { id: 2, name: "Math Outcomes", collections: [4], items: [3,4], descriptor: "1 Group | 2 Outcomes" },
@@ -50,7 +47,6 @@ export default {
       5: { id: 5, name: "Advanced Reading", items: [5], descriptor: "1 Group | 2 Outcomes" },
       6: { id: 6, name: "Advanced Outcomes", items: [5,6], descriptor: "2 Outcomes" }
     }
-
     const ITEMS_DATA = {
       1: { id: 1, name: "Can read" },
       2: { id: 2, name: "Can write" },
@@ -59,21 +55,20 @@ export default {
       5: { id: 5, name: "Can read Shakespeare" },
       6: { id: 6, name: "Can do quantum physics" }
     }
-
     return {
-      componentProps: {
-        collections: COLLECTIONS_DATA,
-        items: ITEMS_DATA,
-        rootId: 1,
-        defaultExpanded: [1]
-      },
-      filter: (
-        // prevent unecessary icon permutations
-        // eslint-disable-next-line no-undefined
-        (props.collectionIcon === undefined && props.collectionIconExpanded === IconExpand) ||
-        // eslint-disable-next-line no-undefined
-        (props.collectionIcon === IconCollapse && props.collectionIconExpanded === undefined)
-      )
+      collections: COLLECTIONS_DATA,
+      items: ITEMS_DATA,
+      rootId: 1,
+      defaultExpanded: [1]
     }
+  },
+  filter: (props) => {
+    return (
+      // prevent unecessary icon permutations
+      // eslint-disable-next-line no-undefined
+      (props.collectionIcon === undefined && props.collectionIconExpanded === IconExpand) ||
+      // eslint-disable-next-line no-undefined
+      (props.collectionIcon === IconCollapse && props.collectionIconExpanded === undefined)
+    )
   }
 }

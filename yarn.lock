@@ -1709,6 +1709,15 @@
   resolved "https://registry.npmjs.org/@sinonjs/text-encoding/-/text-encoding-0.7.1.tgz#8da5c6530915653f3a1f38fd5f101d8c3f8079c5"
   integrity sha512-+iTbntw2IZPb/anVDbypzfQa+ay64MW0Zo8aJ8gZPWMMK6/OubMVb6lUPMagqjOPnmtauXnFCACVl3O7ogjeqQ==
 
+"@storybook/addon-options@^4.1.11":
+  version "4.1.12"
+  resolved "https://registry.npmjs.org/@storybook/addon-options/-/addon-options-4.1.12.tgz#28d570ed47faae3c97d24dae7b6bb4984c1f7231"
+  integrity sha512-tX2oguZw7P0NZJ4rSICnBcAs1UzgOfVuvPecPY3LuFsgsrAPbWIesU/yh4KVqAW1hK24HjBAn13hIJ7lH3QMNA==
+  dependencies:
+    "@storybook/addons" "4.1.12"
+    core-js "^2.5.7"
+    util-deprecate "^1.0.2"
+
 "@storybook/addons@4.1.12":
   version "4.1.12"
   resolved "https://registry.npmjs.org/@storybook/addons/-/addons-4.1.12.tgz#ab38bfd0be97ed02a7d43d97cc631fa4c3a6f3a2"

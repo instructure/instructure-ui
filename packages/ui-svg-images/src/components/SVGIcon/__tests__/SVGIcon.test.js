@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
-import { mount, expect } from '@instructure/ui-test-utils'
+import { mount, expect, generateA11yTests } from '@instructure/ui-test-utils'
 
 import SVGIcon from '../index'
 import SVGIconLocator from '../locator'
+import SVGIconExamples from '../__examples__/SVGIcon.examples'
 
 import styles from '../styles.css'
 
@@ -103,14 +104,7 @@ describe('<SVGIcon />', async () => {
     expect(height).to.equal('200px')
   })
 
-  it('should meet a11y standards', async () => {
-    await mount(
-      <SVGIcon
-        size='large'
-        src={SVG_SRC}
-      />
-    )
-    const subject = await SVGIconLocator.find()
-    expect(await subject.accessible()).to.be.true()
+  describe('with generated examples', async () => {
+    generateA11yTests(SVGIconExamples)
   })
 })

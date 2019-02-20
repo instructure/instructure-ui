@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+
 import IconHeart from '@instructure/ui-icons/lib/Line/IconHeart'
 import IconApple from '@instructure/ui-icons/lib/Line/IconApple'
 import IconBank from '@instructure/ui-icons/lib/Line/IconBank'
@@ -38,14 +39,10 @@ const getOptions = (withIcon = false) => {
 }
 
 export default {
-  sections: 'layout',
+  sectionProp: 'size',
   maxExamplesPerPage: 50,
-  permutations: [
-    'size',
-    'layout',
-    'disabled',
-    'multiple',
-    { children: [
+  propValues: {
+    children: [
       getOptions(),
       getOptions(true),
       [
@@ -61,15 +58,17 @@ export default {
           <option value="item5">Item Five</option>
         </optgroup>,
       ]
-    ]},
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+    ],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'Hello from select!',
-        assistiveText: '3 options available. Use arrow keys to navigate options.'
-      }
+      layout: 'stacked',
+      label: 'Hello from select!',
+      assistiveText: '3 options available. Use arrow keys to navigate options.'
     }
+  },
+  filter: (props) => {
+    return props.inputRef || props.editable || (props.allowCustom && props.multiple) || props.vAlign
   }
 }

@@ -27,33 +27,31 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
 
 const iconButton = (props) => {
-  return props.variant.includes('icon') || props.variant.includes('circle')
+  return props.variant && (props.variant.includes('icon') || props.variant.includes('circle'))
 }
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'fluidWidth',
-    'disabled',
-    'readOnly',
-    { icon: [null, IconTrash] }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    icon: [null, IconTrash]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: props.variant.includes('icon') || props.variant.includes('circle')
-          ? <ScreenReaderContent>Hello</ScreenReaderContent>
-          : 'Hello'
-      },
-      exampleProps: {
-        background: props.variant.includes('inverse') ? 'inverse' : 'default'
-      },
-      filter: (
-        iconButton(props) && props.icon === null ||
-        iconButton(props) && props.fluidWidth
-      )
+      children: props.variant.includes('icon') || props.variant.includes('circle')
+        ? <ScreenReaderContent>Hello</ScreenReaderContent>
+        : 'Hello'
     }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.variant.includes('inverse') ? 'inverse' : 'default'
+    }
+  },
+  filter: (props) => {
+    return (
+      iconButton(props) && props.icon === null ||
+      iconButton(props) && props.fluidWidth ||
+      props.type && props.type !== 'button' || props.disabled
+    )
   }
 }

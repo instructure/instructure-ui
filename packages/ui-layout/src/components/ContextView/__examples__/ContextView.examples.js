@@ -24,22 +24,19 @@
 import React from 'react'
 
 export default {
-  sections: 'background',
-  permutations: [
-    'background',
-    {placement: [
+  sectionProp: 'background',
+  propValues: {
+    placement: [
       'top',
       'end',
       'bottom',
       'start'
-    ]}
-  ],
-  renderProps: (props) => {
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: <span key="0">Hello World</span>,
-        padding: 'small'
-      }
+      children: <span key="0">Hello World</span>,
+      padding: 'small'
     }
   }
 }

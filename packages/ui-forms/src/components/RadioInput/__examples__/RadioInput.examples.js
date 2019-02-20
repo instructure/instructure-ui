@@ -23,23 +23,16 @@
  */
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'disabled',
-    'checked',
-    'context'
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'A radio input'
-      },
-      filter: (
-        props.variant === 'simple' && props.context !== 'off' ||
-        props.variant === 'toggle' && !props.checked && props.context !== 'off'
-      )
+      label: 'A radio input'
     }
+  },
+  filter: (props) => {
+    return (
+      props.variant === 'simple' && props.context !== 'off' ||
+      props.variant === 'toggle' && !props.checked && props.context !== 'off'
+    )
   }
 }

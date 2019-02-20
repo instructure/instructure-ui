@@ -23,23 +23,17 @@
  */
 
 export default {
-  sections: 'constrain',
-  permutations: [
-    'constrain',
-    'inline',
-    'grayscale',
-    'blur'
-  ],
-  renderProps: (props) => {
+  sectionProp: 'constrain',
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        src: require('./testImage.jpg'),
-        alt: 'Panda in the tree'
-      },
-      exampleProps: {
-        height: '15rem',
-        width: '12rem'
-      }
+      src: require('./testImage.jpg'),
+      alt: 'Panda in the tree'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      height: '15rem',
+      width: '12rem'
     }
   }
 }

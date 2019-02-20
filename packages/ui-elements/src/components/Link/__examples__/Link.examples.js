@@ -21,28 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
-
 const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
 const shortString = 'Delete'
 
 export default {
-  permutations: [
-    { children: [
+  sectionProp: 'variant',
+  propValues: {
+    children: [
       shortString,
       longString
-    ]},
-    { iconPlacement: [null, 'start', 'end']},
-    { icon: [null, IconTrash] },
-    'disabled'
-  ],
-  renderProps: (props) => {
+    ],
+    iconPlacement: [null, 'start', 'end'],
+    icon: [null, IconTrash]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        href: 'http://instructure.design'
-      },
-      filter: props.ellipsis || (props.iconPlacement && !props.icon || !props.iconPlacement && props.icon)
+      href: 'http://instructure.design'
     }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.variant
+    }
+  },
+  filter: (props) => {
+    return props.ellipsis || (props.iconPlacement && !props.icon || !props.iconPlacement && props.icon) || props.disabled
   }
 }

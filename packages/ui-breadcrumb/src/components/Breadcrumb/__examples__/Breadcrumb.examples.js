@@ -22,40 +22,34 @@
  * SOFTWARE.
  */
 import React from 'react'
-import BreadcrumbLink from '../BreadcrumbLink'
 import IconBank from '@instructure/ui-icons/lib/Line/IconBank'
 
-const regular = [
-  <BreadcrumbLink key="0" onClick={() => {}}>English 204</BreadcrumbLink>,
-  <BreadcrumbLink key="1" href="#">The Rabbit Novels</BreadcrumbLink>,
-  <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
-]
-
-const icons = [
-  <BreadcrumbLink key="0" onClick={() => {}}>
-    <IconBank size="small" /> Item Bank
-  </BreadcrumbLink>,
-  <BreadcrumbLink key="1" href="#">
-    <IconBank size="small" /> History
-  </BreadcrumbLink>,
-  <BreadcrumbLink key="2">
-    <IconBank size="small" /> Question
-  </BreadcrumbLink>
-]
+import { BreadcrumbLink } from '../index'
 
 export default {
-  permutations: [
-    { children: [
-      regular,
-      icons
-    ]},
-    'size',
-  ],
-  renderProps: (props) => {
+  propValues: {
+    children: [
+      [
+        <BreadcrumbLink key="0" onClick={() => {}}>English 204</BreadcrumbLink>,
+        <BreadcrumbLink key="1" href="#">The Rabbit Novels</BreadcrumbLink>,
+        <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
+      ],
+      [
+        <BreadcrumbLink key="0" onClick={() => {}}>
+          <IconBank size="small" /> Item Bank
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="1" href="#">
+          <IconBank size="small" /> History
+        </BreadcrumbLink>,
+        <BreadcrumbLink key="2">
+          <IconBank size="small" /> Question
+        </BreadcrumbLink>
+      ]
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'You are here:'
-      }
+      label: 'You are here:'
     }
   }
 }

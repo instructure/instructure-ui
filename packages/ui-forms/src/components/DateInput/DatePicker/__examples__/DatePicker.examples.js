@@ -21,20 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  permutations: [
-    { disabledDaysOfWeek: [[], [0, 6]]},
-    { disabledDays: [[], ['2018-06-04', '2018-06-21', '2018-06-19']] }
-  ],
-  renderProps: (props) => {
+  propValues: {
+    disabledDaysOfWeek: [[], [0, 6]],
+    disabledDays: [[], ['2018-06-04', '2018-06-21', '2018-06-19']]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        todayValue: '2018-06-05',
-        previousLabel: 'previous month',
-        nextLabel: 'next month',
-        invalidDateMessage: (value) => { return `'${value}' is not a valid date` }
-      }
+      todayValue: '2018-06-05',
+      previousLabel: 'previous month',
+      nextLabel: 'next month',
+      invalidDateMessage: (value) => { return `'${value}' is not a valid date` }
     }
   }
 }

@@ -25,20 +25,11 @@
 import React from 'react'
 
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    'defaultExpanded',
-    'iconPosition',
-    'fluidWidth'
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        summary: 'This is the summary',
-        children: <span>hello content</span>
-      }
+      summary: 'This is the summary',
+      children: <span>hello content</span>
     }
   }
 }

@@ -23,21 +23,19 @@
  */
 
 export default {
-  permutations: [
-    'truncate',
-    'position',
-    { maxLines: [1, 3] }
-  ],
-  renderProps: (props) => {
+  propValues: {
+    maxLines: [1, 3]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: (
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
-        )
-      },
-      exampleProps: {
-        maxWidth: '25rem'
-      }
+      children: (
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation'
+      )
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      maxWidth: '25rem'
     }
   }
 }

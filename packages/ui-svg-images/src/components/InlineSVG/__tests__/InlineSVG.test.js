@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
-import { mount, expect } from '@instructure/ui-test-utils'
+import { mount, expect, generateA11yTests } from '@instructure/ui-test-utils'
 
 import InlineSVG from '../index'
 import InlineSVGLocator from '../locator'
+import InlineSVGExamples from '../__examples__/InlineSVG.examples'
 
 import styles from '../styles.css'
 
@@ -236,13 +237,7 @@ describe('<InlineSVG />', async () => {
       .to.equal('<circle cx="50" cy="50" r="40"></circle>')
   })
 
-  it('should meet a11y standards', async () => {
-    await mount(
-      <InlineSVG
-        src={SVG_SRC}
-      />
-    )
-    const svg = await InlineSVGLocator.find()
-    expect(await svg.accessible()).to.be.true()
+  describe('with generated examples', async () => {
+    generateA11yTests(InlineSVGExamples)
   })
 })

@@ -21,19 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  sections: 'variant',
-  permutations: [
-    'variant',
-    'size',
-    { src: [null, require('./testImage.jpg')] }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'variant',
+  propValues: {
+    src: [null, require('./testImage.jpg')]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        name: 'Kyle Montgomery'
-      }
+      name: 'Kyle Montgomery'
     }
   }
 }

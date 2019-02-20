@@ -21,34 +21,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import React from 'react'
-import ListItem from '../ListItem'
+import { ListItem } from '../index'
 
 export default {
   sections: 'size',
-  permutations: [
-    'size',
-    'as',
-    'variant',
-    'delimiter',
-    'itemSpacing'
-  ],
-  renderProps: (props) => {
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: [
-          <ListItem key="1">Oranges</ListItem>,
-          <ListItem key="2">Pineapples</ListItem>,
-          <ListItem key="3">Bananas</ListItem>
-        ]
-      },
-      filter: (
-        ['dashed', 'solid'].includes(props.delimiter) && props.variant === 'inline' ||
-        ['slash', 'pipe', 'arrow'].includes(props.delimiter) && props.variant !== 'inline' ||
-        props.delimiter !== 'none' && props.itemSpacing !== 'none' ||
-        props.as === 'ol' && props.variant !== 'default'
-      )
+      children: [
+        <ListItem key="1">Oranges</ListItem>,
+        <ListItem key="2">Pineapples</ListItem>,
+        <ListItem key="3">Bananas</ListItem>
+      ]
     }
+  },
+  filter: (props) => {
+    return ['dashed', 'solid'].includes(props.delimiter) && props.variant === 'inline' ||
+    ['slash', 'pipe', 'arrow'].includes(props.delimiter) && props.variant !== 'inline' ||
+    props.delimiter !== 'none' && props.itemSpacing !== 'none' ||
+    props.as === 'ol' && props.variant !== 'default'
   }
 }

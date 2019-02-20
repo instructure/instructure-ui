@@ -23,37 +23,30 @@
  */
 
 export default {
-  sections: 'size',
-  permutations: [
-    'color',
-    'size',
-    'weight',
-    'fontStyle',
-    'letterSpacing',
-    'transform',
-    'lineHeight',
-  ],
+  sectionProp: 'size',
   maxExamplesPerPage: 50,
-  renderProps: (props) => {
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: ['x-small', 'small', 'medium', 'large'].includes(props.size) ? (
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
-        ) : (
-          'Lorem ipsum dolor sit amet, consectetur'
-        )
-      },
-      exampleProps: {
-        background: props.color.includes('inverse') ? 'inverse' : 'default',
-        maxWidth: '25rem'
-      },
-      filter: props.color !== 'primary' && !(
-        props.weight === 'normal' &&
-        props.fontStyle === 'normal' &&
-        props.letterSpacing === 'normal' &&
-        props.transform === 'none' &&
-        props.lineHeight === 'default'
+      children: ['x-small', 'small', 'medium', 'large'].includes(props.size) ? (
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor ullamco'
+      ) : (
+        'Lorem ipsum dolor sit amet, consectetur'
       )
     }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.color.includes('inverse') ? 'inverse' : 'default',
+      maxWidth: '25rem'
+    }
+  },
+  filter: (props) => {
+    return props.color !== 'primary' && !(
+      props.weight === 'normal' &&
+      props.fontStyle === 'normal' &&
+      props.letterSpacing === 'normal' &&
+      props.transform === 'none' &&
+      props.lineHeight === 'default'
+    )
   }
 }

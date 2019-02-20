@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import MetricsListItem from '../MetricsListItem'
+import { MetricsListItem } from '../index'
 
 const getMetricsListItems = (textAlign) => {
   return [
@@ -49,11 +49,11 @@ const getMetricsListItems = (textAlign) => {
 }
 
 export default {
-  permutations: [
-    {children: [
+  propValues: {
+    children: [
       getMetricsListItems('start'),
       getMetricsListItems('center'),
       getMetricsListItems('end')
-    ]}
-  ]
+    ]
+  }
 }

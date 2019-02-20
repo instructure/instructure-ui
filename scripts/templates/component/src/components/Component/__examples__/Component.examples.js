@@ -22,13 +22,10 @@
  * SOFTWARE.
  */
 
- export default {
-   permutations: [],
-   renderProps: (props) => {
-     return {
-       componentProps: {
-         children: 'Hello world'
-       }
-     }
-   }
- }
+  export default {
+    getComponentProps: (props) => {
+      return {
+        children: 'Hello world'
+      }
+    }
+  }

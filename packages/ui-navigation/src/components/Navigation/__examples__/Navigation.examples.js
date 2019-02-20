@@ -22,66 +22,61 @@
  * SOFTWARE.
  */
 import React from 'react'
-import NavigationItem from '../NavigationItem'
+
 import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
 import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
 import IconAssignment from '@instructure/ui-icons/lib/Line/IconAssignment'
 import IconAnnouncement from '@instructure/ui-icons/lib/Line/IconAnnouncement'
 
+import { NavigationItem } from '../index'
+
 export default {
-  permutations: [
-    'defaultMinimized'
-  ],
-  renderProps: (props) => {
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: "I'm the main nav",
-        toggleLabel: {
-          expandedLabel: 'Minimize Navigation',
-          minimizedLabel: 'Expand Navigation',
-        },
-        children: [
-          <NavigationItem
-            key="1"
-            icon={<IconAdmin />}
-            label="Admin"
-            href="#"
-            theme={{
-              backgroundColor: 'red',
-              hoverBackgroundColor: 'blue'
-            }}
-          />,
-          <NavigationItem
-            key="2"
-            icon={<IconDashboard />}
-            label="Dashboard"
-            href="#"
-            selected={true}
-          />,
-          <NavigationItem
-            key="3"
-            icon={<IconAssignment />}
-            label="Courses"
-            href="#"
-          />,
-          <NavigationItem
-            key="4"
-            icon={<IconAnnouncement />}
-            label="Supercalifragilistic"
-            href="#"
-          />
-        ]
+      label: "I'm the main nav",
+      toggleLabel: {
+        expandedLabel: 'Minimize Navigation',
+        minimizedLabel: 'Expand Navigation',
       },
-      exampleProps: {
-        style: {
-          width: '5.25rem',
-          height: '30rem'
-        }
-      }
+      children: [
+        <NavigationItem
+          key="1"
+          icon={<IconAdmin />}
+          label="Admin"
+          href="#"
+          theme={{
+            backgroundColor: 'red',
+            hoverBackgroundColor: 'blue'
+          }}
+        />,
+        <NavigationItem
+          key="2"
+          icon={<IconDashboard />}
+          label="Dashboard"
+          href="#"
+          selected={true}
+        />,
+        <NavigationItem
+          key="3"
+          icon={<IconAssignment />}
+          label="Courses"
+          href="#"
+        />,
+        <NavigationItem
+          key="4"
+          icon={<IconAnnouncement />}
+          label="Supercalifragilistic"
+          href="#"
+        />
+      ]
     }
   },
-  /* eslint-disable react/display-name */
-  renderExample: (Component, componentProps, exampleProps, key) => {
-    return <div key={key} {...exampleProps}><Component {...componentProps} /></div>
+  getExampleProps: (props) => {
+    return {
+      style: {
+        width: '5.25rem',
+        height: '30rem'
+      }
+    }
   }
 }

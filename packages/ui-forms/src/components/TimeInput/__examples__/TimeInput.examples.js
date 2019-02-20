@@ -25,16 +25,14 @@
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  permutations: [
-    'disabled',
-    { defaultValue: [undefined, '1986-05-17T18:00:00.000Z'] }, // eslint-disable-line no-undefined
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  maxExamplesPerPage: 50,
+  propValues: {
+    defaultValue: [undefined, '1986-05-17T18:00:00.000Z'], // eslint-disable-line no-undefined
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'A time input'
-      }
+      label: 'A time input'
     }
   }
 }

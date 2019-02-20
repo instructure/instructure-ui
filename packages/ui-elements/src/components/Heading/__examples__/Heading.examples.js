@@ -21,38 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  sections: 'level',
-  permutations: [
-    'level',
-    'border',
-    'ellipsis',
-    { color: [
+  sectionProp: 'level',
+  propValues: {
+    color: [
       'primary',
       'secondary',
       'primary-inverse',
       'secondary-inverse',
       'inherit'
-    ]}
-  ],
-  renderProps: (props) => {
+    ]
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        children: 'Hello this is a test heading',
-        margin: 'medium none'
-      },
-      exampleProps: {
-        background: [
-          'primary-inverse',
-          'secondary-inverse'
-        ].includes(props.color) ? 'inverse' : 'default',
-        width: props.ellipsis ? '10rem' : '100%'
-      },
-      filter: (
-        props.type === 'notification' && props.countUntil ||
-        props.standalone && props.placement !== 'start top'
-      )
+      children: 'Hello this is a test heading',
+      margin: 'medium none'
     }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: [
+        'primary-inverse',
+        'secondary-inverse'
+      ].includes(props.color) ? 'inverse' : 'default',
+      width: props.ellipsis ? '10rem' : '100%'
+    }
+  },
+  filter: (props) => {
+    return props.type === 'notification' && props.countUntil ||
+    props.standalone && props.placement !== 'start top'
   }
 }

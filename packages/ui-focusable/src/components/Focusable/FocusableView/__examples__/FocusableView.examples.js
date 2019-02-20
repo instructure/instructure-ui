@@ -21,23 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 export default {
-  componentPath: '../index.js',
   sections: 'color',
-  permutations: [
-    'color',
-    'shape'
-  ],
-  renderProps: (props) => {
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        focused: true,
-        children: 'Focused'
-      },
-      exampleProps: {
-        background: props.color === 'inverse' ? 'inverse' : 'default'
-      }
+      focused: true,
+      children: 'Focused'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.color === 'inverse' ? 'inverse' : 'default'
     }
   }
 }

@@ -21,26 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sections: 'layout',
-  permutations: [
-    'disabled',
-    'showArrows',
-    'layout',
-    'size',
-    { defaultValue: [null, 500] },
-    { placeholder: [null, 'type something'] },
-    { messages: generateMessages() }
-  ],
-  renderProps: (props) => {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    defaultValue: [null, 500],
+    placeholder: [null, 'type something'],
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        label: 'A number input'
-      },
-      filter: props.placeholder && props.defaultValue
+      label: 'A number input'
     }
+  },
+  filter: (props) => {
+    return props.placeholder && props.defaultValue
   }
 }

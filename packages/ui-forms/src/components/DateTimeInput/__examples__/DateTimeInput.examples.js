@@ -21,31 +21,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sections: 'layout',
-  permutations: [
-    'layout',
-    'disabled',
-    { datePlaceholder: [null, 'Choose a date'] },
-    { defaultValue: [undefined, '20180806T133055Z'] }, // eslint-disable-line no-undefined
-    { messages: generateMessages()}
-  ],
-  renderProps: (props) => {
+  sectionProp: 'layout',
+  maxExamplesPerPage: 50,
+  propValues: {
+    datePlaceholder: [null, 'Choose a date'],
+    defaultValue: [undefined, '20180806T133055Z'], // eslint-disable-line no-undefined
+    messages: generateMessages()
+  },
+  getComponentProps: (props) => {
     return {
-      componentProps: {
-        description: 'Pick a date and time',
-        dateLabel: 'Date',
-        timeLabel: 'Time',
-        datePreviousLabel: 'previous month',
-        dateNextLabel: 'next month',
-        invalidDateTimeMessage: (dvalue, tvalue) => { return `'${dvalue} ${tvalue}' is not valid.` },
-        disabledDateMessage: (date) => `Date is disabled`,
-        onChange: () => {}
-      },
-      filter: props.datePlaceholder && props.defaultValue
+      description: 'Pick a date and time',
+      dateLabel: 'Date',
+      timeLabel: 'Time',
+      datePreviousLabel: 'previous month',
+      dateNextLabel: 'next month',
+      invalidDateTimeMessage: (dvalue, tvalue) => { return `'${dvalue} ${tvalue}' is not valid.` },
+      disabledDateMessage: (date) => `Date is disabled`,
+      onChange: () => {}
     }
+  },
+  filter: (props) => {
+    return props.datePlaceholder && props.defaultValue
   }
 }
