@@ -16,7 +16,6 @@ pipeline {
     JIRA_PEM_PATH='/home/docker/.ssh/gerritbot_jira.pem'
     SLACK_USERNAME="${SLACK_USERNAME}"
     SLACK_WEBHOOK="${SLACK_WEBHOOK}"
-    NODE_VERSION_LOCKED="${NODE_VERSION_LOCKED}"
     POST_MERGE_BUILD=true
     UV_THREADPOOL_SIZE=128
   }

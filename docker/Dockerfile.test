@@ -1,5 +1,4 @@
 FROM instructure/node:10
-ARG NODE_VERSION_LOCKED
 USER root
 
 ENV YARN_VERSION 1.12.3-1
@@ -28,8 +27,6 @@ RUN curl --silent "https://dl-ssl.google.com/linux/linux_signing_key.pub" | apt-
     ## yarn="$YARN_VERSION" \
   ## && apt-get clean \
   ## && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN if [ -n "$NODE_VERSION_LOCKED" ] ; then npm install -g n && n "$NODE_VERSION_LOCKED" ; fi
 
 USER docker
 

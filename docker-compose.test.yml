@@ -9,8 +9,6 @@ services:
     build:
       context: .
       dockerfile: 'docker/Dockerfile.test'
-      args:
-        NODE_VERSION_LOCKED: '${NODE_VERSION_LOCKED}'
     env_file:
       - ./.env.test
     volumes_from:

@@ -51,7 +51,6 @@ JIRA_PEM_PATH=/home/docker/.ssh/gerritbot_jira.pem
 SLACK_USERNAME=${SLACK_USERNAME}
 SLACK_WEBHOOK=${SLACK_WEBHOOK}
 SSH_KEY_PATH=${SSH_KEY_PATH}
-NODE_VERSION_LOCKED=${NODE_VERSION_LOCKED}
 SSH_USERNAME=${SSH_USERNAME}
 UV_THREADPOOL_SIZE=128
 EOF
@@ -71,6 +70,7 @@ if [[ -e "${SSH_KEY_PATH}" ]]; then
   docker exec -u 0 $container mkdir /home/docker/.ssh
   docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
   docker cp "$SSH_KEY_PATH" $container:/home/docker/.ssh/
+  docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
 else
   echo "SSH_KEY_PATH not set on post merge build"
   echo "Please set SSH_KEY_PATH or set CI to false"
@@ -83,7 +83,6 @@ fi
 
 docker cp .git $container:/usr/src/app/.git
 docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
-docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
 
 echo "Running release..."
 docker exec $container bash -c "ssh-keyscan -p 29418 gerrit.instructure.com >> ~/.ssh/known_hosts"
