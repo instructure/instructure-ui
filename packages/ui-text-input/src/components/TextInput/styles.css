@@ -1,0 +1,121 @@
+.layout {
+  position: relative;
+  display: block;
+}
+
+.contentAfterInput { /* TODO: refactor this class when we add renderBeforeInput prop */
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  offset-inline-end: var(--padding);
+  offset-inline-start: auto;
+  height: 100%;
+  pointer-events: none;
+  fill: var(--iconColor);
+}
+
+.outline {
+  pointer-events: none;
+  position: absolute;
+  display: block;
+  box-sizing: border-box;
+  top: -0.25rem;
+  bottom: -0.25rem;
+  left: -0.25rem; /* stylelint-disable-line property-blacklist */
+  right: -0.25rem; /* stylelint-disable-line property-blacklist */
+  border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+  border-radius: calc(var(--borderRadius) * 1.5);
+  transition: all 0.2s;
+
+  /* properties to transition on :focus */
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+/* stylelint-disable selector-max-type, no-descending-specificity */
+
+.input,
+input[type].input {
+  all: initial;
+
+  &::-ms-clear {
+    display: none;
+  }
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  appearance: none;
+  line-height: 1; /* reset global line height */
+  margin: 0;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  transition: all 0.2s;
+  outline: none;
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+  color: var(--color);
+  background: var(--background);
+  padding: 0 var(--padding);
+
+  &:focus {
+    box-shadow: initial;
+
+    ~ .outline {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  &[aria-invalid] {
+    border-color: var(--errorBorderColor);
+
+    &:focus,
+    ~ .outline {
+      border-color: var(--errorBorderColor);
+    }
+  }
+
+  &::placeholder {
+    color: var(--placeholderColor);
+  }
+
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.small {
+    font-size: var(--smallFontSize);
+    height: var(--smallHeight);
+  }
+
+  &.medium {
+    font-size: var(--mediumFontSize);
+    height: var(--mediumHeight);
+  }
+
+  &.large {
+    font-size: var(--largeFontSize);
+    height: var(--largeHeight);
+  }
+
+  &.hasContentAfterInput { /* TODO: refactor this class when we add renderBeforeInput prop */
+    padding-inline-end: calc(var(--padding) * 2 + 1em);
+    padding-inline-start: var(--padding);
+  }
+
+  &.textAlign--start {
+    text-align: start;
+  }
+
+  &.textAlign--center {
+    text-align: center;
+  }
+}
+
+/* stylelint-enable selector-max-type, no-descending-specificity */

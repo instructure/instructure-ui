@@ -48,6 +48,7 @@ export TimeInput from '@instructure/ui-forms/lib/components/TimeInput'
 export * from '@instructure/ui-form-field/lib/components'
 
 export { NumberInput as NumberInputControlled } from '@instructure/ui-number-input/lib/components'
+export { TextInput as TextInputControlled } from '@instructure/ui-text-input/lib/components'
 
 export * from '@instructure/ui-i18n/lib/components'
 export * from '@instructure/ui-layout/lib/components'
