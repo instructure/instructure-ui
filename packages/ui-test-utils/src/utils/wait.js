@@ -21,6 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { wait as domTestingLibraryWait } from 'dom-testing-library'
+ import waitForExpect from 'wait-for-expect'
 
-export const wait = domTestingLibraryWait
+ function wait (callback = () => {}, { timeout = 4500, interval = 50 } = {}) {
+   return waitForExpect(callback, timeout, interval)
+ }
+
+ export {
+   wait
+ }

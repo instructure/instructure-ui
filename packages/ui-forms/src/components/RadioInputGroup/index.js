@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import CustomPropTypes from '@instructure/ui-utils/lib/react/CustomPropTypes'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
+import testable from '@instructure/ui-testable'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
@@ -40,6 +41,7 @@ import RadioInput from '../RadioInput'
 category: components
 ---
 **/
+@testable()
 export default class RadioInputGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,

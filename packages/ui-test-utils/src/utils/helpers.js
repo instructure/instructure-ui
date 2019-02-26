@@ -21,11 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { elementToString } from './elementToString'
 import runAxeCheck from '@instructure/ui-axe-check'
 
+import { elementToString } from './elementToString'
 import { fireEvent } from './events'
+import { isElement } from './isElement'
 
 function getOwnerDocument (element) {
   return element.ownerDocument || document
@@ -36,25 +36,71 @@ function getOwnerWindow (element) {
   return doc.defaultView || doc.parentWindow
 }
 
-function typeIn (element, value) {
-  element.value = value // eslint-disable-line no-param-reassign
-  fireEvent(element, new Event('change', {
+function typeIn (element, text, options = { timeout: 0 }) {
+  const initialValue = element.value
+  const characterCount = text.length
+  const eventInit = {
     bubbles: true,
     cancelable: true,
-    target: { value }
-  }))
+    defaultPrevented: false,
+    eventPhase: 2,
+    isTrusted: true,
+  }
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        for (let i = 0; i < characterCount; ++i) {
+          const code = text.charCodeAt(i)
+          const keyEventData = {
+            altKey: false,
+            charCode: code,
+            ctrlKey: false,
+            keyCode: code,
+            metaKey: false,
+            shiftKey: false,
+            which: code,
+            ...eventInit
+          }
+
+          const inputEventData = {
+            charCode: code,
+            target: {
+              value: initialValue + text.slice(0, i + 1)
+            },
+            ...eventInit
+          }
+
+          fireEvent.keyDown(element, keyEventData)
+          fireEvent.keyPress(element, keyEventData)
+          fireEvent.beforeInput(element, inputEventData)
+          fireEvent.input(element, inputEventData)
+          fireEvent.change(element, inputEventData)
+          fireEvent.keyUp(element, keyEventData)
+        }
+        resolve()
+      } catch (err) {
+        reject(err)
+      }
+    }, options.timeout)
+  })
 }
 
 function getTextContent (element) {
+  if (element.matches('input[type=submit], input[type=button]')) {
+    return element.value
+  }
+
   return element.textContent
 }
+// aliases:
+const text = getTextContent
 
 function getTagName (element) {
   return element.tagName.toLowerCase()
 }
 
 function getComputedStyle (element) {
-  if (element instanceof Element) {
+  if (isElement(element)) {
     return getOwnerWindow(element).getComputedStyle(element)
   } else {
     throw new Error(`[ui-test-utils] cannot get computed style for an invalid Element: ${element}`)
@@ -115,8 +161,8 @@ function getPositionedParents (element) {
   // eslint-disable-next-line no-cond-assign
   while ((parent = parent.parentNode) &&
     parent &&
-    parent instanceof HTMLElement &&
-    !(parent instanceof HTMLBodyElement)
+    isElement(parent) &&
+    parent.tagName.toLowerCase() !== 'body'
   ) {
     if (positioned(parent)) {
       parents.push(parent)
@@ -158,13 +204,13 @@ function getClientRects (element) {
 }
 
 function visible (element) {
-  if (element instanceof HTMLHtmlElement || element.nodeType !== 1) {
+  if (!isElement(element) || (element && element.tagName.toLowerCase() === 'html')) {
     return true
   }
 
   const style = getComputedStyle(element)
 
-  if (style.visibility === 'hidden' || style.display === 'none') {
+  if (style.visibility === 'hidden' || style.display === 'none' || style.opacity === '0') {
     return false
   }
 
@@ -175,11 +221,13 @@ function visible (element) {
   const children = Array.from(element.childNodes)
 
   // handle inline elements with block children...
-  if (style.display === 'inline' && children.length > 0 && !(element instanceof HTMLIFrameElement)) {
+  if (style.display === 'inline' && children.length > 0 && element.tagName.toLowerCase() !== 'iframe') {
     if (children.length > 0) {
-      return children.reduce((previousChildIsVisible, child) => {
+      if (!children.reduce((previousChildIsVisible, child) => {
         return previousChildIsVisible || visible(child)
-      }, false)
+      }, false)) {
+        return false
+      }
     }
   } else if (elementWidth <= 0 && elementHeight <= 0) {
     return false
@@ -290,6 +338,8 @@ function hasClass (element, classname) {
 function getId (element) {
   return element.id
 }
+// aliases:
+const id = getId
 
 function debug (...args) {
   // eslint-disable-next-line no-console
@@ -301,10 +351,142 @@ function toString (...args) {
 }
 
 function accessible (element = document.body, options) {
-  if (element instanceof Element) {
+  if (isElement(element)) {
     return runAxeCheck(element, options)
   } else {
     throw new Error('[ui-test-utils] accessibility check can only run on a single, valid DOM Element!')
+  }
+}
+
+function exists (element) {
+  const doc = getOwnerDocument(element)
+  return (doc && doc.body.contains(element))
+}
+
+function empty (element) {
+  if (element && element.value) {
+    return element.value.length === 0 || !element.value.trim()
+  } else if (element && element.children) {
+    return element.children.length === 0
+  } else {
+    throw new Error(`[ui-test-utils] cannot determine if a non-element is empty: ${toString(element)}`)
+  }
+}
+
+function contains (element, elementOrSelector) {
+  if (typeof elementOrSelector === 'string') {
+    return element.querySelector(elementOrSelector)
+  } else if (isElement(elementOrSelector)) {
+    return element.contains(elementOrSelector)
+  } else if (elementOrSelector && typeof elementOrSelector.getDOMNode === 'function') {
+    return element.contains(elementOrSelector.getDOMNode())
+  } else {
+    return false
+  }
+}
+
+function descendants (element, selector) {
+  return element.querySelectorAll(selector)
+}
+// aliases:
+const children = descendants
+
+function ancestors (element, selector) {
+  const ancestors = []
+  let parentNode = element.parentNode
+  while (
+    parentNode &&
+    parentNode !== document &&
+    parentNode.matches
+  ) {
+    if (parentNode.matches(selector)) {
+      ancestors.push(parentNode)
+    }
+    parentNode = parentNode.parentNode
+  }
+  return ancestors
+}
+// aliases:
+const parents = ancestors
+
+function attribute (element, attribute) {
+  return element.getAttribute(attribute)
+}
+
+function style (element, property) {
+  return getComputedStyle(element).getPropertyValue(property)
+}
+
+function classNames (element) {
+  return Array.from(element.classList)
+}
+
+function matches (element, selector) {
+  return element.matches(selector)
+}
+
+function bounds (element, property) {
+  return getBoundingClientRect(element).property
+}
+
+function checked (element) {
+  return element.checked || element.getAttribute('aria-checked')
+}
+
+function selected (element) {
+  return element.selected || element.getAttribute('aria-selected')
+}
+
+function disabled (element) {
+  return element.getAttribute('disabled') || element.getAttribute('aria-disabled')
+}
+
+function readonly (element) {
+  return element.readonly || element.getAttribute('aria-readonly')
+}
+
+function role (element) {
+  return element.getAttribute('role')
+}
+
+function value (element) {
+  return element.value
+}
+
+function label (element) {
+  const doc = getOwnerDocument(element)
+  if (element.matches('[aria-label]')) {
+    return element.getAttribute('aria-label')
+  } else if (element.matches('[aria-labelledby]')) {
+    const ids = element.getAttribute('aria-labelledby').split(/\s+/)
+    const labels = ids.map(id => doc.getElementById(id))
+    return labels.map(label => label ? label.textContent : '').join(' ')
+  } else if (element.matches('button, a[href], [role="button"], [role="link"]')) {
+    return getTextContent(element)
+  } else if (element.matches('fieldset')) {
+    const legend = element.querySelector('legend')
+    if (legend) {
+      return getTextContent(legend)
+    }
+  } else if (element.matches('[id]')) {
+    const labels = Array.from(doc.querySelectorAll(`[for="${element.getAttribute('id')}"]`))
+    return labels.map(label => label ? label.textContent : '').join(' ')
+  } else if (element.matches('input,textarea,select')) {
+    const labels = ancestors(element, 'label')
+    if (labels.length > 0) {
+      return getTextContent(labels[0])
+    }
+  }
+}
+
+function title (element) {
+  if (element.matches('[title]')) {
+    return element.getAttribute('title')
+  } else if (element.matches('svg')) {
+    const title = element.querySelector('title')
+    if (title) {
+      return getTextContent(title)
+    }
   }
 }
 
@@ -330,5 +512,27 @@ export {
   focusable,
   tabbable,
   clickable,
-  onscreen
+  onscreen,
+  exists,
+  text,
+  empty,
+  contains,
+  descendants,
+  ancestors,
+  attribute,
+  style,
+  classNames,
+  id,
+  matches,
+  bounds,
+  checked,
+  selected,
+  disabled,
+  readonly,
+  role,
+  value,
+  label,
+  title,
+  children,
+  parents
 }

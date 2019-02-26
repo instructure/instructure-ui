@@ -149,7 +149,7 @@ class Focusable extends Component {
     const tabbable = findTabbable(this, true) || []
     const tabbableCount = tabbable && tabbable.length || 0
 
-    error(tabbableCount === 1, 'Focusable', `Exactly one focusable child is required (${tabbableCount} found).`)
+    error(tabbableCount === 1, 'Focusable', `Exactly one tabbable child is required (${tabbableCount} found).`)
 
     const focusable = tabbable ? tabbable[0] : false
 

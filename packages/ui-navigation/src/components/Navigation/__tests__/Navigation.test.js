@@ -117,9 +117,9 @@ describe('<Navigation />', async () => {
     )
     const nav = await NavigationLocator.find()
     const toggle = await nav.find(':contains(Minimize Navigation):focusable')
-    expect(toggle.getAttribute('aria-expanded')).to.equal('true')
+    expect(toggle).to.have.attribute('aria-expanded', 'true')
     await toggle.click()
-    expect(toggle.getAttribute('aria-expanded')).to.equal('false')
+    expect(toggle).to.have.attribute('aria-expanded', 'false')
   })
 
   it('should add the minimized style to the root when the nav is collapsed', async () => {
@@ -145,7 +145,7 @@ describe('<Navigation />', async () => {
     const nav = await NavigationLocator.find()
     const toggle = await nav.find(':contains(Minimize Navigation):focusable')
     await toggle.click()
-    expect(nav.hasClass(styles['minimized'])).to.exist()
+    expect(nav).to.have.className(styles['minimized'])
   })
 
   it('should meet a11y standards', async () => {

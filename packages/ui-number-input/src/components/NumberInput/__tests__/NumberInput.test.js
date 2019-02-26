@@ -24,9 +24,10 @@
 
 import React from 'react'
 
-import { accessible, expect, find, findAll, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 
 import NumberInput from '../index'
+import NumberInputLocator from '../locator'
 
 describe('<NumberInput />', () => {
   it('sets value on the input', async () => {
@@ -37,18 +38,20 @@ describe('<NumberInput />', () => {
         value="42"
       />
     )
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
 
-    const input = await find('input')
-    expect(input.getDOMNode().value).to.equal('42')
+    expect(input).to.have.value('42')
   })
 
   it('displays the label', async () => {
     await mount(
       <NumberInput label="Label" />
     )
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
 
-    const label = await find('label')
-    expect(label.getTextContent()).to.include('Label')
+    expect(input).to.have.label('Label')
   })
 
   it('passes the input element to inputRef', async () => {
@@ -57,7 +60,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" inputRef={inputRef} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     expect(inputRef).to.have.been.calledOnce()
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
@@ -66,11 +71,14 @@ describe('<NumberInput />', () => {
     const onChange = stub().callsFake(event => {
       event.persist() // so we can make assertions about the event
     })
+
     await mount(
       <NumberInput label="Label" onChange={onChange} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     const event = { target: { value: 'foo' } }
     await input.change(event)
 
@@ -85,7 +93,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onKeyDown={onKeyDown} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     await input.keyDown()
 
     expect(onKeyDown).to.have.been.calledOnce()
@@ -97,7 +107,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onBlur={onBlur} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     await input.blur()
 
     expect(onBlur).to.have.been.calledOnce()
@@ -109,7 +121,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onFocus={onFocus} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     await input.focus({ target: {} }) // this only works if we pass a target
 
     expect(onFocus).to.have.been.calledOnce()
@@ -120,7 +134,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     expect(buttons).to.have.length(2)
   })
 
@@ -129,7 +145,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" showArrows={false} />
     )
 
-    const buttons = await findAll('button', { expectEmpty: true })
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons({ expectEmpty: true })
+
     expect(buttons).to.have.length(0)
   })
 
@@ -139,7 +157,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onIncrement={onIncrement} />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     await buttons[0].mouseDown()
 
     expect(onIncrement).to.have.been.calledOnce()
@@ -151,7 +171,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" readOnly onIncrement={onIncrement} />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     await buttons[0].mouseDown()
 
     expect(onIncrement).not.to.have.been.called()
@@ -163,7 +185,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onDecrement={onDecrement} />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     await buttons[1].mouseDown()
 
     expect(onDecrement).to.have.been.calledOnce()
@@ -175,7 +199,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" readOnly onDecrement={onDecrement} />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     await buttons[1].mouseDown()
 
     expect(onDecrement).not.to.have.been.called()
@@ -186,12 +212,15 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     const event = await buttons[0].mouseDown()
 
     expect(event.preventDefault).to.have.been.calledOnce()
 
-    const input = await find('input')
+    const input = await numberInput.findInput()
+
     expect(input.focused()).to.be.true()
   })
 
@@ -200,12 +229,15 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const buttons = await findAll('button')
+    const numberInput = await NumberInputLocator.find()
+    const buttons = await numberInput.findArrowButtons()
+
     const event = await buttons[1].mouseDown()
 
     expect(event.preventDefault).to.have.been.calledOnce()
 
-    const input = await find('input')
+    const input = await numberInput.findInput()
+
     expect(input.focused()).to.be.true()
   })
 
@@ -214,8 +246,9 @@ describe('<NumberInput />', () => {
     await mount(
       <NumberInput label="Label" onIncrement={onIncrement} />
     )
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
 
-    const input = await find('input')
     await input.keyDown('up')
 
     expect(onIncrement).to.have.been.calledOnce()
@@ -227,7 +260,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" onDecrement={onDecrement} />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     await input.keyDown('down')
 
     expect(onDecrement).to.have.been.calledOnce()
@@ -238,7 +273,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     const event = await input.keyDown('up')
 
     expect(event.preventDefault).to.have.been.calledOnce()
@@ -249,7 +286,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     const event = await input.keyDown('down')
 
     expect(event.preventDefault).to.have.been.calledOnce()
@@ -260,7 +299,9 @@ describe('<NumberInput />', () => {
       <NumberInput label="Label" />
     )
 
-    const input = await find('input')
+    const numberInput = await NumberInputLocator.find()
+    const input = await numberInput.findInput()
+
     const event = await input.keyDown()
 
     expect(event.preventDefault).not.to.have.been.called()
@@ -269,16 +310,18 @@ describe('<NumberInput />', () => {
   describe('a11y', () => {
     it('meets standards', async () => {
       await mount(<NumberInput label="Label" />)
-
-      expect(await accessible()).to.be.true()
+      const numberInput = await NumberInputLocator.find()
+      expect(await numberInput.accessible()).to.be.true()
     })
 
     it('sets aria-invalid when there are error messages', async () => {
       const messages = [{ type: 'error', text: 'some error message' }]
       await mount(<NumberInput label="Label" messages={messages} />)
 
-      const input = await find('input')
-      expect(input.getAttribute('aria-invalid')).to.equal('true')
+      const numberInput = await NumberInputLocator.find()
+      const input = await numberInput.findInput()
+
+      expect(input).to.have.attribute('aria-invalid', 'true')
     })
   })
 })

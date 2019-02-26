@@ -666,6 +666,7 @@ describe('<SelectMultiple />', async () => {
       const select = await SelectMultipleLocator.find()
       const input = await select.findInput()
 
+      await input.focus()
       await input.typeIn('f')
 
       expect(await select.find('button[title="Jamaica"]')).to.exist()
@@ -678,7 +679,6 @@ describe('<SelectMultiple />', async () => {
         ],
       })
 
-      await input.click()
       const item = await select.findOption()
       await item.keyDown('enter')
 

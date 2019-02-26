@@ -46,7 +46,7 @@ describe('<ScreenReaderContent />', async () => {
       </ScreenReaderContent>
     )
     const screenReaderContent = within(subject.getDOMNode())
-    expect(screenReaderContent.getTextContent()).to.equal('Screenreader text')
+    expect(screenReaderContent).to.have.text('Screenreader text')
   })
 
   it('renders children offscreen', async () => {
@@ -62,8 +62,8 @@ describe('<ScreenReaderContent />', async () => {
   it('is accessible by screen readers', async () => {
     const subject = await mount(<ScreenReaderContent />)
     const screenReaderContent = within(subject.getDOMNode())
-    const height = screenReaderContent.getComputedStyle().getPropertyValue('height')
-    const opacity = screenReaderContent.getComputedStyle().getPropertyValue('opacity')
+    const height = screenReaderContent.style('height')
+    const opacity = screenReaderContent.style('opacity')
 
     expect(height).to.not.equal(0 || undefined) // eslint-disable-line no-undefined
     expect(opacity).to.not.equal(0 || undefined) // eslint-disable-line no-undefined

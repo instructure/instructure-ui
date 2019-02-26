@@ -23,13 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import CheckboxGroup from '../index'
+import CheckboxGroupLocator from '../locator'
 import Checkbox from '../../Checkbox'
 
 describe('<CheckboxGroup />', async () => {
   it('adds the name props to all Checkbox types', async () => {
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -41,13 +42,13 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const checkboxes = await checkboxGroup.findAll('input[name="sports"]')
     expect(checkboxes.length).to.equal(4)
   })
 
   it('links the messages to the fieldset via aria-describedby', async () => {
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -62,7 +63,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const fieldset = await checkboxGroup.find('fieldset')
     const messagesId = fieldset.getAttribute('aria-describedby')
     const messages = await checkboxGroup.find(`#${messagesId}`, { visible: false })
@@ -73,7 +74,7 @@ describe('<CheckboxGroup />', async () => {
   it('displays description message inside the legend', async () => {
     const description = 'You should pick something'
 
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description={description}
@@ -85,7 +86,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const legend = await checkboxGroup.find('legend', { visible: false })
     expect(legend.getTextContent()).to.equal(description)
   })
@@ -114,7 +115,7 @@ describe('<CheckboxGroup />', async () => {
   it('does not call the onChange prop when disabled', async () => {
     const onChange = stub()
 
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -128,7 +129,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click(null, { clickable: false })
 
@@ -138,7 +139,7 @@ describe('<CheckboxGroup />', async () => {
   it('does not call the onChange prop when readOnly', async () => {
     const onChange = stub()
 
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -152,7 +153,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
@@ -160,7 +161,7 @@ describe('<CheckboxGroup />', async () => {
   })
 
   it('should not update the value when the value prop is set', async () => {
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -174,7 +175,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
     inputs.forEach((input) => {
       expect(input.getDOMNode().checked).to.be.false()
@@ -190,7 +191,7 @@ describe('<CheckboxGroup />', async () => {
 
   it('should add the checkbox value to the value list when it is checked', async () => {
     const onChange = stub()
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -203,7 +204,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
@@ -212,7 +213,7 @@ describe('<CheckboxGroup />', async () => {
 
   it('should check the checkboxes based on the defaultValue prop', async () => {
     const defaultValue = ['football', 'volleyball']
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -225,7 +226,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const inputs = await checkboxGroup.findAll('input')
 
     inputs.forEach((input) => {
@@ -240,7 +241,7 @@ describe('<CheckboxGroup />', async () => {
   it('should remove the checkbox value from the value list when it is unchecked', async () => {
     const onChange = stub()
 
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -254,7 +255,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const input = await checkboxGroup.find('input[value="football"]')
     await input.click()
 
@@ -264,7 +265,7 @@ describe('<CheckboxGroup />', async () => {
   it('passes the array of selected values to onChange handler', async () => {
     const onChange = stub()
 
-    const subject = await mount(
+    await mount(
       <CheckboxGroup
         name="sports"
         description="Select your favorite sports"
@@ -278,7 +279,7 @@ describe('<CheckboxGroup />', async () => {
       </CheckboxGroup>
     )
 
-    const checkboxGroup = within(subject.getDOMNode())
+    const checkboxGroup = await CheckboxGroupLocator.find()
     const input1 = await checkboxGroup.find('input[value="football"]')
     const input2 = await checkboxGroup.find('input[value="other"]')
 
@@ -291,7 +292,7 @@ describe('<CheckboxGroup />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <CheckboxGroup
           name="sports"
           description="Select your favorite sports"
@@ -303,7 +304,7 @@ describe('<CheckboxGroup />', async () => {
         </CheckboxGroup>
       )
 
-      const checkboxGroup = within(subject.getDOMNode())
+      const checkboxGroup = await CheckboxGroupLocator.find()
       expect(await checkboxGroup.accessible({
         ignores: [ 'checkboxgroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */
       })).to.be.true()

@@ -34,7 +34,7 @@ import {
   focusable,
   clickable,
   visible,
-  getOwnerDocument
+  exists
 } from './helpers'
 
 import {
@@ -223,8 +223,7 @@ function addPseudos (
 
   // :exists
   Sizzle.selectors.pseudos.exists = (element) => {
-    const doc = getOwnerDocument(element)
-    return (doc && doc.body.contains(element))
+    return exists(element)
   }
 
   // :visible

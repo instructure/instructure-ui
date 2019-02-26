@@ -23,23 +23,24 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within, wait, find } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import TextArea from '../index'
+import TextAreaLocator from '../locator'
 import styles from '../styles.css'
 
 describe('TextArea', async () => {
   it('should accept a default value', async () => {
-    const subject = await mount(
+    await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         defaultValue="Tom Servo"
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
 
-    expect(textarea.getDOMNode().value).to.equal('Tom Servo')
+    expect(input).to.have.value('Tom Servo')
   })
 
   it('should include a label', async () => {
@@ -49,22 +50,22 @@ describe('TextArea', async () => {
         autoGrow={false}
       />
     )
-    const label = await find('label')
-    expect(label).to.exist()
+    const textArea = await TextAreaLocator.find(':label(Name)')
+    expect(textArea).to.exist()
   })
 
   it('should set an initial height', async () => {
-    const subject = await mount(
+    await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         height="100px"
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
 
-    expect(textarea.getComputedStyle().height).to.contain('100px')
+    expect(input.getComputedStyle().height).to.contain('100px')
   })
 
   it('should resize if autoGrow is true', async () => {
@@ -76,9 +77,9 @@ describe('TextArea', async () => {
         onChange={stub}
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
-    const initialHeight = parseInt(textarea.getComputedStyle().height, 10)
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
+    const initialHeight = parseInt(input.getComputedStyle().height, 10)
 
     /* eslint-disable max-len */
     await subject.setProps({value: 'Chartreuse celiac thundercats, distillery snackwave glossier pork belly tacos venmo fanny pack paleo portland. Migas 3 wolf moon typewriter, meditation pitchfork meh narwhal copper mug gluten-free vegan next level. Succulents keytar cronut, fanny pack kitsch hammock sustainable skateboard gochujang poutine la croix ennui cred quinoa. Fap copper mug pitchfork small batch hell of vice. Kickstarter small batch hexagon, scenester bushwick tacos cliche. Pickled flannel PBR&B, chartreuse next level vinyl echo park chambray pitchfork selfies actually tattooed blue bottle 3 wolf moon. Raw denim enamel pin tumeric retro fam scenester.'})
@@ -86,18 +87,18 @@ describe('TextArea', async () => {
 
     let resizedHeight
     await wait(() => {
-      resizedHeight = parseInt(textarea.getComputedStyle().height, 10)
+      resizedHeight = parseInt(input.getComputedStyle().height, 10)
       expect(resizedHeight).to.be.above(initialHeight)
     })
 
     /* Ensure minHeight that matches input height is being applied to container */
-    const layout = await label.find(`.${styles.layout}`)
+    const layout = await textArea.find(`.${styles.layout}`)
     const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
     expect(resizedHeight).to.equal(layoutMinHeight)
   })
 
   it('should set a maxHeight', async () => {
-    const subject = await mount(
+    await mount(
       <TextArea
         label="Name"
         autoGrow={true}
@@ -129,12 +130,12 @@ describe('TextArea', async () => {
         hexagon, scenester bushwick tacos`}
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
 
-    expect(textarea.getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
+    expect(input.getComputedStyle().getPropertyValue('max-height')).to.contain('160px')
     /* ensure maxHeight is being applied to input container and not exceeded by minHeight style */
-    const layout = await label.find(`.${styles.layout}`)
+    const layout = await textArea.find(`.${styles.layout}`)
     const layoutMaxHeight = parseInt(layout.getComputedStyle().getPropertyValue('max-height'), 10)
     const layoutMinHeight = parseInt(layout.getComputedStyle().getPropertyValue('min-height'), 10)
     expect(layoutMaxHeight).to.equal(160)
@@ -143,18 +144,18 @@ describe('TextArea', async () => {
 
   it('should focus the textarea when focus is called', async () => {
     let ref
-    const subject = await mount(
+    await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         componentRef={el => ref = el}
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
 
     ref.focus()
-    expect(textarea.focused()).to.be.true()
+    expect(input.focused()).to.be.true()
   })
 
   it('provides a focused getter', async () => {
@@ -173,17 +174,17 @@ describe('TextArea', async () => {
 
   it('should provide an textareaRef prop', async () => {
     const textareaRef = stub()
-    const subject = await mount(
+    await mount(
       <TextArea
         label="Name"
         autoGrow={false}
         textareaRef={textareaRef}
       />
     )
-    const label = within(subject.getDOMNode())
-    const textarea = await label.find('textarea')
+    const textArea = await TextAreaLocator.find()
+    const input = await textArea.findInput()
 
-    expect(textareaRef).to.have.been.calledWith(textarea.getDOMNode())
+    expect(textareaRef).to.have.been.calledWith(input.getDOMNode())
   })
 
   it('should provide a value getter', async () => {
@@ -203,23 +204,24 @@ describe('TextArea', async () => {
   describe('events', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <TextArea
           label="Name"
           autoGrow={false}
           onChange={onChange}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
 
-      await textarea.change({ target: { value: 'foo' } })
+      await input.change({ target: { value: 'foo' } })
+
       expect(onChange).to.have.been.called()
     })
 
     it('does not respond to onChange event when disabled', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <TextArea
           disabled
           label="Name"
@@ -227,16 +229,17 @@ describe('TextArea', async () => {
           onChange={onChange}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
 
-      await textarea.change({ target: { value: 'foo' } })
+      await input.change({ target: { value: 'foo' } })
+
       expect(onChange).to.not.have.been.called()
     })
 
     it('does not respond to onChange event when readOnly', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <TextArea
           readOnly
           label="Name"
@@ -244,69 +247,72 @@ describe('TextArea', async () => {
           onChange={onChange}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
 
-      await textarea.change({ target: { value: 'foo' } })
+      await input.change({ target: { value: 'foo' } })
       expect(onChange).to.not.have.been.called()
     })
 
     it('responds to onBlur event', async () => {
       const onBlur = stub()
-      const subject = await mount(
+      await mount(
         <TextArea
           label="Name"
           autoGrow={false}
           onBlur={onBlur}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
 
-      await textarea.blur()
+      await input.blur()
+
       expect(onBlur).to.have.been.called()
     })
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      const subject = await mount(
+      await mount(
         <TextArea
           label="Name"
           autoGrow={false}
           onFocus={onFocus}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
 
-      await textarea.focus()
+      await input.focus()
+
       expect(onFocus).to.have.been.called()
     })
   })
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <TextArea
           label="Name"
           autoGrow={false}
         />
       )
-      const label = within(subject.getDOMNode())
-      expect(await label.accessible()).to.be.true()
+      const textArea = await TextAreaLocator.find()
+      expect(await textArea.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      const subject = await mount(
+      await mount(
         <TextArea
           label="Name"
           autoGrow={false}
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const label = within(subject.getDOMNode())
-      const textarea = await label.find('textarea')
-      expect(textarea.getAttribute('aria-invalid')).to.exist()
+      const textArea = await TextAreaLocator.find()
+      const input = await textArea.findInput()
+
+      expect(input.getAttribute('aria-invalid')).to.exist()
     })
   })
 })

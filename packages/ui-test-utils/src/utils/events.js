@@ -88,6 +88,10 @@ const eventMap = {
     EventType: 'InputEvent',
     defaultInit: {bubbles: true, cancelable: true},
   },
+  beforeInput: {
+    EventType: 'InputEvent',
+    defaultInit: {bubbles: true, cancelable: true},
+  },
   input: {
     EventType: 'InputEvent',
     defaultInit: {bubbles: true, cancelable: true},

@@ -21,12 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { prettyDOM } from 'dom-testing-library'
+import prettyFormat from 'pretty-format'
+import { isElement } from './isElement'
 
-export function elementToString (element, maxLength = 7000, options = { highlight: false }) {
-  if (element) {
-    return prettyDOM(element, maxLength, options)
+const { DOMElement, DOMCollection } = prettyFormat.plugins
+
+function format (htmlElement, maxLength, options) {
+  if (htmlElement.documentElement) {
+    // eslint-disable-next-line no-param-reassign
+    htmlElement = htmlElement.documentElement
+  }
+
+  const debugContent = prettyFormat(htmlElement, {
+    plugins: [DOMElement, DOMCollection],
+    printFunctionName: false,
+    highlight: true,
+    ...options,
+  })
+  return typeof maxLength !== 'undefined' && htmlElement.outerHTML.length > maxLength
+    ? `${debugContent.slice(0, maxLength)}...`
+    : debugContent
+}
+
+function elementToString (element, maxLength = 7000, options = { highlight: false }) {
+  if (isElement(element)) {
+    return format(element, maxLength, options)
+  } else if (typeof element.toString === 'function') {
+    return element.toString()
   } else {
     return JSON.stringify(element)
   }
+}
+
+export {
+  elementToString
 }

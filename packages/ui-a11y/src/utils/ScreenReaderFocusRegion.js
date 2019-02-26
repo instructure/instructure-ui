@@ -58,7 +58,7 @@ export default class ScreenReaderFocusRegion {
   }
 
   muteNode (node) {
-    if (node && !(node instanceof HTMLScriptElement)) {
+    if (node && node.tagName.toLowerCase() !== 'script') {
       // When we are trapping screen reader focus on an element that
       // is deep inside the DOM, we can't apply aria-hidden to the
       // parents, so parent regions will be read if they have a role
@@ -87,13 +87,13 @@ export default class ScreenReaderFocusRegion {
       if (
         node &&
         node.nodeType === 1 &&
-        !(node instanceof HTMLScriptElement) &&
+        node.tagName.toLowerCase() !== 'script' &&
         this._parents.indexOf(node) === -1 &&
         this._nodes.indexOf(node) === -1 &&
         this._liveRegion.indexOf(node) === -1 &&
         !this._contextElement.contains(node)
       ) {
-        if (node.tagName !== 'IFRAME') {
+        if (node.tagName.toLowerCase() !== 'iframe') {
           this.hideNode(node)
         }
 
@@ -120,7 +120,7 @@ export default class ScreenReaderFocusRegion {
       record.removedNodes.forEach((removedNode) => {
         // Node has been removed from the DOM, make sure it is
         // removed from our list of hidden nodes as well
-        if (removedNode.tagName !== 'IFRAME') {
+        if (removedNode.tagName.toLowerCase() !== 'iframe') {
           this.restoreNode(removedNode)
         }
 
@@ -146,11 +146,11 @@ export default class ScreenReaderFocusRegion {
 
     let iframes = []
 
-    if (node.tagName === 'IFRAME') {
+    if (node.tagName.toLowerCase() === 'iframe') {
       iframes.push(node)
     } else {
       if (node.querySelectorAll) {
-        iframes = [...node.querySelectorAll('IFRAME')]
+        iframes = [...node.querySelectorAll('iframe')]
       }
     }
 
@@ -175,7 +175,7 @@ export default class ScreenReaderFocusRegion {
 
     let node = this._contextElement
 
-    while (node && node.nodeType === 1 && node.tagName !== 'BODY') {
+    while (node && node.nodeType === 1 && node.tagName.toLowerCase() !== 'body') {
       const parent = node.parentElement // can be null
 
       if (parent) {

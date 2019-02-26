@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import Checkbox from '../index'
+import CheckboxLocator from '../locator'
 
 describe('<Checkbox />', async () => {
   it('renders an input with type "checkbox"', async () => {
-    const subject = await mount(
+    await mount(
       <Checkbox
         label="fake label"
         defaultChecked
@@ -37,13 +38,13 @@ describe('<Checkbox />', async () => {
       />
     )
 
-    const checkbox = within(subject.getDOMNode())
+    const checkbox = await CheckboxLocator.find()
     const input = await checkbox.find('input')
     expect(input.getDOMNode().type).to.equal('checkbox')
   })
 
   it('`simple` variant only displays a checkmark when checked', async () => {
-    const subject = await mount(
+    await mount(
       <Checkbox
         label="fake label"
         variant="simple"
@@ -53,12 +54,12 @@ describe('<Checkbox />', async () => {
       />
     )
 
-    const checkbox = within(subject.getDOMNode())
+    const checkbox = await CheckboxLocator.find()
     expect(await checkbox.find('svg', { expectEmpty: true })).to.not.exist()
   })
 
   it('`simple` variant supports indeterminate/mixed state', async () => {
-    const subject = await mount(
+    await mount(
       <Checkbox
         label="fake label"
         variant="simple"
@@ -69,7 +70,7 @@ describe('<Checkbox />', async () => {
       />
     )
 
-    const checkbox = within(subject.getDOMNode())
+    const checkbox = await CheckboxLocator.find()
     const input = await checkbox.find('input')
     expect(input.getAttribute('aria-checked')).to.equal('mixed')
   })
@@ -79,7 +80,7 @@ describe('<Checkbox />', async () => {
       const onClick = stub()
       const onChange = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -90,7 +91,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.click()
 
@@ -102,7 +103,7 @@ describe('<Checkbox />', async () => {
       const onClick = stub()
       const onChange = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -114,7 +115,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.click(null, { clickable: false })
 
@@ -126,7 +127,7 @@ describe('<Checkbox />', async () => {
       const onClick = stub()
       const onChange = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -138,7 +139,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.click()
 
@@ -149,7 +150,7 @@ describe('<Checkbox />', async () => {
     it('calls onChange when enter key is pressed', async () => {
       const onChange = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -160,7 +161,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.keyDown('enter')
 
@@ -170,7 +171,7 @@ describe('<Checkbox />', async () => {
     it('responds to onBlur event', async () => {
       const onBlur = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -180,7 +181,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.blur()
 
@@ -190,7 +191,7 @@ describe('<Checkbox />', async () => {
     it('responds to onFocus event', async () => {
       const onFocus = stub()
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -200,7 +201,7 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       await input.focus()
 
@@ -210,7 +211,7 @@ describe('<Checkbox />', async () => {
     it('focuses with the focus helper', async () => {
       let checkboxRef = null
 
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -226,7 +227,7 @@ describe('<Checkbox />', async () => {
 
       expect(checkboxRef.focused).to.be.true()
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
       expect(input.focused()).to.be.true()
     })
@@ -235,7 +236,7 @@ describe('<Checkbox />', async () => {
       const onMouseOver = stub()
 
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -246,7 +247,7 @@ describe('<Checkbox />', async () => {
       )
       /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
 
       await checkbox.mouseOver()
 
@@ -257,7 +258,7 @@ describe('<Checkbox />', async () => {
       const onMouseOut = stub()
 
       /* eslint-disable jsx-a11y/mouse-events-have-key-events */
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -268,7 +269,7 @@ describe('<Checkbox />', async () => {
       )
       /* eslint-enable jsx-a11y/mouse-events-have-key-events */
 
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
 
       await checkbox.mouseOut()
 
@@ -278,7 +279,7 @@ describe('<Checkbox />', async () => {
 
   describe('for a11y', () => {
     it('`simple` variant should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -287,12 +288,12 @@ describe('<Checkbox />', async () => {
           variant="simple"
         />
       )
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       expect(await checkbox.accessible()).to.be.true()
     })
 
     it('`toggle` variant should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <Checkbox
           label="fake label"
           defaultChecked
@@ -301,7 +302,7 @@ describe('<Checkbox />', async () => {
           variant="toggle"
         />
       )
-      const checkbox = within(subject.getDOMNode())
+      const checkbox = await CheckboxLocator.find()
       expect(await checkbox.accessible()).to.be.true()
     })
 

@@ -39,6 +39,10 @@ const initGlobals = () => {
   global.setImmediate = window.setImmediate || function setImmediate(fn) {
     return setTimeout(fn, 0)
   }
+  if (!global.Element.prototype.matches) {
+    // polyfill for IE and JSDOM
+    global.Element.prototype.matches = global.Element.prototype.msMatchesSelector
+  }
 }
 
 export {

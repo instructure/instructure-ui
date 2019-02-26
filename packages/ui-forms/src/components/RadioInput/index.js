@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 
@@ -38,6 +39,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class RadioInput extends Component {
   static propTypes = {

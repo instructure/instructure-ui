@@ -21,20 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { bindElementToUtilities } from './bindElementToUtilities'
 
-export function within (container, ...args) {
-  if (container instanceof Element) {
-    return bindElementToUtilities(container, ...args)
-  } else {
-    throw new Error('[ui-test-utils] within requires a valid DOM Element.')
-  }
-}
+import { locator } from '@instructure/ui-test-utils'
 
-export function withinEach (containers, ...args) {
-  if (Array.isArray(containers)) {
-    return containers.map(element => within(element))
-  } else {
-    return within(containers)
-  }
-}
+import CheckboxGroup from './index'
+
+export default locator(CheckboxGroup.selector)

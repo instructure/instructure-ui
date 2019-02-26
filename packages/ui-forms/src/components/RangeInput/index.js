@@ -34,6 +34,7 @@ import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -44,6 +45,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class RangeInput extends Component {
   static propTypes = {

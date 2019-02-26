@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import RadioInput from '../index'
+import RadioInputLocator from '../locator'
 
 describe('<RadioInput />', async () => {
   it('renders an input with type "radio"', async () => {
-    const subject = await mount(
+    await mount(
       <RadioInput
         label="fake label"
         value="someValue"
@@ -36,7 +37,7 @@ describe('<RadioInput />', async () => {
       />
     )
 
-    const radioInput = within(subject.getDOMNode())
+    const radioInput = await RadioInputLocator.find()
     const input = await radioInput.find('input[type="radio"]')
 
     expect(input).to.exist()
@@ -45,7 +46,7 @@ describe('<RadioInput />', async () => {
   describe('events', async () => {
     it('responds to onClick event', async () => {
       const onClick = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -54,7 +55,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -63,7 +64,7 @@ describe('<RadioInput />', async () => {
 
     it('does not respond to onClick event when disabled', async () => {
       const onClick = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           disabled
           label="fake label"
@@ -73,7 +74,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -82,7 +83,7 @@ describe('<RadioInput />', async () => {
 
     it('does not respond to onClick event when readOnly', async () => {
       const onClick = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           readOnly
           label="fake label"
@@ -92,7 +93,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -101,7 +102,7 @@ describe('<RadioInput />', async () => {
 
     it('responds to onChange event', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -110,7 +111,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -119,7 +120,7 @@ describe('<RadioInput />', async () => {
 
     it('does not respond to onChange event when disabled', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           disabled
           label="fake label"
@@ -129,7 +130,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -138,7 +139,7 @@ describe('<RadioInput />', async () => {
 
     it('does not respond to onChange event when readOnly', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           readOnly
           label="fake label"
@@ -148,7 +149,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
@@ -157,7 +158,7 @@ describe('<RadioInput />', async () => {
 
     it('responds to onBlur event', async () => {
       const onBlur = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -166,7 +167,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.blur()
@@ -175,7 +176,7 @@ describe('<RadioInput />', async () => {
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      const subject = await mount(
+      await mount(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -184,7 +185,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
 
       await input.focus()
@@ -192,7 +193,7 @@ describe('<RadioInput />', async () => {
     })
 
     it('sets input to checked when selected', async () => {
-      const subject = await mount(
+      await mount(
         <RadioInput
           checked
           label="fake label"
@@ -201,14 +202,14 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
       expect(input.getDOMNode().checked).to.be.true()
     })
 
     it('focuses with the focus helper', async () => {
       let ref
-      const subject = await mount(
+      await mount(
         <RadioInput
           label="fake label"
           value="someValue"
@@ -217,7 +218,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
 
       ref.focus()
 
@@ -228,7 +229,7 @@ describe('<RadioInput />', async () => {
 
   describe('for a11y', async () => {
     it('simple variant should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <RadioInput
           variant="simple"
           label="fake label"
@@ -237,7 +238,7 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      const radioInput = within(subject.getDOMNode())
+      const radioInput = await RadioInputLocator.find()
       expect(await radioInput.accessible())
     })
 

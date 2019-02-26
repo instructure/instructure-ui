@@ -23,13 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import RadioInput from '../../RadioInput'
 import RadioInputGroup from '../index'
+import RadioInputGroupLocator from '../locator'
 
 describe('<RadioInputGroup />', async () => {
   it('adds the name props to all RadioInput types', async () => {
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -39,7 +40,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const inputs = await group.findAll('input[name="fruit"]')
     expect(inputs.length).to.equal(3)
   })
@@ -63,7 +64,7 @@ describe('<RadioInputGroup />', async () => {
 
   it('calls the onChange prop', async () => {
     const onChange = stub()
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -74,7 +75,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const input = await group.find('input')
 
     await input.click()
@@ -83,7 +84,7 @@ describe('<RadioInputGroup />', async () => {
 
   it('does not call the onChange prop when disabled', async () => {
     const onChange = stub()
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         disabled
         name="fruit"
@@ -95,7 +96,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const input = await group.find('input')
 
     await input.click(null, { clickable: false })
@@ -104,7 +105,7 @@ describe('<RadioInputGroup />', async () => {
 
   it('does not call the onChange prop when readOnly', async () => {
     const onChange = stub()
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         readOnly
         name="fruit"
@@ -116,7 +117,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const input = await group.find('input')
 
     await input.click()
@@ -124,7 +125,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('should not update the value when the value prop is set', async () => {
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -136,7 +137,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const banana = await group.find('input[value="banana"]')
 
     await banana.click()
@@ -147,7 +148,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -157,7 +158,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const inputs = await group.findAll('input[name="fruit"]')
 
     expect(inputs[0].getAttribute('tabindex')).to.equal('0')
@@ -166,7 +167,7 @@ describe('<RadioInputGroup />', async () => {
   })
 
   it('adds the correct tabindex to RadioInputs when checked', async () => {
-    const subject = await mount(
+    await mount(
       <RadioInputGroup
         name="fruit"
         description="Select a fruit"
@@ -177,7 +178,7 @@ describe('<RadioInputGroup />', async () => {
         <RadioInput label="Orange" value="orange" />
       </RadioInputGroup>
     )
-    const group = within(subject.getDOMNode())
+    const group = await RadioInputGroupLocator.find()
     const inputs = await group.findAll('input[name="fruit"]')
 
     expect(inputs[0].getAttribute('tabindex')).to.equal('-1')
@@ -187,7 +188,7 @@ describe('<RadioInputGroup />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <RadioInputGroup
           name="fruit"
           description="Select a fruit"
@@ -197,7 +198,7 @@ describe('<RadioInputGroup />', async () => {
           <RadioInput label="Orange" value="orange" />
         </RadioInputGroup>
       )
-      const group = within(subject.getDOMNode())
+      const group = await RadioInputGroupLocator.find()
 
       expect(await group.accessible({
         ignores: [ 'radiogroup' ] /* https://github.com/dequelabs/axe-core/issues/176 */

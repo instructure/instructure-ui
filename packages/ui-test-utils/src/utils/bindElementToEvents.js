@@ -23,10 +23,12 @@
  */
 
 import keycode from 'keycode'
-import { querySelector } from './selector'
+
+import { querySelector } from './selectors'
+import { isElement } from './isElement'
 
 export function bindElementToEvents (element, events) {
-  if (element instanceof Element) {
+  if (isElement(element)) {
     return Object.entries(events).reduce((bound, [key, fn]) => {
       if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
@@ -37,9 +39,13 @@ export function bindElementToEvents (element, events) {
       } else if (['blur'].includes(key)) {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireBlurEvent.bind(null, element, fn)
-      } else if (key === 'click') {
+      } else if (['click', 'dblClick'].includes(key) ||
+        key.startsWith('mouse') ||
+        key.startsWith('drag') ||
+        key.startsWith('touch')
+      ) {
         // eslint-disable-next-line no-param-reassign
-        bound[key] = fireClickEvent.bind(null, element, fn)
+        bound[key] = firePointerEvent.bind(null, element, fn)
       } else {
         // eslint-disable-next-line no-param-reassign
         bound[key] = fireDOMEvent.bind(null, element, fn)
@@ -64,7 +70,7 @@ function fireDOMEvent (element, fn, init, options = { timeout: 0 }) {
   })
 }
 
-function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: true })  {
+function firePointerEvent (element, fn, init, options = { timeout: 0, clickable: true })  {
   let clickable = element
 
   if (options.clickable) {
@@ -74,12 +80,12 @@ function fireClickEvent (element, fn, init, options = { timeout: 0, clickable: t
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (clickable instanceof Element) {
+        if (isElement(clickable)) {
           const fireEvent = fn.bind(null, clickable)
           resolve(fireEvent(init))
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a 'click' event on an element that is not 'clickable': ${element}`)
+            new Error(`[ui-test-utils] could not fire a pointer event on an element that is not 'clickable': ${element}`)
           )
         }
       } catch (e) {
@@ -99,7 +105,7 @@ function fireBlurEvent (element, fn, init, options = { timeout: 0, focusable: tr
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (focusable instanceof Element) {
+        if (isElement(focusable)) {
           const fireEvent = fn.bind(null, focusable)
           resolve(fireEvent(init))
         } else {
@@ -124,7 +130,7 @@ function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: t
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (focusable instanceof Element)  {
+        if (isElement(focusable))  {
           if (init) {
             const fireEvent = fn.bind(null, focusable)
 
@@ -162,7 +168,7 @@ function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0,
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (focusable instanceof Element) {
+        if (isElement(focusable)) {
           const fireEvent = fn.bind(null, focusable)
           resolve(fireEvent({
             ...init,

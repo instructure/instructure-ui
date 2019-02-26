@@ -46,7 +46,7 @@ describe('<ModalHeader />', async () => {
     )
 
     const header = within(subject.getDOMNode())
-    expect(header.hasClass(styles['inverse'])).to.be.true()
+    expect(header).to.have.className(styles['inverse'])
   })
 
 })

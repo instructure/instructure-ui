@@ -21,17 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { getNodeText } from 'dom-testing-library'
-
-import { getOwnerDocument } from './helpers'
-
-if (typeof Element !== 'undefined') { // is the DOM available?
-  // polyfill for IE
-  // TODO: check SVGElement support
-  if (!Element.prototype.matches) {
-   Element.prototype.matches = Element.prototype.msMatchesSelector
-  }
-}
+import { label, title } from './helpers'
 
 function matches (textToMatch, matcherString, options = {
   exact: true,
@@ -59,7 +49,7 @@ function exactMatches (textToMatch, matcher, { collapseWhitespace = true, trim =
   return normalizedText === matcher
 }
 
-function normalize (text, { trim, collapseWhitespace }) {
+function normalize (text, {collapseWhitespace = true, trim = true} = {}) {
   let normalizedText = text
   normalizedText = trim ? normalizedText.trim() : normalizedText
   normalizedText = collapseWhitespace
@@ -69,68 +59,32 @@ function normalize (text, { trim, collapseWhitespace }) {
 }
 
 function matchElementByTitle (element, titleText, options) {
-  if (element.matches('[title]')) {
-    return matchElementByAttributeValue(element, 'title', titleText, options)
-  } else if (element.matches('svg')) {
-    const title = element.querySelector('title')
-    if (title) {
-      return matchElementByText(title, titleText, options)
-    }
-  }
-  return false
+  return matches(title(element), titleText, options)
 }
 
 function matchElementByLabel (element, labelText, options) {
-  const doc = getOwnerDocument(element)
-
-  if (element.getAttribute('aria-label')) {
-    return matchElementByAttributeValue(element, 'aria-label', labelText, options)
-  } else if (element.getAttribute('aria-labelledby')) {
-    // <label id="someId">text</label><label id="someOtherId">text</label>
-    // <input aria-labelledby="someId someOtherId" />
-    const ids = element.getAttribute('aria-labelledby').split(/\s+/)
-    const labels = ids.map(id => doc.getElementById(id))
-    return matches(
-      labels.map(label => label ? label.textContent : '').join(' '),
-      labelText,
-      options
-    )
-  } else if (element.matches('button, a[href], [role="button"], [role="link"]')) {
-    return matchElementByContents(element, labelText, options)
-  } else if (element.matches('fieldset')) {
-    const legend = element.querySelector('legend')
-    return legend ? matchElementByContents(legend, labelText, options) : false
-  } else if (element.matches('[id]')) {
-    // <label for="someId">text</label><input id="someId" />
-    const labels = Array.from(doc.querySelectorAll(`[for="${element.getAttribute('id')}"]`))
-    const label = labels.map(label => label ? label.textContent : '').join(' ')
-    return matches(label, labelText, options)
-  } else if (element.matches('input,textarea,select')) {
-    // <label>text: <input /></label>
-    let parentNode = element.parentNode
-
-    while (
-      parentNode &&
-      parentNode !== document &&
-      parentNode.matches &&
-      !parentNode.matches('label')
-    ) {
-      parentNode = parentNode.parentNode
-    }
-    return matchElementByContents(parentNode, labelText, options)
-  }
-}
-
-function matchElementByContents (element, elementOrString, options = {}) {
-  if (elementOrString instanceof Element) {
-    return element.contains(elementOrString)
-  } else {
-    return matches(element.textContent, elementOrString, options)
-  }
+  return matches(label(element), labelText, options)
 }
 
 function matchElementByText (element, text, options) {
-  return matches(getNodeText(element), text, options)
+  if (element.matches('input[type=submit], input[type=button]')) {
+    return element.value
+  }
+  const nodeText = Array.from(element.childNodes)
+    .map((child) => {
+      let textContent
+
+      // filter out nodes that have the same textContent as the parent
+      if (child.nodeType === 3 ||
+        (child.nodeType === 1 && (normalize(element.textContent) !== normalize(child.textContent)))
+      ) {
+        textContent = child.textContent
+      }
+
+      return textContent || ''
+    })
+    .join('')
+  return matches(nodeText, text, options)
 }
 
 function matchElementByAttributeValue (element, name, value, options) {
@@ -138,7 +92,7 @@ function matchElementByAttributeValue (element, name, value, options) {
 }
 
 export {
-  matchElementByContents,
+  matches,
   matchElementByTitle,
   matchElementByLabel,
   matchElementByAttributeValue,

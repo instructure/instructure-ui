@@ -36,6 +36,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import CheckboxFacade from './CheckboxFacade'
 import ToggleFacade from './ToggleFacade'
@@ -49,6 +50,7 @@ category: components
 ---
 **/
 
+@testable()
 @themeable(theme, styles)
 class Checkbox extends Component {
   static propTypes = {

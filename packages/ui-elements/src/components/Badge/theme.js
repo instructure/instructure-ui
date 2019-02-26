@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors, spacing, typography }) {
+export default function generator ({ borders, colors, spacing, typography, stacking }) {
   return {
     fontFamily: typography.fontFamily,
     fontWeight: typography.fontWeightNormal,
@@ -34,6 +34,7 @@ export default function generator ({ borders, colors, spacing, typography }) {
     size: '1.25rem',
     countOffset: '0.5rem',
     notificationOffset: '0.125rem',
+    notificationZIndex: stacking.above,
     sizeNotification: spacing.small,
     borderRadius: '999rem',
     padding: spacing.xxSmall,

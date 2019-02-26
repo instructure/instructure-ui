@@ -23,13 +23,14 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within, find } from '@instructure/ui-test-utils'
+import { expect, mount, stub, find } from '@instructure/ui-test-utils'
 import NumberInput from '../index'
+import NumberInputLocator from '../locator'
 
 describe('<NumberInput />', async () => {
   describe('NumberInput.applyStep', async () => {
     it('should add steps', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -37,16 +38,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
       expect(input.getDOMNode().value).to.equal('1')
     })
 
     it('should subtract steps', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="1"
@@ -54,16 +55,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
       expect(input.getDOMNode().value).to.equal('0')
     })
 
     it('should support fractional steps', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="3"
@@ -71,9 +72,9 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
       expect(input.getDOMNode().value).to.equal('1.5')
@@ -81,7 +82,7 @@ describe('<NumberInput />', async () => {
 
     describe('with large numbers', async () => {
       it('should add steps', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="123456789012345678901"
@@ -89,16 +90,16 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[0].mouseDown()
         expect(input.getDOMNode().value).to.equal('123,456,789,012,345,678,902')
       })
 
       it('should substract steps', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="1234567890123456789012345"
@@ -106,16 +107,16 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[1].mouseDown()
         expect(input.getDOMNode().value).to.equal('1,234,567,890,123,456,789,012,344')
       })
 
       it('should not use scientific notation', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="123456789012345678901234567890"
@@ -123,9 +124,9 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[0].mouseDown()
         expect(input.getDOMNode().value).to.equal('123,456,789,012,345,678,901,234,567,895')
@@ -134,7 +135,7 @@ describe('<NumberInput />', async () => {
 
     describe('when the input is empty', () => {
       it('should assume value is 0 web adding steps', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue=""
@@ -142,16 +143,16 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[0].mouseDown()
         expect(input.getDOMNode().value).to.equal('123')
       })
 
       it('should assume value is 0 when subtracting steps', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue=""
@@ -159,9 +160,9 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[1].mouseDown()
         expect(input.getDOMNode().value).to.equal('-123')
@@ -170,7 +171,7 @@ describe('<NumberInput />', async () => {
 
     describe('with a min prop', async () => {
       it('should limit min if given', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="-9"
@@ -179,16 +180,16 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[1].mouseDown()
         expect(input.getDOMNode().value).to.equal('-10')
       })
 
       it('should limit min if given', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="-10"
@@ -197,9 +198,9 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[1].mouseDown()
         expect(input.getDOMNode().value).to.equal('-10')
@@ -215,16 +216,16 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[1].mouseDown()
-        expect(input.getDOMNode().value).to.equal('-10')
+        expect(input).to.have.value('-10')
 
         await subject.setProps({ defaultValue: '-10', step: '1', min: '-10' })
         await arrows[1].mouseDown()
-        expect(input.getDOMNode().value).to.equal('-10')
+        expect(input).to.have.value('-10')
       })
     })
 
@@ -238,22 +239,22 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
-        const arrows = await numberInput.findAll('button')
+        const arrows = await numberInput.findArrowButtons()
 
         await arrows[0].mouseDown()
-        expect(input.getDOMNode().value).to.equal('3')
+        expect(input).to.have.value('3')
 
         subject.setProps({ defaultValue: '2.5', step: '1' })
 
         await arrows[1].mouseDown()
-        expect(input.getDOMNode().value).to.equal('2')
+        expect(input).to.have.value('2')
       })
     })
 
     it('should snap value to min if value is already smaller than min and dir is -1', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="-99"
@@ -262,16 +263,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
-      expect(input.getDOMNode().value).to.equal('-10')
+      expect(input).to.have.value('-10')
     })
 
     it('should snap value to min when it is already smaller than min and dir is 1', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="-99"
@@ -280,16 +281,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('-10')
+      expect(input).to.have.value('-10')
     })
 
     it('should limit max if given', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="6"
@@ -298,19 +299,19 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('7')
+      expect(input).to.have.value('7')
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('7')
+      expect(input).to.have.value('7')
     })
 
     it('should snap value to max if value is already greater than max and dir is 1', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="99"
@@ -319,16 +320,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('10')
+      expect(input).to.have.value('10')
     })
 
     it('should snap value to max when it is already greater than max and dir is -1', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="99"
@@ -337,16 +338,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
-      expect(input.getDOMNode().value).to.equal('10')
+      expect(input).to.have.value('10')
     })
 
     it("should not pass over max when the last step doesn't match", async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="2"
@@ -355,18 +356,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('2.75')
+      expect(input).to.have.value('2.75')
     })
   })
 
   describe('internationalization', async () => {
     it('can be passed a locale prop', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0.5"
@@ -375,14 +376,14 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      expect(input.getDOMNode().value).to.equal('0,5')
+      expect(input).to.have.value('0,5')
     })
 
     it('uses the context locale if no locale prop is passed', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0.5"
@@ -392,14 +393,14 @@ describe('<NumberInput />', async () => {
           context: { locale: 'de' }
         })
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      expect(input.getDOMNode().value).to.equal('0,5')
+      expect(input).to.have.value('0,5')
     })
 
     it('uses the prop if locale is passed as a prop and locale is available on the context', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0.5"
@@ -409,14 +410,14 @@ describe('<NumberInput />', async () => {
           context: { locale: 'en-au' }
         })
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      expect(input.getDOMNode().value).to.equal('0,5')
+      expect(input).to.have.value('0,5')
     })
 
     it('formats default values in accordance with the locale', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="a2.5"
@@ -425,10 +426,10 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      expect(input.getDOMNode().value).to.equal('2,5')
+      expect(input).to.have.value('2,5')
     })
 
     it('updates the input value if the locale changes', async () => {
@@ -440,17 +441,17 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      expect(input.getDOMNode().value).to.equal('2.5')
+      expect(input).to.have.value('2.5')
 
       await subject.setProps({ locale: 'de'})
-      expect(input.getDOMNode().value).to.equal('2,5')
+      expect(input).to.have.value('2,5')
     })
 
     it('increments the number in the appropriate locale when the up arrow is pressed', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="2.5"
@@ -459,16 +460,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
-      expect(input.getDOMNode().value).to.equal('2,6')
+      expect(input).to.have.value('2,6')
     })
 
     it('decrements the number in the appropriate locale when the down arrow is pressed', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="2.5"
@@ -477,16 +478,16 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
-      expect(input.getDOMNode().value).to.equal('2,4')
+      expect(input).to.have.value('2,4')
     })
 
     it('allows entering "." if the locale uses "." as a decimal delimiter', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -494,17 +495,17 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.typeIn('2.1')
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('2.1')
+      expect(input).to.have.value('2.1')
     })
 
     it('allows entering "," if the locale uses "," as a decimal delimiter', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -513,18 +514,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.typeIn('2,1')
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('2,1')
+      expect(input).to.have.value('2,1')
     })
 
     describe('conditionalFormat', () => {
       it('formats on render when a number value props is given', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             value={7.3}
@@ -533,14 +534,14 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
-        expect(input.getDOMNode().value).to.equal('7,3')
+        expect(input).to.have.value('7,3')
       })
 
       it('does not format on render when a string value prop is given', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             value="foo"
@@ -549,14 +550,14 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
-        expect(input.getDOMNode().value).to.equal('foo')
+        expect(input).to.have.value('foo')
       })
 
       it('does not format on render when value is falsey', async () => {
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             step="1"
@@ -564,10 +565,10 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
-        expect(input.getDOMNode().value).to.equal('')
+        expect(input).to.have.value('')
       })
     })
   })
@@ -576,7 +577,7 @@ describe('<NumberInput />', async () => {
     it('receives the raw string value of the input as the second argument', async () => {
       const value = '-12.501,5'
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -587,7 +588,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
@@ -599,7 +600,7 @@ describe('<NumberInput />', async () => {
     it('receives the normalized string value of the input as the third argument', async () => {
       const value = '-12.501,5'
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -610,7 +611,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
@@ -622,7 +623,7 @@ describe('<NumberInput />', async () => {
     it("receives null as the third argument if the value can't be parsed", async () => {
       const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -633,7 +634,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
@@ -645,7 +646,7 @@ describe('<NumberInput />', async () => {
     it('receives the min value as the third argument if value is less than min', async () => {
       const value = '0'
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -657,7 +658,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
@@ -669,7 +670,7 @@ describe('<NumberInput />', async () => {
     it('receives the max value as the third argument if value is greater than max', async () => {
       const value = '100'
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -681,7 +682,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
@@ -694,7 +695,7 @@ describe('<NumberInput />', async () => {
       it('includes trailing zeros in third argument', async () => {
         const value = '5,00'
         const onChange = stub()
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -705,7 +706,7 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
@@ -719,7 +720,7 @@ describe('<NumberInput />', async () => {
       it('receives a third argument with trailing zeros', async () => {
         const value = '3.9'
         const onChange = stub()
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -729,7 +730,7 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
@@ -743,7 +744,7 @@ describe('<NumberInput />', async () => {
       it('receives a third argument rounded to the given decimal precision', async () => {
         const value = '9.99'
         const onChange = stub()
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -753,7 +754,7 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
@@ -765,7 +766,7 @@ describe('<NumberInput />', async () => {
       it('receives a third argument rounded to the given significant digits', async () => {
         const value = '9.175'
         const onChange = stub()
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -775,7 +776,7 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
@@ -791,7 +792,7 @@ describe('<NumberInput />', async () => {
       const value = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       // expect(inputValueOnBlur(value)).to.equal(value)
 
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -800,19 +801,19 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal(value)
+      expect(input).to.have.value(value)
     })
 
     it('should reject all symbols except for - and the locale decimal delimiter', async () => {
       // locale is set to 'en' so the decimal delimiter is '.'
       const value = '-!"·$%&/()=?¿\'|@0#¢∞¬÷“”≠´`+´ç,^*¨Ç;:_[.]{}„…0'
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -820,18 +821,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('0')
+      expect(input).to.have.value('0')
     })
 
     it('should apply the locale specific thousands delimiter', async () => {
       const value = '1234567890'
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -840,18 +841,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('1.234.567.890')
+      expect(input).to.have.value('1.234.567.890')
     })
 
     it('should remove leading zeros', async () => {
       const value = 'aabb0.0.0.1'
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -860,18 +861,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('1')
+      expect(input).to.have.value('1')
     })
 
     it('should leave only the last decimal delimiter', async () => {
       const value = ',1,,2,,,3,,4'
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -880,18 +881,18 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('123,4')
+      expect(input).to.have.value('123,4')
     })
 
     it('should not strip trailing zeros', async () => {
       const value = '1.000'
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -899,19 +900,19 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('1.000')
+      expect(input).to.have.value('1.000')
     })
 
     context('when value is less precise than specified precision', async () => {
       it('adds trailing zeros', async () => {
         const value = '123'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -920,20 +921,20 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('123.00')
+        expect(input).to.have.value('123.00')
       })
     })
 
     context('when value is more precise than specified precision', async () => {
       it('rounds to the given decimal precision', async () => {
         const value = '123.58'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -942,18 +943,18 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('123.6')
+        expect(input).to.have.value('123.6')
       })
 
       it('rounds to the given significant digits', async () => {
         const value = '123'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -962,20 +963,20 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('120')
+        expect(input).to.have.value('120')
       })
     })
 
     context('when the specified precision is 0', async () => {
       it('rounds the decimal precision to 0', async () => {
         const value = '123.93'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -984,20 +985,20 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('124')
+        expect(input).to.have.value('124')
       })
     })
 
     context('when value is negative and min is 0', async () => {
       it('sets the value to 0', async () => {
         const value = '-1'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -1006,20 +1007,20 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('0')
+        expect(input).to.have.value('0')
       })
     })
 
     context('when value is positive and max is 0', async () => {
       it('sets the value to 0', async () => {
         const value = '1'
-        const subject = await mount(
+        await mount(
           <NumberInput
             label="Name"
             defaultValue="0"
@@ -1028,19 +1029,19 @@ describe('<NumberInput />', async () => {
           />
         )
 
-        const numberInput = within(subject.getDOMNode())
+        const numberInput = await NumberInputLocator.find()
         const input = await numberInput.find('input')
 
         await input.change({ target: { value } })
         await input.blur()
 
-        expect(input.getDOMNode().value).to.equal('0')
+        expect(input).to.have.value('0')
       })
     })
   })
 
   it('should accept a default value', async () => {
-    const subject = await mount(
+    await mount(
       <NumberInput
         label="Name"
         defaultValue="7"
@@ -1048,10 +1049,10 @@ describe('<NumberInput />', async () => {
       />
     )
 
-    const numberInput = within(subject.getDOMNode())
+    const numberInput = await NumberInputLocator.find()
     const input = await numberInput.find('input')
 
-    expect(input.getDOMNode().value).to.equal('7')
+    expect(input).to.have.value('7')
   })
 
   it('should include a label', async () => {
@@ -1069,7 +1070,7 @@ describe('<NumberInput />', async () => {
 
   it('should focus the input when focus is called', async () => {
     let ref
-    const subject = await mount(
+    await mount(
       <NumberInput
         label="Name"
         defaultValue="7"
@@ -1078,7 +1079,7 @@ describe('<NumberInput />', async () => {
       />
     )
 
-    const numberInput = within(subject.getDOMNode())
+    const numberInput = await NumberInputLocator.find()
 
     ref.focus()
 
@@ -1087,7 +1088,7 @@ describe('<NumberInput />', async () => {
 
   it('should provide an inputRef prop', async () => {
     const inputRef = stub()
-    const subject = await mount(
+    await mount(
       <NumberInput
         label="Name"
         defaultValue="7"
@@ -1096,7 +1097,7 @@ describe('<NumberInput />', async () => {
       />
     )
 
-    const numberInput = within(subject.getDOMNode())
+    const numberInput = await NumberInputLocator.find()
     const input = await numberInput.find('input')
 
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
@@ -1117,28 +1118,28 @@ describe('<NumberInput />', async () => {
   })
 
   it('displays the number 0 passed as value prop', async () => {
-    const subject = await mount(
+    await mount(
       <NumberInput
         label="Name"
         value={0}
       />
     )
 
-    const numberInput = within(subject.getDOMNode())
+    const numberInput = await NumberInputLocator.find()
     const input = await numberInput.find('input')
 
-    expect(input.getDOMNode().value).to.equal('0')
+    expect(input).to.have.value('0')
   })
 
   it('passes props through to input element', async () => {
-    const subject = await mount(
+    await mount(
       <NumberInput
         label="Name"
         data-automation="foo"
       />
     )
 
-    const numberInput = within(subject.getDOMNode())
+    const numberInput = await NumberInputLocator.find()
     const input = await numberInput.find('input')
 
     expect(input.getDOMNode().dataset.automation).to.equal('foo')
@@ -1147,7 +1148,7 @@ describe('<NumberInput />', async () => {
   describe('events', async () => {
     it('up arrow responds to clicks', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1156,22 +1157,22 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[0].mouseDown()
 
       expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('1')
       expect(onChange.firstCall.args[2]).to.equal('1')
-      expect(input.getDOMNode().value).to.equal('1')
+      expect(input).to.have.value('1')
     })
 
     it('down arrow responds to clicks', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1180,22 +1181,22 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      const arrows = await numberInput.findAll('button')
+      const arrows = await numberInput.findArrowButtons()
 
       await arrows[1].mouseDown()
 
       expect(onChange).to.have.been.called()
       expect(onChange.firstCall.args[1]).to.equal('-1')
       expect(onChange.firstCall.args[2]).to.equal('-1')
-      expect(input.getDOMNode().value).to.equal('-1')
+      expect(input).to.have.value('-1')
     })
 
     it('responds to onChange event', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1204,7 +1205,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value: '1'} })
@@ -1214,7 +1215,7 @@ describe('<NumberInput />', async () => {
 
     it('responds to onKeyDown event', async () => {
       const onKeyDown = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1223,7 +1224,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.keyDown('up')
@@ -1233,7 +1234,7 @@ describe('<NumberInput />', async () => {
 
     it('responds to onBlur event', async () => {
       const onBlur = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1242,7 +1243,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.blur()
@@ -1252,7 +1253,7 @@ describe('<NumberInput />', async () => {
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1261,7 +1262,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.focus()
@@ -1287,82 +1288,82 @@ describe('<NumberInput />', async () => {
     }
 
     it('allows negative numbers to be typed into the input', async () => {
-      const subject = await mount(
+      await mount(
         <Example />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value: '-' } })
-      expect(input.getDOMNode().value).to.equal('-')
+      expect(input).to.have.value('-')
 
       await input.change({ target: { value: '-1' } })
-      expect(input.getDOMNode().value).to.equal('-1')
+      expect(input).to.have.value('-1')
     })
 
     it('allows periods to be typed into the input', async () => {
-      const subject = await mount(
+      await mount(
         <Example />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value: '.' } })
-      expect(input.getDOMNode().value).to.equal('.')
+      expect(input).to.have.value('.')
 
       await input.change({ target: { value: '.5' } })
-      expect(input.getDOMNode().value).to.equal('.5')
+      expect(input).to.have.value('.5')
     })
 
     it('allows commas to be typed into the input', async () => {
-      const subject = await mount(
+      await mount(
         <Example />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value: ',' } })
-      expect(input.getDOMNode().value).to.equal(',')
+      expect(input).to.have.value(',')
 
       await input.change({ target: { value: ',5' } })
-      expect(input.getDOMNode().value).to.equal(',5')
+      expect(input).to.have.value(',5')
     })
 
     it('formats the value according to the locale on blur', async () => {
       const value = '12345,6789'
-      const subject = await mount(
+      await mount(
         <Example locale="de" />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
-      expect(input.getDOMNode().value).to.equal(value)
+      expect(input).to.have.value(value)
 
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('12.345,6789')
+      expect(input).to.have.value('12.345,6789')
     })
 
     it('sets the value to the specified precision on blur', async () => {
       const value = '102'
-      const subject = await mount(
+      await mount(
         <Example significantDigits={2} />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       await input.change({ target: { value } })
-      expect(input.getDOMNode().value).to.equal(value)
+      expect(input).to.have.value(value)
 
       await input.blur()
 
-      expect(input.getDOMNode().value).to.equal('100')
+      expect(input).to.have.value('100')
     })
   })
 
@@ -1379,14 +1380,15 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       input.getDOMNode().value = '1234.5'
 
       await subject.setProps({ locale: 'de' })
 
-      expect(input.getDOMNode().value).to.equal('1.234,5')
+      expect(input).to.have.value('1.234,5')
+
       expect(onChange.lastCall.args[1]).to.equal('1.234,5')
       expect(onChange.lastCall.args[2]).to.equal('1234.5')
     })
@@ -1403,14 +1405,17 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
-      input.getDOMNode().value = '12.5'
+      await input.focus()
+      await input.typeIn('12.5')
+      await input.blur()
 
       await subject.setProps({ decimalPrecision: 2, significantDigits: null })
 
-      expect(input.getDOMNode().value).to.equal('12.50')
+      expect(input).to.have.value('12.50')
+
       expect(onChange.lastCall.args[1]).to.equal('12.50')
       expect(onChange.lastCall.args[2]).to.equal('12.50')
     })
@@ -1418,7 +1423,7 @@ describe('<NumberInput />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1426,13 +1431,13 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
 
       expect(await numberInput.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      const subject = await mount(
+      await mount(
         <NumberInput
           label="Name"
           defaultValue="0"
@@ -1441,7 +1446,7 @@ describe('<NumberInput />', async () => {
         />
       )
 
-      const numberInput = within(subject.getDOMNode())
+      const numberInput = await NumberInputLocator.find()
       const input = await numberInput.find('input')
 
       expect(input.getAttribute('aria-invalid')).to.exist()

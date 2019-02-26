@@ -21,34 +21,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { bindElementToUtilities } from './bindElementToUtilities'
 import { isElement } from './isElement'
 
-export function parseQueryArguments (...args) {
-  let element = document.body
-  let selector
-  let options = {
-    expectEmpty: false,
-    exact: true,
-    trim: true,
-    collapseWhitespace: true,
-    ignore: 'script,style',
-    visible: true,
-    timeout: 1900
+export function wrap (container, ...args) {
+  if (container && typeof container.getDOMNode === 'function') {
+    return container
+  } else if (isElement(container)) {
+    return bindElementToUtilities(container, ...args)
+  } else {
+    throw new Error('[ui-test-utils] within requires a valid DOM Element.')
   }
-
-  args.forEach((arg) => {
-    if (typeof arg === 'string' || arg instanceof String) {
-      selector = arg
-    } else if (isElement(arg)) {
-      element = arg
-    } else if (typeof arg === 'object' || arg instanceof Object) {
-      options = arg ? { ...options, ...arg } : options
-    }
-  })
-
-  if (selector && (selector.includes('div') || selector.includes('span'))) {
-    throw new Error('[ui-test-utils] Selectors should only include semantic elements (not `div` or `span`).')
-  }
-
-  return { element, selector, options }
 }

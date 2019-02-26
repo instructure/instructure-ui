@@ -38,6 +38,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import px from '@instructure/ui-utils/lib/px'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -48,6 +49,7 @@ import theme from './theme'
 category: components
 ---
 **/
+@testable()
 @themeable(theme, styles)
 class TextArea extends Component {
   static propTypes = {

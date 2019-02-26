@@ -27,7 +27,7 @@
     "@instructure/command-utils": "^5",
     "@instructure/cz-lerna-changelog": "^5",
     "@instructure/pkg-utils": "^5",
-    "@lerna/project": "^3.13.1",
+    "@lerna/project": "^3",
     "@storybook/react": "^4",
     "commitizen": "^3.0.7",
     "dotenv": "^6.2.0",

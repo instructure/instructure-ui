@@ -27,12 +27,13 @@ import { firstOrNull } from './firstOrNull'
 import { parseQueryArguments } from './parseQueryArguments'
 import { waitForQueryResult } from './waitForQueryResult'
 import { bindElementToUtilities } from './bindElementToUtilities'
+import { isElement } from './isElement'
 import {
   querySelectorAll,
   matchesSelector,
   querySelectorParent,
   querySelectorParents
-} from './selector'
+} from './selectors'
 
 async function find (...args) {
   return firstOrNull(await findAll(...args))
@@ -124,7 +125,7 @@ async function getQueryResult (
 
     if (Array.isArray(results)) {
       boundResults = results.map(result => bindElementToUtilities(result, customMethods))
-    } else if (results instanceof Element) {
+    } else if (isElement(results)) {
       boundResults = [bindElementToUtilities(results, customMethods)]
     }
 

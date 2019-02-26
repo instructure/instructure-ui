@@ -29,13 +29,15 @@ const execa = require('execa')
 const rl = require('readline')
 const chalk = require('chalk')
 
-exports.info = function info (...args) {
+function info (...args) {
   console.info(chalk.blue(...args)) // eslint-disable-line no-console
 }
+exports.info = info
 
-exports.error = function error (...args) {
+function error (...args) {
   console.error(chalk.red('⚠️   ', ...args))
 }
+exports.error = error
 
 class Command {
   constructor (bin, args = [], vars = []) {
@@ -86,7 +88,15 @@ function runCommandsConcurrently (commands) {
     }
   })
 
-  return runCommandSync(`${resolveBin('concurrently')}`, args)
+  let result = { status: 1 }
+
+  try {
+    result = runCommandSync(`${resolveBin('concurrently')}`, args)
+  } catch (err) {
+    error(err)
+  }
+
+  return result
 }
 exports.runCommandsConcurrently = runCommandsConcurrently
 

@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import RangeInput from '../index'
+import RangeInputLocator from '../locator'
 
 describe('<RangeInput />', async () => {
   it('renders an input with type "range"', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -36,14 +37,14 @@ describe('<RangeInput />', async () => {
         min={0}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
     expect(input).to.exist()
   })
 
   it('displays the default value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -52,14 +53,14 @@ describe('<RangeInput />', async () => {
         defaultValue={42}
       />
     )
-    const label = within(subject.getDOMNode())
-    const output = await label.find('output')
+    const rangeInput = await RangeInputLocator.find()
+    const output = await rangeInput.findOutput()
 
-    expect(output.getTextContent()).to.equal('42')
+    expect(output).to.have.text('42')
   })
 
   it('sets input value to default value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -68,14 +69,14 @@ describe('<RangeInput />', async () => {
         defaultValue={25}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
-    expect(input.getAttribute('value')).to.equal('25')
+    expect(input).to.have.value('25')
   })
 
   it('sets input value to controlled value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -85,14 +86,14 @@ describe('<RangeInput />', async () => {
         onChange={() => {}}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
-    expect(input.getAttribute('value')).to.equal('25')
+    expect(input).to.have.value('25')
   })
 
   it('sets min value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -100,14 +101,14 @@ describe('<RangeInput />', async () => {
         min={25}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
-    expect(input.getAttribute('min')).to.equal('25')
+    expect(input).to.have.attribute('min', '25')
   })
 
   it('sets max value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -115,14 +116,14 @@ describe('<RangeInput />', async () => {
         min={0}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
-    expect(input.getAttribute('max')).to.equal('75')
+    expect(input).to.have.attribute('max', '75')
   })
 
   it('sets step value', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -131,10 +132,10 @@ describe('<RangeInput />', async () => {
         step={5}
       />
     )
-    const label = within(subject.getDOMNode())
-    const input = await label.find('input[type="range"]')
+    const rangeInput = await RangeInputLocator.find()
+    const input = await rangeInput.findInput()
 
-    expect(input.getAttribute('step')).to.equal('5')
+    expect(input).to.have.attribute('step', '5')
   })
 
   it('requires an `onChange` prop with a `value` prop', async () => {
@@ -149,11 +150,12 @@ describe('<RangeInput />', async () => {
       />
     )
 
-    expect(consoleError).to.have.been.calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
+    expect(consoleError).to.have.been
+      .calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
   })
 
   it('formats the value displayed', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -165,14 +167,14 @@ describe('<RangeInput />', async () => {
         }}
       />
     )
-    const label = within(subject.getDOMNode())
-    const output = await label.find('output')
+    const rangeInput = await RangeInputLocator.find()
+    const output = await rangeInput.findOutput()
 
-    expect(output.getTextContent()).to.equal('45%')
+    expect(output).to.have.text('45%')
   })
 
   it('hides the value when displayValue is false', async () => {
-    const subject = await mount(
+    await mount(
       <RangeInput
         label="Opacity"
         name="opacity"
@@ -181,8 +183,8 @@ describe('<RangeInput />', async () => {
         displayValue={false}
       />
     )
-    const label = within(subject.getDOMNode())
-    const output = await label.find('output', { expectEmpty: true })
+    const rangeInput = await RangeInputLocator.find()
+    const output = await rangeInput.findOutput('output', { expectEmpty: true })
 
     expect(output).to.not.exist()
   })
@@ -207,7 +209,7 @@ describe('<RangeInput />', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -216,12 +218,12 @@ describe('<RangeInput />', async () => {
           defaultValue={50}
         />
       )
-      const label = within(subject.getDOMNode())
-      expect(await label.accessible()).to.be.true()
+      const rangeInput = await RangeInputLocator.find()
+      expect(await rangeInput.accessible()).to.be.true()
     })
 
     it('sets the input role to "slider"', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -230,14 +232,14 @@ describe('<RangeInput />', async () => {
           defaultValue={50}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput('input[type="range"]')
 
-      expect(input.getAttribute('role')).to.equal('slider')
+      expect(input).to.have.attribute('role', 'slider')
     })
 
     it('sets the aria-valuenow attribute', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -246,14 +248,14 @@ describe('<RangeInput />', async () => {
           defaultValue={40}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
-      expect(input.getAttribute('aria-valuenow')).to.equal('40')
+      expect(input).to.have.attribute('aria-valuenow', '40')
     })
 
     it('sets the aria-valuemin attribute', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -261,14 +263,14 @@ describe('<RangeInput />', async () => {
           min={20}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
-      expect(input.getAttribute('aria-valuemin')).to.equal('20')
+      expect(input).to.have.attribute('aria-valuemin', '20')
     })
 
     it('sets the aria-valuemax attribute', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -276,14 +278,14 @@ describe('<RangeInput />', async () => {
           min={0}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
-      expect(input.getAttribute('aria-valuemax')).to.equal('80')
+      expect(input).to.have.attribute('aria-valuemax', '80')
     })
 
     it('formats the aria-valuetext attribute', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -295,16 +297,16 @@ describe('<RangeInput />', async () => {
           }}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
-      expect(input.getAttribute('aria-valuetext')).to.equal('40%')
+      expect(input).to.have.attribute('aria-valuetext', '40%')
     })
   })
 
   describe('when the input value changes', async () => {
     it('should update the value displayed', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -313,19 +315,19 @@ describe('<RangeInput />', async () => {
           defaultValue={50}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
-      const output = await label.find('output')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
+      const output = await rangeInput.findOutput()
 
       await input.change({ target: { value: '30' } })
 
-      expect(output.getTextContent()).to.equal('30')
-      expect(input.getAttribute('aria-valuenow')).to.equal('30')
+      expect(output).to.have.text('30')
+      expect(input).to.have.attribute('aria-valuenow', '30')
     })
 
     it('should call the onChange prop', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -335,8 +337,8 @@ describe('<RangeInput />', async () => {
           onChange={onChange}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
       await input.change({ target: { value: '30' } })
 
@@ -344,7 +346,7 @@ describe('<RangeInput />', async () => {
     })
 
     it('should not update the input value when the value prop is set', async () => {
-      const subject = await mount(
+      await mount(
         <RangeInput
           label="Opacity"
           name="opacity"
@@ -354,12 +356,12 @@ describe('<RangeInput />', async () => {
           onChange={() => {}}
         />
       )
-      const label = within(subject.getDOMNode())
-      const input = await label.find('input[type="range"]')
+      const rangeInput = await RangeInputLocator.find()
+      const input = await rangeInput.findInput()
 
       await input.change({ target: { value: '30' } })
 
-      expect(input.getDOMNode().value).to.equal('0')
+      expect(input).to.have.value('0')
     })
   })
 })

@@ -23,31 +23,32 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub } from '@instructure/ui-test-utils'
 import FileDrop from '../index'
+import FileDropLocator from '../locator'
 
 describe('<FileDrop />', async () => {
   it('should render', async () => {
-    const subject = await mount(<FileDrop label="fake label" />)
+    await mount(<FileDrop label="fake label" />)
 
-    const fileInput = within(subject.getDOMNode())
-    expect(fileInput).to.exist()
+    const fileDrop = await FileDropLocator.find()
+    expect(fileDrop).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(<FileDrop label="fake label" />)
+    await mount(<FileDrop label="fake label" />)
 
-    const fileInput = within(subject.getDOMNode())
-    expect(await fileInput.accessible()).to.be.true()
+    const fileDrop = await FileDropLocator.find()
+    expect(await fileDrop.accessible()).to.be.true()
   })
 
   describe('file-type checking when onDrop', async () => {
     it('responds to drop event', async () => {
       const onDrop = stub()
 
-      const subject = await mount(<FileDrop label="fake label" onDrop={onDrop} />)
+      await mount(<FileDrop label="fake label" onDrop={onDrop} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
 
       await label.drop()
@@ -58,9 +59,9 @@ describe('<FileDrop />', async () => {
     it('responds to change event', async () => {
       const onDrop = stub()
 
-      const subject = await mount(<FileDrop label="fake label" onDrop={onDrop} />)
+      await mount(<FileDrop label="fake label" onDrop={onDrop} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const input = await fileDrop.find('input')
       await input.change()
 
@@ -74,7 +75,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           accept="image/*"
@@ -89,7 +90,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -108,7 +109,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           enablePreview
@@ -124,7 +125,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -143,7 +144,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           accept="image/*"
@@ -159,7 +160,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -178,7 +179,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           accept="jpeg"
@@ -193,7 +194,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -212,7 +213,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           accept="image/*"
@@ -227,7 +228,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -246,7 +247,7 @@ describe('<FileDrop />', async () => {
       const onDropAccepted = spy()
       const onDropRejected = spy()
 
-      const subject = await mount(
+      await mount(
         <FileDrop
           label="fake label"
           accept="jpeg"
@@ -261,7 +262,7 @@ describe('<FileDrop />', async () => {
       const dataTransfer = new DataTransfer()
       dataTransfer.items.add(file)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.drop({ dataTransfer })
 
@@ -282,9 +283,9 @@ describe('<FileDrop />', async () => {
         </section>
       )
 
-      const subject = await mount(<FileDrop label={label} />)
+      await mount(<FileDrop label={label} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       expect(await fileDrop.find('section#test-id')).to.exist()
     })
 
@@ -320,9 +321,9 @@ describe('<FileDrop />', async () => {
   describe('onDrag events', async () => {
     it('responds to onDragEnter event', async () => {
       const onDragEnter = stub()
-      const subject = await mount(<FileDrop label="fake label" onDragEnter={onDragEnter} />)
+      await mount(<FileDrop label="fake label" onDragEnter={onDragEnter} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.dragEnter()
 
@@ -331,9 +332,9 @@ describe('<FileDrop />', async () => {
 
     it('responds to onDragOver event', async () => {
       const onDragOver = stub()
-      const subject = await mount(<FileDrop label="fake label" onDragOver={onDragOver} />)
+      await mount(<FileDrop label="fake label" onDragOver={onDragOver} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.dragOver()
 
@@ -342,9 +343,9 @@ describe('<FileDrop />', async () => {
 
     it('responds to onDragLeave event', async () => {
       const onDragLeave = stub()
-      const subject = await mount(<FileDrop label="fake label" onDragLeave={onDragLeave} />)
+      await mount(<FileDrop label="fake label" onDragLeave={onDragLeave} />)
 
-      const fileDrop = within(subject.getDOMNode())
+      const fileDrop = await FileDropLocator.find()
       const label = await fileDrop.find('label')
       await label.dragLeave()
 

@@ -23,21 +23,22 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub } from '@instructure/ui-test-utils'
 import TextInput from '../index'
+import TextInputLocator from '../locator'
 
 describe('<TextInput/>', async () => {
   it('should accept a default value', async () => {
-    const subject = await mount(
+    await mount(
       <TextInput
         label="Name"
         defaultValue="Tom Servo"
       />
     )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
+    const textInput = await TextInputLocator.find()
+    const input = await textInput.findInput()
 
-    expect(input.getDOMNode().value).to.equal('Tom Servo')
+    expect(input).to.have.value('Tom Servo')
   })
 
   it('should include a label', async () => {
@@ -46,35 +47,36 @@ describe('<TextInput/>', async () => {
         label="Name"
       />
     )
-    const label = await find('label')
-    expect(label).to.exist()
+    const textInput = await TextInputLocator.find(':label(Name)')
+    expect(textInput).to.exist()
   })
 
   it('should focus the input when focus is called', async () => {
     let ref
-    const subject = await mount(
+    await mount(
       <TextInput
         label="Name"
         componentRef={el => ref = el}
       />
     )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
+    const textInput = await TextInputLocator.find()
+    const input = await textInput.findInput()
 
     ref.focus()
-    expect(input.focused()).to.be.true()
+
+    expect(input).to.be.focused()
   })
 
   it('should provide an inputRef prop', async () => {
     const inputRef = stub()
-    const subject = await mount(
+    await mount(
       <TextInput
         label="Name"
         inputRef={inputRef}
       />
     )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
+    const textInput = await TextInputLocator.find()
+    const input = await textInput.findInput()
 
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
@@ -93,7 +95,7 @@ describe('<TextInput/>', async () => {
   })
 
   it('should provide messageId to FormField', async () => {
-    const subject = await mount(
+    await mount(
       <TextInput
         label="Name"
         messages={
@@ -104,14 +106,14 @@ describe('<TextInput/>', async () => {
         }
       />
     )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
+    const textInput = await TextInputLocator.find()
+    const input = await textInput.findInput()
 
     expect(input.getAttribute('aria-describedby')).to.exist()
   })
 
   it('should have equal messagesId and aria-describedby values', async () => {
-    const subject = await mount(
+    await mount(
       <TextInput
         label="Name"
         messages={
@@ -122,8 +124,8 @@ describe('<TextInput/>', async () => {
         }
       />
     )
-    const textInput = within(subject.getDOMNode())
-    const input = await textInput.find('input')
+    const textInput = await TextInputLocator.find()
+    const input = await textInput.findInput()
 
     const id = input.getAttribute('aria-describedby')
     const messages = await textInput.find(`[id="${id}"]`)
@@ -134,14 +136,14 @@ describe('<TextInput/>', async () => {
   describe('events', async () => {
     it('responds to onChange event', async () => {
       const onChange = stub()
-      const subject = await mount(
+      await mount(
         <TextInput
           label="Name"
           onChange={onChange}
         />
       )
-      const textInput = within(subject.getDOMNode())
-      const input = await textInput.find('input')
+      const textInput = await TextInputLocator.find()
+      const input = await textInput.findInput()
 
       await input.change({ target: { value: 'foo' } })
       expect(onChange).to.have.been.called()
@@ -149,14 +151,14 @@ describe('<TextInput/>', async () => {
 
     it('responds to onBlur event', async () => {
       const onBlur = stub()
-      const subject = await mount(
+      await mount(
         <TextInput
           label="Name"
           onBlur={onBlur}
         />
       )
-      const textInput = within(subject.getDOMNode())
-      const input = await textInput.find('input')
+      const textInput = await TextInputLocator.find()
+      const input = await textInput.findInput()
 
       await input.blur()
       expect(onBlur).to.have.been.called()
@@ -164,14 +166,14 @@ describe('<TextInput/>', async () => {
 
     it('responds to onFocus event', async () => {
       const onFocus = stub()
-      const subject = await mount(
+      await mount(
         <TextInput
           label="Name"
           onFocus={onFocus}
         />
       )
-      const textInput = within(subject.getDOMNode())
-      const input = await textInput.find('input')
+      const textInput = await TextInputLocator.find()
+      const input = await textInput.findInput()
 
       await input.focus()
       expect(onFocus).to.have.been.called()
@@ -180,25 +182,27 @@ describe('<TextInput/>', async () => {
 
   describe('for a11y', async () => {
     it('should meet standards', async () => {
-      const subject = await mount(
+      await mount(
         <TextInput
           label="Name"
         />
       )
-      const textInput = within(subject.getDOMNode())
+      const textInput = await TextInputLocator.find()
+
       expect(await textInput.accessible()).to.be.true()
     })
 
     it('should set aria-invalid when errors prop is set', async () => {
-      const subject = await mount(
+      await mount(
         <TextInput
           label="Name"
           messages={[{ type: 'error', text: 'some error message' }]}
         />
       )
-      const textInput = within(subject.getDOMNode())
-      const input = await textInput.find('input')
-      expect(input.getAttribute('aria-invalid')).to.exist()
+      const textInput = await TextInputLocator.find()
+      const input = await textInput.findInput()
+
+      expect(input).to.have.attribute('aria-invalid', 'true')
     })
   })
 })

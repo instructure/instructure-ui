@@ -34,12 +34,15 @@ import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 /**
 ---
 category: components
 ---
 **/
+
+@testable()
 class NumberInput extends Component {
   static propTypes = {
     label: PropTypes.node.isRequired,

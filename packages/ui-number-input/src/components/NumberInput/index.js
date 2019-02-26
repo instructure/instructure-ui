@@ -33,6 +33,7 @@ import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
 import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
@@ -44,6 +45,7 @@ category: components
 id: NumberInputControlled
 ---
 **/
+@testable()
 @themeable(theme, styles)
 export default class NumberInput extends Component {
   static propTypes = {

@@ -21,34 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { isElement } from './isElement'
 
-export function parseQueryArguments (...args) {
-  let element = document.body
-  let selector
-  let options = {
-    expectEmpty: false,
-    exact: true,
-    trim: true,
-    collapseWhitespace: true,
-    ignore: 'script,style',
-    visible: true,
-    timeout: 1900
-  }
+import { locator } from '@instructure/ui-test-utils'
 
-  args.forEach((arg) => {
-    if (typeof arg === 'string' || arg instanceof String) {
-      selector = arg
-    } else if (isElement(arg)) {
-      element = arg
-    } else if (typeof arg === 'object' || arg instanceof Object) {
-      options = arg ? { ...options, ...arg } : options
-    }
-  })
+import RangeInput from './index'
 
-  if (selector && (selector.includes('div') || selector.includes('span'))) {
-    throw new Error('[ui-test-utils] Selectors should only include semantic elements (not `div` or `span`).')
-  }
-
-  return { element, selector, options }
-}
+export default locator(RangeInput.selector, {
+  findInput: (...args) => locator('input[type=range]').find(...args),
+  findOutput: (...args) => locator('output').find(...args)
+})

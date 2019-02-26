@@ -21,8 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { isElement } from './isElement'
+
 export function bindElementToMethods (element, methods) {
-  if (element instanceof Element) {
+  if (isElement(element)) {
     return Object.entries(methods).reduce((bound, [key, fn]) => {
       if (typeof fn === 'function') {
         bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign

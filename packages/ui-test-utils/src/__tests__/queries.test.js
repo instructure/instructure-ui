@@ -52,7 +52,7 @@ describe('queries', async () => {
       </svg>
     )
 
-    expect(await findAll(':title(Close)')).to.have.length(1)
+    expect(await findAll(':title(Close)', { visible: false })).to.have.length(1)
   })
 
   describe('by locator', async () => {
@@ -112,7 +112,7 @@ describe('queries', async () => {
     it('can get elements by matching their text content', async () => {
       await mount(
         <div data-locator="TestLocator">
-          <span>Currently showing</span>
+          <span>Currently showing: </span>
           <span>
             {`Step
             1
@@ -121,10 +121,12 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll(':textContent(Currently showing)'))
+      expect(await findAll(':textContent("Currently showing:")'))
         .to.have.length(1)
-      expect(await findAll(':textContent(Step 1 of 4)'))
+      expect(await findAll(':textContent("Step 1 of 4")'))
         .to.have.length(1)
+      expect(await findAll(':textContent("Currently showing: Step 1 of 4")'))
+          .to.have.length(1)
     })
 
     it('can get elements by matching their nested contents', async () => {
@@ -163,6 +165,15 @@ describe('queries', async () => {
 
       expect(nodes).to.have.length(1)
     })
+
+    it('gets text content correctly', async () => {
+      const subject = await mount(
+        <div>
+          <span>Hello World</span>
+        </div>
+      )
+      expect(within(subject.getDOMNode())).to.have.text('Hello World')
+    })
   })
 
   describe('by label', async () => {
@@ -191,6 +202,9 @@ describe('queries', async () => {
       expect(await findAll(':label(Name)', { exact: false }))
         .to.have.length(1)
       expect(await findAll(':label("(Last, First)")', { exact: false }))
+        .to.have.length(1)
+        .to.have.length(1)
+      expect(await findAll(':label("Name (Last, First)")', { exact: false }))
         .to.have.length(1)
     })
 
@@ -258,6 +272,29 @@ describe('queries', async () => {
         </fieldset>
       )
       expect(await findAll(':label(Full name)')).to.have.length(1)
+    })
+
+    it('can find an element with a visually hidden label', async () => {
+      await mount(
+        <button>
+          <span style={{ position: 'absolute', left: -9999, top: -9999 }}>
+            Hello World
+          </span>
+        </button>
+      )
+      expect(await find('button:label(Hello World)')).to.exist()
+    })
+
+    it('can find an element with a visually hidden label and a visible label', async () => {
+      await mount(
+        <button>
+          <span style={{ position: 'absolute', left: -9999, top: -9999 }}>
+            Hello World
+          </span>
+          <span aria-hidden="true">Hello</span>
+        </button>
+      )
+      expect(await find('button:label(Hello WorldHello)')).to.exist()
     })
   })
 

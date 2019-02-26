@@ -27,10 +27,13 @@ import string from 'chai-string'
 import dirty from 'dirty-chai'
 import promised from 'chai-as-promised'
 
+import assertions from './assertions'
+
 const init = (chai) => {
   chai.use(sinon)
   chai.use(string)
   chai.use(promised)
+  chai.use(assertions)
   chai.use(dirty)
   return chai
 }

@@ -24,7 +24,7 @@
 
 import { findAllByQuery } from './queries'
 import { parseQueryArguments } from './parseQueryArguments'
-import { querySelectorAllWithin } from './selector'
+import { querySelectorAllWithin } from './selectors'
 import { firstOrNull } from './firstOrNull'
 
 export function locator (componentSelector, customMethods = {}) {

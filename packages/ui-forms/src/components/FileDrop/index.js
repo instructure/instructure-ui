@@ -31,6 +31,7 @@ import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import View from '@instructure/ui-layout/lib/components/View'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
+import testable from '@instructure/ui-testable'
 import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -61,6 +62,8 @@ const IS_MS = isBrowserMS()
 category: components
 ---
 **/
+
+@testable()
 @themeable(theme, styles)
 export default class FileDrop extends Component {
   static propTypes = {

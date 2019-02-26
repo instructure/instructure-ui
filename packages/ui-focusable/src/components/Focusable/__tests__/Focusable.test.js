@@ -219,7 +219,7 @@ describe('<Focusable />', async () => {
 
   it('should warn when there is more than one focusable descendant', async () => {
     const consoleError = stub(console, 'error')
-    const warning = 'Warning: [Focusable] Exactly one focusable child is required (2 found).'
+    const warning = 'Warning: [Focusable] Exactly one tabbable child is required (2 found).'
     await mount(
       <Focusable>
         {(args) => {
@@ -240,7 +240,7 @@ describe('<Focusable />', async () => {
 
   it('should warn when there are no focusable descendants', async () => {
     const consoleError = stub(console, 'error')
-    const warning = 'Warning: [Focusable] Exactly one focusable child is required (0 found).'
+    const warning = 'Warning: [Focusable] Exactly one tabbable child is required (0 found).'
     await mount(
       <Focusable>
         {(args) => {

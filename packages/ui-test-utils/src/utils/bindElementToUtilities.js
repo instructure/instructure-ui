@@ -27,16 +27,23 @@ import * as helpers from './helpers'
 import * as queries from './queries'
 import { bindElementToMethods } from './bindElementToMethods'
 import { bindElementToEvents } from './bindElementToEvents'
+import { isElement } from './isElement'
 
-export function bindElementToUtilities ($element, customMethods = {}) {
-  let element = $element
-  if (typeof $element.getDOMNode === 'function') {
-    element = $element.getDOMNode()
+export function bindElementToUtilities (element, customMethods = {}) {
+  let el
+
+  if (!element) {
+    return element
+  } else if (typeof element.getDOMNode === 'function') {
+    el = element.getDOMNode()
+  } else if (isElement(element)) {
+    el = element
   }
+
   return {
-    ...bindElementToMethods(element, queries),
-    ...bindElementToEvents(element, fireEvent),
-    ...bindElementToMethods(element, helpers),
-    ...bindElementToMethods(element, customMethods)
+    ...bindElementToMethods(el, queries),
+    ...bindElementToEvents(el, fireEvent),
+    ...bindElementToMethods(el, helpers),
+    ...bindElementToMethods(el, customMethods)
   }
 }

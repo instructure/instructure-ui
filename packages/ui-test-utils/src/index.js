@@ -23,12 +23,12 @@
  */
 import { mount, stub, spy, viewport } from './utils/sandbox'
 import { wait } from './utils/wait'
-import { within, withinEach } from './utils/within'
+import { wrap } from './utils/wrap'
 import { expect } from './utils/expect'
 import { locator } from './utils/locator'
 import { debug, accessible } from './utils/helpers'
 import { firstOrNull } from './utils/firstOrNull'
-import { querySelectorAll, querySelector, matchesSelector } from './utils/selector'
+import { querySelectorAll, querySelector, matchesSelector } from './utils/selectors'
 import { parseQueryArguments } from './utils/parseQueryArguments'
 import { generateA11yTests } from './utils/generateA11yTests'
 import {
@@ -39,6 +39,8 @@ import {
   findAllFrames,
   findFrame
 } from './utils/queries'
+
+const within = wrap
 
 export {
   generateA11yTests,
@@ -53,7 +55,7 @@ export {
   locator,
   firstOrNull,
   within,
-  withinEach,
+  wrap,
   wait,
   expect,
   mount,

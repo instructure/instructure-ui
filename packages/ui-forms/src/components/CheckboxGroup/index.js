@@ -32,6 +32,7 @@ import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentT
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import testable from '@instructure/ui-testable'
 
 import Checkbox from '../Checkbox'
 
@@ -40,6 +41,8 @@ import Checkbox from '../Checkbox'
 category: components
 ---
 **/
+
+@testable()
 export default class CheckboxGroup extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
