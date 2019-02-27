@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.43.0](https://github.com/instructure/instructure-ui/compare/v5.42.0...v5.43.0) (2019-02-27)
+
+
+### Bug Fixes
+
+* **jenkins:** SSH directory doesn’t have access on post merge ([907b123](https://github.com/instructure/instructure-ui/commit/907b123))
+* **postcss-themeable-styles,ui-buttons:** add missing Button theme variables ([ac626ec](https://github.com/instructure/instructure-ui/commit/ac626ec))
+* **ui-buttons:** scope Button styles more tightly to HTML ([92f044f](https://github.com/instructure/instructure-ui/commit/92f044f))
+
+
+### Features
+
+* **ui-component-examples:** add a new examples generator ([eefb1e7](https://github.com/instructure/instructure-ui/commit/eefb1e7))
+* **ui-overlays:** add overflow property to Modal ([614933c](https://github.com/instructure/instructure-ui/commit/614933c))
+* **ui-test-utils:** add a11y test generator util ([16240d8](https://github.com/instructure/instructure-ui/commit/16240d8))
+
+
+
+
+
 <a name="5.42.0"></a>
 # [5.42.0](https://github.com/instructure/instructure-ui/compare/v5.41.1...v5.42.0) (2019-02-15)
 

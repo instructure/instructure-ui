@@ -1,6 +1,6 @@
 {
   "name": "@instructure/pkg-utils",
-  "version": "5.42.0",
+  "version": "5.43.0",
   "description": "Utilities for managing node packages in a monorepo.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

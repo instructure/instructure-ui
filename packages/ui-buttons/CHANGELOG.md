@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.43.0](https://github.com/instructure/instructure-ui/compare/v5.42.0...v5.43.0) (2019-02-27)
+
+
+### Bug Fixes
+
+* **postcss-themeable-styles,ui-buttons:** add missing Button theme variables ([ac626ec](https://github.com/instructure/instructure-ui/commit/ac626ec))
+* **ui-buttons:** scope Button styles more tightly to HTML ([92f044f](https://github.com/instructure/instructure-ui/commit/92f044f))
+
+
+### Features
+
+* **ui-test-utils:** add a11y test generator util ([16240d8](https://github.com/instructure/instructure-ui/commit/16240d8))
+
+
+
+
+
 <a name="5.42.0"></a>
 # [5.42.0](https://github.com/instructure/instructure-ui/compare/v5.41.1...v5.42.0) (2019-02-15)
 

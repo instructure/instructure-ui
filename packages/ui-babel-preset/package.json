@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-babel-preset",
-  "version": "5.42.0",
+  "version": "5.43.0",
   "description": "A UI babel preset made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -23,9 +23,9 @@
     "@babel/plugin-proposal-object-rest-spread": "7.3.2",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/plugin-transform-classes": "^7.3.3",
-    "@babel/plugin-transform-react-display-name": "^7.2.0",
     "@babel/plugin-transform-destructuring": "^7.3.2",
     "@babel/plugin-transform-react-constant-elements": "^7.2.0",
+    "@babel/plugin-transform-react-display-name": "^7.2.0",
     "@babel/plugin-transform-runtime": "^7.2.0",
     "@babel/preset-env": "^7.3.1",
     "@babel/preset-react": "^7.0.0",
@@ -34,8 +34,8 @@
     "@instructure/config-loader": "^5",
     "@instructure/ui-postcss-config": "^5",
     "babel-loader": "^8.0.5",
-    "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-dynamic-import-node": "^2.2.0",
+    "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
     "babel-preset-react-app": "^7"
   },

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/command-utils",
-  "version": "5.42.0",
+  "version": "5.43.0",
   "description": "Node CLI utilties made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -15,8 +15,6 @@
     "lint:fix": "ui-test --lint --fix"
   },
   "license": "MIT",
-  "devDependencies": {
-  },
   "dependencies": {
     "chalk": "^2.4.2",
     "concurrently": "^4.1.0",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.43.0](https://github.com/instructure/instructure-ui/compare/v5.42.0...v5.43.0) (2019-02-27)
+
+
+### Features
+
+* **ui-overlays:** add overflow property to Modal ([614933c](https://github.com/instructure/instructure-ui/commit/614933c))
+
+
+
+
+
 <a name="5.42.0"></a>
 # [5.42.0](https://github.com/instructure/instructure-ui/compare/v5.41.1...v5.42.0) (2019-02-15)
 
