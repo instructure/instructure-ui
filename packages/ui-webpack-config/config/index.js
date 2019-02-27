@@ -25,7 +25,7 @@
 module.exports = {
   cache: process.env.NODE_ENV !== 'production',
   bail: !process.env.DEBUG,
-  devtool: (process.env.NODE_ENV === 'production') ? 'source-map' : 'cheap-module-source-map',
+  devtool: (process.env.NODE_ENV === 'production') ? 'none' : 'cheap-module-source-map',
   node: { fs: 'empty' },
   resolveLoader: {
     alias: require('./resolveLoader/alias')

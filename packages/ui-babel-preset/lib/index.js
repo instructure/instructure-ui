@@ -29,7 +29,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
 
   const presets = [
     [require('@babel/preset-env').default, envPresetConfig],
-    require('@babel/preset-react').default
+    [require('@babel/preset-react').default, { useBuiltIns: true }]
   ]
 
   let plugins = [
@@ -38,7 +38,12 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
     [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
     require('@babel/plugin-proposal-export-default-from').default,
     [require('@babel/plugin-proposal-object-rest-spread').default, { useBuiltIns: true }],
-    require('@babel/plugin-transform-runtime').default,
+    [require('@babel/plugin-transform-runtime').default, {
+      corejs: false,
+      regenerator: true,
+      helpers: true,
+      useESModules: opts.esModules
+    }],
     require('@babel/plugin-syntax-dynamic-import').default
   ]
 
@@ -96,8 +101,6 @@ function getNodeEnvConfig () {
       node: 'current'
     },
     modules: 'commonjs',
-    // this is for @instructure/ui-themeable. It currently doesn't work against native class syntax.
-    // once it does, this line can be removed
     include: ['transform-classes']
   }
 }
@@ -105,10 +108,11 @@ function getNodeEnvConfig () {
 function getWebEnvConfig (opts) {
   return {
     targets: {
-      browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers'))
+      ie: 11,
     },
+    ignoreBrowserslistConfig: true,
+    useBuiltIns: 'usage',
     modules: opts.esModules ? false : 'commonjs',
-    useBuiltIns: 'entry',
     exclude: ['transform-typeof-symbol']
   }
 }

@@ -21,6 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+const fs = require('fs')
 const path = require('path')
 const { runCommandsConcurrently, getCommand, resolveBin } = require('@instructure/command-utils')
 
@@ -30,9 +32,14 @@ let args = [
   '--colors',
   '--require', '@babel/register',
   '--require', '@babel/polyfill',
-  '--exit',
-  `--opts ${path.resolve(process.cwd(), 'mocha.opts')}`
+  '--exit'
 ]
+
+const optsPath = path.resolve(process.cwd(), 'mocha.opts')
+
+if (fs.existsSync(optsPath)) {
+  args.push(`--opts ${optsPath}`)
+}
 
 const vars = [`NODE_ENV=test`]
 

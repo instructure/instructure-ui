@@ -24,7 +24,7 @@
     "enzyme": "^2.9.1",
     "glamor": "^2.20.37",
     "keycode": "^2.1.8",
-    "mocha": "^5.0.1",
+    "mocha": "^6.0.2",
     "react-addons-test-utils": "^15",
     "react-test-renderer": "^15",
     "sinon": "^7.2.3",
