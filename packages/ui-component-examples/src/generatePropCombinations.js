@@ -23,9 +23,6 @@
  */
 
 /**
- * ---
- * category: utilities
- * ---
  * Given possible values for each prop, returns all combinations of those prop values.
  * To generate the prop names and values from the component source see the `parsePropValues` utility
  * and the `component-examples-loader`

@@ -24,9 +24,6 @@
 import { parse } from 'react-docgen'
 
 /**
- * ---
- * category: utilities
- * ---
  * Given a relative path and the React component source, returns an object of all
  * enumerated and boolean prop names mapped to arrays of their possible values.
  *

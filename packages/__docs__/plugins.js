@@ -62,8 +62,7 @@ module.exports = [
       '**/ui-i18n/src/**/*.js',
       '**/ui-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
-      '**/ui-decorator/src/**/*.js',
-      '**/ui-component-examples/src/**/*.js'
+      '**/ui-decorator/src/**/*.js'
     ],
     ignore: [
       '**/*-loader.js',
@@ -90,6 +89,7 @@ module.exports = [
       '**/ui-utils/src/{react,dom}/index.js',
 
       // packages to ignore:
+      '**/ui-component-examples/src/**',
       '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
