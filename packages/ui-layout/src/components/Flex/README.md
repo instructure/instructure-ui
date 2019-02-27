@@ -9,11 +9,11 @@ layouts with flexbox.
 
 **Note:** Use the `visualDebug` property to see the borders of Flex/FlexItem while developing!
 
-Flex defaults to a `direction` of `row` (a horizontal) layout. Change `direction` to
+Flex defaults to a `direction` of `row`, creating a horizontal layout. Change `direction` to
 `column` to stack your FlexItems.
 
-When `direction` is set to `column`, FlexItems are set to handle vertical overflow by scrolling.
-_Note that this means that the overflow of FlexItems is no longer `visible` by default._
+> **Unless your layout has a specific/finite height, you probably don't need `direction="column"`.** To create a
+layout of stacked elements, it is simpler to use multiple [View](#View) components with `display="block"`.
 
 ```js
 ---
@@ -26,13 +26,13 @@ example: true
     <FlexItem>Three</FlexItem>
     <FlexItem>Four</FlexItem>
   </Flex>
-  <Flex visualDebug direction="column">
+  <Flex visualDebug direction="column" margin="none none large">
     <FlexItem>One</FlexItem>
     <FlexItem>Two</FlexItem>
     <FlexItem>Three</FlexItem>
     <FlexItem>Four</FlexItem>
   </Flex>
-  <Flex visualDebug direction="row-reverse">
+  <Flex visualDebug direction="row-reverse" margin="none none large">
     <FlexItem>One</FlexItem>
     <FlexItem>Two</FlexItem>
     <FlexItem>Three</FlexItem>
@@ -203,6 +203,29 @@ example: true
     </FlexItem>
   </Flex>
 </div>
+```
+
+### Handling overflow
+When `direction` is set to `column`, FlexItems' `overflowY` property is automagically set
+to `auto` to account for content overflow with a vertical scrollbar.
+
+> To override this default, simply set `overflowY` on the FlexItem to either `visible` or `hidden`.
+
+```js
+---
+example: true
+---
+<Flex
+  visualDebug
+  direction="column"
+>
+  <FlexItem padding="small">
+    <Heading>Pandas are cute, right?</Heading>
+  </FlexItem>
+  <FlexItem size="150px" padding="small">
+    <Img src={avatarSquare} />
+  </FlexItem>
+</Flex>
 ```
 
 ### A few common layouts

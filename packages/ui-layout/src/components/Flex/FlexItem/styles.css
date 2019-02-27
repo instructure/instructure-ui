@@ -7,11 +7,6 @@
   flex-shrink: 0;
 }
 
-.column {
-  /* useful defaults for column layouts */
-  overflow-y: auto;
-}
-
 .align--start {
   align-self: flex-start;
 }

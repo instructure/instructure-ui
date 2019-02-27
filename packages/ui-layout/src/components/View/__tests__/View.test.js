@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 import View from '../index'
 
 describe('<View />', async () => {
@@ -166,6 +166,21 @@ describe('<View />', async () => {
 
     const styles = subject.getDOMNode().style
     expect(styles['cursor']).to.equal(cursor)
+  })
+
+  it('should set overflow', async () => {
+    const subject = await mount(
+      <View overflowX="hidden" overflowY="auto">
+        <h1>Hello!</h1>
+      </View>
+    )
+
+    const view = within(subject.getDOMNode())
+
+    await wait(() => {
+      expect(view.getComputedStyle()['overflow-x']).to.equal('hidden')
+      expect(view.getComputedStyle()['overflow-y']).to.equal('auto')
+    })
   })
 
   it('should override default max-width', async () => {

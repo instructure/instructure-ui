@@ -116,7 +116,7 @@ example: true
 </div>
 ```
 
-Apply a border with the `borderWidth` prop. Utilize the 
+Apply a border with the `borderWidth` prop. Utilize the
 [CSS shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border styles to individual edges.
 
@@ -170,7 +170,7 @@ example: true
 </div>
 ```
 
-Adjust the border radius using the `borderRadius` prop. Utilize the 
+Adjust the border radius using the `borderRadius` prop. Utilize the
 [CSS shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border radii to individual corners.
 
@@ -213,6 +213,91 @@ example: true
     {lorem.sentence()}
   </View>
 </div>
+```
+
+Handle vertical and horizontal content overflow with the `overflowX` and `overflowY`
+props.
+
+> **Important CSS note:** Setting one axis to `visible` and setting the other to a different value results in `visible` behaving as `auto`.
+
+```javascript
+---
+example: true
+render: false
+---
+class OverflowExample extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      overflowY: 'visible'
+    }
+  }
+
+  updateOverflowY = (event, value) => {
+    this.setState({
+      overflowY: value
+    })
+  }
+
+  updateOverflowX = (event, value) => {
+    this.setState({
+      overflowX: value
+    })
+  }
+
+  render () {
+    return (
+      <View as="div">
+        <FormFieldGroup
+          description={<ScreenReaderContent>Overflow example</ScreenReaderContent>}
+          rowSpacing="small"
+          vAlign="top"
+          layout="columns"
+        >
+          <RadioInputGroup
+            onChange={this.updateOverflowY}
+            name="overflowY"
+            defaultValue="visible"
+            variant="toggle"
+            description="overflowY ="
+          >
+            <RadioInput label="visible" value="visible" />
+            <RadioInput label="auto" value="auto" />
+            <RadioInput label="hidden" value="hidden" />
+          </RadioInputGroup>
+          <RadioInputGroup
+            onChange={this.updateOverflowX}
+            name="overflowX"
+            defaultValue="visible"
+            variant="toggle"
+            description="overflowX ="
+          >
+            <RadioInput label="visible" value="visible" />
+            <RadioInput label="auto" value="auto" />
+            <RadioInput label="hidden" value="hidden" />
+          </RadioInputGroup>
+        </FormFieldGroup>
+        <View
+          as="div"
+          height="7rem"
+          width="20rem"
+          margin="medium none x-large"
+          overflowY={this.state.overflowY}
+          overflowX={this.state.overflowX}
+          debug
+        >
+          <div style={{width: '30rem', height: '10rem'}}>
+            <Img src={avatarSquare} constrain="cover" />
+          </div>
+
+        </View>
+      </View>
+    )
+  }
+}
+
+render(<OverflowExample />)
 ```
 
 ### Debugging
@@ -284,8 +369,8 @@ example: true
 ```
 
 ### Inline Views
-By default, View will render as a span which displays inline. When using the `as` 
-prop to render a block level element, setting `display` to `inline-block`, styles 
+By default, View will render as a span which displays inline. When using the `as`
+prop to render a block level element, setting `display` to `inline-block`, styles
 the View to display inline-block with other inline elements.
 
 ```js

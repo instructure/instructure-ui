@@ -86,7 +86,9 @@ export default class FlexItem extends Component {
     /**
     * Places dashed lines around the component's borders to help debug your layout
     */
-    visualDebug: PropTypes.bool
+    visualDebug: PropTypes.bool,
+    overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+    overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible'])
   }
 
   static defaultProps = {
@@ -105,6 +107,8 @@ export default class FlexItem extends Component {
      direction,
      grow,
      margin,
+     overflowX,
+     overflowY,
      padding,
      shrink,
      size,
@@ -123,8 +127,7 @@ export default class FlexItem extends Component {
      [styles.visualDebug]: visualDebug,
      [styles.grow]: grow,
      [styles.shrink]: shrink,
-     [styles[`align--${align}`]]: align,
-     [styles.column]: dirColumn
+     [styles[`align--${align}`]]: align
    }
 
    return (
@@ -138,6 +141,8 @@ export default class FlexItem extends Component {
        textAlign={textAlign}
        margin={margin}
        padding={padding}
+       overflowX={overflowX}
+       overflowY={overflowY || (dirColumn ? 'auto' : 'visible')}
      >
        {children}
      </View>

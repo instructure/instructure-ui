@@ -68,6 +68,9 @@ class View extends Component {
     */
     display: PropTypes.oneOf(['auto', 'block', 'inline-block', 'flex', 'inline-flex']),
 
+    overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+    overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible']),
+
     /**
     * Set the margin using familiar CSS shorthand
     */
@@ -135,7 +138,7 @@ class View extends Component {
   }
 
   static defaultProps = {
-    display: 'auto'
+    display: 'auto',
     // Note:
     // - `as` will default to type span via getElementType, so for consistency and
     // compatibility with Container we are leaving it undefined here. Otherwise
@@ -145,6 +148,8 @@ class View extends Component {
     // from parents
     // - Any props used to set inline styles should be undefined so that they
     // don't break consuming components' CSS
+    overflowX: 'visible',
+    overflowY: 'visible'
   }
 
   get hasBorder () {
@@ -225,6 +230,8 @@ class View extends Component {
       minHeight,
       maxWidth,
       maxHeight,
+      overflowX,
+      overflowY,
       stacking,
       shadow,
       size, // eslint-disable-line react/prop-types
@@ -243,6 +250,8 @@ class View extends Component {
           [styles[`textAlign--${textAlign}`]]: textAlign,
           [styles[`background--${background}`]]: background,
           [styles[`display--${display}`]]: display && display !== 'auto',
+          [styles[`overflowX--${overflowX}`]]: overflowX && overflowX !== 'visible',
+          [styles[`overflowY--${overflowY}`]]: overflowY && overflowY !== 'visible',
           [styles[`size--${size}`]]: size && size !== 'auto',
           [styles[`stacking--${stacking}`]]: stacking,
           [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',

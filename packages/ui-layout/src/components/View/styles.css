@@ -111,3 +111,19 @@
 .shadow--above {
   box-shadow: var(--shadowAbove);
 }
+
+.overflowX--hidden {
+  overflow-x: hidden;
+}
+
+.overflowX--auto {
+  overflow-x: auto;
+}
+
+.overflowY--hidden {
+  overflow-y: hidden;
+}
+
+.overflowY--auto {
+  overflow-y: auto;
+}
