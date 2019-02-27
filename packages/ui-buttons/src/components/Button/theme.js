@@ -69,8 +69,10 @@ export default function generator ({ colors, borders, forms, spacing, typography
 
     lightBackground: colors.backgroundLightest,
     lightBorderColor: darken(colors.borderLight, 10),
+    lightBorderStyle: borders.style,
     lightColor: colors.textDarkest,
     lightHoverBackground: darken(colors.backgroundLightest, 5),
+    lightActiveBackground: colors.backgroundLightest,
     lightActiveBoxShadow: `${activeShadow} ${darken(colors.borderLightest, 25)}`,
 
     ghostBackground: 'transparent',
@@ -78,12 +80,15 @@ export default function generator ({ colors, borders, forms, spacing, typography
     ghostBorderStyle: borders.style,
     ghostColor: colors.textBrand,
     ghostHoverBackground: alpha(colors.backgroundBrand, 10),
+    ghostActiveBackground: 'transparent',
     ghostActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderBrand, 20)}`,
 
     ghostInverseBackground: 'transparent',
     ghostInverseBorderColor: colors.borderLightest,
+    ghostInverseBorderStyle: borders.style,
     ghostInverseColor: colors.textLightest,
     ghostInverseHoverBackground: alpha(colors.backgroundLightest, 10),
+    ghostInverseActiveBackground: 'transparent',
     ghostInverseActiveBoxShadow: `inset 0 0 1px 1px ${alpha(colors.borderLightest, 20)}`,
 
     linkColor: colors.textLink,
