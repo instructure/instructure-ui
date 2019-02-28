@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandSync, resolveBin, error } = require('@instructure/command-utils')
+const { runCommandSync, error, info } = require('@instructure/command-utils')
 const validateMessage = require('validate-commit-msg')
 
 const runGitCommand = exports.runGitCommand = function runGitCommand (args = []) {
@@ -49,7 +49,7 @@ exports.setupGit = function setupGit () {
     remotes = runGitCommand(['remote']).split(/(\s+)/)
   } catch (err) {
     error(err)
-    process.exit()
+    process.exit(1)
   }
 
   if (GIT_REMOTE_URL) {
@@ -79,21 +79,27 @@ exports.isReleaseCommit = function isReleaseCommit (version) {
   let result
 
   try {
-    const { stdout } = runCommandSync('git', [
-      'log', '--oneline', '--format=%B', '-n', '1', 'HEAD', '|',
-      resolveBin('head'), '-n', '1', '|',
-      resolveBin('grep'), '"chore(release)"'
-    ], [], { stdio: 'pipe' })
-    result = stdout
+    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
+    result = result.split('\n')[0].trim()
   } catch (e) {
-    return false
+    error(e)
+    process.exit(1)
   }
 
-  return result && (result.trim() === `chore(release): ${version}`)
+  info(result)
+
+  return result && (result.startsWith(`chore(release): ${version}`))
 }
 
 exports.checkWorkingDirectory = function checkWorkingDirectory () {
-  const result = runGitCommand(['status', '--porcelain'])
+  let result
+
+  try {
+    result = runGitCommand(['status', '--porcelain'])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
 
   if (result) {
     error(`Refusing to operate on unclean working directory!`)
@@ -104,7 +110,14 @@ exports.checkWorkingDirectory = function checkWorkingDirectory () {
 
 exports.checkIfGitTagExists = function checkIfGitTagExists (version) {
   const tag = `v${version}`
-  const result = runGitCommand(['tag', '--list', tag])
+  let result
+
+  try {
+    result = runGitCommand(['tag', '--list', tag])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
 
   if (result) {
     error(`Git tag ${tag} already exists!`)
@@ -114,9 +127,16 @@ exports.checkIfGitTagExists = function checkIfGitTagExists (version) {
 }
 
 exports.checkIfCommitIsReviewed = function checkIfCommitIsReviewed () {
-  const result = runGitCommand(['log', '-n', '1', '|', resolveBin('grep'), 'Reviewed-on'])
+  let result
 
-  if (!result) {
+  try {
+    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  if (!result || result.indexOf('Reviewed-on') < 0) {
     error('The release commit must be reviewed and merged prior to running the release!')
     error('Use "git pull --rebase" to pull down the latest from the remote.')
     process.exit(1)
@@ -128,9 +148,13 @@ exports.createGitTagForRelease = function createGitTagForRelease (version) {
   const { GIT_REMOTE_NAME } = process.env
   const origin = GIT_REMOTE_NAME || 'origin'
 
-  runGitCommand(['tag', '-am', `Version ${version}`, tag])
-
-  runGitCommand(['push', origin, tag])
+  try {
+    runGitCommand(['tag', '-am', `Version ${version}`, tag])
+    runGitCommand(['push', origin, tag])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
 }
 
 exports.commitVersionBump = function commitVersionBump (releaseVersion) {
@@ -139,4 +163,80 @@ exports.commitVersionBump = function commitVersionBump (releaseVersion) {
 
 exports.resetToCommit = function resetToCommit (commitish = 'HEAD') {
   runGitCommand(['reset', '--hard', commitish])
+}
+
+function getPreviousReleaseCommit () {
+  return runGitCommand(['rev-list', '--tags', '--skip=1', '--max-count=1'])
+}
+exports.getPreviousReleaseCommit = getPreviousReleaseCommit
+
+function getCurrentReleaseTag () {
+  return runGitCommand(['describe', '--exact-match'])
+}
+exports.getCurrentReleaseTag = getCurrentReleaseTag
+
+function getPreviousReleaseTag () {
+  return runGitCommand(['describe', '--abbrev=0', '--tags', getPreviousReleaseCommit()])
+}
+exports.getPreviousReleaseTag = getPreviousReleaseTag
+
+const jiraMatcher = /((?!([A-Z0-9a-z]{1,10})-?$)[A-Z]{1}[A-Z0-9]+-\d+)/g
+
+exports.getIssuesInRelease = function getIssuesInRelease (jiraProjectKey) {
+  info(`Looking up issues for the ${jiraProjectKey} project...`)
+  let currentReleaseTag, previousReleaseTag
+
+  try {
+    currentReleaseTag = getCurrentReleaseTag()
+    previousReleaseTag = getPreviousReleaseTag()
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  let result
+
+  info(`${previousReleaseTag}..${currentReleaseTag}`)
+
+  try {
+    result = runGitCommand(['log', `${previousReleaseTag}..${currentReleaseTag}`])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  let issueKeys = result.match(jiraMatcher) || []
+
+  issueKeys = issueKeys
+    .filter(key => key.indexOf(jiraProjectKey) != -1)
+
+  if (issueKeys.length > 0) {
+    issueKeys = Array.from(new Set(issueKeys))
+    info(`Issues in this release: ${issueKeys.join(', ')}`)
+  }
+
+  return issueKeys
+}
+
+exports.getIssuesInCommit = function getIssuesInCommit (jiraProjectKey) {
+  let result
+
+  try {
+    result = runGitCommand(['log', '-1', '--pretty=format:%B'])
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
+
+  let issueKeys = result.match(jiraMatcher) || []
+
+  issueKeys = issueKeys
+    .filter(key => key.indexOf(jiraProjectKey) != -1)
+
+  if (issueKeys.length > 0) {
+    issueKeys = Array.from(new Set(issueKeys))
+    info(`Issues in this release: ${issueKeys.join(', ')}`)
+  }
+
+  return issueKeys
 }

@@ -30,23 +30,27 @@ const Project = require('@lerna/project')
 
 async function bumpPackages (packageName, requestedVersion) {
   let args = []
+  let bumpVersion = requestedVersion
 
-  if (requestedVersion) {
-    if (!['major', 'minor', 'patch', 'premajor', 'preminor', 'prepatch', 'prerelease']
-      .includes(requestedVersion)) {
-        // eslint-disable-next-line no-param-reassign
-        requestedVersion = semver.valid(requestedVersion)
+  if (bumpVersion) {
+    if (!['major', 'minor', 'patch'].includes(bumpVersion)) {
+      bumpVersion = semver.valid(bumpVersion)
+
+      if (!bumpVersion) {
+        error(`${requestedVersion} is not a valid semantic version!`)
+        process.exit(1)
+      }
     }
 
-    args.push(requestedVersion)
+    args.push(bumpVersion)
 
-    if (requestedVersion.startsWith('pre')) {
-      args = args.concat(['--preid', 'rc'])
-    }
-
-    if (requestedVersion.startsWith('pre') || semver.prerelease(requestedVersion)) {
+    if (semver.prerelease(bumpVersion)) {
       args.push('--exact')
     }
+  }
+
+  if (process.env.CI) {
+    args.push('--yes')
   }
 
   info(`📦  Bumping ${packageName} packages and generating changelogs...`)
@@ -54,18 +58,25 @@ async function bumpPackages (packageName, requestedVersion) {
   let releaseVersion
 
   try {
-    await runCommandAsync('lerna', ['version',
+    await runCommandAsync('lerna', [
+      'version',
       ...args,
-      '--yes',
       '--no-push',
       '--no-git-tag-version',
       '--force-publish=*',
       '--conventional-commits'
     ])
+
     releaseVersion = new Project(process.cwd()).version
     const pkg = getPackage()
+
+    if (releaseVersion === pkg.get('version')) {
+      process.exit(0)
+    }
+
     pkg.set('version', releaseVersion)
     await pkg.serialize()
+
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
     error(err)
@@ -76,25 +87,35 @@ async function bumpPackages (packageName, requestedVersion) {
 }
 exports.bumpPackages = bumpPackages
 
-async function publishPackages (packageName, releaseVersion, tag = 'rc') {
-  if (!semver.valid(releaseVersion)) {
-    error(`${releaseVersion} is not a valid semantic version!`)
-    process.exit(1)
+async function publishPackages (packageName, releaseVersion = 'prerelease', preidAndTag = 'rc') {
+  let args
+
+  if (releaseVersion === 'prerelease') {
+    args = [
+      '--canary',
+      '--preid',
+      preidAndTag,
+      '--dist-tag',
+      preidAndTag,
+      '--exact',
+      '--conventional-commits'
+    ]
+  } else {
+    args = ['from-package', '--dist-tag', 'latest']
   }
 
-  info(`📦  Publishing version ${releaseVersion} of ${packageName}...`)
+  info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
   try {
-    runCommandSync('lerna', ['publish',
-      releaseVersion,
+    runCommandSync('lerna', [
+      'publish',
+      ...args,
       '--yes',
-      '--dist-tag',
-      tag,
       '--no-push',
       '--no-git-tag-version',
-      '--force-publish=*',
-      '--conventional-commits'
+      '--force-publish=*'
     ])
-    info(`📦  Version ${releaseVersion} of ${packageName} was successfully published!`)
+
+    info(`📦  ${releaseVersion} of ${packageName} was successfully published!`)
   } catch (err) {
     error(err)
     process.exit(1)

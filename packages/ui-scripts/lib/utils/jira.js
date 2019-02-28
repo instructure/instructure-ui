@@ -25,8 +25,7 @@
 const fs = require('fs')
 const Jira = require('jira-client')
 
-const { runCommandAsync, resolveBin, info, error } = require('@instructure/command-utils')
-const { getCurrentReleaseTag, getPreviousReleaseTag } = require('./git')
+const { info, error } = require('@instructure/command-utils')
 
 const {
   JIRA_PEM_PATH,
@@ -141,65 +140,6 @@ async function createJiraVersion (jiraVersionName, config = {}) {
   }
 }
 exports.createJiraVersion = createJiraVersion
-
-exports.getIssuesInRelease = async function getIssuesInRelease (config = {}) {
-  info(`Looking up issues for the ${config.jira_project_key} project...`)
-
-  const currentReleaseTag = await getCurrentReleaseTag()
-  const previousReleaseTag = await getPreviousReleaseTag()
-
-  let result
-
-  try {
-    const { stdout } = await runCommandAsync('git', [
-      'log', `${previousReleaseTag}..${currentReleaseTag}`, '|',
-      resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
-    ], [], { stdio: 'pipe' })
-    result = stdout.trim()
-  } catch (e) {
-    info(`No Jira issues found in commit messages!`)
-  }
-
-  let issueKeys = []
-  issueKeys = (result ? result.split(/\s+/g) : [])
-
-  issueKeys = issueKeys
-    .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
-
-  if (issueKeys.length > 0) {
-    issueKeys = Array.from(new Set(issueKeys))
-    info(`Issues in this release: ${issueKeys.join(', ')}`)
-  }
-
-  return issueKeys
-}
-
-async function getIssuesInCommit (config = {}) {
-  let result
-
-  try {
-    const { stdout } = await runCommandAsync('git', [
-      'log', '-1', '--pretty=%B', '|',
-      resolveBin('grep'), '-Eo', '\'([A-Z]{3,}-)([0-9]+)\''
-    ], [], { stdio: 'pipe' })
-    result = stdout.trim()
-  } catch (e) {
-    info(`No Jira issues found in commit message!`)
-  }
-
-  let issueKeys = (result ? result.split(/\s+/g) : [])
-
-  issueKeys = issueKeys
-    .filter(key => key.indexOf(`${config.jira_project_key}`) != -1)
-
-  if (issueKeys.length > 0) {
-    issueKeys = Array.from(new Set(issueKeys))
-    info(`Issues in this release: ${issueKeys.join(', ')}`)
-  }
-
-  return issueKeys
-}
-exports.getIssuesInCommit = getIssuesInCommit
 
 async function updateJiraIssues (issueKeys, jiraVersionName, config) {
   await Promise.all(issueKeys.map((issueKey) => {

@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 const { getPackageJSON } = require('@instructure/pkg-utils')
-const { error, info, confirm } = require('@instructure/command-utils')
+const { error, info } = require('@instructure/command-utils')
 
 const {
   publishPackages,
-  bumpPackages,
   createNPMRCFile
 } = require('./utils/npm')
 const {
@@ -36,64 +35,36 @@ const {
 } = require('./utils/git')
 const {
   setupGit,
-  checkWorkingDirectory,
-  resetToCommit
+  checkWorkingDirectory
 } = require('./utils/git')
 const { getConfig } = require('./utils/config')
 
 try {
   const pkgJSON = getPackageJSON()
   // optional version argument:
-  // e.g. ui-scripts --publish 5.11.0-dev
+  // e.g. ui-scripts --publish alpha
   publish(pkgJSON.name, pkgJSON.version, process.argv[3], getConfig(pkgJSON))
 } catch (err) {
   error(err)
   process.exit(1)
 }
 
-async function publish (packageName, currentVersion, requestedVersion = 'prerelease', config = {}) {
+async function publish (packageName, currentVersion, preidAndTag, config = {}) {
   setupGit()
   createNPMRCFile(config)
   checkWorkingDirectory()
 
-  let versionToRelease, npmTag
+  let versionToRelease
 
   if (isReleaseCommit(currentVersion)) {
     checkIfGitTagExists(currentVersion)
     checkIfCommitIsReviewed()
     info(`📦  Currently on release commit for ${currentVersion} of ${packageName}.`)
     versionToRelease = currentVersion
-    npmTag = 'latest'
   } else {
-    try {
-      versionToRelease = await bumpPackages(packageName, requestedVersion)
-    } catch (err) {
-      error(err)
-      process.exit(1)
-    }
-    info(`📦  Not on a release commit--${versionToRelease} will be a pre-release.`)
-    npmTag = 'rc'
+    info(`📦  Not on a release commit--publishing a pre-release...`)
+    versionToRelease = 'prerelease'
   }
 
-  info(`📦  Version: ${versionToRelease}, Tag: ${npmTag}`)
-
-  if (!process.env.CI) {
-    const reply = await confirm('Continue? [y/n]\n')
-    if (!['Y', 'y'].includes(reply.trim())) {
-      process.exit(0)
-    }
-  }
-
-  try {
-    await publishPackages(packageName, versionToRelease, npmTag)
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
-  if (npmTag === 'rc') {
-    resetToCommit('HEAD')
-  }
-
-  info(`📦  Version ${versionToRelease} of ${packageName} was successfully released!`)
+  await publishPackages(packageName, versionToRelease, preidAndTag)
 }

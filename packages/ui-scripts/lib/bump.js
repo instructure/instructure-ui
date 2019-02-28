@@ -67,6 +67,7 @@ async function bump (packageName, currentVersion, requestedVersion, config = {})
   }
 
   info(`💾  Committing version bump commit for ${packageName} ${releaseVersion}...`)
+
   try {
     commitVersionBump(releaseVersion)
   } catch (err) {
