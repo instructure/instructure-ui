@@ -3,19 +3,11 @@ pipeline {
 
   environment {
     CI=true
-    NPM_TOKEN="${NPM_TOKEN}"
-    NPM_USERNAME="${NPM_USERNAME}"
     NPM_EMAIL="${NPM_EMAIL}"
     GIT_EMAIL="${GIT_EMAIL}"
     GIT_USERNAME="${GIT_USERNAME}"
     GIT_REMOTE_URL="${GIT_REMOTE_URL}"
     GIT_REMOTE_NAME="${GIT_REMOTE_NAME}"
-    JIRA_CONSUMER_KEY="${JIRA_CONSUMER_KEY}"
-    JIRA_TOKEN="${JIRA_TOKEN}"
-    JIRA_SECRET="${JIRA_SECRET}"
-    JIRA_PEM_PATH='/home/docker/.ssh/gerritbot_jira.pem'
-    SLACK_USERNAME="${SLACK_USERNAME}"
-    SLACK_WEBHOOK="${SLACK_WEBHOOK}"
     POST_MERGE_BUILD=true
     UV_THREADPOOL_SIZE=128
   }
@@ -25,11 +17,31 @@ pipeline {
 
       steps {
         withCredentials([
-          sshUserPrivateKey(credentialsId: '44aa91d6-ab24-498a-b2b4-911bcb17cc35', keyFileVariable: 'SSH_KEY_PATH', usernameVariable: 'SSH_USERNAME'),
-          usernamePassword(credentialsId: '6d7501aa-19d1-4b54-a0b1-90efdd52e1fa', usernameVariable: 'NPM_USERNAME', passwordVariable: 'NPM_TOKEN'),
-          usernamePassword(credentialsId: 'a133fabf-4667-401e-9875-35ec31088998',
-          usernameVariable: 'JIRA_TOKEN', passwordVariable: 'JIRA_SECRET')
-
+          sshUserPrivateKey(
+            credentialsId: '44aa91d6-ab24-498a-b2b4-911bcb17cc35',
+            keyFileVariable: 'SSH_KEY_PATH',
+            usernameVariable: 'SSH_USERNAME'
+          ),
+          sshUserPrivateKey(
+            credentialsId: 'f844b0c2-cd2d-47df-871e-e1e48afd205e',
+            keyFileVariable: 'JIRA_PEM_PATH',
+            usernameVariable: 'JIRA_CONSUMER_KEY'
+          ),
+          usernamePassword(
+            credentialsId: 'a133fabf-4667-401e-9875-35ec31088998',
+            usernameVariable: 'JIRA_TOKEN',
+            passwordVariable: 'JIRA_SECRET'
+          ),
+          usernamePassword(
+            credentialsId: 'a4c3be8a-0c49-4504-a5fa-a67bedb4a801',
+            usernameVariable: 'NPM_USERNAME',
+            passwordVariable: 'NPM_TOKEN'
+          ),
+          usernamePassword(
+            credentialsId: '2ad9702c-4312-4a72-a0f7-f3b5686db9b5',
+            usernameVariable: 'SLACK_USERNAME',
+            passwordVariable: 'SLACK_WEBHOOK'
+          )
         ]) {
           sh './docker/release'
         }
