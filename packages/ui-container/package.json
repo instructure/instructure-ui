@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-container",
-  "version": "5.43.0",
+  "version": "5.44.0",
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",

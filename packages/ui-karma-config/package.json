@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-karma-config",
-  "version": "5.43.0",
+  "version": "5.44.0",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
