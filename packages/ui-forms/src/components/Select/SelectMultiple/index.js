@@ -389,7 +389,7 @@ class SelectMultiple extends Component {
       return (
         <Tag
           className={styles.tag}
-          key={tag.label}
+          key={getOptionId(tag) + tag.label}
           title={tag.label}
           text={this.props.formatSelectedOption(tag, index)}
           size={this.props.size}
@@ -406,7 +406,7 @@ class SelectMultiple extends Component {
       return (
         <input
           type="hidden"
-          key={tag.label}
+          key={getOptionId(tag) + tag.label}
           name={this.props.name}
           value={tag.value}
         />
