@@ -112,6 +112,7 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--yes',
       '--no-push',
       '--no-git-tag-version',
+      '--no-git-reset',
       '--force-publish=*'
     ])
 

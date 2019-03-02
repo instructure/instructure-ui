@@ -65,7 +65,6 @@ async function postPublish (packageName, releaseVersion, config = {}) {
 
   if (isReleaseCommit(releaseVersion)) {
    createGitTagForRelease(releaseVersion)
-
    if (hasJiraConfig(config)) {
      issueKeys = await getIssuesInRelease(jiraProjectKey)
      jiraVersion = await getJiraVersion(jiraVersion.name, config)
@@ -73,7 +72,6 @@ async function postPublish (packageName, releaseVersion, config = {}) {
        await updateJiraIssues(issueKeys, jiraVersion.name, config)
      }
    }
-
    if (hasSlackConfig(config)) {
      postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
    }

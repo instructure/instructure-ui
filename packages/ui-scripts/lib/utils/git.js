@@ -235,7 +235,7 @@ exports.getIssuesInCommit = function getIssuesInCommit (jiraProjectKey) {
 
   if (issueKeys.length > 0) {
     issueKeys = Array.from(new Set(issueKeys))
-    info(`Issues in this release: ${issueKeys.join(', ')}`)
+    info(`Issues in this commit: ${issueKeys.join(', ')}`)
   }
 
   return issueKeys
