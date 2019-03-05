@@ -44,7 +44,8 @@ const commands = [
   '--install-react',
   '--server',
   '--tag',
-  '--deprecate'
+  '--deprecate',
+  '--vrt'
 ]
 
 function listCommands () {
@@ -75,6 +76,8 @@ if (process.argv.includes('--help')) {
   require('./lint-commit')
 } else if (process.argv.includes('--lint')) {
   require('./test/lint')
+} else if (process.argv.includes('--vrt')) {
+  require('./test/vrt')
 } else if (process.argv.includes('--clean')) {
   require('./build/clean')
 } else if (process.argv.includes('--install-react')) {

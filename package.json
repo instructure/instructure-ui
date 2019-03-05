@@ -62,7 +62,9 @@
     "deploy": "ui-scripts --deploy-docs",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples"
+    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
+    "storybook": "yarn start:examples",
+    "test:vrt": "ui-test --vrt -p 9001"
   },
   "license": "MIT",
   "resolutions": {

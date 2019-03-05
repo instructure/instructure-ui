@@ -23,6 +23,7 @@
  */
 
 import React from 'react'
+import 'storybook-chromatic'
 import { configure, addDecorator } from '@storybook/react'
 import { withOptions } from '@storybook/addon-options'
 import { getStorybook, storiesOf } from '@storybook/react'

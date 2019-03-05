@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 /*
  * The MIT License (MIT)
  *
@@ -25,14 +23,24 @@
  */
 require('dotenv').config()
 
-process.env['NODE_ENV'] = process.env.NODE_ENV || 'test'
+const path = require('path')
+const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
-if (process.argv.includes('--lint')) {
-  require('./lint')
-} else if (process.argv.includes('--mocha')) {
-  require('./mocha')
- } else if (process.argv.includes('--vrt')) {
-  require('./vrt')
-} else {
-  require('./karma')
+const rootPath = path.resolve(process.cwd(), '../../node_modules')
+
+let result
+
+// ui-build --vrt -p 8080
+const args = process.argv.slice(2)
+const portIndex = args.findIndex(arg => arg === '-p')
+let port = '9001'
+if (portIndex > 0) {
+  port = args[portIndex + 1]
+
 }
+
+result = runCommandsConcurrently({
+  chromatic: getCommand('chromatic', ['test', '--storybook-port', port, '--no-interactive', '--exit-zero-on-changes'], [`CHROMATIC_APP_CODE=${process.env.CHROMATIC_APP_CODE}`])
+})
+
+process.exit(result.status)
