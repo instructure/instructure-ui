@@ -25,7 +25,7 @@ import React from 'react'
 import { ListItem } from '../index'
 
 export default {
-  sections: 'size',
+  sectionProp: 'size',
   getComponentProps: (props) => {
     return {
       children: [

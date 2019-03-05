@@ -28,7 +28,7 @@ const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((v, i) => {
     return (
       <PaginationButton key={i} current={i === current}>
-        #{i}
+        {i}
       </PaginationButton>
     )
   })
