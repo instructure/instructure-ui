@@ -193,7 +193,7 @@ export default class MenuItemGroup extends Component {
         ++index
         const value = child.props.value || index
 
-        return (<li> {
+        return (<li role="none"> {
           safeCloneElement(child, {
             tabIndex: (isTabbable && index === 0) ? 0 : -1,
             controls,
@@ -222,7 +222,7 @@ export default class MenuItemGroup extends Component {
       >
         <span id={this._labelId}>{this.renderLabel()}</span>
         <ul
-          role="group"
+          role="menu"
           className={styles.items}
           aria-disabled={this.props.disabled ? 'true' : null}
           aria-labelledby={this._labelId}

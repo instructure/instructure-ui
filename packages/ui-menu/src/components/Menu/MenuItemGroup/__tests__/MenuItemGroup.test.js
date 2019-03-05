@@ -47,7 +47,7 @@ describe('<MenuItemGroup />', async () => {
     expect(group).to.exist()
   })
 
-  it('should set the role to "group"', async () => {
+  it('should set the role to "menu"', async () => {
     await mount(
       <MenuItemGroup label="Select one">
         <MenuItem>Foo</MenuItem>
@@ -59,7 +59,21 @@ describe('<MenuItemGroup />', async () => {
     const container = await MenuItemGroupLocator.find()
     const group = await container.find(':label(Select one)')
 
-    expect(group.getAttribute('role')).to.equal('group')
+    expect(group.getAttribute('role')).to.equal('menu')
+  })
+
+  it('should set the list item role to "none"', async () => {
+    await mount(
+      <MenuItemGroup label="Select one">
+        <MenuItem>Food</MenuItem>
+        <MenuItem>Bar</MenuItem>
+      </MenuItemGroup>
+    )
+
+    const container = await MenuItemGroupLocator.find()
+    const menuItem = await container.find(':label(Select one) li')
+
+    expect(menuItem.getAttribute('role')).to.equal('none')
   })
 
   it('should default to children with type "radio"', async () => {
