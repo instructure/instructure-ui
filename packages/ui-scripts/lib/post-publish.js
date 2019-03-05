@@ -54,7 +54,6 @@ try {
 
 async function postPublish (packageName, releaseVersion, config = {}) {
   setupGit()
-  checkWorkingDirectory()
 
   const jiraProjectKey = `${config.jira_project_key}`
 
@@ -64,24 +63,27 @@ async function postPublish (packageName, releaseVersion, config = {}) {
   let issueKeys = []
 
   if (isReleaseCommit(releaseVersion)) {
-   createGitTagForRelease(releaseVersion)
-   if (hasJiraConfig(config)) {
-     issueKeys = await getIssuesInRelease(jiraProjectKey)
-     jiraVersion = await getJiraVersion(jiraVersion.name, config)
-     if (issueKeys.length > 0 && jiraVersion.id) {
-       await updateJiraIssues(issueKeys, jiraVersion.name, config)
-     }
-   }
-   if (hasSlackConfig(config)) {
-     postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
-   }
+    checkWorkingDirectory()
+    createGitTagForRelease(releaseVersion)
+
+    if (hasJiraConfig(config)) {
+      issueKeys = await getIssuesInRelease(jiraProjectKey)
+      jiraVersion = await getJiraVersion(jiraVersion.name, config)
+      if (issueKeys.length > 0 && jiraVersion.id) {
+        await updateJiraIssues(issueKeys, jiraVersion.name, config)
+      }
+    }
+
+    if (hasSlackConfig(config)) {
+      postStableReleaseSlackMessage(jiraVersion, issueKeys, config)
+    }
   } else {
-   if (hasJiraConfig(config)) {
-     issueKeys = await getIssuesInCommit(jiraProjectKey)
-   }
-   if (hasSlackConfig(config) && issueKeys.length > 0) {
-     postReleaseCandidateSlackMessage(jiraVersion.name, issueKeys, config)
-   }
+    if (hasJiraConfig(config)) {
+      issueKeys = await getIssuesInCommit(jiraProjectKey)
+    }
+    if (hasSlackConfig(config) && issueKeys.length > 0) {
+      postReleaseCandidateSlackMessage(jiraVersion.name, issueKeys, config)
+    }
   }
 
   info(`📦  Post-publish steps for ${releaseVersion} of ${packageName} complete!`)

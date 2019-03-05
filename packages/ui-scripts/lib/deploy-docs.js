@@ -26,7 +26,7 @@ const { error, info } = require('@instructure/command-utils')
 
 const { publishGithubPages } = require('./utils/gh-pages')
 const { getConfig } = require('./utils/config')
-const { setupGit, isReleaseCommit } = require('./utils/git')
+const { setupGit, isReleaseCommit, checkWorkingDirectory } = require('./utils/git')
 
 try {
   const pkgJSON = getPackageJSON()
@@ -40,6 +40,7 @@ function deployDocs (packageName, currentVersion, config = {}) {
   setupGit()
 
   if (isReleaseCommit(currentVersion)) {
+    checkWorkingDirectory()
     info(`📖   Deploying documentation for ${currentVersion} of ${packageName}...`)
     try {
       publishGithubPages(config)
