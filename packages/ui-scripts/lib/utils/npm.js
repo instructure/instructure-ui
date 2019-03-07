@@ -28,6 +28,18 @@ const { getPackage, getChangedPackages } = require('@instructure/pkg-utils')
 const { runCommandAsync, runCommandSync, error, info  } = require('@instructure/command-utils')
 const Project = require('@lerna/project')
 
+async function syncRepoPackageVersion () {
+  let releaseVersion = new Project(process.cwd()).version
+  const pkg = getPackage()
+
+  if (releaseVersion !== pkg.get('version')) {
+    pkg.set('version', releaseVersion)
+    await pkg.serialize()
+  }
+
+  return releaseVersion
+}
+
 async function bumpPackages (packageName, requestedVersion) {
   let args = []
   let bumpVersion = requestedVersion
@@ -67,15 +79,7 @@ async function bumpPackages (packageName, requestedVersion) {
       '--conventional-commits'
     ])
 
-    releaseVersion = new Project(process.cwd()).version
-    const pkg = getPackage()
-
-    if (releaseVersion === pkg.get('version')) {
-      process.exit(0)
-    }
-
-    pkg.set('version', releaseVersion)
-    await pkg.serialize()
+    releaseVersion = await syncRepoPackageVersion()
 
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
@@ -105,6 +109,8 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
   }
 
   info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
+  let publishedVersion
+
   try {
     runCommandSync('lerna', [
       'publish',
@@ -116,11 +122,15 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--force-publish=*'
     ])
 
-    info(`📦  ${releaseVersion} of ${packageName} was successfully published!`)
+    publishedVersion = await syncRepoPackageVersion()
+
+    info(`📦  ${publishedVersion} of ${packageName} was successfully published!`)
   } catch (err) {
     error(err)
     process.exit(1)
   }
+
+  return publishedVersion
 }
 exports.publishPackages = publishPackages
 
