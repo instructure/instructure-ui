@@ -40,4 +40,4 @@ Options that can be run with `yarn test`/`yarn test:watch`:
 Code coverage thresholds are configured in `karma.config.js` and code is instrumented
 via babel config (see [@instructure/ui-babel-preset](#ui-babel-preset)).
 If coverage numbers go below the configured values, the test run will fail.
-When you run `yarn test` a detailed coverage report is generated in the `coverage/` directory.
+When you run `yarn test` (or `yarn test --scope [package name]`) a detailed coverage report is generated in the `coverage/` directory.
