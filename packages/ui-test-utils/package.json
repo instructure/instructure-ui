@@ -34,8 +34,8 @@
     "dirty-chai": "^2.0.1",
     "fetch-mock": "^7.3.0",
     "keycode": "^2",
-    "pretty-format": "^24.0.0",
-    "sinon": "^7.2.3",
+    "pretty-format": "^24.4.0",
+    "sinon": "^7.2.7",
     "sinon-chai": "^3.3.0",
     "sizzle": "^2.3.3",
     "wait-for-expect": "^1.1.0"

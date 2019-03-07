@@ -24,16 +24,9 @@
 
 import React from 'react'
 import 'storybook-chromatic'
-import { configure, addDecorator } from '@storybook/react'
-import { withOptions } from '@storybook/addon-options'
-import { getStorybook, storiesOf } from '@storybook/react'
 
-addDecorator(
-  withOptions({
-    name: 'instructure-ui',
-    showAddonPanel: false
-  })
-)
+import { create } from '@storybook/theming'
+import { getStorybook, storiesOf, configure, addParameters } from '@storybook/react'
 
 import '@instructure/ui-themes/lib/canvas'
 // eslint-disable-next-line import/no-unresolved
@@ -41,6 +34,19 @@ import '@instructure/ui-polyfill-loader!'
 
 // eslint-disable-next-line no-console
 console.log('Generating component examples...')
+
+addParameters({
+  options: {
+    theme: create({
+      base: 'light',
+      name: 'instructure-ui',
+      brandUrl: 'https://instructure.design',
+      brandImage: 'https://instructure.design/icons-bea652a7d0546b99c7cba9d3b4a538ee/favicon-32x32.png'
+    }),
+    showPanel: false,
+    isFullscreen: false
+  }
+})
 
 const examplesContext = require.context('../../', true, /^.*\/src\/.*\.examples\.js$/)
 const examples = examplesContext.keys().map(requirePath => examplesContext(requirePath))

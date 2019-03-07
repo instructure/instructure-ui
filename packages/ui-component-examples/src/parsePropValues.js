@@ -65,8 +65,7 @@ export default function parsePropValues (fileSource) {
     parsedSrc = parse(
      fileSource,
      null,
-     null,
-     { legacyDecorators: true }
+     null
     )
   } catch (error) {
     throw new Error(

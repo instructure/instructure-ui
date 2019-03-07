@@ -34,7 +34,7 @@ const requireHook = require('css-modules-require-hook')
 
 const transformCSSRequire = require('./transform')
 const generateComponentId = require('./generateComponentId')
-const getScopedNameGenerator = require('./getScopedNameGenerator')
+const generateScopedName = require('./generateScopedName')
 
 const matchExtensions = /\.css$/i
 
@@ -43,7 +43,9 @@ const DEBUG = Boolean(process.env.DEBUG)
 module.exports = function transformThemeableStyles ({ types: t }) {
   const STYLES = new Map()
 
-  let componentId
+  let _componentId
+
+  const getComponentId = () => _componentId
 
   let requireHookInitialized = false
   let thisPluginOptions = {
@@ -70,10 +72,11 @@ module.exports = function transformThemeableStyles ({ types: t }) {
       if (!DEBUG) {
         requireHook({
           ignore: thisPluginOptions.ignore,
-          generateScopedName: (name, filepath, css) => {
-            componentId = generateComponentId(css)
-            return getScopedNameGenerator(thisPluginOptions.themeablerc, componentId, name, filepath, css)
+          preprocessCss: (css, filepath) => {
+            _componentId = generateComponentId(css)
+            return css
           },
+          generateScopedName: generateScopedName.bind(null, getComponentId, thisPluginOptions.themeablerc),
           prepend: getPostCSSPlugins(thisPluginOptions.postcssrc),
           processCss: (css, filepath) => {
             // remove comments
@@ -112,7 +115,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
 
             path.parentPath.replaceWith(
-              generateVariableDeclaration(path.node.local.name, tokens, css, componentId)
+              generateVariableDeclaration(path.node.local.name, tokens, css, getComponentId())
             )
           }
         }
@@ -141,7 +144,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
 
             if (!t.isExpressionStatement(path.parent)) {
-              path.replaceWithSourceString(transformCSSRequire(tokens, css, componentId))
+              path.replaceWithSourceString(transformCSSRequire(tokens, css, getComponentId()))
             } else {
               path.remove()
             }

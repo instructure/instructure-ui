@@ -19,7 +19,7 @@
     "@instructure/canvas-supported-browsers": "^1",
     "@instructure/config-loader": "^5",
     "@instructure/postcss-themeable-styles": "^5",
-    "autoprefixer": "^9.4.9",
+    "autoprefixer": "^9.4.10",
     "cssnano-preset-default": "^4",
     "postcss": "^7",
     "postcss-bidirection": "^2.6.0",

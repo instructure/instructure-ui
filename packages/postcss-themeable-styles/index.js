@@ -33,7 +33,7 @@ module.exports = postcss.plugin('postcss-themeable-styles', () => {
           .forEach((match) => {
             const matcher = new RegExp(match[0].replace(/[\\^$*+?.()|[\]{}]/g, '\\$&'), 'gm')
             // eslint-disable-next-line no-useless-escape
-            value = value.replace(matcher, `\$\{theme.${match[1]} || 'none'\}`)
+            value = value.replace(matcher, `\$\{theme.${match[1]} || 'inherit'\}`)
           })
         decl.value = value // eslint-disable-line no-param-reassign
       })

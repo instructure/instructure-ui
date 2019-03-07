@@ -27,7 +27,7 @@
     "mocha": "^6.0.2",
     "react-addons-test-utils": "^15",
     "react-test-renderer": "^15",
-    "sinon": "^7.2.3",
+    "sinon": "^7.2.7",
     "sinon-chai": "^3.3.0"
   },
   "peerDependencies": {

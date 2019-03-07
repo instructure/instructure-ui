@@ -21,24 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const path = require('path')
+const loaderUtils = require('loader-utils')
+const { getPackage } = require('@instructure/pkg-utils')
 
 const ENV = process.env.BABEL_ENV || process.env.NODE_ENV || 'development'
+const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
 
-const genericNames = require('generic-names')
-
-module.exports = function getScopedNameGenerator (config, componentId, name, filepath, css) { // for css modules class names
-  // for the default we assume the folder name is the same as the component displayName:
-  let scopedNamePattern = (ENV === 'production') ? `${componentId}_[hash:base64:4]` : `[folder]__${componentId}-[local]`
-
-  if (config && typeof config.generateScopedName === 'function') {
-    scopedNamePattern = config.generateScopedName({ env: ENV }, componentId, name, filepath, css)
-  } else if (config && typeof config.generateScopedName === 'string') {
-    scopedNamePattern = config.generateScopedName
+module.exports = function generateScopedName (getComponentId, config, name, filepath, css) {
+  const componentId = getComponentId()
+  const context = {
+    env: ENV,
+    resourcePath: filepath,
+    context: process.cwd()
   }
 
-  const generateScopedName = genericNames(scopedNamePattern, {
-    context: process.cwd()
-  })
+  let scopedNamePattern
 
-  return generateScopedName(name, filepath)
+  if (config && typeof config.generateScopedName === 'function') {
+    scopedNamePattern = config.generateScopedName(context, name, filepath, css, componentId)
+  } else if (config && typeof config.generateScopedName === 'string') {
+    scopedNamePattern = config.generateScopedName
+  } else if (DEBUG) {
+    const pkg = getPackage({ cwd: path.dirname(filepath) })
+    const pkgName = pkg.name.split('/').pop()
+    scopedNamePattern = `${pkgName}__[folder]--[local]`
+  } else {
+    scopedNamePattern = `${componentId}_${loaderUtils.getHashDigest(name, 'md5', 'base52', 4)}`
+  }
+
+  scopedNamePattern = scopedNamePattern.replace(/\[local\]/gi, name)
+
+  return loaderUtils.interpolateName(context, scopedNamePattern, { content: css })
 }

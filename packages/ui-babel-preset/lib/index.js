@@ -118,7 +118,6 @@ function getWebEnvConfig (opts) {
       browsers: loadConfig('browserslist', require('@instructure/canvas-supported-browsers'))
     },
     useBuiltIns: 'entry',
-
     modules: opts.esModules ? false : 'commonjs',
     // debug: true, // un-comment if you want to see what browsers are being targeted and what plugins that means it will activate
     exclude: ['transform-typeof-symbol']

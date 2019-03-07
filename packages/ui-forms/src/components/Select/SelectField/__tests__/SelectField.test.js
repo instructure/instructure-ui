@@ -25,6 +25,7 @@
 import React from 'react'
 import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import SelectField from '../index'
+import optionsListStyles from '../../SelectOptionsList/styles.css'
 import styles from '../styles.css'
 
 import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
@@ -514,10 +515,10 @@ describe('<SelectField />', async () => {
       const items = await selectField.findAllOptions()
 
       await input.keyDown('down')
-      expect(items[1].getDOMNode().className).to.include('highlighted')
+      expect(items[1].getDOMNode().className).to.include(optionsListStyles.highlighted)
 
       await input.keyDown('up')
-      expect(items[0].getDOMNode().className).to.include('highlighted')
+      expect(items[0].getDOMNode().className).to.include(optionsListStyles.highlighted)
 
       expect(onSelect).to.not.have.been.called()
 
@@ -549,10 +550,10 @@ describe('<SelectField />', async () => {
       const items = await selectField.findAllOptions()
 
       await input.keyDown('end')
-      expect(items[2].getDOMNode().className).to.include('highlighted')
+      expect(items[2].getDOMNode().className).to.include(optionsListStyles.highlighted)
 
       await input.keyDown('home')
-      expect(items[0].getDOMNode().className).to.include('highlighted')
+      expect(items[0].getDOMNode().className).to.include(optionsListStyles.highlighted)
     })
 
     it('highlights selectedOption when expanding', async () => {
@@ -574,7 +575,7 @@ describe('<SelectField />', async () => {
       await input.click()
 
       const items = await selectField.findAllOptions()
-      expect(items[1].getDOMNode().className).to.include('highlighted')
+      expect(items[1].getDOMNode().className).to.include(optionsListStyles.highlighted)
     })
 
     it(`should highlight first option when options are loaded asynchronously`, async () => {

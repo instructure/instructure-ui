@@ -22,7 +22,6 @@
     "@instructure/postcss-themeable-styles": "^5",
     "@instructure/ui-postcss-config": "^5",
     "css-modules-require-hook": "^4.2.3",
-    "generic-names": "^2.0.1",
     "loader-utils": "^1.2.3",
     "postcss": "^7",
     "postcss-modules": "^1.4.1",

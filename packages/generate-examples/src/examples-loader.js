@@ -64,8 +64,7 @@ export default function (source, map) {
           parsedSrc = parse(
             fs.readFileSync(`${componentPath}${!componentPath.includes('.') ? '.js' : ''}`, 'utf8'),
             null,
-            null,
-            {legacyDecorators: true}
+            null
           )
         } catch (error) {
           loader.emitWarning(error)

@@ -28,7 +28,7 @@ const loadConfig = require('@instructure/config-loader')
 
 const generateComponentId = require('./generateComponentId')
 const transformCSSRequire = require('./transform')
-const getScopedNameGenerator = require('./getScopedNameGenerator')
+const generateScopedName = require('./generateScopedName')
 
 const themeableConfig = loadConfig('themeable')
 const noop = () => {}
@@ -79,9 +79,7 @@ module.exports = function (content, map, meta) {
     return postcss([
       require('@instructure/postcss-themeable-styles'),
       require('postcss-modules')({
-        generateScopedName: (name, filepath, css) => {
-          return getScopedNameGenerator(themeableConfig, componentId, name, filepath, css)
-        },
+        generateScopedName: generateScopedName.bind(null, () => componentId, themeableConfig),
         getJSON: noop
       }),
       require('postcss-reporter')({ clearReportedMessages: true })
