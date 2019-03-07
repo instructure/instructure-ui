@@ -32,6 +32,7 @@ let args = [
   '--colors',
   '--require', '@babel/register',
   '--require', '@babel/polyfill',
+  '--require', 'jsdom-global/register',
   '--exit'
 ]
 

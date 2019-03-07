@@ -33,7 +33,6 @@
     "chai-string": "^1.5.0",
     "dirty-chai": "^2.0.1",
     "fetch-mock": "^7.3.0",
-    "jsdom-global": "^3.0.2",
     "keycode": "^2",
     "pretty-format": "^24.0.0",
     "sinon": "^7.2.3",
@@ -42,7 +41,6 @@
     "wait-for-expect": "^1.1.0"
   },
   "peerDependencies": {
-    "jsdom": ">=10.0.0",
     "react": "^0.14.9 || ^15.0.0 || ^16.0.0",
     "react-dom": "^0.14.9 || ^15.0.0 || ^16.0.0"
   },

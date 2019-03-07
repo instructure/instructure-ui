@@ -29,6 +29,7 @@ require('dotenv').config()
 
 const commands = [
   '--publish',
+  '--release',
   '--fix-publish',
   '--post-publish',
   '--bump',
@@ -56,7 +57,7 @@ if (process.argv.includes('--help')) {
   require('./post-publish')
 } else if (process.argv.includes('--bump')) {
   require('./bump')
-} else if (process.argv.includes('--publish')) {
+} else if (process.argv.includes('--publish') || process.argv.includes('--release')) {
   require('./publish')
 } else if (process.argv.includes('--fix-publish')) {
   require('./fix-publish')
@@ -87,4 +88,5 @@ if (process.argv.includes('--help')) {
 } else {
   error('[ui-scripts]: Invalid command!')
   listCommands()
+  process.exit(1)
 }

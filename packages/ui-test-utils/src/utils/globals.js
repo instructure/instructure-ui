@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import jsdom from 'jsdom-global'
 import MutationObserverShim from '@sheerun/mutationobserver-shim'
 
 const noop = () => {}
@@ -30,7 +29,7 @@ let cleanupGlobals = noop
 
 const initGlobals = () => {
   if (typeof document === 'undefined') {
-    cleanupGlobals = jsdom()
+    console.error(`[ui-test-utils] requires access to the DOM API!`)
   }
   // jsdom doesn't provide Date on the window object and we need it for wait-for-expect
   global.window.Date = (global.window.Date && global.window.Date.now) ? global.window.Date : global.Date
