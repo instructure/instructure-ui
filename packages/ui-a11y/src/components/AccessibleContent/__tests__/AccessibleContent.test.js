@@ -33,13 +33,10 @@ describe('<AccessibleContent />', async () => {
         Presentational Content
       </AccessibleContent>
     )
-    const accessibleContent = within(subject.getDOMNode())
-    const screenReaderContent = await accessibleContent.find(
-      ':textContent(Screen Reader Content)',
-      { visible: false }
-    )
+    const content = within(subject.getDOMNode())
+    const alt = await content.find(':withText(Screen Reader Content)')
 
-    expect(screenReaderContent.onscreen()).to.be.false()
+    expect(alt.onscreen()).to.be.false()
   })
 
   it('should render a presentational content', async () => {
@@ -48,11 +45,11 @@ describe('<AccessibleContent />', async () => {
         Presentational Content
       </AccessibleContent>
     )
-    const accessibleContent = within(subject.getDOMNode())
-    const presentationContent = await accessibleContent.find(':textContent(Presentational Content)')
+    const content = within(subject.getDOMNode())
+    const presentational = await content.find(':textContent(Presentational Content)')
 
-    expect(presentationContent.onscreen()).to.be.true()
-    expect(presentationContent.getAttribute('aria-hidden')).to.exist()
+    expect(presentational.onscreen()).to.be.true()
+    expect(presentational.getAttribute('aria-hidden')).to.exist()
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {

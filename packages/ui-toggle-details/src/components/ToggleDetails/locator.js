@@ -21,41 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
-  locator,
-  querySelector,
-  findByQuery
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import ToggleDetails from './index'
 
 const ToggleLocator = locator('[aria-expanded][aria-controls]')
 
-const contentQuery = (element, selector, options) => {
-  let results = []
-  let { result} = ToggleLocator.query(element)
-  let contentSelector
-  if (result && result.getAttribute) {
-    contentSelector = `#${result.getAttribute('aria-controls')}`
-    const content = querySelector(contentSelector, options)
-    if (content) {
-      results.push(content)
+export const customMethods = {
+  clickToggle: async (element, ...args) => (await ToggleLocator.find(element)).click(...args),
+  findToggle: (...args) => ToggleLocator.find(...args),
+  findContent: async (element, ...args) => {
+    const toggle = await ToggleLocator.find(element)
+    if (toggle) {
+      return locator(`#${toggle.getAttribute('aria-controls')}`).find(...args)
+    } else {
+      return null
     }
-  }
-  return {
-    results,
-    selector: contentSelector
   }
 }
 
-export default locator(ToggleDetails.selector, {
-  clickToggle: async (element, ...args) => {
-    return (await ToggleLocator.find(element)).click(...args)
-  },
-  findToggle: (...args) => {
-    return ToggleLocator.find(...args)
-  },
-  findContent: (...args) => {
-    return findByQuery(contentQuery, ...args)
-  }
-})
+export default locator(ToggleDetails.selector, customMethods)

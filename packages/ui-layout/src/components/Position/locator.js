@@ -22,45 +22,32 @@
  * SOFTWARE.
  */
 
-import {
-  findByQuery,
-  locator,
-  querySelector
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import Position, { PositionTarget, PositionContent } from './index'
-
-const query = (ComponentIdentifier, element, selector, options) => {
-  const results = []
-  let componentSelector
-  // Account for an element here that may not be the position root. This occurs when the
-  // `positionTarget` prop is set on Popover and the trigger and differs from the target
-  const positionRoot = querySelector(element, `[${Position.locatorAttribute}]`, { visible: false })
-  if (positionRoot && positionRoot.getAttribute) {
-    componentSelector = `[${ComponentIdentifier.locatorAttribute}="${positionRoot.getAttribute(Position.locatorAttribute)}"]`
-    // query document because content and target aren't necessarily a child of the component itself
-    const result = querySelector(componentSelector, options)
-    if (result) {
-      results.push(result)
-    }
-  }
-  return {
-    results,
-    selector: componentSelector
-  }
-}
-
-const customMethods =  {
-  findTarget: (...args) => findByQuery(query.bind(null, PositionTarget), ...args),
-  findContent: (...args) => findByQuery(query.bind(null, PositionContent), ...args)
-}
-
-const PositionLocator = locator(Position.selector, customMethods)
 
 export const PositionTargetLocator = locator(PositionTarget.selector)
 export const PositionContentLocator = locator(PositionContent.selector)
 
-export default {
-  ...PositionLocator,
-  ...customMethods
+export const customMethods = {
+  findTarget: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${PositionTarget.locatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  },
+  findContent: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(Position.locatorAttribute)
+      return locator(`[${PositionContent.locatorAttribute}="${id}"]`)
+        .find(...args)
+    } else {
+      return null
+    }
+  }
 }
+
+export default locator(Position.selector, customMethods)

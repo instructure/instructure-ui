@@ -71,7 +71,7 @@ describe('<FormFieldGroup />', async () => {
     const fieldset = await formFieldGroup.find('fieldset')
 
     const messagesId = fieldset.getAttribute('aria-describedby')
-    const message = await formFieldGroup.find(`#${messagesId}`, { visible: false })
+    const message = await formFieldGroup.find(`#${messagesId}`)
 
     expect(message.getTextContent()).to.equal('Invalid name')
   })
@@ -88,7 +88,7 @@ describe('<FormFieldGroup />', async () => {
     )
 
     const formFieldGroup = within(subject.getDOMNode())
-    const legend = await formFieldGroup.find(`legend:contains(${description})`, { visible: false })
+    const legend = await formFieldGroup.find(`legend:contains(${description})`)
     expect(legend).to.exist()
   })
 

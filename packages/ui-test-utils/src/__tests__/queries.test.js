@@ -27,19 +27,19 @@ import { mount, expect, findAll, find, spy, wait, within } from '../index'
 describe('queries', async () => {
   it('throws an error message by default when nothing is found', async () => {
     await expect(findAll('[selected]', { timeout: 0 })).to.be.rejected()
-    await expect(findAll(':label(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(findAll(':withLabel(pineapple)', { timeout: 0 })).to.be.rejected()
     await expect(findAll('pineapple', { timeout: 0 })).to.be.rejected()
-    await expect(findAll(':textContent(pineapple)', { timeout: 0 })).to.be.rejected()
+    await expect(findAll(':withText(pineapple)', { timeout: 0 })).to.be.rejected()
     await expect(findAll('table', { timeout: 100 })).to.be.rejected()
   })
 
   it('should return empty array when configured to expect empty results', async () => {
     const options = { expectEmpty: true }
     expect(await findAll('[selected]', options)).to.have.length(0)
-    expect(await findAll(':label(pineapple)', options)).to.have.length(0)
+    expect(await findAll(':withLabel(pineapple)', options)).to.have.length(0)
     expect(await findAll('pineapple', options)).to.have.length(0)
-    expect(await findAll(':textContent(pineapple)', options)).to.have.length(0)
-    expect(await findAll(':title(pineapple)', options)).to.have.length(0)
+    expect(await findAll(':withText(pineapple)', options)).to.have.length(0)
+    expect(await findAll(':withTitle(pineapple)', options)).to.have.length(0)
   })
 
   it('works with SVG elements', async () => {
@@ -52,7 +52,7 @@ describe('queries', async () => {
       </svg>
     )
 
-    expect(await findAll(':title(Close)', { visible: false })).to.have.length(1)
+    expect(await findAll(':withTitle(Close)')).to.have.length(1)
   })
 
   describe('by locator', async () => {
@@ -123,9 +123,9 @@ describe('queries', async () => {
 
       expect(await findAll(':textContent("Currently showing:")'))
         .to.have.length(1)
-      expect(await findAll(':textContent("Step 1 of 4")'))
+      expect(await findAll(':withText("Step 1 of 4")'))
         .to.have.length(1)
-      expect(await findAll(':textContent("Currently showing: Step 1 of 4")'))
+      expect(await findAll(':withText("Currently showing: Step 1 of 4")'))
           .to.have.length(1)
     })
 
@@ -147,7 +147,7 @@ describe('queries', async () => {
         </div>
       )
 
-      expect(await findAll('[data-locator="TestLocator"]:textContent(Foo)', { expectEmpty: true }))
+      expect(await findAll('[data-locator="TestLocator"]:withText(Foo)', { expectEmpty: true }))
         .to.have.length(0)
     })
 
@@ -161,7 +161,7 @@ describe('queries', async () => {
       const subject = await mount(<div />)
       subject.getDOMNode().appendChild(div)
 
-      const nodes = await findAll(':textContent(£24.99)')
+      const nodes = await findAll(':withText(£24.99)')
 
       expect(nodes).to.have.length(1)
     })
@@ -186,7 +186,7 @@ describe('queries', async () => {
         </div>
       )
       /* eslint-enable jsx-a11y/label-has-associated-control */
-      expect(await findAll(':label(Name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Name)')).to.have.length(1)
     })
 
     it('can find an input with a complex aria-labelledby attribute', async () => {
@@ -201,10 +201,10 @@ describe('queries', async () => {
       /* eslint-enable jsx-a11y/label-has-associated-control */
       expect(await findAll(':label(Name)', { exact: false }))
         .to.have.length(1)
-      expect(await findAll(':label("(Last, First)")', { exact: false }))
+      expect(await findAll(':withLabel("(Last, First)")', { exact: false }))
         .to.have.length(1)
         .to.have.length(1)
-      expect(await findAll(':label("Name (Last, First)")', { exact: false }))
+      expect(await findAll(':withLabel("Name (Last, First)")', { exact: false }))
         .to.have.length(1)
     })
 
@@ -221,8 +221,8 @@ describe('queries', async () => {
           </div>
         </div>
       )
-      expect(await findAll(':label(First name)')).to.have.length(1)
-      expect(await findAll(':label(Last name)')).to.have.length(1)
+      expect(await findAll(':withLabel(First name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Last name)')).to.have.length(1)
     })
 
     it('can find an input with an id via a for attribute', async () => {
@@ -232,36 +232,36 @@ describe('queries', async () => {
           <input id="name-id" />
         </div>
       )
-      expect(await findAll(':label(Name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Name)')).to.have.length(1)
     })
 
     it('can find an input nested in a label', async () => {
       await mount(<label>Name<input /></label>)
-      expect(await findAll(':label(Name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Name)')).to.have.length(1)
     })
 
     it('handles a label with no form control', async () => {
       // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label>First name</label>)
-      expect(await find(':label(Name)', { expectEmpty: true }))
+      expect(await find(':withLabel(Name)', { expectEmpty: true }))
         .to.be.null()
     })
 
     it('handles a totally empty label', async () => {
       // eslint-disable-next-line jsx-a11y/label-has-associated-control
       await mount(<label />)
-      expect(await find(':label(" ")', { expectEmpty: true }))
+      expect(await find(':withLabel(" ")', { expectEmpty: true }))
         .to.be.null()
     })
 
     it('can find an input with an aria-label', async () => {
       await mount(<input aria-label="Name" />)
-      expect(await findAll(':label(Name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Name)')).to.have.length(1)
     })
 
     it('can find a button by its text content', async () => {
       await mount(<button>Submit</button>)
-      expect(await findAll(':label(Submit)')).to.have.length(1)
+      expect(await findAll(':withLabel(Submit)')).to.have.length(1)
     })
 
     it('can find a fieldset by its legend', async () => {
@@ -271,7 +271,7 @@ describe('queries', async () => {
           <label>First name <input type="text"/></label>
         </fieldset>
       )
-      expect(await findAll(':label(Full name)')).to.have.length(1)
+      expect(await findAll(':withLabel(Full name)')).to.have.length(1)
     })
 
     it('can find an element with a visually hidden label', async () => {
@@ -282,7 +282,7 @@ describe('queries', async () => {
           </span>
         </button>
       )
-      expect(await find('button:label(Hello World)')).to.exist()
+      expect(await find('button:withLabel(Hello World)')).to.exist()
     })
 
     it('can find an element with a visually hidden label and a visible label', async () => {
@@ -294,7 +294,7 @@ describe('queries', async () => {
           <span aria-hidden="true">Hello</span>
         </button>
       )
-      expect(await find('button:label(Hello WorldHello)')).to.exist()
+      expect(await find('button:withLabel(Hello WorldHello)')).to.exist()
     })
   })
 
@@ -309,7 +309,7 @@ describe('queries', async () => {
       )
 
       expect(await findAll(':title(Delete)')).to.have.length(1)
-      expect(await findAll(':title(Ignore)', { exact: false })).to.have.length(2)
+      expect(await findAll(':withTitle(Ignore)', { exact: false })).to.have.length(2)
     })
 
     it('can find an SVG element by its title', async () => {
@@ -322,7 +322,7 @@ describe('queries', async () => {
         </svg>
       )
 
-      expect(await findAll(':title(Close)', { visible: false })).to.have.length(1)
+      expect(await findAll(':withTitle(Close)')).to.have.length(1)
     })
   })
 

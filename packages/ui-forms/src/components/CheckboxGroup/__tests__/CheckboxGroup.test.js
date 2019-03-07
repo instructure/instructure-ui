@@ -66,7 +66,7 @@ describe('<CheckboxGroup />', async () => {
     const checkboxGroup = await CheckboxGroupLocator.find()
     const fieldset = await checkboxGroup.find('fieldset')
     const messagesId = fieldset.getAttribute('aria-describedby')
-    const messages = await checkboxGroup.find(`#${messagesId}`, { visible: false })
+    const messages = await checkboxGroup.find(`#${messagesId}`)
 
     expect(messages.getTextContent()).to.equal('Invalid name')
   })
@@ -87,7 +87,7 @@ describe('<CheckboxGroup />', async () => {
     )
 
     const checkboxGroup = await CheckboxGroupLocator.find()
-    const legend = await checkboxGroup.find('legend', { visible: false })
+    const legend = await checkboxGroup.find('legend')
     expect(legend.getTextContent()).to.equal(description)
   })
 

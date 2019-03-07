@@ -32,7 +32,7 @@ const InputLocator = locator('input[type="text"]')
 const OptionsListLocator = locator('ul')
 const OptionsLocator = locator('li')
 
-const customMethods = {
+export const customMethods = {
   findInput: (...args) => InputLocator.find(...args),
   findOptionsList: async (element, ...args) => {
     const content = await PositionLocator.findContent(element)
@@ -44,13 +44,8 @@ const customMethods = {
   },
   findAllOptions: async (element, ...args) => {
     const content = await PositionLocator.findContent(element)
-    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : null
+    return content ? OptionsLocator.findAll(content.getDOMNode(), ...args) : []
   }
 }
 
-const SelectLocator = locator(Select.selector, customMethods)
-
-export default {
-  ...SelectLocator,
-  ...customMethods
-}
+export default locator(Select.selector, customMethods)

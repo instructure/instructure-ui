@@ -27,7 +27,7 @@ import debounce from '@instructure/debounce'
 // original source: https://github.com/kentcdodds/dom-testing-library/blob/master/src/wait-for-element.js
 // this doesn't require the mutation observer shim because we don't run the tests with JSDOM
 export function waitForQueryResult (
-  query,
+  queryFn,
   {
     element,
     timeout = 1900,
@@ -49,22 +49,30 @@ export function waitForQueryResult (
 
     let lastError, observer, timer, lastResult
 
+    lastResult = {}
+
     function runQuery () {
-      if (typeof query !== 'function') {
+      if (typeof queryFn !== 'function') {
+        lastResult = {
+          results: [],
+          selector: JSON.stringify(queryFn)
+        }
         onDone(new Error([
-          '[ui-test-utils] Invalid element query.',
-          JSON.stringify(query)
-        ].join('\n')),  { results: [] })
+          '[ui-test-utils] Invalid element query function.',
+          lastResult.selector
+        ].join('\n')), lastResult)
         return
       }
 
       try {
-        lastResult = query()
-        const result = lastResult.results || []
-
+        const { results, selector } = queryFn()
+        lastResult = {
+          results: results || [],
+          selector: selector || queryFn.name
+        }
         if (
-          (!expectEmpty && result.length > 0) ||
-          (expectEmpty && result.length === 0)
+          (!expectEmpty && lastResult.results.length > 0) ||
+          (expectEmpty && lastResult.results.length === 0)
         ) {
           // Return the query result when we get what we expected:
           onDone(null, lastResult)
@@ -105,10 +113,11 @@ export function waitForQueryResult (
       onDone(lastError || timedoutError, lastResult)
     }
 
-    timer = setTimeout(onTimeout, timeout)
-    observer = new MutationObserver(onMutation)
-    observer.observe(element, mutationObserverOptions)
-
-    runQuery()
+    setTimeout(() => {
+      timer = setTimeout(onTimeout, timeout)
+      observer = new MutationObserver(onMutation)
+      observer.observe(element, mutationObserverOptions)
+      runQuery()
+    }, 0)
   })
 }

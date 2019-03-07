@@ -23,8 +23,8 @@
  */
 
 import { mount, stub, spy, viewport } from './utils/sandbox'
-import { wait } from './utils/wait'
-import { wrap } from './utils/wrap'
+import { waitForExpect } from './utils/waitForExpect'
+import { wrapQueryResult } from './utils/queryResult'
 import { expect } from './utils/expect'
 import { locator } from './utils/locator'
 import { debug, accessible } from './utils/helpers'
@@ -33,6 +33,8 @@ import { querySelectorAll, querySelector, matchesSelector } from './utils/select
 import { parseQueryArguments } from './utils/parseQueryArguments'
 import { generateA11yTests } from './utils/generateA11yTests'
 import {
+  findWithText,
+  findWithLabel,
   findAllByQuery,
   findByQuery,
   find,
@@ -41,13 +43,18 @@ import {
   findFrame
 } from './utils/queries'
 
-const within = wrap
+// aliases for backwards compat:
+const within = wrapQueryResult
+const wrap = wrapQueryResult
+const wait = waitForExpect
 
 export {
   generateA11yTests,
   viewport,
   accessible,
   parseQueryArguments,
+  findWithLabel,
+  findWithText,
   findByQuery,
   findAllByQuery,
   matchesSelector,
@@ -56,7 +63,9 @@ export {
   locator,
   firstOrNull,
   within,
+  wrapQueryResult,
   wrap,
+  waitForExpect,
   wait,
   expect,
   mount,

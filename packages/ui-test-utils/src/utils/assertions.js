@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { elementToString } from './elementToString'
-import { wrap } from './wrap'
+import { wrapQueryResult } from './queryResult'
 import { isElement } from './isElement'
 import { matches } from './matchers'
 
@@ -32,7 +32,7 @@ export default function assertions (chai, utils) {
 
   function wrapObj (obj) {
     if (isElement(obj)) {
-      return wrap(obj)
+      return wrapQueryResult(obj)
     } else if (obj && typeof obj.getDOMNode === 'function') {
       return obj
     }
@@ -178,7 +178,9 @@ export default function assertions (chai, utils) {
 
   addAssertion('visible', booleanAssertion('visible', 'visible'))
   addAssertion('descendants', listAndCountAssertion('descendants', 'descendants'))
+  addAssertion('children', listAndCountAssertion('children', 'children'))
   addAssertion('ancestors', listAndCountAssertion('ancestors', 'ancestors'))
+  addAssertion('parents', listAndCountAssertion('parents', 'parents'))
   addAssertion('attribute', propAndValueAssertion('attribute', 'attribute'))
   addAssertion('style', propAndValueAssertion('style', 'computed CSS style'))
   addAssertion('bounds', propAndValueAssertion('bounds', 'bounding client rect'))

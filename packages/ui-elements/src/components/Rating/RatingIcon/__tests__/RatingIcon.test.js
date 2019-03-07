@@ -25,22 +25,34 @@
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
+import ApplyTheme from '@instructure/ui-themeable/lib/components/ApplyTheme'
+import Transition from '@instructure/ui-motion/lib/components/Transition'
 import TransitionLocator from '@instructure/ui-motion/lib/components/Transition/locator'
 
 import RatingIcon from '../index'
 
 describe('<RatingIcon />', async () => {
   it('transitions when filled on render and animateFill is true', async () => {
-    await mount(<RatingIcon filled animateFill />)
+    await mount(
+      <ApplyTheme theme={{ [Transition.theme]: {
+        duration: '2s'
+      }}}>
+        <RatingIcon filled animateFill />
+      </ApplyTheme>
+    )
     expect(await TransitionLocator.find()).to.exist()
   })
 
   it('transitions when filled after render and animateFill is true', async () => {
     const subject = await mount(
-      <RatingIcon
-        filled={false}
-        animateFill={true}
-      />
+      <ApplyTheme theme={{ [Transition.theme]: {
+        duration: '2s'
+      }}}>
+        <RatingIcon
+          filled={false}
+          animateFill={true}
+        />
+      </ApplyTheme>
     )
 
     expect(await TransitionLocator.find({ expectEmpty: true })).to.not.exist()

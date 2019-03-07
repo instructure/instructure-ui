@@ -26,27 +26,15 @@ import { locator, parseQueryArguments } from '@instructure/ui-test-utils'
 import Tooltip from './index'
 import PopoverLocator from '../Popover/locator'
 
-const customMethods = {
-  findTrigger: async (...args) => {
-    const trigger = await PopoverLocator.findTrigger()
-    if (trigger) {
-      return trigger.find('[aria-describedby]', ...args)
-    } else {
-      return null
-    }
+export const customMethods = {
+  findTrigger: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findTrigger(element, '[aria-describedby]', options)
   },
-  findContent: async (...args) => {
-    const { options } = parseQueryArguments(...args)
-    const content = await PopoverLocator.findContent({ ...options, visible: false })
-    if (content) {
-      return content.find('[role="tooltip"]', options)
-    } else {
-      return null
-    }
+  findContent: (...args) => {
+    const { element, options } = parseQueryArguments(...args)
+    return PopoverLocator.findContent(element, '[role="tooltip"]', options)
   }
 }
 
-export default {
-  ...locator(Tooltip.selector, customMethods),
-  ...customMethods
-}
+export default locator(Tooltip.selector, customMethods)

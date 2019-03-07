@@ -53,11 +53,11 @@ describe('<Tooltip />', async () => {
       const tip = await TooltipLocator.find()
       const trigger = await tip.findTrigger()
 
-      const content = await tip.findContent({ visible: false })
+      const content = await tip.findContent()
 
       await wait(() => {
-        expect(trigger.getTextContent()).to.equal('Hover or focus me')
-        expect(content.getTextContent()).to.equal('Hello')
+        expect(trigger).to.have.text('Hover or focus me')
+        expect(content).to.have.text('Hello')
       })
     })
 
@@ -75,8 +75,7 @@ describe('<Tooltip />', async () => {
       const content = await tip.findContent()
 
       await wait(() => {
-        expect(trigger.getAttribute('aria-describedby'))
-          .to.equal(content.getAttribute('id'))
+        expect(content).to.contain(`#${trigger.getAttribute('aria-describedby')}`)
       })
     })
 

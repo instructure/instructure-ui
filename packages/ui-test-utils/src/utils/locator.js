@@ -27,20 +27,14 @@ import { parseQueryArguments } from './parseQueryArguments'
 import { querySelectorAllWithin } from './selectors'
 import { firstOrNull } from './firstOrNull'
 
-export function locator (componentSelector, customMethods = {}) {
+export function locator (containerSelector, customMethods = {}) {
   const queryAll = (element, selector, options) => {
-    return {
-      results: querySelectorAllWithin(componentSelector, element, selector, options),
-      selector: componentSelector
-    }
+    return querySelectorAllWithin(containerSelector, element, selector, options)
   }
+  queryAll.displayName = containerSelector
 
   const query = (...args) => {
-    const { selector, results } = queryAll(...args)
-    return {
-      result: firstOrNull(results),
-      selector
-    }
+    return firstOrNull(queryAll(...args))
   }
 
   const findAll = (...args) => {
@@ -58,12 +52,34 @@ export function locator (componentSelector, customMethods = {}) {
     return firstOrNull(await findAll(...args))
   }
 
+  const findWithText = (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, `:withText("${selector}")`, options)
+  }
+
+  const findWithLabel = (...args) => {
+    const { element, selector, options } = parseQueryArguments(...args)
+    return find(element, `:withLabel("${selector}")`, options)
+  }
+
+  let methods = {}
+  Object.keys(customMethods).forEach((methodKey) => {
+    methods[methodKey] = async (...args) => {
+      const { element, selector, options } = parseQueryArguments(...args)
+      const container = await find(element)
+      return container ? container[methodKey](selector, options) : null
+    }
+  })
+
   return {
     customMethods,
-    selector: componentSelector,
+    selector: containerSelector,
     query,
     queryAll,
     findAll,
-    find
+    find,
+    findWithText,
+    findWithLabel,
+    ...methods
   }
 }

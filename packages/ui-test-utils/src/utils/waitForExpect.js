@@ -21,15 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { bindElementToUtilities } from './bindElementToUtilities'
-import { isElement } from './isElement'
+ import _waitForExpect from 'wait-for-expect'
 
-export function wrap (container, ...args) {
-  if (container && typeof container.getDOMNode === 'function') {
-    return container
-  } else if (isElement(container)) {
-    return bindElementToUtilities(container, ...args)
-  } else {
-    throw new Error('[ui-test-utils] within requires a valid DOM Element.')
-  }
-}
+ function waitForExpect (callback = () => {}, { timeout = 1900, interval = 50 } = {}) {
+   return _waitForExpect(callback, timeout, interval)
+ }
+
+ export {
+   waitForExpect
+ }

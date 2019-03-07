@@ -79,7 +79,7 @@ describe('<Avatar />', async () => {
       )
 
       const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img', { visible: false })
+      const image = await avatar.find('img')
 
       await image.load()
 
@@ -98,7 +98,7 @@ describe('<Avatar />', async () => {
       )
 
       const avatar = await AvatarLocator.find()
-      const image = await avatar.find('img', { visible: false })
+      const image = await avatar.find('img')
 
       await image.load()
 
@@ -121,7 +121,7 @@ describe('<Avatar />', async () => {
     it('should render a single initial', async () => {
       await mount(<Avatar name="Jessica" />)
 
-      expect(await AvatarLocator.find(':textContent(J)')).to.exist()
+      expect(await AvatarLocator.find()).to.have.text('J')
     })
   })
 
@@ -129,7 +129,7 @@ describe('<Avatar />', async () => {
     it('should skip them', async () => {
       await mount(<Avatar name=" Jessica Jones" />)
 
-      expect(await AvatarLocator.find(':textContent(JJ)')).to.exist()
+      expect(await AvatarLocator.find()).to.have.text('JJ')
     })
   })
 
@@ -138,7 +138,7 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="" />)
 
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find(`.${styles.initials}`, { visible: false })
+      const initials = await avatar.find(`.${styles.initials}`)
 
       expect(initials).to.exist()
       expect(initials.getTextContent()).to.equal('')
@@ -149,16 +149,12 @@ describe('<Avatar />', async () => {
     it('should render the text as an aria-label attribute', async () => {
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
 
-      expect(await AvatarLocator.find(':label(This is a test)')).to.exist()
+      expect(await AvatarLocator.find()).to.have.label('This is a test')
     })
 
     it('should set the role attribute to img', async () => {
       await mount(<Avatar name="Jessica Jones" alt="This is a test" />)
-
-      const avatar = await AvatarLocator.find()
-      const img = await avatar.find('[role="img"]')
-
-      expect(img).to.exist()
+      expect(await AvatarLocator.find()).to.contain('[role="img"]')
     })
   })
 

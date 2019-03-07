@@ -51,7 +51,7 @@ function querySelectorAll (...args) {
   let results = []
 
   if (selector) {
-    results = findAll(selector, element, options)
+    results = findAllMatches(element, selector, options)
   } else {
     throwQueryError(element, selector)
   }
@@ -83,46 +83,36 @@ function querySelectorParents (element, selector, options) {
   return results
 }
 
-function querySelectorParent (element, selector, options) {
-  if (matchesSelector(element, selector)) {
-    return element
-  } else {
-    let parentNode = element.parentNode
-
-    while (
-      parentNode &&
-      parentNode !== document &&
-      !matchesSelector(parentNode, selector, options)
-    ) {
-      parentNode = parentNode.parentNode
-    }
-
-    return matchesSelector(parentNode, selector, options) ? parentNode : null
-  }
+function querySelectorFrames (element, selector, options ) {
+  return querySelectorAll(element, 'iframe')
+    .filter(frame => matchesSelector(frame, selector, options))
+    .map((frame) => {
+      let doc = null
+      try {
+        doc = frame.contentDocument.documentElement
+      } catch (e) {
+        console.warn(`[ui-test-utils] could not find document element for iframe: ${e}`)
+      }
+      return doc
+    })
+    .filter(doc => doc !== null)
 }
 
 function querySelectorAllWithin (containerSelector, element, selector, options) {
-  // find all of the container root nodes that match the selector...
-  const containers = querySelectorAll(element, containerSelector, options)
+  // find all of the container root nodes...
+  let containers = querySelectorAll(element, containerSelector, options)
 
   if (selector) {
-    // if there is a selector, query within each container for matches inside...
-    return containers.reduce((previouResults, element) => {
-      let results = querySelectorAll(element, selector, options)
-      results = results
-        .map((result) => {
-          const root = querySelectorParent(result, containerSelector, options)
-          // ignore matches that are in a nested container...
-          // we always return the root so that customMethods work...
-          return (root !== element) ? null : root
-        })
-        .filter(result => result !== null)
-      return [ ...previouResults, ...results]
-    }, [])
-  } else {
-    // otherwise just return the container root nodes
-    return containers
+    // if there is a selector, filter out containers that don't have a match inside...
+     containers = containers
+      .filter((container) => {
+        const results = querySelectorAll(container, selector)
+          .filter(result => firstOrNull(querySelectorParents(result, containerSelector, options)) === container)
+        return results.length > 0
+      })
   }
+
+  return containers
 }
 
 function matchesSelector (...args) {
@@ -146,23 +136,18 @@ function throwQueryError (element, selector) {
   )
 }
 
-function findAll (selector, element, options) {
-  addPseudos(options)
-
+function findAllMatches (element, selector, options) {
   let results = []
 
-  if (element && matches(element, selector, options)) {
+  if (matchesSelector(element, selector, options)) {
     results.push(element)
   }
 
+  addPseudos(options)
   Sizzle(selector, element, results)
 
   if (options.ignore) {
     results = results.filter(result => !matchesSelector(result, options.ignore))
-  }
-
-  if (options.visible) {
-    results = results.filter(result => matchesSelector(result, ':visible'))
   }
 
   results = results.filter(result => matchesSelector(result, ':exists'))
@@ -172,8 +157,7 @@ function findAll (selector, element, options) {
 
 function matches (element, selector, options) {
   addPseudos(options)
-
-  return Sizzle.matchesSelector(element, selector)
+  return element && Sizzle.matchesSelector(element, selector)
 }
 
 function addPseudos (
@@ -185,26 +169,29 @@ function addPseudos (
 ) {
   const { createPseudo } = Sizzle.selectors
 
-  // :label(text)
-  Sizzle.selectors.pseudos.label = createPseudo((text) => {
+  // :withLabel(text)
+  Sizzle.selectors.pseudos.withLabel = createPseudo((text) => {
     return (element) => {
       return matchElementByLabel(element, text, options)
     }
   })
+  Sizzle.selectors.pseudos.label = Sizzle.selectors.pseudos.withLabel
 
-  // :textContent(text)
-  Sizzle.selectors.pseudos.textContent = createPseudo((text) => {
+  // :withText(text)
+  Sizzle.selectors.pseudos.withText = createPseudo((text) => {
     return (element) => {
       return matchElementByText(element, text, options)
     }
   })
+  Sizzle.selectors.pseudos.textContent = Sizzle.selectors.pseudos.withText
 
-  // :title(text)
-  Sizzle.selectors.pseudos.title = createPseudo((text) => {
+  // :withTitle(text)
+  Sizzle.selectors.pseudos.withTitle = createPseudo((text) => {
     return (element) => {
       return matchElementByTitle(element, text, options)
     }
   })
+  Sizzle.selectors.pseudos.title = Sizzle.selectors.pseudos.withTitle
 
   // :clickable
   Sizzle.selectors.pseudos.clickable = (element) => {
@@ -236,7 +223,7 @@ export {
   matchesSelector,
   querySelector,
   querySelectorAll,
-  querySelectorParent,
   querySelectorParents,
-  querySelectorAllWithin
+  querySelectorAllWithin,
+  querySelectorFrames
 }

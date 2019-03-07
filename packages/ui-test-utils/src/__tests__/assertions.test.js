@@ -204,7 +204,7 @@ describe('assertions', async () => {
         </svg>
       )
 
-      expect(await find('svg', { visible: false })).to.have.title('Close')
+      expect(await find('svg')).to.have.title('Close')
     })
   })
 
@@ -242,6 +242,25 @@ describe('assertions', async () => {
         </form>
       )
       expect(await find('input')).to.not.have.ancestors('input')
+    })
+  })
+
+  describe('#parents', async () => {
+    it('matches an input with a matching parent element', async () => {
+      await mount(
+        <form>
+          <input type="text"/>
+        </form>
+      )
+      expect(await find('input')).to.have.exactly(1).parents('form')
+    })
+    it('does not include the element itself', async () => {
+      await mount(
+        <form>
+          <input type="text"/>
+        </form>
+      )
+      expect(await find('input')).to.not.have.parents('input')
     })
   })
 
@@ -285,6 +304,49 @@ describe('assertions', async () => {
         </table>
       )
       expect(await find('table')).to.have.exactly(2).descendants('table')
+    })
+  })
+
+  describe('#children', async () => {
+    it('matches an element with matching children', async () => {
+      await mount(
+        <form>
+          <input type="text"/>
+          <input type="text"/>
+          <input type="text"/>
+        </form>
+      )
+      expect(await find('form')).to.have.exactly(3).children('input')
+    })
+    it('does not include the element itself', async () => {
+      await mount(
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table>
+                          <tbody>
+                            <tr>
+                              <td>
+                                I am so nested!
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      )
+      expect(await find('table')).to.have.exactly(2).children('table')
     })
   })
 })

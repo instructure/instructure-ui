@@ -33,13 +33,17 @@ import RatingLocator from '../locator'
 describe('<Rating />', async () => {
   it('should render the correct number of icons', async () => {
     await mount(<Rating label="Course rating" iconCount={5} />)
-    const icons = await RatingLocator.findAll('svg')
+    const rating = await RatingLocator.find()
+    const icons = await rating.findAll('svg')
+
     expect(icons.length).to.equal(5)
   })
 
   it('should handle a valueMax of zero', async () => {
     await mount(<Rating label="Course rating" valueMax={0} />)
-    const icons = await RatingLocator.findAll('svg')
+    const rating = await RatingLocator.find()
+    const icons = await rating.findAll('svg')
+
     expect(icons.length).to.equal(3)
   })
 
@@ -69,7 +73,9 @@ describe('<Rating />', async () => {
       />
     )
 
-    const icons = await RatingLocator.findAll('svg')
+    const rating = await RatingLocator.find()
+    const icons = await rating.findAll('svg')
+
     expect(icons.length).to.equal(5)
   })
 

@@ -22,50 +22,39 @@
  * SOFTWARE.
  */
 
-import { elementToString } from './elementToString'
 import { firstOrNull } from './firstOrNull'
+import { getQueryResult } from './queryResult'
 import { parseQueryArguments } from './parseQueryArguments'
-import { waitForQueryResult } from './waitForQueryResult'
-import { bindElementToUtilities } from './bindElementToUtilities'
-import { isElement } from './isElement'
 import {
   querySelectorAll,
-  matchesSelector,
-  querySelectorParent,
+  querySelectorFrames,
   querySelectorParents
 } from './selectors'
+
+async function findWithLabel (...args) {
+  const { element, selector, options } = parseQueryArguments(...args)
+  return find(element, `:withLabel("${selector}")`, options)
+}
+
+async function findWithText (...args) {
+  const { element, selector, options } = parseQueryArguments(...args)
+  return find(element, `:withText("${selector}")`, options)
+}
 
 async function find (...args) {
   return firstOrNull(await findAll(...args))
 }
 
 function findAll (...args) {
-  return findAllByQuery((element, selector, options) => {
-    return {
-      results: querySelectorAll(element, selector, options),
-      selector
-    }
-  }, ...args)
+  return findAllByQuery(querySelectorAll, ...args)
 }
 
 async function findParent (...args) {
-  return firstOrNull(
-    await findAllByQuery((element, selector, options) => {
-      return {
-        results: querySelectorParent(element, selector, options),
-        selector: `parent: ${selector}`
-      }
-    }, ...args)
-  )
+  return firstOrNull(await findParents(...args))
 }
 
 function findParents (...args) {
-  return findAllByQuery((element, selector, options) => {
-    return {
-      results: querySelectorParents(element, selector, options),
-      selector: `parents: ${selector}`
-    }
-  }, ...args)
+  return findAllByQuery(querySelectorParents, ...args)
 }
 
 async function findFrame (...args) {
@@ -73,90 +62,20 @@ async function findFrame (...args) {
 }
 
 function findAllFrames (...args) {
-  return findAllByQuery((element, selector, options ) => {
-    const results = querySelectorAll(element, 'iframe')
-      .filter(frame => matchesSelector(frame, selector, options))
-      .map((frame) => {
-        let doc = null
-        try {
-          doc = frame.contentDocument.documentElement
-        } catch (e) {
-          console.warn(`[ui-test-utils] could not find document element for iframe: ${e}`)
-        }
-        return doc
-      })
-      .filter(doc => doc !== null)
-
-    return {
-      results,
-      selector: `iframe ${selector}`
-    }
-  }, ...args)
+  return findAllByQuery(querySelectorFrames, ...args)
 }
 
-function findAllByQuery (query, ...args) {
-  const { element, selector, options } = parseQueryArguments(...args)
-
-  return getQueryResult(
-    element,
-    query.bind(null, element, selector, options),
-    options
-  )
+function findAllByQuery (queryFn, ...args) {
+  return getQueryResult(queryFn, ...args)
 }
 
 async function findByQuery (...args) {
   return firstOrNull(await findAllByQuery(...args))
 }
 
-async function getQueryResult (
-  element = document,
-  query,
-  options = {
-    expectEmpty: false,
-    timeout: 1900
-  }
-) {
-  const { expectEmpty, timeout, customMethods } = options
-
-  const queryResult = () => {
-    const { results, selector } = query()
-
-    let boundResults = []
-
-    if (Array.isArray(results)) {
-      boundResults = results.map(result => bindElementToUtilities(result, customMethods))
-    } else if (isElement(results)) {
-      boundResults = [bindElementToUtilities(results, customMethods)]
-    }
-
-    return {
-      results: boundResults,
-      selector
-    }
-  }
-
-  const { results, selector } = (timeout > 0) ? (await waitForQueryResult(
-    queryResult,
-    { timeout, expectEmpty, element }
-  )) : queryResult()
-
-  if (results && results.length > 0) {
-    return results
-  } else if (!expectEmpty) {
-    throw new Error(
-      [
-        `[ui-test-utils] No matches found for Element query...`,
-        `with selector: "${selector}"`,
-        `element: ${elementToString(element, 7000, { highlight: false })}`
-      ]
-      .join('\n')
-    )
-  } else {
-    return []
-  }
-}
-
 export {
+  findWithLabel,
+  findWithText,
   findAllByQuery,
   findByQuery,
   findAll,

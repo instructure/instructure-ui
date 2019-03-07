@@ -25,9 +25,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import {
-  querySelectorAll,
-  matchesSelector,
-  findAllByQuery,
   mount,
   expect,
   locator
@@ -68,19 +65,7 @@ class Component extends React.Component {
 }
 
 const ComponentLocator = locator(Component.selector, {
-  findAllInputs: (...args) => {
-    return findAllByQuery((element, selector, options) => {
-      let results = querySelectorAll(element, 'input')
-      if (selector) {
-        results = results
-          .filter(input => matchesSelector(input, selector, options))
-      }
-      return {
-        results,
-        selector: ['input', selector].join(', ')
-      }
-    }, ...args)
-  }
+  findAllInputs: (...args) => locator('input').findAll(...args)
 })
 
 describe('locator', async () => {

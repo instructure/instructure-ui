@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, wait, stub } from '@instructure/ui-test-utils'
 import RadioInput from '../../RadioInput'
 import RadioInputGroup from '../index'
 import RadioInputGroupLocator from '../locator'
@@ -138,13 +138,16 @@ describe('<RadioInputGroup />', async () => {
       </RadioInputGroup>
     )
     const group = await RadioInputGroupLocator.find()
-    const banana = await group.find('input[value="banana"]')
+
+    const banana = await group.find('input:label(Banana)')
 
     await banana.click()
 
-    const orange = await group.find('input:label(Orange)')
+    const orange = await group.find(':label(Orange)')
 
-    expect(orange.getDOMNode().checked).to.be.true()
+    await wait(() => {
+      expect(orange).to.be.checked()
+    })
   })
 
   it('adds the correct tabindex to RadioInputs when none are checked', async () => {

@@ -29,21 +29,28 @@ import { bindElementToMethods } from './bindElementToMethods'
 import { bindElementToEvents } from './bindElementToEvents'
 import { isElement } from './isElement'
 
-export function bindElementToUtilities (element, customMethods = {}) {
-  let el
-
+function bindElementToUtilities (element, customMethods = {}) {
   if (!element) {
     return element
+  } else if (Array.isArray(element)){
+    return element.map(el => bindElementToUtilities(el, customMethods))
   } else if (typeof element.getDOMNode === 'function') {
-    el = element.getDOMNode()
-  } else if (isElement(element)) {
-    el = element
+    // eslint-disable-next-line no-param-reassign
+    element = element.getDOMNode()
+  }
+
+  if (!isElement(element)) {
+    throw new Error('[ui-test-utils] could not bind utilities to invalid DOM Element!')
   }
 
   return {
-    ...bindElementToMethods(el, queries),
-    ...bindElementToEvents(el, fireEvent),
-    ...bindElementToMethods(el, helpers),
-    ...bindElementToMethods(el, customMethods)
+    ...bindElementToMethods(element, queries),
+    ...bindElementToEvents(element, fireEvent),
+    ...bindElementToMethods(element, helpers),
+    ...bindElementToMethods(element, customMethods)
   }
+}
+
+export {
+  bindElementToUtilities
 }

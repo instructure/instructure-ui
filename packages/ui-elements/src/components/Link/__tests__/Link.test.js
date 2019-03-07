@@ -131,7 +131,11 @@ describe('<Link />', async () => {
     )
 
     await mount(<Link href="https://instructure.design" icon={customIcon}>Hello World</Link>)
-    expect(await LinkLocator.find('svg:title(Custom icon)')).to.exist()
+
+    const link = await LinkLocator.find()
+    const icon = await link.find('svg')
+
+    expect(icon).to.have.title('Custom icon')
   })
 
   describe('when disabled', async () => {

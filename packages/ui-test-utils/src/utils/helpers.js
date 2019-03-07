@@ -26,6 +26,7 @@ import runAxeCheck from '@instructure/ui-axe-check'
 import { elementToString } from './elementToString'
 import { fireEvent } from './events'
 import { isElement } from './isElement'
+import { querySelector, querySelectorAll, matchesSelector } from './selectors'
 
 function getOwnerDocument (element) {
   return element.ownerDocument || document
@@ -36,7 +37,7 @@ function getOwnerWindow (element) {
   return doc.defaultView || doc.parentWindow
 }
 
-function typeIn (element, text, options = { timeout: 0 }) {
+function typeIn (element, text, options) {
   const initialValue = element.value
   const characterCount = text.length
   const eventInit = {
@@ -81,12 +82,12 @@ function typeIn (element, text, options = { timeout: 0 }) {
       } catch (err) {
         reject(err)
       }
-    }, options.timeout)
+    }, 0)
   })
 }
 
 function getTextContent (element) {
-  if (element.matches('input[type=submit], input[type=button]')) {
+  if (matchesSelector(element, 'input[type=submit], input[type=button]')) {
     return element.value
   }
 
@@ -122,6 +123,7 @@ function positioned (element) {
 
 function getViewportRects (element) {
   const doc = getOwnerDocument(element)
+  const win = getOwnerWindow(element)
   const viewport = {
     width: Math.max(
       doc.body.scrollWidth,
@@ -130,7 +132,7 @@ function getViewportRects (element) {
       doc.documentElement.offsetWidth,
       doc.body.clientWidth,
       doc.documentElement.clientWidth,
-      window.innerWidth || 0
+      win.innerWidth || 0
     ),
     height: Math.max(
       doc.body.scrollHeight,
@@ -139,7 +141,7 @@ function getViewportRects (element) {
       doc.documentElement.offsetHeight,
       doc.body.clientHeight,
       doc.documentElement.clientHeight,
-      window.innerHeight || 0
+      win.innerHeight || 0
     )
   }
 
@@ -221,14 +223,12 @@ function visible (element) {
   const children = Array.from(element.childNodes)
 
   // handle inline elements with block children...
-  if (style.display === 'inline' && children.length > 0 && element.tagName.toLowerCase() !== 'iframe') {
-    if (children.length > 0) {
-      if (!children.reduce((previousChildIsVisible, child) => {
-        return previousChildIsVisible || visible(child)
-      }, false)) {
-        return false
-      }
-    }
+  if (element.tagName.toLowerCase() !== 'iframe' &&
+    style.display === 'inline' &&
+    children.length > 0 &&
+    children.filter(child => visible(child)).length === 0
+  ) {
+    return false
   } else if (elementWidth <= 0 && elementHeight <= 0) {
     return false
   }
@@ -299,7 +299,8 @@ function focusable (element) {
     'button:not([disabled])',
     '*[tabindex]'
   ]
-  return !element.disabled && visible(element) && element.matches(selector.join(','))
+
+  return !element.disabled && visible(element) && matchesSelector(element, selector.join(','))
 }
 
 function tabbable (element) {
@@ -375,7 +376,7 @@ function empty (element) {
 
 function contains (element, elementOrSelector) {
   if (typeof elementOrSelector === 'string') {
-    return element.querySelector(elementOrSelector)
+    return querySelector(element, elementOrSelector)
   } else if (isElement(elementOrSelector)) {
     return element.contains(elementOrSelector)
   } else if (elementOrSelector && typeof elementOrSelector.getDOMNode === 'function') {
@@ -386,7 +387,8 @@ function contains (element, elementOrSelector) {
 }
 
 function descendants (element, selector) {
-  return element.querySelectorAll(selector)
+  return querySelectorAll(element, selector)
+    .filter(match => match !== element)
 }
 // aliases:
 const children = descendants
@@ -394,16 +396,18 @@ const children = descendants
 function ancestors (element, selector) {
   const ancestors = []
   let parentNode = element.parentNode
+
   while (
     parentNode &&
     parentNode !== document &&
-    parentNode.matches
+    isElement(parentNode)
   ) {
-    if (parentNode.matches(selector)) {
+    if (matchesSelector(parentNode, selector)) {
       ancestors.push(parentNode)
     }
     parentNode = parentNode.parentNode
   }
+
   return ancestors
 }
 // aliases:
@@ -422,7 +426,7 @@ function classNames (element) {
 }
 
 function matches (element, selector) {
-  return element.matches(selector)
+  return matchesSelector(element, selector)
 }
 
 function bounds (element, property) {
@@ -455,23 +459,23 @@ function value (element) {
 
 function label (element) {
   const doc = getOwnerDocument(element)
-  if (element.matches('[aria-label]')) {
+  if (matchesSelector(element, '[aria-label]')) {
     return element.getAttribute('aria-label')
-  } else if (element.matches('[aria-labelledby]')) {
+  } else if (matchesSelector(element, '[aria-labelledby]')) {
     const ids = element.getAttribute('aria-labelledby').split(/\s+/)
     const labels = ids.map(id => doc.getElementById(id))
     return labels.map(label => label ? label.textContent : '').join(' ')
-  } else if (element.matches('button, a[href], [role="button"], [role="link"]')) {
+  } else if (matchesSelector(element, 'button, a[href], [role="button"], [role="link"]')) {
     return getTextContent(element)
-  } else if (element.matches('fieldset')) {
-    const legend = element.querySelector('legend')
+  } else if (matchesSelector(element, 'fieldset')) {
+    const legend = querySelector(element, 'legend')
     if (legend) {
       return getTextContent(legend)
     }
-  } else if (element.matches('[id]')) {
-    const labels = Array.from(doc.querySelectorAll(`[for="${element.getAttribute('id')}"]`))
+  } else if (matchesSelector(element, '[id]')) {
+    const labels = Array.from(querySelectorAll(doc, `[for="${element.getAttribute('id')}"]`))
     return labels.map(label => label ? label.textContent : '').join(' ')
-  } else if (element.matches('input,textarea,select')) {
+  } else if (matchesSelector(element, 'input,textarea,select')) {
     const labels = ancestors(element, 'label')
     if (labels.length > 0) {
       return getTextContent(labels[0])
@@ -480,10 +484,10 @@ function label (element) {
 }
 
 function title (element) {
-  if (element.matches('[title]')) {
+  if (matchesSelector(element, '[title]')) {
     return element.getAttribute('title')
-  } else if (element.matches('svg')) {
-    const title = element.querySelector('title')
+  } else if (matchesSelector(element, 'svg')) {
+    const title = querySelector(element, 'title')
     if (title) {
       return getTextContent(title)
     }

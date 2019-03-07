@@ -24,40 +24,36 @@
 
 import keycode from 'keycode'
 
-import { querySelector } from './selectors'
 import { isElement } from './isElement'
+import { find } from './queries'
 
 export function bindElementToEvents (element, events) {
-  if (isElement(element)) {
-    return Object.entries(events).reduce((bound, [key, fn]) => {
-      if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
-        // eslint-disable-next-line no-param-reassign
-        bound[key] = fireKeyboardEvent.bind(null, element, fn)
-      } else if (['focus'].includes(key)) {
-        // eslint-disable-next-line no-param-reassign
-        bound[key] = fireFocusEvent.bind(null, element, fn)
-      } else if (['blur'].includes(key)) {
-        // eslint-disable-next-line no-param-reassign
-        bound[key] = fireBlurEvent.bind(null, element, fn)
-      } else if (['click', 'dblClick'].includes(key) ||
-        key.startsWith('mouse') ||
-        key.startsWith('drag') ||
-        key.startsWith('touch')
-      ) {
-        // eslint-disable-next-line no-param-reassign
-        bound[key] = firePointerEvent.bind(null, element, fn)
-      } else {
-        // eslint-disable-next-line no-param-reassign
-        bound[key] = fireDOMEvent.bind(null, element, fn)
-      }
-      return bound
-    }, {})
-  } else {
-    throw new Error(`[ui-test-utils] could not bind events to invalid Element: ${element}`)
-  }
+  return Object.entries(events).reduce((bound, [key, fn]) => {
+    if (['keyDown', 'keyPress', 'keyUp'].includes(key)) {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = fireKeyboardEvent.bind(null, element, fn)
+    } else if (['focus'].includes(key)) {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = fireFocusEvent.bind(null, element, fn)
+    } else if (['blur'].includes(key)) {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = fireBlurEvent.bind(null, element, fn)
+    } else if (['click', 'dblClick'].includes(key) ||
+      key.startsWith('mouse') ||
+      key.startsWith('drag') ||
+      key.startsWith('touch')
+    ) {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = firePointerEvent.bind(null, element, fn)
+    } else {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = fireDOMEvent.bind(null, element, fn)
+    }
+    return bound
+  }, {})
 }
 
-function fireDOMEvent (element, fn, init, options = { timeout: 0 }) {
+function fireDOMEvent (element, fn, init, options = {}) {
   const fireEvent = fn.bind(null, element)
   return new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -66,15 +62,19 @@ function fireDOMEvent (element, fn, init, options = { timeout: 0 }) {
       } catch (e) {
         reject(e)
       }
-    }, options.timeout)
+    }, 0)
   })
 }
 
-function firePointerEvent (element, fn, init, options = { timeout: 0, clickable: true })  {
+async function firePointerEvent (element, fn, init, options = { clickable: true })  {
   let clickable = element
 
   if (options.clickable) {
-    clickable = querySelector(element, ':clickable')
+    clickable = await find(element, ':clickable')
+  }
+
+  if (clickable && typeof clickable.getDOMNode === 'function') {
+    clickable = clickable.getDOMNode()
   }
 
   return new Promise((resolve, reject) => {
@@ -91,15 +91,19 @@ function firePointerEvent (element, fn, init, options = { timeout: 0, clickable:
       } catch (e) {
         reject(e)
       }
-    }, options.timeout)
+    }, 0)
   })
 }
 
-function fireBlurEvent (element, fn, init, options = { timeout: 0, focusable: true }) {
+async function fireBlurEvent (element, fn, init, options = { focusable: true }) {
   let focusable = element
 
   if (options.focusable) {
-    focusable = querySelector(element, ':focusable')
+    focusable = await find(element, ':focusable')
+  }
+
+  if (focusable && typeof focusable.getDOMNode === 'function') {
+    focusable = focusable.getDOMNode()
   }
 
   return new Promise((resolve, reject) => {
@@ -116,15 +120,19 @@ function fireBlurEvent (element, fn, init, options = { timeout: 0, focusable: tr
       } catch (e) {
         reject(e)
       }
-    }, options.timeout)
+    }, 0)
   })
 }
 
-function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: true }) {
+async function fireFocusEvent (element, fn, init, options = { focusable: true }) {
   let focusable = element
 
   if (options.focusable) {
-    focusable = querySelector(element, ':focusable')
+    focusable = await find(element, ':focusable')
+  }
+
+  if (focusable && typeof focusable.getDOMNode === 'function') {
+    focusable = focusable.getDOMNode()
   }
 
   return new Promise((resolve, reject) => {
@@ -151,15 +159,19 @@ function fireFocusEvent (element, fn, init, options = { timeout: 0, focusable: t
       } catch (e) {
         reject(e)
       }
-    }, options.timeout)
+    }, 0)
   })
 }
 
-function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0, focusable: true }) {
+async function fireKeyboardEvent (element, fn, whichKey, init, options = { focusable: true }) {
   let focusable = element
 
   if (options.focusable) {
-    focusable = querySelector(element, ':focusable')
+    focusable = await find(element, ':focusable')
+  }
+
+  if (focusable && typeof focusable.getDOMNode === 'function') {
+    focusable = focusable.getDOMNode()
   }
 
   const keyCode = (typeof whichKey === 'string') ? keycode(whichKey) : whichKey
@@ -184,6 +196,6 @@ function fireKeyboardEvent (element, fn, whichKey, init, options = { timeout: 0,
       } catch (e) {
         reject(e)
       }
-    }, options.timeout)
+    }, 0)
   })
 }

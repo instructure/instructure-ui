@@ -21,19 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { isElement } from './isElement'
-
 export function bindElementToMethods (element, methods) {
-  if (isElement(element)) {
-    return Object.entries(methods).reduce((bound, [key, fn]) => {
-      if (typeof fn === 'function') {
-        bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
-        return bound
-      } else {
-        throw new Error(`[ui-test-utils] cannot bind to a non-function of type ${typeof fn}`, key)
-      }
-    }, {})
-  } else {
-    console.warn('[ui-test-utils] could not bind methods to invalid Element')
-  }
+  return Object.entries(methods).reduce((bound, [key, fn]) => {
+    if (typeof fn === 'function') {
+      bound[key] = fn.bind(null, element) // eslint-disable-line no-param-reassign
+      return bound
+    } else {
+      throw new Error(`[ui-test-utils] cannot bind to a non-function of type ${typeof fn}`, key)
+    }
+  }, {})
 }

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -59,7 +59,10 @@ describe('<Pill />', async () => {
     await pill.focus()
 
     const tooltip = await pill.findTooltipContent()
-    expect(tooltip.getTextContent()).to.equal(text)
+
+    await wait(() => {
+      expect(tooltip).to.have.text(text)
+    })
   })
 
   it('should apply focus styles when rendering with Tooltip', async () => {

@@ -30,15 +30,10 @@
  export const PopoverTriggerLocator = locator(PopoverTrigger.selector)
  export const PopoverContentLocator = locator(PopoverContent.selector)
 
- const customMethods = {
+ export const customMethods = {
    findContent: (...args) => PositionLocator.findContent(...args),
    findPositionTarget: (...args) => PositionLocator.findTarget(...args),
    findTrigger: (...args) => PopoverTriggerLocator.find(...args)
  }
 
-const PopoverLocator = locator(Popover.selector, customMethods)
-
-export default {
-  ...PopoverLocator,
-  ...customMethods
-}
+export default locator(Popover.selector, customMethods)

@@ -28,10 +28,8 @@ import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/loca
 import DateInput from './index'
 import DatePickerLocator from './DatePicker/locator'
 
-const InputLocator = locator('input')
-
 const DateInputLocator = locator(DateInput.selector, {
-  findInput: (...args) => InputLocator.find(...args),
+  findInput: (...args) => locator('input').find(...args),
   findDatePicker: async (element, ...args) => {
     const content = await PopoverLocator.findContent(element)
     return content ? DatePickerLocator.find(content.getDOMNode()) : null

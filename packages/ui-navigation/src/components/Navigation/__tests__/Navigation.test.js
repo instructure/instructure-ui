@@ -67,8 +67,8 @@ describe('<Navigation />', async () => {
         />
       </Navigation>
     )
-    const nav = await NavigationLocator.findAll('nav')
-    expect(nav).to.have.length(1)
+    const nav = await NavigationLocator.find()
+    expect(nav).to.contain('nav')
   })
 
   it('should render a semantic list for the nav content', async () => {
@@ -90,8 +90,10 @@ describe('<Navigation />', async () => {
         />
       </Navigation>
     )
-    const list = await NavigationLocator.findAll('ul')
-    const items = await NavigationLocator.findAll('li')
+    const nav = await NavigationLocator.find()
+    const list = await nav.findAll('ul')
+    const items = await nav.findAll('li')
+
     expect(list).to.have.length(1)
     expect(items).to.have.length(2)
   })

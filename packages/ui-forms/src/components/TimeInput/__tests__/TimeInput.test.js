@@ -169,7 +169,7 @@ describe('<TimeInput />', async () => {
     await input.click()
 
     await wait(async () => {
-      const items = await timeInput.findAllOptions({ visible: false })
+      const items = await timeInput.findAllOptions()
 
       expect(input.getDOMNode().value).to.equal(value.format('LT'))
 

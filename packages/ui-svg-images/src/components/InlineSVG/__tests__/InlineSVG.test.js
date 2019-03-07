@@ -83,10 +83,7 @@ describe('<InlineSVG />', async () => {
     )
 
     const svg = await InlineSVGLocator.find()
-    const title = await svg.find('title', {
-      expectEmpty: true,
-      visible: false
-    })
+    const title = await svg.find('title', { expectEmpty: true })
 
     expect(title).to.not.exist()
   })
@@ -99,9 +96,7 @@ describe('<InlineSVG />', async () => {
       />
     )
     const svg = await InlineSVGLocator.find()
-    const title = await svg.find(':title(Test Title)', {
-      visible: false
-    })
+    const title = await svg.find(':withTitle(Test Title)')
 
     expect(title).to.exist()
   })
@@ -115,8 +110,7 @@ describe('<InlineSVG />', async () => {
 
     const svg = await InlineSVGLocator.find()
     const description = await svg.find('description', {
-      expectEmpty: true,
-      visible: false
+      expectEmpty: true
     })
 
     expect(description).to.not.exist()
@@ -131,9 +125,7 @@ describe('<InlineSVG />', async () => {
     )
 
     const svg = await InlineSVGLocator.find()
-    const description = await svg.find('desc', {
-      visible: false
-    })
+    const description = await svg.find('desc')
 
     expect(description).to.exist()
   })

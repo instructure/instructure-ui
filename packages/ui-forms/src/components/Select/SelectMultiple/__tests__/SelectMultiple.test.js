@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { locator, expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import SelectMultiple from '../index'
 
 import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
@@ -317,17 +317,25 @@ describe('<SelectMultiple />', async () => {
 
     await input.click()
 
-    const item1 = await select.findOption()
-    await item1.keyDown('enter')
-    expect(await select.find('button[title="Aruba"]')).to.exist()
+    let opts = await select.findAllOptions()
+
+    expect(opts.length).to.equal(4)
+
+    await opts[0].keyDown('enter')
+
     expect(onChange.getCall(0).args[1]).to.deep.equal([options[0]])
+    expect(select).to.contain(':withLabel(Aruba)')
 
     await input.click()
 
-    const item2 = await select.findOption()
-    await item2.keyDown('enter')
-    expect(await select.find('button[title="Jamaica"]')).to.exist()
-    expect((await select.findAll('button')).length).to.equal(2)
+    opts = await select.findAllOptions()
+
+    expect(opts.length).to.equal(3)
+
+    await opts[0].keyDown('enter')
+
+    expect(select).to.contain(':withLabel(Jamaica)')
+    expect(select).to.have.exactly(2).descendants('button')
     expect(onChange.getCall(1).args[1]).to.deep.equal([options[0], options[1]])
   })
 

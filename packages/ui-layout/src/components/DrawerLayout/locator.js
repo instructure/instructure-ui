@@ -22,40 +22,22 @@
  * SOFTWARE.
  */
 
-import {
-  findByQuery,
-  locator,
-  querySelector
-} from '@instructure/ui-test-utils'
+import { locator } from '@instructure/ui-test-utils'
 
 import DrawerLayout, { DrawerContent, DrawerTray } from './index'
 
 export const DrawerContentLocator = locator(DrawerContent.selector)
 export const DrawerTrayLocator = locator(DrawerTray.selector)
 
-const trayQuery = (element, selector, options) => {
-  let traySelector
-  let results = []
-  if (element && element.getAttribute) {
-    const id = element.getAttribute(DrawerLayout.locatorAttribute)
-    traySelector = `[${DrawerTray.locatorAttribute}="${id}"]`
-    results = querySelector(
-      traySelector,
-      options
-    )
-  }
-  return {
-    results,
-    selector: traySelector
-  }
-}
-
 const DrawerLayoutLocator = locator(DrawerLayout.selector, {
-  findContent: (...args) => {
-    return DrawerContentLocator.find(...args)
-  },
-  findTray: (...args) => {
-    return findByQuery(trayQuery, ...args)
+  findContent: (...args) => DrawerContentLocator.find(...args),
+  findTray: (element, ...args) => {
+    if (element && element.getAttribute) {
+      const id = element.getAttribute(DrawerLayout.locatorAttribute)
+      return locator(`[${DrawerTray.locatorAttribute}="${id}"]`).find(...args)
+    } else {
+      return null
+    }
   }
 })
 

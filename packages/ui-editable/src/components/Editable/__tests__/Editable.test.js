@@ -90,7 +90,7 @@ describe('<Editable />', async () => {
 
     const editable = within(subject.getDOMNode())
 
-    const editButton = await editable.find('button:contains(edit)', { visible: false })
+    const editButton = await editable.find('button:withLabel(edit)')
     await editButton.focus()
     await editButton.click()
 
