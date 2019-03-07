@@ -52,11 +52,18 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   }
 
   let themeableOptions = {
-    postcssrc: loadConfig('postcss', require('@instructure/ui-postcss-config')())
+    postcssrc: loadConfig('postcss', require('@instructure/ui-postcss-config')()),
+    themeablerc: loadConfig('themeable')
   }
 
-  if (typeof opts.themeable === 'object') {
-    themeableOptions = Object.assign(themeableOptions, opts.themeable)
+  if (opts.themeable && typeof opts.themeable === 'object') {
+    const { themeablerc, postcssrc } = opts.themeable
+    if (themeablerc) {
+      themeableOptions.themeablerc = themeablerc
+    }
+    if (postcssrc) {
+      themeableOptions.postcssrc = postcssrc
+    }
   }
 
   plugins = plugins.concat([
