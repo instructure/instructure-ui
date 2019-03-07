@@ -47,7 +47,7 @@ parent: Calendar
 **/
 @testable()
 @themeable(theme, styles)
-class CalendarDay extends Component {
+class Day extends Component {
   static propTypes = {
     /**
     * The rendered representation of the corresponding date.
@@ -55,7 +55,7 @@ class CalendarDay extends Component {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * An ISO 8601 formatted string representing the date corresponding to
-    * this `<Calendar.Day />`
+    * this `<Day />`
     */
     date: I18nPropTypes.iso8601.isRequired,
     /**
@@ -66,33 +66,33 @@ class CalendarDay extends Component {
     */
     label: PropTypes.string.isRequired,
     /**
-    * Is the `<Calendar.Day />` disabled
+    * Is the `<Day />` disabled
     */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
     /**
-    * Is the `<Calendar.Day />` selected
+    * Is the `<Day />` selected
     */
     isSelected: PropTypes.bool,
     /**
-    * Is the `<Calendar.Day />` today
+    * Is the `<Day />` today
     */
     isToday: PropTypes.bool,
     /**
-    * Is the `<Calendar.Day />` located outside the current rendered month
+    * Is the `<Day />` located outside the current rendered month
     */
     isOutsideMonth: PropTypes.bool,
     /**
     * Callback fired on click.
     * @param {Object} event - the click event
     * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Calendar.Day />`
+    * @param data.date - the date of the corresponding `<Day />`
     */
     onClick: PropTypes.func,
     /**
     * Callback fired on key down.
     * @param {Object} event - the key down event
     * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Calendar.Day />`
+    * @param data.date - the date of the corresponding `<Day />`
     */
     onKeyDown: PropTypes.func,
     /**
@@ -123,7 +123,7 @@ class CalendarDay extends Component {
 
   get elementType () {
     const { as } = this.props
-    return as || getElementType(CalendarDay, this.props)
+    return as || getElementType(Day, this.props)
   }
 
   shouldApplyAriaSelected () {
@@ -178,8 +178,8 @@ class CalendarDay extends Component {
     })
 
     const passthroughProps = View.omitViewProps(
-      omitProps(props, CalendarDay.propTypes),
-      CalendarDay
+      omitProps(props, Day.propTypes),
+      Day
     )
 
     return (
@@ -210,4 +210,4 @@ class CalendarDay extends Component {
   }
 }
 
-export default CalendarDay
+export default Day

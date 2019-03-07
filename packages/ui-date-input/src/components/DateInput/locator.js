@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-utils'
+import CalendarLocator from '@instructure/ui-calendar/lib/components/Calendar/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
 
-import Calendar from './index'
-import Day from './Day/locator'
+import DateInput from './index'
 
-export default locator(Calendar.selector, {
-  findAllDays: (...args) => {
-    return Day.findAll(...args)
-  },
-  findDay: (...args) => {
-    return Day.find(...args)
+export default locator(DateInput.selector, {
+  findInput: (...args) => locator('input').find(...args),
+  findCalendar: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element, ...args)
+    return content ? CalendarLocator.find(content.getDOMNode()) : null
   }
 })

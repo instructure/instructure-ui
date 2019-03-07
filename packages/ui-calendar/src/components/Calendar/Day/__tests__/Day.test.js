@@ -26,62 +26,62 @@ import React from 'react'
 
 import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
-import CalendarDay from '../index'
-import CalendarDayLocator from '../locator'
-import CalendarDayExamples from '../__examples__/CalendarDay.examples'
+import Day from '../index'
+import DayLocator from '../locator'
+import DayExamples from '../__examples__/Day.examples'
 
-describe('CalendarDay', async () => {
+describe('Day', async () => {
   it('should render children', async () => {
     const subject = await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    expect(await CalendarDayLocator.find(':textContent(8)')).to.exist()
+    expect(await DayLocator.find(':textContent(8)')).to.exist()
 
     await subject.setProps({
       children: () => 31
     })
 
-    expect(await CalendarDayLocator.find(':textContent(31)')).to.exist()
+    expect(await DayLocator.find(':textContent(31)')).to.exist()
   })
 
   it('should have an accessible label', async () => {
     const label = '1 August 2019 Friday'
     await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label={label}
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    expect(await CalendarDayLocator.find(`:textContent(${label})`)).to.exist()
+    expect(await DayLocator.find(`:textContent(${label})`)).to.exist()
   })
 
   it('should set aria-current="date" when `isToday`', async () => {
     const subject = await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
         isToday
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    expect(await CalendarDayLocator.find(
+    expect(await DayLocator.find(
       '[aria-current="date"]'
     )).to.exist()
 
     await subject.setProps({ isToday: false })
 
-    expect(await CalendarDayLocator.find(
+    expect(await DayLocator.find(
       '[aria-current="date"]',
       { expectEmpty: true }
     )).to.not.exist()
@@ -89,46 +89,46 @@ describe('CalendarDay', async () => {
 
   it('should not set aria-selected without a role', async () => {
     const subject = await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    expect(await CalendarDayLocator.find(
+    expect(await DayLocator.find(
       '[aria-selected]', { expectEmpty: true }
     )).to.not.exist()
 
     await subject.setProps({ isSelected: true })
 
-    expect(await CalendarDayLocator.find(
+    expect(await DayLocator.find(
       '[aria-selected]', { expectEmpty: true }
     )).to.not.exist()
   })
 
   it('should set aria-selected="true/false" when `isSelected` and `role` is `option` or `gridcell`', async () => {
     const subject = await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
         role="option"
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    expect(await CalendarDayLocator.find('[aria-selected="false"]')).to.exist()
+    expect(await DayLocator.find('[aria-selected="false"]')).to.exist()
 
     await subject.setProps({ isSelected: true })
-    expect(await CalendarDayLocator.find('[aria-selected="true"]')).to.exist()
+    expect(await DayLocator.find('[aria-selected="true"]')).to.exist()
 
     await subject.setProps({ isSelected: false, role: 'gridcell' })
-    expect(await CalendarDayLocator.find('[aria-selected="false"]')).to.exist()
+    expect(await DayLocator.find('[aria-selected="false"]')).to.exist()
 
     await subject.setProps({ isSelected: true })
-    expect(await CalendarDayLocator.find('[aria-selected="true"]')).to.exist()
+    expect(await DayLocator.find('[aria-selected="true"]')).to.exist()
   })
 
   it('should call onClick with date', async () => {
@@ -136,18 +136,18 @@ describe('CalendarDay', async () => {
     const date = '2019-08-02'
 
     await mount(
-      <CalendarDay
+      <Day
         date={date}
         label="1 August 2019 Friday"
         onClick={onClick}
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    const calendarDay = await CalendarDayLocator.find()
+    const day = await DayLocator.find()
 
-    await calendarDay.click()
+    await day.click()
 
     expect(onClick).to.have.been.calledOnce()
     expect(onClick.lastCall.args[1].date).to.equal(date)
@@ -158,19 +158,19 @@ describe('CalendarDay', async () => {
     const date = '2019-08-02'
 
     await mount(
-      <CalendarDay
+      <Day
         date={date}
         label="1 August 2019 Friday"
         onKeyDown={onKeyDown}
         onClick={() => {}}
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    const calendarDay = await CalendarDayLocator.find()
+    const day = await DayLocator.find()
 
-    await calendarDay.keyDown()
+    await day.keyDown()
 
     expect(onKeyDown).to.have.been.calledOnce()
     expect(onKeyDown.lastCall.args[1].date).to.equal(date)
@@ -180,21 +180,21 @@ describe('CalendarDay', async () => {
     const onClick = stub()
 
     await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
         onClick={onClick}
         interaction="disabled"
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
-    const calendarDay = await CalendarDayLocator.find('[disabled]')
+    const day = await DayLocator.find('[disabled]')
 
-    expect(calendarDay).to.exist()
+    expect(day).to.exist()
 
-    await calendarDay.click(null, { clickable: false })
+    await day.click(null, { clickable: false })
 
     expect(onClick).to.not.have.been.called()
   })
@@ -207,13 +207,13 @@ describe('CalendarDay', async () => {
     }
 
     const subject = await mount(
-      <CalendarDay
+      <Day
         date="2019-08-02"
         label="1 August 2019 Friday"
         elementRef={elementRef}
       >
         8
-      </CalendarDay>
+      </Day>
     )
 
     expect(subject.getDOMNode()).to.equal(element)
@@ -222,51 +222,51 @@ describe('CalendarDay', async () => {
   describe('element type', async () => {
     it('should render as a span by default', async () => {
       await mount(
-        <CalendarDay
+        <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
         >
           8
-        </CalendarDay>
+        </Day>
       )
 
-      const calendarDay = await CalendarDayLocator.find()
-      expect(calendarDay.getTagName()).to.equal('span')
+      const day = await DayLocator.find()
+      expect(day.getTagName()).to.equal('span')
     })
 
     it('should render as a button when onClick is provided', async () => {
       await mount(
-        <CalendarDay
+        <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
           onClick={() => {}}
         >
           8
-        </CalendarDay>
+        </Day>
       )
 
-      const calendarDay = await CalendarDayLocator.find()
-      expect(calendarDay.getTagName()).to.equal('button')
+      const day = await DayLocator.find()
+      expect(day.getTagName()).to.equal('button')
     })
 
     it('default elementTypes should be overwritten when `as` prop is set', async () => {
       await mount(
-        <CalendarDay
+        <Day
           date="2019-08-02"
           label="1 August 2019 Friday"
           onClick={() => {}}
           as="li"
         >
           8
-        </CalendarDay>
+        </Day>
       )
 
-      const calendarDay = await CalendarDayLocator.find()
-      expect(calendarDay.getTagName()).to.equal('li')
+      const day = await DayLocator.find()
+      expect(day.getTagName()).to.equal('li')
     })
   })
 
   describe('with generated examples', async () => {
-    generateA11yTests(CalendarDayExamples)
+    generateA11yTests(DayExamples)
   })
 })

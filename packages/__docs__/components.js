@@ -49,6 +49,7 @@ export TimeInput from '@instructure/ui-forms/lib/components/TimeInput'
 
 export * from '@instructure/ui-form-field/lib/components'
 
+export { DateInput as DateInputControlled } from '@instructure/ui-date-input/lib/components'
 export { NumberInput as NumberInputControlled } from '@instructure/ui-number-input/lib/components'
 export { TextInput as TextInputControlled } from '@instructure/ui-text-input/lib/components'
 export { Table as TableControlled } from '@instructure/ui-table/lib/components'

@@ -25,12 +25,12 @@
 import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
-import CalendarDay from '../index'
+import Day from '../index'
 
 /* eslint-disable mocha/no-synchronous-tests */
-describe('CalendarDay.theme', () => {
+describe('Day.theme', () => {
   describe('with the default theme', () => {
-    const variables = CalendarDay.generateTheme()
+    const variables = Day.generateTheme()
 
     it('should have default background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(3)
@@ -50,7 +50,7 @@ describe('CalendarDay.theme', () => {
   })
 
   describe('with the high contrast canvas theme', () => {
-    const variables = CalendarDay.generateTheme('canvas-high-contrast')
+    const variables = Day.generateTheme('canvas-high-contrast')
 
     it('should have default background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.background, variables.color)).to.be.above(4.5)

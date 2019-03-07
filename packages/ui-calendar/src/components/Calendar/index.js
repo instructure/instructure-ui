@@ -40,7 +40,7 @@ import uid from '@instructure/uid/lib/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
-import CalendarDay from './CalendarDay'
+import Day from './Day'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -53,7 +53,7 @@ category: components
 @testable()
 @themeable(theme, styles)
 class Calendar extends Component {
-  static Day = CalendarDay
+  static Day = Day
   static DAY_COUNT = 42 // 6 weeks visible
 
   static propTypes = {
@@ -61,7 +61,7 @@ class Calendar extends Component {
     * children of type `<Calendar.Day />` There should be exactly 42 provided (6
     * weeks).
     */
-    children: ChildrenPropTypes.oneOf([CalendarDay]),
+    children: ChildrenPropTypes.oneOf([Day]),
     /**
     * A button to render in the navigation header. The recomendation is to
     * compose it with the [Button](#Button) component, setting the `variant` prop

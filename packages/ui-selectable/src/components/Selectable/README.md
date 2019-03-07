@@ -168,10 +168,11 @@ class CustomSelect extends React.Component {
           >
             <label {...getLabelProps()}>Selectable Example</label>
             <input
-              type="text"
-              value={inputValue}
               style={this.getInputStyles()}
+              {...getInputProps()}
               {...getTriggerProps({
+                type: 'text',
+                value: inputValue,
                 onChange: (e) => {
                   const newOptions = this.filterOptions(e.target.value)
                   this.setState({

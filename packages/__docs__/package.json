@@ -35,6 +35,7 @@
     "@instructure/ui-buttons": "^5.48.0",
     "@instructure/ui-calendar": "^5.48.0",
     "@instructure/ui-code-editor": "^5.48.0",
+    "@instructure/ui-date-input": "^5.48.0",
     "@instructure/ui-docs-client": "^5.48.0",
     "@instructure/ui-docs-plugin": "^5.48.0",
     "@instructure/ui-editable": "^5.48.0",

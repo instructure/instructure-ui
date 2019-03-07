@@ -21,16 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
 
-import Calendar from './index'
-import Day from './Day/locator'
-
-export default locator(Calendar.selector, {
-  findAllDays: (...args) => {
-    return Day.findAll(...args)
-  },
-  findDay: (...args) => {
-    return Day.find(...args)
-  }
-})
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES)
+     }
+   ]]
+ }

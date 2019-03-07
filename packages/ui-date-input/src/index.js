@@ -21,27 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import generateMessages from '../../../__tests__/generateMessages'
 
-export default {
-  sectionProp: 'layout',
-  maxExamplesPerPage: 50,
-  propValues: {
-    placeholder: [null, 'Select a date'],
-    dateValue: [undefined, '2018-08-06'], // eslint-disable-line no-undefined
-    messages: generateMessages()
-  },
-  getComponentProps: (props) => {
-    return {
-      label: 'Date',
-      previousLabel: 'previous month',
-      nextLabel: 'next month',
-      invalidDateMessage: (value) => { return `'${value}' is not a valid date` },
-      disabledDateMessage: (date) => `Date is disabled`,
-      onChange: () => {},
-      readOnly: false,
-      required: false,
-      validationFeedback: false
-    }
-  }
-}
+ export * from './components'

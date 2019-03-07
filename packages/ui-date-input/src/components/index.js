@@ -22,8 +22,4 @@
  * SOFTWARE.
  */
 
-import { locator } from '@instructure/ui-test-utils'
-
-import CalendarDay from './index'
-
-export default locator(CalendarDay.selector)
+export DateInput from './DateInput'
