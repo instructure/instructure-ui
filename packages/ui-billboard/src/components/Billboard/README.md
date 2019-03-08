@@ -39,7 +39,7 @@ example: true
     onClick={function () {
       alert('This Billboard was clicked!')
     }}
-    hero={(size) => <IconUser.Solid size={size} />}
+    hero={(size) => <IconUser.Line size={size} />}
   />
 </View>
 ```
@@ -83,7 +83,7 @@ example: true
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconUser.Solid size={size} />}
+  hero={(size) => <IconUser.Line size={size} />}
   disabled
 />
 ```

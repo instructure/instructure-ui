@@ -306,22 +306,22 @@ example: true
 
     <Flex visualDebug justifyItems="space-between">
       <FlexItem>
-        <Button variant="icon" icon={IconUser.Solid}>
+        <Button variant="icon" icon={IconEmail.Line}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconUser.Solid}>
+        <Button variant="icon" icon={IconPrinter.Line}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconUser.Solid}>
+        <Button variant="icon" icon={IconCalendarDay.Line}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconUser.Solid}>
+        <Button variant="icon" icon={IconSettings.Line}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>

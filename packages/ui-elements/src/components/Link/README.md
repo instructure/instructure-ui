@@ -80,7 +80,7 @@ example: true
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      icon={<IconUser.Solid />}
+      icon={<IconUser.Line />}
       iconPlacement="end"
     >
       Icon appears after Link text
@@ -88,7 +88,7 @@ example: true
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} icon={IconUser.Solid}>
+    <Link onClick={() => console.log('clicked!')} icon={IconUser.Line}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
   </View>

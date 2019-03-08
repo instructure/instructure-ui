@@ -94,7 +94,7 @@ function Example () {
 render(<Example />)
 ```
 
-Set the `variant` prop to `toggle` to have the RadioInputGroup display as a toggle switch.
+Set the `variant` prop to `toggle` to have the RadioInputGroup display as a toggle switch. The `context` prop can be set to switch the background color of the toggle switch. Default is `success` options are 'success', 'warning', 'danger', and 'off'.
 
 ```js
 ---
@@ -121,80 +121,25 @@ example: true
     <RadioInput label="On" value="on" />
   </RadioInputGroup>
   <RadioInputGroup
+    name="context"
+    defaultValue="off"
+    description="Context (background changes based on context set)"
+    variant="toggle">
+    <RadioInput label="Off" value="off" context="danger" />
+    <RadioInput label="Allow" value="allow" context="warning" />
+    <RadioInput label="On" value="on" />
+  </RadioInputGroup>
+  <RadioInputGroup
     name="featurelg"
     defaultValue="on"
     description="Large-size"
     variant="toggle"
     size="large">
-    <RadioInput label="Off" value="off" context="off" />
+    <RadioInput label="Off" value="off" />
     <RadioInput label="Allow" value="allow" />
     <RadioInput label="On" value="on" />
   </RadioInputGroup>
 </FormFieldGroup>
-```
-
-Set the `context` prop on each `<RadioInput>` to convey context via the toggle's
-background color. Default context is `success`.
-
-```js
----
-example: true
----
-<RadioInputGroup
-  layout="inline"
-  name="context"
-  defaultValue="danger"
-  description="Contexts"
-  variant="toggle">
-  <RadioInput
-    label={
-      <span>
-        <IconUser.Solid />
-        <ScreenReaderContent>
-          This option makes something inactive
-        </ScreenReaderContent>
-      </span>
-    }
-    value="off"
-    context="off"
-  />
-  <RadioInput
-    label={
-      <span>
-        <IconUser.Solid />
-        <ScreenReaderContent>
-          This option is an inadvisable choice
-        </ScreenReaderContent>
-      </span>
-    }
-    value="warning"
-    context="warning"
-  />
-  <RadioInput
-    label={
-      <span>
-        <IconUser.Solid />
-        <ScreenReaderContent>
-          This option is a bad choice
-        </ScreenReaderContent>
-      </span>
-    }
-    value="danger"
-    context="danger"
-  />
-  <RadioInput
-    label={
-      <span>
-        <IconUser.Solid />
-        <ScreenReaderContent>
-          This option is a good choice
-        </ScreenReaderContent>
-      </span>
-    }
-    value="success"
-    context="success"
-  />
-</RadioInputGroup>
 ```
 
 Setting the `disabled` prop to `true` will disable the entire RadioInputGroup.

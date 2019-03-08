@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
-import IconCheck from '@instructure/ui-icons/lib/Solid/IconCheck'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import IconCheck from '@instructure/ui-icons/lib/Line/IconCheck'
+import IconX from '@instructure/ui-icons/lib/Line/IconX'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'

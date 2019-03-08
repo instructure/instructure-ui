@@ -1,0 +1,98 @@
+---
+title: Using Icons
+category: Patterns
+id: UsingIcons
+---
+
+## Using Iconography
+
+### Icons and Accessibility
+By default the role is set to presentation. However, when the `title` prop is set, the role attribute is set to img. Include the `description` prop to further describe the icon.
+
+```js
+---
+example: true
+---
+<View as="div" margin="small" padding="medium" background="default">
+  <Text as="div" size="large">I <IconHeart.Line color="error" title="Love" /> New York</Text>
+</View>
+```
+
+### Line vs Solid Iconography
+The default choice for Iconography is the `Line` version. However, when an Icon appears on a dark or colored background the `Solid` version should be used.
+
+```js
+---
+example: true
+---
+<View as="div" margin="small">
+  <Button margin="small" icon={IconEye.Line}>Preview</Button>
+  <Button variant="primary" margin="small" icon={IconEye.Solid}>Preview</Button>
+  <View margin="small" display="inline-block" width="20rem" background="inverse" padding="small" textAlign="end">
+    <IconExpand.Solid size="small" />
+  </View>
+</View>
+```
+
+### Changing the Icon Size
+By default the Icon is set to a size of 1em, so it will scale to match the font-size of its parent element. To change the size of the icon, use one of the predefined options for the `size` prop. If you need a size that is not offered via the size prop, adjust the font-size on the icon’s parent element.
+```js
+---
+example: true
+---
+<View as="div" margin="small" padding="medium" background="default">
+  <Flex wrapItems={true}>
+    <FlexItem padding="small" grow>
+      <Heading>I <IconHeart.Line /> the size of my parent heading </Heading>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text>I am an <b>x-small</b> icon <IconHeart.Line size="x-small" /> overriding my parent font-size.</Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text>I am a <b>small</b> icon <IconHeart.Line size="small" /> overriding my parent font-size.</Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text>I am a <b>medium</b> icon <IconHeart.Line size="medium" /> overriding my parent font-size.</Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">I am a <b>large</b> icon <IconHeart.Line size="large" /> overriding my parent font-size.</Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text>I am an <b>x-large</b> icon <IconHeart.Line size="x-large" /> overriding my parent font-size.</Text>
+    </FlexItem>
+  </Flex>
+</View>
+```
+
+### Changing the Icon Color
+To change the color of the icon, use one of the predefined options for the `color` prop. By default the icon inherits the color of its parent element. However, it can be changed by setting the icon to one of the theme colors via the color property.
+```js
+---
+example: true
+---
+<View as="div" margin="small" padding="medium" background="default">
+  <Flex wrapItems={true}>
+    <FlexItem padding="small" grow>
+      <Text color="brand">I am inheriting my parents color <IconHeart.Line /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be primary <IconHeart.Line color="primary" /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be secondary <IconHeart.Line color="secondary" /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be brand <IconHeart.Line color="brand" /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be success <IconHeart.Line color="success" /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be error <IconHeart.Line color="error" /></Text>
+    </FlexItem>
+    <FlexItem padding="small" grow>
+      <Text as="div">My icon should be warning <IconHeart.Line color="warning" /></Text>
+    </FlexItem>
+  </Flex>
+</View>
+```

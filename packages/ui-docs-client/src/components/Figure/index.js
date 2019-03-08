@@ -33,7 +33,7 @@ import { Children } from '@instructure/ui-prop-types'
 
 import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
 import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
-import IconA11y from '@instructure/ui-icons/lib/Line/IconA11y'
+import IconA11y from '@instructure/ui-icons/lib/Solid/IconA11y'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import List, { ListItem } from '@instructure/ui-elements/lib/components/List'

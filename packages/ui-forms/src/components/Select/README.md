@@ -246,8 +246,8 @@ example: true
   padding="x-small"
 >
   <Select label="Icon select">
-    <option value="foo" icon={IconUser.Solid}>Foo</option>
-    <option value="bar" icon={IconUser.Solid}>Bar</option>
+    <option value="foo" icon={IconUser.Line}>Foo</option>
+    <option value="bar" icon={IconUser.Line}>Bar</option>
   </Select>
 </View>
 ```

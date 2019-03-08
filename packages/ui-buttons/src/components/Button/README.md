@@ -71,10 +71,10 @@ if there is no visible text on the Button. **Please do not add icons as children
 example: true
 ---
 <div>
-  <Button margin="0 x-small 0 0" icon={IconPlus.Solid}>
+  <Button margin="0 x-small 0 0" icon={IconPlus.Line}>
     Button label
   </Button>
-  <Button margin="0 x-small 0 0" icon={IconUser.Solid}>
+  <Button margin="0 x-small 0 0" icon={IconUser.Line}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
 </div>
@@ -87,10 +87,10 @@ The following Button variants should only be used with a single icon.
 example: true
 ---
 <div>
-  <Button variant="icon" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+  <Button variant="icon" margin="0 x-small 0 0" icon={IconPlus.Line}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
-  <Button variant="circle-default" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+  <Button variant="circle-default" margin="0 x-small 0 0" icon={IconPlus.Line}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
   <Button variant="circle-primary" margin="0 x-small 0 0" icon={IconPlus.Solid}>
@@ -141,7 +141,7 @@ and wrap the text.
 example: true
 ---
 <View as="div" width="10rem">
-  <Button fluidWidth icon={IconUser.Solid}>20 characters max</Button>
+  <Button fluidWidth icon={IconUser.Line}>20 characters max</Button>
 </View>
 ```
 
@@ -168,7 +168,7 @@ example: true
     return (
       <View borderWidth="small" background="default" padding="small" as="div">
         <Text as="div">The <code>fullButton</code> query is <b>{fullButton ? 'true' : 'false'}</b>.</Text>
-        <Button icon={IconUser.Solid} margin="small 0 0">
+        <Button icon={IconUser.Line} margin="small 0 0">
           {(fullButton) ? text : <ScreenReaderContent>{text}</ScreenReaderContent>}
         </Button>
       </View>
