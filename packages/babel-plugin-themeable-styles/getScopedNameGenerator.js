@@ -28,7 +28,7 @@ const genericNames = require('generic-names')
 
 module.exports = function getScopedNameGenerator (config, componentId, name, filepath, css) { // for css modules class names
   // for the default we assume the folder name is the same as the component displayName:
-  let scopedNamePattern = (ENV === 'production') ? `${componentId}__[hash:base64:5]` : `[folder]__${componentId}-[local]`
+  let scopedNamePattern = (ENV === 'production') ? `${componentId}_[hash:base64:4]` : `[folder]__${componentId}-[local]`
 
   if (config && typeof config.generateScopedName === 'function') {
     scopedNamePattern = config.generateScopedName({ env: ENV }, componentId, name, filepath, css)

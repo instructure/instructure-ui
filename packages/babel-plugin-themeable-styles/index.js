@@ -76,16 +76,15 @@ module.exports = function transformThemeableStyles ({ types: t }) {
           },
           prepend: getPostCSSPlugins(thisPluginOptions.postcssrc),
           processCss: (css, filepath) => {
-            // eslint-disable-next-line no-console
-            // console.log(`[transform-themeable]: ${relative(process.cwd(), filepath)}`)
-
+            // remove comments
+            const styles = (css || '').replace(/\/\*[^*]*\*+([^/*][^*]*\*+)*\//gim, '')
             if (!STYLES.has(filepath)) {
-              STYLES.set(filepath, css)
+              STYLES.set(filepath, styles)
             }
-
-            return css
+            return styles
           },
-          append: [require('@instructure/postcss-themeable-styles')]
+          append: [require('@instructure/postcss-themeable-styles')],
+          devMode: DEBUG
         })
 
         requireHookInitialized = true

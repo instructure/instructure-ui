@@ -20,6 +20,7 @@
     "@instructure/config-loader": "^5",
     "@instructure/postcss-themeable-styles": "^5",
     "autoprefixer": "^9.4.9",
+    "cssnano-preset-default": "^4",
     "postcss": "^7",
     "postcss-bidirection": "^2.6.0",
     "postcss-custom-properties": "^8.0.9",

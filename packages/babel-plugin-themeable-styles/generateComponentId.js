@@ -28,7 +28,7 @@
 
  module.exports = function generateComponentId (source) {
    if (idCache[source]) return idCache[source]
-   const hash = loaderUtils.getHashDigest(source, 'md5', 'base52', 10)
+   const hash = loaderUtils.getHashDigest(source, 'md5', 'base52', 5)
    idCache[source] = hash
    return hash
  }

@@ -41,6 +41,20 @@ const CORE_PLUGINS_POST = [
   [require('postcss-reporter'), { clearReportedMessages: true }]
 ]
 
+// For production builds we need to minify css with postcss here, we can't rely on babel/uglify to
+// minify the css part of our js bundles because by the time they see it is just a string.
+if ((process.env.BABEL_ENV || process.env.NODE_ENV) === 'production') {
+  // we can't just use all of cssnano because there are some things it does that won't work for us,
+  // so we filter them out.
+  const minificationPlugins = require('cssnano-preset-default')({
+    svgo: {'doesn\'t work': true}, // only has an async api and the css modules require hook needs everything to have a sync api
+    convertValues: {'doesn\'t work': true}, // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
+    mergeLonghand: {'doesn\'t work': true} // needs postcss 7+, when css-modules-require-hook uses 7.x, it should work
+  }).plugins.filter(([_, pluginOpts = {}]) => !pluginOpts['doesn\'t work'])
+
+  CORE_PLUGINS_POST.push(...minificationPlugins)
+}
+
 module.exports = function (opts = { before: {}, after: {}, nesting: false }) {
   return function (ctx = {}) {
     let plugins = [
