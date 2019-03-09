@@ -28,16 +28,27 @@ const { getPackage, getChangedPackages } = require('@instructure/pkg-utils')
 const { runCommandAsync, runCommandSync, error, info  } = require('@instructure/command-utils')
 const Project = require('@lerna/project')
 
-async function syncRepoPackageVersion () {
-  let releaseVersion = new Project(process.cwd()).version
-  const pkg = getPackage()
+async function syncRootPackageVersion (useProjectVersion) {
+  const project = new Project(process.cwd())
+  const rootPkg = getPackage()
 
-  if (releaseVersion !== pkg.get('version')) {
-    pkg.set('version', releaseVersion)
-    await pkg.serialize()
+  let projectVersion
+
+  if (project.isIndependent() || useProjectVersion) {
+    projectVersion = project.version
+  } else {
+    // unfortunately lerna doesn't update lerna.json for canary releases,
+    // so we have to do this:
+    const pkgs = getChangedPackages()
+    projectVersion = pkgs[0].get('version')
   }
 
-  return releaseVersion
+  if (projectVersion !== rootPkg.get('version')) {
+    rootPkg.set('version', projectVersion)
+    await rootPkg.serialize()
+  }
+
+  return projectVersion
 }
 
 async function bumpPackages (packageName, requestedVersion) {
@@ -79,7 +90,7 @@ async function bumpPackages (packageName, requestedVersion) {
       '--conventional-commits'
     ])
 
-    releaseVersion = await syncRepoPackageVersion()
+    releaseVersion = await syncRootPackageVersion(true)
 
     info(`📦  Done bumping ${packageName} to ${releaseVersion}!`)
   } catch (err) {
@@ -122,7 +133,7 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--force-publish=*'
     ])
 
-    publishedVersion = await syncRepoPackageVersion()
+    publishedVersion = await syncRootPackageVersion()
 
     info(`📦  ${publishedVersion} of ${packageName} was successfully published!`)
   } catch (err) {
