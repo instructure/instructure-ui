@@ -44,6 +44,10 @@ if (argv.includes('--no-headless')) {
   args.push('--no-headless')
 }
 
+if (argv.includes('--randomize')) {
+  args.push('--randomize')
+}
+
 const browsersArgIndex = argv.findIndex(arg => arg.startsWith('--browsers='))
 
 if (browsersArgIndex) {

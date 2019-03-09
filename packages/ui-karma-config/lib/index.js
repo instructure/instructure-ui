@@ -23,9 +23,11 @@
  */
 const path = require('path')
 const constants = require('karma').constants
+const choma = require.resolve('choma')
 
 const noLaunchers = process.argv.some((arg) => arg === '--no-launch')
 const noHeadless = process.argv.some((arg) => arg === '--no-headless')
+const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
 
@@ -94,9 +96,10 @@ module.exports = function makeConfig ({
 
       frameworks: ['mocha', 'viewport'],
 
-      files: [bundle],
+      files: randomizeTestOrder ? [choma, bundle] : [bundle],
 
       preprocessors: {
+        [choma]: ['webpack'],
         [bundle]: ['webpack', 'sourcemap']
       },
 
@@ -156,7 +159,12 @@ module.exports = function makeConfig ({
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
-          'react/addons': true
+          'react/addons': true,
+          // The karma webpack plugin exposes a mocha instance as
+          // `window.mocha`, but the mocha npm package exports the mocha
+          // contructor function. The choma script needs access to the mocha
+          // constructor so it can monkey-patch it for random test ordering.
+          'mocha': 'mocha.constructor'
         },
         resolveLoader: {
           alias: {

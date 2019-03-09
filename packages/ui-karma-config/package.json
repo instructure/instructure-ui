@@ -18,6 +18,7 @@
   "dependencies": {
     "@instructure/config-loader": "^5",
     "@instructure/ui-webpack-config": "^5",
+    "choma": "^1",
     "globby": "^9.0.0",
     "karma": "^4.0.0",
     "karma-chrome-launcher": "^2.2.0",
