@@ -160,10 +160,10 @@ module.exports = function makeConfig ({
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,
           'react/addons': true,
-          // The karma webpack plugin exposes a mocha instance as
-          // `window.mocha`, but the mocha npm package exports the mocha
-          // contructor function. The choma script needs access to the mocha
-          // constructor so it can monkey-patch it for random test ordering.
+          // The karma mocha plugin exposes a mocha instance as `window.mocha`,
+          // but the mocha npm package exports the mocha contructor function.
+          // The choma script needs access to the mocha constructor so it can
+          // monkey-patch it for random test ordering.
           'mocha': 'mocha.constructor'
         },
         resolveLoader: {

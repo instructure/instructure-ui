@@ -34,6 +34,7 @@ Options that can be run with `yarn test`/`yarn test:watch`:
 - `--path [test file paths (comma delimited)]` will run just the tests in a single test src file.
 - `--browser=Firefox` will run the tests in the Firefox browser.
 - `--browser=Safari` will run the tests in the Safari browser.
+- `--randomize` will run the tests in random order, to help catch interdependent or leaky tests.
 
 ### Code Coverage
 
