@@ -11,16 +11,24 @@
   vertical-align: middle;
 }
 
-.contentAfterInput { /* TODO: refactor this class when we add renderBeforeInput prop */
+.content {
   display: flex;
   align-items: center;
   position: absolute;
   top: 0;
+  height: 100%;
+  fill: var(--iconColor);
+  pointer-events: none;
+}
+
+.content--before {
+  offset-inline-start: var(--padding);
+  offset-inline-end: auto;
+}
+
+.content--after {
   offset-inline-end: var(--padding);
   offset-inline-start: auto;
-  height: 100%;
-  pointer-events: none;
-  fill: var(--iconColor);
 }
 
 .outline {
@@ -112,9 +120,19 @@ input[type].input {
     height: var(--largeHeight);
   }
 
-  &.hasContentAfterInput { /* TODO: refactor this class when we add renderBeforeInput prop */
+  &.hasContentBeforeInput {
+    padding-inline-start: calc(var(--padding) * 2 + 1em);
+    padding-inline-end: var(--padding); /* reset for postcss-bidirection plugin */
+  }
+
+  &.hasContentAfterInput {
     padding-inline-end: calc(var(--padding) * 2 + 1em);
-    padding-inline-start: var(--padding);
+    padding-inline-start: var(--padding); /* reset for postcss-bidirection plugin */
+  }
+
+  &.hasContentAfterInput.hasContentBeforeInput { /* stylelint-disable-line selector-max-class */
+    padding-inline-start: calc(var(--padding) * 2 + 1em);
+    padding-inline-end: calc(var(--padding) * 2 + 1em);
   }
 
   &.textAlign--start {

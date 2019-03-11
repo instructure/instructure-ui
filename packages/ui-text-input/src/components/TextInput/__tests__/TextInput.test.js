@@ -66,6 +66,42 @@ describe('<TextInput/>', async () => {
     expect(inputRef).to.have.been.calledWith(input.getDOMNode())
   })
 
+  it('should prepend and append content', async () => {
+    const contentBeforeSVG = (
+      <svg height="24" width="24">
+        <title>Content before</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    const contentAfterSVG = (
+      <svg height="24" width="24">
+        <title>Content after</title>
+        <circle cx="50" cy="50" r="40" />
+      </svg>
+    )
+
+    const subject = await mount(
+      <TextInput
+        label="Name"
+        renderBeforeInput={() => contentBeforeSVG}
+      />
+    )
+
+    const textInput = within(subject.getDOMNode())
+    const contentBefore = await textInput.find('svg:withTitle(Content before)')
+    expect(contentBefore).to.exist()
+
+    await subject.setProps({
+      renderAfterInput: () => contentAfterSVG
+    })
+    const contentAfter = await textInput.find('svg:withTitle(Content after)')
+    expect(contentAfter).to.exist()
+
+    const allContent = await textInput.findAll('svg')
+    expect(allContent.length).to.equal(2)
+  })
+
   it('should provide a value getter', async () => {
     let ref
     await mount(

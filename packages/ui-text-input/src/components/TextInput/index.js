@@ -84,6 +84,10 @@ class TextInput extends Component {
     */
     value: controllable(PropTypes.string),
     /**
+    * Content to display before the input text, such as an icon
+    */
+    renderBeforeInput: PropTypes.func,
+    /**
     * Content to display after the input text, such as an icon
     */
     renderAfterInput: PropTypes.func,
@@ -158,21 +162,29 @@ class TextInput extends Component {
     this.props.onFocus(event)
   }
 
-  renderAfterInput () { //TODO: refactor when we add renderBeforeInput prop
-    const Content = this.props.renderAfterInput
+  renderContent(placement) {
+    const {
+      renderBeforeInput,
+      renderAfterInput
+    } = this.props
 
-    if (typeof Content === 'function') {
-      return (
-        <span
-          className={styles.contentAfterInput}
-          aria-hidden="true"
-        >
-          <Content />
-        </span>
-      )
-    } else {
-      return null
+    const ContentBefore = renderBeforeInput || null
+    const ContentAfter = renderAfterInput || null
+
+    const classes = {
+      [styles.content]: true,
+      [styles[`content--${placement}`]]: true
     }
+
+    return (
+      <span
+        className={classnames(classes)}
+        aria-hidden="true"
+      >
+        {placement === 'before' && <ContentBefore />}
+        {placement === 'after' && <ContentAfter />}
+      </span>
+    )
   }
 
   render () {
@@ -186,17 +198,22 @@ class TextInput extends Component {
       readOnly,
       required,
       width,
+      renderBeforeInput,
       renderAfterInput,
       inline
     } = this.props
 
     const props = omitProps(this.props, TextInput.propTypes)
 
+    const hasContentBeforeInput = typeof renderBeforeInput === 'function'
+    const hasContentAfterInput = typeof renderAfterInput === 'function'
+
     const inputClasses = {
       [styles.input]: true,
       [styles[size]]: size,
       [styles[`textAlign--${textAlign}`]]: textAlign,
-      [styles.hasContentAfterInput]: renderAfterInput,
+      [styles.hasContentBeforeInput]: hasContentBeforeInput,
+      [styles.hasContentAfterInput]: hasContentAfterInput,
       [styles.disabled]: disabled
     }
 
@@ -245,7 +262,8 @@ class TextInput extends Component {
             (!disabled && !readOnly)
             ? <span className={styles.outline} aria-hidden="true"></span> : null
           }
-          {this.renderAfterInput()}
+          {hasContentBeforeInput && this.renderContent('before')}
+          {hasContentAfterInput && this.renderContent('after')}
         </span>
       </FormField>
     )

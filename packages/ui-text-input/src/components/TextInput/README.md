@@ -75,6 +75,7 @@ class ControlledTextInputExample extends React.Component {
             readOnly={this.state.readOnly}
             layout={this.state.inline ? 'inline' : 'stacked'}
             messages={this.state.messages}
+            renderBeforeInput={() => <SVGIcon src={iconExample} />}
             renderAfterInput={() => <SVGIcon src={iconExample} />}
             width="15rem"
           />
