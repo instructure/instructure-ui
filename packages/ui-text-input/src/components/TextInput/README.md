@@ -76,6 +76,7 @@ class ControlledTextInputExample extends React.Component {
             layout={this.state.inline ? 'inline' : 'stacked'}
             messages={this.state.messages}
             renderAfterInput={() => <SVGIcon src={iconExample} />}
+            width="15rem"
           />
         </View>
       </div>
@@ -85,6 +86,27 @@ class ControlledTextInputExample extends React.Component {
 
 render(<ControlledTextInputExample />)
 ```
+
+To make the component display inline, set the `inline` boolean property. To constrain the
+size of the input itself, use `width`.
+
+> Note: IE11 needs a `width` prop if the TextInput is `inline`.
+
+```js
+---
+example: true
+---
+<div>
+  <TextInputControlled
+    label="I am a fairly long label"
+    inline
+    width="4rem"
+  />
+  &nbsp;
+  <Text>I am inline content</Text>
+</div>
+```
+
 ### Guidelines
 
 ```js

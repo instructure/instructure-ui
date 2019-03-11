@@ -1,6 +1,14 @@
-.layout {
+.positioning {
   position: relative;
+}
+
+.positioning--block {
   display: block;
+}
+
+.positioning--inline {
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .contentAfterInput { /* TODO: refactor this class when we add renderBeforeInput prop */

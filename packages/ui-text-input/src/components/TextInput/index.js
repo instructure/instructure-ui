@@ -186,17 +186,24 @@ class TextInput extends Component {
       readOnly,
       required,
       width,
-      renderAfterInput
+      renderAfterInput,
+      inline
     } = this.props
 
     const props = omitProps(this.props, TextInput.propTypes)
 
-    const classes = {
+    const inputClasses = {
       [styles.input]: true,
       [styles[size]]: size,
       [styles[`textAlign--${textAlign}`]]: textAlign,
       [styles.hasContentAfterInput]: renderAfterInput,
       [styles.disabled]: disabled
+    }
+
+    const positioningClasses = {
+      [styles.positioning]: true,
+      [styles['positioning--block']]: !inline && !width,
+      [styles['positioning--inline']]: inline || width,
     }
 
     const style = width ? { width } : null
@@ -215,7 +222,7 @@ class TextInput extends Component {
         id={this.id}
         messagesId={this._messagesId}
       >
-        <span className={styles.layout}>
+        <span className={classnames(positioningClasses)}>
           <input
             {...props}
             value={value}
@@ -228,7 +235,7 @@ class TextInput extends Component {
             aria-required={required}
             aria-invalid={this.invalid ? 'true' : null}
             disabled={disabled || readOnly}
-            className={classnames(classes)}
+            className={classnames(inputClasses)}
             aria-describedby={descriptionIds !== '' ? descriptionIds : null}
             onChange={this.handleChange}
             onBlur={this.handleBlur}
