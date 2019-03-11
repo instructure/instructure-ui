@@ -3,6 +3,42 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.45.0](https://github.com/instructure/instructure-ui/compare/v5.44.0...v5.45.0) (2019-03-11)
+
+
+### Bug Fixes
+
+* fix yarn test --scope ([92ba95e](https://github.com/instructure/instructure-ui/commit/92ba95e))
+* **ui-babel-preset:** load themeable config ([b5b8397](https://github.com/instructure/instructure-ui/commit/b5b8397))
+* **ui-forms:** prevent "duplicate adjacent keys" react warning ([1cf778f](https://github.com/instructure/instructure-ui/commit/1cf778f))
+* **ui-scripts:** disable git reset for RC releases ([e02cf7a](https://github.com/instructure/instructure-ui/commit/e02cf7a))
+* **ui-scripts:** move working directory check ([174e2d1](https://github.com/instructure/instructure-ui/commit/174e2d1))
+* **ui-scripts:** update repo package version for RCs ([0573f5c](https://github.com/instructure/instructure-ui/commit/0573f5c))
+* **ui-scripts:** use correct version in post-publish for RCs ([fa1c985](https://github.com/instructure/instructure-ui/commit/fa1c985))
+* **ui-scripts,ui-test-utils:** make sure test teardown always runs ([be84200](https://github.com/instructure/instructure-ui/commit/be84200))
+* **ui-text-input:** fix layout with inline and width props ([0a8dfea](https://github.com/instructure/instructure-ui/commit/0a8dfea))
+* **ui-webpack-config:** add missing dependency ([234d7cd](https://github.com/instructure/instructure-ui/commit/234d7cd))
+
+
+### Features
+
+* A ui-prop-types package ([0fbc609](https://github.com/instructure/instructure-ui/commit/0fbc609))
+* **ui-eslint-config:** remove async test rule ([607b878](https://github.com/instructure/instructure-ui/commit/607b878))
+* **ui-karma-config,ui-scripts:** --randomize test order flag ([dee991c](https://github.com/instructure/instructure-ui/commit/dee991c))
+* **ui-menu:** Fix roles on menu item group items for NVDA/JAWS ([76de5d0](https://github.com/instructure/instructure-ui/commit/76de5d0))
+* **ui-postcss-config:** minify the css we publish to npm ([9aa49dc](https://github.com/instructure/instructure-ui/commit/9aa49dc))
+* **ui-scripts,ui-test-utils:** move jsdom to ui-scripts ([9d1f063](https://github.com/instructure/instructure-ui/commit/9d1f063))
+* **ui-test-utils:** add aliases for finding by text, label ([14fdb9e](https://github.com/instructure/instructure-ui/commit/14fdb9e))
+
+
+### Performance Improvements
+
+* **ui-babel-preset:** don't add polyfills to js we publish to npm ([2d2e859](https://github.com/instructure/instructure-ui/commit/2d2e859))
+
+
+
+
+
 # [5.44.0](https://github.com/instructure/instructure-ui/compare/v5.43.0...v5.44.0) (2019-03-01)
 
 

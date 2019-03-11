@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.45.0](https://github.com/instructure/instructure-ui/compare/v5.44.0...v5.45.0) (2019-03-11)
+
+
+### Bug Fixes
+
+* **ui-babel-preset:** load themeable config ([b5b8397](https://github.com/instructure/instructure-ui/commit/b5b8397))
+
+
+### Performance Improvements
+
+* **ui-babel-preset:** don't add polyfills to js we publish to npm ([2d2e859](https://github.com/instructure/instructure-ui/commit/2d2e859))
+
+
+
+
+
 # [5.44.0](https://github.com/instructure/instructure-ui/compare/v5.43.0...v5.44.0) (2019-03-01)
 
 **Note:** Version bump only for package @instructure/ui-babel-preset

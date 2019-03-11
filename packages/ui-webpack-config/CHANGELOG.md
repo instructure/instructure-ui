@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.45.0](https://github.com/instructure/instructure-ui/compare/v5.44.0...v5.45.0) (2019-03-11)
+
+
+### Bug Fixes
+
+* **ui-webpack-config:** add missing dependency ([234d7cd](https://github.com/instructure/instructure-ui/commit/234d7cd))
+
+
+
+
+
 # [5.44.0](https://github.com/instructure/instructure-ui/compare/v5.43.0...v5.44.0) (2019-03-01)
 
 **Note:** Version bump only for package @instructure/ui-webpack-config

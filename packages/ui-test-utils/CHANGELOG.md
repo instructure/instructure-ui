@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.45.0](https://github.com/instructure/instructure-ui/compare/v5.44.0...v5.45.0) (2019-03-11)
+
+
+### Bug Fixes
+
+* **ui-scripts,ui-test-utils:** make sure test teardown always runs ([be84200](https://github.com/instructure/instructure-ui/commit/be84200))
+
+
+### Features
+
+* A ui-prop-types package ([0fbc609](https://github.com/instructure/instructure-ui/commit/0fbc609))
+* **ui-scripts,ui-test-utils:** move jsdom to ui-scripts ([9d1f063](https://github.com/instructure/instructure-ui/commit/9d1f063))
+* **ui-test-utils:** add aliases for finding by text, label ([14fdb9e](https://github.com/instructure/instructure-ui/commit/14fdb9e))
+
+
+
+
+
 # [5.44.0](https://github.com/instructure/instructure-ui/compare/v5.43.0...v5.44.0) (2019-03-01)
 
 
