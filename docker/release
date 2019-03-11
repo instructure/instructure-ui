@@ -3,6 +3,9 @@
 set -e
 
 env_file=.env.test
+key_path=/home/docker/.ssh
+pem_path=${key_path}/gerritbot_jira.pem
+git_path=/usr/src/app/.git
 
 dotenv () {
   set -a
@@ -47,7 +50,7 @@ GIT_REMOTE_NAME=${GIT_REMOTE_NAME}
 JIRA_CONSUMER_KEY=${JIRA_CONSUMER_KEY}
 JIRA_TOKEN=${JIRA_TOKEN}
 JIRA_SECRET=${JIRA_SECRET}
-JIRA_PEM_PATH=/home/docker/.ssh/gerritbot_jira.pem
+JIRA_PEM_PATH=${pem_path}
 SLACK_USERNAME=${SLACK_USERNAME}
 SLACK_WEBHOOK=${SLACK_WEBHOOK}
 SSH_KEY_PATH=${SSH_KEY_PATH}
@@ -67,10 +70,10 @@ container=$(docker-compose run -d --rm test tail -f /dev/null)
 
 if [[ -e "${SSH_KEY_PATH}" ]]; then
   echo $SSH_KEY_PATH
-  docker exec -u 0 $container mkdir /home/docker/.ssh
-  docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
-  docker cp "$SSH_KEY_PATH" $container:/home/docker/.ssh/
-  docker exec -u 0 $container chown -R docker:docker /home/docker/.ssh
+  docker exec -u 0 $container mkdir $key_path
+  docker exec -u 0 $container chown -R docker:docker $key_path
+  docker cp "${SSH_KEY_PATH}" $container:$key_path
+  docker exec -u 0 $container chown -R docker:docker $key_path
 else
   echo "SSH_KEY_PATH not set on post merge build"
   echo "Please set SSH_KEY_PATH or set CI to false"
@@ -78,14 +81,15 @@ else
 fi
 
 if [[ -e "${JIRA_PEM_PATH}" ]]; then
-  docker cp "${JIRA_PEM_PATH}" $container:/home/docker/.ssh/gerritbot_jira.pem
+  docker cp "${JIRA_PEM_PATH}" $container:$pem_path
+  docker exec -u 0 $container chown -R docker:docker $pem_path
 fi
 
-docker cp .git $container:/usr/src/app/.git
-docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
+docker cp .git $container:$git_path
+docker exec -u 0 $container chown -R docker:docker $git_path
 
 echo "Running release..."
-docker exec $container bash -c "ssh-keyscan -p 29418 gerrit.instructure.com >> ~/.ssh/known_hosts"
-docker exec $container bash -c "GIT_SSH_COMMAND='ssh -i /home/docker/.ssh/ssh-key-SSH_KEY_PATH -l "\$SSH_USERNAME"' yarn release"
+docker exec $container bash -c "ssh-keyscan -p 29418 gerrit.instructure.com >> ${key_path}/known_hosts"
+docker exec $container bash -c "GIT_SSH_COMMAND='ssh -i ${key_path}/ssh-key-SSH_KEY_PATH -l "\$SSH_USERNAME"' yarn release"
 
 docker stop $container

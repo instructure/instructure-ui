@@ -3,6 +3,7 @@
 set -e
 
 env_file=.env.test
+git_path=/usr/src/app/.git
 
 dotenv () {
   set -a
@@ -50,8 +51,8 @@ docker-compose build
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
-docker cp .git $container:/usr/src/app/.git
-docker exec -u 0 $container chown -R docker:docker /usr/src/app/.git
+docker cp .git $container:$git_path
+docker exec -u 0 $container chown -R docker:docker $git_path
 
 echo "Running tests..."
 docker exec $container bash -c "yarn test:patchset"
