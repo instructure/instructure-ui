@@ -48,6 +48,8 @@ class Sandbox {
     try {
       initConsole()
 
+      fetchMock.config.overwriteRoutes = true
+
       this._sandbox = sinon.createSandbox()
 
       this._attributes = {
