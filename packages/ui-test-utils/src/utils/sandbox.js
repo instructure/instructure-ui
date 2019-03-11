@@ -29,80 +29,85 @@ import StyleSheet from '@instructure/ui-stylesheet'
 import ReactComponentWrapper from './reactComponentWrapper'
 
 import initConsole from './initConsole'
-import { initGlobals, cleanupGlobals } from './globals'
 
 class Sandbox {
   constructor () {
-    initGlobals()
-    initConsole()
-
     // eslint-disable-next-line no-console
     console.log('[ui-test-utils] Initializing test sandbox...')
-
-    this._sandbox = sinon.createSandbox()
-
-    this._attributes = {
-      document: [...document.documentElement.attributes],
-      body: [...document.body.attributes]
-    }
-
-    this._addedNodes = []
-    this._observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        Array.from(mutation.addedNodes).forEach((addedNode) => {
-          this._addedNodes.push(addedNode)
-        })
-      })
-    })
-
     try {
       // global Mocha (or Jest?) beforeEach
-      beforeEach(this.setup.bind(this))
-    } catch (e) {} // eslint-disable-line no-empty
+      before(this.setup.bind(this))
+      beforeEach(this.setupEach.bind(this))
+      afterEach(this.teardownEach.bind(this))
+    } catch (e) {
+      console.warn(`[ui-test-utils] error initializing test sandbox: ${e}`)
+    }
   }
 
-  teardown () {
-    this._observer.disconnect()
-
-    ReactComponentWrapper.unmount()
-
-    StyleSheet.flush()
-
-    this._sandbox.resetHistory()
-    this._sandbox.restore()
-
-    window.localStorage && window.localStorage.clear()
-    window.sessionStorage &&  window.sessionStorage.clear()
-
-    if (this._originalWindowOnError) {
-      window.onerror = this._originalWindowOnError
-    }
-
-    if (this._originalConsoleError) {
-      console.error = this._originalConsoleError
-    }
-
-    setAttributes(document.documentElement, this._attributes.document)
-    setAttributes(document.body, this._attributes.body)
-
-    this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
-    this._addedNodes = []
-
-    fetchMock.restore()
-
-    if (global.viewport) {
-      global.viewport.set('large')
-    }
-
-    cleanupGlobals()
-  }
-
-  setup () {
+  async setup () {
     try {
-      this.teardown()
+      initConsole()
 
-      initGlobals()
+      this._sandbox = sinon.createSandbox()
 
+      this._attributes = {
+        document: [...document.documentElement.attributes],
+        body: [...document.body.attributes]
+      }
+
+      this._addedNodes = []
+      this._observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+          Array.from(mutation.addedNodes).forEach((addedNode) => {
+            this._addedNodes.push(addedNode)
+          })
+        })
+      })
+    } catch (e) {
+      console.warn(`[ui-test-utils] error in suite setup: ${e}`)
+    }
+  }
+
+  async teardownEach () {
+    try {
+      this._observer.disconnect()
+
+      ReactComponentWrapper.unmount()
+
+      StyleSheet.flush()
+
+      this._sandbox.resetHistory()
+      this._sandbox.restore()
+
+      window.localStorage && window.localStorage.clear()
+      window.sessionStorage &&  window.sessionStorage.clear()
+
+      if (this._originalWindowOnError) {
+        window.onerror = this._originalWindowOnError
+      }
+
+      if (this._originalConsoleError) {
+        console.error = this._originalConsoleError
+      }
+
+      setAttributes(document.documentElement, this._attributes.document)
+      setAttributes(document.body, this._attributes.body)
+
+      this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
+      this._addedNodes = []
+
+      fetchMock.restore()
+
+      if (global.viewport) {
+        global.viewport.set('large')
+      }
+    } catch (e) {
+      console.warn(`[ui-test-utils] error in test teardown: ${e}`)
+    }
+  }
+
+  async setupEach () {
+    try {
       document.documentElement.setAttribute('dir', 'ltr')
       document.documentElement.setAttribute('lang', 'en-US')
 

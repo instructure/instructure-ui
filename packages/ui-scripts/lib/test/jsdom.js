@@ -21,40 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const fs = require('fs')
-const path = require('path')
-const { runCommandsConcurrently, getCommand, resolveBin } = require('@instructure/command-utils')
-
-let command = 'mocha'
-let args = [
-  '**/*.test.js',
-  '--colors',
-  '--require', '@babel/register',
-  '--require', '@babel/polyfill',
-  '--require', require.resolve('./jsdom'),
-  '--exit'
-]
-
-const optsPath = path.resolve(process.cwd(), 'mocha.opts')
-
-if (fs.existsSync(optsPath)) {
-  args.push(`--opts ${optsPath}`)
-}
-
-const vars = [`NODE_ENV=test`]
-
-if (process.argv.includes('--watch')) {
-  args.push('--watch')
-} else if (process.argv.includes('--coverage')) {
-  command = 'nyc'
-  args = [
-    resolveBin('mocha')
-  ].concat(args)
-}
-
-const commands = {
-  node: getCommand(command, args, vars)
-}
-
-process.exit(runCommandsConcurrently(commands).status)
+module.exports = require('jsdom-global')('', {
+  pretendToBeVisual: true,
+  runScripts: 'dangerously',
+  url: 'http://localhost'
+})

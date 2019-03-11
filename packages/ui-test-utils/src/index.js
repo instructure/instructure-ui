@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import './utils/shims'
 
 import { mount, stub, spy, viewport } from './utils/sandbox'
 import { waitForExpect } from './utils/waitForExpect'

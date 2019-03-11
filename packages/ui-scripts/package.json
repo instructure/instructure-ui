@@ -35,7 +35,6 @@
     "gh-pages": "^2.0.1",
     "http-server": "^0.11.1",
     "jira-client": "^6.6.0",
-    "jsdom-global": "^3.0.2",
     "karma-cli": "^2.0.0",
     "lerna": "^3",
     "mocha": "^6.0.2",
@@ -47,6 +46,9 @@
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.2.3",
     "webpack-dev-server": "^3.2.1"
+  },
+  "optionalDependencies": {
+    "jsdom-global": "^3.0.2"
   },
   "peerDependencies": {
     "jsdom": ">=10.0.0",
