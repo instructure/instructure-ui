@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-presets",
-  "version": "5.45.1",
+  "version": "5.46.0",
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./index.js",

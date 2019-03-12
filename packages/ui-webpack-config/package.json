@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-webpack-config",
-  "version": "5.45.1",
+  "version": "5.46.0",
   "description": "A shared webpack config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./config/index.js",

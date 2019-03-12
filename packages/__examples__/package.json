@@ -2,7 +2,7 @@
   "name": "docs-examples",
   "description": "UI libraries made by Instructure Inc.",
   "private": true,
-  "version": "5.45.1",
+  "version": "5.46.0",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {
     "type": "git",
@@ -21,10 +21,10 @@
   "license": "MIT",
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-babel-preset": "^5.45.1",
-    "@instructure/ui-component-examples": "^5.45.1",
-    "@instructure/ui-themes": "^5.45.1",
-    "@instructure/ui-webpack-config": "^5.45.1",
+    "@instructure/ui-babel-preset": "^5.46.0",
+    "@instructure/ui-component-examples": "^5.46.0",
+    "@instructure/ui-themes": "^5.46.0",
+    "@instructure/ui-webpack-config": "^5.46.0",
     "@storybook/react": "^5.0.1",
     "@storybook/theming": "^5.0.1",
     "react": "^0.14.9 || ^15 || ^16",
