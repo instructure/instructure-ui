@@ -84,6 +84,7 @@ async function bumpPackages (packageName, requestedVersion) {
     await runCommandAsync('lerna', [
       'version',
       ...args,
+      '--include-merged-tags',
       '--no-push',
       '--no-git-tag-version',
       '--force-publish=*',
@@ -111,6 +112,7 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--preid', preidAndTag,
       '--dist-tag', preidAndTag,
       '--exact',
+      '--include-merged-tags',
       '--conventional-commits',
       '--no-git-reset'
     ]
