@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
+import { locator, expect, mount, stub, spy } from '@instructure/ui-test-utils'
 import SelectMultiple from '../index'
 
 import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'

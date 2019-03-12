@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import Pagination, { PaginationButton } from '../index'
+import { PaginationButton } from '../index'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((v, i) => {

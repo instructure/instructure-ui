@@ -23,10 +23,7 @@
  */
 require('dotenv').config()
 
-const path = require('path')
 const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
-
-const rootPath = path.resolve(process.cwd(), '../../node_modules')
 
 let result
 
@@ -40,7 +37,11 @@ if (portIndex > 0) {
 }
 
 result = runCommandsConcurrently({
-  chromatic: getCommand('chromatic', ['test', '--storybook-port', port, '--no-interactive', '--exit-zero-on-changes'], [`CHROMATIC_APP_CODE=${process.env.CHROMATIC_APP_CODE}`])
+  chromatic: getCommand(
+    'chromatic',
+    ['test', '--storybook-port', port, '--no-interactive', '--exit-zero-on-changes'],
+    [`CHROMATIC_APP_CODE=${process.env.CHROMATIC_APP_CODE}`]
+  )
 })
 
 process.exit(result.status)

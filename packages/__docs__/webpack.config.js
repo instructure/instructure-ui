@@ -30,7 +30,7 @@ const DEBUG = process.env.DEBUG || process.env.NODE_ENV === 'development'
 const outputPath = path.resolve(__dirname, '__build__')
 
 // eslint-disable-next-line no-console
-console.log(`Starting Docs with React version ${React.version}...`)
+console.log(`Building documentation with React version ${React.version}...`)
 
 module.exports = {
   ...baseConfig,
