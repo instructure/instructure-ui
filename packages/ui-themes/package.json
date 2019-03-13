@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-themes",
-  "version": "5.46.0",
+  "version": "5.46.1",
   "description": "A library of @instructure/ui-themeable themes",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
