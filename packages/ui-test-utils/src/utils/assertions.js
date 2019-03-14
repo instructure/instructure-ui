@@ -184,6 +184,7 @@ export default function assertions (chai, utils) {
   addAssertion('attribute', propAndValueAssertion('attribute', 'attribute'))
   addAssertion('style', propAndValueAssertion('style', 'computed CSS style'))
   addAssertion('bounds', propAndValueAssertion('bounds', 'bounding client rect'))
+  addAssertion('tagName', valueAssertion('tagName', 'tag name'))
   addAssertion('id', valueAssertion('id', 'id'))
   addAssertion('visible', booleanAssertion('visible', 'visible'))
   addAssertion('clickable', booleanAssertion('clickable', 'clickable'))

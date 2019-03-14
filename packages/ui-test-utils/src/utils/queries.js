@@ -41,6 +41,11 @@ async function findWithText (...args) {
   return find(element, `:withText("${selector}")`, options)
 }
 
+async function findWithTitle (...args) {
+  const { element, selector, options } = parseQueryArguments(...args)
+  return find(element, `:withTitle("${selector}")`, options)
+}
+
 async function find (...args) {
   return firstOrNull(await findAll(...args))
 }
@@ -76,6 +81,7 @@ async function findByQuery (...args) {
 export {
   findWithLabel,
   findWithText,
+  findWithTitle,
   findAllByQuery,
   findByQuery,
   findAll,

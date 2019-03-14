@@ -36,6 +36,7 @@ import { generateA11yTests } from './utils/generateA11yTests'
 import {
   findWithText,
   findWithLabel,
+  findWithTitle,
   findAllByQuery,
   findByQuery,
   find,
@@ -56,6 +57,7 @@ export {
   parseQueryArguments,
   findWithLabel,
   findWithText,
+  findWithTitle,
   findByQuery,
   findAllByQuery,
   matchesSelector,

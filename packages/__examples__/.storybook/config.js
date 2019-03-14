@@ -28,7 +28,9 @@ import 'storybook-chromatic'
 import { create } from '@storybook/theming'
 import { getStorybook, storiesOf, configure, addParameters } from '@storybook/react'
 
-import '@instructure/ui-themes/lib/canvas'
+import theme from '@instructure/ui-themes/lib/canvas'
+theme.use({ overrides: { transitions: { duration: '0ms' } } })
+
 // eslint-disable-next-line import/no-unresolved
 import '@instructure/ui-polyfill-loader!'
 

@@ -101,7 +101,7 @@ class Sandbox {
       fetchMock.restore()
 
       if (global.viewport) {
-        global.viewport.set('large')
+        global.viewport.reset()
       }
     } catch (e) {
       console.warn(`[ui-test-utils] error in test teardown: ${e}`)

@@ -99,6 +99,8 @@ const text = getTextContent
 function getTagName (element) {
   return element.tagName.toLowerCase()
 }
+// aliases
+const tagName = getTagName
 
 function getComputedStyle (element) {
   if (isElement(element)) {
@@ -314,6 +316,7 @@ function getAttribute (element, ...args) {
 function getParentNode (element) {
   return element.parentNode
 }
+const parent = getParentNode
 
 function containsFocus (element) {
   const activeElement = getOwnerDocument(element).activeElement
@@ -327,10 +330,12 @@ function focused (element) {
 function getDOMNode (element) {
   return element
 }
+const node = getDOMNode
 
 function getBoundingClientRect (element) {
   return element.getBoundingClientRect()
 }
+const rect = getBoundingClientRect
 
 function hasClass (element, classname) {
   return element.classList.contains(classname)
@@ -501,14 +506,18 @@ export {
   getOwnerDocument,
   getComputedStyle,
   getTagName,
+  tagName,
   typeIn,
   getAttribute,
   getDOMNode,
+  node,
   debug,
   accessible,
   getTextContent,
   getParentNode,
+  parent,
   getBoundingClientRect,
+  rect,
   hasClass,
   containsFocus,
   focused,
