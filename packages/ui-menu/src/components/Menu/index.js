@@ -510,7 +510,7 @@ class Menu extends Component {
       <ul
         role="menu"
         aria-label={title || label}
-        tabIndex={this.state.hasFocus ? null : '0'}
+        tabIndex="0"
         className={styles.menu}
         aria-labelledby={labelledBy || (trigger && this._labelId)}
         aria-controls={controls}

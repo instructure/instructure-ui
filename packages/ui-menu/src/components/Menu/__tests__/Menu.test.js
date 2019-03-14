@@ -314,7 +314,7 @@ describe('<Menu />', async () => {
       expect(popoverRef).to.have.been.called()
     })
 
-    it('should focus the menu', async () => {
+    it('should focus the menu first', async () => {
       await mount(
         <Menu
           trigger={<button>More</button>}
@@ -325,12 +325,17 @@ describe('<Menu />', async () => {
         </Menu>
       )
 
-      const menu = await MenuLocator.find(':label(More)')
-      const popover = await menu.findPopoverContent()
+      const subject = await MenuLocator.find(':label(More)')
+      const popover = await subject.findPopoverContent()
+      const menu = await popover.find(`[role="menu"]`)
 
-      await wait (() => {
-        expect(popover.containsFocus()).to.be.true()
-      })
+      expect(menu.focused()).to.be.true()
+      expect(menu.getAttribute('tabIndex')).to.equal('0')
+
+      await menu.keyDown('down')
+
+      expect(menu.focused()).to.be.false()
+      expect(menu.getAttribute('tabIndex')).to.equal('0')
     })
 
     it('should call onToggle on click', async () => {
