@@ -34,7 +34,10 @@ export default function componentExamplesLoader (source, map, meta) {
   const loader = this
   const callback = loader.async()
 
-  const config = loadConfig('examples')
+  const config = {
+    maxExamples: 500,
+    ...loadConfig('examples', {})
+  }
 
   const generateComponentExamples = require.resolve('./generateComponentExamples')
   const renderPage = require.resolve('./renderPage')
@@ -78,6 +81,8 @@ config.propValues = Object.assign(
   config.propValues || {}
 )
 const Component = require(${JSON.stringify(componentPath)}).default
+
+config.maxExamples = Boolean(config.maxExamples) ? config.maxExamples : ${config.maxExamples}
 
 module.exports = {
  componentName: Component.displayName || Component.name,

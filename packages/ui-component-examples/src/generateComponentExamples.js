@@ -29,9 +29,10 @@ export default function generateComponentExamples (Component, config = {
     sectionProp: null,
     propValues: {},
     maxExamplesPerPage: null,
-    getExampleProps: (props) => { return {} },
-    getComponentProps: (props) => { return {} },
-    filter: (props) => false
+    getExampleProps: (props, index) => { return {} },
+    getComponentProps: (props, index) => { return {} },
+    getParameters: (examples, pageIndex) => { return {} },
+    filter: (props, index) => false
   }) {
   const {
     sectionProp,
@@ -39,12 +40,22 @@ export default function generateComponentExamples (Component, config = {
     filter
   } = config
 
+  const KEY_CACHE = []
   const sections = []
   let exampleCount = 0
 
-  const getRenderProps = (props) => {
+  const getParameters = ({ examples, index }) => {
+    let parameters = {}
+    if (typeof config.getParameters === 'function') {
+      parameters = {
+        ...config.getParameters(examples, index)
+      }
+    }
+    return parameters
+  }
+
+  const getComponentProps = (props) => {
     let componentProps = props
-    let exampleProps = {}
 
     if (typeof config.getComponentProps === 'function') {
       componentProps = {
@@ -53,27 +64,33 @@ export default function generateComponentExamples (Component, config = {
       }
     }
 
+    return componentProps
+  }
+
+  const getExampleProps = (props) => {
+    let exampleProps = {}
+
     if (typeof config.getExampleProps === 'function') {
       exampleProps = {
         ...config.getExampleProps(props)
       }
     }
 
-    return {
-      componentProps,
-      exampleProps
-    }
+    return  exampleProps
   }
 
   const addPage = (section) => {
     const page = {
-      examples : []
+      examples : [],
+      index: section.pages.length
     }
     section.pages.push(page)
     return page
   }
 
   const addExample = (sectionName = 'Examples', example) => {
+    if (exampleCount >= config.maxExamples) return
+
     let section = sections.find(section => section.sectionName === sectionName)
     if (!section) {
       section = {
@@ -100,33 +117,55 @@ export default function generateComponentExamples (Component, config = {
     }
 
     page.examples.push(example)
-    exampleCount++
   }
 
   // eslint-disable-next-line no-console
   console.log(`Generating examples for ${Component.displayName}...`)
 
-  generatePropCombinations(propValues, filter)
-    .filter(Boolean)
-    .forEach((props) => {
-      if (typeof filter === 'function' && filter(props)) return
+  const combos = generatePropCombinations(propValues).filter(Boolean)
+  const maxExamples = config.maxExamples || 500
 
-      const { componentProps, exampleProps } = getRenderProps(props)
+  let index = 0
 
-      addExample(props[sectionProp], {
-        Component,
-        componentProps,
-        exampleProps,
-        key: objectHash(componentProps)
-      })
-    })
+  while (index < combos.length && exampleCount <= maxExamples) {
+    const props = combos[index]
 
-  if (exampleCount > 200) {
-    console.error(`${exampleCount} is too many examples for ${Component.displayName}! Add a filter to the config!`)
+    index++
+
+    const componentProps = getComponentProps(props)
+    const exampleProps = getExampleProps(props)
+    const key = objectHash(componentProps)
+    const ignore = (typeof filter === 'function') && filter(componentProps)
+
+    if (!ignore && !KEY_CACHE.includes(key)) {
+      exampleCount++
+
+      if (exampleCount <= maxExamples) {
+        KEY_CACHE.push(key)
+
+        addExample(props[sectionProp], {
+          Component,
+          componentProps,
+          exampleProps,
+          key
+        })
+      }
+    }
+  }
+
+  if (exampleCount > maxExamples) {
+    console.error(`Too many examples for ${Component.displayName}! Add a filter to the config.`)
   } else {
     // eslint-disable-next-line no-console
-    console.log(`Generated ${exampleCount} examples for ${Component.displayName}!`)
+    console.log(`Generated ${exampleCount} examples for ${Component.displayName}`)
   }
+
+  sections.forEach(({ pages }) => {
+    pages.forEach((page, index) => {
+      // eslint-disable-next-line no-param-reassign
+      page.parameters = getParameters(page)
+    })
+  })
 
   return sections
 }

@@ -27,7 +27,7 @@ passed to the `generateComponentExamples` function to generate examples.
 
 In your webpack.config.js:
 
-```
+```js
 module.exports = {
   module: {
     rules: [
@@ -71,6 +71,7 @@ Given a configuration object, `generateComponentExamples` returns an array of ge
 export default {
  sectionProp: 'variant',
  maxExamplesPerPage: 50,
+ maxExamples: 200,
  propValues: {
    variant: ['circular', 'rectangular'],
    placement: ['top', 'bottom', 'start', 'end'],
@@ -87,6 +88,9 @@ export default {
  },
  renderPage: ({ examples, key, renderExample }) => {
    return <View key={key}>{examples.map(renderExample)}</View>
+ },
+ getParameters: ({ examples, index}) {
+   return { delay: 200, viewports: [320, 1200] }
  }
 }
 ```
@@ -128,6 +132,13 @@ maxExamplesPerPage: (sectionName) => sectionName === 'inverse' ? 20 : 50
 |----------|-------------|
 | `number` | a number specifying the maximum examples per page |
 
+
+#### maxExamples
+Specifies the total max number of examples
+
+| Type     | Default     |
+|----------|-------------|
+| `number` | `500` |
 
 #### propValues
 
@@ -254,6 +265,35 @@ The parameters consist of an object with the following properties
 | Type     | Description |
 |----------|-------------|
 | `ReactComponent` | the rendered page of examples |
+
+
+#### getParameters
+
+A function called with the examples and index for the current page of examples. It returns an object
+of parameters/meta data for that page of examples (e.g. to be passed in to a visual regression tool like chromatic).
+
+| Type     | Default     |
+|----------|-------------|
+| `function` | `undefined` |
+
+
+```js
+getParameters: ({ examples, index }) => ({
+  // add a delay for the first page of examples only:
+  index === 1 ? { delay: 200 } : {}
+})
+```
+
+##### Parameters
+| Param     | Type     | Default    | Description    |
+|----------|-------------|----------|----------|
+| props | `Object` | `undefined` | the examples and index of the current page |
+
+##### Returns
+| Type     | Description |
+|----------|-------------|
+| `Object` | a parameters object with delay and viewport sizes configuration for the page |
+
 
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-ui-component-examples.svg

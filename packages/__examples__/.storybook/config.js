@@ -58,16 +58,21 @@ configure(() => {
   console.log(`Creating stories for ${examples.length} components...`)
 
   examples.forEach(({ componentName, sections, renderPage, renderExample }) => {
-    const stories = storiesOf(componentName, module)
-    sections.forEach(({ pages, sectionName }) => {
-      pages.forEach((page, i) => {
-        page.renderExample = renderExample
-        stories.add(
-          `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
-          renderPage.bind(null, page)
-        )
+    if (sections && sections.length > 0) {
+      const stories = storiesOf(componentName, module)
+
+      sections.forEach(({ pages, sectionName }) => {
+        pages.forEach((page, i) => {
+          page.renderExample = renderExample
+          stories
+            .add(
+              `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
+              renderPage.bind(null, page),
+              { chromatic: page.parameters }
+            )
+        })
       })
-    })
+    }
   })
 }, module)
 

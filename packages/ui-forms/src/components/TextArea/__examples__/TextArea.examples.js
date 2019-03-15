@@ -27,16 +27,16 @@ export default {
   sectionProp: 'layout',
   maxExamplesPerPage: 50,
   propValues: {
-    placeholder: [null, 'Hello text area placeholder'],
-    defaultValue: [null, 'Some content for the text area'],
+    placeholder: [undefined, 'Hello text area placeholder'], // eslint-disable-line no-undefined
+    value: [undefined, 'Some content for the text area'], // eslint-disable-line no-undefined
     messages: generateMessages()
   },
   getComponentProps: (props) => {
     return {
-      label: 'A text area'
+      label: 'A text area',
+      readOnly: false,
+      onChange: () => {},
+      required: false
     }
-  },
-  filter: (props) => {
-    return props.placeholder && props.defaultValue
   }
 }

@@ -61,18 +61,6 @@ describe('generatePropCombinations', () => {
       ])
   })
 
-  it('should filter props/values', () => {
-    const result = generatePropCombinations({
-      foo: [1, 2],
-      bar: ['a', 'b']
-    }, (props) => props.foo === 2)
-    expect(result)
-      .to.deep.equal([
-       {foo: 1, bar: 'a'},
-       {foo: 1, bar: 'b'}
-      ])
-  })
-
   it('should work with props with values of differing lengths', () => {
     const result = generatePropCombinations({
       foo: [1, 2],

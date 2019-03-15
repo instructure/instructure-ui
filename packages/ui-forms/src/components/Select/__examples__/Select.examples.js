@@ -65,10 +65,14 @@ export default {
     return {
       layout: 'stacked',
       label: 'Hello from select!',
-      assistiveText: '3 options available. Use arrow keys to navigate options.'
+      assistiveText: '3 options available. Use arrow keys to navigate options.',
+      readOnly: false,
+      closeOnSelect: false,
+      allowEmpty: false,
+      allowCustom: false
     }
   },
   filter: (props) => {
-    return props.inputRef || props.editable || (props.allowCustom && props.multiple) || props.vAlign
+    return props.editable || (props.allowCustom && props.multiple) || props.vAlign
   }
 }

@@ -165,7 +165,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     const displayName = id.name
 
     // eslint-disable-next-line no-console
-    console.log(`[transform-themeable]: ${displayName}`)
+    console.log(`\n[transform-themeable]: ${displayName}`)
 
     var blockLevelStmnt
     path.find(function (path) {

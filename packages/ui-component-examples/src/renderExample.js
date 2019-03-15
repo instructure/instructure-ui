@@ -22,7 +22,12 @@
  * SOFTWARE.
  */
 import React from 'react'
-import View from '@instructure/ui-layout/lib/components/View'
+import { View } from '@instructure/ui-layout'
+import { Tooltip} from '@instructure/ui-overlays'
+import { Button } from '@instructure/ui-buttons'
+import { IconInfoLine } from '@instructure/ui-icons'
+import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { Text } from '@instructure/ui-elements'
 
 export default function renderExample ({ Component, componentProps, exampleProps, key }) {
   return (
@@ -38,6 +43,19 @@ export default function renderExample ({ Component, componentProps, exampleProps
       {...exampleProps}
     >
       <Component {...componentProps} />
+      <Tooltip
+        tip={<pre>{JSON.stringify(componentProps,null,2)}</pre>}
+        placement="bottom"
+        on={['click']}
+        size="large"
+      >
+        <Button variant="icon" size="small">
+          <Text color="secondary">
+            <IconInfoLine />
+          </Text>
+          <ScreenReaderContent>props</ScreenReaderContent>
+        </Button>
+      </Tooltip>
     </View>
   )
 }

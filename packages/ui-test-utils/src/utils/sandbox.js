@@ -36,9 +36,9 @@ class Sandbox {
     console.log('[ui-test-utils] Initializing test sandbox...')
     try {
       // global Mocha (or Jest?) beforeEach
-      before(this.setup.bind(this))
-      beforeEach(this.setupEach.bind(this))
-      afterEach(this.teardownEach.bind(this))
+      before('[ui-test-utils] sandbox init', this.setup.bind(this))
+      beforeEach('[ui-test-utils] sandbox setup', this.setupEach.bind(this))
+      afterEach('[ui-test-utils] sandbox teardown', this.teardownEach.bind(this))
     } catch (e) {
       console.warn(`[ui-test-utils] error initializing test sandbox: ${e}`)
     }

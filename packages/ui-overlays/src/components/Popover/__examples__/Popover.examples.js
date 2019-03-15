@@ -28,10 +28,7 @@ import { PopoverTrigger, PopoverContent } from '../'
 export default {
   propValues: {
     withArrow: [true, false],
-    placement: [
-      'bottom center',
-      'start top'
-    ],
+    placement: ['bottom center'],
     dir: [
       'rtl',
       'ltr'
@@ -40,6 +37,7 @@ export default {
   getComponentProps: (props) => {
     return {
       defaultShow: true,
+      placement: 'bottom center',
       children: [
         <PopoverTrigger key="trigger">
           <button>Show Popup</button>

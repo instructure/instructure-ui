@@ -31,7 +31,8 @@ export default {
   getComponentProps: (props) => {
     return {
       value: 'example',
-      label: 'A checkbox component'
+      label: 'A checkbox component',
+      readOnly: false
     }
   },
   filter: (props) => {

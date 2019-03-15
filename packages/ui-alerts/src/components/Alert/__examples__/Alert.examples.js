@@ -32,7 +32,16 @@ export default {
       'to fill'
     ]
   },
+  getComponentProps: (props) => {
+    return {
+      margin: 'medium',
+      screenReaderOnly: false,
+      liveRegionPoliteness: 'polite',
+      transition: 'none',
+      open: true
+    }
+  },
   filter: (props) => {
-    return props.screenReaderOnly
+    return props.screenReaderOnly || props.open === false
   }
 }

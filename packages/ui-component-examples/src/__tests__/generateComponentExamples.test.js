@@ -56,7 +56,11 @@ describe('generateComponentExamples', () => {
       propValues: {
         variant: ['circle', 'rectangle'],
         show: [true, false]
-      }
+      },
+      getParameters: (page) => {
+        return { delay: 200 }
+      },
+      maxExamples: 500
     }
     expect(generateComponentExamples(TestComponent, config))
       .to.deep.equal([
@@ -79,7 +83,9 @@ describe('generateComponentExamples', () => {
                   exampleProps: {},
                   key: '03541b2f3d348c4f3cc95f12b4b08696a72d3138'
                 }
-              ]
+              ],
+              parameters: { delay: 200 },
+              index: 0
             }
           ]
         },
@@ -102,7 +108,9 @@ describe('generateComponentExamples', () => {
                   exampleProps: {},
                   key: '98a535f4504f6f304545863e0a7474b903fab9db'
                 }
-              ]
+              ],
+              parameters: { delay: 200 },
+              index: 0
             }
           ]
         }
@@ -133,7 +141,9 @@ describe('generateComponentExamples', () => {
                   exampleProps: {},
                   key: '59d40acdc7ae53876cf6f5492ca1dc3f6fbb6084'
                 }
-              ]
+              ],
+              parameters: {},
+              index: 0
             }
           ]
         },
@@ -156,7 +166,9 @@ describe('generateComponentExamples', () => {
                   exampleProps: {},
                   key: '98a535f4504f6f304545863e0a7474b903fab9db'
                 }
-              ]
+              ],
+              parameters: {},
+              index: 0
             }
           ]
         }

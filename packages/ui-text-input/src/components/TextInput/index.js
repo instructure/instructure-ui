@@ -86,11 +86,11 @@ class TextInput extends Component {
     /**
     * Content to display before the input text, such as an icon
     */
-    renderBeforeInput: PropTypes.func,
+    renderBeforeInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * Content to display after the input text, such as an icon
     */
-    renderAfterInput: PropTypes.func,
+    renderAfterInput: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     onChange: PropTypes.func,
     onBlur: PropTypes.func,
     onFocus: PropTypes.func

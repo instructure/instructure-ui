@@ -38,7 +38,8 @@ export default {
     return {
       padding: 'medium',
       display: 'block',
-      children: 'Some content for the View'
+      children: 'Some content for the View',
+      debug: false
     }
   },
   filter: (props) => {

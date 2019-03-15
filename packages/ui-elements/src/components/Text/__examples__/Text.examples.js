@@ -46,7 +46,8 @@ export default {
       props.fontStyle === 'normal' &&
       props.letterSpacing === 'normal' &&
       props.transform === 'none' &&
-      props.lineHeight === 'default'
+      props.lineHeight === 'default' &&
+      props.size === 'small'
     )
   }
 }

@@ -38,10 +38,10 @@ export default {
       nextLabel: 'next month',
       invalidDateMessage: (value) => { return `'${value}' is not a valid date` },
       disabledDateMessage: (date) => `Date is disabled`,
-      onChange: () => {}
+      onChange: () => {},
+      readOnly: false,
+      required: false,
+      validationFeedback: false
     }
-  },
-  filter: (props) => {
-    return props.placeholder && props.dateValue
   }
 }

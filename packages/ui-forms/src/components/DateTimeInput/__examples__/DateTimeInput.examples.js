@@ -28,7 +28,7 @@ export default {
   maxExamplesPerPage: 50,
   propValues: {
     datePlaceholder: [null, 'Choose a date'],
-    defaultValue: [undefined, '20180806T133055Z'], // eslint-disable-line no-undefined
+    value: [undefined, '20180806T133055Z'], // eslint-disable-line no-undefined
     messages: generateMessages()
   },
   getComponentProps: (props) => {
@@ -40,10 +40,8 @@ export default {
       dateNextLabel: 'next month',
       invalidDateTimeMessage: (dvalue, tvalue) => { return `'${dvalue} ${tvalue}' is not valid.` },
       disabledDateMessage: (date) => `Date is disabled`,
-      onChange: () => {}
+      onChange: () => {},
+      readOnly: false
     }
-  },
-  filter: (props) => {
-    return props.datePlaceholder && props.defaultValue
   }
 }

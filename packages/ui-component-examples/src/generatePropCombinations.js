@@ -30,7 +30,7 @@
  * @param {Object} propValues an object with the shape {propName: arrayOfPossibleValues}
  * @returns {Array} an array of all prop combinations [{propAName: propAValue, propBName: propBValue}]
  */
-export default function generatePropCombinations (propValues = {}, filter = props => false) {
+export default function generatePropCombinations (propValues = {}) {
   const propNames = Object.keys(propValues)
   let combos = []
 
@@ -53,25 +53,18 @@ export default function generatePropCombinations (propValues = {}, filter = prop
       if (numCombos > 0) {
         for (let k = 0; k < numCombos; k++) {
           let combo = combos[k]
-          if (!combo[propName]) {
+
+          // Check against the keys of the object here. `combo[propName]` could
+          // evaluate to a boolean value which will mess up this logic.
+          if (!Object.keys(combo).includes(propName)) {
             // eslint-disable-next-line no-param-reassign
             combo[propName] = propValue
-
-            if (filter(combo)) {
-              delete combo[propName]
-            }
           } else {
-            combo = { ...combo, [propName]: propValue }
-            if (!filter(combo)) {
-              combos.push(combo)
-            }
+            combos.push({ ...combo, [propName]: propValue })
           }
         }
       } else {
-        const combo = { [propName]: propValue }
-        if (!filter(combo)) {
-          combos.push(combo)
-        }
+        combos.push({ [propName]: propValue })
       }
     }
   }

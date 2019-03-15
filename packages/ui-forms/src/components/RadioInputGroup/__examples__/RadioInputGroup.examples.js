@@ -40,6 +40,7 @@ export default {
     return {
       name: generateName(),
       description: 'A radio input group',
+      readOnly: false,
       children: [
         <RadioInput
           key="minnie"
