@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.47.0](https://github.com/instructure/instructure-ui/compare/v5.46.1...v5.47.0) (2019-03-15)
+
+
+### Bug Fixes
+
+* **ui-utils:** updates to CustomPropTypes.Children ([4679cbb](https://github.com/instructure/instructure-ui/commit/4679cbb))
+
+
+### Features
+
+* **ui-selectable:** add Selectable component ([de742b4](https://github.com/instructure/instructure-ui/commit/de742b4))
+* **ui-tabs:** new Tabs component ([b8fe295](https://github.com/instructure/instructure-ui/commit/b8fe295))
+* **ui-test-utils:** add a few more test helpers ([386a867](https://github.com/instructure/instructure-ui/commit/386a867))
+
+
+
+
+
 ## [5.46.1](https://github.com/instructure/instructure-ui/compare/v5.46.0...v5.46.1) (2019-03-13)
 
 

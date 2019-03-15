@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-navigation",
-  "version": "5.46.1",
+  "version": "5.47.0",
   "description": "",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
