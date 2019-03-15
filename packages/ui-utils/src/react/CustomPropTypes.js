@@ -44,14 +44,14 @@ import { changedPackageWarning, warnDeprecatedComponent } from './deprecated'
  * Custom prop types for React components.
  * @module CustomPropTypes
  */
-export default {
-  Children (...args) {
-    warnDeprecatedComponent('v5.45.0', 'Children', changedPackageWarning(
-      'ui-utils',
-      'ui-prop-types'
-    ))
-    return Children(...args)
-  },
+ class CustomPropTypes {
+   get Children () {
+     warnDeprecatedComponent('v5.45.0', 'Children', changedPackageWarning(
+       'ui-utils',
+       'ui-prop-types'
+     ))
+     return Children
+  }
 
   childrenOrValue (...args) {
     warnDeprecatedComponent('v5.45.0', 'childrenOrValue', changedPackageWarning(
@@ -59,7 +59,7 @@ export default {
       'ui-prop-types'
     ))
     return childrenOrValue(...args)
-  },
+  }
 
   controllable (...args) {
     warnDeprecatedComponent('v5.45.0', 'controllable', changedPackageWarning(
@@ -67,7 +67,7 @@ export default {
       'ui-prop-types'
     ))
     return controllable(...args)
-  },
+  }
 
   cursor (...args) {
     warnDeprecatedComponent('v5.45.0', 'cursor', changedPackageWarning(
@@ -75,7 +75,7 @@ export default {
       'ui-prop-types'
     ))
     return cursor(...args)
-  },
+  }
 
   element (...args) {
     warnDeprecatedComponent('v5.45.0', 'element', changedPackageWarning(
@@ -83,12 +83,12 @@ export default {
       'ui-prop-types'
     ))
     return element(...args)
-  },
+  }
 
   elementType (...args) {
     warnDeprecatedComponent('v5.45.0', 'elementType', 'Use `PropTypes.elementType` https://github.com/facebook/prop-types')
     return elementType(...args)
-  },
+  }
 
   xor (...args) {
     warnDeprecatedComponent('v5.45.0', 'xor', changedPackageWarning(
@@ -98,3 +98,5 @@ export default {
     return xor(...args)
   }
 }
+
+export default new CustomPropTypes()
