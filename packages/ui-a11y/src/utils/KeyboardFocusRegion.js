@@ -175,8 +175,11 @@ export default class KeyboardFocusRegion {
   }
 
   handleKeyDown = event => {
-    if (event.keyCode === keycode.codes.tab && containsActiveElement(this._contextElement)) {
-      scopeTab(this._contextElement, event)
+    if (event.keyCode === keycode.codes.tab) {
+      if (containsActiveElement(this._contextElement) || !this._options.shouldCloseOnDocumentClick) {
+        // if active el is in region or region may be active after document click
+        scopeTab(this._contextElement, event)
+      }
     }
   }
 
