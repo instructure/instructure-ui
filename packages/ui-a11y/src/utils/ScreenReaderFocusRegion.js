@@ -115,9 +115,12 @@ export default class ScreenReaderFocusRegion {
 
   handleDOMMutation = (records) => {
     records.forEach((record) => {
-      this.hideNodes(Array.from(record.addedNodes))
+      const addedNodes = Array.from(record.addedNodes)
+      const removedNodes = Array.from(record.removedNodes)
 
-      record.removedNodes.forEach((removedNode) => {
+      this.hideNodes(addedNodes)
+
+      removedNodes.forEach((removedNode) => {
         // Node has been removed from the DOM, make sure it is
         // removed from our list of hidden nodes as well
         if (removedNode.tagName.toLowerCase() !== 'iframe') {
