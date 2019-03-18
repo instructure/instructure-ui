@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.48.0](https://github.com/instructure/instructure-ui/compare/v5.47.0...v5.48.0) (2019-03-18)
+
+
+### Bug Fixes
+
+* **ui-prop-types:** require prop-types >= 15.7 ([30c105a](https://github.com/instructure/instructure-ui/commit/30c105a))
+
+
+### Features
+
+* **ui-component-examples,ui-test-utils:** add parameters to example config ([19e4cfd](https://github.com/instructure/instructure-ui/commit/19e4cfd))
+* **ui-table:** add controlled table ([20f39f9](https://github.com/instructure/instructure-ui/commit/20f39f9))
+
+
+
+
+
 # [5.47.0](https://github.com/instructure/instructure-ui/compare/v5.46.1...v5.47.0) (2019-03-15)
 
 

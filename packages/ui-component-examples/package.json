@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-component-examples",
-  "version": "5.47.0",
+  "version": "5.48.0",
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -28,8 +28,8 @@
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-buttons": "^5",
     "@instructure/ui-elements": "^5",
-    "@instructure/ui-icons": "^5",
     "@instructure/ui-i18n": "^5",
+    "@instructure/ui-icons": "^5",
     "@instructure/ui-layout": "^5",
     "@instructure/ui-overlays": "^5",
     "loader-utils": "^1.2.3",

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-media-player",
-  "version": "5.47.0",
+  "version": "5.48.0",
   "description": "A cross-browser HTML5 media player.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
