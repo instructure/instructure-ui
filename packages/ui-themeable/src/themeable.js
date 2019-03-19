@@ -205,7 +205,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       }
       const { immutable } = getContext(this.context)
       let theme = getThemeFromContext(this.context)
-      if (this.props.theme) {
+      if (this.props.theme && !isEmpty(this.props.theme)) {
         if (!theme) {
           theme = this.props.theme
         } else if (immutable) {

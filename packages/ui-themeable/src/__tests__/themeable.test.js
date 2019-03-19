@@ -78,6 +78,14 @@ describe('@themeable', async () => {
     expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
   })
 
+  it('ignores empty theme props', async () => {
+    const subject = await mount(<ThemeableComponent theme={{}} />)
+    const component = subject.getDOMNode()
+
+    expect(getComputedStyle(component).color).to.equal('rgb(0, 128, 0)') // green
+    expect(getComputedStyle(component).backgroundColor).to.equal('rgb(255, 255, 0)') // yellow
+  })
+
   it('allows configuration through context', async () => {
     const context = makeThemeContext({
       [ThemeableComponent.theme]: {
