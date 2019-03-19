@@ -45,7 +45,7 @@ function jiraClient (config = {}) {
         consumer_key: JIRA_CONSUMER_KEY,
         consumer_secret: fs.readFileSync(JIRA_PEM_PATH),
         access_token: JIRA_TOKEN,
-        access_secret: JIRA_SECRET
+        access_token_secret: JIRA_SECRET
       }
     })
   }

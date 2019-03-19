@@ -22,15 +22,16 @@ pipeline {
             keyFileVariable: 'SSH_KEY_PATH',
             usernameVariable: 'SSH_USERNAME'
           ),
+          string(credentialsId: 'JIRA_CONSUMER_KEY', variable: 'JIRA_CONSUMER_KEY'),
           sshUserPrivateKey(
-            credentialsId: 'f844b0c2-cd2d-47df-871e-e1e48afd205e',
-            keyFileVariable: 'JIRA_PEM_PATH',
-            usernameVariable: 'JIRA_CONSUMER_KEY'
+                  credentialsId: 'JIRA_PRIVATE_KEY',
+                  keyFileVariable: 'JIRA_PEM_PATH',
+                  usernameVariable: 'JIRA_USERNAME'
           ),
           usernamePassword(
-            credentialsId: 'a133fabf-4667-401e-9875-35ec31088998',
-            usernameVariable: 'JIRA_TOKEN',
-            passwordVariable: 'JIRA_SECRET'
+                  credentialsId: 'JIRA_ACCESS_TOKEN',
+                  usernameVariable: 'JIRA_TOKEN',
+                  passwordVariable: 'JIRA_SECRET'
           ),
           usernamePassword(
             credentialsId: 'a4c3be8a-0c49-4504-a5fa-a67bedb4a801',
