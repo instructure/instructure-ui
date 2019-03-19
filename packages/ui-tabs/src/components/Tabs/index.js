@@ -39,8 +39,8 @@ import error from '@instructure/ui-utils/lib/error'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 
-import TabButton from './TabButton'
-import TabPanel from './TabPanel'
+import Tab from './Tab'
+import Panel from './Panel'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -56,9 +56,9 @@ category: components
 export default class Tabs extends Component {
   static propTypes = {
     /**
-    * children of type `TabPanel`
+    * children of type `Tabs.Panel`
     */
-    children: ChildrenPropTypes.oneOf([TabPanel, null]),
+    children: ChildrenPropTypes.oneOf([Panel, null]),
 
     variant: PropTypes.oneOf(['default', 'secondary']),
     /**
@@ -100,7 +100,8 @@ export default class Tabs extends Component {
     defaultSelectedIndex: 0
   }
 
-  static Panel = TabPanel
+  static Panel = Panel
+  static Tab = Tab
 
   constructor (props) {
     super(props)
@@ -128,7 +129,7 @@ export default class Tabs extends Component {
   }
 
   handleClick = (event, data) => {
-    const tab = this.getTabButton(data.index)
+    const tab = this.getTab(data.index)
 
     if (!tab.props.disabled) {
       this.setSelected(data.index)
@@ -140,7 +141,7 @@ export default class Tabs extends Component {
       return
     }
 
-    const tab = this.getTabButton(data.index)
+    const tab = this.getTab(data.index)
 
     if (!tab.props.disabled) {
       this.setSelected(data.index)
@@ -188,7 +189,7 @@ export default class Tabs extends Component {
 
   get tabs () {
     return React.Children.toArray(this.props.children).map((child) => {
-      return matchComponentTypes(child, [TabPanel]) && child
+      return matchComponentTypes(child, [Panel]) && child
     })
   }
 
@@ -232,7 +233,7 @@ export default class Tabs extends Component {
     let index = startIndex
     do {
       index = (index + change) % count
-    } while (this.getTabButton(index).props.disabled)
+    } while (this.getTab(index).props.disabled)
 
     return index
   }
@@ -241,12 +242,12 @@ export default class Tabs extends Component {
     return (index >= 0 && index < this.tabs.length)
   }
 
-  getTabButton (index) {
+  getTab (index) {
     return this._tabs[index]
   }
 
   createScreenReaderTab (index, id, props) {
-    return createElement(TabButton, {
+    return createElement(Tab, {
       variant: 'screenreader-only',
       ref: (c) => {
         this._srTabs[index] = c
@@ -263,10 +264,10 @@ export default class Tabs extends Component {
     })
   }
 
-  createTabButton (index, id, selected, props) {
+  createTab (index, id, selected, props) {
     const focus = selected && this.state.focus
 
-    return createElement(TabButton, {
+    return createElement(Tab, {
       variant: this.props.variant,
       ref: (c) => {
         this._tabs[index] = c
@@ -310,7 +311,7 @@ export default class Tabs extends Component {
     const count = tabs.length
 
     React.Children.forEach(this.props.children, (child, index) => {
-      if (matchComponentTypes(child, [TabPanel])) {
+      if (matchComponentTypes(child, [Panel])) {
         const selected = !child.props.disabled && (this.selectedIndex === index)
         const id = ids[index]
 
@@ -321,7 +322,7 @@ export default class Tabs extends Component {
           }
         }
 
-        children.push(this.createTabButton(index, id, selected, child.props))
+        children.push(this.createTab(index, id, selected, child.props))
 
         // render screen reader only tabs after the selected tab
         if (selected) {

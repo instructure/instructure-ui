@@ -22,6 +22,6 @@
  * SOFTWARE.
  */
 import { locator } from '@instructure/ui-test-utils'
-import TabButton from './index'
+import Tab from './index'
 
-export default locator(TabButton.selector)
+export default locator(Tab.selector)

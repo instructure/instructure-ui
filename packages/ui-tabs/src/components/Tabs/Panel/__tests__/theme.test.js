@@ -21,7 +21,31 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator } from '@instructure/ui-test-utils'
-import TabPanel from './index'
 
-export default locator(TabPanel.selector)
+import { expect } from '@instructure/ui-test-utils'
+import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+import Panel from '../index'
+
+describe('Panel.theme', async () => {
+  describe('with the default theme', async () => {
+    const variables = Panel.generateTheme()
+
+    describe('secondary variant', async () => {
+      it('should ensure text and tab panel background meet 3:1 contrast', async () => {
+        expect(contrast(variables.color, variables.background))
+          .to.be.above(3)
+      })
+    })
+  })
+
+  describe('with the "canvas-high-contrast" theme', async () => {
+    const variables = Panel.generateTheme('canvas-high-contrast')
+
+    describe('secondary variant', async () => {
+      it('should ensure text and tab panel background meet 4.5:1 contrast', async () => {
+        expect(contrast(variables.color, variables.background))
+          .to.be.above(4.5)
+      })
+    })
+  })
+})

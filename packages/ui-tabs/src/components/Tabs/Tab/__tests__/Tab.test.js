@@ -25,12 +25,12 @@
 import React from 'react'
 import { expect, find, mount, stub } from '@instructure/ui-test-utils'
 
-import TabButton from '../index'
+import Tab from '../index'
 
 describe('<TabButton />', async () => {
   it('should render children', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel">Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -40,14 +40,14 @@ describe('<TabButton />', async () => {
 
   it('should have appropriate role attribute', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel">Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
     )
     expect(await find('[role="tab"]')).to.exist()
   })
 
   it('should have appropriate aria attributes', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel">Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -58,35 +58,35 @@ describe('<TabButton />', async () => {
 
   it('should set the aria-selected attribute', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" selected>Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
     )
     expect(await find('[role="tab"][aria-selected="true"]')).to.exist()
   })
 
   it('should set the aria-disabled attribute', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" disabled>Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
     )
     expect(await find('[role="tab"][aria-disabled="true"]')).to.exist()
   })
 
   it('should set the tabindex to 0 when selected', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" selected>Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel" selected>Tab Label</Tab>
     )
     expect(await find('[role="tab"][tabindex="0"]')).to.exist()
   })
 
   it('should set the tabindex to -1 when not selected', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel">Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel">Tab Label</Tab>
     )
     expect(await find('[role="tab"][tabindex="-1"]')).to.exist()
   })
 
   it('should remove the tabindex attribute when disabled', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" disabled>Tab Label</TabButton>
+      <Tab id="foo" index={0} controls="foo-panel" disabled>Tab Label</Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -99,7 +99,7 @@ describe('<TabButton />', async () => {
     const index = 2
 
     await mount(
-      <TabButton id="foo" index={index} controls="foo-panel" onClick={onClick}>Tab Label</TabButton>
+      <Tab id="foo" index={index} controls="foo-panel" onClick={onClick}>Tab Label</Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -113,9 +113,9 @@ describe('<TabButton />', async () => {
     const onClick = stub()
 
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" onClick={onClick} disabled>
+      <Tab id="foo" index={0} controls="foo-panel" onClick={onClick} disabled>
         Tab Label
-      </TabButton>
+      </Tab>
     )
     const tab = await find('[role="tab"]')
     await tab.click()
@@ -128,9 +128,9 @@ describe('<TabButton />', async () => {
     const index = 2
 
     await mount(
-      <TabButton id="foo" index={index} controls="foo-panel" onKeyDown={onKeyDown}>
+      <Tab id="foo" index={index} controls="foo-panel" onKeyDown={onKeyDown}>
         Tab Label
-      </TabButton>
+      </Tab>
     )
 
     const tab = await find('[role="tab"]')
@@ -144,9 +144,9 @@ describe('<TabButton />', async () => {
     const onKeyDown = stub()
 
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" onKeyDown={onKeyDown} disabled>
+      <Tab id="foo" index={0} controls="foo-panel" onKeyDown={onKeyDown} disabled>
         Tab Label
-      </TabButton>
+      </Tab>
     )
     const tab = await find('[role="tab"]')
 
@@ -163,9 +163,9 @@ describe('<TabButton />', async () => {
 
   it('should focus itself when focus is set and it is selected', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" selected focus>
+      <Tab id="foo" index={0} controls="foo-panel" selected focus>
         Tab Label
-      </TabButton>
+      </Tab>
     )
     const tab = await find('[role="tab"]')
 
@@ -174,9 +174,9 @@ describe('<TabButton />', async () => {
 
   it('should not focus itself when it is not selected', async () => {
     await mount(
-      <TabButton id="foo" index={0} controls="foo-panel" selected={false} focus>
+      <Tab id="foo" index={0} controls="foo-panel" selected={false} focus>
         Tab Label
-      </TabButton>
+      </Tab>
     )
     const tab = await find('[role="tab"]')
 

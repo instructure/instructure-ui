@@ -25,25 +25,25 @@ import { locator } from '@instructure/ui-test-utils'
 
 import Tabs from './index'
 
-import TabButtonLocator from './TabButton/locator'
-import TabPanelLocator from './TabPanel/locator'
+import TabLocator from './Tab/locator'
+import PanelLocator from './Panel/locator'
 
-const SelectedTabButtonLocator = locator('[role="tab"][aria-selected="true"]')
+const SelectedTabLocator = locator('[role="tab"][aria-selected="true"]')
 
 export default locator(Tabs.selector, {
   findTab: (...args) => {
-    return TabButtonLocator.find(...args)
+    return TabLocator.find(...args)
   },
   findAllTabs: (...args) => {
-    return TabButtonLocator.findAll(...args)
+    return TabLocator.findAll(...args)
   },
   findSelectedTab: (...args) => {
-    return SelectedTabButtonLocator.find( ...args)
+    return SelectedTabLocator.find( ...args)
   },
   findTabPanel: (...args) => {
-    return TabPanelLocator.find(...args)
+    return PanelLocator.find(...args)
   },
   findAllTabPanels: (...args) => {
-    return TabPanelLocator.findAll(...args)
+    return PanelLocator.findAll(...args)
   }
 })

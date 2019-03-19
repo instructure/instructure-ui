@@ -21,24 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
+import Panel from './index'
 
-import React from 'react'
-import { expect, find, mount } from '@instructure/ui-test-utils'
-
-import TabPanel from '../index'
-
-describe('<TabPanel />', async () => {
-  it('should render children', async () => {
-    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
-
-    const tabPanel = await find('[role="tabpanel"]')
-    expect(tabPanel.getTextContent()).to.equal('Panel contents')
-  })
-
-  it('should have appropriate role attribute', async () => {
-    await mount(<TabPanel selected title="Panel Title">Panel contents</TabPanel>)
-
-    const tabPanel = await find('[role="tabpanel"]')
-    expect(tabPanel.getAttribute('role')).to.equal('tabpanel')
-  })
-})
+export default locator(Panel.selector)

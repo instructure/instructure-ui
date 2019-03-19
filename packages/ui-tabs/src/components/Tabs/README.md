@@ -2,7 +2,7 @@
 describes: Tabs
 ---
 
-Accessible Tab component. You can use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render set the `defaultSelectedIndex`.
+Accessible Tabs component. You can use the TAB key to focus the component and arrow keys to navigate between panels of content. To set a default panel that should be selected on initial render set the `defaultSelectedIndex`.
 
 To restrict the width of the `<Tabs/>`, use the `size` prop. Add space around the entire component using the `margin` prop. Adjust the padding around the panel content via `padding` (default is `small`). Restrict the height of the panel using `minHeight` or `maxHeight`. Finally, switch the
 text alignment of the panel content with `textAlign`.

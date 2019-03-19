@@ -44,7 +44,7 @@ parent: Tabs
 **/
 @testable()
 @themeable(theme, styles)
-export default class TabPanels extends Component {
+export default class Panel extends Component {
   static propTypes = {
     /**
     * The content that will be rendered in the corresponding <Tab /> and will label

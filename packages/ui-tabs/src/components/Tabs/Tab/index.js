@@ -40,7 +40,7 @@ parent: Tabs
 **/
 @testable()
 @themeable(theme, styles)
-export default class TabButton extends Component {
+export default class Tab extends Component {
   static propTypes = {
     variant: PropTypes.oneOf(['default', 'secondary', 'screenreader-only']),
     id: PropTypes.string.isRequired,
