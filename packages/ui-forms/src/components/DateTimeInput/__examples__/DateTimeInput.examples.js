@@ -24,7 +24,6 @@
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sectionProp: 'layout',
   maxExamplesPerPage: 50,
   propValues: {
     datePlaceholder: [null, 'Choose a date'],
@@ -41,7 +40,8 @@ export default {
       invalidDateTimeMessage: (dvalue, tvalue) => { return `'${dvalue} ${tvalue}' is not valid.` },
       disabledDateMessage: (date) => `Date is disabled`,
       onChange: () => {},
-      readOnly: false
+      readOnly: false,
+      layout: 'stacked'
     }
   }
 }

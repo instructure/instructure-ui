@@ -25,6 +25,7 @@
 export default {
   sectionProp: 'size',
   maxExamplesPerPage: 50,
+  maxExamples: 2500,
   getComponentProps: (props) => {
     return {
       children: ['x-small', 'small', 'medium', 'large'].includes(props.size) ? (
@@ -41,13 +42,13 @@ export default {
     }
   },
   filter: (props) => {
-    return props.color !== 'primary' && !(
-      props.weight === 'normal' &&
-      props.fontStyle === 'normal' &&
-      props.letterSpacing === 'normal' &&
-      props.transform === 'none' &&
-      props.lineHeight === 'default' &&
-      props.size === 'small'
-    )
+    return (props.size !== 'medium' && (
+      props.weight !== 'normal' ||
+      props.fontStyle !== 'normal' ||
+      props.lineHeight !== 'default' ||
+      props.letterSpacing !== 'normal' ||
+      props.transform !== 'none' ||
+      props.color !== 'primary'
+    )) || props.size === 'x-small'
   }
 }

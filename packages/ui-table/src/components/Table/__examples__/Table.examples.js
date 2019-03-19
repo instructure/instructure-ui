@@ -27,16 +27,20 @@ import React from 'react'
 import Table from '../index'
 
 export default {
+  sectionProp: 'size',
+  propValues: {
+    size: ['small', 'medium', 'large']
+  },
   getComponentProps: (props) => {
     return {
       caption: 'Top rated movies',
       children: [
         <Table.Head key={"head"}>
           <Table.Row>
-            <Table.ColHeader>Rank</Table.ColHeader>
-            <Table.ColHeader>Title</Table.ColHeader>
-            <Table.ColHeader>Year</Table.ColHeader>
-            <Table.ColHeader>Rating</Table.ColHeader>
+            <Table.ColHeader id="rank">Rank</Table.ColHeader>
+            <Table.ColHeader id="title">Title</Table.ColHeader>
+            <Table.ColHeader id="year">Year</Table.ColHeader>
+            <Table.ColHeader id="rating">Rating</Table.ColHeader>
           </Table.Row>
         </Table.Head>,
         <Table.Body key={"body"}>

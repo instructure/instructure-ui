@@ -38,7 +38,8 @@ export default class TestComponent extends Component {
   static defaultProps = {
     variant: 'circle',
     show: true,
-    message: null
+    message: null,
+    children: null
   }
 
   render () {
@@ -63,6 +64,7 @@ describe('generateComponentExamples', () => {
       maxExamples: 500
     }
     expect(generateComponentExamples(TestComponent, config))
+      .excludingEvery(['key'])
       .to.deep.equal([
         {
           sectionName: 'circle',
@@ -74,14 +76,12 @@ describe('generateComponentExamples', () => {
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'circle', show: true },
-                  exampleProps: {},
-                  key: '59d40acdc7ae53876cf6f5492ca1dc3f6fbb6084'
+                  exampleProps: {}
                 },
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'circle', show: false },
-                  exampleProps: {},
-                  key: '03541b2f3d348c4f3cc95f12b4b08696a72d3138'
+                  exampleProps: {}
                 }
               ],
               parameters: { delay: 200 },
@@ -99,14 +99,12 @@ describe('generateComponentExamples', () => {
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'rectangle', show: true },
-                  exampleProps: {},
-                  key: '47730c74cfccfd0356a8d8381201f541687ce512'
+                  exampleProps: {}
                 },
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'rectangle', show: false },
-                  exampleProps: {},
-                  key: '98a535f4504f6f304545863e0a7474b903fab9db'
+                  exampleProps: {}
                 }
               ],
               parameters: { delay: 200 },
@@ -127,6 +125,7 @@ describe('generateComponentExamples', () => {
       filter: (props) => props.show === false && props.variant === 'circle'
     }
     expect(generateComponentExamples(TestComponent, config))
+      .excludingEvery(['key'])
       .to.deep.equal([
         {
           sectionName: 'circle',
@@ -138,8 +137,7 @@ describe('generateComponentExamples', () => {
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'circle', show: true },
-                  exampleProps: {},
-                  key: '59d40acdc7ae53876cf6f5492ca1dc3f6fbb6084'
+                  exampleProps: {}
                 }
               ],
               parameters: {},
@@ -157,14 +155,12 @@ describe('generateComponentExamples', () => {
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'rectangle', show: true },
-                  exampleProps: {},
-                  key: '47730c74cfccfd0356a8d8381201f541687ce512'
+                  exampleProps: {}
                 },
                 {
                   Component: TestComponent,
                   componentProps: { variant: 'rectangle', show: false },
-                  exampleProps: {},
-                  key: '98a535f4504f6f304545863e0a7474b903fab9db'
+                  exampleProps: {}
                 }
               ],
               parameters: {},

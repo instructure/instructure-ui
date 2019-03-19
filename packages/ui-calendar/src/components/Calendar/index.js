@@ -24,7 +24,6 @@
 
 import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
-import objectHash from 'object-hash'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
@@ -227,7 +226,7 @@ class Calendar extends Component {
       return days
     }, []).map((row) => (
         <tr
-          key={objectHash(row.map(day => day.props.date))}
+          key={`row${row[0].props.date}`}
           role={role}
         >
           {row.map((day, i) => (

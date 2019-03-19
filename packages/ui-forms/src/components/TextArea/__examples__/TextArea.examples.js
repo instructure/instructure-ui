@@ -21,22 +21,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
-  sectionProp: 'layout',
   maxExamplesPerPage: 50,
+  maxExamples: 800,
   propValues: {
     placeholder: [undefined, 'Hello text area placeholder'], // eslint-disable-line no-undefined
     value: [undefined, 'Some content for the text area'], // eslint-disable-line no-undefined
-    messages: generateMessages()
+    messages: [undefined, [{ type: 'hint', text: 'hint text' }]], // eslint-disable-line no-undefined
+    width: [undefined, '3rem'], // eslint-disable-line no-undefined
+    height: [undefined, '5rem'] // eslint-disable-line no-undefined
   },
   getComponentProps: (props) => {
     return {
       label: 'A text area',
+      layout: 'stacked',
       readOnly: false,
       onChange: () => {},
-      required: false
+      required: false,
+      resize: 'none'
     }
   }
 }

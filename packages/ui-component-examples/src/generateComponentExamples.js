@@ -21,8 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import objectHash from 'object-hash'
+import uid from '@instructure/uid'
 import generatePropCombinations from './generatePropCombinations'
 
 export default function generateComponentExamples (Component, config = {
@@ -40,7 +39,7 @@ export default function generateComponentExamples (Component, config = {
     filter
   } = config
 
-  const KEY_CACHE = []
+  const PROPS_CACHE = []
   const sections = []
   let exampleCount = 0
 
@@ -89,8 +88,6 @@ export default function generateComponentExamples (Component, config = {
   }
 
   const addExample = (sectionName = 'Examples', example) => {
-    if (exampleCount >= config.maxExamples) return
-
     let section = sections.find(section => section.sectionName === sectionName)
     if (!section) {
       section = {
@@ -127,21 +124,22 @@ export default function generateComponentExamples (Component, config = {
 
   let index = 0
 
-  while (index < combos.length && exampleCount <= maxExamples) {
+  while (index < combos.length && exampleCount < maxExamples) {
     const props = combos[index]
 
     index++
 
     const componentProps = getComponentProps(props)
     const exampleProps = getExampleProps(props)
-    const key = objectHash(componentProps)
+    const key = uid()
+    const propsString = JSON.stringify(componentProps)
     const ignore = (typeof filter === 'function') && filter(componentProps)
 
-    if (!ignore && !KEY_CACHE.includes(key)) {
+    if (!ignore && !PROPS_CACHE.includes(propsString)) {
       exampleCount++
 
-      if (exampleCount <= maxExamples) {
-        KEY_CACHE.push(key)
+      if (exampleCount < maxExamples) {
+        PROPS_CACHE.push(propsString)
 
         addExample(props[sectionProp], {
           Component,
@@ -153,12 +151,12 @@ export default function generateComponentExamples (Component, config = {
     }
   }
 
-  if (exampleCount > maxExamples) {
+  if (exampleCount >= maxExamples) {
     console.error(`Too many examples for ${Component.displayName}! Add a filter to the config.`)
-  } else {
-    // eslint-disable-next-line no-console
-    console.log(`Generated ${exampleCount} examples for ${Component.displayName}`)
   }
+
+  // eslint-disable-next-line no-console
+  console.log(`Generated ${exampleCount} examples for ${Component.displayName}`)
 
   sections.forEach(({ pages }) => {
     pages.forEach((page, index) => {

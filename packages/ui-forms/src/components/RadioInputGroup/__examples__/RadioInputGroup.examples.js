@@ -30,16 +30,20 @@ let counter = 1
 const generateName = () => `Example${counter++}`
 
 export default {
-  sectionProp: 'layout',
+  sectionProp: 'variant',
   maxExamplesPerPage: 50,
+  maxExamples: 600,
   propValues: {
-    defaultValue: [null, 'mickey'],
+    value: [undefined, 'mickey'], // eslint-disable-line no-undefined
     messages: generateMessages()
   },
   getComponentProps: (props) => {
     return {
       name: generateName(),
+      size: 'medium',
+      layout: 'stacked',
       description: 'A radio input group',
+      onChange: () => {},
       readOnly: false,
       children: [
         <RadioInput

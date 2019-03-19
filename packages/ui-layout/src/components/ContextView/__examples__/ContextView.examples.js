@@ -36,7 +36,8 @@ export default {
   getComponentProps: (props) => {
     return {
       children: <span key="0">Hello World</span>,
-      padding: 'small'
+      padding: 'small',
+      debug: false
     }
   }
 }

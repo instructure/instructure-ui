@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@instructure/config-loader": "^5",
+    "@instructure/uid": "^5",
     "@instructure/ui-a11y": "^5",
     "@instructure/ui-buttons": "^5",
     "@instructure/ui-elements": "^5",
@@ -33,7 +34,6 @@
     "@instructure/ui-layout": "^5",
     "@instructure/ui-overlays": "^5",
     "loader-utils": "^1.2.3",
-    "object-hash": "^1.3.0",
     "prop-types": "^15",
     "react-docgen": "^4"
   },

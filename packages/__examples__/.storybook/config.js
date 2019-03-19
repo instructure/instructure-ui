@@ -22,6 +22,9 @@
  * SOFTWARE.
  */
 
+// eslint-disable-next-line import/no-unresolved
+import '@instructure/ui-polyfill-loader!'
+
 import React from 'react'
 import 'storybook-chromatic'
 
@@ -30,9 +33,6 @@ import { getStorybook, storiesOf, configure, addParameters } from '@storybook/re
 
 import theme from '@instructure/ui-themes/lib/canvas'
 theme.use({ overrides: { transitions: { duration: '0ms' } } })
-
-// eslint-disable-next-line import/no-unresolved
-import '@instructure/ui-polyfill-loader!'
 
 // eslint-disable-next-line no-console
 console.log('Generating component examples...')
@@ -57,6 +57,8 @@ configure(() => {
   // eslint-disable-next-line no-console
   console.log(`Creating stories for ${examples.length} components...`)
 
+  let numStories = 0
+
   examples.forEach(({ componentName, sections, renderPage, renderExample }) => {
     if (sections && sections.length > 0) {
       const stories = storiesOf(componentName, module)
@@ -64,6 +66,7 @@ configure(() => {
       sections.forEach(({ pages, sectionName }) => {
         pages.forEach((page, i) => {
           page.renderExample = renderExample
+          numStories++
           stories
             .add(
               `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
@@ -74,6 +77,8 @@ configure(() => {
       })
     }
   })
+
+  console.log(`Created ${numStories} stories!`)
 }, module)
 
 export { getStorybook }

@@ -24,6 +24,7 @@
 import generateMessages from '../../../__tests__/generateMessages'
 
 export default {
+  maxExamplesPerPage: 50,
   sectionProp: 'variant',
   propValues: {
     messages: generateMessages()
