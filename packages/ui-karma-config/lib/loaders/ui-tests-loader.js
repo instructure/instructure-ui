@@ -40,7 +40,7 @@ module.exports = function (source, map) {
   globby(files, { ignore })
     .then((matches) => {
       const scopes = process.env.UI_TEST_SCOPE_PATHS
-      const allFilePaths = matches
+      const testFilePaths = matches
         .map(filePath => path.normalize(filePath))
         .filter((testFilePath) => {
           if (typeof scopes !== 'string') return true
@@ -51,35 +51,6 @@ module.exports = function (source, map) {
 
       let result
 
-      // BEGIN TODO once all of the legacy/Testbed tests are converted, remove the following:
-      const USE_TESTBED = process.env.USE_TESTBED
-      const TESTBED_REMOVE_THIS = options.TESTBED_REMOVE_THIS || []
-      const matchesTestbedPath = function (filePath) {
-        return TESTBED_REMOVE_THIS.findIndex(testbedFilePath => filePath.startsWith(testbedFilePath)) >= 0
-      }
-      const testbedFilePaths = allFilePaths
-        .filter((filePath) => {
-          return matchesTestbedPath(filePath)
-        })
-
-      const testFilePaths = allFilePaths
-        .filter((filePath) => {
-          return !matchesTestbedPath(filePath)
-        })
-
-      if (USE_TESTBED) {
-        if (testbedFilePaths.length > 0 && parseFloat(process.env.REACT_VERSION) < 16) {
-          const testbedFileRequires = testbedFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
-          const testbedTests = testbedFileRequires.join(';\n')
-          result = `
-describe('ui-testbed', function () {
-  require('${require.resolve('@instructure/ui-testbed')}');
-  ${testbedTests}
-})
-`
-        }
-      // END TODO (remove Testbed)
-    } else {
       if (testFilePaths.length > 0) {
         const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         result = `
@@ -87,10 +58,7 @@ describe('ui-test-utils', async function () {
 ${testFileRequires.join(';\n')}
 })
 `
-      }
-    }
-
-      if (!result) {
+      } else {
         result = `
 describe('WHEN NO TESTS MATCH...', () => {
   it('should still pass', () => {})

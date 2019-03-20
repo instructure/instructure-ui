@@ -36,7 +36,7 @@ example: true
   </p>
   <p>
     <Tooltip
-      variant="inverse"
+      variant="default"
       tip="Hello"
       placement="bottom"
       mountNode={() => document.getElementById('main')}
@@ -52,6 +52,7 @@ example: true
   <p>
     <Tooltip
       tip="Hello. I'm a tool tip"
+      placement="start"
       on={['click', 'hover', 'focus']}
     >
       <Button variant="icon" icon={IconInfo.Line}>

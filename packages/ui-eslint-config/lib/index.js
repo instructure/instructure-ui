@@ -43,10 +43,6 @@ module.exports = {
     mocha: true,
     es6: true
   },
-  globals: {
-    expect: true,
-    Testbed: true
-  },
   parser: 'babel-eslint',
   parserOptions: {
    ecmaFeatures: {
@@ -93,7 +89,7 @@ module.exports = {
   ],
   settings: {
     react: {
-      version: process.env.REACT_VERSION || '15.6.2'
+      version: process.env.REACT_VERSION || '16.8.6'
     }
   }
 }

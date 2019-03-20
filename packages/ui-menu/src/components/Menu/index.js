@@ -30,7 +30,6 @@ import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlay
 
 import uid from '@instructure/uid'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
@@ -52,11 +51,6 @@ category: components
 ---
 **/
 @testable()
-@deprecated('5.1.0', {
-  title: 'label',
-  labelledBy: 'aria-labelledby',
-  controls: 'aria-controls'
-})
 @themeable(theme, styles)
 class Menu extends Component {
   static propTypes = {
@@ -401,7 +395,7 @@ class Menu extends Component {
     let count = 0
 
     return Children.map(children, (child) => {
-      if (!matchComponentTypes(child, ['MenuItemSeparator', 'MenuItem', 'MenuItemFlyout', 'MenuItemGroup', 'Menu'])) {
+      if (!matchComponentTypes(child, ['MenuItemSeparator', 'MenuItem', 'MenuItemGroup', 'Menu'])) {
         return
       }
 
@@ -452,7 +446,7 @@ class Menu extends Component {
         )
       }
 
-      if (matchComponentTypes(child, ['Menu', 'MenuItemFlyout'])) {
+      if (matchComponentTypes(child, ['Menu'])) {
         const submenuDisabled = disabled || child.props.disabled
 
         return (
@@ -494,17 +488,16 @@ class Menu extends Component {
       label,
       trigger,
       onKeyUp,
-      title,  // eslint-disable-line react/prop-types
       contentRef // eslint-disable-line react/prop-types
     } = this.props
 
-    const labelledBy = this.props['aria-labelledby'] || this.props.labelledBy // eslint-disable-line react/prop-types
-    const controls = this.props['aria-controls'] || this.props.controls // eslint-disable-line react/prop-types
+    const labelledBy = this.props['aria-labelledby'] // eslint-disable-line react/prop-types
+    const controls = this.props['aria-controls'] // eslint-disable-line react/prop-types
 
     return (
       <ul
         role="menu"
-        aria-label={title || label}
+        aria-label={label}
         tabIndex="0"
         className={styles.menu}
         aria-labelledby={labelledBy || (trigger && this._labelId)}
@@ -569,18 +562,6 @@ class Menu extends Component {
 }
 
 export default Menu
-
-@deprecated('5.1.0', {
-  title: 'label',
-  contentRef: 'menuRef',
-  controls: 'aria-controls',
-  labelledBy: 'aria-labelledby'
-})
-@deprecated('5.1.0', null, '[Menu] children of type [MenuItemFlyout] should be replaced with [Menu].')
-export class MenuItemFlyout extends Menu {
-  static displayName = 'MenuItemFlyout'
-}
-
 export { default as MenuItem } from './MenuItem'
 export { default as MenuItemGroup } from './MenuItemGroup'
 export { default as MenuItemSeparator } from './MenuItemSeparator'

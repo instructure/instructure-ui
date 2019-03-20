@@ -39,7 +39,7 @@ const karmaArgs = ['start']
 let envVars = [
   'NODE_ENV=test',
   `REACT_VERSION=${React.version}`,
-  'NODE_OPTIONS=--max_old_space_size=8192'
+  'NODE_OPTIONS=--max_old_space_size=120000'
 ]
 
 if (args.includes('--watch')) {
@@ -85,7 +85,7 @@ if (scopeArgIndex >= 0) {
   const allPackages = getPackages()
   const scopes = args[scopeArgIndex + 1].split(',').map(scope => scope.trim())
   const pkgs = allPackages.filter(pkg => scopes.includes(pkg.name))
-  if (pkgs.length > 0) {
+  if (pkgs.length >= 0) {
     paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
   }
 } else if (pathArgIndex >= 0) {
@@ -100,10 +100,6 @@ if (scopeArgIndex >= 0) {
 
 if (paths.length > 0) {
   envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
-}
-
-if (args.includes('--testbed')) {
-  envVars.push('USE_TESTBED=1')
 }
 
 process.exit(runCommandsConcurrently({

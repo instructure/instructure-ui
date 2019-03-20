@@ -30,7 +30,6 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -43,11 +42,6 @@ category: components
 **/
 
 @testable()
-@deprecated('3.0.0', {
-  tableData: true,
-  rowHeaders: true,
-  colHeaders: true
-})
 
 @themeable(theme, styles)
 class Table extends Component {
@@ -79,18 +73,6 @@ class Table extends Component {
     */
     margin: ThemeablePropTypes.spacing,
     /**
-    * @deprecated
-    */
-    tableData: PropTypes.array,
-    /**
-    * @deprecated
-    */
-    colHeaders: PropTypes.arrayOf(PropTypes.string),
-    /**
-    * @deprecated
-    */
-    rowHeaders: PropTypes.bool,
-    /**
     * provides a reference to the underlying html element
     */
     elementRef: PropTypes.func,
@@ -105,9 +87,6 @@ class Table extends Component {
     children: null,
     striped: undefined,
     margin: undefined,
-    tableData: undefined,
-    colHeaders: undefined,
-    rowHeaders: undefined,
     elementRef: undefined,
     hover: false,
     size: 'medium',

@@ -42,7 +42,7 @@ import theme from './theme'
 /**
 ---
 category: components
-id: NumberInputControlled
+id: NumberInput
 ---
 **/
 @testable()

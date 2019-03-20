@@ -9,6 +9,8 @@ category: packages
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+**DEPRECATED:** use [@instructure/ui-component-examples](#ui-component-examples) instead.
+
 A utility for automatically generating component examples.
 
 ### Installation

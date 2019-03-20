@@ -37,7 +37,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import FormPropTypes from '@instructure/ui-forms/lib/utils/FormPropTypes'
+import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 
 import testable from '@instructure/ui-testable'
 

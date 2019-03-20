@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import decorator from '@instructure/ui-decorator'
@@ -93,6 +94,10 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   let componentId = `${(styles && styles.componentId) || uid()}`
   if (process.env.NODE_ENV !== 'production') {
     componentId = `${displayName}__${componentId}`
+    warn(
+      parseInt(React.version) >= 15,
+      `[themeable] React 15 or higher is required. You are running React version ${React.version}.`,
+    )
   }
 
   const contextKey = Symbol(componentId)

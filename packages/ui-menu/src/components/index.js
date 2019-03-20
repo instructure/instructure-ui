@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export Menu, { MenuItem, MenuItemFlyout, MenuItemGroup, MenuItemSeparator } from './Menu'
+export Menu, { MenuItem, MenuItemGroup, MenuItemSeparator } from './Menu'

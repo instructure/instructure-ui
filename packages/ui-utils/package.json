@@ -26,21 +26,15 @@
   "dependencies": {
     "@babel/runtime": "^7",
     "@instructure/console": "^5.52.2",
-    "@instructure/debounce": "^5.52.2",
     "@instructure/ui-decorator": "^5.52.2",
-    "@instructure/ui-prop-types": "^5.52.2",
-    "@instructure/uid": "^5.52.2",
     "bowser": "^1.9.4",
-    "decimal.js": "^10",
     "fast-deep-equal": "^2",
     "keycode": "^2",
-    "moment-timezone": "^0.5",
-    "numeral": "^2",
     "prop-types": "^15"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15 || ^16",
-    "react-dom": "^0.14.9 || ^15 || ^16"
+    "react": "^15 || ^16",
+    "react-dom": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

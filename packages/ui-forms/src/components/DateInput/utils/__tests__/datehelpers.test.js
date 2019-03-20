@@ -24,7 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { isSameMonth, isSameDay, isDayDisabled } from "../dateHelpers"
-import DateTime from '@instructure/ui-utils/lib/i18n/DateTime'
+import DateTime from '@instructure/ui-i18n/lib/DateTime'
 
 const locale = 'en-US'
 const timezone = "US/Eastern"

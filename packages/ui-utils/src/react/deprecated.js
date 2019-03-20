@@ -30,7 +30,7 @@ import { warn } from '@instructure/console/macro'
 * category: utilities/react
 * ---
 * Deprecate React component props. Warnings will display in the console when deprecated
-* props are used.
+* props are used. Include the version number when the deprecated component will be removed.
 *
 * ```js
 *  class Example extends Component {
@@ -38,7 +38,7 @@ import { warn } from '@instructure/console/macro'
 *      currentProp: PropTypes.func
 *    }
 *  }
-*  export default deprecated('3.0.0', {
+*  export default deprecated('7.0.0', {
 *    deprecatedProp: 'currentProp',
 *    nowNonExistentProp: true
 *  })(Example)
@@ -88,7 +88,7 @@ export default decorator((ComposedComponent, version, oldProps, message) => {
  *
  * @param {function} propType - validates the prop type. Returns null if valid, error otherwise
  * @param {array} deprecated - an array of the deprecated variant names
- * @param {string} message - additional information to display with the warning
+ * @param {string} message - additional information to display with the warning (include the version in which they will be removed)
  */
 export const deprecatePropValues = (propType, deprecated = [], message) => {
   return (props, propName, componentName, ...rest) => {
@@ -112,7 +112,7 @@ function warnDeprecatedProps (componentName, version, props, oldProps, message =
 
       warn(
         false,
-        `[${componentName}] \`${oldProp}\` was deprecated in ${version}${newPropMessage}. ${message}`,
+        `[${componentName}] \`${oldProp}\` is deprecated and will be removed in version ${version}${newPropMessage}. ${message}`,
       )
     }
   })
@@ -127,7 +127,7 @@ function warnDeprecatedProps (componentName, version, props, oldProps, message =
  * @param {String} message a message to display as a console error in DEV env when condition is false
  */
 export function warnDeprecatedComponent (version, componentName, message) {
-  warn(false, `[${componentName}] was deprecated in version ${version}. ${message || ''}`)
+  warn(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
 }
 
 /**

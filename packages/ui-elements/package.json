@@ -28,7 +28,6 @@
     "@instructure/console": "^5.52.2",
     "@instructure/debounce": "^5.52.2",
     "@instructure/ui-a11y": "^5.52.2",
-    "@instructure/ui-container": "^5.52.2",
     "@instructure/ui-focusable": "^5.52.2",
     "@instructure/ui-icons": "^5.52.2",
     "@instructure/ui-layout": "^5.52.2",
@@ -44,7 +43,7 @@
     "prop-types": "^15"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15 || ^16"
+    "react": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

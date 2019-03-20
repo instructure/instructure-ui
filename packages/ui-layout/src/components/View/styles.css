@@ -62,26 +62,6 @@
   background: var(--backgroundLight);
 }
 
-.size--x-small {
-  max-width: var(--xSmallMaxWidth);
-}
-
-.size--small {
-  max-width: var(--smallMaxWidth);
-}
-
-.size--medium {
-  max-width: var(--mediumMaxWidth);
-}
-
-.size--large {
-  max-width: var(--largeMaxWidth);
-}
-
-.size--fullscreen {
-  max-width: 100vw;
-}
-
 .stacking--topmost {
   z-index: var(--stackingTopmost);
 }

@@ -56,4 +56,4 @@ See [this working example][example] for details.
 [coc-badge]: https://img.shields.io/badge/code%20of-conduct-ff69b4.svg?style=flat-square
 [coc]: https://github.com/instructure/instructure-ui/blob/master/CODE_OF_CONDUCT.md
 
-[example]: https://instructure.design/#NumberInputControlled
+[example]: https://instructure.design/#NumberInput

@@ -266,5 +266,9 @@
   {
     "pattern": "^@instructure/ui-utils/lib/react/CustomPropTypes",
     "replace": "@instructure/ui-prop-types"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/utils/FormPropTypes",
+    "replace": "@instructure/ui-form-field/utils/FormPropTypes"
   }
 ]

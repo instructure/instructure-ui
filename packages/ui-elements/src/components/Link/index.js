@@ -37,7 +37,6 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { warn } from '@instructure/console/macro'
 import testable from '@instructure/ui-testable'
 
@@ -50,7 +49,6 @@ category: components
 ---
 **/
 @testable()
-@deprecated('5.40.0', { ellipsis: '<Link><TruncateText /></Link>' })
 @themeable(theme, styles)
 class Link extends Component {
   static propTypes = {
@@ -71,10 +69,6 @@ class Link extends Component {
     as: PropTypes.elementType,
     disabled: PropTypes.bool,
     onClick: PropTypes.func,
-    /**
-    * __DEPRECATED (5.40.0)__ Use `<Link><TruncateText /></Link>` instead.
-    */
-    ellipsis: PropTypes.bool, // eslint-disable-line react/require-default-props
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -124,10 +118,6 @@ class Link extends Component {
   get display () {
     if (this.props.display) {
       return this.props.display // user-entered display property
-    }
-
-    if (this.props.ellipsis) {
-      return 'block' // can delete this block when ellipsis is removed
     }
 
     if (this.props.icon) {
@@ -204,7 +194,6 @@ class Link extends Component {
       variant,
       href,
       margin,
-      ellipsis,
       icon,
       iconPlacement,
       linkRef,
@@ -215,8 +204,7 @@ class Link extends Component {
       [styles.root]: true,
       [styles.inverse]: variant === 'inverse',
       [styles[`iconPlacement--${iconPlacement}`]]: icon && this.hasVisibleChildren,
-      [styles.truncates]: this.containsTruncateText,
-      [styles.ellipsis]: ellipsis
+      [styles.truncates]: this.containsTruncateText
     }
 
     const role = onClick && this.element !== 'button' ? 'button' : null

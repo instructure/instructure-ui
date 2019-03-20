@@ -35,7 +35,6 @@ import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { error } from '@instructure/console/macro'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -54,7 +53,7 @@ class View extends Component {
     /**
     * The element to render as the component root, `span` by default
     */
-    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
+    as: PropTypes.elementType,
 
     /**
     * provides a reference to the underlying html element
@@ -143,7 +142,7 @@ class View extends Component {
     // compatibility with Container we are leaving it undefined here. Otherwise
     // it modifies behavior for consuming components because of the logic around
     // default props in getElementType
-    // as: undefined,
+    as: undefined,
     // - `textAlign` is undefined by default so that View can inherit text alignment
     // from parents
     textAlign: undefined,
@@ -321,11 +320,10 @@ class View extends Component {
   }
 }
 
-const ComposedView = deprecated('5.4.0', {size: 'maxWidth'})(
+const ComposedView =
   bidirectional()(
     themeable(theme, styles)(View)
   )
-)
 
 // omitViewProps needs to be called on the composed View component so that the
 // View.propTypes in the method matches the View.propTypes that will be called in

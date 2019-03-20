@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { error } from '@instructure/console/macro'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
@@ -39,13 +38,6 @@ import FocusRegionManager from '../../utils/FocusRegionManager'
 category: components/utilities
 ---
 **/
-
-@deprecated('5.0.0', {
-  applicationElement: true
-},
-'Elements outside of the `<Dialog />` are now hidden from screen readers automatically. ' +
-'when `shouldContainFocus` is set to `true` or `screenreader`. The `liveRegion` prop can ' +
-'be used to specify any elements that should not be hidden')
 
 class Dialog extends Component {
   static propTypes = {

@@ -86,22 +86,6 @@ input.root[type] {
   color: var(--secondaryInverseColor);
 }
 
-.color-success {
-  color: var(--successColor);
-}
-
-.color-warning {
-  color: var(--warningColor);
-}
-
-.color-brand {
-  color: var(--brandColor);
-}
-
-.color-error {
-  color: var(--errorColor);
-}
-
 .reset {
   margin: 0;
   font-size: inherit;

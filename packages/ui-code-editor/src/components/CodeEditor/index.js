@@ -30,7 +30,6 @@ import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import uid from '@instructure/uid'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,9 +40,7 @@ import CodeMirror from './codemirror'
 category: components
 ---
 **/
-@deprecated('5.1.0', {
-  code: 'value'
-})
+
 @themeable(theme, styles)
 export default class CodeEditor extends Component {
   static propTypes = {
@@ -94,7 +91,7 @@ export default class CodeEditor extends Component {
 
     if (typeof props.value === 'undefined') {
       this.state = {
-        value: props.defaultValue || props.code // eslint-disable-line react/prop-types
+        value: props.defaultValue
       }
     }
   }

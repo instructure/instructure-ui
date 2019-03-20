@@ -1,6 +1,0 @@
-[
-  {
-    "pattern": "^instructure-icons(.*)(Line|Solid)$",
-    "replace": "@instructure/ui-icons$1"
-  }
-]

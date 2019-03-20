@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import InlineSVG from '../InlineSVG'
 import testable from '@instructure/ui-testable'
@@ -42,15 +41,9 @@ category: components/utilities
 **/
 @testable()
 @themeable(theme, styles)
-@deprecated('5.0.0', {
-  width: 'size',
-  height: 'size'
-})
 class SVGIcon extends Component {
   static propTypes = {
     ...InlineSVG.propTypes,
-    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-    height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     rotate: PropTypes.oneOf(['0', '90', '180', '270']),
     size: PropTypes.oneOf([
       'x-small',
@@ -65,8 +58,6 @@ class SVGIcon extends Component {
   static defaultProps = {
     rotate: '0',
     bidirectional: false,
-    width: undefined,
-    height: undefined,
     size: undefined
   }
 

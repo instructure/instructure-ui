@@ -24,8 +24,6 @@
 
 /* list utils in alphabetical order */
 export ComponentIdentifier from './ComponentIdentifier'
-export containerQuery from './containerQuery'
-export CustomPropTypes from './CustomPropTypes'
 export deprecated from './deprecated'
 export ensureSingleChild from './ensureSingleChild'
 export getDisplayName from './getDisplayName'

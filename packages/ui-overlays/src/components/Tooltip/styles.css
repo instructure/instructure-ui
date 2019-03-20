@@ -3,19 +3,6 @@
   font-weight: var(--fontWeight);
   box-sizing: border-box;
   display: block;
-}
-
-.small {
-  font-size: var(--smallFontSize);
-  padding: var(--smallPadding);
-}
-
-.medium {
-  font-size: var(--mediumFontSize);
-  padding: var(--mediumPadding);
-}
-
-.large {
-  font-size: var(--largeFontSize);
-  padding: var(--largePadding);
+  font-size: var(--fontSize);
+  padding: var(--padding);
 }

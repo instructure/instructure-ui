@@ -27,13 +27,11 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
@@ -58,21 +56,6 @@ category: components
 ---
 **/
 @testable()
-@deprecated('3.0.0', {
-  onRequestClose: 'onDismiss',
-  isOpen: 'open',
-  onReady: 'onOpen',
-  onAfterOpen: 'onOpen',
-  getDefaultFocusElement: 'defaultFocusElement',
-  closeButtonVariant: true,
-  padding: true
-})
-@deprecated('5.0.0', {
-  closeButtonLabel: true,
-  closeButtonRef: true,
-  applicationElement: true,
-  shouldCloseOnOverlayClick: 'shouldCloseOnDocumentClick'
-})
 @themeable(theme, styles)
 export default class Modal extends Component {
   static propTypes = {
@@ -80,11 +63,6 @@ export default class Modal extends Component {
      * An accessible label for the `<Modal />` content
      */
     label: PropTypes.string.isRequired,
-
-    /**
-     * __DEPRECATED (5.0.0)__ An accessible label for the close button. The close button won't display without this label.
-     */
-    closeButtonLabel: PropTypes.string,
 
     /**
      * The children to be rendered within the `<Modal />`
@@ -146,12 +124,6 @@ export default class Modal extends Component {
      * A function that returns a reference to the content element
      */
     contentRef: PropTypes.func,
-
-    /**
-     *
-     * __DEPRECATED (5.0.0)__ A function that returns a reference to the close button element
-     */
-    closeButtonRef: PropTypes.func,
 
     /**
      * An element or a function returning an element to use as the mount node
@@ -229,9 +201,7 @@ export default class Modal extends Component {
     defaultFocusElement: null,
     children: null,
     constrain: 'window',
-    overflow: 'scroll',
-    closeButtonLabel: undefined,
-    closeButtonRef: undefined
+    overflow: 'scroll'
   }
 
   constructor (props) {
@@ -252,7 +222,7 @@ export default class Modal extends Component {
   }
 
   get defaultFocusElement () {
-    return this.props.defaultFocusElement || (() => this._closeButton)
+    return this.props.defaultFocusElement
   }
 
   get ie11 () {
@@ -288,32 +258,11 @@ export default class Modal extends Component {
     })
   }
 
-  buttonRef = el => {
-    this._closeButton = el
-    if (typeof this.props.closeButtonRef === 'function') {
-      this.props.closeButtonRef(el)
-    }
-  }
-
   contentRef = el => {
     this._content = el
     if (typeof this.props.contentRef === 'function') {
       this.props.contentRef(el)
     }
-  }
-
-  renderCloseButton() {
-    return this.props.closeButtonLabel
-      ? <CloseButton
-        buttonRef={this.buttonRef}
-        placement="end"
-        offset="medium"
-        onClick={this.props.onDismiss}
-        variant={this.props.variant === 'default' ? 'icon' : 'icon-inverse'}
-      >
-        {this.props.closeButtonLabel}
-      </CloseButton>
-      : null
   }
 
   renderChildren() {
@@ -343,7 +292,6 @@ export default class Modal extends Component {
     const {
       onDismiss,
       label,
-      shouldCloseOnOverlayClick, // eslint-disable-line react/prop-types
       shouldCloseOnDocumentClick,
       shouldReturnFocus,
       liveRegion,
@@ -360,11 +308,7 @@ export default class Modal extends Component {
         onDismiss={onDismiss}
         label={label}
         defaultFocusElement={this.defaultFocusElement}
-        shouldCloseOnDocumentClick={
-          (typeof shouldCloseOnOverlayClick === 'undefined')
-            ? shouldCloseOnDocumentClick
-            : shouldCloseOnOverlayClick
-        }
+        shouldCloseOnDocumentClick={shouldCloseOnDocumentClick}
         shouldCloseOnEscape
         shouldContainFocus
         shouldReturnFocus={shouldReturnFocus}
@@ -380,7 +324,6 @@ export default class Modal extends Component {
         ref={this.contentRef}
         // aria-modal="true" see VO bug https://bugs.webkit.org/show_bug.cgi?id=174667
       >
-        {this.renderCloseButton()}
         {this.renderChildren()}
       </Dialog>
     )

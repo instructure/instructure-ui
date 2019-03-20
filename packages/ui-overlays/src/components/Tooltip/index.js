@@ -24,14 +24,12 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -47,9 +45,6 @@ category: components
 ---
 **/
 @testable()
-@deprecated('5.42', {
-  size: true
-})
 @themeable(theme, styles)
 export default class Tooltip extends Component {
   static propTypes = {
@@ -72,11 +67,13 @@ export default class Tooltip extends Component {
       PropTypes.arrayOf(PropTypes.oneOf(['click', 'hover', 'focus']))
     ]),
     variant: PropTypes.oneOf(['default', 'inverse']),
-    placement: LayoutPropTypes.placement,
     /**
-    * __DEPRECATED 5.42__  `size` is now deprecated
-    */
-    size: PropTypes.oneOf(['small', 'medium', 'large']), // eslint-disable-line react/require-default-props
+     * Specifies where the Tooltip will be placed in relation to the target element.
+     * Ex. placement="bottom" will render the Tooltip below the triggering element
+     * (Note: if there is not room, it will position opposite. Ex. "top" will
+     * automatically switch to "bottom").
+     */
+    placement: LayoutPropTypes.placement,
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
@@ -92,7 +89,7 @@ export default class Tooltip extends Component {
 
   static defaultProps = {
     on: undefined,
-    variant: 'default',
+    variant: 'inverse',
     placement: 'top',
     mountNode: null,
     constrain: 'window'
@@ -136,8 +133,6 @@ export default class Tooltip extends Component {
   }
 
   render () {
-    const size = this.props.size || 'small'
-
     return (
       <Focusable render={({ focused }) => {
         return (
@@ -157,10 +152,7 @@ export default class Tooltip extends Component {
             <PopoverContent>
               <span
                 id={this._id}
-                className={classnames({
-                  [styles.root]: true,
-                  [styles[size]]: size
-                })}
+                className={styles.root}
                 role="tooltip"
               >
                 {this.props.tip}

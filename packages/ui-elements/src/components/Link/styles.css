@@ -110,17 +110,3 @@ button.root {
     align-items: center;
   }
 }
-
-/* ellipsis is deprecated */
-.ellipsis {
-  display: block;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-button.ellipsis {
-  width: 100%;
-}
-
-/* stylelint-enable selector-max-class, no-descending-specificity, selector-max-type */

@@ -32,7 +32,6 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import { Children, controllable, element } from '@instructure/ui-prop-types'
@@ -47,7 +46,6 @@ import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import px from '@instructure/ui-utils/lib/px'
 import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
@@ -71,15 +69,6 @@ category: components
 ---
 **/
 @testable()
-@deprecated('3.0.0', {
-  renderOffscreen: 'shouldRenderOffscreen',
-  rootClose: 'shouldCloseOnDocumentClick'
-})
-@deprecated('5.0.0', {
-  closeButtonLabel: true,
-  closeButtonRef: true,
-  applicationElement: true
-})
 @bidirectional()
 class Popover extends Component {
   static Trigger = PopoverTrigger
@@ -179,16 +168,6 @@ class Popover extends Component {
     * Should the `<Popover />` display with an arrow pointing to the trigger
     */
     withArrow: PropTypes.bool,
-
-    /**
-     * An accessible label for the close button. The close button won't display without this label.
-     */
-    closeButtonLabel: PropTypes.string,
-
-    /**
-     * A function that returns a reference to the close button element
-     */
-    closeButtonRef: PropTypes.func,
 
     /**
      * An accessible label for the `<Popover />` content
@@ -467,20 +446,9 @@ class Popover extends Component {
 
   handlePositionChanged = ({ placement }) => {
     this.setState({
-      closeButtonPlacement: this.getCloseButtonPlacement(this.props),
       placement,
       ...this.computeOffsets(placement)
     })
-  }
-
-  getCloseButtonPlacement (props) {
-    const placement = props.placement.split(' ')
-
-    if (placement.indexOf('end') >= 0) {
-      return 'start'
-    } else {
-      return 'end'
-    }
   }
 
   renderTrigger () {
@@ -546,25 +514,6 @@ class Popover extends Component {
     return this.props.defaultFocusElement
   }
 
-  renderCloseButton () {
-    return this.props.closeButtonLabel
-      ? <CloseButton
-        placement={this.state.closeButtonPlacement}
-        offset="x-small"
-        variant={this.props.variant === 'inverse' ? 'icon-inverse' : 'icon'}
-        buttonRef={el => {
-          this._closeButton = el
-          if (typeof this.props.closeButtonRef === 'function') {
-            this.props.closeButtonRef(el)
-          }
-        }}
-        onClick={this.hide}
-      >
-        {this.props.closeButtonLabel}
-      </CloseButton>
-      : null
-  }
-
   renderContent () {
     let content = pick(Popover.Content, this.props.children)
 
@@ -615,7 +564,6 @@ class Popover extends Component {
 
       return (
         <ViewElement {...viewProps}>
-          {this.renderCloseButton()}
           {content}
         </ViewElement>
       )

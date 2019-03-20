@@ -33,7 +33,6 @@ export default MyAvatar = function () {
 The `ui-elements` package contains the following:
 - [Avatar](#Avatar)
 - [Badge](#Badge)
-- [ContextBox](#ContextBox)
 - [Heading](#Heading)
 - [Img](#Img)
 - [Link](#Link)

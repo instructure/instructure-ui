@@ -5,6 +5,8 @@ describes: Dialog
 The `Dialog` component is a utility that is used by
 [Popover](#Popover), [Modal](#Modal) and [Tray](#Tray) for keyboard accessibility.
 
+Elements outside of the `Dialog` are hidden from screen readers automatically when `shouldContainFocus` is set to `true` or `screenreader`. The `liveRegion` prop can be used to specify any elements that should not be hidden.
+
 ```js
 ---
 example: true

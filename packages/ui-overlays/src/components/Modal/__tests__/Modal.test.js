@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, spy, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import Modal, { ModalHeader, ModalBody, ModalFooter } from '../index'
 import ModalLocator from '../locator'
@@ -279,39 +279,6 @@ describe('<Modal />', async () => {
     })
 
     expect(modal).to.exist()
-  })
-
-  it('should dismiss when close button is clicked', async () => {
-    const onDismiss = stub()
-    const consoleWarn = spy(console, 'warn')
-
-    await mount(
-      <Modal
-        open
-        onDismiss={onDismiss}
-        label="Modal Dialog"
-        closeButtonLabel="Close"
-        shouldReturnFocus={false}
-      >
-        <ModalBody>Foo Bar Baz</ModalBody>
-      </Modal>
-    )
-
-    expect(consoleWarn)
-      .to.have.been.calledWithMatch('Warning: [Modal] `closeButtonLabel` was deprecated in 5.0.0.')
-
-    const modal = await ModalLocator.find(':label(Modal Dialog)')
-    const closeButton = await modal.find(':label(Close)')
-
-    await wait(() => {
-      expect(modal.containsFocus()).to.be.true()
-    })
-
-    await closeButton.click()
-
-    await wait(() => {
-      expect(onDismiss).to.have.been.called()
-    })
   })
 
   it('should render children', async () => {

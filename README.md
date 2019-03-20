@@ -46,6 +46,10 @@ export default App
 
 Before contributing please read our [code of conduct](#CODE_OF_CONDUCT) and read the [docs/contributing](#contributing) documentation.
 
+### React Support
+
+Instructure-UI currently supports React 15 and higher.
+
 ### Browser Support
 
 - Internet Explorer 11 and Edge

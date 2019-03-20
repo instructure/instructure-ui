@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, spy, wait, within } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
 import Tray from '../index'
 import TrayLocator from '../locator'
@@ -174,62 +174,6 @@ describe('<Tray />', async () => {
 
     await wait(() => {
       expect(onDismiss).to.have.been.calledOnce()
-    })
-  })
-
-  describe('with a closeButtonLabel', async () => {
-    it('should log deprecation warnings', async () => {
-      const consoleWarn = spy(console, 'warn')
-      await mount(
-        <Tray
-          label="Tray Example"
-          closeButtonLabel="Close"
-          open
-        >
-          Hello World
-        </Tray>
-      )
-
-      expect(consoleWarn)
-        .to.have.been.calledWithMatch('Warning: [Tray] `closeButtonLabel` was deprecated in 5.0.0.')
-    })
-
-    it('should render an "icon" style close button by default', async () => {
-      await mount(
-        <Tray
-          label="Tray Example"
-          closeButtonLabel="Close"
-          open
-        >
-          Hello World
-        </Tray>
-      )
-      const tray = await TrayLocator.find()
-      const button = await tray.find('button:label(Close)')
-      const icon = await button.find('svg[name="IconX"]')
-
-      expect(icon).to.exist()
-    })
-
-    it('should focus closeButton by default', async () => {
-      await mount(
-        <Tray
-          open
-          label="Tray Example"
-          closeButtonLabel="close"
-        >
-          <div>
-            <input type="text" />
-          </div>
-        </Tray>
-      )
-
-      const tray = await TrayLocator.find()
-      const button = await tray.find('button:label(close)')
-
-      await wait(() => {
-        expect(button.focused()).to.be.true()
-      })
     })
   })
 

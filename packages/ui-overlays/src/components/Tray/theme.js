@@ -24,7 +24,6 @@
 
 export default function ({ colors, breakpoints, shadows, stacking, borders }) {
   return {
-    closeButtonOffset: '0',
     background: colors.backgroundLightest,
     borderColor: colors.borderMedium,
     borderWidth: borders.widthSmall,

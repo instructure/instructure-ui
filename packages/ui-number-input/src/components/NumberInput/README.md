@@ -1,6 +1,5 @@
 ---
-describes: NumberInputControlled
-id: NumberInputControlled__README
+describes: NumberInput
 ---
 
 A controlled number input field. Note that this field **does not work
@@ -114,7 +113,7 @@ class Example extends React.Component {
           label="Inline layout"
           onChange={this.toggleInline}
         />
-        <NumberInputControlled
+        <NumberInput
           disabled={this.state.disabled}
           label={`How old are you? (${this.MIN}-${this.MAX})`}
           layout={this.state.inline ? 'inline' : null}

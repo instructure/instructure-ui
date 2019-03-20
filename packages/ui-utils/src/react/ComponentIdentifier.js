@@ -43,9 +43,9 @@ Abstract component identifier. Helpful for picking out a specific child.
       return (
         <div>
           {title}
-          <ContextBox>
+          <ContextView>
             {content}
-          </ContextBox>
+          </ContextView>
          </div>
      )
     }

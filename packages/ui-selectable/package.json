@@ -33,7 +33,7 @@
     "@instructure/uid": "^5.52.2",
     "keycode": "^2",
     "prop-types": "^15",
-    "react": "^0.14.9 || ^15 || ^16"
+    "react": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"

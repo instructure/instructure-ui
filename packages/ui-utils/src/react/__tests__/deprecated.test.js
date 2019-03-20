@@ -54,7 +54,8 @@ describe('@deprecated', async () => {
 
     it('should warn when suggesting new prop when using old prop', async () => {
       const consoleWarn = spy(console, 'warn')
-      const warning = 'Warning: [TestComponent] `foo` was deprecated in 2.1.0. Use `bar` instead.'
+      const warning =
+        'Warning: [TestComponent] `foo` is deprecated and will be removed in version 2.1.0. Use `bar` instead.'
 
       await mount(<DeprecatedComponent foo="Jane" />)
 
@@ -64,7 +65,7 @@ describe('@deprecated', async () => {
 
     it('should warn when using old prop with no new prop', async () => {
       const consoleWarn = spy(console, 'warn')
-      const warning = 'Warning: [TestComponent] `baz` was deprecated in 2.1.0.'
+      const warning = 'Warning: [TestComponent] `baz` is deprecated and will be removed in version 2.1.0.'
 
       await mount(<DeprecatedComponent baz="Goodbye" />)
 
@@ -86,7 +87,7 @@ describe('@deprecated', async () => {
 
     it('should warn that the entire component is deprecated if no old props are supplied', async () => {
       const consoleWarn = spy(console, 'warn')
-      const warning = 'Warning: [TestComponent] was deprecated in version 3.4.0.'
+      const warning = 'Warning: [TestComponent] is deprecated and will be removed in version 3.4.0.'
 
       await mount(<DeprecatedComponent />)
 
@@ -97,15 +98,15 @@ describe('@deprecated', async () => {
 
   describe('deprecated component with a changed package message', async () => {
     const DeprecatedComponent = deprecated('5.0.0', null, changedPackageWarning(
-      'ui-core',
-      'ui-portal'
+      'ui-forms',
+      'ui-number-input'
     ))(TestComponent)
 
     it('should warn that the component is deprecated and output a warning that the package changed', async () => {
       const consoleWarn = spy(console, 'warn')
       const warning = [
-        'Warning: [TestComponent] was deprecated in version 5.0.0.',
-        `It has been moved from @instructure/ui-core to @instructure/ui-portal.`
+        'Warning: [TestComponent] is deprecated and will be removed in version 5.0.0.',
+        `It has been moved from @instructure/ui-forms to @instructure/ui-number-input.`
       ].join(' ')
 
       await mount(<DeprecatedComponent />)

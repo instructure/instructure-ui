@@ -32,7 +32,6 @@ import testable from '@instructure/ui-testable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { error } from '@instructure/console/macro'
-import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -47,11 +46,7 @@ parent: List
 export default class ListItem extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    variant: deprecatePropValues(
-      PropTypes.oneOf(['default', 'unstyled', 'inline']),
-      ['pipe'],
-      'For the same functionality, use `inline` on the `variant` prop and set the `delimiter` prop to `pipe`.'
-    ),
+    variant: PropTypes.oneOf(['default', 'unstyled', 'inline']),
     delimiter: PropTypes.oneOf(['none', 'pipe', 'slash', 'arrow', 'dashed', 'solid']),
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
@@ -96,15 +91,12 @@ export default class ListItem extends Component {
       ListItem
     )
 
-    const delimiter = (this.props.variant === 'pipe') ? 'pipe' : this.props.delimiter
-    const variant = (this.props.variant === 'pipe') ? 'inline' : this.props.variant
-    const size = (this.props.variant === 'pipe') ? 'small' : this.props.size
+    const { delimiter, variant, size } = this.props
 
     const noDelimiter = (delimiter === 'none' && variant !== 'inline')
 
     const noSpacing = (
       this.props.delimiter !== 'none' ||
-      this.props.variant === 'pipe' ||
       this.props.spacing === 'none'
     )
 

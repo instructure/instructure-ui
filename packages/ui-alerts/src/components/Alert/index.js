@@ -42,7 +42,6 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 
@@ -55,12 +54,6 @@ category: components
 ---
 **/
 
-@deprecated('3.0.0', {
-  dismissable: true,
-  onClose: 'onDismiss',
-  transitionType: 'transition',
-  isOpen: 'open'
-})
 @themeable(theme, styles)
 export default class Alert extends Component {
   static propTypes = {

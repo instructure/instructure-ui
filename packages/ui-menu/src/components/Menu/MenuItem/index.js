@@ -33,7 +33,6 @@ import keycode from 'keycode'
 import themeable from '@instructure/ui-themeable'
 import uid from '@instructure/uid'
 import { controllable } from '@instructure/ui-prop-types'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -52,9 +51,6 @@ parent: Menu
 ---
 **/
 @testable()
-@deprecated('5.0.0', {
-  active: true
-})
 @themeable(theme, styles)
 class MenuItem extends Component {
   static propTypes = {

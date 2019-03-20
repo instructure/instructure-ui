@@ -30,7 +30,6 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import testable from '@instructure/ui-testable'
@@ -50,16 +49,13 @@ export default class Heading extends Component {
    static propTypes = {
      border: PropTypes.oneOf(['none', 'top', 'bottom']),
      children: childrenOrValue,
-     color: deprecatePropValues(
-       PropTypes.oneOf([
-         'primary',
-         'secondary',
-         'primary-inverse',
-         'secondary-inverse',
-         'inherit'
-       ]),
-       ['success', 'warning', 'error', 'brand']
-     ),
+     color: PropTypes.oneOf([
+      'primary',
+      'secondary',
+      'primary-inverse',
+      'secondary-inverse',
+      'inherit'
+    ]),
      level: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'reset']),
     /**
     * the element type to render as (defaults to the level)

@@ -35,7 +35,7 @@
     "react-storybook-addon-props-combinations": "^1.1.0"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15 || ^16",
+    "react": "^15 || ^16",
     "webpack": "^3 || ^4"
   },
   "publishConfig": {

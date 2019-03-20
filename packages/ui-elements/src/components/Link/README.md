@@ -41,8 +41,7 @@ example: true
 
 ### Truncating text
 
-The `ellipsis` property has been deprecated. Use [TruncateText](#TruncateText) instead to truncate text within Link.
-Like `ellipsis`, using TruncateText within Link will cause it to display block-level.
+Use [TruncateText](#TruncateText) to truncate text within Link. Note this will cause Link to display block-level.
 
 ```js
 ---

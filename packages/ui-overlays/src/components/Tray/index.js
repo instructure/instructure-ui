@@ -27,12 +27,10 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import { element } from '@instructure/ui-prop-types'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -51,31 +49,11 @@ category: components
 ---
 **/
 @testable()
-@deprecated('3.0.0', {
-  onRequestClose: 'onDismiss',
-  isOpen: 'open',
-  onReady: 'onOpen',
-  onAfterOpen: 'onOpen',
-  getDefaultFocusElement: 'defaultFocusElement',
-  trapFocus: 'shouldContainFocus'
-})
-@deprecated('5.0.0', {
-  closeButtonLabel: true,
-  closeButtonRef: true,
-  closeButtonVariant: true,
-  applicationElement: true
-})
 @bidirectional()
 @themeable(theme, styles)
 class Tray extends Component {
   static propTypes = {
     label: PropTypes.string.isRequired,
-
-    /**
-     * __DEPRECATED (5.0.0)__ An accessible label for the close button. The close button won't display without this label.
-     */
-    closeButtonLabel: PropTypes.string,
-
     children: PropTypes.node,
 
     /*
@@ -103,11 +81,6 @@ class Tray extends Component {
      * A function that returns a reference to the content element
      */
     contentRef: PropTypes.func,
-
-    /**
-     * __DEPRECATED (5.0.0)__ A function that returns a reference to the close button element
-     */
-    closeButtonRef: PropTypes.func,
 
     /**
      * Whether focus should be contained within the `<Tray/>` when it is open
@@ -184,10 +157,6 @@ class Tray extends Component {
      * Callback fired after the <Tray /> finishes transitioning out
      */
     onExited: PropTypes.func,
-    /**
-    * __DEPRECATED (5.0.0)__
-    */
-    closeButtonVariant: PropTypes.oneOf(['icon', 'icon-inverse']),
 
     /**
      * Should the `<Tray />` have a border
@@ -224,9 +193,6 @@ class Tray extends Component {
     shadow: true,
     border: false,
     children: null,
-    closeButtonLabel: undefined,
-    closeButtonRef: undefined,
-    closeButtonVariant: undefined,
     onTransition: undefined
   }
 
@@ -284,47 +250,15 @@ class Tray extends Component {
     DOMNode && this.applyTheme(DOMNode)
   }
 
-  closeButtonRef = el => {
-    this._closeButton = el
-    if (typeof this.props.closeButtonRef === 'function') {
-     this.props.closeButtonRef(el)
-    }
-  }
-
-  renderCloseButton () {
-    return this.props.closeButtonLabel ? (
-      <CloseButton
-        placement={this.props.placement === 'end' ? 'start' : 'end'}
-        offset="x-small"
-        variant={this.props.closeButtonVariant}
-        buttonRef={this.closeButtonRef}
-        onClick={this.props.onDismiss}
-     >
-       {this.props.closeButtonLabel}
-     </CloseButton>
-    ) : null
-  }
-
-  renderContent () {
-    return (
-      <div>
-        {this.renderCloseButton()}
-        {this.props.children}
-      </div>
-    )
-  }
-
   render () {
     const {
       label,
-      closeButtonLabel,
       children,
       size,
       placement,
       open,
       defaultFocusElement,
       contentRef,
-      closeButtonRef,
       shouldContainFocus,
       shouldReturnFocus,
       shouldCloseOnDocumentClick,
@@ -341,7 +275,6 @@ class Tray extends Component {
       onExiting,
       onExited,
       onTransition,
-      closeButtonVariant,
       border,
       shadow,
       ...props
@@ -383,7 +316,7 @@ class Tray extends Component {
               ref={contentRef}
             >
               {
-                (this.state.transitioning) ? this.renderContent() : (
+                (this.state.transitioning) ? children : (
                   <Dialog
                     as="div"
                     label={label}
@@ -396,7 +329,7 @@ class Tray extends Component {
                     liveRegion={liveRegion}
                     onDismiss={onDismiss}
                   >
-                    {this.renderContent()}
+                    {children}
                   </Dialog>
                 )
               }

@@ -61,22 +61,6 @@ describe('<SVGIcon />', async () => {
     expect(icon.getAttribute('rotate')).to.equal('90')
   })
 
-  it('should set custom width and height properly', async () => {
-    await mount(
-      <SVGIcon
-        width='150px'
-        height='100px'
-        src={SVG_SRC}
-      />
-    )
-    const custom = await SVGIconLocator.find()
-    const width = custom.getComputedStyle().width
-    const height = custom.getComputedStyle().height
-
-    expect(width).to.equal('150px')
-    expect(height).to.equal('100px')
-  })
-
   it('should set size', async () => {
     await mount(
       <SVGIcon
@@ -86,22 +70,6 @@ describe('<SVGIcon />', async () => {
     )
     const subject = await SVGIconLocator.find()
     expect(subject.hasClass(styles['size--large'])).to.be.true()
-  })
-
-  it('should prioritize deprecated width and height over size', async () => {
-    await mount(
-      <SVGIcon
-        width='200px'
-        height='200px'
-        size='x-small'
-        src={SVG_SRC}
-      />
-    )
-    const subject = await SVGIconLocator.find()
-    const width = subject.getComputedStyle().getPropertyValue('width')
-    const height = subject.getComputedStyle().getPropertyValue('height')
-    expect(width).to.equal('200px')
-    expect(height).to.equal('200px')
   })
 
   describe('with generated examples', async () => {

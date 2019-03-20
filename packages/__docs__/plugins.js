@@ -96,24 +96,7 @@ module.exports = [
       '**/ui-docs-plugin/src/**',
 
       // deprecated packages and modules:
-      '**/generate-examples/**',
-      '**/ui-container/**',
-      '**/ui-core/**',
-      '**/ui-elements/src/components/ContextBox/**',
-      '**/ui-forms/src/components/FormField/**',
-      '**/ui-forms/src/components/FormFieldGroup/**',
-      '**/ui-forms/src/utils/FormPropTypes.js',
-      '**/ui-utils/src/i18n/*.js',
-      '**/ui-utils/src/dom/calculateElementPosition.js',
-      '**/ui-utils/src/dom/findTabbable.js',
-      '**/ui-utils/src/dom/focusManager.js',
-      '**/ui-utils/src/dom/scopeTab.js',
-      '**/ui-utils/src/dom/isVisible.js',
-      '**/ui-utils/src/debounce.js',
-      '**/ui-utils/src/uid.js',
-      '**/ui-utils/src/dom/generateElementId.js',
-      '**/ui-utils/src/react/containerQuery.js',
-      '**/ui-utils/src/Decimal.js'
+      '**/generate-examples/**'
     ],
     themes: [
       require.resolve('@instructure/ui-themes/lib/canvas/base'),

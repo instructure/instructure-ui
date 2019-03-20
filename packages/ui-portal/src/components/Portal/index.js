@@ -30,7 +30,6 @@ import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 
 import { element } from '@instructure/ui-prop-types'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import testable from '@instructure/ui-testable'
 
 /**
@@ -39,11 +38,6 @@ category: components/utilities
 ---
 **/
 @testable()
-@deprecated('3.0.0', {
-  container: 'mountNode',
-  isOpen: 'open',
-  onReady: 'onOpen'
-})
 @bidirectional()
 export default class Portal extends Component {
   static propTypes = {

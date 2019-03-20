@@ -71,7 +71,7 @@ module.exports = require('@instructure/ui-presets/karma')({
       lines: 50
     }
   },
-  coverageDirectory: path.join(__dirname, '../../coverage/ui-core')
+  coverageDirectory: path.join(__dirname, '../../coverage/ui-buttons')
 })
 ```
 

@@ -35,7 +35,7 @@
     "react-codemirror2": "^5.1.0"
   },
   "peerDependencies": {
-    "react": "^0.14.9 || ^15 || ^16"
+    "react": "^15 || ^16"
   },
   "publishConfig": {
     "access": "public"
