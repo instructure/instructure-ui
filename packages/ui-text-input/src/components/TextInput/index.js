@@ -27,10 +27,12 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { controllable } from '@instructure/ui-prop-types'
+import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
+import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import uid from '@instructure/uid'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
@@ -108,12 +110,14 @@ class TextInput extends Component {
     onChange: function (event, value) {},
     onBlur: function (event) {},
     onFocus: function (event) {},
+    renderBeforeInput: null,
+    renderAfterInput: null,
     layout: 'stacked'
   }
 
   constructor (props) {
     super()
-
+    this.state = { focused: false }
     this._defaultId = uid('TextInputControlled')
     this._messagesId = uid('TextInputControlled-messages')
   }
@@ -133,16 +137,16 @@ class TextInput extends Component {
     return this.props.messages && this.props.messages.findIndex((message) => { return message.type === 'error' }) >= 0
   }
 
-  get id () {
-    return this.props.id || this._defaultId
-  }
-
   get focused () {
     return isActiveElement(this._input)
   }
 
   get value () {
     return this._input.value
+  }
+
+  get id () {
+    return this.props.id || this._defaultId
   }
 
   handleInputRef = node => {
@@ -156,38 +160,19 @@ class TextInput extends Component {
 
   handleBlur = (event) => {
     this.props.onBlur(event)
+    this.setState({
+      focused: false
+    })
   }
 
   handleFocus = (event) => {
     this.props.onFocus(event)
+    this.setState({
+      focused: true
+    })
   }
 
-  renderContent(placement) {
-    const {
-      renderBeforeInput,
-      renderAfterInput
-    } = this.props
-
-    const ContentBefore = renderBeforeInput || null
-    const ContentAfter = renderAfterInput || null
-
-    const classes = {
-      [styles.content]: true,
-      [styles[`content--${placement}`]]: true
-    }
-
-    return (
-      <span
-        className={classnames(classes)}
-        aria-hidden="true"
-      >
-        {placement === 'before' && <ContentBefore />}
-        {placement === 'after' && <ContentAfter />}
-      </span>
-    )
-  }
-
-  render () {
+  renderInput () {
     const {
       type,
       size,
@@ -196,34 +181,16 @@ class TextInput extends Component {
       value,
       disabled,
       readOnly,
-      required,
-      width,
-      renderBeforeInput,
-      renderAfterInput,
-      inline
+      required
     } = this.props
 
     const props = omitProps(this.props, TextInput.propTypes)
 
-    const hasContentBeforeInput = typeof renderBeforeInput === 'function'
-    const hasContentAfterInput = typeof renderAfterInput === 'function'
-
     const inputClasses = {
       [styles.input]: true,
       [styles[size]]: size,
-      [styles[`textAlign--${textAlign}`]]: textAlign,
-      [styles.hasContentBeforeInput]: hasContentBeforeInput,
-      [styles.hasContentAfterInput]: hasContentAfterInput,
-      [styles.disabled]: disabled
+      [styles[`textAlign--${textAlign}`]]: textAlign
     }
-
-    const positioningClasses = {
-      [styles.positioning]: true,
-      [styles['positioning--block']]: !inline && !width,
-      [styles['positioning--inline']]: inline || width,
-    }
-
-    const style = width ? { width } : null
 
     let descriptionIds = ''
     if (props['aria-describedby']) {
@@ -234,36 +201,84 @@ class TextInput extends Component {
     }
 
     return (
+      <input
+        {...props}
+        value={value}
+        placeholder={placeholder}
+        ref={this.handleInputRef}
+        type={type}
+        id={this.id}
+        required={required}
+        aria-required={required}
+        aria-invalid={this.invalid ? 'true' : null}
+        disabled={disabled}
+        readOnly={readOnly}
+        className={classnames(inputClasses)}
+        aria-describedby={descriptionIds !== '' ? descriptionIds : null}
+        onChange={this.handleChange}
+        onBlur={this.handleBlur}
+        onFocus={this.handleFocus}
+      />
+    )
+  }
+
+  render () {
+    const {
+      disabled,
+      readOnly,
+      width,
+      renderBeforeInput,
+      renderAfterInput
+    } = this.props
+
+    const renderBeforeOrAfter = renderBeforeInput || renderAfterInput
+
+    const facadeClasses = {
+      [styles.facade]: true,
+      [styles.inactive]: disabled || readOnly,
+      [styles.invalid]: this.invalid,
+      [styles.focused]: this.state.focused
+    }
+
+    return (
       <FormField
         {...pickProps(this.props, FormField.propTypes)}
         id={this.id}
         messagesId={this._messagesId}
+        width={width}
       >
-        <span className={classnames(positioningClasses)}>
-          <input
-            {...props}
-            value={value}
-            style={style}
-            placeholder={placeholder}
-            ref={this.handleInputRef}
-            type={type}
-            id={this.id}
-            required={required}
-            aria-required={required}
-            aria-invalid={this.invalid ? 'true' : null}
-            disabled={disabled || readOnly}
-            className={classnames(inputClasses)}
-            aria-describedby={descriptionIds !== '' ? descriptionIds : null}
-            onChange={this.handleChange}
-            onBlur={this.handleBlur}
-            onFocus={this.handleFocus}
-          />
+        <span className={classnames(facadeClasses)}>
           {
-            (!disabled && !readOnly)
-            ? <span className={styles.outline} aria-hidden="true"></span> : null
+            renderBeforeOrAfter ?
+              <Flex wrapItems>
+                {renderBeforeInput &&
+                  <FlexItem padding="0 0 0 x-small">
+                    {callRenderProp(renderBeforeInput)}
+                  </FlexItem>
+                }
+                <FlexItem grow shrink>
+
+                  {/*
+                    The input and content after input should not wrap, so they're in their own
+                    Flex container
+                  */}
+                  <Flex>
+                    <FlexItem grow shrink>
+                      {this.renderInput()}
+                    </FlexItem>
+                    {renderAfterInput &&
+                      <FlexItem padding="0 x-small 0 0">
+                        {callRenderProp(renderAfterInput)}
+                      </FlexItem>
+                    }
+                  </Flex>
+
+                </FlexItem>
+              </Flex>
+
+              /* If no prepended or appended content, don't render Flex layout */
+              : this.renderInput()
           }
-          {hasContentBeforeInput && this.renderContent('before')}
-          {hasContentAfterInput && this.renderContent('after')}
         </span>
       </FormField>
     )

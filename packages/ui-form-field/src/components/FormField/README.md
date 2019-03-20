@@ -9,7 +9,7 @@ components. In most cases it shouldn't be used directly.
 ---
 example: true
 ---
-<FormField id="foo" label="Opacity">
-  <input id="foo" type="range"/>
+<FormField id="foo" label="Opacity" width="200px">
+  <input style={{display: 'block', width: '100%'}}/>
 </FormField>
 ```

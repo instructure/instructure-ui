@@ -182,6 +182,9 @@ export default class FormFieldLayout extends Component {
       <ElementType
         {...omitProps(this.props, {...FormFieldLayout.propTypes, ...Grid.propTypes})}
         className={classnames(classes)}
+        style={{
+          width: this.props.width
+        }}
         aria-describedby={this.hasMessages ? this._messagesId : null}
       >
         { this.elementType === 'fieldset' && this.renderLegend() }

@@ -1,52 +1,48 @@
-.positioning {
+.facade {
   position: relative;
-}
-
-.positioning--block {
-  display: block;
-}
-
-.positioning--inline {
-  display: inline-block;
-  vertical-align: middle;
-}
-
-.content {
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  height: 100%;
-  fill: var(--iconColor);
-  pointer-events: none;
-}
-
-.content--before {
-  offset-inline-start: var(--padding);
-  offset-inline-end: auto;
-}
-
-.content--after {
-  offset-inline-end: var(--padding);
-  offset-inline-start: auto;
-}
-
-.outline {
-  pointer-events: none;
-  position: absolute;
   display: block;
   box-sizing: border-box;
-  top: -0.25rem;
-  bottom: -0.25rem;
-  left: -0.25rem; /* stylelint-disable-line property-blacklist */
-  right: -0.25rem; /* stylelint-disable-line property-blacklist */
-  border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
-  border-radius: calc(var(--borderRadius) * 1.5);
-  transition: all 0.2s;
+  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
+  border-radius: var(--borderRadius);
+  background: var(--background);
 
-  /* properties to transition on :focus */
-  opacity: 0;
-  transform: scale(0.95);
+  &::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    display: block;
+    box-sizing: border-box;
+    top: -0.25rem;
+    bottom: -0.25rem;
+    left: -0.25rem; /* stylelint-disable-line property-blacklist */
+    right: -0.25rem; /* stylelint-disable-line property-blacklist */
+    border: var(--focusOutlineWidth) var(--focusOutlineStyle) var(--focusOutlineColor);
+    border-radius: calc(var(--borderRadius) * 1.5);
+    transition: all 0.2s;
+
+    /* properties to transition on :focus */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  &.focused::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.inactive {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &.invalid {
+    border-color: var(--errorBorderColor);
+
+    &.focused::before { /* stylelint-disable-line selector-max-class */
+      border-color: var(--errorBorderColor);
+    }
+  }
 }
 
 /* stylelint-disable selector-max-type, no-descending-specificity */
@@ -67,72 +63,35 @@ input[type].input {
   width: 100%;
   display: block;
   box-sizing: border-box;
-  transition: all 0.2s;
   outline: none;
   font-family: var(--fontFamily);
   font-weight: var(--fontWeight);
-  border: var(--borderWidth) var(--borderStyle) var(--borderColor);
-  border-radius: var(--borderRadius);
   color: var(--color);
-  background: var(--background);
   padding: 0 var(--padding);
+  background: transparent;
+  border: none;
 
   &:focus {
     box-shadow: initial;
-
-    ~ .outline {
-      transform: scale(1);
-      opacity: 1;
-    }
-  }
-
-  &[aria-invalid] {
-    border-color: var(--errorBorderColor);
-
-    &:focus,
-    ~ .outline {
-      border-color: var(--errorBorderColor);
-    }
   }
 
   &::placeholder {
     color: var(--placeholderColor);
   }
 
-  &.disabled {
-    cursor: not-allowed;
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
   &.small {
     font-size: var(--smallFontSize);
-    height: var(--smallHeight);
+    height: calc(var(--smallHeight) - (2 * var(--borderWidth)));
   }
 
   &.medium {
     font-size: var(--mediumFontSize);
-    height: var(--mediumHeight);
+    height: calc(var(--mediumHeight) - (2 * var(--borderWidth)));
   }
 
   &.large {
     font-size: var(--largeFontSize);
-    height: var(--largeHeight);
-  }
-
-  &.hasContentBeforeInput {
-    padding-inline-start: calc(var(--padding) * 2 + 1em);
-    padding-inline-end: var(--padding); /* reset for postcss-bidirection plugin */
-  }
-
-  &.hasContentAfterInput {
-    padding-inline-end: calc(var(--padding) * 2 + 1em);
-    padding-inline-start: var(--padding); /* reset for postcss-bidirection plugin */
-  }
-
-  &.hasContentAfterInput.hasContentBeforeInput { /* stylelint-disable-line selector-max-class */
-    padding-inline-start: calc(var(--padding) * 2 + 1em);
-    padding-inline-end: calc(var(--padding) * 2 + 1em);
+    height: calc(var(--largeHeight) - (2 * var(--borderWidth)));
   }
 
   &.textAlign--start {

@@ -75,9 +75,7 @@ class ControlledTextInputExample extends React.Component {
             readOnly={this.state.readOnly}
             layout={this.state.inline ? 'inline' : 'stacked'}
             messages={this.state.messages}
-            renderBeforeInput={() => <SVGIcon src={iconExample} />}
-            renderAfterInput={() => <SVGIcon src={iconExample} />}
-            width="15rem"
+            renderAfterInput={<SVGIcon src={iconExample} />}
           />
         </View>
       </div>
@@ -88,8 +86,93 @@ class ControlledTextInputExample extends React.Component {
 render(<ControlledTextInputExample />)
 ```
 
+### Prepending and appending content
+TextInputControlled accepts focusable and non-focusable content before and/or after
+the input text. A common use case is adding an icon or avatar to the input.
+Focusable content will be focused separately from the input itself.
+
+> Note: For any content larger than an icon or small avatar (multiple [Tags](#Tag), for example),
+use the `renderBeforeInput` property.
+
+```javascript
+---
+example: true
+render: false
+---
+class ExtraContentExample extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      value: ''
+    }
+  }
+
+  handleChange = (e, value) => this.setState({ value })
+
+  render () {
+    return (
+      <View as="div">
+        <TextInputControlled
+          label="What are Paula Panda's favorite ice cream flavors?"
+          value={this.state.value}
+          onChange={this.handleChange}
+          renderBeforeInput={
+            <View display="block" padding="xxx-small 0">
+              {
+                (this.state.value !== '') &&
+                <Tag
+                  text={this.state.value}
+                  margin="xxx-small xxx-small xxx-small none"
+                  onClick={function () {
+                    console.log(this.state.value)
+                  }}
+                />
+              }
+              <Tag
+                text="Rocky road"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={function () {
+                  console.log('Rocky road')
+                }}
+              />
+              <Tag
+                text="Vanilla"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={function () {
+                  console.log('Vanilla')
+                }}
+              />
+              <Tag
+                text="Coffee"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={function () {
+                  console.log('Coffee')
+                }}
+              />
+              <Tag
+                text="Strawberry"
+                margin="xxx-small xxx-small xxx-small none"
+                onClick={function () {
+                  console.log('Strawberry')
+                }}
+              />
+            </View>
+          }
+          renderAfterInput={() => <Avatar name="Paula Panda" src={avatarSquare} size="x-small" />}
+        />
+      </View>
+    )
+  }
+}
+
+render(<ExtraContentExample />)
+```
+
+### Setting width and display
+
 To make the component display inline, set the `inline` boolean property. To constrain the
-size of the input itself, use `width`.
+size of the component, use `width`.
 
 > Note: IE11 needs a `width` prop if the TextInput is `inline`.
 
@@ -99,12 +182,12 @@ example: true
 ---
 <div>
   <TextInputControlled
-    label="I am a fairly long label"
+    label={<ScreenReaderContent>I am a hidden label</ScreenReaderContent>}
     inline
     width="4rem"
   />
   &nbsp;
-  <Text>I am inline content</Text>
+  <Button>I am inline content</Button>
 </div>
 ```
 
