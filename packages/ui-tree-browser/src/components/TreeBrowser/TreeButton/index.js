@@ -68,7 +68,15 @@ export default class TreeButton extends Component {
     variant: 'folderTree',
     selected: false,
     focused: false,
-    onClick: function () {}
+    onClick: function () {},
+    id: undefined,
+    name: undefined,
+    collectionIcon: undefined,
+    collectionIconExpanded: undefined,
+    itemIcon: undefined,
+    thumbnail: undefined,
+    expanded: false,
+    descriptor: undefined
   }
 
   renderImage () {

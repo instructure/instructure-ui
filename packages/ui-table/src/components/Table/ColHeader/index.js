@@ -60,6 +60,10 @@ class ColHeader extends Component {
 
   static defaultProps = {
     sortDirection: 'none',
+    children: null,
+    colAlign: 'start',
+    size: 'medium',
+    onRequestSort: undefined
   }
 
   handleClick = (event) => {

@@ -36,6 +36,7 @@ class TestComponent extends Component {
   }
 
   static defaultProps = {
+    bar: undefined,
     qux: 'Hello'
   }
 

@@ -46,6 +46,7 @@ parent: Grid
 **/
 @themeable(theme, styles)
 export default class GridRow extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     children: ChildrenPropTypes.oneOf([GridCol, ScreenReaderContent]),
     rowSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
@@ -55,6 +56,12 @@ export default class GridRow extends Component {
     startAt: PropTypes.oneOf(['small', 'medium', 'large', 'x-large', null]),
     visualDebug: PropTypes.bool,
     isLastRow: PropTypes.bool
+  }
+  /* eslint-enable react/require-default-props */
+
+  static defaultProps = {
+    children: null,
+    isLastRow: false
   }
 
   startAtClass () {

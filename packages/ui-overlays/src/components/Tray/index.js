@@ -223,7 +223,11 @@ class Tray extends Component {
     placement: 'start',
     shadow: true,
     border: false,
-    children: null
+    children: null,
+    closeButtonLabel: undefined,
+    closeButtonRef: undefined,
+    closeButtonVariant: undefined,
+    onTransition: undefined
   }
 
   state = {

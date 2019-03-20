@@ -27,7 +27,7 @@ import { expect, stub } from '@instructure/ui-test-utils'
 
 import { controllable } from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('controllable', () => {
   afterEach(() => {
     console.error.restore && console.error.restore()
@@ -111,4 +111,4 @@ describe('controllable', () => {
     expect(controllable(...controllableArgs)(...propTypeArgs)).to.be.an.instanceOf(Error)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

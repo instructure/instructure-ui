@@ -29,11 +29,11 @@ import IconAnnotate from '@instructure/ui-icons/lib/Solid/IconAnnotate'
 export default {
   sectionProp: 'size',
   propValues: {
-    // eslint-disable-next-line no-undefined
+
     itemIcon: [undefined, IconAnnotate],
-    // eslint-disable-next-line no-undefined
+
     collectionIcon: [undefined, IconCollapse],
-    // eslint-disable-next-line no-undefined
+
     collectionIconExpanded: [undefined, IconExpand],
     selectionType: ['none', 'single']
   },
@@ -65,9 +65,9 @@ export default {
   filter: (props) => {
     return (
       // prevent unecessary icon permutations
-      // eslint-disable-next-line no-undefined
+
       (props.collectionIcon === undefined && props.collectionIconExpanded === IconExpand) ||
-      // eslint-disable-next-line no-undefined
+
       (props.collectionIcon === IconCollapse && props.collectionIconExpanded === undefined)
     )
   }

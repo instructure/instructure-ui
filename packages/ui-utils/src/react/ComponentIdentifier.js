@@ -72,6 +72,10 @@ export default class ComponentIdentifier extends Component {
     children: PropTypes.node
   }
 
+  static defaultProps = {
+    children: null
+  }
+
   render () {
     const {
       children,

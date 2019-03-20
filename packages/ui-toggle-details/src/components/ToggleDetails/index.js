@@ -104,7 +104,9 @@ class ToggleDetails extends Component {
     iconExpanded: IconArrowOpenDown,
     iconPosition: 'start',
     defaultExpanded: false,
-    onToggle: function (event, expanded) {}
+    onToggle: function (event, expanded) {},
+    children: null,
+    expanded: undefined
   }
 
   shouldAnimateContent = false

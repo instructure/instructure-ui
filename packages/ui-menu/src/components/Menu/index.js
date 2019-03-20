@@ -181,7 +181,10 @@ class Menu extends Component {
     constrain: 'window',
     liveRegion: null,
     shouldHideOnSelect: true,
-    shouldFocusTriggerOnClose: true
+    shouldFocusTriggerOnClose: true,
+    show: undefined,
+    id: undefined,
+    type: undefined
   }
 
   state = { hasFocus: false }

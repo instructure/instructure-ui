@@ -768,7 +768,7 @@ describe('<DateInput />', async () => {
     await input.keyDown('enter')
 
     expect(onDateChange).to.have.been.called()
-    expect(onDateChange.getCall(1).args[1]).to.equal(undefined) // eslint-disable-line no-undefined
+    expect(onDateChange.getCall(1).args[1]).to.equal(undefined)
   })
 
   it('should fire the onDateChange event with rawConversionFailed=true when TextInput value is invalid', async () => {
@@ -866,4 +866,3 @@ describe('<DateInput />', async () => {
     expect(await dateInput.find(`:contains(${invalidDateMessage})`)).to.exist()
   })
 })
-/* eslint-disable mocha/no-synchronous-tests */

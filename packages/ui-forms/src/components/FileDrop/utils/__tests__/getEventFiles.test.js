@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import getEventFiles from '../getEventFiles'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('getEventFiles', () => {
   const chromeDragEnter = {
     dataTransfer: {
@@ -74,4 +74,4 @@ describe('getEventFiles', () => {
     expect(getEventFiles(safariDragEnter).length).to.be.equal(0)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

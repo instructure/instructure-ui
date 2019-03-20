@@ -59,6 +59,9 @@ class Pill extends Component {
   }
 
   static defaultProps = {
+    margin: undefined,
+    elementRef: undefined,
+    as: undefined,
     variant: 'default'
   }
 

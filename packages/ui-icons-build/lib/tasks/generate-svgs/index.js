@@ -70,7 +70,7 @@ gulp.task('generate-svgs-index', (cb) => {
             const data = Object.assign({ variant }, glyphs[glyph][variant])
             return {
               name: variant,
-              json: JSON.stringify(data, undefined, 2) // eslint-disable-line no-undefined
+              json: JSON.stringify(data, undefined, 2)
             }
           })
       }
@@ -80,7 +80,7 @@ gulp.task('generate-svgs-index', (cb) => {
     .pipe(
       consolidate('lodash', {
         glyphs: glyphExports,
-        json: JSON.stringify(glyphs, undefined, 2) // eslint-disable-line no-undefined
+        json: JSON.stringify(glyphs, undefined, 2)
       })
     )
     .pipe(rename({ basename: 'index', extname: '.js' }))

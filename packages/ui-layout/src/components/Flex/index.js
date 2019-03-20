@@ -90,12 +90,19 @@ export default class Flex extends Component {
   }
 
   static defaultProps = {
+    children: null,
     as: 'span',
     direction: 'row',
     justifyItems: 'start',
     inline: false,
     visualDebug: false,
-    wrapItems: false
+    wrapItems: false,
+    width: undefined,
+    height: undefined,
+    padding: undefined,
+    margin: undefined,
+    alignItems: undefined,
+    textAlign: undefined
   }
 
   renderChildren () {

@@ -33,6 +33,10 @@ class ComponentWithConsumer extends Component {
     customRenderProp: PropTypes.func
   }
 
+  static defaultProps = {
+    customRenderProp: undefined
+  }
+
   render() {
     return (
       <Consumer>

@@ -76,7 +76,7 @@ export default class Tooltip extends Component {
     /**
     * __DEPRECATED 5.42__  `size` is now deprecated
     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    size: PropTypes.oneOf(['small', 'medium', 'large']), // eslint-disable-line react/require-default-props
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
@@ -91,6 +91,8 @@ export default class Tooltip extends Component {
   }
 
   static defaultProps = {
+    as: undefined,
+    on: undefined,
     variant: 'default',
     placement: 'top',
     mountNode: null,

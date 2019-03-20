@@ -95,6 +95,13 @@ class TextInput extends Component {
   }
 
   static defaultProps = {
+    id: undefined,
+    width: undefined,
+    placeholder: undefined,
+    required: false,
+    defaultValue: undefined,
+    value: undefined,
+    icon: undefined,
     inline: false,
     type: 'text',
     size: 'medium',

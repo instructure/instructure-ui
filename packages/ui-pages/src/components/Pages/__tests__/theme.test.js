@@ -27,7 +27,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Pages from '../index'
 
-/*  eslint-disable mocha/no-synchronous-tests */
 describe('Pages.theme', () => {
   describe('with the default theme', () => {
     const variables = Pages.generateTheme()
@@ -45,4 +44,3 @@ describe('Pages.theme', () => {
     })
   })
 })
-/*  eslint-enable mocha/no-synchronous-tests */

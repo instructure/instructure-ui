@@ -160,7 +160,15 @@ export default class BaseTransition extends React.Component {
     onExit: function () {},
     onExiting: function () {},
     onExited: function () {},
-    onTransition: function (toState, fromState) {}
+    onTransition: function (toState, fromState) {},
+
+    className: undefined,
+    children: null,
+    transitionClassName: undefined,
+    exitedClassName: undefined,
+    exitingClassName: undefined,
+    enteredClassName: undefined,
+    enteringClassName: undefined
   }
 
   static states = STATES

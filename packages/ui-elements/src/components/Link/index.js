@@ -97,6 +97,14 @@ class Link extends Component {
   }
 
   static defaultProps = {
+    href: undefined,
+    elementRef: undefined,
+    disabled: false,
+    onClick: undefined,
+    ellipsis: false,
+    margin: undefined,
+    icon: undefined,
+    display: undefined,
     variant: 'default',
     as: 'button',
     linkRef: function (link) {},
@@ -163,7 +171,7 @@ class Link extends Component {
 
     if (truncateText) {
       warning( // if display prop is used, warn about icon or TruncateText
-        this.props.display === undefined, // eslint-disable-line no-undefined
+        this.props.display === undefined,
         '[Link] Using the display property with TruncateText may cause layout issues.'
       )
     }
@@ -178,7 +186,7 @@ class Link extends Component {
   renderIcon () {
     const Icon = this.props.icon
     warning( // if display prop is used, warn about icon or TruncateText
-      this.props.display === undefined, // eslint-disable-line no-undefined
+      this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )
 

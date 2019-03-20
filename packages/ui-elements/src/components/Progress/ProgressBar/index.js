@@ -92,7 +92,10 @@ export default class ProgressBar extends Component {
     valueNow: 0,
     variant: 'default',
     successColor: true,
-    as: 'div'
+    as: 'div',
+    formatDisplayedValue: undefined,
+    margin: undefined,
+    elementRef: undefined
   }
 
   render () {

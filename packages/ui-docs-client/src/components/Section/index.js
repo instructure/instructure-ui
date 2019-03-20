@@ -35,7 +35,9 @@ export default class Section extends Component {
   }
 
   static defaultProps = {
-    children: null
+    children: null,
+    id: undefined,
+    heading: undefined
   }
 
   render () {

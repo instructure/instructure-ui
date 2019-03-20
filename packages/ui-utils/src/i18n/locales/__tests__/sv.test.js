@@ -28,7 +28,7 @@ import '../sv'
 
 numeral.locale('sv')
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('ordinal', () => {
   it('formats 1 ordinal as 1:a', () => {
     expect(numeral(1).format('0o')).to.equal('1:a')
@@ -66,4 +66,4 @@ describe('ordinal', () => {
     expect(numeral(23).format('0o')).to.equal('23:e')
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

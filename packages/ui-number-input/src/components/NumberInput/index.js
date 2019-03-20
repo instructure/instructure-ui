@@ -126,7 +126,8 @@ export default class NumberInput extends Component {
     required: false,
     showArrows: true,
     size: 'medium',
-    width: null
+    width: null,
+    value: undefined
   }
 
   state = {

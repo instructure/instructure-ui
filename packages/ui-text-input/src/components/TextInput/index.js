@@ -99,7 +99,13 @@ class TextInput extends Component {
   }
 
   static defaultProps = {
+    id: undefined,
+    required: false,
+    value: undefined,
     inline: false,
+    placeholder: undefined,
+    width: undefined,
+    label: undefined,
     type: 'text',
     size: 'medium',
     textAlign: 'start',
@@ -110,8 +116,8 @@ class TextInput extends Component {
     onChange: function (event, value) {},
     onBlur: function (event) {},
     onFocus: function (event) {},
-    renderBeforeInput: null,
-    renderAfterInput: null,
+    renderBeforeInput: undefined,
+    renderAfterInput: undefined,
     layout: 'stacked'
   }
 

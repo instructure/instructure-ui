@@ -102,6 +102,13 @@ class Table extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    striped: undefined,
+    margin: undefined,
+    tableData: undefined,
+    colHeaders: undefined,
+    rowHeaders: undefined,
+    elementRef: undefined,
     hover: false,
     size: 'medium',
     layout: 'auto'

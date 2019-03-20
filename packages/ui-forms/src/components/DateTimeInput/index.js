@@ -201,7 +201,19 @@ class DateTimeInput extends Component {
     messageFormat: 'LLL',
     required: false,
     disabled: false,
-    readOnly: false
+    readOnly: false,
+    onBlur: undefined,
+    timeInputRef: undefined,
+    dateInputRef: undefined,
+    onChange: undefined,
+    defaultValue: undefined,
+    value: undefined,
+    messages: undefined,
+    timezone: undefined,
+    locale: undefined,
+    timeFormat: undefined,
+    datePlaceholder: undefined,
+    dateFormat: undefined
   }
 
   static contextTypes = {
@@ -267,7 +279,7 @@ class DateTimeInput extends Component {
       }
     }
     return {
-      iso: undefined, // eslint-disable-line no-undefined
+      iso: undefined,
       message: iso ? this.getErrorMessage(...iso.split('T')) : null,
     }
   }

@@ -62,7 +62,8 @@ export default class Tab extends Component {
     focus: false,
     role: 'tab',
     onClick: (event, data) => {},
-    onKeyDown: (event, data) => {}
+    onKeyDown: (event, data) => {},
+    children: null
   }
 
   handleClick = (event) => {

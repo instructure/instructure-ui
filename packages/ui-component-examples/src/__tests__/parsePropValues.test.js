@@ -49,7 +49,6 @@ export default class TestComponent extends Component {
 }
 `
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('parsePropValues', () => {
   expect(parsePropValues(src))
     .to.deep.equal({
@@ -57,4 +56,3 @@ describe('parsePropValues', () => {
       show: [false, true]
     })
 })
-/* eslint-enable mocha/no-synchronous-tests */

@@ -46,7 +46,8 @@ export default class ModalFooter extends Component {
   }
 
   static defaultProps = {
-    variant: 'default'
+    variant: 'default',
+    children: null
   }
 
   render () {

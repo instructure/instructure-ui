@@ -36,7 +36,8 @@ export default class NavToggle extends Component {
   }
 
   static defaultProps = {
-    variant: 'section'
+    variant: 'section',
+    children: null
   }
 
   focus () {

@@ -99,7 +99,10 @@ export default class ProgressCircle extends Component {
     variant: 'default',
     animateOnMount: false,
     successColor: true,
-    as: 'div'
+    as: 'div',
+    formatDisplayedValue: undefined,
+    margin: undefined,
+    elementRef: undefined
   }
 
   constructor (props) {

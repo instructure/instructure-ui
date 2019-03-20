@@ -47,6 +47,12 @@ export default class ApplyLocale extends Component {
     children: PropTypes.node
   }
 
+  static defaultProps = {
+    locale: undefined,
+    timezone: undefined,
+    children: undefined
+  }
+
   static childContextTypes = {
     locale: PropTypes.string,
     timezone: PropTypes.string

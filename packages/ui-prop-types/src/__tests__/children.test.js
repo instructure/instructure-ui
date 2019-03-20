@@ -36,7 +36,7 @@ const Bar = (props) => <div>bar</div>
 const Baz = (props) => <div>baz</div>
 const Qux = (props) => <div>qux</div>
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('children', () => {
   describe('oneOf', () => {
     it('should accept props of the correct type', () => {
@@ -310,4 +310,4 @@ describe('children', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

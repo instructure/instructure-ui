@@ -3,7 +3,7 @@
   "version": "5.49.0",
   "description": "A babel plugin to add a displayName property to React component class declarations",
   "author": "Instructure, Inc. Engineering and Product Design",
-  "main": "./index.js",
+  "main": "./lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/instructure/instructure-ui.git"

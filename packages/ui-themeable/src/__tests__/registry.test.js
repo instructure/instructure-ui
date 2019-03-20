@@ -33,7 +33,7 @@ import {
   setRegistry
 } from '../registry'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('registry', () => {
   const KEY = Symbol('ThemedComponent')
   const registry = getRegistry()
@@ -140,7 +140,7 @@ describe('registry', () => {
 
       defaultTheme.use({ accessible: true })
 
-      // eslint-disable-next-line no-undefined
+
       const theme = generateTheme(undefined, {
         red: 'maroon'
       })
@@ -200,7 +200,7 @@ describe('registry', () => {
 
       defaultTheme.use({ accessible: true })
 
-      // eslint-disable-next-line no-undefined
+
       const theme = generateComponentTheme(KEY, undefined, {
         color: 'maroon'
       })
@@ -220,12 +220,11 @@ describe('registry', () => {
       const theme = generateComponentTheme(KEY)
 
       expect(theme).to.deep.equal({
-        color: undefined, // eslint-disable-line no-undefined
-        linkColor: undefined, // eslint-disable-line no-undefined
-        buttonPrimaryColor: undefined, // eslint-disable-line no-undefined
-        buttonPrimaryBackground: undefined // eslint-disable-line no-undefined
+        color: undefined,
+        linkColor: undefined,
+        buttonPrimaryColor: undefined,
+        buttonPrimaryBackground: undefined
       })
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

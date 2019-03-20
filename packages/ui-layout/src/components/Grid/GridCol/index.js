@@ -43,6 +43,7 @@ parent: Grid
 **/
 @themeable(theme, styles)
 export default class GridCol extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     children: PropTypes.node,
     colSpacing: PropTypes.oneOf(['none', 'small', 'medium', 'large']),
@@ -73,9 +74,13 @@ export default class GridCol extends Component {
     isLastRow: PropTypes.bool,
     isLastCol: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    textAlign: 'inherit'
+    textAlign: 'inherit',
+    children: null,
+    isLastCol: false,
+    isLastRow: false
   }
 
   startAtClass () {

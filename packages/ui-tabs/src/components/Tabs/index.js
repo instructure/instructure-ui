@@ -95,9 +95,16 @@ export default class Tabs extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    padding: 'small',
+    margin: 'none',
+    textAlign: 'start',
     variant: 'default',
     focus: false,
-    defaultSelectedIndex: 0
+    defaultSelectedIndex: 0,
+    onChange: undefined,
+    selectedIndex: undefined,
+    size: 'medium'
   }
 
   static Panel = Panel

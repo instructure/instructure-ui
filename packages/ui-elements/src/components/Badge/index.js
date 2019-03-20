@@ -91,6 +91,12 @@ class Badge extends Component {
   }
 
   static defaultProps = {
+    count: undefined,
+    children: null,
+    countUntil: undefined,
+    margin: undefined,
+    formatOutput: undefined,
+    as: undefined,
     standalone: false,
     type: 'count',
     variant: 'primary',

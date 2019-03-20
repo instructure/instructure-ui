@@ -84,7 +84,12 @@ export default class CheckboxGroup extends Component {
     disabled: false,
     readOnly: false,
     size: 'medium',
-    layout: 'stacked'
+    layout: 'stacked',
+    defaultValue: undefined,
+    messages: undefined,
+    value: undefined,
+    onChange: undefined,
+    children: null
   }
 
   constructor (props) {

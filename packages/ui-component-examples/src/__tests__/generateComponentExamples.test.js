@@ -49,7 +49,6 @@ export default class TestComponent extends Component {
   }
 }
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('generateComponentExamples', () => {
   it('should work', () => {
     const config = {
@@ -171,4 +170,3 @@ describe('generateComponentExamples', () => {
       ])
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

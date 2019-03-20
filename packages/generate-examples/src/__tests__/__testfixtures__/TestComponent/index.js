@@ -40,7 +40,8 @@ export default class TestComponent extends Component {
   static defaultProps = {
     variant: 'circle',
     show: true,
-    message: null
+    message: null,
+    children: null
   }
 
   render () {

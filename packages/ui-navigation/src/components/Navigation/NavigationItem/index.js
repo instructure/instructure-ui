@@ -79,7 +79,8 @@ class NavigationItem extends Component {
     as: 'a',
     onClick: function (e, selected) {},
     selected: false,
-    minimized: false
+    minimized: false,
+    href: undefined
   }
 
   renderLink () {

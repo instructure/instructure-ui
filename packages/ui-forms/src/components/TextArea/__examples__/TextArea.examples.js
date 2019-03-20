@@ -26,11 +26,11 @@ export default {
   maxExamplesPerPage: 50,
   maxExamples: 800,
   propValues: {
-    placeholder: [undefined, 'Hello text area placeholder'], // eslint-disable-line no-undefined
-    value: [undefined, 'Some content for the text area'], // eslint-disable-line no-undefined
-    messages: [undefined, [{ type: 'hint', text: 'hint text' }]], // eslint-disable-line no-undefined
-    width: [undefined, '3rem'], // eslint-disable-line no-undefined
-    height: [undefined, '5rem'] // eslint-disable-line no-undefined
+    placeholder: [undefined, 'Hello text area placeholder'],
+    value: [undefined, 'Some content for the text area'],
+    messages: [undefined, [{ type: 'hint', text: 'hint text' }]],
+    width: [undefined, '3rem'],
+    height: [undefined, '5rem']
   },
   getComponentProps: (props) => {
     return {

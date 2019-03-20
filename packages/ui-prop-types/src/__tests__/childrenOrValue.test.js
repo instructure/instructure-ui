@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { childrenOrValue } from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('childrenOrValue', () => {
   it('should accept when as="input", value is provided, and children is null', () => {
     const props = {
@@ -95,4 +95,4 @@ describe('childrenOrValue', () => {
     expect(childrenOrValue(...args)).to.be.an.instanceOf(Error)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

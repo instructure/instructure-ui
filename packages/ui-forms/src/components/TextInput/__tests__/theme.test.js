@@ -26,7 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import TextInput from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('TextInput.theme', () => {
   describe('with the default theme', () => {
     const variables = TextInput.generateTheme()
@@ -60,4 +60,4 @@ describe('TextInput.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

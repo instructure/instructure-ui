@@ -102,6 +102,10 @@ class Dialog extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    as: undefined,
+    display: undefined,
+    label: undefined,
     open: false,
     shouldFocusOnOpen: true,
     shouldContainFocus: false,

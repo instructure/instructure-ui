@@ -78,8 +78,13 @@ export default class Editable extends Component {
      */
     readOnly: PropTypes.bool
   }
+
   static defaultProps = {
-    readOnly: false
+    readOnly: false,
+    onChange: undefined,
+    value: undefined,
+    render: undefined,
+    children: null
   }
 
   state = {

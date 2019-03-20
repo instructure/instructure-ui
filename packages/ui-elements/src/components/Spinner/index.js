@@ -71,7 +71,9 @@ export default class Spinner extends Component {
   static defaultProps = {
     as: 'div',
     size: 'medium',
-    variant: 'default'
+    variant: 'default',
+    margin: undefined,
+    elementRef: undefined
   }
 
   constructor (props) {

@@ -42,6 +42,7 @@ parent: Flex
 **/
 @themeable(theme, styles)
 export default class FlexItem extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
     * overrides the parent Flex's alignItems prop, if needed
@@ -89,6 +90,7 @@ export default class FlexItem extends Component {
     overflowX: PropTypes.oneOf(['auto', 'hidden', 'visible']),
     overflowY: PropTypes.oneOf(['auto', 'hidden', 'visible'])
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
     as: 'span',
@@ -135,8 +137,8 @@ export default class FlexItem extends Component {
        className={classnames(classes)}
        style={style}
        as={as}
-       minHeight={dirColumn ? size : undefined} // eslint-disable-line no-undefined
-       minWidth={direction === 'row' ? size : undefined} // eslint-disable-line no-undefined
+       minHeight={dirColumn ? size : undefined}
+       minWidth={direction === 'row' ? size : undefined}
        textAlign={textAlign}
        margin={margin}
        padding={padding}

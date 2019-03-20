@@ -25,7 +25,6 @@ import { expect } from '@instructure/ui-test-utils'
 
 import generatePropCombinations from '../generatePropCombinations'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('generatePropCombinations', () => {
   it('should return [] when passed empty prop values', () => {
     expect(generatePropCombinations({}))
@@ -95,4 +94,3 @@ describe('generatePropCombinations', () => {
     }).to.throw(Error)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

@@ -76,6 +76,10 @@ export default class Heading extends Component {
    }
 
    static defaultProps = {
+     children: null,
+     as: undefined,
+     margin: undefined,
+     elementRef: undefined,
      border: 'none',
      color: 'inherit',
      level: 'h2',

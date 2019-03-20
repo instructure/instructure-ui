@@ -120,7 +120,14 @@ class ContextView extends Component {
     textAlign: 'start',
     background: 'default',
     shadow: 'resting',
-    placement: 'center end'
+    placement: 'center end',
+    margin: undefined,
+    padding: undefined,
+    stacking: undefined,
+    maxWidth: undefined,
+    minWidth: undefined,
+    maxHeight: undefined,
+    minHeight: undefined
   }
 
   get mirroredPlacement () {

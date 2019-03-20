@@ -230,6 +230,7 @@ class Select extends Component {
   }
 
   static defaultProps = {
+    multiple: false,
     editable: false,
     allowEmpty: true,
     allowCustom: false,
@@ -245,7 +246,26 @@ class Select extends Component {
     },
     formatSelectedOption: tag => tag.label || tag.children,
     closeOnSelect: true,
-    constrain: 'window'
+    constrain: 'window',
+    onBlur: undefined,
+    onClick: undefined,
+    onOptionsChange: undefined,
+    onInputChange: undefined,
+    onChange: undefined,
+    onClose: undefined,
+    onOpen: undefined,
+    onPositioned: undefined,
+    readOnly: false,
+    disabled: false,
+    announcement: undefined,
+    assistiveText: undefined,
+    layout: undefined,
+    messages: undefined,
+    placement: undefined,
+    id: undefined,
+    defaultOption: undefined,
+    value: undefined,
+    children: null
   }
 
   constructor (props) {

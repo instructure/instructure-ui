@@ -125,6 +125,17 @@ class SelectSingle extends Component {
   }
 
   static defaultProps = {
+    options: undefined,
+    selectedOption: undefined,
+    defaultSelectedOption: undefined,
+    value: undefined,
+    filter: undefined,
+    readOnly: false,
+    disabled: false,
+    allowCustom: false,
+    allowEmpty: false,
+    editable: false,
+    optionsMaxWidth: undefined,
     inputRef: (node) => {},
     onClose: () => {},
     onChange: (event, selectedOption) => {},
@@ -285,7 +296,7 @@ class SelectSingle extends Component {
         const filteredOptions = props.filter(this.props.options, filterText || '')
         let selectedOption = prevState.selectedOption
         if (props.allowCustom && filteredOptions.length === 0) {
-          selectedOption = undefined    // eslint-disable-line no-undefined
+          selectedOption = undefined
         }
         return {
           filterText,

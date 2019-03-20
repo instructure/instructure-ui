@@ -26,7 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import uid from '../uid'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('uid', () => {
   it('generates a specified length', () => {
     expect(uid('', 5).length).to.equal(5)
@@ -43,4 +43,4 @@ describe('uid', () => {
     expect(results.size).to.be.eql(5000)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

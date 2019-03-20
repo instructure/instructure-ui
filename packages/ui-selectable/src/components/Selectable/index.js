@@ -108,7 +108,9 @@ class Selectable extends Component {
     onRequestHighlightOption: (event, data) => {},
     onRequestHighlightFirstOption: (event, data) => {},
     onRequestHighlightLastOption: (event, data) => {},
-    onRequestSelectOption: (event, data) => {}
+    onRequestSelectOption: (event, data) => {},
+    children: null,
+    render: undefined
   }
 
   _id = this.props.id || uid('Selectable')

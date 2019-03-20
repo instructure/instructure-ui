@@ -63,6 +63,14 @@ export default class BreadcrumbLink extends Component {
     iconPlacement: PropTypes.oneOf(['start', 'end'])
   }
 
+  static defaultProps = {
+    href: undefined,
+    onClick: undefined,
+    size: undefined,
+    icon: undefined,
+    iconPlacement: undefined
+  }
+
   render () {
     const {
       children,

@@ -54,6 +54,8 @@ export default class ApplyTheme extends Component {
   }
 
   static defaultProps = {
+    theme: undefined,
+    children: null,
     immutable: false
   }
 

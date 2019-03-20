@@ -43,7 +43,8 @@ export default class HamburgerButton extends Component {
   }
 
   static defaultProps = {
-    expanded: false
+    expanded: false,
+    controls: undefined
   }
 
   render () {

@@ -117,7 +117,10 @@ export default class InPlaceEdit extends Component {
   static defaultProps = {
     readOnly: false,
     showFocusRing: true,
-    inline: true
+    inline: true,
+    value: undefined,
+    editButtonPlacement: 'end',
+    onChange: undefined
   }
 
   constructor(props) {

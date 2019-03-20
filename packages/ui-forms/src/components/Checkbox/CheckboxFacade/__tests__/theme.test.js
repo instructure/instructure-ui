@@ -26,7 +26,6 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import CheckboxFacade from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('CheckboxFacade.theme', () => {
   describe('with the default theme', () => {
     const variables = CheckboxFacade.generateTheme()
@@ -46,4 +45,3 @@ describe('CheckboxFacade.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

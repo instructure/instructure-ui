@@ -27,7 +27,7 @@ import { expect, stub } from '@instructure/ui-test-utils'
 
 import { xor } from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('xor', () => {
   afterEach(() => {
     console.error.restore && console.error.restore()
@@ -161,4 +161,4 @@ describe('xor', () => {
     expect(errorSpy).to.have.been.calledOnce()
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

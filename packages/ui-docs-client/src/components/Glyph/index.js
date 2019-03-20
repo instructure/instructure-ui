@@ -90,6 +90,10 @@ export default class Glyph extends Component {
     rtl: PropTypes.bool
   }
 
+  static defaultProps = {
+    rtl: false
+  }
+
   renderGlyphInfo (glyph) {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`

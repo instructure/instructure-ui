@@ -80,7 +80,14 @@ class Tag extends Component {
   static defaultProps = {
     size: 'medium',
     dismissible: false,
-    variant: 'default'
+    variant: 'default',
+    elementRef: undefined,
+    className: undefined,
+    title: undefined,
+    disabled: false,
+    readOnly: false,
+    margin: undefined,
+    onClick: undefined
   }
 
   get focused () {

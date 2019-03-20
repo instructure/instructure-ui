@@ -124,7 +124,16 @@ export default class DatePicker extends Component {
 
   static defaultProps = {
     disabledDaysOfWeek: [],
-    disabledDays: []
+    disabledDays: [],
+    onRenderedChange: undefined,
+    onSelectedChange: undefined,
+    locale: undefined,
+    timezone: undefined,
+    todayValue: undefined,
+    renderedValue: undefined,
+    defaultRenderedValue: undefined,
+    selectedValue: undefined,
+    defaultSelectedValue: undefined
   }
 
   static contextTypes = {

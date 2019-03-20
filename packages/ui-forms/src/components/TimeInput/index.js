@@ -216,7 +216,7 @@ class TimeInput extends Component {
   }
 
   getDefaultOption (defaultToFirstOption, defaultValue, options) {
-    // eslint-disable-next-line no-undefined
+
     return defaultValue || (defaultToFirstOption ? options[0].props.value : undefined)
   }
 }

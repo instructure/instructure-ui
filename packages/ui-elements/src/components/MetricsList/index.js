@@ -47,6 +47,10 @@ export default class MetricsList extends Component {
     children: Children.oneOf([MetricsListItem])
   }
 
+  static defaultProps = {
+    children: null
+  }
+
   render () {
     return (
       <div className={styles.root} role="grid" aria-readonly="true">

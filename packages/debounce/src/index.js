@@ -73,7 +73,7 @@ export default function debounce (func, wait = 0, options = {}) {
     const args = lastArgs
     const thisArg = lastThis
 
-    lastArgs = lastThis = undefined // eslint-disable-line no-undefined
+    lastArgs = lastThis = undefined
     lastInvokeTime = time
     if (cancelled !== true) {
       result = func.apply(thisArg, args)
@@ -127,7 +127,7 @@ export default function debounce (func, wait = 0, options = {}) {
       return invokeFunc(time)
     }
 
-    lastArgs = lastThis = undefined // eslint-disable-line no-undefined
+    lastArgs = lastThis = undefined
     return result
   }
 
@@ -135,7 +135,7 @@ export default function debounce (func, wait = 0, options = {}) {
     cancelled = true
     clearAllTimers()
     lastInvokeTime = 0
-    lastArgs = lastCallTime = lastThis = undefined // eslint-disable-line no-undefined
+    lastArgs = lastCallTime = lastThis = undefined
   }
 
   function flush () {

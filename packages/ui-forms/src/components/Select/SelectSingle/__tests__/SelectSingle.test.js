@@ -798,4 +798,4 @@ describe('<SelectSingle />', async () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

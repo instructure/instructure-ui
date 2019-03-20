@@ -30,7 +30,7 @@ import {
 export default {
   sectionProp: 'background',
   propValues: {
-    shadow: [undefined, ...Object.values(SHADOW_TYPES)], // eslint-disable-line no-undefined
+    shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
     borderRadius: [...Object.values(BORDER_RADII)]
   },

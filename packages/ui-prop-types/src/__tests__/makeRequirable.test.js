@@ -34,7 +34,7 @@ function mockValidator (props, propName, componentName) {
 
 mockValidator.isRequired = makeRequirable(mockValidator)
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('makeRequirable', () => {
   it('should validate when not required', () => {
     const props = {
@@ -95,4 +95,4 @@ describe('makeRequirable', () => {
     expect(mockValidator.isRequired(...args)).to.be.an.instanceOf(Error)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

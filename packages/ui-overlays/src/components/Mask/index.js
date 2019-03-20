@@ -55,7 +55,10 @@ class Mask extends Component {
 
   static defaultProps = {
     placement: 'center',
-    fullscreen: false
+    fullscreen: false,
+    onDismiss: undefined,
+    children: null,
+    onClick: undefined
   }
 
   componentDidMount () {

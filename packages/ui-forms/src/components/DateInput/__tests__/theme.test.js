@@ -27,7 +27,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import DateInput from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('DateInput.theme', () => {
   describe('with the canvas theme', () => {
     const variables = DateInput.generateTheme()
@@ -45,4 +44,3 @@ describe('DateInput.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

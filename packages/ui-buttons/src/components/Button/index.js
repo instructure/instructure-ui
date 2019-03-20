@@ -129,7 +129,12 @@ class Button extends Component {
     fluidWidth: false,
     buttonRef: function (button) {},
     cursor: 'pointer',
-    tabIndex: null
+    disabled: undefined,
+    onClick: undefined,
+    icon: undefined,
+    href: undefined,
+    readOnly: undefined,
+    tabIndex: undefined
   }
 
   handleClick = e => {

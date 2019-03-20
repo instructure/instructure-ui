@@ -171,6 +171,7 @@ export default class DateInput extends Component {
   }
 
   static defaultProps = {
+    disabledDateMessage: undefined,
     placement: 'bottom center',
     messages: [],
     format: 'LL',
@@ -186,7 +187,14 @@ export default class DateInput extends Component {
     readOnly: false,
     layout: 'stacked',
     disabledDaysOfWeek: [],
-    disabledDays: []
+    disabledDays: [],
+    placeholder: undefined,
+    width: undefined,
+    todayValue: undefined,
+    dateValue: undefined,
+    defaultDateValue: undefined,
+    timezone: undefined,
+    locale: undefined
   }
 
   static contextTypes = {
@@ -197,7 +205,7 @@ export default class DateInput extends Component {
   constructor (props, context) {
     super(props, context)
 
-    const initialDateValue = props.dateValue || props.defaultDateValue || undefined // eslint-disable-line no-undefined
+    const initialDateValue = props.dateValue || props.defaultDateValue || undefined
     const locale = this._locale(props, context)
     const timezone = this._timezone(props, context)
     const parsedDate = this._parseDate(initialDateValue, locale, timezone)
@@ -226,7 +234,7 @@ export default class DateInput extends Component {
     if (isUpdated) {
       this.setState((prevState) => {
         const value = valueChanged
-          ? (nextProps.dateValue != null ? nextProps.dateValue : (nextProps.defaultDateValue || undefined)) // eslint-disable-line no-undefined
+          ? (nextProps.dateValue != null ? nextProps.dateValue : (nextProps.defaultDateValue || undefined))
           : prevState.acceptedValue
         const locale = nextProps.locale || this.locale
         const timezone = nextProps.timezone || this.timezone
@@ -272,7 +280,7 @@ export default class DateInput extends Component {
   get calendarSelectedValue () {
     const { acceptedValue } = this.state
 
-    let value = acceptedValue ? this.parseDate(acceptedValue) : undefined // eslint-disable-line no-undefined
+    let value = acceptedValue ? this.parseDate(acceptedValue) : undefined
 
     if (!value || !value.isValid()) {
       value = DateTime.now(this.locale, this.timezone)
@@ -454,7 +462,7 @@ export default class DateInput extends Component {
 
       return {
         isValidOrEmpty: !rawValue,
-        acceptedValue: undefined, // eslint-disable-line no-undefined
+        acceptedValue: undefined,
         textInputValue: textInputValue || '',
         hour: 0,
         minute: 0,

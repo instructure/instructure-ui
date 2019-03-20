@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import parseCss, { ruleTypes } from '../parseCss'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('parseCss', () => {
   const cssText = `
     .Component__root {
@@ -64,4 +64,4 @@ describe('parseCss', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

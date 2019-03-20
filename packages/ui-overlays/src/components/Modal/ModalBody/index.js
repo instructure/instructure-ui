@@ -59,7 +59,10 @@ export default class ModalBody extends Component {
   static defaultProps = {
     padding: 'medium',
     as: 'div',
-    variant: 'default'
+    variant: 'default',
+    children: null,
+    elementRef: undefined,
+    overflow: undefined
   }
 
   render () {

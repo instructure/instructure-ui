@@ -177,7 +177,7 @@ class DateInput extends Component {
     * full day name for assistive technologies and the children containing the
     * abbreviation. ex. `[<AccessibleContent alt="Sunday">Sun</AccessibleContent>, ...]`
     */
-    renderWeekdayLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.node])),
+    renderWeekdayLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.node])).isRequired,
     /**
     * A button to render in the calendar navigation header. The recomendation is
     * to compose it with the [Button](#Button) component, setting the `variant`
@@ -211,6 +211,7 @@ class DateInput extends Component {
     layout: 'stacked',
     width: null,
     inputRef: (el) => {},
+    messages: undefined,
     placement: 'bottom center',
     isShowingCalendar: false,
     onRequestValidateDate: (event) => {},

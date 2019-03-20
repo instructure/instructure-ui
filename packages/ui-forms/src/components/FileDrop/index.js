@@ -164,7 +164,10 @@ export default class FileDrop extends Component {
     maxSize: Infinity,
     minSize: 0,
     readOnly: false,
-    messages: []
+    messages: [],
+    disabled: false,
+    id: undefined,
+    accept: undefined
   }
 
   constructor (props) {

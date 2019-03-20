@@ -77,6 +77,13 @@ export default class Img extends Component {
   }
 
   static defaultProps = {
+    margin: undefined,
+    overlay: undefined,
+    cover: false,
+    constrain: undefined,
+    elementRef: undefined,
+    height: undefined,
+    width: undefined,
     alt: '',
     inline: true,
     grayscale: false,
@@ -167,7 +174,7 @@ export default class Img extends Component {
             [styles['container--has-background']]: hasBackground
           })}
           style={{
-            backgroundImage: hasBackground ? `url(${src})` : undefined // eslint-disable-line no-undefined
+            backgroundImage: hasBackground ? `url(${src})` : undefined
           }}
         >
           {

@@ -91,6 +91,11 @@ export default class FocusableView extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    href: undefined,
+    width: undefined,
+    margin: undefined,
+    onClick: undefined,
     focused: false,
     shape: "rectangular",
     color: 'primary',

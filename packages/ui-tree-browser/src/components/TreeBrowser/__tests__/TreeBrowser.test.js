@@ -78,7 +78,7 @@ describe('<TreeBrowser />', async () => {
       <TreeBrowser
         collections={COLLECTIONS_DATA}
         items={ITEMS_DATA}
-        rootId={undefined /* eslint-disable-line no-undefined */}
+        rootId={undefined}
       />
     )
 

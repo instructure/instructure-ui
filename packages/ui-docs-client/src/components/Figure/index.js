@@ -61,7 +61,11 @@ export default class Figure extends Component {
 
   static defaultProps = {
     recommendation: 'none',
-    float: 'none'
+    float: 'none',
+    title: undefined,
+    caption: undefined,
+    iconTitle: undefined,
+    children: null
   }
 
   get recommendationIcon () {

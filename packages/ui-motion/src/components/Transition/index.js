@@ -119,7 +119,8 @@ export default class Transition extends Component {
     onExit: function () {},
     onExiting: function () {},
     onExited: function () {},
-    onTransition: function (toState, fromState) {}
+    onTransition: function (toState, fromState) {},
+    children: null
   }
 
   static states = BaseTransition.states

@@ -64,7 +64,10 @@ class SVGIcon extends Component {
 
   static defaultProps = {
     rotate: '0',
-    bidirectional: false
+    bidirectional: false,
+    width: undefined,
+    height: undefined,
+    size: undefined
   }
 
   render () {

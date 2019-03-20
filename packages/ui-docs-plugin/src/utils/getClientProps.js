@@ -58,7 +58,7 @@ function parseDocs (docs, library) {
 
     parsed.docs[id] = {
       ...doc,
-      // eslint-disable-next-line no-undefined
+
       methods: doc.methods ? doc.methods.filter(method => method.docblock !== null) : undefined,
       generateTheme: doc.resource && doc.resource.generateTheme
     }
@@ -106,7 +106,7 @@ function parseDocs (docs, library) {
 
 function warning (condition, message, ...args) {
   if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-    // eslint-disable-next-line no-undefined
+
     console.warn(`Warning: ${message}`, ...args)
   }
 }

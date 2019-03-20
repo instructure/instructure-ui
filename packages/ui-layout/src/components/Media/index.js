@@ -70,7 +70,12 @@ class Media extends Component {
   }
 
   static defaultProps = {
-    alignContent: 'center'
+    alignContent: 'center',
+    elementRef: undefined,
+    margin: undefined,
+    title: undefined,
+    size: undefined,
+    description: undefined
   }
 
   render () {

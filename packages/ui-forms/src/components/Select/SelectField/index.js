@@ -229,7 +229,19 @@ class SelectField extends Component {
     onKeyDown: event => {},
     onKeyUp: event => {},
     onOpen: event => {},
-    onClose: event => {}
+    onClose: event => {},
+    disabled: false,
+    readOnly: false,
+    required: false,
+    inputRef: undefined,
+    id: undefined,
+    children: null,
+    width: undefined,
+    assistiveText: undefined,
+    optionsMaxWidth: undefined,
+    layout: undefined,
+    messages: undefined,
+    placement: undefined
   }
 
   constructor (props) {

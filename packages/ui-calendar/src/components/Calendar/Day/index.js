@@ -111,9 +111,10 @@ class Day extends Component {
     isToday: false,
     isOutsideMonth: false,
     elementRef: (el) => {},
-    onClick: null,
-    onKeyDown: null,
-    as: null
+    onClick: undefined,
+    onKeyDown: undefined,
+    as: undefined,
+    children: null
   }
 
   get isDisabled () {

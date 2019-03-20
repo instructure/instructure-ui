@@ -26,7 +26,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import ${COMPONENT} from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('${COMPONENT}.theme', () => {
   describe('with the default theme', () => {
     const variables = ${COMPONENT}.generateTheme()
@@ -44,4 +43,3 @@ describe('${COMPONENT}.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

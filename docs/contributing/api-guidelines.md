@@ -11,6 +11,7 @@ order: 3
 - All components should pass through additional props down to the root DOM element using the `omitProps` utility. (e.g. `<div {...omitProps(this.props, MyComponent.propTypes)}>`). Note that in addition to omitting the props you pass in, `omitProps` will remove the `theme`, `className` and `style` props to prevent unexpected style issues.
 - Avoid props that could be computed from other props. (e.g. prefer `<Select filter={handleFilter} />` over `<Select shouldFilter filter={handleFilter} />`. Prefer determining whether filtering should happen based on the presence of the `filter` function prop.)
 - Avoid situations where certain prop combinations are not supported. Prefer splitting the component into separate components with fewer props or using `PropTypes.oneOf`.
+- Set default prop values for non-required props when possible.
 
 #### General Naming Conventions
 
@@ -22,13 +23,13 @@ order: 3
 #### Boolean props
 
 - Boolean props should be avoided when possible in favor of `PropTypes.oneOf` (a list of possible values) so that it's easier to extend later on.
-- Avoid multiple Boolean props that are mutually exclusive in favor of `PropTypes.oneOf`. For example, prefer `<Input interaction="disabled" />` over `<Input disabled />` where the `interaction` prop is `PropTypes.oneOf(['disabled', 'enabled', 'readonly'])`. Note that an input cannot be disabled and readonly, so these are mutually exclusive.
+- Avoid Boolean props that are mutually exclusive in favor of `PropTypes.oneOf` or separate components. For example, prefer `<Input interaction="disabled" />` over `<Input disabled />` where the `interaction` prop is `PropTypes.oneOf(['disabled', 'enabled', 'readonly'])`. Note that an input cannot be disabled and readonly, so these are mutually exclusive.
 - Boolean props should begin with `should`/`is`/`does`/`has`/`with`.
 - When possible, default boolean props to `false` so that they can be set to `true` without a value. (e.g. prefer `<Modal isOpen />` over `<Modal isClosed={false} />`)
 
 #### Function props
 
-- Function props that provide custom rendering should be prefixed with `render` (e.g. `renderLabel`, `renderHeader`). These props can be set to `PropTypes.oneOfType([PropTypes.node, PropTypes.elementType])` for the most flexibility.
+- Function props that provide custom rendering should be prefixed with `render` (e.g. `renderLabel`, `renderHeader`). These props can be set to `PropTypes.oneOfType([PropTypes.node, PropTypes.func])` for the most flexibility.
 - Function props that handle events should be prefixed with `on` (e.g. `onDismiss`, `onClose`, `onSelect`).
 - Function props that handle DOM events should always pass in the [React SyntheticEvent](https://reactjs.org/docs/events.html) object as the first argument and any meta data about the event as a second argument.
 - Function props that handle DOM events should be chained (e.g. `createChainedFunction(this.props.onFocus, this.handleFocus)`) so that consumers are able to attach their own handlers in addition to the built in handlers.

@@ -45,6 +45,10 @@ export default class PaginationArrowButton extends Component {
     label: PropTypes.oneOfType([PropTypes.string, PropTypes.node]).isRequired
   }
 
+  static defaultProps = {
+    direction: undefined
+  }
+
   render() {
     const { label, direction, ...props } = this.props
     const Icon = direction === 'prev' ? IconStart : IconEnd

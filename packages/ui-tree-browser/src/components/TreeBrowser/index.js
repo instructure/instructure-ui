@@ -109,7 +109,10 @@ export default class TreeBrowser extends Component {
     selectionType: 'none',
     onItemClick: function (item) {},
     onCollectionClick: function (id, collection) {},
-    onCollectionToggle: function (collection) {}
+    onCollectionToggle: function (collection) {},
+    rootId: undefined,
+    expanded: undefined,
+    treeLabel: undefined
   }
 
   constructor (props) {

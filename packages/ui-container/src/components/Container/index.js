@@ -88,7 +88,17 @@ class Container extends Component {
   }
 
   static defaultProps = {
-    display: null
+    display: undefined,
+    withShadow: false,
+    withBorder: false,
+    visualDebug: false,
+    padding: undefined,
+    elementRef: undefined,
+    margin: undefined,
+    size: undefined,
+    textAlign: undefined,
+    children: null,
+    as: undefined
   }
 
   renderSpacingStyles (spacingFromProps, spacingFromTheme) {

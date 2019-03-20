@@ -60,7 +60,9 @@ export default class ApplyTextDirection extends Component {
   }
 
   static defaultProps = {
-    as: 'span'
+    dir: undefined,
+    as: 'span',
+    children: null
   }
 
   static childContextTypes = TextDirectionContextTypes

@@ -38,6 +38,10 @@ export default class Guidelines extends Component {
     children: PropTypes.node
   }
 
+  static defaultProps = {
+    children: null
+  }
+
   render () {
     return (
       <Flex

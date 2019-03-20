@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import transformCss from '../transformCss'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('transformCss', () => {
   const cssText = `
     .Component__root {
@@ -57,4 +57,4 @@ describe('transformCss', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

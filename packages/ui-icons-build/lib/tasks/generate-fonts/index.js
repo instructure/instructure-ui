@@ -109,13 +109,13 @@ gulp.task('generate-font-index-files', (cb) => {
             const data = Object.assign({ variant }, GLYPHS[glyph][variant])
             return {
               name: variant,
-              json: JSON.stringify(data, undefined, 2) // eslint-disable-line no-undefined
+              json: JSON.stringify(data, undefined, 2)
             }
           })
       }
     })
   return gulp.src(require.resolve('./index.ejs'))
-    .pipe(consolidate('lodash', { glyphs: glyphs, json: JSON.stringify(GLYPHS, undefined, 2) })) // eslint-disable-line no-undefined
+    .pipe(consolidate('lodash', { glyphs: glyphs, json: JSON.stringify(GLYPHS, undefined, 2) }))
     .pipe(rename({ basename: 'index', extname: '.js' }))
     .on('error', handleErrors)
     .pipe(gulp.dest(config.fonts.destination))

@@ -93,6 +93,8 @@ class Navigation extends Component {
     defaultMinimized: false,
     onMinimized: function (event, minimized) {},
     onClick: function (e) {},
+    href: undefined,
+    minimized: undefined
   }
 
   constructor (props) {

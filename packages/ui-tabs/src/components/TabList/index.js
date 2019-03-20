@@ -97,7 +97,14 @@ export default class TabList extends Component {
   static defaultProps = {
     variant: 'simple',
     focus: false,
-    defaultSelectedIndex: 0
+    defaultSelectedIndex: 0,
+    padding: undefined,
+    textAlign: undefined,
+    size: undefined,
+    selectedIndex: undefined,
+    onChange: undefined,
+    margin: undefined,
+    children: null
   }
 
   constructor (props) {

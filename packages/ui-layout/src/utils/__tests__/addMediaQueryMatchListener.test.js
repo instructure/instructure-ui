@@ -26,7 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 import addMediaQueryMatchListener from '../addMediaQueryMatchListener'
 import MediaQueryListProxy from './__testfixtures__/MediaQueryListProxy'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('@addMediaQueryMatchListener', () => {
   let matches = []
   let resizeWindowFuncs = []
@@ -145,4 +145,4 @@ describe('@addMediaQueryMatchListener', () => {
     expect(matches.includes('six')).to.be.true()
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

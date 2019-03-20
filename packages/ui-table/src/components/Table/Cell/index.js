@@ -47,6 +47,13 @@ class Cell extends Component {
     header: PropTypes.node,
   }
 
+  static defaultProps = {
+    children: null,
+    size: 'medium',
+    colAlign: 'start',
+    header: undefined
+  }
+
   render () {
     const { children, size, colAlign } = this.props
 

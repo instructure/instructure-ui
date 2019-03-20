@@ -46,7 +46,9 @@ class AccessibleContent extends Component {
   }
 
   static defaultProps = {
-    as: 'span'
+    alt: undefined,
+    as: 'span',
+    children: null
   }
 
   render () {

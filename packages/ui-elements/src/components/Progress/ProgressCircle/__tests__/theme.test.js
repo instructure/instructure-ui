@@ -26,7 +26,6 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import ProgressCircle from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('ProgressCircle.theme', () => {
   describe('with the default theme', () => {
     const variables = ProgressCircle.generateTheme()
@@ -50,4 +49,3 @@ describe('ProgressCircle.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

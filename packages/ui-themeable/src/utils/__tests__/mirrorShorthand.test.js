@@ -24,7 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 import { mirrorShorthandCorners, mirrorShorthandEdges } from '../mirrorShorthand'
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('convertRtlShorthandEdges', () => {
   it('should not modify 1 value syntax', () => {
     const value = 'x-small'
@@ -72,4 +72,4 @@ describe('convertRtlShorthandCorners', () => {
     expect(result).to.equal('x-small auto x-large none')
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

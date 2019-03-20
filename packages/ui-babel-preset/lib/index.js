@@ -44,7 +44,8 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
       helpers: true,
       useESModules: opts.esModules
     }],
-    require('@babel/plugin-syntax-dynamic-import').default
+    require('@babel/plugin-syntax-dynamic-import').default,
+    require('babel-plugin-transform-undefined-to-void')
   ]
 
   if (process.env.NODE_ENV === 'production') {

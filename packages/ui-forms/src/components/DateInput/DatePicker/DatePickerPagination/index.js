@@ -49,6 +49,10 @@ export default class DatePickerPagination extends Component {
     children: PropTypes.node
   }
 
+  static defaultProps = {
+    children: null
+  }
+
   handlePrevClick = (e) => {
     this.props.onPrev(e)
   }

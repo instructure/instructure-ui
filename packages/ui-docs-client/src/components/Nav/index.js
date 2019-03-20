@@ -66,7 +66,8 @@ export default class Nav extends Component {
   static defaultProps = {
     docs: [],
     themes: [],
-    icons: {}
+    icons: {},
+    selected: undefined
   }
 
   setExpandedSections = (expanded, sections) => {

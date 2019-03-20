@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import { camelize, pascalize } from '../convertCase'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('convertCase', () => {
   describe('camelize', () => {
     it('handles hyphenated strings', () => {
@@ -65,4 +65,4 @@ describe('convertCase', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

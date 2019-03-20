@@ -25,10 +25,10 @@
 import { expect, spy } from '@instructure/ui-test-utils'
 import createChainedFunction from '../createChainedFunction'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('createChainedFunction', () => {
   it('should return null if no function provided', () => {
-    expect(createChainedFunction(null, undefined)).to.equal(null) // eslint-disable-line no-undefined
+    expect(createChainedFunction(null, undefined)).to.equal(null)
   })
 
   it('should return a function', () => {
@@ -52,4 +52,3 @@ describe('createChainedFunction', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

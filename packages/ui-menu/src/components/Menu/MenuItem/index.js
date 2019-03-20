@@ -91,7 +91,17 @@ class MenuItem extends Component {
   static defaultProps = {
     type: 'button',
     disabled: false,
-    onSelect: function (e, value, selected, item) {}
+    onSelect: function (e, value, selected, item) {},
+    defaultSelected: undefined,
+    selected: undefined,
+    onClick: undefined,
+    onKeyDown: undefined,
+    onKeyUp: undefined,
+    onMouseOver: undefined,
+    controls: undefined,
+    as: undefined,
+    value: undefined,
+    href: undefined
   }
 
   static contextTypes = MenuContextTypes

@@ -21,9 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-require('@instructure/ui-themes/lib/canvas/high-contrast')
 require('@instructure/ui-polyfill-loader!')
+require('@instructure/ui-themes/lib/canvas/high-contrast')
 
 const theme = require('@instructure/ui-themes/lib/canvas/base').default
 theme.use({ overrides: { transitions: { duration: '1ms' } } })

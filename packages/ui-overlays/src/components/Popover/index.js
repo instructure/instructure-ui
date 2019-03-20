@@ -327,7 +327,12 @@ class Popover extends Component {
     insertAt: 'bottom',
     liveRegion: null,
     positionTarget: null,
-    alignArrow: false
+    alignArrow: false,
+    id: undefined,
+    show: undefined,
+    closeButtonRef: undefined,
+    closeButtonLabel: undefined,
+    onKeyDown: undefined
   }
 
   constructor (props) {

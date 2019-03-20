@@ -50,6 +50,13 @@ class Body extends Component {
     colAlign: PropTypes.oneOf(['start', 'center', 'end']),
   }
 
+  static defaultProps = {
+    children: null,
+    size: 'medium',
+    hover: false,
+    colAlign: 'start'
+  }
+
   render () {
     const { children, size, hover, colAlign } = this.props
 

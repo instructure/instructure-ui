@@ -41,7 +41,7 @@ const renderBeforeInput = () => {
   )
 
 }
-/* eslint-disable no-undefined */
+
 export default {
  maxExamplesPerPage: 50,
  propValues: {
@@ -69,5 +69,3 @@ export default {
     (props.renderAfterInput && props.width)
  }
 }
-
-/* eslint-enable no-undefined */

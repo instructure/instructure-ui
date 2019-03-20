@@ -46,6 +46,12 @@ class RowHeader extends Component {
     colAlign: PropTypes.oneOf(['start', 'center', 'end']),
   }
 
+  static defaultProps = {
+    children: null,
+    size: 'medium',
+    colAlign: 'start'
+  }
+
   render () {
     const { children, size, colAlign } = this.props
 

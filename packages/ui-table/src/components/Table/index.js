@@ -88,10 +88,13 @@ class Table extends Component {
   }
 
   static defaultProps = {
+    children: null,
     hover: false,
     size: 'medium',
     layout: 'auto',
     colAlign: 'start',
+    margin: 'none',
+    elementRef: undefined
   }
 
   static Head = Head

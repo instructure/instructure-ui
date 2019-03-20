@@ -25,7 +25,7 @@
 import { expect, stub } from '@instructure/ui-test-utils'
 import Locale from '../Locale'
 import Decimal from '../Decimal'
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('Decimal', () => {
   const uniqueDelimiters = {
     bg: Decimal.getDelimiters('bg'),
@@ -62,7 +62,7 @@ describe('Decimal', () => {
   describe('#parse', () => {
     it('returns NaN when input is undefined', () => {
       expect(Decimal.parse().isNaN()).to.be.true()
-      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true() // eslint-disable-line no-undefined
+      expect(Decimal.parse(undefined, 'pl').isNaN()).to.be.true()
     })
 
     it('returns 0 when input is null', () => {
@@ -234,7 +234,7 @@ describe('Decimal', () => {
 
     it('returns empty string if the number given is undefined', () => {
       expect(Decimal.toLocaleString()).to.equal('')
-      expect(Decimal.toLocaleString(undefined, 'de')).to.equal('') // eslint-disable-line no-undefined
+      expect(Decimal.toLocaleString(undefined, 'de')).to.equal('')
     })
 
     describe('correctly converts all floating numbers', () => {
@@ -657,4 +657,3 @@ function expectResult (fn, args, method, expectedResult) {
       .to.equal(expectedResult)
   })
 }
-/* eslint-enable mocha/no-synchronous-tests */

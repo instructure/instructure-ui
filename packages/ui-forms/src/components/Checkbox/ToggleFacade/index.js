@@ -51,7 +51,9 @@ export default class ToggleFacade extends Component {
   static defaultProps = {
     checked: false,
     focused: false,
-    size: 'medium'
+    size: 'medium',
+    disabled: false,
+    readOnly: false
   }
 
   renderIcon () {

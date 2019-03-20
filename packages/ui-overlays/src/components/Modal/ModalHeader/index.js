@@ -48,6 +48,7 @@ export default class ModalHeader extends Component {
   }
 
   static defaultProps = {
+    children: null,
     variant: 'default'
   }
 

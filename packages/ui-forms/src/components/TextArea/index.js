@@ -130,7 +130,16 @@ class TextArea extends Component {
     disabled: false,
     readOnly: false,
     textareaRef: function (textarea) {},
-    layout: 'stacked'
+    layout: 'stacked',
+    id: undefined,
+    value: undefined,
+    defaultValue: undefined,
+    onChange: undefined,
+    required: false,
+    placeholder: undefined,
+    width: undefined,
+    height: undefined,
+    maxHeight: undefined
   }
 
   constructor () {

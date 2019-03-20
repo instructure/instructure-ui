@@ -67,6 +67,10 @@ export default class TabPanel extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    maxHeight: undefined,
+    disabled: false,
+    textAlign: undefined,
     id: null,
     variant: 'simple',
     labelledBy: null,

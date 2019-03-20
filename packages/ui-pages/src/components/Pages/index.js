@@ -77,7 +77,8 @@ class Pages extends Component {
     children: null,
     defaultPageIndex: null,
     activePageIndex: 0,
-    onPageIndexChange: function () {}
+    onPageIndexChange: function () {},
+    margin: undefined
   }
 
   static childContextTypes = {

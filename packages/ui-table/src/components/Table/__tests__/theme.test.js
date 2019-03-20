@@ -27,7 +27,7 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Table from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('Table.theme', () => {
   describe('with the default theme', () => {
     const variables = Table.generateTheme()
@@ -45,4 +45,4 @@ describe('Table.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

@@ -88,7 +88,9 @@ class Rating extends Component {
     formatValueText: (filled, iconCount) => `${filled} / ${iconCount}`,
     iconCount: 3,
     size: 'medium',
-    valueNow: 0
+    valueNow: 0,
+    margin: undefined,
+    valueMax: undefined
   }
 
   get filled () {

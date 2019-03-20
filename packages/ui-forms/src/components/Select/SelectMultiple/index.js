@@ -153,6 +153,16 @@ class SelectMultiple extends Component {
     onKeyDown: (event) => {},
     closeOnSelect: true,
     allowCustom: false,
+    readOnly: false,
+    disabled: false,
+    filter: undefined,
+    optionsMaxWidth: undefined,
+    size: undefined,
+    name: undefined,
+    editable: false,
+    selectedOption: undefined,
+    defaultSelectedOption: undefined,
+    options: undefined
   }
 
   constructor (props) {

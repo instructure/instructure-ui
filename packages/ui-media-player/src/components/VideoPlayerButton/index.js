@@ -50,7 +50,8 @@ export default class VideoPlayerButton extends Component {
 
   static defaultProps = {
     forwardRef: (ref) => {},
-    onClick: (e) => {}
+    onClick: (e) => {},
+    children: null
   }
 
   handleKeyDown = (e) => {

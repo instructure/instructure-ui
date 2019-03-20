@@ -78,6 +78,7 @@ class VideoPlayer extends Component {
   }
 
   static defaultProps = {
+    sources: undefined,
     controls: (VPC) => {
       return (
         <VPC>

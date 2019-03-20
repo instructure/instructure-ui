@@ -80,6 +80,16 @@ export default class ListItem extends Component {
     elementRef: PropTypes.func
   }
 
+  static defaultProps = {
+    padding: undefined,
+    margin: undefined,
+    spacing: undefined,
+    variant: undefined,
+    delimiter: undefined,
+    size: undefined,
+    elementRef: undefined
+  }
+
   render () {
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, ListItem.propTypes),

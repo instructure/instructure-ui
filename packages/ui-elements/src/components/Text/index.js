@@ -95,7 +95,14 @@ export default class Text extends Component {
   static defaultProps = {
     as: 'span',
     size: 'medium',
-    letterSpacing: 'normal'
+    letterSpacing: 'normal',
+    children: null,
+    elementRef: undefined,
+    color: undefined,
+    transform: undefined,
+    lineHeight: undefined,
+    fontStyle: undefined,
+    weight: undefined
   }
 
   render() {

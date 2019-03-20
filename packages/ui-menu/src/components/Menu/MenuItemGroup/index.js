@@ -87,6 +87,12 @@ export default class MenuItemGroup extends Component {
   }
 
   static defaultProps = {
+    onMouseOver: undefined,
+    disabled: false,
+    controls: undefined,
+    onKeyDown: undefined,
+    selected: undefined,
+    children: null,
     isTabbable: false,
     allowMultiple: false,
     defaultSelected: [],

@@ -53,7 +53,8 @@ class Volume extends Component {
   }
 
   static defaultProps = {
-    forwardRef: (ref) => {}
+    forwardRef: (ref) => {},
+    children: null
   }
 
   config (muted) {

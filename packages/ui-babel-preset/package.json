@@ -37,6 +37,7 @@
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
+    "babel-plugin-transform-undefined-to-void": "^6.9.4",
     "core-js": "^3.0.0"
   },
   "publishConfig": {

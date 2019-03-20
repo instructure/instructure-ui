@@ -56,6 +56,7 @@ export default class Tab extends Component {
   }
 
   static defaultProps = {
+    children: null,
     variant: 'simple',
     disabled: false,
     selected: false,

@@ -27,7 +27,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import MenuItemGroup from '../index'
 
-/*  eslint-disable mocha/no-synchronous-tests */
 describe('MenuItemGroup.theme', () => {
   describe('with the canvas theme', () => {
     const variables = MenuItemGroup.generateTheme()
@@ -45,4 +44,3 @@ describe('MenuItemGroup.theme', () => {
     })
   })
 })
-/*  eslint-enable mocha/no-synchronous-tests */

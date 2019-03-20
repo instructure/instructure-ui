@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import parseUnit from '../parseUnit'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('parseUnit', () => {
   it('unitless', () => {
     expect(parseUnit('50')[0]).to.equal(50)
@@ -79,4 +79,4 @@ describe('parseUnit', () => {
     expect(parseUnit('70vmin')[1]).to.equal('vmin')
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

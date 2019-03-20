@@ -66,7 +66,10 @@ class Expandable extends Component {
 
    static defaultProps = {
      defaultExpanded: false,
-     onToggle: function (event, expanded) {}
+     onToggle: function (event, expanded) {},
+     expanded: undefined,
+     children: null,
+     render: undefined
    }
 
    constructor (props) {

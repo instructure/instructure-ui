@@ -70,6 +70,11 @@ export default class FormFieldGroup extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    layout: undefined,
+    startAt: undefined,
+    messages: undefined,
+    messagesId: undefined,
     as: 'fieldset',
     disabled: false,
     rowSpacing: 'medium',

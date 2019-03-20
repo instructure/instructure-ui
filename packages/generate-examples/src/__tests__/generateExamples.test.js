@@ -119,7 +119,6 @@ const verifyMaxExamplesPerPage = (pages, max) => {
   return result
 }
 
-/* eslint-disable mocha/no-synchronous-tests */
 
 describe('generateExamples', () => {
   describe('sections', () => {
@@ -504,5 +503,3 @@ describe('generateExamples', () => {
     })
   })
 })
-
-/* eslint-enable mocha/no-synchronous-tests */

@@ -229,7 +229,9 @@ export default class Modal extends Component {
     defaultFocusElement: null,
     children: null,
     constrain: 'window',
-    overflow: 'scroll'
+    overflow: 'scroll',
+    closeButtonLabel: undefined,
+    closeButtonRef: undefined
   }
 
   constructor (props) {

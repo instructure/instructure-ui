@@ -150,7 +150,16 @@ class NumberInput extends Component {
     onChange: function (event, value, normalizedValue) {},
     onKeyDown: function (event) {},
     onFocus: function (event) {},
-    onBlur: function (event) {}
+    onBlur: function (event) {},
+    value: undefined,
+    defaultValue: undefined,
+    required: false,
+    placeholder: undefined,
+    locale: undefined,
+    width: undefined,
+    significantDigits: undefined,
+    decimalPrecision: undefined,
+    id: undefined
   }
 
   state = {

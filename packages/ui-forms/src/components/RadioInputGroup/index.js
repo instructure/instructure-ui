@@ -92,7 +92,12 @@ export default class RadioInputGroup extends Component {
     variant: 'simple',
     size: 'medium',
     layout: 'stacked',
-    readOnly: false
+    readOnly: false,
+    defaultValue: undefined,
+    value: undefined,
+    children: null,
+    messages: undefined,
+    onChange: undefined
   }
 
   constructor (props) {
@@ -184,7 +189,7 @@ export default class RadioInputGroup extends Component {
         vAlign={(variant === 'toggle') ? 'middle' : 'top'}
         rowSpacing="small"
         colSpacing={(variant === 'toggle') ? 'none' : 'small'} // keep toggles close together
-        startAt={(variant === 'toggle') ? 'small' : undefined} // eslint-disable-line no-undefined
+        startAt={(variant === 'toggle') ? 'small' : undefined}
         messagesId={this._messagesId}
       >
         {this.renderChildren()}

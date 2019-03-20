@@ -80,6 +80,9 @@ export default class List extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    itemSpacing: undefined,
+    elementRef: undefined,
     as: 'ul',
     margin: 'none',
     variant: 'default',

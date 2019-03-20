@@ -28,7 +28,7 @@ import mirrorPlacement, {
   executeMirrorFunction
 } from '../mirrorPlacement'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('@mirrorPlacement', () => {
   describe('executeMirrorFunction', () => {
     const mirrorFunction = (first, second) => {
@@ -89,4 +89,4 @@ describe('@mirrorPlacement', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

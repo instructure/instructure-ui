@@ -151,7 +151,9 @@ class Position extends Component {
     over: false,
     onPositioned: position => {},
     onPositionChanged: position => {},
-    constrain: 'window'
+    constrain: 'window',
+    children: null,
+    id: undefined
   }
 
   constructor (props) {

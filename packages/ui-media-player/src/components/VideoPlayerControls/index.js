@@ -52,7 +52,8 @@ class VideoPlayerControls extends Component {
   }
 
   static defaultProps = {
-    showControls: false
+    showControls: false,
+    children: null
   }
 
   static CustomControls = (props) => (

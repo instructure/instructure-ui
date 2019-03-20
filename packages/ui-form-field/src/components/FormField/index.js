@@ -62,7 +62,11 @@ export default class FormField extends Component {
     inline: false,
     layout: 'stacked',
     labelAlign: 'end',
-    vAlign: 'middle'
+    vAlign: 'middle',
+    messages: undefined,
+    messagesId: undefined,
+    children: null,
+    width: undefined
   }
 
   render () {

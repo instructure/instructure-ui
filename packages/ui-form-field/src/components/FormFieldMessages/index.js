@@ -64,6 +64,10 @@ export default class FormFieldMessages extends Component {
     messages: PropTypes.arrayOf(FormPropTypes.message)
   }
 
+  static defaultProps = {
+    messages: undefined
+  }
+
   render () {
     const {messages} = this.props
     return messages && messages.length > 0 ? (

@@ -75,7 +75,11 @@ class RadioInput extends Component {
     disabled: false,
     inline: false,
     context: 'success',
-    readOnly: false
+    readOnly: false,
+    checked: undefined,
+    id: undefined,
+    name: undefined,
+    value: undefined
   }
 
   constructor (props) {

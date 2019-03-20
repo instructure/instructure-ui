@@ -109,6 +109,7 @@ class ToggleGroup extends Component {
   }
 
   static defaultProps = {
+    expanded: undefined,
     size: 'medium',
     icon: IconArrowOpenEnd,
     iconExpanded: IconArrowOpenDown,

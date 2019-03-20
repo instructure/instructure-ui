@@ -52,3 +52,7 @@ export default function IconArrowDown ({ className }) {
 IconArrowDown.propTypes = {
   className: PropTypes.string
 }
+
+IconArrowDown.defaultProps = {
+  className: undefined
+}

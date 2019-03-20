@@ -52,6 +52,7 @@ export default class InlineSVG extends Component {
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     inline: PropTypes.bool,
     color: PropTypes.oneOf([
+      'inherit',
       'primary',
       'secondary',
       'primary-inverse',
@@ -68,7 +69,11 @@ export default class InlineSVG extends Component {
     src: '',
     title: '',
     description: '',
-    inline: true
+    inline: true,
+    children: null,
+    width: undefined,
+    height: undefined,
+    color: 'inherit'
   }
 
   static prepareSrc = src => {
@@ -176,7 +181,7 @@ export default class InlineSVG extends Component {
           [styles.inline]: this.props.inline,
           [styles.block]: !this.props.inline,
           [props.className]: props.className,
-          [styles[`color--${color}`]]: color
+          [styles[`color--${color}`]]: color !== 'inherit'
         })}
       >
         {this.renderTitle()}

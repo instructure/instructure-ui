@@ -43,7 +43,8 @@ class PresentationContent extends Component {
   }
 
   static defaultProps = {
-    as: 'span'
+    as: 'span',
+    children: null
   }
 
   render () {

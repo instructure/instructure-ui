@@ -159,7 +159,6 @@ describe('<Link />', async () => {
     describe('with `onClick`', async () => {
       let onClick
 
-      // eslint-disable-next-line mocha/no-synchronous-tests
       before(() => {
         onClick = Function.prototype
       })

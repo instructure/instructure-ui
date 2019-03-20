@@ -62,6 +62,11 @@ class Provider extends Component {
     value: PropTypes.shape(VideoPlayerState)
   }
 
+  static defaultProps = {
+    children: null,
+    value: undefined
+  }
+
   static childContextTypes = VideoPlayerState
 
   getChildContext() {

@@ -136,6 +136,8 @@ class DrawerTray extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    render: undefined,
     shouldContainFocus: true,
     shouldCloseOnEscape: true,
     shouldCloseOnDocumentClick: true,
@@ -152,7 +154,12 @@ class DrawerTray extends Component {
     onExit: () => {},
     onExiting: () => {},
     onExited: () => {},
-    contentRef: (node) => {}
+    contentRef: (node) => {},
+    onClose: undefined,
+    onDismiss: undefined,
+    defaultFocusElement: undefined,
+    liveRegion: undefined,
+    onTransition: undefined
   }
 
   static contextTypes = {

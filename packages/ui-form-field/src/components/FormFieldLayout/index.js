@@ -81,6 +81,11 @@ export default class FormFieldLayout extends Component {
   }
 
   static defaultProps = {
+    id: undefined,
+    width: undefined,
+    messages: undefined,
+    messagesId: undefined,
+    children: null,
     inline: false,
     layout: 'stacked',
     as: 'label',

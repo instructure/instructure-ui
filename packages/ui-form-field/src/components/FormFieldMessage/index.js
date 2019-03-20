@@ -55,7 +55,8 @@ export default class FormFieldMessage extends Component {
   }
 
   static defaultProps = {
-    variant: 'hint'
+    variant: 'hint',
+    children: null
   }
 
   render () {

@@ -62,7 +62,8 @@ export default class Grid extends Component {
     hAlign: 'start',
     startAt: 'small',
     vAlign: 'top',
-    visualDebug: false
+    visualDebug: false,
+    children: null
   };
 
   startAtClass () {

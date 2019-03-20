@@ -88,13 +88,22 @@ class Select extends Component {
   }
 
   static defaultProps = {
+    required: false,
+    width: undefined,
     inline: false,
     type: 'text',
     size: 'medium',
     layout: 'stacked',
     messages: [],
     disabled: false,
-    selectRef: function (select) {}
+    selectRef: function (select) {},
+    children: null,
+    id: undefined,
+    value: undefined,
+    defaultValue: undefined,
+    onChange: undefined,
+    onBlur: undefined,
+    onKeyDown: undefined
   }
 
   constructor (props) {

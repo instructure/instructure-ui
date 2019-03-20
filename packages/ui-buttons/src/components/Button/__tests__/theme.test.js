@@ -26,7 +26,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import { expect } from '@instructure/ui-test-utils'
 import Button from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('Button.theme', () => {
   describe('with the default theme', () => {
     const variables = Button.generateTheme()
@@ -126,4 +125,3 @@ describe('Button.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

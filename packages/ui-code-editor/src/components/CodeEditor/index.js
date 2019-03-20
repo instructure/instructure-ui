@@ -81,7 +81,11 @@ export default class CodeEditor extends Component {
     readOnly: false,
     options: {
       styleActiveLine: true
-    }
+    },
+    onChange: undefined,
+    attachment: undefined,
+    defaultValue: undefined,
+    value: undefined
   }
 
   constructor (props) {

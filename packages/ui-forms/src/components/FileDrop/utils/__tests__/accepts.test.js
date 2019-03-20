@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import accepts from '../accepts'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('accepts', () => {
   const dropImage = {
     lastModified: 1489419040000,
@@ -82,4 +82,4 @@ describe('accepts', () => {
     expect(accepts(dropImage, 'jpg, png')).to.be.true()
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

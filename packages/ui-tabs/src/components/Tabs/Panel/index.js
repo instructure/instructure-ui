@@ -68,7 +68,12 @@ export default class Panel extends Component {
   }
 
   static defaultProps = {
-    id: null,
+    children: null,
+    id: undefined,
+    disabled: false,
+    maxHeight: undefined,
+    minHeight: undefined,
+    textAlign: 'start',
     variant: 'default',
     labelledBy: null,
     selected: false,

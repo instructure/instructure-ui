@@ -130,7 +130,13 @@ class SelectOptionsList extends Component {
     onHighlightOption: event => {},
     onSelect: (event, selectedOption) => {},
     onStaticClick: event => {},
-    disabled: false
+    disabled: false,
+    optionsId: undefined,
+    highlightedIndex: undefined,
+    maxWidth: undefined,
+    onKeyDown: undefined,
+    onKeyUp: undefined,
+    onBlur: undefined
   }
 
   optionHeight = 5

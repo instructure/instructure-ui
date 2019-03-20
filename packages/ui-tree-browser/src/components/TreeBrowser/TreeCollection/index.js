@@ -77,7 +77,16 @@ export default class TreeCollection extends Component {
     variant: 'folderTree',
     onItemClick: function () {},
     onCollectionClick: function () {},
-    onKeyDown: function () {}
+    onKeyDown: function () {},
+    id: undefined,
+    name: undefined,
+    descriptor: undefined,
+    collectionIconExpanded: undefined,
+    collectionIcon: undefined,
+    itemIcon: undefined,
+    numChildren: undefined,
+    level: undefined,
+    position: undefined
   }
 
   constructor (props) {

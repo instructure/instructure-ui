@@ -27,7 +27,7 @@ import generateMessages from '../../../__tests__/generateMessages'
 export default {
   maxExamplesPerPage: 50,
   propValues: {
-    defaultValue: [undefined, '1986-05-17T18:00:00.000Z'], // eslint-disable-line no-undefined
+    defaultValue: [undefined, '1986-05-17T18:00:00.000Z'],
     messages: generateMessages()
   },
   getComponentProps: (props) => {

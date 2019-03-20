@@ -807,4 +807,4 @@ describe('<SelectMultiple />', async () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

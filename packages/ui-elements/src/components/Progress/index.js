@@ -93,7 +93,9 @@ class Progress extends Component {
     valueNow: 0,
     variant: 'bar',
     successColor: true,
-    elementRef: (el) => {}
+    elementRef: (el) => {},
+    formatDisplayedValue: undefined,
+    margin: undefined
   }
 
   render () {

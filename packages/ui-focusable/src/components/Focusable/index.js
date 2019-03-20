@@ -51,6 +51,11 @@ class Focusable extends Component {
     render: PropTypes.func
   }
 
+  static defaultProps = {
+    children: null,
+    render: undefined
+  }
+
   static inputTypes = {
     text: true,
     search: true,

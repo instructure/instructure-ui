@@ -78,6 +78,11 @@ export default class Avatar extends Component {
   }
 
   static defaultProps = {
+    src: undefined,
+    alt: undefined,
+    margin: undefined,
+    as: undefined,
+    elementRef: undefined,
     size: 'medium',
     variant: 'circle',
     inline: true,
@@ -141,7 +146,7 @@ export default class Avatar extends Component {
       <View
         {...passthroughProps}
         style={{
-          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined // eslint-disable-line no-undefined
+          backgroundImage: this.state.loaded ? `url('${this.props.src}')` : undefined
         }}
         className={classnames({
           [styles.root]: true,

@@ -93,7 +93,15 @@ class ContextBox extends Component {
     placement: 'center end',
     withArrow: true,
     withBorder: true,
-    withShadow: true
+    withShadow: true,
+    size: undefined,
+    padding: undefined,
+    margin: undefined,
+    textAlign: undefined,
+    positionTop: undefined,
+    positionStart: undefined,
+    arrowOffsetTop: undefined,
+    arrowOffsetStart: undefined
   }
 
   render () {

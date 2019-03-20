@@ -60,7 +60,8 @@ export default class Page extends Component {
   static defaultProps = {
     defaultFocusElement: null,
     padding: 'small',
-    textAlign: 'start'
+    textAlign: 'start',
+    children: null
   }
 
   static contextTypes = {

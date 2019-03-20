@@ -104,7 +104,19 @@ class Checkbox extends Component {
     variant: 'simple',
     disabled: false,
     inline: false,
-    indeterminate: false
+    indeterminate: false,
+    readOnly: false,
+    onChange: undefined,
+    onKeyDown: undefined,
+    onFocus: undefined,
+    onBlur: undefined,
+    onMouseOut: undefined,
+    onMouseOver: undefined,
+    checked: undefined,
+    defaultChecked: undefined,
+    messages: undefined,
+    id: undefined,
+    value: undefined
   }
 
   constructor (props) {

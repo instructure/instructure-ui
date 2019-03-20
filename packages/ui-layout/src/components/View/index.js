@@ -143,12 +143,31 @@ class View extends Component {
     // compatibility with Container we are leaving it undefined here. Otherwise
     // it modifies behavior for consuming components because of the logic around
     // default props in getElementType
+    as: undefined,
     // - `textAlign` is undefined by default so that View can inherit text alignment
     // from parents
+    textAlign: undefined,
     // - Any props used to set inline styles should be undefined so that they
     // don't break consuming components' CSS
     overflowX: 'visible',
-    overflowY: 'visible'
+    overflowY: 'visible',
+    shadow: undefined,
+    stacking: undefined,
+    debug: false,
+    cursor: undefined,
+    borderWidth: undefined,
+    borderRadius: undefined,
+    margin: undefined,
+    padding: undefined,
+    elementRef: undefined,
+    background: undefined,
+    children: null,
+    width: undefined,
+    height: undefined,
+    maxWidth: undefined,
+    maxHeight: undefined,
+    minWidth: undefined,
+    minHeight: undefined
   }
 
   get hasBorder () {

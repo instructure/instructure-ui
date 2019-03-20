@@ -114,6 +114,11 @@ export default class Pagination extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    label: undefined,
+    labelNext: undefined,
+    labelPrev: undefined,
+    margin: undefined,
     disabled: false,
     variant: 'full',
     as: 'div',

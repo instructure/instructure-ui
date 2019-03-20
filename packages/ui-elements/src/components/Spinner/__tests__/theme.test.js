@@ -26,7 +26,6 @@ import { expect } from '@instructure/ui-test-utils'
 import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 import Spinner from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('Spinner.theme', () => {
   describe('with the default theme', () => {
     const variables = Spinner.generateTheme()
@@ -64,4 +63,3 @@ describe('Spinner.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

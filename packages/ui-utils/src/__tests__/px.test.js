@@ -27,7 +27,7 @@ import { expect } from '@instructure/ui-test-utils'
 import px from '../px'
 import getFontSize from '../dom/getFontSize'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('px', () => {
   let node
 
@@ -58,4 +58,4 @@ describe('px', () => {
     expect(px('4')).to.equal(4)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

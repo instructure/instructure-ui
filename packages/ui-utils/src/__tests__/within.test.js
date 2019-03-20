@@ -26,7 +26,7 @@ import { expect } from '@instructure/ui-test-utils'
 
 import within from '../within'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('within', () => {
   it('returns true when values are within range', () => {
     expect(within(10, 8, 2)).to.be.true()
@@ -43,4 +43,4 @@ describe('within', () => {
     expect(within(-2, -1.5, 0.4)).to.be.false()
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

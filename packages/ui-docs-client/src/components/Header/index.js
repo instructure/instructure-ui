@@ -40,6 +40,10 @@ export default class Header extends Component {
     version: PropTypes.string
   }
 
+  static defaultProps = {
+    version: undefined
+  }
+
   render () {
     return (
       <div className={styles.root}>

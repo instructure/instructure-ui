@@ -69,7 +69,9 @@ export default class Breadcrumb extends Component {
   }
 
   static defaultProps = {
-    size: 'medium'
+    size: 'medium',
+    children: null,
+    margin: undefined
   }
 
   renderChildren () {

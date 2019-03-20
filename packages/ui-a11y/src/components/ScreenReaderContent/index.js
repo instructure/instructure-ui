@@ -50,7 +50,8 @@ class ScreenReaderContent extends Component {
   }
 
   static defaultProps = {
-    as: 'span'
+    as: 'span',
+    children: null
   }
 
   render () {

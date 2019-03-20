@@ -25,7 +25,7 @@
 import { expect } from '@instructure/ui-test-utils'
 import applyCustomMediaToCss from '../applyCustomMediaToCss'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('applyCustomMediaToCss', () => {
   it('applies custom media values to css text', () => {
     const cssText = `
@@ -55,4 +55,4 @@ describe('applyCustomMediaToCss', () => {
     expect(transformedCss).to.equalIgnoreSpaces(expectedCss)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

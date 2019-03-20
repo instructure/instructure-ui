@@ -55,7 +55,8 @@ export default class CheckboxFacade extends Component {
     checked: false,
     focused: false,
     hovered: false,
-    size: 'medium'
+    size: 'medium',
+    indeterminate: false
   }
 
   renderIcon () {

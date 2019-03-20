@@ -27,7 +27,7 @@ export default {
   maxExamplesPerPage: 50,
   propValues: {
     datePlaceholder: [null, 'Choose a date'],
-    value: [undefined, '20180806T133055Z'], // eslint-disable-line no-undefined
+    value: [undefined, '20180806T133055Z'],
     messages: generateMessages()
   },
   getComponentProps: (props) => {

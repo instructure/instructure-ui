@@ -120,7 +120,11 @@ export default class Alert extends Component {
     transition: 'fade',
     open: true,
     screenReaderOnly: false,
-    liveRegionPoliteness: 'assertive'
+    liveRegionPoliteness: 'assertive',
+    onDismiss: undefined,
+    liveRegion: undefined,
+    closeButtonLabel: undefined,
+    children: null
   }
 
   constructor (props) {

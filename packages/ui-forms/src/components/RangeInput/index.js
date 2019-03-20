@@ -92,7 +92,12 @@ class RangeInput extends Component {
     layout: 'stacked',
     displayValue: true,
     disabled: false,
-    readOnly: false
+    readOnly: false,
+    id: undefined,
+    defaultValue: undefined,
+    value: undefined,
+    onChange: undefined,
+    messages: undefined
   }
 
   constructor (props) {

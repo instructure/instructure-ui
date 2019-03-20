@@ -53,7 +53,9 @@ class SourceChooser extends Component {
   }
 
   static defaultProps = {
-    forwardRef: (ref) => {}
+    forwardRef: (ref) => {},
+    sources: undefined,
+    selectedSrc: undefined
   }
 
   state = {

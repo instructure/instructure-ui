@@ -43,7 +43,7 @@ const theme = {
 
 const name = 'TestComponent'
 
-/* eslint-disable mocha/no-synchronous-tests */
+
 describe('getShorthandPropValue', () => {
   it('converts 1 value syntax', () => {
     const value = 'x-small'
@@ -106,4 +106,4 @@ describe('getShorthandPropValue', () => {
       .to.have.been.calledWithExactly(warning)
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */
+

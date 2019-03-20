@@ -101,7 +101,13 @@ export default class PopoverMenu extends Component {
     placement: 'bottom center',
     defaultShow: false,
     contentRef: function (el) {},
-    shouldFocusTriggerOnClose: true
+    shouldFocusTriggerOnClose: true,
+    children: null,
+    onToggle: undefined,
+    onSelect: undefined,
+    onClose: undefined,
+    show: undefined,
+    onFocus: undefined
   }
 
   constructor (props) {

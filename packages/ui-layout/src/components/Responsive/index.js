@@ -70,6 +70,8 @@ class Responsive extends Component {
   }
 
   static defaultProps = {
+    children: null,
+    render: undefined,
     match: 'element',
     props: null
   }

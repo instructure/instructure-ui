@@ -40,6 +40,10 @@ class Component extends React.Component {
     onUnmount: null
   }
 
+  static defaultProps = {
+    foo: 'foo'
+  }
+
   static contextTypes = {
     foo: PropTypes.string
   }

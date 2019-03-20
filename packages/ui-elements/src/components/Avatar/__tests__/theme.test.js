@@ -27,7 +27,6 @@ import { contrast } from '@instructure/ui-themeable/lib/utils/color'
 
 import Avatar from '../index'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('Avatar.theme', () => {
   describe('with the default theme', () => {
     const variables = Avatar.generateTheme()
@@ -51,4 +50,3 @@ describe('Avatar.theme', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

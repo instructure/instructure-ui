@@ -181,6 +181,19 @@ class Autocomplete extends Component {
   }
 
   static defaultProps = {
+    defaultOption: undefined,
+    placement: undefined,
+    messages: undefined,
+    id: undefined,
+    layout: undefined,
+    multiple: false,
+    onClick: undefined,
+    onBlur: undefined,
+    onInputChange: undefined,
+    onChange: undefined,
+    onClose: undefined,
+    onOpen: undefined,
+    onPositioned: undefined,
     editable: true,
     allowEmpty: false,
     emptyOption: '---',
@@ -194,7 +207,8 @@ class Autocomplete extends Component {
       return options.filter(option => option.label.toLowerCase().startsWith(filterText.toLowerCase()))
     },
     formatSelectedOption: tag => tag.label || tag.children,
-    closeOnSelect: true
+    closeOnSelect: true,
+    children: null
   }
 
   constructor (props) {
