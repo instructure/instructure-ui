@@ -21,7 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const semver = require('semver')
 const { getPackageJSON } = require('@instructure/pkg-utils')
 const { error, info } = require('@instructure/command-utils')
 
@@ -32,7 +31,6 @@ const {
   checkWorkingDirectory
 } = require('./utils/git')
 const {
-  updateCrossPackageDependencies,
   bumpPackages
 } = require('./utils/npm')
 
@@ -54,13 +52,6 @@ async function bump (packageName, currentVersion, requestedVersion, config = {})
 
   try {
     releaseVersion = await bumpPackages(packageName, requestedVersion)
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
-
-  try {
-    await updateCrossPackageDependencies(packageName, releaseVersion, `^${semver.major(releaseVersion)}`)
   } catch (err) {
     error(err)
     process.exit(1)
