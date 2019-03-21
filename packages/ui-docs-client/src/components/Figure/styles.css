@@ -31,7 +31,7 @@
 .iconContainer {
   position: absolute;
   top: -0.0625rem;
-  offset-inline-end: -0.0313rem;
+  inset-inline-end: -0.0313rem;
   z-index: var(--iconContainerStacking);
   width: var(--iconContainerSize);
   height: var(--iconContainerSize);

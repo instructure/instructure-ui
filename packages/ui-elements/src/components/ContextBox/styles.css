@@ -49,16 +49,16 @@
 
     .arrow {
       top: 50%;
-      offset-inline-end: 100%;
-      offset-inline-start: auto;
+      inset-inline-end: 100%;
+      inset-inline-start: auto;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-inline-start-width: 0;
       border-inline-end-width: var(--arrowSize);
     }
 
     .arrow::after {
-      offset-inline-start: var(--borderWidth);
-      offset-inline-end: auto;
+      inset-inline-start: var(--borderWidth);
+      inset-inline-end: auto;
       margin-top: calc(-1 * var(--arrowSize));
       border-inline-start-width: 0;
       border-inline-end-width: var(--arrowSize);
@@ -75,16 +75,16 @@
 
     .arrow {
       top: 50%;
-      offset-inline-start: 100%;
-      offset-inline-end: auto;
+      inset-inline-start: 100%;
+      inset-inline-end: auto;
       margin-top: calc(-1 * (var(--arrowSize) + var(--borderWidth)));
       border-inline-end-width: 0;
       border-inline-start-width: var(--arrowSize);
     }
 
     .arrow::after {
-      offset-inline-end: var(--borderWidth);
-      offset-inline-start: auto;
+      inset-inline-end: var(--borderWidth);
+      inset-inline-start: auto;
       margin-top: calc(-1 * var(--arrowSize));
       border-inline-end-width: 0;
       border-inline-start-width: var(--arrowSize);
@@ -147,8 +147,8 @@
   &.positioned--top-start,
   &.positioned--bottom-start {
     .arrow {
-      offset-inline-start: calc((var(--arrowSize) + var(--borderWidth)) * 2);
-      offset-inline-end: auto;
+      inset-inline-start: calc((var(--arrowSize) + var(--borderWidth)) * 2);
+      inset-inline-end: auto;
     }
   }
 
@@ -169,8 +169,8 @@
   &.positioned--top-end,
   &.positioned--bottom-end {
     .arrow {
-      offset-inline-start: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
-      offset-inline-end: auto;
+      inset-inline-start: calc(100% - (var(--arrowSize) + var(--borderWidth)) * 2);
+      inset-inline-end: auto;
     }
   }
 }

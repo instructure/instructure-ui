@@ -38,25 +38,25 @@
 
     &.positioned--start {
       &.count {
-        offset-inline-start: calc(-1 * var(--countOffset));
-        offset-inline-end: auto;
+        inset-inline-start: calc(-1 * var(--countOffset));
+        inset-inline-end: auto;
       }
 
       &.notification {
-        offset-inline-start: var(--notificationOffset);
-        offset-inline-end: auto;
+        inset-inline-start: var(--notificationOffset);
+        inset-inline-end: auto;
       }
     }
 
     &.positioned--end {
       &.count {
-        offset-inline-end: calc(-1 * var(--countOffset));
-        offset-inline-start: auto;
+        inset-inline-end: calc(-1 * var(--countOffset));
+        inset-inline-start: auto;
       }
 
       &.notification {
-        offset-inline-end: var(--notificationOffset);
-        offset-inline-start: auto;
+        inset-inline-end: var(--notificationOffset);
+        inset-inline-start: auto;
       }
     }
 
@@ -79,25 +79,25 @@
 
     &.positioned--center.positioned--start {
       &.count {
-        offset-inline-start: auto;
-        offset-inline-end: calc(100% - var(--countOffset));
+        inset-inline-start: auto;
+        inset-inline-end: calc(100% - var(--countOffset));
       }
 
       &.notification {
-        offset-inline-start: calc(-1 * var(--sizeNotification) / 2);
-        offset-inline-end: auto;
+        inset-inline-start: calc(-1 * var(--sizeNotification) / 2);
+        inset-inline-end: auto;
       }
     }
 
     &.positioned--center.positioned--end {
       &.count {
-        offset-inline-end: auto;
-        offset-inline-start: calc(100% - var(--countOffset));
+        inset-inline-end: auto;
+        inset-inline-start: calc(100% - var(--countOffset));
       }
 
       &.notification {
-        offset-inline-end: calc(-1 * var(--sizeNotification) / 2);
-        offset-inline-start: auto;
+        inset-inline-end: calc(-1 * var(--sizeNotification) / 2);
+        inset-inline-start: auto;
       }
     }
   }
@@ -156,8 +156,8 @@
     border-radius: var(--borderRadius);
     position: absolute;
     top: -0.25rem;
-    offset-inline-end: auto;
-    offset-inline-start: -0.25rem;
+    inset-inline-end: auto;
+    inset-inline-start: -0.25rem;
     box-sizing: border-box;
     border: var(--pulseBorderThickness) solid;
     opacity: 0;

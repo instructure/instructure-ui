@@ -29,8 +29,8 @@
 
   &.flyout {
     .icon {
-      offset-inline-start: auto;
-      offset-inline-end: var(--iconPadding);
+      inset-inline-start: auto;
+      inset-inline-end: var(--iconPadding);
     }
   }
 
@@ -39,8 +39,8 @@
     padding-inline-start: var(--labelPadding);
 
     .icon {
-      offset-inline-start: var(--iconPadding);
-      offset-inline-end: auto;
+      inset-inline-start: var(--iconPadding);
+      inset-inline-end: auto;
     }
   }
 

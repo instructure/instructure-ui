@@ -5,7 +5,7 @@
   padding: 0;
   position: absolute;
   top: 0;
-  offset-inline-start: 0;
+  inset-inline-start: 0;
   overflow: hidden;
   clip: rect(0 0 0 0);
   border: 0;

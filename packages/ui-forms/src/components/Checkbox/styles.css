@@ -18,8 +18,8 @@
   width: auto;
   position: absolute;
   top: 0;
-  offset-inline-start: 0;
-  offset-inline-end: auto;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
   opacity: 0.0001; /* selenium cannot find fully transparent elements */
 }
 

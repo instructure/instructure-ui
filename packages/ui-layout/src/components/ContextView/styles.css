@@ -86,8 +86,8 @@
 .arrow--start {
   /* arrow on the left side pointing left */
   top: 50%;
-  offset-inline-end: 100%;
-  offset-inline-start: auto;
+  inset-inline-end: 100%;
+  inset-inline-start: auto;
   margin-top: calc(-1 * (var(--arrowSize) + var(--arrowBorderWidth)));
   border-inline-start-width: 0;
   border-inline-start-color: transparent;
@@ -97,8 +97,8 @@
   border-inline-end-width: var(--arrowSize);
 
   &::after {
-    offset-inline-start: var(--arrowBorderWidth);
-    offset-inline-end: auto;
+    inset-inline-start: var(--arrowBorderWidth);
+    inset-inline-end: auto;
     margin-top: calc(-1 * var(--arrowSize));
     border-inline-start-width: 0;
     border-inline-start-color: transparent;
@@ -124,8 +124,8 @@
 .arrow--end {
   /* arrow on the right side pointing right */
   top: 50%;
-  offset-inline-start: 100%;
-  offset-inline-end: auto;
+  inset-inline-start: 100%;
+  inset-inline-end: auto;
   margin-top: calc(-1 * (var(--arrowSize) + var(--arrowBorderWidth)));
   border-inline-end-width: 0;
   border-inline-end-color: transparent;
@@ -135,8 +135,8 @@
   border-inline-start-width: var(--arrowSize);
 
   &::after {
-    offset-inline-end: var(--arrowBorderWidth);
-    offset-inline-start: auto;
+    inset-inline-end: var(--arrowBorderWidth);
+    inset-inline-start: auto;
     margin-top: calc(-1 * var(--arrowSize));
     border-inline-end-width: 0;
     border-inline-end-color: transparent;
@@ -221,19 +221,19 @@
 .arrow--bottom,
 .arrow--top-center,
 .arrow--bottom-center {
-  offset-inline-start: 50%;
+  inset-inline-start: 50%;
 }
 
 .arrow--top-start,
 .arrow--bottom-start {
-  offset-inline-start: calc((var(--arrowSize) + var(--arrowBorderWidth)) * 2);
-  offset-inline-end: auto;
+  inset-inline-start: calc((var(--arrowSize) + var(--arrowBorderWidth)) * 2);
+  inset-inline-end: auto;
 }
 
 .arrow--top-end,
 .arrow--bottom-end {
-  offset-inline-start: calc(100% - (var(--arrowSize) + var(--arrowBorderWidth)) * 2);
-  offset-inline-end: auto;
+  inset-inline-start: calc(100% - (var(--arrowSize) + var(--arrowBorderWidth)) * 2);
+  inset-inline-end: auto;
 }
 
 .arrow--start-top,

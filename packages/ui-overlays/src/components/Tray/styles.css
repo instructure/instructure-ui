@@ -21,8 +21,8 @@
 
 .placement--top,
 .placement--bottom {
-  offset-inline-start: 0;
-  offset-inline-end: 0;
+  inset-inline-start: 0;
+  inset-inline-end: 0;
 }
 
 .placement--start,
@@ -59,8 +59,8 @@
 }
 
 .placement--start {
-  offset-inline-start: 0;
-  offset-inline-end: auto;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
 
   &.border {
     border-inline-end-width: var(--borderWidth);
@@ -68,8 +68,8 @@
 }
 
 .placement--end {
-  offset-inline-end: 0;
-  offset-inline-start: auto;
+  inset-inline-end: 0;
+  inset-inline-start: auto;
 
   &.border {
     border-inline-start-width: var(--borderWidth);

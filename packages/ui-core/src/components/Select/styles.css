@@ -9,8 +9,8 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    offset-inline-end: var(--padding);
-    offset-inline-start: auto;
+    inset-inline-end: var(--padding);
+    inset-inline-start: auto;
     pointer-events: none;
     color: var(--arrowColor);
   }

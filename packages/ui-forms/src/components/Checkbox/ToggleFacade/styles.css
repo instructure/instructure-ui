@@ -70,8 +70,8 @@
   text-align: center;
   position: absolute;
   top: 0;
-  offset-inline-start: 0;
-  offset-inline-end: auto;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
   transition: all 0.2s;
   transform: translate3d(0, 0, 0);
 }

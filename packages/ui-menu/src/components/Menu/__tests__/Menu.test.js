@@ -315,13 +315,17 @@ describe('<Menu />', async () => {
       const popover = await subject.findPopoverContent()
       const menu = await popover.find(`[role="menu"]`)
 
-      expect(menu.focused()).to.be.true()
-      expect(menu.getAttribute('tabIndex')).to.equal('0')
+      await wait(() => {
+        expect(menu.focused()).to.be.true()
+        expect(menu.getAttribute('tabIndex')).to.equal('0')
+      })
 
       await menu.keyDown('down')
 
-      expect(menu.focused()).to.be.false()
-      expect(menu.getAttribute('tabIndex')).to.equal('0')
+      await wait(() => {
+        expect(menu.focused()).to.be.false()
+        expect(menu.getAttribute('tabIndex')).to.equal('0')
+      })
     })
 
     it('should call onToggle on click', async () => {

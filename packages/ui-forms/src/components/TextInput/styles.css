@@ -8,8 +8,8 @@
   align-items: center;
   position: absolute;
   top: 0;
-  offset-inline-end: var(--padding);
-  offset-inline-start: auto;
+  inset-inline-end: var(--padding);
+  inset-inline-start: auto;
   height: 100%;
   pointer-events: none;
   fill: var(--iconColor);

@@ -151,8 +151,8 @@
       font-size: 0.75rem;
       padding: 0.25rem;
       position: absolute;
-      offset-inline-end: 0;
-      offset-inline-start: auto;
+      inset-inline-end: 0;
+      inset-inline-start: auto;
       top: 0;
       transform: translate(40%, -40%);
     }

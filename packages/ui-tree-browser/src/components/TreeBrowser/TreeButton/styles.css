@@ -131,8 +131,8 @@
     height: var(--borderWidth);
     background: var(--borderColor);
     position: absolute;
-    offset-inline-start: 0;
-    offset-inline-end: auto;
+    inset-inline-start: 0;
+    inset-inline-end: auto;
     top: 50%;
     pointer-events: none;
   }

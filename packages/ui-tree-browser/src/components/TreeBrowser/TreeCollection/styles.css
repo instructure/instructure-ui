@@ -35,8 +35,8 @@
   position: absolute;
   top: 0.25rem;
   bottom: 1.1875rem;
-  offset-inline-start: 0;
-  offset-inline-end: auto;
+  inset-inline-start: 0;
+  inset-inline-end: auto;
   transform: scaleY(0.01);
   transform-origin: center top;
   animation-name: list;

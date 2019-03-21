@@ -426,7 +426,11 @@ class Popover extends Component {
 
   handleDialogDismiss = (...args) => {
     if (!this.props.shouldReturnFocus && this.props.shouldFocusContentOnTriggerBlur) {
-      findDOMNode(this._trigger).focus()
+      const trigger = findDOMNode(this._trigger)
+
+      if (trigger && typeof trigger.focus === 'function') {
+        trigger.focus()
+      }
     }
     this.hide(...args)
   }
