@@ -96,12 +96,18 @@ class ReactComponentWrapper {
   }
 
   unmount () {
-    let result
-    if (this._mountNode) {
-      result = ReactDOM.unmountComponentAtNode(this._mountNode)
-      this._mountNode && this._mountNode.remove()
-    }
-    return result
+    return new Promise((resolve, reject) => {
+      try {
+        let result
+        if (this._mountNode) {
+          result = ReactDOM.unmountComponentAtNode(this._mountNode)
+          this._mountNode && this._mountNode.remove()
+        }
+        resolve(result)
+      } catch (err) {
+        reject(err)
+      }
+    })
   }
 }
 

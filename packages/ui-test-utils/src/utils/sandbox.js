@@ -74,7 +74,7 @@ class Sandbox {
     try {
       this._observer.disconnect()
 
-      ReactComponentWrapper.unmount()
+      await ReactComponentWrapper.unmount()
 
       StyleSheet.flush()
 
@@ -153,6 +153,10 @@ class Sandbox {
     return ReactComponentWrapper.mount(element, options)
   }
 
+  unmount () {
+    return ReactComponentWrapper.unmount()
+  }
+
   viewport () {
     if (!global.viewport) {
       console.error('[ui-test-utils] the `viewport` global has not been configured. See https://github.com/squidfunk/karma-viewport.')
@@ -214,12 +218,14 @@ function setAttributes (element, attributes = []) {
 const sandbox = new Sandbox()
 const viewport = sandbox.viewport
 const mount = (element, context) => sandbox.mount(element, context)
+const unmount = sandbox.unmount
 const stub = (obj, method, fn) => sandbox.stub(obj, method, fn)
 const spy = (obj, method) => sandbox.spy(obj, method)
 
 export {
   viewport,
   mount,
+  unmount,
   stub,
   spy
 }

@@ -31,7 +31,13 @@ class Component extends React.Component {
   static displayName = 'Component'
 
   static propTypes = {
-    foo: PropTypes.string
+    foo: PropTypes.string,
+    onUnmount: PropTypes.func
+  }
+
+  static defaultProps = {
+    foo: null,
+    onUnmount: null
   }
 
   static contextTypes = {
@@ -40,6 +46,12 @@ class Component extends React.Component {
 
   test (cb) {
     cb('test')
+  }
+
+  componentWillUnmount () {
+    if (typeof this.props.onUnmount === 'function') {
+      this.props.onUnmount()
+    }
   }
 
   render () {
@@ -74,6 +86,20 @@ describe('reactComponentWrapper', async () => {
       <Component componentRef={(el) => {component = el}} />
     )
     expect(component.props.componentRef).to.not.exist()
+  })
+
+  it('should unmount', async () => {
+    const handleUnmount = stub()
+    const subject = await ReactComponentWrapper.mount(
+      <Component onUnmount={handleUnmount} />
+    )
+
+    expect(subject.getDOMNode()).to.have.text('Hello World')
+
+    await ReactComponentWrapper.unmount()
+
+    expect(handleUnmount).to.have.been.calledOnce()
+    expect(subject.getDOMNode()).to.equal(null)
   })
 
   describe('options', async () => {

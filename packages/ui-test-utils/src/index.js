@@ -23,7 +23,7 @@
  */
 import './utils/shims'
 
-import { mount, stub, spy, viewport } from './utils/sandbox'
+import { mount, unmount, stub, spy, viewport } from './utils/sandbox'
 import { waitForExpect } from './utils/waitForExpect'
 import { wrapQueryResult } from './utils/queryResult'
 import { expect } from './utils/expect'
@@ -72,6 +72,7 @@ export {
   wait,
   expect,
   mount,
+  unmount,
   stub,
   spy,
   find,
