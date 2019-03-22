@@ -1,7 +1,7 @@
 {
-  "name": "@instructure/pkg-utils",
+  "name": "@instructure/mocha-environment-jsdom",
   "version": "5.49.0",
-  "description": "Utilities for managing node packages in a monorepo.",
+  "description": "jsdom environment setup for use with mocha tests",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
   "repository": {
@@ -16,11 +16,16 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^5.49.0",
-    "@lerna/package": "^3",
-    "read-pkg-up": "^5.0.0"
+    "@babel/register": "",
+    "core-js": "^3",
+    "jsdom-global": "^3.0.2",
+    "regenerator-runtime": "^0.13.2"
+  },
+  "peerDependencies": {
+    "jsdom": ">=10.0.0"
   },
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "sideEffects": false
 }

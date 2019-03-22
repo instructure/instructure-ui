@@ -1,8 +1,7 @@
 class Modal extends React.Component {
   render () {
-    const isOpen = this.props.isOpen
-    const isOpen = props.isOpen
-    const { isOpen } = this.props
+    const foo = this.props.isOpen
+    const bar = props.isOpen
     const { isOpen } = props
   }
 }

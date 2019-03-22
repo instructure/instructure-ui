@@ -30,7 +30,7 @@
     "@instructure/ui-utils": "^5.49.0",
     "@instructure/uid": "^5.49.0",
     "classnames": "^2",
-    "codemirror": "^5.44.0",
+    "codemirror": "^5.45.0",
     "prop-types": "^15",
     "react-codemirror2": "^5.1.0"
   },

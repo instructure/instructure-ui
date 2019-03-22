@@ -30,9 +30,7 @@ let command = 'mocha'
 let args = [
   '**/*.test.js',
   '--colors',
-  '--require', '@babel/register',
-  '--require', '@babel/polyfill',
-  '--require', require.resolve('./jsdom'),
+  '--require', '@instructure/mocha-environment-jsdom',
   '--exit'
 ]
 

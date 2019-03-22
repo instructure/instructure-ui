@@ -11,4 +11,4 @@ import Bar from 'something/else/Bar'
 import Baz from 'something/else/Baz'
 import Qux from 'something/else/Qux'
 
-const Foo = require('something/lib/Foo')
+const Blah = require('something/lib/Blah')

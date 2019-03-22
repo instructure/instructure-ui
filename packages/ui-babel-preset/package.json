@@ -16,17 +16,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/core": "^7",
-    "@babel/plugin-proposal-class-properties": "^7.3.4",
-    "@babel/plugin-proposal-decorators": "^7.3.0",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
+    "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-proposal-export-default-from": "^7.2.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/plugin-transform-classes": "^7.3.4",
-    "@babel/plugin-transform-destructuring": "^7.3.2",
+    "@babel/plugin-transform-classes": "^7.4.0",
+    "@babel/plugin-transform-destructuring": "^7.4.0",
     "@babel/plugin-transform-react-constant-elements": "^7.2.0",
     "@babel/plugin-transform-react-display-name": "^7.2.0",
-    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/plugin-transform-runtime": "^7.4.0",
     "@babel/preset-env": "^7.3.4",
     "@babel/preset-react": "^7.0.0",
     "@instructure/babel-plugin-themeable-styles": "^5.49.0",
@@ -37,7 +37,7 @@
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-istanbul": "^5.1.0",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
-    "babel-preset-react-app": "^7"
+    "core-js": "^3.0.0"
   },
   "publishConfig": {
     "access": "public"

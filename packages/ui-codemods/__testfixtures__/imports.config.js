@@ -16,6 +16,10 @@ module.exports = [
     newPath: 'something/lib/Foo'
   },
   {
+    oldPath: 'example/path/Blah',
+    newPath: 'something/lib/Blah'
+  },
+  {
     oldPath: 'example/path/Alpha',
     newPath: 'something/lib/Alpha'
   },

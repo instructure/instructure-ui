@@ -21,6 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+require('@babel/register')
+require('core-js/stable')
+require('regenerator-runtime/runtime')
+
 module.exports = require('jsdom-global')('', {
   pretendToBeVisual: true,
   runScripts: 'dangerously',

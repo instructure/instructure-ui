@@ -11,4 +11,4 @@ import Bar from 'example/path/Bar'
 import Baz from 'example/path/Baz'
 import Qux from 'example/path/Qux'
 
-const Foo = require('example/path/Foo')
+const Blah = require('example/path/Blah')
