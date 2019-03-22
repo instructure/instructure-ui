@@ -31,21 +31,40 @@ let result
 // ui-build --examples -p 8080
 
 const args = process.argv.slice(2)
+const vars = []
 const portIndex = args.findIndex(arg => arg === '-p')
 let port = '8080'
 if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
+if (process.env.DEBUG) {
+  vars.push(`DEBUG=${process.env.DEBUG}`)
+}
+
+if (process.env.UNMANGLED_CLASS_NAMES) {
+  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+}
+
+if (process.env.USE_WEBPACK_CSS_LOADERS) {
+  vars.push(`USE_WEBPACK_CSS_LOADERS=${process.env.USE_WEBPACK_CSS_LOADERS}`)
+}
+
 if (process.argv.includes('--watch')) {
   result = runCommandsConcurrently({
     // DEBUG=1 start-storybook -p
-    storybook: getCommand('start-storybook', ['-c', '.storybook', '-p', port], ['NODE_ENV=development', 'DEBUG=1'])
+    storybook: getCommand('start-storybook',
+      ['-c', '.storybook', '-p', port],
+      ['NODE_ENV=development', ...vars]
+    )
   })
 } else {
   result = runCommandsConcurrently({
     // build-storybook -o __build__
-    storybook: getCommand('build-storybook', ['-c', '.storybook', '-o', '__build__'], [`NODE_ENV=production`, `NODE_PATH=${rootPath}`])
+    storybook: getCommand('build-storybook',
+      ['-c', '.storybook', '-o', '__build__'],
+      [`NODE_ENV=production`, `NODE_PATH=${rootPath}`, ...vars]
+    )
   })
 }
 

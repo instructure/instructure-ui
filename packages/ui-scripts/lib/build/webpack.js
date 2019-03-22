@@ -30,19 +30,38 @@ const ENV = process.env.NODE_ENV || 'production'
 let result
 
 const args = process.argv.slice(2)
+const vars = []
 const portIndex = args.findIndex(arg => arg === '-p')
 let port = '8080'
 if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
+if (process.env.DEBUG) {
+  vars.push(`DEBUG=${process.env.DEBUG}`)
+}
+
+if (process.env.UNMANGLED_CLASS_NAMES) {
+  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+}
+
+if (process.env.USE_WEBPACK_CSS_LOADERS) {
+  vars.push(`USE_WEBPACK_CSS_LOADERS=${process.env.USE_WEBPACK_CSS_LOADERS}`)
+}
+
 if (process.argv.includes('--watch')) {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack-dev-server', ['--mode=development', `--port=${port}`], ['NODE_ENV=development', 'DEBUG=1'])
+    webpack: getCommand('webpack-dev-server',
+      ['--mode=development', `--port=${port}`],
+      ['NODE_ENV=development', ...vars]
+    )
   })
 } else {
   result = runCommandsConcurrently({
-    webpack: getCommand('webpack', ['--mode=production'], [`NODE_ENV=${ENV}`, 'NODE_OPTIONS=--max_old_space_size=8192'])
+    webpack: getCommand('webpack',
+      ['--mode=production'],
+      [`NODE_ENV=${ENV}`, 'NODE_OPTIONS=--max_old_space_size=8192', ...vars]
+    )
   })
 }
 

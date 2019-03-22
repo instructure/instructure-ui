@@ -38,7 +38,7 @@ const generateScopedName = require('./generateScopedName')
 
 const matchExtensions = /\.css$/i
 
-const DEBUG = Boolean(process.env.DEBUG)
+const USE_WEBPACK_CSS_LOADERS = Boolean(process.env.USE_WEBPACK_CSS_LOADERS) || Boolean(process.env.DEBUG)
 
 module.exports = function transformThemeableStyles ({ types: t }) {
   const STYLES = new Map()
@@ -69,7 +69,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         }
       }
 
-      if (!DEBUG) {
+      if (!USE_WEBPACK_CSS_LOADERS) {
         requireHook({
           ignore: thisPluginOptions.ignore,
           preprocessCss: (css, filepath) => {
@@ -87,7 +87,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
             return styles
           },
           append: [require('@instructure/postcss-themeable-styles')],
-          devMode: DEBUG
+          devMode: process.env.NODE_ENV === 'development'
         })
 
         requireHookInitialized = true
@@ -103,7 +103,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         const { value } = path.parentPath.node.source
 
         if (matchExtensions.test(value)) {
-          if (requireHookInitialized && !DEBUG) {
+          if (requireHookInitialized && !USE_WEBPACK_CSS_LOADERS) {
             const stylesheetPath = resolveStylesheetPath(requiringFile, value)
             const tokens = requireCssFile(stylesheetPath)
 

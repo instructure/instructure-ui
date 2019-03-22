@@ -34,6 +34,18 @@ if (argv.includes('--watch')) {
   vars.push('DEBUG=1')
 } else {
   vars.push('COVERAGE=1')
+
+  if (process.env.DEBUG) {
+    vars.push(`DEBUG=${process.env.DEBUG}`)
+  }
+}
+
+if (process.env.UNMANGLED_CLASS_NAMES) {
+  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+}
+
+if (process.env.USE_WEBPACK_CSS_LOADERS) {
+  vars.push(`USE_WEBPACK_CSS_LOADERS=${process.env.USE_WEBPACK_CSS_LOADERS}`)
 }
 
 if (argv.includes('--no-launch')) {

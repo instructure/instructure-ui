@@ -40,6 +40,14 @@ if (process.argv.includes('--watch')) {
   vars.push(`NODE_ENV=${process.env.NODE_ENV}`)
 }
 
+if (process.env.DEBUG) {
+  vars.push(`DEBUG=${process.env.DEBUG}`)
+}
+
+if (process.env.UNMANGLED_CLASS_NAMES) {
+  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+}
+
 process.exit(runCommandsConcurrently({
   es: getCommand('babel', [...args, '--out-dir', 'es'], [...vars, 'ES_MODULES=1']),
   lib: getCommand('babel', [...args, '--out-dir', 'lib'], vars)
