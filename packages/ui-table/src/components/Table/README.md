@@ -766,3 +766,29 @@ render(
   />
 )
 ```
+
+### Guidelines
+
+```js
+---
+guidelines: true
+---
+<Guidelines>
+  <Figure recommendation="yes" title="Do">
+    <FigureItem>Column headers can be sortable</FigureItem>
+    <FigureItem>Use the <code>small</code> Buttons and Inputs inside cells</FigureItem>
+    <FigureItem>Actions must relate to that row only</FigureItem>
+    <FigureItem>Use horizontal and vertical alignment that makes sense with the content</FigureItem>
+    <FigureItem>Left align US dates and apply i18n</FigureItem>
+    <FigureItem>Left align text and alphanumeric</FigureItem>
+    <FigureItem>Right align quantities, decimals</FigureItem>
+    <FigureItem>Left align column headers, including currency</FigureItem>
+  </Figure>
+  <Figure recommendation="no" title="Don't">
+    <FigureItem>Center align more than 4 characters/numbers, choose left or right</FigureItem>
+    <FigureItem>Use to create a layout</FigureItem>
+    <FigureItem>Use zebra stripes</FigureItem>
+    <FigureItem>Bottom align ever</FigureItem>
+  </Figure>
+</Guidelines>
+```
