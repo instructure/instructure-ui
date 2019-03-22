@@ -138,6 +138,10 @@ class Sandbox {
   }
 
   stub (obj, method, fn) {
+    if (!this._sandbox) {
+      throw new Error('[ui-test-utils] a stub cannot be created outside an `it`, `before`, or `beforeEach` block.')
+    }
+
     if (typeof fn === 'function') {
       return this._sandbox.stub(obj, method).callsFake(fn)
     } else {
@@ -146,6 +150,10 @@ class Sandbox {
   }
 
   spy (obj, method) {
+    if (!this._sandbox) {
+      throw new Error('[ui-test-utils] a spy cannot be created outside an `it`, `before`, or `beforeEach` block.')
+    }
+
     return this._sandbox.spy(obj, method)
   }
 
