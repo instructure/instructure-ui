@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 import { label, title } from './helpers'
+import { normalizeText } from './normalizeText'
+import { getNodeText } from './getNodeText'
 
 function matches (textToMatch, matcherString, options = {
   exact: true,
@@ -37,25 +39,28 @@ function fuzzyMatches (textToMatch, matcher, {collapseWhitespace = true, trim = 
   if (typeof textToMatch !== 'string') {
     return false
   }
-  const normalizedText = normalize(textToMatch, {trim, collapseWhitespace})
-  return normalizedText.toLowerCase().includes(matcher.toLowerCase())
+
+  const normalizedText = normalizeText(textToMatch, {trim, collapseWhitespace})
+
+  if (typeof matcher === 'string') {
+    return normalizedText.toLowerCase().includes(matcher.toLowerCase())
+  } else {
+    return matcher.test(normalizedText)
+  }
 }
 
 function exactMatches (textToMatch, matcher, { collapseWhitespace = true, trim = true } = {}) {
   if (typeof textToMatch !== 'string') {
     return false
   }
-  const normalizedText = normalize(textToMatch, { trim, collapseWhitespace })
-  return normalizedText === matcher
-}
 
-function normalize (text, {collapseWhitespace = true, trim = true} = {}) {
-  let normalizedText = text
-  normalizedText = trim ? normalizedText.trim() : normalizedText
-  normalizedText = collapseWhitespace
-    ? normalizedText.replace(/\s+/g, ' ')
-    : normalizedText
-  return normalizedText
+  const normalizedText = normalizeText(textToMatch, { trim, collapseWhitespace })
+
+  if (typeof matcher === 'string') {
+    return normalizedText === matcher
+  } else {
+    return matcher.test(normalizedText)
+  }
 }
 
 function matchElementByTitle (element, titleText, options) {
@@ -67,24 +72,7 @@ function matchElementByLabel (element, labelText, options) {
 }
 
 function matchElementByText (element, text, options) {
-  if (element.matches('input[type=submit], input[type=button]')) {
-    return element.value
-  }
-  const nodeText = Array.from(element.childNodes)
-    .map((child) => {
-      let textContent
-
-      // filter out nodes that have the same textContent as the parent
-      if (child.nodeType === 3 ||
-        (child.nodeType === 1 && (normalize(element.textContent) !== normalize(child.textContent)))
-      ) {
-        textContent = child.textContent
-      }
-
-      return textContent || ''
-    })
-    .join('')
-  return matches(nodeText, text, options)
+  return matches(getNodeText(element), text, options)
 }
 
 function matchElementByAttributeValue (element, name, value, options) {

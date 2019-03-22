@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import Calendar from '@instructure/ui-calendar/lib/components/Calendar'
 
 import DateInput from '../index'
@@ -232,7 +232,10 @@ describe('<DateInput />', async () => {
       )
 
       const dateInput = await DateInputLocator.find()
-      expect(dateInput).to.contain.text(text)
+
+      await wait (() => {
+        expect(dateInput).to.contain.text(text, { exact: false })
+      })
     })
   })
 

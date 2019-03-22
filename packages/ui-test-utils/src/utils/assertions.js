@@ -134,7 +134,7 @@ export default function assertions (chai, utils) {
         )
       } else {
         this.assert(
-          matches(actual, String(arg1), arg2),
+          matches(actual, arg1, arg2),
           () => `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
           () => `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
           arg1,
@@ -147,12 +147,14 @@ export default function assertions (chai, utils) {
   })
 
   overwriteChainableMethod('contain', function contain ({ wrapper, markup, arg1, sig }) {
-    this.assert(
-      wrapper.contains(arg1),
-      () => `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
-      () => `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
-      arg1
-    )
+    if (arg1) {
+      this.assert(
+        wrapper.contains(arg1),
+        () => `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
+        () => `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
+        arg1
+      )
+    }
   })
 
   addAssertion('className', function className ({ wrapper, markup, arg1, sig }) {

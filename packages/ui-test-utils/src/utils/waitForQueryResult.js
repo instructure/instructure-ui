@@ -29,6 +29,7 @@ import debounce from '@instructure/debounce'
 export function waitForQueryResult (
   queryFn,
   {
+    sync = false,
     element,
     timeout = 1900,
     expectEmpty = false,
@@ -113,11 +114,17 @@ export function waitForQueryResult (
       onDone(lastError || timedoutError, lastResult)
     }
 
-    setTimeout(() => {
+    function startQuery () {
       timer = setTimeout(onTimeout, timeout)
       observer = new MutationObserver(onMutation)
       observer.observe(element, mutationObserverOptions)
       runQuery()
-    }, 0)
+    }
+
+    if (sync) {
+      startQuery()
+    } else {
+      setTimeout(startQuery, 0)
+    }
   })
 }
