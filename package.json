@@ -33,6 +33,7 @@
     "test": "ui-test",
     "test:jest": "lerna run test:jest --stream",
     "test:mocha": "lerna run test --stream",
+    "test:vrt": "lerna run test:vrt --stream",
     "test:react:15": "npm-run-all install:react:15 test test:testbed install:react",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
@@ -62,9 +63,7 @@
     "deploy": "ui-scripts --deploy-docs",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
     "start:examples": "lerna run start --stream --scope docs-examples",
-    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples",
-    "storybook": "yarn start:examples",
-    "test:vrt": "ui-test --vrt -p 9001"
+    "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples"
   },
   "license": "MIT",
   "resolutions": {

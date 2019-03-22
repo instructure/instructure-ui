@@ -25,7 +25,9 @@
  */
 const { error, info } = require('@instructure/command-utils')
 
-require('dotenv').config()
+const { readEnv } = require('./utils/readEnv')
+
+readEnv()
 
 const commands = [
   '--publish',

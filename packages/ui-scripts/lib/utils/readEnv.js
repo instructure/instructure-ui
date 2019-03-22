@@ -21,25 +21,10 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
-let result
+const findUp = require('find-up')
 
-// ui-build --vrt -p 8080
-const args = process.argv.slice(2)
-const portIndex = args.findIndex(arg => arg === '-p')
-let port = '9001'
-if (portIndex > 0) {
-  port = args[portIndex + 1]
-
+function readEnv () {
+  require('dotenv').config({ path: findUp.sync('.env') || process.cwd() })
 }
-
-result = runCommandsConcurrently({
-  chromatic: getCommand(
-    'chromatic',
-    ['test', '--storybook-port', port, '--no-interactive', '--exit-zero-on-changes'],
-    [`CHROMATIC_APP_CODE=${process.env.CHROMATIC_APP_CODE}`]
-  )
-})
-
-process.exit(result.status)
+exports.readEnv = readEnv

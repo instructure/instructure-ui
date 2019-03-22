@@ -22,16 +22,18 @@
  * SOFTWARE.
  */
 
-import generateMessages from '../../../__tests__/generateMessages'
-
 export default {
   propValues: {
-    messages: generateMessages()
+    // eslint-disable-next-line no-undefined
+    messages: [undefined, [{ type: 'hint', text: 'hint text' }]]
   },
   getComponentProps: (props) => {
     return {
+      enablePreview: false,
       accept: 'image/*',
       label: 'Upload a file',
+      readOnly: false,
+      allowMultiple: false,
       onDropAccepted: ([file]) => { console.log(`File accepted ${file.name}`) }, // eslint-disable-line no-console
       onDropRejected: ([file]) => { console.log(`File rejected ${file.name}`) } // eslint-disable-line no-console
     }

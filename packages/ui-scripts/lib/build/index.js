@@ -23,6 +23,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const { readEnv } = require('../utils/readEnv')
+
+readEnv()
 
 process.env['NODE_ENV'] = process.env['NODE_ENV'] || 'production'
 

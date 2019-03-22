@@ -32,6 +32,7 @@
     "commitizen": "^3.0.7",
     "dotenv": "^7.0.0",
     "eslint": "^5.15.2",
+    "find-up": "^3.0.0",
     "gh-pages": "^2.0.1",
     "http-server": "^0.11.1",
     "jira-client": "^6.7.1",

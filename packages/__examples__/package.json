@@ -14,6 +14,8 @@
     "prestart": "yarn bundle",
     "start": "ui-scripts --server -p 9001",
     "start:watch": "ui-build --examples --watch -p 9090",
+    "storybook": "yarn start",
+    "test:vrt": "ui-test --vrt -p 9001",
     "bundle": "ui-build --examples",
     "clean": "ui-scripts --clean",
     "generate:sketch": "story2sketch --url http://localhost:9001/iframe.html --output stories.asketch.json"
