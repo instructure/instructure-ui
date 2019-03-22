@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.49.0](https://github.com/instructure/instructure-ui/compare/v5.48.0...v5.49.0) (2019-03-22)
+
+
+### Bug Fixes
+
+* **ui-scripts:** don't update x-package deps when bumping versions ([5550000](https://github.com/instructure/instructure-ui/commit/5550000))
+
+
+### Features
+
+* **ui-scripts:** read dotenv file from project root ([6886dcb](https://github.com/instructure/instructure-ui/commit/6886dcb))
+
+
+
+
+
 # [5.48.0](https://github.com/instructure/instructure-ui/compare/v5.47.0...v5.48.0) (2019-03-18)
 
 

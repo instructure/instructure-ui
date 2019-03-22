@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.49.0](https://github.com/instructure/instructure-ui/compare/v5.48.0...v5.49.0) (2019-03-22)
+
+
+### Bug Fixes
+
+* **ui-a11y:** convert NodeList to Array in ScreenReaderFocusRegion ([ab482a6](https://github.com/instructure/instructure-ui/commit/ab482a6))
+* **ui-a11y:** prevent focus from escaping dialog ([899dd5e](https://github.com/instructure/instructure-ui/commit/899dd5e))
+* **ui-component-examples:** improve loadtime for storybook ([679b37d](https://github.com/instructure/instructure-ui/commit/679b37d))
+* **ui-menu:** always focus the entire menu when opened ([9bec477](https://github.com/instructure/instructure-ui/commit/9bec477))
+* **ui-scripts:** don't update x-package deps when bumping versions ([5550000](https://github.com/instructure/instructure-ui/commit/5550000))
+* **ui-tabs:** update Tabs sub-directories to support dot notation naming convention ([6bb2616](https://github.com/instructure/instructure-ui/commit/6bb2616))
+* **ui-test-utils:** better error message when sinon sandbox is undef ([19d65df](https://github.com/instructure/instructure-ui/commit/19d65df))
+* **ui-test-utils:** preserve built-in behavior of chai contain method ([a7b266e](https://github.com/instructure/instructure-ui/commit/a7b266e))
+* **ui-themeable:** prevent setting a component theme to an empty object ([04d8bc2](https://github.com/instructure/instructure-ui/commit/04d8bc2))
+
+
+### Features
+
+* **ui-calendar,ui-focusable:** a Calendar component ([7a4f96e](https://github.com/instructure/instructure-ui/commit/7a4f96e))
+* **ui-date-input:** A controlled DateInput ([e558771](https://github.com/instructure/instructure-ui/commit/e558771))
+* **ui-scripts:** read dotenv file from project root ([6886dcb](https://github.com/instructure/instructure-ui/commit/6886dcb))
+* **ui-test-utils:** add unmount util ([4d508be](https://github.com/instructure/instructure-ui/commit/4d508be))
+
+
+
+
+
 # [5.48.0](https://github.com/instructure/instructure-ui/compare/v5.47.0...v5.48.0) (2019-03-18)
 
 
