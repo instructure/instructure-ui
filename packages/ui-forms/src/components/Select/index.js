@@ -245,7 +245,7 @@ class Select extends Component {
     },
     formatSelectedOption: tag => tag.label || tag.children,
     closeOnSelect: true,
-    constrain: 'scroll-parent'
+    constrain: 'window'
   }
 
   constructor (props) {

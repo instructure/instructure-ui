@@ -782,6 +782,11 @@ describe('<SelectField />', async () => {
         />
       )
 
+      const selectField = await SelectFieldLocator.find()
+      const input = await selectField.findInput()
+
+      await input.click()
+
       await wait(() => {
         expect(onPositioned).to.have.been.called()
       })

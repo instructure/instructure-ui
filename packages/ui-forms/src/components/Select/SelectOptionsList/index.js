@@ -172,6 +172,7 @@ class SelectOptionsList extends Component {
       event.preventDefault()
       return
     }
+
     this.props.onSelect(event, option)
   }
 
@@ -252,6 +253,12 @@ class SelectOptionsList extends Component {
             onKeyDown={this.props.onKeyDown}
             onKeyUp={this.props.onKeyUp}
             onBlur={this.props.onBlur}
+            onClick={event => {
+              // prevent synthetic event from firing on the document
+              // when select is in a dialog, this event could inadvertently close the dialog
+              event.stopPropagation()
+              event.nativeEvent.stopImmediatePropagation()
+            }}
             tabIndex="-1"
             ref={el => {
               menuRef(el)

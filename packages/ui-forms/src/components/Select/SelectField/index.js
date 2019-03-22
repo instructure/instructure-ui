@@ -28,13 +28,13 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
+import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormFieldLayout from '@instructure/ui-form-field/lib/components/FormFieldLayout'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import Position, { PositionContent } from '@instructure/ui-layout/lib/components/Position'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import uid from '@instructure/uid'
@@ -217,7 +217,7 @@ class SelectField extends Component {
     closeOnSelect: true,
     editable: false,
     inline: false,
-    constrain: 'scroll-parent',
+    constrain: 'window',
     onPositioned: () => {},
     onSelect: (event, selectedOption) => {},
     onStaticClick: event => {},
@@ -467,6 +467,10 @@ class SelectField extends Component {
         this._input.focus()
       }
     }
+    if (key === 'tab') {
+      // return focus to input and back into natural tab order
+      this._input.focus()
+    }
     this.props.onKeyDown(event)
   }
 
@@ -495,26 +499,23 @@ class SelectField extends Component {
   handleBlur = event => {
     event.persist()
 
-    const el = event.target.tagName === 'INPUT' ? this._menu : this._inputContainer
-    const stillFocused = this._inputContainer.contains(event.relatedTarget)
+    let stillFocused = this._inputContainer.contains(event.relatedTarget)
+    if (!stillFocused && this.expanded) {
+      stillFocused = this._menu.contains(event.relatedTarget)
+    }
+
     this.setState(
       () => ({ focus: stillFocused }),
       () => {
         if (this.expanded) {
-          this._timeouts.push(
-            setTimeout(() => {
-              // timeout so we can check where focus went to
-              if (!containsActiveElement(el)) {
-                this.close(event)
-              }
-            }, 0)
-          )
+          if (!stillFocused) {
+            this.close(event)
+          }
         }
         if (!stillFocused) {
           this.props.onBlur(event)
         }
-      }
-    )
+      })
   }
 
   handleClick = event => {
@@ -681,35 +682,37 @@ class SelectField extends Component {
             </span>
           </span>
         </span>
-        <Position
-          trackPosition={this.expanded}
-          placement={this.placement}
-          onPositioned={this.handlePositioned}
-          target={this._inputContainer}
-          mountNode={this._inputContainer}
-          constrain={constrain}
-        >
-          <PositionContent>
-            <SelectOptionsList
-              options={options}
-              selectedOption={selectedOption}
-              optionsId={this._optionsId}
-              menuRef={this.handleMenuRef}
-              visibleOptionsCount={visibleOptionsCount}
-              loadingText={loadingText}
-              emptyOption={emptyOption}
-              onStaticClick={onStaticClick}
-              onHighlightOption={this.highlightOption}
-              onSelect={this.select}
-              expanded={this.state.expanded}
-              onKeyDown={this.handleKeyDown}
-              onKeyUp={this.handleKeyUp}
-              onBlur={this.handleBlur}
-              highlightedIndex={this.state.highlightedIndex}
-              maxWidth={this.props.optionsMaxWidth}
-            />
-          </PositionContent>
-        </Position>
+        <Dialog open={this.state.expanded}>
+          <Position
+            trackPosition={this.expanded}
+            placement={this.placement}
+            onPositioned={this.handlePositioned}
+            target={this._inputContainer}
+            mountNode={document.body}
+            constrain={constrain}
+          >
+            <PositionContent>
+              <SelectOptionsList
+                options={options}
+                selectedOption={selectedOption}
+                optionsId={this._optionsId}
+                menuRef={this.handleMenuRef}
+                visibleOptionsCount={visibleOptionsCount}
+                loadingText={loadingText}
+                emptyOption={emptyOption}
+                onStaticClick={onStaticClick}
+                onHighlightOption={this.highlightOption}
+                onSelect={this.select}
+                expanded={this.state.expanded}
+                onKeyDown={this.handleKeyDown}
+                onKeyUp={this.handleKeyUp}
+                onBlur={this.handleBlur}
+                highlightedIndex={this.state.highlightedIndex}
+                maxWidth={this.props.optionsMaxWidth}
+              />
+            </PositionContent>
+          </Position>
+        </Dialog>
         <span
           id={this._assistId}
           style={{

@@ -8,8 +8,6 @@ Select is an accessible, custom styled combobox component with optional autocomp
 - Select can provide autocomplete behavior.
 - Select can allow single or multiple selections.
 
-*Note: When Select is rendered inside a parent with `overflow:hidden` the options may be clipped.*
-
 ### Select size variants
 
 Default is `medium`. As with other form elements, the sizes align with the `Button` options for a nice layout.
