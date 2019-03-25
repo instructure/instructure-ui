@@ -31,7 +31,7 @@ import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
+import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -47,6 +47,9 @@ category: components
 ---
 **/
 @testable()
+@deprecated('5.42', {
+  size: true
+})
 @themeable(theme, styles)
 export default class Tooltip extends Component {
   static propTypes = {
@@ -71,14 +74,9 @@ export default class Tooltip extends Component {
     variant: PropTypes.oneOf(['default', 'inverse']),
     placement: LayoutPropTypes.placement,
     /**
-    * __DEPRECATED 5.42__ `small` and `medium` will no longer be supported, use `large`
+    * __DEPRECATED 5.42__  `size` is now deprecated
     */
-    size: deprecatePropValues(
-      PropTypes.oneOf([
-        'large'
-      ]),
-      ['small', 'medium']
-    ),
+    size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
      * An element or a function returning an element to use as the mount node
      * for the `<Tooltip />` (defaults to `document.body`)
@@ -95,7 +93,6 @@ export default class Tooltip extends Component {
   static defaultProps = {
     variant: 'default',
     placement: 'top',
-    size: 'small',
     mountNode: null,
     constrain: 'window'
   }
@@ -138,6 +135,8 @@ export default class Tooltip extends Component {
   }
 
   render () {
+    const size = this.props.size || 'small'
+
     return (
       <Focusable render={({ focused }) => {
         return (
@@ -159,7 +158,7 @@ export default class Tooltip extends Component {
                 id={this._id}
                 className={classnames({
                   [styles.root]: true,
-                  [styles[this.props.size]]: this.props.size
+                  [styles[size]]: size
                 })}
                 role="tooltip"
               >
