@@ -85,6 +85,34 @@ describe('<Billboard />', async () => {
     expect(onClick).to.have.been.calledOnce()
   })
 
+  describe('when rendering message', async () => {
+    it('should render message when passed a node', async () => {
+      const message = 'hello some message'
+
+      const subject = await mount(
+        <Billboard
+          heading='Test heading'
+          message={<span>{message}</span>}
+        />
+      )
+      const billboard = within(subject.getDOMNode())
+      expect(await billboard.find(`:textContent(${message})`)).to.exist()
+    })
+
+    it('should render message passed a function', async () => {
+      const message = 'hello some message'
+
+      const subject = await mount(
+        <Billboard
+          heading='Test heading'
+          message={() => <span>{message}</span>}
+        />
+      )
+      const billboard = within(subject.getDOMNode())
+      expect(await billboard.find(`:textContent(${message})`)).to.exist()
+    })
+  })
+
   describe('when disabled', async () => {
     it('should apply aria-disabled to link', async () => {
       const subject = await mount(

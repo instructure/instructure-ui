@@ -20,8 +20,10 @@ example: true
 
 - If Billboard has an `href` prop set, it will render as a link;
 if an `onClick` prop is set, the component will render as a button.
-- Use the `message` prop for your link or button text/call to action, and
-the `size` prop to adjust the size of the icon and text.
+- Use the `message` prop for your link or button text/call to action (Note:
+don't pass interactive content to the `message` prop if you have set the `href`
+or `onClick` props).
+- Use the `size` prop to adjust the size of the icon and text.
 - Pass [Instructure icons](#icons-react) to the `hero` property via a function
 _(see examples)_, and they will be sized correctly based on the Billboard's
 `size`.

@@ -30,6 +30,7 @@ import Heading from '@instructure/ui-elements/lib/components/Heading'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
+import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
@@ -75,9 +76,12 @@ class Billboard extends Component {
     */
     headingLevel: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4']),
     /**
-    * Instructions or information for the Billboard
+    * Instructions or information for the Billboard. Note: you should not pass
+    * interactive content to this prop if you are also providing an `href` or
+    * `onClick`. That would cause the Billboard to render as a button or link
+    * and would result in nested interactive content.
     */
-    message: PropTypes.string,
+    message: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * If you add an onClick prop, the Billboard renders as a clickable button
     */
@@ -166,7 +170,7 @@ class Billboard extends Component {
       <span className={styles.content}>
         {hero && <span className={styles.hero}>{this.renderHero()}</span>}
         {heading && this.renderHeading()}
-        {message && <span className={styles.message}>{message}</span>}
+        {message && <span className={styles.message}>{callRenderProp(message)}</span>}
       </span>
     )
   }
