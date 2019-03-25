@@ -13,8 +13,11 @@ pipeline {
   }
 
   stages {
-    stage('Deploy') {
-
+    stage('Release') {
+      when {
+        environment name: "GERRIT_EVENT_TYPE",
+        value: "change-merged"
+      }
       steps {
         withCredentials([
           sshUserPrivateKey(
