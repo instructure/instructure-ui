@@ -26,12 +26,17 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import { View } from '@instructure/ui-layout'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { Select } from '@instructure/ui-forms'
+import { IconCheckLine } from '@instructure/ui-icons'
 
 import styles from './styles.css'
 import theme from './theme'
+import Row from '../Row'
+import ColHeader from '../ColHeader'
 
 /**
 ---
@@ -40,39 +45,97 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class Head extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * Table.Row
+     * `Table.Row`
      */
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    children: ChildrenPropTypes.oneOf([Row]),
+    isStacked: PropTypes.bool
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
-    size: 'medium',
-    colAlign: 'start'
+    children: null
+  }
+
+  renderSelect () {
+    const { children } = this.props
+    const [ row ] = Children.toArray(children)
+
+    if (!matchComponentTypes(row, [Row])) {
+      return null
+    }
+    const options = []
+    const clickHandlers = {}
+    let selectedOption = null
+    let count = 0
+
+    Children.forEach(row.props.children, (colHeader) => {
+      count += 1
+      if (matchComponentTypes(colHeader, [ColHeader])) {
+        const {id, sortDirection, onRequestSort} = colHeader.props
+
+        if (onRequestSort) {
+          options.push(id)
+          clickHandlers[id] = onRequestSort
+          if (sortDirection !== 'none') {
+            selectedOption = id
+          }
+        }
+      }
+    })
+    if (!options.length) {
+      return null
+    }
+    const handleSelect = (event, { value }) => clickHandlers[value](event, {
+      id: value,
+    })
+
+    return (
+      <div role="rowgroup">
+        <div role="row">
+          <div role="cell" aria-colspan={count}>
+            <Select
+              label=""
+              selectedOption={selectedOption}
+              onChange={handleSelect}
+            >
+              {options.map((option) => (
+                <option
+                  key={option}
+                  value={option}
+                  icon={option === selectedOption
+                    ? IconCheckLine
+                    : () => <IconCheckLine style={{color: 'transparent'}} />}
+                >
+                  {option}
+                </option>
+              ))}
+            </Select>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   render () {
-    const { children, size, colAlign } = this.props
+    const { children, isStacked } = this.props
 
-    return (
-      <View
-        {...omitProps(this.props, Head.propTypes)}
-        as="thead"
-        className={styles.root}
-      >
-        {Children.map(children, (child) => {
-          return safeCloneElement(child, {
-            key: `${child.props.name}`,
-            size,
-            colAlign,
-          })
-        })}
-      </View>
-    )
+    return isStacked
+      ? this.renderSelect()
+      : (
+        <thead
+          {...omitProps(this.props, Head.propTypes)}
+          className={styles.root}
+        >
+          {Children.map(children, (child) => {
+            return safeCloneElement(child, {
+              key: child.props.name,
+            })
+          })}
+        </thead>
+      )
   }
 }
 

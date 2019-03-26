@@ -23,53 +23,38 @@
  */
 
 .root {
+  background: var(--background);
+  vertical-align: middle;
+  box-sizing: border-box;
+}
+
+.header {
+  color: var(--color);
   font-size: var(--fontSize);
   font-family: var(--fontFamily);
   font-weight: bold;
-  color: var(--color);
-  background: var(--background);
-  box-sizing: border-box;
-  vertical-align: middle;
-  padding: 0;
+  line-height: var(--lineHeight);
+  padding: var(--padding);
 }
 
-.small {
-  font-size: var(--smallFontSize);
-  line-height: var(--smallLineHeight);
-  padding: var(--smallPadding);
-}
-
-.medium {
-  font-size: var(--mediumFontSize);
-  line-height: var(--mediumLineHeight);
-  padding: var(--mediumPadding);
-}
-
-.large {
-  font-size: var(--largeFontSize);
-  line-height: var(--largeLineHeight);
-  padding: var(--largePadding);
-}
-
-.colAlign--start {
+.textAlign--start {
   text-align: start;
 }
 
-.colAlign--center {
+.textAlign--center {
   text-align: center;
 }
 
-.colAlign--end {
+.textAlign--end {
   text-align: end;
 }
 
 .button {
+  box-sizing: border-box;
   border: none;
-  color: inherit; /* Without this, Safari changes color when button is active */
   width: 100%;
   height: 100%;
   background: transparent;
-  font-weight: bold;
   cursor: pointer;
   outline: none;
 

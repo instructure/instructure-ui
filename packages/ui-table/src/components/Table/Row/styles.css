@@ -34,6 +34,10 @@
   border-bottom-color: var(--borderColor);
 }
 
+.stacked {
+  padding: var(--padding);
+}
+
 .hover {
   border-left: 0.1875rem solid transparent; /* stylelint-disable-line property-blacklist */
   border-right: 0.1875rem solid transparent; /* stylelint-disable-line property-blacklist */

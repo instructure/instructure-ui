@@ -28,8 +28,11 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
+import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-layout'
 
 import styles from './styles.css'
@@ -51,13 +54,13 @@ id: TableControlled
 class Table extends Component {
   static propTypes = {
     /**
-     * Set the table's caption.
+     * Set the table's caption for screen reader
      */
-    caption: PropTypes.node.isRequired,
+    caption: PropTypes.string.isRequired,
     /**
-     * Build table via Table.Head or Table.Body
+     * Build table via `Table.Head` and `Table.Body`
      */
-    children: PropTypes.node,
+    children: ChildrenPropTypes.oneOf([Head, Body]),
     /**
      * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
      * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -73,27 +76,22 @@ class Table extends Component {
      */
     hover: PropTypes.bool,
     /**
-     * Control the padding and font-size of table cells
-     */
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    /**
      * `auto` lets the browser determine table column widths based on cell content,
      * while `fixed` forces columns of equal width.
      */
     layout: PropTypes.oneOf(['auto', 'fixed']),
     /**
-     * Control the horizontal alignment of table cells
+     * `stacked` renders table in one column to be more readable on narrow screens
      */
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    mode: PropTypes.oneOf(['default', 'stacked']),
   }
 
   static defaultProps = {
     children: null,
     hover: false,
-    size: 'medium',
     layout: 'auto',
-    colAlign: 'start',
-    margin: 'none',
+    mode: 'default',
+    margin: undefined,
     elementRef: undefined
   }
 
@@ -104,32 +102,56 @@ class Table extends Component {
   static RowHeader = RowHeader
   static Cell = Cell
 
+  getHeaders () {
+    const { children } = this.props
+    const [ head ] = Children.toArray(children)
+
+    if (matchComponentTypes(head, [Head])) {
+      const [ row ] = Children.toArray(head.props.children)
+
+      if (matchComponentTypes(row, [Row])) {
+        return Children.map(row.props.children, (colHeader) => {
+          return matchComponentTypes(colHeader, [ColHeader])
+            ? colHeader.props.children
+            : null
+        })
+      }
+    }
+    return null
+  }
+
   render () {
-    const { margin, elementRef, layout, caption, children, size, hover, colAlign } = this.props
-    const [head, body] = Children.toArray(children)
+    const { margin, elementRef, layout, caption, children, hover, mode } = this.props
+    const isStacked = mode === 'stacked'
+    const headers = isStacked ? this.getHeaders() : null
 
     return (
       <View
         {...View.omitViewProps(omitProps(this.props, Table.propTypes), Table)}
-        as="table"
+        as={isStacked ? 'div' : 'table'}
         margin={margin}
         elementRef={elementRef}
         className={classnames({
           [styles.root]: true,
           [styles.fixedLayout]: layout === 'fixed',
         })}
+        role={isStacked ? "table" : null}
+        aria-label={isStacked ? caption : null}
       >
-        <caption>{caption}</caption>
-        {head && safeCloneElement(head, {
-          key: head.props.name,
-          size,
-          colAlign,
-        })}
-        {body && safeCloneElement(body, {
-          key: body.props.name,
-          size,
-          colAlign,
-          hover,
+        {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
+        {Children.map(children, (child) => {
+          const props = {
+            key: child.props.name,
+            isStacked,
+          }
+
+          return matchComponentTypes(child, [Head])
+            ? safeCloneElement(child, props)
+            : safeCloneElement(child, {
+              ...props,
+              hover,
+              headers,
+            })
         })}
       </View>
     )

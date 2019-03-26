@@ -72,7 +72,7 @@ if (args.includes('--randomize')) {
 
 const browsersArgIndex = args.findIndex(arg => arg.startsWith('--browsers='))
 
-if (browsersArgIndex) {
+if (browsersArgIndex >= 0) {
   karmaArgs.push(args[browsersArgIndex])
 }
 
@@ -81,14 +81,14 @@ const pathArgIndex = args.indexOf('--path')
 
 let paths = []
 
-if (scopeArgIndex > 0) {
+if (scopeArgIndex >= 0) {
   const allPackages = getPackages()
   const scopes = args[scopeArgIndex + 1].split(',').map(scope => scope.trim())
   const pkgs = allPackages.filter(pkg => scopes.includes(pkg.name))
   if (pkgs.length > 0) {
     paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
   }
-} else if (pathArgIndex > 0) {
+} else if (pathArgIndex >= 0) {
   paths = args[pathArgIndex + 1].split(',').map(path => path.trim())
 } else if (args.includes('--changed')) {
   const changedPackages = getChangedPackages('HEAD^1')

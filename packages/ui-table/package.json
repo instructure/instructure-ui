@@ -25,8 +25,11 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
+    "@instructure/ui-a11y": "^5.50.0",
+    "@instructure/ui-forms": "^5.50.0",
     "@instructure/ui-icons": "^5.50.0",
     "@instructure/ui-layout": "^5.50.0",
+    "@instructure/ui-prop-types": "^5.50.0",
     "@instructure/ui-testable": "^5.50.0",
     "@instructure/ui-themeable": "^5.50.0",
     "@instructure/ui-utils": "^5.50.0",

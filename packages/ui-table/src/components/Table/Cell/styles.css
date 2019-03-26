@@ -30,34 +30,18 @@
   background: var(--background);
   box-sizing: border-box;
   vertical-align: middle;
+  line-height: var(--lineHeight);
+  padding: var(--padding);
 }
 
-.small {
-  font-size: var(--smallFontSize);
-  line-height: var(--smallLineHeight);
-  padding: var(--smallPadding);
-}
-
-.medium {
-  font-size: var(--mediumFontSize);
-  line-height: var(--mediumLineHeight);
-  padding: var(--mediumPadding);
-}
-
-.large {
-  font-size: var(--largeFontSize);
-  line-height: var(--largeLineHeight);
-  padding: var(--largePadding);
-}
-
-.colAlign--start {
+.textAlign--start {
   text-align: start;
 }
 
-.colAlign--center {
+.textAlign--center {
   text-align: center;
 }
 
-.colAlign--end {
+.textAlign--end {
   text-align: end;
 }

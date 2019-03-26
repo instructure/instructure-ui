@@ -27,8 +27,11 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { View } from '@instructure/ui-layout'
+
+import Row from '../Row'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -40,38 +43,38 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class Body extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * Table.Row
+     * `Table.Row`
      */
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    children: ChildrenPropTypes.oneOf([Row]),
     hover: PropTypes.bool,
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    isStacked: PropTypes.bool,
+    headers: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.node, PropTypes.func]))
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
-    size: 'medium',
-    hover: false,
-    colAlign: 'start'
+    children: null
   }
 
   render () {
-    const { children, size, hover, colAlign } = this.props
+    const { children, hover, isStacked, headers } = this.props
 
     return (
       <View
-        {...omitProps(this.props, Body.propTypes)}
-        as="tbody"
+        {...View.omitViewProps(omitProps(this.props, Body.propTypes), Body)}
+        as={isStacked ? 'div' : 'tbody'}
         className={styles.root}
+        role={isStacked ? "rowgroup" : null}
       >
         {Children.map(children, (child) => {
           return safeCloneElement(child, {
-            key: `${child.props.name}`,
-            size,
+            key: child.props.name,
             hover,
-            colAlign,
+            isStacked,
+            headers,
           })
         })}
       </View>

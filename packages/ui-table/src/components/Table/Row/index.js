@@ -27,9 +27,15 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { View } from '@instructure/ui-layout'
+
+import ColHeader from '../ColHeader'
+import RowHeader from '../RowHeader'
+import Cell from '../Cell'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -41,40 +47,54 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class Row extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * Table.ColHeader, Table.RowHeader or Table.Cell
+     * `Table.ColHeader`, `Table.RowHeader` or `Table.Cell`
      */
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
+    children: ChildrenPropTypes.oneOf([ColHeader, RowHeader, Cell]),
     hover: PropTypes.bool,
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    isStacked: PropTypes.bool,
+    headers: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.node, PropTypes.func])),
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
-    size: 'medium',
-    hover: false,
-    colAlign: 'start'
+    children: null
   }
 
   render () {
-    const { children, size, hover, colAlign } = this.props
+    const { children, hover, isStacked, headers } = this.props
 
     return (
       <View
-        {...omitProps(this.props, Row.propTypes)}
-        as="tr"
+        {...View.omitViewProps(omitProps(this.props, Row.propTypes), Row)}
+        as={isStacked ? 'div' : 'tr'}
         className={classnames({
           [styles.root]: true,
           [styles.hover]: hover,
+          [styles.stacked]: isStacked,
         })}
+        role={isStacked ? "row" : null}
       >
-        {Children.map(children, (child) => {
+        {Children.map(children, (child, index) => {
+          const props = {
+            key: child.props.name,
+          }
+
+          if (matchComponentTypes(child, [ColHeader])) {
+            return safeCloneElement(child, props)
+          }
+          if (matchComponentTypes(child, [RowHeader])) {
+            return safeCloneElement(child, {
+              ...props,
+              isStacked,
+            })
+          }
           return safeCloneElement(child, {
-            key: `${child.props.name}`,
-            size,
-            colAlign,
+            ...props,
+            isStacked,
+            header: headers && headers[index],
           })
         })}
       </View>

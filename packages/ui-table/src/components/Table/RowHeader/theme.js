@@ -33,16 +33,7 @@ export default function generator ({ colors, typography, spacing }) {
 
     borderColor: colors.borderMedium,
 
-    smallFontSize: typography.fontSizeSmall,
-    smallLineHeight: typography.lineHeightFit,
-    smallPadding: `${spacing.xxSmall} ${spacing.xSmall}`,
-
-    mediumFontSize: typography.fontSizeMedium,
-    mediumLineHeight: typography.lineHeightCondensed,
-    mediumPadding: `${spacing.xSmall} ${spacing.small}`,
-
-    largeFontSize: typography.fontSizeLarge,
-    largeLineHeight: typography.lineHeightCondensed,
-    largePadding: `${spacing.small} ${spacing.medium}`,
+    lineHeight: typography.lineHeightCondensed,
+    padding: `${spacing.xSmall} ${spacing.small}`,
   }
 }

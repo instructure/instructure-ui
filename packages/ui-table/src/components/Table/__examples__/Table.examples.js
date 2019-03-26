@@ -27,9 +27,9 @@ import React from 'react'
 import Table from '../index'
 
 export default {
-  sectionProp: 'size',
+  sectionProp: 'mode',
   propValues: {
-    size: ['small', 'medium', 'large']
+    mode: ['default', 'stacked']
   },
   getComponentProps: (props) => {
     return {

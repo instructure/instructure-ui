@@ -24,7 +24,6 @@
 
 import React from 'react'
 import { expect, mount, stub, find, within } from '@instructure/ui-test-utils'
-import { View } from '@instructure/ui-layout'
 
 import Table from '../index'
 import styles from '../Row/styles.css'
@@ -99,10 +98,64 @@ describe('<Table />', async () => {
     expect(thNode.getAttribute('scope')).to.equal('row')
   })
 
+  it('can render table in stacked mode', async () => {
+    const stackedTable = await render({
+      mode: 'stacked',
+    })
+
+    expect(stackedTable).to.exist()
+  })
+
+  it('can handle non-existent head in stacked mode', async () => {
+    const stackedTable = await mount(
+      <Table
+        caption="Test table"
+        mode="stacked"
+      >
+        <Table.Body>
+        </Table.Body>
+      </Table>
+    )
+
+    expect(stackedTable).to.exist()
+  })
+
+  it('can handle empty head in stacked mode', async () => {
+    const stackedTable = await mount(
+      <Table
+        caption="Test table"
+        mode="stacked"
+      >
+        <Table.Head>
+        </Table.Head>
+      </Table>
+    )
+
+    expect(stackedTable).to.exist()
+  })
+
+  it('can handle invalid header in stacked mode', async () => {
+    const stackedTable = await mount(
+      <Table
+        caption="Test table"
+        mode="stacked"
+      >
+        <Table.Head>
+          <Table.Row>
+            <Table.Cell>Foo</Table.Cell>
+          </Table.Row>
+        </Table.Head>
+      </Table>
+    )
+
+    expect(stackedTable).to.exist()
+  })
+
   describe('when table is sortable', async () => {
-    const renderSortableTable = (props) => mount(
+    const renderSortableTable = (props, mode = 'default') => mount(
       <Table
         caption="Sortable table"
+        mode={mode}
       >
         <Table.Head>
           <Table.Row>
@@ -142,39 +195,28 @@ describe('<Table />', async () => {
       await button.click()
       expect(onRequestSort).to.have.been.calledOnce()
     })
-  })
 
-  describe('when passing down props to View', async () => {
-    const allowedProps = {
-      margin: 'small',
-      elementRef: () => {}
-    }
+    it('can render table head as a combobox when in stacked mode', async () => {
+      const sortFoo = stub()
 
-    Object.keys(View.propTypes)
-      .filter(prop => prop !== 'theme' && prop !== 'children')
-      .forEach((prop) => {
-        if (Object.keys(allowedProps).indexOf(prop) < 0) {
-          it(`should NOT allow the '${prop}' prop`, async () => {
-            const consoleError = stub(console, 'error')
-            const warning = `Warning: [Table] prop '${prop}' is not allowed.`
-            const props = {
-              [prop]: 'foo'
-            }
+      await renderSortableTable({
+        onRequestSort: sortFoo,
+      }, 'stacked')
+      const input = await find('input[role="combobox"]')
 
-            await mount(<Table caption="Test table" {...props} />)
-            expect(consoleError)
-              .to.be.calledWithExactly(warning)
-          })
-        } else {
-          it(`should allow the '${prop}' prop`, async () => {
-            const props = { [prop]: allowedProps[prop] }
-            const consoleError = stub(console, 'error')
+      await input.keyDown('down')
+      await input.keyDown('enter')
+      expect(sortFoo).to.have.been.calledOnce()
+    })
 
-            await mount(<Table caption="Test table" {...props} />)
-            expect(consoleError)
-              .to.not.be.called()
-          })
-        }
-      })
+    it('can render check mark for sorted column in stacked mode', async () => {
+      await renderSortableTable({
+        onRequestSort: stub(),
+        sortDirection: 'ascending',
+      }, 'stacked')
+      const icon = await find('svg[name="IconCheck"]')
+
+      expect(icon).to.exist()
+    })
   })
 })

@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
 import { View } from '@instructure/ui-layout'
 
 import styles from './styles.css'
@@ -40,33 +41,37 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class RowHeader extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    isStacked: PropTypes.bool,
+    /**
+     * Control the text alignment in row header
+     */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
-    size: 'medium',
-    colAlign: 'start'
+    textAlign: 'start',
+    children: null
   }
 
   render () {
-    const { children, size, colAlign } = this.props
+    const { children, textAlign, isStacked } = this.props
 
     return (
       <View
-        {...omitProps(this.props, RowHeader.propTypes)}
-        as="th"
+        {...View.omitViewProps(omitProps(this.props, RowHeader.propTypes), RowHeader)}
+        as={isStacked ? 'div' : 'th'}
         className={classnames({
           [styles.root]: true,
-          [styles[size]]: true,
-          [styles[`colAlign--${colAlign}`]]: colAlign,
+          [styles[`textAlign--${textAlign}`]]: textAlign,
         })}
         scope="row"
+        role={isStacked ? "rowheader" : null}
       >
-        {children}
+        {callRenderProp(children)}
       </View>
     )
   }

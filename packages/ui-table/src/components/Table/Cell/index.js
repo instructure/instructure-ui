@@ -28,6 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
 import { View } from '@instructure/ui-layout'
 
 import styles from './styles.css'
@@ -40,34 +41,39 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class Cell extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
-    header: PropTypes.node,
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    isStacked: PropTypes.bool,
+    header: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+     * Control the text alignment in cell
+     */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end'])
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
-    children: null,
-    size: 'medium',
-    colAlign: 'start',
-    header: undefined
+    textAlign: 'start',
+    children: null
   }
 
   render () {
-    const { children, size, colAlign } = this.props
+    const { children, textAlign, isStacked, header } = this.props
 
     return (
       <View
-        {...omitProps(this.props, Cell.propTypes)}
-        as="td"
+        {...View.omitViewProps(omitProps(this.props, Cell.propTypes), Cell)}
+        as={isStacked ? 'div' : 'td'}
         className={classnames({
           [styles.root]: true,
-          [styles[size]]: true,
-          [styles[`colAlign--${colAlign}`]]: colAlign,
+          [styles[`textAlign--${textAlign}`]]: textAlign,
         })}
+        role={isStacked ? "cell" : null}
       >
-        {children}
+        {callRenderProp(header)}
+        {header && ': '}
+        {callRenderProp(children)}
       </View>
     )
   }

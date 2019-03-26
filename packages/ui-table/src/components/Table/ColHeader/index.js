@@ -29,6 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { IconMiniArrowUpLine, IconMiniArrowDownLine } from '@instructure/ui-icons'
+import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -40,14 +41,22 @@ parent: TableControlled
 **/
 @themeable(theme, styles)
 class ColHeader extends Component {
+  /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * A unique id for this column
+     * A unique id for this column. When sortable table is in stacked mode,
+     * id is also used as option in combobox.
      */
     id: PropTypes.string.isRequired,
-    children: PropTypes.node,
-    size: PropTypes.oneOf(['small', 'medium', 'large']),
-    colAlign: PropTypes.oneOf(['start', 'center', 'end']),
+    children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
+    /**
+     * Control the width of column.
+     */
+    width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    /**
+     * Control the text alignment in column header
+     */
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
      * The string of sorting direction
      */
@@ -57,13 +66,12 @@ class ColHeader extends Component {
      */
     onRequestSort: PropTypes.func,
   }
+  /* eslint-enable react/require-default-props */
 
   static defaultProps = {
+    textAlign: 'start',
     sortDirection: 'none',
-    children: null,
-    colAlign: 'start',
-    size: 'medium',
-    onRequestSort: undefined
+    children: null
   }
 
   handleClick = (event) => {
@@ -91,28 +99,31 @@ class ColHeader extends Component {
   }
 
   render () {
-    const { onRequestSort, size, colAlign, children } = this.props
+    const { onRequestSort, width, textAlign, children } = this.props
 
     return (
       <th
         {...omitProps(this.props, ColHeader.propTypes)}
         className={classnames({
           [styles.root]: true,
-          [styles[size]]: !onRequestSort,
-          [styles[`colAlign--${colAlign}`]]: colAlign,
+          [styles.header]: !onRequestSort,
+          [styles[`textAlign--${textAlign}`]]: textAlign,
         })}
+        style={{
+          width,
+        }}
         scope="col"
       >
         {onRequestSort && (
           <button
             onClick={this.handleClick}
             className={classnames({
+              [styles.header]: true,
               [styles.button]: true,
-              [styles[size]]: true,
-              [styles[`colAlign--${colAlign}`]]: colAlign,
+              [styles[`textAlign--${textAlign}`]]: textAlign,
             })}
           >
-            {children}
+            {callRenderProp(children)}
             {this.renderSortArrow()}
           </button>
         )}
