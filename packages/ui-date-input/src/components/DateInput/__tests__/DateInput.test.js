@@ -161,7 +161,7 @@ describe('<DateInput />', async () => {
 
       await subject.setProps({ interaction: 'readonly' })
 
-      expect(await dateInput.findInput('[disabled]')).to.exist()
+      expect(await dateInput.findInput('[readonly]')).to.exist()
     })
 
     it('should set placeholder', async () => {
