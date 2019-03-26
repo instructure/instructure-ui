@@ -2,7 +2,6 @@ pipeline {
   agent { label 'docker' }
 
   environment {
-    CI=true
     NPM_EMAIL="${NPM_EMAIL}"
     GIT_EMAIL="${GIT_EMAIL}"
     GIT_USERNAME="${GIT_USERNAME}"
