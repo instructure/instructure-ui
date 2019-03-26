@@ -27,8 +27,6 @@ const { readEnv } = require('../utils/readEnv')
 
 readEnv()
 
-process.env['NODE_ENV'] = process.env.NODE_ENV || 'test'
-
 if (process.argv.includes('--lint')) {
   require('./lint')
 } else if (process.argv.includes('--mocha')) {

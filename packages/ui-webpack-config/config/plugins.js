@@ -27,11 +27,13 @@ const webpack = require('webpack')
 const WatchMissingNodeModulesPlugin = require('react-dev-utils/WatchMissingNodeModulesPlugin')
 
 const ENV = process.env.NODE_ENV || 'production'
-const DEBUG = Boolean(process.env.DEBUG) || ENV === 'development'
+const DEBUG = process.env.DEBUG || ENV === 'development'
+const DISABLE_SPEEDY_STYLESHEET = process.env.DISABLE_SPEEDY_STYLESHEET || false
 
 const envVars = {
   NODE_ENV: ENV,
-  DEBUG: DEBUG
+  DEBUG,
+  DISABLE_SPEEDY_STYLESHEET
 }
 
 module.exports = [

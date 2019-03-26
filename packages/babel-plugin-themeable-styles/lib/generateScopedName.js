@@ -26,9 +26,8 @@ const loaderUtils = require('loader-utils')
 const { getPackage } = require('@instructure/pkg-utils')
 
 const ENV = process.env.BABEL_ENV || process.env.NODE_ENV || 'development'
-const UNMANGLED_CLASS_NAMES = Boolean(process.env.UNMANGLED_CLASS_NAMES) ||
-  Boolean(process.env.DEBUG) ||
-  ENV === 'development'
+const UNMANGLED_CLASS_NAMES = process.env.UNMANGLED_CLASS_NAMES ||
+  process.env.DEBUG || ENV === 'development'
 
 module.exports = function generateScopedName (getComponentId, config, name, filepath, css) {
   const componentId = getComponentId()

@@ -23,32 +23,47 @@
  */
 
 const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
+
+const {
+  BABEL_ENV,
+  NODE_ENV,
+  DEBUG,
+  UNMANGLED_CLASS_NAMES,
+  DISABLE_SPEEDY_STYLESHEET
+} = process.env
+
+const args = process.argv.slice(2)
+
 // ui-build src --watch
 // ui-build --watch src
-const src = process.argv.slice(2).filter(arg => (arg.indexOf('--') == -1))[0] || 'src'
-const vars = []
-const args = [src, '--ignore "src/**/*.test.js","src/**/__tests__/**"']
+const src = args.filter(arg => (arg.indexOf('--') == -1))[0] || 'src'
 
-if (process.argv.includes('--copy-files')) {
-  args.push('--copy-files')
+const babelArgs = [src, '--ignore "src/**/*.test.js","src/**/__tests__/**"']
+
+if (args.includes('--copy-files')) {
+  babelArgs.push('--copy-files')
 }
 
-if (process.argv.includes('--watch')) {
-  vars.push('NODE_ENV=development')
-  args.push('--watch')
+let envVars
+
+if (args.includes('--watch')) {
+  envVars = [
+    'NODE_ENV=development',
+    'DEBUG=1',
+    'UNMANGLED_CLASS_NAMES=1',
+    'DISABLE_SPEEDY_STYLESHEET=1'
+  ]
+  babelArgs.push('--watch')
 } else {
-  vars.push(`NODE_ENV=${process.env.NODE_ENV}`)
-}
-
-if (process.env.DEBUG) {
-  vars.push(`DEBUG=${process.env.DEBUG}`)
-}
-
-if (process.env.UNMANGLED_CLASS_NAMES) {
-  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+  envVars = [
+    `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
+    (DEBUG ? `DEBUG=1` : false),
+    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
+    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
+  ].filter(Boolean)
 }
 
 process.exit(runCommandsConcurrently({
-  es: getCommand('babel', [...args, '--out-dir', 'es'], [...vars, 'ES_MODULES=1']),
-  lib: getCommand('babel', [...args, '--out-dir', 'lib'], vars)
+  es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], [...envVars, 'ES_MODULES=1']),
+  lib: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], envVars)
 }).status)

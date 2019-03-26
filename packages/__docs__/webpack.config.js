@@ -26,7 +26,9 @@ const path = require('path')
 const React = require('react')
 const baseConfig = require('@instructure/ui-webpack-config')
 
-const DEBUG = process.env.DEBUG || process.env.NODE_ENV === 'development'
+const ENV = process.env.NODE_ENV || 'production'
+const DEBUG = process.env.DEBUG || ENV === 'development'
+
 const outputPath = path.resolve(__dirname, '__build__')
 
 // eslint-disable-next-line no-console

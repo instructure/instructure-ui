@@ -23,10 +23,15 @@
  */
 const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
+const {
+  CHROMATIC_APP_CODE
+} = process.env
+
+const args = process.argv.slice(2)
+
 let result
 
 // ui-build --vrt -p 8080
-const args = process.argv.slice(2)
 const portIndex = args.findIndex(arg => arg === '-p')
 let port = '9001'
 if (portIndex > 0) {
@@ -38,7 +43,7 @@ result = runCommandsConcurrently({
   chromatic: getCommand(
     'chromatic',
     ['test', '--storybook-port', port, '--no-interactive', '--exit-zero-on-changes'],
-    [`CHROMATIC_APP_CODE=${process.env.CHROMATIC_APP_CODE}`]
+    [`CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}`]
   )
 })
 

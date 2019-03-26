@@ -38,7 +38,7 @@ const generateScopedName = require('./generateScopedName')
 
 const matchExtensions = /\.css$/i
 
-const USE_WEBPACK_CSS_LOADERS = Boolean(process.env.USE_WEBPACK_CSS_LOADERS) || Boolean(process.env.DEBUG)
+const USE_WEBPACK_CSS_LOADERS = process.env.USE_WEBPACK_CSS_LOADERS || process.env.DEBUG
 
 module.exports = function transformThemeableStyles ({ types: t }) {
   const STYLES = new Map()

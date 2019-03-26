@@ -36,6 +36,7 @@ import theme from './theme'
 /**
 ---
 parent: Tabs
+id: Tabs.Tab
 ---
 **/
 @testable()

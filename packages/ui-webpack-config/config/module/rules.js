@@ -23,8 +23,8 @@
  */
 
 const path = require('path')
-
-const DEBUG = Boolean(process.env.DEBUG) || process.env.NODE_ENV === 'development'
+const ENV = process.env.NODE_ENV || 'production'
+const DEBUG = process.env.DEBUG || ENV === 'development'
 const exclude = [ /node_modules/, /\/lib\//, /\/es\// ]
 
 const babelLoader = {

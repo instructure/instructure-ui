@@ -47,7 +47,6 @@ export default function renderExample ({ Component, componentProps, exampleProps
         tip={<pre>{JSON.stringify(componentProps,null,2)}</pre>}
         placement="bottom"
         on={['click']}
-        size="large"
       >
         <Button variant="icon" size="small">
           <Text color="secondary">

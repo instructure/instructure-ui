@@ -27,8 +27,6 @@ const { readEnv } = require('../utils/readEnv')
 
 readEnv()
 
-process.env['NODE_ENV'] = process.env['NODE_ENV'] || 'production'
-
 if (process.argv.includes('--examples')) {
   require('./examples')
 } else if (process.argv.includes('--bundle')) {

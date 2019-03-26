@@ -26,76 +26,86 @@ const React = require('react')
 const { getPackages, getChangedPackages } = require('@instructure/pkg-utils')
 const { getCommand, runCommandsConcurrently } = require('@instructure/command-utils')
 
-const vars = ['NODE_ENV=test', `REACT_VERSION=${React.version}`, 'NODE_OPTIONS=--max_old_space_size=8192']
-const { argv } = process
-const args = ['start']
+const {
+  UNMANGLED_CLASS_NAMES,
+  DISABLE_SPEEDY_STYLESHEET,
+  USE_WEBPACK_CSS_LOADERS
+} = process.env
 
-if (argv.includes('--watch')) {
-  vars.push('DEBUG=1')
+const args = process.argv.slice(2)
+
+const karmaArgs = ['start']
+
+let envVars = [
+  'NODE_ENV=test',
+  `REACT_VERSION=${React.version}`,
+  'NODE_OPTIONS=--max_old_space_size=8192'
+]
+
+if (args.includes('--watch')) {
+  envVars = envVars.concat([
+    `DEBUG=1`,
+    `UNMANGLED_CLASS_NAMES=1`,
+    `USE_WEBPACK_CSS_LOADERS=1`,
+    'DISABLE_SPEEDY_STYLESHEET=1'
+  ])
 } else {
-  vars.push('COVERAGE=1')
-
-  if (process.env.DEBUG) {
-    vars.push(`DEBUG=${process.env.DEBUG}`)
-  }
+  envVars = envVars.concat([
+    'COVERAGE=1',
+    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
+    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false),
+    (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false)
+  ].filter(Boolean))
 }
 
-if (process.env.UNMANGLED_CLASS_NAMES) {
-  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
+if (args.includes('--no-launch')) {
+  karmaArgs.push('--no-launch')
 }
 
-if (process.env.USE_WEBPACK_CSS_LOADERS) {
-  vars.push(`USE_WEBPACK_CSS_LOADERS=${process.env.USE_WEBPACK_CSS_LOADERS}`)
+if (args.includes('--no-headless')) {
+  karmaArgs.push('--no-headless')
 }
 
-if (argv.includes('--no-launch')) {
-  args.push('--no-launch')
+if (args.includes('--randomize')) {
+  karmaArgs.push('--randomize')
 }
 
-if (argv.includes('--no-headless')) {
-  args.push('--no-headless')
-}
-
-if (argv.includes('--randomize')) {
-  args.push('--randomize')
-}
-
-const browsersArgIndex = argv.findIndex(arg => arg.startsWith('--browsers='))
+const browsersArgIndex = args.findIndex(arg => arg.startsWith('--browsers='))
 
 if (browsersArgIndex) {
-  args.push(argv[browsersArgIndex])
+  karmaArgs.push(args[browsersArgIndex])
 }
 
-const scopeArgIndex = argv.indexOf('--scope')
-const pathArgIndex = argv.indexOf('--path')
+const scopeArgIndex = args.indexOf('--scope')
+const pathArgIndex = args.indexOf('--path')
 
 let paths = []
 
 if (scopeArgIndex > 0) {
   const allPackages = getPackages()
-  const scopes = argv[scopeArgIndex + 1].split(',').map(scope => scope.trim())
+  const scopes = args[scopeArgIndex + 1].split(',').map(scope => scope.trim())
   const pkgs = allPackages.filter(pkg => scopes.includes(pkg.name))
   if (pkgs.length > 0) {
     paths = pkgs.map(pkg => path.relative('.', pkg.location) + path.sep)
   }
 } else if (pathArgIndex > 0) {
-  paths = argv[pathArgIndex + 1].split(',').map(path => path.trim())
-} else if (argv.includes('--changed')) {
+  paths = args[pathArgIndex + 1].split(',').map(path => path.trim())
+} else if (args.includes('--changed')) {
   const changedPackages = getChangedPackages('HEAD^1')
   paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
-} else if (argv.includes('--staged')) {
+} else if (args.includes('--staged')) {
   const changedPackages = getChangedPackages('--cached')
   paths = changedPackages.map(pkg => path.relative('.', pkg.location) + path.sep)
 }
 
 if (paths.length > 0) {
-  vars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
+  envVars.push(`UI_TEST_SCOPE_PATHS=${paths.join(',')}`)
 }
 
-if (argv.includes('--testbed')) {
-  vars.push('USE_TESTBED=1')
+if (args.includes('--testbed')) {
+  envVars.push('USE_TESTBED=1')
 }
 
 process.exit(runCommandsConcurrently({
-  karma: getCommand('karma', args, vars)
+  karma: getCommand('karma', karmaArgs, envVars)
 }).status)

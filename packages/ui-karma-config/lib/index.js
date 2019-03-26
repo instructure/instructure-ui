@@ -31,8 +31,8 @@ const randomizeTestOrder = process.argv.some((arg) => arg === '--randomize')
 
 const baseWebpackConfig = require('@instructure/ui-webpack-config')
 
-const DEBUG = Boolean(process.env.DEBUG)
-const withCoverage = Boolean(process.env.COVERAGE)
+const DEBUG = process.env.DEBUG
+const withCoverage = process.env.COVERAGE
 
 const CHROME_FLAGS = [
   '--no-sandbox',

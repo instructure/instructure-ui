@@ -21,11 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const DEBUG = process.env.DEBUG
+const ENV = process.env.NODE_ENV || 'production'
 
 module.exports = {
-  cache: process.env.NODE_ENV !== 'production',
-  bail: !process.env.DEBUG,
-  devtool: (process.env.NODE_ENV === 'production') ? 'none' : 'cheap-module-source-map',
+  cache: ENV !== 'production',
+  bail: !DEBUG,
+  devtool: (ENV === 'production') ? 'none' : 'cheap-module-source-map',
   node: { fs: 'empty' },
   resolveLoader: {
     alias: require('./resolveLoader/alias')
@@ -36,6 +38,6 @@ module.exports = {
   plugins: require('./plugins'),
   optimization: require('./optimization'),
   performance: {
-    hints: (process.env.NODE_ENV === 'production') ? 'warning' : false,
+    hints: (ENV === 'production') ? 'warning' : false,
   }
 }

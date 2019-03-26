@@ -25,47 +25,49 @@ const path = require('path')
 const { runCommandsConcurrently, getCommand } = require('@instructure/command-utils')
 
 const rootPath = path.resolve(process.cwd(), '../../node_modules')
-
-let result
-
-// ui-build --examples -p 8080
+const {
+  DEBUG,
+  UNMANGLED_CLASS_NAMES,
+  DISABLE_SPEEDY_STYLESHEET,
+  USE_WEBPACK_CSS_LOADERS
+} = process.env
 
 const args = process.argv.slice(2)
-const vars = []
+
+// ui-build --examples -p 8080
 const portIndex = args.findIndex(arg => arg === '-p')
 let port = '8080'
 if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-if (process.env.DEBUG) {
-  vars.push(`DEBUG=${process.env.DEBUG}`)
-}
+let command, commandArgs, envVars
 
-if (process.env.UNMANGLED_CLASS_NAMES) {
-  vars.push(`UNMANGLED_CLASS_NAMES=${process.env.UNMANGLED_CLASS_NAMES}`)
-}
-
-if (process.env.USE_WEBPACK_CSS_LOADERS) {
-  vars.push(`USE_WEBPACK_CSS_LOADERS=${process.env.USE_WEBPACK_CSS_LOADERS}`)
-}
-
-if (process.argv.includes('--watch')) {
-  result = runCommandsConcurrently({
-    // DEBUG=1 start-storybook -p
-    storybook: getCommand('start-storybook',
-      ['-c', '.storybook', '-p', port],
-      ['NODE_ENV=development', ...vars]
-    )
-  })
+if (args.includes('--watch')) {
+  command = 'start-storybook'
+  commandArgs = ['-c', '.storybook', '-p', port]
+  envVars = [
+    'NODE_ENV=development',
+    'DEBUG=1',
+    'UNMANGLED_CLASS_NAMES=1',
+    'USE_WEBPACK_CSS_LOADERS=1',
+    'DISABLE_SPEEDY_STYLESHEET=1'
+  ]
 } else {
-  result = runCommandsConcurrently({
-    // build-storybook -o __build__
-    storybook: getCommand('build-storybook',
-      ['-c', '.storybook', '-o', '__build__'],
-      [`NODE_ENV=production`, `NODE_PATH=${rootPath}`, ...vars]
-    )
-  })
+  command = 'build-storybook'
+  commandArgs = ['-c', '.storybook', '-o', '__build__']
+  envVars = [
+    `NODE_ENV=production`,
+    `NODE_PATH=${rootPath}`,
+    (DEBUG ? `DEBUG=1` : false),
+    (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
+    (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false),
+    (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
+  ].filter(Boolean)
 }
 
-process.exit(result.status)
+process.exit(
+  runCommandsConcurrently({
+    storybook: getCommand(command, commandArgs, envVars)
+  }).status
+)
