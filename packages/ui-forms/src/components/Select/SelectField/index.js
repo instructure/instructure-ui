@@ -262,7 +262,7 @@ class SelectField extends Component {
   }
 
   get placement () {
-    if (this.expanded) {
+    if (this.state.expanded) {
       return this.props.placement || 'bottom stretch'
     } else {
       return 'offscreen'
@@ -688,7 +688,6 @@ class SelectField extends Component {
             placement={this.placement}
             onPositioned={this.handlePositioned}
             target={this._inputContainer}
-            mountNode={document.body}
             constrain={constrain}
           >
             <PositionContent>
