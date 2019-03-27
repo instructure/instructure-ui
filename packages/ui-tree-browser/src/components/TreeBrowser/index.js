@@ -93,9 +93,13 @@ export default class TreeBrowser extends Component {
     onCollectionToggle: PropTypes.func,
     onItemClick: PropTypes.func,
     /**
-    * An optional label to assist visually impaired users
-    */
-    treeLabel: PropTypes.string
+     * An optional label to assist visually impaired users
+     */
+    treeLabel: PropTypes.string,
+    /**
+     * whether or not to display text and descriptors in full text on hover.
+     */
+    showFulltext: PropTypes.bool
   }
 
   static defaultProps = {
@@ -112,7 +116,8 @@ export default class TreeBrowser extends Component {
     onCollectionToggle: function (collection) {},
     rootId: undefined,
     expanded: undefined,
-    treeLabel: undefined
+    treeLabel: undefined,
+    showFulltext: false
   }
 
   constructor (props) {

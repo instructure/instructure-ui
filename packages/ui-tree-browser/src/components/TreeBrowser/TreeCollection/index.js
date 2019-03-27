@@ -65,7 +65,8 @@ export default class TreeCollection extends Component {
     onKeyDown: PropTypes.func,
     numChildren: PropTypes.number,
     level: PropTypes.number,
-    position: PropTypes.number
+    position: PropTypes.number,
+    showFulltext: PropTypes.bool
   }
 
   static defaultProps = {
@@ -218,7 +219,8 @@ export default class TreeCollection extends Component {
       descriptor: this.props.descriptor,
       size: this.props.size,
       variant: this.props.variant,
-      itemIcon: this.props.itemIcon
+      itemIcon: this.props.itemIcon,
+      showFulltext: this.props.showFulltext
     }
   }
 

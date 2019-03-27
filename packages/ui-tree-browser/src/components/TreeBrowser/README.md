@@ -32,6 +32,7 @@ example: true
   }}
   defaultExpanded={[1, 3]}
   rootId={1}
+  showFulltext
 />
 ```
 

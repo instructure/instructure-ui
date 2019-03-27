@@ -29,6 +29,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
 import Img from '@instructure/ui-elements/lib/components/Img'
+import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -42,6 +43,21 @@ parent: TreeBrowser
 @testable()
 @themeable(theme, styles)
 export default class TreeButton extends Component {
+  constructor(props) {
+    super(props)
+
+    this.nameEl = null
+    this.descriptorEl = null
+
+    this.state = {
+      isTruncated: false
+    }
+  }
+
+  componentDidMount() {
+    this.checkForTruncation()
+  }
+
   static propTypes = {
     id: PropTypes.oneOfType([
       PropTypes.string,
@@ -59,7 +75,8 @@ export default class TreeButton extends Component {
     onClick: PropTypes.func,
     expanded: PropTypes.bool,
     selected: PropTypes.bool,
-    focused: PropTypes.bool
+    focused: PropTypes.bool,
+    showFulltext: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -76,7 +93,8 @@ export default class TreeButton extends Component {
     itemIcon: undefined,
     thumbnail: undefined,
     expanded: false,
-    descriptor: undefined
+    descriptor: undefined,
+    showFulltext: false
   }
 
   renderImage () {
@@ -114,7 +132,33 @@ export default class TreeButton extends Component {
     }
   }
 
-  render () {
+  renderFulltext() {
+    const { name, descriptor } = this.props
+
+    return (
+      <>
+        <header>{name}</header>
+        {descriptor && <span>{descriptor}</span>}
+      </>
+    )
+  }
+
+  elementIsTruncated(el) {
+    if (!el) {
+      return false
+    }
+
+    return el.offsetWidth < el.scrollWidth
+  }
+
+  checkForTruncation() {
+    const isTruncated = this.elementIsTruncated(this.nameEl) || this.elementIsTruncated(this.descriptorEl)
+    this.setState({
+      isTruncated: isTruncated
+    })
+  }
+
+  renderButton() {
     const {
       name,
       descriptor,
@@ -139,28 +183,35 @@ export default class TreeButton extends Component {
 
     // VoiceOver can't navigate without the buttons, even though they don't do anything
     return (
-      <button
-        tabIndex={-1}
-        type="button"
-        className={classnames(classes)}
-      >
-        <span className={styles.layout}>
+      <button type="button" className={classnames(classes)}>
+        <span className={styles.layout} >
           {this.renderImage()}
-          <span className={styles.text}>
-            <span className={styles.textName}>
+          <span className={styles.text} >
+            <span className={styles.textName} ref={el => (this.nameEl = el)}>
               {name}
             </span>
-            {(descriptor)
-              ? <span
-                className={styles.textDescriptor}
-                title={descriptor}
-              >
+            {descriptor ? (
+              <span className={styles.textDescriptor} title={descriptor} ref={el => (this.descriptorEl = el)}>
                 {descriptor}
-              </span> : null
-            }
+              </span>
+            ) : null}
           </span>
         </span>
       </button>
     )
+  }
+
+  render() {
+    const { showFulltext } = this.props
+    const button = this.renderButton()
+    const displayTooltip = showFulltext && this.state.isTruncated
+
+    return displayTooltip ? (
+      <Tooltip tip={this.renderFulltext()}>
+        {button}
+      </Tooltip>
+    ) : (
+        button
+      )
   }
 }

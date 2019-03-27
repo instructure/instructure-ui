@@ -28,6 +28,7 @@ import TreeButton from '../index'
 import styles from '../styles.css'
 
 const TreeButtonLocator = locator(TreeButton.selector)
+import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
 
 describe('<TreeButton />', async () => {
   it('should render', async () => {
@@ -155,6 +156,38 @@ describe('<TreeButton />', async () => {
         { expectEmpty: true }
       )).to.not.exist()
       expect(await TreeButtonLocator.find('img')).to.exist()
+    })
+  })
+
+  describe('fulltext', async () => {
+    const wideSpaceStyle = {
+      width: '1000px'
+    }
+
+    const narrowSpaceStyle = {
+      width: '10px'
+    }
+
+    const buttonName = "Exampleeof a tree button"
+
+    it('should render the tree button with a tooltip if the content inside the tree button has been truncated', async () => {
+      await mount(<div style={narrowSpaceStyle}>
+        <TreeButton id="1" type="item" name={buttonName} showFulltext></TreeButton>
+      </div>
+      )
+
+      const tooltipLocator = await TooltipLocator.find()
+      expect(tooltipLocator).to.exist()
+    })
+
+    it('should not the render tree button with a tooltip if the content inside the tree button has not been truncated', async () => {
+      await mount(<div style={wideSpaceStyle}>
+        <TreeButton id="1" type="item" name={buttonName} showFulltext></TreeButton>
+      </div>
+      )
+
+      const tooltipLocator = await TooltipLocator.find({ expectEmpty: true })
+      expect(tooltipLocator).to.not.exist()
     })
   })
 })
