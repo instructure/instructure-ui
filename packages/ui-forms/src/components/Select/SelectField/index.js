@@ -35,6 +35,7 @@ import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import Position, { PositionContent } from '@instructure/ui-layout/lib/components/Position'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import uid from '@instructure/uid'
@@ -510,24 +511,32 @@ class SelectField extends Component {
 
   handleBlur = event => {
     event.persist()
-
+    // is focus on an input or a tag
     let stillFocused = this._inputContainer.contains(event.relatedTarget)
     if (!stillFocused && this.expanded) {
+      // is focus on an option
       stillFocused = this._menu.contains(event.relatedTarget)
     }
 
     this.setState(
       () => ({ focus: stillFocused }),
       () => {
-        if (this.expanded) {
-          if (!stillFocused) {
-            this.close(event)
-          }
+        if (this.expanded && !stillFocused) {
+          this._timeouts.push(
+            setTimeout(() => {
+              // timeout so we can check where focus went to
+              if (!containsActiveElement(this._menu)) {
+                // is focus still not on an option
+                this.close(event)
+              }
+            }, 0)
+          )
         }
         if (!stillFocused) {
           this.props.onBlur(event)
         }
-      })
+      }
+    )
   }
 
   handleClick = event => {
