@@ -22,15 +22,27 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps, pickProps } from './passthroughProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+import { contrast } from '@instructure/ui-color-utils'
+import { expect } from '@instructure/ui-test-utils'
+
+import { Options } from '../index'
+
+/* eslint-disable mocha/no-synchronous-tests */
+describe('Options.theme', () => {
+  describe('with the default theme', () => {
+    const variables = Options.generateTheme()
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
+  })
+
+  describe('with the high contrast canvas theme', () => {
+    const variables = Options.generateTheme('canvas-high-contrast')
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+  })
+})
+/* eslint-enable mocha/no-synchronous-tests */

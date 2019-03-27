@@ -52,6 +52,7 @@
     "@instructure/ui-motion": "^6.2.0",
     "@instructure/ui-navigation": "^6.2.0",
     "@instructure/ui-number-input": "^6.2.0",
+    "@instructure/ui-options": "^6.2.0",
     "@instructure/ui-overlays": "^6.2.0",
     "@instructure/ui-pages": "^6.2.0",
     "@instructure/ui-pagination": "^6.2.0",

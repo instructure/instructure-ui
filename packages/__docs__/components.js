@@ -101,6 +101,7 @@ export {
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
 export { Navigation } from '@instructure/ui-navigation'
 export { Menu } from '@instructure/ui-menu'
+export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'
 export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
@@ -112,8 +113,3 @@ export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-d
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export * from '@instructure/ui-icons'
 export { Guidelines, Figure } from '@instructure/ui-docs-client'
-
-
-
-
-

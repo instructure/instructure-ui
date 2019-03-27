@@ -22,15 +22,49 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps, pickProps } from './passthroughProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { getElementType } from '@instructure/ui-react-utils'
+import { themeable } from '@instructure/ui-themeable'
+
+import styles from './styles.css'
+import theme from './theme'
+
+/**
+---
+parent: Options
+---
+@module Separator
+**/
+@themeable(theme, styles)
+class Separator extends Component {
+  static propTypes = {
+    /**
+    * Element type to render as
+    */
+    as: PropTypes.elementType
+  }
+
+  static defaultProps = {
+    as: 'span'
+  }
+
+  render () {
+    const { as, ...rest } = this.props
+    const ElementType = getElementType(Separator, this.props, () => (as))
+
+    return (
+      <ElementType role="none">
+        <div
+          {...rest}
+          className={styles.separator}
+          role="presentation"
+        />
+      </ElementType>
+    )
+  }
+}
+
+export default Separator
+export { Separator }

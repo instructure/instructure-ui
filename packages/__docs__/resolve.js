@@ -47,6 +47,7 @@ module.exports = {
     '@instructure/ui-navigation$': path.resolve(__dirname, '../ui-navigation/src/'),
     '@instructure/ui-number-input$': path.resolve(__dirname, '../ui-number-input/src/'),
     '@instructure/ui-text-input$': path.resolve(__dirname, '../ui-text-input/src/'),
+    '@instructure/ui-options$': path.resolve(__dirname, '../ui-options/src/'),
     '@instructure/ui-overlays$': path.resolve(__dirname, '../ui-overlays/src/'),
     '@instructure/ui-pagination$': path.resolve(__dirname, '../ui-pagination/src/'),
     '@instructure/ui-pages$': path.resolve(__dirname, '../ui-pages/src/'),

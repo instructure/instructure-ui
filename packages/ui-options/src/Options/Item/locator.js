@@ -21,16 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps, pickProps } from './passthroughProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+import OptionsLocator from '../locator'
+import { Item } from './index'
+
+export default locator(Item.selector, {
+  findNestedOptions: (...args) => {
+    return OptionsLocator.find(...args)
+  }
+})

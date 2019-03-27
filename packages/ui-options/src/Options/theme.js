@@ -22,15 +22,14 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps, pickProps } from './passthroughProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+export default function generator ({ colors, typography, spacing }) {
+  return {
+    labelFontWeight: typography.fontWeightBold,
+
+    background: colors.backgroundLightest,
+    labelColor: colors.textDarkest,
+
+    labelPadding: `${spacing.xSmall} 0`,
+    nestedLabelPadding: `${spacing.xSmall} ${spacing.small}`
+  }
+}

@@ -26,6 +26,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
+import { experimental } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
@@ -37,6 +38,7 @@ category: components
 experimental: true
 ---
 **/
+@experimental()
 class Selectable extends Component {
   static propTypes = {
     /**

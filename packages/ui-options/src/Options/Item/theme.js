@@ -22,15 +22,28 @@
  * SOFTWARE.
  */
 
-/* list utils in alphabetical order */
-export { callRenderProp } from './callRenderProp'
-export { ComponentIdentifier } from './ComponentIdentifier'
-export { deprecated } from './deprecated'
-export { ensureSingleChild } from './ensureSingleChild'
-export { experimental } from './experimental'
-export { getDisplayName } from './getDisplayName'
-export { getElementType } from './getElementType'
-export { matchComponentTypes } from './matchComponentTypes'
-export { omitProps, pickProps } from './passthroughProps'
-export { safeCloneElement } from './safeCloneElement'
-export { windowMessageListener } from './windowMessageListener'
+export default function generator ({ colors, typography, spacing }) {
+  return {
+    fontSize: typography.fontSizeMedium,
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
+    lineHeight: typography.lineHeightCondensed,
+
+    color: colors.textDarkest,
+    background: colors.backgroundLightest,
+    highlightedLabelColor: colors.textLightest,
+    highlightedBackground: colors.backgroundBrand,
+    selectedLabelColor: colors.textLightest,
+    selectedBackground: colors.backgroundDark,
+
+    padding: `${spacing.xSmall} ${spacing.small}`,
+    iconPadding: spacing.small
+  }
+}
+
+generator.canvas = function (variables) {
+  return {
+    color: variables['ic-brand-font-color-dark'],
+    highlightedBackground: variables['ic-brand-primary']
+  }
+}
