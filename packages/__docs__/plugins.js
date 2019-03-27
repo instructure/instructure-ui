@@ -94,7 +94,6 @@ module.exports = [
       '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
-      '**/media-capture/src/**',
 
       // deprecated packages and modules:
       '**/generate-examples/**',

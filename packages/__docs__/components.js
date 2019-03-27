@@ -56,7 +56,6 @@ export { Table as TableControlled } from '@instructure/ui-table/lib/components'
 
 export * from '@instructure/ui-i18n/lib/components'
 export * from '@instructure/ui-layout/lib/components'
-export * from '@instructure/ui-media-player/lib/components'
 export * from '@instructure/ui-menu/lib/components'
 export * from '@instructure/ui-motion/lib/components'
 export * from '@instructure/ui-navigation/lib/components'

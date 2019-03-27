@@ -24,10 +24,5 @@
 
 module.exports = {
   files: ['packages/**/*.test.js'],
-  ignore: ['packages/ui-codemods/**'],
-  // TODO convert these to use ui-test-utils and then remove them:
-  TESTBED_REMOVE_THIS: [
-    'packages/media-capture/',
-    'packages/ui-media-player/'
-  ]
+  ignore: ['packages/ui-codemods/**']
 }
