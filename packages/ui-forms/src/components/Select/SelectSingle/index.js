@@ -24,11 +24,11 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import deepEqual from 'deep-equal'
 
 import { controllable } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import testable from '@instructure/ui-testable'
 
 import SelectField from '../SelectField'

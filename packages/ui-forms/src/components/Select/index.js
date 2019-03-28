@@ -24,11 +24,11 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import deepEqual from 'deep-equal'
 
 import { Children, controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import error from '@instructure/ui-utils/lib/error'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import testable from '@instructure/ui-testable'
