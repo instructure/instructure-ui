@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-editable",
-  "version": "5.49.0",
+  "version": "5.50.0",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,17 +20,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.49.0",
-    "@instructure/ui-test-utils": "^5.49.0"
+    "@instructure/ui-babel-preset": "^5.50.0",
+    "@instructure/ui-test-utils": "^5.50.0"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-a11y": "^5.49.0",
-    "@instructure/ui-buttons": "^5.49.0",
-    "@instructure/ui-focusable": "^5.49.0",
-    "@instructure/ui-icons": "^5.49.0",
-    "@instructure/ui-layout": "^5.49.0",
-    "@instructure/ui-utils": "^5.49.0",
+    "@instructure/ui-a11y": "^5.50.0",
+    "@instructure/ui-buttons": "^5.50.0",
+    "@instructure/ui-focusable": "^5.50.0",
+    "@instructure/ui-icons": "^5.50.0",
+    "@instructure/ui-layout": "^5.50.0",
+    "@instructure/ui-utils": "^5.50.0",
     "prop-types": "^15"
   },
   "peerDependencies": {

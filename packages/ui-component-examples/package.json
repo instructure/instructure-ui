@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-component-examples",
-  "version": "5.49.0",
+  "version": "5.50.0",
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,19 +20,19 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.49.0",
-    "@instructure/ui-test-utils": "^5.49.0"
+    "@instructure/ui-babel-preset": "^5.50.0",
+    "@instructure/ui-test-utils": "^5.50.0"
   },
   "dependencies": {
-    "@instructure/config-loader": "^5.49.0",
-    "@instructure/ui-a11y": "^5.49.0",
-    "@instructure/ui-buttons": "^5.49.0",
-    "@instructure/ui-elements": "^5.49.0",
-    "@instructure/ui-i18n": "^5.49.0",
-    "@instructure/ui-icons": "^5.49.0",
-    "@instructure/ui-layout": "^5.49.0",
-    "@instructure/ui-overlays": "^5.49.0",
-    "@instructure/uid": "^5.49.0",
+    "@instructure/config-loader": "^5.50.0",
+    "@instructure/ui-a11y": "^5.50.0",
+    "@instructure/ui-buttons": "^5.50.0",
+    "@instructure/ui-elements": "^5.50.0",
+    "@instructure/ui-i18n": "^5.50.0",
+    "@instructure/ui-icons": "^5.50.0",
+    "@instructure/ui-layout": "^5.50.0",
+    "@instructure/ui-overlays": "^5.50.0",
+    "@instructure/uid": "^5.50.0",
     "loader-utils": "^1.2.3",
     "prop-types": "^15",
     "react-docgen": "^4"

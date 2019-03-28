@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.50.0](https://github.com/instructure/instructure-ui/compare/v5.49.0...v5.50.0) (2019-03-28)
+
+
+### Bug Fixes
+
+* **ui-forms:** allow Select to render without inline mountNode ([44e9176](https://github.com/instructure/instructure-ui/commit/44e9176))
+* **ui-forms:** prevent select from closing prematurely in IE ([785c9dd](https://github.com/instructure/instructure-ui/commit/785c9dd))
+* **ui-forms:** remove explicit mountNode in Select ([8542b79](https://github.com/instructure/instructure-ui/commit/8542b79))
+
+
+
+
+
 # [5.49.0](https://github.com/instructure/instructure-ui/compare/v5.48.0...v5.49.0) (2019-03-22)
 
 

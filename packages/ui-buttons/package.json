@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-buttons",
-  "version": "5.49.0",
+  "version": "5.50.0",
   "description": "Accessible button components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,17 +20,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.49.0",
-    "@instructure/ui-test-utils": "^5.49.0"
+    "@instructure/ui-babel-preset": "^5.50.0",
+    "@instructure/ui-test-utils": "^5.50.0"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-a11y": "^5.49.0",
-    "@instructure/ui-icons": "^5.49.0",
-    "@instructure/ui-layout": "^5.49.0",
-    "@instructure/ui-testable": "^5.49.0",
-    "@instructure/ui-themeable": "^5.49.0",
-    "@instructure/ui-utils": "^5.49.0",
+    "@instructure/ui-a11y": "^5.50.0",
+    "@instructure/ui-icons": "^5.50.0",
+    "@instructure/ui-layout": "^5.50.0",
+    "@instructure/ui-testable": "^5.50.0",
+    "@instructure/ui-themeable": "^5.50.0",
+    "@instructure/ui-utils": "^5.50.0",
     "classnames": "^2",
     "keycode": "^2",
     "prop-types": "^15"

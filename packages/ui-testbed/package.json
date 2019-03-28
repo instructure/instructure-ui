@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-testbed",
-  "version": "5.49.0",
+  "version": "5.50.0",
   "description": "A test utility library for UI components",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/ui-axe-check": "^5.49.0",
+    "@instructure/ui-axe-check": "^5.50.0",
     "chai": "^4.2.0",
     "chai-enzyme": "^0.8.0",
     "chai-string": "^1.5.0",
