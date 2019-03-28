@@ -1,0 +1,19 @@
+pipeline {
+  agent { label 'docker' }
+
+  environment {
+    CHROMATIC_APP_CODE="${CHROMATIC_APP_CODE}"
+    GERRIT_CHANGE_ID="${GERRIT_CHANGE_ID}",
+    GERRIT_PROJECT="${GERRIT_PROJECT}",
+    GERRIT_BRANCH="${GERRIT_BRANCH}"
+    GERRIT_EVENT_TYPE="${GERRIT_EVENT_TYPE}"
+  }
+
+  stages {
+    stage('VRT') {
+      steps {
+        sh './docker/vrt'
+      }
+    }
+  }
+}

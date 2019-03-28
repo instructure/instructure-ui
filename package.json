@@ -35,6 +35,7 @@
     "test:mocha": "lerna run test --stream",
     "pretest:vrt": "yarn bootstrap",
     "test:vrt": "lerna run test:vrt --stream",
+    "accept:vrt": "lerna run accept:vrt --stream",
     "test:react:15": "npm-run-all install:react:15 test test:testbed install:react",
     "lint": "lerna run lint --stream",
     "lint:changes": "yarn lint --since HEAD^",
