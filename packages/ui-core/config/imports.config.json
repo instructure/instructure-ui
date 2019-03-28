@@ -120,8 +120,8 @@
     "replace": "@instructure/ui-overlays/lib/components/Popover"
   },
   {
-    "pattern": "^@instructure/ui-core/lib/components/PopoverMenu",
-    "replace": "@instructure/ui-menu/lib/components/PopoverMenu"
+   "pattern": "^@instructure/ui-core/lib/components/PopoverMenu",
+   "replace": "@instructure/ui-menu/lib/components/Menu"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
