@@ -96,7 +96,7 @@ describe('<FocusableView />', async () => {
             }
             await mount(<FocusableView {...props}>Focus Me!</FocusableView>)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

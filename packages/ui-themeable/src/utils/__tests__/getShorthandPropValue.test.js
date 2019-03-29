@@ -103,7 +103,7 @@ describe('getShorthandPropValue', () => {
     getShorthandPropValue(name, theme, value, 'borderRadius')
 
     expect(consoleError)
-      .to.have.been.calledWithExactly(warning)
+      .to.have.been.calledWith(warning)
   })
 })
 

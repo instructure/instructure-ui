@@ -101,7 +101,7 @@ describe('<Media />', async () => {
       </Media>
     )
     expect(consoleError)
-      .to.be.calledWithExactly('Warning: [Media] prop \'as\' is not allowed.')
+      .to.be.calledWith('Warning: [Media] prop \'as\' is not allowed.')
   })
 
   describe('when passing down props to View', async () => {
@@ -127,7 +127,7 @@ describe('<Media />', async () => {
               <Media {...props}>{image}</Media>
             )
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

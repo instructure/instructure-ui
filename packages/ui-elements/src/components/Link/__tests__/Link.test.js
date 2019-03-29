@@ -263,7 +263,7 @@ describe('<Link />', async () => {
             }
             await mount(<Link href="https://instructure.design" {...props}>Hello World</Link>)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

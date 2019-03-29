@@ -442,7 +442,7 @@ describe('<Pagination />', async () => {
                 </Pagination>
               )
               expect(consoleError)
-                .to.be.calledWithExactly(warning)
+                .to.be.calledWith(warning)
             })
           } else {
             it(`should allow the '${prop}' prop`, async () => {

@@ -202,7 +202,7 @@ describe('<Alert />', async () => {
           Success: Sample alert text.
         </Alert>
       )
-      expect(consoleError).to.be.calledWithExactly(warning)
+      expect(consoleError).to.be.calledWith(warning)
     })
   })
 

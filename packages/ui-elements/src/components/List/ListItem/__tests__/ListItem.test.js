@@ -77,7 +77,7 @@ describe('<ListItem />', async () => {
             }
             await mount(<ListItem {...props}>hello</ListItem>)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

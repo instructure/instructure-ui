@@ -130,6 +130,6 @@ describe('<Responsive />', async () => {
       'will be overwritten as `solid`.'
     ].join(' ')
     expect(consoleError)
-      .to.be.calledWithExactly(warning)
+      .to.be.calledWith(warning)
   })
 })

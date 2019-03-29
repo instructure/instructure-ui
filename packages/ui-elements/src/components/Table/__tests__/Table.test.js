@@ -68,7 +68,7 @@ describe('<Table />', async () => {
             }
             await mount(<Table caption="Test table" {...props} />)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

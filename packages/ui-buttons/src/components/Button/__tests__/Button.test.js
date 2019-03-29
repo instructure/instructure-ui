@@ -117,7 +117,7 @@ describe('<Button/>', async () => {
     await mount(
       <Button padding='24px 4px 24px 8px'>Hello World</Button>
     )
-    expect(consoleError).to.be.calledWithExactly(`Warning: [Button] prop 'padding' is not allowed.`)
+    expect(consoleError).to.be.calledWith(`Warning: [Button] prop 'padding' is not allowed.`)
   })
 
   it('focuses with the focus helper', async () => {
@@ -273,7 +273,7 @@ describe('<Button/>', async () => {
             await mount(
               <Button {...props}>Hello World</Button>
             )
-            expect(consoleError).to.be.calledWithExactly(warning)
+            expect(consoleError).to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

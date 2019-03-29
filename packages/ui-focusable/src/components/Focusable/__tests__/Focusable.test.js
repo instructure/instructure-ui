@@ -235,7 +235,7 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
     expect(consoleError)
-      .to.be.calledWithExactly(warning)
+      .to.be.calledWith(warning)
   })
 
   it('should warn when there are no focusable descendants', async () => {
@@ -251,7 +251,7 @@ describe('<Focusable />', async () => {
       </Focusable>
     )
     expect(consoleError)
-      .to.be.calledWithExactly(warning)
+      .to.be.calledWith(warning)
   })
 
   it('should attach event listener correctly even when the focusable element is not the root', async () => {

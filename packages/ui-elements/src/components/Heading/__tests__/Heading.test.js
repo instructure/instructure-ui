@@ -79,7 +79,7 @@ describe('<Heading />', () => {
             }
             await mount(<Heading {...props}>Hello World</Heading>)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

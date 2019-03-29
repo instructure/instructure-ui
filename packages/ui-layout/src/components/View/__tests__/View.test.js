@@ -60,7 +60,7 @@ describe('<View />', async () => {
       </View>
     )
     expect(consoleError)
-      .to.be.calledWithExactly(warning)
+      .to.be.calledWith(warning)
   })
 
   it('should not warn when as=span, display=auto, and vertical margins are not set', async () => {
@@ -223,7 +223,7 @@ describe('<View />', async () => {
 
         View.omitViewProps(props, TestClass)
 
-        expect(consoleError).to.have.been.calledWithExactly(warning)
+        expect(consoleError).to.have.been.calledWith(warning)
       })
     })
   })

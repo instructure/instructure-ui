@@ -194,7 +194,7 @@ describe('<Img />', () => {
             }
             await mount(<Img src={image} {...props} />)
             expect(consoleError)
-              .to.be.calledWithExactly(warning)
+              .to.be.calledWith(warning)
           })
         } else {
           it(`should allow the '${prop}' prop`, async () => {

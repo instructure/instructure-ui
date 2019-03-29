@@ -497,7 +497,7 @@ describe('generateExamples', () => {
         }
       })
       expect(consoleError)
-        .to.have.been.calledWithExactly(
+        .to.have.been.calledWith(
           `Warning: [ExampleGenerator] TestComponent does not have the following prop: '${fakeProp}'.`
         )
     })
