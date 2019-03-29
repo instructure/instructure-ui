@@ -42,13 +42,13 @@ example: true
 ---
 <div>
   <Button variant="primary" margin="0 x-small 0 0">
-    Primary button
+    Primary Button
   </Button>
   <Button href="https://instructure.github.io/instructure-ui/" variant="success" margin="0 x-small 0 0">
-    Success button
+    Success Button
   </Button>
   <Button variant="danger" margin="0 x-small 0 0">
-    Danger button
+    Danger Button
   </Button>
   <Button variant="light" margin="0 x-small 0 0">
     Light Button
@@ -72,10 +72,10 @@ example: true
 ---
 <div>
   <Button margin="0 x-small 0 0" icon={IconPlus.Line}>
-    Button label
+    Button Label
   </Button>
   <Button margin="0 x-small 0 0" icon={IconUser.Line}>
-    <ScreenReaderContent>Accessible button label</ScreenReaderContent>
+    <ScreenReaderContent>Accessible Button Label</ScreenReaderContent>
   </Button>
 </div>
 ```
@@ -126,9 +126,9 @@ Change the `size` prop to `small` or `large` to produce smaller or larger button
 example: true
 ---
 <div>
-  <Button size="small" margin="0 x-small 0 0">Small-size button</Button>
-  <Button margin="0 x-small 0 0">Default-size button</Button>
-  <Button size="large">Large-size button</Button>
+  <Button size="small" margin="0 x-small 0 0">Small-size Button</Button>
+  <Button margin="0 x-small 0 0">Default-size Button</Button>
+  <Button size="large">Large-size Button</Button>
 </div>
 ```
 
@@ -141,7 +141,7 @@ and wrap the text.
 example: true
 ---
 <View as="div" width="10rem">
-  <Button fluidWidth icon={IconUser.Line}>20 characters max</Button>
+  <Button fluidWidth icon={IconUser.Line}>20 Characters Max</Button>
 </View>
 ```
 
@@ -162,7 +162,7 @@ example: true
   }}
 >
   {(props, matches) => {
-    const text = 'Button label text'
+    const text = 'Button Label Text'
     const fullButton = matches.includes('fullButton')
 
     return (
@@ -187,7 +187,7 @@ cursor, pass a `cursor` prop.
 example: true
 ---
 <Button cursor="move" icon={IconDragHandle.Line}>
-  Move me
+  Move Me
 </Button>
 ```
 ### Guidelines
@@ -198,15 +198,16 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
+    <FigureItem>Use 'Title Case' for button text</FigureItem>
     <FigureItem>Use the primary button only once for each section of content</FigureItem>
-<FigureItem>Use the primary button when the task of the view requires an action to be taken</FigureItem>
-<FigureItem>Use the success and danger buttons for grading activities</FigureItem>
-<FigureItem>Use the danger button to warn the user of potentially destructive actions</FigureItem>
-<FigureItem>Use the default button as as secondary or tertiary option for actions such as Cancel</FigureItem>
-<FigureItem>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</FigureItem>
-<FigureItem>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</FigureItem>
-<FigureItem>Use the link button when the action is navigational</FigureItem>
-<FigureItem>The maximum string length of any button, including spaces, should be 20 characters</FigureItem>
+    <FigureItem>Use the primary button when the task of the view requires an action to be taken</FigureItem>
+    <FigureItem>Use the success and danger buttons for grading activities</FigureItem>
+    <FigureItem>Use the danger button to warn the user of potentially destructive actions</FigureItem>
+    <FigureItem>Use the default button as a secondary or tertiary option for actions such as Cancel</FigureItem>
+    <FigureItem>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</FigureItem>
+    <FigureItem>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</FigureItem>
+    <FigureItem>Use the link button when the action is navigational</FigureItem>
+    <FigureItem>The maximum string length of any button, including spaces, should be 20 characters</FigureItem>
   </Figure>
   <Figure recommendation="no" title="Don't">
     <FigureItem>Use more than one primary button per section of content
