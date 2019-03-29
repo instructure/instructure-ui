@@ -34,9 +34,9 @@ const {
 
 const args = process.argv.slice(2)
 
-// ui-build src --watch
-// ui-build --watch src
-const src = args.filter(arg => (arg.indexOf('--') == -1))[0] || 'src'
+// positional: ui-build src --watch
+const firstArg = args[0]
+const src = (firstArg && firstArg.indexOf('--') < 0) ? firstArg : 'src'
 
 const babelArgs = [src, '--ignore "src/**/*.test.js","src/**/__tests__/**"']
 
@@ -63,7 +63,25 @@ if (args.includes('--watch')) {
   ].filter(Boolean)
 }
 
-process.exit(runCommandsConcurrently({
+let modules = ['es', 'cjs']
+
+if (args.includes('--modules')) {
+  //  eslint-disable-next-line no-unused-vars
+  const [_, arg] = args.splice(args.indexOf('--modules'), 2)
+  if (!arg) {
+    throw new Error('Missing --modules argument')
+  }
+  modules = arg.split(',')
+  if (modules.some(mod => !['es', 'cjs'].includes(mod))) {
+    throw new Error(`Invalid --modules argument: '${arg}'`)
+  }
+}
+
+const commands = {
   es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], [...envVars, 'ES_MODULES=1']),
-  lib: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], envVars)
-}).status)
+  cjs: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], envVars)
+}
+
+const commandsToRun = modules.reduce((obj, key) => ({ ...obj, [key]: commands[key] }), {})
+
+process.exit(runCommandsConcurrently(commandsToRun).status)

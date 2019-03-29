@@ -35,6 +35,14 @@ To clean out built/generated files from a package:
 
 `yarn ui-build --clean`
 
+#### `modules`
+
+`yarn ui-build --modules lib` writes commonjs modules to the lib/ directory.
+
+`yarn ui-build --modules es` writes es modules to the es/ directory.
+
+If not specified, `modules` defaults to `es,lib`.
+
 #### `test`
 
 To run (karma/mocha) tests for a package:
