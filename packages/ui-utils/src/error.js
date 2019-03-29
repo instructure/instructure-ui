@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import getReactRenderStack from './getReactRenderStack'
 /**
  * ---
  * category: utilities
@@ -31,6 +32,6 @@
  */
 export default function error (condition, context, message, ...args) {
   if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-    console.error(`Warning: [${context}] ${message}`, ...args)
+    console.error(`Warning: [${context}] ${message}`, ...args, getReactRenderStack())
   }
 }

@@ -22,16 +22,20 @@
  * SOFTWARE.
  */
 
-import getReactRenderStack from './getReactRenderStack'
+import React from 'react'
+
 /**
  * ---
  * category: utilities
  * ---
- * @param {Boolean} condition a condition that we expect to be true
- * @param {String} message a message to display as a console warning in DEV env when condition is false
+ * @returns {String} if called while React is rendering, will return the current stack of components it is rendering, otherwise an empty string
  */
-export default function warning (condition, message, ...args) {
-  if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-    console.warn(`Warning: ${message}`, ...args, getReactRenderStack())
+export default function getReactRenderStack() {
+  let currentRenderStack = ''
+  try {
+    currentRenderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+  } catch (error) {
+    // happened outside a react render or couldn't figure out where in the render stack we are.
   }
+  return currentRenderStack
 }
