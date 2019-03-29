@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-axe-check",
-  "version": "5.50.0",
+  "version": "5.51.0",
   "description": "A UI a11y testing library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,7 +19,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.50.0"
+    "@instructure/ui-babel-preset": "^5.51.0"
   },
   "dependencies": {
     "@babel/runtime": "^7",

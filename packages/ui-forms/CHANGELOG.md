@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.51.0](https://github.com/instructure/instructure-ui/compare/v5.50.0...v5.51.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **ui-forms:** fix too much recursion error ([08dedf3](https://github.com/instructure/instructure-ui/commit/08dedf3))
+
+
+
+
+
 # [5.50.0](https://github.com/instructure/instructure-ui/compare/v5.49.0...v5.50.0) (2019-03-28)
 
 

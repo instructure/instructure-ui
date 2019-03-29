@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.51.0](https://github.com/instructure/instructure-ui/compare/v5.50.0...v5.51.0) (2019-03-29)
+
+
+### Bug Fixes
+
+* **ui-forms:** fix too much recursion error ([08dedf3](https://github.com/instructure/instructure-ui/commit/08dedf3))
+* **ui-menu:** prevent menu from focusing single item ([6d8ac37](https://github.com/instructure/instructure-ui/commit/6d8ac37))
+
+
+### Features
+
+* **ui-scripts:** post gerrit reviews from publish script ([b63ec87](https://github.com/instructure/instructure-ui/commit/b63ec87))
+* **ui-table:** make table responsive ([1ec9a2b](https://github.com/instructure/instructure-ui/commit/1ec9a2b))
+* **ui-utils:** add React's render stack to console messages ([4226153](https://github.com/instructure/instructure-ui/commit/4226153))
+
+
+
+
+
 # [5.50.0](https://github.com/instructure/instructure-ui/compare/v5.49.0...v5.50.0) (2019-03-28)
 
 
