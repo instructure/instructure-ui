@@ -144,20 +144,6 @@ describe('<Menu />', async () => {
       expect(menuRef).to.have.been.calledWith(menu.getDOMNode())
     })
 
-    it('should focus the first menu item when menu only has one item', async () => {
-      await mount(
-        <Menu label="Settings">
-          <MenuItem value="Account">Account</MenuItem>
-        </Menu>
-      )
-      const menu = await MenuLocator.find(':label(Settings)')
-      const items = await menu.findAllItems()
-
-      await menu.focus()
-
-      expect(items[0].containsFocus()).to.be.true()
-    })
-
     it('should set aria attributes properly', async () => {
       await mount(
         <Menu disabled label="Settings">

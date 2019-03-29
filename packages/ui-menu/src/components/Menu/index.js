@@ -264,14 +264,6 @@ class Menu extends Component {
     }
   }
 
-  handleMenuFocus = () => {
-    // when there is only one menu item, focus that item so SR users
-    // don't have to drill down for access
-    if (this.menuItems.length === 1) {
-      this.menuItems[0].focus && this.menuItems[0].focus()
-    }
-  }
-
   handleMenuKeyDown = (event) => {
     const key = event && event.keyCode
     const {
@@ -520,7 +512,6 @@ class Menu extends Component {
         aria-disabled={disabled ? 'true' : null}
         onKeyDown={this.handleMenuKeyDown}
         onKeyUp={onKeyUp}
-        onFocus={this.handleMenuFocus}
         ref={(el) => {
           this._menu = el
           if (typeof menuRef === 'function') {
