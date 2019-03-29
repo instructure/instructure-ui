@@ -68,12 +68,23 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
     versionToRelease = 'prerelease'
   }
 
-  const releasedVersion = await publishPackages(packageName, versionToRelease, preidAndTag)
+  let releasedVersion
+  try {
+    releasedVersion = await publishPackages(packageName, versionToRelease, preidAndTag)
+  } catch (e) {
+    error(e)
+    process.exit(1)
+  }
 
   if (GERRIT_CHANGE_NUMBER && GERRIT_PATCHSET_NUMBER) {
-    await postGerritReview(
-      `${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER}`,
-      `Successfully published ${releasedVersion} for this commit.`
-    )
+    try {
+      await postGerritReview(
+        `${GERRIT_CHANGE_NUMBER},${GERRIT_PATCHSET_NUMBER}`,
+        `Successfully published ${releasedVersion} for this commit.`
+      )
+    } catch (e) {
+      error(e)
+      process.exit(1)
+    }
   }
 }
