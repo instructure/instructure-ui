@@ -35,7 +35,7 @@ import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-pro
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 
@@ -204,7 +204,7 @@ export default class Tabs extends Component {
     let selectedIndex
 
     // Check index boundary
-    error(this.isValidIndex(index), 'Tabs', `Invalid tab index: '${index}'.`)
+    error(this.isValidIndex(index), `[Tabs] Invalid tab index: '${index}'.`)
 
     const handleChange = () => {
       if (typeof selectedIndex !== 'undefined' && typeof this.props.onChange === 'function') {
@@ -235,7 +235,7 @@ export default class Tabs extends Component {
     const count = this.tabs.length
     const change = (step < 0) ? step + count : step
 
-    error(this.isValidIndex(startIndex), 'Tabs',  `Invalid tab index: '${startIndex}'`)
+    error(this.isValidIndex(startIndex), `[Tabs] Invalid tab index: '${startIndex}'`)
 
     let index = startIndex
     do {

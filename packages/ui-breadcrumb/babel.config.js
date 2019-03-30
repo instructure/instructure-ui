@@ -26,8 +26,9 @@
    presets: [[
      require('@instructure/ui-babel-preset'),
      {
-      coverage: false,
-      esModules: false
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production'
      }
    ]]
  }

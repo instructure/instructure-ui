@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 
 import addElementQueryMatchListener from '../../utils/addElementQueryMatchListener'
 import addMediaQueryMatchListener from '../../utils/addMediaQueryMatchListener'
@@ -85,8 +85,7 @@ class Responsive extends Component {
   componentWillMount () {
     error(
       (this.props.render || this.props.children),
-      'Responsive',
-      `must have either a \`render\` prop or \`children\` prop.`
+      `[Responsive] must have either a \`render\` prop or \`children\` prop.`
     )
   }
 
@@ -141,24 +140,22 @@ class Responsive extends Component {
 
     matches.forEach((match) => {
       const matchProps = props[match]
+
       // Iterate over the props for the current match. If that the prop is
       // already in `mergedProps` that means that the prop was defined for
       // multiple breakpoints, and more than one of those breakpoints is being
-      // currently applied so we throw a warning.
+      // currently applied so we log an error.
       Object.keys(matchProps).forEach((prop) => {
-        const warning = [
-          `The prop \`${prop}\` is defined at 2 or more breakpoints`,
-          `which are currently applied at the same time. Its current value, \`${mergedProps[prop]}\`,`,
-          `will be overwritten as \`${matchProps[prop]}\`.`
-        ].join(' ')
         error(
           !(prop in mergedProps),
-          'Responsive',
-          warning
+          [
+            `[Responsive] The prop \`${prop}\` is defined at 2 or more breakpoints`,
+            `which are currently applied at the same time. Its current value, \`${mergedProps[prop]}\`,`,
+            `will be overwritten as \`${matchProps[prop]}\`.`
+          ].join(' ')
         )
+        mergedProps[prop] = matchProps[prop]
       })
-
-      mergedProps = Object.assign(mergedProps, matchProps)
     })
 
     return mergedProps

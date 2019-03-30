@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import getReactRenderStack from './getReactRenderStack'
+import { error } from '@instructure/console/macro'
 /**
  * ---
  * category: utilities
@@ -30,8 +30,6 @@ import getReactRenderStack from './getReactRenderStack'
  * @param {String} context the displayName of the component or Function.name of the utility function
  * @param {String} message a message to display as a console error in DEV env when condition is false
  */
-export default function error (condition, context, message, ...args) {
-  if (!condition && process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-    console.error(`Warning: [${context}] ${message}`, ...args, getReactRenderStack())
-  }
+export default function (condition, context, message, ...args) {
+  error(condition, `[${context}] ${message}`, ...args)
 }

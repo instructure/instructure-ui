@@ -28,7 +28,7 @@ import keycode from 'keycode'
 
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid/lib/uid'
 
 /**
@@ -305,7 +305,7 @@ class Selectable extends Component {
           onClick,
           ...rest
         } = {}) => {
-          error(id, 'Selectable', `Must provide id for each option via \`getOptionProps\`.`)
+          error(id, `[Selectable] Must provide id for each option via \`getOptionProps\`.`)
           return {
             id,
             role: 'option',

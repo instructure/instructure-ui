@@ -29,7 +29,7 @@ import { FocusableView } from '@instructure/ui-focusable/lib/components/Focusabl
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import IconEdit from '@instructure/ui-icons/lib/Line/IconEdit'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import Editable from '../Editable'
@@ -126,7 +126,7 @@ export default class InPlaceEdit extends Component {
   constructor(props) {
     super(props)
 
-    warning(props.readOnly ? props.mode === 'view' : true, '[InPlaceEdit] When readOnly is true, mode is forced to "view"')
+    warn(props.readOnly ? props.mode === 'view' : true, '[InPlaceEdit] When readOnly is true, mode is forced to "view"')
   }
 
   handleEditButtonRef = (el) => {

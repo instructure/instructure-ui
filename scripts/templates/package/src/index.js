@@ -21,3 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { log } from '@instructure/console/macro'
+
+log('Hello World')

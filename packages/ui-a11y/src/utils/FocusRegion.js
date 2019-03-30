@@ -28,7 +28,7 @@ import contains from '@instructure/ui-utils/lib/dom/contains'
 import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
 import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
 import uid from '@instructure/uid'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 
 import findTabbable from './findTabbable'
 import ScreenReaderFocusRegion from './ScreenReaderFocusRegion'
@@ -151,12 +151,12 @@ export default class FocusRegion {
   }
 
   focus () {
-    error(this._active, 'FocusRegion', `Cannot call '.focus()' on a region that is not currently active.`)
+    error(this._active, `[FocusRegion] Cannot call '.focus()' on a region that is not currently active.`)
     this._keyboardFocusRegion.focus()
   }
 
   blur () {
-    error(!this._active, 'FocusRegion', `Cannot call '.blur()' on a region that is currently active.`)
+    error(!this._active, `[FocusRegion] Cannot call '.blur()' on a region that is currently active.`)
     this._keyboardFocusRegion.blur()
   }
 }

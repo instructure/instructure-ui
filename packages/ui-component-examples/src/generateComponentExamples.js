@@ -117,7 +117,7 @@ export default function generateComponentExamples (Component, config = {
   }
 
   // eslint-disable-next-line no-console
-  console.log(`Generating examples for ${Component.displayName}...`)
+  console.info(`Generating examples for ${Component.displayName}...`)
 
   const combos = generatePropCombinations(propValues).filter(Boolean)
   const maxExamples = config.maxExamples || 500
@@ -156,7 +156,7 @@ export default function generateComponentExamples (Component, config = {
   }
 
   // eslint-disable-next-line no-console
-  console.log(`Generated ${exampleCount} examples for ${Component.displayName}`)
+  console.info(`Generated ${exampleCount} examples for ${Component.displayName}`)
 
   sections.forEach(({ pages }) => {
     pages.forEach((page, index) => {

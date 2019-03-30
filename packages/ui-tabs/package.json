@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
+    "@instructure/console": "^5.51.1",
     "@instructure/ui-layout": "^5.51.1",
     "@instructure/ui-motion": "^5.51.1",
     "@instructure/ui-prop-types": "^5.51.1",

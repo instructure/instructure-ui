@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
@@ -184,8 +184,7 @@ class Calendar extends Component {
 
     error(
       length === 7,
-      'Calendar',
-      `\`renderWeekdayLabels\` should be an array with 7 labels (one for each weekday). ${length} provided.`
+      `[Calendar] \`renderWeekdayLabels\` should be an array with 7 labels (one for each weekday). ${length} provided.`
     )
 
     return (
@@ -213,8 +212,7 @@ class Calendar extends Component {
 
     error(
       length === Calendar.DAY_COUNT,
-      'Calendar',
-      `should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
+      `[Calendar] should have exactly ${Calendar.DAY_COUNT} children. ${length} provided.`
     )
 
     return children.reduce((days, day, i) => {

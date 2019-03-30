@@ -1,9 +1,17 @@
 ---
 describes: Heading
 ---
+
+```js
+---
+example: true
+---
+<Heading>Default Heading</Heading>
+```
+
 ### Heading level
 Generate content headings, from h1 to h5. Use the `margin` prop to add margin.
-- The `as` prop controls what html element is output. _(if not defined it will default to level)._ 
+- The `as` prop controls what html element is output. _(if not defined it will default to level)._
 - The `level` prop sets its appearance.
 
 ```js
@@ -21,7 +29,7 @@ example: true
 ```
 
 ### Heading colors
-The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_). 
+The default is for the color to inherit, but it can be set to `primary` or `secondary` via the `color` prop. Note there is an inverse option available as well: `primary-inverse` or `secondary-inverse` (_see inverse example below_).
 ```js
 ---
 example: true

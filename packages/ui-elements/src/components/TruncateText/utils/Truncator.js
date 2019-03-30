@@ -25,7 +25,7 @@
 import escapeHtml from 'escape-html'
 
 import cloneArray from '@instructure/ui-utils/lib/cloneArray'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import isVisible from '@instructure/ui-utils/lib/dom/isVisible'
@@ -72,7 +72,7 @@ export default class Truncator {
     }
 
     if (!element) {
-      error(false, 'Truncator',  'No element to truncate.')
+      error(false, '[Truncator] No element to truncate.')
       return
     }
 

@@ -24,7 +24,8 @@
     "@instructure/ui-test-utils": "^5"
   },
   "dependencies": {
-    "@babel/runtime": "^7"
+    "@babel/runtime": "^7",
+    "@instructure/console": "^5"
   },
   "publishConfig": {
     "access": "public"

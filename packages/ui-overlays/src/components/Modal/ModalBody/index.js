@@ -31,7 +31,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 import Browser from '@instructure/ui-utils/lib/Browser'
@@ -86,15 +86,11 @@ export default class ModalBody extends Component {
     })
 
     const isFit = overflow === 'fit'
-    const ie11 = Browser.msie && Browser.version > 10
 
-    if (isFit) {
-      error(
-        !ie11,
-        'Modal',
-        `overflow="fit" is only supported with fullscreen modals in Internet Explorer`
-      )
-    }
+    error(
+      !(Browser.msie && Browser.version > 10) || !isFit,
+      `[Modal] overflow="fit" is only supported with fullscreen modals in Internet Explorer`
+    )
 
     return (
       <View

@@ -24,7 +24,13 @@
 
 const loadConfig = require('@instructure/config-loader')
 
-module.exports = function (context, opts = { themeable: false, esModules: false, coverage: false, node: false }) {
+module.exports = function (context, opts = {
+  themeable: false,
+  esModules: false,
+  coverage: false,
+  node: false,
+  removeConsole: false
+}) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
   const presets = [
@@ -33,6 +39,7 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   ]
 
   let plugins = [
+    require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
     [require('@babel/plugin-proposal-class-properties').default, { loose: true }],
@@ -49,7 +56,9 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
   ]
 
   if (process.env.NODE_ENV === 'production') {
-    plugins.push(require('@babel/plugin-transform-react-constant-elements').default)
+    plugins.push(
+      require('@babel/plugin-transform-react-constant-elements').default
+    )
   }
 
   let themeableOptions = {
@@ -67,9 +76,19 @@ module.exports = function (context, opts = { themeable: false, esModules: false,
     }
   }
 
-  plugins = plugins.concat([
+  plugins.push(
     [require('@instructure/babel-plugin-themeable-styles'), themeableOptions]
-  ])
+  )
+
+  if (opts.removeConsole) {
+    if (typeof opts.removeConsole === 'object') {
+      plugins.push(
+        [require('babel-plugin-transform-remove-console'), opts.removeConsole]
+      )
+    } else {
+      plugins.push(require('babel-plugin-transform-remove-console'))
+    }
+  }
 
   if (opts.node) {
     plugins = plugins.concat([

@@ -65,6 +65,7 @@ module.exports = [
       '**/ui-decorator/src/**/*.js'
     ],
     ignore: [
+      '*macro.js',
       '**/*-loader.js',
       '**/packages/**/CHANGELOG.md',
       '**/config/**',

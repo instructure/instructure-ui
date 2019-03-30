@@ -48,7 +48,7 @@ import px from '@instructure/ui-utils/lib/px'
 import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
@@ -503,8 +503,7 @@ class Popover extends Component {
       if (on.indexOf('hover') > -1) {
         error(
           !(on === 'hover'),
-          'Popover',
-          'Specifying only the `"hover"` trigger limits the visibilty of the Popover to just mouse users. ' +
+          '[Popover] Specifying only the `"hover"` trigger limits the visibilty of the Popover to just mouse users. ' +
           'Consider also including the `"focus"` trigger ' +
           'so that touch and keyboard only users can see the Popover content as well.'
         )

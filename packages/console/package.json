@@ -1,0 +1,36 @@
+{
+  "name": "@instructure/console",
+  "version": "5.51.1",
+  "description": "A babel macro made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^5.51.1"
+  },
+  "dependencies": {
+    "@babel/helper-annotate-as-pure": "^7.0.0",
+    "@babel/helper-module-imports": "^7.0.0",
+    "babel-plugin-macros": "^2.5.1"
+  },
+  "peerDependencies": {
+    "react": "^15 || ^16"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

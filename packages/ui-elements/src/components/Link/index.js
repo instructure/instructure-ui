@@ -38,7 +38,7 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'
@@ -168,23 +168,21 @@ class Link extends Component {
       }
     })
 
-    if (truncateText) {
-      warning( // if display prop is used, warn about icon or TruncateText
-        this.props.display === undefined,
-        '[Link] Using the display property with TruncateText may cause layout issues.'
-      )
-    }
+    warn( // if display prop is used, warn about icon or TruncateText
+      !truncateText || this.props.display === undefined,
+      '[Link] Using the display property with TruncateText may cause layout issues.'
+    )
 
     return truncateText
   }
 
   focus () {
-    findDOMNode(this._link).focus() // eslint-disable-line react/no-find-dom-node
+    findDOMNode(this._link).focus()
   }
 
   renderIcon () {
     const Icon = this.props.icon
-    warning( // if display prop is used, warn about icon or TruncateText
+    warn( // if display prop is used, warn about icon or TruncateText
       this.props.display === undefined,
       '[Link] Using the display property with an icon may cause layout issues.'
     )

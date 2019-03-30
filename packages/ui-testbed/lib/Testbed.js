@@ -165,7 +165,7 @@ class Testbed {
 
 Testbed.init = () => {
   /* eslint-disable no-console */
-  console.log('[ui-testbed] Initializing test bed...') // eslint-disable-line no-console
+  console.info('[ui-testbed] Initializing test bed...') // eslint-disable-line no-console
 
   // clear the console before rebundling:
   if (typeof console.clear === 'function') {

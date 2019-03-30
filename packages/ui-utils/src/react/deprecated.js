@@ -23,7 +23,7 @@
  */
 import decorator from '@instructure/ui-decorator'
 
-import warning from '../warning'
+import { warn } from '@instructure/console/macro'
 
 /**
 * ---
@@ -93,7 +93,7 @@ export default decorator((ComposedComponent, version, oldProps, message) => {
 export const deprecatePropValues = (propType, deprecated = [], message) => {
   return (props, propName, componentName, ...rest) => {
     const isDeprecatedValue = deprecated.includes(props[propName])
-    warning(
+    warn(
       (!isDeprecatedValue),
       `[${componentName}] The '${props[propName]}' value for the \`${propName}\` prop is deprecated. ${message || ''}`
     )
@@ -110,7 +110,7 @@ function warnDeprecatedProps (componentName, version, props, oldProps, message =
 
       const newPropMessage = newProp ? `. Use \`${newProp}\` instead` : ''
 
-      warning(
+      warn(
         false,
         `[${componentName}] \`${oldProp}\` was deprecated in ${version}${newPropMessage}. ${message}`,
       )
@@ -127,7 +127,7 @@ function warnDeprecatedProps (componentName, version, props, oldProps, message =
  * @param {String} message a message to display as a console error in DEV env when condition is false
  */
 export function warnDeprecatedComponent (version, componentName, message) {
-  warning(false, `[${componentName}] was deprecated in version ${version}. ${message || ''}`)
+  warn(false, `[${componentName}] was deprecated in version ${version}. ${message || ''}`)
 }
 
 /**

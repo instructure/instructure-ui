@@ -33,7 +33,7 @@ import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import testable from '@instructure/ui-testable'
 
 import { truncate } from './utils/Truncator'
@@ -170,23 +170,25 @@ class TruncateText extends Component {
   }
 
   checkChildren () {
-    const text = ensureSingleChild(this.props.children)
-
-    React.Children.forEach(text.props.children, (child) => {
-      if (child.props) {
-        React.Children.forEach(child.props.children, (grandChild) => {
-          if (grandChild.props) {
-            // currently we don't support node trees deeper than 2 levels
-            // truncation will still occur on their text content, but their actual node structure will be lost
-            error(
-              false,
-              'TruncateText',
-              `Some children are too deep in the node tree and will not render.`
-            )
+    error(
+      !((() => {
+        let isTooDeep = false
+        const text = ensureSingleChild(this.props.children)
+        React.Children.forEach(text.props.children, (child) => {
+          if (child.props) {
+            React.Children.forEach(child.props.children, (grandChild) => {
+              // currently we don't support node trees deeper than 2 levels
+              // truncation will still occur on their text content, but their actual node structure will be lost
+              if (grandChild.props) {
+                isTooDeep = true
+              }
+            })
           }
         })
-      }
-    })
+        return isTooDeep
+      })()),
+      `[TruncateText] Some children are too deep in the node tree and will not render.`
+    )
   }
 
   update = () => {

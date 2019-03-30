@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import { deprecatePropValues } from '@instructure/ui-utils/lib/react/deprecated'
 
 import styles from './styles.css'
@@ -110,8 +110,7 @@ export default class ListItem extends Component {
 
     error(
       !(noSpacing && this.props.spacing),
-      'List',
-      `\`itemSpacing\` has no effect inside Lists with the \`delimiter\`
+      `[List] \`itemSpacing\` has no effect inside Lists with the \`delimiter\`
       prop set to anything other than \`none\`, or with a \`variant\` of \`pipe\`.`
     )
 

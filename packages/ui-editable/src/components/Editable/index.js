@@ -25,7 +25,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import deepequal from '@instructure/ui-utils/lib/deepEqual'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 
 
@@ -98,7 +98,7 @@ export default class Editable extends Component {
   constructor(props) {
     super(props)
 
-    warning(props.readOnly ? props.mode === 'view' : true, '[Editable] When readOnly is true, mode must be "view"')
+    warn(props.readOnly ? props.mode === 'view' : true, '[Editable] When readOnly is true, mode must be "view"')
   }
 
   componentDidMount () {
@@ -130,7 +130,7 @@ export default class Editable extends Component {
   }
 
   focusEditor () {
-    warning(!!this._editorRef && !this.props.readOnly, '[Editable] Did you forget to connect editorRef to your editor component?')
+    warn(!!this._editorRef && !this.props.readOnly, '[Editable] Did you forget to connect editorRef to your editor component?')
     if (this._editorRef) {
       this._editorRef.focus()
     }

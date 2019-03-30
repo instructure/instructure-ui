@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import decorator from '@instructure/ui-decorator'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
@@ -97,7 +97,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
 
   const contextKey = Symbol(componentId)
   const template = (styles && typeof styles.template === 'function') ? styles.template : () => {
-    warning(
+    warn(
       false,
       '[themeable] Invalid styles for: %O. Use @instructure/babel-plugin-themeable-styles to transform CSS imports.',
       displayName
@@ -209,7 +209,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
         if (!theme) {
           theme = this.props.theme
         } else if (immutable) {
-          warning(
+          warn(
             false,
             '[themeable] Parent theme is immutable. Cannot apply theme: %O',
             this.props.theme

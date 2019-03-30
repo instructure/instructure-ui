@@ -23,7 +23,7 @@
  */
 
 import React, { Children } from 'react'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 
 /**
 ---
@@ -68,7 +68,7 @@ export default function parseOptions (children) {
   return Children.map(options, (option) => {
     const { label, id, value, children, disabled, icon, group, groupLabel, groupItem } = option.props
 
-    error(typeof value === 'string', 'Select', `The 'value' prop on <option> must be a string.`)
+    error(typeof value === 'string', `[Select] The 'value' prop on <option> must be a string.`)
 
     return {
       id: id || value,

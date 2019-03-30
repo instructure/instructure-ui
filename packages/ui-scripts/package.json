@@ -26,7 +26,6 @@
     "@instructure/cz-lerna-changelog": "^5.51.1",
     "@instructure/pkg-utils": "^5.51.1",
     "@lerna/project": "^3",
-    "@storybook/react": "^5",
     "commitizen": "^3.0.7",
     "dotenv": "^7.0.0",
     "eslint": "^5.15.3",
@@ -48,7 +47,8 @@
     "webpack-dev-server": "^3.2.1"
   },
   "optionalDependencies": {
-    "@instructure/mocha-environment-jsdom": "^5.51.1"
+    "@instructure/mocha-environment-jsdom": "^5.51.1",
+    "@storybook/react": "^4 || ^5"
   },
   "peerDependencies": {
     "react": "^0.14.9 || ^15 || ^16",

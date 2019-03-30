@@ -86,9 +86,6 @@ module.exports = function (content, map, meta) {
     ])
     .process(source, opts)
     .then((result) => {
-      // eslint-disable-next-line no-console
-      // console.log(`[themeable-css-loader]: ${relativePath}`)
-
       result.warnings().forEach((msg) => {
         loader.emitWarning(msg.toString())
       })

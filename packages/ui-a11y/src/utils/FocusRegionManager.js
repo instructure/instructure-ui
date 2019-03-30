@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import FocusRegion from './FocusRegion'
 
 let ENTRIES = []
@@ -50,8 +50,7 @@ export default class FocusRegionManager {
     } else {
       error(
         false,
-        'FocusRegionManager',
-        `Could not focus region with element: ${element}`
+        `[FocusRegionManager] Could not focus region with element: ${element}`
       )
     }
   }

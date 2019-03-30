@@ -23,7 +23,7 @@
  */
 import decorator from '@instructure/ui-decorator'
 
-import warning from '../warning'
+import { warn } from '@instructure/console/macro'
 
 /**
 * ---
@@ -48,46 +48,48 @@ import warning from '../warning'
 * @return {function} React component flagged as experimental
 */
 export default decorator((ComposedComponent, experimentalProps, message) => {
-  return class ExperimentalComponent extends ComposedComponent {
-    componentDidMount () {
+  class ExperimentalComponent extends ComposedComponent {}
+
+  if (process.env.NODE_ENV !== 'production') {
+    ExperimentalComponent.prototype.componentDidMount = function () {
       if (experimentalProps) {
         warnExperimentalProps(ComposedComponent.displayName, this.props, experimentalProps, message)
       } else {
         warnExperimentalComponent(ComposedComponent.displayName, message)
       }
 
-      if (super.componentDidMount) {
-        super.componentDidMount()
+      if (ComposedComponent.prototype.componentDidMount) {
+        ComposedComponent.prototype.componentDidMount()
       }
     }
 
-    componentWillReceiveProps (nextProps) {
+    ExperimentalComponent.prototype.componentWillReceiveProps = function (nextProps) {
       if (experimentalProps) {
         warnExperimentalProps(ComposedComponent.displayName, nextProps, experimentalProps, message)
       } else {
         warnExperimentalComponent(ComposedComponent.displayName, message)
       }
 
-      if (super.componentWillReceiveProps) {
-        super.componentWillReceiveProps(nextProps)
+      if (ComposedComponent.prototype.componentWillReceiveProps) {
+        ComposedComponent.prototype.componentWillReceiveProps(nextProps)
       }
     }
   }
+
+  return ExperimentalComponent
 })
 
 function warnExperimentalProps (displayName, props, experimentalProps, message = '') {
   experimentalProps.forEach((experimentalProp) => {
-    if (typeof props[experimentalProp] !== 'undefined') {
-      warning(
-        false,
-        `[${displayName}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
-      )
-    }
+    warn(
+      (typeof props[experimentalProp] === 'undefined'),
+      `[${displayName}] The \`${experimentalProp}\` prop is experimental and its API could change significantly in a future release. ${message}`
+    )
   })
 }
 
 function warnExperimentalComponent (displayName, message = '') {
-  warning(
+  warn(
     false,
     `[${displayName}] is experimental and its API could change significantly in a future release. ${message}`
   )

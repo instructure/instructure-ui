@@ -34,7 +34,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { Children, controllable } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import uid from '@instructure/uid'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 
 import Page from './Page'
 
@@ -164,7 +164,7 @@ class Pages extends Component {
     const pages = React.Children.toArray(children)
     const activePage = (activePageIndex < pages.length) ? pages[activePageIndex] : null
 
-    error(activePage, 'Pages', 'Invalid `activePageIndex`.')
+    error(activePage, '[Pages] Invalid `activePageIndex`.')
 
     return activePage ? safeCloneElement(activePage, {
       ref: (el) => { this._activePage = el }

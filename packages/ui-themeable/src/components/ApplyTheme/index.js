@@ -26,7 +26,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
 
 import { ThemeContextTypes, makeThemeContext, getThemeContext } from '../../ThemeContextTypes'
@@ -71,7 +71,7 @@ export default class ApplyTheme extends Component {
     const parentThemeContext = getThemeContext(this.context) || {}
 
     if (parentThemeContext.immutable && parentThemeContext.theme) {
-      warning(
+      warn(
         !this.props.theme,
         '[ApplyTheme] Parent theme is immutable. Cannot apply theme: %O',
         this.props.theme

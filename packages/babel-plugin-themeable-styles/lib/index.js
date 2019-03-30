@@ -111,9 +111,6 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
             if (!css) return
 
-            // eslint-disable-next-line no-console
-            // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
-
             path.parentPath.replaceWith(
               generateVariableDeclaration(path.node.local.name, tokens, css, getComponentId())
             )
@@ -140,9 +137,6 @@ module.exports = function transformThemeableStyles ({ types: t }) {
 
             if (!css) return
 
-            // eslint-disable-next-line no-console
-            // console.log(`[transform-themeable]: ${relative(process.cwd(), requiringFile)}`)
-
             if (!t.isExpressionStatement(path.parent)) {
               path.replaceWithSourceString(transformCSSRequire(tokens, css, getComponentId()))
             } else {
@@ -165,7 +159,7 @@ module.exports = function transformThemeableStyles ({ types: t }) {
     const displayName = id.name
 
     // eslint-disable-next-line no-console
-    console.log(`\n[transform-themeable]: ${displayName}`)
+    // console.log(`\n[transform-themeable]: ${displayName}`)
 
     var blockLevelStmnt
     path.find(function (path) {

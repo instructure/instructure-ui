@@ -55,9 +55,9 @@ export default async function runAxe (element, options = {}) {
       violation.nodes.forEach(function (node) {
         const el = document.querySelector(node.target.toString())
         if (!el) {
-          console.log(node.target.toString())
+          console.info(node.target.toString())
         } else {
-          console.log(el)
+          console.info(el)
         }
       })
       console.groupEnd()

@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
+    "@instructure/console": "^5.51.1",
     "@instructure/ui-a11y": "^5.51.1",
     "@instructure/ui-focusable": "^5.51.1",
     "@instructure/ui-i18n": "^5.51.1",

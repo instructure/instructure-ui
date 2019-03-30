@@ -29,7 +29,7 @@ import deepEqual from 'deep-equal'
 import { Children, controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import testable from '@instructure/ui-testable'
 
@@ -274,8 +274,7 @@ class Select extends Component {
 
     error(
       !(props.allowCustom && props.multiple),
-      'Select',
-      `The 'allowCustom' and 'multiple' props are mutually exclusive.`
+      `[Select] The 'allowCustom' and 'multiple' props are mutually exclusive.`
     )
 
     this.state = { options }

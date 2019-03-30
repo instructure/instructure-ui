@@ -32,7 +32,7 @@ import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
 import px from '@instructure/ui-utils/lib/px'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 
@@ -269,8 +269,8 @@ class DrawerLayout extends Component {
       }
     })
 
-    error((trayCount <= 1), 'DrawerLayout', `Only one 'DrawerTray' per 'DrawerLayout' is supported.`)
-    error((contentCount <= 1), 'DrawerLayout', `Only one 'DrawerContent' per 'DrawerLayout' is supported.`)
+    error((trayCount <= 1), `[DrawerLayout] Only one 'DrawerTray' per 'DrawerLayout' is supported.`)
+    error((contentCount <= 1), `[DrawerLayout] Only one 'DrawerContent' per 'DrawerLayout' is supported.`)
 
     return children
   }

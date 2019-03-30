@@ -467,7 +467,7 @@ describe('generateExamples', () => {
 
       expect(consoleError)
         .to.have.been.calledWithMatch(
-          `Warning: [generateExamples] Error: Could not initialize the examples generator for component`
+          `[generateExamples] Error: Could not initialize the examples generator for component`
         )
     })
 
@@ -481,7 +481,7 @@ describe('generateExamples', () => {
 
       expect(consoleError)
         .to.have.been.calledWithMatch(
-          `Warning: [generateExamples] Error: Could not initialize the examples generator for TestComponent`
+          `[generateExamples] Error: Could not initialize the examples generator for TestComponent`
         )
     })
 
@@ -498,7 +498,7 @@ describe('generateExamples', () => {
       })
       expect(consoleError)
         .to.have.been.calledWith(
-          `Warning: [ExampleGenerator] TestComponent does not have the following prop: '${fakeProp}'.`
+          `[ExampleGenerator] TestComponent does not have the following prop: '${fakeProp}'.`
         )
     })
   })

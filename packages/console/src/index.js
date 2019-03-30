@@ -21,21 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+const React = require('react')
 
-import React from 'react'
+/* eslint-disable no-console */
 
-/**
- * ---
- * category: utilities
- * ---
- * @returns {String} if called while React is rendering, will return the current stack of components it is rendering, otherwise an empty string
- */
-export default function getReactRenderStack() {
-  let currentRenderStack = ''
+function getRenderStack () {
+  let renderStack = ''
   try {
-    currentRenderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame.getStackAddendum()
+    renderStack = React.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED.ReactDebugCurrentFrame
+      .getStackAddendum()
   } catch (error) {
-    // happened outside a react render or couldn't figure out where in the render stack we are.
+    // log happened outside a react render or couldn't figure out where in the render stack we are.
   }
-  return currentRenderStack
+  return renderStack
 }
+
+function logWithRenderStack (level, condition, message, ...args) {
+  if (!condition && process.env.NODE_ENV !== 'production') {
+    const renderStack = getRenderStack()
+
+    if (typeof console[level] === 'function') {
+      console[level](`Warning: ${message}`, ...args, renderStack)
+    } else {
+      throw new Error(`'${level}' is not a valid console method!`)
+    }
+  }
+}
+
+exports.error =  (...args) => logWithRenderStack('error', ...args)
+exports.warn = (...args) => logWithRenderStack('warn', ...args)
+exports.info = (...args) => console.info(...args)
+exports.assert = (...args) => console.assert(...args)
+exports.debug = (...args) => console.debug(...args)
+exports.log = (...args) => console.log(...args)
+
+/* eslint-enable no-console */

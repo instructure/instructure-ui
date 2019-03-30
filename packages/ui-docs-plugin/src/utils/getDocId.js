@@ -34,7 +34,7 @@ module.exports = function getDocId (docData, options, context, interpolate) {
   DOCS[id] = docData.relativePath
 
   // eslint-disable-next-line no-console
-  console.log(`[ui-docs-plugin] #${id} - ${docData.relativePath}`)
+  console.info(`[ui-docs-plugin] #${id} - ${docData.relativePath}`)
 
   return id
 }

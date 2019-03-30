@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 
 /**
  * ---
@@ -162,7 +162,7 @@ export default class ScreenReaderFocusRegion {
         try {
           body = iframe.contentDocument.body
         } catch (e) {
-          warning(false, `[ui-a11y] could not find a document for iframe: ${e}`, iframe)
+          warn(false, `[ui-a11y] could not find a document for iframe: ${e}`, iframe)
         }
         return body
       })

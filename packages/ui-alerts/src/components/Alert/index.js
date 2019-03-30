@@ -43,7 +43,7 @@ import Transition from '@instructure/ui-motion/lib/components/Transition'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 
 import styles from './styles.css'
@@ -206,8 +206,7 @@ export default class Alert extends Component {
   initLiveRegion (liveRegion) {
     error(
       liveRegion.getAttribute('role') === 'alert',
-      'Alert',
-      `live region must have role='alert' set on page load in order to announce content`
+      `[Alert] live region must have role='alert' set on page load in order to announce content`
     )
 
     if (liveRegion) {
@@ -341,8 +340,7 @@ export default class Alert extends Component {
     if (this.props.screenReaderOnly) {
       error(
         this.getLiveRegion(),
-        'Alert',
-        `The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
+        `[Alert] The 'screenReaderOnly' prop must be used in conjunction with 'liveRegion'.`
       )
 
       return null

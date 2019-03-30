@@ -25,6 +25,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
+    "@instructure/console": "^5.51.1",
     "@instructure/debounce": "^5.51.1",
     "@instructure/ui-a11y": "^5.51.1",
     "@instructure/ui-container": "^5.51.1",

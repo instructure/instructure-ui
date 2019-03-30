@@ -25,7 +25,6 @@
 import React from 'react'
 import objectHash from 'object-hash'
 
-import error from '@instructure/ui-utils/lib/error'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import generatePropCombinations from './generatePropCombinations'
@@ -357,7 +356,7 @@ export default function generateExamples (modules, options = {}) {
       const generator = new ExampleGenerator(module, options)
       examples.push(generator.generateExamples())
     } catch (e) {
-      error(false, 'generateExamples', e)
+      console.error(`[generateExamples] ${e}`)
       return
     }
   })
@@ -481,7 +480,7 @@ class ExampleGenerator {
           const propValue = this.props[permutation]
 
           if (!propValue) {
-            error(false, 'ExampleGenerator', `${this.displayName} does not have the following prop: '${permutation}'.`)
+            console.error(`[ExampleGenerator] ${this.displayName} does not have the following prop: '${permutation}'.`)
             return
           }
 

@@ -50,7 +50,7 @@ function makePrompter() {
     const questions = makeDefaultQuestions(packageNames, changedPackages)
 
     // eslint-disable-next-line no-console
-    console.log('\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n')
+    console.info('\n\nLine 1 will be cropped at 100 characters. All other lines will be wrapped after 100 characters.\n')
 
     cz.registerPrompt('autocomplete', autocomplete)
 
@@ -77,9 +77,9 @@ function makePrompter() {
         commitAnalyzer.analyzeCommits({}, { cwd, commits: [{ hash: '', message }], logger: console })
           .then((type) => {
             /* eslint-disable no-console */
-            console.log(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
-            console.log('\n\nCommit message:')
-            console.log(chalk.blue(`\n\n${message}\n`))
+            console.info(chalk.green(`\n${getCommitTypeMessage(type)}\n`))
+            console.info('\n\nCommit message:')
+            console.info(chalk.blue(`\n\n${message}\n`))
             /* eslint-enable no-console */
             commit(message)
           })

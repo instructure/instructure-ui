@@ -30,7 +30,7 @@ import classnames from 'classnames'
 import { controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
@@ -280,8 +280,7 @@ class Checkbox extends Component {
 
     error(
       !(variant === 'toggle' && indeterminate),
-      'Checkbox',
-      `The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
+      `[Checkbox] The \`toggle\` variant does not support the \`indeterminate\` property. Use the \`simple\` variant instead.`
     )
 
     /* eslint-disable jsx-a11y/mouse-events-have-key-events */

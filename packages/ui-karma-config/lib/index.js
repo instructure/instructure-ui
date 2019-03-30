@@ -155,7 +155,9 @@ module.exports = function makeConfig ({
 
       webpack: {
         ...baseWebpackConfig,
-        mode: DEBUG ? 'development' : 'production',
+        cache: !DEBUG,
+        mode: 'development',
+        devtool: DEBUG ? 'cheap-module-source-map': 'none',
         externals: {
           'react/lib/ExecutionEnvironment': true,
           'react/lib/ReactContext': true,

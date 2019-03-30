@@ -34,7 +34,7 @@ import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
@@ -228,7 +228,7 @@ class Menu extends Component {
           context.removeMenuItem(item)
         } else {
           const index = this.getMenuItemIndex(item)
-          error(index >= 0, 'Menu', 'Could not find registered menu item.')
+          error(index >= 0, '[Menu] Could not find registered menu item.')
           if (index >= 0) {
             this._menuItems.splice(index, 1)
           }
@@ -350,10 +350,10 @@ class Menu extends Component {
 
   focus () {
     if (this.shown) {
-      error(this._menu && this._menu.focus, 'Menu', 'Could not focus the menu.')
+      error(this._menu && this._menu.focus, '[Menu] Could not focus the menu.')
       this._menu.focus()
     } else {
-      error(this._trigger && this._trigger.focus, 'Menu', 'Could not focus the trigger.')
+      error(this._trigger && this._trigger.focus, '[Menu] Could not focus the trigger.')
       this._trigger.focus()
     }
   }
@@ -383,7 +383,7 @@ class Menu extends Component {
 
     const nextItem = this.menuItems[(current + count + step) % count]
 
-    error(nextItem && nextItem.focus, 'Menu', 'Could not focus next menu item.')
+    error(nextItem && nextItem.focus, '[Menu] Could not focus next menu item.')
 
     nextItem.focus()
   }

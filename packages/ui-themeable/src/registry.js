@@ -29,8 +29,7 @@
 * A global theme registry
 * @module registry
 */
-import warning from '@instructure/ui-utils/lib/warning'
-import error from '@instructure/ui-utils/lib/error'
+import { error, warn } from '@instructure/console/macro'
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import uid from '@instructure/uid'
@@ -64,7 +63,7 @@ const validateRegistry = (registry) => {
     }
   })
 
-  error(valid, 'themeable', 'Invalid global theme registry!')
+  error(valid, '[themeable] Invalid global theme registry!')
 
   return registry
 }
@@ -113,7 +112,7 @@ export const setDefaultTheme = (themeKey, overrides) => {
 
   if (!theme) {
     if (themeKey !== DEFAULT_THEME_KEY) {
-      error(theme, 'themeable', `Could not find theme: '${themeKey}' in the registry.`)
+      error(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
     }
     theme = {}
   }
@@ -145,7 +144,7 @@ export const makeTheme = ({
     description,
     use: function ({ accessible, overrides } = {}) {
       if (accessible) {
-        warning(a11y && a11y.key, `[themeable] No accessible theme provided for ${themeKey}.`)
+        warn(a11y && a11y.key, `[themeable] No accessible theme provided for ${themeKey}.`)
         if (a11y && a11y.key) {
           setDefaultTheme(a11y.key)
         }
@@ -179,7 +178,7 @@ export const getRegisteredTheme = (themeKey, defaultTheme = {}) => {
     return theme
   } else {
     if (themeKey !== DEFAULT_THEME_KEY) {
-      error(theme, 'themeable', `Could not find theme: '${themeKey}' in the registry.`)
+      error(theme, `[themeable] Could not find theme: '${themeKey}' in the registry.`)
     }
     return defaultTheme
   }
@@ -191,7 +190,7 @@ const getVariablesWithOverrides = (themeKey, overrides) => {
   const overridesIsEmpty = isEmpty(overrides)
 
   if (!overridesIsEmpty && theme.immutable) {
-    warning(
+    warn(
       false,
       `[themeable] Theme, '${theme.key}', is immutable. Cannot apply overrides: ${JSON.stringify(overrides)}`
     )
@@ -317,7 +316,7 @@ export const getRegisteredComponent = (themeKey, componentKey) => {
 export const generateTheme = (themeKey, overrides) => {
   const registry = getRegistry()
 
-  error((registry.registered.length > 0), 'themeable', 'No themes have been registered. ' +
+  error((registry.registered.length > 0), '[themeable] No themes have been registered. ' +
     'Import a theme from @instructure/ui-themes or register a custom theme with registerTheme ' +
     '(see @instructure/ui-themeable/lib/registry.js).'
   )
@@ -387,9 +386,7 @@ export const generateComponentTheme = (componentKey, themeKey, overrides) => {
       try {
         componentTheme = componentThemeFunction(variables)
       } catch (e) {
-        if (process.env.NODE_ENV !== 'production') {
-          console.error(e) // eslint-disable-line no-console
-        }
+        error(false, `[themeable] ${e}`)
       }
     }
   }
@@ -397,7 +394,7 @@ export const generateComponentTheme = (componentKey, themeKey, overrides) => {
   if (isEmpty(overrides)) {
     return (theme[componentKey] = componentTheme)
   } else if (theme.immutable) {
-    warning(
+    warn(
       false,
       `[themeable] Theme '${t}' is immutable. Cannot apply overrides for '${componentKey.toString()}': ${JSON.stringify(overrides)}`
     )

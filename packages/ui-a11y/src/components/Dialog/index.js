@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 
@@ -172,7 +172,7 @@ class Dialog extends Component {
 
   focus () {
     if (!this.props.open || !this.contentElement) {
-      error(false, 'Dialog', 'Can\'t focus a Dialog that isn\'t open.')
+      error(false, '[Dialog] Can\'t focus a Dialog that isn\'t open.')
       return
     }
 
@@ -183,7 +183,7 @@ class Dialog extends Component {
 
   blur () {
     if (!this.props.open || !this.contentElement) {
-      error(false, 'Dialog', 'Can\'t blur a Dialog that isn\'t open.')
+      error(false, '[Dialog] Can\'t blur a Dialog that isn\'t open.')
       return
     }
 

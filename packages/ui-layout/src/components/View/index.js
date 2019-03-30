@@ -34,7 +34,7 @@ import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-th
 import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
-import error from '@instructure/ui-utils/lib/error'
+import { error } from '@instructure/console/macro'
 import deprecated from '@instructure/ui-utils/lib/react/deprecated'
 import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -170,6 +170,33 @@ class View extends Component {
     minHeight: undefined
   }
 
+  componentDidMount () {
+    error(
+      !((function verifySpanMargin (element, margin) {
+        if (!element) {
+          return
+        }
+        const marginValues = margin ? margin.split(' ') : null
+        const display = getComputedStyle(element).display
+
+        let verticalMargin = false
+
+        // either top or bottom margin are set
+        if (margin) {
+          if (marginValues[0] && (marginValues[0] !== 'none' && marginValues[0] !== '0')) {
+            verticalMargin = true
+          }
+          if (marginValues[2] && (marginValues[2] !== 'none' && marginValues[2] !== '0')) {
+            verticalMargin = true
+          }
+        }
+
+        return verticalMargin && display === 'inline'
+      })(this._element, this.props.margin)),
+      `[View] display style is set to 'inline' and will allow for horizontal margins only.`
+    )
+  }
+
   get hasBorder () {
     const { borderWidth } = this.props
     return borderWidth && borderWidth !== '0' && borderWidth !== 'none'
@@ -294,36 +321,6 @@ class View extends Component {
   }
 }
 
-if (process.env.NODE_ENV !== 'production') {
-  View.prototype.componentDidMount = View.prototype.verifySpanMargin = function() {
-    if (!this._element) {
-      return
-    }
-
-    const { margin } = this.props
-    const marginValues = margin ? margin.split(' ') : null
-    const display = getComputedStyle(this._element).display
-
-    let verticalMargin = false
-
-    // either top or bottom margin are set
-    if (margin) {
-      if (marginValues[0] && (marginValues[0] !== 'none' && marginValues[0] !== '0')) {
-        verticalMargin = true
-      }
-      if (marginValues[2] && (marginValues[2] !== 'none' && marginValues[2] !== '0')) {
-        verticalMargin = true
-      }
-    }
-
-    error(
-      !(verticalMargin && display === 'inline'),
-      'View',
-      `display style is set to '${display}' and will allow for horizontal margins only.`
-    )
-  }
-}
-
 const ComposedView = deprecated('5.4.0', {size: 'maxWidth'})(
   bidirectional()(
     themeable(theme, styles)(View)
@@ -337,7 +334,7 @@ const ComposedView = deprecated('5.4.0', {size: 'maxWidth'})(
 ComposedView.omitViewProps = (props, Component) => {
   if (process.env.NODE_ENV !== 'production') {
     Object.keys(pickProps(props, ComposedView.propTypes)).forEach((prop) => {
-      error(false, Component.displayName, `prop '${prop}' is not allowed.`)
+      error(false, `[${Component.displayName}] prop '${prop}' is not allowed.`)
     })
   }
 

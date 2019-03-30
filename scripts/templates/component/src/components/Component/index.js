@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
+import { log } from '@instructure/console/macro'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -45,6 +46,7 @@ class ${COMPONENT} extends Component {
   }
 
   render () {
+    log('hello I rendered!')
     const { children, ...props } = this.props
     return (
       <div

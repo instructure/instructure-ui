@@ -34,7 +34,7 @@ import getElementType from '@instructure/ui-utils/lib/react/getElementType'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 
 import View from '@instructure/ui-layout/lib/components/View'
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
@@ -238,7 +238,7 @@ class Button extends Component {
       if (this.hasVisibleChildren) {
         React.Children.forEach(children, (child) => {
           const icon = child && child.type && typeof child.type.glyphName !== 'undefined'
-          warning(
+          warn(
             !icon,
             `[Button] Icons as children is deprecated. Please use the 'icon' prop instead.`
           )

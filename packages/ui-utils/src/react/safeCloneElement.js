@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import warning from '../warning'
+import { warn } from '@instructure/console/macro'
 import createChainedFunction from '../createChainedFunction'
 
 /**
@@ -70,7 +70,7 @@ export default function safeCloneElement (element, props, ...children) {
     return React.cloneElement(element, mergedProps, ...children)
   }
 
-  warning(originalRefIsAFunction,
+  warn(originalRefIsAFunction,
     `Cloning an element with a ref that will be overwritten because the ref \
 is not a function. Use a composable callback-style ref instead. \
 Ignoring ref: ${originalRef}`)

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
-import warning from '@instructure/ui-utils/lib/warning'
+import { warn } from '@instructure/console/macro'
 
 let hasRan = false
 /**
@@ -38,7 +38,7 @@ export default function setTextDirection () {
   if (canUseDOM) {
     const dir = document.documentElement.getAttribute('dir')
     if (!dir) {
-      warning(dir,
+      warn(dir,
         `[themeable] component styles require setting a 'dir' attribute on the HTML element.
         To prevent breaking changes, we'll set it to a default value: 'ltr'.`
       )

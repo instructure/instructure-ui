@@ -33,7 +33,7 @@ import initConsole from './initConsole'
 class Sandbox {
   constructor () {
     // eslint-disable-next-line no-console
-    console.log('[ui-test-utils] Initializing test sandbox...')
+    console.info('[ui-test-utils] Initializing test sandbox...')
     try {
       // global Mocha (or Jest?) beforeEach
       before('[ui-test-utils] sandbox init', this.setup.bind(this))
