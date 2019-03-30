@@ -87,7 +87,7 @@ class Badge extends Component {
     elementRef: PropTypes.func,
     formatOverflowText: PropTypes.func,
     formatOutput: PropTypes.func,
-    as: PropTypes.elementType
+    as: PropTypes.elementType // eslint-disable-line react/require-default-props
   }
 
   static defaultProps = {
@@ -96,7 +96,6 @@ class Badge extends Component {
     countUntil: undefined,
     margin: undefined,
     formatOutput: undefined,
-    as: undefined,
     standalone: false,
     type: 'count',
     variant: 'primary',

@@ -74,7 +74,7 @@ class Link extends Component {
     /**
     * __DEPRECATED (5.40.0)__ Use `<Link><TruncateText /></Link>` instead.
     */
-    ellipsis: PropTypes.bool,
+    ellipsis: PropTypes.bool, // eslint-disable-line react/require-default-props
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
     * `small`, `medium`, `large`, `x-large`, `xx-large`. Apply these values via
@@ -101,7 +101,6 @@ class Link extends Component {
     elementRef: undefined,
     disabled: false,
     onClick: undefined,
-    ellipsis: false,
     margin: undefined,
     icon: undefined,
     display: undefined,

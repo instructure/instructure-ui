@@ -69,7 +69,7 @@ export default class Img extends Component {
     }),
     grayscale: PropTypes.bool,
     blur: PropTypes.bool,
-    cover: PropTypes.bool,
+    cover: PropTypes.bool, // eslint-disable-line react/require-default-props
     constrain: PropTypes.oneOf(['cover', 'contain']),
     elementRef: PropTypes.func,
     height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
@@ -79,7 +79,6 @@ export default class Img extends Component {
   static defaultProps = {
     margin: undefined,
     overlay: undefined,
-    cover: false,
     constrain: undefined,
     elementRef: undefined,
     height: undefined,

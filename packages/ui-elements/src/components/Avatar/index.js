@@ -70,7 +70,7 @@ export default class Avatar extends Component {
     /**
     * the element type to render as
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
     * provides a reference to the underlying html element
     */
@@ -81,7 +81,6 @@ export default class Avatar extends Component {
     src: undefined,
     alt: undefined,
     margin: undefined,
-    as: undefined,
     elementRef: undefined,
     size: 'medium',
     variant: 'circle',

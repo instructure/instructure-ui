@@ -64,7 +64,7 @@ export default class Heading extends Component {
     /**
     * the element type to render as (defaults to the level)
     */
-     as: PropTypes.elementType,
+     as: PropTypes.elementType, // eslint-disable-line react/require-default-props
      ellipsis: PropTypes.bool,
     /**
     * Valid values are `0`, `none`, `auto`, `xxx-small`, `xx-small`, `x-small`,
@@ -77,7 +77,6 @@ export default class Heading extends Component {
 
    static defaultProps = {
      children: null,
-     as: undefined,
      margin: undefined,
      elementRef: undefined,
      border: 'none',

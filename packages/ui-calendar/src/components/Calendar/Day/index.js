@@ -102,7 +102,7 @@ class Day extends Component {
     /**
     * the element type to render as
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType // eslint-disable-line react/require-default-props
   }
 
   static defaultProps = {
@@ -113,7 +113,6 @@ class Day extends Component {
     elementRef: (el) => {},
     onClick: undefined,
     onKeyDown: undefined,
-    as: undefined,
     children: null
   }
 

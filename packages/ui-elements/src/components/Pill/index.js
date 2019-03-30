@@ -55,13 +55,12 @@ class Pill extends Component {
     margin: ThemeablePropTypes.spacing,
     variant: PropTypes.oneOf(['default', 'success', 'danger', 'primary', 'warning', 'message']),
     elementRef: PropTypes.func,
-    as: PropTypes.elementType
+    as: PropTypes.elementType // eslint-disable-line react/require-default-props
   }
 
   static defaultProps = {
     margin: undefined,
     elementRef: undefined,
-    as: undefined,
     variant: 'default'
   }
 

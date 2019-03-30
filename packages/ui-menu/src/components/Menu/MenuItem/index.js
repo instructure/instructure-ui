@@ -82,7 +82,7 @@ class MenuItem extends Component {
     /**
     * the element type to render as (will default to `<a>` if href is provided)
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     type: PropTypes.oneOf(['button', 'checkbox', 'radio', 'flyout']),
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     href: PropTypes.string
@@ -99,7 +99,6 @@ class MenuItem extends Component {
     onKeyUp: undefined,
     onMouseOver: undefined,
     controls: undefined,
-    as: undefined,
     value: undefined,
     href: undefined
   }

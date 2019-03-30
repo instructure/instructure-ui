@@ -45,7 +45,7 @@ category: components
 @themeable(theme, styles)
 class Container extends Component {
   static propTypes = {
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     children: PropTypes.node,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
@@ -97,8 +97,7 @@ class Container extends Component {
     margin: undefined,
     size: undefined,
     textAlign: undefined,
-    children: null,
-    as: undefined
+    children: null
   }
 
   renderSpacingStyles (spacingFromProps, spacingFromTheme) {

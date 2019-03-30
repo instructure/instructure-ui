@@ -63,7 +63,7 @@ export default class Tooltip extends Component {
     /**
     * the element type to render as (assumes a single child if 'as' is undefined)
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
     /**
      * The action that causes the Content to display (`click`, `hover`, `focus`)
      */
@@ -91,7 +91,6 @@ export default class Tooltip extends Component {
   }
 
   static defaultProps = {
-    as: undefined,
     on: undefined,
     variant: 'default',
     placement: 'top',

@@ -57,7 +57,7 @@ class Dialog extends Component {
     /**
     * The element to render as the component root, `span` by default
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
 
     display: PropTypes.oneOf(['auto', 'block', 'inline-block']),
 
@@ -103,7 +103,6 @@ class Dialog extends Component {
 
   static defaultProps = {
     children: null,
-    as: undefined,
     display: undefined,
     label: undefined,
     open: false,

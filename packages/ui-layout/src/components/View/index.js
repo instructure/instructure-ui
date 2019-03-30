@@ -54,7 +54,7 @@ class View extends Component {
     /**
     * The element to render as the component root, `span` by default
     */
-    as: PropTypes.elementType,
+    as: PropTypes.elementType, // eslint-disable-line react/require-default-props
 
     /**
     * provides a reference to the underlying html element
@@ -143,7 +143,7 @@ class View extends Component {
     // compatibility with Container we are leaving it undefined here. Otherwise
     // it modifies behavior for consuming components because of the logic around
     // default props in getElementType
-    as: undefined,
+    // as: undefined,
     // - `textAlign` is undefined by default so that View can inherit text alignment
     // from parents
     textAlign: undefined,
