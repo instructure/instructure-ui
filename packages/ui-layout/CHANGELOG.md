@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.51.1](https://github.com/instructure/instructure-ui/compare/v5.51.0...v5.51.1) (2019-03-30)
+
+
+### Bug Fixes
+
+* **ui-elements,ui-layout:** prevent prop warnings due to defaults ([5a7128d](https://github.com/instructure/instructure-ui/commit/5a7128d))
+
+
+
+
+
 # [5.51.0](https://github.com/instructure/instructure-ui/compare/v5.50.0...v5.51.0) (2019-03-29)
 
 **Note:** Version bump only for package @instructure/ui-layout
