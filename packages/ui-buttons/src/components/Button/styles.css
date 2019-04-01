@@ -713,9 +713,12 @@ a.icon,
   color: var(--iconColor);
 
   &:focus,
-  &:hover,
-  &:active {
+  &:hover {
     color: var(--iconHoverColor);
+  }
+
+  &:active {
+    color: var(--iconActiveColor);
   }
 }
 
