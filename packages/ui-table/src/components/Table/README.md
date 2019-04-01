@@ -556,8 +556,6 @@ class SelectableTable extends React.Component {
 class PaginatedTable extends React.Component {
   constructor(props) {
     super(props)
-    const { perPage } = props
-
     this.state = {
       page: 0,
     }
@@ -569,15 +567,13 @@ class PaginatedTable extends React.Component {
     })
   }
 
-  handleSort = (event, { id }) => {
+  handleSort = (event, options) => {
     const { onSort } = this.props
 
     this.setState({
       page: 0,
     })
-    onSort(event, {
-      id,
-    })
+    onSort(event, options)
   }
 
   render() {

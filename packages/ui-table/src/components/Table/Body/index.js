@@ -26,6 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
+import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -69,14 +70,14 @@ class Body extends Component {
         className={styles.root}
         role={isStacked ? "rowgroup" : null}
       >
-        {Children.map(children, (child) => {
-          return safeCloneElement(child, {
+        {Children.map(children, (child) => matchComponentTypes(child, [Row])
+          ? safeCloneElement(child, {
             key: child.props.name,
             hover,
             isStacked,
             headers,
           })
-        })}
+          : null)}
       </View>
     )
   }

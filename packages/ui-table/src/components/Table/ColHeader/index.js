@@ -107,7 +107,7 @@ class ColHeader extends Component {
         className={classnames({
           [styles.root]: true,
           [styles.header]: !onRequestSort,
-          [styles[`textAlign--${textAlign}`]]: textAlign,
+          [styles[`textAlign--${textAlign}`]]: true,
         })}
         style={{
           width,
@@ -120,11 +120,13 @@ class ColHeader extends Component {
             className={classnames({
               [styles.header]: true,
               [styles.button]: true,
-              [styles[`textAlign--${textAlign}`]]: textAlign,
+              [styles[`flexDirection--${textAlign}`]]: true,
             })}
           >
             {callRenderProp(children)}
-            {this.renderSortArrow()}
+            <div>
+              {this.renderSortArrow()}
+            </div>
           </button>
         )}
         {!onRequestSort && children}

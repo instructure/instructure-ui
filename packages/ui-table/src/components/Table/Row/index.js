@@ -78,24 +78,23 @@ class Row extends Component {
         role={isStacked ? "row" : null}
       >
         {Children.map(children, (child, index) => {
-          const props = {
-            key: child.props.name,
-          }
-
           if (matchComponentTypes(child, [ColHeader])) {
-            return safeCloneElement(child, props)
+            return child
           }
           if (matchComponentTypes(child, [RowHeader])) {
             return safeCloneElement(child, {
-              ...props,
+              key: child.props.name,
               isStacked,
             })
           }
-          return safeCloneElement(child, {
-            ...props,
-            isStacked,
-            header: headers && headers[index],
-          })
+          if (matchComponentTypes(child, [Cell])) {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              isStacked,
+              header: headers && headers[index],
+            })
+          }
+          return null
         })}
       </View>
     )

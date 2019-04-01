@@ -49,7 +49,21 @@
   text-align: end;
 }
 
+.flexDirection--start {
+  flex-direction: row;
+}
+
+.flexDirection--center {
+  justify-content: center;
+}
+
+.flexDirection--end {
+  flex-direction: row-reverse;
+}
+
 .button {
+  display: flex;
+  align-items: center; /* align arrow in vertical center */
   box-sizing: border-box;
   border: none;
   width: 100%;

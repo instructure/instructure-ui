@@ -140,18 +140,21 @@ class Table extends Component {
       >
         {!isStacked && <caption><ScreenReaderContent>{caption}</ScreenReaderContent></caption>}
         {Children.map(children, (child) => {
-          const props = {
-            key: child.props.name,
-            isStacked,
+          if (matchComponentTypes(child, [Head])) {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              isStacked,
+            })
           }
-
-          return matchComponentTypes(child, [Head])
-            ? safeCloneElement(child, props)
-            : safeCloneElement(child, {
-              ...props,
+          if (matchComponentTypes(child, [Body])) {
+            return safeCloneElement(child, {
+              key: child.props.name,
+              isStacked,
               hover,
               headers,
             })
+          }
+          return null
         })}
       </View>
     )

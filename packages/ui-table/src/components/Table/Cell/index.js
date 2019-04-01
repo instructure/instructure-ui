@@ -71,7 +71,7 @@ class Cell extends Component {
         })}
         role={isStacked ? "cell" : null}
       >
-        {callRenderProp(header)}
+        {header && callRenderProp(header)}
         {header && ': '}
         {callRenderProp(children)}
       </View>

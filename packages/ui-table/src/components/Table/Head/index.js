@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { Select } from '@instructure/ui-forms'
@@ -129,11 +128,9 @@ class Head extends Component {
           {...omitProps(this.props, Head.propTypes)}
           className={styles.root}
         >
-          {Children.map(children, (child) => {
-            return safeCloneElement(child, {
-              key: child.props.name,
-            })
-          })}
+          {Children.map(children, (child) => matchComponentTypes(child, [Row])
+            ? child
+            : null)}
         </thead>
       )
   }
