@@ -1,0 +1,30 @@
+{
+  "name": "@instructure/instui-cli",
+  "version": "5.52.0",
+  "description": "A cli for working with instructure-ui packages",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "bin": {
+    "instui": "./lib/index.js"
+  },
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@instructure/command-utils": "^5.52.0",
+    "@instructure/instui-config": "^5.52.0",
+    "@instructure/ui-scripts": "^5.52.0",
+    "yargs": "^13"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
