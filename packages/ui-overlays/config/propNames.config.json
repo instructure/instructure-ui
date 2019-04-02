@@ -1,0 +1,7 @@
+{
+  "Mask": {
+    "5.0.0": [
+      { "old": "fullScreen", "new": "fullscreen" }
+    ]
+  }
+ }
