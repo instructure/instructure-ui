@@ -39,7 +39,7 @@ if (portIndex > 0) {
   port = args[portIndex + 1]
 }
 
-let chromaticArgs = ['test', '--storybook-port', port, '--no-interactive', '--do-not-start']
+let chromaticArgs = ['test', '--storybook-port', port]
 
 if (args.includes('--auto-accept-changes')) {
   chromaticArgs.push('--auto-accept-changes')

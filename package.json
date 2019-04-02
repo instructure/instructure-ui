@@ -33,7 +33,6 @@
     "test": "ui-test",
     "test:jest": "lerna run test:jest --stream",
     "test:mocha": "lerna run test --stream",
-    "pretest:vrt": "yarn bootstrap",
     "test:vrt": "lerna run test:vrt --stream",
     "accept:vrt": "lerna run accept:vrt --stream",
     "test:react:15": "npm-run-all install:react:15 test test:testbed install:react",
@@ -64,15 +63,16 @@
     "predeploy": "yarn build:docs",
     "deploy": "ui-scripts --deploy-docs",
     "dev:examples": "lerna run start:watch --stream --scope docs-examples",
+    "prestart:examples": "yarn bootstrap",
     "start:examples": "lerna run start --stream --scope docs-examples",
     "generate:sketch": "lerna run generate:sketch --stream --scope docs-examples"
   },
   "license": "MIT",
   "resolutions": {
-    "@babel/core": "^7.4.0",
-    "@babel/runtime": "^7.4.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6"
+    "@babel/core": "^7.4.3",
+    "@babel/runtime": "^7.4.3",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "devDependencies": {
     "husky": "^1.3.1",

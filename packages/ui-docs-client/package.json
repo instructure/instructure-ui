@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@babel/standalone": "^7.4.2",
+    "@babel/standalone": "^7.4.3",
     "@instructure/ui-a11y": "^5.51.1",
     "@instructure/ui-buttons": "^5.51.1",
     "@instructure/ui-code-editor": "^5.51.1",

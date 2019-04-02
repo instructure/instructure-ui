@@ -3,6 +3,7 @@
 set -e
 
 env_file=.env.test
+git_path=/usr/src/app/.git
 
 dotenv () {
   set -a
@@ -34,6 +35,10 @@ echo "Creating ${env_file} file..."
 (
 cat << EOF
 CI=true
+GIT_EMAIL=${GIT_EMAIL}
+GIT_USERNAME=${GIT_USERNAME}
+GIT_REMOTE_URL=${GIT_REMOTE_URL}
+GIT_REMOTE_NAME=${GIT_REMOTE_NAME}
 CHROMATIC_APP_CODE=${CHROMATIC_APP_CODE}
 GERRIT_CHANGE_ID=${GERRIT_CHANGE_ID}
 GERRIT_PROJECT=${GERRIT_PROJECT}
@@ -51,10 +56,13 @@ docker-compose build
 echo "Preparing container..."
 container=$(docker-compose run -d --rm test tail -f /dev/null)
 
+docker cp .git $container:$git_path
+docker exec -u 0 $container chown -R docker:docker $git_path
+
 if [ "${GERRIT_EVENT_TYPE}" == "change-merged" ]; then
   echo "Accepting VRT images..."
-  docker exec $container bash -c "yarn accept:vrt"
+  docker exec $container bash -c "yarn bootstrap && yarn accept:vrt"
 else
   echo "Running VRT tests..."
-  docker exec $container bash -c "yarn test:vrt"
+  docker exec $container bash -c "yarn bootstrap && yarn test:vrt"
 fi

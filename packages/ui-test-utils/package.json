@@ -35,7 +35,7 @@
     "dirty-chai": "^2.0.1",
     "fetch-mock": "^7.3.0",
     "keycode": "^2",
-    "pretty-format": "^24.5.0",
+    "pretty-format": "^24.6.0",
     "sinon": "^7.3.1",
     "sinon-chai": "^3.3.0",
     "sizzle": "^2.3.3",
