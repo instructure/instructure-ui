@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.52.0](https://github.com/instructure/instructure-ui/compare/v5.51.1...v5.52.0) (2019-04-03)
+
+
+### Bug Fixes
+
+* **ui-scripts:** resolve promise for gerritbot review ([23a7123](https://github.com/instructure/instructure-ui/commit/23a7123))
+
+
+### Features
+
+* **console:** remove console statements in prod env ([603c738](https://github.com/instructure/instructure-ui/commit/603c738))
+* **ui-scripts:** ui-build --modules option ([0be81cc](https://github.com/instructure/instructure-ui/commit/0be81cc))
+
+
+
+
+
 ## [5.51.1](https://github.com/instructure/instructure-ui/compare/v5.51.0...v5.51.1) (2019-03-30)
 
 **Note:** Version bump only for package @instructure/ui-scripts
