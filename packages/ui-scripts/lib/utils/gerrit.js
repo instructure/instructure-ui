@@ -53,9 +53,8 @@ exports.postGerritReview  = async function postGerritReview (target, message, la
         error(`An error occured posting a gerrit review for ${target}.`)
         error(err)
         reject(err)
-      } else {
-        resolve()
       }
+      resolve()
     })
   })
 }
