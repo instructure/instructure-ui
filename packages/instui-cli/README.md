@@ -19,7 +19,7 @@ yarn global add @instructure/instui-cli
 
 ### Available commands
 * __upgrade-packages__ | Upgrade instructure-ui packages in a specified directory to the latest version
-
+* __codemod__ | Apply instructure-ui codemods to source at a specified path
 
 ### Documentation
 

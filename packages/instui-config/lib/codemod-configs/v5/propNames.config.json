@@ -1,0 +1,53 @@
+{
+  "Modal": {
+    "5.0.0": [
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "onRequestClose", "new": "onDismiss" },
+      { "old": "onAfterOpen", "new": "onOpen" },
+      { "old": "isOpen", "new": "open" },
+      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" }
+    ]
+  },
+  "Portal": {
+    "5.0.0": [
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "container", "new": "mountNode" },
+      { "old": "isOpen", "new": "open" }
+    ]
+  },
+  "Overlay": {
+    "5.0.0": [
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "isOpen", "new": "open" },
+      { "old": "onRequestClose", "new": "onDismiss" },
+      { "old": "onAfterOpen", "new": "onOpen" },
+      { "old": "shouldCloseOnClick", "new": "shouldCloseOnDocumentClick" }
+    ]
+  },
+  "Tray": {
+    "5.0.0": [
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "onRequestClose", "new": "onDismiss" },
+      { "old": "onAfterOpen", "new": "onOpen" },
+      { "old": "isOpen", "new": "open" },
+      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" },
+      { "old": "trapFocus", "new": "shouldContainFocus" }
+    ]
+  },
+  "Popover": {
+    "5.0.0": [
+      { "old": "renderOffscreen", "new": "shouldRenderOffscreen" },
+      { "old": "rootClose", "new": "shouldCloseOnDocumentClick" }
+    ]
+  },
+  "PopoverMenu": {
+    "5.0.0": [{ "old": "focusTriggerOnClose", "new": "shouldFocusTriggerOnClose" }]
+  },
+  "Alert": {
+    "5.0.0": [
+      { "old": "onClose", "new": "onDismiss" },
+      { "old": "transitionType", "new": "transition" },
+      { "old": "isOpen", "new": "open" }
+    ]
+  }
+}
