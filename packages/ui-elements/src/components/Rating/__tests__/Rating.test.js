@@ -79,7 +79,7 @@ describe('<Rating />', async () => {
     expect(icons.length).to.equal(5)
   })
 
-  it('should set the required aria attribute values', async () => {
+  it('should render screen reader text to give context', async () => {
     await mount(
       <Rating
         label="Course rating"
@@ -92,14 +92,7 @@ describe('<Rating />', async () => {
 
     const rating = await RatingLocator.find()
 
-    // see https://www.w3.org/TR/wai-aria-1.1/#slider
-    expect(rating.getAttribute('role')).to.equal('slider')
-    expect(rating.getAttribute('aria-readonly')).to.equal('true')
-    expect(rating.getAttribute('aria-label')).to.equal('Course rating')
-    expect(rating.getAttribute('aria-valuenow')).to.equal('4')
-    expect(rating.getAttribute('aria-valuemax')).to.equal('5')
-    expect(rating.getAttribute('aria-valuemin')).to.equal('0')
-    expect(rating.getAttribute('aria-valuetext')).to.equal('4 out of 5')
+    expect(rating.getTextContent()).to.contain('Course rating 4 out of 5')
   })
 
   it('should meet a11y standards', async () => {
@@ -147,6 +140,6 @@ describe('<Rating />', async () => {
             expect(consoleError).to.not.be.called()
           })
         }
-    })
+      })
   })
 })

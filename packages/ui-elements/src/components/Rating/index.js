@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import themeable from '@instructure/ui-themeable'
@@ -93,7 +94,7 @@ class Rating extends Component {
     valueMax: undefined
   }
 
-  get filled () {
+  get filled() {
     const {
       valueNow,
       iconCount,
@@ -113,16 +114,17 @@ class Rating extends Component {
     }
   }
 
-  get empty () {
+  get empty() {
     return this.props.iconCount - this.filled
   }
 
-  render () {
+  render() {
     const {
       iconCount,
       animateFill,
       size,
       margin,
+      label,
       formatValueText
     } = this.props
 
@@ -130,7 +132,7 @@ class Rating extends Component {
       [styles.root]: true
     }
 
-    const valueText = formatValueText(this.filled, iconCount)
+    const valueText = label + ' ' + formatValueText(this.filled, iconCount)
 
     const passthroughProps = View.omitViewProps(
       omitProps(this.props, Rating.propTypes),
@@ -142,15 +144,9 @@ class Rating extends Component {
         {...passthroughProps}
         className={classnames(classes)}
         margin={margin}
-        role="slider"
-        aria-valuetext={valueText}
-        aria-valuenow={this.filled}
-        aria-valuemax={this.props.iconCount}
-        aria-valuemin={0}
-        aria-label={this.props.label}
-        aria-readonly="true"
         display="inline-block"
       >
+        <ScreenReaderContent>{valueText}</ScreenReaderContent>
         {
           [...Array(this.filled)].map((x, i) => (
             <RatingIcon
