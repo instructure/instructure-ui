@@ -165,6 +165,60 @@ example: true
 </div>
 ```
 
+### Using tooltips
+
+It's best practice to make the complete text of a truncated element available via a [Tooltip](#Tooltip).
+
+```js
+---
+render: false
+example: true
+---
+class Example extends React.Component {
+  state = {
+    isTruncated: false
+  }
+
+  handleUpdate = (isTruncated) => {
+    if (this.state.isTruncated !== isTruncated) {
+      this.setState({ isTruncated })
+    }
+  }
+
+  renderLink () {
+    return (
+      <Link href="#">
+        <TruncateText onUpdate={this.handleUpdate}>
+          {this.props.message}
+        </TruncateText>
+      </Link>
+    )
+  }
+
+  render () {
+    return (
+      <View
+        as="div"
+        padding="xx-small none"
+        maxWidth="230px"
+        debug
+      >
+        {this.state.isTruncated ? (
+          <Tooltip
+            tip={this.props.message}
+            mountNode={() => document.getElementById('main')}
+          >
+            { this.renderLink() }
+          </Tooltip>
+        ) : this.renderLink()}
+      </View>
+    )
+  }
+}
+
+render(<Example message="A tooltip will display only when this text is truncated" />)
+```
+
 ### Guidelines
 
 ```js
