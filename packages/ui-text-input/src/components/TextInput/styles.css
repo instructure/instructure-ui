@@ -30,7 +30,7 @@
     transform: scale(1);
   }
 
-  &.inactive {
+  &.disabled {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.5;

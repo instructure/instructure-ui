@@ -231,7 +231,6 @@ class TextInput extends Component {
   render () {
     const {
       disabled,
-      readOnly,
       width,
       renderBeforeInput,
       renderAfterInput
@@ -241,7 +240,7 @@ class TextInput extends Component {
 
     const facadeClasses = {
       [styles.facade]: true,
-      [styles.inactive]: disabled || readOnly,
+      [styles.disabled]: disabled,
       [styles.invalid]: this.invalid,
       [styles.focused]: this.state.focused
     }
