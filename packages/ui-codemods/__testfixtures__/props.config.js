@@ -4,7 +4,8 @@ module.exports = {
       { old: 'onReady', new: 'onOpen' },
       { old: 'isOpen', new: 'open' },
       { old: 'getDefaultFocusElement', new: 'defaultFocusElement' },
-    ] 
+      { old: 'closeButtonVariant', new: null }
+    ]
   },
 
   'Overlay': {
@@ -25,6 +26,5 @@ module.exports = {
     '3.0.0': [
       { old: 'onReady', new: 'onPositioned' },
     ]
-  },  
+  },
 }
-

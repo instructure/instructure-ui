@@ -197,7 +197,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FormField",
-    "replace": "@instructure/ui-forms/lib/components/FormField"
+    "replace": "@instructure/ui-form-field/lib/components/FormField"
   },
   {
     "pattern": "^@instructure/ui-forms/lib/components/FormField",
@@ -205,7 +205,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FormFieldGroup",
-    "replace": "@instructure/ui-forms/lib/components/FormFieldGroup"
+    "replace": "@instructure/ui-form-field/lib/components/FormFieldGroup"
   },
   {
     "pattern": "^@instructure/ui-forms/lib/components/FormFieldGroup",
@@ -245,7 +245,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/NumberInput",
-    "replace": "@instructure/ui-forms/lib/components/NumberInput"
+    "replace": "@instructure/ui-number-input/lib/components/NumberInput"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/components/NumberInput",
+    "replace": "@instructure/ui-number-input/lib/components/NumberInput"
   },
   {
     "pattern": "^@instructure-ui/ui-core/lib/utils/hasVisibleChildren",

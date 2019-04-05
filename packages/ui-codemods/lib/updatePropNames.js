@@ -44,6 +44,6 @@ module.exports = function (file, api, options) {
   hasModifications = replaceDeprecatedProps(j, root, config) || hasModifications
 
   return hasModifications
-    ? root.toSource({ quote: 'single' })
+    ? root.toSource({ quote: 'single', tabWidth: 2 })
     : null
 }

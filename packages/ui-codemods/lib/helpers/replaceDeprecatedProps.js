@@ -55,7 +55,15 @@ module.exports = function replaceDeprecatedProps (j, root, config) {
 
                 if (match) {
                   hasModifications = true
-                  j(i).replaceWith(j.jsxIdentifier(match.new))
+
+                  if (match.new) {
+                    // Update the prop name if the config specifies a new name
+                    j(i).replaceWith(j.jsxIdentifier(match.new))
+                  } else {
+                    // If config sets the new name to null, the prop has been
+                    // removed. Remove the prop and value.
+                    j(attr).remove()
+                  }
                 }
               })
           })

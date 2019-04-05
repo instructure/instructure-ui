@@ -1,1 +1,1 @@
-<Modal isOpen onReady={() => {}} />
+<Modal isOpen onReady={() => {}} closeButtonVariant="value" />

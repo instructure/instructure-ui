@@ -1,18 +1,21 @@
 {
+  "Alert": {
+    "5.0.0": [
+      { "old": "onClose", "new": "onDismiss" },
+      { "old": "transitionType", "new": "transition" },
+      { "old": "isOpen", "new": "open" },
+      { "old": "dismissable", "new": null }
+    ]
+  },
   "Modal": {
     "5.0.0": [
       { "old": "onReady", "new": "onOpen" },
       { "old": "onRequestClose", "new": "onDismiss" },
       { "old": "onAfterOpen", "new": "onOpen" },
       { "old": "isOpen", "new": "open" },
-      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" }
-    ]
-  },
-  "Portal": {
-    "5.0.0": [
-      { "old": "onReady", "new": "onOpen" },
-      { "old": "container", "new": "mountNode" },
-      { "old": "isOpen", "new": "open" }
+      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" },
+      { "old": "closeButtonVariant", "new": null },
+      { "old": "padding", "new": null }
     ]
   },
   "Overlay": {
@@ -24,16 +27,6 @@
       { "old": "shouldCloseOnClick", "new": "shouldCloseOnDocumentClick" }
     ]
   },
-  "Tray": {
-    "5.0.0": [
-      { "old": "onReady", "new": "onOpen" },
-      { "old": "onRequestClose", "new": "onDismiss" },
-      { "old": "onAfterOpen", "new": "onOpen" },
-      { "old": "isOpen", "new": "open" },
-      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" },
-      { "old": "trapFocus", "new": "shouldContainFocus" }
-    ]
-  },
   "Popover": {
     "5.0.0": [
       { "old": "renderOffscreen", "new": "shouldRenderOffscreen" },
@@ -43,11 +36,28 @@
   "PopoverMenu": {
     "5.0.0": [{ "old": "focusTriggerOnClose", "new": "shouldFocusTriggerOnClose" }]
   },
-  "Alert": {
+  "Portal": {
     "5.0.0": [
-      { "old": "onClose", "new": "onDismiss" },
-      { "old": "transitionType", "new": "transition" },
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "container", "new": "mountNode" },
       { "old": "isOpen", "new": "open" }
+    ]
+  },
+  "Table": {
+    "5.0.0": [
+      { "old": "tableData", "new": null },
+      { "old": "rowHeaders", "new": null },
+      { "old": "colHeaders", "new": null }
+    ]
+  },
+  "Tray": {
+    "5.0.0": [
+      { "old": "onReady", "new": "onOpen" },
+      { "old": "onRequestClose", "new": "onDismiss" },
+      { "old": "onAfterOpen", "new": "onOpen" },
+      { "old": "isOpen", "new": "open" },
+      { "old": "getDefaultFocusElement", "new": "defaultFocusElement" },
+      { "old": "trapFocus", "new": "shouldContainFocus" }
     ]
   }
 }

@@ -31,7 +31,6 @@
       "warning"
     ]
   },
-
   {
     "oldPath": "instructure-ui/lib/util",
     "newPath": "@instructure/ui-utils/lib/react",

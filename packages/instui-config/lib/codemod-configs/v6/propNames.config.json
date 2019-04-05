@@ -1,7 +1,68 @@
 {
+  "CodeEditor": {
+    "6.0.0": [
+      { "old": "code", "new": "value" }
+    ]
+  },
+  "Dialog": {
+    "6.0.0": [
+      { "old": "applicationElement", "new": null }
+    ]
+  },
+  "Img": {
+    "6.0.0": [
+      { "old": "cover", "new": "constrain" }
+    ]
+  },
   "Mask": {
     "6.0.0": [
       { "old": "fullScreen", "new": "fullscreen" }
+    ]
+  },
+  "Menu": {
+    "6.0.0": [
+      { "old": "title", "new": "label" },
+      { "old": "labelledBy", "new": "aria-labelledby" },
+      { "old": "controls", "new": "aria-controls" }
+    ]
+  },
+  "MenuItem": {
+    "6.0.0": [
+      { "old": "active", "new": null }
+    ]
+  },
+  "Modal": {
+    "6.0.0": [
+      { "old": "closeButtonLabel", "new": null },
+      { "old": "closeButtonRef", "new": null },
+      { "old": "applicationElement", "new": null },
+      { "old": "shouldCloseOnOverlayClick", "new": "shouldCloseOnDocumentClick" }
+    ]
+  },
+  "Popover": {
+    "6.0.0": [
+      { "old": "closeButtonLabel", "new": null },
+      { "old": "closeButtonRef", "new": null },
+      { "old": "applicationElement", "new": null }
+    ]
+  },
+  "SVGIcon": {
+    "6.0.0": [
+      { "old": "width", "new": "size" },
+      { "old": "height", "new": "size" }
+    ]
+  },
+  "Tooltip": {
+    "6.0.0": [
+      { "old": "size", "new": null }
+    ]
+  },
+  "Tray": {
+    "6.0.0": [
+      { "old": "closeButtonLabel", "new": null },
+      { "old": "closeButtonRef", "new": null },
+      { "old": "closeButtonVariant", "new": null },
+      { "old": "applicationElement", "new": null }
     ]
   }
 }
