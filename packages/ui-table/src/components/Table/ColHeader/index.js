@@ -44,7 +44,7 @@ class ColHeader extends Component {
   /* eslint-disable react/require-default-props */
   static propTypes = {
     /**
-     * A unique id for this column. When sortable table is in stacked mode,
+     * A unique id for this column. When sortable table is in stacked layout,
      * id is also used as option in combobox.
      */
     id: PropTypes.string.isRequired,

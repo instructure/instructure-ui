@@ -27,9 +27,9 @@ import React from 'react'
 import Table from '../index'
 
 export default {
-  sectionProp: 'mode',
+  sectionProp: 'layout',
   propValues: {
-    mode: ['default', 'stacked']
+    layout: ['auto', 'fixed', 'stacked']
   },
   getComponentProps: (props) => {
     return {

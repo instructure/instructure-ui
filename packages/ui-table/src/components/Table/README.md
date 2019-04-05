@@ -3,7 +3,7 @@ describes: TableControlled
 id: TableControlled__README
 ---
 
-### `layout`, `mode` and `hover`
+### `layout` and `hover`
 
 In stacked mode, column header is rendered in each cell, but not in row header.
 
@@ -15,7 +15,6 @@ render: false
 class Example extends React.Component {
   state = {
     layout: 'auto',
-    mode: 'default',
     hover: false,
   }
 
@@ -26,7 +25,7 @@ class Example extends React.Component {
   }
 
   renderOptions () {
-    const { layout, mode, hover } = this.state
+    const { layout, hover } = this.state
 
     return (
       <Flex alignItems="start">
@@ -39,16 +38,6 @@ class Example extends React.Component {
           >
             <RadioInput label="auto" value="auto" />
             <RadioInput label="fixed" value="fixed" />
-          </RadioInputGroup>
-        </FlexItem>
-        <FlexItem margin="small">
-          <RadioInputGroup
-            name="mode"
-            description="mode"
-            value={mode}
-            onChange={(e, value) => this.handleChange('mode', value)}
-          >
-            <RadioInput label="default" value="default" />
             <RadioInput label="stacked" value="stacked" />
           </RadioInputGroup>
         </FlexItem>
@@ -64,7 +53,7 @@ class Example extends React.Component {
   }
 
   render() {
-    const { layout, mode, hover } = this.state
+    const { layout, hover } = this.state
 
     return (
       <div>
@@ -73,7 +62,6 @@ class Example extends React.Component {
           caption='Top rated movies'
           layout={layout}
           hover={hover}
-          mode={mode}
         >
           <TableControlled.Head>
             <TableControlled.Row>
@@ -133,16 +121,15 @@ class Example extends React.Component {
           large: { minWidth: '41rem' },
         }}
         props={{
-          small: { mode: 'stacked' },
-          large: { mode: 'default' },
+          small: { layout: 'stacked' },
+          large: { layout: 'fixed' },
         }}
       >
-        {({ mode }) => (
+        {({ layout }) => (
           <div>
             <TableControlled
               caption='Top rated movies'
-              layout='fixed'
-              mode={mode}
+              layout={layout}
             >
               <TableControlled.Head>
                 <TableControlled.Row>
@@ -164,9 +151,9 @@ class Example extends React.Component {
                     {headers.map(({ id, renderCell, textAlign }) => (
                       <TableControlled.Cell
                         key={id}
-                        textAlign={mode === 'stacked' ? 'start' : textAlign}
+                        textAlign={layout === 'stacked' ? 'start' : textAlign}
                       >
-                        {renderCell ? renderCell(row[id], mode) : row[id]}
+                        {renderCell ? renderCell(row[id], layout) : row[id]}
                       </TableControlled.Cell>
                     ))}
                   </TableControlled.Row>
@@ -180,7 +167,7 @@ class Example extends React.Component {
   }
 }
 
-const renderSummary = (summary, mode) => (mode === 'stacked')
+const renderSummary = (summary, layout) => (layout === 'stacked')
   ? summary
   : (
     <TruncateText
@@ -309,8 +296,8 @@ class SortableTable extends React.Component {
           large: { minWidth: '41rem' },
         }}
         props={{
-          small: { mode: 'stacked' },
-          large: { mode: 'default' },
+          small: { layout: 'stacked' },
+          large: { layout: 'auto' },
         }}
       >
         {(props) => (
@@ -476,8 +463,8 @@ class SelectableTable extends React.Component {
           large: { minWidth: '41rem' },
         }}
         props={{
-          small: { mode: 'stacked' },
-          large: { mode: 'default' },
+          small: { layout: 'stacked' },
+          large: { layout: 'auto' },
         }}
       >
         {(props) => (

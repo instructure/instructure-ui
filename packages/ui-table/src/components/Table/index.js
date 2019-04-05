@@ -34,6 +34,7 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-layout'
+import { deprecated } from '@instructure/ui-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -77,20 +78,16 @@ class Table extends Component {
     hover: PropTypes.bool,
     /**
      * `auto` lets the browser determine table column widths based on cell content,
-     * while `fixed` forces columns of equal width.
+     * while `fixed` forces columns of equal width. `stacked` renders table in one
+     * column to be more readable on narrow screens
      */
-    layout: PropTypes.oneOf(['auto', 'fixed']),
-    /**
-     * `stacked` renders table in one column to be more readable on narrow screens
-     */
-    mode: PropTypes.oneOf(['default', 'stacked']),
+    layout: PropTypes.oneOf(['auto', 'fixed', 'stacked']),
   }
 
   static defaultProps = {
     children: null,
     hover: false,
     layout: 'auto',
-    mode: 'default',
     margin: undefined,
     elementRef: undefined
   }
@@ -121,8 +118,9 @@ class Table extends Component {
   }
 
   render () {
+    // eslint-disable-next-line react/prop-types
     const { margin, elementRef, layout, caption, children, hover, mode } = this.props
-    const isStacked = mode === 'stacked'
+    const isStacked = layout === 'stacked' || mode === 'stacked'
     const headers = isStacked ? this.getHeaders() : null
 
     return (
@@ -161,4 +159,6 @@ class Table extends Component {
   }
 }
 
-export default Table
+export default deprecated('6.0', {
+  mode: true
+})(Table)

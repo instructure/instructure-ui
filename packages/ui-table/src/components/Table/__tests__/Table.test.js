@@ -98,9 +98,9 @@ describe('<Table />', async () => {
     expect(thNode.getAttribute('scope')).to.equal('row')
   })
 
-  it('can render table in stacked mode', async () => {
+  it('can render table in stacked layout', async () => {
     const stackedTable = await render({
-      mode: 'stacked',
+      layout: 'stacked',
     })
 
     expect(stackedTable).to.exist()
@@ -135,11 +135,11 @@ describe('<Table />', async () => {
     expect(tr).to.have.length(2)
   })
 
-  it('can handle non-existent head in stacked mode', async () => {
+  it('can handle non-existent head in stacked layout', async () => {
     const stackedTable = await mount(
       <Table
         caption="Test table"
-        mode="stacked"
+        layout="stacked"
       >
         <Table.Body>
         </Table.Body>
@@ -149,11 +149,11 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  it('can handle empty head in stacked mode', async () => {
+  it('can handle empty head in stacked layout', async () => {
     const stackedTable = await mount(
       <Table
         caption="Test table"
-        mode="stacked"
+        layout="stacked"
       >
         <Table.Head>
         </Table.Head>
@@ -163,11 +163,11 @@ describe('<Table />', async () => {
     expect(stackedTable).to.exist()
   })
 
-  it('can handle invalid header in stacked mode', async () => {
+  it('can handle invalid header in stacked layout', async () => {
     const stackedTable = await mount(
       <Table
         caption="Test table"
-        mode="stacked"
+        layout="stacked"
       >
         <Table.Head>
           <Table.Row>
@@ -181,10 +181,10 @@ describe('<Table />', async () => {
   })
 
   describe('when table is sortable', async () => {
-    const renderSortableTable = (props, mode = 'default') => mount(
+    const renderSortableTable = (props, layout = 'auto') => mount(
       <Table
         caption="Sortable table"
-        mode={mode}
+        layout={layout}
       >
         <Table.Head>
           <Table.Row>
@@ -225,7 +225,7 @@ describe('<Table />', async () => {
       expect(onRequestSort).to.have.been.calledOnce()
     })
 
-    it('can render table head as a combobox when in stacked mode', async () => {
+    it('can render table head as a combobox when in stacked layout', async () => {
       const sortFoo = stub()
 
       await renderSortableTable({
@@ -238,7 +238,7 @@ describe('<Table />', async () => {
       expect(sortFoo).to.have.been.calledOnce()
     })
 
-    it('can render check mark for sorted column in stacked mode', async () => {
+    it('can render check mark for sorted column in stacked layout', async () => {
       await renderSortableTable({
         onRequestSort: stub(),
         sortDirection: 'ascending',
