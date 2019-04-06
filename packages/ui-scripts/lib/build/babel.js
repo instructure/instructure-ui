@@ -49,7 +49,6 @@ let envVars
 if (args.includes('--watch')) {
   envVars = [
     'NODE_ENV=development',
-    'DEBUG=1',
     'UNMANGLED_CLASS_NAMES=1',
     'DISABLE_SPEEDY_STYLESHEET=1'
   ]
