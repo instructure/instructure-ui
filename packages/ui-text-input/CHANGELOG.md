@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.52.1](https://github.com/instructure/instructure-ui/compare/v5.52.0...v5.52.1) (2019-04-08)
+
+
+### Bug Fixes
+
+* **ui-text-input:** readOnly input should not look disabled ([1c13287](https://github.com/instructure/instructure-ui/commit/1c13287))
+
+
+
+
+
 # [5.52.0](https://github.com/instructure/instructure-ui/compare/v5.51.1...v5.52.0) (2019-04-03)
 
 

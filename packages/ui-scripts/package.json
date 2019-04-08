@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-scripts",
-  "version": "5.52.0",
+  "version": "5.52.1",
   "description": "A UI build scripts library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -22,9 +22,9 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.4.3",
-    "@instructure/command-utils": "^5.52.0",
-    "@instructure/cz-lerna-changelog": "^5.52.0",
-    "@instructure/pkg-utils": "^5.52.0",
+    "@instructure/command-utils": "^5.52.1",
+    "@instructure/cz-lerna-changelog": "^5.52.1",
+    "@instructure/pkg-utils": "^5.52.1",
     "@lerna/project": "^3",
     "commitizen": "^3.0.7",
     "dotenv": "^7.0.0",
@@ -46,7 +46,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "optionalDependencies": {
-    "@instructure/mocha-environment-jsdom": "^5.52.0",
+    "@instructure/mocha-environment-jsdom": "^5.52.1",
     "@storybook/react": "^4 || ^5",
     "storybook-chromatic": "^1.3.2"
   },
