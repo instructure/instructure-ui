@@ -46,6 +46,17 @@ describe('<MenuItem />', async () => {
     expect(link).to.exist()
   })
 
+  it('should render as a link when a to is provided', async () => {
+    await mount(
+      <MenuItem to="/example">Hello</MenuItem>
+    )
+
+    const item = await MenuItemFixture.find(':label(Hello)')
+    const link = await item.find('a[to="/example"]')
+
+    expect(link).to.exist()
+  })
+
   it('should call onSelect after click', async () => {
     const onSelect = stub()
     await mount(

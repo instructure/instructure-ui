@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+import { warn } from '@instructure/console/macro'
 /**
  * ---
  * category: utilities/react
@@ -44,6 +45,14 @@ export default function (Component, props, getDefault) {
   }
 
   if (props.href) {
+    return 'a'
+  }
+
+  if (props.to) {
+    warn( // if to prop is used without as
+      !props.as,
+      `[${Component.displayName}] \`as\` prop should be provided when using \`to\``
+    )
     return 'a'
   }
 

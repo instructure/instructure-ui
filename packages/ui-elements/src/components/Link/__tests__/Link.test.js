@@ -243,6 +243,25 @@ describe('<Link />', async () => {
     })
   })
 
+  describe('when a `to` is provided', async () => {
+    it('should render an anchor element', async () => {
+      await mount(<Link to="/example">Hello World</Link>)
+      expect(await LinkLocator.find('a')).to.exist()
+    })
+
+    it('should set the to attribute', async () => {
+      await mount(<Link to="/example">Hello World</Link>)
+      expect(await LinkLocator.find('[to="/example"]')).to.exist()
+    })
+
+    it('should not set role="button"', async () => {
+      await mount(<Link to="/example">Hello World</Link>)
+      expect(await LinkLocator.find('[role="button"]', {
+        expectEmpty: true
+      })).to.not.exist()
+    })
+  })
+
   describe('when passing down props to View', async () => {
     const allowedProps = {
       margin: '0 small',

@@ -61,6 +61,14 @@ describe('<Button/>', async () => {
     expect(await ButtonLocator.findAll('[href="example.html"]')).to.have.length(1)
   })
 
+  it('should render as a link when `to` prop is provided', async () => {
+    await mount(
+      <Button to="/example">Test</Button>
+    )
+    const link = await ButtonLocator.find('a')
+    expect(link.getAttribute('to')).to.equal('/example')
+  })
+
   it('should render designated tag if `as` prop is specified', async () => {
     await mount(
       <Button as='span'>Hello World</Button>

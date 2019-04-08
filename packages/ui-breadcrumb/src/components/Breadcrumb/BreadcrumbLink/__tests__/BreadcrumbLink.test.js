@@ -53,6 +53,14 @@ describe('<BreadcrumbLink />', async () => {
     expect(onClick).to.have.been.calledOnce()
   })
 
+  it('should allow to prop to pass through', async () => {
+    await mount(
+      <BreadcrumbLink to="/example">Test</BreadcrumbLink>
+    )
+    const link = await BreadcrumbLinkLocator.find()
+    expect(link.getAttribute('to')).to.equal('/example')
+  })
+
   it('should not render a link when not given an href prop', async () => {
     await mount(
       <BreadcrumbLink>Test</BreadcrumbLink>

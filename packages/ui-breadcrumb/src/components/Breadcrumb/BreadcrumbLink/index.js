@@ -84,7 +84,7 @@ export default class BreadcrumbLink extends Component {
 
     // Link will display a button by default, even if there is no action.
     // Force a span in this case.
-    const as = href || onClick ? void 0 : 'span'
+    const as = href || onClick ? undefined : 'span'
 
     return (
       <Link
