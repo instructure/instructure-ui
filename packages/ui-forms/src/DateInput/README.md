@@ -3,11 +3,11 @@ describes: DeprecatedDateInput
 id: DeprecatedDateInput__README
 ---
 
-**DEPRECATED:** use the [controlled-only `DateInput` from ui-date-input](#DateInput) instead.
+**DEPRECATED:** Use the controlled [DateInput from ui-date-input](#DateInput) instead. View that [documentation](#DateInput) for examples of managing state for a `DateInput`.
 
 A DateInput component is used to input a date either with a
 [DatePicker](#DatePicker) in a [Popover](#Popover), or by typing a date into a
-[TextInput](#TextInput). 
+[TextInput](#TextInput).
 - A `placeholder` prop is available to be used as hint text in the input.
 - A `defaultDateValue` can be used that will override the placeholder text.
 - Input can be set to `disabled`.

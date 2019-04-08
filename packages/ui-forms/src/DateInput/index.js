@@ -35,7 +35,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { themeable } from '@instructure/ui-themeable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps, pickProps } from '@instructure/ui-react-utils'
 import { testable } from '@instructure/ui-testable'
 import { TextInput } from '@instructure/ui-text-input'
 
@@ -53,6 +53,7 @@ id: DeprecatedDateInput
 ---
 **/
 @testable()
+@deprecated('7.0.0', null, 'Use @instructure/ui-date-input instead')
 @themeable(theme, styles)
 class DateInput extends Component {
   static propTypes = {

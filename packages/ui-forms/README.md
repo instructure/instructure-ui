@@ -44,6 +44,13 @@ The `ui-forms` package contains the following components:
 - [TextInput (deprecated)](#DeprecatedTextInput)
 - [TimeInput](#TimeInput)
 
+### Deprecated components
+The following components have been deprecated and will be removed from the `ui-forms` package:
+- [DateInput](#DeprecatedDateInput) \(use [DateInput from `ui-date-input`](#DateInput) instead)
+- [TextInput](#DeprecatedTextInput) \(use [TextInput from `ui-text-input`](#TextInput) instead)
+
+Codemods are provided to assist in updating the packages. See [ui-codemods](#ui-codemods)
+
 ### Contribute
 
 See the [contributing guidelines](#contributing) for details.
