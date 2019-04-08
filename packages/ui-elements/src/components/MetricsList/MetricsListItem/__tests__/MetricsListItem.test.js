@@ -43,6 +43,17 @@ describe('<MetricsListItem />', async () => {
     expect(await metricsListItem.find(':contains(80%)')).to.exist()
   })
 
+  it('passes props through to MetricsListItem element', async () => {
+    await mount(
+      <MetricsListItem
+        data-automation="foo"
+        label="Grade"
+        value="80%"
+      />
+    )
+
+    expect(await MetricsListItemLocator.find()).to.have.attribute('data-automation', 'foo')
+  })
   describe('for a11y', () => {
     it('should meet standards', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)

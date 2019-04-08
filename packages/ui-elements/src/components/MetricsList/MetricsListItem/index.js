@@ -26,6 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -39,7 +40,7 @@ parent: MetricsList
 @themeable(theme, styles)
 export default class MetricsListItem extends Component {
   static propTypes = {
-    textAlign: PropTypes.oneOf(['start','center', 'end']),
+    textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     label: PropTypes.node.isRequired,
     value: PropTypes.node.isRequired
   }
@@ -47,7 +48,7 @@ export default class MetricsListItem extends Component {
     textAlign: 'center'
   }
 
-  render () {
+  render() {
     const {
       textAlign
     } = this.props
@@ -58,7 +59,9 @@ export default class MetricsListItem extends Component {
     }
 
     return (
-      <div role="row"
+      <div
+        {...omitProps(this.props, MetricsListItem.propTypes)}
+        role="row"
         className={classnames(classes)}
       >
         <div role="rowheader" className={styles.label}>

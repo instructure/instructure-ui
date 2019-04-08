@@ -26,6 +26,7 @@ import React, { Component } from 'react'
 import { Children } from '@instructure/ui-prop-types'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
+import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import MetricsListItem from './MetricsListItem'
 
@@ -51,9 +52,11 @@ export default class MetricsList extends Component {
     children: null
   }
 
-  render () {
+  render() {
     return (
-      <div className={styles.root} role="grid" aria-readonly="true">
+      <div
+        {...omitProps(this.props, MetricsList.propTypes)}
+        className={styles.root} role="grid" aria-readonly="true">
         {this.props.children}
       </div>
     )
