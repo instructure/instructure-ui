@@ -23,7 +23,7 @@
     "@instructure/instui-config": "^5.52.2",
     "@instructure/ui-codemods": "^5.52.2",
     "@instructure/ui-scripts": "^5.52.2",
-    "jscodeshift": "^0.6.3",
+    "semver": "^6.0.0",
     "yargs": "^13"
   },
   "publishConfig": {

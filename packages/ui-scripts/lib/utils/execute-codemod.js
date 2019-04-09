@@ -22,34 +22,27 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const path = require('path')
+const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
+module.exports = ({ sourcePath, codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
+  try {
+    info(`Running ${codemodPath} on ${sourcePath} with config ${configPath}...`)
+    const codemodCommand = [
+      '-t',
+      codemodPath,
+      sourcePath,
+      `--config=${configPath}`
+    ]
 
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
-  })
-
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
-  })
-}
-
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
-
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
-  })
+    runCommandSync('jscodeshift', [
+      ...codemodCommand,
+      // ignore-pattern needs to be placed after the other commands
+      `--ignore-pattern=${[
+        ...(ignore || [])
+      ].map(i => path.join(sourcePath, i)).join('|')}`,
+    ])
+  } catch (err) {
+    error(err)
+  }
 }

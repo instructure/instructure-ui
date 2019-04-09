@@ -1,0 +1,16 @@
+[
+  "@instructure/babel-plugin-themeable-styles",
+  "@instructure/babel-plugin-transform-class-display-name",
+  "@instructure/postcss-themeable-styles",
+  "@instructure/ui-codemods",
+  "@instructure/ui-core",
+  "@instructure/ui-docs-client",
+  "@instructure/ui-docs-plugin",
+  "@instructure/ui-polyfill-loader",
+  "@instructure/ui-presets",
+  "@instructure/ui-testbed",
+  "@instructure/ui-themeable",
+  "@instructure/ui-themes",
+  "@instructure/ui-utils",
+  "instructure-icons"
+]

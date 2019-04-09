@@ -22,34 +22,21 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const fs = require('fs')
+const path = require('path')
+const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
+const outputDir = process.argv[3] || process.cwd()
+const outputPath = path.join(outputDir, 'package-list.json')
 
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
+try {
+  const { stdout } = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe'})
+  const packages = JSON.parse(stdout)
+  const packageList = packages.map(pkg => pkg.name)
+  fs.writeFile(outputPath, JSON.stringify(packageList, null, 1), (err) => {
+    if (err) throw err
+    info(`Successfully generated package list at ${outputPath}`)
   })
-
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
-  })
-}
-
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
-
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
-  })
+} catch (err) {
+  error(err)
 }

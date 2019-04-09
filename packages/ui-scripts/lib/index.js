@@ -39,6 +39,7 @@ const commands = [
   '--build',
   '--test',
   '--commit',
+  '--generate-package-list',
   '--link-packages',
   '--lint',
   '--lint-commit',
@@ -72,6 +73,8 @@ if (process.argv.includes('--help')) {
   require('./test/karma')
 } else if (process.argv.includes('--commit')) {
   require('./commit')
+} else if (process.argv.includes('--generate-package-list')) {
+  require('./generate-package-list')
 } else if (process.argv.includes('--link-packages')) {
   require('./link-packages')
 } else if (process.argv.includes('--lint-commit')) {

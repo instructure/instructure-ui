@@ -22,34 +22,43 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const { info, error } = require('@instructure/command-utils')
+const executeCodemod = require('@instructure/ui-scripts/lib/utils/execute-codemod')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
+const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
+module.exports = ({ sourcePath, logAddedImports, ignore }) => {
+  info(`Applying codemods to ${sourcePath}\n`)
+
+  executeCodemods({
+    sourcePath,
+    codemodName: 'updateImports.js',
+    configPaths: getInstuiConfigPaths({
+      type: 'codemod-configs',
+      name: 'imports.config.json'
+    }),
+    ignore
   })
 
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
+  executeCodemods({
+    sourcePath,
+    codemodName: 'updatePropNames.js',
+    configPaths: getInstuiConfigPaths({
+      type: 'codemod-configs',
+      name: 'propNames.config.json'
+    }),
+    ignore
   })
 }
 
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
+const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
+  try {
+    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
 
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
-  })
+    for (const configPath of configPaths) {
+      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
+    }
+  } catch (err) {
+    error(err)
+  }
 }

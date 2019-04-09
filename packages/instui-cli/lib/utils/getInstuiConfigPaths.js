@@ -22,34 +22,27 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const path = require('path')
+const fs = require('fs')
+const semver = require('semver')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
-
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
-  })
-
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
-  })
+const parseMajorVersion = ({ version }) => {
+  const semanticVersion = semver.coerce(version)
+  return semanticVersion ? semanticVersion.major : version
 }
 
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
+module.exports = ({ name, type, version } = {}) => {
+  const root = path.resolve(path.dirname(require.resolve('@instructure/instui-config/package.json')), type)
 
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
+  const paths = []
+  fs.readdirSync(root).forEach((dirName) => {
+    if (!version || parseMajorVersion({ version: dirName }) <= parseMajorVersion({ version })) {
+      const filePath = path.join(root, dirName, name)
+      if (fs.existsSync(filePath)) {
+        paths.push(filePath)
+      }
+    }
   })
+
+  return paths
 }

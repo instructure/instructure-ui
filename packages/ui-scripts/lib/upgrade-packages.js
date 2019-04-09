@@ -25,6 +25,8 @@
 const { getPackage } = require('@instructure/pkg-utils')
 const { info, error, runCommandSync } = require('@instructure/command-utils')
 
+const verifyPackageJson = require('./utils/verify-package-json')
+
 async function updateResolutions ({ pkg, packages, path }) {
   const originalResolutions = {...pkg.get('resolutions')}
   const packageResolutions = {}
@@ -62,6 +64,8 @@ async function updateResolutions ({ pkg, packages, path }) {
 }
 
 module.exports = async function upgradePackages ({ useResolutions = false, packageList = [], path } = {}) {
+  verifyPackageJson({ sourcePath: path })
+
   const pkg = getPackage({ cwd: path })
 
   const dependencies = Object.keys(pkg.get('dependencies') || {})

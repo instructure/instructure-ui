@@ -49,6 +49,10 @@
     ]
   },
   {
+    "pattern": "^instructure-icons$",
+    "replace": "@instructure/ui-icons"
+  },
+  {
     "pattern": "^instructure-icons(.*)(Line|Solid)$",
     "replace": "@instructure/ui-icons$1"
   }

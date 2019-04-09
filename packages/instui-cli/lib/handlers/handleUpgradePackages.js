@@ -22,34 +22,14 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const upgradePackages = require('@instructure/ui-scripts/lib/upgrade-packages')
+const { getCurrentPackageList } = require('../utils/getPackageLists')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
-
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
-  })
-
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
-  })
-}
-
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
-
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
+module.exports = ({ sourcePath, version, useResolutions }) => {
+  upgradePackages({
+    path: sourcePath,
+    packageList: getCurrentPackageList(),
+    version,
+    useResolutions
   })
 }

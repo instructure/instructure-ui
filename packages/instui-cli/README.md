@@ -18,8 +18,9 @@ npm install -g @instructure/instui-cli
 ```
 
 ### Available commands
-* __upgrade-packages__ | Upgrade instructure-ui packages in a specified directory to the latest version
-* __codemod__ | Apply instructure-ui codemods to source at a specified path
+* __upgrade__ | Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.
+* __upgrade-packages__ | Upgrade instructure-ui packages to the latest stable version.
+* __codemod__ | Apply instructure-ui codemods to source at a specified path.
 
 ### Documentation
 

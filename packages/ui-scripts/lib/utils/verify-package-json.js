@@ -22,34 +22,14 @@
  * SOFTWARE.
  */
 
-const { handleExecuteCodemods } = require('../handlers')
+const path = require('path')
+const fs = require('fs')
 
-exports.command = 'codemod'
-exports.desc = 'Apply instructure-ui codemods to source at a specified path.'
+const { error } = require('@instructure/command-utils')
 
-exports.builder = (yargs) => {
-  yargs.option('path', {
-    alias: 'p',
-    type: 'string',
-    describe: 'The path to the source where the codemod will be applied (defaults to current working directory).',
-    default: process.cwd()
-  })
-
-  yargs.option('ignore', {
-    alias: 'i',
-    type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
-  })
-}
-
-exports.handler = (argv) => {
-  const {
-    path,
-    ignore
-  } = argv
-
-  handleExecuteCodemods({
-    sourcePath: path,
-    ignore
-  })
+module.exports = function ({ sourcePath }) {
+  if (!fs.existsSync(path.join(sourcePath, 'package.json'))) {
+    error(`No package.json found in ${sourcePath}`)
+    process.exit(1)
+  }
 }
