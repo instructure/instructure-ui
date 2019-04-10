@@ -39,6 +39,10 @@ function macro({ babel, references, state }) {
       // add pure function annotation
       // so that consumers can remove console statements from prod bundles
       if (process.env.NODE_ENV === 'production') {
+        path.traverse({
+          Function: annotateAsPure
+        })
+        annotateAsPure(reference)
         annotateAsPure(path)
       }
     })
