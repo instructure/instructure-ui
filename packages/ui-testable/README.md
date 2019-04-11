@@ -12,6 +12,16 @@ category: packages
 A decorator that adds a `data-` attribute to the React component root node
 to make it easier to test.
 
+**NOTE: by default, when NODE_ENV==='production' the `data-` attributes will not be appended**
+(since they are specifically there for testing and appending them takes a non-trivial
+amount of time at runtime, slowing things down for your actual users).
+If you would like the `data-cid` attributes on elements even in your production
+builds  (like if you are using them in your e2e builds or something),
+you need to set the environment variable:
+```sh
+ALWAYS_APPEND_UI_TESTABLE_LOCATORS=1
+```
+
 ### Installation
 
 ```sh
