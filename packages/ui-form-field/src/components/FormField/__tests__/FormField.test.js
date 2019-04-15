@@ -54,6 +54,12 @@ describe('<FormField />', async () => {
     )
   })
 
+  it('passes props through to FormField', async () => {
+    const subject = await mount(<FormField label="foo" id="bar" data-automation="baz" />)
+
+    expect(subject.getDOMNode()).to.have.attribute('data-automation', 'baz')
+  })
+
   it('should meet a11y standards', async () => {
     const subject = await mount(<FormField label="foo" id="bar" />)
 

@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldLayout from '../FormFieldLayout'
@@ -69,9 +69,10 @@ export default class FormField extends Component {
     width: undefined
   }
 
-  render () {
+  render() {
     return (
       <FormFieldLayout
+        {...omitProps(this.props, FormField.propTypes)}
         {...pickProps(this.props, FormFieldLayout.propTypes)}
         vAlign={this.props.vAlign}
         as="label"
