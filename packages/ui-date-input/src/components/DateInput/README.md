@@ -198,7 +198,6 @@ class Example extends React.Component {
     const {
       value,
       isShowingCalendar,
-      selectedDate,
       renderedDate,
       messages
     } = this.state
@@ -234,7 +233,7 @@ class Example extends React.Component {
         onRequestSelectPrevDay={this.handleSelectPrevDay}
         onRequestRenderNextMonth={this.handleRenderNextMonth}
         onRequestRenderPrevMonth={this.handleRenderPrevMonth}
-        renderNavigationLabel={              
+        renderNavigationLabel={
           <span>
             <div>{date.format('MMMM')}</div>
             <div>{date.format('YYYY')}</div>

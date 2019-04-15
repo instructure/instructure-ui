@@ -3,9 +3,9 @@ describes: TableControlled
 id: TableControlled__README
 ---
 
-### `layout` and `hover`
+### Table layout
 
-In stacked mode, column header is rendered in each cell, but not in row header.
+In stacked layout, column header is rendered in each cell, but not in row header.
 
 ```javascript
 ---

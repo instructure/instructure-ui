@@ -164,7 +164,7 @@ class DateInput extends Component {
     */
     onRequestRenderPrevMonth: PropTypes.func,
     /**
-    * Content to render in the calendar navigation header. The recomendation is
+    * Content to render in the calendar navigation header. The recommendation is
     * to include the name of the current rendered month along with the year.
     */
     renderNavigationLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
@@ -179,14 +179,14 @@ class DateInput extends Component {
     */
     renderWeekdayLabels: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.func, PropTypes.node])).isRequired,
     /**
-    * A button to render in the calendar navigation header. The recomendation is
+    * A button to render in the calendar navigation header. The recommendation is
     * to compose it with the [Button](#Button) component, setting the `variant`
     * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
     * [IconArrowOpenEnd](#iconography).
     */
     renderNextMonthButton: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     /**
-    * A button to render in the calendar navigation header. The recomendation is
+    * A button to render in the calendar navigation header. The recommendation is
     * to compose it with the [Button](#Button) component, setting the `variant`
     * prop to `icon`, the `size` prop to `small`, and setting the `icon` prop to
     * [IconArrowOpenStart](#iconography).

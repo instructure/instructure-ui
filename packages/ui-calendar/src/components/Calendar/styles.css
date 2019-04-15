@@ -39,5 +39,6 @@
 }
 
 .weekdayHeader {
+  text-align: center;
   max-width: var(--maxHeaderWidth);
 }

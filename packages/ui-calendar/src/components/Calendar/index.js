@@ -63,21 +63,21 @@ class Calendar extends Component {
     */
     children: ChildrenPropTypes.oneOf([Day]),
     /**
-    * A button to render in the navigation header. The recomendation is to
+    * A button to render in the navigation header. The recommendation is to
     * compose it with the [Button](#Button) component, setting the `variant` prop
     * to `icon`, the `size` prop to `small`, and setting the `icon` prop to
     * [IconArrowOpenEnd](#iconography).
     */
     renderNextMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * A button to render in the navigation header. The recomendation is to
+    * A button to render in the navigation header. The recommendation is to
     * compose it with the [Button](#Button) component, setting the `variant` prop
     * to `icon`, the `size` prop to `small`, and setting the `icon` prop to
     * [IconArrowOpenStart](#iconography).
     */
     renderPrevMonthButton: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
-    * Content to render in the navigation header. The recomendation is to include
+    * Content to render in the navigation header. The recommendation is to include
     * the name of the current rendered month along with the year.
     */
     renderNavigationLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
