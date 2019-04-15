@@ -132,7 +132,7 @@ class DateInput extends Component {
     */
     isShowingCalendar: PropTypes.bool,
     /**
-    * Callback fired requesting date validation. Feedback should be provided
+    * Callback fired when the input is blurred. Feedback should be provided
     * to the user when this function is called if the selected date or input
     * value is not valid.
     */

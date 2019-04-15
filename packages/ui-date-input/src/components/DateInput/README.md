@@ -73,23 +73,22 @@ class Example extends React.Component {
   }
 
   handleValidateDate = (event) => {
-    const { selectedDate, value } = this.state
-
-    // We don't have a selectedDate but we have a value. That means that the value
-    // could not be parsed and so the date is invalid
-    if (!selectedDate && value) {
-      this.setState({
-        messages: [{ type: 'error', text: 'This date is invalid' }]
-      })
-    }
-
-    // Display a message if the user has typed in a value that corresponds to a
-    // disabledDate
-    if (this.isDisabledDate(parseDate(selectedDate))) {
-      this.setState({
-        messages: [{ type: 'error', text: 'This date is disabled' }]
-      })
-    }
+    this.setState(({ selectedDate, value }) => {
+      // We don't have a selectedDate but we have a value. That means that the value
+      // could not be parsed and so the date is invalid
+      if (!selectedDate && value) {
+        return {
+          messages: [{ type: 'error', text: 'This date is invalid' }],
+        }
+      }
+      // Display a message if the user has typed in a value that corresponds to a
+      // disabledDate
+      if (this.isDisabledDate(parseDate(selectedDate))) {
+        return {
+          messages: [{ type: 'error', text: 'This date is disabled' }],
+        }
+      }
+    })
   }
 
   handleDayClick = (event, { date }) => {
