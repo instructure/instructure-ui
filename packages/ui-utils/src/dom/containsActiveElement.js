@@ -23,6 +23,7 @@
  */
 
 import findDOMNode from './findDOMNode'
+import contains from './contains'
 import getActiveElement from './getActiveElement'
 
 /**
@@ -38,5 +39,5 @@ import getActiveElement from './getActiveElement'
 export default function containsActiveElement (el) {
   const node = el && findDOMNode(el)
   const active = getActiveElement()
-  return (node && (active === node || node.contains(active)))
+  return (node && (active === node || contains(node,active)))
 }
