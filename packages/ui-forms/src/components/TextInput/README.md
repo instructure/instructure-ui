@@ -1,6 +1,7 @@
 ---
 describes: TextInput
 ---
+**DEPRECATED:** use the [controlled `TextInput` from ui-text-input](#TextInputControlled) instead.
 
 `TextInput` renders a custom HTML `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 

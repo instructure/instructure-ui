@@ -1,0 +1,6 @@
+[
+  {
+    "pattern": "^@instructure/ui-forms/lib/components/TextInput",
+    "replace": "@instructure/ui-text-input/lib/components/TextInput"
+  }
+]

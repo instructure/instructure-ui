@@ -30,8 +30,9 @@ import themeable from '@instructure/ui-themeable'
 
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Text from '@instructure/ui-elements/lib/components/Text'
-import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import IconSearch from '@instructure/ui-icons/lib/Line/IconSearch'
 
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 
@@ -348,6 +349,8 @@ export default class Nav extends Component {
             placeholder="Find..."
             onChange={this.handleSearchChange}
             label={<ScreenReaderContent>Search Documentation</ScreenReaderContent>}
+            type="search"
+            renderAfterInput={<IconSearch inline={false} />}
           />
         </div>
         <div role="navigation" className={styles.sections}>

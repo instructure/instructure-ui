@@ -30,6 +30,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
+import deprecated, { changedPackageWarning } from '@instructure/ui-utils/lib/react/deprecated'
 import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -235,4 +236,7 @@ class TextInput extends Component {
   }
 }
 
-export default TextInput
+export default deprecated('7.0.0', null, changedPackageWarning(
+  'ui-forms',
+  'ui-text-input'
+))(TextInput)
