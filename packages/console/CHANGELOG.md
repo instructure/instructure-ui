@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.52.2](https://github.com/instructure/instructure-ui/compare/v5.52.1...v5.52.2) (2019-04-17)
+
+
+### Performance Improvements
+
+* **console:** fix production error/warning stripping ([f03d6e6](https://github.com/instructure/instructure-ui/commit/f03d6e6))
+
+
+
+
+
 ## [5.52.1](https://github.com/instructure/instructure-ui/compare/v5.52.0...v5.52.1) (2019-04-08)
 
 **Note:** Version bump only for package @instructure/console

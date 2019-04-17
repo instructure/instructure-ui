@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.52.2](https://github.com/instructure/instructure-ui/compare/v5.52.1...v5.52.2) (2019-04-17)
+
+
+### Bug Fixes
+
+* **ui-elements:** fix role for Rating so it reads correctly for SR ([8b3a4c0](https://github.com/instructure/instructure-ui/commit/8b3a4c0))
+* **ui-elements:** MetricsList/MetricsListItem allow data attributes to be passed thru ([319188c](https://github.com/instructure/instructure-ui/commit/319188c))
+* **ui-utils:** allow to prop on elements that allow href ([208fa09](https://github.com/instructure/instructure-ui/commit/208fa09))
+
+
+
+
+
 ## [5.52.1](https://github.com/instructure/instructure-ui/compare/v5.52.0...v5.52.1) (2019-04-08)
 
 **Note:** Version bump only for package @instructure/ui-elements

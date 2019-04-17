@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-a11y",
-  "version": "5.52.1",
+  "version": "5.52.2",
   "description": "A collection of utilities and components to make UI components accessible",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,15 +20,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.52.1",
-    "@instructure/ui-test-utils": "^5.52.1"
+    "@instructure/ui-babel-preset": "^5.52.2",
+    "@instructure/ui-test-utils": "^5.52.2"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/console": "^5.52.1",
-    "@instructure/ui-themeable": "^5.52.1",
-    "@instructure/ui-utils": "^5.52.1",
-    "@instructure/uid": "^5.52.1",
+    "@instructure/console": "^5.52.2",
+    "@instructure/ui-themeable": "^5.52.2",
+    "@instructure/ui-utils": "^5.52.2",
+    "@instructure/uid": "^5.52.2",
     "keycode": "^2",
     "prop-types": "^15"
   },

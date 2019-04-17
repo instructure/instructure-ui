@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.52.2](https://github.com/instructure/instructure-ui/compare/v5.52.1...v5.52.2) (2019-04-17)
+
+
+### Bug Fixes
+
+* **ui-calendar,ui-date-input,ui-table:** align week labels in center ([2ec0d82](https://github.com/instructure/instructure-ui/commit/2ec0d82))
+
+
+
+
+
 ## [5.52.1](https://github.com/instructure/instructure-ui/compare/v5.52.0...v5.52.1) (2019-04-08)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/debounce",
-  "version": "5.52.1",
+  "version": "5.52.2",
   "description": "A debounce util made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,7 +20,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.52.1"
+    "@instructure/ui-babel-preset": "^5.52.2"
   },
   "dependencies": {
     "@babel/runtime": "^7"

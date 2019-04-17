@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instui-cli",
-  "version": "5.52.1",
+  "version": "5.52.2",
   "description": "A cli for working with instructure-ui packages",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,10 +19,10 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/command-utils": "^5.52.1",
-    "@instructure/instui-config": "^5.52.1",
-    "@instructure/ui-codemods": "^5.52.1",
-    "@instructure/ui-scripts": "^5.52.1",
+    "@instructure/command-utils": "^5.52.2",
+    "@instructure/instui-config": "^5.52.2",
+    "@instructure/ui-codemods": "^5.52.2",
+    "@instructure/ui-scripts": "^5.52.2",
     "jscodeshift": "^0.6.3",
     "yargs": "^13"
   },
