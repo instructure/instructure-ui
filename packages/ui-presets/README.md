@@ -4,6 +4,8 @@ category: packages
 
 ## @instructure/ui-presets
 
+**DEPRECATED:** use the individual presets packages instead.
+
 Shared config for building and testing UI code.
 
 [![npm][npm]][npm-url]

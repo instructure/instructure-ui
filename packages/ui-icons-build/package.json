@@ -26,7 +26,7 @@
     "gulp-consolidate": "^0.2.0",
     "gulp-iconfont": "^10.0.2",
     "gulp-rename": "^1.4.0",
-    "gulp-svgmin": "^2.1.0",
+    "gulp-svgmin": "^2.2.0",
     "merge-stream": "^1.0.1",
     "plugin-error": "^1.0.1",
     "recursive-readdir": "^2.2.0",

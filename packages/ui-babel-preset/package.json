@@ -35,12 +35,12 @@
     "@instructure/ui-postcss-config": "^5.52.2",
     "babel-loader": "^8.0.5",
     "babel-plugin-dynamic-import-node": "^2.2.0",
-    "babel-plugin-istanbul": "^5.1.0",
+    "babel-plugin-istanbul": "^5.1.2",
     "babel-plugin-macros": "^2.5.1",
     "babel-plugin-transform-ensure-ignore": "^0.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-plugin-transform-undefined-to-void": "^6.9.4",
-    "core-js": "^3.0.0"
+    "core-js": "^3.0.1"
   },
   "publishConfig": {
     "access": "public"

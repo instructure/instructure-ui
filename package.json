@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "husky": "^1.3.1",
-    "lerna": "^3.13.1",
+    "lerna": "^3.13.3",
     "lint-staged": "^8.1.3",
     "npm-run-all": "^4.1.5",
     "yarn": "^1.15.2"
@@ -97,13 +97,6 @@
     },
     "commitizen": {
       "path": "./node_modules/@instructure/cz-lerna-changelog"
-    }
-  },
-  "standard-version": {
-    "skip": {
-      "tag": true,
-      "commit": true,
-      "changelog": true
     }
   },
   "lint-staged": {

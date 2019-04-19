@@ -44,7 +44,7 @@
     "@instructure/ui-utils": "^5.52.2",
     "classnames": "^2",
     "gray-matter": "3.1.1",
-    "marked": "^0.6.0",
+    "marked": "^0.6.2",
     "prop-types": "^15",
     "react-github-corner": "^2.1.0"
   },

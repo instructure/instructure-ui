@@ -31,7 +31,6 @@ const consolidate = require('gulp-consolidate')
 const path = require('path')
 const glob = require('glob')
 const fs = require('fs')
-const which = require('which')
 
 const handleErrors = require('../../util/handle-errors')
 const config = require('../../config')
@@ -89,13 +88,6 @@ gulp.task('generate-svgs-index', (cb) => {
 })
 
 gulp.task('generate-svgs-from-sketch', () => {
-  try {
-    which.sync('sketchtool')
-  } catch (error) {
-    handleErrors(error)
-    return
-  }
-
   return gulp.src(config.svg.source)
     .pipe(changed(config.svg.destination))
     // export svgs from sketch source

@@ -21,5 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './utils'
-export * from './components'
+export findFocusable from './findFocusable'
+export findTabbable from './findTabbable'
+export FocusRegion from './FocusRegion'
+export FocusRegionManager from './FocusRegionManager'
+export hasVisibleChildren from './hasVisibleChildren'
+export KeyboardFocusRegion from './KeyboardFocusRegion'
+export scopeTab from './scopeTab'
+export ScreenReaderFocusRegion from './ScreenReaderFocusRegion'

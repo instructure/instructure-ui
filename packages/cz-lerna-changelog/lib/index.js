@@ -57,7 +57,6 @@ function makePrompter() {
     cz.prompt(autocompleteQuestions(questions))
       .then((answers) => {
         const {
-          scope,
           body,
           footer,
           ...rest
@@ -66,11 +65,17 @@ function makePrompter() {
         const testplan = (answers.testplan) ? `\nTEST PLAN:\n${answers.testplan}\n\n` : ''
         const issues = (footer) ? `\n\nrefs: ${footer}\n\n` : ''
 
+        let scope = '*'
+
+        if (Array.isArray(answers.scope)) {
+          scope = answers.scope.join(',')
+        }
+
         const message = buildCommit({
           ...rest,
           body: issues + body + testplan,
-          scope: (scope && scope.length > 0) ? scope.join(',') : '*'
-        })
+          scope
+        }, { breaklineChar: '|' })
 
         const cwd = process.cwd()
 
