@@ -64,7 +64,7 @@ export default class CodePenButton extends Component {
     return (
       <form action="https://codepen.io/pen/define" method="POST" target="_blank">
         <input type="hidden" name="data" value={JSON.stringify(data)} />
-        <Tooltip variant="inverse" tip="Edit in Codepen" placement="bottom">
+        <Tooltip tip="Edit in Codepen" placement="bottom">
           <Button
             type="submit"
             size="small"

@@ -212,7 +212,7 @@ export default class Playground extends Component {
 
             <Flex>
               <FlexItem>
-                <Tooltip variant="inverse" tip="Fullscreen" placement="bottom">
+                <Tooltip tip="Fullscreen" placement="bottom">
                   <Button
                     onClick={this.handleMaximize}
                     ref={(c) => { this._fullScreenButton = c }}
@@ -228,7 +228,7 @@ export default class Playground extends Component {
                 </Tooltip>
               </FlexItem>
               <FlexItem>
-                <Tooltip variant="inverse" tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
+                <Tooltip tip={this.state.showCode ? 'Hide Code' : 'Show Code'} placement="bottom">
                   <Button
                     margin="0 x-small"
                     onClick={this.handleCodeToggle}
