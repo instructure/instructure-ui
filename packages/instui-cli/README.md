@@ -14,7 +14,7 @@ A cli for working with instructure-ui packages.
 ### Installation
 
 ```sh
-yarn global add @instructure/instui-cli
+npm install -g @instructure/instui-cli
 ```
 
 ### Available commands

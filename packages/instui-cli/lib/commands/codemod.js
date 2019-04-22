@@ -79,8 +79,7 @@ const handleExecuteCodemod = ({ sourcePath, codemodName, configName, ignore }) =
 
     for (const configPath of configPaths) {
       info(`Now running ${codemodPath} on ${sourcePath} with config ${configPath}.`)
-      runCommandSync('yarn', [
-        'jscodeshift',
+      runCommandSync('jscodeshift', [
         '-t',
         codemodPath,
         `--config=${configPath}`,
