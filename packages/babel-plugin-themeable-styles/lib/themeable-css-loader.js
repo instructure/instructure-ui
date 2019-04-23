@@ -33,6 +33,10 @@ const generateScopedName = require('./generateScopedName')
 const themeableConfig = loadConfig('themeable')
 const noop = () => {}
 
+if (themeableConfig && themeableConfig.generateScopedName) {
+  console.warn('[themeable-css-loader] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.')
+}
+
 module.exports = function (content, map, meta) {
   this.cacheable && this.cacheable()
 

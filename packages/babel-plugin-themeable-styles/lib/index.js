@@ -69,6 +69,10 @@ module.exports = function transformThemeableStyles ({ types: t }) {
         }
       }
 
+      if (thisPluginOptions.themeablerc && thisPluginOptions.themeablerc.generateScopedName) {
+        console.warn('[babel-plugin-themeable-styles] Custom scoped CSS class names will be removed in 7.0. Please use the default themeable config.')
+      }
+
       if (!USE_WEBPACK_CSS_LOADERS) {
         requireHook({
           ignore: thisPluginOptions.ignore,
