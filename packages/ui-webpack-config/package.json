@@ -25,7 +25,7 @@
     "file-loader": "^3.0.1",
     "postcss-loader": "^3",
     "postcss-reporter": "^6.0.1",
-    "react-dev-utils": "^8.0.0",
+    "react-dev-utils": "^9.0.0",
     "style-loader": "^0.23.1",
     "stylelint": "^9",
     "terser-webpack-plugin": "^1.2.3",

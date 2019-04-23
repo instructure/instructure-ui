@@ -21,7 +21,7 @@
   "devDependencies": {
     "@instructure/ui-babel-preset": "^5.52.2",
     "@instructure/ui-icons-build": "^5.52.2",
-    "gulp": "^4.0.0"
+    "gulp": "^4.0.1"
   },
   "dependencies": {
     "@babel/runtime": "^7",

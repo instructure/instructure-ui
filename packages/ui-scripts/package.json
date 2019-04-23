@@ -44,7 +44,7 @@
     "semver": "^6.0.0",
     "stylelint": "^9",
     "validate-commit-msg": "^2.14.0",
-    "webpack-cli": "^3.3.0",
+    "webpack-cli": "^3.3.1",
     "webpack-dev-server": "^3.3.1"
   },
   "optionalDependencies": {
