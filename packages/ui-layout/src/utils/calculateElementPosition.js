@@ -190,8 +190,12 @@ class PositionedElement {
     // ancestor. We calculate the offset between the child and
     // positioned parent so we can negate that distance
     const parents = getOffsetParents(this.node)
+    const doc = ownerDocument(this.node)
 
-    let offsetY = 0
+    // If there is more than one parent, the offset on the
+    // documentElement should be calculated appropriately.
+    // Otherwise we need to explictly account for that offset
+    let offsetY = parents.length > 1 ? 0 : doc.documentElement.offsetTop
     let offsetX = 0
     let scrollY = 0
 
@@ -202,7 +206,7 @@ class PositionedElement {
       offsetY = offsetY + (child.top - parent.top)
       offsetX = offsetX + (child.left - parent.left)
 
-      if (parents[i] === ownerDocument(this.node).body) {
+      if (parents[i] === doc.body) {
         // accounts for any margin on body
         offsetY = offsetY + parent.top
         offsetX = offsetX + parent.left
