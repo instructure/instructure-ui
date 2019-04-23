@@ -548,4 +548,68 @@ describe('<Position />', async () => {
       expect(within(Math.floor(contentRect.right), Math.floor(targetRect.left), 1)).to.be.true()
     })
   })
+
+  describe('when the documentElement is offset', async () => {
+    beforeEach(async () => {
+      document.documentElement.style.position = 'fixed'
+      document.documentElement.style.top = '-100px'
+    })
+
+    it('should position correctly', async () => {
+      await mount(
+        <div style={{padding: '100px'}}>
+          <Position placement="bottom">
+            <PositionTarget>
+              <button>Target</button>
+            </PositionTarget>
+            <PositionContent>
+              <div id="content">
+                <div>Content</div>
+              </div>
+            </PositionContent>
+          </Position>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
+
+      await wait(() => {
+        expect(content.getBoundingClientRect().top).to.equal(target.getBoundingClientRect().bottom)
+      })
+    })
+
+    it('should position correctly with mountNode', async () => {
+      await mount(
+        <div style={{padding: '100px'}}>
+          <div id="mountNode">mount</div>
+          <div style={{width: '50px', height: '50px', overflow: 'scroll', padding: '50px'}}>
+            <Position
+              placement="bottom"
+              constrain="scroll-parent"
+              mountNode={el => document.getElementById('mountNode')}
+            >
+              <PositionTarget>
+                <button>Target</button>
+              </PositionTarget>
+              <PositionContent>
+                <div id="content">
+                  <div>Content</div>
+                </div>
+              </PositionContent>
+            </Position>
+          </div>
+        </div>
+      )
+
+      const position = await PositionLocator.find()
+      const target = await position.findTarget(':contains(Target)')
+      const content = await position.findContent(':contains(Content)')
+
+      await wait(() => {
+        expect(content.getBoundingClientRect().top).to.equal(target.getBoundingClientRect().bottom)
+      })
+    })
+  })
 })

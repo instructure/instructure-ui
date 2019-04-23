@@ -74,6 +74,8 @@ export default {
 
     return {
       constrain: 'none',
+      trackPosition: false,
+      insertAt: 'bottom',
       over: xStretch || yStretch,
       offsetX: yStretch ? -parseInt(targetSize) : 0,
       offsetY: xStretch ? -parseInt(targetSize) : 0,
