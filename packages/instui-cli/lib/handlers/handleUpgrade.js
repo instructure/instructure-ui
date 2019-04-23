@@ -58,6 +58,7 @@ const checkInstuiDependencies = async ({ sourcePath }) => {
 
   const checkedDependencies = await checkDependencies({ sourcePath }).catch((err) => {
     error(err)
+    process.exit(1)
   })
 
   const { dependencies, devDependencies, missing } = (checkedDependencies || {})

@@ -25,24 +25,28 @@
 const path = require('path')
 const { info, error, runCommandSync } = require('@instructure/command-utils')
 
-module.exports = ({ sourcePath, codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
-  try {
-    info(`Running ${codemodPath} on ${sourcePath} with config ${configPath}...`)
-    const codemodCommand = [
-      '-t',
-      codemodPath,
-      sourcePath,
-      `--config=${configPath}`
-    ]
+module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
+  info(`Running ${codemodPath}...`)
+  info(`Source path: ${sourcePath}`)
+  info(`Config path: ${configPath}`)
+  info(`Ignoring: ${ignore.join(', ')}`)
 
-    runCommandSync('jscodeshift', [
-      ...codemodCommand,
-      // ignore-pattern needs to be placed after the other commands
-      `--ignore-pattern=${[
-        ...(ignore || [])
-      ].map(i => path.join(sourcePath, i)).join('|')}`,
-    ])
-  } catch (err) {
-    error(err)
-  }
+  const codemodCommand = [
+    '-t',
+    codemodPath,
+    sourcePath,
+    `--config=${configPath}`
+  ]
+
+  let ignoreArgs = []
+
+  ignore.forEach((ignore) => {
+    ignoreArgs = ignoreArgs.concat('--ignore-pattern', ignore)
+  })
+
+  runCommandSync('jscodeshift', [
+    ...codemodCommand,
+    // ignore-pattern args need to be placed after the other commands
+    ...ignoreArgs
+  ])
 }

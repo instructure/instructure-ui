@@ -24,16 +24,17 @@
 
 const fs = require('fs')
 const path = require('path')
+const requireUncached = require('./utils/requireUncached')
 
 const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
 
 module.exports = function (file, api, options) {
   const j = api.jscodeshift
   const c = path.resolve(process.cwd(), options.config)
-  const config = fs.existsSync(c) ? require(c) : null
+  const config = fs.existsSync(c) ? requireUncached(c) : null
 
   if (!config) {
-    throw new Error(`Invalid config file "${options.config}"`)
+    throw new Error(`Invalid config file "${c}"`)
   }
 
   const root = j(file.source)

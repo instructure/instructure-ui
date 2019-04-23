@@ -21,45 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-const { info, error } = require('@instructure/command-utils')
-const executeCodemod = require('@instructure/ui-scripts/lib/utils/execute-codemod')
-
-const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
-
-module.exports = ({ sourcePath, logAddedImports, ignore }) => {
-  info(`Applying codemods to ${sourcePath}\n`)
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updateImports.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'imports.config.json'
-    }),
-    ignore
-  })
-
-  executeCodemods({
-    sourcePath,
-    codemodName: 'updatePropNames.js',
-    configPaths: getInstuiConfigPaths({
-      type: 'codemod-configs',
-      name: 'propNames.config.json'
-    }),
-    ignore
-  })
-}
-
-const executeCodemods = ({ sourcePath, configPaths, codemodName, ignore }) => {
-  try {
-    const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
-
-    for (const configPath of configPaths) {
-      executeCodemod({ sourcePath, codemodPath, configPath, ignore })
-    }
-  } catch (err) {
-    error(err)
-    process.exit(1)
-  }
+module.exports = function requireUncached (module){
+  delete require.cache[require.resolve(module)]
+  return require(module)
 }
