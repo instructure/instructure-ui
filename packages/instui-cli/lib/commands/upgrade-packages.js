@@ -40,13 +40,21 @@ exports.builder = (yargs) => {
     describe: 'Perform the upgrade via resolutions (this will not modify your package.json).',
     default: false
   })
+
+  yargs.option('version', {
+    alias: 'v',
+    type: 'string',
+    describe: 'A semantic instructure-ui version number. When provided, packages will be upgraded to the specified version. When omitted, packages are upgraded to the latest stable version.',
+    default: null
+  })
 }
 
 exports.handler = (argv) => {
   const {
     path,
-    useResolutions
+    useResolutions,
+    version
   } = argv
 
-  handleUpgradePackages({ sourcePath: path, useResolutions })
+  handleUpgradePackages({ sourcePath: path, useResolutions, version })
 }

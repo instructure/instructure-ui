@@ -27,7 +27,7 @@ const executeCodemod = require('@instructure/ui-scripts/lib/utils/execute-codemo
 
 const getInstuiConfigPaths = require('../utils/getInstuiConfigPaths')
 
-module.exports = ({ sourcePath, logAddedImports, ignore }) => {
+module.exports = ({ sourcePath, logAddedImports, version, ignore }) => {
   info(`Applying codemods to ${sourcePath}\n`)
 
   executeCodemods({
@@ -35,7 +35,8 @@ module.exports = ({ sourcePath, logAddedImports, ignore }) => {
     codemodName: 'updateImports.js',
     configPaths: getInstuiConfigPaths({
       type: 'codemod-configs',
-      name: 'imports.config.json'
+      name: 'imports.config.json',
+      version
     }),
     ignore
   })
@@ -45,7 +46,8 @@ module.exports = ({ sourcePath, logAddedImports, ignore }) => {
     codemodName: 'updatePropNames.js',
     configPaths: getInstuiConfigPaths({
       type: 'codemod-configs',
-      name: 'propNames.config.json'
+      name: 'propNames.config.json',
+      version
     }),
     ignore
   })

@@ -38,18 +38,28 @@ exports.builder = (yargs) => {
   yargs.option('ignore', {
     alias: 'i',
     type: 'array',
-    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).'
+    describe: 'One or multiple glob path patterns for files/directories that will be ignored when the codemods are applied (ex. **/node_modules/**).',
+    default: ['**/node_modules/**']
+  })
+
+  yargs.option('version', {
+    alias: 'v',
+    type: 'string',
+    describe: 'A semantic instructure-ui version number. When provided, the source will be modified to be compatible with the specified version. When omitted, the source will be modified to be compatible with the latest stable version.',
+    default: null
   })
 }
 
 exports.handler = (argv) => {
   const {
     path,
-    ignore
+    ignore,
+    version
   } = argv
 
   handleExecuteCodemods({
     sourcePath: path,
+    version,
     ignore
   })
 }

@@ -40,13 +40,21 @@ exports.builder = (yargs) => {
     type: 'array',
     describe: 'One or multiple glob path patterns for files/directories that will be ignored when the upgrade codemods are applied (ex. **/node_modules/**).'
   })
+
+  yargs.option('version', {
+    alias: 'v',
+    type: 'string',
+    describe: 'A semantic instructure-ui version number. When provided, upgrades to the specified version. When omitted, upgrades to the latest stable version.',
+    default: null
+  })
 }
 
 exports.handler = (argv) => {
   const {
     path,
-    ignore
+    ignore,
+    version
   } = argv
 
-  handleUpgrade({ sourcePath: path, ignore })
+  handleUpgrade({ sourcePath: path, ignore, version })
 }

@@ -31,8 +31,8 @@ const getPackageListPaths = ({ version } = {}) => getInstuiConfigPaths({
   version
 })
 
-exports.getCurrentPackageList = () => {
-  const packageListPaths = getPackageListPaths()
+exports.getPackageList = ({ version } = {}) => {
+  const packageListPaths = getPackageListPaths({ version })
 
   if (packageListPaths && packageListPaths.length > 0) {
     try {

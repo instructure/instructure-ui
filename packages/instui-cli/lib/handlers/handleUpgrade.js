@@ -31,30 +31,30 @@ const handleUpgradePackages = require('./handleUpgradePackages')
 
 const {
   getRemovedPackageList,
-  getCurrentPackageList
+  getPackageList
 } = require('../utils/getPackageLists')
 
-module.exports = async ({ sourcePath, ignore }) => {
+module.exports = async ({ sourcePath, version, ignore }) => {
   verifyPackageJson({ sourcePath })
 
-  handleExecuteCodemods({ sourcePath, ignore, report: true })
+  handleExecuteCodemods({ sourcePath, version, ignore, report: true })
 
   info('Auditing Instructure UI dependencies...')
-  const { missing, unused } = await checkInstuiDependencies({ sourcePath })
+  const { missing, unused } = await checkInstuiDependencies({ sourcePath, version })
 
   // Remove any unused instructure ui packages
   await executeRemoveUnusedPackages({ unusedPackages: unused, sourcePath })
 
   // Upgrade instructure ui packages that are still in the project to the latest
-  handleUpgradePackages({ sourcePath })
+  handleUpgradePackages({ sourcePath, version })
 
   // Add any missing packages that were not listed in the project deps
   await executeAddMissingPackages({ missingPackages: missing, sourcePath })
 }
 
-const checkInstuiDependencies = async ({ sourcePath }) => {
-  const currentPackages = getCurrentPackageList()
-  const removedPackages = getRemovedPackageList()
+const checkInstuiDependencies = async ({ sourcePath, version }) => {
+  const packages = getPackageList({ version })
+  const removedPackages = getRemovedPackageList({ version })
 
   const checkedDependencies = await checkDependencies({ sourcePath }).catch((err) => {
     error(err)
@@ -64,7 +64,7 @@ const checkInstuiDependencies = async ({ sourcePath }) => {
   const { dependencies, devDependencies, missing } = (checkedDependencies || {})
 
   return {
-    missing: Object.keys(missing || {}).filter(dep => currentPackages.includes(dep)),
+    missing: Object.keys(missing || {}).filter(dep => packages.includes(dep)),
     unused: [...(dependencies || []), ...(devDependencies || [])].filter(dep => removedPackages.includes(dep))
   }
 }

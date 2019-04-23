@@ -23,12 +23,12 @@
  */
 
 const upgradePackages = require('@instructure/ui-scripts/lib/upgrade-packages')
-const { getCurrentPackageList } = require('../utils/getPackageLists')
+const { getPackageList } = require('../utils/getPackageLists')
 
 module.exports = ({ sourcePath, version, useResolutions }) => {
   upgradePackages({
     path: sourcePath,
-    packageList: getCurrentPackageList(),
+    packageList: getPackageList({ version }),
     version,
     useResolutions
   })
