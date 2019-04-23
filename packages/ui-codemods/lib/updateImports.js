@@ -29,9 +29,7 @@ const replaceDeprecatedImports = require('./helpers/replaceDeprecatedImports')
 
 module.exports = function (file, api, options) {
   const j = api.jscodeshift
-  const c = options.config.indexOf(process.cwd()) > -1
-    ? options.config
-    : path.join(process.cwd(), options.config)
+  const c = path.resolve(process.cwd(), options.config)
   const config = fs.existsSync(c) ? require(c) : null
 
   if (!config) {

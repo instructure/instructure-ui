@@ -64,7 +64,7 @@ exports.handler = (argv) => {
   })
 }
 
-const handleExecuteCodemod = ({ sourcePath, codemodName, configName, ignore }) => {
+const handleExecuteCodemod = ({ sourcePath = process.cwd(), codemodName, configName, ignore = ['**/node_modules/**'] }) => {
   try {
     const codemodPath = require.resolve(`@instructure/ui-codemods/lib/${codemodName}`)
     const configsRoot = path.resolve(path.dirname(require.resolve('@instructure/instui-config/package.json')), './lib/codemod-configs')
@@ -83,7 +83,9 @@ const handleExecuteCodemod = ({ sourcePath, codemodName, configName, ignore }) =
         '-t',
         codemodPath,
         `--config=${configPath}`,
-        `--ignore-pattern=${(ignore || []).map(i => path.join(sourcePath, i)).join('|')}`,
+        `--ignore-pattern=${[
+          ...(ignore || [])
+        ].map(i => path.join(sourcePath, i)).join('|')}`,
         sourcePath
       ])
     }
