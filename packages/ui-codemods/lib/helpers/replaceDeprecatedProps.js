@@ -23,6 +23,7 @@
  */
 
 const findDeprecatedProp = require('../utils/findDeprecatedProp')
+const createLiteral = require('../utils/createLiteral')
 
 /**
   * Find JSX attributes (props)
@@ -56,13 +57,48 @@ module.exports = function replaceDeprecatedProps (j, root, config) {
                 if (match) {
                   hasModifications = true
 
-                  if (match.new) {
-                    // Update the prop name if the config specifies a new name
-                    j(i).replaceWith(j.jsxIdentifier(match.new))
-                  } else {
+                  if (!match.new) {
                     // If config sets the new name to null, the prop has been
                     // removed. Remove the prop and value.
                     j(attr).remove()
+                  } else {
+                    // Update the prop name if the config specifies a new name
+                    const newPropName = j.jsxIdentifier(match.new)
+                    j(i).replaceWith(newPropName)
+
+                    // If replacement values are specified, replace the value
+                    if (match.values && match.values.length > 0) {
+                      const expressionContainers = j(attr).find(j.JSXExpressionContainer)
+                      const literals = j(attr).find(j.Literal)
+
+                      if (expressionContainers && expressionContainers.length > 0) {
+                        // This means the value is contained in a jsx expression container. For example,
+                        // in the following jsx, `<div prop={someValue} />` we are looking at `{someValue}`
+                        expressionContainers.forEach((expressionContainer) => {
+                          const { type } = expressionContainer.value.expression
+                          // Verify that the expression container contains a literal
+                          if (type === 'Literal') {
+                            replaceValue({ j, literals, match, attr, expressionContainer })
+                          }
+                        })
+                      } else if (literals && literals.length > 0) {
+                        // If the value isn't in a jsx expression container, but we have a literal, that
+                        // means that the user is passing a string value. For example, in the following
+                        // jsx, `<div prop="someValue" />` we are looking at `"someValue"`
+                        replaceValue({ j, literals, match, attr })
+                      } else {
+                        // If we don't have a jsx expression container or a string literal, that means that
+                        // we have just the attribute. For example, in the following jsx, `<div prop />`
+                        // we are looking at `prop`. Modify it so that it is a standard bool expression
+                        // and then execute replace like the others
+                        j(attr).replaceWith(j.jsxAttribute(
+                          newPropName,
+                          j.booleanLiteral(true)
+                        ))
+                        // Look for literals again after update
+                        replaceValue({ j, literals: j(attr).find(j.Literal), match, attr })
+                      }
+                    }
                   }
                 }
               })
@@ -71,4 +107,28 @@ module.exports = function replaceDeprecatedProps (j, root, config) {
     })
 
   return hasModifications
+}
+
+const replaceValue = ({ j, literals, match, attr, expressionContainer } = {}) => {
+  literals.forEach((literalValue) => {
+    const currentValue = literalValue.value.value
+
+    // Find an old value provided that matches the existing value
+    const valueUpdate = match.values.find(entry => entry.old === currentValue)
+
+    if (valueUpdate) {
+      const newValue = valueUpdate.new
+
+      if (typeof newValue === 'undefined') {
+        j(attr).remove()
+      } else {
+        const replacement = createLiteral(j, newValue)
+
+        if (replacement) {
+          // Replace the entire expression container if present. If not, just replace the literal
+          j(expressionContainer || literalValue).replaceWith(replacement)
+        }
+      }
+    }
+  })
 }

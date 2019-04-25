@@ -2,7 +2,10 @@
   "Alert": {
     "5.0.0": [
       { "old": "onClose", "new": "onDismiss" },
-      { "old": "transitionType", "new": "transition" },
+      { "old": "transitionType", "new": "transition", "values": [
+        { "old": "none", "new": false },
+        { "old": "fade", "new": true }
+      ]},
       { "old": "isOpen", "new": "open" },
       { "old": "dismissable", "new": null }
     ]

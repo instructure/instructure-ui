@@ -21,7 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-module.exports = function requireUncached (module) {
-  delete require.cache[require.resolve(module)]
-  return require(module)
-}
+
+ module.exports = function createLiteral (j, value) {
+   if (typeof value === 'string') {
+     return j.stringLiteral(value)
+   }
+
+   if (typeof value === 'number') {
+     return j.jsxExpressionContainer(j.numericLiteral(value))
+   }
+
+   if (typeof value === 'boolean') {
+     return j.jsxExpressionContainer(j.booleanLiteral(value))
+   }
+
+   if (value === null) {
+     return j.jsxExpressionContainer(j.nullLiteral(value))
+   }
+
+   return null
+ }

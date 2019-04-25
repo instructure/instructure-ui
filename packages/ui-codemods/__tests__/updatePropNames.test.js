@@ -1,7 +1,7 @@
 const path = require('path')
 const defineTest = require('jscodeshift/dist/testUtils').defineTest
 
-const tests = ['elements']
+const tests = ['elements', 'updateValues']
 
 jest.autoMockOff()
 

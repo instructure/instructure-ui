@@ -11,7 +11,10 @@
   },
   "Img": {
     "6.0.0": [
-      { "old": "cover", "new": "constrain" }
+      { "old": "cover", "new": "constrain", "values": [
+        { "old": false },
+        { "old": true, "new": "cover" }
+      ]}
     ]
   },
   "Mask": {
@@ -44,12 +47,6 @@
       { "old": "closeButtonLabel", "new": null },
       { "old": "closeButtonRef", "new": null },
       { "old": "applicationElement", "new": null }
-    ]
-  },
-  "SVGIcon": {
-    "6.0.0": [
-      { "old": "width", "new": "size" },
-      { "old": "height", "new": "size" }
     ]
   },
   "Tooltip": {
