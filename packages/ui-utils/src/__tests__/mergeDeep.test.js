@@ -23,8 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import mergeDeep from '../mergeDeep'
-
+import { mergeDeep } from '../mergeDeep'
 
 describe('mergeDeep', () => {
   it('should merge object properties without affecting any object', () => {

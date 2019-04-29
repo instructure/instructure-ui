@@ -26,7 +26,7 @@ import { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid/lib/uid'

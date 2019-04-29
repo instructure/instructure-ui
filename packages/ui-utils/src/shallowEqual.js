@@ -38,7 +38,7 @@ const hasOwnProperty = Object.prototype.hasOwnProperty
  * @param {Object} objB
  * @returns {Boolean} Returns true when the values of all keys are strictly equal
 */
-export default function shallowEqual (objA, objB) {
+function shallowEqual (objA, objB) {
   if (is(objA, objB)) {
     return true
   }
@@ -79,3 +79,6 @@ function is (x, y) {
     return x !== x && y !== y // eslint-disable-line no-self-compare
   }
 }
+
+export default shallowEqual
+export { shallowEqual }

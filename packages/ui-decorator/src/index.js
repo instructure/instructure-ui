@@ -21,5 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export default from './decorator'
+import { decorator } from './decorator'
+export default decorator
+export { decorator }

@@ -32,8 +32,8 @@ import Selectable from '@instructure/ui-selectable/lib/components/Selectable'
 import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
 
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'

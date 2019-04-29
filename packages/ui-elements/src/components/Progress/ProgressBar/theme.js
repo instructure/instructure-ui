@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { lighten } from '@instructure/ui-themeable/lib/utils/color'
+import { lighten } from '@instructure/ui-color-utils'
 
 export default function generator ({ colors, spacing, typography }) {
   return {

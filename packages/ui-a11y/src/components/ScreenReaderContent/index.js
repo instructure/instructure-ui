@@ -26,8 +26,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import styles from './styles.css'
 

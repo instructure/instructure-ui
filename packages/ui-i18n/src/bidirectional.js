@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import PropTypes from 'prop-types'
-import decorator from '@instructure/ui-decorator'
+import { decorator } from '@instructure/ui-decorator'
 
 import { TextDirectionContextTypes, getTextDirectionContext, DIRECTION } from './TextDirectionContextTypes'
 import getTextDirection from './utils/getTextDirection'

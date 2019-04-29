@@ -35,17 +35,17 @@ import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 
 import { Children, controllable, element } from '@instructure/ui-prop-types'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import ComponentIdentifier from '@instructure/ui-react-utils/lib/ComponentIdentifier'
+import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import requestAnimationFrame from '@instructure/ui-dom-utils/lib/requestAnimationFrame'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import px from '@instructure/ui-utils/lib/px'
-import handleMouseOverOut from '@instructure/ui-utils/lib/dom/handleMouseOverOut'
-import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import handleMouseOverOut from '@instructure/ui-dom-utils/lib/handleMouseOverOut'
+import { pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
@@ -452,7 +452,7 @@ class Popover extends Component {
   }
 
   renderTrigger () {
-    let trigger = pick(Popover.Trigger, this.props.children)
+    let trigger = ComponentIdentifier.pick(Popover.Trigger, this.props.children)
 
     if (trigger) {
       const { on, shouldContainFocus } = this.props
@@ -515,7 +515,7 @@ class Popover extends Component {
   }
 
   renderContent () {
-    let content = pick(Popover.Content, this.props.children)
+    let content = ComponentIdentifier.pick(Popover.Content, this.props.children)
 
     if (this.shown) {
       content = (

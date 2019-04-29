@@ -27,12 +27,14 @@
   "dependencies": {
     "@babel/runtime": "^7",
     "@instructure/console": "^5.52.2",
+    "@instructure/ui-color-utils": "^5.52.2",
     "@instructure/ui-decorator": "^5.52.2",
+    "@instructure/ui-dom-utils": "^5.52.2",
+    "@instructure/ui-react-utils": "^5.52.2",
     "@instructure/ui-stylesheet": "^5.52.2",
     "@instructure/ui-utils": "^5.52.2",
     "@instructure/uid": "^5.52.2",
-    "prop-types": "^15",
-    "tinycolor2": "^1.4.1"
+    "prop-types": "^15"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

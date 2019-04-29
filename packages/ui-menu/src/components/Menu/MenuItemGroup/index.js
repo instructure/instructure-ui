@@ -27,9 +27,9 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import uid from '@instructure/uid'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'

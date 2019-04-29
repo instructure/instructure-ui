@@ -36,7 +36,7 @@
  * @param {function} functions to chain
  * @returns {function|null}
  */
-export default function createChainedFunction (...funcs) {
+function createChainedFunction (...funcs) {
   return funcs
     .filter((f, i) => {
       if (f == null) {
@@ -81,3 +81,6 @@ function getAllIndexes (arr, val) {
 
   return indexes
 }
+
+export default createChainedFunction
+export { createChainedFunction }

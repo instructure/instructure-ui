@@ -34,9 +34,9 @@
  * http://api.jqueryui.com/category/ui-core/
  **/
 
-import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import elementMatches from '@instructure/ui-utils/lib/dom/elementMatches'
+import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import elementMatches from '@instructure/ui-dom-utils/lib/elementMatches'
 
 /**
 * ---

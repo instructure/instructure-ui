@@ -29,8 +29,8 @@ import classnames from 'classnames'
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
 
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
@@ -39,7 +39,7 @@ import Portal from '@instructure/ui-portal/lib/components/Portal'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 
 import Mask from '../Mask'
 

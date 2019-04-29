@@ -29,9 +29,9 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import supportsObjectFit from '@instructure/ui-utils/lib/dom/supportsObjectFit'
-import deprecated from '@instructure/ui-utils/lib/react/deprecated'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import supportsObjectFit from '@instructure/ui-dom-utils/lib/supportsObjectFit'
+import deprecated from '@instructure/ui-react-utils/lib/deprecated'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'

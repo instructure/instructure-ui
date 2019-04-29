@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { isValid } from '@instructure/ui-themeable/lib/utils/color'
+import { isValid } from '@instructure/ui-color-utils'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'

@@ -30,9 +30,9 @@ import Heading from '@instructure/ui-elements/lib/components/Heading'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
 import styles from './styles.css'

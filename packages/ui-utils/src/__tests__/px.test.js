@@ -23,10 +23,9 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
+import { getFontSize } from '@instructure/ui-dom-utils'
 
-import px from '../px'
-import getFontSize from '../dom/getFontSize'
-
+import { px } from '../px'
 
 describe('px', () => {
   let node

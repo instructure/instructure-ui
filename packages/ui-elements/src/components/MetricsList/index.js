@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import { Children } from '@instructure/ui-prop-types'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import MetricsListItem from './MetricsListItem'
 

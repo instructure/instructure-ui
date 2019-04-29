@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
 

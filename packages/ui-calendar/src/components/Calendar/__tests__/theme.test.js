@@ -23,7 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import { contrast } from '@instructure/ui-themeable/lib/utils/color'
+import { contrast } from '@instructure/ui-color-utils'
 
 import Calendar from '../index'
 

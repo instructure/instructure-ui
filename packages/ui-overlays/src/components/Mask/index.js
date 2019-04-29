@@ -28,8 +28,8 @@ import classnames from 'classnames'
 import noScroll from 'no-scroll'
 
 import themeable from '@instructure/ui-themeable'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

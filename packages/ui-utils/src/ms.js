@@ -39,7 +39,7 @@ import parseUnit from './parseUnit'
  * @param {String} val
  * @returns {Number} Returns numerical representation of milliseconds
 */
-export default function ms (val) {
+function ms (val) {
   if (!val || typeof val === 'number') {
     return val
   }
@@ -54,3 +54,6 @@ export default function ms (val) {
     return num
   }
 }
+
+export default ms
+export { ms }

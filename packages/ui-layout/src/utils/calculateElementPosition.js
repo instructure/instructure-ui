@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
-import getScrollParents from '@instructure/ui-utils/lib/dom/getScrollParents'
-import getOffsetParents from '@instructure/ui-utils/lib/dom/getOffsetParents'
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
+import getBoundingClientRect from '@instructure/ui-dom-utils/lib/getBoundingClientRect'
+import getScrollParents from '@instructure/ui-dom-utils/lib/getScrollParents'
+import getOffsetParents from '@instructure/ui-dom-utils/lib/getOffsetParents'
+import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import ownerDocument from '@instructure/ui-dom-utils/lib/ownerDocument'
+import ownerWindow from '@instructure/ui-dom-utils/lib/ownerWindow'
 import mirrorPlacement from './mirrorPlacement'
 
 /**

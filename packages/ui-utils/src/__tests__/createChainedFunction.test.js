@@ -23,8 +23,7 @@
  */
 
 import { expect, spy } from '@instructure/ui-test-utils'
-import createChainedFunction from '../createChainedFunction'
-
+import { createChainedFunction } from '../createChainedFunction'
 
 describe('createChainedFunction', () => {
   it('should return null if no function provided', () => {

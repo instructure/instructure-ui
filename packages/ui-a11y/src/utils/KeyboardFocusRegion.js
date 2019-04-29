@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 
-import ownerWindow from '@instructure/ui-utils/lib/dom/ownerWindow'
-import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
-import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
-import ownerDocument from '@instructure/ui-utils/lib/dom/ownerDocument'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import ownerWindow from '@instructure/ui-dom-utils/lib/ownerWindow'
+import getActiveElement from '@instructure/ui-dom-utils/lib/getActiveElement'
+import addEventListener from '@instructure/ui-dom-utils/lib/addEventListener'
+import ownerDocument from '@instructure/ui-dom-utils/lib/ownerDocument'
+import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import { error } from '@instructure/console/macro'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import requestAnimationFrame from '@instructure/ui-dom-utils/lib/requestAnimationFrame'
 
 import keycode from 'keycode'
 

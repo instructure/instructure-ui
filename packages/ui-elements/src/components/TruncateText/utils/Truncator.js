@@ -26,9 +26,9 @@ import escapeHtml from 'escape-html'
 
 import cloneArray from '@instructure/ui-utils/lib/cloneArray'
 import { error } from '@instructure/console/macro'
-import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
-import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
-import isVisible from '@instructure/ui-utils/lib/dom/isVisible'
+import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
+import getBoundingClientRect from '@instructure/ui-dom-utils/lib/getBoundingClientRect'
+import isVisible from '@instructure/ui-dom-utils/lib/isVisible'
 
 import measureText from './measureText'
 import cleanString from './cleanString'

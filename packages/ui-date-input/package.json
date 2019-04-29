@@ -31,6 +31,7 @@
     "@instructure/ui-layout": "^5.52.2",
     "@instructure/ui-overlays": "^5.52.2",
     "@instructure/ui-prop-types": "^5.52.2",
+    "@instructure/ui-react-utils": "^5.52.2",
     "@instructure/ui-selectable": "^5.52.2",
     "@instructure/ui-testable": "^5.52.2",
     "@instructure/ui-text-input": "^5.52.2",

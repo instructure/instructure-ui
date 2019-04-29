@@ -28,9 +28,9 @@ import deepEqual from 'deep-equal'
 
 import themeable from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
+import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import testable from '@instructure/ui-testable'
 
 import Tag from '@instructure/ui-elements/lib/components/Tag'

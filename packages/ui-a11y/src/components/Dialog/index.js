@@ -25,11 +25,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import { error } from '@instructure/console/macro'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import requestAnimationFrame from '@instructure/ui-dom-utils/lib/requestAnimationFrame'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 
 import FocusRegionManager from '../../utils/FocusRegionManager'
 

@@ -24,8 +24,7 @@
 
 import { expect } from '@instructure/ui-test-utils'
 
-import within from '../within'
-
+import { within } from '../within'
 
 describe('within', () => {
   it('returns true when values are within range', () => {

@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
+import { alpha, darken } from '@instructure/ui-color-utils'
 
 export default function generator ({ colors, typography, spacing, forms }) {
   return {

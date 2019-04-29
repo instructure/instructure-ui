@@ -29,7 +29,7 @@ import IconStarLightSolid from '@instructure/ui-icons/lib/IconStarLightSolid'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import requestAnimationFrame from '@instructure/ui-dom-utils/lib/requestAnimationFrame'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 

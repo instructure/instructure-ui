@@ -23,8 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import parseUnit from '../parseUnit'
-
+import { parseUnit } from '../parseUnit'
 
 describe('parseUnit', () => {
   it('unitless', () => {

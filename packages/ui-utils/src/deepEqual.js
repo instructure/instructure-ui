@@ -23,6 +23,7 @@
  */
 
 import deepEqual from 'fast-deep-equal'
+
 /**
  * ---
  * category: utilities
@@ -30,3 +31,4 @@ import deepEqual from 'fast-deep-equal'
  * A wrapper for [fast-deep-equal](https://www.npmjs.com/package/fast-deep-equal)
  */
 export default deepEqual
+export { deepEqual }

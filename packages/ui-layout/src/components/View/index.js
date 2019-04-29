@@ -28,15 +28,15 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import getShorthandPropValue from '@instructure/ui-themeable/lib/utils/getShorthandPropValue'
-import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
+import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-themeable/lib/utils/mirrorShorthand'
 import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { error } from '@instructure/console/macro'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
+import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

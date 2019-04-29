@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import { element } from '@instructure/ui-prop-types'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'

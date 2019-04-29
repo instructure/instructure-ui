@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { alpha, darken } from '@instructure/ui-themeable/lib/utils/color'
+import { alpha, darken } from '@instructure/ui-color-utils'
 
 const activeShadow = 'inset 0 0 0.1875rem 0.0625rem'
 const focusShadow = 'inset 0 0 0 0.0625rem'

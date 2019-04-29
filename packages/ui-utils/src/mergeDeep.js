@@ -32,7 +32,7 @@
  * @param {Object} arguments objects to merge
  * @returns {Object} a new object with items from all arguments
  */
-export default function mergeDeep () {
+function mergeDeep () {
   const args = [...arguments]
   let target = {}
 
@@ -73,3 +73,6 @@ function isObject (item) {
 function isArray (item) {
   return (item && Array.isArray(item))
 }
+
+export default mergeDeep
+export { mergeDeep }

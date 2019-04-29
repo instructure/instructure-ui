@@ -25,13 +25,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import decorator from '@instructure/ui-decorator'
+import { decorator } from '@instructure/ui-decorator'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import isEmpty from '@instructure/ui-utils/lib/isEmpty'
 import { warn } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 
 import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
 

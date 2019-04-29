@@ -61,6 +61,9 @@ module.exports = [
       '**/ui-themeable/src/**/*.js',
       '**/ui-i18n/src/**/*.js',
       '**/ui-utils/src/**/*.js',
+      '**/ui-dom-utils/src/**/*.js',
+      '**/ui-react-utils/src/**/*.js',
+      '**/ui-color-utils/src/**/*.js',
       '**/debounce/src/**/*.js',
       '**/ui-decorator/src/**/*.js'
     ],

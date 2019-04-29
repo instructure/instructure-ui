@@ -21,7 +21,8 @@
   "license": "MIT",
   "devDependencies": {
     "@instructure/ui-babel-preset": "^6",
-    "@instructure/ui-test-utils": "^6"
+    "@instructure/ui-test-utils": "^6",
+    "@instructure/ui-color-utils": "^6"
   },
   "dependencies": {
     "@babel/runtime": "^7",

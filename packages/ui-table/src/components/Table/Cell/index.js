@@ -27,8 +27,8 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import callRenderProp from '@instructure/ui-utils/lib/react/callRenderProp'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
 import { View } from '@instructure/ui-layout'
 
 import styles from './styles.css'

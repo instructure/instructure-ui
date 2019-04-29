@@ -286,5 +286,17 @@
   {
     "pattern": "^@instructure/ui-themes/lib/canvas/high-contrast",
     "replace": "@instructure/canvas-high-contrast-theme"
+  },
+  {
+    "pattern": "^@instructure/ui-utils/lib/react",
+    "replace": "@instructure/ui-react-utils/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-utils/lib/dom",
+    "replace": "@instructure/ui-dom-utils/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-themeable/lib/utils/color",
+    "replace": "@instructure/ui-color-utils/lib"
   }
 ]

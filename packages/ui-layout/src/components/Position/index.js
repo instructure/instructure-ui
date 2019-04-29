@@ -28,14 +28,14 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
-import ComponentIdentifier, { pick } from '@instructure/ui-utils/lib/react/ComponentIdentifier'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import addPositionChangeListener from '@instructure/ui-utils/lib/dom/addPositionChangeListener'
+import ComponentIdentifier from '@instructure/ui-react-utils/lib/ComponentIdentifier'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
+import addPositionChangeListener from '@instructure/ui-dom-utils/lib/addPositionChangeListener'
 import uid from '@instructure/uid'
 import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
 import debounce from '@instructure/debounce'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import testable from '@instructure/ui-testable'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
@@ -289,7 +289,7 @@ class Position extends Component {
   }
 
   renderContent () {
-    let content = pick(Position.Content, this.props.children)
+    let content = ComponentIdentifier.pick(Position.Content, this.props.children)
 
     if (content && React.Children.count(content.props.children) > 0) {
       content = safeCloneElement(content, {
@@ -318,7 +318,7 @@ class Position extends Component {
   }
 
   renderTarget () {
-    let target = pick(Position.Target, this.props.children)
+    let target = ComponentIdentifier.pick(Position.Target, this.props.children)
 
     if (target) {
       return safeCloneElement(target, {

@@ -28,6 +28,7 @@
     "@instructure/console": "^5.52.2",
     "@instructure/ui-a11y": "^5.52.2",
     "@instructure/ui-buttons": "^5.52.2",
+    "@instructure/ui-dom-utils": "^5.52.2",
     "@instructure/ui-focusable": "^5.52.2",
     "@instructure/ui-icons": "^5.52.2",
     "@instructure/ui-layout": "^5.52.2",

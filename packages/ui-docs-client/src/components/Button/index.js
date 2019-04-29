@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
+import { darken } from '@instructure/ui-color-utils'
 import BaseButton from '@instructure/ui-buttons/lib/components/Button'
 
 export default class Button extends Component {

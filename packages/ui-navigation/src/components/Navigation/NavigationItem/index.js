@@ -28,8 +28,8 @@ import classnames from 'classnames'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
 

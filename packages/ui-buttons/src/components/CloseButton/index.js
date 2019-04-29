@@ -32,7 +32,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReade
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import Button from '../Button'
 

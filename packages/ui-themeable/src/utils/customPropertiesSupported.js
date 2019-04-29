@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
+import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
 import Browser from '@instructure/ui-utils/lib/Browser'
 
 let cachedReturnVal
 /**
  * ---
- * category: utilities/DOM
+ * category: utilities/Themes
  * ---
  * check if CSS custom properties (CSS variables) are supported
  * @returns {Boolean} true if the DOM is available and CSS variables are supported

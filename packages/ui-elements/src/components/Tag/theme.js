@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
+import { darken } from '@instructure/ui-color-utils'
 
 export default function generator ({ borders, colors, forms, spacing, typography }) {
   const tagVariant = function (style, {

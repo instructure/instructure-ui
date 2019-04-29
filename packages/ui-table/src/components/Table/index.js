@@ -28,13 +28,13 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
 import { View } from '@instructure/ui-layout'
-import { deprecated } from '@instructure/ui-utils'
+import { deprecated } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -51,6 +51,9 @@ category: components
 id: TableControlled
 ---
 **/
+@deprecated('7.0', {
+  mode: true
+})
 @themeable(theme, styles)
 class Table extends Component {
   static propTypes = {
@@ -159,6 +162,4 @@ class Table extends Component {
   }
 }
 
-export default deprecated('6.0', {
-  mode: true
-})(Table)
+export default Table

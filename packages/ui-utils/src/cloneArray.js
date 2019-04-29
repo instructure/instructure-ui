@@ -32,7 +32,7 @@
  * @returns {Array} Returns a copy of the array
 */
 
-export default function cloneArray (arr) {
+function cloneArray (arr) {
   let copy
   if (Array.isArray(arr)) {
     copy = arr.slice(0)
@@ -44,3 +44,6 @@ export default function cloneArray (arr) {
     return arr
   }
 }
+
+export default cloneArray
+export { cloneArray }

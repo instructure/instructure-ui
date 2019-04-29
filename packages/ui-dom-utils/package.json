@@ -1,0 +1,38 @@
+{
+  "name": "@instructure/ui-dom-utils",
+  "version": "5.52.2",
+  "description": "A DOM utility library made by Instructure Inc.",
+  "author": "Instructure, Inc. Engineering and Product Design",
+  "main": "./lib/index.js",
+  "module": "./es/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/instructure/instructure-ui.git"
+  },
+  "homepage": "https://instructure.github.io/instructure-ui/",
+  "bugs": "https://github.com/instructure/instructure-ui/issues",
+  "scripts": {
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "build": "ui-build",
+    "build:watch": "ui-build --watch"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^5.52.2",
+    "@instructure/ui-test-utils": "^5.52.2"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7",
+    "@instructure/console": "^5.52.2"
+  },
+  "peerDependencies": {
+    "react": "^15 || ^16",
+    "react-dom": "^15 || ^16"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "sideEffects": false
+}

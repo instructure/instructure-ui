@@ -24,9 +24,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import getClassList from '@instructure/ui-utils/lib/dom/getClassList'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import getClassList from '@instructure/ui-dom-utils/lib/getClassList'
+import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 
 const STATES = {
   EXITED: -2,

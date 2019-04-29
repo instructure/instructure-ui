@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import View from '../View'
 

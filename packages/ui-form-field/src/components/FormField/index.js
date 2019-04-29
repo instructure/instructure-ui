@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import FormPropTypes from '../../utils/FormPropTypes'
 import FormFieldLayout from '../FormFieldLayout'

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import mergeDeep from '@instructure/ui-utils/lib/mergeDeep'
 import { warn } from '@instructure/console/macro'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
 
 import { ThemeContextTypes, makeThemeContext, getThemeContext } from '../../ThemeContextTypes'
 import themeable from '../../themeable'

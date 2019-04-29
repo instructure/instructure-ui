@@ -24,10 +24,10 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import classnames from 'classnames'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 

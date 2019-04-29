@@ -25,10 +25,10 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import addEventListener from '@instructure/ui-utils/lib/dom/addEventListener'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
+import addEventListener from '@instructure/ui-dom-utils/lib/addEventListener'
+import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import { error } from '@instructure/console/macro'
-import InputModeListener from '@instructure/ui-utils/lib/dom/InputModeListener'
+import InputModeListener from '@instructure/ui-dom-utils/lib/InputModeListener'
 import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
 
 /**

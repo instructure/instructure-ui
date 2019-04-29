@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { alpha } from '@instructure/ui-themeable/lib/utils/color'
+import { alpha } from '@instructure/ui-color-utils'
 
 export default function generator ({ borders, colors }) {
   return {

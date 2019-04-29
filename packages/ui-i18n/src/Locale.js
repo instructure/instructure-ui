@@ -22,7 +22,7 @@
 * SOFTWARE.
 */
 
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
+import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
 
 const defaultLocale = 'en-US'
 

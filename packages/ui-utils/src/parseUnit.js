@@ -41,7 +41,7 @@
  * @returns {Array} Returns array of shape [ value, unit ]
 */
 
-export default function parseUnit (str) {
+function parseUnit (str) {
   const value = `${str}`
   return [
     parseFloat(value, 10),
@@ -49,3 +49,6 @@ export default function parseUnit (str) {
     value.match(/[\d.\-\+]*\s*(.*)/)[1] || ''
   ]
 }
+
+export default parseUnit
+export { parseUnit }

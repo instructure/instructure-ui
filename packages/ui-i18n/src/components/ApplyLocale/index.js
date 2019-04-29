@@ -24,7 +24,7 @@
 
 import { Component } from 'react'
 import PropTypes from 'prop-types'
-import ensureSingleChild from '@instructure/ui-utils/lib/react/ensureSingleChild'
+import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
 
 /**
 ---

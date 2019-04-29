@@ -23,16 +23,16 @@
  * SOFTWARE.
  */
 
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
-import containsActiveElement from '@instructure/ui-utils/lib/dom/containsActiveElement'
-import getActiveElement from '@instructure/ui-utils/lib/dom/getActiveElement'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
+import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
+import getActiveElement from '@instructure/ui-dom-utils/lib/getActiveElement'
 
 import findTabbable from './findTabbable'
 
 /**
  * ---
- * category: utilities/DOM
+ * category: utilities/a11y
  * ---
  *
  * Scope tab in order to trap focus within a specified

@@ -24,7 +24,7 @@
 
 import { findDOMNode } from 'react-dom'
 
-import decorator from '@instructure/ui-decorator'
+import { decorator } from '@instructure/ui-decorator'
 
 export default decorator((ComposedComponent) => {
   const displayName = ComposedComponent.displayName || ComposedComponent.name

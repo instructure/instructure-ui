@@ -23,13 +23,13 @@
  */
 
 import React from 'react'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 
 import ScreenReaderContent from '../components/ScreenReaderContent'
 
 /**
  * ---
- * category: utilities/react
+ * category: utilities/a11y
  * ---
  * Returns `true` if any of the children are not wrapped with [ScreenReaderContent](#ScreenReaderContent).
  * @param {ReactChildren} children - A react component's children prop

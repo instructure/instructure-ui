@@ -31,3 +31,4 @@ import Browser from 'bowser'
  * detection library.
  */
 export default Browser
+export { Browser }

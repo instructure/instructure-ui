@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import getFontSize from './dom/getFontSize'
+import { getFontSize } from '@instructure/ui-dom-utils'
 import parseUnit from './parseUnit'
 
 /**
@@ -42,7 +42,7 @@ import parseUnit from './parseUnit'
  * @param {DomNode} el - containing element, for context measure is em (defaults to document.body)
  * @returns {Number} Returns numerical representation of pixels
 */
-export default function px (val, el) {
+function px (val, el) {
   const container = el || document.body
 
   if (!val || typeof val === 'number') {
@@ -59,3 +59,6 @@ export default function px (val, el) {
     return num
   }
 }
+
+export default px
+export { px }

@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
-import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
+import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
+import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
 
 let observer
 

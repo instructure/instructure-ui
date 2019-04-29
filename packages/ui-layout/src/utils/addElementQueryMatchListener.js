@@ -23,10 +23,10 @@
  */
 import parseQuery from './parseQuery'
 
-import addResizeListener from '@instructure/ui-utils/lib/dom/addResizeListener'
+import addResizeListener from '@instructure/ui-dom-utils/lib/addResizeListener'
 import debounce from '@instructure/debounce'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import getBoundingClientRect from '@instructure/ui-utils/lib/dom/getBoundingClientRect'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import getBoundingClientRect from '@instructure/ui-dom-utils/lib/getBoundingClientRect'
 
 /**
  * ---

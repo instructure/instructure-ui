@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import getTextDirection from '../../utils/getTextDirection'
 
 import {

@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import uid from '@instructure/uid'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

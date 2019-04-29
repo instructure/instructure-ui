@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 
 import styles from './styles.css'
 import theme from './theme'

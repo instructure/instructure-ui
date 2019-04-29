@@ -25,7 +25,7 @@
 import { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import { error } from '@instructure/console/macro'
 

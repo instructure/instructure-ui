@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 
 import deepequal from '@instructure/ui-utils/lib/deepEqual'
 import { warn } from '@instructure/console/macro'
-import requestAnimationFrame from '@instructure/ui-utils/lib/dom/requestAnimationFrame'
+import requestAnimationFrame from '@instructure/ui-dom-utils/lib/requestAnimationFrame'
 
 
 /**

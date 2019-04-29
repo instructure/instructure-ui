@@ -23,8 +23,8 @@
  */
 import jsonToMediaQuery from './jsonToMediaQuery'
 
-import findDOMNode from '@instructure/ui-utils/lib/dom/findDOMNode'
-import uiMatchMedia from '@instructure/ui-utils/lib/dom/matchMedia'
+import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import uiMatchMedia from '@instructure/ui-dom-utils/lib/matchMedia'
 
 /**
  * ---

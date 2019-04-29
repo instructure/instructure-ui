@@ -26,10 +26,10 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import { View } from '@instructure/ui-layout'
 
 import Row from '../Row'

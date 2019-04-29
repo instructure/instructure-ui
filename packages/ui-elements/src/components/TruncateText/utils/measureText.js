@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import getComputedStyle from '@instructure/ui-utils/lib/dom/getComputedStyle'
+import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
 
 /**
  * ---

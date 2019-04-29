@@ -93,6 +93,9 @@ module.exports = {
     '@instructure/ui-toggle-details/lib': path.resolve(__dirname, '../ui-toggle-details/src'),
     '@instructure/ui-tree-browser/lib': path.resolve(__dirname, '../ui-tree-browser/src'),
     '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),
-    '@instructure/ui-themeable/lib': path.resolve(__dirname, '../ui-themeable/src')
+    '@instructure/ui-themeable/lib': path.resolve(__dirname, '../ui-themeable/src'),
+    '@instructure/ui-react-utils$': path.resolve(__dirname, '../ui-react-utils/src/'),
+    '@instructure/ui-dom-utils$': path.resolve(__dirname, '../ui-dom-utils/src/'),
+    '@instructure/ui-color-utils$': path.resolve(__dirname, '../ui-color-utils/src/')
   }
 }

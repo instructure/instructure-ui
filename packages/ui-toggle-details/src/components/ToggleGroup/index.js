@@ -25,13 +25,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
-import getElementType from '@instructure/ui-utils/lib/react/getElementType'
+import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 import { controllable } from '@instructure/ui-prop-types'
-import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
+import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import View from '@instructure/ui-layout/lib/components/View'

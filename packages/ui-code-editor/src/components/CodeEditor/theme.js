@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { darken } from '@instructure/ui-themeable/lib/utils/color'
+import { darken } from '@instructure/ui-color-utils'
 
 export default function ({ colors, borders, spacing, typography, stacking }) {
   return {

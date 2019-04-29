@@ -29,10 +29,10 @@ import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-pro
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import uid from '@instructure/uid'
 import testable from '@instructure/ui-testable'
-import matchComponentTypes from '@instructure/ui-utils/lib/react/matchComponentTypes'
-import safeCloneElement from '@instructure/ui-utils/lib/react/safeCloneElement'
+import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
+import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import RadioInput from '../RadioInput'
 

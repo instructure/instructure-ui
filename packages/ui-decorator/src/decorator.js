@@ -32,7 +32,7 @@
  * @param {Function} decorator a function that returns a decorated component
  * @returns {Class} a decorated component class
  */
-export default function decorator (decorate) {
+function decorator (decorate) {
   return (...args) => {
     return (ComposedComponent) => {
       if (typeof decorate === 'function') {
@@ -46,3 +46,5 @@ export default function decorator (decorate) {
     }
   }
 }
+export default decorator
+export { decorator }

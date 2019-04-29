@@ -34,7 +34,7 @@ import IconArrowOpenUpLine from '@instructure/ui-icons/lib/IconArrowOpenUpLine'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
-import { pickProps, omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 
 import styles from './styles.css'
 import theme from './theme'

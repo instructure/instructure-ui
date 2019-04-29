@@ -27,7 +27,7 @@ import classnames from 'classnames'
 
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import Transition from '@instructure/ui-motion/lib/components/Transition'
-import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'

@@ -24,9 +24,8 @@
 
 import { expect } from '@instructure/ui-test-utils'
 
-import cloneArray from '../cloneArray'
-import deepEqual from '../deepEqual'
-
+import { cloneArray } from '../cloneArray'
+import { deepEqual } from '../deepEqual'
 
 describe('cloneArray', () => {
   it('should return an array', () => {

@@ -26,7 +26,7 @@ import { makeRequirable } from '@instructure/ui-prop-types'
 
 /**
  * ---
- * category: utilities/react
+ * category: utilities/i18n
  * ---
  * Custom I18n prop types for React components.
  * @module I18nPropTypes

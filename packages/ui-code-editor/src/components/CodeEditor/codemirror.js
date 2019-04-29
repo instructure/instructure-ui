@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import canUseDOM from '@instructure/ui-utils/lib/dom/canUseDOM'
+import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
 import { Controlled as CodeMirror } from 'react-codemirror2'
 
 if (canUseDOM) {

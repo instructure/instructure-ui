@@ -23,8 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import ms from '../ms'
-
+import { ms } from '../ms'
 
 describe('ms', () => {
   it('handles ms unit', () => {
