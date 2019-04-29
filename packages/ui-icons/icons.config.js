@@ -28,7 +28,7 @@ const destination = './__build__/'
 
 const svg = {
   source: `${source}**/*.sketch`,
-  destination: `${source}__svg__/`
+  destination: `svg/`
 }
 
 const fonts = {

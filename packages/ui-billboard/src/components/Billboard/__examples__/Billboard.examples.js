@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import IconAnnouncement from '@instructure/ui-icons/lib/Line/IconAnnouncement'
+import IconAnnouncementLine from '@instructure/ui-icons/lib/IconAnnouncementLine'
 import Img from '@instructure/ui-elements/lib/components/Img'
 
 export default {
@@ -31,7 +31,7 @@ export default {
   propValues: {
     hero: [
       function renderHero (size) {
-        return <IconAnnouncement size={size} />
+        return <IconAnnouncementLine size={size} />
       },
       <Img key="test" src={require('./testImage.jpg')} />,
       null

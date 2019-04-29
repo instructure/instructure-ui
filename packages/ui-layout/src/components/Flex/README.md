@@ -244,7 +244,7 @@ example: true
     <Button margin="none x-small none none">
       Cancel
     </Button>
-    <Button variant="success" icon={IconUser.Solid}>
+    <Button variant="success" icon={IconUserSolid}>
       Add user
     </Button>
   </FlexItem>
@@ -306,22 +306,22 @@ example: true
 
     <Flex visualDebug justifyItems="space-between">
       <FlexItem>
-        <Button variant="icon" icon={IconEmail.Line}>
+        <Button variant="icon" icon={IconEmailLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconPrinter.Line}>
+        <Button variant="icon" icon={IconPrinterLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconCalendarDay.Line}>
+        <Button variant="icon" icon={IconCalendarDayLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>
       <FlexItem>
-        <Button variant="icon" icon={IconSettings.Line}>
+        <Button variant="icon" icon={IconSettingsLine}>
           <ScreenReaderContent>Some app function</ScreenReaderContent>
         </Button>
       </FlexItem>

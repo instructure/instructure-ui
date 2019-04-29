@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
-import IconFolder from '@instructure/ui-icons/lib/Line/IconFolder'
-import IconDocument from '@instructure/ui-icons/lib/Line/IconDocument'
+import IconFolderLine from '@instructure/ui-icons/lib/IconFolderLine'
+import IconDocumentLine from '@instructure/ui-icons/lib/IconDocumentLine'
 
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-utils/lib/react/passthroughProps'
@@ -102,9 +102,9 @@ export default class TreeBrowser extends Component {
     size: 'medium',
     variant: 'folderTree',
     showRootCollection: true,
-    collectionIcon: IconFolder,
-    collectionIconExpanded: IconFolder,
-    itemIcon: IconDocument,
+    collectionIcon: IconFolderLine,
+    collectionIconExpanded: IconFolderLine,
+    itemIcon: IconDocumentLine,
     defaultExpanded: [],
     selectionType: 'none',
     onItemClick: function (item) {},

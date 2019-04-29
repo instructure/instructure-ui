@@ -22,19 +22,19 @@
 * SOFTWARE.
 */
 
-import IconCollapse from '@instructure/ui-icons/lib/Solid/IconCollapse'
-import IconExpand from '@instructure/ui-icons/lib/Solid/IconExpand'
-import IconAnnotate from '@instructure/ui-icons/lib/Solid/IconAnnotate'
+import IconCollapseSolid from '@instructure/ui-icons/lib/IconCollapseSolid'
+import IconExpandSolid from '@instructure/ui-icons/lib/IconExpandSolid'
+import IconAnnotateSolid from '@instructure/ui-icons/lib/IconAnnotateSolid'
 
 export default {
   sectionProp: 'size',
   propValues: {
 
-    itemIcon: [undefined, IconAnnotate],
+    itemIcon: [undefined, IconAnnotateSolid],
 
-    collectionIcon: [undefined, IconCollapse],
+    collectionIcon: [undefined, IconCollapseSolid],
 
-    collectionIconExpanded: [undefined, IconExpand],
+    collectionIconExpanded: [undefined, IconExpandSolid],
     selectionType: ['none', 'single']
   },
   getComponentProps: (props) => {
@@ -66,9 +66,9 @@ export default {
     return (
       // prevent unecessary icon permutations
 
-      (props.collectionIcon === undefined && props.collectionIconExpanded === IconExpand) ||
+      (props.collectionIcon === undefined && props.collectionIconExpanded === IconExpandSolid) ||
 
-      (props.collectionIcon === IconCollapse && props.collectionIconExpanded === undefined)
+      (props.collectionIcon === IconCollapseSolid && props.collectionIconExpanded === undefined)
     )
   }
 }

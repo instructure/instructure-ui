@@ -626,7 +626,7 @@ class Example extends React.Component {
         size="small"
         variant="icon"
         margin="0 0 0 x-small"
-        icon={IconCalendarMonth.Line}
+        icon={IconCalendarMonthLine}
         onClick={onClick}
         onFocus={onFocus}
         onBlur={onBlur}

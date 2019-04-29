@@ -23,10 +23,10 @@
  */
 import React from 'react'
 
-import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
-import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
-import IconAssignment from '@instructure/ui-icons/lib/Line/IconAssignment'
-import IconAnnouncement from '@instructure/ui-icons/lib/Line/IconAnnouncement'
+import IconAdminLine from '@instructure/ui-icons/lib/IconAdminLine'
+import IconDashboardLine from '@instructure/ui-icons/lib/IconDashboardLine'
+import IconAssignmentLine from '@instructure/ui-icons/lib/IconAssignmentLine'
+import IconAnnouncementLine from '@instructure/ui-icons/lib/IconAnnouncementLine'
 
 import { NavigationItem } from '../index'
 
@@ -41,7 +41,7 @@ export default {
       children: [
         <NavigationItem
           key="1"
-          icon={<IconAdmin />}
+          icon={<IconAdminLine />}
           label="Admin"
           href="#"
           theme={{
@@ -51,20 +51,20 @@ export default {
         />,
         <NavigationItem
           key="2"
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
           selected={true}
         />,
         <NavigationItem
           key="3"
-          icon={<IconAssignment />}
+          icon={<IconAssignmentLine />}
           label="Courses"
           href="#"
         />,
         <NavigationItem
           key="4"
-          icon={<IconAnnouncement />}
+          icon={<IconAnnouncementLine />}
           label="Supercalifragilistic"
           href="#"
         />

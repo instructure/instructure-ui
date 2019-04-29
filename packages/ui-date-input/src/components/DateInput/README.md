@@ -207,8 +207,8 @@ class Example extends React.Component {
       size: 'small',
       variant: 'icon',
       icon: type === 'prev'
-        ? <IconArrowOpenStart.Solid color="primary" />
-        : <IconArrowOpenEnd.Solid color="primary" />,
+        ? <IconArrowOpenStartSolid color="primary" />
+        : <IconArrowOpenEndSolid color="primary" />,
       children: (
         <ScreenReaderContent>
           {type === 'prev' ? 'Previous month' : 'Next month'}

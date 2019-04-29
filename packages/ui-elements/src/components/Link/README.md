@@ -54,7 +54,7 @@ example: true
     </Link>
   </View>
   <View as="div">
-    <Link onClick={() => console.log('clicked')} icon={<IconUser.Line size="small" />}>
+    <Link onClick={() => console.log('clicked')} icon={<IconUserLine size="small" />}>
       <TruncateText>{lorem.paragraph()}</TruncateText>
     </Link>
   </View>
@@ -74,12 +74,12 @@ example: true
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" icon={<IconUser.Line size="small" />}>Icon before text</Link>
+    <Link href="https://instructure.design" icon={<IconUserLine size="small" />}>Icon before text</Link>
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
       href="https://instructure.design"
-      icon={<IconUser.Line />}
+      icon={<IconUserLine />}
       iconPlacement="end"
     >
       Icon appears after Link text
@@ -87,7 +87,7 @@ example: true
   </View>
   <View as="div">
     This Link consists of only an icon&nbsp;
-    <Link onClick={() => console.log('clicked!')} icon={IconUser.Line}>
+    <Link onClick={() => console.log('clicked!')} icon={IconUserLine}>
       <ScreenReaderContent>Descriptive text</ScreenReaderContent>
     </Link>.
   </View>

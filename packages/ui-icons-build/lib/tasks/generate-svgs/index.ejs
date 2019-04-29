@@ -1,5 +1,3 @@
 <% _.each(glyphs, function(glyph) { %><% _.each(glyph.variants, function(variant) { %>
 export const <%= glyph.name %><%= variant.name %> = <%= variant.json %>
 <% }); %><% }); %>
-
-export default <%= json %>

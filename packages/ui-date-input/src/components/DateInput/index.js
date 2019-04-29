@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Calendar from '@instructure/ui-calendar/lib/components/Calendar'
-import IconCalendarMonth from '@instructure/ui-icons/lib/Line/IconCalendarMonth'
+import IconCalendarMonthLine from '@instructure/ui-icons/lib/IconCalendarMonthLine'
 import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
 import Selectable from '@instructure/ui-selectable/lib/components/Selectable'
 import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
@@ -378,7 +378,7 @@ class DateInput extends Component {
           readOnly: interaction === 'readonly',
           required: isRequired,
           inline: isInline,
-          renderAfterInput: IconCalendarMonth
+          renderAfterInput: IconCalendarMonthLine
         })}
       />
     )

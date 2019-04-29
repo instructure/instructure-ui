@@ -28,6 +28,7 @@ import PropTypes from 'prop-types'
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+import Link from '@instructure/ui-elements/lib/components/Link'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
@@ -79,6 +80,19 @@ export default class Icons extends Component {
   get selectedFormat () {
     const { formats } = this.props
     return formats[this.selectedFormatKey]
+  }
+
+  get selectedGlyphs () {
+    const glyphs = {}
+
+    Object.keys(this.selectedFormat.glyphs).forEach((glyphName) => {
+      const glyph = this.selectedFormat.glyphs[glyphName]
+
+      glyphs[glyph.glyphName] = glyphs[glyph.glyphName] || {}
+      glyphs[glyph.glyphName][glyph.variant] = glyph
+    })
+
+    return glyphs
   }
 
   handleSearchChange = (e) => this.setState({query: e.target.value})
@@ -182,7 +196,7 @@ class MyIcon extends React.Component {
 }`
     } else if (glyph.displayName) {
       example = `\
-import ${glyph.displayName} from '${requirePath}/${variant}/${glyph.displayName}'
+import ${glyph.displayName} from '${requirePath}/${glyph.displayName}'
 
 class MyIcon extends React.Component {
   render() {
@@ -204,7 +218,7 @@ class MyIcon extends React.Component {
           language="javascript"
           readOnly
         />
-        { glyph.displayName && <p>See the <a href="#SVGIcon">SVGIcon</a> component for props and examples.</p> }
+        { glyph.displayName && <p>See the <Link href="#SVGIcon">SVGIcon</Link> component for props and examples.</p> }
       </div>
     )
   }
@@ -225,14 +239,15 @@ class MyIcon extends React.Component {
 
   render () {
     const { name, variant, glyph } = this.state
+
     return (
       <div className={styles.root}>
         {this.renderHeader()}
         <div className={styles.glyphs}>
           {
-            Object.keys(this.selectedFormat.glyphs)
+            Object.keys(this.selectedGlyphs)
               .filter(name => new RegExp(this.state.query, 'i').test(name))
-              .map(name => this.renderGlyph(name, this.selectedFormat.glyphs[name]))
+              .map(name => this.renderGlyph(name, this.selectedGlyphs[name]))
           }
         </div>
         {this.renderFooter()}
@@ -244,7 +259,6 @@ class MyIcon extends React.Component {
               label={`Usage: ${name} ${variant}`}
               size="medium"
               shouldCloseOnDocumentClick
-              closeButtonLabel="Close"
             >
               <ModalHeader>
                 <CloseButton

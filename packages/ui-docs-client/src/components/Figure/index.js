@@ -31,9 +31,9 @@ import { omitProps } from '@instructure/ui-utils/lib/react/passthroughProps'
 import ComponentIdentifier from '@instructure/ui-utils/lib/react/ComponentIdentifier'
 import { Children } from '@instructure/ui-prop-types'
 
-import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
-import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
-import IconA11y from '@instructure/ui-icons/lib/Solid/IconA11y'
+import IconCheckMarkSolid from '@instructure/ui-icons/lib/IconCheckMarkSolid'
+import IconNoSolid from '@instructure/ui-icons/lib/IconNoSolid'
+import IconA11ySolid from '@instructure/ui-icons/lib/IconA11ySolid'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import List, { ListItem } from '@instructure/ui-elements/lib/components/List'
@@ -70,11 +70,11 @@ export default class Figure extends Component {
 
   get recommendationIcon () {
     if (this.props.recommendation === 'yes') {
-      return IconCheckMark
+      return IconCheckMarkSolid
     } else if (this.props.recommendation === 'no') {
-      return IconNo
+      return IconNoSolid
     } else if (this.props.recommendation === 'a11y') {
-      return IconA11y
+      return IconA11ySolid
     } else {
       return null
     }

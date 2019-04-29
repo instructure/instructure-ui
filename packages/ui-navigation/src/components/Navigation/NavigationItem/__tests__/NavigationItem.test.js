@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { mount, expect, stub } from '@instructure/ui-test-utils'
-import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
+import IconAdminLine from '@instructure/ui-icons/lib/IconAdminLine'
 
 import NavigationItem from '../index'
 import NavigationItemLocator from '../locator'
@@ -33,7 +33,7 @@ describe('<NavigationItem />', async () => {
   it('should render', async () => {
     await mount(
       <NavigationItem
-        icon={<IconAdmin />}
+        icon={<IconAdminLine />}
         label='Admin'
         href='#'
       />
@@ -47,7 +47,7 @@ describe('<NavigationItem />', async () => {
     await mount(
       <div style={{ width: 100 }}>
         <NavigationItem
-          icon={<IconAdmin />}
+          icon={<IconAdminLine />}
           label="Admin"
           onClick={onClick}
           minimized={true}
@@ -64,7 +64,7 @@ describe('<NavigationItem />', async () => {
   it('should meet a11y standards', async () => {
     await mount(
       <NavigationItem
-        icon={<IconAdmin />}
+        icon={<IconAdminLine />}
         label="Dashboard"
         href="#"
       />

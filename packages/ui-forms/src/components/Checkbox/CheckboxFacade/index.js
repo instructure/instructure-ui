@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
-import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
+import IconCheckMarkSolid from '@instructure/ui-icons/lib/IconCheckMarkSolid'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -67,7 +67,7 @@ export default class CheckboxFacade extends Component {
         </SVGIcon>
       )
     } else if (this.props.checked) {
-      return <IconCheckMark inline={false} />
+      return <IconCheckMarkSolid inline={false} />
     } else {
       return null
     }

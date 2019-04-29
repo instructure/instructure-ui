@@ -24,17 +24,17 @@
 
 import React from 'react'
 
-import IconHeart from '@instructure/ui-icons/lib/Line/IconHeart'
-import IconApple from '@instructure/ui-icons/lib/Line/IconApple'
-import IconBank from '@instructure/ui-icons/lib/Line/IconBank'
+import IconHeartLine from '@instructure/ui-icons/lib/IconHeartLine'
+import IconAppleLine from '@instructure/ui-icons/lib/IconAppleLine'
+import IconBankLine from '@instructure/ui-icons/lib/IconBankLine'
 
 import generateMessages from '../../../__tests__/generateMessages'
 
 const getOptions = (withIcon = false) => {
   return [
-    <option key="foo" value="foo" icon={withIcon && IconHeart}>Foo</option>,
-    <option key="bar" value="bar" icon={withIcon && IconApple}>Bar</option>,
-    <option key="baz" value="baz" icon={withIcon && IconBank}>Baz</option>,
+    <option key="foo" value="foo" icon={withIcon && IconHeartLine}>Foo</option>,
+    <option key="bar" value="bar" icon={withIcon && IconAppleLine}>Bar</option>,
+    <option key="baz" value="baz" icon={withIcon && IconBankLine}>Baz</option>,
   ]
 }
 
@@ -53,7 +53,7 @@ export default {
         <optgroup key="two" label="Group Two">
           <option value="item3">Item Three</option>
         </optgroup>,
-        <optgroup key="three" label="Group Three" icon={IconHeart}>
+        <optgroup key="three" label="Group Three" icon={IconHeartLine}>
           <option value="item4">Item Four</option>
           <option value="item5">Item Five</option>
         </optgroup>,

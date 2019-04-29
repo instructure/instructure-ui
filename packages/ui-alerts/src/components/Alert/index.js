@@ -33,10 +33,10 @@ import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import View from '@instructure/ui-layout/lib/components/View'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
-import IconCheckMark from '@instructure/ui-icons/lib/Solid/IconCheckMark'
-import IconInfoBorderless from '@instructure/ui-icons/lib/Solid/IconInfoBorderless'
-import IconWarningBorderless from '@instructure/ui-icons/lib/Solid/IconWarningBorderless'
-import IconNo from '@instructure/ui-icons/lib/Solid/IconNo'
+import IconCheckMarkSolid from '@instructure/ui-icons/lib/IconCheckMarkSolid'
+import IconInfoBorderlessSolid from '@instructure/ui-icons/lib/IconInfoBorderlessSolid'
+import IconWarningBorderlessSolid from '@instructure/ui-icons/lib/IconWarningBorderlessSolid'
+import IconNoSolid from '@instructure/ui-icons/lib/IconNoSolid'
 
 import Transition from '@instructure/ui-motion/lib/components/Transition'
 
@@ -133,19 +133,19 @@ export default class Alert extends Component {
   variantUI () {
     return {
       error: {
-        Icon: IconNo,
+        Icon: IconNoSolid,
         classNames: classNames(styles.alert, styles.error)
       },
       info: {
-        Icon: IconInfoBorderless,
+        Icon: IconInfoBorderlessSolid,
         classNames: classNames(styles.alert, styles.info)
       },
       success: {
-        Icon: IconCheckMark,
+        Icon: IconCheckMarkSolid,
         classNames: classNames(styles.alert, styles.success)
       },
       warning: {
-        Icon: IconWarningBorderless,
+        Icon: IconWarningBorderlessSolid,
         classNames: classNames(styles.alert, styles.warning)
       }
     }[this.props.variant]

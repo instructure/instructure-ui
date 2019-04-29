@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 
-export default class <%= name %> extends Component {
+class <%= name %><%= variant %> extends Component {
   static glyphName = '<%= glyphName %>';
   static variant = '<%= variant %>';
   <% if (deprecated) { %>
@@ -15,7 +15,7 @@ export default class <%= name %> extends Component {
   render () {
     <% if (deprecated) { %>
     if (process.env.NODE_ENV !== 'production') {
-      console.warn('<<%= name %> /> is deprecated. Please use <<%= deprecated %> /> instead.')
+      console.warn('<<%= name %> /><%= variant %> is deprecated. Please use <<%= deprecated %> /> instead.')
     }
     <% } %>
     return (
@@ -32,3 +32,6 @@ export default class <%= name %> extends Component {
     )
   }
 }
+
+export default <%= name %><%= variant %>
+export { <%= name %><%= variant %> }

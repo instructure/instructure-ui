@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import IconBank from '@instructure/ui-icons/lib/Line/IconBank'
+import IconBankLine from '@instructure/ui-icons/lib/IconBankLine'
 
 import { BreadcrumbLink } from '../index'
 
@@ -35,13 +35,13 @@ export default {
         <BreadcrumbLink key="2">Rabbit Is Rich</BreadcrumbLink>
       ],
       [
-        <BreadcrumbLink key="0" onClick={() => {}} icon={IconBank}>
+        <BreadcrumbLink key="0" onClick={() => {}} icon={IconBankLine}>
           Item Bank
         </BreadcrumbLink>,
-        <BreadcrumbLink key="1" href="#" icon={IconBank}>
+        <BreadcrumbLink key="1" href="#" icon={IconBankLine}>
           History
         </BreadcrumbLink>,
-        <BreadcrumbLink key="2" icon={IconBank}>
+        <BreadcrumbLink key="2" icon={IconBankLine}>
           Question
         </BreadcrumbLink>
       ]

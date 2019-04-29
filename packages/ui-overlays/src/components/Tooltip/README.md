@@ -55,7 +55,7 @@ example: true
       placement="start"
       on={['click', 'hover', 'focus']}
     >
-      <Button variant="icon" icon={IconInfo.Line}>
+      <Button variant="icon" icon={IconInfoLine}>
         <ScreenReaderContent>toggle tooltip</ScreenReaderContent>
       </Button>
     </Tooltip>

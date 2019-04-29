@@ -24,7 +24,7 @@
 
 import React from 'react'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
+import IconTrashSolid from '@instructure/ui-icons/lib/IconTrashSolid'
 
 const iconButton = (props) => {
   return props.variant && (props.variant.includes('icon') || props.variant.includes('circle'))
@@ -33,7 +33,7 @@ const iconButton = (props) => {
 export default {
   sectionProp: 'variant',
   propValues: {
-    icon: [null, IconTrash]
+    icon: [null, IconTrashSolid]
   },
   getComponentProps: (props) => {
     return {

@@ -29,8 +29,8 @@ import keycode from 'keycode'
 
 import FormField from '@instructure/ui-form-field/lib/components/FormField'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
-import IconArrowOpenDown from '@instructure/ui-icons/lib/Line/IconArrowOpenDown'
-import IconArrowOpenUp from '@instructure/ui-icons/lib/Line/IconArrowOpenUp'
+import IconArrowOpenDownLine from '@instructure/ui-icons/lib/IconArrowOpenDownLine'
+import IconArrowOpenUpLine from '@instructure/ui-icons/lib/IconArrowOpenUpLine'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
@@ -208,7 +208,7 @@ export default class NumberInput extends Component {
           onMouseDown={this.handleClickUpArrow}
           tabIndex="-1"
         >
-          <IconArrowOpenUp />
+          <IconArrowOpenUpLine />
         </button>
         <button
           aria-hidden
@@ -216,7 +216,7 @@ export default class NumberInput extends Component {
           onMouseDown={this.handleClickDownArrow}
           tabIndex="-1"
         >
-          <IconArrowOpenDown />
+          <IconArrowOpenDownLine />
         </button>
       </span>
     )

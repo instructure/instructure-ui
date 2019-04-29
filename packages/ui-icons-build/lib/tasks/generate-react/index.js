@@ -69,28 +69,7 @@ const createMainIndexTask = function () {
 }
 
 gulp.task('generate-react-index-files', () => {
-  const tasks = readDirectories(config.react.source)
-    .map((variant) => {
-      const destination = path.join(config.react.destination, variant)
-
-      const glyphs = Object.keys(GLYPHS)
-        .map((name) => {
-          const glyph = Object.assign({ name }, GLYPHS[name][variant])
-          glyph.variant = variant
-          glyph.path = path.relative(destination, glyph.path)
-          return glyph
-        })
-
-      return gulp.src(require.resolve('./variant.ejs'))
-        .pipe(consolidate(
-          'lodash',
-          { glyphs }
-        ))
-        .pipe(rename({ basename: 'index', extname: '.js' }))
-        .on('error', handleErrors)
-        .pipe(gulp.dest(destination))
-    })
-  return merge(createMainIndexTask(), ...tasks)
+  return createMainIndexTask()
 })
 
 gulp.task('generate-react-svg-data', () => {
@@ -113,7 +92,7 @@ gulp.task('generate-react-svg-data', () => {
               variant,
               deprecated: toComponentName(deprecated[baseName]),
               bidirectional: bidirectional.indexOf(baseName) !== -1,
-              path: path.join(config.react.destination, variant, name),
+              path: path.join(config.react.destination, name + variant),
               viewBox: $svg.attr('viewBox'), // we only care about the viewBox attr
               source: svgtojsx($svg.html())
             }
@@ -139,9 +118,9 @@ gulp.task('generate-react-components', () => {
             tasks.push(
               gulp.src(require.resolve('./component.ejs'))
                 .pipe(consolidate('lodash', data))
-                .pipe(rename({ basename: data.name, extname: '.js' }))
+                .pipe(rename({ basename: data.name + data.variant, extname: '.js' }))
                 .on('error', handleErrors)
-                .pipe(gulp.dest(path.join(config.react.destination, data.variant)))
+                .pipe(gulp.dest(config.react.destination))
             )
           })
       })

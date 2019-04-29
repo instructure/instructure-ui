@@ -37,7 +37,7 @@ class Example extends React.Component {
         <FlexItem>
           <Button
             variant="icon"
-            icon={IconX.Line}
+            icon={IconXLine}
             onClick={this.hideTray}
           >
             <ScreenReaderContent>Close</ScreenReaderContent>

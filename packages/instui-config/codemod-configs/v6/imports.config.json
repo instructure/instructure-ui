@@ -270,5 +270,9 @@
   {
     "pattern": "^@instructure/ui-forms/lib/utils/FormPropTypes",
     "replace": "@instructure/ui-form-field/utils/FormPropTypes"
+  },
+  {
+    "pattern": "^@instructure\/ui-icons\/lib\/(Line|Solid)\/(.*)$",
+    "replace": "@instructure/ui-icons/lib/$2$1"
   }
 ]

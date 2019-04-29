@@ -67,6 +67,7 @@ module.exports = [
     ignore: [
       '*macro.js',
       '**/*-loader.js',
+      '**/svg/README.md',
       '**/packages/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
@@ -105,7 +106,7 @@ module.exports = [
     icons: {
       packageName: '@instructure/ui-icons',
       formats: {
-        React: '@instructure/ui-icons/lib',
+        React: '@instructure/ui-icons',
         SVG: '@instructure/ui-icons/lib/svg',
         Font: '@instructure/ui-icons/lib/font'
       }

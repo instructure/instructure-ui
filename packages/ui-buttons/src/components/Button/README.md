@@ -71,10 +71,10 @@ if there is no visible text on the Button. **Please do not add icons as children
 example: true
 ---
 <div>
-  <Button margin="0 x-small 0 0" icon={IconPlus.Line}>
+  <Button margin="0 x-small 0 0" icon={IconPlusLine}>
     Button Label
   </Button>
-  <Button margin="0 x-small 0 0" icon={IconUser.Line}>
+  <Button margin="0 x-small 0 0" icon={IconUserLine}>
     <ScreenReaderContent>Accessible Button Label</ScreenReaderContent>
   </Button>
 </div>
@@ -87,16 +87,16 @@ The following Button variants should only be used with a single icon.
 example: true
 ---
 <div>
-  <Button variant="icon" margin="0 x-small 0 0" icon={IconPlus.Line}>
+  <Button variant="icon" margin="0 x-small 0 0" icon={IconPlusLine}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
-  <Button variant="circle-default" margin="0 x-small 0 0" icon={IconPlus.Line}>
+  <Button variant="circle-default" margin="0 x-small 0 0" icon={IconPlusLine}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
-  <Button variant="circle-primary" margin="0 x-small 0 0" icon={IconPlus.Solid}>
+  <Button variant="circle-primary" margin="0 x-small 0 0" icon={IconPlusSolid}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
-  <Button variant="circle-danger" icon={IconX.Solid}>
+  <Button variant="circle-danger" icon={IconXSolid}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
 </div>
@@ -111,7 +111,7 @@ background: 'checkerboard-inverse'
 ---
 <div>
   <Button variant="ghost-inverse" margin="0 x-small 0 0">Ghost Button</Button>
-  <Button variant="icon-inverse" icon={IconUser.Solid}>
+  <Button variant="icon-inverse" icon={IconUserSolid}>
     <ScreenReaderContent>Accessible button label</ScreenReaderContent>
   </Button>
   <Button variant="link-inverse">Link Button</Button>
@@ -141,7 +141,7 @@ and wrap the text.
 example: true
 ---
 <View as="div" width="10rem">
-  <Button fluidWidth icon={IconUser.Line}>20 Characters Max</Button>
+  <Button fluidWidth icon={IconUserLine}>20 Characters Max</Button>
 </View>
 ```
 
@@ -168,7 +168,7 @@ example: true
     return (
       <View borderWidth="small" background="default" padding="small" as="div">
         <Text as="div">The <code>fullButton</code> query is <b>{fullButton ? 'true' : 'false'}</b>.</Text>
-        <Button icon={IconUser.Line} margin="small 0 0">
+        <Button icon={IconUserLine} margin="small 0 0">
           {(fullButton) ? text : <ScreenReaderContent>{text}</ScreenReaderContent>}
         </Button>
       </View>
@@ -186,7 +186,7 @@ cursor, pass a `cursor` prop.
 ---
 example: true
 ---
-<Button cursor="move" icon={IconDragHandle.Line}>
+<Button cursor="move" icon={IconDragHandleLine}>
   Move Me
 </Button>
 ```

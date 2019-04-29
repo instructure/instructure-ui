@@ -35,8 +35,8 @@ import isActiveElement from '@instructure/ui-utils/lib/dom/isActiveElement'
 
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import View from '@instructure/ui-layout/lib/components/View'
-import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
-import IconArrowOpenDown from '@instructure/ui-icons/lib/Solid/IconArrowOpenDown'
+import IconArrowOpenEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
+import IconArrowOpenDownSolid from '@instructure/ui-icons/lib/IconArrowOpenDownSolid'
 import testable from '@instructure/ui-testable'
 
 import Expandable from '../Expandable'
@@ -111,8 +111,8 @@ class ToggleGroup extends Component {
   static defaultProps = {
     expanded: undefined,
     size: 'medium',
-    icon: IconArrowOpenEnd,
-    iconExpanded: IconArrowOpenDown,
+    icon: IconArrowOpenEndSolid,
+    iconExpanded: IconArrowOpenDownSolid,
     defaultExpanded: false,
     onToggle: function (event, expanded) {},
     transition: true,

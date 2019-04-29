@@ -75,9 +75,9 @@ You can include icons in `BreadcrumbLink`:
 example: true
 ---
 <Breadcrumb label="Breadcrumb with icons">
-  <BreadcrumbLink icon={<IconBank.Line size="small" />} href="#Breadcrumb">Item Bank</BreadcrumbLink>
-  <BreadcrumbLink icon={<IconClock.Line size="small" />} onClick={() => {}}>History</BreadcrumbLink>
-  <BreadcrumbLink icon={IconPlus.Line} iconPlacement="end">New Question</BreadcrumbLink>
+  <BreadcrumbLink icon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</BreadcrumbLink>
+  <BreadcrumbLink icon={<IconClockLine size="small" />} onClick={() => {}}>History</BreadcrumbLink>
+  <BreadcrumbLink icon={IconPlusLine} iconPlacement="end">New Question</BreadcrumbLink>
 </Breadcrumb>
 ```
 

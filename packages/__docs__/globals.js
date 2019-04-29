@@ -34,7 +34,6 @@ import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirr
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')
 
-import { default as Icons } from '@instructure/ui-icons'
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
@@ -48,7 +47,6 @@ import placeholderImage from './placeholder-image'
 import placeholderLogo from './placeholder-logo'
 
 const globals = {
-  ...Icons,
   ...Components,
   moment,
   locales: moment.locales(),

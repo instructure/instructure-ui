@@ -146,10 +146,10 @@ example: true
 ---
 <div>
   <Button margin="small">Default Button</Button>
-  <Button margin="small" icon={IconPlus.Solid}>
+  <Button margin="small" icon={IconPlusSolid}>
     <ScreenReaderContent>Default Button</ScreenReaderContent>
   </Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="circle-default" >
+  <Button margin="small" icon={IconPlusSolid} variant="circle-default" >
     <ScreenReaderContent>Default Button</ScreenReaderContent>
   </Button>
 </div>
@@ -162,10 +162,10 @@ example: true
 ---
 <div>
   <Button margin="small" variant="primary">Primary Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="primary">
+  <Button margin="small" icon={IconPlusSolid} variant="primary">
     <ScreenReaderContent>Primary Button</ScreenReaderContent>
   </Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="circle-primary" >
+  <Button margin="small" icon={IconPlusSolid} variant="circle-primary" >
     <ScreenReaderContent>Primary Button</ScreenReaderContent>
   </Button>
 </div>
@@ -178,10 +178,10 @@ example: true
 ---
 <div>
   <Button margin="small" variant="danger">Danger Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="danger">
+  <Button margin="small" icon={IconPlusSolid} variant="danger">
     <ScreenReaderContent>Danger Button</ScreenReaderContent>
   </Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="circle-danger" >
+  <Button margin="small" icon={IconPlusSolid} variant="circle-danger" >
     <ScreenReaderContent>Danger Button</ScreenReaderContent>
   </Button>
 </div>
@@ -194,7 +194,7 @@ example: true
 ---
 <div>
   <Button margin="small" variant="success">Success Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="success">
+  <Button margin="small" icon={IconPlusSolid} variant="success">
     <ScreenReaderContent>Success Button</ScreenReaderContent>
   </Button>
 </div>
@@ -207,7 +207,7 @@ example: true
 ---
 <div>
   <Button margin="small" variant="light">Light Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="light">
+  <Button margin="small" icon={IconPlusSolid} variant="light">
     <ScreenReaderContent>Light Button</ScreenReaderContent>
   </Button>
 </div>
@@ -220,7 +220,7 @@ example: true
 ---
 <div>
   <Button margin="small" variant="link">Link Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="icon">
+  <Button margin="small" icon={IconPlusSolid} variant="icon">
     <ScreenReaderContent>Link Button</ScreenReaderContent>
   </Button>
 </div>
@@ -234,7 +234,7 @@ inverse: true
 ---
 <div>
   <Button margin="small" variant="link-inverse">Inverse Link Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="icon-inverse">
+  <Button margin="small" icon={IconPlusSolid} variant="icon-inverse">
     <ScreenReaderContent>Inverse Link Button</ScreenReaderContent>
   </Button>
 </div>
@@ -247,7 +247,7 @@ example: true
 ---
 <div>
   <Button margin="small" variant="ghost">Ghost Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="ghost">
+  <Button margin="small" icon={IconPlusSolid} variant="ghost">
     <ScreenReaderContent>Ghost Button</ScreenReaderContent>
   </Button>
 </div>
@@ -261,7 +261,7 @@ inverse: true
 ---
 <div>
   <Button margin="small" variant="ghost-inverse">Inverse Ghost Button</Button>
-  <Button margin="small" icon={IconPlus.Solid} variant="ghost-inverse">
+  <Button margin="small" icon={IconPlusSolid} variant="ghost-inverse">
     <ScreenReaderContent>Inverse Ghost Button</ScreenReaderContent>
   </Button>
 </div>

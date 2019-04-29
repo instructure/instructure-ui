@@ -33,7 +33,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStart.Line}
+        icon={IconArrowOpenStartLine}
       >
         <ScreenReaderContent>Back to Page One</ScreenReaderContent>
       </Button>
@@ -122,7 +122,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={navigateToPreviousPage}
-        icon={IconArrowStart.Line}
+        icon={IconArrowStartLine}
       >
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
@@ -314,7 +314,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={navigateToPreviousPage}
-        icon={IconArrowOpenStart.Line}
+        icon={IconArrowOpenStartLine}
       >
         <ScreenReaderContent>Back</ScreenReaderContent>
       </Button>
@@ -326,7 +326,7 @@ class Example extends React.Component {
       <Button
         variant="icon"
         onClick={this.hidePopover}
-        icon={IconX.Line}
+        icon={IconXLine}
       >
         <ScreenReaderContent>Close</ScreenReaderContent>
       </Button>

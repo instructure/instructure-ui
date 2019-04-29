@@ -244,8 +244,8 @@ example: true
   padding="x-small"
 >
   <Select label="Icon select">
-    <option value="foo" icon={IconUser.Line}>Foo</option>
-    <option value="bar" icon={IconUser.Line}>Bar</option>
+    <option value="foo" icon={IconUserLine}>Foo</option>
+    <option value="bar" icon={IconUserLine}>Bar</option>
   </Select>
 </View>
 ```
@@ -268,9 +268,9 @@ example: true
     <optgroup label="Group Two" value="group-2">
       <option value="item3">Item Three</option>
     </optgroup>
-    <optgroup label="Group With an Icon" icon={IconUser.Solid}>
-      <option value="item5" icon={IconUser.Solid}>Item Five</option>
-      <option value="item6" icon={IconUser.Solid}>Item Six</option>
+    <optgroup label="Group With an Icon" icon={IconUserSolid}>
+      <option value="item5" icon={IconUserSolid}>Item Five</option>
+      <option value="item6" icon={IconUserSolid}>Item Six</option>
     </optgroup>
   </Select>
 

@@ -24,8 +24,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import IconStar from '@instructure/ui-icons/lib/Solid/IconStar'
-import IconStarLight from '@instructure/ui-icons/lib/Solid/IconStarLight'
+import IconStarSolid from '@instructure/ui-icons/lib/IconStarSolid'
+import IconStarLightSolid from '@instructure/ui-icons/lib/IconStarLightSolid'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
@@ -109,7 +109,7 @@ export default class RatingIcon extends Component {
       [styles.empty]: !this.state.filled
     }
 
-    const Icon = this.state.filled ? IconStar : IconStarLight
+    const Icon = this.state.filled ? IconStarSolid : IconStarLightSolid
 
     return (
       <span className={classnames(classes)}>

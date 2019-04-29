@@ -25,7 +25,7 @@
 import React from 'react'
 import { mount, expect, stub, generateA11yTests } from '@instructure/ui-test-utils'
 import View from '@instructure/ui-layout/lib/components/View'
-import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
+import IconTrashSolid from '@instructure/ui-icons/lib/IconTrashSolid'
 import Button from '../index'
 import ButtonLocator from '../locator'
 import ButtonExamples from '../__examples__/Button.examples'
@@ -103,7 +103,7 @@ describe('<Button/>', async () => {
 
   it('should pass down an icon via the icon property', async () => {
     await mount(
-      <Button icon={IconTrash}>Hello World</Button>
+      <Button icon={IconTrashSolid}>Hello World</Button>
     )
     const button = await ButtonLocator.find()
     const icon = await button.find('svg[name]')

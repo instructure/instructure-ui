@@ -37,8 +37,8 @@ import Mask from '@instructure/ui-overlays/lib/components/Mask'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Pill from '@instructure/ui-elements/lib/components/Pill'
 
-import IconHeart from '@instructure/ui-icons/lib/Solid/IconHeart'
-import IconGithub from '@instructure/ui-icons/lib/Solid/IconGithub'
+import IconHeartSolid from '@instructure/ui-icons/lib/IconHeartSolid'
+import IconGithubSolid from '@instructure/ui-icons/lib/IconGithubSolid'
 
 import Document from '../Document'
 import Header from '../Header'
@@ -288,13 +288,13 @@ export default class App extends Component {
         { author && (
           <span>
             Made with &nbsp;
-            <IconHeart className={styles.footerIcon} />
+            <IconHeartSolid className={styles.footerIcon} />
             &nbsp; by {author}. &nbsp;
           </span>
         ) }
         { repository && (
           <a href={repository} rel="noopener noreferrer" className={styles.githubLink} target="_blank">
-            <IconGithub className={styles.footerIcon} />
+            <IconGithubSolid className={styles.footerIcon} />
             <ScreenReaderContent>Contribute on Github</ScreenReaderContent>
           </a>
         ) }

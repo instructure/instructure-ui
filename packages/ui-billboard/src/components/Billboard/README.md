@@ -41,7 +41,7 @@ example: true
     onClick={function () {
       alert('This Billboard was clicked!')
     }}
-    hero={(size) => <IconUser.Line size={size} />}
+    hero={(size) => <IconUserLine size={size} />}
   />
 </View>
 ```
@@ -54,7 +54,7 @@ example: true
     margin="large"
     message="Click this link"
     href="http://instructure.com"
-    hero={(size) => <IconGradebook.Line size={size} />}
+    hero={(size) => <IconGradebookLine size={size} />}
   />
 </View>
 ```
@@ -69,7 +69,7 @@ example: true
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconPlus.Line size={size} />}
+  hero={(size) => <IconPlusLine size={size} />}
 />
 ```
 
@@ -85,7 +85,7 @@ example: true
   onClick={function () {
     alert('This Billboard was clicked!')
   }}
-  hero={(size) => <IconUser.Line size={size} />}
+  hero={(size) => <IconUserLine size={size} />}
   disabled
 />
 ```

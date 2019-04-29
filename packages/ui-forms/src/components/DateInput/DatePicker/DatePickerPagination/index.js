@@ -27,8 +27,8 @@ import PropTypes from 'prop-types'
 
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import IconArrowOpenStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
-import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
+import IconArrowOpenStartSolid from '@instructure/ui-icons/lib/IconArrowOpenStartSolid'
+import IconArrowOpenEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
 import themeable from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -68,7 +68,7 @@ export default class DatePickerPagination extends Component {
           variant="icon"
           onClick={this.handlePrevClick}
           icon={
-            <IconArrowOpenStart className={styles.arrowIcon} />
+            <IconArrowOpenStartSolid className={styles.arrowIcon} />
           }
         >
           <ScreenReaderContent>{this.props.previousLabel}</ScreenReaderContent>
@@ -78,7 +78,7 @@ export default class DatePickerPagination extends Component {
           variant="icon"
           onClick={this.handleNextClick}
           icon={
-            <IconArrowOpenEnd className={styles.arrowIcon} />
+            <IconArrowOpenEndSolid className={styles.arrowIcon} />
           }
         >
           <ScreenReaderContent>{this.props.nextLabel}</ScreenReaderContent>

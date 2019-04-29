@@ -98,7 +98,7 @@ export default class Glyph extends Component {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`
     } else if (glyph.displayName) {
-      return `<${glyph.displayName}/>`
+      return glyph.glyphName
     }
   }
 

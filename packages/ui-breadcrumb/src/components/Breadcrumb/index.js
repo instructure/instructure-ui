@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/components/View'
-import IconArrowOpenEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
+import IconArrowOpenEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { Children } from '@instructure/ui-prop-types'
@@ -84,7 +84,7 @@ export default class Breadcrumb extends Component {
         return (
           <li className={styles.crumb} style={style}>
             {child}
-            {index < (numChildren - 1) && <IconArrowOpenEnd className={styles.separator} />}
+            {index < (numChildren - 1) && <IconArrowOpenEndSolid className={styles.separator} />}
           </li>
         )
       }

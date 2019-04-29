@@ -47,7 +47,7 @@ class Example extends React.Component {
   render () {
     return (
       <div>
-        <Button icon={IconTrash.Line} onClick={this.handleButtonClick}>
+        <Button icon={IconTrashLine} onClick={this.handleButtonClick}>
           <ScreenReaderContent>Delete the Assignment</ScreenReaderContent>
         </Button>
         <Modal

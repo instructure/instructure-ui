@@ -29,8 +29,8 @@ import PresentationContent from '@instructure/ui-a11y/lib/components/Presentatio
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 
-import IconStart from '@instructure/ui-icons/lib/Solid/IconArrowOpenStart'
-import IconEnd from '@instructure/ui-icons/lib/Solid/IconArrowOpenEnd'
+import IconStartSolid from '@instructure/ui-icons/lib/IconArrowOpenStartSolid'
+import IconEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
 
 import testable from '@instructure/ui-testable'
 /**
@@ -51,7 +51,7 @@ export default class PaginationArrowButton extends Component {
 
   render() {
     const { label, direction, ...props } = this.props
-    const Icon = direction === 'prev' ? IconStart : IconEnd
+    const Icon = direction === 'prev' ? IconStartSolid : IconEndSolid
     return (
       <Tooltip
         on={['hover', 'focus']}

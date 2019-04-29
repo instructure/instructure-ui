@@ -96,7 +96,7 @@ function parseIcons (icons = {}) {
     return `\
 'icons-${format.toLowerCase()}': {
   format: '${format}',
-  glyphs: require('${requirePath}').default,
+  glyphs: require('${requirePath}'),
   requirePath: '${requirePath}'
 }`
   })

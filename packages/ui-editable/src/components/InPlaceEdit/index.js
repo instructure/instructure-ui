@@ -28,7 +28,7 @@ import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
 import { FocusableView } from '@instructure/ui-focusable/lib/components/Focusable'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
-import IconEdit from '@instructure/ui-icons/lib/Line/IconEdit'
+import IconEditLine from '@instructure/ui-icons/lib/IconEditLine'
 import { warn } from '@instructure/console/macro'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
@@ -167,7 +167,7 @@ export default class InPlaceEdit extends Component {
       <Button
         size="small"
         variant="icon"
-        icon={isVisible ? IconEdit : null}
+        icon={isVisible ? IconEditLine : null}
         {...buttonProps}
       >
         <ScreenReaderContent>{label}</ScreenReaderContent>

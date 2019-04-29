@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import IconTrash from '@instructure/ui-icons/lib/Solid/IconTrash'
+import IconTrashSolid from '@instructure/ui-icons/lib/IconTrashSolid'
 const longString = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat'
 const shortString = 'Delete'
 
@@ -33,7 +33,7 @@ export default {
       longString
     ],
     iconPlacement: [null, 'start', 'end'],
-    icon: [null, IconTrash]
+    icon: [null, IconTrashSolid]
   },
   getComponentProps: (props) => {
     return {

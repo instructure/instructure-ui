@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
 
 import View from '@instructure/ui-layout/lib/components/View'
 
@@ -159,7 +159,7 @@ class Tag extends Component {
           {text}
         </span>
         {(onClick && dismissible)
-          ? <IconX className={styles.icon} /> : null
+          ? <IconXSolid className={styles.icon} /> : null
         }
       </View>
     )

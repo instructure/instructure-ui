@@ -25,8 +25,8 @@
 import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
 import Badge from '@instructure/ui-elements/lib/components/Badge'
-import IconAdmin from '@instructure/ui-icons/lib/Line/IconAdmin'
-import IconDashboard from '@instructure/ui-icons/lib/Line/IconDashboard'
+import IconAdminLine from '@instructure/ui-icons/lib/IconAdminLine'
+import IconDashboardLine from '@instructure/ui-icons/lib/IconDashboardLine'
 
 import Navigation, { NavigationItem } from '../index'
 import NavigationLocator from '../locator'
@@ -42,7 +42,7 @@ describe('<Navigation />', async () => {
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
@@ -61,7 +61,7 @@ describe('<Navigation />', async () => {
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
@@ -79,12 +79,12 @@ describe('<Navigation />', async () => {
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdmin /></Badge>}
+          icon={<Badge count={99}><IconAdminLine /></Badge>}
           label="Inbox"
           href="#"
         />
@@ -106,12 +106,12 @@ describe('<Navigation />', async () => {
           expandedLabel: 'Minimize Navigation',
           minimizedLabel: 'Expand Navigation'}}>
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdmin /></Badge>}
+          icon={<Badge count={99}><IconAdminLine /></Badge>}
           label="Inbox"
           href="#"
         />
@@ -133,12 +133,12 @@ describe('<Navigation />', async () => {
           minimizedLabel: 'Expand Navigation'}}
         >
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdmin /></Badge>}
+          icon={<Badge count={99}><IconAdminLine /></Badge>}
           label="Inbox"
           href="#"
         />
@@ -159,12 +159,12 @@ describe('<Navigation />', async () => {
           minimizedLabel: 'Expand Navigation'}}
         >
         <NavigationItem
-          icon={<IconDashboard />}
+          icon={<IconDashboardLine />}
           label="Dashboard"
           href="#"
         />
         <NavigationItem
-          icon={<Badge count={99}><IconAdmin /></Badge>}
+          icon={<Badge count={99}><IconAdminLine /></Badge>}
           label="Inbox"
           href="#"
         />

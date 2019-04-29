@@ -269,7 +269,7 @@ class Example extends React.Component {
               <FlexItem>
                 <Button
                   variant="icon-inverse"
-                  icon={IconX.Solid}
+                  icon={IconXSolid}
                   onClick={this.handleButtonClick}
                 >
                   <ScreenReaderContent>Close</ScreenReaderContent>
@@ -387,13 +387,13 @@ class Example extends React.Component {
                 </Flex>
               </FlexItem>
               <FlexItem>
-                <Button variant="icon-inverse" icon={IconPrinter.Solid} margin="0 x-small">
+                <Button variant="icon-inverse" icon={IconPrinterSolid} margin="0 x-small">
                   <ScreenReaderContent>Print This</ScreenReaderContent>
                 </Button>
-                <Button variant="icon-inverse" icon={IconDownload.Solid} margin="0 x-small 0 0">
+                <Button variant="icon-inverse" icon={IconDownloadSolid} margin="0 x-small 0 0">
                   <ScreenReaderContent>Download This</ScreenReaderContent>
                 </Button>
-                <Button variant="icon-inverse" icon={IconX.Solid}
+                <Button variant="icon-inverse" icon={IconXSolid}
                   onClick={this.handleButtonClick}
                 >
                   <ScreenReaderContent>Close</ScreenReaderContent>

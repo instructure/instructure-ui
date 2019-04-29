@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import IconX from '@instructure/ui-icons/lib/Solid/IconX'
+import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
 
 import testable from '@instructure/ui-testable'
@@ -80,7 +80,7 @@ class CloseButton extends Component {
           [styles[`offset--${offset}`]]: offset
         })}
       >
-        <Button {...pickProps(this.props, Button.propTypes)} icon={IconX}>
+        <Button {...pickProps(this.props, Button.propTypes)} icon={IconXSolid}>
           <ScreenReaderContent>
             {this.props.children}
           </ScreenReaderContent>
