@@ -22,20 +22,28 @@
  * SOFTWARE.
  */
 
-import { registerTheme } from '@instructure/ui-themeable/lib/registry'
-import KEYS from '../../keys'
 
-import colors from './colors'
-import { baseVariables } from '../base'
+const onePixel = 0.0625
 
-export const variables = {
-  ...baseVariables,
-  colors
+// base = 16px
+const values = {
+  xxSmall: 8, // 128px
+  xSmall: 16, // 256px
+  small: 30, // 480px
+  medium: 48, // 768px
+  large: 62, // 992px
+  xLarge: 75 // 1200px
 }
 
-export default registerTheme({
-  key: KEYS.CANVAS_HIGH_CONTRAST,
-  immutable: false,
-  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
-  variables
+const breakpoints = Object.freeze({
+  xxSmall: `${values.xxSmall}em`,
+  xSmall: `${values.xSmall}em`,
+  small: `${values.small}em`,
+  medium: `${values.medium}em`,
+  large: `${values.large}em`,
+  xLarge: `${values.xLarge}em`,
+  maxWidth: `${values.large - onePixel}em`
 })
+
+export default breakpoints
+export { breakpoints }

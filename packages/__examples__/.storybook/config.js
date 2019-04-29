@@ -31,7 +31,7 @@ import 'storybook-chromatic'
 import { create } from '@storybook/theming'
 import { getStorybook, storiesOf, configure, addParameters } from '@storybook/react'
 
-import theme from '@instructure/ui-themes/lib/canvas'
+import { theme } from '@instructure/canvas-theme'
 theme.use({ overrides: { transitions: { duration: '0ms' } } })
 
 // eslint-disable-next-line no-console

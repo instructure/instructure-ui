@@ -22,27 +22,24 @@
  * SOFTWARE.
  */
 
-export default Object.freeze({
-  fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
-  fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 
-  fontSizeXSmall: '0.75rem', // 12px
-  fontSizeSmall: '0.875rem', // 14px
-  fontSizeMedium: '1rem', // 16px
-  fontSizeLarge: '1.375rem', // 22px
-  fontSizeXLarge: '1.75rem',  // 28px
-  fontSizeXXLarge: '2.375rem', // 38px
+// use for consistent box shadows
 
-  fontWeightLight: 300,
-  fontWeightNormal: 400,
-  fontWeightBold: 700,
+const values = [
+  '0 0.0625rem 0.125rem rgba(0, 0, 0, 0.2), 0 0.0625rem 0.1875rem rgba(0, 0, 0, 0.1)',
+  '0 0.1875rem 0.375rem rgba(0, 0, 0, 0.1), 0 0.1875rem 0.375rem rgba(0, 0, 0, 0.16)',
+  '0 0.375rem 0.4375rem rgba(0, 0, 0, 0.1), 0 0.625rem 1.75rem rgba(0, 0, 0, 0.25)',
+]
 
-  lineHeight: 1.5, // 24px
-  lineHeightFit: 1.125,
-  lineHeightCondensed: 1.25,
-  lineHeightDouble: 2,
+const shadows = Object.freeze({
+  depth1: values[0],
+  depth2: values[1],
+  depth3: values[2],
 
-  letterSpacingNormal: 0,
-  letterSpacingCondensed: '-0.0625rem',
-  letterSpacingExpanded: '0.0625rem'
+  resting: values[0],
+  above: values[1],
+  topmost: values[2]
 })
+
+export default shadows
+export { shadows }

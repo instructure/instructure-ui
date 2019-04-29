@@ -22,17 +22,13 @@
  * SOFTWARE.
  */
 
-import { registerTheme } from '@instructure/ui-themeable/lib/registry'
-
-import highContrastTheme from './high-contrast'
-import { key, variables } from './base'
-
-const theme = registerTheme({
-  key,
-  variables,
-  a11y: { key: highContrastTheme.key }
-})
-
-theme.use()
-
-export default theme
+ module.exports = {
+   presets: [[
+     require('@instructure/ui-babel-preset'),
+     {
+      coverage: Boolean(process.env.COVERAGE),
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: process.env.NODE_ENV === 'production'
+     }
+   ]]
+ }

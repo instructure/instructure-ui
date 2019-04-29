@@ -84,8 +84,8 @@ function parseThemes (themes = [], options) {
     const themePath = path.resolve(options.projectRoot, theme)
     const pathInfo = getPathInfo(themePath, options, options.context)
     return `{
-        resource: require('${path.resolve(options.context, themePath)}').default,
-        requirePath: '${pathInfo.requirePath}'
+        resource: require('${path.resolve(options.context, themePath)}').theme,
+        requirePath: '${pathInfo.packageName}'
       }`
   })
 }

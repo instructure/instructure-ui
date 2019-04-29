@@ -100,8 +100,8 @@ module.exports = [
       '**/generate-examples/**'
     ],
     themes: [
-      require.resolve('@instructure/ui-themes/lib/canvas/base'),
-      require.resolve('@instructure/ui-themes/lib/canvas/high-contrast')
+      require.resolve('@instructure/canvas-theme'),
+      require.resolve('@instructure/canvas-high-contrast-theme')
     ],
     icons: {
       packageName: '@instructure/ui-icons',

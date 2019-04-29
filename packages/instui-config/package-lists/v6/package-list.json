@@ -1,6 +1,8 @@
 [
  "@instructure/babel-plugin-themeable-styles",
  "@instructure/babel-plugin-transform-class-display-name",
+ "@instructure/canvas-high-contrast-theme",
+ "@instructure/canvas-theme",
  "@instructure/command-utils",
  "@instructure/config-loader",
  "@instructure/console",

@@ -22,9 +22,8 @@
  * SOFTWARE.
  */
 require('@instructure/ui-polyfill-loader!')
-require('@instructure/ui-themes/lib/canvas/high-contrast')
 
-const theme = require('@instructure/ui-themes/lib/canvas/base').default
-theme.use({ overrides: { transitions: { duration: '1ms' } } })
+const { canvas } = require('@instructure/ui-themes')
+canvas.use({ overrides: { transitions: { duration: '1ms' } } })
 
 require('ui-tests-loader!')

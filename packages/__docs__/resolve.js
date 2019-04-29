@@ -58,7 +58,8 @@ module.exports = {
     '@instructure/ui-toggle-details$': path.resolve(__dirname, '../ui-toggle-details/src/'),
     '@instructure/ui-tree-browser$': path.resolve(__dirname, '../ui-tree-browser/src/'),
     '@instructure/ui-utils$': path.resolve(__dirname, '../ui-utils/src/'),
-    '@instructure/ui-themes$': path.resolve(__dirname, '../ui-themes/src/'),
+    '@instructure/canvas-theme$': path.resolve(__dirname, '../canvas-theme/src/'),
+    '@instructure/canvas-high-contrast-theme$': path.resolve(__dirname, '../canvas-high-contrast-theme/src/'),
     '@instructure/ui-themeable$': path.resolve(__dirname, '../ui-themeable/src/'),
 
     '@instructure/ui-a11y/lib': path.resolve(__dirname, '../ui-a11y/src'),
@@ -92,7 +93,6 @@ module.exports = {
     '@instructure/ui-toggle-details/lib': path.resolve(__dirname, '../ui-toggle-details/src'),
     '@instructure/ui-tree-browser/lib': path.resolve(__dirname, '../ui-tree-browser/src'),
     '@instructure/ui-utils/lib': path.resolve(__dirname, '../ui-utils/src'),
-    '@instructure/ui-themes/lib': path.resolve(__dirname, '../ui-themes/src'),
     '@instructure/ui-themeable/lib': path.resolve(__dirname, '../ui-themeable/src')
   }
 }

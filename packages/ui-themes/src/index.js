@@ -22,8 +22,8 @@
  * SOFTWARE.
  */
 
-import { getRegisteredThemes } from '@instructure/ui-themeable/lib/registry'
+import { theme as canvasHighContrast } from '@instructure/canvas-high-contrast-theme'
+import { theme as canvas } from '@instructure/canvas-theme'
 
-export default getRegisteredThemes()
-
-export canvas from './canvas'
+export { canvas, canvasHighContrast }
+export default canvas

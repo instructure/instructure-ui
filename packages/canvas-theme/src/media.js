@@ -22,9 +22,13 @@
  * SOFTWARE.
  */
 
-export default Object.freeze({
-  topmost: 9999,
-  above: 1,
-  below: -1,
-  deepest: -9999
+import { breakpoints } from './breakpoints'
+
+const media = Object.freeze({
+  mediumMin: `min-width: ${breakpoints.medium}`,
+  largeMin: `min-width: ${breakpoints.large}`,
+  xLargeMin: `min-width: ${breakpoints.xLarge}`
 })
+
+export default media
+export { media }

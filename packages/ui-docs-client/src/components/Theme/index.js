@@ -111,7 +111,7 @@ export default class Theme extends Component {
 
             ${'```js'}
             // before mounting your React application:
-            import theme from '${this.props.requirePath}'
+            import { theme } from '${this.props.requirePath}'
 
             theme.use(${params})
             ${'```'}

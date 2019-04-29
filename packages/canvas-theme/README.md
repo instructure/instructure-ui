@@ -2,17 +2,21 @@
 category: packages
 ---
 
-## @instructure/ui-themes
+## canvas-theme
 
 [![npm][npm]][npm-url]
 [![build-status][build-status]][build-status-url]
 [![MIT License][license-badge]][LICENSE]
 [![Code of Conduct][coc-badge]][coc]
 
+A UI component theme for Canvas LMS made by Instructure Inc.
+
+This theme has a 3:1 minimum contrast requirement. 
+
 ### Installation
 
 ```sh
-yarn add @instructure/ui-themes
+yarn add @instructure/canvas-theme
 ```
 
 ### Usage
@@ -20,8 +24,8 @@ yarn add @instructure/ui-themes
 Before mounting (rendering) your React application:
 
 ```js
-import { canvas } from '@instructure/ui-themes'
-canvas.use()
+import { theme } from '@instructure/canvas-theme'
+theme.use()
 ```
 
 To override the variables:
@@ -30,15 +34,8 @@ To override the variables:
 theme.use({ overrides: { colors: { brand: 'red' } } })
 ```
 
-To use the high contrast theme:
-
-```js
-import { canvasHighContrast } from '@instructure/ui-themes'
-canvasHighContrast.use()
-```
-
-[npm]: https://img.shields.io/npm/v/@instructure/ui-themes.svg
-[npm-url]: https://npmjs.com/package/@instructure/ui-themes
+[npm]: https://img.shields.io/npm/v/@instructure/canvas-theme.svg
+[npm-url]: https://npmjs.com/package/@instructure/canvas-theme
 
 [build-status]: https://travis-ci.org/instructure/instructure-ui.svg?branch=master
 [build-status-url]: https://travis-ci.org/instructure/instructure-ui "Travis CI"

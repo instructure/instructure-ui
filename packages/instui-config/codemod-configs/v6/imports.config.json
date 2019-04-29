@@ -274,5 +274,17 @@
   {
     "pattern": "^@instructure\/ui-icons\/lib\/(Line|Solid)\/(.*)$",
     "replace": "@instructure/ui-icons/lib/$2$1"
+  },
+  {
+    "pattern": "^@instructure/ui-themes/lib/canvas/base",
+    "replace": "@instructure/canvas-theme"
+  },
+  {
+    "pattern": "^@instructure/ui-themes/lib/canvas",
+    "replace": "@instructure/canvas-theme"
+  },
+  {
+    "pattern": "^@instructure/ui-themes/lib/canvas/high-contrast",
+    "replace": "@instructure/canvas-high-contrast-theme"
   }
 ]

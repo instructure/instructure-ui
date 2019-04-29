@@ -22,10 +22,55 @@
  * SOFTWARE.
  */
 
-import breakpoints from './breakpoints'
+import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 
-export default Object.freeze({
-  mediumMin: `min-width: ${breakpoints.medium}`,
-  largeMin: `min-width: ${breakpoints.large}`,
-  xLargeMin: `min-width: ${breakpoints.xLarge}`
+import { colors } from './colors'
+
+import {
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking
+ } from '@instructure/canvas-theme'
+
+const key = 'canvas-high-contrast'
+
+const variables = {
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking,
+  colors
+}
+
+const theme = registerTheme({
+  key,
+  description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
+  variables
 })
+
+export default theme
+export {
+  borders,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking,
+  colors,
+  theme,
+  key
+}

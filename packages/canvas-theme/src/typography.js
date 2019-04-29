@@ -22,17 +22,30 @@
  * SOFTWARE.
  */
 
+const typography = Object.freeze({
+  fontFamily: 'LatoWeb, Lato, "Helvetica Neue", Helvetica, Arial, sans-serif',
+  fontFamilyMonospace: 'Menlo, Consolas, Monaco, "Andale Mono", monospace',
 
-// use for consistency between buttons, text inputs, etc.
+  fontSizeXSmall: '0.75rem', // 12px
+  fontSizeSmall: '0.875rem', // 14px
+  fontSizeMedium: '1rem', // 16px
+  fontSizeLarge: '1.375rem', // 22px
+  fontSizeXLarge: '1.75rem',  // 28px
+  fontSizeXXLarge: '2.375rem', // 38px
 
-export default Object.freeze({
-  radiusSmall: '0.125rem', // 2px
-  radiusMedium: '0.25rem', // 4px
-  radiusLarge: '0.5rem', // 8px
+  fontWeightLight: 300,
+  fontWeightNormal: 400,
+  fontWeightBold: 700,
 
-  widthSmall: '0.0625rem', // 1px
-  widthMedium: '0.125rem', // 2px
-  widthLarge: '0.25rem', // 4px
+  lineHeight: 1.5, // 24px
+  lineHeightFit: 1.125,
+  lineHeightCondensed: 1.25,
+  lineHeightDouble: 2,
 
-  style: 'solid'
+  letterSpacingNormal: 0,
+  letterSpacingCondensed: '-0.0625rem',
+  letterSpacingExpanded: '0.0625rem'
 })
+
+export default typography
+export { typography }

@@ -28,6 +28,8 @@
     "svg-inline-loader": "^0.8.0"
   },
   "dependencies": {
+    "@instructure/canvas-theme": "^5.52.2",
+    "@instructure/canvas-high-contrast-theme": "^5.52.2",
     "@instructure/ui-a11y": "^5.52.2",
     "@instructure/ui-alerts": "^5.52.2",
     "@instructure/ui-billboard": "^5.52.2",
@@ -60,7 +62,6 @@
     "@instructure/ui-tabs": "^5.52.2",
     "@instructure/ui-text-input": "^5.52.2",
     "@instructure/ui-themeable": "^5.52.2",
-    "@instructure/ui-themes": "^5.52.2",
     "@instructure/ui-toggle-details": "^5.52.2",
     "@instructure/ui-tree-browser": "^5.52.2",
     "@instructure/ui-utils": "^5.52.2",

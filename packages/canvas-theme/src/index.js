@@ -24,22 +24,20 @@
 
 import { registerTheme } from '@instructure/ui-themeable/lib/registry'
 
-import KEYS from '../../keys'
+import { borders } from './borders'
+import { colors, functionalColors } from './colors'
+import { transitions } from './transitions'
+import { typography } from './typography'
+import { spacing } from './spacing'
+import { forms } from './forms'
+import { media } from './media'
+import { breakpoints } from './breakpoints'
+import { shadows } from './shadows'
+import { stacking } from './stacking'
 
-import borders from './borders'
-import colors from './colors'
-import transitions from './transitions'
-import typography from './typography'
-import spacing from './spacing'
-import forms from './forms'
-import media from './media'
-import breakpoints from './breakpoints'
-import shadows from './shadows'
-import stacking from './stacking'
+const key = 'canvas'
 
-export const key = KEYS.CANVAS
-
-export const baseVariables = {
+const variables = {
   borders,
   colors,
   transitions,
@@ -52,7 +50,7 @@ export const baseVariables = {
   stacking
 }
 
-export const brandVariables = {
+const brandVariables = {
   /* Defaults for Canvas account branding variables: */
   'ic-brand-primary': colors.textBrand,
   'ic-brand-font-color-dark': colors.textDarkest,
@@ -73,12 +71,24 @@ export const brandVariables = {
   'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
 
-export const variables = {
-  ...baseVariables,
-  ...brandVariables
-}
-
-export default registerTheme({
-  key: KEYS.CANVAS,
-  variables
+const theme = registerTheme({
+  key,
+  variables: { ...variables, ...brandVariables }
 })
+
+export default theme
+export {
+  functionalColors,
+  borders,
+  colors,
+  transitions,
+  typography,
+  spacing,
+  forms,
+  media,
+  breakpoints,
+  shadows,
+  stacking,
+  theme,
+  key
+}

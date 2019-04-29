@@ -22,23 +22,20 @@
  * SOFTWARE.
  */
 
- import { makeFunctionalColors } from '../base/colors'
 
- const colors = {
-   brand: '#0770A3',
-   link: '#0770A3',
-   electric: '#0770A3',
-   shamrock: '#127A1B',
-   barney: '#B8309E',
-   crimson: '#D01A19',
-   fire: '#C23C0D',
-   licorice: '#2D3B45',
-   oxford: '#394B58',
-   ash: '#556572',
-   slate: '#556572',
-   tiara: '#556572',
-   porcelain: '#FFFFFF',
-   white: '#FFFFFF'
- }
+// use for consistency between buttons, text inputs, etc.
 
- export default Object.freeze(makeFunctionalColors(colors))
+const borders = Object.freeze({
+  radiusSmall: '0.125rem', // 2px
+  radiusMedium: '0.25rem', // 4px
+  radiusLarge: '0.5rem', // 8px
+
+  widthSmall: '0.0625rem', // 1px
+  widthMedium: '0.125rem', // 2px
+  widthLarge: '0.25rem', // 4px
+
+  style: 'solid'
+})
+
+export default borders
+export { borders }

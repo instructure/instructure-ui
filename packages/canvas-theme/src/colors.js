@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-const colors = {
+const values = {
   brand: '#008EE2',
   link: '#008EE2',
   electric: '#008EE2',
@@ -38,7 +38,7 @@ const colors = {
   white: '#FFFFFF'
 }
 
-export function makeFunctionalColors (colors) {
+function functionalColors (colors) {
   return {
     ...colors,
 
@@ -86,4 +86,7 @@ export function makeFunctionalColors (colors) {
   }
 }
 
-export default Object.freeze(makeFunctionalColors(colors))
+const colors = Object.freeze(functionalColors(values))
+
+export default colors
+export { colors, functionalColors }
