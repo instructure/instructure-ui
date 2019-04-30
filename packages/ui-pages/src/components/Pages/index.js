@@ -29,7 +29,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
-import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { Children, controllable } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'

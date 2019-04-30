@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
-import themeable from '../themeable'
+import { themeable } from '../themeable'
 import { makeThemeContext } from '../ThemeContextTypes'
 
 describe('@themeable', async () => {

@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-export { default } from './themeable'
+import { themeable } from './themeable'
+export default themeable
+export { themeable }
 export * from './components'

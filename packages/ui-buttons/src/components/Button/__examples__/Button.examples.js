@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import IconTrashSolid from '@instructure/ui-icons/lib/IconTrashSolid'
 
 const iconButton = (props) => {

@@ -33,7 +33,7 @@ import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import IconMoveStartLine from '@instructure/ui-icons/lib/IconMoveStartLine'
 
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import NavigationItem from './NavigationItem'
 
 import styles from './styles.css'

@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import ScreenReaderContent from '@instructure/ui-a11y/es/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'

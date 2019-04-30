@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 
@@ -36,7 +36,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroug
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import uid from '@instructure/uid'
 
-import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 
 import FormFieldLabel from '../FormFieldLabel'
 import FormFieldMessages from '../FormFieldMessages'

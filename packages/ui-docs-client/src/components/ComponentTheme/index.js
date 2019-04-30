@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import themeable from '@instructure/ui-themeable'
 
 import Table from '@instructure/ui-elements/lib/components/Table'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import ColorSwatch from '../ColorSwatch'
 

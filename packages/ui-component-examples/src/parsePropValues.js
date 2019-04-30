@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { parse } from 'react-docgen'
+import { resolver, parse } from 'react-docgen'
 
 /**
  * Given a relative path and the React component source, returns an object of all
@@ -64,9 +64,11 @@ export default function parsePropValues (fileSource) {
   try {
     parsedSrc = parse(
      fileSource,
-     null,
-     null
+     resolver.findAllExportedComponentDefinitions
     )
+    if (Array.isArray(parsedSrc)) {
+      parsedSrc = parsedSrc.pop()
+    }
   } catch (error) {
     throw new Error(
       `[ui-component-examples] Could not parse component source: ${error}`

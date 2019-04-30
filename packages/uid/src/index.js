@@ -21,4 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export default from './uid'
+import { uid } from './uid'
+export default uid
+export { uid }

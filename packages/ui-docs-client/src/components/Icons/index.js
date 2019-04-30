@@ -31,11 +31,11 @@ import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
-import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
+import AccessibleContent from '@instructure/ui-a11y/lib/AccessibleContent'
 
 import themeable from '@instructure/ui-themeable'
 

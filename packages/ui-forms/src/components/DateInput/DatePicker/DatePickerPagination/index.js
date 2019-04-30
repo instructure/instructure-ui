@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from '@instructure/ui-buttons/lib/components/Button'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import IconArrowOpenStartSolid from '@instructure/ui-icons/lib/IconArrowOpenStartSolid'
 import IconArrowOpenEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
 import themeable from '@instructure/ui-themeable'

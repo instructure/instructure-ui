@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'

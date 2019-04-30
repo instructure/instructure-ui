@@ -31,7 +31,7 @@ import themeable from '@instructure/ui-themeable'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
-import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 
 import styles from './styles.css'
 import theme from './theme'

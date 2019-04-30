@@ -29,7 +29,7 @@ import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 
-import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 
 import styles from './styles.css'
 import theme from './theme'

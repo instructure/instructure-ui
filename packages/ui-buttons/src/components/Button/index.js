@@ -33,7 +33,7 @@ import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
-import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 import { warn } from '@instructure/console/macro'
 
 import View from '@instructure/ui-layout/lib/components/View'

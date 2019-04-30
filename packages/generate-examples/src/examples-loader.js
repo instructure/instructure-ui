@@ -26,7 +26,7 @@ import path from 'path'
 import fs from 'fs'
 import globby from 'globby'
 import loadConfig from '@instructure/config-loader'
-import { parse } from 'react-docgen'
+import { resolver, parse } from 'react-docgen'
 
 export default function (source, map) {
   this.cacheable && this.cacheable()
@@ -63,9 +63,11 @@ export default function (source, map) {
         try {
           parsedSrc = parse(
             fs.readFileSync(`${componentPath}${!componentPath.includes('.') ? '.js' : ''}`, 'utf8'),
-            null,
-            null
+            resolver.findAllExportedComponentDefinitions
           )
+          if (Array.isArray(parsedSrc)) {
+            parsedSrc = parsedSrc.pop()
+          }
         } catch (error) {
           loader.emitWarning(error)
         }

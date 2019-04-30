@@ -244,3 +244,4 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
 themeable.generateTheme = generateTheme
 
 export default themeable
+export { themeable }

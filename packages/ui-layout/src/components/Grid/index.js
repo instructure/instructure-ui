@@ -32,7 +32,7 @@ import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLett
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import GridRow from './GridRow'
 

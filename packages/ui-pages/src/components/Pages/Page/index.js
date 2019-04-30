@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
-import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 import { error } from '@instructure/console/macro'
 
 import View from '@instructure/ui-layout/lib/components/View'

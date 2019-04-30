@@ -32,7 +32,7 @@ import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import uid from '@instructure/uid'
 
-import hasVisibleChildren from '@instructure/ui-a11y/lib/utils/hasVisibleChildren'
+import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 
 import testable from '@instructure/ui-testable'
 

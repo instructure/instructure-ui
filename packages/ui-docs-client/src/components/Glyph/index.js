@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import themeable from '@instructure/ui-themeable'
 

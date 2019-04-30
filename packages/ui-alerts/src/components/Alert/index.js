@@ -31,7 +31,7 @@ import keycode from 'keycode'
 
 import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
 import View from '@instructure/ui-layout/lib/components/View'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import IconCheckMarkSolid from '@instructure/ui-icons/lib/IconCheckMarkSolid'
 import IconInfoBorderlessSolid from '@instructure/ui-icons/lib/IconInfoBorderlessSolid'

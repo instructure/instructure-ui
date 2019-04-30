@@ -25,7 +25,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'

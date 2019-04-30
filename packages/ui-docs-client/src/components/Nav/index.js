@@ -31,9 +31,8 @@ import themeable from '@instructure/ui-themeable'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import Text from '@instructure/ui-elements/lib/components/Text'
 import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import IconSearch from '@instructure/ui-icons/lib/IconSearchLine'
-
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
 
 import NavToggle from '../NavToggle'

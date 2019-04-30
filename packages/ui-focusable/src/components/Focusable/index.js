@@ -29,7 +29,7 @@ import addEventListener from '@instructure/ui-dom-utils/lib/addEventListener'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import { error } from '@instructure/console/macro'
 import InputModeListener from '@instructure/ui-dom-utils/lib/InputModeListener'
-import findTabbable from '@instructure/ui-a11y/lib/utils/findTabbable'
+import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 
 /**
 ---

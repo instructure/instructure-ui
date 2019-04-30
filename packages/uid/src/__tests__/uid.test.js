@@ -23,8 +23,7 @@
  */
 import { expect } from '@instructure/ui-test-utils'
 
-import uid from '../index'
-
+import { uid } from '../index'
 
 describe('uid', () => {
   it('generates a specified length', () => {

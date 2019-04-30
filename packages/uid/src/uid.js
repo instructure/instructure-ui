@@ -30,6 +30,7 @@ const dictionaryLengthMinus1 = dictionary.length - 1
 /**
  * ---
  * category: utilities
+ * id: uid_doc
  * ---
  * Generate a unique (CSS-safe) id string
  *
@@ -38,7 +39,7 @@ const dictionaryLengthMinus1 = dictionary.length - 1
  * @param {Number} length id length (in characters, minus the prefix)
  * @returns {String} a unique id
  */
-export default function uid (prefix = '', length = 12) {
+function uid (prefix = '', length = 12) {
   const id = `u${_uid('', length - 1)}`
   if (prefix && process.env.NODE_ENV !== 'production') {
     return `${prefix}__${id}`
@@ -64,3 +65,6 @@ function _uid(_ignored, idLength = 12) {
   }
   return id
 }
+
+export default uid
+export { uid }

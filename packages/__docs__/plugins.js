@@ -56,6 +56,8 @@ module.exports = [
     },
     files: [
       '**/*.md',
+      '**/src/*/**/index.js',
+      '**/src/*.js',
       '**/src/components/*/**/index.js',
       '**/src/utils/**/*.js',
       '**/ui-themeable/src/**/*.js',

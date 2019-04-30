@@ -21,7 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from '@instructure/ui-a11y/lib/components'
+export {
+  AccessibleContent,
+  Dialog,
+  PresentationContent,
+  ScreenReaderContent
+} from '@instructure/ui-a11y'
+
 export * from '@instructure/ui-alerts/lib/components'
 export * from '@instructure/ui-billboard/lib/components'
 export * from '@instructure/ui-breadcrumb/lib/components'

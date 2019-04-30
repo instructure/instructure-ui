@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
+import Dialog from '@instructure/ui-a11y/lib/Dialog'
 
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'

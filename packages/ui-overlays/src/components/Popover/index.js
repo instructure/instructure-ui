@@ -30,7 +30,7 @@ import keycode from 'keycode'
 import ContextView from '@instructure/ui-layout/lib/components/ContextView'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import Dialog from '@instructure/ui-a11y/lib/components/Dialog'
+import Dialog from '@instructure/ui-a11y/lib/Dialog'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
 

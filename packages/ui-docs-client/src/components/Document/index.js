@@ -120,15 +120,19 @@ export default class Document extends Component {
 
     if (esPath) {
       example.push(`\
-/*** ES Modules ***/
+/*** ES Modules (with tree shaking) ***/
 import { ${importName} } from '${packageName}'
+`)
+example.push(`\
+/*** ES Modules (without tree shaking) ***/
+import { ${importName} } from '${requirePath}'
 `)
     }
 
     if (requirePath) {
       example.push(`\
 /*** CommonJS ***/
-const ${importName} = require('${requirePath}').default
+const { ${importName} } = require('${requirePath}')
 `)
     }
 

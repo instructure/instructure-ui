@@ -34,8 +34,8 @@ import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'
 import { error } from '@instructure/console/macro'
 
-import PresentationContent from '@instructure/ui-a11y/lib/components/PresentationContent'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/components/ScreenReaderContent'
+import PresentationContent from '@instructure/ui-a11y/lib/PresentationContent'
+import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import testable from '@instructure/ui-testable'
 
