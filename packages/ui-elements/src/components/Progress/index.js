@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import testable from '@instructure/ui-testable'
 
 import ProgressBar from './ProgressBar'

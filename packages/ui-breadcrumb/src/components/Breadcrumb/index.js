@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import View from '@instructure/ui-layout/lib/components/View'
 import IconArrowOpenEndSolid from '@instructure/ui-icons/lib/IconArrowOpenEndSolid'
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import { Children } from '@instructure/ui-prop-types'
 import testable from '@instructure/ui-testable'
 

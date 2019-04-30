@@ -24,7 +24,7 @@
 
 /* Global variables (colors, typography, spacing, etc.) are defined in lib/themes */
 
-import makeThemeVars from '@instructure/ui-themeable/lib/utils/makeThemeVars'
+import makeThemeVars from '@instructure/ui-themeable/lib/makeThemeVars'
 
 export default function generator ({ typography, colors, borders, spacing, shadows, stacking, breakpoints }) {
   return {

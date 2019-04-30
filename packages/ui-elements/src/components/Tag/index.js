@@ -29,7 +29,7 @@ import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import testable from '@instructure/ui-testable'

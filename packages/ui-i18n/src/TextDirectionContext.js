@@ -37,6 +37,7 @@ const DIRECTION = {
 }
 
 const TextDirectionContext = {
+  CONTEXT_KEY,
   DIRECTION,
 
   /**

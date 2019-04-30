@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import testable from '@instructure/ui-testable'
 

@@ -32,7 +32,7 @@ import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import { error } from '@instructure/console/macro'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 
 import Browser from '@instructure/ui-utils/lib/Browser'
 

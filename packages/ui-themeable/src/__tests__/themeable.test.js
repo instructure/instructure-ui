@@ -24,8 +24,9 @@
 
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
+
 import { themeable } from '../themeable'
-import { makeThemeContext } from '../ThemeContextTypes'
+import { ThemeContext } from '../ThemeContext'
 
 describe('@themeable', async () => {
   const theme = function () {
@@ -87,7 +88,7 @@ describe('@themeable', async () => {
   })
 
   it('allows configuration through context', async () => {
-    const context = makeThemeContext({
+    const context = ThemeContext.makeThemeContext({
       [ThemeableComponent.theme]: {
         textColor: 'green',
         backgroundColor: 'yellow'

@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 
 import Transition from '@instructure/ui-motion/lib/Transition'
 

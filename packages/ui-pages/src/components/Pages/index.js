@@ -32,7 +32,7 @@ import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveE
 import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { Children, controllable } from '@instructure/ui-prop-types'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import uid from '@instructure/uid'
 import { error } from '@instructure/console/macro'
 

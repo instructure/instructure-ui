@@ -5,7 +5,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ApplyTheme",
-    "replace": "@instructure/ui-themeable/lib/components/ApplyTheme"
+    "replace": "@instructure/ui-themeable/lib/ApplyTheme"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ApplyLocale",
@@ -322,5 +322,9 @@
   {
     "pattern": "^@instructure/ui-portal/lib/components",
     "replace": "@instructure/ui-portal/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-themeable/lib/utils",
+    "replace": "@instructure/ui-themeable/lib"
   }
 ]

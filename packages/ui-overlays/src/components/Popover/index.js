@@ -50,7 +50,7 @@ import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import testable from '@instructure/ui-testable'
 
 @testable()

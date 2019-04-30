@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'

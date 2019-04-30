@@ -26,27 +26,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { decorator } from '@instructure/ui-decorator'
-import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import isEmpty from '@instructure/ui-utils/lib/isEmpty'
+import { isEmpty, shallowEqual, deepEqual } from '@instructure/ui-utils'
 import { warn } from '@instructure/console/macro'
-import uid from '@instructure/uid'
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
-import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
+import { uid } from '@instructure/uid'
+import { StyleSheet } from '@instructure/ui-stylesheet'
+import { findDOMNode } from '@instructure/ui-dom-utils'
 
-import { ThemeContextTypes, getThemeContext } from './ThemeContextTypes'
+import { ThemeContext } from './ThemeContext'
+import { applyVariablesToNode } from './applyVariablesToNode'
+import { getCssText } from './getCssText'
+import { setTextDirection } from './setTextDirection'
+import { ThemeRegistry } from './ThemeRegistry'
+import { toRules } from './transformCss'
 
-import applyVariablesToNode from './utils/applyVariablesToNode'
-import getCssText from './utils/getCssText'
-import setTextDirection from './utils/setTextDirection'
-
-import {
+const {
   generateComponentTheme,
   generateTheme,
   registerComponentTheme
-} from './registry'
-
-import StyleSheet from './StyleSheet'
-import { toRules } from './utils/transformCss'
+} = ThemeRegistry
 
 /**
 * ---
@@ -111,7 +108,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
   }
   registerComponentTheme(contextKey, theme)
   const getContext = function (context) {
-    const themeContext = getThemeContext(context)
+    const themeContext = ThemeContext.getThemeContext(context)
     return themeContext || emptyObj
   }
   const getThemeFromContext = function (context) {
@@ -135,7 +132,7 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
     static theme = contextKey
     static contextTypes = {
       ...ComposedComponent.contextTypes,
-      ...ThemeContextTypes
+      ...ThemeContext.types
     }
     static propTypes = {
       ...ComposedComponent.propTypes,
@@ -161,7 +158,10 @@ const themeable = decorator((ComposedComponent, theme, styles = {}) => {
       }
     }
     shouldComponentUpdate (nextProps, nextState, nextContext) {
-      const themeContextWillChange = !deepEqual(getThemeContext(this.context), getThemeContext(nextContext))
+      const themeContextWillChange = !deepEqual(
+          ThemeContext.getThemeContext(this.context),
+          ThemeContext.getThemeContext(nextContext)
+        )
       if (themeContextWillChange) return true
       if (super.shouldComponentUpdate) {
         return super.shouldComponentUpdate(nextProps, nextState, nextContext)

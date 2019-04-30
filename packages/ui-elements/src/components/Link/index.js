@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import findFocusable from '@instructure/ui-a11y/lib/findFocusable'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'

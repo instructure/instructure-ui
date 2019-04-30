@@ -41,7 +41,7 @@ import IconNoSolid from '@instructure/ui-icons/lib/IconNoSolid'
 import Transition from '@instructure/ui-motion/lib/Transition'
 
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
 

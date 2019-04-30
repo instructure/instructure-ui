@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { registerTheme } from '@instructure/ui-themeable/lib/registry'
+import { ThemeRegistry } from '@instructure/ui-themeable/lib/ThemeRegistry'
 
 import { borders } from './borders'
 import { colors, functionalColors } from './colors'
@@ -71,7 +71,7 @@ const brandVariables = {
   'ic-brand-global-nav-menu-item__text-color--active': colors.textBrand
 }
 
-const theme = registerTheme({
+const theme = ThemeRegistry.registerTheme({
   key,
   variables: { ...variables, ...brandVariables }
 })

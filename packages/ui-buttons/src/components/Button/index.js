@@ -28,7 +28,7 @@ import keycode from 'keycode'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'

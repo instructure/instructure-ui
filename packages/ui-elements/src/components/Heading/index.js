@@ -29,7 +29,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 
 import themeable from '@instructure/ui-themeable'
 import { childrenOrValue } from '@instructure/ui-prop-types'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import testable from '@instructure/ui-testable'

@@ -76,7 +76,9 @@ export { Portal } from '@instructure/ui-portal'
 export * from '@instructure/ui-selectable/lib/components'
 export * from '@instructure/ui-svg-images/lib/components'
 export * from '@instructure/ui-tabs/lib/components'
-export * from '@instructure/ui-themeable/lib/components'
+
+export { ApplyTheme } from '@instructure/ui-themeable'
+
 export * from '@instructure/ui-toggle-details/lib/components'
 export * from '@instructure/ui-tree-browser/lib/components'
 export Figure, { FigureItem } from '@instructure/ui-docs-client/lib/components/Figure'

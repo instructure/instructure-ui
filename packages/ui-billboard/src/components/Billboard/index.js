@@ -33,7 +33,7 @@ import themeable from '@instructure/ui-themeable'
 import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 
 import styles from './styles.css'
 import theme from './theme'

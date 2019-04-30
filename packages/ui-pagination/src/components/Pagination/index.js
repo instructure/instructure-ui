@@ -32,7 +32,7 @@ import testable from '@instructure/ui-testable'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import uid from '@instructure/uid'
 import { Children } from '@instructure/ui-prop-types'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 

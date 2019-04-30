@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { registerTheme } from '@instructure/ui-themeable/lib/registry'
+import { ThemeRegistry } from '@instructure/ui-themeable/lib/ThemeRegistry'
 
 import { colors } from './colors'
 
@@ -53,7 +53,7 @@ const variables = {
   colors
 }
 
-const theme = registerTheme({
+const theme = ThemeRegistry.registerTheme({
   key,
   description: 'This theme meets WCAG 2.0 AA rules for color contrast.',
   variables

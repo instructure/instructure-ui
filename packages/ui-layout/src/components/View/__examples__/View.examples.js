@@ -21,11 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import {
+import ThemeablePropValues from '@instructure/ui-themeable/lib/ThemeablePropValues'
+
+const {
   SHADOW_TYPES,
   BORDER_WIDTHS,
   BORDER_RADII
-} from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
+} = ThemeablePropValues
 
 export default {
   sectionProp: 'background',
