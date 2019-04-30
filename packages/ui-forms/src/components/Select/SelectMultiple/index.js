@@ -28,7 +28,7 @@ import deepEqual from 'deep-equal'
 
 import themeable from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import testable from '@instructure/ui-testable'

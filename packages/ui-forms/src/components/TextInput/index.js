@@ -34,7 +34,8 @@ import deprecated, { changedPackageWarning } from '@instructure/ui-react-utils/l
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
-import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 
 import styles from './styles.css'
 import theme from './theme'

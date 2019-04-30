@@ -33,7 +33,7 @@ import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 
 import accepts, { getAcceptList } from './utils/accepts'
 import getEventFiles from './utils/getEventFiles'

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Link from '@instructure/ui-elements/lib/components/Link'
 import TruncateText from '@instructure/ui-elements/lib/components/TruncateText'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import testable from '@instructure/ui-testable'
 
 /**

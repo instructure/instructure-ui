@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 
 import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'

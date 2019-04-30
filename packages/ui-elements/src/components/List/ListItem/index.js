@@ -30,7 +30,7 @@ import View from '@instructure/ui-layout/lib/components/View'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import { error } from '@instructure/console/macro'
 
 import styles from './styles.css'

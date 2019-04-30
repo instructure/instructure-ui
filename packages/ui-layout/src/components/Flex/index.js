@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 
 import View from '../View'
 import FlexItem from './FlexItem'

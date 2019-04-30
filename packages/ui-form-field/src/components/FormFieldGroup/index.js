@@ -28,7 +28,8 @@ import classnames from 'classnames'
 
 import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
 import themeable from '@instructure/ui-themeable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 
 import FormFieldLayout from '../FormFieldLayout'
 import FormPropTypes from '../../utils/FormPropTypes'

@@ -32,7 +32,8 @@ import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Gr
 
 import { error } from '@instructure/console/macro'
 import themeable from '@instructure/ui-themeable'
-import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import uid from '@instructure/uid'
 

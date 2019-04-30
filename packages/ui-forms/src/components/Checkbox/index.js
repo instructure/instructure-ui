@@ -35,7 +35,7 @@ import uid from '@instructure/uid'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import themeable from '@instructure/ui-themeable'
 import FormFieldMessages from '@instructure/ui-form-field/lib/components/FormFieldMessages'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import testable from '@instructure/ui-testable'
 
 import CheckboxFacade from './CheckboxFacade'

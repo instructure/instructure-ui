@@ -29,7 +29,7 @@ import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import { View } from '@instructure/ui-layout'
 
 import Row from '../Row'

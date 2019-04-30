@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import deepEqual from 'deep-equal'
 
 import { controllable } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import testable from '@instructure/ui-testable'
 

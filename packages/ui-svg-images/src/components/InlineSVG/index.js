@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import uid from '@instructure/uid'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import testable from '@instructure/ui-testable'
 
 import styles from './styles.css'

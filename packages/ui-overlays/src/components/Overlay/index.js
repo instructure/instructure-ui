@@ -29,7 +29,8 @@ import Dialog from '@instructure/ui-a11y/lib/Dialog'
 
 import testable from '@instructure/ui-testable'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
-import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import { element } from '@instructure/ui-prop-types'
 
 import Portal from '@instructure/ui-portal/lib/Portal'

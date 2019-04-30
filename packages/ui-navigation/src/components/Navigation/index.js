@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import IconMoveStartLine from '@instructure/ui-icons/lib/IconMoveStartLine'
 

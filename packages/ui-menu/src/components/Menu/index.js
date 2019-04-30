@@ -31,7 +31,7 @@ import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlay
 import uid from '@instructure/uid'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
-import { pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import { error } from '@instructure/console/macro'
 import themeable from '@instructure/ui-themeable'

@@ -37,7 +37,8 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import { error } from '@instructure/console/macro'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import themeable from '@instructure/ui-themeable'
-import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import testable from '@instructure/ui-testable'
 
 import DatePicker from './DatePicker'

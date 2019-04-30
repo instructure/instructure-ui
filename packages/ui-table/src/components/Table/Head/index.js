@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { Select } from '@instructure/ui-forms'
 import { IconCheckLine } from '@instructure/ui-icons'

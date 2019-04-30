@@ -25,7 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'

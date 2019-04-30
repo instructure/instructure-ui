@@ -32,7 +32,7 @@ import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import { error } from '@instructure/console/macro'
 import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 import uid from '@instructure/uid/lib/uid'

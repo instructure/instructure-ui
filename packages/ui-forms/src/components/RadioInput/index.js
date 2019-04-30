@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 
 import styles from './styles.css'

@@ -33,7 +33,7 @@ import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes
 import findFocusable from '@instructure/ui-a11y/lib/findFocusable'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'

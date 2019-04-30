@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import debounce from '@instructure/debounce'
 import addResizeListener from '@instructure/ui-dom-utils/lib/addResizeListener'
 import getBoundingClientRect from '@instructure/ui-dom-utils/lib/getBoundingClientRect'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 

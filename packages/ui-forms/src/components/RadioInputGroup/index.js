@@ -32,7 +32,8 @@ import testable from '@instructure/ui-testable'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
-import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 
 import RadioInput from '../RadioInput'
 

@@ -30,7 +30,7 @@ import { Children, controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
 import { error } from '@instructure/console/macro'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import testable from '@instructure/ui-testable'
 
 import SelectSingle from './SelectSingle'

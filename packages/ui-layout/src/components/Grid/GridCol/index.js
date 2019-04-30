@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import themeable from '@instructure/ui-themeable'
 import capitalizeFirstLetter from '@instructure/ui-utils/lib/capitalizeFirstLetter'
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 
 import styles from './styles.css'
 import theme from './theme'

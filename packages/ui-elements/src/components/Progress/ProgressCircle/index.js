@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import View from '@instructure/ui-layout/lib/components/View'
 
-import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 

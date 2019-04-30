@@ -29,7 +29,7 @@ import IconFolderLine from '@instructure/ui-icons/lib/IconFolderLine'
 import IconDocumentLine from '@instructure/ui-icons/lib/IconDocumentLine'
 
 import themeable from '@instructure/ui-themeable'
-import { pickProps } from '@instructure/ui-react-utils/lib/passthroughProps'
+import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import { controllable } from '@instructure/ui-prop-types'
 import testable from '@instructure/ui-testable'
 
