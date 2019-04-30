@@ -96,13 +96,16 @@ module.exports = [
       '**/ui-utils/src/{react,dom}/index.js',
 
       // packages to ignore:
+      '**/canvas-theme/**',
+      '**/canvas-high-contrast-theme/**',
       '**/ui-component-examples/src/**',
       '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',
       '**/ui-docs-plugin/src/**',
 
       // deprecated packages and modules:
-      '**/generate-examples/**'
+      '**/generate-examples/**',
+      '**/ui-themeable/src/StyleSheet.js'
     ],
     themes: [
       require.resolve('@instructure/canvas-theme'),

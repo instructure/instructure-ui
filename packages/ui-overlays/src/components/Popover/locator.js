@@ -24,7 +24,7 @@
 
  import { locator } from '@instructure/ui-test-utils'
 
- import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+ import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
  import Popover, { PopoverTrigger, PopoverContent } from './index'
 
  export const PopoverTriggerLocator = locator(PopoverTrigger.selector)

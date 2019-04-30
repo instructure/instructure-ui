@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'

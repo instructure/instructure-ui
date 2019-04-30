@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'

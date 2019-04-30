@@ -36,7 +36,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
 import Portal from '@instructure/ui-portal/lib/Portal'
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/mirrorHorizontalPlacement'
 
 import Transition from '@instructure/ui-motion/lib/Transition'
 

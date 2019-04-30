@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import themeable from '@instructure/ui-themeable'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'

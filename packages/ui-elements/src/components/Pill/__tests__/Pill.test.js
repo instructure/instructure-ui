@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import Pill from '../index'
 import PillLocator from '../locator'

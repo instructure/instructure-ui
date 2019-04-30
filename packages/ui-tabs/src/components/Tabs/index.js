@@ -28,7 +28,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import themeable from '@instructure/ui-themeable'
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'

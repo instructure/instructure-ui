@@ -37,8 +37,8 @@ import IconA11ySolid from '@instructure/ui-icons/lib/IconA11ySolid'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import List, { ListItem } from '@instructure/ui-elements/lib/components/List'
-import View from '@instructure/ui-layout/lib/components/View'
-import Responsive from '@instructure/ui-layout/lib/components/Responsive'
+import View from '@instructure/ui-layout/lib/View'
+import Responsive from '@instructure/ui-layout/lib/Responsive'
 
 import styles from './styles.css'
 import theme from './theme'

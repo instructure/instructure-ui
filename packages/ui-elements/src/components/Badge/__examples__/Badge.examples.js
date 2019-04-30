@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import React from 'react'
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 export default {
   sectionProp: 'variant',

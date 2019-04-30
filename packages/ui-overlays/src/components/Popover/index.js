@@ -27,16 +27,16 @@ import PropTypes from 'prop-types'
 
 import keycode from 'keycode'
 
-import ContextView from '@instructure/ui-layout/lib/components/ContextView'
-import View from '@instructure/ui-layout/lib/components/View'
+import ContextView from '@instructure/ui-layout/lib/ContextView'
+import View from '@instructure/ui-layout/lib/View'
 
 import Dialog from '@instructure/ui-a11y/lib/Dialog'
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
-import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/components/Position'
+import Position, { PositionTarget, PositionContent } from '@instructure/ui-layout/lib/Position'
 
 import { Children, controllable, element } from '@instructure/ui-prop-types'
 import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
-import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/LayoutPropTypes'
 import ComponentIdentifier from '@instructure/ui-react-utils/lib/ComponentIdentifier'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
@@ -48,8 +48,8 @@ import handleMouseOverOut from '@instructure/ui-dom-utils/lib/handleMouseOverOut
 import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import { error } from '@instructure/console/macro'
 import uid from '@instructure/uid'
-import { parsePlacement } from '@instructure/ui-layout/lib/utils/calculateElementPosition'
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/utils/mirrorPlacement'
+import { parsePlacement } from '@instructure/ui-layout/lib/calculateElementPosition'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/mirrorHorizontalPlacement'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
 import testable from '@instructure/ui-testable'
 

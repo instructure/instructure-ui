@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import Heading from '@instructure/ui-elements/lib/components/Heading'
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import themeable from '@instructure/ui-themeable'
 import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'

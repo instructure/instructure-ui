@@ -107,7 +107,7 @@ describe('<Table />', async () => {
   })
 
   it('can ignore invalid children', async () => {
-    const table = await mount(
+    await mount(
       <Table
         caption="Test table"
       >

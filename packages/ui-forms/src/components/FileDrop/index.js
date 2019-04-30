@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 import uid from '@instructure/uid'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'

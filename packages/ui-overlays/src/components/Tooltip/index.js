@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
-import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/LayoutPropTypes'
 import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
 import uid from '@instructure/uid'

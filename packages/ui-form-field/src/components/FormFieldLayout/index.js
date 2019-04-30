@@ -28,7 +28,7 @@ import classnames from 'classnames'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
-import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
+import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/Grid'
 
 import { error } from '@instructure/console/macro'
 import themeable from '@instructure/ui-themeable'

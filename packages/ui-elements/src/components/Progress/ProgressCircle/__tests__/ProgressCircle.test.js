@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 import ProgressCircle from '../index'
 

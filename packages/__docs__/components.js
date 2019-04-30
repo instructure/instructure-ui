@@ -60,7 +60,17 @@ export { Table as TableControlled } from '@instructure/ui-table/lib/components'
 
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
 
-export * from '@instructure/ui-layout/lib/components'
+export {
+  ContextView,
+  DrawerLayout, DrawerContent, DrawerTray,
+  Flex, FlexItem,
+  Grid, GridRow, GridCol,
+  Media,
+  Position, PositionTarget, PositionContent,
+  Responsive,
+  View
+} from '@instructure/ui-layout'
+
 export * from '@instructure/ui-menu/lib/components'
 
 export { Transition } from '@instructure/ui-motion'

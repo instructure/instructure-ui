@@ -35,7 +35,7 @@ import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
-import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
 
 import Preview from '../Preview'
 import CodePenButton from '../CodePenButton'

@@ -30,7 +30,7 @@ import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import findTabbable from '@instructure/ui-a11y/lib/findTabbable'
 import { error } from '@instructure/console/macro'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 
 /**
 ---

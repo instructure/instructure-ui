@@ -28,7 +28,7 @@ import SelectField from '../index'
 import optionsListStyles from '../../SelectOptionsList/styles.css'
 import styles from '../styles.css'
 
-import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
 
 const InputLocator = locator('input[type="text"]')
 const OptionsListLocator = locator('ul')

@@ -26,7 +26,7 @@ import React, { createElement } from 'react'
 import marked from 'marked'
 import grayMatter from 'gray-matter'
 
-import View from '@instructure/ui-layout/lib/components/View'
+import View from '@instructure/ui-layout/lib/View'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Img from '@instructure/ui-elements/lib/components/Img'
 import Link from '@instructure/ui-elements/lib/components/Link'

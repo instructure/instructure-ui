@@ -41,19 +41,19 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Container",
-    "replace": "@instructure/ui-layout/lib/components/View"
+    "replace": "@instructure/ui-layout/lib/View"
   },
   {
     "pattern": "^@instructure/ui-container/lib/components/Container",
-    "replace": "@instructure/ui-layout/lib/components/View"
+    "replace": "@instructure/ui-layout/lib/View"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ContextBox",
-    "replace": "@instructure/ui-layout/lib/components/ContextView"
+    "replace": "@instructure/ui-layout/lib/ContextView"
   },
   {
     "pattern": "^@instructure/ui-elements/lib/components/ContextBox",
-    "replace": "@instructure/ui-layout/lib/components/ContextView"
+    "replace": "@instructure/ui-layout/lib/ContextView"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Dialog",
@@ -65,7 +65,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Grid",
-    "replace": "@instructure/ui-layout/lib/components/Grid"
+    "replace": "@instructure/ui-layout/lib/Grid"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Heading",
@@ -93,7 +93,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Media",
-    "replace": "@instructure/ui-layout/lib/components/Media"
+    "replace": "@instructure/ui-layout/lib/Media"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/MetricsList",
@@ -121,7 +121,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Position",
-    "replace": "@instructure/ui-layout/lib/components/Position"
+    "replace": "@instructure/ui-layout/lib/Position"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Progress",
@@ -257,7 +257,7 @@
   },
   {
     "pattern": "^@instructure-ui/ui-utils/lib/dom/calculateElementPosition",
-    "replace": "@instructure/ui-layout/lib/utils/calculateElementPosition"
+    "replace": "@instructure/ui-layout/lib/calculateElementPosition"
   },
   {
     "pattern": "^@instructure/ui-utils/lib/debounce",
@@ -326,5 +326,13 @@
   {
     "pattern": "^@instructure/ui-themeable/lib/utils",
     "replace": "@instructure/ui-themeable/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/components",
+    "replace": "@instructure/ui-layout/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-layout/lib/utils",
+    "replace": "@instructure/ui-layout/lib"
   }
 ]

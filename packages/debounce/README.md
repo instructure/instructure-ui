@@ -1,5 +1,7 @@
 ---
 category: packages
+id: debounce_README
+title: debounce
 ---
 
 ## debounce

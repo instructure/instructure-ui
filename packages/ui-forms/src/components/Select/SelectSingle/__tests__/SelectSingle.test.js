@@ -26,7 +26,7 @@ import React from 'react'
 import { locator, expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 import SelectSingle from '../index'
 
-import PositionLocator from '@instructure/ui-layout/lib/components/Position/locator'
+import PositionLocator from '@instructure/ui-layout/lib/Position/locator'
 
 const InputLocator = locator('input[type="text"]')
 const OptionsLocator = locator('li')

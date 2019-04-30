@@ -36,8 +36,8 @@ import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
 import { warn } from '@instructure/console/macro'
 
-import View from '@instructure/ui-layout/lib/components/View'
-import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
+import View from '@instructure/ui-layout/lib/View'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
 
 import styles from './styles.css'
 import theme from './theme'

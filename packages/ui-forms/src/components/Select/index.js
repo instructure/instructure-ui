@@ -28,7 +28,7 @@ import deepEqual from 'deep-equal'
 
 import { Children, controllable } from '@instructure/ui-prop-types'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
-import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/LayoutPropTypes'
 import { error } from '@instructure/console/macro'
 import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import testable from '@instructure/ui-testable'

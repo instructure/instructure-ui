@@ -26,7 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/components/Grid'
+import Grid, { GridCol, GridRow } from '@instructure/ui-layout/lib/Grid'
 import themeable from '@instructure/ui-themeable'
 import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
 import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'

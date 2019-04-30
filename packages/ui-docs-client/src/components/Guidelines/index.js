@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 
-import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
 
 import styles from './styles.css'
 import theme from './theme'

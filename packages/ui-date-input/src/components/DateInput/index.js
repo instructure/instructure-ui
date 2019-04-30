@@ -36,7 +36,7 @@ import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
-import LayoutPropTypes from '@instructure/ui-layout/lib/utils/LayoutPropTypes'
+import LayoutPropTypes from '@instructure/ui-layout/lib/LayoutPropTypes'
 import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
 
 import testable from '@instructure/ui-testable'

@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Flex, { FlexItem } from '@instructure/ui-layout/lib/components/Flex'
+import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
 import { FocusableView } from '@instructure/ui-focusable/lib/components/Focusable'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
