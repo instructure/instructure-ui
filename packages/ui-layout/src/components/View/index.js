@@ -31,7 +31,7 @@ import getShorthandPropValue from '@instructure/ui-themeable/lib/utils/getShorth
 import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 import { mirrorShorthandEdges, mirrorShorthandCorners } from '@instructure/ui-themeable/lib/utils/mirrorShorthand'
-import bidirectional, { DIRECTION } from '@instructure/ui-i18n/lib/bidirectional'
+import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
 
 import { cursor as cursorPropTypes } from '@instructure/ui-prop-types'
 import { error } from '@instructure/console/macro'
@@ -204,7 +204,7 @@ class View extends Component {
   get borderStyle () {
     let { borderRadius, borderWidth } = this.props
 
-    if (this.dir === DIRECTION.rtl) {
+    if (this.dir === bidirectional.DIRECTION.rtl) {
       borderRadius = mirrorShorthandCorners(borderRadius)
       borderWidth = mirrorShorthandEdges(borderWidth)
     }

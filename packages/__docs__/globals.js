@@ -36,7 +36,7 @@ const Components = require('./components')
 import '@instructure/ui-icons/lib/font/Solid/InstructureIcons-Solid.css'
 import '@instructure/ui-icons/lib/font/Line/InstructureIcons-Line.css'
 
-import {now, parse, isValid, browserTimeZone, toLocaleString} from '@instructure/ui-i18n/lib/DateTime'
+import { DateTime } from '@instructure/ui-i18n'
 
 // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
 import iconExample from '!svg-inline-loader!./heart_lg.svg'
@@ -54,9 +54,7 @@ const globals = {
   locales: moment.locales(),
   avatarSquare,
   avatarPortrait,
-  DateTime: {
-    now, parse, isValid, browserTimeZone, toLocaleString
-  },
+  DateTime,
   iconExample,
   lorem: {
     sentence () {

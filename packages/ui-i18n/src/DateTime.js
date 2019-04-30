@@ -38,7 +38,7 @@ import moment from 'moment-timezone'
 * @param {String} timezone
 * @returns {Object} an instance of a moment.
 */
-export function now (locale, timezone) {
+function now (locale, timezone) {
   _checkParams(locale, timezone)
   return moment().locale(locale).tz(timezone)
 }
@@ -50,7 +50,7 @@ export function now (locale, timezone) {
 * @param {String} timezone
 * @returns {String} ISO 8601 string
 */
-export function parse (dateString, locale, timezone) {
+function parse (dateString, locale, timezone) {
   _checkParams(locale, timezone)
   // list all available localized formats, from most specific to least
   return moment.tz(dateString, [moment.ISO_8601, 'llll', 'LLLL', 'lll', 'LLL', 'll', 'LL', 'l', 'L'], locale, timezone)
@@ -61,7 +61,7 @@ export function parse (dateString, locale, timezone) {
 * @param {String} dateString
 * @returns {Boolean} true if dateString is a valid ISO 8601 string
 */
-export function isValid (dateString) {
+function isValid (dateString) {
   return moment(dateString, [moment.ISO_8601]).isValid()
 }
 
@@ -70,7 +70,7 @@ export function isValid (dateString) {
 * see https://momentjs.com/timezone/docs/#/using-timezones/guessing-user-timezone/
 * @returns {String} a time zone identifier (see https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
 */
-export function browserTimeZone () {
+function browserTimeZone () {
   return moment.tz.guess()
 }
 
@@ -82,13 +82,18 @@ export function browserTimeZone () {
 * @param {String} format
 * @returns {String} Localized ISO 8601 string
 */
-export function toLocaleString (dateString, locale, timezone, format) {
+function toLocaleString (dateString, locale, timezone, format) {
   const d = parse(dateString, locale, timezone)
   const iso8601format = 'YYYY-MM-DDTHH:mm:ss.SSSZ'
   return format ? d.format(format) : d.format(iso8601format)
 }
 
-export default {
+function _checkParams (locale, timezone) {
+  if (locale == null) throw Error('locale must be specified')
+  if (timezone == null) throw Error('timezone must be specified')
+}
+
+const DateTime = {
   now,
   parse,
   browserTimeZone,
@@ -96,7 +101,5 @@ export default {
   toLocaleString
 }
 
-function _checkParams (locale, timezone) {
-  if (locale == null) throw Error('locale must be specified')
-  if (timezone == null) throw Error('timezone must be specified')
-}
+export default DateTime
+export { DateTime }

@@ -21,38 +21,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
 
-import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
-import getComputedStyle from '@instructure/ui-dom-utils/lib/getComputedStyle'
+import { expect, mount } from '@instructure/ui-test-utils'
+import { getTextDirection } from '../getTextDirection'
 
-let observer
+describe('getTextDirection', async () => {
+  it('defaults the dir of <html>', async () => {
+    expect(getTextDirection()).to.equal(document.documentElement.getAttribute('dir'))
+  })
 
-/**
- * ---
- * category: utilities/i18n
- * ---
- *
- * Return the direction ('ltr' or 'rtl') of an element
- * @param {Element} element will use the <html> element by default
- * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
- */
-export default canUseDOM ? (() => {
-  /**
-   * use a cached value for the default of <html> element's "dir" so we don't
-   * have to call the expensive getComputedStyle to look it it up every time
-   */
-  const htmlEl = document.documentElement
-  let htmlElDir = htmlEl.getAttribute('dir') || getComputedStyle(htmlEl).direction
+  it('defaults to the dir of <html> when passed an element', async () => {
+    const subject = await mount(
+      <div><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode())).to.equal('ltr')
+  })
 
-  if (!observer) {
-    observer = new MutationObserver(() => {
-      htmlElDir = htmlEl.getAttribute('dir')
-    })
-    observer.observe(htmlEl, { attributes: true })
-  }
+  it('returns "rtl" if the `dir` of the element is "rtl"', async () => {
+    const subject = await mount(
+      <div dir="rtl"><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode())).to.equal('rtl')
+  })
 
-  return element => {
-    if (typeof element === 'undefined' || (element === htmlEl)) return htmlElDir
-    return getComputedStyle(element).direction
-  }
-})() : function(){}
+  it('inherits value set by ancestor', async () => {
+    const subject = await mount(
+      <div dir="rtl"><h1>Hello</h1></div>
+    )
+    expect(getTextDirection(subject.getDOMNode().firstChild)).to.equal('rtl')
+  })
+})

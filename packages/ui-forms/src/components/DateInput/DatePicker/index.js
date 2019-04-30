@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import keycode from 'keycode'
 
 import { controllable } from '@instructure/ui-prop-types'
-import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/I18nPropTypes'
 import themeable from '@instructure/ui-themeable'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'

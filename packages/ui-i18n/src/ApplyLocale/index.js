@@ -21,5 +21,55 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export ApplyTextDirection from './ApplyTextDirection'
-export ApplyLocale from './ApplyLocale'
+
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { ensureSingleChild } from '@instructure/ui-react-utils'
+
+/**
+---
+category: components/utilities
+---
+**/
+class ApplyLocale extends Component {
+  static propTypes = {
+    /**
+      A standard language id
+    **/
+    locale: PropTypes.string,
+    /**
+      A timezone identifier in the format: Area/Location
+    **/
+    timezone: PropTypes.string,
+    /**
+    * accepts only one child (children must be wrapped in a single component/element)
+    */
+    children: PropTypes.node
+  }
+
+  static defaultProps = {
+    locale: undefined,
+    timezone: undefined,
+    children: undefined
+  }
+
+  static childContextTypes = {
+    locale: PropTypes.string,
+    timezone: PropTypes.string
+  }
+
+  getChildContext () {
+    return {
+      locale: this.props.locale,
+      timezone: this.props.timezone
+    }
+  }
+
+  render () {
+    return ensureSingleChild(this.props.children)
+  }
+}
+
+export default ApplyLocale
+export { ApplyLocale }

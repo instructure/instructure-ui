@@ -22,7 +22,7 @@
 * SOFTWARE.
 */
 
-import canUseDOM from '@instructure/ui-dom-utils/lib/canUseDOM'
+import { canUseDOM } from '@instructure/ui-dom-utils'
 
 const defaultLocale = 'en-US'
 
@@ -33,7 +33,7 @@ const defaultLocale = 'en-US'
 * Localization utilities
 * @module Locale
 */
-export default {
+const Locale = {
   defaultLocale,
 
   /**
@@ -55,3 +55,6 @@ export default {
     return defaultLocale
   }
 }
+
+export default Locale
+export { Locale }

@@ -23,7 +23,7 @@
  */
 
 import { getFontSize } from '@instructure/ui-dom-utils'
-import parseUnit from './parseUnit'
+import { parseUnit } from './parseUnit'
 
 /**
  * ---

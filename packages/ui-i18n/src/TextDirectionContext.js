@@ -21,50 +21,57 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import React from 'react'
 import PropTypes from 'prop-types'
 
-import { expect, mount, within } from '@instructure/ui-test-utils'
+/**
+ * ---
+ * category: utilities/i18n
+ * ---
+ * @module TextDirectionContext
+ */
+const CONTEXT_KEY = '@@bidirectional'
 
-import ApplyLocale from '../index'
+const DIRECTION = {
+  ltr: 'ltr',
+  rtl: 'rtl'
+}
 
-class LocalizableComponent extends React.Component {
-  static contextTypes = {
-    locale: PropTypes.string,
-    timezone: PropTypes.string
-  }
+const TextDirectionContext = {
+  DIRECTION,
 
-  render () {
-    return (
-      <div>
-        <span>{this.context.locale}</span>
-        <span>{this.context.timezone}</span>
-      </div>
-    )
+  /**
+   * React context types for [bidirectional](#bidirectional) components and
+   * the [ApplyTextDirection](#ApplyTextDirection) component.
+   */
+  types: {
+    [CONTEXT_KEY]: PropTypes.shape({
+      dir: PropTypes.oneOf(Object.values(DIRECTION))
+    })
+  },
+
+  /**
+   * create direction context
+   * @param {string} dir
+   */
+  makeTextDirectionContext (dir) {
+    return {[CONTEXT_KEY]: {
+      dir
+    }}
+  },
+
+  /**
+   * get a direction context from a context object
+   * @param {ReactContext} context React context object
+   * @returns {Object} a direction context object
+   */
+  getTextDirectionContext (context) {
+    if (context) {
+      return context[CONTEXT_KEY]
+    }
   }
 }
 
-describe('<ApplyLocale />', async () => {
-  it('applies locale context', async () => {
-    const subject = await mount(
-      <ApplyLocale locale="fr" >
-        <LocalizableComponent />
-      </ApplyLocale>
-    )
-
-    const component = within(subject.getDOMNode())
-    expect(await component.find(':textContent(fr)')).to.exist()
-  })
-
-  it('applies timezone context', async () => {
-    const subject = await mount(
-      <ApplyLocale timezone="Europe/Paris">
-        <LocalizableComponent />
-      </ApplyLocale>
-    )
-
-    const component = within(subject.getDOMNode())
-    expect(await component.find(':textContent(Europe/Paris)')).to.exist()
-  })
-})
+export default TextDirectionContext
+export {
+  TextDirectionContext
+}

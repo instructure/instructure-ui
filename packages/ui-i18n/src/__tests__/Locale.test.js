@@ -23,8 +23,7 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import Locale from '../Locale'
-
+import { Locale } from '../Locale'
 
 describe('browserLocale', () => {
   it('returns the navigator language if a navigator is explicity passed', () => {

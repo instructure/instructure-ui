@@ -9,7 +9,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ApplyLocale",
-    "replace": "@instructure/ui-i18n/lib/components/ApplyLocale"
+    "replace": "@instructure/ui-i18n/lib/ApplyLocale"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Alert",
@@ -310,5 +310,13 @@
   {
     "pattern": "^@instructure/ui-motion/lib/components",
     "replace": "@instructure/ui-motion/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-i18n/lib/components",
+    "replace": "@instructure/ui-i18n/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-i18n/lib/utils",
+    "replace": "@instructure/ui-i18n/lib"
   }
 ]

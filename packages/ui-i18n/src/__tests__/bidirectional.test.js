@@ -24,8 +24,9 @@
 
 import React from 'react'
 import { expect, mount } from '@instructure/ui-test-utils'
-import bidirectional from '../bidirectional'
-import { makeTextDirectionContext } from '../TextDirectionContextTypes'
+
+import { bidirectional } from '../bidirectional'
+import { TextDirectionContext } from '../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component {
@@ -52,7 +53,7 @@ describe('@bidirectional', async () => {
   })
 
   it('should give context preference when props and context are present', async () => {
-    const context = makeTextDirectionContext('rtl')
+    const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(<BidirectionalComponent dir="ltr" />, { context })
 
     expect(subject.getDOMNode().getAttribute('data-dir')).to.equal('rtl')

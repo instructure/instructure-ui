@@ -29,7 +29,7 @@ import classnames from 'classnames'
 
 import { transform } from '@babel/standalone'
 
-import ApplyTextDirection, { DIRECTION } from '@instructure/ui-i18n/lib/components/ApplyTextDirection'
+import ApplyTextDirection from '@instructure/ui-i18n/lib/ApplyTextDirection'
 import themeable, { ApplyTheme } from '@instructure/ui-themeable'
 
 import styles from './styles.css'
@@ -123,7 +123,7 @@ export default class Preview extends Component {
 
       let elToRender = (
         <ApplyTextDirection
-          dir={this.props.rtl ? DIRECTION.rtl : DIRECTION.ltr}
+          dir={this.props.rtl ? ApplyTextDirection.DIRECTION.rtl : ApplyTextDirection.DIRECTION.ltr}
           as="div"
         >
           {el}

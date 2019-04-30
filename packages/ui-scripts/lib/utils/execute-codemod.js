@@ -22,8 +22,7 @@
  * SOFTWARE.
  */
 
-const path = require('path')
-const { info, error, runCommandSync } = require('@instructure/command-utils')
+const { info, runCommandSync } = require('@instructure/command-utils')
 
 module.exports = ({ sourcePath = process.cwd(), codemodPath, configPath, ignore = ['**/node_modules/**'] } = {}) => {
   info(`Running ${codemodPath}...`)

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { mount, expect, find, findAll } from '@instructure/ui-test-utils'
 
-import testable from '../index'
+import { testable } from '../index'
 
 class Component extends React.Component {
   static propTypes = {

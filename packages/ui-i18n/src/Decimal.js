@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import Locale from './Locale'
+import { Locale } from './Locale'
 import BaseDecimal from 'decimal.js/decimal'
 
 /**
@@ -89,8 +89,6 @@ Decimal.prototype.toFixed = _localizePrecision(Decimal.prototype._toFixed)
 
 Decimal.prototype._toPrecision = Decimal.prototype.toPrecision
 Decimal.prototype.toPrecision = _localizePrecision(Decimal.prototype._toPrecision)
-
-export default Decimal
 
 // TODO: simplify this, it supports many formats we don't need. It should be
 // enough to strip thousands separators and change the decimal separator to `.`.
@@ -214,3 +212,6 @@ function _localizePrecision (fn) {
     return _format(_localize(value, locale), locale)
   }
 }
+
+export default Decimal
+export { Decimal }

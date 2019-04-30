@@ -25,9 +25,9 @@
 import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
-import ApplyTextDirection from '../index'
-import bidirectional from '../../../bidirectional'
-import { makeTextDirectionContext } from '../../../TextDirectionContextTypes'
+import { ApplyTextDirection } from '../index'
+import { bidirectional } from '../../bidirectional'
+import { TextDirectionContext } from '../../TextDirectionContext'
 
 @bidirectional()
 class BidirectionalComponent extends React.Component {
@@ -48,7 +48,7 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should take on the context direction if dir prop is not supplied', async () => {
-    const context = makeTextDirectionContext('rtl')
+    const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
       <ApplyTextDirection>
         Hello world
@@ -59,7 +59,7 @@ describe('<ApplyTextDirection />', async () => {
   })
 
   it('should give dir prop preference over context and default document element when supplied', async () => {
-    const context = makeTextDirectionContext('rtl')
+    const context = TextDirectionContext.makeTextDirectionContext('rtl')
     const subject = await mount(
       <ApplyTextDirection dir="ltr">
         Hello world

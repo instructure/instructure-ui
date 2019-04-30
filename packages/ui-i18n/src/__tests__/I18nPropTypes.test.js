@@ -23,9 +23,8 @@
  */
 
 import { expect } from '@instructure/ui-test-utils'
-import I18nPropTypes from '../I18nPropTypes'
+import { I18nPropTypes } from '../I18nPropTypes'
 
-/* eslint-disable mocha/no-synchronous-tests */
 describe('I18nPropTypes', () => {
   describe('iso8601', () => {
     const { iso8601 } = I18nPropTypes
@@ -131,4 +130,3 @@ describe('I18nPropTypes', () => {
     })
   })
 })
-/* eslint-enable mocha/no-synchronous-tests */

@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import themeable from '@instructure/ui-themeable'
 import { controllable } from '@instructure/ui-prop-types'
-import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/I18nPropTypes'
 import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import DateTime from '@instructure/ui-i18n/lib/DateTime'
 import Locale from '@instructure/ui-i18n/lib/Locale'

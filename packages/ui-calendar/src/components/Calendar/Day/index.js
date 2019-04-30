@@ -32,7 +32,7 @@ import AccessibleContent from '@instructure/ui-a11y/lib/AccessibleContent'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
-import I18nPropTypes from '@instructure/ui-i18n/lib/utils/I18nPropTypes'
+import I18nPropTypes from '@instructure/ui-i18n/lib/I18nPropTypes'
 
 import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'

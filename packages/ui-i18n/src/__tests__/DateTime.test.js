@@ -22,7 +22,9 @@
  * SOFTWARE.
  */
 import { expect } from '@instructure/ui-test-utils'
-import { now, isValid, browserTimeZone, parse, toLocaleString } from '../DateTime'
+import { DateTime } from '../DateTime'
+
+const { now, isValid, browserTimeZone, parse, toLocaleString } = DateTime
 
 describe('DateTime', () => {
   const timezone = "America/Halifax"  // -3

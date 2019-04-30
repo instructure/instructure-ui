@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import ApplyLocale from '@instructure/ui-i18n/lib/components/ApplyLocale'
+import ApplyLocale from '@instructure/ui-i18n/lib/ApplyLocale'
 
 // eslint-disable-next-line react/prop-types
 export default function renderPage ({ examples, renderExample }) {

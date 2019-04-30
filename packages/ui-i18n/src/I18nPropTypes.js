@@ -69,3 +69,4 @@ const I18nPropTypes = {
 I18nPropTypes.iso8601.isRequired = makeRequirable(I18nPropTypes.iso8601)
 
 export default I18nPropTypes
+export { I18nPropTypes }

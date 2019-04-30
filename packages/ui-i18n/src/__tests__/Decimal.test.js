@@ -23,8 +23,8 @@
  */
 
 import { expect, stub } from '@instructure/ui-test-utils'
-import Locale from '../Locale'
-import Decimal from '../Decimal'
+import { Locale } from '../Locale'
+import { Decimal } from '../Decimal'
 
 describe('Decimal', () => {
   const uniqueDelimiters = {

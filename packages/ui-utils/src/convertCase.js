@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import capitalizeFirstLetter from './capitalizeFirstLetter'
+import { capitalizeFirstLetter } from './capitalizeFirstLetter'
 
 /**
  * ---

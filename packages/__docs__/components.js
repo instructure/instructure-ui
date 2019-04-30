@@ -58,7 +58,8 @@ export { DateInput as DateInputControlled } from '@instructure/ui-date-input/lib
 export { TextInput as TextInputControlled } from '@instructure/ui-text-input/lib/components'
 export { Table as TableControlled } from '@instructure/ui-table/lib/components'
 
-export * from '@instructure/ui-i18n/lib/components'
+export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
+
 export * from '@instructure/ui-layout/lib/components'
 export * from '@instructure/ui-menu/lib/components'
 

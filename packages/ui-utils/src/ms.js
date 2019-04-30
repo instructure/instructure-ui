@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import parseUnit from './parseUnit'
+import { parseUnit } from './parseUnit'
 
 /**
  * ---

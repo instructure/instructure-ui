@@ -22,48 +22,49 @@
  * SOFTWARE.
  */
 
-/**
- * ---
- * category: utilities/i18n
- * ---
- * @module TextDirectionContextTypes
- */
+import React from 'react'
 import PropTypes from 'prop-types'
 
-const CONTEXT_KEY = '@@bidirectional'
+import { expect, mount, within } from '@instructure/ui-test-utils'
 
-export const DIRECTION = {
-  ltr: 'ltr',
-  rtl: 'rtl'
-}
+import { ApplyLocale } from '../index'
 
-/**
- * React context types for [bidirectional](#bidirectional) components and
- * the [ApplyTextDirection](#ApplyTextDirection) component.
- */
-export const TextDirectionContextTypes = {
-  [CONTEXT_KEY]: PropTypes.shape({
-    dir: PropTypes.oneOf(Object.values(DIRECTION))
-  })
-}
+class LocalizableComponent extends React.Component {
+  static contextTypes = {
+    locale: PropTypes.string,
+    timezone: PropTypes.string
+  }
 
-/**
- * create direction context
- * @param {string} dir
- */
-export function makeTextDirectionContext (dir) {
-  return {[CONTEXT_KEY]: {
-    dir
-  }}
-}
-
-/**
- * get a direction context from a context object
- * @param {ReactContext} context React context object
- * @returns {Object} a direction context object
- */
-export function getTextDirectionContext (context) {
-  if (context) {
-    return context[CONTEXT_KEY]
+  render () {
+    return (
+      <div>
+        <span>{this.context.locale}</span>
+        <span>{this.context.timezone}</span>
+      </div>
+    )
   }
 }
+
+describe('<ApplyLocale />', async () => {
+  it('applies locale context', async () => {
+    const subject = await mount(
+      <ApplyLocale locale="fr" >
+        <LocalizableComponent />
+      </ApplyLocale>
+    )
+
+    const component = within(subject.getDOMNode())
+    expect(await component.find(':textContent(fr)')).to.exist()
+  })
+
+  it('applies timezone context', async () => {
+    const subject = await mount(
+      <ApplyLocale timezone="Europe/Paris">
+        <LocalizableComponent />
+      </ApplyLocale>
+    )
+
+    const component = within(subject.getDOMNode())
+    expect(await component.find(':textContent(Europe/Paris)')).to.exist()
+  })
+})
