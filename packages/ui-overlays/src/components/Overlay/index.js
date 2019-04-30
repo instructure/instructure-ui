@@ -32,7 +32,7 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import { pickProps, omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import { element } from '@instructure/ui-prop-types'
 
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import Portal from '@instructure/ui-portal/lib/Portal'
 
 import Transition from '@instructure/ui-motion/lib/Transition'
 

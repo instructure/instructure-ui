@@ -70,7 +70,9 @@ export * from '@instructure/ui-number-input/lib/components'
 export * from '@instructure/ui-overlays/lib/components'
 export * from '@instructure/ui-pages/lib/components'
 export * from '@instructure/ui-pagination/lib/components'
-export * from '@instructure/ui-portal/lib/components'
+
+export { Portal } from '@instructure/ui-portal'
+
 export * from '@instructure/ui-selectable/lib/components'
 export * from '@instructure/ui-svg-images/lib/components'
 export * from '@instructure/ui-tabs/lib/components'

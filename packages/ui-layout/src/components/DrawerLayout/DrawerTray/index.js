@@ -34,7 +34,7 @@ import createChainedFunction from '@instructure/ui-utils/lib/createChainedFuncti
 import testable from '@instructure/ui-testable'
 
 import Dialog from '@instructure/ui-a11y/lib/Dialog'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import Portal from '@instructure/ui-portal/lib/Portal'
 
 import { mirrorHorizontalPlacement } from '../../../utils/mirrorPlacement'
 

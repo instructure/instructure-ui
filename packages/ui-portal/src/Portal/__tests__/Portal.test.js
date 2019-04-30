@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub } from '@instructure/ui-test-utils'
 
-import Portal from '../index'
+import { Portal } from '../index'
 import PortalLocator from '../locator'
 
 describe('<Portal />', async () => {

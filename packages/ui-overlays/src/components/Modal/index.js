@@ -34,7 +34,7 @@ import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
 import Transition from '@instructure/ui-motion/lib/Transition'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import Portal from '@instructure/ui-portal/lib/Portal'
 
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'

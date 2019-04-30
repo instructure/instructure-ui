@@ -22,4 +22,4 @@
  * SOFTWARE.
  */
 
-export * from './components'
+export { Portal } from './Portal'

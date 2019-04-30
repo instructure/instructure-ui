@@ -38,7 +38,7 @@ import deepEqual from '@instructure/ui-utils/lib/deepEqual'
 import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
 import testable from '@instructure/ui-testable'
 
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import Portal from '@instructure/ui-portal/lib/Portal'
 
 import calculateElementPosition from '../../utils/calculateElementPosition'
 import LayoutPropTypes from '../../utils/LayoutPropTypes'

@@ -36,10 +36,11 @@ import testable from '@instructure/ui-testable'
 ---
 category: components/utilities
 ---
+@module Portal
 **/
 @testable()
 @bidirectional()
-export default class Portal extends Component {
+class Portal extends Component {
   static propTypes = {
     /**
      * Wheter or not the `<Portal />` is open
@@ -190,3 +191,6 @@ export default class Portal extends Component {
     return this.DOMNode
   }
 }
+
+export default Portal
+export { Portal }

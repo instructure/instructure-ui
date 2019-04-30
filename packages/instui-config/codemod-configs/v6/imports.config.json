@@ -117,7 +117,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Portal",
-    "replace": "@instructure/ui-portal/lib/components/Portal"
+    "replace": "@instructure/ui-portal/lib/Portal"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Position",
@@ -318,5 +318,9 @@
   {
     "pattern": "^@instructure/ui-i18n/lib/utils",
     "replace": "@instructure/ui-i18n/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-portal/lib/components",
+    "replace": "@instructure/ui-portal/lib"
   }
 ]
