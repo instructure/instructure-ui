@@ -24,11 +24,12 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import themeable from '@instructure/ui-themeable'
-import ms from '@instructure/ui-utils/lib/ms'
-import testable from '@instructure/ui-testable'
 
-import BaseTransition from './BaseTransition'
+import { themeable } from '@instructure/ui-themeable'
+import { ms } from '@instructure/ui-utils/lib/ms'
+import { testable } from '@instructure/ui-testable'
+
+import { BaseTransition } from './BaseTransition'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -37,10 +38,11 @@ import theme from './theme'
 ---
 category: components/utilities
 ---
+@module Transition
 **/
 @testable()
 @themeable(theme, styles)
-export default class Transition extends Component {
+class Transition extends Component {
   static propTypes = {
     type: PropTypes.oneOf([
       'fade',
@@ -171,3 +173,6 @@ export default class Transition extends Component {
     )
   }
 }
+
+export default Transition
+export { Transition }

@@ -33,7 +33,7 @@ import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
 import themeable from '@instructure/ui-themeable'

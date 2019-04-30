@@ -61,7 +61,9 @@ export { Table as TableControlled } from '@instructure/ui-table/lib/components'
 export * from '@instructure/ui-i18n/lib/components'
 export * from '@instructure/ui-layout/lib/components'
 export * from '@instructure/ui-menu/lib/components'
-export * from '@instructure/ui-motion/lib/components'
+
+export { Transition } from '@instructure/ui-motion'
+
 export * from '@instructure/ui-navigation/lib/components'
 export * from '@instructure/ui-number-input/lib/components'
 export * from '@instructure/ui-overlays/lib/components'

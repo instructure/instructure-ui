@@ -161,7 +161,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Transition",
-    "replace": "@instructure/ui-motion/lib/components/Transition"
+    "replace": "@instructure/ui-motion/lib/Transition"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Tray",
@@ -306,5 +306,9 @@
   {
     "pattern": "^@instructure/ui-a11y/lib/utils",
     "replace": "@instructure/ui-a11y/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-motion/lib/components",
+    "replace": "@instructure/ui-motion/lib"
   }
 ]

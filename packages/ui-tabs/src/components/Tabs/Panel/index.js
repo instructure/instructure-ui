@@ -32,7 +32,7 @@ import testable from '@instructure/ui-testable'
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'
 
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 
 import styles from './styles.css'
 import theme from './theme'

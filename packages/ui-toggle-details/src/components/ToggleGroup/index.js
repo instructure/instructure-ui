@@ -29,7 +29,7 @@ import { omitProps, pickProps } from '@instructure/ui-react-utils/lib/passthroug
 import getElementType from '@instructure/ui-react-utils/lib/getElementType'
 import Button from '@instructure/ui-buttons/lib/components/Button'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 import { controllable } from '@instructure/ui-prop-types'
 import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 

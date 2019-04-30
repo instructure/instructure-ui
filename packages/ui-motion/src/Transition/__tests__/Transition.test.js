@@ -24,7 +24,8 @@
 
 import React from 'react'
 import { expect, mount, stub, wait, within, find } from '@instructure/ui-test-utils'
-import Transition from '../index'
+
+import { Transition } from '../index'
 import styles from '../styles.css'
 
 describe('<Transition />', async () => {

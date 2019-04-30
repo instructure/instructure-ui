@@ -24,9 +24,9 @@
 
 import React from 'react'
 import PropTypes from 'prop-types'
-import getClassList from '@instructure/ui-dom-utils/lib/getClassList'
-import ensureSingleChild from '@instructure/ui-react-utils/lib/ensureSingleChild'
-import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
+
+import { getClassList } from '@instructure/ui-dom-utils'
+import { ensureSingleChild, safeCloneElement} from '@instructure/ui-react-utils'
 
 const STATES = {
   EXITED: -2,
@@ -39,7 +39,7 @@ const STATES = {
   Note: this is forked from https://github.com/react-bootstrap/react-overlays/blob/master/src/Transition.js
   so that it works with css modules. The internals are pretty different now, but it has roughly the same api.
 **/
-export default class BaseTransition extends React.Component {
+class BaseTransition extends React.Component {
   static propTypes = {
     /**
      * Show the component? Triggers the enter or exit animation.
@@ -381,3 +381,6 @@ export default class BaseTransition extends React.Component {
     }
   }
 }
+
+export default BaseTransition
+export { BaseTransition }

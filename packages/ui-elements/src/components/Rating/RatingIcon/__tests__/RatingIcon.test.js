@@ -26,8 +26,8 @@ import React from 'react'
 import { expect, mount, within } from '@instructure/ui-test-utils'
 
 import ApplyTheme from '@instructure/ui-themeable/lib/components/ApplyTheme'
-import Transition from '@instructure/ui-motion/lib/components/Transition'
-import TransitionLocator from '@instructure/ui-motion/lib/components/Transition/locator'
+import Transition from '@instructure/ui-motion/lib/Transition'
+import TransitionLocator from '@instructure/ui-motion/lib/Transition/locator'
 
 import RatingIcon from '../index'
 

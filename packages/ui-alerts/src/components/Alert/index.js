@@ -38,7 +38,7 @@ import IconInfoBorderlessSolid from '@instructure/ui-icons/lib/IconInfoBorderles
 import IconWarningBorderlessSolid from '@instructure/ui-icons/lib/IconWarningBorderlessSolid'
 import IconNoSolid from '@instructure/ui-icons/lib/IconNoSolid'
 
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 
 import themeable from '@instructure/ui-themeable'
 import ThemeablePropTypes from '@instructure/ui-themeable/lib/utils/ThemeablePropTypes'

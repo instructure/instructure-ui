@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 import { omitProps } from '@instructure/ui-react-utils/lib/passthroughProps'
 import themeable from '@instructure/ui-themeable'
 import { element } from '@instructure/ui-prop-types'

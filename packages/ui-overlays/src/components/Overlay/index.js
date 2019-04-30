@@ -34,7 +34,7 @@ import { element } from '@instructure/ui-prop-types'
 
 import Portal from '@instructure/ui-portal/lib/components/Portal'
 
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import Transition from '@instructure/ui-motion/lib/Transition'
 
 /**
 ---

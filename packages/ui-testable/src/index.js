@@ -21,61 +21,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-import { findDOMNode } from 'react-dom'
-
-import { decorator } from '@instructure/ui-decorator'
-
-export default decorator((ComposedComponent) => {
-  const displayName = ComposedComponent.displayName || ComposedComponent.name
-  const locator = {
-    attribute: 'data-cid',
-    value: displayName
-  }
-  const selector = `[${locator.attribute}~="${locator.value}"]`
-  class TestableComponent extends ComposedComponent {
-    static selector = selector
-    componentDidMount (...args) {
-      if (super.componentDidMount) {
-        super.componentDidMount(...args)
-      }
-      this.appendLocatorAttribute()
-    }
-    componentDidUpdate (...args) {
-      if (super.componentDidUpdate) {
-        super.componentDidUpdate(...args)
-      }
-      this.appendLocatorAttribute()
-    }
-    componentWillUnmount (...args) {
-      this._testableUnmounted = true
-      if (super.componentWillUnmount) {
-        super.componentWillUnmount(...args)
-      }
-      clearTimeout(this.locatorTimeout)
-    }
-    appendLocatorAttribute () {
-      this.locatorTimeout = setTimeout(() => {
-        let node
-        if (this._testableUnmounted) {
-          return
-        }
-        try {
-          // Use this.DOMNode for components that render as non-native Portals...
-          node = findDOMNode(this) || this.DOMNode
-        } catch (e) {
-          console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
-        }
-        if (node && node.getAttribute) {
-          const attribute = node.getAttribute(locator.attribute)
-          const values = typeof attribute === 'string' ? attribute.split(/\s+/) : []
-          if (!values.includes(locator.value)) {
-            values.push(locator.value)
-          }
-          node.setAttribute(locator.attribute, values.join(' '))
-        }
-      })
-    }
-  }
-  return TestableComponent
-})
+import { testable } from './testable'
+export default testable
+export { testable }
