@@ -33,7 +33,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import Select from '@instructure/ui-forms/lib/components/Select'
 import View from '@instructure/ui-layout/lib/View'
 import DrawerLayout, { DrawerTray, DrawerContent } from '@instructure/ui-layout/lib/DrawerLayout'
-import Mask from '@instructure/ui-overlays/lib/components/Mask'
+import Mask from '@instructure/ui-overlays/lib/Mask'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import Pill from '@instructure/ui-elements/lib/components/Pill'
 

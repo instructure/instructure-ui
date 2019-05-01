@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
-import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
+import Tooltip from '@instructure/ui-overlays/lib/Tooltip'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 
 import Button from '../Button'

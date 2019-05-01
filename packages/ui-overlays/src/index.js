@@ -21,4 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './components'
+export { Mask } from './Mask'
+export { Modal, ModalHeader, ModalBody, ModalFooter } from './Modal'
+export { Overlay } from './Overlay'
+export { Popover, PopoverTrigger, PopoverContent } from './Popover'
+export { Tooltip } from './Tooltip'
+export { Tray } from './Tray'

@@ -23,7 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 import CalendarLocator from '@instructure/ui-calendar/lib/components/Calendar/locator'
-import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 
 import DateInput from './index'
 

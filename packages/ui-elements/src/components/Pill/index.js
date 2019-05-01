@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import View from '@instructure/ui-layout/lib/View'
-import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
+import Tooltip from '@instructure/ui-overlays/lib/Tooltip'
 import TruncateText from '../TruncateText'
 
 import themeable from '@instructure/ui-themeable'

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { FocusableView } from '@instructure/ui-focusable/lib/components/Focusable'
+import FocusableView from '@instructure/ui-focusable/lib/FocusableView'
 import View from '@instructure/ui-layout/lib/View'
 import AccessibleContent from '@instructure/ui-a11y/lib/AccessibleContent'
 import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'

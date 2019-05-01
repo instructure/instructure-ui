@@ -38,7 +38,8 @@ export * from '@instructure/ui-calendar/lib/components'
 export * from '@instructure/ui-code-editor/lib/components'
 export * from '@instructure/ui-editable/lib/components'
 export * from '@instructure/ui-elements/lib/components'
-export * from '@instructure/ui-focusable/lib/components'
+
+export { Focusable, FocusableView } from '@instructure/ui-focusable'
 
 export Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
 export CheckboxGroup from '@instructure/ui-forms/lib/components/CheckboxGroup'
@@ -79,7 +80,16 @@ export { Transition } from '@instructure/ui-motion'
 
 export * from '@instructure/ui-navigation/lib/components'
 export * from '@instructure/ui-number-input/lib/components'
-export * from '@instructure/ui-overlays/lib/components'
+
+export {
+  Mask,
+  Modal, ModalHeader, ModalBody, ModalFooter,
+  Overlay,
+  Popover, PopoverTrigger, PopoverContent,
+  Tooltip,
+  Tray
+} from '@instructure/ui-overlays'
+
 export * from '@instructure/ui-pages/lib/components'
 export * from '@instructure/ui-pagination/lib/components'
 

@@ -28,11 +28,11 @@ import ReactDOM from 'react-dom'
 
 import themeable from '@instructure/ui-themeable'
 
-import Modal, { ModalBody } from '@instructure/ui-overlays/lib/components/Modal'
+import Modal, { ModalBody } from '@instructure/ui-overlays/lib/Modal'
 import AccessibleContent from '@instructure/ui-a11y/lib/AccessibleContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
-import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'
+import Tooltip from '@instructure/ui-overlays/lib/Tooltip'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
 import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'

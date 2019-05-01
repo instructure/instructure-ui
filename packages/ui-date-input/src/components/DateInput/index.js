@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import Calendar from '@instructure/ui-calendar/lib/components/Calendar'
 import IconCalendarMonthLine from '@instructure/ui-icons/lib/IconCalendarMonthLine'
-import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
+import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/Popover'
 import Selectable from '@instructure/ui-selectable/lib/components/Selectable'
 import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
 

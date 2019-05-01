@@ -31,7 +31,7 @@ import Menu from './index'
 import MenuItem from './MenuItem/locator'
 import MenuItemGroup from './MenuItemGroup/locator'
 
-import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 
 const customMethods = {
   findAllItems: (...args) => {

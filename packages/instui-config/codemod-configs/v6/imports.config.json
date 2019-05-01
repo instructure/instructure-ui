@@ -89,7 +89,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Mask",
-    "replace": "@instructure/ui-overlays/lib/components/Mask"
+    "replace": "@instructure/ui-overlays/lib/Mask"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Media",
@@ -101,7 +101,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Modal",
-    "replace": "@instructure/ui-overlays/lib/components/Modal"
+    "replace": "@instructure/ui-overlays/lib/Modal"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Pill",
@@ -109,7 +109,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Popover",
-    "replace": "@instructure/ui-overlays/lib/components/Popover"
+    "replace": "@instructure/ui-overlays/lib/Popover"
   },
   {
    "pattern": "^@instructure/ui-core/lib/components/PopoverMenu",
@@ -157,7 +157,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Tooltip",
-    "replace": "@instructure/ui-overlays/lib/components/Tooltip"
+    "replace": "@instructure/ui-overlays/lib/Tooltip"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Transition",
@@ -165,7 +165,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Tray",
-    "replace": "@instructure/ui-overlays/lib/components/Tray"
+    "replace": "@instructure/ui-overlays/lib/Tray"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TreeBrowser",
@@ -338,5 +338,17 @@
   {
     "pattern": "^@instructure/ui-buttons/lib/components",
     "replace": "@instructure/ui-buttons/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-overlays/lib/components",
+    "replace": "@instructure/ui-overlays/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-focsuable/lib/components/Focusable/FocusableView",
+    "replace": "@instructure/ui-focusable/lib/FocusableView"
+  },
+  {
+    "pattern": "^@instructure/ui-focsuable/lib/components",
+    "replace": "@instructure/ui-focusable/lib"
   }
 ]

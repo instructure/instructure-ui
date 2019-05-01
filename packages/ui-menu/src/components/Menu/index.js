@@ -26,7 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import keycode from 'keycode'
 
-import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/components/Popover'
+import Popover, { PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/Popover'
 
 import uid from '@instructure/uid'
 import { controllable, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'

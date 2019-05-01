@@ -24,7 +24,7 @@
 import { locator  } from '@instructure/ui-test-utils'
 
 import NavigationItem from './index'
-import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
+import TooltipLocator from '@instructure/ui-overlays/lib/Tooltip/locator'
 
 export default locator(NavigationItem.selector, {
   findTooltipContent: (...args) => TooltipLocator.findContent(...args)

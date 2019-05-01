@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { locator, find } from '@instructure/ui-test-utils'
-import TooltipLocator from '@instructure/ui-overlays/lib/components/Tooltip/locator'
+import TooltipLocator from '@instructure/ui-overlays/lib/Tooltip/locator'
 
 import PaginationArrowButton from './index'
 

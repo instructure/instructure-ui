@@ -23,7 +23,7 @@
  */
 import { locator } from '@instructure/ui-test-utils'
 
-import PopoverLocator from '@instructure/ui-overlays/lib/components/Popover/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 
 import DateInput from './index'
 import DatePickerLocator from './DatePicker/locator'
