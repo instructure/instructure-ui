@@ -17,11 +17,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Avatar",
-    "replace": "@instructure/ui-elements/lib/components/Avatar"
+    "replace": "@instructure/ui-elements/lib/Avatar"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Badge",
-    "replace": "@instructure/ui-elements/lib/components/Badge"
+    "replace": "@instructure/ui-elements/lib/Badge"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Billboard",
@@ -69,11 +69,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Heading",
-    "replace": "@instructure/ui-elements/lib/components/Heading"
+    "replace": "@instructure/ui-elements/lib/Heading"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Image",
-    "replace": "@instructure/ui-elements/lib/components/Img"
+    "replace": "@instructure/ui-elements/lib/Img"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
@@ -81,11 +81,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Link",
-    "replace": "@instructure/ui-elements/lib/components/Link"
+    "replace": "@instructure/ui-elements/lib/Link"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/List",
-    "replace": "@instructure/ui-elements/lib/components/List"
+    "replace": "@instructure/ui-elements/lib/List"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Mask",
@@ -97,7 +97,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/MetricsList",
-    "replace": "@instructure/ui-elements/lib/components/MetricsList"
+    "replace": "@instructure/ui-elements/lib/MetricsList"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Modal",
@@ -105,7 +105,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Pill",
-    "replace": "@instructure/ui-elements/lib/components/Pill"
+    "replace": "@instructure/ui-elements/lib/Pill"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Popover",
@@ -125,7 +125,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Progress",
-    "replace": "@instructure/ui-elements/lib/components/Progress"
+    "replace": "@instructure/ui-elements/lib/Progress"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Select",
@@ -133,19 +133,19 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Spinner",
-    "replace": "@instructure/ui-elements/lib/components/Spinner"
+    "replace": "@instructure/ui-elements/lib/Spinner"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Table",
-    "replace": "@instructure/ui-elements/lib/components/Table"
+    "replace": "@instructure/ui-elements/lib/Table"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Tag",
-    "replace": "@instructure/ui-elements/lib/components/Tag"
+    "replace": "@instructure/ui-elements/lib/Tag"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Text",
-    "replace": "@instructure/ui-elements/lib/components/Text"
+    "replace": "@instructure/ui-elements/lib/Text"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TimeInput",
@@ -350,5 +350,9 @@
   {
     "pattern": "^@instructure/ui-focsuable/lib/components",
     "replace": "@instructure/ui-focusable/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-elements/lib/components",
+    "replace": "@instructure/ui-elements/lib"
   }
 ]

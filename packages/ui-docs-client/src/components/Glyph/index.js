@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from '@instructure/ui-buttons/lib/Button'
-import Heading from '@instructure/ui-elements/lib/components/Heading'
+import Heading from '@instructure/ui-elements/lib/Heading'
 import InlineSVG from '@instructure/ui-svg-images/lib/components/InlineSVG'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 

@@ -23,7 +23,7 @@
  */
 import React from 'react'
 import IconAnnouncementLine from '@instructure/ui-icons/lib/IconAnnouncementLine'
-import Img from '@instructure/ui-elements/lib/components/Img'
+import Img from '@instructure/ui-elements/lib/Img'
 
 export default {
   sectionProp: 'size',

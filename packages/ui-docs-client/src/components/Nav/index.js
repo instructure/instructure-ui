@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 
 import Button from '@instructure/ui-buttons/lib/Button'
-import Text from '@instructure/ui-elements/lib/components/Text'
+import Text from '@instructure/ui-elements/lib/Text'
 import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import IconSearch from '@instructure/ui-icons/lib/IconSearchLine'

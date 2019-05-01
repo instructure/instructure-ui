@@ -33,7 +33,7 @@ import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
 import containsActiveElement from '@instructure/ui-dom-utils/lib/containsActiveElement'
 import testable from '@instructure/ui-testable'
 
-import Tag from '@instructure/ui-elements/lib/components/Tag'
+import Tag from '@instructure/ui-elements/lib/Tag'
 import SelectField from '../SelectField'
 import getOptionId from '../utils/getOptionId'
 

@@ -37,7 +37,24 @@ export { Button, CloseButton } from '@instructure/ui-buttons'
 export * from '@instructure/ui-calendar/lib/components'
 export * from '@instructure/ui-code-editor/lib/components'
 export * from '@instructure/ui-editable/lib/components'
-export * from '@instructure/ui-elements/lib/components'
+
+export {
+  Avatar,
+  Badge,
+  Heading,
+  Img,
+  Link,
+  List, ListItem,
+  MetricsList, MetricsListItem,
+  Pill,
+  Progress, ProgressBar, ProgressCircle,
+  Rating,
+  Spinner,
+  Table,
+  Tag,
+  Text,
+  TruncateText
+} from '@instructure/ui-elements'
 
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
 

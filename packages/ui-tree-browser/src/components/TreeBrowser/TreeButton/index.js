@@ -28,7 +28,7 @@ import classnames from 'classnames'
 import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 import Browser from '@instructure/ui-utils/lib/Browser'
-import Img from '@instructure/ui-elements/lib/components/Img'
+import Img from '@instructure/ui-elements/lib/Img'
 
 import styles from './styles.css'
 import theme from './theme'

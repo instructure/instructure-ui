@@ -30,7 +30,7 @@ import themeable from '@instructure/ui-themeable'
 import testable from '@instructure/ui-testable'
 
 import View from '@instructure/ui-layout/lib/View'
-import Spinner from '@instructure/ui-elements/lib/components/Spinner'
+import Spinner from '@instructure/ui-elements/lib/Spinner'
 
 import getOptionId from '../utils/getOptionId'
 

@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Heading from '@instructure/ui-elements/lib/components/Heading'
+import Heading from '@instructure/ui-elements/lib/Heading'
 import View from '@instructure/ui-layout/lib/View'
 
 import themeable from '@instructure/ui-themeable'

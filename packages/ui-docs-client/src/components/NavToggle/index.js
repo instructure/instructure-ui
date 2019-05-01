@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import ToggleDetails from '@instructure/ui-toggle-details/lib/components/ToggleDetails'
-import Text from '@instructure/ui-elements/lib/components/Text'
+import Text from '@instructure/ui-elements/lib/Text'
 
 export default class NavToggle extends Component {
   static propTypes = {

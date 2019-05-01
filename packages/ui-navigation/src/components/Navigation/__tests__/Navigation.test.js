@@ -24,7 +24,7 @@
 
 import React from 'react'
 import { mount, expect } from '@instructure/ui-test-utils'
-import Badge from '@instructure/ui-elements/lib/components/Badge'
+import Badge from '@instructure/ui-elements/lib/Badge'
 import IconAdminLine from '@instructure/ui-icons/lib/IconAdminLine'
 import IconDashboardLine from '@instructure/ui-icons/lib/IconDashboardLine'
 

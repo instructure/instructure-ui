@@ -25,8 +25,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Heading from '@instructure/ui-elements/lib/components/Heading'
-import Link from '@instructure/ui-elements/lib/components/Link'
+import Heading from '@instructure/ui-elements/lib/Heading'
+import Link from '@instructure/ui-elements/lib/Link'
 import themeable from '@instructure/ui-themeable'
 
 import PandaLogo from './instui-panda.js'

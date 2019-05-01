@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import Table from '@instructure/ui-elements/lib/components/Table'
+import Table from '@instructure/ui-elements/lib/Table'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 
 import compileMarkdown from '../../utils/compileMarkdown'
