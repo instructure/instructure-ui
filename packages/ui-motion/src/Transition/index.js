@@ -26,7 +26,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
-import { ms } from '@instructure/ui-utils/lib/ms'
+import { ms } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
 
 import { BaseTransition } from './BaseTransition'

@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-import * as Children from './utils/children'
-import childrenOrValue from './utils/childrenOrValue'
-import controllable from './utils/controllable'
-import cursor from './utils/cursor'
-import element from './utils/element'
-import makeRequirable from './utils/makeRequirable'
-import xor from './utils/xor'
+import { Children } from './Children'
+import { childrenOrValue } from './childrenOrValue'
+import { controllable } from './controllable'
+import { cursor } from './cursor'
+import { element } from './element'
+import { makeRequirable } from './makeRequirable'
+import { xor } from './xor'
 
 export {
   Children,

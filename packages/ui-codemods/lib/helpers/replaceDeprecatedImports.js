@@ -66,7 +66,7 @@ function replace (p, j, config) {
  * Find imports
  *
  * Example:
- *  import Modal from 'instructure-ui/lib/components/Modal'
+ *  import Modal from 'instructure-ui/lib/Modal'
  */
 module.exports = function replaceDeprecatedImports (j, root, config) {
   let hasModifications = false

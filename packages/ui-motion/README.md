@@ -20,10 +20,10 @@ yarn add @instructure/ui-motion
 
 ```js
 import React from 'react'
-import Heading from '@instructure/ui-elements/lib/components/Heading'
-import Transition from '@instructure/ui-motion/lib/components/Transition'
+import { Heading } from '@instructure/ui-elements'
+import { Transition } from '@instructure/ui-motion'
 
-export default MyTransition = function () {
+const HeadingWithTransition = () => {
   return (
     <Transition transitionOnMount in>
       <Heading>Hi there!</Heading>

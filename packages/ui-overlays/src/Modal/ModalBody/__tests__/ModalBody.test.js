@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
 
-import View from '@instructure/ui-layout/lib/View'
+import { View } from '@instructure/ui-layout'
 
 import { ModalBody } from '../index'
-import ModalBodyLocator from '../locator'
+
+const ModalBodyLocator = locator(ModalBody.selector)
 
 import styles from '../styles.css'
 

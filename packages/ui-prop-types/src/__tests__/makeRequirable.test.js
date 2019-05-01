@@ -34,7 +34,6 @@ function mockValidator (props, propName, componentName) {
 
 mockValidator.isRequired = makeRequirable(mockValidator)
 
-
 describe('makeRequirable', () => {
   it('should validate when not required', () => {
     const props = {

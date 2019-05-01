@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
 import { ScreenReaderContent, hasVisibleChildren } from '@instructure/ui-a11y'
-import { Grid, GridCol, GridRow } from '@instructure/ui-layout'
+import { Grid } from '@instructure/ui-layout'
 import { error } from '@instructure/console/macro'
 import { themeable } from '@instructure/ui-themeable'
 import { omitProps, pickProps, getElementType } from '@instructure/ui-react-utils'
@@ -119,7 +119,7 @@ class FormFieldLayout extends Component {
   renderLabel () {
     if (this.hasVisibleLabel) {
       return (
-        <GridCol
+        <Grid.Col
           textAlign={this.props.labelAlign}
           width={(this.inlineContainerAndLabel) ? 'auto' : 3}
         >
@@ -127,7 +127,7 @@ class FormFieldLayout extends Component {
             aria-hidden={this.elementType === 'fieldset' ? 'true' : null}>
             { this.props.label }
           </FormFieldLabel>
-        </GridCol>
+        </Grid.Col>
       )
     } else if (this.elementType !== 'fieldset') {
       // to avoid duplicate label/legend content
@@ -156,14 +156,14 @@ class FormFieldLayout extends Component {
 
   renderVisibleMessages () {
     return this.hasMessages ? (
-      <GridRow>
-        <GridCol
+      <Grid.Row>
+        <Grid.Col
           offset={(this.inlineContainerAndLabel) ? null : 3}
           textAlign={(this.inlineContainerAndLabel) ? 'end' : null}
         >
           <FormFieldMessages id={this._messagesId} messages={this.props.messages} />
-        </GridCol>
-      </GridRow>
+        </Grid.Col>
+      </Grid.Row>
     ) : null
   }
 
@@ -191,12 +191,12 @@ class FormFieldLayout extends Component {
           startAt={this.props.layout === 'inline' && this.hasVisibleLabel ? 'medium' : null}
           {...pickProps(this.props, Grid.propTypes)}
         >
-          <GridRow>
+          <Grid.Row>
             { this.renderLabel() }
-            <GridCol width={(this.inlineContainerAndLabel) ? 'auto' : null}>
+            <Grid.Col width={(this.inlineContainerAndLabel) ? 'auto' : null}>
               { this.props.children }
-            </GridCol>
-          </GridRow>
+            </Grid.Col>
+          </Grid.Row>
           { this.renderVisibleMessages() }
         </Grid>
       </ElementType>

@@ -21,9 +21,9 @@ yarn add @instructure/ui-code-editor
 
 ```js
 import React from 'react'
-import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
+import { CodeEditor } from '@instructure/ui-code-editor'
 
-export default MyCodeEditor = function () {
+const MyCodeEditor = () => {
   return (
     <CodeEditor
       label='code editor'

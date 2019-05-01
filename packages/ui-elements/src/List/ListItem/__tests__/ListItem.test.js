@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-layout'
 
 import { ListItem } from '../index'
-import ListItemLocator from '../locator'
+
+const ListItemLocator = locator(ListItem.selector)
 
 describe('<ListItem />', async () => {
   it('should render children', async () => {

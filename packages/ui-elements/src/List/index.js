@@ -87,6 +87,8 @@ class List extends Component {
     size: 'medium'
   }
 
+  static Item = ListItem
+
   renderChildren () {
     return Children.map(this.props.children, (child) => {
       if (!child) return // ignore null, falsy children

@@ -20,9 +20,9 @@ yarn add @instructure/ui-pagination
 
 ```js
 import React from 'react'
-import Pagination, { PaginationButton } from '@instructure/ui-pagination/lib/components/Pagination'
+import { Pagination, PaginationButton } from '@instructure/ui-pagination'
 
-export default MyPagination = function () {
+const MyPagination = () => {
   return (
     <Pagination>
       <PaginationButton current>1</PaginationButton>

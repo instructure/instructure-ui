@@ -23,41 +23,42 @@ The `ui-table` package contains the following:
 - [TableControlled](#TableControlled)
 
 ```javascript
----
-example: true
----
-<TableControlled
-  caption='Top rated movies'
->
-  <TableControlled.Head>
-    <TableControlled.Row>
-      <TableControlled.ColHeader>Rank</TableControlled.ColHeader>
-      <TableControlled.ColHeader>Title</TableControlled.ColHeader>
-      <TableControlled.ColHeader>Year</TableControlled.ColHeader>
-      <TableControlled.ColHeader>Rating</TableControlled.ColHeader>
-    </TableControlled.Row>
-  </TableControlled.Head>
-  <TableControlled.Body>
-    <TableControlled.Row>
-      <TableControlled.RowHeader>1</TableControlled.RowHeader>
-      <TableControlled.Cell>The Shawshank Redemption</TableControlled.Cell>
-      <TableControlled.Cell>1994</TableControlled.Cell>
-      <TableControlled.Cell>9.3</TableControlled.Cell>
-    </TableControlled.Row>
-    <TableControlled.Row>
-      <TableControlled.RowHeader>2</TableControlled.RowHeader>
-      <TableControlled.Cell>The Godfather</TableControlled.Cell>
-      <TableControlled.Cell>1972</TableControlled.Cell>
-      <TableControlled.Cell>9.2</TableControlled.Cell>
-    </TableControlled.Row>
-    <TableControlled.Row>
-      <TableControlled.RowHeader>3</TableControlled.RowHeader>
-      <TableControlled.Cell>The Godfather: Part II</TableControlled.Cell>
-      <TableControlled.Cell>1974</TableControlled.Cell>
-      <TableControlled.Cell>9.0</TableControlled.Cell>
-    </TableControlled.Row>
-  </TableControlled.Body>
-</TableControlled>
+import { Table } from '@instructure/ui-table'
+
+const MyTable = () => {
+  return (
+    <Table caption='Top rated movies'>
+      <Table.Head>
+        <Table.Row>
+          <Table.ColHeader>Rank</Table.ColHeader>
+          <Table.ColHeader>Title</Table.ColHeader>
+          <Table.ColHeader>Year</Table.ColHeader>
+          <Table.ColHeader>Rating</Table.ColHeader>
+        </Table.Row>
+      </Table.Head>
+      <Table.Body>
+        <Table.Row>
+          <Table.RowHeader>1</Table.RowHeader>
+          <Table.Cell>The Shawshank Redemption</Table.Cell>
+          <Table.Cell>1994</Table.Cell>
+          <Table.Cell>9.3</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.RowHeader>2</Table.RowHeader>
+          <Table.Cell>The Godfather</Table.Cell>
+          <Table.Cell>1972</Table.Cell>
+          <Table.Cell>9.2</Table.Cell>
+        </Table.Row>
+        <Table.Row>
+          <Table.RowHeader>3</Table.RowHeader>
+          <Table.Cell>The Godfather: Part II</Table.Cell>
+          <Table.Cell>1974</Table.Cell>
+          <Table.Cell>9.0</Table.Cell>
+        </Table.Row>
+      </Table.Body>
+  </Table>
+  )
+}
 ```
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-table.svg

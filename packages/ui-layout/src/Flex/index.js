@@ -103,6 +103,8 @@ class Flex extends Component {
     textAlign: undefined
   }
 
+  static Item = FlexItem
+
   renderChildren () {
     return Children.map(this.props.children, (child) => {
       if (child) {

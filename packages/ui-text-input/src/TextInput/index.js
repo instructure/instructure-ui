@@ -30,7 +30,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { callRenderProp, omitProps, pickProps } from '@instructure/ui-react-utils'
 import { isActiveElement } from '@instructure/ui-dom-utils'
 import { FormField, FormPropTypes } from '@instructure/ui-form-field'
-import { Flex, FlexItem } from '@instructure/ui-layout'
+import { Flex } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 
@@ -255,28 +255,28 @@ class TextInput extends Component {
             renderBeforeOrAfter ?
               <Flex wrapItems>
                 {renderBeforeInput &&
-                  <FlexItem padding="0 0 0 x-small">
+                  <Flex.Item padding="0 0 0 x-small">
                     {callRenderProp(renderBeforeInput)}
-                  </FlexItem>
+                  </Flex.Item>
                 }
-                <FlexItem grow shrink>
+                <Flex.Item grow shrink>
 
                   {/*
                     The input and content after input should not wrap, so they're in their own
                     Flex container
                   */}
                   <Flex>
-                    <FlexItem grow shrink>
+                    <Flex.Item grow shrink>
                       {this.renderInput()}
-                    </FlexItem>
+                    </Flex.Item>
                     {renderAfterInput &&
-                      <FlexItem padding="0 x-small 0 0">
+                      <Flex.Item padding="0 x-small 0 0">
                         {callRenderProp(renderAfterInput)}
-                      </FlexItem>
+                      </Flex.Item>
                     }
                   </Flex>
 
-                </FlexItem>
+                </Flex.Item>
               </Flex>
 
               /* If no prepended or appended content, don't render Flex layout */

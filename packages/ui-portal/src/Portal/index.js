@@ -26,11 +26,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import bidirectional from '@instructure/ui-i18n/lib/bidirectional'
-
+import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
-import shallowEqual from '@instructure/ui-utils/lib/shallowEqual'
-import testable from '@instructure/ui-testable'
+import { shallowEqual } from '@instructure/ui-utils'
+import { testable } from '@instructure/ui-testable'
 
 /**
 ---

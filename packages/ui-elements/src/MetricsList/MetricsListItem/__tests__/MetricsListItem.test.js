@@ -23,10 +23,11 @@
  */
 
 import React from 'react'
-import { expect, mount } from '@instructure/ui-test-utils'
+import { expect, mount, locator } from '@instructure/ui-test-utils'
 
 import { MetricsListItem } from '../index'
-import MetricsListItemLocator from '../locator'
+
+const MetricsListItemLocator = locator(MetricsListItem.selector)
 
 describe('<MetricsListItem />', async () => {
   it('should render the label', async () => {

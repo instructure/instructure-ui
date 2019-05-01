@@ -36,6 +36,9 @@ const STATES = {
 }
 
 /**
+---
+private: true
+---
   Note: this is forked from https://github.com/react-bootstrap/react-overlays/blob/master/src/Transition.js
   so that it works with css modules. The internals are pretty different now, but it has roughly the same api.
 **/

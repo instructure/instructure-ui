@@ -23,7 +23,7 @@
  */
 import React from 'react'
 
-import { PopoverTrigger, PopoverContent } from '../'
+import { Popover } from '../'
 
 export default {
   propValues: {
@@ -39,12 +39,12 @@ export default {
       defaultShow: true,
       placement: 'bottom center',
       children: [
-        <PopoverTrigger key="trigger">
+        <Popover.Trigger key="trigger">
           <button>Show Popup</button>
-        </PopoverTrigger>,
-        <PopoverContent key="content">
+        </Popover.Trigger>,
+        <Popover.Content key="content">
           <h2>Hello World</h2>
-        </PopoverContent>
+        </Popover.Content>
       ]
     }
   },

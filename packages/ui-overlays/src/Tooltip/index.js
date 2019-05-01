@@ -31,7 +31,7 @@ import { LayoutPropTypes } from '@instructure/ui-layout'
 import { uid } from '@instructure/uid'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { Popover, PopoverTrigger, PopoverContent } from '../Popover'
+import { Popover } from '../Popover'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -143,10 +143,10 @@ class Tooltip extends Component {
             constrain={this.props.constrain}
             shadow="none"
           >
-            <PopoverTrigger>
+            <Popover.Trigger>
               {this.renderTrigger(focused)}
-            </PopoverTrigger>
-            <PopoverContent>
+            </Popover.Trigger>
+            <Popover.Content>
               <span
                 id={this._id}
                 className={styles.root}
@@ -154,7 +154,7 @@ class Tooltip extends Component {
               >
                 {this.props.tip}
               </span>
-            </PopoverContent>
+            </Popover.Content>
           </Popover>
         )
       }} />

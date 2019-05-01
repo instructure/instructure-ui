@@ -24,7 +24,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { DrawerLayout, DrawerTray, DrawerContent } from '../index'
+import { DrawerLayout } from '../index'
 
 export default class DrawerLayoutFixture extends Component {
   static propTypes = {
@@ -58,19 +58,19 @@ export default class DrawerLayoutFixture extends Component {
           minWidth="500px"
           onOverlayTrayChange={onOverlayTrayChange}
         >
-          <DrawerTray
+          <DrawerLayout.Tray
             open={open}
             placement={placement}
             label="Test DrawerTray"
           >
             <div style={{width: trayWidth}}>Hello from tray</div>
-          </DrawerTray>
-          <DrawerContent label="Test DrawerContent">
+          </DrawerLayout.Tray>
+          <DrawerLayout.Content label="Test DrawerContent">
             <div>
               Hello from content
               <button>Expand</button>
             </div>
-          </DrawerContent>
+          </DrawerLayout.Content>
         </DrawerLayout>
       </div>
     )

@@ -26,8 +26,9 @@ $ yarn add @instructure/ui-themes @instructure/ui-elements
 
 ```javascript
 import React, { Component } from 'react'
-import theme from '@instructure/ui-themes/lib/canvas'
-import Heading from '@instructure/ui-elements/lib/components/Heading'
+import '@instructure/canvas-theme'
+
+import { Heading } from '@instructure/ui-elements'
 
 class App extends Component {
   render() {

@@ -20,9 +20,9 @@ yarn add @instructure/ui-alerts
 
 ```js
 import React from 'react'
-import Alert from '@instructure/ui-alerts/lib/components/Alert'
+import { Alert } from '@instructure/ui-alerts'
 
-export default MyAlert = function () {
+const MyAlert = function () {
   return (
     <Alert>Hello alert</Alert>
   )

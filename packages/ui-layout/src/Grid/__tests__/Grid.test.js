@@ -26,17 +26,17 @@ import React from 'react'
 
 import { expect, mount } from '@instructure/ui-test-utils'
 
-import { Grid, GridRow, GridCol } from '../index'
+import { Grid } from '../index'
 
 describe('<Grid />', async () => {
   it('should render content in each column', async () => {
     const subject = await mount(
       <Grid>
-        <GridRow>
-          <GridCol>Foo</GridCol>
-          <GridCol>Bar</GridCol>
-          <GridCol>Baz</GridCol>
-        </GridRow>
+        <Grid.Row>
+          <Grid.Col>Foo</Grid.Col>
+          <Grid.Col>Bar</Grid.Col>
+          <Grid.Col>Baz</Grid.Col>
+        </Grid.Row>
       </Grid>
     )
 
@@ -46,11 +46,11 @@ describe('<Grid />', async () => {
   it('should pass aria and role attributes to underlying DOM elements', async () => {
     await mount(
       <Grid role="grid" aria-hidden="true">
-        <GridRow aria-live="polite" role="presentation">
-          <GridCol aria-disabled="true" role="presentation">
+        <Grid.Row aria-live="polite" role="presentation">
+          <Grid.Col aria-disabled="true" role="presentation">
             Foo
-          </GridCol>
-        </GridRow>
+          </Grid.Col>
+        </Grid.Row>
       </Grid>
     )
 

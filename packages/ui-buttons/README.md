@@ -20,9 +20,9 @@ yarn add @instructure/ui-buttons
 
 ```js
 import React from 'react'
-import Button from '@instructure/ui-buttons/lib/components/Button'
+import { Button } from '@instructure/ui-buttons'
 
-export default MyButton = function () {
+const MyButton = function () {
   return (
     <Button>Hello button</Button>
   )

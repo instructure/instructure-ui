@@ -25,16 +25,16 @@
 import React from 'react'
 
 import { expect, mount, within, wait } from '@instructure/ui-test-utils'
-import { Flex, FlexItem } from '../index'
+import { Flex } from '../index'
 
 describe('<Flex />', async () => {
-  it('should render FlexItems as children', async () => {
+  it('should render Flex.Items as children', async () => {
     const subject = await mount(
       <Flex>
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -52,10 +52,10 @@ describe('<Flex />', async () => {
   it('should accept width and height as props', async () => {
     const subject = await mount(
       <Flex width="400px" height="200px">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -70,10 +70,10 @@ describe('<Flex />', async () => {
   it('should set flex-direction with the direction property', async () => {
     const subject = await mount(
       <Flex direction="column">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -87,10 +87,10 @@ describe('<Flex />', async () => {
   it('should render an inline-flex container with the inline property', async () => {
     const subject = await mount(
       <Flex inline>
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -104,10 +104,10 @@ describe('<Flex />', async () => {
   it('should set align-items with the alignItems property', async () => {
     const subject = await mount(
       <Flex alignItems="start">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
     const flex = within(subject.getDOMNode())
@@ -120,10 +120,10 @@ describe('<Flex />', async () => {
   it('should set justify-content with the justifyItems property', async () => {
     const subject = await mount(
       <Flex justifyItems="space-between">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -137,10 +137,10 @@ describe('<Flex />', async () => {
   it('should set flex-wrap with the wrapItems property', async () => {
     const subject = await mount(
       <Flex wrapItems={true}>
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -151,13 +151,13 @@ describe('<Flex />', async () => {
     })
   })
 
-  it('should let FlexItems align themselves with the align property', async () => {
+  it('should let Flex.Items align themselves with the align property', async () => {
     const subject = await mount(
       <Flex as="div" alignItems="end">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -170,13 +170,13 @@ describe('<Flex />', async () => {
     })
   })
 
-  it('should let FlexItems flex-grow with the grow property', async () => {
+  it('should let Flex.Items flex-grow with the grow property', async () => {
     const subject = await mount(
       <Flex as="div">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -190,13 +190,13 @@ describe('<Flex />', async () => {
     })
   })
 
-  it('should let FlexItems flex-shrink with the shrink property', async () => {
+  it('should let Flex.Items flex-shrink with the shrink property', async () => {
     const subject = await mount(
       <Flex as="div">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -210,13 +210,13 @@ describe('<Flex />', async () => {
     })
   })
 
-  it('should set flex-basis and min-width on FlexItems with the size property', async () => {
+  it('should set flex-basis and min-width on Flex.Items with the size property', async () => {
     const subject = await mount(
       <Flex as="div">
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 
@@ -234,10 +234,10 @@ describe('<Flex />', async () => {
   it('should meet a11y standards', async () => {
     const subject = await mount(
       <Flex>
-        <FlexItem align="stretch">Flex item 1</FlexItem>
-        <FlexItem grow shrink>Flex item 2</FlexItem>
-        <FlexItem size="100px">Flex item 3</FlexItem>
-        <FlexItem>Flex item 4</FlexItem>
+        <Flex.Item align="stretch">Flex item 1</Flex.Item>
+        <Flex.Item grow shrink>Flex item 2</Flex.Item>
+        <Flex.Item size="100px">Flex item 3</Flex.Item>
+        <Flex.Item>Flex item 4</Flex.Item>
       </Flex>
     )
 

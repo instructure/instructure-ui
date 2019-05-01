@@ -22,25 +22,25 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { GridCol, GridRow } from '../index'
+import { Grid } from '../index'
 
 const text1 = 'Occaecat quis qui anim quis cillum eu. Exercitation consectetur aute dolore adipisicing consectetur consectetur aliquip.'
 const text2 = 'Fugiat nisi Lorem non irure sunt ipsum excepteur. Incididunt in id culpa id reprehenderit minim. Cillum est occaecat proident qui sit laboris proident in voluptate minim amet deserunt. Laboris cupidatat nulla consequat nostrud Lorem.'
 
 const regular = (
-  <GridRow>
-    <GridCol>{text1}</GridCol>
-    <GridCol>{text2}</GridCol>
-    <GridCol>{text1}</GridCol>
-  </GridRow>
+  <Grid.Row>
+    <Grid.Col>{text1}</Grid.Col>
+    <Grid.Col>{text2}</Grid.Col>
+    <Grid.Col>{text1}</Grid.Col>
+  </Grid.Row>
 )
 
 const widths = (
-  <GridRow>
-    <GridCol width={2}>{text1}</GridCol>
-    <GridCol width={4}>{text2}</GridCol>
-    <GridCol width={2}>{text1}</GridCol>
-  </GridRow>
+  <Grid.Row>
+    <Grid.Col width={2}>{text1}</Grid.Col>
+    <Grid.Col width={4}>{text2}</Grid.Col>
+    <Grid.Col width={2}>{text1}</Grid.Col>
+  </Grid.Row>
 )
 
 export default {

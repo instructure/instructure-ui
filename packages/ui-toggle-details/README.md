@@ -20,9 +20,9 @@ yarn add @instructure/ui-toggle-details
 
 ```js
 import React from 'react'
-import Portal from '@instructure/ui-toggle-details/lib/components/ToggleDetails'
+import { ToggleDetails } from '@instructure/ui-toggle-details'
 
-export default MyToggleDetails = function () {
+const MyToggleDetails = () => {
   return (
     <ToggleDetails summary="Hello toggle">
       <Text>Hello details</Text>

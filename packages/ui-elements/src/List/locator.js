@@ -26,7 +26,7 @@ import { locator } from '@instructure/ui-test-utils'
 
 import { List } from './index'
 
-import ListItemLocator from './ListItem/locator'
+const ListItemLocator = locator(List.Item.selector)
 
 export default locator(List.selector, {
   findAllItems: (...args) => {

@@ -24,9 +24,9 @@
 
 import React from 'react'
 import { expect, mount, wait } from '@instructure/ui-test-utils'
-import DateTime from '@instructure/ui-i18n/lib/DateTime'
+import { DateTime } from '@instructure/ui-i18n'
 
-import TimeInput from '../index'
+import { TimeInput } from '../index'
 import TimeInputLocator from '../locator'
 
 describe('<TimeInput />', async () => {

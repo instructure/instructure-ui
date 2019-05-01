@@ -24,16 +24,16 @@
 
 import { locator } from '@instructure/ui-test-utils'
 
-import { Position, PositionTarget, PositionContent } from './index'
+import { Position } from './index'
 
-export const PositionTargetLocator = locator(PositionTarget.selector)
-export const PositionContentLocator = locator(PositionContent.selector)
+export const PositionTargetLocator = locator(Position.Target.selector)
+export const PositionContentLocator = locator(Position.Content.selector)
 
 export const customMethods = {
   findTarget: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${PositionTarget.locatorAttribute}="${id}"]`)
+      return locator(`[${Position.Target.locatorAttribute}="${id}"]`)
         .find(...args)
     } else {
       return null
@@ -42,7 +42,7 @@ export const customMethods = {
   findContent: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(Position.locatorAttribute)
-      return locator(`[${PositionContent.locatorAttribute}="${id}"]`)
+      return locator(`[${Position.Content.locatorAttribute}="${id}"]`)
         .find(...args)
     } else {
       return null

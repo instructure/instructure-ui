@@ -26,8 +26,7 @@ import React, { Children, Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import Dialog from '@instructure/ui-a11y/lib/Dialog'
-
+import { Dialog } from '@instructure/ui-a11y'
 import { element, Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 import { omitProps, safeCloneElement , matchComponentTypes } from '@instructure/ui-react-utils'
 import { createChainedFunction, Browser } from '@instructure/ui-utils'
@@ -197,6 +196,10 @@ class Modal extends Component {
     constrain: 'window',
     overflow: 'scroll'
   }
+
+  static Header = ModalHeader
+  static Body = ModalBody
+  static Footer = ModalFooter
 
   constructor (props) {
     super(props)

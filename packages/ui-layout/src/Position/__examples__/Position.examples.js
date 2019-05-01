@@ -24,7 +24,7 @@
 import React from 'react'
 
 import { View } from '../../View'
-import { PositionTarget, PositionContent } from '../index'
+import { Position } from '../index'
 
 export default {
   propValues: {
@@ -80,14 +80,14 @@ export default {
       offsetX: yStretch ? -parseInt(targetSize) : 0,
       offsetY: xStretch ? -parseInt(targetSize) : 0,
       children: xStretch || yStretch ? [
-        <PositionTarget key="0">
+        <Position.Target key="0">
           <View
             as="div"
             width={xStretch ? '100%' : targetSize}
             height={xStretch ? targetSize : '100%'}
             background="inverse" />
-        </PositionTarget>,
-        <PositionContent key="1">
+        </Position.Target>,
+        <Position.Content key="1">
           <View
             {...contentProps}
             width={xStretch ? null : contentSize}
@@ -95,21 +95,21 @@ export default {
           >
             {text}
           </View>
-        </PositionContent>
+        </Position.Content>
       ] : [
-        <PositionTarget key="0">
+        <Position.Target key="0">
           <View
             as="div"
             width={targetSize}
             height={targetSize}
             background="inverse"
           />
-        </PositionTarget>,
-        <PositionContent key="1">
+        </Position.Target>,
+        <Position.Content key="1">
           <View {...contentProps}>
             {text}
           </View>
-        </PositionContent>
+        </Position.Content>
       ]
     }
   },

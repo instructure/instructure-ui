@@ -20,10 +20,10 @@ yarn add @instructure/ui-navigation
 
 ```js
 import React from 'react'
-import Navigation, { NavigationItem } from '@instructure/ui-navigation/lib/components/Navigation'
-import Avatar from '@instructure/ui-elements/lib/components/Avatar'
+import { Navigation, NavigationItem } from '@instructure/ui-navigation'
+import { Avatar } from '@instructure/ui-elements'
 
-export default MyNavigation = function () {
+const MyNavigation = () => {
   return (
     <Navigation label="My Navigation">
       <NavigationItem

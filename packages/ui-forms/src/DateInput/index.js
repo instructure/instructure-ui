@@ -30,7 +30,7 @@ import { controllable } from '@instructure/ui-prop-types'
 import { DateTime, I18nPropTypes, Locale } from '@instructure/ui-i18n'
 import { FormPropTypes } from '@instructure/ui-form-field'
 import { LayoutPropTypes } from '@instructure/ui-layout'
-import { Popover, PopoverContent } from '@instructure/ui-overlays'
+import { Popover } from '@instructure/ui-overlays'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { error } from '@instructure/console/macro'
 import { isActiveElement } from '@instructure/ui-dom-utils'
@@ -498,7 +498,7 @@ class DateInput extends Component {
           onDismiss={this.handleCalendarDismiss}
           positionTarget={this._input}
         >
-          <PopoverContent>
+          <Popover.Content>
             <DatePicker
               todayValue={this.props.todayValue}
               previousLabel={this.props.previousLabel}
@@ -511,7 +511,7 @@ class DateInput extends Component {
               disabledDays={this.props.disabledDays}
               ref={this.props.datePickerRef}
             />
-          </PopoverContent>
+          </Popover.Content>
         </Popover>
       </span>
     )

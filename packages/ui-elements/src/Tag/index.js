@@ -24,8 +24,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
 
+import { IconXSolid } from '@instructure/ui-icons'
 import { View } from '@instructure/ui-layout'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { omitProps } from '@instructure/ui-react-utils'

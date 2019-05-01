@@ -19,9 +19,9 @@ yarn add @instructure/ui-form-field
 
 ```js
 import React from 'react'
-import FormField from '@instructure/ui-form-field/lib/components/FormField'
+import { FormField } from '@instructure/ui-form-field'
 
-export default function Example () {
+const MyFormField = () => {
   return (
     <FormField label="Label" layout="inline">
       ...

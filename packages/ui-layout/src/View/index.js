@@ -249,7 +249,7 @@ class View extends Component {
       'minHeight',
       // Img:
       'filter',
-      // FlexItem:
+      // Flex.Item:
       'flexBasis',
       // Avatar:
       'backgroundImage'

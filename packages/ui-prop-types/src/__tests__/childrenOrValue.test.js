@@ -25,7 +25,6 @@
 import { expect } from '@instructure/ui-test-utils'
 import { childrenOrValue } from '../index'
 
-
 describe('childrenOrValue', () => {
   it('should accept when as="input", value is provided, and children is null', () => {
     const props = {

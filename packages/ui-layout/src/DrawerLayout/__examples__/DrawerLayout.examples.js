@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { DrawerTray, DrawerContent } from '../index'
+import { DrawerLayout } from '../index'
 import { View } from '../../View'
 
 export default {
   getComponentProps: (props) => {
     return {
       children: [
-        <DrawerTray
+        <DrawerLayout.Tray
           key="0"
           id="DrawerLayoutTrayExample1"
           open={true}
@@ -45,14 +45,14 @@ export default {
           >
             Drawer tray
           </View>
-        </DrawerTray>,
-        <DrawerContent key="1" label="Drawer content example">
+        </DrawerLayout.Tray>,
+        <DrawerLayout.Content key="1" label="Drawer content example">
           <div style={{background: 'white', height: '100%'}}>
             <View as="div" padding="x-large">
               Drawer content
             </View>
           </div>
-        </DrawerContent>
+        </DrawerLayout.Content>
       ]
     }
   },

@@ -52,6 +52,8 @@ class MetricsList extends Component {
     children: null
   }
 
+  static Item = MetricsListItem
+
   render() {
     return (
       <div

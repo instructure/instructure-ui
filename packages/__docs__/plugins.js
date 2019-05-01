@@ -55,29 +55,17 @@ module.exports = [
       }
     },
     files: [
-      '**/*.md',
-      '**/src/*/**/index.js',
-      '**/src/*.js',
-      '**/src/components/*/**/index.js',
-      '**/src/utils/**/*.js',
-      '**/ui-themeable/src/**/*.js',
-      '**/ui-i18n/src/**/*.js',
-      '**/ui-utils/src/**/*.js',
-      '**/ui-dom-utils/src/**/*.js',
-      '**/ui-react-utils/src/**/*.js',
-      '**/ui-color-utils/src/**/*.js',
-      '**/debounce/src/**/*.js',
-      '**/ui-decorator/src/**/*.js'
+      '**/*.md', // package READMEs
+      '**/src/*.js', // util src files
+      '**/src/*/*.js' // component src files
     ],
     ignore: [
       '*macro.js',
       '**/*-loader.js',
-      '**/svg/README.md',
+      '**/svg/**',
       '**/packages/**/CHANGELOG.md',
       '**/config/**',
       '**/templates/**',
-      '**/controllers/**',
-      '**/views/**',
       '**/node_modules/**',
       '**/__docs__/**',
       '**/__examples__/**',
@@ -87,13 +75,10 @@ module.exports = [
       '**/__tests__/**',
       '**/locales/**',
       '**/theme.js',
+      '**/locator.js',
 
       // ignore index files that just re-export
       '**/src/index.js',
-      '**/src/components/index.js',
-      '**/src/utils/index.js',
-      '**/ui-utils/src/index.js',
-      '**/ui-utils/src/{react,dom}/index.js',
 
       // packages to ignore:
       '**/canvas-theme/**',

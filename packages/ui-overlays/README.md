@@ -20,9 +20,9 @@ yarn add @instructure/ui-overlays
 
 ```js
 import React from 'react'
-import Mask from '@instructure/ui-overlays/lib/components/Mask'
+import { Mask } from '@instructure/ui-overlays'
 
-export default MyMask = function () {
+const MyMask = () => {
   return (
     <Mask>
       <Text>Hello mask</Text>

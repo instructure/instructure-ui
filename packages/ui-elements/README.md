@@ -20,9 +20,9 @@ yarn add @instructure/ui-elements
 
 ```js
 import React from 'react'
-import Avatar from '@instructure/ui-elements/lib/components/Avatar'
+import { Avatar } from '@instructure/ui-elements'
 
-export default MyAvatar = function () {
+const MyAvatar = () => {
   return (
     <Avatar name="Kyle Montgomery" />
   )

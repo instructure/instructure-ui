@@ -13,7 +13,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Alert",
-    "replace": "@instructure/ui-alerts/lib/components/Alert"
+    "replace": "@instructure/ui-alerts/lib/Alert"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Avatar",
@@ -77,7 +77,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/InlineSVG",
-    "replace": "@instructure/ui-svg-images/lib/components/InlineSVG"
+    "replace": "@instructure/ui-svg-images/lib/InlineSVG"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Link",
@@ -140,6 +140,10 @@
     "replace": "@instructure/ui-elements/lib/Table"
   },
   {
+    "pattern": "^@instructure/ui-core/lib/components/TabList",
+    "replace": "@instructure/ui-tabs/lib/TabList"
+  },
+  {
     "pattern": "^@instructure/ui-core/lib/components/Tag",
     "replace": "@instructure/ui-elements/lib/Tag"
   },
@@ -153,7 +157,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ToggleDetails",
-    "replace": "@instructure/ui-toggle-details/lib/components/ToggleDetails"
+    "replace": "@instructure/ui-toggle-details/lib/ToggleDetails"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Tooltip",
@@ -169,11 +173,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TreeBrowser",
-    "replace": "@instructure/ui-tree-browser/lib/components/TreeBrowser"
+    "replace": "@instructure/ui-tree-browser/lib/TreeBrowser"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/SVGIcon",
-    "replace": "@instructure/ui-svg-images/lib/components/SVGIcon"
+    "replace": "@instructure/ui-svg-images/lib/SVGIcon"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/AccessibleContent",
@@ -189,11 +193,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Pagination",
-    "replace": "@instructure/ui-pagination/lib/components/Pagination"
+    "replace": "@instructure/ui-pagination/lib/Pagination"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Menu",
-    "replace": "@instructure/ui-menu/lib/components/Menu"
+    "replace": "@instructure/ui-menu/lib/Menu"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FormField",
@@ -245,11 +249,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/NumberInput",
-    "replace": "@instructure/ui-number-input/lib/components/NumberInput"
+    "replace": "@instructure/ui-number-input/lib/NumberInput"
   },
   {
     "pattern": "^@instructure/ui-forms/lib/components/NumberInput",
-    "replace": "@instructure/ui-number-input/lib/components/NumberInput"
+    "replace": "@instructure/ui-number-input/lib/NumberInput"
   },
   {
     "pattern": "^@instructure-ui/ui-core/lib/utils/hasVisibleChildren",
@@ -370,5 +374,73 @@
   {
     "pattern": "^@instructure/ui-text-input/lib/components",
     "replace": "@instructure/ui-text-input/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-alerts/lib/components",
+    "replace": "@instructure/ui-alerts/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-billboard/lib/components",
+    "replace": "@instructure/ui-billboard/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-breadcrumb/lib/components",
+    "replace": "@instructure/ui-breadcrumb/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-calendar/lib/components",
+    "replace": "@instructure/ui-calendar/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-code-editor/lib/components",
+    "replace": "@instructure/ui-code-editor/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-date-input/lib/components",
+    "replace": "@instructure/ui-date-input/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-editable/lib/components",
+    "replace": "@instructure/ui-editable/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-navigation/lib/components",
+    "replace": "@instructure/ui-navigation/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-number-input/lib/components",
+    "replace": "@instructure/ui-number-input/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-pages/lib/components",
+    "replace": "@instructure/ui-pages/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-pagination/lib/components",
+    "replace": "@instructure/ui-pagination/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-selectable/lib/components",
+    "replace": "@instructure/ui-selectable/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-svg-images/lib/components",
+    "replace": "@instructure/ui-svg-images/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-tabs/lib/components",
+    "replace": "@instructure/ui-tabs/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-toggle-details/lib/components",
+    "replace": "@instructure/ui-toggle-details/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-tree-browser/lib/components",
+    "replace": "@instructure/ui-tree-browser/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-prop-types/lib/utils",
+    "replace": "@instructure/ui-prop-types/lib"
   }
 ]

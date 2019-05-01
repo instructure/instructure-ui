@@ -13,16 +13,20 @@ category: packages
 
 ```js
 import React from 'react'
-import Pages, { Page } from '@instructure/ui-pages/lib/components/Page'
+import { Pages, Page } from '@instructure/ui-pages'
 
-<Pages activePageIndex={1}>
-  <Page>
-    Page One
-  </Page>
-  <Page>
-    Page Two
-  </Page>
-</Pages>
+const MyPages = () => {
+  return (
+    <Pages activePageIndex={1}>
+      <Page>
+        Page One
+      </Page>
+      <Page>
+        Page Two
+      </Page>
+    </Pages>
+  )
+}
 ```
 
 ### Installation

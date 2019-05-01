@@ -26,9 +26,9 @@ import { locator } from '@instructure/ui-test-utils'
 
 import { Modal } from './index'
 
-import ModalHeaderLocator from './ModalHeader/locator'
-import ModalBodyLocator from './ModalBody/locator'
-import ModalFooterLocator from './ModalFooter/locator'
+const ModalHeaderLocator = locator(Modal.Header.selector)
+const ModalBodyLocator = locator(Modal.Body.selector)
+const ModalFooterLocator = locator(Modal.Footer.selector)
 
 export default locator(Modal.selector, {
   findHeader: (...args) => {

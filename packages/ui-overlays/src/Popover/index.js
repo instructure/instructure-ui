@@ -30,8 +30,6 @@ import {
   ContextView,
   View,
   Position,
-  PositionTarget,
-  PositionContent,
   LayoutPropTypes,
   parsePlacement,
   mirrorHorizontalPlacement
@@ -617,21 +615,21 @@ class Popover extends Component {
         <span>
           {this.renderTrigger()}
           <Position {...positionProps}>
-            <PositionContent>
+            <Position.Content>
               {this.renderContent()}
-            </PositionContent>
+            </Position.Content>
           </Position>
         </span>
       )
     } else {
       return (
         <Position {...positionProps}>
-          <PositionTarget>
+          <Position.Target>
             {this.renderTrigger()}
-          </PositionTarget>
-          <PositionContent>
+          </Position.Target>
+          <Position.Content>
             {this.renderContent()}
-          </PositionContent>
+          </Position.Content>
         </Position>
       )
     }

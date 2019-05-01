@@ -24,17 +24,17 @@
 
 import { locator } from '@instructure/ui-test-utils'
 
-import { DrawerLayout, DrawerContent, DrawerTray } from './index'
+import { DrawerLayout } from './index'
 
-export const DrawerContentLocator = locator(DrawerContent.selector)
-export const DrawerTrayLocator = locator(DrawerTray.selector)
+export const DrawerContentLocator = locator(DrawerLayout.Content.selector)
+export const DrawerTrayLocator = locator(DrawerLayout.Tray.selector)
 
 const DrawerLayoutLocator = locator(DrawerLayout.selector, {
   findContent: (...args) => DrawerContentLocator.find(...args),
   findTray: (element, ...args) => {
     if (element && element.getAttribute) {
       const id = element.getAttribute(DrawerLayout.locatorAttribute)
-      return locator(`[${DrawerTray.locatorAttribute}="${id}"]`).find(...args)
+      return locator(`[${DrawerLayout.Tray.locatorAttribute}="${id}"]`).find(...args)
     } else {
       return null
     }

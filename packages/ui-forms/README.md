@@ -20,9 +20,9 @@ yarn add @instructure/ui-forms
 
 ```js
 import React from 'react'
-import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+import { TextInput } from '@instructure/ui-forms'
 
-export default MyTextInput = function () {
+const MyTextInput = () => {
   return (
     <TextInput label="Name" placeholder="Doe, John Doe" />
   )

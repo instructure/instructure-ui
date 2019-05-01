@@ -33,7 +33,7 @@ import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
 import { hasVisibleChildren } from '@instructure/ui-a11y'
 import { warn } from '@instructure/console/macro'
 
-import { View, Flex, FlexItem  } from '@instructure/ui-layout'
+import { View, Flex } from '@instructure/ui-layout'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -278,10 +278,10 @@ class Button extends Component {
       >
         {hasTextAndIcon ? (
           <Flex height="100%" width="100%">
-            <FlexItem padding="0 x-small 0 0">{this.renderIcon()}</FlexItem>
-            <FlexItem grow shrink>
+            <Flex.Item padding="0 x-small 0 0">{this.renderIcon()}</Flex.Item>
+            <Flex.Item  grow shrink>
               <span className={styles.content}>{children}</span>
-            </FlexItem>
+            </Flex.Item>
           </Flex>
         ) : (
           // all other button layouts (icon only and text only)

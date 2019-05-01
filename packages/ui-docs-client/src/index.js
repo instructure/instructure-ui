@@ -25,8 +25,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './components/App'
+import { App } from './App'
+import { Figure, FigureItem } from './Figure'
+import { Guidelines } from './Guidelines'
 
-export default function renderDocsClient (data, element) {
+function renderDocsClient (data, element) {
   ReactDOM.render(<App {...data} />, element)
 }
+
+export {
+  renderDocsClient,
+  Figure,
+  FigureItem,
+  Guidelines
+}
+
+export default renderDocsClient

@@ -30,7 +30,7 @@ import keycode from 'keycode'
 
 import { Dialog, ScreenReaderContent, hasVisibleChildren } from '@instructure/ui-a11y'
 import { FormField, FormFieldLayout, FormPropTypes } from '@instructure/ui-form-field'
-import { LayoutPropTypes, Position, PositionContent } from '@instructure/ui-layout'
+import { LayoutPropTypes, Position } from '@instructure/ui-layout'
 import { containsActiveElement, findDOMNode, isActiveElement   } from '@instructure/ui-dom-utils'
 import { createChainedFunction } from '@instructure/ui-utils'
 import { uid } from '@instructure/uid'
@@ -692,7 +692,7 @@ class SelectField extends Component {
                 readOnly={!editable}
                 disabled={disabled || readOnly}
               />
-              <IconArrowOpenDownLine className={styles.icon} />
+              <IconArrowOpenDownLine width="0.875rem" height="0.875rem" className={styles.icon} />
             </span>
           </span>
         </span>
@@ -704,7 +704,7 @@ class SelectField extends Component {
             target={this._inputContainer}
             constrain={constrain}
           >
-            <PositionContent>
+            <Position.Content>
               <SelectOptionsList
                 options={options}
                 selectedOption={selectedOption}
@@ -723,7 +723,7 @@ class SelectField extends Component {
                 highlightedIndex={this.state.highlightedIndex}
                 maxWidth={this.props.optionsMaxWidth}
               />
-            </PositionContent>
+            </Position.Content>
           </Position>
         </Dialog>
         <span

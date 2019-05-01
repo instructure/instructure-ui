@@ -33,7 +33,7 @@ import { createChainedFunction } from '@instructure/ui-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { themeable } from '@instructure/ui-themeable'
 import { testable } from '@instructure/ui-testable'
-import { Portal } from '@instructure/ui-portal/lib/Portal'
+import { Portal } from '@instructure/ui-portal'
 import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
 import { Transition } from '@instructure/ui-motion'
 

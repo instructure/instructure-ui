@@ -27,6 +27,8 @@ import { decorator } from '@instructure/ui-decorator'
 import { TextDirectionContext } from './TextDirectionContext'
 import { getTextDirection } from './getTextDirection'
 
+const { DIRECTION, getTextDirectionContext } = TextDirectionContext
+
 /**
 * ---
 * category: utilities/i18n
@@ -67,27 +69,22 @@ const bidirectional = decorator((ComposedComponent) => {
       ...TextDirectionContext.types
     }
 
-    _defaultDirection = getTextDirection()
-
     get dir () {
-      const context = TextDirectionContext.getTextDirectionContext(this.context) || {}
-
-      return context.dir  ||
-        this.props.dir ||
-        this._defaultDirection
+      const context = getTextDirectionContext(this.context) || {}
+      return context.dir  || this.props.dir || getTextDirection()
     }
 
     get rtl () {
-      return this.dir === TextDirectionContext.DIRECTION.rtl
+      return this.dir === DIRECTION.rtl
     }
 
     get ltr () {
-      return this.dir === TextDirectionContext.DIRECTION.ltr
+      return this.dir === DIRECTION.ltr
     }
   }
 })
 
-bidirectional.DIRECTION = TextDirectionContext.DIRECTION
+bidirectional.DIRECTION = DIRECTION
 
 export default bidirectional
 export { bidirectional }

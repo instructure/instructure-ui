@@ -20,9 +20,9 @@ yarn add @instructure/ui-menu
 
 ```js
 import React from 'react'
-import Menu, { MenuItem } from '@instructure/ui-menu/lib/components/Menu'
+import { Menu, MenuItem } from '@instructure/ui-menu'
 
-export default MyMenu = function () {
+const MyMenu = () => {
   return (
     <Menu>
       <MenuItem value="foo">Foo</MenuItem>

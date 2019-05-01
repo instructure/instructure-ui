@@ -38,7 +38,7 @@ import { shallowEqual, deepEqual } from '@instructure/ui-utils'
 import { debounce } from '@instructure/debounce'
 import { testable } from '@instructure/ui-testable'
 
-import { Portal } from '@instructure/ui-portal/lib/Portal'
+import { Portal } from '@instructure/ui-portal'
 
 import { calculateElementPosition } from '../calculateElementPosition'
 import { LayoutPropTypes } from '../LayoutPropTypes'

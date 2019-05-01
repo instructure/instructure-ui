@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { ThemeRegistry } from '@instructure/ui-themeable/lib/ThemeRegistry'
+import { ThemeRegistry } from '@instructure/ui-themeable'
 
 import { borders } from './borders'
 import { colors, functionalColors } from './colors'

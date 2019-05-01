@@ -20,9 +20,9 @@ yarn add @instructure/ui-tree-browser
 
 ```js
 import React from 'react'
-import TreeBrowser from '@instructure/ui-tree-browser/lib/components/TreeBrowser'
+import { TreeBrowser } from '@instructure/ui-tree-browser'
 
-export default MyTreeBrowser = function () {
+const MyTreeBrowser = () => {
   return (
     <TreeBrowser
       collections={{ 1: { id: 1, name: "Collection", items: [1], descriptor: "My Collection" }}}

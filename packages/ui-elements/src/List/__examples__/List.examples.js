@@ -22,16 +22,16 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { ListItem } from '../index'
+import { List } from '../index'
 
 export default {
   sectionProp: 'size',
   getComponentProps: (props) => {
     return {
       children: [
-        <ListItem key="1">Oranges</ListItem>,
-        <ListItem key="2">Pineapples</ListItem>,
-        <ListItem key="3">Bananas</ListItem>
+        <List.Item key="1">Oranges</List.Item>,
+        <List.Item key="2">Pineapples</List.Item>,
+        <List.Item key="3">Bananas</List.Item>
       ]
     }
   },

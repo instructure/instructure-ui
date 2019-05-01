@@ -158,7 +158,7 @@ example: true
         truncate="word"
         ellipsis=".../"
       >
-        @instructure/ui-elements/somefakedir/tomakethislonger/lib/components/TruncateText
+        @instructure/ui-elements/somefakedir/tomakethislonger/lib/longer/TruncateText
       </TruncateText>
     </Link>
   </View>

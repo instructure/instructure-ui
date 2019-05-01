@@ -28,7 +28,7 @@ import lorem from 'lorem-ipsum'
 import moment from 'moment'
 import 'moment/min/locales'
 
-import { mirrorHorizontalPlacement } from '@instructure/ui-layout/lib/mirrorHorizontalPlacement'
+import { mirrorHorizontalPlacement } from '@instructure/ui-layout'
 
 // eslint-plugin-import doesn't like 'import * as Components' here
 const Components = require('./components')

@@ -27,7 +27,6 @@ import { expect, stub } from '@instructure/ui-test-utils'
 
 import { controllable } from '../index'
 
-
 describe('controllable', () => {
   afterEach(() => {
     console.error.restore && console.error.restore()

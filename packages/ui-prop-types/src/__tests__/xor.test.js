@@ -27,7 +27,6 @@ import { expect, stub } from '@instructure/ui-test-utils'
 
 import { xor } from '../index'
 
-
 describe('xor', () => {
   afterEach(() => {
     console.error.restore && console.error.restore()

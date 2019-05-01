@@ -25,17 +25,14 @@
 import React from 'react'
 import { expect } from '@instructure/ui-test-utils'
 
-import {
-  oneOf,
-  oneOfEach,
-  enforceOrder
-} from '../utils/children'
+import { Children } from '../Children'
 
 const Foo = (props) => <div>foo</div>
 const Bar = (props) => <div>bar</div>
 const Baz = (props) => <div>baz</div>
 const Qux = (props) => <div>qux</div>
 
+const { oneOf, oneOfEach, enforceOrder } = Children
 
 describe('children', () => {
   describe('oneOf', () => {

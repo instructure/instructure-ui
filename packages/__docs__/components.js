@@ -21,33 +21,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 export {
   AccessibleContent,
   Dialog,
   PresentationContent,
   ScreenReaderContent
 } from '@instructure/ui-a11y'
-
-export * from '@instructure/ui-alerts/lib/components'
-export * from '@instructure/ui-billboard/lib/components'
-export * from '@instructure/ui-breadcrumb/lib/components'
-
+export { Alert } from '@instructure/ui-alerts'
+export { Billboard } from '@instructure/ui-billboard'
 export { Button, CloseButton } from '@instructure/ui-buttons'
-
-export * from '@instructure/ui-calendar/lib/components'
-export * from '@instructure/ui-code-editor/lib/components'
-export * from '@instructure/ui-editable/lib/components'
-
+export { Calendar } from '@instructure/ui-calendar'
+export { CodeEditor } from '@instructure/ui-code-editor'
+export { Editable, InPlaceEdit } from '@instructure/ui-editable'
 export {
   Avatar,
   Badge,
   Heading,
   Img,
   Link,
-  List, ListItem,
-  MetricsList, MetricsListItem,
   Pill,
-  Progress, ProgressBar, ProgressCircle,
+  Progress,
   Rating,
   Spinner,
   Table,
@@ -55,9 +49,7 @@ export {
   Text,
   TruncateText
 } from '@instructure/ui-elements'
-
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
-
 export {
   Checkbox,
   CheckboxGroup,
@@ -72,7 +64,9 @@ export {
   TextInput,
   TimeInput
  } from '@instructure/ui-forms'
-
+export { NumberInput } from '@instructure/ui-number-input'
+export { DateInput as DateInputControlled } from '@instructure/ui-date-input'
+export { TextInput as TextInputControlled } from '@instructure/ui-text-input'
  export {
   FormField,
   FormFieldLabel,
@@ -81,54 +75,47 @@ export {
   FormFieldLayout,
   FormFieldGroup,
 } from '@instructure/ui-form-field'
-
-export { DateInput as DateInputControlled } from '@instructure/ui-date-input/lib/components'
-export { TextInput as TextInputControlled } from '@instructure/ui-text-input'
-export { Table as TableControlled } from '@instructure/ui-table/lib/components'
-
+export { Table as TableControlled } from '@instructure/ui-table'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
-
 export {
   ContextView,
-  DrawerLayout, DrawerContent, DrawerTray,
-  Flex, FlexItem,
-  Grid, GridRow, GridCol,
   Media,
-  Position, PositionTarget, PositionContent,
   Responsive,
   View
 } from '@instructure/ui-layout'
-
-export * from '@instructure/ui-menu/lib/components'
-
 export { Transition } from '@instructure/ui-motion'
-
-export * from '@instructure/ui-navigation/lib/components'
-export * from '@instructure/ui-number-input/lib/components'
-
 export {
   Mask,
-  Modal, ModalHeader, ModalBody, ModalFooter,
   Overlay,
-  Popover, PopoverTrigger, PopoverContent,
   Tooltip,
   Tray
 } from '@instructure/ui-overlays'
-
-export * from '@instructure/ui-pages/lib/components'
-export * from '@instructure/ui-pagination/lib/components'
-
 export { Portal } from '@instructure/ui-portal'
-
-export * from '@instructure/ui-selectable/lib/components'
-export * from '@instructure/ui-svg-images/lib/components'
-export * from '@instructure/ui-tabs/lib/components'
-
+export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
-
-export * from '@instructure/ui-toggle-details/lib/components'
-export * from '@instructure/ui-tree-browser/lib/components'
-export Figure, { FigureItem } from '@instructure/ui-docs-client/lib/components/Figure'
-export Guidelines from '@instructure/ui-docs-client/lib/components/Guidelines'
-
+export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
+export { Tabs } from '@instructure/ui-tabs'
+export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
+export { TreeBrowser } from '@instructure/ui-tree-browser'
 export * from '@instructure/ui-icons'
+
+export { Guidelines } from '@instructure/ui-docs-client'
+
+// TODO: when we split these out into their own packages we should always export a single component
+// e.g. (Flex.Item, Grid.Row, List.Item)
+export { Flex, FlexItem } from '@instructure/ui-layout/lib/Flex'
+export { DrawerLayout, DrawerContent, DrawerTray } from '@instructure/ui-layout/lib/DrawerLayout'
+export { Grid, GridRow, GridCol } from '@instructure/ui-layout/lib/Grid'
+export { Position, PositionTarget, PositionContent } from '@instructure/ui-layout/lib/Position'
+export { Navigation, NavigationItem } from '@instructure/ui-navigation/lib/Navigation'
+export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from '@instructure/ui-menu/lib/Menu'
+export { Pagination, PaginationButton } from '@instructure/ui-pagination/lib/Pagination'
+export { TabList, TabPanel } from '@instructure/ui-tabs/lib/TabList'
+export { Pages, Page } from '@instructure/ui-pages/lib/Pages'
+export { Modal, ModalHeader, ModalBody, ModalFooter } from '@instructure/ui-overlays/lib/Modal'
+export { Popover, PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/Popover'
+export { List, ListItem } from '@instructure/ui-elements/lib/List'
+export { MetricsList, MetricsListItem } from '@instructure/ui-elements/lib/MetricsList'
+export { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb/lib/Breadcrumb'
+
+export { Figure, FigureItem } from '@instructure/ui-docs-client/lib/Figure'

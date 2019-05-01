@@ -22,4 +22,5 @@
  * SOFTWARE.
  */
 
-export * from './components'
+export { InlineSVG } from './InlineSVG'
+export { SVGIcon } from './SVGIcon'

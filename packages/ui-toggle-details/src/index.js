@@ -21,4 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './components'
+
+export { Expandable } from './Expandable'
+export { ToggleDetails } from './ToggleDetails'
+export { ToggleGroup } from './ToggleGroup'

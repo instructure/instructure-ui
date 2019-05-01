@@ -38,6 +38,7 @@ import {
 import { ScreenReaderContent } from '@instructure/ui-a11y'
 
 import { GridRow } from './GridRow'
+import { GridCol } from './GridCol'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -67,7 +68,10 @@ class Grid extends Component {
     vAlign: 'top',
     visualDebug: false,
     children: null
-  };
+  }
+
+  static Row = GridRow
+  static Col = GridCol
 
   startAtClass () {
     return !!this.props.startAt && (`startAt${capitalizeFirstLetter(this.props.startAt)}`)
@@ -110,5 +114,4 @@ class Grid extends Component {
 }
 
 export default Grid
-export { Grid, GridRow }
-export { default as GridCol } from './GridCol'
+export { Grid, GridRow, GridCol }

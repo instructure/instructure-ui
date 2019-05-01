@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 import { expect, spy, stub } from '@instructure/ui-test-utils'
-import deepEqual from '@instructure/ui-utils/lib/deepEqual'
+import { deepEqual } from '@instructure/ui-utils'
 
 import generateExamples from '../generateExamples'
 import generatePropCombinations from '../generatePropCombinations'

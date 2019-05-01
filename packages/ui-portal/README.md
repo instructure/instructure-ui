@@ -19,11 +19,11 @@ yarn add @instructure/ui-portal
 
 ```js
 import React from 'react'
-import Portal from '@instructure/ui-portal/lib/components/Portal'
+import { Portal } from '@instructure/ui-portal'
 
-export default MyPortal = function () {
+const MyPortal = () => {
   return (
-    <Portal>
+    <Portal open>
       <Text>Hello from Portal</Text>
     </Portal>
   )

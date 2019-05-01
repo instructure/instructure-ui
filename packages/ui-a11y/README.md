@@ -20,9 +20,9 @@ yarn add @instructure/ui-a11y
 
 ```js
 import React from 'react'
-import AccessibleContent from '@instructure/ui-a11y/lib/components/AccessibleContent'
+import { AccessibleContent } from '@instructure/ui-a11y'
 
-export default MyAccessibleContent = function () {
+const MyAccessibleContent = () => {
   return (
     <AccessibleContent alt="Alternative text for a screenreader only">
         Presentational content goes here

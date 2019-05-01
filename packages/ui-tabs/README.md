@@ -20,18 +20,18 @@ yarn add @instructure/ui-tabs
 
 ```js
 import React from 'react'
-import TabList, { TabPanel } from '@instructure/ui-tabs/lib/components'
+import { Tabs } from '@instructure/ui-tabs'
 
 export default MyTabList = function () {
   return (
-    <TabList defaultSelectedIndex={1}>
-      <TabPanel title="First Tab">
+    <Tabs defaultSelectedIndex={1}>
+      <Tabs.Panel title="First Tab">
         Tab One
-      </TabPanel>
-      <TabPanel title="Second Tab">
+      </Tabs.Panel>
+      <Tabs.Panel title="Second Tab">
         Tab Two (selected)
-      </TabPanel>
-    </TabList>
+      </Tabs.Panel>
+    </Tabs>
   )
 }
 ```

@@ -24,7 +24,36 @@
 
 import { canUseDOM, getComputedStyle } from '@instructure/ui-dom-utils'
 
-let observer
+let defaultDir, dirAttribute, observer
+
+const getDefaultDir = () => {
+  /**
+   * use a cached value for the default of <html> element's "dir" so we don't
+   * have to call the expensive getComputedStyle to look it it up every time
+   */
+  if (defaultDir) {
+    return defaultDir
+  }
+
+  if (canUseDOM) {
+    const htmlEl = document.documentElement
+
+    dirAttribute = htmlEl.getAttribute('dir')
+    defaultDir = dirAttribute || getComputedStyle(htmlEl).direction
+
+    if (!observer) {
+      observer = new MutationObserver(() => {
+        const attr = htmlEl.getAttribute('dir')
+        if (attr && attr !== dirAttribute) {
+          dirAttribute = defaultDir = attr
+        }
+      })
+      observer.observe(htmlEl, { attributes: true })
+    }
+
+    return defaultDir
+  }
+}
 
 /**
  * ---
@@ -35,26 +64,12 @@ let observer
  * @param {Element} element will use the <html> element by default
  * @returns {String} 'ltr' or 'rtl' (or `undefined` if no DOM is present)
  */
-const getTextDirection = canUseDOM ? (() => {
-  /**
-   * use a cached value for the default of <html> element's "dir" so we don't
-   * have to call the expensive getComputedStyle to look it it up every time
-   */
-  const htmlEl = document.documentElement
-  let htmlElDir = htmlEl.getAttribute('dir') || getComputedStyle(htmlEl).direction
-
-  if (!observer) {
-    observer = new MutationObserver(() => {
-      htmlElDir = htmlEl.getAttribute('dir')
-    })
-    observer.observe(htmlEl, { attributes: true })
+function getTextDirection (element) {
+  if (canUseDOM) {
+    if (typeof element === 'undefined' || (element === document.documentElement)) return getDefaultDir()
+    return element.getAttribute('dir') || getComputedStyle(element).direction
   }
-
-  return element => {
-    if (typeof element === 'undefined' || (element === htmlEl)) return htmlElDir
-    return getComputedStyle(element).direction
-  }
-})() : function(){}
+}
 
 export default getTextDirection
 export { getTextDirection }

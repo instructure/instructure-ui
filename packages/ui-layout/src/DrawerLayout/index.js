@@ -78,6 +78,9 @@ class DrawerLayout extends Component {
     shouldOverlayTray: PropTypes.bool
   }
 
+  static Content = DrawerContent
+  static Tray = DrawerTray
+
   constructor (props) {
     super(props)
 

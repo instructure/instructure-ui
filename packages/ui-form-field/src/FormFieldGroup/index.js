@@ -26,7 +26,7 @@ import React, { Component, Children } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import { Grid, GridCol, GridRow } from '@instructure/ui-layout'
+import { Grid } from '@instructure/ui-layout'
 import { themeable } from '@instructure/ui-themeable'
 import { pickProps, omitProps } from '@instructure/ui-react-utils'
 
@@ -94,9 +94,9 @@ class FormFieldGroup extends Component {
   renderColumns () {
     return Children.map(this.props.children, (child, index) => {
       return child
-        ? <GridCol width={child.props && child.props.width ? 'auto' : null} key={index}>
+        ? <Grid.Col width={child.props && child.props.width ? 'auto' : null} key={index}>
           {child}
-        </GridCol>
+        </Grid.Col>
         : null
     })
   }
@@ -109,9 +109,9 @@ class FormFieldGroup extends Component {
         vAlign={this.props.vAlign}
         startAt={this.props.startAt || (this.props.layout === 'columns' ? 'medium' : null)}
       >
-        <GridRow>
+        <Grid.Row>
           {this.renderColumns()}
-        </GridRow>
+        </Grid.Row>
       </Grid>
     )
   }

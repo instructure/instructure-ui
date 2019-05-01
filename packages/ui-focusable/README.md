@@ -20,9 +20,9 @@ yarn add @instructure/ui-focusable
 
 ```js
 import React from 'react'
-import Focusable from '@instructure/ui-focusable/lib/components/Focusable'
+import { Focusable } from '@instructure/ui-focusable'
 
-export default MyFocusable = function () {
+const MyFocusableElement = () => {
   return (
     <Focusable>
     {({ focused }) => (
