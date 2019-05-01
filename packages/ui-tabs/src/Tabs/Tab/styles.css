@@ -66,6 +66,13 @@
   }
 }
 
+@keyframes selectedTab {
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) scaleX(1);
+  }
+}
+
 .default {
   padding: 1rem 1.25rem;
   line-height: 1;
@@ -75,15 +82,16 @@
   color: var(--defaultColor);
 
   &::after {
-    transition: all 0.2s ease-out;
-    transform: translate3d(0, 0, 0) scaleX(0.01);
     content: "";
     height: 0.25rem;
     width: 100%;
     position: absolute;
     left: 0; /* stylelint-disable-line property-blacklist */
     bottom: -0.0625rem;
+
+    /* rules to animate from */
     opacity: 0;
+    transform: translate3d(0, 0, 0) scaleX(0.01);
   }
 
   &[aria-disabled] {
@@ -95,8 +103,10 @@
   }
 
   &[aria-selected]::after {
-    transform: translate3d(0, 0, 0) scaleX(1);
-    opacity: 1;
+    animation-name: selectedTab;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease-out;
     background-color: var(--defaultSelectedBorderColor);
   }
 
