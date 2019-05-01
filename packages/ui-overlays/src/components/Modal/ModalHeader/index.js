@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import matchComponentTypes from '@instructure/ui-react-utils/lib/matchComponentTypes'
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+import CloseButton from '@instructure/ui-buttons/lib/CloseButton'
 import classnames from 'classnames'
 import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
 import themeable from '@instructure/ui-themeable'

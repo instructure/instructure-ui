@@ -25,7 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+import CloseButton from '@instructure/ui-buttons/lib/CloseButton'
 import Heading from '@instructure/ui-elements/lib/components/Heading'
 import TextInput from '@instructure/ui-forms/lib/components/TextInput'
 import Link from '@instructure/ui-elements/lib/components/Link'

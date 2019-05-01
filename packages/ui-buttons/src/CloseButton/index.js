@@ -26,16 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 
-import IconXSolid from '@instructure/ui-icons/lib/IconXSolid'
-import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
+import { IconXSolid } from '@instructure/ui-icons'
+import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { testable } from '@instructure/ui-testable'
+import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { omitProps, pickProps } from '@instructure/ui-react-utils'
 
-import testable from '@instructure/ui-testable'
-import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
-import { pickProps } from '@instructure/ui-react-utils/lib/pickProps'
-
-import Button from '../Button'
+import { Button } from '../Button'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -92,3 +89,4 @@ class CloseButton extends Component {
 }
 
 export default CloseButton
+export { CloseButton }

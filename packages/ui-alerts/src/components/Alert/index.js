@@ -29,7 +29,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import keycode from 'keycode'
 
-import CloseButton from '@instructure/ui-buttons/lib/components/CloseButton'
+import CloseButton from '@instructure/ui-buttons/lib/CloseButton'
 import View from '@instructure/ui-layout/lib/View'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 

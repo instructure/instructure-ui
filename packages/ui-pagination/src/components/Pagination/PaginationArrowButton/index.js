@@ -24,7 +24,7 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Button from '@instructure/ui-buttons/lib/components/Button'
+import Button from '@instructure/ui-buttons/lib/Button'
 import PresentationContent from '@instructure/ui-a11y/lib/PresentationContent'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import Tooltip from '@instructure/ui-overlays/lib/components/Tooltip'

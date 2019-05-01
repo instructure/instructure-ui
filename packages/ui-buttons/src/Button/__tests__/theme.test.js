@@ -24,7 +24,8 @@
 
 import { contrast } from '@instructure/ui-color-utils'
 import { expect } from '@instructure/ui-test-utils'
-import Button from '../index'
+
+import { Button } from '../index'
 
 describe('Button.theme', () => {
   describe('with the default theme', () => {

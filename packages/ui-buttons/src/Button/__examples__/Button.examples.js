@@ -21,6 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-import { locator  } from '@instructure/ui-test-utils'
-import CloseButton from './index'
-export default locator(CloseButton.selector)
+
+import React from 'react'
+
+import { ScreenReaderContent } from '@instructure/ui-a11y'
+import { IconTrashSolid } from '@instructure/ui-icons'
+
+const iconButton = (props) => {
+  return props.variant && (props.variant.includes('icon') || props.variant.includes('circle'))
+}
+
+export default {
+  sectionProp: 'variant',
+  propValues: {
+    icon: [null, IconTrashSolid]
+  },
+  getComponentProps: (props) => {
+    return {
+      children: props.variant.includes('icon') || props.variant.includes('circle')
+        ? <ScreenReaderContent>Hello</ScreenReaderContent>
+        : 'Hello'
+    }
+  },
+  getExampleProps: (props) => {
+    return {
+      background: props.variant.includes('inverse') ? 'inverse' : 'default'
+    }
+  },
+  filter: (props) => {
+    return (
+      iconButton(props) && props.icon === null ||
+      iconButton(props) && props.fluidWidth ||
+      props.type && props.type !== 'button' || props.disabled
+    )
+  }
+}

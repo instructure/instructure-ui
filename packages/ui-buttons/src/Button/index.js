@@ -26,18 +26,14 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import keycode from 'keycode'
 
-import testable from '@instructure/ui-testable'
-import themeable from '@instructure/ui-themeable'
-import ThemeablePropTypes from '@instructure/ui-themeable/lib/ThemeablePropTypes'
-import { omitProps } from '@instructure/ui-react-utils/lib/omitProps'
-import getElementType from '@instructure/ui-react-utils/lib/getElementType'
-import isActiveElement from '@instructure/ui-dom-utils/lib/isActiveElement'
-import findDOMNode from '@instructure/ui-dom-utils/lib/findDOMNode'
-import hasVisibleChildren from '@instructure/ui-a11y/lib/hasVisibleChildren'
+import { testable } from '@instructure/ui-testable'
+import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
+import { omitProps, getElementType } from '@instructure/ui-react-utils'
+import { isActiveElement, findDOMNode } from '@instructure/ui-dom-utils'
+import { hasVisibleChildren } from '@instructure/ui-a11y'
 import { warn } from '@instructure/console/macro'
 
-import View from '@instructure/ui-layout/lib/View'
-import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
+import { View, Flex, FlexItem  } from '@instructure/ui-layout'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -300,3 +296,4 @@ class Button extends Component {
 }
 
 export default Button
+export { Button }

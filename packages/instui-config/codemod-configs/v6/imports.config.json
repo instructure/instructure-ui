@@ -33,11 +33,11 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Button",
-    "replace": "@instructure/ui-buttons/lib/components/Button"
+    "replace": "@instructure/ui-buttons/lib/Button"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/CloseButton",
-    "replace": "@instructure/ui-buttons/lib/components/CloseButton"
+    "replace": "@instructure/ui-buttons/lib/CloseButton"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Container",
@@ -334,5 +334,9 @@
   {
     "pattern": "^@instructure/ui-layout/lib/utils",
     "replace": "@instructure/ui-layout/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-buttons/lib/components",
+    "replace": "@instructure/ui-buttons/lib"
   }
 ]

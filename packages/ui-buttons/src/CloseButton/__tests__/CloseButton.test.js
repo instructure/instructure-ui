@@ -22,5 +22,19 @@
  * SOFTWARE.
  */
 
-export Button from './Button'
-export CloseButton from './CloseButton'
+import React from 'react'
+import { mount, expect } from '@instructure/ui-test-utils'
+
+import { CloseButton } from '../index'
+import CloseButtonLocator from '../locator'
+
+describe('<CloseButton />', async () => {
+  it('should render with x icon', async () => {
+    await mount(
+      <CloseButton>Close</CloseButton>
+    )
+    const button = await CloseButtonLocator.find()
+    const icon = await button.find('svg[name]')
+    expect(icon.getAttribute('name')).to.equal('IconX')
+  })
+})

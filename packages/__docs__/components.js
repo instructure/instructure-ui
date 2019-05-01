@@ -31,7 +31,9 @@ export {
 export * from '@instructure/ui-alerts/lib/components'
 export * from '@instructure/ui-billboard/lib/components'
 export * from '@instructure/ui-breadcrumb/lib/components'
-export * from '@instructure/ui-buttons/lib/components'
+
+export { Button, CloseButton } from '@instructure/ui-buttons'
+
 export * from '@instructure/ui-calendar/lib/components'
 export * from '@instructure/ui-code-editor/lib/components'
 export * from '@instructure/ui-editable/lib/components'

@@ -21,4 +21,5 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export * from './components'
+export { Button } from './Button'
+export { CloseButton } from './CloseButton'
