@@ -27,7 +27,7 @@ import PropTypes from 'prop-types'
 
 import { expect, mount, spy } from '@instructure/ui-test-utils'
 
-import { deprecated, changedPackageWarning } from '../deprecated'
+import { deprecated } from '../deprecated'
 
 class TestComponent extends Component {
   static propTypes = {
@@ -97,7 +97,7 @@ describe('@deprecated', async () => {
   })
 
   describe('deprecated component with a changed package message', async () => {
-    const DeprecatedComponent = deprecated('5.0.0', null, changedPackageWarning(
+    const DeprecatedComponent = deprecated('5.0.0', null, deprecated.changedPackageWarning(
       'ui-forms',
       'ui-number-input'
     ))(TestComponent)

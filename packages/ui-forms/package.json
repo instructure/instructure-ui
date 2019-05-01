@@ -42,6 +42,7 @@
     "@instructure/ui-react-utils": "^5.52.2",
     "@instructure/ui-svg-images": "^5.52.2",
     "@instructure/ui-testable": "^5.52.2",
+    "@instructure/ui-text-input": "^5.52.2",
     "@instructure/ui-themeable": "^5.52.2",
     "@instructure/ui-utils": "^5.52.2",
     "@instructure/uid": "^5.52.2",

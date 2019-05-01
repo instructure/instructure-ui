@@ -90,7 +90,7 @@ const deprecated = decorator((ComposedComponent, version, oldProps, message) => 
  * @param {array} deprecated - an array of the deprecated variant names
  * @param {string} message - additional information to display with the warning (include the version in which they will be removed)
  */
-function deprecatePropValues(propType, deprecated = [], message) {
+deprecated.deprecatePropValues = (propType, deprecated = [], message) => {
   return (props, propName, componentName, ...rest) => {
     const isDeprecatedValue = deprecated.includes(props[propName])
     warn(
@@ -101,7 +101,7 @@ function deprecatePropValues(propType, deprecated = [], message) {
   }
 }
 
-function warnDeprecatedProps(componentName, version, props, oldProps, message = '') {
+function warnDeprecatedProps (componentName, version, props, oldProps, message = '') {
   Object.keys(oldProps).forEach((oldProp) => {
     if (typeof props[oldProp] !== 'undefined') {
       const newProp = typeof oldProps[oldProp] === 'string'
@@ -117,6 +117,7 @@ function warnDeprecatedProps(componentName, version, props, oldProps, message = 
     }
   })
 }
+deprecated.warnDeprecatedProps = warnDeprecatedProps
 
 /**
  * ---
@@ -126,9 +127,10 @@ function warnDeprecatedProps(componentName, version, props, oldProps, message = 
   * @param {String} componentName the displayName of the component or Function.name of the utility function
  * @param {String} message a message to display as a console error in DEV env when condition is false
  */
-function warnDeprecatedComponent(version, componentName, message) {
+function warnDeprecatedComponent (version, componentName, message) {
   warn(false, `[${componentName}] is deprecated and will be removed in version ${version}. ${message || ''}`)
 }
+deprecated.warnDeprecatedComponent = warnDeprecatedComponent
 
 /**
  * ---
@@ -138,15 +140,9 @@ function warnDeprecatedComponent(version, componentName, message) {
  * @param {String} newPackage the new version of the package
  * @return {String} the formatted warning string
  */
-function changedPackageWarning(prevPackage, newPackage) {
+deprecated.changedPackageWarning = (prevPackage, newPackage) => {
   return `It has been moved from @instructure/${prevPackage} to @instructure/${newPackage}.`
 }
 
 export default deprecated
-export {
-  deprecated,
-  changedPackageWarning,
-  warnDeprecatedComponent,
-  warnDeprecatedProps,
-  deprecatePropValues
-}
+export { deprecated }

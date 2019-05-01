@@ -30,7 +30,7 @@ import GithubCorner from 'react-github-corner'
 import themeable from '@instructure/ui-themeable'
 
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
-import Select from '@instructure/ui-forms/lib/components/Select'
+import Select from '@instructure/ui-forms/lib/Select'
 import View from '@instructure/ui-layout/lib/View'
 import DrawerLayout, { DrawerTray, DrawerContent } from '@instructure/ui-layout/lib/DrawerLayout'
 import Mask from '@instructure/ui-overlays/lib/Mask'

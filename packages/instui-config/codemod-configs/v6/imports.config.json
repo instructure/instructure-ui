@@ -1,7 +1,7 @@
 [
   {
     "pattern": "^@instructure/ui-core/lib/components/Autocomplete",
-    "replace": "@instructure/ui-forms/lib/components/Select"
+    "replace": "@instructure/ui-forms/lib/Select"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ApplyTheme",
@@ -61,7 +61,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/DateInput",
-    "replace": "@instructure/ui-forms/lib/components/DateInput"
+    "replace": "@instructure/ui-forms/lib/DateInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Grid",
@@ -129,7 +129,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Select",
-    "replace": "@instructure/ui-forms/lib/components/Select"
+    "replace": "@instructure/ui-forms/lib/Select"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Spinner",
@@ -149,7 +149,7 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TimeInput",
-    "replace": "@instructure/ui-forms/lib/components/TimeInput"
+    "replace": "@instructure/ui-forms/lib/TimeInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/ToggleDetails",
@@ -197,51 +197,51 @@
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FormField",
-    "replace": "@instructure/ui-form-field/lib/components/FormField"
+    "replace": "@instructure/ui-form-field/lib/FormField"
   },
   {
     "pattern": "^@instructure/ui-forms/lib/components/FormField",
-    "replace": "@instructure/ui-form-field/lib/components/FormField"
+    "replace": "@instructure/ui-form-field/lib/FormField"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FormFieldGroup",
-    "replace": "@instructure/ui-form-field/lib/components/FormFieldGroup"
+    "replace": "@instructure/ui-form-field/lib/FormFieldGroup"
   },
   {
     "pattern": "^@instructure/ui-forms/lib/components/FormFieldGroup",
-    "replace": "@instructure/ui-form-field/lib/components/FormFieldGroup"
+    "replace": "@instructure/ui-form-field/lib/FormFieldGroup"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/Checkbox",
-    "replace": "@instructure/ui-forms/lib/components/Checkbox"
+    "replace": "@instructure/ui-forms/lib/Checkbox"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/CheckboxGroup",
-    "replace": "@instructure/ui-forms/lib/components/CheckboxGroup"
+    "replace": "@instructure/ui-forms/lib/CheckboxGroup"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/RadioInput",
-    "replace": "@instructure/ui-forms/lib/components/RadioInput"
+    "replace": "@instructure/ui-forms/lib/RadioInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/RadioInputGroup",
-    "replace": "@instructure/ui-forms/lib/components/RadioInputGroup"
+    "replace": "@instructure/ui-forms/lib/RadioInputGroup"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/RangeInput",
-    "replace": "@instructure/ui-forms/lib/components/RangeInput"
+    "replace": "@instructure/ui-forms/lib/RangeInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/FileDrop",
-    "replace": "@instructure/ui-forms/lib/components/FileDrop"
+    "replace": "@instructure/ui-forms/lib/FileDrop"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TextArea",
-    "replace": "@instructure/ui-forms/lib/components/TextArea"
+    "replace": "@instructure/ui-forms/lib/TextArea"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/TextInput",
-    "replace": "@instructure/ui-forms/lib/components/TextInput"
+    "replace": "@instructure/ui-forms/lib/TextInput"
   },
   {
     "pattern": "^@instructure/ui-core/lib/components/NumberInput",
@@ -354,5 +354,21 @@
   {
     "pattern": "^@instructure/ui-elements/lib/components",
     "replace": "@instructure/ui-elements/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-forms/lib/components",
+    "replace": "@instructure/ui-forms/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-form-field/lib/components",
+    "replace": "@instructure/ui-form-field/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-form-field/lib/utils",
+    "replace": "@instructure/ui-form-field/lib"
+  },
+  {
+    "pattern": "^@instructure/ui-text-input/lib/components",
+    "replace": "@instructure/ui-text-input/lib"
   }
 ]

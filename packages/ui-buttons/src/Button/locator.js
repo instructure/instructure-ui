@@ -23,7 +23,7 @@
  */
 import { locator, find  } from '@instructure/ui-test-utils'
 
-import Button from './index'
+import { Button } from './index'
 
 export default locator(Button.selector, {
   click: async (element, ...args) => {

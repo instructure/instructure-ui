@@ -22,4 +22,10 @@
  * SOFTWARE.
  */
 
-export * from './components'
+export { FormField } from './FormField'
+export { FormFieldLabel } from './FormFieldLabel'
+export { FormFieldMessage } from './FormFieldMessage'
+export { FormFieldMessages } from './FormFieldMessages'
+export { FormFieldLayout } from './FormFieldLayout'
+export { FormFieldGroup } from './FormFieldGroup'
+export { FormPropTypes } from './FormPropTypes'

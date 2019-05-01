@@ -29,7 +29,7 @@ import Calendar from '@instructure/ui-calendar/lib/components/Calendar'
 import IconCalendarMonthLine from '@instructure/ui-icons/lib/IconCalendarMonthLine'
 import Popover, { PopoverContent } from '@instructure/ui-overlays/lib/Popover'
 import Selectable from '@instructure/ui-selectable/lib/components/Selectable'
-import TextInput from '@instructure/ui-text-input/lib/components/TextInput'
+import TextInput from '@instructure/ui-text-input/lib/TextInput'
 
 import createChainedFunction from '@instructure/ui-utils/lib/createChainedFunction'
 import callRenderProp from '@instructure/ui-react-utils/lib/callRenderProp'
@@ -37,7 +37,7 @@ import safeCloneElement from '@instructure/ui-react-utils/lib/safeCloneElement'
 
 import { Children as ChildrenPropTypes, controllable } from '@instructure/ui-prop-types'
 import LayoutPropTypes from '@instructure/ui-layout/lib/LayoutPropTypes'
-import FormPropTypes from '@instructure/ui-form-field/lib/utils/FormPropTypes'
+import FormPropTypes from '@instructure/ui-form-field/lib/FormPropTypes'
 
 import testable from '@instructure/ui-testable'
 

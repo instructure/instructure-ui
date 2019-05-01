@@ -34,7 +34,7 @@ import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import SVGIcon from '@instructure/ui-svg-images/lib/components/SVGIcon'
 import Tooltip from '@instructure/ui-overlays/lib/Tooltip'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
-import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
+import Checkbox from '@instructure/ui-forms/lib/Checkbox'
 import Flex, { FlexItem } from '@instructure/ui-layout/lib/Flex'
 
 import Preview from '../Preview'

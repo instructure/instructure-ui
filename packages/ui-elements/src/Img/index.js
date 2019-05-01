@@ -40,7 +40,7 @@ category: components
 ---
 **/
 @testable()
-@deprecated('6.0.0', {
+@deprecated('7.0.0', {
   cover: 'constrain'
 })
 @themeable(theme, styles)

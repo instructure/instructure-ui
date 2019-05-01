@@ -27,14 +27,14 @@ import PropTypes from 'prop-types'
 
 import CloseButton from '@instructure/ui-buttons/lib/CloseButton'
 import Heading from '@instructure/ui-elements/lib/Heading'
-import TextInput from '@instructure/ui-forms/lib/components/TextInput'
+import TextInput from '@instructure/ui-text-input/lib/TextInput'
 import Link from '@instructure/ui-elements/lib/Link'
-import Select from '@instructure/ui-forms/lib/components/Select'
-import FormFieldGroup from '@instructure/ui-form-field/lib/components/FormFieldGroup'
+import Select from '@instructure/ui-forms/lib/Select'
+import FormFieldGroup from '@instructure/ui-form-field/lib/FormFieldGroup'
 import ScreenReaderContent from '@instructure/ui-a11y/lib/ScreenReaderContent'
 import Modal, { ModalHeader, ModalBody } from '@instructure/ui-overlays/lib/Modal'
 import CodeEditor from '@instructure/ui-code-editor/lib/components/CodeEditor'
-import Checkbox from '@instructure/ui-forms/lib/components/Checkbox'
+import Checkbox from '@instructure/ui-forms/lib/Checkbox'
 import AccessibleContent from '@instructure/ui-a11y/lib/AccessibleContent'
 
 import themeable from '@instructure/ui-themeable'
@@ -127,7 +127,7 @@ export default class Icons extends Component {
         >
           <TextInput
             placeholder="Filter icons..."
-            defaultValue={this.state.query}
+            value={this.state.query}
             onChange={this.handleSearchChange}
             label={<ScreenReaderContent>Icon Name</ScreenReaderContent>}
             size="large"
