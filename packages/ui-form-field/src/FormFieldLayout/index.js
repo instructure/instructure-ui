@@ -72,7 +72,8 @@ class FormFieldLayout extends Component {
     inline: PropTypes.bool,
     layout: PropTypes.oneOf(['stacked', 'inline']),
     labelAlign: PropTypes.oneOf(['start', 'end']),
-    width: PropTypes.string
+    width: PropTypes.string,
+    inputContainerRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -84,7 +85,8 @@ class FormFieldLayout extends Component {
     inline: false,
     layout: 'stacked',
     as: 'label',
-    labelAlign: 'end'
+    labelAlign: 'end',
+    inputContainerRef: undefined
   }
 
   constructor (props) {
@@ -114,6 +116,12 @@ class FormFieldLayout extends Component {
   get inlineContainerAndLabel () {
     // Return if both the component container and label will display inline
     return this.props.inline && this.props.layout === 'inline'
+  }
+
+  handleInputContainerRef = (node) => {
+    if (this.props.inputContainerRef) {
+      this.props.inputContainerRef(node)
+    }
   }
 
   renderLabel () {
@@ -193,7 +201,10 @@ class FormFieldLayout extends Component {
         >
           <Grid.Row>
             { this.renderLabel() }
-            <Grid.Col width={(this.inlineContainerAndLabel) ? 'auto' : null}>
+            <Grid.Col
+              width={(this.inlineContainerAndLabel) ? 'auto' : null}
+              elementRef={this.handleInputContainerRef}
+            >
               { this.props.children }
             </Grid.Col>
           </Grid.Row>

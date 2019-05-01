@@ -72,7 +72,8 @@ class GridCol extends Component {
       })
     ]),
     isLastRow: PropTypes.bool,
-    isLastCol: PropTypes.bool
+    isLastCol: PropTypes.bool,
+    elementRef: PropTypes.func
   }
   /* eslint-enable react/require-default-props */
 
@@ -80,7 +81,8 @@ class GridCol extends Component {
     textAlign: 'inherit',
     children: null,
     isLastCol: false,
-    isLastRow: false
+    isLastRow: false,
+    elementRef: undefined
   }
 
   startAtClass () {
@@ -177,6 +179,7 @@ class GridCol extends Component {
     return (
       <span
         {...props}
+        ref={this.props.elementRef}
         className={classnames(classes)}
       >
         {children}

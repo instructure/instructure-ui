@@ -55,7 +55,8 @@ class FormField extends Component {
     layout: PropTypes.oneOf(['stacked', 'inline']),
     labelAlign: PropTypes.oneOf(['start', 'end']),
     vAlign: PropTypes.oneOf(['top', 'middle', 'bottom']),
-    width: PropTypes.string
+    width: PropTypes.string,
+    inputContainerRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -66,7 +67,8 @@ class FormField extends Component {
     messages: undefined,
     messagesId: undefined,
     children: null,
-    width: undefined
+    width: undefined,
+    inputContainerRef: undefined
   }
 
   render() {

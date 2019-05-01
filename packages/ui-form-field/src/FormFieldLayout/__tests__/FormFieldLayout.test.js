@@ -23,8 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
-
+import { expect, mount, within, stub } from '@instructure/ui-test-utils'
 import { FormFieldLayout } from '../index'
 
 describe('<FormFieldLayout />', async () => {
@@ -71,5 +70,22 @@ describe('<FormFieldLayout />', async () => {
     const formFieldLayout = within(subject.getDOMNode())
     const label = await formFieldLayout.find(':textContent(Username)')
     expect(label.getComputedStyle().textAlign).to.equal('left')
+  })
+
+  it('should provide a ref to the input container', async () => {
+    const inputContainerRef = stub()
+    const subject = await mount(
+      <FormFieldLayout
+        label="Username"
+        inputContainerRef={inputContainerRef}
+      >
+        <input type="text" />
+      </FormFieldLayout>
+    )
+
+    const formFieldLayout = within(subject.getDOMNode())
+    const input = await formFieldLayout.find('input')
+
+    expect(inputContainerRef).to.have.been.calledWith(input.getParentNode())
   })
 })
