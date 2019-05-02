@@ -20,14 +20,14 @@ yarn add @instructure/ui-pagination
 
 ```js
 import React from 'react'
-import { Pagination, PaginationButton } from '@instructure/ui-pagination'
+import { Pagination } from '@instructure/ui-pagination'
 
 const MyPagination = () => {
   return (
     <Pagination>
-      <PaginationButton current>1</PaginationButton>
-      <PaginationButton>2</PaginationButton>
-      <PaginationButton>3</PaginationButton>
+      <Pagination.Page current>1</Pagination.Page>
+      <Pagination.Page>2</Pagination.Page>
+      <Pagination.Page>3</Pagination.Page>
     </Pagination>
   )
 }

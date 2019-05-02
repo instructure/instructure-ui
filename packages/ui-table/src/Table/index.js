@@ -45,7 +45,6 @@ import { Cell } from './Cell'
 /**
 ---
 category: components
-id: TableControlled
 ---
 **/
 @deprecated('7.0', {

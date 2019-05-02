@@ -39,7 +39,7 @@ import { ColHeader } from '../ColHeader'
 
 /**
 ---
-parent: TableControlled
+parent: Table
 ---
 **/
 @themeable(theme, styles)

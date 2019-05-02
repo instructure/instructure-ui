@@ -57,17 +57,17 @@ class Example extends React.Component {
           label="Delete"
           shouldCloseOnDocumentClick
         >
-          <ModalHeader>
+          <Modal.Header>
             {this.renderCloseButton()}
             <Heading level="h2">Delete</Heading>
-          </ModalHeader>
-          <ModalBody padding="large medium">
+          </Modal.Header>
+          <Modal.Body padding="large medium">
             <Text>You are about to delete an active assignment. This will affect 16 students grades.</Text>
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Cancel</Button>&nbsp;
             <Button onClick={this.handleButtonClick} variant="danger" type="submit">Delete</Button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
       </div>
     )
@@ -85,14 +85,14 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use when deleting Users, Accounts, Courses, Etc</FigureItem>
-    <FigureItem>Use when navigating away from a page that would cause a loss in changes or data</FigureItem>
-    <FigureItem>Use language that specifically describes the destructive nature</FigureItem>
-    <FigureItem>Use a confirmation button that describes the action to be taken</FigureItem>
+    <Figure.Item>Use when deleting Users, Accounts, Courses, Etc</Figure.Item>
+    <Figure.Item>Use when navigating away from a page that would cause a loss in changes or data</Figure.Item>
+    <Figure.Item>Use language that specifically describes the destructive nature</Figure.Item>
+    <Figure.Item>Use a confirmation button that describes the action to be taken</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use “Are you sure?” type language</FigureItem>
-    <FigureItem>Use red button for other modal actions</FigureItem>
+    <Figure.Item>Use “Are you sure?” type language</Figure.Item>
+    <Figure.Item>Use red button for other modal actions</Figure.Item>
   </Figure>
 </Guidelines>
 ```

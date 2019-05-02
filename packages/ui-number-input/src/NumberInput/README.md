@@ -162,12 +162,12 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use when the input is limited to a number (integer, rational, or irrational expressed with decimal points)</FigureItem>
-    <FigureItem>Use labels at the top or to the left of the input field</FigureItem>
+    <Figure.Item>Use when the input is limited to a number (integer, rational, or irrational expressed with decimal points)</Figure.Item>
+    <Figure.Item>Use labels at the top or to the left of the input field</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Place labels or text strings to the right of the input field</FigureItem>
-    <FigureItem>Use for alphanumeric input</FigureItem>
+    <Figure.Item>Place labels or text strings to the right of the input field</Figure.Item>
+    <Figure.Item>Use for alphanumeric input</Figure.Item>
   </Figure>
 </Guidelines>
 ```

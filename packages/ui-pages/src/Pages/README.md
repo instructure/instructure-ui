@@ -47,7 +47,7 @@ class Example extends React.Component {
         onPageIndexChange={this.handlePagesBackButtonClick}
         backButtonLabel="Back to previous page"
       >
-        <Page>
+        <Pages.Page>
          {(history, navigateToPreviousPage) => {
           return (
             <div>
@@ -65,8 +65,8 @@ class Example extends React.Component {
             </div>
           )
         }}
-        </Page>
-        <Page>
+        </Pages.Page>
+        <Pages.Page>
           {(history, navigateToPreviousPage) => {
           return (
             <div>
@@ -81,7 +81,7 @@ class Example extends React.Component {
             </div>
           )
         }}
-        </Page>
+        </Pages.Page>
       </Pages>
     )
   }
@@ -136,7 +136,7 @@ class Example extends React.Component {
         onPageIndexChange={this.handlePagesBackButtonClick}
         backButtonLabel="Back to previous page"
       >
-        <Page>
+        <Pages.Page>
         {(history, navigateToPreviousPage) => {
           return (
             <div>
@@ -155,8 +155,8 @@ class Example extends React.Component {
             </div>
           )
         }}
-        </Page>
-        <Page>
+        </Pages.Page>
+        <Pages.Page>
         {(history, navigateToPreviousPage) => {
           return (
             <div>
@@ -172,7 +172,7 @@ class Example extends React.Component {
             </div>
           )
         }}
-        </Page>
+        </Pages.Page>
       </Pages>
     )
   }
@@ -345,53 +345,53 @@ class Example extends React.Component {
           placement="center end"
           onDismiss={this.hidePopover}
         >
-          <PopoverTrigger>
+          <Popover.Trigger>
             <Button onClick={this.showPopover}>
               View Users
             </Button>
-          </PopoverTrigger>
-          <PopoverContent>
+          </Popover.Trigger>
+          <Popover.Content>
             <Pages
               activePageIndex={this.state.activePageIndex}
               onPageIndexChange={this.handlePagesBackButtonClick}
               backButtonLabel="Back to previous page"
             >
-              <Page
+              <Pages.Page
                 defaultFocusElement={() => this._usersNav[this.state.lastPageIndex]}
               >
               {(history, navigateToPreviousPage) => {
                 return (
                   <div>
                     <Grid hAlign="space-between">
-                      <GridRow>
-                        <GridCol width={9}>
+                      <Grid.Row>
+                        <Grid.Col width={9}>
                           <Heading level="h1">Users</Heading>
-                        </GridCol>
-                        <GridCol width={3} textAlign="end">
+                        </Grid.Col>
+                        <Grid.Col width={3} textAlign="end">
                           {this.renderNavigationButton(history, navigateToPreviousPage)}
-                        </GridCol>
-                      </GridRow>
+                        </Grid.Col>
+                      </Grid.Row>
                     </Grid>
                     {this.renderNavigation()}
                   </div>
                 )
               }}
-              </Page>
+              </Pages.Page>
               {USERS.map((user, index) => {
                 return (
-                  <Page key={index}>
+                  <Pages.Page key={index}>
                   {(history, navigateToPreviousPage) => {
                     return (
                       <div>
                         <Grid hAlign="space-between">
-                          <GridRow>
-                            <GridCol width={9}>
+                          <Grid.Row>
+                            <Grid.Col width={9}>
                               <Heading level="h1">User Details</Heading>
-                            </GridCol>
-                            <GridCol width={3} textAlign="end">
+                            </Grid.Col>
+                            <Grid.Col width={3} textAlign="end">
                               {this.renderNavigationButton(history, navigateToPreviousPage)}
-                            </GridCol>
-                          </GridRow>
+                            </Grid.Col>
+                          </Grid.Row>
                         </Grid>
                         <Media description={user.name}>
                           <Avatar name={user.name} />
@@ -433,11 +433,11 @@ class Example extends React.Component {
                       </div>
                     )
                   }}
-                  </Page>
+                  </Pages.Page>
                 )
               })}
             </Pages>
-          </PopoverContent>
+          </Popover.Content>
         </Popover>
       </View>
     )

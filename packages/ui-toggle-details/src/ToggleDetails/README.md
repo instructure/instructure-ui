@@ -139,10 +139,10 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use ToggleDetails when descriptive text is longer than a short phrase</FigureItem>
+    <Figure.Item>Use ToggleDetails when descriptive text is longer than a short phrase</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Nest ToggleDetails within another ToggleDetails</FigureItem>
+    <Figure.Item>Nest ToggleDetails within another ToggleDetails</Figure.Item>
   </Figure>
 </Guidelines>
 ```

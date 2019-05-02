@@ -26,14 +26,14 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use sentence-style capitalization</FigureItem>
-    <FigureItem>Use a clear and concise label for RadioInput</FigureItem>
-    <FigureItem>Optionally include a heading to provide further clarity</FigureItem>
+    <Figure.Item>Use sentence-style capitalization</Figure.Item>
+    <Figure.Item>Use a clear and concise label for RadioInput</Figure.Item>
+    <Figure.Item>Optionally include a heading to provide further clarity</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Have a single RadioInput</FigureItem>
-    <FigureItem>Use long labels for RadioInput</FigureItem>
-    <FigureItem>Display more than two radio inputs horizontally</FigureItem>
+    <Figure.Item>Have a single RadioInput</Figure.Item>
+    <Figure.Item>Use long labels for RadioInput</Figure.Item>
+    <Figure.Item>Display more than two radio inputs horizontally</Figure.Item>
   </Figure>
 </Guidelines>
 ```

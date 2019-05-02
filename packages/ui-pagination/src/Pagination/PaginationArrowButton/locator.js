@@ -24,7 +24,7 @@
 import { locator, find } from '@instructure/ui-test-utils'
 import TooltipLocator from '@instructure/ui-overlays/lib/Tooltip/locator'
 
-import PaginationArrowButton from './index'
+import { PaginationArrowButton } from './index'
 
 export default locator(PaginationArrowButton.selector, {
   findTooltipContent: (...args) => TooltipLocator.findContent(...args),

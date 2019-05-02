@@ -198,21 +198,21 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use 'Title Case' for button text</FigureItem>
-    <FigureItem>Use the primary button only once for each section of content</FigureItem>
-    <FigureItem>Use the primary button when the task of the view requires an action to be taken</FigureItem>
-    <FigureItem>Use the success and danger buttons for grading activities</FigureItem>
-    <FigureItem>Use the danger button to warn the user of potentially destructive actions</FigureItem>
-    <FigureItem>Use the default button as a secondary or tertiary option for actions such as Cancel</FigureItem>
-    <FigureItem>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</FigureItem>
-    <FigureItem>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</FigureItem>
-    <FigureItem>Use the link button when the action is navigational</FigureItem>
-    <FigureItem>The maximum string length of any button, including spaces, should be 20 characters</FigureItem>
+    <Figure.Item>Use 'Title Case' for button text</Figure.Item>
+    <Figure.Item>Use the primary button only once for each section of content</Figure.Item>
+    <Figure.Item>Use the primary button when the task of the view requires an action to be taken</Figure.Item>
+    <Figure.Item>Use the success and danger buttons for grading activities</Figure.Item>
+    <Figure.Item>Use the danger button to warn the user of potentially destructive actions</Figure.Item>
+    <Figure.Item>Use the default button as a secondary or tertiary option for actions such as Cancel</Figure.Item>
+    <Figure.Item>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</Figure.Item>
+    <Figure.Item>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</Figure.Item>
+    <Figure.Item>Use the link button when the action is navigational</Figure.Item>
+    <Figure.Item>The maximum string length of any button, including spaces, should be 20 characters</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use more than one primary button per section of content
-</FigureItem>
-    <FigureItem>Use the ghost button excessively or when another variant would work</FigureItem>
+    <Figure.Item>Use more than one primary button per section of content
+</Figure.Item>
+    <Figure.Item>Use the ghost button excessively or when another variant would work</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -223,10 +223,10 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>When using ghost, icon, or link variants on a dark background, use the <code>*-inverse</code> variant to ensure adequate contrast</FigureItem>
-    <FigureItem>Ensure buttons can be activated with both Enter and Spacebar keys</FigureItem>
-    <FigureItem>Disabled buttons do not need to meet color contrast ratio requirements or receive keyboard focus but should be read as "disabled" or "dimmed" by screen readers</FigureItem>
-    <FigureItem>Icon only buttons must have ScreenReaderContent added so screen readers indicate what the button is used for</FigureItem>
+    <Figure.Item>When using ghost, icon, or link variants on a dark background, use the <code>*-inverse</code> variant to ensure adequate contrast</Figure.Item>
+    <Figure.Item>Ensure buttons can be activated with both Enter and Spacebar keys</Figure.Item>
+    <Figure.Item>Disabled buttons do not need to meet color contrast ratio requirements or receive keyboard focus but should be read as "disabled" or "dimmed" by screen readers</Figure.Item>
+    <Figure.Item>Icon only buttons must have ScreenReaderContent added so screen readers indicate what the button is used for</Figure.Item>
   </Figure>
 </Guidelines>
 ```

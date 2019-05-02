@@ -1,6 +1,5 @@
 ---
-describes: DateInputControlled
-id: DateInputControlled__README
+describes: DateInput
 ---
 
 The `DateInput` component provides a visual interface for inputting date data.
@@ -177,7 +176,7 @@ class Example extends React.Component {
       const dateStr = date.toISOString()
 
       return (
-        <DateInputControlled.Day
+        <DateInput.Day
           key={dateStr}
           date={dateStr}
           interaction={this.isDisabledDate(date) ? 'disabled' : 'enabled'}
@@ -188,7 +187,7 @@ class Example extends React.Component {
           onClick={this.handleDayClick}
         >
           {date.format('D')}
-        </DateInputControlled.Day>
+        </DateInput.Day>
       )
     })
   }
@@ -217,7 +216,7 @@ class Example extends React.Component {
     })
 
     return (
-      <DateInputControlled
+      <DateInput
         label="Choose a date"
         value={value}
         onChange={this.handleChange}
@@ -243,7 +242,7 @@ class Example extends React.Component {
         renderWeekdayLabels={this.renderWeekdayLabels()}
       >
         {this.renderDays()}
-      </DateInputControlled>
+      </DateInput>
     )
   }
 }

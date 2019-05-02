@@ -1,11 +1,10 @@
 ---
-describes: TextInputControlled
-id: TextInputControlled__README
+describes: TextInput
 ---
 
-A **controlled-only** version of [`TextInput`](#TextInput): You must pass event handlers if you want it to respond to user input.
+A **controlled-only** version of [`TextInput`](#DeprecatedTextInput): You must pass event handlers if you want it to respond to user input.
 
-TextInputControlled supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
+TextInput supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 
 ```javascript
 ---
@@ -66,7 +65,7 @@ class ControlledTextInputExample extends React.Component {
           />
         </FormFieldGroup>
         <View display="block" margin="medium 0 0">
-          <TextInputControlled
+          <TextInput
             label="What is your favorite band?"
             value={this.state.value}
             onChange={this.handleChange}
@@ -87,7 +86,7 @@ render(<ControlledTextInputExample />)
 ```
 
 ### Prepending and appending content
-TextInputControlled accepts focusable and non-focusable content before and/or after
+TextInput accepts focusable and non-focusable content before and/or after
 the input text. A common use case is adding an icon or avatar to the input.
 Focusable content will be focused separately from the input itself.
 
@@ -113,7 +112,7 @@ class ExtraContentExample extends React.Component {
   render () {
     return (
       <View as="div">
-        <TextInputControlled
+        <TextInput
           label="What are Paula Panda's favorite ice cream flavors?"
           value={this.state.value}
           onChange={this.handleChange}
@@ -181,7 +180,7 @@ size of the component, use `width`.
 example: true
 ---
 <div>
-  <TextInputControlled
+  <TextInput
     label={<ScreenReaderContent>I am a hidden label</ScreenReaderContent>}
     inline
     width="4rem"
@@ -199,13 +198,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Left align text (exceptions may apply)</FigureItem>
-    <FigureItem>Place labels on top or to the left (inline)</FigureItem>
-    <FigureItem>Make placeholder text different than the label</FigureItem>
+    <Figure.Item>Left align text (exceptions may apply)</Figure.Item>
+    <Figure.Item>Place labels on top or to the left (inline)</Figure.Item>
+    <Figure.Item>Make placeholder text different than the label</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Place labels to the right of the input</FigureItem>
-    <FigureItem>Place inputs in the middle of sentences or phrases</FigureItem>
+    <Figure.Item>Place labels to the right of the input</Figure.Item>
+    <Figure.Item>Place inputs in the middle of sentences or phrases</Figure.Item>
   </Figure>
 </Guidelines>
 ```

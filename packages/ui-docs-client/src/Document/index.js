@@ -111,12 +111,12 @@ class Document extends Component {
   }
 
   renderUsage () {
-    const { requirePath, esPath, id, displayName, packageName, title, resource } = this.props.doc
+    const { requirePath, id, displayName, packageName, title, resource } = this.props.doc
     const importName = displayName || resource.displayName || id
 
     let example = []
 
-    if (esPath) {
+    if (packageName && requirePath) {
       example.push(`\
 /*** ES Modules (with tree shaking) ***/
 import { ${importName} } from '${packageName}'

@@ -39,11 +39,11 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Ensure the appropriate size is being used for its placement (in a table, stand-alone, etc…)</FigureItem>
-    <FigureItem>Use circle variant in Canvas</FigureItem>
+    <Figure.Item>Ensure the appropriate size is being used for its placement (in a table, stand-alone, etc…)</Figure.Item>
+    <Figure.Item>Use circle variant in Canvas</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use inline in sentence</FigureItem>
+    <Figure.Item>Use inline in sentence</Figure.Item>
   </Figure>
 </Guidelines>
 ```

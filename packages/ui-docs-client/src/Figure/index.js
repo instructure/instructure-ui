@@ -65,6 +65,8 @@ class Figure extends Component {
     children: null
   }
 
+  static Item = FigureItem
+
   get recommendationIcon () {
     if (this.props.recommendation === 'yes') {
       return IconCheckMarkSolid

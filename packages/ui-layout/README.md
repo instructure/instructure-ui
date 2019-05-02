@@ -19,13 +19,13 @@ yarn add @instructure/ui-layout
 
 ```js
 import React from 'react'
-import { DrawerLayout, DrawerTray, DrawerContent } from '@instructure/ui-layout'
+import { DrawerLayout } from '@instructure/ui-layout'
 
 const MyLayout = () => {
   return (
     <DrawerLayout>
-      <DrawerTray>Hello from layout tray</DrawerTray>
-      <DrawerContent>Hello from layout content</DrawerContent>
+      <DrawerLayout.Tray>Hello from layout tray</DrawerLayout.Tray>
+      <DrawerLayout.Content>Hello from layout content</DrawerLayout.Content>
     </DrawerLayout>
   )
 }

@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/register": "",
+    "@babel/register": "^7.4.4",
     "core-js": "^3",
     "jsdom-global": "^3.0.2",
     "regenerator-runtime": "^0.13.2"

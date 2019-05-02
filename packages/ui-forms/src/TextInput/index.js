@@ -40,6 +40,7 @@ import theme from './theme'
 /**
 ---
 category: components
+id: DeprecatedTextInput
 ---
 **/
 @deprecated('7.0.0', null, deprecated.changedPackageWarning(

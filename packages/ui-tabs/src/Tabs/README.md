@@ -62,18 +62,18 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Title should be a single row above content</FigureItem>
-    <FigureItem>TabButton content should be succinct, preferably one word</FigureItem>
-    <FigureItem>Use title case</FigureItem>
-    <FigureItem>Use default variant when a single Tabs component exists on the page</FigureItem> 
-    <FigureItem>Ensure each TabPanel content is mutually exclusive of the others’</FigureItem>
+    <Figure.Item>Title should be a single row above content</Figure.Item>
+    <Figure.Item>TabButton content should be succinct, preferably one word</Figure.Item>
+    <Figure.Item>Use title case</Figure.Item>
+    <Figure.Item>Use default variant when a single Tabs component exists on the page</Figure.Item> 
+    <Figure.Item>Ensure each Tablist.Panel content is mutually exclusive of the others’</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Exceed 20 characters including spaces for the title</FigureItem>
-    <FigureItem>Exceed 5 tabs</FigureItem>
-    <FigureItem>Use avatars, pills, icons, etc in the TabButton</FigureItem>
-    <FigureItem>Nest tabbed content within a tab</FigureItem>
-    <FigureItem>Align tabs to the center of the page</FigureItem>
+    <Figure.Item>Exceed 20 characters including spaces for the title</Figure.Item>
+    <Figure.Item>Exceed 5 tabs</Figure.Item>
+    <Figure.Item>Use avatars, pills, icons, etc in the TabButton</Figure.Item>
+    <Figure.Item>Nest tabbed content within a tab</Figure.Item>
+    <Figure.Item>Align tabs to the center of the page</Figure.Item>
   </Figure>
 </Guidelines>
 ```

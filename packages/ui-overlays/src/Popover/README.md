@@ -56,14 +56,14 @@ class Example extends React.Component {
           offsetY="16px"
           mountNode={() => document.getElementById('main')}
         >
-          <PopoverTrigger>
+          <Popover.Trigger>
             <Button
               onClick={this.showPopover}
             >
               Sign In
             </Button>
-          </PopoverTrigger>
-          <PopoverContent>
+          </Popover.Trigger>
+          <Popover.Content>
             <View padding="medium" display="block" as="form">
               {this.renderCloseButton()}
               <FormFieldGroup description="Log In">
@@ -71,7 +71,7 @@ class Example extends React.Component {
                 <TextInput label="Password" type="password" />
               </FormFieldGroup>
             </View>
-          </PopoverContent>
+          </Popover.Content>
         </Popover>
       </View>
     )
@@ -102,12 +102,12 @@ render () {
           alignArrow
           mountNode={() => document.getElementById('main')}
         >
-          <PopoverTrigger>
+          <Popover.Trigger>
             <div style={{display: 'inline-block', height: '3px', width: '3px', background: 'blue'}}/>
-          </PopoverTrigger>
-          <PopoverContent>
+          </Popover.Trigger>
+          <Popover.Content>
             <Heading>Small<br/>Target</Heading>
-          </PopoverContent>
+          </Popover.Content>
         </Popover>
       </div>
   )
@@ -136,12 +136,12 @@ render () {
         shouldFocusContentOnTriggerBlur
         mountNode={() => document.getElementById('container')}
       >
-        <PopoverTrigger>
+        <Popover.Trigger>
           <Button margin="small">focus me</Button>
-        </PopoverTrigger>
-        <PopoverContent>
+        </Popover.Trigger>
+        <Popover.Content>
           <Button margin="small">focus me when trigger blurs</Button>
-        </PopoverContent>
+        </Popover.Content>
       </Popover>
       <div id="container"/>
       <Button id="next" margin="small">focus me next</Button>
@@ -162,13 +162,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Consider using a <Link href="/#Tray">Tray</Link> if the content is beyond a mobile screen size</FigureItem>
+    <Figure.Item>Consider using a <Link href="/#Tray">Tray</Link> if the content is beyond a mobile screen size</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Put content on the same row as the close "x"</FigureItem>
-    <FigureItem>Use with an <Link href="#Overlay">Overlay</Link></FigureItem>
-    <FigureItem>Have multiple Popovers open at the same time</FigureItem>
-    <FigureItem>Use in place of a <Link href="/#Tooltip">Tooltip</Link> or <Link href="/#Menu">Menu</Link></FigureItem>
+    <Figure.Item>Put content on the same row as the close "x"</Figure.Item>
+    <Figure.Item>Use with an <Link href="#Overlay">Overlay</Link></Figure.Item>
+    <Figure.Item>Have multiple Popovers open at the same time</Figure.Item>
+    <Figure.Item>Use in place of a <Link href="/#Tooltip">Tooltip</Link> or <Link href="/#Menu">Menu</Link></Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -180,10 +180,10 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Keyboard focus must be set in the popover when it appears; usually on the first interactive element</FigureItem>
-    <FigureItem>Popovers must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</FigureItem>
-    <FigureItem>When a user closes the Popover, focus must return to a logical place within the page. This is usually the element that triggered opening the popover</FigureItem>
-    <FigureItem>Popovers should be able to be closed by clicking away, esc key and/or a close button</FigureItem>
+    <Figure.Item>Keyboard focus must be set in the popover when it appears; usually on the first interactive element</Figure.Item>
+    <Figure.Item>Popovers must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</Figure.Item>
+    <Figure.Item>When a user closes the Popover, focus must return to a logical place within the page. This is usually the element that triggered opening the popover</Figure.Item>
+    <Figure.Item>Popovers should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
   </Figure>
 </Guidelines>
 ```

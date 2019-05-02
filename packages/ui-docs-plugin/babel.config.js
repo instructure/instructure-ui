@@ -27,7 +27,9 @@
      require('@instructure/ui-babel-preset'),
      {
       coverage: Boolean(process.env.COVERAGE),
-      esModules: Boolean(process.env.ES_MODULES)
+      esModules: Boolean(process.env.ES_MODULES),
+      removeConsole: false,
+      transformImports: Boolean(process.env.TRANSFORM_IMPORTS)
      }
    ]]
  }

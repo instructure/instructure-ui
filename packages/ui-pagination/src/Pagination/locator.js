@@ -26,7 +26,7 @@ import { locator } from '@instructure/ui-test-utils'
 import PaginationArrowButtonLocator from './PaginationArrowButton/locator'
 import { Pagination } from './index'
 
-const PaginationButtonLocator = locator(Pagination.PageButton.selector)
+const PaginationButtonLocator = locator(Pagination.Page.selector)
 
 export default locator(Pagination.selector, {
   findAllPageButtons: async (...args) => PaginationButtonLocator.findAll(...args),

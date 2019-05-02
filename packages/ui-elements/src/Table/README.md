@@ -1,6 +1,9 @@
 ---
-describes: Table
+describes: DeprecatedTable
+id: DeprecatedTable__README
 ---
+
+**DEPRECATED:** use the [controlled-only `Table` from ui-table](#Table) instead.
 
 Note that the `caption` prop is required for accessibility. If you would
 rather hide the caption, wrap it inside a
@@ -10,7 +13,7 @@ rather hide the caption, wrap it inside a
 ---
 example: true
 ---
-<Table
+<DeprecatedTable
   caption={<ScreenReaderContent>Some great records</ScreenReaderContent>}
 >
   <thead>
@@ -41,7 +44,7 @@ example: true
       <td>Capitol Europe</td>
     </tr>
   </tbody>
-</Table>
+</DeprecatedTable>
 ```
 
 ### The `layout` property
@@ -57,7 +60,7 @@ The `layout` default, `auto`, lets the browser determine table column widths bas
 ---
 example: true
 ---
-<Table
+<DeprecatedTable
   caption={<ScreenReaderContent>Napster</ScreenReaderContent>}
   layout="fixed"
 >
@@ -83,7 +86,7 @@ example: true
       </td>
     </tr>
   </tbody>
-</Table>
+</DeprecatedTable>
 ```
 
 ### Table style variants
@@ -97,7 +100,7 @@ prop to add space around the table.
 ---
 example: true
 ---
-<Table
+<DeprecatedTable
   caption="Some great records"
   size="large"
   hover
@@ -132,14 +135,14 @@ example: true
       <td>Epic</td>
     </tr>
   </tbody>
-</Table>
+</DeprecatedTable>
 ```
 
 ```js
 ---
 example: true
 ---
-<Table
+<DeprecatedTable
   caption={<ScreenReaderContent>Some great records</ScreenReaderContent>}
   size="small"
   striped="columns"
@@ -185,5 +188,5 @@ example: true
       <td>Matador</td>
     </tr>
   </tbody>
-</Table>
+</DeprecatedTable>
 ```

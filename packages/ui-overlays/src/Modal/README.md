@@ -6,7 +6,7 @@ The Modal is a dialog component that is centered in the viewport. The Modal
 overlays the application content and applies a mask to it.
 
 The default `padding` of the Modal content is `medium` but can be overridden
-by using the `padding` prop on the `<ModalBody/>` if the use case requires it.
+by using the `padding` prop on the `<Modal.Body/>` if the use case requires it.
 
 ```js
 ---
@@ -86,18 +86,18 @@ class Example extends React.Component {
           label="Modal Dialog: Hello World"
           shouldCloseOnDocumentClick
         >
-          <ModalHeader>
+          <Modal.Header>
             {this.renderCloseButton()}
             <Heading>Hello World</Heading>
-          </ModalHeader>
-          <ModalBody>
+          </Modal.Header>
+          <Modal.Body>
             <TextInput label="Example" placeholder="if you hit enter here, it should submit the form" />
             <Text lineHeight="double">{fpo}</Text>
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
             <Button variant="primary" type="submit">Submit</Button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
       </div>
     )
@@ -163,20 +163,20 @@ class Example extends React.Component {
           mountNode={() => document.getElementById('constrainExample')}
           constrain="parent"
         >
-          <ModalHeader>
+          <Modal.Header>
             {this.renderCloseButton()}
             <Heading>This Modal contains an Autocomplete</Heading>
-          </ModalHeader>
-          <ModalBody>
+          </Modal.Header>
+          <Modal.Body>
             <View as="p" margin="none none small"><Text>{fpo}</Text></View>
             <ModalAutoCompleteExample
               label="Choose a state" defaultOption="12"
               onChange={(e, o) => console.log(o.label)} />
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick}>Close</Button>&nbsp;
             <Button onClick={this.handleButtonClick} variant="primary" type="submit">Submit</Button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
         <View
           background="inverse"
@@ -225,7 +225,7 @@ render(<Example />)
 
 > Setting the `variant` prop to `"inverse"` will result in a dark version of Modal, useful for displaying media. *Note that the `inverse` Modal does not currently support text or form input content.*
 
-**If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** ModalBody will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
+**If you are displaying small, relatively uniform images or videos inside Modal, the default settings should work well.** Modal.Body will expand to the height of the media you're displaying. If there is overflow, scrollbars will be available.
 
 ```js
 ---
@@ -261,12 +261,12 @@ class Example extends React.Component {
           shouldCloseOnDocumentClick
           variant="inverse"
         >
-          <ModalHeader>
+          <Modal.Header>
             <Flex>
-              <FlexItem grow shrink>
+              <Flex.Item grow shrink>
                 <Heading level="h2" ellipsis>A small image</Heading>
-              </FlexItem>
-              <FlexItem>
+              </Flex.Item>
+              <Flex.Item>
                 <Button
                   variant="icon-inverse"
                   icon={IconXSolid}
@@ -274,19 +274,19 @@ class Example extends React.Component {
                 >
                   <ScreenReaderContent>Close</ScreenReaderContent>
                 </Button>
-              </FlexItem>
+              </Flex.Item>
             </Flex>
-          </ModalHeader>
-          <ModalBody padding="none">
+          </Modal.Header>
+          <Modal.Body padding="none">
             <Img
               src={placeholderImage(500, 250)}
               inline={false}
               margin="0 auto"
             />
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
       </div>
     )
@@ -296,8 +296,8 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-**When you have to display large media inside the Modal (or have no control over the size of the media)**, set `overflow` to `fit`. Doing so makes ModalBody fill 100% of the available width and height, enabling you to
-use the [Img](#Img) component's `constrain` property to fit the image inside ModalBody.
+**When you have to display large media inside the Modal (or have no control over the size of the media)**, set `overflow` to `fit`. Doing so makes Modal.Body fill 100% of the available width and height, enabling you to
+use the [Img](#Img) component's `constrain` property to fit the image inside Modal.Body.
 
 > `<Img />` uses CSS's [`object-fit`](https://developer.mozilla.org/en-US/docs/Web/CSS/object-fit) for its constrain property. If you're not using `<Img />`, add an `object-fit` rule to your media, and it will work with `overflow="fit"`.
 
@@ -374,19 +374,19 @@ class Example extends React.Component {
           variant="inverse"
           overflow="fit"
         >
-          <ModalHeader>
+          <Modal.Header>
             <Flex>
-              <FlexItem grow shrink>
+              <Flex.Item grow shrink>
                 <Flex alignItems="center">
-                  <FlexItem margin="0 x-small 0 0">
+                  <Flex.Item margin="0 x-small 0 0">
                     <SVGIcon src={iconExample} size="small" title="Icon Example" />
-                  </FlexItem>
-                  <FlexItem grow shrink>
+                  </Flex.Item>
+                  <Flex.Item grow shrink>
                     <Heading level="h2" ellipsis>This Modal Contains Media</Heading>
-                  </FlexItem>
+                  </Flex.Item>
                 </Flex>
-              </FlexItem>
-              <FlexItem>
+              </Flex.Item>
+              <Flex.Item>
                 <Button variant="icon-inverse" icon={IconPrinterSolid} margin="0 x-small">
                   <ScreenReaderContent>Print This</ScreenReaderContent>
                 </Button>
@@ -398,19 +398,19 @@ class Example extends React.Component {
                 >
                   <ScreenReaderContent>Close</ScreenReaderContent>
                 </Button>
-              </FlexItem>
+              </Flex.Item>
             </Flex>
-          </ModalHeader>
-          <ModalBody padding="none">
+          </Modal.Header>
+          <Modal.Body padding="none">
             <Img
               src={avatarSquare}
               constrain={this.state.imageFit}
               inline={false}
             />
-          </ModalBody>
-          <ModalFooter>
+          </Modal.Body>
+          <Modal.Footer>
             <Button onClick={this.handleButtonClick} variant="ghost-inverse" type="submit">Ok</Button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
       </div>
     )
@@ -428,18 +428,18 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use it to validate user decisions or to gain secondary confirmation</FigureItem>
-    <FigureItem>Provide input areas that the user may interact with such as Forms, Dropdowns, Selectors, and Links</FigureItem>
-    <FigureItem>Provide a way to dismiss the Modal: the "x" close button, the ESC key, clicking outside the modal, alternative response button (done, etc...)</FigureItem>
-    <FigureItem>Place optional response button(s) on the right side within the ModalFooter</FigureItem>
-    <FigureItem>Place primary button on the far right with secondary response buttons to the left of the primary</FigureItem>
-    <FigureItem>Use size="fullscreen" when setting ModalBody to overflow="contain" to support media fitting within its container</FigureItem>
+    <Figure.Item>Use it to validate user decisions or to gain secondary confirmation</Figure.Item>
+    <Figure.Item>Provide input areas that the user may interact with such as Forms, Dropdowns, Selectors, and Links</Figure.Item>
+    <Figure.Item>Provide a way to dismiss the Modal: the "x" close button, the ESC key, clicking outside the modal, alternative response button (done, etc...)</Figure.Item>
+    <Figure.Item>Place optional response button(s) on the right side within the Modal.Footer</Figure.Item>
+    <Figure.Item>Place primary button on the far right with secondary response buttons to the left of the primary</Figure.Item>
+    <Figure.Item>Use size="fullscreen" when setting Modal.Body to overflow="contain" to support media fitting within its container</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use when the workflow should NOT be interrupted</FigureItem>
-    <FigureItem>Use to show error, success, or warning messages/notifications (see Alert)</FigureItem>
-    <FigureItem>Add content to a modal that would be better suited in its own page</FigureItem>
-    <FigureItem>Use "inverse" variant for anything other than media</FigureItem>
+    <Figure.Item>Use when the workflow should NOT be interrupted</Figure.Item>
+    <Figure.Item>Use to show error, success, or warning messages/notifications (see Alert)</Figure.Item>
+    <Figure.Item>Add content to a modal that would be better suited in its own page</Figure.Item>
+    <Figure.Item>Use "inverse" variant for anything other than media</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -450,11 +450,11 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Keyboard focus must be set in the modal when it appears; usually on the first interactive element</FigureItem>
-    <FigureItem>Modals must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</FigureItem>
-    <FigureItem>When a user closes a modal, focus must return to a logical place within the page. This is usually the element that triggered opening the modal</FigureItem>
-    <FigureItem>Modals should be able to be closed by clicking away, esc key and/or a close button</FigureItem>
-    <FigureItem>We recommend that modals begin with a heading (typically H2)</FigureItem>
+    <Figure.Item>Keyboard focus must be set in the modal when it appears; usually on the first interactive element</Figure.Item>
+    <Figure.Item>Modals must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</Figure.Item>
+    <Figure.Item>When a user closes a modal, focus must return to a logical place within the page. This is usually the element that triggered opening the modal</Figure.Item>
+    <Figure.Item>Modals should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
+    <Figure.Item>We recommend that modals begin with a heading (typically H2)</Figure.Item>
   </Figure>
 </Guidelines>
 ```

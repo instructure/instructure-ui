@@ -77,13 +77,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Keyboard focus must be set to a dialog when it appears; usually on the first interactive element within the dialog</FigureItem>
-    <FigureItem>A modal dialog must contain keyboard focus until it closes, so that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</FigureItem>
-    <FigureItem>A non-modal dialog must close when it loses focus</FigureItem>
-    <FigureItem>When the user closes a dialog, focus must return to a logical place within the page. This is usually to the element that triggered the dialog</FigureItem>
-    <FigureItem>When dialogs are triggered by buttons or links (buttons are recommended), accessibility can be further enhanced by applying aria-haspopup="dialog" to the trigger. This will notify screen reader users that the trigger opens a dialog</FigureItem>
-    <FigureItem>We recommend that dialogs begin with a heading (typically an H2)</FigureItem>
-    <FigureItem>Dialogs should be able to be closed by clicking away, esc key and/or a close button</FigureItem>
+    <Figure.Item>Keyboard focus must be set to a dialog when it appears; usually on the first interactive element within the dialog</Figure.Item>
+    <Figure.Item>A modal dialog must contain keyboard focus until it closes, so that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</Figure.Item>
+    <Figure.Item>A non-modal dialog must close when it loses focus</Figure.Item>
+    <Figure.Item>When the user closes a dialog, focus must return to a logical place within the page. This is usually to the element that triggered the dialog</Figure.Item>
+    <Figure.Item>When dialogs are triggered by buttons or links (buttons are recommended), accessibility can be further enhanced by applying aria-haspopup="dialog" to the trigger. This will notify screen reader users that the trigger opens a dialog</Figure.Item>
+    <Figure.Item>We recommend that dialogs begin with a heading (typically an H2)</Figure.Item>
+    <Figure.Item>Dialogs should be able to be closed by clicking away, esc key and/or a close button</Figure.Item>
   </Figure>
 </Guidelines>
 ```

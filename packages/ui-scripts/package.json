@@ -21,7 +21,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/cli": "^7.4.3",
+    "@babel/cli": "^7.4.4",
     "@instructure/command-utils": "^5.52.2",
     "@instructure/cz-lerna-changelog": "^5.52.2",
     "@instructure/pkg-utils": "^5.52.2",
@@ -35,7 +35,7 @@
     "gh-pages": "^2.0.1",
     "http-server": "^0.11.1",
     "jira-client": "^6.7.1",
-    "jscodeshift": "^0.6.3",
+    "jscodeshift": "^0.6.4",
     "karma-cli": "^2.0.0",
     "lerna": "^3",
     "mocha": "^6.1.4",

@@ -44,16 +44,18 @@ export {
   Progress,
   Rating,
   Spinner,
-  Table,
+  Table as DeprecatedTable,
   Tag,
   Text,
-  TruncateText
+  TruncateText,
+  List,
+  MetricsList
 } from '@instructure/ui-elements'
 export { Focusable, FocusableView } from '@instructure/ui-focusable'
 export {
   Checkbox,
   CheckboxGroup,
-  DateInput,
+  DateInput as DeprecatedDateInput,
   DateTimeInput,
   FileDrop,
   RadioInput,
@@ -61,12 +63,12 @@ export {
   RangeInput,
   Select,
   TextArea,
-  TextInput,
+  TextInput as DeprecatedTextInput,
   TimeInput
  } from '@instructure/ui-forms'
 export { NumberInput } from '@instructure/ui-number-input'
-export { DateInput as DateInputControlled } from '@instructure/ui-date-input'
-export { TextInput as TextInputControlled } from '@instructure/ui-text-input'
+export { DateInput } from '@instructure/ui-date-input'
+export { TextInput } from '@instructure/ui-text-input'
  export {
   FormField,
   FormFieldLabel,
@@ -75,47 +77,43 @@ export { TextInput as TextInputControlled } from '@instructure/ui-text-input'
   FormFieldLayout,
   FormFieldGroup,
 } from '@instructure/ui-form-field'
-export { Table as TableControlled } from '@instructure/ui-table'
+export { Table } from '@instructure/ui-table'
 export { ApplyLocale, ApplyTextDirection } from '@instructure/ui-i18n'
 export {
   ContextView,
   Media,
   Responsive,
-  View
+  View,
+  Flex,
+  DrawerLayout,
+  Grid,
+  Position
 } from '@instructure/ui-layout'
 export { Transition } from '@instructure/ui-motion'
 export {
   Mask,
   Overlay,
   Tooltip,
-  Tray
+  Tray,
+  Modal,
+  Popover
 } from '@instructure/ui-overlays'
+export { Breadcrumb } from '@instructure/ui-breadcrumb'
+export { Navigation } from '@instructure/ui-navigation'
+export { Menu } from '@instructure/ui-menu'
+export { Pagination } from '@instructure/ui-pagination'
+export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
 export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'
-export { Tabs } from '@instructure/ui-tabs'
+export { Tabs, TabList } from '@instructure/ui-tabs'
 export { Expandable, ToggleDetails, ToggleGroup } from '@instructure/ui-toggle-details'
 export { TreeBrowser } from '@instructure/ui-tree-browser'
 export * from '@instructure/ui-icons'
+export { Guidelines, Figure } from '@instructure/ui-docs-client'
 
-export { Guidelines } from '@instructure/ui-docs-client'
 
-// TODO: when we split these out into their own packages we should always export a single component
-// e.g. (Flex.Item, Grid.Row, List.Item)
-export { Flex, FlexItem } from '@instructure/ui-layout/lib/Flex'
-export { DrawerLayout, DrawerContent, DrawerTray } from '@instructure/ui-layout/lib/DrawerLayout'
-export { Grid, GridRow, GridCol } from '@instructure/ui-layout/lib/Grid'
-export { Position, PositionTarget, PositionContent } from '@instructure/ui-layout/lib/Position'
-export { Navigation, NavigationItem } from '@instructure/ui-navigation/lib/Navigation'
-export { Menu, MenuItem, MenuItemGroup, MenuItemSeparator } from '@instructure/ui-menu/lib/Menu'
-export { Pagination, PaginationButton } from '@instructure/ui-pagination/lib/Pagination'
-export { TabList, TabPanel } from '@instructure/ui-tabs/lib/TabList'
-export { Pages, Page } from '@instructure/ui-pages/lib/Pages'
-export { Modal, ModalHeader, ModalBody, ModalFooter } from '@instructure/ui-overlays/lib/Modal'
-export { Popover, PopoverTrigger, PopoverContent } from '@instructure/ui-overlays/lib/Popover'
-export { List, ListItem } from '@instructure/ui-elements/lib/List'
-export { MetricsList, MetricsListItem } from '@instructure/ui-elements/lib/MetricsList'
-export { Breadcrumb, BreadcrumbLink } from '@instructure/ui-breadcrumb/lib/Breadcrumb'
 
-export { Figure, FigureItem } from '@instructure/ui-docs-client/lib/Figure'
+
+

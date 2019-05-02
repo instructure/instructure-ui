@@ -20,13 +20,13 @@ yarn add @instructure/ui-menu
 
 ```js
 import React from 'react'
-import { Menu, MenuItem } from '@instructure/ui-menu'
+import { Menu } from '@instructure/ui-menu'
 
 const MyMenu = () => {
   return (
     <Menu>
-      <MenuItem value="foo">Foo</MenuItem>
-      <MenuItem value="bar">Bar</MenuItem>
+      <Menu.Item value="foo">Foo</Menu.Item>
+      <Menu.Item value="bar">Bar</Menu.Item>
     </Menu>
   )
 }

@@ -33,7 +33,7 @@ const MyTextInput = () => {
 The `ui-forms` package contains the following components:
 - [Checkbox](#Checkbox)
 - [CheckboxGroup](#CheckboxGroup)
-- [DateInput](#DateInput)
+- [DateInput (deprecated)](#DeprecatedDateInput)
 - [DateTimeInput](#DateTimeInput)
 - [FileDrop](#FileDrop)
 - [RadioInput](#RadioInput)
@@ -41,7 +41,7 @@ The `ui-forms` package contains the following components:
 - [RangeInput](#RangeInput)
 - [Select](#Select)
 - [TextArea](#TextArea)
-- [TextInput](#TextInput)
+- [TextInput (deprecated)](#DeprecatedTextInput)
 - [TimeInput](#TimeInput)
 
 ### Contribute

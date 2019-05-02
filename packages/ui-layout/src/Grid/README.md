@@ -4,7 +4,7 @@ describes: Grid
 
 ### Create a basic column layout
 
-Simply create a `<Grid>` with some `<GridRow>` and `GridCol` children, and
+Simply create a `<Grid>` with some `<Grid.Row>` and `Grid.Col` children, and
 the component will evenly distribute its columns.
 
 Note the `visualDebug` prop you can set if you're wondering
@@ -16,17 +16,17 @@ example: true
 ---
 <div>
   <Grid visualDebug>
-    <GridRow>
-      <GridCol>
+    <Grid.Row>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-    </GridRow>
+      </Grid.Col>
+    </Grid.Row>
   </Grid>
   <p>
     {lorem.paragraph()}
@@ -36,7 +36,7 @@ example: true
 
 ### Make the grid stack until a certain breakpoint/screen width
 
-Often you will want to stack your `<GridCol>`s until you reach a certain
+Often you will want to stack your `<Grid.Col>`s until you reach a certain
 screen width. To do this, use the `startAt` prop.
 
 Reduce the screen width and see how the grid below only displays its
@@ -48,26 +48,26 @@ default, stacked columns have bottom margin for visual separation.
 example: true
 ---
 <Grid startAt="large" visualDebug>
-  <GridRow>
-    <GridCol>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-  </GridRow>
+    </Grid.Col>
+  </Grid.Row>
 </Grid>
 ```
 
 ### Control the width of each column
 
-You can control the width of the `<GridCol>` columns for each
+You can control the width of the `<Grid.Col>` columns for each
 breakpoint with the `width` prop. Please note the following:
 
 + If you don't need complex responsive behavior, you can just set
   the width property to a single value for all breakpoints after
   and including the breakpoint set via the `startAt` prop. e.g.
-  `<GridCol width={2}>`
+  `<Grid.Col width={2}>`
 
 + The grid is made up of **12 columns**. If the columns' total
   width exceeds 12, the layout will break.
@@ -77,7 +77,7 @@ breakpoint with the `width` prop. Please note the following:
   to expand to the width of its content. (See the final example grid
   to see how this can be useful for right-aligning column content.)
 
-+ The `startAt` prop setting supersedes any `<GridCol>` width props. For
++ The `startAt` prop setting supersedes any `<Grid.Col>` width props. For
   example, if you set `width={{small: 2}}` on a column, but the `startAt` prop
   on your `<Grid>` is set to `medium`, the `width={{small: 2}}` will be ignored.
 
@@ -86,17 +86,17 @@ breakpoint with the `width` prop. Please note the following:
 example: true
 ---
 <Grid visualDebug>
-  <GridRow>
-    <GridCol width={{small: 4, medium: 6, large: 3, xLarge: 6}}>
+  <Grid.Row>
+    <Grid.Col width={{small: 4, medium: 6, large: 3, xLarge: 6}}>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol width={{small: 4, medium: 4, large: 3, xLarge: 5}}>
+    </Grid.Col>
+    <Grid.Col width={{small: 4, medium: 4, large: 3, xLarge: 5}}>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol width={{small: 4, medium: 2, large: 6, xLarge: 1}}>
+    </Grid.Col>
+    <Grid.Col width={{small: 4, medium: 2, large: 6, xLarge: 1}}>
       {lorem.paragraph()}
-    </GridCol>
-  </GridRow>
+    </Grid.Col>
+  </Grid.Row>
 </Grid>
 ```
 
@@ -111,32 +111,32 @@ or remove it with `none`.
 example: true
 ---
 <Grid colSpacing="large" rowSpacing="small" visualDebug>
-  <GridRow>
-    <GridCol>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-  </GridRow>
-  <GridRow>
-    <GridCol>
+    </Grid.Col>
+  </Grid.Row>
+  <Grid.Row>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
       {lorem.paragraph()}
-    </GridCol>
-  </GridRow>
+    </Grid.Col>
+  </Grid.Row>
 </Grid>
 ```
 
-Another useful method for spacing out `<GridCol>` elements is to use the `hAlign`
+Another useful method for spacing out `<Grid.Col>` elements is to use the `hAlign`
 prop together with set widths on the columns. `hAlign` accepts the following
 values: `start`, `center`, `end`, `space-around`, and `space-between`.
 
@@ -147,17 +147,17 @@ values: `start`, `center`, `end`, `space-around`, and `space-between`.
 example: true
 ---
   <Grid hAlign="space-between" visualDebug>
-    <GridRow>
-      <GridCol width={2}>
+    <Grid.Row>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol width={4}>
+      </Grid.Col>
+      <Grid.Col width={4}>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol width={2}>
+      </Grid.Col>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </GridCol>
-    </GridRow>
+      </Grid.Col>
+    </Grid.Row>
   </Grid>
 ```
 
@@ -168,17 +168,17 @@ example: true
 example: true
 ---
   <Grid hAlign="space-around" visualDebug>
-    <GridRow>
-      <GridCol width={2}>
+    <Grid.Row>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol width={4}>
+      </Grid.Col>
+      <Grid.Col width={4}>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol width={2}>
+      </Grid.Col>
+      <Grid.Col width={2}>
         {lorem.paragraph()}
-      </GridCol>
-    </GridRow>
+      </Grid.Col>
+    </Grid.Row>
   </Grid>
 ```
 
@@ -192,17 +192,17 @@ below the grid is set to vertically center its columns.
 example: true
 ---
   <Grid vAlign="middle" visualDebug>
-    <GridRow>
-      <GridCol>
+    <Grid.Row>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-      <GridCol>
+      </Grid.Col>
+      <Grid.Col>
         {lorem.paragraph()}
-      </GridCol>
-    </GridRow>
+      </Grid.Col>
+    </Grid.Row>
   </Grid>
 ```
 
@@ -214,9 +214,9 @@ screens &#151; like smalls &#151; we want the header to stack the heading and
 the buttons.
 
 Use `startAt="medium"` to make the grid only affect most tablets and above. To align
-the buttons to the right, add `width="auto"` to their `<GridCol>`. This will
+the buttons to the right, add `width="auto"` to their `<Grid.Col>`. This will
 make the column only expand to fit the width of the buttons. Because the
-`<GridCol>` containing the heading has no set width, it will expand by default
+`<Grid.Col>` containing the heading has no set width, it will expand by default
 to take up all the width it can, pinning the columns containing the buttons
 to the right.
 
@@ -225,15 +225,15 @@ to the right.
 example: true
 ---
   <Grid startAt="medium" vAlign="middle" colSpacing="none">
-    <GridRow>
-      <GridCol>
+    <Grid.Row>
+      <Grid.Col>
         <Heading>I am a fairly lengthy heading for the page</Heading>
-      </GridCol>
-      <GridCol width="auto">
+      </Grid.Col>
+      <Grid.Col width="auto">
         <Button>Cancel</Button>
         &nbsp;
         <Button variant="primary" icon={IconAddSolid}>Widget</Button>
-      </GridCol>
-    </GridRow>
+      </Grid.Col>
+    </Grid.Row>
   </Grid>
 ```

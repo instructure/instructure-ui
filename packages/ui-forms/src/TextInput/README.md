@@ -1,7 +1,8 @@
 ---
-describes: TextInput
+describes: DeprecatedTextInput
+id: DeprecatedTextInput__README
 ---
-**DEPRECATED:** use the [controlled `TextInput` from ui-text-input](#TextInputControlled) instead.
+**DEPRECATED:** use the [controlled-only `TextInput` from ui-text-input](#TextInput) instead.
 
 `TextInput` renders a custom HTML `input` element. It supports the following types: `text` (default) / `email` / `url` / `tel` / `search` / `password`
 
@@ -9,7 +10,7 @@ describes: TextInput
 ---
 example: true
 ---
-<TextInput label="Name" placeholder="Doe, John Doe" />
+<DeprecatedTextInput label="Name" placeholder="Doe, John Doe" />
 ```
 
 A `TextInput` with errors:
@@ -18,7 +19,7 @@ A `TextInput` with errors:
 ---
 example: true
 ---
-<TextInput messages={[{ text: 'Invalid name', type: 'error' }]} label="Name" />
+<DeprecatedTextInput messages={[{ text: 'Invalid name', type: 'error' }]} label="Name" />
 ```
 
 A disabled `TextInput`:
@@ -27,7 +28,7 @@ A disabled `TextInput`:
 ---
 example: true
 ---
-<TextInput disabled label="Name" defaultValue="Charles" />
+<DeprecatedTextInput disabled label="Name" defaultValue="Charles" />
 ```
 
 A `TextInput` with an `inline` layout:
@@ -36,7 +37,7 @@ A `TextInput` with an `inline` layout:
 ---
 example: true
 ---
-<TextInput
+<DeprecatedTextInput
   label="Name"
   layout="inline"
 />
@@ -48,7 +49,7 @@ A `TextInput` with a screen reader only label:
 ---
 example: true
 ---
-<TextInput
+<DeprecatedTextInput
   label={<ScreenReaderContent>Age</ScreenReaderContent>}
   placeholder="hello world"
 />
@@ -62,7 +63,7 @@ the TextInput is `inline`.*
 example: true
 ---
 <div style={{display: 'flex', alignItems: 'center'}}>
-  <TextInput
+  <DeprecatedTextInput
     label={<ScreenReaderContent>Label</ScreenReaderContent>}
     inline
     width="4em"
@@ -79,9 +80,9 @@ Default is `medium.  As with other form elements, the sizes align with the `Butt
 example: true
 ---
 <div>
-  <TextInput size="small" label="Small-size input" /><br/>
-  <TextInput label="Default-size input" /><br/>
-  <TextInput size="large" label="Large-size input" />
+  <DeprecatedTextInput size="small" label="Small-size input" /><br/>
+  <DeprecatedTextInput label="Default-size input" /><br/>
+  <DeprecatedTextInput size="large" label="Large-size input" />
 </div>
 ```
 ### Guidelines
@@ -92,13 +93,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Left align text (exceptions may apply)</FigureItem>
-    <FigureItem>Place labels on top or to the left (inline)</FigureItem>
-    <FigureItem>Make placeholder text different than the label</FigureItem>
+    <Figure.Item>Left align text (exceptions may apply)</Figure.Item>
+    <Figure.Item>Place labels on top or to the left (inline)</Figure.Item>
+    <Figure.Item>Make placeholder text different than the label</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Place labels to the right of the input</FigureItem>
-    <FigureItem>Place inputs in the middle of sentences or phrases</FigureItem>
+    <Figure.Item>Place labels to the right of the input</Figure.Item>
+    <Figure.Item>Place inputs in the middle of sentences or phrases</Figure.Item>
   </Figure>
 </Guidelines>
 ```

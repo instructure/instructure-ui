@@ -34,7 +34,7 @@
     "classnames": "^2",
     "codemirror": "^5.46.0",
     "prop-types": "^15",
-    "react-codemirror2": "^5.1.0"
+    "react-codemirror2": "^6.0.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

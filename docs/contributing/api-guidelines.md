@@ -59,6 +59,13 @@ order: 3
 
 - When using `setTimeout`, `requestAnimationFrame`, `MutationObserver`, or similar async functionality in your component, be sure to cancel/clear them in the `componentWillUnmount` lifecycle method.
 
+### Package directory structure and file naming
+
+- React component names, and their source directory names, should be PascalCase.
+- Avoid deeply nesting directories within a package. All components and utilities should be directly under `src`. Prefer splitting into separate packages over sub-directories. Child components can be nested under the parent if they cannot be used on their own.
+- Always provide a named export. (e.g. prefer `export { MyComponent }` vs. `export default MyComponent`)
+- Always import named exports when they are available. (e.g. prefer `import { MyComponent } from 'my-lib'` to `import MyComponent from 'my-lib'`)
+
 ### Render Prop Components
 
 See the [React docs](https://reactjs.org/docs/render-props.html) for information about what a render prop component is.

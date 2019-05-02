@@ -161,13 +161,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Align to the left side of the label</FigureItem>
-    <FigureItem>Use when multiple selections are allowed</FigureItem>
-    <FigureItem>Use to save space from toggles</FigureItem>
-    <FigureItem>Stack vertically if there is more than two options to select</FigureItem>
+    <Figure.Item>Align to the left side of the label</Figure.Item>
+    <Figure.Item>Use when multiple selections are allowed</Figure.Item>
+    <Figure.Item>Use to save space from toggles</Figure.Item>
+    <Figure.Item>Stack vertically if there is more than two options to select</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Run more than two checkboxes horizontally</FigureItem>
+    <Figure.Item>Run more than two checkboxes horizontally</Figure.Item>
   </Figure>
 </Guidelines>
 ```

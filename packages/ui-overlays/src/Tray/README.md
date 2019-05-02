@@ -31,10 +31,10 @@ class Example extends React.Component {
   renderCloseButton () {
     return (
       <Flex>
-        <FlexItem grow shrink>
+        <Flex.Item grow shrink>
           <Heading>Hello</Heading>
-        </FlexItem>
-        <FlexItem>
+        </Flex.Item>
+        <Flex.Item>
           <Button
             variant="icon"
             icon={IconXLine}
@@ -42,7 +42,7 @@ class Example extends React.Component {
           >
             <ScreenReaderContent>Close</ScreenReaderContent>
           </Button>
-        </FlexItem>
+        </Flex.Item>
       </Flex>
     )
   }
@@ -118,20 +118,20 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Configure Tray to enter from the end on desktop, bottom on mobile/tablet</FigureItem>
-    <FigureItem>Use when it is useful to still see information contained on the page or not lose context of the page that triggered the Tray</FigureItem>
-    <FigureItem>Use 2 tabs max if using TabList in small size</FigureItem>
-    <FigureItem>Use 5 tabs max if using TabList in medium/large size</FigureItem>
-    <FigureItem>Prefer Tray to close when user clicks outside of the Tray</FigureItem>
-    <FigureItem>Keep the close 'x' directly following the Tray title, no matter what side the Tray slides from</FigureItem>
+    <Figure.Item>Configure Tray to enter from the end on desktop, bottom on mobile/tablet</Figure.Item>
+    <Figure.Item>Use when it is useful to still see information contained on the page or not lose context of the page that triggered the Tray</Figure.Item>
+    <Figure.Item>Use 2 tabs max if using TabList in small size</Figure.Item>
+    <Figure.Item>Use 5 tabs max if using TabList in medium/large size</Figure.Item>
+    <Figure.Item>Prefer Tray to close when user clicks outside of the Tray</Figure.Item>
+    <Figure.Item>Keep the close 'x' directly following the Tray title, no matter what side the Tray slides from</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use TabList in the x-small size</FigureItem>
-    <FigureItem>Use for Sub Nav or <Link href="/#DrawerLayout">Drawer Layout</Link></FigureItem>
-    <FigureItem>Use with an <Link href="/#Overlay">Overlay</Link></FigureItem>
-    <FigureItem>Use a Tray on top of a <Link href="/#Modal">Modal</Link></FigureItem>
-    <FigureItem>Use for <Link href="#Alert">Alerts</Link> or Confirmation Dialogs</FigureItem>
-    <FigureItem>Allow Tray to push the content of the page</FigureItem>
+    <Figure.Item>Use TabList in the x-small size</Figure.Item>
+    <Figure.Item>Use for Sub Nav or <Link href="/#DrawerLayout">Drawer Layout</Link></Figure.Item>
+    <Figure.Item>Use with an <Link href="/#Overlay">Overlay</Link></Figure.Item>
+    <Figure.Item>Use a Tray on top of a <Link href="/#Modal">Modal</Link></Figure.Item>
+    <Figure.Item>Use for <Link href="#Alert">Alerts</Link> or Confirmation Dialogs</Figure.Item>
+    <Figure.Item>Allow Tray to push the content of the page</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -142,10 +142,10 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Keyboard focus must be set in the tray when it appears; usually on the first interactive element</FigureItem>
-    <FigureItem>Trays must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</FigureItem>
-    <FigureItem>When a user closes a tray, focus must return to a logical place within the page. This is usually the element that triggered opening the tray</FigureItem>
-    <FigureItem>We recommend that trays begin with a heading (typically H2)</FigureItem>
+    <Figure.Item>Keyboard focus must be set in the tray when it appears; usually on the first interactive element</Figure.Item>
+    <Figure.Item>Trays must contain keyboard focus until they’re closed. This is to ensure that keyboard or screen reader users won't mistakenly interact with background content that is meant to be hidden or inaccessible</Figure.Item>
+    <Figure.Item>When a user closes a tray, focus must return to a logical place within the page. This is usually the element that triggered opening the tray</Figure.Item>
+    <Figure.Item>We recommend that trays begin with a heading (typically H2)</Figure.Item>
   </Figure>
 </Guidelines>
 ```

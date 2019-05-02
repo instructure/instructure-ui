@@ -71,17 +71,17 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use on icons with no labels</FigureItem>
-    <FigureItem>Use on condensed dates</FigureItem>
-    <FigureItem>Use on table content if items are getting truncated</FigureItem>
-    <FigureItem>Use to provide more specific data (ie. user hovers over a chart element, Tooltip shows precise info)</FigureItem>
-    <FigureItem>Try to stay within 50 characters</FigureItem>
+    <Figure.Item>Use on icons with no labels</Figure.Item>
+    <Figure.Item>Use on condensed dates</Figure.Item>
+    <Figure.Item>Use on table content if items are getting truncated</Figure.Item>
+    <Figure.Item>Use to provide more specific data (ie. user hovers over a chart element, Tooltip shows precise info)</Figure.Item>
+    <Figure.Item>Try to stay within 50 characters</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Repeat the exact information contained on the triggering element</FigureItem>
-    <FigureItem>Contain links or focusable items</FigureItem>
-    <FigureItem>Use icons inside Tooltips</FigureItem>
-    <FigureItem>Use in place of a <Link href="/#Popover">Popover</Link> or <Link href="/#Menu">Menu</Link></FigureItem>
+    <Figure.Item>Repeat the exact information contained on the triggering element</Figure.Item>
+    <Figure.Item>Contain links or focusable items</Figure.Item>
+    <Figure.Item>Use icons inside Tooltips</Figure.Item>
+    <Figure.Item>Use in place of a <Link href="/#Popover">Popover</Link> or <Link href="/#Menu">Menu</Link></Figure.Item>
   </Figure>
 </Guidelines>
 ```

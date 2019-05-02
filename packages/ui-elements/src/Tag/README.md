@@ -111,7 +111,7 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>When implementing dismissable tags, be sure to add AccessibleContent to clarify that the tag is dismissible to screen readers</FigureItem>
+    <Figure.Item>When implementing dismissable tags, be sure to add AccessibleContent to clarify that the tag is dismissible to screen readers</Figure.Item>
   </Figure>
 </Guidelines>
 ```

@@ -15,7 +15,7 @@ category: packages
 yarn add @instructure/ui-date-input
 ```
 
-For detailed usage and documentation, see [DateInput](#DateInputControlled).
+For detailed usage and documentation, see [DateInput](#DateInput).
 
 [npm]: https://img.shields.io/npm/v/@instructure/ui-date-input.svg
 [npm-url]: https://npmjs.com/package/@instructure/ui-date-input

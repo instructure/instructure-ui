@@ -63,13 +63,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use all capital letters</FigureItem>
+    <Figure.Item>Use all capital letters</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use more than 2 words</FigureItem>
-    <FigureItem>Use for dismissible items (use a <Link href="/#Tag">Tag</Link> instead)</FigureItem>
-    <FigureItem>Use for counts (use a <Link href="/#Badge">Badge</Link> instead)</FigureItem>
-    <FigureItem>Put icons or actions next to the text</FigureItem>
+    <Figure.Item>Use more than 2 words</Figure.Item>
+    <Figure.Item>Use for dismissible items (use a <Link href="/#Tag">Tag</Link> instead)</Figure.Item>
+    <Figure.Item>Use for counts (use a <Link href="/#Badge">Badge</Link> instead)</Figure.Item>
+    <Figure.Item>Put icons or actions next to the text</Figure.Item>
   </Figure>
 </Guidelines>
 ```

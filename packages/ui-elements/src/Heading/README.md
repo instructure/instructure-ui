@@ -89,9 +89,9 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Each page should always contain one and only one H1</FigureItem>
-    <FigureItem>Headings should be used in logical order</FigureItem>
-    <FigureItem>Headings should not be used to format text</FigureItem>
+    <Figure.Item>Each page should always contain one and only one H1</Figure.Item>
+    <Figure.Item>Headings should be used in logical order</Figure.Item>
+    <Figure.Item>Headings should not be used to format text</Figure.Item>
   </Figure>
 </Guidelines>
 ```

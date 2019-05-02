@@ -123,8 +123,7 @@ class Pagination extends Component {
     shouldHandleFocus: true
   }
 
-  static PageButton = PaginationButton
-  static ArrowButton = PaginationArrowButton
+  static Page = PaginationButton
 
   constructor (...args) {
     super(...args)

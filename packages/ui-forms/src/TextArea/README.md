@@ -117,14 +117,14 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Align text to the left</FigureItem>
-    <FigureItem>Place labels on top or to the left (inline)</FigureItem>
+    <Figure.Item>Align text to the left</Figure.Item>
+    <Figure.Item>Place labels on top or to the left (inline)</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Repeat label text if using placeholder text</FigureItem>
-    <FigureItem>Use for rich text editing</FigureItem>
-    <FigureItem>Allow resizing of the TextArea to break the layout of a page</FigureItem>
-    <FigureItem>Place labels to the right of the TextArea</FigureItem>
+    <Figure.Item>Repeat label text if using placeholder text</Figure.Item>
+    <Figure.Item>Use for rich text editing</Figure.Item>
+    <Figure.Item>Allow resizing of the TextArea to break the layout of a page</Figure.Item>
+    <Figure.Item>Place labels to the right of the TextArea</Figure.Item>
   </Figure>
 </Guidelines>
 ```

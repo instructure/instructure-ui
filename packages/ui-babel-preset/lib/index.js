@@ -29,7 +29,8 @@ module.exports = function (context, opts = {
   esModules: false,
   coverage: false,
   node: false,
-  removeConsole: false
+  removeConsole: false,
+  transformImports: true
 }) {
   const envPresetConfig = opts.node ? getNodeEnvConfig() : getWebEnvConfig(opts)
 
@@ -38,7 +39,22 @@ module.exports = function (context, opts = {
     [require('@babel/preset-react').default, { useBuiltIns: true }]
   ]
 
-  let plugins = [
+  let plugins = []
+
+  if (opts.transformImports) {
+    plugins.push([
+      require('@instructure/babel-plugin-transform-imports'), {
+        '(@instructure\/ui-[^\/]+)$': { // eslint-disable-line no-useless-escape
+          transform: (importName, matches) => {
+            if (!matches || !matches[1] || matches[1] === '@instructure/ui-test-utils') return
+            return `${matches[1]}/lib/${importName}`
+          }
+        }
+      }
+    ])
+  }
+
+  plugins = plugins.concat([
     require('babel-plugin-macros'),
     require('@babel/plugin-transform-destructuring').default,
     [require('@babel/plugin-proposal-decorators').default, { legacy: true }], // must run before themeable-styles plugin below
@@ -53,7 +69,7 @@ module.exports = function (context, opts = {
     }],
     require('@babel/plugin-syntax-dynamic-import').default,
     require('babel-plugin-transform-undefined-to-void')
-  ]
+  ])
 
   if (process.env.NODE_ENV === 'production') {
     plugins.push(

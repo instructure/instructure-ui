@@ -58,5 +58,5 @@ module.exports = {
     ...baseConfig.plugins,
     ...require('./plugins')
   ],
-  resolve: DEBUG ? require('./resolve') : {}
+  resolve: DEBUG ? require('./resolve') : { mainFields: ['main'] }
 }

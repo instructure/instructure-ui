@@ -46,7 +46,7 @@ class BreadcrumbLink extends Component {
     */
     href: PropTypes.string,
     /**
-    * If the BreadcrumbLink has an onClick prop (and no href), it will render as a button
+    * If the Breadcrumb.Link has an onClick prop (and no href), it will render as a button
     */
     onClick: PropTypes.func,
     /**
@@ -54,11 +54,11 @@ class BreadcrumbLink extends Component {
     */
     size: PropTypes.oneOf(['small', 'medium', 'large']),
     /**
-    * Add an icon to the BreadcrumbLink
+    * Add an icon to the Breadcrumb.Link
     */
     icon: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     /**
-    * Place the icon before or after the text in the BreadcrumbLink
+    * Place the icon before or after the text in the Breadcrumb.Link
     */
     iconPlacement: PropTypes.oneOf(['start', 'end'])
   }

@@ -25,7 +25,7 @@
 import React from 'react'
 import { expect, mount, stub, wait, within } from '@instructure/ui-test-utils'
 
-import { Modal, ModalHeader, ModalBody, ModalFooter } from '../index'
+import { Modal } from '../index'
 import ModalLocator from '../locator'
 import styles from '../styles.css'
 
@@ -36,7 +36,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
     const modal = await ModalLocator.find(':label(Modal Dialog)', { expectEmpty: true })
@@ -52,7 +52,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -73,7 +73,7 @@ describe('<Modal />', async () => {
           smallMaxWidth: '10em'
         }}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -94,7 +94,7 @@ describe('<Modal />', async () => {
         shouldReturnFocus={false}
         constrain="parent"
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -116,7 +116,7 @@ describe('<Modal />', async () => {
             textColor: 'rgb(0, 0, 0)'
           }}
         >
-          <ModalBody>Foo Bar Baz</ModalBody>
+          <Modal.Body>Foo Bar Baz</Modal.Body>
         </Modal>
       </div>
     )
@@ -135,7 +135,7 @@ describe('<Modal />', async () => {
         shouldReturnFocus={false}
       >
         {null}
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
         {null}
       </Modal>
     )
@@ -151,7 +151,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
     const modal = await ModalLocator.find()
@@ -175,7 +175,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -195,7 +195,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -213,7 +213,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz</ModalBody>
+        <Modal.Body>Foo Bar Baz</Modal.Body>
       </Modal>
     )
 
@@ -233,7 +233,7 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>Foo Bar Baz <button>click me</button></ModalBody>
+        <Modal.Body>Foo Bar Baz <button>click me</button></Modal.Body>
       </Modal>
     )
 
@@ -261,7 +261,7 @@ describe('<Modal />', async () => {
         shouldReturnFocus={false}
         shouldCloseOnDocumentClick={false}
       >
-        <ModalBody>Foo Bar Baz <button>click me</button></ModalBody>
+        <Modal.Body>Foo Bar Baz <button>click me</button></Modal.Body>
       </Modal>
     )
 
@@ -288,9 +288,9 @@ describe('<Modal />', async () => {
         label="Modal Dialog"
         shouldReturnFocus={false}
       >
-        <ModalBody>
+        <Modal.Body>
           <button>Cancel</button>
-        </ModalBody>
+        </Modal.Body>
       </Modal>
     )
     const modal = await ModalLocator.find(':label(Modal Dialog)')
@@ -308,11 +308,11 @@ describe('<Modal />', async () => {
             label="Modal Dialog"
             shouldReturnFocus={false}
           >
-            <ModalHeader>Hello World</ModalHeader>
-            <ModalBody>Foo Bar Baz</ModalBody>
-            <ModalFooter>
+            <Modal.Header>Hello World</Modal.Header>
+            <Modal.Body>Foo Bar Baz</Modal.Body>
+            <Modal.Footer>
               <button>Cancel</button>
-            </ModalFooter>
+            </Modal.Footer>
           </Modal>
         )
       ).to.not.be.rejected()
@@ -326,11 +326,11 @@ describe('<Modal />', async () => {
           label="Modal Dialog"
           shouldReturnFocus={false}
         >
-          <ModalBody>Foo Bar Baz</ModalBody>
-          <ModalFooter>
+          <Modal.Body>Foo Bar Baz</Modal.Body>
+          <Modal.Footer>
             <button>Cancel</button>
-          </ModalFooter>
-          <ModalHeader>Hello World</ModalHeader>
+          </Modal.Footer>
+          <Modal.Header>Hello World</Modal.Header>
         </Modal>
       )
       expect(consoleError)
@@ -349,11 +349,11 @@ describe('<Modal />', async () => {
           shouldReturnFocus={false}
           variant="inverse"
         >
-          <ModalHeader ref={el => headerRef = el}>Hello Dark World</ModalHeader>
-          <ModalBody ref={el => bodyRef = el}>Foo Bar Baz</ModalBody>
-          <ModalFooter ref={el => footerRef = el}>
+          <Modal.Header ref={el => headerRef = el}>Hello Dark World</Modal.Header>
+          <Modal.Body ref={el => bodyRef = el}>Foo Bar Baz</Modal.Body>
+          <Modal.Footer ref={el => footerRef = el}>
             <button>Cancel</button>
-          </ModalFooter>
+          </Modal.Footer>
         </Modal>
       )
 
@@ -362,7 +362,7 @@ describe('<Modal />', async () => {
       expect(footerRef.props.variant).to.equal('inverse')
     })
 
-    it('should pass overflow to ModalBody', async () => {
+    it('should pass overflow to Modal.Body', async () => {
       let bodyRef
 
       await mount(
@@ -372,7 +372,7 @@ describe('<Modal />', async () => {
           shouldReturnFocus={false}
           overflow="fit"
         >
-          <ModalBody ref={el => bodyRef = el}>Foo Bar Baz</ModalBody>
+          <Modal.Body ref={el => bodyRef = el}>Foo Bar Baz</Modal.Body>
         </Modal>
       )
       expect(bodyRef.props.overflow).to.equal('fit')
@@ -390,14 +390,14 @@ describe('<Modal />', async () => {
           <div>
             <input type="text" />
             <Modal {...this.props}>
-              <ModalHeader><button>Close</button></ModalHeader>
-              <ModalBody>
+              <Modal.Header><button>Close</button></Modal.Header>
+              <Modal.Body>
                 <input type="text" id="input-one" />
                 <input type="text" id="input-two" />
-              </ModalBody>
-              <ModalFooter>
+              </Modal.Body>
+              <Modal.Footer>
                 <button>Cancel</button>
-              </ModalFooter>
+              </Modal.Footer>
             </Modal>
           </div>
         )

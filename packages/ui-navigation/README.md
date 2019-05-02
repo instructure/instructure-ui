@@ -20,13 +20,13 @@ yarn add @instructure/ui-navigation
 
 ```js
 import React from 'react'
-import { Navigation, NavigationItem } from '@instructure/ui-navigation'
+import { Navigation } from '@instructure/ui-navigation'
 import { Avatar } from '@instructure/ui-elements'
 
 const MyNavigation = () => {
   return (
     <Navigation label="My Navigation">
-      <NavigationItem
+      <Navigation.Item
         icon={<Avatar name="Joel Andrews" size="x-small" />}
         label="My Account"
         href="http://example.com"

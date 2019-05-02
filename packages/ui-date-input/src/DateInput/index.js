@@ -43,7 +43,6 @@ import styles from './styles.css'
 /**
 ---
 category: components
-id: DateInputControlled
 ---
 **/
 @testable()

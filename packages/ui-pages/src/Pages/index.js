@@ -46,8 +46,6 @@ category: components
 **/
 @themeable(theme, styles)
 class Pages extends Component {
-  static Page = Page
-
   static propTypes = {
     children: Children.oneOf([
       Page

@@ -227,13 +227,13 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use a <Link href="/#Tooltip">Tooltip</Link> for all truncated items</FigureItem>
-    <FigureItem>Use when trying to restrict the number of lines that are visible</FigureItem>
-    <FigureItem>Use end ellipsis if the unique identifier is at the beginning of the string</FigureItem>
-    <FigureItem>Use middle ellipsis if the unique identifier is at the end of the string</FigureItem>
+    <Figure.Item>Use a <Link href="/#Tooltip">Tooltip</Link> for all truncated items</Figure.Item>
+    <Figure.Item>Use when trying to restrict the number of lines that are visible</Figure.Item>
+    <Figure.Item>Use end ellipsis if the unique identifier is at the beginning of the string</Figure.Item>
+    <Figure.Item>Use middle ellipsis if the unique identifier is at the end of the string</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use in <Link href="/#Button">Buttons</Link>, <Link href="/#Navigation">Nav Items</Link>, <Link href="/#TabList">TabLists</Link></FigureItem>
+    <Figure.Item>Use in <Link href="/#Button">Buttons</Link>, <Link href="/#Navigation">Nav Items</Link>, <Link href="/#TabList">TabLists</Link></Figure.Item>
   </Figure>
 </Guidelines>
 ```

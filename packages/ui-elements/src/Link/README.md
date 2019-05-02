@@ -102,8 +102,8 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Use the <code>inverse</code> variant when a Link appear on a dark background to ensure adequate contrast</FigureItem>
-    <FigureItem>Links must have a non-empty href attribute in order to be considered true links and to be accessible to keyboard users</FigureItem>
+    <Figure.Item>Use the <code>inverse</code> variant when a Link appear on a dark background to ensure adequate contrast</Figure.Item>
+    <Figure.Item>Links must have a non-empty href attribute in order to be considered true links and to be accessible to keyboard users</Figure.Item>
   </Figure>
 </Guidelines>
 ```

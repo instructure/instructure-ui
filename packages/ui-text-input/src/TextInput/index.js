@@ -40,7 +40,6 @@ import theme from './theme'
 /**
 ---
 category: components
-id: TextInputControlled
 ---
 **/
 @themeable(theme, styles)
@@ -122,8 +121,8 @@ class TextInput extends Component {
   constructor (props) {
     super()
     this.state = { focused: false }
-    this._defaultId = uid('TextInputControlled')
-    this._messagesId = uid('TextInputControlled-messages')
+    this._defaultId = uid('TextInput')
+    this._messagesId = uid('TextInput-messages')
   }
 
   /**

@@ -33,8 +33,10 @@ To pass in more options, you can make your own preset:
 /* babelrc.js */
 module.exports = {
   presets: [[ require('@instructure/ui-babel-preset'), {
-    coverage: Boolean(process.env.COVERAGE),
-    esModules: Boolean(process.env.ES_MODULES)
+    coverage: true,
+    esModules: true,
+    removeConsole: false,
+    transformImports: false
   }]]
 }
 ```

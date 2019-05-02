@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@babel/template": "^7.4.0",
+    "@babel/template": "^7.4.4",
     "@instructure/config-loader": "^5.52.2",
     "@instructure/pkg-utils": "^5.52.2",
     "@instructure/postcss-themeable-styles": "^5.52.2",

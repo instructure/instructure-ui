@@ -42,24 +42,24 @@ example: true
 ---
 <View as="div" margin="small" padding="medium" background="default">
   <Flex wrapItems={true}>
-    <FlexItem padding="small" grow>
+    <Flex.Item padding="small" grow>
       <Heading>I <IconHeartLine /> the size of my parent heading </Heading>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text>I am an <b>x-small</b> icon <IconHeartLine size="x-small" /> overriding my parent font-size.</Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text>I am a <b>small</b> icon <IconHeartLine size="small" /> overriding my parent font-size.</Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text>I am a <b>medium</b> icon <IconHeartLine size="medium" /> overriding my parent font-size.</Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">I am a <b>large</b> icon <IconHeartLine size="large" /> overriding my parent font-size.</Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text>I am an <b>x-large</b> icon <IconHeartLine size="x-large" /> overriding my parent font-size.</Text>
-    </FlexItem>
+    </Flex.Item>
   </Flex>
 </View>
 ```
@@ -72,27 +72,27 @@ example: true
 ---
 <View as="div" margin="small" padding="medium" background="default">
   <Flex wrapItems={true}>
-    <FlexItem padding="small" grow>
+    <Flex.Item padding="small" grow>
       <Text color="brand">I am inheriting my parents color <IconHeartLine /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be primary <IconHeartLine color="primary" /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be secondary <IconHeartLine color="secondary" /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be brand <IconHeartLine color="brand" /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be success <IconHeartLine color="success" /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be error <IconHeartLine color="error" /></Text>
-    </FlexItem>
-    <FlexItem padding="small" grow>
+    </Flex.Item>
+    <Flex.Item padding="small" grow>
       <Text as="div">My icon should be warning <IconHeartLine color="warning" /></Text>
-    </FlexItem>
+    </Flex.Item>
   </Flex>
 </View>
 ```

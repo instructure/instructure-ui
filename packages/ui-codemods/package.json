@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
-    "jscodeshift": "^0.6.3"
+    "jscodeshift": "^0.6.4"
   },
   "publishConfig": {
     "access": "public"

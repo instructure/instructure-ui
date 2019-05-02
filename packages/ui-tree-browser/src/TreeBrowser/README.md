@@ -141,10 +141,10 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use for browsing hierarchical content</FigureItem>
+    <Figure.Item>Use for browsing hierarchical content</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use for site navigation</FigureItem>
+    <Figure.Item>Use for site navigation</Figure.Item>
   </Figure>
 </Guidelines>
 ```

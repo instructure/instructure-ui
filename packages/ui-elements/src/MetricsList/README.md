@@ -9,9 +9,9 @@ The MetricsList component displays metrics (value + label) in rows.
 example: true
 ---
 <MetricsList>
-  <MetricsListItem label="Grade" value="80%" />
-  <MetricsListItem label="Late" value="4" />
-  <MetricsListItem label="Missing" value="2" />
+  <MetricsList.Item label="Grade" value="80%" />
+  <MetricsList.Item label="Late" value="4" />
+  <MetricsList.Item label="Missing" value="2" />
 </MetricsList>
 ```
 
@@ -21,19 +21,19 @@ example: true
 ---
 <ContextView padding="small" placement="center start">
   <MetricsList>
-    <MetricsListItem
+    <MetricsList.Item
       label={<div>Average Grade<div>High 33%, Low 10%</div></div>}
       value="25%"
     />
-    <MetricsListItem
+    <MetricsList.Item
       label={<div>Average Page Views</div>}
       value="12"
     />
-    <MetricsListItem
+    <MetricsList.Item
       label={<div>Missing Submissions</div>}
       value="5"
     />
-    <MetricsListItem
+    <MetricsList.Item
       label={<div>Late Submissions</div>}
       value="11"
     />

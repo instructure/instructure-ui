@@ -15,69 +15,69 @@ example: true
 ---
 <div>
   <Breadcrumb size="small" label="You are here:" margin="none none medium">
-    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
-      <BreadcrumbLink
+    <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
+      <Breadcrumb.Link
         onClick={function () {
-          console.log("This BreadcrumbLink was clicked!")
+          console.log("This Breadcrumb.Link was clicked!")
         }}
       >
         Exploring John Updike
-      </BreadcrumbLink>
-    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
-    <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
+      </Breadcrumb.Link>
+    <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</Breadcrumb.Link>
+    <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
   </Breadcrumb>
   <View as="div" width="40rem">
     <Breadcrumb label="You are here:" margin="none none medium">
-      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
-        <BreadcrumbLink
+      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
+        <Breadcrumb.Link
           onClick={function () {
-            console.log("This BreadcrumbLink was clicked!")
+            console.log("This Breadcrumb.Link was clicked!")
           }}
         >
           Exploring John Updike
-        </BreadcrumbLink>
-      <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
-      <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
+        </Breadcrumb.Link>
+      <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</Breadcrumb.Link>
+      <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
     </Breadcrumb>
   </View>
   <Breadcrumb size="large" label="You are here:">
-    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">English 204</BreadcrumbLink>
-      <BreadcrumbLink
+    <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">English 204</Breadcrumb.Link>
+      <Breadcrumb.Link
         onClick={function () {
-          console.log("This BreadcrumbLink was clicked!")
+          console.log("This Breadcrumb.Link was clicked!")
         }}
       >
         Exploring John Updike
-      </BreadcrumbLink>
-    <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</BreadcrumbLink>
-    <BreadcrumbLink>Rabbit Is Rich</BreadcrumbLink>
+      </Breadcrumb.Link>
+    <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">The Rabbit Novels</Breadcrumb.Link>
+    <Breadcrumb.Link>Rabbit Is Rich</Breadcrumb.Link>
   </Breadcrumb>
 </div>
 ```
 
-If you don't provide an href to `BreadcrumbLink`, it will render as text.
+If you don't provide an href to `Breadcrumb.Link`, it will render as text.
 
 ```js
 ---
 example: true
 ---
 <Breadcrumb label="You are here:">
-  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">Course A</BreadcrumbLink>
-  <BreadcrumbLink href="https://instructure.github.io/instructure-ui/">Modules</BreadcrumbLink>
-  <BreadcrumbLink>A Great Module</BreadcrumbLink>
+  <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Course A</Breadcrumb.Link>
+  <Breadcrumb.Link href="https://instructure.github.io/instructure-ui/">Modules</Breadcrumb.Link>
+  <Breadcrumb.Link>A Great Module</Breadcrumb.Link>
 </Breadcrumb>
 ```
 
-You can include icons in `BreadcrumbLink`:
+You can include icons in `Breadcrumb.Link`:
 
 ```js
 ---
 example: true
 ---
 <Breadcrumb label="Breadcrumb with icons">
-  <BreadcrumbLink icon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</BreadcrumbLink>
-  <BreadcrumbLink icon={<IconClockLine size="small" />} onClick={() => {}}>History</BreadcrumbLink>
-  <BreadcrumbLink icon={IconPlusLine} iconPlacement="end">New Question</BreadcrumbLink>
+  <Breadcrumb.Link icon={<IconBankLine size="small" />} href="#Breadcrumb">Item Bank</Breadcrumb.Link>
+  <Breadcrumb.Link icon={<IconClockLine size="small" />} onClick={() => {}}>History</Breadcrumb.Link>
+  <Breadcrumb.Link icon={IconPlusLine} iconPlacement="end">New Question</Breadcrumb.Link>
 </Breadcrumb>
 ```
 
@@ -89,12 +89,12 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Place Breadcrumb near the top of the page</FigureItem>
-    <FigureItem>Show hierarchy, not history</FigureItem>
-    <FigureItem>Keep Breadcrumb titles short but descriptive</FigureItem>
+    <Figure.Item>Place Breadcrumb near the top of the page</Figure.Item>
+    <Figure.Item>Show hierarchy, not history</Figure.Item>
+    <Figure.Item>Keep Breadcrumb titles short but descriptive</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use Breadcrumb if you are taking users through a multi-step process</FigureItem>
+    <Figure.Item>Use Breadcrumb if you are taking users through a multi-step process</Figure.Item>
   </Figure>
 </Guidelines>
 ```

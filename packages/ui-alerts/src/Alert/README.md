@@ -145,14 +145,14 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use the Info alert to notify the user of more information</FigureItem>
-    <FigureItem>Use the Error alert to notify user of an error</FigureItem>
-    <FigureItem>Use the Warning alert to notify user of a warning</FigureItem>
-    <FigureItem>Use the Success alert to notify user of a success event or action</FigureItem>
+    <Figure.Item>Use the Info alert to notify the user of more information</Figure.Item>
+    <Figure.Item>Use the Error alert to notify user of an error</Figure.Item>
+    <Figure.Item>Use the Warning alert to notify user of a warning</Figure.Item>
+    <Figure.Item>Use the Success alert to notify user of a success event or action</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Have alert messaging that is more than two lines long</FigureItem>
-    <FigureItem>Overuse alerts on the same page</FigureItem>
+    <Figure.Item>Have alert messaging that is more than two lines long</Figure.Item>
+    <Figure.Item>Overuse alerts on the same page</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -163,9 +163,9 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>If the alert requires user interaction to be dismissed, the alert should behave as a modal dialog. Focus should be set to the alert when it appears, remain in the alert until it is dismissed, and return to a logical place on the page when the alert is dismissed</FigureItem>
-    <FigureItem>aria-live="polite" alerts will only be announced if the user is not currently doing anything. Polite should be used in most situations involving live regions that present new info to users</FigureItem>
-    <FigureItem>aria-live="assertive" alerts will be announced to the user as soon as possible, but not necessarily immediately. Assertive should be used if there is information that a user must know about right away, for example, a warning message in a form that does validation on the fly</FigureItem>
+    <Figure.Item>If the alert requires user interaction to be dismissed, the alert should behave as a modal dialog. Focus should be set to the alert when it appears, remain in the alert until it is dismissed, and return to a logical place on the page when the alert is dismissed</Figure.Item>
+    <Figure.Item>aria-live="polite" alerts will only be announced if the user is not currently doing anything. Polite should be used in most situations involving live regions that present new info to users</Figure.Item>
+    <Figure.Item>aria-live="assertive" alerts will be announced to the user as soon as possible, but not necessarily immediately. Assertive should be used if there is information that a user must know about right away, for example, a warning message in a form that does validation on the fly</Figure.Item>
   </Figure>
 </Guidelines>
 ```

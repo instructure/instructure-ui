@@ -87,12 +87,12 @@ render () {
             offsetY={offset.y}
             onPositionChanged={this.handlePositionChanged}
           >
-            <PositionTarget>
+            <Position.Target>
               <Button variant="primary" onClick={this.handleButtonClick}>
                 Change placement
               </Button>
-            </PositionTarget>
-            <PositionContent>
+            </Position.Target>
+            <Position.Content>
               <ContextView 
                 placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted} 
                 maxWidth="22rem" padding="small"
@@ -100,7 +100,7 @@ render () {
                 <Heading level="h3">{placement}</Heading>
                 <p>{fpo}</p>
               </ContextView>
-            </PositionContent>
+            </Position.Content>
           </Position>
         )
       }
@@ -194,15 +194,15 @@ class Example extends React.Component {
               mountNode={() => this._mountNode}
               onPositionChanged={this.handlePositionChanged}
             >
-              <PositionTarget>
+              <Position.Target>
                 <Button
                   variant="primary"
                   onClick={this.handleButtonClick}
                 >
                   Change placement
                 </Button>
-              </PositionTarget>
-              <PositionContent>
+              </Position.Target>
+              <Position.Content>
                 <ContextView
                   placement={rtl ? mirrorHorizontalPlacement(adjusted, ' ') : adjusted}
                   maxWidth="20rem"
@@ -213,7 +213,7 @@ class Example extends React.Component {
                     {fpo}
                   </p>
                 </ContextView>
-              </PositionContent>
+              </Position.Content>
             </Position>
           )}
         </ApplyTextDirection>
@@ -279,7 +279,7 @@ class Example extends React.Component {
               insertAt="top"
               mountNode={() => this._mountNode}
             >
-              <PositionContent>
+              <Position.Content>
                 <div
                   style={{
                     backgroundColor: 'white',
@@ -288,8 +288,8 @@ class Example extends React.Component {
                 >
                   <Heading level="h3">{placement}</Heading>
                 </div>
-              </PositionContent>
-              <PositionTarget>
+              </Position.Content>
+              <Position.Target>
                 <div
                   ref={(c) => { this._mountNode = c }}
                   style={{
@@ -301,7 +301,7 @@ class Example extends React.Component {
                 >
                   {fpo}
                 </div>
-              </PositionTarget>
+              </Position.Target>
             </Position>
           )}
         </ApplyTextDirection>

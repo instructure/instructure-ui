@@ -1,6 +1,5 @@
 ---
-describes: TableControlled
-id: TableControlled__README
+describes: Table
 ---
 
 ### Table layout
@@ -29,7 +28,7 @@ class Example extends React.Component {
 
     return (
       <Flex alignItems="start">
-        <FlexItem margin="small">
+        <Flex.Item margin="small">
           <RadioInputGroup
             name="layout"
             description="layout"
@@ -40,14 +39,14 @@ class Example extends React.Component {
             <RadioInput label="fixed" value="fixed" />
             <RadioInput label="stacked" value="stacked" />
           </RadioInputGroup>
-        </FlexItem>
-        <FlexItem margin="small">
+        </Flex.Item>
+        <Flex.Item margin="small">
           <Checkbox
             label="hover"
             checked={hover}
             onChange={(e, value) => this.handleChange('hover', !hover)}
           />
-        </FlexItem>
+        </Flex.Item>
       </Flex>
     )
   }
@@ -58,40 +57,40 @@ class Example extends React.Component {
     return (
       <div>
         {this.renderOptions()}
-        <TableControlled
+        <Table
           caption='Top rated movies'
           layout={layout}
           hover={hover}
         >
-          <TableControlled.Head>
-            <TableControlled.Row>
-              <TableControlled.ColHeader id="Rank">Rank</TableControlled.ColHeader>
-              <TableControlled.ColHeader id="Title">Title</TableControlled.ColHeader>
-              <TableControlled.ColHeader id="Year">Year</TableControlled.ColHeader>
-              <TableControlled.ColHeader id="Rating">Rating</TableControlled.ColHeader>
-            </TableControlled.Row>
-          </TableControlled.Head>
-          <TableControlled.Body>
-            <TableControlled.Row>
-              <TableControlled.RowHeader>1</TableControlled.RowHeader>
-              <TableControlled.Cell>The Shawshank Redemption</TableControlled.Cell>
-              <TableControlled.Cell>1994</TableControlled.Cell>
-              <TableControlled.Cell>9.3</TableControlled.Cell>
-            </TableControlled.Row>
-            <TableControlled.Row>
-              <TableControlled.RowHeader>2</TableControlled.RowHeader>
-              <TableControlled.Cell>The Godfather</TableControlled.Cell>
-              <TableControlled.Cell>1972</TableControlled.Cell>
-              <TableControlled.Cell>9.2</TableControlled.Cell>
-            </TableControlled.Row>
-            <TableControlled.Row>
-              <TableControlled.RowHeader>3</TableControlled.RowHeader>
-              <TableControlled.Cell>The Godfather: Part II</TableControlled.Cell>
-              <TableControlled.Cell>1974</TableControlled.Cell>
-              <TableControlled.Cell>9.0</TableControlled.Cell>
-            </TableControlled.Row>
-          </TableControlled.Body>
-        </TableControlled>
+          <Table.Head>
+            <Table.Row>
+              <Table.ColHeader id="Rank">Rank</Table.ColHeader>
+              <Table.ColHeader id="Title">Title</Table.ColHeader>
+              <Table.ColHeader id="Year">Year</Table.ColHeader>
+              <Table.ColHeader id="Rating">Rating</Table.ColHeader>
+            </Table.Row>
+          </Table.Head>
+          <Table.Body>
+            <Table.Row>
+              <Table.RowHeader>1</Table.RowHeader>
+              <Table.Cell>The Shawshank Redemption</Table.Cell>
+              <Table.Cell>1994</Table.Cell>
+              <Table.Cell>9.3</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.RowHeader>2</Table.RowHeader>
+              <Table.Cell>The Godfather</Table.Cell>
+              <Table.Cell>1972</Table.Cell>
+              <Table.Cell>9.2</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.RowHeader>3</Table.RowHeader>
+              <Table.Cell>The Godfather: Part II</Table.Cell>
+              <Table.Cell>1974</Table.Cell>
+              <Table.Cell>9.0</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </div>
     )
   }
@@ -127,39 +126,39 @@ class Example extends React.Component {
       >
         {({ layout }) => (
           <div>
-            <TableControlled
+            <Table
               caption='Top rated movies'
               layout={layout}
             >
-              <TableControlled.Head>
-                <TableControlled.Row>
+              <Table.Head>
+                <Table.Row>
                   {(headers || []).map(({ id, text, width, textAlign }) => (
-                    <TableControlled.ColHeader
+                    <Table.ColHeader
                       key={id}
                       id={id}
                       width={width}
                       textAlign={textAlign}
                     >
                       {text}
-                    </TableControlled.ColHeader>
+                    </Table.ColHeader>
                    ))}
-                </TableControlled.Row>
-              </TableControlled.Head>
-              <TableControlled.Body>
+                </Table.Row>
+              </Table.Head>
+              <Table.Body>
                 {rows.map((row) => (
-                  <TableControlled.Row key={row.id}>
+                  <Table.Row key={row.id}>
                     {headers.map(({ id, renderCell, textAlign }) => (
-                      <TableControlled.Cell
+                      <Table.Cell
                         key={id}
                         textAlign={layout === 'stacked' ? 'start' : textAlign}
                       >
                         {renderCell ? renderCell(row[id], layout) : row[id]}
-                      </TableControlled.Cell>
+                      </Table.Cell>
                     ))}
-                  </TableControlled.Row>
+                  </Table.Row>
                 ))}
-              </TableControlled.Body>
-            </TableControlled>
+              </Table.Body>
+            </Table>
           </div>
         )}
       </Responsive>
@@ -302,36 +301,36 @@ class SortableTable extends React.Component {
       >
         {(props) => (
           <div>
-            <TableControlled
+            <Table
               caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
               {...props}
             >
-              <TableControlled.Head>
-                <TableControlled.Row>
+              <Table.Head>
+                <Table.Row>
                   {(headers || []).map(({ id, text }) => (
-                    <TableControlled.ColHeader
+                    <Table.ColHeader
                       key={id}
                       id={id}
                       onRequestSort={this.handleSort}
                       sortDirection={id === sortBy ? direction : 'none'}
                     >
                       {text}
-                    </TableControlled.ColHeader>
+                    </Table.ColHeader>
                    ))}
-                </TableControlled.Row>
-              </TableControlled.Head>
-              <TableControlled.Body>
+                </Table.Row>
+              </Table.Head>
+              <Table.Body>
                 {sortedRows.map((row) => (
-                  <TableControlled.Row key={row.id}>
+                  <Table.Row key={row.id}>
                     {headers.map(({ id, renderCell }) => (
-                      <TableControlled.Cell key={id}>
+                      <Table.Cell key={id}>
                         {renderCell ? renderCell(row[id]) : row[id]}
-                      </TableControlled.Cell>
+                      </Table.Cell>
                     ))}
-                  </TableControlled.Row>
+                  </Table.Row>
                 ))}
-              </TableControlled.Body>
-            </TableControlled>
+              </Table.Body>
+            </Table>
             <Alert
               liveRegion={() => document.getElementById('flash-messages')}
               liveRegionPoliteness="polite"
@@ -476,22 +475,22 @@ class SelectableTable extends React.Component {
             >
               {`${selected.size} of ${rowIds.length} selected`}
             </View>
-            <TableControlled
+            <Table
               caption={`${caption}: sorted by ${sortBy} in ${direction} order`}
               {...props}
             >
-              <TableControlled.Head>
-                <TableControlled.Row>
-                  <TableControlled.ColHeader id="select">
+              <Table.Head>
+                <Table.Row>
+                  <Table.ColHeader id="select">
                     <Checkbox
                       label={<ScreenReaderContent>Select all</ScreenReaderContent>}
                       onChange={() => this.handleSelectAll(allSelected)}
                       checked={allSelected}
                       indeterminate={someSelected}
                     />
-                  </TableControlled.ColHeader>
+                  </Table.ColHeader>
                   {(headers || []).map(({ id, text, width }) => (
-                     <TableControlled.ColHeader
+                     <Table.ColHeader
                        key={id}
                        id={id}
                        width={width}
@@ -499,33 +498,33 @@ class SelectableTable extends React.Component {
                        sortDirection={id === sortBy ? direction : 'none'}
                      >
                        {text}
-                     </TableControlled.ColHeader>
+                     </Table.ColHeader>
                    ))}
-                </TableControlled.Row>
-              </TableControlled.Head>
-              <TableControlled.Body>
+                </Table.Row>
+              </Table.Head>
+              <Table.Body>
                 {(rows || []).map((row) => {
                   const rowSelected = selected.has(row.id)
 
                   return (
-                    <TableControlled.Row key={row.id}>
-                      <TableControlled.RowHeader>
+                    <Table.Row key={row.id}>
+                      <Table.RowHeader>
                         <Checkbox
                           label={<ScreenReaderContent>Select row</ScreenReaderContent>}
                           onChange={() => this.handleSelectRow(rowSelected, row.id)}
                           checked={rowSelected}
                         />
-                      </TableControlled.RowHeader>
+                      </Table.RowHeader>
                       {(headers || []).map(({ id, renderCell }) => (
-                        <TableControlled.Cell key={id}>
+                        <Table.Cell key={id}>
                           {renderCell ? renderCell(row[id]) : row[id]}
-                        </TableControlled.Cell>
+                        </Table.Cell>
                       ))}
-                    </TableControlled.Row>
+                    </Table.Row>
                   )
                 })}
-              </TableControlled.Body>
-            </TableControlled>
+              </Table.Body>
+            </Table>
             <Alert
               liveRegion={() => document.getElementById('flash-messages')}
               liveRegionPoliteness="polite"
@@ -589,13 +588,13 @@ class PaginatedTable extends React.Component {
             margin='large'
           >
             {Array.from(Array(pageCount), (item, index) => (
-              <PaginationButton
+              <Pagination.Page
                 key={index}
                 onClick={() => this.handleClick(index)}
                 current={index === page}
               >
                 {index + 1}
-              </PaginationButton>
+              </Pagination.Page>
             ))}
           </Pagination>
         )}
@@ -758,20 +757,20 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Column headers can be sortable</FigureItem>
-    <FigureItem>Use the <code>small</code> Buttons and Inputs inside cells</FigureItem>
-    <FigureItem>Actions must relate to that row only</FigureItem>
-    <FigureItem>Use horizontal and vertical alignment that makes sense with the content</FigureItem>
-    <FigureItem>Left align US dates and apply i18n</FigureItem>
-    <FigureItem>Left align text and alphanumeric</FigureItem>
-    <FigureItem>Right align quantities, decimals</FigureItem>
-    <FigureItem>Left align column headers, including currency</FigureItem>
+    <Figure.Item>Column headers can be sortable</Figure.Item>
+    <Figure.Item>Use the <code>small</code> Buttons and Inputs inside cells</Figure.Item>
+    <Figure.Item>Actions must relate to that row only</Figure.Item>
+    <Figure.Item>Use horizontal and vertical alignment that makes sense with the content</Figure.Item>
+    <Figure.Item>Left align US dates and apply i18n</Figure.Item>
+    <Figure.Item>Left align text and alphanumeric</Figure.Item>
+    <Figure.Item>Right align quantities, decimals</Figure.Item>
+    <Figure.Item>Left align column headers, including currency</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Center align more than 4 characters/numbers, choose left or right</FigureItem>
-    <FigureItem>Use to create a layout</FigureItem>
-    <FigureItem>Use zebra stripes</FigureItem>
-    <FigureItem>Bottom align ever</FigureItem>
+    <Figure.Item>Center align more than 4 characters/numbers, choose left or right</Figure.Item>
+    <Figure.Item>Use to create a layout</Figure.Item>
+    <Figure.Item>Use zebra stripes</Figure.Item>
+    <Figure.Item>Bottom align ever</Figure.Item>
   </Figure>
 </Guidelines>
 ```

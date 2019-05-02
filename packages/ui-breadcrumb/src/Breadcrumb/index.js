@@ -48,7 +48,7 @@ category: components
 class Breadcrumb extends Component {
   static propTypes = {
     /**
-    * children of type BreadcrumbLink
+    * children of type Breadcrumb.Link
     */
     children: Children.oneOf([BreadcrumbLink]),
     /**

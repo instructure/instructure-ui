@@ -45,7 +45,7 @@ category: components
 class Flex extends Component {
   static propTypes = {
     /**
-    * Flex only accepts FlexItem as a child
+    * Flex only accepts Flex.Item as a child
     */
     children: ChildrenPropTypes.oneOf([FlexItem]),
     /**

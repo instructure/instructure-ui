@@ -19,7 +19,7 @@ yarn add @instructure/ui-text-input
 
 ### Components
 The `ui-text-input` package contains the following:
-- [TextInputControlled](#TextInputControlled)
+- [TextInput](#TextInput)
 
 ```javascript
 ---
@@ -40,7 +40,7 @@ class ControlledTextInputExample extends React.Component {
   render () {
     return (
       <View as="div">
-        <TextInputControlled
+        <TextInput
           label="What is your favorite ice cream flavor?"
           value={this.state.value}
           onChange={this.handleChange}

@@ -44,22 +44,22 @@ if (args.includes('--copy-files')) {
   babelArgs.push('--copy-files')
 }
 
-let envVars
+let envVars = []
 
 if (args.includes('--watch')) {
-  envVars = [
+  envVars = envVars.concat([
     'NODE_ENV=development',
     'UNMANGLED_CLASS_NAMES=1',
     'DISABLE_SPEEDY_STYLESHEET=1'
-  ]
+  ])
   babelArgs.push('--watch')
 } else {
-  envVars = [
+  envVars = envVars.concat([
     `NODE_ENV=${BABEL_ENV || NODE_ENV || 'production'}`,
     (DEBUG ? `DEBUG=1` : false),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false)
-  ].filter(Boolean)
+  ]).filter(Boolean)
 }
 
 let modules = ['es', 'cjs']
@@ -78,7 +78,7 @@ if (args.includes('--modules')) {
 
 const commands = {
   es: getCommand('babel', [...babelArgs, '--out-dir', 'es'], [...envVars, 'ES_MODULES=1']),
-  cjs: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], envVars)
+  cjs: getCommand('babel', [...babelArgs, '--out-dir', 'lib'], [...envVars, 'TRANSFORM_IMPORTS=1'])
 }
 
 const commandsToRun = modules.reduce((obj, key) => ({ ...obj, [key]: commands[key] }), {})

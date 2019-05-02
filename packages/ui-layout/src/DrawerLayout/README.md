@@ -2,12 +2,12 @@
 describes: DrawerLayout
 ---
 
-The `<DrawerLayout />` component creates a layout consisting of both `<DrawerTray />` and `<DrawerContent />`.
+The `<DrawerLayout />` component creates a layout consisting of both `<DrawerLayout.Tray />` and `<DrawerLayout.Content />`.
 The tray can be placed at the `start` or `end` position. When there is sufficient space available,
 the tray is positioned alongside the content. As the screen gets smaller, the `<DrawerTray />` can
-be configured to overlay the `<DrawerContent />`
+be configured to overlay the `<DrawerLayout.Content />`
 
-The `minWidth` prop specifies a breakpoint. When the `<DrawerContent />` resizes such that the width is
+The `minWidth` prop specifies a breakpoint. When the `<DrawerLayout.Content />` resizes such that the width is
 less than the designated `minWidth`, the tray overlays the content
 
 ```js
@@ -36,7 +36,7 @@ class Example extends React.Component {
       >
         { this.state.trayIsOverlayed && this.state.open && <Mask onClick={this.handleTrayDismiss} /> }
         <DrawerLayout onOverlayTrayChange={this.handleOverlayTrayChange}>
-          <DrawerTray
+          <DrawerLayout.Tray
             id="DrawerLayoutTrayExample1"
             open={this.state.open}
             placement="start"
@@ -63,14 +63,14 @@ class Example extends React.Component {
                 Hello from start tray with a small amount of placeholder content
               </Text>
             </View>
-          </DrawerTray>
-          <DrawerContent label="Drawer content example">
+          </DrawerLayout.Tray>
+          <DrawerLayout.Content label="Drawer content example">
             <div style={{background: 'white', height: '100%'}}>
               <View as="div" padding="x-large">
                 <Heading border="bottom">A simple drawer layout</Heading>
                 <Grid startAt="medium" vAlign="middle" colSpacing="none">
-                  <GridRow>
-                    <GridCol>
+                  <Grid.Row>
+                    <Grid.Col>
                       <Button
                         margin="small 0"
                         size="small"
@@ -80,8 +80,8 @@ class Example extends React.Component {
                       >
                         Expand tray
                       </Button>
-                    </GridCol>
-                  </GridRow>
+                    </Grid.Col>
+                  </Grid.Row>
                 </Grid>
                 <Text size="x-small">
                   <p>{lorem.paragraph()}</p>
@@ -91,7 +91,7 @@ class Example extends React.Component {
                 </Text>
               </View>
             </div>
-          </DrawerContent>
+          </DrawerLayout.Content>
         </DrawerLayout>
       </View>
     )
@@ -122,7 +122,7 @@ class Example extends React.Component {
         background="default"
       >
         <DrawerLayout>
-          <DrawerTray
+          <DrawerLayout.Tray
             open={this.state.endOpen}
             placement="end"
             label="Drawer Tray End Example"
@@ -149,10 +149,10 @@ class Example extends React.Component {
                 Hello from end tray with a good amount of content as well
               </Text>
             </View>
-          </DrawerTray>
-          <DrawerContent label="Drawer content example containing another layout">
+          </DrawerLayout.Tray>
+          <DrawerLayout.Content label="Drawer content example containing another layout">
             <DrawerLayout>
-              <DrawerTray
+              <DrawerLayout.Tray
                 label="Layout Tray Start Example"
                 open={this.state.startOpen}
                 placement="start"
@@ -180,14 +180,14 @@ class Example extends React.Component {
                     Hello from start tray with a small amount of placeholder content
                   </Text>
                 </View>
-              </DrawerTray>
-              <DrawerContent label="Drawer content example containing a responsive ">
+              </DrawerLayout.Tray>
+              <DrawerLayout.Content label="Drawer content example containing a responsive ">
                 <div style={{background: 'white', height: '100%'}}>
                   <View as="div" padding="x-large">
                     <Heading border="bottom">A nested drawer layout</Heading>
                     <Grid startAt="medium" vAlign="middle" colSpacing="none">
-                      <GridRow>
-                        <GridCol>
+                      <Grid.Row>
+                        <Grid.Col>
                           <Button
                             margin="small 0"
                             size="small"
@@ -196,8 +196,8 @@ class Example extends React.Component {
                           >
                             Expand start tray
                           </Button>
-                        </GridCol>
-                        <GridCol width="auto">
+                        </Grid.Col>
+                        <Grid.Col width="auto">
                           <Button
                             margin="small 0"
                             size="small"
@@ -206,19 +206,19 @@ class Example extends React.Component {
                           >
                             Expand end tray
                           </Button>
-                        </GridCol>
-                      </GridRow>
-                      <GridRow colSpacing="medium">
-                        <GridCol>
+                        </Grid.Col>
+                      </Grid.Row>
+                      <Grid.Row colSpacing="medium">
+                        <Grid.Col>
                           <Img role="img" src={placeholderImage(250, 250)} />
-                        </GridCol>
-                        <GridCol>
+                        </Grid.Col>
+                        <Grid.Col>
                           <Img role="img" src={placeholderImage(250, 250)} />
-                        </GridCol>
-                        <GridCol>
+                        </Grid.Col>
+                        <Grid.Col>
                           <Img role="img" src={placeholderImage(250, 250)} />
-                        </GridCol>
-                      </GridRow>
+                        </Grid.Col>
+                      </Grid.Row>
                     </Grid>
                     <Text size="x-small">
                       <p>{lorem.paragraph()}</p>
@@ -228,9 +228,9 @@ class Example extends React.Component {
                     </Text>
                   </View>
                 </div>
-              </DrawerContent>
+              </DrawerLayout.Content>
             </DrawerLayout>
-          </DrawerContent>
+          </DrawerLayout.Content>
         </DrawerLayout>
       </View>
     )

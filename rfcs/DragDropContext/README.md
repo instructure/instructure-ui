@@ -255,5 +255,5 @@ combined backend or provide our own logic to conditionally use the appropriate
 backend.
 - It may be difficult to use some components with `DragDropContext`, particularly
 those that require specific children, such as a `List` that requires only
-`ListItem`s as immediate children. However, we expect new components to be purpose
+`List.Item`s as immediate children. However, we expect new components to be purpose
 built for draggable use cases, so this likely won't be an issue.

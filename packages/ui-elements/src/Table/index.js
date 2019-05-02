@@ -36,6 +36,7 @@ import theme from './theme'
 /**
 ---
 category: components
+id: DeprecatedTable
 ---
 **/
 

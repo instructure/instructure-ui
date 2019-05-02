@@ -26,7 +26,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { App } from './App'
-import { Figure, FigureItem } from './Figure'
+import { Figure } from './Figure'
 import { Guidelines } from './Guidelines'
 
 function renderDocsClient (data, element) {
@@ -36,7 +36,6 @@ function renderDocsClient (data, element) {
 export {
   renderDocsClient,
   Figure,
-  FigureItem,
   Guidelines
 }
 

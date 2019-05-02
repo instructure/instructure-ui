@@ -42,7 +42,7 @@ The `ui-elements` package contains the following:
 - [Progress](#Progress)
 - [Rating](#Rating)
 - [Spinner](#Spinner)
-- [Table](#Table)
+- [Table (deprecated)](#DeprecatedTable)
 - [Tag](#Tag)
 - [Text](#Text)
 - [TruncateText](#TruncateText)

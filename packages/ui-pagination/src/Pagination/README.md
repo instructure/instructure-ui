@@ -28,12 +28,12 @@ class Example extends React.Component {
   }
 
   render () {
-    const pages = Array.from(Array(9)).map((v, i) => <PaginationButton
+    const pages = Array.from(Array(9)).map((v, i) => <Pagination.Page
       key={i}
       onClick={this.setPage.bind(this, i)}
       current={i === this.state.currentPage}>
         {i + 1}
-    </PaginationButton>)
+    </Pagination.Page>)
 
     return (
       <Pagination
@@ -67,13 +67,13 @@ class Example extends React.Component {
 
   renderPaginationButton(pageIndex) {
     return (
-      <PaginationButton
+      <Pagination.Page
         key={pageIndex}
         onClick={() => this.setState({ currentPage: pageIndex })}
         current={pageIndex === this.state.currentPage}
       >
           {pageIndex + 1}
-      </PaginationButton>
+      </Pagination.Page>
     )
   }
 
@@ -104,18 +104,18 @@ class Example extends React.Component {
 render(<Example />)
 ```
 
-If you instead provide an href to `PaginationButton` it will render as a link.
+If you instead provide an href to `Pagination.Page` it will render as a link.
 
 ```js
 ---
 example: true
 ---
 <Pagination variant="full" label="Jump to">
-  <PaginationButton href="/pages/1" current>A-G</PaginationButton>
-  <PaginationButton href="/pages/2">H-J</PaginationButton>
-  <PaginationButton href="/pages/3">K-M</PaginationButton>
-  <PaginationButton href="/pages/3">N-Q</PaginationButton>
-  <PaginationButton href="/pages/3">R-Z</PaginationButton>
+  <Pagination.Page href="/pages/1" current>A-G</Pagination.Page>
+  <Pagination.Page href="/pages/2">H-J</Pagination.Page>
+  <Pagination.Page href="/pages/3">K-M</Pagination.Page>
+  <Pagination.Page href="/pages/3">N-Q</Pagination.Page>
+  <Pagination.Page href="/pages/3">R-Z</Pagination.Page>
 </Pagination>
 ```
 ### Guidelines
@@ -126,8 +126,8 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use for splitting up content or data into several pages</FigureItem>
-    <FigureItem>Use if there are more than 20 items displayed in one view</FigureItem>
+    <Figure.Item>Use for splitting up content or data into several pages</Figure.Item>
+    <Figure.Item>Use if there are more than 20 items displayed in one view</Figure.Item>
   </Figure>
 </Guidelines>
 ```
@@ -138,7 +138,7 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Ensure page links and the next/previous buttons are labeled correctly for screen readers</FigureItem>
+    <Figure.Item>Ensure page links and the next/previous buttons are labeled correctly for screen readers</Figure.Item>
   </Figure>
 </Guidelines>
 ```

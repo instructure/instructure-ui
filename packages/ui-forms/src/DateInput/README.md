@@ -1,6 +1,9 @@
 ---
-describes: DateInput
+describes: DeprecatedDateInput
+id: DeprecatedDateInput__README
 ---
+
+**DEPRECATED:** use the [controlled-only `DateInput` from ui-date-input](#DateInput) instead.
 
 A DateInput component is used to input a date either with a
 [DatePicker](#DatePicker) in a [Popover](#Popover), or by typing a date into a
@@ -13,7 +16,7 @@ A DateInput component is used to input a date either with a
 ---
 example: true
 ---
-<DateInput
+<DeprecatedDateInput
   previousLabel="previous month"
   nextLabel="next month"
   placeholder="Select a date"
@@ -29,7 +32,7 @@ A disabled DateInput:
 ---
 example: true
 ---
-<DateInput
+<DeprecatedDateInput
   previousLabel="previous month"
   nextLabel="next month"
   placeholder="Select a date"
@@ -99,7 +102,7 @@ class Example extends React.Component {
     return (
       <FormFieldGroup description={<ScreenReaderContent>DateInput Example</ScreenReaderContent>}>
         <Button margin="small" onClick={this.randomMonth}>Random Month</Button>
-        <DateInput
+        <DeprecatedDateInput
           label="Date"
           placeholder="Pick a date"
           previousLabel="previous month"
@@ -127,7 +130,7 @@ A DateInput with a `disabledDaysOfWeek` prop disabling weekends:
 ---
 example: true
 ---
-<DateInput
+<DeprecatedDateInput
   previousLabel="previous month"
   nextLabel="next month"
   placeholder="Select a date"
@@ -144,7 +147,7 @@ A DateInput with a `disabledDays` array
 ---
 example: true
 ---
-<DateInput
+<DeprecatedDateInput
   previousLabel="previous month"
   nextLabel="next month"
   placeholder="Select a date"
@@ -162,7 +165,7 @@ A DateInput with a `disabledDays` callback function
 ---
 example: true
 ---
-<DateInput
+<DeprecatedDateInput
   previousLabel="previous month"
   nextLabel="next month"
   placeholder="Select a date"

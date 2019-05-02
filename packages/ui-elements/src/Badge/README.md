@@ -226,14 +226,14 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="yes" title="Do">
-    <FigureItem>Use count for up to 2 digits of numbers</FigureItem>
-    <FigureItem>Use "+" symbol for more than 2 digits (99+)</FigureItem>
-    <FigureItem>Use for numeric count (like unread messages)</FigureItem>
-    <FigureItem>Provide accessible text for what the number represents</FigureItem>
+    <Figure.Item>Use count for up to 2 digits of numbers</Figure.Item>
+    <Figure.Item>Use "+" symbol for more than 2 digits (99+)</Figure.Item>
+    <Figure.Item>Use for numeric count (like unread messages)</Figure.Item>
+    <Figure.Item>Provide accessible text for what the number represents</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
-    <FigureItem>Use as a status indicator refer to Pill</FigureItem>
-    <FigureItem>Use for text strings</FigureItem>
+    <Figure.Item>Use as a status indicator refer to Pill</Figure.Item>
+    <Figure.Item>Use for text strings</Figure.Item>
   </Figure>
 </Guidelines>
 ```

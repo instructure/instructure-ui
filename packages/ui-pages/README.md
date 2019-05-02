@@ -13,17 +13,17 @@ category: packages
 
 ```js
 import React from 'react'
-import { Pages, Page } from '@instructure/ui-pages'
+import { Pages } from '@instructure/ui-pages'
 
 const MyPages = () => {
   return (
     <Pages activePageIndex={1}>
-      <Page>
+      <Pages.Page>
         Page One
-      </Page>
-      <Page>
+      </Pages.Page>
+      <Pages.Page>
         Page Two
-      </Page>
+      </Pages.Page>
     </Pages>
   )
 }

@@ -20,7 +20,7 @@ yarn add @instructure/ui-table
 ### Components
 
 The `ui-table` package contains the following:
-- [TableControlled](#TableControlled)
+- [Table](#Table)
 
 ```javascript
 import { Table } from '@instructure/ui-table'

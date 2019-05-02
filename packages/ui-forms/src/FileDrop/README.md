@@ -60,8 +60,8 @@ will turn the theme's `rejectedColor`.
 example: true
 ---
 <Grid startAt="medium">
-  <GridRow>
-    <GridCol>
+  <Grid.Row>
+    <Grid.Col>
 
       <FileDrop
         accept=".jpg"
@@ -77,8 +77,8 @@ example: true
         }
       />
 
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
 
       <FileDrop
         accept=".png"
@@ -93,8 +93,8 @@ example: true
         }
       />
 
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
 
       <FileDrop
         accept="video/*"
@@ -109,8 +109,8 @@ example: true
         }
       />
 
-    </GridCol>
-  </GridRow>
+    </Grid.Col>
+  </Grid.Row>
 </Grid>
 ```
 
@@ -123,8 +123,8 @@ If the `allowMultiple` prop is set to `true`, FileDrop accepts multiple files.
 example: true
 ---
 <Grid startAt="medium" vAlign="middle">
-  <GridRow>
-    <GridCol>
+  <Grid.Row>
+    <Grid.Col>
 
       <FileDrop
         allowMultiple={true}
@@ -140,8 +140,8 @@ example: true
         }
       />
 
-    </GridCol>
-    <GridCol>
+    </Grid.Col>
+    <Grid.Col>
 
       <FileDrop
         label={
@@ -155,7 +155,7 @@ example: true
         }
       />
 
-    </GridCol>
-  </GridRow>
+    </Grid.Col>
+  </Grid.Row>
 </Grid>
 ```

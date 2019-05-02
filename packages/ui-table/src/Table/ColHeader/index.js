@@ -35,7 +35,7 @@ import theme from './theme'
 
 /**
 ---
-parent: TableControlled
+parent: Table
 ---
 **/
 @themeable(theme, styles)

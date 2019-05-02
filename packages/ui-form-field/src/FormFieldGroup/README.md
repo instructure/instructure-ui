@@ -122,7 +122,7 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <FigureItem>Avoid placeholder text (it creates usability problems by increasing cognitive load, low contrast, lack of screen reader compatibility, etc.)</FigureItem>
+    <Figure.Item>Avoid placeholder text (it creates usability problems by increasing cognitive load, low contrast, lack of screen reader compatibility, etc.)</Figure.Item>
   </Figure>
 </Guidelines>
 ```
