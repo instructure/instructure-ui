@@ -56,21 +56,23 @@ async function publish (packageName, currentVersion, preidAndTag, config = {}) {
   createNPMRCFile(config)
   checkWorkingDirectory()
 
-  let versionToRelease
+  let versionToRelease, tag
 
   if (isReleaseCommit(currentVersion)) {
     checkIfGitTagExists(currentVersion)
     checkIfCommitIsReviewed()
     info(`📦  Currently on release commit for ${currentVersion} of ${packageName}.`)
     versionToRelease = currentVersion
+    tag = preidAndTag || 'latest'
   } else {
     info(`📦  Not on a release commit--publishing a pre-release...`)
     versionToRelease = 'prerelease'
+    tag = preidAndTag || 'rc'
   }
 
   let releasedVersion
   try {
-    releasedVersion = await publishPackages(packageName, versionToRelease, preidAndTag)
+    releasedVersion = await publishPackages(packageName, versionToRelease, tag)
   } catch (e) {
     error(e)
     process.exit(1)

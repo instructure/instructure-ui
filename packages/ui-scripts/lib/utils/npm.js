@@ -117,7 +117,7 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--no-git-reset'
     ]
   } else {
-    args = ['from-package', '--dist-tag', 'latest']
+    args = ['from-package', '--dist-tag', preidAndTag]
   }
 
   info(`📦  Publishing ${releaseVersion} of ${packageName}...`)
