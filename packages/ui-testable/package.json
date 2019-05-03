@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-testable",
-  "version": "5.52.2",
+  "version": "5.52.3",
   "description": "A UI component test utility made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,12 +20,12 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.52.2",
-    "@instructure/ui-test-utils": "^5.52.2",
+    "@instructure/ui-babel-preset": "^5.52.3",
+    "@instructure/ui-test-utils": "^5.52.3",
     "prop-types": "^15.6.2"
   },
   "dependencies": {
-    "@instructure/ui-decorator": "^5.52.2"
+    "@instructure/ui-decorator": "^5.52.3"
   },
   "peerDependencies": {
     "react": "^15.0.0 || ^16.0.0",

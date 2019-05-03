@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-pagination",
-  "version": "5.52.2",
+  "version": "5.52.3",
   "description": "A UI component library made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -20,24 +20,24 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.52.2",
-    "@instructure/ui-test-utils": "^5.52.2"
+    "@instructure/ui-babel-preset": "^5.52.3",
+    "@instructure/ui-test-utils": "^5.52.3"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/ui-a11y": "^5.52.2",
-    "@instructure/ui-buttons": "^5.52.2",
-    "@instructure/ui-elements": "^5.52.2",
-    "@instructure/ui-icons": "^5.52.2",
-    "@instructure/ui-layout": "^5.52.2",
-    "@instructure/ui-overlays": "^5.52.2",
-    "@instructure/ui-portal": "^5.52.2",
-    "@instructure/ui-prop-types": "^5.52.2",
-    "@instructure/ui-react-utils": "^5.52.2",
-    "@instructure/ui-testable": "^5.52.2",
-    "@instructure/ui-themeable": "^5.52.2",
-    "@instructure/ui-utils": "^5.52.2",
-    "@instructure/uid": "^5.52.2",
+    "@instructure/ui-a11y": "^5.52.3",
+    "@instructure/ui-buttons": "^5.52.3",
+    "@instructure/ui-elements": "^5.52.3",
+    "@instructure/ui-icons": "^5.52.3",
+    "@instructure/ui-layout": "^5.52.3",
+    "@instructure/ui-overlays": "^5.52.3",
+    "@instructure/ui-portal": "^5.52.3",
+    "@instructure/ui-prop-types": "^5.52.3",
+    "@instructure/ui-react-utils": "^5.52.3",
+    "@instructure/ui-testable": "^5.52.3",
+    "@instructure/ui-themeable": "^5.52.3",
+    "@instructure/ui-utils": "^5.52.3",
+    "@instructure/uid": "^5.52.3",
     "prop-types": "^15"
   },
   "peerDependencies": {

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-karma-config",
-  "version": "5.52.2",
+  "version": "5.52.3",
   "description": "A shared karma config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -16,8 +16,8 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/config-loader": "^5.52.2",
-    "@instructure/ui-webpack-config": "^5.52.2",
+    "@instructure/config-loader": "^5.52.3",
+    "@instructure/ui-webpack-config": "^5.52.3",
     "choma": "^1",
     "globby": "^9.2.0",
     "karma": "^4.1.0",
