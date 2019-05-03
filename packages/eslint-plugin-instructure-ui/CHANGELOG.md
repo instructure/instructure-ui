@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/instructure/instructure-ui/compare/v5.52.3...v6.0.0) (2019-05-03)
+
+**Note:** Version bump only for package eslint-plugin-instructure-ui
+
+
+
+
+
 ## [5.52.3](https://github.com/instructure/instructure-ui/compare/v5.52.2...v5.52.3) (2019-04-25)
 
 **Note:** Version bump only for package eslint-plugin-instructure-ui

@@ -1,6 +1,6 @@
 {
   "name": "@instructure/generate-examples",
-  "version": "5.52.3",
+  "version": "6.0.0",
   "private": true,
   "description": "A utility for automatically generating component examples",
   "author": "Instructure, Inc. Engineering and Product Design",
@@ -21,13 +21,13 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^5.52.3",
-    "@instructure/ui-test-utils": "^5.52.3"
+    "@instructure/ui-babel-preset": "^6.0.0",
+    "@instructure/ui-test-utils": "^6.0.0"
   },
   "dependencies": {
-    "@instructure/config-loader": "^5.52.3",
-    "@instructure/ui-layout": "^5.52.3",
-    "@instructure/ui-utils": "^5.52.3",
+    "@instructure/config-loader": "^6.0.0",
+    "@instructure/ui-layout": "^6.0.0",
+    "@instructure/ui-utils": "^6.0.0",
     "globby": "^9.2.0",
     "loader-utils": "^1.2.3",
     "object-hash": "^1.3.1",

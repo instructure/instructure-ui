@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-presets",
-  "version": "5.52.3",
+  "version": "6.0.0",
   "private": true,
   "description": "Shared build config files for UI libraries",
   "author": "Instructure, Inc. Engineering and Product Design",
@@ -17,17 +17,17 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@instructure/babel-plugin-themeable-styles": "^5.52.3",
+    "@instructure/babel-plugin-themeable-styles": "^6.0.0",
     "@instructure/canvas-supported-browsers": "^1",
-    "@instructure/config-loader": "^5.52.3",
-    "@instructure/generate-examples": "^5.52.3",
-    "@instructure/ui-babel-preset": "^5.52.3",
-    "@instructure/ui-eslint-config": "^5.52.3",
-    "@instructure/ui-karma-config": "^5.52.3",
-    "@instructure/ui-postcss-config": "^5.52.3",
-    "@instructure/ui-scripts": "^5.52.3",
-    "@instructure/ui-stylelint-config": "^5.52.3",
-    "@instructure/ui-webpack-config": "^5.52.3"
+    "@instructure/config-loader": "^6.0.0",
+    "@instructure/generate-examples": "^6.0.0",
+    "@instructure/ui-babel-preset": "^6.0.0",
+    "@instructure/ui-eslint-config": "^6.0.0",
+    "@instructure/ui-karma-config": "^6.0.0",
+    "@instructure/ui-postcss-config": "^6.0.0",
+    "@instructure/ui-scripts": "^6.0.0",
+    "@instructure/ui-stylelint-config": "^6.0.0",
+    "@instructure/ui-webpack-config": "^6.0.0"
   },
   "peerDependencies": {
     "react": "^15 || ^16"

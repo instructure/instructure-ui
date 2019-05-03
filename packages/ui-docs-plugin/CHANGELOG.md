@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/instructure/instructure-ui/compare/v5.52.3...v6.0.0) (2019-05-03)
+
+
+### Features
+
+* **canvas-theme,canvas-high-contrast-theme:** separate canvas theme packages ([ef2e1d0](https://github.com/instructure/instructure-ui/commit/ef2e1d0))
+* **ui-babel-preset:** transform member imports to full paths ([d02cc45](https://github.com/instructure/instructure-ui/commit/d02cc45))
+
+
+### Performance Improvements
+
+* **ui-icons,ui-icons-build:** remove default exports for React icons ([95195ee](https://github.com/instructure/instructure-ui/commit/95195ee))
+
+
+
+
+
 ## [5.52.3](https://github.com/instructure/instructure-ui/compare/v5.52.2...v5.52.3) (2019-04-25)
 
 **Note:** Version bump only for package @instructure/ui-docs-plugin

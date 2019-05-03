@@ -3,6 +3,73 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/instructure/instructure-ui/compare/v5.52.3...v6.0.0) (2019-05-03)
+
+
+### Bug Fixes
+
+* **instui-cli:** don't use yarn to run jscodeshift ([992e250](https://github.com/instructure/instructure-ui/commit/992e250))
+* **instui-cli,ui-codemods:** codemod paths should work when cli is globally installed ([0948a76](https://github.com/instructure/instructure-ui/commit/0948a76))
+* **instui-cli,ui-codemods,ui-scripts:** require uncached version of configs ([7130c12](https://github.com/instructure/instructure-ui/commit/7130c12))
+* **ui-docs-client:** fix search icon import path ([7390556](https://github.com/instructure/instructure-ui/commit/7390556))
+* **ui-layout:** position should account for documentElement offset ([701b08e](https://github.com/instructure/instructure-ui/commit/701b08e))
+* **ui-utils:** ensure 'getActiveElement' is using the instui 'contains' ([26f7d98](https://github.com/instructure/instructure-ui/commit/26f7d98))
+
+
+### Features
+
+* remove deprecated packages/props ([1d8813c](https://github.com/instructure/instructure-ui/commit/1d8813c))
+* **babel-plugin-themeable-styles:** deprecate themeable config ([f3228bc](https://github.com/instructure/instructure-ui/commit/f3228bc))
+* **canvas-theme,canvas-high-contrast-theme:** separate canvas theme packages ([ef2e1d0](https://github.com/instructure/instructure-ui/commit/ef2e1d0))
+* **instui-cli,instui-config,ui-codemods:** add upgrade command ([a805ed6](https://github.com/instructure/instructure-ui/commit/a805ed6))
+* **instui-cli,instui-config,ui-scripts:** Allow upgrade to specific version ([55c3c16](https://github.com/instructure/instructure-ui/commit/55c3c16))
+* **instui-config,ui-codemods:** configure codemod updates for simple prop values ([4049122](https://github.com/instructure/instructure-ui/commit/4049122))
+* **instui-config,ui-forms:** add deprecation + codemod for old TextInput to TextInputControlled ([eb83528](https://github.com/instructure/instructure-ui/commit/eb83528))
+* **ui-babel-preset:** transform member imports to full paths ([d02cc45](https://github.com/instructure/instructure-ui/commit/d02cc45))
+* **ui-dom-utils,ui-react-utils,ui-color-utils:** new utils packages ([03e8ee2](https://github.com/instructure/instructure-ui/commit/03e8ee2))
+
+
+### Performance Improvements
+
+* **ui-icons,ui-icons-build:** remove default exports for React icons ([95195ee](https://github.com/instructure/instructure-ui/commit/95195ee))
+
+
+### BREAKING CHANGES
+
+* **ui-core:** entire package has been removed
+* **ui-elements:** ContextBox has been removed
+* **ui-testbed:** entire package has been removed
+* **ui-forms:** NumberInput has been removed
+* **ui-container:** entire package has been removed
+* **ui-menu:** MenuItemFlyout has been removed
+* **ui-forms:** FormField & FormFieldGroup have been removed
+* **ui-svg-images:** height and width props removed from SVGIcon
+* **ui-utils:** Decimal has been removed
+* **ui-overlays:** applicationElement, closeButtonLabel, closeButtonRef, closeButtonVariant props removed from Tray (as well as dep warnings from InstUI 3)
+* **ui-overlays:** applicationElement, closeButtonLabel, closeButtonRef props removed from Popover (as well as dep warnings from InstUI 3)
+* **ui-overlays:** applicationElement, closeButtonLabel, closeButtonRef props removed from Modal (as well as dep warnings from InstUI 3)
+* **ui-overlays:** fullScreen prop removed from Mask
+* **ui-menu:** active prop removed from MenuItem
+* **ui-menu:** title, labelledBy and controls props removed from Menu
+* **ui-a11y:** applicationElement prop removed from Dialog
+* **ui-code-editor:** code prop removed from CodeEditor
+* **ui-layout:** size prop removed from View
+* **ui-elements:** ellipsis prop removed from Link
+* **ui-overlays:** size prop removed from Tooltip, switched variant so the inverse Tooltip is what a consumer gets out of the box, default (light has to be explicitly set)
+* **ui-alerts:** 3.0 deprecations removed from Alert
+* **ui-elements:** 3.0 deprecations removed from Table, prop values from Heading, ListItem
+* **ui-portal:** 3.0 deprecations removed from Portal
+* **ui-component-examples:** should not be referencing a size prop for Tooltip
+* **ui-utils:** deprecated util has updated messaging
+* **scripts:** update component and package template dependancy from '^5' to '^6'
+* **ui-forms, ui-icons, ui-overlays, ui-utils:** remove 'config' folder as they now reside in their own package
+* **ui-themeable:** added warning in dev env when using react version < 15
+* All package peerDependencies updated to remove support for React v0.14
+* **ui-utils:** deprecated utils removed
+* **ui-themes:** remove deprecated canvas-a11y theme
+* removed /components and /utils directories, add codemods to update imports
+
+
 ## [5.52.3](https://github.com/instructure/instructure-ui/compare/v5.52.2...v5.52.3) (2019-04-25)
 
 
