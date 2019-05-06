@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 
-export default function generator ({ borders, colors, typography }) {
-  return {
-    fontFamily: typography.fontFamily,
-    borderWidth: borders.widthMedium,
-    borderRadiusRectangular: borders.radiusMedium,
-    borderRadiusCircular: '999rem',
-    borderColorPrimary: colors.borderBrand,
-    borderColorError: colors.borderDanger,
-    borderColorInverse: colors.borderLightest
-  }
-}
+ export default function generator ({ typography }) {
+   return {
+     fontFamily: typography.fontFamily
+   }
+ }

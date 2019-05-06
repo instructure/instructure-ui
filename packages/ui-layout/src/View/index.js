@@ -109,10 +109,24 @@ class View extends Component {
     borderWidth: ThemeablePropTypes.borderWidth,
 
     /**
-    * Accepts the familiar CSS shorthand to designate border radii corresponding
-    * to corners
+    * Accepts `small`, `medium`, `large`, `circle`, and `pill`. Border radius can be
+    * assigned to individual corners in CSS shorthand style (e.g., `"medium large none pill"`).
     */
-    borderRadius: ThemeablePropTypes.borderWidth,
+    borderRadius: ThemeablePropTypes.borderRadius,
+
+    /**
+    * Sets the color of the View border
+    */
+    borderColor: PropTypes.oneOf([
+      'default',
+      'inverse',
+      'brand',
+      'info',
+      'success',
+      'warning',
+      'alert',
+      'danger'
+    ]),
 
     /**
     * Designates the background style of the `<View />`
@@ -146,6 +160,43 @@ class View extends Component {
     cursor: cursorPropTypes,
 
     /**
+    * Specify a value for the CSS position property. Use `relative` if `focusable` will be true.
+    */
+    position: PropTypes.oneOf(['static', 'absolute', 'relative', 'sticky', 'fixed']),
+
+    /**
+    * The `left` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
+    */
+    insetInlineStart: PropTypes.string,
+    /**
+    * The `right` CSS property in left-to-right interfaces. Will not do anything if `position === "static"`.
+    */
+    insetInlineEnd: PropTypes.string,
+    /**
+    * The `top` CSS property. Will not do anything if `position === "static"`.
+    */
+    insetBlockStart: PropTypes.string,
+    /**
+    * The `bottom` CSS property. Will not do anything if `position === "static"`.
+    */
+    insetBlockEnd: PropTypes.string,
+
+    /**
+     * When true and position prop is `relative`, show focus outline.
+     */
+    focused: PropTypes.bool,
+
+    /**
+     * Determines whether the focus outline displays offset or inset from the focused View
+     */
+    focusPosition: PropTypes.oneOf(['offset', 'inset']),
+
+    /**
+    * Determines the color of the focus outline
+    */
+    focusColor: PropTypes.oneOf(['info', 'inverse', 'success', 'danger']),
+
+    /**
     * Activate a dotted outline around the component to make building your
     * layout easier
     */
@@ -173,6 +224,7 @@ class View extends Component {
     cursor: undefined,
     borderWidth: undefined,
     borderRadius: undefined,
+    borderColor: 'default',
     margin: undefined,
     padding: undefined,
     elementRef: undefined,
@@ -183,7 +235,15 @@ class View extends Component {
     maxWidth: undefined,
     maxHeight: undefined,
     minWidth: undefined,
-    minHeight: undefined
+    minHeight: undefined,
+    position: 'static',
+    focused: false,
+    focusPosition: 'offset',
+    focusColor: 'info',
+    insetInlineStart: undefined,
+    insetInlineEnd: undefined,
+    insetBlockStart: undefined,
+    insetBlockEnd: undefined
   }
 
   componentDidMount () {
@@ -211,6 +271,46 @@ class View extends Component {
       })(this._element, this.props.margin)),
       `[View] display style is set to 'inline' and will allow for horizontal margins only.`
     )
+  }
+
+  get isFocused () {
+    const {
+      focused,
+      position
+    } = this.props
+
+    if (focused) {
+      if (position === 'relative') {
+        return true
+      } else {
+        error(
+          position === 'relative',
+          '[View] the focus ring will only display if the `position` prop is `relative`.'
+        )
+        return false
+      }
+    } else {
+      return false
+    }
+  }
+
+  get focusRingRadius () {
+    const { borderRadius } = this.props
+
+    if (this.verifyUniformValues('circle', borderRadius)
+      || this.verifyUniformValues('pill', borderRadius)) {
+      // if pill or circle, ok for focus ring to inherit parent radius
+      return 'focusRing--radiusInherit'
+    } else if (this.verifyUniformValues('small', borderRadius)) {
+      return 'focusRing--radiusSmall'
+    } else if (this.verifyUniformValues('medium', borderRadius)) {
+      return 'focusRing--radiusMedium'
+    } else if (this.verifyUniformValues('large', borderRadius)) {
+      return 'focusRing--radiusLarge'
+    } else {
+      // for shapes with irregular borders (e.g., `large medium`), leave focus ring square
+      return 'focusRing--radiusNone'
+    }
   }
 
   get hasBorder () {
@@ -246,6 +346,40 @@ class View extends Component {
     }
   }
 
+  get offsetStyle () {
+    const {
+      insetBlockStart,
+      insetBlockEnd,
+      insetInlineStart,
+      insetInlineEnd
+    } = this.props
+
+    const rtl = this.dir === 'rtl'
+
+    const blockStart = {
+      top: insetBlockStart,
+      insetBlockStart
+    }
+
+    const blockEnd = {
+      bottom: insetBlockEnd,
+      insetBlockEnd
+    }
+
+    const horizontalOffsets = {
+      left: rtl ? insetInlineEnd : insetInlineStart,
+      right: rtl ? insetInlineStart : insetInlineEnd,
+      insetInlineStart,
+      insetInlineEnd
+    }
+
+    return {
+      ...blockStart,
+      ...blockEnd,
+      ...horizontalOffsets
+    }
+  }
+
   get styleProps () {
     const { cursor, style } = this.props // eslint-disable-line react/prop-types
     const whitelisted = pickProps(style || {}, {}, [
@@ -268,6 +402,7 @@ class View extends Component {
     if (cursor) {
       whitelisted.cursor = cursor
     }
+
     return whitelisted
   }
 
@@ -276,6 +411,16 @@ class View extends Component {
       this.props.elementRef(el)
     }
     this._element = el
+  }
+
+  // verify that each value passed into ThemeablePropType is identical
+  verifyUniformValues = (value, input) => {
+    if (typeof input !== "string") return false
+
+    return input
+      .trim()
+      .split(" ")
+      .every(inputValue => inputValue === value)
   }
 
   render () {
@@ -295,32 +440,51 @@ class View extends Component {
       overflowY,
       stacking,
       shadow,
+      position,
+      focusPosition,
+      focusColor,
+      borderColor,
       size, // eslint-disable-line react/prop-types
       className // eslint-disable-line react/prop-types
     } = this.props
 
     const ElementType = getElementType(View, this.props)
 
+    const focusOutlineClasses = position === 'relative' ? {
+      [styles[this.focusRingRadius]]: true,
+      [styles[`focusPosition--${focusPosition}`]]: true,
+      [styles[`focusColor--${focusColor}`]]: true
+    } : {}
+
+    const classes = classnames({
+      [styles.root]: true,
+      [styles.debug]: debug,
+      [styles.hasBorder]: this.hasBorder,
+      [styles[`borderColor--${borderColor}`]]: this.hasBorder && borderColor !== 'inverse',
+      [styles['borderColor--inverse']]: this.hasBorder && background === 'inverse',
+      [styles[`textAlign--${textAlign}`]]: textAlign,
+      [styles[`background--${background}`]]: background,
+      [styles[`display--${display}`]]: display && display !== 'auto',
+      [styles[`overflowX--${overflowX}`]]: overflowX && overflowX !== 'visible',
+      [styles[`overflowY--${overflowY}`]]: overflowY && overflowY !== 'visible',
+      [styles[`size--${size}`]]: size && size !== 'auto',
+      [styles[`stacking--${stacking}`]]: stacking,
+      [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
+      [styles[`position--${position}`]]: position !== 'static',
+      // leaving `focused` out of focusOutlineClasses so warning fires if position is not relative
+      [styles.focused]: this.isFocused,
+      ...focusOutlineClasses,
+      [className]: className
+    })
+
     return (
       <ElementType
         {...omitProps(this.props, View.propTypes)}
-        className={classnames({
-          [styles.root]: true,
-          [styles.border]: this.hasBorder,
-          [styles.debug]: debug,
-          [styles[`textAlign--${textAlign}`]]: textAlign,
-          [styles[`background--${background}`]]: background,
-          [styles[`display--${display}`]]: display && display !== 'auto',
-          [styles[`overflowX--${overflowX}`]]: overflowX && overflowX !== 'visible',
-          [styles[`overflowY--${overflowY}`]]: overflowY && overflowY !== 'visible',
-          [styles[`size--${size}`]]: size && size !== 'auto',
-          [styles[`stacking--${stacking}`]]: stacking,
-          [styles[`shadow--${shadow}`]]: shadow && shadow !== 'none',
-          [className]: className
-        })}
+        className={classes}
         style={{
           ...this.spacingStyle,
           ...this.borderStyle,
+          ...this.offsetStyle,
           width,
           height,
           minWidth,

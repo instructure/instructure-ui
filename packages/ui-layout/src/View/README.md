@@ -2,8 +2,18 @@
 describes: View
 ---
 
-Use View to separate content and/or to set the
-text alignment for a section of content.
+### View &#151; the visual basis of instructure-UI
+
+View provides the base appearance for most of the components
+in instructure-UI.
+
+> **Because View provides access to so many visual styles, it
+can be easy to abuse.** Before you use View, ensure that the component
+you're trying to style doesn't already have access to the same props.
+For example, don't wrap a `<Button>` in a `<View>` just to add
+`margin` around the button: Instead, use the `margin` prop on the
+button itself.
+
 
 ```js
 ---
@@ -19,7 +29,10 @@ example: true
   {lorem.sentence()}
 </View>
 ```
-Change the background using the `background` prop
+
+### `background`
+
+Change the background color using the `background` prop.
 
 ```js
 ---
@@ -129,7 +142,9 @@ example: true
 </div>
 ```
 
-Add a shadow to the View using the `shadow` prop
+### `shadow`
+
+Add a CSS box-shadow to the View using the `shadow` prop.
 
 ```js
 ---
@@ -172,8 +187,10 @@ example: true
 </div>
 ```
 
-Apply a border with the `borderWidth` prop. Utilize the
-[CSS shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
+### `borderWidth`
+
+Apply a border with the `borderWidth` prop. Utilize
+[CSS shorthand style](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border styles to individual edges.
 
 ```js
@@ -226,8 +243,98 @@ example: true
 </div>
 ```
 
-Adjust the border radius using the `borderRadius` prop. Utilize the
-[CSS shorthand](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
+### `borderColor`
+
+Change the color of View's border for different contexts via the `borderColor` prop.
+
+```js
+---
+example: true
+---
+<div>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+  >
+    default
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="info"
+  >
+    info
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="warning"
+  >
+    warning
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="danger"
+  >
+    danger
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="alert"
+  >
+    alert
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="success"
+  >
+    success
+  </View>
+  <View
+    as="span"
+    display="inline-block"
+    margin="small"
+    padding="small"
+    background="default"
+    borderWidth="large"
+    borderColor="brand"
+  >
+    brand
+  </View>
+</div>
+```
+
+### `borderRadius`
+
+Adjust the border radius using the `borderRadius` prop. Utilize
+[CSS shorthand style](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)
 to apply different border radii to individual corners.
 
 ```js
@@ -240,35 +347,271 @@ example: true
     display="inline-block"
     maxWidth="10rem"
     margin="small"
-    padding="small"
+    padding="medium"
     background="inverse"
     borderRadius="medium"
+    textAlign="center"
   >
-    {lorem.sentence()}
+    medium
   </View>
   <View
     as="span"
     display="inline-block"
     maxWidth="10rem"
     margin="small"
-    padding="small"
+    padding="medium"
     background="inverse"
     borderRadius="large large none none"
+    textAlign="center"
   >
-    {lorem.sentence()}
+    large large none none
   </View>
   <View
     as="span"
     display="inline-block"
     maxWidth="10rem"
     margin="small"
-    padding="small"
+    padding="medium"
     background="inverse"
     borderRadius="none none large large"
+    textAlign="center"
   >
-    {lorem.sentence()}
+    none none large large
+  </View>
+  <View
+    display="inline-block"
+    width="6rem"
+    height="6rem"
+    margin="small"
+    padding="medium"
+    background="inverse"
+    borderRadius="circle"
+    textAlign="center"
+  >
+    circle
+  </View>
+  <View
+    display="inline-block"
+    width="10rem"
+    margin="small"
+    padding="medium"
+    background="inverse"
+    borderRadius="pill"
+    textAlign="center"
+  >
+    pill
   </View>
 </div>
+```
+
+
+### `position`
+
+`position` sets the CSS position rule for the component: `static`, `absolute`, `relative`,
+`sticky`, or `fixed`.
+
+> Note that `position="sticky"` is currently [not as fully supported](https://caniuse.com/#feat=css-sticky)
+as the other values.
+
+```js
+---
+example: true
+---
+<View
+  position="relative"
+  as="div"
+  height="200px"
+  borderWidth="small"
+>
+  <View
+    as="div"
+    position="absolute"
+    insetInlineEnd="100px"
+    insetBlockStart="10px"
+    insetBlockEnd="0"
+    background="inverse"
+  >
+    Positioned View inside a View with relative positioning.
+  </View>
+</View>
+```
+
+### `focused`
+
+Set `focused` to `true` to make View's "focus ring" display.
+
+`focused` supports the following `borderRadius` values: `circle`, `pill`, `small`, `medium`,
+and `large`. For Views with irregular border radius (e.g., `borderRadius="small large none medium"`),
+the focus ring will appear with square edges. The color of the focus outline can be
+changed for different contexts via the `focusColor` property.
+
+> Note that `position` must be set to `relative` for the focus ring to display.
+(This restriction exists because the focus ring requires styling a pseudo element
+that has absolute positioning.)
+
+
+```javascript
+---
+example: true
+render: false
+---
+class FocusedExample extends React.Component {
+  constructor (props) {
+    super(props)
+
+    this.state = {
+      focused: true,
+      inset: false
+    }
+  }
+
+  updateFocused = (event) => {
+    this.setState({focused: event.target.checked})
+  }
+
+  updateInset = (event) => {
+    this.setState({inset: event.target.checked})
+  }
+
+  render () {
+    const { focused, focusPosition } = this.state
+
+    return (
+      <View as="div">
+        <View as="div" background="default" padding="small" margin="0 0 small" borderWidth="small">
+          <FormFieldGroup
+            rowSpacing="small"
+            description={<ScreenReaderContent>View focus outline examples</ScreenReaderContent>}
+          >
+            <Checkbox
+              label="focused"
+              checked={this.state.focused}
+              onChange={this.updateFocused}
+            />
+            <Checkbox
+              label="focusPosition = inset"
+              checked={this.state.inset}
+              onChange={this.updateInset}
+            />
+          </FormFieldGroup>
+        </View>
+        <View as="div">
+          <code>borderRadius =</code>
+          <View
+            display="inline-block"
+            margin="small"
+            padding="small"
+            background="default"
+            borderRadius="small"
+            borderWidth="small"
+            position="relative"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            small
+          </View>
+          <View
+            display="inline-block"
+            margin="small"
+            padding="small"
+            background="default"
+            borderRadius="medium"
+            borderWidth="small"
+            position="relative"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            medium
+          </View>
+          <View
+            display="inline-block"
+            margin="small"
+            padding="small"
+            background="default"
+            borderRadius="large"
+            borderWidth="small"
+            position="relative"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            large
+          </View>
+          <View
+            display="inline-block"
+            height="100px"
+            width="100px"
+            margin="small"
+            background="default"
+            borderRadius="circle"
+            borderWidth="small"
+            position="relative"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            <Flex
+              width="100%"
+              height="100%"
+              alignItems="center"
+              justifyItems="center"
+            >
+              <Flex.Item>
+                circle
+              </Flex.Item>
+            </Flex>
+          </View>
+          <View background="inverse" display="inline-block" padding="small">
+            <View
+              display="block"
+              margin="small"
+              padding="small"
+              background="inverse"
+              borderRadius="large"
+              borderWidth="small"
+              position="relative"
+              focused={this.state.focused}
+              focusColor="inverse"
+              focusPosition={this.state.inset ? 'inset' : 'offset'}
+            >
+              medium
+            </View>
+          </View>
+          <View
+            display="inline-block"
+            margin="small"
+            padding="small"
+            background="default"
+            borderRadius="pill"
+            borderWidth="small"
+            position="relative"
+            focusColor="success"
+            width="100px"
+            textAlign="center"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            pill
+          </View>
+          <View
+            display="inline-block"
+            margin="small"
+            padding="small"
+            background="default"
+            borderWidth="small"
+            borderRadius="none large"
+            focusColor="danger"
+            position="relative"
+            focused={this.state.focused}
+            focusPosition={this.state.inset ? 'inset' : 'offset'}
+          >
+            none large
+          </View>
+        </View>
+      </View>
+    )
+  }
+}
+
+render(<FocusedExample />)
 ```
 
 Handle vertical and horizontal content overflow with the `overflowX` and `overflowY`

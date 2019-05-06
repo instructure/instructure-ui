@@ -38,13 +38,40 @@
   outline: 0.0625rem dashed var(--debugOutlineColor);
 }
 
-.border {
+.hasBorder {
   border-style: var(--borderStyle);
-  border-color: var(--borderColor);
+}
 
-  &.background--inverse {
-    border-color: var(--borderColorInverse);
-  }
+.borderColor--default {
+  border-color: var(--borderColorDefault);
+}
+
+.borderColor--inverse {
+  border-color: var(--borderColorInverse);
+}
+
+.borderColor--brand {
+  border-color: var(--borderColorBrand);
+}
+
+.borderColor--info {
+  border-color: var(--borderColorInfo);
+}
+
+.borderColor--success {
+  border-color: var(--borderColorSuccess);
+}
+
+.borderColor--warning {
+  border-color: var(--borderColorWarning);
+}
+
+.borderColor--alert {
+  border-color: var(--borderColorAlert);
+}
+
+.borderColor--danger {
+  border-color: var(--borderColorDanger);
 }
 
 .background--default {
@@ -136,4 +163,114 @@
 
 .overflowY--auto {
   overflow-y: auto;
+}
+
+.position--relative {
+  position: relative;
+
+  &::before {
+    pointer-events: none;
+    content: "";
+    position: absolute;
+    border-style: var(--focusOutlineStyle);
+    border-width: var(--focusOutlineWidth);
+    border-color: var(--focusOutlineColorDefault);
+    transition: all 0.2s;
+
+    /* properties to transition when focused */
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  &.focusPosition--offset::before {
+    top: calc(var(--focusOutlineOffset) * -1);
+    left: calc(var(--focusOutlineOffset) * -1); /* stylelint-disable-line property-blacklist */
+    right: calc(var(--focusOutlineOffset) * -1); /* stylelint-disable-line property-blacklist */
+    bottom: calc(var(--focusOutlineOffset) * -1);
+  }
+
+  &.focusPosition--inset::before {
+    top: var(--focusOutlineInset);
+    left: var(--focusOutlineInset); /* stylelint-disable-line property-blacklist */
+    right: var(--focusOutlineInset); /* stylelint-disable-line property-blacklist */
+    bottom: var(--focusOutlineInset);
+  }
+
+  &.focusRing--radiusInherit::before {
+    border-radius: inherit;
+  }
+
+  &.focusRing--radiusNone::before {
+    border-radius: 0;
+  }
+
+  /*
+  * Calculations below ensure that the border radius of the focus outline will always be
+  * correct regardless of changes to the offset/inset and focusOutlineWidth theme vars
+  */
+
+  /* stylelint-disable selector-max-class */
+
+  &.focusPosition--offset.focusRing--radiusSmall::before {
+    border-radius: calc(var(--borderRadiusSmall) + (var(--focusOutlineOffset) - var(--focusOutlineWidth)));
+  }
+
+  &.focusPosition--offset.focusRing--radiusMedium::before {
+    border-radius: calc(var(--borderRadiusMedium) + (var(--focusOutlineOffset) - var(--focusOutlineWidth)));
+  }
+
+  &.focusPosition--offset.focusRing--radiusLarge::before {
+    border-radius: calc(var(--borderRadiusLarge) + (var(--focusOutlineOffset) - var(--focusOutlineWidth)));
+  }
+
+  &.focusPosition--inset.focusRing--radiusSmall::before {
+    border-radius: calc(var(--borderRadiusSmall) - (var(--focusOutlineInset) + var(--focusOutlineWidth)));
+  }
+
+  &.focusPosition--inset.focusRing--radiusMedium::before {
+    border-radius: calc(var(--borderRadiusMedium) - (var(--focusOutlineInset) + var(--focusOutlineWidth)));
+  }
+
+  &.focusPosition--inset.focusRing--radiusLarge::before {
+    border-radius: calc(var(--borderRadiusLarge) - (var(--focusOutlineInset) + var(--focusOutlineWidth)));
+  }
+
+  /* stylelint-enable selector-max-class */
+
+  &.focused {
+    outline: none;
+  }
+
+  &.focused::before {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  &.focusColor--info::before {
+    border-color: var(--focusColorInfo);
+  }
+
+  &.focusColor--inverse::before {
+    border-color: var(--focusColorInverse);
+  }
+
+  &.focusColor--success::before {
+    border-color: var(--focusColorSuccess);
+  }
+
+  &.focusColor--danger::before {
+    border-color: var(--focusColorDanger);
+  }
+}
+
+.position--fixed {
+  position: fixed;
+}
+
+.position--absolute {
+  position: absolute;
+}
+
+.position--sticky {
+  position: sticky;
 }

@@ -73,7 +73,7 @@ describe('<View />', async () => {
     expect(consoleError).to.not.be.called()
   })
 
-  it('should pass position style attributes', async () => {
+  it('should pass whitelisted style attributes', async () => {
     const styleProps = {
       top: '10rem',
       left: '5px',
@@ -183,6 +183,42 @@ describe('<View />', async () => {
     })
   })
 
+  it('should set CSS position', async () => {
+    const subject = await mount(
+      <View position="fixed">
+        <h1>Hello!</h1>
+      </View>
+    )
+
+    const view = within(subject.getDOMNode())
+
+    await wait(() => {
+      expect(view.getComputedStyle()['position']).to.equal('fixed')
+    })
+  })
+
+  it('should set inline offset (top, bottom, left, right)', async () => {
+    const subject = await mount(
+      <View
+        insetBlockStart="0"
+        insetBlockEnd="20px"
+        insetInlineStart="2px"
+        insetInlineEnd="3px"
+      >
+        <h1>Hello!</h1>
+      </View>
+    )
+
+    const view = within(subject.getDOMNode())
+
+    await wait(() => {
+      expect(view.getComputedStyle()['top']).to.equal('0px')
+      expect(view.getComputedStyle()['bottom']).to.equal('20px')
+      expect(view.getComputedStyle()['left']).to.equal('2px')
+      expect(view.getComputedStyle()['right']).to.equal('3px')
+    })
+  })
+
   it('should override default max-width', async () => {
     const subject = await mount(
       <View>
@@ -195,6 +231,17 @@ describe('<View />', async () => {
 
     await subject.setProps({maxWidth: '200px'})
     expect(view.getComputedStyle().maxWidth).to.equal('200px')
+  })
+
+  it('should warn when focused is true without position=relative', async () => {
+    const consoleError = stub(console, 'error')
+    const warning = 'Warning: [View] the focus ring will only display if the `position` prop is `relative`.'
+    await mount(
+      <View focused>
+        <h1>Hello!</h1>
+      </View>
+    )
+    expect(consoleError).to.be.calledWith(warning)
   })
 
   it('should meet a11y standards', async () => {

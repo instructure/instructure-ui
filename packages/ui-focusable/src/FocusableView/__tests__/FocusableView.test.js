@@ -81,6 +81,7 @@ describe('<FocusableView />', async () => {
       display: 'auto',
       cursor: 'auto',
       width: '100%',
+      focused: false,
       elementRef: () => {}
     }
 

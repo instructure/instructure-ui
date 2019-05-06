@@ -29,7 +29,7 @@ import classnames from 'classnames'
 import { View } from '@instructure/ui-layout'
 
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
-import { omitProps } from '@instructure/ui-react-utils'
+import { deprecated, omitProps } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -39,6 +39,7 @@ import theme from './theme'
 parent: Focusable
 ---
 **/
+@deprecated('7.0.0', null, 'Use @instructure/ui-layout/View instead')
 @themeable(theme, styles)
 class FocusableView extends Component {
   static propTypes = {
@@ -96,7 +97,7 @@ class FocusableView extends Component {
     margin: undefined,
     onClick: undefined,
     focused: false,
-    shape: "rectangular",
+    shape: 'rectangular',
     color: 'primary',
     display: 'inline-block',
     as: 'button',
@@ -106,11 +107,22 @@ class FocusableView extends Component {
     tabIndex: null
   }
 
+  get focusColor () {
+    const color = this.props.color
+
+    if (color === 'error') {
+      return 'danger'
+    } else if (color === 'inverse') {
+      return 'inverse'
+    } else {
+      return 'info'
+    }
+  }
+
   render () {
     const {
       as,
       children,
-      color,
       cursor,
       display,
       elementRef,
@@ -138,22 +150,22 @@ class FocusableView extends Component {
         display={display}
         as={as}
         cursor={cursor}
+        focused={focused}
+        position="relative"
+        focusColor={this.focusColor}
         href={href}
         to={to}
         margin={margin}
         width={width}
         elementRef={elementRef}
         className={classnames({
-          [className]: className,
           [styles.root]: true,
-          [styles[color]]: true,
-          [styles[shape]]: true,
-          [styles.focused]: focused,
-          [styles['focus-disabled']]: !focused
+          [className]: className
         })}
         role={role || onClick ? role : null}
         tabIndex={onClick && !role ? (tabIndex || '0') : tabIndex}
         onClick={onClick}
+        borderRadius={shape === 'circular' ? 'circle' : 'medium'}
       >
         {children}
       </View>

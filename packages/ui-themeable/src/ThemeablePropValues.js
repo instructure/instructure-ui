@@ -51,7 +51,9 @@ const ThemeablePropValues = {
     none: 'none',
     small: 'small',
     medium: 'medium',
-    large: 'large'
+    large: 'large',
+    circle: 'circle',
+    pill: 'pill'
   },
 
   BACKGROUNDS: {

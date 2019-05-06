@@ -55,6 +55,14 @@ function getShorthandPropValue (componentName, componentTheme, propValue, propNa
         return '0'
       }
 
+      if (shortHandValue === 'circle') {
+        return '100%'
+      }
+
+      if (shortHandValue === 'pill') {
+        return '999em'
+      }
+
       const themeVariableName = camelize(`${propName}-${shortHandValue}`)
       const themeVariableValue = componentTheme[themeVariableName]
 

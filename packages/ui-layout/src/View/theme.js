@@ -26,21 +26,42 @@
 
 import { makeThemeVars } from '@instructure/ui-themeable'
 
-export default function generator ({ typography, colors, borders, spacing, shadows, stacking, breakpoints }) {
+export default function generator ({
+  typography,
+  colors,
+  borders,
+  spacing,
+  shadows,
+  stacking,
+  breakpoints,
+  transitions
+}) {
   return {
     fontFamily: typography.fontFamily,
 
     color: colors.oxford,
-    background: colors.white,
-    borderColor: colors.tiara,
+
+    borderStyle: borders.style,
+
+    borderColorDefault: colors.borderMedium,
+    borderColorSuccess: colors.borderSuccess,
+    borderColorBrand: colors.borderBrand,
+    borderColorInfo: colors.borderInfo,
+    borderColorAlert: colors.borderAlert,
+    borderColorWarning: colors.borderWarning,
+    borderColorDanger: colors.borderDanger,
+    borderColorInverse: 'transparent',
+
+    borderRadiusSmall: borders.radiusSmall,
+    borderRadiusMedium: borders.radiusMedium,
+    borderRadiusLarge: borders.radiusLarge,
 
     colorInverse: colors.white,
-    backgroundInverse: colors.oxford,
-    borderColorInverse: 'transparent',
     debugOutlineColor: colors.borderDebug,
 
-    backgroundLight: colors.porcelain,
-
+    background: colors.backgroundLightest,
+    backgroundLight: colors.backgroundLight,
+    backgroundInverse: colors.backgroundBrandSecondary,
     backgroundBrand: colors.backgroundBrand,
     backgroundAlert: colors.backgroundAlert,
     backgroundInfo: colors.backgroundInfo,
@@ -48,9 +69,17 @@ export default function generator ({ typography, colors, borders, spacing, shado
     backgroundDanger: colors.backgroundDanger,
     backgroundWarning: colors.backgroundWarning,
 
-    borderStyle: borders.style,
-
     arrowSize: '0.5rem',
+
+    focusOutlineStyle: borders.style,
+    focusOutlineWidth: borders.widthMedium,
+    focusOutlineOffset: '0.3125rem',
+    focusOutlineInset: '0rem', // do not use unitless zero (for CSS calc())
+
+    focusColorInfo: colors.borderInfo,
+    focusColorDanger: colors.borderDanger,
+    focusColorSuccess: colors.borderSuccess,
+    focusColorInverse: colors.borderLightest,
 
     xSmallMaxWidth: breakpoints.xSmall,
     smallMaxWidth: breakpoints.small,
