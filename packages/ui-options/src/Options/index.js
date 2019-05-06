@@ -62,6 +62,10 @@ class Options extends Component {
     */
     role: PropTypes.string,
     /**
+    * The the actual list element
+    */
+    elementRef: PropTypes.func,
+    /**
     * Content to render as a label. Mostly for when the component is nested
     */
     renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
@@ -71,6 +75,7 @@ class Options extends Component {
   static defaultProps = {
     as: 'span',
     role: 'list',
+    elementRef: (node) => {},
     renderLabel: null,
     children: null
   }
@@ -135,6 +140,7 @@ class Options extends Component {
     const {
       as,
       role,
+      elementRef,
       renderLabel
     } = this.props
 
@@ -146,6 +152,7 @@ class Options extends Component {
         {renderLabel && this.renderLabel()}
         <View
           {...passthroughProps}
+          elementRef={elementRef}
           className={styles.list}
           as={as}
           role={role}

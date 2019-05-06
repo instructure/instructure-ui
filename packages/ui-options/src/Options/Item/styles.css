@@ -37,7 +37,7 @@
   user-select: none;
 }
 
-.label {
+.container {
   display: block;
   padding: var(--padding);
 }
@@ -80,37 +80,45 @@
 .containsList {
   cursor: default;
 
-  & > .label {
+  & > .container {
     padding: 0;
   }
 }
 
 .hasContentBeforeLabel {
-  .label {
+  .container {
     padding-inline-end: var(--iconPadding);
     padding-inline-start: calc(var(--iconPadding) * 2 + 1em);
   }
 }
 
 .hasContentAfterLabel {
-  .label {
+  .container {
     padding-inline-end: calc(var(--iconPadding) * 2 + 1em);
     padding-inline-start: var(--iconPadding);
   }
 }
 
 /* stylelint-disable selector-max-class */
+/* stylelint-disable no-duplicate-selectors */
 .hasContentAfterLabel.hasContentBeforeLabel {
-  .label {
+  .container {
     padding-inline-end: calc(var(--iconPadding) * 2 + 1em);
     padding-inline-start: calc(var(--iconPadding) * 2 + 1em);
   }
 }
 
-.hasContentBeforeLabel.isGrouped {
-  .label {
-    padding-inline-end: var(--iconPadding);
-    padding-inline-start: calc(var(--groupPadding) + var(--iconPadding) + 1em);
+.root {
+  /* nested item, with no icon */
+  .root:not(.hasContentBeforeLabel) {
+    .container {
+      padding-inline-start: var(--nestedPadding);
+    }
+
+    .content--before {
+      offset-inline-start: var(--nestedPadding);
+    }
   }
 }
+/* stylelint-enable no-duplicate-selectors */
 /* stylelint-enable selector-max-class */

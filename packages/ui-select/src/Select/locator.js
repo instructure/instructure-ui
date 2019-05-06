@@ -21,30 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import { locator } from '@instructure/ui-test-utils'
 
+import OptionsLocator from '@instructure/ui-options/lib/Options/locator'
+import PopoverLocator from '@instructure/ui-overlays/lib/Popover/locator'
 
-/**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
+import { Select } from './index'
+
+export default locator(Select.selector, {
+  findInput: (...args) => locator('input').find(...args),
+  findOptionsList: async (element, ...args) => {
+    const content = await PopoverLocator.findContent(element, ...args)
+    return content ? OptionsLocator.find(content.getDOMNode()) : null
   }
-
-  if (!option || typeof option !== 'object') {
-    return null
-  }
-
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
-  }
-
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
-
-  return null
-}
+})

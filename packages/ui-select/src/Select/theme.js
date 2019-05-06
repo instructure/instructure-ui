@@ -22,29 +22,16 @@
  * SOFTWARE.
  */
 
+export default function generator ({ colors, typography }) {
+  return {
+    fontSize: typography.fontSizeMedium,
+    fontFamily: typography.fontFamily,
+    fontWeight: typography.fontWeightNormal,
+    smallIconSize: typography.fontSizeXSmall,
+    mediumIconSize: typography.fontSizeSmall,
+    largeIconSize: typography.fontSizeMedium,
 
-/**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
+    color: colors.textDarkest,
+    background: colors.backgroundLightest
   }
-
-  if (!option || typeof option !== 'object') {
-    return null
-  }
-
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
-  }
-
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
-
-  return null
 }

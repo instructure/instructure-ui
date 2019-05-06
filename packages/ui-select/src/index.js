@@ -22,29 +22,4 @@
  * SOFTWARE.
  */
 
-
-/**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
-  }
-
-  if (!option || typeof option !== 'object') {
-    return null
-  }
-
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
-  }
-
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
-
-  return null
-}
+export { Select } from './Select'

@@ -37,7 +37,8 @@ export default function generator ({ colors, typography, spacing }) {
     selectedBackground: colors.backgroundDark,
 
     padding: `${spacing.xSmall} ${spacing.small}`,
-    iconPadding: spacing.small
+    iconPadding: spacing.small,
+    nestedPadding: spacing.medium
   }
 }
 

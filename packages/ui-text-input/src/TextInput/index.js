@@ -79,6 +79,10 @@ class TextInput extends Component {
     */
     inputRef: PropTypes.func,
     /**
+    * a function that provides a reference a parent of the input element
+    */
+    inputContainerRef: PropTypes.func,
+    /**
     * the selected value (must be accompanied by an `onChange` prop)
     */
     value: controllable(PropTypes.string),
@@ -110,6 +114,7 @@ class TextInput extends Component {
     disabled: false,
     readOnly: false,
     inputRef: function (input) {},
+    inputContainerRef: function (container) {},
     onChange: function (event, value) {},
     onBlur: function (event) {},
     onFocus: function (event) {},
@@ -254,7 +259,7 @@ class TextInput extends Component {
             renderBeforeOrAfter ?
               <Flex wrapItems>
                 {renderBeforeInput &&
-                  <Flex.Item padding="0 0 0 x-small">
+                  <Flex.Item padding="0 0 0 small">
                     {callRenderProp(renderBeforeInput)}
                   </Flex.Item>
                 }
@@ -269,7 +274,7 @@ class TextInput extends Component {
                       {this.renderInput()}
                     </Flex.Item>
                     {renderAfterInput &&
-                      <Flex.Item padding="0 x-small 0 0">
+                      <Flex.Item padding="0 small 0 0">
                         {callRenderProp(renderAfterInput)}
                       </Flex.Item>
                     }

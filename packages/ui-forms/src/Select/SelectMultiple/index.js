@@ -49,7 +49,7 @@ const optionType = PropTypes.shape({
 
 /**
 ---
-parent: Select
+parent: DeprecatedSelect
 ---
 **/
 @testable()

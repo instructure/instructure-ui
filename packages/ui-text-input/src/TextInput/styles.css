@@ -71,6 +71,10 @@ input[type].input {
   background: transparent;
   border: none;
 
+  &[autocomplete="off"]::-webkit-contacts-auto-fill-button {
+    display: none !important; /* stylelint-disable-line declaration-no-important */
+  }
+
   &:focus {
     box-shadow: initial;
   }

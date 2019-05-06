@@ -22,29 +22,40 @@
  * SOFTWARE.
  */
 
+import { Component } from 'react'
+import PropTypes from 'prop-types'
+
+import { Children as ChildrenPropTypes } from '@instructure/ui-prop-types'
 
 /**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
+---
+parent: Select
+id: Select.Group
+---
+@module Group
+**/
+class Group extends Component {
+  static propTypes = {
+    /**
+    * The label associated with the group options.
+    */
+    renderLabel: PropTypes.oneOfType([PropTypes.node, PropTypes.func]).isRequired,
+    /**
+    * Children of type `<Select.Option />` that will be considered part of the group.
+    */
+    children: ChildrenPropTypes.oneOf([Option]),
   }
 
-  if (!option || typeof option !== 'object') {
+  static defaultProps = {
+    children: null
+  }
+
+  render () {
+    // this component is only used for prop validation. Select.Group children
+    // are parsed in Select and rendered as Options components
     return null
   }
-
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
-  }
-
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
-
-  return null
 }
+
+export default Group
+export { Group }

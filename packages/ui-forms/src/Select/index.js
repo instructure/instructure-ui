@@ -41,6 +41,7 @@ import parseOptions from './utils/parseOptions'
 /**
 ---
 category: components
+id: DeprecatedSelect
 ---
 **/
 @testable()

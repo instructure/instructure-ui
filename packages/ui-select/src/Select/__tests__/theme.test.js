@@ -22,29 +22,25 @@
  * SOFTWARE.
  */
 
+import { expect } from '@instructure/ui-test-utils'
+import { contrast } from '@instructure/ui-color-utils'
 
-/**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
-  }
+import { Select } from '../index'
 
-  if (!option || typeof option !== 'object') {
-    return null
-  }
+describe('Select.theme', () => {
+  describe('with the default theme', () => {
+    const variables = Select.generateTheme()
 
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
-  }
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(3)
+    })
+  })
 
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
+  describe('with the high contrast canvas theme', () => {
+    const variables = Select.generateTheme('canvas-high-contrast')
 
-  return null
-}
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.background, variables.color)).to.be.above(4.5)
+    })
+  })
+})

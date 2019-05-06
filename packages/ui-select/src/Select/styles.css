@@ -22,29 +22,31 @@
  * SOFTWARE.
  */
 
+.root {
+  font-size: var(--fontSize);
+  font-family: var(--fontFamily);
+  font-weight: var(--fontWeight);
+  color: var(--color);
+}
 
-/**
-* ---
-* parent: DeprecatedSelect
-* private: true
-* ---
-*/
-export default function getOptionId (option) {
-  if (typeof option === 'string') {
-    return option
+.small {
+  .icon {
+    font-size: var(--smallIconSize);
   }
+}
 
-  if (!option || typeof option !== 'object') {
-    return null
+.medium {
+  .icon {
+    font-size: var(--mediumIconSize);
   }
+}
 
-  if (typeof option.id !== 'undefined' && option.id !== null) {
-    return option.id
+.large {
+  .icon {
+    font-size: var(--largeIconSize);
   }
+}
 
-  if (typeof option.value !== 'undefined' && option.value !== null) {
-    return option.value
-  }
-
-  return null
+.assistiveText {
+  display: none;
 }

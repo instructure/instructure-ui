@@ -144,7 +144,6 @@ describe('<Item />', async () => {
 
     expect(content).to.exist()
     expect(icon).to.exist()
-    item.debug()
     expect(item.hasClass(`.${styles.hasContentBeforeLabel}`))
   })
 
@@ -173,9 +172,11 @@ describe('<Item />', async () => {
     )
     const item = await ItemLocator.find()
     const options = await item.findNestedOptions()
-    const list = await options.find('ul')
+    const nestedList = await options.find('ul')
+    const nestedItem = await options.findItem(':textContent("Sub item")')
 
-    expect(list).to.exist()
+    expect(nestedList).to.exist()
+    expect(nestedItem).to.exist()
   })
 
   describe('with generated examples', async () => {

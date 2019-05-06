@@ -36,7 +36,7 @@ example: true
 example: true
 ---
 <View display="block" width="300px">
-  <Options role="menu">
+  <Options role="menu" as="ul">
     <Options.Item role="menuitem">
       Option one
     </Options.Item>
@@ -46,15 +46,24 @@ example: true
     <Options.Item role="menuitem" renderAfterLabel={IconArrowOpenEndSolid}>
       Flyout menu option
     </Options.Item>
+    <Options.Separator as="li" />
+    <Options role="menu" as="ul" renderLabel={'Sub menu'}>
+      <Options.Item role="menuitem">
+        Sub option one
+      </Options.Item>
+      <Options.Item role="menuitem">
+        Sub option two
+      </Options.Item>
+    </Options>
     <Options.Separator />
-    <Options role="menu" renderLabel={'Nested group'}>
+    <Options role="menu" as="ul" renderLabel={'Radio group'}>
       <Options.Item role="menuitemradio" renderBeforeLabel={IconCheckSolid}>
-        Nested option one
+        Radio option one
       </Options.Item>
       <Options.Item role="menuitemradio" renderBeforeLabel={
         <IconCheckLine style={{opacity: 0}} />
       }>
-        Nested option two
+        Radio option two
       </Options.Item>
     </Options>
     <Options.Separator />

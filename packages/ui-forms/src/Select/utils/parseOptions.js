@@ -27,7 +27,7 @@ import { error } from '@instructure/console/macro'
 
 /**
 ---
-parent: Select
+parent: DeprecatedSelect
 private: True
 id: parseOptions
 ---

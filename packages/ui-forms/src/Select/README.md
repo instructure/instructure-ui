@@ -1,6 +1,9 @@
 ---
-describes: Select
+describes: DeprecatedSelect
+id: DeprecatedSelect__README
 ---
+
+**DEPRECATED:** Use the controlled [Select from ui-select](#Select) instead. View that [documentation](#Select) for examples of managing state for a `Select`.
 
 Select is an accessible, custom styled combobox component with optional autocomplete.
 - Select behaves similar to [Popover](#Popover) but provides additional semantic markup and focus behavior as a form input.
@@ -21,7 +24,7 @@ example: true
   margin="0 auto xx-large auto"
   padding="x-small x-small x-large x-small"
 >
-  <Select
+  <DeprecatedSelect
     size="small"
     label="Small"
     assistiveText="3 options available. Use arrow keys to navigate options."
@@ -29,18 +32,18 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
-  <Select
+  <DeprecatedSelect
     label="Medium"
     assistiveText="3 options available. Use arrow keys to navigate options."
   >
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
-  <Select
+  <DeprecatedSelect
     size="large"
     label="Large"
     assistiveText="3 options available. Use arrow keys to navigate options."
@@ -48,7 +51,7 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -65,10 +68,10 @@ example: true
   margin="0 auto xx-large auto"
   padding="x-small"
 >
-  <Select label="Inline select" layout="inline">
+  <DeprecatedSelect label="Inline select" layout="inline">
     <option value="foo">Foo</option>
     <option disabled value="bar">Bar</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -130,7 +133,7 @@ class Example extends React.Component {
           <Button onClick={this.cl} margin="0 medium 0 0">clear selected option</Button>
           Current Value: <span style={{whiteSpace: 'pre'}}>'{this._select ? this._select.value : ''}'</span>
         </p>
-        <Select
+        <DeprecatedSelect
           ref={el => this._select = el}
           label="Type anything."
           allowCustom
@@ -142,7 +145,7 @@ class Example extends React.Component {
           <option value="1">Foo</option>
           <option value="2">Bar</option>
           <option value="3">Baz</option>
-        </Select>
+        </DeprecatedSelect>
       </View>
     )
   }
@@ -165,16 +168,16 @@ example: true
   margin="0 auto medium auto"
   padding="x-small"
 >
-  <Select
+  <DeprecatedSelect
     label="Single"
     defaultOption="bar"
     onChange={(event, option) => console.log(option.value)}
   >
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
-  <Select
+  <DeprecatedSelect
     label="Multiple"
     assistiveText="Start typing to search. Press the down arrow to select multiple options."
     defaultOption={['foo', 'bar']}
@@ -193,7 +196,7 @@ example: true
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
     <option value="baz">Baz</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -208,16 +211,16 @@ example: true
   margin="0 auto medium auto"
   padding="x-small"
 >
-  <Select
+  <DeprecatedSelect
     label="Single"
     defaultOption="bar"
     disabled
   >
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
-  <Select
+  <DeprecatedSelect
     label="Multiple"
     defaultOption={['foo', 'bar']}
     formatSelectedOption={(tag) => (
@@ -228,7 +231,7 @@ example: true
   >
     <option value="foo">Foo</option>
     <option value="bar">Bar</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -243,10 +246,10 @@ example: true
   margin="0 auto xx-large auto"
   padding="x-small"
 >
-  <Select label="Icon select">
+  <DeprecatedSelect label="Icon select">
     <option value="foo" icon={IconUserLine}>Foo</option>
     <option value="bar" icon={IconUserLine}>Bar</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -257,7 +260,7 @@ example: true
 example: true
 ---
 <div style={{ padding: '0 0 18rem 0', margin: '0 auto' }}>
-  <Select
+  <DeprecatedSelect
     label="Group Select"
     onChange={(e, opt) => console.log(`option from '${opt.group}' selected`)}
   >
@@ -272,7 +275,7 @@ example: true
       <option value="item5" icon={IconUserSolid}>Item Five</option>
       <option value="item6" icon={IconUserSolid}>Item Six</option>
     </optgroup>
-  </Select>
+  </DeprecatedSelect>
 
 </div>
 ```
@@ -288,7 +291,7 @@ example: true
   margin="0 auto xx-large auto"
   padding="x-small x-small x-large x-small"
 >
-  <Select
+  <DeprecatedSelect
     layout="inline"
     label="Choose a snack"
     messages={[{ text: 'You need to make a selection', type: 'error' }]}>
@@ -296,9 +299,9 @@ example: true
     <option value="oranges">Oranges</option>
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
-  <Select
+  <DeprecatedSelect
     layout="inline"
     label="Choose a snack"
     messages={[{ text: 'Great job choosing something healthy!', type: 'success' }]}>
@@ -306,7 +309,7 @@ example: true
     <option value="oranges">Oranges</option>
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 
@@ -333,7 +336,7 @@ class Example extends React.Component {
     ]
 
     return (
-      <Select
+      <DeprecatedSelect
         {...this.props}
         assistiveText="Start typing to search. Press the down arrow to navigate results."
         announcement={this.state.announcement}
@@ -356,7 +359,7 @@ class Example extends React.Component {
             {label}
           </option>
         ))}
-      </Select>
+      </DeprecatedSelect>
     )
   }
 }
@@ -386,20 +389,20 @@ example: true
   margin="0 auto x-large auto"
   padding="x-small"
 >
-  <Select label="Choose a snack" inline>
+  <DeprecatedSelect label="Choose a snack" inline>
     <option value="apples">Apples</option>
     <option value="oranges">Oranges</option>
     <option value="bananas">Bananas</option>
     <option value="candy" disabled>Candy</option>
-  </Select>
+  </DeprecatedSelect>
   <br />
   <br />
-  <Select disabled label="What would you like for a snack?" inline>
+  <DeprecatedSelect disabled label="What would you like for a snack?" inline>
     <option value="apples" disabled>Apples</option>
     <option value="oranges">Oranges</option>
     <option value="bananas">Bananas</option>
     <option value="candy">Candy</option>
-  </Select>
+  </DeprecatedSelect>
 </View>
 ```
 ### Select with autocomplete
@@ -422,7 +425,7 @@ class Example extends React.Component {
     ]
 
     return (
-      <Select
+      <DeprecatedSelect
         {...this.props}
         assistiveText="Start typing to search. Press the down arrow to navigate results."
         formatSelectedOption={(tag) => (
@@ -434,7 +437,7 @@ class Example extends React.Component {
             {label}
           </option>
         ))}
-      </Select>
+      </DeprecatedSelect>
     )
   }
 }
@@ -537,7 +540,7 @@ class Example extends React.Component {
 
   render () {
     return (
-      <Select
+      <DeprecatedSelect
         editable
         inputRef={this.handleInputRef}
         loadingText={this.state.loading ? 'Loading options' : null}
@@ -552,7 +555,7 @@ class Example extends React.Component {
             {label}
           </option>
         ))}
-      </Select>
+      </DeprecatedSelect>
     )
   }
 }
@@ -621,7 +624,7 @@ class Example extends React.Component {
     const { initialOption, ...props } = this.props
     return (
       <div>
-        <Select
+        <DeprecatedSelect
           editable
           {...props}
           formatSelectedOption={(tag) => (
@@ -647,7 +650,7 @@ class Example extends React.Component {
           <option value="14">Hawaii</option>
           <option value="15">Idaho</option>
           <option value="16">Illinois</option>
-        </Select>
+        </DeprecatedSelect>
         <div>Value selected: {this.getOptionLabel()}</div>
         <br />
         <Button onClick={this.handleFlorida}>Only select Florida</Button>
@@ -716,7 +719,7 @@ class Example extends React.Component {
   render () {
     return (
       <div>
-        <Select
+        <DeprecatedSelect
           editable
           {...this.props}
           selectedOption={this.state.options}
@@ -729,7 +732,7 @@ class Example extends React.Component {
           <option value="4">Pears</option>
           <option value="5">Cherries</option>
 
-        </Select>
+        </DeprecatedSelect>
         <div>Value selected: {this.getOptionLabel()}</div>
         <br />
         <Button onClick={this.clear}>Clear Selections</Button>
@@ -756,7 +759,7 @@ class Example extends React.Component {
   render () {
     return (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <Select
+        <DeprecatedSelect
           {...this.props}
           editable
           inline
@@ -778,7 +781,7 @@ class Example extends React.Component {
           <option value="14">Hawaii</option>
           <option value="15">Idaho</option>
           <option value="16">Illinois</option>
-        </Select>
+        </DeprecatedSelect>
         &nbsp;
         <Text>{this.props.width}</Text>
       </div>

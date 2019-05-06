@@ -47,7 +47,7 @@ import theme from './theme'
 
 /**
 ---
-parent: Select
+parent: DeprecatedSelect
 ---
 **/
 @testable()

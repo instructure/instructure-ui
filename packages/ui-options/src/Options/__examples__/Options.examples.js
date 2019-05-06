@@ -36,36 +36,45 @@ export default {
         <Options.Item key="option-2" variant="highlighted">
           Option two
         </Options.Item>,
-        <Options.Item key="option-3">
+        <Options.Item key="option-3" variant="selected">
           Option three
         </Options.Item>,
-        <Options.Item key="option-4">
+        <Options.Item key="option-4" variant="disabled">
           Option four
         </Options.Item>
       ],
       [
-        <Options.Item key="option-1">
-          Option one
-        </Options.Item>,
         <Options.Item
-          key="option-2"
+          key="option-1"
           variant="highlighted"
           renderAfterLabel={IconArrowOpenEndSolid}
         >
           Flyout menu option
         </Options.Item>,
+        <Options.Item key="option-2">
+          Option one
+        </Options.Item>,
         <Options.Separator key="sep-1" />,
-        <Options key="options-nest" renderLabel={'Nested List'}>
+        <Options key="sub-list" renderLabel={'Sub list'}>
+          <Options.Item variant="selected">
+            Sub option one
+          </Options.Item>
+          <Options.Item>
+            Sub option two
+          </Options.Item>
+        </Options>,
+        <Options.Separator key="sep-2" />,
+        <Options key="icon-list" renderLabel={'Icon List'}>
           <Options.Item renderBeforeLabel={IconCheckSolid}>
-            Nested option one
+            Icon option one
           </Options.Item>
           <Options.Item renderBeforeLabel={
             <IconCheckSolid style={{opacity: 0}} />
           }>
-            Nested option two
+            Icon option two
           </Options.Item>
         </Options>,
-        <Options.Separator key="sep-2" />,
+        <Options.Separator key="sep-3" />,
         <Options.Item key="option-3">
           Option two
         </Options.Item>

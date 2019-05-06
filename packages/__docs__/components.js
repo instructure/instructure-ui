@@ -61,7 +61,7 @@ export {
   RadioInput,
   RadioInputGroup,
   RangeInput,
-  Select,
+  Select as DeprecatedSelect,
   TextArea,
   TextInput as DeprecatedTextInput,
   TimeInput
@@ -105,6 +105,7 @@ export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'
 export { Pages } from '@instructure/ui-pages'
 export { Portal } from '@instructure/ui-portal'
+export { Select } from '@instructure/ui-select'
 export { Selectable } from '@instructure/ui-selectable'
 export { ApplyTheme } from '@instructure/ui-themeable'
 export { InlineSVG, SVGIcon } from '@instructure/ui-svg-images'

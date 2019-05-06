@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, generateA11yTests } from '@instructure/ui-test-utils'
+import { expect, mount, stub, generateA11yTests } from '@instructure/ui-test-utils'
 
 import { Options } from '../index'
 import OptionsLocator from '../locator'
@@ -49,6 +49,20 @@ describe('<Options />', async () => {
     const items = await options.findAllItems()
 
     expect(items.length).to.equal(2)
+  })
+
+  it('should provide elementRef', async () => {
+    const elementRef = stub()
+    await mount(
+      <Options elementRef={elementRef} as="ul">
+        <Options.Item>Option one</Options.Item>
+        <Options.Item>Option two</Options.Item>
+      </Options>
+    )
+    const options = await OptionsLocator.find()
+    const list = await options.find('ul')
+
+    expect(elementRef).to.have.been.calledWith(list.getDOMNode())
   })
 
   it('should render designated tag if `as` prop is specified', async () => {

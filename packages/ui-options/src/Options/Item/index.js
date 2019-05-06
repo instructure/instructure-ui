@@ -139,7 +139,7 @@ class Item extends Component {
       >
         <span
           {...passthroughProps}
-          className={styles.label}
+          className={styles.container}
           role={role}
         >
           {children}
