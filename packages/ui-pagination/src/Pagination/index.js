@@ -124,6 +124,7 @@ class Pagination extends Component {
   }
 
   static Page = PaginationButton
+  static Navigation = PaginationArrowButton
 
   constructor (...args) {
     super(...args)

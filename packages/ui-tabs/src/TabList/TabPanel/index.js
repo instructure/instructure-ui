@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: TabList
+id: TabList.Panel
 ---
 **/
 @testable()

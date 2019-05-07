@@ -44,6 +44,7 @@ import theme from './theme'
 /**
 ---
 parent: Menu
+id: Menu.Item
 ---
 **/
 @testable()

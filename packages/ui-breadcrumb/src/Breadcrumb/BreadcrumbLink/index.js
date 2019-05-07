@@ -32,6 +32,7 @@ import { testable } from '@instructure/ui-testable'
 /**
 ---
 parent: Breadcrumb
+id: Breadcrumb.Link
 ---
 **/
 @testable()

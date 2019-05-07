@@ -40,6 +40,7 @@ import { ColHeader } from '../ColHeader'
 /**
 ---
 parent: Table
+id: Table.Head
 ---
 **/
 @themeable(theme, styles)

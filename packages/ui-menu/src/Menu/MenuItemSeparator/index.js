@@ -33,6 +33,7 @@ import theme from './theme'
 /**
 ---
 parent: Menu
+id: Menu.Separator
 ---
 @module MenuItemSeparator
 **/

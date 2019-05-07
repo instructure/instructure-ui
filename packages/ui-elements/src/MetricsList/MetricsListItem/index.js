@@ -35,6 +35,7 @@ import theme from './theme'
 /**
 ---
 parent: MetricsList
+id: MetricsList.Item
 ---
 **/
 @testable()

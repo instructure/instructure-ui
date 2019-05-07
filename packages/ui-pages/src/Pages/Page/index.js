@@ -34,6 +34,7 @@ import { View } from '@instructure/ui-layout'
 /**
 ---
 parent: Pages
+id: Pages.Page
 ---
 **/
 class Page extends Component {

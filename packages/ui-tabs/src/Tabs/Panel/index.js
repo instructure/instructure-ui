@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: Tabs
+id: Tabs.Panel
 ---
 **/
 @testable()
@@ -45,7 +46,7 @@ class Panel extends Component {
   static propTypes = {
     /**
     * The content that will be rendered in the corresponding <Tab /> and will label
-    * this `<TabPanel />` for screen readers
+    * this `<Tabs.Panel />` for screen readers
     */
     title: PropTypes.node.isRequired,
     children: PropTypes.node,
@@ -59,7 +60,7 @@ class Panel extends Component {
     padding: ThemeablePropTypes.spacing,
     textAlign: PropTypes.oneOf(['start', 'center', 'end']),
     /**
-    * A ref to this `<TabPanel />` component instance
+    * A ref to this `<Tabs.Panel />` component instance
     */
     tabRef: PropTypes.func
   }

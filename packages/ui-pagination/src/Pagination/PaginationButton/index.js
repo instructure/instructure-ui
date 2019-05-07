@@ -31,6 +31,7 @@ import { testable } from '@instructure/ui-testable'
 /**
 ---
 parent: Pagination
+id: Pagination.Page
 ---
 **/
 

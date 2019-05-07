@@ -45,6 +45,7 @@ import theme from './theme'
 /**
 ---
 parent: Grid
+id: Grid.Row
 ---
 **/
 @themeable(theme, styles)

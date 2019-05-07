@@ -38,6 +38,7 @@ import theme from './theme'
 /**
 ---
 parent: Table
+id: Table.Body
 ---
 **/
 @themeable(theme, styles)

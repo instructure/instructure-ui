@@ -36,6 +36,7 @@ import theme from './theme'
 /**
 ---
 parent: Table
+id: Table.Cell
 ---
 **/
 @themeable(theme, styles)

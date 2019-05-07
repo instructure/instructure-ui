@@ -41,6 +41,7 @@ import theme from './theme'
 /**
 ---
 parent: Menu
+id: Menu.Group
 ---
 **/
 @testable()

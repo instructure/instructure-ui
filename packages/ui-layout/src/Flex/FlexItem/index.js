@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: Flex
+id: Flex.Item
 ---
 **/
 @themeable(theme, styles)

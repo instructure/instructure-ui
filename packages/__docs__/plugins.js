@@ -57,7 +57,8 @@ module.exports = [
     files: [
       '**/*.md', // package READMEs
       '**/src/*.js', // util src files
-      '**/src/*/*.js' // component src files
+      '**/src/*/*.js', // component src files
+      '**/src/*/*/*.js' // child component src files
     ],
     ignore: [
       '*macro.js',

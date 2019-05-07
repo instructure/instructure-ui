@@ -41,6 +41,7 @@ import theme from './theme'
 /**
 ---
 parent: Table
+id: Table.Row
 ---
 **/
 @themeable(theme, styles)

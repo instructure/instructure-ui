@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: List
+id: List.Item
 ---
 **/
 @testable()
