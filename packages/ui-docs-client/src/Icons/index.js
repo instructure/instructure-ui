@@ -177,12 +177,13 @@ class Icons extends Component {
   }
 
   renderUsage (name, variant, glyph) {
-    const { requirePath } = this.selectedFormat
+    const { requirePath, packageName } = this.selectedFormat
 
     let example
 
     if (glyph.cssFile) {
       example = `\
+/*** using the webpack css-loader and ES modules ***/
 import '${requirePath}/${variant}/${glyph.cssFile}'
 
 class MyIcon extends React.Component {
@@ -192,7 +193,14 @@ class MyIcon extends React.Component {
 }`
     } else if (glyph.displayName) {
       example = `\
-import ${glyph.displayName} from '${requirePath}/${glyph.displayName}'
+/*** ES Modules (with tree shaking) ***/
+import { ${glyph.displayName} } from '${packageName}'
+
+/*** ES Modules (without tree shaking) ***/
+import { ${glyph.displayName} } from '${requirePath}/${glyph.displayName}'
+
+/*** CommonJS ***/
+const { ${glyph.displayName}  } = require('${requirePath}/${glyph.displayName}')
 
 class MyIcon extends React.Component {
   render() {

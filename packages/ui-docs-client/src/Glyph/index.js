@@ -96,14 +96,13 @@ class Glyph extends Component {
   renderGlyphInfo (glyph) {
     if (glyph.codepoint) {
       return `\\${glyph.codepoint}`
-    } else if (glyph.displayName) {
-      return glyph.glyphName
     }
   }
 
   render () {
     const { name, variants } = this.props
     const firstVariant = variants[Object.keys(variants)[0]]
+    const info = this.renderGlyphInfo(firstVariant)
 
     return (
       <div className={styles.root}>
@@ -115,9 +114,7 @@ class Glyph extends Component {
               ))
           }
         </div>
-        <div className={styles.info}>
-          { this.renderGlyphInfo(firstVariant) || name }
-        </div>
+        { info && <div className={styles.info}>{info}</div> }
         <Heading level="h3">
           { firstVariant.glyphName }
         </Heading>

@@ -100,7 +100,7 @@ module.exports = [
     icons: {
       packageName: '@instructure/ui-icons',
       formats: {
-        React: '@instructure/ui-icons',
+        React: '@instructure/ui-icons/lib',
         SVG: '@instructure/ui-icons/lib/svg',
         Font: '@instructure/ui-icons/lib/font'
       }

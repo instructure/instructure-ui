@@ -17,7 +17,7 @@
   border: var(--border);
   border-radius: var(--borderRadius);
   position: relative;
-  overflow: scroll;
+  overflow: hidden;
   margin-bottom: 0.5rem;
 }
 

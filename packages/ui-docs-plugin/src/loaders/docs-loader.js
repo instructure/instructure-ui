@@ -93,10 +93,12 @@ function parseThemes (themes = [], options) {
 function parseIcons (icons = {}) {
   const formats = Object.keys(icons.formats || []).map((format) => {
     const requirePath = icons.formats[format]
+    const packageName = icons.packageName
     return `\
 'icons-${format.toLowerCase()}': {
   format: '${format}',
   glyphs: require('${requirePath}'),
+  packageName: '${packageName}',
   requirePath: '${requirePath}'
 }`
   })
