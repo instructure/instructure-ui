@@ -27,6 +27,7 @@ import React from 'react'
 import { Menu, MenuItem, MenuItemSeparator, MenuItemGroup } from '../index'
 
 export default {
+  maxExamplesPerPage: 50,
   propValues: {
     trigger: [ <button key="open">Open Menu</button>, null ],
     placement: [

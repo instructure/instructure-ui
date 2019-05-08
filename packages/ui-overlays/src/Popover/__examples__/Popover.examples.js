@@ -26,6 +26,7 @@ import React from 'react'
 import { Popover } from '../'
 
 export default {
+  maxExamplesPerPage: 50,
   propValues: {
     withArrow: [true, false],
     placement: ['bottom center'],

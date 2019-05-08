@@ -59,6 +59,7 @@ const grow = [
 ]
 
 export default {
+  maxExamplesPerPage: 50,
   propValues: {
     children: [
       regular,
