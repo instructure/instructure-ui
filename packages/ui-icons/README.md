@@ -44,7 +44,7 @@ const MyComponent = () => {
 
 - Run `yarn export:icons` from the repository root directory to generate the SVG files. Troubleshooting: if sketchtool is not installed do so by running `curl -L https://raw.githubusercontent.com/cognitom/gulp-sketch/master/install-sketchtool.sh | sudo sh`
 
-- Verify that the art-boards are exported as SVG to the `/src/__svg__` directory. There should be directories for each variant based on the art-board names.
+- Verify that the art-boards are exported as SVG to the `/svg` directory. There should be directories for each variant based on the art-board names (Line and Solid).
 
 - Run `yarn dev` from the repository root directory to start the local server and check the generated output.
 
@@ -62,7 +62,7 @@ const MyComponent = () => {
 
 - Export strokes to vector (Layer > Convert to Outlines).
 
-- Don’t use borders on vectors, especially not inside/outside borders which aren’t supported in SVG.
+- Don’t use borders on vectors, especially not inside/outside borders which aren’t supported in SVG. Do not use clipping paths as that will have adverse affects when converting sketch to SVG.
 
 - Make sure none of the paths go outside of the art-board. If so, the glyph in the icon font will be misaligned.
   Draw inside the lines.
