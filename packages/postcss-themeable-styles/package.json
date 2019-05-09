@@ -16,7 +16,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "postcss": "^7.0.14"
+    "postcss": "^7"
   },
   "publishConfig": {
     "access": "public"

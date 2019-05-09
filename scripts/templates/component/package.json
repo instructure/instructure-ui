@@ -20,15 +20,15 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@instructure/ui-babel-preset": "^6",
-    "@instructure/ui-test-utils": "^6",
-    "@instructure/ui-color-utils": "^6"
+    "@instructure/ui-babel-preset": "^${VERSION}",
+    "@instructure/ui-test-utils": "^${VERSION}",
+    "@instructure/ui-color-utils": "^${VERSION}"
   },
   "dependencies": {
     "@babel/runtime": "^7",
-    "@instructure/console": "^6",
-    "@instructure/ui-themeable": "^6",
-    "@instructure/ui-testable": "^6",
+    "@instructure/console": "^${VERSION}",
+    "@instructure/ui-themeable": "^${VERSION}",
+    "@instructure/ui-testable": "^${VERSION}",
     "prop-types": "^15",
     "react": "^15 || ^16"
   },

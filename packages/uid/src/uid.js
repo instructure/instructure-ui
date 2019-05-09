@@ -30,7 +30,6 @@ const dictionaryLengthMinus1 = dictionary.length - 1
 /**
  * ---
  * category: utilities
- * id: uid_doc
  * ---
  * Generate a unique (CSS-safe) id string
  *

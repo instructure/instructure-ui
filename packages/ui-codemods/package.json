@@ -17,7 +17,7 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "jest": "^24.7.1"
+    "jest": "^24.8.0"
   },
   "dependencies": {
     "babel-core": "^7.0.0-bridge.0",
