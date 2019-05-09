@@ -4,7 +4,7 @@ set -e
 
 PACKAGE_DIR=packages
 PACKAGE_TEMPLATE_DIR=scripts/templates/component
-COMPONENT_TEMPLATE_DIR=$PACKAGE_TEMPLATE_DIR/src/components/Component
+COMPONENT_TEMPLATE_DIR=$PACKAGE_TEMPLATE_DIR/src/Component
 
 current_version=$(node -p "require('./lerna').version")
 
@@ -35,7 +35,7 @@ if [ ! -d "$COMPONENT_TEMPLATE_DIR" ]; then
   exit 1
 fi
 
-COMPONENT_DIR=$PACKAGE_DIR/$PACKAGE/src/components
+COMPONENT_DIR=$PACKAGE_DIR/$PACKAGE/src
 
 if [ -d "$PACKAGE_DIR/$PACKAGE" ]; then
   read -p "Package $PACKAGE exists! Continue? [Y/n]" CONT
