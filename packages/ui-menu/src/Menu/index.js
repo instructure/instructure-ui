@@ -274,10 +274,12 @@ class Menu extends Component {
 
     if (key === down || key === pgdn) {
       event.preventDefault()
+      event.stopPropagation()
       this.moveFocus(1)
       this.hideActiveSubMenu(event)
     } else if (key === up || key === pgup) {
       event.preventDefault()
+      event.stopPropagation()
       this.moveFocus(-1)
       this.hideActiveSubMenu(event)
     } else if (key === tab || key === left) {

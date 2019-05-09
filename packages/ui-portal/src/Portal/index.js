@@ -26,10 +26,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
-import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
-import { shallowEqual } from '@instructure/ui-utils'
 import { testable } from '@instructure/ui-testable'
+
+import { ReactPortal } from './ReactPortal'
+import { SubtreePortal } from './SubtreePortal'
+
+const IS_CREATE_PORTAL_SUPPORTED = typeof ReactDOM.createPortal === 'function'
 
 /**
 ---
@@ -38,7 +41,6 @@ category: components/utilities
 @module Portal
 **/
 @testable()
-@bidirectional()
 class Portal extends Component {
   static propTypes = {
     /**
@@ -69,125 +71,36 @@ class Portal extends Component {
     /**
      * The children to be rendered within the `<Portal />`
      */
-    children: PropTypes.node
+    children: PropTypes.node,
+    /**
+    * provides a reference to the underlying html element
+    */
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
     open: false,
     insertAt: 'bottom',
-    onOpen: () => {},
+    onOpen: (DOMNode) => {},
     onClose: () => {},
     mountNode: null,
-    children: null
+    children: null,
+    elementRef: (el) => {}
   }
 
-  componentDidMount () {
-    this.renderPortal(this.props)
-  }
-
-  shouldComponentUpdate (nextProps, nextState) {
-    return !(shallowEqual(this.props, nextProps) && shallowEqual(this.state, nextState))
-  }
-
-  componentWillReceiveProps (nextProps) {
-    this.renderPortal(nextProps)
-  }
-
-  componentWillUnmount () {
-    this.removePortal(this.props)
+  handleElementRef = (el) => {
+    if (el) {
+      this.DOMNode = el
+      if (typeof this.props.elementRef === 'function') {
+        this.props.elementRef(el)
+      }
+    }
   }
 
   render () {
-    return null
-  }
-
-  renderPortal (props) {
-    const isInitialMount = !this.DOMNode
-    const mountNode = this.mountNode
-
-    let children = props.children
-
-    // Wrap text in a span since subtree will only render a single top-level node
-    if (typeof children === 'string' && children.length > 0) {
-      children = (
-        <span>
-          {children}
-        </span>
-      )
-    }
-
-    // Render subtree if Portal is open and has children to render
-    if (props.open && React.Children.count(children) > 0) {
-      // Create node if it doesn't already exist
-      if (!this.DOMNode) {
-        this.DOMNode = document.createElement('span')
-        this.DOMNode.setAttribute('dir', this.dir)
-      }
-
-      // Append node to container if it isn't already
-      if (this.DOMNode.parentNode !== mountNode) {
-        if (this.props.insertAt === 'bottom') {
-          mountNode.appendChild(this.DOMNode)
-        } else {
-          mountNode.insertBefore(this.DOMNode, mountNode.firstChild)
-        }
-      }
-
-      // Notify that subtree has been rendered if props ask for it
-      const handleMount = () => {
-        // Only fire onOpen if Portal was closed and is now open
-        if ((isInitialMount || (!this.props.open && props.open)) && typeof props.onOpen === 'function') {
-          props.onOpen(this.DOMNode)
-        }
-      }
-
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, children, this.DOMNode, handleMount)
-    } else {
-      this.removePortal(props)
-    }
-  }
-
-  removePortal (props) {
-    let unmounted
-
-    if (this.DOMNode) {
-      unmounted = ReactDOM.unmountComponentAtNode(this.DOMNode)
-      this.DOMNode.parentNode && this.DOMNode.parentNode.removeChild(this.DOMNode)
-      this.DOMNode = null
-    }
-
-    if (unmounted && typeof props.onClose === 'function') {
-      props.onClose()
-    }
-  }
-
-  get mountNode () {
-    let mountNode
-
-    if (typeof this.props.mountNode === 'function') {
-      mountNode = ReactDOM.findDOMNode(this.props.mountNode.call(null)) // eslint-disable-line react/no-find-dom-node
-    } else if (this.props.mountNode) {
-      mountNode = ReactDOM.findDOMNode(this.props.mountNode) // eslint-disable-line react/no-find-dom-node
-    }
-
-    if (!mountNode || !mountNode.nodeName) {
-      mountNode = document.body
-    }
-
-    return mountNode
-  }
-
-  get DOMNode () {
-    return this._node
-  }
-
-  set DOMNode (el) {
-    this._node = el
-  }
-
-  // for backwards compatibility:
-  get node () {
-    return this.DOMNode
+    return IS_CREATE_PORTAL_SUPPORTED ?
+      <ReactPortal {...this.props} elementRef={this.handleElementRef} /> :
+      <SubtreePortal {...this.props} elementRef={this.handleElementRef} />
   }
 }
 

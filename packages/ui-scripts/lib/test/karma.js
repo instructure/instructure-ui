@@ -51,7 +51,7 @@ if (args.includes('--watch')) {
   ])
 } else {
   envVars = envVars.concat([
-    'COVERAGE=1',
+    (`${React.version}`.startsWith('15') ? false : 'COVERAGE=1'),
     (UNMANGLED_CLASS_NAMES  ? `UNMANGLED_CLASS_NAMES=1` : false),
     (DISABLE_SPEEDY_STYLESHEET  ? `DISABLE_SPEEDY_STYLESHEET=1` : false),
     (USE_WEBPACK_CSS_LOADERS  ? `USE_WEBPACK_CSS_LOADERS=1` : false)

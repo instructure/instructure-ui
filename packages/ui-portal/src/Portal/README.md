@@ -19,19 +19,21 @@ class Example extends React.Component {
   }
 
   handleButtonClick = () => {
-    this.setState({
-      isPortalOpen: !this.state.isPortalOpen
+    this.setState(state => {
+      return { isPortalOpen: !state.isPortalOpen }
     })
   };
 
   render () {
+    const firstParagraph = lorem.paragraph()
+    const secondParagraph = lorem.paragraph()
     return (
       <div>
         <Button onClick={this.handleButtonClick}>
           {this.state.isPortalOpen ? 'Close' : 'Open'} the Portal
         </Button>
         <Portal
-          mountNode={() => this._mountNode}
+          mountNode={this._mountNode}
           open={this.state.isPortalOpen}
         >
           <ContextView placement="center start" padding="0 x-small">
@@ -39,9 +41,9 @@ class Example extends React.Component {
           </ContextView>
         </Portal>
         <Text>
-          <p>{lorem.paragraph()}</p>
+          <p>{firstParagraph}</p>
           <div ref={(c) => this._mountNode = c}></div>
-          <p>{lorem.paragraph()}</p>
+          <p>{secondParagraph}</p>
         </Text>
       </div>
     )

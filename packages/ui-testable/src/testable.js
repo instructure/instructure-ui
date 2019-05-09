@@ -62,7 +62,7 @@ const testable = decorator((ComposedComponent) => {
         }
         try {
           // Use this.DOMNode for components that render as non-native Portals...
-          node = findDOMNode(this) || this.DOMNode
+          node = this.DOMNode || findDOMNode(this)
         } catch (e) {
           console.warn(`[ui-testable] Could not append locator attribute: ${e}`)
         }

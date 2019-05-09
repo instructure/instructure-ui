@@ -23,12 +23,13 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
 
 import { Portal } from '../index'
-import PortalLocator from '../locator'
 
-describe('<Portal />', async () => {
+const PortalLocator = locator(Portal.selector)
+
+describe(`<Portal />`, async () => {
   it('should render', async () => {
     await mount(
       <Portal open>Hello World</Portal>
@@ -138,22 +139,22 @@ describe('<Portal />', async () => {
     })
 
     it('should render children and have a node with a parent when open', async () => {
+      const mountNode = document.createElement('div')
+      mountNode.setAttribute('id', 'portal-mount-node')
+      document.body.appendChild(mountNode)
+
       await mount(
-        <div>
-          <Portal
-            open
-            mountNode={() => document.getElementById('portal-mount-node')}
-          >
-            Hello World
-          </Portal>
-          <div id="portal-mount-node" />
-        </div>
+        <Portal
+          open
+          mountNode={mountNode}
+        >
+          Hello World
+        </Portal>
       )
 
       const portal = await PortalLocator.find(':contains(Hello World)')
 
-      expect(portal.getParentNode())
-        .to.equal(document.getElementById('portal-mount-node'))
+      expect(portal).to.have.exactly(1).ancestors('#portal-mount-node')
     })
   })
 })
