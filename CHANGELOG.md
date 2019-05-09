@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/instructure/instructure-ui/compare/v6.0.0...v6.1.0) (2019-05-09)
+
+
+### Bug Fixes
+
+* **instui-config,ui-forms:** deprecate DateInput from ui-forms ([d02c7ea](https://github.com/instructure/instructure-ui/commit/d02c7ea))
+* **ui-docs-client,ui-docs-plugin:** update icon import paths ([5a3eda2](https://github.com/instructure/instructure-ui/commit/5a3eda2))
+* **ui-prop-types:** Update childrenOrValue error message ([b36f61a](https://github.com/instructure/instructure-ui/commit/b36f61a))
+* **ui-scripts:** fix tags for patch releases ([a479911](https://github.com/instructure/instructure-ui/commit/a479911))
+* **ui-tabs:** Selected tab animations ([1313023](https://github.com/instructure/instructure-ui/commit/1313023))
+
+
+### Features
+
+* **ui-form-field:** add input container ref to FormField ([16bebbf](https://github.com/instructure/instructure-ui/commit/16bebbf))
+* **ui-icons:** add new bullet-list-(option) icons to icon library ([c2433af](https://github.com/instructure/instructure-ui/commit/c2433af))
+
+
+
+
+
 # [6.0.0](https://github.com/instructure/instructure-ui/compare/v5.52.3...v6.0.0) (2019-05-03)
 
 

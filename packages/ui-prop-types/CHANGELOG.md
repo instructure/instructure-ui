@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/instructure/instructure-ui/compare/v6.0.0...v6.1.0) (2019-05-09)
+
+
+### Bug Fixes
+
+* **ui-prop-types:** Update childrenOrValue error message ([b36f61a](https://github.com/instructure/instructure-ui/commit/b36f61a))
+
+
+
+
+
 # [6.0.0](https://github.com/instructure/instructure-ui/compare/v5.52.3...v6.0.0) (2019-05-03)
 
 
