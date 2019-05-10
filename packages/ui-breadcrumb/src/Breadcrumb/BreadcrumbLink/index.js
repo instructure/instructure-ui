@@ -83,13 +83,9 @@ class BreadcrumbLink extends Component {
 
     const props = omitProps(this.props, BreadcrumbLink.propTypes)
 
-    // Link will display a button by default, even if there is no action.
-    // Force a span in this case.
-    const as = href || onClick ? undefined : 'span'
-
     return (
       <Link
-        as={as}
+        as={this.element}
         {...props}
         href={href}
         icon={icon}

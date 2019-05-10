@@ -93,7 +93,7 @@ class Link extends Component {
     icon: undefined,
     display: undefined,
     variant: 'default',
-    as: 'button',
+    as: undefined,
     linkRef: function (link) {},
     iconPlacement: 'start'
   }

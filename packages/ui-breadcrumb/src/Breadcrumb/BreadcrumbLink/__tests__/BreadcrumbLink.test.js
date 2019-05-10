@@ -71,6 +71,7 @@ describe('<BreadcrumbLink />', async () => {
 
     expect(tagName).to.not.equal('button')
     expect(tagName).to.not.equal('a')
+    expect(tagName).to.equal('span')
   })
 
   it('should not render a button when not given an onClick prop', async () => {
@@ -82,6 +83,7 @@ describe('<BreadcrumbLink />', async () => {
 
     expect(tagName).to.not.equal('button')
     expect(tagName).to.not.equal('a')
+    expect(tagName).to.equal('span')
   })
 
   it('should meet a11y standards as a link', async () => {
