@@ -104,7 +104,8 @@ example: true
   <Text color="brand">I&#39;m brand text</Text><br />
   <Text color="success">I&#39;m success text</Text><br/>
   <Text color="warning">I&#39;m warning text</Text><br/>
-  <Text color="error">I&#39;m error text</Text>
+  <Text color="error">I&#39;m error text</Text><br />
+  <Text color="alert">I&#39;m alert text</Text>
 </div>
 ```
 

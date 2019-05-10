@@ -84,6 +84,7 @@ class Text extends Component {
       'secondary-inverse',
       'success',
       'error',
+      'alert',
       'warning',
       'brand'
     ]),

@@ -36,6 +36,7 @@ export default function generator ({ typography, colors, spacing }) {
     brandColor: colors.textBrand,
     errorColor: colors.textDanger,
     successColor: colors.textSuccess,
+    alertColor: colors.textAlert,
 
     paragraphMargin: `${spacing.medium} 0`
   }

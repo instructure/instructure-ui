@@ -75,6 +75,7 @@ example: true
   <SVGIcon color="success" src={iconExample} size="large" title="Icon Example" />
   <SVGIcon color="warning" src={iconExample} size="large" title="Icon Example" />
   <SVGIcon color="error" src={iconExample} size="large" title="Icon Example" />
+  <SVGIcon color="alert" src={iconExample} size="large" title="Icon Example" />
 </div>
 ```
 

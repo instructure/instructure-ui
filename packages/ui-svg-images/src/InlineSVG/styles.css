@@ -42,3 +42,7 @@
 .color--error {
   color: var(--errorColor);
 }
+
+.color--alert {
+  color: var(--alertColor);
+}

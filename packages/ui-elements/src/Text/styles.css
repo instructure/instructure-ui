@@ -98,6 +98,10 @@ input.root[type] {
     color: var(--errorColor);
   }
 
+  &.color-alert {
+    color: var(--alertColor);
+  }
+
   &.weight-normal {
     font-weight: var(--fontWeightNormal);
   }

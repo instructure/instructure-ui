@@ -34,6 +34,7 @@ export default function generator ({ colors }) {
     warningColor: colors.textWarning,
     brandColor: colors.textBrand,
     errorColor: colors.textDanger,
+    alertColor: colors.textAlert,
     successColor: colors.textSuccess
   }
 }
