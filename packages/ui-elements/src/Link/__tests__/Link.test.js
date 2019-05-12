@@ -175,9 +175,18 @@ describe('<Link />', async () => {
         expect(await LinkLocator.find('[role="button"]')).to.exist()
       })
 
-      it('should set type="button"', async () => {
-        await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
-        expect(await LinkLocator.find('[type="button"]')).to.exist()
+      describe('should not set type="button", unless it is actually a button', async () => {
+        it('should not set type="button" on other things like <span>s', async () => {
+          await mount(<Link as="span" onClick={onClick}>Hello World</Link>)
+          expect(await LinkLocator.find('[type="button"]', {
+            expectEmpty: true
+          })).to.not.exist()
+        })
+
+        it('should set type="button" on <button>s', async () => {
+          await mount(<Link as="button" onClick={onClick}>Hello World</Link>)
+          expect(await LinkLocator.find('[type="button"]')).to.exist()
+        })
       })
 
       it('should set tabIndex="0"', async () => {

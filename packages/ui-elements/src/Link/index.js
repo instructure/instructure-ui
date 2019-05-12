@@ -202,7 +202,7 @@ class Link extends Component {
     }
 
     const role = onClick && this.element !== 'button' ? 'button' : null
-    const type = onClick || this.element === 'button' ? 'button' : null
+    const type = (this.element === 'button' || this.element === 'input') ? 'button' : null
     const tabIndex = (role === 'button' && !disabled) ? '0' : null
 
     const passthroughProps = View.omitViewProps(
