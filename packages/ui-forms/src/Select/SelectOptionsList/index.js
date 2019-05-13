@@ -195,7 +195,7 @@ class SelectOptionsList extends Component {
     } = this.props
 
     if (loadingText) {
-      return this.renderStaticOption(<Spinner size="x-small" title={loadingText} />)
+      return this.renderStaticOption(<Spinner size="x-small" renderTitle={loadingText} />)
     }
 
     if (options.length === 0) {
