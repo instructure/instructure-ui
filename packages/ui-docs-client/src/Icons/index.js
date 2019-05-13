@@ -250,7 +250,7 @@ class MyIcon extends React.Component {
         <div className={styles.glyphs}>
           {
             Object.keys(this.selectedGlyphs)
-              .filter(name => new RegExp(this.state.query, 'i').test(name))
+              .filter(name => new RegExp(this.state.query.replace(/([^\w\d-])/gi, '\\$1'), 'i').test(name))
               .map(name => this.renderGlyph(name, this.selectedGlyphs[name]))
           }
         </div>
