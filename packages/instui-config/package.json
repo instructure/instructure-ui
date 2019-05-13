@@ -1,6 +1,6 @@
 {
   "name": "@instructure/instui-config",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "A package containing Instructure-UI specific configuration data for operations such as upgrades and codemod scripts",
   "author": "Instructure, Inc. Engineering and Product Design",
   "repository": {

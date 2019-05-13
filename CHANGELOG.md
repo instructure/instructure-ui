@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/instructure/instructure-ui/compare/v6.1.0...v6.2.0) (2019-05-13)
+
+
+### Bug Fixes
+
+* **ui-docs-client:** escape regexp chars in icon search term ([00b3ef9](https://github.com/instructure/instructure-ui/commit/00b3ef9))
+* **ui-elements:** don’t set type=button on any non-button <Link>s ([67084ae](https://github.com/instructure/instructure-ui/commit/67084ae))
+* **ui-forms:** use renderTitle prop on Spinner ([dce5248](https://github.com/instructure/instructure-ui/commit/dce5248))
+
+
+### Features
+
+* **ui-breadcrumb,ui-elements:** remove default as='button' on Link ([c23e859](https://github.com/instructure/instructure-ui/commit/c23e859))
+* **ui-elements:** add renderTitle prop to Spinner component ([6b66b89](https://github.com/instructure/instructure-ui/commit/6b66b89))
+* **ui-elements,ui-svg-images:** adds alert color to Text and InlineSVG components ([118ba53](https://github.com/instructure/instructure-ui/commit/118ba53))
+* **ui-portal:** Use built-in React 16 Portal ([1e334e3](https://github.com/instructure/instructure-ui/commit/1e334e3))
+
+
+
+
+
 # [6.1.0](https://github.com/instructure/instructure-ui/compare/v6.0.0...v6.1.0) (2019-05-09)
 
 

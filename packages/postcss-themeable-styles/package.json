@@ -1,6 +1,6 @@
 {
   "name": "@instructure/postcss-themeable-styles",
-  "version": "6.1.0",
+  "version": "6.2.0",
   "description": "PostCSS plugin for themeable component styles",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
