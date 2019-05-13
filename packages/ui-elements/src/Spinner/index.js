@@ -26,7 +26,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import { View } from '@instructure/ui-layout'
-import { omitProps } from '@instructure/ui-react-utils'
+import { callRenderProp, omitProps, deprecated } from '@instructure/ui-react-utils'
 import { themeable, ThemeablePropTypes } from '@instructure/ui-themeable'
 import { Browser } from '@instructure/ui-utils'
 import { uid } from '@instructure/uid'
@@ -40,14 +40,21 @@ import theme from './theme'
 category: components
 ---
 **/
+@deprecated('7.0.0', {
+  title:'renderTitle'
+})
 @testable()
 @themeable(theme, styles)
 class Spinner extends Component {
   static propTypes = {
     /**
+    * Give the spinner a title to be read by screenreaders (Deprecated)
+    */
+    title: PropTypes.string,
+    /**
     * Give the spinner a title to be read by screenreaders
     */
-    title: PropTypes.string.isRequired,
+    renderTitle: PropTypes.oneOfType([PropTypes.func, PropTypes.node]).isRequired,
     /**
     * Different-sized spinners
     */
@@ -71,7 +78,8 @@ class Spinner extends Component {
     size: 'medium',
     variant: 'default',
     margin: undefined,
-    elementRef: undefined
+    elementRef: undefined,
+    title:"Loading"
   }
 
   constructor (props) {
@@ -108,6 +116,9 @@ class Spinner extends Component {
       Spinner
     )
 
+    // TODO: this.props.title is deprecated in 7.0.0. Remove reference here when 7.0.0 is released
+    const title = this.props.renderTitle ? callRenderProp(this.props.renderTitle) : this.props.title
+
     return (
       <View
         {...passthroughProps}
@@ -122,7 +133,7 @@ class Spinner extends Component {
           aria-labelledby={this.titleId}
           focusable="false"
         >
-          <title id={this.titleId}>{this.props.title}</title>
+          <title id={this.titleId}>{title}</title>
           <g role="presentation">
             <circle className={styles.circleShadow} cx="50%" cy="50%" r={this.radius()} />
             <circle className={styles.circleTrack} cx="50%" cy="50%" r={this.radius()} />
@@ -133,6 +144,7 @@ class Spinner extends Component {
     )
   }
 }
+
 
 export default Spinner
 export { Spinner }

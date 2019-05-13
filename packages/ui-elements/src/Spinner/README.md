@@ -12,10 +12,10 @@ The `size` prop allows you to select from `x-small`, `small`, `medium` and `larg
 example: true
 ---
 <div>
-  <Spinner title="Loading" size="x-small" />
-  <Spinner title="Loading" size="small" margin="0 0 0 medium" />
-  <Spinner title="Loading" margin="0 0 0 medium" />
-  <Spinner title="Loading" size="large" margin="0 0 0 medium" />
+  <Spinner renderTitle="Loading" size="x-small" />
+  <Spinner renderTitle="Loading" size="small" margin="0 0 0 medium" />
+  <Spinner renderTitle="Loading" margin="0 0 0 medium" />
+  <Spinner renderTitle="Loading" size="large" margin="0 0 0 medium" />
 </div>
 ```
 
@@ -29,7 +29,19 @@ color scheme designed to be more visible on dark backgrounds.
 example: true
 background: 'checkerboard-inverse'
 ---
-<Spinner title="Loading" variant="inverse" />
+<Spinner renderTitle="Loading" variant="inverse" />
+```
+
+### Translating the Screen Reader Title
+
+The component supports using React component in the `renderTitle` prop, which is read to screen readers.
+This allows for translating the title text with another React component.
+
+```js
+---
+example: true
+---
+<Spinner renderTitle={() => "I'm translated!"} />
 ```
 
 ### Internet Explorer

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
 
 import { View } from '@instructure/ui-layout'
 
@@ -32,19 +32,36 @@ import SpinnerLocator from '../locator'
 
 describe('<Spinner />', async () => {
   it('should render', async () => {
-    await mount(<Spinner title="Loading" size="small" />)
+    await mount(<Spinner renderTitle="Loading" size="small" />)
     expect(await SpinnerLocator.find()).to.exist()
   })
 
   it('should render the title prop text in the SVG element title', async () => {
-    await mount(<Spinner title="Loading" size="large" />)
+    await mount(<Spinner renderTitle="Loading" size="large" />)
     expect(await SpinnerLocator.find(':contains(Loading)')).to.exist()
   })
 
   it('should meet a11y standards', async () => {
-    await mount(<Spinner title="Loading" size="small" />)
+    await mount(<Spinner renderTitle="Loading" size="small" />)
     const spinner = await SpinnerLocator.find()
     expect(await spinner.accessible()).to.be.true()
+  })
+
+  it('should render the contents of a component used in renderTitle', async () => {
+    const Translation = ({children}) => <span>I have translated {children}.</span>
+    await mount(<Spinner renderTitle={<Translation>Loading</Translation>} size="small" />)
+    const spinner = await SpinnerLocator.find()
+    expect(await SpinnerLocator.find(':contains(I have translated Loading)')).to.exist()
+    expect(await spinner.accessible()).to.be.true()
+  })
+
+  it('should log deprecation warnings', async () => {
+    const consoleWarn = spy(console, 'warn')
+    await mount(
+      <Spinner title="Loading" renderTitle={() => "Title"} />
+    )
+    expect(consoleWarn)
+      .to.have.been.calledWithMatch('Warning: [Spinner] `title` is deprecated and will be removed in version 7.0.0.')
   })
 
   describe('when passing down props to View', async () => {
@@ -64,7 +81,7 @@ describe('<Spinner />', async () => {
               [prop]: 'foo'
             }
             const warning = `Warning: [Spinner] prop '${prop}' is not allowed.`
-            await mount(<Spinner title="Loading" {...props} />)
+            await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError)
               .to.be.calledWith(warning)
           })
@@ -72,7 +89,7 @@ describe('<Spinner />', async () => {
           it(`should allow the '${prop}' prop`, async () => {
             const props = { [prop]: allowedProps[prop] }
             const consoleError = stub(console, 'error')
-            await mount(<Spinner title="Loading" {...props} />)
+            await mount(<Spinner renderTitle="Loading" {...props} />)
             expect(consoleError)
               .to.not.be.called()
           })
