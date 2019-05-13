@@ -114,6 +114,7 @@ async function publishPackages (packageName, releaseVersion = 'prerelease', prei
       '--exact',
       '--include-merged-tags',
       '--conventional-commits',
+      '--conventional-prerelease=*',
       '--no-git-reset'
     ]
   } else {

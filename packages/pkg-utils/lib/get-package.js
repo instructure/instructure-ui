@@ -29,11 +29,11 @@ const Package = require('@lerna/package')
 
 exports.getPackage = function getPackage (options) {
   const result = readPackage(options)
-  return new Package(result.pkg, path.dirname(result.path))
+  return new Package(result.package, path.dirname(result.path))
 }
 
 exports.getPackageJSON = function getPackageJSON (options) {
-  return readPackage(options).pkg
+  return readPackage(options).package
 }
 
 exports.getPackagePath = function getPackagePath (options) {
@@ -47,9 +47,14 @@ function readPackage (options) {
     normalize: false,
     ...options
   }
-  return readPkgUp.sync({
+
+  const pkg = readPkgUp.sync({
     cwd: fs.realpathSync(options.cwd),
     normalize: options.normalize
   })
+
+  // for backwards compat:
+  pkg.pkg = pkg.package
+  return pkg
 }
 exports.readPackage = readPackage

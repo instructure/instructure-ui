@@ -37,7 +37,7 @@ module.exports = {
     function findNamedPackage (filePath) {
       const found = readPackage({cwd: filePath})
       // console.log(found)
-      if (found.pkg && !found.pkg.name) {
+      if (found.package && !found.package.name) {
         return findNamedPackage(path.join(found.path, '../..'))
       }
       return found
@@ -59,12 +59,12 @@ module.exports = {
       const importPkg = findNamedPackage(resolvedImport)
       const contextPkg = findNamedPackage(resolvedContext)
 
-      if (importPkg.pkg && contextPkg.pkg && importPkg.pkg.name !== contextPkg.pkg.name) {
+      if (importPkg.package && contextPkg.package && importPkg.package.name !== contextPkg.package.name) {
         const importBaseName = path.basename(importPath)
         const importRoot = path.dirname(importPkg.path)
         const properPath = path.relative(importRoot, resolvedImport)
         const properImport = path.join(
-          importPkg.pkg.name,
+          importPkg.package.name,
           path.dirname(properPath),
           importBaseName === path.basename(importRoot) ? '' : importBaseName
         )

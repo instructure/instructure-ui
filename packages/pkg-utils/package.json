@@ -18,7 +18,7 @@
   "dependencies": {
     "@instructure/command-utils": "^6.2.0",
     "@lerna/package": "^3",
-    "read-pkg-up": "^5.0.0"
+    "read-pkg-up": "^6.0.0"
   },
   "publishConfig": {
     "access": "public"

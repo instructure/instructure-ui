@@ -50,7 +50,7 @@ if (jspaths.length) {
 }
 
 if (csspaths.length) {
-  commands['stylelint'] = getCommand('stylelint', csspaths)
+  commands['stylelint'] = getCommand('stylelint', [...csspaths, '--allow-empty-input' ])
 }
 
 process.exit(runCommandsConcurrently(commands).status)

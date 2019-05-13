@@ -34,7 +34,7 @@
     "@instructure/canvas-supported-browsers": "^1",
     "@instructure/config-loader": "^6.2.0",
     "@instructure/ui-postcss-config": "^6.2.0",
-    "babel-loader": "^8.0.5",
+    "babel-loader": "^8.0.6",
     "babel-plugin-dynamic-import-node": "^2.2.0",
     "babel-plugin-istanbul": "^5.1.4",
     "babel-plugin-macros": "^2.5.1",
