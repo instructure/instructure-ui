@@ -15,6 +15,12 @@ class Example extends React.Component {
     open: false
   }
 
+  _mask = null
+
+  handleMaskRef = el => {
+    this._mask = el
+  }
+
   render () {
     return (
       <div>
@@ -28,8 +34,12 @@ class Example extends React.Component {
           shouldReturnFocus
           shouldContainFocus
           onDismiss={() => { this.setState({ open: false })}}
+          defaultFocusElement={() => this._mask}
         >
-          <Mask onClick={() => { this.setState({ open: false })}}>
+          <Mask
+            onClick={() => { this.setState({ open: false })}}
+            elementRef={this.handleMaskRef}
+          >
             <Spinner title="Loading" size="large" margin="0 0 0 medium" />
           </Mask>
         </Overlay>

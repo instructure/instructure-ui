@@ -62,7 +62,7 @@ class KeyboardFocusRegion {
     }
 
     if (this._options.shouldReturnFocus) {
-      this._focusLaterElement = getActiveElement(this.doc)
+      this._focusLaterElement = this.activeElement
     }
   }
 
@@ -84,7 +84,7 @@ class KeyboardFocusRegion {
   }
 
   get focusable () {
-    return findFocusable(this._contextElement) || []
+    return findFocusable(this._contextElement, () => true, true) || []
   }
 
   get tabbable () {
@@ -115,8 +115,59 @@ class KeyboardFocusRegion {
     return ownerWindow(this._contextElement)
   }
 
+  get activeElement () {
+    return getActiveElement(this.doc)
+  }
+
+  get defaultFocusElement () {
+    const { defaultFocusElement } = this._options
+
+    let element = typeof defaultFocusElement === 'function'
+      ? defaultFocusElement()
+      : defaultFocusElement
+
+    if (element) {
+      element = findDOMNode(element)
+    }
+
+    if (this._contextElement.contains(element)) {
+      return element
+    }
+
+    const { firstTabbable } = this
+    if (firstTabbable) {
+      return firstTabbable
+    }
+
+    if (this.focusable.includes(this._contextElement)) {
+      return this._contextElement
+    }
+
+    return null
+  }
+
   updateElement (element) {
     this._contextElement = element
+  }
+
+  focusDefaultElement () {
+    const { defaultFocusElement, shouldContainFocus } = this
+
+    if (defaultFocusElement) {
+      defaultFocusElement.focus()
+    } else {
+      if (shouldContainFocus) {
+        // Blur the active element to place focus on the document body
+        this.activeElement.blur()
+
+        error(true,
+          `
+          [KeyboardFocusRegion] No \`defaultFocusElement\` was provided and \`shouldContainFocus\`
+          was set to \`true\`. Focus has been moved to the document body instead.
+          `
+        )
+      }
+    }
   }
 
   focus () {
@@ -124,31 +175,9 @@ class KeyboardFocusRegion {
       return
     }
 
-    let element = this._options.defaultFocusElement
-
-    if (typeof element === 'function') {
-      element = element()
-    }
-
-    if (element) {
-      element = findDOMNode(element)
-    }
-
-    if (!element || !this._contextElement.contains(element)) {
-      element = this.firstTabbable || this.firstFocusable || this._contextElement
-    }
-
     this._raf.push(
       requestAnimationFrame(() => {
-        try {
-          element && element.focus()
-        } catch (e) {
-          error(
-            false,
-            '[KeyboardFocusRegion] A focusable element is required in order to set focus to a FocusRegion.'
-          )
-          ownerDocument(this._contextElement).activeElement.blur()
-        }
+        this.focusDefaultElement()
       })
     )
   }
@@ -176,10 +205,7 @@ class KeyboardFocusRegion {
 
   handleKeyDown = event => {
     if (event.keyCode === keycode.codes.tab) {
-      if (containsActiveElement(this._contextElement) || !this._options.shouldCloseOnDocumentClick) {
-        // if active el is in region or region may be active after document click
-        scopeTab(this._contextElement, event)
-      }
+      scopeTab(this._contextElement, event)
     }
   }
 
@@ -213,7 +239,7 @@ class KeyboardFocusRegion {
           if (containsActiveElement(this._contextElement)) {
             return
           }
-          this.firstTabbable && this.firstTabbable.focus()
+          this.focusDefaultElement()
         })
       )
     }
@@ -232,24 +258,24 @@ class KeyboardFocusRegion {
   }
 
   activate () {
+    const { defaultFocusElement, shouldContainFocus } = this
+
     if (!this._active) {
-      if (this.tabbable.length > 0) {
-        if (this.shouldContainFocus) {
+      if (defaultFocusElement || shouldContainFocus) {
+        if (shouldContainFocus) {
           this._listeners.push(addEventListener(this.doc, 'keydown', this.handleKeyDown))
         } else {
-          this._listeners.push(addEventListener(this.firstTabbable, 'keydown', this.handleFirstTabbableKeyDown))
-          this._listeners.push(addEventListener(this.lastTabbable, 'keydown', this.handleLastTabbableKeyDown))
+          this._listeners.push(addEventListener(this.firstTabbable || defaultFocusElement, 'keydown', this.handleFirstTabbableKeyDown))
+          this._listeners.push(addEventListener(this.lastTabbable || defaultFocusElement, 'keydown', this.handleLastTabbableKeyDown))
         }
-      }
 
-      if (this._options.shouldContainFocus) {
         this._listeners.push(addEventListener(this.doc, 'click', this.handleClick, true))
 
         this._listeners.push(addEventListener(this.win, 'blur', this.handleWindowBlur, false))
         this._listeners.push(addEventListener(this.doc, 'focus', this.handleFocus, true))
-      }
 
-      this._active = true
+        this._active = true
+      }
     }
   }
 

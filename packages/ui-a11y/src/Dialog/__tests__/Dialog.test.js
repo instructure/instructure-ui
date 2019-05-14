@@ -140,10 +140,12 @@ describe('<Dialog />', async () => {
               label="A Modal"
               {...this.props}
             >
-              <div>
-                <input type="text" id="input-one" />
-                <input type="text" id="input-two" />
-              </div>
+              {this.props.children || (
+                <div>
+                  <input type="text" id="input-one" />
+                  <input type="text" id="input-two" />
+                </div>
+              )}
             </Dialog>
           </div>
         )
@@ -151,7 +153,7 @@ describe('<Dialog />', async () => {
     }
 
     it('should focus the first tabbable element by default', async () => {
-      await mount(<DialogExample open={true} />)
+      await mount(<DialogExample open />)
       const input = await find('#input-one')
       await wait(() => {
         expect(input.focused()).to.be.true()
@@ -186,6 +188,60 @@ describe('<Dialog />', async () => {
 
       await wait(() => {
         expect(input.focused()).to.be.true()
+      })
+    })
+
+    it('should still focus the defaultFocusElement when it is focusable but not tabbable', async () => {
+      await mount(
+        <DialogExample
+          open
+          defaultFocusElement={() => document.getElementById('non-tabbable')}
+        >
+          <div tabIndex="-1" id="non-tabbable">hello world</div>
+        </DialogExample>
+      )
+
+      const content = await find('#non-tabbable')
+      await wait(() => {
+        expect(content.focused()).to.be.true()
+      })
+    })
+
+    it('should focus the contentElement by default if focusable and no defaultFocusElement is provided', async () => {
+      await mount(
+        <div>
+          <DialogExample
+            open
+            contentElement={() => document.getElementById('container')}
+          >
+            some content
+          </DialogExample>
+          <div id="container" tabIndex="-1">some more content</div>
+        </div>
+      )
+
+      const container = await find('#container')
+      await wait(() => {
+        expect(container.focused()).to.be.true()
+      })
+    })
+
+    it('should focus the document body if there is no defaultFocusElement, tabbable elements, or focusable contentElement', async () => {
+      const subject = await mount(
+        <DialogExample open={false}>
+          hello world
+        </DialogExample>
+      )
+
+      const input = await find('#input-trigger')
+      await input.focus()
+
+      await subject.setProps({ open: true })
+
+      const body = await find('body')
+
+      await wait(() => {
+        expect(body.focused()).to.be.true()
       })
     })
 

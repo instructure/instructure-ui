@@ -45,7 +45,8 @@ class Mask extends Component {
     placement: PropTypes.oneOf(['top', 'center', 'bottom', 'stretch']),
     fullscreen: PropTypes.bool,
     children: PropTypes.node,
-    onClick: PropTypes.func
+    onClick: PropTypes.func,
+    elementRef: PropTypes.func
   }
 
   static defaultProps = {
@@ -53,7 +54,8 @@ class Mask extends Component {
     fullscreen: false,
     onDismiss: undefined,
     children: null,
-    onClick: undefined
+    onClick: undefined,
+    elementRef: (el) => {}
   }
 
   componentDidMount () {
@@ -66,6 +68,10 @@ class Mask extends Component {
     if (this.props.fullscreen) {
       noScroll.off()
     }
+  }
+
+  handleElementRef = el => {
+    this.props.elementRef(el)
   }
 
   contentRef = el => {
@@ -83,8 +89,11 @@ class Mask extends Component {
       [styles.fullscreen]: this.props.fullscreen
     })
 
-    let props = omitProps(this.props, Mask.propTypes)
-    props.className = classes
+    const props = {
+      ...omitProps(this.props, Mask.propTypes),
+      className: classes,
+      ref: this.handleElementRef
+    }
 
     if (typeof this.props.onClick === 'function') {
       props.onClick = this.props.onClick

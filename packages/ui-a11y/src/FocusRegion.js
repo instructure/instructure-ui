@@ -111,11 +111,7 @@ class FocusRegion {
     if (!this._active) {
       const doc = ownerDocument(this._contextElement)
 
-      // Only activate keyboard focus region if region has keyboard focusable content
-      if (this.keyboardFocusable) {
-        this._keyboardFocusRegion.activate()
-      }
-
+      this._keyboardFocusRegion.activate()
       this._screenReaderFocusRegion.activate()
 
       if (this._options.shouldCloseOnDocumentClick) {

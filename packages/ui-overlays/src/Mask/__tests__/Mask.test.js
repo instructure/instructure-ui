@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, within } from '@instructure/ui-test-utils'
+import { expect, mount, spy, stub, within } from '@instructure/ui-test-utils'
 
 import { Mask } from '../index'
 import styles from '../styles.css'
@@ -58,5 +58,11 @@ describe('<Mask />', async () => {
     const mask = within(subject.getDOMNode())
     const fullscreen = await mask.find(`.${styles['fullscreen']}`)
     expect(fullscreen).to.exist()
+  })
+
+  it('should provide an elementRef', async () => {
+    const elementRef = spy()
+    const subject = await mount(<Mask elementRef={elementRef} />)
+    expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
   })
 })
