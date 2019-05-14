@@ -32,7 +32,6 @@ example: true
     maxWidth="10rem"
     margin="small"
     padding="small"
-    textAlign="center"
     background="transparent"
   >
     {lorem.sentence()}
@@ -43,7 +42,6 @@ example: true
     maxWidth="10rem"
     margin="small"
     padding="small"
-    textAlign="center"
     background="default"
   >
     {lorem.sentence()}
@@ -54,7 +52,6 @@ example: true
     maxWidth="10rem"
     margin="small"
     padding="small"
-    textAlign="center"
     background="light"
   >
     {lorem.sentence()}
@@ -65,8 +62,67 @@ example: true
     maxWidth="10rem"
     margin="small"
     padding="small"
-    textAlign="center"
     background="inverse"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="brand"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="alert"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="info"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="success"
+  >
+    {lorem.sentence()}
+  </View>
+    <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="danger"
+  >
+    {lorem.sentence()}
+  </View>
+  <View
+    as="div"
+    display="inline-block"
+    maxWidth="10rem"
+    margin="small"
+    padding="small"
+    background="warning"
   >
     {lorem.sentence()}
   </View>

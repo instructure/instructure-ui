@@ -62,6 +62,36 @@
   background: var(--backgroundLight);
 }
 
+.background--brand {
+  color: var(--colorInverse);
+  background: var(--backgroundBrand);
+}
+
+.background--alert {
+  color: var(--colorInverse);
+  background: var(--backgroundAlert);
+}
+
+.background--info {
+  color: var(--colorInverse);
+  background: var(--backgroundInfo);
+}
+
+.background--success {
+  color: var(--colorInverse);
+  background: var(--backgroundSuccess);
+}
+
+.background--danger {
+  color: var(--colorInverse);
+  background: var(--backgroundDanger);
+}
+
+.background--warning {
+  color: var(--colorInverse);
+  background: var(--backgroundWarning);
+}
+
 .stacking--topmost {
   z-index: var(--stackingTopmost);
 }

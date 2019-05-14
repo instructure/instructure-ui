@@ -42,6 +42,30 @@ describe('View.theme', () => {
     it('should have a background and text colors that meet 3:1 contrast', () => {
       expect(contrast(variables.backgroundLight, variables.color)).to.be.above(3)
     })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundBrand, variables.colorInverse)).to.be.above(3)
+    })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundAlert, variables.colorInverse)).to.be.above(3)
+    })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundInfo, variables.colorInverse)).to.be.above(3)
+    })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundSuccess, variables.colorInverse)).to.be.above(3)
+    })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundDanger, variables.colorInverse)).to.be.above(3)
+    })
+
+    it('should have a background and text colors that meet 3:1 contrast', () => {
+      expect(contrast(variables.backgroundWarning, variables.colorInverse)).to.be.above(3)
+    })
   })
 
   describe('with the high contrast canvas theme', async () => {
@@ -57,6 +81,30 @@ describe('View.theme', () => {
 
     it('should have a background and text colors that meet 4.5:1 contrast', () => {
       expect(contrast(variables.backgroundLight, variables.color)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundBrand, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundAlert, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundInfo, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundSuccess, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundDanger, variables.colorInverse)).to.be.above(4.5)
+    })
+
+    it('should have a background and text colors that meet 4.5:1 contrast', () => {
+      expect(contrast(variables.backgroundWarning, variables.colorInverse)).to.be.above(4.5)
     })
   })
 })

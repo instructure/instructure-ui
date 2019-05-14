@@ -41,6 +41,13 @@ export default function generator ({ typography, colors, borders, spacing, shado
 
     backgroundLight: colors.porcelain,
 
+    backgroundBrand: colors.backgroundBrand,
+    backgroundAlert: colors.backgroundAlert,
+    backgroundInfo: colors.backgroundInfo,
+    backgroundSuccess: colors.backgroundSuccess,
+    backgroundDanger: colors.backgroundDanger,
+    backgroundWarning: colors.backgroundWarning,
+
     borderStyle: borders.style,
 
     arrowSize: '0.5rem',
