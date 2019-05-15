@@ -44,6 +44,7 @@ import theme from './theme'
 /**
 ---
 parent: DrawerLayout
+id: DrawerLayout.Tray
 ---
 **/
 @testable()
@@ -56,7 +57,7 @@ class DrawerTray extends Component {
     children: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
     render: PropTypes.func,
     /**
-     * Placement of the `<DrawerTray />`
+     * Placement of the `<DrawerLayout.Tray />`
      */
     placement: PropTypes.oneOf(['start', 'end']),
 
@@ -66,56 +67,56 @@ class DrawerTray extends Component {
     open: PropTypes.bool,
 
     /**
-     * Called when the `<DrawerTray />` is opened
+     * Called when the `<DrawerLayout.Tray />` is opened
      */
     onOpen: PropTypes.func,
     /**
-     * Called when the `<DrawerTray />` is closed
+     * Called when the `<DrawerLayout.Tray />` is closed
      */
     onClose: PropTypes.func,
     /**
-     * Should the `<DrawerTray />` have a border
+     * Should the `<DrawerLayout.Tray />` have a border
      */
     border: PropTypes.bool,
     /**
-     * Should the `<DrawerTray />` have a shadow
+     * Should the `<DrawerLayout.Tray />` have a shadow
      */
     shadow: PropTypes.bool,
     /**
-     * Callback fired when the <DrawerTray /> transitions in/out
+     * Callback fired when the <DrawerLayout.Tray /> transitions in/out
      */
     onTransition: PropTypes.func,
     /**
-     * Callback fired before the <DrawerTray /> transitions in
+     * Callback fired before the <DrawerLayout.Tray /> transitions in
      */
     onEnter: PropTypes.func,
     /**
-     * Callback fired as the <DrawerTray /> begins to transition in
+     * Callback fired as the <DrawerLayout.Tray /> begins to transition in
      */
     onEntering: PropTypes.func,
     /**
-     * Callback fired after the <DrawerTray /> finishes transitioning in
+     * Callback fired after the <DrawerLayout.Tray /> finishes transitioning in
      */
     onEntered: PropTypes.func,
     /**
-     * Callback fired right before the <DrawerTray /> transitions out
+     * Callback fired right before the <DrawerLayout.Tray /> transitions out
      */
     onExit: PropTypes.func,
     /**
-     * Callback fired as the <DrawerTray /> begins to transition out
+     * Callback fired as the <DrawerLayout.Tray /> begins to transition out
      */
     onExiting: PropTypes.func,
     /**
-     * Callback fired after the <DrawerTray /> finishes transitioning out
+     * Callback fired after the <DrawerLayout.Tray /> finishes transitioning out
      */
     onExited: PropTypes.func,
     /**
-     * Ref function for the <DrawerTray /> content
+     * Ref function for the <DrawerLayout.Tray /> content
      */
     contentRef: PropTypes.func,
     /**
      * An element or a function returning an element to use as the mount node
-     * for the `<DrawerTray />` when tray is overlaying content
+     * for the `<DrawerLayout.Tray />` when tray is overlaying content
      */
     mountNode: PropTypes.oneOfType([element, PropTypes.func]),
     /**
@@ -125,7 +126,7 @@ class DrawerTray extends Component {
 
     /**
      * An element, function returning an element, or array of elements that will not be hidden from
-     * the screen reader when the `<DrawerTray />` is open
+     * the screen reader when the `<DrawerLayout.Tray />` is open
      */
     liveRegion: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.element), PropTypes.element, PropTypes.func]),
     onDismiss: PropTypes.func,

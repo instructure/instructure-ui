@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: DrawerLayout
+id: DrawerLayout.Content
 ---
 **/
 @testable()
@@ -48,7 +49,7 @@ class DrawerContent extends Component {
     children: PropTypes.node,
     contentRef: PropTypes.func,
     /**
-     * Callback fired whenever the `<DrawerContent />` changes size
+     * Callback fired whenever the `<DrawerLayout.Content />` changes size
      */
     onSizeChange: PropTypes.func,
     role: PropTypes.string

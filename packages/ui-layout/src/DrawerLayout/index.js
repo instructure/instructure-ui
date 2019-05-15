@@ -53,15 +53,15 @@ class DrawerLayout extends Component {
   static locatorAttribute = 'data-drawer-layout'
   static propTypes = {
     /**
-     * Exactly one of each of the following child types: `DrawerContent`, `DrawerTray`
+     * Exactly one of each of the following child types: `DrawerLayout.Content`, `DrawerLayout.Tray`
      */
     children: ChildrenPropTypes.oneOfEach([DrawerContent, DrawerTray]),
     /**
-     * Min width for the `<DrawerContent />`
+     * Min width for the `<DrawerLayout.Content />`
      */
     minWidth: PropTypes.string,
     /**
-     * Function called when the `<DrawerContent />` is resized and hits the `minWidth` breakpoint
+     * Function called when the `<DrawerLayout.Content />` is resized and hits the `minWidth` breakpoint
      * Called with a boolean value, `true` if the tray is now overlaying the content or `false` if
      * it is side by side
      */
