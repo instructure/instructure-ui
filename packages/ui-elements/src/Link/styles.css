@@ -1,8 +1,7 @@
 /* stylelint-disable selector-max-class, no-descending-specificity, selector-max-type */
 
 .root,
-a.root:link,
-a.root:visited,
+a.root,
 button.root {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
@@ -37,8 +36,7 @@ button.root {
 * If Link is not a button or link, it should not look clickable,
 * so scope those styles.
 */
-a.root:link,
-a.root:visited,
+a.root,
 button.root {
   cursor: pointer;
   color: var(--color);
