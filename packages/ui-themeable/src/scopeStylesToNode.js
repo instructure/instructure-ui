@@ -121,7 +121,7 @@ function isRootSelector (selector) {
 }
 
 function isClassSelector (selector) {
-  return selector.match(/^(\.\S+)/)
+  return selector.match(/(^)((\S+)?(\.)(\S+))/)
 }
 
 function scopeSimpleSelector (selector, scope) {

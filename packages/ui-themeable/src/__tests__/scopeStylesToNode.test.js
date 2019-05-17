@@ -136,5 +136,21 @@ describe('scopeStylesToNode', async () => {
       expect(scopeCssText(cssText, '[foo]'))
         .to.equalIgnoreSpaces(scopedCss)
     })
+    it('should apply scope to rules with an element-class selector', async () => {
+      const cssText = `
+      button[disabled].Component__root {
+        color: blue;
+        background-color: var(--Component-backgroundColor);
+      }
+      `
+      const scopedCss = `
+      button[disabled].Component__root[foo] {
+        color: blue;
+        background-color: var(--Component-backgroundColor);
+      }
+      `
+      expect(scopeCssText(cssText, '[foo]'))
+        .to.equalIgnoreSpaces(scopedCss)
+    })
   })
 })

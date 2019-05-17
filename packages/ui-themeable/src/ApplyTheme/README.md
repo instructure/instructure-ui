@@ -17,17 +17,17 @@ example: true
   }}>
   <div>
     <p>
-      <Link>I should be Green</Link>
+      <Link href="http://instructure.com">I should be Green</Link>
     </p>
     <p>
       <ApplyTheme theme={{
           [Link.theme]: { color: 'red' }
         }}>
-        <Link>I should be Red</Link>
+        <Link href="http://instructure.com">I should be Red</Link>
       </ApplyTheme>
     </p>
     <p>
-      <Link theme={{ color: 'purple' }}>I should be Purple</Link>
+      <Link href="http://instructure.com" theme={{ color: 'purple' }}>I should be Purple</Link>
     </p>
   </div>
 </ApplyTheme>
