@@ -36,7 +36,7 @@ describe('<AccessibleContent />', async () => {
     const content = within(subject.getDOMNode())
     const alt = await content.find(':withText(Screen Reader Content)')
 
-    expect(alt.onscreen()).to.be.false()
+    expect(alt).to.not.be.visible()
   })
 
   it('should render a presentational content', async () => {
@@ -48,14 +48,15 @@ describe('<AccessibleContent />', async () => {
     const content = within(subject.getDOMNode())
     const presentational = await content.find(':textContent(Presentational Content)')
 
-    expect(presentational.onscreen()).to.be.true()
-    expect(presentational.getAttribute('aria-hidden')).to.exist()
+    expect(presentational).to.be.visible()
+    expect(presentational).to.have.attribute('aria-hidden')
   })
 
   it('should render with the specified tag when `as` prop is set', async () => {
     const subject = await mount(<AccessibleContent as="div" />)
     const accessibleContent = within(subject.getDOMNode())
-    expect(accessibleContent.getTagName()).to.equal('div')
+
+    expect(accessibleContent).to.have.tagName('div')
   })
 
   it('should meet a11y standards', async () => {
@@ -66,6 +67,7 @@ describe('<AccessibleContent />', async () => {
     )
 
     const accessibleContent = within(subject.getDOMNode())
+
     expect(await accessibleContent.accessible()).to.be.true()
   })
 })

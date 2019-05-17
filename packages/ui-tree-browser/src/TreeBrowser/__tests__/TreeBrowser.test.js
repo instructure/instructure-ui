@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 import { TreeBrowser } from '../index'
 
 import TreeBrowserLocator from '../locator'
@@ -84,6 +84,7 @@ describe('<TreeBrowser />', async () => {
 
     const tree = await TreeBrowserLocator.find()
     const items = await tree.findAllItems()
+
     expect(items.length).to.equal(4)
   })
 
@@ -99,8 +100,10 @@ describe('<TreeBrowser />', async () => {
       const tree = await TreeBrowserLocator.find()
       const items = await tree.findAllItems()
 
-      expect(items.length).to.equal(1)
-      expect(items[0].getTextContent()).to.equal('Root Directory')
+      await wait(() => {
+        expect(items.length).to.equal(1)
+        expect(items[0]).to.have.text('Root Directory')
+      })
     })
 
     it('should accept an array of default expanded collections', async () => {
@@ -207,7 +210,9 @@ describe('<TreeBrowser />', async () => {
 
       item.click()
 
-      expect(item.getAttribute('aria-selected')).to.not.exist()
+      await wait(() => {
+        expect(item).to.not.have.attribute('aria-selected')
+      })
     })
 
     it('should show the selection indicator on last clicked collection or item', async () => {
@@ -226,13 +231,17 @@ describe('<TreeBrowser />', async () => {
 
       await item.click()
 
-      expect(item.getAttribute('aria-selected')).to.exist()
+      await wait(() => {
+        expect(item).to.have.attribute('aria-selected')
+      })
 
       const nestedItem = await tree.findItem(':label(Item 1)')
 
       await nestedItem.click()
 
-      expect(nestedItem.getAttribute('aria-selected')).to.exist()
+      await wait(() => {
+        expect(nestedItem).to.have.attribute('aria-selected')
+      })
     })
   })
 
@@ -336,7 +345,9 @@ describe('<TreeBrowser />', async () => {
 
       await item.click()
 
-      expect(onCollectionToggle).to.have.been.called()
+      await wait(() => {
+        expect(onCollectionToggle).to.have.been.called()
+      })
     })
 
     it('should call onCollectionToggle on arrow key expansion or collapse', async () => {
@@ -355,13 +366,17 @@ describe('<TreeBrowser />', async () => {
 
       await item.focus()
 
-      expect(item.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(item).to.contain.focus()
+      })
 
       await item.keyDown('right')
       await item.keyDown('left')
       await item.keyDown('left')
 
-      expect(onCollectionToggle).to.have.been.calledTwice()
+      await wait(() => {
+        expect(onCollectionToggle).to.have.been.calledTwice()
+      })
     })
 
     it('should call onCollectionClick on button activation (space/enter or click)', async () => {
@@ -379,11 +394,12 @@ describe('<TreeBrowser />', async () => {
       const item = await tree.findItem(':label(Root Directory)')
 
       await item.click()
-
       await item.keyDown('space')
       await item.keyDown('enter')
 
-      expect(onCollectionClick).to.have.been.calledThrice()
+      await wait(() => {
+        expect(onCollectionClick).to.have.been.calledThrice()
+      })
     })
   })
 
@@ -481,11 +497,15 @@ describe('<TreeBrowser />', async () => {
       const tree = await TreeBrowserLocator.find()
       const item = await tree.findItem()
 
-      expect(item.getAttribute('aria-expanded')).to.equal('false')
+      await wait(() => {
+        expect(item).to.have.attribute('aria-expanded', 'false')
+      })
 
       await item.click()
 
-      expect(item.getAttribute('aria-expanded')).to.equal('true')
+      await wait(() => {
+        expect(item).to.have.attribute('aria-expanded', 'true')
+      })
     })
 
     it('should use aria-selected when selectionType is not none', async () => {
@@ -500,15 +520,19 @@ describe('<TreeBrowser />', async () => {
       const tree = await TreeBrowserLocator.find()
       const item = await tree.findItem()
 
-      expect(item.getAttribute('aria-selected')).to.not.exist()
+      expect(item).to.not.have.attribute('aria-selected')
 
       await item.click()
 
-      expect(item.getAttribute('aria-selected')).to.equal('true')
+      await wait(() => {
+        expect(item).to.have.attribute('aria-selected', 'true')
+      })
 
       const nestedItem = await tree.findItem(':label(Sub Root 1)')
 
-      expect(nestedItem.getAttribute('aria-selected')).to.equal('false')
+      await wait(() => {
+        expect(nestedItem).to.have.attribute('aria-selected', 'false')
+      })
     })
 
     it('should move focus with the up/down arrow keys', async () => {
@@ -526,20 +550,28 @@ describe('<TreeBrowser />', async () => {
 
       await tree.focus()
 
-      expect(tree.focused()).to.be.true()
+      await wait(() => {
+        expect(tree.focused()).to.be.true()
+      })
 
       await tree.keyDown('down')
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
 
       await tree.keyDown('down')
 
-      expect(items[0].focused()).to.be.false()
-      expect(items[1].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.false()
+        expect(items[1].focused()).to.be.true()
+      })
 
       await tree.keyDown('up')
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
     })
 
     it('should move focus via keyboard shortcuts', async () => {
@@ -557,20 +589,28 @@ describe('<TreeBrowser />', async () => {
 
       await tree.focus()
 
-      expect(tree.focused()).to.be.true()
+      await wait(() => {
+        expect(tree.focused()).to.be.true()
+      })
 
       await tree.keyDown('j')
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
 
       await tree.keyDown('j')
 
-      expect(items[0].focused()).to.be.false()
-      expect(items[1].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.false()
+        expect(items[1].focused()).to.be.true()
+      })
 
       await tree.keyDown('k')
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
     })
 
     it('should open collapsed collection with right arrow', async () => {
@@ -589,7 +629,9 @@ describe('<TreeBrowser />', async () => {
 
       await items[0].focus()
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
 
       await items[0].keyDown('right')
 
@@ -615,11 +657,15 @@ describe('<TreeBrowser />', async () => {
 
       await items[0].focus()
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
 
       await items[0].keyDown('right')
 
-      expect(items[1].focused()).to.be.true()
+      await wait(() => {
+        expect(items[1].focused()).to.be.true()
+      })
 
       items = await tree.findAllItems()
 
@@ -642,10 +688,11 @@ describe('<TreeBrowser />', async () => {
       expect(items.length).to.equal(4)
 
       await items[0].focus()
-
       await items[0].keyDown('left')
 
-      expect(items[0].focused()).to.be.true()
+      await wait(() => {
+        expect(items[0].focused()).to.be.true()
+      })
 
       items = await tree.findAllItems()
 
@@ -671,10 +718,11 @@ describe('<TreeBrowser />', async () => {
       const secondItem = items[1]
 
       await secondItem.focus()
-
       await secondItem.keyDown('left')
 
-      expect(firstItem.focused()).to.be.true()
+      await wait(() => {
+        expect(firstItem.focused()).to.be.true()
+      })
 
       items = await tree.findAllItems()
 
@@ -701,12 +749,16 @@ describe('<TreeBrowser />', async () => {
       await firstItem.focus()
       await firstItem.keyDown('enter')
 
-      expect(firstItem.getAttribute('aria-selected')).to.equal('true')
+      await wait(() => {
+        expect(firstItem).to.have.attribute('aria-selected', 'true')
+      })
 
       await secondItem.focus()
       await secondItem.keyDown('space')
 
-      expect(secondItem.getAttribute('aria-selected')).to.equal('true')
+      await wait(() => {
+        expect(secondItem).to.have.attribute('aria-selected', 'true')
+      })
     })
 
     it('should not expand the node on enter or space if selectionType is not "none"', async () => {

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { TextInput } from '../index'
 import TextInputLocator from '../locator'
@@ -147,7 +147,10 @@ describe('<TextInput/>', async () => {
       const input = await textInput.findInput()
 
       await input.change({ target: { value: 'foo' } })
-      expect(onChange).to.have.been.called()
+
+      await wait(() => {
+        expect(onChange).to.have.been.called()
+      })
     })
 
     it('responds to onBlur event', async () => {
@@ -162,7 +165,10 @@ describe('<TextInput/>', async () => {
       const input = await textInput.findInput()
 
       await input.blur()
-      expect(onBlur).to.have.been.called()
+
+      await wait(() => {
+        expect(onBlur).to.have.been.called()
+      })
     })
 
     it('responds to onFocus event', async () => {
@@ -177,7 +183,10 @@ describe('<TextInput/>', async () => {
       const input = await textInput.findInput()
 
       await input.focus()
-      expect(onFocus).to.have.been.called()
+
+      await wait(() => {
+        expect(onFocus).to.have.been.called()
+      })
     })
   })
 
@@ -203,7 +212,9 @@ describe('<TextInput/>', async () => {
       const textInput = await TextInputLocator.find()
       const input = await textInput.findInput()
 
-      expect(input).to.have.attribute('aria-invalid', 'true')
+      await wait(() => {
+        expect(input).to.have.attribute('aria-invalid', 'true')
+      })
     })
   })
 })

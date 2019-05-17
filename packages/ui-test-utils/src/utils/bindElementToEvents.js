@@ -38,7 +38,10 @@ export function bindElementToEvents (element, events) {
     } else if (['blur'].includes(key)) {
       // eslint-disable-next-line no-param-reassign
       bound[key] = fireBlurEvent.bind(null, element, fn)
-    } else if (['click', 'dblClick'].includes(key) ||
+    } else if (['click'].includes(key)) {
+      // eslint-disable-next-line no-param-reassign
+      bound[key] = fireClickEvent.bind(null, element, fn)
+    } else if (['dblClick'].includes(key) ||
       key.startsWith('mouse') ||
       key.startsWith('drag') ||
       key.startsWith('touch')
@@ -95,26 +98,30 @@ async function firePointerEvent (element, fn, init, options = { clickable: true 
   })
 }
 
-async function fireBlurEvent (element, fn, init, options = { focusable: true }) {
-  let focusable = element
+async function fireClickEvent (element, fn, init, options = { clickable: true, simulate: false })  {
+  let clickable = element
 
-  if (options.focusable) {
-    focusable = await find(element, ':focusable')
+  if (options.clickable) {
+    clickable = await find(element, ':clickable')
   }
 
-  if (focusable && typeof focusable.getDOMNode === 'function') {
-    focusable = focusable.getDOMNode()
+  if (clickable && typeof clickable.getDOMNode === 'function') {
+    clickable = clickable.getDOMNode()
   }
 
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        if (isElement(focusable)) {
-          const fireEvent = fn.bind(null, focusable)
-          resolve(fireEvent(init))
+        if (isElement(clickable)) {
+          if (!options.simulate) {
+            const fireEvent = fn.bind(null, clickable)
+            resolve(fireEvent(init))
+          } else {
+            resolve(clickable.click())
+          }
         } else {
           reject(
-            new Error(`[ui-test-utils] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
+            new Error(`[ui-test-utils] could not fire a click event on an element that is not 'clickable': ${element}`)
           )
         }
       } catch (e) {
@@ -124,7 +131,7 @@ async function fireBlurEvent (element, fn, init, options = { focusable: true }) 
   })
 }
 
-async function fireFocusEvent (element, fn, init, options = { focusable: true }) {
+async function fireBlurEvent (element, fn, init, options = { focusable: true, simulate: false }) {
   let focusable = element
 
   if (options.focusable) {
@@ -139,7 +146,49 @@ async function fireFocusEvent (element, fn, init, options = { focusable: true })
     setTimeout(() => {
       try {
         if (isElement(focusable))  {
-          if (init) {
+          if (!options.simulate) {
+            const fireEvent = fn.bind(null, focusable)
+
+            console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic blur.
+        Test event handlers (with event initialization) and focus state behavior separately.
+        Note: this means that .focused will be true unless you call .blur without event initialization.`)
+
+            resolve(fireEvent(init))
+          } else {
+            // We need to call Element.blur here because firing the FocusEvent doesn't actually move focus.
+            resolve(focusable.blur())
+          }
+        } else {
+          reject(
+            new Error(`[ui-test-utils] could not fire a 'blur' event on an element that is not 'focusable': ${element}`)
+          )
+        }
+      } catch (e) {
+        reject(e)
+      }
+    }, 0)
+  })
+}
+
+async function fireFocusEvent (element, fn, init, options = { focusable: true, simulate: false }) {
+  let focusable = element
+
+  if (options.focusable) {
+    focusable = await find(element, ':focusable')
+  }
+
+  if (focusable && typeof focusable.getDOMNode === 'function') {
+    focusable = focusable.getDOMNode()
+  }
+
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      try {
+        if (isElement(focusable))  {
+          if (!init || options.simulate) {
+            // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
+            resolve(focusable.focus())
+          } else {
             const fireEvent = fn.bind(null, focusable)
 
             console.warn(`[ui-test-utils] passing FocusEvent initilization prevents programmatic focus.
@@ -147,9 +196,6 @@ async function fireFocusEvent (element, fn, init, options = { focusable: true })
         Note: this means that .focused will be false unless you call .focus without event initialization.`)
 
             resolve(fireEvent(init))
-          } else {
-            // We need to call Element.focus here because firing the FocusEvent doesn't actually move focus.
-            resolve(focusable.focus())
           }
         } else {
           reject(

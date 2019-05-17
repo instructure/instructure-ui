@@ -21,7 +21,7 @@
     "start:watch": "lerna run start:watch --stream --scope docs-app",
     "dev": "yarn start:watch",
     "pretest:patchset": "yarn bootstrap && yarn check",
-    "test:patchset": "npm-run-all lint:commit lint:changes test:jest test:mocha test:changes install:react:15 test:changes install:react",
+    "test:patchset": "npm-run-all lint:commit lint:changes test:jest test:mocha test install:react:15 test install:react",
     "pretest:merge": "yarn bootstrap && yarn check",
     "test:merge": "npm-run-all lint:commit lint test install:react:15 test install:react",
     "test:all": "npm-run-all test:jest test:mocha test:karma",

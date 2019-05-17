@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { Checkbox } from '../index'
 import CheckboxLocator from '../locator'
@@ -41,6 +41,7 @@ describe('<Checkbox />', async () => {
 
     const checkbox = await CheckboxLocator.find()
     const input = await checkbox.find('input')
+
     expect(input.getDOMNode().type).to.equal('checkbox')
   })
 
@@ -56,6 +57,7 @@ describe('<Checkbox />', async () => {
     )
 
     const checkbox = await CheckboxLocator.find()
+
     expect(await checkbox.find('svg', { expectEmpty: true })).to.not.exist()
   })
 
@@ -73,7 +75,8 @@ describe('<Checkbox />', async () => {
 
     const checkbox = await CheckboxLocator.find()
     const input = await checkbox.find('input')
-    expect(input.getAttribute('aria-checked')).to.equal('mixed')
+
+    expect(input).to.have.attribute('aria-checked', 'mixed')
   })
 
   describe('events', async () => {
@@ -94,10 +97,14 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.click()
 
-      expect(onClick).to.have.been.called()
-      expect(onChange).to.have.been.called()
+      await wait(() => {
+        expect(onClick).to.have.been.called()
+        expect(onChange).to.have.been.called()
+      })
+
     })
 
     it('when clicked, does not call onClick or onChange when disabled', async () => {
@@ -118,6 +125,7 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.click(null, { clickable: false })
 
       expect(onClick).to.not.have.been.called()
@@ -142,10 +150,13 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.click()
 
-      expect(onClick).to.not.have.been.called()
-      expect(onChange).to.not.have.been.called()
+      await wait(() => {
+        expect(onClick).to.not.have.been.called()
+        expect(onChange).to.not.have.been.called()
+      })
     })
 
     it('calls onChange when enter key is pressed', async () => {
@@ -164,9 +175,12 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.keyDown('enter')
 
-      expect(onChange).to.have.been.called()
+      await wait(() => {
+        expect(onChange).to.have.been.called()
+      })
     })
 
     it('responds to onBlur event', async () => {
@@ -184,9 +198,12 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.blur()
 
-      expect(onBlur).to.have.been.called()
+      await wait(() => {
+        expect(onBlur).to.have.been.called()
+      })
     })
 
     it('responds to onFocus event', async () => {
@@ -204,9 +221,12 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
+
       await input.focus()
 
-      expect(onFocus).to.have.been.called()
+      await wait(() => {
+        expect(onFocus).to.have.been.called()
+      })
     })
 
     it('focuses with the focus helper', async () => {
@@ -230,7 +250,10 @@ describe('<Checkbox />', async () => {
 
       const checkbox = await CheckboxLocator.find()
       const input = await checkbox.find('input')
-      expect(input.focused()).to.be.true()
+
+      await wait(() => {
+        expect(input).to.have.focus()
+      })
     })
 
     it('calls onMouseOver', async () => {
@@ -252,7 +275,9 @@ describe('<Checkbox />', async () => {
 
       await checkbox.mouseOver()
 
-      expect(onMouseOver).to.have.been.called()
+      await wait(() => {
+        expect(onMouseOver).to.have.been.called()
+      })
     })
 
     it('calls onMouseOut', async () => {
@@ -274,7 +299,9 @@ describe('<Checkbox />', async () => {
 
       await checkbox.mouseOut()
 
-      expect(onMouseOut).to.have.been.called()
+      await wait(() => {
+        expect(onMouseOut).to.have.been.called()
+      })
     })
   })
 
@@ -289,7 +316,9 @@ describe('<Checkbox />', async () => {
           variant="simple"
         />
       )
+
       const checkbox = await CheckboxLocator.find()
+
       expect(await checkbox.accessible()).to.be.true()
     })
 
@@ -303,7 +332,9 @@ describe('<Checkbox />', async () => {
           variant="toggle"
         />
       )
+
       const checkbox = await CheckboxLocator.find()
+
       expect(await checkbox.accessible()).to.be.true()
     })
 
@@ -318,9 +349,11 @@ describe('<Checkbox />', async () => {
         />
       )
 
-      expect(consoleError).to.have.been.calledWithMatch(
-        'prop `label` is marked as required in `Checkbox`'
-      )
+      await wait(() => {
+        expect(consoleError).to.have.been.calledWithMatch(
+          'prop `label` is marked as required in `Checkbox`'
+        )
+      })
     })
   })
 })

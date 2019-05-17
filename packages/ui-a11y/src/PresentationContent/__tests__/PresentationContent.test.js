@@ -23,36 +23,33 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount, find, accessible } from '@instructure/ui-test-utils'
 
 import { PresentationContent } from '../index'
 
 describe('<PresentationContent />', async () => {
   it('should render children with an aria-hidden attribute', async () => {
-    const subject = await mount(
+    await mount(
       <PresentationContent>
         Hello World
       </PresentationContent>
     )
-    const presentationContent = within(subject.getDOMNode())
-    const text = await presentationContent.find(':textContent(Hello World)')
-
-    expect(text.getAttribute('aria-hidden')).to.exist()
+    const text = await find(':textContent(Hello World)')
+    expect(text).to.have.attribute('aria-hidden')
   })
 
   it('should render the specified tag when `as` prop is set', async () => {
     const subject = await mount(<PresentationContent as="div" />)
-    expect(subject.getDOMNode().tagName).to.equal('DIV')
+    expect(subject.getDOMNode()).to.have.tagName('div')
   })
 
   it('should meet a11y standards', async () => {
-    const subject = await mount(
+    await mount(
       <PresentationContent>
         Hello World
       </PresentationContent>
     )
-    const presentationContent = within(subject.getDOMNode())
 
-    expect(await presentationContent.accessible()).to.be.true()
+    expect(await accessible()).to.be.true()
   })
 })

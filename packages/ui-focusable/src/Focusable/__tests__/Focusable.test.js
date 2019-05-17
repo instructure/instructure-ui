@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, find, mount, spy, stub } from '@instructure/ui-test-utils'
+import { expect, find, mount, spy, stub, wait } from '@instructure/ui-test-utils'
 
 import { Focusable } from '../index'
 
@@ -45,37 +45,41 @@ describe('<Focusable />', async () => {
     const renderSpy = spy()
 
     await mount(
-      <div>
-        <Focusable>
-          {(args) => {
-            renderSpy(args)
-            return <button type="button">foo</button>
-          }}
-        </Focusable>
-        <input type="text" id="input" />
-      </div>
+      <Focusable>
+        {(args) => {
+          renderSpy(args)
+          return <button type="button">foo</button>
+        }}
+      </Focusable>
     )
 
     const focusable = await find(':focusable')
 
-    expect(lastCall(renderSpy).focused).to.be.false()
-    expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
-    expect(lastCall(renderSpy).focusVisible).to.be.false()
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.be.false()
+      expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
+      expect(lastCall(renderSpy).focusVisible).to.be.false()
+    })
 
     await focusable.keyDown() // make sure we're back in keyboard mode
     await focusable.focus()
 
-    expect(focusable.focused()).to.be.true()
-    expect(lastCall(renderSpy).focused).to.be.true()
-    expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
+    await wait(() => {
+      expect(focusable.focused()).to.be.true()
+      expect(lastCall(renderSpy).focused).to.be.true()
+      expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
 
-    expect(lastCall(renderSpy).focusVisible).to.be.true()
+      expect(lastCall(renderSpy).focusVisible).to.be.true()
+    })
 
-    await focusable.blur()
+    await focusable.blur({}, { simulate: true })
 
-    expect(lastCall(renderSpy).focused).to.equal(false)
-    expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
-    expect(lastCall(renderSpy).focusVisible).to.equal(false)
+    await wait(() => {
+      expect(focusable.focused()).to.be.false()
+      expect(lastCall(renderSpy).focused).to.equal(false)
+      expect(lastCall(renderSpy).focusable).to.equal(focusable.getDOMNode())
+      expect(lastCall(renderSpy).focusVisible).to.equal(false)
+    })
   })
 
   it('should populate the focusVisible argument', async () => {
@@ -95,8 +99,10 @@ describe('<Focusable />', async () => {
     await focusable.mouseDown()
     await focusable.focus()
 
-    expect(lastCall(renderSpy).focused).to.equal(true)
-    expect(lastCall(renderSpy).focusVisible).to.equal(false)
+    await wait(() =>{
+      expect(lastCall(renderSpy).focused).to.equal(true)
+      expect(lastCall(renderSpy).focusVisible).to.equal(false)
+    })
   })
 
   it('should handle conditionally rendered focus elements', async () => {
@@ -119,32 +125,43 @@ describe('<Focusable />', async () => {
 
     const renderSpy = spy(props, 'render')
 
-    await mount(<Focusable {...props} />)
+    await mount(
+      <Focusable {...props} />
+    )
 
     const firstFocusable = await find(':focusable')
+
     expect(firstFocusable.getTagName()).to.equal('a')
     expect(firstFocusable.focused()).to.be.false()
 
-    expect(lastCall(renderSpy).focused).to.be.false()
-    expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.be.false()
+      expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+    })
 
     await firstFocusable.focus()
 
     const nextFocusable = await find(':focusable')
+
     expect(nextFocusable.getTagName()).to.equal('input')
     expect(nextFocusable.focused()).to.be.true()
 
-    expect(lastCall(renderSpy).focused).to.be.true()
-    expect(lastCall(renderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.be.true()
+      expect(lastCall(renderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+    })
 
-    await nextFocusable.blur()
+    await nextFocusable.blur({}, { simulate: true })
 
     const lastFocusable = await find(':focusable')
+
     expect(lastFocusable.getTagName()).to.equal('a')
     expect(lastFocusable.focused()).to.be.false()
 
-    expect(lastCall(renderSpy).focused).to.be.false()
-    expect(lastCall(renderSpy).focusable).to.equal(lastFocusable.getDOMNode())
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.be.false()
+      expect(lastCall(renderSpy).focusable).to.equal(lastFocusable.getDOMNode())
+    })
   })
 
   it('should maintain focus when the focus element changes', async () => {
@@ -162,9 +179,12 @@ describe('<Focusable />', async () => {
 
     const firstFocusable = await find(':focusable')
     await firstFocusable.focus()
-    expect(firstFocusable.focused()).to.be.true()
-    expect(lastCall(renderSpy).focused).to.be.true()
-    expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+
+    await wait(() => {
+      expect(firstFocusable.focused()).to.be.true()
+      expect(lastCall(renderSpy).focused).to.be.true()
+      expect(lastCall(renderSpy).focusable).to.equal(firstFocusable.getDOMNode())
+    })
 
     /* eslint-disable react/display-name */
     const nextProps = { render: () => <button>Click</button> }
@@ -177,8 +197,10 @@ describe('<Focusable />', async () => {
     expect(nextFocusable.getTagName()).to.equal('button')
     expect(nextFocusable.focused()).to.be.true()
 
-    expect(lastCall(nextRenderSpy).focused).to.be.true()
-    expect(lastCall(nextRenderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+    await wait(() => {
+      expect(lastCall(nextRenderSpy).focused).to.be.true()
+      expect(lastCall(nextRenderSpy).focusable).to.equal(nextFocusable.getDOMNode())
+    })
   })
 
   it('should update the focus element correctly', async () => {
@@ -197,11 +219,15 @@ describe('<Focusable />', async () => {
 
     await firstButton.focus()
 
-    expect(lastCall(renderSpy).focused).to.equal(true)
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.equal(true)
+    })
 
-    await firstButton.blur()
+    await firstButton.blur({}, { simulate: true })
 
-    expect(lastCall(renderSpy).focused).to.equal(false)
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.equal(false)
+    })
 
     await subject.setProps({
       children: (args) => { // eslint-disable-line react/display-name
@@ -214,12 +240,14 @@ describe('<Focusable />', async () => {
 
     await secondButton.focus()
 
-    expect(lastCall(renderSpy).focused).to.equal(true)
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.equal(true)
+    })
   })
 
   it('should warn when there is more than one focusable descendant', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = 'Warning: [Focusable] Exactly one tabbable child is required (2 found).'
+    const consoleWarn = stub(console, 'warn')
+    const warning = 'Warning: [Focusable] Exactly one focusable child is required (2 found).'
     await mount(
       <Focusable>
         {(args) => {
@@ -234,13 +262,13 @@ describe('<Focusable />', async () => {
         }}
       </Focusable>
     )
-    expect(consoleError)
+    expect(consoleWarn)
       .to.be.calledWith(warning)
   })
 
   it('should warn when there are no focusable descendants', async () => {
-    const consoleError = stub(console, 'error')
-    const warning = 'Warning: [Focusable] Exactly one tabbable child is required (0 found).'
+    const consoleWarn = stub(console, 'warn')
+    const warning = 'Warning: [Focusable] Exactly one focusable child is required (0 found).'
     await mount(
       <Focusable>
         {(args) => {
@@ -250,7 +278,7 @@ describe('<Focusable />', async () => {
         }}
       </Focusable>
     )
-    expect(consoleError)
+    expect(consoleWarn)
       .to.be.calledWith(warning)
   })
 
@@ -279,7 +307,9 @@ describe('<Focusable />', async () => {
     const button = await find('button:label(foo)')
     await button.focus()
 
-    expect(lastCall(renderSpy).focused).to.equal(true)
+    await wait(() => {
+      expect(lastCall(renderSpy).focused).to.equal(true)
+    })
   })
 
   it('should provide a focus method', async () => {

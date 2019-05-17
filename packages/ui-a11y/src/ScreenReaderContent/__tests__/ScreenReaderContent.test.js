@@ -23,20 +23,18 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 import { ScreenReaderContent } from '../index'
 
 describe('<ScreenReaderContent />', async () => {
   it('should render the specified tag when `as` prop is set', async () => {
     const subject = await mount(<ScreenReaderContent as="div" />)
-    const screenReaderContent = within(subject.getDOMNode())
-    expect(screenReaderContent.getTagName()).to.equal('div')
+    expect(subject.getDOMNode()).to.have.tagName('div')
   })
 
   it('accepts "passthrough" props', async () => {
     const subject = await mount(<ScreenReaderContent hidden />)
-    const screenReaderContent = within(subject.getDOMNode())
-    expect(screenReaderContent.getDOMNode().getAttribute('hidden')).to.exist()
+    expect(subject.getDOMNode()).to.have.attribute('hidden')
   })
 
   it('renders children components', async () => {
@@ -45,8 +43,8 @@ describe('<ScreenReaderContent />', async () => {
         <span>Screenreader text</span>
       </ScreenReaderContent>
     )
-    const screenReaderContent = within(subject.getDOMNode())
-    expect(screenReaderContent).to.have.text('Screenreader text')
+
+    expect(subject.getDOMNode()).to.have.text('Screenreader text')
   })
 
   it('renders children offscreen', async () => {
@@ -55,17 +53,14 @@ describe('<ScreenReaderContent />', async () => {
         <span>Screenreader text</span>
       </ScreenReaderContent>
     )
-    const screenReaderContent = within(subject.getDOMNode())
-    expect(screenReaderContent.onscreen()).to.be.false()
+
+    expect(subject.getDOMNode()).to.not.be.visible()
   })
 
   it('is accessible by screen readers', async () => {
     const subject = await mount(<ScreenReaderContent />)
-    const screenReaderContent = within(subject.getDOMNode())
-    const height = screenReaderContent.style('height')
-    const opacity = screenReaderContent.style('opacity')
 
-    expect(height).to.not.equal(0 || undefined)
-    expect(opacity).to.not.equal(0 || undefined)
+    expect(subject.getDOMNode()).to.have.style('height', 0)
+    expect(subject.getDOMNode()).to.have.style('opacity', 0)
   })
 })

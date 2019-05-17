@@ -460,7 +460,7 @@ describe('queries', async () => {
 
         const button = within(subject.getDOMNode())
 
-        const event = await button.click()
+        const event = await button.click({})
 
         await wait(() => {
           expect(event.preventDefault).to.have.been.calledOnce()

@@ -57,6 +57,6 @@ describe('<PaginationArrowButton />', async () => {
 
     const tooltip = await button.findTooltipContent()
 
-    expect(tooltip.getTextContent()).to.equal('Label')
+    expect(tooltip).to.have.text('Label')
   })
 })

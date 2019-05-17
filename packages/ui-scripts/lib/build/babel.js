@@ -38,11 +38,13 @@ const args = process.argv.slice(2)
 const firstArg = args[0]
 const src = (firstArg && firstArg.indexOf('--') < 0) ? firstArg : 'src'
 
-const babelArgs = [src, '--ignore "src/**/*.test.js","src/**/__tests__/**"']
+let babelArgs = []
 
 if (args.includes('--copy-files')) {
   babelArgs.push('--copy-files')
 }
+
+babelArgs = babelArgs.concat([src, '--ignore "src/**/*.test.js","src/**/__tests__/**"'])
 
 let envVars = []
 

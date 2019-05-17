@@ -52,7 +52,7 @@ import { findFocusable } from './findFocusable'
  */
 class KeyboardFocusRegion {
   constructor (element, options) {
-    this._contextElement = element
+    this._contextElement = findDOMNode(element)
     this._options = options || {
       shouldContainFocus: true,
       shouldReturnFocus: true,
@@ -122,15 +122,13 @@ class KeyboardFocusRegion {
   get defaultFocusElement () {
     const { defaultFocusElement } = this._options
 
-    let element = typeof defaultFocusElement === 'function'
-      ? defaultFocusElement()
-      : defaultFocusElement
+    let element = findDOMNode(
+      typeof defaultFocusElement === 'function'
+        ? defaultFocusElement()
+        : defaultFocusElement
+    )
 
-    if (element) {
-      element = findDOMNode(element)
-    }
-
-    if (this._contextElement.contains(element)) {
+    if (element && this._contextElement && this._contextElement.contains(element)) {
       return element
     }
 
@@ -147,7 +145,7 @@ class KeyboardFocusRegion {
   }
 
   updateElement (element) {
-    this._contextElement = element
+    this._contextElement = findDOMNode(element)
   }
 
   focusDefaultElement () {

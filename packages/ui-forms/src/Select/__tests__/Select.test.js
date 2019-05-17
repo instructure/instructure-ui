@@ -62,7 +62,9 @@ describe('<Select />', async () => {
 
     selectRef.focus()
 
-    expect(input.focused()).to.be.true()
+    await wait(() => {
+      expect(input.focused()).to.be.true()
+    })
   })
 
   it('should respond to onBlur event appropriately', async () => {
@@ -92,12 +94,14 @@ describe('<Select />', async () => {
 
     // focus moves to input
     await input.focus()
+
     await wait(() => {
       expect(input.focused()).to.be.true()
     })
 
     // focus moves to tag and back to input
     await tag.click()
+
     await wait(() => {
       expect(input.focused()).to.be.true()
     })
@@ -108,11 +112,11 @@ describe('<Select />', async () => {
 
     // focus entirely leaves select
     await link.focus()
+
     await wait(() => {
       expect(link.focused()).to.be.true()
+      expect(onBlur).to.have.been.calledOnce()
     })
-
-    expect(onBlur).to.have.been.calledOnce()
   })
 
 
@@ -132,7 +136,9 @@ describe('<Select />', async () => {
 
     selectRef.focus()
 
-    expect(selectRef.focused).to.be.true()
+    await wait(() => {
+      expect(selectRef.focused).to.be.true()
+    })
    })
 
    it('should provide an invalid getter', async () => {
@@ -165,7 +171,7 @@ describe('<Select />', async () => {
 
     const input = await SelectLocator.findInput()
 
-    expect(input.getAttribute('aria-invalid')).to.equal('true')
+    expect(input).to.have.attribute('aria-invalid')
   })
 
   it('should provide an inputRef prop', async () => {
@@ -184,7 +190,9 @@ describe('<Select />', async () => {
     const select = await SelectLocator.find()
     const input = await select.findInput()
 
-    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
+    await wait(() => {
+      expect(inputRef).to.have.been.calledWith(input.getDOMNode())
+    })
   })
 
   it('recalculates options when children change', async () => {
@@ -245,7 +253,9 @@ describe('<Select />', async () => {
       </Select>
     )
 
-    expect(consoleError).to.have.been.calledWithMatch('Expected one of option, optgroup')
+    await wait(() => {
+      expect(consoleError).to.have.been.calledWithMatch('Expected one of option, optgroup')
+    })
   })
 
   it('should include group value or label in onChange', async () => {
@@ -266,18 +276,23 @@ describe('<Select />', async () => {
 
     const select = await SelectLocator.find()
     const input = await select.findInput()
+
     // select first item
     await input.keyDown('down')
     await input.keyDown('enter')
 
-    expect(onChange.getCall(0).args[1].group).to.equal('group-1')
+    await wait(() => {
+      expect(onChange.getCall(0).args[1].group).to.equal('group-1')
+    })
 
     // select second item
     await input.keyDown('down')
     await input.keyDown('down')
     await input.keyDown('enter')
 
-    expect(onChange.getCall(1).args[1].group).to.equal('Group Two')
+    await wait(() => {
+      expect(onChange.getCall(1).args[1].group).to.equal('Group Two')
+    })
   })
 
   describe('for a11y', async () => {

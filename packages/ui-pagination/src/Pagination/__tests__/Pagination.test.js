@@ -107,8 +107,10 @@ describe('<Pagination />', async () => {
       label: <ScreenReaderContent>I am a hidden label</ScreenReaderContent>
     })
 
-    const heightWithHiddenLabel = paginationNode.getComputedStyle()['height']
-    expect(heightWithNoLabel).to.equal(heightWithHiddenLabel)
+    await wait(() => {
+      const heightWithHiddenLabel = paginationNode.getComputedStyle()['height']
+      expect(heightWithNoLabel).to.equal(heightWithHiddenLabel)
+    })
   })
 
   it('should render page buttons', async () => {
@@ -136,7 +138,7 @@ describe('<Pagination />', async () => {
     const buttons = await pagination.findAllPageButtons()
 
     expect(buttons.length).to.equal(1)
-    expect(buttons[0].getTextContent()).to.equal(`#0`)
+    expect(buttons[0]).to.have.text(`#0`)
   })
 
   it('should render nothing if there are no pages', async () => {
@@ -167,8 +169,7 @@ describe('<Pagination />', async () => {
     expect(allButtons.length).to.equal(9)
     expect(paginationButtons.length).to.equal(7)
     expect(ellipses.length).to.equal(2)
-
-    expect(pagination.getTextContent()).to.equal('Prev#0…#2#3#4#5#6…#8Next')
+    expect(pagination).to.have.text('Prev#0…#2#3#4#5#6…#8Next')
   })
 
   it('should truncate start', async () => {
@@ -190,7 +191,7 @@ describe('<Pagination />', async () => {
     expect(paginationButtons.length).to.equal(3)
     expect(ellipses.length).to.equal(1)
 
-    expect(pagination.getTextContent()).to.equal('Prev#0…#4#5')
+    expect(pagination).to.have.text('Prev#0…#4#5')
   })
 
   it('should truncate end', async () => {
@@ -212,7 +213,7 @@ describe('<Pagination />', async () => {
     expect(paginationButtons.length).to.equal(5)
     expect(ellipses.length).to.equal(1)
 
-    expect(pagination.getTextContent()).to.equal('#0#1#2#3…#5Next')
+    expect(pagination).to.have.text('#0#1#2#3…#5Next')
   })
 
   it('should omit ellipses when bounds included in context', async () => {
@@ -263,7 +264,9 @@ describe('<Pagination />', async () => {
 
       const button0 = await pagination.findPageButton(':label(#0)')
 
-      expect(button0.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button0.containsFocus()).to.be.true()
+      })
     })
 
     it('should not change focus when the Previous Page button did not have focus', async () => {
@@ -280,7 +283,9 @@ describe('<Pagination />', async () => {
 
       await subject.setProps({ children: buildPages(7, 0) })
 
-      expect(button1.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button1.containsFocus()).to.be.true()
+      })
     })
 
     it('should not continue to change focus on subsequent updates', async () => {
@@ -307,7 +312,9 @@ describe('<Pagination />', async () => {
 
       await subject.setProps({ children: buildPages(7, 0) })
 
-      expect(button1.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button1.containsFocus()).to.be.true()
+      })
     })
   })
 
@@ -332,7 +339,9 @@ describe('<Pagination />', async () => {
 
       const button6 = await pagination.findPageButton(':label(#6)')
 
-      expect(button6.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button6.containsFocus()).to.be.true()
+      })
     })
 
     it('should not change focus when the Next Page button did not have focus', async () => {
@@ -353,7 +362,9 @@ describe('<Pagination />', async () => {
 
       await subject.setProps({ children: buildPages(7, 6) })
 
-      expect(button5.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button5.containsFocus()).to.be.true()
+      })
     })
 
     it('should not continue to change focus on subsequent updates', async () => {
@@ -376,7 +387,9 @@ describe('<Pagination />', async () => {
 
       await subject.setProps({ children: buildPages(7, 6) })
 
-      expect(button5.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(button5.containsFocus()).to.be.true()
+      })
     })
   })
 
@@ -439,8 +452,9 @@ describe('<Pagination />', async () => {
                   { buildPages(6) }
                 </Pagination>
               )
-              expect(consoleError)
-                .to.be.calledWith(warning)
+              await wait(() => {
+                expect(consoleError).to.be.calledWith(warning)
+              })
             })
           } else {
             it(`should allow the '${prop}' prop`, async () => {
@@ -474,7 +488,9 @@ describe('<Pagination />', async () => {
           { buildPages(6) }
         </Pagination>
       )
-      expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+      await wait(() => {
+        expect(elementRef).to.have.been.calledWith(subject.getDOMNode())
+      })
     })
 
     it('should navigate to adjacent pages', async () => {

@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, spy } from '@instructure/ui-test-utils'
+import { expect, mount, stub, spy, wait } from '@instructure/ui-test-utils'
 
 import { DateTime } from '@instructure/ui-i18n'
 
@@ -58,8 +58,8 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput.getDOMNode().value).to.equal(moment_dt.format('LL'))
-    expect(timeInput.getDOMNode().value).to.equal(moment_dt.format('LT'))
+    expect(dateInput).to.have.value(moment_dt.format('LL'))
+    expect(timeInput).to.have.value(moment_dt.format('LT'))
   })
 
   it('should use the value', async () => {
@@ -90,8 +90,8 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput.getDOMNode().value).to.equal(moment_dt.format('LL'))
-    expect(timeInput.getDOMNode().value).to.equal(moment_dt.format('LT'))
+    expect(dateInput).to.have.value(moment_dt.format('LL'))
+    expect(timeInput).to.have.value(moment_dt.format('LT'))
   })
 
   it('should prefer value to defaultValue', async () => {
@@ -124,8 +124,8 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput.getDOMNode().value).to.equal(value.format('LL'))
-    expect(timeInput.getDOMNode().value).to.equal(value.format('LT'))
+    expect(dateInput).to.have.value(value.format('LL'))
+    expect(timeInput).to.have.value(value.format('LT'))
   })
 
   it('should focus the DateInput when focus is called', async () => {
@@ -149,9 +149,11 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
 
     dateTimeInputRef.focus()
-    expect(dateTimeInputRef.focused).to.be.true()
 
-    expect(dateInput.focused()).to.be.true()
+    await wait(() => {
+      expect(dateTimeInputRef.focused).to.be.true()
+      expect(dateInput.focused()).to.be.true()
+    })
   })
 
   it('should set time to local midnight when only date is set', async () => {
@@ -181,8 +183,8 @@ describe('<DateTimeInput />', async () => {
     const dateInput = await dateLocator.findInput()
     const timeInput = await timeLocator.findInput()
 
-    expect(dateInput.getDOMNode().value).to.equal(moment_dt.format('LL'))
-    expect(timeInput.getDOMNode().value).to.equal('12:00 AM')
+    expect(dateInput).to.have.value(moment_dt.format('LL'))
+    expect(timeInput).to.have.value('12:00 AM')
   })
 
   it('should call invalidDateTimeMessage if time is set w/o a date', async () => {
@@ -214,7 +216,10 @@ describe('<DateTimeInput />', async () => {
     await timeInput.change({target: { value: '1:00 PM' }})
     await timeInput.keyDown('enter')
 
-    expect(messageSpy).to.have.been.called()
+    await wait(() => {
+      expect(messageSpy).to.have.been.called()
+    })
+
     expect(await dateTimeInput.find(':contains(whoops)')).to.exist()
   })
 
@@ -243,8 +248,10 @@ describe('<DateTimeInput />', async () => {
     await dateInput.change({target: { value: '5/1/2017' }})
     await dateInput.keyDown('enter')
 
-    expect(onChange).to.have.been.called()
-    expect(onChange.getCall(0).args[1]).to.include('2017-05-01')
+    await wait(() => {
+      expect(onChange).to.have.been.called()
+      expect(onChange.getCall(0).args[1]).to.include('2017-05-01')
+    })
   })
 
   it('should not fire the onDateChange event when DateInput value change is not a date change', async () => {
@@ -272,12 +279,16 @@ describe('<DateTimeInput />', async () => {
     await dateInput.change({target: { value: 'Nov' }})
     await dateInput.keyDown('enter')
 
-    expect(onChange).to.have.been.calledOnce()
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+    })
 
     await dateInput.change({target: { value: 'Nove' }})
     await dateInput.keyDown('enter')
 
-    expect(onChange).to.have.been.calledOnce()
+    await wait(() => {
+      expect(onChange).to.have.been.calledOnce()
+    })
   })
 
   it('should fire the onChange event when TimeInput value changes', async () => {
@@ -310,12 +321,15 @@ describe('<DateTimeInput />', async () => {
     await timeInput.change({target: { value: '3:00 AM' }})
     await timeInput.keyDown('enter')
 
-    // get expected 3AM string in UTC, which is how it comes out of TimeInput
-    const newValue = new Date(DateTime.parse('2017-05-01T03:00', locale, timezone)).valueOf()
+    await wait(() => {
+      // get expected 3AM string in UTC, which is how it comes out of TimeInput
+      const newValue = new Date(DateTime.parse('2017-05-01T03:00', locale, timezone)).valueOf()
 
-    expect(onChange).to.have.been.called()
-    const onChangeArg = new Date(onChange.firstCall.args[1]).valueOf()
-    expect(onChangeArg).to.equal(newValue)
+
+      expect(onChange).to.have.been.called()
+      const onChangeArg = new Date(onChange.firstCall.args[1]).valueOf()
+      expect(onChangeArg).to.equal(newValue)
+    })
   })
 
   it('should show correct message when TimeInput value changes', async () => {
@@ -507,6 +521,7 @@ describe('<DateTimeInput />', async () => {
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
+
     expect(await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')).to.exist()
 
     await subject.setProps({
@@ -539,6 +554,7 @@ describe('<DateTimeInput />', async () => {
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
+
     expect(await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')).to.exist()
 
     const dateLocator = await dateTimeInput.findDateInput()
@@ -573,6 +589,7 @@ describe('<DateTimeInput />', async () => {
     )
 
     const dateTimeInput = await DateTimeInputLocator.find()
+
     expect(await dateTimeInput.find(':contains(May 1, 2017 1:30 PM)')).to.exist()
 
     await subject.setProps({messages: [{text: 'hello world', type: 'success'}]})

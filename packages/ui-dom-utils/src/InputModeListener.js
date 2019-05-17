@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
+import { warn } from '@instructure/console/macro'
 import { addEventListener } from './addEventListener'
 import { canUseDOM } from './canUseDOM'
 
@@ -32,6 +32,7 @@ export const MODES = {
 
 class InputModeListenerImpl {
   constructor () {
+    warn(false, `[InputModeListener] is deprecated and will be removed in version 7.0.0. Use addInputModeListener instead.`)
     this.init()
   }
   _listeners = []

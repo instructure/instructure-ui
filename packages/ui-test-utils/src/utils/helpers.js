@@ -306,7 +306,7 @@ function focusable (element) {
 }
 
 function tabbable (element) {
-  return focusable(element) && parseInt(element.getAttribute('tabindex')) > 0
+  return focusable(element) && parseInt(getAttribute(element, 'tabindex')) > 0
 }
 
 function getAttribute (element, ...args) {
@@ -417,10 +417,7 @@ function ancestors (element, selector) {
 }
 // aliases:
 const parents = ancestors
-
-function attribute (element, attribute) {
-  return element.getAttribute(attribute)
-}
+const attribute = getAttribute
 
 function style (element, property) {
   return getComputedStyle(element).getPropertyValue(property)
@@ -439,23 +436,23 @@ function bounds (element, property) {
 }
 
 function checked (element) {
-  return element.checked || element.getAttribute('aria-checked')
+  return element.checked || getAttribute(element, 'aria-checked')
 }
 
 function selected (element) {
-  return element.selected || element.getAttribute('aria-selected')
+  return element.selected || getAttribute(element, 'aria-selected')
 }
 
 function disabled (element) {
-  return element.getAttribute('disabled') || element.getAttribute('aria-disabled')
+  return getAttribute(element, 'disabled') || getAttribute(element, 'aria-disabled')
 }
 
 function readonly (element) {
-  return element.readonly || element.getAttribute('aria-readonly')
+  return element.readonly || getAttribute(element, 'aria-readonly')
 }
 
 function role (element) {
-  return element.getAttribute('role')
+  return getAttribute(element, 'role')
 }
 
 function value (element) {
@@ -465,9 +462,9 @@ function value (element) {
 function label (element) {
   const doc = getOwnerDocument(element)
   if (matchesSelector(element, '[aria-label]')) {
-    return element.getAttribute('aria-label')
+    return getAttribute(element, 'aria-label')
   } else if (matchesSelector(element, '[aria-labelledby]')) {
-    const ids = element.getAttribute('aria-labelledby').split(/\s+/)
+    const ids = getAttribute(element, 'aria-labelledby').split(/\s+/)
     const labels = ids.map(id => doc.getElementById(id))
     return labels.map(label => label ? label.textContent : '').join(' ')
   } else if (matchesSelector(element, 'button, a[href], [role="button"], [role="link"]')) {
@@ -478,7 +475,7 @@ function label (element) {
       return getTextContent(legend)
     }
   } else if (matchesSelector(element, '[id]')) {
-    const labels = Array.from(querySelectorAll(doc, `[for="${element.getAttribute('id')}"]`))
+    const labels = Array.from(querySelectorAll(doc, `[for="${getAttribute(element, 'id')}"]`))
     return labels.map(label => label ? label.textContent : '').join(' ')
   } else if (matchesSelector(element, 'input,textarea,select')) {
     const labels = ancestors(element, 'label')
@@ -490,7 +487,7 @@ function label (element) {
 
 function title (element) {
   if (matchesSelector(element, '[title]')) {
-    return element.getAttribute('title')
+    return getAttribute(element, 'title')
   } else if (matchesSelector(element, 'svg')) {
     const title = querySelector(element, 'title')
     if (title) {

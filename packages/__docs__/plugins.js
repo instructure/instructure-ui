@@ -91,7 +91,8 @@ module.exports = [
 
       // deprecated packages and modules:
       '**/generate-examples/**',
-      '**/ui-themeable/src/StyleSheet.js'
+      '**/ui-themeable/src/StyleSheet.js',
+      '**/InputModeListener.js'
     ],
     themes: [
       require.resolve('@instructure/canvas-theme'),

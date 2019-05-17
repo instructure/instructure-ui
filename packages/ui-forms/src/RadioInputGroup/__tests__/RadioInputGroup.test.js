@@ -61,7 +61,10 @@ describe('<RadioInputGroup />', async () => {
       </RadioInputGroup>
     )
 
-    expect(consoleError).to.have.been.calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
+    await wait(() => {
+      expect(consoleError)
+        .to.have.been.calledWithMatch(`provided a 'value' prop without an 'onChange' handler`)
+    })
   })
 
   it('calls the onChange prop', async () => {
@@ -81,7 +84,10 @@ describe('<RadioInputGroup />', async () => {
     const input = await group.find('input')
 
     await input.click()
-    expect(onChange).to.have.been.called()
+
+    await wait(() => {
+      expect(onChange).to.have.been.called()
+    })
   })
 
   it('does not call the onChange prop when disabled', async () => {
@@ -102,7 +108,10 @@ describe('<RadioInputGroup />', async () => {
     const input = await group.find('input')
 
     await input.click(null, { clickable: false })
-    expect(onChange).to.not.have.been.called()
+
+    await wait(() => {
+      expect(onChange).to.not.have.been.called()
+    })
   })
 
   it('does not call the onChange prop when readOnly', async () => {
@@ -123,7 +132,10 @@ describe('<RadioInputGroup />', async () => {
     const input = await group.find('input')
 
     await input.click()
-    expect(onChange).to.not.have.been.called()
+
+    await wait(() => {
+      expect(onChange).to.not.have.been.called()
+    })
   })
 
   it('should not update the value when the value prop is set', async () => {
@@ -166,9 +178,11 @@ describe('<RadioInputGroup />', async () => {
     const group = await RadioInputGroupLocator.find()
     const inputs = await group.findAll('input[name="fruit"]')
 
-    expect(inputs[0].getAttribute('tabindex')).to.equal('0')
-    expect(inputs[1].getAttribute('tabindex')).to.equal('-1')
-    expect(inputs[2].getAttribute('tabindex')).to.equal('-1')
+    await wait(() => {
+      expect(inputs[0]).to.have.attribute('tabindex', '0')
+      expect(inputs[1]).to.attribute('tabindex', '-1')
+      expect(inputs[2]).to.attribute('tabindex', '-1')
+    })
   })
 
   it('adds the correct tabindex to RadioInputs when checked', async () => {
@@ -186,9 +200,11 @@ describe('<RadioInputGroup />', async () => {
     const group = await RadioInputGroupLocator.find()
     const inputs = await group.findAll('input[name="fruit"]')
 
-    expect(inputs[0].getAttribute('tabindex')).to.equal('-1')
-    expect(inputs[1].getAttribute('tabindex')).to.equal('0')
-    expect(inputs[2].getAttribute('tabindex')).to.equal('-1')
+    await wait(() => {
+      expect(inputs[0]).to.have.attribute('tabindex', '-1')
+      expect(inputs[1]).to.attribute('tabindex', '0')
+      expect(inputs[2]).to.attribute('tabindex', '-1')
+    })
   })
 
   describe('for a11y', async () => {

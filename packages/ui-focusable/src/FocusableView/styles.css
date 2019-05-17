@@ -95,7 +95,7 @@
     }
   }
 
-  &:focus,
+  &:focus:not(.focus-disabled),
   &.focused {
     &::before {
       opacity: 1;

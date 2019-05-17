@@ -83,6 +83,7 @@ describe('<SelectField />', async () => {
     )
 
     const selectField = await SelectFieldLocator.find()
+
     expect(await selectField.find('label')).to.exist()
   })
 
@@ -119,7 +120,9 @@ describe('<SelectField />', async () => {
     const selectField = await SelectFieldLocator.find()
     const input = await selectField.findInput()
 
-    expect(inputRef).to.have.been.calledWith(input.getDOMNode())
+    await wait(() => {
+      expect(inputRef).to.have.been.calledWith(input.getDOMNode())
+    })
   })
 
   it('should provide an expanded getter', async () => {
@@ -172,7 +175,8 @@ describe('<SelectField />', async () => {
     const menu = await selectField.findOptionsList()
 
     await wait(() => {
-      expect(input.getBoundingClientRect().top).to.be.lessThan(menu.getBoundingClientRect().top)
+      expect(input.getBoundingClientRect().top)
+        .to.be.lessThan(menu.getBoundingClientRect().top)
     })
   })
 
@@ -196,7 +200,10 @@ describe('<SelectField />', async () => {
 
     const menu = await selectField.findOptionsList()
 
-    expect(input.getBoundingClientRect().top).to.not.be.lessThan(menu.getBoundingClientRect().top)
+    await wait(() => {
+      expect(input.getBoundingClientRect().top)
+        .to.not.be.lessThan(menu.getBoundingClientRect().top)
+    })
   })
 
   it('expands when input is clicked', async () => {
@@ -213,8 +220,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
+
     await wait(() => {
-      expect(input.getAttribute('aria-expanded')).to.equal('true')
+      expect(input).to.have.attribute('aria-expanded', 'true')
     })
   })
 
@@ -233,8 +241,9 @@ describe('<SelectField />', async () => {
     const layout = await selectField.find(`.${styles.inputLayout}`)
 
     await layout.click()
+
     await wait(() => {
-      expect(input.getAttribute('aria-expanded')).to.equal('true')
+      expect(input).to.have.attribute('aria-expanded', 'true')
     })
   })
 
@@ -252,8 +261,9 @@ describe('<SelectField />', async () => {
     const label = await selectField.find('label:contains(Choose a state)')
 
     await label.click()
+
     await wait(() => {
-      expect(input.getAttribute('aria-expanded')).to.equal('true')
+      expect(input).to.have.attribute('aria-expanded', 'true')
     })
   })
 
@@ -270,8 +280,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.keyDown('down')
+
     await wait(() => {
-      expect(input.getAttribute('aria-expanded')).to.equal('true')
+      expect(input).to.have.attribute('aria-expanded', 'true')
     })
   })
 
@@ -288,8 +299,9 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.keyDown('up')
+
     await wait(() => {
-      expect(input.getAttribute('aria-expanded')).to.equal('true')
+      expect(input).to.have.attribute('aria-expanded', 'true')
     })
   })
 
@@ -307,6 +319,7 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.change({ target: { value: 'a' } })
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('true')
     })
@@ -326,6 +339,7 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('false')
     })
@@ -345,6 +359,7 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('false')
     })
@@ -364,11 +379,13 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('true')
     })
 
     await input.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('false')
     })
@@ -389,11 +406,13 @@ describe('<SelectField />', async () => {
     const layout = await selectField.find(`.${styles.inputLayout}`)
 
     await layout.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('true')
     })
 
     await layout.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('false')
     })
@@ -414,11 +433,13 @@ describe('<SelectField />', async () => {
     const label = await selectField.find('label:contains(Choose a state)')
 
     await label.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('true')
     })
 
     await label.click()
+
     await wait(() => {
       expect(input.getAttribute('aria-expanded')).to.equal('false')
     })
@@ -486,12 +507,17 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     await input.click()
-
     await input.keyDown('down')
-    expect(input.focused()).to.be.false()
+
+    await wait(() => {
+      expect(input).to.not.have.focus()
+    })
 
     await input.keyUp('esc')
-    expect(input.focused()).to.be.true()
+
+    await wait(() => {
+      expect(input).to.have.focus()
+    })
   })
 
   describe('selecting, highlighting, and loading options', () => {
@@ -517,21 +543,29 @@ describe('<SelectField />', async () => {
       const items = await selectField.findAllOptions()
 
       await input.keyDown('down')
-      expect(items[1].getDOMNode().className).to.include(optionsListStyles.highlighted)
+
+      await wait(() => {
+        expect(items[1]).to.have.className(optionsListStyles.highlighted)
+      })
 
       await input.keyDown('up')
-      expect(items[0].getDOMNode().className).to.include(optionsListStyles.highlighted)
 
-      expect(onSelect).to.not.have.been.called()
+      await wait(() => {
+        expect(items[0]).to.have.className(optionsListStyles.highlighted)
+        expect(onSelect).to.not.have.been.called()
+      })
 
       await input.keyDown('down')
       await input.keyDown('enter')
 
       const value = '1'
       const label = 'Alaska'
-      expect(onSelect).to.have.been.calledOnce()
-      expect(onSelect.firstCall.args[0].target).to.exist()
-      expect(onSelect.firstCall.args[1]).to.deep.equal({ value, label, id: value, children: label })
+
+      await wait(() => {
+        expect(onSelect).to.have.been.calledOnce()
+        expect(onSelect.firstCall.args[0].target).to.exist()
+        expect(onSelect.firstCall.args[1]).to.deep.equal({ value, label, id: value, children: label })
+      })
     })
 
     it('changes highlights with Home & End keys', async () => {
@@ -552,10 +586,16 @@ describe('<SelectField />', async () => {
       const items = await selectField.findAllOptions()
 
       await input.keyDown('end')
-      expect(items[2].getDOMNode().className).to.include(optionsListStyles.highlighted)
+
+      await wait(() => {
+        expect(items[2]).to.have.className(optionsListStyles.highlighted)
+      })
 
       await input.keyDown('home')
-      expect(items[0].getDOMNode().className).to.include(optionsListStyles.highlighted)
+
+      await wait(() => {
+        expect(items[0]).to.have.className(optionsListStyles.highlighted)
+      })
     })
 
     it('highlights selectedOption when expanding', async () => {
@@ -577,7 +617,10 @@ describe('<SelectField />', async () => {
       await input.click()
 
       const items = await selectField.findAllOptions()
-      expect(items[1].getDOMNode().className).to.include(optionsListStyles.highlighted)
+
+      await wait(() => {
+        expect(items[1]).to.have.className(optionsListStyles.highlighted)
+      })
     })
 
     it(`should highlight first option when options are loaded asynchronously`, async () => {
@@ -603,7 +646,10 @@ describe('<SelectField />', async () => {
       })
 
       await input.click()
-      expect(highlight).to.have.been.calledWith(0)
+
+      await wait(() => {
+        expect(highlight).to.have.been.calledWith(0)
+      })
     })
 
     it('renders only emptyOption prop in menu when options are empty', async () => {
@@ -625,7 +671,8 @@ describe('<SelectField />', async () => {
       await input.click()
 
       const item = await selectField.findOption()
-      expect(item.getTextContent()).to.equal(emptyOption)
+
+      expect(item).to.have.text(emptyOption)
     })
 
     it('renders only Spinner when loading is true', async () => {
@@ -647,7 +694,10 @@ describe('<SelectField />', async () => {
       await input.click()
 
       const item = await selectField.findOption()
-      expect(item.getTextContent()).to.equal(loadingText)
+
+      await wait(() => {
+        expect(item).to.have.text(loadingText)
+      })
     })
 
     it('does not change highlight when there are no options', async () => {
@@ -673,7 +723,9 @@ describe('<SelectField />', async () => {
       await input.keyDown('down')
       await input.keyDown('up')
 
-      expect(highlight).to.not.have.been.called()
+      await wait(() => {
+        expect(highlight).to.not.have.been.called()
+      })
     })
 
     it('should not close the options list when closeOnSelect is false', async () => {
@@ -714,24 +766,30 @@ describe('<SelectField />', async () => {
         />
       )
 
-      expect(onSelect).to.not.have.been.called()
-      expect(onClick).to.not.have.been.called()
+      await wait(() => {
+        expect(onSelect).to.not.have.been.called()
+        expect(onClick).to.not.have.been.called()
+      })
 
       const selectField = await SelectFieldLocator.find()
       const input = await selectField.findInput()
 
       await input.click()
 
-      // onClick gets called once when we expand the input
-      expect(onSelect).to.not.have.been.called()
-      expect(onClick).to.have.been.calledOnce()
+      await wait(() => {
+        // onClick gets called once when we expand the input
+        expect(onSelect).to.not.have.been.called()
+        expect(onClick).to.have.been.calledOnce()
+      })
 
       const option = await selectField.findOption()
       await option.keyDown('enter')
 
-      // onSelect gets called, onClick still should have only been called once
-      expect(onSelect).to.have.been.calledOnce()
-      expect(onClick).to.have.been.calledOnce()
+      await wait(() => {
+        // onSelect gets called, onClick still should have only been called once
+        expect(onSelect).to.have.been.calledOnce()
+        expect(onClick).to.have.been.calledOnce()
+      })
     })
   })
 
@@ -751,7 +809,10 @@ describe('<SelectField />', async () => {
     await input.click()
 
     const event = await input.keyDown('enter')
-    expect(event.preventDefault).to.have.been.called()
+
+    await wait(() => {
+      expect(event.preventDefault).to.have.been.called()
+    })
   })
 
   it('should not preventDefault onKeyDown of Enter when collapsed', async () => {
@@ -768,7 +829,10 @@ describe('<SelectField />', async () => {
     const input = await selectField.findInput()
 
     const event = await input.keyDown('enter')
-    expect(event.preventDefault).to.not.have.been.called()
+
+    await wait(() => {
+      expect(event.preventDefault).to.not.have.been.called()
+    })
   })
 
   describe('events', async () => {
@@ -814,9 +878,11 @@ describe('<SelectField />', async () => {
 
       await input.change({ target: { value: 'a' } })
 
-      expect(onInputChange).to.have.been.called()
-      expect(onInputChange.firstCall.args[0].type).to.equal('change')
-      expect(onInputChange.firstCall.args[1]).to.equal('a')
+      await wait(() => {
+        expect(onInputChange).to.have.been.called()
+        expect(onInputChange.firstCall.args[0].type).to.equal('change')
+        expect(onInputChange.firstCall.args[1]).to.equal('a')
+      })
     })
 
     it('responds to onBlur event', async () => {
@@ -835,7 +901,10 @@ describe('<SelectField />', async () => {
       const input = await selectField.findInput()
 
       await input.blur()
-      expect(onBlur).to.have.been.called()
+
+      await wait(() => {
+        expect(onBlur).to.have.been.called()
+      })
     })
 
     it('responds to onFocus event', async () => {
@@ -854,7 +923,10 @@ describe('<SelectField />', async () => {
       const input = await selectField.findInput()
 
       await input.focus()
-      expect(onFocus).to.have.been.called()
+
+      await wait(() => {
+        expect(onFocus).to.have.been.called()
+      })
     })
   })
 
@@ -904,7 +976,9 @@ describe('<SelectField />', async () => {
       const selectField = await SelectFieldLocator.find()
       const input = await selectField.findInput()
 
-      expect(input.getAttribute('aria-invalid')).to.exist()
+      await wait(() => {
+        expect(input).to.have.attribute('aria-invalid')
+      })
     })
   })
 })

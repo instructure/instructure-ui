@@ -53,9 +53,11 @@ describe('<MetricsListItem />', async () => {
       />
     )
 
-    expect(await MetricsListItemLocator.find()).to.have.attribute('data-automation', 'foo')
+    expect(await MetricsListItemLocator.find())
+      .to.have.attribute('data-automation', 'foo')
   })
-  describe('for a11y', () => {
+
+  describe('for a11y', async () => {
     it('should meet standards', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
@@ -71,24 +73,26 @@ describe('<MetricsListItem />', async () => {
     it('should have role="row" for the container', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
-      const metricsListItem = await MetricsListItemLocator.find()
-      expect(metricsListItem.getAttribute('role')).to.equal('row')
+      expect(await MetricsListItemLocator.find())
+        .to.have.attribute('role', 'row')
     })
 
     it('should have role="gridcell" for the value', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
       const metricsListItem = await MetricsListItemLocator.find()
-      const value = await metricsListItem.find('[role="gridcell"]')
-      expect(value.getTextContent()).to.equal('80%')
+
+      expect(await metricsListItem.find('[role="gridcell"]'))
+        .to.have.text('80%')
     })
 
     it('should have role=rowheader for the label', async () => {
       await mount(<MetricsListItem label="Grade" value="80%" />)
 
       const metricsListItem = await MetricsListItemLocator.find()
-      const label = await metricsListItem.find('[role="rowheader"]')
-      expect(label.getTextContent()).to.equal('Grade')
+
+      expect(await metricsListItem.find('[role="rowheader"]'))
+        .to.have.text('Grade')
     })
   })
 })

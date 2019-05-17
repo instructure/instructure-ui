@@ -36,104 +36,129 @@ class Sandbox {
     console.info('[ui-test-utils] Initializing test sandbox...')
     try {
       // global Mocha (or Jest?) beforeEach
-      before('[ui-test-utils] sandbox init', this.setup.bind(this))
-      beforeEach('[ui-test-utils] sandbox setup', this.setupEach.bind(this))
-      afterEach('[ui-test-utils] sandbox teardown', this.teardownEach.bind(this))
+      before(this.init.bind(this))
+      beforeEach(this.setup.bind(this))
+      afterEach(this.teardown.bind(this))
     } catch (e) {
       console.warn(`[ui-test-utils] error initializing test sandbox: ${e}`)
     }
   }
 
+  async init () {
+    initConsole()
+
+    const originalAddDocumentListener = document.addEventListener
+    const originalAddWindowListener = window.addEventListener
+    this._listeners = []
+    document.addEventListener = (...args) => {
+      this._listeners.push([document, args])
+      return originalAddDocumentListener(...args)
+    }
+    window.addEventListener = (...args) => {
+      this._listeners.push([window, args])
+      return originalAddWindowListener(...args)
+    }
+
+    const originalSetTimeout = global.setTimeout
+    this._timeouts = []
+    global.setTimeout = (...args) => {
+      const timeoutId = originalSetTimeout(...args)
+      this._timeouts.push(timeoutId)
+      return timeoutId
+    }
+
+    const originalRequestAnimationFrame = window.requestAnimationFrame
+    this._raf = []
+    window.requestAnimationFrame = (...args) => {
+      const requestId = originalRequestAnimationFrame(...args)
+      this._raf.push(requestId)
+      return requestId
+    }
+
+    fetchMock.config.overwriteRoutes = true
+
+    this._sandbox = sinon.createSandbox()
+
+    this._attributes = {
+      document: [...document.documentElement.attributes],
+      body: [...document.body.attributes]
+    }
+
+    this._addedNodes = []
+    this._observer = new MutationObserver((mutations) => {
+      const addedNodes = Array.from(mutations).map(mutation => Array.from(mutation.addedNodes))
+      this._addedNodes = this._addedNodes.concat(addedNodes)
+    })
+    this._observer.observe(document.head, { childList: true })
+    this._observer.observe(document.body, { childList: true })
+  }
+
   async setup () {
-    try {
-      initConsole()
+    document.documentElement.setAttribute('dir', 'ltr')
+    document.documentElement.setAttribute('lang', 'en-US')
 
-      fetchMock.config.overwriteRoutes = true
-
-      this._sandbox = sinon.createSandbox()
-
-      this._attributes = {
-        document: [...document.documentElement.attributes],
-        body: [...document.body.attributes]
-      }
-
-      this._addedNodes = []
-      this._observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          Array.from(mutation.addedNodes).forEach((addedNode) => {
-            this._addedNodes.push(addedNode)
-          })
-        })
-      })
-    } catch (e) {
-      console.warn(`[ui-test-utils] error in suite setup: ${e}`)
+    // override mocha's onerror handler
+    if (typeof window.onerror === 'function') {
+      this._originalWindowOnError = window.onerror
+      window.onerror = overrideWindowOnError(window.onerror)
     }
+
+    // for prop-type warnings:
+    if (typeof console.error === 'function') {
+      this._originalConsoleError = console.error
+      console.error = overrideConsoleError(console.error)
+    }
+
+    // We need to call 'mock' at least once
+    // in order to get fetch-mock to error out on unexpected actual fetch calls,
+    // so we call it with a bogus path that should never get hit.
+    fetchMock.mock('bananas', 'bananas')
   }
 
-  async teardownEach () {
-    try {
-      this._observer.disconnect()
+  async teardown () {
+    await ReactComponentWrapper.unmount()
 
-      await ReactComponentWrapper.unmount()
+    this._timeouts.forEach((timeoutId) => {
+      clearTimeout(timeoutId)
+    })
 
-      StyleSheet.flush()
+    this._raf.forEach((requestId) => {
+      window.cancelAnimationFrame(requestId)
+    })
 
-      this._sandbox.resetHistory()
-      this._sandbox.restore()
+    this._listeners.forEach(([element, args]) => {
+      element.removeEventListener(...args)
+    })
 
-      window.localStorage && window.localStorage.clear()
-      window.sessionStorage &&  window.sessionStorage.clear()
+    StyleSheet.flush()
 
-      if (this._originalWindowOnError) {
-        window.onerror = this._originalWindowOnError
-      }
+    this._sandbox.resetHistory()
+    this._sandbox.restore()
 
-      if (this._originalConsoleError) {
-        console.error = this._originalConsoleError
-      }
+    window.localStorage && window.localStorage.clear()
+    window.sessionStorage &&  window.sessionStorage.clear()
 
-      setAttributes(document.documentElement, this._attributes.document)
-      setAttributes(document.body, this._attributes.body)
-
-      this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
-      this._addedNodes = []
-
-      fetchMock.restore()
-
-      if (global.viewport) {
-        global.viewport.reset()
-      }
-    } catch (e) {
-      console.warn(`[ui-test-utils] error in test teardown: ${e}`)
+    if (this._originalWindowOnError) {
+      window.onerror = this._originalWindowOnError
     }
-  }
 
-  async setupEach () {
-    try {
-      document.documentElement.setAttribute('dir', 'ltr')
-      document.documentElement.setAttribute('lang', 'en-US')
+    if (this._originalConsoleError) {
+      console.error = this._originalConsoleError
+    }
 
-      // override mocha's onerror handler
-      if (typeof window.onerror === 'function') {
-        this._originalWindowOnError = window.onerror
-        window.onerror = overrideWindowOnError(window.onerror)
-      }
+    setAttributes(document.documentElement, this._attributes.document)
+    setAttributes(document.body, this._attributes.body)
 
-      // for prop-type warnings:
-      if (typeof console.error === 'function') {
-        this._originalConsoleError = console.error
-        console.error = overrideConsoleError(console.error)
-      }
+    this._observer.disconnect()
+    this._observer.takeRecords()
 
-      this._observer.observe(document.head, { childList: true })
-      this._observer.observe(document.body, { childList: true })
+    this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
+    this._addedNodes = []
 
-      // We need to call 'mock' at least once
-      // in order to get fetch-mock to error out on unexpected actual fetch calls,
-      // so we call it with a bogus path that should never get hit.
-      fetchMock.mock('bananas', 'bananas')
-    } catch (e) {
-      console.warn(`[ui-test-utils] error in test setup: ${e}`)
+    fetchMock.restore()
+
+    if (global.viewport) {
+      global.viewport.reset()
     }
   }
 

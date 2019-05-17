@@ -42,18 +42,16 @@ example: true
 ---
 <Focusable>
 {({ focused }) => {
-  const button = <Button href="#main">Skip to content</Button>
   return (
     <div>
-      {focused ?
-        button :
-        <div>
-          <ScreenReaderContent>{button}</ScreenReaderContent>
-          <Text color="error">
-            Tab into this code example to see the Skip to Content link appear
-          </Text>
-        </div>
+      {
+        focused ? 
+          <Button href="#mainContentExample">Skip to content</Button> : 
+          <ScreenReaderContent tabIndex="0">Skip to content</ScreenReaderContent>
       }
+      <View as="p" id="mainContentExample">
+        Tab into this code example to see a 'Skip to Content' link appear
+      </View>
     </div>
   )
 }}
@@ -125,8 +123,8 @@ class Example extends React.Component {
       <div>
         <View margin="small" as="div">
           <Focusable ref={(el) => this._focusable = el}>
-            {({ focusVisible }) => (
-              <FocusableView focused={focusVisible}>
+            {({ focused }) => (
+              <FocusableView focused={focused}>
                 Focus me using the Button below
               </FocusableView>
             )}

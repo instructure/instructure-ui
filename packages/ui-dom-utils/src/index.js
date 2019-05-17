@@ -24,6 +24,7 @@
 
 /* list utils in alphabetical order */
 export { addEventListener } from './addEventListener'
+export { addInputModeListener } from './addInputModeListener'
 export { addPositionChangeListener } from './addPositionChangeListener'
 export { addResizeListener } from './addResizeListener'
 export { canUseDOM } from './canUseDOM'
@@ -39,7 +40,6 @@ export { getFontSize } from './getFontSize'
 export { getOffsetParents } from './getOffsetParents'
 export { getScrollParents } from './getScrollParents'
 export { handleMouseOverOut } from './handleMouseOverOut'
-export { InputModeListener } from './InputModeListener'
 export { isActiveElement } from './isActiveElement'
 export { isVisible } from './isVisible'
 export { ownerDocument } from './ownerDocument'

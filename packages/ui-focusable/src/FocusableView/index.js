@@ -148,7 +148,8 @@ class FocusableView extends Component {
           [styles.root]: true,
           [styles[color]]: true,
           [styles[shape]]: true,
-          [styles.focused]: focused
+          [styles.focused]: focused,
+          [styles['focus-disabled']]: !focused
         })}
         role={role || onClick ? role : null}
         tabIndex={onClick && !role ? (tabIndex || '0') : tabIndex}

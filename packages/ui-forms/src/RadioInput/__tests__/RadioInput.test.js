@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, stub } from '@instructure/ui-test-utils'
+import { expect, mount, stub, wait } from '@instructure/ui-test-utils'
 
 import { RadioInput } from '../index'
 import RadioInputLocator from '../locator'
@@ -60,7 +60,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onClick).to.have.been.called()
+
+      await wait (() => {
+        expect(onClick).to.have.been.called()
+      })
     })
 
     it('does not respond to onClick event when disabled', async () => {
@@ -79,7 +82,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onClick).to.not.have.been.called()
+
+      await wait(() => {
+        expect(onClick).to.not.have.been.called()
+      })
     })
 
     it('does not respond to onClick event when readOnly', async () => {
@@ -98,7 +104,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onClick).to.not.have.been.called()
+
+      await wait(() => {
+        expect(onClick).to.not.have.been.called()
+      })
     })
 
     it('responds to onChange event', async () => {
@@ -116,7 +125,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onChange).to.have.been.called()
+
+      await wait(() => {
+        expect(onChange).to.have.been.called()
+      })
     })
 
     it('does not respond to onChange event when disabled', async () => {
@@ -135,7 +147,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onChange).to.not.have.been.called()
+
+      await wait(() => {
+        expect(onChange).to.not.have.been.called()
+      })
     })
 
     it('does not respond to onChange event when readOnly', async () => {
@@ -154,7 +169,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.click()
-      expect(onChange).to.not.have.been.called()
+
+      await wait(() => {
+        expect(onChange).to.not.have.been.called()
+      })
     })
 
     it('responds to onBlur event', async () => {
@@ -172,7 +190,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.blur()
-      expect(onBlur).to.have.been.called()
+
+      await wait(() => {
+        expect(onBlur).to.have.been.called()
+      })
     })
 
     it('responds to onFocus event', async () => {
@@ -190,7 +211,10 @@ describe('<RadioInput />', async () => {
       const input = await radioInput.find('input[type="radio"]')
 
       await input.focus()
-      expect(onFocus).to.have.been.called()
+
+      await wait(() => {
+        expect(onFocus).to.have.been.called()
+      })
     })
 
     it('sets input to checked when selected', async () => {
@@ -205,7 +229,10 @@ describe('<RadioInput />', async () => {
 
       const radioInput = await RadioInputLocator.find()
       const input = await radioInput.find('input[type="radio"]')
-      expect(input.getDOMNode().checked).to.be.true()
+
+      await wait(() => {
+        expect(input).to.be.checked()
+      })
     })
 
     it('focuses with the focus helper', async () => {
@@ -223,8 +250,9 @@ describe('<RadioInput />', async () => {
 
       ref.focus()
 
-      expect(ref.focused).to.be.true()
-      expect(radioInput.containsFocus()).to.be.true()
+      await wait(() => {
+        expect(radioInput).to.contain.focus()
+      })
     })
   })
 
@@ -240,6 +268,7 @@ describe('<RadioInput />', async () => {
       )
 
       const radioInput = await RadioInputLocator.find()
+
       expect(await radioInput.accessible())
     })
 
@@ -254,7 +283,9 @@ describe('<RadioInput />', async () => {
         />
       )
 
-      expect(consoleError).to.have.been.calledWithMatch('prop `label` is marked as required')
+      await wait(() => {
+        expect(consoleError).to.have.been.calledWithMatch('prop `label` is marked as required')
+      })
     })
   })
 })

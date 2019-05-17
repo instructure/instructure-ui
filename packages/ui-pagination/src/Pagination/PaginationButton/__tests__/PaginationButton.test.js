@@ -24,7 +24,7 @@
 
 import React from 'react'
 
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
+import { expect, mount, stub, locator, wait } from '@instructure/ui-test-utils'
 
 import { PaginationButton } from '../index'
 
@@ -54,7 +54,10 @@ describe('<PaginationButton />', async () => {
     )
     const button = await PaginationButtonLocator.find(':label(1)')
     await button.click()
-    expect(onClick).to.not.have.been.called()
+
+    await wait(() => {
+      expect(onClick).to.not.have.been.called()
+    })
   })
 
   it('should navigate using link when href provided', async () => {
@@ -62,6 +65,9 @@ describe('<PaginationButton />', async () => {
       <PaginationButton href="https://instructure.design/">1</PaginationButton>
     )
     const button = await PaginationButtonLocator.find(':label(1)')
-    expect(button.getAttribute('href')).to.equal('https://instructure.design/')
+
+    await wait(() => {
+      expect(button).to.have.attribute('href', 'https://instructure.design/')
+    })
   })
 })

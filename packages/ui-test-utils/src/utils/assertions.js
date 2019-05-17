@@ -21,6 +21,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import React from 'react'
+import { findDOMNode } from 'react-dom'
+
 import { elementToString } from './elementToString'
 import { wrapQueryResult } from './queryResult'
 import { isElement } from './isElement'
@@ -31,10 +34,20 @@ export default function assertions (chai, utils) {
   const { Assertion } = chai
 
   function wrapObj (obj) {
-    if (isElement(obj)) {
-      return wrapQueryResult(obj)
-    } else if (obj && typeof obj.getDOMNode === 'function') {
+    if (obj && typeof obj.getDOMNode === 'function') {
       return obj
+    }
+
+    let node
+
+    if (isElement(obj)) {
+      node = obj
+    } else if (React.isValidElement(obj)) {
+      node = findDOMNode(obj)
+    }
+
+    if (node) {
+      return wrapQueryResult(node)
     }
   }
 
@@ -79,9 +92,11 @@ export default function assertions (chai, utils) {
   function wrapOverwriteAssertion (assertion, _super) {
     return function (arg1, arg2) {
       const wrapper = wrapObj(flag(this, 'object'))
+
       if (!wrapper) {
         return _super.apply(this, arguments)
       }
+
       assertion.call(this, {
         markup: () => wrapper.toString(),
         sig: inspect(wrapper.getDOMNode()),
@@ -97,17 +112,23 @@ export default function assertions (chai, utils) {
   function wrapAssertion (assertion) {
     return function (arg1, arg2) {
       const wrapper = wrapObj(flag(this, 'object'))
+
       const config = {
-        markup: () => wrapper.toString(),
-        sig: inspect(wrapper.getDOMNode()),
         wrapper,
         arg1,
         flag,
         inspect
       }
+
+      if (wrapper) {
+        config.markup = () => wrapper.toString()
+        config.sig = inspect(wrapper.getDOMNode())
+      }
+
       if (arguments.length > 1) {
         config.arg2 = arg2
       }
+
       assertion.call(this, config)
     }
   }
@@ -126,7 +147,7 @@ export default function assertions (chai, utils) {
     if (typeof arg1 !== 'undefined') {
       if (flag(this, 'contains')) {
         this.assert(
-          actual.indexOf(String(arg1)) > -1,
+          actual && actual.indexOf(String(arg1)) > -1,
           () => `expected ${sig} to contain text #{exp}, but it has #{act} ${markup()}`,
           () => `expected ${sig} not to contain text #{exp}, but it has #{act} ${markup()}`,
           arg1,
@@ -134,7 +155,7 @@ export default function assertions (chai, utils) {
         )
       } else {
         this.assert(
-          matches(actual, arg1, arg2),
+          actual && matches(actual, arg1, arg2),
           () => `expected ${sig} to have text #{exp}, but it has #{act} ${markup()}`,
           () => `expected ${sig} to not have text #{exp}, but it has #{act} ${markup()}`,
           arg1,
@@ -149,7 +170,7 @@ export default function assertions (chai, utils) {
   overwriteChainableMethod('contain', function contain ({ wrapper, markup, arg1, sig }) {
     if (arg1) {
       this.assert(
-        wrapper.contains(arg1),
+        wrapper && wrapper.contains(arg1),
         () => `expected ${sig} to contain ${elementToString(arg1)} ${markup()}`,
         () => `expected ${sig} to not contain ${elementToString(arg1)} ${markup()}`,
         arg1
@@ -161,7 +182,7 @@ export default function assertions (chai, utils) {
     const actual = wrapper.classNames()
 
     this.assert(
-      wrapper.hasClass(arg1),
+      wrapper && wrapper.hasClass(arg1),
       () => `expected ${sig} to have a #{exp} class, but it has #{act} ${markup()}`,
       () => `expected ${sig} to not have a #{exp} class, but it has #{act} ${markup()}`,
       arg1,
@@ -171,7 +192,7 @@ export default function assertions (chai, utils) {
 
   addAssertion('match', function match ({ wrapper, markup, arg1, sig }) {
     this.assert(
-      wrapper.matches(arg1),
+      wrapper && wrapper.matches(arg1),
       () => `expected ${sig} to match #{exp} ${markup()}`,
       () => `expected ${sig} to not match #{exp} ${markup()}`,
       arg1
@@ -206,27 +227,34 @@ export default function assertions (chai, utils) {
   addAssertion('label', valueAssertion('label', 'label'))
 }
 
+function getActual (wrapper, assertion, ...args) {
+  const methodOrProperty = wrapper ? wrapper[assertion] : undefined
+  if (typeof methodOrProperty === 'function') {
+    return methodOrProperty(...args)
+  } else {
+    return methodOrProperty
+  }
+}
+
 function propAndValueAssertion (assertion, desc) {
   return function (args) {
     const { wrapper, markup, flag, inspect, arg1, arg2, arg3, sig } = args
-    const actual = wrapper[assertion](arg1)
-
-    if (!flag(this, 'negate') || !arg2) {
-      this.assert(
-        typeof actual !== 'undefined',
-        () => `expected ${sig} to have a #{exp} ${desc} ${markup()}`,
-        () => `expected ${sig} to not have a #{exp} ${desc} ${markup()}`,
-        arg1
-      )
-    }
+    const actual = getActual(wrapper, assertion, arg1)
 
     if (arg2) {
       this.assert(
-        matches(actual, arg2, arg3),
+        actual && matches(actual, arg2, arg3),
         () => `expected ${sig} to have a ${inspect(arg1)} ${desc} with the value #{exp}, but the value was #{act} ${markup()}`,
         () => `expected ${sig} to not have a ${inspect(arg1)} ${desc} with the value #{act} ${markup()}`,
         arg2,
         actual
+      )
+    } else {
+      this.assert(
+        typeof actual !== 'undefined' && actual !== null,
+        () => `expected ${sig} to have a #{exp} ${desc} ${markup()}`,
+        () => `expected ${sig} to not have a #{exp} ${desc} ${markup()}`,
+        arg1
       )
     }
 
@@ -236,8 +264,9 @@ function propAndValueAssertion (assertion, desc) {
 
 function booleanAssertion (assertion, desc) {
   return function ({ wrapper, markup, sig }) {
+    const actual = getActual(wrapper, assertion)
     this.assert(
-      wrapper[assertion](),
+      actual,
       () => `expected ${sig} to be ${desc} ${markup()}`,
       () => `expected ${sig} to not be ${desc} ${markup()}`
     )
@@ -246,10 +275,10 @@ function booleanAssertion (assertion, desc) {
 
 function valueAssertion (assertion, desc) {
   return function ({ wrapper, markup, arg1, arg2, sig }) {
-    const actual = wrapper[assertion]()
+    const actual = getActual(wrapper, assertion)
 
     this.assert(
-      matches(wrapper[assertion](), arg1, arg2),
+      matches(actual, arg1, arg2),
       () => `expected ${sig} to have a #{exp} ${desc}, but it has #{act} ${markup()}`,
       () => `expected ${sig} to not have a #{exp} ${desc}, but it has #{act} ${markup()}`,
       arg1,
@@ -261,10 +290,10 @@ function valueAssertion (assertion, desc) {
 function listAndCountAssertion (assertion, desc) {
   return function ({ wrapper, markup, arg1, sig, flag }) {
     const exactlyCount = flag(this, 'exactlyCount')
+    const actual = getActual(wrapper, assertion, arg1)
+    const count = actual.length
 
     if (exactlyCount || exactlyCount === 0) {
-      const count = wrapper[assertion](arg1).length
-
       this.assert(
           count === exactlyCount,
           () => `expected ${sig} to have ${exactlyCount} ${desc} #{exp} but actually found ${count} ${markup()}`,
@@ -273,7 +302,7 @@ function listAndCountAssertion (assertion, desc) {
       )
     } else {
       this.assert(
-          (wrapper[assertion](arg1).length > 0),
+          (count > 0),
           () => `expected ${sig} to have ${desc} #{exp} ${markup()}`,
           () => `expected ${sig} to not have ${desc} #{exp} ${markup()}`,
           arg1

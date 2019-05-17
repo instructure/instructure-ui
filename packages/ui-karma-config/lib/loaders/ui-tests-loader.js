@@ -54,7 +54,7 @@ module.exports = function (source, map) {
       if (testFilePaths.length > 0) {
         const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         result = `
-describe('ui-test-utils', async function () {
+describe(':', async function () {
 ${testFileRequires.join(';\n')}
 })
 `

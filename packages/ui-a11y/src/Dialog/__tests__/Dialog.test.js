@@ -109,7 +109,9 @@ describe('<Dialog />', async () => {
     await within(dialog.getOwnerDocument().documentElement)
       .click()
 
-    expect(onDismiss).to.have.been.called()
+    await wait(() => {
+      expect(onDismiss).to.have.been.called()
+    })
   })
 
   describe('managed focus', async () => {
