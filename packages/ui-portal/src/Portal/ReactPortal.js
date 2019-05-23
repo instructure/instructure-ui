@@ -24,6 +24,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import isPropValid from '@emotion/is-prop-valid'
 
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
@@ -147,16 +148,37 @@ class ReactPortal extends React.Component {
   }
 
   insertNode () {
+    const {
+      open,
+      insertAt,
+      onOpen,
+      onClose,
+      mountNode,
+      children,
+      elementRef,
+      ...props
+    } = this.props
+
     // Create node if it doesn't already exist
     if (!this.DOMNode) {
-      this.DOMNode = document.createElement('span')
-      this.DOMNode.setAttribute('dir', this.dir)
-      this.props.elementRef(this.DOMNode)
+      const node = document.createElement('span')
+
+      Object.keys(props).forEach((name) => {
+        if (isPropValid(name)) {
+          node.setAttribute(name, props[name])
+        }
+      })
+
+      node.setAttribute('dir', this.dir)
+
+      elementRef(node)
+
+      this.DOMNode = node
     }
 
     // Append node to container if it isn't already
     if (this.DOMNode.parentNode !== this.state.mountNode) {
-      if (this.props.insertAt === 'bottom') {
+      if (insertAt === 'bottom') {
         this.state.mountNode.appendChild(this.DOMNode)
       } else {
         this.state.mountNode.insertBefore(this.DOMNode, this.state.mountNode.firstChild)

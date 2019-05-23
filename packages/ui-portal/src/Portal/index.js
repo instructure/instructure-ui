@@ -27,7 +27,6 @@ import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
 
 import { element } from '@instructure/ui-prop-types'
-import { testable } from '@instructure/ui-testable'
 
 import { ReactPortal } from './ReactPortal'
 import { SubtreePortal } from './SubtreePortal'
@@ -40,7 +39,6 @@ category: components/utilities
 ---
 @module Portal
 **/
-@testable()
 class Portal extends Component {
   static propTypes = {
     /**

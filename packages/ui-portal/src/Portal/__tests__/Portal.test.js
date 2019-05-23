@@ -23,37 +23,35 @@
  */
 
 import React from 'react'
-import { expect, mount, stub, locator } from '@instructure/ui-test-utils'
+import { find, expect, mount, stub } from '@instructure/ui-test-utils'
 
 import { Portal } from '../index'
-
-const PortalLocator = locator(Portal.selector)
 
 describe(`<Portal />`, async () => {
   it('should render', async () => {
     await mount(
       <Portal open>Hello World</Portal>
     )
-    const portal = await PortalLocator.find(':contains(Hello World)')
+    const portal = await find(':contains(Hello World)')
     expect(portal.getDOMNode()).to.exist()
   })
 
   it('should be accessible', async () => {
     await mount(
-      <Portal open>Hello World</Portal>
+      <Portal open id="portal">Hello World</Portal>
     )
-    const portal = await PortalLocator.find(':contains(Hello World)')
+    const portal = await find('#portal')
     expect(await portal.accessible()).to.be.true()
   })
 
   it('should support onOpen prop', async () => {
     const onOpen = stub()
     await mount(
-      <Portal open onOpen={onOpen}>
+      <Portal open onOpen={onOpen} id="portal">
         Hello World
       </Portal>
     )
-    const portal = await PortalLocator.find(':contains(Hello World)')
+    const portal = await find('#portal')
     expect(onOpen).to.have.been.calledWith(portal.getDOMNode())
   })
 
@@ -75,18 +73,18 @@ describe(`<Portal />`, async () => {
   it('should add a dir attribute to the root DOM node', async () => {
     const onOpen = stub()
     await mount(
-      <Portal open onOpen={onOpen}>
+      <Portal open onOpen={onOpen} id="portal">
         Hello World
       </Portal>
     )
-    const portal = await PortalLocator.find(':contains(Hello World)')
+    const portal = await find('#portal')
     expect(portal.getAttribute('dir')).to.equal('ltr')
   })
 
   it('should not render if children are empty', async () => {
-    await mount(<Portal open />)
-    const portal = await PortalLocator.findAll({ expectEmpty: true })
-    expect(portal.length).to.equal(0)
+    await mount(<Portal open id="portal" />)
+    const portal = await find('#portal', { expectEmpty: true })
+    expect(portal).to.not.exist()
   })
 
   describe('without a mountNode prop', () => {
@@ -96,27 +94,28 @@ describe(`<Portal />`, async () => {
           Hello World
         </Portal>
       )
-      const portal = await PortalLocator.findAll({ expectEmpty: true })
-      expect(portal.length).to.equal(0)
+      const portal = await find('#portal', { expectEmpty: true })
+      expect(portal).to.not.exist()
     })
 
     it('should render children and have a node with a parent when open', async () => {
       const onKeyDown = stub()
       await mount(
-        <Portal open>
+        <Portal open id="portal">
           <button onKeyDown={onKeyDown}>
             Hello World
           </button>
         </Portal>
       )
 
-      const button = await PortalLocator.find('button:label(Hello World)')
+      const portal = await find('#portal')
+      const button = await find('button:label(Hello World)')
 
       await button.keyDown('Enter')
 
       expect(onKeyDown).to.have.been.called()
 
-      expect(button.getParentNode())
+      expect(portal.getParentNode())
         .to.equal(button.getOwnerDocument().body)
     })
   })
@@ -127,13 +126,14 @@ describe(`<Portal />`, async () => {
         <div>
           <Portal
             mountNode={() => document.getElementById('portal-mount-node')}
+            id="portal"
           >
             Hello World
           </Portal>
           <div id="portal-mount-node" />
         </div>
       )
-      const portal = await PortalLocator.find({ expectEmpty: true })
+      const portal = await find('#portal', { expectEmpty: true })
 
       expect(portal).to.not.exist()
     })
@@ -147,12 +147,13 @@ describe(`<Portal />`, async () => {
         <Portal
           open
           mountNode={mountNode}
+          id="portal"
         >
           Hello World
         </Portal>
       )
 
-      const portal = await PortalLocator.find(':contains(Hello World)')
+      const portal = await find('#portal')
 
       expect(portal).to.have.exactly(1).ancestors('#portal-mount-node')
     })

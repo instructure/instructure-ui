@@ -25,6 +25,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
+import isPropValid from '@emotion/is-prop-valid'
 
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
@@ -108,32 +109,48 @@ class SubtreePortal extends Component {
   }
 
   renderPortal (props) {
+    const {
+      open,
+      insertAt,
+      onOpen,
+      onClose,
+      elementRef,
+      children,
+      ...passThroughProps
+    } = props
+
     const isInitialMount = !this.DOMNode
     const mountNode = this.mountNode
 
-    let children = props.children
+    let content = children
 
     // Wrap text in a span since subtree will only render a single top-level node
-    if (typeof children === 'string' && children.length > 0) {
-      children = (
+    if (typeof content === 'string' && content.length > 0) {
+      content = (
         <span>
-          {children}
+          {content}
         </span>
       )
     }
 
     // Render subtree if Portal is open and has children to render
-    if (props.open && React.Children.count(children) > 0) {
+    if (open && React.Children.count(content) > 0) {
       // Create node if it doesn't already exist
       if (!this.DOMNode) {
-        this.DOMNode = document.createElement('span')
-        this.DOMNode.setAttribute('dir', this.dir)
-        this.props.elementRef(this.DOMNode)
+        const node = document.createElement('span')
+        Object.keys(passThroughProps).forEach((name) => {
+          if (isPropValid(name)) {
+            node.setAttribute(name, passThroughProps[name])
+          }
+        })
+        node.setAttribute('dir', this.dir)
+        elementRef(node)
+        this.DOMNode = node
       }
 
       // Append node to container if it isn't already
       if (this.DOMNode.parentNode !== mountNode) {
-        if (this.props.insertAt === 'bottom') {
+        if (insertAt === 'bottom') {
           mountNode.appendChild(this.DOMNode)
         } else {
           mountNode.insertBefore(this.DOMNode, mountNode.firstChild)
@@ -143,12 +160,12 @@ class SubtreePortal extends Component {
       // Notify that subtree has been rendered if props ask for it
       const handleMount = () => {
         // Only fire onOpen if Portal was closed and is now open
-        if ((isInitialMount || (!this.props.open && props.open)) && typeof props.onOpen === 'function') {
-          props.onOpen(this.DOMNode)
+        if ((isInitialMount || (!this.props.open && open)) && typeof onOpen === 'function') {
+          onOpen(this.DOMNode)
         }
       }
 
-      ReactDOM.unstable_renderSubtreeIntoContainer(this, children, this.DOMNode, handleMount)
+      ReactDOM.unstable_renderSubtreeIntoContainer(this, content, this.DOMNode, handleMount)
     } else {
       this.removePortal(props)
     }

@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@babel/runtime": "^7",
+    "@emotion/is-prop-valid": "^0.7.3",
     "@instructure/ui-i18n": "^6.2.0",
     "@instructure/ui-prop-types": "^6.2.0",
-    "@instructure/ui-testable": "^6.2.0",
     "@instructure/ui-utils": "^6.2.0",
     "prop-types": "^15"
   },
