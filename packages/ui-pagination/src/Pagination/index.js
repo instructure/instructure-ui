@@ -68,7 +68,7 @@ category: components
 class Pagination extends Component {
   static propTypes = {
     /**
-     * children of type PaginationButton
+     * children of type Pagination.Page
      */
     children: Children.oneOf([PaginationButton]),
     /**
@@ -103,7 +103,7 @@ class Pagination extends Component {
      */
     elementRef: PropTypes.func,
     /**
-     * For accessibility, Pagination sets focus on the first or last PaginationButtons,
+     * For accessibility, Pagination sets focus on the first or last Pagination.Pages,
      * respectively, when the Previous or Next arrow buttons are removed from the DOM.
      * Set this property to `false` to prevent this behavior.
      */

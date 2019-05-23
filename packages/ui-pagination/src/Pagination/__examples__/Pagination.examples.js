@@ -22,14 +22,14 @@
  * SOFTWARE.
  */
 import React from 'react'
-import { PaginationButton } from '../index'
+import { Pagination } from '../index'
 
 const buildPages = (count = 4, current = 0) => {
   return Array.from(Array(count)).map((v, i) => {
     return (
-      <PaginationButton key={i} current={i === current}>
+      <Pagination.Page key={i} current={i === current}>
         {i}
-      </PaginationButton>
+      </Pagination.Page>
     )
   })
 }

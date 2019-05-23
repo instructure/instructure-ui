@@ -3,14 +3,14 @@ describes: Pagination
 ---
 
 Renders available pages of content, and reacts to selection of another page.
-Expects array of `PaginationButton` children. Focus and announcement of page change is
+Expects array of `Pagination.Page` children. Focus and announcement of page change is
 the responsibility of your app.
 
 If there are more than 5 pages, the `compact` variant truncates the page navigation
 to show only the first, last, and pages surrounding the current page. At fewer than
 5 pages, no next/previous arrow buttons will be shown, and all pages will be listed.
 
-Provide an `onClick` to `PaginationButton` to handle navigation.
+Provide an `onClick` to `Pagination.Page` to handle navigation.
 
 ```js
 ---
@@ -65,7 +65,7 @@ class Example extends React.Component {
     this.state = { currentPage: 0 }
   }
 
-  renderPaginationButton(pageIndex) {
+  renderPage(pageIndex) {
     return (
       <Pagination.Page
         key={pageIndex}
@@ -79,12 +79,12 @@ class Example extends React.Component {
 
   render () {
     const pages = Array(100000)
-    pages[0] = this.renderPaginationButton(0)
-    pages[pages.length - 1] = this.renderPaginationButton(pages.length - 1)
+    pages[0] = this.renderPage(0)
+    pages[pages.length - 1] = this.renderPage(pages.length - 1)
     const visiblePageRangeStart = Math.max(this.state.currentPage - 1, 0)
     const visiblePageRangeEnd = Math.min(this.state.currentPage + 4, pages.length - 1)
     for (let i = visiblePageRangeStart; i < visiblePageRangeEnd; i++) {
-      pages[i] = this.renderPaginationButton(i)
+      pages[i] = this.renderPage(i)
     }
 
     return (
