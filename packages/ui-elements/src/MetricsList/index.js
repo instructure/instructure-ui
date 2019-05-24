@@ -43,7 +43,7 @@ category: components
 class MetricsList extends Component {
   static propTypes = {
     /**
-    * children of type `MetricsListItem`
+    * children of type `MetricsList.Item`
     */
     children: Children.oneOf([MetricsListItem])
   }

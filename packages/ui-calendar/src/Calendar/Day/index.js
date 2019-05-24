@@ -41,6 +41,7 @@ import theme from './theme'
 /**
 ---
 parent: Calendar
+id: Calendar.Day
 ---
 **/
 @testable()
@@ -53,7 +54,7 @@ class Day extends Component {
     children: PropTypes.oneOfType([PropTypes.node, PropTypes.func]),
     /**
     * An ISO 8601 formatted string representing the date corresponding to
-    * this `<Day />`
+    * this `<Calendar.Day />`
     */
     date: I18nPropTypes.iso8601.isRequired,
     /**
@@ -64,33 +65,33 @@ class Day extends Component {
     */
     label: PropTypes.string.isRequired,
     /**
-    * Is the `<Day />` disabled
+    * Is the `<Calendar.Day />` disabled
     */
     interaction: PropTypes.oneOf(['enabled', 'disabled']),
     /**
-    * Is the `<Day />` selected
+    * Is the `<Calendar.Day />` selected
     */
     isSelected: PropTypes.bool,
     /**
-    * Is the `<Day />` today
+    * Is the `<Calendar.Day />` today
     */
     isToday: PropTypes.bool,
     /**
-    * Is the `<Day />` located outside the current rendered month
+    * Is the `<Calendar.Day />` located outside the current rendered month
     */
     isOutsideMonth: PropTypes.bool,
     /**
     * Callback fired on click.
     * @param {Object} event - the click event
     * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Day />`
+    * @param data.date - the date of the corresponding `<Calendar.Day />`
     */
     onClick: PropTypes.func,
     /**
     * Callback fired on key down.
     * @param {Object} event - the key down event
     * @param {Object} data - additional data
-    * @param data.date - the date of the corresponding `<Day />`
+    * @param data.date - the date of the corresponding `<Calendar.Day />`
     */
     onKeyDown: PropTypes.func,
     /**

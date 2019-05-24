@@ -46,7 +46,7 @@ category: components
 class List extends Component {
   static propTypes = {
     /**
-    * Only accepts <ListItem> as a child
+    * Only accepts `<List.Item>` as a child
     */
     children: ChildrenPropTypes.oneOf([ListItem]),
     as: PropTypes.oneOf(['ul', 'ol']),

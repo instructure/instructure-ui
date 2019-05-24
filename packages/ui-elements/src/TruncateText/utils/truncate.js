@@ -35,6 +35,7 @@ import cleanData from './cleanData'
 /**
  * ---
  * parent: TruncateText
+ * private: true
  * ---
  * Truncate the text content of an HTML element and its children.
  *

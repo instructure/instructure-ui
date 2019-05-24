@@ -34,6 +34,7 @@ import theme from './theme'
 /**
 ---
 parent: Options
+id: Options.Separator
 ---
 @module Separator
 **/

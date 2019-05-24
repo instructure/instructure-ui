@@ -51,7 +51,7 @@ class MenuItemGroup extends Component {
     label: PropTypes.node.isRequired,
     allowMultiple: PropTypes.bool,
     /**
-    * children of type `MenuItem`, `MenuItemSeparator`
+    * children of type `Menu.Item`, `Menu.Separator`
     */
     children: ChildrenPropTypes.oneOf([MenuItem, MenuItemSeparator]),
     /**

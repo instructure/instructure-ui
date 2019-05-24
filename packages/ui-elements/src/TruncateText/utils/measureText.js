@@ -27,6 +27,7 @@ import { getComputedStyle } from '@instructure/ui-dom-utils'
 /**
  * ---
  * parent: TruncateText
+ * private: true
  * ---
  * Finds the max potential width of set of DOM nodes.
  *

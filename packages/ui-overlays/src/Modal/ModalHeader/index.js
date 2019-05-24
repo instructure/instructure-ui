@@ -37,6 +37,7 @@ import theme from './theme'
 /**
 ---
 parent: Modal
+id: Modal.Header
 ---
 **/
 @testable()

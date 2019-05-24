@@ -83,35 +83,35 @@ class DrawerTray extends Component {
      */
     shadow: PropTypes.bool,
     /**
-     * Callback fired when the <DrawerLayout.Tray /> transitions in/out
+     * Callback fired when the `<DrawerLayout.Tray />` transitions in/out
      */
     onTransition: PropTypes.func,
     /**
-     * Callback fired before the <DrawerLayout.Tray /> transitions in
+     * Callback fired before the `<DrawerLayout.Tray />` transitions in
      */
     onEnter: PropTypes.func,
     /**
-     * Callback fired as the <DrawerLayout.Tray /> begins to transition in
+     * Callback fired as the `<DrawerLayout.Tray />` begins to transition in
      */
     onEntering: PropTypes.func,
     /**
-     * Callback fired after the <DrawerLayout.Tray /> finishes transitioning in
+     * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning in
      */
     onEntered: PropTypes.func,
     /**
-     * Callback fired right before the <DrawerLayout.Tray /> transitions out
+     * Callback fired right before the `<DrawerLayout.Tray />` transitions out
      */
     onExit: PropTypes.func,
     /**
-     * Callback fired as the <DrawerLayout.Tray /> begins to transition out
+     * Callback fired as the `<DrawerLayout.Tray />` begins to transition out
      */
     onExiting: PropTypes.func,
     /**
-     * Callback fired after the <DrawerLayout.Tray /> finishes transitioning out
+     * Callback fired after the `<DrawerLayout.Tray />` finishes transitioning out
      */
     onExited: PropTypes.func,
     /**
-     * Ref function for the <DrawerLayout.Tray /> content
+     * Ref function for the `<DrawerLayout.Tray />` content
      */
     contentRef: PropTypes.func,
     /**

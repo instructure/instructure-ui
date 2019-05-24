@@ -54,7 +54,7 @@ category: components
 class Menu extends Component {
   static propTypes = {
     /**
-     * Children of type `MenuItem`, `MenuItemGroup`, `MenuItemSeparator`, or `Menu`
+     * Children of type `Menu.Item`, `Menu.Group`, `Menu.Separator`, or `Menu`
      */
     children: ChildrenPropTypes.oneOf(['MenuItem', 'MenuItemGroup', 'MenuItemSeparator', 'Menu']),
     /**

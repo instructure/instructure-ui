@@ -53,7 +53,7 @@ category: components
 class TabList extends Component {
   static propTypes = {
     /**
-    * children of type `TabPanel`
+    * children of type `TabList.Panel`
     */
     children: Children.oneOf([TabPanel, null]),
 

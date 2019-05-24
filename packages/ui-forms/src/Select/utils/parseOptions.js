@@ -28,6 +28,7 @@ import { error } from '@instructure/console/macro'
 /**
 ---
 parent: Select
+private: True
 id: parseOptions
 ---
 */

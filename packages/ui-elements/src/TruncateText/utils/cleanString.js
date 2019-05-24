@@ -26,6 +26,7 @@
 /**
  * ---
  * parent: TruncateText
+ * private: true
  * ---
  * Removes given characters, such as whitespace and punctuation, from either end of a string.
  *

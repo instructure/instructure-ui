@@ -26,6 +26,7 @@
 /**
 * ---
 * parent: Select
+* private: true
 * ---
 */
 export default function getOptionId (option) {

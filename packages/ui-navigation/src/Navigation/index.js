@@ -50,7 +50,7 @@ category: components
 class Navigation extends Component {
   static propTypes = {
     /**
-    * children of type NavigationItem
+    * children of type Navigation.Item
     */
     children: ChildrenPropTypes.oneOf([NavigationItem]),
     /**
@@ -62,7 +62,7 @@ class Navigation extends Component {
       'defaultMinimized'
     ),
     /**
-    * Whether the <Navigation /> is initially minimized (uncontrolled)
+    * Whether the `<Navigation />` is initially minimized (uncontrolled)
     */
     defaultMinimized: PropTypes.bool,
     onMinimized: PropTypes.func,
@@ -78,11 +78,11 @@ class Navigation extends Component {
       minimizedLabel: PropTypes.string
     }).isRequired,
     /**
-    * If the NavigationItem goes to a new page, pass an href
+    * If the `<Navigation.Item>` goes to a new page, pass an href
     */
     href: PropTypes.string,
     /**
-    * If the NavigationItem does not go to a new page pass an onClick
+    * If the `<Navigation.Item>` does not go to a new page pass an onClick
     */
     onClick: PropTypes.func,
   }

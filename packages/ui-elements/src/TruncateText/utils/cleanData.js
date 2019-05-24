@@ -27,6 +27,7 @@ import { cloneArray } from '@instructure/ui-utils'
 /**
  * ---
  * parent: TruncateText
+ * private: true
  * ---
  * Removes given characters, such as whitespace and punctuation, from stringData
  * arrays used by Truncator and TruncateText.
