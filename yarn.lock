@@ -1023,7 +1023,7 @@
   resolved "https://registry.npmjs.org/@emotion/hash/-/hash-0.7.1.tgz#9833722341379fb7d67f06a4b00ab3c37913da53"
   integrity sha512-OYpa/Sg+2GDX+jibUfpZVn1YqSVRpYmTLF2eyAfrFTIJSbwyIrc+YscayoykvaOME/wV4BV0Sa0yqdMrgse6mA==
 
-"@emotion/is-prop-valid@0.7.3":
+"@emotion/is-prop-valid@0.7.3", "@emotion/is-prop-valid@^0.7.3":
   version "0.7.3"
   resolved "https://registry.npmjs.org/@emotion/is-prop-valid/-/is-prop-valid-0.7.3.tgz#a6bf4fa5387cbba59d44e698a4680f481a8da6cc"
   integrity sha512-uxJqm/sqwXw3YPA5GXX365OBcJGFtxUVkB6WyezqFHlNe9jqUWH5ur2O2M8dGBz61kn1g3ZBlzUunFQXQIClhA==
