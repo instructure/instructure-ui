@@ -55,7 +55,24 @@ function listCommands () {
   info(`Commands: \n${commands.join(', \n')}`)
 }
 
-if (process.argv.includes('--help')) {
+// We will be transitioning existing commands to use yargs. Any new commands should
+// be added to the `commands` directory and should be executed via yargs by calling
+// this function instead of requiring the file directly.
+function executeYargs () {
+  /* eslint-disable no-unused-expressions */
+  require('yargs')
+    .commandDir('./commands')
+    .version(false)
+    .help()
+    .argv
+  /* eslint-enable no-unused-expressions */
+}
+
+// Place yargs commands at the start so users can get yargs argument documentation
+// by setting the --help flag
+if (process.argv.includes('open-sandbox')) {
+  executeYargs()
+} else if (process.argv.includes('--help')) {
   listCommands()
 } else if (process.argv.includes('--post-publish')) {
   require('./post-publish')

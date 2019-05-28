@@ -22,6 +22,7 @@
   "license": "MIT",
   "dependencies": {
     "@babel/cli": "^7.4.4",
+    "@codesandbox/common": "^1.0.5",
     "@instructure/command-utils": "^6.3.0",
     "@instructure/cz-lerna-changelog": "^6.3.0",
     "@instructure/pkg-utils": "^6.3.0",
@@ -40,12 +41,14 @@
     "lerna": "^3",
     "mocha": "^6.1.4",
     "nyc": "^14.1.1",
+    "open": "^6.3.0",
     "rimraf": "^2.6.3",
     "semver": "^6.0.0",
     "stylelint": "^10",
     "validate-commit-msg": "^2.14.0",
     "webpack-cli": "^3.3.2",
-    "webpack-dev-server": "^3.3.1"
+    "webpack-dev-server": "^3.3.1",
+    "yargs": "^13.2.4"
   },
   "optionalDependencies": {
     "@instructure/mocha-environment-jsdom": "^6.3.0",
