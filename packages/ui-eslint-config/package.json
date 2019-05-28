@@ -1,6 +1,6 @@
 {
   "name": "@instructure/ui-eslint-config",
-  "version": "6.2.0",
+  "version": "6.3.0",
   "description": "A UI shared eslint config made by Instructure Inc.",
   "author": "Instructure, Inc. Engineering and Product Design",
   "main": "./lib/index.js",
@@ -19,7 +19,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5",
     "eslint-plugin-import": "^2.17.2",
-    "eslint-plugin-instructure-ui": "^6.2.0",
+    "eslint-plugin-instructure-ui": "^6.3.0",
     "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-mocha": "^5.2.1",
     "eslint-plugin-notice": "^0.7.8",

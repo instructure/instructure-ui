@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
+
+
+### Bug Fixes
+
+* **ui-a11y:** dialogs with non focusable children should contain focus when shouldContainFocus ([f72a179](https://github.com/instructure/instructure-ui/commit/f72a179))
+* **ui-elements:** Change scoping of Link color ([09028b8](https://github.com/instructure/instructure-ui/commit/09028b8))
+* **ui-elements:** fix typo in componentWillUnmount ([093c47e](https://github.com/instructure/instructure-ui/commit/093c47e))
+* **ui-portal:** remove ui-testable from Portal ([9421d63](https://github.com/instructure/instructure-ui/commit/9421d63))
+* **ui-test-utils:** prevent test pollution related failures ([626bd7a](https://github.com/instructure/instructure-ui/commit/626bd7a))
+* **ui-themeable:** Fix polyfill class selector ([0527709](https://github.com/instructure/instructure-ui/commit/0527709))
+
+
+### Features
+
+* **ui-icons:** update existing text-subscript icon per design ([fea49f4](https://github.com/instructure/instructure-ui/commit/fea49f4))
+* **ui-layout:** add functional colors as background values for View ([18938fa](https://github.com/instructure/instructure-ui/commit/18938fa))
+* **ui-options:** add Options component ([c0df653](https://github.com/instructure/instructure-ui/commit/c0df653))
+
+
+
+
+
 # [6.2.0](https://github.com/instructure/instructure-ui/compare/v6.1.0...v6.2.0) (2019-05-13)
 
 

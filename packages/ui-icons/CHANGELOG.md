@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
+
+
+### Features
+
+* **ui-icons:** update existing text-subscript icon per design ([fea49f4](https://github.com/instructure/instructure-ui/commit/fea49f4))
+
+
+
+
+
 # [6.2.0](https://github.com/instructure/instructure-ui/compare/v6.1.0...v6.2.0) (2019-05-13)
 
 **Note:** Version bump only for package @instructure/ui-icons

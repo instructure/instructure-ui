@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.3.0](https://github.com/instructure/instructure-ui/compare/v6.2.0...v6.3.0) (2019-05-28)
+
+
+### Bug Fixes
+
+* **ui-a11y:** dialogs with non focusable children should contain focus when shouldContainFocus ([f72a179](https://github.com/instructure/instructure-ui/commit/f72a179))
+* **ui-test-utils:** prevent test pollution related failures ([626bd7a](https://github.com/instructure/instructure-ui/commit/626bd7a))
+
+
+
+
+
 # [6.2.0](https://github.com/instructure/instructure-ui/compare/v6.1.0...v6.2.0) (2019-05-13)
 
 **Note:** Version bump only for package @instructure/ui-a11y
