@@ -124,7 +124,7 @@ class TruncateText extends Component {
     }
   }
 
-  componentWillUnMount () {
+  componentWillUnmount () {
     if (this._resizeListener) {
       this._resizeListener.remove()
     }
