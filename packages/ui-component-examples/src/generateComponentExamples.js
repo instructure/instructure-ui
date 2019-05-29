@@ -41,6 +41,7 @@ export default function generateComponentExamples (Component, config = {
 
   const PROPS_CACHE = []
   const sections = []
+  const maxExamples = config.maxExamples || 500
   let exampleCount = 0
 
   const getParameters = ({ examples, index }) => {
@@ -116,24 +117,12 @@ export default function generateComponentExamples (Component, config = {
     page.examples.push(example)
   }
 
-  // eslint-disable-next-line no-console
-  console.info(`Generating examples for ${Component.displayName}...`)
-
-  const combos = generatePropCombinations(propValues).filter(Boolean)
-  const maxExamples = config.maxExamples || 500
-
-  let index = 0
-
-  while (index < combos.length && exampleCount < maxExamples) {
-    const props = combos[index]
-
-    index++
-
+  const maybeAddExample = (props) => {
     const componentProps = getComponentProps(props)
     const exampleProps = getExampleProps(props)
     const key = uid()
     const propsString = JSON.stringify(componentProps)
-    const ignore = (typeof filter === 'function') && filter(componentProps)
+    const ignore = (typeof filter === 'function') ? filter(componentProps) : false
 
     if (!ignore && !PROPS_CACHE.includes(propsString)) {
       exampleCount++
@@ -141,12 +130,29 @@ export default function generateComponentExamples (Component, config = {
       if (exampleCount < maxExamples) {
         PROPS_CACHE.push(propsString)
 
-        addExample(props[sectionProp], {
+        addExample(componentProps[sectionProp], {
           Component,
           componentProps,
           exampleProps,
           key
         })
+      }
+    }
+  }
+
+  // eslint-disable-next-line no-console
+  console.info(`Generating examples for ${Component.displayName}...`)
+
+  if (isEmpty(propValues)) {
+    maybeAddExample(propValues)
+  } else {
+    const combos = generatePropCombinations(propValues).filter(Boolean)
+    let index = 0
+    while (index < combos.length && exampleCount < maxExamples) {
+      const combo = combos[index]
+      if (combo) {
+        maybeAddExample(combo)
+        index++
       }
     }
   }
@@ -166,4 +172,12 @@ export default function generateComponentExamples (Component, config = {
   })
 
   return sections
+}
+
+function isEmpty (obj) {
+  if (typeof obj !== 'object') return true
+  for (let key in obj) {
+    if (hasOwnProperty.call(obj, key)) return false
+  }
+  return true
 }

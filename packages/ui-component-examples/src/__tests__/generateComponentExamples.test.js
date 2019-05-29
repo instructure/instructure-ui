@@ -50,7 +50,42 @@ export default class TestComponent extends Component {
 }
 
 describe('generateComponentExamples', () => {
-  it('should work', () => {
+  it('should work with no propValues defined', () => {
+    const config = {
+      sectionProp: 'variant',
+      getComponentProps: (props) => {
+        return { variant: 'circle', show: true }
+      },
+      getParameters: (page) => {
+        return { delay: 200 }
+      },
+      maxExamples: 500
+    }
+
+    expect(generateComponentExamples(TestComponent, config))
+    .excludingEvery(['key'])
+    .to.deep.equal([
+      {
+        sectionName: 'circle',
+        propName: 'variant',
+        propValue: 'circle',
+        pages: [
+          {
+            examples: [
+              {
+                Component: TestComponent,
+                componentProps: { variant: 'circle', show: true },
+                exampleProps: {}
+              }
+            ],
+            parameters: { delay: 200 },
+            index: 0
+          }
+        ]
+      }
+    ])
+  })
+  it('should work with propValues defined', () => {
     const config = {
       sectionProp: 'variant',
       propValues: {
