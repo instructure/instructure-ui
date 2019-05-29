@@ -17,7 +17,7 @@ example: true
 <div>
   <Alert
     variant="success"
-    closeButtonLabel="Close"
+    renderCloseButtonLabel="Close"
     margin="small"
     transition="none"
   >
@@ -25,14 +25,14 @@ example: true
   </Alert>
   <Alert
     variant="info"
-    closeButtonLabel="Close"
+    renderCloseButtonLabel="Close"
     margin="small"
   >
     Sample info text. I will fade out if you close me.
   </Alert>
   <Alert
     variant="error"
-    closeButtonLabel="Close"
+    renderCloseButtonLabel="Close"
     margin="small"
   >
     Sample error text that continues for a while
@@ -63,9 +63,17 @@ example: true
   Sample info text. I will fade out after 5 seconds
 </Alert>
 ```
+
 Given a `liveRegion` property, Alerts will guarantee a screenreader will announce their text.
 Use `liveRegionPoliteness` to choose an `aria-live` politeness setting of either `polite`
 or `assertive` (default).
+
+Due to a bug in some screen readers, the live region element should be static, either through
+server rendering or included in the static HTML file for the app. The Alert component will
+ensure that element has the correct ARIA attributes.
+
+For more information about live regions, see
+[this MDN article](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/ARIA_Live_Regions).
 
 ```js
 ---
@@ -119,7 +127,7 @@ class Example extends React.Component {
             >
               <Alert
                 variant={alert.variant}
-                closeButtonLabel="Close"
+                renderCloseButtonLabel="Close"
                 onDismiss={alert.onDismiss}
                 liveRegion={() => document.getElementById('flash-messages')}
                 liveRegionPoliteness={alert.politeness}
@@ -137,6 +145,7 @@ class Example extends React.Component {
 
 render(<Example />)
 ```
+
 ### Guidelines
 
 ```js

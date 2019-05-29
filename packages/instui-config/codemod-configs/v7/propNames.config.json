@@ -1,0 +1,7 @@
+{
+  "Alert": {
+    "7.0.0": [
+      { "old": "closeButtonLabel", "new": "renderCloseButtonLabel" }
+    ]
+  }
+}

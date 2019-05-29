@@ -29,6 +29,7 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import keycode from 'keycode'
 
+import { deprecated, callRenderProp } from '@instructure/ui-react-utils'
 import { CloseButton } from '@instructure/ui-buttons'
 import { View } from '@instructure/ui-layout'
 import { ScreenReaderContent } from '@instructure/ui-a11y'
@@ -51,7 +52,9 @@ import theme from './theme'
 category: components
 ---
 **/
-
+@deprecated('7.0.0', {
+  closeButtonLabel:'renderCloseButtonLabel'
+})
 @themeable(theme, styles)
 class Alert extends Component {
   static propTypes = {
@@ -86,6 +89,10 @@ class Alert extends Component {
     */
     timeout: PropTypes.number,
     /**
+    * Close button label. Can be a React component
+    */
+    renderCloseButtonLabel: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+    /**
     * Close button label
     */
     closeButtonLabel: PropTypes.string,
@@ -114,6 +121,7 @@ class Alert extends Component {
     liveRegionPoliteness: 'assertive',
     onDismiss: undefined,
     liveRegion: undefined,
+    renderCloseButtonLabel: undefined,
     closeButtonLabel: undefined,
     children: null
   }
@@ -262,7 +270,7 @@ class Alert extends Component {
   }
 
   handleKeyUp = event => {
-    if (this.props.closeButtonLabel && event.keyCode === keycode.codes.esc) {
+    if ((this.props.renderCloseButtonLabel || this.props.closeButtonLabel) && event.keyCode === keycode.codes.esc) {
       this.close()
     }
   }
@@ -304,10 +312,14 @@ class Alert extends Component {
   }
 
   renderCloseButton () {
-    return this.props.closeButtonLabel
+    const closeButtonLabel = (this.props.renderCloseButtonLabel
+      && callRenderProp(this.props.renderCloseButtonLabel))
+      || this.props.closeButtonLabel
+
+    return closeButtonLabel
       ? <div className={styles.closeButton} key="closeButton">
         <CloseButton onClick={this.close} size="small" variant="icon">
-          {this.props.closeButtonLabel}
+          {closeButtonLabel}
         </CloseButton>
       </div>
       : null
