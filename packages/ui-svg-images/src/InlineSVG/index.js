@@ -61,7 +61,8 @@ class InlineSVG extends Component {
       'error',
       'alert',
       'warning',
-      'brand'
+      'brand',
+      'auto'
     ])
   }
 
@@ -179,10 +180,10 @@ class InlineSVG extends Component {
         focusable={focusable ? 'true' : 'false'}
         className={classnames({
           [styles.root]: true,
+          [styles[`color--${color}`]]: color !== 'auto',
           [styles.inline]: this.props.inline,
           [styles.block]: !this.props.inline,
-          [props.className]: props.className,
-          [styles[`color--${color}`]]: color !== 'inherit'
+          [props.className]: props.className
         })}
       >
         {this.renderTitle()}

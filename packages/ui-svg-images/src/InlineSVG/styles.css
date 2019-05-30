@@ -1,5 +1,4 @@
 .root {
-  color: inherit;
   fill: currentColor;
 }
 
@@ -9,6 +8,10 @@
 
 .block {
   display: block;
+}
+
+.color--inherit {
+  color: inherit;
 }
 
 .color--primary {

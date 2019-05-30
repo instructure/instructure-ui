@@ -85,7 +85,13 @@ class Breadcrumb extends Component {
         return (
           <li className={styles.crumb} style={style}>
             {child}
-            {index < (numChildren - 1) && <IconArrowOpenEndSolid className={styles.separator} />}
+            {
+              index < (numChildren - 1) &&
+                <IconArrowOpenEndSolid
+                  color="auto"
+                  className={styles.separator}
+                />
+            }
           </li>
         )
       }

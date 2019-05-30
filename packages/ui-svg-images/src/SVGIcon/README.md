@@ -64,6 +64,11 @@ By default SVGIcon inherits the color of its parent element. However,
 [InlineSVG](#InlineSVG), the child component of SVGIcon, supports setting
 the icon to one of the theme colors via the `color` property.
 
+> Setting `color` to `auto` will make SVGIcon not set
+any color fill. If you are setting the icon color via the `className` prop,
+use this option &#151; otherwise the `color` value set by your class
+could be overwritten.
+
 ```js
 ---
 example: true
@@ -82,7 +87,7 @@ example: true
 ```js
 ---
 example: true
-inverse: true
+background: 'checkerboard-inverse'
 ---
 <div>
   <SVGIcon color="primary-inverse" src={iconExample} size="large" title="Icon Example" />
