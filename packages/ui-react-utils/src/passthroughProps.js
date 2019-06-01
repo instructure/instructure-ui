@@ -21,6 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+import isPropValid from '@emotion/is-prop-valid'
 
 const hasOwnProperty = Object.prototype.hasOwnProperty
 const omit = (originalObject, keys) => {
@@ -64,7 +65,21 @@ function pickProps (props, propTypes, include) {
   return pick(props, combined)
 }
 
+function passthroughProps (props) {
+  const validProps = {}
+
+  Object.keys(props)
+    // style and className need to be explicitly passed through
+    .filter(propName => isPropValid(propName) && propName !== 'style' && propName !== 'className')
+    .forEach((propName) => {
+      validProps[propName] = props[propName]
+    })
+
+  return validProps
+}
+
 export {
   pickProps,
-  omitProps
+  omitProps,
+  passthroughProps
 }

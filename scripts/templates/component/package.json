@@ -27,6 +27,7 @@
   "dependencies": {
     "@babel/runtime": "^7",
     "@instructure/console": "^${VERSION}",
+    "@instructure/ui-react-utils": "^${VERSION}",
     "@instructure/ui-themeable": "^${VERSION}",
     "@instructure/ui-testable": "^${VERSION}",
     "prop-types": "^15",

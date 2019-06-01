@@ -28,6 +28,7 @@ export default function generateComponentExamples (Component, config = {
     sectionProp: null,
     propValues: {},
     maxExamplesPerPage: null,
+    excludeProps: [],
     getExampleProps: (props, index) => { return {} },
     getComponentProps: (props, index) => { return {} },
     getParameters: (examples, pageIndex) => { return {} },
@@ -35,7 +36,7 @@ export default function generateComponentExamples (Component, config = {
   }) {
   const {
     sectionProp,
-    propValues,
+    excludeProps,
     filter
   } = config
 
@@ -43,6 +44,7 @@ export default function generateComponentExamples (Component, config = {
   const sections = []
   const maxExamples = config.maxExamples || 500
   let exampleCount = 0
+  let propValues = {}
 
   const getParameters = ({ examples, index }) => {
     let parameters = {}
@@ -140,12 +142,22 @@ export default function generateComponentExamples (Component, config = {
     }
   }
 
-  // eslint-disable-next-line no-console
-  console.info(`Generating examples for ${Component.displayName}...`)
-
-  if (isEmpty(propValues)) {
-    maybeAddExample(propValues)
+  if (isEmpty(config.propValues)) {
+    maybeAddExample(config.propValues)
   } else {
+    if (Array.isArray(excludeProps)) {
+      Object.keys(config.propValues).forEach((propName) => {
+        if (!excludeProps.includes(propName)) {
+          propValues[propName] = config.propValues[propName]
+        }
+      })
+    } else {
+      propValues = config.propValues
+    }
+
+    // eslint-disable-next-line no-console
+    console.info(`Generating examples for ${Component.displayName} (${Object.keys(propValues).length} props)...`)
+
     const combos = generatePropCombinations(propValues).filter(Boolean)
     let index = 0
     while (index < combos.length && exampleCount < maxExamples) {

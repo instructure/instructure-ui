@@ -34,39 +34,31 @@ export default {
   propValues: {
     shadow: [undefined, ...Object.values(SHADOW_TYPES)],
     borderWidth: [...Object.values(BORDER_WIDTHS)],
-    borderRadius: [...Object.values(BORDER_RADII)]
+    borderRadius: [...Object.values(BORDER_RADII)],
+    position: ['relative', 'static']
   },
   getComponentProps: (props) => {
     return {
       padding: 'medium',
       display: 'block',
       children: 'Some content for the View',
-      debug: false
+      debug: false,
+      focusColor: 'info',
+      focusPosition: 'offset',
+      borderColor: 'info',
+      overflowX: 'visible',
+      overflowY: 'visible'
     }
   },
+  excludeProps: ['padding', 'display', 'debug', 'focusColor', 'focusPosition', 'borderColor', 'overflowX', 'overflowY'],
   filter: (props) => {
     return (
       // Border radius and border width list 0 in addition to none in their object values
       // so we filter those here as they are redundant
       (
-        props.borderRadius === 'none' || props.borderWidth === 'none'
-        || props.overflowX === 'hidden' || props.overflowX === 'auto'
-        || props.overflowY === 'hidden' || props.overflowY === 'auto'
-        || props.position === 'sticky' || props.position === 'fixed'
-        || props.position === 'absolute'
-        || (props.borderColor === 'default' && props.borderWidth === undefined)
-        || (props.borderColor === 'inverse' && props.borderWidth === undefined)
-        || (props.borderColor === 'info' && props.borderWidth === undefined)
-        || (props.borderColor === 'brand' && props.borderWidth === undefined)
-        || (props.borderColor === 'danger' && props.borderWidth === undefined)
-        || (props.borderColor === 'warning' && props.borderWidth === undefined)
-        || (props.borderColor === 'alert' && props.borderWidth === undefined)
-        || (props.borderColor === 'success' && props.borderWidth === undefined)
-        || (props.focused && props.position !== 'relative')
-        || (props.focusColor === 'info' && !props.focused)
-        || (props.focusColor === 'inverse' && !props.focused)
-        || (props.focusColor === 'success' && !props.focused)
-        || (props.focusColor === 'danger' && !props.focused)
+        props.borderRadius === 'none' || props.borderWidth === 'none' || props.background === 'transparent' ||
+        (props.focusPosition === 'inset' && !props.focused) ||
+        (props.focused && props.position !== 'relative')
       )
     )
   }

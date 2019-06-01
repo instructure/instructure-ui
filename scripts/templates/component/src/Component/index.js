@@ -27,6 +27,7 @@ import PropTypes from 'prop-types'
 
 import { themeable } from '@instructure/ui-themeable'
 import { log } from '@instructure/console/macro'
+import { passthroughProps } from '@instructure/ui-react-utils'
 
 import styles from './styles.css'
 import theme from './theme'
@@ -42,15 +43,22 @@ class ${COMPONENT} extends Component {
     /**
     * FIXME: description of the children prop goes here
     */
-    children: PropTypes.node
+    children: PropTypes.node,
+    elementRef: PropTypes.func
+  }
+
+  static defaultProps = {
+    children: null,
+    elementRef: (el) => {}
   }
 
   render () {
     log('hello I rendered!')
-    const { children, ...props } = this.props
+    const { children, elementRef, ...props } = this.props
     return (
       <div
-        {...props}
+        {...passthroughProps(props)}
+        ref={elementRef}
         className={styles.root}
       >
         {children}

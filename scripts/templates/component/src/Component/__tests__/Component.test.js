@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, accessible } from '@instructure/ui-test-utils'
+import { expect, mount, accessible, stub } from '@instructure/ui-test-utils'
 
 import { ${COMPONENT} } from '../index'
 import ${COMPONENT}Locator from '../locator'

@@ -50,32 +50,32 @@ addParameters({
   }
 })
 
-const examplesContext = require.context('../../', true, /^.*\/src\/.*\.examples\.js$/)
-const examples = examplesContext.keys().map(requirePath => examplesContext(requirePath))
-
 configure(() => {
-  // eslint-disable-next-line no-console
-  console.log(`Creating stories for ${examples.length} components...`)
-
+  const examplesContext = require.context('../../', true, /^.*\/src\/.*\.examples\.js$/, 'lazy')
   let numStories = 0
 
-  examples.forEach(({ componentName, sections, renderPage, renderExample }) => {
-    if (sections && sections.length > 0) {
-      const stories = storiesOf(componentName, module)
+  // eslint-disable-next-line no-console
+  console.log(`Creating stories for ${examplesContext.keys().length} components...`)
 
-      sections.forEach(({ pages, sectionName }) => {
-        pages.forEach((page, i) => {
-          page.renderExample = renderExample
-          numStories++
-          stories
-            .add(
-              `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
-              renderPage.bind(null, page),
-              { chromatic: page.parameters }
-            )
+  examplesContext.keys().map((requirePath) => {
+    examplesContext(requirePath).then(({ componentName, sections, renderPage, renderExample }) => {
+      if (sections && sections.length > 0) {
+        const stories = storiesOf(componentName, module)
+
+        sections.forEach(({ pages, sectionName }) => {
+          pages.forEach((page, i) => {
+            page.renderExample = renderExample
+            numStories++
+            stories
+              .add(
+                `${sectionName}${pages.length > 1 ? ` (page ${i+1})` : ''}`,
+                renderPage.bind(null, page),
+                { chromatic: page.parameters }
+              )
+          })
         })
-      })
-    }
+      }
+    })
   })
 
   console.log(`Created ${numStories} stories!`)

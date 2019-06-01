@@ -72,7 +72,7 @@ find $COMPONENT_DIR/$COMPONENT -name 'Component*' -type f -exec bash -c 'mv "$1"
 
 # Update file contents
 if [[ "$OSTYPE" == darwin* ]]; then
-  find $COMPONENT_DIR/$COMPONENT -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i '' "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 else
-  find $COMPONENT_DIR/$COMPONENT -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
+  find $PACKAGE_DIR/$PACKAGE -type f -exec sed -i -e "s/\${COMPONENT}/$COMPONENT/g" '{}' \;
 fi

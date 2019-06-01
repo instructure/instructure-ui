@@ -24,8 +24,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ReactDOM from 'react-dom'
-import isPropValid from '@emotion/is-prop-valid'
 
+import { passthroughProps } from '@instructure/ui-react-utils'
 import { bidirectional } from '@instructure/ui-i18n'
 import { element } from '@instructure/ui-prop-types'
 
@@ -162,14 +162,14 @@ class ReactPortal extends React.Component {
     // Create node if it doesn't already exist
     if (!this.DOMNode) {
       const node = document.createElement('span')
+      const attributes = {
+        ...passthroughProps(props),
+        dir: this.dir
+      }
 
-      Object.keys(props).forEach((name) => {
-        if (isPropValid(name)) {
-          node.setAttribute(name, props[name])
-        }
+      Object.keys(attributes).forEach((name) => {
+        node.setAttribute(name, attributes[name])
       })
-
-      node.setAttribute('dir', this.dir)
 
       elementRef(node)
 
