@@ -25,7 +25,7 @@
 const path = require('path')
 const open = require('open')
 
-const { error, info } = require('@instructure/command-utils')
+const { error, info, runCommandSync } = require('@instructure/command-utils')
 const { getPackageJSON } = require('@instructure/pkg-utils')
 
 const sandboxHost = require('@codesandbox/common/lib/utils/host').default
@@ -36,36 +36,55 @@ const {
   sandboxUrl
 } = require('@codesandbox/common/lib/utils/url-generator')
 
-module.exports = ({ repo, username, branch, path: sourcePath }) => {
-  let url = sandboxHost()
+module.exports = ({ repo, username, branch, path: sourcePath, scope, command, root }) => {
 
-  if (repo && username) {
-    url += sandboxUrl({
-      git: {
-        username,
-        repo,
-        branch,
-        path: path.normalize(sourcePath)
+  if (!scope) {
+    let url = sandboxHost()
+
+    if (repo && username) {
+      url += sandboxUrl({
+        git: {
+          username,
+          repo,
+          branch,
+          path: path.normalize(sourcePath)
+        }
+      })
+    } else {
+      const { repository } = getPackageJSON()
+      const repoUrl = (repository || {}).url
+
+      if (!repoUrl) {
+        error('In order to open with codesandbox both the GitHub repo name and username should be provided to this command, or the `url` in the `repository` field in this app\'s package.json should be specified.')
+        process.exit(1)
       }
-    })
+
+      if (!gitHubRepoPattern.test(repoUrl)) {
+        error('Currently only projects hosted on GitHub can be opened with codesandbox.')
+        process.exit(1)
+      }
+
+      url += gitHubToSandboxUrl(repoUrl)
+    }
+
+    info(`Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`)
+
+    open(url, { app: ['google chrome'] })
   } else {
-    const { repository } = getPackageJSON()
-    const repoUrl = (repository || {}).url
+    const result = runCommandSync('lerna', ['list', '--json'], [], { stdio: 'pipe' }).stdout
+    const pkg = JSON.parse(result).find(({ name }) => name === scope)
 
-    if (!repoUrl) {
-      error('In order to open with codesandbox both the GitHub repo name and username should be provided to this command, or the `url` in the `repository` field in this app\'s package.json should be specified.')
+    if (!pkg) {
+      error(`No project found with the name ${scope}`)
       process.exit(1)
     }
 
-    if (!gitHubRepoPattern.test(repoUrl)) {
-      error('Currently only projects hosted on GitHub can be opened with codesandbox.')
-      process.exit(1)
-    }
+    const { name } = getPackageJSON()
+    const { location } = pkg
 
-    url += gitHubToSandboxUrl(repoUrl)
+    const appPath = path.relative(sourcePath, location)
+
+    const executeSandbox = `run ${command} --stream --scope ${scope} -- -- --repo ${name} --username ${username} --path ${appPath}`
+    runCommandSync('lerna', executeSandbox.split(' '))
   }
-
-  info(`Opening sandbox at the following url:\n${url}\n\nIf you get an error accessing the url or don't see your changes:\n  *  Ensure that your GitHub repo exists and is set to public\n  *  Ensure you have pushed any local changes`)
-
-  open(url, { app: ['google chrome'] })
 }
