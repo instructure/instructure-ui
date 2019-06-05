@@ -99,7 +99,7 @@ export {
   Popover
 } from '@instructure/ui-overlays'
 export { Breadcrumb } from '@instructure/ui-breadcrumb'
-export { Navigation } from '@instructure/ui-navigation'
+export { Navigation, AppNav } from '@instructure/ui-navigation'
 export { Menu } from '@instructure/ui-menu'
 export { Options } from '@instructure/ui-options'
 export { Pagination } from '@instructure/ui-pagination'

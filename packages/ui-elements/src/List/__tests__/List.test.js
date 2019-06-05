@@ -33,7 +33,7 @@ import { ListItem } from '../ListItem'
 import ListLocator from '../locator'
 
 describe('<List />', async () => {
-  it('should render list items (and filter out null/falsy children', async () => {
+  it('should render list items and filter out null/falsy children', async () => {
     await mount(
       <List>
         <ListItem>List item 1</ListItem>

@@ -21,5 +21,47 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Navigation } from './Navigation'
-export { AppNav } from './AppNav'
+
+/* stylelint-disable selector-max-type, no-descending-specificity */
+
+button.root,
+a.root,
+.root {
+  appearance: none;
+  overflow: visible;
+  direction: inherit;
+  margin: 0;
+  text-decoration: none;
+  user-select: none;
+  touch-action: manipulation;
+  background: transparent;
+  border: none;
+  outline: none;
+  line-height: var(--height);
+  padding: 0 var(--padding);
+  align-items: flex-start;
+
+  &:hover .label {
+    text-decoration: underline;
+  }
+
+  &.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+.label {
+  white-space: nowrap;
+  font-family: var(--fontFamily);
+  font-size: var(--fontSize);
+  font-weight: var(--fontWeight);
+  color: var(--textColor);
+}
+
+.isSelected .label {
+  color: var(--textColorSelected);
+  text-decoration: underline;
+}
+
+/* stylelint-enable selector-max-type, no-descending-specificity */

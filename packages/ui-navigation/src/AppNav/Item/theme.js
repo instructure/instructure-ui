@@ -21,5 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Navigation } from './Navigation'
-export { AppNav } from './AppNav'
+
+export default function generator ({ colors, spacing, typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    fontSize: '1.125rem',
+    fontWeight: typography.fontWeightBold,
+    textColor: colors.textLink,
+    textColorSelected: colors.textDarkest,
+    height: '2.25rem',
+    padding: spacing.small,
+    backgroundColor: colors.backgroundLightest
+  }
+}

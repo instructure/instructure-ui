@@ -21,5 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Navigation } from './Navigation'
-export { AppNav } from './AppNav'
+
+export default function generator ({ borders, colors, spacing, typography }) {
+  return {
+    fontFamily: typography.fontFamily,
+    height: '3.75rem', // 60px per product design
+    borderColor: colors.borderMedium,
+    borderStyle: borders.style,
+    borderWidth: borders.widthSmall,
+    horizontalMargin: spacing.xxSmall
+  }
+}

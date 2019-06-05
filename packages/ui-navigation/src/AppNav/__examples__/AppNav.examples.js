@@ -21,5 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-export { Navigation } from './Navigation'
-export { AppNav } from './AppNav'
+
+import React from 'react'
+
+import { ScreenReaderContent } from '@instructure/ui-a11y'
+
+import { IconArcSolid } from '@instructure/ui-icons'
+import { AppNav } from '../index'
+
+export default {
+  getComponentProps: (props) => {
+    return {
+      screenReaderLabel: "Navigation label",
+      renderAfterItems: <span>renderAfter content!</span>,
+      children: [
+        <AppNav.Item
+          key="1"
+          renderIcon={<IconArcSolid size="medium" color="primary" inline={false} />}
+          renderLabel={<ScreenReaderContent>Arc</ScreenReaderContent>}
+          href="http://instructure.design"
+        />,
+        <AppNav.Item
+          key="2"
+          renderLabel="Favorite videos"
+          isSelected
+          onClick={() => 'clicked'}
+        />,
+        <AppNav.Item
+          key="3"
+          renderLabel="About Instructure"
+          href="http://instructure.com"
+        />
+      ]
+    }
+  }
+}

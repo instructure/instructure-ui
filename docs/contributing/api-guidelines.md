@@ -29,7 +29,7 @@ order: 3
 
 #### Function props
 
-- Function props that provide custom rendering should be prefixed with `render` (e.g. `renderLabel`, `renderHeader`). These props can be set to `PropTypes.oneOfType([PropTypes.node, PropTypes.func])` for the most flexibility.
+- Function props that provide custom rendering should be prefixed with `render` (e.g. `renderLabel`, `renderHeader`). These props can be set to `PropTypes.oneOfType([PropTypes.node, PropTypes.func])` for the most flexibility. If your prop only accepts strings and provides text that is only read by screen readers, use the `screenReader` prefix (e.g., `screenReaderLabel`).
 - Function props that handle events should be prefixed with `on` (e.g. `onDismiss`, `onClose`, `onSelect`).
 - Function props that handle DOM events should always pass in the [React SyntheticEvent](https://reactjs.org/docs/events.html) object as the first argument and any meta data about the event as a second argument.
 - Function props that handle DOM events should be chained (e.g. `createChainedFunction(this.props.onFocus, this.handleFocus)`) so that consumers are able to attach their own handlers in addition to the built in handlers.
