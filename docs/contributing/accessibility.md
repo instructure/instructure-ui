@@ -13,7 +13,7 @@ Our [default theme](#canvas) colors meet at least a [3:1](http://www.w3.org/TR/W
 
 ### Keyboard Navigation
 
-Some users are unable to use a mouse, and instead navigate through applications using tools such as a keyboard, mouth wand, or eye tracking software.  Our components are navigable using these technologies without mouse assistance.  Keyboard focus follows the page as an eye would scan it (top to bottom, left to right).  We also ensure that focus indication is clear and apparent so users are always aware of where their current keyboard focus is within the page.  Our components can be interacted with using standard keystrokes, so there is no need to learn any new shortcuts.
+Some users are unable to use a mouse, and instead navigate through applications using tools such as a keyboard, mouth wand, or eye tracking software.  Our components are navigable using these technologies without mouse assistance.  Keyboard focus follows the page as an eye would scan it (top to bottom, left to right).  We also ensure that focus indication is clear and apparent so users are always aware of where their current keyboard focus is within the page.  Our components can be interacted with using [standard keystrokes](https://webaim.org/techniques/keyboard/#testing), so there is no need to learn any new shortcuts.
 
 ### Assistive Technologies
 

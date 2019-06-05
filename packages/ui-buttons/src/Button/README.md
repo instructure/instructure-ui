@@ -199,6 +199,7 @@ guidelines: true
 <Guidelines>
   <Figure recommendation="yes" title="Do">
     <Figure.Item>Use 'Title Case' for button text</Figure.Item>
+    <Figure.Item>Use the Button variant="link" when the design calls for a Link that is not within a paragraph or other content and the action takes the user to a new page or view</Figure.Item>
     <Figure.Item>Use the primary button only once for each section of content</Figure.Item>
     <Figure.Item>Use the primary button when the task of the view requires an action to be taken</Figure.Item>
     <Figure.Item>Use the success and danger buttons for grading activities</Figure.Item>
@@ -206,7 +207,6 @@ guidelines: true
     <Figure.Item>Use the default button as a secondary or tertiary option for actions such as Cancel</Figure.Item>
     <Figure.Item>Use the light button when placed on a background that would match the default button background (example: ModalFooter)</Figure.Item>
     <Figure.Item>Use the ghost button when working on backgrounds of a darker color or when you need to give a subtle color treatment</Figure.Item>
-    <Figure.Item>Use the link button when the action is navigational</Figure.Item>
     <Figure.Item>The maximum string length of any button, including spaces, should be 20 characters</Figure.Item>
   </Figure>
   <Figure recommendation="no" title="Don't">
@@ -227,6 +227,7 @@ guidelines: true
     <Figure.Item>Ensure buttons can be activated with both Enter and Spacebar keys</Figure.Item>
     <Figure.Item>Disabled buttons do not need to meet color contrast ratio requirements or receive keyboard focus but should be read as "disabled" or "dimmed" by screen readers</Figure.Item>
     <Figure.Item>Icon only buttons must have ScreenReaderContent added so screen readers indicate what the button is used for</Figure.Item>
+    <Figure.Item>For more details about keyboard functionality see the <Link href="/#accessibility">Accessibility</Link> section</Figure.Item>
   </Figure>
 </Guidelines>
 ```

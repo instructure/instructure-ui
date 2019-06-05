@@ -2,20 +2,13 @@
 describes: Link
 ---
 
-`Link` is intended for presenting actions inline with other content, such as within headings or sentences. Typically those actions navigate the user to a different view. If the action is not presented within other content or is grouped with other similar actions, use a [Button](#Button).
+`Link` is intended for presenting actions __inline with other content__, such as within headings or sentences. Typically those actions navigate the user to a different view. If the action is not presented within other content or is grouped with other similar actions, use a [Button](#Button) with variant="link".
 
 ```js
 ---
 example: true
 ---
-<Link href="https://instructure.github.io/instructure-ui/">I am a link</Link>
-```
-
-```js
----
-example: true
----
-<Link onClick={() => 'click'}>I am a button that looks like a link because I have no href prop</Link>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
 ```
 
 ```js
@@ -23,20 +16,20 @@ example: true
 example: true
 background: 'checkerboard-inverse'
 ---
-<Link variant="inverse" onClick={() => 'click'}>I am an inverse link for use with dark backgrounds</Link>
+<Text color="primary-inverse">The quick brown fox <Link variant="inverse" href="https://instructure.github.io/instructure-ui/">jumps</Link> over the lazy dog.</Text>
 ```
 
 ### Adding margin
 
 Use the `margin` prop to add space to the left or right of the Link. Because
-Link displays `inline`, top and bottom margin will not work. If you need
+Link displays `inline`, __top and bottom margin will not work__. If you need
 to add margin to the top or bottom of Link, wrap it inside a `<View />`.
 
 ```js
 ---
 example: true
 ---
-<Link href="https://instructure.github.io/instructure-ui/" margin="0 0 0 large">I am a link with left margin</Link>
+<Text>The quick brown fox <Link href="https://instructure.github.io/instructure-ui/" margin="0 small">jumps</Link> over the lazy dog.</Text>
 ```
 
 ### Truncating text
@@ -74,7 +67,7 @@ example: true
 ---
 <div>
   <View as="div" margin="0 0 small">
-    <Link href="https://instructure.design" icon={<IconUserLine size="small" />}>Icon before text</Link>
+    <Link href="https://instructure.design" icon={<IconUserLine size="small" />}>Icon before text</Link> with the quick brown fox
   </View>
   <View as="div" margin="0 0 small">
     This Link has an icon and displays inline with text. <Link
@@ -102,7 +95,7 @@ guidelines: true
 ---
 <Guidelines>
   <Figure recommendation="a11y" title="Accessibility">
-    <Figure.Item>Use the <code>inverse</code> variant when a Link appear on a dark background to ensure adequate contrast</Figure.Item>
+    <Figure.Item>Use the <code>inverse</code> variant when a Link appears on a dark background to ensure adequate contrast</Figure.Item>
     <Figure.Item>Links must have a non-empty href attribute in order to be considered true links and to be accessible to keyboard users</Figure.Item>
   </Figure>
 </Guidelines>
