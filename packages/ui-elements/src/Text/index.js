@@ -43,6 +43,10 @@ class Text extends Component {
     * the element type to render as
     */
     as: PropTypes.elementType,
+    wrap: PropTypes.oneOf([
+      'normal',
+      'break-word'
+    ]),
     weight: PropTypes.oneOf([
       'normal',
       'light',
@@ -94,6 +98,7 @@ class Text extends Component {
 
   static defaultProps = {
     as: 'span',
+    wrap: 'normal',
     size: 'medium',
     letterSpacing: 'normal',
     children: null,
@@ -107,6 +112,7 @@ class Text extends Component {
 
   render() {
     const {
+      wrap,
       weight,
       fontStyle,
       size,
@@ -125,6 +131,7 @@ class Text extends Component {
         className={classnames({
           [styles.root]: true,
           [styles[size]]: size,
+          [styles[`wrap-${wrap}`]]: wrap,
           [styles[`weight-${weight}`]]: weight,
           [styles[`style-${fontStyle}`]]: fontStyle,
           [styles[`transform-${transform}`]]: transform,

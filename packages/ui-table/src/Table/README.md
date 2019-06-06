@@ -6,6 +6,11 @@ describes: Table
 
 In stacked layout, column header is rendered in each cell, but not in row header.
 
+> If you are using [TruncateText](#TruncateText) (or CSS ellipsis) in your Table, set the
+> layout to `fixed` or `stacked`, or the text truncation will not work. To force long strings to break and not
+> exceed the bounds of the table cell, use `fixed` or `stacked`, together with the [Text](#Text) component:
+> `<Text wrap="break-word">[long string]</Text>`.
+
 ```javascript
 ---
 example: true

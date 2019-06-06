@@ -102,6 +102,12 @@ input.root[type] {
     color: var(--alertColor);
   }
 
+  &.wrap-break-word {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+  }
+
   &.weight-normal {
     font-weight: var(--fontWeightNormal);
   }

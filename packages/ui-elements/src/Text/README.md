@@ -92,6 +92,30 @@ example: true
   <Text letterSpacing="expanded" transform="uppercase">I&#39;m expanded uppercase text</Text><br/>
 </div>
 ```
+
+### Wrap
+
+Use `wrap="break-word"` to force breaking in long strings that would otherwise
+exceed the bounds of their containers.
+
+```js
+---
+example: true
+---
+<div>
+  <View as="div" maxWidth="300px" margin="none none small" debug>
+    <Text>
+      superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
+    </Text>
+  </View>
+  <View as="div" maxWidth="300px" debug>
+    <Text wrap="break-word">
+      superlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstringsuperlongstring
+    </Text>
+  </View>
+</div>
+```
+
 ### Text colors
 
 ```js
