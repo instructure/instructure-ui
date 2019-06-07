@@ -22,14 +22,11 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+import React from 'react'
+import Banner from './Banner'
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
-}
+import '@instructure/canvas-theme'
+
+const App = () => <Banner />
+
+export default App

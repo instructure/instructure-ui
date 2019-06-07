@@ -22,14 +22,4 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
-
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
-}
+module.exports = require('@instructure/ui-stylelint-config')

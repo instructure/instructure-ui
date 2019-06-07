@@ -1,0 +1,12 @@
+node_modules/
+__build__/
+npm-debug.log
+yarn-error.log
+.yarnclean
+.babel-cache
+.vscode
+.idea
+.DS_Store
+.viminfo
+.npmrc
+.tmp/

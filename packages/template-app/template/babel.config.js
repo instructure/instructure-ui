@@ -22,14 +22,6 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
-
 module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
+  presets: [require('@instructure/ui-babel-preset')]
 }

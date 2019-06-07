@@ -22,14 +22,28 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+const path = require('path')
+const fse = require('fs-extra')
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
+const { info, error } = require('@instructure/command-utils')
+
+const replaceTemplateVariables = require('../utils/replaceTemplateVariables')
+
+module.exports = async ({ template, path: sourcePath, name, values }) => {
+  info(`Creating \`${name}\` in \`${sourcePath}\``)
+
+  const destPath = path.join(sourcePath, name)
+
+  await fse.copy(template, destPath).catch((err) => {
+    error('Failed to copy template files: ', err)
+    process.exit(1)
+  })
+
+  try {
+    replaceTemplateVariables({ root: destPath, values })
+  } catch (err) {
+    error('Encountered an error replacing template variables: ', err)
+  }
+
+  info('Success!')
 }

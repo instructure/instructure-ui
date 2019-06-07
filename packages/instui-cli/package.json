@@ -21,6 +21,7 @@
   "dependencies": {
     "@instructure/command-utils": "^6.4.0",
     "@instructure/instui-config": "^6.4.0",
+    "@instructure/template-app": "^6.4.0",
     "@instructure/ui-codemods": "^6.4.0",
     "@instructure/ui-scripts": "^6.4.0",
     "semver": "^6.1.1",

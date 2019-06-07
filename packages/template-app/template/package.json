@@ -1,0 +1,32 @@
+{
+  "name": "${NAME}",
+  "version": "0.1.0",
+  "private": "true",
+  "scripts": {
+    "start": "ui-build --bundle --watch -p 3000",
+    "build": "ui-build --bundle",
+    "lint": "ui-test --lint",
+    "lint:fix": "ui-test --lint --fix",
+    "clean": "ui-build --clean",
+    "open:sandbox": "ui-scripts open-sandbox"
+  },
+  "dependencies": {
+    "@instructure/canvas-theme": "^${VERSION}",
+    "@instructure/ui-elements": "^${VERSION}",
+    "@instructure/ui-icons": "^${VERSION}",
+    "@instructure/ui-layout": "^${VERSION}",
+    "@instructure/ui-svg-images": "^${VERSION}",
+    "@instructure/ui-themeable": "^${VERSION}",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "@instructure/ui-babel-preset": "^${VERSION}",
+    "@instructure/ui-eslint-config": "^${VERSION}",
+    "@instructure/ui-postcss-config": "^${VERSION}",
+    "@instructure/ui-scripts": "^${VERSION}",
+    "@instructure/ui-stylelint-config": "^${VERSION}",
+    "@instructure/ui-webpack-config": "^${VERSION}",
+    "html-webpack-plugin": "^3.2.0"
+  }
+}

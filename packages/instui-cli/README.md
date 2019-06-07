@@ -18,6 +18,7 @@ npm install -g @instructure/instui-cli
 ```
 
 ### Available commands
+* __create app__ | Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.
 * __upgrade__ | Upgrades instructure-ui in a designated repository to the latest stable version including upgrading packages and applying codemods.
 * __upgrade-packages__ | Upgrade instructure-ui packages to the latest stable version.
 * __codemod__ | Apply instructure-ui codemods to source at a specified path.

@@ -22,14 +22,25 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+const path = require('path')
+const { handleCreateFromTemplate } = require('@instructure/ui-scripts/lib/handlers')
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
+module.exports = async ({ contentType, path: sourcePath, name }) => {
+  const templateDirname = 'template'
+  const composeTemplatePath = pkgPath => path.join(path.dirname(pkgPath), templateDirname)
+
+  if (contentType === 'app') {
+    const pkgPath = '@instructure/template-app/package.json'
+    const version = require(pkgPath).version
+
+    handleCreateFromTemplate({
+      template: composeTemplatePath(require.resolve(pkgPath)),
+      path: sourcePath,
+      name,
+      values: {
+        'NAME': name,
+        'VERSION': version
+      }
+    })
+  }
 }

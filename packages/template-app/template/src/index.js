@@ -22,14 +22,8 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App'
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
-}
+ReactDOM.render(<App />, document.getElementById('app'))

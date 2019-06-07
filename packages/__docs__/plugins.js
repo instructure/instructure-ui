@@ -84,6 +84,7 @@ module.exports = [
       // packages to ignore:
       '**/canvas-theme/**',
       '**/canvas-high-contrast-theme/**',
+      '**/template-app/**',
       '**/ui-component-examples/src/**',
       '**/ui-test-utils/src/**',
       '**/ui-docs-client/src/**',

@@ -22,14 +22,40 @@
  * SOFTWARE.
  */
 
-const handleCreate = require('./handleCreate')
-const handleExecuteCodemods = require('./handleExecuteCodemods')
-const handleUpgrade = require('./handleUpgrade')
-const handleUpgradePackages = require('./handleUpgradePackages')
+const { confirm } = require('@instructure/command-utils')
+const { handleCreate } = require('../handlers')
 
-module.exports = {
-  handleCreate,
-  handleExecuteCodemods,
-  handleUpgrade,
-  handleUpgradePackages
+exports.command = 'create'
+exports.desc = 'Create content generated from Instructure UI template packages.'
+
+exports.builder = (yargs) => {
+  yargs.command(
+    'app',
+    'Create a starter app with all Instructure UI presets configured (webpack, babel, etc). Similar to create react app.',
+    (yargs) => {
+      yargs.option('path', {
+        alias: 'p',
+        describe: `The path where the app source will be generated.`,
+        default: process.cwd()
+      })
+
+      yargs.option('name', {
+        alias: 'n',
+        describe: `The name of the app.`
+      })
+    },
+    async (argv) => {
+      const {
+        path
+      } = argv
+
+      let name = argv.name
+
+      if (!name) {
+        name = await confirm('Please enter a name for your app: ')
+      }
+
+      handleCreate({ contentType: 'app', path, name })
+    }
+  )
 }

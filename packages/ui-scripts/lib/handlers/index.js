@@ -22,8 +22,10 @@
  * SOFTWARE.
  */
 
+const handleCreateFromTemplate = require('./handleCreateFromTemplate')
 const handleOpenSandbox = require('./handleOpenSandbox')
 
 module.exports = {
+  handleCreateFromTemplate,
   handleOpenSandbox
 }
