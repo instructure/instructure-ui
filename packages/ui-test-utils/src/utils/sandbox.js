@@ -22,7 +22,6 @@
  * SOFTWARE.
  */
 import sinon from 'sinon'
-import fetchMock from 'fetch-mock'
 
 import StyleSheet from '@instructure/ui-stylesheet'
 
@@ -48,13 +47,13 @@ class Sandbox {
     initConsole()
 
     const originalAddDocumentListener = document.addEventListener
-    const originalAddWindowListener = window.addEventListener
+    const originalAddWindowListener = global.window.addEventListener
     this._listeners = []
     document.addEventListener = (...args) => {
       this._listeners.push([document, args])
       return originalAddDocumentListener(...args)
     }
-    window.addEventListener = (...args) => {
+    global.window.addEventListener = (...args) => {
       this._listeners.push([window, args])
       return originalAddWindowListener(...args)
     }
@@ -67,15 +66,13 @@ class Sandbox {
       return timeoutId
     }
 
-    const originalRequestAnimationFrame = window.requestAnimationFrame
+    const originalRequestAnimationFrame = global.window.requestAnimationFrame
     this._raf = []
-    window.requestAnimationFrame = (...args) => {
+    global.window.requestAnimationFrame = (...args) => {
       const requestId = originalRequestAnimationFrame(...args)
       this._raf.push(requestId)
       return requestId
     }
-
-    fetchMock.config.overwriteRoutes = true
 
     this._sandbox = sinon.createSandbox()
 
@@ -98,9 +95,9 @@ class Sandbox {
     document.documentElement.setAttribute('lang', 'en-US')
 
     // override mocha's onerror handler
-    if (typeof window.onerror === 'function') {
-      this._originalWindowOnError = window.onerror
-      window.onerror = overrideWindowOnError(window.onerror)
+    if (typeof global.window.onerror === 'function') {
+      this._originalWindowOnError = global.window.onerror
+      global.window.onerror = overrideWindowOnError(global.window.onerror)
     }
 
     // for prop-type warnings:
@@ -109,10 +106,21 @@ class Sandbox {
       console.error = overrideConsoleError(console.error)
     }
 
-    // We need to call 'mock' at least once
-    // in order to get fetch-mock to error out on unexpected actual fetch calls,
-    // so we call it with a bogus path that should never get hit.
-    fetchMock.mock('bananas', 'bananas')
+    this._sandbox.restore()
+    if (global.window.fetch) {
+      this._sandbox
+        .stub(global.window, 'fetch')
+        .callsFake(() => {
+          return Promise.resolve(new global.window.Response(JSON.stringify({
+            'key' : 'value'
+            }), { //the fetch API returns a resolved window Response object
+            status: 200,
+            headers: {
+              'Content-type': 'application/json'
+            }
+          }))
+        })
+    }
   }
 
   async teardown () {
@@ -123,7 +131,7 @@ class Sandbox {
     })
 
     this._raf.forEach((requestId) => {
-      window.cancelAnimationFrame(requestId)
+      global.window.cancelAnimationFrame(requestId)
     })
 
     this._listeners.forEach(([element, args]) => {
@@ -132,14 +140,13 @@ class Sandbox {
 
     StyleSheet.flush()
 
-    this._sandbox.resetHistory()
     this._sandbox.restore()
 
-    window.localStorage && window.localStorage.clear()
-    window.sessionStorage &&  window.sessionStorage.clear()
+    global.window.localStorage && global.window.localStorage.clear()
+    global.window.sessionStorage &&  global.window.sessionStorage.clear()
 
     if (this._originalWindowOnError) {
-      window.onerror = this._originalWindowOnError
+      global.window.onerror = this._originalWindowOnError
     }
 
     if (this._originalConsoleError) {
@@ -154,8 +161,6 @@ class Sandbox {
 
     this._addedNodes.forEach((node) => node && typeof node.remove === 'function' && node.remove())
     this._addedNodes = []
-
-    fetchMock.restore()
 
     if (global.viewport) {
       global.viewport.reset()
@@ -248,7 +253,7 @@ function setAttributes (element, attributes = []) {
 }
 
 // only allow one Sandbox instance
-const sandbox = new Sandbox()
+const sandbox = global.sandbox = global.sandbox || new Sandbox()
 const viewport = sandbox.viewport
 const mount = (element, context) => sandbox.mount(element, context)
 const unmount = sandbox.unmount

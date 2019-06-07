@@ -254,7 +254,8 @@ function propAndValueAssertion (assertion, desc) {
         typeof actual !== 'undefined' && actual !== null,
         () => `expected ${sig} to have a #{exp} ${desc} ${markup()}`,
         () => `expected ${sig} to not have a #{exp} ${desc} ${markup()}`,
-        arg1
+        arg1,
+        actual
       )
     }
 

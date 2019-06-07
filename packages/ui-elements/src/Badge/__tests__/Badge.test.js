@@ -106,6 +106,6 @@ describe('<Badge />', () => {
 
     const badge = await BadgeLocator.find()
 
-    expect(await badge.find(':textContent(15!)')).to.exist()
+    expect(await badge.findWithText('15!')).to.exist()
   })
 })

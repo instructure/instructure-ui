@@ -166,7 +166,7 @@ describe('<Link />', async () => {
       it('should render designated tag', async () => {
         await mount(<Link as="a" onClick={onClick}>Hello World</Link>)
         const componentRoot = await LinkLocator.find()
-        const link = await componentRoot.find(':textContent(Hello World)')
+        const link = await componentRoot.findWithText('Hello World')
         expect(link.getTagName()).to.equal('a')
       })
 
@@ -199,7 +199,7 @@ describe('<Link />', async () => {
       it('should render designated tag', async () => {
         await mount(<Link as="a">Hello World</Link>)
         const componentRoot = await LinkLocator.find()
-        const link = await componentRoot.find(':textContent(Hello World)')
+        const link = await componentRoot.findWithText('Hello World')
         expect(link.getTagName()).to.equal('a')
       })
 

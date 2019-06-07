@@ -54,7 +54,7 @@ describe('<ApplyLocale />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    expect(await component.find(':textContent(fr)')).to.exist()
+    expect(await component.findWithText('fr')).to.exist()
   })
 
   it('applies timezone context', async () => {
@@ -65,6 +65,6 @@ describe('<ApplyLocale />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    expect(await component.find(':textContent(Europe/Paris)')).to.exist()
+    expect(await component.findWithText('Europe/Paris')).to.exist()
   })
 })

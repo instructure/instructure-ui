@@ -77,7 +77,7 @@ describe('<ApplyTextDirection />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    const text = await component.find(':textContent(Hello world)')
+    const text = await component.findWithText('Hello world')
 
     expect(text.getAttribute('data-dir')).to.equal('rtl')
   })
@@ -93,7 +93,7 @@ describe('<ApplyTextDirection />', async () => {
     )
 
     const component = within(subject.getDOMNode())
-    const text = await component.find(':textContent(Hello world)')
+    const text = await component.findWithText('Hello world')
 
     expect(text.getAttribute('data-dir')).to.equal('ltr')
   })

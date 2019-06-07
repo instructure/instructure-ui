@@ -46,7 +46,7 @@ describe('<AccessibleContent />', async () => {
       </AccessibleContent>
     )
     const content = within(subject.getDOMNode())
-    const presentational = await content.find(':textContent(Presentational Content)')
+    const presentational = await content.findWithText('Presentational Content')
 
     expect(presentational).to.be.visible()
     expect(presentational).to.have.attribute('aria-hidden')

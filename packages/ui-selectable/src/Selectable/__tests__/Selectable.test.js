@@ -23,7 +23,17 @@
  */
 
 import React from 'react'
-import { expect, mount, spy, stub, find, findAll, within } from '@instructure/ui-test-utils'
+import {
+  expect,
+  mount,
+  spy,
+  stub,
+  find,
+  findAll,
+  within,
+  findWithLabel,
+  findWithText
+} from '@instructure/ui-test-utils'
 
 import { Selectable } from '../index'
 
@@ -229,7 +239,7 @@ describe('<Selectable />', async () => {
         )}
       </Selectable>
     )
-    const button = await find('button:textContent(Selected)')
+    const button = await findWithLabel('Selected')
 
     await button.mouseDown()
     await button.click()
@@ -701,7 +711,7 @@ describe('<Selectable />', async () => {
         </Selectable>
       )
       const input = await find('input')
-      const desc = await find(':textContent(description)')
+      const desc = await findWithText('description')
 
       expect(input.getAttribute('aria-haspopup')).to.equal('listbox')
       expect(input.getAttribute('aria-describedby')).to.equal(desc.getAttribute('id'))
@@ -1376,7 +1386,7 @@ describe('<Selectable />', async () => {
           )}
         </Selectable>
       )
-      const announcement = await find(':textContent(Announcement)')
+      const announcement = await findWithText('Announcement')
       expect(announcement.getAttribute('role')).to.equal('log')
       expect(announcement.getAttribute('aria-live')).to.equal('polite')
       expect(announcement.getAttribute('aria-atomic')).to.equal('true')

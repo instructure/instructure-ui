@@ -177,15 +177,15 @@ describe('<Calendar />', async () => {
     )
 
     const calendar = await CalendarLocator.find()
-    expect(await calendar.find(':textContent(March)')).to.exist()
-    expect(await calendar.find(':textContent(2019)')).to.exist()
+    expect(await calendar.findWithText('March')).to.exist()
+    expect(await calendar.findWithText('2019')).to.exist()
 
     await subject.setProps({
       renderNavigationLabel: () => navLabel
     })
 
-    expect(await calendar.find(':textContent(March)')).to.exist()
-    expect(await calendar.find(':textContent(2019)')).to.exist()
+    expect(await calendar.findWithText('March')).to.exist()
+    expect(await calendar.findWithText('2019')).to.exist()
   })
 
   it('should render next and prev buttons', async () => {
@@ -200,8 +200,8 @@ describe('<Calendar />', async () => {
     )
 
     const calendar = await CalendarLocator.find()
-    expect(await calendar.find('button:textContent(prev month)')).to.exist()
-    expect(await calendar.find('button:textContent(next month)')).to.exist()
+    expect(await calendar.findWithLabel('prev month')).to.exist()
+    expect(await calendar.findWithLabel('next month')).to.exist()
 
     /* eslint-disable react/display-name */
     await subject.setProps({
@@ -210,8 +210,8 @@ describe('<Calendar />', async () => {
     })
     /* eslint-enable react/display-name */
 
-    expect(await calendar.find('button:textContent(prev month)')).to.exist()
-    expect(await calendar.find('button:textContent(next month)')).to.exist()
+    expect(await calendar.findWithLabel('prev month')).to.exist()
+    expect(await calendar.findWithLabel('next month')).to.exist()
   })
 
   it('should call onRequestRenderNextMonth and onRequestRenderPrevMonth', async () => {
@@ -231,8 +231,8 @@ describe('<Calendar />', async () => {
     )
 
     const calendar = await CalendarLocator.find()
-    const prevButton = await calendar.find('button:textContent(prev month)')
-    const nextButton = await calendar.find('button:textContent(next month)')
+    const prevButton = await calendar.findWithText('prev month')
+    const nextButton = await calendar.findWithText('next month')
 
     expect(onRequestRenderPrevMonth).to.have.not.been.called()
     expect(onRequestRenderNextMonth).to.have.not.been.called()

@@ -46,7 +46,7 @@ describe('<Avatar />', async () => {
       await mount(<Avatar name="Jessica Jones" />)
 
       const avatar = await AvatarLocator.find()
-      const initials = await avatar.find(':textContent(JJ)')
+      const initials = await avatar.findWithText('JJ')
 
       expect(initials.getAttribute('aria-hidden')).to.equal('true')
     })
@@ -62,7 +62,7 @@ describe('<Avatar />', async () => {
     it('should render initials', async () => {
       await mount(<Avatar name="Jessica Jones" />)
 
-      expect(await AvatarLocator.find(':textContent(JJ)')).to.exist()
+      expect(await AvatarLocator.findWithText('JJ')).to.exist()
     })
   })
 

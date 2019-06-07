@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, find, accessible } from '@instructure/ui-test-utils'
+import { expect, mount, find, accessible, wait } from '@instructure/ui-test-utils'
 
 import { PresentationContent } from '../index'
 
@@ -34,8 +34,12 @@ describe('<PresentationContent />', async () => {
         Hello World
       </PresentationContent>
     )
-    const text = await find(':textContent(Hello World)')
-    expect(text).to.have.attribute('aria-hidden')
+
+    const content = await find('[aria-hidden]')
+
+    await wait(() => {
+      expect(content).to.have.text('Hello World')
+    })
   })
 
   it('should render the specified tag when `as` prop is set', async () => {

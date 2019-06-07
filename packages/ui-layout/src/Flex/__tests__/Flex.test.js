@@ -162,7 +162,7 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    const item = await flex.find(':textContent(Flex item 1)')
+    const item = await flex.findWithText('Flex item 1')
 
     await wait(() => {
       expect(flex.getComputedStyle()['align-items']).to.equal('flex-end')
@@ -181,8 +181,8 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    const item1 = await flex.find(':textContent(Flex item 1)')
-    const item2 = await flex.find(':textContent(Flex item 2)')
+    const item1 = await flex.findWithText('Flex item 1')
+    const item2 = await flex.findWithText('Flex item 2')
 
     await wait(() => {
       expect(item1.getComputedStyle()['flex-grow']).to.equal('0')
@@ -201,8 +201,8 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    const item1 = await flex.find(':textContent(Flex item 1)')
-    const item2 = await flex.find(':textContent(Flex item 2)')
+    const item1 = await flex.findWithText('Flex item 1')
+    const item2 = await flex.findWithText('Flex item 2')
 
     await wait(() => {
       expect(item1.getComputedStyle()['flex-shrink']).to.equal('0')
@@ -221,8 +221,8 @@ describe('<Flex />', async () => {
     )
 
     const flex = within(subject.getDOMNode())
-    const item2 = await flex.find(':textContent(Flex item 2)')
-    const item3 = await flex.find(':textContent(Flex item 3)')
+    const item2 = await flex.findWithText('Flex item 2')
+    const item3 = await flex.findWithText('Flex item 3')
 
     await wait(() => {
       expect(item3.getComputedStyle()['flex-basis']).to.equal('100px')

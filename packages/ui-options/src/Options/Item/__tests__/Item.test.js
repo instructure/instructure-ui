@@ -63,9 +63,9 @@ describe('<Item />', async () => {
       </Item>
     )
     const item = await ItemLocator.find()
-    const label = await item.find('#customContent:textContent(Hello World)')
 
-    expect(label).to.exist()
+    expect(await item.find('#customContent'))
+      .to.have.text('Hello World')
   })
 
   it('should render role attributes appropriately when given a role', async () => {
@@ -90,7 +90,7 @@ describe('<Item />', async () => {
       </Item>
     )
     const item = await ItemLocator.find()
-    const label = await item.find(':textContent(Hello World)')
+    const label = await item.findWithText('Hello World')
 
     expect(item.getAttribute('role')).to.equal('none')
     expect(label.getAttribute('role')).to.equal('option')
@@ -106,7 +106,7 @@ describe('<Item />', async () => {
       </Item>
     )
     const item = await ItemLocator.find()
-    const label = await item.find(':textContent(Hello World)')
+    const label = await item.findWithText('Hello World')
 
     await item.click()
     expect(onClick).to.not.have.been.called()
@@ -123,7 +123,7 @@ describe('<Item />', async () => {
       </Item>
     )
     const item = await ItemLocator.find()
-    const label = await item.find(':textContent(Hello World)')
+    const label = await item.findWithText('Hello World')
 
     await item.focus()
     await wait(() => {

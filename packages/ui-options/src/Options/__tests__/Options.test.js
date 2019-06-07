@@ -156,7 +156,7 @@ describe('<Options />', async () => {
     const options = await OptionsLocator.find()
     const items = await options.findAllItems()
     const nestedItem = await options.findItem(':contains(Nested list)')
-    const nestedLabel = await nestedItem.find(':textContent(Nested list)')
+    const nestedLabel = await nestedItem.findWithText('Nested list')
 
     expect(items.length).to.equal(5)
     expect(nestedLabel).to.exist()

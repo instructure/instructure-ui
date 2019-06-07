@@ -41,13 +41,13 @@ describe('Day', async () => {
       </Day>
     )
 
-    expect(await DayLocator.find(':textContent(8)')).to.exist()
+    expect(await DayLocator.findWithText('8')).to.exist()
 
     await subject.setProps({
       children: () => 31
     })
 
-    expect(await DayLocator.find(':textContent(31)')).to.exist()
+    expect(await DayLocator.findWithText('31')).to.exist()
   })
 
   it('should have an accessible label', async () => {
@@ -61,7 +61,7 @@ describe('Day', async () => {
       </Day>
     )
 
-    expect(await DayLocator.find(`:textContent(${label})`)).to.exist()
+    expect(await DayLocator.findWithText(label)).to.exist()
   })
 
   it('should set aria-current="date" when `isToday`', async () => {

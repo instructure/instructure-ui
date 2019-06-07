@@ -648,8 +648,8 @@ describe('<DateInput />', async () => {
       const dateInput = await DateInputLocator.find()
       const calendar = await dateInput.findCalendar()
 
-      const nextButton = await calendar.find('button:textContent(next)')
-      const prevButton = await calendar.find('button:textContent(prev)')
+      const nextButton = await calendar.findWithLabel('next')
+      const prevButton = await calendar.findWithLabel('prev')
 
       await nextButton.click()
       await prevButton.click()
@@ -673,7 +673,7 @@ describe('<DateInput />', async () => {
 
       const dateInput = await DateInputLocator.find()
       const calendar = await dateInput.findCalendar()
-      expect(await calendar.find(`:textContent(${label})`)).to.exist()
+      expect(await calendar.findWithText(label)).to.exist()
     })
 
     it('should render calendar weekday labels', async () => {

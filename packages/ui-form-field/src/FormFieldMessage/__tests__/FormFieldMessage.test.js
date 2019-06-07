@@ -32,7 +32,7 @@ describe('<FormFieldMessage />', async () => {
     const subject = await mount(<FormFieldMessage>hello world</FormFieldMessage>)
 
     const formFieldMessage = within(subject.getDOMNode())
-    expect(await formFieldMessage.find(':textContent(hello world)')).to.exist()
+    expect(await formFieldMessage.findWithText('hello world')).to.exist()
   })
 
   it('should meet a11y standards', async () => {

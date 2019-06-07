@@ -23,7 +23,7 @@
  */
 
 import React from 'react'
-import { expect, mount, within } from '@instructure/ui-test-utils'
+import { expect, mount } from '@instructure/ui-test-utils'
 import { callRenderProp } from '../callRenderProp'
 
 describe('callRenderProp', async () => {
@@ -71,6 +71,7 @@ describe('callRenderProp', async () => {
     const result = callRenderProp(Baz)
 
     const subject = await mount(<div>{result}</div>)
-    expect(within(subject.getDOMNode()).find(':textContent(some text)')).to.exist()
+
+    expect(subject.getDOMNode()).to.have.text('some text')
   })
 })

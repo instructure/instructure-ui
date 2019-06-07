@@ -139,7 +139,7 @@ class SubtreePortal extends Component {
       if (!this.DOMNode) {
         const node = document.createElement('span')
         const attributes = {
-          ...passthroughProps(props),
+          ...passthroughProps(passThroughProps),
           dir: this.dir
         }
         Object.keys(attributes).forEach((name) => {

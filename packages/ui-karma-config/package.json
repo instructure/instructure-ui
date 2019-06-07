@@ -29,7 +29,7 @@
     "karma-safari-launcher": "^1.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-viewport": "^1.0.4",
-    "karma-webpack": "^4.0.0-rc.5",
+    "karma-webpack": "^4.0.2",
     "loader-utils": "^1.2.3"
   },
   "peerDependencies": {

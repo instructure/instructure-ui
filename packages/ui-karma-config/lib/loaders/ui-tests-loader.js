@@ -54,7 +54,7 @@ module.exports = function (source, map) {
       if (testFilePaths.length > 0) {
         const testFileRequires = testFilePaths.map(filePath => `require('./${path.relative(cwd, filePath)}')`)
         result = `
-describe(':', async function () {
+describe(':', async () => {
 ${testFileRequires.join(';\n')}
 })
 `

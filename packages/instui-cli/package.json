@@ -23,7 +23,7 @@
     "@instructure/instui-config": "^6.3.0",
     "@instructure/ui-codemods": "^6.3.0",
     "@instructure/ui-scripts": "^6.3.0",
-    "semver": "^6.0.0",
+    "semver": "^6.1.1",
     "yargs": "^13.2.4"
   },
   "publishConfig": {

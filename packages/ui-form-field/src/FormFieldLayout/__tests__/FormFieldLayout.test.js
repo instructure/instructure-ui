@@ -52,7 +52,7 @@ describe('<FormFieldLayout />', async () => {
     )
 
     const formFieldLayout = within(subject.getDOMNode())
-    const label = await formFieldLayout.find(':textContent(Username)')
+    const label = await formFieldLayout.findWithText('Username')
     expect(label.getComputedStyle().textAlign).to.equal('right')
   })
 
@@ -68,7 +68,7 @@ describe('<FormFieldLayout />', async () => {
     )
 
     const formFieldLayout = within(subject.getDOMNode())
-    const label = await formFieldLayout.find(':textContent(Username)')
+    const label = await formFieldLayout.findWithText('Username')
     expect(label.getComputedStyle().textAlign).to.equal('left')
   })
 
